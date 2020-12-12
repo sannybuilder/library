@@ -1,28 +1,28 @@
-| Class | Information
-|-------|--------------|
+| Class | Information | Notes
+|-------|--------------|------|
 | Audio | Audio effects
 | Blip | Markers and radar icons
 | Boat | Boat control
 | Camera | Camera/View manipulation
 | Car | Script vehicles
 | CarGenerator | Parking lots
-| CatalinaHeli | Hardcoded Catalina's Heli from the final mission
+| CatalinaHeli | Hardcoded Catalina's Heli from the final mission | exclusive to GTA 3
 | Char | Script characters (actors)
-| ChaseScene | Intro cutscene logic
+| ChaseScene | Intro cutscene logic | exclusive to GTA 3
 | Clock | Time manipulation
 | Corona | Corona effect
 | Crane | Static crane objects
 | Credits | Credits after the final mission 
 | Cutscene | Setting up and playing cutscenes
 | DeathArrest | Wasted/Busted logic
-| DrugRun | Dodo logic from S.A.M. mission 
+| DrugRun | Dodo logic from S.A.M. mission | exclusive to GTA 3
 | Game | Gameplay
 | Gang | Gangs configuration
 | Garage | Garages
 | Light | Light effect
 | Menu | Interaction with the main menu 
 | Object | Script objects
-| Pacman | Big'N'Veiny mission logic
+| Pacman | Big'N'Veiny mission logic | exclusive to GTA 3
 | Pad | Input controls
 | Pager | In-game pager
 | Particles | Particle effects

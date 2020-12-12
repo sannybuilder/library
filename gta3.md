@@ -1012,7 +1012,7 @@
 | 03F1 | SET_THREAT_FOR_PED_TYPE | Game.SetThreatForPedType | static
 | 03F2 | CLEAR_THREAT_FOR_PED_TYPE | Game.ClearThreatForPedType | static
 | 03F3 | GET_CAR_COLOURS | Car.GetColours
-| 03F4 | SET_ALL_CARS_CAN_BE_DAMAGED | World.SetAllCarsCanBeDamaged | static
+| 03F4 | SET_ALL_CARS_CAN_BE_DAMAGED | Game.SetAllCarsCanBeDamaged | static
 | 03F5 | SET_CAR_CAN_BE_DAMAGED | Car.SetCanBeDamaged
 | 03F6 | MAKE_PLAYER_UNSAFE | Player.MakeUnsafe
 | 03F7 | LOAD_COLLISION | Streaming.LoadCollision | static

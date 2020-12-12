@@ -10,7 +10,7 @@
 | Char | Script characters (actors)
 | ChaseScene | Intro cutscene logic | exclusive to GTA 3
 | Clock | Time manipulation
-| Corona | Corona effect
+| Corona | Corona effect | can be merged into Effects class?
 | Crane | Static crane objects
 | Credits | Credits after the final mission 
 | Cutscene | Setting up and playing cutscenes
@@ -19,12 +19,12 @@
 | Game | Gameplay
 | Gang | Gangs configuration
 | Garage | Garages
-| Light | Light effect
+| Light | Light effect | can be merged into Effects class?
 | Menu | Interaction with the main menu 
 | Object | Script objects
 | Pacman | Big'N'Veiny mission logic | exclusive to GTA 3
 | Pad | Input controls
-| Pager | In-game pager
+| Pager | In-game pager exclusive to GTA 3
 | Particles | Particle effects
 | Paths | Configuring car and ped paths and lookup for nodes
 | PhoneInfo | Phone booths
@@ -35,7 +35,7 @@
 | Restart | Configuration of respawn points
 | Screen | Manipulating game UI
 | ScriptFire | Script fires
-| Shadow | Shadow effect
+| Shadow | Shadow effect | can be merged into Effects class?
 | Sphere | Blue cylinder markers
 | Sprite | Textures to be drawn on screen
 | Stat | Game statistics information

@@ -1,10 +1,10 @@
 | Class | Information
 |-------|--------------|
-| Audio | Commands for audio effects
-| Blip | Markers
+| Audio | Audio effects
+| Blip | Markers and radar icons
 | Boat | Boat control
 | Camera | Camera/View manipulation
-| Car | Any vehicles control
+| Car | Script vehicles
 | CarGenerator | Parking lots
 | CatalinaHeli | Hardcoded Catalina's Heli from the final mission
 | Char | Script characters (actors)
@@ -43,7 +43,6 @@
 | StuckCarCheck | Checking if script cars are stuck
 | Text | Displaying subtitles and text boxes
 | Txd | Loading texture dictionaries
-| Vehicle | Script vehicles
 | Weather | Controlling weather
 | World | Manipulating traffic, population and other physical enitites
 | Zone | Configuring different areas of game map 

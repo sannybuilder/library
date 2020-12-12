@@ -1043,7 +1043,7 @@
 | 040F | SET_FADE_IN_AFTER_NEXT_DEATH | Restart.SetFadeInAfterNextDeath | static
 | 0410 | SET_GANG_PED_MODEL_PREFERENCE | Gang.SetPedModelPreference | static
 | 0411 | SET_CHAR_USE_PEDNODE_SEEK | Char.SetUsePednodeSeek
-| 0412 | SWITCH_VEHICLE_WEAPONS | Vehicle.SwitchWeapons
+| 0412 | SWITCH_VEHICLE_WEAPONS | Car.SwitchWeapons
 | 0413 | SET_GET_OUT_OF_JAIL_FREE | Game.SetGetOutOfJailFree | static
 | 0414 | SET_FREE_HEALTH_CARE | Game.SetFreeHealthCare | static
 | 0415 | IS_CAR_DOOR_CLOSED | Car.IsDoorClosed

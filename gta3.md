@@ -1,183 +1,183 @@
 | Opcode | Command Name                                    | Class                                          | Modifier              |
 | ------ | ----------------------------------------------- | ---------------------------------------------- | --------------------- |
 | 0000   | NOP                                             |                                                | nop                   |
-| 0001   | WAIT                                            | keyword                                        |
-| 0002   | GOTO                                            | keyword                                        |
+| 0001   | WAIT                                            | keyword                                        |                       |
+| 0002   | GOTO                                            | keyword                                        |                       |
 | 0003   | SHAKE_CAM                                       | Camera.Shake                                   | static                |
-| 0004   | SET_VAR_INT                                     | built-in                                       |
-| 0005   | SET_VAR_FLOAT                                   | built-in                                       |
-| 0006   | SET_LVAR_INT                                    | built-in                                       |
-| 0007   | SET_LVAR_FLOAT                                  | built-in                                       |
-| 0008   | ADD_VAL_TO_INT_VAR                              | built-in                                       |
-| 0009   | ADD_VAL_TO_FLOAT_VAR                            | built-in                                       |
-| 000A   | ADD_VAL_TO_INT_LVAR                             | built-in                                       |
-| 000B   | ADD_VAL_TO_FLOAT_LVAR                           | built-in                                       |
-| 000C   | SUB_VAL_FROM_INT_VAR                            | built-in                                       |
-| 000D   | SUB_VAL_FROM_FLOAT_VAR                          | built-in                                       |
-| 000E   | SUB_VAL_FROM_INT_LVAR                           | built-in                                       |
-| 000F   | SUB_VAL_FROM_FLOAT_LVAR                         | built-in                                       |
-| 0010   | MULT_INT_VAR_BY_VAL                             | built-in                                       |
-| 0011   | MULT_FLOAT_VAR_BY_VAL                           | built-in                                       |
-| 0012   | MULT_INT_LVAR_BY_VAL                            | built-in                                       |
-| 0013   | MULT_FLOAT_LVAR_BY_VAL                          | built-in                                       |
-| 0014   | DIV_INT_VAR_BY_VAL                              | built-in                                       |
-| 0015   | DIV_FLOAT_VAR_BY_VAL                            | built-in                                       |
-| 0016   | DIV_INT_LVAR_BY_VAL                             | built-in                                       |
-| 0017   | DIV_FLOAT_LVAR_BY_VAL                           | built-in                                       |
-| 0018   | IS_INT_VAR_GREATER_THAN_NUMBER                  | built-in                                       |
-| 0019   | IS_INT_LVAR_GREATER_THAN_NUMBER                 | built-in                                       |
-| 001A   | IS_NUMBER_GREATER_THAN_INT_VAR                  | built-in                                       |
-| 001B   | IS_NUMBER_GREATER_THAN_INT_LVAR                 | built-in                                       |
-| 001C   | IS_INT_VAR_GREATER_THAN_INT_VAR                 | built-in                                       |
-| 001D   | IS_INT_LVAR_GREATER_THAN_INT_LVAR               | built-in                                       |
-| 001E   | IS_INT_VAR_GREATER_THAN_INT_LVAR                | built-in                                       |
-| 001F   | IS_INT_LVAR_GREATER_THAN_INT_VAR                | built-in                                       |
-| 0020   | IS_FLOAT_VAR_GREATER_THAN_NUMBER                | built-in                                       |
-| 0021   | IS_FLOAT_LVAR_GREATER_THAN_NUMBER               | built-in                                       |
-| 0022   | IS_NUMBER_GREATER_THAN_FLOAT_VAR                | built-in                                       |
-| 0023   | IS_NUMBER_GREATER_THAN_FLOAT_LVAR               | built-in                                       |
-| 0024   | IS_FLOAT_VAR_GREATER_THAN_FLOAT_VAR             | built-in                                       |
-| 0025   | IS_FLOAT_LVAR_GREATER_THAN_FLOAT_LVAR           | built-in                                       |
-| 0026   | IS_FLOAT_VAR_GREATER_THAN_FLOAT_LVAR            | built-in                                       |
-| 0027   | IS_FLOAT_LVAR_GREATER_THAN_FLOAT_VAR            | built-in                                       |
-| 0028   | IS_INT_VAR_GREATER_OR_EQUAL_TO_NUMBER           | built-in                                       |
-| 0029   | IS_INT_LVAR_GREATER_OR_EQUAL_TO_NUMBER          | built-in                                       |
-| 002A   | IS_NUMBER_GREATER_OR_EQUAL_TO_INT_VAR           | built-in                                       |
-| 002B   | IS_NUMBER_GREATER_OR_EQUAL_TO_INT_LVAR          | built-in                                       |
-| 002C   | IS_INT_VAR_GREATER_OR_EQUAL_TO_INT_VAR          | built-in                                       |
-| 002D   | IS_INT_LVAR_GREATER_OR_EQUAL_TO_INT_LVAR        | built-in                                       |
-| 002E   | IS_INT_VAR_GREATER_OR_EQUAL_TO_INT_LVAR         | built-in                                       |
-| 002F   | IS_INT_LVAR_GREATER_OR_EQUAL_TO_INT_VAR         | built-in                                       |
-| 0030   | IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_NUMBER         | built-in                                       |
-| 0031   | IS_FLOAT_LVAR_GREATER_OR_EQUAL_TO_NUMBER        | built-in                                       |
-| 0032   | IS_NUMBER_GREATER_OR_EQUAL_TO_FLOAT_VAR         | built-in                                       |
-| 0033   | IS_NUMBER_GREATER_OR_EQUAL_TO_FLOAT_LVAR        | built-in                                       |
-| 0034   | IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_FLOAT_VAR      | built-in                                       |
-| 0035   | IS_FLOAT_LVAR_GREATER_OR_EQUAL_TO_FLOAT_LVAR    | built-in                                       |
-| 0036   | IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_FLOAT_LVAR     | built-in                                       |
-| 0037   | IS_FLOAT_LVAR_GREATER_OR_EQUAL_TO_FLOAT_VAR     | built-in                                       |
-| 0038   | IS_INT_VAR_EQUAL_TO_NUMBER                      | built-in                                       |
-| 0039   | IS_INT_LVAR_EQUAL_TO_NUMBER                     | built-in                                       |
-| 003A   | IS_INT_VAR_EQUAL_TO_INT_VAR                     | built-in                                       |
-| 003B   | IS_INT_LVAR_EQUAL_TO_INT_LVAR                   | built-in                                       |
-| 003C   | IS_INT_VAR_EQUAL_TO_INT_LVAR                    | built-in                                       |
-| 003D   | IS_INT_VAR_NOT_EQUAL_TO_NUMBER                  | built-in                                       |
-| 003E   | IS_INT_LVAR_NOT_EQUAL_TO_NUMBER                 | built-in                                       |
-| 003F   | IS_INT_VAR_NOT_EQUAL_TO_INT_VAR                 | built-in                                       |
-| 0040   | IS_INT_LVAR_NOT_EQUAL_TO_INT_LVAR               | built-in                                       |
-| 0041   | IS_INT_VAR_NOT_EQUAL_TO_INT_LVAR                | built-in                                       |
-| 0042   | IS_FLOAT_VAR_EQUAL_TO_NUMBER                    | built-in                                       |
-| 0043   | IS_FLOAT_LVAR_EQUAL_TO_NUMBER                   | built-in                                       |
-| 0044   | IS_FLOAT_VAR_EQUAL_TO_FLOAT_VAR                 | built-in                                       |
-| 0045   | IS_FLOAT_LVAR_EQUAL_TO_FLOAT_LVAR               | built-in                                       |
-| 0046   | IS_FLOAT_VAR_EQUAL_TO_FLOAT_LVAR                | built-in                                       |
-| 0047   | IS_FLOAT_VAR_NOT_EQUAL_TO_NUMBER                | built-in                                       |
-| 0048   | IS_FLOAT_LVAR_NOT_EQUAL_TO_NUMBER               | built-in                                       |
-| 0049   | IS_FLOAT_VAR_NOT_EQUAL_TO_FLOAT_VAR             | built-in                                       |
-| 004A   | IS_FLOAT_LVAR_NOT_EQUAL_TO_FLOAT_LVAR           | built-in                                       |
-| 004B   | IS_FLOAT_VAR_NOT_EQUAL_TO_FLOAT_LVAR            | built-in                                       |
-| 004C   | GOTO_IF_TRUE                                    | keyword                                        |
-| 004D   | GOTO_IF_FALSE                                   | keyword                                        |
-| 004E   | TERMINATE_THIS_SCRIPT                           | keyword                                        |
-| 004F   | START_NEW_SCRIPT                                | keyword                                        |
-| 0050   | GOSUB                                           | keyword                                        |
-| 0051   | RETURN                                          | keyword                                        |
+| 0004   | SET_VAR_INT                                     | built-in                                       |                       |
+| 0005   | SET_VAR_FLOAT                                   | built-in                                       |                       |
+| 0006   | SET_LVAR_INT                                    | built-in                                       |                       |
+| 0007   | SET_LVAR_FLOAT                                  | built-in                                       |                       |
+| 0008   | ADD_VAL_TO_INT_VAR                              | built-in                                       |                       |
+| 0009   | ADD_VAL_TO_FLOAT_VAR                            | built-in                                       |                       |
+| 000A   | ADD_VAL_TO_INT_LVAR                             | built-in                                       |                       |
+| 000B   | ADD_VAL_TO_FLOAT_LVAR                           | built-in                                       |                       |
+| 000C   | SUB_VAL_FROM_INT_VAR                            | built-in                                       |                       |
+| 000D   | SUB_VAL_FROM_FLOAT_VAR                          | built-in                                       |                       |
+| 000E   | SUB_VAL_FROM_INT_LVAR                           | built-in                                       |                       |
+| 000F   | SUB_VAL_FROM_FLOAT_LVAR                         | built-in                                       |                       |
+| 0010   | MULT_INT_VAR_BY_VAL                             | built-in                                       |                       |
+| 0011   | MULT_FLOAT_VAR_BY_VAL                           | built-in                                       |                       |
+| 0012   | MULT_INT_LVAR_BY_VAL                            | built-in                                       |                       |
+| 0013   | MULT_FLOAT_LVAR_BY_VAL                          | built-in                                       |                       |
+| 0014   | DIV_INT_VAR_BY_VAL                              | built-in                                       |                       |
+| 0015   | DIV_FLOAT_VAR_BY_VAL                            | built-in                                       |                       |
+| 0016   | DIV_INT_LVAR_BY_VAL                             | built-in                                       |                       |
+| 0017   | DIV_FLOAT_LVAR_BY_VAL                           | built-in                                       |                       |
+| 0018   | IS_INT_VAR_GREATER_THAN_NUMBER                  | built-in                                       |                       |
+| 0019   | IS_INT_LVAR_GREATER_THAN_NUMBER                 | built-in                                       |                       |
+| 001A   | IS_NUMBER_GREATER_THAN_INT_VAR                  | built-in                                       |                       |
+| 001B   | IS_NUMBER_GREATER_THAN_INT_LVAR                 | built-in                                       |                       |
+| 001C   | IS_INT_VAR_GREATER_THAN_INT_VAR                 | built-in                                       |                       |
+| 001D   | IS_INT_LVAR_GREATER_THAN_INT_LVAR               | built-in                                       |                       |
+| 001E   | IS_INT_VAR_GREATER_THAN_INT_LVAR                | built-in                                       |                       |
+| 001F   | IS_INT_LVAR_GREATER_THAN_INT_VAR                | built-in                                       |                       |
+| 0020   | IS_FLOAT_VAR_GREATER_THAN_NUMBER                | built-in                                       |                       |
+| 0021   | IS_FLOAT_LVAR_GREATER_THAN_NUMBER               | built-in                                       |                       |
+| 0022   | IS_NUMBER_GREATER_THAN_FLOAT_VAR                | built-in                                       |                       |
+| 0023   | IS_NUMBER_GREATER_THAN_FLOAT_LVAR               | built-in                                       |                       |
+| 0024   | IS_FLOAT_VAR_GREATER_THAN_FLOAT_VAR             | built-in                                       |                       |
+| 0025   | IS_FLOAT_LVAR_GREATER_THAN_FLOAT_LVAR           | built-in                                       |                       |
+| 0026   | IS_FLOAT_VAR_GREATER_THAN_FLOAT_LVAR            | built-in                                       |                       |
+| 0027   | IS_FLOAT_LVAR_GREATER_THAN_FLOAT_VAR            | built-in                                       |                       |
+| 0028   | IS_INT_VAR_GREATER_OR_EQUAL_TO_NUMBER           | built-in                                       |                       |
+| 0029   | IS_INT_LVAR_GREATER_OR_EQUAL_TO_NUMBER          | built-in                                       |                       |
+| 002A   | IS_NUMBER_GREATER_OR_EQUAL_TO_INT_VAR           | built-in                                       |                       |
+| 002B   | IS_NUMBER_GREATER_OR_EQUAL_TO_INT_LVAR          | built-in                                       |                       |
+| 002C   | IS_INT_VAR_GREATER_OR_EQUAL_TO_INT_VAR          | built-in                                       |                       |
+| 002D   | IS_INT_LVAR_GREATER_OR_EQUAL_TO_INT_LVAR        | built-in                                       |                       |
+| 002E   | IS_INT_VAR_GREATER_OR_EQUAL_TO_INT_LVAR         | built-in                                       |                       |
+| 002F   | IS_INT_LVAR_GREATER_OR_EQUAL_TO_INT_VAR         | built-in                                       |                       |
+| 0030   | IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_NUMBER         | built-in                                       |                       |
+| 0031   | IS_FLOAT_LVAR_GREATER_OR_EQUAL_TO_NUMBER        | built-in                                       |                       |
+| 0032   | IS_NUMBER_GREATER_OR_EQUAL_TO_FLOAT_VAR         | built-in                                       |                       |
+| 0033   | IS_NUMBER_GREATER_OR_EQUAL_TO_FLOAT_LVAR        | built-in                                       |                       |
+| 0034   | IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_FLOAT_VAR      | built-in                                       |                       |
+| 0035   | IS_FLOAT_LVAR_GREATER_OR_EQUAL_TO_FLOAT_LVAR    | built-in                                       |                       |
+| 0036   | IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_FLOAT_LVAR     | built-in                                       |                       |
+| 0037   | IS_FLOAT_LVAR_GREATER_OR_EQUAL_TO_FLOAT_VAR     | built-in                                       |                       |
+| 0038   | IS_INT_VAR_EQUAL_TO_NUMBER                      | built-in                                       |                       |
+| 0039   | IS_INT_LVAR_EQUAL_TO_NUMBER                     | built-in                                       |                       |
+| 003A   | IS_INT_VAR_EQUAL_TO_INT_VAR                     | built-in                                       |                       |
+| 003B   | IS_INT_LVAR_EQUAL_TO_INT_LVAR                   | built-in                                       |                       |
+| 003C   | IS_INT_VAR_EQUAL_TO_INT_LVAR                    | built-in                                       |                       |
+| 003D   | IS_INT_VAR_NOT_EQUAL_TO_NUMBER                  |                                                | nop                   |
+| 003E   | IS_INT_LVAR_NOT_EQUAL_TO_NUMBER                 |                                                | nop                   |
+| 003F   | IS_INT_VAR_NOT_EQUAL_TO_INT_VAR                 |                                                | nop                   |
+| 0040   | IS_INT_LVAR_NOT_EQUAL_TO_INT_LVAR               |                                                | nop                   |
+| 0041   | IS_INT_VAR_NOT_EQUAL_TO_INT_LVAR                |                                                | nop                   |
+| 0042   | IS_FLOAT_VAR_EQUAL_TO_NUMBER                    | built-in                                       |                       |
+| 0043   | IS_FLOAT_LVAR_EQUAL_TO_NUMBER                   | built-in                                       |                       |
+| 0044   | IS_FLOAT_VAR_EQUAL_TO_FLOAT_VAR                 | built-in                                       |                       |
+| 0045   | IS_FLOAT_LVAR_EQUAL_TO_FLOAT_LVAR               | built-in                                       |                       |
+| 0046   | IS_FLOAT_VAR_EQUAL_TO_FLOAT_LVAR                | built-in                                       |                       |
+| 0047   | IS_FLOAT_VAR_NOT_EQUAL_TO_NUMBER                |                                                | nop                   |
+| 0048   | IS_FLOAT_LVAR_NOT_EQUAL_TO_NUMBER               |                                                | nop                   |
+| 0049   | IS_FLOAT_VAR_NOT_EQUAL_TO_FLOAT_VAR             |                                                | nop                   |
+| 004A   | IS_FLOAT_LVAR_NOT_EQUAL_TO_FLOAT_LVAR           |                                                | nop                   |
+| 004B   | IS_FLOAT_VAR_NOT_EQUAL_TO_FLOAT_LVAR            |                                                | nop                   |
+| 004C   | GOTO_IF_TRUE                                    | keyword                                        |                       |
+| 004D   | GOTO_IF_FALSE                                   | keyword                                        |                       |
+| 004E   | TERMINATE_THIS_SCRIPT                           | keyword                                        |                       |
+| 004F   | START_NEW_SCRIPT                                | keyword                                        |                       |
+| 0050   | GOSUB                                           | keyword                                        |                       |
+| 0051   | RETURN                                          | keyword                                        |                       |
 | 0052   | LINE                                            |                                                | nop                   |
 | 0053   | CREATE_PLAYER                                   | Player.Create                                  | constructor           |
-| 0054   | GET_PLAYER_COORDINATES                          | Player.GetCoordinates                          |
-| 0055   | SET_PLAYER_COORDINATES                          | Player.SetCoordinates                          |
-| 0056   | IS_PLAYER_IN_AREA_2D                            | Player.IsInArea2d                              |
-| 0057   | IS_PLAYER_IN_AREA_3D                            | Player.IsInArea3d                              |
-| 0058   | ADD_INT_VAR_TO_INT_VAR                          | built-in                                       |
-| 0059   | ADD_FLOAT_VAR_TO_FLOAT_VAR                      | built-in                                       |
-| 005A   | ADD_INT_LVAR_TO_INT_LVAR                        | built-in                                       |
-| 005B   | ADD_FLOAT_LVAR_TO_FLOAT_LVAR                    | built-in                                       |
-| 005C   | ADD_INT_VAR_TO_INT_LVAR                         | built-in                                       |
-| 005D   | ADD_FLOAT_VAR_TO_FLOAT_LVAR                     | built-in                                       |
-| 005E   | ADD_INT_LVAR_TO_INT_VAR                         | built-in                                       |
-| 005F   | ADD_FLOAT_LVAR_TO_FLOAT_VAR                     | built-in                                       |
-| 0060   | SUB_INT_VAR_FROM_INT_VAR                        | built-in                                       |
-| 0061   | SUB_FLOAT_VAR_FROM_FLOAT_VAR                    | built-in                                       |
-| 0062   | SUB_INT_LVAR_FROM_INT_LVAR                      | built-in                                       |
-| 0063   | SUB_FLOAT_LVAR_FROM_FLOAT_LVAR                  | built-in                                       |
-| 0064   | SUB_INT_VAR_FROM_INT_LVAR                       | built-in                                       |
-| 0065   | SUB_FLOAT_VAR_FROM_FLOAT_LVAR                   | built-in                                       |
-| 0066   | SUB_INT_LVAR_FROM_INT_VAR                       | built-in                                       |
-| 0067   | SUB_FLOAT_LVAR_FROM_FLOAT_VAR                   | built-in                                       |
-| 0068   | MULT_INT_VAR_BY_INT_VAR                         | built-in                                       |
-| 0069   | MULT_FLOAT_VAR_BY_FLOAT_VAR                     | built-in                                       |
-| 006A   | MULT_INT_LVAR_BY_INT_LVAR                       | built-in                                       |
-| 006B   | MULT_FLOAT_LVAR_BY_FLOAT_LVAR                   | built-in                                       |
-| 006C   | MULT_INT_VAR_BY_INT_LVAR                        | built-in                                       |
-| 006D   | MULT_FLOAT_VAR_BY_FLOAT_LVAR                    | built-in                                       |
-| 006E   | MULT_INT_LVAR_BY_INT_VAR                        | built-in                                       |
-| 006F   | MULT_FLOAT_LVAR_BY_FLOAT_VAR                    | built-in                                       |
-| 0070   | DIV_INT_VAR_BY_INT_VAR                          | built-in                                       |
-| 0071   | DIV_FLOAT_VAR_BY_FLOAT_VAR                      | built-in                                       |
-| 0072   | DIV_INT_LVAR_BY_INT_LVAR                        | built-in                                       |
-| 0073   | DIV_FLOAT_LVAR_BY_FLOAT_LVAR                    | built-in                                       |
-| 0074   | DIV_INT_VAR_BY_INT_LVAR                         | built-in                                       |
-| 0075   | DIV_FLOAT_VAR_BY_FLOAT_LVAR                     | built-in                                       |
-| 0076   | DIV_INT_LVAR_BY_INT_VAR                         | built-in                                       |
-| 0077   | DIV_FLOAT_LVAR_BY_FLOAT_VAR                     | built-in                                       |
-| 0078   | ADD_TIMED_VAL_TO_FLOAT_VAR                      | built-in                                       |
-| 0079   | ADD_TIMED_VAL_TO_FLOAT_LVAR                     | built-in                                       |
-| 007A   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_VAR                | built-in                                       |
-| 007B   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_LVAR              | built-in                                       |
-| 007C   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_LVAR               | built-in                                       |
-| 007D   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_VAR               | built-in                                       |
-| 007E   | SUB_TIMED_VAL_FROM_FLOAT_VAR                    | built-in                                       |
-| 007F   | SUB_TIMED_VAL_FROM_FLOAT_LVAR                   | built-in                                       |
-| 0080   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_VAR              | built-in                                       |
-| 0081   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_LVAR            | built-in                                       |
-| 0082   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_LVAR             | built-in                                       |
-| 0083   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_VAR             | built-in                                       |
-| 0084   | SET_VAR_INT_TO_VAR_INT                          | built-in                                       |
-| 0085   | SET_LVAR_INT_TO_LVAR_INT                        | built-in                                       |
-| 0086   | SET_VAR_FLOAT_TO_VAR_FLOAT                      | built-in                                       |
-| 0087   | SET_LVAR_FLOAT_TO_LVAR_FLOAT                    | built-in                                       |
-| 0088   | SET_VAR_FLOAT_TO_LVAR_FLOAT                     | built-in                                       |
-| 0089   | SET_LVAR_FLOAT_TO_VAR_FLOAT                     | built-in                                       |
-| 008A   | SET_VAR_INT_TO_LVAR_INT                         | built-in                                       |
-| 008B   | SET_LVAR_INT_TO_VAR_INT                         | built-in                                       |
-| 008C   | CSET_VAR_INT_TO_VAR_FLOAT                       | built-in                                       |
-| 008D   | CSET_VAR_FLOAT_TO_VAR_INT                       | built-in                                       |
-| 008E   | CSET_LVAR_INT_TO_VAR_FLOAT                      | built-in                                       |
-| 008F   | CSET_LVAR_FLOAT_TO_VAR_INT                      | built-in                                       |
-| 0090   | CSET_VAR_INT_TO_LVAR_FLOAT                      | built-in                                       |
-| 0091   | CSET_VAR_FLOAT_TO_LVAR_INT                      | built-in                                       |
-| 0092   | CSET_LVAR_INT_TO_LVAR_FLOAT                     | built-in                                       |
-| 0093   | CSET_LVAR_FLOAT_TO_LVAR_INT                     | built-in                                       |
-| 0094   | ABS_VAR_INT                                     | built-in                                       |
-| 0095   | ABS_LVAR_INT                                    | built-in                                       |
-| 0096   | ABS_VAR_FLOAT                                   | built-in                                       |
-| 0097   | ABS_LVAR_FLOAT                                  | built-in                                       |
-| 0098   | GENERATE_RANDOM_FLOAT                           | built-in                                       |
-| 0099   | GENERATE_RANDOM_INT                             | built-in                                       |
+| 0054   | GET_PLAYER_COORDINATES                          | Player.GetCoordinates                          |                       |
+| 0055   | SET_PLAYER_COORDINATES                          | Player.SetCoordinates                          |                       |
+| 0056   | IS_PLAYER_IN_AREA_2D                            | Player.IsInArea2d                              |                       |
+| 0057   | IS_PLAYER_IN_AREA_3D                            | Player.IsInArea3d                              |                       |
+| 0058   | ADD_INT_VAR_TO_INT_VAR                          | built-in                                       |                       |
+| 0059   | ADD_FLOAT_VAR_TO_FLOAT_VAR                      | built-in                                       |                       |
+| 005A   | ADD_INT_LVAR_TO_INT_LVAR                        | built-in                                       |                       |
+| 005B   | ADD_FLOAT_LVAR_TO_FLOAT_LVAR                    | built-in                                       |                       |
+| 005C   | ADD_INT_VAR_TO_INT_LVAR                         | built-in                                       |                       |
+| 005D   | ADD_FLOAT_VAR_TO_FLOAT_LVAR                     | built-in                                       |                       |
+| 005E   | ADD_INT_LVAR_TO_INT_VAR                         | built-in                                       |                       |
+| 005F   | ADD_FLOAT_LVAR_TO_FLOAT_VAR                     | built-in                                       |                       |
+| 0060   | SUB_INT_VAR_FROM_INT_VAR                        | built-in                                       |                       |
+| 0061   | SUB_FLOAT_VAR_FROM_FLOAT_VAR                    | built-in                                       |                       |
+| 0062   | SUB_INT_LVAR_FROM_INT_LVAR                      | built-in                                       |                       |
+| 0063   | SUB_FLOAT_LVAR_FROM_FLOAT_LVAR                  | built-in                                       |                       |
+| 0064   | SUB_INT_VAR_FROM_INT_LVAR                       | built-in                                       |                       |
+| 0065   | SUB_FLOAT_VAR_FROM_FLOAT_LVAR                   | built-in                                       |                       |
+| 0066   | SUB_INT_LVAR_FROM_INT_VAR                       | built-in                                       |                       |
+| 0067   | SUB_FLOAT_LVAR_FROM_FLOAT_VAR                   | built-in                                       |                       |
+| 0068   | MULT_INT_VAR_BY_INT_VAR                         | built-in                                       |                       |
+| 0069   | MULT_FLOAT_VAR_BY_FLOAT_VAR                     | built-in                                       |                       |
+| 006A   | MULT_INT_LVAR_BY_INT_LVAR                       | built-in                                       |                       |
+| 006B   | MULT_FLOAT_LVAR_BY_FLOAT_LVAR                   | built-in                                       |                       |
+| 006C   | MULT_INT_VAR_BY_INT_LVAR                        | built-in                                       |                       |
+| 006D   | MULT_FLOAT_VAR_BY_FLOAT_LVAR                    | built-in                                       |                       |
+| 006E   | MULT_INT_LVAR_BY_INT_VAR                        | built-in                                       |                       |
+| 006F   | MULT_FLOAT_LVAR_BY_FLOAT_VAR                    | built-in                                       |                       |
+| 0070   | DIV_INT_VAR_BY_INT_VAR                          | built-in                                       |                       |
+| 0071   | DIV_FLOAT_VAR_BY_FLOAT_VAR                      | built-in                                       |                       |
+| 0072   | DIV_INT_LVAR_BY_INT_LVAR                        | built-in                                       |                       |
+| 0073   | DIV_FLOAT_LVAR_BY_FLOAT_LVAR                    | built-in                                       |                       |
+| 0074   | DIV_INT_VAR_BY_INT_LVAR                         | built-in                                       |                       |
+| 0075   | DIV_FLOAT_VAR_BY_FLOAT_LVAR                     | built-in                                       |                       |
+| 0076   | DIV_INT_LVAR_BY_INT_VAR                         | built-in                                       |                       |
+| 0077   | DIV_FLOAT_LVAR_BY_FLOAT_VAR                     | built-in                                       |                       |
+| 0078   | ADD_TIMED_VAL_TO_FLOAT_VAR                      | built-in                                       |                       |
+| 0079   | ADD_TIMED_VAL_TO_FLOAT_LVAR                     | built-in                                       |                       |
+| 007A   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_VAR                | built-in                                       |                       |
+| 007B   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_LVAR              | built-in                                       |                       |
+| 007C   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_LVAR               | built-in                                       |                       |
+| 007D   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_VAR               | built-in                                       |                       |
+| 007E   | SUB_TIMED_VAL_FROM_FLOAT_VAR                    | built-in                                       |                       |
+| 007F   | SUB_TIMED_VAL_FROM_FLOAT_LVAR                   | built-in                                       |                       |
+| 0080   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_VAR              | built-in                                       |                       |
+| 0081   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_LVAR            | built-in                                       |                       |
+| 0082   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_LVAR             | built-in                                       |                       |
+| 0083   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_VAR             | built-in                                       |                       |
+| 0084   | SET_VAR_INT_TO_VAR_INT                          | built-in                                       |                       |
+| 0085   | SET_LVAR_INT_TO_LVAR_INT                        | built-in                                       |                       |
+| 0086   | SET_VAR_FLOAT_TO_VAR_FLOAT                      | built-in                                       |                       |
+| 0087   | SET_LVAR_FLOAT_TO_LVAR_FLOAT                    | built-in                                       |                       |
+| 0088   | SET_VAR_FLOAT_TO_LVAR_FLOAT                     | built-in                                       |                       |
+| 0089   | SET_LVAR_FLOAT_TO_VAR_FLOAT                     | built-in                                       |                       |
+| 008A   | SET_VAR_INT_TO_LVAR_INT                         | built-in                                       |                       |
+| 008B   | SET_LVAR_INT_TO_VAR_INT                         | built-in                                       |                       |
+| 008C   | CSET_VAR_INT_TO_VAR_FLOAT                       | built-in                                       |                       |
+| 008D   | CSET_VAR_FLOAT_TO_VAR_INT                       | built-in                                       |                       |
+| 008E   | CSET_LVAR_INT_TO_VAR_FLOAT                      | built-in                                       |                       |
+| 008F   | CSET_LVAR_FLOAT_TO_VAR_INT                      | built-in                                       |                       |
+| 0090   | CSET_VAR_INT_TO_LVAR_FLOAT                      | built-in                                       |                       |
+| 0091   | CSET_VAR_FLOAT_TO_LVAR_INT                      | built-in                                       |                       |
+| 0092   | CSET_LVAR_INT_TO_LVAR_FLOAT                     | built-in                                       |                       |
+| 0093   | CSET_LVAR_FLOAT_TO_LVAR_INT                     | built-in                                       |                       |
+| 0094   | ABS_VAR_INT                                     | built-in                                       |                       |
+| 0095   | ABS_LVAR_INT                                    | built-in                                       |                       |
+| 0096   | ABS_VAR_FLOAT                                   | built-in                                       |                       |
+| 0097   | ABS_LVAR_FLOAT                                  | built-in                                       |                       |
+| 0098   | GENERATE_RANDOM_FLOAT                           | built-in                                       |                       |
+| 0099   | GENERATE_RANDOM_INT                             | built-in                                       |                       |
 | 009A   | CREATE_CHAR                                     | Char.Create                                    | constructor           |
 | 009B   | DELETE_CHAR                                     | Char.Delete                                    | destructor            |
-| 009C   | CHAR_WANDER_DIR                                 | Char.WanderDir                                 |
+| 009C   | CHAR_WANDER_DIR                                 | Char.WanderDir                                 |                       |
 | 009D   | CHAR_WANDER_RANGE                               |                                                | nop                   |
-| 009E   | CHAR_FOLLOW_PATH                                | Char.FollowPath                                |
-| 009F   | CHAR_SET_IDLE                                   | Char.SetIdle                                   |
-| 00A0   | GET_CHAR_COORDINATES                            | Char.GetCoordinates                            |
-| 00A1   | SET_CHAR_COORDINATES                            | Char.SetCoordinates                            |
-| 00A2   | IS_CHAR_STILL_ALIVE                             | Char.IsStillAlive                              |
-| 00A3   | IS_CHAR_IN_AREA_2D                              | Char.IsInArea2d                                |
-| 00A4   | IS_CHAR_IN_AREA_3D                              | Char.IsInArea3d                                |
+| 009E   | CHAR_FOLLOW_PATH                                | Char.FollowPath                                |                       |
+| 009F   | CHAR_SET_IDLE                                   | Char.SetIdle                                   |                       |
+| 00A0   | GET_CHAR_COORDINATES                            | Char.GetCoordinates                            |                       |
+| 00A1   | SET_CHAR_COORDINATES                            | Char.SetCoordinates                            |                       |
+| 00A2   | IS_CHAR_STILL_ALIVE                             | Char.IsStillAlive                              |                       |
+| 00A3   | IS_CHAR_IN_AREA_2D                              | Char.IsInArea2d                                |                       |
+| 00A4   | IS_CHAR_IN_AREA_3D                              | Char.IsInArea3d                                |                       |
 | 00A5   | CREATE_CAR                                      | Car.Create                                     | constructor           |
 | 00A6   | DELETE_CAR                                      | Car.Delete                                     | destructor            |
-| 00A7   | CAR_GOTO_COORDINATES                            | Car.Goto                                       |
-| 00A8   | CAR_WANDER_RANDOMLY                             | Car.WanderRandomly                             |
-| 00A9   | CAR_SET_IDLE                                    | Car.SetIdle                                    |
-| 00AA   | GET_CAR_COORDINATES                             | Car.GetCoordinates                             |
-| 00AB   | SET_CAR_COORDINATES                             | Car.SetCoordinates                             |
-| 00AC   | IS_CAR_STILL_ALIVE                              | Car.IsStillAlive                               |
-| 00AD   | SET_CAR_CRUISE_SPEED                            | Car.SetCruiseSpeed                             |
-| 00AE   | SET_CAR_DRIVING_STYLE                           | Car.SetDrivingStyle                            |
-| 00AF   | SET_CAR_MISSION                                 | Car.SetMission                                 |
-| 00B0   | IS_CAR_IN_AREA_2D                               | Car.IsInArea2d                                 |
-| 00B1   | IS_CAR_IN_AREA_3D                               | Car.IsInArea3d                                 |
+| 00A7   | CAR_GOTO_COORDINATES                            | Car.Goto                                       |                       |
+| 00A8   | CAR_WANDER_RANDOMLY                             | Car.WanderRandomly                             |                       |
+| 00A9   | CAR_SET_IDLE                                    | Car.SetIdle                                    |                       |
+| 00AA   | GET_CAR_COORDINATES                             | Car.GetCoordinates                             |                       |
+| 00AB   | SET_CAR_COORDINATES                             | Car.SetCoordinates                             |                       |
+| 00AC   | IS_CAR_STILL_ALIVE                              | Car.IsStillAlive                               |                       |
+| 00AD   | SET_CAR_CRUISE_SPEED                            | Car.SetCruiseSpeed                             |                       |
+| 00AE   | SET_CAR_DRIVING_STYLE                           | Car.SetDrivingStyle                            |                       |
+| 00AF   | SET_CAR_MISSION                                 | Car.SetMission                                 |                       |
+| 00B0   | IS_CAR_IN_AREA_2D                               | Car.IsInArea2d                                 |                       |
+| 00B1   | IS_CAR_IN_AREA_3D                               | Car.IsInArea3d                                 |                       |
 | 00B2   | SPECIAL_0                                       |                                                | nop                   |
 | 00B3   | SPECIAL_1                                       |                                                | nop                   |
 | 00B4   | SPECIAL_2                                       |                                                | nop                   |
@@ -214,17 +214,17 @@
 | 00D3   | WHILE                                           |                                                | nop                   |
 | 00D4   | WHILENOT                                        |                                                | nop                   |
 | 00D5   | ENDWHILE                                        |                                                | nop                   |
-| 00D6   | IF                                              | keyword                                        |
-| 00D7   | LAUNCH_MISSION                                  | keyword                                        |
-| 00D8   | MISSION_HAS_FINISHED                            | keyword                                        |
-| 00D9   | STORE_CAR_CHAR_IS_IN                            | Char.StoreCarIsIn                              |
-| 00DA   | STORE_CAR_PLAYER_IS_IN                          | Player.StoreCarIsIn                            |
-| 00DB   | IS_CHAR_IN_CAR                                  | Char.IsInCar                                   |
-| 00DC   | IS_PLAYER_IN_CAR                                | Player.IsInCar                                 |
-| 00DD   | IS_CHAR_IN_MODEL                                | Char.IsInModel                                 |
-| 00DE   | IS_PLAYER_IN_MODEL                              | Player.IsInModel                               |
-| 00DF   | IS_CHAR_IN_ANY_CAR                              | Char.IsInAnyCar                                |
-| 00E0   | IS_PLAYER_IN_ANY_CAR                            | Player.IsInAnyCar                              |
+| 00D6   | IF                                              | keyword                                        |                       |
+| 00D7   | LAUNCH_MISSION                                  | keyword                                        |                       |
+| 00D8   | MISSION_HAS_FINISHED                            | keyword                                        |                       |
+| 00D9   | STORE_CAR_CHAR_IS_IN                            | Char.StoreCarIsIn                              |                       |
+| 00DA   | STORE_CAR_PLAYER_IS_IN                          | Player.StoreCarIsIn                            |                       |
+| 00DB   | IS_CHAR_IN_CAR                                  | Char.IsInCar                                   |                       |
+| 00DC   | IS_PLAYER_IN_CAR                                | Player.IsInCar                                 |                       |
+| 00DD   | IS_CHAR_IN_MODEL                                | Char.IsInModel                                 |                       |
+| 00DE   | IS_PLAYER_IN_MODEL                              | Player.IsInModel                               |                       |
+| 00DF   | IS_CHAR_IN_ANY_CAR                              | Char.IsInAnyCar                                |                       |
+| 00E0   | IS_PLAYER_IN_ANY_CAR                            | Player.IsInAnyCar                              |                       |
 | 00E1   | IS_BUTTON_PRESSED                               | Pad.IsButtonPressed                            | static                |
 | 00E2   | GET_PAD_STATE                                   | Pad.GetState                                   | static                |
 | 00E3   | LOCATE_PLAYER_ANY_MEANS_2D                      | Player.LocateAnyMeans2d                        |
@@ -384,9 +384,9 @@
 | 017D   | LOAD_CAMERA_SPLINE                              |                                                | nop                   |
 | 017E   | MOVE_CAMERA_ALONG_SPLINE                        |                                                | nop                   |
 | 017F   | GET_CAMERA_POSITION_ALONG_SPLINE                |                                                | nop                   |
-| 0180   | DECLARE_MISSION_FLAG                            | keyword                                        |
-| 0181   | DECLARE_MISSION_FLAG_FOR_CONTACT                | keyword                                        |
-| 0182   | DECLARE_BASE_BRIEF_ID_FOR_CONTACT               | keyword                                        |
+| 0180   | DECLARE_MISSION_FLAG                            | keyword                                        |                       |
+| 0181   | DECLARE_MISSION_FLAG_FOR_CONTACT                | keyword                                        |                       |
+| 0182   | DECLARE_BASE_BRIEF_ID_FOR_CONTACT               | keyword                                        |                       |
 | 0183   | IS_PLAYER_HEALTH_GREATER                        | Player.IsHealthGreater                         |
 | 0184   | IS_CHAR_HEALTH_GREATER                          | Char.IsHealthGreater                           |
 | 0185   | IS_CAR_HEALTH_GREATER                           | Car.IsHealthGreater                            |
@@ -486,7 +486,7 @@
 | 01E3   | PRINT_WITH_NUMBER_BIG                           | Text.PrintWithNumberBig                        | static                |
 | 01E4   | PRINT_WITH_NUMBER                               | Text.PrintWithNumber                           | static                |
 | 01E5   | PRINT_WITH_NUMBER_NOW                           | Text.PrintWithNumberNow                        | static                |
-| 01E6   | PRINT_WITH_NUMBER_SOON                          | Text.PrintWithNumberSoon                       | static                |
+| 01E6   | PRINT_WITH_NUMBER_SOON                          |                                                | nop                   |
 | 01E7   | SWITCH_ROADS_ON                                 | Paths.SwitchRoadsOn                            | static                |
 | 01E8   | SWITCH_ROADS_OFF                                | Paths.SwitchRoadsOff                           | static                |
 | 01E9   | GET_NUMBER_OF_PASSENGERS                        | Car.GetNumberOfPassengers                      |
@@ -507,7 +507,7 @@
 | 01F8   | ADD_PAGER_MESSAGE_WITH_NUMBER                   | Pager.AddMessageWithNumber                     | static                |
 | 01F9   | START_KILL_FRENZY                               | Rampage.Start                                  | static                |
 | 01FA   | READ_KILL_FRENZY_STATUS                         | Rampage.ReadStatus                             |
-| 01FB   | SQRT                                            | keyword                                        |
+| 01FB   | SQRT                                            | keyword                                        |                       |
 | 01FC   | LOCATE_PLAYER_ANY_MEANS_CAR_2D                  | Player.LocateAnyMeansCar2d                     |
 | 01FD   | LOCATE_PLAYER_ON_FOOT_CAR_2D                    | Player.LocateOnFootCar2d                       |
 | 01FE   | LOCATE_PLAYER_IN_CAR_CAR_2D                     | Player.LocateInCarCar2d                        |
@@ -520,8 +520,8 @@
 | 0205   | LOCATE_CHAR_ANY_MEANS_CAR_3D                    | Char.LocateAnyMeansCar3d                       |
 | 0206   | LOCATE_CHAR_ON_FOOT_CAR_3D                      | Char.LocateOnFootCar3d                         |
 | 0207   | LOCATE_CHAR_IN_CAR_CAR_3D                       | Char.LocateInCarCar3d                          |
-| 0208   | GENERATE_RANDOM_FLOAT_IN_RANGE                  | keyword                                        |
-| 0209   | GENERATE_RANDOM_INT_IN_RANGE                    | keyword                                        |
+| 0208   | GENERATE_RANDOM_FLOAT_IN_RANGE                  | keyword                                        |                       |
+| 0209   | GENERATE_RANDOM_INT_IN_RANGE                    | keyword                                        |                       |
 | 020A   | LOCK_CAR_DOORS                                  | Car.LockDoors                                  |
 | 020B   | EXPLODE_CAR                                     | Car.Explode                                    |
 | 020C   | ADD_EXPLOSION                                   | World.AddExplosion                             | static                |
@@ -542,7 +542,7 @@
 | 021B   | SET_TARGET_CAR_FOR_MISSION_GARAGE               | Garage.SetTargetCar                            |
 | 021C   | IS_CAR_IN_MISSION_GARAGE                        | Garage.IsCarIn                                 |
 | 021D   | SET_FREE_BOMBS                                  | Game.SetFreeBombs                              | static                |
-| 021E   | SET_POWERPOINT                                  | Game.SetPowerpoint                             |
+| 021E   | SET_POWERPOINT                                  | Game.SetPowerpoint                             | static, PS2 only      |
 | 021F   | SET_ALL_TAXI_LIGHTS                             | Game.SetAllTaxiLights                          | static                |
 | 0220   | IS_CAR_ARMED_WITH_ANY_BOMB                      | Car.IsArmedWithAnyBomb                         |
 | 0221   | APPLY_BRAKES_TO_PLAYERS_CAR                     | Pad.ApplyBrakesToPlayersCar                    | static                |
@@ -565,7 +565,7 @@
 | 0232   | SET_GANG_ATTITUDE                               |                                                | nop                   |
 | 0233   | SET_GANG_GANG_ATTITUDE                          |                                                | nop                   |
 | 0234   | SET_GANG_PLAYER_ATTITUDE                        |                                                | nop                   |
-| 0235   | SET_GANG_PED_MODELS                             | Gang.SetPedModels                              | static                |
+| 0235   | SET_GANG_PED_MODELS                             |                                                | nop                   |
 | 0236   | SET_GANG_CAR_MODEL                              | Gang.SetCarModel                               | static                |
 | 0237   | SET_GANG_WEAPONS                                | Gang.SetWeapons                                | static                |
 | 0238   | SET_CHAR_OBJ_RUN_TO_AREA                        | Char.SetObjRunToArea                           |
@@ -597,7 +597,7 @@
 | 0252   | RESTORE_WEATHER                                 | Weather.Restore                                | static                |
 | 0253   | STORE_CLOCK                                     | Clock.Store                                    | static                |
 | 0254   | RESTORE_CLOCK                                   | Clock.Restore                                  | static                |
-| 0255   | RESTART_CRITICAL_MISSION                        | keyword                                        |
+| 0255   | RESTART_CRITICAL_MISSION                        | keyword                                        |                       |
 | 0256   | IS_PLAYER_PLAYING                               | Player.IsPlaying                               |
 | 0257   | SET_COLL_OBJ_NO_OBJ                             |                                                | nop                   |
 | 0258   | SET_COLL_OBJ_WAIT_ON_FOOT                       |                                                | nop                   |
@@ -666,14 +666,14 @@
 | 0297   | RESET_NUM_OF_MODELS_KILLED_BY_PLAYER            | Rampage.ResetNumOfModelsKilledByPlayer         | static                |
 | 0298   | GET_NUM_OF_MODELS_KILLED_BY_PLAYER              | Rampage.GetNumOfModelsKilledByPlayer           | static                |
 | 0299   | ACTIVATE_GARAGE                                 | Garage.Activate                                |
-| 029A   | SWITCH_TAXI_TIMER                               |                                                | nop                   |
+| 029A   | SWITCH_TAXI_TIMER                               |                                                | static, nop           |
 | 029B   | CREATE_OBJECT_NO_OFFSET                         | Object.CreateNoOffset                          | constructor           |
 | 029C   | IS_BOAT                                         | Car.IsBoat                                     |
 | 029D   | SET_CHAR_OBJ_GOTO_AREA_ANY_MEANS                | Char.SetObjGotoAreaAnyMeans                    |
 | 029E   | SET_COLL_OBJ_GOTO_AREA_ANY_MEANS                |                                                | nop                   |
 | 029F   | IS_PLAYER_STOPPED                               | Player.IsStopped                               |
 | 02A0   | IS_CHAR_STOPPED                                 | Char.IsStopped                                 |
-| 02A1   | MESSAGE_WAIT                                    | keyword                                        |
+| 02A1   | MESSAGE_WAIT                                    | keyword                                        |                       |
 | 02A2   | ADD_PARTICLE_EFFECT                             | Particles.AddEffect                            | static                |
 | 02A3   | SWITCH_WIDESCREEN                               | Screen.SwitchWidescreen                        |
 | 02A4   | ADD_SPRITE_BLIP_FOR_CAR                         | Blip.AddSpriteForCar                           |
@@ -717,7 +717,7 @@
 | 02CA   | IS_CAR_ON_SCREEN                                | Car.IsOnScreen                                 |
 | 02CB   | IS_CHAR_ON_SCREEN                               | Char.IsOnScreen                                |
 | 02CC   | IS_OBJECT_ON_SCREEN                             | Object.IsOnScreen                              |
-| 02CD   | GOSUB_FILE                                      | keyword                                        |
+| 02CD   | GOSUB_FILE                                      | keyword                                        |                       |
 | 02CE   | GET_GROUND_Z_FOR_3D_COORD                       | World.GetGroundZFor3dCoord                     | static                |
 | 02CF   | START_SCRIPT_FIRE                               | ScriptFire.Start                               | constructor           |
 | 02D0   | IS_SCRIPT_FIRE_EXTINGUISHED                     | ScriptFire.IsExtinguished                      |
@@ -758,8 +758,8 @@
 | 02F3   | LOAD_SPECIAL_MODEL                              | Streaming.LoadSpecialModel                     | static                |
 | 02F4   | CREATE_CUTSCENE_HEAD                            | Cutscene.CreateHead                            | constructor           |
 | 02F5   | SET_CUTSCENE_HEAD_ANIM                          | Cutscene.SetHeadAnim                           | static                |
-| 02F6   | SIN                                             | keyword                                        |
-| 02F7   | COS                                             | keyword                                        |
+| 02F6   | SIN                                             | keyword                                        |                       |
+| 02F7   | COS                                             | keyword                                        |                       |
 | 02F8   | GET_CAR_FORWARD_X                               | Car.GetForwardX                                |
 | 02F9   | GET_CAR_FORWARD_Y                               | Car.GetForwardY                                |
 | 02FA   | CHANGE_GARAGE_TYPE                              | Garage.ChangeType                              |
@@ -901,7 +901,7 @@
 | 0382   | SET_OBJECT_COLLISION                            | Object.SetCollision                            |
 | 0383   | IS_ICECREAM_JINGLE_ON                           | Car.IsIcecreamJingleOn                         |
 | 0384   | PRINT_STRING_IN_STRING_NOW                      | Text.PrintStringInStringNow                    | static                |
-| 0385   | PRINT_STRING_IN_STRING_SOON                     | Text.PrintStringInStringSoon                   | static                |
+| 0385   | PRINT_STRING_IN_STRING_SOON                     |                                                | nop                   |
 | 0386   | SET_5_REPEATED_PHONE_MESSAGES                   | PhoneInfo.Set5RepeatedPhoneMessages            | static                |
 | 0387   | SET_5_PHONE_MESSAGES                            | PhoneInfo.Set5PhoneMessages                    | static                |
 | 0388   | SET_6_REPEATED_PHONE_MESSAGES                   | PhoneInfo.Set6RepeatedPhoneMessages            | static                |
@@ -932,12 +932,12 @@
 | 03A1   | DRAW_SPHERE                                     | Sphere.Draw                                    |
 | 03A2   | SET_CAR_STATUS                                  | Car.SetStatus                                  |
 | 03A3   | IS_CHAR_MALE                                    | Char.IsMale                                    |
-| 03A4   | SCRIPT_NAME                                     | keyword                                        |
+| 03A4   | SCRIPT_NAME                                     | keyword                                        |                       |
 | 03A5   | CHANGE_GARAGE_TYPE_WITH_CAR_MODEL               | Garage.ChangeTypeWithCarModel                  |
 | 03A6   | FIND_DRUG_PLANE_COORDINATES                     | DrugRun.FindDrugPlaneCoordinates               | static                |
-| 03A7   | SAVE_INT_TO_DEBUG_FILE                          | keyword                                        |
-| 03A8   | SAVE_FLOAT_TO_DEBUG_FILE                        | keyword                                        |
-| 03A9   | SAVE_NEWLINE_TO_DEBUG_FILE                      | keyword                                        |
+| 03A7   | SAVE_INT_TO_DEBUG_FILE                          |                                                | nop                   |
+| 03A8   | SAVE_FLOAT_TO_DEBUG_FILE                        |                                                | nop                   |
+| 03A9   | SAVE_NEWLINE_TO_DEBUG_FILE                      |                                                | nop                   |
 | 03AA   | POLICE_RADIO_MESSAGE                            | Audio.PoliceRadioMessage                       | static                |
 | 03AB   | SET_CAR_STRONG                                  | Car.SetStrong                                  |
 | 03AC   | REMOVE_ROUTE                                    | Paths.RemoveRoute                              | static                |
@@ -1000,7 +1000,7 @@
 | 03E5   | PRINT_HELP                                      | Text.PrintHelp                                 | static                |
 | 03E6   | CLEAR_HELP                                      | Text.ClearHelp                                 | static                |
 | 03E7   | FLASH_HUD_OBJECT                                | Screen.FlashHudObject                          | static                |
-| 03E8   | FLASH_RADAR_BLIP                                | Screen.FlashRadarBlip                          | static                |
+| 03E8   | FLASH_RADAR_BLIP                                |                                                | nop                   |
 | 03E9   | IS_CHAR_IN_CONTROL                              | Char.IsInControl                               |
 | 03EA   | SET_GENERATE_CARS_AROUND_CAMERA                 | Camera.SetGenerateCarsAround                   | static                |
 | 03EB   | CLEAR_SMALL_PRINTS                              | Text.ClearSmallPrints                          |
@@ -1014,17 +1014,16 @@
 | 03F3   | GET_CAR_COLOURS                                 | Car.GetColours                                 |
 | 03F4   | SET_ALL_CARS_CAN_BE_DAMAGED                     | Game.SetAllCarsCanBeDamaged                    | static                |
 | 03F5   | SET_CAR_CAN_BE_DAMAGED                          | Car.SetCanBeDamaged                            |
-| 03F6   | MAKE_PLAYER_UNSAFE                              | Player.MakeUnsafe                              |
+| 03F6   | MAKE_PLAYER_UNSAFE                              |                                                | nop                   |
 | 03F7   | LOAD_COLLISION                                  | Streaming.LoadCollision                        | static                |
 | 03F8   | GET_BODY_CAST_HEALTH                            | Object.GetBodyCastHealth                       |
 | 03F9   | SET_CHARS_CHATTING                              | Char.ChatWith                                  | ?                     |
-| 03FA   | MAKE_PLAYER_SAFE                                | Player.MakeSafe                                |
+| 03FA   | MAKE_PLAYER_SAFE                                |                                                | nop                   |
 | 03FB   | SET_CAR_STAYS_IN_CURRENT_LEVEL                  | Car.SetStaysInCurrentLevel                     |
 | 03FC   | SET_CHAR_STAYS_IN_CURRENT_LEVEL                 | Char.SetStaysInCurrentLevel                    |
 | 03FD   | REGISTER_4X4_ONE_TIME                           | Stat.Register4X4OneTime                        | static                |
 | 03FE   | REGISTER_4X4_TWO_TIME                           | Stat.Register4X4TwoTime                        | static                |
 | 03FF   | REGISTER_4X4_THREE_TIME                         | Stat.Register4X4ThreeTime                      | static                |
-| 03FE   | SET_CHAR_MONEY                                  | Char.SetMoney                                  |
 | 0400   | REGISTER_4X4_MAYHEM_TIME                        | Stat.Register4X4MayhemTime                     | static                |
 | 0401   | REGISTER_LIFE_SAVED                             | Stat.RegisterLifeSaved                         | static                |
 | 0402   | REGISTER_CRIMINAL_CAUGHT                        | Stat.RegisterCriminalCaught                    | static                |
@@ -1034,7 +1033,7 @@
 | 0406   | REGISTER_LONGEST_DODO_FLIGHT                    | Stat.RegisterLongestDodoFlight                 | static                |
 | 0407   | COMMAND_REGISTER_DEFUSE_BOMB_TIME               | Stat.RegisterDefuseBombTime                    | static                |
 | 0408   | SET_TOTAL_NUMBER_OF_KILL_FRENZIES               | Stat.SetTotalNumberOfKillFrenzies              | static                |
-| 0409   | BLOW_UP_RC_BUGGY                                | Rc.BlowUpRcBuggy                               | static                |
+| 0409   | BLOW_UP_RC_BUGGY                                | Rc.BlowUpBuggy                                 | static                |
 | 040A   | REMOVE_CAR_FROM_CHASE                           | ChaseScene.RemoveCarFromChase                  | static                |
 | 040B   | IS_FRENCH_GAME                                  | Game.IsFrench                                  | static                |
 | 040C   | IS_GERMAN_GAME                                  | Game.IsGerman                                  | static                |
@@ -1047,8 +1046,8 @@
 | 0413   | SET_GET_OUT_OF_JAIL_FREE                        | Game.SetGetOutOfJailFree                       | static                |
 | 0414   | SET_FREE_HEALTH_CARE                            | Game.SetFreeHealthCare                         | static                |
 | 0415   | IS_CAR_DOOR_CLOSED                              | Car.IsDoorClosed                               |
-| 0416   | LOAD_AND_LAUNCH_MISSION                         | keyword                                        |
-| 0417   | LOAD_AND_LAUNCH_MISSION_INTERNAL                | keyword                                        |
+| 0416   | LOAD_AND_LAUNCH_MISSION                         | keyword                                        |                       |
+| 0417   | LOAD_AND_LAUNCH_MISSION_INTERNAL                | keyword                                        |                       |
 | 0418   | SET_OBJECT_DRAW_LAST                            | Object.SetDrawLast                             |
 | 0419   | GET_AMMO_IN_PLAYER_WEAPON                       | Player.GetAmmoInWeapon                         |
 | 041A   | GET_AMMO_IN_CHAR_WEAPON                         | Char.GetAmmoInWeapon                           |
@@ -1066,14 +1065,14 @@
 | 0426   | MARK_ROADS_BETWEEN_LEVELS                       | Paths.MarkRoadsBetweenLevels                   | static                |
 | 0427   | MARK_PED_ROADS_BETWEEN_LEVELS                   | Paths.MarkPedRoadsBetweenLevels                | static                |
 | 0428   | SET_CAR_AVOID_LEVEL_TRANSITIONS                 | Car.SetAvoidLevelTransitions                   |
-| 0429   | SET_CHAR_AVOID_LEVEL_TRANSITIONS                | Char.SetCharAvoidLevelTransitions              |
+| 0429   | SET_CHAR_AVOID_LEVEL_TRANSITIONS                |                                                | nop                   |
 | 042A   | IS_THREAT_FOR_PED_TYPE                          | Game.IsThreatForPedType                        | static                |
 | 042B   | CLEAR_AREA_OF_CHARS                             | World.ClearAreaOfChars                         | static                |
 | 042C   | SET_TOTAL_NUMBER_OF_MISSIONS                    | Stat.SetTotalNumberOfMissions                  | static                |
 | 042D   | CONVERT_METRES_TO_FEET_INT                      | ConvertMetresToFeetInt                         | util                  |
 | 042E   | REGISTER_FASTEST_TIME                           | Stat.RegisterFastestTime                       | static                |
 | 042F   | REGISTER_HIGHEST_SCORE                          | Stat.RegisterHighestScore                      | static                |
-| 0430   | WARP_CHAR_INTO_CAR_AS_PASSENGER                 | Char.WarpIntoCarAsPassenger                    |
+| 0430   | WARP_CHAR_INTO_CAR_AS_PASSENGER                 |                                                | nop                   |
 | 0431   | IS_CAR_PASSENGER_SEAT_FREE                      | Car.IsPassengerSeatFree                        |
 | 0432   | GET_CHAR_IN_CAR_PASSENGER_SEAT                  | Char.GetInCarPassengerSeat                     |
 | 0433   | SET_CHAR_IS_CHRIS_CRIMINAL                      | Char.SetIsChrisCriminal                        |
@@ -1111,16 +1110,16 @@
 | 0453   | SET_OBJECT_ROTATION                             | Object.SetRotation                             |
 | 0454   | GET_DEBUG_CAMERA_COORDINATES                    | Camera.GetDebugCoordinates                     | static                |
 | 0455   | GET_DEBUG_CAMERA_FRONT_VECTOR                   | Camera.GetDebugFrontVector                     | static                |
-| 0456   | IS_PLAYER_TARGETTING_ANY_CHAR                   | Player.IsTargettingAnyChar                     |
-| 0457   | IS_PLAYER_TARGETTING_CHAR                       | Player.IsTargettingChar                        |
-| 0458   | IS_PLAYER_TARGETTING_OBJECT                     | Player.IsTargettingObject                      |
-| 0459   | TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME            | keyword                                        |
-| 045A   | DISPLAY_TEXT_WITH_NUMBER                        | Text.DisplayWithNumber                         |
-| 045B   | DISPLAY_TEXT_WITH_2_NUMBERS                     | Text.DisplayWith2Numbers                       |
+| 0456   | IS_PLAYER_TARGETTING_ANY_CHAR                   | Player.IsTargettingAnyChar                     |                       |
+| 0457   | IS_PLAYER_TARGETTING_CHAR                       | Player.IsTargettingChar                        |                       |
+| 0458   | IS_PLAYER_TARGETTING_OBJECT                     | Player.IsTargettingObject                      |                       |
+| 0459   | TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME            | keyword                                        |                       |
+| 045A   | DISPLAY_TEXT_WITH_NUMBER                        | Text.DisplayWithNumber                         |                       |
+| 045B   | DISPLAY_TEXT_WITH_2_NUMBERS                     | Text.DisplayWith2Numbers                       |                       |
 | 045C   | FAIL_CURRENT_MISSION                            | Game.FailCurrentMission                        | static                |
 | 045D   | GET_CLOSEST_OBJECT_OF_TYPE                      | World.GetClosestObjectOfType                   | static                |
 | 045E   | PLACE_OBJECT_RELATIVE_TO_OBJECT                 | World.PlaceObjectRelativeToObject              | static                |
-| 045F   | SET_ALL_OCCUPANTS_OF_CAR_LEAVE_CAR              | Car.SetAllOccupantsLeave                       |
+| 045F   | SET_ALL_OCCUPANTS_OF_CAR_LEAVE_CAR              | Car.SetAllOccupantsLeave                       |                       |
 | 0460   | SET_INTERPOLATION_PARAMETERS                    | Camera.SetInterpolationParameters              | static                |
 | 0461   | GET_CLOSEST_CAR_NODE_WITH_HEADING_TOWARDS_POINT | Paths.GetClosestCarNodeWithHeadingTowardsPoint | static                |
 | 0462   | GET_CLOSEST_CAR_NODE_WITH_HEADING_AWAY_POINT    | Paths.GetClosestCarNodeWithHeadingAwayPoint    | static                |
@@ -1151,8 +1150,8 @@
 | 047B   | LOCATE_SNIPER_BULLET_2D                         | World.LocateSniperBullet2D                     | static                |
 | 047C   | LOCATE_SNIPER_BULLET_3D                         | World.LocateSniperBullet3D                     | static                |
 | 047D   | GET_NUMBER_OF_SEATS_IN_MODEL                    | Car.GetNumberOfSeatsInModel                    | static ?              |
-| 047E   | IS_PLAYER_ON_ANY_BIKE                           | Player.IsOnAnyBike                             |
-| 047F   | IS_CHAR_LYING_DOWN                              | Char.IsLyingDown                               |
-| 0480   | CAN_CHAR_SEE_DEAD_CHAR                          | Char.CanSeeDeadChar                            |
+| 047E   | IS_PLAYER_ON_ANY_BIKE                           | Player.IsOnAnyBike                             |                       |
+| 047F   | IS_CHAR_LYING_DOWN                              | Char.IsLyingDown                               |                       |
+| 0480   | CAN_CHAR_SEE_DEAD_CHAR                          | Char.CanSeeDeadChar                            |                       |
 | 0481   | SET_ENTER_CAR_RANGE_MULTIPLIER                  | Char.SetEnterCarRangeMultiplier                | static                |
 | 0482   | SET_THREAT_REACTION_RANGE_MULTIPLIER            | Char.SetThreatReactionRangeMultiplier          | static, gta3 1.0 only |

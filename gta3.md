@@ -1,13 +1,13 @@
-| Opcode | Command Name                                    | Class                                          | Modifier                   |
+| Opcode | Command Name                                    | Class                                          | Notes                      |
 | ------ | ----------------------------------------------- | ---------------------------------------------- | -------------------------- |
 | 0000   | NOP                                             |                                                | nop                        |
 | 0001   | WAIT                                            | keyword                                        |                            |
 | 0002   | GOTO                                            | keyword                                        |                            |
 | 0003   | SHAKE_CAM                                       | Camera.Shake                                   | static                     |
-| 0004   | SET_VAR_INT                                     | built-in                                       |                            |
-| 0005   | SET_VAR_FLOAT                                   | built-in                                       |                            |
-| 0006   | SET_LVAR_INT                                    | built-in                                       |                            |
-| 0007   | SET_LVAR_FLOAT                                  | built-in                                       |                            |
+| 0004   | SET_VAR_INT                                     | int var = constant                             |                            |
+| 0005   | SET_VAR_FLOAT                                   | float var = constant                           |                            |
+| 0006   | SET_LVAR_INT                                    | int lvar = constant                            |                            |
+| 0007   | SET_LVAR_FLOAT                                  | float lvar = constant                          |                            |
 | 0008   | ADD_VAL_TO_INT_VAR                              | built-in                                       |                            |
 | 0009   | ADD_VAL_TO_FLOAT_VAR                            | built-in                                       |                            |
 | 000A   | ADD_VAL_TO_INT_LVAR                             | built-in                                       |                            |
@@ -120,18 +120,18 @@
 | 0075   | DIV_FLOAT_VAR_BY_FLOAT_LVAR                     | built-in                                       |                            |
 | 0076   | DIV_INT_LVAR_BY_INT_VAR                         | built-in                                       |                            |
 | 0077   | DIV_FLOAT_LVAR_BY_FLOAT_VAR                     | built-in                                       |                            |
-| 0078   | ADD_TIMED_VAL_TO_FLOAT_VAR                      | built-in                                       |                            |
-| 0079   | ADD_TIMED_VAL_TO_FLOAT_LVAR                     | built-in                                       |                            |
-| 007A   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_VAR                | built-in                                       |                            |
-| 007B   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_LVAR              | built-in                                       |                            |
-| 007C   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_LVAR               | built-in                                       |                            |
-| 007D   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_VAR               | built-in                                       |                            |
-| 007E   | SUB_TIMED_VAL_FROM_FLOAT_VAR                    | built-in                                       |                            |
-| 007F   | SUB_TIMED_VAL_FROM_FLOAT_LVAR                   | built-in                                       |                            |
-| 0080   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_VAR              | built-in                                       |                            |
-| 0081   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_LVAR            | built-in                                       |                            |
-| 0082   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_LVAR             | built-in                                       |                            |
-| 0083   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_VAR             | built-in                                       |                            |
+| 0078   | ADD_TIMED_VAL_TO_FLOAT_VAR                      | +=@                                            |                            |
+| 0079   | ADD_TIMED_VAL_TO_FLOAT_LVAR                     | +=@                                            |                            |
+| 007A   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_VAR                | +=@                                            |                            |
+| 007B   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_LVAR              | +=@                                            |                            |
+| 007C   | ADD_TIMED_FLOAT_VAR_TO_FLOAT_LVAR               | +=@                                            |                            |
+| 007D   | ADD_TIMED_FLOAT_LVAR_TO_FLOAT_VAR               | +=@                                            |                            |
+| 007E   | SUB_TIMED_VAL_FROM_FLOAT_VAR                    | -=@                                            |                            |
+| 007F   | SUB_TIMED_VAL_FROM_FLOAT_LVAR                   | -=@                                            |                            |
+| 0080   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_VAR              | -=@                                            |                            |
+| 0081   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_LVAR            | -=@                                            |                            |
+| 0082   | SUB_TIMED_FLOAT_VAR_FROM_FLOAT_LVAR             | -=@                                            |                            |
+| 0083   | SUB_TIMED_FLOAT_LVAR_FROM_FLOAT_VAR             | -=@                                            |                            |
 | 0084   | SET_VAR_INT_TO_VAR_INT                          | built-in                                       |                            |
 | 0085   | SET_LVAR_INT_TO_LVAR_INT                        | built-in                                       |                            |
 | 0086   | SET_VAR_FLOAT_TO_VAR_FLOAT                      | built-in                                       |                            |
@@ -140,22 +140,22 @@
 | 0089   | SET_LVAR_FLOAT_TO_VAR_FLOAT                     | built-in                                       |                            |
 | 008A   | SET_VAR_INT_TO_LVAR_INT                         | built-in                                       |                            |
 | 008B   | SET_LVAR_INT_TO_VAR_INT                         | built-in                                       |                            |
-| 008C   | CSET_VAR_INT_TO_VAR_FLOAT                       | built-in                                       |                            |
-| 008D   | CSET_VAR_FLOAT_TO_VAR_INT                       | built-in                                       |                            |
-| 008E   | CSET_LVAR_INT_TO_VAR_FLOAT                      | built-in                                       |                            |
-| 008F   | CSET_LVAR_FLOAT_TO_VAR_INT                      | built-in                                       |                            |
-| 0090   | CSET_VAR_INT_TO_LVAR_FLOAT                      | built-in                                       |                            |
-| 0091   | CSET_VAR_FLOAT_TO_LVAR_INT                      | built-in                                       |                            |
-| 0092   | CSET_LVAR_INT_TO_LVAR_FLOAT                     | built-in                                       |                            |
-| 0093   | CSET_LVAR_FLOAT_TO_LVAR_INT                     | built-in                                       |                            |
-| 0094   | ABS_VAR_INT                                     | built-in                                       |                            |
-| 0095   | ABS_LVAR_INT                                    | built-in                                       |                            |
-| 0096   | ABS_VAR_FLOAT                                   | built-in                                       |                            |
-| 0097   | ABS_LVAR_FLOAT                                  | built-in                                       |                            |
-| 0098   | GENERATE_RANDOM_FLOAT                           | built-in                                       |                            |
-| 0099   | GENERATE_RANDOM_INT                             | built-in                                       |                            |
+| 008C   | CSET_VAR_INT_TO_VAR_FLOAT                       | Math.IntToFloat or =#                          | static                     |
+| 008D   | CSET_VAR_FLOAT_TO_VAR_INT                       | Math.FloatToInt or =#                          | static                     |
+| 008E   | CSET_LVAR_INT_TO_VAR_FLOAT                      | Math.IntToFloat or =#                          | static                     |
+| 008F   | CSET_LVAR_FLOAT_TO_VAR_INT                      | Math.FloatToInt or =#                          | static                     |
+| 0090   | CSET_VAR_INT_TO_LVAR_FLOAT                      | Math.IntToFloat or =#                          | static                     |
+| 0091   | CSET_VAR_FLOAT_TO_LVAR_INT                      | Math.FloatToInt or =#                          | static                     |
+| 0092   | CSET_LVAR_INT_TO_LVAR_FLOAT                     | Math.IntToFloat or =#                          | static                     |
+| 0093   | CSET_LVAR_FLOAT_TO_LVAR_INT                     | Math.FloatToInt or =#                          | static                     |
+| 0094   | ABS_VAR_INT                                     | Math.AbsInt                                    | static                     |
+| 0095   | ABS_LVAR_INT                                    | Math.AbsInt                                    | static                     |
+| 0096   | ABS_VAR_FLOAT                                   | Math.AbsFloat                                  | static                     |
+| 0097   | ABS_LVAR_FLOAT                                  | Math.AbsFloat                                  | static                     |
+| 0098   | GENERATE_RANDOM_FLOAT                           | Math.RandomFloat                               | static                     |
+| 0099   | GENERATE_RANDOM_INT                             | Math.RandomInt                                 | static                     |
 | 009A   | CREATE_CHAR                                     | Char.Create                                    | Char constructor           |
-| 009B   | DELETE_CHAR                                     | Char.Delete                                    | destructor                 |
+| 009B   | DELETE_CHAR                                     | Char.Delete                                    | Char destructor            |
 | 009C   | CHAR_WANDER_DIR                                 | Char.WanderDir                                 |                            |
 | 009D   | CHAR_WANDER_RANGE                               |                                                | nop                        |
 | 009E   | CHAR_FOLLOW_PATH                                | Char.FollowPath                                |                            |
@@ -166,7 +166,7 @@
 | 00A3   | IS_CHAR_IN_AREA_2D                              | Char.IsInArea2d                                |                            |
 | 00A4   | IS_CHAR_IN_AREA_3D                              | Char.IsInArea3d                                |                            |
 | 00A5   | CREATE_CAR                                      | Car.Create                                     | Car constructor            |
-| 00A6   | DELETE_CAR                                      | Car.Delete                                     | destructor                 |
+| 00A6   | DELETE_CAR                                      | Car.Delete                                     | Car destructor             |
 | 00A7   | CAR_GOTO_COORDINATES                            | Car.Goto                                       |                            |
 | 00A8   | CAR_WANDER_RANDOMLY                             | Car.WanderRandomly                             |                            |
 | 00A9   | CAR_SET_IDLE                                    | Car.SetIdle                                    |                            |
@@ -264,17 +264,17 @@
 | 0105   | LOCATE_CHAR_ON_FOOT_CHAR_3D                     | Char.LocateOnFootChar3d                        |                            |
 | 0106   | LOCATE_CHAR_IN_CAR_CHAR_3D                      | Char.LocateInCarChar3d                         |                            |
 | 0107   | CREATE_OBJECT                                   | Object.Create                                  | Object constructor         |
-| 0108   | DELETE_OBJECT                                   | Object.Delete                                  | destructor                 |
+| 0108   | DELETE_OBJECT                                   | Object.Delete                                  | Object destructor          |
 | 0109   | ADD_SCORE                                       | Player.AddScore                                |                            |
 | 010A   | IS_SCORE_GREATER                                | Player.IsScoreGreater                          |                            |
 | 010B   | STORE_SCORE                                     | Player.StoreScore                              |                            |
-| 010C   | GIVE_REMOTE_CONTROLLED_CAR_TO_PLAYER            | Rc.GiveCarToPlayer                             |                            |
+| 010C   | GIVE_REMOTE_CONTROLLED_CAR_TO_PLAYER            | Rc.GiveCarToPlayer                             | static                     |
 | 010D   | ALTER_WANTED_LEVEL                              | Player.AlterWantedLevel                        |                            |
 | 010E   | ALTER_WANTED_LEVEL_NO_DROP                      | Player.AlterWantedLevelNoDrop                  |                            |
 | 010F   | IS_WANTED_LEVEL_GREATER                         | Player.IsWantedLevelGreater                    |                            |
 | 0110   | CLEAR_WANTED_LEVEL                              | Player.ClearWantedLevel                        |                            |
-| 0111   | SET_DEATHARREST_STATE                           | DeathArrest.SetState                           |                            |
-| 0112   | HAS_DEATHARREST_BEEN_EXECUTED                   | DeathArrest.HasBeenExecuted                    |                            |
+| 0111   | SET_DEATHARREST_STATE                           | Game.SetDeatharrestState                       | static                     |
+| 0112   | HAS_DEATHARREST_BEEN_EXECUTED                   | Game.HasDeatharrestBeenExecuted                | static                     |
 | 0113   | ADD_AMMO_TO_PLAYER                              | Player.AddAmmo                                 |                            |
 | 0114   | ADD_AMMO_TO_CHAR                                | Char.AddAmmo                                   |                            |
 | 0115   | ADD_AMMO_TO_CAR                                 |                                                | nop                        |
@@ -357,17 +357,17 @@
 | 0162   | ADD_BLIP_FOR_CHAR_OLD                           | Blip.CreateForCharEx                           | Blip constructor           |
 | 0163   | ADD_BLIP_FOR_OBJECT_OLD                         | Blip.CreatForObjectEx                          | Blip constructor           |
 | 0164   | REMOVE_BLIP                                     | Blip.Remove                                    |                            |
-| 0165   | CHANGE_BLIP_COLOUR                              | Blip.ChangeColour                              |                            |
+| 0165   | CHANGE_BLIP_COLOR                               | Blip.ChangeColor                               |                            |
 | 0166   | DIM_BLIP                                        | Blip.Dim                                       |                            |
 | 0167   | ADD_BLIP_FOR_COORD_OLD                          | Blip.CreateForCoordEx                          | Blip constructor           |
 | 0168   | CHANGE_BLIP_SCALE                               | Blip.ChangeScale                               |                            |
-| 0169   | SET_FADING_COLOUR                               | Camera.SetFadingColour                         | static                     |
+| 0169   | SET_FADING_COLOR                                | Camera.SetFadingColor                          | static                     |
 | 016A   | DO_FADE                                         | Camera.DoFade                                  | static                     |
 | 016B   | GET_FADING_STATUS                               | Camera.GetFadingStatus                         | static                     |
 | 016C   | ADD_HOSPITAL_RESTART                            | Restart.AddHospitalRestart                     | static                     |
 | 016D   | ADD_POLICE_RESTART                              | Restart.AddPoliceRestart                       | static                     |
 | 016E   | OVERRIDE_NEXT_RESTART                           | Restart.OverrideNextRestart                    | static                     |
-| 016F   | DRAW_SHADOW                                     | Shadow.Draw                                    |                            |
+| 016F   | DRAW_SHADOW                                     | Fx.DrawShadow                                  | static                     |
 | 0170   | GET_PLAYER_HEADING                              | Player.GetHeading                              |                            |
 | 0171   | SET_PLAYER_HEADING                              | Player.SetHeading                              |                            |
 | 0172   | GET_CHAR_HEADING                                | Char.GetHeading                                |                            |
@@ -506,8 +506,8 @@
 | 01F7   | SET_POLICE_IGNORE_PLAYER                        | Player.SetIgnorePolice                         |                            |
 | 01F8   | ADD_PAGER_MESSAGE_WITH_NUMBER                   | Pager.AddMessageWithNumber                     | static                     |
 | 01F9   | START_KILL_FRENZY                               | Rampage.Start                                  | static                     |
-| 01FA   | READ_KILL_FRENZY_STATUS                         | Rampage.ReadStatus                             |                            |
-| 01FB   | SQRT                                            | keyword                                        |                            |
+| 01FA   | READ_KILL_FRENZY_STATUS                         | Rampage.ReadStatus                             | static                     |
+| 01FB   | SQRT                                            | Math.Sqrt                                      | static                     |
 | 01FC   | LOCATE_PLAYER_ANY_MEANS_CAR_2D                  | Player.LocateAnyMeansCar2d                     |                            |
 | 01FD   | LOCATE_PLAYER_ON_FOOT_CAR_2D                    | Player.LocateOnFootCar2d                       |                            |
 | 01FE   | LOCATE_PLAYER_IN_CAR_CAR_2D                     | Player.LocateInCarCar2d                        |                            |
@@ -520,8 +520,8 @@
 | 0205   | LOCATE_CHAR_ANY_MEANS_CAR_3D                    | Char.LocateAnyMeansCar3d                       |                            |
 | 0206   | LOCATE_CHAR_ON_FOOT_CAR_3D                      | Char.LocateOnFootCar3d                         |                            |
 | 0207   | LOCATE_CHAR_IN_CAR_CAR_3D                       | Char.LocateInCarCar3d                          |                            |
-| 0208   | GENERATE_RANDOM_FLOAT_IN_RANGE                  | keyword                                        |                            |
-| 0209   | GENERATE_RANDOM_INT_IN_RANGE                    | keyword                                        |                            |
+| 0208   | GENERATE_RANDOM_FLOAT_IN_RANGE                  | Math.RandomFloatInRange                        | static                     |
+| 0209   | GENERATE_RANDOM_INT_IN_RANGE                    | Math.RandomIntInRange                          | static                     |
 | 020A   | LOCK_CAR_DOORS                                  | Car.LockDoors                                  |                            |
 | 020B   | EXPLODE_CAR                                     | Car.Explode                                    |                            |
 | 020C   | ADD_EXPLOSION                                   | World.AddExplosion                             | static                     |
@@ -533,10 +533,10 @@
 | 0212   | SET_CHAR_OBJ_GOTO_COORD_IN_CAR                  |                                                | nop                        |
 | 0213   | CREATE_PICKUP                                   | Pickup.Create                                  | Pickup constructor         |
 | 0214   | HAS_PICKUP_BEEN_COLLECTED                       | Pickup.HasBeenCollected                        |                            |
-| 0215   | REMOVE_PICKUP                                   | Pickup.Remove                                  | destructor                 |
+| 0215   | REMOVE_PICKUP                                   | Pickup.Remove                                  | Pickup destructor          |
 | 0216   | SET_TAXI_LIGHTS                                 | Car.SetTaxiLight                               |                            |
-| 0217   | PRINT_BIG_Q                                     | Text.PrintBigQ                                 |                            |
-| 0218   | PRINT_WITH_NUMBER_BIG_Q                         | Text.PrintWithNumberBigQ                       |                            |
+| 0217   | PRINT_BIG_Q                                     | Text.PrintBigQ                                 | static                     |
+| 0218   | PRINT_WITH_NUMBER_BIG_Q                         | Text.PrintWithNumberBigQ                       | static                     |
 | 0219   | SET_GARAGE                                      | Garage.Create                                  | Garage constructor         |
 | 021A   | SET_GARAGE_WITH_CAR_MODEL                       | Garage.CreateWithCarModel                      | Garage constructor         |
 | 021B   | SET_TARGET_CAR_FOR_MISSION_GARAGE               | Garage.SetTargetCar                            |                            |
@@ -553,7 +553,7 @@
 | 0226   | GET_CHAR_HEALTH                                 | Char.GetHealth                                 |                            |
 | 0227   | GET_CAR_HEALTH                                  | Car.GetHealth                                  |                            |
 | 0228   | IS_CAR_ARMED_WITH_BOMB                          | Car.IsArmedWithBomb                            |                            |
-| 0229   | CHANGE_CAR_COLOUR                               | Car.ChangeColour                               |                            |
+| 0229   | CHANGE_CAR_COLOR                                | Car.ChangeColor                                |                            |
 | 022A   | SWITCH_PED_ROADS_ON                             | Paths.SwitchPedRoadsOn                         | static                     |
 | 022B   | SWITCH_PED_ROADS_OFF                            | Paths.SwitchPedRoadsOff                        | static                     |
 | 022C   | CHAR_LOOK_AT_CHAR_ALWAYS                        | Char.LookAtCharAlways                          |                            |
@@ -561,7 +561,7 @@
 | 022E   | PLAYER_LOOK_AT_CHAR_ALWAYS                      | Player.LookAtCharAlways                        |                            |
 | 022F   | STOP_CHAR_LOOKING                               | Char.StopLooking                               |                            |
 | 0230   | STOP_PLAYER_LOOKING                             | Player.StopLooking                             |                            |
-| 0231   | SET_SCRIPT_POLICE_HELI_TO_CHASE_CHAR            | Game.SetScriptPoliceHeliToChaseChar            |                            |
+| 0231   | SET_SCRIPT_POLICE_HELI_TO_CHASE_CHAR            | Game.SetScriptPoliceHeliToChaseChar            | static                     |
 | 0232   | SET_GANG_ATTITUDE                               |                                                | nop                        |
 | 0233   | SET_GANG_GANG_ATTITUDE                          |                                                | nop                        |
 | 0234   | SET_GANG_PLAYER_ATTITUDE                        |                                                | nop                        |
@@ -583,21 +583,21 @@
 | 0244   | SET_CUTSCENE_OFFSET                             | Cutscene.SetOffset                             | static                     |
 | 0245   | SET_ANIM_GROUP_FOR_CHAR                         | Char.SetAnimGroup                              |                            |
 | 0246   | SET_ANIM_GROUP_FOR_PLAYER                       | Player.SetAnimGroup                            |                            |
-| 0247   | REQUEST_MODEL                                   | Streaming.RequestModel                         |                            |
-| 0248   | HAS_MODEL_LOADED                                | Streaming.HasModelLoaded                       |                            |
-| 0249   | MARK_MODEL_AS_NO_LONGER_NEEDED                  | Streaming.MarkModelAsNoLongerNeeded            |                            |
-| 024A   | GRAB_PHONE                                      | PhoneInfo.Grab                                 | static                     |
-| 024B   | SET_REPEATED_PHONE_MESSAGE                      | PhoneInfo.SetRepeatedMessage                   | static                     |
-| 024C   | SET_PHONE_MESSAGE                               | PhoneInfo.SetMessage                           | static                     |
-| 024D   | HAS_PHONE_DISPLAYED_MESSAGE                     | PhoneInfo.HasDisplayedMessage                  | static                     |
-| 024E   | TURN_PHONE_OFF                                  | PhoneInfo.TurnOff                              | static                     |
-| 024F   | DRAW_CORONA                                     | Corona.Draw                                    | static                     |
-| 0250   | DRAW_LIGHT                                      | Light.Draw                                     | static                     |
+| 0247   | REQUEST_MODEL                                   | Streaming.RequestModel                         | static                     |
+| 0248   | HAS_MODEL_LOADED                                | Streaming.HasModelLoaded                       | static                     |
+| 0249   | MARK_MODEL_AS_NO_LONGER_NEEDED                  | Streaming.MarkModelAsNoLongerNeeded            | static                     |
+| 024A   | GRAB_PHONE                                      | Phone.Grab                                     | Phone constructor          |
+| 024B   | SET_REPEATED_PHONE_MESSAGE                      | Phone.SetRepeatedMessage                       | static                     |
+| 024C   | SET_PHONE_MESSAGE                               | Phone.SetMessage                               | static                     |
+| 024D   | HAS_PHONE_DISPLAYED_MESSAGE                     | Phone.HasDisplayedMessage                      | static                     |
+| 024E   | TURN_PHONE_OFF                                  | Phone.TurnOff                                  | static                     |
+| 024F   | DRAW_CORONA                                     | Fx.DrawCorona                                  | static                     |
+| 0250   | DRAW_LIGHT                                      | Fx.DrawLight                                   | static                     |
 | 0251   | STORE_WEATHER                                   | Weather.Store                                  | static                     |
 | 0252   | RESTORE_WEATHER                                 | Weather.Restore                                | static                     |
 | 0253   | STORE_CLOCK                                     | Clock.Store                                    | static                     |
 | 0254   | RESTORE_CLOCK                                   | Clock.Restore                                  | static                     |
-| 0255   | RESTART_CRITICAL_MISSION                        | keyword                                        |                            |
+| 0255   | RESTART_CRITICAL_MISSION                        | Restart.RestartCriticalMission                 | static                     |
 | 0256   | IS_PLAYER_PLAYING                               | Player.IsPlaying                               |                            |
 | 0257   | SET_COLL_OBJ_NO_OBJ                             |                                                | nop                        |
 | 0258   | SET_COLL_OBJ_WAIT_ON_FOOT                       |                                                | nop                        |
@@ -674,8 +674,8 @@
 | 029F   | IS_PLAYER_STOPPED                               | Player.IsStopped                               |                            |
 | 02A0   | IS_CHAR_STOPPED                                 | Char.IsStopped                                 |                            |
 | 02A1   | MESSAGE_WAIT                                    | keyword                                        |                            |
-| 02A2   | ADD_PARTICLE_EFFECT                             | Particles.AddEffect                            | static                     |
-| 02A3   | SWITCH_WIDESCREEN                               | Screen.SwitchWidescreen                        |                            |
+| 02A2   | ADD_PARTICLE_EFFECT                             | Fx.AddParticleEffect                           | static                     |
+| 02A3   | SWITCH_WIDESCREEN                               | Screen.SwitchWidescreen                        | static                     |
 | 02A4   | ADD_SPRITE_BLIP_FOR_CAR                         | Blip.AddSpriteForCar                           |                            |
 | 02A5   | ADD_SPRITE_BLIP_FOR_CHAR                        | Blip.AddSpriteForChar                          |                            |
 | 02A6   | ADD_SPRITE_BLIP_FOR_OBJECT                      | Blip.AddSpriteForObject                        |                            |
@@ -721,7 +721,7 @@
 | 02CE   | GET_GROUND_Z_FOR_3D_COORD                       | World.GetGroundZFor3dCoord                     | static                     |
 | 02CF   | START_SCRIPT_FIRE                               | ScriptFire.Create                              | ScriptFire constructor     |
 | 02D0   | IS_SCRIPT_FIRE_EXTINGUISHED                     | ScriptFire.IsExtinguished                      |                            |
-| 02D1   | REMOVE_SCRIPT_FIRE                              | ScriptFire.Remove                              |                            |
+| 02D1   | REMOVE_SCRIPT_FIRE                              | ScriptFire.Remove                              | ScriptFire destructor      |
 | 02D2   | SET_COMEDY_CONTROLS                             | Car.SetComedyControls                          |                            |
 | 02D3   | BOAT_GOTO_COORDS                                | Boat.GotoCoords                                |                            |
 | 02D4   | BOAT_STOP                                       | Boat.Stop                                      |                            |
@@ -758,8 +758,8 @@
 | 02F3   | LOAD_SPECIAL_MODEL                              | Streaming.LoadSpecialModel                     | static                     |
 | 02F4   | CREATE_CUTSCENE_HEAD                            | CutsceneHead.Create                            | CutsceneHead constructor   |
 | 02F5   | SET_CUTSCENE_HEAD_ANIM                          | CutsceneHead.SetAnim                           |                            |
-| 02F6   | SIN                                             | keyword                                        |                            |
-| 02F7   | COS                                             | keyword                                        |                            |
+| 02F6   | SIN                                             | Math.Sin                                       | static                     |
+| 02F7   | COS                                             | Math.Cos                                       | static                     |
 | 02F8   | GET_CAR_FORWARD_X                               | Car.GetForwardX                                |                            |
 | 02F9   | GET_CAR_FORWARD_Y                               | Car.GetForwardY                                |                            |
 | 02FA   | CHANGE_GARAGE_TYPE                              | Garage.ChangeType                              |                            |
@@ -794,9 +794,9 @@
 | 0317   | REGISTER_MISSION_GIVEN                          | Stat.RegisterMissionGiven                      | static                     |
 | 0318   | REGISTER_MISSION_PASSED                         | Stat.RegisterMissionPassed                     | static                     |
 | 0319   | SET_CHAR_RUNNING                                | Char.SetRunning                                |                            |
-| 031A   | REMOVE_ALL_SCRIPT_FIRES                         | ScriptFire.RemoveAll                           | static                     |
-| 031B   | IS_FIRST_CAR_COLOUR                             | Car.IsFirstColour                              |                            |
-| 031C   | IS_SECOND_CAR_COLOUR                            | Car.IsSecondColour                             |                            |
+| 031A   | REMOVE_ALL_SCRIPT_FIRES                         | World.RemoveAllScriptFires                     | static                     |
+| 031B   | IS_FIRST_CAR_COLOR                              | Car.IsFirstColor                               |                            |
+| 031C   | IS_SECOND_CAR_COLOR                             | Car.IsSecondColor                              |                            |
 | 031D   | HAS_CHAR_BEEN_DAMAGED_BY_WEAPON                 | Char.HasBeenDamagedByWeapon                    |                            |
 | 031E   | HAS_CAR_BEEN_DAMAGED_BY_WEAPON                  | Car.HasBeenDamagedByWeapon                     |                            |
 | 031F   | IS_CHAR_IN_CHARS_GROUP                          | Char.IsInCharsGroup                            |                            |
@@ -810,7 +810,7 @@
 | 0327   | GET_RANDOM_CAR_OF_TYPE_IN_AREA                  | World.GetRandomCarOfTypeInArea                 | Car constructor            |
 | 0328   | GET_RANDOM_CAR_OF_TYPE_IN_ZONE                  | World.GetRandomCarOfTypeInZone                 | Car constructor            |
 | 0329   | HAS_RESPRAY_HAPPENED                            | Game.HasResprayHappened                        |                            |
-| 032A   | SET_CAMERA_ZOOM                                 | Camera.SetZoom                                 |                            |
+| 032A   | SET_CAMERA_ZOOM                                 | Camera.SetZoom                                 | static                     |
 | 032B   | CREATE_PICKUP_WITH_AMMO                         | Pickup.CreateWithAmmo                          |                            |
 | 032C   | SET_CAR_RAM_CAR                                 | Car.SetRamCar                                  |                            |
 | 032D   | SET_CAR_BLOCK_CAR                               | Car.SetBlockCar                                |                            |
@@ -821,7 +821,7 @@
 | 0332   | SET_CHAR_BLEEDING                               | Char.SetBleeding                               |                            |
 | 0333   | SET_CAR_FUNNY_SUSPENSION                        | Car.SetFunnySuspension                         |                            |
 | 0334   | SET_CAR_BIG_WHEELS                              | Car.SetBigWheels                               |                            |
-| 0335   | SET_FREE_RESPRAYS                               | Game.SetFreeResprays                           |                            |
+| 0335   | SET_FREE_RESPRAYS                               | Game.SetFreeResprays                           | static                     |
 | 0336   | SET_PLAYER_VISIBLE                              | Player.SetVisible                              |                            |
 | 0337   | SET_CHAR_VISIBLE                                | Char.SetVisible                                |                            |
 | 0338   | SET_CAR_VISIBLE                                 | Car.SetVisible                                 |                            |
@@ -832,13 +832,13 @@
 | 033D   | SAVE_PLAYER_FROM_FIRES                          | Player.SaveFromFires                           |                            |
 | 033E   | DISPLAY_TEXT                                    | Text.Display                                   | static                     |
 | 033F   | SET_TEXT_SCALE                                  | Text.SetScale                                  | static                     |
-| 0340   | SET_TEXT_COLOUR                                 | Text.SetColour                                 | static                     |
+| 0340   | SET_TEXT_COLOR                                  | Text.SetColor                                  | static                     |
 | 0341   | SET_TEXT_JUSTIFY                                | Text.SetJustify                                | static                     |
 | 0342   | SET_TEXT_CENTRE                                 | Text.SetCentre                                 | static                     |
 | 0343   | SET_TEXT_WRAPX                                  | Text.SetWrapx                                  | static                     |
 | 0344   | SET_TEXT_CENTRE_SIZE                            | Text.SetCentreSize                             | static                     |
 | 0345   | SET_TEXT_BACKGROUND                             | Text.SetBackground                             | static                     |
-| 0346   | SET_TEXT_BACKGROUND_COLOUR                      | Text.SetBackgroundColour                       | static                     |
+| 0346   | SET_TEXT_BACKGROUND_COLOR                       | Text.SetBackgroundColor                        | static                     |
 | 0347   | SET_TEXT_BACKGROUND_ONLY_TEXT                   | Text.SetBackgroundOnlyText                     | static                     |
 | 0348   | SET_TEXT_PROPORTIONAL                           | Text.SetProportional                           | static                     |
 | 0349   | SET_TEXT_FONT                                   | Text.SetFont                                   | static                     |
@@ -849,7 +849,7 @@
 | 034E   | SLIDE_OBJECT                                    | Object.Slide                                   |                            |
 | 034F   | REMOVE_CHAR_ELEGANTLY                           | Char.RemoveElegantly                           |                            |
 | 0350   | SET_CHAR_STAY_IN_SAME_PLACE                     | Char.SetStayInSamePlace                        |                            |
-| 0351   | IS_NASTY_GAME                                   | Game.IsNasty                                   |                            |
+| 0351   | IS_NASTY_GAME                                   | Game.IsNasty                                   | static                     |
 | 0352   | UNDRESS_CHAR                                    | Char.Undress                                   |                            |
 | 0353   | DRESS_CHAR                                      | Char.Dress                                     |                            |
 | 0354   | START_CHASE_SCENE                               | ChaseScene.Start                               | static                     |
@@ -887,13 +887,13 @@
 | 0374   | SET_MOTION_BLUR                                 | Camera.SetMotionBlur                           | static                     |
 | 0375   | PRINT_STRING_IN_STRING                          | Text.PrintStringInString                       | static                     |
 | 0376   | CREATE_RANDOM_CHAR                              | Char.CreateRandom                              | Char constructor           |
-| 0377   | SET_CHAR_OBJ_STEAL_ANY_CAR                      | SetCharObjStealAnyCar                          |                            |
-| 0378   | SET_2_REPEATED_PHONE_MESSAGES                   | PhoneInfo.Set2RepeatedMessages                 |                            |
-| 0379   | SET_2_PHONE_MESSAGES                            | PhoneInfo.Set2Messages                         |                            |
-| 037A   | SET_3_REPEATED_PHONE_MESSAGES                   | PhoneInfo.Set3RepeatedMessages                 |                            |
-| 037B   | SET_3_PHONE_MESSAGES                            | PhoneInfo.Set3Messages                         |                            |
-| 037C   | SET_4_REPEATED_PHONE_MESSAGES                   | PhoneInfo.Set4RepeatedMessages                 |                            |
-| 037D   | SET_4_PHONE_MESSAGES                            | PhoneInfo.Set4Messages                         |                            |
+| 0377   | SET_CHAR_OBJ_STEAL_ANY_CAR                      | Char.SetObjStealAnyCar                         |                            |
+| 0378   | SET_2_REPEATED_PHONE_MESSAGES                   | Phone.Set2RepeatedMessages                     |                            |
+| 0379   | SET_2_PHONE_MESSAGES                            | Phone.Set2Messages                             |                            |
+| 037A   | SET_3_REPEATED_PHONE_MESSAGES                   | Phone.Set3RepeatedMessages                     |                            |
+| 037B   | SET_3_PHONE_MESSAGES                            | Phone.Set3Messages                             |                            |
+| 037C   | SET_4_REPEATED_PHONE_MESSAGES                   | Phone.Set4RepeatedMessages                     |                            |
+| 037D   | SET_4_PHONE_MESSAGES                            | Phone.Set4Messages                             |                            |
 | 037E   | IS_SNIPER_BULLET_IN_AREA                        | World.IsSniperBulletInArea                     | static                     |
 | 037F   | GIVE_PLAYER_DETONATOR                           | Player.GiveDetonator                           | static                     |
 | 0380   | SET_COLL_OBJ_STEAL_ANY_CAR                      |                                                | nop                        |
@@ -902,21 +902,21 @@
 | 0383   | IS_ICECREAM_JINGLE_ON                           | Car.IsIcecreamJingleOn                         |                            |
 | 0384   | PRINT_STRING_IN_STRING_NOW                      | Text.PrintStringInStringNow                    | static                     |
 | 0385   | PRINT_STRING_IN_STRING_SOON                     |                                                | nop                        |
-| 0386   | SET_5_REPEATED_PHONE_MESSAGES                   | PhoneInfo.Set5RepeatedPhoneMessages            | static                     |
-| 0387   | SET_5_PHONE_MESSAGES                            | PhoneInfo.Set5PhoneMessages                    | static                     |
-| 0388   | SET_6_REPEATED_PHONE_MESSAGES                   | PhoneInfo.Set6RepeatedPhoneMessages            | static                     |
-| 0389   | SET_6_PHONE_MESSAGES                            | PhoneInfo.Set6PhoneMessages                    | static                     |
+| 0386   | SET_5_REPEATED_PHONE_MESSAGES                   | Phone.Set5RepeatedMessages                     | static                     |
+| 0387   | SET_5_PHONE_MESSAGES                            | Phone.Set5Messages                             | static                     |
+| 0388   | SET_6_REPEATED_PHONE_MESSAGES                   | Phone.Set6RepeatedMessages                     | static                     |
+| 0389   | SET_6_PHONE_MESSAGES                            | Phone.Set6Messages                             | static                     |
 | 038A   | IS_POINT_OBSCURED_BY_A_MISSION_ENTITY           | World.IsPointObscuredByAMissionEntity          | static                     |
 | 038B   | LOAD_ALL_MODELS_NOW                             | Streaming.LoadAllModelsNow                     | static                     |
 | 038C   | ADD_TO_OBJECT_VELOCITY                          | Object.AddToVelocity                           |                            |
-| 038D   | DRAW_SPRITE                                     | Sprite.Draw                                    | static                     |
+| 038D   | DRAW_SPRITE                                     | Screen.DrawSprite                              | static                     |
 | 038E   | DRAW_RECT                                       | Screen.DrawRect                                | static                     |
-| 038F   | LOAD_SPRITE                                     | Sprite.Load                                    | static                     |
+| 038F   | LOAD_SPRITE                                     | Txd.LoadSprite                                 | static                     |
 | 0390   | LOAD_TEXTURE_DICTIONARY                         | Txd.Load                                       | static                     |
 | 0391   | REMOVE_TEXTURE_DICTIONARY                       | Txd.Remove                                     | static                     |
 | 0392   | SET_OBJECT_DYNAMIC                              | Object.SetDynamic                              |                            |
 | 0393   | SET_CHAR_ANIM_SPEED                             | Char.SetAnimSpeed                              |                            |
-| 0394   | PLAY_MISSION_PASSED_TUNE                        | Audio.PlayMissionPassedTune                    |                            |
+| 0394   | PLAY_MISSION_PASSED_TUNE                        | Audio.PlayMissionPassedTune                    | static                     |
 | 0395   | CLEAR_AREA                                      | World.ClearArea                                | static                     |
 | 0396   | FREEZE_ONSCREEN_TIMER                           | Screen.FreezeOnscreenTimer                     | static                     |
 | 0397   | SWITCH_CAR_SIREN                                | Car.SwitchSiren                                |                            |
@@ -925,11 +925,11 @@
 | 039A   | SWITCH_ROADS_ON_ANGLED                          | Paths.SwitchRoadsOnAngled                      | static                     |
 | 039B   | SWITCH_ROADS_OFF_ANGLED                         | Paths.SwitchRoadsOffAngled                     | static                     |
 | 039C   | SET_CAR_WATERTIGHT                              | Car.SetWatertight                              |                            |
-| 039D   | ADD_MOVING_PARTICLE_EFFECT                      | Particles.AddMovingEffect                      | static                     |
+| 039D   | ADD_MOVING_PARTICLE_EFFECT                      | Fx.AddMovingParticleEffect                     | static                     |
 | 039E   | SET_CHAR_CANT_BE_DRAGGED_OUT                    | Char.SetCantBeDraggedOut                       |                            |
 | 039F   | TURN_CAR_TO_FACE_COORD                          | Car.TurnToFaceCoord                            |                            |
 | 03A0   | IS_CRANE_LIFTING_CAR                            | Crane.IsLiftingCar                             | static                     |
-| 03A1   | DRAW_SPHERE                                     | Sphere.Draw                                    |                            |
+| 03A1   | DRAW_SPHERE                                     | Sphere.Draw                                    | static                     |
 | 03A2   | SET_CAR_STATUS                                  | Car.SetStatus                                  |                            |
 | 03A3   | IS_CHAR_MALE                                    | Char.IsMale                                    |                            |
 | 03A4   | SCRIPT_NAME                                     | keyword                                        |                            |
@@ -953,16 +953,16 @@
 | 03B6   | SWAP_NEAREST_BUILDING_MODEL                     | World.SwapNearestBuildingModel                 | static                     |
 | 03B7   | SWITCH_WORLD_PROCESSING                         | World.SwitchProcessing                         | static                     |
 | 03B8   | REMOVE_ALL_PLAYER_WEAPONS                       | Player.RemoveAllWeapons                        |                            |
-| 03B9   | GRAB_CATALINA_HELI                              | CatalinaHeli.Grab                              | static                     |
+| 03B9   | GRAB_CATALINA_HELI                              | CatalinaHeli.Grab                              | Car constructor            |
 | 03BA   | CLEAR_AREA_OF_CARS                              | World.ClearAreaOfCars                          | static                     |
 | 03BB   | SET_ROTATING_GARAGE_DOOR                        | Garage.SetRotatingDoor                         |                            |
 | 03BC   | ADD_SPHERE                                      | Sphere.Create                                  | Sphere constructor         |
-| 03BD   | REMOVE_SPHERE                                   | Sphere.Remove                                  |                            |
+| 03BD   | REMOVE_SPHERE                                   | Sphere.Remove                                  | Sphere destructor          |
 | 03BE   | CATALINA_HELI_FLY_AWAY                          | CatalinaHeli.FlyAway                           | static                     |
 | 03BF   | SET_EVERYONE_IGNORE_PLAYER                      | Game.SetEveryoneIgnorePlayer                   | static                     |
-| 03C0   | STORE_CAR_CHAR_IS_IN_NO_SAVE                    | Car.StoreCharIsInNoSave                        |                            |
-| 03C1   | STORE_CAR_PLAYER_IS_IN_NO_SAVE                  | Car.StorePlayerIsInNoSave                      |                            |
-| 03C2   | IS_PHONE_DISPLAYING_MESSAGE                     | PhoneInfo.IsDisplayingMessage                  |                            |
+| 03C0   | STORE_CAR_CHAR_IS_IN_NO_SAVE                    | Char.StoreCarIsInNoSave                        |                            |
+| 03C1   | STORE_CAR_PLAYER_IS_IN_NO_SAVE                  | Player.StoreCarIsInNoSave                      |                            |
+| 03C2   | IS_PHONE_DISPLAYING_MESSAGE                     | Phone.IsDisplayingMessage                      |                            |
 | 03C3   | DISPLAY_ONSCREEN_TIMER_WITH_STRING              | Screen.DisplayOnscreenTimerWithString          | static                     |
 | 03C4   | DISPLAY_ONSCREEN_COUNTER_WITH_STRING            | Screen.DisplayOnscreenCounterWithString        | static                     |
 | 03C5   | CREATE_RANDOM_CAR_FOR_CAR_PARK                  | World.CreateRandomCarForCarPark                | static                     |
@@ -993,9 +993,9 @@
 | 03DE   | SET_PED_DENSITY_MULTIPLIER                      | World.SetPedDensityMultiplier                  | static                     |
 | 03DF   | FORCE_RANDOM_PED_TYPE                           | World.ForceRandomPedType                       | static                     |
 | 03E0   | SET_TEXT_DRAW_BEFORE_FADE                       | Text.SetDrawBeforeFade                         | static                     |
-| 03E1   | GET_COLLECTABLE1S_COLLECTED                     | World.GetCollectable1SCollected                | static                     |
+| 03E1   | GET_COLLECTABLE1S_COLLECTED                     | Game.GetCollectable1SCollected                 | static                     |
 | 03E2   | REGISTER_EL_BURRO_TIME                          | Stat.RegisterElBurroTime                       | static, gta3 only          |
-| 03E3   | SET_SPRITES_DRAW_BEFORE_FADE                    | Screen.SetSpritesDrawBeforeFade                |                            |
+| 03E3   | SET_SPRITES_DRAW_BEFORE_FADE                    | Screen.SetSpritesDrawBeforeFade                | static                     |
 | 03E4   | SET_TEXT_RIGHT_JUSTIFY                          | Text.SetRightJustify                           | static                     |
 | 03E5   | PRINT_HELP                                      | Text.PrintHelp                                 | static                     |
 | 03E6   | CLEAR_HELP                                      | Text.ClearHelp                                 | static                     |
@@ -1003,7 +1003,7 @@
 | 03E8   | FLASH_RADAR_BLIP                                |                                                | nop                        |
 | 03E9   | IS_CHAR_IN_CONTROL                              | Char.IsInControl                               |                            |
 | 03EA   | SET_GENERATE_CARS_AROUND_CAMERA                 | Camera.SetGenerateCarsAround                   | static                     |
-| 03EB   | CLEAR_SMALL_PRINTS                              | Text.ClearSmallPrints                          |                            |
+| 03EB   | CLEAR_SMALL_PRINTS                              | Text.ClearSmallPrints                          | static                     |
 | 03EC   | HAS_MILITARY_CRANE_COLLECTED_ALL_CARS           | Crane.HasMilitaryCraneCollectedAllCars         | static                     |
 | 03ED   | SET_UPSIDEDOWN_CAR_NOT_DAMAGED                  | Car.SetUpsidedownNotDamaged                    |                            |
 | 03EE   | CAN_PLAYER_START_MISSION                        | Player.CanStartMission                         |                            |
@@ -1011,12 +1011,12 @@
 | 03F0   | USE_TEXT_COMMANDS                               | Screen.UseTextCommands                         | static                     |
 | 03F1   | SET_THREAT_FOR_PED_TYPE                         | Game.SetThreatForPedType                       | static                     |
 | 03F2   | CLEAR_THREAT_FOR_PED_TYPE                       | Game.ClearThreatForPedType                     | static                     |
-| 03F3   | GET_CAR_COLOURS                                 | Car.GetColours                                 |                            |
+| 03F3   | GET_CAR_COLORS                                  | Car.GetColors                                  |                            |
 | 03F4   | SET_ALL_CARS_CAN_BE_DAMAGED                     | Game.SetAllCarsCanBeDamaged                    | static                     |
 | 03F5   | SET_CAR_CAN_BE_DAMAGED                          | Car.SetCanBeDamaged                            |                            |
 | 03F6   | MAKE_PLAYER_UNSAFE                              |                                                | nop                        |
 | 03F7   | LOAD_COLLISION                                  | Streaming.LoadCollision                        | static                     |
-| 03F8   | GET_BODY_CAST_HEALTH                            | Object.GetBodyCastHealth                       |                            |
+| 03F8   | GET_BODY_CAST_HEALTH                            | Object.GetBodyCastHealth                       | static, gta3 only          |
 | 03F9   | SET_CHARS_CHATTING                              | Char.ChatWith                                  | ?                          |
 | 03FA   | MAKE_PLAYER_SAFE                                |                                                | nop                        |
 | 03FB   | SET_CAR_STAYS_IN_CURRENT_LEVEL                  | Car.SetStaysInCurrentLevel                     |                            |
@@ -1029,7 +1029,7 @@
 | 0402   | REGISTER_CRIMINAL_CAUGHT                        | Stat.RegisterCriminalCaught                    | static                     |
 | 0403   | REGISTER_AMBULANCE_LEVEL                        | Stat.RegisterAmbulanceLevel                    | static                     |
 | 0404   | REGISTER_FIRE_EXTINGUISHED                      | Stat.RegisterFireExtinguished                  | static                     |
-| 0405   | TURN_PHONE_ON                                   | PhoneInfo.TurnPhoneOn                          | static                     |
+| 0405   | TURN_PHONE_ON                                   | Phone.TurnOn                                   | static                     |
 | 0406   | REGISTER_LONGEST_DODO_FLIGHT                    | Stat.RegisterLongestDodoFlight                 | static                     |
 | 0407   | COMMAND_REGISTER_DEFUSE_BOMB_TIME               | Stat.RegisterDefuseBombTime                    | static                     |
 | 0408   | SET_TOTAL_NUMBER_OF_KILL_FRENZIES               | Stat.SetTotalNumberOfKillFrenzies              | static                     |
@@ -1061,7 +1061,7 @@
 | 0422   | DOES_GARAGE_CONTAIN_CAR                         | Garage.DoesContainCar                          |                            |
 | 0423   | SET_CAR_TRACTION                                | Car.SetTraction                                |                            |
 | 0424   | ARE_MEASUREMENTS_IN_METRES                      | Game.AreMeasurementsInMetres                   | static                     |
-| 0425   | CONVERT_METRES_TO_FEET                          | ConvertMetresToFeet                            | util                       |
+| 0425   | CONVERT_METRES_TO_FEET                          | Math.ConvertMetresToFeet                       | static                     |
 | 0426   | MARK_ROADS_BETWEEN_LEVELS                       | Paths.MarkRoadsBetweenLevels                   | static                     |
 | 0427   | MARK_PED_ROADS_BETWEEN_LEVELS                   | Paths.MarkPedRoadsBetweenLevels                | static                     |
 | 0428   | SET_CAR_AVOID_LEVEL_TRANSITIONS                 | Car.SetAvoidLevelTransitions                   |                            |
@@ -1069,7 +1069,7 @@
 | 042A   | IS_THREAT_FOR_PED_TYPE                          | Game.IsThreatForPedType                        | static                     |
 | 042B   | CLEAR_AREA_OF_CHARS                             | World.ClearAreaOfChars                         | static                     |
 | 042C   | SET_TOTAL_NUMBER_OF_MISSIONS                    | Stat.SetTotalNumberOfMissions                  | static                     |
-| 042D   | CONVERT_METRES_TO_FEET_INT                      | ConvertMetresToFeetInt                         | util                       |
+| 042D   | CONVERT_METRES_TO_FEET_INT                      | Math.ConvertMetresToFeetInt                    | static                     |
 | 042E   | REGISTER_FASTEST_TIME                           | Stat.RegisterFastestTime                       | static                     |
 | 042F   | REGISTER_HIGHEST_SCORE                          | Stat.RegisterHighestScore                      | static                     |
 | 0430   | WARP_CHAR_INTO_CAR_AS_PASSENGER                 |                                                | nop                        |
@@ -1079,11 +1079,11 @@
 | 0434   | START_CREDITS                                   | Credits.Start                                  | static                     |
 | 0435   | STOP_CREDITS                                    | Credits.Stop                                   | static                     |
 | 0436   | ARE_CREDITS_FINISHED                            | Credits.AreFinished                            | static                     |
-| 0437   | CREATE_SINGLE_PARTICLE                          | Particles.CreateSingleParticle                 | static                     |
+| 0437   | CREATE_SINGLE_PARTICLE                          | Fx.CreateSingleParticle                        | static                     |
 | 0438   | SET_CHAR_IGNORE_LEVEL_TRANSITIONS               | Char.SetIgnoreLevelTransitions                 |                            |
 | 0439   | GET_CHASE_CAR                                   | ChaseScene.GetChaseCar                         | static                     |
-| 043A   | START_BOAT_FOAM_ANIMATION                       | Particles.StartBoatFoamAnimation               | static                     |
-| 043B   | UPDATE_BOAT_FOAM_ANIMATION                      | Particles.UpdateBoatFoamAnimation              | static                     |
+| 043A   | START_BOAT_FOAM_ANIMATION                       | Fx.StartBoatFoamAnimation                      | static                     |
+| 043B   | UPDATE_BOAT_FOAM_ANIMATION                      | Fx.UpdateBoatFoamAnimation                     | static                     |
 | 043C   | SET_MUSIC_DOES_FADE                             | Audio.SetMusicDoesFade                         | static                     |
 | 043D   | SET_INTRO_IS_PLAYING                            | Game.SetIntroIsPlaying                         | static                     |
 | 043E   | SET_PLAYER_HOOKER                               | Player.SetHooker                               |                            |
@@ -1093,8 +1093,8 @@
 | 0442   | IS_PLAYER_SITTING_IN_CAR                        | Player.IsSittingInCar                          |                            |
 | 0443   | IS_PLAYER_SITTING_IN_ANY_CAR                    | Player.IsSittingInAnyCar                       |                            |
 | 0444   | SET_SCRIPT_FIRE_AUDIO                           | ScriptFire.SetAudio                            |                            |
-| 0445   | ARE_ANY_CAR_CHEATS_ACTIVATED                    | Game.AreAnyCarCheatsActivated                  |                            |
-| 0446   | SET_CHAR_SUFFERS_CRITICAL_HITS                  | Char.SetSuffersCriticalHits                    |                            |
+| 0445   | ARE_ANY_CAR_CHEATS_ACTIVATED                    | Game.AreAnyCarCheatsActivated                  | static                     |
+| 0446   | SET_CHAR_SUFFERS_CRITICAL_HITS                  | Char.SetSuffersCriticalHits                    | static                     |
 | 0447   | IS_PLAYER_LIFTING_A_PHONE                       | Player.IsLiftingAPhone                         |                            |
 | 0448   | IS_CHAR_SITTING_IN_CAR                          | Char.IsSittingInCar                            |                            |
 | 0449   | IS_CHAR_SITTING_IN_ANY_CAR                      | Char.IsSittingInAnyCar                         |                            |
@@ -1114,10 +1114,10 @@
 | 0457   | IS_PLAYER_TARGETTING_CHAR                       | Player.IsTargettingChar                        |                            |
 | 0458   | IS_PLAYER_TARGETTING_OBJECT                     | Player.IsTargettingObject                      |                            |
 | 0459   | TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME            | keyword                                        |                            |
-| 045A   | DISPLAY_TEXT_WITH_NUMBER                        | Text.DisplayWithNumber                         |                            |
-| 045B   | DISPLAY_TEXT_WITH_2_NUMBERS                     | Text.DisplayWith2Numbers                       |                            |
+| 045A   | DISPLAY_TEXT_WITH_NUMBER                        | Text.DisplayWithNumber                         | static                     |
+| 045B   | DISPLAY_TEXT_WITH_2_NUMBERS                     | Text.DisplayWith2Numbers                       | static                     |
 | 045C   | FAIL_CURRENT_MISSION                            | Game.FailCurrentMission                        | static                     |
-| 045D   | GET_CLOSEST_OBJECT_OF_TYPE                      | World.GetClosestObjectOfType                   | static                     |
+| 045D   | GET_CLOSEST_OBJECT_OF_TYPE                      | World.GetClosestObjectOfType                   | Object constructor         |
 | 045E   | PLACE_OBJECT_RELATIVE_TO_OBJECT                 | World.PlaceObjectRelativeToObject              | static                     |
 | 045F   | SET_ALL_OCCUPANTS_OF_CAR_LEAVE_CAR              | Car.SetAllOccupantsLeave                       |                            |
 | 0460   | SET_INTERPOLATION_PARAMETERS                    | Camera.SetInterpolationParameters              | static                     |
@@ -1129,12 +1129,12 @@
 | 0466   | SET_CAR_STAY_IN_FAST_LANE                       | Car.SetStayInFastLane                          |                            |
 | 0467   | CLEAR_CHAR_LAST_WEAPON_DAMAGE                   | Char.ClearLastWeaponDamage                     |                            |
 | 0468   | CLEAR_CAR_LAST_WEAPON_DAMAGE                    | Car.ClearLastWeaponDamage                      |                            |
-| 0469   | GET_RANDOM_COP_IN_AREA                          | World.GetRandomCopInArea                       | static                     |
-| 046A   | GET_RANDOM_COP_IN_ZONE                          | World.GetRandomCopInZone                       | static                     |
+| 0469   | GET_RANDOM_COP_IN_AREA                          | World.GetRandomCopInArea                       | Char constructor           |
+| 046A   | GET_RANDOM_COP_IN_ZONE                          | World.GetRandomCopInZone                       | Char constructor           |
 | 046B   | SET_CHAR_OBJ_FLEE_CAR                           | Char.SetObjFleeCar                             |                            |
 | 046C   | GET_DRIVER_OF_CAR                               | Car.GetDriver                                  |                            |
 | 046D   | GET_NUMBER_OF_FOLLOWERS                         | Char.GetNumberOfFollowers                      |                            |
-| 046E   | GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER          | Rc.GiveModelToPlayer                           |                            |
+| 046E   | GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER          | Rc.GiveModelToPlayer                           | static                     |
 | 046F   | GET_CURRENT_PLAYER_WEAPON                       | Player.GetCurrentWeapon                        |                            |
 | 0470   | GET_CURRENT_CHAR_WEAPON                         | Char.GetCurrentWeapon                          |                            |
 | 0471   | LOCATE_CHAR_ANY_MEANS_OBJECT_2D                 | Char.LocateAnyMeansObject2D                    |                            |
@@ -1149,7 +1149,7 @@
 | 047A   | IS_CHAR_ON_ANY_BIKE                             | Char.IsOnAnyBike                               |                            |
 | 047B   | LOCATE_SNIPER_BULLET_2D                         | World.LocateSniperBullet2D                     | static                     |
 | 047C   | LOCATE_SNIPER_BULLET_3D                         | World.LocateSniperBullet3D                     | static                     |
-| 047D   | GET_NUMBER_OF_SEATS_IN_MODEL                    | Car.GetNumberOfSeatsInModel                    | static ?                   |
+| 047D   | GET_NUMBER_OF_SEATS_IN_MODEL                    | Car.GetNumberOfSeatsInModel                    | static                     |
 | 047E   | IS_PLAYER_ON_ANY_BIKE                           | Player.IsOnAnyBike                             |                            |
 | 047F   | IS_CHAR_LYING_DOWN                              | Char.IsLyingDown                               |                            |
 | 0480   | CAN_CHAR_SEE_DEAD_CHAR                          | Char.CanSeeDeadChar                            |                            |

@@ -1,48 +1,50 @@
-| Class | Information | Notes
-|-------|--------------|------|
-| Audio | Audio effects
-| Blip | Markers and radar icons
-| Boat | Boat control
-| Camera | Camera/View manipulation
-| Car | Script vehicles
-| CarGenerator | Parking lots
-| CatalinaHeli | Hardcoded Catalina's Heli from the final mission | exclusive to GTA 3
-| Char | Script characters (actors)
-| ChaseScene | Intro cutscene logic | exclusive to GTA 3
-| Clock | Time manipulation
-| Corona | Corona effect | can be merged into Effects class?
-| Crane | Static crane objects
-| Credits | Credits after the final mission 
-| Cutscene | Setting up and playing cutscenes
-| DeathArrest | Wasted/Busted logic
-| DrugRun | Dodo logic from S.A.M. mission | exclusive to GTA 3
-| Game | Gameplay
-| Gang | Gangs configuration
-| Garage | Garages
-| Light | Light effect | can be merged into Effects class?
-| Menu | Interaction with the main menu 
-| Object | Script objects
-| Pacman | Big'N'Veiny mission logic | exclusive to GTA 3
-| Pad | Input controls
-| Pager | In-game pager exclusive to GTA 3
-| Particles | Particle effects
-| Paths | Configuring car and ped paths and lookup for nodes
-| PhoneInfo | Phone booths
-| Pickup | Interactive script objects
-| Player | The main character controlled by a player
-| Rampage | Rampages logic
-| Rc | Remote controlled cars logic
-| Restart | Configuration of respawn points
-| Screen | Manipulating game UI
-| ScriptFire | Script fires
-| Shadow | Shadow effect | can be merged into Effects class?
-| Sphere | Blue cylinder markers
-| Sprite | Textures to be drawn on screen
-| Stat | Game statistics information
-| Streaming | Loading game assets
-| StuckCarCheck | Checking if script cars are stuck
-| Text | Displaying subtitles and text boxes
-| Txd | Loading texture dictionaries
-| Weather | Controlling weather
-| World | Manipulating traffic, population and other physical enitites
-| Zone | Configuring different areas of game map 
+| Class          | Information                                                  | Notes                             | Has Constructor? |
+| -------------- | ------------------------------------------------------------ | --------------------------------- | ---------------- |
+| Audio          | Audio effects                                                |                                   | N                |
+| Blip           | Markers and radar icons                                      |                                   | Y                |
+| Boat           | Boat control                                                 |                                   | N                |
+| Camera         | Camera/View manipulation                                     |                                   | N                |
+| Car            | Script vehicles                                              |                                   | Y                |
+| CarGenerator   | Parking lots                                                 |                                   | Y                |
+| CatalinaHeli   | Hardcoded Catalina's Heli from the final mission             | exclusive to GTA 3                | N                |
+| Char           | Script characters (actors)                                   |                                   | Y                |
+| ChaseScene     | Intro cutscene logic                                         | exclusive to GTA 3                | N                |
+| Clock          | Time manipulation                                            |                                   | N                |
+| Corona         | Corona effect                                                | can be merged into Effects class? | N                |
+| Crane          | Static crane objects                                         |                                   | N                |
+| Credits        | Credits after the final mission                              |                                   | N                |
+| Cutscene       | Setting up and playing cutscenes                             |                                   | N                |
+| CutsceneHead   | Cutscene head object                                         | exclusive to GTA 3                | Y                |
+| CutsceneObject | Cutscene object                                              | exclusive to GTA 3                | Y                |
+| DeathArrest    | Wasted/Busted logic                                          |                                   | N                |
+| DrugRun        | Dodo logic from S.A.M. mission                               | exclusive to GTA 3                | N                |
+| Game           | Gameplay                                                     |                                   | N                |
+| Gang           | Gangs configuration                                          |                                   | N                |
+| Garage         | Garages                                                      |                                   | Y                |
+| Light          | Light effect                                                 | can be merged into Effects class? | N                |
+| Menu           | Interaction with the main menu                               |                                   | N                |
+| Object         | Script objects                                               |                                   | Y                |
+| Pacman         | Big'N'Veiny mission logic                                    | exclusive to GTA 3                | N                |
+| Pad            | Input controls                                               |                                   | N                |
+| Pager          | In-game pager exclusive to GTA 3                             |                                   | N                |
+| Particles      | Particle effects                                             |                                   | N                |
+| Paths          | Configuring car and ped paths and lookup for nodes           |                                   | N                |
+| PhoneInfo      | Phone booths                                                 |                                   | N                |
+| Pickup         | Interactive script objects                                   |                                   | Y                |
+| Player         | The main character controlled by a player                    | has constructor                   | Y                |
+| Rampage        | Rampages logic                                               |                                   | N                |
+| Rc             | Remote controlled cars logic                                 |                                   | N                |
+| Restart        | Configuration of respawn points                              |                                   | N                |
+| Screen         | Manipulating game UI                                         |                                   | N                |
+| ScriptFire     | Script fires                                                 |                                   | Y                |
+| Shadow         | Shadow effect                                                | can be merged into Effects class? | N                |
+| Sphere         | Blue cylinder markers                                        |                                   | Y                |
+| Sprite         | Textures to be drawn on screen                               | move to Screen and Txd?           | N                |
+| Stat           | Game statistics information                                  |                                   | N                |
+| Streaming      | Loading game assets                                          |                                   | N                |
+| StuckCarCheck  | Checking if script cars are stuck                            |                                   | N                |
+| Text           | Displaying subtitles and text boxes                          |                                   | N                |
+| Txd            | Loading texture dictionaries                                 |                                   | N                |
+| Weather        | Controlling weather                                          |                                   | N                |
+| World          | Manipulating traffic, population and other physical enitites |                                   | N                |
+| Zone           | Configuring different areas of game map                      |                                   | N                |

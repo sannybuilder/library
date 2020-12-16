@@ -1,4 +1,4 @@
-import { React } from 'https://deno.land/x/pagic/mod.ts';
+// import { React } from 'https://deno.land/x/pagic/mod.ts';
 
 export default {
     srcDir: '.',
@@ -9,9 +9,9 @@ export default {
     plugins: ['sidebar'],
     title: 'Sanny Classes Library',
     description: 'Sanny Classes Library',
-    head: <>
-      <link rel="icon" type="image/png" href="https://sannybuilder.com/favicon.png" />
-    </>,
+    // head: <>
+    //   <link rel="icon" type="image/png" href="https://sannybuilder.com/favicon.png" />
+    // </>,
     nav: [
       // {
       //   text: 'GTA 3',

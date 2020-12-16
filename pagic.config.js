@@ -8,7 +8,7 @@ export default {
     description: 'Sanny Classes Library',
     head: (React.createElement(React.Fragment, null,
         React.createElement("link", { rel: "icon", type: "image/png", href: "https://sannybuilder.com/favicon.png" }),
-        React.createElement("link", { href: '/assets/main.css?up=1', rel: 'stylesheet', type: 'text/css' }))),
+        React.createElement("link", { href: 'assets/main.css?up=1', rel: 'stylesheet', type: 'text/css' }))),
     nav: [
         {
             text: 'Sanny Builder',

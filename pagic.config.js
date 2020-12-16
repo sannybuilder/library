@@ -1,4 +1,3 @@
-// import { React } from 'https://deno.land/x/pagic/mod.ts';
 export default {
     srcDir: '.',
     exclude: ['LICENSE'],
@@ -7,14 +6,10 @@ export default {
     plugins: ['sidebar'],
     title: 'Sanny Classes Library',
     description: 'Sanny Classes Library',
-    // head: <>
-    //   <link rel="icon" type="image/png" href="https://sannybuilder.com/favicon.png" />
-    // </>,
+    head: (React.createElement(React.Fragment, null,
+        React.createElement("link", { rel: "icon", type: "image/png", href: "https://sannybuilder.com/favicon.png" }),
+        React.createElement("link", { href: '/assets/main.css?up=1', rel: 'stylesheet', type: 'text/css' }))),
     nav: [
-        // {
-        //   text: 'GTA 3',
-        //   link: '/classes/gta3/',
-        // },
         {
             text: 'Sanny Builder',
             link: 'https://sannybuilder.com',

@@ -8,7 +8,9 @@ export default {
     'content': React.createElement("article", { dangerouslySetInnerHTML: {
             __html: '<ul>\n<li><a href="gta3/index.html">GTA 3 Commands</a></li>\n<li><a href="gta3/classes.html">GTA 3 Classes list</a></li>\n</ul>'
         } }),
-    'head': null,
+    'head': React.createElement(React.Fragment, null,
+        React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
+        React.createElement("link", { href: "/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })),
     'script': React.createElement(React.Fragment, null,
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),

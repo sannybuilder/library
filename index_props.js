@@ -1,13 +1,81 @@
 import projectConfig from '/classes/pagic.config.js';
+import Page from './index_content.js';
 export default {
     config: { "root": "/", ...projectConfig, branch: 'master' },
-    'pagePath': "index.md",
+    'pagePath': "index.tsx",
     'layoutPath': "_layout.tsx",
     'outputPath': "index.html",
-    'title': undefined,
-    'content': React.createElement("article", { dangerouslySetInnerHTML: {
-            __html: '<ul>\n<li><a href="gta3/index.html">GTA 3 Commands</a></li>\n<li><a href="gta3/classes.html">GTA 3 Classes list</a></li>\n</ul>'
-        } }),
+    'title': "",
+    'content': React.createElement(Page, { config: {
+            branch: 'master',
+            description: 'Sanny Classes Library',
+            exclude: [
+                '**/.*',
+                '**/package.json',
+                '**/package-lock.json',
+                '**/node_modules',
+                'pagic.config.ts',
+                'pagic.config.tsx',
+                '**/config.gypi',
+                '**/CVS',
+                '**/npm-debug.log',
+                'LICENSE',
+                'dist'
+            ],
+            github: 'https://github.com/sannybuilder/classes',
+            head: React.createElement(React.Fragment, null,
+                React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
+                React.createElement("link", { href: "/classes/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })),
+            include: undefined,
+            nav: [
+                {
+                    align: 'right',
+                    link: 'https://sannybuilder.com',
+                    text: 'Sanny Builder'
+                }
+            ],
+            outDir: 'dist',
+            plugins: [
+                'clean',
+                'init',
+                'md',
+                'tsx',
+                'script',
+                'layout',
+                'out',
+                'sidebar'
+            ],
+            port: 8000,
+            root: '/classes/',
+            serve: false,
+            sidebar: {
+                '/': [
+                    {
+                        children: [
+                            {
+                                link: 'gta3/index.md',
+                                text: 'GTA 3 Commands'
+                            },
+                            {
+                                link: 'gta3/classes.md',
+                                text: 'GTA 3 Classes list'
+                            }
+                        ],
+                        text: 'GTA 3'
+                    }
+                ]
+            },
+            srcDir: '.',
+            theme: 'docs',
+            title: 'Sanny Classes Library',
+            tools: {
+                backToTop: true,
+                editOnGitHub: true
+            },
+            watch: false
+        }, content: null, head: React.createElement(React.Fragment, null,
+            React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
+            React.createElement("link", { href: "/classes/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
     'head': React.createElement(React.Fragment, null,
         React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
         React.createElement("link", { href: "/classes/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })),
@@ -15,20 +83,6 @@ export default {
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),
         React.createElement("script", { src: "/classes/index.js", type: "module" })),
-    'contentTitle': undefined,
-    'contentBody': React.createElement("article", { dangerouslySetInnerHTML: {
-            __html: '<ul>\n<li><a href="gta3/index.html">GTA 3 Commands</a></li>\n<li><a href="gta3/classes.html">GTA 3 Classes list</a></li>\n</ul>'
-        } }),
-    'toc': null,
-    'author': "x87",
-    'contributors': [
-        "x87",
-        "Seemann"
-    ],
-    'date': "2020-12-13T23:33:37.000Z",
-    'updated': "2020-12-16T02:26:34.000Z",
-    'excerpt': " - GTA 3 Commands - GTA 3 Classes list",
-    'cover': undefined,
     'sidebar': [
         {
             "text": "GTA 3",

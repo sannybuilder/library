@@ -4,36 +4,33 @@ export default {
     exclude: ['LICENSE'],
     root: '/classes/',
     theme: 'docs',
-    plugins: ['sidebar', 'prev_next'],
+    plugins: ['sidebar'],
     title: 'Sanny Classes Library',
     description: 'Sanny Classes Library',
     // head: <>
-    //   <link rel="icon" type="image/png" href="/favicon.png" />
-    //   <script src="/assets/custom.js" />
+    //   <link rel="icon" type="image/png" href="https://sannybuilder.com/favicon.png" />
     // </>,
     nav: [
+        // {
+        //   text: 'GTA 3',
+        //   link: '/classes/gta3/',
+        // },
         {
-            text: 'GTA 3',
-            link: '/classes/gta3/',
-        },
-        {
-            text: 'About',
-            link: '/about/index.html',
+            text: 'Sanny Builder',
+            link: 'https://sannybuilder.com',
             align: 'right',
         },
     ],
     github: 'https://github.com/sannybuilder/classes',
     sidebar: {
         '/': [
-            'index.md',
-            {
-                link: 'gta3/index.md',
-                children: ['gta3/index.md', 'gta3/classes.md'],
-            },
             {
                 text: 'GTA 3',
                 children: [
-                    'gta3/index.md',
+                    {
+                        text: 'GTA 3 Commands',
+                        link: 'gta3/index.md'
+                    },
                     {
                         text: 'GTA 3 Classes list',
                         link: 'gta3/classes.md'
@@ -46,5 +43,4 @@ export default {
         editOnGitHub: true,
         backToTop: true,
     },
-    port: 8000,
 };

@@ -1,11 +1,5 @@
 import projectConfig from '/classes/pagic.config.js';
 export default {
-    'prev': {
-        "link": "gta3/index.html"
-    },
-    'next': {
-        "link": "gta3/index.html"
-    },
     config: { "root": "/", ...projectConfig, branch: 'master' },
     'pagePath': "gta3/classes.md",
     'layoutPath': "_layout.tsx",
@@ -34,27 +28,10 @@ export default {
     'cover': undefined,
     'sidebar': [
         {
-            "link": "index.html",
-            "pagePath": "index.md"
-        },
-        {
-            "link": "gta3/index.html",
-            "children": [
-                {
-                    "link": "gta3/index.html",
-                    "pagePath": "gta3/index.md"
-                },
-                {
-                    "link": "gta3/classes.html",
-                    "pagePath": "gta3/classes.md"
-                }
-            ],
-            "pagePath": "gta3/index.md"
-        },
-        {
             "text": "GTA 3",
             "children": [
                 {
+                    "text": "GTA 3 Commands",
                     "link": "gta3/index.html",
                     "pagePath": "gta3/index.md"
                 },

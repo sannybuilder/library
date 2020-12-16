@@ -28,7 +28,7 @@ export default {
         "Seemann"
     ],
     'date': "2020-12-13T23:33:37.000Z",
-    'updated': "2020-12-15T04:10:36.000Z",
+    'updated': "2020-12-16T02:26:34.000Z",
     'excerpt': " - GTA 3 Commands - GTA 3 Classes list",
     'cover': undefined,
     'sidebar': [

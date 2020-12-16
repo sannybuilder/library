@@ -10,7 +10,7 @@ export default {
     description: 'Sanny Classes Library',
     head: (<>
       <link rel="icon" type="image/png" href="https://sannybuilder.com/favicon.png" />
-      <link href='assets/main.css?up=1' rel='stylesheet' type='text/css' />
+      <link href='/classes/assets/main.css?up=1' rel='stylesheet' type='text/css' />
     </>),
     nav: [
       {

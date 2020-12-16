@@ -11,7 +11,6 @@ export default {
     description: 'Sanny Classes Library',
     head: <>
       <link rel="icon" type="image/png" href="https://sannybuilder.com/favicon.png" />
-      {/* <script src="/assets/custom.js" /> */}
     </>,
     nav: [
       // {

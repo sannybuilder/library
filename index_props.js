@@ -25,7 +25,7 @@ export default {
             github: 'https://github.com/sannybuilder/classes',
             head: React.createElement(React.Fragment, null,
                 React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-                React.createElement("link", { href: "/classes/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })),
+                React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })),
             include: undefined,
             nav: [
                 {
@@ -54,14 +54,14 @@ export default {
                         children: [
                             {
                                 link: 'gta3/index.md',
-                                text: 'GTA 3 Commands'
+                                text: 'Commands'
                             },
                             {
                                 link: 'gta3/classes.md',
-                                text: 'GTA 3 Classes list'
+                                text: 'Classes list'
                             }
                         ],
-                        text: 'GTA 3'
+                        text: 'GTA III'
                     }
                 ]
             },
@@ -75,25 +75,25 @@ export default {
             watch: false
         }, content: null, head: React.createElement(React.Fragment, null,
             React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-            React.createElement("link", { href: "/classes/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
+            React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
     'head': React.createElement(React.Fragment, null,
         React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-        React.createElement("link", { href: "/classes/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })),
+        React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })),
     'script': React.createElement(React.Fragment, null,
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),
         React.createElement("script", { src: "/classes/index.js", type: "module" })),
     'sidebar': [
         {
-            "text": "GTA 3",
+            "text": "GTA III",
             "children": [
                 {
-                    "text": "GTA 3 Commands",
+                    "text": "Commands",
                     "link": "gta3/index.html",
                     "pagePath": "gta3/index.md"
                 },
                 {
-                    "text": "GTA 3 Classes list",
+                    "text": "Classes list",
                     "link": "gta3/classes.html",
                     "pagePath": "gta3/classes.md"
                 }

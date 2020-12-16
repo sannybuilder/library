@@ -10,7 +10,7 @@ export default {
         } }),
     'head': React.createElement(React.Fragment, null,
         React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-        React.createElement("link", { href: "/classes/assets/main.css?up=1", rel: "stylesheet", type: "text/css" })),
+        React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })),
     'script': React.createElement(React.Fragment, null,
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),
@@ -30,15 +30,15 @@ export default {
     'cover': undefined,
     'sidebar': [
         {
-            "text": "GTA 3",
+            "text": "GTA III",
             "children": [
                 {
-                    "text": "GTA 3 Commands",
+                    "text": "Commands",
                     "link": "gta3/index.html",
                     "pagePath": "gta3/index.md"
                 },
                 {
-                    "text": "GTA 3 Classes list",
+                    "text": "Classes list",
                     "link": "gta3/classes.html",
                     "pagePath": "gta3/classes.md"
                 }

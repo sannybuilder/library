@@ -1,81 +1,13 @@
 import projectConfig from '/classes/pagic.config.js';
-import Page from './index_content.js';
 export default {
     config: { "root": "/", ...projectConfig, branch: 'master' },
-    'pagePath': "index.tsx",
+    'pagePath': "README.md",
     'layoutPath': "_layout.tsx",
     'outputPath': "index.html",
-    'title': "",
-    'content': React.createElement(Page, { config: {
-            branch: 'master',
-            description: 'Sanny Classes Library',
-            exclude: [
-                '**/.*',
-                '**/package.json',
-                '**/package-lock.json',
-                '**/node_modules',
-                'pagic.config.ts',
-                'pagic.config.tsx',
-                '**/config.gypi',
-                '**/CVS',
-                '**/npm-debug.log',
-                'LICENSE',
-                'dist'
-            ],
-            github: 'https://github.com/sannybuilder/classes',
-            head: React.createElement(React.Fragment, null,
-                React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-                React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })),
-            include: undefined,
-            nav: [
-                {
-                    align: 'right',
-                    link: 'https://sannybuilder.com',
-                    text: 'Sanny Builder'
-                }
-            ],
-            outDir: 'dist',
-            plugins: [
-                'clean',
-                'init',
-                'md',
-                'tsx',
-                'script',
-                'layout',
-                'out',
-                'sidebar'
-            ],
-            port: 8000,
-            root: '/classes/',
-            serve: false,
-            sidebar: {
-                '/': [
-                    {
-                        children: [
-                            {
-                                link: 'gta3/index.md',
-                                text: 'Commands'
-                            },
-                            {
-                                link: 'gta3/classes.md',
-                                text: 'Classes list'
-                            }
-                        ],
-                        text: 'GTA III'
-                    }
-                ]
-            },
-            srcDir: '.',
-            theme: 'docs',
-            title: 'Sanny Classes Library',
-            tools: {
-                backToTop: true,
-                editOnGitHub: true
-            },
-            watch: false
-        }, content: null, head: React.createElement(React.Fragment, null,
-            React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-            React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
+    'title': "Sanny Classes Library",
+    'content': React.createElement("article", { dangerouslySetInnerHTML: {
+            __html: '<h1>Sanny Classes Library</h1>\n<p>An attempt to build a complete and consistent class system spanning GTA 3D series games. Heavily based on original naming conventions.</p>\n<p>Currently under early development. Contributions are welcome!</p>\n<p>See online at <a href="https://sannybuilder.github.io/classes/">https://sannybuilder.github.io/classes/</a></p>\n<p>Discuss: <a href="https://github.com/sannybuilder/dev/discussions/107">https://github.com/sannybuilder/dev/discussions/107</a></p>'
+        } }),
     'head': React.createElement(React.Fragment, null,
         React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
         React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })),
@@ -83,6 +15,19 @@ export default {
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),
         React.createElement("script", { src: "/classes/index.js", type: "module" })),
+    'contentTitle': React.createElement("h1", { key: "0" }, "Sanny Classes Library"),
+    'contentBody': React.createElement("article", { dangerouslySetInnerHTML: {
+            __html: '<p>An attempt to build a complete and consistent class system spanning GTA 3D series games. Heavily based on original naming conventions.</p>\n<p>Currently under early development. Contributions are welcome!</p>\n<p>See online at <a href="https://sannybuilder.github.io/classes/">https://sannybuilder.github.io/classes/</a></p>\n<p>Discuss: <a href="https://github.com/sannybuilder/dev/discussions/107">https://github.com/sannybuilder/dev/discussions/107</a></p>'
+        } }),
+    'toc': null,
+    'author': "Seemann",
+    'contributors': [
+        "Seemann"
+    ],
+    'date': "2020-12-16T03:49:54.000Z",
+    'updated': null,
+    'excerpt': "An attempt to build a complete and consistent class system spanning GTA 3D series games. Heavily based on original naming conventions. Currently under early development. Contributions are welcome! See online at...",
+    'cover': undefined,
     'sidebar': [
         {
             "text": "GTA III",

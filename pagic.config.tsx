@@ -2,7 +2,7 @@ import { React } from 'https://deno.land/x/pagic/mod.ts';
 
 export default {
     srcDir: '.',
-    exclude: ['LICENSE'],
+    exclude: ['LICENSE', 'README.md'],
     root: '/classes/',
     theme: 'docs',
     plugins: ['sidebar'],

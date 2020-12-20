@@ -30,6 +30,7 @@ fn main() {
 
         let native = columns.get(COL_NATIVE).unwrap();
         let class = columns.get(COL_CLASS).unwrap();
+        let opcode = columns.get(COL_OP).unwrap();
 
         let class_name = class.split('.').nth(0).unwrap().to_case(Case::Pascal);
         let class_member = class.split('.').nth(1).unwrap().to_case(Case::Pascal);
@@ -61,7 +62,7 @@ fn main() {
                 }
             })
             .collect();
-        let description = format!("{},{},{},({})", "0000", is_condition, 0, params.join(" "));
+        let description = format!("{},{},{},({})", opcode.trim(), is_condition, 0, params.join(" "));
         map.insert(class_member, description);
     }
 

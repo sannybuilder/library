@@ -1,6 +1,6 @@
 export default {
     srcDir: '.',
-    exclude: ['LICENSE'],
+    exclude: ['LICENSE', 'README.md'],
     root: '/classes/',
     theme: 'docs',
     plugins: ['sidebar'],

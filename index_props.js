@@ -60,6 +60,10 @@ export default {
                             {
                                 link: 'gta3/classes.md',
                                 text: 'Classes list'
+                            },
+                            {
+                                link: 'gta3/classes.db',
+                                text: 'Download classes.db'
                             }
                         ],
                         text: 'GTA III'
@@ -97,6 +101,10 @@ export default {
                     "text": "Classes list",
                     "link": "gta3/classes.html",
                     "pagePath": "gta3/classes.md"
+                },
+                {
+                    "text": "Download classes.db",
+                    "link": "gta3/classes.db"
                 }
             ]
         }

@@ -41,6 +41,10 @@ export default {
                     "text": "Classes list",
                     "link": "gta3/classes.html",
                     "pagePath": "gta3/classes.md"
+                },
+                {
+                    "text": "Download classes.db",
+                    "link": "gta3/classes.db"
                 }
             ]
         }

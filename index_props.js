@@ -26,7 +26,7 @@ export default {
             github: 'https://github.com/sannybuilder/classes',
             head: React.createElement(React.Fragment, null,
                 React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-                React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })),
+                React.createElement("link", { href: "/classes/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })),
             include: undefined,
             nav: [
                 {
@@ -67,6 +67,23 @@ export default {
                             }
                         ],
                         text: 'GTA III'
+                    },
+                    {
+                        children: [
+                            {
+                                link: 'vc/index.md',
+                                text: 'Commands'
+                            },
+                            {
+                                link: 'vc/classes.md',
+                                text: 'Classes list'
+                            },
+                            {
+                                link: 'vc/classes.db',
+                                text: 'Download classes.db'
+                            }
+                        ],
+                        text: 'GTA Vice City'
                     }
                 ]
             },
@@ -80,10 +97,10 @@ export default {
             watch: false
         }, content: null, head: React.createElement(React.Fragment, null,
             React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-            React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
+            React.createElement("link", { href: "/classes/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
     'head': React.createElement(React.Fragment, null,
         React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-        React.createElement("link", { href: "/classes/assets/main.css?up=2", rel: "stylesheet", type: "text/css" })),
+        React.createElement("link", { href: "/classes/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })),
     'script': React.createElement(React.Fragment, null,
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),
@@ -105,6 +122,25 @@ export default {
                 {
                     "text": "Download classes.db",
                     "link": "gta3/classes.db"
+                }
+            ]
+        },
+        {
+            "text": "GTA Vice City",
+            "children": [
+                {
+                    "text": "Commands",
+                    "link": "vc/index.html",
+                    "pagePath": "vc/index.md"
+                },
+                {
+                    "text": "Classes list",
+                    "link": "vc/classes.html",
+                    "pagePath": "vc/classes.md"
+                },
+                {
+                    "text": "Download classes.db",
+                    "link": "vc/classes.db"
                 }
             ]
         }

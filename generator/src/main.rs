@@ -24,7 +24,10 @@ fn main() {
 
         let notes = columns.get(COL_NOTES).unwrap();
 
-        if notes.contains("not-a-class") || notes.contains("keyword") || notes.contains("nop") {
+        if notes.contains("not-a-class")
+            || notes.contains("keyword")
+            || notes.contains("nop") | notes.contains("unsupported")
+        {
             continue;
         }
 
@@ -62,7 +65,13 @@ fn main() {
                 }
             })
             .collect();
-        let description = format!("{},{},{},({})", opcode.trim(), is_condition, 0, params.join(" "));
+        let description = format!(
+            "{},{},{},({})",
+            opcode.trim(),
+            is_condition,
+            0,
+            params.join(" ")
+        );
         map.insert(class_member, description);
     }
 

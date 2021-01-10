@@ -14,7 +14,7 @@
 | Credits        | Credits after the final mission                              |                            | N                |
 | Cutscene       | Setting up and playing cutscenes                             |                            | N                |
 | CutsceneHead   | Cutscene head object                                         | exclusive to GTA 3         | Y                |
-| CutsceneObject | Cutscene object                                              | exclusive to GTA 3         | Y                |
+| CutsceneObject | Cutscene object                                              |                            | Y                |
 | DrugRun        | Dodo logic from S.A.M. mission                               | exclusive to GTA 3         | N                |
 | Fx             | Various 2D effects (shadown, lights, coronas, particles)     |                            | N                |
 | Game           | Gameplay                                                     |                            | N                |

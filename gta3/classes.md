@@ -26,7 +26,7 @@
 | Pacman         | Big'N'Veiny mission logic                                    | exclusive to GTA 3         | N                |
 | Pad            | Input controls                                               |                            | N                |
 | Pager          | In-game pager                                                | exclusive to GTA 3         | N                |
-| Paths          | Configuring car and ped paths and lookup for nodes           |                            | N                |
+| Path           | Configuring car and ped paths and lookup for nodes           |                            | N                |
 | Phone          | Setting up phone booth calls and messages                    |                            | Y                |
 | Pickup         | Interactive script objects                                   |                            | Y                |
 | Player         | The main character controlled by a player                    |                            | Y                |

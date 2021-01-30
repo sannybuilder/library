@@ -20,7 +20,7 @@
 | Menu           | Interaction with the main menu                               |                            | N                |
 | Object         | Script objects                                               |                            | Y                |
 | Pad            | Input controls                                               |                            | N                |
-| Paths          | Configuring car and ped paths and lookup for nodes           |                            | N                |
+| Path           | Configuring car and ped paths and lookup for nodes           |                            | N                |
 | Phone          | Setting up phone booth calls and messages                    |                            | Y                |
 | Pickup         | Interactive script objects                                   |                            | Y                |
 | Plane          | Planes                                                       | specific kind of a vehicle | Y (Car.Create)   |

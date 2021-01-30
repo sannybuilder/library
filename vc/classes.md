@@ -15,6 +15,7 @@
 | Game           | Gameplay                                                     |                            | N                |
 | Gang           | Gangs configuration                                          |                            | N                |
 | Garage         | Garages                                                      |                            | Y                |
+| Heli           | Helicopteps                                                  | specific kind of a vehicle | Y (Car.Create)   |
 | Math           | Math and conversion utilities                                |                            | N                |
 | Menu           | Interaction with the main menu                               |                            | N                |
 | Object         | Script objects                                               |                            | Y                |
@@ -28,6 +29,7 @@
 | Restart        | Configuration of respawn points                              |                            | N                |
 | Screen         | Manipulating game UI                                         |                            | N                |
 | ScriptFire     | Script fires                                                 |                            | Y                |
+| ScriptPath     | Script path                                                  |                            | N                |
 | Sphere         | Cylinder markers                                             |                            | Y                |
 | Stat           | Game statistics                                              |                            | N                |
 | Streaming      | Loading game assets                                          |                            | N                |

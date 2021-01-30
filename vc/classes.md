@@ -23,13 +23,14 @@
 | Paths          | Configuring car and ped paths and lookup for nodes           |                            | N                |
 | Phone          | Setting up phone booth calls and messages                    |                            | Y                |
 | Pickup         | Interactive script objects                                   |                            | Y                |
+| Plane          | Planes                                                       | specific kind of a vehicle | Y (Car.Create)   |
 | Player         | The main character controlled by a player                    |                            | Y                |
 | Rampage        | Rampages logic                                               |                            | N                |
 | Rc             | Remote controlled cars logic                                 |                            | N                |
 | Restart        | Configuration of respawn points                              |                            | N                |
 | Screen         | Manipulating game UI                                         |                            | N                |
 | ScriptFire     | Script fires                                                 |                            | Y                |
-| ScriptPath     | Script path                                                  |                            | N                |
+| ScriptPath     | Script paths                                                 |                            | N                |
 | Sphere         | Cylinder markers                                             |                            | Y                |
 | Stat           | Game statistics                                              |                            | N                |
 | Streaming      | Loading game assets                                          |                            | N                |

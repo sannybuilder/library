@@ -31,6 +31,7 @@
 | Screen         | Manipulating game UI                                         |                            | N                |
 | ScriptFire     | Script fires                                                 |                            | Y                |
 | ScriptPath     | Script paths                                                 |                            | N                |
+| Shortcut       | Mission shortcut taxi                                        | exclusive to Vice City     | N                |
 | Sphere         | Cylinder markers                                             |                            | Y                |
 | Stat           | Game statistics                                              |                            | N                |
 | Streaming      | Loading game assets                                          |                            | N                |

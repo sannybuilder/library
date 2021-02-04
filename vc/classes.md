@@ -36,6 +36,7 @@
 | Stat           | Game statistics                                              |                            | N                |
 | Streaming      | Loading game assets                                          |                            | N                |
 | StuckCarCheck  | Checking if script cars are stuck                            |                            | N                |
+| Tank           | Tank logic                                                   | exclusive to Vice City     | Y (Car.Create)   |
 | Text           | Displaying subtitles and text boxes                          |                            | N                |
 | Txd            | Working with texture dictionaries                            |                            | N                |
 | Weather        | Controlling weather                                          |                            | N                |

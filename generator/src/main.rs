@@ -35,8 +35,16 @@ fn main() {
         let class = columns.get(COL_CLASS).unwrap();
         let opcode = columns.get(COL_OP).unwrap();
 
-        let class_name = class.split('.').nth(0).unwrap().to_case(Case::Pascal);
-        let class_member = class.split('.').nth(1).unwrap().to_case(Case::Pascal);
+        let class_name = class
+            .split('.')
+            .nth(0)
+            .unwrap_or_else(|| panic!("{}", class))
+            .to_case(Case::Pascal);
+        let class_member = class
+            .split('.')
+            .nth(1)
+            .unwrap_or_else(|| panic!("{}", class))
+            .to_case(Case::Pascal);
 
         if !classes_list.contains_key(&class_name) {
             classes_list.insert(class_name.clone(), HashMap::new());
@@ -59,6 +67,7 @@ fn main() {
                         "float" => String::from("%f"),
                         "int" => String::from("%i"),
                         "string" => String::from("%s"),
+                        "bool" | "boolean" => String::from("%b"),
                         _ => format!(": {}", p),
                     };
                     format!("\"_p{}{}\"", i + 1, _type)

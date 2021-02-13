@@ -1,14 +1,14 @@
 export default {
     srcDir: ".",
     exclude: ["LICENSE", "README.md"],
-    root: "/classes/",
+    root: "/library/",
     theme: "docs",
     plugins: ["sidebar"],
-    title: "Sanny Classes Library",
-    description: "Sanny Classes Library",
+    title: "Sanny Commands Library",
+    description: "Sanny Commands Library",
     head: (React.createElement(React.Fragment, null,
         React.createElement("link", { rel: "icon", type: "image/png", href: "https://sannybuilder.com/favicon.png" }),
-        React.createElement("link", { href: "/classes/assets/main.css?up=3", rel: "stylesheet", type: "text/css" }))),
+        React.createElement("link", { href: "/library/assets/main.css?up=3", rel: "stylesheet", type: "text/css" }))),
     nav: [
         {
             text: "Sanny Builder",
@@ -16,7 +16,7 @@ export default {
             align: "right",
         },
     ],
-    github: "https://github.com/sannybuilder/classes",
+    github: "https://github.com/sannybuilder/library",
     sidebar: {
         "/": [
             {

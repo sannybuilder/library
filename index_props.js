@@ -1,4 +1,4 @@
-import projectConfig from '/classes/pagic.config.js';
+import projectConfig from '/library/pagic.config.js';
 import Page from './index_content.js';
 export default {
     config: { "root": "/", ...projectConfig, branch: 'master' },
@@ -8,7 +8,7 @@ export default {
     'title': "",
     'content': React.createElement(Page, { config: {
             branch: 'master',
-            description: 'Sanny Classes Library',
+            description: 'Sanny Commands Library',
             exclude: [
                 '**/.*',
                 '**/package.json',
@@ -23,10 +23,10 @@ export default {
                 'README.md',
                 'dist'
             ],
-            github: 'https://github.com/sannybuilder/classes',
+            github: 'https://github.com/sannybuilder/library',
             head: React.createElement(React.Fragment, null,
                 React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-                React.createElement("link", { href: "/classes/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })),
+                React.createElement("link", { href: "/library/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })),
             include: undefined,
             nav: [
                 {
@@ -47,7 +47,7 @@ export default {
                 'sidebar'
             ],
             port: 8000,
-            root: '/classes/',
+            root: '/library/',
             serve: false,
             sidebar: {
                 '/': [
@@ -89,7 +89,7 @@ export default {
             },
             srcDir: '.',
             theme: 'docs',
-            title: 'Sanny Classes Library',
+            title: 'Sanny Commands Library',
             tools: {
                 backToTop: true,
                 editOnGitHub: true
@@ -97,14 +97,14 @@ export default {
             watch: false
         }, content: null, head: React.createElement(React.Fragment, null,
             React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-            React.createElement("link", { href: "/classes/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
+            React.createElement("link", { href: "/library/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })), layoutPath: "_layout.tsx", outputPath: "index.html", pagePath: "index.tsx", script: null, title: "" }),
     'head': React.createElement(React.Fragment, null,
         React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
-        React.createElement("link", { href: "/classes/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })),
+        React.createElement("link", { href: "/library/assets/main.css?up=3", rel: "stylesheet", type: "text/css" })),
     'script': React.createElement(React.Fragment, null,
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),
-        React.createElement("script", { src: "/classes/index.js", type: "module" })),
+        React.createElement("script", { src: "/library/index.js", type: "module" })),
     'sidebar': [
         {
             "text": "GTA III",

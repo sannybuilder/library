@@ -4,9 +4,9 @@ export default {
     'pagePath': "gta3/0001.md",
     'layoutPath': "_layout.tsx",
     'outputPath': "gta3/0001.html",
-    'title': undefined,
+    'title': "WAIT",
     'content': React.createElement("article", { dangerouslySetInnerHTML: {
-            __html: '<h3 id="0001">0001<a class="anchor" href="#0001">§</a></h3>'
+            __html: '<h1>WAIT</h1>'
         } }),
     'head': React.createElement(React.Fragment, null,
         React.createElement("link", { href: "https://sannybuilder.com/favicon.png", rel: "icon", type: "image/png" }),
@@ -15,21 +15,18 @@ export default {
         React.createElement("script", { src: "https://cdn.pagic.org/react@16.13.1/umd/react.production.min.js" }),
         React.createElement("script", { src: "https://cdn.pagic.org/react-dom@16.13.1/umd/react-dom.production.min.js" }),
         React.createElement("script", { src: "/library/index.js", type: "module" })),
-    'contentTitle': undefined,
+    'contentTitle': React.createElement("h1", { key: "0" }, "WAIT"),
     'contentBody': React.createElement("article", { dangerouslySetInnerHTML: {
-            __html: '<h3 id="0001">0001<a class="anchor" href="#0001">§</a></h3>'
+            __html: ''
         } }),
-    'toc': React.createElement("nav", { key: "0", className: "toc" },
-        React.createElement("ol", null,
-            React.createElement("li", null,
-                React.createElement("a", { href: "#0001" }, "0001")))),
+    'toc': null,
     'author': "Seemann",
     'contributors': [
         "Seemann"
     ],
     'date': "2021-02-13T04:36:28.000Z",
-    'updated': null,
-    'excerpt': "0001",
+    'updated': "2021-02-13T05:07:15.000Z",
+    'excerpt': "",
     'cover': undefined,
     'sidebar': [
         {

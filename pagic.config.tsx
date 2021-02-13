@@ -3,11 +3,11 @@ import { React } from "https://deno.land/x/pagic/mod.ts";
 export default {
   srcDir: ".",
   exclude: ["LICENSE", "README.md"],
-  root: "/classes/",
+  root: "/library/",
   theme: "docs",
   plugins: ["sidebar"],
-  title: "Sanny Classes Library",
-  description: "Sanny Classes Library",
+  title: "Sanny Commands Library",
+  description: "Sanny Commands Library",
   head: (
     <>
       <link
@@ -16,7 +16,7 @@ export default {
         href="https://sannybuilder.com/favicon.png"
       />
       <link
-        href="/classes/assets/main.css?up=3"
+        href="/library/assets/main.css?up=3"
         rel="stylesheet"
         type="text/css"
       />
@@ -29,7 +29,7 @@ export default {
       align: "right",
     },
   ],
-  github: "https://github.com/sannybuilder/classes",
+  github: "https://github.com/sannybuilder/library",
   sidebar: {
     "/": [
       {

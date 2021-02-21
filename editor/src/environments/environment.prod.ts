@@ -7,6 +7,6 @@ export const environment: Config = {
     editing: false,
   },
   endpoints: {
-    commands: 'data/commands.json',
+    commands: 'data/gta3.json',
   },
 };

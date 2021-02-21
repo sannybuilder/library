@@ -20,7 +20,7 @@ app.post("/commands", (req, res) => {
       },
       commands: req.body,
     };
-    fs.writeFileSync(COMMANDS_FILE, JSON.stringify(newContent));
+    fs.writeFileSync(COMMANDS_FILE, JSON.stringify(newContent, null, 2));
     res.send({ result: "success", last_update: lastUpdate });
   } catch {
     res.status(500);

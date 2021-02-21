@@ -15,6 +15,7 @@ import { CommandEditorComponent } from './command-editor/command-editor.componen
 import { FusejsService } from './fusejs/fusejs.service';
 import { FusejsPipe } from './fusejs/fusejs.pipe';
 import { ConfigModule } from './config';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,29 @@ import { ConfigModule } from './config';
     FormsModule,
     HttpClientModule,
     ConfigModule,
+    RouterModule.forRoot(
+      [
+        {
+          path: 'gta3',
+          component: DashboardComponent,
+          pathMatch: 'full',
+        },
+        {
+          path: '',
+          redirectTo: '/gta3',
+          pathMatch: 'full',
+        },
+        {
+          path: '**',
+          redirectTo: '/gta3',
+        },
+      ],
+      { useHash: false }
+    ),
     StoreModule.forRoot({ root: reducer }),
     EffectsModule.forRoot([StateEffects]),
   ],
+  exports: [],
   providers: [FusejsService],
   bootstrap: [AppComponent],
 })

@@ -7,6 +7,6 @@ export const environment: Config = {
     editing: false,
   },
   endpoints: {
-    commands: 'commands.json',
+    commands: 'data/commands.json',
   },
 };

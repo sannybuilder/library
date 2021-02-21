@@ -1,37 +1,40 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command } from '../models';
+import { Command, Extension } from '../models';
 import {
   editCommand,
-  getCommands,
-  getCommandsError,
-  getCommandsSuccess,
+  loadExtensions,
+  loadExtensionsError,
+  loadExtensionsSuccess,
+  toggleExtension,
   updateCommand,
-  updateCommandsSuccess,
+  updateExtensionsSuccess,
 } from './actions';
+import { flatMap, without } from 'lodash';
 
 export interface State {
-  commands: Command[];
+  extensions?: Extension[];
   lastUpdate?: number;
   error?: string;
   editCommand?: Command;
   loading: boolean;
+  selectedExtensions?: string[];
 }
 
 export const initialState: State = {
-  commands: [],
   loading: false,
 };
 
 const _reducer = createReducer(
   initialState,
-  on(getCommands, (state) => ({ ...state, loading: true })),
-  on(getCommandsSuccess, (state, { commands, lastUpdate }) => ({
+  on(loadExtensions, (state) => ({ ...state, loading: true })),
+  on(loadExtensionsSuccess, (state, { extensions, lastUpdate }) => ({
     ...state,
     loading: false,
     lastUpdate,
-    commands,
+    extensions,
+    selectedExtensions: extensions.map((e) => e.name),
   })),
-  on(getCommandsError, (state) => ({
+  on(loadExtensionsError, (state) => ({
     ...state,
     commands: [],
     loading: false,
@@ -41,19 +44,33 @@ const _reducer = createReducer(
     ...state,
     editCommand,
   })),
-  on(updateCommand, (state, { command: newCommand }) => {
-    const newCommands = state.commands.map((c) => {
-      if (c.id === newCommand.id) {
-        return newCommand;
+  on(updateCommand, (state, { command: newCommand, extension }) => {
+    const extensions = flatMap(state.extensions, (e) => {
+      if (e.name === extension) {
+        return {
+          ...e,
+          commands: e.commands.map((c) => {
+            if (c.id === newCommand.id) {
+              return newCommand;
+            }
+            return c;
+          }),
+        };
       }
-      return c;
+      return e;
     });
-    return { ...state, commands: newCommands };
+    return { ...state, extensions };
   }),
-  on(updateCommandsSuccess, (state, { lastUpdate }) => ({
+  on(updateExtensionsSuccess, (state, { lastUpdate }) => ({
     ...state,
     lastUpdate,
-  }))
+  })),
+  on(toggleExtension, (state, { extension }) => {
+    const selectedExtensions = state.selectedExtensions.includes(extension)
+      ? without(state.selectedExtensions, extension)
+      : [...state.selectedExtensions, extension];
+    return { ...state, selectedExtensions };
+  })
 );
 
 export function reducer(state: State, action: Action) {

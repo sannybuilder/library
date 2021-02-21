@@ -17,7 +17,7 @@ export class CommandListComponent implements OnInit {
   @ViewChild(CommandEditorComponent) commandEditor: CommandEditorComponent;
   rows: Command[] = [];
 
-  commands$ = this.facade.commands$;
+  extensions$ = this.facade.extensions$;
   editCommand$ = this.facade.editCommand$;
   loading$ = this.facade.loading$;
   lastUpdate$ = this.facade.lastUpdate$;
@@ -41,22 +41,31 @@ export class CommandListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.facade.getCommands();
+    this.facade.loadExtensions();
   }
 
-  edit(command: Command) {
+  edit(command: Command, extension: string) {
     this.facade.editCommand(command);
-    this.commandEditor.open(command);
+    this.commandEditor.open(command, extension);
     return false;
   }
 
-  onSave(command: Command) {
+  onSave({ command, extension }: { command: Command; extension: string }) {
     this.facade.updateCommand(
-      omit(command, this.searchOptions.fusejsHighlightKey)
+      omit(command, this.searchOptions.fusejsHighlightKey),
+      extension
     );
   }
 
   onSearchUpdate(term: string) {
     this.searchTerm$.next(term);
+  }
+
+  toggleExtension(extenstion: string) {
+    this.facade.toggleExtension(extenstion);
+  }
+
+  isExtensionChecked(extension: string) {
+    return this.facade.getExtensionCheckedState(extension);
   }
 }

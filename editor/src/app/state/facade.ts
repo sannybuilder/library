@@ -1,41 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Command } from '../models';
+import { Command, Extension } from '../models';
 import {
   editCommand,
-  getCommands,
-  updateCommands,
+  loadExtensions,
+  updateExtensions,
   updateCommand,
+  toggleExtension,
 } from './actions';
 import {
-  commandsSelector,
+  extensionsSelector,
   editCommandSelector,
   lastUpdateSelector,
   loadingSelector,
+  selectedExtensionsSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
 export class StateFacade {
-  commands$ = this.store$.select(commandsSelector());
-  editCommand$ = this.store$.select(editCommandSelector());
-  loading$ = this.store$.select(loadingSelector());
-  lastUpdate$ = this.store$.select(lastUpdateSelector());
+  extensions$ = this.store$.select(extensionsSelector);
+  editCommand$ = this.store$.select(editCommandSelector);
+  loading$ = this.store$.select(loadingSelector);
+  lastUpdate$ = this.store$.select(lastUpdateSelector);
+  getExtensionCheckedState(extension: string) {
+    return this.store$.select(selectedExtensionsSelector, { extension });
+  }
 
   constructor(private store$: Store) {}
 
-  getCommands() {
-    this.store$.dispatch(getCommands());
+  loadExtensions() {
+    this.store$.dispatch(loadExtensions());
   }
 
-  updateCommands(commands: Command[]) {
-    this.store$.dispatch(updateCommands({ commands }));
+  updateExtensions(extensions: Extension[]) {
+    this.store$.dispatch(updateExtensions({ extensions }));
   }
 
   editCommand(command: Command) {
     this.store$.dispatch(editCommand({ command }));
   }
 
-  updateCommand(command: Command) {
-    this.store$.dispatch(updateCommand({ command }));
+  updateCommand(command: Command, extension: string) {
+    this.store$.dispatch(updateCommand({ command, extension }));
+  }
+
+  toggleExtension(extension: string) {
+    this.store$.dispatch(toggleExtension({ extension }));
   }
 }

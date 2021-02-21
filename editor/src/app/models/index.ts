@@ -39,3 +39,8 @@ export interface Command {
   member?: string;
   short_desc: string;
 }
+
+export interface Extension {
+  name: string;
+  commands: Command[];
+}

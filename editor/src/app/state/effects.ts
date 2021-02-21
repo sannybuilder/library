@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  getCommands,
-  getCommandsError,
-  getCommandsSuccess,
+  loadExtensions,
+  loadExtensionsSuccess,
   updateCommand,
-  updateCommands,
-  updateCommandsSuccess,
+  updateExtensions,
+  updateExtensionsSuccess,
 } from './actions';
 import { CommandsService } from './service';
 import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
@@ -14,28 +13,30 @@ import { StateFacade } from './facade';
 
 @Injectable()
 export class StateEffects {
-  loadCommands$ = createEffect(() =>
+  loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getCommands),
+      ofType(loadExtensions),
       switchMap(() =>
         this.service
-          .loadCommands()
+          .loadExtensions()
           .pipe(
-            map(({ commands, lastUpdate }) =>
-              getCommandsSuccess({ commands, lastUpdate })
+            map(({ extensions, lastUpdate }) =>
+              loadExtensionsSuccess({ extensions, lastUpdate })
             )
           )
       )
     )
   );
 
-  updateCommands$ = createEffect(() =>
+  updateExtensions$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(updateCommands),
-      switchMap(({ commands }) =>
+      ofType(updateExtensions),
+      switchMap(({ extensions }) =>
         this.service
-          .updateCommands(commands)
-          .pipe(map(({ lastUpdate }) => updateCommandsSuccess({ lastUpdate })))
+          .updateExtensions(extensions)
+          .pipe(
+            map(({ lastUpdate }) => updateExtensionsSuccess({ lastUpdate }))
+          )
       )
     )
   );
@@ -43,8 +44,8 @@ export class StateEffects {
   updateCommand$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateCommand),
-      withLatestFrom(this.facade.commands$),
-      map(([_, commands]) => updateCommands({ commands }))
+      withLatestFrom(this.facade.extensions$),
+      map(([_, extensions]) => updateExtensions({ extensions }))
     )
   );
 

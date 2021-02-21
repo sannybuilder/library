@@ -9,6 +9,7 @@ import { Command } from '../../models';
 })
 export class CommandEditorComponent implements AfterViewInit {
   private _command: Command;
+  private _extension: string;
 
   set command(value: Command) {
     this._command = JSON.parse(JSON.stringify(value));
@@ -18,7 +19,14 @@ export class CommandEditorComponent implements AfterViewInit {
     return this._command;
   }
 
-  @Output() save: EventEmitter<Command> = new EventEmitter();
+  get extension(): string {
+    return this._extension;
+  }
+
+  @Output() save: EventEmitter<{
+    command: Command;
+    extension: string;
+  }> = new EventEmitter();
 
   readonly attrs = [
     'is_branch',
@@ -39,8 +47,9 @@ export class CommandEditorComponent implements AfterViewInit {
     this.handle = new Modal(document.getElementById('modal'), {});
   }
 
-  public open(command: Command) {
+  public open(command: Command, extension: string) {
     this.command = command;
+    this._extension = extension;
     this.handle.show();
   }
 
@@ -49,7 +58,7 @@ export class CommandEditorComponent implements AfterViewInit {
   }
 
   saveAndClose() {
-    this.save.emit(this.command);
+    this.save.emit({ command: this.command, extension: this.extension });
     this.close();
   }
 }

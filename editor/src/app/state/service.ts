@@ -3,13 +3,13 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONFIG, Config } from '../config';
-import { Command } from '../models';
+import { Extension } from '../models';
 
 interface LoadCommandsResponse {
   meta: {
     last_update: number;
   };
-  commands: Command[];
+  extensions: Extension[];
 }
 
 interface UpdateCommandsResponse {
@@ -24,18 +24,21 @@ export class CommandsService {
     @Inject(CONFIG) public config: Config
   ) {}
 
-  loadCommands(): Observable<{ commands: Command[]; lastUpdate: number }> {
+  loadExtensions(): Observable<{
+    extensions: Extension[];
+    lastUpdate: number;
+  }> {
     return this.http
       .get<LoadCommandsResponse>(this.config.endpoints.commands)
       .pipe(
         map((data) => ({
-          commands: data.commands,
+          extensions: data.extensions,
           lastUpdate: data.meta.last_update,
         }))
       );
   }
 
-  updateCommands(data: Command[]): Observable<{ lastUpdate: number }> {
+  updateExtensions(data: Extension[]): Observable<{ lastUpdate: number }> {
     return this.http
       .post<UpdateCommandsResponse>(this.config.endpoints.commands, data)
       .pipe(map(({ last_update: lastUpdate }) => ({ lastUpdate })));

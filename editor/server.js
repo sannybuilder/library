@@ -18,7 +18,7 @@ app.post("/commands", (req, res) => {
       meta: {
         last_update: lastUpdate,
       },
-      commands: req.body,
+      extensions: req.body,
     };
     fs.writeFileSync(COMMANDS_FILE, JSON.stringify(newContent, null, 2));
     res.send({ result: "success", last_update: lastUpdate });

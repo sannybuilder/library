@@ -1,0 +1,92 @@
+<h2 class="mb-3">Sanny Commands Library (SCL) / GTA III</h2>
+
+<div class="row card mb-3">
+  <div class="col-12 card-body">
+    <div class="form-group">
+      <div class="input-group">
+        <input
+          type="search"
+          class="form-control"
+          [ngModel]="searchTerms"
+          (ngModelChange)="onSearchUpdate($event)"
+          placeholder="Enter search terms here"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="spinner-border text-info"
+  role="status"
+  *ngIf="loading$ | async"
+></div>
+<div
+  class="row card mb-3"
+  *ngFor="
+    let row of commands$
+      | async
+      | fusejs: (searchTermDebounce$ | async):searchOptions
+  "
+>
+  <div class="col-12 card-body">
+    <a
+      *ngIf="config.features.editing"
+      class="edit-button small text-muted"
+      href="#"
+      (click)="edit(row)"
+      >Edit</a
+    >
+    <div class="row">
+      <div class="col-2">
+        <a [href]="'#' + (row.id | opcode)" [name]="row.id | opcode">{{
+          row.id | opcode
+        }}</a>
+      </div>
+
+      <div
+        class="col-8"
+        [innerHTML]="row[searchOptions.fusejsHighlightKey].name"
+      >
+        {{ row.name }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div
+          *ngIf="!row.attrs.is_unsupported && !row.attrs.is_nop"
+          [innerHTML]="row[searchOptions.fusejsHighlightKey].short_desc"
+        >
+          {{ row.short_desc }}
+        </div>
+        <ng-container *ngIf="row.attrs.is_unsupported"
+          >Unsupported</ng-container
+        >
+        <ng-container *ngIf="row.attrs.is_nop">Does nothing (NOP)</ng-container>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="row.attrs.is_keyword">
+      <div class="col-12">
+        <code>{{ row.name | lowercase }}</code>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="row.class && row.member">
+      <div class="col-12">
+        <code>{{ row.class }}.{{ row.member }}{{ row | params }}</code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-command-editor (save)="onSave($event)"></app-command-editor>
+
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <div class="container-fluid">
+    <small style="margin: 0 auto"
+      >Last update: {{ lastUpdate$ | async | date: "full" }}</small
+    >
+  </div>
+</nav>

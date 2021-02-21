@@ -13,18 +13,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup deno
-        uses: denolib/setup-deno@v2
+      - uses: actions/setup-node@v2
         with:
-          deno-version: nightly
+          node-version: "12"
 
       - name: Build gh-pages
         run: |
-          deno --version
-          deno install --unstable --allow-read --allow-write --allow-net --allow-run -n pagic https://deno.land/x/pagic/mod.ts
-          pagic build
+          cd editor
+          npm install
+          npm run build
+
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./editor/dist/editor

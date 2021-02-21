@@ -1,18 +1,19 @@
 import { Component, ViewChild, OnInit, Inject } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
-import { CommandEditorComponent } from '../command-editor/command-editor.component';
-import { CONFIG, Config } from '../config';
-import { Command } from '../models';
-import { StateFacade } from '../state/facade';
 import { omit } from 'lodash';
 
+import { CONFIG, Config } from '../../config';
+import { Command } from '../../models';
+import { StateFacade } from '../../state/facade';
+import { CommandEditorComponent } from '../command-editor/command-editor.component';
+
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'scl-command-list',
+  templateUrl: './command-list.component.html',
+  styleUrls: ['./command-list.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class CommandListComponent implements OnInit {
   @ViewChild(CommandEditorComponent) commandEditor: CommandEditorComponent;
   rows: Command[] = [];
 

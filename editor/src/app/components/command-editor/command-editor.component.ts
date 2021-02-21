@@ -1,9 +1,9 @@
 import { Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Modal } from 'bootstrap';
-import { Command } from '../models';
+import { Command } from '../../models';
 
 @Component({
-  selector: 'app-command-editor',
+  selector: 'scl-command-editor',
   templateUrl: './command-editor.component.html',
   styleUrls: ['./command-editor.component.scss'],
 })

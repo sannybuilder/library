@@ -4,23 +4,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ParamsPipe } from './pipes/params.pipe';
 import { OpcodePipe } from './pipes/opcode.pipe';
 import { reducer } from './state/reducer';
 import { StateEffects } from './state/effects';
-import { CommandEditorComponent } from './command-editor/command-editor.component';
 import { FusejsService } from './fusejs/fusejs.service';
 import { FusejsPipe } from './fusejs/fusejs.pipe';
 import { ConfigModule } from './config';
-import { RouterModule } from '@angular/router';
+
+import { AppComponent } from './app.component';
+import { CommandListComponent } from './components/command-list/command-list.component';
+import { CommandEditorComponent } from './components/command-editor/command-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    CommandListComponent,
     ParamsPipe,
     OpcodePipe,
     CommandEditorComponent,
@@ -35,7 +36,7 @@ import { RouterModule } from '@angular/router';
       [
         {
           path: 'gta3',
-          component: DashboardComponent,
+          component: CommandListComponent,
           pathMatch: 'full',
         },
         {

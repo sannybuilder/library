@@ -8,7 +8,7 @@ import { Config } from '../app/config';
 export const environment: Config = {
   production: false,
   features: {
-    editing: false,
+    editing: true,
   },
   endpoints: {
     commands: { [Game.GTA3]: '/commands/gta3', [Game.VC]: '/commands/vc' },

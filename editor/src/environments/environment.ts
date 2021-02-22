@@ -2,15 +2,16 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Game } from 'src/app/models';
 import { Config } from '../app/config';
 
 export const environment: Config = {
   production: false,
   features: {
-    editing: true,
+    editing: false,
   },
   endpoints: {
-    commands: '/commands',
+    commands: { [Game.GTA3]: '/commands/gta3', [Game.VC]: '/commands/vc' },
   },
 };
 

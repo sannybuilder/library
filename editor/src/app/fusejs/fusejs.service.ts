@@ -85,10 +85,10 @@ export class FusejsService {
         }
 
         for (let indice of indices) {
-          let initialValue: string = get(
+          let initialValue = get(
             item[options.fusejsHighlightKey],
             key
-          ) as string;
+          ).toString();
 
           const startOffset = indice[0] + highlightOffset;
           const endOffset = indice[1] + highlightOffset + 1;

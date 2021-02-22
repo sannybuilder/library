@@ -17,6 +17,10 @@ import { ConfigModule } from './config';
 import { AppComponent } from './app.component';
 import { CommandListComponent } from './components/command-list/command-list.component';
 import { CommandEditorComponent } from './components/command-editor/command-editor.component';
+import { HeaderComponent } from './components/header/header.component';
+import { CommandInfoComponent } from './components/command-info/command-info.component';
+import { HomeComponent } from './components/home/home.component';
+import { RouteGuard, RouteResolver } from './route.guard';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,9 @@ import { CommandEditorComponent } from './components/command-editor/command-edit
     OpcodePipe,
     CommandEditorComponent,
     FusejsPipe,
+    HeaderComponent,
+    CommandInfoComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,18 +42,17 @@ import { CommandEditorComponent } from './components/command-editor/command-edit
     RouterModule.forRoot(
       [
         {
-          path: 'gta3',
-          component: CommandListComponent,
-          pathMatch: 'full',
-        },
-        {
           path: '',
-          redirectTo: '/gta3',
           pathMatch: 'full',
+          component: HomeComponent,
         },
         {
           path: '**',
-          redirectTo: '/gta3',
+          canActivate: [RouteGuard],
+          resolve: {
+            data: RouteResolver,
+          },
+          component: CommandListComponent,
         },
       ],
       { useHash: false }
@@ -55,7 +61,7 @@ import { CommandEditorComponent } from './components/command-editor/command-edit
     EffectsModule.forRoot([StateEffects]),
   ],
   exports: [],
-  providers: [FusejsService],
+  providers: [FusejsService, RouteGuard, RouteResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

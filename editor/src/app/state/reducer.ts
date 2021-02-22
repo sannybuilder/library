@@ -8,6 +8,7 @@ import {
   toggleExtension,
   updateCommand,
   updateExtensionsSuccess,
+  updateSearchTerm,
 } from './actions';
 import { flatMap, without } from 'lodash';
 
@@ -18,6 +19,7 @@ export interface State {
   editCommand?: Command;
   loading: boolean;
   selectedExtensions?: string[];
+  searchTerm?: string;
 }
 
 export const initialState: State = {
@@ -70,7 +72,11 @@ const _reducer = createReducer(
       ? without(state.selectedExtensions, extension)
       : [...state.selectedExtensions, extension];
     return { ...state, selectedExtensions };
-  })
+  }),
+  on(updateSearchTerm, (state, { term: searchTerm }) => ({
+    ...state,
+    searchTerm,
+  }))
 );
 
 export function reducer(state: State, action: Action) {

@@ -33,3 +33,8 @@ export const selectedExtensionsSelector = createSelector(
   (state: State, props: { extension: string }) =>
     state.selectedExtensions.includes(props.extension)
 );
+
+export const searchTermSelector = createSelector(
+  root,
+  (state: State) => state.searchTerm
+);

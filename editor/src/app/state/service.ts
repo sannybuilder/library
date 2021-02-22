@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONFIG, Config } from '../config';
-import { Extension } from '../models';
+import { Extension, Game } from '../models';
 
 interface LoadCommandsResponse {
   meta: {
@@ -24,23 +24,36 @@ export class CommandsService {
     @Inject(CONFIG) public config: Config
   ) {}
 
-  loadExtensions(): Observable<{
+  loadExtensions(
+    game: Game
+  ): Observable<{
     extensions: Extension[];
     lastUpdate: number;
   }> {
-    return this.http
-      .get<LoadCommandsResponse>(this.config.endpoints.commands)
-      .pipe(
-        map((data) => ({
-          extensions: data.extensions,
-          lastUpdate: data.meta.last_update,
-        }))
-      );
+    return this.http.get<LoadCommandsResponse>(this.getEndpoint(game)).pipe(
+      map((data) => ({
+        extensions: data.extensions,
+        lastUpdate: data.meta.last_update,
+      }))
+    );
   }
 
-  updateExtensions(data: Extension[]): Observable<{ lastUpdate: number }> {
+  updateExtensions(
+    game: Game,
+    data: Extension[]
+  ): Observable<{ lastUpdate: number }> {
     return this.http
-      .post<UpdateCommandsResponse>(this.config.endpoints.commands, data)
+      .post<UpdateCommandsResponse>(this.getEndpoint(game), data)
       .pipe(map(({ last_update: lastUpdate }) => ({ lastUpdate })));
+  }
+
+  private getEndpoint(game: Game) {
+    switch (game) {
+      case Game.GTA3:
+        return this.config.endpoints.commands.gta3;
+      case Game.VC:
+        return this.config.endpoints.commands.vc;
+    }
+    throw new Error(`unknown game: ${game}`);
   }
 }

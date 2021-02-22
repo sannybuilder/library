@@ -1,20 +1,4 @@
-<h2 class="mb-3">Sanny Commands Library (SCL) / GTA III</h2>
-
-<div class="row card mb-3">
-  <div class="col-12 card-body">
-    <div class="form-group">
-      <div class="input-group">
-        <input
-          type="search"
-          class="form-control"
-          [ngModel]="searchTerms"
-          (ngModelChange)="onSearchUpdate($event)"
-          placeholder="Enter search terms here"
-        />
-      </div>
-    </div>
-  </div>
-</div>
+<h2 class="mt-3 mb-3">SCL / {{ title }}</h2>
 
 <ng-container *ngIf="extensions$ | async as extensions; else loading">
   <div class="row card mb-3">
@@ -55,17 +39,28 @@
             (click)="edit(command, extension.name)"
             >Edit</a
           >
+          <a
+            *ngIf="!config.features.editing"
+            class="edit-button small text-muted"
+            (click)="displayInfo(command)"
+            [routerLink]="['/', game, extension.name, command.id | opcode]"
+            [replaceUrl]="true"
+            [name]="command.id | opcode"
+            >Info</a
+          >
           <div class="row">
-            <div class="col-2">
+            <div class="col-md-2">
               <a
-                [href]="'#' + (command.id | opcode)"
+                (click)="displayInfo(command)"
+                [routerLink]="['/', game, extension.name, command.id | opcode]"
+                [replaceUrl]="true"
                 [name]="command.id | opcode"
                 >{{ command.id | opcode }}</a
               >
             </div>
 
             <div
-              class="col-8"
+              class="col-md-8"
               [innerHTML]="command[searchOptions.fusejsHighlightKey].name"
             >
               {{ command.name }}
@@ -110,15 +105,21 @@
     </ng-container>
   </ng-container>
 </ng-container>
-<scl-command-editor (save)="onSave($event)"></scl-command-editor>
 
 <nav class="navbar fixed-bottom navbar-light bg-light">
   <div class="container-fluid">
     <small style="margin: 0 auto"
-      >Last update: {{ lastUpdate$ | async | date: "full" }}</small
+      ><a href="https://github.com/sannybuilder/library"
+        >Sanny Commands Library</a
+      >
+      | Last update: {{ lastUpdate$ | async | date: "full" }}</small
     >
   </div>
 </nav>
+
+<scl-command-editor (save)="onSave($event)"></scl-command-editor>
+
+<scl-command-info></scl-command-info>
 
 <ng-template #loading>
   <div

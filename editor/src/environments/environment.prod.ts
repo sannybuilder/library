@@ -1,3 +1,4 @@
+import { Game } from 'src/app/models';
 import { Config } from '../app/config';
 
 export const environment: Config = {
@@ -7,6 +8,9 @@ export const environment: Config = {
     editing: false,
   },
   endpoints: {
-    commands: 'data/gta3.json',
+    commands: {
+      [Game.GTA3]: 'data/gta3-scl.json',
+      [Game.VC]: 'data/vc-scl.json',
+    },
   },
 };

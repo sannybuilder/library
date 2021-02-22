@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { Command, Extension } from '../models';
+import { Command, Extension, Game } from '../models';
 
-export const loadExtensions = createAction('load extensions');
+export const loadExtensions = createAction(
+  'load extensions',
+  props<{ game: Game }>()
+);
 export const loadExtensionsSuccess = createAction(
   'load extensions success',
   props<{ extensions: Extension[]; lastUpdate: number }>()
@@ -11,7 +14,7 @@ export const loadExtensionsError = createAction('load extensions error');
 
 export const updateExtensions = createAction(
   'update extensions',
-  props<{ extensions: Extension[] }>()
+  props<{ extensions: Extension[]; game: Game }>()
 );
 
 export const updateExtensionsSuccess = createAction(
@@ -26,10 +29,15 @@ export const editCommand = createAction(
 
 export const updateCommand = createAction(
   'update single command',
-  props<{ command: Command; extension: string }>()
+  props<{ command: Command; extension: string; game: Game }>()
 );
 
 export const toggleExtension = createAction(
   'toggle extension selection',
   props<{ extension: string }>()
+);
+
+export const updateSearchTerm = createAction(
+  'update search term',
+  props<{ term: string }>()
 );

@@ -8,7 +8,7 @@ import {
   updateExtensionsSuccess,
 } from './actions';
 import { CommandsService } from './service';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { StateFacade } from './facade';
 
 @Injectable()
@@ -16,9 +16,9 @@ export class StateEffects {
   loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadExtensions),
-      switchMap(() =>
+      switchMap(({ game }) =>
         this.service
-          .loadExtensions()
+          .loadExtensions(game)
           .pipe(
             map(({ extensions, lastUpdate }) =>
               loadExtensionsSuccess({ extensions, lastUpdate })
@@ -31,9 +31,9 @@ export class StateEffects {
   updateExtensions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateExtensions),
-      switchMap(({ extensions }) =>
+      switchMap(({ extensions, game }) =>
         this.service
-          .updateExtensions(extensions)
+          .updateExtensions(game, extensions)
           .pipe(
             map(({ lastUpdate }) => updateExtensionsSuccess({ lastUpdate }))
           )
@@ -45,7 +45,7 @@ export class StateEffects {
     this.actions$.pipe(
       ofType(updateCommand),
       withLatestFrom(this.facade.extensions$),
-      map(([_, extensions]) => updateExtensions({ extensions }))
+      map(([{ game }, extensions]) => updateExtensions({ extensions, game }))
     )
   );
 

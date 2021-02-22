@@ -1,5 +1,6 @@
 import { InjectionToken, NgModule } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Game } from '../models';
 
 export const CONFIG = new InjectionToken('config');
 
@@ -9,7 +10,7 @@ export interface Config {
     editing: boolean;
   };
   endpoints: {
-    commands: string;
+    commands: Record<Game, string>;
   };
 }
 

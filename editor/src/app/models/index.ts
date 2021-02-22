@@ -44,3 +44,10 @@ export interface Extension {
   name: string;
   commands: Command[];
 }
+
+export enum Game {
+  GTA3 = 'gta3',
+  VC = 'vc',
+}
+
+export const DEFAULT_EXTENSION = 'default';

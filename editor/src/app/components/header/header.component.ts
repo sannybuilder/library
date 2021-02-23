@@ -8,11 +8,12 @@ import { StateFacade } from 'src/app/state/facade';
 })
 export class HeaderComponent {
   searchTerm: string = '';
+  displaySearchBar$ = this._facade.displaySearchBar$;
 
-  constructor(public facade: StateFacade) {}
+  constructor(private _facade: StateFacade) {}
 
   onSearchUpdate(term: string) {
-    this.facade.updateSearch(term);
+    this._facade.updateSearch(term);
   }
 
   clear() {

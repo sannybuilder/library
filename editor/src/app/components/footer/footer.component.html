@@ -2,7 +2,11 @@
   <div class="container-fluid">
     <small style="margin: 0 auto"
       ><a href="https://github.com/sannybuilder/library">About SCL</a>
-      <ng-container *ngIf="lastUpdate$ | async as lastUpdate">
+      <ng-container
+        *ngIf="
+          (displayLastUpdate$ | async) && (lastUpdate$ | async) as lastUpdate
+        "
+      >
         | Last update: {{ lastUpdate | date: "full" }}</ng-container
       >
     </small>

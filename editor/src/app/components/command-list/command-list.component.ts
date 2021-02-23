@@ -87,11 +87,13 @@ export class CommandListComponent implements OnInit, OnDestroy {
         this.facade.loadExtensions(this.game);
       }
     });
+    this.facade.toggleCommandListElements(true);
   }
 
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();
+    this.facade.toggleCommandListElements(false);
   }
 
   edit(command: Command, extension: string) {

@@ -38,3 +38,13 @@ export const searchTermSelector = createSelector(
   root,
   (state: State) => state.searchTerm
 );
+
+export const displaySearchBarSelector = createSelector(
+  root,
+  (state: State) => state.displaySearchBar
+);
+
+export const displayLastUpdatedSelector = createSelector(
+  root,
+  (state: State) => state.displayLastUpdated
+);

@@ -41,3 +41,8 @@ export const updateSearchTerm = createAction(
   'update search term',
   props<{ term: string }>()
 );
+
+export const toggleCommandListElements = createAction(
+  'toggle command list elements',
+  props<{ flag: boolean }>()
+);

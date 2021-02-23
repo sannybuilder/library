@@ -8,6 +8,7 @@ import {
   updateCommand,
   toggleExtension,
   updateSearchTerm,
+  toggleCommandListElements,
 } from './actions';
 import {
   extensionsSelector,
@@ -16,6 +17,8 @@ import {
   loadingSelector,
   selectedExtensionsSelector,
   searchTermSelector,
+  displaySearchBarSelector,
+  displayLastUpdatedSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -25,6 +28,8 @@ export class StateFacade {
   loading$ = this.store$.select(loadingSelector);
   lastUpdate$ = this.store$.select(lastUpdateSelector);
   searchTerm$ = this.store$.select(searchTermSelector);
+  displaySearchBar$ = this.store$.select(displaySearchBarSelector);
+  displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selectedExtensionsSelector, { extension });
@@ -54,5 +59,9 @@ export class StateFacade {
 
   updateSearch(term: string) {
     this.store$.dispatch(updateSearchTerm({ term }));
+  }
+
+  toggleCommandListElements(flag: boolean) {
+    this.store$.dispatch(toggleCommandListElements({ flag }));
   }
 }

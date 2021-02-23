@@ -8,5 +8,7 @@ import { StateFacade } from 'src/app/state/facade';
 })
 export class FooterComponent {
   lastUpdate$ = this._facade.lastUpdate$;
+  displayLastUpdate$ = this._facade.displayLastUpdated$;
+
   constructor(private _facade: StateFacade) {}
 }

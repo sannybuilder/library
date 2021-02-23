@@ -5,6 +5,7 @@ import {
   loadExtensions,
   loadExtensionsError,
   loadExtensionsSuccess,
+  toggleCommandListElements,
   toggleExtension,
   updateCommand,
   updateExtensionsSuccess,
@@ -20,10 +21,14 @@ export interface State {
   loading: boolean;
   selectedExtensions?: string[];
   searchTerm?: string;
+  displaySearchBar: boolean;
+  displayLastUpdated: boolean;
 }
 
 export const initialState: State = {
   loading: false,
+  displayLastUpdated: false,
+  displaySearchBar: false,
 };
 
 const _reducer = createReducer(
@@ -76,6 +81,11 @@ const _reducer = createReducer(
   on(updateSearchTerm, (state, { term: searchTerm }) => ({
     ...state,
     searchTerm,
+  })),
+  on(toggleCommandListElements, (state, { flag }) => ({
+    ...state,
+    displaySearchBar: flag,
+    displayLastUpdated: flag,
   }))
 );
 

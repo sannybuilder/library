@@ -1,58 +1,74 @@
-<nav class="navbar sticky-top bg-dark navbar-expand-lg mb-2">
-  <div class="container">
-    <ul class="navbar-nav me-auto">
-      <li class="nav-item">
-        <a routerLink="/" class="nav-link d-inline-block"
-          ><img src="assets/sanny.png" width="24" height="24" />
-          <span
-            class="align-middle d-none d-sm-inline-block d-inline-block pl-1"
-            >Home</span
-          ></a
+<nav class="navbar sticky-top bg-dark navbar-expand mb-2 overflow-hidden">
+  <div class="container-lg">
+    <div class="row flex-grow-1">
+      <div class="col-12 col-lg-6">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a routerLink="/" class="nav-link d-inline-block"
+              ><img
+                class="d-none d-sm-inline-block"
+                src="assets/sanny.png"
+                width="24"
+                height="24"
+              />
+              <span class="align-middle pl-1">Home</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLinkActive="active"
+              routerLink="/gta3"
+              class="nav-link d-inline-block"
+              aria-current="page"
+              ><img
+                class="d-none d-sm-inline-block"
+                src="assets/gta3.png"
+                width="24"
+                height="24"
+              />
+              <span class="align-middle pl-1">GTA III</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLinkActive="active"
+              routerLink="/vc"
+              class="nav-link d-inline-block"
+              aria-current="page"
+              ><img
+                class="d-none d-sm-inline-block"
+                src="assets/vc.png"
+                width="24"
+                height="24"
+              />
+              <span class="align-middle pl-1"> Vice City</span></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6 d-flex">
+        <form
+          class="form-inline ml-lg-auto my-2 my-lg-0 flex-nowrap"
+          *ngIf="displaySearchBar$ | async"
         >
-      </li>
-      <li class="nav-item">
-        <a
-          routerLinkActive="active"
-          routerLink="/gta3"
-          class="nav-link d-inline-block"
-          aria-current="page"
-          ><img src="assets/gta3.png" width="24" height="24" />
-          <span class="align-middle d-none d-sm-inline-block pl-1"
-            >GTA III</span
-          ></a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          routerLinkActive="active"
-          routerLink="/vc"
-          class="nav-link d-inline-block"
-          aria-current="page"
-          ><img src="assets/vc.png" width="24" height="24" />
-          <span class="align-middle d-none d-sm-inline-block pl-1">
-            Vice City</span
-          ></a
-        >
-      </li>
-    </ul>
-
-    <form class="form-inline my-2 my-lg-0" *ngIf="displaySearchBar$ | async">
-      <input
-        name="search"
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        autofocus
-        [(ngModel)]="searchTerm"
-        (ngModelChange)="onSearchUpdate($event)"
-      />
-      <button
-        class="btn btn-outline-secondary my-2 my-sm-0"
-        type="button"
-        (click)="clear()"
-      >
-        Clear
-      </button>
-    </form>
+          <input
+            name="search"
+            class="search-bar form-control mr-2"
+            type="search"
+            placeholder="Search"
+            autofocus
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchUpdate($event)"
+          />
+          <button
+            class="btn btn-outline-secondary my-2 my-sm-0"
+            type="button"
+            (click)="clear()"
+          >
+            Clear
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </nav>

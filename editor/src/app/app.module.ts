@@ -22,11 +22,7 @@ import { CommandInfoComponent } from './components/command-info/command-info.com
 import { HomeComponent } from './components/home/home.component';
 import { RouteGuard, RouteResolver } from './route.guard';
 import { FooterComponent } from './components/footer/footer.component';
-import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
-
-export function getBaseHref(platformLocation: PlatformLocation): string {
-  return platformLocation.getBaseHrefFromDOM();
-}
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -72,11 +68,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     FusejsService,
     RouteGuard,
     RouteResolver,
-    {
-      provide: APP_BASE_HREF,
-      useFactory: getBaseHref,
-      deps: [PlatformLocation],
-    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })

@@ -1,5 +1,4 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -11,16 +10,10 @@ import { DEFAULT_EXTENSION, Game } from './models';
 
 @Injectable()
 export class RouteGuard implements CanActivate {
-  constructor(
-    private _router: Router,
-    @Inject(APP_BASE_HREF) private _baseHref: string
-  ) {}
+  constructor(private _router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const segments = getSegmentsFromUrl(
-      this._router,
-      state.url.replace(this._baseHref, '')
-    );
+    const segments = getSegmentsFromUrl(this._router, state.url);
 
     if (segments.length === 0) {
       return this.goHome();

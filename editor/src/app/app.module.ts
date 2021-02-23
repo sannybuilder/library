@@ -21,6 +21,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { CommandInfoComponent } from './components/command-info/command-info.component';
 import { HomeComponent } from './components/home/home.component';
 import { RouteGuard, RouteResolver } from './route.guard';
+import { FooterComponent } from './components/footer/footer.component';
+import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
+
+export function getBaseHref(platformLocation: PlatformLocation): string {
+  return platformLocation.getBaseHrefFromDOM();
+}
 
 @NgModule({
   declarations: [
@@ -33,6 +39,7 @@ import { RouteGuard, RouteResolver } from './route.guard';
     HeaderComponent,
     CommandInfoComponent,
     HomeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,16 @@ import { RouteGuard, RouteResolver } from './route.guard';
     EffectsModule.forRoot([StateEffects]),
   ],
   exports: [],
-  providers: [FusejsService, RouteGuard, RouteResolver],
+  providers: [
+    FusejsService,
+    RouteGuard,
+    RouteResolver,
+    {
+      provide: APP_BASE_HREF,
+      useFactory: getBaseHref,
+      deps: [PlatformLocation],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

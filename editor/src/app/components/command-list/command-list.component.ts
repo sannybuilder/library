@@ -24,7 +24,7 @@ export class CommandListComponent implements OnInit, OnDestroy {
   extensions$ = this.facade.extensions$;
   editCommand$ = this.facade.editCommand$;
   loading$ = this.facade.loading$;
-  lastUpdate$ = this.facade.lastUpdate$;
+
   searchTerms: string;
   searchTerm$ = this.facade.searchTerm$;
   searchTermDebounce$ = this.searchTerm$.pipe(debounce(() => timer(500)));

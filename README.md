@@ -4,7 +4,7 @@ An attempt to build a complete and consistent class system and commands document
 
 Currently under early development. Contributions are welcome!
 
-See online at https://sannybuilder.github.io/library/
+See online at https://library.sannybuilder.com/
 
 Discuss: https://github.com/sannybuilder/dev/discussions/107
 

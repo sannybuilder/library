@@ -1,6 +1,19 @@
-import { Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from '@angular/core';
 import { Modal } from 'bootstrap';
 import { Command } from '../../models';
+import { SelectorComponent } from '../selector/selector.component';
+
+export interface SaveEvent {
+  command: Command;
+  newExtension: string;
+  oldExtension: string;
+}
 
 @Component({
   selector: 'scl-command-editor',
@@ -8,8 +21,12 @@ import { Command } from '../../models';
   styleUrls: ['./command-editor.component.scss'],
 })
 export class CommandEditorComponent implements AfterViewInit {
+  @ViewChild(SelectorComponent) selector: SelectorComponent;
+
   private _command: Command;
-  private _extension: string;
+  private _oldExtension: string;
+  private _newExtension: string;
+  extensions: string[];
 
   set command(value: Command) {
     this._command = JSON.parse(JSON.stringify(value));
@@ -20,13 +37,18 @@ export class CommandEditorComponent implements AfterViewInit {
   }
 
   get extension(): string {
-    return this._extension;
+    return this._newExtension;
   }
 
-  @Output() save: EventEmitter<{
-    command: Command;
-    extension: string;
-  }> = new EventEmitter();
+  set extension(val: string) {
+    if (!val) {
+      console.warn('extension can not be empty, using "default"');
+      val = 'default';
+    }
+    this._newExtension = val;
+  }
+
+  @Output() save: EventEmitter<SaveEvent> = new EventEmitter();
 
   readonly attrs = [
     'is_branch',
@@ -47,9 +69,18 @@ export class CommandEditorComponent implements AfterViewInit {
     this.handle = new Modal(document.getElementById('modal'), {});
   }
 
-  public open(command: Command, extension: string) {
+  public open(
+    command: Command,
+    extension: string,
+    availableExtensions: string[]
+  ) {
     this.command = command;
-    this._extension = extension;
+    this._oldExtension = extension;
+    this.extension = extension;
+    this.extensions = availableExtensions;
+    if (this.selector) {
+      this.selector.freeInput = '';
+    }
     this.handle.show();
   }
 
@@ -58,7 +89,11 @@ export class CommandEditorComponent implements AfterViewInit {
   }
 
   saveAndClose() {
-    this.save.emit({ command: this.command, extension: this.extension });
+    this.save.emit({
+      command: this.command,
+      newExtension: this._newExtension,
+      oldExtension: this._oldExtension,
+    });
     this.close();
   }
 }

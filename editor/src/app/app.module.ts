@@ -23,6 +23,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RouteGuard, RouteResolver } from './route.guard';
 import { FooterComponent } from './components/footer/footer.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { SelectorComponent } from './components/selector/selector.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     CommandInfoComponent,
     HomeComponent,
     FooterComponent,
+    SelectorComponent,
   ],
   imports: [
     BrowserModule,

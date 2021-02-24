@@ -11,7 +11,7 @@ import {
   updateExtensionsSuccess,
   updateSearchTerm,
 } from './actions';
-import { flatMap, without } from 'lodash';
+import { without, sortBy } from 'lodash';
 
 export interface State {
   extensions?: Extension[];
@@ -51,23 +51,63 @@ const _reducer = createReducer(
     ...state,
     editCommand,
   })),
-  on(updateCommand, (state, { command: newCommand, extension }) => {
-    const extensions = flatMap(state.extensions, (e) => {
-      if (e.name === extension) {
-        return {
+  on(
+    updateCommand,
+    (state, { command: newCommand, newExtension: name, oldExtension }) => {
+      let tickExtension = null;
+      let untickExtension = null;
+      let extensions = upsertBy(
+        state.extensions,
+        'name',
+        name,
+        (e) => ({
           ...e,
-          commands: e.commands.map((c) => {
-            if (c.id === newCommand.id) {
-              return newCommand;
-            }
-            return c;
-          }),
-        };
+          commands: upsertBy(
+            e.commands,
+            'id',
+            newCommand.id,
+            () => newCommand,
+            () => newCommand
+          ),
+        }),
+        () => {
+          tickExtension = name;
+          return {
+            name,
+            commands: [newCommand],
+          };
+        }
+      );
+
+      if (name !== oldExtension) {
+        // remove from previous collection
+        extensions = upsertBy(extensions, 'name', oldExtension, (e) => {
+          const commands = upsertBy(e.commands, 'id', newCommand.id);
+          if (!commands.length) {
+            // remove previous collection ifit is empty
+            untickExtension = oldExtension;
+            return null;
+          }
+          return {
+            ...e,
+            commands,
+          };
+        });
       }
-      return e;
-    });
-    return { ...state, extensions };
-  }),
+
+      const selectedExtensions =
+        untickExtension !== null
+          ? state.selectedExtensions.filter((s) => s !== untickExtension)
+          : [...state.selectedExtensions];
+
+      if (tickExtension !== null) {
+        selectedExtensions.push(tickExtension);
+        selectedExtensions.sort();
+      }
+
+      return { ...state, extensions, selectedExtensions };
+    }
+  ),
   on(updateExtensionsSuccess, (state, { lastUpdate }) => ({
     ...state,
     lastUpdate,
@@ -91,4 +131,36 @@ const _reducer = createReducer(
 
 export function reducer(state: State, action: Action) {
   return _reducer(state, action);
+}
+
+function upsertBy<T extends object, Key extends keyof T>(
+  collection: T[],
+  key: Key,
+  needle: T[Key],
+  onFound: (element: T) => T | null = () => null,
+  onDefault: () => T | null = () => null
+): T[] {
+  let found = false;
+  const newCollection: T[] = [];
+
+  for (let i = 0; i < collection.length; i++) {
+    if (collection[i][key] === needle) {
+      found = true;
+      const newItem = onFound(collection[i]);
+      if (newItem !== null) {
+        newCollection.push(onFound(collection[i]));
+      }
+    } else {
+      newCollection.push(collection[i]);
+    }
+  }
+  if (!found) {
+    const newItem = onDefault();
+    if (newItem !== null) {
+      newCollection.push(newItem);
+      return sortBy(newCollection, key);
+    }
+  }
+
+  return newCollection;
 }

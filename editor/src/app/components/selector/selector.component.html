@@ -1,0 +1,34 @@
+<div class="input-group">
+  <div class="dropdown">
+    <button
+      type="button"
+      class="btn btn-secondary dropdown-toggle"
+      data-toggle="dropdown"
+      data-offset="0,0"
+    >
+      {{ label }}
+    </button>
+    <div class="dropdown-menu">
+      <button
+        class="dropdown-item"
+        *ngFor="let choice of choices"
+        (click)="update(choice)"
+      >
+        {{ choice }}
+      </button>
+      <div class="dropdown-item input-group">
+        <input class="form-control" type="text" [(ngModel)]="freeInput" />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="update(freeInput)"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="text" class="form-control" [ngModel]="model" />
+</div>

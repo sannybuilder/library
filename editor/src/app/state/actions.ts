@@ -29,7 +29,12 @@ export const editCommand = createAction(
 
 export const updateCommand = createAction(
   'update single command',
-  props<{ command: Command; extension: string; game: Game }>()
+  props<{
+    command: Command;
+    newExtension: string;
+    oldExtension: string;
+    game: Game;
+  }>()
 );
 
 export const toggleExtension = createAction(

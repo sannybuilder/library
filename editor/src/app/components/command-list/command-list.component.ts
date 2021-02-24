@@ -6,7 +6,10 @@ import { omit } from 'lodash';
 import { CONFIG, Config } from '../../config';
 import { Command, Game } from '../../models';
 import { StateFacade } from '../../state/facade';
-import { CommandEditorComponent } from '../command-editor/command-editor.component';
+import {
+  CommandEditorComponent,
+  SaveEvent,
+} from '../command-editor/command-editor.component';
 import { ActivatedRoute } from '@angular/router';
 import { CommandInfoComponent } from '../command-info/command-info.component';
 
@@ -22,6 +25,9 @@ export class CommandListComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject();
 
   extensions$ = this.facade.extensions$;
+  extensionNames$ = this.extensions$.pipe(
+    map((extensions) => extensions.map((e) => e.name))
+  );
   editCommand$ = this.facade.editCommand$;
   loading$ = this.facade.loading$;
 
@@ -96,18 +102,19 @@ export class CommandListComponent implements OnInit, OnDestroy {
     this.facade.toggleCommandListElements(false);
   }
 
-  edit(command: Command, extension: string) {
+  edit(command: Command, extension: string, availableExtensions: string[]) {
     this.facade.editCommand(command);
-    this.commandEditor.open(command, extension);
+    this.commandEditor.open(command, extension, availableExtensions);
     return false;
   }
 
-  onSave({ command, extension }: { command: Command; extension: string }) {
-    this.facade.updateCommand(
-      omit(command, this.searchOptions.fusejsHighlightKey),
-      extension,
-      this.game
-    );
+  onSave({ command, newExtension, oldExtension }: SaveEvent) {
+    this.facade.updateCommand({
+      newExtension,
+      oldExtension,
+      command: omit(command, this.searchOptions.fusejsHighlightKey),
+      game: this.game,
+    });
   }
 
   toggleExtension(extenstion: string) {

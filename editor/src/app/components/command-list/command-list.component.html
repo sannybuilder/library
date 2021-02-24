@@ -1,108 +1,115 @@
 <h2 class="mt-3 mb-3">SCL / {{ title }}</h2>
 
 <ng-container *ngIf="extensions$ | async as extensions; else loading">
-  <div class="row card mb-3">
-    <div class="col-12 card-body">
-      <div><p>Extensions:</p></div>
-      <div
-        class="form-check d-inline-block pr-2"
-        *ngFor="let extension of extensions"
-      >
-        <input
-          class="form-check-input"
-          type="checkbox"
-          [ngModel]="isExtensionChecked(extension.name) | async"
-          (ngModelChange)="toggleExtension(extension.name)"
-          [id]="extension.name"
-        />
-        <label class="form-check-label" [for]="extension.name">
-          {{ extension.name }}
-        </label>
+  <ng-container *ngIf="extensionNames$ | async as extensionNames">
+    <div class="row card mb-3">
+      <div class="col-12 card-body">
+        <div><p>Extensions:</p></div>
+        <div
+          class="form-check d-inline-block pr-2"
+          *ngFor="let name of extensionNames"
+        >
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [ngModel]="isExtensionChecked(name) | async"
+            (ngModelChange)="toggleExtension(name)"
+            [id]="name"
+          />
+          <label class="form-check-label" [for]="name">
+            {{ name }}
+          </label>
+        </div>
       </div>
     </div>
-  </div>
 
-  <ng-container *ngFor="let extension of extensions">
-    <ng-container *ngIf="isExtensionChecked(extension.name) | async">
-      <div
-        class="row card mb-3"
-        *ngFor="
-          let command of extension.commands
-            | fusejs: (searchTermDebounce$ | async):searchOptions
-        "
-      >
-        <div class="col-12 card-body">
-          <a
-            *ngIf="config.features.editing"
-            class="btn edit-button small text-muted"
-            href="#"
-            (click)="edit(command, extension.name)"
-            >Edit</a
-          >
-          <a
-            *ngIf="!config.features.editing"
-            class="btn edit-button small text-muted"
-            (click)="displayInfo(command)"
-            [routerLink]="['/', game, extension.name, command.id | opcode]"
-            [replaceUrl]="true"
-            [name]="command.id | opcode"
-            >Info</a
-          >
-          <div class="row">
-            <div class="col-md-2">
-              <a
-                (click)="displayInfo(command)"
-                [routerLink]="['/', game, extension.name, command.id | opcode]"
-                [replaceUrl]="true"
-                [name]="command.id | opcode"
-                >{{ command.id | opcode }}</a
-              >
-            </div>
-
-            <div
-              class="col-md-8"
-              [innerHTML]="command[searchOptions.fusejsHighlightKey].name"
+    <ng-container *ngFor="let extension of extensions">
+      <ng-container *ngIf="isExtensionChecked(extension.name) | async">
+        <div
+          class="row card mb-3"
+          *ngFor="
+            let command of extension.commands
+              | fusejs: (searchTermDebounce$ | async):searchOptions
+          "
+        >
+          <div class="col-12 card-body">
+            <a
+              *ngIf="config.features.editing"
+              class="btn edit-button small text-muted"
+              href="#"
+              (click)="edit(command, extension.name, extensionNames)"
+              >Edit</a
             >
-              {{ command.name }}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div
-                class="my-2"
-                *ngIf="!command.attrs.is_unsupported && !command.attrs.is_nop"
-                [innerHTML]="
-                  command[searchOptions.fusejsHighlightKey].short_desc
-                "
-              >
-                {{ command.short_desc }}
+            <a
+              *ngIf="!config.features.editing"
+              class="btn edit-button small text-muted"
+              (click)="displayInfo(command)"
+              [routerLink]="['/', game, extension.name, command.id | opcode]"
+              [replaceUrl]="true"
+              [name]="command.id | opcode"
+              >Info</a
+            >
+            <div class="row">
+              <div class="col-md-2">
+                <a
+                  (click)="displayInfo(command)"
+                  [routerLink]="[
+                    '/',
+                    game,
+                    extension.name,
+                    command.id | opcode
+                  ]"
+                  [replaceUrl]="true"
+                  [name]="command.id | opcode"
+                  >{{ command.id | opcode }}</a
+                >
               </div>
-              <ng-container *ngIf="command.attrs.is_unsupported"
-                >Unsupported</ng-container
-              >
-              <ng-container *ngIf="command.attrs.is_nop"
-                >Does nothing (NOP)</ng-container
-              >
-            </div>
-          </div>
 
-          <div class="row" *ngIf="command.attrs.is_keyword">
-            <div class="col-12">
-              <code>{{ command.name | lowercase }}</code>
-            </div>
-          </div>
-
-          <div class="row" *ngIf="command.class && command.member">
-            <div class="col-12">
-              <code
-                >{{ command.class }}.{{ command.member
-                }}{{ command | params }}</code
+              <div
+                class="col-md-8"
+                [innerHTML]="command[searchOptions.fusejsHighlightKey].name"
               >
+                {{ command.name }}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="my-2"
+                  *ngIf="!command.attrs.is_unsupported && !command.attrs.is_nop"
+                  [innerHTML]="
+                    command[searchOptions.fusejsHighlightKey].short_desc
+                  "
+                >
+                  {{ command.short_desc }}
+                </div>
+                <ng-container *ngIf="command.attrs.is_unsupported"
+                  >Unsupported</ng-container
+                >
+                <ng-container *ngIf="command.attrs.is_nop"
+                  >Does nothing (NOP)</ng-container
+                >
+              </div>
+            </div>
+
+            <div class="row" *ngIf="command.attrs.is_keyword">
+              <div class="col-12">
+                <code>{{ command.name | lowercase }}</code>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="command.class && command.member">
+              <div class="col-12">
+                <code
+                  >{{ command.class }}.{{ command.member
+                  }}{{ command | params }}</code
+                >
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-container>

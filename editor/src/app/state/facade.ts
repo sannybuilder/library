@@ -49,8 +49,20 @@ export class StateFacade {
     this.store$.dispatch(editCommand({ command }));
   }
 
-  updateCommand(command: Command, extension: string, game: Game) {
-    this.store$.dispatch(updateCommand({ command, extension, game }));
+  updateCommand({
+    command,
+    newExtension,
+    oldExtension,
+    game,
+  }: {
+    command: Command;
+    newExtension: string;
+    oldExtension: string;
+    game: Game;
+  }) {
+    this.store$.dispatch(
+      updateCommand({ command, newExtension, oldExtension, game })
+    );
   }
 
   toggleExtension(extension: string) {

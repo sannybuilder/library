@@ -50,8 +50,9 @@ export class CommandListComponent implements OnInit, OnDestroy {
         (e) => e.name === this.displayExtension
       );
       if (extension) {
-        const id = parseInt(this.displayOpcode, 16);
-        return extension.commands.find((command) => command.id === id);
+        return extension.commands.find(
+          (command) => command.id === this.displayOpcode
+        );
       }
     }),
     filter<Command>(Boolean)
@@ -69,7 +70,7 @@ export class CommandListComponent implements OnInit, OnDestroy {
     });
 
   searchOptions = {
-    keys: ['name', 'short_desc'],
+    keys: ['name', 'short_desc', 'id'],
     threshold: 0.3,
     ignoreLocation: true,
     minMatchCharLength: 3,

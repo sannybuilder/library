@@ -35,6 +35,11 @@ export class FusejsService {
     );
     let result = [];
 
+    // hack for opcode search
+    if (searchTerms?.length === 4 && searchTerms[0] === '0') {
+      fuseOptions.threshold = 0.0;
+    }
+
     if (searchTerms && searchTerms.length >= fuseOptions.minSearchTermLength) {
       if (fuseOptions.supportHighlight) {
         fuseOptions.includeMatches = true;

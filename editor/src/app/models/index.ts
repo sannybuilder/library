@@ -11,17 +11,13 @@ export interface Attr {
   is_overload: boolean;
 }
 
-export type ParamType =
-  | 'any'
-  | 'label'
-  | 'arguments'
-  | 'int'
-  | 'float'
-  | 'Car'
-  | 'Char'
-  | 'Player'
-  | 'Object'
-  | 'Pickup';
+export enum ParamType {
+  any = 'any',
+  label = 'label',
+  arguments = 'arguments',
+  int = 'int',
+  float = 'float',
+}
 
 export interface Param {
   type: ParamType;
@@ -29,7 +25,7 @@ export interface Param {
 }
 
 export interface Command {
-  id: number;
+  id: string;
   name: string;
   attrs: Attr;
   num_params: number;

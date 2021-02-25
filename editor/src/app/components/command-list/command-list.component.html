@@ -44,24 +44,20 @@
               *ngIf="!config.features.editing"
               class="btn edit-button small text-muted"
               (click)="displayInfo(command)"
-              [routerLink]="['/', game, extension.name, command.id | opcode]"
+              [routerLink]="['/', game, extension.name, command.id]"
               [replaceUrl]="true"
-              [name]="command.id | opcode"
+              [name]="command.id"
               >Info</a
             >
             <div class="row">
               <div class="col-md-2">
                 <a
                   (click)="displayInfo(command)"
-                  [routerLink]="[
-                    '/',
-                    game,
-                    extension.name,
-                    command.id | opcode
-                  ]"
+                  [routerLink]="['/', game, extension.name, command.id]"
                   [replaceUrl]="true"
-                  [name]="command.id | opcode"
-                  >{{ command.id | opcode }}</a
+                  [name]="command.id"
+                  [innerHTML]="command[searchOptions.fusejsHighlightKey].id"
+                  >{{ command.id }}</a
                 >
               </div>
 

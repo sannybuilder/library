@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONFIG, Config } from '../config';
 import { Extension, Game } from '../models';
+import { pickBy } from 'lodash';
 
 interface LoadCommandsResponse {
   meta: {
@@ -43,7 +44,17 @@ export class CommandsService {
     data: Extension[]
   ): Observable<{ lastUpdate: number }> {
     return this.http
-      .post<UpdateCommandsResponse>(this.getEndpoint(game), data)
+      .post<UpdateCommandsResponse>(
+        this.getEndpoint(game),
+        data.map((e) => ({
+          ...e,
+          commands: e.commands.map((c) => ({
+            ...c,
+            id: c.id,
+            attrs: pickBy(c.attrs, (x) => x),
+          })),
+        }))
+      )
       .pipe(map(({ last_update: lastUpdate }) => ({ lastUpdate })));
   }
 

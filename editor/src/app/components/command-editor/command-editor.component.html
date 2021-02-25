@@ -9,28 +9,31 @@
     <div class="modal-content">
       <div class="modal-body" *ngIf="command">
         <div class="row mb-2">
-          <div class="col-3">
+          <div class="col-12 col-lg-3">
             <div class="input-group">
               <span class="input-group-text">Opcode</span>
               <input
                 type="text"
                 class="form-control"
                 maxlength="4"
-                [ngModel]="command.id | opcode"
+                (blur)="opcodify(command)"
+                [ngModel]="command.id"
+                (ngModelChange)="onOpcodeChange(command, $event)"
               />
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-12 col-lg-6">
             <div class="input-group">
               <span class="input-group-text">Command name</span>
               <input
                 type="text"
                 class="form-control"
-                [(ngModel)]="command.name"
+                [ngModel]="command.name | uppercase"
+                (ngModelChange)="onCommandNameChange(command, $event)"
               />
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-12 col-lg-3">
             <scl-selector
               label="Extension"
               [(model)]="extension"
@@ -40,20 +43,27 @@
         </div>
 
         <div class="row mb-2">
-          <div class="col-12">
+          <div class="col-12 col-md-6">
             <div class="input-group">
               <span class="input-group-text">Class</span>
               <input
                 type="text"
                 [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
                 class="form-control"
-                [(ngModel)]="command.class"
+                [ngModel]="command.class"
+                (ngModelChange)="onClassChange(command, $event)"
               />
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Member</span>
               <input
                 type="text"
                 [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
                 class="form-control"
-                [(ngModel)]="command.member"
+                [ngModel]="command.member"
+                (ngModelChange)="onMemberChange(command, $event)"
               />
             </div>
           </div>
@@ -77,7 +87,7 @@
           class="row mb-2"
           *ngFor="let param of command.input; let i = index"
         >
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <div class="input-group">
               <span class="input-group-text">Input {{ i + 1 }}</span>
               <input
@@ -87,15 +97,12 @@
               />
             </div>
           </div>
-          <div class="col-6">
-            <div class="input-group">
-              <span class="input-group-text">Type</span>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="param.type"
-              />
-            </div>
+          <div class="col-12 col-md-6">
+            <scl-selector
+              label="Type"
+              [(model)]="param.type"
+              [choices]="paramTypes"
+            ></scl-selector>
           </div>
         </div>
 
@@ -103,7 +110,7 @@
           class="row mb-2"
           *ngFor="let param of command.output; let i = index"
         >
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <div class="input-group">
               <span class="input-group-text">Output {{ i + 1 }}</span>
               <input
@@ -113,15 +120,12 @@
               />
             </div>
           </div>
-          <div class="col-6">
-            <div class="input-group">
-              <span class="input-group-text">Type</span>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="param.type"
-              />
-            </div>
+          <div class="col-12 col-md-6">
+            <scl-selector
+              label="Type"
+              [(model)]="param.type"
+              [choices]="paramTypes"
+            ></scl-selector>
           </div>
         </div>
 

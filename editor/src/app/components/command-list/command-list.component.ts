@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, Inject, OnDestroy } from '@angular/core';
-import { ReplaySubject, Subject, timer } from 'rxjs';
-import { debounce, filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { combineLatest, ReplaySubject, Subject, timer } from 'rxjs';
+import { debounce, filter, map, takeUntil } from 'rxjs/operators';
 import { omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
@@ -43,22 +43,22 @@ export class CommandListComponent implements OnInit, OnDestroy {
     extension: string;
   }>(1);
 
-  displayOpcodeInfo$ = this.extensions$
+  displayOpcodeInfo$ = combineLatest([this.extensions$, this.route.data])
     .pipe(
       takeUntil(this.onDestroy$),
-      switchMap((extensions) =>
-        this.displayOpcodeInfoOnDemand$.pipe(
-          map(({ opcode, extension }) => {
-            return extensions
-              .find((e) => e.name === extension)
-              ?.commands.find((command) => command.id === opcode);
-          }),
-          filter<Command>(Boolean)
-        )
+      filter(([extensions, { data }]) => !!data.opcode && !!data.extension),
+      map(([extensions, { data }]) =>
+        extensions
+          .find((e) => e.name === data.extension)
+          ?.commands.find((command) => command.id === data.opcode)
       )
     )
     .subscribe((command) => {
-      this.commandInfo.open(command);
+      if (command) {
+        this.commandInfo.open(command);
+      } else {
+        this.commandInfo.close();
+      }
     });
 
   searchOptions = {
@@ -98,9 +98,6 @@ export class CommandListComponent implements OnInit, OnDestroy {
       this.game = data.game;
       this.facade.loadExtensions(this.game);
     }
-    if (data.opcode && data.extension) {
-      this.displayInfo(data.opcode, data.extension);
-    }
   }
 
   ngOnDestroy() {
@@ -132,7 +129,7 @@ export class CommandListComponent implements OnInit, OnDestroy {
     return this.facade.getExtensionCheckedState(extension);
   }
 
-  displayInfo(opcode: string, extension: string) {
-    this.displayOpcodeInfoOnDemand$.next({ opcode, extension });
+  displayInfo(command: Command) {
+    this.commandInfo.open(command);
   }
 }

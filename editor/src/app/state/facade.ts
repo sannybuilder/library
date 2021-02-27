@@ -20,6 +20,7 @@ import {
   searchTermSelector,
   displaySearchBarSelector,
   displayLastUpdatedSelector,
+  entitiesSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -36,6 +37,9 @@ export class StateFacade {
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selectedExtensionsSelector, { extension });
+  }
+  getExtensionEntities(extension: string) {
+    return this.store$.select(entitiesSelector, { extension });
   }
 
   constructor(private store$: Store) {}

@@ -28,13 +28,7 @@ export class CommandEditorComponent implements AfterViewInit {
   private _oldExtension: string;
   private _newExtension: string;
   extensions: string[];
-  paramTypes: ParamType[] = [
-    ParamType.int,
-    ParamType.float,
-    ParamType.any,
-    ParamType.arguments,
-    ParamType.label,
-  ];
+  paramTypes: ParamType[] = [];
 
   set command(value: Command) {
     this._command = JSON.parse(JSON.stringify(value));
@@ -69,6 +63,15 @@ export class CommandEditorComponent implements AfterViewInit {
     'is_destructor',
     'is_static',
     'is_overload',
+    'is_variadic',
+  ];
+  readonly primitiveTypes = [
+    ParamType.int,
+    ParamType.float,
+    ParamType.any,
+    ParamType.arguments,
+    ParamType.label,
+    ParamType.string,
   ];
 
   private handle: Modal;
@@ -80,12 +83,15 @@ export class CommandEditorComponent implements AfterViewInit {
   public open(
     command: Command,
     extension: string,
-    availableExtensions: string[]
+    availableExtensions: string[],
+    entities: ParamType[]
   ) {
     this.command = command;
     this._oldExtension = extension;
     this.extension = extension;
     this.extensions = availableExtensions;
+    const paramTypes = new Set([...this.primitiveTypes, ...entities]);
+    this.paramTypes = [...paramTypes];
     if (this.selector) {
       this.selector.freeInput = '';
     }

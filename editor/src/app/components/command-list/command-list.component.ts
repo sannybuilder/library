@@ -1,10 +1,10 @@
 import { Component, ViewChild, OnInit, Inject, OnDestroy } from '@angular/core';
 import { combineLatest, ReplaySubject, Subject, timer } from 'rxjs';
-import { debounce, filter, map, takeUntil } from 'rxjs/operators';
+import { debounce, filter, map, take, takeUntil, tap } from 'rxjs/operators';
 import { omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
-import { Command, Game } from '../../models';
+import { Command, Game, ParamType } from '../../models';
 import { StateFacade } from '../../state/facade';
 import {
   CommandEditorComponent,
@@ -106,9 +106,19 @@ export class CommandListComponent implements OnInit, OnDestroy {
     this.facade.toggleCommandListElements(false);
   }
 
-  edit(command: Command, extension: string, availableExtensions: string[]) {
+  edit(command: Command, extension: string) {
     this.facade.editCommand(command);
-    this.commandEditor.open(command, extension, availableExtensions);
+    combineLatest([this.extensionNames$, this.getExtensionEntities(extension)])
+      .pipe(take(1))
+      .subscribe(([availableExtensions, entities]) => {
+        this.commandEditor.open(
+          command,
+          extension,
+          availableExtensions,
+          entities as ParamType[]
+        );
+      });
+
     return false;
   }
 
@@ -131,5 +141,9 @@ export class CommandListComponent implements OnInit, OnDestroy {
 
   displayInfo(command: Command) {
     this.commandInfo.open(command);
+  }
+
+  getExtensionEntities(extension: string) {
+    return this.facade.getExtensionEntities(extension);
   }
 }

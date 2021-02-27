@@ -9,6 +9,7 @@ export interface Attr {
   is_destructor: boolean;
   is_static: boolean;
   is_overload: boolean;
+  is_variadic: boolean;
 }
 
 export enum ParamType {
@@ -17,6 +18,7 @@ export enum ParamType {
   arguments = 'arguments',
   int = 'int',
   float = 'float',
+  string = 'string',
 }
 
 export interface Param {

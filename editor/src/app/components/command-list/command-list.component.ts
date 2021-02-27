@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, Inject, OnDestroy } from '@angular/core';
-import { merge, Observable, Subject, timer } from 'rxjs';
-import { debounce, filter, map, takeUntil } from 'rxjs/operators';
+import { ReplaySubject, Subject, timer } from 'rxjs';
+import { debounce, filter, map, switchMap, takeUntil } from 'rxjs/operators';
 import { omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
@@ -10,7 +10,7 @@ import {
   CommandEditorComponent,
   SaveEvent,
 } from '../command-editor/command-editor.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CommandInfoComponent } from '../command-info/command-info.component';
 
 @Component({
@@ -37,34 +37,26 @@ export class CommandListComponent implements OnInit, OnDestroy {
   exactSearch: boolean = false;
   title: string;
   game: Game;
-  displayOpcode?: string;
-  displayExtension?: string;
 
-  displayOpcodeInfoOnStart$: Observable<Command> = this.extensions$.pipe(
-    filter(
-      (extensions) =>
-        !!extensions && !!this.displayOpcode && !!this.displayExtension
-    ),
-    map((extensions) => {
-      const extension = extensions.find(
-        (e) => e.name === this.displayExtension
-      );
-      if (extension) {
-        return extension.commands.find(
-          (command) => command.id === this.displayOpcode
-        );
-      }
-    }),
-    filter<Command>(Boolean)
-  );
+  displayOpcodeInfoOnDemand$ = new ReplaySubject<{
+    opcode: string;
+    extension: string;
+  }>(1);
 
-  displayOpcodeInfoOnDemand$ = new Subject<Command>();
-
-  displayOpcodeInfo$ = merge(
-    this.displayOpcodeInfoOnStart$,
-    this.displayOpcodeInfoOnDemand$
-  )
-    .pipe(takeUntil(this.onDestroy$))
+  displayOpcodeInfo$ = this.extensions$
+    .pipe(
+      takeUntil(this.onDestroy$),
+      switchMap((extensions) =>
+        this.displayOpcodeInfoOnDemand$.pipe(
+          map(({ opcode, extension }) => {
+            return extensions
+              .find((e) => e.name === extension)
+              ?.commands.find((command) => command.id === opcode);
+          }),
+          filter<Command>(Boolean)
+        )
+      )
+    )
     .subscribe((command) => {
       this.commandInfo.open(command);
     });
@@ -81,20 +73,34 @@ export class CommandListComponent implements OnInit, OnDestroy {
   constructor(
     public facade: StateFacade,
     @Inject(CONFIG) public config: Config,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private _router: Router
   ) {}
 
   ngOnInit() {
-    this.route.data.pipe(takeUntil(this.onDestroy$)).subscribe(({ data }) => {
-      this.displayOpcode = data.opcode;
-      this.displayExtension = data.extension;
-      this.title = data.title;
-      if (data.game !== this.game) {
-        this.game = data.game;
-        this.facade.loadExtensions(this.game);
-      }
-    });
+    this._router.events
+      .pipe(
+        filter((x) => x instanceof NavigationEnd),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe(() => {
+        this.onRouteChange();
+      });
+
+    this.onRouteChange();
     this.facade.toggleCommandListElements(true);
+  }
+
+  onRouteChange() {
+    const { data } = this.route.snapshot.data;
+    this.title = data.title;
+    if (data.game !== this.game) {
+      this.game = data.game;
+      this.facade.loadExtensions(this.game);
+    }
+    if (data.opcode && data.extension) {
+      this.displayInfo(data.opcode, data.extension);
+    }
   }
 
   ngOnDestroy() {
@@ -126,7 +132,7 @@ export class CommandListComponent implements OnInit, OnDestroy {
     return this.facade.getExtensionCheckedState(extension);
   }
 
-  displayInfo(command: Command) {
-    this.displayOpcodeInfoOnDemand$.next(command);
+  displayInfo(opcode: string, extension: string) {
+    this.displayOpcodeInfoOnDemand$.next({ opcode, extension });
   }
 }

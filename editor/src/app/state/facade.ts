@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { filter } from 'rxjs/operators';
 import { Command, Extension, Game } from '../models';
 import {
   editCommand,
@@ -23,7 +24,9 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class StateFacade {
-  extensions$ = this.store$.select(extensionsSelector);
+  extensions$ = this.store$
+    .select(extensionsSelector)
+    .pipe(filter<Extension[]>(Boolean));
   editCommand$ = this.store$.select(editCommandSelector);
   loading$ = this.store$.select(loadingSelector);
   lastUpdate$ = this.store$.select(lastUpdateSelector);

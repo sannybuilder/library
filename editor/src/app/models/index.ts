@@ -21,6 +21,20 @@ export enum ParamType {
   string = 'string',
 }
 
+export const CommandAttributes = [
+  'is_branch',
+  'is_segment',
+  'is_keyword',
+  'is_condition',
+  'is_nop',
+  'is_unsupported',
+  'is_constructor',
+  'is_destructor',
+  'is_static',
+  'is_overload',
+  'is_variadic',
+];
+
 export interface Param {
   type: ParamType;
   name: String;

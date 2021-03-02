@@ -4,7 +4,7 @@ import { debounce, filter, map, take, takeUntil, tap } from 'rxjs/operators';
 import { omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
-import { Command, Game, ParamType } from '../../models';
+import { Command, CommandAttributes, Game, ParamType } from '../../models';
 import { StateFacade } from '../../state/facade';
 import {
   CommandEditorComponent,
@@ -30,6 +30,7 @@ export class CommandListComponent implements OnInit, OnDestroy {
   );
   editCommand$ = this.facade.editCommand$;
   loading$ = this.facade.loading$;
+  selectedFilters$ = this.facade.selectedFilters$;
 
   searchTerms: string;
   searchTerm$ = this.facade.searchTerm$;
@@ -37,6 +38,7 @@ export class CommandListComponent implements OnInit, OnDestroy {
   exactSearch: boolean = false;
   title: string;
   game: Game;
+  filters = CommandAttributes;
 
   displayOpcodeInfoOnDemand$ = new ReplaySubject<{
     opcode: string;
@@ -137,6 +139,14 @@ export class CommandListComponent implements OnInit, OnDestroy {
 
   isExtensionChecked(extension: string) {
     return this.facade.getExtensionCheckedState(extension);
+  }
+
+  toggleFilter(filter: string) {
+    this.facade.toggleFilter(filter);
+  }
+
+  isFilterChecked(filter: string) {
+    return this.facade.getFilterCheckedState(filter);
   }
 
   displayInfo(command: Command) {

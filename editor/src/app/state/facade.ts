@@ -10,6 +10,7 @@ import {
   toggleExtension,
   updateSearchTerm,
   toggleCommandListElements,
+  toggleFilter,
 } from './actions';
 import {
   extensionsSelector,
@@ -21,6 +22,8 @@ import {
   displaySearchBarSelector,
   displayLastUpdatedSelector,
   entitiesSelector,
+  selectedFiltersSelector,
+  isFilterSelectedSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -34,10 +37,16 @@ export class StateFacade {
   searchTerm$ = this.store$.select(searchTermSelector);
   displaySearchBar$ = this.store$.select(displaySearchBarSelector);
   displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
+  selectedFilters$ = this.store$.select(selectedFiltersSelector);
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selectedExtensionsSelector, { extension });
   }
+
+  getFilterCheckedState(filter: string) {
+    return this.store$.select(isFilterSelectedSelector, { filter });
+  }
+
   getExtensionEntities(extension: string) {
     return this.store$.select(entitiesSelector, { extension });
   }
@@ -74,6 +83,10 @@ export class StateFacade {
 
   toggleExtension(extension: string) {
     this.store$.dispatch(toggleExtension({ extension }));
+  }
+
+  toggleFilter(filter: string) {
+    this.store$.dispatch(toggleFilter({ filter }));
   }
 
   updateSearch(term: string) {

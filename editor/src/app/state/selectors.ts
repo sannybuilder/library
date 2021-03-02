@@ -35,6 +35,17 @@ export const selectedExtensionsSelector = createSelector(
     state.selectedExtensions.includes(props.extension)
 );
 
+export const selectedFiltersSelector = createSelector(
+  root,
+  (state: State) => state.selectedFilters
+);
+
+export const isFilterSelectedSelector = createSelector(
+  selectedFiltersSelector,
+  (selectedFilters: string[], props: { filter: string }) =>
+    selectedFilters.includes(props.filter)
+);
+
 export const searchTermSelector = createSelector(
   root,
   (state: State) => state.searchTerm

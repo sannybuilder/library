@@ -6,8 +6,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Modal } from 'bootstrap';
-import { opcodify } from '../../pipes/opcodify';
-import { Command, ParamType } from '../../models';
+import { opcodify } from '../../pipes';
+import { Command, CommandAttributes, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 
 export interface SaveEvent {
@@ -52,19 +52,7 @@ export class CommandEditorComponent implements AfterViewInit {
 
   @Output() save: EventEmitter<SaveEvent> = new EventEmitter();
 
-  readonly attrs = [
-    'is_branch',
-    'is_segment',
-    'is_keyword',
-    'is_condition',
-    'is_nop',
-    'is_unsupported',
-    'is_constructor',
-    'is_destructor',
-    'is_static',
-    'is_overload',
-    'is_variadic',
-  ];
+  readonly attrs = CommandAttributes;
   readonly primitiveTypes = [
     ParamType.int,
     ParamType.float,

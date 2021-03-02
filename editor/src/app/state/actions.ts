@@ -42,6 +42,11 @@ export const toggleExtension = createAction(
   props<{ extension: string }>()
 );
 
+export const toggleFilter = createAction(
+  'toggle filter selection',
+  props<{ filter: string }>()
+);
+
 export const updateSearchTerm = createAction(
   'update search term',
   props<{ term: string }>()

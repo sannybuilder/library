@@ -7,6 +7,7 @@ import {
   loadExtensionsSuccess,
   toggleCommandListElements,
   toggleExtension,
+  toggleFilter,
   updateCommand,
   updateExtensionsSuccess,
   updateSearchTerm,
@@ -23,12 +24,14 @@ export interface State {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
+  selectedFilters: string[];
 }
 
 export const initialState: State = {
   loading: false,
   displayLastUpdated: false,
   displaySearchBar: false,
+  selectedFilters: [],
 };
 
 const _reducer = createReducer(
@@ -117,6 +120,12 @@ const _reducer = createReducer(
       ? without(state.selectedExtensions, extension)
       : [...state.selectedExtensions, extension];
     return { ...state, selectedExtensions };
+  }),
+  on(toggleFilter, (state, { filter }) => {
+    const selectedFilters = state.selectedFilters.includes(filter)
+      ? without(state.selectedFilters, filter)
+      : [...state.selectedFilters, filter];
+    return { ...state, selectedFilters };
   }),
   on(updateSearchTerm, (state, { term: searchTerm }) => ({
     ...state,

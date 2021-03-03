@@ -1,50 +1,84 @@
 use collections::HashMap;
 use convert_case::{Case, Casing};
+use serde::{Deserialize, Serialize};
+use serde_json::Result;
 use std::{collections, fs};
 
-static COL_OP: usize = 1;
-static COL_NATIVE: usize = 2;
-static COL_CLASS: usize = 3;
-static COL_NOTES: usize = 4;
-static COL_INPUT: usize = 5;
-static COL_OUTPUT: usize = 6;
+#[derive(Serialize, Deserialize, Debug)]
+struct Attr {
+    is_branch: Option<bool>,
+    is_segment: Option<bool>,
+    is_keyword: Option<bool>,
+    is_condition: Option<bool>,
+    is_nop: Option<bool>,
+    is_unsupported: Option<bool>,
+    is_constructor: Option<bool>,
+    is_destructor: Option<bool>,
+    is_static: Option<bool>,
+    is_overload: Option<bool>,
+    is_variadic: Option<bool>,
+}
 
-fn main() {
+#[derive(Serialize, Deserialize, Debug)]
+struct Param {
+    r#type: String,
+    r#name: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Command {
+    id: String,
+    name: String,
+    attrs: Attr,
+    num_params: i32,
+    input: Vec<Param>,
+    output: Vec<Param>,
+    class: Option<String>,
+    member: Option<String>,
+    short_desc: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Extension {
+    name: String,
+    commands: Vec<Command>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Meta {
+    last_update: u64,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Library {
+    meta: Meta,
+    extensions: Vec<Extension>,
+}
+
+fn main() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
     let input_file = args
         .get(1)
         .unwrap_or_else(|| panic!("Provide input file name"));
 
     let content = fs::read_to_string(input_file).unwrap();
+    let library = serde_json::from_str::<Library>(content.as_str())?;
+
+    let commands = library
+        .extensions
+        .iter()
+        .flat_map(|ext| ext.commands.iter())
+        .collect::<Vec<_>>();
 
     let mut classes_list: HashMap<String, HashMap<String, String>> = HashMap::new();
 
-    for line in content.lines().skip(2) {
-        let columns: Vec<&str> = line.split('|').collect();
-
-        let notes = columns.get(COL_NOTES).unwrap();
-
-        if notes.contains("not-a-class")
-            || notes.contains("keyword")
-            || notes.contains("nop") | notes.contains("unsupported")
-        {
+    for command in commands {
+        if !command.class.is_some() || !command.member.is_some() {
             continue;
         }
 
-        let native = columns.get(COL_NATIVE).unwrap();
-        let class = columns.get(COL_CLASS).unwrap();
-        let opcode = columns.get(COL_OP).unwrap();
-
-        let class_name = class
-            .split('.')
-            .nth(0)
-            .unwrap_or_else(|| panic!("{}", class))
-            .to_case(Case::Pascal);
-        let class_member = class
-            .split('.')
-            .nth(1)
-            .unwrap_or_else(|| panic!("{}", class))
-            .to_case(Case::Pascal);
+        let class_name = command.class.as_ref().unwrap().to_case(Case::Pascal);
+        let class_member = command.member.as_ref().unwrap().to_case(Case::Pascal);
 
         if !classes_list.contains_key(&class_name) {
             classes_list.insert(class_name.clone(), HashMap::new());
@@ -52,31 +86,34 @@ fn main() {
 
         let map = classes_list.get_mut(&class_name).unwrap();
 
-        let is_condition = if notes.contains("condition") { 1 } else { 0 };
+        let is_condition = if command.attrs.is_condition.is_some() {
+            1
+        } else {
+            0
+        };
 
-        let input = columns.get(COL_INPUT).unwrap();
-        let params: Vec<String> = input
-            .split(',')
-            .enumerate()
-            .map(|(i, p)| {
-                let p = p.trim();
-                if p.len() == 0 {
+        let params: Vec<String> = command
+            .input
+            .iter()
+            .map(|p| {
+                if p.name.len() == 0 {
                     String::from("")
                 } else {
-                    let _type = match p.to_ascii_lowercase().as_str() {
+                    let _type = match p.r#type.to_ascii_lowercase().as_str() {
                         "float" => String::from("%f"),
                         "int" => String::from("%i"),
                         "string" => String::from("%s"),
                         "bool" | "boolean" => String::from("%b"),
-                        _ => format!(": {}", p),
+                        _ => format!(": {}", p.r#type),
                     };
-                    format!("\"_p{}{}\"", i + 1, _type)
+                    format!("\"{}{}\"", p.name, _type)
                 }
             })
             .collect();
+
         let description = format!(
             "{},{},{},({})",
-            opcode.trim(),
+            command.id.trim(),
             is_condition,
             0,
             params.join(" ")
@@ -113,4 +150,6 @@ fn main() {
     }
 
     println!("#EOF");
+
+    Ok(())
 }

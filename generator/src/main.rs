@@ -95,6 +95,7 @@ fn main() -> Result<()> {
         let params: Vec<String> = command
             .input
             .iter()
+            .chain(command.output.iter())
             .map(|p| {
                 if p.name.len() == 0 {
                     String::from("")

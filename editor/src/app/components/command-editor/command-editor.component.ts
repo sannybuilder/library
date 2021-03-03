@@ -66,7 +66,10 @@ export class CommandEditorComponent implements AfterViewInit {
   private handle: Modal;
 
   ngAfterViewInit(): void {
-    this.handle = new Modal(document.getElementById('modal'), {});
+    this.handle = new Modal(document.getElementById('modal'), {
+      backdrop: 'static',
+      keyboard: true,
+    });
   }
 
   public open(

@@ -12,7 +12,10 @@ export class CommandInfoComponent implements AfterViewInit, OnDestroy {
   command: Command;
 
   ngAfterViewInit(): void {
-    this._handle = new Modal(document.getElementById('modal-info'), {});
+    this._handle = new Modal(document.getElementById('modal-info'), {
+      backdrop: 'static',
+      keyboard: true,
+    });
   }
 
   close() {

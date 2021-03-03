@@ -120,8 +120,17 @@
             <div class="row" *ngIf="command.class && command.member">
               <div class="col-12">
                 <code
-                  >{{ command.class }}.{{ command.member
-                  }}{{ command | params }}</code
+                  ><span
+                    [innerHTML]="
+                      command[searchOptions.fusejsHighlightKey].class
+                    "
+                    >{{ command.class }}</span
+                  >.<span
+                    [innerHTML]="
+                      command[searchOptions.fusejsHighlightKey].member
+                    "
+                    >{{ command.member }}</span
+                  >{{ command | params }}</code
                 >
               </div>
             </div>

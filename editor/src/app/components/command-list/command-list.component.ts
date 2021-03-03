@@ -64,7 +64,7 @@ export class CommandListComponent implements OnInit, OnDestroy {
     });
 
   searchOptions = {
-    keys: ['name', 'short_desc', 'id'],
+    keys: ['name', 'short_desc', 'id', 'class', 'member'],
     threshold: 0.3,
     ignoreLocation: true,
     minMatchCharLength: 3,

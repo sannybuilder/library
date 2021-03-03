@@ -13,8 +13,16 @@ export class SelectorComponent {
   freeInput: string;
 
   @Output() modelChange: EventEmitter<string> = new EventEmitter();
+  @Output() keydown: EventEmitter<string> = new EventEmitter();
 
   update(value: string) {
     this.modelChange.emit(value);
+  }
+
+  onkeydown(event: KeyboardEvent) {
+    const { key } = event;
+    if (key) {
+      this.keydown.emit(key.toLowerCase());
+    }
   }
 }

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Modal } from 'bootstrap';
 import { opcodify } from '../../pipes';
-import { Command, CommandAttributes, ParamType } from '../../models';
+import { Command, CommandAttributes, Param, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 
 export interface SaveEvent {
@@ -126,5 +126,28 @@ export class CommandEditorComponent implements AfterViewInit {
 
   opcodify(command: Command) {
     command.id = opcodify(command.id);
+  }
+
+  onTypeKeyDown(key: string, param: Param) {
+    switch (key) {
+      case 'i':
+        param.type = ParamType.int;
+        break;
+      case 'f':
+        param.type = ParamType.float;
+        break;
+      case 's':
+        param.type = ParamType.string;
+        break;
+      case 'a':
+        param.type = ParamType.arguments;
+        break;
+      case 'b':
+        param.type = ParamType.boolean;
+        break;
+      case 'l':
+        param.type = ParamType.label;
+        break;
+    }
   }
 }

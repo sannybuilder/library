@@ -54,10 +54,11 @@ export class CommandEditorComponent implements AfterViewInit {
 
   readonly attrs = CommandAttributes;
   readonly primitiveTypes = [
-    ParamType.int,
-    ParamType.float,
     ParamType.any,
     ParamType.arguments,
+    ParamType.boolean,
+    ParamType.float,
+    ParamType.int,
     ParamType.label,
     ParamType.string,
   ];

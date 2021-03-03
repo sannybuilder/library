@@ -14,10 +14,11 @@ export interface Attr {
 
 export enum ParamType {
   any = 'any',
-  label = 'label',
   arguments = 'arguments',
-  int = 'int',
+  boolean = 'bool',
   float = 'float',
+  int = 'int',
+  label = 'label',
   string = 'string',
 }
 

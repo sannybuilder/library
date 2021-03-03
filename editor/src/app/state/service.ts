@@ -44,17 +44,7 @@ export class CommandsService {
     data: Extension[]
   ): Observable<{ lastUpdate: number }> {
     return this.http
-      .post<UpdateCommandsResponse>(
-        this.getEndpoint(game),
-        data.map((e) => ({
-          ...e,
-          commands: e.commands.map((c) => ({
-            ...c,
-            id: c.id,
-            attrs: pickBy(c.attrs, (x) => x),
-          })),
-        }))
-      )
+      .post<UpdateCommandsResponse>(this.getEndpoint(game), data)
       .pipe(map(({ last_update: lastUpdate }) => ({ lastUpdate })));
   }
 

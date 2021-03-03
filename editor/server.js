@@ -3,10 +3,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = 3000;
+const pickBy = require("lodash/pickBy");
 
 const fs = require("fs");
-const COMMANDS_FILE = "data/gta3.json";
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
@@ -18,7 +17,19 @@ app.post("/commands/:game", (req, res) => {
       meta: {
         last_update: lastUpdate,
       },
-      extensions: req.body,
+      extensions: req.body.map((e) => ({
+        ...e,
+        commands: e.commands.map((c) =>
+          pickBy(
+            {
+              ...c,
+              id: c.id,
+              attrs: pickBy(c.attrs, (x) => x),
+            },
+            (x) => x !== null && (!Array.isArray(x) || x.length > 0)
+          )
+        ),
+      })),
     };
     const file = getCommandsFile(req.params.game);
     fs.writeFileSync(file, JSON.stringify(newContent, null, 2));

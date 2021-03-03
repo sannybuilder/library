@@ -31,8 +31,8 @@ struct Command {
     name: String,
     attrs: Attr,
     num_params: i32,
-    input: Vec<Param>,
-    output: Vec<Param>,
+    input: Option<Vec<Param>>,
+    output: Option<Vec<Param>>,
     class: Option<String>,
     member: Option<String>,
     short_desc: String,
@@ -94,8 +94,10 @@ fn main() -> Result<()> {
 
         let params: Vec<String> = command
             .input
+            .as_ref()
+            .unwrap_or(&Vec::new())
             .iter()
-            .chain(command.output.iter())
+            .chain(command.output.as_ref().unwrap_or(&Vec::new()).iter())
             .map(|p| {
                 if p.name.len() == 0 {
                     String::from("")

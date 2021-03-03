@@ -35,7 +35,7 @@ struct Command {
     output: Option<Vec<Param>>,
     class: Option<String>,
     member: Option<String>,
-    short_desc: String,
+    short_desc: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

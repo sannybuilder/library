@@ -17,19 +17,7 @@ app.post("/commands/:game", (req, res) => {
       meta: {
         last_update: lastUpdate,
       },
-      extensions: req.body.map((e) => ({
-        ...e,
-        commands: e.commands.map((c) =>
-          pickBy(
-            {
-              ...c,
-              id: c.id,
-              attrs: pickBy(c.attrs, (x) => x),
-            },
-            (x) => x !== null && (!Array.isArray(x) || x.length > 0)
-          )
-        ),
-      })),
+      extensions: stripBody(req.body),
     };
     const file = getCommandsFile(req.params.game);
     fs.writeFileSync(file, JSON.stringify(newContent, null, 2));
@@ -58,4 +46,23 @@ function getCommandsFile(game) {
       return "data/vc-scl.json";
   }
   throw new Error(`unknown game: ${game}`);
+}
+
+function stripBody(body) {
+  return body.map((e) => ({
+    ...e,
+    commands: e.commands.map((c) =>
+      pickBy(
+        {
+          ...c,
+          id: c.id,
+          attrs: pickBy(c.attrs, (x) => x),
+          class: c.attrs.is_unsupported ? null : c.class,
+          member: c.attrs.is_unsupported ? null : c.member,
+          short_desc: c.attrs.is_unsupported ? null : c.short_desc,
+        },
+        (x) => x !== null && (!Array.isArray(x) || x.length > 0)
+      )
+    ),
+  }));
 }

@@ -17,6 +17,13 @@ jobs:
         with:
           node-version: "12"
 
+      - uses: icepuma/rust-action@master
+        with:
+          args: |
+            cd generator
+            cargo run ../editor/data/gta3-scl.json > ../editor/data/gta3_classes.db
+            cargo run ../editor/data/vc-scl.json > ../editor/data/vc_classes.db
+
       - name: Build gh-pages
         run: |
           cd editor

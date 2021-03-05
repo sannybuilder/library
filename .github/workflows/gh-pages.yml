@@ -3,7 +3,7 @@ name: gh-pages
 on:
   push:
     branches:
-      - master
+      - rs
 
 jobs:
   build-and-deploy:
@@ -17,12 +17,19 @@ jobs:
         with:
           node-version: "12"
 
+      - uses: icepuma/rust-action@master
+        with:
+          args: |
+            cd generator
+            cargo run ../editor/data/gta3-scl.json > ../editor/data/gta3_classes.db
+            cargo run ../editor/data/vc-scl.json > ../editor/data/vc_classes.db
+
       - name: Build gh-pages
         run: |
           cd editor
           npm install
           npm run build
-          cp data dist/editor -r
+          cp data/* dist/editor/assets
           cp src/404.html dist/editor
           echo "library.sannybuilder.com" > dist/editor/CNAME
 

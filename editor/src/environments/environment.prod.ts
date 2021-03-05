@@ -9,8 +9,8 @@ export const environment: Config = {
   },
   endpoints: {
     commands: {
-      [Game.GTA3]: 'data/gta3-scl.json',
-      [Game.VC]: 'data/vc-scl.json',
+      [Game.GTA3]: 'assets/gta3-scl.json',
+      [Game.VC]: 'assets/vc-scl.json',
     },
   },
 };

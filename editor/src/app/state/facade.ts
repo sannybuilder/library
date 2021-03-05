@@ -24,6 +24,8 @@ import {
   entitiesSelector,
   selectedFiltersSelector,
   isFilterSelectedSelector,
+  displayDownloadPanelSelector,
+  gameSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -37,7 +39,9 @@ export class StateFacade {
   searchTerm$ = this.store$.select(searchTermSelector);
   displaySearchBar$ = this.store$.select(displaySearchBarSelector);
   displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
+  displayDownloadPanel$ = this.store$.select(displayDownloadPanelSelector);
   selectedFilters$ = this.store$.select(selectedFiltersSelector);
+  game$ = this.store$.select(gameSelector);
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selectedExtensionsSelector, { extension });

@@ -1,0 +1,30 @@
+<div
+  class="card mb-3"
+  *ngIf="(displayDownloadPanel$ | async) && (game$ | async) as game"
+>
+  <div class="card-body">
+    <div class="d-flex mb-auto flex-lg-column flex-row align-items-center">
+      <div class="h5 mb-0 d-flex align-items-center">
+        <img
+          class="d-none d-sm-inline-block"
+          [src]="getGameIcon(game)"
+          width="24"
+          height="24"
+        />
+        <div class="ml-2">Download</div>
+      </div>
+      <hr class="d-none d-lg-block" />
+      <ul class="nav flex-lg-column flex-row navbar-dark">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [href]="getClasses(game)"
+            download="classes.db"
+            target="_blank"
+            >classes.db</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

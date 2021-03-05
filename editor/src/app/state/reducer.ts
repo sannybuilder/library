@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Extension } from '../models';
+import { Command, Extension, Game } from '../models';
 import {
   editCommand,
   loadExtensions,
@@ -24,19 +24,22 @@ export interface State {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
+  displayDownloadPanel: boolean;
   selectedFilters: string[];
+  game?: Game;
 }
 
 export const initialState: State = {
   loading: false,
   displayLastUpdated: false,
   displaySearchBar: false,
+  displayDownloadPanel: false,
   selectedFilters: [],
 };
 
 const _reducer = createReducer(
   initialState,
-  on(loadExtensions, (state) => ({ ...state, loading: true })),
+  on(loadExtensions, (state, { game }) => ({ ...state, game, loading: true })),
   on(loadExtensionsSuccess, (state, { extensions, lastUpdate }) => ({
     ...state,
     loading: false,
@@ -135,6 +138,7 @@ const _reducer = createReducer(
     ...state,
     displaySearchBar: flag,
     displayLastUpdated: flag,
+    displayDownloadPanel: flag,
   }))
 );
 

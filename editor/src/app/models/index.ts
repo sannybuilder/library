@@ -63,4 +63,14 @@ export enum Game {
   VC = 'vc',
 }
 
+export const GameIcon: Record<Game, string> = {
+  [Game.GTA3]: 'assets/gta3.png',
+  [Game.VC]: 'assets/vc.png',
+};
+
+export const GameClasses: Record<Game, string> = {
+  [Game.GTA3]: 'assets/gta3_classes.db',
+  [Game.VC]: 'assets/vc_classes.db',
+};
+
 export const DEFAULT_EXTENSION = 'default';

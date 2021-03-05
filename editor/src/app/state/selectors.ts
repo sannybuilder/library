@@ -61,6 +61,13 @@ export const displayLastUpdatedSelector = createSelector(
   (state: State) => state.displayLastUpdated
 );
 
+export const displayDownloadPanelSelector = createSelector(
+  root,
+  (state: State) => state.displayDownloadPanel
+);
+
+export const gameSelector = createSelector(root, (state: State) => state.game);
+
 export const entitiesSelector = createSelector(
   extensionsSelector,
   (extensions: Extension[], props: { extension: string }) => {

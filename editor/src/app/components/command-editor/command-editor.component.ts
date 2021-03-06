@@ -9,6 +9,7 @@ import { Modal } from 'bootstrap';
 import { opcodify } from '../../pipes';
 import { Command, CommandAttributes, Param, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
+import { StateFacade } from '../../state/facade';
 
 export interface SaveEvent {
   command: Command;
@@ -24,10 +25,11 @@ export interface SaveEvent {
 export class CommandEditorComponent implements AfterViewInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
+  extensionNames$ = this.facade.extensionNames$;
+
   private _command: Command;
   private _oldExtension: string;
   private _newExtension: string;
-  extensions: string[];
   paramTypes: ParamType[] = [];
 
   set command(value: Command) {
@@ -65,6 +67,8 @@ export class CommandEditorComponent implements AfterViewInit {
 
   private handle: Modal;
 
+  constructor(public facade: StateFacade) {}
+
   ngAfterViewInit(): void {
     this.handle = new Modal(document.getElementById('modal'), {
       backdrop: 'static',
@@ -72,16 +76,10 @@ export class CommandEditorComponent implements AfterViewInit {
     });
   }
 
-  public open(
-    command: Command,
-    extension: string,
-    availableExtensions: string[],
-    entities: ParamType[]
-  ) {
+  public open(command: Command, extension: string, entities: ParamType[]) {
     this.command = command;
     this._oldExtension = extension;
     this.extension = extension;
-    this.extensions = availableExtensions;
     const paramTypes = new Set([...this.primitiveTypes, ...entities]);
     this.paramTypes = [...paramTypes];
     if (this.selector) {

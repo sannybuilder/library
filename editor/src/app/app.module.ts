@@ -24,6 +24,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { SelectorComponent } from './components/selector/selector.component';
 import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
+import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
+import { LibraryPageComponent } from './components/library-page/library-page.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { DownloadPanelComponent } from './components/download-panel/download-pan
     FooterComponent,
     SelectorComponent,
     DownloadPanelComponent,
+    FilterPanelComponent,
+    LibraryPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,7 @@ import { DownloadPanelComponent } from './components/download-panel/download-pan
           resolve: {
             data: RouteResolver,
           },
-          component: CommandListComponent,
+          component: LibraryPageComponent,
         },
       ],
       { useHash: false }

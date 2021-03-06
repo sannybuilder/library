@@ -24,7 +24,6 @@ export interface State {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
-  displayDownloadPanel: boolean;
   selectedFilters: string[];
   game?: Game;
 }
@@ -33,7 +32,6 @@ export const initialState: State = {
   loading: false,
   displayLastUpdated: false,
   displaySearchBar: false,
-  displayDownloadPanel: false,
   selectedFilters: [],
 };
 
@@ -138,7 +136,6 @@ const _reducer = createReducer(
     ...state,
     displaySearchBar: flag,
     displayLastUpdated: flag,
-    displayDownloadPanel: flag,
   }))
 );
 

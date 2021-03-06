@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Command, Extension, Game } from '../models';
 import {
   editCommand,
@@ -24,7 +24,6 @@ import {
   entitiesSelector,
   selectedFiltersSelector,
   isFilterSelectedSelector,
-  displayDownloadPanelSelector,
   gameSelector,
 } from './selectors';
 
@@ -33,13 +32,16 @@ export class StateFacade {
   extensions$ = this.store$
     .select(extensionsSelector)
     .pipe(filter<Extension[]>(Boolean));
+
+  extensionNames$ = this.extensions$.pipe(
+    map((extensions) => extensions.map((e) => e.name))
+  );
   editCommand$ = this.store$.select(editCommandSelector);
   loading$ = this.store$.select(loadingSelector);
   lastUpdate$ = this.store$.select(lastUpdateSelector);
   searchTerm$ = this.store$.select(searchTermSelector);
   displaySearchBar$ = this.store$.select(displaySearchBarSelector);
   displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
-  displayDownloadPanel$ = this.store$.select(displayDownloadPanelSelector);
   selectedFilters$ = this.store$.select(selectedFiltersSelector);
   game$ = this.store$.select(gameSelector);
 

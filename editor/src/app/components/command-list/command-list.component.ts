@@ -21,30 +21,21 @@ import { CommandInfoComponent } from '../command-info/command-info.component';
 export class CommandListComponent implements OnInit, OnDestroy {
   @ViewChild(CommandEditorComponent) commandEditor: CommandEditorComponent;
   @ViewChild(CommandInfoComponent) commandInfo: CommandInfoComponent;
-  rows: Command[] = [];
-  onDestroy$ = new Subject();
 
+  title: string;
+  game: Game;
+
+  onDestroy$ = new Subject();
   extensions$ = this.facade.extensions$;
-  extensionNames$ = this.extensions$.pipe(
-    map((extensions) => extensions.map((e) => e.name))
-  );
   editCommand$ = this.facade.editCommand$;
   loading$ = this.facade.loading$;
   selectedFilters$ = this.facade.selectedFilters$;
-
-  searchTerms: string;
   searchTerm$ = this.facade.searchTerm$;
   searchTermDebounce$ = this.searchTerm$.pipe(debounce(() => timer(500)));
-  exactSearch: boolean = false;
-  title: string;
-  game: Game;
-  filters = CommandAttributes;
-
   displayOpcodeInfoOnDemand$ = new ReplaySubject<{
     opcode: string;
     extension: string;
   }>(1);
-
   displayOpcodeInfo$ = combineLatest([this.extensions$, this.route.data])
     .pipe(
       takeUntil(this.onDestroy$),
@@ -110,15 +101,10 @@ export class CommandListComponent implements OnInit, OnDestroy {
 
   edit(command: Command, extension: string) {
     this.facade.editCommand(command);
-    combineLatest([this.extensionNames$, this.getExtensionEntities(extension)])
+    this.getExtensionEntities(extension)
       .pipe(take(1))
-      .subscribe(([availableExtensions, entities]) => {
-        this.commandEditor.open(
-          command,
-          extension,
-          availableExtensions,
-          entities as ParamType[]
-        );
+      .subscribe((entities) => {
+        this.commandEditor.open(command, extension, entities as ParamType[]);
       });
 
     return false;
@@ -133,27 +119,15 @@ export class CommandListComponent implements OnInit, OnDestroy {
     });
   }
 
-  toggleExtension(extenstion: string) {
-    this.facade.toggleExtension(extenstion);
-  }
-
   isExtensionChecked(extension: string) {
     return this.facade.getExtensionCheckedState(extension);
-  }
-
-  toggleFilter(filter: string) {
-    this.facade.toggleFilter(filter);
-  }
-
-  isFilterChecked(filter: string) {
-    return this.facade.getFilterCheckedState(filter);
   }
 
   displayInfo(command: Command) {
     this.commandInfo.open(command);
   }
 
-  getExtensionEntities(extension: string) {
+  private getExtensionEntities(extension: string) {
     return this.facade.getExtensionEntities(extension);
   }
 }

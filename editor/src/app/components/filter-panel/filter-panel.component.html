@@ -1,0 +1,42 @@
+<div class="card mb-3" *ngIf="extensionNames$ | async as extensionNames">
+  <div class="card-body flex-column">
+    <h5 class="mb-3">Filters</h5>
+
+    <div>
+      <p>Extensions:</p>
+    </div>
+    <div
+      class="form-check d-inline-block d-xl-block pr-2 mb-3"
+      *ngFor="let name of extensionNames"
+    >
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [ngModel]="isExtensionChecked(name) | async"
+        (ngModelChange)="toggleExtension(name)"
+        [id]="name"
+      />
+      <label class="form-check-label ml-2" [for]="name">
+        {{ name }}
+      </label>
+    </div>
+    <div>
+      <p>Attributes:</p>
+    </div>
+    <div
+      class="form-check d-inline-block d-xl-block pr-2"
+      *ngFor="let filter of filters"
+    >
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [ngModel]="isFilterChecked(filter) | async"
+        (ngModelChange)="toggleFilter(filter)"
+        [id]="filter"
+      />
+      <label class="form-check-label ml-2" [for]="filter">
+        {{ filter }}
+      </label>
+    </div>
+  </div>
+</div>

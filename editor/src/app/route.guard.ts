@@ -4,13 +4,13 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
-  Resolve,
 } from '@angular/router';
 import { DEFAULT_EXTENSION, Game } from './models';
+import { StateFacade } from './state/facade';
 
 @Injectable()
 export class RouteGuard implements CanActivate {
-  constructor(private _router: Router) {}
+  constructor(private _router: Router, private _facade: StateFacade) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const segments = getSegmentsFromUrl(this._router, state.url);
@@ -19,9 +19,13 @@ export class RouteGuard implements CanActivate {
       return this.goHome();
     }
 
-    const game = segments[0];
+    const game = getGame(segments.shift());
 
-    if (['gta3', 'vc'].includes(game)) {
+    if (game) {
+      const extension = segments.shift() || DEFAULT_EXTENSION;
+      const opcode = segments.shift();
+
+      this._facade.onListEnter(game, opcode, extension);
       return true;
     }
 
@@ -30,46 +34,6 @@ export class RouteGuard implements CanActivate {
 
   goHome() {
     return this._router.parseUrl('/');
-  }
-}
-
-interface RouteData {
-  game: Game;
-  extension: string;
-  opcode?: string;
-  title: string;
-}
-
-@Injectable()
-export class RouteResolver implements Resolve<RouteData> {
-  constructor(private _router: Router) {}
-  resolve(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): RouteData {
-    const segments = getSegmentsFromUrl(this._router, state.url);
-
-    const game = getGame(segments.shift());
-    const defaultData = {
-      game,
-      title: getGameTitle(game),
-      extension: DEFAULT_EXTENSION,
-    };
-
-    if (segments.length === 2) {
-      return {
-        ...defaultData,
-        extension: segments.shift(),
-        opcode: segments.shift(),
-      };
-    }
-    if (segments.length === 1) {
-      return {
-        ...defaultData,
-        opcode: segments.shift(),
-      };
-    }
-    return defaultData;
   }
 }
 
@@ -86,14 +50,5 @@ function getGame(game: string): Game {
   }
   if (game === 'vc') {
     return Game.VC;
-  }
-}
-
-function getGameTitle(game: Game): string {
-  if (game === Game.GTA3) {
-    return 'GTA III';
-  }
-  if (game === Game.VC) {
-    return 'Vice City';
   }
 }

@@ -73,6 +73,11 @@ export const GameClasses: Record<Game, string> = {
   [Game.VC]: 'assets/vc_classes.db',
 };
 
+export const GameTitle: Record<Game, string> = {
+  [Game.GTA3]: 'GTA III',
+  [Game.VC]: 'Vice City',
+};
+
 export const DEFAULT_EXTENSION = 'default';
 
 export const SEARCH_OPTIONS = {

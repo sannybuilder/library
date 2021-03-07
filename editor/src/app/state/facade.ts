@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Command, Extension, Game, ViewMode } from '../models';
 import {
   loadExtensions,
@@ -12,6 +12,7 @@ import {
   toggleFilter,
   displayOrEditCommandInfo,
   stopEditOrDisplay,
+  onListEnter,
 } from './actions';
 import {
   extensionsSelector,
@@ -26,6 +27,7 @@ import {
   isFilterSelectedSelector,
   gameSelector,
   commandToDisplayOrEditSelector,
+  opcodeOnLoadSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -45,6 +47,13 @@ export class StateFacade {
   selectedFilters$ = this.store$.select(selectedFiltersSelector);
   game$ = this.store$.select(gameSelector);
   commandToDisplayOrEdit$ = this.store$.select(commandToDisplayOrEditSelector);
+  opcodeOnLoad$ = this.store$
+    .select(opcodeOnLoadSelector)
+    .pipe(
+      distinctUntilChanged(
+        (a, b) => a.opcode === b.opcode && a.extension === b.extension
+      )
+    );
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selectedExtensionsSelector, { extension });
@@ -72,15 +81,13 @@ export class StateFacade {
     command,
     newExtension,
     oldExtension,
-    game,
   }: {
     command: Command;
     newExtension: string;
     oldExtension: string;
-    game: Game;
   }) {
     this.store$.dispatch(
-      updateCommand({ command, newExtension, oldExtension, game })
+      updateCommand({ command, newExtension, oldExtension })
     );
   }
 
@@ -100,25 +107,13 @@ export class StateFacade {
     this.store$.dispatch(toggleCommandListElements({ flag }));
   }
 
-  displayCommandInfo({
-    command,
-    extension,
-  }: {
-    command: Command;
-    extension: string;
-  }) {
+  displayCommandInfo(command: Command, extension: string) {
     this.store$.dispatch(
       displayOrEditCommandInfo({ command, extension, viewMode: ViewMode.View })
     );
   }
 
-  editCommandInfo({
-    command,
-    extension,
-  }: {
-    command: Command;
-    extension: string;
-  }) {
+  editCommandInfo(command: Command, extension: string) {
     this.store$.dispatch(
       displayOrEditCommandInfo({ command, extension, viewMode: ViewMode.Edit })
     );
@@ -126,5 +121,9 @@ export class StateFacade {
 
   stopEditOrDisplay() {
     this.store$.dispatch(stopEditOrDisplay());
+  }
+
+  onListEnter(game: Game, opcode: string, extension: string) {
+    this.store$.dispatch(onListEnter({ game, opcode, extension }));
   }
 }

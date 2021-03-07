@@ -12,6 +12,7 @@ import {
   updateCommand,
   updateExtensionsSuccess,
   updateSearchTerm,
+  onListEnter,
 } from './actions';
 import { without, sortBy } from 'lodash';
 
@@ -29,6 +30,8 @@ export interface State {
   extensionToDisplayOrEdit?: string;
   viewMode: ViewMode;
   game?: Game;
+  opcodeOnLoad?: string;
+  extensionOnLoad?: string;
 }
 
 export const initialState: State = {
@@ -148,6 +151,12 @@ const _reducer = createReducer(
     commandToDisplayOrEdit: undefined,
     extensionToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
+  })),
+  on(onListEnter, (state, { game, opcode, extension }) => ({
+    ...state,
+    game,
+    opcodeOnLoad: opcode,
+    extensionOnLoad: extension,
   }))
 );
 

@@ -65,6 +65,11 @@ export const commandToDisplayOrEditSelector = createSelector(
   })
 );
 
+export const opcodeOnLoadSelector = createSelector(root, (state: State) => ({
+  opcode: state.opcodeOnLoad,
+  extension: state.extensionOnLoad,
+}));
+
 export const gameSelector = createSelector(root, (state: State) => state.game);
 
 export const entitiesSelector = createSelector(

@@ -19,7 +19,7 @@ import { CommandEditorComponent } from './components/command-editor/command-edit
 import { HeaderComponent } from './components/header/header.component';
 import { CommandInfoComponent } from './components/command-info/command-info.component';
 import { HomeComponent } from './components/home/home.component';
-import { RouteGuard, RouteResolver } from './route.guard';
+import { RouteGuard } from './route.guard';
 import { FooterComponent } from './components/footer/footer.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { SelectorComponent } from './components/selector/selector.component';
@@ -60,9 +60,6 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
         {
           path: '**',
           canActivate: [RouteGuard],
-          resolve: {
-            data: RouteResolver,
-          },
           component: LibraryPageComponent,
         },
       ],
@@ -75,7 +72,6 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
   providers: [
     FusejsService,
     RouteGuard,
-    RouteResolver,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],

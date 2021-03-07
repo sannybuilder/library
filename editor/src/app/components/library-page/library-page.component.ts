@@ -1,11 +1,10 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { omit } from 'lodash';
 import { Modal } from 'bootstrap';
 
-import { Command, Game, SEARCH_OPTIONS, ViewMode } from '../../models';
+import { Command, SEARCH_OPTIONS, ViewMode } from '../../models';
 import { StateFacade } from '../../state/facade';
 
 @Component({
@@ -17,54 +16,39 @@ export class LibraryPageComponent implements OnInit, OnDestroy {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
   command$ = this._facade.commandToDisplayOrEdit$;
+  game$ = this._facade.game$;
 
   command?: Command;
   extension?: string;
   oldExtension?: string;
-  title: string;
-  game: Game;
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
 
   private _handle: Modal;
 
-  constructor(
-    private _facade: StateFacade,
-    private _router: Router,
-    public route: ActivatedRoute
-  ) {}
+  constructor(private _facade: StateFacade) {}
 
   ngOnInit() {
-    this._router.events
-      .pipe(
-        filter((x) => x instanceof NavigationEnd),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(() => {
-        this.onRouteChange();
-      });
-
-    this.onRouteChange();
     this._facade.toggleCommandListElements(true);
 
     this.command$
-      .pipe(
-        takeUntil(this.onDestroy$),
-        tap(({ command, extension, viewMode }) => {
-          this.command = command
-            ? JSON.parse(JSON.stringify(command))
-            : command;
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(({ command, extension, viewMode }) => {
+        this.command = command ? JSON.parse(JSON.stringify(command)) : command;
 
-          // display editor in modal
-          if (this.screenSize < 1200) {
+        // display editor in modal
+        this.detectScreenSize();
+        if (this.screenSize < 1200) {
+          if (this.command) {
             this._handle.show();
+          } else {
+            this._handle.hide();
           }
-          this.oldExtension = extension;
-          this.extension = extension;
-          this.viewMode = viewMode;
-        })
-      )
-      .subscribe();
+        }
+        this.oldExtension = extension;
+        this.extension = extension;
+        this.viewMode = viewMode;
+      });
   }
 
   ngOnDestroy() {
@@ -81,21 +65,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy {
     this.detectScreenSize();
   }
 
-  onRouteChange() {
-    const { data } = this.route.snapshot.data;
-    this.title = data.title;
-    if (data.game !== this.game) {
-      this.game = data.game;
-      this._facade.loadExtensions(this.game);
-    }
-  }
-
   onSave() {
     this._facade.updateCommand({
       newExtension: this.extension,
       oldExtension: this.oldExtension,
       command: omit(this.command, SEARCH_OPTIONS.fusejsHighlightKey),
-      game: this.game,
     });
   }
 
@@ -108,10 +82,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy {
     return this._facade.getExtensionEntities(extension);
   }
 
-  @HostListener('window:resize', [])
-  private onResize() {
-    this.detectScreenSize();
-  }
+  // @HostListener('window:resize', [])
+  // private onResize() {
+  //   this.detectScreenSize();
+  // }
 
   private detectScreenSize() {
     this.screenSize = window.innerWidth;

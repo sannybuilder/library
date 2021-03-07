@@ -1,13 +1,10 @@
-import { Component, ViewChild, Inject, OnDestroy, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { combineLatest, ReplaySubject, Subject, timer } from 'rxjs';
-import { debounce, filter, map, takeUntil } from 'rxjs/operators';
+import { Component, Inject, OnDestroy, Input } from '@angular/core';
+import { timer } from 'rxjs';
+import { debounce } from 'rxjs/operators';
 
 import { CONFIG, Config } from '../../config';
 import { StateFacade } from '../../state/facade';
-import { Command, Game, SEARCH_OPTIONS } from '../../models';
-import { CommandEditorComponent } from '../command-editor/command-editor.component';
-import { CommandInfoComponent } from '../command-info/command-info.component';
+import { Command, Game, GameTitle, SEARCH_OPTIONS } from '../../models';
 
 @Component({
   selector: 'scl-command-list',
@@ -15,66 +12,43 @@ import { CommandInfoComponent } from '../command-info/command-info.component';
   styleUrls: ['./command-list.component.scss'],
 })
 export class CommandListComponent implements OnDestroy {
-  @ViewChild(CommandEditorComponent) commandEditor: CommandEditorComponent;
-  @ViewChild(CommandInfoComponent) commandInfo: CommandInfoComponent;
+  private _game: Game;
 
-  @Input() title: string;
-  @Input() game: Game;
+  @Input() set game(val: Game) {
+    this._game = val;
+    this.title = GameTitle[this.game];
+  }
+  get game(): Game {
+    return this._game;
+  }
 
-  onDestroy$ = new Subject();
   extensions$ = this.facade.extensions$;
   loading$ = this.facade.loading$;
   selectedFilters$ = this.facade.selectedFilters$;
-  searchTerm$ = this.facade.searchTerm$;
-  searchTermDebounce$ = this.searchTerm$.pipe(debounce(() => timer(500)));
-  displayOpcodeInfoOnDemand$ = new ReplaySubject<{
-    opcode: string;
-    extension: string;
-  }>(1);
-  displayOpcodeInfo$ = combineLatest([this.extensions$, this.route.data])
-    .pipe(
-      takeUntil(this.onDestroy$),
-      filter(([extensions, { data }]) => !!data.opcode && !!data.extension),
-      map(([extensions, { data }]) => ({
-        command: extensions
-          .find((e) => e.name === data.extension)
-          ?.commands.find((command) => command.id === data.opcode),
-        extension: data.extension,
-      }))
-    )
-    .subscribe(({ command, extension }) => {
-      if (command) {
-        this.facade.displayCommandInfo({ command, extension });
-      } else {
-        this.facade.stopEditOrDisplay();
-      }
-    });
-
+  searchTerm$ = this.facade.searchTerm$.pipe(debounce(() => timer(500)));
   searchOptions = SEARCH_OPTIONS;
+  title: string;
 
   constructor(
     public facade: StateFacade,
-    @Inject(CONFIG) public config: Config,
-    public route: ActivatedRoute
+    @Inject(CONFIG) public config: Config
   ) {}
 
   ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
     this.facade.toggleCommandListElements(false);
-  }
-
-  edit(command: Command, extension: string) {
-    this.facade.editCommandInfo({ command, extension });
-    return false;
   }
 
   isExtensionChecked(extension: string) {
     return this.facade.getExtensionCheckedState(extension);
   }
 
+  edit(command: Command, extension: string) {
+    this.facade.editCommandInfo(command, extension);
+    return false;
+  }
+
   displayInfo(command: Command, extension: string) {
-    this.facade.displayCommandInfo({ command, extension });
+    this.facade.displayCommandInfo(command, extension);
     return false;
   }
 }

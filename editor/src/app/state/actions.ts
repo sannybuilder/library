@@ -28,7 +28,6 @@ export const updateCommand = createAction(
     command: Command;
     newExtension: string;
     oldExtension: string;
-    game: Game;
   }>()
 );
 
@@ -58,3 +57,8 @@ export const displayOrEditCommandInfo = createAction(
 );
 
 export const stopEditOrDisplay = createAction('stop edit or display');
+
+export const onListEnter = createAction(
+  'on list enter',
+  props<{ game: Game; opcode: string; extension: string }>()
+);

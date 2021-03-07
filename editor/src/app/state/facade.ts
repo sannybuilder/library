@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs/operators';
-import { Command, Extension, Game } from '../models';
+import { Command, Extension, Game, ViewMode } from '../models';
 import {
-  editCommand,
   loadExtensions,
   updateExtensions,
   updateCommand,
@@ -11,10 +10,11 @@ import {
   updateSearchTerm,
   toggleCommandListElements,
   toggleFilter,
+  displayOrEditCommandInfo,
+  stopEditOrDisplay,
 } from './actions';
 import {
   extensionsSelector,
-  editCommandSelector,
   lastUpdateSelector,
   loadingSelector,
   selectedExtensionsSelector,
@@ -25,6 +25,7 @@ import {
   selectedFiltersSelector,
   isFilterSelectedSelector,
   gameSelector,
+  commandToDisplayOrEditSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -36,7 +37,6 @@ export class StateFacade {
   extensionNames$ = this.extensions$.pipe(
     map((extensions) => extensions.map((e) => e.name))
   );
-  editCommand$ = this.store$.select(editCommandSelector);
   loading$ = this.store$.select(loadingSelector);
   lastUpdate$ = this.store$.select(lastUpdateSelector);
   searchTerm$ = this.store$.select(searchTermSelector);
@@ -44,6 +44,7 @@ export class StateFacade {
   displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
   selectedFilters$ = this.store$.select(selectedFiltersSelector);
   game$ = this.store$.select(gameSelector);
+  commandToDisplayOrEdit$ = this.store$.select(commandToDisplayOrEditSelector);
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selectedExtensionsSelector, { extension });
@@ -65,10 +66,6 @@ export class StateFacade {
 
   updateExtensions(extensions: Extension[], game: Game) {
     this.store$.dispatch(updateExtensions({ extensions, game }));
-  }
-
-  editCommand(command: Command) {
-    this.store$.dispatch(editCommand({ command }));
   }
 
   updateCommand({
@@ -101,5 +98,33 @@ export class StateFacade {
 
   toggleCommandListElements(flag: boolean) {
     this.store$.dispatch(toggleCommandListElements({ flag }));
+  }
+
+  displayCommandInfo({
+    command,
+    extension,
+  }: {
+    command: Command;
+    extension: string;
+  }) {
+    this.store$.dispatch(
+      displayOrEditCommandInfo({ command, extension, viewMode: ViewMode.View })
+    );
+  }
+
+  editCommandInfo({
+    command,
+    extension,
+  }: {
+    command: Command;
+    extension: string;
+  }) {
+    this.store$.dispatch(
+      displayOrEditCommandInfo({ command, extension, viewMode: ViewMode.Edit })
+    );
+  }
+
+  stopEditOrDisplay() {
+    this.store$.dispatch(stopEditOrDisplay());
   }
 }

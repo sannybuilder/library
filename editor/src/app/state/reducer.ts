@@ -1,10 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Extension, Game } from '../models';
+import { Command, Extension, Game, ViewMode } from '../models';
 import {
-  editCommand,
+  displayOrEditCommandInfo,
   loadExtensions,
   loadExtensionsError,
   loadExtensionsSuccess,
+  stopEditOrDisplay,
   toggleCommandListElements,
   toggleExtension,
   toggleFilter,
@@ -18,13 +19,15 @@ export interface State {
   extensions?: Extension[];
   lastUpdate?: number;
   error?: string;
-  editCommand?: Command;
   loading: boolean;
   selectedExtensions?: string[];
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
   selectedFilters: string[];
+  commandToDisplayOrEdit?: Command;
+  extensionToDisplayOrEdit?: string;
+  viewMode: ViewMode;
   game?: Game;
 }
 
@@ -32,6 +35,7 @@ export const initialState: State = {
   loading: false,
   displayLastUpdated: false,
   displaySearchBar: false,
+  viewMode: ViewMode.None,
   selectedFilters: [],
 };
 
@@ -50,10 +54,6 @@ const _reducer = createReducer(
     commands: [],
     loading: false,
     error: `Error: can't load commands`,
-  })),
-  on(editCommand, (state, { command: editCommand }) => ({
-    ...state,
-    editCommand,
   })),
   on(
     updateCommand,
@@ -136,6 +136,18 @@ const _reducer = createReducer(
     ...state,
     displaySearchBar: flag,
     displayLastUpdated: flag,
+  })),
+  on(displayOrEditCommandInfo, (state, { command, extension, viewMode }) => ({
+    ...state,
+    viewMode,
+    commandToDisplayOrEdit: command,
+    extensionToDisplayOrEdit: extension,
+  })),
+  on(stopEditOrDisplay, (state) => ({
+    ...state,
+    commandToDisplayOrEdit: undefined,
+    extensionToDisplayOrEdit: undefined,
+    viewMode: ViewMode.None,
   }))
 );
 

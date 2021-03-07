@@ -6,9 +6,59 @@
         <scl-filter-panel></scl-filter-panel>
       </div>
     </div>
-    <div class="col-12 col-xl-7">
-      <scl-command-list></scl-command-list>
+    <div
+      class="col-12"
+      [ngClass]="{ 'col-xl-5': command, 'col-xl-8': !command }"
+    >
+      <scl-command-list [game]="game" [title]="title"></scl-command-list>
     </div>
-    <div class="col-xl-3 d-none d-xl-block"></div>
+    <div class="d-none d-xl-block col-xl-5">
+      <ng-container *ngIf="command">
+        <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
+        <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+      </ng-container>
+    </div>
   </div>
 </div>
+
+<div class="modal fade" id="modal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
+      </div>
+      <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalFooter>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="onCancel()"
+    >
+      {{ viewMode === ViewMode.Edit ? "Cancel" : "Close" }}
+    </button>
+    <button
+      *ngIf="viewMode === ViewMode.Edit"
+      type="button"
+      class="btn btn-outline-success"
+      (click)="onSave()"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #commandViewer>
+  <scl-command-editor
+    *ngIf="viewMode === ViewMode.Edit"
+    [command]="command"
+    [(extension)]="extension"
+    [entities]="getExtensionEntities(extension) | async"
+  ></scl-command-editor>
+  <scl-command-info *ngIf="viewMode === ViewMode.View" [command]="command">
+  </scl-command-info>
+</ng-template>

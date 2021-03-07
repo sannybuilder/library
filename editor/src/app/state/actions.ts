@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Command, Extension, Game } from '../models';
+import { Command, Extension, Game, ViewMode } from '../models';
 
 export const loadExtensions = createAction(
   'load extensions',
@@ -20,11 +20,6 @@ export const updateExtensions = createAction(
 export const updateExtensionsSuccess = createAction(
   'update extensions success',
   props<{ lastUpdate: number }>()
-);
-
-export const editCommand = createAction(
-  'edit command',
-  props<{ command: Command }>()
 );
 
 export const updateCommand = createAction(
@@ -56,3 +51,10 @@ export const toggleCommandListElements = createAction(
   'toggle command list elements',
   props<{ flag: boolean }>()
 );
+
+export const displayOrEditCommandInfo = createAction(
+  'display or edit command',
+  props<{ command: Command; extension: string; viewMode: ViewMode }>()
+);
+
+export const stopEditOrDisplay = createAction('stop edit or display');

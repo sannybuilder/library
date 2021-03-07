@@ -1,58 +1,50 @@
 import {
   Component,
-  AfterViewInit,
   Output,
   EventEmitter,
   ViewChild,
+  Input,
+  OnInit,
 } from '@angular/core';
-import { Modal } from 'bootstrap';
+
 import { opcodify } from '../../pipes';
 import { Command, CommandAttributes, Param, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 import { StateFacade } from '../../state/facade';
-
-export interface SaveEvent {
-  command: Command;
-  newExtension: string;
-  oldExtension: string;
-}
 
 @Component({
   selector: 'scl-command-editor',
   templateUrl: './command-editor.component.html',
   styleUrls: ['./command-editor.component.scss'],
 })
-export class CommandEditorComponent implements AfterViewInit {
+export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   extensionNames$ = this.facade.extensionNames$;
 
-  private _command: Command;
-  private _oldExtension: string;
   private _newExtension: string;
   paramTypes: ParamType[] = [];
-
-  set command(value: Command) {
-    this._command = JSON.parse(JSON.stringify(value));
-  }
-
-  get command(): Command {
-    return this._command;
-  }
 
   get extension(): string {
     return this._newExtension;
   }
 
+  @Input() command: Command;
+  @Input()
   set extension(val: string) {
     if (!val) {
       console.warn('extension can not be empty, using "default"');
       val = 'default';
     }
     this._newExtension = val;
+    this.extensionChange.emit(val);
   }
+  @Output() extensionChange: EventEmitter<string> = new EventEmitter();
 
-  @Output() save: EventEmitter<SaveEvent> = new EventEmitter();
+  @Input() set entities(val: ParamType[]) {
+    const paramTypes = new Set([...this.primitiveTypes, ...val]);
+    this.paramTypes = [...paramTypes];
+  }
 
   readonly attrs = CommandAttributes;
   readonly primitiveTypes = [
@@ -65,40 +57,12 @@ export class CommandEditorComponent implements AfterViewInit {
     ParamType.string,
   ];
 
-  private handle: Modal;
-
   constructor(public facade: StateFacade) {}
 
-  ngAfterViewInit(): void {
-    this.handle = new Modal(document.getElementById('modal'), {
-      backdrop: 'static',
-      keyboard: true,
-    });
-  }
-
-  public open(command: Command, extension: string, entities: ParamType[]) {
-    this.command = command;
-    this._oldExtension = extension;
-    this.extension = extension;
-    const paramTypes = new Set([...this.primitiveTypes, ...entities]);
-    this.paramTypes = [...paramTypes];
+  ngOnInit() {
     if (this.selector) {
       this.selector.freeInput = '';
     }
-    this.handle.show();
-  }
-
-  public close() {
-    this.handle.hide();
-  }
-
-  saveAndClose() {
-    this.save.emit({
-      command: this.command,
-      newExtension: this._newExtension,
-      oldExtension: this._oldExtension,
-    });
-    this.close();
   }
 
   onCommandNameChange(command: Command, value: string) {

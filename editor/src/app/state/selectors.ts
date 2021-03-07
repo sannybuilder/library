@@ -14,11 +14,6 @@ export const errorSelector = createSelector(
   (state: State) => state.error
 );
 
-export const editCommandSelector = createSelector(
-  root,
-  (state: State) => state.editCommand
-);
-
 export const loadingSelector = createSelector(
   root,
   (state: State) => state.loading
@@ -59,6 +54,15 @@ export const displaySearchBarSelector = createSelector(
 export const displayLastUpdatedSelector = createSelector(
   root,
   (state: State) => state.displayLastUpdated
+);
+
+export const commandToDisplayOrEditSelector = createSelector(
+  root,
+  (state: State) => ({
+    command: state.commandToDisplayOrEdit,
+    extension: state.extensionToDisplayOrEdit,
+    viewMode: state.viewMode,
+  })
 );
 
 export const gameSelector = createSelector(root, (state: State) => state.game);

@@ -1,16 +1,12 @@
-import { Component, ViewChild, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, ViewChild, Inject, OnDestroy, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { combineLatest, ReplaySubject, Subject, timer } from 'rxjs';
-import { debounce, filter, map, take, takeUntil, tap } from 'rxjs/operators';
-import { omit } from 'lodash';
+import { debounce, filter, map, takeUntil } from 'rxjs/operators';
 
 import { CONFIG, Config } from '../../config';
-import { Command, CommandAttributes, Game, ParamType } from '../../models';
 import { StateFacade } from '../../state/facade';
-import {
-  CommandEditorComponent,
-  SaveEvent,
-} from '../command-editor/command-editor.component';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Command, Game, SEARCH_OPTIONS } from '../../models';
+import { CommandEditorComponent } from '../command-editor/command-editor.component';
 import { CommandInfoComponent } from '../command-info/command-info.component';
 
 @Component({
@@ -18,16 +14,15 @@ import { CommandInfoComponent } from '../command-info/command-info.component';
   templateUrl: './command-list.component.html',
   styleUrls: ['./command-list.component.scss'],
 })
-export class CommandListComponent implements OnInit, OnDestroy {
+export class CommandListComponent implements OnDestroy {
   @ViewChild(CommandEditorComponent) commandEditor: CommandEditorComponent;
   @ViewChild(CommandInfoComponent) commandInfo: CommandInfoComponent;
 
-  title: string;
-  game: Game;
+  @Input() title: string;
+  @Input() game: Game;
 
   onDestroy$ = new Subject();
   extensions$ = this.facade.extensions$;
-  editCommand$ = this.facade.editCommand$;
   loading$ = this.facade.loading$;
   selectedFilters$ = this.facade.selectedFilters$;
   searchTerm$ = this.facade.searchTerm$;
@@ -40,58 +35,28 @@ export class CommandListComponent implements OnInit, OnDestroy {
     .pipe(
       takeUntil(this.onDestroy$),
       filter(([extensions, { data }]) => !!data.opcode && !!data.extension),
-      map(([extensions, { data }]) =>
-        extensions
+      map(([extensions, { data }]) => ({
+        command: extensions
           .find((e) => e.name === data.extension)
-          ?.commands.find((command) => command.id === data.opcode)
-      )
+          ?.commands.find((command) => command.id === data.opcode),
+        extension: data.extension,
+      }))
     )
-    .subscribe((command) => {
+    .subscribe(({ command, extension }) => {
       if (command) {
-        this.commandInfo.open(command);
+        this.facade.displayCommandInfo({ command, extension });
       } else {
-        this.commandInfo.close();
+        this.facade.stopEditOrDisplay();
       }
     });
 
-  searchOptions = {
-    keys: ['name', 'short_desc', 'id', 'class', 'member'],
-    threshold: 0.3,
-    ignoreLocation: true,
-    minMatchCharLength: 3,
-    distance: 50,
-    fusejsHighlightKey: '_highlight',
-  };
+  searchOptions = SEARCH_OPTIONS;
 
   constructor(
     public facade: StateFacade,
     @Inject(CONFIG) public config: Config,
-    public route: ActivatedRoute,
-    private _router: Router
+    public route: ActivatedRoute
   ) {}
-
-  ngOnInit() {
-    this._router.events
-      .pipe(
-        filter((x) => x instanceof NavigationEnd),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(() => {
-        this.onRouteChange();
-      });
-
-    this.onRouteChange();
-    this.facade.toggleCommandListElements(true);
-  }
-
-  onRouteChange() {
-    const { data } = this.route.snapshot.data;
-    this.title = data.title;
-    if (data.game !== this.game) {
-      this.game = data.game;
-      this.facade.loadExtensions(this.game);
-    }
-  }
 
   ngOnDestroy() {
     this.onDestroy$.next();
@@ -100,34 +65,16 @@ export class CommandListComponent implements OnInit, OnDestroy {
   }
 
   edit(command: Command, extension: string) {
-    this.facade.editCommand(command);
-    this.getExtensionEntities(extension)
-      .pipe(take(1))
-      .subscribe((entities) => {
-        this.commandEditor.open(command, extension, entities as ParamType[]);
-      });
-
+    this.facade.editCommandInfo({ command, extension });
     return false;
-  }
-
-  onSave({ command, newExtension, oldExtension }: SaveEvent) {
-    this.facade.updateCommand({
-      newExtension,
-      oldExtension,
-      command: omit(command, this.searchOptions.fusejsHighlightKey),
-      game: this.game,
-    });
   }
 
   isExtensionChecked(extension: string) {
     return this.facade.getExtensionCheckedState(extension);
   }
 
-  displayInfo(command: Command) {
-    this.commandInfo.open(command);
-  }
-
-  private getExtensionEntities(extension: string) {
-    return this.facade.getExtensionEntities(extension);
+  displayInfo(command: Command, extension: string) {
+    this.facade.displayCommandInfo({ command, extension });
+    return false;
   }
 }

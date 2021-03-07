@@ -74,3 +74,18 @@ export const GameClasses: Record<Game, string> = {
 };
 
 export const DEFAULT_EXTENSION = 'default';
+
+export const SEARCH_OPTIONS = {
+  keys: ['name', 'short_desc', 'id', 'class', 'member'],
+  threshold: 0.3,
+  ignoreLocation: true,
+  minMatchCharLength: 3,
+  distance: 50,
+  fusejsHighlightKey: '_highlight',
+};
+
+export enum ViewMode {
+  None,
+  Edit,
+  View,
+}

@@ -1,165 +1,126 @@
-<div class="modal fade" id="modal" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-body" *ngIf="command">
-        <div class="row mb-2">
-          <div class="col-12 col-lg-3">
-            <div class="input-group">
-              <span class="input-group-text">Opcode</span>
-              <input
-                type="text"
-                class="form-control"
-                maxlength="4"
-                (blur)="opcodify(command)"
-                [ngModel]="command.id"
-                (ngModelChange)="onOpcodeChange(command, $event)"
-              />
-            </div>
-          </div>
-          <div class="col-12 col-lg-6">
-            <div class="input-group">
-              <span class="input-group-text">Command name</span>
-              <input
-                type="text"
-                class="form-control"
-                [ngModel]="command.name | uppercase"
-                (ngModelChange)="onCommandNameChange(command, $event)"
-              />
-            </div>
-          </div>
-          <div class="col-12 col-lg-3">
-            <scl-selector
-              label="Extension"
-              [(model)]="extension"
-              [choices]="extensionNames$ | async"
-            ></scl-selector>
-          </div>
-        </div>
+<div class="row mb-2">
+  <div class="col-12 col-xl-3">
+    <div class="input-group">
+      <span class="input-group-text">Opcode</span>
+      <input
+        type="text"
+        class="form-control"
+        maxlength="4"
+        (blur)="opcodify(command)"
+        [ngModel]="command.id"
+        (ngModelChange)="onOpcodeChange(command, $event)"
+      />
+    </div>
+  </div>
+  <div class="col-12 col-xl-9">
+    <div class="input-group">
+      <span class="input-group-text">Command name</span>
+      <input
+        type="text"
+        class="form-control"
+        [ngModel]="command.name | uppercase"
+        (ngModelChange)="onCommandNameChange(command, $event)"
+      />
+    </div>
+  </div>
+</div>
 
-        <div class="row mb-2">
-          <div class="col-12 col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Class</span>
-              <input
-                type="text"
-                [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
-                class="form-control"
-                [ngModel]="command.class"
-                (ngModelChange)="onClassChange(command, $event)"
-              />
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Member</span>
-              <input
-                type="text"
-                [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
-                class="form-control"
-                [ngModel]="command.member"
-                (ngModelChange)="onMemberChange(command, $event)"
-              />
-            </div>
-          </div>
-        </div>
+<div class="row mb-2">
+  <div class="col-12">
+    <scl-selector
+      label="Extension"
+      [(model)]="extension"
+      [choices]="extensionNames$ | async"
+    ></scl-selector>
+  </div>
+</div>
 
-        <div class="row mb-2">
-          <div class="col-12">
-            <div class="input-group">
-              <span class="input-group-text">Short Description</span>
-              <textarea
-                [(ngModel)]="command.short_desc"
-                class="form-control"
-                [disabled]="command.attrs.is_nop"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
-        </div>
+<div class="row mb-2">
+  <div class="col-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-text">Class</span>
+      <input
+        type="text"
+        [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
+        class="form-control"
+        [ngModel]="command.class"
+        (ngModelChange)="onClassChange(command, $event)"
+      />
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-text">Member</span>
+      <input
+        type="text"
+        [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
+        class="form-control"
+        [ngModel]="command.member"
+        (ngModelChange)="onMemberChange(command, $event)"
+      />
+    </div>
+  </div>
+</div>
 
-        <div
-          class="row mb-2"
-          *ngFor="let param of command.input; let i = index"
-        >
-          <div class="col-12 col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Input {{ i + 1 }}</span>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="param.name"
-              />
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <scl-selector
-              label="Type"
-              [(model)]="param.type"
-              [choices]="paramTypes"
-              (keydown)="onTypeKeyDown($event, param)"
-            ></scl-selector>
-          </div>
-        </div>
+<div class="row mb-2">
+  <div class="col-12">
+    <div class="input-group">
+      <span class="input-group-text">Short Description</span>
+      <textarea
+        [(ngModel)]="command.short_desc"
+        class="form-control"
+        [disabled]="command.attrs.is_nop"
+        rows="3"
+      ></textarea>
+    </div>
+  </div>
+</div>
 
-        <div
-          class="row mb-2"
-          *ngFor="let param of command.output; let i = index"
-        >
-          <div class="col-12 col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Output {{ i + 1 }}</span>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="param.name"
-              />
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <scl-selector
-              label="Type"
-              [(model)]="param.type"
-              [choices]="paramTypes"
-            ></scl-selector>
-          </div>
-        </div>
+<div class="row mb-2" *ngFor="let param of command.input; let i = index">
+  <div class="col-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-text">Input {{ i + 1 }}</span>
+      <input type="text" class="form-control" [(ngModel)]="param.name" />
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <scl-selector
+      label="Type"
+      [(model)]="param.type"
+      [choices]="paramTypes"
+      (keydown)="onTypeKeyDown($event, param)"
+    ></scl-selector>
+  </div>
+</div>
 
-        <div class="row mb-2">
-          <div class="col-12">
-            <div
-              class="form-check d-inline-block pr-2"
-              *ngFor="let attr of attrs"
-            >
-              <input
-                class="form-check-input"
-                type="checkbox"
-                [(ngModel)]="command.attrs[attr]"
-                [id]="attr"
-              />
-              <label class="form-check-label" [for]="attr">
-                {{ attr }}
-              </label>
-            </div>
-          </div>
-        </div>
+<div class="row mb-2" *ngFor="let param of command.output; let i = index">
+  <div class="col-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-text">Output {{ i + 1 }}</span>
+      <input type="text" class="form-control" [(ngModel)]="param.name" />
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <scl-selector
+      label="Type"
+      [(model)]="param.type"
+      [choices]="paramTypes"
+    ></scl-selector>
+  </div>
+</div>
 
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            (click)="close()"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-success"
-            (click)="saveAndClose()"
-          >
-            Save
-          </button>
-        </div>
-      </div>
+<div class="row mb-2">
+  <div class="col-12">
+    <div class="form-check d-inline-block pr-2" *ngFor="let attr of attrs">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [(ngModel)]="command.attrs[attr]"
+        [id]="attr"
+      />
+      <label class="form-check-label" [for]="attr">
+        {{ attr }}
+      </label>
     </div>
   </div>
 </div>

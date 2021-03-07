@@ -32,6 +32,7 @@ export interface State {
   game?: Game;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
+  entities?: Record<string, string[]>;
 }
 
 export const initialState: State = {
@@ -51,6 +52,7 @@ const _reducer = createReducer(
     lastUpdate,
     extensions,
     selectedExtensions: extensions.map((e) => e.name),
+    entities: getEntities(extensions),
   })),
   on(loadExtensionsError, (state) => ({
     ...state,
@@ -112,7 +114,9 @@ const _reducer = createReducer(
         selectedExtensions.sort();
       }
 
-      return { ...state, extensions, selectedExtensions };
+      const entities = getEntities(extensions);
+
+      return { ...state, extensions, selectedExtensions, entities };
     }
   ),
   on(updateExtensionsSuccess, (state, { lastUpdate }) => ({
@@ -194,4 +198,22 @@ function upsertBy<T extends object, Key extends keyof T>(
   }
 
   return newCollection;
+}
+
+function getEntities(extensions: Extension[]): Record<string, string[]> {
+  return extensions.reduce((m, e) => {
+    const set = e.commands
+      .filter((command) => command.attrs.is_constructor)
+      .reduce((entities, command) => {
+        const last = command.output[command.output.length - 1];
+        if (!last) {
+          return [];
+        }
+        entities.add(last.type);
+        return entities;
+      }, new Set());
+
+    (m[e.name] ??= []).push(...set);
+    return m;
+  }, {});
 }

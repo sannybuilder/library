@@ -89,6 +89,7 @@
       [(model)]="param.type"
       [choices]="paramTypes"
       (keydown)="onTypeKeyDown($event, param)"
+      [canInput]="false"
     ></scl-selector>
   </div>
 </div>
@@ -105,6 +106,9 @@
       label="Type"
       [(model)]="param.type"
       [choices]="paramTypes"
+      [canInput]="
+        command.attrs.is_constructor && i === command.output.length - 1
+      "
     ></scl-selector>
   </div>
 </div>

@@ -69,6 +69,7 @@ export class LibraryPageComponent implements OnDestroy {
       oldExtension: this.oldExtension,
       command: omit(this.command, SEARCH_OPTIONS.fusejsHighlightKey),
     });
+    this._handle.hide();
   }
 
   onCancel() {

@@ -48,16 +48,7 @@ export class StateFacade {
     .select(gameSelector)
     .pipe(distinctUntilChanged(), filter<Game>(Boolean));
 
-  commandToDisplayOrEdit$ = this.store$
-    .select(commandToDisplayOrEditSelector)
-    .pipe(
-      distinctUntilChanged(
-        (a, b) =>
-          a.command === b.command &&
-          a.extension === b.extension &&
-          a.viewMode === b.viewMode
-      )
-    );
+  commandToDisplayOrEdit$ = this.store$.select(commandToDisplayOrEditSelector);
 
   opcodeOnLoad$ = this.store$.select(opcodeOnLoadSelector).pipe(
     distinctUntilChanged(

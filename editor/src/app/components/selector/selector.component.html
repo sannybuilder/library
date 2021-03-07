@@ -9,14 +9,16 @@
       {{ label }}
     </button>
     <div class="dropdown-menu">
-      <button
-        class="dropdown-item"
-        *ngFor="let choice of choices"
-        (click)="update(choice)"
-      >
-        {{ choice }}
-      </button>
-      <div class="dropdown-item input-group">
+      <div class="choices-list">
+        <button
+          class="dropdown-item"
+          *ngFor="let choice of choices"
+          (click)="update(choice)"
+        >
+          {{ choice }}
+        </button>
+      </div>
+      <div class="dropdown-item input-group" *ngIf="canInput">
         <input class="form-control" type="text" [(ngModel)]="freeInput" />
         <div class="input-group-append">
           <button

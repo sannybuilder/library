@@ -79,23 +79,7 @@ export const opcodeOnLoadSelector = createSelector(root, (state: State) => ({
 export const gameSelector = createSelector(root, (state: State) => state.game);
 
 export const entitiesSelector = createSelector(
-  extensionsSelector,
-  (extensions: Extension[], props: { extension: string }) => {
-    const e = extensions.find((e) => e.name === props.extension);
-    if (!e) {
-      return [];
-    }
-    const set = e.commands
-      .filter((command) => command.attrs.is_constructor)
-      .reduce((entities, command) => {
-        const last = command.output[command.output.length - 1];
-        if (!last) {
-          return [];
-        }
-        entities.add(last.type);
-        return entities;
-      }, new Set());
-
-    return [...set];
-  }
+  root,
+  (state: State, props: { extension: string }) =>
+    state.entities?.[props.extension] ?? []
 );

@@ -9,6 +9,7 @@ export class SelectorComponent {
   @Input() choices: string[];
   @Input() model: string;
   @Input() label: string;
+  @Input() canInput = true;
 
   freeInput: string;
 

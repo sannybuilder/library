@@ -9,6 +9,12 @@ export const extensionsSelector = createSelector(
   (state: State) => state.extensions
 );
 
+export const extensionNamesSelector = createSelector(
+  extensionsSelector,
+  (extensions?: Extension[]) =>
+    extensions ? extensions.map((e) => e.name) : []
+);
+
 export const errorSelector = createSelector(
   root,
   (state: State) => state.error

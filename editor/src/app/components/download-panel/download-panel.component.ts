@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Game, GameClasses } from '../../models';
-import { StateFacade } from '../../state/facade';
 
 @Component({
   selector: 'scl-download-panel',
@@ -8,13 +7,7 @@ import { StateFacade } from '../../state/facade';
   styleUrls: ['./download-panel.component.scss'],
 })
 export class DownloadPanelComponent {
-  game$ = this._facade.game$;
-
-  constructor(private _facade: StateFacade) {}
-
-  onSearchUpdate(term: string) {
-    this._facade.updateSearch(term);
-  }
+  @Input() game: Game;
 
   getClasses(game: Game) {
     return GameClasses[game];

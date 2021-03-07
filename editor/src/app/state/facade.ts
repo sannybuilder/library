@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { Command, Extension, Game, ViewMode } from '../models';
 import {
   loadExtensions,
@@ -28,6 +28,7 @@ import {
   gameSelector,
   commandToDisplayOrEditSelector,
   opcodeOnLoadSelector,
+  extensionNamesSelector,
 } from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -36,24 +37,34 @@ export class StateFacade {
     .select(extensionsSelector)
     .pipe(filter<Extension[]>(Boolean));
 
-  extensionNames$ = this.extensions$.pipe(
-    map((extensions) => extensions.map((e) => e.name))
-  );
+  extensionNames$ = this.store$.select(extensionNamesSelector);
   loading$ = this.store$.select(loadingSelector);
   lastUpdate$ = this.store$.select(lastUpdateSelector);
   searchTerm$ = this.store$.select(searchTermSelector);
   displaySearchBar$ = this.store$.select(displaySearchBarSelector);
   displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
   selectedFilters$ = this.store$.select(selectedFiltersSelector);
-  game$ = this.store$.select(gameSelector);
-  commandToDisplayOrEdit$ = this.store$.select(commandToDisplayOrEditSelector);
-  opcodeOnLoad$ = this.store$
-    .select(opcodeOnLoadSelector)
+  game$ = this.store$
+    .select(gameSelector)
+    .pipe(distinctUntilChanged(), filter<Game>(Boolean));
+
+  commandToDisplayOrEdit$ = this.store$
+    .select(commandToDisplayOrEditSelector)
     .pipe(
       distinctUntilChanged(
-        (a, b) => a.opcode === b.opcode && a.extension === b.extension
+        (a, b) =>
+          a.command === b.command &&
+          a.extension === b.extension &&
+          a.viewMode === b.viewMode
       )
     );
+
+  opcodeOnLoad$ = this.store$.select(opcodeOnLoadSelector).pipe(
+    distinctUntilChanged(
+      (a, b) => a.opcode === b.opcode && a.extension === b.extension
+    ),
+    filter((a) => !!a.extension)
+  );
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selectedExtensionsSelector, { extension });

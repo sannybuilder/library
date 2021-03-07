@@ -10,13 +10,7 @@ import {
   updateExtensionsSuccess,
 } from './actions';
 import { CommandsService } from './service';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { StateFacade } from './facade';
 import { Game, ViewMode } from '../models';
 import { combineLatest } from 'rxjs';
@@ -83,11 +77,7 @@ export class StateEffects {
   );
 
   onGameChange$ = createEffect(() =>
-    this.facade.game$.pipe(
-      filter<Game>(Boolean),
-      distinctUntilChanged(),
-      map((game) => loadExtensions({ game }))
-    )
+    this.facade.game$.pipe(map((game) => loadExtensions({ game })))
   );
 
   constructor(

@@ -12,7 +12,7 @@ import { StateFacade } from '../../state/facade';
   templateUrl: './library-page.component.html',
   styleUrls: ['./library-page.component.scss'],
 })
-export class LibraryPageComponent implements OnInit, OnDestroy {
+export class LibraryPageComponent implements OnDestroy {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
   command$ = this._facade.commandToDisplayOrEdit$;
@@ -28,7 +28,18 @@ export class LibraryPageComponent implements OnInit, OnDestroy {
 
   constructor(private _facade: StateFacade) {}
 
-  ngOnInit() {
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+    this._handle.dispose();
+  }
+
+  ngAfterViewInit(): void {
+    this._handle = new Modal(document.getElementById('modal'), {
+      backdrop: 'static',
+      keyboard: true,
+    });
+
     this._facade.toggleCommandListElements(true);
 
     this.command$
@@ -49,20 +60,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy {
         this.extension = extension;
         this.viewMode = viewMode;
       });
-  }
-
-  ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-    this._handle.dispose();
-  }
-
-  ngAfterViewInit(): void {
-    this._handle = new Modal(document.getElementById('modal'), {
-      backdrop: 'static',
-      keyboard: true,
-    });
-    this.detectScreenSize();
   }
 
   onSave() {

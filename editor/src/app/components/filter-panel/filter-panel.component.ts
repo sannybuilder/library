@@ -8,7 +8,6 @@ import { StateFacade } from 'src/app/state/facade';
   styleUrls: ['./filter-panel.component.scss'],
 })
 export class FilterPanelComponent {
-  extensions$ = this._facade.extensions$;
   extensionNames$ = this._facade.extensionNames$;
 
   filters = CommandAttributes;

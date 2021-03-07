@@ -10,6 +10,14 @@
       class="col-12"
       [ngClass]="{ 'col-xl-5': command, 'col-xl-8': !command }"
     >
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ game$ | async | gameTitle }}
+          </li>
+        </ol>
+      </nav>
       <scl-command-list [game]="game$ | async"></scl-command-list>
     </div>
     <div class="d-none d-xl-block col-xl-5">

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Game } from 'src/app/models';
 import { StateFacade } from 'src/app/state/facade';
 
 @Component({
@@ -7,6 +8,7 @@ import { StateFacade } from 'src/app/state/facade';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  Game = Game;
   searchTerm: string = '';
   displaySearchBar$ = this._facade.displaySearchBar$;
 

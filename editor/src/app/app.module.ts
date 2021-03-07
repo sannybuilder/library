@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 
-import { ParamsPipe, OpcodePipe, AttrFilterPipe } from './pipes';
+import { ParamsPipe, OpcodePipe, AttrFilterPipe, GameTitlePipe } from './pipes';
 import { reducer } from './state/reducer';
 import { StateEffects } from './state/effects';
 import { FusejsService } from './fusejs/fusejs.service';
@@ -35,6 +35,7 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
     OpcodePipe,
     FusejsPipe,
     AttrFilterPipe,
+    GameTitlePipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

@@ -32,6 +32,7 @@ export class LibraryPageComponent implements OnDestroy {
     this.onDestroy$.next();
     this.onDestroy$.complete();
     this._handle.dispose();
+    this._facade.toggleCommandListElements(false);
   }
 
   ngAfterViewInit(): void {

@@ -6,7 +6,9 @@
           class="row mb-3"
           *ngFor="
             let command of extension.commands
-              | attrFilter: (selectedFilters$ | async)
+              | attrFilter
+                : (selectedFiltersOnly$ | async)
+                : (selectedFiltersExcept$ | async)
               | fusejs: (searchTerm$ | async):searchOptions
           "
         >

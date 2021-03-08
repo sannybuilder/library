@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommandAttributes } from '../../models';
+import { CommandAttributes, Modifier } from '../../models';
 import { StateFacade } from 'src/app/state/facade';
 
 @Component({
@@ -22,11 +22,11 @@ export class FilterPanelComponent {
     return this._facade.getExtensionCheckedState(extension);
   }
 
-  toggleFilter(filter: string) {
-    this._facade.toggleFilter(filter);
+  toggleFilter(filter: string, modifier: Modifier) {
+    this._facade.toggleFilter(filter, modifier);
   }
 
-  isFilterChecked(filter: string) {
-    return this._facade.getFilterCheckedState(filter);
+  isFilterChecked(filter: string, modifier: Modifier) {
+    return this._facade.getFilterCheckedState(filter, modifier);
   }
 }

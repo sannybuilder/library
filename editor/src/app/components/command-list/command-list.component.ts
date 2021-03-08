@@ -16,7 +16,8 @@ export class CommandListComponent {
 
   extensions$ = this.facade.extensions$;
   loading$ = this.facade.loading$;
-  selectedFilters$ = this.facade.selectedFilters$;
+  selectedFiltersOnly$ = this.facade.selectedFiltersOnly$;
+  selectedFiltersExcept$ = this.facade.selectedFiltersExcept$;
   searchTerm$ = this.facade.searchTerm$.pipe(debounce(() => timer(500)));
   searchOptions = SEARCH_OPTIONS;
 

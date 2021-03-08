@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Command, Extension, Game, ViewMode } from '../models';
+import { Command, Extension, Game, Modifier, ViewMode } from '../models';
 import {
   loadExtensions,
   updateExtensions,
@@ -23,8 +23,10 @@ import {
   displaySearchBarSelector,
   displayLastUpdatedSelector,
   entitiesSelector,
-  selectedFiltersSelector,
-  isFilterSelectedSelector,
+  selectedFiltersOnlySelector,
+  selectedFiltersExceptSelector,
+  isFilterSelectedOnlySelector,
+  isFilterSelectedExceptSelector,
   gameSelector,
   commandToDisplayOrEditSelector,
   opcodeOnLoadSelector,
@@ -43,7 +45,8 @@ export class StateFacade {
   searchTerm$ = this.store$.select(searchTermSelector);
   displaySearchBar$ = this.store$.select(displaySearchBarSelector);
   displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
-  selectedFilters$ = this.store$.select(selectedFiltersSelector);
+  selectedFiltersOnly$ = this.store$.select(selectedFiltersOnlySelector);
+  selectedFiltersExcept$ = this.store$.select(selectedFiltersExceptSelector);
   game$ = this.store$
     .select(gameSelector)
     .pipe(distinctUntilChanged(), filter<Game>(Boolean));
@@ -61,8 +64,13 @@ export class StateFacade {
     return this.store$.select(selectedExtensionsSelector, { extension });
   }
 
-  getFilterCheckedState(filter: string) {
-    return this.store$.select(isFilterSelectedSelector, { filter });
+  getFilterCheckedState(filter: string, modifier: Modifier) {
+    return this.store$.select(
+      modifier === 'only'
+        ? isFilterSelectedOnlySelector
+        : isFilterSelectedExceptSelector,
+      { filter }
+    );
   }
 
   getExtensionEntities(extension: string) {
@@ -97,8 +105,8 @@ export class StateFacade {
     this.store$.dispatch(toggleExtension({ extension }));
   }
 
-  toggleFilter(filter: string) {
-    this.store$.dispatch(toggleFilter({ filter }));
+  toggleFilter(filter: string, modifier: Modifier) {
+    this.store$.dispatch(toggleFilter({ filter, modifier }));
   }
 
   updateSearch(term: string) {

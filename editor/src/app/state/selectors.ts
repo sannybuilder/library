@@ -36,13 +36,24 @@ export const selectedExtensionsSelector = createSelector(
     state.selectedExtensions.includes(props.extension)
 );
 
-export const selectedFiltersSelector = createSelector(
+export const selectedFiltersOnlySelector = createSelector(
   root,
-  (state: State) => state.selectedFilters
+  (state: State) => state.selectedFiltersOnly
 );
 
-export const isFilterSelectedSelector = createSelector(
-  selectedFiltersSelector,
+export const selectedFiltersExceptSelector = createSelector(
+  root,
+  (state: State) => state.selectedFiltersExcept
+);
+
+export const isFilterSelectedOnlySelector = createSelector(
+  selectedFiltersOnlySelector,
+  (selectedFilters: string[], props: { filter: string }) =>
+    selectedFilters.includes(props.filter)
+);
+
+export const isFilterSelectedExceptSelector = createSelector(
+  selectedFiltersExceptSelector,
   (selectedFilters: string[], props: { filter: string }) =>
     selectedFilters.includes(props.filter)
 );

@@ -94,3 +94,5 @@ export enum ViewMode {
   Edit,
   View,
 }
+
+export type Modifier = 'except' | 'only';

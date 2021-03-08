@@ -25,7 +25,8 @@ export interface State {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
-  selectedFilters: string[];
+  selectedFiltersOnly: string[];
+  selectedFiltersExcept: string[];
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   viewMode: ViewMode;
@@ -40,7 +41,8 @@ export const initialState: State = {
   displayLastUpdated: false,
   displaySearchBar: false,
   viewMode: ViewMode.None,
-  selectedFilters: [],
+  selectedFiltersOnly: [],
+  selectedFiltersExcept: ['is_nop', 'is_unsupported'],
 };
 
 const _reducer = createReducer(
@@ -129,11 +131,20 @@ const _reducer = createReducer(
       : [...state.selectedExtensions, extension];
     return { ...state, selectedExtensions };
   }),
-  on(toggleFilter, (state, { filter }) => {
-    const selectedFilters = state.selectedFilters.includes(filter)
-      ? without(state.selectedFilters, filter)
-      : [...state.selectedFilters, filter];
-    return { ...state, selectedFilters };
+  on(toggleFilter, (state, { filter, modifier }) => {
+    const filters =
+      modifier === 'only'
+        ? state.selectedFiltersOnly
+        : state.selectedFiltersExcept;
+    const selectedFilters = filters.includes(filter)
+      ? without(filters, filter)
+      : [...filters, filter];
+    return {
+      ...state,
+      [modifier === 'only'
+        ? 'selectedFiltersOnly'
+        : 'selectedFiltersExcept']: selectedFilters,
+    };
   }),
   on(updateSearchTerm, (state, { term: searchTerm }) => ({
     ...state,

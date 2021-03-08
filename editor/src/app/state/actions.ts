@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Command, Extension, Game, ViewMode } from '../models';
+import { Command, Extension, Game, Modifier, ViewMode } from '../models';
 
 export const loadExtensions = createAction(
   'load extensions',
@@ -38,7 +38,7 @@ export const toggleExtension = createAction(
 
 export const toggleFilter = createAction(
   'toggle filter selection',
-  props<{ filter: string }>()
+  props<{ filter: string; modifier: Modifier }>()
 );
 
 export const updateSearchTerm = createAction(

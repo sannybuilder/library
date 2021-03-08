@@ -1,42 +1,100 @@
-<div class="card mb-3" *ngIf="extensionNames$ | async as extensionNames">
-  <div class="card-body flex-column">
-    <h5 class="mb-3">Filters</h5>
+<div
+  class="accordion mb-3"
+  id="left-rail"
+  *ngIf="extensionNames$ | async as extensionNames"
+>
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button
+          class="btn btn-link btn-block text-left"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="falses"
+          aria-controls="collapseOne"
+        >
+          Filter by extensions
+        </button>
+      </h2>
+    </div>
 
-    <div>
-      <p>Extensions:</p>
+    <div
+      id="collapseOne"
+      class="collapse"
+      aria-labelledby="headingOne"
+      data-parent="#left-rail"
+    >
+      <div class="card-body">
+        <div
+          class="form-check d-inline-block d-xl-block pr-2 mb-3"
+          *ngFor="let name of extensionNames"
+        >
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [ngModel]="isExtensionChecked(name) | async"
+            (ngModelChange)="toggleExtension(name)"
+            [id]="name"
+          />
+          <label class="form-check-label" [for]="name">
+            {{ name }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button
+          class="btn btn-link btn-block text-left collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          Filter by attributes
+        </button>
+      </h2>
     </div>
     <div
-      class="form-check d-inline-block d-xl-block pr-2 mb-3"
-      *ngFor="let name of extensionNames"
+      id="collapseTwo"
+      class="collapse"
+      aria-labelledby="headingTwo"
+      data-parent="#left-rail"
     >
-      <input
-        class="form-check-input"
-        type="checkbox"
-        [ngModel]="isExtensionChecked(name) | async"
-        (ngModelChange)="toggleExtension(name)"
-        [id]="name"
-      />
-      <label class="form-check-label" [for]="name">
-        {{ name }}
-      </label>
-    </div>
-    <div>
-      <p>Attributes:</p>
-    </div>
-    <div
-      class="form-check d-inline-block d-xl-block pr-2"
-      *ngFor="let filter of filters"
-    >
-      <input
-        class="form-check-input"
-        type="checkbox"
-        [ngModel]="isFilterChecked(filter) | async"
-        (ngModelChange)="toggleFilter(filter)"
-        [id]="filter"
-      />
-      <label class="form-check-label" [for]="filter">
-        {{ filter }}
-      </label>
+      <div class="card-body">
+        <ng-container
+          *ngTemplateOutlet="attrs; context: { $implicit: 'only' }"
+        ></ng-container>
+
+        <hr />
+        <ng-container
+          *ngTemplateOutlet="attrs; context: { $implicit: 'except' }"
+        ></ng-container>
+      </div>
     </div>
   </div>
 </div>
+
+<ng-template #attrs let-modifier>
+  <div class="mb-3">{{ modifier }}:</div>
+
+  <div
+    class="form-check d-inline-block d-xl-block pr-2"
+    *ngFor="let filter of filters"
+  >
+    <input
+      class="form-check-input"
+      type="checkbox"
+      [ngModel]="isFilterChecked(filter, modifier) | async"
+      (ngModelChange)="toggleFilter(filter, modifier)"
+      [id]="modifier + filter"
+    />
+    <label class="form-check-label" [for]="modifier + filter">
+      {{ filter }}
+    </label>
+  </div>
+</ng-template>

@@ -1,4 +1,4 @@
-## Sanny Commands Library Editor
+## Sanny Builder Library Editor
 
 Generated with Angular CLI v11.2
 

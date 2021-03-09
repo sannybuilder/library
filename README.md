@@ -1,4 +1,4 @@
-# Sanny Commands Library
+# Sanny Builder Library
 
 An attempt to build a complete and consistent class system and commands documentation spanning GTA 3D series games. Heavily based on original naming conventions.
 

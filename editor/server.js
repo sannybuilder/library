@@ -41,9 +41,9 @@ app.listen(port, () => {
 function getCommandsFile(game) {
   switch (game) {
     case "gta3":
-      return "data/gta3-scl.json";
+      return "data/gta3.json";
     case "vc":
-      return "data/vc-scl.json";
+      return "data/vc.json";
   }
   throw new Error(`unknown game: ${game}`);
 }

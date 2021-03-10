@@ -16,7 +16,7 @@ import {
 } from './actions';
 import { without, sortBy } from 'lodash';
 
-export interface State {
+export interface RootState {
   extensions?: Extension[];
   lastUpdate?: number;
   error?: string;
@@ -36,7 +36,7 @@ export interface State {
   entities?: Record<string, string[]>;
 }
 
-export const initialState: State = {
+export const initialState: RootState = {
   loading: false,
   displayLastUpdated: false,
   displaySearchBar: false,
@@ -175,7 +175,7 @@ const _reducer = createReducer(
   }))
 );
 
-export function reducer(state: State, action: Action) {
+export function rootReducer(state: RootState, action: Action) {
   return _reducer(state, action);
 }
 

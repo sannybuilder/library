@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CONFIG, Config } from '../config';
 import { Extension, Game } from '../models';
-import { pickBy } from 'lodash';
 
 interface LoadCommandsResponse {
   meta: {
@@ -18,7 +17,7 @@ interface UpdateCommandsResponse {
   last_update: number;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CommandsService {
   constructor(
     private http: HttpClient,

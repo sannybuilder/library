@@ -33,7 +33,7 @@ import {
   extensionNamesSelector,
 } from './selectors';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class StateFacade {
   extensions$ = this.store$
     .select(extensionsSelector)

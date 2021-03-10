@@ -1,7 +1,7 @@
 <nav class="navbar sticky-top bg-dark navbar-expand overflow-hidden mb-3">
   <div class="container-xl">
     <div class="row flex-grow-1">
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-lg-4">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <a routerLink="/" class="nav-link d-inline-block"
@@ -50,10 +50,10 @@
           </li>
         </ul>
       </div>
-      <div class="col-12 col-lg-6 d-flex">
+      <div class="col-12 col-lg-5 d-flex">
         <form
-          class="form-inline mt-2 my-lg-0 flex-nowrap flex-grow-1 justify-content-lg-end"
           *ngIf="displaySearchBar$ | async"
+          class="form-inline my-2 my-lg-0 flex-nowrap flex-grow-1 justify-content-lg-end"
         >
           <input
             name="search"
@@ -72,6 +72,23 @@
             Clear
           </button>
         </form>
+      </div>
+      <div class="col-12 col-lg-3 d-flex">
+        <div class="d-flex align-items-center">
+          <div class="mr-2" *ngIf="avatarUrl$ | async as avatar">
+            <img [src]="avatar" width="24" height="24" />
+            <span class="px-2">Welcome, {{ userName$ | async }} </span>
+            <a href="#" (click)="logout()">Logout</a>
+          </div>
+
+          <button
+            *ngIf="(isAuthorized$ | async) === false"
+            class="btn btn-outline-success d-flex"
+            (click)="login()"
+          >
+            Login
+          </button>
+        </div>
       </div>
     </div>
   </div>

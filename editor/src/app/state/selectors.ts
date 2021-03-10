@@ -1,12 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Extension } from '../models';
-import { State } from './reducer';
+import { RootState } from './reducer';
 
-export const root = createFeatureSelector('root');
+export const state = createFeatureSelector('root');
 
 export const extensionsSelector = createSelector(
-  root,
-  (state: State) => state.extensions
+  state,
+  (state: RootState) => state.extensions
 );
 
 export const extensionNamesSelector = createSelector(
@@ -16,34 +16,34 @@ export const extensionNamesSelector = createSelector(
 );
 
 export const errorSelector = createSelector(
-  root,
-  (state: State) => state.error
+  state,
+  (state: RootState) => state.error
 );
 
 export const loadingSelector = createSelector(
-  root,
-  (state: State) => state.loading
+  state,
+  (state: RootState) => state.loading
 );
 
 export const lastUpdateSelector = createSelector(
-  root,
-  (state: State) => state.lastUpdate
+  state,
+  (state: RootState) => state.lastUpdate
 );
 
 export const selectedExtensionsSelector = createSelector(
-  root,
-  (state: State, props: { extension: string }) =>
+  state,
+  (state: RootState, props: { extension: string }) =>
     state.selectedExtensions.includes(props.extension)
 );
 
 export const selectedFiltersOnlySelector = createSelector(
-  root,
-  (state: State) => state.selectedFiltersOnly
+  state,
+  (state: RootState) => state.selectedFiltersOnly
 );
 
 export const selectedFiltersExceptSelector = createSelector(
-  root,
-  (state: State) => state.selectedFiltersExcept
+  state,
+  (state: RootState) => state.selectedFiltersExcept
 );
 
 export const isFilterSelectedOnlySelector = createSelector(
@@ -59,38 +59,44 @@ export const isFilterSelectedExceptSelector = createSelector(
 );
 
 export const searchTermSelector = createSelector(
-  root,
-  (state: State) => state.searchTerm
+  state,
+  (state: RootState) => state.searchTerm
 );
 
 export const displaySearchBarSelector = createSelector(
-  root,
-  (state: State) => state.displaySearchBar
+  state,
+  (state: RootState) => state.displaySearchBar
 );
 
 export const displayLastUpdatedSelector = createSelector(
-  root,
-  (state: State) => state.displayLastUpdated
+  state,
+  (state: RootState) => state.displayLastUpdated
 );
 
 export const commandToDisplayOrEditSelector = createSelector(
-  root,
-  (state: State) => ({
+  state,
+  (state: RootState) => ({
     command: state.commandToDisplayOrEdit,
     extension: state.extensionToDisplayOrEdit,
     viewMode: state.viewMode,
   })
 );
 
-export const opcodeOnLoadSelector = createSelector(root, (state: State) => ({
-  opcode: state.opcodeOnLoad,
-  extension: state.extensionOnLoad,
-}));
+export const opcodeOnLoadSelector = createSelector(
+  state,
+  (state: RootState) => ({
+    opcode: state.opcodeOnLoad,
+    extension: state.extensionOnLoad,
+  })
+);
 
-export const gameSelector = createSelector(root, (state: State) => state.game);
+export const gameSelector = createSelector(
+  state,
+  (state: RootState) => state.game
+);
 
 export const entitiesSelector = createSelector(
-  root,
-  (state: State, props: { extension: string }) =>
+  state,
+  (state: RootState, props: { extension: string }) =>
     state.entities?.[props.extension] ?? []
 );

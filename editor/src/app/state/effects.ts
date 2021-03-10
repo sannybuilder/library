@@ -12,11 +12,11 @@ import {
 import { CommandsService } from './service';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { StateFacade } from './facade';
-import { Game, ViewMode } from '../models';
+import { ViewMode } from '../models';
 import { combineLatest } from 'rxjs';
 
 @Injectable()
-export class StateEffects {
+export class RootEffects {
   loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadExtensions),

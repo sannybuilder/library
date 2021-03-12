@@ -29,9 +29,11 @@ export class HeaderComponent {
 
   login() {
     this._authFacade.login();
+    return false;
   }
 
   logout() {
     this._authFacade.logout();
+    return false;
   }
 }

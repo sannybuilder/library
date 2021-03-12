@@ -16,21 +16,24 @@
             <div class="card">
               <div class="card-body">
                 <a
-                  *ngIf="config.features.editing"
+                  *ngIf="editable$ | async; else infoLink"
                   class="btn edit-button small text-muted"
                   href="#"
                   (click)="edit(command, extension.name)"
                   >Edit</a
                 >
-                <a
-                  *ngIf="!config.features.editing"
-                  class="btn edit-button small text-muted"
-                  (click)="displayInfo(command, extension.name)"
-                  [routerLink]="['/', game, extension.name, command.id]"
-                  [replaceUrl]="true"
-                  [name]="command.id"
-                  >Info</a
-                >
+
+                <ng-template #infoLink>
+                  <a
+                    class="btn edit-button small text-muted"
+                    (click)="displayInfo(command, extension.name)"
+                    [routerLink]="['/', game, extension.name, command.id]"
+                    [replaceUrl]="true"
+                    [name]="command.id"
+                    >Info</a
+                  >
+                </ng-template>
+
                 <div class="row">
                   <div class="col-md-2">
                     <a

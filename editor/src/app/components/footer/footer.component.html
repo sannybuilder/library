@@ -1,5 +1,10 @@
 <nav class="navbar fixed-bottom navbar-light bg-dark">
-  <div class="container-fluid justify-content-center">
+  <div class="container-fluid justify-content-center flex-row">
+    <div class="save-button-container" *ngIf="(changesCount$ | async) > 0">
+      <button class="btn btn-outline-success" (click)="submitChanges()">
+        Save To GitHub
+      </button>
+    </div>
     <small
       ><a href="https://github.com/sannybuilder/library">About</a>
       <ng-container

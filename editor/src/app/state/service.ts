@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { pickBy } from 'lodash';
+
+import { AuthService } from '../auth/auth.service';
 import { CONFIG, Config } from '../config';
 import { Extension, Game } from '../models';
 
@@ -21,7 +24,8 @@ interface UpdateCommandsResponse {
 export class CommandsService {
   constructor(
     private http: HttpClient,
-    @Inject(CONFIG) public config: Config
+    @Inject(CONFIG) public config: Config,
+    private _authService: AuthService
   ) {}
 
   loadExtensions(
@@ -38,13 +42,23 @@ export class CommandsService {
     );
   }
 
-  updateExtensions(
+  saveChanges(
     game: Game,
     data: Extension[]
   ): Observable<{ lastUpdate: number }> {
-    return this.http
-      .post<UpdateCommandsResponse>(this.getEndpoint(game), data)
-      .pipe(map(({ last_update: lastUpdate }) => ({ lastUpdate })));
+    const lastUpdate = Date.now();
+    const newContent = {
+      meta: {
+        last_update: lastUpdate,
+      },
+      extensions: this.stripBody(data),
+    };
+    return from(
+      this._authService.saveFile(
+        this.getFileName(game),
+        JSON.stringify(newContent, null, 2)
+      )
+    ).pipe(map(() => ({ lastUpdate })));
   }
 
   private getEndpoint(game: Game) {
@@ -55,5 +69,34 @@ export class CommandsService {
         return this.config.endpoints.commands.vc;
     }
     throw new Error(`unknown game: ${game}`);
+  }
+
+  private getFileName(game: Game) {
+    switch (game) {
+      case 'gta3':
+        return 'editor/data/gta3.json';
+      case 'vc':
+        return 'editor/data/vc.json';
+    }
+    throw new Error(`unknown game: ${game}`);
+  }
+
+  private stripBody(data: Extension[]) {
+    return data.map((e) => ({
+      ...e,
+      commands: e.commands.map((c) =>
+        pickBy(
+          {
+            ...c,
+            id: c.id,
+            attrs: pickBy(c.attrs, (x) => x),
+            class: c.attrs.is_unsupported ? null : c.class,
+            member: c.attrs.is_unsupported ? null : c.member,
+            short_desc: c.attrs.is_unsupported ? null : c.short_desc,
+          },
+          (x) => x !== null && (!Array.isArray(x) || x.length > 0)
+        )
+      ),
+    }));
   }
 }

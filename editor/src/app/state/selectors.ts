@@ -4,76 +4,73 @@ import { RootState } from './reducer';
 
 export const state = createFeatureSelector('root');
 
-export const extensionsSelector = createSelector(
+export const extensions = createSelector(
   state,
   (state: RootState) => state.extensions
 );
 
-export const extensionNamesSelector = createSelector(
-  extensionsSelector,
+export const extensionNames = createSelector(
+  extensions,
   (extensions?: Extension[]) =>
     extensions ? extensions.map((e) => e.name) : []
 );
 
-export const errorSelector = createSelector(
-  state,
-  (state: RootState) => state.error
-);
+export const error = createSelector(state, (state: RootState) => state.error);
 
-export const loadingSelector = createSelector(
+export const loading = createSelector(
   state,
   (state: RootState) => state.loading
 );
 
-export const lastUpdateSelector = createSelector(
+export const lastUpdate = createSelector(
   state,
   (state: RootState) => state.lastUpdate
 );
 
-export const selectedExtensionsSelector = createSelector(
+export const selectedExtensions = createSelector(
   state,
   (state: RootState, props: { extension: string }) =>
     state.selectedExtensions.includes(props.extension)
 );
 
-export const selectedFiltersOnlySelector = createSelector(
+export const selectedFiltersOnly = createSelector(
   state,
   (state: RootState) => state.selectedFiltersOnly
 );
 
-export const selectedFiltersExceptSelector = createSelector(
+export const selectedFiltersExcept = createSelector(
   state,
   (state: RootState) => state.selectedFiltersExcept
 );
 
-export const isFilterSelectedOnlySelector = createSelector(
-  selectedFiltersOnlySelector,
+export const isFilterSelectedOnly = createSelector(
+  selectedFiltersOnly,
   (selectedFilters: string[], props: { filter: string }) =>
     selectedFilters.includes(props.filter)
 );
 
-export const isFilterSelectedExceptSelector = createSelector(
-  selectedFiltersExceptSelector,
+export const isFilterSelectedExcept = createSelector(
+  selectedFiltersExcept,
   (selectedFilters: string[], props: { filter: string }) =>
     selectedFilters.includes(props.filter)
 );
 
-export const searchTermSelector = createSelector(
+export const searchTerm = createSelector(
   state,
   (state: RootState) => state.searchTerm
 );
 
-export const displaySearchBarSelector = createSelector(
+export const displaySearchBar = createSelector(
   state,
   (state: RootState) => state.displaySearchBar
 );
 
-export const displayLastUpdatedSelector = createSelector(
+export const displayLastUpdated = createSelector(
   state,
   (state: RootState) => state.displayLastUpdated
 );
 
-export const commandToDisplayOrEditSelector = createSelector(
+export const commandToDisplayOrEdit = createSelector(
   state,
   (state: RootState) => ({
     command: state.commandToDisplayOrEdit,
@@ -82,21 +79,20 @@ export const commandToDisplayOrEditSelector = createSelector(
   })
 );
 
-export const opcodeOnLoadSelector = createSelector(
-  state,
-  (state: RootState) => ({
-    opcode: state.opcodeOnLoad,
-    extension: state.extensionOnLoad,
-  })
-);
+export const opcodeOnLoad = createSelector(state, (state: RootState) => ({
+  opcode: state.opcodeOnLoad,
+  extension: state.extensionOnLoad,
+}));
 
-export const gameSelector = createSelector(
-  state,
-  (state: RootState) => state.game
-);
+export const game = createSelector(state, (state: RootState) => state.game);
 
-export const entitiesSelector = createSelector(
+export const entities = createSelector(
   state,
   (state: RootState, props: { extension: string }) =>
     state.entities?.[props.extension] ?? []
+);
+
+export const changesCount = createSelector(
+  state,
+  (state: RootState) => state.changesCount
 );

@@ -14,7 +14,7 @@ export class AuthService {
   private readonly sessionKey = 'sbl.oauth.access_token';
   private readonly client_id = 'c07f7913dd4515732ac7';
 
-  public github?: KoreFile; 
+  public github?: KoreFile;
 
   constructor(
     private _http: HttpClient,
@@ -35,7 +35,7 @@ export class AuthService {
         repo: 'library',
         ref: 'heads/master',
         token: access_token,
-      })
+      }),
     });
   }
 
@@ -56,5 +56,9 @@ export class AuthService {
     return this._http.get<UserResponse>('https://api.github.com/user', {
       headers: headers,
     });
+  }
+
+  async saveFile(fileName: string, content: string) {
+    await this.github.writeFile(fileName, content);
   }
 }

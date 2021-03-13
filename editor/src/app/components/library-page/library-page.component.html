@@ -18,7 +18,12 @@
           </li>
         </ol>
       </nav>
-      <scl-command-list [game]="game$ | async"></scl-command-list>
+      <scl-command-list
+        [game]="game$ | async"
+        [canEdit]="canEdit$ | async"
+        (view)="onView($event.command, $event.extension)"
+        (edit)="onEdit($event.command, $event.extension)"
+      ></scl-command-list>
     </div>
     <div class="d-none d-xl-block col-xl-5">
       <ng-container *ngIf="command">
@@ -47,7 +52,15 @@
       class="btn btn-outline-secondary"
       (click)="onCancel()"
     >
-      {{ viewMode === ViewMode.Edit ? "Cancel" : "Close" }}
+      Close
+    </button>
+    <button
+      *ngIf="viewMode === ViewMode.View && canEdit$ | async"
+      type="button"
+      class="btn btn-outline-success"
+      (click)="onEdit(command, extension)"
+    >
+      Edit
     </button>
     <button
       *ngIf="viewMode === ViewMode.Edit"

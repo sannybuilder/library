@@ -10,7 +10,7 @@ import {
   toggleExtension,
   toggleFilter,
   updateCommand,
-  updateExtensionsSuccess,
+  submitChangesSuccess,
   updateSearchTerm,
   onListEnter,
 } from './actions';
@@ -34,6 +34,7 @@ export interface RootState {
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
   entities?: Record<string, string[]>;
+  changesCount: number;
 }
 
 export const initialState: RootState = {
@@ -43,11 +44,17 @@ export const initialState: RootState = {
   viewMode: ViewMode.None,
   selectedFiltersOnly: [],
   selectedFiltersExcept: ['is_nop', 'is_unsupported'],
+  changesCount: 0,
 };
 
 const _reducer = createReducer(
   initialState,
-  on(loadExtensions, (state, { game }) => ({ ...state, game, loading: true })),
+  on(loadExtensions, (state, { game }) => ({
+    ...state,
+    game,
+    loading: true,
+    changesCount: 0,
+  })),
   on(loadExtensionsSuccess, (state, { extensions, lastUpdate }) => ({
     ...state,
     loading: false,
@@ -118,12 +125,19 @@ const _reducer = createReducer(
 
       const entities = getEntities(extensions);
 
-      return { ...state, extensions, selectedExtensions, entities };
+      return {
+        ...state,
+        extensions,
+        selectedExtensions,
+        entities,
+        changesCount: state.changesCount + 1,
+      };
     }
   ),
-  on(updateExtensionsSuccess, (state, { lastUpdate }) => ({
+  on(submitChangesSuccess, (state, { lastUpdate }) => ({
     ...state,
     lastUpdate,
+    changesCount: 0,
   })),
   on(toggleExtension, (state, { extension }) => {
     const selectedExtensions = state.selectedExtensions.includes(extension)

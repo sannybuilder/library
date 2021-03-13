@@ -4,7 +4,7 @@ import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { Command, Extension, Game, Modifier, ViewMode } from '../models';
 import {
   loadExtensions,
-  updateExtensions,
+  submitChanges,
   updateCommand,
   toggleExtension,
   updateSearchTerm,
@@ -14,46 +14,31 @@ import {
   stopEditOrDisplay,
   onListEnter,
 } from './actions';
-import {
-  extensionsSelector,
-  lastUpdateSelector,
-  loadingSelector,
-  selectedExtensionsSelector,
-  searchTermSelector,
-  displaySearchBarSelector,
-  displayLastUpdatedSelector,
-  entitiesSelector,
-  selectedFiltersOnlySelector,
-  selectedFiltersExceptSelector,
-  isFilterSelectedOnlySelector,
-  isFilterSelectedExceptSelector,
-  gameSelector,
-  commandToDisplayOrEditSelector,
-  opcodeOnLoadSelector,
-  extensionNamesSelector,
-} from './selectors';
+import * as selector from './selectors';
 
 @Injectable()
 export class StateFacade {
   extensions$ = this.store$
-    .select(extensionsSelector)
+    .select(selector.extensions)
     .pipe(filter<Extension[]>(Boolean));
 
-  extensionNames$ = this.store$.select(extensionNamesSelector);
-  loading$ = this.store$.select(loadingSelector);
-  lastUpdate$ = this.store$.select(lastUpdateSelector);
-  searchTerm$ = this.store$.select(searchTermSelector);
-  displaySearchBar$ = this.store$.select(displaySearchBarSelector);
-  displayLastUpdated$ = this.store$.select(displayLastUpdatedSelector);
-  selectedFiltersOnly$ = this.store$.select(selectedFiltersOnlySelector);
-  selectedFiltersExcept$ = this.store$.select(selectedFiltersExceptSelector);
+  extensionNames$ = this.store$.select(selector.extensionNames);
+  loading$ = this.store$.select(selector.loading);
+  lastUpdate$ = this.store$.select(selector.lastUpdate);
+  searchTerm$ = this.store$.select(selector.searchTerm);
+  displaySearchBar$ = this.store$.select(selector.displaySearchBar);
+  displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
+  selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
+  selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
+  changesCount$ = this.store$.select(selector.changesCount);
+
   game$ = this.store$
-    .select(gameSelector)
+    .select(selector.game)
     .pipe(distinctUntilChanged(), filter<Game>(Boolean));
 
-  commandToDisplayOrEdit$ = this.store$.select(commandToDisplayOrEditSelector);
+  commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
 
-  opcodeOnLoad$ = this.store$.select(opcodeOnLoadSelector).pipe(
+  opcodeOnLoad$ = this.store$.select(selector.opcodeOnLoad).pipe(
     distinctUntilChanged(
       (a, b) => a.opcode === b.opcode && a.extension === b.extension
     ),
@@ -61,20 +46,22 @@ export class StateFacade {
   );
 
   getExtensionCheckedState(extension: string) {
-    return this.store$.select(selectedExtensionsSelector, { extension });
+    return this.store$.select(selector.selectedExtensions, {
+      extension,
+    });
   }
 
   getFilterCheckedState(filter: string, modifier: Modifier) {
     return this.store$.select(
       modifier === 'only'
-        ? isFilterSelectedOnlySelector
-        : isFilterSelectedExceptSelector,
+        ? selector.isFilterSelectedOnly
+        : selector.isFilterSelectedExcept,
       { filter }
     );
   }
 
   getExtensionEntities(extension: string) {
-    return this.store$.select(entitiesSelector, { extension });
+    return this.store$.select(selector.entities, { extension });
   }
 
   constructor(private store$: Store) {}
@@ -83,8 +70,8 @@ export class StateFacade {
     this.store$.dispatch(loadExtensions({ game }));
   }
 
-  updateExtensions(extensions: Extension[], game: Game) {
-    this.store$.dispatch(updateExtensions({ extensions, game }));
+  submitChanges() {
+    this.store$.dispatch(submitChanges());
   }
 
   updateCommand({

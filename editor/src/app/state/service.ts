@@ -6,7 +6,7 @@ import { pickBy } from 'lodash';
 
 import { AuthService } from '../auth/auth.service';
 import { CONFIG, Config } from '../config';
-import { Extension, Game } from '../models';
+import { Extension, Game, GameLibrary } from '../models';
 
 interface LoadCommandsResponse {
   meta: {
@@ -55,7 +55,7 @@ export class CommandsService {
     };
     return from(
       this._authService.saveFile(
-        this.getFileName(game),
+        GameLibrary[game],
         JSON.stringify(newContent, null, 2)
       )
     ).pipe(map(() => ({ lastUpdate })));
@@ -67,16 +67,6 @@ export class CommandsService {
         return this.config.endpoints.commands.gta3;
       case Game.VC:
         return this.config.endpoints.commands.vc;
-    }
-    throw new Error(`unknown game: ${game}`);
-  }
-
-  private getFileName(game: Game) {
-    switch (game) {
-      case 'gta3':
-        return 'editor/data/gta3.json';
-      case 'vc':
-        return 'editor/data/vc.json';
     }
     throw new Error(`unknown game: ${game}`);
   }

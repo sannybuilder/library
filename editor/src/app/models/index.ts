@@ -73,6 +73,11 @@ export const GameClasses: Record<Game, string> = {
   [Game.VC]: 'assets/vc_classes.db',
 };
 
+export const GameLibrary: Record<Game, string> = {
+  [Game.GTA3]: 'gta3/gta3.json',
+  [Game.VC]: 'vc/vc.json',
+};
+
 export const GameTitle: Record<Game, string> = {
   [Game.GTA3]: 'GTA III',
   [Game.VC]: 'Vice City',

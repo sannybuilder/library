@@ -10,9 +10,9 @@ export const environment: Config = {
   endpoints: {
     commands: {
       [Game.GTA3]:
-        'https://raw.githubusercontent.com/sannybuilder/library/master/editor/data/gta3.json',
+        'https://raw.githubusercontent.com/sannybuilder/library/master/gta3/gta3.json',
       [Game.VC]:
-        'https://raw.githubusercontent.com/sannybuilder/library/master/editor/data/vc.json',
+        'https://raw.githubusercontent.com/sannybuilder/library/master/vc/vc.json',
     },
   },
 };

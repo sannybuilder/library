@@ -8,7 +8,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
-import { ParamsPipe, OpcodePipe, AttrFilterPipe, GameTitlePipe } from './pipes';
+import {
+  ClassParamsPipe,
+  KeywordParamsPipe,
+  OpcodePipe,
+  AttrFilterPipe,
+  GameTitlePipe,
+} from './pipes';
 import { rootReducer } from './state/reducer';
 import { RootEffects } from './state/effects';
 import { FusejsService } from './fusejs/fusejs.service';
@@ -38,7 +44,8 @@ import { AuthEffects } from './auth/auth.effects';
   declarations: [
     AppComponent,
     CommandListComponent,
-    ParamsPipe,
+    ClassParamsPipe,
+    KeywordParamsPipe,
     OpcodePipe,
     FusejsPipe,
     AttrFilterPipe,

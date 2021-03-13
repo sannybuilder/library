@@ -2,10 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Command } from '../models';
 
 @Pipe({
-  name: 'params',
+  name: 'classParams',
 })
-export class ParamsPipe implements PipeTransform {
-  transform(value: Command, ...args: unknown[]): unknown {
+export class ClassParamsPipe implements PipeTransform {
+  transform(value: Command): string {
     if (!value.num_params) {
       return '()';
     }

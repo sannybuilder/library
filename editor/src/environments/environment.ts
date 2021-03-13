@@ -2,7 +2,6 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { Game } from 'src/app/models';
 import { Config } from '../app/config';
 
 export const environment: Config = {
@@ -10,14 +9,7 @@ export const environment: Config = {
   features: {
     editing: true,
   },
-  endpoints: {
-    commands: {
-      [Game.GTA3]:
-        'https://raw.githubusercontent.com/sannybuilder/library/master/gta3/gta3.json',
-      [Game.VC]:
-        'https://raw.githubusercontent.com/sannybuilder/library/master/vc/vc.json',
-    },
-  },
+  endpoints: {},
 };
 
 /*

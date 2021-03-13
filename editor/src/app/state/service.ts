@@ -15,11 +15,6 @@ interface LoadCommandsResponse {
   extensions: Extension[];
 }
 
-interface UpdateCommandsResponse {
-  result: 'OK';
-  last_update: number;
-}
-
 @Injectable()
 export class CommandsService {
   constructor(
@@ -62,13 +57,7 @@ export class CommandsService {
   }
 
   private getEndpoint(game: Game) {
-    switch (game) {
-      case Game.GTA3:
-        return this.config.endpoints.commands.gta3;
-      case Game.VC:
-        return this.config.endpoints.commands.vc;
-    }
-    throw new Error(`unknown game: ${game}`);
+    return `https://raw.githubusercontent.com/sannybuilder/library/master/${GameLibrary[game]}`;
   }
 
   private stripBody(data: Extension[]) {

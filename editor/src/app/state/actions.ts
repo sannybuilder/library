@@ -12,12 +12,9 @@ export const loadExtensionsSuccess = createAction(
 
 export const loadExtensionsError = createAction('load extensions error');
 
-export const updateExtensions = createAction(
-  'update extensions',
-  props<{ extensions: Extension[]; game: Game }>()
-);
+export const submitChanges = createAction('submit changes');
 
-export const updateExtensionsSuccess = createAction(
+export const submitChangesSuccess = createAction(
   'update extensions success',
   props<{ lastUpdate: number }>()
 );

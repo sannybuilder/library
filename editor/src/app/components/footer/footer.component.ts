@@ -9,6 +9,11 @@ import { StateFacade } from 'src/app/state/facade';
 export class FooterComponent {
   lastUpdate$ = this._facade.lastUpdate$;
   displayLastUpdate$ = this._facade.displayLastUpdated$;
+  changesCount$ = this._facade.changesCount$;
 
   constructor(private _facade: StateFacade) {}
+
+  submitChanges() {
+    this._facade.submitChanges();
+  }
 }

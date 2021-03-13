@@ -5,8 +5,24 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
+import { AuthFacade } from './auth/auth.facade';
 import { DEFAULT_EXTENSION, Game } from './models';
 import { StateFacade } from './state/facade';
+import { Location } from '@angular/common';
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+  constructor(private _facade: AuthFacade, private location: Location) {}
+
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    const { access_token } = route.queryParams;
+    if (access_token) {
+      this.location.replaceState('/');
+    }
+    this._facade.onAppEnter(access_token);
+    return true;
+  }
+}
 
 @Injectable()
 export class RouteGuard implements CanActivate {

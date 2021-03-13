@@ -1,9 +1,11 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 import { omit } from 'lodash';
 import { Modal } from 'bootstrap';
 
+import { CONFIG, Config } from '../../config';
+import { AuthFacade } from '../../auth/auth.facade';
 import { Command, SEARCH_OPTIONS, ViewMode } from '../../models';
 import { StateFacade } from '../../state/facade';
 
@@ -17,6 +19,9 @@ export class LibraryPageComponent implements OnDestroy {
   onDestroy$ = new Subject();
   command$ = this._facade.commandToDisplayOrEdit$;
   game$ = this._facade.game$;
+  canEdit$ = this._authFacade.isAuthorized$.pipe(
+    map((isAuthorized) => isAuthorized && this._config.features.editing)
+  );
 
   command?: Command;
   extension?: string;
@@ -26,7 +31,11 @@ export class LibraryPageComponent implements OnDestroy {
 
   private _handle: Modal;
 
-  constructor(private _facade: StateFacade) {}
+  constructor(
+    private _facade: StateFacade,
+    private _authFacade: AuthFacade,
+    @Inject(CONFIG) private _config: Config
+  ) {}
 
   ngOnDestroy() {
     this.onDestroy$.next();
@@ -67,9 +76,19 @@ export class LibraryPageComponent implements OnDestroy {
     this._facade.updateCommand({
       newExtension: this.extension,
       oldExtension: this.oldExtension,
-      command: omit(this.command, SEARCH_OPTIONS.fusejsHighlightKey),
+      command: omit(this.command, SEARCH_OPTIONS.fusejsHighlightKey) as Command,
     });
     this._handle.hide();
+  }
+
+  onView(command: Command, extension: string) {
+    this._facade.displayCommandInfo(command, extension);
+    return false;
+  }
+
+  onEdit(command: Command, extension: string) {
+    this._facade.editCommandInfo(command, extension);
+    return false;
   }
 
   onCancel() {

@@ -6,17 +6,17 @@ import {
   loadExtensionsSuccess,
   stopEditOrDisplay,
   updateCommand,
-  updateExtensions,
-  updateExtensionsSuccess,
+  submitChanges,
+  submitChangesSuccess,
 } from './actions';
 import { CommandsService } from './service';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { StateFacade } from './facade';
-import { Game, ViewMode } from '../models';
+import { ViewMode } from '../models';
 import { combineLatest } from 'rxjs';
 
 @Injectable()
-export class StateEffects {
+export class RootEffects {
   loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadExtensions),
@@ -32,15 +32,14 @@ export class StateEffects {
     )
   );
 
-  updateExtensions$ = createEffect(() =>
+  submitChanges$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(updateExtensions),
-      switchMap(({ extensions, game }) =>
+      ofType(submitChanges),
+      withLatestFrom(this.facade.extensions$, this.facade.game$),
+      switchMap(([_, extensions, game]) =>
         this.service
-          .updateExtensions(game, extensions)
-          .pipe(
-            map(({ lastUpdate }) => updateExtensionsSuccess({ lastUpdate }))
-          )
+          .saveChanges(game, extensions)
+          .pipe(map(({ lastUpdate }) => submitChangesSuccess({ lastUpdate })))
       )
     )
   );
@@ -48,8 +47,13 @@ export class StateEffects {
   updateCommand$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateCommand),
-      withLatestFrom(this.facade.extensions$, this.facade.game$),
-      map(([_, extensions, game]) => updateExtensions({ extensions, game }))
+      map(({ command, newExtension: extension }) =>
+        displayOrEditCommandInfo({
+          command,
+          extension,
+          viewMode: ViewMode.Edit,
+        })
+      )
     )
   );
 

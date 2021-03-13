@@ -1,96 +1,98 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Extension } from '../models';
-import { State } from './reducer';
+import { RootState } from './reducer';
 
-export const root = createFeatureSelector('root');
+export const state = createFeatureSelector('root');
 
-export const extensionsSelector = createSelector(
-  root,
-  (state: State) => state.extensions
+export const extensions = createSelector(
+  state,
+  (state: RootState) => state.extensions
 );
 
-export const extensionNamesSelector = createSelector(
-  extensionsSelector,
+export const extensionNames = createSelector(
+  extensions,
   (extensions?: Extension[]) =>
     extensions ? extensions.map((e) => e.name) : []
 );
 
-export const errorSelector = createSelector(
-  root,
-  (state: State) => state.error
+export const error = createSelector(state, (state: RootState) => state.error);
+
+export const loading = createSelector(
+  state,
+  (state: RootState) => state.loading
 );
 
-export const loadingSelector = createSelector(
-  root,
-  (state: State) => state.loading
+export const lastUpdate = createSelector(
+  state,
+  (state: RootState) => state.lastUpdate
 );
 
-export const lastUpdateSelector = createSelector(
-  root,
-  (state: State) => state.lastUpdate
-);
-
-export const selectedExtensionsSelector = createSelector(
-  root,
-  (state: State, props: { extension: string }) =>
+export const selectedExtensions = createSelector(
+  state,
+  (state: RootState, props: { extension: string }) =>
     state.selectedExtensions.includes(props.extension)
 );
 
-export const selectedFiltersOnlySelector = createSelector(
-  root,
-  (state: State) => state.selectedFiltersOnly
+export const selectedFiltersOnly = createSelector(
+  state,
+  (state: RootState) => state.selectedFiltersOnly
 );
 
-export const selectedFiltersExceptSelector = createSelector(
-  root,
-  (state: State) => state.selectedFiltersExcept
+export const selectedFiltersExcept = createSelector(
+  state,
+  (state: RootState) => state.selectedFiltersExcept
 );
 
-export const isFilterSelectedOnlySelector = createSelector(
-  selectedFiltersOnlySelector,
+export const isFilterSelectedOnly = createSelector(
+  selectedFiltersOnly,
   (selectedFilters: string[], props: { filter: string }) =>
     selectedFilters.includes(props.filter)
 );
 
-export const isFilterSelectedExceptSelector = createSelector(
-  selectedFiltersExceptSelector,
+export const isFilterSelectedExcept = createSelector(
+  selectedFiltersExcept,
   (selectedFilters: string[], props: { filter: string }) =>
     selectedFilters.includes(props.filter)
 );
 
-export const searchTermSelector = createSelector(
-  root,
-  (state: State) => state.searchTerm
+export const searchTerm = createSelector(
+  state,
+  (state: RootState) => state.searchTerm
 );
 
-export const displaySearchBarSelector = createSelector(
-  root,
-  (state: State) => state.displaySearchBar
+export const displaySearchBar = createSelector(
+  state,
+  (state: RootState) => state.displaySearchBar
 );
 
-export const displayLastUpdatedSelector = createSelector(
-  root,
-  (state: State) => state.displayLastUpdated
+export const displayLastUpdated = createSelector(
+  state,
+  (state: RootState) => state.displayLastUpdated
 );
 
-export const commandToDisplayOrEditSelector = createSelector(
-  root,
-  (state: State) => ({
+export const commandToDisplayOrEdit = createSelector(
+  state,
+  (state: RootState) => ({
     command: state.commandToDisplayOrEdit,
     extension: state.extensionToDisplayOrEdit,
     viewMode: state.viewMode,
   })
 );
 
-export const opcodeOnLoadSelector = createSelector(root, (state: State) => ({
+export const opcodeOnLoad = createSelector(state, (state: RootState) => ({
   opcode: state.opcodeOnLoad,
   extension: state.extensionOnLoad,
 }));
 
-export const gameSelector = createSelector(root, (state: State) => state.game);
+export const game = createSelector(state, (state: RootState) => state.game);
 
-export const entitiesSelector = createSelector(
-  root,
-  (state: State, props: { extension: string }) =>
+export const entities = createSelector(
+  state,
+  (state: RootState, props: { extension: string }) =>
     state.entities?.[props.extension] ?? []
+);
+
+export const changesCount = createSelector(
+  state,
+  (state: RootState) => state.changesCount
 );

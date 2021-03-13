@@ -1,8 +1,7 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
 
-import { CONFIG, Config } from '../../config';
 import { StateFacade } from '../../state/facade';
 import { Command, Game, SEARCH_OPTIONS } from '../../models';
 
@@ -13,30 +12,36 @@ import { Command, Game, SEARCH_OPTIONS } from '../../models';
 })
 export class CommandListComponent {
   @Input() game: Game;
+  @Input() canEdit: boolean;
+  @Output() view: EventEmitter<{
+    command: Command;
+    extension: string;
+  }> = new EventEmitter();
+  @Output() edit: EventEmitter<{
+    command: Command;
+    extension: string;
+  }> = new EventEmitter();
 
-  extensions$ = this.facade.extensions$;
-  loading$ = this.facade.loading$;
-  selectedFiltersOnly$ = this.facade.selectedFiltersOnly$;
-  selectedFiltersExcept$ = this.facade.selectedFiltersExcept$;
-  searchTerm$ = this.facade.searchTerm$.pipe(debounce(() => timer(500)));
+  extensions$ = this._facade.extensions$;
+  loading$ = this._facade.loading$;
+  selectedFiltersOnly$ = this._facade.selectedFiltersOnly$;
+  selectedFiltersExcept$ = this._facade.selectedFiltersExcept$;
+  searchTerm$ = this._facade.searchTerm$.pipe(debounce(() => timer(500)));
   searchOptions = SEARCH_OPTIONS;
 
-  constructor(
-    public facade: StateFacade,
-    @Inject(CONFIG) public config: Config
-  ) {}
+  constructor(private _facade: StateFacade) {}
 
   isExtensionChecked(extension: string) {
-    return this.facade.getExtensionCheckedState(extension);
+    return this._facade.getExtensionCheckedState(extension);
   }
 
-  edit(command: Command, extension: string) {
-    this.facade.editCommandInfo(command, extension);
+  onEdit(command: Command, extension: string) {
+    this.edit.emit({ command, extension });
     return false;
   }
 
-  displayInfo(command: Command, extension: string) {
-    this.facade.displayCommandInfo(command, extension);
+  onView(command: Command, extension: string) {
+    this.view.emit({ command, extension });
     return false;
   }
 }

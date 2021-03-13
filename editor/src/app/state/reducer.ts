@@ -10,13 +10,13 @@ import {
   toggleExtension,
   toggleFilter,
   updateCommand,
-  updateExtensionsSuccess,
+  submitChangesSuccess,
   updateSearchTerm,
   onListEnter,
 } from './actions';
 import { without, sortBy } from 'lodash';
 
-export interface State {
+export interface RootState {
   extensions?: Extension[];
   lastUpdate?: number;
   error?: string;
@@ -34,20 +34,27 @@ export interface State {
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
   entities?: Record<string, string[]>;
+  changesCount: number;
 }
 
-export const initialState: State = {
+export const initialState: RootState = {
   loading: false,
   displayLastUpdated: false,
   displaySearchBar: false,
   viewMode: ViewMode.None,
   selectedFiltersOnly: [],
   selectedFiltersExcept: ['is_nop', 'is_unsupported'],
+  changesCount: 0,
 };
 
 const _reducer = createReducer(
   initialState,
-  on(loadExtensions, (state, { game }) => ({ ...state, game, loading: true })),
+  on(loadExtensions, (state, { game }) => ({
+    ...state,
+    game,
+    loading: true,
+    changesCount: 0,
+  })),
   on(loadExtensionsSuccess, (state, { extensions, lastUpdate }) => ({
     ...state,
     loading: false,
@@ -118,12 +125,19 @@ const _reducer = createReducer(
 
       const entities = getEntities(extensions);
 
-      return { ...state, extensions, selectedExtensions, entities };
+      return {
+        ...state,
+        extensions,
+        selectedExtensions,
+        entities,
+        changesCount: state.changesCount + 1,
+      };
     }
   ),
-  on(updateExtensionsSuccess, (state, { lastUpdate }) => ({
+  on(submitChangesSuccess, (state, { lastUpdate }) => ({
     ...state,
     lastUpdate,
+    changesCount: 0,
   })),
   on(toggleExtension, (state, { extension }) => {
     const selectedExtensions = state.selectedExtensions.includes(extension)
@@ -175,7 +189,7 @@ const _reducer = createReducer(
   }))
 );
 
-export function reducer(state: State, action: Action) {
+export function rootReducer(state: RootState, action: Action) {
   return _reducer(state, action);
 }
 

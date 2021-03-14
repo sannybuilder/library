@@ -16,7 +16,7 @@ interface LoadCommandsResponse {
 }
 
 @Injectable()
-export class ExtensionsService {
+export class UiService {
   constructor(
     private http: HttpClient,
     @Inject(CONFIG) public config: Config,

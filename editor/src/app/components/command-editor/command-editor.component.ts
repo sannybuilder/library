@@ -10,8 +10,7 @@ import {
 import { opcodify } from '../../pipes';
 import { Command, CommandAttributes, Param, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
-import { ExtensionsFacade } from '../../state/extensions/facade';
-import { SnippetsFacade } from '../../state/snippets/facade';
+import { SnippetsFacade, ExtensionsFacade } from '../../state';
 
 @Component({
   selector: 'scl-command-editor',

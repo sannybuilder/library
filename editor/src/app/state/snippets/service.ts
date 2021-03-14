@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CONFIG, Config } from '../../config';
-import { ExtensionSnippets, Game, GameLibrary } from '../../models';
+import { ExtensionSnippets, Game } from '../../models';
 
 @Injectable()
 export class SnippetsService {

@@ -5,9 +5,8 @@ import { omit } from 'lodash';
 import { Modal } from 'bootstrap';
 
 import { CONFIG, Config } from '../../config';
-import { AuthFacade } from '../../state/auth/auth.facade';
 import { Command, SEARCH_OPTIONS, ViewMode } from '../../models';
-import { ExtensionsFacade } from '../../state/extensions/facade';
+import { AuthFacade, ExtensionsFacade, UiFacade } from '../../state';
 
 @Component({
   selector: 'scl-library-page',
@@ -17,8 +16,8 @@ import { ExtensionsFacade } from '../../state/extensions/facade';
 export class LibraryPageComponent implements OnDestroy {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
-  command$ = this._extensions.commandToDisplayOrEdit$;
-  game$ = this._extensions.game$;
+  command$ = this._ui.commandToDisplayOrEdit$;
+  game$ = this._ui.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
       (isAuthorized) =>
@@ -37,6 +36,7 @@ export class LibraryPageComponent implements OnDestroy {
   constructor(
     private _extensions: ExtensionsFacade,
     private _auth: AuthFacade,
+    private _ui: UiFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
 
@@ -44,7 +44,7 @@ export class LibraryPageComponent implements OnDestroy {
     this.onDestroy$.next();
     this.onDestroy$.complete();
     this._handle.dispose();
-    this._extensions.toggleCommandListElements(false);
+    this._ui.toggleCommandListElements(false);
   }
 
   ngAfterViewInit(): void {
@@ -53,7 +53,7 @@ export class LibraryPageComponent implements OnDestroy {
       keyboard: true,
     });
 
-    this._extensions.toggleCommandListElements(true);
+    this._ui.toggleCommandListElements(true);
 
     this.command$
       .pipe(takeUntil(this.onDestroy$))
@@ -85,17 +85,17 @@ export class LibraryPageComponent implements OnDestroy {
   }
 
   onView(command: Command, extension: string) {
-    this._extensions.displayCommandInfo(command, extension);
+    this._ui.displayCommandInfo(command, extension);
     return false;
   }
 
   onEdit(command: Command, extension: string) {
-    this._extensions.editCommandInfo(command, extension);
+    this._ui.editCommandInfo(command, extension);
     return false;
   }
 
   onCancel() {
-    this._extensions.stopEditOrDisplay();
+    this._ui.stopEditOrDisplay();
     this._handle.hide();
   }
 

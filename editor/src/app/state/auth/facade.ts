@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { enter, authorize, authorizeFail } from './auth.actions';
+import { enter, authorize, authorizeFail } from './actions';
 import {
   avatarUrlSelector,
   isAuthorizedSelector,
   userNameSelector,
-} from './auth.selectors';
+} from './selectors';
 
 @Injectable()
 export class AuthFacade {

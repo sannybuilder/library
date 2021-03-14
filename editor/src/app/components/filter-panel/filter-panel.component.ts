@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommandAttributes, Modifier } from '../../models';
-import { ExtensionsFacade } from '../../state/extensions/facade';
+import { ExtensionsFacade, UiFacade } from '../../state';
 
 @Component({
   selector: 'scl-filter-panel',
@@ -12,7 +12,7 @@ export class FilterPanelComponent {
 
   filters = CommandAttributes;
 
-  constructor(private _extensions: ExtensionsFacade) {}
+  constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
   toggleExtension(extenstion: string) {
     this._extensions.toggleExtension(extenstion);
@@ -23,10 +23,10 @@ export class FilterPanelComponent {
   }
 
   toggleFilter(filter: string, modifier: Modifier) {
-    this._extensions.toggleFilter(filter, modifier);
+    this._ui.toggleFilter(filter, modifier);
   }
 
   isFilterChecked(filter: string, modifier: Modifier) {
-    return this._extensions.getFilterCheckedState(filter, modifier);
+    return this._ui.getFilterCheckedState(filter, modifier);
   }
 }

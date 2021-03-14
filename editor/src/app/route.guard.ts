@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -5,28 +6,28 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { AuthFacade } from './state/auth/auth.facade';
 import { DEFAULT_EXTENSION, Game } from './models';
+import { AuthFacade } from './state/auth/facade';
 import { ExtensionsFacade } from './state/extensions/facade';
-import { Location } from '@angular/common';
+import { UiFacade } from './state/ui/facade';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private _facade: AuthFacade, private location: Location) {}
+  constructor(private _auth: AuthFacade, private location: Location) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const { access_token } = route.queryParams;
     if (access_token) {
       this.location.replaceState('/');
     }
-    this._facade.onAppEnter(access_token);
+    this._auth.onAppEnter(access_token);
     return true;
   }
 }
 
 @Injectable()
 export class RouteGuard implements CanActivate {
-  constructor(private _router: Router, private _facade: ExtensionsFacade) {}
+  constructor(private _router: Router, private _ui: UiFacade) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const segments = getSegmentsFromUrl(this._router, state.url);
@@ -41,7 +42,7 @@ export class RouteGuard implements CanActivate {
       const extension = segments.shift() || DEFAULT_EXTENSION;
       const opcode = segments.shift();
 
-      this._facade.onListEnter(game, opcode, extension);
+      this._ui.onListEnter(game, opcode, extension);
       return true;
     }
 

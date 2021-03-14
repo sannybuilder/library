@@ -1,50 +1,25 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Command, Extension, Game, ViewMode } from '../../models';
 import {
-  displayOrEditCommandInfo,
   loadExtensions,
   loadExtensionsError,
   loadExtensionsSuccess,
-  stopEditOrDisplay,
-  toggleCommandListElements,
   toggleExtension,
-  toggleFilter,
   updateCommand,
   submitChangesSuccess,
-  updateSearchTerm,
-  onListEnter,
 } from './actions';
 import { without, sortBy } from 'lodash';
 
 export interface ExtensionsState {
   extensions?: Extension[];
-  lastUpdate?: number;
-  error?: string;
-  loading: boolean;
   selectedExtensions?: string[];
-  searchTerm?: string;
-  displaySearchBar: boolean;
-  displayLastUpdated: boolean;
-  selectedFiltersOnly: string[];
-  selectedFiltersExcept: string[];
-  commandToDisplayOrEdit?: Command;
-  extensionToDisplayOrEdit?: string;
-  viewMode: ViewMode;
-  game?: Game;
-  opcodeOnLoad?: string;
-  extensionOnLoad?: string;
+  lastUpdate?: number;
+  loading: boolean;
   entities?: Record<string, string[]>;
-  changesCount: number;
 }
 
 export const initialState: ExtensionsState = {
   loading: false,
-  displayLastUpdated: false,
-  displaySearchBar: false,
-  viewMode: ViewMode.None,
-  selectedFiltersOnly: [],
-  selectedFiltersExcept: ['is_nop', 'is_unsupported'],
-  changesCount: 0,
 };
 
 const _reducer = createReducer(
@@ -130,7 +105,6 @@ const _reducer = createReducer(
         extensions,
         selectedExtensions,
         entities,
-        changesCount: state.changesCount + 1,
       };
     }
   ),
@@ -144,49 +118,7 @@ const _reducer = createReducer(
       ? without(state.selectedExtensions, extension)
       : [...state.selectedExtensions, extension];
     return { ...state, selectedExtensions };
-  }),
-  on(toggleFilter, (state, { filter, modifier }) => {
-    const filters =
-      modifier === 'only'
-        ? state.selectedFiltersOnly
-        : state.selectedFiltersExcept;
-    const selectedFilters = filters.includes(filter)
-      ? without(filters, filter)
-      : [...filters, filter];
-    return {
-      ...state,
-      [modifier === 'only'
-        ? 'selectedFiltersOnly'
-        : 'selectedFiltersExcept']: selectedFilters,
-    };
-  }),
-  on(updateSearchTerm, (state, { term: searchTerm }) => ({
-    ...state,
-    searchTerm,
-  })),
-  on(toggleCommandListElements, (state, { flag }) => ({
-    ...state,
-    displaySearchBar: flag,
-    displayLastUpdated: flag,
-  })),
-  on(displayOrEditCommandInfo, (state, { command, extension, viewMode }) => ({
-    ...state,
-    viewMode,
-    commandToDisplayOrEdit: command,
-    extensionToDisplayOrEdit: extension,
-  })),
-  on(stopEditOrDisplay, (state) => ({
-    ...state,
-    commandToDisplayOrEdit: undefined,
-    extensionToDisplayOrEdit: undefined,
-    viewMode: ViewMode.None,
-  })),
-  on(onListEnter, (state, { game, opcode, extension }) => ({
-    ...state,
-    game,
-    opcodeOnLoad: opcode,
-    extensionOnLoad: extension,
-  }))
+  })
 );
 
 export function extensionsReducer(state: ExtensionsState, action: Action) {

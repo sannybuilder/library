@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ExtensionsFacade } from '../../state/extensions/facade';
+import { ExtensionsFacade, UiFacade } from '../../state';
 
 @Component({
   selector: 'scl-footer',
@@ -8,10 +8,10 @@ import { ExtensionsFacade } from '../../state/extensions/facade';
 })
 export class FooterComponent {
   lastUpdate$ = this._extensions.lastUpdate$;
-  displayLastUpdate$ = this._extensions.displayLastUpdated$;
-  changesCount$ = this._extensions.changesCount$;
+  displayLastUpdate$ = this._ui.displayLastUpdated$;
+  changesCount$ = this._ui.changesCount$;
 
-  constructor(private _extensions: ExtensionsFacade) {}
+  constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
   submitChanges() {
     this._extensions.submitChanges();

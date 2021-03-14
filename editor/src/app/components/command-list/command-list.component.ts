@@ -2,9 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
 
-import { ExtensionsFacade } from '../../state/extensions/facade';
 import { Command, Game, SEARCH_OPTIONS } from '../../models';
-import { SnippetsFacade } from '../../state/snippets/facade';
+import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
 
 @Component({
   selector: 'scl-command-list',
@@ -25,14 +24,15 @@ export class CommandListComponent {
 
   extensions$ = this._extensions.extensions$;
   loading$ = this._extensions.loading$;
-  selectedFiltersOnly$ = this._extensions.selectedFiltersOnly$;
-  selectedFiltersExcept$ = this._extensions.selectedFiltersExcept$;
-  searchTerm$ = this._extensions.searchTerm$.pipe(debounce(() => timer(500)));
+  selectedFiltersOnly$ = this._ui.selectedFiltersOnly$;
+  selectedFiltersExcept$ = this._ui.selectedFiltersExcept$;
+  searchTerm$ = this._ui.searchTerm$.pipe(debounce(() => timer(500)));
   searchOptions = SEARCH_OPTIONS;
 
   constructor(
     private _extensions: ExtensionsFacade,
-    private _snippets: SnippetsFacade
+    private _snippets: SnippetsFacade,
+    private _ui: UiFacade
   ) {}
 
   isExtensionChecked(extension: string) {

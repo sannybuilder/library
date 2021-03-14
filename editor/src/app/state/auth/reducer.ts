@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { authorizeSuccess, authorizeFail, gotUser } from './auth.actions';
+import { authorizeSuccess, authorizeFail, gotUser } from './actions';
 
 export interface AuthState {
   userName: string;

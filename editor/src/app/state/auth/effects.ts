@@ -8,8 +8,8 @@ import {
   authorizeSuccess,
   authorizeFail,
   gotUser,
-} from './auth.actions';
-import { AuthService } from './auth.service';
+} from './actions';
+import { AuthService } from './service';
 
 @Injectable()
 export class AuthEffects {

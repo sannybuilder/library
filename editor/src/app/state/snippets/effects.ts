@@ -4,6 +4,7 @@ import { loadSnippets, loadSnippetsSuccess } from './actions';
 import { SnippetsService } from './service';
 import { map, switchMap } from 'rxjs/operators';
 import { ExtensionsFacade } from '../extensions/facade';
+import { UiFacade } from '../ui/facade';
 
 @Injectable()
 export class SnippetsEffects {
@@ -23,12 +24,13 @@ export class SnippetsEffects {
   );
 
   onGameChange$ = createEffect(() =>
-    this._extensions.game$.pipe(map((game) => loadSnippets({ game })))
+    this._ui.game$.pipe(map((game) => loadSnippets({ game })))
   );
 
   constructor(
     private actions$: Actions,
     private service: SnippetsService,
-    private _extensions: ExtensionsFacade
+    private _extensions: ExtensionsFacade,
+    private _ui: UiFacade
   ) {}
 }

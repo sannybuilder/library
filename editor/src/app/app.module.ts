@@ -30,10 +30,16 @@ import { SnippetsService } from './state/snippets/service';
 import { SnippetsFacade } from './state/snippets/facade';
 
 // auth state
-import { AuthService } from './state/auth/auth.service';
-import { authReducer } from './state/auth/auth.reducer';
-import { AuthFacade } from './state/auth/auth.facade';
-import { AuthEffects } from './state/auth/auth.effects';
+import { AuthService } from './state/auth/service';
+import { authReducer } from './state/auth/reducer';
+import { AuthFacade } from './state/auth/facade';
+import { AuthEffects } from './state/auth/effects';
+
+// ui state
+import { UiService } from './state/ui/service';
+import { uiReducer } from './state/ui/reducer';
+import { UiFacade } from './state/ui/facade';
+import { UiEffects } from './state/ui/effects';
 
 import { FusejsService } from './fusejs/fusejs.service';
 import { FusejsPipe } from './fusejs/fusejs.pipe';
@@ -103,8 +109,14 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
       extensions: extensionsReducer,
       auth: authReducer,
       snippets: snippetsReducer,
+      ui: uiReducer,
     }),
-    EffectsModule.forRoot([ExtensionsEffects, AuthEffects, SnippetsEffects]),
+    EffectsModule.forRoot([
+      ExtensionsEffects,
+      AuthEffects,
+      SnippetsEffects,
+      UiEffects,
+    ]),
   ],
   exports: [],
   providers: [
@@ -112,6 +124,8 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
     ExtensionsService,
     AuthFacade,
     AuthService,
+    UiFacade,
+    UiService,
     SnippetsFacade,
     SnippetsService,
     CookieService,

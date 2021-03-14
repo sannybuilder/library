@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  displayOrEditCommandInfo,
   loadExtensions,
   loadExtensionsSuccess,
-  stopEditOrDisplay,
   updateCommand,
   submitChanges,
   submitChangesSuccess,
@@ -12,8 +10,7 @@ import {
 import { ExtensionsService } from './service';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ExtensionsFacade } from './facade';
-import { ViewMode } from '../../models';
-import { combineLatest } from 'rxjs';
+import { UiFacade } from '../ui/facade';
 
 @Injectable()
 export class ExtensionsEffects {
@@ -35,7 +32,7 @@ export class ExtensionsEffects {
   submitChanges$ = createEffect(() =>
     this.actions$.pipe(
       ofType(submitChanges),
-      withLatestFrom(this.facade.extensions$, this.facade.game$),
+      withLatestFrom(this._extensions.extensions$, this._ui.game$),
       switchMap(([_, extensions, game]) =>
         this.service
           .saveChanges(game, extensions)
@@ -44,49 +41,10 @@ export class ExtensionsEffects {
     )
   );
 
-  updateCommand$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(updateCommand),
-      map(({ command, newExtension: extension }) =>
-        displayOrEditCommandInfo({
-          command,
-          extension,
-          viewMode: ViewMode.Edit,
-        })
-      )
-    )
-  );
-
-  viewOpcodeOnLoad$ = createEffect(() =>
-    combineLatest([
-      this.actions$.pipe(ofType(loadExtensionsSuccess)),
-      this.facade.opcodeOnLoad$,
-    ]).pipe(
-      map(([{ extensions }, { opcode, extension }]) => {
-        const command = extensions
-          .find((e) => e.name === extension)
-          ?.commands.find((command) => command.id === opcode);
-
-        if (command) {
-          return displayOrEditCommandInfo({
-            command,
-            extension,
-            viewMode: ViewMode.View,
-          });
-        } else {
-          return stopEditOrDisplay();
-        }
-      })
-    )
-  );
-
-  onGameChange$ = createEffect(() =>
-    this.facade.game$.pipe(map((game) => loadExtensions({ game })))
-  );
-
   constructor(
     private actions$: Actions,
-    private facade: ExtensionsFacade,
-    private service: ExtensionsService
+    private _extensions: ExtensionsFacade,
+    private service: ExtensionsService,
+    private _ui: UiFacade
   ) {}
 }

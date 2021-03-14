@@ -1,12 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  Command,
-  Extension,
-  ExtensionSnippets,
-  Game,
-  Modifier,
-  ViewMode,
-} from '../../models';
+import { Command, Extension, Game, Modifier, ViewMode } from '../../models';
 
 export const loadExtensions = createAction(
   'load extensions',
@@ -16,16 +9,6 @@ export const loadExtensions = createAction(
 export const loadExtensionsSuccess = createAction(
   'load extensions success',
   props<{ extensions: Extension[]; lastUpdate: number }>()
-);
-
-export const loadSnippets = createAction(
-  'load snippets',
-  props<{ game: Game }>()
-);
-
-export const loadSnippetsSuccess = createAction(
-  'load snippets success',
-  props<{ extensionSnippets: ExtensionSnippets }>()
 );
 
 export const loadExtensionsError = createAction('load extensions error');

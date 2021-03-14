@@ -6,7 +6,7 @@ import { pickBy } from 'lodash';
 
 import { AuthService } from '../auth/auth.service';
 import { CONFIG, Config } from '../../config';
-import { Extension, ExtensionSnippets, Game, GameLibrary } from '../../models';
+import { Extension, Game, GameLibrary } from '../../models';
 
 interface LoadCommandsResponse {
   meta: {
@@ -37,12 +37,6 @@ export class ExtensionsService {
           lastUpdate: data.meta.last_update,
         }))
       );
-  }
-
-  loadSnippets(game: Game): Observable<ExtensionSnippets> {
-    return this.http.get<ExtensionSnippets>(
-      this.config.endpoints.snippets[game]
-    );
   }
 
   saveChanges(

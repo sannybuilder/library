@@ -4,6 +4,7 @@ import { debounce } from 'rxjs/operators';
 
 import { ExtensionsFacade } from '../../state/extensions/facade';
 import { Command, Game, SEARCH_OPTIONS } from '../../models';
+import { SnippetsFacade } from '../../state/snippets/facade';
 
 @Component({
   selector: 'scl-command-list',
@@ -22,17 +23,20 @@ export class CommandListComponent {
     extension: string;
   }> = new EventEmitter();
 
-  extensions$ = this._facade.extensions$;
-  loading$ = this._facade.loading$;
-  selectedFiltersOnly$ = this._facade.selectedFiltersOnly$;
-  selectedFiltersExcept$ = this._facade.selectedFiltersExcept$;
-  searchTerm$ = this._facade.searchTerm$.pipe(debounce(() => timer(500)));
+  extensions$ = this._extensions.extensions$;
+  loading$ = this._extensions.loading$;
+  selectedFiltersOnly$ = this._extensions.selectedFiltersOnly$;
+  selectedFiltersExcept$ = this._extensions.selectedFiltersExcept$;
+  searchTerm$ = this._extensions.searchTerm$.pipe(debounce(() => timer(500)));
   searchOptions = SEARCH_OPTIONS;
 
-  constructor(private _facade: ExtensionsFacade) {}
+  constructor(
+    private _extensions: ExtensionsFacade,
+    private _snippets: SnippetsFacade
+  ) {}
 
   isExtensionChecked(extension: string) {
-    return this._facade.getExtensionCheckedState(extension);
+    return this._extensions.getExtensionCheckedState(extension);
   }
 
   onEdit(command: Command, extension: string) {
@@ -46,6 +50,6 @@ export class CommandListComponent {
   }
 
   getSnippet(extension: string, opcode: string) {
-    return this._facade.getSnippet(extension, opcode);
+    return this._snippets.getSnippet(extension, opcode);
   }
 }

@@ -16,10 +16,24 @@ import {
   GameTitlePipe,
   ParametrifyPipe,
 } from './pipes';
+
+// extensions state
 import { extensionsReducer } from './state/extensions/reducer';
 import { ExtensionsEffects } from './state/extensions/effects';
 import { ExtensionsFacade } from './state/extensions/facade';
 import { ExtensionsService } from './state/extensions/service';
+
+// snippets state
+import { snippetsReducer } from './state/snippets/reducer';
+import { SnippetsEffects } from './state/snippets/effects';
+import { SnippetsService } from './state/snippets/service';
+import { SnippetsFacade } from './state/snippets/facade';
+
+// auth state
+import { AuthService } from './state/auth/auth.service';
+import { authReducer } from './state/auth/auth.reducer';
+import { AuthFacade } from './state/auth/auth.facade';
+import { AuthEffects } from './state/auth/auth.effects';
 
 import { FusejsService } from './fusejs/fusejs.service';
 import { FusejsPipe } from './fusejs/fusejs.pipe';
@@ -37,10 +51,6 @@ import { SelectorComponent } from './components/selector/selector.component';
 import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
-import { AuthService } from './state/auth/auth.service';
-import { authReducer } from './state/auth/auth.reducer';
-import { AuthFacade } from './state/auth/auth.facade';
-import { AuthEffects } from './state/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -89,15 +99,21 @@ import { AuthEffects } from './state/auth/auth.effects';
       ],
       { useHash: false }
     ),
-    StoreModule.forRoot({ extensions: extensionsReducer, auth: authReducer }),
-    EffectsModule.forRoot([ExtensionsEffects, AuthEffects]),
+    StoreModule.forRoot({
+      extensions: extensionsReducer,
+      auth: authReducer,
+      snippets: snippetsReducer,
+    }),
+    EffectsModule.forRoot([ExtensionsEffects, AuthEffects, SnippetsEffects]),
   ],
   exports: [],
   providers: [
-    AuthFacade,
     ExtensionsFacade,
-    AuthService,
     ExtensionsService,
+    AuthFacade,
+    AuthService,
+    SnippetsFacade,
+    SnippetsService,
     CookieService,
     FusejsService,
     RouteGuard,

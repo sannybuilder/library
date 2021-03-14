@@ -7,13 +7,13 @@ import { ExtensionsFacade } from '../../state/extensions/facade';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  lastUpdate$ = this._facade.lastUpdate$;
-  displayLastUpdate$ = this._facade.displayLastUpdated$;
-  changesCount$ = this._facade.changesCount$;
+  lastUpdate$ = this._extensions.lastUpdate$;
+  displayLastUpdate$ = this._extensions.displayLastUpdated$;
+  changesCount$ = this._extensions.changesCount$;
 
-  constructor(private _facade: ExtensionsFacade) {}
+  constructor(private _extensions: ExtensionsFacade) {}
 
   submitChanges() {
-    this._facade.submitChanges();
+    this._extensions.submitChanges();
   }
 }

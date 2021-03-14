@@ -1,11 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {
-  Command,
-  Extension,
-  ExtensionSnippetsViewModel,
-  Game,
-  ViewMode,
-} from '../../models';
+import { Command, Extension, Game, ViewMode } from '../../models';
 import {
   displayOrEditCommandInfo,
   loadExtensions,
@@ -19,7 +13,6 @@ import {
   submitChangesSuccess,
   updateSearchTerm,
   onListEnter,
-  loadSnippetsSuccess,
 } from './actions';
 import { without, sortBy } from 'lodash';
 
@@ -42,7 +35,6 @@ export interface ExtensionsState {
   extensionOnLoad?: string;
   entities?: Record<string, string[]>;
   changesCount: number;
-  extensionSnippets?: ExtensionSnippetsViewModel;
 }
 
 export const initialState: ExtensionsState = {
@@ -194,27 +186,7 @@ const _reducer = createReducer(
     game,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
-  })),
-  on(loadSnippetsSuccess, (state, { extensionSnippets }) => {
-    // add changed: false to each snippet
-    const snippets = Object.entries(extensionSnippets).reduce(
-      (extensionMap, [extensionName, map]) => {
-        extensionMap[extensionName] = Object.entries(map).reduce(
-          (snippetMap, [opcode, snippet]) => {
-            snippetMap[opcode] = { snippet, changed: false };
-            return snippetMap;
-          },
-          {}
-        );
-        return extensionMap;
-      },
-      {}
-    );
-    return {
-      ...state,
-      extensionSnippets: snippets,
-    };
-  })
+  }))
 );
 
 export function extensionsReducer(state: ExtensionsState, action: Action) {

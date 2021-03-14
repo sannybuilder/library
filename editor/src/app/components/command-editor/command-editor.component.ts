@@ -11,6 +11,7 @@ import { opcodify } from '../../pipes';
 import { Command, CommandAttributes, Param, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 import { ExtensionsFacade } from '../../state/extensions/facade';
+import { SnippetsFacade } from '../../state/snippets/facade';
 
 @Component({
   selector: 'scl-command-editor',
@@ -20,7 +21,7 @@ import { ExtensionsFacade } from '../../state/extensions/facade';
 export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
-  extensionNames$ = this._facade.extensionNames$;
+  extensionNames$ = this._extensions.extensionNames$;
 
   private _newExtension: string;
   paramTypes: ParamType[] = [];
@@ -57,7 +58,10 @@ export class CommandEditorComponent implements OnInit {
     ParamType.string,
   ];
 
-  constructor(private _facade: ExtensionsFacade) {}
+  constructor(
+    private _extensions: ExtensionsFacade,
+    private _snippets: SnippetsFacade
+  ) {}
 
   ngOnInit() {
     if (this.selector) {
@@ -114,6 +118,6 @@ export class CommandEditorComponent implements OnInit {
   }
 
   getSnippet(extension: string, opcode: string) {
-    return this._facade.getSnippet(extension, opcode);
+    return this._snippets.getSnippet(extension, opcode);
   }
 }

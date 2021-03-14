@@ -11,18 +11,18 @@ import { ExtensionsFacade } from '../../state/extensions/facade';
 export class HeaderComponent {
   Game = Game;
   searchTerm: string = '';
-  displaySearchBar$ = this._facade.displaySearchBar$;
-  isAuthorized$ = this._authFacade.isAuthorized$;
-  avatarUrl$ = this._authFacade.avatarUrl$;
-  userName$ = this._authFacade.userName$;
+  displaySearchBar$ = this._extensions.displaySearchBar$;
+  isAuthorized$ = this._auth.isAuthorized$;
+  avatarUrl$ = this._auth.avatarUrl$;
+  userName$ = this._auth.userName$;
 
   constructor(
-    private _facade: ExtensionsFacade,
-    private _authFacade: AuthFacade
+    private _extensions: ExtensionsFacade,
+    private _auth: AuthFacade
   ) {}
 
   onSearchUpdate(term: string) {
-    this._facade.updateSearch(term);
+    this._extensions.updateSearch(term);
   }
 
   clear() {
@@ -31,12 +31,12 @@ export class HeaderComponent {
   }
 
   login() {
-    this._authFacade.login();
+    this._auth.login();
     return false;
   }
 
   logout() {
-    this._authFacade.logout();
+    this._auth.logout();
     return false;
   }
 }

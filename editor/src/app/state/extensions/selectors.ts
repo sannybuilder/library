@@ -102,12 +102,3 @@ export const changesCount = createSelector(
   state,
   (state: ExtensionsState) => state.changesCount
 );
-
-export const snippets = createSelector(
-  state,
-  (state: ExtensionsState, props: { extension: string; opcode: string }) => {
-    return (
-      state.extensionSnippets?.[props.extension]?.[props.opcode]?.snippet ?? ''
-    );
-  }
-);

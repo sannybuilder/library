@@ -8,25 +8,25 @@ import { ExtensionsFacade } from '../../state/extensions/facade';
   styleUrls: ['./filter-panel.component.scss'],
 })
 export class FilterPanelComponent {
-  extensionNames$ = this._facade.extensionNames$;
+  extensionNames$ = this._extensions.extensionNames$;
 
   filters = CommandAttributes;
 
-  constructor(private _facade: ExtensionsFacade) {}
+  constructor(private _extensions: ExtensionsFacade) {}
 
   toggleExtension(extenstion: string) {
-    this._facade.toggleExtension(extenstion);
+    this._extensions.toggleExtension(extenstion);
   }
 
   isExtensionChecked(extension: string) {
-    return this._facade.getExtensionCheckedState(extension);
+    return this._extensions.getExtensionCheckedState(extension);
   }
 
   toggleFilter(filter: string, modifier: Modifier) {
-    this._facade.toggleFilter(filter, modifier);
+    this._extensions.toggleFilter(filter, modifier);
   }
 
   isFilterChecked(filter: string, modifier: Modifier) {
-    return this._facade.getFilterCheckedState(filter, modifier);
+    return this._extensions.getFilterCheckedState(filter, modifier);
   }
 }

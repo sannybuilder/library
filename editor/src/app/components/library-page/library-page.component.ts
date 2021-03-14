@@ -17,9 +17,9 @@ import { ExtensionsFacade } from '../../state/extensions/facade';
 export class LibraryPageComponent implements OnDestroy {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
-  command$ = this._facade.commandToDisplayOrEdit$;
-  game$ = this._facade.game$;
-  canEdit$ = this._authFacade.isAuthorized$.pipe(
+  command$ = this._extensions.commandToDisplayOrEdit$;
+  game$ = this._extensions.game$;
+  canEdit$ = this._auth.isAuthorized$.pipe(
     map(
       (isAuthorized) =>
         !this._config.features.shouldBeAuthorizedToEdit || isAuthorized
@@ -35,8 +35,8 @@ export class LibraryPageComponent implements OnDestroy {
   private _handle: Modal;
 
   constructor(
-    private _facade: ExtensionsFacade,
-    private _authFacade: AuthFacade,
+    private _extensions: ExtensionsFacade,
+    private _auth: AuthFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
 
@@ -44,7 +44,7 @@ export class LibraryPageComponent implements OnDestroy {
     this.onDestroy$.next();
     this.onDestroy$.complete();
     this._handle.dispose();
-    this._facade.toggleCommandListElements(false);
+    this._extensions.toggleCommandListElements(false);
   }
 
   ngAfterViewInit(): void {
@@ -53,7 +53,7 @@ export class LibraryPageComponent implements OnDestroy {
       keyboard: true,
     });
 
-    this._facade.toggleCommandListElements(true);
+    this._extensions.toggleCommandListElements(true);
 
     this.command$
       .pipe(takeUntil(this.onDestroy$))
@@ -76,7 +76,7 @@ export class LibraryPageComponent implements OnDestroy {
   }
 
   onSave() {
-    this._facade.updateCommand({
+    this._extensions.updateCommand({
       newExtension: this.extension,
       oldExtension: this.oldExtension,
       command: omit(this.command, SEARCH_OPTIONS.fusejsHighlightKey) as Command,
@@ -85,22 +85,22 @@ export class LibraryPageComponent implements OnDestroy {
   }
 
   onView(command: Command, extension: string) {
-    this._facade.displayCommandInfo(command, extension);
+    this._extensions.displayCommandInfo(command, extension);
     return false;
   }
 
   onEdit(command: Command, extension: string) {
-    this._facade.editCommandInfo(command, extension);
+    this._extensions.editCommandInfo(command, extension);
     return false;
   }
 
   onCancel() {
-    this._facade.stopEditOrDisplay();
+    this._extensions.stopEditOrDisplay();
     this._handle.hide();
   }
 
   getExtensionEntities(extension: string) {
-    return this._facade.getExtensionEntities(extension);
+    return this._extensions.getExtensionEntities(extension);
   }
 
   // todo: switch edit modal/rail on resise

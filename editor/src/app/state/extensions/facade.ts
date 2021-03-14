@@ -50,13 +50,6 @@ export class ExtensionsFacade {
     });
   }
 
-  getSnippet(extension: string, opcode: string) {
-    return this.store$.select(selector.snippets, {
-      extension,
-      opcode,
-    });
-  }
-
   getFilterCheckedState(filter: string, modifier: Modifier) {
     return this.store$.select(
       modifier === 'only'

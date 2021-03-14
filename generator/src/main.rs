@@ -2,7 +2,12 @@ use collections::HashMap;
 use convert_case::{Case, Casing};
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
-use std::{collections, fs};
+use std::{
+    collections,
+    fs::{self, DirEntry},
+    io,
+    path::Path,
+};
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Attr {
@@ -55,7 +60,46 @@ struct Library {
     extensions: Vec<Extension>,
 }
 
-fn main() -> Result<()> {
+fn visit_dirs(dir: &Path, cb: &mut dyn FnMut(&DirEntry) -> Option<()>) -> io::Result<()> {
+    if dir.is_dir() {
+        for entry in fs::read_dir(dir)? {
+            let entry = entry?;
+            let path = entry.path();
+            if path.is_dir() {
+                visit_dirs(&path, cb)?;
+            } else {
+                cb(&entry);
+            }
+        }
+    }
+    Ok(())
+}
+
+fn generate_snippets() -> io::Result<()> {
+    let mut snippets: HashMap<String, HashMap<String, String>> = HashMap::new();
+    let args: Vec<String> = std::env::args().collect();
+    let source_dir = args
+        .get(2)
+        .unwrap_or_else(|| panic!("Provide source directory path"));
+
+    visit_dirs(&Path::new(source_dir), &mut |f| -> Option<()> {
+        let content = fs::read_to_string(f.path()).ok()?;
+        let path = f.path();
+        let mut c = path.components();
+
+        let extension: String = c.nth_back(1)?.as_os_str().to_str()?.into();
+        let map = snippets.entry(extension).or_insert(HashMap::new());
+        map.insert(f.path().file_stem()?.to_str()?.into(), content);
+        Some(())
+    })?;
+
+    let json = serde_json::to_string_pretty(&snippets)?;
+    println!("{}", json);
+
+    Ok(())
+}
+
+fn generate_classes() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
     let input_file = args
         .get(1)
@@ -155,4 +199,18 @@ fn main() -> Result<()> {
     println!("#EOF");
 
     Ok(())
+}
+
+fn main() {
+    let args: Vec<String> = std::env::args().collect();
+    match args.get(1) {
+        Some(x) if x == "classes" => generate_classes().ok(),
+        Some(x) if x == "snippets" => generate_snippets().ok(),
+        Some(x) => {
+            panic!("unknown action argument {}", x);
+        }
+        None => {
+            panic!("missing action argument");
+        }
+    };
 }

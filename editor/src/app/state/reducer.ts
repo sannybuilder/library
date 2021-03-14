@@ -1,5 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Extension, Game, ViewMode } from '../models';
+import {
+  Command,
+  Extension,
+  ExtensionSnippets,
+  Game,
+  ViewMode,
+} from '../models';
 import {
   displayOrEditCommandInfo,
   loadExtensions,
@@ -13,6 +19,7 @@ import {
   submitChangesSuccess,
   updateSearchTerm,
   onListEnter,
+  loadSnippetsSuccess,
 } from './actions';
 import { without, sortBy } from 'lodash';
 
@@ -35,6 +42,7 @@ export interface RootState {
   extensionOnLoad?: string;
   entities?: Record<string, string[]>;
   changesCount: number;
+  extensionSnippets?: ExtensionSnippets;
 }
 
 export const initialState: RootState = {
@@ -186,6 +194,10 @@ const _reducer = createReducer(
     game,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
+  })),
+  on(loadSnippetsSuccess, (state, { extensionSnippets }) => ({
+    ...state,
+    extensionSnippets,
   }))
 );
 

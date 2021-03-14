@@ -14,6 +14,7 @@ import {
   OpcodePipe,
   AttrFilterPipe,
   GameTitlePipe,
+  ParametrifyPipe,
 } from './pipes';
 import { rootReducer } from './state/reducer';
 import { RootEffects } from './state/effects';
@@ -50,6 +51,7 @@ import { AuthEffects } from './auth/auth.effects';
     FusejsPipe,
     AttrFilterPipe,
     GameTitlePipe,
+    ParametrifyPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

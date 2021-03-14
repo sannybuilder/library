@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { Command, Extension, Game, Modifier, ViewMode } from '../models';
 import {
-  loadExtensions,
   submitChanges,
   updateCommand,
   toggleExtension,
@@ -51,6 +50,13 @@ export class StateFacade {
     });
   }
 
+  getSnippet(extension: string, opcode: string) {
+    return this.store$.select(selector.snippets, {
+      extension,
+      opcode,
+    });
+  }
+
   getFilterCheckedState(filter: string, modifier: Modifier) {
     return this.store$.select(
       modifier === 'only'
@@ -65,10 +71,6 @@ export class StateFacade {
   }
 
   constructor(private store$: Store) {}
-
-  loadExtensions(game: Game) {
-    this.store$.dispatch(loadExtensions({ game }));
-  }
 
   submitChanges() {
     this.store$.dispatch(submitChanges());

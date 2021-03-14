@@ -58,6 +58,10 @@ export interface Extension {
   commands: Command[];
 }
 
+export interface ExtensionSnippets {
+  [extensionName: string]: { [opcode: string]: string };
+}
+
 export enum Game {
   GTA3 = 'gta3',
   VC = 'vc',

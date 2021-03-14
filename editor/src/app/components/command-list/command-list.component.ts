@@ -44,4 +44,8 @@ export class CommandListComponent {
     this.view.emit({ command, extension });
     return false;
   }
+
+  getSnippet(extension: string, opcode: string) {
+    return this._facade.getSnippet(extension, opcode);
+  }
 }

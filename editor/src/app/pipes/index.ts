@@ -4,3 +4,4 @@ export * from './class-params.pipe';
 export * from './keyword-params.pipe';
 export * from './opcodify';
 export * from './game-title.pipe';
+export * from './parametrify.pipe';

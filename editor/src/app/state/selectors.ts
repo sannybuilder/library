@@ -96,3 +96,10 @@ export const changesCount = createSelector(
   state,
   (state: RootState) => state.changesCount
 );
+
+export const snippets = createSelector(
+  state,
+  (state: RootState, props: { extension: string; opcode: string }) => {
+    return state.extensionSnippets?.[props.extension]?.[props.opcode] ?? '';
+  }
+);

@@ -20,7 +20,7 @@ import { StateFacade } from '../../state/facade';
 export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
-  extensionNames$ = this.facade.extensionNames$;
+  extensionNames$ = this._facade.extensionNames$;
 
   private _newExtension: string;
   paramTypes: ParamType[] = [];
@@ -57,7 +57,7 @@ export class CommandEditorComponent implements OnInit {
     ParamType.string,
   ];
 
-  constructor(public facade: StateFacade) {}
+  constructor(private _facade: StateFacade) {}
 
   ngOnInit() {
     if (this.selector) {
@@ -111,5 +111,9 @@ export class CommandEditorComponent implements OnInit {
         param.type = ParamType.label;
         break;
     }
+  }
+
+  getSnippet(extension: string, opcode: string) {
+    return this._facade.getSnippet(extension, opcode);
   }
 }

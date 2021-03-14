@@ -8,6 +8,8 @@ import {
   updateCommand,
   submitChanges,
   submitChangesSuccess,
+  loadSnippets,
+  loadSnippetsSuccess,
 } from './actions';
 import { CommandsService } from './service';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
@@ -26,6 +28,21 @@ export class RootEffects {
           .pipe(
             map(({ extensions, lastUpdate }) =>
               loadExtensionsSuccess({ extensions, lastUpdate })
+            )
+          )
+      )
+    )
+  );
+
+  loadSnippets$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadSnippets),
+      switchMap(({ game }) =>
+        this.service
+          .loadSnippets(game)
+          .pipe(
+            map((extensionSnippets) =>
+              loadSnippetsSuccess({ extensionSnippets })
             )
           )
       )
@@ -81,7 +98,9 @@ export class RootEffects {
   );
 
   onGameChange$ = createEffect(() =>
-    this.facade.game$.pipe(map((game) => loadExtensions({ game })))
+    this.facade.game$.pipe(
+      switchMap((game) => [loadExtensions({ game }), loadSnippets({ game })])
+    )
   );
 
   constructor(

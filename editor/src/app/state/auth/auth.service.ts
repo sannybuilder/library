@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { CONFIG, Config } from '../config';
-import { createGitHubAdaptor, createKoreFile, KoreFile } from '../korefile';
+import { CONFIG, Config } from '../../config';
+import { createGitHubAdaptor, createKoreFile, KoreFile } from '../../korefile';
 
 interface UserResponse {
   login: string;
@@ -23,7 +23,15 @@ export class AuthService {
   ) {}
 
   login(state: string) {
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=${this.client_id}&state=${state}&scope=public_repo`;
+    const params = {
+      state,
+      client_id: this.client_id,
+      scope: 'public_repo',
+    };
+    const query = Object.entries(params)
+      .map((v) => v.join('='))
+      .join('&');
+    window.location.href = [this.config.endpoints.oauth, query].join('?');
   }
 
   setSession(access_token: string) {
@@ -53,7 +61,7 @@ export class AuthService {
       Authorization: `Bearer ${token}`,
     });
 
-    return this._http.get<UserResponse>('https://api.github.com/user', {
+    return this._http.get<UserResponse>(this.config.endpoints.user, {
       headers: headers,
     });
   }

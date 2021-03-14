@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
 
-import { StateFacade } from '../../state/facade';
+import { ExtensionsFacade } from '../../state/extensions/facade';
 import { Command, Game, SEARCH_OPTIONS } from '../../models';
 
 @Component({
@@ -29,7 +29,7 @@ export class CommandListComponent {
   searchTerm$ = this._facade.searchTerm$.pipe(debounce(() => timer(500)));
   searchOptions = SEARCH_OPTIONS;
 
-  constructor(private _facade: StateFacade) {}
+  constructor(private _facade: ExtensionsFacade) {}
 
   isExtensionChecked(extension: string) {
     return this._facade.getExtensionCheckedState(extension);

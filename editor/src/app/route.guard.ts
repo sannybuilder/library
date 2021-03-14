@@ -5,9 +5,9 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { AuthFacade } from './auth/auth.facade';
+import { AuthFacade } from './state/auth/auth.facade';
 import { DEFAULT_EXTENSION, Game } from './models';
-import { StateFacade } from './state/facade';
+import { ExtensionsFacade } from './state/extensions/facade';
 import { Location } from '@angular/common';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
 
 @Injectable()
 export class RouteGuard implements CanActivate {
-  constructor(private _router: Router, private _facade: StateFacade) {}
+  constructor(private _router: Router, private _facade: ExtensionsFacade) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const segments = getSegmentsFromUrl(this._router, state.url);

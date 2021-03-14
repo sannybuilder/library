@@ -6,7 +6,7 @@ import {
   Game,
   Modifier,
   ViewMode,
-} from '../models';
+} from '../../models';
 
 export const loadExtensions = createAction(
   'load extensions',

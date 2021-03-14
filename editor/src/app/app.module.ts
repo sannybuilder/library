@@ -16,8 +16,11 @@ import {
   GameTitlePipe,
   ParametrifyPipe,
 } from './pipes';
-import { rootReducer } from './state/reducer';
-import { RootEffects } from './state/effects';
+import { extensionsReducer } from './state/extensions/reducer';
+import { ExtensionsEffects } from './state/extensions/effects';
+import { ExtensionsFacade } from './state/extensions/facade';
+import { ExtensionsService } from './state/extensions/service';
+
 import { FusejsService } from './fusejs/fusejs.service';
 import { FusejsPipe } from './fusejs/fusejs.pipe';
 import { ConfigModule } from './config';
@@ -34,12 +37,10 @@ import { SelectorComponent } from './components/selector/selector.component';
 import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
-import { AuthService } from './auth/auth.service';
-import { authReducer } from './auth/auth.reducer';
-import { StateFacade } from './state/facade';
-import { CommandsService } from './state/service';
-import { AuthFacade } from './auth/auth.facade';
-import { AuthEffects } from './auth/auth.effects';
+import { AuthService } from './state/auth/auth.service';
+import { authReducer } from './state/auth/auth.reducer';
+import { AuthFacade } from './state/auth/auth.facade';
+import { AuthEffects } from './state/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -88,15 +89,15 @@ import { AuthEffects } from './auth/auth.effects';
       ],
       { useHash: false }
     ),
-    StoreModule.forRoot({ root: rootReducer, auth: authReducer }),
-    EffectsModule.forRoot([RootEffects, AuthEffects]),
+    StoreModule.forRoot({ extensions: extensionsReducer, auth: authReducer }),
+    EffectsModule.forRoot([ExtensionsEffects, AuthEffects]),
   ],
   exports: [],
   providers: [
     AuthFacade,
-    StateFacade,
+    ExtensionsFacade,
     AuthService,
-    CommandsService,
+    ExtensionsService,
     CookieService,
     FusejsService,
     RouteGuard,

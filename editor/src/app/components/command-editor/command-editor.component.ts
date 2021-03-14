@@ -10,7 +10,7 @@ import {
 import { opcodify } from '../../pipes';
 import { Command, CommandAttributes, Param, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
-import { StateFacade } from '../../state/facade';
+import { ExtensionsFacade } from '../../state/extensions/facade';
 
 @Component({
   selector: 'scl-command-editor',
@@ -57,7 +57,7 @@ export class CommandEditorComponent implements OnInit {
     ParamType.string,
   ];
 
-  constructor(private _facade: StateFacade) {}
+  constructor(private _facade: ExtensionsFacade) {}
 
   ngOnInit() {
     if (this.selector) {

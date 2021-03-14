@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommandAttributes, Modifier } from '../../models';
-import { StateFacade } from 'src/app/state/facade';
+import { ExtensionsFacade } from '../../state/extensions/facade';
 
 @Component({
   selector: 'scl-filter-panel',
@@ -12,7 +12,7 @@ export class FilterPanelComponent {
 
   filters = CommandAttributes;
 
-  constructor(private _facade: StateFacade) {}
+  constructor(private _facade: ExtensionsFacade) {}
 
   toggleExtension(extenstion: string) {
     this._facade.toggleExtension(extenstion);

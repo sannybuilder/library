@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthFacade } from '../../auth/auth.facade';
+import { AuthFacade } from '../../state/auth/auth.facade';
 import { Game } from '../../models';
-import { StateFacade } from '../../state/facade';
+import { ExtensionsFacade } from '../../state/extensions/facade';
 
 @Component({
   selector: 'scl-header',
@@ -16,7 +16,10 @@ export class HeaderComponent {
   avatarUrl$ = this._authFacade.avatarUrl$;
   userName$ = this._authFacade.userName$;
 
-  constructor(private _facade: StateFacade, private _authFacade: AuthFacade) {}
+  constructor(
+    private _facade: ExtensionsFacade,
+    private _authFacade: AuthFacade
+  ) {}
 
   onSearchUpdate(term: string) {
     this._facade.updateSearch(term);

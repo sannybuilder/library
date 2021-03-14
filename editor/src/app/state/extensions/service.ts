@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
 import { pickBy } from 'lodash';
 
 import { AuthService } from '../auth/auth.service';
-import { CONFIG, Config } from '../config';
-import { Extension, ExtensionSnippets, Game, GameLibrary } from '../models';
+import { CONFIG, Config } from '../../config';
+import { Extension, ExtensionSnippets, Game, GameLibrary } from '../../models';
 
 interface LoadCommandsResponse {
   meta: {
@@ -16,7 +16,7 @@ interface LoadCommandsResponse {
 }
 
 @Injectable()
-export class CommandsService {
+export class ExtensionsService {
   constructor(
     private http: HttpClient,
     @Inject(CONFIG) public config: Config,
@@ -29,12 +29,14 @@ export class CommandsService {
     extensions: Extension[];
     lastUpdate: number;
   }> {
-    return this.http.get<LoadCommandsResponse>(this.getEndpoint(game)).pipe(
-      map((data) => ({
-        extensions: data.extensions,
-        lastUpdate: data.meta.last_update,
-      }))
-    );
+    return this.http
+      .get<LoadCommandsResponse>(this.config.endpoints.extensions[game])
+      .pipe(
+        map((data) => ({
+          extensions: data.extensions,
+          lastUpdate: data.meta.last_update,
+        }))
+      );
   }
 
   loadSnippets(game: Game): Observable<ExtensionSnippets> {
@@ -60,10 +62,6 @@ export class CommandsService {
         JSON.stringify(newContent, null, 2)
       )
     ).pipe(map(() => ({ lastUpdate })));
-  }
-
-  private getEndpoint(game: Game) {
-    return `https://raw.githubusercontent.com/sannybuilder/library/master/${GameLibrary[game]}`;
   }
 
   private stripBody(data: Extension[]) {

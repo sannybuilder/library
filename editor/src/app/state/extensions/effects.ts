@@ -11,14 +11,14 @@ import {
   loadSnippets,
   loadSnippetsSuccess,
 } from './actions';
-import { CommandsService } from './service';
+import { ExtensionsService } from './service';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { StateFacade } from './facade';
-import { ViewMode } from '../models';
+import { ExtensionsFacade } from './facade';
+import { ViewMode } from '../../models';
 import { combineLatest } from 'rxjs';
 
 @Injectable()
-export class RootEffects {
+export class ExtensionsEffects {
   loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadExtensions),
@@ -105,7 +105,7 @@ export class RootEffects {
 
   constructor(
     private actions$: Actions,
-    private facade: StateFacade,
-    private service: CommandsService
+    private facade: ExtensionsFacade,
+    private service: ExtensionsService
   ) {}
 }

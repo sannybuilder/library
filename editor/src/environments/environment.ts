@@ -8,13 +8,19 @@ import { Config } from '../app/config';
 export const environment: Config = {
   production: false,
   features: {
-    editing: true,
+    shouldBeAuthorizedToEdit: false,
   },
   endpoints: {
     snippets: {
       [Game.GTA3]: '/assets/gta3_snippets.json',
       [Game.VC]: '/assets/vc_snippets.json',
     },
+    extensions: {
+      [Game.GTA3]: '/assets/gta3.json',
+      [Game.VC]: '/assets/vc.json',
+    },
+    oauth: 'https://github.com/login/oauth/authorize',
+    user: 'https://api.github.com/user',
   },
 };
 

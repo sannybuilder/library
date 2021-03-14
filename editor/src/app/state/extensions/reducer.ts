@@ -2,10 +2,10 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   Command,
   Extension,
-  ExtensionSnippets,
+  ExtensionSnippetsViewModel,
   Game,
   ViewMode,
-} from '../models';
+} from '../../models';
 import {
   displayOrEditCommandInfo,
   loadExtensions,
@@ -23,7 +23,7 @@ import {
 } from './actions';
 import { without, sortBy } from 'lodash';
 
-export interface RootState {
+export interface ExtensionsState {
   extensions?: Extension[];
   lastUpdate?: number;
   error?: string;
@@ -42,10 +42,10 @@ export interface RootState {
   extensionOnLoad?: string;
   entities?: Record<string, string[]>;
   changesCount: number;
-  extensionSnippets?: ExtensionSnippets;
+  extensionSnippets?: ExtensionSnippetsViewModel;
 }
 
-export const initialState: RootState = {
+export const initialState: ExtensionsState = {
   loading: false,
   displayLastUpdated: false,
   displaySearchBar: false,
@@ -195,13 +195,29 @@ const _reducer = createReducer(
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
   })),
-  on(loadSnippetsSuccess, (state, { extensionSnippets }) => ({
-    ...state,
-    extensionSnippets,
-  }))
+  on(loadSnippetsSuccess, (state, { extensionSnippets }) => {
+    // add changed: false to each snippet
+    const snippets = Object.entries(extensionSnippets).reduce(
+      (extensionMap, [extensionName, map]) => {
+        extensionMap[extensionName] = Object.entries(map).reduce(
+          (snippetMap, [opcode, snippet]) => {
+            snippetMap[opcode] = { snippet, changed: false };
+            return snippetMap;
+          },
+          {}
+        );
+        return extensionMap;
+      },
+      {}
+    );
+    return {
+      ...state,
+      extensionSnippets: snippets,
+    };
+  })
 );
 
-export function rootReducer(state: RootState, action: Action) {
+export function extensionsReducer(state: ExtensionsState, action: Action) {
   return _reducer(state, action);
 }
 

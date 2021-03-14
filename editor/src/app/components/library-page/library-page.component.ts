@@ -5,9 +5,9 @@ import { omit } from 'lodash';
 import { Modal } from 'bootstrap';
 
 import { CONFIG, Config } from '../../config';
-import { AuthFacade } from '../../auth/auth.facade';
+import { AuthFacade } from '../../state/auth/auth.facade';
 import { Command, SEARCH_OPTIONS, ViewMode } from '../../models';
-import { StateFacade } from '../../state/facade';
+import { ExtensionsFacade } from '../../state/extensions/facade';
 
 @Component({
   selector: 'scl-library-page',
@@ -20,7 +20,10 @@ export class LibraryPageComponent implements OnDestroy {
   command$ = this._facade.commandToDisplayOrEdit$;
   game$ = this._facade.game$;
   canEdit$ = this._authFacade.isAuthorized$.pipe(
-    map((isAuthorized) => isAuthorized && this._config.features.editing)
+    map(
+      (isAuthorized) =>
+        !this._config.features.shouldBeAuthorizedToEdit || isAuthorized
+    )
   );
 
   command?: Command;
@@ -32,7 +35,7 @@ export class LibraryPageComponent implements OnDestroy {
   private _handle: Modal;
 
   constructor(
-    private _facade: StateFacade,
+    private _facade: ExtensionsFacade,
     private _authFacade: AuthFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
@@ -100,6 +103,7 @@ export class LibraryPageComponent implements OnDestroy {
     return this._facade.getExtensionEntities(extension);
   }
 
+  // todo: switch edit modal/rail on resise
   // @HostListener('window:resize', [])
   // private onResize() {
   //   this.detectScreenSize();

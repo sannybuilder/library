@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Command, Extension, Game, Modifier, ViewMode } from '../models';
+import { Command, Extension, Game, Modifier, ViewMode } from '../../models';
 import {
   submitChanges,
   updateCommand,
@@ -16,7 +16,7 @@ import {
 import * as selector from './selectors';
 
 @Injectable()
-export class StateFacade {
+export class ExtensionsFacade {
   extensions$ = this.store$
     .select(selector.extensions)
     .pipe(filter<Extension[]>(Boolean));

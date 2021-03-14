@@ -3,7 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   loadExtensions,
   loadExtensionsSuccess,
-  updateCommand,
   submitChanges,
   submitChangesSuccess,
 } from './actions';

@@ -102,7 +102,7 @@ fn generate_snippets() -> io::Result<()> {
 fn generate_classes() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
     let input_file = args
-        .get(1)
+        .get(2)
         .unwrap_or_else(|| panic!("Provide input file name"));
 
     let content = fs::read_to_string(input_file).unwrap();

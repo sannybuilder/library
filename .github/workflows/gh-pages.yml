@@ -17,14 +17,17 @@ jobs:
         with:
           node-version: "12"
 
-      - uses: icepuma/rust-action@master
+      - uses: actions-rs/toolchain@v1
         with:
-          args: |
-            cd generator
-            cargo run classes ../gta3/gta3.json > ../editor/data/gta3_classes.db
-            cargo run classes ../vc/vc.json > ../editor/data/vc_classes.db
-            cargo run snippets ../gta3/snippets > ../editor/data/gta3_snippets.json
-            cargo run snippets ../vc/snippets > ../editor/data/vc_snippets.json
+          toolchain: stable
+
+      - name: Compile files
+        run: |
+          cd generator
+          cargo run classes ../gta3/gta3.json > ../editor/data/gta3_classes.db
+          cargo run classes ../vc/vc.json > ../editor/data/vc_classes.db
+          cargo run snippets ../gta3/snippets > ../editor/data/gta3_snippets.json
+          cargo run snippets ../vc/snippets > ../editor/data/vc_snippets.json
 
       - name: Build gh-pages
         run: |

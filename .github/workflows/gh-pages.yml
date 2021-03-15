@@ -3,7 +3,7 @@ name: gh-pages
 on:
   push:
     branches:
-      - master
+      - fix
 
 jobs:
   build-and-deploy:
@@ -26,6 +26,8 @@ jobs:
           cd editor
           npm install
           npm run build
+          cp ../gta3/gta3.json dist/editor/assets/gta3
+          cp ../vc/vc.json dist/editor/assets/vc
           cp src/404.html dist/editor
           echo "library.sannybuilder.com" > dist/editor/CNAME
 

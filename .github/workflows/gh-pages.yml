@@ -27,7 +27,6 @@ jobs:
           npm install
           npm run build
           cp src/404.html dist/editor
-          echo "library.sannybuilder.com" > dist/editor/CNAME
 
       - name: Compile files
         run: |
@@ -42,3 +41,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./editor/dist/editor
+          cname: library.sannybuilder.com

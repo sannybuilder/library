@@ -2,18 +2,15 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Command, Extension, Game, ViewMode } from '../../models';
 import {
   loadExtensions,
-  loadExtensionsError,
   loadExtensionsSuccess,
   toggleExtension,
   updateCommand,
-  submitChangesSuccess,
 } from './actions';
 import { without, sortBy } from 'lodash';
 
 export interface ExtensionsState {
   extensions?: Extension[];
   selectedExtensions?: string[];
-  lastUpdate?: number;
   loading: boolean;
   entities?: Record<string, string[]>;
 }
@@ -37,12 +34,6 @@ const _reducer = createReducer(
     extensions,
     selectedExtensions: extensions.map((e) => e.name),
     entities: getEntities(extensions),
-  })),
-  on(loadExtensionsError, (state) => ({
-    ...state,
-    commands: [],
-    loading: false,
-    error: `Error: can't load commands`,
   })),
   on(
     updateCommand,
@@ -108,11 +99,6 @@ const _reducer = createReducer(
       };
     }
   ),
-  on(submitChangesSuccess, (state, { lastUpdate }) => ({
-    ...state,
-    lastUpdate,
-    changesCount: 0,
-  })),
   on(toggleExtension, (state, { extension }) => {
     const selectedExtensions = state.selectedExtensions.includes(extension)
       ? without(state.selectedExtensions, extension)

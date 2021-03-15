@@ -12,7 +12,7 @@ import {
 } from '../extensions/actions';
 import { loadSnippets } from '../snippets/actions';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UiEffects {
   viewOpcodeOnLoad$ = createEffect(() =>
     combineLatest([

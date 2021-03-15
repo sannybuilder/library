@@ -13,7 +13,7 @@ import {
 } from './actions';
 import * as selector from './selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UiFacade {
   extensionNames$ = this.store$.select(selector.extensionNames);
   searchTerm$ = this.store$.select(selector.searchTerm);
@@ -21,7 +21,6 @@ export class UiFacade {
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
   selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
-  changesCount$ = this.store$.select(selector.changesCount);
 
   game$ = this.store$
     .select(selector.game)

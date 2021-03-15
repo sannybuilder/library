@@ -20,11 +20,6 @@ export const loading = createSelector(
   (state: ExtensionsState) => state.loading
 );
 
-export const lastUpdate = createSelector(
-  state,
-  (state: ExtensionsState) => state.lastUpdate
-);
-
 export const selectedExtensions = createSelector(
   state,
   (state: ExtensionsState, props: { extension: string }) =>

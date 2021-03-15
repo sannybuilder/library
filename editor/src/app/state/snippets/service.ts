@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CONFIG, Config } from '../../config';
 import { ExtensionSnippets, Game } from '../../models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SnippetsService {
   constructor(
     private http: HttpClient,

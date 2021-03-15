@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+
+import { ChangesFacade } from '../changes/facade';
 import {
   enter,
   authorize,
@@ -11,7 +13,7 @@ import {
 } from './actions';
 import { AuthService } from './service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthEffects {
   authorize$ = createEffect(
     () =>
@@ -55,6 +57,7 @@ export class AuthEffects {
         ofType(authorizeSuccess),
         tap(({ access_token }) => {
           this.service.setSession(access_token);
+          this._changes.initializeGithub(access_token);
         })
       ),
     { dispatch: false }
@@ -71,7 +74,11 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  constructor(private actions$: Actions, private service: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private service: AuthService,
+    private _changes: ChangesFacade
+  ) {}
 }
 
 const random = (length = 8) => {

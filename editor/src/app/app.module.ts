@@ -20,28 +20,23 @@ import {
 // extensions state
 import { extensionsReducer } from './state/extensions/reducer';
 import { ExtensionsEffects } from './state/extensions/effects';
-import { ExtensionsFacade } from './state/extensions/facade';
-import { ExtensionsService } from './state/extensions/service';
 
 // snippets state
 import { snippetsReducer } from './state/snippets/reducer';
 import { SnippetsEffects } from './state/snippets/effects';
-import { SnippetsService } from './state/snippets/service';
-import { SnippetsFacade } from './state/snippets/facade';
 
 // auth state
-import { AuthService } from './state/auth/service';
 import { authReducer } from './state/auth/reducer';
-import { AuthFacade } from './state/auth/facade';
 import { AuthEffects } from './state/auth/effects';
 
+// changes state
+import { changesReducer } from './state/changes/reducer';
+import { ChangesEffects } from './state/changes/effects';
+
 // ui state
-import { UiService } from './state/ui/service';
 import { uiReducer } from './state/ui/reducer';
-import { UiFacade } from './state/ui/facade';
 import { UiEffects } from './state/ui/effects';
 
-import { FusejsService } from './fusejs/fusejs.service';
 import { FusejsPipe } from './fusejs/fusejs.pipe';
 import { ConfigModule } from './config';
 
@@ -110,28 +105,20 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
       auth: authReducer,
       snippets: snippetsReducer,
       ui: uiReducer,
+      changes: changesReducer,
     }),
     EffectsModule.forRoot([
       ExtensionsEffects,
       AuthEffects,
       SnippetsEffects,
       UiEffects,
+      ChangesEffects,
     ]),
   ],
   exports: [],
   providers: [
-    ExtensionsFacade,
-    ExtensionsService,
-    AuthFacade,
-    AuthService,
-    UiFacade,
-    UiService,
-    SnippetsFacade,
-    SnippetsService,
     CookieService,
-    FusejsService,
-    RouteGuard,
-    AuthGuard,
+
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],

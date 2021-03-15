@@ -4,18 +4,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { CONFIG, Config } from '../../config';
-import { createGitHubAdaptor, createKoreFile, KoreFile } from '../../korefile';
 
 interface UserResponse {
   login: string;
   avatar_url: string;
 }
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly sessionKey = 'sbl.oauth.access_token';
   private readonly client_id = 'c07f7913dd4515732ac7';
-
-  public github?: KoreFile;
 
   constructor(
     private _http: HttpClient,
@@ -35,17 +32,8 @@ export class AuthService {
     window.location.href = [this.config.endpoints.oauth, query].join('?');
   }
 
-  setSession(access_token: string) {
-    this.cookieService.set(this.sessionKey, access_token, 2);
-
-    this.github = createKoreFile({
-      adaptor: createGitHubAdaptor({
-        owner: 'sannybuilder',
-        repo: 'library',
-        ref: 'heads/master',
-        token: access_token,
-      }),
-    });
+  setSession(accessToken: string) {
+    this.cookieService.set(this.sessionKey, accessToken, 2);
   }
 
   getSession(): string {
@@ -65,9 +53,5 @@ export class AuthService {
     return this._http.get<UserResponse>(this.config.endpoints.user, {
       headers: headers,
     });
-  }
-
-  async saveFile(fileName: string, content: string) {
-    await this.github.writeFile(fileName, content);
   }
 }

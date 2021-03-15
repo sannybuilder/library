@@ -11,7 +11,7 @@ import { AuthFacade } from './state/auth/facade';
 import { ExtensionsFacade } from './state/extensions/facade';
 import { UiFacade } from './state/ui/facade';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(private _auth: AuthFacade, private location: Location) {}
 
@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
   }
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RouteGuard implements CanActivate {
   constructor(private _router: Router, private _ui: UiFacade) {}
 

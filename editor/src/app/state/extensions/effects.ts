@@ -3,15 +3,15 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   loadExtensions,
   loadExtensionsSuccess,
-  submitChanges,
-  submitChangesSuccess,
+  updateCommand,
 } from './actions';
 import { ExtensionsService } from './service';
-import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { map, tap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ExtensionsFacade } from './facade';
 import { UiFacade } from '../ui/facade';
+import { ChangesFacade } from '../changes/facade';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
   loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
@@ -28,22 +28,23 @@ export class ExtensionsEffects {
     )
   );
 
-  submitChanges$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(submitChanges),
-      withLatestFrom(this._extensions.extensions$, this._ui.game$),
-      switchMap(([_, extensions, game]) =>
-        this.service
-          .saveChanges(game, extensions)
-          .pipe(map(({ lastUpdate }) => submitChangesSuccess({ lastUpdate })))
-      )
-    )
+  updateCommands$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateCommand),
+        withLatestFrom(this._extensions.extensions$, this._ui.game$),
+        tap(([_, extensions, game]) => {
+          this._changes.registerExtensionsChange(extensions, game);
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(
     private actions$: Actions,
     private _extensions: ExtensionsFacade,
     private service: ExtensionsService,
-    private _ui: UiFacade
+    private _ui: UiFacade,
+    private _changes: ChangesFacade
   ) {}
 }

@@ -63,8 +63,3 @@ export const opcodeOnLoad = createSelector(state, (state: UiState) => ({
 }));
 
 export const game = createSelector(state, (state: UiState) => state.game);
-
-export const changesCount = createSelector(
-  state,
-  (state: UiState) => state.changesCount
-);

@@ -4,13 +4,11 @@ import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
   toggleCommandListElements,
-  toggleExtension,
   toggleFilter,
   updateSearchTerm,
   onListEnter,
 } from './actions';
 import { without } from 'lodash';
-import { updateCommand } from '../extensions/actions';
 
 export interface UiState {
   searchTerm?: string;
@@ -24,7 +22,6 @@ export interface UiState {
   game?: Game;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
-  changesCount: number;
 }
 
 export const initialState: UiState = {
@@ -33,7 +30,6 @@ export const initialState: UiState = {
   viewMode: ViewMode.None,
   selectedFiltersOnly: [],
   selectedFiltersExcept: ['is_nop', 'is_unsupported'],
-  changesCount: 0,
 };
 
 const _reducer = createReducer(
@@ -79,10 +75,6 @@ const _reducer = createReducer(
     game,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
-  })),
-  on(updateCommand, (state) => ({
-    ...state,
-    changesCount: state.changesCount + 1,
   }))
 );
 

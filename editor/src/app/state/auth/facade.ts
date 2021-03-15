@@ -7,7 +7,7 @@ import {
   userNameSelector,
 } from './selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthFacade {
   userName$ = this.store$.select(userNameSelector);
   isAuthorized$ = this.store$.select(isAuthorizedSelector);

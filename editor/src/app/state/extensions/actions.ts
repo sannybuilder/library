@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Command, Extension, Game, Modifier, ViewMode } from '../../models';
+import { Command, Extension, Game } from '../../models';
 
 export const loadExtensions = createAction(
   'load extensions',
@@ -9,15 +9,6 @@ export const loadExtensions = createAction(
 export const loadExtensionsSuccess = createAction(
   'load extensions success',
   props<{ extensions: Extension[]; lastUpdate: number }>()
-);
-
-export const loadExtensionsError = createAction('load extensions error');
-
-export const submitChanges = createAction('submit changes');
-
-export const submitChangesSuccess = createAction(
-  'update extensions success',
-  props<{ lastUpdate: number }>()
 );
 
 export const updateCommand = createAction(

@@ -9,7 +9,7 @@ export interface AngularFusejsOptions extends Fuse.FuseOptions {
   maximumScore?: number;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FusejsService {
   private defaultOptions: AngularFusejsOptions = {
     supportHighlight: true,

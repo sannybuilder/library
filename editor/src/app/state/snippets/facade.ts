@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as selector from './selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SnippetsFacade {
   getSnippet(extension: string, opcode: string) {
     return this.store$.select(selector.snippets, {

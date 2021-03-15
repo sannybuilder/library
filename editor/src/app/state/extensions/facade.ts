@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { Command, Extension } from '../../models';
-import { submitChanges, updateCommand, toggleExtension } from './actions';
+import { updateCommand, toggleExtension } from './actions';
 import * as selector from './selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ExtensionsFacade {
   extensions$ = this.store$
     .select(selector.extensions)
@@ -13,7 +13,6 @@ export class ExtensionsFacade {
 
   extensionNames$ = this.store$.select(selector.extensionNames);
   loading$ = this.store$.select(selector.loading);
-  lastUpdate$ = this.store$.select(selector.lastUpdate);
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selector.selectedExtensions, {
@@ -26,10 +25,6 @@ export class ExtensionsFacade {
   }
 
   constructor(private store$: Store) {}
-
-  submitChanges() {
-    this.store$.dispatch(submitChanges());
-  }
 
   updateCommand({
     command,

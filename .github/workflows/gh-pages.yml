@@ -29,7 +29,6 @@ jobs:
           cp ../gta3/gta3.json dist/editor/assets/gta3
           cp ../vc/vc.json dist/editor/assets/vc
           cp src/404.html dist/editor
-          echo "library.sannybuilder.com" > dist/editor/CNAME
 
       - name: Compile files
         run: |
@@ -52,3 +51,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./editor/dist/editor
+          cname: library.sannybuilder.com
+          allow_empty_commit: true

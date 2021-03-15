@@ -10,8 +10,7 @@ export interface Config {
     shouldBeAuthorizedToEdit: boolean;
   };
   endpoints: {
-    snippets: Record<Game, string>;
-    extensions: Record<Game, string>;
+    base: string;
     oauth: string;
     user: string;
   };

@@ -2,7 +2,6 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { Game } from '../app/models';
 import { Config } from '../app/config';
 
 export const environment: Config = {
@@ -11,14 +10,7 @@ export const environment: Config = {
     shouldBeAuthorizedToEdit: false,
   },
   endpoints: {
-    snippets: {
-      [Game.GTA3]: '/assets/gta3_snippets.json',
-      [Game.VC]: '/assets/vc_snippets.json',
-    },
-    extensions: {
-      [Game.GTA3]: '/assets/gta3.json',
-      [Game.VC]: '/assets/vc.json',
-    },
+    base: '/assets',
     oauth: 'https://github.com/login/oauth/authorize',
     user: 'https://api.github.com/user',
   },

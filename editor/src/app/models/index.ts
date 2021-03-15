@@ -82,13 +82,18 @@ export const GameIcon: Record<Game, string> = {
 };
 
 export const GameClasses: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3_classes.db',
-  [Game.VC]: 'assets/vc_classes.db',
+  [Game.GTA3]: 'assets/gta3/classes.db',
+  [Game.VC]: 'assets/vc/classes.db',
 };
 
 export const GameLibrary: Record<Game, string> = {
   [Game.GTA3]: 'gta3/gta3.json',
   [Game.VC]: 'vc/vc.json',
+};
+
+export const GameSnippets: Record<Game, string> = {
+  [Game.GTA3]: 'gta3/snippets.json',
+  [Game.VC]: 'vc/snippets.json',
 };
 
 export const GameTitle: Record<Game, string> = {

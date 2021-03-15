@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AuthService } from '../auth/service';
 import { CONFIG, Config } from '../../config';
-import { Extension, Game } from '../../models';
+import { Extension, Game, GameLibrary } from '../../models';
 
-interface LoadCommandsResponse {
+interface LoadExtensionsResponse {
   meta: {
     last_update: number;
   };
@@ -18,8 +18,7 @@ interface LoadCommandsResponse {
 export class ExtensionsService {
   constructor(
     private http: HttpClient,
-    @Inject(CONFIG) public config: Config,
-    private _authService: AuthService
+    @Inject(CONFIG) public config: Config
   ) {}
 
   loadExtensions(
@@ -29,7 +28,9 @@ export class ExtensionsService {
     lastUpdate: number;
   }> {
     return this.http
-      .get<LoadCommandsResponse>(this.config.endpoints.extensions[game])
+      .get<LoadExtensionsResponse>(
+        Location.joinWithSlash(this.config.endpoints.base, GameLibrary[game])
+      )
       .pipe(
         map((data) => ({
           extensions: data.extensions,

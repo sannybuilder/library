@@ -105,7 +105,9 @@
                   class="row"
                   *ngIf="
                     !command.attrs.is_keyword &&
-                    !(command.class && command.member)
+                    !(command.class && command.member) &&
+                    !command.attrs.is_unsupported &&
+                    !command.attrs.is_nop
                   "
                 >
                   <div class="col-12">

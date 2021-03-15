@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { CONFIG, Config } from '../../config';
-import { ExtensionSnippets, Game } from '../../models';
+import { ExtensionSnippets, Game, GameSnippets } from '../../models';
 
 @Injectable({ providedIn: 'root' })
 export class SnippetsService {
@@ -13,7 +14,7 @@ export class SnippetsService {
 
   loadSnippets(game: Game): Observable<ExtensionSnippets> {
     return this.http.get<ExtensionSnippets>(
-      this.config.endpoints.snippets[game]
+      Location.joinWithSlash(this.config.endpoints.base, GameSnippets[game])
     );
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { KoreFile } from '../../korefile';
-import { Extension, Game } from '../../models';
+import { Extension } from '../../models';
 import {
   clearChanges,
   initializeGithub,
@@ -21,12 +21,12 @@ export class ChangesFacade {
 
   constructor(private store$: Store) {}
 
-  registerExtensionsChange(extensions: Extension[], game: Game) {
-    this.store$.dispatch(registerExtensionsChange({ extensions, game }));
+  registerExtensionsChange(fileName: string, content: Extension[]) {
+    this.store$.dispatch(registerExtensionsChange({ fileName, content }));
   }
 
-  registerSnippetChange(extension: string, content: string) {
-    this.store$.dispatch(registerSnippetChange({ extension, content }));
+  registerSnippetChange(fileName: string, content: string) {
+    this.store$.dispatch(registerSnippetChange({ fileName, content }));
   }
 
   clearChanges() {

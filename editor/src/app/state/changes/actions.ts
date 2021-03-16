@@ -3,12 +3,12 @@ import { Extension, Game } from '../../models';
 
 export const registerExtensionsChange = createAction(
   'register extensions change',
-  props<{ extensions: Extension[]; game: Game }>()
+  props<{ fileName: string; content: Extension[] }>()
 );
 
 export const registerSnippetChange = createAction(
   'register snippet change',
-  props<{ extension: string; content: string }>()
+  props<{ fileName: string; content: string }>()
 );
 
 export const clearChanges = createAction('clear changes');

@@ -10,6 +10,7 @@ import { map, tap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ExtensionsFacade } from './facade';
 import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
+import { GameLibrary } from '../../models';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -34,7 +35,7 @@ export class ExtensionsEffects {
         ofType(updateCommand),
         withLatestFrom(this._extensions.extensions$, this._ui.game$),
         tap(([_, extensions, game]) => {
-          this._changes.registerExtensionsChange(extensions, game);
+          this._changes.registerExtensionsChange(GameLibrary[game], extensions);
         })
       ),
     { dispatch: false }

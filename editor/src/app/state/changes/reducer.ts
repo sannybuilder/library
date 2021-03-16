@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { pickBy } from 'lodash';
 
 import { createGitHubAdaptor, createKoreFile, KoreFile } from '../../korefile';
-import { Extension, GameLibrary } from '../../models';
+import { Extension } from '../../models';
 import {
   clearChanges,
   initializeGithub,
@@ -23,16 +23,21 @@ export const initialState: ChangesState = {
 
 const _reducer = createReducer(
   initialState,
-  on(registerExtensionsChange, (state, { extensions, game }) => {
+  on(registerExtensionsChange, (state, { fileName, content }) => {
     const newMap = new Map(state.changes);
     const lastUpdate = Date.now();
     const newContent = {
       meta: {
         last_update: lastUpdate,
       },
-      extensions: stripBody(extensions),
+      extensions: stripBody(content),
     };
-    newMap.set(GameLibrary[game], JSON.stringify(newContent, null, 2));
+    newMap.set(fileName, JSON.stringify(newContent, null, 2));
+    return { ...state, changes: newMap };
+  }),
+  on(registerSnippetChange, (state, { fileName, content }) => {
+    const newMap = new Map(state.changes);
+    newMap.set(fileName, content);
     return { ...state, changes: newMap };
   }),
   on(submitChangesSuccess, (state, { lastUpdate }) => ({

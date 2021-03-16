@@ -10,3 +10,8 @@ export const loadSnippetsSuccess = createAction(
   'load snippets success',
   props<{ extensionSnippets: ExtensionSnippets }>()
 );
+
+export const updateSnippet = createAction(
+  'update snippets',
+  props<{ extension: string; opcode: string; content: string }>()
+);

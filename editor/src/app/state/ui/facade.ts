@@ -27,6 +27,7 @@ export class UiFacade {
     .pipe(distinctUntilChanged(), filter<Game>(Boolean));
 
   commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
+  snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
 
   opcodeOnLoad$ = this.store$.select(selector.opcodeOnLoad).pipe(
     distinctUntilChanged(

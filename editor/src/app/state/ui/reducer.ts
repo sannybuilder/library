@@ -7,6 +7,7 @@ import {
   toggleFilter,
   updateSearchTerm,
   onListEnter,
+  displayOrEditSnippet,
 } from './actions';
 import { without } from 'lodash';
 
@@ -18,6 +19,7 @@ export interface UiState {
   selectedFiltersExcept: string[];
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
+  snippetToDisplayOrEdit?: string;
   viewMode: ViewMode;
   game?: Game;
   opcodeOnLoad?: string;
@@ -64,10 +66,15 @@ const _reducer = createReducer(
     commandToDisplayOrEdit: command,
     extensionToDisplayOrEdit: extension,
   })),
+  on(displayOrEditSnippet, (state, { snippet }) => ({
+    ...state,
+    snippetToDisplayOrEdit: snippet,
+  })),
   on(stopEditOrDisplay, (state) => ({
     ...state,
     commandToDisplayOrEdit: undefined,
     extensionToDisplayOrEdit: undefined,
+    snippetToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
   })),
   on(onListEnter, (state, { game, opcode, extension }) => ({

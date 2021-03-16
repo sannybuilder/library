@@ -6,7 +6,10 @@ export const registerExtensionsChange = createAction(
   props<{ extensions: Extension[]; game: Game }>()
 );
 
-export const registerSnippetChange = createAction('register snippet change');
+export const registerSnippetChange = createAction(
+  'register snippet change',
+  props<{ extension: string; content: string }>()
+);
 
 export const clearChanges = createAction('clear changes');
 

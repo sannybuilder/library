@@ -26,6 +26,11 @@ export const displayOrEditCommandInfo = createAction(
   props<{ command: Command; extension: string; viewMode: ViewMode }>()
 );
 
+export const displayOrEditSnippet = createAction(
+  'display or edit snippet',
+  props<{ snippet: string }>()
+);
+
 export const stopEditOrDisplay = createAction('stop edit or display');
 
 export const onListEnter = createAction(

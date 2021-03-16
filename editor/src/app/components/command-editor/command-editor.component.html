@@ -9,6 +9,7 @@
         (blur)="opcodify(command)"
         [ngModel]="command.id"
         (ngModelChange)="onOpcodeChange(command, $event)"
+        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -20,6 +21,7 @@
         class="form-control"
         [ngModel]="command.name | uppercase"
         (ngModelChange)="onCommandNameChange(command, $event)"
+        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -29,7 +31,8 @@
   <div class="col-12">
     <scl-selector
       label="Extension"
-      [(model)]="extension"
+      [model]="extension"
+      (modelChange)="onExtensionChange($event)"
       [choices]="extensionNames$ | async"
     ></scl-selector>
   </div>
@@ -45,6 +48,7 @@
         class="form-control"
         [ngModel]="command.class"
         (ngModelChange)="onClassChange(command, $event)"
+        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -57,6 +61,7 @@
         class="form-control"
         [ngModel]="command.member"
         (ngModelChange)="onMemberChange(command, $event)"
+        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -71,6 +76,7 @@
         [(ngModel)]="command.short_desc"
         class="form-control"
         [disabled]="command.attrs.is_nop"
+        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -80,7 +86,12 @@
   <div class="col-12 col-md-6">
     <div class="input-group">
       <span class="input-group-text">Input {{ i + 1 }}</span>
-      <input type="text" class="form-control" [(ngModel)]="param.name" />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="param.name"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+      />
     </div>
   </div>
   <div class="col-12 col-md-6">
@@ -98,7 +109,12 @@
   <div class="col-12 col-md-6">
     <div class="input-group">
       <span class="input-group-text">Output {{ i + 1 }}</span>
-      <input type="text" class="form-control" [(ngModel)]="param.name" />
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="param.name"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+      />
     </div>
   </div>
   <div class="col-12 col-md-6">
@@ -137,7 +153,9 @@
         class="form-control"
         rows="4"
         [id]="command.id + '_snippet'"
-        [value]="getSnippet(extension, command.id) | async"
+        [ngModel]="snippet"
+        (ngModelChange)="onSnippetChange($event)"
+        [ngModelOptions]="{ updateOn: 'blur' }"
       ></textarea>
     </div>
   </div>

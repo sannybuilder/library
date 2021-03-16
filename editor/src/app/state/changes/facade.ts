@@ -25,8 +25,8 @@ export class ChangesFacade {
     this.store$.dispatch(registerExtensionsChange({ extensions, game }));
   }
 
-  registerSnippetChange() {
-    this.store$.dispatch(registerSnippetChange());
+  registerSnippetChange(extension: string, content: string) {
+    this.store$.dispatch(registerSnippetChange({ extension, content }));
   }
 
   clearChanges() {

@@ -62,15 +62,6 @@ export interface ExtensionSnippets {
   [extensionName: string]: { [opcode: string]: string };
 }
 
-export interface ExtensionSnippetsViewModel {
-  [extensionName: string]: {
-    [opcode: string]: {
-      snippet: string;
-      changed: boolean;
-    };
-  };
-}
-
 export enum Game {
   GTA3 = 'gta3',
   VC = 'vc',

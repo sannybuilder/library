@@ -6,7 +6,12 @@ import { Modal } from 'bootstrap';
 
 import { CONFIG, Config } from '../../config';
 import { Command, SEARCH_OPTIONS, ViewMode } from '../../models';
-import { AuthFacade, ExtensionsFacade, UiFacade } from '../../state';
+import {
+  AuthFacade,
+  ExtensionsFacade,
+  SnippetsFacade,
+  UiFacade,
+} from '../../state';
 
 @Component({
   selector: 'scl-library-page',
@@ -17,6 +22,7 @@ export class LibraryPageComponent implements OnDestroy {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
   command$ = this._ui.commandToDisplayOrEdit$;
+  snippet$ = this._ui.snippetToDisplayOrEdit$;
   game$ = this._ui.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
@@ -26,6 +32,8 @@ export class LibraryPageComponent implements OnDestroy {
   );
 
   command?: Command;
+  snippet?: string;
+  oldSnippet?: string;
   extension?: string;
   oldExtension?: string;
   screenSize: number;
@@ -37,6 +45,7 @@ export class LibraryPageComponent implements OnDestroy {
     private _extensions: ExtensionsFacade,
     private _auth: AuthFacade,
     private _ui: UiFacade,
+    private _snippets: SnippetsFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
 
@@ -54,6 +63,11 @@ export class LibraryPageComponent implements OnDestroy {
     });
 
     this._ui.toggleCommandListElements(true);
+
+    this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
+      this.snippet = snippet;
+      this.oldSnippet = snippet;
+    });
 
     this.command$
       .pipe(takeUntil(this.onDestroy$))
@@ -81,6 +95,14 @@ export class LibraryPageComponent implements OnDestroy {
       oldExtension: this.oldExtension,
       command: omit(this.command, SEARCH_OPTIONS.fusejsHighlightKey) as Command,
     });
+    if (this.snippet !== this.oldSnippet) {
+      this._snippets.updateSnippet({
+        extension: this.extension,
+        opcode: this.command.id,
+        content: this.snippet,
+      });
+    }
+
     this._handle.hide();
   }
 
@@ -97,6 +119,10 @@ export class LibraryPageComponent implements OnDestroy {
   onCancel() {
     this._ui.stopEditOrDisplay();
     this._handle.hide();
+  }
+
+  getSnippet(extension: string, opcode: string) {
+    return this._snippets.getSnippet(extension, opcode);
   }
 
   getExtensionEntities(extension: string) {

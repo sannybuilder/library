@@ -57,6 +57,11 @@ export const commandToDisplayOrEdit = createSelector(
   })
 );
 
+export const snippetToDisplayOrEdit = createSelector(
+  state,
+  (state: UiState) => state.snippetToDisplayOrEdit
+);
+
 export const opcodeOnLoad = createSelector(state, (state: UiState) => ({
   opcode: state.opcodeOnLoad,
   extension: state.extensionOnLoad,

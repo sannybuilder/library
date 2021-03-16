@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { displayOrEditCommandInfo, stopEditOrDisplay } from './actions';
+import {
+  displayOrEditCommandInfo,
+  displayOrEditSnippet,
+  stopEditOrDisplay,
+} from './actions';
 import { map, switchMap } from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { ViewMode } from '../../models';
@@ -11,6 +15,7 @@ import {
   updateCommand,
 } from '../extensions/actions';
 import { loadSnippets } from '../snippets/actions';
+import { SnippetsFacade } from '../snippets/facade';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -56,5 +61,19 @@ export class UiEffects {
     )
   );
 
-  constructor(private _actions$: Actions, private _ui: UiFacade) {}
+  displayOrEditSnippet$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(displayOrEditCommandInfo),
+      switchMap(({ command, extension }) =>
+        this._snippets.getSnippet(extension, command.id)
+      ),
+      map((snippet) => displayOrEditSnippet({ snippet }))
+    )
+  );
+
+  constructor(
+    private _actions$: Actions,
+    private _ui: UiFacade,
+    private _snippets: SnippetsFacade
+  ) {}
 }

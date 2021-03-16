@@ -10,7 +10,7 @@ import {
 import { opcodify } from '../../pipes';
 import { Command, CommandAttributes, Param, ParamType } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
-import { SnippetsFacade, ExtensionsFacade } from '../../state';
+import { ExtensionsFacade } from '../../state';
 
 @Component({
   selector: 'scl-command-editor',
@@ -22,24 +22,13 @@ export class CommandEditorComponent implements OnInit {
 
   extensionNames$ = this._extensions.extensionNames$;
 
-  private _newExtension: string;
   paramTypes: ParamType[] = [];
 
-  get extension(): string {
-    return this._newExtension;
-  }
-
   @Input() command: Command;
-  @Input()
-  set extension(val: string) {
-    if (!val) {
-      console.warn('extension can not be empty, using "default"');
-      val = 'default';
-    }
-    this._newExtension = val;
-    this.extensionChange.emit(val);
-  }
+  @Input() snippet: string;
+  @Input() extension: string;
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
+  @Output() snippetChange: EventEmitter<string> = new EventEmitter();
 
   @Input() set entities(val: ParamType[]) {
     const paramTypes = new Set([...this.primitiveTypes, ...val]);
@@ -57,10 +46,7 @@ export class CommandEditorComponent implements OnInit {
     ParamType.string,
   ];
 
-  constructor(
-    private _extensions: ExtensionsFacade,
-    private _snippets: SnippetsFacade
-  ) {}
+  constructor(private _extensions: ExtensionsFacade) {}
 
   ngOnInit() {
     if (this.selector) {
@@ -89,6 +75,18 @@ export class CommandEditorComponent implements OnInit {
       value?.length > 1 ? value[0].toUpperCase() + value.substring(1) : value;
   }
 
+  onExtensionChange(val: string) {
+    if (!val) {
+      console.warn('extension can not be empty, using "default"');
+      val = 'default';
+    }
+    this.extensionChange.emit(val);
+  }
+
+  onSnippetChange(val: string) {
+    this.snippetChange.emit(val);
+  }
+
   opcodify(command: Command) {
     command.id = opcodify(command.id);
   }
@@ -114,9 +112,5 @@ export class CommandEditorComponent implements OnInit {
         param.type = ParamType.label;
         break;
     }
-  }
-
-  getSnippet(extension: string, opcode: string) {
-    return this._snippets.getSnippet(extension, opcode);
   }
 }

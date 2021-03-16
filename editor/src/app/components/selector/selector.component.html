@@ -19,7 +19,12 @@
         </button>
       </div>
       <div class="dropdown-item input-group" *ngIf="canInput">
-        <input class="form-control" type="text" [(ngModel)]="freeInput" />
+        <input
+          class="form-control"
+          type="text"
+          [(ngModel)]="freeInput"
+          [ngModelOptions]="{ updateOn: 'blur' }"
+        />
         <div class="input-group-append">
           <button
             class="btn btn-outline-secondary"

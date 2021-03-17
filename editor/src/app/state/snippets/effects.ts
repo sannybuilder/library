@@ -4,7 +4,6 @@ import { loadSnippets, loadSnippetsSuccess, updateSnippet } from './actions';
 import { SnippetsService } from './service';
 import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ChangesFacade } from '../changes/facade';
-import { SnippetsFacade } from './facade';
 import { UiFacade } from '../ui/facade';
 
 @Injectable({ providedIn: 'root' })
@@ -30,9 +29,7 @@ export class SnippetsEffects {
         ofType(updateSnippet),
         withLatestFrom(this._ui.game$),
         tap(([{ content, extension, opcode }, game]) => {
-          const fileName = [game, 'snippets', extension, `${opcode}.txt`].join(
-            '/'
-          );
+          const fileName = `${game}/snippets/${extension}/${opcode}.txt`;
           this._changes.registerSnippetChange(fileName, content);
         })
       ),
@@ -42,7 +39,6 @@ export class SnippetsEffects {
   constructor(
     private actions$: Actions,
     private service: SnippetsService,
-    private _snippets: SnippetsFacade,
     private _ui: UiFacade,
     private _changes: ChangesFacade
   ) {}

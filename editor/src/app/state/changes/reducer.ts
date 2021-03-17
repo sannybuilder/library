@@ -41,7 +41,7 @@ const _reducer = createReducer(
     return { ...state, changes: newMap };
   }),
   on(submitChangesSuccess, (state, { lastUpdate }) => ({
-    ...state,
+    ...initialState,
     lastUpdate,
   })),
   on(clearChanges, () => ({

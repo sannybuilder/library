@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Command } from '../models';
+import { stringifyParamBrackets } from './params';
 
 @Pipe({
   name: 'keywordParams',
@@ -11,10 +12,6 @@ export class KeywordParamsPipe implements PipeTransform {
     }
     const input = value?.input ?? [];
     const output = value?.output ?? [];
-    return `${[...input, ...output]
-      .map((p) => {
-        return `[${p.name}: ${p.type}]`;
-      })
-      .join(' ')}`;
+    return `${[...input, ...output].map(stringifyParamBrackets).join(' ')}`;
   }
 }

@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Command } from '../models';
+import { stringifyParam } from './params';
 
 @Pipe({
   name: 'classParams',
@@ -11,10 +12,6 @@ export class ClassParamsPipe implements PipeTransform {
     }
     const input = value?.input ?? [];
     const output = value?.output ?? [];
-    return `(${[...input, ...output]
-      .map((p) => {
-        return `${p.name}: ${p.type}`;
-      })
-      .join(', ')})`;
+    return `(${[...input, ...output].map(stringifyParam).join(', ')})`;
   }
 }

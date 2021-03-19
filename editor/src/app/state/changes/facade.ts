@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs/operators';
-import { KoreFile } from '../../korefile';
 import { Extension } from '../../models';
 import {
   clearChanges,
@@ -17,7 +15,7 @@ export class ChangesFacade {
   changesCount$ = this.store$.select(selector.changesCount);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
   changes$ = this.store$.select(selector.changes);
-  github$ = this.store$.select(selector.github).pipe(filter<KoreFile>(Boolean));
+  github$ = this.store$.select(selector.github);
 
   constructor(private store$: Store) {}
 

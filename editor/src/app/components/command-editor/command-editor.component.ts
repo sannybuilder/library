@@ -8,7 +8,13 @@ import {
 } from '@angular/core';
 
 import { opcodify } from '../../pipes';
-import { Command, CommandAttributes, Param, ParamType } from '../../models';
+import {
+  Command,
+  CommandAttributes,
+  Param,
+  ParamType,
+  SourceType,
+} from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 import { ExtensionsFacade } from '../../state';
 
@@ -36,6 +42,13 @@ export class CommandEditorComponent implements OnInit {
   }
 
   readonly attrs = CommandAttributes;
+  readonly sources = [
+    SourceType.any,
+    SourceType.var_any,
+    SourceType.var_global,
+    SourceType.var_local,
+  ];
+
   readonly primitiveTypes = [
     ParamType.any,
     ParamType.arguments,
@@ -112,5 +125,17 @@ export class CommandEditorComponent implements OnInit {
         param.type = ParamType.label;
         break;
     }
+  }
+
+  getDefaultInputSource(param: Param) {
+    return param.source ?? SourceType.any;
+  }
+
+  getDefaultOutputSource(param: Param) {
+    return param.source ?? SourceType.var_any;
+  }
+
+  onParamSourceUpdate(source: SourceType, param: Param) {
+    param.source = source;
   }
 }

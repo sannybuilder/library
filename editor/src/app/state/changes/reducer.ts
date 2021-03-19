@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { pickBy } from 'lodash';
 
 import { createGitHubAdaptor, createKoreFile, KoreFile } from '../../korefile';
-import { Extension } from '../../models';
+import { Extension, Param, SourceType } from '../../models';
 import {
   clearChanges,
   initializeGithub,
@@ -72,13 +72,28 @@ function stripBody(extensions: Extension[]) {
         {
           ...c,
           id: c.id,
-          attrs: pickBy(c.attrs, (x) => x),
+          attrs: smash(pickBy(c.attrs, (x) => x)),
           class: c.attrs.is_unsupported ? null : c.class,
           member: c.attrs.is_unsupported ? null : c.member,
           short_desc: c.attrs.is_unsupported ? null : c.short_desc,
+          input: c.input?.map(stripAnyValueType),
+          output: c.output?.map(stripAnyValueType),
         },
         (x) => x !== null && (!Array.isArray(x) || x.length > 0)
       )
     ),
   }));
+}
+
+// return undefined if the object is an empty object {}
+function smash(value: object) {
+  if (Object.keys(value).length > 0) {
+    return value;
+  }
+}
+
+function stripAnyValueType(param: Param) {
+  return pickBy(param, (v, k) =>
+    k === 'source' ? v !== SourceType.any : true
+  );
 }

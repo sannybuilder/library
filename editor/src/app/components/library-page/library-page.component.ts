@@ -104,6 +104,7 @@ export class LibraryPageComponent implements OnDestroy {
     }
 
     this._handle.hide();
+    this._ui.stopEditOrDisplay();
   }
 
   onView(command: Command, extension: string) {

@@ -22,6 +22,13 @@ export enum ParamType {
   string = 'string',
 }
 
+export enum SourceType {
+  any = 'any',
+  var_any = 'var_any',
+  var_global = 'var_global',
+  var_local = 'var_local',
+}
+
 export const CommandAttributes = [
   'is_branch',
   'is_segment',
@@ -39,18 +46,19 @@ export const CommandAttributes = [
 export interface Param {
   type: ParamType;
   name: String;
+  source: SourceType;
 }
 
 export interface Command {
   id: string;
   name: string;
-  attrs: Attr;
+  attrs: Partial<Attr>;
   num_params: number;
   input?: Param[];
   output?: Param[];
   class?: string;
   member?: string;
-  short_desc: string;
+  short_desc?: string;
 }
 
 export interface Extension {

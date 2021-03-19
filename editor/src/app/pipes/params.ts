@@ -14,9 +14,9 @@ export function stringifySource(source: SourceType) {
 }
 
 export function stringifyParam(p: Param) {
-  return `${p.name}: ${[p.type, stringifySource(p.source)]
-    .filter(Boolean)
-    .join(' ')}`;
+  return `${[stringifySource(p.source), p.name].filter(Boolean).join(' ')}: ${
+    p.type
+  }`;
 }
 
 export function stringifyParamBrackets(p: Param) {

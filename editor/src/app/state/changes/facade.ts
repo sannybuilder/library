@@ -13,7 +13,7 @@ import * as selector from './selectors';
 @Injectable({ providedIn: 'root' })
 export class ChangesFacade {
   changesCount$ = this.store$.select(selector.changesCount);
-  lastUpdate$ = this.store$.select(selector.lastUpdate);
+
   changes$ = this.store$.select(selector.changes);
   github$ = this.store$.select(selector.github);
 

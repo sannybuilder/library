@@ -7,7 +7,7 @@ import { UiFacade, ChangesFacade } from '../../state';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  lastUpdate$ = this._changes.lastUpdate$;
+  lastUpdate$ = this._ui.lastUpdate$;
   displayLastUpdate$ = this._ui.displayLastUpdated$;
   changesCount$ = this._changes.changesCount$;
 

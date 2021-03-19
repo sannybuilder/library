@@ -12,6 +12,8 @@ export interface Attr {
   is_variadic: boolean;
 }
 
+export type Attribute = keyof Attr;
+
 export enum ParamType {
   any = 'any',
   arguments = 'arguments',
@@ -29,7 +31,7 @@ export enum SourceType {
   var_local = 'var_local',
 }
 
-export const CommandAttributes = [
+export const CommandAttributes: Attribute[] = [
   'is_branch',
   'is_segment',
   'is_keyword',
@@ -45,14 +47,14 @@ export const CommandAttributes = [
 
 export interface Param {
   type: ParamType;
-  name: String;
+  name: string;
   source: SourceType;
 }
 
 export interface Command {
   id: string;
   name: string;
-  attrs: Partial<Attr>;
+  attrs?: Partial<Attr>;
   num_params: number;
   input?: Param[];
   output?: Param[];

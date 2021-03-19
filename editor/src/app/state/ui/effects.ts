@@ -27,7 +27,7 @@ export class UiEffects {
       map(([{ extensions }, { opcode, extension }]) => {
         const command = extensions
           .find((e) => e.name === extension)
-          ?.commands.find((command) => command.id === opcode);
+          ?.commands.find(({ id }) => id === opcode);
 
         if (command) {
           return displayOrEditCommandInfo({

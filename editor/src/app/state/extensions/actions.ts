@@ -8,7 +8,7 @@ export const loadExtensions = createAction(
 
 export const loadExtensionsSuccess = createAction(
   'load extensions success',
-  props<{ extensions: Extension[]; lastUpdate: number }>()
+  props<{ extensions: Extension[] }>()
 );
 
 export const updateCommand = createAction(

@@ -44,7 +44,7 @@
       <span class="input-group-text">Class</span>
       <input
         type="text"
-        [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
+        [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
         class="form-control"
         [ngModel]="command.class"
         (ngModelChange)="onClassChange(command, $event)"
@@ -57,7 +57,7 @@
       <span class="input-group-text">Member</span>
       <input
         type="text"
-        [disabled]="command.attrs.is_keyword || command.attrs.is_nop"
+        [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
         class="form-control"
         [ngModel]="command.member"
         (ngModelChange)="onMemberChange(command, $event)"
@@ -75,7 +75,7 @@
         type="text"
         [(ngModel)]="command.short_desc"
         class="form-control"
-        [disabled]="command.attrs.is_nop"
+        [disabled]="command.attrs?.is_nop"
         [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
@@ -131,7 +131,7 @@
       [(model)]="param.type"
       [choices]="paramTypes"
       [canInput]="
-        command.attrs.is_constructor && i === command.output.length - 1
+        command.attrs?.is_constructor && i === command.output.length - 1
       "
     ></scl-selector>
   </div>
@@ -151,7 +151,8 @@
       <input
         class="form-check-input"
         type="checkbox"
-        [(ngModel)]="command.attrs[attr]"
+        [ngModel]="command.attrs ? command.attrs[attr] : undefined"
+        (ngModelChange)="onAttrChange(command, attr, $event)"
         [id]="attr"
       />
       <label class="form-check-label" [for]="attr">

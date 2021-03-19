@@ -8,6 +8,7 @@ import {
   updateSearchTerm,
   onListEnter,
   displayOrEditSnippet,
+  updateLastUpdateTime,
 } from './actions';
 import { without } from 'lodash';
 
@@ -24,6 +25,7 @@ export interface UiState {
   game?: Game;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
+  lastUpdate?: number;
 }
 
 export const initialState: UiState = {
@@ -82,6 +84,10 @@ const _reducer = createReducer(
     game,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
+  })),
+  on(updateLastUpdateTime, (state, { lastUpdate }) => ({
+    ...state,
+    lastUpdate,
   }))
 );
 

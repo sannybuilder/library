@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Extension, Game, ViewMode } from '../../models';
+import { Extension } from '../../models';
 import {
   loadExtensions,
   loadExtensionsSuccess,
@@ -27,10 +27,9 @@ const _reducer = createReducer(
     loading: true,
     changesCount: 0,
   })),
-  on(loadExtensionsSuccess, (state, { extensions, lastUpdate }) => ({
+  on(loadExtensionsSuccess, (state, { extensions }) => ({
     ...state,
     loading: false,
-    lastUpdate,
     extensions,
     selectedExtensions: extensions.map((e) => e.name),
     entities: getEntities(extensions),
@@ -38,8 +37,8 @@ const _reducer = createReducer(
   on(
     updateCommand,
     (state, { command: newCommand, newExtension: name, oldExtension }) => {
-      let tickExtension = null;
-      let untickExtension = null;
+      let tickExtension: string | null = null;
+      let untickExtension: string | null = null;
       let extensions = upsertBy(
         state.extensions,
         'name',
@@ -121,15 +120,15 @@ function upsertBy<T extends object, Key extends keyof T>(
   let found = false;
   const newCollection: T[] = [];
 
-  for (let i = 0; i < collection.length; i++) {
-    if (collection[i][key] === needle) {
+  for (const item of collection) {
+    if (item[key] === needle) {
       found = true;
-      const newItem = onFound(collection[i]);
+      const newItem = onFound(item);
       if (newItem !== null) {
-        newCollection.push(onFound(collection[i]));
+        newCollection.push(onFound(item));
       }
     } else {
-      newCollection.push(collection[i]);
+      newCollection.push(item);
     }
   }
   if (!found) {
@@ -146,7 +145,7 @@ function upsertBy<T extends object, Key extends keyof T>(
 function getEntities(extensions: Extension[]): Record<string, string[]> {
   return extensions.reduce((m, e) => {
     const set = e.commands
-      .filter((command) => command.attrs.is_constructor)
+      .filter((command) => command.attrs?.is_constructor)
       .reduce((entities, command) => {
         const last = command.output[command.output.length - 1];
         if (!last) {
@@ -158,5 +157,5 @@ function getEntities(extensions: Extension[]): Record<string, string[]> {
 
     (m[e.name] ??= []).push(...set);
     return m;
-  }, {});
+  }, {} as Record<string, string[]>);
 }

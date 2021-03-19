@@ -57,7 +57,7 @@
                     <div
                       class="my-2"
                       *ngIf="
-                        !command.attrs.is_unsupported && !command.attrs.is_nop
+                        !command.attrs?.is_unsupported && !command.attrs?.is_nop
                       "
                       [innerHTML]="
                         command[searchOptions.fusejsHighlightKey].short_desc
@@ -65,16 +65,16 @@
                     >
                       {{ command.short_desc }}
                     </div>
-                    <ng-container *ngIf="command.attrs.is_unsupported"
+                    <ng-container *ngIf="command.attrs?.is_unsupported"
                       >Unsupported</ng-container
                     >
-                    <ng-container *ngIf="command.attrs.is_nop"
+                    <ng-container *ngIf="command.attrs?.is_nop"
                       >Does nothing (NOP)</ng-container
                     >
                   </div>
                 </div>
 
-                <div class="row" *ngIf="command.attrs.is_keyword">
+                <div class="row" *ngIf="command.attrs?.is_keyword">
                   <div class="col-12">
                     <code
                       >{{ command.name | lowercase }}
@@ -104,10 +104,10 @@
                 <div
                   class="row"
                   *ngIf="
-                    !command.attrs.is_keyword &&
+                    !command.attrs?.is_keyword &&
                     !(command.class && command.member) &&
-                    !command.attrs.is_unsupported &&
-                    !command.attrs.is_nop
+                    !command.attrs?.is_unsupported &&
+                    !command.attrs?.is_nop
                   "
                 >
                   <div class="col-12">

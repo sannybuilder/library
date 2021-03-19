@@ -45,7 +45,7 @@ export class FusejsService {
         fuseOptions.includeMatches = true;
       }
 
-      let fuse = new Fuse(list, fuseOptions);
+      const fuse = new Fuse(list, fuseOptions);
       result = fuse.search(searchTerms);
       if (fuseOptions.supportHighlight) {
         result = this.handleHighlight(result, fuseOptions);
@@ -66,7 +66,7 @@ export class FusejsService {
     return result;
   }
 
-  private handleHighlight(result, options: AngularFusejsOptions) {
+  private handleHighlight(result: any[], options: AngularFusejsOptions) {
     if (options.maximumScore && options.includeScore) {
       result = result.filter((matchObject) => {
         return matchObject.score <= options.maximumScore;

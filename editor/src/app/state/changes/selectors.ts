@@ -13,11 +13,6 @@ export const changesCount = createSelector(
   (changes: Map<string, string>) => changes.size
 );
 
-export const lastUpdate = createSelector(
-  state,
-  (state: ChangesState) => state.lastUpdate
-);
-
 export const github = createSelector(
   state,
   (state: ChangesState) => state.github

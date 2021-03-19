@@ -40,9 +40,8 @@ const _reducer = createReducer(
     newMap.set(fileName, content);
     return { ...state, changes: newMap };
   }),
-  on(submitChangesSuccess, (state, { lastUpdate }) => ({
+  on(submitChangesSuccess, () => ({
     ...initialState,
-    lastUpdate,
   })),
   on(clearChanges, () => ({
     ...initialState,
@@ -73,9 +72,9 @@ function stripBody(extensions: Extension[]) {
           ...c,
           id: c.id,
           attrs: smash(pickBy(c.attrs, (x) => x)),
-          class: c.attrs.is_unsupported ? null : c.class,
-          member: c.attrs.is_unsupported ? null : c.member,
-          short_desc: c.attrs.is_unsupported ? null : c.short_desc,
+          class: c.attrs?.is_unsupported ? null : c.class,
+          member: c.attrs?.is_unsupported ? null : c.member,
+          short_desc: c.attrs?.is_unsupported ? null : c.short_desc,
           input: c.input?.map(stripAnyValueType),
           output: c.output?.map(stripAnyValueType),
         },

@@ -6,11 +6,12 @@ import {
   updateCommand,
 } from './actions';
 import { ExtensionsService } from './service';
-import { map, tap, switchMap, withLatestFrom } from 'rxjs/operators';
+import { tap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ExtensionsFacade } from './facade';
 import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
 import { GameLibrary } from '../../models';
+import { updateLastUpdateTime } from '../ui/actions';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -21,9 +22,10 @@ export class ExtensionsEffects {
         this.service
           .loadExtensions(game)
           .pipe(
-            map(({ extensions, lastUpdate }) =>
-              loadExtensionsSuccess({ extensions, lastUpdate })
-            )
+            switchMap(({ extensions, lastUpdate }) => [
+              loadExtensionsSuccess({ extensions }),
+              updateLastUpdateTime({ lastUpdate }),
+            ])
           )
       )
     )

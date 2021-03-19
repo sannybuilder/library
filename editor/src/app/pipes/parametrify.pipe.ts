@@ -12,7 +12,7 @@ export class ParametrifyPipe implements PipeTransform {
       (command[key] ??= []).reduce((m, v, i) => {
         m[key + (i + 1)] = `[${v.name}: ${v.type}]`;
         return m;
-      }, {});
+      }, {} as Record<string, string>);
     return compiled({
       ...stringify('input'),
       ...stringify('output'),

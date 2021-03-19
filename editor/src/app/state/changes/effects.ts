@@ -29,7 +29,7 @@ export class ChangesEffects {
           })
         )
       ),
-      map(() => submitChangesSuccess({ lastUpdate: Date.now() }))
+      map(() => submitChangesSuccess())
     )
   );
 

@@ -9,6 +9,7 @@ import {
 
 import { opcodify } from '../../pipes';
 import {
+  Attribute,
   Command,
   CommandAttributes,
   Param,
@@ -41,7 +42,7 @@ export class CommandEditorComponent implements OnInit {
     this.paramTypes = [...paramTypes];
   }
 
-  readonly attrs = CommandAttributes;
+  readonly attrs: Attribute[] = CommandAttributes;
   readonly sources = [
     SourceType.any,
     SourceType.var_any,
@@ -137,5 +138,9 @@ export class CommandEditorComponent implements OnInit {
 
   onParamSourceUpdate(source: SourceType, param: Param) {
     param.source = source;
+  }
+
+  onAttrChange(command: Command, attr: Attribute, value: boolean) {
+    (command.attrs ??= {})[attr] = value;
   }
 }

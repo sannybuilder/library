@@ -48,6 +48,7 @@ export class CommandEditorComponent implements OnInit {
     SourceType.var_any,
     SourceType.var_global,
     SourceType.var_local,
+    SourceType.literal,
   ];
 
   readonly primitiveTypes = [

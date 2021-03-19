@@ -10,13 +10,15 @@ export function stringifySource(source: SourceType) {
       return 'gvar';
     case SourceType.var_local:
       return 'lvar';
+    case SourceType.literal:
+      return 'literal';
   }
 }
 
 export function stringifyParam(p: Param) {
-  return `${[stringifySource(p.source), p.name].filter(Boolean).join(' ')}: ${
-    p.type
-  }`;
+  return [[stringifySource(p.source), p.name].filter(Boolean).join(' '), p.type]
+    .filter(Boolean)
+    .join(': ');
 }
 
 export function stringifyParamBrackets(p: Param) {

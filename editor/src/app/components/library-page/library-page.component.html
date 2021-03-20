@@ -34,16 +34,14 @@
   </div>
 </div>
 
-<div class="modal d-xl-none" id="modal" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
-      </div>
-      <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
-    </div>
+<scl-modal *ngIf="command && screenSize < 1200">
+  <div class="modal-body">
+    <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
   </div>
-</div>
+  <ng-container class="modal-footer">
+    <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+  </ng-container>
+</scl-modal>
 
 <ng-template #modalFooter>
   <div class="modal-footer">

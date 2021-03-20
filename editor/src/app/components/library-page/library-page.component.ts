@@ -1,4 +1,10 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  Inject,
+  OnDestroy,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { omit } from 'lodash';
@@ -18,7 +24,7 @@ import {
   templateUrl: './library-page.component.html',
   styleUrls: ['./library-page.component.scss'],
 })
-export class LibraryPageComponent implements OnDestroy {
+export class LibraryPageComponent implements OnDestroy, AfterViewInit {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
   command$ = this._ui.commandToDisplayOrEdit$;
@@ -39,8 +45,6 @@ export class LibraryPageComponent implements OnDestroy {
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
 
-  private _handle: Modal;
-
   constructor(
     private _extensions: ExtensionsFacade,
     private _auth: AuthFacade,
@@ -52,16 +56,11 @@ export class LibraryPageComponent implements OnDestroy {
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();
-    this._handle.dispose();
     this._ui.toggleCommandListElements(false);
   }
 
   ngAfterViewInit(): void {
-    this._handle = new Modal(document.getElementById('modal'), {
-      backdrop: 'static',
-      keyboard: true,
-    });
-
+    this.detectScreenSize();
     this._ui.toggleCommandListElements(true);
 
     this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
@@ -73,16 +72,6 @@ export class LibraryPageComponent implements OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(({ command, extension, viewMode }) => {
         this.command = command ? JSON.parse(JSON.stringify(command)) : command;
-
-        // display editor in modal
-        this.detectScreenSize();
-        if (this.screenSize < 1200) {
-          if (this.command) {
-            this._handle.show();
-          } else {
-            this._handle.hide();
-          }
-        }
         this.oldExtension = extension;
         this.extension = extension;
         this.viewMode = viewMode;
@@ -103,7 +92,6 @@ export class LibraryPageComponent implements OnDestroy {
       });
     }
 
-    this._handle.hide();
     this._ui.stopEditOrDisplay();
   }
 
@@ -119,7 +107,6 @@ export class LibraryPageComponent implements OnDestroy {
 
   onCancel() {
     this._ui.stopEditOrDisplay();
-    this._handle.hide();
   }
 
   getSnippet(extension: string, opcode: string) {
@@ -130,12 +117,7 @@ export class LibraryPageComponent implements OnDestroy {
     return this._extensions.getExtensionEntities(extension);
   }
 
-  // todo: switch edit modal/rail on resise
-  // @HostListener('window:resize', [])
-  // private onResize() {
-  //   this.detectScreenSize();
-  // }
-
+  @HostListener('window:resize', [])
   private detectScreenSize() {
     this.screenSize = window.innerWidth;
   }

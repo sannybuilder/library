@@ -52,6 +52,7 @@ import { SelectorComponent } from './components/selector/selector.component';
 import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
     DownloadPanelComponent,
     FilterPanelComponent,
     LibraryPageComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

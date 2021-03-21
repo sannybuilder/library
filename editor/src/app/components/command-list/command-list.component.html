@@ -107,13 +107,16 @@
                         !command.attrs?.is_nop
                       "
                     >
-                      <code
-                        >{{
+                      <ng-container
+                        *ngIf="
                           getSnippet(extension.name, command.id)
-                            | async
-                            | parametrify: command
-                        }}
-                      </code>
+                            | async as snippet
+                        "
+                      >
+                        <pre class="sample">{{
+                          snippet | parametrify: command
+                        }}</pre>
+                      </ng-container>
                     </ng-container>
                   </div>
                 </div>

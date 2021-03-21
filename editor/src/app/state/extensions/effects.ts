@@ -19,6 +19,7 @@ import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
 import { GameLibrary } from '../../models';
 import { updateLastUpdateTime } from '../ui/actions';
+import { isAnyAttributeInvalid } from 'src/app/utils/validation';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -46,6 +47,25 @@ export class ExtensionsEffects {
         withLatestFrom(this._extensions.extensions$, this._ui.game$),
         tap(([_, extensions, game]) => {
           this._changes.registerExtensionsChange(GameLibrary[game], extensions);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  validateExtensions$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadExtensionsSuccess),
+        tap(({ extensions }) => {
+          extensions.forEach((extension) =>
+            extension.commands.forEach((command) => {
+              if (isAnyAttributeInvalid(command)) {
+                console.warn(
+                  `Invalid combination of attributes: extension ${extension.name}, opcode: ${command.id}`
+                );
+              }
+            })
+          );
         })
       ),
     { dispatch: false }

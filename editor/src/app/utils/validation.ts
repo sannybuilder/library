@@ -4,7 +4,7 @@ export const ATTRIBUTE_RULES: Partial<
   Record<Attribute, { allowed?: Attribute[]; disallowed?: Attribute[] }>
 > = {
   is_unsupported: { allowed: [] },
-  is_nop: { allowed: ['is_condition'] },
+  is_nop: { allowed: ['is_condition', 'is_static'] },
   is_keyword: { disallowed: ['is_constructor', 'is_destructor', 'is_static'] },
 };
 

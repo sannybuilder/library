@@ -1,4 +1,4 @@
-use collections::HashMap;
+use collections::{BTreeMap, HashMap};
 use convert_case::{Case, Casing};
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
@@ -76,7 +76,7 @@ fn visit_dirs(dir: &Path, cb: &mut dyn FnMut(&DirEntry) -> Option<()>) -> io::Re
 }
 
 fn generate_snippets() -> io::Result<()> {
-    let mut snippets: HashMap<String, HashMap<String, String>> = HashMap::new();
+    let mut snippets: BTreeMap<String, BTreeMap<String, String>> = BTreeMap::new();
     let args: Vec<String> = std::env::args().collect();
     let source_dir = args
         .get(2)
@@ -88,7 +88,7 @@ fn generate_snippets() -> io::Result<()> {
         let mut c = path.components();
 
         let extension: String = c.nth_back(1)?.as_os_str().to_str()?.into();
-        let map = snippets.entry(extension).or_insert(HashMap::new());
+        let map = snippets.entry(extension).or_insert(BTreeMap::new());
         map.insert(f.path().file_stem()?.to_str()?.into(), content);
         Some(())
     })?;

@@ -1,8 +1,18 @@
 <nav class="navbar fixed-bottom navbar-light bg-dark">
   <div class="container-fluid justify-content-center flex-row">
     <div class="save-button-container" *ngIf="(changesCount$ | async) > 0">
-      <button class="btn btn-outline-success" (click)="submitChanges()">
-        Save To GitHub
+      <button
+        class="btn btn-outline-success"
+        (click)="submitChanges()"
+        [disabled]="isUpdating$ | async"
+      >
+        <span>Save To GitHub</span>
+        <span
+          *ngIf="isUpdating$ | async"
+          class="spinner-border spinner-border-sm ml-2"
+          role="status"
+          aria-hidden="true"
+        ></span>
       </button>
     </div>
     <small

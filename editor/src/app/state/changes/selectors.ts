@@ -17,3 +17,8 @@ export const github = createSelector(
   state,
   (state: ChangesState) => state.github
 );
+
+export const isUpdating = createSelector(
+  state,
+  (state: ChangesState) => state.isUpdating
+);

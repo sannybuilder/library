@@ -8,6 +8,7 @@ import {
   initializeGithub,
   registerExtensionsChange,
   registerSnippetChange,
+  submitChanges,
   submitChangesSuccess,
 } from './actions';
 
@@ -15,10 +16,12 @@ export interface ChangesState {
   changes: Map<string, string>;
   github?: KoreFile;
   lastUpdate?: number;
+  isUpdating: boolean;
 }
 
 export const initialState: ChangesState = {
   changes: new Map(),
+  isUpdating: false,
 };
 
 const _reducer = createReducer(
@@ -40,6 +43,7 @@ const _reducer = createReducer(
     newMap.set(fileName, content);
     return { ...state, changes: newMap };
   }),
+  on(submitChanges, (state) => ({ ...state, isUpdating: true })),
   on(submitChangesSuccess, () => ({
     ...initialState,
   })),

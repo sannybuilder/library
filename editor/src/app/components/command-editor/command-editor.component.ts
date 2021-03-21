@@ -17,7 +17,7 @@ import {
   SourceType,
 } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
-import { ExtensionsFacade } from '../../state';
+import { isAnyAttributeInvalid } from '../../utils/validation';
 
 @Component({
   selector: 'scl-command-editor',
@@ -27,13 +27,12 @@ import { ExtensionsFacade } from '../../state';
 export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
-  extensionNames$ = this._extensions.extensionNames$;
-
   paramTypes: ParamType[] = [];
 
   @Input() command: Command;
   @Input() snippet: string;
   @Input() extension: string;
+  @Input() extensionNames: string[];
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
 
@@ -60,8 +59,6 @@ export class CommandEditorComponent implements OnInit {
     ParamType.label,
     ParamType.string,
   ];
-
-  constructor(private _extensions: ExtensionsFacade) {}
 
   ngOnInit() {
     if (this.selector) {
@@ -143,5 +140,9 @@ export class CommandEditorComponent implements OnInit {
 
   onAttrChange(command: Command, attr: Attribute, value: boolean) {
     (command.attrs ??= {})[attr] = value;
+  }
+
+  public shouldDisplayAttributeError(): boolean {
+    return isAnyAttributeInvalid(this.command);
   }
 }

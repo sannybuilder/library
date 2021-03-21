@@ -1,9 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { submitChanges, submitChangesSuccess } from './actions';
-import { map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { ChangesFacade } from '../changes/facade';
 import { from, of } from 'rxjs';
+import {
+  distinctUntilChanged,
+  map,
+  switchMap,
+  take,
+  withLatestFrom,
+} from 'rxjs/operators';
+
+import { submitChanges, submitChangesSuccess } from './actions';
+import { ChangesFacade } from '../changes/facade';
 import { Config, CONFIG } from '../../config';
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +19,7 @@ export class ChangesEffects {
     this.actions$.pipe(
       ofType(submitChanges),
       withLatestFrom(this._facade.changes$),
+      distinctUntilChanged((a, b) => a[1] === b[1]),
       switchMap(([_, changes]) =>
         this._facade.github$.pipe(
           take(1),
@@ -19,7 +27,7 @@ export class ChangesEffects {
             if (!github && !this._config.features.shouldBeAuthorizedToEdit) {
               console.log('Submit changes');
               console.table(changes);
-              return of();
+              return of(undefined);
             }
             const files = [...changes.entries()].map(([path, content]) => ({
               path,

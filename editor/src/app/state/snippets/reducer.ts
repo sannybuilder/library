@@ -17,9 +17,9 @@ const _reducer = createReducer(
   on(updateSnippet, (state, { extension, opcode, content }) => ({
     ...state,
     extensionSnippets: {
-      ...state.extensionSnippets,
+      ...(state.extensionSnippets ?? {}),
       [extension]: {
-        ...state.extensionSnippets[extension],
+        ...(state.extensionSnippets?.[extension] ?? {}),
         [opcode]: content,
       },
     },

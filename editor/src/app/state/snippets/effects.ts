@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import {
+  distinctUntilChanged,
+  map,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
+import { isEqual } from 'lodash';
+
 import { loadSnippets, loadSnippetsSuccess, updateSnippet } from './actions';
 import { SnippetsService } from './service';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ChangesFacade } from '../changes/facade';
 import { UiFacade } from '../ui/facade';
 
@@ -27,6 +35,7 @@ export class SnippetsEffects {
     () =>
       this.actions$.pipe(
         ofType(updateSnippet),
+        distinctUntilChanged(isEqual),
         withLatestFrom(this._ui.game$),
         tap(([{ content, extension, opcode }, game]) => {
           const fileName = `${game}/snippets/${extension}/${opcode}.txt`;

@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
+  tap,
+  switchMap,
+  withLatestFrom,
+  distinctUntilChanged,
+} from 'rxjs/operators';
+import { isEqual } from 'lodash';
+
+import {
   loadExtensions,
   loadExtensionsSuccess,
   updateCommand,
 } from './actions';
 import { ExtensionsService } from './service';
-import { tap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ExtensionsFacade } from './facade';
 import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
@@ -35,6 +42,7 @@ export class ExtensionsEffects {
     () =>
       this.actions$.pipe(
         ofType(updateCommand),
+        distinctUntilChanged(isEqual),
         withLatestFrom(this._extensions.extensions$, this._ui.game$),
         tap(([_, extensions, game]) => {
           this._changes.registerExtensionsChange(GameLibrary[game], extensions);

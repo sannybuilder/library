@@ -8,7 +8,6 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { omit } from 'lodash';
-import { Modal } from 'bootstrap';
 
 import { CONFIG, Config } from '../../config';
 import { Command, SEARCH_OPTIONS, ViewMode } from '../../models';
@@ -18,6 +17,7 @@ import {
   SnippetsFacade,
   UiFacade,
 } from '../../state';
+import { isAnyAttributeInvalid } from '../../utils/validation';
 
 @Component({
   selector: 'scl-library-page',
@@ -29,6 +29,7 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
   onDestroy$ = new Subject();
   command$ = this._ui.commandToDisplayOrEdit$;
   snippet$ = this._ui.snippetToDisplayOrEdit$;
+  extensionNames$ = this._extensions.extensionNames$;
   game$ = this._ui.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
@@ -120,5 +121,9 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
   @HostListener('window:resize', [])
   private detectScreenSize() {
     this.screenSize = window.innerWidth;
+  }
+
+  shouldDisableSaveButton() {
+    return isAnyAttributeInvalid(this.command);
   }
 }

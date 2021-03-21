@@ -33,7 +33,7 @@
       label="Extension"
       [model]="extension"
       (modelChange)="onExtensionChange($event)"
-      [choices]="extensionNames$ | async"
+      [choices]="extensionNames"
     ></scl-selector>
   </div>
 </div>
@@ -158,6 +158,10 @@
       <label class="form-check-label" [for]="attr">
         {{ attr }}
       </label>
+    </div>
+
+    <div class="alert alert-danger mt-3" *ngIf="shouldDisplayAttributeError()">
+      Invalid combination of attributes
     </div>
   </div>
 </div>

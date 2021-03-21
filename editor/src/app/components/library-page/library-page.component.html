@@ -62,6 +62,7 @@
     </button>
     <button
       *ngIf="viewMode === ViewMode.Edit"
+      [disabled]="shouldDisableSaveButton()"
       type="button"
       class="btn btn-outline-success"
       (click)="onSave()"
@@ -77,6 +78,7 @@
     [command]="command"
     [(extension)]="extension"
     [(snippet)]="snippet"
+    [extensionNames]="extensionNames$ | async"
     [entities]="getExtensionEntities(extension) | async"
   ></scl-command-editor>
   <scl-command-info *ngIf="viewMode === ViewMode.View" [command]="command">

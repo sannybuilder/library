@@ -82,68 +82,72 @@
   </div>
 </div>
 
-<h4>Parameters</h4>
-<div class="row mb-2" *ngFor="let param of command.input; let i = index">
-  <div class="col-12 col-lg-4">
-    <div class="input-group">
-      <span class="input-group-text">{{ i + 1 }}</span>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="param.name"
-        [ngModelOptions]="{ updateOn: 'blur' }"
-      />
+<ng-container *ngIf="command.input?.length">
+  <h4>Parameters</h4>
+  <div class="row mb-2" *ngFor="let param of command.input; let i = index">
+    <div class="col-12 col-lg-4">
+      <div class="input-group">
+        <span class="input-group-text">{{ i + 1 }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="param.name"
+          [ngModelOptions]="{ updateOn: 'blur' }"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-4">
+      <scl-selector
+        [(model)]="param.type"
+        [choices]="paramTypes"
+        (keydown)="onTypeKeyDown($event, param)"
+        [canInput]="false"
+      ></scl-selector>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-4">
+      <scl-selector
+        [model]="getDefaultInputSource(param)"
+        (modelChange)="onParamSourceUpdate($event, param)"
+        [choices]="sources"
+        [canInput]="false"
+      ></scl-selector>
     </div>
   </div>
-  <div class="col-12 col-sm-6 col-lg-4">
-    <scl-selector
-      [(model)]="param.type"
-      [choices]="paramTypes"
-      (keydown)="onTypeKeyDown($event, param)"
-      [canInput]="false"
-    ></scl-selector>
-  </div>
-  <div class="col-12 col-sm-6 col-lg-4">
-    <scl-selector
-      [model]="getDefaultInputSource(param)"
-      (modelChange)="onParamSourceUpdate($event, param)"
-      [choices]="sources"
-      [canInput]="false"
-    ></scl-selector>
-  </div>
-</div>
+</ng-container>
 
-<h4>Result</h4>
-<div class="row mb-2" *ngFor="let param of command.output; let i = index">
-  <div class="col-12 col-lg-4">
-    <div class="input-group">
-      <span class="input-group-text">{{ i + 1 }}</span>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="param.name"
-        [ngModelOptions]="{ updateOn: 'blur' }"
-      />
+<ng-container *ngIf="command.output?.length">
+  <h4>Result</h4>
+  <div class="row mb-2" *ngFor="let param of command.output; let i = index">
+    <div class="col-12 col-lg-4">
+      <div class="input-group">
+        <span class="input-group-text">{{ i + 1 }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="param.name"
+          [ngModelOptions]="{ updateOn: 'blur' }"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-4">
+      <scl-selector
+        [(model)]="param.type"
+        [choices]="paramTypes"
+        [canInput]="
+          command.attrs?.is_constructor && i === command.output.length - 1
+        "
+      ></scl-selector>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-4">
+      <scl-selector
+        [model]="getDefaultOutputSource(param)"
+        (modelChange)="onParamSourceUpdate($event, param)"
+        [choices]="sources"
+        [canInput]="false"
+      ></scl-selector>
     </div>
   </div>
-  <div class="col-12 col-sm-6 col-lg-4">
-    <scl-selector
-      [(model)]="param.type"
-      [choices]="paramTypes"
-      [canInput]="
-        command.attrs?.is_constructor && i === command.output.length - 1
-      "
-    ></scl-selector>
-  </div>
-  <div class="col-12 col-sm-6 col-lg-4">
-    <scl-selector
-      [model]="getDefaultOutputSource(param)"
-      (modelChange)="onParamSourceUpdate($event, param)"
-      [choices]="sources"
-      [canInput]="false"
-    ></scl-selector>
-  </div>
-</div>
+</ng-container>
 
 <div class="row mb-2">
   <div class="col-12">

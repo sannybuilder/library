@@ -10,7 +10,7 @@ import { takeUntil, map } from 'rxjs/operators';
 import { omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
-import { Command, SEARCH_OPTIONS, ViewMode } from '../../models';
+import { Command, ViewMode } from '../../models';
 import {
   AuthFacade,
   ExtensionsFacade,
@@ -18,6 +18,7 @@ import {
   UiFacade,
 } from '../../state';
 import { isAnyAttributeInvalid } from '../../utils/validation';
+import { FUSEJS_OPTIONS } from '../../fusejs';
 
 @Component({
   selector: 'scl-library-page',
@@ -83,7 +84,7 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
     this._extensions.updateCommand({
       newExtension: this.extension,
       oldExtension: this.oldExtension,
-      command: omit(this.command, SEARCH_OPTIONS.fusejsHighlightKey) as Command,
+      command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
     });
     if (this.snippet !== this.oldSnippet) {
       this._snippets.updateSnippet({

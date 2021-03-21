@@ -10,7 +10,7 @@ export class ParametrifyPipe implements PipeTransform {
   transform(snippet: string, command: Command): string {
     const compiled = template(snippet);
     const stringify = (key: 'input' | 'output') =>
-      (command[key] ??= []).reduce((m, v, i) => {
+      (command[key] ?? []).reduce((m, v, i) => {
         m[key + (i + 1)] = braceify(stringifyWithColon(v), '[]');
         return m;
       }, {} as Record<string, string>);

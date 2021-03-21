@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { timer } from 'rxjs';
 import { debounce } from 'rxjs/operators';
 
-import { Command, Game, SEARCH_OPTIONS } from '../../models';
+import { Command, Game } from '../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
 
 @Component({
@@ -27,7 +27,6 @@ export class CommandListComponent {
   selectedFiltersOnly$ = this._ui.selectedFiltersOnly$;
   selectedFiltersExcept$ = this._ui.selectedFiltersExcept$;
   searchTerm$ = this._ui.searchTerm$.pipe(debounce(() => timer(500)));
-  searchOptions = SEARCH_OPTIONS;
 
   constructor(
     private _extensions: ExtensionsFacade,

@@ -9,7 +9,7 @@
               | attrFilter
                 : (selectedFiltersOnly$ | async)
                 : (selectedFiltersExcept$ | async)
-              | fusejs: (searchTerm$ | async):searchOptions
+              | fusejs: (searchTerm$ | async)
           "
         >
           <div class="col-12">
@@ -39,13 +39,13 @@
                       [routerLink]="['/', game, extension.name, command.id]"
                       [replaceUrl]="true"
                       [name]="command.id"
-                      [innerHTML]="command[searchOptions.fusejsHighlightKey].id"
+                      [innerHTML]="command | hlProp: 'id'"
                     ></a>
                   </div>
 
                   <div
                     class="col-md-8"
-                    [innerHTML]="command[searchOptions.fusejsHighlightKey].name"
+                    [innerHTML]="command | hlProp: 'name'"
                   ></div>
                 </div>
 
@@ -58,9 +58,7 @@
                     >
                       <div
                         class="my-2"
-                        [innerHTML]="
-                          command[searchOptions.fusejsHighlightKey].short_desc
-                        "
+                        [innerHTML]="command | hlProp: 'short_desc'"
                       ></div>
                     </ng-container>
 
@@ -82,15 +80,9 @@
                       <ng-container *ngIf="command.attrs?.is_constructor">
                         <code>
                           {{ command | outputParams }} =
-                          <span
-                            [innerHTML]="
-                              command[searchOptions.fusejsHighlightKey].class
-                            "
-                          ></span
+                          <span [innerHTML]="command | hlProp: 'class'"></span
                           >.<span
-                            [innerHTML]="
-                              command[searchOptions.fusejsHighlightKey].member
-                            "
+                            [innerHTML]="command | hlProp: 'member'"
                           ></span
                           >{{ command | inputParams }}</code
                         >
@@ -98,15 +90,9 @@
 
                       <ng-container *ngIf="!command.attrs?.is_constructor">
                         <code
-                          ><span
-                            [innerHTML]="
-                              command[searchOptions.fusejsHighlightKey].class
-                            "
-                          ></span
+                          ><span [innerHTML]="command | hlProp: 'class'"></span
                           >.<span
-                            [innerHTML]="
-                              command[searchOptions.fusejsHighlightKey].member
-                            "
+                            [innerHTML]="command | hlProp: 'member'"
                           ></span
                           >{{ command | classParams }}</code
                         >

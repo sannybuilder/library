@@ -39,7 +39,7 @@ import { ChangesEffects } from './state/changes/effects';
 import { uiReducer } from './state/ui/reducer';
 import { UiEffects } from './state/ui/effects';
 
-import { FusejsPipe } from './fusejs/fusejs.pipe';
+import { FusejsPipe, HlPropPipe } from './fusejs';
 import { ConfigModule } from './config';
 
 import { AppComponent } from './app.component';
@@ -69,6 +69,7 @@ import { ModalComponent } from './components/modal/modal.component';
     ParametrifyPipe,
     InputParamsPipe,
     OutputParamsPipe,
+    HlPropPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

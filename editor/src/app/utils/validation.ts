@@ -9,7 +9,7 @@ export const ATTRIBUTE_RULES: Partial<
 };
 
 export function isAnyAttributeInvalid(command: Command): boolean {
-  const entries = Object.entries(command.attrs) as [Attribute, boolean][];
+  const entries = Object.entries(command.attrs ?? {}) as [Attribute, boolean][];
 
   return !entries.reduce((m, [k, v]) => {
     // no rule for attribute or attribute is not enabled => skip

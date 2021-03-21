@@ -40,84 +40,95 @@
                       [replaceUrl]="true"
                       [name]="command.id"
                       [innerHTML]="command[searchOptions.fusejsHighlightKey].id"
-                      >{{ command.id }}</a
-                    >
+                    ></a>
                   </div>
 
                   <div
                     class="col-md-8"
                     [innerHTML]="command[searchOptions.fusejsHighlightKey].name"
-                  >
-                    {{ command.name }}
-                  </div>
+                  ></div>
                 </div>
 
                 <div class="row">
                   <div class="col-12">
-                    <div
-                      class="my-2"
+                    <ng-container
                       *ngIf="
                         !command.attrs?.is_unsupported && !command.attrs?.is_nop
                       "
-                      [innerHTML]="
-                        command[searchOptions.fusejsHighlightKey].short_desc
-                      "
                     >
-                      {{ command.short_desc }}
-                    </div>
+                      <div
+                        class="my-2"
+                        [innerHTML]="
+                          command[searchOptions.fusejsHighlightKey].short_desc
+                        "
+                      ></div>
+                    </ng-container>
+
                     <ng-container *ngIf="command.attrs?.is_unsupported"
                       >Unsupported</ng-container
                     >
                     <ng-container *ngIf="command.attrs?.is_nop"
                       >Does nothing (NOP)</ng-container
                     >
-                  </div>
-                </div>
 
-                <div class="row" *ngIf="command.attrs?.is_keyword">
-                  <div class="col-12">
-                    <code
-                      >{{ command.name | lowercase }}
-                      {{ command | keywordParams }}</code
+                    <ng-container *ngIf="command.attrs?.is_keyword">
+                      <code
+                        >{{ command.name | lowercase }}
+                        {{ command | keywordParams }}</code
+                      >
+                    </ng-container>
+
+                    <ng-container *ngIf="command.class && command.member">
+                      <ng-container *ngIf="command.attrs?.is_constructor">
+                        <code>
+                          {{ command | outputParams }} =
+                          <span
+                            [innerHTML]="
+                              command[searchOptions.fusejsHighlightKey].class
+                            "
+                          ></span
+                          >.<span
+                            [innerHTML]="
+                              command[searchOptions.fusejsHighlightKey].member
+                            "
+                          ></span
+                          >{{ command | inputParams }}</code
+                        >
+                      </ng-container>
+
+                      <ng-container *ngIf="!command.attrs?.is_constructor">
+                        <code
+                          ><span
+                            [innerHTML]="
+                              command[searchOptions.fusejsHighlightKey].class
+                            "
+                          ></span
+                          >.<span
+                            [innerHTML]="
+                              command[searchOptions.fusejsHighlightKey].member
+                            "
+                          ></span
+                          >{{ command | classParams }}</code
+                        >
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container
+                      *ngIf="
+                        !command.attrs?.is_keyword &&
+                        !(command.class && command.member) &&
+                        !command.attrs?.is_unsupported &&
+                        !command.attrs?.is_nop
+                      "
                     >
-                  </div>
-                </div>
-
-                <div class="row" *ngIf="command.class && command.member">
-                  <div class="col-12">
-                    <code
-                      ><span
-                        [innerHTML]="
-                          command[searchOptions.fusejsHighlightKey].class
-                        "
-                        >{{ command.class }}</span
-                      >.<span
-                        [innerHTML]="
-                          command[searchOptions.fusejsHighlightKey].member
-                        "
-                        >{{ command.member }}</span
-                      >{{ command | classParams }}</code
-                    >
-                  </div>
-                </div>
-
-                <div
-                  class="row"
-                  *ngIf="
-                    !command.attrs?.is_keyword &&
-                    !(command.class && command.member) &&
-                    !command.attrs?.is_unsupported &&
-                    !command.attrs?.is_nop
-                  "
-                >
-                  <div class="col-12">
-                    <code
-                      >{{
-                        getSnippet(extension.name, command.id)
-                          | async
-                          | parametrify: command
-                      }}
-                    </code>
+                      <code
+                        >{{
+                          getSnippet(extension.name, command.id)
+                            | async
+                            | parametrify: command
+                        }}
+                      </code>
+                    </ng-container>
                   </div>
                 </div>
               </div>

@@ -15,6 +15,8 @@ import {
   AttrFilterPipe,
   GameTitlePipe,
   ParametrifyPipe,
+  InputParamsPipe,
+  OutputParamsPipe,
 } from './pipes';
 
 // extensions state
@@ -65,6 +67,8 @@ import { ModalComponent } from './components/modal/modal.component';
     AttrFilterPipe,
     GameTitlePipe,
     ParametrifyPipe,
+    InputParamsPipe,
+    OutputParamsPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

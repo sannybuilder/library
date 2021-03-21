@@ -5,3 +5,5 @@ export * from './keyword-params.pipe';
 export * from './opcodify';
 export * from './game-title.pipe';
 export * from './parametrify.pipe';
+export * from './input-params.pipe';
+export * from './output-params.pipe';

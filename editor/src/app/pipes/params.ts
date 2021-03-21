@@ -15,12 +15,16 @@ export function stringifySource(source: SourceType) {
   }
 }
 
-export function stringifyParam(p: Param) {
+export function stringifyWithColon(p: Param) {
   return [[stringifySource(p.source), p.name].filter(Boolean).join(' '), p.type]
     .filter(Boolean)
     .join(': ');
 }
 
-export function stringifyParamBrackets(p: Param) {
-  return `[${stringifyParam(p)}]`;
+export function braceify(value: string, braces: '[]' | '()') {
+  return `${braces[0]}${value}${braces[1]}`;
+}
+
+export function stringify(params: Param[], sep: ' ' | ', '): string {
+  return params.map(stringifyWithColon).join(sep);
 }

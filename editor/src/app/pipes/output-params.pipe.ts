@@ -3,15 +3,14 @@ import { Command } from '../models';
 import { braceify, stringify } from './params';
 
 @Pipe({
-  name: 'keywordParams',
+  name: 'outputParams',
 })
-export class KeywordParamsPipe implements PipeTransform {
+export class OutputParamsPipe implements PipeTransform {
   transform(value: Command): string {
     if (!value.num_params) {
       return '';
     }
-    const input = value?.input ?? [];
     const output = value?.output ?? [];
-    return braceify(stringify([...input, ...output], ' '), '[]');
+    return braceify(stringify(output, ' '), '[]');
   }
 }

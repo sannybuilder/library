@@ -25,7 +25,7 @@
         (edit)="onEdit($event.command, $event.extension)"
       ></scl-command-list>
     </div>
-    <div class="d-none d-xl-block col-xl-5">
+    <div class="d-none d-xl-block col-xl-5 right-rail">
       <ng-container *ngIf="command">
         <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
         <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
@@ -44,7 +44,8 @@
 </scl-modal>
 
 <ng-template #modalFooter>
-  <div class="modal-footer">
+  <div class="modal-footer d-flex">
+    <a href="#" (click)="resetChanges()" class="mr-auto">Reset all changes</a>
     <button
       type="button"
       class="btn btn-outline-secondary"

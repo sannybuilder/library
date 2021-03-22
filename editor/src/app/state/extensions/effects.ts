@@ -19,7 +19,7 @@ import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
 import { GameLibrary } from '../../models';
 import { updateLastUpdateTime } from '../ui/actions';
-import { isAnyAttributeInvalid } from 'src/app/utils/validation';
+import { isAnyAttributeInvalid } from '../../utils';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {

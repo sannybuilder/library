@@ -18,6 +18,7 @@ import {
 } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 import { isAnyAttributeInvalid } from '../../utils/validation';
+import { smash } from '../../utils';
 
 @Component({
   selector: 'scl-command-editor',
@@ -140,6 +141,12 @@ export class CommandEditorComponent implements OnInit {
 
   onAttrChange(command: Command, attr: Attribute, value: boolean) {
     (command.attrs ??= {})[attr] = value;
+    const compressed = smash(command.attrs);
+    if (compressed) {
+      command.attrs = compressed;
+    } else {
+      delete command.attrs;
+    }
   }
 
   public shouldDisplayAttributeError(): boolean {

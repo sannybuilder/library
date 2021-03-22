@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-import { omit } from 'lodash';
+import { cloneDeep, isEqual, omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
 import { Command, ViewMode } from '../../models';
@@ -40,6 +40,7 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
   );
 
   command?: Command;
+  oldCommand?: Command;
   snippet?: string;
   oldSnippet?: string;
   extension?: string;
@@ -73,7 +74,8 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
     this.command$
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(({ command, extension, viewMode }) => {
-        this.command = command ? JSON.parse(JSON.stringify(command)) : command;
+        this.command = command ? cloneDeep(command) : command;
+        this.oldCommand = command ? cloneDeep(command) : command;
         this.oldExtension = extension;
         this.extension = extension;
         this.viewMode = viewMode;
@@ -125,6 +127,20 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
   }
 
   shouldDisableSaveButton() {
-    return isAnyAttributeInvalid(this.command);
+    return isAnyAttributeInvalid(this.command) || this.noChanges();
+  }
+
+  resetChanges() {
+    this.onEdit(this.oldCommand, this.oldExtension);
+    this.snippet = this.oldSnippet;
+    return false;
+  }
+
+  private noChanges(): boolean {
+    return (
+      isEqual(this.command, this.oldCommand) &&
+      this.extension === this.oldExtension &&
+      this.snippet === this.oldSnippet
+    );
   }
 }

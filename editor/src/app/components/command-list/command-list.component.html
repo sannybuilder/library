@@ -15,22 +15,38 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <a
-                  *ngIf="canEdit"
-                  class="btn edit-button small text-muted"
-                  href="#"
-                  (click)="onEdit(command, extension.name)"
-                  >Edit</a
-                >
+                <div class="toolbar">
+                  <div
+                    class="d-inline-block mr-4"
+                    *ngIf="
+                      getCommandGames(command, extension.name) | async;
+                      let games
+                    "
+                  >
+                    <scl-icon
+                      *ngFor="let game of games"
+                      [game]="game"
+                      size="16"
+                    ></scl-icon>
+                  </div>
 
-                <a
-                  class="btn view-button small text-muted"
-                  (click)="onView(command, extension.name)"
-                  [routerLink]="['/', game, extension.name, command.id]"
-                  [replaceUrl]="true"
-                  [name]="command.id"
-                  >Info</a
-                >
+                  <a
+                    *ngIf="canEdit"
+                    class="btn small text-muted"
+                    href="#"
+                    (click)="onEdit(command, extension.name)"
+                    >Edit</a
+                  >
+
+                  <a
+                    class="btn small text-muted"
+                    (click)="onView(command, extension.name)"
+                    [routerLink]="['/', game, extension.name, command.id]"
+                    [replaceUrl]="true"
+                    [name]="command.id"
+                    >Info</a
+                  >
+                </div>
 
                 <div class="row">
                   <div class="col-md-2">

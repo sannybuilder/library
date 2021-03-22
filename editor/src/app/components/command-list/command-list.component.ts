@@ -51,4 +51,8 @@ export class CommandListComponent {
   getSnippet(extension: string, opcode: string) {
     return this._snippets.getSnippet(extension, opcode);
   }
+
+  getCommandGames(command: Command, extension: string) {
+    return this._ui.getCommandGames(command, extension);
+  }
 }

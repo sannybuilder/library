@@ -145,9 +145,7 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
     );
   }
 
-  getGames(command: Command, extension: string) {
-    return combineLatest([this.links$, this.game$]).pipe(
-      map(([links, game]) => links?.[extension]?.[command.id] ?? [game])
-    );
+  getCommandGames(command: Command, extension: string) {
+    return this._ui.getCommandGames(command, extension);
   }
 }

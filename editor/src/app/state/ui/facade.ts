@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, filter } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { Command, Game, Modifier, ViewMode } from '../../models';
 import {
   toggleExtension,
@@ -44,6 +45,12 @@ export class UiFacade {
         ? selector.isFilterSelectedOnly
         : selector.isFilterSelectedExcept,
       { filter }
+    );
+  }
+
+  getCommandGames(command: Command, extension: string) {
+    return combineLatest([this.links$, this.game$]).pipe(
+      map(([links, game]) => links?.[extension]?.[command.id] ?? [game])
     );
   }
 

@@ -1,21 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { Location } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CONFIG, Config } from '../../config';
 import { Links } from './reducer';
 
 @Injectable({ providedIn: 'root' })
 export class UiService {
-  constructor(
-    private http: HttpClient,
-    @Inject(CONFIG) public config: Config
-  ) {}
+  constructor(private http: HttpClient) {}
 
   loadLinks(): Observable<Links> {
-    return this.http.get<Links>(
-      Location.joinWithSlash(this.config.endpoints.base, 'links.json')
-    );
+    return this.http.get<Links>('/assets/links.json');
   }
 }

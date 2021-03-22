@@ -9,8 +9,11 @@ import {
   onListEnter,
   displayOrEditSnippet,
   updateLastUpdateTime,
+  loadLinksSuccess,
 } from './actions';
 import { without } from 'lodash';
+
+export type Links = Record<string, Record<string, Game[]>>;
 
 export interface UiState {
   searchTerm?: string;
@@ -26,6 +29,7 @@ export interface UiState {
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
   lastUpdate?: number;
+  links?: Links;
 }
 
 export const initialState: UiState = {
@@ -88,6 +92,10 @@ const _reducer = createReducer(
   on(updateLastUpdateTime, (state, { lastUpdate }) => ({
     ...state,
     lastUpdate,
+  })),
+  on(loadLinksSuccess, (state, { links }) => ({
+    ...state,
+    links,
   }))
 );
 

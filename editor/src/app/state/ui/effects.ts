@@ -3,6 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   displayOrEditCommandInfo,
   displayOrEditSnippet,
+  loadLinks,
+  loadLinksSuccess,
   stopEditOrDisplay,
 } from './actions';
 import { map, switchMap } from 'rxjs/operators';
@@ -16,6 +18,7 @@ import {
 } from '../extensions/actions';
 import { loadSnippets } from '../snippets/actions';
 import { SnippetsFacade } from '../snippets/facade';
+import { UiService } from './service';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -71,9 +74,22 @@ export class UiEffects {
     )
   );
 
+  loadLinks$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadLinks),
+      switchMap(() => this._service.loadLinks()),
+      map((links) => loadLinksSuccess({ links }))
+    )
+  );
+
   constructor(
     private _actions$: Actions,
     private _ui: UiFacade,
-    private _snippets: SnippetsFacade
+    private _snippets: SnippetsFacade,
+    private _service: UiService
   ) {}
+
+  ngrxOnInitEffects() {
+    return loadLinks();
+  }
 }

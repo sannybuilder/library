@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Command, Game, Modifier, ViewMode } from '../../models';
+import { Links } from './reducer';
 
 export const toggleExtension = createAction(
   'toggle extension selection',
@@ -41,4 +42,11 @@ export const onListEnter = createAction(
 export const updateLastUpdateTime = createAction(
   'update last update time',
   props<{ lastUpdate: number }>()
+);
+
+export const loadLinks = createAction('load links');
+
+export const loadLinksSuccess = createAction(
+  'load links success',
+  props<{ links: Links }>()
 );

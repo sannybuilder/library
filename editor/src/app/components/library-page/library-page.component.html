@@ -45,7 +45,9 @@
 
 <ng-template #modalFooter>
   <div class="modal-footer d-flex">
-    <a href="#" (click)="resetChanges()" class="mr-auto">Reset all changes</a>
+    <a href="#" *ngIf="!noChanges()" (click)="resetChanges()" class="mr-auto"
+      >Reset all changes</a
+    >
     <button
       type="button"
       class="btn btn-outline-secondary"
@@ -81,6 +83,7 @@
     [(snippet)]="snippet"
     [extensionNames]="extensionNames$ | async"
     [entities]="getExtensionEntities(extension) | async"
+    [games]="getGames(command, extension) | async"
   ></scl-command-editor>
   <scl-command-info *ngIf="viewMode === ViewMode.View" [command]="command">
   </scl-command-info>

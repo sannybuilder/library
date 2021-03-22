@@ -12,6 +12,7 @@ import {
   Attribute,
   Command,
   CommandAttributes,
+  Game,
   Param,
   ParamType,
   SourceType,
@@ -34,6 +35,7 @@ export class CommandEditorComponent implements OnInit {
   @Input() snippet: string;
   @Input() extension: string;
   @Input() extensionNames: string[];
+  @Input() games: Game[];
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
 

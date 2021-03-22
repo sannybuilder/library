@@ -43,18 +43,20 @@ import { FusejsPipe, HlPropPipe } from './fusejs';
 import { ConfigModule } from './config';
 
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { LibraryPageComponent } from './components/library-page/library-page.component';
+
 import { CommandListComponent } from './components/command-list/command-list.component';
 import { CommandEditorComponent } from './components/command-editor/command-editor.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CommandInfoComponent } from './components/command-info/command-info.component';
-import { HomeComponent } from './components/home/home.component';
 import { AuthGuard, RouteGuard } from './route.guard';
 import { FooterComponent } from './components/footer/footer.component';
 import { SelectorComponent } from './components/selector/selector.component';
 import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
-import { LibraryPageComponent } from './components/library-page/library-page.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -73,13 +75,14 @@ import { ModalComponent } from './components/modal/modal.component';
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,
-    HomeComponent,
+    HomePageComponent,
     FooterComponent,
     SelectorComponent,
     DownloadPanelComponent,
     FilterPanelComponent,
     LibraryPageComponent,
     ModalComponent,
+    IconComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,7 +98,7 @@ import { ModalComponent } from './components/modal/modal.component';
             {
               path: '',
               pathMatch: 'full',
-              component: HomeComponent,
+              component: HomePageComponent,
             },
             {
               path: '**',

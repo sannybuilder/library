@@ -5,7 +5,7 @@ import {
   Inject,
   OnDestroy,
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
@@ -31,6 +31,7 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
   command$ = this._ui.commandToDisplayOrEdit$;
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
+  links$ = this._ui.links$;
   game$ = this._ui.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
@@ -136,11 +137,17 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
     return false;
   }
 
-  private noChanges(): boolean {
+  noChanges(): boolean {
     return (
       isEqual(this.command, this.oldCommand) &&
       this.extension === this.oldExtension &&
       this.snippet === this.oldSnippet
+    );
+  }
+
+  getGames(command: Command, extension: string) {
+    return combineLatest([this.links$, this.game$]).pipe(
+      map(([links, game]) => links?.[extension]?.[command.id] ?? [game])
     );
   }
 }

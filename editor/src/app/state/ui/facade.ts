@@ -22,6 +22,7 @@ export class UiFacade {
   selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
+  links$ = this.store$.select(selector.links);
 
   game$ = this.store$
     .select(selector.game)

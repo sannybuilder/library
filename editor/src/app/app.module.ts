@@ -57,6 +57,7 @@ import { DownloadPanelComponent } from './components/download-panel/download-pan
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { IconComponent } from './components/icon/icon.component';
+import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { IconComponent } from './components/icon/icon.component';
     LibraryPageComponent,
     ModalComponent,
     IconComponent,
+    SupportedGamesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Extension } from '../../models';
+import { Command, Extension, SupportInfo } from '../../models';
 import { extensions } from '../extensions/selectors';
 import { UiState } from './reducer';
 
@@ -75,3 +75,14 @@ export const lastUpdate = createSelector(
 );
 
 export const links = createSelector(state, (state: UiState) => state.links);
+
+export const supportInfo = createSelector(
+  state,
+  (state: UiState) => state.supportInfo
+);
+
+export const commandSupportInfo = createSelector(
+  supportInfo,
+  (supportInfo: SupportInfo, props: { command: Command; extension: string }) =>
+    supportInfo?.[props.extension]?.[props.command.id]
+);

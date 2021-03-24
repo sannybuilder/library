@@ -12,10 +12,11 @@ import {
   Attribute,
   Command,
   CommandAttributes,
-  Game,
+  GameTitle,
   Param,
   ParamType,
   SourceType,
+  SupportInfo,
 } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 import { isAnyAttributeInvalid } from '../../utils/validation';
@@ -27,6 +28,7 @@ import { smash } from '../../utils';
   styleUrls: ['./command-editor.component.scss'],
 })
 export class CommandEditorComponent implements OnInit {
+  GameTitle = GameTitle;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: ParamType[] = [];
@@ -35,7 +37,7 @@ export class CommandEditorComponent implements OnInit {
   @Input() snippet: string;
   @Input() extension: string;
   @Input() extensionNames: string[];
-  @Input() games: Game[];
+  @Input() supportInfo: SupportInfo;
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
 

@@ -11,4 +11,5 @@ export class IconComponent {
 
   @Input() game: Game;
   @Input() size = 24;
+  @Input() opacity = 1.0;
 }

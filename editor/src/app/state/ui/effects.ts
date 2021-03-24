@@ -5,6 +5,8 @@ import {
   displayOrEditSnippet,
   loadLinks,
   loadLinksSuccess,
+  loadSupportInfo,
+  loadSupportInfoSuccess,
   stopEditOrDisplay,
 } from './actions';
 import { map, switchMap } from 'rxjs/operators';
@@ -47,7 +49,11 @@ export class UiEffects {
 
   onGameChange$ = createEffect(() =>
     this._ui.game$.pipe(
-      switchMap((game) => [loadExtensions({ game }), loadSnippets({ game })])
+      switchMap((game) => [
+        loadExtensions({ game }),
+        loadSnippets({ game }),
+        loadSupportInfo({ game }),
+      ])
     )
   );
 
@@ -79,6 +85,14 @@ export class UiEffects {
       ofType(loadLinks),
       switchMap(() => this._service.loadLinks()),
       map((links) => loadLinksSuccess({ links }))
+    )
+  );
+
+  loadSupportInfo$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadSupportInfo),
+      switchMap(({ game }) => this._service.loadSupportInfo(game)),
+      map((supportInfo) => loadSupportInfoSuccess({ supportInfo }))
     )
   );
 

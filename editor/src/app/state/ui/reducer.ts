@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Game, ViewMode } from '../../models';
+import { Command, Game, SupportInfo, ViewMode } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
@@ -10,6 +10,7 @@ import {
   displayOrEditSnippet,
   updateLastUpdateTime,
   loadLinksSuccess,
+  loadSupportInfoSuccess,
 } from './actions';
 import { without } from 'lodash';
 
@@ -30,6 +31,7 @@ export interface UiState {
   extensionOnLoad?: string;
   lastUpdate?: number;
   links?: Links;
+  supportInfo?: SupportInfo;
 }
 
 export const initialState: UiState = {
@@ -96,6 +98,10 @@ const _reducer = createReducer(
   on(loadLinksSuccess, (state, { links }) => ({
     ...state,
     links,
+  })),
+  on(loadSupportInfoSuccess, (state, { supportInfo }) => ({
+    ...state,
+    supportInfo,
   }))
 );
 

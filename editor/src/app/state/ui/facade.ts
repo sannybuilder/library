@@ -24,6 +24,7 @@ export class UiFacade {
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
   links$ = this.store$.select(selector.links);
+  supportInfo$ = this.store$.select(selector.supportInfo);
 
   game$ = this.store$
     .select(selector.game)
@@ -48,10 +49,11 @@ export class UiFacade {
     );
   }
 
-  getCommandGames(command: Command, extension: string) {
-    return combineLatest([this.links$, this.game$]).pipe(
-      map(([links, game]) => links?.[extension]?.[command.id] ?? [game])
-    );
+  getCommandSupportInfo(command: Command, extension: string) {
+    return this.store$.select(selector.commandSupportInfo, {
+      command,
+      extension,
+    });
   }
 
   constructor(private store$: Store) {}

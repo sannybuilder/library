@@ -5,7 +5,7 @@ import {
   Inject,
   OnDestroy,
 } from '@angular/core';
-import { combineLatest, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
@@ -145,7 +145,7 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
     );
   }
 
-  getCommandGames(command: Command, extension: string) {
-    return this._ui.getCommandGames(command, extension);
+  getCommandSupportInfo(command: Command, extension: string) {
+    return this._ui.getCommandSupportInfo(command, extension);
   }
 }

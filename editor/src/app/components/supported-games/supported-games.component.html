@@ -1,0 +1,10 @@
+<ng-container *ngFor="let item of supportInfo">
+  <scl-icon
+    *ngIf="item.level !== -1"
+    [ngClass]="{ 'diff-params': item.level === 2 }"
+    [game]="item.game"
+    size="16"
+    [title]="stringifyLevel(item.level, item.game)"
+    [opacity]="item.level === 0 ? 0.3 : 1"
+  ></scl-icon>
+</ng-container>

@@ -112,3 +112,8 @@ export enum ViewMode {
 }
 
 export type Modifier = 'except' | 'only';
+
+export type SupportInfo = Record<
+  string,
+  Record<string, Array<{ game: Game; level: number }>>
+>;

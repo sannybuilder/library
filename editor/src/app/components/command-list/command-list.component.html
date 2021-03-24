@@ -1,140 +1,132 @@
 <ng-container *ngIf="extensions$ | async as extensions; else loading">
   <ng-container *ngFor="let extension of extensions">
     <ng-container *ngIf="isExtensionChecked(extension.name) | async">
-      <div class="command-list">
-        <div
-          class="row mb-3"
-          *ngFor="
-            let command of extension.commands
-              | attrFilter
-                : (selectedFiltersOnly$ | async)
-                : (selectedFiltersExcept$ | async)
-              | fusejs: (searchTerm$ | async)
-          "
-        >
-          <div class="col-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="toolbar">
-                  <div
-                    class="d-inline-block mr-4"
-                    *ngIf="
-                      getCommandGames(command, extension.name) | async;
-                      let games
-                    "
-                  >
-                    <scl-icon
-                      *ngFor="let game of games"
-                      [game]="game"
-                      size="16"
-                    ></scl-icon>
-                  </div>
+      <div
+        class="row mb-3"
+        *ngFor="
+          let command of extension.commands
+            | attrFilter
+              : (selectedFiltersOnly$ | async)
+              : (selectedFiltersExcept$ | async)
+            | fusejs: (searchTerm$ | async)
+        "
+      >
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="toolbar">
+                <div
+                  class="d-inline-block mr-4"
+                  *ngIf="
+                    getCommandSupportInfo(command, extension.name) | async;
+                    let supportInfo
+                  "
+                >
+                  <scl-supported-games
+                    [supportInfo]="supportInfo"
+                  ></scl-supported-games>
+                </div>
 
-                  <a
-                    *ngIf="canEdit"
-                    class="btn small text-muted"
-                    href="#"
-                    (click)="onEdit(command, extension.name)"
-                    >Edit</a
-                  >
+                <a
+                  *ngIf="canEdit"
+                  class="btn small text-muted"
+                  href="#"
+                  (click)="onEdit(command, extension.name)"
+                  >Edit</a
+                >
 
+                <a
+                  class="btn small text-muted"
+                  (click)="onView(command, extension.name)"
+                  [routerLink]="['/', game, extension.name, command.id]"
+                  [replaceUrl]="true"
+                  [name]="command.id"
+                  >Info</a
+                >
+              </div>
+
+              <div class="row">
+                <div class="col-md-2">
                   <a
-                    class="btn small text-muted"
                     (click)="onView(command, extension.name)"
                     [routerLink]="['/', game, extension.name, command.id]"
                     [replaceUrl]="true"
                     [name]="command.id"
-                    >Info</a
+                    [innerHTML]="command | hlProp: 'id'"
+                  ></a>
+                </div>
+
+                <div
+                  class="col-md-8"
+                  [innerHTML]="command | hlProp: 'name'"
+                ></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <ng-container
+                    *ngIf="
+                      !command.attrs?.is_unsupported && !command.attrs?.is_nop
+                    "
                   >
-                </div>
+                    <div
+                      class="my-2"
+                      [innerHTML]="command | hlProp: 'short_desc'"
+                    ></div>
+                  </ng-container>
 
-                <div class="row">
-                  <div class="col-md-2">
-                    <a
-                      (click)="onView(command, extension.name)"
-                      [routerLink]="['/', game, extension.name, command.id]"
-                      [replaceUrl]="true"
-                      [name]="command.id"
-                      [innerHTML]="command | hlProp: 'id'"
-                    ></a>
-                  </div>
+                  <ng-container *ngIf="command.attrs?.is_unsupported"
+                    >Unsupported</ng-container
+                  >
+                  <ng-container *ngIf="command.attrs?.is_nop"
+                    >Does nothing (NOP)</ng-container
+                  >
 
-                  <div
-                    class="col-md-8"
-                    [innerHTML]="command | hlProp: 'name'"
-                  ></div>
-                </div>
-
-                <div class="row">
-                  <div class="col-12">
-                    <ng-container
-                      *ngIf="
-                        !command.attrs?.is_unsupported && !command.attrs?.is_nop
-                      "
+                  <ng-container *ngIf="command.attrs?.is_keyword">
+                    <code
+                      >{{ command.name | lowercase }}
+                      {{ command | keywordParams }}</code
                     >
-                      <div
-                        class="my-2"
-                        [innerHTML]="command | hlProp: 'short_desc'"
-                      ></div>
+                  </ng-container>
+
+                  <ng-container *ngIf="command.class && command.member">
+                    <ng-container *ngIf="command.attrs?.is_constructor">
+                      <code>
+                        {{ command | outputParams }} =
+                        <span [innerHTML]="command | hlProp: 'class'"></span
+                        >.<span [innerHTML]="command | hlProp: 'member'"></span
+                        >{{ command | inputParams }}</code
+                      >
                     </ng-container>
 
-                    <ng-container *ngIf="command.attrs?.is_unsupported"
-                      >Unsupported</ng-container
-                    >
-                    <ng-container *ngIf="command.attrs?.is_nop"
-                      >Does nothing (NOP)</ng-container
-                    >
-
-                    <ng-container *ngIf="command.attrs?.is_keyword">
+                    <ng-container *ngIf="!command.attrs?.is_constructor">
                       <code
-                        >{{ command.name | lowercase }}
-                        {{ command | keywordParams }}</code
+                        ><span [innerHTML]="command | hlProp: 'class'"></span
+                        >.<span [innerHTML]="command | hlProp: 'member'"></span
+                        >{{ command | classParams }}</code
                       >
                     </ng-container>
+                  </ng-container>
 
-                    <ng-container *ngIf="command.class && command.member">
-                      <ng-container *ngIf="command.attrs?.is_constructor">
-                        <code>
-                          {{ command | outputParams }} =
-                          <span [innerHTML]="command | hlProp: 'class'"></span
-                          >.<span
-                            [innerHTML]="command | hlProp: 'member'"
-                          ></span
-                          >{{ command | inputParams }}</code
-                        >
-                      </ng-container>
-
-                      <ng-container *ngIf="!command.attrs?.is_constructor">
-                        <code
-                          ><span [innerHTML]="command | hlProp: 'class'"></span
-                          >.<span
-                            [innerHTML]="command | hlProp: 'member'"
-                          ></span
-                          >{{ command | classParams }}</code
-                        >
-                      </ng-container>
-                    </ng-container>
-
+                  <ng-container
+                    *ngIf="
+                      !command.attrs?.is_keyword &&
+                      !(command.class && command.member) &&
+                      !command.attrs?.is_unsupported &&
+                      !command.attrs?.is_nop
+                    "
+                  >
                     <ng-container
                       *ngIf="
-                        !command.attrs?.is_keyword &&
-                        !(command.class && command.member) &&
-                        !command.attrs?.is_unsupported &&
-                        !command.attrs?.is_nop
+                        getSnippet(extension.name, command.id)
+                          | async as snippet
                       "
                     >
-                      <ng-container
-                        *ngIf="
-                          getSnippet(extension.name, command.id)
-                            | async as snippet
-                        "
-                      >
-                        <pre class="sample">{{
-                          snippet | parametrify: command
-                        }}</pre>
-                      </ng-container>
+                      <pre class="sample">{{
+                        snippet | parametrify: command
+                      }}</pre>
                     </ng-container>
-                  </div>
+                  </ng-container>
                 </div>
               </div>
             </div>

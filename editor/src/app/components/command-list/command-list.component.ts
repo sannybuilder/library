@@ -52,7 +52,7 @@ export class CommandListComponent {
     return this._snippets.getSnippet(extension, opcode);
   }
 
-  getCommandGames(command: Command, extension: string) {
-    return this._ui.getCommandGames(command, extension);
+  getCommandSupportInfo(command: Command, extension: string) {
+    return this._ui.getCommandSupportInfo(command, extension);
   }
 }

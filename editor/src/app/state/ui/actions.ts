@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Command, Game, Modifier, ViewMode } from '../../models';
+import { Command, Game, Modifier, SupportInfo, ViewMode } from '../../models';
 import { Links } from './reducer';
 
 export const toggleExtension = createAction(
@@ -49,4 +49,14 @@ export const loadLinks = createAction('load links');
 export const loadLinksSuccess = createAction(
   'load links success',
   props<{ links: Links }>()
+);
+
+export const loadSupportInfo = createAction(
+  'load support info',
+  props<{ game: Game }>()
+);
+
+export const loadSupportInfoSuccess = createAction(
+  'load support info success',
+  props<{ supportInfo: SupportInfo }>()
 );

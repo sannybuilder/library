@@ -1,12 +1,11 @@
-<div class="container-fluid overflow-hidden">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-xl-2">
-      <div class="left-rail">
-        <scl-download-panel [game]="game$ | async"></scl-download-panel>
-        <scl-filter-panel></scl-filter-panel>
-      </div>
+    <div class="col-12 col-xl-2 left-rail">
+      <scl-download-panel [game]="game$ | async"></scl-download-panel>
+      <scl-filter-panel></scl-filter-panel>
     </div>
-    <div
+
+    <main
       class="col-12"
       [ngClass]="{ 'col-xl-5': command, 'col-xl-8': !command }"
     >
@@ -24,12 +23,11 @@
         (view)="onView($event.command, $event.extension)"
         (edit)="onEdit($event.command, $event.extension)"
       ></scl-command-list>
-    </div>
-    <div class="d-none d-xl-block col-xl-5 right-rail">
-      <ng-container *ngIf="command">
-        <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
-        <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
-      </ng-container>
+    </main>
+
+    <div class="d-none d-xl-block col-xl-5 right-rail" *ngIf="command">
+      <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
+      <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
     </div>
   </div>
 </div>

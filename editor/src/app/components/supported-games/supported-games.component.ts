@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Game, GameTitle, SupportInfo } from '../../models';
+import { Game, GameTitle, SupportInfo, SupportLevel } from '../../models';
 
 @Component({
   selector: 'scl-supported-games',
@@ -7,19 +7,20 @@ import { Game, GameTitle, SupportInfo } from '../../models';
   styleUrls: ['./supported-games.component.scss'],
 })
 export class SupportedGamesComponent {
+  SupportLevel = SupportLevel;
   @Input() supportInfo: SupportInfo;
 
   stringifyLevel(level: number, game: Game) {
-    if (level === 1) {
+    if (level === SupportLevel.Supported) {
       return `Supported in ${GameTitle[game]}`;
     }
-    if (level === 2) {
+    if (level === SupportLevel.SupportedDiffParams) {
       return `Supported in ${GameTitle[game]} but has different number of parameters`;
     }
-    if (level === -1) {
+    if (level === SupportLevel.Unsupported) {
       return `Not supported in ${GameTitle[game]}`;
     }
-    if (level === 0) {
+    if (level === SupportLevel.Nop) {
       return `No operation (NOP) in ${GameTitle[game]}`;
     }
   }

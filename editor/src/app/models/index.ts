@@ -115,5 +115,12 @@ export type Modifier = 'except' | 'only';
 
 export type SupportInfo = Record<
   string,
-  Record<string, Array<{ game: Game; level: number }>>
+  Record<string, Array<{ game: Game; level: SupportLevel }>>
 >;
+
+export enum SupportLevel {
+  Unsupported = -1,
+  Nop = 0,
+  Supported = 1,
+  SupportedDiffParams = 2,
+}

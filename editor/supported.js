@@ -36,9 +36,14 @@ games.forEach((game, i) => {
 });
 
 function getCommand(source, extensionName, command) {
-  return source.extensions
-    .find((e) => e.name === extensionName)
-    ?.commands.find((c) => c.id === command.id && c.name === command.name);
+  const extension = source.extensions.find((e) => e.name === extensionName);
+  return (
+    extension &&
+    extension.commands &&
+    extension.commands.find(
+      (c) => c.id === command.id && c.name === command.name
+    )
+  );
 }
 
 function getSupportLevel(command, otherCommand) {

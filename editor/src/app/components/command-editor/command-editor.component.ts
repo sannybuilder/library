@@ -12,7 +12,6 @@ import {
   Attribute,
   Command,
   CommandAttributes,
-  GameTitle,
   Param,
   ParamType,
   SourceType,
@@ -28,7 +27,6 @@ import { smash } from '../../utils';
   styleUrls: ['./command-editor.component.scss'],
 })
 export class CommandEditorComponent implements OnInit {
-  GameTitle = GameTitle;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: ParamType[] = [];

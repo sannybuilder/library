@@ -47,7 +47,7 @@ function getCommand(source, extensionName, command) {
 }
 
 function getSupportLevel(command, otherCommand) {
-  const attrs = command ? command.attrs ?? {} : { is_unsupported: true };
+  const attrs = command ? command.attrs || {} : { is_unsupported: true };
 
   const { is_nop, is_unsupported } = attrs;
   if (is_unsupported) {

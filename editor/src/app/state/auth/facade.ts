@@ -23,7 +23,7 @@ export class AuthFacade {
     this.store$.dispatch(authorizeFail());
   }
 
-  onAppEnter(access_token?: string) {
-    this.store$.dispatch(enter({ access_token }));
+  onAppEnter(accessToken?: string) {
+    this.store$.dispatch(enter({ accessToken }));
   }
 }

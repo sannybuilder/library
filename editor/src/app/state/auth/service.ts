@@ -12,7 +12,7 @@ interface UserResponse {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly sessionKey = 'sbl.oauth.access_token';
-  private readonly client_id = 'c07f7913dd4515732ac7';
+  private readonly clientId = 'c07f7913dd4515732ac7';
 
   constructor(
     private _http: HttpClient,
@@ -23,7 +23,7 @@ export class AuthService {
   login(state: string) {
     const params = {
       state,
-      client_id: this.client_id,
+      client_id: this.clientId,
       scope: 'public_repo',
     };
     const query = Object.entries(params)
@@ -51,7 +51,7 @@ export class AuthService {
     });
 
     return this._http.get<UserResponse>(this.config.endpoints.user, {
-      headers: headers,
+      headers,
     });
   }
 }

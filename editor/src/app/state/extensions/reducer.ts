@@ -21,11 +21,9 @@ export const initialState: ExtensionsState = {
 
 const _reducer = createReducer(
   initialState,
-  on(loadExtensions, (state, { game }) => ({
+  on(loadExtensions, (state) => ({
     ...state,
-    game,
     loading: true,
-    changesCount: 0,
   })),
   on(loadExtensionsSuccess, (state, { extensions }) => ({
     ...state,

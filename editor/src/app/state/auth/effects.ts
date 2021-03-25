@@ -29,10 +29,10 @@ export class AuthEffects {
   enter$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(enter),
-      map(({ access_token: token }) => {
-        const access_token = token || this.service.getSession();
-        if (access_token) {
-          return authorizeSuccess({ access_token });
+      map(({ accessToken: token }) => {
+        const accessToken = token || this.service.getSession();
+        if (accessToken) {
+          return authorizeSuccess({ accessToken });
         }
         return authorizeFail();
       })
@@ -42,9 +42,11 @@ export class AuthEffects {
   getUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authorizeSuccess),
-      switchMap(({ access_token }) =>
-        this.service.getUser(access_token).pipe(
-          map(({ login, avatar_url }) => gotUser({ login, avatar_url })),
+      switchMap(({ accessToken }) =>
+        this.service.getUser(accessToken).pipe(
+          map(({ login, avatar_url: avatarUrl }) =>
+            gotUser({ login, avatarUrl })
+          ),
           catchError(() => of(authorizeFail()))
         )
       )
@@ -55,9 +57,9 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(authorizeSuccess),
-        tap(({ access_token }) => {
-          this.service.setSession(access_token);
-          this._changes.initializeGithub(access_token);
+        tap(({ accessToken }) => {
+          this.service.setSession(accessToken);
+          this._changes.initializeGithub(accessToken);
         })
       ),
     { dispatch: false }

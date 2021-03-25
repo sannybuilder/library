@@ -3,8 +3,8 @@ import { authorizeSuccess, authorizeFail, gotUser } from './actions';
 
 export interface AuthState {
   userName: string;
-  access_token?: string;
-  avatar_url?: string;
+  accessToken?: string;
+  avatarUrl?: string;
 }
 
 export const initialState: AuthState = {
@@ -13,14 +13,14 @@ export const initialState: AuthState = {
 
 const _reducer = createReducer(
   initialState,
-  on(gotUser, (state, { login, avatar_url }) => ({
+  on(gotUser, (state, { login, avatarUrl }) => ({
     ...state,
-    avatar_url,
+    avatarUrl,
     userName: login,
   })),
-  on(authorizeSuccess, (state, { access_token }) => ({
+  on(authorizeSuccess, (state, { accessToken }) => ({
     ...state,
-    access_token,
+    accessToken,
   })),
   on(authorizeFail, () => ({
     ...initialState,

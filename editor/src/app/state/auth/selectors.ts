@@ -10,12 +10,12 @@ export const userNameSelector = createSelector(
 
 export const avatarUrlSelector = createSelector(
   state,
-  (state: AuthState) => state.avatar_url
+  (state: AuthState) => state.avatarUrl
 );
 
 export const authTokenSelector = createSelector(
   state,
-  (state: AuthState) => state.access_token
+  (state: AuthState) => state.accessToken
 );
 
 export const isAuthorizedSelector = createSelector(

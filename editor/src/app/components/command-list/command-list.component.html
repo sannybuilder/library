@@ -14,39 +14,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <div class="toolbar">
-                <div
-                  class="d-inline-block mr-4"
-                  *ngIf="
-                    getCommandSupportInfo(command, extension.name) | async;
-                    let supportInfo
-                  "
-                >
-                  <scl-supported-games
-                    [supportInfo]="supportInfo"
-                  ></scl-supported-games>
-                </div>
-
-                <a
-                  *ngIf="canEdit"
-                  class="btn small text-muted"
-                  href="#"
-                  (click)="onEdit(command, extension.name)"
-                  >Edit</a
-                >
-
-                <a
-                  class="btn small text-muted"
-                  (click)="onView(command, extension.name)"
-                  [routerLink]="['/', game, extension.name, command.id]"
-                  [replaceUrl]="true"
-                  [name]="command.id"
-                  >Info</a
-                >
-              </div>
-
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-3 col-md-1 order-0 d-flex align-items-center">
                   <a
                     (click)="onView(command, extension.name)"
                     [routerLink]="['/', game, extension.name, command.id]"
@@ -57,9 +26,51 @@
                 </div>
 
                 <div
-                  class="col-md-8"
+                  class="col-12 order-2 d-flex align-items-center"
+                  [ngClass]="{
+                    'col-md-12': narrowed,
+                    'col-md-7': !narrowed,
+                    'order-md-2': narrowed,
+                    'order-md-1': !narrowed
+                  }"
                   [innerHTML]="command | hlProp: 'name'"
                 ></div>
+
+                <div
+                  class="col-9 order-1 d-flex justify-content-end align-items-center"
+                  [ngClass]="{
+                    'col-md-11': narrowed,
+                    'col-md-4': !narrowed,
+                    'order-md-1': narrowed,
+                    'order-md-2': !narrowed
+                  }"
+                >
+                  <scl-supported-games
+                    class="mr-2"
+                    *ngIf="
+                      getCommandSupportInfo(command, extension.name) | async;
+                      let supportInfo
+                    "
+                    [supportInfo]="supportInfo"
+                  ></scl-supported-games>
+
+                  <a
+                    *ngIf="canEdit"
+                    class="btn small text-muted"
+                    href="#"
+                    (click)="onEdit(command, extension.name)"
+                    >Edit</a
+                  >
+
+                  <a
+                    class="btn small text-muted"
+                    (click)="onView(command, extension.name)"
+                    [routerLink]="['/', game, extension.name, command.id]"
+                    [replaceUrl]="true"
+                    [name]="command.id"
+                    >Info</a
+                  >
+                </div>
               </div>
 
               <div class="row">

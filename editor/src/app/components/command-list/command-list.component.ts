@@ -13,6 +13,7 @@ import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
 export class CommandListComponent {
   @Input() game: Game;
   @Input() canEdit: boolean;
+  @Input() narrowed: boolean;
   @Output() view: EventEmitter<{
     command: Command;
     extension: string;

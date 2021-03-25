@@ -74,8 +74,6 @@ export const lastUpdate = createSelector(
   (state: UiState) => state.lastUpdate
 );
 
-export const links = createSelector(state, (state: UiState) => state.links);
-
 export const supportInfo = createSelector(
   state,
   (state: UiState) => state.supportInfo

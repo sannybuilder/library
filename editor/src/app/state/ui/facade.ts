@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { Command, Game, Modifier, ViewMode } from '../../models';
 import {
   toggleExtension,
@@ -23,7 +22,6 @@ export class UiFacade {
   selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
-  links$ = this.store$.select(selector.links);
   supportInfo$ = this.store$.select(selector.supportInfo);
 
   game$ = this.store$

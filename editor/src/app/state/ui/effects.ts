@@ -3,8 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   displayOrEditCommandInfo,
   displayOrEditSnippet,
-  loadLinks,
-  loadLinksSuccess,
   loadSupportInfo,
   loadSupportInfoSuccess,
   stopEditOrDisplay,
@@ -80,14 +78,6 @@ export class UiEffects {
     )
   );
 
-  loadLinks$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(loadLinks),
-      switchMap(() => this._service.loadLinks()),
-      map((links) => loadLinksSuccess({ links }))
-    )
-  );
-
   loadSupportInfo$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadSupportInfo),
@@ -102,8 +92,4 @@ export class UiEffects {
     private _snippets: SnippetsFacade,
     private _service: UiService
   ) {}
-
-  ngrxOnInitEffects() {
-    return loadLinks();
-  }
 }

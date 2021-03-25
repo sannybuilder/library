@@ -31,7 +31,6 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
   command$ = this._ui.commandToDisplayOrEdit$;
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
-  links$ = this._ui.links$;
   game$ = this._ui.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(

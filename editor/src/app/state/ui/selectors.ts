@@ -1,15 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Command, Extension, SupportInfo } from '../../models';
-import { extensions } from '../extensions/selectors';
+import { Command, SupportInfo } from '../../models';
 import { UiState } from './reducer';
 
 export const state = createFeatureSelector('ui');
-
-export const extensionNames = createSelector(
-  extensions,
-  (extensions?: Extension[]) =>
-    extensions ? extensions.map((e) => e.name) : []
-);
 
 export const selectedFiltersOnly = createSelector(
   state,

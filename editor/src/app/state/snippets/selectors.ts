@@ -1,11 +1,20 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Game } from '../../models';
+import { game } from '../ui/selectors';
 import { SnippetsState } from './reducer';
 
 export const state = createFeatureSelector('snippets');
 
 export const snippets = createSelector(
   state,
-  (state: SnippetsState, props: { extension: string; opcode: string }) => {
-    return state.extensionSnippets?.[props.extension]?.[props.opcode] ?? '';
+  game,
+  (
+    state: SnippetsState,
+    game: Game,
+    props: { extension: string; opcode: string }
+  ) => {
+    return (
+      state.extensionSnippets[game]?.[props.extension]?.[props.opcode] ?? ''
+    );
   }
 );

@@ -5,6 +5,8 @@ import {
   switchMap,
   withLatestFrom,
   distinctUntilChanged,
+  concatMap,
+  take,
 } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 
@@ -12,26 +14,27 @@ import {
   loadExtensions,
   loadExtensionsSuccess,
   updateCommand,
+  updateGameCommand,
 } from './actions';
 import { ExtensionsService } from './service';
 import { ExtensionsFacade } from './facade';
 import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
-import { GameLibrary } from '../../models';
+import { GameLibrary, GameSupportInfo } from '../../models';
 import { updateLastUpdateTime } from '../ui/actions';
-import { isAnyAttributeInvalid } from '../../utils';
+import { getSameCommands, isAnyAttributeInvalid } from '../../utils';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
   loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadExtensions),
-      switchMap(({ game }) =>
+      concatMap(({ game }) =>
         this.service
           .loadExtensions(game)
           .pipe(
             switchMap(({ extensions, lastUpdate }) => [
-              loadExtensionsSuccess({ extensions }),
+              loadExtensionsSuccess({ game, extensions }),
               updateLastUpdateTime({ lastUpdate }),
             ])
           )
@@ -39,10 +42,33 @@ export class ExtensionsEffects {
     )
   );
 
-  updateCommands$ = createEffect(
+  updateCommands$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateCommand),
+      distinctUntilChanged(isEqual),
+      withLatestFrom(this._ui.game$),
+      switchMap(([{ command, newExtension, oldExtension }, game]) => {
+        return this._ui.getCommandSupportInfo(command, oldExtension).pipe(
+          take(1),
+          switchMap((supportInfo: GameSupportInfo[]) =>
+            getSameCommands(supportInfo, game).map((d) =>
+              updateGameCommand({
+                command,
+                game: d.game,
+                newExtension,
+                oldExtension,
+              })
+            )
+          )
+        );
+      })
+    )
+  );
+
+  updateGameCommands$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(updateCommand),
+        ofType(updateGameCommand),
         distinctUntilChanged(isEqual),
         withLatestFrom(this._extensions.extensions$, this._ui.game$),
         tap(([_, extensions, game]) => {

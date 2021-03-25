@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ExtensionSnippets, Game } from '../../models';
+import { Command, ExtensionSnippets, Game } from '../../models';
 
 export const loadSnippets = createAction(
   'load snippets',
@@ -8,10 +8,15 @@ export const loadSnippets = createAction(
 
 export const loadSnippetsSuccess = createAction(
   'load snippets success',
-  props<{ extensionSnippets: ExtensionSnippets }>()
+  props<{ game: Game; extensionSnippets: ExtensionSnippets }>()
 );
 
 export const updateSnippet = createAction(
   'update snippets',
-  props<{ extension: string; opcode: string; content: string }>()
+  props<{ extension: string; command: Command; content: string }>()
+);
+
+export const updateGameSnippet = createAction(
+  'update game snippets',
+  props<{ game: Game; extension: string; opcode: string; content: string }>()
 );

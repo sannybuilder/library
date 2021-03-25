@@ -113,10 +113,12 @@ export enum ViewMode {
 
 export type Modifier = 'except' | 'only';
 
-export type SupportInfo = Record<
-  string,
-  Record<string, Array<{ game: Game; level: SupportLevel }>>
->;
+export type SupportInfo = Record<string, Record<string, GameSupportInfo[]>>;
+
+export interface GameSupportInfo {
+  game: Game;
+  level: SupportLevel;
+}
 
 export enum SupportLevel {
   Unsupported = -1,

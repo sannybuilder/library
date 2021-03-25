@@ -4,13 +4,14 @@ import {
   HostListener,
   Inject,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
-import { Command, ViewMode } from '../../models';
+import { Command, Game, ViewMode } from '../../models';
 import {
   AuthFacade,
   ExtensionsFacade,
@@ -25,7 +26,7 @@ import { FUSEJS_OPTIONS } from '../../fusejs';
   templateUrl: './library-page.component.html',
   styleUrls: ['./library-page.component.scss'],
 })
-export class LibraryPageComponent implements OnDestroy, AfterViewInit {
+export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
   command$ = this._ui.commandToDisplayOrEdit$;
@@ -55,6 +56,13 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
     private _snippets: SnippetsFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
+
+  ngOnInit() {
+    this._extensions.loadExtensions(Game.GTA3);
+    this._extensions.loadExtensions(Game.VC);
+    this._snippets.loadSnippets(Game.GTA3);
+    this._snippets.loadSnippets(Game.VC);
+  }
 
   ngOnDestroy() {
     this.onDestroy$.next();
@@ -91,7 +99,7 @@ export class LibraryPageComponent implements OnDestroy, AfterViewInit {
     if (this.snippet !== this.oldSnippet) {
       this._snippets.updateSnippet({
         extension: this.extension,
-        opcode: this.command.id,
+        command: this.command,
         content: this.snippet,
       });
     }

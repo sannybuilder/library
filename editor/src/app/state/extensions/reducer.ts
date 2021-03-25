@@ -1,44 +1,48 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Extension } from '../../models';
+import { Extension, Game } from '../../models';
 import {
   loadExtensions,
   loadExtensionsSuccess,
   toggleExtension,
-  updateCommand,
+  updateGameCommand,
 } from './actions';
 import { without, sortBy } from 'lodash';
 
 export interface ExtensionsState {
-  extensions?: Extension[];
+  extensions: Partial<Record<Game, Extension[]>>;
   selectedExtensions?: string[];
-  loading: boolean;
+  loading: number;
   entities?: Record<string, string[]>;
 }
 
 export const initialState: ExtensionsState = {
-  loading: false,
+  extensions: {},
+  loading: 0,
 };
 
 const _reducer = createReducer(
   initialState,
   on(loadExtensions, (state) => ({
     ...state,
-    loading: true,
+    loading: state.loading + 1,
   })),
-  on(loadExtensionsSuccess, (state, { extensions }) => ({
+  on(loadExtensionsSuccess, (state, { game, extensions }) => ({
     ...state,
-    loading: false,
-    extensions,
+    loading: state.loading - 1,
+    extensions: { ...state.extensions, [game]: extensions },
     selectedExtensions: extensions.map((e) => e.name),
     entities: getEntities(extensions),
   })),
   on(
-    updateCommand,
-    (state, { command: newCommand, newExtension: name, oldExtension }) => {
+    updateGameCommand,
+    (
+      state,
+      { game, command: newCommand, newExtension: name, oldExtension }
+    ) => {
       let tickExtension: string | null = null;
       let untickExtension: string | null = null;
       let extensions = upsertBy(
-        state.extensions,
+        state.extensions[game] ?? [],
         'name',
         name,
         (e) => ({
@@ -90,7 +94,7 @@ const _reducer = createReducer(
 
       return {
         ...state,
-        extensions,
+        extensions: { ...state.extensions, [game]: extensions },
         selectedExtensions,
         entities,
       };

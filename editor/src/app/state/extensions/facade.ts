@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
-import { Command, Extension } from '../../models';
-import { updateCommand, toggleExtension } from './actions';
+import { Command, Extension, Game } from '../../models';
+import { updateCommand, toggleExtension, loadExtensions } from './actions';
 import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -42,5 +42,9 @@ export class ExtensionsFacade {
 
   toggleExtension(extension: string) {
     this.store$.dispatch(toggleExtension({ extension }));
+  }
+
+  loadExtensions(game: Game) {
+    this.store$.dispatch(loadExtensions({ game }));
   }
 }

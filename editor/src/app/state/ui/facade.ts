@@ -15,7 +15,6 @@ import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UiFacade {
-  extensionNames$ = this.store$.select(selector.extensionNames);
   searchTerm$ = this.store$.select(selector.searchTerm);
   displaySearchBar$ = this.store$.select(selector.displaySearchBar);
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);

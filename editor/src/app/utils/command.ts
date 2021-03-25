@@ -1,5 +1,11 @@
 import { pickBy } from 'lodash';
-import { Param, SourceType } from '../models';
+import {
+  Game,
+  Param,
+  SourceType,
+  SupportLevel,
+  GameSupportInfo,
+} from '../models';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
 export function smash(value: object) {
@@ -13,4 +19,17 @@ export function stripSourceAny(param: Param) {
   return pickBy(param, (v, k) =>
     k === 'source' ? v !== SourceType.any : true
   );
+}
+
+export function getSameCommands(supportInfo: GameSupportInfo[], game: Game) {
+  const curr = supportInfo.find((i) => i.game === game);
+  // also update the same command in other games
+  const others =
+    curr.level === SupportLevel.Supported
+      ? supportInfo.filter(
+          (i) => i.game !== game && i.level === SupportLevel.Supported
+        )
+      : [];
+
+  return [curr, ...others];
 }

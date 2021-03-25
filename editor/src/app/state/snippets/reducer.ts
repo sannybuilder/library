@@ -1,26 +1,34 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { ExtensionSnippets } from '../../models';
-import { loadSnippetsSuccess, updateSnippet } from './actions';
+import { ExtensionSnippets, Game } from '../../models';
+import { loadSnippetsSuccess, updateGameSnippet } from './actions';
 
 export interface SnippetsState {
-  extensionSnippets?: ExtensionSnippets;
+  extensionSnippets: Partial<Record<Game, ExtensionSnippets>>;
 }
 
-export const initialState: SnippetsState = {};
+export const initialState: SnippetsState = {
+  extensionSnippets: {},
+};
 
 const _reducer = createReducer(
   initialState,
-  on(loadSnippetsSuccess, (state, { extensionSnippets }) => ({
-    ...state,
-    extensionSnippets,
-  })),
-  on(updateSnippet, (state, { extension, opcode, content }) => ({
+  on(loadSnippetsSuccess, (state, { game, extensionSnippets }) => ({
     ...state,
     extensionSnippets: {
-      ...(state.extensionSnippets ?? {}),
-      [extension]: {
-        ...(state.extensionSnippets?.[extension] ?? {}),
-        [opcode]: content,
+      ...state.extensionSnippets,
+      [game]: extensionSnippets,
+    },
+  })),
+  on(updateGameSnippet, (state, { game, extension, opcode, content }) => ({
+    ...state,
+    extensionSnippets: {
+      ...state.extensionSnippets,
+      [game]: {
+        ...(state.extensionSnippets[game] ?? {}),
+        [extension]: {
+          ...(state.extensionSnippets[game]?.[extension] ?? {}),
+          [opcode]: content,
+        },
       },
     },
   }))

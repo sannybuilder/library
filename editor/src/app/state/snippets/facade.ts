@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { updateSnippet } from './actions';
+import { Command, Game } from '../../models';
+import { loadSnippets, updateSnippet } from './actions';
 import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -16,13 +17,17 @@ export class SnippetsFacade {
 
   updateSnippet({
     extension,
-    opcode,
+    command,
     content,
   }: {
     extension: string;
-    opcode: string;
+    command: Command;
     content: string;
   }) {
-    return this.store$.dispatch(updateSnippet({ extension, opcode, content }));
+    return this.store$.dispatch(updateSnippet({ extension, command, content }));
+  }
+
+  loadSnippets(game: Game) {
+    return this.store$.dispatch(loadSnippets({ game }));
   }
 }

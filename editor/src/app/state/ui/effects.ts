@@ -7,16 +7,11 @@ import {
   loadSupportInfoSuccess,
   stopEditOrDisplay,
 } from './actions';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { ViewMode } from '../../models';
 import { combineLatest } from 'rxjs';
-import {
-  loadExtensions,
-  loadExtensionsSuccess,
-  updateCommand,
-} from '../extensions/actions';
-import { loadSnippets } from '../snippets/actions';
+import { loadExtensionsSuccess, updateCommand } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
 import { UiService } from './service';
 
@@ -26,7 +21,9 @@ export class UiEffects {
     combineLatest([
       this._actions$.pipe(ofType(loadExtensionsSuccess)),
       this._ui.opcodeOnLoad$,
+      this._ui.game$,
     ]).pipe(
+      filter(([{ game }, _, currGame]) => game === currGame),
       map(([{ extensions }, { opcode, extension }]) => {
         const command = extensions
           .find((e) => e.name === extension)
@@ -46,13 +43,7 @@ export class UiEffects {
   );
 
   onGameChange$ = createEffect(() =>
-    this._ui.game$.pipe(
-      switchMap((game) => [
-        loadExtensions({ game }),
-        loadSnippets({ game }),
-        loadSupportInfo({ game }),
-      ])
-    )
+    this._ui.game$.pipe(map((game) => loadSupportInfo({ game })))
   );
 
   updateCommand$ = createEffect(() =>

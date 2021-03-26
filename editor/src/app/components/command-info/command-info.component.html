@@ -21,28 +21,6 @@
       *ngIf="!command.attrs?.is_unsupported && !command.attrs?.is_nop"
     >
       <div class="mb-3">{{ command.short_desc }}</div>
-
-      <div *ngIf="command.input?.length > 0" class="mb-3">
-        <h4>Parameters</h4>
-
-        <ng-container
-          *ngTemplateOutlet="
-            paramTemplate;
-            context: { $implicit: command.input }
-          "
-        ></ng-container>
-      </div>
-
-      <div *ngIf="command.output?.length > 0" class="mb-3">
-        <h4>Result</h4>
-
-        <ng-container
-          *ngTemplateOutlet="
-            paramTemplate;
-            context: { $implicit: command.output }
-          "
-        ></ng-container>
-      </div>
     </ng-container>
 
     <ng-container *ngIf="command.attrs?.is_unsupported"
@@ -59,10 +37,8 @@
     <ng-container *ngIf="command.class && command.member">
       <ng-container *ngIf="command.attrs?.is_constructor">
         <code>
-          {{ command | outputParams }} = {{ command.class }}.{{
-            command.member
-          }}
-          {{ command | inputParams }}</code
+          {{ command | outputParams }} = {{ command.class }}.{{ command.member
+          }}{{ command | inputParams }}</code
         >
       </ng-container>
 
@@ -73,6 +49,25 @@
         >
       </ng-container>
     </ng-container>
+
+    <div *ngIf="command.input?.length > 0" class="mt-3">
+      <h5>Parameters</h5>
+
+      <ng-container
+        *ngTemplateOutlet="paramTemplate; context: { $implicit: command.input }"
+      ></ng-container>
+    </div>
+
+    <div *ngIf="command.output?.length > 0" class="mt-3">
+      <h5>Result</h5>
+
+      <ng-container
+        *ngTemplateOutlet="
+          paramTemplate;
+          context: { $implicit: command.output }
+        "
+      ></ng-container>
+    </div>
   </div>
 </div>
 
@@ -80,7 +75,7 @@
   <hr />
   <div class="row mb-2">
     <div class="col-12">
-      <h4>Attributes</h4>
+      <h5>Attributes</h5>
       <ul class="list-unstyled">
         <li *ngFor="let attr of attrs">{{ attr | attrTitle }}.</li>
       </ul>
@@ -90,7 +85,7 @@
 
 <ng-container *ngIf="snippet">
   <hr />
-  <h4>Code Snippet</h4>
+  <h5>Code Snippet</h5>
   <pre class="sample">{{ snippet | parametrify: command }}</pre>
 </ng-container>
 

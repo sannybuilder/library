@@ -21,7 +21,13 @@ export function stripSourceAny(param: Param) {
   );
 }
 
-export function getSameCommands(supportInfo: GameSupportInfo[], game: Game) {
+export function getSameCommands(
+  supportInfo: GameSupportInfo[] | undefined,
+  game: Game
+): GameSupportInfo[] {
+  if (!supportInfo) {
+    return [{ game, level: SupportLevel.Supported }];
+  }
   const curr = supportInfo.find((i) => i.game === game);
   // also update the same command in other games
   const others =

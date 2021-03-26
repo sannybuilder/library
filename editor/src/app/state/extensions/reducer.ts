@@ -8,41 +8,50 @@ import {
 } from './actions';
 import { without, sortBy } from 'lodash';
 
-export interface ExtensionsState {
-  extensions: Partial<Record<Game, Extension[]>>;
+export interface GameState {
+  extensions: Extension[];
   selectedExtensions?: string[];
-  loading: number;
+  loading: boolean;
   entities?: Record<string, string[]>;
+}
+export interface ExtensionsState {
+  games: Partial<Record<Game, GameState>>;
 }
 
 export const initialState: ExtensionsState = {
-  extensions: {},
-  loading: 0,
+  games: {},
 };
 
 const _reducer = createReducer(
   initialState,
-  on(loadExtensions, (state) => ({
-    ...state,
-    loading: state.loading + 1,
-  })),
-  on(loadExtensionsSuccess, (state, { game, extensions }) => ({
-    ...state,
-    loading: state.loading - 1,
-    extensions: { ...state.extensions, [game]: extensions },
-    selectedExtensions: extensions.map((e) => e.name),
-    entities: getEntities(extensions),
-  })),
+  on(loadExtensions, (state, { game }) =>
+    updateState(state, game, {
+      loading: true,
+    })
+  ),
+  on(loadExtensionsSuccess, (state, { game, extensions }) =>
+    updateState(state, game, {
+      extensions,
+      selectedExtensions: extensions.map((e) => e.name),
+      entities: getEntities(extensions),
+    })
+  ),
   on(
     updateGameCommand,
     (
       state,
       { game, command: newCommand, newExtension: name, oldExtension }
     ) => {
+      const gameState: GameState = state.games[game] ?? {
+        extensions: [],
+        selectedExtensions: [],
+        loading: false,
+        entities: {},
+      };
       let tickExtension: string | null = null;
       let untickExtension: string | null = null;
       let extensions = upsertBy(
-        state.extensions[game] ?? [],
+        gameState.extensions,
         'name',
         name,
         (e) => ({
@@ -69,7 +78,7 @@ const _reducer = createReducer(
         extensions = upsertBy(extensions, 'name', oldExtension, (e) => {
           const commands = upsertBy(e.commands, 'id', newCommand.id);
           if (!commands.length) {
-            // remove previous collection ifit is empty
+            // remove previous collection if it is empty
             untickExtension = oldExtension;
             return null;
           }
@@ -82,8 +91,8 @@ const _reducer = createReducer(
 
       const selectedExtensions =
         untickExtension !== null
-          ? state.selectedExtensions.filter((s) => s !== untickExtension)
-          : [...state.selectedExtensions];
+          ? gameState.selectedExtensions.filter((s) => s !== untickExtension)
+          : [...gameState.selectedExtensions];
 
       if (tickExtension !== null) {
         selectedExtensions.push(tickExtension);
@@ -92,21 +101,37 @@ const _reducer = createReducer(
 
       const entities = getEntities(extensions);
 
-      return {
-        ...state,
-        extensions: { ...state.extensions, [game]: extensions },
+      return updateState(state, game, {
+        extensions,
         selectedExtensions,
         entities,
-      };
+      });
     }
   ),
-  on(toggleExtension, (state, { extension }) => {
-    const selectedExtensions = state.selectedExtensions.includes(extension)
-      ? without(state.selectedExtensions, extension)
-      : [...state.selectedExtensions, extension];
-    return { ...state, selectedExtensions };
+  on(toggleExtension, (state, { game, extension }) => {
+    const selectedExtensions = state.games[game]?.selectedExtensions ?? [];
+
+    return updateState(state, game, {
+      selectedExtensions: selectedExtensions.includes(extension)
+        ? without(selectedExtensions, extension)
+        : [...selectedExtensions, extension],
+    });
   })
 );
+
+function updateState(
+  state: ExtensionsState,
+  game: Game,
+  newState: Partial<GameState>
+) {
+  return {
+    ...state,
+    games: {
+      ...state.games,
+      [game]: { ...(state.games[game] ?? {}), ...newState },
+    },
+  };
+}
 
 export function extensionsReducer(state: ExtensionsState, action: Action) {
   return _reducer(state, action);

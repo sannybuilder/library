@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommandAttributes, Modifier } from '../../models';
+import { Component, Input } from '@angular/core';
+import { CommandAttributes, Game, Modifier } from '../../models';
 import { ExtensionsFacade, UiFacade } from '../../state';
 
 @Component({
@@ -8,14 +8,15 @@ import { ExtensionsFacade, UiFacade } from '../../state';
   styleUrls: ['./filter-panel.component.scss'],
 })
 export class FilterPanelComponent {
+  @Input() game: Game;
   extensionNames$ = this._extensions.extensionNames$;
 
   filters = CommandAttributes;
 
   constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
-  toggleExtension(extenstion: string) {
-    this._extensions.toggleExtension(extenstion);
+  toggleExtension(extension: string) {
+    this._extensions.toggleExtension(this.game, extension);
   }
 
   isExtensionChecked(extension: string) {

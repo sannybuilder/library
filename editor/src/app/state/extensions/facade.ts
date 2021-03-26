@@ -40,8 +40,8 @@ export class ExtensionsFacade {
     );
   }
 
-  toggleExtension(extension: string) {
-    this.store$.dispatch(toggleExtension({ extension }));
+  toggleExtension(game: Game, extension: string) {
+    this.store$.dispatch(toggleExtension({ game, extension }));
   }
 
   loadExtensions(game: Game) {

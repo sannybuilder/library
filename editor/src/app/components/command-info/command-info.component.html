@@ -1,4 +1,97 @@
-<h5>{{ command.id }}</h5>
-<div>
-  {{ command.short_desc }}
+<div class="row mb-2" *ngIf="supportInfo">
+  <div class="col-12 d-flex justify-content-end">
+    <scl-supported-games [supportInfo]="supportInfo"></scl-supported-games>
+  </div>
 </div>
+
+<div class="row mb-2">
+  <div class="col-12 col-md-1">
+    <h5>{{ command.id }}</h5>
+  </div>
+  <div class="col-12 col-md-11 d-flex">
+    <h5>{{ command.name }}</h5>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-12">
+    <ng-container
+      *ngIf="!command.attrs?.is_unsupported && !command.attrs?.is_nop"
+    >
+      <div class="mb-3">{{ command.short_desc }}</div>
+
+      <div *ngIf="command.input?.length > 0" class="mb-3">
+        <h4>Parameters</h4>
+
+        <ng-container
+          *ngTemplateOutlet="
+            paramTemplate;
+            context: { $implicit: command.input }
+          "
+        ></ng-container>
+      </div>
+
+      <div *ngIf="command.output?.length > 0" class="mb-3">
+        <h4>Result</h4>
+
+        <ng-container
+          *ngTemplateOutlet="
+            paramTemplate;
+            context: { $implicit: command.output }
+          "
+        ></ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="command.attrs?.is_unsupported"
+      >Unsupported</ng-container
+    >
+    <ng-container *ngIf="command.attrs?.is_nop"
+      >Does nothing (NOP)</ng-container
+    >
+
+    <ng-container *ngIf="command.attrs?.is_keyword">
+      <code>{{ command.name | lowercase }} {{ command | keywordParams }}</code>
+    </ng-container>
+
+    <ng-container *ngIf="command.class && command.member">
+      <ng-container *ngIf="command.attrs?.is_constructor">
+        <code>
+          {{ command | outputParams }} = {{ command.class }}.{{
+            command.member
+          }}
+          {{ command | inputParams }}</code
+        >
+      </ng-container>
+
+      <ng-container *ngIf="!command.attrs?.is_constructor">
+        <code
+          >{{ command.class }}.{{ command.member
+          }}{{ command | classParams }}</code
+        >
+      </ng-container>
+    </ng-container>
+
+    <ng-container
+      *ngIf="
+        !command.attrs?.is_keyword &&
+        !(command.class && command.member) &&
+        !command.attrs?.is_unsupported &&
+        !command.attrs?.is_nop
+      "
+    >
+      <ng-container *ngIf="snippet">
+        <pre class="sample">{{ snippet | parametrify: command }}</pre>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #paramTemplate let-params>
+  <ng-container *ngFor="let param of params; let i = index">
+    <div class="row">
+      <div class="col-1 text-center">{{ i + 1 }}</div>
+      <div class="col-11">{{ param | singleParam }}</div>
+    </div>
+  </ng-container>
+</ng-template>

@@ -7,9 +7,9 @@ export function stringifySource(source: SourceType) {
     case SourceType.var_any:
       return 'var';
     case SourceType.var_global:
-      return 'gvar';
+      return 'global var';
     case SourceType.var_local:
-      return 'lvar';
+      return 'local var';
     case SourceType.literal:
       return 'literal';
   }

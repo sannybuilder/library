@@ -18,6 +18,7 @@ import {
   ParametrifyPipe,
   InputParamsPipe,
   OutputParamsPipe,
+  SingleParamPipe,
 } from './pipes';
 
 // extensions state
@@ -59,7 +60,6 @@ import { FilterPanelComponent } from './components/filter-panel/filter-panel.com
 import { ModalComponent } from './components/modal/modal.component';
 import { IconComponent } from './components/icon/icon.component';
 import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -74,6 +74,7 @@ import { environment } from '../environments/environment';
     ParametrifyPipe,
     InputParamsPipe,
     OutputParamsPipe,
+    SingleParamPipe,
     HlPropPipe,
     CommandEditorComponent,
     HeaderComponent,

@@ -7,3 +7,4 @@ export * from './game-title.pipe';
 export * from './parametrify.pipe';
 export * from './input-params.pipe';
 export * from './output-params.pipe';
+export * from './single-param.pipe';

@@ -84,6 +84,11 @@
     [entities]="getExtensionEntities(extension) | async"
     [supportInfo]="getCommandSupportInfo(command, extension) | async"
   ></scl-command-editor>
-  <scl-command-info *ngIf="viewMode === ViewMode.View" [command]="command">
+  <scl-command-info
+    *ngIf="viewMode === ViewMode.View"
+    [command]="command"
+    [snippet]="getSnippet(extension, command.id) | async"
+    [supportInfo]="getCommandSupportInfo(command, extension) | async"
+  >
   </scl-command-info>
 </ng-template>

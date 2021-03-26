@@ -19,6 +19,7 @@ import {
   InputParamsPipe,
   OutputParamsPipe,
   SingleParamPipe,
+  AttrTitlePipe,
 } from './pipes';
 
 // extensions state
@@ -88,6 +89,7 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
     ModalComponent,
     IconComponent,
     SupportedGamesComponent,
+    AttrTitlePipe,
   ],
   imports: [
     BrowserModule,

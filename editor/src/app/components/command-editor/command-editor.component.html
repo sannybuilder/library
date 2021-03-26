@@ -162,9 +162,10 @@
         type="checkbox"
         [ngModel]="command.attrs ? command.attrs[attr] : undefined"
         (ngModelChange)="onAttrChange(command, attr, $event)"
+        [title]="attr | attrTitle"
         [id]="attr"
       />
-      <label class="form-check-label" [for]="attr">
+      <label class="form-check-label" [for]="attr" [title]="attr | attrTitle">
         {{ attr }}
       </label>
     </div>

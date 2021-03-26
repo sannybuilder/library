@@ -13,6 +13,8 @@
   </div>
 </div>
 
+<hr />
+
 <div class="row mb-2">
   <div class="col-12">
     <ng-container
@@ -71,21 +73,26 @@
         >
       </ng-container>
     </ng-container>
-
-    <ng-container
-      *ngIf="
-        !command.attrs?.is_keyword &&
-        !(command.class && command.member) &&
-        !command.attrs?.is_unsupported &&
-        !command.attrs?.is_nop
-      "
-    >
-      <ng-container *ngIf="snippet">
-        <pre class="sample">{{ snippet | parametrify: command }}</pre>
-      </ng-container>
-    </ng-container>
   </div>
 </div>
+
+<ng-container *ngIf="attrs.length">
+  <hr />
+  <div class="row mb-2">
+    <div class="col-12">
+      <h4>Attributes</h4>
+      <ul class="list-unstyled">
+        <li *ngFor="let attr of attrs">{{ attr | attrTitle }}.</li>
+      </ul>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="snippet">
+  <hr />
+  <h4>Code Snippet</h4>
+  <pre class="sample">{{ snippet | parametrify: command }}</pre>
+</ng-container>
 
 <ng-template #paramTemplate let-params>
   <ng-container *ngFor="let param of params; let i = index">

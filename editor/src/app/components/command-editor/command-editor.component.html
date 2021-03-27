@@ -14,7 +14,6 @@
         (blur)="opcodify(command)"
         [ngModel]="command.id"
         (ngModelChange)="onOpcodeChange(command, $event)"
-        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -26,7 +25,6 @@
         class="form-control"
         [ngModel]="command.name | uppercase"
         (ngModelChange)="onCommandNameChange(command, $event)"
-        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -53,7 +51,6 @@
         class="form-control"
         [ngModel]="command.class"
         (ngModelChange)="onClassChange(command, $event)"
-        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -66,7 +63,6 @@
         class="form-control"
         [ngModel]="command.member"
         (ngModelChange)="onMemberChange(command, $event)"
-        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -81,7 +77,6 @@
         [(ngModel)]="command.short_desc"
         class="form-control"
         [disabled]="command.attrs?.is_nop"
-        [ngModelOptions]="{ updateOn: 'blur' }"
       />
     </div>
   </div>
@@ -93,12 +88,7 @@
     <div class="col-12 col-lg-4">
       <div class="input-group">
         <span class="input-group-text">{{ i + 1 }}</span>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="param.name"
-          [ngModelOptions]="{ updateOn: 'blur' }"
-        />
+        <input type="text" class="form-control" [(ngModel)]="param.name" />
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
@@ -126,12 +116,7 @@
     <div class="col-12 col-lg-4">
       <div class="input-group">
         <span class="input-group-text">{{ i + 1 }}</span>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="param.name"
-          [ngModelOptions]="{ updateOn: 'blur' }"
-        />
+        <input type="text" class="form-control" [(ngModel)]="param.name" />
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
@@ -157,15 +142,13 @@
 <div class="row mb-2">
   <div class="col-12">
     <div class="form-check d-inline-block pr-2" *ngFor="let attr of attrs">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        [ngModel]="command.attrs ? command.attrs[attr] : undefined"
-        (ngModelChange)="onAttrChange(command, attr, $event)"
-        [title]="attr | attrTitle"
-        [id]="attr"
-      />
-      <label class="form-check-label" [for]="attr" [title]="attr | attrTitle">
+      <label class="form-check-label" [title]="attr | attrTitle">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [ngModel]="command.attrs ? command.attrs[attr] : undefined"
+          (ngModelChange)="onAttrChange(command, attr, $event)"
+        />
         {{ attr }}
       </label>
     </div>
@@ -186,7 +169,6 @@
         [id]="command.id + '_snippet'"
         [ngModel]="snippet"
         (ngModelChange)="onSnippetChange($event)"
-        [ngModelOptions]="{ updateOn: 'blur' }"
       ></textarea>
     </div>
   </div>

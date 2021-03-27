@@ -25,6 +25,10 @@ export function braceify(value: string, braces: '[]' | '()') {
   return `${braces[0]}${value}${braces[1]}`;
 }
 
-export function stringify(params: Param[], sep: ' ' | ', '): string {
-  return params.map(stringifyWithColon).join(sep);
+export function stringify(
+  params: Param[],
+  sep: ' ' | ', ',
+  mapFn: (p: Param) => string = stringifyWithColon
+): string {
+  return params.map(mapFn).join(sep);
 }

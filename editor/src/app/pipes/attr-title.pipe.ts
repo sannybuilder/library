@@ -26,7 +26,7 @@ export class AttrTitlePipe implements PipeTransform {
       case 'is_segment':
         return 'This command is used to separate segments in SCM header';
       case 'is_static':
-        return 'This command operates on a static in-game entity or a property that can not be constructed dynamically';
+        return 'This command operates on a static property or in-an game entity that can not be constructed dynamically';
       case 'is_variadic':
         return 'This command has variadic number of arguments';
     }

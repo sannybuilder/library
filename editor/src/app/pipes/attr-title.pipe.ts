@@ -8,7 +8,7 @@ export class AttrTitlePipe implements PipeTransform {
   transform(value: Attribute): string {
     switch (value) {
       case 'is_branch':
-        return 'This command is used to branch the code ';
+        return 'This command is used to branch the code';
       case 'is_condition':
         return 'This command can be used in conditional statements';
       case 'is_constructor':

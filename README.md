@@ -4,11 +4,28 @@ An attempt to build a complete and consistent class system and commands document
 
 Currently under early development. Contributions are welcome!
 
-See online at https://library.sannybuilder.com/
+Available online at https://library.sannybuilder.com/
 
-Discuss: https://github.com/sannybuilder/dev/discussions/107
+Introductory post on Patreon: https://www.patreon.com/posts/49241369
 
-# Credits
+Discuss: https://github.com/sannybuilder/dev/discussions/136
+
+## Library Features
+
+- Offers the complete list of script commands for GTA III and Vice City in a keyword or class form in addition to the native name
+- Describes the specifics of each command using extra attributes
+- Is aware of Sanny's Language Extensions
+- Is able to filter commands by attributes or using a search query
+- Provides information on support of the command in other games
+- Has a convenient online editor for authorized users (see Contributing) where changes could be committed from the browser to GitHub
+- Updates the classes.db file automatically after new commits pushed to GitHub
+- Has the responsive design for using on mobile devices
+
+## Contributing
+
+Sanny Builder Library is an open project where anyone can contribute if they will. If you are looking for ways to participate in the project or want to get access to the online editor tool, drop a message in https://github.com/sannybuilder/dev/discussions/136 and we will sort this out.
+
+## Credits
 
 Information presented here is attributed to many talented individuals in the GTA modding community.
 

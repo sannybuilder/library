@@ -3,14 +3,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { from, of } from 'rxjs';
 import {
   distinctUntilChanged,
-  map,
+  mapTo,
   switchMap,
   take,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { submitChanges, submitChangesSuccess } from './actions';
+import { reloadPage, submitChanges, submitChangesSuccess } from './actions';
 import { ChangesFacade } from '../changes/facade';
 import { Config, CONFIG } from '../../config';
 
@@ -28,24 +28,29 @@ export class ChangesEffects {
             if (!github && !this._config.features.shouldBeAuthorizedToEdit) {
               console.log('Submit changes');
               console.table(changes);
-              return of(undefined);
+              return of(false);
             }
             const files = [...changes.entries()].map(([path, content]) => ({
               path,
               content,
             }));
-            return from(github.writeFiles(files));
+            return from(github.writeFiles(files)).pipe(mapTo(true));
           })
         )
       ),
-      map(() => submitChangesSuccess())
+      switchMap((shouldReload) =>
+        [
+          submitChangesSuccess(),
+          shouldReload ? reloadPage() : undefined,
+        ].filter(Boolean)
+      )
     )
   );
 
-  submitChangesSuccess$ = createEffect(
+  reloadPage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(submitChangesSuccess),
+        ofType(reloadPage),
         tap(() => {
           // reloading page to ensure we pull the latest files
           window.location.reload();

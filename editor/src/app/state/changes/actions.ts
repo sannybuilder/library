@@ -21,3 +21,5 @@ export const initializeGithub = createAction(
   'initialize github',
   props<{ accessToken: string }>()
 );
+
+export const reloadPage = createAction('reload page');

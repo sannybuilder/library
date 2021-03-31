@@ -13,6 +13,7 @@ export class ExtensionsFacade {
 
   extensionNames$ = this.store$.select(selector.extensionNames);
   loading$ = this.store$.select(selector.loading);
+  lastUpdate$ = this.store$.select(selector.lastUpdate);
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selector.selectedExtensions, {

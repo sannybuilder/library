@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UiFacade, ChangesFacade } from '../../state';
+import { UiFacade, ChangesFacade, ExtensionsFacade } from '../../state';
 
 @Component({
   selector: 'scl-footer',
@@ -7,12 +7,16 @@ import { UiFacade, ChangesFacade } from '../../state';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  lastUpdate$ = this._ui.lastUpdate$;
+  lastUpdate$ = this._extensions.lastUpdate$;
   displayLastUpdate$ = this._ui.displayLastUpdated$;
   changesCount$ = this._changes.changesCount$;
   isUpdating$ = this._changes.isUpdating$;
 
-  constructor(private _changes: ChangesFacade, private _ui: UiFacade) {}
+  constructor(
+    private _changes: ChangesFacade,
+    private _ui: UiFacade,
+    private _extensions: ExtensionsFacade
+  ) {}
 
   submitChanges() {
     this._changes.submitChanges();

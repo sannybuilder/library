@@ -13,6 +13,7 @@ export interface GameState {
   selectedExtensions?: string[];
   loading: boolean;
   entities?: Record<string, string[]>;
+  lastUpdate?: number;
 }
 export interface ExtensionsState {
   games: Partial<Record<Game, GameState>>;
@@ -29,9 +30,10 @@ const _reducer = createReducer(
       loading: true,
     })
   ),
-  on(loadExtensionsSuccess, (state, { game, extensions }) =>
+  on(loadExtensionsSuccess, (state, { game, extensions, lastUpdate }) =>
     updateState(state, game, {
       extensions,
+      lastUpdate,
       selectedExtensions: extensions.map((e) => e.name),
       entities: getEntities(extensions),
     })

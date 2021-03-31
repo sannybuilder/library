@@ -62,11 +62,6 @@ export const opcodeOnLoad = createSelector(state, (state: UiState) => ({
 
 export const game = createSelector(state, (state: UiState) => state.game);
 
-export const lastUpdate = createSelector(
-  state,
-  (state: UiState) => state.lastUpdate
-);
-
 export const supportInfo = createSelector(
   state,
   (state: UiState) => state.supportInfo

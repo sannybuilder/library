@@ -7,6 +7,7 @@ import {
   distinctUntilChanged,
   concatMap,
   take,
+  map,
 } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 
@@ -21,7 +22,6 @@ import { ExtensionsFacade } from './facade';
 import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
 import { GameLibrary, GameSupportInfo } from '../../models';
-import { updateLastUpdateTime } from '../ui/actions';
 import { getSameCommands, isAnyAttributeInvalid } from '../../utils';
 
 @Injectable({ providedIn: 'root' })
@@ -33,10 +33,9 @@ export class ExtensionsEffects {
         this.service
           .loadExtensions(game)
           .pipe(
-            switchMap(({ extensions, lastUpdate }) => [
-              loadExtensionsSuccess({ game, extensions }),
-              updateLastUpdateTime({ lastUpdate }),
-            ])
+            map(({ extensions, lastUpdate }) =>
+              loadExtensionsSuccess({ game, extensions, lastUpdate })
+            )
           )
       )
     )

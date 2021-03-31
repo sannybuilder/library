@@ -8,7 +8,6 @@ import {
   updateSearchTerm,
   onListEnter,
   displayOrEditSnippet,
-  updateLastUpdateTime,
   loadSupportInfoSuccess,
 } from './actions';
 import { without } from 'lodash';
@@ -26,7 +25,6 @@ export interface UiState {
   game?: Game;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
-  lastUpdate?: number;
   supportInfo?: SupportInfo;
 }
 
@@ -86,10 +84,6 @@ const _reducer = createReducer(
     game,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
-  })),
-  on(updateLastUpdateTime, (state, { lastUpdate }) => ({
-    ...state,
-    lastUpdate,
   })),
   on(loadSupportInfoSuccess, (state, { supportInfo }) => ({
     ...state,

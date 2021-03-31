@@ -38,3 +38,8 @@ export const entities = createSelector(
   (state: GameState, props: { extension: string }) =>
     state.entities?.[props.extension] ?? []
 );
+
+export const lastUpdate = createSelector(
+  state,
+  (state: GameState) => state.lastUpdate
+);

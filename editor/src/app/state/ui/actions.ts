@@ -38,11 +38,6 @@ export const onListEnter = createAction(
   props<{ game: Game; opcode: string; extension: string }>()
 );
 
-export const updateLastUpdateTime = createAction(
-  'update last update time',
-  props<{ lastUpdate: number }>()
-);
-
 export const loadSupportInfo = createAction(
   'load support info',
   props<{ game: Game }>()

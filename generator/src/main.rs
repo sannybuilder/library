@@ -28,13 +28,14 @@ struct Attr {
 struct Param {
     r#type: String,
     r#name: String,
+    r#source: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Command {
     id: String,
     name: String,
-    attrs: Attr,
+    attrs: Option<Attr>,
     num_params: i32,
     input: Option<Vec<Param>>,
     output: Option<Vec<Param>>,
@@ -130,10 +131,9 @@ fn generate_classes() -> Result<()> {
 
         let map = classes_list.get_mut(&class_name).unwrap();
 
-        let is_condition = if command.attrs.is_condition.is_some() {
-            1
-        } else {
-            0
+        let is_condition = match command.attrs.as_ref() {
+            Some(attr) if attr.is_condition.is_some() => 1,
+            _ => 0,
         };
 
         let params: Vec<String> = command

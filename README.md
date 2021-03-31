@@ -12,7 +12,7 @@ Discuss: https://github.com/sannybuilder/dev/discussions/136
 
 ## Library Features
 
-- Offers the complete list of script commands for GTA III and Vice City in a keyword or class form in addition to the native name
+- Offers the complete list of script commands for GTA III and Vice City (SA in progress!) in a keyword or class form in addition to the native name
 - Describes the specifics of each command using extra attributes
 - Is aware of Sanny's Language Extensions
 - Is able to filter commands by attributes or using a search query

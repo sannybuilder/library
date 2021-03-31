@@ -6,6 +6,7 @@ import {
   map,
   switchMap,
   take,
+  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
@@ -39,6 +40,18 @@ export class ChangesEffects {
       ),
       map(() => submitChangesSuccess())
     )
+  );
+
+  submitChangesSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(submitChangesSuccess),
+        tap(() => {
+          // reloading page to ensure we pull the latest files
+          window.location.reload();
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(

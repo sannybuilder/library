@@ -6,7 +6,7 @@ const IS_UNSUPPORTED = -1;
 const IS_SUPPORTED = 1;
 const HAS_DIFF_PARAMS = 2;
 
-const games = ["gta3", "vc"];
+const games = ["gta3", "vc", "sa"];
 
 const sources = games.map((game) => {
   const source = readFileSync(join("..", game, `${game}.json`), {

@@ -58,10 +58,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this._extensions.loadExtensions(Game.GTA3);
-    this._extensions.loadExtensions(Game.VC);
-    this._snippets.loadSnippets(Game.GTA3);
-    this._snippets.loadSnippets(Game.VC);
+    [Game.GTA3, Game.VC, Game.SA].forEach((game) => {
+      this._extensions.loadExtensions(game);
+      this._snippets.loadSnippets(game);
+    });
   }
 
   ngOnDestroy() {

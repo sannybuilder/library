@@ -76,31 +76,37 @@ export interface ExtensionSnippets {
 export enum Game {
   GTA3 = 'gta3',
   VC = 'vc',
+  SA = 'sa',
 }
 
 export const GameIcon: Record<Game, string> = {
   [Game.GTA3]: 'assets/gta3.png',
   [Game.VC]: 'assets/vc.png',
+  [Game.SA]: 'assets/sa.png',
 };
 
 export const GameClasses: Record<Game, string> = {
   [Game.GTA3]: 'assets/gta3/classes.db',
   [Game.VC]: 'assets/vc/classes.db',
+  [Game.SA]: 'assets/sa/classes.db',
 };
 
 export const GameLibrary: Record<Game, string> = {
   [Game.GTA3]: 'gta3/gta3.json',
   [Game.VC]: 'vc/vc.json',
+  [Game.SA]: 'sa/sa.json',
 };
 
 export const GameSnippets: Record<Game, string> = {
   [Game.GTA3]: 'gta3/snippets.json',
   [Game.VC]: 'vc/snippets.json',
+  [Game.SA]: 'sa/snippets.json',
 };
 
 export const GameTitle: Record<Game, string> = {
   [Game.GTA3]: 'GTA III',
   [Game.VC]: 'Vice City',
+  [Game.SA]: 'San Andreas',
 };
 
 export const DEFAULT_EXTENSION = 'default';

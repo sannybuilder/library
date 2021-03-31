@@ -68,4 +68,7 @@ function getGame(game: string): Game {
   if (game === 'vc') {
     return Game.VC;
   }
+  if (game === 'sa') {
+    return Game.SA;
+  }
 }

@@ -15,29 +15,21 @@
               <span class="align-middle pl-1">Home</span></a
             >
           </li>
-          <li class="nav-item">
+          <li
+            class="nav-item"
+            *ngFor="let game of [Game.GTA3, Game.VC, Game.SA]"
+          >
             <a
               routerLinkActive="active"
-              routerLink="/gta3"
+              [routerLink]="['/', game]"
               class="nav-link d-inline-block"
               aria-current="page"
             >
-              <scl-icon game="gta3" class="d-none d-sm-inline-block"></scl-icon>
-              <span class="align-middle pl-1">{{
-                Game.GTA3 | gameTitle
-              }}</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              routerLinkActive="active"
-              routerLink="/vc"
-              class="nav-link d-inline-block"
-              aria-current="page"
-              ><scl-icon game="vc" class="d-none d-sm-inline-block"></scl-icon>
-              <span class="align-middle pl-1">{{
-                Game.VC | gameTitle
-              }}</span></a
+              <scl-icon
+                [game]="game"
+                class="d-none d-sm-inline-block"
+              ></scl-icon>
+              <span class="align-middle pl-1">{{ game | gameTitle }}</span></a
             >
           </li>
         </ul>

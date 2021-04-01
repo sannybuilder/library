@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Game, SupportInfo, ViewMode } from '../../models';
+import { Command, Game, SupportInfo, ViewMode, Attribute } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
@@ -9,6 +9,7 @@ import {
   onListEnter,
   displayOrEditSnippet,
   loadSupportInfoSuccess,
+  changePage,
 } from './actions';
 import { without } from 'lodash';
 
@@ -16,8 +17,8 @@ export interface UiState {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
-  selectedFiltersOnly: string[];
-  selectedFiltersExcept: string[];
+  selectedFiltersOnly: Attribute[];
+  selectedFiltersExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
@@ -26,6 +27,7 @@ export interface UiState {
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
   supportInfo?: SupportInfo;
+  currentPage: number;
 }
 
 export const initialState: UiState = {
@@ -34,6 +36,7 @@ export const initialState: UiState = {
   viewMode: ViewMode.None,
   selectedFiltersOnly: [],
   selectedFiltersExcept: ['is_nop', 'is_unsupported'],
+  currentPage: 1,
 };
 
 const _reducer = createReducer(
@@ -88,6 +91,10 @@ const _reducer = createReducer(
   on(loadSupportInfoSuccess, (state, { supportInfo }) => ({
     ...state,
     supportInfo,
+  })),
+  on(changePage, (state, { index: currentPage }) => ({
+    ...state,
+    currentPage,
   }))
 );
 

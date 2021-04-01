@@ -1,5 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Command, Game, Modifier, SupportInfo, ViewMode } from '../../models';
+import {
+  Attribute,
+  Command,
+  Game,
+  Modifier,
+  SupportInfo,
+  ViewMode,
+} from '../../models';
 
 export const toggleExtension = createAction(
   'toggle extension selection',
@@ -8,7 +15,7 @@ export const toggleExtension = createAction(
 
 export const toggleFilter = createAction(
   'toggle filter selection',
-  props<{ filter: string; modifier: Modifier }>()
+  props<{ filter: Attribute; modifier: Modifier }>()
 );
 
 export const updateSearchTerm = createAction(
@@ -46,4 +53,9 @@ export const loadSupportInfo = createAction(
 export const loadSupportInfoSuccess = createAction(
   'load support info success',
   props<{ supportInfo: SupportInfo }>()
+);
+
+export const changePage = createAction(
+  'change page',
+  props<{ index: number }>()
 );

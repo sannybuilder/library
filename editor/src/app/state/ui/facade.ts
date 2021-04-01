@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Command, Game, Modifier, ViewMode } from '../../models';
+import { Attribute, Command, Game, Modifier, ViewMode } from '../../models';
 import {
   toggleExtension,
   updateSearchTerm,
@@ -10,6 +10,7 @@ import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
   onListEnter,
+  changePage,
 } from './actions';
 import * as selector from './selectors';
 
@@ -21,6 +22,7 @@ export class UiFacade {
   selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
   supportInfo$ = this.store$.select(selector.supportInfo);
+  currentPage$ = this.store$.select(selector.currentPage);
 
   game$ = this.store$
     .select(selector.game)
@@ -36,7 +38,7 @@ export class UiFacade {
     filter((a) => !!a.extension)
   );
 
-  getFilterCheckedState(filter: string, modifier: Modifier) {
+  getFilterCheckedState(filter: Attribute, modifier: Modifier) {
     return this.store$.select(
       modifier === 'only'
         ? selector.isFilterSelectedOnly
@@ -58,7 +60,7 @@ export class UiFacade {
     this.store$.dispatch(toggleExtension({ extension }));
   }
 
-  toggleFilter(filter: string, modifier: Modifier) {
+  toggleFilter(filter: Attribute, modifier: Modifier) {
     this.store$.dispatch(toggleFilter({ filter, modifier }));
   }
 
@@ -88,5 +90,9 @@ export class UiFacade {
 
   onListEnter(game: Game, opcode: string, extension: string) {
     this.store$.dispatch(onListEnter({ game, opcode, extension }));
+  }
+
+  changePage(index: number) {
+    this.store$.dispatch(changePage({ index }));
   }
 }

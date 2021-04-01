@@ -13,7 +13,6 @@ import {
   ClassParamsPipe,
   KeywordParamsPipe,
   OpcodePipe,
-  AttrFilterPipe,
   GameTitlePipe,
   ParametrifyPipe,
   InputParamsPipe,
@@ -42,7 +41,7 @@ import { ChangesEffects } from './state/changes/effects';
 import { uiReducer } from './state/ui/reducer';
 import { UiEffects } from './state/ui/effects';
 
-import { FusejsPipe, HlPropPipe } from './fusejs';
+import { HlPropPipe } from './fusejs';
 import { ConfigModule } from './config';
 
 import { AppComponent } from './app.component';
@@ -61,6 +60,7 @@ import { FilterPanelComponent } from './components/filter-panel/filter-panel.com
 import { ModalComponent } from './components/modal/modal.component';
 import { IconComponent } from './components/icon/icon.component';
 import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -69,8 +69,6 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
     ClassParamsPipe,
     KeywordParamsPipe,
     OpcodePipe,
-    FusejsPipe,
-    AttrFilterPipe,
     GameTitlePipe,
     ParametrifyPipe,
     InputParamsPipe,
@@ -90,6 +88,7 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
     IconComponent,
     SupportedGamesComponent,
     AttrTitlePipe,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,20 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { combineLatest, of, timer, zip } from 'rxjs';
-import { debounce, filter, map, switchMap, tap } from 'rxjs/operators';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
+import { combineLatest, of, Subject, timer, zip } from 'rxjs';
+import {
+  debounce,
+  filter,
+  map,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 import { flatMap } from 'lodash';
 import { Attribute, Command, Game } from '../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
@@ -11,7 +25,7 @@ import { search } from '../../fusejs/fusejs';
   templateUrl: './command-list.component.html',
   styleUrls: ['./command-list.component.scss'],
 })
-export class CommandListComponent {
+export class CommandListComponent implements AfterViewInit, OnDestroy {
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
@@ -23,6 +37,8 @@ export class CommandListComponent {
     command: Command;
     extension: string;
   }> = new EventEmitter();
+
+  onDestroy$ = new Subject();
 
   loading$ = this._extensions.loading$;
   selectedFiltersOnly$ = this._ui.selectedFiltersOnly$;
@@ -74,6 +90,22 @@ export class CommandListComponent {
     private _snippets: SnippetsFacade,
     private _ui: UiFacade
   ) {}
+
+  ngAfterViewInit() {
+    this.rows$
+      .pipe(
+        takeUntil(this.onDestroy$),
+        tap(() => {
+          this._ui.changePage(1);
+        })
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
 
   isExtensionChecked(extension: string) {
     return this._extensions.getExtensionCheckedState(extension);

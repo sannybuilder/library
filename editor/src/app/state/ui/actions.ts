@@ -8,11 +8,6 @@ import {
   ViewMode,
 } from '../../models';
 
-export const toggleExtension = createAction(
-  'toggle extension selection',
-  props<{ extension: string }>()
-);
-
 export const toggleFilter = createAction(
   'toggle filter selection',
   props<{ filter: Attribute; modifier: Modifier }>()

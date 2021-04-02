@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { Attribute, Command, Game, Modifier, ViewMode } from '../../models';
 import {
-  toggleExtension,
   updateSearchTerm,
   toggleCommandListElements,
   toggleFilter,
@@ -55,10 +54,6 @@ export class UiFacade {
   }
 
   constructor(private store$: Store) {}
-
-  toggleExtension(extension: string) {
-    this.store$.dispatch(toggleExtension({ extension }));
-  }
 
   toggleFilter(filter: Attribute, modifier: Modifier) {
     this.store$.dispatch(toggleFilter({ filter, modifier }));

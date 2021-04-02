@@ -1,20 +1,26 @@
-<nav aria-label="Page navigation example">
+<nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
     <li class="page-item" [ngClass]="{ disabled: currentPage < 2 }">
-      <a
-        class="page-link"
-        href="#"
-        tabindex="-1"
-        (click)="selectPage(currentPage - 1)"
+      <a class="page-link" href="#" (click)="selectPage(currentPage - 1)"
         >Previous</a
       >
     </li>
     <li
       class="page-item"
       *ngFor="let page of pages"
-      [ngClass]="{ active: currentPage === page }"
+      [ngClass]="{
+        active: currentPage === page
+      }"
     >
-      <a class="page-link" href="#" (click)="selectPage(page)">{{ page }}</a>
+      <a
+        class="page-link"
+        [ngClass]="{
+          'bg-dark': currentPage === page
+        }"
+        href="#"
+        (click)="selectPage(page)"
+        >{{ page }}</a
+      >
     </li>
     <li class="page-item" [ngClass]="{ disabled: currentPage >= pages.length }">
       <a class="page-link" href="#" (click)="selectPage(currentPage + 1)"

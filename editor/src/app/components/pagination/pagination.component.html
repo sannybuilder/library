@@ -1,7 +1,10 @@
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
-    <li class="page-item" [ngClass]="{ disabled: currentPage < 2 }">
-      <a class="page-link" href="#" (click)="selectPage(currentPage - 1)"
+    <li
+      class="page-item"
+      [ngClass]="{ disabled: currentPage < 2 || currentPage === 'all' }"
+    >
+      <a class="page-link" href="#" (click)="selectPage(+currentPage - 1)"
         >Previous</a
       >
     </li>
@@ -22,9 +25,30 @@
         >{{ page }}</a
       >
     </li>
-    <li class="page-item" [ngClass]="{ disabled: currentPage >= pages.length }">
-      <a class="page-link" href="#" (click)="selectPage(currentPage + 1)"
+    <li
+      class="page-item"
+      [ngClass]="{
+        disabled: currentPage >= pages.length || currentPage === 'all'
+      }"
+    >
+      <a class="page-link" href="#" (click)="selectPage(+currentPage + 1)"
         >Next</a
+      >
+    </li>
+
+    <li
+      class="page-item"
+      *ngIf="pages.length > 1"
+      [ngClass]="{ disabled: pages.length <= 1, active: currentPage === 'all' }"
+    >
+      <a
+        class="page-link"
+        [ngClass]="{
+          'bg-dark': currentPage === 'all'
+        }"
+        href="#"
+        (click)="selectPage('all')"
+        >All</a
       >
     </li>
   </ul>

@@ -27,7 +27,7 @@ export interface UiState {
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
   supportInfo?: SupportInfo;
-  currentPage: number;
+  currentPage: number | 'all';
 }
 
 export const initialState: UiState = {

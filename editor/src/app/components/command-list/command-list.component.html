@@ -4,7 +4,11 @@
       class="row mb-3"
       *ngFor="
         let row of rows
-          | slice: (currentPage - 1) * 100:(currentPage - 1) * 100 + 100
+          | slice
+            : (currentPage === 'all' ? 0 : (currentPage - 1) * 100)
+            : (currentPage === 'all'
+                ? rows.length
+                : (currentPage - 1) * 100 + 100)
       "
     >
       <div class="col-12">

@@ -52,5 +52,5 @@ export const loadSupportInfoSuccess = createAction(
 
 export const changePage = createAction(
   'change page',
-  props<{ index: number }>()
+  props<{ index: number | 'all' }>()
 );

@@ -14,14 +14,14 @@ export class PaginationComponent {
     this._pages = chunk({ length }, this.pageSize).map((_, i) => i + 1);
   }
 
-  @Input() currentPage = 1;
-  @Output() pageChange: EventEmitter<number> = new EventEmitter();
+  @Input() currentPage: number | 'all' = 1;
+  @Output() pageChange: EventEmitter<number | 'all'> = new EventEmitter();
 
   get pages() {
     return this._pages;
   }
 
-  selectPage(index: number) {
+  selectPage(index: number | 'all') {
     this.pageChange.emit(index);
     return false;
   }

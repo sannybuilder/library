@@ -72,3 +72,8 @@ export const commandSupportInfo = createSelector(
   (supportInfo: SupportInfo, props: { command: Command; extension: string }) =>
     supportInfo?.[props.extension]?.[props.command.id]
 );
+
+export const currentPage = createSelector(
+  state,
+  (state: UiState) => state.currentPage
+);

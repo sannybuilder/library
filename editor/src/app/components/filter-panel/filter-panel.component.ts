@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommandAttributes, Game, Modifier } from '../../models';
+import { Attribute, CommandAttributes, Game, Modifier } from '../../models';
 import { ExtensionsFacade, UiFacade } from '../../state';
 
 @Component({
@@ -23,11 +23,11 @@ export class FilterPanelComponent {
     return this._extensions.getExtensionCheckedState(extension);
   }
 
-  toggleFilter(filter: string, modifier: Modifier) {
+  toggleFilter(filter: Attribute, modifier: Modifier) {
     this._ui.toggleFilter(filter, modifier);
   }
 
-  isFilterChecked(filter: string, modifier: Modifier) {
+  isFilterChecked(filter: Attribute, modifier: Modifier) {
     return this._ui.getFilterCheckedState(filter, modifier);
   }
 }

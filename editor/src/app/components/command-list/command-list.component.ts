@@ -1,16 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { timer } from 'rxjs';
-import { debounce } from 'rxjs/operators';
-
-import { Command, Game } from '../../models';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
+import { combineLatest, of, Subject, timer, zip } from 'rxjs';
+import {
+  debounce,
+  filter,
+  map,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
+import { flatMap } from 'lodash';
+import { Attribute, Command, Game } from '../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
+import { search } from '../../fusejs/fusejs';
 
 @Component({
   selector: 'scl-command-list',
   templateUrl: './command-list.component.html',
   styleUrls: ['./command-list.component.scss'],
 })
-export class CommandListComponent {
+export class CommandListComponent implements AfterViewInit, OnDestroy {
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
@@ -23,17 +38,74 @@ export class CommandListComponent {
     extension: string;
   }> = new EventEmitter();
 
-  extensions$ = this._extensions.extensions$;
+  onDestroy$ = new Subject();
+
   loading$ = this._extensions.loading$;
   selectedFiltersOnly$ = this._ui.selectedFiltersOnly$;
   selectedFiltersExcept$ = this._ui.selectedFiltersExcept$;
   searchTerm$ = this._ui.searchTerm$.pipe(debounce(() => timer(500)));
+  currentPage$ = this._ui.currentPage$;
+
+  rows$ = combineLatest([
+    this._extensions.extensions$.pipe(
+      filter((extensions) => !!extensions),
+      switchMap((extensions) =>
+        zip(...extensions.map((e) => this.isExtensionChecked(e.name))).pipe(
+          switchMap((state) => of(extensions.filter((_, i) => state[i])))
+        )
+      )
+    ),
+    this.selectedFiltersOnly$,
+    this.selectedFiltersExcept$,
+    this.searchTerm$,
+  ]).pipe(
+    switchMap(
+      ([
+        extensions,
+        selectedFiltersOnly,
+        selectedFiltersExcept,
+        searchTerm,
+      ]) => {
+        return of(
+          flatMap(extensions, ({ name: extension, commands }) => {
+            const filtered = this.filterCommands(
+              commands,
+              selectedFiltersOnly,
+              selectedFiltersExcept
+            );
+            return search(filtered, searchTerm).map((command) => ({
+              extension,
+              command,
+            }));
+          })
+        );
+      }
+    )
+  );
+
+  rowsCount$ = this.rows$.pipe(map((rows) => rows.length));
 
   constructor(
     private _extensions: ExtensionsFacade,
     private _snippets: SnippetsFacade,
     private _ui: UiFacade
   ) {}
+
+  ngAfterViewInit() {
+    this.rows$
+      .pipe(
+        takeUntil(this.onDestroy$),
+        tap(() => {
+          this._ui.changePage(1);
+        })
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
 
   isExtensionChecked(extension: string) {
     return this._extensions.getExtensionCheckedState(extension);
@@ -55,5 +127,21 @@ export class CommandListComponent {
 
   getCommandSupportInfo(command: Command, extension: string) {
     return this._ui.getCommandSupportInfo(command, extension);
+  }
+
+  pageChange(index: number) {
+    this._ui.changePage(index);
+  }
+
+  private filterCommands(
+    elements: Command[],
+    only: Attribute[],
+    except: Attribute[]
+  ) {
+    return elements.filter(
+      (element) =>
+        only.every((attr) => element.attrs?.[attr]) &&
+        !except.some((attr) => element.attrs?.[attr])
+    );
   }
 }

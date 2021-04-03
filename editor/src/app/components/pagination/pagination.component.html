@@ -4,34 +4,28 @@
       class="page-item"
       [ngClass]="{ disabled: currentPage < 2 || currentPage === 'all' }"
     >
-      <a class="page-link" href="#" (click)="selectPage(+currentPage - 1)"
+      <a
+        class="page-link"
+        routerLink="./"
+        [queryParams]="{ p: +currentPage - 1 }"
         >Previous</a
       >
     </li>
-    <li
-      class="page-item"
-      *ngFor="let page of pages"
-      [ngClass]="{
-        active: currentPage === page
-      }"
-    >
-      <a
-        class="page-link"
-        [ngClass]="{
-          'bg-dark': currentPage === page
-        }"
-        href="#"
-        (click)="selectPage(page)"
-        >{{ page }}</a
-      >
-    </li>
+
+    <ng-container
+      *ngIf="pages.length <= 7; then full; else partial"
+    ></ng-container>
+
     <li
       class="page-item"
       [ngClass]="{
         disabled: currentPage >= pages.length || currentPage === 'all'
       }"
     >
-      <a class="page-link" href="#" (click)="selectPage(+currentPage + 1)"
+      <a
+        class="page-link"
+        routerLink="./"
+        [queryParams]="{ p: +currentPage + 1 }"
         >Next</a
       >
     </li>
@@ -46,10 +40,97 @@
         [ngClass]="{
           'bg-dark': currentPage === 'all'
         }"
-        href="#"
-        (click)="selectPage('all')"
+        routerLink="./"
+        [queryParams]="{ p: 'all' }"
         >All</a
       >
     </li>
   </ul>
 </nav>
+
+<ng-template #full>
+  <ng-container
+    *ngFor="let page of pages"
+    [ngTemplateOutlet]="pageItem"
+    [ngTemplateOutletContext]="{ $implicit: page }"
+  ></ng-container>
+</ng-template>
+
+<ng-template #partial>
+  <ng-container *ngIf="currentPage <= 4 || currentPage === 'all'">
+    <!-- [1] 2 3 4 5 .. 100 -->
+    <ng-container
+      *ngFor="let page of pages | slice: 0:5"
+      [ngTemplateOutlet]="pageItem"
+      [ngTemplateOutletContext]="{ $implicit: page }"
+    ></ng-container>
+
+    <ng-container [ngTemplateOutlet]="dummy"></ng-container>
+
+    <ng-container
+      [ngTemplateOutlet]="pageItem"
+      [ngTemplateOutletContext]="{ $implicit: pages.length }"
+    ></ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="currentPage > pages.length - 4">
+    <!-- 1 .. 96 [97] 98 99 100 -->
+    <ng-container
+      [ngTemplateOutlet]="pageItem"
+      [ngTemplateOutletContext]="{ $implicit: 1 }"
+    ></ng-container>
+
+    <ng-container [ngTemplateOutlet]="dummy"></ng-container>
+
+    <ng-container
+      *ngFor="let page of pages | slice: pages.length - 5:pages.length"
+      [ngTemplateOutlet]="pageItem"
+      [ngTemplateOutletContext]="{ $implicit: page }"
+    ></ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="currentPage > 4 && currentPage <= pages.length - 4">
+    <!-- 1 .. 4 [5] 6 .. 100 -->
+    <ng-container
+      [ngTemplateOutlet]="pageItem"
+      [ngTemplateOutletContext]="{ $implicit: 1 }"
+    ></ng-container>
+    <ng-container [ngTemplateOutlet]="dummy"></ng-container>
+
+    <ng-container
+      *ngFor="let page of pages | slice: currentPage - 2:currentPage + 1"
+      [ngTemplateOutlet]="pageItem"
+      [ngTemplateOutletContext]="{ $implicit: page }"
+    ></ng-container>
+
+    <ng-container [ngTemplateOutlet]="dummy"></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="pageItem"
+      [ngTemplateOutletContext]="{ $implicit: pages.length }"
+    ></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #pageItem let-page>
+  <li
+    *ngIf="pages.length >= page"
+    class="page-item"
+    [ngClass]="{ active: currentPage === page }"
+  >
+    <a
+      class="page-link"
+      [ngClass]="{
+        'bg-dark': currentPage === page
+      }"
+      routerLink="./"
+      [queryParams]="{ p: page }"
+      >{{ page }}</a
+    >
+  </li>
+</ng-template>
+
+<ng-template #dummy>
+  <li class="page-item disabled">
+    <span class="page-link">..</span>
+  </li>
+</ng-template>

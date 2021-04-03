@@ -1,19 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
+  changePage,
   displayOrEditCommandInfo,
   displayOrEditSnippet,
   loadSupportInfo,
   loadSupportInfoSuccess,
   stopEditOrDisplay,
 } from './actions';
-import { filter, map, switchMap } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { ViewMode } from '../../models';
 import { combineLatest } from 'rxjs';
 import { loadExtensionsSuccess, updateCommand } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
 import { UiService } from './service';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterEvent,
+} from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -77,10 +90,23 @@ export class UiEffects {
     )
   );
 
+  pageEvents$ = createEffect(() =>
+    this._route.queryParams.pipe(
+      map((params) => {
+        const p = params?.p;
+        return p === 'all' ? p : +p;
+      }),
+      distinctUntilChanged(),
+      filter((p): p is number | 'all' => p === 'all' || +p > 0),
+      map((index) => changePage({ index }))
+    )
+  );
+
   constructor(
     private _actions$: Actions,
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
-    private _service: UiService
+    private _service: UiService,
+    private _route: ActivatedRoute
   ) {}
 }

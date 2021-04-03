@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
@@ -7,14 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { combineLatest, of, Subject, timer, zip } from 'rxjs';
-import {
-  debounce,
-  filter,
-  map,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs/operators';
+import { debounce, filter, map, switchMap } from 'rxjs/operators';
 import { flatMap } from 'lodash';
 import { Attribute, Command, Game } from '../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
@@ -25,7 +17,7 @@ import { search } from '../../fusejs/fusejs';
   templateUrl: './command-list.component.html',
   styleUrls: ['./command-list.component.scss'],
 })
-export class CommandListComponent implements AfterViewInit, OnDestroy {
+export class CommandListComponent implements OnDestroy {
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
@@ -91,17 +83,6 @@ export class CommandListComponent implements AfterViewInit, OnDestroy {
     private _ui: UiFacade
   ) {}
 
-  ngAfterViewInit() {
-    this.rows$
-      .pipe(
-        takeUntil(this.onDestroy$),
-        tap(() => {
-          this._ui.changePage(1);
-        })
-      )
-      .subscribe();
-  }
-
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();
@@ -127,10 +108,6 @@ export class CommandListComponent implements AfterViewInit, OnDestroy {
 
   getCommandSupportInfo(command: Command, extension: string) {
     return this._ui.getCommandSupportInfo(command, extension);
-  }
-
-  pageChange(index: number) {
-    this._ui.changePage(index);
   }
 
   private filterCommands(

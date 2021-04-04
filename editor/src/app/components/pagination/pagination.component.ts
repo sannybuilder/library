@@ -14,9 +14,17 @@ export class PaginationComponent {
     this._pages = chunk({ length }, this.pageSize).map((_, i) => i + 1);
   }
 
+  get total() {
+    return this.pages.length;
+  }
+
   @Input() currentPage: number | 'all' = 1;
 
   get pages() {
     return this._pages;
+  }
+
+  scrollTop() {
+    window.scrollTo(0, 0);
   }
 }

@@ -7,24 +7,26 @@
       <a
         class="page-link"
         routerLink="./"
+        (click)="scrollTop()"
         [queryParams]="{ p: +currentPage - 1 }"
         >Previous</a
       >
     </li>
 
     <ng-container
-      *ngIf="pages.length <= 7; then full; else partial"
+      *ngIf="total <= 7; then allPages; else compact"
     ></ng-container>
 
     <li
       class="page-item"
       [ngClass]="{
-        disabled: currentPage >= pages.length || currentPage === 'all'
+        disabled: currentPage >= total || currentPage === 'all'
       }"
     >
       <a
         class="page-link"
         routerLink="./"
+        (click)="scrollTop()"
         [queryParams]="{ p: +currentPage + 1 }"
         >Next</a
       >
@@ -32,8 +34,8 @@
 
     <li
       class="page-item"
-      *ngIf="pages.length > 1"
-      [ngClass]="{ disabled: pages.length <= 1, active: currentPage === 'all' }"
+      *ngIf="total > 1"
+      [ngClass]="{ disabled: total <= 1, active: currentPage === 'all' }"
     >
       <a
         class="page-link"
@@ -41,6 +43,7 @@
           'bg-dark': currentPage === 'all'
         }"
         routerLink="./"
+        (click)="scrollTop()"
         [queryParams]="{ p: 'all' }"
         >All</a
       >
@@ -48,7 +51,7 @@
   </ul>
 </nav>
 
-<ng-template #full>
+<ng-template #allPages>
   <ng-container
     *ngFor="let page of pages"
     [ngTemplateOutlet]="pageItem"
@@ -56,7 +59,7 @@
   ></ng-container>
 </ng-template>
 
-<ng-template #partial>
+<ng-template #compact>
   <ng-container *ngIf="currentPage <= 4 || currentPage === 'all'">
     <!-- [1] 2 3 4 5 .. 100 -->
     <ng-container
@@ -69,11 +72,11 @@
 
     <ng-container
       [ngTemplateOutlet]="pageItem"
-      [ngTemplateOutletContext]="{ $implicit: pages.length }"
+      [ngTemplateOutletContext]="{ $implicit: total }"
     ></ng-container>
   </ng-container>
 
-  <ng-container *ngIf="currentPage > pages.length - 4">
+  <ng-container *ngIf="currentPage > total - 4">
     <!-- 1 .. 96 [97] 98 99 100 -->
     <ng-container
       [ngTemplateOutlet]="pageItem"
@@ -83,13 +86,13 @@
     <ng-container [ngTemplateOutlet]="dummy"></ng-container>
 
     <ng-container
-      *ngFor="let page of pages | slice: pages.length - 5:pages.length"
+      *ngFor="let page of pages | slice: -5"
       [ngTemplateOutlet]="pageItem"
       [ngTemplateOutletContext]="{ $implicit: page }"
     ></ng-container>
   </ng-container>
 
-  <ng-container *ngIf="currentPage > 4 && currentPage <= pages.length - 4">
+  <ng-container *ngIf="currentPage > 4 && currentPage <= total - 4">
     <!-- 1 .. 4 [5] 6 .. 100 -->
     <ng-container
       [ngTemplateOutlet]="pageItem"
@@ -106,14 +109,14 @@
     <ng-container [ngTemplateOutlet]="dummy"></ng-container>
     <ng-container
       [ngTemplateOutlet]="pageItem"
-      [ngTemplateOutletContext]="{ $implicit: pages.length }"
+      [ngTemplateOutletContext]="{ $implicit: total }"
     ></ng-container>
   </ng-container>
 </ng-template>
 
 <ng-template #pageItem let-page>
   <li
-    *ngIf="pages.length >= page"
+    *ngIf="total >= page"
     class="page-item"
     [ngClass]="{ active: currentPage === page }"
   >
@@ -123,6 +126,7 @@
         'bg-dark': currentPage === page
       }"
       routerLink="./"
+      (click)="scrollTop()"
       [queryParams]="{ p: page }"
       >{{ page }}</a
     >

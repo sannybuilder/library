@@ -23,8 +23,4 @@ export class PaginationComponent {
   get pages() {
     return this._pages;
   }
-
-  scrollTop() {
-    window.scrollTo(0, 0);
-  }
 }

@@ -35,4 +35,9 @@ export class HeaderComponent {
     this._auth.logout();
     return false;
   }
+
+  scrollTop() {
+    this._ui.scrollTop();
+    return false;
+  }
 }

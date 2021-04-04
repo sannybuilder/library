@@ -15,8 +15,15 @@ export class AppComponent {
     const classList = this._d.body.classList;
     const scrollUp = 'scroll-up';
     const scrollDown = 'scroll-down';
+    const scrolledDown = 'scrolled-down';
 
     const currentScroll = window.pageYOffset;
+    if (currentScroll > 53) {
+      classList.add(scrolledDown);
+    } else {
+      classList.remove(scrolledDown);
+    }
+
     if (currentScroll <= 0) {
       classList.remove(scrollUp);
       return;

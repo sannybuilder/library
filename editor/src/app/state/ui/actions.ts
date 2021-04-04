@@ -54,3 +54,5 @@ export const changePage = createAction(
   'change page',
   props<{ index: number | 'all' }>()
 );
+
+export const scrollTop = createAction('scroll top');

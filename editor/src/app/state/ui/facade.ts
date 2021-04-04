@@ -10,6 +10,7 @@ import {
   stopEditOrDisplay,
   onListEnter,
   changePage,
+  scrollTop,
 } from './actions';
 import * as selector from './selectors';
 
@@ -89,5 +90,9 @@ export class UiFacade {
 
   changePage(index: number) {
     this.store$.dispatch(changePage({ index }));
+  }
+
+  scrollTop() {
+    this.store$.dispatch(scrollTop());
   }
 }

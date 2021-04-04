@@ -7,6 +7,7 @@ import {
   displayOrEditSnippet,
   loadSupportInfo,
   loadSupportInfoSuccess,
+  scrollTop,
   stopEditOrDisplay,
   toggleFilter,
   updateSearchTerm,
@@ -99,7 +100,7 @@ export class UiEffects {
       }),
       distinctUntilChanged(),
       filter((p): p is number | 'all' => p === 'all' || +p > 0),
-      map((index) => changePage({ index }))
+      switchMap((index) => [changePage({ index }), scrollTop()])
     )
   );
 
@@ -118,6 +119,17 @@ export class UiEffects {
     {
       dispatch: false,
     }
+  );
+
+  scrollTop$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(scrollTop),
+        tap(() => {
+          window.scroll(0, 0);
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(

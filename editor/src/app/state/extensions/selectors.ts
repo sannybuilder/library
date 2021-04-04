@@ -29,8 +29,13 @@ export const loading = createSelector(
 
 export const selectedExtensions = createSelector(
   state,
-  (state: GameState, props: { extension: string }) =>
-    state.selectedExtensions.includes(props.extension)
+  (state: GameState) => state.selectedExtensions
+);
+
+export const isExtensionSelected = createSelector(
+  selectedExtensions,
+  (selectedExtensions: string[], props: { extension: string }) =>
+    selectedExtensions?.includes(props.extension)
 );
 
 export const entities = createSelector(

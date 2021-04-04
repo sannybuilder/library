@@ -16,7 +16,7 @@ export class ExtensionsFacade {
   lastUpdate$ = this.store$.select(selector.lastUpdate);
 
   getExtensionCheckedState(extension: string) {
-    return this.store$.select(selector.selectedExtensions, {
+    return this.store$.select(selector.isExtensionSelected, {
       extension,
     });
   }

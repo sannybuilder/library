@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Game } from '../../models';
-import { ExtensionsFacade, UiFacade, AuthFacade } from '../../state';
+import { UiFacade, AuthFacade } from '../../state';
 
 @Component({
   selector: 'scl-header',
@@ -9,17 +9,13 @@ import { ExtensionsFacade, UiFacade, AuthFacade } from '../../state';
 })
 export class HeaderComponent {
   Game = Game;
-  searchTerm: string = '';
+  searchTerm = '';
   displaySearchBar$ = this._ui.displaySearchBar$;
   isAuthorized$ = this._auth.isAuthorized$;
   avatarUrl$ = this._auth.avatarUrl$;
   userName$ = this._auth.userName$;
 
-  constructor(
-    private _extensions: ExtensionsFacade,
-    private _auth: AuthFacade,
-    private _ui: UiFacade
-  ) {}
+  constructor(private _auth: AuthFacade, private _ui: UiFacade) {}
 
   onSearchUpdate(term: string) {
     this._ui.updateSearch(term);

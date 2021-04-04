@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   changePage,
@@ -7,6 +8,8 @@ import {
   loadSupportInfo,
   loadSupportInfoSuccess,
   stopEditOrDisplay,
+  toggleFilter,
+  updateSearchTerm,
 } from './actions';
 import {
   distinctUntilChanged,
@@ -18,15 +21,13 @@ import {
 import { UiFacade } from './facade';
 import { ViewMode } from '../../models';
 import { combineLatest } from 'rxjs';
-import { loadExtensionsSuccess, updateCommand } from '../extensions/actions';
+import {
+  loadExtensionsSuccess,
+  toggleExtension,
+  updateCommand,
+} from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
 import { UiService } from './service';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterEvent,
-} from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -102,11 +103,29 @@ export class UiEffects {
     )
   );
 
+  resetPagination$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(toggleFilter, toggleExtension, updateSearchTerm),
+        tap(() => {
+          const [url] = this._router.url.split('?');
+          this._router.navigate([url], {
+            queryParams: { p: 1 },
+            queryParamsHandling: 'merge',
+          });
+        })
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
   constructor(
     private _actions$: Actions,
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
     private _service: UiService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) {}
 }

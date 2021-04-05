@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   changePage,
@@ -24,6 +24,8 @@ import {
 import { SnippetsFacade } from '../snippets/facade';
 import { UiService } from './service';
 import { ExtensionsFacade } from '../extensions/facade';
+import { ChangesFacade } from '../changes/facade';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -120,11 +122,26 @@ export class UiEffects {
     { dispatch: false }
   );
 
+  changesCount$ = createEffect(
+    () =>
+      this._changes.changesCount$.pipe(
+        tap((changesCount) => {
+          this._d.body.classList[changesCount > 0 ? 'add' : 'remove'](
+            'has-unsubmitted-changes'
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private _actions$: Actions,
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
     private _service: UiService,
-    private _extensions: ExtensionsFacade
+    private _extensions: ExtensionsFacade,
+    private _changes: ChangesFacade,
+
+    @Inject(DOCUMENT) private _d: Document
   ) {}
 }

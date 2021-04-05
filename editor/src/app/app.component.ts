@@ -18,6 +18,8 @@ export class AppComponent {
     const scrolledDown = 'scrolled-down';
 
     const currentScroll = window.pageYOffset;
+
+    // go to top link
     if (currentScroll > 53) {
       classList.add(scrolledDown);
     } else {

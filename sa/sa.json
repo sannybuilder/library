@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1617645677667
+    "last_update": 1617655403493
   },
   "extensions": [
     {
@@ -31077,8 +31077,8 @@
           "short_desc": "Gets the objects quaternion",
           "input": [
             {
-              "name": "objectHandle",
-              "type": "any"
+              "name": "handle",
+              "type": "Object"
             },
             {
               "name": "x",
@@ -31111,8 +31111,8 @@
           "short_desc": "Sets the objects quaternion",
           "input": [
             {
-              "name": "objectHandle",
-              "type": "any"
+              "name": "handle",
+              "type": "Object"
             },
             {
               "name": "x",
@@ -32336,14 +32336,17 @@
           "short_desc": "Gets the characters active ped event",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "eventID",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "member": "GetHighestPriorityEvent",
+          "class": "Char"
         },
         {
           "id": "080F",
@@ -32570,14 +32573,16 @@
           "short_desc": "Sets whether the character shouldn't chase his victim far (to attempt a melee attack or get in weapon range)",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "member": "SetKindaStayInSamePlace",
+          "class": "Char"
         },
         {
           "id": "0817",
@@ -32606,10 +32611,15 @@
           "short_desc": "Returns true if the character is in the air",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "Char"
             }
-          ]
+          ],
+          "member": "IsInAir",
+          "class": "Char",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "0819",
@@ -32618,14 +32628,17 @@
           "short_desc": "Returns the actors distance from ground",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "GetHeightAboveGround"
         },
         {
           "id": "081A",

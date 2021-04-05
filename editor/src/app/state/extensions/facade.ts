@@ -14,6 +14,7 @@ export class ExtensionsFacade {
   extensionNames$ = this.store$.select(selector.extensionNames);
   loading$ = this.store$.select(selector.loading);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
+  rows$ = this.store$.select(selector.rows);
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selector.isExtensionSelected, {

@@ -4,10 +4,7 @@
       class="page-item"
       [ngClass]="{ disabled: currentPage < 2 || currentPage === 'all' }"
     >
-      <a
-        class="page-link"
-        routerLink="./"
-        [queryParams]="{ p: +currentPage - 1 }"
+      <a class="page-link" href="#" (click)="changePage(+currentPage - 1)"
         >&lt;</a
       >
     </li>
@@ -22,10 +19,7 @@
         disabled: currentPage >= total || currentPage === 'all'
       }"
     >
-      <a
-        class="page-link"
-        routerLink="./"
-        [queryParams]="{ p: +currentPage + 1 }"
+      <a class="page-link" href="#" (click)="changePage(+currentPage + 1)"
         >&gt;</a
       >
     </li>
@@ -40,8 +34,8 @@
         [ngClass]="{
           'bg-dark': currentPage === 'all'
         }"
-        routerLink="./"
-        [queryParams]="{ p: 'all' }"
+        href="#"
+        (click)="changePage('all')"
         >All</a
       >
     </li>
@@ -122,8 +116,8 @@
       [ngClass]="{
         'bg-dark': currentPage === page
       }"
-      routerLink="./"
-      [queryParams]="{ p: page }"
+      href="#"
+      (click)="changePage(page)"
       >{{ page }}</a
     >
   </li>

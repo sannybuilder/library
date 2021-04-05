@@ -1,6 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Extension, Game } from '../../models';
-import { game } from '../ui/selectors';
+import { flatMap } from 'lodash';
+import { search } from '../../fusejs/fusejs';
+import { Attribute, Command, Extension, Game } from '../../models';
+import {
+  game,
+  searchTerm,
+  selectedFiltersExcept,
+  selectedFiltersOnly,
+} from '../ui/selectors';
 import { ExtensionsState, GameState } from './reducer';
 
 export const gamesState = createFeatureSelector('extensions');
@@ -48,3 +55,44 @@ export const lastUpdate = createSelector(
   state,
   (state: GameState) => state.lastUpdate
 );
+
+export const rows = createSelector(
+  extensions,
+  selectedExtensions,
+  selectedFiltersOnly,
+  selectedFiltersExcept,
+  searchTerm,
+  (
+    extensions,
+    selectedExtensions,
+    selectedFiltersOnly,
+    selectedFiltersExcept,
+    searchTerm
+  ) => {
+    const selected = extensions?.filter((_, i) => selectedExtensions[i]);
+
+    return flatMap(selected, ({ name: extension, commands }) => {
+      const filtered = filterCommands(
+        commands,
+        selectedFiltersOnly,
+        selectedFiltersExcept
+      );
+      return search(filtered, searchTerm).map((command) => ({
+        extension,
+        command,
+      }));
+    });
+  }
+);
+
+function filterCommands(
+  elements: Command[],
+  only: Attribute[],
+  except: Attribute[]
+) {
+  return elements.filter(
+    (element) =>
+      only.every((attr) => element.attrs?.[attr]) &&
+      !except.some((attr) => element.attrs?.[attr])
+  );
+}

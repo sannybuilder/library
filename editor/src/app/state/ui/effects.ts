@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   changePage,
@@ -7,21 +6,16 @@ import {
   displayOrEditSnippet,
   loadSupportInfo,
   loadSupportInfoSuccess,
+  onListEnter,
   scrollTop,
   stopEditOrDisplay,
   toggleFilter,
   updateSearchTerm,
 } from './actions';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { filter, map, mapTo, switchMap, tap } from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { ViewMode } from '../../models';
-import { combineLatest } from 'rxjs';
+import { combineLatest, merge } from 'rxjs';
 import {
   loadExtensionsSuccess,
   toggleExtension,
@@ -29,6 +23,7 @@ import {
 } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
 import { UiService } from './service';
+import { ExtensionsFacade } from '../extensions/facade';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -92,33 +87,26 @@ export class UiEffects {
     )
   );
 
-  pageEvents$ = createEffect(() =>
-    this._route.queryParams.pipe(
-      map((params) => {
-        const p = params?.p;
-        return p === 'all' ? p : +p;
-      }),
-      distinctUntilChanged(),
-      filter((p): p is number | 'all' => p === 'all' || +p > 0),
-      switchMap((index) => [changePage({ index }), scrollTop()])
-    )
+  resetPagination$ = createEffect(() =>
+    merge(
+      this._actions$.pipe(
+        ofType(toggleFilter, toggleExtension, updateSearchTerm)
+      ),
+      this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
+    ).pipe(mapTo(changePage({ index: 1 })))
   );
 
-  resetPagination$ = createEffect(
-    () =>
-      this._actions$.pipe(
-        ofType(toggleFilter, toggleExtension, updateSearchTerm),
-        tap(() => {
-          const [url] = this._router.url.split('?');
-          this._router.navigate([url], {
-            queryParams: { p: 1 },
-            queryParamsHandling: 'merge',
-          });
-        })
+  commandPage$ = createEffect(() =>
+    combineLatest([
+      this._extensions.rows$,
+      this._ui.commandToDisplayOrEdit$,
+    ]).pipe(
+      map(([rows, command]) =>
+        rows.findIndex((row) => row.command?.id === command.command?.id)
       ),
-    {
-      dispatch: false,
-    }
+      filter((index) => index >= 0),
+      map((index) => changePage({ index: Math.ceil((index + 1) / 100) }))
+    )
   );
 
   scrollTop$ = createEffect(
@@ -137,7 +125,6 @@ export class UiEffects {
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
     private _service: UiService,
-    private _route: ActivatedRoute,
-    private _router: Router
+    private _extensions: ExtensionsFacade
   ) {}
 }

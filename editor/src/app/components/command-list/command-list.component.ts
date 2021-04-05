@@ -5,12 +5,10 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
-import { combineLatest, of, Subject, timer, zip } from 'rxjs';
-import { debounce, filter, map, switchMap } from 'rxjs/operators';
-import { flatMap } from 'lodash';
-import { Attribute, Command, Game } from '../../models';
+import { Subject, timer } from 'rxjs';
+import { debounce, map } from 'rxjs/operators';
+import { Command, Game } from '../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
-import { search } from '../../fusejs/fusejs';
 
 @Component({
   selector: 'scl-command-list',
@@ -37,44 +35,7 @@ export class CommandListComponent implements OnDestroy {
   selectedFiltersExcept$ = this._ui.selectedFiltersExcept$;
   searchTerm$ = this._ui.searchTerm$.pipe(debounce(() => timer(500)));
   currentPage$ = this._ui.currentPage$;
-
-  rows$ = combineLatest([
-    this._extensions.extensions$.pipe(
-      filter((extensions) => !!extensions),
-      switchMap((extensions) =>
-        zip(...extensions.map((e) => this.isExtensionChecked(e.name))).pipe(
-          switchMap((state) => of(extensions.filter((_, i) => state[i])))
-        )
-      )
-    ),
-    this.selectedFiltersOnly$,
-    this.selectedFiltersExcept$,
-    this.searchTerm$,
-  ]).pipe(
-    switchMap(
-      ([
-        extensions,
-        selectedFiltersOnly,
-        selectedFiltersExcept,
-        searchTerm,
-      ]) => {
-        return of(
-          flatMap(extensions, ({ name: extension, commands }) => {
-            const filtered = this.filterCommands(
-              commands,
-              selectedFiltersOnly,
-              selectedFiltersExcept
-            );
-            return search(filtered, searchTerm).map((command) => ({
-              extension,
-              command,
-            }));
-          })
-        );
-      }
-    )
-  );
-
+  rows$ = this._extensions.rows$;
   rowsCount$ = this.rows$.pipe(map((rows) => rows.length));
 
   constructor(
@@ -110,15 +71,8 @@ export class CommandListComponent implements OnDestroy {
     return this._ui.getCommandSupportInfo(command, extension);
   }
 
-  private filterCommands(
-    elements: Command[],
-    only: Attribute[],
-    except: Attribute[]
-  ) {
-    return elements.filter(
-      (element) =>
-        only.every((attr) => element.attrs?.[attr]) &&
-        !except.some((attr) => element.attrs?.[attr])
-    );
+  goToPage(index: number) {
+    this._ui.changePage(index);
+    this._ui.scrollTop();
   }
 }

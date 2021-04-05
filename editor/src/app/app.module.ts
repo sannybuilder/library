@@ -132,7 +132,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ]),
     // StoreDevtoolsModule.instrument({
     //   maxAge: 25,
-    //   logOnly: environment.production,
+    //   logOnly: false,
     // }),
   ],
   exports: [],

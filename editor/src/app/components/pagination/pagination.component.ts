@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { chunk } from 'lodash';
 
 @Component({
@@ -18,9 +18,15 @@ export class PaginationComponent {
     return this.pages.length;
   }
 
-  @Input() currentPage: number | 'all' = 1;
-
   get pages() {
     return this._pages;
+  }
+
+  @Input() currentPage: number | 'all' = 1;
+  @Output() pageChange: EventEmitter<number | 'all'> = new EventEmitter();
+
+  changePage(index: number | 'all') {
+    this.pageChange.emit(index);
+    return false;
   }
 }

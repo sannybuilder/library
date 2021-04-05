@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1616354041737
+    "last_update": 1617636859487
   },
   "extensions": [
     {
@@ -22,13 +22,13 @@
           "id": "0001",
           "input": [
             {
-              "name": "_p1",
+              "name": "time",
               "type": "int"
             }
           ],
           "name": "WAIT",
           "num_params": 1,
-          "short_desc": "Pauses the script execution for (at least) N milliseconds"
+          "short_desc": "Pauses the script execution for specified amount of time in milliseconds"
         },
         {
           "attrs": {
@@ -39,13 +39,13 @@
           "id": "0002",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "label"
             }
           ],
           "name": "GOTO",
           "num_params": 1,
-          "short_desc": "Transfers the script execution to a label unconditionally"
+          "short_desc": "Transfers the script execution to the label unconditionally"
         },
         {
           "attrs": {
@@ -55,25 +55,25 @@
           "id": "0003",
           "input": [
             {
-              "name": "_p1",
+              "name": "intensity",
               "type": "int"
             }
           ],
           "member": "Shake",
           "name": "SHAKE_CAM",
           "num_params": 1,
-          "short_desc": "Shakes the camera"
+          "short_desc": "Shakes the camera with the given intensity"
         },
         {
           "id": "0004",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "literal"
             }
@@ -86,12 +86,12 @@
           "id": "0005",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "literal"
             }
@@ -104,12 +104,12 @@
           "id": "0006",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "literal"
             }
@@ -122,12 +122,12 @@
           "id": "0007",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "literal"
             }
@@ -140,12 +140,14 @@
           "id": "0008",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_global"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
           "name": "ADD_VAL_TO_INT_VAR",
@@ -156,12 +158,14 @@
           "id": "0009",
           "input": [
             {
-              "name": "_p1",
-              "type": "float"
+              "name": "",
+              "type": "float",
+              "source": "var_global"
             },
             {
-              "name": "_p2",
-              "type": "float"
+              "name": "",
+              "type": "float",
+              "source": "literal"
             }
           ],
           "name": "ADD_VAL_TO_FLOAT_VAR",
@@ -172,12 +176,14 @@
           "id": "000A",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_local"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
           "name": "ADD_VAL_TO_INT_LVAR",
@@ -188,12 +194,14 @@
           "id": "000B",
           "input": [
             {
-              "name": "_p1",
-              "type": "float"
+              "name": "",
+              "type": "float",
+              "source": "var_local"
             },
             {
-              "name": "_p2",
-              "type": "float"
+              "name": "",
+              "type": "float",
+              "source": "literal"
             }
           ],
           "name": "ADD_VAL_TO_FLOAT_LVAR",
@@ -1286,7 +1294,7 @@
           "id": "004D",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "label"
             }
           ],
@@ -1312,11 +1320,11 @@
           "id": "004F",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "label"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "arguments"
             }
           ],
@@ -1332,7 +1340,7 @@
           "id": "0050",
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "label"
             }
           ],
@@ -1392,19 +1400,19 @@
           "id": "0053",
           "input": [
             {
-              "name": "_p1",
+              "name": "model",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float"
             }
           ],
@@ -1413,8 +1421,9 @@
           "num_params": 5,
           "output": [
             {
-              "name": "_p5",
-              "type": "Player"
+              "name": "handle",
+              "type": "Player",
+              "source": "var_any"
             }
           ],
           "short_desc": "Creates a player at the specified position"
@@ -1425,7 +1434,7 @@
           "input": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "Player"
             }
           ],
           "member": "GetCoordinates",

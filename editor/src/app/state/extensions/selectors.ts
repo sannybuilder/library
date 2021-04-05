@@ -71,17 +71,20 @@ export const rows = createSelector(
   ) => {
     const selected = extensions?.filter((_, i) => selectedExtensions[i]);
 
-    return flatMap(selected, ({ name: extension, commands }) => {
-      const filtered = filterCommands(
-        commands,
-        selectedFiltersOnly,
-        selectedFiltersExcept
-      );
-      return search(filtered, searchTerm).map((command) => ({
-        extension,
-        command,
-      }));
-    });
+    return (
+      selected &&
+      flatMap(selected, ({ name: extension, commands }) => {
+        const filtered = filterCommands(
+          commands,
+          selectedFiltersOnly,
+          selectedFiltersExcept
+        );
+        return search(filtered, searchTerm).map((command) => ({
+          extension,
+          command,
+        }));
+      })
+    );
   }
 );
 

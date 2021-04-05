@@ -36,6 +36,7 @@ const _reducer = createReducer(
       lastUpdate,
       selectedExtensions: extensions.map((e) => e.name),
       entities: getEntities(extensions),
+      loading: false,
     })
   ),
   on(

@@ -102,7 +102,7 @@ export class UiEffects {
       this._ui.commandToDisplayOrEdit$,
     ]).pipe(
       map(([rows, command]) =>
-        rows.findIndex((row) => row.command?.id === command.command?.id)
+        rows?.findIndex((row) => row.command?.id === command.command?.id)
       ),
       filter((index) => index >= 0),
       map((index) => changePage({ index: Math.ceil((index + 1) / 100) }))

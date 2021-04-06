@@ -187,4 +187,60 @@ export class CommandEditorComponent implements OnInit {
       return parts.map(capitalize).join('');
     }
   }
+
+  getSuggestedInputName(index: number) {
+    if (
+      index === 0 &&
+      !this.command.attrs?.is_constructor &&
+      !this.command.attrs?.is_static &&
+      (!this.command.input?.[index]?.name ||
+        this.command.input?.[index]?.name?.startsWith('_')) &&
+      ['Player', 'Car', 'Char', 'Object'].includes(this.command.class)
+    ) {
+      return 'self';
+    }
+  }
+
+  getSuggestedInputType(index: number) {
+    if (
+      this.command.input?.[index]?.type === ParamType.any &&
+      (this.command.input?.[index]?.name ||
+        this.getSuggestedInputName(index)) === 'self'
+    ) {
+      return this.command.class || this.suggestedClassName;
+    }
+  }
+
+  getSuggestedOutputName(index: number) {
+    if (
+      index === 0 &&
+      this.command.attrs?.is_constructor &&
+      (!this.command.output?.[index]?.name ||
+        this.command.output?.[index]?.name.startsWith('_'))
+    ) {
+      return 'handle';
+    }
+  }
+
+  getSuggestedOutputType(index: number) {
+    if (
+      index === 0 &&
+      this.command.output?.length === 1 &&
+      this.command.attrs?.is_constructor &&
+      this.command.output?.[index]?.type === ParamType.any
+    ) {
+      return this.command.class || this.suggestedClassName;
+    }
+  }
+
+  getSuggestedOutputSource(index: number) {
+    if (
+      index === 0 &&
+      this.command.output?.length === 1 &&
+      this.command.attrs?.is_constructor &&
+      this.command.output?.[index]?.source === SourceType.any
+    ) {
+      return SourceType.var_any;
+    }
+  }
 }

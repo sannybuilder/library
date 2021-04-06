@@ -122,6 +122,14 @@
         <span class="input-group-text">{{ i + 1 }}</span>
         <input type="text" class="form-control" [(ngModel)]="param.name" />
       </div>
+      <div class="mb-1" *ngIf="getSuggestedInputName(i) as suggestedInputName">
+        <small
+          >Suggestion:
+          <a href="#" (click)="(param.name = suggestedInputName) && false">
+            {{ suggestedInputName }}</a
+          ></small
+        >
+      </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
       <scl-selector
@@ -131,6 +139,14 @@
         (keydown)="onTypeKeyDown($event, param)"
         [canInput]="false"
       ></scl-selector>
+      <div class="mb-1" *ngIf="getSuggestedInputType(i) as suggestedInputType">
+        <small
+          >Suggestion:
+          <a href="#" (click)="(param.type = suggestedInputType) && false">
+            {{ suggestedInputType }}</a
+          ></small
+        >
+      </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
       <scl-selector
@@ -151,6 +167,17 @@
         <span class="input-group-text">{{ i + 1 }}</span>
         <input type="text" class="form-control" [(ngModel)]="param.name" />
       </div>
+      <div
+        class="mb-1"
+        *ngIf="getSuggestedOutputName(i) as suggestedOutputName"
+      >
+        <small
+          >Suggestion:
+          <a href="#" (click)="(param.name = suggestedOutputName) && false">
+            {{ suggestedOutputName }}</a
+          ></small
+        >
+      </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
       <scl-selector
@@ -161,6 +188,17 @@
           command.attrs?.is_constructor && i === command.output.length - 1
         "
       ></scl-selector>
+      <div
+        class="mb-1"
+        *ngIf="getSuggestedOutputType(i) as suggestedOutputType"
+      >
+        <small
+          >Suggestion:
+          <a href="#" (click)="(param.type = suggestedOutputType) && false">
+            {{ suggestedOutputType }}</a
+          ></small
+        >
+      </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-4">
       <scl-selector
@@ -169,6 +207,20 @@
         [choices]="sources"
         [canInput]="false"
       ></scl-selector>
+      <div
+        class="mb-1"
+        *ngIf="getSuggestedOutputSource(i) as suggestedOutputSource"
+      >
+        <small
+          >Suggestion:
+          <a
+            href="#"
+            (click)="onParamSourceUpdate(suggestedOutputSource, param) || false"
+          >
+            {{ suggestedOutputSource }}</a
+          ></small
+        >
+      </div>
     </div>
   </div>
 </ng-container>

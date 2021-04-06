@@ -43,66 +43,59 @@
 
 <div class="row mb-2">
   <div class="col-12 col-md-6">
-    <div>
-      <div class="input-group">
-        <span class="input-group-text">Class</span>
-        <input
-          type="text"
-          [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
-          class="form-control"
-          [ngModel]="command.class"
-          (ngModelChange)="onClassChange(command, $event)"
-        />
-      </div>
-      <div
-        class="mb-1"
-        *ngIf="
-          !command.attrs?.is_keyword &&
-          !command.attrs?.is_nop &&
-          !command.class &&
+    <div class="input-group">
+      <span class="input-group-text">Class</span>
+      <input
+        type="text"
+        [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
+        class="form-control"
+        [ngModel]="command.class"
+        (ngModelChange)="onClassChange(command, $event)"
+      />
+    </div>
+    <div
+      class="mb-1"
+      *ngIf="
+        !command.attrs?.is_keyword &&
+        !command.attrs?.is_nop &&
+        !command.class &&
+        suggestedClassName
+      "
+    >
+      <small
+        >Suggested:
+        <a href="#" (click)="(command.class = suggestedClassName) && false">{{
           suggestedClassName
-        "
+        }}</a></small
       >
-        <small
-          >Suggested:
-          <a href="#" (click)="(command.class = suggestedClassName) && false">{{
-            suggestedClassName
-          }}</a></small
-        >
-      </div>
     </div>
   </div>
   <div class="col-12 col-md-6">
-    <div>
-      <div class="input-group">
-        <span class="input-group-text">Member</span>
-        <input
-          type="text"
-          [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
-          class="form-control"
-          [ngModel]="command.member"
-          (ngModelChange)="onMemberChange(command, $event)"
-        />
-      </div>
-      <div
-        class="mb-1"
-        *ngIf="
-          !command.attrs?.is_keyword &&
-          !command.attrs?.is_nop &&
-          !command.member &&
-          suggestedClassMember
-        "
+    <div class="input-group">
+      <span class="input-group-text">Member</span>
+      <input
+        type="text"
+        [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
+        class="form-control"
+        [ngModel]="command.member"
+        (ngModelChange)="onMemberChange(command, $event)"
+      />
+    </div>
+    <div
+      class="mb-1"
+      *ngIf="
+        !command.attrs?.is_keyword &&
+        !command.attrs?.is_nop &&
+        !command.member &&
+        suggestedClassMember
+      "
+    >
+      <small
+        >Suggested:
+        <a href="#" (click)="(command.member = suggestedClassMember) && false">
+          {{ suggestedClassMember }}</a
+        ></small
       >
-        <small
-          >Suggested:
-          <a
-            href="#"
-            (click)="(command.member = suggestedClassMember) && false"
-          >
-            {{ suggestedClassMember }}</a
-          ></small
-        >
-      </div>
     </div>
   </div>
 </div>

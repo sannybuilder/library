@@ -274,7 +274,7 @@ export const createGitHubAdaptor = (options: GitHubAdaptorOptions) => {
         ...filledOptions,
         files: files,
       };
-      const commitMessage = `Update files`;
+      const commitMessage = `:memo: update commands`;
       return getReferenceCommit(octKit, filledOptions)
         .then((data) => createTree(octKit, withFileOption, data))
         .then((data) =>

@@ -23,21 +23,14 @@ export class UiFacade {
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
   supportInfo$ = this.store$.select(selector.supportInfo);
   currentPage$ = this.store$.select(selector.currentPage);
-
   game$ = this.store$
     .select(selector.game)
     .pipe(distinctUntilChanged(), filter<Game>(Boolean));
-
-  commandToDisplayOrEdit$ = this.store$
-    .select(selector.commandToDisplayOrEdit)
-    .pipe(
-      distinctUntilChanged(
-        (p, c) =>
-          p.command?.id === c.command?.id &&
-          p.extension === c.extension &&
-          p.viewMode === c.viewMode
-      )
-    );
+  commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
+  extensionToDisplayOrEdit$ = this.store$.select(
+    selector.extensionToDisplayOrEdit
+  );
+  viewMode$ = this.store$.select(selector.viewMode);
   snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
 
   opcodeOnLoad$ = this.store$.select(selector.opcodeOnLoad).pipe(

@@ -12,7 +12,14 @@ import {
   toggleFilter,
   updateSearchTerm,
 } from './actions';
-import { filter, map, mapTo, switchMap, tap } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  mapTo,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { ViewMode } from '../../models';
 import { combineLatest, merge } from 'rxjs';
@@ -104,10 +111,11 @@ export class UiEffects {
       this._ui.commandToDisplayOrEdit$,
     ]).pipe(
       map(([rows, command]) =>
-        rows?.findIndex((row) => row.command?.id === command.command?.id)
+        rows?.findIndex((row) => row.command?.id === command?.id)
       ),
-      filter((index) => index >= 0),
-      map((index) => changePage({ index: Math.ceil((index + 1) / 100) }))
+      withLatestFrom(this._ui.currentPage$),
+      filter(([index, currentPage]) => index >= 0 && currentPage !== index),
+      map(([index]) => changePage({ index: Math.ceil((index + 1) / 100) }))
     )
   );
 

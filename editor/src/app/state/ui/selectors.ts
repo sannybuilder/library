@@ -43,11 +43,17 @@ export const displayLastUpdated = createSelector(
 
 export const commandToDisplayOrEdit = createSelector(
   state,
-  (state: UiState) => ({
-    command: state.commandToDisplayOrEdit,
-    extension: state.extensionToDisplayOrEdit,
-    viewMode: state.viewMode,
-  })
+  (state: UiState) => state.commandToDisplayOrEdit
+);
+
+export const extensionToDisplayOrEdit = createSelector(
+  state,
+  (state: UiState) => state.extensionToDisplayOrEdit
+);
+
+export const viewMode = createSelector(
+  state,
+  (state: UiState) => state.viewMode
 );
 
 export const snippetToDisplayOrEdit = createSelector(

@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
@@ -29,7 +29,11 @@ import { FUSEJS_OPTIONS } from '../../fusejs';
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
-  command$ = this._ui.commandToDisplayOrEdit$;
+  command$ = combineLatest([
+    this._ui.commandToDisplayOrEdit$,
+    this._ui.extensionToDisplayOrEdit$,
+    this._ui.viewMode$,
+  ]);
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
   game$ = this._ui.game$;
@@ -81,7 +85,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.command$
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(({ command, extension, viewMode }) => {
+      .subscribe(([command, extension, viewMode]) => {
         this.command = command ? cloneDeep(command) : command;
         this.oldCommand = command ? cloneDeep(command) : command;
         this.oldExtension = extension;

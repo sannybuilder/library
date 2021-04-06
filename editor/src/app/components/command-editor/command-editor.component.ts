@@ -6,7 +6,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { capitalize } from 'lodash';
+import { camelCase, capitalize } from 'lodash';
 
 import { opcodify } from '../../pipes';
 import {
@@ -81,15 +81,14 @@ export class CommandEditorComponent implements OnInit {
 
   onClassChange(command: Command, value: string) {
     if (value.length > 1) {
-      command.class = value[0].toUpperCase() + value.substring(1);
+      command.class = capitalize(value);
     } else {
       command.class = value;
     }
   }
 
   onMemberChange(command: Command, value: string) {
-    command.member =
-      value?.length > 1 ? value[0].toUpperCase() + value.substring(1) : value;
+    command.member = value?.length > 1 ? capitalize(value) : value;
   }
 
   onExtensionChange(val: string) {
@@ -129,6 +128,10 @@ export class CommandEditorComponent implements OnInit {
         param.type = ParamType.label;
         break;
     }
+  }
+
+  onParamNameChange(name: string, param: Param) {
+    param.name = name.startsWith('_') ? name : camelCase(name);
   }
 
   getDefaultInputSource(param: Param) {

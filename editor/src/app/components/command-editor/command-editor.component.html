@@ -1,3 +1,5 @@
+<input type="text" />
+<textarea></textarea>
 <div class="row mb-2" *ngIf="supportInfo">
   <div class="col-12 d-flex justify-content-end">
     <scl-supported-games [supportInfo]="supportInfo"></scl-supported-games>
@@ -120,7 +122,12 @@
     <div class="col-12 col-lg-4">
       <div class="input-group">
         <span class="input-group-text">{{ i + 1 }}</span>
-        <input type="text" class="form-control" [(ngModel)]="param.name" />
+        <input
+          type="text"
+          class="form-control"
+          [ngModel]="param.name"
+          (ngModelChange)="onParamNameChange($event, param)"
+        />
       </div>
       <div class="mb-1" *ngIf="getSuggestedInputName(i) as suggestedInputName">
         <small
@@ -165,7 +172,12 @@
     <div class="col-12 col-lg-4">
       <div class="input-group">
         <span class="input-group-text">{{ i + 1 }}</span>
-        <input type="text" class="form-control" [(ngModel)]="param.name" />
+        <input
+          type="text"
+          class="form-control"
+          [ngModel]="param.name"
+          (ngModelChange)="onParamNameChange($event, param)"
+        />
       </div>
       <div
         class="mb-1"

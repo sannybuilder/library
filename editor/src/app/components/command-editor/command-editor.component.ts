@@ -27,6 +27,7 @@ import { smash } from '../../utils';
   styleUrls: ['./command-editor.component.scss'],
 })
 export class CommandEditorComponent implements OnInit {
+  ParamType = ParamType;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: ParamType[] = [];

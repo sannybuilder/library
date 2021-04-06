@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Game, GameTitle, SupportInfo, SupportLevel } from '../../models';
+import { Game, GameSupportInfo, GameTitle, SupportLevel } from '../../models';
 
 @Component({
   selector: 'scl-supported-games',
@@ -8,7 +8,7 @@ import { Game, GameTitle, SupportInfo, SupportLevel } from '../../models';
 })
 export class SupportedGamesComponent {
   SupportLevel = SupportLevel;
-  @Input() supportInfo: SupportInfo;
+  @Input() supportInfo: GameSupportInfo[];
 
   stringifyLevel(level: number, game: Game) {
     if (level === SupportLevel.Supported) {

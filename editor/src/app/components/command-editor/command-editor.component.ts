@@ -81,14 +81,15 @@ export class CommandEditorComponent implements OnInit {
 
   onClassChange(command: Command, value: string) {
     if (value.length > 1) {
-      command.class = capitalize(value);
+      command.class = value[0].toUpperCase() + value.substring(1);
     } else {
       command.class = value;
     }
   }
 
   onMemberChange(command: Command, value: string) {
-    command.member = value?.length > 1 ? capitalize(value) : value;
+    command.member =
+      value?.length > 1 ? value[0].toUpperCase() + value.substring(1) : value;
   }
 
   onExtensionChange(val: string) {

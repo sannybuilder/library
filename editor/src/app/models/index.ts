@@ -34,15 +34,15 @@ export enum SourceType {
 
 export const CommandAttributes: Attribute[] = [
   'is_branch',
-  'is_segment',
-  'is_keyword',
   'is_condition',
-  'is_nop',
-  'is_unsupported',
   'is_constructor',
   'is_destructor',
-  'is_static',
+  'is_keyword',
+  'is_nop',
   'is_overload',
+  'is_segment',
+  'is_static',
+  'is_unsupported',
   'is_variadic',
 ];
 

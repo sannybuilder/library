@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { capitalize } from 'lodash';
 
 import { opcodify } from '../../pipes';
 import {
@@ -154,5 +155,33 @@ export class CommandEditorComponent implements OnInit {
 
   public shouldDisplayAttributeError(): boolean {
     return isAnyAttributeInvalid(this.command);
+  }
+
+  get suggestedClassName() {
+    const parts = this.command.name?.toUpperCase().split('_');
+
+    switch (parts[1]) {
+      case 'PLAYER':
+        return 'Player';
+      case 'CHAR':
+        return 'Char';
+      case 'CAR':
+      case 'VEHICLE':
+        return 'Car';
+      case 'OBJECT':
+        return 'Object';
+      case 'CAM':
+      case 'CAMERA':
+        return 'Camera';
+    }
+  }
+
+  get suggestedClassMember() {
+    const className = this.suggestedClassName;
+    if (className) {
+      const parts = this.command.name.toUpperCase().split('_');
+      parts.splice(1, 1);
+      return parts.map(capitalize).join('');
+    }
   }
 }

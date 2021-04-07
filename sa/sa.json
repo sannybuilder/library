@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1617798915275
+    "last_update": 1617816461293
   },
   "extensions": [
     {
@@ -26770,14 +26770,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Player",
+          "member": "DisableSprint"
         },
         {
           "id": "06B0",
@@ -28059,22 +28061,27 @@
           "short_desc": "Gets the coordinates of the fire",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "ScriptFire"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "ScriptFire",
+          "member": "GetCoords"
         },
         {
           "id": "06F6",
@@ -28171,13 +28178,15 @@
           "short_desc": "Returns true if the car has car stuck check enabled",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "DoesHaveStuckCarCheck"
         },
         {
           "id": "06FD",
@@ -28301,22 +28310,24 @@
           "short_desc": "Vehicle drives to the destination as fast as possible, trying to overtake other vehicles",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             }
-          ]
+          ],
+          "member": "GotoCoordinatesRacing",
+          "class": "Car"
         },
         {
           "id": "0705",
@@ -28505,10 +28516,12 @@
           "short_desc": "Rebuilds the player model, applying any required texture changes",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Player"
             }
-          ]
+          ],
+          "class": "Player",
+          "member": "BuildModel"
         },
         {
           "id": "070E",
@@ -28651,14 +28664,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetStayInSlowLane"
         },
         {
           "id": "0715",
@@ -28814,14 +28829,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "health",
+              "type": "int"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "SetHealth"
         },
         {
           "id": "0720",
@@ -29229,17 +29246,19 @@
           "short_desc": "Returns true if the actor is lifting the specified object",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Object"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsHoldingObject"
         },
         {
           "id": "0738",
@@ -29397,13 +29416,15 @@
           "short_desc": "Returns true if the character has been arrested",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "HasBeenArrested"
         },
         {
           "id": "0742",
@@ -29713,14 +29734,16 @@
           "short_desc": "Sets whether the object is visible",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "SetVisible"
         },
         {
           "id": "0751",
@@ -30160,14 +30183,16 @@
           "short_desc": "Causes the auto aim to be more likely to target the specified actor than actors without this flag",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetIsTargetPriority"
         },
         {
           "id": "0771",
@@ -31151,14 +31176,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Player",
+          "member": "SetGroupRecruitment"
         },
         {
           "id": "07B5",
@@ -31790,14 +31817,16 @@
           "short_desc": "Sets the attack rate of the actor",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "rate",
+              "type": "int"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetShootRate"
         },
         {
           "id": "07DE",
@@ -32380,14 +32409,16 @@
           "short_desc": "Enables hydraulic suspension on the car",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetHydraulics"
         },
         {
           "id": "0800",
@@ -32425,13 +32456,15 @@
           "short_desc": "Returns true if the car has hydraulics installed",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "DoesHaveHydraulics"
         },
         {
           "id": "0804",
@@ -32928,14 +32961,16 @@
           "short_desc": "Sets the characters weapon accuracy",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "skillId",
+              "type": "int"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetWeaponSkill"
         },
         {
           "id": "081B",
@@ -32981,14 +33016,16 @@
           "short_desc": "Sets whether the cars engine is broken",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetEngineBroken"
         },
         {
           "id": "081E",
@@ -33282,13 +33319,15 @@
           "short_desc": "Returns true if the object has been photographed",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "HasBeenPhotographed"
         },
         {
           "id": "0834",

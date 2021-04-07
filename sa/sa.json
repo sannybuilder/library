@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1617774003556
+    "last_update": 1617798915275
   },
   "extensions": [
     {
@@ -36381,14 +36381,16 @@
           "short_desc": "Sets whether the object can be picked up and carried",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "SetAsStealable"
         },
         {
           "id": "08EA",
@@ -36858,14 +36860,16 @@
           "short_desc": "Sets the objects mass",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "mass",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "SetMass"
         },
         {
           "id": "0907",
@@ -36874,14 +36878,17 @@
           "short_desc": "Returns the objects mass",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "mass",
+              "type": "float",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "GetMass"
         },
         {
           "id": "0908",
@@ -36890,14 +36897,16 @@
           "short_desc": "Sets the objects turn mass",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "turnMass",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "SetTurnMass"
         },
         {
           "id": "0909",
@@ -36906,14 +36915,17 @@
           "short_desc": "Returns the objects turn mass",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "turnMass",
+              "type": "float",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "GetTurnMass"
         },
         {
           "id": "090A",
@@ -37096,14 +37108,16 @@
           "short_desc": "Sets whether the vehicles engine is turned on or off",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetEngineOn"
         },
         {
           "id": "0919",
@@ -37112,14 +37126,16 @@
           "short_desc": "Sets whether the vehicles lights are on",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetLightsOn"
         },
         {
           "id": "091A",
@@ -37722,14 +37738,16 @@
           "short_desc": "Specifies that the character should only use upper-body damage animations, meaning they can still run if shot in the legs etc",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetBulletproofVest"
         },
         {
           "id": "093C",
@@ -38011,13 +38029,15 @@
           "short_desc": "Returns true if the character is playing any speech",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsTalking"
         },
         {
           "id": "094E",
@@ -38026,14 +38046,16 @@
           "short_desc": "Prevents any character speech from playing",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "DisableSpeech"
         },
         {
           "id": "094F",
@@ -38042,10 +38064,12 @@
           "short_desc": "Enables pain audio if it was disabled using 094E",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "EnableSpeech"
         },
         {
           "id": "0950",
@@ -38480,7 +38504,7 @@
           "short_desc": "The character will start moving it's mouth as if it were talking",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -38498,7 +38522,7 @@
           "short_desc": "Stops the character moving it's mouth as if it was talking",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -38571,13 +38595,15 @@
           "short_desc": "Returns true if the vehicle is a low rider",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsLowRider"
         },
         {
           "id": "096F",
@@ -38586,13 +38612,15 @@
           "short_desc": "Returns true if the vehicle is a street racer",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsStreetRacer"
         },
         {
           "id": "0970",
@@ -38613,7 +38641,7 @@
           "short_desc": "Puts the characters at the coordinates by the center of body instead of the feet",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -38639,13 +38667,15 @@
           "short_desc": "Returns true if the fire exists",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "ScriptFire"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "ScriptFire",
+          "member": "DoesExist"
         },
         {
           "id": "0974",
@@ -38687,13 +38717,15 @@
           "short_desc": "Returns true if the object is within the external script trigger radius",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "IsWithinBrainActivationRange"
         },
         {
           "id": "0978",
@@ -38884,14 +38916,17 @@
           "short_desc": "Returns the objects model index",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "model",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Object",
+          "member": "GetModel"
         },
         {
           "id": "0985",
@@ -39446,13 +39481,15 @@
           "short_desc": "Returns true if the character has had its head shot off",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsHeadMissing"
         },
         {
           "id": "09A9",
@@ -39533,13 +39570,15 @@
           "short_desc": "Returns true if the specified character is in a train",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsInAnyTrain"
         },
         {
           "id": "09AF",
@@ -39617,14 +39656,17 @@
           "short_desc": "Returns the door lock mode of the vehicle",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "status",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "GetDoorLockStatus"
         },
         {
           "id": "09B4",
@@ -39661,14 +39703,16 @@
           "short_desc": "Sets whether the character signals after killing",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetSignalAfterKill"
         },
         {
           "id": "09B6",
@@ -39677,14 +39721,16 @@
           "short_desc": "Sets whether police should chase the character",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetWantedByPolice"
         },
         {
           "id": "09B7",
@@ -39773,17 +39819,19 @@
           "short_desc": "Returns true if the specified vehicle part is visibly damaged",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "doorId",
+              "type": "int"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsDoorDamaged"
         },
         {
           "id": "09BC",
@@ -39792,22 +39840,24 @@
           "short_desc": "This command is a combination of 0972 and 08C7",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetCoordinatesDontWarpGangNoOffset"
         },
         {
           "id": "09BD",

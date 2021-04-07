@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1617824217973
+    "last_update": 1617830469767
   },
   "extensions": [
     {
@@ -25068,22 +25068,27 @@
           "short_desc": "Returns the X, Y and Z coordinates of the pickup",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "Pickup"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Pickup",
+          "member": "GetCoordinates"
         },
         {
           "id": "065C",
@@ -25248,14 +25253,17 @@
           "short_desc": "Returns the characters model",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "modelId",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "GetModel"
         },
         {
           "id": "0666",
@@ -33803,14 +33811,16 @@
           "short_desc": "Sets whether the vehicle can be visibly damaged",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetCanBeVisiblyDamaged"
         },
         {
           "id": "0853",
@@ -33871,14 +33881,16 @@
           "short_desc": "Used to disable a character from crouching",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetAllowedToDuck"
         },
         {
           "id": "0857",
@@ -34834,22 +34846,24 @@
           "short_desc": "Sets the vehicle coordinates without applying offsets to account for the height of the vehicle",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetCoordinatesNoOffset"
         },
         {
           "id": "088D",
@@ -35736,14 +35750,16 @@
           "short_desc": "If set, the character will not fall off their bike in collisions",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetCanBeKnockedOffBike"
         },
         {
           "id": "08C7",
@@ -35752,22 +35768,24 @@
           "short_desc": "Sets the characters coordinates without warping the rest of it's group",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetCoordinatesDontWarpGang"
         },
         {
           "id": "08C8",
@@ -37718,41 +37736,43 @@
           "id": "0939",
           "name": "ATTACH_CAR_TO_OBJECT",
           "num_params": 8,
-          "short_desc": "",
+          "short_desc": "Attach car to object with offset and ratation",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Object"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "xOffset",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "yOffset",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "zOffset",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "any"
+              "name": "xRotation",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "any"
+              "name": "yRotation",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "any"
+              "name": "zRotation",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "AttachToObject"
         },
         {
           "id": "093A",
@@ -37912,14 +37932,17 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "armour",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Player",
+          "member": "GetMaxArmour"
         },
         {
           "id": "0946",
@@ -37928,14 +37951,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetUsesUpperbodyDamageAnimsOnly"
         },
         {
           "id": "0947",

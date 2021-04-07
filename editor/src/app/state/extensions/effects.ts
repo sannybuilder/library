@@ -68,9 +68,9 @@ export class ExtensionsEffects {
     () =>
       this.actions$.pipe(
         ofType(updateGameCommand),
-        distinctUntilChanged(isEqual),
-        withLatestFrom(this._extensions.extensions$, this._ui.game$),
-        tap(([_, extensions, game]) => {
+        distinctUntilChanged<ReturnType<typeof updateGameCommand>>(isEqual),
+        withLatestFrom(this._extensions.extensions$),
+        tap(([{ game }, extensions]) => {
           this._changes.registerExtensionsChange(GameLibrary[game], extensions);
         })
       ),

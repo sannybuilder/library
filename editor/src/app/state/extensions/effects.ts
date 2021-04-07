@@ -69,10 +69,16 @@ export class ExtensionsEffects {
       this.actions$.pipe(
         ofType(updateGameCommand),
         distinctUntilChanged<ReturnType<typeof updateGameCommand>>(isEqual),
-        withLatestFrom(this._extensions.extensions$),
-        tap(([{ game }, extensions]) => {
-          this._changes.registerExtensionsChange(GameLibrary[game], extensions);
-        })
+        switchMap(({ game }) =>
+          this._extensions.getGameExtensions(game).pipe(
+            tap((extensions) => {
+              this._changes.registerExtensionsChange(
+                GameLibrary[game],
+                extensions
+              );
+            })
+          )
+        )
       ),
     { dispatch: false }
   );

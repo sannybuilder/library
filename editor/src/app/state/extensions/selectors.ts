@@ -23,6 +23,12 @@ export const extensions = createSelector(
   (state: GameState) => state.extensions
 );
 
+export const gameExtensions = createSelector(
+  gamesState,
+  (games: ExtensionsState, props: { game: Game }) =>
+    games.games[props.game]?.extensions ?? []
+);
+
 export const extensionNames = createSelector(
   extensions,
   (extensions?: Extension[]) =>

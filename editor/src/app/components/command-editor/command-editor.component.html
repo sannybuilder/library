@@ -118,15 +118,9 @@
   <h5>Parameters</h5>
   <div class="row mb-2" *ngFor="let param of command.input; let i = index">
     <div class="col-12 col-lg-4">
-      <div class="input-group">
-        <span class="input-group-text">{{ i + 1 }}</span>
-        <input
-          type="text"
-          class="form-control"
-          [ngModel]="param.name"
-          (ngModelChange)="onParamNameChange($event, param)"
-        />
-      </div>
+      <ng-container
+        *ngTemplateOutlet="paramTemplate; context: { param: param, i: i }"
+      ></ng-container>
       <div class="mb-1" *ngIf="getSuggestedInputName(i) as suggestedInputName">
         <small
           >Suggestion:
@@ -168,15 +162,9 @@
   <h5>Result</h5>
   <div class="row mb-2" *ngFor="let param of command.output; let i = index">
     <div class="col-12 col-lg-4">
-      <div class="input-group">
-        <span class="input-group-text">{{ i + 1 }}</span>
-        <input
-          type="text"
-          class="form-control"
-          [ngModel]="param.name"
-          (ngModelChange)="onParamNameChange($event, param)"
-        />
-      </div>
+      <ng-container
+        *ngTemplateOutlet="paramTemplate; context: { param: param, i: i }"
+      ></ng-container>
       <div
         class="mb-1"
         *ngIf="getSuggestedOutputName(i) as suggestedOutputName"
@@ -249,8 +237,16 @@
       </label>
     </div>
 
-    <div class="alert alert-danger mt-3" *ngIf="shouldDisplayAttributeError()">
-      Invalid combination of attributes
+    <div class="alert alert-danger mt-3" *ngIf="hasAnyError">
+      <div *ngIf="shouldDisplayAttributeError">
+        Invalid combination of attributes
+      </div>
+
+      <div *ngIf="shouldDisplayDuplicateParamNameError">
+        Duplicate parameter name
+      </div>
+
+      <div *ngIf="shouldDisplayDuplicateNameError">Duplicate command name</div>
     </div>
   </div>
 </div>
@@ -269,3 +265,16 @@
     </div>
   </div>
 </div>
+
+<ng-template #paramTemplate let-param="param" let-i="i">
+  <div class="input-group">
+    <span class="input-group-text">{{ i + 1 }}</span>
+    <input
+      type="text"
+      class="form-control"
+      [ngModel]="param.name"
+      (ngModelChange)="onParamNameChange($event, param)"
+      [ngClass]="{ 'is-invalid': isParamNameDuplicate(param.name) }"
+    />
+  </div>
+</ng-template>

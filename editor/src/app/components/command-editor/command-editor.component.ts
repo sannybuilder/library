@@ -6,7 +6,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { camelCase, capitalize } from 'lodash';
+import { camelCase, capitalize, trim } from 'lodash';
 
 import { opcodify } from '../../pipes';
 import {
@@ -32,12 +32,16 @@ export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: ParamType[] = [];
+  shouldDisplayDuplicateNameError = false;
+  shouldDisplayDuplicateParamNameError = false;
+  shouldDisplayAttributeError = false;
 
   @Input() command: Command;
   @Input() snippet: string;
   @Input() extension: string;
   @Input() extensionNames: string[];
   @Input() supportInfo: SupportInfo;
+  @Input() commands?: Command[];
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
 
@@ -72,40 +76,40 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onCommandNameChange(command: Command, value: string) {
-    command.name = value ? value.replace('-', '_').toUpperCase() : value;
+    command.name = trim(
+      value ? value.replace(/[\s-]/g, '_').toUpperCase() : value
+    );
+    this.shouldDisplayDuplicateNameError = this.getShouldDisplayDuplicateNameError();
   }
 
   onOpcodeChange(command: Command, value: string) {
-    command.id = value ? value.toUpperCase() : value;
+    command.id = trim(value ? value.toUpperCase() : value);
+    this.shouldDisplayDuplicateNameError = this.getShouldDisplayDuplicateNameError();
   }
 
   onClassChange(command: Command, value: string) {
-    if (value.length > 1) {
-      command.class = value[0].toUpperCase() + value.substring(1);
-    } else {
-      command.class = value;
-    }
+    command.class = this.capitalizeFirst(value);
   }
 
   onMemberChange(command: Command, value: string) {
-    command.member =
-      value?.length > 1 ? value[0].toUpperCase() + value.substring(1) : value;
+    command.member = this.capitalizeFirst(value);
   }
 
   onExtensionChange(val: string) {
-    if (!val) {
+    let newName = trim(val);
+    if (!newName) {
       console.warn('extension can not be empty, using "default"');
-      val = 'default';
+      newName = 'default';
     }
-    this.extensionChange.emit(val);
+    this.extensionChange.emit(newName);
   }
 
   onSnippetChange(val: string) {
-    this.snippetChange.emit(val);
+    this.snippetChange.emit(trim(val));
   }
 
   opcodify(command: Command) {
-    command.id = opcodify(command.id);
+    command.id = trim(opcodify(command.id));
   }
 
   onTypeKeyDown(key: string, param: Param) {
@@ -132,7 +136,8 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onParamNameChange(name: string, param: Param) {
-    param.name = name.startsWith('_') ? name : camelCase(name);
+    param.name = name.startsWith('_') ? name : camelCase(name); // camelCase also trims the value
+    this.shouldDisplayDuplicateParamNameError = this.getShouldDisplayDuplicateParamNameError();
   }
 
   getDefaultInputSource(param: Param) {
@@ -155,10 +160,7 @@ export class CommandEditorComponent implements OnInit {
     } else {
       delete command.attrs;
     }
-  }
-
-  public shouldDisplayAttributeError(): boolean {
-    return isAnyAttributeInvalid(this.command);
+    this.shouldDisplayAttributeError = this.getShouldDisplayAttributeError();
   }
 
   get suggestedClassName() {
@@ -174,6 +176,8 @@ export class CommandEditorComponent implements OnInit {
         return 'Car';
       case 'OBJECT':
         return 'Object';
+      case 'PICKUP':
+        return 'Pickup';
       case 'CAM':
       case 'CAMERA':
         return 'Camera';
@@ -199,7 +203,7 @@ export class CommandEditorComponent implements OnInit {
       !this.command.attrs?.is_static &&
       (!this.command.input?.[index]?.name ||
         this.command.input?.[index]?.name?.startsWith('_')) &&
-      ['Player', 'Car', 'Char', 'Object'].includes(this.command.class)
+      ['Player', 'Car', 'Char', 'Object', 'Pickup'].includes(this.command.class)
     ) {
       return 'self';
     }
@@ -246,5 +250,47 @@ export class CommandEditorComponent implements OnInit {
     ) {
       return SourceType.var_any;
     }
+  }
+
+  get hasAnyError() {
+    return (
+      this.shouldDisplayDuplicateParamNameError ||
+      this.shouldDisplayAttributeError ||
+      this.shouldDisplayDuplicateNameError
+    );
+  }
+
+  isParamNameDuplicate(name: string) {
+    return (
+      this.getAllParams().filter((param) => param.name === name).length > 1
+    );
+  }
+
+  private getAllParams() {
+    return [...(this.command.input ?? []), ...(this.command.output ?? [])];
+  }
+
+  private getShouldDisplayAttributeError(): boolean {
+    return isAnyAttributeInvalid(this.command);
+  }
+
+  private getShouldDisplayDuplicateNameError() {
+    return (this.commands ?? []).some(
+      (command) =>
+        command.name === this.command.name && command.id !== this.command.id
+    );
+  }
+
+  private getShouldDisplayDuplicateParamNameError() {
+    return this.getAllParams().some((param) =>
+      this.isParamNameDuplicate(param.name)
+    );
+  }
+
+  private capitalizeFirst(value?: string) {
+    const camelized = camelCase(value);
+    return camelized.length > 1
+      ? camelized[0].toUpperCase() + camelized.substring(1)
+      : camelized;
   }
 }

@@ -29,11 +29,6 @@ import { FUSEJS_OPTIONS } from '../../fusejs';
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
-  command$ = combineLatest([
-    this._ui.commandToDisplayOrEdit$,
-    this._ui.extensionToDisplayOrEdit$,
-    this._ui.viewMode$,
-  ]);
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
   game$ = this._ui.game$;
@@ -52,6 +47,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   oldExtension?: string;
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
+  commands?: Command[];
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -83,9 +79,15 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.oldSnippet = snippet;
     });
 
-    this.command$
+    combineLatest([
+      this._ui.commandToDisplayOrEdit$,
+      this._ui.extensionToDisplayOrEdit$,
+      this._ui.viewMode$,
+      this._extensions.extensions$,
+    ])
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(([command, extension, viewMode]) => {
+      .subscribe(([command, extension, viewMode, extensions]) => {
+        this.commands = extensions.find((e) => e.name === extension)?.commands;
         this.command = command ? cloneDeep(command) : command;
         this.oldCommand = command ? cloneDeep(command) : command;
         this.oldExtension = extension;

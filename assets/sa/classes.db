@@ -14,6 +14,7 @@ Cutscene
 Fx
 Game
 Garage
+Group
 Heli
 Math
 Menu
@@ -253,6 +254,8 @@ GetOffsetInWorldCoords,04C4,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f"
 GetPedType,089F,0,0,("handle: Char" "pedType%i")
 GetSpeed,06AC,0,0,("handle: Char" "speed%f")
 GetSwimState,0966,0,0,("handle: Char" "state%i")
+GetTaskSequenceProgress,0646,0,0,("self: Char" "_p2: any")
+GetTaskSequenceProgressRecursive,07A4,0,0,("self: Char" "_p2: any" "_p3: any")
 GetWeaponInSlot,04B8,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4%i" "_p5%i")
 GiveWeapon,01B2,0,0,("_p1%i" "_p2%i" "_p3%i")
 HasBeenArrested,0741,1,0,("self: Char")
@@ -335,6 +338,8 @@ LocateStoppedInCar3D,0103,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "
 LocateStoppedOnFoot2D,00F0,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 LocateStoppedOnFoot3D,0102,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%i")
 MarkAsNoLongerNeeded,01C2,0,0,("_p1%i")
+PerformTaskSequence,0618,0,0,("self: Char" "sequence: TaskSequence")
+PerformTaskSequenceFromProgress,07A0,0,0,("self: Char" "sequence: TaskSequence" "_p3%i" "_p4%i")
 RemoveAllWeapons,048F,0,0,("_p1%i")
 RemoveElegantly,034F,0,0,("_p1%i")
 RemoveWeapon,0555,0,0,("handle: Char" "weaponId%i")
@@ -453,6 +458,11 @@ IsClosed,03B1,1,0,("_p1%i")
 IsOpen,03B0,1,0,("_p1%i")
 Open,0360,0,0,("_p1%i")
 SetTargetCar,021B,0,0,("_p1%i" "_p2%i")
+$END
+
+$Group
+$BEGIN
+SetTaskSequence,087D,0,0,("self: Group" "sequence: TaskSequence")
 $END
 
 $Heli
@@ -706,16 +716,10 @@ $END
 
 $TaskSequence
 $BEGIN
-Clear,061B,0,0,("_p1: any")
-Close,0616,0,0,("_p1: any")
-GetProgress,0646,0,0,("_p1: any" "_p2: any")
-GetProgressRecursive,07A4,0,0,("_p1: any" "_p2: any" "_p3: any")
-Open,0615,0,0,("_p1: any")
-Perform,0618,0,0,("_p1: any" "_p2: any")
-PerformFromProgress,07A0,0,0,("_p1: any" "_p2: any" "_p3: any" "_p4: any")
-PerformRepeatedly,063F,0,0,()
-SetGroup,087D,0,0,("_p1: any" "_p2: any")
-SetToRepeat,0643,0,0,("_p1: any" "_p2: any")
+Clear,061B,0,0,("self: TaskSequence")
+Close,0616,0,0,("self: TaskSequence")
+Open,0615,0,0,("handle: TaskSequence")
+SetToRepeat,0643,0,0,("self: TaskSequence" "state%b")
 $END
 
 $Text

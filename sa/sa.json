@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1617929645493
+    "last_update": 1617958503492
   },
   "extensions": [
     {
@@ -38379,13 +38379,15 @@
           "short_desc": "Returns true if the actor is stuck under a car",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsStuckUnderCar"
         },
         {
           "id": "095E",
@@ -38454,14 +38456,16 @@
           "short_desc": "Sets whether the character should keep it's tasks after mission cleanup (basically cleanup will be skipped for this character)",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetKeepTask"
         },
         {
           "id": "0962",
@@ -38952,14 +38956,16 @@
           "short_desc": "When set, the character will not fall out of the car upon death",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetForceDieInCar"
         },
         {
           "id": "0983",
@@ -39303,14 +39309,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetCollision"
         },
         {
           "id": "099B",
@@ -39529,14 +39537,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetDruggedUp"
         },
         {
           "id": "09A8",
@@ -40092,14 +40102,16 @@
           "short_desc": "Changes the player to use the specified model",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "modelId",
+              "type": "int"
             }
-          ]
+          ],
+          "class": "Player",
+          "member": "SetModel"
         },
         {
           "id": "09C8",
@@ -40165,17 +40177,19 @@
           "short_desc": "Returns true if the car is touching the other car",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "other",
+              "type": "Car"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsTouchingCar"
         },
         {
           "id": "09CC",
@@ -40453,13 +40467,15 @@
           "short_desc": "Returns true if the character is entering a car, but is not in the car",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsGettingInToACar"
         },
         {
           "id": "09DF",
@@ -40504,14 +40520,17 @@
           "short_desc": "Returns the value of the specified car model",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "GetModelValue"
         },
         {
           "id": "09E2",
@@ -40736,17 +40755,19 @@
           "short_desc": "Returns true if the character can see the other character in front of it",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "other",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "HasSpottedCharInFront"
         },
         {
           "id": "09EE",
@@ -40865,14 +40886,16 @@
           "short_desc": "Controls whether the character will try to exit an upside down car until it is on fire",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetGetOutUpsideDownCar"
         },
         {
           "id": "09F7",
@@ -40933,13 +40956,15 @@
           "short_desc": "Appears to return true if something had entered the objects position since it was created or it's position was changed",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Object"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "IsIntersectingWorld"
         },
         {
           "id": "09FD",
@@ -41227,18 +41252,20 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "colorId1",
+              "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "colorId2",
+              "type": "int"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetExtraColours"
         },
         {
           "id": "0A12",
@@ -41247,18 +41274,22 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "colorId1",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "colorId2",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "GetExtraColours"
         },
         {
           "id": "0A13",
@@ -41285,13 +41316,15 @@
           "short_desc": "Returns true if the vehicle was resprayed in the last frame",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "HasBeenResprayed"
         },
         {
           "id": "0A16",
@@ -41420,17 +41453,19 @@
           "short_desc": "Returns true if one character is touching the other",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "other",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsTouchingChar"
         },
         {
           "id": "0A1C",
@@ -41515,14 +41550,16 @@
           "short_desc": "Sets whether a ped driven vehicles handling is affected by the 'perfect handling' cheat",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "ImproveByCheating"
         },
         {
           "id": "0A22",
@@ -41625,14 +41662,16 @@
           "short_desc": "Sets the speed that the character swims at, increasing it's swimming animation speeds",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "speed",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Char",
+          "member": "SetSwimSpeed"
         },
         {
           "id": "0A29",
@@ -41752,10 +41791,12 @@
           "short_desc": "Restores the vehicle to full health and removes the damage",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "Fix"
         },
         {
           "id": "0A31",
@@ -41780,13 +41821,15 @@
           "short_desc": "Returns true if the actor is turreted on any vehicle",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsAttachedToAnyCar"
         },
         {
           "id": "0A33",

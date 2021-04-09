@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1617975610141
+    "last_update": 1617993618627
   },
   "extensions": [
     {
@@ -21620,11 +21620,11 @@
           "id": "0594",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "alpha",
               "type": "int"
             }
           ],
@@ -23093,14 +23093,16 @@
           "short_desc": "Makes the vehicle stay on the other vehicles left side, keeping parallel",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "hanle",
+              "type": "Car"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetEscortCarLeft"
         },
         {
           "id": "05F2",
@@ -23109,14 +23111,16 @@
           "short_desc": "Makes the vehicle stay by the right side of the other vehicle, keeping parallel",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Car"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetEscortCarRight"
         },
         {
           "id": "05F3",
@@ -23125,14 +23129,16 @@
           "short_desc": "Makes the vehicle stay behind the other car, keeping parallel",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Car"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetEscortCarRear"
         },
         {
           "id": "05F4",
@@ -23141,14 +23147,16 @@
           "short_desc": "Makes the vehicle stay in front of the other, keeping parallel",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Car"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetEscortCarFront"
         },
         {
           "id": "05F5",
@@ -26543,22 +26551,27 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "bool",
+              "source": "var_any"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "z",
+              "type": "bool",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "GetSpeedVector"
         },
         {
           "id": "06A3",
@@ -26567,14 +26580,17 @@
           "short_desc": "Returns the vehicles mass",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "mass",
+              "type": "float",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "GetMass"
         },
         {
           "id": "06A4",
@@ -28535,10 +28551,12 @@
           "short_desc": "Makes the vehicle explode without affecting it's surroundings",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "ExplodeInCutscene"
         },
         {
           "id": "070D",
@@ -30053,10 +30071,12 @@
           "short_desc": "Sets the script as the owner of the vehicle and adds it to the mission cleanup list",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetAsMissionCar"
         },
         {
           "id": "0764",
@@ -32139,14 +32159,16 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetAlwaysCreateSkids"
         },
         {
           "id": "07EF",
@@ -32337,18 +32359,20 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Car"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "SetFollowCar"
         },
         {
           "id": "07F9",
@@ -38916,14 +38940,17 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "count",
+              "type": "int",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "GetNumColours"
         },
         {
           "id": "097E",
@@ -39080,14 +39107,17 @@
           "short_desc": "If carA is driving to a set destination, this command will return carB, if it is preventing carA from getting to it's destination",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "hadle",
+              "type": "Car",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Car",
+          "member": "GetBlockingCar"
         },
         {
           "id": "0988",

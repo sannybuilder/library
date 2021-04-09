@@ -31,7 +31,7 @@ export class CommandEditorComponent implements OnInit {
   ParamType = ParamType;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
-  paramTypes: ParamType[] = [];
+  paramTypes: string[] = [];
   shouldDisplayDuplicateNameError = false;
   shouldDisplayDuplicateParamNameError = false;
   shouldDisplayAttributeError = false;
@@ -46,7 +46,10 @@ export class CommandEditorComponent implements OnInit {
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
 
   @Input() set entities(val: ParamType[]) {
-    const paramTypes = new Set([...this.primitiveTypes, ...val]);
+    const paramTypes = new Set([
+      ...this.primitiveTypes.map((t) => `type ${t}`),
+      ...val.map((t) => `class ${t}`),
+    ]);
     this.paramTypes = [...paramTypes];
   }
 

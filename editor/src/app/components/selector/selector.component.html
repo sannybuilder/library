@@ -5,6 +5,7 @@
       class="btn btn-secondary dropdown-toggle"
       data-toggle="dropdown"
       data-offset="0,0"
+      data-display="static"
     >
       {{ label }}
     </button>
@@ -12,10 +13,12 @@
       <div class="choices-list">
         <button
           class="dropdown-item"
-          *ngFor="let choice of choices"
-          (click)="update(choice)"
+          *ngFor="let choice of choicesUi"
+          (click)="update(choice.value)"
         >
-          {{ choice }}
+          <span *ngIf="choice.prefix" class="text-muted"
+            >{{ choice.prefix }}&nbsp;&nbsp;</span
+          >{{ choice.value }}
         </button>
       </div>
       <div class="dropdown-item input-group" *ngIf="canInput">

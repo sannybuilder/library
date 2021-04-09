@@ -1,12 +1,29 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+interface Choice {
+  prefix?: string;
+  value: string;
+}
 @Component({
   selector: 'scl-selector',
   templateUrl: './selector.component.html',
   styleUrls: ['./selector.component.scss'],
 })
 export class SelectorComponent {
-  @Input() choices: string[];
+  private _choicesUi: Choice[];
+
+  @Input() set choices(values: string[]) {
+    this._choicesUi = values.map((value) => {
+      const words = value.split(' ');
+      return words.length > 1
+        ? { prefix: words[0], value: words.slice(1).join(' ') }
+        : { value };
+    });
+  }
+
+  get choicesUi() {
+    return this._choicesUi;
+  }
   @Input() model: string;
   @Input() label: string;
   @Input() canInput = true;

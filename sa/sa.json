@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1617973011847
+    "last_update": 1617975610141
   },
   "extensions": [
     {
@@ -24054,12 +24054,15 @@
           "short_desc": "Begins a task sequence",
           "output": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "TaskSequence"
             }
           ],
           "class": "TaskSequence",
-          "member": "Open"
+          "member": "Open",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "id": "0616",
@@ -24068,8 +24071,8 @@
           "short_desc": "Ends the task sequence",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "TaskSequence"
             }
           ],
           "class": "TaskSequence",
@@ -24091,16 +24094,16 @@
           "short_desc": "Assigns the character to the specified action sequence",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "sequence",
+              "type": "TaskSequence"
             }
           ],
-          "class": "TaskSequence",
-          "member": "Perform"
+          "class": "Char",
+          "member": "PerformTaskSequence"
         },
         {
           "id": "0619",
@@ -24145,12 +24148,15 @@
           "short_desc": "Clears the task sequence",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "TaskSequence"
             }
           ],
           "class": "TaskSequence",
-          "member": "Clear"
+          "member": "Clear",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "id": "061C",
@@ -24719,9 +24725,9 @@
           "id": "063F",
           "name": "PERFORM_SEQUENCE_TASK_REPEATEDLY",
           "num_params": 0,
-          "short_desc": "",
-          "class": "TaskSequence",
-          "member": "PerformRepeatedly"
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "id": "0640",
@@ -24761,12 +24767,12 @@
           "short_desc": "When set, the specified task sequence runs in a loop",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "TaskSequence"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
           ],
           "class": "TaskSequence",
@@ -24795,16 +24801,16 @@
           "short_desc": "Gets the characters task sequence progress, as started by 0618",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
               "name": "_p2",
               "type": "any"
             }
           ],
-          "class": "TaskSequence",
-          "member": "GetProgress"
+          "class": "Char",
+          "member": "GetTaskSequenceProgress"
         },
         {
           "id": "0647",
@@ -30875,24 +30881,24 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "sequence",
+              "type": "TaskSequence"
             },
             {
               "name": "_p3",
-              "type": "any"
+              "type": "int"
             },
             {
               "name": "_p4",
-              "type": "any"
+              "type": "int"
             }
           ],
-          "class": "TaskSequence",
-          "member": "PerformFromProgress"
+          "class": "Char",
+          "member": "PerformTaskSequenceFromProgress"
         },
         {
           "id": "07A1",
@@ -30946,8 +30952,8 @@
           "short_desc": "",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
               "name": "_p2",
@@ -30958,8 +30964,8 @@
               "type": "any"
             }
           ],
-          "class": "TaskSequence",
-          "member": "GetProgressRecursive"
+          "class": "Char",
+          "member": "GetTaskSequenceProgressRecursive"
         },
         {
           "id": "07A5",
@@ -34596,16 +34602,16 @@
           "short_desc": "Sets the default task sequence for members of the group",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Group"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "sequence",
+              "type": "TaskSequence"
             }
           ],
-          "class": "TaskSequence",
-          "member": "SetGroup"
+          "class": "Group",
+          "member": "SetTaskSequence"
         },
         {
           "id": "087E",

@@ -22,8 +22,6 @@ export class CommandListComponent {
   }> = new EventEmitter();
 
   loading$ = this._extensions.loading$;
-  selectedFiltersOnly$ = this._ui.selectedFiltersOnly$;
-  selectedFiltersExcept$ = this._ui.selectedFiltersExcept$;
   currentPage$ = this._ui.currentPage$;
   rows$ = this._extensions.rows$;
   rowsCount$ = this.rows$.pipe(map((rows) => rows.length));

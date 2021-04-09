@@ -35,6 +35,7 @@ export class CommandEditorComponent implements OnInit {
   shouldDisplayDuplicateNameError = false;
   shouldDisplayDuplicateParamNameError = false;
   shouldDisplayAttributeError = false;
+  shouldDisplayNoOutputParamsError = false;
 
   @Input() command: Command;
   @Input() snippet: string;
@@ -164,6 +165,7 @@ export class CommandEditorComponent implements OnInit {
       delete command.attrs;
     }
     this.shouldDisplayAttributeError = this.getShouldDisplayAttributeError();
+    this.shouldDisplayNoOutputParamsError = this.getShouldDisplayNoOutputParamsError();
   }
 
   get suggestedClassName() {
@@ -259,7 +261,8 @@ export class CommandEditorComponent implements OnInit {
     return (
       this.shouldDisplayDuplicateParamNameError ||
       this.shouldDisplayAttributeError ||
-      this.shouldDisplayDuplicateNameError
+      this.shouldDisplayDuplicateNameError ||
+      this.shouldDisplayNoOutputParamsError
     );
   }
 
@@ -288,6 +291,10 @@ export class CommandEditorComponent implements OnInit {
     return this.getAllParams().some((param) =>
       this.isParamNameDuplicate(param.name)
     );
+  }
+
+  private getShouldDisplayNoOutputParamsError() {
+    return this.command.attrs?.is_constructor && !this.command.output?.length;
   }
 
   private capitalizeFirst(value?: string) {

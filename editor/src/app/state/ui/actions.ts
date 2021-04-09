@@ -56,3 +56,5 @@ export const changePage = createAction(
 );
 
 export const scrollTop = createAction('scroll top');
+
+export const resetFilters = createAction('reset filters');

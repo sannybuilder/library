@@ -10,6 +10,7 @@ import {
   displayOrEditSnippet,
   loadSupportInfoSuccess,
   changePage,
+  resetFilters,
 } from './actions';
 import { without } from 'lodash';
 
@@ -30,12 +31,17 @@ export interface UiState {
   currentPage: number | 'all';
 }
 
+const defaultFilterState = {
+  searchTerm: '',
+  selectedFiltersOnly: [] as Attribute[],
+  selectedFiltersExcept: ['is_nop', 'is_unsupported'] as Attribute[],
+};
+
 export const initialState: UiState = {
+  ...defaultFilterState,
   displayLastUpdated: false,
   displaySearchBar: false,
   viewMode: ViewMode.None,
-  selectedFiltersOnly: [],
-  selectedFiltersExcept: ['is_nop', 'is_unsupported'],
   currentPage: 1,
 };
 
@@ -95,6 +101,10 @@ const _reducer = createReducer(
   on(changePage, (state, { index: currentPage }) => ({
     ...state,
     currentPage,
+  })),
+  on(resetFilters, (state) => ({
+    ...state,
+    ...defaultFilterState,
   }))
 );
 

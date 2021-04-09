@@ -1,12 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output,
-} from '@angular/core';
-import { Subject, timer } from 'rxjs';
-import { debounce, map } from 'rxjs/operators';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { Command, Game } from '../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
 
@@ -15,7 +8,7 @@ import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
   templateUrl: './command-list.component.html',
   styleUrls: ['./command-list.component.scss'],
 })
-export class CommandListComponent implements OnDestroy {
+export class CommandListComponent {
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
@@ -28,12 +21,9 @@ export class CommandListComponent implements OnDestroy {
     extension: string;
   }> = new EventEmitter();
 
-  onDestroy$ = new Subject();
-
   loading$ = this._extensions.loading$;
   selectedFiltersOnly$ = this._ui.selectedFiltersOnly$;
   selectedFiltersExcept$ = this._ui.selectedFiltersExcept$;
-  searchTerm$ = this._ui.searchTerm$.pipe(debounce(() => timer(500)));
   currentPage$ = this._ui.currentPage$;
   rows$ = this._extensions.rows$;
   rowsCount$ = this.rows$.pipe(map((rows) => rows.length));
@@ -43,11 +33,6 @@ export class CommandListComponent implements OnDestroy {
     private _snippets: SnippetsFacade,
     private _ui: UiFacade
   ) {}
-
-  ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-  }
 
   isExtensionChecked(extension: string) {
     return this._extensions.getExtensionCheckedState(extension);
@@ -74,5 +59,10 @@ export class CommandListComponent implements OnDestroy {
   goToPage(index: number) {
     this._ui.changePage(index);
     this._ui.scrollTop();
+  }
+
+  resetFilters() {
+    this._ui.resetFilters();
+    return false;
   }
 }

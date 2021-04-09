@@ -11,6 +11,7 @@ import {
   onListEnter,
   changePage,
   scrollTop,
+  resetFilters,
 } from './actions';
 import * as selector from './selectors';
 
@@ -96,5 +97,9 @@ export class UiFacade {
 
   scrollTop() {
     this.store$.dispatch(scrollTop());
+  }
+
+  resetFilters() {
+    this.store$.dispatch(resetFilters());
   }
 }

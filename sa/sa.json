@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618030886484
+    "last_update": 1618058822034
   },
   "extensions": [
     {
@@ -8843,8 +8843,8 @@
           "id": "0214",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Pickup"
             }
           ],
           "member": "HasBeenCollected",
@@ -17623,15 +17623,15 @@
           "id": "048C",
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z",
               "type": "float"
             }
           ],
@@ -17957,8 +17957,8 @@
           "id": "04A5",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "Char"
             }
           ],
           "member": "GetDeadCharPickupCoords",
@@ -17966,16 +17966,19 @@
           "num_params": 4,
           "output": [
             {
-              "name": "_p2",
-              "type": "float"
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "float"
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p4",
-              "type": "float"
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "short_desc": "Returns appropriate coordinates for creating a pickup by a dead character"
@@ -17988,15 +17991,15 @@
           "id": "04A6",
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z",
               "type": "float"
             },
             {
@@ -18013,7 +18016,7 @@
           "num_params": 6,
           "output": [
             {
-              "name": "_p6",
+              "name": "handle",
               "type": "Pickup"
             }
           ],
@@ -20058,19 +20061,19 @@
           "id": "0517",
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "gxt",
               "type": "string"
             }
           ],
@@ -20079,7 +20082,7 @@
           "num_params": 5,
           "output": [
             {
-              "name": "_p5",
+              "name": "handle",
               "type": "Pickup"
             }
           ],
@@ -20093,23 +20096,23 @@
           "id": "0518",
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "price",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "gxt",
               "type": "string"
             }
           ],
@@ -20118,7 +20121,7 @@
           "num_params": 6,
           "output": [
             {
-              "name": "_p6",
+              "name": "handle",
               "type": "Pickup"
             }
           ],
@@ -25099,7 +25102,7 @@
           "short_desc": "Returns the X, Y and Z coordinates of the pickup",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Pickup"
             },
             {
@@ -40327,13 +40330,15 @@
           "short_desc": "Returns true if the pickup exists",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Pickup"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Pickup",
+          "member": "DoesExist"
         },
         {
           "id": "09D2",
@@ -40466,21 +40471,23 @@
           "short_desc": "Returns true if a money pickup exists near the specified coordinates",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             }
           ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "World",
+          "member": "IsMoneyPickupAtCoords"
         },
         {
           "id": "09DB",

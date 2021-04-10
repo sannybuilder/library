@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618079714906
+    "last_update": 1618080765541
   },
   "extensions": [
     {
@@ -32514,10 +32514,16 @@
           "short_desc": "Returns the cameras field of view",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "fov",
+              "type": "float",
+              "source": "var_any"
             }
-          ]
+          ],
+          "class": "Camera",
+          "member": "GetFov",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0802",
@@ -37671,10 +37677,15 @@
           "short_desc": "Locks the camera target point in position after propagating",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Camera",
+          "member": "PersistTrack",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0930",
@@ -37683,10 +37694,15 @@
           "short_desc": "Locks the cameras position",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Camera",
+          "member": "PersistPos",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0931",
@@ -37695,10 +37711,15 @@
           "short_desc": "Locks the zoom level after the camera has finished zooming",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
-          ]
+          ],
+          "class": "Camera",
+          "member": "PersistFov",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0932",
@@ -37713,13 +37734,25 @@
           "id": "0933",
           "name": "CAMERA_IS_VECTOR_MOVE_RUNNING",
           "num_params": 0,
-          "short_desc": "Returns true if the camera is moving in position"
+          "short_desc": "Returns true if the camera is moving in position",
+          "class": "Camera",
+          "member": "IsVectorMoveRunning",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
         },
         {
           "id": "0934",
           "name": "CAMERA_IS_VECTOR_TRACK_RUNNING",
           "num_params": 0,
-          "short_desc": "Returns true if the camera is moving in angle"
+          "short_desc": "Returns true if the camera is moving in angle",
+          "class": "Camera",
+          "member": "IsVectorTrackRunning",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
         },
         {
           "id": "0935",
@@ -37999,10 +38032,15 @@
           "short_desc": "Puts the camera in front of the specified character",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "handle",
+              "type": "Char"
             }
-          ]
+          ],
+          "class": "Camera",
+          "member": "SetInFrontOfChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0945",

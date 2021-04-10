@@ -6,13 +6,14 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { camelCase, capitalize, trim } from 'lodash';
+import { camelCase, capitalize, trim, uniq } from 'lodash';
 
 import { opcodify } from '../../pipes';
 import {
   Attribute,
   Command,
   CommandAttributes,
+  Entity,
   Param,
   ParamType,
   SourceType,
@@ -38,6 +39,7 @@ export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: string[] = [];
+  classes: string[] = [];
 
   errors: Record<ErrorType, boolean> = {
     invalidAttributeCombo: false,
@@ -57,12 +59,15 @@ export class CommandEditorComponent implements OnInit {
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
 
-  @Input() set entities(val: ParamType[]) {
-    const paramTypes = new Set([
+  @Input() set entities(val: Entity[]) {
+    const dynamicClasses = val.filter((v) => v.type === 'dynamic');
+    this.paramTypes = uniq([
       ...this.primitiveTypes.map((t) => `type ${t}`),
-      ...val.map((t) => `class ${t}`),
+      ...dynamicClasses.map(({ name }) => `class ${name}`),
     ]);
-    this.paramTypes = [...paramTypes];
+    this.classes = uniq(
+      val.map((v) => `${v.type === 'static' ? 'static' : 'class'} ${v.name}`)
+    ).sort();
   }
 
   readonly attrs: Attribute[] = CommandAttributes;
@@ -219,6 +224,8 @@ export class CommandEditorComponent implements OnInit {
       case 'CAM':
       case 'CAMERA':
         return 'Camera';
+      case 'BLIP':
+        return 'Blip';
     }
   }
 

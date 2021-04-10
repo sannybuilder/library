@@ -132,3 +132,8 @@ export enum SupportLevel {
   Supported = 1,
   SupportedDiffParams = 2,
 }
+
+export interface Entity {
+  name: string;
+  type: 'static' | 'dynamic'; // dynamic can be constructed using an opcode
+}

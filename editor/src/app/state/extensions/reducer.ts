@@ -1,18 +1,18 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Extension, Game } from '../../models';
+import { Entity, Extension, Game } from '../../models';
 import {
   loadExtensions,
   loadExtensionsSuccess,
   toggleExtension,
   updateGameCommand,
 } from './actions';
-import { without, sortBy } from 'lodash';
+import { without, sortBy, last } from 'lodash';
 
 export interface GameState {
   extensions: Extension[];
   selectedExtensions?: string[];
   loading: boolean;
-  entities?: Record<string, string[]>;
+  entities?: Record<string, Entity[]>;
   lastUpdate?: number;
 }
 export interface ExtensionsState {
@@ -172,20 +172,31 @@ function upsertBy<T extends object, Key extends keyof T>(
   return newCollection;
 }
 
-function getEntities(extensions: Extension[]): Record<string, string[]> {
-  return extensions.reduce((m, e) => {
-    const set = e.commands
-      .filter((command) => command.attrs?.is_constructor)
-      .reduce((entities, command) => {
-        const last = command.output[command.output.length - 1];
-        if (!last) {
-          return [];
-        }
-        entities.add(last.type);
-        return entities;
-      }, new Set());
+function getEntities(extensions: Extension[]): Record<string, Entity[]> {
+  const dynamicClasses = new Set<string>();
+  const staticClasses = new Set<string>();
 
-    (m[e.name] ??= []).push(...set);
+  return extensions.reduce((m, e) => {
+    for (const command of e.commands) {
+      if (command.attrs?.is_constructor) {
+        const name = last(command.output)?.type;
+        if (name) {
+          dynamicClasses.add(name);
+        }
+      } else if (command.class) {
+        staticClasses.add(command.class);
+      }
+    }
+    const dynamicClassesArray = [...dynamicClasses];
+    const staticClassesArray = [...staticClasses].filter(
+      (name) => !dynamicClassesArray.includes(name)
+    );
+    (m[e.name] ??= []).push(
+      ...dynamicClassesArray.map(
+        (name) => ({ name, type: 'dynamic' } as Entity)
+      ),
+      ...staticClassesArray.map((name) => ({ name, type: 'static' } as Entity))
+    );
     return m;
-  }, {} as Record<string, string[]>);
+  }, {} as Record<string, Entity[]>);
 }

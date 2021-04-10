@@ -27,6 +27,7 @@ export class SelectorComponent {
   @Input() model: string;
   @Input() label: string;
   @Input() canInput = true;
+  @Input() disabled = false;
 
   freeInput: string;
 

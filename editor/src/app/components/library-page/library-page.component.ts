@@ -18,7 +18,6 @@ import {
   SnippetsFacade,
   UiFacade,
 } from '../../state';
-import { isAnyAttributeInvalid } from '../../utils/validation';
 import { FUSEJS_OPTIONS } from '../../fusejs';
 
 @Component({
@@ -48,6 +47,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
   commands?: Command[];
+  editorHasError = false;
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -141,7 +141,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   shouldDisableSaveButton() {
-    return isAnyAttributeInvalid(this.command) || this.noChanges();
+    return (
+      this.editorHasError ||
+      this.noChanges() ||
+      // class & member should be both empty or both filed
+      !!this.command?.class !== !!this.command.member
+    );
   }
 
   resetChanges() {

@@ -75,7 +75,9 @@
       <span class="input-group-text">Member</span>
       <input
         type="text"
-        [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
+        [disabled]="
+          command.attrs?.is_keyword || command.attrs?.is_nop || !command.class
+        "
         class="form-control"
         [ngModel]="command.member"
         (ngModelChange)="onMemberChange(command, $event)"
@@ -237,19 +239,9 @@
       </label>
     </div>
 
-    <div class="alert alert-danger mt-3" *ngIf="hasAnyError">
-      <div *ngIf="shouldDisplayAttributeError">
-        Invalid combination of attributes
-      </div>
-
-      <div *ngIf="shouldDisplayDuplicateParamNameError">
-        Duplicate parameter name
-      </div>
-
-      <div *ngIf="shouldDisplayDuplicateNameError">Duplicate command name</div>
-
-      <div *ngIf="shouldDisplayNoOutputParamsError">
-        is_constructor can't be used in a command without an output param
+    <div class="alert alert-danger mt-3" *ngIf="errorMessages.length">
+      <div *ngFor="let message of errorMessages">
+        {{ message }}
       </div>
     </div>
   </div>

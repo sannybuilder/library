@@ -84,6 +84,7 @@
     [entities]="getExtensionEntities(extension) | async"
     [supportInfo]="getCommandSupportInfo(command, extension) | async"
     [commands]="commands"
+    (hasError)="editorHasError = $event"
   ></scl-command-editor>
   <scl-command-info
     *ngIf="viewMode === ViewMode.View"

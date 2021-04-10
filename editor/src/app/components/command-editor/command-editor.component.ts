@@ -22,6 +22,12 @@ import { SelectorComponent } from '../selector/selector.component';
 import { isAnyAttributeInvalid } from '../../utils/validation';
 import { smash } from '../../utils';
 
+type ErrorType =
+  | 'duplicateName'
+  | 'duplicateParamName'
+  | 'invalidAttributeCombo'
+  | 'noConstructorWithoutOutputParams';
+
 @Component({
   selector: 'scl-command-editor',
   templateUrl: './command-editor.component.html',
@@ -32,10 +38,14 @@ export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: string[] = [];
-  shouldDisplayDuplicateNameError = false;
-  shouldDisplayDuplicateParamNameError = false;
-  shouldDisplayAttributeError = false;
-  shouldDisplayNoOutputParamsError = false;
+
+  errors: Record<ErrorType, boolean> = {
+    invalidAttributeCombo: false,
+    duplicateName: false,
+    duplicateParamName: false,
+    noConstructorWithoutOutputParams: false,
+  };
+  errorMessages: string[] = [];
 
   @Input() command: Command;
   @Input() snippet: string;
@@ -45,6 +55,7 @@ export class CommandEditorComponent implements OnInit {
   @Input() commands?: Command[];
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
+  @Output() hasError: EventEmitter<boolean> = new EventEmitter();
 
   @Input() set entities(val: ParamType[]) {
     const paramTypes = new Set([
@@ -72,6 +83,18 @@ export class CommandEditorComponent implements OnInit {
     ParamType.label,
     ParamType.string,
   ];
+  readonly errorHandlers: Record<ErrorType, () => void> = {
+    invalidAttributeCombo: this.updateAttributeError,
+    duplicateName: this.updateDuplicateNameError,
+    duplicateParamName: this.updateDuplicateParamNameError,
+    noConstructorWithoutOutputParams: this.updateNoOutputParamsError,
+  };
+  readonly messages: Record<ErrorType, string> = {
+    invalidAttributeCombo: 'Invalid combination of attributes',
+    duplicateParamName: 'Duplicate parameter name',
+    duplicateName: 'Duplicate command name',
+    noConstructorWithoutOutputParams: `is_constructor can't be used in a command without an output param`,
+  };
 
   ngOnInit() {
     if (this.selector) {
@@ -79,16 +102,24 @@ export class CommandEditorComponent implements OnInit {
     }
   }
 
+  updateError(...errors: ErrorType[]) {
+    errors.forEach((error) => this.errorHandlers[error].call(this));
+    this.errorMessages = Object.entries(this.errors)
+      .filter(([_, v]) => v)
+      .map(([k, _]) => this.messages[k as ErrorType]);
+    this.hasError.emit(this.errorMessages.length > 0);
+  }
+
   onCommandNameChange(command: Command, value: string) {
     command.name = trim(
       value ? value.replace(/[\s-]/g, '_').toUpperCase() : value
     );
-    this.shouldDisplayDuplicateNameError = this.getShouldDisplayDuplicateNameError();
+    this.updateError('duplicateName');
   }
 
   onOpcodeChange(command: Command, value: string) {
     command.id = trim(value ? value.toUpperCase() : value);
-    this.shouldDisplayDuplicateNameError = this.getShouldDisplayDuplicateNameError();
+    this.updateError('duplicateName');
   }
 
   onClassChange(command: Command, value: string) {
@@ -141,7 +172,7 @@ export class CommandEditorComponent implements OnInit {
 
   onParamNameChange(name: string, param: Param) {
     param.name = name.startsWith('_') ? name : camelCase(name); // camelCase also trims the value
-    this.shouldDisplayDuplicateParamNameError = this.getShouldDisplayDuplicateParamNameError();
+    this.updateError('duplicateParamName');
   }
 
   getDefaultInputSource(param: Param) {
@@ -164,8 +195,10 @@ export class CommandEditorComponent implements OnInit {
     } else {
       delete command.attrs;
     }
-    this.shouldDisplayAttributeError = this.getShouldDisplayAttributeError();
-    this.shouldDisplayNoOutputParamsError = this.getShouldDisplayNoOutputParamsError();
+    this.updateError(
+      'invalidAttributeCombo',
+      'noConstructorWithoutOutputParams'
+    );
   }
 
   get suggestedClassName() {
@@ -191,10 +224,7 @@ export class CommandEditorComponent implements OnInit {
 
   get suggestedClassMember() {
     const className = this.suggestedClassName;
-    if (
-      className &&
-      (!this.command.class || this.command.class === className)
-    ) {
+    if (className && this.command.class === className) {
       const parts = this.command.name.split('_');
       parts.splice(1, 1);
       return parts.map(capitalize).join('');
@@ -257,15 +287,6 @@ export class CommandEditorComponent implements OnInit {
     }
   }
 
-  get hasAnyError() {
-    return (
-      this.shouldDisplayDuplicateParamNameError ||
-      this.shouldDisplayAttributeError ||
-      this.shouldDisplayDuplicateNameError ||
-      this.shouldDisplayNoOutputParamsError
-    );
-  }
-
   isParamNameDuplicate(name: string) {
     return (
       this.getAllParams().filter((param) => param.name === name).length > 1
@@ -276,25 +297,26 @@ export class CommandEditorComponent implements OnInit {
     return [...(this.command.input ?? []), ...(this.command.output ?? [])];
   }
 
-  private getShouldDisplayAttributeError(): boolean {
-    return isAnyAttributeInvalid(this.command);
+  private updateAttributeError() {
+    this.errors.invalidAttributeCombo = isAnyAttributeInvalid(this.command);
   }
 
-  private getShouldDisplayDuplicateNameError() {
-    return (this.commands ?? []).some(
+  private updateDuplicateNameError() {
+    this.errors.duplicateName = (this.commands ?? []).some(
       (command) =>
         command.name === this.command.name && command.id !== this.command.id
     );
   }
 
-  private getShouldDisplayDuplicateParamNameError() {
-    return this.getAllParams().some((param) =>
+  private updateDuplicateParamNameError() {
+    this.errors.duplicateParamName = this.getAllParams().some((param) =>
       this.isParamNameDuplicate(param.name)
     );
   }
 
-  private getShouldDisplayNoOutputParamsError() {
-    return this.command.attrs?.is_constructor && !this.command.output?.length;
+  private updateNoOutputParamsError() {
+    this.errors.noConstructorWithoutOutputParams =
+      this.command.attrs?.is_constructor && !this.command.output?.length;
   }
 
   private capitalizeFirst(value?: string) {

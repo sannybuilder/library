@@ -250,7 +250,9 @@ export class CommandEditorComponent implements OnInit {
       !this.command.attrs?.is_static &&
       (!this.command.input?.[index]?.name ||
         this.command.input?.[index]?.name?.startsWith('_')) &&
-      ['Player', 'Car', 'Char', 'Object', 'Pickup'].includes(this.command.class)
+      ['Player', 'Car', 'Char', 'Object', 'Pickup', 'Blip'].includes(
+        this.command.class
+      )
     ) {
       return 'self';
     }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -130,6 +131,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
       UiEffects,
       ChangesEffects,
     ]),
+    DragDropModule,
     // StoreDevtoolsModule.instrument({
     //   maxAge: 25,
     //   logOnly: false,

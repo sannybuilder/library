@@ -88,8 +88,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(([command, extension, viewMode, extensions]) => {
         this.commands = extensions.find((e) => e.name === extension)?.commands;
-        this.command = command ? cloneDeep(command) : command;
-        this.oldCommand = command ? cloneDeep(command) : command;
+        this.command = command
+          ? { input: [], output: [], ...cloneDeep(command) }
+          : command;
+        this.oldCommand = cloneDeep(this.command);
         this.oldExtension = extension;
         this.extension = extension;
         this.viewMode = viewMode;

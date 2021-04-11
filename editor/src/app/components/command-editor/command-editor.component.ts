@@ -7,6 +7,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { camelCase, capitalize, trim, uniq } from 'lodash';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 import { opcodify } from '../../pipes';
 import {
@@ -296,8 +301,26 @@ export class CommandEditorComponent implements OnInit {
 
   isParamNameDuplicate(name: string) {
     return (
+      !!name &&
       this.getAllParams().filter((param) => param.name === name).length > 1
     );
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 
   private getAllParams() {

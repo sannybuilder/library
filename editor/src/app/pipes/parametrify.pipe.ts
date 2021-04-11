@@ -14,9 +14,14 @@ export class ParametrifyPipe implements PipeTransform {
         m[key + (i + 1)] = braceify(stringifyWithColon(v), '[]');
         return m;
       }, {} as Record<string, string>);
-    return compiled({
-      ...stringify('input'),
-      ...stringify('output'),
-    });
+
+    try {
+      return compiled({
+        ...stringify('input'),
+        ...stringify('output'),
+      });
+    } catch {
+      return '[invalid code snippet]';
+    }
   }
 }

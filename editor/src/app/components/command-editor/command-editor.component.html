@@ -117,110 +117,146 @@
   </div>
 </div>
 
-<ng-container *ngIf="command.input?.length">
-  <h5>Parameters</h5>
-  <div class="row mb-2" *ngFor="let param of command.input; let i = index">
-    <div class="col-12 col-lg-4">
-      <ng-container
-        *ngTemplateOutlet="paramTemplate; context: { param: param, i: i }"
-      ></ng-container>
-      <div class="mb-1" *ngIf="getSuggestedInputName(i) as suggestedInputName">
-        <small
-          >Suggestion:
-          <a href="#" (click)="(param.name = suggestedInputName) && false">
-            {{ suggestedInputName }}</a
-          ></small
+<ng-container cdkDropListGroup>
+  <div
+    cdkDropList
+    [cdkDropListData]="command.input"
+    [ngClass]="{ 'empty-list': !command.input.length }"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h5>Parameters</h5>
+    <div
+      class="row mb-2"
+      *ngFor="let param of command.input; let i = index"
+      cdkDrag
+      cdkDragBoundary="scl-command-editor"
+    >
+      <div class="col-12 col-lg-4">
+        <div class="input-group">
+          <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
+          <ng-container
+            *ngTemplateOutlet="paramTemplate; context: { param: param }"
+          ></ng-container>
+        </div>
+        <div
+          class="mb-1"
+          *ngIf="getSuggestedInputName(i) as suggestedInputName"
         >
+          <small
+            >Suggestion:
+            <a href="#" (click)="(param.name = suggestedInputName) && false">
+              {{ suggestedInputName }}</a
+            ></small
+          >
+        </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-4">
-      <scl-selector
-        [ngClass]="{ invalid: param.type === ParamType.any }"
-        [(model)]="param.type"
-        [choices]="paramTypes"
-        (keydown)="onTypeKeyDown($event, param)"
-        [canInput]="false"
-      ></scl-selector>
-      <div class="mb-1" *ngIf="getSuggestedInputType(i) as suggestedInputType">
-        <small
-          >Suggestion:
-          <a href="#" (click)="(param.type = suggestedInputType) && false">
-            {{ suggestedInputType }}</a
-          ></small
+      <div class="col-12 col-sm-6 col-lg-4">
+        <scl-selector
+          [ngClass]="{ invalid: param.type === ParamType.any }"
+          [(model)]="param.type"
+          [choices]="paramTypes"
+          (keydown)="onTypeKeyDown($event, param)"
+          [canInput]="false"
+        ></scl-selector>
+        <div
+          class="mb-1"
+          *ngIf="getSuggestedInputType(i) as suggestedInputType"
         >
+          <small
+            >Suggestion:
+            <a href="#" (click)="(param.type = suggestedInputType) && false">
+              {{ suggestedInputType }}</a
+            ></small
+          >
+        </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-4">
-      <scl-selector
-        [model]="getDefaultInputSource(param)"
-        (modelChange)="onParamSourceUpdate($event, param)"
-        [choices]="sources"
-        [canInput]="false"
-      ></scl-selector>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <scl-selector
+          [model]="getDefaultInputSource(param)"
+          (modelChange)="onParamSourceUpdate($event, param)"
+          [choices]="sources"
+          [canInput]="false"
+        ></scl-selector>
+      </div>
     </div>
   </div>
-</ng-container>
 
-<ng-container *ngIf="command.output?.length">
-  <h5>Result</h5>
-  <div class="row mb-2" *ngFor="let param of command.output; let i = index">
-    <div class="col-12 col-lg-4">
-      <ng-container
-        *ngTemplateOutlet="paramTemplate; context: { param: param, i: i }"
-      ></ng-container>
-      <div
-        class="mb-1"
-        *ngIf="getSuggestedOutputName(i) as suggestedOutputName"
-      >
-        <small
-          >Suggestion:
-          <a href="#" (click)="(param.name = suggestedOutputName) && false">
-            {{ suggestedOutputName }}</a
-          ></small
+  <div
+    cdkDropList
+    [cdkDropListData]="command.output"
+    [ngClass]="{ 'empty-list': !command.output.length }"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h5>Result</h5>
+    <div
+      class="row mb-2"
+      *ngFor="let param of command.output; let i = index"
+      cdkDrag
+      cdkDragBoundary="scl-command-editor"
+    >
+      <div class="col-12 col-lg-4">
+        <div class="input-group">
+          <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
+          <ng-container
+            *ngTemplateOutlet="paramTemplate; context: { param: param }"
+          ></ng-container>
+        </div>
+        <div
+          class="mb-1"
+          *ngIf="getSuggestedOutputName(i) as suggestedOutputName"
         >
-      </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-4">
-      <scl-selector
-        [ngClass]="{ invalid: param.type === ParamType.any }"
-        [(model)]="param.type"
-        [choices]="paramTypes"
-        [canInput]="
-          command.attrs?.is_constructor && i === command.output.length - 1
-        "
-      ></scl-selector>
-      <div
-        class="mb-1"
-        *ngIf="getSuggestedOutputType(i) as suggestedOutputType"
-      >
-        <small
-          >Suggestion:
-          <a href="#" (click)="(param.type = suggestedOutputType) && false">
-            {{ suggestedOutputType }}</a
-          ></small
-        >
-      </div>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-4">
-      <scl-selector
-        [model]="getDefaultOutputSource(param)"
-        (modelChange)="onParamSourceUpdate($event, param)"
-        [choices]="sources"
-        [canInput]="false"
-      ></scl-selector>
-      <div
-        class="mb-1"
-        *ngIf="getSuggestedOutputSource(i) as suggestedOutputSource"
-      >
-        <small
-          >Suggestion:
-          <a
-            href="#"
-            (click)="onParamSourceUpdate(suggestedOutputSource, param) || false"
+          <small
+            >Suggestion:
+            <a href="#" (click)="(param.name = suggestedOutputName) && false">
+              {{ suggestedOutputName }}</a
+            ></small
           >
-            {{ suggestedOutputSource }}</a
-          ></small
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <scl-selector
+          [ngClass]="{ invalid: param.type === ParamType.any }"
+          [(model)]="param.type"
+          [choices]="paramTypes"
+          [canInput]="
+            command.attrs?.is_constructor && i === command.output.length - 1
+          "
+        ></scl-selector>
+        <div
+          class="mb-1"
+          *ngIf="getSuggestedOutputType(i) as suggestedOutputType"
         >
+          <small
+            >Suggestion:
+            <a href="#" (click)="(param.type = suggestedOutputType) && false">
+              {{ suggestedOutputType }}</a
+            ></small
+          >
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <scl-selector
+          [model]="getDefaultOutputSource(param)"
+          (modelChange)="onParamSourceUpdate($event, param)"
+          [choices]="sources"
+          [canInput]="false"
+        ></scl-selector>
+        <div
+          class="mb-1"
+          *ngIf="getSuggestedOutputSource(i) as suggestedOutputSource"
+        >
+          <small
+            >Suggestion:
+            <a
+              href="#"
+              (click)="
+                onParamSourceUpdate(suggestedOutputSource, param) || false
+              "
+            >
+              {{ suggestedOutputSource }}</a
+            ></small
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -264,14 +300,11 @@
 </div>
 
 <ng-template #paramTemplate let-param="param" let-i="i">
-  <div class="input-group">
-    <span class="input-group-text">{{ i + 1 }}</span>
-    <input
-      type="text"
-      class="form-control"
-      [ngModel]="param.name"
-      (ngModelChange)="onParamNameChange($event, param)"
-      [ngClass]="{ 'is-invalid': isParamNameDuplicate(param.name) }"
-    />
-  </div>
+  <input
+    type="text"
+    class="form-control"
+    [ngModel]="param.name"
+    (ngModelChange)="onParamNameChange($event, param)"
+    [ngClass]="{ 'is-invalid': isParamNameDuplicate(param.name) }"
+  />
 </ng-template>

@@ -1,33 +1,31 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Game, SupportInfo, ViewMode, Attribute } from '../../models';
+import { Command, ViewMode, Attribute } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
   toggleCommandListElements,
   toggleFilter,
   updateSearchTerm,
-  onListEnter,
   displayOrEditSnippet,
-  loadSupportInfoSuccess,
   changePage,
   resetFilters,
 } from './actions';
 import { without } from 'lodash';
+import { onListEnter } from '../game/actions';
 
 export interface UiState {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
+  selectedExtensions?: string[];
   selectedFiltersOnly: Attribute[];
   selectedFiltersExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
   viewMode: ViewMode;
-  game?: Game;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
-  supportInfo?: SupportInfo;
   currentPage: number | 'all';
 }
 
@@ -88,15 +86,10 @@ const _reducer = createReducer(
     snippetToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
   })),
-  on(onListEnter, (state, { game, opcode, extension }) => ({
+  on(onListEnter, (state, { opcode, extension }) => ({
     ...state,
-    game,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
-  })),
-  on(loadSupportInfoSuccess, (state, { supportInfo }) => ({
-    ...state,
-    supportInfo,
   })),
   on(changePage, (state, { index: currentPage }) => ({
     ...state,

@@ -1,5 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Command, SupportInfo } from '../../models';
+import { flatMap } from 'lodash';
+import { search } from '../../fusejs/fusejs';
+import { Attribute, Command } from '../../models';
+import { extensions, selectedExtensions } from '../extensions/selectors';
 import { UiState } from './reducer';
 
 export const state = createFeatureSelector('ui');
@@ -66,20 +69,51 @@ export const opcodeOnLoad = createSelector(state, (state: UiState) => ({
   extension: state.extensionOnLoad,
 }));
 
-export const game = createSelector(state, (state: UiState) => state.game);
-
-export const supportInfo = createSelector(
-  state,
-  (state: UiState) => state.supportInfo
-);
-
-export const commandSupportInfo = createSelector(
-  supportInfo,
-  (supportInfo: SupportInfo, props: { command: Command; extension: string }) =>
-    supportInfo?.[props.extension]?.[props.command.id]
-);
-
 export const currentPage = createSelector(
   state,
   (state: UiState) => state.currentPage
 );
+
+export const rows = createSelector(
+  extensions,
+  selectedExtensions,
+  selectedFiltersOnly,
+  selectedFiltersExcept,
+  searchTerm,
+  (
+    extensions,
+    selectedExtensions,
+    selectedFiltersOnly,
+    selectedFiltersExcept,
+    searchTerm
+  ) => {
+    const selected = extensions?.filter((_, i) => selectedExtensions[i]);
+
+    return (
+      selected &&
+      flatMap(selected, ({ name: extension, commands }) => {
+        const filtered = filterCommands(
+          commands,
+          selectedFiltersOnly,
+          selectedFiltersExcept
+        );
+        return search(filtered, searchTerm).map((command) => ({
+          extension,
+          command,
+        }));
+      })
+    );
+  }
+);
+
+function filterCommands(
+  elements: Command[],
+  only: Attribute[],
+  except: Attribute[]
+) {
+  return elements.filter(
+    (element) =>
+      only.every((attr) => element.attrs?.[attr]) &&
+      !except.some((attr) => element.attrs?.[attr])
+  );
+}

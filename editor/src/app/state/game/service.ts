@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Game, SupportInfo } from '../../models';
 
 @Injectable({ providedIn: 'root' })
-export class UiService {
+export class GameService {
   constructor(private http: HttpClient) {}
 
   loadSupportInfo(game: Game): Observable<SupportInfo> {

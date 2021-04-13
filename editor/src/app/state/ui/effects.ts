@@ -4,9 +4,6 @@ import {
   changePage,
   displayOrEditCommandInfo,
   displayOrEditSnippet,
-  loadSupportInfo,
-  loadSupportInfoSuccess,
-  onListEnter,
   scrollTop,
   stopEditOrDisplay,
   toggleFilter,
@@ -29,10 +26,11 @@ import {
   updateCommand,
 } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
-import { UiService } from './service';
 import { ExtensionsFacade } from '../extensions/facade';
 import { ChangesFacade } from '../changes/facade';
 import { DOCUMENT } from '@angular/common';
+import { onListEnter } from '../game/actions';
+import { GameFacade } from '../game/facade';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -40,7 +38,7 @@ export class UiEffects {
     combineLatest([
       this._actions$.pipe(ofType(loadExtensionsSuccess)),
       this._ui.opcodeOnLoad$,
-      this._ui.game$,
+      this._game.game$,
     ]).pipe(
       filter(([{ game }, _, currGame]) => game === currGame),
       map(([{ extensions }, { opcode, extension }]) => {
@@ -59,10 +57,6 @@ export class UiEffects {
         }
       })
     )
-  );
-
-  onGameChange$ = createEffect(() =>
-    this._ui.game$.pipe(map((game) => loadSupportInfo({ game })))
   );
 
   updateCommand$ = createEffect(() =>
@@ -88,14 +82,6 @@ export class UiEffects {
     )
   );
 
-  loadSupportInfo$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(loadSupportInfo),
-      switchMap(({ game }) => this._service.loadSupportInfo(game)),
-      map((supportInfo) => loadSupportInfoSuccess({ supportInfo }))
-    )
-  );
-
   resetPagination$ = createEffect(() =>
     merge(
       this._actions$.pipe(
@@ -106,10 +92,7 @@ export class UiEffects {
   );
 
   commandPage$ = createEffect(() =>
-    combineLatest([
-      this._extensions.rows$,
-      this._ui.commandToDisplayOrEdit$,
-    ]).pipe(
+    combineLatest([this._ui.rows$, this._ui.commandToDisplayOrEdit$]).pipe(
       map(([rows, command]) =>
         rows?.findIndex((row) => row.command?.id === command?.id)
       ),
@@ -146,10 +129,9 @@ export class UiEffects {
     private _actions$: Actions,
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
-    private _service: UiService,
     private _extensions: ExtensionsFacade,
     private _changes: ChangesFacade,
-
+    private _game: GameFacade,
     @Inject(DOCUMENT) private _d: Document
   ) {}
 }

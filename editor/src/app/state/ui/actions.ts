@@ -1,12 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  Attribute,
-  Command,
-  Game,
-  Modifier,
-  SupportInfo,
-  ViewMode,
-} from '../../models';
+import { Attribute, Command, Modifier, ViewMode } from '../../models';
 
 export const toggleFilter = createAction(
   'toggle filter selection',
@@ -34,21 +27,6 @@ export const displayOrEditSnippet = createAction(
 );
 
 export const stopEditOrDisplay = createAction('stop edit or display');
-
-export const onListEnter = createAction(
-  'on list enter',
-  props<{ game: Game; opcode: string; extension: string }>()
-);
-
-export const loadSupportInfo = createAction(
-  'load support info',
-  props<{ game: Game }>()
-);
-
-export const loadSupportInfoSuccess = createAction(
-  'load support info success',
-  props<{ supportInfo: SupportInfo }>()
-);
 
 export const changePage = createAction(
   'change page',

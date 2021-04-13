@@ -19,20 +19,20 @@ import {
 } from './actions';
 import { ExtensionsService } from './service';
 import { ExtensionsFacade } from './facade';
-import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
 import { GameLibrary, GameSupportInfo } from '../../models';
 import { getSameCommands, isAnyAttributeInvalid } from '../../utils';
 import { AuthFacade } from '../auth/facade';
+import { GameFacade } from '../game/facade';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
   loadExtensions$ = createEffect(() =>
-    this.actions$.pipe(
+    this._actions$.pipe(
       ofType(loadExtensions),
       withLatestFrom(this._auth.authToken$),
       concatMap(([{ game }, accessToken]) =>
-        this.service
+        this._service
           .loadExtensions(game, accessToken)
           .pipe(
             map(({ extensions, lastUpdate }) =>
@@ -44,12 +44,12 @@ export class ExtensionsEffects {
   );
 
   updateCommands$ = createEffect(() =>
-    this.actions$.pipe(
+    this._actions$.pipe(
       ofType(updateCommand),
       distinctUntilChanged(isEqual),
-      withLatestFrom(this._ui.game$),
-      switchMap(([{ command, newExtension, oldExtension }, game]) => {
-        return this._ui.getCommandSupportInfo(command, oldExtension).pipe(
+      withLatestFrom(this._game.game$),
+      switchMap(([{ command, newExtension, oldExtension }, game]) =>
+        this._game.getCommandSupportInfo(command, oldExtension).pipe(
           take(1),
           switchMap((supportInfo: GameSupportInfo[]) =>
             getSameCommands(supportInfo, game).map((d) =>
@@ -61,14 +61,14 @@ export class ExtensionsEffects {
               })
             )
           )
-        );
-      })
+        )
+      )
     )
   );
 
   updateGameCommands$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this._actions$.pipe(
         ofType(updateGameCommand),
         distinctUntilChanged<ReturnType<typeof updateGameCommand>>(isEqual),
         switchMap(({ game }) =>
@@ -87,7 +87,7 @@ export class ExtensionsEffects {
 
   validateExtensions$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this._actions$.pipe(
         ofType(loadExtensionsSuccess),
         tap(({ extensions }) => {
           extensions.forEach((extension) =>
@@ -105,11 +105,11 @@ export class ExtensionsEffects {
   );
 
   constructor(
-    private actions$: Actions,
+    private _actions$: Actions,
     private _extensions: ExtensionsFacade,
-    private service: ExtensionsService,
-    private _ui: UiFacade,
     private _changes: ChangesFacade,
-    private _auth: AuthFacade
+    private _auth: AuthFacade,
+    private _service: ExtensionsService,
+    private _game: GameFacade
   ) {}
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { GameFacade } from 'src/app/state/game/facade';
 import { Command, Game } from '../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
 
@@ -23,18 +24,15 @@ export class CommandListComponent {
 
   loading$ = this._extensions.loading$;
   currentPage$ = this._ui.currentPage$;
-  rows$ = this._extensions.rows$;
+  rows$ = this._ui.rows$;
   rowsCount$ = this.rows$.pipe(map((rows) => rows.length));
 
   constructor(
     private _extensions: ExtensionsFacade,
     private _snippets: SnippetsFacade,
-    private _ui: UiFacade
+    private _ui: UiFacade,
+    private _game: GameFacade
   ) {}
-
-  isExtensionChecked(extension: string) {
-    return this._extensions.getExtensionCheckedState(extension);
-  }
 
   onEdit(command: Command, extension: string) {
     this.edit.emit({ command, extension });
@@ -51,7 +49,7 @@ export class CommandListComponent {
   }
 
   getCommandSupportInfo(command: Command, extension: string) {
-    return this._ui.getCommandSupportInfo(command, extension);
+    return this._game.getCommandSupportInfo(command, extension);
   }
 
   goToPage(index: number) {

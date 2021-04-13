@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { flatMap } from 'lodash';
+import { flatMap, uniq } from 'lodash';
 import { search } from '../../fusejs/fusejs';
 import { Attribute, Command, Extension, Game } from '../../models';
+import { game } from '../game/selectors';
 import {
-  game,
   searchTerm,
   selectedFiltersExcept,
   selectedFiltersOnly,
@@ -35,6 +35,12 @@ export const extensionNames = createSelector(
     extensions ? extensions.map((e) => e.name) : []
 );
 
+export const extensionCommands = createSelector(
+  state,
+  (extensions: Extension[], props: { extension: string }) =>
+    extensions.find((e) => e.name === props.extension)?.commands
+);
+
 export const loading = createSelector(
   state,
   (state: GameState) => state.loading
@@ -62,46 +68,20 @@ export const lastUpdate = createSelector(
   (state: GameState) => state.lastUpdate
 );
 
-export const rows = createSelector(
+// todo: move to ui
+export const classNamesForSelectedExtensions = createSelector(
   extensions,
   selectedExtensions,
-  selectedFiltersOnly,
-  selectedFiltersExcept,
-  searchTerm,
-  (
-    extensions,
-    selectedExtensions,
-    selectedFiltersOnly,
-    selectedFiltersExcept,
-    searchTerm
-  ) => {
+  (extensions, selectedExtensions) => {
     const selected = extensions?.filter((_, i) => selectedExtensions[i]);
 
     return (
       selected &&
-      flatMap(selected, ({ name: extension, commands }) => {
-        const filtered = filterCommands(
-          commands,
-          selectedFiltersOnly,
-          selectedFiltersExcept
-        );
-        return search(filtered, searchTerm).map((command) => ({
-          extension,
-          command,
-        }));
-      })
+      uniq(
+        flatMap(selected, ({ commands }) =>
+          commands.map((command) => command.class || '(no class)')
+        )
+      )
     );
   }
 );
-
-function filterCommands(
-  elements: Command[],
-  only: Attribute[],
-  except: Attribute[]
-) {
-  return elements.filter(
-    (element) =>
-      only.every((attr) => element.attrs?.[attr]) &&
-      !except.some((attr) => element.attrs?.[attr])
-  );
-}

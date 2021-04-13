@@ -14,11 +14,11 @@ export class ExtensionsFacade {
   extensionNames$ = this.store$.select(selector.extensionNames);
   loading$ = this.store$.select(selector.loading);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
-  rows$ = this.store$.select(selector.rows);
 
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });
   }
+
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selector.isExtensionSelected, {
       extension,
@@ -27,6 +27,10 @@ export class ExtensionsFacade {
 
   getExtensionEntities(extension: string) {
     return this.store$.select(selector.entities, { extension });
+  }
+
+  getExtensionCommands(extension: string) {
+    return this.store$.select(selector.extensionCommands, { extension });
   }
 
   constructor(private store$: Store) {}

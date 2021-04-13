@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Attribute, Command, Game, Modifier, ViewMode } from '../../models';
+import { Attribute, Command, Modifier, ViewMode } from '../../models';
 import {
   updateSearchTerm,
   toggleCommandListElements,
   toggleFilter,
   displayOrEditCommandInfo,
   stopEditOrDisplay,
-  onListEnter,
   changePage,
   scrollTop,
   resetFilters,
@@ -22,18 +21,14 @@ export class UiFacade {
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
   selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
-  supportInfo$ = this.store$.select(selector.supportInfo);
   currentPage$ = this.store$.select(selector.currentPage);
-  game$ = this.store$
-    .select(selector.game)
-    .pipe(distinctUntilChanged(), filter<Game>(Boolean));
   commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
   extensionToDisplayOrEdit$ = this.store$.select(
     selector.extensionToDisplayOrEdit
   );
   viewMode$ = this.store$.select(selector.viewMode);
   snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
-
+  rows$ = this.store$.select(selector.rows);
   opcodeOnLoad$ = this.store$.select(selector.opcodeOnLoad).pipe(
     distinctUntilChanged(
       (a, b) => a.opcode === b.opcode && a.extension === b.extension
@@ -48,13 +43,6 @@ export class UiFacade {
         : selector.isFilterSelectedExcept,
       { filter }
     );
-  }
-
-  getCommandSupportInfo(command: Command, extension: string) {
-    return this.store$.select(selector.commandSupportInfo, {
-      command,
-      extension,
-    });
   }
 
   constructor(private store$: Store) {}
@@ -85,10 +73,6 @@ export class UiFacade {
 
   stopEditOrDisplay() {
     this.store$.dispatch(stopEditOrDisplay());
-  }
-
-  onListEnter(game: Game, opcode: string, extension: string) {
-    this.store$.dispatch(onListEnter({ game, opcode, extension }));
   }
 
   changePage(index: number) {

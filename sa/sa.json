@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618408823391
+    "last_update": 1618418664678
   },
   "extensions": [
     {
@@ -2495,6 +2495,13 @@
           "short_desc": "Makes a negative float positive"
         },
         {
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2504,15 +2511,16 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_FLOAT",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "float"
-            }
-          ],
-          "short_desc": "Gets a random float between 0"
+          "short_desc": "Gets a random float between 0.0 and 1.0 and stores the result into a variable."
         },
         {
+          "output": [
+            {
+              "name": "result",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2522,12 +2530,6 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_INT",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "short_desc": "Gets a random integer between 0 and 32767 (max signed 16-bit) and stores the result to a variable"
         },
         {
@@ -8625,57 +8627,59 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "min",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Math",
           "id": "0208",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "member": "RandomFloatInRange",
           "name": "GENERATE_RANDOM_FLOAT_IN_RANGE",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "short_desc": "Generates a random float between the ranges specified"
         },
         {
+          "input": [
+            {
+              "name": "min",
+              "type": "int"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Math",
           "id": "0209",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "RandomIntInRange",
           "name": "GENERATE_RANDOM_INT_IN_RANGE",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "short_desc": "Generates a random integer between the ranges specified"
         },
         {
@@ -14732,29 +14736,29 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "03C5",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "CreateRandomCarForCarPark",
           "name": "CREATE_RANDOM_CAR_FOR_CAR_PARK",
           "num_params": 4,
@@ -17601,18 +17605,18 @@
           "short_desc": "Enables a remote-control vehicle detonation"
         },
         {
-          "class": "Car",
-          "id": "048B",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "routeSeed",
               "type": "int"
             }
           ],
+          "class": "Car",
+          "id": "048B",
           "member": "SetRandomRouteSeed",
           "name": "SET_CAR_RANDOM_ROUTE_SEED",
           "num_params": 2,
@@ -20179,67 +20183,61 @@
           "short_desc": "Returns true if the character has been hurt by the other character"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            }
-          ],
           "id": "051B",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_CAR",
           "num_params": 2,
           "short_desc": "Returns true if the actor has been hurt by the specified vehicle",
-          "attrs": {
-            "is_condition": true
-          },
-          "class": "Char",
-          "member": "HasBeenDamagedByCar"
-        },
-        {
           "input": [
             {
-              "name": "self",
-              "type": "Car"
+              "name": "_p1",
+              "type": "any"
             },
             {
-              "name": "handle",
-              "type": "Char"
+              "name": "_p2",
+              "type": "any"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
           "id": "051C",
           "name": "HAS_CAR_BEEN_DAMAGED_BY_CHAR",
           "num_params": 2,
           "short_desc": "Returns true if the car has been damaged by the specified actor",
-          "attrs": {
-            "is_condition": true
-          },
-          "class": "Car",
-          "member": "HasBeenDamagedByChar"
-        },
-        {
           "input": [
             {
-              "name": "self",
-              "type": "Car"
+              "name": "_p1",
+              "type": "any"
             },
             {
-              "name": "handle",
-              "type": "Car"
+              "name": "_p2",
+              "type": "any"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
           "id": "051D",
           "name": "HAS_CAR_BEEN_DAMAGED_BY_CAR",
           "num_params": 2,
           "short_desc": "Returns true if the vehicle has been damaged by another specified vehicle",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ],
           "attrs": {
             "is_condition": true
-          },
-          "class": "Car",
-          "member": "HasBeenDamagedByCar"
+          }
         },
         {
           "id": "051E",
@@ -20315,18 +20313,18 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "class": "Char",
           "id": "0526",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "SetStayInCarWhenJacked",
           "name": "SET_CHAR_STAY_IN_CAR_WHEN_JACKED",
           "num_params": 2,
@@ -20566,18 +20564,18 @@
           "short_desc": "Loops through the pool of vehicles to retrieve one that matches the specified model in the specified 2D area"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "class": "Car",
           "id": "053F",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "SetCanBurstTyres",
           "name": "SET_CAN_BURST_CAR_TYRES",
           "num_params": 2,
@@ -20593,14 +20591,14 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            }
-          ],
           "class": "Car",
           "id": "0541",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "member": "FireHunterGun",
           "name": "FIRE_HUNTER_GUN",
           "num_params": 1,
@@ -20684,18 +20682,18 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "class": "Char",
           "id": "054A",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "SetCanBeShotInVehicle",
           "name": "SET_CHAR_CAN_BE_SHOT_IN_VEHICLE",
           "num_params": 2,
@@ -20815,9 +20813,13 @@
           }
         },
         {
+          "id": "0555",
+          "name": "REMOVE_WEAPON_FROM_CHAR",
+          "num_params": 2,
+          "short_desc": "Removes the weapon from the character",
           "input": [
             {
-              "name": "self",
+              "name": "handle",
               "type": "Char"
             },
             {
@@ -20825,10 +20827,6 @@
               "type": "int"
             }
           ],
-          "id": "0555",
-          "name": "REMOVE_WEAPON_FROM_CHAR",
-          "num_params": 2,
-          "short_desc": "Removes the weapon from the character",
           "class": "Char",
           "member": "RemoveWeapon"
         },
@@ -21681,17 +21679,17 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0597",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "member": "IsDucking",
           "name": "IS_CHAR_DUCKING",
           "num_params": 1,
@@ -23973,22 +23971,20 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "senseRange",
-              "type": "float"
-            }
-          ],
           "id": "060F",
           "name": "SET_SENSE_RANGE",
           "num_params": 2,
           "short_desc": "Sets the characters melee accuracy",
-          "class": "Char",
-          "member": "SetSenseRange"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "0610",
@@ -25076,22 +25072,20 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "doorId",
-              "type": "int"
-            }
-          ],
           "id": "0657",
           "name": "OPEN_CAR_DOOR",
           "num_params": 2,
           "short_desc": "Opens the specified car door",
-          "class": "Car",
-          "member": "OpenDoor"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "0658",
@@ -25984,22 +25978,20 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "lightsState",
-              "type": "int"
-            }
-          ],
           "id": "067F",
           "name": "FORCE_CAR_LIGHTS",
           "num_params": 2,
           "short_desc": "Sets an override for the cars lights",
-          "class": "Car",
-          "member": "ForceLights"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "0680",
@@ -26222,44 +26214,40 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "doorId",
-              "type": "int"
-            },
-            {
-              "name": "visibility",
-              "type": "bool"
-            }
-          ],
           "id": "0689",
           "name": "POP_CAR_DOOR",
           "num_params": 3,
           "short_desc": "Removes the specified car door component from the car",
-          "class": "Car",
-          "member": "PopDoor"
-        },
-        {
           "input": [
             {
-              "name": "self",
-              "type": "Car"
+              "name": "_p1",
+              "type": "any"
             },
             {
-              "name": "doorId",
-              "type": "int"
+              "name": "_p2",
+              "type": "any"
+            },
+            {
+              "name": "_p3",
+              "type": "any"
             }
-          ],
+          ]
+        },
+        {
           "id": "068A",
           "name": "FIX_CAR_DOOR",
           "num_params": 2,
           "short_desc": "Repairs the car door",
-          "class": "Car",
-          "member": "FixDoor"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "068B",
@@ -26430,22 +26418,20 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "tyreId",
-              "type": "int"
-            }
-          ],
           "id": "0699",
           "name": "FIX_CAR_TYRE",
           "num_params": 2,
           "short_desc": "Repairs a cars tyre",
-          "class": "Car",
-          "member": "FixTyre"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "069A",
@@ -29376,22 +29362,20 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "id": "073B",
           "name": "SET_CAR_CAN_GO_AGAINST_TRAFFIC",
           "num_params": 2,
           "short_desc": "Sets whether the vehicle will drive the wrong way on roads",
-          "class": "Car",
-          "member": "SetCanGoAgainstTraffic"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "073C",
@@ -29451,44 +29435,52 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "civilian",
+              "type": "bool"
+            },
+            {
+              "name": "gang",
+              "type": "bool"
+            },
+            {
+              "name": "criminal",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "073F",
           "name": "GET_RANDOM_CHAR_IN_SPHERE",
           "num_params": 8,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetRandomCharInSphere",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0740",
@@ -29799,25 +29791,23 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "eventId",
-              "type": "int"
-            }
-          ],
           "id": "074F",
           "name": "IS_CHAR_RESPONDING_TO_EVENT",
           "num_params": 2,
           "short_desc": "Returns true if the character is responding to the specified ped event",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ],
           "attrs": {
             "is_condition": true
-          },
-          "class": "Char",
-          "member": "IsRespondingToEvent"
+          }
         },
         {
           "id": "0750",
@@ -30403,48 +30393,44 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "relationship",
-              "type": "int"
-            },
-            {
-              "name": "pedType",
-              "type": "int"
-            }
-          ],
           "id": "077A",
           "name": "SET_CHAR_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "",
-          "class": "Char",
-          "member": "SetRelationship"
-        },
-        {
           "input": [
             {
-              "name": "self",
-              "type": "Char"
+              "name": "_p1",
+              "type": "any"
             },
             {
-              "name": "relationship",
-              "type": "int"
+              "name": "_p2",
+              "type": "any"
             },
             {
-              "name": "pedType",
-              "type": "int"
+              "name": "_p3",
+              "type": "any"
             }
-          ],
+          ]
+        },
+        {
           "id": "077B",
           "name": "CLEAR_CHAR_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "",
-          "class": "Char",
-          "member": "ClearRelationship"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            },
+            {
+              "name": "_p3",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "077C",
@@ -32772,7 +32758,7 @@
         {
           "input": [
             {
-              "name": "self",
+              "name": "handle",
               "type": "Char"
             }
           ],
@@ -35223,32 +35209,40 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "089E",
           "name": "GET_RANDOM_CHAR_IN_SPHERE_ONLY_DRUGS_BUYERS",
           "num_params": 5,
           "short_desc": "Loops through the ped pool and returns the first character that is within the specified radius and has the \"buys drugs\" flag set in peds",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetRandomCharInSphereOnlyDrugsBuyers",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -36500,32 +36494,40 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "08E5",
           "name": "GET_RANDOM_CHAR_IN_SPHERE_NO_BRAIN",
           "num_params": 5,
           "short_desc": "Finds the nearest character to the specified point, in the specified radius",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetRandomCharInSphereNoBrain",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08E6",

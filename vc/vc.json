@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618408731142
+    "last_update": 1618418664792
   },
   "extensions": [
     {
@@ -2597,6 +2597,13 @@
           "short_desc": "Makes a negative float positive"
         },
         {
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2606,15 +2613,16 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_FLOAT",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "float"
-            }
-          ],
-          "short_desc": "Gets a random float between 0"
+          "short_desc": "Gets a random float between 0.0 and 1.0 and stores the result into a variable."
         },
         {
+          "output": [
+            {
+              "name": "result",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2624,12 +2632,6 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_INT",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "short_desc": "Gets a random integer between 0 and 32767 (max signed 16-bit) and stores the result to a variable"
         },
         {
@@ -10448,57 +10450,59 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "min",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Math",
           "id": "0208",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "member": "RandomFloatInRange",
           "name": "GENERATE_RANDOM_FLOAT_IN_RANGE",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "short_desc": "Generates a random float between the ranges specified"
         },
         {
+          "input": [
+            {
+              "name": "min",
+              "type": "int"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Math",
           "id": "0209",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "RandomIntInRange",
           "name": "GENERATE_RANDOM_INT_IN_RANGE",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "short_desc": "Generates a random integer between the ranges specified"
         },
         {
@@ -17630,29 +17634,29 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "03C5",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "CreateRandomCarForCarPark",
           "name": "CREATE_RANDOM_CAR_FOR_CAR_PARK",
           "num_params": 4,
@@ -20825,18 +20829,18 @@
           "short_desc": "Enables a remote-control vehicle detonation"
         },
         {
-          "class": "Car",
-          "id": "048B",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "routeSeed",
               "type": "int"
             }
           ],
+          "class": "Car",
+          "id": "048B",
           "member": "SetRandomRouteSeed",
           "name": "SET_CAR_RANDOM_ROUTE_SEED",
           "num_params": 2,
@@ -23825,18 +23829,18 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "class": "Char",
           "id": "0526",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "SetStayInCarWhenJacked",
           "name": "SET_CHAR_STAY_IN_CAR_WHEN_JACKED",
           "num_params": 2,
@@ -24156,18 +24160,18 @@
           "short_desc": "Loops through the pool of vehicles to retrieve one that matches the specified model in the specified 2D area"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "class": "Car",
           "id": "053F",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "SetCanBurstTyres",
           "name": "SET_CAN_BURST_CAR_TYRES",
           "num_params": 2,
@@ -24192,14 +24196,14 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            }
-          ],
           "class": "Car",
           "id": "0541",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "member": "FireHunterGun",
           "name": "FIRE_HUNTER_GUN",
           "num_params": 1,
@@ -24349,18 +24353,18 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "class": "Char",
           "id": "054A",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "SetCanBeShotInVehicle",
           "name": "SET_CHAR_CAN_BE_SHOT_IN_VEHICLE",
           "num_params": 2,
@@ -25699,17 +25703,17 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0597",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "member": "IsDucking",
           "name": "IS_CHAR_DUCKING",
           "num_params": 1,

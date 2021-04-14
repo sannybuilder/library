@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618418664678
+    "last_update": 1618419481795
   },
   "extensions": [
     {
@@ -2495,13 +2495,6 @@
           "short_desc": "Makes a negative float positive"
         },
         {
-          "output": [
-            {
-              "name": "result",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2511,16 +2504,15 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_FLOAT",
           "num_params": 1,
-          "short_desc": "Gets a random float between 0.0 and 1.0 and stores the result into a variable."
-        },
-        {
           "output": [
             {
-              "name": "result",
-              "type": "int",
-              "source": "var_any"
+              "name": "_p1",
+              "type": "float"
             }
           ],
+          "short_desc": "Gets a random float between 0"
+        },
+        {
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2530,6 +2522,12 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_INT",
           "num_params": 1,
+          "output": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "short_desc": "Gets a random integer between 0 and 32767 (max signed 16-bit) and stores the result to a variable"
         },
         {
@@ -8627,59 +8625,57 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "min",
-              "type": "float"
-            },
-            {
-              "name": "max",
-              "type": "float"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "Math",
           "id": "0208",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "float"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            }
+          ],
           "member": "RandomFloatInRange",
           "name": "GENERATE_RANDOM_FLOAT_IN_RANGE",
           "num_params": 3,
+          "output": [
+            {
+              "name": "_p3",
+              "type": "float"
+            }
+          ],
           "short_desc": "Generates a random float between the ranges specified"
         },
         {
-          "input": [
-            {
-              "name": "min",
-              "type": "int"
-            },
-            {
-              "name": "max",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "Math",
           "id": "0209",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "RandomIntInRange",
           "name": "GENERATE_RANDOM_INT_IN_RANGE",
           "num_params": 3,
+          "output": [
+            {
+              "name": "_p3",
+              "type": "int"
+            }
+          ],
           "short_desc": "Generates a random integer between the ranges specified"
         },
         {
@@ -14736,29 +14732,29 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "heading",
-              "type": "float"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "03C5",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "float"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            }
+          ],
           "member": "CreateRandomCarForCarPark",
           "name": "CREATE_RANDOM_CAR_FOR_CAR_PARK",
           "num_params": 4,
@@ -17605,18 +17601,18 @@
           "short_desc": "Enables a remote-control vehicle detonation"
         },
         {
+          "class": "Car",
+          "id": "048B",
           "input": [
             {
-              "name": "self",
-              "type": "Car"
+              "name": "_p1",
+              "type": "int"
             },
             {
-              "name": "routeSeed",
+              "name": "_p2",
               "type": "int"
             }
           ],
-          "class": "Car",
-          "id": "048B",
           "member": "SetRandomRouteSeed",
           "name": "SET_CAR_RANDOM_ROUTE_SEED",
           "num_params": 2,
@@ -29435,52 +29431,44 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "radius",
-              "type": "float"
-            },
-            {
-              "name": "civilian",
-              "type": "bool"
-            },
-            {
-              "name": "gang",
-              "type": "bool"
-            },
-            {
-              "name": "criminal",
-              "type": "bool"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "id": "073F",
           "name": "GET_RANDOM_CHAR_IN_SPHERE",
           "num_params": 8,
           "short_desc": "",
-          "class": "World",
-          "member": "GetRandomCharInSphere",
-          "attrs": {
-            "is_static": true
-          }
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            },
+            {
+              "name": "_p3",
+              "type": "any"
+            },
+            {
+              "name": "_p4",
+              "type": "any"
+            },
+            {
+              "name": "_p5",
+              "type": "any"
+            },
+            {
+              "name": "_p6",
+              "type": "any"
+            },
+            {
+              "name": "_p7",
+              "type": "any"
+            },
+            {
+              "name": "_p8",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "0740",
@@ -35209,40 +35197,32 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "radius",
-              "type": "float"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "id": "089E",
           "name": "GET_RANDOM_CHAR_IN_SPHERE_ONLY_DRUGS_BUYERS",
           "num_params": 5,
           "short_desc": "Loops through the ped pool and returns the first character that is within the specified radius and has the \"buys drugs\" flag set in peds",
-          "class": "World",
-          "member": "GetRandomCharInSphereOnlyDrugsBuyers",
-          "attrs": {
-            "is_static": true
-          }
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            },
+            {
+              "name": "_p3",
+              "type": "any"
+            },
+            {
+              "name": "_p4",
+              "type": "any"
+            },
+            {
+              "name": "_p5",
+              "type": "any"
+            }
+          ]
         },
         {
           "input": [
@@ -36515,8 +36495,7 @@
           "output": [
             {
               "name": "handle",
-              "type": "Char",
-              "source": "var_any"
+              "type": "Char"
             }
           ],
           "id": "08E5",
@@ -38478,19 +38457,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            }
+          ],
           "id": "095B",
           "name": "HAS_OBJECT_BEEN_UPROOTED",
           "num_params": 1,
           "short_desc": "Returns true if the object has been made moveable by the 0392",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "HasBeenUprooted"
         },
         {
           "id": "095C",
@@ -40315,20 +40296,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "09C9",
           "name": "REMOVE_CHAR_FROM_CAR_MAINTAIN_POSITION",
           "num_params": 2,
           "short_desc": "Removes the character from the vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "RemoveFromCarMaintainPosition"
         },
         {
           "id": "09CA",
@@ -40384,23 +40367,25 @@
           "member": "IsTouchingCar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "modelId",
+              "type": "int"
+            }
+          ],
           "id": "09CC",
           "name": "DOES_OBJECT_HAVE_THIS_MODEL",
           "num_params": 2,
           "short_desc": "Returns true if the objects model is the model specified",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "DoesHaveThisModel"
         },
         {
           "id": "09CD",

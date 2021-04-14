@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618168972316
+    "last_update": 1618408823391
   },
   "extensions": [
     {
@@ -20179,61 +20179,67 @@
           "short_desc": "Returns true if the character has been hurt by the other character"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "051B",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_CAR",
           "num_params": 2,
           "short_desc": "Returns true if the actor has been hurt by the specified vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "HasBeenDamagedByCar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "051C",
           "name": "HAS_CAR_BEEN_DAMAGED_BY_CHAR",
           "num_params": 2,
           "short_desc": "Returns true if the car has been damaged by the specified actor",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "HasBeenDamagedByChar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "051D",
           "name": "HAS_CAR_BEEN_DAMAGED_BY_CAR",
           "num_params": 2,
           "short_desc": "Returns true if the vehicle has been damaged by another specified vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "HasBeenDamagedByCar"
         },
         {
           "id": "051E",
@@ -20309,18 +20315,18 @@
           }
         },
         {
-          "class": "Char",
-          "id": "0526",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
+          "id": "0526",
           "member": "SetStayInCarWhenJacked",
           "name": "SET_CHAR_STAY_IN_CAR_WHEN_JACKED",
           "num_params": 2,
@@ -20560,18 +20566,18 @@
           "short_desc": "Loops through the pool of vehicles to retrieve one that matches the specified model in the specified 2D area"
         },
         {
-          "class": "Car",
-          "id": "053F",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
+          "id": "053F",
           "member": "SetCanBurstTyres",
           "name": "SET_CAN_BURST_CAR_TYRES",
           "num_params": 2,
@@ -20587,14 +20593,14 @@
           }
         },
         {
-          "class": "Car",
-          "id": "0541",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "class": "Car",
+          "id": "0541",
           "member": "FireHunterGun",
           "name": "FIRE_HUNTER_GUN",
           "num_params": 1,
@@ -20678,18 +20684,18 @@
           }
         },
         {
-          "class": "Char",
-          "id": "054A",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
+          "id": "054A",
           "member": "SetCanBeShotInVehicle",
           "name": "SET_CHAR_CAN_BE_SHOT_IN_VEHICLE",
           "num_params": 2,
@@ -20809,13 +20815,9 @@
           }
         },
         {
-          "id": "0555",
-          "name": "REMOVE_WEAPON_FROM_CHAR",
-          "num_params": 2,
-          "short_desc": "Removes the weapon from the character",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -20823,6 +20825,10 @@
               "type": "int"
             }
           ],
+          "id": "0555",
+          "name": "REMOVE_WEAPON_FROM_CHAR",
+          "num_params": 2,
+          "short_desc": "Removes the weapon from the character",
           "class": "Char",
           "member": "RemoveWeapon"
         },
@@ -21675,17 +21681,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0597",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsDucking",
           "name": "IS_CHAR_DUCKING",
           "num_params": 1,
@@ -23967,20 +23973,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "senseRange",
+              "type": "float"
+            }
+          ],
           "id": "060F",
           "name": "SET_SENSE_RANGE",
           "num_params": 2,
           "short_desc": "Sets the characters melee accuracy",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetSenseRange"
         },
         {
           "id": "0610",
@@ -25068,20 +25076,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "doorId",
+              "type": "int"
+            }
+          ],
           "id": "0657",
           "name": "OPEN_CAR_DOOR",
           "num_params": 2,
           "short_desc": "Opens the specified car door",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "OpenDoor"
         },
         {
           "id": "0658",
@@ -25974,20 +25984,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "lightsState",
+              "type": "int"
+            }
+          ],
           "id": "067F",
           "name": "FORCE_CAR_LIGHTS",
           "num_params": 2,
           "short_desc": "Sets an override for the cars lights",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "ForceLights"
         },
         {
           "id": "0680",
@@ -26210,40 +26222,44 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "doorId",
+              "type": "int"
+            },
+            {
+              "name": "visibility",
+              "type": "bool"
+            }
+          ],
           "id": "0689",
           "name": "POP_CAR_DOOR",
           "num_params": 3,
           "short_desc": "Removes the specified car door component from the car",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "PopDoor"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "doorId",
+              "type": "int"
+            }
+          ],
           "id": "068A",
           "name": "FIX_CAR_DOOR",
           "num_params": 2,
           "short_desc": "Repairs the car door",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "FixDoor"
         },
         {
           "id": "068B",
@@ -26414,20 +26430,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "tyreId",
+              "type": "int"
+            }
+          ],
           "id": "0699",
           "name": "FIX_CAR_TYRE",
           "num_params": 2,
           "short_desc": "Repairs a cars tyre",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "FixTyre"
         },
         {
           "id": "069A",
@@ -29358,20 +29376,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "073B",
           "name": "SET_CAR_CAN_GO_AGAINST_TRAFFIC",
           "num_params": 2,
           "short_desc": "Sets whether the vehicle will drive the wrong way on roads",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetCanGoAgainstTraffic"
         },
         {
           "id": "073C",
@@ -29779,23 +29799,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "eventId",
+              "type": "int"
+            }
+          ],
           "id": "074F",
           "name": "IS_CHAR_RESPONDING_TO_EVENT",
           "num_params": 2,
           "short_desc": "Returns true if the character is responding to the specified ped event",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsRespondingToEvent"
         },
         {
           "id": "0750",
@@ -30381,44 +30403,48 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "relationship",
+              "type": "int"
+            },
+            {
+              "name": "pedType",
+              "type": "int"
+            }
+          ],
           "id": "077A",
           "name": "SET_CHAR_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetRelationship"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "relationship",
+              "type": "int"
+            },
+            {
+              "name": "pedType",
+              "type": "int"
+            }
+          ],
           "id": "077B",
           "name": "CLEAR_CHAR_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "ClearRelationship"
         },
         {
           "id": "077C",
@@ -32746,7 +32772,7 @@
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             }
           ],

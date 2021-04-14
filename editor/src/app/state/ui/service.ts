@@ -8,6 +8,9 @@ export class UiService {
   constructor(private http: HttpClient) {}
 
   loadSupportInfo(game: Game): Observable<SupportInfo> {
-    return this.http.get<SupportInfo>(`/assets/${game}/supported.json`);
+    const ts = Date.now().toString();
+    return this.http.get<SupportInfo>(`/assets/${game}/supported.json`, {
+      params: { ts },
+    });
   }
 }

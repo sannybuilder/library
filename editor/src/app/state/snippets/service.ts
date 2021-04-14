@@ -9,8 +9,10 @@ export class SnippetsService {
   constructor(private http: HttpClient) {}
 
   loadSnippets(game: Game): Observable<ExtensionSnippets> {
+    const ts = Date.now().toString();
     return this.http.get<ExtensionSnippets>(
-      Location.joinWithSlash('/assets', GameSnippets[game])
+      Location.joinWithSlash('/assets', GameSnippets[game]),
+      { params: { ts } }
     );
   }
 }

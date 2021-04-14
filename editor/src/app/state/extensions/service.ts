@@ -27,9 +27,11 @@ export class ExtensionsService {
     extensions: Extension[];
     lastUpdate: number;
   }> {
+    const ts = Date.now().toString();
     return this.http
       .get<LoadExtensionsResponse>(
-        Location.joinWithSlash(this.config.endpoints.base, GameLibrary[game])
+        Location.joinWithSlash(this.config.endpoints.base, GameLibrary[game]),
+        { params: { ts } }
       )
       .pipe(
         map((data) => ({

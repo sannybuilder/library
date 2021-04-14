@@ -41,6 +41,7 @@ type ErrorType =
 })
 export class CommandEditorComponent implements OnInit {
   ParamType = ParamType;
+  SourceType = SourceType;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: string[] = [];
@@ -308,7 +309,7 @@ export class CommandEditorComponent implements OnInit {
     );
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Param[]>, newSource: SourceType) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -322,6 +323,7 @@ export class CommandEditorComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      event.container.data[event.currentIndex].source = newSource;
     }
   }
 

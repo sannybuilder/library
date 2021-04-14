@@ -22,6 +22,7 @@ import {
   startWith,
   groupBy,
   mergeMap,
+  take,
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { Extension, Game, ViewMode } from '../../models';
@@ -155,6 +156,7 @@ export class UiEffects {
 
               const added = c.filter((e) => !p.includes(e));
               const removed = p.filter((e) => !c.includes(e));
+
               return [
                 ...added.map((extension) =>
                   selectExtension({ game, extension, state: true })
@@ -173,9 +175,8 @@ export class UiEffects {
   resetFilters$ = createEffect(() =>
     this._actions$.pipe(
       ofType(resetFilters),
-      switchMap(() => this._extensions.extensionNames$),
-      withLatestFrom(this._game.game$),
-      switchMap(([extensions, game]) =>
+      withLatestFrom(this._extensions.extensionNames$, this._game.game$),
+      switchMap(([_, extensions, game]) =>
         extensions.map((extension) =>
           selectExtension({ game, extension, state: true })
         )

@@ -1,9 +1,19 @@
 import { createAction, props } from '@ngrx/store';
-import { Attribute, Command, Modifier, ViewMode } from '../../models';
+import { Attribute, Command, Game, Modifier, ViewMode } from '../../models';
+
+export const selectExtension = createAction(
+  'change extension selection',
+  props<{ game: Game; extension: string; state: boolean }>()
+);
 
 export const toggleFilter = createAction(
   'toggle filter selection',
   props<{ filter: Attribute; modifier: Modifier }>()
+);
+
+export const toggleClass = createAction(
+  'toggle class selection',
+  props<{ game: Game; className: string }>()
 );
 
 export const updateSearchTerm = createAction(

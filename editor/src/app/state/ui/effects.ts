@@ -4,7 +4,9 @@ import {
   changePage,
   displayOrEditCommandInfo,
   displayOrEditSnippet,
+  resetFilters,
   scrollTop,
+  selectExtension,
   stopEditOrDisplay,
   toggleFilter,
   updateSearchTerm,
@@ -13,18 +15,18 @@ import {
   filter,
   map,
   mapTo,
+  pairwise,
   switchMap,
   tap,
   withLatestFrom,
+  startWith,
+  groupBy,
+  mergeMap,
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
-import { ViewMode } from '../../models';
+import { Extension, Game, ViewMode } from '../../models';
 import { combineLatest, merge } from 'rxjs';
-import {
-  loadExtensionsSuccess,
-  toggleExtension,
-  updateCommand,
-} from '../extensions/actions';
+import { loadExtensionsSuccess, updateCommand } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
 import { ExtensionsFacade } from '../extensions/facade';
 import { ChangesFacade } from '../changes/facade';
@@ -85,7 +87,7 @@ export class UiEffects {
   resetPagination$ = createEffect(() =>
     merge(
       this._actions$.pipe(
-        ofType(toggleFilter, toggleExtension, updateSearchTerm)
+        ofType(toggleFilter, selectExtension, updateSearchTerm)
       ),
       this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
     ).pipe(mapTo(changePage({ index: 1 })))
@@ -123,6 +125,62 @@ export class UiEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  /**
+   * for each game, subscribe to extension list changes
+   * then calculate a diff between previous and current extensions
+   * and update selected extensions accordingly
+   */
+  extensionChanges$ = createEffect(() =>
+    this._game.game$.pipe(
+      groupBy((game) => game),
+      mergeMap((game$) =>
+        game$.pipe(
+          mergeMap((game) =>
+            this._extensions
+              .getGameExtensions(game)
+              .pipe(map((extensions) => ({ extensions, game })))
+          ),
+          startWith({ extensions: [] as Extension[] }),
+          pairwise(),
+          switchMap(
+            ([prev, curr]: [
+              { extensions: Extension[] },
+              { extensions: Extension[]; game: Game }
+            ]) => {
+              const p = prev.extensions.map(({ name }) => name);
+              const c = curr.extensions.map(({ name }) => name);
+              const game = curr.game;
+
+              const added = c.filter((e) => !p.includes(e));
+              const removed = p.filter((e) => !c.includes(e));
+              return [
+                ...added.map((extension) =>
+                  selectExtension({ game, extension, state: true })
+                ),
+                ...removed.map((extension) =>
+                  selectExtension({ game, extension, state: false })
+                ),
+              ];
+            }
+          )
+        )
+      )
+    )
+  );
+
+  resetFilters$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(resetFilters),
+      switchMap(() => this._extensions.extensionNames$),
+      withLatestFrom(this._game.game$),
+      switchMap(([extensions, game]) =>
+        extensions.map((extension) =>
+          selectExtension({ game, extension, state: true })
+        )
+      )
+    )
   );
 
   constructor(

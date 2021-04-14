@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { Command, Extension, Game } from '../../models';
-import { updateCommand, toggleExtension, loadExtensions } from './actions';
+import { updateCommand, loadExtensions } from './actions';
 import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -17,12 +17,6 @@ export class ExtensionsFacade {
 
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });
-  }
-
-  getExtensionCheckedState(extension: string) {
-    return this.store$.select(selector.isExtensionSelected, {
-      extension,
-    });
   }
 
   getExtensionEntities(extension: string) {
@@ -47,10 +41,6 @@ export class ExtensionsFacade {
     this.store$.dispatch(
       updateCommand({ command, newExtension, oldExtension })
     );
-  }
-
-  toggleExtension(game: Game, extension: string) {
-    this.store$.dispatch(toggleExtension({ game, extension }));
   }
 
   loadExtensions(game: Game) {

@@ -15,12 +15,12 @@ export class FilterPanelComponent {
 
   constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
-  toggleExtension(extension: string) {
-    this._extensions.toggleExtension(this.game, extension);
+  selectExtension(extension: string, state: boolean) {
+    this._ui.selectExtension(this.game, extension, state);
   }
 
   isExtensionChecked(extension: string) {
-    return this._extensions.getExtensionCheckedState(extension);
+    return this._ui.getExtensionCheckedState(extension);
   }
 
   toggleFilter(filter: Attribute, modifier: Modifier) {

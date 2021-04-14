@@ -1,11 +1,18 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { flatMap } from 'lodash';
+import { flatMap, uniq } from 'lodash';
 import { search } from '../../fusejs/fusejs';
-import { Attribute, Command } from '../../models';
-import { extensions, selectedExtensions } from '../extensions/selectors';
-import { UiState } from './reducer';
+import { Attribute, Command, Game } from '../../models';
+import { extensions } from '../extensions/selectors';
+import { game } from '../game/selectors';
+import { UiState, GameState } from './reducer';
 
 export const state = createFeatureSelector('ui');
+
+const gameState = createSelector(
+  state,
+  game,
+  (state: UiState, game: Game) => state.games[game]
+);
 
 export const selectedFiltersOnly = createSelector(
   state,
@@ -15,6 +22,22 @@ export const selectedFiltersOnly = createSelector(
 export const selectedFiltersExcept = createSelector(
   state,
   (state: UiState) => state.selectedFiltersExcept
+);
+
+export const selectedExtensions = createSelector(
+  gameState,
+  (state: GameState) => state?.selectedExtensions
+);
+
+export const isExtensionSelected = createSelector(
+  selectedExtensions,
+  (selectedExtensions: string[], props: { extension: string }) =>
+    selectedExtensions?.includes(props.extension)
+);
+
+export const selectedClasses = createSelector(
+  gameState,
+  (state: GameState) => state?.selectedClasses
 );
 
 export const isFilterSelectedOnly = createSelector(
@@ -87,7 +110,9 @@ export const rows = createSelector(
     selectedFiltersExcept,
     searchTerm
   ) => {
-    const selected = extensions?.filter((_, i) => selectedExtensions[i]);
+    const selected = extensions?.filter(({ name }) =>
+      selectedExtensions?.includes(name)
+    );
 
     return (
       selected &&
@@ -117,3 +142,22 @@ function filterCommands(
       !except.some((attr) => element.attrs?.[attr])
   );
 }
+
+// todo: move to ui
+export const classNamesForSelectedExtensions = createSelector(
+  extensions,
+  selectedExtensions,
+  (extensions, selectedExtensions) => {
+    const selected = extensions?.filter(({ name }) =>
+      selectedExtensions?.includes(name)
+    );
+    return (
+      selected &&
+      uniq(
+        flatMap(selected, ({ commands }) =>
+          commands.map((command) => command.class || '(no class)')
+        )
+      )
+    );
+  }
+);

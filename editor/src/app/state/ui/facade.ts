@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Attribute, Command, Modifier, ViewMode } from '../../models';
+import { Attribute, Command, Game, Modifier, ViewMode } from '../../models';
 import {
   updateSearchTerm,
   toggleCommandListElements,
@@ -11,6 +11,8 @@ import {
   changePage,
   scrollTop,
   resetFilters,
+  toggleClass,
+  selectExtension,
 } from './actions';
 import * as selector from './selectors';
 
@@ -21,6 +23,8 @@ export class UiFacade {
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
   selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
+  selectedExtensions$ = this.store$.select(selector.selectedExtensions);
+  selectedClasses$ = this.store$.select(selector.selectedClasses);
   currentPage$ = this.store$.select(selector.currentPage);
   commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
   extensionToDisplayOrEdit$ = this.store$.select(
@@ -49,6 +53,10 @@ export class UiFacade {
 
   toggleFilter(filter: Attribute, modifier: Modifier) {
     this.store$.dispatch(toggleFilter({ filter, modifier }));
+  }
+
+  toggleClass(game: Game, className: string) {
+    this.store$.dispatch(toggleClass({ game, className }));
   }
 
   updateSearch(term: string) {
@@ -85,5 +93,15 @@ export class UiFacade {
 
   resetFilters() {
     this.store$.dispatch(resetFilters());
+  }
+
+  selectExtension(game: Game, extension: string, state: boolean) {
+    this.store$.dispatch(selectExtension({ game, extension, state }));
+  }
+
+  getExtensionCheckedState(extension: string) {
+    return this.store$.select(selector.isExtensionSelected, {
+      extension,
+    });
   }
 }

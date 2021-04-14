@@ -1,5 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, ViewMode, Attribute } from '../../models';
+import { without } from 'lodash';
+
+import { Command, ViewMode, Attribute, Game } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
@@ -9,15 +11,20 @@ import {
   displayOrEditSnippet,
   changePage,
   resetFilters,
+  toggleClass,
+  selectExtension,
 } from './actions';
-import { without } from 'lodash';
 import { onListEnter } from '../game/actions';
+
+export interface GameState {
+  selectedExtensions: string[];
+  selectedClasses: string[];
+}
 
 export interface UiState {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
-  selectedExtensions?: string[];
   selectedFiltersOnly: Attribute[];
   selectedFiltersExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
@@ -27,6 +34,7 @@ export interface UiState {
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
   currentPage: number | 'all';
+  games: Partial<Record<Game, GameState>>;
 }
 
 const defaultFilterState = {
@@ -41,6 +49,7 @@ export const initialState: UiState = {
   displaySearchBar: false,
   viewMode: ViewMode.None,
   currentPage: 1,
+  games: {},
 };
 
 const _reducer = createReducer(
@@ -59,6 +68,14 @@ const _reducer = createReducer(
         ? 'selectedFiltersOnly'
         : 'selectedFiltersExcept']: selectedFilters,
     };
+  }),
+  on(toggleClass, (state, { game, className }) => {
+    const { selectedClasses: selected } = state.games[game];
+    const selectedClasses = selected.includes(className)
+      ? without(selected, className)
+      : [...selected, className];
+
+    return { ...state, selectedClasses };
   }),
   on(updateSearchTerm, (state, { term: searchTerm }) => ({
     ...state,
@@ -98,9 +115,35 @@ const _reducer = createReducer(
   on(resetFilters, (state) => ({
     ...state,
     ...defaultFilterState,
-  }))
+  })),
+  on(selectExtension, (state, { game, extension, state: forceSelect }) => {
+    const selectedExtensions = state.games[game]?.selectedExtensions ?? [];
+    const isSelected = selectedExtensions.includes(extension);
+
+    if (forceSelect && !isSelected) {
+      return updateState(state, game, {
+        selectedExtensions: [...selectedExtensions, extension],
+      });
+    }
+    if (!forceSelect && isSelected) {
+      return updateState(state, game, {
+        selectedExtensions: without(selectedExtensions, extension),
+      });
+    }
+    return state;
+  })
 );
 
 export function uiReducer(state: UiState, action: Action) {
   return _reducer(state, action);
+}
+
+function updateState(state: UiState, game: Game, newState: Partial<GameState>) {
+  return {
+    ...state,
+    games: {
+      ...state.games,
+      [game]: { ...(state.games[game] ?? {}), ...newState },
+    },
+  };
 }

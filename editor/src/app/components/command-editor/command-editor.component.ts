@@ -261,7 +261,7 @@ export class CommandEditorComponent implements OnInit {
 
   getSuggestedInputType(index: number) {
     if (
-      this.command.input?.[index]?.type === ParamType.any &&
+      this.primitiveTypes.includes(this.command.input?.[index]?.type) &&
       (this.command.input?.[index]?.name ||
         this.getSuggestedInputName(index)) === 'self'
     ) {

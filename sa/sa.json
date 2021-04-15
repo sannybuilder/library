@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618459516111
+    "last_update": 1618471523991
   },
   "extensions": [
     {
@@ -42419,18 +42419,18 @@
           "short_desc": ""
         },
         {
-          "id": "0A51",
-          "name": "IS_WIDGET_PRESSED",
-          "num_params": 1,
-          "short_desc": "Returns true if the button widget icon on the screen is pressed.",
-          "class": "Widget",
-          "member": "IsPressed",
           "input": [
             {
               "name": "WidgetID",
               "type": "int"
             }
           ],
+          "id": "0A51",
+          "name": "IS_WIDGET_TOUCHED",
+          "num_params": 1,
+          "short_desc": "If you touch a button widget icon on the screen, it returns true.",
+          "class": "Widget",
+          "member": "IsTouched",
           "attrs": {
             "is_condition": true
           }
@@ -42521,44 +42521,59 @@
           }
         },
         {
-          "id": "0A57",
-          "name": "DO_MISSION_SKIP",
-          "num_params": 2,
-          "short_desc": "",
           "output": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "missionPage",
+              "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "missionNum",
+              "type": "int"
             }
-          ]
+          ],
+          "id": "0A57",
+          "name": "DO_MISSION_SKIP_GET_CURRENT_MISSION_PAGE_OR_SKIP_TO_MISSION_NUMBER",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Game",
+          "member": "GetCurrentMissionPageOrSkipToMissionNumber",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "missionNum",
+              "type": "int"
+            }
+          ],
           "id": "0A58",
           "name": "GET_MISSION_NUM",
           "num_params": 1,
           "short_desc": "",
-          "output": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "GetMissionNum",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "missionPage",
+              "type": "int"
+            }
+          ],
           "id": "0A59",
           "name": "GET_MISSION_PAGE",
           "num_params": 1,
           "short_desc": "",
-          "output": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "GetMissionPage",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "0A5A",

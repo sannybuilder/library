@@ -71,9 +71,9 @@ export class CommandEditorComponent implements OnInit {
       ...this.primitiveTypes.map((t) => `type ${t}`),
       ...dynamicClasses.map(({ name }) => `class ${name}`),
     ]);
-    this.classes = uniq(
-      val.map((v) => `${v.type === 'static' ? 'static' : 'class'} ${v.name}`)
-    ).sort();
+    this.classes = val.map(
+      (v) => `${v.type === 'dynamic' ? 'class' : 'static'} ${v.name}`
+    );
   }
 
   readonly attrs: Attribute[] = CommandAttributes;

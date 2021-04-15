@@ -20,7 +20,7 @@ export class ExtensionsFacade {
   }
 
   getExtensionEntities(extension: string) {
-    return this.store$.select(selector.entities, { extension });
+    return this.store$.select(selector.extensionEntities, { extension });
   }
 
   getExtensionCommands(extension: string) {

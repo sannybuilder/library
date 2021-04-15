@@ -39,7 +39,7 @@ export const loading = createSelector(
   (state: GameState) => state.loading
 );
 
-export const entities = createSelector(
+export const extensionEntities = createSelector(
   state,
   (state: GameState, props: { extension: string }) =>
     state.entities?.[props.extension] ?? []

@@ -157,10 +157,10 @@ function getEntities(extensions: Extension[]): Record<string, Entity[]> {
         staticClasses.add(command.class);
       }
     }
-    const dynamicClassesArray = [...dynamicClasses];
-    const staticClassesArray = [...staticClasses].filter(
-      (name) => !dynamicClassesArray.includes(name)
-    );
+    const dynamicClassesArray = [...dynamicClasses].sort();
+    const staticClassesArray = [...staticClasses]
+      .filter((name) => !dynamicClassesArray.includes(name))
+      .sort();
     (m[e.name] ??= []).push(
       ...dynamicClassesArray.map(
         (name) => ({ name, type: 'dynamic' } as Entity)

@@ -10,6 +10,7 @@ import { ExtensionsFacade, UiFacade } from '../../state';
 export class FilterPanelComponent {
   @Input() game: Game;
   extensionNames$ = this._extensions.extensionNames$;
+  selectedExtensions$ = this._ui.selectedExtensions$;
 
   filters = CommandAttributes;
 
@@ -30,4 +31,12 @@ export class FilterPanelComponent {
   isFilterChecked(filter: Attribute, modifier: Modifier) {
     return this._ui.getFilterCheckedState(filter, modifier);
   }
+
+  getExtensionEntities(extension: string) {
+    return this._extensions.getExtensionEntities(extension);
+  }
+
+  isClassChecked(className: string, extension: string) {}
+
+  selectClass(className: string, extension: string, state: boolean) {}
 }

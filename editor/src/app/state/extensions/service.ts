@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import type { components } from '@octokit/openapi-types';
+
+type GetRepoContentResponseDataBlob = components['schemas']['blob'];
+type GetRepoContentResponseDataDirectory = components['schemas']['content-directory'];
 
 import { CONFIG, Config } from '../../config';
 import { Extension, Game, GameLibrary } from '../../models';
@@ -27,14 +30,22 @@ export class ExtensionsService {
     extensions: Extension[];
     lastUpdate: number;
   }> {
-    const ts = Date.now().toString();
     return this.http
-      .get<LoadExtensionsResponse>(
-        Location.joinWithSlash(this.config.endpoints.base, GameLibrary[game]),
-        { params: { ts } }
+      .get<GetRepoContentResponseDataDirectory>(
+        'https://api.github.com/repos/sannybuilder/library/contents/' + game
       )
       .pipe(
-        map((data) => ({
+        switchMap((dir) => {
+          const { git_url } =
+            dir.find((file) => file.path === GameLibrary[game]) ?? {};
+          if (!git_url) {
+            throw new Error(`File ${GameLibrary[game]} not found in the repo`);
+          }
+          return this.http
+            .get<GetRepoContentResponseDataBlob>(git_url)
+            .pipe(map((blob) => JSON.parse(atob(blob.content))));
+        }),
+        map((data: LoadExtensionsResponse) => ({
           extensions: data.extensions,
           lastUpdate: data.meta.last_update,
         }))

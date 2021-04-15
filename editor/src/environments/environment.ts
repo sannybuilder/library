@@ -10,7 +10,6 @@ export const environment: Config = {
     shouldBeAuthorizedToEdit: false,
   },
   endpoints: {
-    base: '/assets',
     oauth: 'https://github.com/login/oauth/authorize',
     user: 'https://api.github.com/user',
   },

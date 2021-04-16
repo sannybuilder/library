@@ -157,6 +157,7 @@ export class UiEffects {
               const added = c.filter((e) => !p.includes(e));
               const removed = p.filter((e) => !c.includes(e));
 
+              // combine into 1-2 actions
               return [
                 ...added.map((extension) =>
                   selectExtension({ game, extension, state: true })

@@ -10,8 +10,10 @@ export interface Config {
     shouldBeAuthorizedToEdit: boolean;
   };
   endpoints: {
+    base: string;
     oauth: string;
     user: string;
+    contents: string;
   };
 }
 

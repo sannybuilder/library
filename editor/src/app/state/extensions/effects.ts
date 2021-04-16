@@ -23,15 +23,17 @@ import { UiFacade } from '../ui/facade';
 import { ChangesFacade } from '../changes/facade';
 import { GameLibrary, GameSupportInfo } from '../../models';
 import { getSameCommands, isAnyAttributeInvalid } from '../../utils';
+import { AuthFacade } from '../auth/facade';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
   loadExtensions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadExtensions),
-      concatMap(({ game }) =>
+      withLatestFrom(this._auth.authToken$),
+      concatMap(([{ game }, accessToken]) =>
         this.service
-          .loadExtensions(game)
+          .loadExtensions(game, accessToken)
           .pipe(
             map(({ extensions, lastUpdate }) =>
               loadExtensionsSuccess({ game, extensions, lastUpdate })
@@ -107,6 +109,7 @@ export class ExtensionsEffects {
     private _extensions: ExtensionsFacade,
     private service: ExtensionsService,
     private _ui: UiFacade,
-    private _changes: ChangesFacade
+    private _changes: ChangesFacade,
+    private _auth: AuthFacade
   ) {}
 }

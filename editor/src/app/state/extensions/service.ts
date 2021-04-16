@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Location } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import type { components } from '@octokit/openapi-types';
 
 type GetRepoContentResponseDataBlob = components['schemas']['blob'];
@@ -24,26 +25,60 @@ export class ExtensionsService {
     @Inject(CONFIG) public config: Config
   ) {}
 
+  /**
+   * trying the following in order of availability
+   * 1. getting JSON file from raw.githubusercontent.com
+   * 2. trying github API as an authorized user (5000 requests per hour)
+   * 3. trying github API as an anonymous user (60 requests per hour)
+   * 4. trying a local version from /assets
+   */
   loadExtensions(
-    game: Game
+    game: Game,
+    accessToken?: string
   ): Observable<{
     extensions: Extension[];
     lastUpdate: number;
   }> {
     return this.http
-      .get<GetRepoContentResponseDataDirectory>(
-        'https://api.github.com/repos/sannybuilder/library/contents/' + game
+      .get(
+        Location.joinWithSlash(this.config.endpoints.base, GameLibrary[game])
       )
       .pipe(
-        switchMap((dir) => {
-          const { git_url } =
-            dir.find((file) => file.path === GameLibrary[game]) ?? {};
-          if (!git_url) {
-            throw new Error(`File ${GameLibrary[game]} not found in the repo`);
-          }
+        catchError(() => {
+          const headers = accessToken
+            ? new HttpHeaders({
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+              })
+            : undefined;
           return this.http
-            .get<GetRepoContentResponseDataBlob>(git_url)
-            .pipe(map((blob) => JSON.parse(atob(blob.content))));
+            .get<GetRepoContentResponseDataDirectory>(
+              Location.joinWithSlash(this.config.endpoints.contents, game),
+              {
+                headers,
+              }
+            )
+            .pipe(
+              switchMap((dir) => {
+                const { git_url } =
+                  dir.find((file) => file.path === GameLibrary[game]) ?? {};
+                if (!git_url) {
+                  throw new Error(
+                    `File ${GameLibrary[game]} not found in the repo`
+                  );
+                }
+                return this.http
+                  .get<GetRepoContentResponseDataBlob>(git_url, {
+                    headers,
+                  })
+                  .pipe(map((blob) => JSON.parse(atob(blob.content))));
+              }),
+              catchError(() =>
+                this.http.get(
+                  Location.joinWithSlash('/assets', GameLibrary[game])
+                )
+              )
+            );
         }),
         map((data: LoadExtensionsResponse) => ({
           extensions: data.extensions,

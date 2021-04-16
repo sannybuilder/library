@@ -27,16 +27,16 @@
     >
       <div class="card-body">
         <div
-          class="form-check d-inline-block d-xl-block pr-2"
+          class="d-sm-inline-block d-xl-block pr-2"
           *ngFor="let name of extensionNames"
         >
           <label class="form-check-label">
             <input
-              class="form-check-input"
               type="checkbox"
               [ngModel]="isExtensionChecked(name) | async"
               (ngModelChange)="selectExtension(name, $event)"
             />
+            <span class="checkbox"></span>
             {{ name }}
           </label>
         </div>
@@ -69,20 +69,20 @@
       <div class="card-body">
         <ng-container *ngFor="let extension of selectedExtensions$ | async">
           <div
-            class="form-check d-inline-block d-xl-block pr-2"
+            class="d-sm-inline-block d-xl-block pr-2"
             *ngFor="let entity of getExtensionEntities(extension) | async"
           >
             <label class="form-check-label">
               <input
-                class="form-check-input"
                 type="checkbox"
                 [ngModel]="isClassChecked(entity.name, extension) | async"
                 (ngModelChange)="selectClass(entity.name, extension, $event)"
               />
+              <span class="checkbox"></span>
               <span class="text-muted">{{
                 entity.type === "dynamic" ? "class" : "static"
-              }}</span>
-              {{ entity.name }}
+              }}</span
+              >&nbsp;{{ entity.name }}
             </label>
           </div>
         </ng-container>
@@ -128,17 +128,14 @@
 <ng-template #attrs let-modifier>
   <div class="mb-3">{{ modifier }}:</div>
 
-  <div
-    class="form-check d-inline-block d-xl-block pr-2"
-    *ngFor="let filter of filters"
-  >
+  <div class="d-sm-inline-block d-xl-block pr-2" *ngFor="let filter of filters">
     <label class="form-check-label" [title]="filter | attrTitle">
       <input
-        class="form-check-input"
         type="checkbox"
         [ngModel]="isFilterChecked(filter, modifier) | async"
         (ngModelChange)="toggleFilter(filter, modifier)"
       />
+      <span class="checkbox"></span>
       {{ filter }}
     </label>
   </div>

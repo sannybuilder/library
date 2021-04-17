@@ -62,6 +62,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { IconComponent } from './components/icon/icon.component';
 import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { GameEffects } from './state/game/effects';
+import { gameReducer } from './state/game/reducer';
 
 @NgModule({
   declarations: [
@@ -123,6 +125,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
       snippets: snippetsReducer,
       ui: uiReducer,
       changes: changesReducer,
+      game: gameReducer,
     }),
     EffectsModule.forRoot([
       ExtensionsEffects,
@@ -130,6 +133,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
       SnippetsEffects,
       UiEffects,
       ChangesEffects,
+      GameEffects,
     ]),
     DragDropModule,
     // StoreDevtoolsModule.instrument({

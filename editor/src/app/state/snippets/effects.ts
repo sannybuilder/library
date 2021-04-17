@@ -22,6 +22,7 @@ import { ChangesFacade } from '../changes/facade';
 import { UiFacade } from '../ui/facade';
 import { GameSupportInfo } from '../../models';
 import { getSameCommands } from '../../utils';
+import { GameFacade } from '../game/facade';
 
 @Injectable({ providedIn: 'root' })
 export class SnippetsEffects {
@@ -44,9 +45,9 @@ export class SnippetsEffects {
     this.actions$.pipe(
       ofType(updateSnippet),
       distinctUntilChanged(isEqual),
-      withLatestFrom(this._ui.game$),
+      withLatestFrom(this._game.game$),
       switchMap(([{ content, extension, command }, game]) => {
-        return this._ui.getCommandSupportInfo(command, extension).pipe(
+        return this._game.getCommandSupportInfo(command, extension).pipe(
           take(1),
           switchMap((supportInfo: GameSupportInfo[]) =>
             getSameCommands(supportInfo, game).map((d) =>
@@ -79,7 +80,7 @@ export class SnippetsEffects {
   constructor(
     private actions$: Actions,
     private service: SnippetsService,
-    private _ui: UiFacade,
-    private _changes: ChangesFacade
+    private _changes: ChangesFacade,
+    private _game: GameFacade
   ) {}
 }

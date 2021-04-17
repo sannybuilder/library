@@ -10,17 +10,18 @@ import { ExtensionsFacade, UiFacade } from '../../state';
 export class FilterPanelComponent {
   @Input() game: Game;
   extensionNames$ = this._extensions.extensionNames$;
+  selectedExtensions$ = this._ui.selectedExtensions$;
 
   filters = CommandAttributes;
 
   constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
-  toggleExtension(extension: string) {
-    this._extensions.toggleExtension(this.game, extension);
+  selectExtension(extension: string, state: boolean) {
+    this._ui.selectExtensions(this.game, [extension], state);
   }
 
   isExtensionChecked(extension: string) {
-    return this._extensions.getExtensionCheckedState(extension);
+    return this._ui.getExtensionCheckedState(extension);
   }
 
   toggleFilter(filter: Attribute, modifier: Modifier) {
@@ -29,5 +30,17 @@ export class FilterPanelComponent {
 
   isFilterChecked(filter: Attribute, modifier: Modifier) {
     return this._ui.getFilterCheckedState(filter, modifier);
+  }
+
+  getExtensionEntities(extension: string) {
+    return this._extensions.getExtensionEntities(extension);
+  }
+
+  isClassChecked(className: string | 'any' | 'none') {
+    return this._ui.getClassCheckedState(className);
+  }
+
+  selectClass(className: string | 'any' | 'none', state: boolean) {
+    return this._ui.selectClass(this.game, className, state);
   }
 }

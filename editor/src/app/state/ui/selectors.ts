@@ -1,8 +1,18 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Command, SupportInfo } from '../../models';
-import { UiState } from './reducer';
+import { flatMap, uniq } from 'lodash';
+import { search } from '../../fusejs/fusejs';
+import { Attribute, Command, Game } from '../../models';
+import { extensions } from '../extensions/selectors';
+import { game } from '../game/selectors';
+import { UiState, GameState } from './reducer';
 
 export const state = createFeatureSelector('ui');
+
+const gameState = createSelector(
+  state,
+  game,
+  (state: UiState, game: Game) => state.games[game]
+);
 
 export const selectedFiltersOnly = createSelector(
   state,
@@ -12,6 +22,28 @@ export const selectedFiltersOnly = createSelector(
 export const selectedFiltersExcept = createSelector(
   state,
   (state: UiState) => state.selectedFiltersExcept
+);
+
+export const selectedExtensions = createSelector(
+  gameState,
+  (state: GameState) => state?.selectedExtensions
+);
+
+export const isExtensionSelected = createSelector(
+  selectedExtensions,
+  (selectedExtensions: string[], props: { extension: string }) =>
+    selectedExtensions?.includes(props.extension)
+);
+
+export const selectedClasses = createSelector(
+  gameState,
+  (state: GameState) => state?.selectedClasses
+);
+
+export const isClassSelected = createSelector(
+  selectedClasses,
+  (selectedClasses: string[], props: { className: string | 'any' | 'none' }) =>
+    selectedClasses?.includes(props.className)
 );
 
 export const isFilterSelectedOnly = createSelector(
@@ -66,20 +98,69 @@ export const opcodeOnLoad = createSelector(state, (state: UiState) => ({
   extension: state.extensionOnLoad,
 }));
 
-export const game = createSelector(state, (state: UiState) => state.game);
-
-export const supportInfo = createSelector(
-  state,
-  (state: UiState) => state.supportInfo
-);
-
-export const commandSupportInfo = createSelector(
-  supportInfo,
-  (supportInfo: SupportInfo, props: { command: Command; extension: string }) =>
-    supportInfo?.[props.extension]?.[props.command.id]
-);
-
 export const currentPage = createSelector(
   state,
   (state: UiState) => state.currentPage
 );
+
+export const rows = createSelector(
+  extensions,
+  selectedExtensions,
+  selectedFiltersOnly,
+  selectedFiltersExcept,
+  searchTerm,
+  selectedClasses,
+  (
+    extensions,
+    selectedExtensions,
+    selectedFiltersOnly,
+    selectedFiltersExcept,
+    searchTerm,
+    selectedClasses
+  ) => {
+    const selected = extensions?.filter(({ name }) =>
+      selectedExtensions?.includes(name)
+    );
+
+    return (
+      selected &&
+      flatMap(selected, ({ name: extension, commands }) => {
+        const filtered = filterCommands(
+          commands,
+          selectedFiltersOnly,
+          selectedFiltersExcept,
+          selectedClasses
+        );
+        return search(filtered, searchTerm).map((command) => ({
+          extension,
+          command,
+        }));
+      })
+    );
+  }
+);
+
+function filterCommands(
+  commands: Command[],
+  only: Attribute[],
+  except: Attribute[],
+  classes: string[]
+) {
+  return commands.filter(
+    (command) =>
+      only.every((attr) => command.attrs?.[attr]) &&
+      !except.some((attr) => command.attrs?.[attr]) &&
+      isClassMatching(command, classes ?? [])
+  );
+}
+
+function isClassMatching(
+  command: Command,
+  classes: Array<string | 'any' | 'none'>
+): boolean {
+  if (classes.includes('any')) {
+    return true;
+  }
+  const needle = command.class ?? 'none';
+  return classes.includes(needle);
+}

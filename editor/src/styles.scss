@@ -81,3 +81,63 @@ scl-icon + scl-icon {
 .cdk-drag-preview {
   z-index: 1100 !important;
 }
+
+label.form-check-label {
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  [type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+
+    &:checked + .checkbox::before {
+      background: $success;
+      border-color: $success;
+    }
+
+    &:disabled + .checkbox::before {
+      background: #e9ecef;
+      border-color: #e9ecef;
+    }
+
+    &:focus + .checkbox::before {
+      box-shadow: 0 0px 8px $success;
+    }
+
+    & + .checkbox::after {
+      content: "";
+      position: absolute;
+      line-height: 1rem;
+      text-align: center;
+      color: black;
+      top: 0px;
+      left: 0px;
+      margin: 0 3px;
+      height: 1rem;
+      width: 1rem;
+      border: 1px rgba(0, 0, 0, 0) solid;
+      opacity: 0;
+    }
+
+    &:checked + .checkbox::after {
+      opacity: 1;
+    }
+  }
+
+  .checkbox {
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      display: block;
+      margin: 0 3px;
+      height: 1rem;
+      width: 1rem;
+      border: 1px #e9ecef solid;
+      border-radius: 3px;
+    }
+  }
+}

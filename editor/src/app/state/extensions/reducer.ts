@@ -3,14 +3,12 @@ import { Entity, Extension, Game } from '../../models';
 import {
   loadExtensions,
   loadExtensionsSuccess,
-  toggleExtension,
   updateGameCommand,
 } from './actions';
 import { without, sortBy, last } from 'lodash';
 
 export interface GameState {
   extensions: Extension[];
-  selectedExtensions?: string[];
   loading: boolean;
   entities?: Record<string, Entity[]>;
   lastUpdate?: number;
@@ -34,7 +32,6 @@ const _reducer = createReducer(
     updateState(state, game, {
       extensions,
       lastUpdate,
-      selectedExtensions: extensions.map((e) => e.name),
       entities: getEntities(extensions),
       loading: false,
     })
@@ -47,12 +44,9 @@ const _reducer = createReducer(
     ) => {
       const gameState: GameState = state.games[game] ?? {
         extensions: [],
-        selectedExtensions: [],
         loading: false,
         entities: {},
       };
-      let tickExtension: string | null = null;
-      let untickExtension: string | null = null;
       let extensions = upsertBy(
         gameState.extensions,
         'name',
@@ -67,13 +61,10 @@ const _reducer = createReducer(
             () => newCommand
           ),
         }),
-        () => {
-          tickExtension = name;
-          return {
-            name,
-            commands: [newCommand],
-          };
-        }
+        () => ({
+          name,
+          commands: [newCommand],
+        })
       );
 
       if (name !== oldExtension) {
@@ -82,7 +73,6 @@ const _reducer = createReducer(
           const commands = upsertBy(e.commands, 'id', newCommand.id);
           if (!commands.length) {
             // remove previous collection if it is empty
-            untickExtension = oldExtension;
             return null;
           }
           return {
@@ -92,34 +82,14 @@ const _reducer = createReducer(
         });
       }
 
-      const selectedExtensions =
-        untickExtension !== null
-          ? gameState.selectedExtensions.filter((s) => s !== untickExtension)
-          : [...gameState.selectedExtensions];
-
-      if (tickExtension !== null) {
-        selectedExtensions.push(tickExtension);
-        selectedExtensions.sort();
-      }
-
       const entities = getEntities(extensions);
 
       return updateState(state, game, {
         extensions,
-        selectedExtensions,
         entities,
       });
     }
-  ),
-  on(toggleExtension, (state, { game, extension }) => {
-    const selectedExtensions = state.games[game]?.selectedExtensions ?? [];
-
-    return updateState(state, game, {
-      selectedExtensions: selectedExtensions.includes(extension)
-        ? without(selectedExtensions, extension)
-        : [...selectedExtensions, extension],
-    });
-  })
+  )
 );
 
 function updateState(
@@ -187,10 +157,10 @@ function getEntities(extensions: Extension[]): Record<string, Entity[]> {
         staticClasses.add(command.class);
       }
     }
-    const dynamicClassesArray = [...dynamicClasses];
-    const staticClassesArray = [...staticClasses].filter(
-      (name) => !dynamicClassesArray.includes(name)
-    );
+    const dynamicClassesArray = [...dynamicClasses].sort();
+    const staticClassesArray = [...staticClasses]
+      .filter((name) => !dynamicClassesArray.includes(name))
+      .sort();
     (m[e.name] ??= []).push(
       ...dynamicClassesArray.map(
         (name) => ({ name, type: 'dynamic' } as Entity)

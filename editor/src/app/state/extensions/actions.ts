@@ -29,8 +29,3 @@ export const updateGameCommand = createAction(
     oldExtension: string;
   }>()
 );
-
-export const toggleExtension = createAction(
-  'toggle extension selection',
-  props<{ game: Game; extension: string }>()
-);

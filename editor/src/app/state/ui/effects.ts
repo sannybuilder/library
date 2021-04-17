@@ -4,10 +4,10 @@ import {
   changePage,
   displayOrEditCommandInfo,
   displayOrEditSnippet,
-  loadSupportInfo,
-  loadSupportInfoSuccess,
-  onListEnter,
+  resetFilters,
   scrollTop,
+  selectClass,
+  selectExtensions,
   stopEditOrDisplay,
   toggleFilter,
   updateSearchTerm,
@@ -16,23 +16,24 @@ import {
   filter,
   map,
   mapTo,
+  pairwise,
   switchMap,
   tap,
   withLatestFrom,
+  startWith,
+  groupBy,
+  mergeMap,
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
-import { ViewMode } from '../../models';
+import { Extension, Game, ViewMode } from '../../models';
 import { combineLatest, merge } from 'rxjs';
-import {
-  loadExtensionsSuccess,
-  toggleExtension,
-  updateCommand,
-} from '../extensions/actions';
+import { loadExtensionsSuccess, updateCommand } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
-import { UiService } from './service';
 import { ExtensionsFacade } from '../extensions/facade';
 import { ChangesFacade } from '../changes/facade';
 import { DOCUMENT } from '@angular/common';
+import { onListEnter } from '../game/actions';
+import { GameFacade } from '../game/facade';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -40,7 +41,7 @@ export class UiEffects {
     combineLatest([
       this._actions$.pipe(ofType(loadExtensionsSuccess)),
       this._ui.opcodeOnLoad$,
-      this._ui.game$,
+      this._game.game$,
     ]).pipe(
       filter(([{ game }, _, currGame]) => game === currGame),
       map(([{ extensions }, { opcode, extension }]) => {
@@ -59,10 +60,6 @@ export class UiEffects {
         }
       })
     )
-  );
-
-  onGameChange$ = createEffect(() =>
-    this._ui.game$.pipe(map((game) => loadSupportInfo({ game })))
   );
 
   updateCommand$ = createEffect(() =>
@@ -88,28 +85,17 @@ export class UiEffects {
     )
   );
 
-  loadSupportInfo$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(loadSupportInfo),
-      switchMap(({ game }) => this._service.loadSupportInfo(game)),
-      map((supportInfo) => loadSupportInfoSuccess({ supportInfo }))
-    )
-  );
-
   resetPagination$ = createEffect(() =>
     merge(
       this._actions$.pipe(
-        ofType(toggleFilter, toggleExtension, updateSearchTerm)
+        ofType(toggleFilter, selectExtensions, selectClass, updateSearchTerm)
       ),
       this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
     ).pipe(mapTo(changePage({ index: 1 })))
   );
 
   commandPage$ = createEffect(() =>
-    combineLatest([
-      this._extensions.rows$,
-      this._ui.commandToDisplayOrEdit$,
-    ]).pipe(
+    combineLatest([this._ui.rows$, this._ui.commandToDisplayOrEdit$]).pipe(
       map(([rows, command]) =>
         rows?.findIndex((row) => row.command?.id === command?.id)
       ),
@@ -142,14 +128,63 @@ export class UiEffects {
     { dispatch: false }
   );
 
+  /**
+   * for each game, subscribe to extension list changes
+   * then calculate a diff between previous and current extensions
+   * and update selected extensions accordingly
+   */
+  extensionChanges$ = createEffect(() =>
+    this._game.game$.pipe(
+      groupBy((game) => game),
+      mergeMap((game$) =>
+        game$.pipe(
+          mergeMap((game) =>
+            this._extensions
+              .getGameExtensions(game)
+              .pipe(map((extensions) => ({ extensions, game })))
+          ),
+          startWith({ extensions: [] as Extension[] }),
+          pairwise(),
+          switchMap(
+            ([prev, curr]: [
+              { extensions: Extension[] },
+              { extensions: Extension[]; game: Game }
+            ]) => {
+              const p = prev.extensions.map(({ name }) => name);
+              const c = curr.extensions.map(({ name }) => name);
+              const game = curr.game;
+
+              const added = c.filter((e) => !p.includes(e));
+              const removed = p.filter((e) => !c.includes(e));
+
+              return [
+                selectExtensions({ game, extensions: added, state: true }),
+                selectExtensions({ game, extensions: removed, state: false }),
+              ];
+            }
+          )
+        )
+      )
+    )
+  );
+
+  resetFilters$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(resetFilters),
+      withLatestFrom(this._extensions.extensionNames$, this._game.game$),
+      map(([_, extensions, game]) =>
+        selectExtensions({ game, extensions, state: true })
+      )
+    )
+  );
+
   constructor(
     private _actions$: Actions,
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
-    private _service: UiService,
     private _extensions: ExtensionsFacade,
     private _changes: ChangesFacade,
-
+    private _game: GameFacade,
     @Inject(DOCUMENT) private _d: Document
   ) {}
 }

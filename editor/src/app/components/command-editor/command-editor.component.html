@@ -264,14 +264,14 @@
 
 <div class="row mb-2">
   <div class="col-12">
-    <div class="form-check d-inline-block pr-2" *ngFor="let attr of attrs">
+    <div class="d-inline-block pr-2" *ngFor="let attr of attrs">
       <label class="form-check-label" [title]="attr | attrTitle">
         <input
-          class="form-check-input"
           type="checkbox"
           [ngModel]="command.attrs ? command.attrs[attr] : undefined"
           (ngModelChange)="onAttrChange(command, attr, $event)"
         />
+        <span class="checkbox"></span>
         {{ attr }}
       </label>
     </div>

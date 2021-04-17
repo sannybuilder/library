@@ -40,6 +40,7 @@ type ErrorType =
   styleUrls: ['./command-editor.component.scss'],
 })
 export class CommandEditorComponent implements OnInit {
+  private _command: Command;
   ParamType = ParamType;
   SourceType = SourceType;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
@@ -55,7 +56,16 @@ export class CommandEditorComponent implements OnInit {
   };
   errorMessages: string[] = [];
 
-  @Input() command: Command;
+  @Input() set command(val: Command) {
+    this._command = val;
+    // validate the new command
+    this.updateError(...(Object.keys(this.errors) as ErrorType[]));
+  }
+
+  get command() {
+    return this._command;
+  }
+
   @Input() snippet: string;
   @Input() extension: string;
   @Input() extensionNames: string[];
@@ -71,9 +81,9 @@ export class CommandEditorComponent implements OnInit {
       ...this.primitiveTypes.map((t) => `type ${t}`),
       ...dynamicClasses.map(({ name }) => `class ${name}`),
     ]);
-    this.classes = uniq(
-      val.map((v) => `${v.type === 'static' ? 'static' : 'class'} ${v.name}`)
-    ).sort();
+    this.classes = val.map(
+      (v) => `${v.type === 'dynamic' ? 'class' : 'static'} ${v.name}`
+    );
   }
 
   readonly attrs: Attribute[] = CommandAttributes;

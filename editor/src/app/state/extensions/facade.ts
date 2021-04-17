@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { Command, Extension, Game } from '../../models';
-import { updateCommand, toggleExtension, loadExtensions } from './actions';
+import { updateCommand, loadExtensions } from './actions';
 import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -14,19 +14,17 @@ export class ExtensionsFacade {
   extensionNames$ = this.store$.select(selector.extensionNames);
   loading$ = this.store$.select(selector.loading);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
-  rows$ = this.store$.select(selector.rows);
 
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });
   }
-  getExtensionCheckedState(extension: string) {
-    return this.store$.select(selector.isExtensionSelected, {
-      extension,
-    });
-  }
 
   getExtensionEntities(extension: string) {
-    return this.store$.select(selector.entities, { extension });
+    return this.store$.select(selector.extensionEntities, { extension });
+  }
+
+  getExtensionCommands(extension: string) {
+    return this.store$.select(selector.extensionCommands, { extension });
   }
 
   constructor(private store$: Store) {}
@@ -43,10 +41,6 @@ export class ExtensionsFacade {
     this.store$.dispatch(
       updateCommand({ command, newExtension, oldExtension })
     );
-  }
-
-  toggleExtension(game: Game, extension: string) {
-    this.store$.dispatch(toggleExtension({ game, extension }));
   }
 
   loadExtensions(game: Game) {

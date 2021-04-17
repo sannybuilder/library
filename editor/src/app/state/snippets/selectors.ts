@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Game } from '../../models';
-import { game } from '../ui/selectors';
+import { game } from '../game/selectors';
 import { SnippetsState } from './reducer';
 
 export const state = createFeatureSelector('snippets');

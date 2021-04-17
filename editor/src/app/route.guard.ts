@@ -8,8 +8,7 @@ import {
 } from '@angular/router';
 import { DEFAULT_EXTENSION, Game } from './models';
 import { AuthFacade } from './state/auth/facade';
-import { ExtensionsFacade } from './state/extensions/facade';
-import { UiFacade } from './state/ui/facade';
+import { GameFacade } from './state/game/facade';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -27,7 +26,7 @@ export class AuthGuard implements CanActivate {
 
 @Injectable({ providedIn: 'root' })
 export class RouteGuard implements CanActivate {
-  constructor(private _router: Router, private _ui: UiFacade) {}
+  constructor(private _router: Router, private _game: GameFacade) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const segments = getSegmentsFromUrl(this._router, state.url);
@@ -42,7 +41,7 @@ export class RouteGuard implements CanActivate {
       const extension = segments.shift() || DEFAULT_EXTENSION;
       const opcode = segments.shift();
 
-      this._ui.onListEnter(game, opcode, extension);
+      this._game.onListEnter(game, opcode, extension);
       return true;
     }
 

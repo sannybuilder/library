@@ -83,7 +83,7 @@
     [extensionNames]="extensionNames$ | async"
     [entities]="getExtensionEntities(extension) | async"
     [supportInfo]="getCommandSupportInfo(command, extension) | async"
-    [commands]="commands"
+    [commands]="getExtensionCommands(extension) | async"
     (hasError)="editorHasError = $event"
   ></scl-command-editor>
   <scl-command-info

@@ -19,6 +19,7 @@ import {
   UiFacade,
 } from '../../state';
 import { FUSEJS_OPTIONS } from '../../fusejs';
+import { GameFacade } from 'src/app/state/game/facade';
 
 @Component({
   selector: 'scl-library-page',
@@ -30,7 +31,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   onDestroy$ = new Subject();
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
-  game$ = this._ui.game$;
+  game$ = this._game.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
       (isAuthorized) =>
@@ -54,6 +55,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _auth: AuthFacade,
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
+    private _game: GameFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
 
@@ -83,11 +85,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this._ui.commandToDisplayOrEdit$,
       this._ui.extensionToDisplayOrEdit$,
       this._ui.viewMode$,
-      this._extensions.extensions$,
     ])
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(([command, extension, viewMode, extensions]) => {
-        this.commands = extensions.find((e) => e.name === extension)?.commands;
+      .subscribe(([command, extension, viewMode]) => {
         this.command = command
           ? { input: [], output: [], ...cloneDeep(command) }
           : command;
@@ -137,6 +137,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._extensions.getExtensionEntities(extension);
   }
 
+  getExtensionCommands(extension: string) {
+    return this._extensions.getExtensionCommands(extension);
+  }
+
   @HostListener('window:resize', [])
   private detectScreenSize() {
     this.screenSize = window.innerWidth;
@@ -166,6 +170,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getCommandSupportInfo(command: Command, extension: string) {
-    return this._ui.getCommandSupportInfo(command, extension);
+    return this._game.getCommandSupportInfo(command, extension);
   }
 }

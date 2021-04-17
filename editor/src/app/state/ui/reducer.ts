@@ -1,18 +1,25 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Command, Game, SupportInfo, ViewMode, Attribute } from '../../models';
+import { intersection, partition, without } from 'lodash';
+
+import { Command, ViewMode, Attribute, Game } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
   toggleCommandListElements,
   toggleFilter,
   updateSearchTerm,
-  onListEnter,
   displayOrEditSnippet,
-  loadSupportInfoSuccess,
   changePage,
   resetFilters,
+  selectClass,
+  selectExtensions,
 } from './actions';
-import { without } from 'lodash';
+import { onListEnter } from '../game/actions';
+
+export interface GameState {
+  selectedExtensions: string[];
+  selectedClasses: Array<string | 'any' | 'none'>;
+}
 
 export interface UiState {
   searchTerm?: string;
@@ -24,17 +31,35 @@ export interface UiState {
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
   viewMode: ViewMode;
-  game?: Game;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
-  supportInfo?: SupportInfo;
   currentPage: number | 'all';
+  games: Record<Game, GameState>;
 }
 
-const defaultFilterState = {
+const defaultFilterState: {
+  searchTerm: string;
+  selectedFiltersOnly: Attribute[];
+  selectedFiltersExcept: Attribute[];
+  games: Record<Game, GameState>;
+} = {
   searchTerm: '',
-  selectedFiltersOnly: [] as Attribute[],
-  selectedFiltersExcept: ['is_nop', 'is_unsupported'] as Attribute[],
+  selectedFiltersOnly: [],
+  selectedFiltersExcept: ['is_nop', 'is_unsupported'],
+  games: {
+    gta3: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    vc: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    sa: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+  },
 };
 
 export const initialState: UiState = {
@@ -62,6 +87,7 @@ const _reducer = createReducer(
         : 'selectedFiltersExcept']: selectedFilters,
     };
   }),
+
   on(updateSearchTerm, (state, { term: searchTerm }) => ({
     ...state,
     searchTerm,
@@ -88,15 +114,10 @@ const _reducer = createReducer(
     snippetToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
   })),
-  on(onListEnter, (state, { game, opcode, extension }) => ({
+  on(onListEnter, (state, { opcode, extension }) => ({
     ...state,
-    game,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
-  })),
-  on(loadSupportInfoSuccess, (state, { supportInfo }) => ({
-    ...state,
-    supportInfo,
   })),
   on(changePage, (state, { index: currentPage }) => ({
     ...state,
@@ -105,9 +126,57 @@ const _reducer = createReducer(
   on(resetFilters, (state) => ({
     ...state,
     ...defaultFilterState,
-  }))
+  })),
+  on(selectExtensions, (state, { game, extensions, state: forceSelect }) => {
+    const selectedExtensions = state.games[game]?.selectedExtensions ?? [];
+    const [selected, unselected] = partition(extensions, (extension) =>
+      selectedExtensions.includes(extension)
+    );
+
+    if (forceSelect && unselected.length > 0) {
+      return updateState(state, game, {
+        selectedExtensions: [...selectedExtensions, ...unselected],
+      });
+    }
+    if (!forceSelect && selected.length > 0) {
+      return updateState(state, game, {
+        selectedExtensions: without(selectedExtensions, ...selected),
+      });
+    }
+    return state;
+  }),
+  on(selectClass, (state, { game, className, state: forceSelect }) => {
+    const selectedClasses = state.games[game]?.selectedClasses ?? [];
+    const specials = ['none', 'any'];
+    const filtered = specials.includes(className)
+      ? intersection(selectedClasses, [className])
+      : without(selectedClasses, ...specials);
+    const isSelected = filtered.includes(className);
+
+    if (forceSelect && !isSelected) {
+      return updateState(state, game, {
+        selectedClasses: [...filtered, className],
+      });
+    }
+    if (!forceSelect && isSelected) {
+      return updateState(state, game, {
+        selectedClasses: without(filtered, className),
+      });
+    }
+    return state;
+  })
 );
 
 export function uiReducer(state: UiState, action: Action) {
   return _reducer(state, action);
+}
+
+function updateState(state: UiState, game: Game, newState: Partial<GameState>) {
+  return {
+    ...state,
+    games: {
+      ...state.games,
+      [game]: { ...(state.games[game] ?? {}), ...newState },
+    },
+  };
 }

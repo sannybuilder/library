@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { without } from 'lodash';
+import { intersection, partition, without } from 'lodash';
 
 import { Command, ViewMode, Attribute, Game } from '../../models';
 import {
@@ -11,14 +11,14 @@ import {
   displayOrEditSnippet,
   changePage,
   resetFilters,
-  toggleClass,
-  selectExtension,
+  selectClass,
+  selectExtensions,
 } from './actions';
 import { onListEnter } from '../game/actions';
 
 export interface GameState {
   selectedExtensions: string[];
-  selectedClasses: string[];
+  selectedClasses: Array<string | 'any' | 'none'>;
 }
 
 export interface UiState {
@@ -34,13 +34,32 @@ export interface UiState {
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
   currentPage: number | 'all';
-  games: Partial<Record<Game, GameState>>;
+  games: Record<Game, GameState>;
 }
 
-const defaultFilterState = {
+const defaultFilterState: {
+  searchTerm: string;
+  selectedFiltersOnly: Attribute[];
+  selectedFiltersExcept: Attribute[];
+  games: Record<Game, GameState>;
+} = {
   searchTerm: '',
-  selectedFiltersOnly: [] as Attribute[],
-  selectedFiltersExcept: ['is_nop', 'is_unsupported'] as Attribute[],
+  selectedFiltersOnly: [],
+  selectedFiltersExcept: ['is_nop', 'is_unsupported'],
+  games: {
+    gta3: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    vc: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    sa: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+  },
 };
 
 export const initialState: UiState = {
@@ -49,7 +68,6 @@ export const initialState: UiState = {
   displaySearchBar: false,
   viewMode: ViewMode.None,
   currentPage: 1,
-  games: {},
 };
 
 const _reducer = createReducer(
@@ -69,14 +87,7 @@ const _reducer = createReducer(
         : 'selectedFiltersExcept']: selectedFilters,
     };
   }),
-  on(toggleClass, (state, { game, className }) => {
-    const { selectedClasses: selected } = state.games[game];
-    const selectedClasses = selected.includes(className)
-      ? without(selected, className)
-      : [...selected, className];
 
-    return { ...state, selectedClasses };
-  }),
   on(updateSearchTerm, (state, { term: searchTerm }) => ({
     ...state,
     searchTerm,
@@ -116,18 +127,40 @@ const _reducer = createReducer(
     ...state,
     ...defaultFilterState,
   })),
-  on(selectExtension, (state, { game, extension, state: forceSelect }) => {
+  on(selectExtensions, (state, { game, extensions, state: forceSelect }) => {
     const selectedExtensions = state.games[game]?.selectedExtensions ?? [];
-    const isSelected = selectedExtensions.includes(extension);
+    const [selected, unselected] = partition(extensions, (extension) =>
+      selectedExtensions.includes(extension)
+    );
+
+    if (forceSelect && unselected.length > 0) {
+      return updateState(state, game, {
+        selectedExtensions: [...selectedExtensions, ...unselected],
+      });
+    }
+    if (!forceSelect && selected.length > 0) {
+      return updateState(state, game, {
+        selectedExtensions: without(selectedExtensions, ...selected),
+      });
+    }
+    return state;
+  }),
+  on(selectClass, (state, { game, className, state: forceSelect }) => {
+    const selectedClasses = state.games[game]?.selectedClasses ?? [];
+    const specials = ['none', 'any'];
+    const filtered = specials.includes(className)
+      ? intersection(selectedClasses, [className])
+      : without(selectedClasses, ...specials);
+    const isSelected = filtered.includes(className);
 
     if (forceSelect && !isSelected) {
       return updateState(state, game, {
-        selectedExtensions: [...selectedExtensions, extension],
+        selectedClasses: [...filtered, className],
       });
     }
     if (!forceSelect && isSelected) {
       return updateState(state, game, {
-        selectedExtensions: without(selectedExtensions, extension),
+        selectedClasses: without(filtered, className),
       });
     }
     return state;

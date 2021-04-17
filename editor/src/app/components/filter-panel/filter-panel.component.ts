@@ -17,7 +17,7 @@ export class FilterPanelComponent {
   constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
   selectExtension(extension: string, state: boolean) {
-    this._ui.selectExtension(this.game, extension, state);
+    this._ui.selectExtensions(this.game, [extension], state);
   }
 
   isExtensionChecked(extension: string) {
@@ -36,7 +36,11 @@ export class FilterPanelComponent {
     return this._extensions.getExtensionEntities(extension);
   }
 
-  isClassChecked(className: string, extension: string) {}
+  isClassChecked(className: string | 'any' | 'none') {
+    return this._ui.getClassCheckedState(className);
+  }
 
-  selectClass(className: string, extension: string, state: boolean) {}
+  selectClass(className: string | 'any' | 'none', state: boolean) {
+    return this._ui.selectClass(this.game, className, state);
+  }
 }

@@ -40,6 +40,12 @@ export const selectedClasses = createSelector(
   (state: GameState) => state?.selectedClasses
 );
 
+export const isClassSelected = createSelector(
+  selectedClasses,
+  (selectedClasses: string[], props: { className: string | 'any' | 'none' }) =>
+    selectedClasses?.includes(props.className)
+);
+
 export const isFilterSelectedOnly = createSelector(
   selectedFiltersOnly,
   (selectedFilters: string[], props: { filter: string }) =>
@@ -103,12 +109,14 @@ export const rows = createSelector(
   selectedFiltersOnly,
   selectedFiltersExcept,
   searchTerm,
+  selectedClasses,
   (
     extensions,
     selectedExtensions,
     selectedFiltersOnly,
     selectedFiltersExcept,
-    searchTerm
+    searchTerm,
+    selectedClasses
   ) => {
     const selected = extensions?.filter(({ name }) =>
       selectedExtensions?.includes(name)
@@ -120,7 +128,8 @@ export const rows = createSelector(
         const filtered = filterCommands(
           commands,
           selectedFiltersOnly,
-          selectedFiltersExcept
+          selectedFiltersExcept,
+          selectedClasses
         );
         return search(filtered, searchTerm).map((command) => ({
           extension,
@@ -132,32 +141,26 @@ export const rows = createSelector(
 );
 
 function filterCommands(
-  elements: Command[],
+  commands: Command[],
   only: Attribute[],
-  except: Attribute[]
+  except: Attribute[],
+  classes: string[]
 ) {
-  return elements.filter(
-    (element) =>
-      only.every((attr) => element.attrs?.[attr]) &&
-      !except.some((attr) => element.attrs?.[attr])
+  return commands.filter(
+    (command) =>
+      only.every((attr) => command.attrs?.[attr]) &&
+      !except.some((attr) => command.attrs?.[attr]) &&
+      isClassMatching(command, classes ?? [])
   );
 }
 
-// todo: move to ui
-export const classNamesForSelectedExtensions = createSelector(
-  extensions,
-  selectedExtensions,
-  (extensions, selectedExtensions) => {
-    const selected = extensions?.filter(({ name }) =>
-      selectedExtensions?.includes(name)
-    );
-    return (
-      selected &&
-      uniq(
-        flatMap(selected, ({ commands }) =>
-          commands.map((command) => command.class || '(no class)')
-        )
-      )
-    );
+function isClassMatching(
+  command: Command,
+  classes: Array<string | 'any' | 'none'>
+): boolean {
+  if (classes.includes('any')) {
+    return true;
   }
-);
+  const needle = command.class ?? 'none';
+  return classes.includes(needle);
+}

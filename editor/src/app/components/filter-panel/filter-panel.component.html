@@ -67,6 +67,29 @@
       data-parent="#left-rail"
     >
       <div class="card-body">
+        <div class="d-sm-inline-block d-xl-block pr-2">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isClassChecked('any') | async"
+              (ngModelChange)="selectClass('any', $event)"
+            />
+            <span class="checkbox"></span>
+            any class
+          </label>
+        </div>
+        <div class="d-sm-inline-block d-xl-block pr-2">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isClassChecked('none') | async"
+              (ngModelChange)="selectClass('none', $event)"
+            />
+            <span class="checkbox"></span>
+            no class
+          </label>
+        </div>
+
         <ng-container *ngFor="let extension of selectedExtensions$ | async">
           <div
             class="d-sm-inline-block d-xl-block pr-2"
@@ -75,8 +98,8 @@
             <label class="form-check-label">
               <input
                 type="checkbox"
-                [ngModel]="isClassChecked(entity.name, extension) | async"
-                (ngModelChange)="selectClass(entity.name, extension, $event)"
+                [ngModel]="isClassChecked(entity.name) | async"
+                (ngModelChange)="selectClass(entity.name, $event)"
               />
               <span class="checkbox"></span>
               <span class="text-muted">{{

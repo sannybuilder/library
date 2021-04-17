@@ -11,8 +11,8 @@ import {
   changePage,
   scrollTop,
   resetFilters,
-  toggleClass,
-  selectExtension,
+  selectClass,
+  selectExtensions,
 } from './actions';
 import * as selector from './selectors';
 
@@ -24,7 +24,6 @@ export class UiFacade {
   selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
   selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
-  selectedClasses$ = this.store$.select(selector.selectedClasses);
   currentPage$ = this.store$.select(selector.currentPage);
   commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
   extensionToDisplayOrEdit$ = this.store$.select(
@@ -53,10 +52,6 @@ export class UiFacade {
 
   toggleFilter(filter: Attribute, modifier: Modifier) {
     this.store$.dispatch(toggleFilter({ filter, modifier }));
-  }
-
-  toggleClass(game: Game, className: string) {
-    this.store$.dispatch(toggleClass({ game, className }));
   }
 
   updateSearch(term: string) {
@@ -95,13 +90,23 @@ export class UiFacade {
     this.store$.dispatch(resetFilters());
   }
 
-  selectExtension(game: Game, extension: string, state: boolean) {
-    this.store$.dispatch(selectExtension({ game, extension, state }));
+  selectExtensions(game: Game, extensions: string[], state: boolean) {
+    this.store$.dispatch(selectExtensions({ game, extensions, state }));
+  }
+
+  selectClass(game: Game, className: string, state: boolean) {
+    this.store$.dispatch(selectClass({ game, className, state }));
   }
 
   getExtensionCheckedState(extension: string) {
     return this.store$.select(selector.isExtensionSelected, {
       extension,
+    });
+  }
+
+  getClassCheckedState(className: string) {
+    return this.store$.select(selector.isClassSelected, {
+      className,
     });
   }
 }

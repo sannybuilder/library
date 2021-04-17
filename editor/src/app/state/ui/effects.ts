@@ -6,7 +6,8 @@ import {
   displayOrEditSnippet,
   resetFilters,
   scrollTop,
-  selectExtension,
+  selectClass,
+  selectExtensions,
   stopEditOrDisplay,
   toggleFilter,
   updateSearchTerm,
@@ -22,7 +23,6 @@ import {
   startWith,
   groupBy,
   mergeMap,
-  take,
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { Extension, Game, ViewMode } from '../../models';
@@ -88,7 +88,7 @@ export class UiEffects {
   resetPagination$ = createEffect(() =>
     merge(
       this._actions$.pipe(
-        ofType(toggleFilter, selectExtension, updateSearchTerm)
+        ofType(toggleFilter, selectExtensions, selectClass, updateSearchTerm)
       ),
       this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
     ).pipe(mapTo(changePage({ index: 1 })))
@@ -157,14 +157,9 @@ export class UiEffects {
               const added = c.filter((e) => !p.includes(e));
               const removed = p.filter((e) => !c.includes(e));
 
-              // combine into 1-2 actions
               return [
-                ...added.map((extension) =>
-                  selectExtension({ game, extension, state: true })
-                ),
-                ...removed.map((extension) =>
-                  selectExtension({ game, extension, state: false })
-                ),
+                selectExtensions({ game, extensions: added, state: true }),
+                selectExtensions({ game, extensions: removed, state: false }),
               ];
             }
           )
@@ -177,10 +172,8 @@ export class UiEffects {
     this._actions$.pipe(
       ofType(resetFilters),
       withLatestFrom(this._extensions.extensionNames$, this._game.game$),
-      switchMap(([_, extensions, game]) =>
-        extensions.map((extension) =>
-          selectExtension({ game, extension, state: true })
-        )
+      map(([_, extensions, game]) =>
+        selectExtensions({ game, extensions, state: true })
       )
     )
   );

@@ -5,7 +5,7 @@ import { Command } from '../models';
 export const FUSEJS_OPTIONS = {
   keys: ['name', 'short_desc', 'id', 'class', 'member'],
   includeMatches: true,
-  shouldSort: false,
+  shouldSort: true,
   threshold: 0.3,
   ignoreLocation: true,
   minMatchCharLength: 3,

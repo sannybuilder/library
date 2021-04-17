@@ -46,3 +46,8 @@ export const changePage = createAction(
 export const scrollTop = createAction('scroll top');
 
 export const resetFilters = createAction('reset filters');
+
+export const displayClassOverview = createAction(
+  'display class overview',
+  props<{ className: string }>()
+);

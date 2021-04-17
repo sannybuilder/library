@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Attribute, Command, SupportInfo } from '../../models';
 
 @Component({
@@ -26,4 +26,11 @@ export class CommandInfoComponent {
   }
   @Input() supportInfo: SupportInfo;
   @Input() snippet?: string;
+
+  @Output() classOverview: EventEmitter<string> = new EventEmitter();
+
+  onClassOverview(className: string) {
+    this.classOverview.emit(className);
+    return false;
+  }
 }

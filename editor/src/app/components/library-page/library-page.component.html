@@ -7,7 +7,10 @@
 
     <main
       class="col-12"
-      [ngClass]="{ 'col-xl-5': command, 'col-xl-8': !command }"
+      [ngClass]="{
+        'col-xl-5': viewMode !== ViewMode.None,
+        'col-xl-8': viewMode === ViewMode.None
+      }"
     >
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -20,22 +23,28 @@
       <scl-command-list
         [game]="game$ | async"
         [canEdit]="canEdit$ | async"
-        [narrowed]="command && screenSize >= 1200 && screenSize < 1700"
+        [narrowed]="
+          viewMode !== ViewMode.None && screenSize >= 1200 && screenSize < 1700
+        "
         (view)="onView($event.command, $event.extension)"
         (edit)="onEdit($event.command, $event.extension)"
+        (classOverview)="onClassOverview($event)"
       ></scl-command-list>
     </main>
 
-    <div class="d-none d-xl-block col-xl-5 right-rail" *ngIf="command">
-      <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
+    <div
+      class="d-none d-xl-block col-xl-5 right-rail"
+      *ngIf="viewMode !== ViewMode.None"
+    >
+      <ng-container *ngTemplateOutlet="rightRail"></ng-container>
       <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
     </div>
   </div>
 </div>
 
-<scl-modal *ngIf="command && screenSize < 1200">
+<scl-modal *ngIf="viewMode !== ViewMode.None && screenSize < 1200">
   <div class="modal-body">
-    <ng-container *ngTemplateOutlet="commandViewer"></ng-container>
+    <ng-container *ngTemplateOutlet="rightRail"></ng-container>
   </div>
   <ng-container class="modal-footer">
     <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
@@ -74,7 +83,7 @@
   </div>
 </ng-template>
 
-<ng-template #commandViewer>
+<ng-template #rightRail>
   <scl-command-editor
     *ngIf="viewMode === ViewMode.Edit"
     [command]="command"
@@ -91,6 +100,13 @@
     [command]="command"
     [snippet]="getSnippet(extension, command.id) | async"
     [supportInfo]="getCommandSupportInfo(command, extension) | async"
+    (classOverview)="onClassOverview($event)"
   >
   </scl-command-info>
+  <scl-class-overview
+    *ngIf="viewMode === ViewMode.ClassOverview"
+    [className]="classToDisplay$ | async"
+    [classCommands]="classCommands$ | async"
+    (view)="onView($event.command, $event.extension)"
+  ></scl-class-overview>
 </ng-template>

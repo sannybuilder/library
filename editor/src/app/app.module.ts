@@ -42,28 +42,30 @@ import { ChangesEffects } from './state/changes/effects';
 import { uiReducer } from './state/ui/reducer';
 import { UiEffects } from './state/ui/effects';
 
-import { HlPropPipe } from './fusejs';
-import { ConfigModule } from './config';
-
-import { AppComponent } from './app.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { LibraryPageComponent } from './components/library-page/library-page.component';
-
-import { CommandListComponent } from './components/command-list/command-list.component';
-import { CommandEditorComponent } from './components/command-editor/command-editor.component';
-import { HeaderComponent } from './components/header/header.component';
-import { CommandInfoComponent } from './components/command-info/command-info.component';
-import { AuthGuard, RouteGuard } from './route.guard';
-import { FooterComponent } from './components/footer/footer.component';
-import { SelectorComponent } from './components/selector/selector.component';
-import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
-import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { IconComponent } from './components/icon/icon.component';
-import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
+// game state
 import { GameEffects } from './state/game/effects';
 import { gameReducer } from './state/game/reducer';
+
+import { HlPropPipe } from './fusejs';
+import { ConfigModule } from './config';
+import { AuthGuard, RouteGuard } from './route.guard';
+import { AppComponent } from './app.component';
+
+import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
+import { CommandEditorComponent } from './components/command-editor/command-editor.component';
+import { CommandInfoComponent } from './components/command-info/command-info.component';
+import { CommandListComponent } from './components/command-list/command-list.component';
+import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
+import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { IconComponent } from './components/icon/icon.component';
+import { LibraryPageComponent } from './components/library-page/library-page.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { SelectorComponent } from './components/selector/selector.component';
+import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +94,7 @@ import { gameReducer } from './state/game/reducer';
     SupportedGamesComponent,
     AttrTitlePipe,
     PaginationComponent,
+    ClassOverviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -107,7 +107,10 @@
                   <ng-container *ngIf="row.command.attrs?.is_constructor">
                     <code>
                       {{ row.command | outputParams }} =
-                      <span [innerHTML]="row.command | hlProp: 'class'"></span
+                      <a href="#" (click)="onClassOverview(row.command.class)"
+                        ><span
+                          [innerHTML]="row.command | hlProp: 'class'"
+                        ></span></a
                       >.<span
                         [innerHTML]="row.command | hlProp: 'member'"
                       ></span
@@ -116,8 +119,11 @@
                   </ng-container>
 
                   <ng-container *ngIf="!row.command.attrs?.is_constructor">
-                    <code
-                      ><span [innerHTML]="row.command | hlProp: 'class'"></span
+                    <code>
+                      <a href="#" (click)="onClassOverview(row.command.class)">
+                        <span
+                          [innerHTML]="row.command | hlProp: 'class'"
+                        ></span></a
                       >.<span
                         [innerHTML]="row.command | hlProp: 'member'"
                       ></span

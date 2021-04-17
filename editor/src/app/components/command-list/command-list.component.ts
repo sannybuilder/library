@@ -21,6 +21,7 @@ export class CommandListComponent {
     command: Command;
     extension: string;
   }> = new EventEmitter();
+  @Output() classOverview: EventEmitter<string> = new EventEmitter();
 
   loading$ = this._extensions.loading$;
   currentPage$ = this._ui.currentPage$;
@@ -59,6 +60,11 @@ export class CommandListComponent {
 
   resetFilters() {
     this._ui.resetFilters();
+    return false;
+  }
+
+  onClassOverview(className: string) {
+    this.classOverview.emit(className);
     return false;
   }
 }

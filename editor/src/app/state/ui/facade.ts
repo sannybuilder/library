@@ -13,6 +13,7 @@ import {
   resetFilters,
   selectClass,
   selectExtensions,
+  displayClassOverview,
 } from './actions';
 import * as selector from './selectors';
 
@@ -38,6 +39,8 @@ export class UiFacade {
     ),
     filter((a) => !!a.extension)
   );
+  classToDisplay$ = this.store$.select(selector.classToDisplay);
+  classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
 
   getFilterCheckedState(filter: Attribute, modifier: Modifier) {
     return this.store$.select(
@@ -108,5 +111,9 @@ export class UiFacade {
     return this.store$.select(selector.isClassSelected, {
       className,
     });
+  }
+
+  displayClassOverview(className: string) {
+    this.store$.dispatch(displayClassOverview({ className }));
   }
 }

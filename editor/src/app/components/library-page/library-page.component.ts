@@ -31,6 +31,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   onDestroy$ = new Subject();
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
+  classToDisplay$ = this._ui.classToDisplay$;
+  classCommands$ = this._ui.classToDisplayCommands$;
+
   game$ = this._game.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
@@ -47,7 +50,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   oldExtension?: string;
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
-  commands?: Command[];
   editorHasError = false;
 
   constructor(
@@ -171,5 +173,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCommandSupportInfo(command: Command, extension: string) {
     return this._game.getCommandSupportInfo(command, extension);
+  }
+
+  onClassOverview(className: string) {
+    this._ui.displayClassOverview(className);
   }
 }

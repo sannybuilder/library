@@ -17,18 +17,14 @@
 
 <div class="row mb-2">
   <div class="col-12">
-    <ng-container
+    <div
       *ngIf="!command.attrs?.is_unsupported && !command.attrs?.is_nop"
+      class="mb-3"
     >
-      <div class="mb-3">{{ command.short_desc }}</div>
-    </ng-container>
-
-    <ng-container *ngIf="command.attrs?.is_unsupported"
-      >Unsupported</ng-container
-    >
-    <ng-container *ngIf="command.attrs?.is_nop"
-      >Does nothing (NOP)</ng-container
-    >
+      {{ command.short_desc }}
+    </div>
+    <div *ngIf="command.attrs?.is_unsupported" class="mb-3">Unsupported</div>
+    <div *ngIf="command.attrs?.is_nop" class="mb-3">Does nothing (NOP)</div>
 
     <ng-container *ngIf="command.attrs?.is_keyword">
       <code>{{ command.name | lowercase }} {{ command | keywordParams }}</code>
@@ -37,15 +33,20 @@
     <ng-container *ngIf="command.class && command.member">
       <ng-container *ngIf="command.attrs?.is_constructor">
         <code>
-          {{ command | outputParams }} = {{ command.class }}.{{ command.member
-          }}{{ command | inputParams }}</code
+          {{ command | outputParams }} =
+          <a href="#" (click)="onClassOverview(command.class)">{{
+            command.class
+          }}</a
+          >.{{ command.member }}{{ command | inputParams }}</code
         >
       </ng-container>
 
       <ng-container *ngIf="!command.attrs?.is_constructor">
         <code
-          >{{ command.class }}.{{ command.member
-          }}{{ command | classParams }}</code
+          ><a href="#" (click)="onClassOverview(command.class)">{{
+            command.class
+          }}</a
+          >.{{ command.member }}{{ command | classParams }}</code
         >
       </ng-container>
     </ng-container>

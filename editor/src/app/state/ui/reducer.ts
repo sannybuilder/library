@@ -13,6 +13,7 @@ import {
   resetFilters,
   selectClass,
   selectExtensions,
+  displayClassOverview,
 } from './actions';
 import { onListEnter } from '../game/actions';
 
@@ -35,6 +36,7 @@ export interface UiState {
   extensionOnLoad?: string;
   currentPage: number | 'all';
   games: Record<Game, GameState>;
+  classToDisplay?: string;
 }
 
 const defaultFilterState: {
@@ -112,6 +114,7 @@ const _reducer = createReducer(
     commandToDisplayOrEdit: undefined,
     extensionToDisplayOrEdit: undefined,
     snippetToDisplayOrEdit: undefined,
+    classToDisplay: undefined,
     viewMode: ViewMode.None,
   })),
   on(onListEnter, (state, { opcode, extension }) => ({
@@ -164,7 +167,12 @@ const _reducer = createReducer(
       });
     }
     return state;
-  })
+  }),
+  on(displayClassOverview, (state, { className }) => ({
+    ...state,
+    classToDisplay: className,
+    viewMode: ViewMode.ClassOverview,
+  }))
 );
 
 export function uiReducer(state: UiState, action: Action) {

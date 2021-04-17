@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { flatMap, uniq } from 'lodash';
+import { flatMap, sortBy } from 'lodash';
 import { search } from '../../fusejs/fusejs';
 import { Attribute, Command, Game } from '../../models';
 import { extensions } from '../extensions/selectors';
@@ -164,3 +164,33 @@ function isClassMatching(
   const needle = command.class ?? 'none';
   return classes.includes(needle);
 }
+
+export const classToDisplay = createSelector(
+  state,
+  (state: UiState) => state.classToDisplay
+);
+
+export const classToDisplayCommands = createSelector(
+  extensions,
+  classToDisplay,
+  (extensions, classToDisplay) => {
+    if (!classToDisplay) {
+      return;
+    }
+
+    const extensionCommands = flatMap(extensions, (extension) => {
+      return extension.commands
+        .filter((command) => command.class === classToDisplay)
+        .map((command) => ({ command, extension: extension.name }));
+    });
+
+    return sortBy(extensionCommands, [
+      'command.attrs.is_constructor',
+      'command.attrs.is_destructor',
+      'command.attrs.is_static',
+      'command.member',
+      'command.attrs.is_nop',
+      'command.attrs.is_unsupported',
+    ]);
+  }
+);

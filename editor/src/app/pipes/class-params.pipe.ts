@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Command } from '../models';
+import { Command, ParamType } from '../models';
 import { braceify, stringify } from './params';
 
 @Pipe({
@@ -15,7 +15,7 @@ export class ClassParamsPipe implements PipeTransform {
     }
 
     if (value.attrs?.is_condition) {
-      params += ': boolean';
+      return `${params}: ${ParamType.boolean}`;
     }
     return params;
   }

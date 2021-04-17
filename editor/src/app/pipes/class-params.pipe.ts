@@ -7,11 +7,16 @@ import { braceify, stringify } from './params';
 })
 export class ClassParamsPipe implements PipeTransform {
   transform(value: Command): string {
-    if (!value.num_params) {
-      return '()';
+    let params = '()';
+    if (value.num_params) {
+      const input = value?.input ?? [];
+      const output = value?.output ?? [];
+      params = braceify(stringify([...input, ...output], ', '), '()');
     }
-    const input = value?.input ?? [];
-    const output = value?.output ?? [];
-    return braceify(stringify([...input, ...output], ', '), '()');
+
+    if (value.attrs?.is_condition) {
+      params += ': boolean';
+    }
+    return params;
   }
 }

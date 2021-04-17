@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618663235942
+    "last_update": 1618703482030
   },
   "extensions": [
     {
@@ -6637,66 +6637,66 @@
           "short_desc": "Points the camera at the specified X, Y and Z coordinates and applies the position set by 0159"
         },
         {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            },
+            {
+              "name": "display",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "0161",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "AddForCarOld",
           "name": "ADD_BLIP_FOR_CAR_OLD",
           "num_params": 4,
+          "short_desc": "Adds a blip with properties to the vehicle"
+        },
+        {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            },
+            {
+              "name": "display",
+              "type": "int"
+            }
+          ],
           "output": [
             {
-              "name": "_p4",
+              "name": "handle",
               "type": "Blip"
             }
           ],
-          "short_desc": "Creates a floating marker above the specified vehicle"
-        },
-        {
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "0162",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "AddForCharOld",
           "name": "ADD_BLIP_FOR_CHAR_OLD",
           "num_params": 4,
-          "output": [
-            {
-              "name": "_p4",
-              "type": "Blip"
-            }
-          ],
-          "short_desc": ""
+          "short_desc": "Adds a blip with properties to the character"
         },
         {
           "attrs": {
@@ -6707,111 +6707,114 @@
           "num_params": 0
         },
         {
-          "class": "Blip",
-          "id": "0164",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             }
           ],
+          "class": "Blip",
+          "id": "0164",
           "member": "Remove",
           "name": "REMOVE_BLIP",
           "num_params": 1,
-          "short_desc": "Disables the marker with the specified handle"
+          "short_desc": "Removes the blip with the specified handle",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
-          "class": "Blip",
-          "id": "0165",
           "input": [
             {
               "name": "self",
               "type": "Blip"
             },
             {
-              "name": "colorId",
+              "name": "color",
               "type": "int"
             }
           ],
+          "class": "Blip",
+          "id": "0165",
           "member": "ChangeColor",
           "name": "CHANGE_BLIP_COLOUR",
           "num_params": 2,
-          "short_desc": "Changes the colour of the blip"
+          "short_desc": "Changes the blip color"
         },
         {
-          "class": "Blip",
-          "id": "0166",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Blip",
+          "id": "0166",
           "member": "Dim",
           "name": "DIM_BLIP",
           "num_params": 2,
           "short_desc": "Sets whether the blip should appear dimmed"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            },
+            {
+              "name": "display",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "0167",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ],
           "member": "AddForCoordOld",
           "name": "ADD_BLIP_FOR_COORD_OLD",
           "num_params": 6,
-          "output": [
-            {
-              "name": "_p6",
-              "type": "Blip"
-            }
-          ],
-          "short_desc": "Adds a coloured blip at the specified location"
+          "short_desc": "Adds a blip with properties to the coordinates point"
         },
         {
-          "class": "Blip",
-          "id": "0168",
           "input": [
             {
               "name": "self",
               "type": "Blip"
             },
             {
-              "name": "scale",
+              "name": "size",
               "type": "int"
             }
           ],
+          "class": "Blip",
+          "id": "0168",
           "member": "ChangeScale",
           "name": "CHANGE_BLIP_SCALE",
           "num_params": 2,
-          "short_desc": "Sets size of the marker with the specified handle"
+          "short_desc": "Sets size of the blip with the specified handle"
         },
         {
           "attrs": {
@@ -7295,111 +7298,75 @@
           "short_desc": "Returns true if the car's health is above the specified value"
         },
         {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "0186",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "AddForCar",
           "name": "ADD_BLIP_FOR_CAR",
           "num_params": 2,
+          "short_desc": "Adds a blip and a marker to the vehicle"
+        },
+        {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            }
+          ],
           "output": [
             {
-              "name": "_p2",
+              "name": "handle",
               "type": "Blip"
             }
           ],
-          "short_desc": "Creates a marker above the specified vehicle"
-        },
-        {
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "0187",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "AddForChar",
           "name": "ADD_BLIP_FOR_CHAR",
           "num_params": 2,
+          "short_desc": "Adds a blip and a marker to the character"
+        },
+        {
+          "input": [
+            {
+              "name": "object",
+              "type": "Object"
+            }
+          ],
           "output": [
             {
-              "name": "_p2",
+              "name": "handle",
               "type": "Blip"
             }
           ],
-          "short_desc": "Creates a marker above the specified character"
-        },
-        {
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "0188",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "AddForObject",
           "name": "ADD_BLIP_FOR_OBJECT",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "Blip"
-            }
-          ],
-          "short_desc": "Creates a marker above the specified object"
+          "short_desc": "Adds a blip and a marker to the object"
         },
         {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "Blip",
-          "id": "0189",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
-          "member": "AddForContactPoint",
-          "name": "ADD_BLIP_FOR_CONTACT_POINT",
-          "num_params": 4,
-          "output": [
-            {
-              "name": "_p4",
-              "type": "Blip"
-            }
-          ],
-          "short_desc": ""
-        },
-        {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "Blip",
-          "id": "018A",
           "input": [
             {
               "name": "x",
@@ -7414,34 +7381,70 @@
               "type": "float"
             }
           ],
-          "member": "AddForCoord",
-          "name": "ADD_BLIP_FOR_COORD",
-          "num_params": 4,
           "output": [
             {
               "name": "handle",
               "type": "Blip"
             }
           ],
-          "short_desc": "Creates a yellow radar checkpoint marker at the specified X, Y and Z coordinates"
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
+          "id": "0189",
+          "member": "AddForContactPoint",
+          "name": "ADD_BLIP_FOR_CONTACT_POINT",
+          "num_params": 4,
+          "short_desc": "Adds a blip to the contact point"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
           "class": "Blip",
-          "id": "018B",
+          "id": "018A",
+          "member": "AddForCoord",
+          "name": "ADD_BLIP_FOR_COORD",
+          "num_params": 4,
+          "short_desc": "Adds a blip to the coordinates point"
+        },
+        {
           "input": [
             {
               "name": "handle",
               "type": "Blip"
             },
             {
-              "name": "mode",
+              "name": "display",
               "type": "int"
             }
           ],
+          "class": "Blip",
+          "id": "018B",
           "member": "ChangeDisplay",
           "name": "CHANGE_BLIP_DISPLAY",
           "num_params": 2,
-          "short_desc": "Changes the blips display mode"
+          "short_desc": "Changes the display of the specified blip"
         },
         {
           "attrs": {
@@ -12546,74 +12549,74 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "sprite",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "02A7",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ],
           "member": "AddSpriteForContactPoint",
           "name": "ADD_SPRITE_BLIP_FOR_CONTACT_POINT",
           "num_params": 5,
+          "short_desc": "Adds a sprite blip to the contact point"
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "sprite",
+              "type": "int"
+            }
+          ],
           "output": [
             {
-              "name": "_p5",
+              "name": "handle",
               "type": "Blip"
             }
           ],
-          "short_desc": "Adds a contact sprite blip for the specified coordinates"
-        },
-        {
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "02A8",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ],
           "member": "AddSpriteForCoord",
           "name": "ADD_SPRITE_BLIP_FOR_COORD",
           "num_params": 5,
-          "output": [
-            {
-              "name": "_p5",
-              "type": "Blip"
-            }
-          ],
-          "short_desc": "Adds a sprite blip for the specified coordinates"
+          "short_desc": "Adds a sprite blip to the coordinates point"
         },
         {
           "class": "Char",
@@ -18072,27 +18075,27 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "pickup",
+              "type": "Pickup"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Blip",
           "id": "03DC",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "AddForPickup",
           "name": "ADD_BLIP_FOR_PICKUP",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "Blip"
-            }
-          ],
-          "short_desc": "Creates a marker above a pickup"
+          "short_desc": "Adds a blip and a marker to the pickup"
         },
         {
           "attrs": {

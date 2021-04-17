@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618661848177
+    "last_update": 1618663235866
   },
   "extensions": [
     {
@@ -2869,31 +2869,34 @@
           "short_desc": "Sets the car's mission to idle (MISSION_NONE), stopping any driving activity"
         },
         {
-          "class": "Car",
-          "id": "00AA",
           "input": [
             {
               "name": "self",
               "type": "Car"
             }
           ],
-          "member": "GetCoordinates",
-          "name": "GET_CAR_COORDINATES",
-          "num_params": 4,
           "output": [
             {
               "name": "x",
-              "type": "float"
+              "type": "float",
+              "source": "var_any"
             },
             {
               "name": "y",
-              "type": "float"
+              "type": "float",
+              "source": "var_any"
             },
             {
               "name": "z",
-              "type": "float"
+              "type": "float",
+              "source": "var_any"
             }
           ],
+          "class": "Car",
+          "id": "00AA",
+          "member": "GetCoordinates",
+          "name": "GET_CAR_COORDINATES",
+          "num_params": 4,
           "short_desc": "Stores the X, Y and Z position of the specified car into separate variables"
         },
         {
@@ -3225,6 +3228,18 @@
           "short_desc": "Clears all priority text and some styles of big texts"
         },
         {
+          "output": [
+            {
+              "name": "hour",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "minute",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -3233,16 +3248,6 @@
           "member": "GetTimeOfDay",
           "name": "GET_TIME_OF_DAY",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Returns the amount of hours and minutes passed since midnight"
         },
         {
@@ -5997,23 +6002,24 @@
           }
         },
         {
-          "class": "Char",
-          "id": "0172",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
+          "id": "0172",
           "member": "GetHeading",
           "name": "GET_CHAR_HEADING",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "short_desc": "Returns the character's Z angle"
         },
         {
@@ -6035,23 +6041,24 @@
           "short_desc": "Sets the character's Z angle"
         },
         {
-          "class": "Car",
-          "id": "0174",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "0174",
           "member": "GetHeading",
           "name": "GET_CAR_HEADING",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the car's Z angle"
         },
         {
@@ -6073,23 +6080,24 @@
           "short_desc": "Sets the car's Z angle to the specified amount"
         },
         {
-          "class": "Object",
-          "id": "0176",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             }
           ],
+          "output": [
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Object",
+          "id": "0176",
           "member": "GetHeading",
           "name": "GET_OBJECT_HEADING",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "short_desc": "Stores the specified object's Z angle"
         },
         {
@@ -7440,31 +7448,34 @@
           }
         },
         {
-          "class": "Object",
-          "id": "01BB",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Object",
+          "id": "01BB",
           "member": "GetCoordinates",
           "name": "GET_OBJECT_COORDINATES",
           "num_params": 4,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the objects XYZ position"
         },
         {
@@ -8054,43 +8065,45 @@
           "short_desc": "Prevents cars from driving on roads in the specified area"
         },
         {
-          "class": "Car",
-          "id": "01E9",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "count",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "01E9",
           "member": "GetNumberOfPassengers",
           "name": "GET_NUMBER_OF_PASSENGERS",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Stores the number of passengers sitting in a car"
         },
         {
-          "class": "Car",
-          "id": "01EA",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "count",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "01EA",
           "member": "GetMaximumNumberOfPassengers",
           "name": "GET_MAXIMUM_NUMBER_OF_PASSENGERS",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Stores the maximum amount of passengers that could sit in a vehicle"
         },
         {
@@ -8220,23 +8233,24 @@
           "short_desc": "Returns true if the car is upside down"
         },
         {
-          "class": "Player",
-          "id": "01F5",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "class": "Player",
+          "id": "01F5",
           "member": "GetChar",
           "name": "GET_PLAYER_CHAR",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Gets the character handle for the specified player"
         },
         {
@@ -9068,43 +9082,45 @@
           }
         },
         {
-          "class": "Char",
-          "id": "0226",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
+          "id": "0226",
           "member": "GetHealth",
           "name": "GET_CHAR_HEALTH",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Returns the character's health"
         },
         {
-          "class": "Car",
-          "id": "0227",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "0227",
           "member": "GetHealth",
           "name": "GET_CAR_HEALTH",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Stores the vehicle's health in a variable"
         },
         {
@@ -11316,23 +11332,24 @@
           "short_desc": "Affects how often the character will hit it's target when attacking with a weapon"
         },
         {
-          "class": "Car",
-          "id": "02E3",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "speed",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "02E3",
           "member": "GetSpeed",
           "name": "GET_CAR_SPEED",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the car's speed"
         },
         {
@@ -15434,27 +15451,29 @@
           }
         },
         {
-          "class": "Car",
-          "id": "03F3",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "color1",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "color2",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "03F3",
           "member": "GetColors",
           "name": "GET_CAR_COLOURS",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "short_desc": "Gets the car's primary and secondary colours"
         },
         {
@@ -15596,43 +15615,46 @@
           }
         },
         {
-          "class": "Object",
-          "id": "0400",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
+              "name": "xOffet",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "yOffset",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "zOffset",
               "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Object",
+          "id": "0400",
           "member": "GetOffsetInWorldCoords",
           "name": "GET_OFFSET_FROM_OBJECT_IN_WORLD_COORDS",
           "num_params": 7,
-          "output": [
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the coordinates of an object with an offset"
         },
         {
@@ -15684,43 +15706,46 @@
           }
         },
         {
-          "class": "Car",
-          "id": "0407",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "xOffset",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "yOffset",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "zOffset",
               "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "0407",
           "member": "GetOffsetInWorldCoords",
           "name": "GET_OFFSET_FROM_CAR_IN_WORLD_COORDS",
           "num_params": 7,
-          "output": [
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "float"
-            }
-          ],
           "short_desc": "Stores the coordinates of an offset of the vehicle's position"
         },
         {
@@ -16426,23 +16451,24 @@
           }
         },
         {
-          "class": "Car",
-          "id": "0441",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "0441",
           "member": "GetModel",
           "name": "GET_CAR_MODEL",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Returns the car's model ID"
         },
         {
@@ -16657,6 +16683,23 @@
           "short_desc": "Sets an objects X, Y and Z rotation"
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -16665,20 +16708,6 @@
           "member": "GetDebugCoordinates",
           "name": "GET_DEBUG_CAMERA_COORDINATES",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "short_desc": "Returns the debug camera position"
         },
         {
@@ -16888,6 +16917,23 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -16896,20 +16942,6 @@
           "member": "GetDebugCameraPointAt",
           "name": "GET_DEBUG_CAMERA_POINT_AT",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "short_desc": "Stores the X, Y and Z coordinates the debug camera is pointing to"
         },
         {
@@ -17069,7 +17101,8 @@
           "output": [
             {
               "name": "number",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "class": "Char",
@@ -17134,7 +17167,8 @@
           "output": [
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "class": "Char",
@@ -18542,43 +18576,46 @@
           }
         },
         {
-          "class": "Char",
-          "id": "04C4",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "xOffset",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "yOffset",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "zOffset",
               "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
+          "id": "04C4",
           "member": "GetOffsetInWorldCoords",
           "name": "GET_OFFSET_FROM_CHAR_IN_WORLD_COORDS",
           "num_params": 7,
-          "output": [
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "float"
-            }
-          ],
           "short_desc": "Stores the coordinates of an actor, with an offset"
         },
         {
@@ -18987,23 +19024,24 @@
           }
         },
         {
-          "class": "Char",
-          "id": "04DD",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "armour",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
+          "id": "04DD",
           "member": "GetArmour",
           "name": "GET_CHAR_ARMOUR",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Returns the amount of armour the actor has"
         },
         {
@@ -19860,81 +19898,83 @@
           "short_desc": "Closes all car doors, hoods and boots"
         },
         {
+          "input": [
+            {
+              "name": "fromX",
+              "type": "float"
+            },
+            {
+              "name": "fromY",
+              "type": "float"
+            },
+            {
+              "name": "toX",
+              "type": "float"
+            },
+            {
+              "name": "toZ",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "distance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "0509",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "GetDistanceBetweenCoords2D",
           "name": "GET_DISTANCE_BETWEEN_COORDS_2D",
           "num_params": 5,
-          "output": [
-            {
-              "name": "_p5",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the distance between two points"
         },
         {
+          "input": [
+            {
+              "name": "fromX",
+              "type": "float"
+            },
+            {
+              "name": "fromY",
+              "type": "float"
+            },
+            {
+              "name": "fromZ",
+              "type": "float"
+            },
+            {
+              "name": "toX",
+              "type": "float"
+            },
+            {
+              "name": "toY",
+              "type": "float"
+            },
+            {
+              "name": "toZ",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "distance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "050A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            }
-          ],
           "member": "GetDistanceBetweenCoords3D",
           "name": "GET_DISTANCE_BETWEEN_COORDS_3D",
           "num_params": 7,
-          "output": [
-            {
-              "name": "_p7",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the distance between two points"
         },
         {
@@ -21553,6 +21593,13 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "percentage",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -21561,12 +21608,6 @@
           "member": "GetProgressPercentage",
           "name": "GET_PROGRESS_PERCENTAGE",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "float"
-            }
-          ],
           "short_desc": ""
         },
         {
@@ -43032,18 +43073,16 @@
           "member": "SetTexture"
         },
         {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "id": "0A6F",
           "name": "CHECKPOINT_SAVE",
           "num_params": 1,
           "short_desc": "",
-          "class": "Game",
-          "member": "CheckPointSave"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            }
+          ]
         },
         {
           "input": [
@@ -43139,7 +43178,7 @@
           "input": [
             {
               "name": "_p1",
-              "type": "bool"
+              "type": "int"
             }
           ],
           "id": "0A74",
@@ -43153,25 +43192,22 @@
           "member": "IsCheckpointResuming"
         },
         {
+          "id": "0A75",
+          "name": "SET_ACTIVE_MENU_ITEM_CAR_MODS",
+          "num_params": 2,
+          "short_desc": "",
           "input": [
             {
               "name": "panel",
               "type": "int"
             },
             {
-              "name": "color",
-              "type": "int"
+              "name": "find",
+              "type": "Car"
             }
           ],
-          "id": "0A75",
-          "name": "SET_ACTIVE_MENU_ITEM_CAR_MODS",
-          "num_params": 2,
-          "short_desc": "",
           "class": "Game",
-          "member": "SetActiveMenuItemCarMods",
-          "attrs": {
-            "is_condition": true
-          }
+          "member": "SetActiveMenuItemCarMods"
         },
         {
           "input": [

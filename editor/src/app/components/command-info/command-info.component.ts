@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Attribute, Command, SupportInfo } from '../../models';
 
 @Component({
   selector: 'scl-command-info',
   templateUrl: './command-info.component.html',
   styleUrls: ['./command-info.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandInfoComponent {
   private _command: Command;

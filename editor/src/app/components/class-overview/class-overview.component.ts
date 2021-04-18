@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Command } from '../../models';
 
 @Component({
   selector: 'scl-class-overview',
   templateUrl: './class-overview.component.html',
   styleUrls: ['./class-overview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassOverviewComponent {
   @Input() className: string;

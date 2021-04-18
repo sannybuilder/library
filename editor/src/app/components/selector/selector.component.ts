@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 interface Choice {
   prefix?: string;
@@ -8,6 +14,7 @@ interface Choice {
   selector: 'scl-selector',
   templateUrl: './selector.component.html',
   styleUrls: ['./selector.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectorComponent {
   private _choicesUi: Choice[];

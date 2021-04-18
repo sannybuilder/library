@@ -95,10 +95,10 @@ $END
 
 $Boat
 $BEGIN
-Anchor,0323,0,0,("_p1%i" "_p2%i")
-GotoCoords,02D3,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f")
-SetCruiseSpeed,02DB,0,0,("_p1%i" "_p2%f")
-Stop,02D4,0,0,("_p1%i")
+Anchor,0323,0,0,("self: Boat" "state%b")
+Goto,02D3,0,0,("self: Boat" "x%f" "y%f" "z%f")
+SetCruiseSpeed,02DB,0,0,("self: Boat" "speed%f")
+Stop,02D4,0,0,("self: Boat")
 $END
 
 $Camera
@@ -423,9 +423,9 @@ $END
 
 $ChaseScene
 $BEGIN
-GetChaseCar,0439,0,0,("_p1%i" "_p2%i")
-RemoveCarFromChase,040A,0,0,("_p1%i")
-Start,0354,0,0,("_p1%f")
+GetChaseCar,0439,0,0,("carIndex%i" "handle: Car")
+RemoveCarFromChase,040A,0,0,("carIndex%i")
+Start,0354,0,0,("startTime%f")
 Stop,0355,0,0,()
 $END
 

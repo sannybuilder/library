@@ -244,8 +244,8 @@ $END
 
 $CarGenerator
 $BEGIN
-Create,014B,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13: CarGenerator")
-Switch,014C,0,0,("_p1: CarGenerator" "_p2%i")
+Create,014B,0,0,("x%f" "y%f" "z%f" "heading%f" "modelId%i" "primaryColor%i" "secondaryColor%i" "forceSpawn%b" "alarmChance%i" "doorLockChance%i" "minDelay%i" "maxDelay%i" "handle: CarGenerator")
+Switch,014C,0,0,("self: CarGenerator" "amount%i")
 $END
 
 $Char
@@ -750,12 +750,12 @@ $END
 
 $ScriptFire
 $BEGIN
-CreateCarFire,0325,0,0,("_p1%i" "_p2: ScriptFire")
-CreateCharFire,0326,0,0,("_p1%i" "_p2: ScriptFire")
+CreateCarFire,0325,0,0,("vehicle: Car" "handle: ScriptFire")
+CreateCharFire,0326,0,0,("char: Char" "handle: ScriptFire")
 DoesExist,0973,1,0,("handle: ScriptFire")
 GetCoords,06F5,0,0,("handle: ScriptFire" "x%f" "y%f" "z%f")
-IsExtinguished,02D0,1,0,("_p1%i")
-Remove,02D1,0,0,("_p1%i")
+IsExtinguished,02D0,1,0,("self: ScriptFire")
+Remove,02D1,0,0,("self: ScriptFire")
 $END
 
 $Sequence

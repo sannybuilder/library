@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618756845366
+    "last_update": 1618769269836
   },
   "extensions": [
     {
@@ -7545,26 +7545,26 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "017B",
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int"
             }
           ],
-          "member": "SetAmmo",
+          "id": "017B",
           "name": "SET_CHAR_AMMO",
           "num_params": 3,
-          "short_desc": "Sets the amount of ammo the character has in the specified gun"
+          "short_desc": "Sets the amount of ammo the actor has in the specified gun",
+          "class": "Char",
+          "member": "SetAmmo"
         },
         {
           "attrs": {
@@ -14912,21 +14912,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "02D8",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsCurrentWeapon",
           "name": "IS_CURRENT_CHAR_WEAPON",
           "num_params": 2,
@@ -22222,28 +22222,29 @@
           "short_desc": "Returns true if the specified passenger seat is empty"
         },
         {
-          "class": "Char",
-          "id": "0432",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "seatId",
               "type": "int"
             }
           ],
-          "member": "GetInCarPassengerSeat",
-          "name": "GET_CHAR_IN_CAR_PASSENGER_SEAT",
-          "num_params": 3,
           "output": [
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
-          "short_desc": "Returns the character that is sitting in the specified car seat"
+          "id": "0432",
+          "name": "GET_CHAR_IN_CAR_PASSENGER_SEAT",
+          "num_params": 3,
+          "short_desc": "Returns the character that is sitting in the specified car seat",
+          "class": "Car",
+          "member": "GetCharInPassengerSeat"
         },
         {
           "input": [

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618757413351
+    "last_update": 1618769269742
   },
   "extensions": [
     {
@@ -6163,24 +6163,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
+              "type": "int"
+            },
+            {
+              "name": "ammo",
+              "type": "int"
+            }
+          ],
           "id": "017B",
           "name": "SET_CHAR_AMMO",
           "num_params": 3,
           "short_desc": "Sets the amount of ammo the actor has in the specified gun",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetAmmo"
         },
         {
           "id": "017C",
@@ -11172,21 +11174,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "02D8",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsCurrentWeapon",
           "name": "IS_CURRENT_CHAR_WEAPON",
           "num_params": 2,
@@ -16318,24 +16320,29 @@
           "short_desc": "Returns true if the specified passenger seat is empty"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "seatId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "0432",
           "name": "GET_CHAR_IN_CAR_PASSENGER_SEAT",
           "num_params": 3,
           "short_desc": "Returns the character that is sitting in the specified car seat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetCharInPassengerSeat"
         },
         {
           "input": [
@@ -17420,22 +17427,22 @@
           "short_desc": "Returns true if the character is in radius of the specified object"
         },
         {
-          "class": "Car",
-          "id": "0477",
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "actionId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "time",
               "type": "int"
             }
           ],
+          "class": "Car",
+          "id": "0477",
           "member": "SetTempAction",
           "name": "SET_CAR_TEMP_ACTION",
           "num_params": 3,
@@ -17666,18 +17673,18 @@
           "short_desc": "Enables a remote-control vehicle detonation"
         },
         {
-          "class": "Car",
-          "id": "048B",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "routeSeed",
               "type": "int"
             }
           ],
+          "class": "Car",
+          "id": "048B",
           "member": "SetRandomRouteSeed",
           "name": "SET_CAR_RANDOM_ROUTE_SEED",
           "num_params": 2,
@@ -19106,18 +19113,18 @@
           "short_desc": "Limits the amount a helicopter can tilt"
         },
         {
-          "class": "Car",
-          "id": "04E0",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "distance",
               "type": "int"
             }
           ],
+          "class": "Car",
+          "id": "04E0",
           "member": "SetStraightLineDistance",
           "name": "SET_CAR_STRAIGHT_LINE_DISTANCE",
           "num_params": 2,
@@ -21353,20 +21360,22 @@
           "short_desc": "Makes the car maintain it's position"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0575",
           "name": "FREEZE_CHAR_POSITION_AND_DONT_LOAD_COLLISION",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "FreezePositionAndDontLoadCollision"
         },
         {
           "id": "0576",
@@ -30517,24 +30526,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "relationshipId",
+              "type": "int"
+            },
+            {
+              "name": "pedType",
+              "type": "int"
+            }
+          ],
           "id": "077A",
           "name": "SET_CHAR_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetRelationship"
         },
         {
           "id": "077B",
@@ -34293,20 +34304,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "interiorId",
+              "type": "int"
+            }
+          ],
           "id": "0860",
           "name": "SET_CHAR_AREA_VISIBLE",
           "num_params": 2,
           "short_desc": "Sets the interior that the char is in",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetAreaVisible"
         },
         {
           "id": "0861",
@@ -39478,20 +39491,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "offset",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "098D",
           "name": "GET_CAR_MOVING_COMPONENT_OFFSET",
           "num_params": 2,
           "short_desc": "Sets the angle of a vehicles extra",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetMovingComponentOffset"
         },
         {
           "id": "098E",

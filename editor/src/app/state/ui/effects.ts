@@ -160,7 +160,7 @@ export class UiEffects {
               return [
                 selectExtensions({ game, extensions: added, state: true }),
                 selectExtensions({ game, extensions: removed, state: false }),
-              ];
+              ].filter(({ extensions }) => extensions.length > 0);
             }
           )
         )

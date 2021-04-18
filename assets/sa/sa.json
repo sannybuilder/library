@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618753272429
+    "last_update": 1618757413351
   },
   "extensions": [
     {
@@ -6408,7 +6408,7 @@
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Blip"
             },
             {
@@ -17586,7 +17586,8 @@
         },
         {
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Game",
           "id": "0485",
@@ -42596,7 +42597,7 @@
         {
           "input": [
             {
-              "name": "WidgetID",
+              "name": "widgetId",
               "type": "int"
             }
           ],
@@ -42611,86 +42612,86 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
           "id": "0A52",
           "name": "IS_WIDGET_RELEASED",
           "num_params": 1,
           "short_desc": "If the button widget icon on the screen is pressed and released, it returns true.",
           "class": "Widget",
           "member": "IsReleased",
-          "input": [
-            {
-              "name": "WidgetID",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_condition": true
           }
         },
         {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
           "id": "0A53",
           "name": "IS_WIDGET_DOUBLETAPPED",
           "num_params": 1,
           "short_desc": "Returns true if the button widget icon on the screen is double-clicked.",
           "class": "Widget",
           "member": "IsDoubletapped",
-          "input": [
-            {
-              "name": "WidgetID",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_condition": true
           }
         },
         {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
           "id": "0A54",
           "name": "IS_WIDGET_SWIPED",
           "num_params": 1,
           "short_desc": "If you swipe the button widget icon on the screen, it returns true.",
           "class": "Widget",
           "member": "IsSwiped",
-          "input": [
-            {
-              "name": "WidgetID",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_condition": true
           }
         },
         {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
           "id": "0A55",
           "name": "IS_WIDGET_SWIPED_LEFT",
           "num_params": 1,
           "short_desc": "If you swipe the button widget icon on the screen to the left, it returns true.",
           "class": "Widget",
           "member": "IsSwipedLeft",
-          "input": [
-            {
-              "name": "WidgetID",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_condition": true
           }
         },
         {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
           "id": "0A56",
           "name": "IS_WIDGET_SWIPED_RIGHT",
           "num_params": 1,
           "short_desc": "If you swipe the button widget icon on the screen to the right, it returns true.",
           "class": "Widget",
           "member": "IsSwipedRight",
-          "input": [
-            {
-              "name": "WidgetID",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_condition": true
           }
@@ -42710,10 +42711,11 @@
           "name": "DO_MISSION_SKIP",
           "num_params": 2,
           "short_desc": "Check whether the task is skipped (debugging function, the game has a menu page for selecting a task, and you can choose to skip a task. The official version of the game is not enabled), if you skip the task, return to the page where the current task is located, and the ID of the current task  . This command is always invalid in the mobile version of SA, returns false, and the returned 2 values are 0.",
-          "class": "Game",
+          "class": "Debugger",
           "member": "DoMissionSkip",
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           }
         },
         {
@@ -42727,10 +42729,11 @@
           "name": "GET_MISSION_NUM",
           "num_params": 1,
           "short_desc": "See 0A57(DO_MISSION_SKIP).Return to the ID of the task (next task), otherwise -1.",
-          "class": "Game",
+          "class": "Debugger",
           "member": "GetMissionNum",
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           }
         },
         {
@@ -42744,10 +42747,11 @@
           "name": "GET_MISSION_PAGE",
           "num_params": 1,
           "short_desc": "See 0A57(DO_MISSION_SKIP).Return the page where the (next) task is located, otherwise return 0.",
-          "class": "Game",
+          "class": "Debugger",
           "member": "GetMissionPage",
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           }
         },
         {
@@ -42980,7 +42984,8 @@
           "num_params": 0,
           "short_desc": "The command always returns true.",
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Game",
           "member": "IsFinalbuild"
@@ -42989,8 +42994,7 @@
           "input": [
             {
               "name": "_p1",
-              "type": "string",
-              "source": "literal"
+              "type": "string"
             }
           ],
           "id": "0A66",
@@ -42998,7 +43002,10 @@
           "num_params": 1,
           "short_desc": "",
           "class": "Debugger",
-          "member": "WriteLog"
+          "member": "WriteLog",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43016,8 +43023,7 @@
             },
             {
               "name": "_p4",
-              "type": "string",
-              "source": "literal"
+              "type": "string"
             }
           ],
           "id": "0A67",
@@ -43025,7 +43031,10 @@
           "num_params": 4,
           "short_desc": "",
           "class": "Debugger",
-          "member": "WriteLogInt"
+          "member": "WriteLogInt",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43043,8 +43052,7 @@
             },
             {
               "name": "_p4",
-              "type": "string",
-              "source": "literal"
+              "type": "string"
             }
           ],
           "id": "0A68",
@@ -43052,7 +43060,10 @@
           "num_params": 4,
           "short_desc": "",
           "class": "Debugger",
-          "member": "WriteLogFloat"
+          "member": "WriteLogFloat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43167,7 +43178,10 @@
           "num_params": 1,
           "short_desc": "",
           "class": "Game",
-          "member": "CheckPointSave"
+          "member": "CheckPointSave",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43231,7 +43245,10 @@
           "num_params": 0,
           "short_desc": "It saves game with setting SaveGameStateType to 1.",
           "class": "Game",
-          "member": "AutoSave"
+          "member": "AutoSave",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43271,7 +43288,8 @@
           "num_params": 1,
           "short_desc": "",
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Game",
           "member": "IsCheckpointResuming"
@@ -43291,8 +43309,8 @@
           "name": "SET_ACTIVE_MENU_ITEM_CAR_MODS",
           "num_params": 2,
           "short_desc": "",
-          "class": "Game",
-          "member": "SetActiveMenuItemCarMods",
+          "class": "",
+          "member": "",
           "attrs": {
             "is_condition": true
           }
@@ -43317,7 +43335,7 @@
         {
           "input": [
             {
-              "name": "_P1",
+              "name": "_p1",
               "type": "int"
             }
           ],
@@ -43326,7 +43344,10 @@
           "num_params": 1,
           "short_desc": "It is not clear what it does, but it seems to activate when the player is in a vehicle, and there are checks for model ids 537, 538 and 570.",
           "class": "Game",
-          "member": "CheckpointSaveOddjob"
+          "member": "CheckpointSaveOddjob",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

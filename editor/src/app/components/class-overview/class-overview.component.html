@@ -14,7 +14,8 @@ class {{ className }}
     <ng-container *ngIf="command.attrs?.is_constructor"
       >constructor
       <a href="#" (click)="onView(command, extension)">{{ command.member }}</a
-      >{{ command | inputParams }}
+      >{{ command | inputParams }}:
+      {{ command.output[command.output.length - 1].type }}
     </ng-container>
     <ng-container *ngIf="command.attrs?.is_destructor"
       >destructor

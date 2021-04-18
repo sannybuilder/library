@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618734779746
+    "last_update": 1618751579569
   },
   "extensions": [
     {
@@ -10790,42 +10790,45 @@
           "short_desc": "Stores the nearest path from the specified coordinates that a pedestrian can walk on"
         },
         {
+          "input": [
+            {
+              "name": "xCoord",
+              "type": "float"
+            },
+            {
+              "name": "yCoord",
+              "type": "float"
+            },
+            {
+              "name": "zCoord",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Path",
           "id": "02C1",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "GetClosestCarNode",
           "name": "GET_CLOSEST_CAR_NODE",
           "num_params": 6,
-          "output": [
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            }
-          ],
           "short_desc": "Stores the nearest path from the specified coordinates that a vehicle can drive on"
         },
         {
@@ -10928,17 +10931,17 @@
           "short_desc": "Returns true if the car is visible"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "02CB",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsOnScreen",
           "name": "IS_CHAR_ON_SCREEN",
           "num_params": 1,
@@ -11280,17 +11283,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "02E0",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsShooting",
           "name": "IS_CHAR_SHOOTING",
           "num_params": 1,
@@ -11564,21 +11567,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "modelId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "02F2",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsModel",
           "name": "IS_CHAR_MODEL",
           "num_params": 2,
@@ -11658,43 +11661,45 @@
           "short_desc": "Gets the Y Coord of an angle"
         },
         {
-          "class": "Car",
-          "id": "02F8",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "02F8",
           "member": "GetForwardX",
           "name": "GET_CAR_FORWARD_X",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the sine of the vehicle's angle"
         },
         {
-          "class": "Car",
-          "id": "02F9",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
+          "id": "02F9",
           "member": "GetForwardY",
           "name": "GET_CAR_FORWARD_Y",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "short_desc": "Gets the Y Angle of the vehicle's angle"
         },
         {
@@ -12238,14 +12243,14 @@
           }
         },
         {
-          "class": "Char",
-          "id": "0321",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
+          "id": "0321",
           "member": "ExplodeHead",
           "name": "EXPLODE_CHAR_HEAD",
           "num_params": 1,
@@ -12388,17 +12393,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "zoom",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "032A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetZoom",
           "name": "SET_CAMERA_ZOOM",
           "num_params": 1,
@@ -12997,14 +13002,14 @@
           "short_desc": "Returns true if the object has finished moving"
         },
         {
-          "class": "Char",
-          "id": "034F",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
+          "id": "034F",
           "member": "RemoveElegantly",
           "name": "REMOVE_CHAR_ELEGANTLY",
           "num_params": 1,
@@ -14243,17 +14248,17 @@
           "short_desc": "Sets the car's status"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "03A3",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsMale",
           "name": "IS_CHAR_MALE",
           "num_params": 1,
@@ -15996,17 +16001,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "041D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            }
-          ],
           "member": "SetNearClip",
           "name": "SET_NEAR_CLIP",
           "num_params": 1,
@@ -16560,38 +16565,38 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0448",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsSittingInCar",
           "name": "IS_CHAR_SITTING_IN_CAR",
           "num_params": 2,
           "short_desc": "Returns true if the character is in the specified car"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0449",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsSittingInAnyCar",
           "name": "IS_CHAR_SITTING_IN_ANY_CAR",
           "num_params": 1,
@@ -16606,17 +16611,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "044B",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsOnFoot",
           "name": "IS_CHAR_ON_FOOT",
           "num_params": 1,
@@ -17622,18 +17627,18 @@
           "short_desc": "Returns true if the specified model exists in the loaded "
         },
         {
-          "class": "Char",
-          "id": "0489",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
+          "id": "0489",
           "member": "ShutUp",
           "name": "SHUT_CHAR_UP",
           "num_params": 2,
@@ -18957,18 +18962,18 @@
           "short_desc": "Explodes a remote-control vehicle"
         },
         {
-          "class": "Char",
-          "id": "04D7",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
+          "id": "04D7",
           "member": "FreezePosition",
           "name": "FREEZE_CHAR_POSITION",
           "num_params": 2,
@@ -19453,17 +19458,17 @@
           "short_desc": "Releases the specified IFP file, freeing game memory"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "04F0",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsWaitingForWorldCollision",
           "name": "IS_CHAR_WAITING_FOR_WORLD_COLLISION",
           "num_params": 1,
@@ -19750,18 +19755,18 @@
           }
         },
         {
-          "class": "Car",
-          "id": "04FE",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "tyreId",
               "type": "int"
             }
           ],
+          "class": "Car",
+          "id": "04FE",
           "member": "BurstTyre",
           "name": "BURST_CAR_TYRE",
           "num_params": 2,
@@ -20220,44 +20225,46 @@
           "short_desc": "Locks the cars position"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "051A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "HasBeenDamagedByChar",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_CHAR",
           "num_params": 2,
           "short_desc": "Returns true if the character has been hurt by the other character"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "051B",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_CAR",
           "num_params": 2,
           "short_desc": "Returns true if the actor has been hurt by the specified vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "HasBeenDamagedByCar"
         },
         {
           "id": "051C",
@@ -20622,18 +20629,18 @@
           "short_desc": "Loops through the pool of vehicles to retrieve one that matches the specified model in the specified 2D area"
         },
         {
-          "class": "Car",
-          "id": "053F",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
+          "id": "053F",
           "member": "SetCanBurstTyres",
           "name": "SET_CAN_BURST_CAR_TYRES",
           "num_params": 2,
@@ -21196,34 +21203,34 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "056C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInAnyPoliceVehicle",
           "name": "IS_CHAR_IN_ANY_POLICE_VEHICLE",
           "num_params": 1,
           "short_desc": "Returns true if the character is driving a police vehicle"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "056D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "DoesExist",
           "name": "DOES_CHAR_EXIST",
           "num_params": 1,
@@ -27300,20 +27307,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "angle",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "06BE",
           "name": "GET_CAR_ROLL",
           "num_params": 2,
           "short_desc": "Returns the Y Angle of the vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetRoll"
         },
         {
           "id": "06BF",
@@ -30547,20 +30559,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "angle",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "077D",
           "name": "GET_CAR_PITCH",
           "num_params": 2,
           "short_desc": "Returns the X Angle of the vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetPitch"
         },
         {
           "id": "077E",
@@ -34024,24 +34041,26 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "amount",
+              "type": "int"
+            },
+            {
+              "name": "damageArmour",
+              "type": "bool"
+            }
+          ],
           "id": "0851",
           "name": "DAMAGE_CHAR",
           "num_params": 3,
           "short_desc": "Decreases the characters health",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "Damage"
         },
         {
           "id": "0852",
@@ -38057,20 +38076,25 @@
           "member": "AttachToObject"
         },
         {
+          "input": [
+            {
+              "name": "garageId",
+              "type": "string"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "093A",
           "name": "SET_GARAGE_RESPRAY_FREE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Garage",
+          "member": "SetResprayFree",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "093B",
@@ -38393,20 +38417,20 @@
           "member": "IsTalking"
         },
         {
-          "id": "094E",
-          "name": "DISABLE_CHAR_SPEECH",
-          "num_params": 2,
-          "short_desc": "Prevents any character speech from playing",
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "state",
+              "name": "stopNow",
               "type": "bool"
             }
           ],
+          "id": "094E",
+          "name": "DISABLE_CHAR_SPEECH",
+          "num_params": 2,
+          "short_desc": "Prevents any character speech from playing",
           "class": "Char",
           "member": "DisableSpeech"
         },
@@ -40035,7 +40059,7 @@
           ],
           "output": [
             {
-              "name": "status",
+              "name": "lockStatus",
               "type": "int",
               "source": "var_any"
             }
@@ -40430,20 +40454,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "09C9",
           "name": "REMOVE_CHAR_FROM_CAR_MAINTAIN_POSITION",
           "num_params": 2,
           "short_desc": "Removes the character from the vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "RemoveFromCarMaintainPosition"
         },
         {
           "input": [

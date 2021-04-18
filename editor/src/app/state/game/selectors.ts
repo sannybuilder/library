@@ -16,3 +16,8 @@ export const commandSupportInfo = createSelector(
   (supportInfo: SupportInfo, props: { command: Command; extension: string }) =>
     supportInfo?.[props.extension]?.[props.command.id]
 );
+
+export const primitiveTypes = createSelector(
+  state,
+  (state: GameState) => state.primitiveTypes
+);

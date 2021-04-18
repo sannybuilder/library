@@ -5,8 +5,9 @@ import {
   ViewChild,
   Input,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
-import { camelCase, capitalize, trim, uniq } from 'lodash';
+import { camelCase, capitalize, partition, trim, uniq } from 'lodash';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -18,9 +19,9 @@ import {
   Attribute,
   Command,
   CommandAttributes,
-  Entity,
   Param,
   ParamType,
+  PrimitiveType,
   SourceType,
   SupportInfo,
 } from '../../models';
@@ -38,15 +39,17 @@ type ErrorType =
   selector: 'scl-command-editor',
   templateUrl: './command-editor.component.html',
   styleUrls: ['./command-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandEditorComponent implements OnInit {
   private _command: Command;
-  ParamType = ParamType;
+  PrimitiveType = PrimitiveType;
   SourceType = SourceType;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   paramTypes: string[] = [];
   classes: string[] = [];
+  primitives: PrimitiveType[] = [];
 
   errors: Record<ErrorType, boolean> = {
     invalidAttributeCombo: false,
@@ -75,13 +78,15 @@ export class CommandEditorComponent implements OnInit {
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
 
-  @Input() set entities(val: Entity[]) {
-    const dynamicClasses = val.filter((v) => v.type === 'dynamic');
+  @Input() set types(val: ParamType[]) {
+    const [primitives, classes] = partition(val, (v) => v.type === 'primitive');
+    const dynamicClasses = classes.filter((v) => v.type === 'dynamic');
     this.paramTypes = uniq([
-      ...this.primitiveTypes.map((t) => `type ${t}`),
+      ...primitives.map(({ name }) => `type ${name}`),
       ...dynamicClasses.map(({ name }) => `class ${name}`),
     ]);
-    this.classes = val.map(
+    this.primitives = primitives.map((p) => p.name) as PrimitiveType[];
+    this.classes = classes.map(
       (v) => `${v.type === 'dynamic' ? 'class' : 'static'} ${v.name}`
     );
   }
@@ -95,15 +100,6 @@ export class CommandEditorComponent implements OnInit {
     SourceType.literal,
   ];
 
-  readonly primitiveTypes = [
-    ParamType.any,
-    ParamType.arguments,
-    ParamType.boolean,
-    ParamType.float,
-    ParamType.int,
-    ParamType.label,
-    ParamType.string,
-  ];
   readonly errorHandlers: Record<ErrorType, () => void> = {
     invalidAttributeCombo: this.updateAttributeError,
     duplicateName: this.updateDuplicateNameError,
@@ -171,22 +167,32 @@ export class CommandEditorComponent implements OnInit {
   onTypeKeyDown(key: string, param: Param) {
     switch (key) {
       case 'i':
-        param.type = ParamType.int;
+        param.type = PrimitiveType.int;
         break;
       case 'f':
-        param.type = ParamType.float;
+        param.type = PrimitiveType.float;
         break;
       case 's':
-        param.type = ParamType.string;
+        param.type = PrimitiveType.string;
         break;
       case 'a':
-        param.type = ParamType.arguments;
+        param.type = PrimitiveType.arguments;
         break;
       case 'b':
-        param.type = ParamType.boolean;
+        param.type = PrimitiveType.boolean;
         break;
+      case 'p':
       case 'l':
-        param.type = ParamType.label;
+        param.type = PrimitiveType.label;
+        break;
+      case 'o':
+        param.type = PrimitiveType.int_model_any;
+        break;
+      case 'm':
+        param.type = PrimitiveType.int_model_ide;
+        break;
+      case 'g':
+        param.type = PrimitiveType.string_gxt;
         break;
     }
   }
@@ -272,14 +278,14 @@ export class CommandEditorComponent implements OnInit {
   getSuggestedInputType(index: number) {
     const { name, type } = this.command.input?.[index];
     if (
-      this.primitiveTypes.includes(type) &&
+      this.primitives.includes(type as PrimitiveType) &&
       (name || this.getSuggestedInputName(index)) === 'self'
     ) {
       return this.command.class || this.suggestedClassName;
     }
 
-    if (['state', 'flag'].includes(name) && type !== ParamType.boolean) {
-      return ParamType.boolean;
+    if (['state', 'flag'].includes(name) && type !== PrimitiveType.boolean) {
+      return PrimitiveType.boolean;
     }
   }
 
@@ -299,7 +305,7 @@ export class CommandEditorComponent implements OnInit {
       index === 0 &&
       this.command.output?.length === 1 &&
       this.command.attrs?.is_constructor &&
-      this.command.output?.[index]?.type === ParamType.any
+      this.command.output?.[index]?.type === PrimitiveType.any
     ) {
       return this.command.class || this.suggestedClassName;
     }

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { map } from 'rxjs/operators';
 import { GameFacade } from 'src/app/state/game/facade';
 import { Command, Game } from '../../models';
@@ -8,6 +14,7 @@ import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
   selector: 'scl-command-list',
   templateUrl: './command-list.component.html',
   styleUrls: ['./command-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandListComponent {
   @Input() game: Game;

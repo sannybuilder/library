@@ -1,17 +1,18 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   HostListener,
   Inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { combineLatest, Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
-import { Command, Game, ViewMode } from '../../models';
+import { Command, Game, ParamType, Primitive, ViewMode } from '../../models';
 import {
   AuthFacade,
   ExtensionsFacade,
@@ -25,6 +26,7 @@ import { GameFacade } from 'src/app/state/game/facade';
   selector: 'scl-library-page',
   templateUrl: './library-page.component.html',
   styleUrls: ['./library-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ViewMode = ViewMode;
@@ -141,6 +143,21 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getExtensionCommands(extension: string) {
     return this._extensions.getExtensionCommands(extension);
+  }
+
+  getExtensionTypes(extension: string): Observable<ParamType[]> {
+    return combineLatest([
+      this.getExtensionEntities(extension),
+      this._game.primitiveTypes$,
+    ]).pipe(
+      map(([entities, primitiveTypes]) => {
+        const primitives: Primitive[] = primitiveTypes.map((name) => ({
+          type: 'primitive',
+          name,
+        }));
+        return [...entities, ...primitives];
+      })
+    );
   }
 
   @HostListener('window:resize', [])

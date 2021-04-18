@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Attribute, CommandAttributes, Game, Modifier } from '../../models';
 import { ExtensionsFacade, UiFacade } from '../../state';
 
@@ -6,6 +6,7 @@ import { ExtensionsFacade, UiFacade } from '../../state';
   selector: 'scl-filter-panel',
   templateUrl: './filter-panel.component.html',
   styleUrls: ['./filter-panel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterPanelComponent {
   @Input() game: Game;

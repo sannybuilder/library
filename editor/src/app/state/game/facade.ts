@@ -8,6 +8,7 @@ import * as selector from './selectors';
 @Injectable({ providedIn: 'root' })
 export class GameFacade {
   supportInfo$ = this.store$.select(selector.supportInfo);
+  primitiveTypes$ = this.store$.select(selector.primitiveTypes);
   game$ = this.store$
     .select(selector.game)
     .pipe(distinctUntilChanged(), filter<Game>(Boolean));

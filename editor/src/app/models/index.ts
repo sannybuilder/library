@@ -14,7 +14,7 @@ export interface Attr {
 
 export type Attribute = keyof Attr;
 
-export enum ParamType {
+export enum PrimitiveType {
   any = 'any',
   arguments = 'arguments',
   boolean = 'bool',
@@ -22,6 +22,11 @@ export enum ParamType {
   int = 'int',
   label = 'label',
   string = 'string',
+  string128 = 'string128',
+  string_gxt = 'string:gxt_key',
+  int_model_any = 'int:model_any',
+  int_model_ide = 'int:model_ide',
+  int_script_id = 'int:script_id',
 }
 
 export enum SourceType {
@@ -47,7 +52,7 @@ export const CommandAttributes: Attribute[] = [
 ];
 
 export interface Param {
-  type: ParamType;
+  type: ParamType['name'];
   name: string;
   source: SourceType;
 }
@@ -135,6 +140,13 @@ export enum SupportLevel {
 }
 
 export interface Entity {
-  name: string;
   type: 'static' | 'dynamic'; // dynamic can be constructed using an opcode
+  name: string;
 }
+
+export interface Primitive {
+  type: 'primitive';
+  name: PrimitiveType;
+}
+
+export type ParamType = Entity | Primitive;

@@ -36,15 +36,28 @@ export class RouteGuard implements CanActivate {
 
     const game = getGame(segments.shift());
 
-    if (game) {
-      const extension = segments.shift() || DEFAULT_EXTENSION;
-      const opcode = segments.shift();
-
-      this._game.onListEnter(game, opcode, extension);
-      return true;
+    if (!game) {
+      return this.goHome();
     }
 
-    return this.goHome();
+    const extensionOrEnum = segments.shift();
+    if (extensionOrEnum === 'enum') {
+      this._game.onListEnter({
+        game,
+        extension: DEFAULT_EXTENSION,
+        enumName: segments.shift(),
+      });
+    } else {
+      const extension = extensionOrEnum || DEFAULT_EXTENSION;
+      const opcode = segments.shift();
+      this._game.onListEnter({
+        game,
+        extension,
+        opcode,
+      });
+    }
+
+    return true;
   }
 
   goHome() {

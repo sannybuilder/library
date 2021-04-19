@@ -43,7 +43,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   extensionNames$ = this._extensions.extensionNames$;
   classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
-
+  enumToDisplay$ = this._ui.enumToDisplayOrEdit$;
   game$ = this._game.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
@@ -51,6 +51,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         !this._config.features.shouldBeAuthorizedToEdit || isAuthorized
     )
   );
+  viewMode$ = this._ui.viewMode$;
 
   command?: Command;
   oldCommand?: Command;
@@ -98,17 +99,15 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     combineLatest([
       this._ui.commandToDisplayOrEdit$,
       this._ui.extensionToDisplayOrEdit$,
-      this._ui.viewMode$,
     ])
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(([command, extension, viewMode]) => {
+      .subscribe(([command, extension]) => {
         this.command = command
           ? { input: [], output: [], ...cloneDeep(command) }
           : command;
         this.oldCommand = cloneDeep(this.command);
         this.oldExtension = extension;
         this.extension = extension;
-        this.viewMode = viewMode;
       });
   }
 

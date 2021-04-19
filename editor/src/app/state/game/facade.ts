@@ -15,8 +15,18 @@ export class GameFacade {
 
   constructor(private store$: Store) {}
 
-  onListEnter(game: Game, opcode: string, extension: string) {
-    this.store$.dispatch(onListEnter({ game, opcode, extension }));
+  onListEnter({
+    game,
+    opcode,
+    extension,
+    enumName,
+  }: {
+    game: Game;
+    extension: string;
+    opcode?: string;
+    enumName?: string;
+  }) {
+    this.store$.dispatch(onListEnter({ game, opcode, extension, enumName }));
   }
 
   getCommandSupportInfo(command: Command, extension: string) {

@@ -14,6 +14,7 @@ import {
   selectClass,
   selectExtensions,
   displayClassOverview,
+  displayOrEditEnum,
 } from './actions';
 import * as selector from './selectors';
 
@@ -30,6 +31,7 @@ export class UiFacade {
   extensionToDisplayOrEdit$ = this.store$.select(
     selector.extensionToDisplayOrEdit
   );
+  enumToDisplayOrEdit$ = this.store$.select(selector.enumToDisplayOrEdit);
   viewMode$ = this.store$.select(selector.viewMode);
   snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
   rows$ = this.store$.select(selector.rows);
@@ -37,8 +39,11 @@ export class UiFacade {
     distinctUntilChanged(
       (a, b) => a.opcode === b.opcode && a.extension === b.extension
     ),
-    filter((a) => !!a.extension)
+    filter((a) => !!a.extension && !!a.opcode)
   );
+  enumOnLoad$ = this.store$
+    .select(selector.enumOnLoad)
+    .pipe(distinctUntilChanged(), filter<string>(Boolean));
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
 
@@ -67,13 +72,33 @@ export class UiFacade {
 
   displayCommandInfo(command: Command, extension: string) {
     this.store$.dispatch(
-      displayOrEditCommandInfo({ command, extension, viewMode: ViewMode.View })
+      displayOrEditCommandInfo({
+        command,
+        extension,
+        viewMode: ViewMode.ViewCommand,
+      })
     );
   }
 
   editCommandInfo(command: Command, extension: string) {
     this.store$.dispatch(
-      displayOrEditCommandInfo({ command, extension, viewMode: ViewMode.Edit })
+      displayOrEditCommandInfo({
+        command,
+        extension,
+        viewMode: ViewMode.EditCommand,
+      })
+    );
+  }
+
+  displayEnum(enumName: string) {
+    this.store$.dispatch(
+      displayOrEditEnum({ enumName, viewMode: ViewMode.ViewEnum })
+    );
+  }
+
+  editEnum(enumName: string) {
+    this.store$.dispatch(
+      displayOrEditEnum({ enumName, viewMode: ViewMode.EditEnum })
     );
   }
 

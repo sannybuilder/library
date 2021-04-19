@@ -83,6 +83,11 @@ export const extensionToDisplayOrEdit = createSelector(
   (state: UiState) => state.extensionToDisplayOrEdit
 );
 
+export const enumToDisplayOrEdit = createSelector(
+  state,
+  (state: UiState) => state.enumToDisplayOrEdit
+);
+
 export const viewMode = createSelector(
   state,
   (state: UiState) => state.viewMode
@@ -97,6 +102,11 @@ export const opcodeOnLoad = createSelector(state, (state: UiState) => ({
   opcode: state.opcodeOnLoad,
   extension: state.extensionOnLoad,
 }));
+
+export const enumOnLoad = createSelector(
+  state,
+  (state: UiState) => state.enumOnLoad
+);
 
 export const currentPage = createSelector(
   state,

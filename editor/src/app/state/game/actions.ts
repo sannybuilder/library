@@ -3,7 +3,12 @@ import { Game, SupportInfo } from '../../models';
 
 export const onListEnter = createAction(
   'on list enter',
-  props<{ game: Game; opcode: string; extension: string }>()
+  props<{
+    game: Game;
+    extension: string;
+    opcode?: string;
+    enumName?: string;
+  }>()
 );
 
 export const loadSupportInfo = createAction(

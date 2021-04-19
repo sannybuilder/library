@@ -72,6 +72,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { SelectorComponent } from './components/selector/selector.component';
 import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
+import { EnumOverviewComponent } from './components/enum-overview/enum-overview.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
     AttrTitlePipe,
     PaginationComponent,
     ClassOverviewComponent,
+    EnumOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,7 +153,7 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
-          maxAge: 25,
+          maxAge: 50,
           logOnly: false,
         }),
   ],

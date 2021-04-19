@@ -1,112 +1,120 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-xl-2 left-rail" *ngIf="game$ | async as game">
-      <scl-download-panel [game]="game"></scl-download-panel>
-      <scl-filter-panel [game]="game"></scl-filter-panel>
+<ng-container *ngIf="viewMode$ | async as viewMode">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-xl-2 left-rail" *ngIf="game$ | async as game">
+        <scl-download-panel [game]="game"></scl-download-panel>
+        <scl-filter-panel [game]="game"></scl-filter-panel>
+      </div>
+
+      <main
+        class="col-12"
+        [ngClass]="{
+          'col-xl-5': viewMode !== ViewMode.None,
+          'col-xl-8': viewMode === ViewMode.None
+        }"
+      >
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ game$ | async | gameTitle }}
+            </li>
+          </ol>
+        </nav>
+        <scl-command-list
+          [game]="game$ | async"
+          [canEdit]="canEdit$ | async"
+          [narrowed]="
+            viewMode !== ViewMode.None &&
+            screenSize >= 1200 &&
+            screenSize < 1700
+          "
+          (view)="onView($event.command, $event.extension)"
+          (edit)="onEdit($event.command, $event.extension)"
+          (classOverview)="onClassOverview($event)"
+        ></scl-command-list>
+      </main>
+
+      <div
+        class="d-none d-xl-block col-xl-5 right-rail"
+        *ngIf="viewMode !== ViewMode.None"
+      >
+        <ng-container *ngTemplateOutlet="rightRail"></ng-container>
+        <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+      </div>
     </div>
+  </div>
 
-    <main
-      class="col-12"
-      [ngClass]="{
-        'col-xl-5': viewMode !== ViewMode.None,
-        'col-xl-8': viewMode === ViewMode.None
-      }"
-    >
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">
-            {{ game$ | async | gameTitle }}
-          </li>
-        </ol>
-      </nav>
-      <scl-command-list
-        [game]="game$ | async"
-        [canEdit]="canEdit$ | async"
-        [narrowed]="
-          viewMode !== ViewMode.None && screenSize >= 1200 && screenSize < 1700
-        "
-        (view)="onView($event.command, $event.extension)"
-        (edit)="onEdit($event.command, $event.extension)"
-        (classOverview)="onClassOverview($event)"
-      ></scl-command-list>
-    </main>
-
-    <div
-      class="d-none d-xl-block col-xl-5 right-rail"
-      *ngIf="viewMode !== ViewMode.None"
-    >
+  <scl-modal *ngIf="viewMode !== ViewMode.None && screenSize < 1200">
+    <div class="modal-body">
       <ng-container *ngTemplateOutlet="rightRail"></ng-container>
-      <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
     </div>
-  </div>
-</div>
+    <ng-container class="modal-footer">
+      <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+    </ng-container>
+  </scl-modal>
 
-<scl-modal *ngIf="viewMode !== ViewMode.None && screenSize < 1200">
-  <div class="modal-body">
-    <ng-container *ngTemplateOutlet="rightRail"></ng-container>
-  </div>
-  <ng-container class="modal-footer">
-    <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
-  </ng-container>
-</scl-modal>
+  <ng-template #modalFooter>
+    <div class="modal-footer d-flex">
+      <a href="#" *ngIf="!noChanges()" (click)="resetChanges()" class="mr-auto"
+        >Reset all changes</a
+      >
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="onCancel()"
+      >
+        Close
+      </button>
+      <button
+        *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
+        type="button"
+        class="btn btn-outline-success"
+        (click)="onEdit(command, extension)"
+      >
+        Edit
+      </button>
+      <button
+        *ngIf="viewMode === ViewMode.EditCommand"
+        [disabled]="shouldDisableSaveButton()"
+        type="button"
+        class="btn btn-outline-success"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
 
-<ng-template #modalFooter>
-  <div class="modal-footer d-flex">
-    <a href="#" *ngIf="!noChanges()" (click)="resetChanges()" class="mr-auto"
-      >Reset all changes</a
+  <ng-template #rightRail>
+    <scl-command-editor
+      *ngIf="viewMode === ViewMode.EditCommand"
+      [command]="command"
+      [(extension)]="extension"
+      [(snippet)]="snippet"
+      [extensionNames]="extensionNames$ | async"
+      [supportInfo]="getCommandSupportInfo(command, extension) | async"
+      [types]="getExtensionTypes(extension) | async"
+      [commands]="getExtensionCommands(extension) | async"
+      (hasError)="editorHasError = $event"
+    ></scl-command-editor>
+    <scl-command-info
+      *ngIf="viewMode === ViewMode.ViewCommand"
+      [command]="command"
+      [snippet]="getSnippet(extension, command.id) | async"
+      [supportInfo]="getCommandSupportInfo(command, extension) | async"
+      (classOverview)="onClassOverview($event)"
     >
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      (click)="onCancel()"
-    >
-      Close
-    </button>
-    <button
-      *ngIf="viewMode === ViewMode.View && canEdit$ | async"
-      type="button"
-      class="btn btn-outline-success"
-      (click)="onEdit(command, extension)"
-    >
-      Edit
-    </button>
-    <button
-      *ngIf="viewMode === ViewMode.Edit"
-      [disabled]="shouldDisableSaveButton()"
-      type="button"
-      class="btn btn-outline-success"
-      (click)="onSave()"
-    >
-      Save
-    </button>
-  </div>
-</ng-template>
-
-<ng-template #rightRail>
-  <scl-command-editor
-    *ngIf="viewMode === ViewMode.Edit"
-    [command]="command"
-    [(extension)]="extension"
-    [(snippet)]="snippet"
-    [extensionNames]="extensionNames$ | async"
-    [supportInfo]="getCommandSupportInfo(command, extension) | async"
-    [types]="getExtensionTypes(extension) | async"
-    [commands]="getExtensionCommands(extension) | async"
-    (hasError)="editorHasError = $event"
-  ></scl-command-editor>
-  <scl-command-info
-    *ngIf="viewMode === ViewMode.View"
-    [command]="command"
-    [snippet]="getSnippet(extension, command.id) | async"
-    [supportInfo]="getCommandSupportInfo(command, extension) | async"
-    (classOverview)="onClassOverview($event)"
-  >
-  </scl-command-info>
-  <scl-class-overview
-    *ngIf="viewMode === ViewMode.ClassOverview"
-    [className]="classToDisplay$ | async"
-    [classCommands]="classCommands$ | async"
-    (view)="onView($event.command, $event.extension)"
-  ></scl-class-overview>
-</ng-template>
+    </scl-command-info>
+    <scl-class-overview
+      *ngIf="viewMode === ViewMode.ViewClass"
+      [className]="classToDisplay$ | async"
+      [classCommands]="classCommands$ | async"
+      (view)="onView($event.command, $event.extension)"
+    ></scl-class-overview>
+    <scl-enum-overview
+      *ngIf="viewMode === ViewMode.ViewEnum"
+      [enumName]="enumToDisplay$ | async"
+    ></scl-enum-overview>
+  </ng-template>
+</ng-container>

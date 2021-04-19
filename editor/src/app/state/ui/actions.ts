@@ -36,6 +36,11 @@ export const displayOrEditSnippet = createAction(
   props<{ snippet: string }>()
 );
 
+export const displayOrEditEnum = createAction(
+  'display or edit enum',
+  props<{ enumName: string; viewMode: ViewMode }>()
+);
+
 export const stopEditOrDisplay = createAction('stop edit or display');
 
 export const changePage = createAction(

@@ -14,6 +14,7 @@ import {
   selectClass,
   selectExtensions,
   displayClassOverview,
+  displayOrEditEnum,
 } from './actions';
 import { onListEnter } from '../game/actions';
 
@@ -31,9 +32,11 @@ export interface UiState {
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
+  enumToDisplayOrEdit?: string;
   viewMode: ViewMode;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
+  enumOnLoad?: string;
   currentPage: number | 'all';
   games: Record<Game, GameState>;
   classToDisplay?: string;
@@ -109,18 +112,25 @@ const _reducer = createReducer(
     ...state,
     snippetToDisplayOrEdit: snippet,
   })),
+  on(displayOrEditEnum, (state, { enumName, viewMode }) => ({
+    ...state,
+    viewMode,
+    enumToDisplayOrEdit: enumName,
+  })),
   on(stopEditOrDisplay, (state) => ({
     ...state,
     commandToDisplayOrEdit: undefined,
     extensionToDisplayOrEdit: undefined,
     snippetToDisplayOrEdit: undefined,
     classToDisplay: undefined,
+    enumToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
   })),
-  on(onListEnter, (state, { opcode, extension }) => ({
+  on(onListEnter, (state, { opcode, extension, enumName }) => ({
     ...state,
     opcodeOnLoad: opcode,
     extensionOnLoad: extension,
+    enumOnLoad: enumName,
   })),
   on(changePage, (state, { index: currentPage }) => ({
     ...state,
@@ -171,7 +181,7 @@ const _reducer = createReducer(
   on(displayClassOverview, (state, { className }) => ({
     ...state,
     classToDisplay: className,
-    viewMode: ViewMode.ClassOverview,
+    viewMode: ViewMode.ViewClass,
   }))
 );
 

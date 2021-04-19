@@ -127,10 +127,12 @@ export const GameTitle: Record<Game, string> = {
 export const DEFAULT_EXTENSION = 'default';
 
 export enum ViewMode {
-  None,
-  Edit,
-  View,
-  ClassOverview,
+  None = 'None',
+  EditCommand = 'EditCommand',
+  ViewCommand = 'ViewCommand',
+  ViewClass = 'ViewClass',
+  ViewEnum = 'ViewEnum',
+  EditEnum = 'EditEnum',
 }
 
 export type Modifier = 'except' | 'only';

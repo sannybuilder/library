@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   changePage,
   displayOrEditCommandInfo,
+  displayOrEditEnum,
   displayOrEditSnippet,
   resetFilters,
   scrollTop,
@@ -34,6 +35,7 @@ import { ChangesFacade } from '../changes/facade';
 import { DOCUMENT } from '@angular/common';
 import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
+import { loadEnumsSuccess } from '../enums/actions';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -53,7 +55,27 @@ export class UiEffects {
           return displayOrEditCommandInfo({
             command,
             extension,
-            viewMode: ViewMode.View,
+            viewMode: ViewMode.ViewCommand,
+          });
+        } else {
+          return stopEditOrDisplay();
+        }
+      })
+    )
+  );
+
+  viewEnumOnLoad$ = createEffect(() =>
+    combineLatest([
+      this._actions$.pipe(ofType(loadEnumsSuccess)),
+      this._ui.enumOnLoad$,
+      this._game.game$,
+    ]).pipe(
+      filter(([{ game }, _, currGame]) => game === currGame),
+      map(([{ enums }, enumName]) => {
+        if (enums?.[enumName]) {
+          return displayOrEditEnum({
+            enumName,
+            viewMode: ViewMode.ViewEnum,
           });
         } else {
           return stopEditOrDisplay();
@@ -69,7 +91,7 @@ export class UiEffects {
         displayOrEditCommandInfo({
           command,
           extension,
-          viewMode: ViewMode.Edit,
+          viewMode: ViewMode.EditCommand,
         })
       )
     )

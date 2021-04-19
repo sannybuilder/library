@@ -12,15 +12,23 @@ import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
 import { CONFIG, Config } from '../../config';
-import { Command, Game, ParamType, Primitive, ViewMode } from '../../models';
+import {
+  Command,
+  Enum,
+  Game,
+  ParamType,
+  Primitive,
+  ViewMode,
+} from '../../models';
 import {
   AuthFacade,
   ExtensionsFacade,
   SnippetsFacade,
   UiFacade,
+  GameFacade,
+  EnumsFacade,
 } from '../../state';
 import { FUSEJS_OPTIONS } from '../../fusejs';
-import { GameFacade } from 'src/app/state/game/facade';
 
 @Component({
   selector: 'scl-library-page',
@@ -60,6 +68,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
     private _game: GameFacade,
+    private _enums: EnumsFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
 
@@ -67,6 +76,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     [Game.GTA3, Game.VC, Game.SA].forEach((game) => {
       this._extensions.loadExtensions(game);
       this._snippets.loadSnippets(game);
+      this._enums.loadEnums(game);
     });
   }
 
@@ -149,13 +159,17 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return combineLatest([
       this.getExtensionEntities(extension),
       this._game.primitiveTypes$,
+      this._enums.enumNames$,
     ]).pipe(
-      map(([entities, primitiveTypes]) => {
+      map(([entities, primitiveTypes, enumNames]) => {
         const primitives: Primitive[] = primitiveTypes.map((name) => ({
           type: 'primitive',
           name,
         }));
-        return [...entities, ...primitives];
+
+        const enums: Enum[] = enumNames.map((name) => ({ name, type: 'enum' }));
+
+        return [...entities, ...primitives, ...enums];
       })
     );
   }

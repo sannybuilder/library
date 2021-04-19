@@ -6,9 +6,13 @@ import {
   Output,
 } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { GameFacade } from 'src/app/state/game/facade';
 import { Command, Game } from '../../models';
-import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
+import {
+  ExtensionsFacade,
+  SnippetsFacade,
+  UiFacade,
+  GameFacade,
+} from '../../state';
 
 @Component({
   selector: 'scl-command-list',

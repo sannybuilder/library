@@ -19,7 +19,6 @@ import {
 } from './actions';
 import { SnippetsService } from './service';
 import { ChangesFacade } from '../changes/facade';
-import { UiFacade } from '../ui/facade';
 import { GameSupportInfo } from '../../models';
 import { getSameCommands } from '../../utils';
 import { GameFacade } from '../game/facade';

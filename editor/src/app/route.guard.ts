@@ -7,8 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { DEFAULT_EXTENSION, Game } from './models';
-import { AuthFacade } from './state/auth/facade';
-import { GameFacade } from './state/game/facade';
+import { AuthFacade, GameFacade } from './state';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {

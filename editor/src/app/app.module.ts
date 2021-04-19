@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { environment } from '../environments/environment';
+
 import {
   ClassParamsPipe,
   KeywordParamsPipe,
@@ -45,6 +47,10 @@ import { UiEffects } from './state/ui/effects';
 // game state
 import { GameEffects } from './state/game/effects';
 import { gameReducer } from './state/game/reducer';
+
+// enums state
+import { EnumsEffects } from './state/enums/effects';
+import { enumsReducer } from './state/enums/reducer';
 
 import { HlPropPipe } from './fusejs';
 import { ConfigModule } from './config';
@@ -123,31 +129,35 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
       { useHash: false }
     ),
     StoreModule.forRoot({
-      extensions: extensionsReducer,
       auth: authReducer,
+      changes: changesReducer,
+      enums: enumsReducer,
+      extensions: extensionsReducer,
+      game: gameReducer,
       snippets: snippetsReducer,
       ui: uiReducer,
-      changes: changesReducer,
-      game: gameReducer,
     }),
     EffectsModule.forRoot([
-      ExtensionsEffects,
       AuthEffects,
+      ChangesEffects,
+      EnumsEffects,
+      ExtensionsEffects,
+      GameEffects,
       SnippetsEffects,
       UiEffects,
-      ChangesEffects,
-      GameEffects,
     ]),
     DragDropModule,
-    // StoreDevtoolsModule.instrument({
-    //   maxAge: 25,
-    //   logOnly: false,
-    // }),
+
+    environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({
+          maxAge: 25,
+          logOnly: false,
+        }),
   ],
   exports: [],
   providers: [
     CookieService,
-
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],

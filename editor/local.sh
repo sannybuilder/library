@@ -1,6 +1,10 @@
-cp ../gta3/gta3.json src/assets/gta3/gta3.json
-cp ../vc/vc.json src/assets/vc/vc.json
-cp ../sa/sa.json src/assets/sa/sa.json
+cp ../gta3/gta3.json src/assets/gta3
+cp ../vc/vc.json src/assets/vc
+cp ../sa/sa.json src/assets/sa
+
+cp ../gta3/enums.json src/assets/gta3
+cp ../vc/enums.json src/assets/vc
+cp ../sa/enums.json src/assets/sa
 
 node supported.js
 

@@ -78,6 +78,10 @@ export interface ExtensionSnippets {
   [extensionName: string]: { [opcode: string]: string };
 }
 
+export interface Enums {
+  [enumName: string]: Record<string, string | number>;
+}
+
 export enum Game {
   GTA3 = 'gta3',
   VC = 'vc',
@@ -106,6 +110,12 @@ export const GameSnippets: Record<Game, string> = {
   [Game.GTA3]: 'gta3/snippets.json',
   [Game.VC]: 'vc/snippets.json',
   [Game.SA]: 'sa/snippets.json',
+};
+
+export const GameEnums: Record<Game, string> = {
+  [Game.GTA3]: 'gta3/enums.json',
+  [Game.VC]: 'vc/enums.json',
+  [Game.SA]: 'sa/enums.json',
 };
 
 export const GameTitle: Record<Game, string> = {
@@ -149,4 +159,9 @@ export interface Primitive {
   name: PrimitiveType;
 }
 
-export type ParamType = Entity | Primitive;
+export interface Enum {
+  type: 'enum';
+  name: string;
+}
+
+export type ParamType = Entity | Primitive | Enum;

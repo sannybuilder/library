@@ -23,10 +23,10 @@ export enum PrimitiveType {
   label = 'label',
   string = 'string',
   string128 = 'string128',
-  string_gxt = 'string:gxt_key',
-  int_model_any = 'int:model_any',
-  int_model_ide = 'int:model_ide',
-  int_script_id = 'int:script_id',
+  gxt_key = 'gxt_key',
+  model_any = 'model_any',
+  model_ide = 'model_ide',
+  int_script_id = 'script_id',
 }
 
 export enum SourceType {

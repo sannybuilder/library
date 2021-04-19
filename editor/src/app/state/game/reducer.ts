@@ -36,9 +36,9 @@ function primitiveTypes(game: Game): PrimitiveType[] {
     PrimitiveType.int,
     PrimitiveType.label,
     PrimitiveType.string,
-    PrimitiveType.int_model_any,
-    PrimitiveType.int_model_ide,
-    PrimitiveType.string_gxt,
+    PrimitiveType.model_any,
+    PrimitiveType.model_ide,
+    PrimitiveType.gxt_key,
   ];
 
   if (game === Game.SA) {

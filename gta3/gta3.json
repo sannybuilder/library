@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618839731382
+    "last_update": 1618860614715
   },
   "extensions": [
     {
@@ -2769,31 +2769,34 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "00A0",
           "input": [
             {
               "name": "self",
               "type": "Char"
             }
           ],
-          "member": "GetCoordinates",
-          "name": "GET_CHAR_COORDINATES",
-          "num_params": 4,
           "output": [
             {
               "name": "x",
-              "type": "float"
+              "type": "float",
+              "source": "var_any"
             },
             {
               "name": "y",
-              "type": "float"
+              "type": "float",
+              "source": "var_any"
             },
             {
               "name": "z",
-              "type": "float"
+              "type": "float",
+              "source": "var_any"
             }
           ],
+          "class": "Char",
+          "id": "00A0",
+          "member": "GetCoordinates",
+          "name": "GET_CHAR_COORDINATES",
+          "num_params": 4,
           "short_desc": "Returns the character's 3D coordinates"
         },
         {
@@ -3724,23 +3727,23 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "00D9",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
+          "class": "Char",
+          "id": "00D9",
           "member": "StoreCarIsIn",
           "name": "STORE_CAR_CHAR_IS_IN",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Returns the current vehicle of the character and adds it to the mission cleanup list"
         },
         {
@@ -5601,22 +5604,22 @@
           "short_desc": "Adds the specified amount of ammo to the player's weapon"
         },
         {
-          "class": "Char",
-          "id": "0114",
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int"
             }
           ],
+          "class": "Char",
+          "id": "0114",
           "member": "AddAmmo",
           "name": "ADD_AMMO_TO_CHAR",
           "num_params": 3,
@@ -6063,21 +6066,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "vehicleModelId",
+              "type": "model_ide"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "0137",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsModel",
           "name": "IS_CAR_MODEL",
           "num_params": 2,
@@ -7694,21 +7697,21 @@
           "short_desc": "Returns true if the character's health is above the specified value"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "0185",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsHealthGreater",
           "name": "IS_CAR_HEALTH_GREATER",
           "num_params": 2,
@@ -7945,17 +7948,17 @@
           "short_desc": "Stops the sound with the specified ID"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "018F",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsStuckOnRoof",
           "name": "IS_CAR_STUCK_ON_ROOF",
           "num_params": 1,
@@ -9176,22 +9179,22 @@
           "short_desc": "Gives the player the specified weapon with the specified ammunition"
         },
         {
-          "class": "Char",
-          "id": "01B2",
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int"
             }
           ],
+          "class": "Char",
+          "id": "01B2",
           "member": "GiveWeapon",
           "name": "GIVE_WEAPON_TO_CHAR",
           "num_params": 3,
@@ -9459,31 +9462,31 @@
           "short_desc": "Stores the player's current wanted level"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "01C1",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsStopped",
           "name": "IS_CAR_STOPPED",
           "num_params": 1,
           "short_desc": "Returns true if the car is not in motion"
         },
         {
-          "class": "Char",
-          "id": "01C2",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
+          "id": "01C2",
           "member": "MarkAsNoLongerNeeded",
           "name": "MARK_CHAR_AS_NO_LONGER_NEEDED",
           "num_params": 1,
@@ -10393,34 +10396,34 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "01F3",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInAirProper",
           "name": "IS_CAR_IN_AIR_PROPER",
           "num_params": 1,
           "short_desc": "Returns true if the vehicle is in the air"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "01F4",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsUpsidedown",
           "name": "IS_CAR_UPSIDEDOWN",
           "num_params": 1,
@@ -11137,17 +11140,17 @@
           "short_desc": "Creates an explosion"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "020D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsUpright",
           "name": "IS_CAR_UPRIGHT",
           "num_params": 1,
@@ -12100,39 +12103,39 @@
           "member": "IsTouchingObjectOnFoot"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            },
+            {
+              "name": "modelName",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "023C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "string"
-            }
-          ],
           "member": "LoadSpecialCharacter",
           "name": "LOAD_SPECIAL_CHARACTER",
           "num_params": 2,
           "short_desc": "Loads a special character"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Streaming",
           "id": "023D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "HasSpecialCharacterLoaded",
           "name": "HAS_SPECIAL_CHARACTER_LOADED",
           "num_params": 1,
@@ -13181,17 +13184,17 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "0296",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "UnloadSpecialCharacter",
           "name": "UNLOAD_SPECIAL_CHARACTER",
           "num_params": 1,
@@ -14338,17 +14341,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "02BF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInWater",
           "name": "IS_CAR_IN_WATER",
           "num_params": 1,
@@ -14582,17 +14585,17 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "02CA",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsOnScreen",
           "name": "IS_CAR_ON_SCREEN",
           "num_params": 1,
@@ -17791,18 +17794,18 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "035F",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "armour",
               "type": "int"
             }
           ],
+          "class": "Char",
+          "id": "035F",
           "member": "AddArmour",
           "name": "ADD_ARMOUR_TO_CHAR",
           "num_params": 2,
@@ -17837,26 +17840,26 @@
           "short_desc": "Closes the specified garage"
         },
         {
-          "class": "Char",
-          "id": "0362",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float"
             }
           ],
+          "class": "Char",
+          "id": "0362",
           "member": "WarpFromCarToCoord",
           "name": "WARP_CHAR_FROM_CAR_TO_COORD",
           "num_params": 4,
@@ -18072,18 +18075,18 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "036A",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
+          "class": "Char",
+          "id": "036A",
           "member": "WarpIntoCar",
           "name": "WARP_CHAR_INTO_CAR",
           "num_params": 2,
@@ -18390,34 +18393,34 @@
           "short_desc": "Displays a message in which the first string token ~a~ is substituted with the specified text"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Char",
           "id": "0376",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "CreateRandom",
           "name": "CREATE_RANDOM_CHAR",
           "num_params": 4,
-          "output": [
-            {
-              "name": "_p4",
-              "type": "Char"
-            }
-          ],
           "short_desc": "Creates a character with a randomized model and pedtype at the specified coordinates"
         },
         {
@@ -20133,23 +20136,23 @@
           "short_desc": "Makes pedestrians pay no attention to the player"
         },
         {
-          "class": "Char",
-          "id": "03C0",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
+          "class": "Char",
+          "id": "03C0",
           "member": "StoreCarIsInNoSave",
           "name": "STORE_CAR_CHAR_IS_IN_NO_SAVE",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Gets the character's vehicle handle without marking it as used by the script, therefore allowing it to be deleted by the game at any time"
         },
         {
@@ -20412,18 +20415,18 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "StuckCarCheck",
           "id": "03CE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsCarStuck",
           "name": "IS_CAR_STUCK",
           "num_params": 1,
@@ -22176,21 +22179,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "seatId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "0431",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsPassengerSeatFree",
           "name": "IS_CAR_PASSENGER_SEAT_FREE",
           "num_params": 2,
@@ -22863,21 +22866,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0457",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsTargettingChar",
           "name": "IS_PLAYER_TARGETTING_CHAR",
           "num_params": 2,
@@ -23272,14 +23275,14 @@
           "short_desc": "Puts character into a turret on a car, allowing them to shoot"
         },
         {
-          "class": "Char",
-          "id": "0465",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
+          "id": "0465",
           "member": "DetachFromCar",
           "name": "DETACH_CHAR_FROM_CAR",
           "num_params": 1,

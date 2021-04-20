@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1618952718958
+    "last_update": 1618953781578
   },
   "extensions": [
     {
@@ -5469,14 +5469,14 @@
           "short_desc": "Returns true if the player's wanted level is other the specified value"
         },
         {
-          "class": "Player",
-          "id": "0110",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "class": "Player",
+          "id": "0110",
           "member": "ClearWantedLevel",
           "name": "CLEAR_WANTED_LEVEL",
           "num_params": 1,
@@ -8768,18 +8768,18 @@
           "num_params": 0
         },
         {
-          "class": "Player",
-          "id": "01B4",
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
               "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "01B4",
           "member": "SetControl",
           "name": "SET_PLAYER_CONTROL",
           "num_params": 2,
@@ -8983,23 +8983,24 @@
           "num_params": 0
         },
         {
-          "class": "Player",
-          "id": "01C0",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "output": [
+            {
+              "name": "wantedLevel",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Player",
+          "id": "01C0",
           "member": "StoreWantedLevel",
           "name": "STORE_WANTED_LEVEL",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "short_desc": "Stores the player's current wanted level"
         },
         {
@@ -9840,17 +9841,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "wantedLevel",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "01F0",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetMaxWantedLevel",
           "name": "SET_MAX_WANTED_LEVEL",
           "num_params": 1,
@@ -9939,18 +9940,18 @@
           "short_desc": "Stops the player from spawning at the override coordinates"
         },
         {
-          "class": "Player",
-          "id": "01F7",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "01F7",
           "member": "SetIgnorePolice",
           "name": "SET_POLICE_IGNORE_PLAYER",
           "num_params": 2,
@@ -15146,44 +15147,47 @@
           "short_desc": "Sets how far behind the camera is from the player"
         },
         {
-          "class": "Pickup",
-          "id": "032B",
           "input": [
             {
-              "name": "_p1",
+              "name": "modelId",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "pickupType",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "z",
               "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Pickup"
+            }
+          ],
+          "class": "Pickup",
+          "id": "032B",
           "member": "CreateWithAmmo",
           "name": "CREATE_PICKUP_WITH_AMMO",
           "num_params": 7,
-          "output": [
-            {
-              "name": "_p7",
-              "type": "int"
-            }
-          ],
-          "short_desc": "Creates a weapon pickup, giving the player the specified amount of ammo when they pick it up"
+          "short_desc": "Creates a weapon pickup, giving the player the specified amount of ammo when they pick it up",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "class": "Car",
@@ -15228,36 +15232,36 @@
           "num_params": 0
         },
         {
-          "class": "Player",
-          "id": "0330",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "0330",
           "member": "SetNeverGetsTired",
           "name": "SET_PLAYER_NEVER_GETS_TIRED",
           "num_params": 2,
           "short_desc": "Defines whether the player can run fast forever"
         },
         {
-          "class": "Player",
-          "id": "0331",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "0331",
           "member": "SetFastReload",
           "name": "SET_PLAYER_FAST_RELOAD",
           "num_params": 2,
@@ -15298,17 +15302,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "0335",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetFreeResprays",
           "name": "SET_FREE_RESPRAYS",
           "num_params": 1,
@@ -17759,25 +17763,25 @@
           "short_desc": "Returns true if the object exists"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "03CB",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "LoadScene",
           "name": "LOAD_SCENE",
           "num_params": 3,
@@ -18343,31 +18347,31 @@
           "short_desc": "Disables a car from exploding when it is upside down, as long as the player is not in the vehicle"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "03EE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "CanStartMission",
           "name": "CAN_PLAYER_START_MISSION",
           "num_params": 1,
           "short_desc": "Returns true if the player can move"
         },
         {
-          "class": "Player",
-          "id": "03EF",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "class": "Player",
+          "id": "03EF",
           "member": "MakeSafeForCutscene",
           "name": "MAKE_PLAYER_SAFE_FOR_CUTSCENE",
           "num_params": 1,
@@ -23244,18 +23248,18 @@
           "short_desc": "Returns true if the players specified bodypart uses the specified texture"
         },
         {
-          "class": "Player",
-          "id": "0501",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "0501",
           "member": "SetCanDoDriveBy",
           "name": "SET_PLAYER_CAN_DO_DRIVE_BY",
           "num_params": 2,
@@ -24711,18 +24715,18 @@
           "num_params": 0
         },
         {
-          "class": "Player",
-          "id": "055D",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "055D",
           "member": "MakeFireProof",
           "name": "MAKE_PLAYER_FIRE_PROOF",
           "num_params": 2,

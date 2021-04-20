@@ -119,10 +119,17 @@
         [classCommands]="classCommands$ | async"
         (view)="onView($event.command, $event.extension)"
       ></scl-class-overview>
-      <scl-enum-overview
-        *ngIf="viewMode === ViewMode.ViewEnum"
-        [enumName]="enumToDisplay$ | async"
-      ></scl-enum-overview>
+      <ng-container
+        *ngIf="
+          viewMode === ViewMode.ViewEnum && enumToDisplay$
+            | async as enumToDisplay
+        "
+      >
+        <scl-enum-overview
+          [enumName]="enumToDisplay"
+          [enumData]="getEnum(enumToDisplay) | async"
+        ></scl-enum-overview>
+      </ng-container>
     </ng-template>
   </ng-container>
 </ng-container>

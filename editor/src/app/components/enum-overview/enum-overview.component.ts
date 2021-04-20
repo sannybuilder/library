@@ -7,5 +7,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EnumOverviewComponent {
+  private _fields: Array<[string, string | number]>;
+
   @Input() enumName: string;
+  @Input() set enumData(val: Record<string, string | number> | undefined) {
+    this._fields = val ? Object.entries(val) : [];
+  }
+
+  get fields() {
+    return this._fields;
+  }
 }

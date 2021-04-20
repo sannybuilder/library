@@ -209,4 +209,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   onClassOverview(className: string) {
     this._ui.displayClassOverview(className);
   }
+
+  getEnum(enumName: string) {
+    return this._enums.getEnumFields(enumName);
+  }
 }

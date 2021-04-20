@@ -56,6 +56,18 @@ export class UiFacade {
     );
   }
 
+  getExtensionCheckedState(extension: string) {
+    return this.store$.select(selector.isExtensionSelected, {
+      extension,
+    });
+  }
+
+  getClassCheckedState(className: string) {
+    return this.store$.select(selector.isClassSelected, {
+      className,
+    });
+  }
+
   constructor(private store$: Store) {}
 
   toggleFilter(filter: Attribute, modifier: Modifier) {
@@ -124,18 +136,6 @@ export class UiFacade {
 
   selectClass(game: Game, className: string, state: boolean) {
     this.store$.dispatch(selectClass({ game, className, state }));
-  }
-
-  getExtensionCheckedState(extension: string) {
-    return this.store$.select(selector.isExtensionSelected, {
-      extension,
-    });
-  }
-
-  getClassCheckedState(className: string) {
-    return this.store$.select(selector.isClassSelected, {
-      className,
-    });
   }
 
   displayClassOverview(className: string) {

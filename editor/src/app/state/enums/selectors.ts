@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Game } from '../../models';
+import { Enums, Game } from '../../models';
 import { game } from '../game/selectors';
 import { EnumsState } from './reducer';
 
@@ -13,4 +13,9 @@ export const enums = createSelector(
 
 export const enumNames = createSelector(enums, (enums) =>
   Object.keys(enums ?? {})
+);
+
+export const enumFields = createSelector(
+  enums,
+  (enums: Enums, props: { enumName: string }) => enums?.[props.enumName]
 );

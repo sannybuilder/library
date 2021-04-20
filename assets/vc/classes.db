@@ -61,7 +61,7 @@ PlayMissionPassedTune,0394,0,0,("_p1%i")
 PoliceRadioMessage,03AA,0,0,("_p1%f" "_p2%f" "_p3%f")
 RemoveSound,018E,0,0,("_p1%i")
 SetMissionAudioPosition,03D7,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f")
-SetMusicDoesFade,043C,0,0,("_p1%i")
+SetMusicDoesFade,043C,0,0,("state%b")
 SetRadioChannel,041E,0,0,("_p1%i" "_p2%i")
 StopEndOfGameTune,0440,0,0,()
 $END
@@ -98,7 +98,7 @@ $END
 
 $Camera
 $BEGIN
-DoFade,016A,0,0,("_p1%i" "_p2%i")
+DoFade,016A,0,0,("_p1%i" "time%i")
 GetDebugCameraPointAt,0463,0,0,("x%f" "y%f" "z%f")
 GetDebugCoordinates,0454,0,0,("x%f" "y%f" "z%f")
 GetFadingStatus,016B,1,0,()
@@ -561,8 +561,8 @@ $BEGIN
 AddToVelocity,038C,0,0,("self: Object" "x%f" "y%f" "z%f")
 Create,0107,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5: Object")
 CreateNoOffset,029B,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5: Object")
-Delete,0108,0,0,("_p1%i")
-DoesExist,03CA,1,0,("_p1%i")
+Delete,0108,0,0,("self: Object")
+DoesExist,03CA,1,0,("self: Object")
 DontRemove,01C7,0,0,("_p1%i")
 FreezePosition,0550,0,0,("_p1%i" "_p2%i")
 GetCoordinates,01BB,0,0,("self: Object" "x%f" "y%f" "z%f")
@@ -803,7 +803,7 @@ GiveCarToPlayer,010C,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f")
 GiveModelToPlayer,046E,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 RemoveBuggy,04DB,0,0,()
 SetEnableDetonate,048A,0,0,("_p1%i")
-SetEnableDetonateOnContact,04D6,0,0,("_p1%i")
+SetEnableDetonateOnContact,04D6,0,0,("state%b")
 $END
 
 $Restart
@@ -821,7 +821,7 @@ ClearTimer,014F,0,0,("_p1%i")
 DisplayCounter,0150,0,0,("_p1%i" "_p2%i")
 DisplayCounterWithString,03C4,0,0,("_p1%i" "_p2%i" "_p3%s")
 DisplayNthCounterWithString,04F7,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4%s")
-DisplayRadar,0581,0,0,("_p1%i")
+DisplayRadar,0581,0,0,("state%b")
 DisplayTimer,014E,0,0,("_p1%i" "_p2%i")
 DisplayTimerWithString,03C3,0,0,("_p1%i" "_p2%i" "_p3%s")
 DrawRect,038E,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i" "_p7%i" "_p8%i")
@@ -830,7 +830,7 @@ FlashHudObject,03E7,0,0,("_p1%i")
 FreezeTimer,0396,0,0,("_p1%i")
 LoadSplash,044D,0,0,("_p1%s")
 SetSpritesDrawBeforeFade,03E3,0,0,("_p1%i")
-SwitchWidescreen,02A3,0,0,("_p1%i")
+SwitchWidescreen,02A3,0,0,("state%b")
 UseTextCommands,03F0,0,0,("_p1%i")
 WantedStarsAreFlashing,057B,1,0,()
 $END
@@ -856,7 +856,7 @@ $Sphere
 $BEGIN
 Create,03BC,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5: Sphere")
 Draw,03A1,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f")
-Remove,03BD,0,0,("_p1: Sphere")
+Remove,03BD,0,0,("self: Sphere")
 $END
 
 $Stat

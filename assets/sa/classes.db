@@ -59,7 +59,7 @@ PlayMissionAudio,03D1,0,0,("_p1%i")
 PlayMissionPassedTune,0394,0,0,("_p1%i")
 RemoveSound,018E,0,0,("_p1%i")
 SetMissionAudioPosition,03D7,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f")
-SetMusicDoesFade,043C,0,0,("_p1%i")
+SetMusicDoesFade,043C,0,0,("state%b")
 $END
 
 $Blip
@@ -93,7 +93,7 @@ $END
 
 $Camera
 $BEGIN
-DoFade,016A,0,0,("_p1%i" "_p2%i")
+DoFade,016A,0,0,("_p1%i" "time%i")
 GetDebugCameraPointAt,0463,0,0,("x%f" "y%f" "z%f")
 GetDebugCoordinates,0454,0,0,("x%f" "y%f" "z%f")
 GetFadingStatus,016B,1,0,()
@@ -600,8 +600,9 @@ AddToRotationVelocity,05A1,0,0,("self: Object" "x%f" "y%f" "z%f")
 AddToVelocity,038C,0,0,("self: Object" "x%f" "y%f" "z%f")
 Create,0107,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5: Object")
 CreateNoOffset,029B,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5: Object")
-Delete,0108,0,0,("_p1%i")
-DoesExist,03CA,1,0,("_p1%i")
+Delete,0108,0,0,("self: Object")
+DoesExist,03CA,1,0,("self: Object")
+DoesHaveThisModel,09CC,1,0,("self: Object" "modelId: model_ide")
 DontRemove,01C7,0,0,("_p1%i")
 FreezePosition,0550,0,0,("_p1%i" "_p2%i")
 GetAnimCurrentTime,0839,0,0,("self: Object" "animationName%s" "time%f")
@@ -757,7 +758,7 @@ GetCar,0484,0,0,("_p1%i" "_p2%i")
 GiveModelToPlayer,046E,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 RemoveBuggy,04DB,0,0,()
 SetEnableDetonate,048A,0,0,("_p1%i")
-SetEnableDetonateOnContact,04D6,0,0,("_p1%i")
+SetEnableDetonateOnContact,04D6,0,0,("state%b")
 $END
 
 $Restart
@@ -772,7 +773,7 @@ ClearCounter,0151,0,0,("_p1%i")
 ClearTimer,014F,0,0,("_p1%i")
 DisplayCounterWithString,03C4,0,0,("_p1%i" "_p2%i" "_p3%s")
 DisplayNthCounterWithString,04F7,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4%s")
-DisplayRadar,0581,0,0,("_p1%i")
+DisplayRadar,0581,0,0,("state%b")
 DisplayTimer,014E,0,0,("_p1%i" "_p2%i")
 DisplayTimerWithString,03C3,0,0,("_p1%i" "_p2%i" "_p3%s")
 DrawRect,038E,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i" "_p7%i" "_p8%i")
@@ -780,7 +781,7 @@ DrawSprite,038D,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i" "_p7%i" "_p
 FlashHudObject,03E7,0,0,("_p1%i")
 FreezeTimer,0396,0,0,("_p1%i")
 SetSpritesDrawBeforeFade,03E3,0,0,("_p1%i")
-SwitchWidescreen,02A3,0,0,("_p1%i")
+SwitchWidescreen,02A3,0,0,("state%b")
 UseTextCommands,03F0,0,0,("_p1%i")
 $END
 
@@ -806,7 +807,7 @@ $Sphere
 $BEGIN
 Create,03BC,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5: Sphere")
 Draw,03A1,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f")
-Remove,03BD,0,0,("_p1: Sphere")
+Remove,03BD,0,0,("self: Sphere")
 $END
 
 $Stat

@@ -15,6 +15,7 @@ import { CONFIG, Config } from '../../config';
 import {
   Command,
   Enum,
+  EnumRaw,
   Game,
   ParamType,
   Primitive,
@@ -43,7 +44,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   extensionNames$ = this._extensions.extensionNames$;
   classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
-  enumToDisplay$ = this._ui.enumToDisplayOrEdit$;
   game$ = this._game.game$;
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
@@ -60,6 +60,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   oldSnippet?: string;
   extension?: string;
   oldExtension?: string;
+  enumToDisplayOrEdit?: EnumRaw;
+  oldEnumToEdit?: EnumRaw;
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
   editorHasError = false;
@@ -97,6 +99,13 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.oldSnippet = snippet;
     });
 
+    this._ui.enumToDisplayOrEdit$
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((enumToEdit) => {
+        this.enumToDisplayOrEdit = cloneDeep(enumToEdit);
+        this.oldEnumToEdit = cloneDeep(enumToEdit);
+      });
+
     combineLatest([
       this._ui.commandToDisplayOrEdit$,
       this._ui.extensionToDisplayOrEdit$,
@@ -112,21 +121,13 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  onSave() {
-    this._extensions.updateCommand({
-      newExtension: this.extension,
-      oldExtension: this.oldExtension,
-      command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
-    });
-    if (this.snippet !== this.oldSnippet) {
-      this._snippets.updateSnippet({
-        extension: this.extension,
-        command: this.command,
-        content: this.snippet,
-      });
+  onSave(viewMode: ViewMode) {
+    if (viewMode === ViewMode.EditCommand) {
+      this._onSaveCommand();
     }
-
-    this._ui.stopEditOrDisplay();
+    if (viewMode === ViewMode.EditEnum) {
+      this._onSaveEnum();
+    }
   }
 
   onView(command: Command, extension: string) {
@@ -134,9 +135,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return false;
   }
 
-  onEdit(command: Command, extension: string) {
+  onEditCommand(command: Command, extension: string) {
     this._ui.editCommandInfo(command, extension);
-    return false;
+  }
+
+  onEditEnum(enumToEdit: EnumRaw) {
+    this._ui.editEnum(enumToEdit);
   }
 
   onCancel() {
@@ -174,34 +178,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  @HostListener('window:resize', [])
-  private detectScreenSize() {
-    this.screenSize = window.innerWidth;
-  }
-
-  shouldDisableSaveButton() {
-    return (
-      this.editorHasError ||
-      this.noChanges() ||
-      // class & member should be both empty or both filed
-      !!this.command?.class !== !!this.command.member
-    );
-  }
-
-  resetChanges() {
-    this.onEdit(this.oldCommand, this.oldExtension);
-    this.snippet = this.oldSnippet;
-    return false;
-  }
-
-  noChanges(): boolean {
-    return (
-      isEqual(this.command, this.oldCommand) &&
-      this.extension === this.oldExtension &&
-      this.snippet === this.oldSnippet
-    );
-  }
-
   getCommandSupportInfo(command: Command, extension: string) {
     return this._game.getCommandSupportInfo(command, extension);
   }
@@ -212,5 +188,71 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getEnum(enumName: string) {
     return this._enums.getEnumFields(enumName);
+  }
+
+  @HostListener('window:resize', [])
+  private detectScreenSize() {
+    this.screenSize = window.innerWidth;
+  }
+
+  shouldDisableSaveButton(viewMode: ViewMode) {
+    if (this.editorHasError || this.noChanges(viewMode)) {
+      return true;
+    }
+    if (viewMode === ViewMode.EditCommand) {
+      // class & member should be both empty or both filed
+      return !!this.command?.class !== !!this.command.member;
+    }
+    if (viewMode === ViewMode.EditEnum) {
+      return false;
+    }
+
+    return true;
+  }
+
+  resetChanges(viewMode: ViewMode) {
+    if (viewMode === ViewMode.EditCommand) {
+      this.onEditCommand(this.oldCommand, this.oldExtension);
+      this.snippet = this.oldSnippet;
+    }
+    if (viewMode === ViewMode.EditEnum) {
+      this.onEditEnum(this.oldEnumToEdit);
+    }
+    return false;
+  }
+
+  noChanges(viewMode: ViewMode): boolean {
+    if (viewMode === ViewMode.EditCommand) {
+      return (
+        isEqual(this.command, this.oldCommand) &&
+        this.extension === this.oldExtension &&
+        this.snippet === this.oldSnippet
+      );
+    }
+    if (viewMode === ViewMode.EditEnum) {
+      return isEqual(this.enumToDisplayOrEdit, this.oldEnumToEdit);
+    }
+    return true;
+  }
+
+  private _onSaveCommand() {
+    this._extensions.updateCommand({
+      newExtension: this.extension,
+      oldExtension: this.oldExtension,
+      command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
+    });
+    if (this.snippet !== this.oldSnippet) {
+      this._snippets.updateSnippet({
+        extension: this.extension,
+        command: this.command,
+        content: this.snippet,
+      });
+    }
+
+    this._ui.stopEditOrDisplay();
+  }
+
+  private _onSaveEnum() {
+    this._ui.stopEditOrDisplay();
   }
 }

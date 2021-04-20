@@ -7,7 +7,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { camelCase, capitalize, partition, trim, uniq } from 'lodash';
+import { camelCase, capitalize, trim, uniq } from 'lodash';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -28,7 +28,7 @@ import {
 } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 import { isAnyAttributeInvalid } from '../../utils/validation';
-import { smash } from '../../utils';
+import { capitalizeFirst, smash } from '../../utils';
 
 type ErrorType =
   | 'duplicateName'
@@ -160,11 +160,11 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onClassChange(command: Command, value: string) {
-    command.class = this.capitalizeFirst(value);
+    command.class = capitalizeFirst(value);
   }
 
   onMemberChange(command: Command, value: string) {
-    command.member = this.capitalizeFirst(value);
+    command.member = capitalizeFirst(value);
   }
 
   onExtensionChange(val: string) {
@@ -391,12 +391,5 @@ export class CommandEditorComponent implements OnInit {
   private updateNoOutputParamsError() {
     this.errors.noConstructorWithoutOutputParams =
       this.command.attrs?.is_constructor && !this.command.output?.length;
-  }
-
-  private capitalizeFirst(value?: string) {
-    const camelized = camelCase(value);
-    return camelized.length > 1
-      ? camelized[0].toUpperCase() + camelized.substring(1)
-      : camelized;
   }
 }

@@ -1,5 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Attribute, Command, Game, Modifier, ViewMode } from '../../models';
+import {
+  Attribute,
+  Command,
+  EnumRaw,
+  Game,
+  Modifier,
+  ViewMode,
+} from '../../models';
 
 export const selectExtensions = createAction(
   'change extensions selection',
@@ -38,7 +45,7 @@ export const displayOrEditSnippet = createAction(
 
 export const displayOrEditEnum = createAction(
   'display or edit enum',
-  props<{ enumName: string; viewMode: ViewMode }>()
+  props<{ enumToEdit: EnumRaw; viewMode: ViewMode }>()
 );
 
 export const stopEditOrDisplay = createAction('stop edit or display');

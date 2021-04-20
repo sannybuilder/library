@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { intersection, partition, without } from 'lodash';
 
-import { Command, ViewMode, Attribute, Game } from '../../models';
+import { Command, ViewMode, Attribute, Game, EnumRaw } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
@@ -32,7 +32,7 @@ export interface UiState {
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
-  enumToDisplayOrEdit?: string;
+  enumToDisplayOrEdit?: EnumRaw;
   viewMode: ViewMode;
   opcodeOnLoad?: string;
   extensionOnLoad?: string;
@@ -112,10 +112,10 @@ const _reducer = createReducer(
     ...state,
     snippetToDisplayOrEdit: snippet,
   })),
-  on(displayOrEditEnum, (state, { enumName, viewMode }) => ({
+  on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => ({
     ...state,
     viewMode,
-    enumToDisplayOrEdit: enumName,
+    enumToDisplayOrEdit: enumToEdit,
   })),
   on(stopEditOrDisplay, (state) => ({
     ...state,

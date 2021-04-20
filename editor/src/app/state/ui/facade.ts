@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Attribute, Command, Game, Modifier, ViewMode } from '../../models';
+import {
+  Attribute,
+  Command,
+  EnumRaw,
+  Game,
+  Modifier,
+  ViewMode,
+} from '../../models';
 import {
   updateSearchTerm,
   toggleCommandListElements,
@@ -102,15 +109,9 @@ export class UiFacade {
     );
   }
 
-  displayEnum(enumName: string) {
+  editEnum(enumToEdit: EnumRaw) {
     this.store$.dispatch(
-      displayOrEditEnum({ enumName, viewMode: ViewMode.ViewEnum })
-    );
-  }
-
-  editEnum(enumName: string) {
-    this.store$.dispatch(
-      displayOrEditEnum({ enumName, viewMode: ViewMode.EditEnum })
+      displayOrEditEnum({ enumToEdit, viewMode: ViewMode.EditEnum })
     );
   }
 

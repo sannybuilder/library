@@ -26,7 +26,7 @@ import {
   mergeMap,
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
-import { Extension, Game, ViewMode } from '../../models';
+import { EnumRaw, Extension, Game, ViewMode } from '../../models';
 import { combineLatest, merge } from 'rxjs';
 import { loadExtensionsSuccess, updateCommand } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
@@ -72,14 +72,14 @@ export class UiEffects {
     ]).pipe(
       filter(([{ game }, _, currGame]) => game === currGame),
       map(([{ enums }, enumName]) => {
-        if (enums?.[enumName]) {
-          return displayOrEditEnum({
-            enumName,
-            viewMode: ViewMode.ViewEnum,
-          });
-        } else {
-          return stopEditOrDisplay();
-        }
+        const enumToEdit: EnumRaw = {
+          name: enumName,
+          fields: Object.entries(enums[enumName] ?? []),
+        };
+        return displayOrEditEnum({
+          enumToEdit,
+          viewMode: enums?.[enumName] ? ViewMode.ViewEnum : ViewMode.EditEnum,
+        });
       })
     )
   );

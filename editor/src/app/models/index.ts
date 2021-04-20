@@ -82,6 +82,11 @@ export interface Enums {
   [enumName: string]: Record<string, string | number>;
 }
 
+export interface EnumRaw {
+  name: string;
+  fields: Array<[string, string | number]>;
+}
+
 export enum Game {
   GTA3 = 'gta3',
   VC = 'vc',

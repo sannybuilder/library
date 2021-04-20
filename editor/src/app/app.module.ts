@@ -73,6 +73,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { SelectorComponent } from './components/selector/selector.component';
 import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
 import { EnumOverviewComponent } from './components/enum-overview/enum-overview.component';
+import { EnumEditorComponent } from './components/enum-editor/enum-editor.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { EnumOverviewComponent } from './components/enum-overview/enum-overview.
     PaginationComponent,
     ClassOverviewComponent,
     EnumOverviewComponent,
+    EnumEditorComponent,
   ],
   imports: [
     BrowserModule,

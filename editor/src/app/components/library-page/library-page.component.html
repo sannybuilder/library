@@ -31,7 +31,7 @@
               screenSize < 1700
             "
             (view)="onView($event.command, $event.extension)"
-            (edit)="onEdit($event.command, $event.extension)"
+            (edit)="onEditCommand($event.command, $event.extension)"
             (classOverview)="onClassOverview($event)"
           ></scl-command-list>
         </main>
@@ -59,8 +59,8 @@
       <div class="modal-footer d-flex">
         <a
           href="#"
-          *ngIf="!noChanges()"
-          (click)="resetChanges()"
+          *ngIf="!noChanges(viewMode)"
+          (click)="resetChanges(viewMode)"
           class="mr-auto"
           >Reset all changes</a
         >
@@ -75,16 +75,26 @@
           *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
           type="button"
           class="btn btn-outline-success"
-          (click)="onEdit(command, extension)"
+          (click)="onEditCommand(command, extension)"
         >
           Edit
         </button>
         <button
-          *ngIf="viewMode === ViewMode.EditCommand"
-          [disabled]="shouldDisableSaveButton()"
+          *ngIf="viewMode === ViewMode.ViewEnum && (canEdit$ | async)"
           type="button"
           class="btn btn-outline-success"
-          (click)="onSave()"
+          (click)="onEditEnum(enumToDisplayOrEdit)"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="
+            viewMode === ViewMode.EditCommand || viewMode === ViewMode.EditEnum
+          "
+          [disabled]="shouldDisableSaveButton(viewMode)"
+          type="button"
+          class="btn btn-outline-success"
+          (click)="onSave(viewMode)"
         >
           Save
         </button>
@@ -119,17 +129,14 @@
         [classCommands]="classCommands$ | async"
         (view)="onView($event.command, $event.extension)"
       ></scl-class-overview>
-      <ng-container
-        *ngIf="
-          viewMode === ViewMode.ViewEnum && enumToDisplay$
-            | async as enumToDisplay
-        "
-      >
-        <scl-enum-overview
-          [enumName]="enumToDisplay"
-          [enumData]="getEnum(enumToDisplay) | async"
-        ></scl-enum-overview>
-      </ng-container>
+      <scl-enum-overview
+        *ngIf="viewMode === ViewMode.ViewEnum"
+        [enumToView]="enumToDisplayOrEdit"
+      ></scl-enum-overview>
+      <scl-enum-editor
+        *ngIf="viewMode === ViewMode.EditEnum"
+        [enumToEdit]="enumToDisplayOrEdit"
+      ></scl-enum-editor>
     </ng-template>
   </ng-container>
 </ng-container>

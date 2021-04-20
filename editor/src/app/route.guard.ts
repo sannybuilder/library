@@ -41,7 +41,7 @@ export class RouteGuard implements CanActivate {
     }
 
     const extensionOrEnum = segments.shift();
-    if (extensionOrEnum === 'enum') {
+    if (extensionOrEnum === 'enums') {
       this._game.onListEnter({
         game,
         extension: DEFAULT_EXTENSION,

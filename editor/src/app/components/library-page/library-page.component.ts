@@ -52,6 +52,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     )
   );
   viewMode$ = this._ui.viewMode$;
+  enumNames$ = this._enums.enumNames$;
 
   command?: Command;
   oldCommand?: Command;
@@ -158,7 +159,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return combineLatest([
       this.getExtensionEntities(extension),
       this._game.primitiveTypes$,
-      this._enums.enumNames$,
+      this.enumNames$,
     ]).pipe(
       map(([entities, primitiveTypes, enumNames]) => {
         const primitives: Primitive[] = primitiveTypes.map((name) => ({

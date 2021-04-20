@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Attribute, Command, SupportInfo } from '../../models';
+import { Attribute, Command, Game, Param, SupportInfo } from '../../models';
 
 @Component({
   selector: 'scl-command-info',
@@ -33,11 +33,17 @@ export class CommandInfoComponent {
   }
   @Input() supportInfo: SupportInfo;
   @Input() snippet?: string;
+  @Input() game: Game;
+  @Input() enumNames: string[] = [];
 
   @Output() classOverview: EventEmitter<string> = new EventEmitter();
 
   onClassOverview(className: string) {
     this.classOverview.emit(className);
     return false;
+  }
+
+  isEnumParam(param: Param) {
+    return this.enumNames.includes(param.type);
   }
 }

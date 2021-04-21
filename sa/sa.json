@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619008949290
+    "last_update": 1619009469170
   },
   "extensions": [
     {
@@ -5971,86 +5971,96 @@
           "short_desc": "Returns true if the screen is in the middle of a fade in or out"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "townId",
+              "type": "int"
+            }
+          ],
           "id": "016C",
           "name": "ADD_HOSPITAL_RESTART",
           "num_params": 5,
           "short_desc": "Adds a hospital restart, which is where the player will spawn after death (wasted) if the point is closer than any other hospital restart",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Restart",
+          "member": "AddHospital",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "townId",
+              "type": "int"
+            }
+          ],
           "id": "016D",
           "name": "ADD_POLICE_RESTART",
           "num_params": 5,
           "short_desc": "Adds a police restart, which is where the player will spawn after being arrested (busted) if the point is closer than any other police restart",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Restart",
+          "member": "AddPolice",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Restart",
           "id": "016E",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
-          "member": "OverrideNextRestart",
+          "member": "OverrideNext",
           "name": "OVERRIDE_NEXT_RESTART",
           "num_params": 4,
           "short_desc": "Overrides the next wasted or busted restart with the specified position"
@@ -36633,10 +36643,39 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            },
+            {
+              "name": "_p3",
+              "type": "any"
+            },
+            {
+              "name": "_p4",
+              "type": "any"
+            },
+            {
+              "name": "_p5",
+              "type": "any"
+            }
+          ],
           "id": "08DF",
           "name": "SET_EXTRA_HOSPITAL_RESTART_POINT",
           "num_params": 5,
           "short_desc": "",
+          "class": "Restart",
+          "member": "SetExtraHospital",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
@@ -36658,35 +36697,16 @@
               "name": "_p5",
               "type": "any"
             }
-          ]
-        },
-        {
+          ],
           "id": "08E0",
           "name": "SET_EXTRA_POLICE_STATION_RESTART_POINT",
           "num_params": 5,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Restart",
+          "member": "SetExtraPolice",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08E1",

@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   HostListener,
   Inject,
@@ -73,6 +74,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _snippets: SnippetsFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
+    private ref: ChangeDetectorRef,
     @Inject(CONFIG) private _config: Config
   ) {}
 
@@ -97,6 +99,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
       this.snippet = snippet;
       this.oldSnippet = snippet;
+      this.ref.detectChanges();
     });
 
     this._ui.enumToDisplayOrEdit$
@@ -104,6 +107,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((enumToEdit) => {
         this.enumToDisplayOrEdit = cloneDeep(enumToEdit);
         this.oldEnumToEdit = cloneDeep(enumToEdit);
+        this.ref.detectChanges();
       });
 
     combineLatest([
@@ -118,6 +122,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.oldCommand = cloneDeep(this.command);
         this.oldExtension = extension;
         this.extension = extension;
+        this.ref.detectChanges();
       });
   }
 

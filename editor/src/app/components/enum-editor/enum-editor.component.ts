@@ -3,7 +3,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { capitalizeFirst } from '../../utils';
 import { EnumRaw } from '../../models';
 
@@ -11,6 +11,7 @@ import { EnumRaw } from '../../models';
   selector: 'scl-enum-editor',
   templateUrl: './enum-editor.component.html',
   styleUrls: ['./enum-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EnumEditorComponent {
   @Input() enumToEdit: EnumRaw;

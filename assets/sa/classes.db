@@ -505,11 +505,12 @@ $END
 $Debugger
 $BEGIN
 DoMissionSkip,0A57,1,0,("missionPage%i" "missionNum%i")
+DoStuff,0A50,0,0,()
 GetMissionNum,0A58,1,0,("missionNum%i")
 GetMissionPage,0A59,1,0,("missionPage%i")
-WriteLog,0A66,0,0,("_p1%s")
-WriteLogFloat,0A68,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%s")
-WriteLogInt,0A67,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4%s")
+WriteLog,0A66,0,0,("_p1: string128")
+WriteLogFloat,0A68,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4: string128")
+WriteLogInt,0A67,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4: string128")
 $END
 
 $Fx
@@ -928,8 +929,8 @@ $Widget
 $BEGIN
 AddButtonFlag,0A62,0,0,("widgetId%i" "flag%i")
 AddFlag,0A60,0,0,("widgetId%i" "flag%i")
-AddShopItem,0A6A,0,0,("itemNameGxtKey%s" "price%i")
-CreateShopMenu,0A69,0,0,("menuNameGxtkey%s")
+AddShopItem,0A6A,0,0,("itemName: gxt_key" "price%i")
+CreateShopMenu,0A69,0,0,("menuName: gxt_key")
 Delete,0A6B,0,0,("widgetId%i")
 GetPositionScale,0A5D,0,0,("widgetId%i" "screenX%f" "screenY%f" "scaleX%f" "scaleY%f")
 GetValue,0A5A,0,0,("widgetId%i" "_p2%f")
@@ -944,7 +945,7 @@ RemoveButtonFlag,0A63,0,0,("widgetId%i" "flag%i")
 RemoveFlag,0A61,0,0,("widgetId%i" "flag%i")
 SetEquippedItem,0A6C,0,0,("widgetId%i" "_p2%i")
 SetSliderRange,0A5F,0,0,("widgetId%i" "rangeX%f" "rangeY%f")
-SetTexture,0A6E,0,0,("widgetId%i" "textureName%s")
+SetTexture,0A6E,0,0,("widgetId%i" "textureName: string128")
 SetValue,0A5E,0,0,("widgetId%i" "_p2%f")
 SetValue3,0A73,0,0,("widgetId%i" "_p2%f" "_p3%f" "_p4%f")
 $END

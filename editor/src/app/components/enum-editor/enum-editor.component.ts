@@ -4,7 +4,6 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { capitalizeFirst } from '../../utils';
 import { EnumRaw } from '../../models';
 
 @Component({
@@ -39,13 +38,5 @@ export class EnumEditorComponent {
 
   deleteField(index: number) {
     this.enumToEdit.fields.splice(index, 1);
-  }
-
-  onFieldNameChange(field: EnumRaw['fields'][0], value: string) {
-    field[0] = capitalizeFirst(value);
-  }
-
-  onFieldValueChange(field: EnumRaw['fields'][0], value: string) {
-    field[1] = value;
   }
 }

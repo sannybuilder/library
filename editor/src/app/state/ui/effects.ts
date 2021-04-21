@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { combineLatest, merge } from 'rxjs';
 import {
   changePage,
   displayOrEditCommandInfo,
@@ -27,26 +29,19 @@ import {
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { EnumRaw, Extension, Game, ViewMode } from '../../models';
-import { combineLatest, merge } from 'rxjs';
-import { loadExtensionsSuccess, updateCommand } from '../extensions/actions';
+import { updateCommand } from '../extensions/actions';
 import { SnippetsFacade } from '../snippets/facade';
 import { ExtensionsFacade } from '../extensions/facade';
 import { ChangesFacade } from '../changes/facade';
-import { DOCUMENT } from '@angular/common';
 import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
-import { loadEnumsSuccess } from '../enums/actions';
+import { EnumsFacade } from '../enums/facade';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
   viewOpcodeOnLoad$ = createEffect(() =>
-    combineLatest([
-      this._actions$.pipe(ofType(loadExtensionsSuccess)),
-      this._ui.opcodeOnLoad$,
-      this._game.game$,
-    ]).pipe(
-      filter(([{ game }, _, currGame]) => game === currGame),
-      map(([{ extensions }, { opcode, extension }]) => {
+    combineLatest([this._extensions.extensions$, this._ui.opcodeOnLoad$]).pipe(
+      map(([extensions, { opcode, extension }]) => {
         const command = extensions
           .find((e) => e.name === extension)
           ?.commands.find(({ id }) => id === opcode);
@@ -65,13 +60,8 @@ export class UiEffects {
   );
 
   viewEnumOnLoad$ = createEffect(() =>
-    combineLatest([
-      this._actions$.pipe(ofType(loadEnumsSuccess)),
-      this._ui.enumOnLoad$,
-      this._game.game$,
-    ]).pipe(
-      filter(([{ game }, _, currGame]) => game === currGame),
-      map(([{ enums }, enumName]) => {
+    combineLatest([this._enums.enums$, this._ui.enumOnLoad$]).pipe(
+      map(([enums, enumName]) => {
         const enumToEdit: EnumRaw = {
           name: enumName,
           fields: Object.entries(enums[enumName] ?? []),
@@ -207,6 +197,7 @@ export class UiEffects {
     private _extensions: ExtensionsFacade,
     private _changes: ChangesFacade,
     private _game: GameFacade,
+    private _enums: EnumsFacade,
     @Inject(DOCUMENT) private _d: Document
   ) {}
 }

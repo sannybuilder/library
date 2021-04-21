@@ -79,12 +79,12 @@ export interface ExtensionSnippets {
 }
 
 export interface Enums {
-  [enumName: string]: Record<string, string | number>;
+  [enumName: string]: Record<string, string | number | null>;
 }
 
 export interface EnumRaw {
   name: string;
-  fields: Array<[string, string | number]>;
+  fields: Array<[string, string | number | null]>;
 }
 
 export enum Game {

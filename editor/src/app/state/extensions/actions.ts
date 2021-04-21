@@ -2,17 +2,17 @@ import { createAction, props } from '@ngrx/store';
 import { Command, Extension, Game } from '../../models';
 
 export const loadExtensions = createAction(
-  'load extensions',
+  '[extensions] load',
   props<{ game: Game }>()
 );
 
 export const loadExtensionsSuccess = createAction(
-  'load extensions success',
+  '[extensions] load success',
   props<{ game: Game; extensions: Extension[]; lastUpdate: number }>()
 );
 
 export const updateCommand = createAction(
-  'update single command',
+  '[extensions] update single command',
   props<{
     command: Command;
     newExtension: string;
@@ -21,7 +21,7 @@ export const updateCommand = createAction(
 );
 
 export const updateGameCommand = createAction(
-  'update single command for the given game',
+  '[extensions] update single command for the given game',
   props<{
     game: Game;
     command: Command;

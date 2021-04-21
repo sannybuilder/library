@@ -12,7 +12,7 @@ import {
   selectClass,
   selectExtensions,
   stopEditOrDisplay,
-  toggleFilter,
+  toggleAttribute,
   updateSearchTerm,
 } from './actions';
 import {
@@ -41,6 +41,7 @@ import { EnumsFacade } from '../enums/facade';
 export class UiEffects {
   viewOpcodeOnLoad$ = createEffect(() =>
     combineLatest([this._extensions.extensions$, this._ui.opcodeOnLoad$]).pipe(
+      filter(([extensions, opcode]) => !!extensions && !!opcode),
       map(([extensions, { opcode, extension }]) => {
         const command = extensions
           .find((e) => e.name === extension)
@@ -61,10 +62,11 @@ export class UiEffects {
 
   viewEnumOnLoad$ = createEffect(() =>
     combineLatest([this._enums.enums$, this._ui.enumOnLoad$]).pipe(
+      filter(([enums, enumName]) => !!enums && !!enumName),
       map(([enums, enumName]) => {
         const enumToEdit: EnumRaw = {
           name: enumName,
-          fields: Object.entries(enums[enumName] ?? []),
+          fields: Object.entries(enums?.[enumName] ?? []),
         };
         return displayOrEditEnum({
           enumToEdit,
@@ -100,7 +102,7 @@ export class UiEffects {
   resetPagination$ = createEffect(() =>
     merge(
       this._actions$.pipe(
-        ofType(toggleFilter, selectExtensions, selectClass, updateSearchTerm)
+        ofType(toggleAttribute, selectExtensions, selectClass, updateSearchTerm)
       ),
       this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
     ).pipe(mapTo(changePage({ index: 1 })))

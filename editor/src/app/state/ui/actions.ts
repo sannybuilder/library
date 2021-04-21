@@ -13,9 +13,9 @@ export const selectExtensions = createAction(
   props<{ game: Game; extensions: string[]; state: boolean }>()
 );
 
-export const toggleFilter = createAction(
-  '[ui] toggle filter selection',
-  props<{ filter: Attribute; modifier: Modifier }>()
+export const toggleAttribute = createAction(
+  '[ui] toggle attribute selection',
+  props<{ attribute: Attribute; modifier: Modifier }>()
 );
 
 export const selectClass = createAction(

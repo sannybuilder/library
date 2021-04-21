@@ -6,7 +6,7 @@ import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
   toggleCommandListElements,
-  toggleFilter,
+  toggleAttribute,
   updateSearchTerm,
   displayOrEditSnippet,
   changePage,
@@ -27,8 +27,8 @@ export interface UiState {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
-  selectedFiltersOnly: Attribute[];
-  selectedFiltersExcept: Attribute[];
+  selectedAttributesOnly: Attribute[];
+  selectedAttributesExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
@@ -44,13 +44,13 @@ export interface UiState {
 
 const defaultFilterState: {
   searchTerm: string;
-  selectedFiltersOnly: Attribute[];
-  selectedFiltersExcept: Attribute[];
+  selectedAttributesOnly: Attribute[];
+  selectedAttributesExcept: Attribute[];
   games: Record<Game, GameState>;
 } = {
   searchTerm: '',
-  selectedFiltersOnly: [],
-  selectedFiltersExcept: ['is_nop', 'is_unsupported'],
+  selectedAttributesOnly: [],
+  selectedAttributesExcept: ['is_nop', 'is_unsupported'],
   games: {
     gta3: {
       selectedClasses: ['any'],
@@ -77,19 +77,19 @@ export const initialState: UiState = {
 
 const _reducer = createReducer(
   initialState,
-  on(toggleFilter, (state, { filter, modifier }) => {
-    const filters =
+  on(toggleAttribute, (state, { attribute, modifier }) => {
+    const attributes =
       modifier === 'only'
-        ? state.selectedFiltersOnly
-        : state.selectedFiltersExcept;
-    const selectedFilters = filters.includes(filter)
-      ? without(filters, filter)
-      : [...filters, filter];
+        ? state.selectedAttributesOnly
+        : state.selectedAttributesExcept;
+    const selectedAttributes = attributes.includes(attribute)
+      ? without(attributes, attribute)
+      : [...attributes, attribute];
     return {
       ...state,
       [modifier === 'only'
-        ? 'selectedFiltersOnly'
-        : 'selectedFiltersExcept']: selectedFilters,
+        ? 'selectedAttributesOnly'
+        : 'selectedAttributesExcept']: selectedAttributes,
     };
   }),
 

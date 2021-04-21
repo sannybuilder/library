@@ -12,7 +12,7 @@ import {
 import {
   updateSearchTerm,
   toggleCommandListElements,
-  toggleFilter,
+  toggleAttribute,
   displayOrEditCommandInfo,
   stopEditOrDisplay,
   changePage,
@@ -30,8 +30,6 @@ export class UiFacade {
   searchTerm$ = this.store$.select(selector.searchTerm);
   displaySearchBar$ = this.store$.select(selector.displaySearchBar);
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
-  selectedFiltersOnly$ = this.store$.select(selector.selectedFiltersOnly);
-  selectedFiltersExcept$ = this.store$.select(selector.selectedFiltersExcept);
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
   currentPage$ = this.store$.select(selector.currentPage);
   commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
@@ -54,12 +52,12 @@ export class UiFacade {
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
 
-  getFilterCheckedState(filter: Attribute, modifier: Modifier) {
+  getAttributeCheckedState(attribute: Attribute, modifier: Modifier) {
     return this.store$.select(
       modifier === 'only'
-        ? selector.isFilterSelectedOnly
-        : selector.isFilterSelectedExcept,
-      { filter }
+        ? selector.isAttributeSelectedOnly
+        : selector.isAttributeSelectedExcept,
+      { attribute }
     );
   }
 
@@ -77,8 +75,8 @@ export class UiFacade {
 
   constructor(private store$: Store) {}
 
-  toggleFilter(filter: Attribute, modifier: Modifier) {
-    this.store$.dispatch(toggleFilter({ filter, modifier }));
+  toggleAttribute(attribute: Attribute, modifier: Modifier) {
+    this.store$.dispatch(toggleAttribute({ attribute, modifier }));
   }
 
   updateSearch(term: string) {

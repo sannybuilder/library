@@ -13,7 +13,7 @@ export class FilterPanelComponent {
   extensionNames$ = this._extensions.extensionNames$;
   selectedExtensions$ = this._ui.selectedExtensions$;
 
-  filters = CommandAttributes;
+  attributes = CommandAttributes;
 
   constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
@@ -25,12 +25,12 @@ export class FilterPanelComponent {
     return this._ui.getExtensionCheckedState(extension);
   }
 
-  toggleFilter(filter: Attribute, modifier: Modifier) {
-    this._ui.toggleFilter(filter, modifier);
+  toggleAttribute(attribute: Attribute, modifier: Modifier) {
+    this._ui.toggleAttribute(attribute, modifier);
   }
 
-  isFilterChecked(filter: Attribute, modifier: Modifier) {
-    return this._ui.getFilterCheckedState(filter, modifier);
+  isAttributeChecked(attribute: Attribute, modifier: Modifier) {
+    return this._ui.getAttributeCheckedState(attribute, modifier);
   }
 
   getExtensionEntities(extension: string) {

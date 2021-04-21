@@ -14,14 +14,14 @@ const gameState = createSelector(
   (state: UiState, game: Game) => state.games[game]
 );
 
-export const selectedFiltersOnly = createSelector(
+export const selectedAttributesOnly = createSelector(
   state,
-  (state: UiState) => state.selectedFiltersOnly
+  (state: UiState) => state.selectedAttributesOnly
 );
 
-export const selectedFiltersExcept = createSelector(
+export const selectedAttributesExcept = createSelector(
   state,
-  (state: UiState) => state.selectedFiltersExcept
+  (state: UiState) => state.selectedAttributesExcept
 );
 
 export const selectedExtensions = createSelector(
@@ -46,16 +46,16 @@ export const isClassSelected = createSelector(
     selectedClasses?.includes(props.className)
 );
 
-export const isFilterSelectedOnly = createSelector(
-  selectedFiltersOnly,
-  (selectedFilters: string[], props: { filter: string }) =>
-    selectedFilters.includes(props.filter)
+export const isAttributeSelectedOnly = createSelector(
+  selectedAttributesOnly,
+  (selectedAttributes: string[], props: { attribute: string }) =>
+    selectedAttributes.includes(props.attribute)
 );
 
-export const isFilterSelectedExcept = createSelector(
-  selectedFiltersExcept,
-  (selectedFilters: string[], props: { filter: string }) =>
-    selectedFilters.includes(props.filter)
+export const isAttributeSelectedExcept = createSelector(
+  selectedAttributesExcept,
+  (selectedAttributes: string[], props: { attribute: string }) =>
+    selectedAttributes.includes(props.attribute)
 );
 
 export const searchTerm = createSelector(
@@ -116,15 +116,15 @@ export const currentPage = createSelector(
 export const rows = createSelector(
   extensions,
   selectedExtensions,
-  selectedFiltersOnly,
-  selectedFiltersExcept,
+  selectedAttributesOnly,
+  selectedAttributesExcept,
   searchTerm,
   selectedClasses,
   (
     extensions,
     selectedExtensions,
-    selectedFiltersOnly,
-    selectedFiltersExcept,
+    selectedAttributesOnly,
+    selectedAttributesExcept,
     searchTerm,
     selectedClasses
   ) => {
@@ -137,8 +137,8 @@ export const rows = createSelector(
       flatMap(selected, ({ name: extension, commands }) => {
         const filtered = filterCommands(
           commands,
-          selectedFiltersOnly,
-          selectedFiltersExcept,
+          selectedAttributesOnly,
+          selectedAttributesExcept,
           selectedClasses
         );
         return search(filtered, searchTerm).map((command) => ({

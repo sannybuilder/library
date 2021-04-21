@@ -5,7 +5,7 @@ import {
   loadExtensionsSuccess,
   updateGameCommand,
 } from './actions';
-import { without, sortBy, last } from 'lodash';
+import { sortBy, last } from 'lodash';
 
 export interface GameState {
   extensions: Extension[];

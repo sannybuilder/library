@@ -18,7 +18,10 @@ const _reducer = createReducer(
   ),
   on(updateGameEnum, (state, { enumToEdit, oldEnumToEdit, game }) => {
     return updateState(state, game, {
-      [enumToEdit.name]: fromPairs(enumToEdit.fields),
+      [oldEnumToEdit.name]: undefined,
+      [enumToEdit.name]: enumToEdit.fields?.length
+        ? fromPairs(enumToEdit.fields)
+        : undefined,
     });
   })
 );

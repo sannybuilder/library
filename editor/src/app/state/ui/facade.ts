@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, filter } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { Config, CONFIG } from '../../config';
 import {
   Attribute,
   Command,
@@ -9,6 +10,7 @@ import {
   Modifier,
   ViewMode,
 } from '../../models';
+import { AuthFacade } from '../auth/facade';
 import {
   updateSearchTerm,
   toggleCommandListElements,
@@ -27,6 +29,12 @@ import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UiFacade {
+  canEdit$ = this._auth.isAuthorized$.pipe(
+    map(
+      (isAuthorized) =>
+        !this._config.features.shouldBeAuthorizedToEdit || isAuthorized
+    )
+  );
   searchTerm$ = this.store$.select(selector.searchTerm);
   displaySearchBar$ = this.store$.select(selector.displaySearchBar);
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
@@ -48,7 +56,7 @@ export class UiFacade {
   );
   enumOnLoad$ = this.store$
     .select(selector.enumOnLoad)
-    .pipe(distinctUntilChanged(), filter<string>(Boolean));
+    .pipe(distinctUntilChanged());
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
 
@@ -73,7 +81,11 @@ export class UiFacade {
     });
   }
 
-  constructor(private store$: Store) {}
+  constructor(
+    private store$: Store,
+    private _auth: AuthFacade,
+    @Inject(CONFIG) private _config: Config
+  ) {}
 
   toggleAttribute(attribute: Attribute, modifier: Modifier) {
     this.store$.dispatch(toggleAttribute({ attribute, modifier }));

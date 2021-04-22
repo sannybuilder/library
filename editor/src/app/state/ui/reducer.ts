@@ -115,7 +115,10 @@ const _reducer = createReducer(
   on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => ({
     ...state,
     viewMode,
-    enumToDisplayOrEdit: enumToEdit,
+    enumToDisplayOrEdit:
+      enumToEdit.name === 'new'
+        ? { name: '', fields: enumToEdit.fields }
+        : enumToEdit,
   })),
   on(stopEditOrDisplay, (state) => ({
     ...state,
@@ -124,6 +127,7 @@ const _reducer = createReducer(
     snippetToDisplayOrEdit: undefined,
     classToDisplay: undefined,
     enumToDisplayOrEdit: undefined,
+    enumOnLoad: undefined,
     viewMode: ViewMode.None,
   })),
   on(onListEnter, (state, { opcode, extension, enumName }) => ({

@@ -126,11 +126,12 @@ import { EnumEditorComponent } from './components/enum-editor/enum-editor.compon
               path: '**',
               canActivate: [RouteGuard],
               component: LibraryPageComponent,
+              runGuardsAndResolvers: 'always',
             },
           ],
         },
       ],
-      { useHash: false }
+      { useHash: false, onSameUrlNavigation: 'reload' }
     ),
     StoreModule.forRoot({
       auth: authReducer,

@@ -14,14 +14,23 @@
             'col-xl-8': viewMode === ViewMode.None
           }"
         >
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                {{ game | gameTitle }}
-              </li>
-            </ol>
-          </nav>
+          <div class="d-flex flex-row align-items-center mb-3">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  {{ game | gameTitle }}
+                </li>
+              </ol>
+            </nav>
+            <a
+              *ngIf="canEdit$ | async"
+              class="btn btn-outline-secondary ml-auto"
+              [routerLink]="['/', game, 'enums', 'new']"
+              >New Enum</a
+            >
+          </div>
+
           <scl-command-list
             [game]="game"
             [canEdit]="canEdit$ | async"

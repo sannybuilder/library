@@ -7,9 +7,14 @@
       <span class="input-group-text">Name</span>
       <input
         type="text"
-        [(ngModel)]="enumToEdit.name"
+        [ngModel]="enumToEdit.name"
+        (ngModelChange)="onEnumNameChange($event)"
         class="form-control"
         placeholder="Enter enum name"
+        autofocus
+        [ngClass]="{
+          'is-invalid': !enumToEdit.name
+        }"
       />
     </div>
   </div>
@@ -43,7 +48,11 @@
           type="text"
           class="form-control"
           placeholder="Enter field name"
-          [(ngModel)]="field[0]"
+          [ngModel]="field[0]"
+          (ngModelChange)="onFieldNameChange($event, field)"
+          [ngClass]="{
+            'is-invalid': isFieldNameDuplicate(field[0]) || !field[0]
+          }"
         />
       </div>
     </div>
@@ -51,7 +60,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="Enter field value (optional)"
+        [placeholder]="evaluateValue(i)"
         [(ngModel)]="field[1]"
       />
     </div>
@@ -78,5 +87,11 @@
         />
       </svg>
     </button>
+  </div>
+</div>
+
+<div class="alert alert-danger mt-3" *ngIf="errorMessages.length">
+  <div *ngFor="let message of errorMessages">
+    {{ message }}
   </div>
 </div>

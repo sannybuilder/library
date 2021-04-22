@@ -77,8 +77,8 @@ AddForCoord,018A,0,0,("x%f" "y%f" "z%f" "handle: Blip")
 AddForCoordOld,0167,0,0,("x%f" "y%f" "z%f" "color%i" "display%i" "handle: Blip")
 AddForObject,0188,0,0,("object: Object" "handle: Blip")
 AddForPickup,03DC,0,0,("pickup: Pickup" "handle: Blip")
-AddShortRangeSpriteForContactPoint,0570,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5: Blip")
-AddShortRangeSpriteForCoord,04CE,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5: Blip")
+AddShortRangeSpriteForContactPoint,0570,0,0,("x%f" "y%f" "z%f" "sprite%i" "handle: Blip")
+AddShortRangeSpriteForCoord,04CE,0,0,("x%f" "y%f" "z%f" "sprite%i" "handle: Blip")
 AddSpriteForContactPoint,02A7,0,0,("x%f" "y%f" "z%f" "sprite%i" "handle: Blip")
 AddSpriteForCoord,02A8,0,0,("x%f" "y%f" "z%f" "sprite%i" "handle: Blip")
 ChangeColor,0165,0,0,("self: Blip" "color%i")
@@ -636,15 +636,15 @@ $END
 
 $Pickup
 $BEGIN
-Create,0213,0,0,("_p1%i" "_p2%i" "_p3%f" "_p4%f" "_p5%f" "_p6: Pickup")
+Create,0213,0,0,("modelId%i" "pickupType%i" "x%f" "y%f" "z%f" "handle: Pickup")
 CreateClothes,055B,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5: Pickup")
-CreateForsaleProperty,0518,0,0,("x%f" "y%f" "z%f" "price%i" "gxt%s" "handle: Pickup")
-CreateLockedProperty,0517,0,0,("x%f" "y%f" "z%f" "gxt%s" "handle: Pickup")
+CreateForsaleProperty,0518,0,0,("x%f" "y%f" "z%f" "price%i" "message: gxt_key" "handle: Pickup")
+CreateLockedProperty,0517,0,0,("x%f" "y%f" "z%f" "message: gxt_key" "handle: Pickup")
 CreateMoney,02E1,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5: Pickup")
 CreateProtection,04A6,0,0,("x%f" "y%f" "z%f" "_p4%i" "_p5%i" "handle: Pickup")
 CreateWithAmmo,032B,0,0,("modelId%i" "pickupType%i" "ammo%i" "x%f" "y%f" "z%f" "handle: Pickup")
 HasBeenCollected,0214,1,0,("self: Pickup")
-Remove,0215,0,0,("_p1%i")
+Remove,0215,0,0,("self: Pickup")
 $END
 
 $Plane
@@ -854,7 +854,7 @@ $END
 
 $Sphere
 $BEGIN
-Create,03BC,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5: Sphere")
+Create,03BC,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: Sphere")
 Draw,03A1,0,0,("x%f" "y%f" "z%f" "radius%f")
 Remove,03BD,0,0,("self: Sphere")
 $END
@@ -998,7 +998,7 @@ CreateRandomCarForCarPark,03C5,0,0,("x%f" "y%f" "z%f" "heading%f")
 CreateScriptRoadblock,04C0,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 CreateSwatRope,0503,0,0,("_p1%f" "_p2%f" "_p3%f")
 ForceRandomPedType,03DF,0,0,("_p1%i")
-GetDeadCharPickupCoords,04A5,0,0,("handle: Char" "x%f" "y%f" "z%f")
+GetDeadCharPickupCoords,04A5,0,0,("char: Char" "x%f" "y%f" "z%f")
 GetDistanceBetweenCoords2D,0509,0,0,("fromX%f" "fromY%f" "toX%f" "toZ%f" "distance%f")
 GetDistanceBetweenCoords3D,050A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "distance%f")
 GetGroundZFor3DCoord,02CE,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f")

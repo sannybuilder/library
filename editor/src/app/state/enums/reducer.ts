@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Enums, Game } from '../../models';
 import { loadEnumsSuccess, updateGameEnum } from './actions';
-import { fromPairs } from 'lodash';
+import { fromPairs, mapValues } from 'lodash';
 
 export interface EnumsState {
   enums: Partial<Record<Game, Enums>>;
@@ -17,12 +17,21 @@ const _reducer = createReducer(
     updateState(state, game, enums)
   ),
   on(updateGameEnum, (state, { enumToEdit, oldEnumToEdit, game }) => {
-    return updateState(state, game, {
-      [oldEnumToEdit.name]: undefined,
+    const newState = {
       [enumToEdit.name]: enumToEdit.fields?.length
-        ? fromPairs(enumToEdit.fields)
+        ? transformEnum(fromPairs(enumToEdit.fields))
         : undefined,
-    });
+    };
+    return updateState(
+      state,
+      game,
+      oldEnumToEdit.name
+        ? {
+            [oldEnumToEdit.name]: undefined,
+            ...newState,
+          }
+        : newState
+    );
   })
 );
 
@@ -38,6 +47,17 @@ function updateState(
       [game]: { ...(state.enums[game] ?? {}), ...newState },
     },
   };
+}
+
+function transformEnum(enumToEdit: Record<string, string | number | null>) {
+  return mapValues(enumToEdit, (v) => {
+    if (v == null || v === '') {
+      return null;
+    }
+
+    const matches = /^"(.*)"$/.exec(v.toString());
+    return matches ? matches[1] : v;
+  });
 }
 
 export function enumsReducer(state: EnumsState, action: Action) {

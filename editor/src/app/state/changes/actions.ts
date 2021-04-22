@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Extension } from '../../models';
+import { Enums, Extension } from '../../models';
 
 export const registerExtensionsChange = createAction(
   'register extensions change',
@@ -9,6 +9,11 @@ export const registerExtensionsChange = createAction(
 export const registerSnippetChange = createAction(
   'register snippet change',
   props<{ fileName: string; content: string }>()
+);
+
+export const registerEnumChange = createAction(
+  'register enum change',
+  props<{ fileName: string; content: Enums }>()
 );
 
 export const clearChanges = createAction('clear changes');

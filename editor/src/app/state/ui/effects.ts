@@ -36,6 +36,7 @@ import { ChangesFacade } from '../changes/facade';
 import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
+import { capitalizeFirst } from 'src/app/utils';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -64,13 +65,14 @@ export class UiEffects {
     combineLatest([this._enums.enums$, this._ui.enumOnLoad$]).pipe(
       filter(([enums, enumName]) => !!enums && !!enumName),
       map(([enums, enumName]) => {
+        const name = capitalizeFirst(enumName);
         const enumToEdit: EnumRaw = {
-          name: enumName,
-          fields: Object.entries(enums?.[enumName] ?? []),
+          name,
+          fields: Object.entries(enums?.[name] ?? []),
         };
         return displayOrEditEnum({
           enumToEdit,
-          viewMode: enums?.[enumName] ? ViewMode.ViewEnum : ViewMode.EditEnum,
+          viewMode: enums?.[name] ? ViewMode.ViewEnum : ViewMode.EditEnum,
         });
       })
     )

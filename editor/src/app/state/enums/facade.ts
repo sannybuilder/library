@@ -15,6 +15,10 @@ export class EnumsFacade {
     return this.store$.dispatch(loadEnums({ game }));
   }
 
+  getGameEnums(game: Game) {
+    return this.store$.select(selector.gameEnums, { game });
+  }
+
   getEnumFields(enumName: string) {
     return this.store$.select(selector.enumFields, {
       enumName,

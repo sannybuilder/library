@@ -11,13 +11,13 @@ import {
 } from 'rxjs/operators';
 
 import { reloadPage, submitChanges, submitChangesSuccess } from './actions';
-import { ChangesFacade } from '../changes/facade';
+import { ChangesFacade } from './facade';
 import { Config, CONFIG } from '../../config';
 
 @Injectable({ providedIn: 'root' })
 export class ChangesEffects {
   submitChanges$ = createEffect(() =>
-    this.actions$.pipe(
+    this._actions$.pipe(
       ofType(submitChanges),
       withLatestFrom(this._facade.changes$),
       distinctUntilChanged((a, b) => a[1] === b[1]),
@@ -49,7 +49,7 @@ export class ChangesEffects {
 
   reloadPage$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this._actions$.pipe(
         ofType(reloadPage),
         tap(() => {
           // reloading page to ensure we pull the latest files
@@ -60,7 +60,7 @@ export class ChangesEffects {
   );
 
   constructor(
-    private actions$: Actions,
+    private _actions$: Actions,
     private _facade: ChangesFacade,
     @Inject(CONFIG) private _config: Config
   ) {}

@@ -107,18 +107,30 @@ const _reducer = createReducer(
     viewMode,
     commandToDisplayOrEdit: command,
     extensionToDisplayOrEdit: extension,
+    opcodeOnLoad: undefined,
+    extensionOnLoad: undefined,
+    enumOnLoad: undefined,
   })),
   on(displayOrEditSnippet, (state, { snippet }) => ({
     ...state,
     snippetToDisplayOrEdit: snippet,
+    opcodeOnLoad: undefined,
+    extensionOnLoad: undefined,
+    enumOnLoad: undefined,
   })),
   on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => ({
     ...state,
     viewMode,
-    enumToDisplayOrEdit:
-      enumToEdit.name === 'new'
-        ? { name: '', fields: enumToEdit.fields }
-        : enumToEdit,
+    commandToDisplayOrEdit: undefined,
+    extensionToDisplayOrEdit: undefined,
+    snippetToDisplayOrEdit: undefined,
+    opcodeOnLoad: undefined,
+    extensionOnLoad: undefined,
+    enumOnLoad: undefined,
+    enumToDisplayOrEdit: {
+      name: enumToEdit.name === 'new' ? '' : enumToEdit.name,
+      fields: enumToEdit.fields,
+    },
   })),
   on(stopEditOrDisplay, (state) => ({
     ...state,
@@ -127,6 +139,8 @@ const _reducer = createReducer(
     snippetToDisplayOrEdit: undefined,
     classToDisplay: undefined,
     enumToDisplayOrEdit: undefined,
+    opcodeOnLoad: undefined,
+    extensionOnLoad: undefined,
     enumOnLoad: undefined,
     viewMode: ViewMode.None,
   })),

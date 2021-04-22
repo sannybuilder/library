@@ -104,7 +104,7 @@ export class EnumEditorComponent {
     this.updateErrors();
   }
 
-  onFieldNameChange(val: string, field: [string, string | number]) {
+  onFieldNameChange(val: string, field: [string, string | number | null]) {
     field[0] = val;
     this.updateErrors();
   }

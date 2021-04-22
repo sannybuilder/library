@@ -19,3 +19,8 @@ export const enumFields = createSelector(
   enums,
   (enums: Enums, props: { enumName: string }) => enums?.[props.enumName]
 );
+
+export const gameEnums = createSelector(
+  state,
+  (state: EnumsState, props: { game: Game }) => state.enums[props.game] ?? {}
+);

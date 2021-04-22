@@ -7,6 +7,7 @@ import { stripSourceAny, smash } from '../../utils';
 import {
   clearChanges,
   initializeGithub,
+  registerEnumChange,
   registerExtensionsChange,
   registerSnippetChange,
   submitChanges,
@@ -42,6 +43,11 @@ const _reducer = createReducer(
   on(registerSnippetChange, (state, { fileName, content }) => {
     const newMap = new Map(state.changes);
     newMap.set(fileName, content);
+    return { ...state, changes: newMap };
+  }),
+  on(registerEnumChange, (state, { fileName, content }) => {
+    const newMap = new Map(state.changes);
+    newMap.set(fileName, JSON.stringify(content, null, 2));
     return { ...state, changes: newMap };
   }),
   on(submitChanges, (state) => ({ ...state, isUpdating: true })),

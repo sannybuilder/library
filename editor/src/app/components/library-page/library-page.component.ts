@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   HostListener,
-  Inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -12,7 +11,6 @@ import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
-import { CONFIG, Config } from '../../config';
 import {
   Command,
   Enum,
@@ -23,7 +21,6 @@ import {
   ViewMode,
 } from '../../models';
 import {
-  AuthFacade,
   ExtensionsFacade,
   SnippetsFacade,
   UiFacade,
@@ -64,13 +61,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private _extensions: ExtensionsFacade,
-    private _auth: AuthFacade,
+
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
-    private ref: ChangeDetectorRef,
-    @Inject(CONFIG) private _config: Config
+    private ref: ChangeDetectorRef
   ) {}
 
   ngOnInit() {

@@ -190,7 +190,7 @@ Locate2D,01AD,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 Locate3D,01AF,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%i")
 LocateStopped2D,01AE,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 LocateStopped3D,01B0,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%i")
-LockDoors,020A,0,0,("_p1%i" "_p2%i")
+LockDoors,020A,0,0,("self: Car" "lockStatus%i")
 MakeABitStronger,044F,0,0,("_p1%i" "_p2%i")
 MarkAsNoLongerNeeded,01C3,0,0,("_p1%i")
 RemoveUpsidedownCheck,0191,0,0,("_p1%i")
@@ -431,12 +431,12 @@ $END
 
 $Clock
 $BEGIN
-GetGameTimer,01BD,0,0,("_p1%i")
-GetMinutesToTimeOfDay,00C1,0,0,("_p1%i" "_p2%i" "_p3%i")
-GetTimeOfDay,00BF,0,0,("hour%i" "minute%i")
+GetGameTimer,01BD,0,0,("timeInMs%i")
+GetMinutesToTimeOfDay,00C1,0,0,("hours%i" "minutes%i" "time%i")
+GetTimeOfDay,00BF,0,0,("hours%i" "minutes%i")
 Restore,0254,0,0,()
-SetTimeOfDay,00C0,0,0,("_p1%i" "_p2%i")
-SetTimeScale,015D,0,0,("_p1%f")
+SetTimeOfDay,00C0,0,0,("hours%i" "minutes%i")
+SetTimeScale,015D,0,0,("scale%f")
 Store,0253,0,0,()
 $END
 
@@ -460,7 +460,7 @@ $END
 $Cutscene
 $BEGIN
 Clear,02EA,0,0,()
-GetTime,02E8,0,0,("_p1%i")
+GetTime,02E8,0,0,("time%i")
 HasFinished,02E9,1,0,()
 Load,02E4,0,0,("_p1%s")
 SetOffset,0244,0,0,("_p1%f" "_p2%f" "_p3%f")
@@ -857,7 +857,7 @@ DisplayTimerWithString,03C3,0,0,("_p1%i" "_p2%s")
 DrawRect,038E,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i" "_p7%i" "_p8%i")
 DrawSprite,038D,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i" "_p7%i" "_p8%i" "_p9%i")
 FlashHudObject,03E7,0,0,("_p1%i")
-FreezeTimer,0396,0,0,("_p1%i")
+FreezeTimer,0396,0,0,("state%b")
 LoadSplash,044D,0,0,("_p1%s")
 SetSpritesDrawBeforeFade,03E3,0,0,("_p1%i")
 SwitchWidescreen,02A3,0,0,("state%b")

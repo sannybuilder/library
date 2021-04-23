@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619183396926
+    "last_update": 1619196858454
   },
   "extensions": [
     {
@@ -3603,12 +3603,12 @@
         {
           "output": [
             {
-              "name": "hour",
+              "name": "hours",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "minute",
+              "name": "minutes",
               "type": "int",
               "source": "var_any"
             }
@@ -3624,52 +3624,52 @@
           "short_desc": "Returns the amount of hours and minutes passed since midnight"
         },
         {
+          "input": [
+            {
+              "name": "hours",
+              "type": "int"
+            },
+            {
+              "name": "minutes",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Clock",
           "id": "00C0",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "SetTimeOfDay",
           "name": "SET_TIME_OF_DAY",
           "num_params": 2,
           "short_desc": "Sets the current in-game time to the time specified in the two parameters"
         },
         {
+          "input": [
+            {
+              "name": "hours",
+              "type": "int"
+            },
+            {
+              "name": "minutes",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "time",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Clock",
           "id": "00C1",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "GetMinutesToTimeOfDay",
           "name": "GET_MINUTES_TO_TIME_OF_DAY",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p3",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Returns the amount of minutes left until the clock matches the time specified"
         },
         {
@@ -7013,17 +7013,17 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "scale",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Clock",
           "id": "015D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            }
-          ],
           "member": "SetTimeScale",
           "name": "SET_TIME_SCALE",
           "num_params": 1,
@@ -9569,6 +9569,13 @@
           "short_desc": "Puts the specified object at the specified coordinates"
         },
         {
+          "output": [
+            {
+              "name": "timeInMs",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -9577,13 +9584,6 @@
           "member": "GetGameTimer",
           "name": "GET_GAME_TIMER",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Returns the time passed in milleseconds since the game started"
         },
         {
@@ -11279,18 +11279,18 @@
           "short_desc": "Generates a random integer between the ranges specified"
         },
         {
-          "class": "Car",
-          "id": "020A",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "lockStatus",
               "type": "int"
             }
           ],
+          "class": "Car",
+          "id": "020A",
           "member": "LockDoors",
           "name": "LOCK_CAR_DOORS",
           "num_params": 2,
@@ -15454,6 +15454,13 @@
           "short_desc": "Begins the loaded cutscene"
         },
         {
+          "output": [
+            {
+              "name": "time",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -15462,13 +15469,6 @@
           "member": "GetTime",
           "name": "GET_CUTSCENE_TIME",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": ""
         },
         {
@@ -19434,17 +19434,17 @@
           "short_desc": "Clears an area at the specified coordinates, removing all vehicles and pedestrians"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Screen",
           "id": "0396",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "FreezeTimer",
           "name": "FREEZE_ONSCREEN_TIMER",
           "num_params": 1,

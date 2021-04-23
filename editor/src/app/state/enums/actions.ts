@@ -17,7 +17,7 @@ export const updateEnum = createAction(
 );
 
 export const updateGameEnum = createAction(
-  '[extensions] update enum for the given game',
+  '[enums] update enum for the given game',
   props<{
     game: Game;
     enumToEdit: EnumRaw;

@@ -26,6 +26,7 @@ import {
   startWith,
   groupBy,
   mergeMap,
+  take,
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
 import { EnumRaw, Extension, Game, ViewMode } from '../../models';
@@ -41,40 +42,52 @@ import { capitalizeFirst } from 'src/app/utils';
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
   viewOpcodeOnLoad$ = createEffect(() =>
-    combineLatest([this._extensions.extensions$, this._ui.opcodeOnLoad$]).pipe(
-      filter(([extensions, opcode]) => !!extensions && !!opcode),
-      map(([extensions, { opcode, extension }]) => {
-        const command = extensions
-          .find((e) => e.name === extension)
-          ?.commands.find(({ id }) => id === opcode);
+    this._actions$.pipe(
+      ofType(onListEnter),
+      filter(({ enumName }) => !enumName),
+      switchMap(({ opcode, extension }) =>
+        this._extensions.extensions$.pipe(
+          take(1),
+          map((extensions) => {
+            const command = extensions
+              .find((e) => e.name === extension)
+              ?.commands.find(({ id }) => id === opcode);
 
-        if (command) {
-          return displayOrEditCommandInfo({
-            command,
-            extension,
-            viewMode: ViewMode.ViewCommand,
-          });
-        } else {
-          return stopEditOrDisplay();
-        }
-      })
+            if (command) {
+              return displayOrEditCommandInfo({
+                command,
+                extension,
+                viewMode: ViewMode.ViewCommand,
+              });
+            } else {
+              return stopEditOrDisplay();
+            }
+          })
+        )
+      )
     )
   );
 
   viewEnumOnLoad$ = createEffect(() =>
-    combineLatest([this._enums.enums$, this._ui.enumOnLoad$]).pipe(
-      filter(([enums, enumName]) => !!enums && !!enumName),
-      map(([enums, enumName]) => {
-        const name = capitalizeFirst(enumName);
-        const enumToEdit: EnumRaw = {
-          name,
-          fields: Object.entries(enums?.[name] ?? []),
-        };
-        return displayOrEditEnum({
-          enumToEdit,
-          viewMode: enums?.[name] ? ViewMode.ViewEnum : ViewMode.EditEnum,
-        });
-      })
+    this._actions$.pipe(
+      ofType(onListEnter),
+      filter(({ enumName }) => !!enumName),
+      switchMap(({ enumName }) =>
+        this._enums.enums$.pipe(
+          take(1),
+          map((enums) => {
+            const name = capitalizeFirst(enumName);
+            const enumToEdit: EnumRaw = {
+              name,
+              fields: Object.entries(enums?.[name] ?? []),
+            };
+            return displayOrEditEnum({
+              enumToEdit,
+              viewMode: enums?.[name] ? ViewMode.ViewEnum : ViewMode.EditEnum,
+            });
+          })
+        )
+      )
     )
   );
 

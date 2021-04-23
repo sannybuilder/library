@@ -10,7 +10,7 @@ export const environment: Config = {
     shouldBeAuthorizedToEdit: false,
   },
   endpoints: {
-    base: 'https://raw.githubusercontent.com/sannybuilder/library/master',
+    base: '/assets',
     oauth: 'https://github.com/login/oauth/authorize',
     user: 'https://api.github.com/user',
     contents: 'https://api.github.com/repos/sannybuilder/library/contents',

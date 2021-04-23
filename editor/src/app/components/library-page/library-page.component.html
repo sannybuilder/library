@@ -139,11 +139,11 @@
         (view)="onView($event.command, $event.extension)"
       ></scl-class-overview>
       <scl-enum-overview
-        *ngIf="viewMode === ViewMode.ViewEnum"
+        *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"
         [enumToView]="enumToDisplayOrEdit"
       ></scl-enum-overview>
       <scl-enum-editor
-        *ngIf="viewMode === ViewMode.EditEnum"
+        *ngIf="viewMode === ViewMode.EditEnum && enumToDisplayOrEdit"
         [enumToEdit]="enumToDisplayOrEdit"
         (hasError)="editorHasError = $event"
       ></scl-enum-editor>

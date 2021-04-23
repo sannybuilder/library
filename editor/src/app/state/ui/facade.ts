@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Config, CONFIG } from '../../config';
 import {
   Attribute,
@@ -48,15 +48,7 @@ export class UiFacade {
   viewMode$ = this.store$.select(selector.viewMode);
   snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
   rows$ = this.store$.select(selector.rows);
-  opcodeOnLoad$ = this.store$.select(selector.opcodeOnLoad).pipe(
-    distinctUntilChanged(
-      (a, b) => a.opcode === b.opcode && a.extension === b.extension
-    ),
-    filter((a) => !!a.extension && !!a.opcode)
-  );
-  enumOnLoad$ = this.store$
-    .select(selector.enumOnLoad)
-    .pipe(distinctUntilChanged());
+
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
 

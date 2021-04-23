@@ -98,16 +98,6 @@ export const snippetToDisplayOrEdit = createSelector(
   (state: UiState) => state.snippetToDisplayOrEdit
 );
 
-export const opcodeOnLoad = createSelector(state, (state: UiState) => ({
-  opcode: state.opcodeOnLoad,
-  extension: state.extensionOnLoad,
-}));
-
-export const enumOnLoad = createSelector(
-  state,
-  (state: UiState) => state.enumOnLoad
-);
-
 export const currentPage = createSelector(
   state,
   (state: UiState) => state.currentPage

@@ -34,9 +34,6 @@ export interface UiState {
   snippetToDisplayOrEdit?: string;
   enumToDisplayOrEdit?: EnumRaw;
   viewMode: ViewMode;
-  opcodeOnLoad?: string;
-  extensionOnLoad?: string;
-  enumOnLoad?: string;
   currentPage: number | 'all';
   games: Record<Game, GameState>;
   classToDisplay?: string;
@@ -107,16 +104,10 @@ const _reducer = createReducer(
     viewMode,
     commandToDisplayOrEdit: command,
     extensionToDisplayOrEdit: extension,
-    opcodeOnLoad: undefined,
-    extensionOnLoad: undefined,
-    enumOnLoad: undefined,
   })),
   on(displayOrEditSnippet, (state, { snippet }) => ({
     ...state,
     snippetToDisplayOrEdit: snippet,
-    opcodeOnLoad: undefined,
-    extensionOnLoad: undefined,
-    enumOnLoad: undefined,
   })),
   on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => ({
     ...state,
@@ -124,9 +115,6 @@ const _reducer = createReducer(
     commandToDisplayOrEdit: undefined,
     extensionToDisplayOrEdit: undefined,
     snippetToDisplayOrEdit: undefined,
-    opcodeOnLoad: undefined,
-    extensionOnLoad: undefined,
-    enumOnLoad: undefined,
     enumToDisplayOrEdit: {
       name: enumToEdit.name.toLowerCase() === 'new' ? '' : enumToEdit.name,
       fields: enumToEdit.fields,
@@ -139,16 +127,7 @@ const _reducer = createReducer(
     snippetToDisplayOrEdit: undefined,
     classToDisplay: undefined,
     enumToDisplayOrEdit: undefined,
-    opcodeOnLoad: undefined,
-    extensionOnLoad: undefined,
-    enumOnLoad: undefined,
     viewMode: ViewMode.None,
-  })),
-  on(onListEnter, (state, { opcode, extension, enumName }) => ({
-    ...state,
-    opcodeOnLoad: opcode,
-    extensionOnLoad: extension,
-    enumOnLoad: enumName,
   })),
   on(changePage, (state, { index: currentPage }) => ({
     ...state,

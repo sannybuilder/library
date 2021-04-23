@@ -5,6 +5,7 @@ import {
   SourceType,
   SupportLevel,
   GameSupportInfo,
+  Command,
 } from '../models';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
@@ -38,4 +39,25 @@ export function getSameCommands(
       : [];
 
   return [curr, ...others];
+}
+
+export function commandParams(command: Command) {
+  const input = command?.input ?? [];
+  const output = command?.output ?? [];
+  return [...input, ...output];
+}
+
+export function replaceType(
+  params: Param[] | undefined,
+  oldType: string,
+  newType: string
+) {
+  if (!params) {
+    return params;
+  }
+
+  return params.map((p) => ({
+    ...p,
+    type: p.type === oldType ? newType : p.type,
+  }));
 }

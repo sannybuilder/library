@@ -8,8 +8,9 @@ import {
   concatMap,
   take,
   map,
+  filter,
 } from 'rxjs/operators';
-import { isEqual } from 'lodash';
+import { flatMap, isEqual } from 'lodash';
 
 import {
   loadExtensions,
@@ -21,9 +22,15 @@ import { ExtensionsService } from './service';
 import { ExtensionsFacade } from './facade';
 import { ChangesFacade } from '../changes/facade';
 import { GameLibrary, GameSupportInfo } from '../../models';
-import { getSameCommands, isAnyAttributeInvalid } from '../../utils';
+import {
+  commandParams,
+  getSameCommands,
+  isAnyAttributeInvalid,
+  replaceType,
+} from '../../utils';
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
+import { updateEnum, updateGameEnum } from '../enums/actions';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -83,6 +90,42 @@ export class ExtensionsEffects {
         )
       ),
     { dispatch: false }
+  );
+
+  renamedEnum$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updateEnum),
+      filter<ReturnType<typeof updateGameEnum>>(
+        ({ enumToEdit, oldEnumToEdit }) =>
+          enumToEdit.name !== oldEnumToEdit.name
+      ),
+      withLatestFrom(this._extensions.extensions$),
+      switchMap(([{ enumToEdit, oldEnumToEdit }, extensions]) => {
+        const oldEnumName = oldEnumToEdit.name;
+        const newEnumName = enumToEdit.name;
+        const affectedCommands = flatMap(extensions, (extension) =>
+          extension.commands
+            .filter((c) => commandParams(c).some((p) => p.type === oldEnumName))
+            .map((c) => ({
+              extension: extension.name,
+              command: {
+                ...c,
+                input: replaceType(c.input, oldEnumName, newEnumName),
+                output: replaceType(c.output, oldEnumName, newEnumName),
+              },
+            }))
+        );
+
+        // todo: rename enum in another game if it has been affected
+        return affectedCommands.map(({ extension, command }) =>
+          updateCommand({
+            command,
+            oldExtension: extension,
+            newExtension: extension,
+          })
+        );
+      })
+    )
   );
 
   validateExtensions$ = createEffect(

@@ -52,7 +52,7 @@ export class RouteGuard implements CanActivate {
           const enumName = segments.shift();
 
           // editing by anonymous user is not allowed
-          if (enumName === 'new' && !canEdit) {
+          if (enumName?.toLowerCase() === 'new' && !canEdit) {
             return this.goGame(game);
           }
           this._game.onListEnter({

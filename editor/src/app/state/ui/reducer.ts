@@ -128,7 +128,7 @@ const _reducer = createReducer(
     extensionOnLoad: undefined,
     enumOnLoad: undefined,
     enumToDisplayOrEdit: {
-      name: enumToEdit.name === 'new' ? '' : enumToEdit.name,
+      name: enumToEdit.name.toLowerCase() === 'new' ? '' : enumToEdit.name,
       fields: enumToEdit.fields,
     },
   })),

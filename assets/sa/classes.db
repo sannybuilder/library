@@ -567,13 +567,15 @@ $END
 
 $Garage
 $BEGIN
-ChangeType,02FA,0,0,("_p1%i" "_p2%i")
-Close,0361,0,0,("_p1%i")
-IsClosed,03B1,1,0,("_p1%i")
-IsOpen,03B0,1,0,("_p1%i")
-Open,0360,0,0,("_p1%i")
+Activate,0299,0,0,("self: Garage")
+ChangeType,02FA,0,0,("self: Garage" "type%i")
+Close,0361,0,0,("self: Garage")
+Deactivate,02B9,0,0,("self: Garage")
+IsClosed,03B1,1,0,("self: Garage")
+IsOpen,03B0,1,0,("self: Garage")
+Open,0360,0,0,("self: Garage")
 SetResprayFree,093A,0,0,("garageId%s" "state%b")
-SetTargetCar,021B,0,0,("_p1%i" "_p2%i")
+SetTargetCar,021B,0,0,("self: Garage" "vehicle: Car")
 $END
 
 $Group

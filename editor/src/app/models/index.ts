@@ -100,10 +100,16 @@ export const GameIcon: Record<Game, string> = {
   [Game.SA]: 'assets/sa.png',
 };
 
-export const GameClasses: Record<Game, string> = {
+export const GameClassesAssets: Record<Game, string> = {
   [Game.GTA3]: 'assets/gta3/classes.db',
   [Game.VC]: 'assets/vc/classes.db',
   [Game.SA]: 'assets/sa/classes.db',
+};
+
+export const GameEnumsAssets: Record<Game, string> = {
+  [Game.GTA3]: 'assets/gta3/enums.txt',
+  [Game.VC]: 'assets/vc/enums.txt',
+  [Game.SA]: 'assets/sa/enums.txt',
 };
 
 export const GameLibrary: Record<Game, string> = {

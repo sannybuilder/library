@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Game, GameClasses } from '../../models';
+import { Game, GameClassesAssets, GameEnumsAssets } from '../../models';
 
 @Component({
   selector: 'scl-download-panel',
@@ -11,6 +11,10 @@ export class DownloadPanelComponent {
   @Input() game: Game;
 
   getClasses(game: Game) {
-    return GameClasses[game];
+    return GameClassesAssets[game];
+  }
+
+  getEnums(game: Game) {
+    return GameEnumsAssets[game];
   }
 }

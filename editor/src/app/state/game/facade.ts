@@ -20,13 +20,17 @@ export class GameFacade {
     opcode,
     extension,
     enumName,
+    className,
   }: {
     game: Game;
     extension: string;
     opcode?: string;
     enumName?: string;
+    className?: string;
   }) {
-    this.store$.dispatch(onListEnter({ game, opcode, extension, enumName }));
+    this.store$.dispatch(
+      onListEnter({ game, opcode, extension, enumName, className })
+    );
   }
 
   getCommandSupportInfo(command: Command, extension: string) {

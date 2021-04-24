@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { combineLatest, merge } from 'rxjs';
 import {
   changePage,
+  displayClassOverview,
   displayOrEditCommandInfo,
   displayOrEditEnum,
   displayOrEditSnippet,
@@ -29,7 +30,14 @@ import {
   first,
 } from 'rxjs/operators';
 import { UiFacade } from './facade';
-import { EnumRaw, Enums, Extension, Game, ViewMode } from '../../models';
+import {
+  Entity,
+  EnumRaw,
+  Enums,
+  Extension,
+  Game,
+  ViewMode,
+} from '../../models';
 import { SnippetsFacade } from '../snippets/facade';
 import { ExtensionsFacade } from '../extensions/facade';
 import { ChangesFacade } from '../changes/facade';
@@ -43,7 +51,7 @@ export class UiEffects {
   viewOnLoad$ = createEffect(() =>
     this._actions$.pipe(
       ofType(onListEnter),
-      switchMap(({ opcode, extension, enumName }) => {
+      switchMap(({ opcode, extension, enumName, className }) => {
         if (enumName) {
           return this._enums.enums$.pipe(
             first<Enums>(Boolean),
@@ -57,6 +65,19 @@ export class UiEffects {
                 enumToEdit,
                 viewMode: enums?.[name] ? ViewMode.ViewEnum : ViewMode.EditEnum,
               });
+            })
+          );
+        }
+
+        if (className) {
+          return this._extensions.getExtensionEntities(extension).pipe(
+            first<Entity[]>(Boolean),
+            map((entities) => {
+              if (entities.some((e) => e.name === className)) {
+                return displayClassOverview({ className });
+              } else {
+                return stopEditOrDisplay();
+              }
             })
           );
         }

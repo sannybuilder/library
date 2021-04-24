@@ -126,11 +126,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  onView(command: Command, extension: string) {
-    this._ui.displayCommandInfo(command, extension);
-    return false;
-  }
-
   onEditCommand(command: Command, extension: string) {
     this._ui.editCommandInfo(command, extension);
   }
@@ -181,10 +176,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCommandSupportInfo(command: Command, extension: string) {
     return this._game.getCommandSupportInfo(command, extension);
-  }
-
-  onClassOverview(className: string) {
-    this._ui.displayClassOverview(className);
   }
 
   getEnum(enumName: string) {

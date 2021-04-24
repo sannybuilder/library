@@ -47,8 +47,16 @@ export class RouteGuard implements CanActivate {
           return this.goHome();
         }
 
-        const extensionOrEnum = segments.shift();
-        if (extensionOrEnum === 'enums') {
+        const subPath = segments.shift();
+        if (subPath === 'classes') {
+          const className = segments.shift();
+
+          this._game.onListEnter({
+            game,
+            className,
+            extension: DEFAULT_EXTENSION,
+          });
+        } else if (subPath === 'enums') {
           const enumName = segments.shift();
 
           // editing by anonymous user is not allowed
@@ -61,7 +69,7 @@ export class RouteGuard implements CanActivate {
             extension: DEFAULT_EXTENSION,
           });
         } else {
-          const extension = extensionOrEnum || DEFAULT_EXTENSION;
+          const extension = subPath || DEFAULT_EXTENSION;
           const opcode = segments.shift();
           this._game.onListEnter({
             game,

@@ -39,9 +39,7 @@
               screenSize >= 1200 &&
               screenSize < 1700
             "
-            (view)="onView($event.command, $event.extension)"
             (edit)="onEditCommand($event.command, $event.extension)"
-            (classOverview)="onClassOverview($event)"
           ></scl-command-list>
         </main>
 
@@ -129,14 +127,13 @@
         [enumNames]="enumNames$ | async"
         [snippet]="getSnippet(extension, command.id) | async"
         [supportInfo]="getCommandSupportInfo(command, extension) | async"
-        (classOverview)="onClassOverview($event)"
       >
       </scl-command-info>
       <scl-class-overview
         *ngIf="viewMode === ViewMode.ViewClass"
+        [game]="game"
         [className]="classToDisplay$ | async"
         [classCommands]="classCommands$ | async"
-        (view)="onView($event.command, $event.extension)"
       ></scl-class-overview>
       <scl-enum-overview
         *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"

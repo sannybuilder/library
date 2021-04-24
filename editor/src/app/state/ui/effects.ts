@@ -57,13 +57,15 @@ export class UiEffects {
             first<Enums>(Boolean),
             map((enums) => {
               const name = capitalizeFirst(enumName);
+              const isNew = !enums?.[name];
               const enumToEdit: EnumRaw = {
                 name,
+                isNew,
                 fields: Object.entries(enums?.[name] ?? []),
               };
               return displayOrEditEnum({
                 enumToEdit,
-                viewMode: enums?.[name] ? ViewMode.ViewEnum : ViewMode.EditEnum,
+                viewMode: isNew ? ViewMode.EditEnum : ViewMode.ViewEnum,
               });
             })
           );

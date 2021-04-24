@@ -85,6 +85,7 @@ export interface Enums {
 export interface EnumRaw {
   name: string;
   fields: Array<[string, string | number | null]>;
+  isNew: boolean;
 }
 
 export enum Game {

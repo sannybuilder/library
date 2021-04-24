@@ -135,7 +135,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onDeleteEnum() {
-    this.enumToDisplayOrEdit = { name: '', fields: [] };
+    this.enumToDisplayOrEdit = { name: '', fields: [], isNew: false };
     this._onSaveEnum();
   }
 

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Extension } from '../../models';
+import { Enums, Extension } from '../../models';
 import {
   clearChanges,
   initializeGithub,
   registerExtensionsChange,
   registerSnippetChange,
+  registerEnumChange,
   submitChanges,
 } from './actions';
 import * as selector from './selectors';
@@ -25,6 +26,10 @@ export class ChangesFacade {
 
   registerSnippetChange(fileName: string, content: string) {
     this.store$.dispatch(registerSnippetChange({ fileName, content }));
+  }
+
+  registerEnumChange(fileName: string, content: Enums) {
+    this.store$.dispatch(registerEnumChange({ fileName, content }));
   }
 
   clearChanges() {

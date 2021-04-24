@@ -2,16 +2,22 @@ import { createAction, props } from '@ngrx/store';
 import { Game, SupportInfo } from '../../models';
 
 export const onListEnter = createAction(
-  'on list enter',
-  props<{ game: Game; opcode: string; extension: string }>()
+  '[game] on list enter',
+  props<{
+    game: Game;
+    extension: string;
+    opcode?: string;
+    enumName?: string;
+    className?: string;
+  }>()
 );
 
 export const loadSupportInfo = createAction(
-  'load support info',
+  '[game] load support info',
   props<{ game: Game }>()
 );
 
 export const loadSupportInfoSuccess = createAction(
-  'load support info success',
+  '[game] load support info success',
   props<{ supportInfo: SupportInfo }>()
 );

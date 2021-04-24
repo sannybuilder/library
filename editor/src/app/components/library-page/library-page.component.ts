@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   HostListener,
-  Inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -11,16 +11,23 @@ import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit } from 'lodash';
 
-import { CONFIG, Config } from '../../config';
-import { Command, Game, ParamType, Primitive, ViewMode } from '../../models';
 import {
-  AuthFacade,
+  Command,
+  Enum,
+  EnumRaw,
+  Game,
+  ParamType,
+  Primitive,
+  ViewMode,
+} from '../../models';
+import {
   ExtensionsFacade,
   SnippetsFacade,
   UiFacade,
+  GameFacade,
+  EnumsFacade,
 } from '../../state';
 import { FUSEJS_OPTIONS } from '../../fusejs';
-import { GameFacade } from 'src/app/state/game/facade';
 
 @Component({
   selector: 'scl-library-page',
@@ -35,14 +42,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   extensionNames$ = this._extensions.extensionNames$;
   classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
-
   game$ = this._game.game$;
-  canEdit$ = this._auth.isAuthorized$.pipe(
-    map(
-      (isAuthorized) =>
-        !this._config.features.shouldBeAuthorizedToEdit || isAuthorized
-    )
-  );
+  canEdit$ = this._ui.canEdit$;
+  viewMode$ = this._ui.viewMode$;
+  enumNames$ = this._enums.enumNames$;
 
   command?: Command;
   oldCommand?: Command;
@@ -50,23 +53,27 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   oldSnippet?: string;
   extension?: string;
   oldExtension?: string;
+  enumToDisplayOrEdit?: EnumRaw;
+  oldEnumToEdit?: EnumRaw;
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
   editorHasError = false;
 
   constructor(
     private _extensions: ExtensionsFacade,
-    private _auth: AuthFacade,
+
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
     private _game: GameFacade,
-    @Inject(CONFIG) private _config: Config
+    private _enums: EnumsFacade,
+    private ref: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     [Game.GTA3, Game.VC, Game.SA].forEach((game) => {
       this._extensions.loadExtensions(game);
       this._snippets.loadSnippets(game);
+      this._enums.loadEnums(game);
     });
   }
 
@@ -83,50 +90,53 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
       this.snippet = snippet;
       this.oldSnippet = snippet;
+      this.ref.detectChanges();
     });
+
+    this._ui.enumToDisplayOrEdit$
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((enumToEdit) => {
+        this.enumToDisplayOrEdit = cloneDeep(enumToEdit);
+        this.oldEnumToEdit = cloneDeep(enumToEdit);
+        this.ref.detectChanges();
+      });
 
     combineLatest([
       this._ui.commandToDisplayOrEdit$,
       this._ui.extensionToDisplayOrEdit$,
-      this._ui.viewMode$,
     ])
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(([command, extension, viewMode]) => {
+      .subscribe(([command, extension]) => {
         this.command = command
           ? { input: [], output: [], ...cloneDeep(command) }
           : command;
         this.oldCommand = cloneDeep(this.command);
         this.oldExtension = extension;
         this.extension = extension;
-        this.viewMode = viewMode;
+        this.ref.detectChanges();
       });
   }
 
-  onSave() {
-    this._extensions.updateCommand({
-      newExtension: this.extension,
-      oldExtension: this.oldExtension,
-      command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
-    });
-    if (this.snippet !== this.oldSnippet) {
-      this._snippets.updateSnippet({
-        extension: this.extension,
-        command: this.command,
-        content: this.snippet,
-      });
+  onSave(viewMode: ViewMode) {
+    if (viewMode === ViewMode.EditCommand) {
+      this._onSaveCommand();
     }
-
-    this._ui.stopEditOrDisplay();
+    if (viewMode === ViewMode.EditEnum) {
+      this._onSaveEnum();
+    }
   }
 
-  onView(command: Command, extension: string) {
-    this._ui.displayCommandInfo(command, extension);
-    return false;
-  }
-
-  onEdit(command: Command, extension: string) {
+  onEditCommand(command: Command, extension: string) {
     this._ui.editCommandInfo(command, extension);
-    return false;
+  }
+
+  onEditEnum(enumToEdit: EnumRaw) {
+    this._ui.editEnum(enumToEdit);
+  }
+
+  onDeleteEnum() {
+    this.enumToDisplayOrEdit = { name: '', fields: [], isNew: false };
+    this._onSaveEnum();
   }
 
   onCancel() {
@@ -149,42 +159,18 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return combineLatest([
       this.getExtensionEntities(extension),
       this._game.primitiveTypes$,
+      this.enumNames$,
     ]).pipe(
-      map(([entities, primitiveTypes]) => {
+      map(([entities, primitiveTypes, enumNames]) => {
         const primitives: Primitive[] = primitiveTypes.map((name) => ({
           type: 'primitive',
           name,
         }));
-        return [...entities, ...primitives];
+
+        const enums: Enum[] = enumNames.map((name) => ({ name, type: 'enum' }));
+
+        return [...entities, ...primitives, ...enums];
       })
-    );
-  }
-
-  @HostListener('window:resize', [])
-  private detectScreenSize() {
-    this.screenSize = window.innerWidth;
-  }
-
-  shouldDisableSaveButton() {
-    return (
-      this.editorHasError ||
-      this.noChanges() ||
-      // class & member should be both empty or both filed
-      !!this.command?.class !== !!this.command.member
-    );
-  }
-
-  resetChanges() {
-    this.onEdit(this.oldCommand, this.oldExtension);
-    this.snippet = this.oldSnippet;
-    return false;
-  }
-
-  noChanges(): boolean {
-    return (
-      isEqual(this.command, this.oldCommand) &&
-      this.extension === this.oldExtension &&
-      this.snippet === this.oldSnippet
     );
   }
 
@@ -192,7 +178,77 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._game.getCommandSupportInfo(command, extension);
   }
 
-  onClassOverview(className: string) {
-    this._ui.displayClassOverview(className);
+  getEnum(enumName: string) {
+    return this._enums.getEnumFields(enumName);
+  }
+
+  @HostListener('window:resize', [])
+  private detectScreenSize() {
+    this.screenSize = window.innerWidth;
+  }
+
+  shouldDisableSaveButton(viewMode: ViewMode) {
+    if (this.editorHasError || this.noChanges(viewMode)) {
+      return true;
+    }
+    if (viewMode === ViewMode.EditCommand) {
+      // class & member should be both empty or both filed
+      return !!this.command?.class !== !!this.command.member;
+    }
+    if (viewMode === ViewMode.EditEnum) {
+      return false;
+    }
+
+    return true;
+  }
+
+  resetChanges(viewMode: ViewMode) {
+    if (viewMode === ViewMode.EditCommand) {
+      this.onEditCommand(this.oldCommand, this.oldExtension);
+      this.snippet = this.oldSnippet;
+    }
+    if (viewMode === ViewMode.EditEnum) {
+      this.onEditEnum(this.oldEnumToEdit);
+    }
+    return false;
+  }
+
+  noChanges(viewMode: ViewMode): boolean {
+    if (viewMode === ViewMode.EditCommand) {
+      return (
+        isEqual(this.command, this.oldCommand) &&
+        this.extension === this.oldExtension &&
+        this.snippet === this.oldSnippet
+      );
+    }
+    if (viewMode === ViewMode.EditEnum) {
+      return isEqual(this.enumToDisplayOrEdit, this.oldEnumToEdit);
+    }
+    return true;
+  }
+
+  private _onSaveCommand() {
+    this._extensions.updateCommand({
+      newExtension: this.extension,
+      oldExtension: this.oldExtension,
+      command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
+    });
+    if (this.snippet !== this.oldSnippet) {
+      this._snippets.updateSnippet({
+        extension: this.extension,
+        command: this.command,
+        content: this.snippet,
+      });
+    }
+
+    this._ui.stopEditOrDisplay();
+  }
+
+  private _onSaveEnum() {
+    this._enums.updateEnum({
+      enumToEdit: this.enumToDisplayOrEdit,
+      oldEnumToEdit: this.oldEnumToEdit,
+    });
+    this._ui.stopEditOrDisplay();
   }
 }

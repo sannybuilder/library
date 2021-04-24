@@ -7,7 +7,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { camelCase, capitalize, partition, trim, uniq } from 'lodash';
+import { camelCase, capitalize, trim, uniq } from 'lodash';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -21,13 +21,14 @@ import {
   CommandAttributes,
   Param,
   ParamType,
+  Primitive,
   PrimitiveType,
   SourceType,
   SupportInfo,
 } from '../../models';
 import { SelectorComponent } from '../selector/selector.component';
 import { isAnyAttributeInvalid } from '../../utils/validation';
-import { smash } from '../../utils';
+import { capitalizeFirst, smash } from '../../utils';
 
 type ErrorType =
   | 'duplicateName'
@@ -79,16 +80,35 @@ export class CommandEditorComponent implements OnInit {
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
 
   @Input() set types(val: ParamType[]) {
-    const [primitives, classes] = partition(val, (v) => v.type === 'primitive');
-    const dynamicClasses = classes.filter((v) => v.type === 'dynamic');
-    this.paramTypes = uniq([
-      ...primitives.map(({ name }) => `type ${name}`),
-      ...dynamicClasses.map(({ name }) => `class ${name}`),
-    ]);
-    this.primitives = primitives.map((p) => p.name) as PrimitiveType[];
-    this.classes = classes.map(
-      (v) => `${v.type === 'dynamic' ? 'class' : 'static'} ${v.name}`
+    const prefixes: Record<ParamType['type'], string> = {
+      primitive: 'type',
+      dynamic: 'class',
+      enum: 'enum',
+      static: 'static',
+    };
+    const {
+      primitive: primitives,
+      dynamic: dynamics,
+      enum: enums,
+      static: statics,
+    }: Record<ParamType['type'], string[]> = val.reduce(
+      (m, v) => {
+        m[v.type].push(`${prefixes[v.type]} ${v.name}`);
+        return m;
+      },
+      {
+        primitive: [],
+        dynamic: [],
+        enum: [],
+        static: [],
+      }
     );
+
+    this.paramTypes = uniq([...primitives, ...enums, ...dynamics]);
+    this.primitives = val
+      .filter((v): v is Primitive => v.type === 'primitive')
+      .map((p) => p.name);
+    this.classes = [...dynamics, ...statics];
   }
 
   readonly attrs: Attribute[] = CommandAttributes;
@@ -140,11 +160,11 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onClassChange(command: Command, value: string) {
-    command.class = this.capitalizeFirst(value);
+    command.class = capitalizeFirst(value);
   }
 
   onMemberChange(command: Command, value: string) {
-    command.member = this.capitalizeFirst(value);
+    command.member = capitalizeFirst(value);
   }
 
   onExtensionChange(val: string) {
@@ -371,12 +391,5 @@ export class CommandEditorComponent implements OnInit {
   private updateNoOutputParamsError() {
     this.errors.noConstructorWithoutOutputParams =
       this.command.attrs?.is_constructor && !this.command.output?.length;
-  }
-
-  private capitalizeFirst(value?: string) {
-    const camelized = camelCase(value);
-    return camelized.length > 1
-      ? camelized[0].toUpperCase() + camelized.substring(1)
-      : camelized;
   }
 }

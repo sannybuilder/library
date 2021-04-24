@@ -6,9 +6,13 @@ import {
   Output,
 } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { GameFacade } from 'src/app/state/game/facade';
 import { Command, Game } from '../../models';
-import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../state';
+import {
+  ExtensionsFacade,
+  SnippetsFacade,
+  UiFacade,
+  GameFacade,
+} from '../../state';
 
 @Component({
   selector: 'scl-command-list',
@@ -20,15 +24,10 @@ export class CommandListComponent {
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
-  @Output() view: EventEmitter<{
-    command: Command;
-    extension: string;
-  }> = new EventEmitter();
   @Output() edit: EventEmitter<{
     command: Command;
     extension: string;
   }> = new EventEmitter();
-  @Output() classOverview: EventEmitter<string> = new EventEmitter();
 
   loading$ = this._extensions.loading$;
   currentPage$ = this._ui.currentPage$;
@@ -47,11 +46,6 @@ export class CommandListComponent {
     return false;
   }
 
-  onView(command: Command, extension: string) {
-    this.view.emit({ command, extension });
-    return false;
-  }
-
   getSnippet(extension: string, opcode: string) {
     return this._snippets.getSnippet(extension, opcode);
   }
@@ -67,11 +61,6 @@ export class CommandListComponent {
 
   resetFilters() {
     this._ui.resetFilters();
-    return false;
-  }
-
-  onClassOverview(className: string) {
-    this.classOverview.emit(className);
     return false;
   }
 }

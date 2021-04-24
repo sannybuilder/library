@@ -2,21 +2,21 @@ import { createAction, props } from '@ngrx/store';
 import { Command, ExtensionSnippets, Game } from '../../models';
 
 export const loadSnippets = createAction(
-  'load snippets',
+  '[snippets] load',
   props<{ game: Game }>()
 );
 
 export const loadSnippetsSuccess = createAction(
-  'load snippets success',
+  '[snippets] load success',
   props<{ game: Game; extensionSnippets: ExtensionSnippets }>()
 );
 
 export const updateSnippet = createAction(
-  'update snippets',
+  '[snippets] update',
   props<{ extension: string; command: Command; content: string }>()
 );
 
 export const updateGameSnippet = createAction(
-  'update game snippets',
+  '[snippets] update for the given game',
   props<{ game: Game; extension: string; opcode: string; content: string }>()
 );

@@ -17,10 +17,7 @@
             <div class="row">
               <div class="col-3 col-md-1 order-0 d-flex align-items-center">
                 <a
-                  (click)="onView(row.command, row.extension)"
                   [routerLink]="['/', game, row.extension, row.command.id]"
-                  [replaceUrl]="true"
-                  queryParamsHandling="preserve"
                   [name]="row.command.id"
                   [innerHTML]="row.command | hlProp: 'id'"
                 ></a>
@@ -65,10 +62,7 @@
 
                 <a
                   class="btn small text-muted"
-                  (click)="onView(row.command, row.extension)"
                   [routerLink]="['/', game, row.extension, row.command.id]"
-                  [replaceUrl]="true"
-                  queryParamsHandling="preserve"
                   [name]="row.command.id"
                   >View</a
                 >
@@ -107,7 +101,8 @@
                   <ng-container *ngIf="row.command.attrs?.is_constructor">
                     <code>
                       {{ row.command | outputParams }} =
-                      <a href="#" (click)="onClassOverview(row.command.class)"
+                      <a
+                        [routerLink]="['/', game, 'classes', row.command.class]"
                         ><span
                           [innerHTML]="row.command | hlProp: 'class'"
                         ></span></a
@@ -120,7 +115,9 @@
 
                   <ng-container *ngIf="!row.command.attrs?.is_constructor">
                     <code>
-                      <a href="#" (click)="onClassOverview(row.command.class)">
+                      <a
+                        [routerLink]="['/', game, 'classes', row.command.class]"
+                      >
                         <span
                           [innerHTML]="row.command | hlProp: 'class'"
                         ></span></a

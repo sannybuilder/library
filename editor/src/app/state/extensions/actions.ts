@@ -1,31 +1,33 @@
 import { createAction, props } from '@ngrx/store';
 import { Command, Extension, Game } from '../../models';
 
+export interface GameCommandUpdate {
+  command: Command;
+  newExtension: string;
+  oldExtension: string;
+}
+
 export const loadExtensions = createAction(
-  'load extensions',
+  '[extensions] load',
   props<{ game: Game }>()
 );
 
 export const loadExtensionsSuccess = createAction(
-  'load extensions success',
+  '[extensions] load success',
   props<{ game: Game; extensions: Extension[]; lastUpdate: number }>()
 );
 
-export const updateCommand = createAction(
-  'update single command',
+export const updateCommands = createAction(
+  '[extensions] batch update commands',
   props<{
-    command: Command;
-    newExtension: string;
-    oldExtension: string;
+    batch: GameCommandUpdate[];
   }>()
 );
 
-export const updateGameCommand = createAction(
-  'update single command for the given game',
+export const updateGameCommands = createAction(
+  '[extensions] batch update commands for the given game',
   props<{
     game: Game;
-    command: Command;
-    newExtension: string;
-    oldExtension: string;
+    batch: GameCommandUpdate[];
   }>()
 );

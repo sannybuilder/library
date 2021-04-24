@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Command } from '../../models';
+import { Command, Game } from '../../models';
 
 @Component({
   selector: 'scl-class-overview',
@@ -14,6 +14,7 @@ import { Command } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassOverviewComponent {
+  @Input() game: Game;
   @Input() className: string;
   @Input() classCommands: Array<{ command: Command; extension: string }>;
 

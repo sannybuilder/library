@@ -151,15 +151,18 @@
 <ng-template #attrs let-modifier>
   <div class="mb-3">{{ modifier }}:</div>
 
-  <div class="d-sm-inline-block d-xl-block pr-2" *ngFor="let filter of filters">
-    <label class="form-check-label" [title]="filter | attrTitle">
+  <div
+    class="d-sm-inline-block d-xl-block pr-2"
+    *ngFor="let attribute of attributes"
+  >
+    <label class="form-check-label" [title]="attribute | attrTitle">
       <input
         type="checkbox"
-        [ngModel]="isFilterChecked(filter, modifier) | async"
-        (ngModelChange)="toggleFilter(filter, modifier)"
+        [ngModel]="isAttributeChecked(attribute, modifier) | async"
+        (ngModelChange)="toggleAttribute(attribute, modifier)"
       />
       <span class="checkbox"></span>
-      {{ filter }}
+      {{ attribute }}
     </label>
   </div>
 </ng-template>

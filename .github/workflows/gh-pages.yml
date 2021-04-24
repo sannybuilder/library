@@ -28,9 +28,14 @@ jobs:
           node supported.js
           npm run build
           cp src/404.html dist/editor
+
           cp ../gta3/gta3.json dist/editor/assets/gta3
           cp ../vc/vc.json dist/editor/assets/vc
           cp ../sa/sa.json dist/editor/assets/sa
+
+          cp ../gta3/enums.json dist/editor/assets/gta3
+          cp ../vc/enums.json dist/editor/assets/vc
+          cp ../sa/enums.json dist/editor/assets/sa
 
       - name: Compile files
         run: |
@@ -38,6 +43,10 @@ jobs:
           cargo run classes ../gta3/gta3.json > ../editor/dist/editor/assets/gta3/classes.db
           cargo run classes ../vc/vc.json > ../editor/dist/editor/assets/vc/classes.db
           cargo run classes ../sa/sa.json > ../editor/dist/editor/assets/sa/classes.db
+
+          cargo run enums ../gta3/enums.json > ../editor/dist/editor/assets/gta3/enums.txt
+          cargo run enums ../vc/enums.json > ../editor/dist/editor/assets/vc/enums.txt
+          cargo run enums ../sa/enums.json > ../editor/dist/editor/assets/sa/enums.txt
 
           cargo run snippets ../gta3/snippets > ../editor/dist/editor/assets/gta3/snippets.json
           cargo run snippets ../vc/snippets > ../editor/dist/editor/assets/vc/snippets.json

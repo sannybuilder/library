@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { environment } from '../environments/environment';
+
 import {
   ClassParamsPipe,
   KeywordParamsPipe,
@@ -46,6 +48,10 @@ import { UiEffects } from './state/ui/effects';
 import { GameEffects } from './state/game/effects';
 import { gameReducer } from './state/game/reducer';
 
+// enums state
+import { EnumsEffects } from './state/enums/effects';
+import { enumsReducer } from './state/enums/reducer';
+
 import { HlPropPipe } from './fusejs';
 import { ConfigModule } from './config';
 import { AuthGuard, RouteGuard } from './route.guard';
@@ -66,6 +72,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { SelectorComponent } from './components/selector/selector.component';
 import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
+import { EnumOverviewComponent } from './components/enum-overview/enum-overview.component';
+import { EnumEditorComponent } from './components/enum-editor/enum-editor.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +103,8 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
     AttrTitlePipe,
     PaginationComponent,
     ClassOverviewComponent,
+    EnumOverviewComponent,
+    EnumEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,38 +126,43 @@ import { SupportedGamesComponent } from './components/supported-games/supported-
               path: '**',
               canActivate: [RouteGuard],
               component: LibraryPageComponent,
+              runGuardsAndResolvers: 'always',
             },
           ],
         },
       ],
-      { useHash: false }
+      { useHash: false, onSameUrlNavigation: 'reload' }
     ),
     StoreModule.forRoot({
-      extensions: extensionsReducer,
       auth: authReducer,
+      changes: changesReducer,
+      enums: enumsReducer,
+      extensions: extensionsReducer,
+      game: gameReducer,
       snippets: snippetsReducer,
       ui: uiReducer,
-      changes: changesReducer,
-      game: gameReducer,
     }),
     EffectsModule.forRoot([
-      ExtensionsEffects,
       AuthEffects,
+      ChangesEffects,
+      EnumsEffects,
+      ExtensionsEffects,
+      GameEffects,
       SnippetsEffects,
       UiEffects,
-      ChangesEffects,
-      GameEffects,
     ]),
     DragDropModule,
-    // StoreDevtoolsModule.instrument({
-    //   maxAge: 25,
-    //   logOnly: false,
-    // }),
+
+    environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({
+          maxAge: 50,
+          logOnly: false,
+        }),
   ],
   exports: [],
   providers: [
     CookieService,
-
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],

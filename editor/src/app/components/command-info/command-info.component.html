@@ -34,7 +34,7 @@
       <ng-container *ngIf="command.attrs?.is_constructor">
         <code>
           {{ command | outputParams }} =
-          <a href="#" (click)="onClassOverview(command.class)">{{
+          <a [routerLink]="['/', game, 'classes', command.class]">{{
             command.class
           }}</a
           >.{{ command.member }}{{ command | inputParams }}</code
@@ -43,7 +43,7 @@
 
       <ng-container *ngIf="!command.attrs?.is_constructor">
         <code
-          ><a href="#" (click)="onClassOverview(command.class)">{{
+          ><a [routerLink]="['/', game, 'classes', command.class]">{{
             command.class
           }}</a
           >.{{ command.member }}{{ command | classParams }}</code
@@ -94,7 +94,15 @@
   <ng-container *ngFor="let param of params; let i = index">
     <div class="row">
       <div class="col-2 col-sm-1 text-center">{{ i + 1 }}</div>
-      <div class="col-10 col-sm-11">{{ param | singleParam }}</div>
+      <div class="col-10 col-sm-11">
+        <ng-container *ngIf="!isEnumParam(param); else enumParam">
+          {{ param | singleParam }}
+        </ng-container>
+      </div>
     </div>
+    <ng-template #enumParam>
+      {{ param.name }}:
+      <a [routerLink]="['/', game, 'enums', param.type]">{{ param.type }}</a>
+    </ng-template>
   </ng-container>
 </ng-template>

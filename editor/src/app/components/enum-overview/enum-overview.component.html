@@ -1,0 +1,10 @@
+<h5>Enum Overview</h5>
+
+<pre *ngIf="enumToView?.fields" class="sample">
+enum {{ enumToView.name }} 
+<ng-container *ngFor="let field of enumToView.fields"><ng-container *ngTemplateOutlet="fieldTemplate; context: { field: field }"></ng-container></ng-container>end
+</pre>
+
+<ng-template #fieldTemplate let-field="field">
+  &nbsp; {{ field[0] }}{{ field[1] !== null ? " = " + field[1] : "" }}
+</ng-template>

@@ -13,13 +13,17 @@ class {{ className }}
   &nbsp;<code *ngIf="command.class && command.member">
     <ng-container *ngIf="command.attrs?.is_constructor"
       >constructor
-      <a href="#" (click)="onView(command, extension)">{{ command.member }}</a
+      <a [routerLink]="['/', game, extension, command.id]">{{
+        command.member
+      }}</a
       >{{ command | inputParams }}:
       {{ command.output[command.output.length - 1].type }}
     </ng-container>
     <ng-container *ngIf="command.attrs?.is_destructor"
       >destructor
-      <a href="#" (click)="onView(command, extension)">{{ command.member }}</a
+      <a [routerLink]="['/', game, extension, command.id]">{{
+        command.member
+      }}</a
       >{{ command | inputParams }}
     </ng-container>
 
@@ -28,8 +32,7 @@ class {{ className }}
     >
       <ng-container *ngIf="command.attrs?.is_static">static </ng-container
       ><a
-        href="#"
-        (click)="onView(command, extension)"
+        [routerLink]="['/', game, extension, command.id]"
         [ngClass]="{
           strike: command.attrs?.is_nop || command.attrs?.is_unsupported
         }"

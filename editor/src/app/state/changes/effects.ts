@@ -5,39 +5,33 @@ import {
   distinctUntilChanged,
   mapTo,
   switchMap,
-  take,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
 import { reloadPage, submitChanges, submitChangesSuccess } from './actions';
-import { ChangesFacade } from '../changes/facade';
+import { ChangesFacade } from './facade';
 import { Config, CONFIG } from '../../config';
 
 @Injectable({ providedIn: 'root' })
 export class ChangesEffects {
   submitChanges$ = createEffect(() =>
-    this.actions$.pipe(
+    this._actions$.pipe(
       ofType(submitChanges),
-      withLatestFrom(this._facade.changes$),
+      withLatestFrom(this._facade.changes$, this._facade.github$),
       distinctUntilChanged((a, b) => a[1] === b[1]),
-      switchMap(([_, changes]) =>
-        this._facade.github$.pipe(
-          take(1),
-          switchMap((github) => {
-            if (!github && !this._config.features.shouldBeAuthorizedToEdit) {
-              console.log('Submit changes');
-              console.table(changes);
-              return of(false);
-            }
-            const files = [...changes.entries()].map(([path, content]) => ({
-              path,
-              content,
-            }));
-            return from(github.writeFiles(files)).pipe(mapTo(true));
-          })
-        )
-      ),
+      switchMap(([_, changes, github]) => {
+        if (!github && !this._config.features.shouldBeAuthorizedToEdit) {
+          console.log('Submit changes');
+          console.table(changes);
+          return of(false);
+        }
+        const files = [...changes.entries()].map(([path, content]) => ({
+          path,
+          content,
+        }));
+        return from(github.writeFiles(files)).pipe(mapTo(true));
+      }),
       switchMap((shouldReload) =>
         [
           submitChangesSuccess(),
@@ -49,7 +43,7 @@ export class ChangesEffects {
 
   reloadPage$ = createEffect(
     () =>
-      this.actions$.pipe(
+      this._actions$.pipe(
         ofType(reloadPage),
         tap(() => {
           // reloading page to ensure we pull the latest files
@@ -60,7 +54,7 @@ export class ChangesEffects {
   );
 
   constructor(
-    private actions$: Actions,
+    private _actions$: Actions,
     private _facade: ChangesFacade,
     @Inject(CONFIG) private _config: Config
   ) {}

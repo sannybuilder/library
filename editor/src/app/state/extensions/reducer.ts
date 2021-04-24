@@ -3,9 +3,9 @@ import { Entity, Extension, Game } from '../../models';
 import {
   loadExtensions,
   loadExtensionsSuccess,
-  updateGameCommand,
+  updateGameCommands,
 } from './actions';
-import { without, sortBy, last } from 'lodash';
+import { sortBy, last } from 'lodash';
 
 export interface GameState {
   extensions: Extension[];
@@ -36,40 +36,35 @@ const _reducer = createReducer(
       loading: false,
     })
   ),
-  on(
-    updateGameCommand,
-    (
-      state,
-      { game, command: newCommand, newExtension: name, oldExtension }
-    ) => {
-      const gameState: GameState = state.games[game] ?? {
-        extensions: [],
-        loading: false,
-        entities: {},
-      };
-      let extensions = upsertBy(
-        gameState.extensions,
-        'name',
-        name,
-        (e) => ({
-          ...e,
-          commands: upsertBy(
-            e.commands,
-            'id',
-            newCommand.id,
-            () => newCommand,
-            () => newCommand
-          ),
-        }),
-        () => ({
+  on(updateGameCommands, (state, { game, batch }) => {
+    const extensions: Extension[] = batch.reduce(
+      (memo, { command: newCommand, newExtension: name, oldExtension }) => {
+        memo = upsertBy(
+          memo,
+          'name',
           name,
-          commands: [newCommand],
-        })
-      );
+          (e) => ({
+            ...e,
+            commands: upsertBy(
+              e.commands,
+              'id',
+              newCommand.id,
+              () => newCommand,
+              () => newCommand
+            ),
+          }),
+          () => ({
+            name,
+            commands: [newCommand],
+          })
+        );
 
-      if (name !== oldExtension) {
+        if (name === oldExtension) {
+          return memo;
+        }
+
         // remove from previous collection
-        extensions = upsertBy(extensions, 'name', oldExtension, (e) => {
+        return upsertBy(memo, 'name', oldExtension, (e) => {
           const commands = upsertBy(e.commands, 'id', newCommand.id);
           if (!commands.length) {
             // remove previous collection if it is empty
@@ -80,16 +75,17 @@ const _reducer = createReducer(
             commands,
           };
         });
-      }
+      },
+      state.games[game]?.extensions ?? []
+    );
 
-      const entities = getEntities(extensions);
+    const entities = getEntities(extensions);
 
-      return updateState(state, game, {
-        extensions,
-        entities,
-      });
-    }
-  )
+    return updateState(state, game, {
+      extensions,
+      entities,
+    });
+  })
 );
 
 function updateState(

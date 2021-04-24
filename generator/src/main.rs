@@ -12,35 +12,35 @@ use std::{
 #[derive(Serialize, Deserialize, Debug)]
 struct Attr {
     is_branch: Option<bool>,
-    is_segment: Option<bool>,
-    is_keyword: Option<bool>,
     is_condition: Option<bool>,
-    is_nop: Option<bool>,
-    is_unsupported: Option<bool>,
     is_constructor: Option<bool>,
     is_destructor: Option<bool>,
-    is_static: Option<bool>,
+    is_keyword: Option<bool>,
+    is_nop: Option<bool>,
     is_overload: Option<bool>,
+    is_segment: Option<bool>,
+    is_static: Option<bool>,
+    is_unsupported: Option<bool>,
     is_variadic: Option<bool>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Param {
-    r#type: String,
     r#name: String,
     r#source: Option<String>,
+    r#type: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Command {
-    id: String,
-    name: String,
     attrs: Option<Attr>,
-    num_params: i32,
-    input: Option<Vec<Param>>,
-    output: Option<Vec<Param>>,
     class: Option<String>,
+    id: String,
+    input: Option<Vec<Param>>,
     member: Option<String>,
+    name: String,
+    num_params: i32,
+    output: Option<Vec<Param>>,
     short_desc: Option<String>,
 }
 
@@ -201,11 +201,49 @@ fn generate_classes() -> Result<()> {
     Ok(())
 }
 
+fn generate_enums() -> Result<()> {
+    let args: Vec<String> = std::env::args().collect();
+    let input_file = args
+        .get(2)
+        .unwrap_or_else(|| panic!("Provide input file name"));
+
+    let content = fs::read_to_string(input_file).unwrap();
+
+    let enums =
+        serde_json::from_str::<serde_json::map::Map<String, serde_json::Value>>(content.as_str())?;
+
+    for (enum_name, enum_fields) in enums {
+        println!("enum {}", enum_name);
+
+        match enum_fields {
+            serde_json::Value::Object(v) => {
+                for (field_name, field_value) in v {
+                    print!("\t{}", field_name);
+
+                    match field_value {
+                        serde_json::Value::Number(v) => print!("={}", v),
+                        serde_json::Value::String(v) => print!("=\"{}\"", v),
+                        _ => {}
+                    }
+
+                    println!();
+                }
+            }
+            _ => {}
+        }
+
+        println!("end\n");
+    }
+
+    Ok(())
+}
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     match args.get(1) {
         Some(x) if x == "classes" => generate_classes().ok(),
         Some(x) if x == "snippets" => generate_snippets().ok(),
+        Some(x) if x == "enums" => generate_enums().ok(),
         Some(x) => {
             panic!("unknown action argument {}", x);
         }

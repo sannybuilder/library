@@ -78,6 +78,16 @@ export interface ExtensionSnippets {
   [extensionName: string]: { [opcode: string]: string };
 }
 
+export interface Enums {
+  [enumName: string]: Record<string, string | number | null>;
+}
+
+export interface EnumRaw {
+  name: string;
+  fields: Array<[string, string | number | null]>;
+  isNew: boolean;
+}
+
 export enum Game {
   GTA3 = 'gta3',
   VC = 'vc',
@@ -90,10 +100,16 @@ export const GameIcon: Record<Game, string> = {
   [Game.SA]: 'assets/sa.png',
 };
 
-export const GameClasses: Record<Game, string> = {
+export const GameClassesAssets: Record<Game, string> = {
   [Game.GTA3]: 'assets/gta3/classes.db',
   [Game.VC]: 'assets/vc/classes.db',
   [Game.SA]: 'assets/sa/classes.db',
+};
+
+export const GameEnumsAssets: Record<Game, string> = {
+  [Game.GTA3]: 'assets/gta3/enums.txt',
+  [Game.VC]: 'assets/vc/enums.txt',
+  [Game.SA]: 'assets/sa/enums.txt',
 };
 
 export const GameLibrary: Record<Game, string> = {
@@ -108,6 +124,12 @@ export const GameSnippets: Record<Game, string> = {
   [Game.SA]: 'sa/snippets.json',
 };
 
+export const GameEnums: Record<Game, string> = {
+  [Game.GTA3]: 'gta3/enums.json',
+  [Game.VC]: 'vc/enums.json',
+  [Game.SA]: 'sa/enums.json',
+};
+
 export const GameTitle: Record<Game, string> = {
   [Game.GTA3]: 'GTA III',
   [Game.VC]: 'Vice City',
@@ -117,10 +139,12 @@ export const GameTitle: Record<Game, string> = {
 export const DEFAULT_EXTENSION = 'default';
 
 export enum ViewMode {
-  None,
-  Edit,
-  View,
-  ClassOverview,
+  None = 'None',
+  EditCommand = 'EditCommand',
+  ViewCommand = 'ViewCommand',
+  ViewClass = 'ViewClass',
+  ViewEnum = 'ViewEnum',
+  EditEnum = 'EditEnum',
 }
 
 export type Modifier = 'except' | 'only';
@@ -149,4 +173,9 @@ export interface Primitive {
   name: PrimitiveType;
 }
 
-export type ParamType = Entity | Primitive;
+export interface Enum {
+  type: 'enum';
+  name: string;
+}
+
+export type ParamType = Entity | Primitive | Enum;

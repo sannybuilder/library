@@ -1,12 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { intersection, partition, without } from 'lodash';
 
-import { Command, ViewMode, Attribute, Game } from '../../models';
+import { Command, ViewMode, Attribute, Game, EnumRaw } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
   toggleCommandListElements,
-  toggleFilter,
+  toggleAttribute,
   updateSearchTerm,
   displayOrEditSnippet,
   changePage,
@@ -14,6 +14,7 @@ import {
   selectClass,
   selectExtensions,
   displayClassOverview,
+  displayOrEditEnum,
 } from './actions';
 import { onListEnter } from '../game/actions';
 
@@ -26,14 +27,13 @@ export interface UiState {
   searchTerm?: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
-  selectedFiltersOnly: Attribute[];
-  selectedFiltersExcept: Attribute[];
+  selectedAttributesOnly: Attribute[];
+  selectedAttributesExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
+  enumToDisplayOrEdit?: EnumRaw;
   viewMode: ViewMode;
-  opcodeOnLoad?: string;
-  extensionOnLoad?: string;
   currentPage: number | 'all';
   games: Record<Game, GameState>;
   classToDisplay?: string;
@@ -41,13 +41,13 @@ export interface UiState {
 
 const defaultFilterState: {
   searchTerm: string;
-  selectedFiltersOnly: Attribute[];
-  selectedFiltersExcept: Attribute[];
+  selectedAttributesOnly: Attribute[];
+  selectedAttributesExcept: Attribute[];
   games: Record<Game, GameState>;
 } = {
   searchTerm: '',
-  selectedFiltersOnly: [],
-  selectedFiltersExcept: ['is_nop', 'is_unsupported'],
+  selectedAttributesOnly: [],
+  selectedAttributesExcept: ['is_nop', 'is_unsupported'],
   games: {
     gta3: {
       selectedClasses: ['any'],
@@ -74,19 +74,19 @@ export const initialState: UiState = {
 
 const _reducer = createReducer(
   initialState,
-  on(toggleFilter, (state, { filter, modifier }) => {
-    const filters =
+  on(toggleAttribute, (state, { attribute, modifier }) => {
+    const attributes =
       modifier === 'only'
-        ? state.selectedFiltersOnly
-        : state.selectedFiltersExcept;
-    const selectedFilters = filters.includes(filter)
-      ? without(filters, filter)
-      : [...filters, filter];
+        ? state.selectedAttributesOnly
+        : state.selectedAttributesExcept;
+    const selectedAttributes = attributes.includes(attribute)
+      ? without(attributes, attribute)
+      : [...attributes, attribute];
     return {
       ...state,
       [modifier === 'only'
-        ? 'selectedFiltersOnly'
-        : 'selectedFiltersExcept']: selectedFilters,
+        ? 'selectedAttributesOnly'
+        : 'selectedAttributesExcept']: selectedAttributes,
     };
   }),
 
@@ -109,18 +109,30 @@ const _reducer = createReducer(
     ...state,
     snippetToDisplayOrEdit: snippet,
   })),
+  on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => {
+    const isNew = enumToEdit.name.toLowerCase() === 'new';
+    return {
+      ...state,
+      viewMode,
+      commandToDisplayOrEdit: undefined,
+      extensionToDisplayOrEdit: undefined,
+      snippetToDisplayOrEdit: undefined,
+      enumToDisplayOrEdit: {
+        isNew: isNew || enumToEdit.isNew,
+        name: isNew ? '' : enumToEdit.name,
+        fields: enumToEdit.fields,
+      },
+    };
+  }),
+
   on(stopEditOrDisplay, (state) => ({
     ...state,
     commandToDisplayOrEdit: undefined,
     extensionToDisplayOrEdit: undefined,
     snippetToDisplayOrEdit: undefined,
     classToDisplay: undefined,
+    enumToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
-  })),
-  on(onListEnter, (state, { opcode, extension }) => ({
-    ...state,
-    opcodeOnLoad: opcode,
-    extensionOnLoad: extension,
   })),
   on(changePage, (state, { index: currentPage }) => ({
     ...state,
@@ -171,7 +183,7 @@ const _reducer = createReducer(
   on(displayClassOverview, (state, { className }) => ({
     ...state,
     classToDisplay: className,
-    viewMode: ViewMode.ClassOverview,
+    viewMode: ViewMode.ViewClass,
   }))
 );
 

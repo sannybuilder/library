@@ -37,6 +37,7 @@ export class EnumEditorComponent {
     return this._enumToEdit;
   }
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
+  @Output() delete: EventEmitter<void> = new EventEmitter();
 
   errors: Record<ErrorType, boolean> = {
     emptyEnumName: false,
@@ -59,6 +60,10 @@ export class EnumEditorComponent {
     duplicateFieldName: 'Duplicate field name',
     emptyEnum: 'Enum must contain at least one field',
   };
+
+  deleteEnum() {
+    this.delete.emit();
+  }
 
   updateErrors() {
     this.updateError(...(Object.keys(this.errors) as ErrorType[]));

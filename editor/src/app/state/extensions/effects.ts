@@ -21,7 +21,12 @@ import {
 import { ExtensionsService } from './service';
 import { ExtensionsFacade } from './facade';
 import { ChangesFacade } from '../changes/facade';
-import { Game, GameLibrary, GameSupportInfo } from '../../models';
+import {
+  Game,
+  GameLibrary,
+  GameSupportInfo,
+  PrimitiveType,
+} from '../../models';
 import {
   commandParams,
   getSameCommands,
@@ -119,8 +124,16 @@ export class ExtensionsEffects {
                   extension: extension.name,
                   command: {
                     ...c,
-                    input: replaceType(c.input, oldEnumName, newEnumName),
-                    output: replaceType(c.output, oldEnumName, newEnumName),
+                    input: replaceType(
+                      c.input,
+                      oldEnumName,
+                      newEnumName || PrimitiveType.any
+                    ),
+                    output: replaceType(
+                      c.output,
+                      oldEnumName,
+                      newEnumName || PrimitiveType.any
+                    ),
                   },
                 }))
             );

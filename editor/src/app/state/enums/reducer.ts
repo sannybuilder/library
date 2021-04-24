@@ -33,7 +33,7 @@ const _reducer = createReducer(
     }
     return updateState(state, game, {
       [oldEnumName]: undefined,
-      [newEnumName]: currentEnum,
+      [newEnumName]: newEnumName ? currentEnum : undefined,
     });
   })
 );

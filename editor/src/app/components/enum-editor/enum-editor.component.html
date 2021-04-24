@@ -13,7 +13,7 @@
         placeholder="Enter enum name"
         autofocus
         [ngClass]="{
-          'is-invalid': !enumToEdit.name
+          'is-invalid': isDirty && !enumToEdit.name
         }"
       />
     </div>
@@ -60,7 +60,8 @@
           [ngModel]="field[0]"
           (ngModelChange)="onFieldNameChange($event, field)"
           [ngClass]="{
-            'is-invalid': isFieldNameDuplicate(field[0]) || !field[0]
+            'is-invalid':
+              isDirty && (isFieldNameDuplicate(field[0]) || !field[0])
           }"
         />
       </div>
@@ -70,7 +71,8 @@
         type="text"
         class="form-control"
         [placeholder]="evaluateValue(i)"
-        [(ngModel)]="field[1]"
+        [ngModel]="field[1]"
+        (ngModelChange)="onFieldValueChange($event, field)"
       />
     </div>
 
@@ -84,7 +86,7 @@
   </div>
 </div>
 
-<div class="alert alert-danger mt-3" *ngIf="errorMessages.length">
+<div class="alert alert-danger mt-3" *ngIf="errorMessages.length && isDirty">
   <div *ngFor="let message of errorMessages">
     {{ message }}
   </div>

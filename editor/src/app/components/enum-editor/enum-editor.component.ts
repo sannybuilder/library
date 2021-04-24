@@ -30,6 +30,7 @@ export class EnumEditorComponent {
 
   @Input() set enumToEdit(val: EnumRaw) {
     this._enumToEdit = val;
+    this.isDirty = false;
     this.updateErrors();
   }
 
@@ -46,6 +47,7 @@ export class EnumEditorComponent {
     duplicateFieldName: false,
   };
   errorMessages: string[] = [];
+  isDirty: boolean;
 
   readonly errorHandlers: Record<ErrorType, () => void> = {
     emptyEnumName: this.updateEmptyEnumNameError,
@@ -106,11 +108,19 @@ export class EnumEditorComponent {
 
   onEnumNameChange(val: string) {
     this.enumToEdit.name = capitalizeFirst(val);
+    this.isDirty = true;
     this.updateErrors();
   }
 
   onFieldNameChange(val: string, field: [string, string | number | null]) {
     field[0] = val;
+    this.isDirty = true;
+    this.updateErrors();
+  }
+
+  onFieldValueChange(val: string, field: [string, string | number | null]) {
+    field[1] = val;
+    this.isDirty = true;
     this.updateErrors();
   }
 

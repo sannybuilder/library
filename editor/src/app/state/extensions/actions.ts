@@ -1,6 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { Command, Extension, Game } from '../../models';
 
+export interface GameCommandUpdate {
+  command: Command;
+  newExtension: string;
+  oldExtension: string;
+}
+
 export const loadExtensions = createAction(
   '[extensions] load',
   props<{ game: Game }>()
@@ -11,21 +17,17 @@ export const loadExtensionsSuccess = createAction(
   props<{ game: Game; extensions: Extension[]; lastUpdate: number }>()
 );
 
-export const updateCommand = createAction(
-  '[extensions] update single command',
+export const updateCommands = createAction(
+  '[extensions] batch update commands',
   props<{
-    command: Command;
-    newExtension: string;
-    oldExtension: string;
+    batch: GameCommandUpdate[];
   }>()
 );
 
-export const updateGameCommand = createAction(
-  '[extensions] update single command for the given game',
+export const updateGameCommands = createAction(
+  '[extensions] batch update commands for the given game',
   props<{
     game: Game;
-    command: Command;
-    newExtension: string;
-    oldExtension: string;
+    batch: GameCommandUpdate[];
   }>()
 );

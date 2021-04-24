@@ -1,7 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Enums, Game } from '../../models';
-import { loadEnumsSuccess, updateGameEnum } from './actions';
+import { loadEnumsSuccess, renameGameEnum, updateGameEnum } from './actions';
 import { fromPairs, mapValues } from 'lodash';
+import { smash } from '../../utils';
 
 export interface EnumsState {
   enums: Partial<Record<Game, Enums>>;
@@ -18,20 +19,22 @@ const _reducer = createReducer(
   ),
   on(updateGameEnum, (state, { enumToEdit, oldEnumToEdit, game }) => {
     const newState = {
-      [enumToEdit.name]: enumToEdit.fields?.length
+      [oldEnumToEdit.name]: enumToEdit.fields?.length
         ? transformEnum(fromPairs(enumToEdit.fields))
         : undefined,
     };
-    return updateState(
-      state,
-      game,
-      oldEnumToEdit.name
-        ? {
-            [oldEnumToEdit.name]: undefined,
-            ...newState,
-          }
-        : newState
-    );
+    return updateState(state, game, newState);
+  }),
+  on(renameGameEnum, (state, { newEnumName, oldEnumName, game }) => {
+    const currentEnum = state.enums[game]?.[oldEnumName];
+
+    if (!currentEnum) {
+      return state;
+    }
+    return updateState(state, game, {
+      [oldEnumName]: undefined,
+      [newEnumName]: currentEnum,
+    });
   })
 );
 
@@ -44,7 +47,7 @@ function updateState(
     ...state,
     enums: {
       ...state.enums,
-      [game]: { ...(state.enums[game] ?? {}), ...newState },
+      [game]: smash({ ...(state.enums[game] ?? {}), ...newState }),
     },
   };
 }

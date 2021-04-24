@@ -24,3 +24,12 @@ export const updateGameEnum = createAction(
     oldEnumToEdit: EnumRaw;
   }>()
 );
+
+export const renameGameEnum = createAction(
+  '[enums] rename enum for the given game',
+  props<{
+    game: Game;
+    newEnumName: string;
+    oldEnumName: string;
+  }>()
+);

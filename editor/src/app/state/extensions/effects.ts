@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { zip } from 'rxjs';
 import {
   tap,
   switchMap,
   withLatestFrom,
-  distinctUntilChanged,
   concatMap,
   take,
   map,
-  filter,
 } from 'rxjs/operators';
-import { flatMap, isEqual } from 'lodash';
+import { flatMap, groupBy, flatten } from 'lodash';
 
 import {
+  GameCommandUpdate,
   loadExtensions,
   loadExtensionsSuccess,
-  updateCommand,
-  updateGameCommand,
+  updateCommands,
+  updateGameCommands,
 } from './actions';
 import { ExtensionsService } from './service';
 import { ExtensionsFacade } from './facade';
 import { ChangesFacade } from '../changes/facade';
-import { GameLibrary, GameSupportInfo } from '../../models';
+import { Game, GameLibrary, GameSupportInfo } from '../../models';
 import {
   commandParams,
   getSameCommands,
@@ -30,7 +30,7 @@ import {
 } from '../../utils';
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
-import { updateEnum, updateGameEnum } from '../enums/actions';
+import { renameGameEnum } from '../enums/actions';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -52,32 +52,43 @@ export class ExtensionsEffects {
 
   updateCommands$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(updateCommand),
-      distinctUntilChanged(isEqual),
+      ofType(updateCommands),
       withLatestFrom(this._game.game$),
-      switchMap(([{ command, newExtension, oldExtension }, game]) =>
-        this._game.getCommandSupportInfo(command, oldExtension).pipe(
-          take(1),
-          switchMap((supportInfo: GameSupportInfo[]) =>
-            getSameCommands(supportInfo, game).map((d) =>
-              updateGameCommand({
-                command,
-                game: d.game,
-                newExtension,
-                oldExtension,
-              })
+      switchMap(([{ batch }, game]) => {
+        return zip(
+          ...batch.map(({ command, newExtension, oldExtension }) =>
+            this._game.getCommandSupportInfo(command, oldExtension).pipe(
+              // take(1),
+              map((supportInfo: GameSupportInfo[]) =>
+                getSameCommands(supportInfo, game).map((d) => ({
+                  game: d.game,
+                  command,
+                  newExtension,
+                  oldExtension,
+                }))
+              )
             )
           )
-        )
-      )
+        );
+      }),
+      switchMap((updates) => {
+        const groups = groupBy(flatten(updates), 'game');
+
+        return Object.entries(groups).map(([game, batch]) =>
+          updateGameCommands({
+            game: game as Game,
+            batch: batch as GameCommandUpdate[],
+          })
+        );
+      })
     )
   );
 
   updateGameCommands$ = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(updateGameCommand),
-        distinctUntilChanged<ReturnType<typeof updateGameCommand>>(isEqual),
+        ofType(updateGameCommands),
+        // distinctUntilChanged<ReturnType<typeof updateGameCommands>>(isEqual),
         switchMap(({ game }) =>
           this._extensions.getGameExtensions(game).pipe(
             tap((extensions) => {
@@ -92,39 +103,67 @@ export class ExtensionsEffects {
     { dispatch: false }
   );
 
-  renamedEnum$ = createEffect(() =>
+  renameEnum$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(updateEnum),
-      filter<ReturnType<typeof updateGameEnum>>(
-        ({ enumToEdit, oldEnumToEdit }) =>
-          enumToEdit.name !== oldEnumToEdit.name
-      ),
-      withLatestFrom(this._extensions.extensions$),
-      switchMap(([{ enumToEdit, oldEnumToEdit }, extensions]) => {
-        const oldEnumName = oldEnumToEdit.name;
-        const newEnumName = enumToEdit.name;
-        const affectedCommands = flatMap(extensions, (extension) =>
-          extension.commands
-            .filter((c) => commandParams(c).some((p) => p.type === oldEnumName))
-            .map((c) => ({
-              extension: extension.name,
-              command: {
-                ...c,
-                input: replaceType(c.input, oldEnumName, newEnumName),
-                output: replaceType(c.output, oldEnumName, newEnumName),
-              },
-            }))
-        );
-
-        // todo: rename enum in another game if it has been affected
-        return affectedCommands.map(({ extension, command }) =>
-          updateCommand({
-            command,
-            oldExtension: extension,
-            newExtension: extension,
-          })
-        );
-      })
+      ofType(renameGameEnum),
+      switchMap(({ game, oldEnumName, newEnumName }) =>
+        this._extensions.getGameExtensions(game).pipe(
+          // take(1),
+          switchMap((extensions) => {
+            const affectedCommands = flatMap(extensions, (extension) =>
+              extension.commands
+                .filter((c) =>
+                  commandParams(c).some((p) => p.type === oldEnumName)
+                )
+                .map((c) => ({
+                  extension: extension.name,
+                  command: {
+                    ...c,
+                    input: replaceType(c.input, oldEnumName, newEnumName),
+                    output: replaceType(c.output, oldEnumName, newEnumName),
+                  },
+                }))
+            );
+            return zip(
+              ...affectedCommands.map(({ extension, command }) => {
+                return this._game.getCommandSupportInfo(command, extension);
+              })
+            ).pipe(
+              map((supportInfos) => {
+                const otherGames = new Set<Game>();
+                for (const info of supportInfos) {
+                  const sameCommands = getSameCommands(info, game);
+                  sameCommands.forEach((sameCommand) =>
+                    otherGames.add(sameCommand.game)
+                  );
+                }
+                otherGames.delete(game);
+                return {
+                  otherGames: [...otherGames],
+                  affectedCommands,
+                };
+              })
+            );
+          }),
+          switchMap(({ otherGames, affectedCommands }) => [
+            updateGameCommands({
+              game,
+              batch: affectedCommands.map(({ extension, command }) => ({
+                command,
+                oldExtension: extension,
+                newExtension: extension,
+              })),
+            }),
+            ...otherGames.map((otherGame) =>
+              renameGameEnum({
+                game: otherGame,
+                newEnumName,
+                oldEnumName,
+              })
+            ),
+          ])
+        )
+      )
     )
   );
 

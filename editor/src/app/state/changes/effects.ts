@@ -5,7 +5,6 @@ import {
   distinctUntilChanged,
   mapTo,
   switchMap,
-  take,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
@@ -19,25 +18,20 @@ export class ChangesEffects {
   submitChanges$ = createEffect(() =>
     this._actions$.pipe(
       ofType(submitChanges),
-      withLatestFrom(this._facade.changes$),
+      withLatestFrom(this._facade.changes$, this._facade.github$),
       distinctUntilChanged((a, b) => a[1] === b[1]),
-      switchMap(([_, changes]) =>
-        this._facade.github$.pipe(
-          take(1),
-          switchMap((github) => {
-            if (!github && !this._config.features.shouldBeAuthorizedToEdit) {
-              console.log('Submit changes');
-              console.table(changes);
-              return of(false);
-            }
-            const files = [...changes.entries()].map(([path, content]) => ({
-              path,
-              content,
-            }));
-            return from(github.writeFiles(files)).pipe(mapTo(true));
-          })
-        )
-      ),
+      switchMap(([_, changes, github]) => {
+        if (!github && !this._config.features.shouldBeAuthorizedToEdit) {
+          console.log('Submit changes');
+          console.table(changes);
+          return of(false);
+        }
+        const files = [...changes.entries()].map(([path, content]) => ({
+          path,
+          content,
+        }));
+        return from(github.writeFiles(files)).pipe(mapTo(true));
+      }),
       switchMap((shouldReload) =>
         [
           submitChangesSuccess(),

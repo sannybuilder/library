@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {
-  concatMap,
-  distinctUntilChanged,
-  map,
-  switchMap,
-  take,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 
 import {
@@ -43,11 +35,11 @@ export class SnippetsEffects {
   updateSnippet$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateSnippet),
-      distinctUntilChanged(isEqual),
+      // distinctUntilChanged(isEqual),
       withLatestFrom(this._game.game$),
       switchMap(([{ content, extension, command }, game]) => {
         return this._game.getCommandSupportInfo(command, extension).pipe(
-          take(1),
+          // take(1),
           switchMap((supportInfo: GameSupportInfo[]) =>
             getSameCommands(supportInfo, game).map((d) =>
               updateGameSnippet({
@@ -67,7 +59,7 @@ export class SnippetsEffects {
     () =>
       this.actions$.pipe(
         ofType(updateGameSnippet),
-        distinctUntilChanged(isEqual),
+        // distinctUntilChanged(isEqual),
         tap(({ game, content, extension, opcode }) => {
           const fileName = `${game}/snippets/${extension}/${opcode}.txt`;
           this._changes.registerSnippetChange(fileName, content);

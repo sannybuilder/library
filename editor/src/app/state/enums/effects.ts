@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { isEqual } from 'lodash';
 import {
   concatMap,
-  distinctUntilChanged,
+  filter,
   map,
   switchMap,
   tap,
@@ -13,6 +12,7 @@ import {
 import {
   loadEnums,
   loadEnumsSuccess,
+  renameGameEnum,
   updateEnum,
   updateGameEnum,
 } from './actions';
@@ -38,7 +38,7 @@ export class EnumsEffects {
   updateEnums$ = createEffect(() =>
     this._actions$.pipe(
       ofType(updateEnum),
-      distinctUntilChanged(isEqual),
+      // distinctUntilChanged(isEqual),
       withLatestFrom(this._game.game$),
       map(([{ enumToEdit, oldEnumToEdit }, game]) =>
         updateGameEnum({
@@ -50,11 +50,28 @@ export class EnumsEffects {
     )
   );
 
+  renameGameEnums$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updateGameEnum),
+      filter(
+        ({ enumToEdit, oldEnumToEdit }) =>
+          enumToEdit.name !== oldEnumToEdit.name
+      ),
+      map(({ game, enumToEdit, oldEnumToEdit }) =>
+        renameGameEnum({
+          game,
+          newEnumName: enumToEdit.name,
+          oldEnumName: oldEnumToEdit.name,
+        })
+      )
+    )
+  );
+
+  // prepare updated or renamed enum for submit
   updateGameEnums$ = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(updateGameEnum),
-        distinctUntilChanged<ReturnType<typeof updateGameEnum>>(isEqual),
+        ofType(updateGameEnum, renameGameEnum),
         switchMap(({ game }) =>
           this._enums.getGameEnums(game).pipe(
             tap((enums) => {
@@ -65,6 +82,7 @@ export class EnumsEffects {
       ),
     { dispatch: false }
   );
+
   constructor(
     private _actions$: Actions,
     private _game: GameFacade,

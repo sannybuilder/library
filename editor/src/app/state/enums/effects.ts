@@ -21,15 +21,17 @@ import { EnumsService } from './service';
 import { ChangesFacade } from '../changes/facade';
 import { EnumsFacade } from './facade';
 import { GameEnums } from '../../models';
+import { AuthFacade } from '../auth/facade';
 
 @Injectable({ providedIn: 'root' })
 export class EnumsEffects {
   loadEnums$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnums),
-      concatMap(({ game }) =>
+      withLatestFrom(this._auth.authToken$),
+      concatMap(([{ game }, accessToken]) =>
         this._service
-          .loadEnums(game)
+          .loadEnums(game, accessToken)
           .pipe(map((enums) => loadEnumsSuccess({ game, enums })))
       )
     )
@@ -88,6 +90,7 @@ export class EnumsEffects {
     private _game: GameFacade,
     private _service: EnumsService,
     private _changes: ChangesFacade,
-    private _enums: EnumsFacade
+    private _enums: EnumsFacade,
+    private _auth: AuthFacade
   ) {}
 }

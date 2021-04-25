@@ -1,28 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Location } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Game, GameEnums, Enums } from '../../models';
-import { CONFIG, Config } from '../../config';
+import { GitHubService } from '../github/service';
 
 @Injectable({ providedIn: 'root' })
 export class EnumsService {
-  constructor(
-    private http: HttpClient,
-    @Inject(CONFIG) private _config: Config
-  ) {}
+  constructor(private _github: GitHubService) {}
 
-  loadEnums(game: Game): Observable<Enums> {
-    const ts = Date.now().toString();
-    return this.http
-      .get<Enums>(
-        Location.joinWithSlash(this._config.endpoints.base, GameEnums[game]),
-        {
-          params: { ts },
-        }
-      )
-      .pipe(catchError(() => of({})));
+  loadEnums(game: Game, accessToken?: string): Observable<Enums> {
+    return this._github.loadFileGracefully(GameEnums[game], accessToken, game);
   }
 }

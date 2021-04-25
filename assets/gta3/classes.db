@@ -136,7 +136,7 @@ ArmWithBomb,0242,0,0,("_p1%i" "_p2%i")
 ChangeColor,0229,0,0,("self: Car" "primaryColor%i" "secondaryColor%i")
 ChangeLock,0135,0,0,("_p1%i" "_p2%i")
 ClearLastWeaponDamage,0468,0,0,("self: Car")
-Create,00A5,0,0,("model%i" "x%f" "y%f" "z%f" "handle: Car")
+Create,00A5,0,0,("model: model_ide" "x%f" "y%f" "z%f" "handle: Car")
 Delete,00A6,0,0,("self: Car")
 DontRemove,01C6,0,0,("_p1%i")
 Explode,020B,0,0,("self: Car")
@@ -150,7 +150,7 @@ GetForwardY,02F9,0,0,("self: Car" "y%f")
 GetHeading,0174,0,0,("self: Car" "heading%f")
 GetHealth,0227,0,0,("self: Car" "health%i")
 GetMaximumNumberOfPassengers,01EA,0,0,("self: Car" "count%i")
-GetModel,0441,0,0,("self: Car" "modelId%i")
+GetModel,0441,0,0,("self: Car" "modelId: model_ide")
 GetNumberOfPassengers,01E9,0,0,("self: Car" "count%i")
 GetNumberOfSeatsInModel,047D,0,0,("_p1%i" "_p2%i")
 GetSpeed,02E3,0,0,("self: Car" "speed%f")
@@ -235,7 +235,7 @@ $END
 
 $CarGenerator
 $BEGIN
-Create,014B,0,0,("x%f" "y%f" "z%f" "heading%f" "modelId%i" "primaryColor%i" "secondaryColor%i" "forceSpawn%b" "alarmChance%i" "doorLockChance%i" "minDelay%i" "maxDelay%i" "handle: CarGenerator")
+Create,014B,0,0,("x%f" "y%f" "z%f" "heading%f" "modelId: model_ide" "primaryColor%i" "secondaryColor%i" "forceSpawn%b" "alarmChance%i" "doorLockChance%i" "minDelay%i" "maxDelay%i" "handle: CarGenerator")
 Switch,014C,0,0,("self: CarGenerator" "amount%i")
 $END
 
@@ -257,7 +257,7 @@ AttachToCar,0464,0,0,("_p1%i" "_p2%i" "_p3%f" "_p4%f" "_p5%f" "_p6%i" "_p7%f" "_
 CanSeeDeadChar,0480,1,0,("self: Char" "pedType%i")
 ClearLastWeaponDamage,0467,0,0,("self: Char")
 ClearThreatSearch,01ED,0,0,("_p1%i")
-Create,009A,0,0,("pedType: PedType" "model%i" "x%f" "y%f" "z%f" "handle: Char")
+Create,009A,0,0,("pedType: PedType" "model: model_ide" "x%f" "y%f" "z%f" "handle: Char")
 CreateAsPassenger,01C8,0,0,("vehicle: Car" "pedType%i" "modelId: model_ide" "seatId%i" "handle: Char")
 CreateInsideCar,0129,0,0,("vehicle: Car" "pedType: PedType" "modelId: model_ide" "handle: Char")
 CreateRandom,0376,0,0,("x%f" "y%f" "z%f" "handle: Char")
@@ -291,12 +291,12 @@ IsInAreaOnFoot3D,01A6,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%
 IsInCar,00DB,1,0,("self: Char" "handle: Car")
 IsInCharsGroup,031F,1,0,("_p1%i" "_p2%i")
 IsInControl,03E9,1,0,("_p1%i")
-IsInModel,00DD,1,0,("self: Char" "vehicleModelId%i")
+IsInModel,00DD,1,0,("self: Char" "vehicleModelId: model_ide")
 IsInPlayersGroup,0320,1,0,("_p1%i" "_p2%i")
 IsInZone,0154,1,0,("self: Char" "zoneId%s")
 IsLyingDown,047F,1,0,("_p1%i")
 IsMale,03A3,1,0,("self: Char")
-IsModel,02F2,1,0,("self: Char" "modelId%i")
+IsModel,02F2,1,0,("self: Char" "modelId: model_ide")
 IsObjectivePassed,0126,1,0,("_p1%i")
 IsOnAnyBike,047A,1,0,("self: Char")
 IsOnFoot,044B,1,0,("self: Char")
@@ -469,13 +469,13 @@ $END
 
 $CutsceneHead
 $BEGIN
-Create,02F4,0,0,("modelId%i" "cutsceneObject: CutsceneObject" "handle: CutsceneHead")
+Create,02F4,0,0,("modelId: model_any" "cutsceneObject: CutsceneObject" "handle: CutsceneHead")
 SetAnim,02F5,0,0,("self: CutsceneHead" "animation%s")
 $END
 
 $CutsceneObject
 $BEGIN
-Create,02E5,0,0,("modelId%i" "handle: CutsceneObject")
+Create,02E5,0,0,("modelId: model_any" "handle: CutsceneObject")
 SetAnim,02E6,0,0,("self: CutsceneObject" "animation%s")
 $END
 
@@ -550,7 +550,7 @@ ChangeType,02FA,0,0,("self: Garage" "type%i")
 ChangeTypeWithCarModel,03A5,0,0,("self: Garage" "type%i" "modelId: model_ide")
 Close,0361,0,0,("self: Garage")
 Create,0219,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "type%i" "handle: Garage")
-CreateWithCarModel,021A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "type%i" "modelId%i" "handle: Garage")
+CreateWithCarModel,021A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "type%i" "modelId: model_ide" "handle: Garage")
 Deactivate,02B9,0,0,("self: Garage")
 DoesContainCar,0422,1,0,("self: Garage" "vehicle: Car")
 GetNumberOfCarsCollected,02BA,0,0,("self: Garage" "_p2%i")
@@ -587,7 +587,7 @@ $END
 $Object
 $BEGIN
 AddToVelocity,038C,0,0,("self: Object" "x%f" "y%f" "z%f")
-Create,0107,0,0,("modelId%i" "x%f" "y%f" "z%f" "handle: Object")
+Create,0107,0,0,("modelId: model_any" "x%f" "y%f" "z%f" "handle: Object")
 CreateNoOffset,029B,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5: Object")
 Delete,0108,0,0,("self: Object")
 DoesExist,03CA,1,0,("self: Object")
@@ -684,9 +684,9 @@ $END
 
 $Pickup
 $BEGIN
-Create,0213,0,0,("modelId%i" "pickupType%i" "x%f" "y%f" "z%f" "handle: Pickup")
+Create,0213,0,0,("modelId: model_any" "pickupType%i" "x%f" "y%f" "z%f" "handle: Pickup")
 CreateMoney,02E1,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5: Pickup")
-CreateWithAmmo,032B,0,0,("modelId%i" "pickupType%i" "ammo%i" "x%f" "y%f" "z%f" "handle: Pickup")
+CreateWithAmmo,032B,0,0,("modelId: model_any" "pickupType%i" "ammo%i" "x%f" "y%f" "z%f" "handle: Pickup")
 DropMine,02F0,0,0,("_p1%f" "_p2%f" "_p3%f")
 DropNauticalMine,02F1,0,0,("_p1%f" "_p2%f" "_p3%f")
 HasBeenCollected,0214,1,0,("self: Pickup")
@@ -702,7 +702,7 @@ AlterWantedLevel,010D,0,0,("_p1%i" "_p2%i")
 AlterWantedLevelNoDrop,010E,0,0,("_p1%i" "_p2%i")
 CanStartMission,03EE,1,0,("self: Player")
 ClearWantedLevel,0110,0,0,("self: Player")
-Create,0053,0,0,("model%i" "x%f" "y%f" "z%f" "handle: Player")
+Create,0053,0,0,("model: model_ide" "x%f" "y%f" "z%f" "handle: Player")
 ExplodeHead,0322,0,0,("_p1%i")
 GetAmmoInWeapon,0419,0,0,("_p1%i" "_p2%i" "_p3%i")
 GetChar,01F5,0,0,("self: Player" "handle: Char")
@@ -919,7 +919,7 @@ $END
 
 $Streaming
 $BEGIN
-HasModelLoaded,0248,1,0,("_p1%i")
+HasModelLoaded,0248,1,0,("modelId: model_any")
 HasSpecialCharacterLoaded,023D,1,0,("slotId%i")
 IsCollisionInMemory,03C6,1,0,("_p1%i")
 LoadAllModelsNow,038B,0,0,()
@@ -928,8 +928,8 @@ LoadCollisionWithScreen,044C,0,0,("_p1%i")
 LoadScene,03CB,0,0,("x%f" "y%f" "z%f")
 LoadSpecialCharacter,023C,0,0,("slotId%i" "modelName%s")
 LoadSpecialModel,02F3,0,0,("_p1%i" "_p2%s")
-MarkModelAsNoLongerNeeded,0249,0,0,("_p1%i")
-RequestModel,0247,0,0,("_p1%i")
+MarkModelAsNoLongerNeeded,0249,0,0,("modelId: model_any")
+RequestModel,0247,0,0,("modelId: model_any")
 Switch,03AF,0,0,("_p1%i")
 UnloadSpecialCharacter,0296,0,0,("slotId%i")
 $END
@@ -1041,8 +1041,8 @@ RemoveAllScriptFires,031A,0,0,()
 RemoveParticleEffectsInArea,03AE,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 SetCarDensityMultiplier,01EB,0,0,("multiplier%f")
 SetPedDensityMultiplier,03DE,0,0,("_p1%f")
-SetVisibilityOfClosestObjectOfType,0363,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId%i" "state%b")
-SwapNearestBuildingModel,03B6,0,0,("x%f" "y%f" "z%f" "radius%f" "fromModelId%i" "toModelId%i")
+SetVisibilityOfClosestObjectOfType,0363,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_any" "state%b")
+SwapNearestBuildingModel,03B6,0,0,("x%f" "y%f" "z%f" "radius%f" "fromModelId: model_any" "toModelId: model_any")
 SwitchProcessing,03B7,0,0,("_p1%i")
 SwitchRubbish,03AD,0,0,("_p1%i")
 $END

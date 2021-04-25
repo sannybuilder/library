@@ -281,12 +281,12 @@ export class CommandEditorComponent implements OnInit {
   }
 
   getSuggestedInputName(index: number) {
+    const { name } = this.command.input?.[index] ?? {};
     if (
       index === 0 &&
       !this.command.attrs?.is_constructor &&
       !this.command.attrs?.is_static &&
-      (!this.command.input?.[index]?.name ||
-        this.command.input?.[index]?.name?.startsWith('_')) &&
+      (!name || name.startsWith('_')) &&
       ['Player', 'Car', 'Char', 'Object', 'Pickup', 'Blip'].includes(
         this.command.class
       )
@@ -296,7 +296,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   getSuggestedInputType(index: number) {
-    const { name, type } = this.command.input?.[index];
+    const { name, type } = this.command.input?.[index] ?? {};
     if (
       this.primitives.includes(type as PrimitiveType) &&
       (name || this.getSuggestedInputName(index)) === 'self'
@@ -306,6 +306,27 @@ export class CommandEditorComponent implements OnInit {
 
     if (['state', 'flag'].includes(name) && type !== PrimitiveType.boolean) {
       return PrimitiveType.boolean;
+    }
+
+    // suggest the type if the input name is same called
+    const split = (word: string) =>
+      word.split(/(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/);
+    const last = (list: unknown[]) => list && list[list.length - 1];
+    const cmp = (a: string, b: string) => a.toLowerCase() === b.toLowerCase();
+
+    const lastWord = last(split(name));
+
+    if (typeof lastWord === 'string') {
+      if (cmp(lastWord, 'vehicle') && type !== 'Car') {
+        return 'Car';
+      }
+
+      for (const paramType of this.paramTypes) {
+        const typeName = paramType.split(' ')[1];
+        if (cmp(lastWord, typeName) && type !== typeName) {
+          return typeName;
+        }
+      }
     }
   }
 

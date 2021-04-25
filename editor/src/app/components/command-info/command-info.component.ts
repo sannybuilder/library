@@ -29,6 +29,7 @@ export class CommandInfoComponent {
   @Input() snippet?: string;
   @Input() game: Game;
   @Input() enumNames: string[] = [];
+  @Input() extension: string;
 
   isEnumParam(param: Param) {
     return this.enumNames.includes(param.type);

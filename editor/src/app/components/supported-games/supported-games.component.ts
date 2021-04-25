@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Game, GameSupportInfo, GameTitle, SupportLevel } from '../../models';
+import {
+  Command,
+  Game,
+  GameSupportInfo,
+  GameTitle,
+  SupportLevel,
+} from '../../models';
 
 @Component({
   selector: 'scl-supported-games',
@@ -10,6 +16,8 @@ import { Game, GameSupportInfo, GameTitle, SupportLevel } from '../../models';
 export class SupportedGamesComponent {
   SupportLevel = SupportLevel;
   @Input() supportInfo: GameSupportInfo[];
+  @Input() extension: string;
+  @Input() command: Command;
 
   stringifyLevel(level: number, game: Game) {
     if (level === SupportLevel.Supported) {

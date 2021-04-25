@@ -24,6 +24,7 @@ Object
 Pad
 Path
 Pickup
+Plane
 Player
 Rampage
 Rc
@@ -35,6 +36,7 @@ Sphere
 Stat
 Streaming
 StuckCarCheck
+Task
 Text
 Txd
 Weather
@@ -324,12 +326,14 @@ GetModel,0665,0,0,("self: Char" "modelId%i")
 GetNumberOfFollowers,046D,0,0,("self: Char" "number%i")
 GetOffsetInWorldCoords,04C4,0,0,("self: Char" "xOffset%f" "yOffset%f" "zOffset%f" "x%f" "y%f" "z%f")
 GetPedType,089F,0,0,("self: Char" "pedType%i")
+GetScriptTaskStatus,062E,0,0,("self: Char" "taskId%i" "status%i")
 GetSequenceProgress,0646,0,0,("self: Char" "progress%i")
 GetSequenceProgressRecursive,07A4,0,0,("self: Char" "_p2%i" "_p3%i")
 GetSpeed,06AC,0,0,("self: Char" "speed%f")
 GetSwimState,0966,0,0,("self: Char" "state%i")
 GetVelocity,083D,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetWeaponInSlot,04B8,0,0,("self: Char" "weaponSlotId%i" "weaponId%i" "weaponAmmo%i" "weaponModel%i")
+GiveMeleeAttack,07FE,0,0,("self: Char" "styleId%i" "moveId%i")
 GiveWeapon,01B2,0,0,("self: Char" "weaponId%i" "ammo%i")
 HasBeenArrested,0741,1,0,("self: Char")
 HasBeenDamagedByCar,051B,1,0,("self: Char" "handle: Car")
@@ -469,6 +473,7 @@ SetOnlyDamagedByPlayer,02A9,0,0,("self: Char" "state%b")
 SetProofs,02AB,0,0,("self: Char" "bulletProof%b" "fireProof%b" "explosionProof%b" "collisionProof%b" "meleeProof%b")
 SetRelationship,077A,0,0,("self: Char" "relationshipId%i" "pedType%i")
 SetRotation,083E,0,0,("self: Char" "x%f" "y%f" "z%f")
+SetSayContext,0947,0,0,("self: Char" "speech%i" "_p3%i")
 SetShootRate,07DD,0,0,("self: Char" "rate%i")
 SetSignalAfterKill,09B5,0,0,("self: Char" "state%b")
 SetStayInCarWhenJacked,0526,0,0,("self: Char" "state%b")
@@ -586,6 +591,7 @@ $END
 
 $Heli
 $BEGIN
+AttackPlayer,0724,0,0,("self: Heli" "handle: Player" "radius%f")
 ClearOrientation,04D1,0,0,("_p1%i")
 MakeComeCrashingDown,0564,0,0,("_p1%i")
 SetOrientation,04D0,0,0,("_p1%i" "_p2%f")
@@ -721,6 +727,12 @@ DoesExist,09D1,1,0,("self: Pickup")
 GetCoordinates,065B,0,0,("self: Pickup" "x%f" "y%f" "z%f")
 HasBeenCollected,0214,1,0,("self: Pickup")
 Remove,0215,0,0,("self: Pickup")
+$END
+
+$Plane
+$BEGIN
+AttackPlayer,070E,0,0,("self: Plane" "handle: Player" "radius%f")
+AttackPlayerUsingDogFight,08A2,0,0,("self: Plane" "player: Player" "radius%f")
 $END
 
 $Player
@@ -880,6 +892,103 @@ $BEGIN
 Add,03CC,0,0,("vehicle: Car" "distance%f" "duration%i")
 IsCarStuck,03CE,1,0,("vehicle: Car")
 Remove,03CD,0,0,("vehicle: Car")
+$END
+
+$Task
+$BEGIN
+AchieveHeading,05D4,0,0,("handle: Char" "heading%f")
+AimGunAtChar,0635,0,0,("char: Char" "target: Char" "time%i")
+AimGunAtCoord,0667,0,0,("handle: Char" "x%f" "y%f" "z%f" "time%i")
+CarDriveToCoord,05D1,0,0,("driver: Char" "vehicle: Car" "x%f" "y%f" "z%f" "speed%f" "_p7%i" "_p8%i" "_p9%i")
+CarDriveWander,05D2,0,0,("char: Char" "vehicle: Car" "speed%f" "drivingStyle%i")
+CarMission,06E1,0,0,("char: Char" "vehicle: Car" "targetVehicle: Car" "missionId%i" "cruiseSpeed%f" "drivingStyle%i")
+CarTempAction,06C7,0,0,("char: Char" "vehicle: Car" "actionId%i" "time%i")
+CharArrestChar,06E4,0,0,("char: Char" "target: Char")
+CharSlideToCoord,07CD,0,0,("handle: Char" "x%f" "y%f" "z%f" "angle%f" "radius%f")
+CharSlideToCoordAndPlayAnim,0804,0,0,("handle: Char" "x%f" "y%f" "z%f" "angle%f" "radius%f" "animationName%s" "animationFile%s" "frameDelta%f" "loop%b" "lockX%b" "lockY%b" "lockF%b" "time%i")
+ChatWithChar,0677,0,0,("char: Char" "other: Char" "leadSpeaker%b" "_p4%i")
+Climb,078F,0,0,("handle: Char" "flag%b")
+ComplexPickupObject,07C9,0,0,("char: Char" "object: Object")
+Cower,05C3,0,0,("handle: Char")
+Dead,0762,0,0,("handle: Char")
+DestroyCar,0672,0,0,("char: Char" "vehicle: Car")
+Die,05BE,0,0,("handle: Char")
+DieNamedAnim,0829,0,0,("handle: Char" "animationName%s" "animationFile%s" "frameDelta%f" "time%i")
+DiveAndGetUp,0673,0,0,("handle: Char" "directionX%f" "directionY%f" "timeOnGround%i")
+DiveFromAttachmentAndGetUp,06A5,0,0,("handle: Char" "time%i")
+DriveBy,0713,0,0,("handle: Char" "targetChar: Char" "targetVehicle: Car" "x%f" "y%f" "z%f" "radius%f" "style%i" "rightHandCarSeat%b" "fireRate%i")
+DrivePointRoute,06BB,0,0,("char: Char" "vehicle: Car" "speed%i")
+DrivePointRouteAdvanced,07E7,0,0,("char: Char" "vehicle: Car" "speed%f" "_p4%i" "_p5%i" "_p6%i")
+Duck,05C5,0,0,("handle: Char" "time%i")
+EnterCarAsDriver,05CB,0,0,("char: Char" "vehicle: Car" "time%i")
+EnterCarAsPassenger,05CA,0,0,("char: Char" "vehicle: Car" "seatId%i" "time%i")
+EveryoneLeaveCar,068B,0,0,("vehicle: Car")
+FallAndGetUp,05BB,0,0,("handle: Char" "fallDown%b" "timeOnGround%i")
+FleePoint,05DA,0,0,("handle: Char" "x%f" "y%f" "z%f" "radius%f" "time%i")
+FollowFootsteps,0850,0,0,("handle: Char" "target: Char")
+FollowPathNodesToCoord,05F5,0,0,("handle: Char" "x%f" "y%f" "z%f" "walkSpeed%i" "time%i")
+FollowPathNodesToCoordWithRadius,0A2E,0,0,("handle: Char" "x%f" "y%f" "z%f" "mode%i" "time%i" "radius%f")
+FollowPatrolRoute,0817,0,0,("handle: Char" "walkSpeed%i" "routeMode%i")
+FollowPointRoute,05D8,0,0,("handle: Char" "walkSpeed%i" "flag%i")
+GoStraightToCoord,05D3,0,0,("handle: Char" "x%f" "y%f" "z%f" "mode%i" "time%i")
+GoToCoordAnyMeans,0603,0,0,("char: Char" "x%f" "y%f" "z%f" "walkSpeed%i" "vehicle: Car")
+GoToCoordWhileAiming,06C2,0,0,("char: Char" "x%f" "y%f" "z%f" "mode%i" "turnRadius%f" "stopRadius%f" "target: Char" "xOffset%f" "yOffset%f" "zOffset%f")
+GoToCoordWhileShooting,0637,0,0,("char: Char" "x%f" "y%f" "z%f" "mode%i" "turnRadius%f" "stopRadius%f" "target: Char")
+GoToObject,06E2,0,0,("char: Char" "object: Object" "time%i" "radius%f")
+GotoCar,0772,0,0,("char: Char" "vehicle: Car" "time%i" "radius%f")
+GotoChar,05D9,0,0,("walking: Char" "target: Char" "time%i" "radius%f")
+GotoCharAiming,07A3,0,0,("handle: Char" "target: Char" "radiusFrom%f" "radiusTo%f")
+GotoCharOffset,06A8,0,0,("char: Char" "target: Char" "time%i" "radius%f" "heading%f")
+GreetPartner,0823,0,0,("handle: Char" "partner: Char" "_p3%f" "_p4%i")
+HandGesture,0A1D,0,0,("handle: Char" "target: Char")
+HandsUp,05C4,0,0,("handle: Char" "time%i")
+Jetpack,07A7,0,0,("handle: Char")
+Jump,05BC,0,0,("handle: Char" "state%b")
+KillCharOnFoot,05E2,0,0,("killer: Char" "target: Char")
+KillCharOnFootTimed,07A5,0,0,("handle: Char" "target: Char" "time%i")
+KillCharOnFootWhileDucking,0634,0,0,("char: Char" "target: Char" "flags%i" "actionDelay%i" "actionChance%i")
+KindaStayInSamePlace,085B,0,0,("handle: Char" "state%b")
+LeaveAnyCar,0633,0,0,("handle: Char")
+LeaveCar,05CD,0,0,("char: Char" "vehicle: Car")
+LeaveCarAndFlee,05CF,0,0,("char: Char" "vehicle: Car" "x%f" "y%f" "z%f")
+LeaveCarImmediately,0622,0,0,("char: Char" "vehicle: Car")
+LookAbout,05C9,0,0,("handle: Char" "time%i")
+LookAtChar,05BF,0,0,("observer: Char" "target: Char" "time%i")
+LookAtCoord,06A9,0,0,("handle: Char" "x%f" "y%f" "z%f" "time%i")
+LookAtObject,0655,0,0,("char: Char" "object: Object" "time: any")
+LookAtVehicle,05C0,0,0,("char: Char" "vehicle: Car" "time%i")
+Pause,05B9,0,0,("handle: Char" "time%i")
+PickUpObject,070A,0,0,("char: Char" "object: Object" "xOffset%f" "yOffset%f" "zOffset%f" "boneId%i" "_p7%i" "animationName%s" "animationFile%s" "time%i")
+PickUpSecondObject,09A0,0,0,("char: Char" "object: Object" "xOffset%f" "yOffset%f" "zOffset%f" "boneId%i" "_p7%i" "animationName%s" "animationFile%s" "time%i")
+PlayAnim,0605,0,0,("handle: Char" "animationName%s" "animationFile%s" "frameDelta%f" "loop%b" "lockX%b" "lockY%b" "lockF%b" "time%i")
+PlayAnimNonInterruptable,0812,0,0,("handle: Char" "animationName%s" "animationFile%s" "frameDelta%f" "loop%b" "lockX%b" "lockY%b" "lockF%b" "time%i")
+PlayAnimSecondary,0A1A,0,0,("handle: Char" "animationFile%s" "animationName%s" "frameDelta%f" "loop%b" "lockX%b" "lockY%b" "lockF%b" "time%i")
+PlayAnimWithFlags,088A,0,0,("handle: Char" "animationName%s" "animationFile%s" "frameDelta%f" "loop%b" "lockX%b" "lockY%b" "lockF%b" "time%i" "disableForce%b" "disableLockZ%b")
+Say,05C1,0,0,("handle: Char" "phraseId%i")
+ScratchHead,05C8,0,0,("handle: Char")
+SetIgnoreWeaponRangeFlag,099F,0,0,("handle: Char" "state%b")
+ShakeFist,05C2,0,0,("handle: Char")
+ShootAtChar,074D,0,0,("handle: Char" "target: Char" "time%i")
+ShootAtCoord,0668,0,0,("handle: Char" "x%f" "y%f" "z%f" "time%i")
+ShuffleToNextCarSeat,0676,0,0,("char: Char" "vehicle: Car")
+SitDown,06B0,0,0,("handle: Char" "time%i")
+SmartFleePoint,05DC,0,0,("handle: Char" "x%f" "y%f" "z%f" "radius%f" "time%i")
+StandStill,05BA,0,0,("handle: Char" "time%i")
+StayInSamePlace,0638,0,0,("handle: Char" "state%b")
+SwimToCoord,07E1,0,0,("handle: Char" "x%f" "y%f" "z%f")
+Tired,05BD,0,0,("handle: Char" "time%i")
+ToggleDuck,04EB,0,0,("handle: Char" "state%b")
+TogglePedThreatScanner,0688,0,0,("handle: Char" "_p2%b" "_p3%b" "_p4%b")
+TurnCharToFaceChar,0639,0,0,("char: Char" "target: Char")
+TurnCharToFaceCoord,06BA,0,0,("handle: Char" "x%f" "y%f" "z%f")
+UseAtm,05C7,0,0,("handle: Char")
+UseClosestMapAttractor,08A0,0,0,("handle: Char" "radius%f" "model: model_ide" "fromX%f" "fromY%f" "fromZ%f" "name%s")
+UseMobilePhone,0729,0,0,("handle: Char" "start%b")
+WalkAlongsideChar,0859,0,0,("handle: Char" "target: Char")
+WanderStandard,05DE,0,0,("handle: Char")
+WarpCharIntoCarAsDriver,072A,0,0,("char: Char" "vehicle: Car")
+WarpCharIntoCarAsPassenger,072B,0,0,("char: Char" "vehicle: Car" "seatId%i")
+WeaponRoll,06E3,0,0,("handle: Char" "direction%b")
 $END
 
 $Text

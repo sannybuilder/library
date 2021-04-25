@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619360142558
+    "last_update": 1619378392621
   },
   "extensions": [
     {
@@ -19658,20 +19658,25 @@
           "short_desc": "Returns true if the object is in the specified area"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "04EB",
           "name": "TASK_TOGGLE_DUCK",
           "num_params": 2,
           "short_desc": "Makes the character crouch",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Task",
+          "member": "ToggleDuck",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "04EC",
@@ -22606,212 +22611,277 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05B9",
           "name": "TASK_PAUSE",
           "num_params": 2,
           "short_desc": "Makes the character pause for the specified amount of time",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Task",
+          "member": "Pause",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05BA",
           "name": "TASK_STAND_STILL",
           "num_params": 2,
           "short_desc": "Makes the character stand still",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "StandStill"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "fallDown",
+              "type": "bool"
+            },
+            {
+              "name": "timeOnGround",
+              "type": "int"
+            }
+          ],
           "id": "05BB",
           "name": "TASK_FALL_AND_GET_UP",
           "num_params": 3,
           "short_desc": "Makes actor fall to the ground and stay there for the specified time",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "FallAndGetUp"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "05BC",
           "name": "TASK_JUMP",
           "num_params": 2,
           "short_desc": "Makes the actor perform a jump",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Jump"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05BD",
           "name": "TASK_TIRED",
           "num_params": 2,
           "short_desc": "Makes the actor stop to regain breath",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Task",
+          "member": "Tired",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "05BE",
           "name": "TASK_DIE",
           "num_params": 1,
           "short_desc": "Kills the character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Die"
         },
         {
+          "input": [
+            {
+              "name": "observer",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05BF",
           "name": "TASK_LOOK_AT_CHAR",
           "num_params": 3,
           "short_desc": "Makes the character look at another character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LookAtChar"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05C0",
           "name": "TASK_LOOK_AT_VEHICLE",
           "num_params": 3,
           "short_desc": "Makes the actor look at the specified vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LookAtVehicle"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "phraseId",
+              "type": "int"
+            }
+          ],
           "id": "05C1",
           "name": "TASK_SAY",
           "num_params": 2,
           "short_desc": "Makes the character say a phrase from the specified audio table",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Say"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "05C2",
           "name": "TASK_SHAKE_FIST",
           "num_params": 1,
           "short_desc": "Makes the actor lift his hand up in the air angrily",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "ShakeFist"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "05C3",
           "name": "TASK_COWER",
           "num_params": 1,
           "short_desc": "Makes the actor stumble backwards with his arms in front of his face as if he is backing away from something in fear",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Cower"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05C4",
           "name": "TASK_HANDS_UP",
           "num_params": 2,
           "short_desc": "Makes the actor put their hands in the air",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "HandsUp"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05C5",
           "name": "TASK_DUCK",
           "num_params": 2,
           "short_desc": "Character ducks with his arms over head",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Duck"
         },
         {
           "id": "05C6",
@@ -22823,88 +22893,113 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "05C7",
           "name": "TASK_USE_ATM",
           "num_params": 1,
           "short_desc": "Character uses an ATM machine",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "UseAtm"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "05C8",
           "name": "TASK_SCRATCH_HEAD",
           "num_params": 1,
           "short_desc": "Character looks around",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "ScratchHead"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05C9",
           "name": "TASK_LOOK_ABOUT",
           "num_params": 2,
           "short_desc": "Character looks out ahead",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LookAbout"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "seatId",
+              "type": "int"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05CA",
           "name": "TASK_ENTER_CAR_AS_PASSENGER",
           "num_params": 4,
           "short_desc": "Character approaches and occupies the specified car seat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "EnterCarAsPassenger"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05CB",
           "name": "TASK_ENTER_CAR_AS_DRIVER",
           "num_params": 3,
           "short_desc": "Character enters a vehicle as the driver",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "EnterCarAsDriver"
         },
         {
           "id": "05CC",
@@ -22916,20 +23011,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "05CD",
           "name": "TASK_LEAVE_CAR",
           "num_params": 2,
           "short_desc": "Makes the character exit the specified vehicle, if they are currently in it",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LeaveCar"
         },
         {
           "id": "05CE",
@@ -22941,32 +23041,37 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "id": "05CF",
           "name": "TASK_LEAVE_CAR_AND_FLEE",
           "num_params": 5,
           "short_desc": "Makes the character exit the vehicle and flee to the specified position",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LeaveCarAndFlee"
         },
         {
           "id": "05D0",
@@ -22978,120 +23083,140 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "driver",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "int"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            },
+            {
+              "name": "_p9",
+              "type": "int"
+            }
+          ],
           "id": "05D1",
           "name": "TASK_CAR_DRIVE_TO_COORD",
           "num_params": 9,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "CarDriveToCoord"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            },
+            {
+              "name": "drivingStyle",
+              "type": "int"
+            }
+          ],
           "id": "05D2",
           "name": "TASK_CAR_DRIVE_WANDER",
           "num_params": 4,
           "short_desc": "Makes the character drive around aimlessly in a vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "CarDriveWander"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "mode",
+              "type": "int"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05D3",
           "name": "TASK_GO_STRAIGHT_TO_COORD",
           "num_params": 6,
           "short_desc": "Makes the character walk to the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GoStraightToCoord"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "id": "05D4",
           "name": "TASK_ACHIEVE_HEADING",
           "num_params": 2,
           "short_desc": "Rotates a character to the specified angle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "AchieveHeading"
         },
         {
           "id": "05D5",
@@ -23129,80 +23254,95 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "walkSpeed",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
           "id": "05D8",
           "name": "TASK_FOLLOW_POINT_ROUTE",
           "num_params": 3,
           "short_desc": "Makes the character follow the path route",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "FollowPointRoute"
         },
         {
+          "input": [
+            {
+              "name": "walking",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "05D9",
           "name": "TASK_GOTO_CHAR",
           "num_params": 4,
           "short_desc": "Approaches the character from any direction within the specified radius",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GotoChar"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05DA",
           "name": "TASK_FLEE_POINT",
           "num_params": 6,
           "short_desc": "Makes the character run away from a point, scared and often screaming",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "FleePoint"
         },
         {
           "id": "05DB",
@@ -23229,36 +23369,41 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05DC",
           "name": "TASK_SMART_FLEE_POINT",
           "num_params": 6,
           "short_desc": "Makes the character run away from the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "SmartFleePoint"
         },
         {
           "id": "05DD",
@@ -23285,16 +23430,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "05DE",
           "name": "TASK_WANDER_STANDARD",
           "num_params": 1,
           "short_desc": "Makes the character walk around the ped path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "WanderStandard"
         },
         {
           "id": "05DF",
@@ -23324,20 +23474,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "killer",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "id": "05E2",
           "name": "TASK_KILL_CHAR_ON_FOOT",
           "num_params": 2,
           "short_desc": "Character tries to kill another character on foot",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "KillCharOnFoot"
         },
         {
           "id": "05E3",
@@ -23564,36 +23719,41 @@
           "member": "SetEscortCarFront"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "walkSpeed",
+              "type": "int"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "05F5",
           "name": "TASK_FOLLOW_PATH_NODES_TO_COORD",
           "num_params": 6,
           "short_desc": "Makes the character go to the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "FollowPathNodesToCoord"
         },
         {
           "id": "05F6",
@@ -24129,36 +24289,41 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "walkSpeed",
+              "type": "int"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "0603",
           "name": "TASK_GO_TO_COORD_ANY_MEANS",
           "num_params": 6,
           "short_desc": "Assigns the character the task of getting to the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GoToCoordAnyMeans"
         },
         {
           "id": "0604",
@@ -24181,48 +24346,53 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "frameDelta",
+              "type": "float"
+            },
+            {
+              "name": "loop",
+              "type": "bool"
+            },
+            {
+              "name": "lockX",
+              "type": "bool"
+            },
+            {
+              "name": "lockY",
+              "type": "bool"
+            },
+            {
+              "name": "lockF",
+              "type": "bool"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0605",
           "name": "TASK_PLAY_ANIM",
           "num_params": 9,
           "short_desc": "Makes the character perform an animation",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "PlayAnim"
         },
         {
           "id": "0606",
@@ -24694,20 +24864,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "0622",
           "name": "TASK_LEAVE_CAR_IMMEDIATELY",
           "num_params": 2,
           "short_desc": "Makes the character jump out of the vehicle while it is in motion",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LeaveCarImmediately"
         },
         {
           "id": "0623",
@@ -24865,24 +25040,29 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "taskId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "status",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "062E",
           "name": "GET_SCRIPT_TASK_STATUS",
           "num_params": 3,
           "short_desc": "Returns the status of the specified script task of the character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetScriptTaskStatus"
         },
         {
           "id": "062F",
@@ -24945,64 +25125,79 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "0633",
           "name": "TASK_LEAVE_ANY_CAR",
           "num_params": 1,
           "short_desc": "Makes the actor exit the car, if he is in one",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LeaveAnyCar"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "flags",
+              "type": "int"
+            },
+            {
+              "name": "actionDelay",
+              "type": "int"
+            },
+            {
+              "name": "actionChance",
+              "type": "int"
+            }
+          ],
           "id": "0634",
           "name": "TASK_KILL_CHAR_ON_FOOT_WHILE_DUCKING",
           "num_params": 5,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "KillCharOnFootWhileDucking"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0635",
           "name": "TASK_AIM_GUN_AT_CHAR",
           "num_params": 3,
           "short_desc": "Character aims at another character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "AimGunAtChar"
         },
         {
           "id": "0636",
@@ -25052,76 +25247,91 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "mode",
+              "type": "int"
+            },
+            {
+              "name": "turnRadius",
+              "type": "float"
+            },
+            {
+              "name": "stopRadius",
+              "type": "float"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "id": "0637",
           "name": "TASK_GO_TO_COORD_WHILE_SHOOTING",
           "num_params": 8,
           "short_desc": "The character goes to the coordinates (the mode value determines whether the character will walk, run or sprint) while shooting at another character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GoToCoordWhileShooting"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0638",
           "name": "TASK_STAY_IN_SAME_PLACE",
           "num_params": 2,
           "short_desc": "Makes the character stay in the same place",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "StayInSamePlace"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "id": "0639",
           "name": "TASK_TURN_CHAR_TO_FACE_CHAR",
           "num_params": 2,
           "short_desc": "Character turns to another character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "TurnCharToFaceChar"
         },
         {
           "id": "063A",
@@ -25443,24 +25653,29 @@
           "member": "SetRenderScorched"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "time",
+              "type": "any"
+            }
+          ],
           "id": "0655",
           "name": "TASK_LOOK_AT_OBJECT",
           "num_params": 3,
           "short_desc": "Makes the character look at an object",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LookAtObject"
         },
         {
           "id": "0656",
@@ -25736,60 +25951,70 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0667",
           "name": "TASK_AIM_GUN_AT_COORD",
           "num_params": 5,
           "short_desc": "Makes the character aim at the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "AimGunAtCoord"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0668",
           "name": "TASK_SHOOT_AT_COORD",
           "num_params": 5,
           "short_desc": "Makes the character turn round and shoot at the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "ShootAtCoord"
         },
         {
           "id": "0669",
@@ -26071,44 +26296,54 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "0672",
           "name": "TASK_DESTROY_CAR",
           "num_params": 2,
           "short_desc": "Makes the character attack a vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "DestroyCar"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "directionX",
+              "type": "float"
+            },
+            {
+              "name": "directionY",
+              "type": "float"
+            },
+            {
+              "name": "timeOnGround",
+              "type": "int"
+            }
+          ],
           "id": "0673",
           "name": "TASK_DIVE_AND_GET_UP",
           "num_params": 4,
           "short_desc": "Makes the character perform a dive in the specified direction",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "DiveAndGetUp"
         },
         {
           "id": "0674",
@@ -26136,44 +26371,54 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "0676",
           "name": "TASK_SHUFFLE_TO_NEXT_CAR_SEAT",
           "num_params": 2,
           "short_desc": "Makes the character move to the seat on the right",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "ShuffleToNextCarSeat"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "other",
+              "type": "Char"
+            },
+            {
+              "name": "leadSpeaker",
+              "type": "bool"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            }
+          ],
           "id": "0677",
           "name": "TASK_CHAT_WITH_CHAR",
           "num_params": 4,
           "short_desc": "Makes the character chat with another character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "ChatWithChar"
         },
         {
           "id": "0678",
@@ -26608,28 +26853,33 @@
           "member": "ClearTasks"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "_p2",
+              "type": "bool"
+            },
+            {
+              "name": "_p3",
+              "type": "bool"
+            },
+            {
+              "name": "_p4",
+              "type": "bool"
+            }
+          ],
           "id": "0688",
           "name": "TASK_TOGGLE_PED_THREAT_SCANNER",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "TogglePedThreatScanner"
         },
         {
           "id": "0689",
@@ -26670,16 +26920,21 @@
           "member": "FixDoor"
         },
         {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "068B",
           "name": "TASK_EVERYONE_LEAVE_CAR",
           "num_params": 1,
           "short_desc": "Makes all passengers of the car leave it",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Task",
+          "member": "EveryoneLeaveCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -27049,20 +27304,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "06A5",
           "name": "TASK_DIVE_FROM_ATTACHMENT_AND_GET_UP",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "DiveFromAttachmentAndGetUp"
         },
         {
           "id": "06A6",
@@ -27118,60 +27378,70 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "id": "06A8",
           "name": "TASK_GOTO_CHAR_OFFSET",
           "num_params": 5,
           "short_desc": "Approaches the char at the specified offset, specified by the radius and angle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GotoCharOffset"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "06A9",
           "name": "TASK_LOOK_AT_COORD",
           "num_params": 5,
           "short_desc": "Makes the actor look at the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "LookAtCoord"
         },
         {
           "id": "06AA",
@@ -27276,20 +27546,25 @@
           "member": "DisableSprint"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "06B0",
           "name": "TASK_SIT_DOWN",
           "num_params": 2,
           "short_desc": "Makes the actor sit down for the specified amount of time",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "SitDown"
         },
         {
           "id": "06B1",
@@ -27487,48 +27762,58 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "id": "06BA",
           "name": "TASK_TURN_CHAR_TO_FACE_COORD",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "TurnCharToFaceCoord"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "speed",
+              "type": "int"
+            }
+          ],
           "id": "06BB",
           "name": "TASK_DRIVE_POINT_ROUTE",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "DrivePointRoute"
         },
         {
           "id": "06BC",
@@ -27730,56 +28015,61 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "mode",
+              "type": "int"
+            },
+            {
+              "name": "turnRadius",
+              "type": "float"
+            },
+            {
+              "name": "stopRadius",
+              "type": "float"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            }
+          ],
           "id": "06C2",
           "name": "TASK_GO_TO_COORD_WHILE_AIMING",
           "num_params": 11,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            },
-            {
-              "name": "_p11",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GoToCoordWhileAiming"
         },
         {
           "id": "06C3",
@@ -27847,28 +28137,33 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "actionId",
+              "type": "int"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "06C7",
           "name": "TASK_CAR_TEMP_ACTION",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "CarTempAction"
         },
         {
           "id": "06C8",
@@ -28237,92 +28532,112 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "targetVehicle",
+              "type": "Car"
+            },
+            {
+              "name": "missionId",
+              "type": "int"
+            },
+            {
+              "name": "cruiseSpeed",
+              "type": "float"
+            },
+            {
+              "name": "drivingStyle",
+              "type": "int"
+            }
+          ],
           "id": "06E1",
           "name": "TASK_CAR_MISSION",
           "num_params": 6,
           "short_desc": "Sets the cars current mission with various parameters",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "CarMission"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "06E2",
           "name": "TASK_GO_TO_OBJECT",
           "num_params": 4,
           "short_desc": "Makes the character go to an object",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GoToObject"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "direction",
+              "type": "bool"
+            }
+          ],
           "id": "06E3",
           "name": "TASK_WEAPON_ROLL",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "WeaponRoll"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "id": "06E4",
           "name": "TASK_CHAR_ARREST_CHAR",
           "num_params": 2,
           "short_desc": "Makes the character attempt to arrest another character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "CharArrestChar"
         },
         {
           "id": "06E5",
@@ -28947,52 +29262,57 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "boneId",
+              "type": "int"
+            },
+            {
+              "name": "_p7",
+              "type": "int"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "070A",
           "name": "TASK_PICK_UP_OBJECT",
           "num_params": 10,
           "short_desc": "Attaches the specified actor to an object with the optional addition of having it perform an animation",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "PickUpObject"
         },
         {
           "id": "070B",
@@ -29039,24 +29359,26 @@
           "member": "BuildModel"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Plane"
+            },
+            {
+              "name": "handle",
+              "type": "Player"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "070E",
           "name": "PLANE_ATTACK_PLAYER",
           "num_params": 3,
           "short_desc": "Sets the planes mission to attack the player",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Plane",
+          "member": "AttackPlayer"
         },
         {
           "id": "070F",
@@ -29125,52 +29447,57 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "targetChar",
+              "type": "Char"
+            },
+            {
+              "name": "targetVehicle",
+              "type": "Car"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "style",
+              "type": "int"
+            },
+            {
+              "name": "rightHandCarSeat",
+              "type": "bool"
+            },
+            {
+              "name": "fireRate",
+              "type": "int"
+            }
+          ],
           "id": "0713",
           "name": "TASK_DRIVE_BY",
           "num_params": 10,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "DriveBy"
         },
         {
           "id": "0714",
@@ -29401,24 +29728,26 @@
           "member": "Break"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            },
+            {
+              "name": "handle",
+              "type": "Player"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "0724",
           "name": "HELI_ATTACK_PLAYER",
           "num_params": 3,
           "short_desc": "The 2nd param is ignored",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "AttackPlayer"
         },
         {
           "id": "0725",
@@ -29487,56 +29816,71 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "start",
+              "type": "bool"
+            }
+          ],
           "id": "0729",
           "name": "TASK_USE_MOBILE_PHONE",
           "num_params": 2,
           "short_desc": "If the 2nd param is true, the character pulls out a cellphone, answers it, and holds it to their ear",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "UseMobilePhone"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "072A",
           "name": "TASK_WARP_CHAR_INTO_CAR_AS_DRIVER",
           "num_params": 2,
           "short_desc": "Warps the character into the specified vehicles' driver seat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "WarpCharIntoCarAsDriver"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "seatId",
+              "type": "int"
+            }
+          ],
           "id": "072B",
           "name": "TASK_WARP_CHAR_INTO_CAR_AS_PASSENGER",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "WarpCharIntoCarAsPassenger"
         },
         {
           "id": "072C",
@@ -30192,24 +30536,29 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "074D",
           "name": "TASK_SHOOT_AT_CHAR",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "ShootAtChar"
         },
         {
           "id": "074E",
@@ -30533,16 +30882,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "0762",
           "name": "TASK_DEAD",
           "num_params": 1,
           "short_desc": "Kills the character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Dead"
         },
         {
           "id": "0763",
@@ -30742,28 +31096,33 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "0772",
           "name": "TASK_GOTO_CAR",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GotoCar"
         },
         {
           "id": "0773",
@@ -31202,20 +31561,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "id": "078F",
           "name": "TASK_CLIMB",
           "num_params": 2,
           "short_desc": "Makes the character jump and climb on an object",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Climb"
         },
         {
           "id": "0790",
@@ -31434,28 +31798,33 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "radiusFrom",
+              "type": "float"
+            },
+            {
+              "name": "radiusTo",
+              "type": "float"
+            }
+          ],
           "id": "07A3",
           "name": "TASK_GOTO_CHAR_AIMING",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GotoCharAiming"
         },
         {
           "id": "07A4",
@@ -31484,24 +31853,29 @@
           "member": "GetSequenceProgressRecursive"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "07A5",
           "name": "TASK_KILL_CHAR_ON_FOOT_TIMED",
           "num_params": 3,
           "short_desc": "Makes the character attack the specified character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "KillCharOnFootTimed"
         },
         {
           "id": "07A6",
@@ -31536,16 +31910,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "07A7",
           "name": "TASK_JETPACK",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "Jetpack"
         },
         {
           "id": "07A8",
@@ -32060,20 +32439,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            }
+          ],
           "id": "07C9",
           "name": "TASK_COMPLEX_PICKUP_OBJECT",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "ComplexPickupObject"
         },
         {
           "id": "07CA",
@@ -32117,36 +32501,41 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "07CD",
           "name": "TASK_CHAR_SLIDE_TO_COORD",
           "num_params": 6,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "CharSlideToCoord"
         },
         {
           "id": "07CE",
@@ -32448,28 +32837,33 @@
           "member": "SetAsFriendly"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "id": "07E1",
           "name": "TASK_SWIM_TO_COORD",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "SwimToCoord"
         },
         {
           "id": "07E2",
@@ -32558,36 +32952,41 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "id": "07E7",
           "name": "TASK_DRIVE_POINT_ROUTE_ADVANCED",
           "num_params": 6,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "DrivePointRouteAdvanced"
         },
         {
           "id": "07E8",
@@ -32957,24 +33356,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "styleId",
+              "type": "int"
+            },
+            {
+              "name": "moveId",
+              "type": "int"
+            }
+          ],
           "id": "07FE",
           "name": "GIVE_MELEE_ATTACK_TO_CHAR",
           "num_params": 3,
           "short_desc": "Sets the specified characters fighting style and moves",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "GiveMeleeAttack"
         },
         {
           "id": "07FF",
@@ -33047,68 +33448,73 @@
           "member": "DoesHaveHydraulics"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "frameDelta",
+              "type": "float"
+            },
+            {
+              "name": "loop",
+              "type": "bool"
+            },
+            {
+              "name": "lockX",
+              "type": "bool"
+            },
+            {
+              "name": "lockY",
+              "type": "bool"
+            },
+            {
+              "name": "lockF",
+              "type": "bool"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0804",
           "name": "TASK_CHAR_SLIDE_TO_COORD_AND_PLAY_ANIM",
           "num_params": 14,
           "short_desc": "The character goes to the specified point and plays an anim",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            },
-            {
-              "name": "_p11",
-              "type": "any"
-            },
-            {
-              "name": "_p12",
-              "type": "any"
-            },
-            {
-              "name": "_p13",
-              "type": "any"
-            },
-            {
-              "name": "_p14",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "CharSlideToCoordAndPlayAnim"
         },
         {
           "id": "0805",
@@ -33314,48 +33720,53 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "frameDelta",
+              "type": "float"
+            },
+            {
+              "name": "loop",
+              "type": "bool"
+            },
+            {
+              "name": "lockX",
+              "type": "bool"
+            },
+            {
+              "name": "lockY",
+              "type": "bool"
+            },
+            {
+              "name": "lockF",
+              "type": "bool"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0812",
           "name": "TASK_PLAY_ANIM_NON_INTERRUPTABLE",
           "num_params": 9,
           "short_desc": "Makes the character perform an animation",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "PlayAnimNonInterruptable"
         },
         {
           "id": "0813",
@@ -33483,24 +33894,29 @@
           "class": "Char"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "walkSpeed",
+              "type": "int"
+            },
+            {
+              "name": "routeMode",
+              "type": "int"
+            }
+          ],
           "id": "0817",
           "name": "TASK_FOLLOW_PATROL_ROUTE",
           "num_params": 3,
           "short_desc": "Assigns the character to the patrol path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "FollowPatrolRoute"
         },
         {
           "id": "0818",
@@ -33680,28 +34096,33 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "partner",
+              "type": "Char"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            }
+          ],
           "id": "0823",
           "name": "TASK_GREET_PARTNER",
           "num_params": 4,
           "short_desc": "Character greets another character with a handshake",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "GreetPartner"
         },
         {
           "id": "0824",
@@ -33767,32 +34188,37 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "frameDelta",
+              "type": "float"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0829",
           "name": "TASK_DIE_NAMED_ANIM",
           "num_params": 5,
           "short_desc": "Makes the actor perform an animation similarly to 0605",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "DieNamedAnim"
         },
         {
           "id": "082A",
@@ -34374,20 +34800,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "id": "0850",
           "name": "TASK_FOLLOW_FOOTSTEPS",
           "num_params": 2,
           "short_desc": "Makes one actor follow another",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "FollowFootsteps"
         },
         {
           "input": [
@@ -34529,20 +34960,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "id": "0859",
           "name": "TASK_WALK_ALONGSIDE_CHAR",
           "num_params": 2,
           "short_desc": "Makes the character walk alongside the specified character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "WalkAlongsideChar"
         },
         {
           "id": "085A",
@@ -34569,20 +35005,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "085B",
           "name": "TASK_KINDA_STAY_IN_SAME_PLACE",
           "num_params": 2,
           "short_desc": "Makes the character stay near his current position",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "KindaStayInSamePlace"
         },
         {
           "id": "085C",
@@ -35385,56 +35826,61 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "frameDelta",
+              "type": "float"
+            },
+            {
+              "name": "loop",
+              "type": "bool"
+            },
+            {
+              "name": "lockX",
+              "type": "bool"
+            },
+            {
+              "name": "lockY",
+              "type": "bool"
+            },
+            {
+              "name": "lockF",
+              "type": "bool"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "disableForce",
+              "type": "bool"
+            },
+            {
+              "name": "disableLockZ",
+              "type": "bool"
+            }
+          ],
           "id": "088A",
           "name": "TASK_PLAY_ANIM_WITH_FLAGS",
           "num_params": 11,
           "short_desc": "Makes the actor perform an animation",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            },
-            {
-              "name": "_p11",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "PlayAnimWithFlags"
         },
         {
           "id": "088B",
@@ -35757,40 +36203,45 @@
           "member": "GetPedType"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "model",
+              "type": "model_ide"
+            },
+            {
+              "name": "fromX",
+              "type": "float"
+            },
+            {
+              "name": "fromY",
+              "type": "float"
+            },
+            {
+              "name": "fromZ",
+              "type": "float"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
           "id": "08A0",
           "name": "TASK_USE_CLOSEST_MAP_ATTRACTOR",
           "num_params": 7,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "UseClosestMapAttractor"
         },
         {
           "id": "08A1",
@@ -35802,24 +36253,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Plane"
+            },
+            {
+              "name": "player",
+              "type": "Player"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "08A2",
           "name": "PLANE_ATTACK_PLAYER_USING_DOG_FIGHT",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Plane",
+          "member": "AttackPlayerUsingDogFight"
         },
         {
           "id": "08A3",
@@ -38653,24 +39106,29 @@
           "member": "SetUsesUpperbodyDamageAnimsOnly"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "speech",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "_p3",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0947",
           "name": "SET_CHAR_SAY_CONTEXT",
           "num_params": 3,
           "short_desc": "Similar to 05C1, but returns which phrase was spoken and is not run as a task",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetSayContext"
         },
         {
           "id": "0948",
@@ -40117,68 +40575,78 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "099F",
           "name": "TASK_SET_IGNORE_WEAPON_RANGE_FLAG",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "SetIgnoreWeaponRangeFlag"
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "boneId",
+              "type": "int"
+            },
+            {
+              "name": "_p7",
+              "type": "int"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "09A0",
           "name": "TASK_PICK_UP_SECOND_OBJECT",
           "num_params": 10,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "PickUpSecondObject"
         },
         {
           "id": "09A1",
@@ -42198,48 +42666,53 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "frameDelta",
+              "type": "float"
+            },
+            {
+              "name": "loop",
+              "type": "bool"
+            },
+            {
+              "name": "lockX",
+              "type": "bool"
+            },
+            {
+              "name": "lockY",
+              "type": "bool"
+            },
+            {
+              "name": "lockF",
+              "type": "bool"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0A1A",
           "name": "TASK_PLAY_ANIM_SECONDARY",
           "num_params": 9,
           "short_desc": "The character plays an animation that affects only the upper half of it's body",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "PlayAnimSecondary"
         },
         {
           "id": "0A1B",
@@ -42279,20 +42752,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "id": "0A1D",
           "name": "TASK_HAND_GESTURE",
           "num_params": 2,
           "short_desc": "Character will turn to face the other character and make a gesture (most notably used for the camera script where CJ's girlfriend will turn to wave at the camera)",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Task",
+          "member": "HandGesture"
         },
         {
           "id": "0A1E",
@@ -42536,40 +43014,45 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "mode",
+              "type": "int"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "0A2E",
           "name": "TASK_FOLLOW_PATH_NODES_TO_COORD_WITH_RADIUS",
           "num_params": 7,
           "short_desc": "Makes the specified character run in panic to the specified position",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Task",
+          "member": "FollowPathNodesToCoordWithRadius",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A2F",

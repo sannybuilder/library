@@ -19,9 +19,9 @@ export class GitHubService {
   ) {}
 
   loadFileGracefully(fileName: string, accessToken: string, game: Game) {
+    const ts = Date.now().toString();
     return this._http
       .get(Location.joinWithSlash(this._config.endpoints.base, fileName))
-
       .pipe(
         catchError(() => {
           const headers = accessToken
@@ -51,7 +51,9 @@ export class GitHubService {
                   .pipe(map((blob) => JSON.parse(atob(blob.content))));
               }),
               catchError(() =>
-                this._http.get(Location.joinWithSlash('/assets', fileName))
+                this._http.get(Location.joinWithSlash('/assets', fileName), {
+                  params: { ts },
+                })
               )
             );
         })

@@ -1,7 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { pickBy } from 'lodash';
 
-import { createGitHubAdaptor, createKoreFile, KoreFile } from '../../korefile';
+import {
+  createGitHubAdaptor,
+  createKoreFile,
+  KoreFile,
+} from '../../state/github';
 import { Extension } from '../../models';
 import { stripSourceAny, smash } from '../../utils';
 import {

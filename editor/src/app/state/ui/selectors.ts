@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { flatMap, sortBy } from 'lodash';
-import { search } from '../../fusejs/fusejs';
+import { search } from '../../utils';
 import { Attribute, Command, Game } from '../../models';
 import { extensions } from '../extensions/selectors';
 import { game } from '../game/selectors';

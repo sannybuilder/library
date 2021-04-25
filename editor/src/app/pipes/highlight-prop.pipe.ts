@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FUSEJS_OPTIONS } from './fusejs';
+import { FUSEJS_OPTIONS } from '../utils';
 
 @Pipe({ name: 'hlProp' })
 export class HlPropPipe implements PipeTransform {

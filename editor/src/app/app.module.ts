@@ -22,6 +22,7 @@ import {
   OutputParamsPipe,
   SingleParamPipe,
   AttrTitlePipe,
+  HlPropPipe,
 } from './pipes';
 
 // extensions state
@@ -52,7 +53,6 @@ import { gameReducer } from './state/game/reducer';
 import { EnumsEffects } from './state/enums/effects';
 import { enumsReducer } from './state/enums/reducer';
 
-import { HlPropPipe } from './fusejs';
 import { ConfigModule } from './config';
 import { AuthGuard, RouteGuard } from './route.guard';
 import { AppComponent } from './app.component';

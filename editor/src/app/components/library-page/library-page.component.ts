@@ -27,7 +27,7 @@ import {
   GameFacade,
   EnumsFacade,
 } from '../../state';
-import { FUSEJS_OPTIONS } from '../../fusejs';
+import { FUSEJS_OPTIONS } from '../../utils';
 
 @Component({
   selector: 'scl-library-page',

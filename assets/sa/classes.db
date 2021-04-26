@@ -563,9 +563,9 @@ $END
 
 $DynamicLibrary
 $BEGIN
-Free,0AA3,0,0,("_p1: any")
-GetProcedure,0AA4,0,0,("self: DynamicLibrary" "_p2: any" "_p3: any")
-Load,0AA2,0,0,("_p1: any" "handle: DynamicLibrary")
+Free,0AA3,0,0,("self: DynamicLibrary")
+GetProcedure,0AA4,1,0,("name%s" "self: DynamicLibrary" "address%i")
+Load,0AA2,1,0,("fileName%s" "handle: DynamicLibrary")
 $END
 
 $Fs
@@ -580,14 +580,14 @@ FindFirstFile,0AE6,0,0,("_p1: any" "_p2: any" "_p3: any")
 FindNextFile,0AE7,1,0,("_p1: any" "_p2: any")
 GetFileSize,0A9C,0,0,("file: File" "size%i")
 IsEndOfFileReached,0AD6,0,0,("file: File")
-OpenFile,0A9A,0,0,("_p1: any" "_p2: any" "handle: File")
-ReadFromFile,0A9D,0,0,("_p1: any" "_p2: any" "_p3: any")
+OpenFile,0A9A,1,0,("fileName%s" "mode: any" "handle: File")
+ReadFromFile,0A9D,0,0,("file: File" "size%i" "destination: any")
 ReadStringFromFile,0AD7,0,0,("_p1: any" "_p2: any" "_p3: any")
 ScanFile,0ADA,0,0,("_p1: any" "_p2: any" "_p3: any" "_p4: any")
 SetCurrentDirectory,0A99,0,0,("_p1: any")
 WriteFormattedStringToFile,0AD9,0,0,("_p1: any" "_p2: any" "_p3: any")
 WriteStringToFile,0AD8,0,0,("_p1: any" "_p2: any")
-WriteToFile,0A9E,0,0,("_p1: any" "_p2: any" "_p3: any")
+WriteToFile,0A9E,0,0,("file: File" "size%i" "source: any")
 $END
 
 $Fx

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619462992753
+    "last_update": 1619463960628
   },
   "extensions": [
     {
@@ -45899,18 +45899,21 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
-            },
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0AC8",
           "name": "ALLOCATE_MEMORY",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Allocates a chunk of memory of the given size and stores its address to the variable",
           "class": "Memory",
           "member": "Allocate",
           "attrs": {
@@ -45920,14 +45923,14 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "address",
+              "type": "int"
             }
           ],
           "id": "0AC9",
           "name": "FREE_MEMORY",
           "num_params": 1,
-          "short_desc": "",
+          "short_desc": "Frees the memory allocated with 0AC8",
           "class": "Memory",
           "member": "Free",
           "attrs": {
@@ -46681,10 +46684,11 @@
           }
         },
         {
-          "input": [
+          "output": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "0AE9",
@@ -46700,18 +46704,21 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
-            },
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "id": "0AEA",
           "name": "GET_PED_REF",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the corresponding handle of the char located at the given address in memory",
           "class": "Memory",
           "member": "GetPedRef",
           "attrs": {
@@ -46721,18 +46728,21 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
-            },
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
             }
           ],
           "id": "0AEB",
           "name": "GET_VEHICLE_REF",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the corresponding handle of the vehicle located at the given address in memory",
           "class": "Memory",
           "member": "GetVehicleRef",
           "attrs": {
@@ -46742,18 +46752,21 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
-            },
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
             }
           ],
           "id": "0AEC",
           "name": "GET_OBJECT_REF",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the corresponding handle of the object located at the given address in memory",
           "class": "Memory",
           "member": "GetObjectRef",
           "attrs": {
@@ -46788,22 +46801,25 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "number",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
-            },
+              "name": "power",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "0AEE",
           "name": "POW",
           "num_params": 3,
-          "short_desc": "",
+          "short_desc": "Returns the specified number raised to the specified power",
           "class": "Math",
           "member": "Pow",
           "attrs": {
@@ -46813,22 +46829,25 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "number",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
-            },
+              "name": "base",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "0AEF",
           "name": "LOG",
           "num_params": 3,
-          "short_desc": "",
+          "short_desc": "Returns the logarithm of the specified number in the specified base",
           "class": "Math",
           "member": "Log",
           "attrs": {

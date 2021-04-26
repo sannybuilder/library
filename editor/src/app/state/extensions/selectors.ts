@@ -16,6 +16,11 @@ export const extensions = createSelector(
   (state: GameState) => state.extensions
 );
 
+export const entities = createSelector(
+  state,
+  (state: GameState) => state.entities
+);
+
 export const gameExtensions = createSelector(
   gamesState,
   (games: ExtensionsState, props: { game: Game }) =>

@@ -29,7 +29,7 @@ import {
   mergeMap,
   first,
 } from 'rxjs/operators';
-import { UiFacade } from './facade';
+
 import {
   Entity,
   EnumRaw,
@@ -38,13 +38,16 @@ import {
   Game,
   ViewMode,
 } from '../../models';
+
+import { capitalizeFirst } from '../../utils';
+import { flatMap } from 'lodash';
+import { UiFacade } from './facade';
 import { SnippetsFacade } from '../snippets/facade';
 import { ExtensionsFacade } from '../extensions/facade';
 import { ChangesFacade } from '../changes/facade';
 import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
-import { capitalizeFirst } from 'src/app/utils';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -72,10 +75,10 @@ export class UiEffects {
         }
 
         if (className) {
-          return this._extensions.getExtensionEntities(extension).pipe(
-            first<Entity[]>(Boolean),
+          return this._extensions.entities$.pipe(
+            first<Record<string, Entity[]>>(Boolean),
             map((entities) => {
-              if (entities.some((e) => e.name === className)) {
+              if (flatMap(entities).some((e) => e.name === className)) {
                 return displayClassOverview({ className });
               } else {
                 return stopEditOrDisplay();

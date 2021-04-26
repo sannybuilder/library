@@ -12,6 +12,7 @@ export class ExtensionsFacade {
     .pipe(filter<Extension[]>(Boolean));
 
   extensionNames$ = this.store$.select(selector.extensionNames);
+  entities$ = this.store$.select(selector.entities);
   loading$ = this.store$.select(selector.loading);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
 

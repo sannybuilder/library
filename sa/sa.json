@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619401155597
+    "last_update": 1619461289029
   },
   "extensions": [
     {
@@ -44787,7 +44787,8 @@
           "short_desc": "",
           "attrs": {
             "is_keyword": true,
-            "is_variadic": true
+            "is_variadic": true,
+            "is_branch": true
           }
         },
         {
@@ -44796,7 +44797,8 @@
           "num_params": 0,
           "short_desc": "",
           "attrs": {
-            "is_keyword": true
+            "is_keyword": true,
+            "is_branch": true
           }
         },
         {
@@ -44816,7 +44818,8 @@
           "short_desc": "",
           "attrs": {
             "is_keyword": true,
-            "is_variadic": true
+            "is_variadic": true,
+            "is_branch": true
           }
         },
         {
@@ -44920,11 +44923,11 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "fileName",
+              "type": "string"
             },
             {
-              "name": "_p2",
+              "name": "mode",
               "type": "any"
             }
           ],
@@ -44942,7 +44945,8 @@
           "class": "Fs",
           "member": "OpenFile",
           "attrs": {
-            "is_constructor": true
+            "is_constructor": true,
+            "is_condition": true
           }
         },
         {
@@ -44979,7 +44983,7 @@
           "id": "0A9C",
           "name": "GET_FILE_SIZE",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the file size in bytes",
           "class": "Fs",
           "member": "GetFileSize",
           "attrs": {
@@ -44989,16 +44993,19 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "file",
+              "type": "File"
             },
             {
-              "name": "_p2",
-              "type": "any"
-            },
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "destination",
+              "type": "any",
+              "source": "var_any"
             }
           ],
           "id": "0A9D",
@@ -45014,16 +45021,17 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "file",
+              "type": "File"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "size",
+              "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "source",
+              "type": "any",
+              "source": "var_any"
             }
           ],
           "id": "0A9E",
@@ -45057,8 +45065,8 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "",
+              "type": "label"
             }
           ],
           "id": "0AA0",
@@ -45066,7 +45074,8 @@
           "num_params": 1,
           "short_desc": "",
           "attrs": {
-            "is_keyword": true
+            "is_keyword": true,
+            "is_branch": true
           }
         },
         {
@@ -45075,14 +45084,15 @@
           "num_params": 0,
           "short_desc": "",
           "attrs": {
-            "is_keyword": true
+            "is_keyword": true,
+            "is_branch": true
           }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "fileName",
+              "type": "string"
             }
           ],
           "output": [
@@ -45099,14 +45109,15 @@
           "class": "DynamicLibrary",
           "member": "Load",
           "attrs": {
-            "is_constructor": true
+            "is_constructor": true,
+            "is_condition": true
           }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "DynamicLibrary"
             }
           ],
           "id": "0AA3",
@@ -45122,16 +45133,19 @@
         {
           "input": [
             {
+              "name": "name",
+              "type": "string"
+            },
+            {
               "name": "self",
               "type": "DynamicLibrary"
-            },
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0AA4",
@@ -45139,7 +45153,10 @@
           "num_params": 3,
           "short_desc": "",
           "class": "DynamicLibrary",
-          "member": "GetProcedure"
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [

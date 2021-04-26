@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619461289029
+    "last_update": 1619462992753
   },
   "extensions": [
     {
@@ -45161,20 +45161,20 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "address",
+              "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "numParams",
+              "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "pop",
+              "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "",
+              "type": "arguments"
             }
           ],
           "id": "0AA5",
@@ -45190,24 +45190,24 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "address",
+              "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "struct",
+              "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "numParams",
+              "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "pop",
+              "type": "int"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "",
+              "type": "arguments"
             }
           ],
           "id": "0AA6",
@@ -45223,20 +45223,20 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "address",
+              "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "numParams",
+              "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "pop",
+              "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "",
+              "type": "arguments"
             }
           ],
           "id": "0AA7",
@@ -45252,24 +45252,24 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "address",
+              "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "struct",
+              "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "numParams",
+              "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "pop",
+              "type": "int"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "",
+              "type": "arguments"
             }
           ],
           "id": "0AA8",
@@ -45297,7 +45297,7 @@
         {
           "input": [
             {
-              "name": "name",
+              "name": "scriptName",
               "type": "string"
             }
           ],
@@ -45311,7 +45311,7 @@
           "id": "0AAA",
           "name": "GET_SCRIPT_STRUCT_NAMED",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the address of a running script which name matches the given string or 0 otherwise",
           "class": "Memory",
           "member": "GetScriptStructNamed",
           "attrs": {
@@ -45339,8 +45339,8 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "fileName",
+              "type": "string"
             }
           ],
           "output": [
@@ -45368,7 +45368,7 @@
             },
             {
               "name": "_p2",
-              "type": "any"
+              "type": "int"
             }
           ],
           "id": "0AAD",
@@ -45400,30 +45400,33 @@
             {
               "name": "self",
               "type": "AudioStream"
-            },
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "length",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0AAF",
           "name": "GET_AUDIO_STREAM_LENGTH",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the audio stream length in seconds",
           "class": "AudioStream",
           "member": "GetLength"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "keyCode",
+              "type": "int"
             }
           ],
           "id": "0AB0",
           "name": "IS_KEY_PRESSED",
           "num_params": 1,
-          "short_desc": "",
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
           "class": "Pad",
           "member": "IsKeyPressed",
           "attrs": {
@@ -45512,22 +45515,28 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "closestChar",
+              "type": "Char",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
+              "name": "closestCar",
+              "type": "Car",
+              "source": "var_any"
             }
           ],
           "id": "0AB5",
           "name": "STORE_CLOSEST_ENTITIES",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Stores the handles of a ped and vehicle being closest to the char or -1 otherwise",
+          "class": "Char",
+          "member": "GetClosestEntities"
         },
         {
           "output": [
@@ -45550,7 +45559,7 @@
           "id": "0AB6",
           "name": "GET_TARGET_BLIP_COORDS",
           "num_params": 3,
-          "short_desc": "",
+          "short_desc": "Gets the coordinates of the location targetted in the game map",
           "attrs": {
             "is_static": true
           },
@@ -45574,7 +45583,7 @@
           "id": "0AB7",
           "name": "GET_CAR_NUMBER_OF_GEARS",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the total number of gears of the vehicle and stores it to the variable",
           "class": "Car",
           "member": "GetNumberOfGears"
         },
@@ -45595,7 +45604,7 @@
           "id": "0AB8",
           "name": "GET_CAR_CURRENT_GEAR",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Returns the current gear of the vehicle",
           "class": "Car",
           "member": "GetCurrentGear"
         },
@@ -45630,7 +45639,7 @@
           "id": "0ABA",
           "name": "TERMINATE_ALL_CUSTOM_SCRIPTS_WITH_THIS_NAME",
           "num_params": 1,
-          "short_desc": "",
+          "short_desc": "Ends the custom CLEO scripts with the specified name, freeing game memory",
           "attrs": {
             "is_keyword": true
           }

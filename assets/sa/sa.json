@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619463960628
+    "last_update": 1619499527616
   },
   "extensions": [
     {
@@ -4944,7 +4944,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
@@ -7540,7 +7540,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
@@ -7641,7 +7641,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "class": "Char",
@@ -9563,28 +9563,30 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "gangId",
+              "type": "int"
+            },
+            {
+              "name": "weaponId1",
+              "type": "WeaponType"
+            },
+            {
+              "name": "weaponId2",
+              "type": "WeaponType"
+            },
+            {
+              "name": "weaponId3",
+              "type": "WeaponType"
+            }
+          ],
           "id": "0237",
           "name": "SET_GANG_WEAPONS",
           "num_params": 4,
           "short_desc": "Sets the weapons that the specified gang can use",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetGangWeapons"
         },
         {
           "id": "0238",
@@ -11397,7 +11399,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "attrs": {
@@ -12411,21 +12413,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
+              "type": "WeaponType"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "031D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "HasBeenDamagedByWeapon",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_WEAPON",
           "num_params": 2,
@@ -12439,7 +12441,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "attrs": {
@@ -16213,24 +16215,29 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
+              "type": "WeaponType"
+            }
+          ],
+          "output": [
+            {
+              "name": "ammo",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "041A",
           "name": "GET_AMMO_IN_CHAR_WEAPON",
           "num_params": 3,
           "short_desc": "Gets the amount of ammo in the specified characters weapon",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetAmmoInWeapon"
         },
         {
           "id": "041B",
@@ -17450,7 +17457,7 @@
           "output": [
             {
               "name": "weaponId",
-              "type": "int",
+              "type": "WeaponType",
               "source": "var_any"
             }
           ],
@@ -18008,7 +18015,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "id": "0491",
@@ -18641,7 +18648,7 @@
           "output": [
             {
               "name": "weaponId",
-              "type": "int",
+              "type": "WeaponType",
               "source": "var_any"
             },
             {
@@ -21176,10 +21183,6 @@
           }
         },
         {
-          "id": "0555",
-          "name": "REMOVE_WEAPON_FROM_CHAR",
-          "num_params": 2,
-          "short_desc": "Removes the weapon from the character",
           "input": [
             {
               "name": "handle",
@@ -21187,9 +21190,13 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
+          "id": "0555",
+          "name": "REMOVE_WEAPON_FROM_CHAR",
+          "num_params": 2,
+          "short_desc": "Removes the weapon from the character",
           "class": "Char",
           "member": "RemoveWeapon"
         },
@@ -21367,18 +21374,18 @@
           }
         },
         {
-          "class": "Player",
-          "id": "0563",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "ammo",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "0563",
           "member": "EnsureHasDriveByWeapon",
           "name": "ENSURE_PLAYER_HAS_DRIVE_BY_WEAPON",
           "num_params": 2,
@@ -37902,23 +37909,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "weaponId",
+              "type": "WeaponType"
+            }
+          ],
           "id": "08FF",
           "name": "HAS_OBJECT_BEEN_DAMAGED_BY_WEAPON",
           "num_params": 2,
           "short_desc": "Returns true if the object has been damaged by the specified weapon or damage type",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "HasBeenDamagedByWeapon"
         },
         {
           "input": [

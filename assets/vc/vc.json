@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619360142527
+    "last_update": 1619499343811
   },
   "extensions": [
     {
@@ -5709,7 +5709,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
@@ -8939,7 +8939,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
@@ -9050,7 +9050,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "class": "Char",
@@ -13984,7 +13984,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "attrs": {
@@ -15076,21 +15076,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponId",
+              "type": "WeaponType"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "031D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "HasBeenDamagedByWeapon",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_WEAPON",
           "num_params": 2,
@@ -15104,7 +15104,7 @@
             },
             {
               "name": "weaponId",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "attrs": {
@@ -20609,7 +20609,7 @@
           "output": [
             {
               "name": "weaponId",
-              "type": "int",
+              "type": "WeaponType",
               "source": "var_any"
             }
           ],
@@ -21906,7 +21906,7 @@
           "output": [
             {
               "name": "weaponId",
-              "type": "int",
+              "type": "WeaponType",
               "source": "var_any"
             },
             {
@@ -25095,18 +25095,18 @@
           "short_desc": ""
         },
         {
-          "class": "Player",
-          "id": "0563",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "ammo",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "0563",
           "member": "EnsureHasDriveByWeapon",
           "name": "ENSURE_PLAYER_HAS_DRIVE_BY_WEAPON",
           "num_params": 2,

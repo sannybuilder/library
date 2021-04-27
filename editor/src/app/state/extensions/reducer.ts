@@ -139,10 +139,9 @@ function upsertBy<T extends object, Key extends keyof T>(
 }
 
 function getEntities(extensions: Extension[]): Record<string, Entity[]> {
-  const dynamicClasses = new Set<string>();
-  const staticClasses = new Set<string>();
-
   return extensions.reduce((m, e) => {
+    const dynamicClasses = new Set<string>();
+    const staticClasses = new Set<string>();
     for (const command of e.commands) {
       if (command.attrs?.is_constructor) {
         const name = last(command.output)?.type;

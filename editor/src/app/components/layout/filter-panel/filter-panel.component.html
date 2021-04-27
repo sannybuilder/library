@@ -90,25 +90,23 @@
           </label>
         </div>
         <hr />
-        <ng-container *ngFor="let extension of selectedExtensions$ | async">
-          <div
-            class="d-sm-inline-block d-xl-block pr-2"
-            *ngFor="let entity of getExtensionEntities(extension) | async"
-          >
-            <label class="form-check-label">
-              <input
-                type="checkbox"
-                [ngModel]="isClassChecked(entity.name) | async"
-                (ngModelChange)="selectClass(entity.name, $event)"
-              />
-              <span class="checkbox"></span>
-              <span class="text-muted">{{
-                entity.type === "dynamic" ? "class" : "static"
-              }}</span
-              >&nbsp;{{ entity.name }}
-            </label>
-          </div>
-        </ng-container>
+        <div
+          class="d-sm-inline-block d-xl-block pr-2"
+          *ngFor="let entity of selectedExtensionEntities$ | async"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isClassChecked(entity.name) | async"
+              (ngModelChange)="selectClass(entity.name, $event)"
+            />
+            <span class="checkbox"></span>
+            <span class="text-muted">{{
+              entity.type === "dynamic" ? "class" : "static"
+            }}</span
+            >&nbsp;{{ entity.name }}
+          </label>
+        </div>
       </div>
     </div>
   </div>

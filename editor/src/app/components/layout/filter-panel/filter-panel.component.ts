@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { flatten, orderBy, sortedUniqBy } from 'lodash';
+import { of, zip } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+
 import { Attribute, CommandAttributes, Game, Modifier } from '../../../models';
 import { ExtensionsFacade, UiFacade } from '../../../state';
 
@@ -11,7 +15,16 @@ import { ExtensionsFacade, UiFacade } from '../../../state';
 export class FilterPanelComponent {
   @Input() game: Game;
   extensionNames$ = this._extensions.extensionNames$;
-  selectedExtensions$ = this._ui.selectedExtensions$;
+  selectedExtensionEntities$ = this._ui.selectedExtensions$.pipe(
+    switchMap((extensions) => {
+      return extensions?.length
+        ? zip(...extensions.map((e) => this.getExtensionEntities(e)))
+        : of([]);
+    }),
+    map((entities) =>
+      sortedUniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
+    )
+  );
 
   attributes = CommandAttributes;
 

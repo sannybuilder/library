@@ -143,10 +143,12 @@
       ></scl-enum-overview>
       <scl-enum-editor
         *ngIf="viewMode === ViewMode.EditEnum && enumToDisplayOrEdit"
+        [game]="game"
         [enumToEdit]="enumToDisplayOrEdit"
         [enumGames]="getGamesWhereEnumExists(enumToDisplayOrEdit.name) | async"
         (hasError)="editorHasError = $event"
         (delete)="onDeleteEnum()"
+        (clone)="onCloneEnum($event)"
       ></scl-enum-editor>
     </ng-template>
   </ng-container>

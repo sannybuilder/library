@@ -12,9 +12,9 @@
 <hr />
 
 <div class="row mb-2 pr-5">
-  <div class="col-8 col-lg-6">
+  <div class="col-12 col-md-8 mb-2 mb-md-0">
     <div class="input-group">
-      <span class="input-group-text">Name</span>
+      <span class="input-group-text d-none d-md-inline">Name</span>
       <input
         type="text"
         [ngModel]="enumToEdit.name"
@@ -29,9 +29,30 @@
     </div>
   </div>
 
-  <div class="col-4 col-lg-6">
-    <div class="input-group justify-content-end">
-      <button class="btn btn-outline-secondary" (click)="addNewField()">
+  <div class="col-12 col-md-4">
+    <div class="input-group justify-content-md-end flex-nowrap">
+      <button
+        *ngIf="canClone()"
+        class="btn btn-outline-secondary mr-2 dropdown-toggle"
+        data-toggle="dropdown"
+        data-offset="0,0"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Clone
+      </button>
+      <div class="dropdown-menu">
+        <span
+          class="dropdown-item"
+          *ngFor="let target of cloneTargets"
+          (click)="cloneEnum(target.value)"
+          >{{ target.name }}</span
+        >
+      </div>
+      <button
+        class="btn btn-outline-secondary text-nowrap"
+        (click)="addNewField()"
+      >
         Add field
       </button>
     </div>

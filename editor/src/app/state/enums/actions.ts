@@ -33,3 +33,11 @@ export const renameGameEnum = createAction(
     oldEnumName: string;
   }>()
 );
+
+export const cloneEnum = createAction(
+  '[enums] clone enum to the game',
+  props<{
+    game: Game;
+    enumToClone: EnumRaw;
+  }>()
+);

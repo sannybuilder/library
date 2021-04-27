@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EnumRaw, Game } from '../../models';
-import { loadEnums, updateEnum } from './actions';
+import { cloneEnum, loadEnums, updateEnum } from './actions';
 import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -37,5 +37,9 @@ export class EnumsFacade {
     oldEnumToEdit: EnumRaw;
   }) {
     this.store$.dispatch(updateEnum({ enumToEdit, oldEnumToEdit }));
+  }
+
+  cloneEnum({ enumToClone, game }: { enumToClone: EnumRaw; game: Game }) {
+    this.store$.dispatch(cloneEnum({ enumToClone, game }));
   }
 }

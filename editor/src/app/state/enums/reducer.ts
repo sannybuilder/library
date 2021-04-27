@@ -1,6 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Enums, Game } from '../../models';
-import { loadEnumsSuccess, renameGameEnum, updateGameEnum } from './actions';
+import { EnumRaw, Enums, Game } from '../../models';
+import {
+  cloneEnum,
+  loadEnumsSuccess,
+  renameGameEnum,
+  updateGameEnum,
+} from './actions';
 import { fromPairs, mapValues } from 'lodash';
 import { smash } from '../../utils';
 
@@ -20,7 +25,7 @@ const _reducer = createReducer(
   on(updateGameEnum, (state, { enumToEdit, oldEnumToEdit, game }) => {
     const newState = {
       [oldEnumToEdit.name]: enumToEdit.fields?.length
-        ? transformEnum(fromPairs(enumToEdit.fields))
+        ? makeEnum(enumToEdit.fields)
         : undefined,
     };
     return updateState(state, game, newState);
@@ -35,6 +40,12 @@ const _reducer = createReducer(
       [oldEnumName]: undefined,
       [newEnumName]: newEnumName ? currentEnum : undefined,
     });
+  }),
+  on(cloneEnum, (state, { game, enumToClone }) => {
+    const newState = {
+      [enumToClone.name]: makeEnum(enumToClone.fields),
+    };
+    return updateState(state, game, newState);
   })
 );
 
@@ -52,8 +63,8 @@ function updateState(
   };
 }
 
-function transformEnum(enumToEdit: Record<string, string | number | null>) {
-  return mapValues(enumToEdit, (v) => {
+function makeEnum(enumToEdit: EnumRaw['fields']) {
+  return mapValues(fromPairs(enumToEdit), (v) => {
     if (v == null || v === '') {
       return null;
     }

@@ -27,6 +27,8 @@ type ErrorType =
 })
 export class EnumEditorComponent {
   private _enumToEdit: EnumRaw;
+  private _enumGames: Game[];
+  cloneTargets: Array<{ name: string; value: Game }>;
 
   @Input() set enumToEdit(val: EnumRaw) {
     this._enumToEdit = val;
@@ -38,9 +40,23 @@ export class EnumEditorComponent {
     return this._enumToEdit;
   }
 
-  @Input() enumGames: Game[];
+  @Input() set enumGames(val: Game[]) {
+    this._enumGames = val;
+
+    const games = Object.entries(Game);
+    this.cloneTargets = games
+      .filter(([_, game]) => !this.enumGames?.includes(game))
+      .map(([name, value]) => ({ name, value }));
+  }
+
+  get enumGames() {
+    return this._enumGames;
+  }
+
+  @Input() game: Game;
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
   @Output() delete: EventEmitter<void> = new EventEmitter();
+  @Output() clone: EventEmitter<Game> = new EventEmitter();
 
   errors: Record<ErrorType, boolean> = {
     emptyEnumName: false,
@@ -67,6 +83,14 @@ export class EnumEditorComponent {
 
   deleteEnum() {
     this.delete.emit();
+  }
+
+  canClone() {
+    return !this.enumToEdit?.isNew && this.cloneTargets.length > 0;
+  }
+
+  cloneEnum(game: Game) {
+    this.clone.emit(game);
   }
 
   updateErrors() {

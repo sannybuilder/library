@@ -10,6 +10,7 @@ import {
 } from 'rxjs/operators';
 
 import {
+  cloneEnum,
   loadEnums,
   loadEnumsSuccess,
   renameGameEnum,
@@ -22,6 +23,7 @@ import { ChangesFacade } from '../changes/facade';
 import { EnumsFacade } from './facade';
 import { GameEnums } from '../../models';
 import { AuthFacade } from '../auth/facade';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class EnumsEffects {
@@ -73,7 +75,7 @@ export class EnumsEffects {
   updateGameEnums$ = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(updateGameEnum, renameGameEnum),
+        ofType(updateGameEnum, renameGameEnum, cloneEnum),
         switchMap(({ game }) =>
           this._enums.getGameEnums(game).pipe(
             tap((enums) => {
@@ -85,12 +87,24 @@ export class EnumsEffects {
     { dispatch: false }
   );
 
+  cloneEnums$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(cloneEnum),
+        tap(({ game, enumToClone }) => {
+          this._router.navigate(['/', game, 'enums', enumToClone.name]);
+        })
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private _actions$: Actions,
     private _game: GameFacade,
     private _service: EnumsService,
     private _changes: ChangesFacade,
     private _enums: EnumsFacade,
-    private _auth: AuthFacade
+    private _auth: AuthFacade,
+    private _router: Router
   ) {}
 }

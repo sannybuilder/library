@@ -1,0 +1,112 @@
+<div class="row mb-2" *ngIf="supportInfo">
+  <div class="col-12 d-flex justify-content-end">
+    <scl-command-games
+      [supportInfo]="supportInfo"
+      [command]="command"
+      [extension]="extension"
+    ></scl-command-games>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-12 col-md-1">
+    <h5>{{ command.id }}</h5>
+  </div>
+  <div class="col-12 col-md-11 d-flex text-break">
+    <h5>{{ command.name }}</h5>
+  </div>
+</div>
+
+<hr />
+
+<div class="row mb-2">
+  <div class="col-12">
+    <div
+      *ngIf="!command.attrs?.is_unsupported && !command.attrs?.is_nop"
+      class="mb-3"
+    >
+      {{ command.short_desc }}
+    </div>
+    <div *ngIf="command.attrs?.is_unsupported" class="mb-3">Unsupported</div>
+    <div *ngIf="command.attrs?.is_nop" class="mb-3">Does nothing (NOP)</div>
+
+    <ng-container *ngIf="command.attrs?.is_keyword">
+      <code>{{ command.name | lowercase }} {{ command | keywordParams }}</code>
+    </ng-container>
+
+    <ng-container *ngIf="command.class && command.member">
+      <ng-container *ngIf="command.attrs?.is_constructor">
+        <code>
+          {{ command | outputParams }} =
+          <a [routerLink]="['/', game, 'classes', command.class]">{{
+            command.class
+          }}</a
+          >.{{ command.member }}{{ command | inputParams }}</code
+        >
+      </ng-container>
+
+      <ng-container *ngIf="!command.attrs?.is_constructor">
+        <code
+          ><a [routerLink]="['/', game, 'classes', command.class]">{{
+            command.class
+          }}</a
+          >.{{ command.member }}{{ command | classParams }}</code
+        >
+      </ng-container>
+    </ng-container>
+
+    <div *ngIf="command.input?.length > 0" class="mt-3">
+      <h5>Parameters</h5>
+
+      <ng-container
+        *ngTemplateOutlet="paramTemplate; context: { $implicit: command.input }"
+      ></ng-container>
+    </div>
+
+    <div *ngIf="command.output?.length > 0" class="mt-3">
+      <h5>Result</h5>
+
+      <ng-container
+        *ngTemplateOutlet="
+          paramTemplate;
+          context: { $implicit: command.output }
+        "
+      ></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="attrs.length">
+  <hr />
+  <div class="row mb-2">
+    <div class="col-12">
+      <h5>Notes</h5>
+      <ul class="list-unstyled">
+        <li *ngFor="let attr of attrs">{{ attr | attrTitle }}.</li>
+      </ul>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="snippet">
+  <hr />
+  <h5>Code Snippet</h5>
+  <pre class="sample">{{ snippet | parametrify: command }}</pre>
+</ng-container>
+
+<ng-template #paramTemplate let-params>
+  <ng-container *ngFor="let param of params; let i = index">
+    <div class="row">
+      <div class="col-2 col-sm-1 text-center">{{ i + 1 }}</div>
+      <div class="col-10 col-sm-11">
+        <ng-container *ngIf="!isEnumParam(param); else enumParam">
+          {{ param | singleParam }}
+        </ng-container>
+      </div>
+    </div>
+    <ng-template #enumParam>
+      {{ param.name }}:
+      <a [routerLink]="['/', game, 'enums', param.type]">{{ param.type }}</a>
+    </ng-template>
+  </ng-container>
+</ng-template>

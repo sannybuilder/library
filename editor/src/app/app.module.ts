@@ -57,24 +57,37 @@ import { ConfigModule } from './config';
 import { AuthGuard, RouteGuard } from './route.guard';
 import { AppComponent } from './app.component';
 
-import { ClassOverviewComponent } from './components/class-overview/class-overview.component';
-import { CommandEditorComponent } from './components/command-editor/command-editor.component';
-import { CommandInfoComponent } from './components/command-info/command-info.component';
-import { CommandListComponent } from './components/command-list/command-list.component';
-import { DownloadPanelComponent } from './components/download-panel/download-panel.component';
-import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
+import {
+  IconComponent,
+  ModalComponent,
+  PaginationComponent,
+  SelectorComponent,
+} from './components/common';
+
+import {
+  CommandEditorComponent,
+  CommandInfoComponent,
+  CommandListComponent,
+  CommandGamesComponent,
+} from './components/commands';
+
+import {
+  FooterComponent,
+  HeaderComponent,
+  DownloadPanelComponent,
+  FilterPanelComponent,
+} from './components/layout';
+
+import {
+  EnumOverviewComponent,
+  EnumEditorComponent,
+  EnumGamesComponent,
+} from './components/enums';
+
+import { ClassOverviewComponent } from './components/classes';
+
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { IconComponent } from './components/icon/icon.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
-import { SelectorComponent } from './components/selector/selector.component';
-import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
-import { EnumOverviewComponent } from './components/enum-overview/enum-overview.component';
-import { EnumEditorComponent } from './components/enum-editor/enum-editor.component';
-import { EnumGamesComponent } from './components/enum-games/enum-games.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +113,7 @@ import { EnumGamesComponent } from './components/enum-games/enum-games.component
     LibraryPageComponent,
     ModalComponent,
     IconComponent,
-    SupportedGamesComponent,
+    CommandGamesComponent,
     AttrTitlePipe,
     PaginationComponent,
     ClassOverviewComponent,

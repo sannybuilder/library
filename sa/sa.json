@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619503729707
+    "last_update": 1619542603648
   },
   "extensions": [
     {
@@ -37025,48 +37025,56 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "header",
+              "type": "gxt_key"
+            },
+            {
+              "name": "topLeftX",
+              "type": "float"
+            },
+            {
+              "name": "topLeftY",
+              "type": "float"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "numColumns",
+              "type": "int"
+            },
+            {
+              "name": "interactive",
+              "type": "bool"
+            },
+            {
+              "name": "background",
+              "type": "bool"
+            },
+            {
+              "name": "alignment",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Menu",
+              "source": "var_any"
+            }
+          ],
           "id": "08D4",
           "name": "CREATE_MENU",
           "num_params": 9,
-          "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "short_desc": "Creates the specified panel on the screen with basic settings",
+          "class": "Menu",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "id": "08D5",
@@ -37078,88 +37086,107 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "column",
+              "type": "int"
+            },
+            {
+              "name": "alignment",
+              "type": "int"
+            }
+          ],
           "id": "08D6",
           "name": "SET_MENU_COLUMN_ORIENTATION",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "SetColumnOrientation"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            }
+          ],
+          "output": [
+            {
+              "name": "row",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "08D7",
           "name": "GET_MENU_ITEM_SELECTED",
           "num_params": 2,
           "short_desc": "Returns the currently highlighted row in a panel",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "GetItemSelected"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            }
+          ],
+          "output": [
+            {
+              "name": "row",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "08D8",
           "name": "GET_MENU_ITEM_ACCEPTED",
           "num_params": 2,
           "short_desc": "Returns the last row of a panel selected with the sprint key",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "GetItemAccepted"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "row",
+              "type": "int"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08D9",
           "name": "ACTIVATE_MENU_ITEM",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "ActivateItem"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            }
+          ],
           "id": "08DA",
           "name": "DELETE_MENU",
           "num_params": 1,
           "short_desc": "Removes the specified panel from the screen",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "Delete",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "id": "08DB",
@@ -37628,64 +37655,68 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "column",
+              "type": "int"
+            },
+            {
+              "name": "row",
+              "type": "int"
+            },
+            {
+              "name": "gxt",
+              "type": "gxt_key"
+            },
+            {
+              "name": "number",
+              "type": "int"
+            }
+          ],
           "id": "08EE",
           "name": "SET_MENU_ITEM_WITH_NUMBER",
           "num_params": 5,
           "short_desc": "Sets the numbered GXT of the specified panel row",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "SetItemWithNumber"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "column",
+              "type": "int"
+            },
+            {
+              "name": "row",
+              "type": "int"
+            },
+            {
+              "name": "gxt",
+              "type": "gxt_key"
+            },
+            {
+              "name": "number1",
+              "type": "int"
+            },
+            {
+              "name": "number2",
+              "type": "int"
+            }
+          ],
           "id": "08EF",
           "name": "SET_MENU_ITEM_WITH_2_NUMBERS",
           "num_params": 6,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "SetItemWith2Numbers"
         },
         {
           "id": "08F0",
@@ -38129,20 +38160,22 @@
           "short_desc": "Enables turf wars to be provoked in all zones"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "row",
+              "type": "int"
+            }
+          ],
           "id": "090E",
           "name": "SET_ACTIVE_MENU_ITEM",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "SetActiveItem"
         },
         {
           "id": "090F",
@@ -41657,24 +41690,26 @@
           "member": "IsMoneyPickupAtCoords"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "column",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "int"
+            }
+          ],
           "id": "09DB",
           "name": "SET_MENU_COLUMN_WIDTH",
           "num_params": 3,
           "short_desc": "Sets the width of the specified menu column",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "SetColumnWidth"
         },
         {
           "id": "09DC",
@@ -42194,16 +42229,19 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "languageSlot",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "09FB",
           "name": "GET_CURRENT_LANGUAGE",
           "num_params": 1,
           "short_desc": "Returns the current language set in the menu language settings",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "GetCurrentLanguage"
         },
         {
           "id": "09FC",
@@ -42867,24 +42905,26 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "row",
+              "type": "int"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A23",
           "name": "HIGHLIGHT_MENU_ITEM",
           "num_params": 3,
           "short_desc": "Highlights the menu item - used to indicate an owned shopping item",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "HighlightItem"
         },
         {
           "id": "0A24",

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619499343811
+    "last_update": 1619503206295
   },
   "extensions": [
     {
@@ -8910,22 +8910,22 @@
           "short_desc": "Returns true if the car is stopped in the radius of the specified point"
         },
         {
-          "class": "Player",
-          "id": "01B1",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponId",
+              "type": "WeaponType"
             },
             {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "01B1",
           "member": "GiveWeapon",
           "name": "GIVE_WEAPON_TO_PLAYER",
           "num_params": 3,
@@ -9025,22 +9025,22 @@
           "short_desc": "Allows the game to continue it's usual weather pattern after using 01B5"
         },
         {
-          "class": "Player",
-          "id": "01B8",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponId",
+              "type": "WeaponType"
             }
           ],
+          "class": "Player",
+          "id": "01B8",
           "member": "SetCurrentWeapon",
           "name": "SET_CURRENT_PLAYER_WEAPON",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Sets the weapon for the player"
         },
         {
           "input": [
@@ -11549,25 +11549,25 @@
           "short_desc": "Sets the car used by members of the specified gang"
         },
         {
+          "input": [
+            {
+              "name": "gangId",
+              "type": "int"
+            },
+            {
+              "name": "weaponId1",
+              "type": "WeaponType"
+            },
+            {
+              "name": "weaponId2",
+              "type": "WeaponType"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
-          "class": "Gang",
+          "class": "Game",
           "id": "0237",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "SetWeapons",
           "name": "SET_GANG_WEAPONS",
           "num_params": 3,
@@ -13956,25 +13956,25 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "weaponId",
+              "type": "WeaponType"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "02D7",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsCurrentWeapon",
           "name": "IS_CURRENT_PLAYER_WEAPON",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if the player is holding the given type of weapon"
         },
         {
           "input": [
@@ -17638,14 +17638,14 @@
           "short_desc": "Sets whether to load world collision"
         },
         {
-          "class": "Player",
-          "id": "03B8",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "class": "Player",
+          "id": "03B8",
           "member": "RemoveAllWeapons",
           "name": "REMOVE_ALL_PLAYER_WEAPONS",
           "num_params": 1,
@@ -19208,29 +19208,29 @@
           "short_desc": "Sets the specified object to always draw on top of other objects"
         },
         {
-          "class": "Player",
-          "id": "0419",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponId",
+              "type": "WeaponType"
             }
           ],
-          "member": "GetAmmoInWeapon",
-          "name": "GET_AMMO_IN_PLAYER_WEAPON",
-          "num_params": 3,
           "output": [
             {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int",
               "source": "var_any"
             }
           ],
-          "short_desc": ""
+          "class": "Player",
+          "id": "0419",
+          "member": "GetAmmoInWeapon",
+          "name": "GET_AMMO_IN_PLAYER_WEAPON",
+          "num_params": 3,
+          "short_desc": "Gets the ammo of the player's weapon "
         },
         {
           "attrs": {
@@ -20579,24 +20579,24 @@
           "short_desc": "Puts the player in control of a radio controlled vehicle"
         },
         {
-          "class": "Player",
-          "id": "046F",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
-          "member": "GetCurrentWeapon",
-          "name": "GET_CURRENT_PLAYER_WEAPON",
-          "num_params": 2,
           "output": [
             {
-              "name": "_p2",
-              "type": "int",
+              "name": "weaponId",
+              "type": "WeaponType",
               "source": "var_any"
             }
           ],
+          "class": "Player",
+          "id": "046F",
+          "member": "GetCurrentWeapon",
+          "name": "GET_CURRENT_PLAYER_WEAPON",
+          "num_params": 2,
           "short_desc": "Stores the weapon that the player is currently holding"
         },
         {
@@ -21187,21 +21187,21 @@
           "short_desc": "Removes the characters weapons"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "weaponId",
+              "type": "WeaponType"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0490",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "HasGotWeapon",
           "name": "HAS_PLAYER_GOT_WEAPON",
           "num_params": 2,

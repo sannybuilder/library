@@ -14,9 +14,21 @@ import { Command, Game } from '../../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassOverviewComponent {
+  private _classCommands: Array<{ command: Command; extension: string }>;
+  IsThisClassFromOtherExtension: boolean;
   @Input() game: Game;
   @Input() className: string;
-  @Input() classCommands: Array<{ command: Command; extension: string }>;
+  @Input() set classCommands(
+    val: Array<{ command: Command; extension: string }>
+  ) {
+    this._classCommands = val;
+    this.IsThisClassFromOtherExtension = val.every(
+      (c) => c.extension !== 'default'
+    );
+  }
+  get classCommands() {
+    return this._classCommands;
+  }
 
   @Output() view: EventEmitter<{
     command: Command;

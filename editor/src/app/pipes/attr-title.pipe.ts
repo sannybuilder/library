@@ -8,13 +8,13 @@ export class AttrTitlePipe implements PipeTransform {
   transform(value: Attribute): string {
     switch (value) {
       case 'is_branch':
-        return 'This command is used to branch the code';
+        return 'This command branches the code';
       case 'is_condition':
         return 'This command can be used in conditional statements';
       case 'is_constructor':
-        return 'This command is used to create a new in-game entity';
+        return 'This command creates a new in-game entity';
       case 'is_destructor':
-        return 'This command is used to delete the in-game entity';
+        return 'This command deletes the in-game entity';
       case 'is_keyword':
         return 'This command is used as a single keyword followed by arguments';
       case 'is_nop':

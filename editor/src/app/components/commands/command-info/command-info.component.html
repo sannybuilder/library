@@ -76,12 +76,21 @@
   </div>
 </div>
 
-<ng-container *ngIf="attrs.length">
+<ng-container *ngIf="attrs.length || extension !== 'default'">
   <hr />
   <div class="row mb-2">
     <div class="col-12">
       <h5>Notes</h5>
       <ul class="list-unstyled">
+        <li *ngIf="extension !== 'default'">
+          This command requires a non-standard
+          <a
+            href="https://docs.sannybuilder.com/edit-modes/extensions"
+            target="_blank"
+            >extension</a
+          >
+          {{ extension }}
+        </li>
         <li *ngFor="let attr of attrs">{{ attr | attrTitle }}.</li>
       </ul>
     </div>

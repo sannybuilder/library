@@ -24,6 +24,7 @@ Heli
 Hid
 Math
 Memory
+Menu
 Object
 Pad
 Path
@@ -609,6 +610,7 @@ AutoSave,0A72,0,0,()
 CheckPointSave,0A6F,0,0,("_p1%i")
 CheckpointSaveOddjob,0A77,0,0,("_p1%i")
 FailCurrentMission,045C,0,0,()
+GetCurrentLanguage,09FB,0,0,("languageSlot%i")
 HasDeatharrestBeenExecuted,0112,1,0,()
 HasSaveGameFinished,03D9,1,0,()
 IsAustralian,059A,1,0,()
@@ -699,6 +701,21 @@ GetVehicleRef,0AEB,0,0,("address%i" "handle: Car")
 PopFloat,0AE9,0,0,("result%f")
 Read,0A8D,0,0,("address%i" "size%i" "vp%b" "result: any")
 Write,0A8C,0,0,("address%i" "size%i" "value: any" "vp%b")
+$END
+
+$Menu
+$BEGIN
+ActivateItem,08D9,0,0,("self: Menu" "row%i" "state%b")
+Create,08D4,0,0,("header: gxt_key" "topLeftX%f" "topLeftY%f" "width%f" "numColumns%i" "interactive%b" "background%b" "alignment%i" "handle: Menu")
+Delete,08DA,0,0,("self: Menu")
+GetItemAccepted,08D8,0,0,("self: Menu" "row%i")
+GetItemSelected,08D7,0,0,("self: Menu" "row%i")
+HighlightItem,0A23,0,0,("self: Menu" "row%i" "state%b")
+SetActiveItem,090E,0,0,("self: Menu" "row%i")
+SetColumnOrientation,08D6,0,0,("self: Menu" "column%i" "alignment%i")
+SetColumnWidth,09DB,0,0,("self: Menu" "column%i" "width%i")
+SetItemWith2Numbers,08EF,0,0,("self: Menu" "column%i" "row%i" "gxt: gxt_key" "number1%i" "number2%i")
+SetItemWithNumber,08EE,0,0,("self: Menu" "column%i" "row%i" "gxt: gxt_key" "number%i")
 $END
 
 $Object

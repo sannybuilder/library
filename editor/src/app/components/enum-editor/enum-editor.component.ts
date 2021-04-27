@@ -11,7 +11,7 @@ import {
   Output,
 } from '@angular/core';
 import { capitalizeFirst } from '../../utils';
-import { EnumRaw } from '../../models';
+import { EnumRaw, Game } from '../../models';
 
 type ErrorType =
   | 'emptyEnumName'
@@ -37,6 +37,8 @@ export class EnumEditorComponent {
   get enumToEdit(): EnumRaw {
     return this._enumToEdit;
   }
+
+  @Input() enumGames: Game[];
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
   @Output() delete: EventEmitter<void> = new EventEmitter();
 

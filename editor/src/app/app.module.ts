@@ -74,6 +74,7 @@ import { SelectorComponent } from './components/selector/selector.component';
 import { SupportedGamesComponent } from './components/supported-games/supported-games.component';
 import { EnumOverviewComponent } from './components/enum-overview/enum-overview.component';
 import { EnumEditorComponent } from './components/enum-editor/enum-editor.component';
+import { EnumGamesComponent } from './components/enum-games/enum-games.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { EnumEditorComponent } from './components/enum-editor/enum-editor.compon
     ClassOverviewComponent,
     EnumOverviewComponent,
     EnumEditorComponent,
+    EnumGamesComponent,
   ],
   imports: [
     BrowserModule,

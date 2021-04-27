@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EnumRaw } from 'src/app/models';
+import { EnumRaw, Game } from '../../models';
 
 @Component({
   selector: 'scl-enum-overview',
@@ -9,4 +9,5 @@ import { EnumRaw } from 'src/app/models';
 })
 export class EnumOverviewComponent {
   @Input() enumToView: EnumRaw;
+  @Input() enumGames: Game[];
 }

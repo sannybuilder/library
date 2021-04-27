@@ -25,6 +25,10 @@ export class EnumsFacade {
     });
   }
 
+  getGamesWhereEnumExists(enumName: string) {
+    return this.store$.select(selector.gamesWhereExist, { enumName });
+  }
+
   updateEnum({
     enumToEdit,
     oldEnumToEdit,

@@ -182,6 +182,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._enums.getEnumFields(enumName);
   }
 
+  getGamesWhereEnumExists(enumName: string) {
+    return this._enums.getGamesWhereEnumExists(enumName);
+  }
+
   @HostListener('window:resize', [])
   private detectScreenSize() {
     this.screenSize = window.innerWidth;

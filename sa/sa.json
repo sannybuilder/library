@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619543795123
+    "last_update": 1619547590284
   },
   "extensions": [
     {
@@ -21311,27 +21311,27 @@
           "short_desc": "Increases the players armour by the specified amount"
         },
         {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Char",
           "id": "0560",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "CreateRandomAsDriver",
           "name": "CREATE_RANDOM_CHAR_AS_DRIVER",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Creates a driver in the vehicle"
         },
         {
@@ -26828,19 +26828,21 @@
           "member": "IsAttached"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "0686",
           "name": "IS_VEHICLE_ATTACHED",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsAttached"
         },
         {
           "id": "0687",
@@ -28743,16 +28745,18 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "06EB",
           "name": "MARK_VEHICLE_MOD_AS_NO_LONGER_NEEDED",
           "num_params": 1,
           "short_desc": "Marks the vehicle upgrade model as no longer needed, allowing it to be unloaded by the streamer",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "MarkModAsNoLongerNeeded"
         },
         {
           "input": [
@@ -32382,32 +32386,34 @@
           "member": "GetQuaternion"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "w",
+              "type": "float"
+            }
+          ],
           "id": "07C6",
           "name": "SET_VEHICLE_QUATERNION",
           "num_params": 5,
           "short_desc": "Sets the rotation of a vehicle using quaternion values",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetQuaternion"
         },
         {
           "id": "07C7",
@@ -34590,20 +34596,22 @@
           "member": "GetUprightValue"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "interiorId",
+              "type": "int"
+            }
+          ],
           "id": "0840",
           "name": "SET_VEHICLE_AREA_VISIBLE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetAreaVisible"
         },
         {
           "id": "0841",
@@ -34779,20 +34787,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "084E",
           "name": "SET_VEHICLE_CAN_BE_TARGETTED",
           "num_params": 2,
           "short_desc": "Sets whether the vehicle can be targetted",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetCanBeTargetted"
         },
         {
           "id": "084F",
@@ -35887,20 +35897,22 @@
           "member": "PlayAnimWithFlags"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "multiplier",
+              "type": "float"
+            }
+          ],
           "id": "088B",
           "name": "SET_VEHICLE_AIR_RESISTANCE_MULTIPLIER",
           "num_params": 2,
           "short_desc": "Sets the air resistance for the vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetAirResistanceMultiplier"
         },
         {
           "id": "088C",
@@ -36053,23 +36065,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "handle",
+              "type": "Object"
+            }
+          ],
           "id": "0897",
           "name": "IS_VEHICLE_TOUCHING_OBJECT",
           "num_params": 2,
           "short_desc": "Returns true if the vehicle is in contact with the object",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsTouchingObject"
         },
         {
           "id": "0898",
@@ -36291,20 +36305,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "range",
+              "type": "float"
+            }
+          ],
           "id": "08A4",
           "name": "CONTROL_MOVABLE_VEHICLE_PART",
           "num_params": 2,
           "short_desc": "Sets the angle of a vehicles extra",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "ControlMovablePart"
         },
         {
           "id": "08A5",
@@ -37103,7 +37119,7 @@
           "id": "08D6",
           "name": "SET_MENU_COLUMN_ORIENTATION",
           "num_params": 3,
-          "short_desc": "Sets the alignment of the menu column.",
+          "short_desc": "",
           "class": "Menu",
           "member": "SetColumnOrientation"
         },
@@ -37189,74 +37205,72 @@
           }
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Menu"
-            },
-            {
-              "name": "column",
-              "type": "int"
-            },
-            {
-              "name": "title",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row0",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row1",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row2",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row3",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row4",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row5",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row6",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row7",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row8",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row9",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row10",
-              "type": "gxt_key"
-            },
-            {
-              "name": "row11",
-              "type": "gxt_key"
-            }
-          ],
           "id": "08DB",
           "name": "SET_MENU_COLUMN",
           "num_params": 15,
-          "short_desc": "Makes the setting of the menu column. Unnecessary rows and title use the 'DUMMY' gxt key.",
-          "class": "Menu",
-          "member": "SetColumn"
+          "short_desc": "",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            },
+            {
+              "name": "_p3",
+              "type": "any"
+            },
+            {
+              "name": "_p4",
+              "type": "any"
+            },
+            {
+              "name": "_p5",
+              "type": "any"
+            },
+            {
+              "name": "_p6",
+              "type": "any"
+            },
+            {
+              "name": "_p7",
+              "type": "any"
+            },
+            {
+              "name": "_p8",
+              "type": "any"
+            },
+            {
+              "name": "_p9",
+              "type": "any"
+            },
+            {
+              "name": "_p10",
+              "type": "any"
+            },
+            {
+              "name": "_p11",
+              "type": "any"
+            },
+            {
+              "name": "_p12",
+              "type": "any"
+            },
+            {
+              "name": "_p13",
+              "type": "any"
+            },
+            {
+              "name": "_p14",
+              "type": "any"
+            },
+            {
+              "name": "_p15",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "08DC",
@@ -37629,20 +37643,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "class",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "08EC",
           "name": "GET_VEHICLE_CLASS",
           "num_params": 2,
           "short_desc": "Returns the vehicles class as defined in vehicles",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetClass"
         },
         {
           "id": "08ED",
@@ -37761,20 +37780,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08F2",
           "name": "VEHICLE_CAN_BE_TARGETTED_BY_HS_MISSILE",
           "num_params": 2,
           "short_desc": "Sets whether the player can target this vehicle with a heatseeking rocket launcher",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "CanBeTargettedByHsMissile"
         },
         {
           "input": [
@@ -39403,20 +39424,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0957",
           "name": "VEHICLE_DOES_PROVIDE_COVER",
           "num_params": 2,
           "short_desc": "Sets whether characters in combat will choose to use the vehicle as cover from gunfire",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "DoesProvideCover"
         },
         {
           "input": [
@@ -39820,19 +39843,21 @@
           "member": "StopFacialTalk"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "0969",
           "name": "IS_BIG_VEHICLE",
           "num_params": 1,
           "short_desc": "Returns true if the specified vehicle has the 'is big' flag set in 'vehicles",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsBig"
         },
         {
           "id": "096A",
@@ -39974,19 +39999,21 @@
           "short_desc": "Emulates the shared effects of being wasted or busted"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "0975",
           "name": "IS_EMERGENCY_SERVICES_VEHICLE",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsEmergencyServices"
         },
         {
           "id": "0976",
@@ -40936,20 +40963,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09B0",
           "name": "SET_VEHICLE_IS_CONSIDERED_BY_PLAYER",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetIsConsideredByPlayer"
         },
         {
           "id": "09B1",
@@ -41122,16 +41151,18 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09B9",
           "name": "DISPLAY_CAR_NAMES",
           "num_params": 1,
           "short_desc": "Sets whether the name of the current vehicle should be displayed",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "DisplayCarNames"
         },
         {
           "id": "09BA",
@@ -41510,19 +41541,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "09D0",
           "name": "IS_VEHICLE_ON_ALL_WHEELS",
           "num_params": 1,
           "short_desc": "Returns true if all the vehicles wheels are touching the ground",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsOnAllWheels"
         },
         {
           "id": "09D1",
@@ -43226,16 +43259,18 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A37",
           "name": "FORCE_ALL_VEHICLE_LIGHTS_OFF",
           "num_params": 1,
           "short_desc": "Disables all vehicle lights from being rendered if enabled",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "ForceAllVehicleLightsOff"
         },
         {
           "id": "0A38",

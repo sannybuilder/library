@@ -136,6 +136,11 @@
         [className]="classToDisplay$ | async"
         [classCommands]="classCommands$ | async"
       ></scl-class-overview>
+      <scl-class-list
+        *ngIf="viewMode === ViewMode.ViewAllClasses"
+        [game]="game"
+        [entities]="entities$ | async"
+      ></scl-class-list>
       <scl-enum-overview
         *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"
         [enumToView]="enumToDisplayOrEdit"
@@ -150,6 +155,11 @@
         (delete)="onDeleteEnum()"
         (clone)="onCloneEnum($event)"
       ></scl-enum-editor>
+      <scl-enum-list
+        *ngIf="viewMode === ViewMode.ViewAllEnums"
+        [game]="game"
+        [enumNames]="enumNames$ | async"
+      ></scl-enum-list>
     </ng-template>
   </ng-container>
 </ng-container>

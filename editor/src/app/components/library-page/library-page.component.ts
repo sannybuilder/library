@@ -7,12 +7,20 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil, map } from 'rxjs/operators';
-import { cloneDeep, isEqual, omit } from 'lodash';
+import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
+import { takeUntil, map, switchMap } from 'rxjs/operators';
+import {
+  cloneDeep,
+  isEqual,
+  omit,
+  sortedUniqBy,
+  orderBy,
+  flatten,
+} from 'lodash';
 
 import {
   Command,
+  Entity,
   Enum,
   EnumRaw,
   Game,
@@ -46,6 +54,16 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   canEdit$ = this._ui.canEdit$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
+  entities$: Observable<Entity[]> = this._extensions.extensionNames$.pipe(
+    switchMap((extensions) => {
+      return extensions?.length
+        ? zip(...extensions.map((e) => this.getExtensionEntities(e)))
+        : of([]);
+    }),
+    map((entities) =>
+      sortedUniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
+    )
+  );
 
   command?: Command;
   oldCommand?: Command;
@@ -61,7 +79,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private _extensions: ExtensionsFacade,
-
     private _ui: UiFacade,
     private _snippets: SnippetsFacade,
     private _game: GameFacade,

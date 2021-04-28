@@ -1,3 +1,4 @@
-export * from './enum-editor/enum-editor.component';
-export * from './enum-games/enum-games.component';
-export * from './enum-overview/enum-overview.component';
+export { EnumEditorComponent } from './enum-editor/enum-editor.component';
+export { EnumGamesComponent } from './enum-games/enum-games.component';
+export { EnumOverviewComponent } from './enum-overview/enum-overview.component';
+export { EnumListComponent } from './enum-list/enum-list.component';

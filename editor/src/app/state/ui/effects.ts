@@ -4,7 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { combineLatest, merge } from 'rxjs';
 import {
   changePage,
+  displayClassesList,
   displayClassOverview,
+  displayEnumsList,
   displayOrEditCommandInfo,
   displayOrEditEnum,
   displayOrEditSnippet,
@@ -56,6 +58,9 @@ export class UiEffects {
       ofType(onListEnter),
       switchMap(({ opcode, extension, enumName, className }) => {
         if (enumName) {
+          if (enumName === 'all') {
+            return [displayEnumsList()];
+          }
           return this._enums.enums$.pipe(
             first<Enums>(Boolean),
             map((enums) => {
@@ -75,6 +80,9 @@ export class UiEffects {
         }
 
         if (className) {
+          if (className === 'all') {
+            return [displayClassesList()];
+          }
           return this._extensions.entities$.pipe(
             first<Record<string, Entity[]>>(Boolean),
             map((entities) => {

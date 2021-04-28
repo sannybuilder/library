@@ -145,6 +145,8 @@ export enum ViewMode {
   ViewClass = 'ViewClass',
   ViewEnum = 'ViewEnum',
   EditEnum = 'EditEnum',
+  ViewAllClasses = 'ViewAllClasses',
+  ViewAllEnums = 'ViewAllEnums',
 }
 
 export type Modifier = 'except' | 'only';

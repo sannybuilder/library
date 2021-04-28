@@ -48,6 +48,9 @@ export const displayOrEditEnum = createAction(
   props<{ enumToEdit: EnumRaw; viewMode: ViewMode }>()
 );
 
+export const displayClassesList = createAction('[ui] display classes list');
+export const displayEnumsList = createAction('[ui] display enums list');
+
 export const stopEditOrDisplay = createAction('[ui] stop edit or display');
 
 export const changePage = createAction(

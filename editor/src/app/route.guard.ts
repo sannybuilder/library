@@ -49,7 +49,7 @@ export class RouteGuard implements CanActivate {
 
         const subPath = segments.shift();
         if (subPath === 'classes') {
-          const className = segments.shift();
+          const className = segments.shift() || 'all';
 
           this._game.onListEnter({
             game,
@@ -57,7 +57,7 @@ export class RouteGuard implements CanActivate {
             extension: DEFAULT_EXTENSION,
           });
         } else if (subPath === 'enums') {
-          const enumName = segments.shift();
+          const enumName = segments.shift() || 'all';
 
           // editing by anonymous user is not allowed
           if (enumName?.toLowerCase() === 'new' && !canEdit) {

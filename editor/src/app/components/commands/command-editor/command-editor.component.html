@@ -223,6 +223,7 @@
           [ngClass]="{ invalid: param.type === PrimitiveType.any }"
           [(model)]="param.type"
           [choices]="paramTypes"
+          (keydown)="onTypeKeyDown($event, param)"
           [canInput]="
             command.attrs?.is_constructor && i === command.output.length - 1
           "

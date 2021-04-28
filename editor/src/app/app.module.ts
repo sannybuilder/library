@@ -82,9 +82,13 @@ import {
   EnumOverviewComponent,
   EnumEditorComponent,
   EnumGamesComponent,
+  EnumListComponent,
 } from './components/enums';
 
-import { ClassOverviewComponent } from './components/classes';
+import {
+  ClassOverviewComponent,
+  ClassListComponent,
+} from './components/classes';
 
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
@@ -120,6 +124,8 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
     EnumOverviewComponent,
     EnumEditorComponent,
     EnumGamesComponent,
+    EnumListComponent,
+    ClassListComponent,
   ],
   imports: [
     BrowserModule,

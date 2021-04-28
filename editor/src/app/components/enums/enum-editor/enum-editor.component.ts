@@ -164,7 +164,7 @@ export class EnumEditorComponent {
     }
 
     if (index === 0 || val) {
-      return parseInt(val.toString() || '0', 10).toString();
+      return parseInt(val?.toString() || '0', 10).toString();
     }
 
     return (parseInt(this.evaluateValue(index - 1), 10) + 1).toString();

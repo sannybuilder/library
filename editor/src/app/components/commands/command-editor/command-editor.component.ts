@@ -63,7 +63,7 @@ export class CommandEditorComponent implements OnInit {
   @Input() set command(val: Command) {
     this._command = val;
     // validate the new command
-    this.updateError(...(Object.keys(this.errors) as ErrorType[]));
+    this.updateErrors();
   }
 
   get command() {
@@ -139,6 +139,10 @@ export class CommandEditorComponent implements OnInit {
     }
   }
 
+  updateErrors() {
+    this.updateError(...(Object.keys(this.errors) as ErrorType[]));
+  }
+
   updateError(...errors: ErrorType[]) {
     errors.forEach((error) => this.errorHandlers[error].call(this));
     this.errorMessages = Object.entries(this.errors)
@@ -151,12 +155,12 @@ export class CommandEditorComponent implements OnInit {
     command.name = trim(
       value ? value.replace(/[\s-]/g, '_').toUpperCase() : value
     );
-    this.updateError('duplicateName');
+    this.updateErrors();
   }
 
   onOpcodeChange(command: Command, value: string) {
     command.id = trim(value ? value.toUpperCase() : value);
-    this.updateError('duplicateName');
+    this.updateErrors();
   }
 
   onClassChange(command: Command, value: string) {
@@ -219,7 +223,7 @@ export class CommandEditorComponent implements OnInit {
 
   onParamNameChange(name: string, param: Param) {
     param.name = name.startsWith('_') ? name : camelCase(name); // camelCase also trims the value
-    this.updateError('duplicateParamName');
+    this.updateErrors();
   }
 
   getDefaultInputSource(param: Param) {
@@ -242,10 +246,7 @@ export class CommandEditorComponent implements OnInit {
     } else {
       delete command.attrs;
     }
-    this.updateError(
-      'invalidAttributeCombo',
-      'noConstructorWithoutOutputParams'
-    );
+    this.updateErrors();
   }
 
   get suggestedClassName() {
@@ -268,6 +269,10 @@ export class CommandEditorComponent implements OnInit {
         return 'Camera';
       case 'BLIP':
         return 'Blip';
+      case 'MENU':
+        return 'Menu';
+      case 'GROUP':
+        return 'Group';
     }
   }
 
@@ -287,9 +292,16 @@ export class CommandEditorComponent implements OnInit {
       !this.command.attrs?.is_constructor &&
       !this.command.attrs?.is_static &&
       (!name || name.startsWith('_')) &&
-      ['Player', 'Car', 'Char', 'Object', 'Pickup', 'Blip'].includes(
-        this.command.class
-      )
+      [
+        'Player',
+        'Car',
+        'Char',
+        'Object',
+        'Pickup',
+        'Blip',
+        'Menu',
+        'Group',
+      ].includes(this.command.class)
     ) {
       return 'self';
     }

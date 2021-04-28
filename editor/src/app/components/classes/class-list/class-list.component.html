@@ -1,0 +1,12 @@
+<div class="row mb-2">
+  <div class="col-12 d-flex justify-content-end">
+    <a *ngFor="let game of games" [routerLink]="['/', game, 'classes']">
+      <scl-icon [game]="game" size="16"></scl-icon>
+    </a>
+  </div>
+</div>
+
+<h5>Classes</h5>
+
+<pre *ngIf="entities" class="sample">
+<div *ngFor="let entity of entities"><a [routerLink]="['/', game, 'classes', entity.name]">{{ entity.name }}</a></div></pre>

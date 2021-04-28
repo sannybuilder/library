@@ -15,8 +15,9 @@ import {
   selectExtensions,
   displayClassOverview,
   displayOrEditEnum,
+  displayClassesList,
+  displayEnumsList,
 } from './actions';
-import { onListEnter } from '../game/actions';
 
 export interface GameState {
   selectedExtensions: string[];
@@ -184,6 +185,14 @@ const _reducer = createReducer(
     ...state,
     classToDisplay: className,
     viewMode: ViewMode.ViewClass,
+  })),
+  on(displayClassesList, (state) => ({
+    ...state,
+    viewMode: ViewMode.ViewAllClasses,
+  })),
+  on(displayEnumsList, (state) => ({
+    ...state,
+    viewMode: ViewMode.ViewAllEnums,
   }))
 );
 

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619549813866
+    "last_update": 1619614690583
   },
   "extensions": [
     {
@@ -3841,24 +3841,32 @@
           "short_desc": "Returns true if the player is pressing the specified key"
         },
         {
+          "input": [
+            {
+              "name": "padId",
+              "type": "int"
+            },
+            {
+              "name": "buttonId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "00E2",
           "name": "GET_PAD_STATE",
           "num_params": 3,
           "short_desc": "Stores the status of the specified key into a variable",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Pad",
+          "member": "GetState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "00E3",
@@ -4900,17 +4908,17 @@
           "short_desc": "Clears the player's wanted level"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "0111",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetDeatharrestState",
           "name": "SET_DEATHARREST_STATE",
           "num_params": 1,
@@ -5683,25 +5691,25 @@
           "short_desc": "Attaches the camera to the specified vehicle"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "mode",
+              "type": "int"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "0159",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "PointAtChar",
           "name": "POINT_CAMERA_AT_CHAR",
           "num_params": 3,
@@ -5809,29 +5817,29 @@
           "short_desc": "Sets the cameras X, Y and Z position and rotation to the specified values"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "0160",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ],
           "member": "PointAtPoint",
           "name": "POINT_CAMERA_AT_POINT",
           "num_params": 4,
@@ -8555,6 +8563,13 @@
           "short_desc": "Initializes a rampage"
         },
         {
+          "output": [
+            {
+              "name": "status",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -8563,13 +8578,6 @@
           "member": "ReadStatus",
           "name": "READ_KILL_FRENZY_STATUS",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Gets the status of the current rampage"
         },
         {
@@ -12240,34 +12248,34 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "progress",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "030C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "PlayerMadeProgress",
           "name": "PLAYER_MADE_PROGRESS",
           "num_params": 1,
           "short_desc": "Increases the progress made stat by the specified amount"
         },
         {
+          "input": [
+            {
+              "name": "maxProgress",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "030D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetProgressTotal",
           "name": "SET_PROGRESS_TOTAL",
           "num_params": 1,
@@ -12357,17 +12365,17 @@
           "short_desc": "Increases the mission attempts stat by 1"
         },
         {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "0318",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "RegisterMissionPassed",
           "name": "REGISTER_MISSION_PASSED",
           "num_params": 1,
@@ -16455,17 +16463,17 @@
           "short_desc": "Clears all pedestrians from the given area"
         },
         {
+          "input": [
+            {
+              "name": "numMissions",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "042C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetTotalNumberOfMissions",
           "name": "SET_TOTAL_NUMBER_OF_MISSIONS",
           "num_params": 1,
@@ -16496,21 +16504,21 @@
           "short_desc": "Converts the given integer number of metres to an imperial value and stores the result in the variable"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "042E",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "RegisterFastestTime",
           "name": "REGISTER_FASTEST_TIME",
           "num_params": 2,
@@ -19361,18 +19369,18 @@
           }
         },
         {
-          "class": "Heli",
-          "id": "04DF",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Heli",
+          "id": "04DF",
           "member": "SetStabiliser",
           "name": "SET_HELI_STABILISER",
           "num_params": 2,
@@ -19691,17 +19699,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "animationFile",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "04ED",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "RequestAnimation",
           "name": "REQUEST_ANIMATION",
           "num_params": 1,
@@ -19992,49 +20000,49 @@
           }
         },
         {
-          "class": "Player",
-          "id": "04FC",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "output": [
+            {
+              "name": "twoWheelsTime",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "twoWheelsDistance",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "wheelieTime",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "wheelieDistance",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "stoppieTime",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "stoppieDistance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Player",
+          "id": "04FC",
           "member": "GetWheelieStats",
           "name": "GET_WHEELIE_STATS",
           "num_params": 7,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "_p3",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "_p4",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "_p5",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "_p6",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "_p7",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
           "short_desc": ""
         },
         {
@@ -20733,18 +20741,18 @@
           }
         },
         {
-          "class": "Player",
-          "id": "052C",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "intensity",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "052C",
           "member": "SetDrunkenness",
           "name": "SET_PLAYER_DRUNKENNESS",
           "num_params": 2,
@@ -21389,14 +21397,14 @@
           "short_desc": "Sets the amount of ammo a player has during a driveby"
         },
         {
-          "class": "Heli",
-          "id": "0564",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             }
           ],
+          "class": "Heli",
+          "id": "0564",
           "member": "MakeComeCrashingDown",
           "name": "MAKE_HELI_COME_CRASHING_DOWN",
           "num_params": 1,
@@ -21725,17 +21733,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "057E",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetIsInStadium",
           "name": "SET_PLAYER_IS_IN_STADIUM",
           "num_params": 1,
@@ -21776,21 +21784,21 @@
           "short_desc": "Displays or hides the radar"
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "0582",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "RegisterBestPosition",
           "name": "REGISTER_BEST_POSITION",
           "num_params": 2,
@@ -24889,132 +24897,172 @@
           "member": "LeaveCarImmediately"
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "id": "0623",
           "name": "INCREMENT_INT_STAT",
           "num_params": 2,
           "short_desc": "Increases the stat by the value given",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "IncrementInt"
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
           "id": "0624",
           "name": "INCREMENT_FLOAT_STAT",
           "num_params": 2,
           "short_desc": "Increases the stat by the value specified",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "IncrementFloat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "id": "0625",
           "name": "DECREMENT_INT_STAT",
           "num_params": 2,
           "short_desc": "Decreases the stat by the value given",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "DecrementInt"
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
           "id": "0626",
           "name": "DECREMENT_FLOAT_STAT",
           "num_params": 2,
           "short_desc": "Decreases the stat by the value given",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "DecrementFloat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "id": "0627",
           "name": "REGISTER_INT_STAT",
           "num_params": 2,
           "short_desc": "Updates the specified integer stat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "RegisterInt",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
           "id": "0628",
           "name": "REGISTER_FLOAT_STAT",
           "num_params": 2,
           "short_desc": "Sets the specified stat to the specified value, if the specified value is greater than the current stat value",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "RegisterFloat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "id": "0629",
           "name": "SET_INT_STAT",
           "num_params": 2,
           "short_desc": "Sets the stat to the specified value",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
+          "member": "SetInt"
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
           "id": "062A",
           "name": "SET_FLOAT_STAT",
           "num_params": 2,
           "short_desc": "Sets the stat to the specified value",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
+          "member": "SetFloat"
         },
         {
           "id": "062B",
@@ -25476,20 +25524,22 @@
           "member": "ClearLookAt"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "range",
+              "type": "float"
+            }
+          ],
           "id": "0648",
           "name": "SET_FOLLOW_NODE_THRESHOLD_DISTANCE",
           "num_params": 2,
           "short_desc": "Sets the range within which the char responds to events",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetFollowNodeThresholdDistance"
         },
         {
           "id": "0649",
@@ -25607,36 +25657,52 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0652",
           "name": "GET_INT_STAT",
           "num_params": 2,
           "short_desc": "Returns the value of the specified integer stat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "GetInt",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0653",
           "name": "GET_FLOAT_STAT",
           "num_params": 2,
           "short_desc": "Returns the value of the specified float stat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
+          "member": "GetFloat"
         },
         {
           "input": [
@@ -30361,16 +30427,18 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Plane"
+            }
+          ],
           "id": "0745",
           "name": "PLANE_STARTS_IN_AIR",
           "num_params": 1,
           "short_desc": "Immediately provides the aircraft with full power so it can start flying mid-air",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Plane",
+          "member": "StartsInAir"
         },
         {
           "id": "0746",
@@ -34153,16 +34221,18 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            }
+          ],
           "id": "0825",
           "name": "SET_HELI_BLADES_FULL_SPEED",
           "num_params": 1,
           "short_desc": "Makes the helicopter rotor spin at full speed instantly",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "SetBladesFullSpeed"
         },
         {
           "input": [
@@ -37336,24 +37406,24 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "heading",
+              "type": "float"
             }
           ],
           "id": "08DF",
@@ -37361,7 +37431,7 @@
           "num_params": 5,
           "short_desc": "",
           "class": "Restart",
-          "member": "SetExtraHospital",
+          "member": "SetExtraHospitalRestartPoint",
           "attrs": {
             "is_static": true
           }
@@ -37369,24 +37439,24 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "heading",
+              "type": "float"
             }
           ],
           "id": "08E0",
@@ -37394,7 +37464,7 @@
           "num_params": 5,
           "short_desc": "",
           "class": "Restart",
-          "member": "SetExtraPolice",
+          "member": "SetExtraPoliceStationRestartPoint",
           "attrs": {
             "is_static": true
           }
@@ -42578,20 +42648,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "id": "0A10",
           "name": "INCREMENT_INT_STAT_NO_MESSAGE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
+          "member": "IncrementIntNoMessage"
         },
         {
           "input": [
@@ -42879,20 +42954,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "statId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
           "id": "0A1F",
           "name": "INCREMENT_FLOAT_STAT_NO_MESSAGE",
           "num_params": 2,
           "short_desc": "Adds the value to the specified stat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
+          "member": "IncrementFloatNoMessage"
         },
         {
           "input": [

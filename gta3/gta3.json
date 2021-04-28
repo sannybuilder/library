@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619543645358
+    "last_update": 1619614238567
   },
   "extensions": [
     {
@@ -4087,32 +4087,32 @@
           "short_desc": "Returns true if the player is pressing the specified key"
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Pad",
-          "id": "00E2",
           "input": [
             {
-              "name": "_p1",
+              "name": "padId",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "buttonId",
               "type": "int"
             }
           ],
-          "member": "GetState",
-          "name": "GET_PAD_STATE",
-          "num_params": 3,
           "output": [
             {
-              "name": "_p3",
+              "name": "state",
               "type": "int",
               "source": "var_any"
             }
           ],
-          "short_desc": "Stores the status of the specified key into a variable"
+          "id": "00E2",
+          "name": "GET_PAD_STATE",
+          "num_params": 3,
+          "short_desc": "Stores the status of the specified key into a variable",
+          "class": "Pad",
+          "member": "GetState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "attrs": {
@@ -5736,17 +5736,17 @@
           "short_desc": "Clears the player's wanted level"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "0111",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetDeatharrestState",
           "name": "SET_DEATHARREST_STATE",
           "num_params": 1,
@@ -6895,25 +6895,25 @@
           "short_desc": "Attaches the camera to the specified vehicle"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "mode",
+              "type": "int"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "0159",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "PointAtChar",
           "name": "POINT_CAMERA_AT_CHAR",
           "num_params": 3,
@@ -7084,29 +7084,29 @@
           "short_desc": "Sets the cameras X, Y and Z position and rotation to the specified values"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "0160",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ],
           "member": "PointAtPoint",
           "name": "POINT_CAMERA_AT_POINT",
           "num_params": 4,
@@ -10761,6 +10761,13 @@
           "short_desc": "Initializes a rampage"
         },
         {
+          "output": [
+            {
+              "name": "status",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -10769,13 +10776,6 @@
           "member": "ReadStatus",
           "name": "READ_KILL_FRENZY_STATUS",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Gets the status of the current rampage"
         },
         {
@@ -16417,34 +16417,34 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "progress",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "030C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "PlayerMadeProgress",
           "name": "PLAYER_MADE_PROGRESS",
           "num_params": 1,
           "short_desc": "Increases the progress made stat by the specified amount"
         },
         {
+          "input": [
+            {
+              "name": "maxProgress",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "030D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetProgressTotal",
           "name": "SET_PROGRESS_TOTAL",
           "num_params": 1,
@@ -16603,17 +16603,17 @@
           "short_desc": "Increases the mission attempts stat by 1"
         },
         {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "0318",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "RegisterMissionPassed",
           "name": "REGISTER_MISSION_PASSED",
           "num_params": 1,
@@ -22340,17 +22340,17 @@
           "short_desc": "Clears all pedestrians from the given area"
         },
         {
+          "input": [
+            {
+              "name": "numMissions",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "042C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetTotalNumberOfMissions",
           "name": "SET_TOTAL_NUMBER_OF_MISSIONS",
           "num_params": 1,
@@ -22381,21 +22381,21 @@
           "short_desc": "Converts the given integer number of metres to an imperial value and stores the result in the variable"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Stat",
           "id": "042E",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "RegisterFastestTime",
           "name": "REGISTER_FASTEST_TIME",
           "num_params": 2,

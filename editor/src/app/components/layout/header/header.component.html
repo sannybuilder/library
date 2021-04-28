@@ -1,11 +1,15 @@
-<div class="container-fluid bg-dark" *ngIf="game$ | async as thisGame">
+<div class="container-fluid bg-dark">
   <div class="navbar navbar-expand">
     <div class="row flex-grow-1">
       <div class="col-xl-2"></div>
       <div class="col-12 col-xl-8 d-flex align-items-center">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a routerLink="/" class="nav-link d-inline-block">
+            <a
+              routerLink="/"
+              routerLinkActive="active"
+              class="nav-link d-inline-block"
+            >
               <img
                 class="d-none d-sm-inline-block"
                 src="assets/sanny.png"
@@ -15,14 +19,10 @@
               <span class="align-middle pl-1">Home</span></a
             >
           </li>
-          <li
-            class="nav-item dropdown"
-            *ngFor="let game of [Game.GTA3, Game.VC, Game.SA]"
-          >
+          <li class="nav-item dropdown" *ngFor="let game of games">
             <a
               class="nav-link d-inline-block dropdown-toggle"
-              [ngClass]="{ active: thisGame === game }"
-              href="#"
+              [ngClass]="{ active: (activeRoute$ | async) === game }"
               aria-current="page"
               role="button"
               data-toggle="dropdown"

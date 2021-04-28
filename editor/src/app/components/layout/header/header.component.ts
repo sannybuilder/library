@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { Game } from '../../../models';
 import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 
@@ -11,18 +12,27 @@ import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   Game = Game;
+  games = Object.values(Game);
+
   displaySearchBar$ = this._ui.displaySearchBar$;
   isAuthorized$ = this._auth.isAuthorized$;
   avatarUrl$ = this._auth.avatarUrl$;
   userName$ = this._auth.userName$;
   searchTerm$ = this._ui.searchTerm$;
   searchDebounced$ = new Subject<string>();
-  game$ = this._game.game$;
+
+  activeRoute$ = this._router.events.pipe(
+    filter((event) => event instanceof NavigationEnd),
+    map((event: NavigationEnd) => {
+      const parts = event.url.split('/');
+      return parts[1];
+    })
+  );
 
   constructor(
     private _auth: AuthFacade,
     private _ui: UiFacade,
-    private _game: GameFacade
+    private _router: Router
   ) {}
 
   ngOnInit() {

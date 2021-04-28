@@ -12,7 +12,7 @@
 
 <hr />
 
-<div class="row mb-2 pr-5">
+<div class="row mb-2 pr-5 position-relative">
   <div class="col-12">
     <button
       class="btn btn-outline-secondary text-nowrap d-flex ml-auto"
@@ -47,7 +47,8 @@
   </div>
   <div class="col-12 col-xl-8">
     <div class="input-group">
-      <span class="input-group-text">Command Name</span>
+      <span class="input-group-text d-none d-md-inline">Command Name</span>
+      <span class="input-group-text d-inline d-md-none">Name</span>
       <input
         type="text"
         class="form-control"
@@ -134,7 +135,8 @@
 <div class="row mb-2">
   <div class="col-12">
     <div class="input-group">
-      <span class="input-group-text">Short Description</span>
+      <span class="input-group-text d-none d-md-inline">Short Description</span>
+      <span class="input-group-text d-inline d-md-none">Desc.</span>
       <input
         type="text"
         [(ngModel)]="command.short_desc"
@@ -154,7 +156,7 @@
   >
     <h5>Parameters</h5>
     <div
-      class="row mb-2 pr-5"
+      class="row mb-2 pr-5 position-relative"
       *ngFor="let param of command.input; let i = index"
       cdkDrag
       cdkDragBoundary="scl-command-editor"
@@ -226,7 +228,7 @@
   >
     <h5>Result</h5>
     <div
-      class="row mb-2 pr-5"
+      class="row mb-2 pr-5 position-relative"
       *ngFor="let param of command.output; let i = index"
       cdkDrag
       cdkDragBoundary="scl-command-editor"

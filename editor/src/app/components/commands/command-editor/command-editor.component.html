@@ -7,6 +7,30 @@
     ></scl-command-games>
   </div>
 </div>
+
+<h5>Edit Command</h5>
+
+<hr />
+
+<div class="row mb-2 pr-5">
+  <div class="col-12">
+    <button
+      class="btn btn-outline-secondary text-nowrap d-flex ml-auto"
+      (click)="addInput()"
+    >
+      Add Param
+    </button>
+  </div>
+
+  <button
+    class="close delete-command-button text-danger"
+    (click)="deleteCommand()"
+    title="Delete command"
+  >
+    <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
+  </button>
+</div>
+
 <div class="row mb-2">
   <div class="col-12 col-xl-4">
     <div class="input-group">
@@ -23,7 +47,7 @@
   </div>
   <div class="col-12 col-xl-8">
     <div class="input-group">
-      <span class="input-group-text">Command name</span>
+      <span class="input-group-text">Command Name</span>
       <input
         type="text"
         class="form-control"
@@ -130,7 +154,7 @@
   >
     <h5>Parameters</h5>
     <div
-      class="row mb-2"
+      class="row mb-2 pr-5"
       *ngFor="let param of command.input; let i = index"
       cdkDrag
       cdkDragBoundary="scl-command-editor"
@@ -183,6 +207,14 @@
           [narrowDropdown]="true"
         ></scl-selector>
       </div>
+
+      <button
+        class="close delete-param-button"
+        (click)="deleteInput(i)"
+        title="Delete input param"
+      >
+        <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
+      </button>
     </div>
   </div>
 
@@ -194,7 +226,7 @@
   >
     <h5>Result</h5>
     <div
-      class="row mb-2"
+      class="row mb-2 pr-5"
       *ngFor="let param of command.output; let i = index"
       cdkDrag
       cdkDragBoundary="scl-command-editor"
@@ -264,6 +296,14 @@
           >
         </div>
       </div>
+
+      <button
+        class="close delete-param-button"
+        (click)="deleteOutput(i)"
+        title="Delete output param"
+      >
+        <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
+      </button>
     </div>
   </div>
 </ng-container>
@@ -313,4 +353,23 @@
     (ngModelChange)="onParamNameChange($event, param)"
     [ngClass]="{ 'is-invalid': isParamNameDuplicate(param.name) }"
   />
+</ng-template>
+
+<ng-template #deleteIcon>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-trash"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+    />
+    <path
+      fill-rule="evenodd"
+      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+    />
+  </svg>
 </ng-template>

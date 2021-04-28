@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { zip } from 'rxjs';
+import { of, zip } from 'rxjs';
 import {
   tap,
   switchMap,
@@ -61,19 +61,34 @@ export class ExtensionsEffects {
       withLatestFrom(this._game.game$),
       switchMap(([{ batch }, game]) => {
         return zip(
-          ...batch.map(({ command, newExtension, oldExtension }) =>
-            this._game.getCommandSupportInfo(command, oldExtension).pipe(
-              // take(1),
-              map((supportInfo: GameSupportInfo[]) =>
-                getSameCommands(supportInfo, game).map((d) => ({
-                  game: d.game,
+          ...batch.map(({ command, newExtension, oldExtension }) => {
+            // find copies of this command in other games to propagate the changes
+            if (command.id && command.name) {
+              return this._game
+                .getCommandSupportInfo(command, oldExtension)
+                .pipe(
+                  // take(1),
+                  map((supportInfo: GameSupportInfo[]) =>
+                    getSameCommands(supportInfo, game).map((d) => ({
+                      game: d.game,
+                      command,
+                      newExtension,
+                      oldExtension,
+                    }))
+                  )
+                );
+            } else {
+              // if there is no id or name (deleting flow) - update only this game
+              return of([
+                {
+                  game,
                   command,
                   newExtension,
                   oldExtension,
-                }))
-              )
-            )
-          )
+                },
+              ]);
+            }
+          })
         );
       }),
       switchMap((updates) => {

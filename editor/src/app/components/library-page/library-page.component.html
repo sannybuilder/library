@@ -119,6 +119,7 @@
         [types]="getExtensionTypes(extension) | async"
         [commands]="getExtensionCommands(extension) | async"
         (hasError)="editorHasError = $event"
+        (delete)="onDeleteCommand()"
       ></scl-command-editor>
       <scl-command-info
         *ngIf="viewMode === ViewMode.ViewCommand"

@@ -49,8 +49,8 @@ const _reducer = createReducer(
               e.commands,
               'id',
               newCommand.id,
-              () => newCommand,
-              () => newCommand
+              () => (newCommand.id && newCommand.name ? newCommand : null),
+              () => (newCommand.id && newCommand.name ? newCommand : null)
             ),
           }),
           () => ({

@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<h5>Edit Enum</h5>
+<h5>{{ enumToEdit.isNew ? "Add Enum" : "Edit Enum" }}</h5>
 
 <hr />
 
@@ -53,16 +53,16 @@
         class="btn btn-outline-secondary text-nowrap"
         (click)="addNewField()"
       >
-        Add field
+        Add Field
       </button>
     </div>
   </div>
 
   <button
     *ngIf="!enumToEdit.isNew"
-    class="close delete-enum-button"
+    class="close delete-enum-button text-danger"
     (click)="deleteEnum()"
-    title="Delete Enum"
+    title="Delete enum"
   >
     <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
   </button>
@@ -76,7 +76,7 @@
 >
   <h5>Fields</h5>
   <div
-    class="row mb-2 pr-5 field-container"
+    class="row mb-2 pr-5"
     *ngFor="let field of enumToEdit.fields; let i = index"
     cdkDrag
     cdkDragBoundary="scl-enum-editor"

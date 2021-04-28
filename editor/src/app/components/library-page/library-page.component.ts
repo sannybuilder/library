@@ -160,6 +160,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._enums.cloneEnum({ enumToClone: this.enumToDisplayOrEdit, game });
   }
 
+  onDeleteCommand() {
+    this.command.name = undefined;
+    this._onSaveCommand();
+  }
+
   onCancel() {
     this._ui.stopEditOrDisplay();
   }

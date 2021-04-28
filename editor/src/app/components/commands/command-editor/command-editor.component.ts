@@ -19,6 +19,7 @@ import {
   Attribute,
   Command,
   CommandAttributes,
+  Game,
   Param,
   ParamType,
   Primitive,
@@ -35,6 +36,9 @@ type ErrorType =
   | 'duplicateParamName'
   | 'invalidAttributeCombo'
   | 'noConstructorWithoutOutputParams';
+
+const DEFAULT_INPUT_SOURCE = SourceType.any;
+const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
 
 @Component({
   selector: 'scl-command-editor',
@@ -78,6 +82,7 @@ export class CommandEditorComponent implements OnInit {
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
+  @Output() delete: EventEmitter<void> = new EventEmitter();
 
   @Input() set types(val: ParamType[]) {
     const prefixes: Record<ParamType['type'], string> = {
@@ -227,11 +232,11 @@ export class CommandEditorComponent implements OnInit {
   }
 
   getDefaultInputSource(param: Param) {
-    return param.source ?? SourceType.any;
+    return param.source ?? DEFAULT_INPUT_SOURCE;
   }
 
   getDefaultOutputSource(param: Param) {
-    return param.source ?? SourceType.var_any;
+    return param.source ?? DEFAULT_OUTPUT_SOURCE;
   }
 
   onParamSourceUpdate(source: SourceType, param: Param) {
@@ -398,6 +403,33 @@ export class CommandEditorComponent implements OnInit {
       );
       event.container.data[event.currentIndex].source = newSource;
     }
+  }
+
+  addInput() {
+    this.command.input ??= [];
+    this.command.input.push({
+      name: '',
+      type: PrimitiveType.any,
+      source: DEFAULT_INPUT_SOURCE,
+    });
+    this.command.num_params++;
+    this.updateErrors();
+  }
+
+  deleteCommand() {
+    this.delete.emit();
+  }
+
+  deleteInput(index: number) {
+    this.command.input.splice(index, 1);
+    this.command.num_params--;
+    this.updateErrors();
+  }
+
+  deleteOutput(index: number) {
+    this.command.output.splice(index, 1);
+    this.command.num_params--;
+    this.updateErrors();
   }
 
   private getAllParams() {

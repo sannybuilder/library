@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619614690583
+    "last_update": 1619623674910
   },
   "extensions": [
     {
@@ -19286,18 +19286,18 @@
           "short_desc": "Controls whether the character can drown in water"
         },
         {
-          "class": "Object",
-          "id": "04D9",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Object",
+          "id": "04D9",
           "member": "SetRecordsCollisions",
           "name": "SET_OBJECT_RECORDS_COLLISIONS",
           "num_params": 2,
@@ -23589,56 +23589,64 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "path",
+              "type": "int"
+            }
+          ],
           "id": "05EB",
           "name": "START_PLAYBACK_RECORDED_CAR",
           "num_params": 2,
           "short_desc": "Assigns a car to a path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "StartPlaybackRecorded"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "05EC",
           "name": "STOP_PLAYBACK_RECORDED_CAR",
           "num_params": 1,
           "short_desc": "Stops car from following path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "StopPlaybackRecorded"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "05ED",
           "name": "PAUSE_PLAYBACK_RECORDED_CAR",
           "num_params": 1,
           "short_desc": "Freezes the car on it's path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "PausePlaybackRecorded"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "05EE",
           "name": "UNPAUSE_PLAYBACK_RECORDED_CAR",
           "num_params": 1,
           "short_desc": "Unfreezes the vehicle on it's path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "UnpausePlaybackRecorded"
         },
         {
           "id": "05EF",
@@ -24524,19 +24532,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "060E",
           "name": "IS_PLAYBACK_GOING_ON_FOR_CAR",
           "num_params": 1,
           "short_desc": "Returns true if the car is assigned to a path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsPlaybackGoingOn"
         },
         {
           "id": "060F",
@@ -28188,16 +28198,18 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "06C5",
           "name": "SKIP_TO_END_AND_STOP_PLAYBACK_RECORDED_CAR",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SkipToEndAndStopPlaybackRecorded"
         },
         {
           "id": "06C6",
@@ -29091,20 +29103,22 @@
           "member": "DoesHaveStuckCarCheck"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            }
+          ],
           "id": "06FD",
           "name": "SET_PLAYBACK_SPEED",
           "num_params": 2,
           "short_desc": "Sets the playback speed of the car playing a car recording",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetPlaybackSpeed"
         },
         {
           "id": "06FE",
@@ -29232,36 +29246,40 @@
           "class": "Car"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "pathId",
+              "type": "int"
+            }
+          ],
           "id": "0705",
           "name": "START_PLAYBACK_RECORDED_CAR_USING_AI",
           "num_params": 2,
           "short_desc": "Starts the playback of a recorded car with driver AI enabled",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "StartPlaybackRecordedUsingAi"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "amount",
+              "type": "float"
+            }
+          ],
           "id": "0706",
           "name": "SKIP_IN_PLAYBACK_RECORDED_CAR",
           "num_params": 2,
           "short_desc": "Advances the recorded car playback by the specified amount",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SkipInPlaybackRecorded"
         },
         {
           "id": "0707",
@@ -32320,31 +32338,39 @@
           "member": "SetAlwaysDisplayOnZoomedRadar"
         },
         {
+          "input": [
+            {
+              "name": "pathId",
+              "type": "int"
+            }
+          ],
           "id": "07C0",
           "name": "REQUEST_CAR_RECORDING",
           "num_params": 1,
           "short_desc": "Loads the specified car recording",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "RequestCarRecording",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "pathId",
+              "type": "int"
+            }
+          ],
           "id": "07C1",
           "name": "HAS_CAR_RECORDING_BEEN_LOADED",
           "num_params": 1,
           "short_desc": "Returns true if the car recording has finished loading",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "HasCarRecordingBeenLoaded"
         },
         {
           "id": "07C2",
@@ -35139,20 +35165,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "pathId",
+              "type": "int"
+            }
+          ],
           "id": "085E",
           "name": "START_PLAYBACK_RECORDED_CAR_LOOPED",
           "num_params": 2,
           "short_desc": "Starts looped playback of a recorded car path",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "StartPlaybackRecordedLooped"
         },
         {
           "id": "085F",
@@ -35555,16 +35583,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "pathId",
+              "type": "int"
+            }
+          ],
           "id": "0873",
           "name": "REMOVE_CAR_RECORDING",
           "num_params": 1,
           "short_desc": "Unloads the car recording",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "RemoveCarRecording",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0874",
@@ -40673,16 +40706,18 @@
           "member": "SetCollision"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "id": "099B",
           "name": "CHANGE_PLAYBACK_TO_USE_AI",
           "num_params": 1,
           "short_desc": "Changes vehicle control from playback to AI driven",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "ChangePlaybackToUseAi"
         },
         {
           "id": "099C",

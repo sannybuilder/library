@@ -5,6 +5,7 @@ import {
   authTokenSelector,
   avatarUrlSelector,
   isAuthorizedSelector,
+  profileUrlSelector,
   userNameSelector,
 } from './selectors';
 
@@ -13,6 +14,7 @@ export class AuthFacade {
   userName$ = this.store$.select(userNameSelector);
   isAuthorized$ = this.store$.select(isAuthorizedSelector);
   avatarUrl$ = this.store$.select(avatarUrlSelector);
+  profileUrl$ = this.store$.select(profileUrlSelector);
   authToken$ = this.store$.select(authTokenSelector);
 
   constructor(private store$: Store) {}

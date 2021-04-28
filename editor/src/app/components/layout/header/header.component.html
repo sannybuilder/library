@@ -35,7 +35,7 @@
               ></scl-icon>
               <span class="align-middle pl-1">{{ game | gameTitle }}</span></a
             >
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu">
               <a class="dropdown-item" [routerLink]="['/', game]">Commands</a>
               <a class="dropdown-item" [routerLink]="['/', game, 'classes']"
                 >Classes</a
@@ -46,18 +46,35 @@
             </div>
           </li>
         </ul>
-        <div *ngIf="avatarUrl$ | async as avatar">
-          <img
-            class="mr-2"
-            [src]="avatar"
-            width="24"
-            height="24"
-            title="{{ userName$ | async }}'s avatar"
-          />
-          <span class="pr-2 d-none d-md-inline-block"
-            >Welcome, {{ userName$ | async }}
-          </span>
-          <a href="#" (click)="logout()">Logout</a>
+        <div class="position-relative">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-toggle="dropdown"
+            data-display="static"
+          >
+            <img
+              *ngIf="avatarUrl$ | async as avatar; else dummyAvatar"
+              [src]="avatar"
+              width="24"
+              height="24"
+              title="{{ userName$ | async }}'s avatar"
+            />
+            <span class="pl-2 d-none d-md-inline-block align-middle"
+              >Welcome, {{ userName$ | async }}
+            </span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <a
+              class="dropdown-item"
+              [href]="profileUrl$ | async"
+              target="_blank"
+              >Profile</a
+            >
+            <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+          </div>
         </div>
 
         <button
@@ -109,3 +126,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #dummyAvatar>
+  <div class="dummy-avatar" title="No Avatar"></div>
+</ng-template>

@@ -8,6 +8,7 @@ import { CONFIG, Config } from '../../config';
 interface UserResponse {
   login: string;
   avatar_url: string;
+  html_url: string;
 }
 @Injectable({ providedIn: 'root' })
 export class AuthService {

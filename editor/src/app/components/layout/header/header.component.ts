@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { Game } from '../../../models';
-import { UiFacade, AuthFacade, GameFacade } from '../../../state';
+import { UiFacade, AuthFacade } from '../../../state';
 
 @Component({
   selector: 'scl-header',
@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthorized$ = this._auth.isAuthorized$;
   avatarUrl$ = this._auth.avatarUrl$;
   userName$ = this._auth.userName$;
+  profileUrl$ = this._auth.profileUrl$;
   searchTerm$ = this._ui.searchTerm$;
   searchDebounced$ = new Subject<string>();
 

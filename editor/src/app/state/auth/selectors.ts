@@ -13,6 +13,11 @@ export const avatarUrlSelector = createSelector(
   (state: AuthState) => state.avatarUrl
 );
 
+export const profileUrlSelector = createSelector(
+  state,
+  (state: AuthState) => state.profileUrl
+);
+
 export const authTokenSelector = createSelector(
   state,
   (state: AuthState) => state.accessToken

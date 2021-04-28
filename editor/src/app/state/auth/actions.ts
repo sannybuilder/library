@@ -16,5 +16,5 @@ export const authorizeSuccess = createAction(
 
 export const gotUser = createAction(
   '[auth] got user',
-  props<{ login: string; avatarUrl: string }>()
+  props<{ login: string; avatarUrl: string; profileUrl: string }>()
 );

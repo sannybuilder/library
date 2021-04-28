@@ -5,6 +5,7 @@ export interface AuthState {
   userName: string;
   accessToken?: string;
   avatarUrl?: string;
+  profileUrl?: string;
 }
 
 export const initialState: AuthState = {
@@ -13,9 +14,10 @@ export const initialState: AuthState = {
 
 const _reducer = createReducer(
   initialState,
-  on(gotUser, (state, { login, avatarUrl }) => ({
+  on(gotUser, (state, { login, avatarUrl, profileUrl }) => ({
     ...state,
     avatarUrl,
+    profileUrl,
     userName: login,
   })),
   on(authorizeSuccess, (state, { accessToken }) => ({

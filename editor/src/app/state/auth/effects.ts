@@ -44,8 +44,8 @@ export class AuthEffects {
       ofType(authorizeSuccess),
       switchMap(({ accessToken }) =>
         this.service.getUser(accessToken).pipe(
-          map(({ login, avatar_url: avatarUrl }) =>
-            gotUser({ login, avatarUrl })
+          map(({ login, avatar_url: avatarUrl, html_url: profileUrl }) =>
+            gotUser({ login, avatarUrl, profileUrl })
           ),
           catchError(() => of(authorizeFail()))
         )

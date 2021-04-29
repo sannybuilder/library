@@ -125,16 +125,18 @@
   </div>
 </div>
 
-<div class="container-fluid bg-dark sticky-top mb-3">
+<div
+  class="container-fluid bg-dark sticky-top mb-3"
+  [ngClass]="{ 'with-search-bar': displaySearchBar$ | async }"
+>
   <div class="navbar navbar-expand-sm">
     <div class="row flex-grow-1">
       <div class="col-xl-2"></div>
       <div class="col-12 col-xl-5 d-flex align-items-center">
         <form class="form-inline flex-nowrap flex-grow-1">
-          <ng-container *ngIf="displaySearchBar$ | async">
             <input
               name="search"
-              class="search-bar form-control w-100"
+              class="search-bar search-bar-control form-control w-100"
               type="search"
               [placeholder]="'ui.header.searchPlaceholder' | translate"
               autofocus
@@ -142,13 +144,12 @@
               (ngModelChange)="onSearchUpdate($event)"
             />
             <button
-              class="btn btn-outline-secondary mx-2 d-none d-sm-inline-block"
+              class="btn search-bar-control btn-outline-secondary mx-2 d-none d-sm-inline-block"
               type="button"
               (click)="clear()"
             >
               {{ "ui.header.searchClear" | translate }}
             </button>
-          </ng-container>
 
           <button
             class="navbar-toggler ml-auto"

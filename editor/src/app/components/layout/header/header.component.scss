@@ -56,3 +56,22 @@ a.nav-link.active {
   max-height: calc(100vh - 180px);
   overflow: auto;
 }
+
+// search-bar only visible inside with-search-bar
+.search-bar-control {
+  display: none;
+}
+
+.with-search-bar {
+  .search-bar-control {
+    display: block;
+  }
+}
+
+// hide empty sticky containter on wide screens
+// display when there is the search bar or the hamburger menu
+@media (min-width: 576px) {
+  .sticky-top:not(.with-search-bar) {
+    display: none;
+  }
+}

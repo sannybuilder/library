@@ -51,7 +51,10 @@
             </div>
           </li>
         </ul>
-        <div class="position-relative">
+        <div
+          class="position-relative"
+          *ngIf="(isAuthorized$ | async) && (userName$ | async) as userName"
+        >
           <a
             href="#"
             class="nav-link dropdown-toggle"
@@ -249,5 +252,5 @@
 </div>
 
 <ng-template #dummyAvatar>
-  <div class="dummy-avatar" [title]="'ui.header.no_avatar' | translate"></div>
+  <div class="dummy-avatar" [title]="'ui.header.noAvatar' | translate"></div>
 </ng-template>

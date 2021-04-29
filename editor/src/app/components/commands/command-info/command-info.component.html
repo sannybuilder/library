@@ -27,8 +27,12 @@
     >
       {{ command.short_desc }}
     </div>
-    <div *ngIf="command.attrs?.is_unsupported" class="mb-3">Unsupported</div>
-    <div *ngIf="command.attrs?.is_nop" class="mb-3">Does nothing (NOP)</div>
+    <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
+      {{ "ui.commandList.unsupported" | translate }}
+    </div>
+    <div *ngIf="command.attrs?.is_nop" class="mb-3">
+      {{ "ui.commandList.nop" | translate }}
+    </div>
 
     <ng-container *ngIf="command.attrs?.is_keyword">
       <code>{{ command.name | lowercase }} {{ command | keywordParams }}</code>
@@ -56,7 +60,7 @@
     </ng-container>
 
     <div *ngIf="command.input?.length > 0" class="mt-3">
-      <h5>Parameters</h5>
+      <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
 
       <ng-container
         *ngTemplateOutlet="paramTemplate; context: { $implicit: command.input }"
@@ -64,7 +68,7 @@
     </div>
 
     <div *ngIf="command.output?.length > 0" class="mt-3">
-      <h5>Result</h5>
+      <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
 
       <ng-container
         *ngTemplateOutlet="
@@ -80,18 +84,18 @@
   <hr />
   <div class="row mb-2">
     <div class="col-12">
-      <h5>Notes</h5>
+      <h5>{{ "ui.commandOverview.notesSubtitle" | translate }}</h5>
       <ul class="list-unstyled">
-        <li *ngIf="extension !== 'default'">
-          This command requires a non-standard
-          <a
-            href="https://docs.sannybuilder.com/edit-modes/extensions"
-            target="_blank"
-            >extension</a
-          >
-          {{ extension }}
+        <li
+          *ngIf="extension !== 'default'"
+          [innerHTML]="
+            'ui.commandOverview.withExtension'
+              | translate: { extension: extension }
+          "
+        ></li>
+        <li *ngFor="let attr of attrs">
+          {{ "ui.attributes." + attr | translate }}.
         </li>
-        <li *ngFor="let attr of attrs">{{ attr | attrTitle }}.</li>
       </ul>
     </div>
   </div>
@@ -99,7 +103,7 @@
 
 <ng-container *ngIf="snippet">
   <hr />
-  <h5>Code Snippet</h5>
+  <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
   <pre class="sample">{{ snippet | parametrify: command }}</pre>
 </ng-container>
 

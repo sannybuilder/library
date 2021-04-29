@@ -17,7 +17,9 @@
           <div class="d-flex flex-row align-items-center mb-3">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+                <li class="breadcrumb-item">
+                  <a routerLink="/">{{ "ui.header.home" | translate }}</a>
+                </li>
                 <li class="breadcrumb-item active" aria-current="page">
                   {{ game | gameTitle }}
                 </li>
@@ -27,7 +29,7 @@
               *ngIf="canEdit$ | async"
               class="btn btn-outline-secondary ml-auto"
               [routerLink]="['/', game, 'enums', 'new']"
-              >New Enum</a
+              >{{ "ui.layout.newEnum" | translate }}</a
             >
           </div>
 
@@ -69,14 +71,14 @@
           *ngIf="!noChanges(viewMode)"
           (click)="resetChanges(viewMode)"
           class="mr-auto"
-          >Reset all changes</a
+          >{{ "ui.shared.resetChanges" | translate }}</a
         >
         <button
           type="button"
           class="btn btn-outline-secondary"
           (click)="onCancel()"
         >
-          Close
+          {{ "ui.shared.close" | translate }}
         </button>
         <button
           *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
@@ -84,7 +86,7 @@
           class="btn btn-outline-success"
           (click)="onEditCommand(command, extension)"
         >
-          Edit
+          {{ "ui.shared.edit" | translate }}
         </button>
         <button
           *ngIf="viewMode === ViewMode.ViewEnum && (canEdit$ | async)"
@@ -92,7 +94,7 @@
           class="btn btn-outline-success"
           (click)="onEditEnum(enumToDisplayOrEdit)"
         >
-          Edit
+          {{ "ui.shared.edit" | translate }}
         </button>
         <button
           *ngIf="
@@ -103,7 +105,7 @@
           class="btn btn-outline-success"
           (click)="onSave(viewMode)"
         >
-          Save
+          {{ "ui.shared.save" | translate }}
         </button>
       </div>
     </ng-template>

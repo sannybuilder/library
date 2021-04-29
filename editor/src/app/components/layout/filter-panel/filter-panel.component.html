@@ -14,7 +14,7 @@
           aria-expanded="false"
           aria-controls="collapseOne"
         >
-          Filter by extensions
+          {{ "ui.filters.filterExtensions" | translate }}
         </button>
       </h2>
     </div>
@@ -55,7 +55,7 @@
           aria-expanded="false"
           aria-controls="collapseThree"
         >
-          Filter by classes
+          {{ "ui.filters.filterClasses" | translate }}
         </button>
       </h2>
     </div>
@@ -75,7 +75,7 @@
               (ngModelChange)="selectClass('any', $event)"
             />
             <span class="checkbox"></span>
-            any class
+            {{ "ui.filters.anyClass" | translate }}
           </label>
         </div>
         <div class="d-sm-inline-block d-xl-block pr-2">
@@ -86,7 +86,7 @@
               (ngModelChange)="selectClass('none', $event)"
             />
             <span class="checkbox"></span>
-            no class
+            {{ "ui.filters.noClass" | translate }}
           </label>
         </div>
         <hr />
@@ -122,7 +122,7 @@
           aria-expanded="false"
           aria-controls="collapseTwo"
         >
-          Filter by attributes
+          {{ "ui.filters.filterAttributes" | translate }}
         </button>
       </h2>
     </div>
@@ -147,13 +147,16 @@
 </div>
 
 <ng-template #attrs let-modifier>
-  <div class="mb-3">{{ modifier }}:</div>
+  <div class="mb-3">{{ "ui.filters." + modifier | translate }}:</div>
 
   <div
     class="d-sm-inline-block d-xl-block pr-2"
     *ngFor="let attribute of attributes"
   >
-    <label class="form-check-label" [title]="attribute | attrTitle">
+    <label
+      class="form-check-label"
+      [title]="'ui.attributes.' + attribute | translate"
+    >
       <input
         type="checkbox"
         [ngModel]="isAttributeChecked(attribute, modifier) | async"

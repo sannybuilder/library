@@ -7,5 +7,4 @@ export * from './parametrify.pipe';
 export * from './input-params.pipe';
 export * from './output-params.pipe';
 export * from './single-param.pipe';
-export * from './attr-title.pipe';
 export * from './highlight-prop.pipe';

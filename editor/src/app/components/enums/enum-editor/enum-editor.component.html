@@ -7,20 +7,27 @@
   </div>
 </div>
 
-<h5>{{ enumToEdit.isNew ? "Add Enum" : "Edit Enum" }}</h5>
+<h5>
+  {{
+    (enumToEdit.isNew ? "ui.enumEditor.titleNew" : "ui.enumEditor.title")
+      | translate
+  }}
+</h5>
 
 <hr />
 
 <div class="row mb-2 pr-5 position-relative">
-  <div class="col-12 col-md-8 mb-2 mb-md-0">
+  <div class="col-12 col-md-6 mb-2 mb-md-0">
     <div class="input-group">
-      <span class="input-group-text d-none d-md-inline">Name</span>
+      <span class="input-group-text d-none d-md-inline">{{
+        "ui.enumEditor.name" | translate
+      }}</span>
       <input
         type="text"
         [ngModel]="enumToEdit.name"
         (ngModelChange)="onEnumNameChange($event)"
         class="form-control"
-        placeholder="Enter enum name"
+        [placeholder]="'ui.enumEditor.newEnumPlaceholder' | translate"
         autofocus
         [ngClass]="{
           'is-invalid': isDirty && !enumToEdit.name
@@ -29,7 +36,7 @@
     </div>
   </div>
 
-  <div class="col-12 col-md-4">
+  <div class="col-12 col-md-6">
     <div class="input-group justify-content-md-end flex-nowrap">
       <button
         *ngIf="canClone()"
@@ -39,7 +46,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Clone
+        {{ "ui.enumEditor.clone" | translate }}
       </button>
       <div class="dropdown-menu">
         <span
@@ -53,7 +60,7 @@
         class="btn btn-outline-secondary text-nowrap"
         (click)="addNewField()"
       >
-        Add Field
+        {{ "ui.enumEditor.addField" | translate }}
       </button>
     </div>
   </div>
@@ -62,7 +69,7 @@
     *ngIf="!enumToEdit.isNew"
     class="close delete-enum-button text-danger"
     (click)="deleteEnum()"
-    title="Delete enum"
+    [title]="'ui.enumEditor.deleteEnum' | translate"
   >
     <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
   </button>
@@ -74,7 +81,7 @@
   [ngClass]="{ 'empty-list': !enumToEdit.fields.length }"
   (cdkDropListDropped)="drop($event)"
 >
-  <h5>Fields</h5>
+  <h5>{{ "ui.enumEditor.fields" | translate }}</h5>
   <div
     class="row mb-2 pr-5 position-relative"
     *ngFor="let field of enumToEdit.fields; let i = index"
@@ -87,7 +94,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Enter field name"
+          [placeholder]="'ui.enumEditor.newFieldPlaceholder' | translate"
           [ngModel]="field[0]"
           (ngModelChange)="onFieldNameChange($event, field)"
           [ngClass]="{
@@ -110,7 +117,7 @@
     <button
       class="close delete-field-button"
       (click)="deleteField(i)"
-      title="Delete field"
+      [title]="'ui.enumEditor.deleteField' | translate"
     >
       <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
     </button>

@@ -14,6 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandGamesComponent {
+  GameTitle = GameTitle;
   SupportLevel = SupportLevel;
   @Input() supportInfo: GameSupportInfo[];
   @Input() extension: string;
@@ -21,16 +22,16 @@ export class CommandGamesComponent {
 
   stringifyLevel(level: number, game: Game) {
     if (level === SupportLevel.Supported) {
-      return `Supported in ${GameTitle[game]}`;
+      return 'ui.commandGames.same';
     }
     if (level === SupportLevel.SupportedDiffParams) {
-      return `Supported in ${GameTitle[game]} but has different number of parameters`;
+      return 'ui.commandGames.changed';
     }
     if (level === SupportLevel.Unsupported) {
-      return `Not supported in ${GameTitle[game]}`;
+      return 'ui.commandGames.unsupported';
     }
     if (level === SupportLevel.Nop) {
-      return `No operation (NOP) in ${GameTitle[game]}`;
+      return 'ui.commandGames.nop';
     }
   }
 }

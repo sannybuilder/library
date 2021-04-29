@@ -16,7 +16,9 @@
                 width="24"
                 height="24"
               />
-              <span class="align-middle pl-1">Home</span></a
+              <span class="align-middle pl-1">{{
+                "ui.header.home" | translate
+              }}</span></a
             >
           </li>
           <li class="nav-item dropdown" *ngFor="let game of games">
@@ -36,13 +38,15 @@
               <span class="align-middle pl-1">{{ game | gameTitle }}</span></a
             >
             <div class="dropdown-menu">
-              <a class="dropdown-item" [routerLink]="['/', game]">Commands</a>
-              <a class="dropdown-item" [routerLink]="['/', game, 'classes']"
-                >Classes</a
-              >
-              <a class="dropdown-item" [routerLink]="['/', game, 'enums']"
-                >Enums</a
-              >
+              <a class="dropdown-item" [routerLink]="['/', game]">{{
+                "ui.header.menuCommands" | translate
+              }}</a>
+              <a class="dropdown-item" [routerLink]="['/', game, 'classes']">{{
+                "ui.header.menuClasses" | translate
+              }}</a>
+              <a class="dropdown-item" [routerLink]="['/', game, 'enums']">{{
+                "ui.header.menuEnums" | translate
+              }}</a>
             </div>
           </li>
         </ul>
@@ -59,10 +63,16 @@
               [src]="avatar"
               width="24"
               height="24"
-              title="{{ userName$ | async }}'s avatar"
+              [title]="
+                'ui.header.userAvatar'
+                  | translate: { userName: userName$ | async }
+              "
             />
             <span class="pl-2 d-none d-md-inline-block align-middle"
-              >Welcome, {{ userName$ | async }}
+              >{{
+                "ui.header.greeting"
+                  | translate: { userName: userName$ | async }
+              }}
             </span>
           </a>
 
@@ -71,9 +81,11 @@
               class="dropdown-item"
               [href]="profileUrl$ | async"
               target="_blank"
-              >Profile</a
+              >{{ "ui.header.profile" | translate }}</a
             >
-            <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+            <a class="dropdown-item" href="#" (click)="logout()">{{
+              "ui.header.logout" | translate
+            }}</a>
           </div>
         </div>
 
@@ -82,7 +94,7 @@
           class="btn btn-outline-success d-flex"
           (click)="login()"
         >
-          Login
+          {{ "ui.header.login" | translate }}
         </button>
       </div>
     </div>
@@ -102,7 +114,7 @@
             name="search"
             class="search-bar form-control w-100"
             type="search"
-            placeholder="Search"
+            [placeholder]="'ui.header.searchPlaceholder' | translate"
             autofocus
             [ngModel]="searchTerm$ | async"
             (ngModelChange)="onSearchUpdate($event)"
@@ -112,14 +124,14 @@
             type="button"
             (click)="clear()"
           >
-            Clear
+            {{ "ui.header.searchClear" | translate }}
           </button>
 
           <a
             class="d-none ml-auto scroll-top text-nowrap"
             href="#"
             (click)="scrollTop()"
-            >Go to top</a
+            >{{ "ui.header.goToTop" | translate }}</a
           >
         </form>
       </div>
@@ -128,5 +140,5 @@
 </div>
 
 <ng-template #dummyAvatar>
-  <div class="dummy-avatar" title="No Avatar"></div>
+  <div class="dummy-avatar" [title]="'ui.header.no_avatar' | translate"></div>
 </ng-template>

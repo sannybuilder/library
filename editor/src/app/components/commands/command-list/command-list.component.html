@@ -59,14 +59,14 @@
                   class="btn small text-muted"
                   href="#"
                   (click)="onEdit(row.command, row.extension)"
-                  >Edit</a
+                  >{{ "ui.shared.edit" | translate }}</a
                 >
 
                 <a
                   class="btn small text-muted"
                   [routerLink]="['/', game, row.extension, row.command.id]"
                   [name]="row.command.id"
-                  >View</a
+                  >{{ "ui.shared.view" | translate }}</a
                 >
               </div>
             </div>
@@ -85,12 +85,12 @@
                   ></div>
                 </ng-container>
 
-                <ng-container *ngIf="row.command.attrs?.is_unsupported"
-                  >Unsupported</ng-container
-                >
-                <ng-container *ngIf="row.command.attrs?.is_nop"
-                  >Does nothing (NOP)</ng-container
-                >
+                <ng-container *ngIf="row.command.attrs?.is_unsupported">{{
+                  "ui.commandList.unsupported" | translate
+                }}</ng-container>
+                <ng-container *ngIf="row.command.attrs?.is_nop">{{
+                  "ui.commandList.nop" | translate
+                }}</ng-container>
 
                 <ng-container *ngIf="row.command.attrs?.is_keyword">
                   <code
@@ -168,8 +168,11 @@
     <ng-template #noResults>
       <ng-container *ngIf="(rowsCount$ | async) === 0">
         <p>
-          No commands found matching the given criteria.
-          <a href="#" (click)="resetFilters()">Reset filters</a>.
+          {{ "ui.commandList.emptyResult" | translate }}.
+          <a href="#" (click)="resetFilters()">{{
+            "ui.commandList.emptyResultReset" | translate
+          }}</a
+          >.
         </p>
       </ng-container>
     </ng-template>

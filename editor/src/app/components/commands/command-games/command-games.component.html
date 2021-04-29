@@ -5,7 +5,9 @@
       [ngClass]="{ 'diff-params': item.level === 2 }"
       [game]="item.game"
       size="16"
-      [title]="stringifyLevel(item.level, item.game)"
+      [title]="
+        stringifyLevel(item.level) | translate: { game: GameTitle[item.game] }
+      "
       [opacity]="item.level === 0 ? 0.3 : 1"
     ></scl-icon>
   </a>

@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<h5>Edit Command</h5>
+<h5>{{ "ui.commandEditor.title" | translate }}</h5>
 
 <hr />
 
@@ -18,14 +18,14 @@
       class="btn btn-outline-secondary text-nowrap d-flex ml-auto"
       (click)="addInput()"
     >
-      Add Param
+      {{ "ui.commandEditor.addInput" | translate }}
     </button>
   </div>
 
   <button
     class="close delete-command-button text-danger"
     (click)="deleteCommand()"
-    title="Delete command"
+    [title]="'ui.commandEditor.deleteCommand' | translate"
   >
     <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
   </button>
@@ -34,7 +34,9 @@
 <div class="row mb-2">
   <div class="col-12 col-xl-4">
     <div class="input-group">
-      <span class="input-group-text">Opcode</span>
+      <span class="input-group-text">{{
+        "ui.commandEditor.fieldOpcode" | translate
+      }}</span>
       <input
         type="text"
         class="form-control"
@@ -47,8 +49,12 @@
   </div>
   <div class="col-12 col-xl-8">
     <div class="input-group">
-      <span class="input-group-text d-none d-md-inline">Command Name</span>
-      <span class="input-group-text d-inline d-md-none">Name</span>
+      <span class="input-group-text d-none d-md-inline">{{
+        "ui.commandEditor.fieldCommandLong" | translate
+      }}</span>
+      <span class="input-group-text d-inline d-md-none">{{
+        "ui.commandEditor.fieldCommandShort" | translate
+      }}</span>
       <input
         type="text"
         class="form-control"
@@ -62,7 +68,7 @@
 <div class="row mb-2">
   <div class="col-12">
     <scl-selector
-      label="Extension"
+      [label]="'ui.commandEditor.fieldExtension' | translate"
       [model]="extension"
       (modelChange)="onExtensionChange($event)"
       [choices]="extensionNames"
@@ -76,7 +82,7 @@
       <scl-selector
         class="flex-grow-1"
         [model]="command.class"
-        label="Class"
+        [label]="'ui.commandEditor.fieldClass' | translate"
         (modelChange)="onClassChange(command, $event)"
         [choices]="classes"
         [canInput]="true"
@@ -93,7 +99,7 @@
       "
     >
       <small
-        >Suggestion:
+        >{{ "ui.commandEditor.suggestion" | translate }}:
         <a href="#" (click)="(command.class = suggestedClassName) && false">{{
           suggestedClassName
         }}</a></small
@@ -102,7 +108,9 @@
   </div>
   <div class="col-12 col-md-6">
     <div class="input-group">
-      <span class="input-group-text">Member</span>
+      <span class="input-group-text">{{
+        "ui.commandEditor.fieldMember" | translate
+      }}</span>
       <input
         type="text"
         [disabled]="
@@ -123,7 +131,7 @@
       "
     >
       <small
-        >Suggestion:
+        >{{ "ui.commandEditor.suggestion" | translate }}:
         <a href="#" (click)="(command.member = suggestedClassMember) && false">
           {{ suggestedClassMember }}</a
         ></small
@@ -135,8 +143,12 @@
 <div class="row mb-2">
   <div class="col-12">
     <div class="input-group">
-      <span class="input-group-text d-none d-md-inline">Short Description</span>
-      <span class="input-group-text d-inline d-md-none">Desc.</span>
+      <span class="input-group-text d-none d-md-inline">{{
+        "ui.commandEditor.fieldShortDescriptionLong" | translate
+      }}</span>
+      <span class="input-group-text d-inline d-md-none">{{
+        "ui.commandEditor.fieldShortDescriptionShort" | translate
+      }}</span>
       <input
         type="text"
         [(ngModel)]="command.short_desc"
@@ -154,7 +166,7 @@
     [ngClass]="{ 'empty-list': !command.input.length }"
     (cdkDropListDropped)="drop($event, SourceType.any)"
   >
-    <h5>Parameters</h5>
+    <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
     <div
       class="row mb-2 pr-5 position-relative"
       *ngFor="let param of command.input; let i = index"
@@ -173,7 +185,7 @@
           *ngIf="getSuggestedInputName(i) as suggestedInputName"
         >
           <small
-            >Suggestion:
+            >{{ "ui.commandEditor.suggestion" | translate }}:
             <a href="#" (click)="(param.name = suggestedInputName) && false">
               {{ suggestedInputName }}</a
             ></small
@@ -193,7 +205,7 @@
           *ngIf="getSuggestedInputType(i) as suggestedInputType"
         >
           <small
-            >Suggestion:
+            >{{ "ui.commandEditor.suggestion" | translate }}:
             <a href="#" (click)="(param.type = suggestedInputType) && false">
               {{ suggestedInputType }}</a
             ></small
@@ -213,7 +225,7 @@
       <button
         class="close delete-param-button"
         (click)="deleteInput(i)"
-        title="Delete input param"
+        [title]="'ui.commandEditor.deleteParam' | translate"
       >
         <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
       </button>
@@ -226,7 +238,7 @@
     [ngClass]="{ 'empty-list': !command.output.length }"
     (cdkDropListDropped)="drop($event, SourceType.var_any)"
   >
-    <h5>Result</h5>
+    <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
     <div
       class="row mb-2 pr-5 position-relative"
       *ngFor="let param of command.output; let i = index"
@@ -245,7 +257,7 @@
           *ngIf="getSuggestedOutputName(i) as suggestedOutputName"
         >
           <small
-            >Suggestion:
+            >{{ "ui.commandEditor.suggestion" | translate }}:
             <a href="#" (click)="(param.name = suggestedOutputName) && false">
               {{ suggestedOutputName }}</a
             ></small
@@ -267,7 +279,7 @@
           *ngIf="getSuggestedOutputType(i) as suggestedOutputType"
         >
           <small
-            >Suggestion:
+            >{{ "ui.commandEditor.suggestion" | translate }}:
             <a href="#" (click)="(param.type = suggestedOutputType) && false">
               {{ suggestedOutputType }}</a
             ></small
@@ -286,7 +298,7 @@
           *ngIf="getSuggestedOutputSource(i) as suggestedOutputSource"
         >
           <small
-            >Suggestion:
+            >{{ "ui.commandEditor.suggestion" | translate }}:
             <a
               href="#"
               (click)="
@@ -302,7 +314,7 @@
       <button
         class="close delete-param-button"
         (click)="deleteOutput(i)"
-        title="Delete output param"
+        [title]="'ui.commandEditor.deleteParam' | translate"
       >
         <ng-container *ngTemplateOutlet="deleteIcon"></ng-container>
       </button>
@@ -313,7 +325,10 @@
 <div class="row mb-2">
   <div class="col-12">
     <div class="d-inline-block pr-2" *ngFor="let attr of attrs">
-      <label class="form-check-label" [title]="attr | attrTitle">
+      <label
+        class="form-check-label"
+        [title]="'ui.attributes.' + attr | translate"
+      >
         <input
           type="checkbox"
           [ngModel]="command.attrs ? command.attrs[attr] : undefined"
@@ -335,7 +350,9 @@
 <div class="row mb-2">
   <div class="col-12">
     <div class="form-group">
-      <label [for]="command.id + '_snippet'" class="h5">Code Snippet</label>
+      <label [for]="command.id + '_snippet'" class="h5">{{
+        "ui.commandEditor.codeSnippetSubtitle" | translate
+      }}</label>
       <textarea
         class="form-control"
         rows="4"

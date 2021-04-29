@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
@@ -9,6 +9,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {
+  TranslateModule,
+  TranslateLoader,
+  TranslateService,
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '../environments/environment';
 
@@ -21,7 +27,6 @@ import {
   InputParamsPipe,
   OutputParamsPipe,
   SingleParamPipe,
-  AttrTitlePipe,
   HlPropPipe,
 } from './pipes';
 
@@ -93,6 +98,21 @@ import {
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+export function loadTranslations(
+  translate: TranslateService,
+  cookies: CookieService
+) {
+  return () => {
+    const lang = cookies.get('sblang');
+    const knownLang = ['en', 'ru'].includes(lang) ? lang : 'en';
+    return translate.use(knownLang).toPromise();
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,7 +138,6 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
     ModalComponent,
     IconComponent,
     CommandGamesComponent,
-    AttrTitlePipe,
     PaginationComponent,
     ClassOverviewComponent,
     EnumOverviewComponent,
@@ -132,6 +151,14 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
     FormsModule,
     HttpClientModule,
     ConfigModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forRoot(
       [
         {
@@ -185,6 +212,12 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
   providers: [
     CookieService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadTranslations,
+      deps: [TranslateService, CookieService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

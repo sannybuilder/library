@@ -6,7 +6,7 @@
         (click)="submitChanges()"
         [disabled]="isUpdating$ | async"
       >
-        <span>Save To GitHub</span>
+        <span>{{ "ui.footer.submit" | translate }}</span>
         <span
           *ngIf="isUpdating$ | async"
           class="spinner-border spinner-border-sm ml-2"
@@ -16,14 +16,20 @@
       </button>
     </div>
     <small
-      ><a href="https://github.com/sannybuilder/library">About</a>
+      ><a href="https://github.com/sannybuilder/library">{{
+        "ui.footer.about" | translate
+      }}</a>
       <ng-container
         *ngIf="
           (displayLastUpdate$ | async) && (lastUpdate$ | async) as lastUpdate
         "
       >
-        | Last update: {{ lastUpdate | date: "long" }}</ng-container
-      >
+        |
+        {{
+          "ui.footer.lastUpdate"
+            | translate: { date: lastUpdate | date: "long" }
+        }}
+      </ng-container>
     </small>
   </div>
 </nav>

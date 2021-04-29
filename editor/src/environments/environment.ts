@@ -9,6 +9,7 @@ export const environment: Config = {
   features: {
     shouldBeAuthorizedToEdit: false,
   },
+  cookieDomain: 'localhost',
   endpoints: {
     base: '/assets',
     oauth: 'https://github.com/login/oauth/authorize',

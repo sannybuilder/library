@@ -88,6 +88,8 @@ export interface EnumRaw {
   isNew: boolean;
 }
 
+export const KNOWN_LANGUAGES = ['en', 'ru'];
+
 export enum Game {
   GTA3 = 'gta3',
   VC = 'vc',

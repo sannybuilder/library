@@ -1,8 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
-import { Game } from '../../../models';
+import { Config, CONFIG } from '../../../config';
+import { Game, KNOWN_LANGUAGES } from '../../../models';
 import { UiFacade, AuthFacade } from '../../../state';
 
 @Component({
@@ -12,6 +15,7 @@ import { UiFacade, AuthFacade } from '../../../state';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   Game = Game;
+  KNOWN_LANGUAGES = KNOWN_LANGUAGES;
   games = Object.values(Game);
 
   displaySearchBar$ = this._ui.displaySearchBar$;
@@ -33,7 +37,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private _auth: AuthFacade,
     private _ui: UiFacade,
-    private _router: Router
+    private _router: Router,
+    private _translate: TranslateService,
+    private _cookies: CookieService,
+    @Inject(CONFIG) private _config: Config
   ) {}
 
   ngOnInit() {
@@ -66,6 +73,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   scrollTop() {
     this._ui.scrollTop();
+    return false;
+  }
+
+  toggleLanguage(lang: string) {
+    if (KNOWN_LANGUAGES.includes(lang)) {
+      this._translate.use(lang);
+      this._cookies.set('sblang', lang, 30, '/', this._config.cookieDomain);
+    }
     return false;
   }
 }

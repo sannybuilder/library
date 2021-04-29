@@ -97,6 +97,7 @@ import {
 
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
+import { KNOWN_LANGUAGES } from './models';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -108,7 +109,7 @@ export function loadTranslations(
 ) {
   return () => {
     const lang = cookies.get('sblang');
-    const knownLang = ['en', 'ru'].includes(lang) ? lang : 'en';
+    const knownLang = KNOWN_LANGUAGES.includes(lang) ? lang : 'en';
     return translate.use(knownLang).toPromise();
   };
 }

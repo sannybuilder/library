@@ -1,4 +1,4 @@
-<div class="container-fluid bg-dark">
+<div class="container-fluid bg-dark d-none d-sm-block">
   <div class="navbar navbar-expand">
     <div class="row flex-grow-1">
       <div class="col-xl-2"></div>
@@ -11,7 +11,7 @@
               class="nav-link d-inline-block"
             >
               <img
-                class="d-none d-sm-inline-block"
+                class="d-none d-md-inline-block"
                 src="assets/sanny.png"
                 width="24"
                 height="24"
@@ -33,7 +33,7 @@
             >
               <scl-icon
                 [game]="game"
-                class="d-none d-sm-inline-block"
+                class="d-none d-md-inline-block"
               ></scl-icon>
               <span class="align-middle pl-1">{{ game | gameTitle }}</span></a
             >
@@ -68,7 +68,7 @@
                   | translate: { userName: userName$ | async }
               "
             />
-            <span class="pl-2 d-none d-md-inline-block align-middle"
+            <span class="pl-2 d-none d-lg-inline-block align-middle"
               >{{
                 "ui.header.greeting"
                   | translate: { userName: userName$ | async }
@@ -88,7 +88,27 @@
             }}</a>
           </div>
         </div>
-
+        <div class="position-relative">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-toggle="dropdown"
+            data-display="static"
+          >
+            <span class="align-middle pl-1">{{
+              "ui.header.switchLanguage" | translate
+            }}</span></a
+          >
+          <div class="dropdown-menu dropdown-menu-right">
+            <a
+              *ngFor="let lang of KNOWN_LANGUAGES"
+              class="dropdown-item"
+              href="#"
+              (click)="toggleLanguage(lang)"
+              >{{ "ui.lang." + lang | translate }}</a
+            >
+          </div>
+        </div>
         <button
           *ngIf="(isAuthorized$ | async) === false"
           class="btn btn-outline-success d-flex"
@@ -101,38 +121,117 @@
   </div>
 </div>
 
-<div
-  class="container-fluid bg-dark sticky-top mb-3"
-  *ngIf="displaySearchBar$ | async"
->
-  <div class="navbar navbar-expand">
+<div class="container-fluid bg-dark sticky-top mb-3">
+  <div class="navbar navbar-expand-sm">
     <div class="row flex-grow-1">
       <div class="col-xl-2"></div>
       <div class="col-12 col-xl-5 d-flex align-items-center">
         <form class="form-inline flex-nowrap flex-grow-1">
-          <input
-            name="search"
-            class="search-bar form-control w-100"
-            type="search"
-            [placeholder]="'ui.header.searchPlaceholder' | translate"
-            autofocus
-            [ngModel]="searchTerm$ | async"
-            (ngModelChange)="onSearchUpdate($event)"
-          />
+          <ng-container *ngIf="displaySearchBar$ | async">
+            <input
+              name="search"
+              class="search-bar form-control w-100"
+              type="search"
+              [placeholder]="'ui.header.searchPlaceholder' | translate"
+              autofocus
+              [ngModel]="searchTerm$ | async"
+              (ngModelChange)="onSearchUpdate($event)"
+            />
+            <button
+              class="btn btn-outline-secondary mx-2 d-none d-sm-inline-block"
+              type="button"
+              (click)="clear()"
+            >
+              {{ "ui.header.searchClear" | translate }}
+            </button>
+          </ng-container>
+
           <button
-            class="btn btn-outline-secondary mx-2 d-none d-sm-inline-block"
+            class="navbar-toggler ml-auto"
             type="button"
-            (click)="clear()"
+            data-toggle="dropdown"
+            data-display="static"
           >
-            {{ "ui.header.searchClear" | translate }}
+            <span class="navbar-toggler-icon"></span>
           </button>
 
-          <a
-            class="d-none ml-auto scroll-top text-nowrap"
-            href="#"
-            (click)="scrollTop()"
-            >{{ "ui.header.goToTop" | translate }}</a
-          >
+          <div class="dropdown-menu dropdown-menu-right d-sm-none">
+            <p
+              class="pl-4"
+              *ngIf="(isAuthorized$ | async) && (userName$ | async) as userName"
+            >
+              {{ "ui.header.greeting" | translate: { userName: userName } }}
+            </p>
+
+            <a
+              class="dropdown-item"
+              href="#"
+              (click)="login()"
+              *ngIf="(isAuthorized$ | async) === false"
+            >
+              {{ "ui.header.login" | translate }}
+            </a>
+            <div class="dropdown-divider"></div>
+            <a
+              routerLink="/"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="dropdown-item"
+              >{{ "ui.header.home" | translate }}</a
+            >
+            <div class="dropdown-divider"></div>
+
+            <ng-container *ngFor="let game of games">
+              <p class="pl-4">
+                {{ game | gameTitle }}
+              </p>
+              <a
+                class="dropdown-item"
+                [routerLink]="['/', game]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >{{ "ui.header.menuCommands" | translate }}</a
+              >
+              <a
+                class="dropdown-item"
+                [routerLink]="['/', game, 'classes']"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >{{ "ui.header.menuClasses" | translate }}</a
+              >
+              <a
+                class="dropdown-item"
+                [routerLink]="['/', game, 'enums']"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >{{ "ui.header.menuEnums" | translate }}</a
+              >
+              <div class="dropdown-divider"></div>
+            </ng-container>
+
+            <p class="pl-4">{{ "ui.header.switchLanguage" | translate }}</p>
+            <a
+              *ngFor="let lang of KNOWN_LANGUAGES"
+              class="dropdown-item"
+              href="#"
+              (click)="toggleLanguage(lang)"
+              >{{ "ui.lang." + lang | translate }}</a
+            >
+
+            <ng-container *ngIf="isAuthorized$ | async; let isAuthorized">
+              <div class="dropdown-divider"></div>
+              <a
+                *ngIf="profileUrl$ | async; let profileUrl"
+                class="dropdown-item"
+                [href]="profileUrl"
+                target="_blank"
+                >{{ "ui.header.profile" | translate }}</a
+              >
+              <a class="dropdown-item" href="#" (click)="logout()">{{
+                "ui.header.logout" | translate
+              }}</a>
+            </ng-container>
+          </div>
         </form>
       </div>
     </div>

@@ -1,11 +1,11 @@
 import { InjectionToken, NgModule } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Game } from '../models';
 
 export const CONFIG = new InjectionToken('config');
 
 export interface Config {
   production: boolean;
+  cookieDomain: string;
   features: {
     shouldBeAuthorizedToEdit: boolean;
   };

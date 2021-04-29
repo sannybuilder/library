@@ -2,7 +2,7 @@ import { Config } from '../app/config';
 
 export const environment: Config = {
   production: true,
-
+  cookieDomain: '.sannybuilder.com',
   features: {
     shouldBeAuthorizedToEdit: true,
   },

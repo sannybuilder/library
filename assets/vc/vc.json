@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619703319735
+    "last_update": 1619720771126
   },
   "extensions": [
     {
@@ -3921,24 +3921,24 @@
           "short_desc": "Returns the current vehicle of the character and adds it to the mission cleanup list"
         },
         {
-          "class": "Player",
-          "id": "00DA",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
-          "member": "StoreCarIsIn",
-          "name": "STORE_CAR_PLAYER_IS_IN",
-          "num_params": 2,
           "output": [
             {
-              "name": "_p2",
-              "type": "int",
+              "name": "handle",
+              "type": "Car",
               "source": "var_any"
             }
           ],
+          "class": "Player",
+          "id": "00DA",
+          "member": "StoreCarIsIn",
+          "name": "STORE_CAR_PLAYER_IS_IN",
+          "num_params": 2,
           "short_desc": ""
         },
         {
@@ -3963,21 +3963,21 @@
           "short_desc": "Returns true if the character is in the specified vehicle"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00DC",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsInCar",
           "name": "IS_PLAYER_IN_CAR",
           "num_params": 2,
@@ -4005,21 +4005,21 @@
           "short_desc": "Returns true if the specified character is driving a vehicle with the specified model"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00DE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsInModel",
           "name": "IS_PLAYER_IN_MODEL",
           "num_params": 2,
@@ -4043,17 +4043,17 @@
           "short_desc": "Returns true if the character has a vehicle, even if they are not actually sat inside it (opening and closing the door)"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E0",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInAnyCar",
           "name": "IS_PLAYER_IN_ANY_CAR",
           "num_params": 1,
@@ -5565,45 +5565,45 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "010A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsScoreGreater",
           "name": "IS_SCORE_GREATER",
           "num_params": 2,
           "short_desc": "Returns true if the player's money is over the specified value"
         },
         {
-          "class": "Player",
-          "id": "010B",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
-          "member": "StoreScore",
-          "name": "STORE_SCORE",
-          "num_params": 2,
           "output": [
             {
-              "name": "_p2",
+              "name": "money",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "class": "Player",
+          "id": "010B",
+          "member": "StoreScore",
+          "name": "STORE_SCORE",
+          "num_params": 2,
           "short_desc": "Returns the player's money"
         },
         {
@@ -5640,18 +5640,18 @@
           "short_desc": "Gives control of the remote-control vehicle to the player"
         },
         {
-          "class": "Player",
-          "id": "010D",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "wantedLevel",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "010D",
           "member": "AlterWantedLevel",
           "name": "ALTER_WANTED_LEVEL",
           "num_params": 2,
@@ -5676,21 +5676,21 @@
           "short_desc": "Sets the player's wanted level if the specified level is higher than the current one"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "010F",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsWantedLevelGreater",
           "name": "IS_WANTED_LEVEL_GREATER",
           "num_params": 2,
@@ -5909,21 +5909,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "zone",
+              "type": "gxt_key"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0121",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "string"
-            }
-          ],
           "member": "IsInZone",
           "name": "IS_PLAYER_IN_ZONE",
           "num_params": 2,
@@ -5947,21 +5947,21 @@
           "short_desc": "Returns true if the player is honking the horn in a car"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0123",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "HasSpottedPlayer",
           "name": "HAS_CHAR_SPOTTED_PLAYER",
           "num_params": 2,
@@ -6624,25 +6624,25 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Player"
+            },
+            {
+              "name": "mode",
+              "type": "int"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "0157",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "PointAtPlayer",
           "name": "POINT_CAMERA_AT_PLAYER",
           "num_params": 3,
@@ -7210,39 +7210,39 @@
           "num_params": 0
         },
         {
-          "class": "Player",
-          "id": "0170",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
-          "member": "GetHeading",
-          "name": "GET_PLAYER_HEADING",
-          "num_params": 2,
           "output": [
             {
-              "name": "_p2",
+              "name": "heading",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "class": "Player",
+          "id": "0170",
+          "member": "GetHeading",
+          "name": "GET_PLAYER_HEADING",
+          "num_params": 2,
           "short_desc": ""
         },
         {
-          "class": "Player",
-          "id": "0171",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "heading",
               "type": "float"
             }
           ],
+          "class": "Player",
+          "id": "0171",
           "member": "SetHeading",
           "name": "SET_PLAYER_HEADING",
           "num_params": 2,
@@ -7382,22 +7382,22 @@
           "num_params": 0
         },
         {
-          "class": "Player",
-          "id": "017A",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponType",
+              "type": "WeaponType"
             },
             {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "017A",
           "member": "SetAmmo",
           "name": "SET_PLAYER_AMMO",
           "num_params": 3,
@@ -7476,21 +7476,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0183",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsHealthGreater",
           "name": "IS_PLAYER_HEALTH_GREATER",
           "num_params": 2,
@@ -9394,18 +9394,18 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "01CA",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Char"
             }
           ],
+          "class": "Char",
+          "id": "01CA",
           "member": "SetObjKillPlayerOnFoot",
           "name": "SET_CHAR_OBJ_KILL_PLAYER_ON_FOOT",
           "num_params": 2,
@@ -9430,18 +9430,18 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "01CC",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Player"
             }
           ],
+          "class": "Char",
+          "id": "01CC",
           "member": "SetObjKillPlayerAnyMeans",
           "name": "SET_CHAR_OBJ_KILL_PLAYER_ANY_MEANS",
           "num_params": 2,
@@ -11211,18 +11211,18 @@
           "short_desc": "Applies brakes to the player's car"
         },
         {
-          "class": "Player",
-          "id": "0222",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "health",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "0222",
           "member": "SetHealth",
           "name": "SET_PLAYER_HEALTH",
           "num_params": 2,
@@ -11265,24 +11265,24 @@
           "short_desc": "Sets the health of the vehicle to the specified value"
         },
         {
-          "class": "Player",
-          "id": "0225",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
-          "member": "GetHealth",
-          "name": "GET_PLAYER_HEALTH",
-          "num_params": 2,
           "output": [
             {
-              "name": "_p2",
+              "name": "health",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "class": "Player",
+          "id": "0225",
+          "member": "GetHealth",
+          "name": "GET_PLAYER_HEALTH",
+          "num_params": 2,
           "short_desc": ""
         },
         {
@@ -11500,14 +11500,14 @@
           "short_desc": ""
         },
         {
-          "class": "Player",
-          "id": "0230",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "class": "Player",
+          "id": "0230",
           "member": "StopLooking",
           "name": "STOP_PLAYER_LOOKING",
           "num_params": 1,
@@ -12720,17 +12720,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "029F",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsStopped",
           "name": "IS_PLAYER_STOPPED",
           "num_params": 1,
@@ -14119,34 +14119,34 @@
           "short_desc": "Gets a pedestrian in the specified town, if the pedtype matches the specified values"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "02DE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInTaxi",
           "name": "IS_PLAYER_IN_TAXI",
           "num_params": 1,
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "02DF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsShooting",
           "name": "IS_PLAYER_SHOOTING",
           "num_params": 1,
@@ -15217,14 +15217,14 @@
           "short_desc": "Dismembers the character"
         },
         {
-          "class": "Player",
-          "id": "0322",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "class": "Player",
+          "id": "0322",
           "member": "ExplodeHead",
           "name": "EXPLODE_PLAYER_HEAD",
           "num_params": 1,
@@ -15578,18 +15578,18 @@
           "short_desc": "Defines whether the player can respray their car for free"
         },
         {
-          "class": "Player",
-          "id": "0336",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "0336",
           "member": "SetVisible",
           "name": "SET_PLAYER_VISIBLE",
           "num_params": 2,
@@ -17815,21 +17815,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Player"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "03BF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "SetEveryoneIgnorePlayer",
           "name": "SET_EVERYONE_IGNORE_PLAYER",
           "num_params": 2,
@@ -19846,38 +19846,38 @@
           "short_desc": "Returns the car's model ID"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0442",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsSittingInCar",
           "name": "IS_PLAYER_SITTING_IN_CAR",
           "num_params": 2,
           "short_desc": "Returns true if the player is in the specific vehicle"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0443",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsSittingInAnyCar",
           "name": "IS_PLAYER_SITTING_IN_ANY_CAR",
           "num_params": 1,
@@ -19968,17 +19968,17 @@
           "short_desc": "Returns true if the character is occupying any vehicle"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "044A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsOnFoot",
           "name": "IS_PLAYER_ON_FOOT",
           "num_params": 1,
@@ -20953,17 +20953,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "047E",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsOnAnyBike",
           "name": "IS_PLAYER_ON_ANY_BIKE",
           "num_params": 1,
@@ -21668,17 +21668,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "04A8",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInAnyBoat",
           "name": "IS_PLAYER_IN_ANY_BOAT",
           "num_params": 1,
@@ -21693,17 +21693,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "04AA",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInAnyHeli",
           "name": "IS_PLAYER_IN_ANY_HELI",
           "num_params": 1,
@@ -21718,17 +21718,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "04AC",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInAnyPlane",
           "name": "IS_PLAYER_IN_ANY_PLANE",
           "num_params": 1,
@@ -22111,14 +22111,14 @@
           "short_desc": "Marks the car as being part of a convoy, which seems to follow a path set by 0994"
         },
         {
-          "class": "Player",
-          "id": "04BE",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "class": "Player",
+          "id": "04BE",
           "member": "ResetHavoc",
           "name": "RESET_HAVOC_CAUSED_BY_PLAYER",
           "num_params": 1,
@@ -22323,17 +22323,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "04C9",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInFlyingVehicle",
           "name": "IS_PLAYER_IN_FLYING_VEHICLE",
           "num_params": 1,
@@ -22776,40 +22776,40 @@
           "short_desc": "Opens the cars trunk and keeps it open"
         },
         {
-          "class": "Player",
-          "id": "04E2",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "04E2",
           "member": "ShutUp",
           "name": "SHUT_PLAYER_UP",
           "num_params": 2,
           "short_desc": "Shuts the player up"
         },
         {
-          "class": "Player",
-          "id": "04E3",
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "mood",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "time",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "04E3",
           "member": "SetMood",
           "name": "SET_PLAYER_MOOD",
           "num_params": 3,
@@ -24541,18 +24541,18 @@
           "short_desc": "Sets whether the cars tires can be deflated"
         },
         {
-          "class": "Player",
-          "id": "0540",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "0540",
           "member": "SetAutoAim",
           "name": "SET_PLAYER_AUTO_AIM",
           "num_params": 2,
@@ -24635,21 +24635,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0546",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsTouchingVehicle",
           "name": "IS_PLAYER_TOUCHING_VEHICLE",
           "num_params": 2,
@@ -25032,36 +25032,36 @@
           "short_desc": "Makes the player immune to fire"
         },
         {
-          "class": "Player",
-          "id": "055E",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "value",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "055E",
           "member": "IncreaseMaxHealth",
           "name": "INCREASE_PLAYER_MAX_HEALTH",
           "num_params": 2,
           "short_desc": "Increases the players maximum health by the specified amount"
         },
         {
-          "class": "Player",
-          "id": "055F",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "value",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "055F",
           "member": "IncreaseMaxArmour",
           "name": "INCREASE_PLAYER_MAX_ARMOUR",
           "num_params": 2,
@@ -25666,21 +25666,21 @@
           "short_desc": "Updates the stat if the value is lower than the current stat value"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "infoZone",
+              "type": "gxt_key"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0583",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "string"
-            }
-          ],
           "member": "IsInInfoZone",
           "name": "IS_PLAYER_IN_INFO_ZONE",
           "num_params": 2,
@@ -26057,17 +26057,17 @@
           "short_desc": "Specifies that the current mission is complete and affects the appropriate stats"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0596",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsInShortcutTaxi",
           "name": "IS_PLAYER_IN_SHORTCUT_TAXI",
           "num_params": 1,

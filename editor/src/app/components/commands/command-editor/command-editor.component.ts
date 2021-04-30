@@ -53,6 +53,7 @@ export class CommandEditorComponent implements OnInit {
   SourceType = SourceType;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
+  isNew: boolean;
   paramTypes: string[] = [];
   classes: string[] = [];
   primitives: PrimitiveType[] = [];
@@ -69,6 +70,7 @@ export class CommandEditorComponent implements OnInit {
 
   @Input() set command(val: Command) {
     this._command = val;
+    this.isNew = !this.command.name;
     // validate the new command
     this.updateErrors();
     this.isDirty = false;

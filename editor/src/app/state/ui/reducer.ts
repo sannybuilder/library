@@ -110,22 +110,11 @@ const _reducer = createReducer(
     ...state,
     snippetToDisplayOrEdit: snippet,
   })),
-  on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => {
-    const isNew = enumToEdit.name.toLowerCase() === 'new';
-    return {
-      ...state,
-      viewMode,
-      commandToDisplayOrEdit: undefined,
-      extensionToDisplayOrEdit: undefined,
-      snippetToDisplayOrEdit: undefined,
-      enumToDisplayOrEdit: {
-        isNew: isNew || enumToEdit.isNew,
-        name: isNew ? '' : enumToEdit.name,
-        fields: enumToEdit.fields,
-      },
-    };
-  }),
-
+  on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => ({
+    ...state,
+    viewMode,
+    enumToDisplayOrEdit: enumToEdit,
+  })),
   on(stopEditOrDisplay, (state) => ({
     ...state,
     commandToDisplayOrEdit: undefined,

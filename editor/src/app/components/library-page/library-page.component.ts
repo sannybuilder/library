@@ -20,6 +20,7 @@ import {
 
 import {
   Command,
+  DEFAULT_EXTENSION,
   Entity,
   Enum,
   EnumRaw,
@@ -44,6 +45,7 @@ import { FUSEJS_OPTIONS } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
+  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
   snippet$ = this._ui.snippetToDisplayOrEdit$;

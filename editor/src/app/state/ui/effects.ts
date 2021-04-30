@@ -51,6 +51,7 @@ import { ChangesFacade } from '../changes/facade';
 import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
+import { opcodify } from '../../pipes';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -65,16 +66,23 @@ export class UiEffects {
           return this._enums.enums$.pipe(
             first<Enums>(Boolean),
             map((enums) => {
-              const name = capitalizeFirst(enumName);
-              const isNew = !enums?.[name];
-              const enumToEdit: EnumRaw = {
-                name,
-                isNew,
-                fields: Object.entries(enums?.[name] ?? []),
-              };
+              const name =
+                enumName?.toLowerCase() === 'new'
+                  ? ''
+                  : capitalizeFirst(enumName);
+              const enumToEdit = enums?.[name];
+              const isNew = !enumToEdit;
+
+              if (isNew) {
+                return displayOrEditEnum({
+                  enumToEdit: { isNew, name, fields: [] },
+                  viewMode: ViewMode.EditEnum,
+                });
+              }
+
               return displayOrEditEnum({
-                enumToEdit,
-                viewMode: isNew ? ViewMode.EditEnum : ViewMode.ViewEnum,
+                enumToEdit: { isNew, name, fields: Object.entries(enumToEdit) },
+                viewMode: ViewMode.ViewEnum,
               });
             })
           );
@@ -96,38 +104,33 @@ export class UiEffects {
           );
         }
 
-        if (extension === 'new') {
-          const newCommand = {
-            id: '',
-            name: '',
-            num_params: 0,
-          };
-
-          return [
-            displayOrEditCommandInfo({
-              command: newCommand,
-              extension: DEFAULT_EXTENSION,
-              viewMode: ViewMode.EditCommand,
-            }),
-          ];
-        }
-
         return this._extensions.extensions$.pipe(
           first<Extension[]>(Boolean),
           map((extensions) => {
-            const command = extensions
+            const commandId =
+              opcode?.toLowerCase() === 'new' ? '' : opcodify(opcode);
+            const commandToEdit = extensions
               .find((e) => e.name === extension)
-              ?.commands.find(({ id }) => id === opcode);
+              ?.commands.find(({ id }) => id === commandId);
 
-            if (command) {
+            const isNew = !commandToEdit;
+            if (isNew) {
               return displayOrEditCommandInfo({
-                command,
                 extension,
-                viewMode: ViewMode.ViewCommand,
+                command: {
+                  id: commandId,
+                  name: '',
+                  num_params: 0,
+                },
+                viewMode: ViewMode.EditCommand,
               });
-            } else {
-              return stopEditOrDisplay();
             }
+
+            return displayOrEditCommandInfo({
+              extension,
+              command: commandToEdit,
+              viewMode: ViewMode.ViewCommand,
+            });
           })
         );
       })

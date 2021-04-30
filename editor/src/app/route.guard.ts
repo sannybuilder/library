@@ -69,6 +69,10 @@ export class RouteGuard implements CanActivate {
             extension: DEFAULT_EXTENSION,
           });
         } else {
+          // editing by anonymous user is not allowed
+          if (subPath === 'new' && !canEdit) {
+            return this.goGame(game);
+          }
           const extension = subPath || DEFAULT_EXTENSION;
           const opcode = segments.shift();
           this._game.onListEnter({

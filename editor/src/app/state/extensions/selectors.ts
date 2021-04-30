@@ -36,7 +36,7 @@ export const extensionNames = createSelector(
 export const extensionCommands = createSelector(
   extensions,
   (extensions: Extension[], props: { extension: string }) =>
-    extensions.find((e) => e.name === props.extension)?.commands
+    extensions?.find((e) => e.name === props.extension)?.commands
 );
 
 export const loading = createSelector(

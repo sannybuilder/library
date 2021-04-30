@@ -25,12 +25,26 @@
                 </li>
               </ol>
             </nav>
-            <a
+            <button
               *ngIf="canEdit$ | async"
-              class="btn btn-outline-secondary ml-auto"
-              [routerLink]="['/', game, 'enums', 'new']"
-              >{{ "ui.layout.newEnum" | translate }}</a
+              class="btn btn-outline-secondary ml-auto dropdown-toggle"
+              data-toggle="dropdown"
+              data-offset="0,0"
+              aria-haspopup="true"
+              aria-expanded="false"
             >
+              {{ "ui.layout.new" | translate }}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a
+                class="dropdown-item"
+                [routerLink]="['/', game, 'enums', 'new']"
+                >{{ "ui.layout.newEnum" | translate }}</a
+              >
+              <a class="dropdown-item" [routerLink]="['/', game, 'new']">{{
+                "ui.layout.newCommand" | translate
+              }}</a>
+            </div>
           </div>
 
           <scl-command-list
@@ -112,7 +126,7 @@
 
     <ng-template #rightRail>
       <scl-command-editor
-        *ngIf="viewMode === ViewMode.EditCommand"
+        *ngIf="viewMode === ViewMode.EditCommand && command"
         [command]="command"
         [(extension)]="extension"
         [(snippet)]="snippet"
@@ -124,7 +138,7 @@
         (delete)="onDeleteCommand()"
       ></scl-command-editor>
       <scl-command-info
-        *ngIf="viewMode === ViewMode.ViewCommand"
+        *ngIf="viewMode === ViewMode.ViewCommand && command"
         [command]="command"
         [game]="game"
         [enumNames]="enumNames$ | async"

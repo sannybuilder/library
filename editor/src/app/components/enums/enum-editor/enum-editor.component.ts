@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { capitalizeFirst } from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
+import { trim } from 'lodash';
 
 type ErrorType =
   | 'emptyEnumName'
@@ -32,8 +33,8 @@ export class EnumEditorComponent {
 
   @Input() set enumToEdit(val: EnumRaw) {
     this._enumToEdit = val;
-    this.isDirty = false;
     this.updateErrors();
+    this.isDirty = false;
   }
 
   get enumToEdit(): EnumRaw {
@@ -74,13 +75,6 @@ export class EnumEditorComponent {
     emptyEnum: this.updateEmptyEnum,
   };
 
-  readonly messages: Record<ErrorType, string> = {
-    emptyEnumName: 'Enum name can not be empty',
-    emptyFieldName: 'Field name can not be empty',
-    duplicateFieldName: 'Duplicate field name',
-    emptyEnum: 'Enum must contain at least one field',
-  };
-
   deleteEnum() {
     this.delete.emit();
   }
@@ -95,13 +89,14 @@ export class EnumEditorComponent {
 
   updateErrors() {
     this.updateError(...(Object.keys(this.errors) as ErrorType[]));
+    this.isDirty = true;
   }
 
   updateError(...errors: ErrorType[]) {
     errors.forEach((error) => this.errorHandlers[error].call(this));
     this.errorMessages = Object.entries(this.errors)
       .filter(([_, v]) => v)
-      .map(([k, _]) => this.messages[k as ErrorType]);
+      .map(([k, _]) => `ui.errors.enum.${k}`);
     this.hasError.emit(this.errorMessages.length > 0);
   }
 
@@ -133,20 +128,17 @@ export class EnumEditorComponent {
   }
 
   onEnumNameChange(val: string) {
-    this.enumToEdit.name = capitalizeFirst(val);
-    this.isDirty = true;
+    this.enumToEdit.name = capitalizeFirst(trim(val));
     this.updateErrors();
   }
 
   onFieldNameChange(val: string, field: [string, string | number | null]) {
-    field[0] = val;
-    this.isDirty = true;
+    field[0] = trim(val);
     this.updateErrors();
   }
 
   onFieldValueChange(val: string, field: [string, string | number | null]) {
-    field[1] = val;
-    this.isDirty = true;
+    field[1] = trim(val);
     this.updateErrors();
   }
 

@@ -33,6 +33,7 @@ import {
 } from 'rxjs/operators';
 
 import {
+  DEFAULT_EXTENSION,
   Entity,
   EnumRaw,
   Enums,
@@ -93,6 +94,22 @@ export class UiEffects {
               }
             })
           );
+        }
+
+        if (extension === 'new') {
+          const newCommand = {
+            id: '',
+            name: '',
+            num_params: 0,
+          };
+
+          return [
+            displayOrEditCommandInfo({
+              command: newCommand,
+              extension: DEFAULT_EXTENSION,
+              viewMode: ViewMode.EditCommand,
+            }),
+          ];
         }
 
         return this._extensions.extensions$.pipe(

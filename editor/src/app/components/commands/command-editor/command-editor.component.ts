@@ -28,10 +28,11 @@ import {
   SupportInfo,
 } from '../../../models';
 import { SelectorComponent } from '../../common/selector/selector.component';
-import { isAnyAttributeInvalid } from '../../../utils/validation';
-import { capitalizeFirst, smash } from '../../../utils';
+import { isAnyAttributeInvalid, capitalizeFirst, smash } from '../../../utils';
 
 type ErrorType =
+  | 'emptyName'
+  | 'emptyOpcode'
   | 'duplicateName'
   | 'duplicateParamName'
   | 'invalidAttributeCombo'
@@ -57,6 +58,8 @@ export class CommandEditorComponent implements OnInit {
   primitives: PrimitiveType[] = [];
 
   errors: Record<ErrorType, boolean> = {
+    emptyName: false,
+    emptyOpcode: false,
     invalidAttributeCombo: false,
     duplicateName: false,
     duplicateParamName: false,
@@ -68,6 +71,7 @@ export class CommandEditorComponent implements OnInit {
     this._command = val;
     // validate the new command
     this.updateErrors();
+    this.isDirty = false;
   }
 
   get command() {
@@ -130,13 +134,11 @@ export class CommandEditorComponent implements OnInit {
     duplicateName: this.updateDuplicateNameError,
     duplicateParamName: this.updateDuplicateParamNameError,
     noConstructorWithoutOutputParams: this.updateNoOutputParamsError,
+    emptyName: this.updateEmptyNameError,
+    emptyOpcode: this.updateEmptyOpcodeError,
   };
-  readonly messages: Record<ErrorType, string> = {
-    invalidAttributeCombo: 'Invalid combination of attributes',
-    duplicateParamName: 'Duplicate parameter name',
-    duplicateName: 'Duplicate command name',
-    noConstructorWithoutOutputParams: `is_constructor can't be used in a command without an output param`,
-  };
+
+  isDirty: boolean;
 
   ngOnInit() {
     if (this.selector) {
@@ -145,14 +147,16 @@ export class CommandEditorComponent implements OnInit {
   }
 
   updateErrors() {
+    this.isDirty = true;
     this.updateError(...(Object.keys(this.errors) as ErrorType[]));
+    return false;
   }
 
   updateError(...errors: ErrorType[]) {
     errors.forEach((error) => this.errorHandlers[error].call(this));
     this.errorMessages = Object.entries(this.errors)
       .filter(([_, v]) => v)
-      .map(([k, _]) => this.messages[k as ErrorType]);
+      .map(([k, _]) => `ui.errors.command.${k}`);
     this.hasError.emit(this.errorMessages.length > 0);
   }
 
@@ -170,10 +174,12 @@ export class CommandEditorComponent implements OnInit {
 
   onClassChange(command: Command, value: string) {
     command.class = capitalizeFirst(value);
+    this.updateErrors();
   }
 
   onMemberChange(command: Command, value: string) {
     command.member = capitalizeFirst(value);
+    this.updateErrors();
   }
 
   onExtensionChange(val: string) {
@@ -183,10 +189,17 @@ export class CommandEditorComponent implements OnInit {
       newName = 'default';
     }
     this.extensionChange.emit(newName);
+    this.updateErrors();
   }
 
   onSnippetChange(val: string) {
     this.snippetChange.emit(trim(val));
+    this.updateErrors();
+  }
+
+  onShortDescriptionChange(command: Command, val: string) {
+    command.short_desc = val;
+    this.updateErrors();
   }
 
   opcodify(command: Command) {
@@ -224,6 +237,7 @@ export class CommandEditorComponent implements OnInit {
         param.type = PrimitiveType.gxt_key;
         break;
     }
+    this.updateErrors();
   }
 
   onParamNameChange(name: string, param: Param) {
@@ -241,6 +255,7 @@ export class CommandEditorComponent implements OnInit {
 
   onParamSourceUpdate(source: SourceType, param: Param) {
     param.source = source;
+    this.updateErrors();
   }
 
   onAttrChange(command: Command, attr: Attribute, value: boolean) {
@@ -456,5 +471,13 @@ export class CommandEditorComponent implements OnInit {
   private updateNoOutputParamsError() {
     this.errors.noConstructorWithoutOutputParams =
       this.command.attrs?.is_constructor && !this.command.output?.length;
+  }
+
+  private updateEmptyNameError() {
+    this.errors.emptyName = !this.command.name;
+  }
+
+  private updateEmptyOpcodeError() {
+    this.errors.emptyOpcode = !this.command.id;
   }
 }

@@ -44,6 +44,9 @@
         (blur)="opcodify(command)"
         [ngModel]="command.id"
         (ngModelChange)="onOpcodeChange(command, $event)"
+        [ngClass]="{
+          'is-invalid': isDirty && errors.emptyOpcode
+        }"
       />
     </div>
   </div>
@@ -60,6 +63,9 @@
         class="form-control"
         [ngModel]="command.name | uppercase"
         (ngModelChange)="onCommandNameChange(command, $event)"
+        [ngClass]="{
+          'is-invalid': isDirty && errors.emptyName
+        }"
       />
     </div>
   </div>
@@ -100,9 +106,11 @@
     >
       <small
         >{{ "ui.commandEditor.suggestion" | translate }}:
-        <a href="#" (click)="(command.class = suggestedClassName) && false">{{
-          suggestedClassName
-        }}</a></small
+        <a
+          href="#"
+          (click)="(command.class = suggestedClassName) && updateErrors()"
+          >{{ suggestedClassName }}</a
+        ></small
       >
     </div>
   </div>
@@ -132,7 +140,10 @@
     >
       <small
         >{{ "ui.commandEditor.suggestion" | translate }}:
-        <a href="#" (click)="(command.member = suggestedClassMember) && false">
+        <a
+          href="#"
+          (click)="(command.member = suggestedClassMember) && updateErrors()"
+        >
           {{ suggestedClassMember }}</a
         ></small
       >
@@ -151,7 +162,8 @@
       }}</span>
       <input
         type="text"
-        [(ngModel)]="command.short_desc"
+        [ngModel]="command.short_desc"
+        (ngModelChange)="onShortDescriptionChange(command, $event)"
         class="form-control"
         [disabled]="command.attrs?.is_nop"
       />
@@ -186,7 +198,10 @@
         >
           <small
             >{{ "ui.commandEditor.suggestion" | translate }}:
-            <a href="#" (click)="(param.name = suggestedInputName) && false">
+            <a
+              href="#"
+              (click)="(param.name = suggestedInputName) && updateErrors()"
+            >
               {{ suggestedInputName }}</a
             ></small
           >
@@ -206,7 +221,10 @@
         >
           <small
             >{{ "ui.commandEditor.suggestion" | translate }}:
-            <a href="#" (click)="(param.type = suggestedInputType) && false">
+            <a
+              href="#"
+              (click)="(param.type = suggestedInputType) && updateErrors()"
+            >
               {{ suggestedInputType }}</a
             ></small
           >
@@ -258,7 +276,10 @@
         >
           <small
             >{{ "ui.commandEditor.suggestion" | translate }}:
-            <a href="#" (click)="(param.name = suggestedOutputName) && false">
+            <a
+              href="#"
+              (click)="(param.name = suggestedOutputName) && updateErrors()"
+            >
               {{ suggestedOutputName }}</a
             ></small
           >
@@ -280,7 +301,10 @@
         >
           <small
             >{{ "ui.commandEditor.suggestion" | translate }}:
-            <a href="#" (click)="(param.type = suggestedOutputType) && false">
+            <a
+              href="#"
+              (click)="(param.type = suggestedOutputType) && updateErrors()"
+            >
               {{ suggestedOutputType }}</a
             ></small
           >
@@ -339,9 +363,12 @@
       </label>
     </div>
 
-    <div class="alert alert-danger mt-3" *ngIf="errorMessages.length">
+    <div
+      class="alert alert-danger mt-3"
+      *ngIf="errorMessages.length && isDirty"
+    >
       <div *ngFor="let message of errorMessages">
-        {{ message }}
+        {{ message | translate }}
       </div>
     </div>
   </div>

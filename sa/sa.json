@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619720771305
+    "last_update": 1619772779328
   },
   "extensions": [
     {
@@ -4809,18 +4809,18 @@
           "short_desc": "Destroys the specified object, freeing game memory"
         },
         {
-          "class": "Player",
-          "id": "0109",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "money",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "0109",
           "member": "AddScore",
           "name": "ADD_SCORE",
           "num_params": 2,
@@ -4896,18 +4896,18 @@
           "short_desc": "Sets the player's wanted level"
         },
         {
-          "class": "Player",
-          "id": "010E",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "wantedLevel",
               "type": "int"
             }
           ],
+          "class": "Player",
+          "id": "010E",
           "member": "AlterWantedLevelNoDrop",
           "name": "ALTER_WANTED_LEVEL_NO_DROP",
           "num_params": 2,
@@ -15095,17 +15095,17 @@
           }
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Player",
-          "id": "03C7",
           "input": [
             {
-              "name": "_p1",
+              "name": "multiplier",
               "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
+          "id": "03C7",
           "member": "SetWantedMultiplier",
           "name": "SET_WANTED_MULTIPLIER",
           "num_params": 1,
@@ -17867,27 +17867,27 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "player",
+              "type": "Player"
+            }
+          ],
+          "output": [
+            {
+              "name": "car",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Rc",
           "id": "0484",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "GetCar",
           "name": "GET_REMOTE_CONTROLLED_CAR",
           "num_params": 2,
-          "output": [
-            {
-              "name": "_p2",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Returns the players radio-controlled vehicle"
         },
         {
@@ -31514,28 +31514,30 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "textureHash",
+              "type": "int"
+            },
+            {
+              "name": "modelHash",
+              "type": "int"
+            },
+            {
+              "name": "bodyPart",
+              "type": "BodyPart"
+            }
+          ],
           "id": "0784",
           "name": "GIVE_PLAYER_CLOTHES",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Player",
+          "member": "GiveClothes"
         },
         {
           "id": "0785",
@@ -35662,13 +35664,9 @@
           ]
         },
         {
-          "id": "0875",
-          "name": "SET_OBJECT_ONLY_DAMAGED_BY_PLAYER",
-          "num_params": 2,
-          "short_desc": "If set, only the player can damage the object",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -35676,6 +35674,10 @@
               "type": "bool"
             }
           ],
+          "id": "0875",
+          "name": "SET_OBJECT_ONLY_DAMAGED_BY_PLAYER",
+          "num_params": 2,
+          "short_desc": "If set, only the player can damage the object",
           "class": "Object",
           "member": "SetOnlyDamagedByPlayer"
         },

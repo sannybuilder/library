@@ -67,10 +67,10 @@ export class UiEffects {
             first<Enums>(Boolean),
             map((enums) => {
               const name =
-                enumName?.toLowerCase() === 'new'
+                enumName.toLowerCase() === 'new'
                   ? ''
                   : capitalizeFirst(enumName);
-              const enumToEdit = enums?.[name];
+              const enumToEdit = enums[name];
               const isNew = !enumToEdit;
 
               if (isNew) {
@@ -104,35 +104,39 @@ export class UiEffects {
           );
         }
 
-        return this._extensions.extensions$.pipe(
-          first<Extension[]>(Boolean),
-          map((extensions) => {
-            const commandId =
-              opcode?.toLowerCase() === 'new' ? '' : opcodify(opcode);
-            const commandToEdit = extensions
-              .find((e) => e.name === extension)
-              ?.commands.find(({ id }) => id === commandId);
+        if (opcode && extension) {
+          return this._extensions.extensions$.pipe(
+            first<Extension[]>(Boolean),
+            map((extensions) => {
+              const commandId =
+                opcode.toLowerCase() === 'new' ? '' : opcodify(opcode);
+              const commandToEdit = extensions
+                .find((e) => e.name === extension)
+                ?.commands.find(({ id }) => id === commandId);
 
-            const isNew = !commandToEdit;
-            if (isNew) {
+              const isNew = !commandToEdit;
+              if (isNew) {
+                return displayOrEditCommandInfo({
+                  extension,
+                  command: {
+                    id: commandId,
+                    name: '',
+                    num_params: 0,
+                  },
+                  viewMode: ViewMode.EditCommand,
+                });
+              }
+
               return displayOrEditCommandInfo({
                 extension,
-                command: {
-                  id: commandId,
-                  name: '',
-                  num_params: 0,
-                },
-                viewMode: ViewMode.EditCommand,
+                command: commandToEdit,
+                viewMode: ViewMode.ViewCommand,
               });
-            }
+            })
+          );
+        }
 
-            return displayOrEditCommandInfo({
-              extension,
-              command: commandToEdit,
-              viewMode: ViewMode.ViewCommand,
-            });
-          })
-        );
+        return [stopEditOrDisplay()];
       })
     )
   );

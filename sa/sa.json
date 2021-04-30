@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619810990715
+    "last_update": 1619811659849
   },
   "extensions": [
     {
@@ -2739,6 +2739,13 @@
           "short_desc": "Gets a random float between 0"
         },
         {
+          "output": [
+            {
+              "name": "result",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2748,13 +2755,6 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_INT",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Gets a random integer between 0 and 32767 (max signed 16-bit) and stores the result to a variable"
         },
         {
@@ -11249,35 +11249,35 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "groundZ",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "02CE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "GetGroundZFor3DCoord",
           "name": "GET_GROUND_Z_FOR_3D_COORD",
           "num_params": 4,
-          "output": [
-            {
-              "name": "_p4",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Stores the ground position at the specified coordinates"
         },
         {
@@ -14699,17 +14699,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "03AF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "Switch",
           "name": "SWITCH_STREAMING",
           "num_params": 1,
@@ -17927,18 +17927,18 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_any"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Streaming",
           "id": "0488",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsModelAvailable",
           "name": "IS_MODEL_AVAILABLE",
           "num_params": 1,
@@ -19509,21 +19509,21 @@
           "short_desc": "Sets the players mood, affecting the dialogue spoken by the player"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "04E4",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            }
-          ],
           "member": "RequestCollision",
           "name": "REQUEST_COLLISION",
           "num_params": 2,
@@ -19765,35 +19765,35 @@
           "short_desc": "Loads the specified IFP File"
         },
         {
+          "input": [
+            {
+              "name": "animationFile",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Streaming",
           "id": "04EE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "HasAnimationLoaded",
           "name": "HAS_ANIMATION_LOADED",
           "num_params": 1,
           "short_desc": "Returns true if the specified IFP file is loaded"
         },
         {
+          "input": [
+            {
+              "name": "animationFile",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "04EF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "RemoveAnimation",
           "name": "REMOVE_ANIMATION",
           "num_params": 1,
@@ -37163,24 +37163,32 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "08D1",
           "name": "GET_CUTSCENE_OFFSET",
           "num_params": 3,
           "short_desc": "Stores the offset of the currently loaded cutscene",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Cutscene",
+          "member": "GetOffset",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08D2",

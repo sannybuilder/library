@@ -660,6 +660,7 @@ SetGangWeapons,0237,0,0,("gangId%i" "weaponId1: WeaponType" "weaponId2: WeaponTy
 SetIsInStadium,057E,0,0,("state%b")
 SetMaxWantedLevel,01F0,0,0,("wantedLevel%i")
 SetNoResprays,0A14,0,0,("state%b")
+SetWantedMultiplier,03C7,0,0,("multiplier%f")
 $END
 
 $Garage
@@ -811,7 +812,7 @@ SetDynamic,0392,0,0,("self: Object" "state%b")
 SetHeading,0177,0,0,("self: Object" "heading%f")
 SetHealth,071F,0,0,("self: Object" "health%i")
 SetMass,0906,0,0,("self: Object" "mass%f")
-SetOnlyDamagedByPlayer,0875,0,0,("handle: Object" "state%b")
+SetOnlyDamagedByPlayer,0875,0,0,("self: Object" "state%b")
 SetProofs,09CA,0,0,("self: Object" "bulletProof%b" "fireProof%b" "explosionProof%b" "collisionProof%b" "meleeProof%b")
 SetQuaternion,07C4,0,0,("handle: Object" "x%f" "y%f" "z%f" "w%f")
 SetRecordsCollisions,04D9,0,0,("self: Object" "state%b")
@@ -876,9 +877,9 @@ $END
 
 $Player
 $BEGIN
-AddScore,0109,0,0,("_p1%i" "_p2%i")
+AddScore,0109,0,0,("self: Player" "money%i")
 AlterWantedLevel,010D,0,0,("self: Player" "wantedLevel%i")
-AlterWantedLevelNoDrop,010E,0,0,("_p1%i" "_p2%i")
+AlterWantedLevelNoDrop,010E,0,0,("self: Player" "wantedLevel%i")
 ApplyBrakesToCar,0221,0,0,("self: Player" "state%b")
 BuildModel,070D,0,0,("self: Player")
 CanStartMission,03EE,1,0,("self: Player")
@@ -892,6 +893,7 @@ GetCharInTarget,0AD2,0,0,("self: Player" "target: Char")
 GetCityIsIn,0842,0,0,("self: Player" "cityId%i")
 GetMaxArmour,0945,0,0,("self: Player" "maxArmour%i")
 GetWheelieStats,04FC,0,0,("self: Player" "twoWheelsTime%i" "twoWheelsDistance%f" "wheelieTime%i" "wheelieDistance%f" "stoppieTime%i" "stoppieDistance%f")
+GiveClothes,0784,0,0,("self: Player" "textureHash%i" "modelHash%i" "bodyPart: BodyPart")
 GiveClothesOutsideShop,087B,0,0,("self: Player" "textureName%s" "modelName%s" "bodyPart: BodyPart")
 IncreaseMaxArmour,055F,0,0,("self: Player" "value%i")
 IncreaseMaxHealth,055E,0,0,("self: Player" "value%i")
@@ -923,7 +925,6 @@ SetIgnorePolice,01F7,0,0,("self: Player" "state%b")
 SetModel,09C7,0,0,("self: Player" "modelId%i")
 SetMood,04E3,0,0,("self: Player" "mood%i" "time%i")
 SetNeverGetsTired,0330,0,0,("self: Player" "state%b")
-SetWantedMultiplier,03C7,0,0,("_p1%f")
 StoreScore,010B,0,0,("self: Player" "money%i")
 StoreWantedLevel,01C0,0,0,("self: Player" "wantedLevel%i")
 TakeOffGoggles,09EB,0,0,("self: Player" "animate%b")
@@ -937,7 +938,7 @@ $END
 
 $Rc
 $BEGIN
-GetCar,0484,0,0,("_p1%i" "_p2%i")
+GetCar,0484,0,0,("player: Player" "car: Car")
 GiveModelToPlayer,046E,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 RemoveBuggy,04DB,0,0,()
 SetEnableDetonate,048A,0,0,("_p1%i")

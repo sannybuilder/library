@@ -503,6 +503,7 @@ SetIsInStadium,057E,0,0,("state%b")
 SetMaxWantedLevel,01F0,0,0,("wantedLevel%i")
 SetRiotIntensity,0552,0,0,("_p1%i")
 SetThreatForPedType,03F1,0,0,("_p1%i" "_p2%i")
+SetWantedMultiplier,03C7,0,0,("multiplier%f")
 SetWeapons,0237,0,0,("gangId%i" "weaponId1: WeaponType" "weaponId2: WeaponType")
 $END
 
@@ -649,9 +650,9 @@ $END
 $Player
 $BEGIN
 AddArmour,035E,0,0,("_p1%i" "_p2%i")
-AddScore,0109,0,0,("_p1%i" "_p2%i")
+AddScore,0109,0,0,("self: Player" "money%i")
 AlterWantedLevel,010D,0,0,("self: Player" "wantedLevel%i")
-AlterWantedLevelNoDrop,010E,0,0,("_p1%i" "_p2%i")
+AlterWantedLevelNoDrop,010E,0,0,("self: Player" "wantedLevel%i")
 ApplyBrakesToCar,0221,0,0,("self: Player" "state%b")
 CanStartMission,03EE,1,0,("self: Player")
 ClearWantedLevel,0110,0,0,("self: Player")
@@ -770,7 +771,6 @@ SetIgnorePolice,01F7,0,0,("self: Player" "state%b")
 SetMood,04E3,0,0,("self: Player" "mood%i" "time%i")
 SetNeverGetsTired,0330,0,0,("self: Player" "state%b")
 SetVisible,0336,0,0,("self: Player" "state%b")
-SetWantedMultiplier,03C7,0,0,("_p1%f")
 ShutUp,04E2,0,0,("self: Player" "state%b")
 StopLooking,0230,0,0,("self: Player")
 StoreCarIsIn,00DA,0,0,("self: Player" "handle: Car")
@@ -793,7 +793,7 @@ $END
 $Rc
 $BEGIN
 BlowUpBuggy,0409,0,0,()
-GetCar,0484,0,0,("_p1%i" "_p2%i")
+GetCar,0484,0,0,("player: Player" "car: Car")
 GiveCarToPlayer,010C,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f")
 GiveModelToPlayer,046E,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 RemoveBuggy,04DB,0,0,()

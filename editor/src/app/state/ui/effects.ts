@@ -58,7 +58,8 @@ export class UiEffects {
   viewOnLoad$ = createEffect(() =>
     this._actions$.pipe(
       ofType(onListEnter),
-      switchMap(({ opcode, extension, enumName, className }) => {
+      withLatestFrom(this._ui.canEdit$),
+      switchMap(([{ opcode, extension, enumName, className }, canEdit]) => {
         if (enumName) {
           if (enumName === 'all') {
             return [displayEnumsList()];
@@ -74,6 +75,9 @@ export class UiEffects {
               const isNew = !enumToEdit;
 
               if (isNew) {
+                if (!canEdit) {
+                  return stopEditOrDisplay();
+                }
                 return displayOrEditEnum({
                   enumToEdit: { isNew, name, fields: [] },
                   viewMode: ViewMode.EditEnum,
@@ -116,6 +120,9 @@ export class UiEffects {
 
               const isNew = !commandToEdit;
               if (isNew) {
+                if (!canEdit) {
+                  return stopEditOrDisplay();
+                }
                 return displayOrEditCommandInfo({
                   extension,
                   command: {

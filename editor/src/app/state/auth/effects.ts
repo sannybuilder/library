@@ -71,6 +71,7 @@ export class AuthEffects {
         ofType(authorizeFail),
         tap(() => {
           this.service.removeSession();
+          this._changes.initializeGithub(undefined);
         })
       ),
     { dispatch: false }

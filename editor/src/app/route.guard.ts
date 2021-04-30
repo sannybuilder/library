@@ -6,9 +6,8 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { DEFAULT_EXTENSION, Game } from './models';
-import { AuthFacade, GameFacade, UiFacade } from './state';
+import { AuthFacade, GameFacade } from './state';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -26,65 +25,53 @@ export class AuthGuard implements CanActivate {
 
 @Injectable({ providedIn: 'root' })
 export class RouteGuard implements CanActivate {
-  constructor(
-    private _router: Router,
-    private _game: GameFacade,
-    private _ui: UiFacade
-  ) {}
+  constructor(private _router: Router, private _game: GameFacade) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this._ui.canEdit$.pipe(
-      map((canEdit) => {
-        const segments = getSegmentsFromUrl(this._router, state.url);
+    const segments = getSegmentsFromUrl(this._router, state.url);
 
-        if (segments.length === 0) {
-          return this.goHome();
-        }
+    if (segments.length === 0) {
+      return this.goHome();
+    }
 
-        const game = getGame(segments.shift());
+    const game = getGame(segments.shift());
 
-        if (!game) {
-          return this.goHome();
-        }
+    if (!game) {
+      return this.goHome();
+    }
 
-        const subPath = segments.shift();
-        if (subPath === 'classes') {
-          const className = segments.shift() || 'all';
+    const subPath = segments.shift();
+    if (subPath === 'classes') {
+      const className = segments.shift() || 'all';
 
-          this._game.onListEnter({
-            game,
-            className,
-            extension: DEFAULT_EXTENSION,
-          });
-        } else if (subPath === 'enums') {
-          const enumName = segments.shift() || 'all';
+      this._game.onListEnter({
+        game,
+        className,
+        extension: DEFAULT_EXTENSION,
+      });
+      return true;
+    }
 
-          // editing by anonymous user is not allowed
-          if (enumName?.toLowerCase() === 'new' && !canEdit) {
-            return this.goGame(game);
-          }
-          this._game.onListEnter({
-            game,
-            enumName,
-            extension: DEFAULT_EXTENSION,
-          });
-        } else {
-          // editing by anonymous user is not allowed
-          if (subPath === 'new' && !canEdit) {
-            return this.goGame(game);
-          }
-          const extension = subPath || DEFAULT_EXTENSION;
-          const opcode = segments.shift();
-          this._game.onListEnter({
-            game,
-            extension,
-            opcode,
-          });
-        }
+    if (subPath === 'enums') {
+      const enumName = segments.shift() || 'all';
+      this._game.onListEnter({
+        game,
+        enumName,
+        extension: DEFAULT_EXTENSION,
+      });
+      return true;
+    }
 
-        return true;
-      })
-    );
+    // extensions
+    const opcode = segments.shift();
+    const extension = subPath || DEFAULT_EXTENSION;
+    this._game.onListEnter({
+      game,
+      extension,
+      opcode,
+    });
+
+    return true;
   }
 
   goHome() {

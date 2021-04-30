@@ -22,9 +22,11 @@ export const submitChanges = createAction('[changes] submit');
 
 export const submitChangesSuccess = createAction('[changes] submit success');
 
+export const submitChangesFail = createAction('[changes] submit fail');
+
 export const initializeGithub = createAction(
   '[changes] initialize github',
-  props<{ accessToken: string }>()
+  props<{ accessToken?: string }>()
 );
 
 export const reloadPage = createAction('[changes] reload page');

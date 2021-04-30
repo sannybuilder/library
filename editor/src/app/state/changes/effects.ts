@@ -1,15 +1,19 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { from, of } from 'rxjs';
+import { from } from 'rxjs';
 import {
   distinctUntilChanged,
-  mapTo,
   switchMap,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
-import { reloadPage, submitChanges, submitChangesSuccess } from './actions';
+import {
+  reloadPage,
+  submitChanges,
+  submitChangesFail,
+  submitChangesSuccess,
+} from './actions';
 import { ChangesFacade } from './facade';
 import { Config, CONFIG } from '../../config';
 
@@ -21,23 +25,27 @@ export class ChangesEffects {
       withLatestFrom(this._facade.changes$, this._facade.github$),
       distinctUntilChanged((a, b) => a[1] === b[1]),
       switchMap(([_, changes, github]) => {
-        if (!github && !this._config.features.shouldBeAuthorizedToEdit) {
-          console.log('Submit changes');
-          console.table(changes);
-          return of(false);
+        if (!github) {
+          if (!this._config.features.shouldBeAuthorizedToEdit) {
+            console.log('Submit changes');
+            console.table(changes);
+            return [submitChangesSuccess()];
+          } else {
+            console.error(
+              'Must be logged into GitHub in order to submit changes!'
+            );
+            return [submitChangesFail()];
+          }
         }
+
         const files = [...changes.entries()].map(([path, content]) => ({
           path,
           content,
         }));
-        return from(github.writeFiles(files)).pipe(mapTo(true));
-      }),
-      switchMap((shouldReload) =>
-        [
-          submitChangesSuccess(),
-          shouldReload ? reloadPage() : undefined,
-        ].filter(Boolean)
-      )
+        return from(github.writeFiles(files)).pipe(
+          switchMap(() => [submitChangesSuccess(), reloadPage()])
+        );
+      })
     )
   );
 

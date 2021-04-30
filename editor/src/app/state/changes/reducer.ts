@@ -15,6 +15,7 @@ import {
   registerExtensionsChange,
   registerSnippetChange,
   submitChanges,
+  submitChangesFail,
   submitChangesSuccess,
 } from './actions';
 
@@ -58,19 +59,26 @@ const _reducer = createReducer(
   on(submitChangesSuccess, () => ({
     ...initialState,
   })),
+  on(submitChangesFail, (state) => ({
+    ...state,
+    changes: new Map(state.changes), // allow retry
+    isUpdating: false,
+  })),
   on(clearChanges, () => ({
     ...initialState,
   })),
   on(initializeGithub, (state, { accessToken }) => ({
     ...state,
-    github: createKoreFile({
-      adaptor: createGitHubAdaptor({
-        owner: 'sannybuilder',
-        repo: 'library',
-        ref: 'heads/master',
-        token: accessToken,
-      }),
-    }),
+    github: accessToken
+      ? createKoreFile({
+          adaptor: createGitHubAdaptor({
+            owner: 'sannybuilder',
+            repo: 'library',
+            ref: 'heads/master',
+            token: accessToken,
+          }),
+        })
+      : undefined,
   }))
 );
 

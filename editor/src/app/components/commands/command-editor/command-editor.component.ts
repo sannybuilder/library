@@ -20,12 +20,13 @@ import {
   Command,
   CommandAttributes,
   Game,
+  GameSupportInfo,
   Param,
   ParamType,
   Primitive,
   PrimitiveType,
   SourceType,
-  SupportInfo,
+  SupportLevel,
 } from '../../../models';
 import { SelectorComponent } from '../../common/selector/selector.component';
 import { isAnyAttributeInvalid, capitalizeFirst, smash } from '../../../utils';
@@ -49,6 +50,8 @@ const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
 })
 export class CommandEditorComponent implements OnInit {
   private _command: Command;
+  private _supportInfo: GameSupportInfo[];
+
   PrimitiveType = PrimitiveType;
   SourceType = SourceType;
   @ViewChild(SelectorComponent) selector: SelectorComponent;
@@ -57,6 +60,7 @@ export class CommandEditorComponent implements OnInit {
   paramTypes: string[] = [];
   classes: string[] = [];
   primitives: PrimitiveType[] = [];
+  cloneTargets: Array<{ name: string; value: Game }> = [];
 
   errors: Record<ErrorType, boolean> = {
     emptyName: false,
@@ -83,12 +87,29 @@ export class CommandEditorComponent implements OnInit {
   @Input() snippet: string;
   @Input() extension: string;
   @Input() extensionNames: string[];
-  @Input() supportInfo: SupportInfo;
+  @Input() set supportInfo(val: GameSupportInfo[] | undefined) {
+    this._supportInfo = val;
+
+    const games = Object.entries(Game);
+    this.cloneTargets = games
+      .filter(([_, game]) =>
+        val?.some(
+          (info) =>
+            info.game === game && info.level === SupportLevel.DoesNotExist
+        )
+      )
+      .map(([name, value]) => ({ name, value }));
+  }
+
+  get supportInfo() {
+    return this._supportInfo;
+  }
   @Input() commands?: Command[];
   @Output() extensionChange: EventEmitter<string> = new EventEmitter();
   @Output() snippetChange: EventEmitter<string> = new EventEmitter();
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
   @Output() delete: EventEmitter<void> = new EventEmitter();
+  @Output() clone: EventEmitter<Game> = new EventEmitter();
 
   @Input() set types(val: ParamType[]) {
     const prefixes: Record<ParamType['type'], string> = {
@@ -447,6 +468,14 @@ export class CommandEditorComponent implements OnInit {
     this.command.output.splice(index, 1);
     this.command.num_params--;
     this.updateErrors();
+  }
+
+  canClone() {
+    return !this.isNew && this.cloneTargets.length > 0;
+  }
+
+  cloneCommand(game: Game) {
+    this.clone.emit(game);
   }
 
   private getAllParams() {

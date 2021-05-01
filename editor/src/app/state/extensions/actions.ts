@@ -31,3 +31,12 @@ export const updateGameCommands = createAction(
     batch: GameCommandUpdate[];
   }>()
 );
+
+export const cloneCommand = createAction(
+  '[enums] clone command to the game',
+  props<{
+    game: Game;
+    command: Command;
+    extension: string;
+  }>()
+);

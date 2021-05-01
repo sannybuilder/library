@@ -1,11 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { EnumRaw, Enums, Game } from '../../models';
-import {
-  cloneEnum,
-  loadEnumsSuccess,
-  renameGameEnum,
-  updateGameEnum,
-} from './actions';
+import { loadEnumsSuccess, renameGameEnum, updateGameEnum } from './actions';
 import { fromPairs, mapValues } from 'lodash';
 import { smash } from '../../utils';
 
@@ -40,12 +35,6 @@ const _reducer = createReducer(
       [oldEnumName]: undefined,
       [newEnumName]: newEnumName ? currentEnum : undefined,
     });
-  }),
-  on(cloneEnum, (state, { game, enumToClone }) => {
-    const newState = {
-      [enumToClone.name]: makeEnum(enumToClone.fields),
-    };
-    return updateState(state, game, newState);
   })
 );
 

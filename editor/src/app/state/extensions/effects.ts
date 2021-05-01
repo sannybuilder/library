@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, zip } from 'rxjs';
-import {
-  tap,
-  switchMap,
-  withLatestFrom,
-  concatMap,
-  take,
-  map,
-} from 'rxjs/operators';
+import { tap, switchMap, withLatestFrom, concatMap, map } from 'rxjs/operators';
 import { flatMap, groupBy, flatten } from 'lodash';
 
 import {
+  cloneCommand,
   GameCommandUpdate,
   loadExtensions,
   loadExtensionsSuccess,
@@ -36,6 +30,7 @@ import {
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
 import { renameGameEnum } from '../enums/actions';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -214,12 +209,30 @@ export class ExtensionsEffects {
     { dispatch: false }
   );
 
+  cloneCommand$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(cloneCommand),
+      tap(({ game, command, extension }) => {
+        this._router.navigate(['/', game, extension, command.id]);
+      }),
+      map(({ game, command, extension }) =>
+        updateGameCommands({
+          game,
+          batch: [
+            { command, newExtension: extension, oldExtension: extension },
+          ],
+        })
+      )
+    )
+  );
+
   constructor(
     private _actions$: Actions,
     private _extensions: ExtensionsFacade,
     private _changes: ChangesFacade,
     private _auth: AuthFacade,
     private _service: ExtensionsService,
-    private _game: GameFacade
+    private _game: GameFacade,
+    private _router: Router
   ) {}
 }

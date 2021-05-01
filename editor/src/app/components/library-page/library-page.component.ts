@@ -167,6 +167,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._onSaveCommand();
   }
 
+  onCloneCommand(game: Game) {
+    this._extensions.cloneCommand({
+      game,
+      command: this.command,
+      extension: this.extension,
+    });
+  }
+
   onCancel() {
     this._ui.stopEditOrDisplay();
   }

@@ -75,7 +75,7 @@ export class EnumsEffects {
   updateGameEnums$ = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(updateGameEnum, renameGameEnum, cloneEnum),
+        ofType(updateGameEnum, renameGameEnum),
         switchMap(({ game }) =>
           this._enums.getGameEnums(game).pipe(
             tap((enums) => {
@@ -87,15 +87,20 @@ export class EnumsEffects {
     { dispatch: false }
   );
 
-  cloneEnums$ = createEffect(
-    () =>
-      this._actions$.pipe(
-        ofType(cloneEnum),
-        tap(({ game, enumToClone }) => {
-          this._router.navigate(['/', game, 'enums', enumToClone.name]);
+  cloneEnums$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(cloneEnum),
+      tap(({ game, enumToClone }) => {
+        this._router.navigate(['/', game, 'enums', enumToClone.name]);
+      }),
+      map(({ game, enumToClone }) =>
+        updateGameEnum({
+          game,
+          enumToEdit: enumToClone,
+          oldEnumToEdit: enumToClone,
         })
-      ),
-    { dispatch: false }
+      )
+    )
   );
 
   constructor(

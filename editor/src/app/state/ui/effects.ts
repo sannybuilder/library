@@ -32,15 +32,7 @@ import {
   first,
 } from 'rxjs/operators';
 
-import {
-  DEFAULT_EXTENSION,
-  Entity,
-  EnumRaw,
-  Enums,
-  Extension,
-  Game,
-  ViewMode,
-} from '../../models';
+import { Entity, Enums, Extension, Game, ViewMode } from '../../models';
 
 import { capitalizeFirst } from '../../utils';
 import { flatMap } from 'lodash';

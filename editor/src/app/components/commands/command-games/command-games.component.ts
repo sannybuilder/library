@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   Command,
-  Game,
   GameSupportInfo,
   GameTitle,
   SupportLevel,
@@ -20,18 +19,11 @@ export class CommandGamesComponent {
   @Input() extension: string;
   @Input() command: Command;
 
-  stringifyLevel(level: number, game: Game) {
-    if (level === SupportLevel.Supported) {
-      return 'ui.commandGames.same';
-    }
-    if (level === SupportLevel.SupportedDiffParams) {
-      return 'ui.commandGames.changed';
-    }
-    if (level === SupportLevel.Unsupported) {
-      return 'ui.commandGames.unsupported';
-    }
-    if (level === SupportLevel.Nop) {
-      return 'ui.commandGames.nop';
-    }
-  }
+  readonly TEXT_KEYS: Record<SupportLevel, string> = {
+    [SupportLevel.Supported]: 'ui.commandGames.same',
+    [SupportLevel.SupportedDiffParams]: 'ui.commandGames.changed',
+    [SupportLevel.Unsupported]: 'ui.commandGames.unsupported',
+    [SupportLevel.Nop]: 'ui.commandGames.nop',
+    [SupportLevel.DoesNotExist]: 'ui.commandGames.doesNotExist',
+  };
 }

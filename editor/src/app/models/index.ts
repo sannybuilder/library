@@ -161,6 +161,7 @@ export interface GameSupportInfo {
 }
 
 export enum SupportLevel {
+  DoesNotExist = -2,
   Unsupported = -1,
   Nop = 0,
   Supported = 1,

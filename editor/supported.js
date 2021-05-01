@@ -1,8 +1,9 @@
 const { readFileSync, writeFileSync } = require("fs");
 const { join } = require("path");
 
-const IS_NOP = 0;
+const DOES_NOT_EXIST = -2;
 const IS_UNSUPPORTED = -1;
+const IS_NOP = 0;
 const IS_SUPPORTED = 1;
 const HAS_DIFF_PARAMS = 2;
 
@@ -40,14 +41,23 @@ function getCommand(source, extensionName, command) {
   return (
     extension &&
     extension.commands &&
-    extension.commands.find(
-      (c) => c.id === command.id && c.name === command.name
-    )
+    extension.commands.find((c) => c.id === command.id)
   );
 }
 
 function getSupportLevel(command, otherCommand) {
-  const attrs = command ? command.attrs || {} : { is_unsupported: true };
+  // no command with the same id
+  if (!command) {
+    return DOES_NOT_EXIST;
+  }
+
+  // same ids, but different names (e.g. 03E2)
+  if (command.name !== otherCommand.name) {
+    return HAS_DIFF_PARAMS;
+  }
+
+  const attrs = command.attrs || {};
+  const otherAttrs = otherCommand.attrs || {};
 
   const { is_nop, is_unsupported } = attrs;
   if (is_unsupported) {
@@ -56,7 +66,10 @@ function getSupportLevel(command, otherCommand) {
   if (is_nop) {
     return IS_NOP;
   }
-  if (otherCommand.num_params !== command.num_params) {
+  if (
+    otherCommand.num_params !== command.num_params &&
+    !otherAttrs.is_unsupported
+  ) {
     return HAS_DIFF_PARAMS;
   }
   return IS_SUPPORTED;

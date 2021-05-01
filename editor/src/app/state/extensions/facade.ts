@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { Command, Extension, Game } from '../../models';
-import { updateCommands, loadExtensions } from './actions';
+import { updateCommands, loadExtensions, cloneCommand } from './actions';
 import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -48,5 +48,17 @@ export class ExtensionsFacade {
 
   loadExtensions(game: Game) {
     this.store$.dispatch(loadExtensions({ game }));
+  }
+
+  cloneCommand({
+    command,
+    extension,
+    game,
+  }: {
+    command: Command;
+    extension: string;
+    game: Game;
+  }) {
+    this.store$.dispatch(cloneCommand({ command, extension, game }));
   }
 }

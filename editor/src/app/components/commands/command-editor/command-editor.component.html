@@ -17,11 +17,26 @@
 <hr />
 
 <div class="row mb-2 pr-5 position-relative">
-  <div class="col-12">
+  <div class="col-12 flex-row d-flex justify-content-end">
     <button
-      class="btn btn-outline-secondary text-nowrap d-flex ml-auto"
-      (click)="addInput()"
+      *ngIf="canClone()"
+      class="btn btn-outline-secondary mr-2 dropdown-toggle"
+      data-toggle="dropdown"
+      data-offset="0,0"
+      aria-haspopup="true"
+      aria-expanded="false"
     >
+      {{ "ui.shared.clone" | translate }}
+    </button>
+    <div class="dropdown-menu">
+      <span
+        class="dropdown-item"
+        *ngFor="let target of cloneTargets"
+        (click)="cloneCommand(target.value)"
+        >{{ target.name }}</span
+      >
+    </div>
+    <button class="btn btn-outline-secondary text-nowrap" (click)="addInput()">
       {{ "ui.commandEditor.addInput" | translate }}
     </button>
   </div>

@@ -1,14 +1,16 @@
 <ng-container *ngFor="let item of supportInfo">
   <a [routerLink]="['/', item.game, extension, command.id]">
     <scl-icon
-      *ngIf="item.level !== -1"
-      [ngClass]="{ 'diff-params': item.level === 2 }"
+      *ngIf="item.level > SupportLevel.Unsupported"
+      [ngClass]="{
+        'diff-params': item.level === SupportLevel.SupportedDiffParams
+      }"
       [game]="item.game"
       size="16"
       [title]="
-        stringifyLevel(item.level) | translate: { game: GameTitle[item.game] }
+        TEXT_KEYS[item.level] | translate: { game: GameTitle[item.game] }
       "
-      [opacity]="item.level === 0 ? 0.3 : 1"
+      [opacity]="item.level === SupportLevel.Nop ? 0.3 : 1"
     ></scl-icon>
   </a>
 </ng-container>

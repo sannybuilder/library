@@ -162,6 +162,7 @@ export class CommandEditorComponent implements OnInit {
   };
 
   isDirty: boolean;
+  isInvalid: boolean;
 
   ngOnInit() {
     if (this.selector) {
@@ -180,7 +181,8 @@ export class CommandEditorComponent implements OnInit {
     this.errorMessages = Object.entries(this.errors)
       .filter(([_, v]) => v)
       .map(([k, _]) => `ui.errors.command.${k}`);
-    this.hasError.emit(this.errorMessages.length > 0);
+    this.isInvalid = this.errorMessages.length > 0;
+    this.hasError.emit(this.isInvalid);
   }
 
   onCommandNameChange(command: Command, value: string) {
@@ -475,7 +477,9 @@ export class CommandEditorComponent implements OnInit {
   }
 
   cloneCommand(game: Game) {
-    this.clone.emit(game);
+    if (!this.isInvalid) {
+      this.clone.emit(game);
+    }
   }
 
   private getAllParams() {

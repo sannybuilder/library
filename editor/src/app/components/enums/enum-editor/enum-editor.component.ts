@@ -71,6 +71,7 @@ export class EnumEditorComponent {
   };
   errorMessages: string[] = [];
   isDirty: boolean;
+  isInvalid: boolean;
 
   readonly errorHandlers: Record<ErrorType, () => void> = {
     emptyEnumName: this.updateEmptyEnumNameError,
@@ -88,7 +89,9 @@ export class EnumEditorComponent {
   }
 
   cloneEnum(game: Game) {
-    this.clone.emit(game);
+    if (!this.isInvalid) {
+      this.clone.emit(game);
+    }
   }
 
   updateErrors() {
@@ -101,7 +104,8 @@ export class EnumEditorComponent {
     this.errorMessages = Object.entries(this.errors)
       .filter(([_, v]) => v)
       .map(([k, _]) => `ui.errors.enum.${k}`);
-    this.hasError.emit(this.errorMessages.length > 0);
+    this.isInvalid = this.errorMessages.length > 0;
+    this.hasError.emit(this.isInvalid);
   }
 
   drop(event: CdkDragDrop<EnumRaw['fields']>) {

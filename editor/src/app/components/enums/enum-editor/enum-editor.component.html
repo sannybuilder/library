@@ -40,6 +40,7 @@
     <div class="input-group justify-content-md-end flex-nowrap">
       <button
         *ngIf="canClone()"
+        [disabled]="isInvalid"
         class="btn btn-outline-secondary mr-2 dropdown-toggle"
         data-toggle="dropdown"
         data-offset="0,0"
@@ -124,7 +125,7 @@
   </div>
 </div>
 
-<div class="alert alert-danger mt-3" *ngIf="errorMessages.length && isDirty">
+<div class="alert alert-danger mt-3" *ngIf="isInvalid && isDirty">
   <div *ngFor="let message of errorMessages">
     {{ message | translate }}
   </div>

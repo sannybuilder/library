@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619978542390
+    "last_update": 1619981526704
   },
   "extensions": [
     {
@@ -6424,7 +6424,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             },
             {
@@ -11463,7 +11463,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -12484,7 +12484,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -16283,7 +16283,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -18076,7 +18076,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -18709,7 +18709,7 @@
           ],
           "output": [
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType",
               "source": "var_any"
             },
@@ -21251,7 +21251,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -24606,20 +24606,22 @@
           "member": "IsPlaybackGoingOn"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "range",
+              "type": "float"
+            }
+          ],
           "id": "060F",
           "name": "SET_SENSE_RANGE",
           "num_params": 2,
           "short_desc": "Sets the characters melee accuracy",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetSenseRange"
         },
         {
           "id": "0610",
@@ -32174,23 +32176,28 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Searchlight",
+              "source": "var_any"
+            }
+          ],
           "id": "07A9",
           "name": "IS_CHAR_IN_ANY_SEARCHLIGHT",
           "num_params": 2,
           "short_desc": "Returns the handle for the searchlight that's targetting the character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsInAnySearchlight"
         },
         {
           "id": "07AA",
@@ -33973,20 +33980,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "id": "0811",
           "name": "GET_CAR_CHAR_IS_USING",
           "num_params": 2,
           "short_desc": "Stores a handle for the vehicle the character is in or entering",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetCarIsUsing"
         },
         {
           "input": [
@@ -43095,20 +43107,20 @@
           "member": "PlayAnimSecondary"
         },
         {
-          "id": "0A1B",
-          "name": "IS_CHAR_TOUCHING_CHAR",
-          "num_params": 2,
-          "short_desc": "Returns true if one character is touching the other",
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "other",
+              "name": "handle",
               "type": "Char"
             }
           ],
+          "id": "0A1B",
+          "name": "IS_CHAR_TOUCHING_CHAR",
+          "num_params": 2,
+          "short_desc": "Returns true if one character is touching the other",
           "attrs": {
             "is_condition": true
           },
@@ -43302,20 +43314,22 @@
           "short_desc": "Sets the radio station of the vehicle the player is currently in to the favourite station, retrieved from the stats (ID 326)"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A27",
           "name": "SET_DEATH_WEAPONS_PERSIST",
           "num_params": 2,
           "short_desc": "Prevents pickups, which are created when this character dies, from dissapearing until picked up by the player",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetDeathWeaponsPersist"
         },
         {
           "id": "0A28",

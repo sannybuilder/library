@@ -10,7 +10,11 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { capitalizeFirst } from '../../../utils';
+import {
+  capitalizeFirst,
+  evaluateEnumValues,
+  isStringEnum,
+} from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
 import { trim } from 'lodash';
 
@@ -100,7 +104,7 @@ export class EnumEditorComponent {
     this.hasError.emit(this.errorMessages.length > 0);
   }
 
-  drop(event: CdkDragDrop<any>) {
+  drop(event: CdkDragDrop<EnumRaw['fields']>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -142,16 +146,10 @@ export class EnumEditorComponent {
     this.updateErrors();
   }
 
-  isStringEnum() {
-    return this.enumToEdit.fields.some(([_, val]) => {
-      return typeof val === 'string' && val.length > 0 && isNaN(+val);
-    });
-  }
-
   evaluateValue(index: number): string {
     const [name, val] = this.enumToEdit.fields[index];
 
-    if (this.isStringEnum()) {
+    if (isStringEnum(this.enumToEdit.fields)) {
       return name || '';
     }
 

@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { EnumRaw, Enums, Game } from '../../models';
 import { loadEnumsSuccess, renameGameEnum, updateGameEnum } from './actions';
 import { fromPairs, mapValues } from 'lodash';
-import { smash } from '../../utils';
+import { evaluateEnumValues, smash } from '../../utils';
 
 export interface EnumsState {
   enums: Partial<Record<Game, Enums>>;
@@ -52,8 +52,8 @@ function updateState(
   };
 }
 
-function makeEnum(enumToEdit: EnumRaw['fields']) {
-  return mapValues(fromPairs(enumToEdit), (v) => {
+function makeEnum(fields: EnumRaw['fields']) {
+  return mapValues(fromPairs(evaluateEnumValues(fields)), (v) => {
     if (v == null || v === '') {
       return null;
     }

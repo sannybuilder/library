@@ -146,6 +146,7 @@ $BEGIN
 AddToRotationVelocity,07DA,0,0,("self: Car" "x%f" "y%f" "z%f")
 AddUpsidedownCheck,0190,0,0,("self: Car")
 ArmWithBomb,0242,0,0,("self: Car" "_p2%i")
+AttachToCar,0683,0,0,("self: Car" "handle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "xRotation%f" "yRotation%f" "zRotation%f")
 AttachToObject,0939,0,0,("self: Car" "handle: Object" "xOffset%f" "yOffset%f" "zOffset%f" "xRotation%f" "yRotation%f" "zRotation%f")
 BurstTyre,04FE,0,0,("self: Car" "tyreId%i")
 CanBeTargettedByHsMissile,08F2,0,0,("self: Car" "state%b")
@@ -338,8 +339,8 @@ $Char
 $BEGIN
 AddAmmo,0114,0,0,("self: Char" "weaponId: WeaponType" "ammo%i")
 AddArmour,035F,0,0,("self: Char" "armour%i")
-AttachToCar,0464,0,0,("_p1%i" "_p2%i" "_p3%f" "_p4%f" "_p5%f" "_p6%i" "_p7%f" "_p8%i")
-AttachToObject,04F4,0,0,("_p1%i" "_p2%i" "_p3%f" "_p4%f" "_p5%f" "_p6%i" "_p7%f" "_p8%i")
+AttachToCar,0464,0,0,("self: Char" "handle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "position%i" "angleLimit%f" "weaponType: WeaponType")
+AttachToObject,04F4,0,0,("self: Char" "handle: Object" "xOffset%f" "yOffset%f" "zOffset%f" "orientation%i" "angleLimit%f" "weaponType: WeaponType")
 CanSeeDeadChar,0480,1,0,("self: Char" "pedType%i")
 ClearLastDamageEntity,054E,0,0,("self: Char")
 ClearLastWeaponDamage,0467,0,0,("self: Char")
@@ -543,6 +544,7 @@ SetWeaponSkill,081A,0,0,("self: Char" "skillId%i")
 ShutUp,0489,0,0,("self: Char" "state%b")
 StartFacialTalk,0967,0,0,("self: Char" "duration%i")
 StopFacialTalk,0968,0,0,("self: Char")
+StoreCarIsAttachedToNoSave,0A33,0,0,("self: Char" "handle: Car")
 StoreCarIsIn,00D9,0,0,("self: Char" "handle: Car")
 StoreCarIsInNoSave,03C0,0,0,("self: Char" "handle: Car")
 WarpFromCarToCoord,0362,0,0,("self: Char" "x%f" "y%f" "z%f")
@@ -680,6 +682,7 @@ $END
 
 $Heli
 $BEGIN
+AttachWinch,0788,0,0,("self: Heli" "state%b")
 AttackPlayer,0724,0,0,("self: Heli" "handle: Player" "radius%f")
 ClearOrientation,04D1,0,0,("_p1%i")
 FollowEntity,0726,0,0,("self: Heli" "char: Char" "vehicle: Car" "radius%f")
@@ -756,6 +759,9 @@ $Object
 $BEGIN
 AddToRotationVelocity,05A1,0,0,("self: Object" "x%f" "y%f" "z%f")
 AddToVelocity,038C,0,0,("self: Object" "x%f" "y%f" "z%f")
+AttachToCar,0681,0,0,("self: Object" "handle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "xRotation%f" "yRotation%f" "zRotation%f")
+AttachToChar,069B,0,0,("self: Object" "handle: Char" "xOffset%f" "yOffset%f" "zOffset%f" "xRotation%f" "yRotation%f" "zRotation%f")
+AttachToObject,069A,0,0,("self: Object" "handle: Object" "xOffset%f" "yOffset%f" "zOffset%f" "xRotation%f" "yRotation%f" "zRotation%f")
 Break,0723,0,0,("self: Object" "intensity%i")
 ClearLastWeaponDamage,0900,0,0,("self: Object")
 ConnectLods,0827,0,0,("self: Object" "lodObject: Object")
@@ -898,6 +904,7 @@ GiveClothes,0784,0,0,("self: Player" "textureHash%i" "modelHash%i" "bodyPart: Bo
 GiveClothesOutsideShop,087B,0,0,("self: Player" "textureName%s" "modelName%s" "bodyPart: BodyPart")
 IncreaseMaxArmour,055F,0,0,("self: Player" "value%i")
 IncreaseMaxHealth,055E,0,0,("self: Player" "value%i")
+IsAttachedHeadingAchieved,0861,1,0,("self: Player")
 IsClimbing,0A29,1,0,("self: Player")
 IsControlOn,09E7,1,0,("self: Player")
 IsDead,0117,1,0,("self: Player")

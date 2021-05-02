@@ -1,6 +1,15 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Entity, Extension, Game } from '../../models';
 import {
+  Command,
+  Entity,
+  Extension,
+  Game,
+  GameSupportInfo,
+  SupportInfo,
+  SupportLevel,
+} from '../../models';
+import {
+  initSupportInfo,
   loadExtensions,
   loadExtensionsSuccess,
   updateGameCommands,
@@ -12,6 +21,7 @@ export interface GameState {
   loading: boolean;
   entities?: Record<string, Entity[]>;
   lastUpdate?: number;
+  supportInfo: SupportInfo;
 }
 export interface ExtensionsState {
   games: Partial<Record<Game, GameState>>;
@@ -80,11 +90,17 @@ const _reducer = createReducer(
     );
 
     const entities = getEntities(extensions);
-
     return updateState(state, game, {
       extensions,
       entities,
     });
+  }),
+  on(initSupportInfo, (state) => {
+    return Object.entries(state.games).reduce((s, [game, { extensions }]) => {
+      return updateState(s, game as Game, {
+        supportInfo: getSupportInfo(extensions, state.games, game as Game),
+      });
+    }, state);
   })
 );
 
@@ -164,4 +180,65 @@ function getEntities(extensions: Extension[]): Record<string, Entity[]> {
     );
     return m;
   }, {} as Record<string, Entity[]>);
+}
+
+function getSupportInfo(
+  extensions: Extension[],
+  state: ExtensionsState['games'],
+  game: Game
+): SupportInfo {
+  return extensions.reduce((m, { name, commands }) => {
+    m[name] = commands.reduce((m2, command) => {
+      m2[command.id] = Object.keys(state).map((v3: Game) => ({
+        game: v3,
+        level: getSupportLevel(
+          game === v3
+            ? command
+            : getCommand(state[v3].extensions, name, command),
+          command
+        ),
+      }));
+      return m2;
+    }, {} as Record<string, GameSupportInfo[]>);
+    return m;
+  }, {} as SupportInfo);
+}
+
+function getCommand(
+  extensions: Extension[],
+  extensionName: string,
+  command: Command
+) {
+  const extension = extensions?.find((e) => e.name === extensionName);
+  return extension?.commands?.find((c) => c.id === command.id);
+}
+
+function getSupportLevel(command: Command, otherCommand: Command) {
+  // no command with the same id
+  if (!command) {
+    return SupportLevel.DoesNotExist;
+  }
+
+  // same ids, but different names (e.g. 03E2)
+  if (command.name !== otherCommand.name) {
+    return SupportLevel.SupportedDiffParams;
+  }
+
+  const attrs = command.attrs || {};
+  const otherAttrs = otherCommand.attrs || {};
+
+  const { is_nop, is_unsupported } = attrs;
+  if (is_unsupported) {
+    return SupportLevel.Unsupported;
+  }
+  if (is_nop) {
+    return SupportLevel.Nop;
+  }
+  if (
+    otherCommand.num_params !== command.num_params &&
+    !otherAttrs.is_unsupported
+  ) {
+    return SupportLevel.SupportedDiffParams;
+  }
+  return SupportLevel.Supported;
 }

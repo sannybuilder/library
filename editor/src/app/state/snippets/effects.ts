@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { isEqual } from 'lodash';
+import {
+  concatMap,
+  map,
+  switchMap,
+  take,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import {
   loadSnippets,
@@ -14,6 +20,7 @@ import { ChangesFacade } from '../changes/facade';
 import { GameSupportInfo } from '../../models';
 import { getSameCommands } from '../../utils';
 import { GameFacade } from '../game/facade';
+import { ExtensionsFacade } from '../extensions/facade';
 
 @Injectable({ providedIn: 'root' })
 export class SnippetsEffects {
@@ -38,8 +45,8 @@ export class SnippetsEffects {
       // distinctUntilChanged(isEqual),
       withLatestFrom(this._game.game$),
       switchMap(([{ content, extension, command }, game]) => {
-        return this._game.getCommandSupportInfo(command, extension).pipe(
-          // take(1),
+        return this._extensions.getCommandSupportInfo(command, extension).pipe(
+          take(1),
           switchMap((supportInfo: GameSupportInfo[]) =>
             getSameCommands(supportInfo, game).map((d) =>
               updateGameSnippet({
@@ -72,6 +79,7 @@ export class SnippetsEffects {
     private actions$: Actions,
     private service: SnippetsService,
     private _changes: ChangesFacade,
-    private _game: GameFacade
+    private _game: GameFacade,
+    private _extensions: ExtensionsFacade
   ) {}
 }

@@ -33,10 +33,12 @@ export const updateGameCommands = createAction(
 );
 
 export const cloneCommand = createAction(
-  '[enums] clone command to the game',
+  '[extensions] clone command to the game',
   props<{
     game: Game;
     command: Command;
     extension: string;
   }>()
 );
+
+export const initSupportInfo = createAction('[extensions] init support info');

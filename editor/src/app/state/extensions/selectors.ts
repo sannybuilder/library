@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Extension, Game } from '../../models';
+import { Command, Extension, Game, SupportInfo } from '../../models';
 import { game } from '../game/selectors';
 import { ExtensionsState, GameState } from './reducer';
 
@@ -39,6 +39,14 @@ export const extensionCommands = createSelector(
     extensions?.find((e) => e.name === props.extension)?.commands
 );
 
+export const extensionCommand = createSelector(
+  extensions,
+  (extensions: Extension[], props: { extension: string; command: Command }) =>
+    extensions
+      ?.find((e) => e.name === props.extension)
+      ?.commands?.find((c) => c.id === props.command.id)
+);
+
 export const loading = createSelector(
   state,
   (state: GameState) => state.loading
@@ -53,4 +61,21 @@ export const extensionEntities = createSelector(
 export const lastUpdate = createSelector(
   state,
   (state: GameState) => state.lastUpdate
+);
+
+export const supportInfo = createSelector(
+  state,
+  (state: GameState) => state.supportInfo
+);
+
+export const commandSupportInfo = createSelector(
+  supportInfo,
+  (supportInfo: SupportInfo, props: { command: Command; extension: string }) =>
+    supportInfo?.[props.extension]?.[props.command.id]
+);
+
+export const hasAnyLoadingInProgress = createSelector(
+  gamesState,
+  (state: ExtensionsState) =>
+    Object.values(state.games).some(({ loading }) => loading)
 );

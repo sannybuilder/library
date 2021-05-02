@@ -1,10 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Game, PrimitiveType, SupportInfo } from '../../models';
-import { onListEnter, loadSupportInfoSuccess } from './actions';
+import { Game, PrimitiveType } from '../../models';
+import { onListEnter } from './actions';
 
 export interface GameState {
   game?: Game;
-  supportInfo?: SupportInfo;
   primitiveTypes?: PrimitiveType[];
 }
 
@@ -16,10 +15,6 @@ const _reducer = createReducer(
     ...state,
     game,
     primitiveTypes: primitiveTypes(game),
-  })),
-  on(loadSupportInfoSuccess, (state, { supportInfo }) => ({
-    ...state,
-    supportInfo,
   }))
 );
 

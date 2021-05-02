@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, zip } from 'rxjs';
-import { tap, switchMap, withLatestFrom, concatMap, map } from 'rxjs/operators';
+import {
+  tap,
+  switchMap,
+  withLatestFrom,
+  concatMap,
+  map,
+  take,
+  filter,
+} from 'rxjs/operators';
 import { flatMap, groupBy, flatten } from 'lodash';
 
 import {
   cloneCommand,
   GameCommandUpdate,
+  initSupportInfo,
   loadExtensions,
   loadExtensionsSuccess,
   updateCommands,
@@ -15,12 +24,7 @@ import {
 import { ExtensionsService } from './service';
 import { ExtensionsFacade } from './facade';
 import { ChangesFacade } from '../changes/facade';
-import {
-  Game,
-  GameLibrary,
-  GameSupportInfo,
-  PrimitiveType,
-} from '../../models';
+import { Command, Game, GameLibrary, PrimitiveType } from '../../models';
 import {
   commandParams,
   getSameCommands,
@@ -59,18 +63,33 @@ export class ExtensionsEffects {
           ...batch.map(({ command, newExtension, oldExtension }) => {
             // find copies of this command in other games to propagate the changes
             if (command.id && command.name) {
-              return this._game
+              return this._extensions
                 .getCommandSupportInfo(command, oldExtension)
                 .pipe(
-                  // take(1),
-                  map((supportInfo: GameSupportInfo[]) =>
-                    getSameCommands(supportInfo, game).map((d) => ({
-                      game: d.game,
+                  withLatestFrom(
+                    this._extensions.getExtensionCommand({
                       command,
-                      newExtension,
-                      oldExtension,
-                    }))
-                  )
+                      extension: oldExtension,
+                    })
+                  ),
+                  take(1),
+                  map(([supportInfo, oldCommand]) => {
+                    if (shouldUpdateOtherGames(command, oldCommand)) {
+                      return getSameCommands(supportInfo, game).map((d) => ({
+                        game: d.game,
+                        command,
+                        newExtension,
+                        oldExtension,
+                      }));
+                    } else {
+                      return {
+                        game,
+                        command,
+                        newExtension,
+                        oldExtension,
+                      };
+                    }
+                  })
                 );
             } else {
               // if there is no id or name (deleting flow) - update only this game
@@ -89,12 +108,15 @@ export class ExtensionsEffects {
       switchMap((updates) => {
         const groups = groupBy(flatten(updates), 'game');
 
-        return Object.entries(groups).map(([game, batch]) =>
-          updateGameCommands({
-            game: game as Game,
-            batch: batch as GameCommandUpdate[],
-          })
-        );
+        return [
+          ...Object.entries(groups).map(([game, batch]) =>
+            updateGameCommands({
+              game: game as Game,
+              batch: batch as GameCommandUpdate[],
+            })
+          ),
+          initSupportInfo(),
+        ];
       })
     )
   );
@@ -149,9 +171,13 @@ export class ExtensionsEffects {
             );
             return zip(
               ...affectedCommands.map(({ extension, command }) => {
-                return this._game.getCommandSupportInfo(command, extension);
+                return this._extensions.getCommandSupportInfo(
+                  command,
+                  extension
+                );
               })
             ).pipe(
+              take(1),
               map((supportInfos) => {
                 const otherGames = new Set<Game>();
                 for (const info of supportInfos) {
@@ -209,20 +235,30 @@ export class ExtensionsEffects {
     { dispatch: false }
   );
 
+  initSupportInfo$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadExtensionsSuccess),
+      withLatestFrom(this._extensions.hasAnyLoadingInProgress$),
+      filter(([_, hasAnyLoadingInProgress]) => !hasAnyLoadingInProgress),
+      map(() => initSupportInfo())
+    )
+  );
+
   cloneCommand$ = createEffect(() =>
     this._actions$.pipe(
       ofType(cloneCommand),
       tap(({ game, command, extension }) => {
         this._router.navigate(['/', game, extension, command.id]);
       }),
-      map(({ game, command, extension }) =>
+      switchMap(({ game, command, extension }) => [
         updateGameCommands({
           game,
           batch: [
             { command, newExtension: extension, oldExtension: extension },
           ],
-        })
-      )
+        }),
+        initSupportInfo(),
+      ])
     )
   );
 
@@ -235,4 +271,33 @@ export class ExtensionsEffects {
     private _game: GameFacade,
     private _router: Router
   ) {}
+}
+
+// if return false then only current game will be updated
+function shouldUpdateOtherGames(
+  command: Command,
+  oldCommand: Command
+): boolean {
+  if (!oldCommand) {
+    return false;
+  }
+
+  if (command.name !== oldCommand.name) {
+    return false;
+  }
+  if (command.num_params !== oldCommand.num_params) {
+    return false;
+  }
+
+  const attrs = command.attrs || {};
+  const oldAttrs = oldCommand.attrs || {};
+
+  if (attrs.is_unsupported !== oldAttrs.is_unsupported) {
+    return false;
+  }
+  if (attrs.is_nop !== oldAttrs.is_nop) {
+    return false;
+  }
+
+  return true;
 }

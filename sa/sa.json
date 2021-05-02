@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619981526704
+    "last_update": 1619982204726
   },
   "extensions": [
     {
@@ -1494,7 +1494,10 @@
           "num_params": 6,
           "short_desc": "Debug command used to print 6 floats on screen.",
           "class": "Debugger",
-          "member": "Line"
+          "member": "Line",
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -2503,12 +2506,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_global"
             }
@@ -2521,12 +2524,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "var_global"
             }
@@ -2539,12 +2542,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_global"
             }
@@ -2557,12 +2560,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "var_global"
             }
@@ -2575,12 +2578,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_local"
             }
@@ -2611,12 +2614,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_local"
             }
@@ -2629,12 +2632,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "var_local"
             }
@@ -2721,6 +2724,13 @@
           "short_desc": "Get the absolute value of a local variable float."
         },
         {
+          "output": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2730,16 +2740,16 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_FLOAT",
           "num_params": 1,
+          "short_desc": "Gets a random float between 0.0 to 1.0"
+        },
+        {
           "output": [
             {
-              "name": "_p1",
-              "type": "float",
+              "name": "",
+              "type": "int",
               "source": "var_any"
             }
           ],
-          "short_desc": "Gets a random float between 0"
-        },
-        {
           "attrs": {
             "is_overload": true,
             "is_static": true
@@ -2749,14 +2759,7 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_INT",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "short_desc": "Gets a random integer between 0 and 32767 (max signed 16-bit) and stores the result to a variable"
+          "short_desc": "Gets a random integer between 0 and 32767 (SA)/65535(III & VC)(max signed 16-bit) and stores the result to a variable."
         },
         {
           "input": [
@@ -6424,7 +6427,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             },
             {
@@ -11463,7 +11466,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -12484,7 +12487,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -16283,7 +16286,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -18076,7 +18079,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -18709,7 +18712,7 @@
           ],
           "output": [
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType",
               "source": "var_any"
             },
@@ -21251,7 +21254,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -24606,22 +24609,20 @@
           "member": "IsPlaybackGoingOn"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "range",
-              "type": "float"
-            }
-          ],
           "id": "060F",
           "name": "SET_SENSE_RANGE",
           "num_params": 2,
           "short_desc": "Sets the characters melee accuracy",
-          "class": "Char",
-          "member": "SetSenseRange"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "0610",
@@ -32176,28 +32177,23 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Searchlight",
-              "source": "var_any"
-            }
-          ],
           "id": "07A9",
           "name": "IS_CHAR_IN_ANY_SEARCHLIGHT",
           "num_params": 2,
           "short_desc": "Returns the handle for the searchlight that's targetting the character",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ],
           "attrs": {
             "is_condition": true
-          },
-          "class": "Char",
-          "member": "IsInAnySearchlight"
+          }
         },
         {
           "id": "07AA",
@@ -33980,25 +33976,20 @@
           ]
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Car",
-              "source": "var_any"
-            }
-          ],
           "id": "0811",
           "name": "GET_CAR_CHAR_IS_USING",
           "num_params": 2,
           "short_desc": "Stores a handle for the vehicle the character is in or entering",
-          "class": "Char",
-          "member": "GetCarIsUsing"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "input": [
@@ -43107,20 +43098,20 @@
           "member": "PlayAnimSecondary"
         },
         {
+          "id": "0A1B",
+          "name": "IS_CHAR_TOUCHING_CHAR",
+          "num_params": 2,
+          "short_desc": "Returns true if one character is touching the other",
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "other",
               "type": "Char"
             }
           ],
-          "id": "0A1B",
-          "name": "IS_CHAR_TOUCHING_CHAR",
-          "num_params": 2,
-          "short_desc": "Returns true if one character is touching the other",
           "attrs": {
             "is_condition": true
           },
@@ -43314,22 +43305,20 @@
           "short_desc": "Sets the radio station of the vehicle the player is currently in to the favourite station, retrieved from the stats (ID 326)"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "id": "0A27",
           "name": "SET_DEATH_WEAPONS_PERSIST",
           "num_params": 2,
           "short_desc": "Prevents pickups, which are created when this character dies, from dissapearing until picked up by the player",
-          "class": "Char",
-          "member": "SetDeathWeaponsPersist"
+          "input": [
+            {
+              "name": "_p1",
+              "type": "any"
+            },
+            {
+              "name": "_p2",
+              "type": "any"
+            }
+          ]
         },
         {
           "id": "0A28",

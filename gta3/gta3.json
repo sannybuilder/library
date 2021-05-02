@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619981526816
+    "last_update": 1619982238104
   },
   "extensions": [
     {
@@ -1505,7 +1505,10 @@
           "num_params": 6,
           "short_desc": "Debug command used to print 6 floats on screen.",
           "class": "Debugger",
-          "member": "Line"
+          "member": "Line",
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -2621,12 +2624,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_global"
             }
@@ -2639,12 +2642,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "var_global"
             }
@@ -2657,12 +2660,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_global"
             }
@@ -2675,12 +2678,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "var_global"
             }
@@ -2693,12 +2696,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_global"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_local"
             }
@@ -2729,12 +2732,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "float",
               "source": "var_local"
             }
@@ -2747,12 +2750,12 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "float",
               "source": "var_local"
             },
             {
-              "name": "_p2",
+              "name": "",
               "type": "int",
               "source": "var_local"
             }
@@ -2841,7 +2844,7 @@
         {
           "output": [
             {
-              "name": "result",
+              "name": "",
               "type": "float",
               "source": "var_any"
             }
@@ -2855,12 +2858,12 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_FLOAT",
           "num_params": 1,
-          "short_desc": "Gets a random float between 0.0 and 1.0 and stores the result into a variable."
+          "short_desc": "Gets a random float between 0.0 to 1.0"
         },
         {
           "output": [
             {
-              "name": "result",
+              "name": "",
               "type": "int",
               "source": "var_any"
             }
@@ -2874,7 +2877,7 @@
           "member": "Random",
           "name": "GENERATE_RANDOM_INT",
           "num_params": 1,
-          "short_desc": "Gets a random integer between 0 and 32767 (max signed 16-bit) and stores the result to a variable"
+          "short_desc": "Gets a random integer between 0 and 32767 (SA)/65535(III & VC)(max signed 16-bit) and stores the result to a variable."
         },
         {
           "input": [
@@ -2934,22 +2937,22 @@
           "short_desc": "Removes the character from the game and mission cleanup list, freeing game memory"
         },
         {
-          "class": "Char",
-          "id": "009C",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "path",
               "type": "int"
             }
           ],
+          "class": "Char",
+          "id": "009C",
           "member": "WanderDir",
           "name": "CHAR_WANDER_DIR",
           "num_params": 2,
-          "short_desc": "Set char to wander path"
+          "short_desc": "set char to wander path."
         },
         {
           "attrs": {
@@ -2960,44 +2963,44 @@
           "num_params": 0
         },
         {
-          "class": "Char",
-          "id": "009E",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "xCoord",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "yCoord",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "zCoord",
+              "name": "z",
               "type": "float"
             }
           ],
+          "class": "Char",
+          "id": "009E",
           "member": "FollowPath",
           "name": "CHAR_FOLLOW_PATH",
           "num_params": 4,
-          "short_desc": "Set char path"
+          "short_desc": "Set char Follow Path."
         },
         {
-          "class": "Char",
-          "id": "009F",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             }
           ],
+          "class": "Char",
+          "id": "009F",
           "member": "SetIdle",
           "name": "CHAR_SET_IDLE",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Set chat objective wait on foot."
         },
         {
           "input": [
@@ -7799,7 +7802,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             },
             {
@@ -15181,7 +15184,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -16752,7 +16755,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -22010,7 +22013,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],

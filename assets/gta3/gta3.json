@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619982238104
+    "last_update": 1619986826285
   },
   "extensions": [
     {
@@ -3060,17 +3060,17 @@
           "short_desc": "Puts the character at the specified X, Y and Z coordinates"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00A2",
-          "input": [
-            {
-              "name": "handle",
-              "type": "Char"
-            }
-          ],
           "member": "IsStillAlive",
           "name": "IS_CHAR_STILL_ALIVE",
           "num_params": 1,
@@ -3212,8 +3212,6 @@
           "short_desc": "Removes the vehicle from the game"
         },
         {
-          "class": "Car",
-          "id": "00A7",
           "input": [
             {
               "name": "self",
@@ -3232,7 +3230,9 @@
               "type": "float"
             }
           ],
-          "member": "Goto",
+          "class": "Car",
+          "id": "00A7",
+          "member": "GotoCoordinates",
           "name": "CAR_GOTO_COORDINATES",
           "num_params": 4,
           "short_desc": "Makes a car drive to the specified coordinates"
@@ -3323,21 +3323,21 @@
           "short_desc": "Places the car with the specified handle at the specified X, Y and Z coordinates"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "00AC",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "Car"
-            }
-          ],
           "member": "IsStillAlive",
           "name": "IS_CAR_STILL_ALIVE",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns true if the specified car exists and is still alive"
         },
         {
           "input": [

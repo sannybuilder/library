@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1619973202699
+    "last_update": 1619974597376
   },
   "extensions": [
     {
@@ -13143,17 +13143,17 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Text",
           "id": "0345",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetBackground",
           "name": "SET_TEXT_BACKGROUND",
           "num_params": 1,
@@ -25183,64 +25183,81 @@
           "member": "GetScriptTaskStatus"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Group",
+              "source": "var_any"
+            }
+          ],
           "id": "062F",
           "name": "CREATE_GROUP",
           "num_params": 2,
           "short_desc": "Creates a new group, which multiple characters can be assigned to, allowing control over all of them as a group",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "0630",
           "name": "SET_GROUP_LEADER",
           "num_params": 2,
           "short_desc": "Puts the specified character into the group as the leader",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "SetLeader"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "0631",
           "name": "SET_GROUP_MEMBER",
           "num_params": 2,
           "short_desc": "Puts the specified character into the group as a member",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "SetMember"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            }
+          ],
           "id": "0632",
           "name": "REMOVE_GROUP",
           "num_params": 1,
           "short_desc": "Releases the group",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "Remove",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "input": [
@@ -28985,58 +29002,64 @@
           "member": "GivePaintjob"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Group"
+            }
+          ],
           "id": "06EE",
           "name": "IS_GROUP_MEMBER",
           "num_params": 2,
           "short_desc": "Returns true if the character is a member of the specified group",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsGroupMember"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Group"
+            }
+          ],
           "id": "06EF",
           "name": "IS_GROUP_LEADER",
           "num_params": 2,
           "short_desc": "Returns true if the character is the leader of the specified group",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsGroupLeader"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            },
+            {
+              "name": "range",
+              "type": "float"
+            }
+          ],
           "id": "06F0",
           "name": "SET_GROUP_SEPARATION_RANGE",
           "num_params": 2,
           "short_desc": "Sets how far members of the group can be from the leader before they are removed from the group",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "SetSeparationRange"
         },
         {
           "id": "06F1",
@@ -32231,20 +32254,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Group",
+              "source": "var_any"
+            }
+          ],
           "id": "07AF",
           "name": "GET_PLAYER_GROUP",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Player",
+          "member": "GetGroup"
         },
         {
           "id": "07B0",
@@ -32292,20 +32320,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "id": "07B3",
           "name": "SET_GROUP_DEFAULT_TASK_ALLOCATOR",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "SetDefaultTaskAllocator"
         },
         {
           "id": "07B4",
@@ -32690,20 +32720,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "07CB",
           "name": "LISTEN_TO_PLAYER_GROUP_COMMANDS",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "ListenToPlayerGroupCommands"
         },
         {
           "id": "07CC",
@@ -33446,24 +33478,30 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            }
+          ],
+          "output": [
+            {
+              "name": "numLeaders",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "numMembers",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "07F6",
           "name": "GET_GROUP_SIZE",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "GetSize"
         },
         {
           "input": [
@@ -33562,19 +33600,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            }
+          ],
           "id": "07FD",
           "name": "DOES_GROUP_EXIST",
           "num_params": 1,
           "short_desc": "Returns true if the specified group exists",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Group",
+          "member": "DoesExist"
         },
         {
           "input": [
@@ -38930,24 +38970,29 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            },
+            {
+              "name": "slotId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "092B",
           "name": "GET_GROUP_MEMBER",
           "num_params": 3,
           "short_desc": "Returns the nth group member",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "GetMember"
         },
         {
           "id": "092C",
@@ -39296,20 +39341,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0940",
           "name": "SET_GROUP_FOLLOW_STATUS",
           "num_params": 2,
           "short_desc": "If set to 0, the group members will not enter a car when the leader does",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "SetFollowStatus"
         },
         {
           "input": [

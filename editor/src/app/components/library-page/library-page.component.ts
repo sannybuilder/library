@@ -57,14 +57,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
   entities$: Observable<Entity[]> = this._extensions.extensionNames$.pipe(
-    switchMap((extensions) => {
-      return extensions?.length
-        ? zip(...extensions.map((e) => this.getExtensionEntities(e)))
-        : of([]);
-    }),
-    map((entities) =>
-      sortedUniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
-    )
+    switchMap((extensions) => this.getExtensionsEntities(extensions))
   );
 
   command?: Command;
@@ -182,18 +175,24 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   getSnippet(extension: string, opcode: string) {
     return this._snippets.getSnippet(extension, opcode);
   }
-
-  getExtensionEntities(extension: string) {
-    return this._extensions.getExtensionEntities(extension);
+  getExtensionsEntities(extensions: string[]) {
+    return (extensions?.length
+      ? zip(...extensions.map((e) => this._extensions.getExtensionEntities(e)))
+      : of([])
+    ).pipe(
+      map((entities) =>
+        sortedUniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
+      )
+    );
   }
 
   getExtensionCommands(extension: string) {
     return this._extensions.getExtensionCommands(extension);
   }
 
-  getExtensionTypes(extension: string): Observable<ParamType[]> {
+  getExtensionTypes(...extensions: string[]): Observable<ParamType[]> {
     return combineLatest([
-      this.getExtensionEntities(extension),
+      this.getExtensionsEntities(extensions),
       this._game.primitiveTypes$,
       this.enumNames$,
     ]).pipe(

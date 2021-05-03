@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { Extension, Game, GameLibrary } from '../../models';
 import { GitHubService } from '../github/service';
@@ -19,17 +18,11 @@ export class ExtensionsService {
   loadExtensions(
     game: Game,
     accessToken?: string
-  ): Observable<{
-    extensions: Extension[];
-    lastUpdate: number;
-  }> {
-    return this._github
-      .loadFileGracefully(GameLibrary[game], accessToken, game)
-      .pipe(
-        map((data: LoadExtensionsResponse) => ({
-          extensions: data.extensions,
-          lastUpdate: data.meta.last_update,
-        }))
-      );
+  ): Observable<LoadExtensionsResponse> {
+    return this._github.loadFileGracefully(
+      GameLibrary[game],
+      accessToken,
+      game
+    );
   }
 }

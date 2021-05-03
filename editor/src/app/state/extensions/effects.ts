@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, zip } from 'rxjs';
+import { Router } from '@angular/router';
 import {
   tap,
   switchMap,
@@ -34,7 +35,7 @@ import {
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
 import { renameGameEnum } from '../enums/actions';
-import { Router } from '@angular/router';
+import { registerFileContent } from '../changes/actions';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -43,13 +44,20 @@ export class ExtensionsEffects {
       ofType(loadExtensions),
       withLatestFrom(this._auth.authToken$),
       concatMap(([{ game }, accessToken]) =>
-        this._service
-          .loadExtensions(game, accessToken)
-          .pipe(
-            map(({ extensions, lastUpdate }) =>
-              loadExtensionsSuccess({ game, extensions, lastUpdate })
-            )
-          )
+        this._service.loadExtensions(game, accessToken).pipe(
+          switchMap((response) => [
+            loadExtensionsSuccess({
+              game,
+              extensions: response.extensions,
+              lastUpdate: response.meta.last_update,
+            }),
+            registerFileContent({
+              fileName: GameLibrary[game],
+              lastUpdate: response.meta.last_update,
+              content: JSON.stringify(response, null, 2),
+            }),
+          ])
+        )
       )
     )
   );

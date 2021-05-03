@@ -8,14 +8,16 @@ import {
   registerSnippetChange,
   registerEnumChange,
   submitChanges,
+  registerFileContent,
 } from './actions';
 import * as selector from './selectors';
 
 @Injectable({ providedIn: 'root' })
 export class ChangesFacade {
-  changesCount$ = this.store$.select(selector.changesCount);
+  hasChanges$ = this.store$.select(selector.hasChanges);
   isUpdating$ = this.store$.select(selector.isUpdating);
   changes$ = this.store$.select(selector.changes);
+  snapshots$ = this.store$.select(selector.snapshots);
   github$ = this.store$.select(selector.github);
 
   constructor(private store$: Store) {}
@@ -42,5 +44,19 @@ export class ChangesFacade {
 
   initializeGithub(accessToken: string) {
     this.store$.dispatch(initializeGithub({ accessToken }));
+  }
+
+  registerFileContent({
+    fileName,
+    lastUpdate,
+    content,
+  }: {
+    fileName: string;
+    lastUpdate: number;
+    content: string;
+  }) {
+    this.store$.dispatch(
+      registerFileContent({ fileName, lastUpdate, content })
+    );
   }
 }

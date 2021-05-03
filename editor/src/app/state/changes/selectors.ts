@@ -8,9 +8,14 @@ export const changes = createSelector(
   (state: ChangesState) => state.changes
 );
 
-export const changesCount = createSelector(
-  changes,
-  (changes: Map<string, string>) => changes.size
+export const snapshots = createSelector(
+  state,
+  (state: ChangesState) => state.snapshots
+);
+
+export const hasChanges = createSelector(
+  state,
+  (state: ChangesState) => state.hasChanges
 );
 
 export const github = createSelector(

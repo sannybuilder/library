@@ -30,3 +30,13 @@ export const initializeGithub = createAction(
 );
 
 export const reloadPage = createAction('[changes] reload page');
+
+export const registerFileContent = createAction(
+  '[changes] register file content',
+  props<{ fileName: string; lastUpdate: number; content: string }>()
+);
+
+export const validateAndWriteFiles = createAction(
+  '[changes] validate and write files',
+  props<{ files: Array<{ path: string; content: string }> }>()
+);

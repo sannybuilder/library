@@ -181,11 +181,11 @@ export class UiEffects {
     { dispatch: false }
   );
 
-  changesCount$ = createEffect(
+  hasChanges$ = createEffect(
     () =>
-      this._changes.changesCount$.pipe(
-        tap((changesCount) => {
-          this._d.body.classList[changesCount > 0 ? 'add' : 'remove'](
+      this._changes.hasChanges$.pipe(
+        tap((hasChanges) => {
+          this._d.body.classList[hasChanges ? 'add' : 'remove'](
             'has-unsubmitted-changes'
           );
         })

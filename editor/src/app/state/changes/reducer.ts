@@ -11,6 +11,7 @@ import { stripSourceAny, smash } from '../../utils';
 import {
   clearChanges,
   initializeGithub,
+  registerFileContent,
   registerEnumChange,
   registerExtensionsChange,
   registerSnippetChange,
@@ -19,41 +20,62 @@ import {
   submitChangesSuccess,
 } from './actions';
 
+type FileName = string;
 export interface ChangesState {
-  changes: Map<string, string>;
+  changes: Record<FileName, string>;
+  snapshots: Record<FileName, { lastUpdate: number; content: string }>;
   github?: KoreFile;
   lastUpdate?: number;
   isUpdating: boolean;
+  hasChanges: boolean;
 }
 
 export const initialState: ChangesState = {
-  changes: new Map(),
+  changes: {},
+  snapshots: {},
   isUpdating: false,
+  hasChanges: false,
 };
 
 const _reducer = createReducer(
   initialState,
   on(registerExtensionsChange, (state, { fileName, content }) => {
-    const newMap = new Map(state.changes);
-    const lastUpdate = Date.now();
-    const newContent = {
-      meta: {
-        last_update: lastUpdate,
+    const newContent = JSON.stringify(
+      {
+        meta: {
+          last_update: Date.now(),
+        },
+        extensions: stripBody(content),
       },
-      extensions: stripBody(content),
+      null,
+      2
+    );
+
+    return {
+      ...state,
+      hasChanges: true,
+      changes: {
+        ...state.changes,
+        [fileName]: newContent,
+      },
     };
-    newMap.set(fileName, JSON.stringify(newContent, null, 2));
-    return { ...state, changes: newMap };
   }),
   on(registerSnippetChange, (state, { fileName, content }) => {
-    const newMap = new Map(state.changes);
-    newMap.set(fileName, content);
-    return { ...state, changes: newMap };
+    return {
+      ...state,
+      hasChanges: true,
+      changes: { ...state.changes, [fileName]: content },
+    };
   }),
   on(registerEnumChange, (state, { fileName, content }) => {
-    const newMap = new Map(state.changes);
-    newMap.set(fileName, JSON.stringify(content, null, 2));
-    return { ...state, changes: newMap };
+    return {
+      ...state,
+      hasChanges: true,
+      changes: {
+        ...state.changes,
+        [fileName]: JSON.stringify(content, null, 2),
+      },
+    };
   }),
   on(submitChanges, (state) => ({ ...state, isUpdating: true })),
   on(submitChangesSuccess, () => ({
@@ -61,7 +83,7 @@ const _reducer = createReducer(
   })),
   on(submitChangesFail, (state) => ({
     ...state,
-    changes: new Map(state.changes), // allow retry
+    changes: { ...state.changes }, // allow retry
     isUpdating: false,
   })),
   on(clearChanges, () => ({
@@ -79,7 +101,13 @@ const _reducer = createReducer(
           }),
         })
       : undefined,
-  }))
+  })),
+  on(registerFileContent, (state, { fileName, content, lastUpdate }) => {
+    return {
+      ...state,
+      snapshots: { ...state.snapshots, [fileName]: { lastUpdate, content } },
+    };
+  })
 );
 
 export function changesReducer(state: ChangesState, action: Action) {

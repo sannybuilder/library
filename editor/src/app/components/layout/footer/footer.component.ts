@@ -9,7 +9,7 @@ import { UiFacade, ChangesFacade, ExtensionsFacade } from '../../../state';
 export class FooterComponent {
   lastUpdate$ = this._extensions.lastUpdate$;
   displayLastUpdate$ = this._ui.displayLastUpdated$;
-  changesCount$ = this._changes.changesCount$;
+  hasChanges$ = this._changes.hasChanges$;
   isUpdating$ = this._changes.isUpdating$;
 
   constructor(

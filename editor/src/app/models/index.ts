@@ -184,3 +184,10 @@ export interface Enum {
 }
 
 export type ParamType = Entity | Primitive | Enum;
+
+export interface LoadExtensionsResponse {
+  meta: {
+    last_update: number;
+  };
+  extensions: Extension[];
+}

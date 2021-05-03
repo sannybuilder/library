@@ -20,9 +20,9 @@ import {
 import { ChangesFacade } from './facade';
 import { Config, CONFIG } from '../../config';
 import { toPairs } from 'lodash';
-import { ExtensionsService } from '../extensions/service';
-import { Game, GameLibrary } from '../../models';
+import { Game, GameLibrary, LoadExtensionsResponse } from '../../models';
 import { AuthFacade } from '../auth/facade';
+import { GitHubService } from '../github';
 
 @Injectable({ providedIn: 'root' })
 export class ChangesEffects {
@@ -66,8 +66,12 @@ export class ChangesEffects {
               return of(file);
             }
             const game = gameByExtensionFile(file.path);
-            return this._extensionsService
-              .loadExtensions(game, accessToken)
+            return this._gitHub
+              .loadFileFromApi<LoadExtensionsResponse>(
+                file.path,
+                accessToken,
+                game
+              )
               .pipe(
                 withLatestFrom(this._facade.snapshots$),
                 map(([response, snapshots]) => {
@@ -122,7 +126,7 @@ export class ChangesEffects {
     private _actions$: Actions,
     private _facade: ChangesFacade,
     private _auth: AuthFacade,
-    private _extensionsService: ExtensionsService,
+    private _gitHub: GitHubService,
     @Inject(CONFIG) private _config: Config
   ) {}
 }

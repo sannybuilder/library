@@ -7,6 +7,7 @@ import { CONFIG, Config } from '../../config';
 import { Game } from '../../models';
 
 import type { components } from '@octokit/openapi-types';
+import { Observable } from 'rxjs';
 
 export type GetRepoContentResponseDataBlob = components['schemas']['blob'];
 export type GetRepoContentResponseDataDirectory = components['schemas']['content-directory'];
@@ -18,45 +19,54 @@ export class GitHubService {
     private _http: HttpClient
   ) {}
 
-  loadFileGracefully(fileName: string, accessToken: string, game: Game) {
-    const ts = Date.now().toString();
+  loadFileGracefully<T extends object>(
+    fileName: string,
+    accessToken: string,
+    game: Game
+  ): Observable<T> {
     return this._http
-      .get(Location.joinWithSlash(this._config.endpoints.base, fileName))
+      .get<T>(Location.joinWithSlash(this._config.endpoints.base, fileName))
       .pipe(
-        catchError(() => {
-          const headers = accessToken
-            ? new HttpHeaders({
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`,
-              })
-            : undefined;
-          return this._http
-            .get<GetRepoContentResponseDataDirectory>(
-              Location.joinWithSlash(this._config.endpoints.contents, game),
-              {
-                headers,
-              }
-            )
-            .pipe(
-              switchMap((dir) => {
-                const { git_url } =
-                  dir.find((file) => file.path === fileName) ?? {};
-                if (!git_url) {
-                  throw new Error(`File ${fileName} not found in the repo`);
-                }
-                return this._http
-                  .get<GetRepoContentResponseDataBlob>(git_url, {
-                    headers,
-                  })
-                  .pipe(map((blob) => JSON.parse(atob(blob.content))));
-              }),
-              catchError(() =>
-                this._http.get(Location.joinWithSlash('/assets', fileName), {
-                  params: { ts },
-                })
-              )
-            );
+        catchError(() => this.loadFileFromApi<T>(fileName, accessToken, game))
+      );
+  }
+
+  loadFileFromApi<T extends object>(
+    fileName: string,
+    accessToken: string,
+    game: Game
+  ): Observable<T> {
+    const ts = Date.now().toString();
+    const headers = accessToken
+      ? new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         })
+      : undefined;
+    return this._http
+      .get<GetRepoContentResponseDataDirectory>(
+        Location.joinWithSlash(this._config.endpoints.contents, game),
+        {
+          headers,
+        }
+      )
+      .pipe(
+        switchMap((dir) => {
+          const { git_url } = dir.find((file) => file.path === fileName) ?? {};
+          if (!git_url) {
+            throw new Error(`File ${fileName} not found in the repo`);
+          }
+          return this._http
+            .get<GetRepoContentResponseDataBlob>(git_url, {
+              headers,
+            })
+            .pipe(map((blob) => JSON.parse(atob(blob.content))));
+        }),
+        catchError(() =>
+          this._http.get(Location.joinWithSlash('/assets', fileName), {
+            params: { ts },
+          })
+        )
       );
   }
 }

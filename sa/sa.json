@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620049428828
+    "last_update": 1620064524855
   },
   "extensions": [
     {
@@ -25646,48 +25646,58 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Fx",
+              "source": "var_any"
+            }
+          ],
           "id": "064B",
           "name": "CREATE_FX_SYSTEM",
           "num_params": 6,
           "short_desc": "Creates a particle effect",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Fx"
+            }
+          ],
           "id": "064C",
           "name": "PLAY_FX_SYSTEM",
           "num_params": 1,
           "short_desc": "Makes the specified particle visible",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "Play"
         },
         {
           "id": "064D",
@@ -25699,40 +25709,49 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Fx"
+            }
+          ],
           "id": "064E",
           "name": "STOP_FX_SYSTEM",
           "num_params": 1,
           "short_desc": "Stops the specified particle at the source",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "Stop"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Fx"
+            }
+          ],
           "id": "064F",
           "name": "PLAY_AND_KILL_FX_SYSTEM",
           "num_params": 1,
           "short_desc": "Starts the particle effect and relinquishes script control over it",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "PlayAndKill"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Fx"
+            }
+          ],
           "id": "0650",
           "name": "KILL_FX_SYSTEM",
           "num_params": 1,
           "short_desc": "Stops the particle and deletes it",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "Kill",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "id": "0651",
@@ -26174,256 +26193,304 @@
           "member": "ShootAtCoord"
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Fx",
+              "source": "var_any"
+            }
+          ],
           "id": "0669",
           "name": "CREATE_FX_SYSTEM_ON_CHAR",
           "num_params": 7,
           "short_desc": "Creates a particle attached to a character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "CreateOnChar",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "xDirection",
+              "type": "float"
+            },
+            {
+              "name": "yDirection",
+              "type": "float"
+            },
+            {
+              "name": "zDirection",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Fx",
+              "source": "var_any"
+            }
+          ],
           "id": "066A",
           "name": "CREATE_FX_SYSTEM_ON_CHAR_WITH_DIRECTION",
           "num_params": 10,
           "short_desc": "Creates a particle effect attached to a character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Fx",
+          "member": "CreateOnCharWithDirection"
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Fx",
+              "source": "var_any"
+            }
+          ],
           "id": "066B",
           "name": "CREATE_FX_SYSTEM_ON_CAR",
           "num_params": 7,
           "short_desc": "Creates a particle effect attached to a vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "CreateOnCar",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "xDirection",
+              "type": "float"
+            },
+            {
+              "name": "yDirection",
+              "type": "float"
+            },
+            {
+              "name": "zDirection",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Fx",
+              "source": "var_any"
+            }
+          ],
           "id": "066C",
           "name": "CREATE_FX_SYSTEM_ON_CAR_WITH_DIRECTION",
           "num_params": 10,
           "short_desc": "Creates a particle and attaches it to the specified vehicle with the specified offset and direction",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "CreateOnCarWithDirection",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Fx",
+              "source": "var_any"
+            }
+          ],
           "id": "066D",
           "name": "CREATE_FX_SYSTEM_ON_OBJECT",
           "num_params": 7,
           "short_desc": "Creates a particle effect on an object",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "CreateOnObject",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "xDirection",
+              "type": "float"
+            },
+            {
+              "name": "yDirection",
+              "type": "float"
+            },
+            {
+              "name": "zDirection",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Fx",
+              "source": "var_any"
+            }
+          ],
           "id": "066E",
           "name": "CREATE_FX_SYSTEM_ON_OBJECT_WITH_DIRECTION",
           "num_params": 10,
           "short_desc": "Creates particle effect on an object",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "attrs": {
+            "is_constructor": true
+          },
+          "member": "CreateOnObjectWithDirection"
         },
         {
           "id": "066F",
@@ -36008,24 +36075,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Fx"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "boneId",
+              "type": "int"
+            }
+          ],
           "id": "0883",
           "name": "ATTACH_FX_SYSTEM_TO_CHAR_BONE",
           "num_params": 3,
           "short_desc": "Attaches the specified particle to the specified character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "AttachToCharBone"
         },
         {
           "id": "0884",
@@ -40309,16 +40378,21 @@
           "member": "IsEmergencyServices"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Fx"
+            }
+          ],
           "id": "0976",
           "name": "KILL_FX_SYSTEM_NOW",
           "num_params": 1,
           "short_desc": "Destroys the specified particle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "KillNow",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "id": "0977",

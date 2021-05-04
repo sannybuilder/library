@@ -59,7 +59,7 @@ export interface Param {
 
 export interface Command {
   id: string;
-  name: string;
+  name?: string; // can be undefined in delete flow
   attrs?: Partial<Attr>;
   num_params: number;
   input?: Param[];

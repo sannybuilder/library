@@ -27,7 +27,7 @@ export class CommandListComponent {
   loading$ = this._extensions.loading$;
   currentPage$ = this._ui.currentPage$;
   rows$ = this._ui.rows$;
-  rowsCount$ = this.rows$.pipe(map((rows) => rows.length));
+  rowsCount$ = this.rows$.pipe(map((rows) => rows?.length ?? 0));
 
   constructor(
     private _extensions: ExtensionsFacade,

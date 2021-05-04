@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { pickBy } from 'lodash';
 
 import {
@@ -37,7 +37,7 @@ export const initialState: ChangesState = {
   hasChanges: false,
 };
 
-const _reducer = createReducer(
+export const changesReducer = createReducer(
   initialState,
   on(registerExtensionsChange, (state, { fileName, content }) => {
     const newContent = JSON.stringify(
@@ -110,10 +110,6 @@ const _reducer = createReducer(
   })
 );
 
-export function changesReducer(state: ChangesState, action: Action) {
-  return _reducer(state, action);
-}
-
 function stripBody(extensions: Extension[]) {
   return extensions.map((e) => ({
     ...e,
@@ -122,7 +118,7 @@ function stripBody(extensions: Extension[]) {
         {
           ...c,
           id: c.id,
-          attrs: smash(c.attrs),
+          attrs: c.attrs ? smash(c.attrs) : c.attrs,
           class: c.attrs?.is_unsupported ? null : c.class,
           member: c.attrs?.is_unsupported ? null : c.member,
           short_desc: c.attrs?.is_unsupported ? null : c.short_desc,

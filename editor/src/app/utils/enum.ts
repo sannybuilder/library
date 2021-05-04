@@ -11,6 +11,9 @@ export const evaluateEnumValues = (
 ): EnumRaw['fields'] => {
   const shouldAllFieldsBeStrings = isStringEnum(fields);
   return fields.map((f) => {
+    if (f[1] === null) {
+      return f;
+    }
     const curVal = f[1].toString();
 
     // convert value to string or number depending on type of enum

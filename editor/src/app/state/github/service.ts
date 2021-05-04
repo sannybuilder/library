@@ -21,7 +21,7 @@ export class GitHubService {
 
   loadFileGracefully<T extends object>(
     fileName: string,
-    accessToken: string,
+    accessToken: string | undefined,
     game: Game
   ): Observable<T> {
     return this._http
@@ -33,7 +33,7 @@ export class GitHubService {
 
   loadFileFromApi<T extends object>(
     fileName: string,
-    accessToken: string,
+    accessToken: string | undefined,
     game: Game
   ): Observable<T> {
     const ts = Date.now().toString();

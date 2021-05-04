@@ -8,9 +8,10 @@ import * as selector from './selectors';
 @Injectable({ providedIn: 'root' })
 export class GameFacade {
   primitiveTypes$ = this.store$.select(selector.primitiveTypes);
-  game$ = this.store$
-    .select(selector.game)
-    .pipe(distinctUntilChanged(), filter<Game>(Boolean));
+  game$ = this.store$.select(selector.game).pipe(
+    distinctUntilChanged(),
+    filter((v): v is Game => !!v)
+  );
 
   constructor(private store$: Store) {}
 

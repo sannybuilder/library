@@ -152,19 +152,19 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onCloneEnum(game: Game) {
-    this._enums.cloneEnum({ enumToClone: this.enumToDisplayOrEdit, game });
+    this._enums.cloneEnum({ enumToClone: this.enumToDisplayOrEdit!, game });
   }
 
   onDeleteCommand() {
-    this.command.name = undefined;
+    this.command!.name = undefined;
     this._onSaveCommand();
   }
 
   onCloneCommand(game: Game) {
     this._extensions.cloneCommand({
       game,
-      command: this.command,
-      extension: this.extension,
+      command: this.command!,
+      extension: this.extension!,
     });
   }
 
@@ -232,7 +232,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (viewMode === ViewMode.EditCommand) {
       // class & member should be both empty or both filed
-      return !!this.command?.class !== !!this.command.member;
+      return !!this.command?.class !== !!this.command?.member;
     }
     if (viewMode === ViewMode.EditEnum) {
       return false;
@@ -243,11 +243,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   resetChanges(viewMode: ViewMode) {
     if (viewMode === ViewMode.EditCommand) {
-      this.onEditCommand(this.oldCommand, this.oldExtension);
+      this.onEditCommand(this.oldCommand!, this.oldExtension!);
       this.snippet = this.oldSnippet;
     }
     if (viewMode === ViewMode.EditEnum) {
-      this.onEditEnum(this.oldEnumToEdit);
+      this.onEditEnum(this.oldEnumToEdit!);
     }
     return false;
   }
@@ -268,15 +268,15 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private _onSaveCommand() {
     this._extensions.updateCommand({
-      newExtension: this.extension,
-      oldExtension: this.oldExtension,
+      newExtension: this.extension!,
+      oldExtension: this.oldExtension!,
       command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
     });
     if (this.snippet !== this.oldSnippet) {
       this._snippets.updateSnippet({
-        extension: this.extension,
-        command: this.command,
-        content: this.snippet,
+        extension: this.extension!,
+        command: this.command!,
+        content: this.snippet!,
       });
     }
 
@@ -285,8 +285,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private _onSaveEnum() {
     this._enums.updateEnum({
-      enumToEdit: this.enumToDisplayOrEdit,
-      oldEnumToEdit: this.oldEnumToEdit,
+      enumToEdit: this.enumToDisplayOrEdit!,
+      oldEnumToEdit: this.oldEnumToEdit!,
     });
     this._ui.stopEditOrDisplay();
   }

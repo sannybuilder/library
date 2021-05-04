@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { authorizeSuccess, authorizeFail, gotUser } from './actions';
 
 export interface AuthState {
@@ -12,7 +12,7 @@ export const initialState: AuthState = {
   userName: 'guest',
 };
 
-const _reducer = createReducer(
+export const authReducer = createReducer<AuthState>(
   initialState,
   on(gotUser, (state, { login, avatarUrl, profileUrl }) => ({
     ...state,
@@ -28,7 +28,3 @@ const _reducer = createReducer(
     ...initialState,
   }))
 );
-
-export function authReducer(state: AuthState, action: Action) {
-  return _reducer(state, action);
-}

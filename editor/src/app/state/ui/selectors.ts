@@ -11,7 +11,8 @@ export const state = createFeatureSelector<UiState>('ui');
 const gameState = createSelector(
   state,
   game,
-  (state: UiState, game: Game) => state.games[game]
+  (state: UiState, game: Game | undefined) =>
+    game ? state.games[game] : undefined
 );
 
 export const selectedAttributesOnly = createSelector(
@@ -26,24 +27,26 @@ export const selectedAttributesExcept = createSelector(
 
 export const selectedExtensions = createSelector(
   gameState,
-  (state: GameState) => state?.selectedExtensions
+  (state: GameState | undefined) => state?.selectedExtensions
 );
 
 export const isExtensionSelected = createSelector(
   selectedExtensions,
-  (selectedExtensions: string[], props: { extension: string }) =>
+  (selectedExtensions: string[] | undefined, props: { extension: string }) =>
     selectedExtensions?.includes(props.extension)
 );
 
 export const selectedClasses = createSelector(
   gameState,
-  (state: GameState) => state?.selectedClasses
+  (state: GameState | undefined) => state?.selectedClasses
 );
 
 export const isClassSelected = createSelector(
   selectedClasses,
-  (selectedClasses: string[], props: { className: string | 'any' | 'none' }) =>
-    selectedClasses?.includes(props.className)
+  (
+    selectedClasses: string[] | undefined,
+    props: { className: string | 'any' | 'none' }
+  ) => selectedClasses?.includes(props.className)
 );
 
 export const isAttributeSelectedOnly = createSelector(
@@ -144,7 +147,7 @@ function filterCommands(
   commands: Command[],
   only: Attribute[],
   except: Attribute[],
-  classes: string[]
+  classes: string[] | undefined
 ) {
   return commands.filter(
     (command) =>

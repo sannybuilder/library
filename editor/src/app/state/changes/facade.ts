@@ -42,7 +42,7 @@ export class ChangesFacade {
     this.store$.dispatch(submitChanges());
   }
 
-  initializeGithub(accessToken: string) {
+  initializeGithub(accessToken: string | undefined) {
     this.store$.dispatch(initializeGithub({ accessToken }));
   }
 

@@ -101,7 +101,7 @@ export class ChangesEffects {
         ).pipe(
           withLatestFrom(this._facade.github$),
           switchMap(([files, github]) => {
-            return from(github.writeFiles(files)).pipe(
+            return from(github!.writeFiles(files)).pipe(
               switchMap(() => [submitChangesSuccess(), reloadPage()])
             );
           })
@@ -136,5 +136,7 @@ function isExtensionFile(fileName: string) {
 }
 
 function gameByExtensionFile(fileName: string): Game {
-  return Object.entries(GameLibrary).find(([, f]) => f === fileName)[0] as Game;
+  return Object.entries(GameLibrary).find(
+    ([, f]) => f === fileName
+  )?.[0] as Game;
 }

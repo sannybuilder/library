@@ -50,7 +50,7 @@ const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
 })
 export class CommandEditorComponent implements OnInit {
   private _command: Command;
-  private _supportInfo: GameSupportInfo[];
+  private _supportInfo: GameSupportInfo[] | undefined;
 
   PrimitiveType = PrimitiveType;
   SourceType = SourceType;
@@ -133,7 +133,7 @@ export class CommandEditorComponent implements OnInit {
         dynamic: [],
         enum: [],
         static: [],
-      }
+      } as Record<ParamType['type'], string[]>
     );
 
     this.paramTypes = uniq([...primitives, ...enums, ...dynamics]);
@@ -295,7 +295,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   get suggestedClassName(): string {
-    const parts = this.command.name?.split('_');
+    const parts = this.command.name!.split('_');
 
     switch (parts[1]?.toUpperCase()) {
       case 'PLAYER':
@@ -326,7 +326,7 @@ export class CommandEditorComponent implements OnInit {
   get suggestedClassMember(): string {
     const className = this.suggestedClassName;
     if (className && this.command.class === className) {
-      const parts = this.command.name.split('_');
+      const parts = this.command.name!.split('_');
       parts.splice(1, 1);
       return parts.map(capitalize).join('');
     }
@@ -349,7 +349,7 @@ export class CommandEditorComponent implements OnInit {
         'Blip',
         'Menu',
         'Group',
-      ].includes(this.command.class)
+      ].includes(this.command.class!)
     ) {
       return 'self';
     }
@@ -357,7 +357,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   getSuggestedInputType(index: number): string {
-    const { name, type } = this.command.input?.[index] ?? {};
+    const { name, type } = this.command.input?.[index] ?? { name: '' };
     if (
       this.primitives.includes(type as PrimitiveType) &&
       (name || this.getSuggestedInputName(index)) === 'self'
@@ -470,13 +470,13 @@ export class CommandEditorComponent implements OnInit {
   }
 
   deleteInput(index: number) {
-    this.command.input.splice(index, 1);
+    this.command.input!.splice(index, 1);
     this.command.num_params--;
     this.updateErrors();
   }
 
   deleteOutput(index: number) {
-    this.command.output.splice(index, 1);
+    this.command.output!.splice(index, 1);
     this.command.num_params--;
     this.updateErrors();
   }
@@ -514,7 +514,7 @@ export class CommandEditorComponent implements OnInit {
 
   private updateNoOutputParamsError() {
     this.errors.noConstructorWithoutOutputParams =
-      this.command.attrs?.is_constructor && !this.command.output?.length;
+      !!this.command.attrs?.is_constructor && !this.command.output?.length;
   }
 
   private updateEmptyNameError() {

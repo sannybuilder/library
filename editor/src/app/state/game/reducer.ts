@@ -1,15 +1,17 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { Game, PrimitiveType } from '../../models';
 import { onListEnter } from './actions';
 
 export interface GameState {
   game?: Game;
-  primitiveTypes?: PrimitiveType[];
+  primitiveTypes: PrimitiveType[];
 }
 
-export const initialState: GameState = {};
+export const initialState: GameState = {
+  primitiveTypes: [],
+};
 
-const _reducer = createReducer(
+export const gameReducer = createReducer(
   initialState,
   on(onListEnter, (state, { game }) => ({
     ...state,
@@ -17,10 +19,6 @@ const _reducer = createReducer(
     primitiveTypes: primitiveTypes(game),
   }))
 );
-
-export function gameReducer(state: GameState, action: Action) {
-  return _reducer(state, action);
-}
 
 function primitiveTypes(game: Game): PrimitiveType[] {
   const types = [

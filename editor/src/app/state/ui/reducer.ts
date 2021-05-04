@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { intersection, partition, without } from 'lodash';
 
 import { Command, ViewMode, Attribute, Game, EnumRaw } from '../../models';
@@ -25,7 +25,7 @@ export interface GameState {
 }
 
 export interface UiState {
-  searchTerm?: string;
+  searchTerm: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
   selectedAttributesOnly: Attribute[];
@@ -73,7 +73,7 @@ export const initialState: UiState = {
   currentPage: 1,
 };
 
-const _reducer = createReducer(
+export const uiReducer = createReducer(
   initialState,
   on(toggleAttribute, (state, { attribute, modifier }) => {
     const attributes =
@@ -184,10 +184,6 @@ const _reducer = createReducer(
     viewMode: ViewMode.ViewAllEnums,
   }))
 );
-
-export function uiReducer(state: UiState, action: Action) {
-  return _reducer(state, action);
-}
 
 function updateState(state: UiState, game: Game, newState: Partial<GameState>) {
   return {

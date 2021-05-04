@@ -25,5 +25,5 @@ export const authTokenSelector = createSelector(
 
 export const isAuthorizedSelector = createSelector(
   authTokenSelector,
-  (token: string) => !!token
+  (token: string | undefined) => !!token
 );

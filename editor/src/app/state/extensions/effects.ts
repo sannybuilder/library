@@ -284,7 +284,7 @@ export class ExtensionsEffects {
 // if return false then only current game will be updated
 function shouldUpdateOtherGames(
   command: Command,
-  oldCommand: Command
+  oldCommand?: Command
 ): boolean {
   if (!oldCommand) {
     return false;

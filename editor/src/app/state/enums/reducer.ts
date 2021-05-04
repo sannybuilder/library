@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { EnumRaw, Enums, Game } from '../../models';
 import { loadEnumsSuccess, renameGameEnum, updateGameEnum } from './actions';
 import { fromPairs, mapValues } from 'lodash';
@@ -12,7 +12,7 @@ export const initialState: EnumsState = {
   enums: {},
 };
 
-const _reducer = createReducer(
+export const enumsReducer = createReducer(
   initialState,
   on(loadEnumsSuccess, (state, { game, enums }) =>
     updateState(state, game, enums)
@@ -61,8 +61,4 @@ function makeEnum(fields: EnumRaw['fields']) {
     const matches = /^"(.*)"$/.exec(v.toString());
     return matches ? matches[1] : v;
   });
-}
-
-export function enumsReducer(state: EnumsState, action: Action) {
-  return _reducer(state, action);
 }

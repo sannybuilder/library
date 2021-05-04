@@ -14,7 +14,7 @@ import * as selector from './selectors';
 export class ExtensionsFacade {
   extensions$ = this.store$
     .select(selector.extensions)
-    .pipe(filter<Extension[]>(Boolean));
+    .pipe(filter((v): v is Extension[] => !!v));
 
   extensionNames$ = this.store$.select(selector.extensionNames);
   entities$ = this.store$.select(selector.entities);

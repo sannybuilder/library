@@ -30,7 +30,7 @@ export function getSameCommands(
   if (!supportInfo) {
     return [{ game, level: SupportLevel.Supported }];
   }
-  const curr = supportInfo.find((i) => i.game === game);
+  const curr = supportInfo.find((i) => i.game === game)!;
   // also update the same command in other games
   const others =
     curr.level === SupportLevel.Supported

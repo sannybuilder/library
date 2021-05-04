@@ -57,7 +57,7 @@ export class UiEffects {
             return [displayEnumsList()];
           }
           return this._enums.enums$.pipe(
-            first<Enums>(Boolean),
+            first((v): v is Enums => !!v),
             map((enums) => {
               const name =
                 enumName.toLowerCase() === 'new'
@@ -89,7 +89,7 @@ export class UiEffects {
             return [displayClassesList()];
           }
           return this._extensions.entities$.pipe(
-            first<Record<string, Entity[]>>(Boolean),
+            first((v): v is Record<string, Entity[]> => !!v),
             map((entities) => {
               if (flatMap(entities).some((e) => e.name === className)) {
                 return displayClassOverview({ className });
@@ -128,7 +128,7 @@ export class UiEffects {
 
               return displayOrEditCommandInfo({
                 extension,
-                command: commandToEdit,
+                command: commandToEdit!,
                 viewMode: ViewMode.ViewCommand,
               });
             })
@@ -165,8 +165,11 @@ export class UiEffects {
         rows?.findIndex((row) => row.command?.id === command?.id)
       ),
       withLatestFrom(this._ui.currentPage$),
-      filter(([index, currentPage]) => index >= 0 && currentPage !== index),
-      map(([index]) => changePage({ index: Math.ceil((index + 1) / 100) }))
+      filter(
+        ([index, currentPage]) =>
+          index !== undefined && index >= 0 && currentPage !== index
+      ),
+      map(([index]) => changePage({ index: Math.ceil((index! + 1) / 100) }))
     )
   );
 
@@ -213,7 +216,7 @@ export class UiEffects {
           switchMap(([prev, curr]) => {
             const p = prev.extensions.map(({ name }) => name);
             const c = curr.extensions.map(({ name }) => name);
-            const game = curr.game;
+            const game = curr.game!;
 
             const added = c.filter((e) => !p.includes(e));
             const removed = p.filter((e) => !c.includes(e));

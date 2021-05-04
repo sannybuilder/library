@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { ExtensionSnippets, Game } from '../../models';
 import { loadSnippetsSuccess, updateGameSnippet } from './actions';
 
@@ -10,7 +10,7 @@ export const initialState: SnippetsState = {
   extensionSnippets: {},
 };
 
-const _reducer = createReducer(
+export const snippetsReducer = createReducer(
   initialState,
   on(loadSnippetsSuccess, (state, { game, extensionSnippets }) => ({
     ...state,
@@ -33,7 +33,3 @@ const _reducer = createReducer(
     },
   }))
 );
-
-export function snippetsReducer(state: SnippetsState, action: Action) {
-  return _reducer(state, action);
-}

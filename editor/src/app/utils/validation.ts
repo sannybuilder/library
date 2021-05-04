@@ -20,8 +20,8 @@ export function isAnyAttributeInvalid(command: Command): boolean {
 
     // all other enabled attributes
     const other = entries.filter(([_k, _v]) => _k !== k && _v);
-    const allowed = ATTRIBUTE_RULES[k].allowed;
-    const disallowed = ATTRIBUTE_RULES[k].disallowed;
+    const allowed = ATTRIBUTE_RULES[k]?.allowed;
+    const disallowed = ATTRIBUTE_RULES[k]?.disallowed;
 
     // check if all enabled attributes allowed to pair with current attributes
     const isAllowedValid =

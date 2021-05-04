@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import {
   Command,
   Entity,
@@ -31,7 +31,7 @@ export const initialState: ExtensionsState = {
   games: {},
 };
 
-const _reducer = createReducer(
+export const extensionsReducer = createReducer(
   initialState,
   on(loadExtensions, (state, { game }) =>
     updateState(state, game, {
@@ -96,9 +96,13 @@ const _reducer = createReducer(
     });
   }),
   on(initSupportInfo, (state) => {
-    return Object.entries(state.games).reduce((s, [game, { extensions }]) => {
+    return Object.entries(state.games).reduce((s, [game, gameState]) => {
       return updateState(s, game as Game, {
-        supportInfo: getSupportInfo(extensions, state.games, game as Game),
+        supportInfo: getSupportInfo(
+          gameState!.extensions,
+          state.games,
+          game as Game
+        ),
       });
     }, state);
   })
@@ -118,10 +122,6 @@ function updateState(
   };
 }
 
-export function extensionsReducer(state: ExtensionsState, action: Action) {
-  return _reducer(state, action);
-}
-
 function upsertBy<T extends object, Key extends keyof T>(
   collection: T[],
   key: Key,
@@ -137,7 +137,7 @@ function upsertBy<T extends object, Key extends keyof T>(
       found = true;
       const newItem = onFound(item);
       if (newItem !== null) {
-        newCollection.push(onFound(item));
+        newCollection.push(newItem);
       }
     } else {
       newCollection.push(item);
@@ -194,7 +194,7 @@ function getSupportInfo(
         level: getSupportLevel(
           game === v3
             ? command
-            : getCommand(state[v3].extensions, name, command),
+            : getCommand(state[v3]?.extensions, name, command),
           command
         ),
       }));
@@ -205,15 +205,15 @@ function getSupportInfo(
 }
 
 function getCommand(
-  extensions: Extension[],
+  extensions: Extension[] | undefined,
   extensionName: string,
   command: Command
-) {
+): Command | undefined {
   const extension = extensions?.find((e) => e.name === extensionName);
   return extension?.commands?.find((c) => c.id === command.id);
 }
 
-function getSupportLevel(command: Command, otherCommand: Command) {
+function getSupportLevel(command: Command | undefined, otherCommand: Command) {
   // no command with the same id
   if (!command) {
     return SupportLevel.DoesNotExist;

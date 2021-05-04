@@ -10,7 +10,7 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   private _handle: Modal;
 
   ngAfterViewInit() {
-    this._handle = new Modal(document.getElementById('modal'), {
+    this._handle = new Modal(document.getElementById('modal')!, {
       backdrop: 'static',
       keyboard: true,
     });

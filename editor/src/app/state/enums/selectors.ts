@@ -8,7 +8,8 @@ export const state = createFeatureSelector<EnumsState>('enums');
 export const enums = createSelector(
   state,
   game,
-  (state: EnumsState, game: Game) => state.enums[game]
+  (state: EnumsState, game: Game | undefined) =>
+    game ? state.enums[game] : undefined
 );
 
 export const enumNames = createSelector(enums, (enums) =>
@@ -17,7 +18,8 @@ export const enumNames = createSelector(enums, (enums) =>
 
 export const enumFields = createSelector(
   enums,
-  (enums: Enums, props: { enumName: string }) => enums?.[props.enumName]
+  (enums: Enums | undefined, props: { enumName: string }) =>
+    enums?.[props.enumName]
 );
 
 export const gameEnums = createSelector(

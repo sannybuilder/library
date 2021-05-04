@@ -47,7 +47,7 @@ export class SnippetsEffects {
       switchMap(([{ content, extension, command }, game]) => {
         return this._extensions.getCommandSupportInfo(command, extension).pipe(
           take(1),
-          switchMap((supportInfo: GameSupportInfo[]) =>
+          switchMap((supportInfo?: GameSupportInfo[]) =>
             getSameCommands(supportInfo, game).map((d) =>
               updateGameSnippet({
                 game: d.game,

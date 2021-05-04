@@ -90,7 +90,7 @@ function getSegmentsFromUrl(router: Router, url: string): string[] {
   );
 }
 
-function getGame(game: string): Game | undefined {
+function getGame(game: string | undefined): Game | undefined {
   if (game === 'gta3') {
     return Game.GTA3;
   }

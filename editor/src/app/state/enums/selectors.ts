@@ -3,7 +3,7 @@ import { Enums, Game } from '../../models';
 import { game } from '../game/selectors';
 import { EnumsState } from './reducer';
 
-export const state = createFeatureSelector('enums');
+export const state = createFeatureSelector<EnumsState>('enums');
 
 export const enums = createSelector(
   state,
@@ -28,7 +28,7 @@ export const gameEnums = createSelector(
 export const gamesWhereExist = createSelector(
   state,
   (state: EnumsState, props: { enumName: string }) => {
-    return Object.keys(state.enums).filter(
+    return (Object.keys(state.enums) as Game[]).filter(
       (game: Game) => !!state.enums[game]?.[props.enumName]
     );
   }

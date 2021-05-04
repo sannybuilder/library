@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
 export class RouteGuard implements CanActivate {
   constructor(private _router: Router, private _game: GameFacade) {}
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(_next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const segments = getSegmentsFromUrl(this._router, state.url);
 
     if (segments.length === 0) {
@@ -90,7 +90,7 @@ function getSegmentsFromUrl(router: Router, url: string): string[] {
   );
 }
 
-function getGame(game: string): Game {
+function getGame(game: string): Game | undefined {
   if (game === 'gta3') {
     return Game.GTA3;
   }
@@ -100,4 +100,6 @@ function getGame(game: string): Game {
   if (game === 'sa') {
     return Game.SA;
   }
+
+  return undefined;
 }

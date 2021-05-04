@@ -1,7 +1,7 @@
 <h5>{{ "ui.classOverview.title" | translate }}</h5>
 
 <pre *ngIf="classCommands" class="sample">
-class {{ className }} <span *ngIf="IsThisClassFromOtherExtension" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension:classCommands[0].extension } }}</span>
+class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension:classCommands[0].extension } }}</span>
 <ng-container *ngFor="let classCommand of classCommands"><ng-container 
     *ngTemplateOutlet="memberTemplate; 
     context: { command: classCommand.command, extension: classCommand.extension }"
@@ -40,7 +40,7 @@ class {{ className }} <span *ngIf="IsThisClassFromOtherExtension" class="comment
       >{{ command | classParams }}</ng-container
     > </code
   ><span
-    *ngIf="extension !== 'default' && !IsThisClassFromOtherExtension"
+    *ngIf="extension !== 'default' && !isThisClassFromOtherExtension"
     class="comment"
   >
     //

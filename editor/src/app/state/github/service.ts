@@ -60,10 +60,10 @@ export class GitHubService {
             .get<GetRepoContentResponseDataBlob>(git_url, {
               headers,
             })
-            .pipe(map((blob) => JSON.parse(atob(blob.content))));
+            .pipe(map((blob) => JSON.parse(atob(blob.content)) as T));
         }),
         catchError(() =>
-          this._http.get(Location.joinWithSlash('/assets', fileName), {
+          this._http.get<T>(Location.joinWithSlash('/assets', fileName), {
             params: { ts },
           })
         )

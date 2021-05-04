@@ -18,11 +18,11 @@ export interface GitCommitPushOptions {
   token?: string;
 }
 
-const getReferenceCommit = function (
+const getReferenceCommit = (
   octokit: Octokit,
   options: Pick<GitCommitPushOptions, 'owner' | 'repo' | 'ref'>
-) {
-  return octokit.git
+) =>
+  octokit.git
     .getRef({
       owner: options.owner,
       repo: options.repo,
@@ -31,13 +31,12 @@ const getReferenceCommit = function (
     .then((res) => {
       return { referenceCommitSha: res.data.object.sha };
     });
-};
 
-const createTree = function (
+const createTree = (
   octokit: Octokit,
   options: Pick<GitCommitPushOptions, 'owner' | 'repo' | 'files'>,
   data: { referenceCommitSha: string }
-) {
+) => {
   const promises = options.files.map((file) => {
     if (typeof file.content === 'string') {
       return octokit.git
@@ -91,12 +90,12 @@ const createTree = function (
   });
 };
 
-const createCommit = function (
+const createCommit = (
   octokit: Octokit,
   options: Pick<GitCommitPushOptions, 'owner' | 'repo' | 'commitMessage'>,
   data: any
-) {
-  return octokit.git
+) =>
+  octokit.git
     .createCommit({
       owner: options.owner,
       repo: options.repo,
@@ -107,23 +106,19 @@ const createCommit = function (
     .then((res) => {
       return { ...data, newCommitSha: res.data.sha };
     });
-};
 
-const updateReference = function (
+const updateReference = (
   github: Octokit,
   options: GitCommitPushOptions,
   data: any
-) {
-  return github.git
-    .updateRef({
-      owner: options.owner,
-      repo: options.repo,
-      ref: options.ref,
-      sha: data.newCommitSha,
-      force: options.forceUpdate,
-    })
-    .then((res) => {});
-};
+) =>
+  github.git.updateRef({
+    owner: options.owner,
+    repo: options.repo,
+    ref: options.ref,
+    sha: data.newCommitSha,
+    force: options.forceUpdate,
+  });
 
 export const getContent = (
   github: Octokit,
@@ -188,16 +183,14 @@ export const deleteFile = async (
   if (Array.isArray(data)) {
     throw new Error(`folder does not support`);
   }
-  return octokit.repos
-    .deleteFile({
-      owner,
-      repo,
-      path,
-      branch: ref.replace(/^refs\//, '').replace(/^heads\//, ''),
-      sha: data.sha,
-      message: commitMessage,
-    })
-    .then((res) => {});
+  return octokit.repos.deleteFile({
+    owner,
+    repo,
+    path,
+    branch: ref.replace(/^refs\//, '').replace(/^heads\//, ''),
+    sha: data.sha,
+    message: commitMessage,
+  });
 };
 
 export interface GitHubAdaptorOptions {
@@ -238,13 +231,16 @@ export const createGitHubAdaptor = (options: GitHubAdaptorOptions) => {
         ref: filledOptions.ref,
       });
     },
-    writeFile(filePath: string, content: string | ArrayBuffer): Promise<void> {
+    writeFile(
+      filePath: string,
+      content: string | ArrayBuffer
+    ): Promise<unknown> {
       const withFileOption = {
         ...filledOptions,
         files: [
           {
             path: filePath,
-            content: content,
+            content,
           },
         ],
       };
@@ -253,43 +249,19 @@ export const createGitHubAdaptor = (options: GitHubAdaptorOptions) => {
         typeof options.commitMessage.write === 'function'
           ? options.commitMessage.write(filePath)
           : `Update ${filePath}`;
-      return getReferenceCommit(octKit, filledOptions)
-        .then((data) => createTree(octKit, withFileOption, data))
-        .then((data) =>
-          createCommit(
-            octKit,
-            {
-              ...filledOptions,
-              commitMessage,
-            },
-            data
-          )
-        )
-        .then((data) => updateReference(octKit, withFileOption, data));
+      return commit(withFileOption, commitMessage);
     },
     writeFiles(
       files: { path: string; content: string | ArrayBuffer }[]
-    ): Promise<void> {
+    ): Promise<unknown> {
       const withFileOption = {
         ...filledOptions,
-        files: files,
+        files,
       };
       const commitMessage = `:memo: update commands`;
-      return getReferenceCommit(octKit, filledOptions)
-        .then((data) => createTree(octKit, withFileOption, data))
-        .then((data) =>
-          createCommit(
-            octKit,
-            {
-              ...filledOptions,
-              commitMessage,
-            },
-            data
-          )
-        )
-        .then((data) => updateReference(octKit, withFileOption, data));
+      return commit(withFileOption, commitMessage);
     },
-    deleteFile(filePath: string): Promise<void> {
+    deleteFile(filePath: string): Promise<unknown> {
       const commitMessage =
         options.commitMessage &&
         typeof options.commitMessage.delete === 'function'
@@ -297,9 +269,25 @@ export const createGitHubAdaptor = (options: GitHubAdaptorOptions) => {
           : `Delete ${filePath}`;
       return deleteFile(octKit, {
         ...filledOptions,
+        commitMessage,
         path: filePath,
-        commitMessage: commitMessage,
       });
     },
   };
+
+  function commit(withFileOption: any, commitMessage: string) {
+    return getReferenceCommit(octKit, filledOptions)
+      .then((data) => createTree(octKit, withFileOption, data))
+      .then((data) =>
+        createCommit(
+          octKit,
+          {
+            ...filledOptions,
+            commitMessage,
+          },
+          data
+        )
+      )
+      .then((data) => updateReference(octKit, withFileOption, data));
+  }
 };

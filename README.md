@@ -15,10 +15,10 @@ Discuss: https://github.com/sannybuilder/dev/discussions/136
 - Offers the complete list of script commands for GTA III and Vice City (SA in progress!) in a keyword or class form in addition to the native name
 - Describes the specifics of each command using extra attributes
 - Is aware of Sanny's Language Extensions
-- Is able to filter commands by attributes or using a search query
+- Has an advanced filtering and searching functionality
 - Provides information on support of the command in other games
 - Has a convenient online editor for authorized users (see Contributing) where changes could be committed from the browser to GitHub
-- Updates the classes.db file automatically after new commits pushed to GitHub
+- Provides the most recent classes.db and enums.txt files for download and use with Sanny Builder
 - Has the responsive design for using on mobile devices
 
 ## Contributing

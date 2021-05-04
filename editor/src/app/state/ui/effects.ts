@@ -209,25 +209,20 @@ export class UiEffects {
               .pipe(map((extensions) => ({ extensions, game })))
           ),
           startWith({ extensions: [] as Extension[] }),
-          pairwise(),
-          switchMap(
-            ([prev, curr]: [
-              { extensions: Extension[] },
-              { extensions: Extension[]; game: Game }
-            ]) => {
-              const p = prev.extensions.map(({ name }) => name);
-              const c = curr.extensions.map(({ name }) => name);
-              const game = curr.game;
+          pairwise<{ extensions: Extension[]; game?: Game }>(),
+          switchMap(([prev, curr]) => {
+            const p = prev.extensions.map(({ name }) => name);
+            const c = curr.extensions.map(({ name }) => name);
+            const game = curr.game;
 
-              const added = c.filter((e) => !p.includes(e));
-              const removed = p.filter((e) => !c.includes(e));
+            const added = c.filter((e) => !p.includes(e));
+            const removed = p.filter((e) => !c.includes(e));
 
-              return [
-                selectExtensions({ game, extensions: added, state: true }),
-                selectExtensions({ game, extensions: removed, state: false }),
-              ].filter(({ extensions }) => extensions.length > 0);
-            }
-          )
+            return [
+              selectExtensions({ game, extensions: added, state: true }),
+              selectExtensions({ game, extensions: removed, state: false }),
+            ].filter(({ extensions }) => extensions.length > 0);
+          })
         )
       )
     )

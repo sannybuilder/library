@@ -27,8 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   searchDebounced$ = new Subject<string>();
 
   activeRoute$ = this._router.events.pipe(
-    filter((event) => event instanceof NavigationEnd),
-    map((event: NavigationEnd) => {
+    filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+    map((event) => {
       const parts = event.url.split('/');
       return parts[1];
     })

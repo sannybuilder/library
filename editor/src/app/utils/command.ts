@@ -14,6 +14,7 @@ export function smash(value: object) {
   if (Object.keys(compressed).length > 0) {
     return compressed;
   }
+  return undefined;
 }
 
 export function stripSourceAny(param: Param) {

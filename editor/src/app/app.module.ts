@@ -51,7 +51,6 @@ import { uiReducer } from './state/ui/reducer';
 import { UiEffects } from './state/ui/effects';
 
 // game state
-import { GameEffects } from './state/game/effects';
 import { gameReducer } from './state/game/reducer';
 
 // enums state
@@ -196,7 +195,6 @@ export function loadTranslations(
       ChangesEffects,
       EnumsEffects,
       ExtensionsEffects,
-      GameEffects,
       SnippetsEffects,
       UiEffects,
     ]),

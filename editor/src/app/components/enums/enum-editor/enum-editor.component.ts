@@ -10,11 +10,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import {
-  capitalizeFirst,
-  evaluateEnumValues,
-  isStringEnum,
-} from '../../../utils';
+import { capitalizeFirst, isStringEnum } from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
 import { trim } from 'lodash';
 

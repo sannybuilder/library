@@ -7,12 +7,7 @@ import {
 } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Command, Game } from '../../../models';
-import {
-  ExtensionsFacade,
-  SnippetsFacade,
-  UiFacade,
-  GameFacade,
-} from '../../../state';
+import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
   selector: 'scl-command-list',
@@ -37,8 +32,7 @@ export class CommandListComponent {
   constructor(
     private _extensions: ExtensionsFacade,
     private _snippets: SnippetsFacade,
-    private _ui: UiFacade,
-    private _game: GameFacade
+    private _ui: UiFacade
   ) {}
 
   onEdit(command: Command, extension: string) {

@@ -3,7 +3,7 @@ import { Game } from '../../models';
 import { game } from '../game/selectors';
 import { SnippetsState } from './reducer';
 
-export const state = createFeatureSelector('snippets');
+export const state = createFeatureSelector<SnippetsState>('snippets');
 
 export const snippets = createSelector(
   state,

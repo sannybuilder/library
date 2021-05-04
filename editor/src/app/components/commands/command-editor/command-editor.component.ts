@@ -294,7 +294,7 @@ export class CommandEditorComponent implements OnInit {
     this.updateErrors();
   }
 
-  get suggestedClassName() {
+  get suggestedClassName(): string {
     const parts = this.command.name?.split('_');
 
     switch (parts[1]?.toUpperCase()) {
@@ -319,18 +319,21 @@ export class CommandEditorComponent implements OnInit {
       case 'GROUP':
         return 'Group';
     }
+
+    return '';
   }
 
-  get suggestedClassMember() {
+  get suggestedClassMember(): string {
     const className = this.suggestedClassName;
     if (className && this.command.class === className) {
       const parts = this.command.name.split('_');
       parts.splice(1, 1);
       return parts.map(capitalize).join('');
     }
+    return '';
   }
 
-  getSuggestedInputName(index: number) {
+  getSuggestedInputName(index: number): string {
     const { name } = this.command.input?.[index] ?? {};
     if (
       index === 0 &&
@@ -350,9 +353,10 @@ export class CommandEditorComponent implements OnInit {
     ) {
       return 'self';
     }
+    return '';
   }
 
-  getSuggestedInputType(index: number) {
+  getSuggestedInputType(index: number): string {
     const { name, type } = this.command.input?.[index] ?? {};
     if (
       this.primitives.includes(type as PrimitiveType) &&
@@ -385,9 +389,11 @@ export class CommandEditorComponent implements OnInit {
         }
       }
     }
+
+    return '';
   }
 
-  getSuggestedOutputName(index: number) {
+  getSuggestedOutputName(index: number): string {
     if (
       index === 0 &&
       this.command.attrs?.is_constructor &&
@@ -396,9 +402,10 @@ export class CommandEditorComponent implements OnInit {
     ) {
       return 'handle';
     }
+    return '';
   }
 
-  getSuggestedOutputType(index: number) {
+  getSuggestedOutputType(index: number): string {
     if (
       index === 0 &&
       this.command.output?.length === 1 &&
@@ -407,9 +414,10 @@ export class CommandEditorComponent implements OnInit {
     ) {
       return this.command.class || this.suggestedClassName;
     }
+    return '';
   }
 
-  getSuggestedOutputSource(index: number) {
+  getSuggestedOutputSource(index: number): string {
     if (
       index === 0 &&
       this.command.output?.length === 1 &&
@@ -418,6 +426,7 @@ export class CommandEditorComponent implements OnInit {
     ) {
       return SourceType.var_any;
     }
+    return '';
   }
 
   isParamNameDuplicate(name: string) {

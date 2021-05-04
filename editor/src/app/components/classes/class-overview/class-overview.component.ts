@@ -15,14 +15,14 @@ import { Command, Game } from '../../../models';
 })
 export class ClassOverviewComponent {
   private _classCommands: Array<{ command: Command; extension: string }>;
-  IsThisClassFromOtherExtension: boolean;
+  isThisClassFromOtherExtension: boolean;
   @Input() game: Game;
   @Input() className: string;
   @Input() set classCommands(
     val: Array<{ command: Command; extension: string }>
   ) {
     this._classCommands = val;
-    this.IsThisClassFromOtherExtension = val.every(
+    this.isThisClassFromOtherExtension = val.every(
       (c) => c.extension !== 'default'
     );
   }

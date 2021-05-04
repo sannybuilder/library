@@ -3,12 +3,14 @@ import { Command, Extension, Game, SupportInfo } from '../../models';
 import { game } from '../game/selectors';
 import { ExtensionsState, GameState } from './reducer';
 
-export const gamesState = createFeatureSelector('extensions');
+export const extensionsState = createFeatureSelector<ExtensionsState>(
+  'extensions'
+);
 
 export const state = createSelector(
-  gamesState,
+  extensionsState,
   game,
-  (games: ExtensionsState, game: Game) => games.games[game] ?? {}
+  (state: ExtensionsState, game: Game) => (state.games[game] ?? {}) as GameState
 );
 
 export const extensions = createSelector(
@@ -22,9 +24,9 @@ export const entities = createSelector(
 );
 
 export const gameExtensions = createSelector(
-  gamesState,
-  (games: ExtensionsState, props: { game: Game }) =>
-    games.games[props.game]?.extensions ?? []
+  extensionsState,
+  (state: ExtensionsState, props: { game: Game }) =>
+    state.games[props.game]?.extensions ?? []
 );
 
 export const extensionNames = createSelector(
@@ -75,7 +77,7 @@ export const commandSupportInfo = createSelector(
 );
 
 export const hasAnyLoadingInProgress = createSelector(
-  gamesState,
+  extensionsState,
   (state: ExtensionsState) =>
     Object.values(state.games).some(({ loading }) => loading)
 );

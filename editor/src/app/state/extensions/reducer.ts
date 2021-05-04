@@ -189,7 +189,7 @@ function getSupportInfo(
 ): SupportInfo {
   return extensions.reduce((m, { name, commands }) => {
     m[name] = commands.reduce((m2, command) => {
-      m2[command.id] = Object.keys(state).map((v3: Game) => ({
+      m2[command.id] = (Object.keys(state) as Game[]).map((v3) => ({
         game: v3,
         level: getSupportLevel(
           game === v3

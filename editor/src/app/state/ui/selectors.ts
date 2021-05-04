@@ -6,7 +6,7 @@ import { extensions } from '../extensions/selectors';
 import { game } from '../game/selectors';
 import { UiState, GameState } from './reducer';
 
-export const state = createFeatureSelector('ui');
+export const state = createFeatureSelector<UiState>('ui');
 
 const gameState = createSelector(
   state,
@@ -175,7 +175,7 @@ export const classToDisplayCommands = createSelector(
   classToDisplay,
   (extensions, classToDisplay) => {
     if (!classToDisplay) {
-      return;
+      return undefined;
     }
 
     const extensionCommands = flatMap(extensions, (extension) => {

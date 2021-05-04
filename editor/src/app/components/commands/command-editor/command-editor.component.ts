@@ -37,10 +37,13 @@ type ErrorType =
   | 'duplicateName'
   | 'duplicateParamName'
   | 'invalidAttributeCombo'
-  | 'noConstructorWithoutOutputParams';
+  | 'noConstructorWithoutOutputParams'
+  | 'noSelfInStaticMethod'
+  | 'missingSelfParamInMethod';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
+const SELF = 'self';
 
 @Component({
   selector: 'scl-command-editor',
@@ -69,6 +72,8 @@ export class CommandEditorComponent implements OnInit {
     duplicateName: false,
     duplicateParamName: false,
     noConstructorWithoutOutputParams: false,
+    noSelfInStaticMethod: false,
+    missingSelfParamInMethod: false,
   };
   errorMessages: string[] = [];
 
@@ -159,6 +164,8 @@ export class CommandEditorComponent implements OnInit {
     noConstructorWithoutOutputParams: this.updateNoOutputParamsError,
     emptyName: this.updateEmptyNameError,
     emptyOpcode: this.updateEmptyOpcodeError,
+    noSelfInStaticMethod: this.noSelfInStaticMethod,
+    missingSelfParamInMethod: this.missingSelfParamInMethod,
   };
 
   isDirty: boolean;
@@ -351,7 +358,7 @@ export class CommandEditorComponent implements OnInit {
         'Group',
       ].includes(this.command.class!)
     ) {
-      return 'self';
+      return SELF;
     }
     return '';
   }
@@ -360,7 +367,7 @@ export class CommandEditorComponent implements OnInit {
     const { name, type } = this.command.input?.[index] ?? { name: '' };
     if (
       this.primitives.includes(type as PrimitiveType) &&
-      (name || this.getSuggestedInputName(index)) === 'self'
+      (name || this.getSuggestedInputName(index)) === SELF
     ) {
       return this.command.class || this.suggestedClassName;
     }
@@ -523,5 +530,27 @@ export class CommandEditorComponent implements OnInit {
 
   private updateEmptyOpcodeError() {
     this.errors.emptyOpcode = !this.command.id;
+  }
+
+  private noSelfInStaticMethod() {
+    this.errors.noSelfInStaticMethod =
+      !!this.command.attrs?.is_static &&
+      this.getAllParams().some((p) => p.name === SELF);
+  }
+
+  private missingSelfParamInMethod() {
+    const { is_static, is_keyword, is_nop, is_unsupported, is_constructor } =
+      this.command.attrs ?? {};
+    const { class: className, member, num_params } = this.command;
+    this.errors.missingSelfParamInMethod =
+      !is_static &&
+      !is_keyword &&
+      !is_nop &&
+      !is_unsupported &&
+      !is_constructor &&
+      !!className &&
+      !!member &&
+      num_params > 0 &&
+      !this.getAllParams().some((p) => p.name === SELF);
   }
 }

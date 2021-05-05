@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620226079661
+    "last_update": 1620231961593
   },
   "extensions": [
     {
@@ -19129,32 +19129,32 @@
           }
         },
         {
-          "class": "Heli",
-          "id": "04D0",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             },
             {
-              "name": "_p2",
+              "name": "angle",
               "type": "float"
             }
           ],
+          "class": "Heli",
+          "id": "04D0",
           "member": "SetOrientation",
           "name": "SET_HELI_ORIENTATION",
           "num_params": 2,
           "short_desc": ""
         },
         {
-          "class": "Heli",
-          "id": "04D1",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             }
           ],
+          "class": "Heli",
+          "id": "04D1",
           "member": "ClearOrientation",
           "name": "CLEAR_HELI_ORIENTATION",
           "num_params": 1,
@@ -21253,11 +21253,11 @@
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -21932,18 +21932,18 @@
           "short_desc": ""
         },
         {
-          "class": "Char",
-          "id": "0588",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
+          "id": "0588",
           "member": "SetLoadCollisionFlag",
           "name": "SET_LOAD_COLLISION_FOR_CHAR_FLAG",
           "num_params": 2,
@@ -22451,13 +22451,9 @@
           ]
         },
         {
-          "id": "05A8",
-          "name": "GET_OBJECT_SPEED",
-          "num_params": 2,
-          "short_desc": "Gets the speed of the object",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -22466,6 +22462,10 @@
               "source": "var_any"
             }
           ],
+          "id": "05A8",
+          "name": "GET_OBJECT_SPEED",
+          "num_params": 2,
+          "short_desc": "Gets the speed of the object",
           "class": "Object",
           "member": "GetSpeed"
         },
@@ -25616,7 +25616,7 @@
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -29175,13 +29175,9 @@
           }
         },
         {
-          "id": "06F5",
-          "name": "GET_SCRIPT_FIRE_COORDS",
-          "num_params": 4,
-          "short_desc": "Gets the coordinates of the fire",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "ScriptFire"
             },
             {
@@ -29200,6 +29196,10 @@
               "source": "var_any"
             }
           ],
+          "id": "06F5",
+          "name": "GET_SCRIPT_FIRE_COORDS",
+          "num_params": 4,
+          "short_desc": "Gets the coordinates of the fire",
           "class": "ScriptFire",
           "member": "GetCoords"
         },
@@ -29946,13 +29946,9 @@
           }
         },
         {
-          "id": "071E",
-          "name": "GET_OBJECT_HEALTH",
-          "num_params": 2,
-          "short_desc": "",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -29961,6 +29957,10 @@
               "source": "var_any"
             }
           ],
+          "id": "071E",
+          "name": "GET_OBJECT_HEALTH",
+          "num_params": 2,
+          "short_desc": "",
           "class": "Object",
           "member": "GetHealth"
         },
@@ -32606,47 +32606,43 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "w",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "07C3",
           "name": "GET_OBJECT_QUATERNION",
           "num_params": 5,
           "short_desc": "Gets the objects quaternion",
-          "input": [
-            {
-              "name": "handle",
-              "type": "Object"
-            },
-            {
-              "name": "x",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "y",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "z",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "w",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
           "class": "Object",
           "member": "GetQuaternion"
         },
         {
-          "id": "07C4",
-          "name": "SET_OBJECT_QUATERNION",
-          "num_params": 5,
-          "short_desc": "Sets the objects quaternion",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -32666,6 +32662,10 @@
               "type": "float"
             }
           ],
+          "id": "07C4",
+          "name": "SET_OBJECT_QUATERNION",
+          "num_params": 5,
+          "short_desc": "Sets the objects quaternion",
           "class": "Object",
           "member": "SetQuaternion"
         },
@@ -33979,7 +33979,7 @@
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -37373,13 +37373,9 @@
           ]
         },
         {
-          "id": "08D2",
-          "name": "SET_OBJECT_SCALE",
-          "num_params": 2,
-          "short_desc": "Sets the scale of the object",
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -37387,6 +37383,10 @@
               "type": "float"
             }
           ],
+          "id": "08D2",
+          "name": "SET_OBJECT_SCALE",
+          "num_params": 2,
+          "short_desc": "Sets the scale of the object",
           "class": "Object",
           "member": "SetScale"
         },
@@ -40354,16 +40354,16 @@
           "member": "SetCoordinatesNoOffset"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "ScriptFire"
+            }
+          ],
           "id": "0973",
           "name": "DOES_SCRIPT_FIRE_EXIST",
           "num_params": 1,
           "short_desc": "Returns true if the fire exists",
-          "input": [
-            {
-              "name": "handle",
-              "type": "ScriptFire"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
@@ -43692,7 +43692,10 @@
           "num_params": 1,
           "short_desc": "Disables all vehicle lights from being rendered if enabled",
           "class": "World",
-          "member": "ForceAllVehicleLightsOff"
+          "member": "ForceAllVehicleLightsOff",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A38",

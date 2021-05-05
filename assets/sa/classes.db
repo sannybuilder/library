@@ -26,6 +26,7 @@ Memory
 Menu
 Object
 Pad
+Particle
 Path
 Pickup
 Plane
@@ -630,21 +631,8 @@ $Fx
 $BEGIN
 AddBigGunFlash,058A,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 AddExplosionNoSound,0565,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i")
-AttachToCharBone,0883,0,0,("self: Fx" "handle: Char" "boneId%i")
-Create,064B,0,0,("name%s" "x%f" "y%f" "z%f" "type%i" "handle: Fx")
-CreateOnCar,066B,0,0,("name%s" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "type%f" "handle: Fx")
-CreateOnCarWithDirection,066C,0,0,("name%s" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "xDirection%f" "yDirection%f" "zDirection%f" "type%i" "handle: Fx")
-CreateOnChar,0669,0,0,("name%s" "char: Char" "xOffset%f" "yOffset%f" "zOffset%f" "type%i" "handle: Fx")
-CreateOnCharWithDirection,066A,0,0,("name%s" "char: Char" "xOffset%f" "yOffset%f" "zOffset%f" "xDirection%f" "yDirection%f" "zDirection%f" "type%i" "handle: Fx")
-CreateOnObject,066D,0,0,("name%s" "object: Object" "xOffset%f" "yOffset%f" "zOffset%f" "type%i" "handle: Fx")
-CreateOnObjectWithDirection,066E,0,0,("name%s" "object: Object" "xOffset%f" "yOffset%f" "zOffset%f" "xDirection%f" "yDirection%f" "zDirection%f" "type%i" "handle: Fx")
 DrawCorona,024F,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i")
 DrawWeaponshopCorona,04D5,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i")
-Kill,0650,0,0,("self: Fx")
-KillNow,0976,0,0,("self: Fx")
-Play,064C,0,0,("self: Fx")
-PlayAndKill,064F,0,0,("self: Fx")
-Stop,064E,0,0,("self: Fx")
 $END
 
 $Game
@@ -873,6 +861,23 @@ IsButtonPressed,00E1,1,0,("_p1%i" "_p2%i")
 IsKeyPressed,0AB0,1,0,("keyCode%i")
 SetDrunkInputDelay,03FD,0,0,("_p1%i" "_p2%i")
 TestCheat,0ADC,1,0,("input%s")
+$END
+
+$Particle
+$BEGIN
+AttachToCharBone,0883,0,0,("self: Particle" "handle: Char" "boneId%i")
+Create,064B,0,0,("name%s" "x%f" "y%f" "z%f" "type%i" "handle: Particle")
+CreateOnCar,066B,0,0,("name%s" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "type%f" "handle: Particle")
+CreateOnCarWithDirection,066C,0,0,("name%s" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "xDirection%f" "yDirection%f" "zDirection%f" "type%i" "handle: Particle")
+CreateOnChar,0669,0,0,("name%s" "char: Char" "xOffset%f" "yOffset%f" "zOffset%f" "type%i" "handle: Particle")
+CreateOnCharWithDirection,066A,0,0,("name%s" "char: Char" "xOffset%f" "yOffset%f" "zOffset%f" "xDirection%f" "yDirection%f" "zDirection%f" "type%i" "handle: Particle")
+CreateOnObject,066D,0,0,("name%s" "object: Object" "xOffset%f" "yOffset%f" "zOffset%f" "type%i" "handle: Particle")
+CreateOnObjectWithDirection,066E,0,0,("name%s" "object: Object" "xOffset%f" "yOffset%f" "zOffset%f" "xDirection%f" "yDirection%f" "zDirection%f" "type%i" "handle: Particle")
+Kill,0650,0,0,("self: Particle")
+KillNow,0976,0,0,("self: Particle")
+Play,064C,0,0,("self: Particle")
+PlayAndKill,064F,0,0,("self: Particle")
+Stop,064E,0,0,("self: Particle")
 $END
 
 $Path

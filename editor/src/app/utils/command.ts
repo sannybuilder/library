@@ -1,4 +1,4 @@
-import { pickBy } from 'lodash';
+import { camelCase, pickBy } from 'lodash';
 import {
   Game,
   Param,
@@ -61,4 +61,16 @@ export function replaceType(
     ...p,
     type: p.type === oldType ? newType : p.type,
   }));
+}
+
+export function formatParamName(name: string) {
+  return name.startsWith('_') ? name : camelCase(name);
+}
+
+export function formatCommandName(name: string | undefined) {
+  return name ? name.replace(/[\s-]/g, '_').toUpperCase() : name;
+}
+
+export function formatOpcode(opcode: string) {
+  return opcode ? opcode.toUpperCase() : opcode;
 }

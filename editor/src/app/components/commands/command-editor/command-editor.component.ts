@@ -29,7 +29,22 @@ import {
   SupportLevel,
 } from '../../../models';
 import { SelectorComponent } from '../../common/selector/selector.component';
-import { isAnyAttributeInvalid, capitalizeFirst, smash } from '../../../utils';
+import {
+  isAnyAttributeInvalid,
+  capitalizeFirst,
+  smash,
+  isParamNameDuplicate,
+  hasDuplicateNameError,
+  hasDuplicateParamNameError,
+  hasNoOutputParamsError,
+  hasEmptyNameError,
+  hasEmptyOpcodeError,
+  hasSelfInStaticMethod,
+  hasMissingSelfParamInMethod,
+  formatParamName,
+  formatCommandName,
+  formatOpcode,
+} from '../../../utils';
 
 type ErrorType =
   | 'emptyName'
@@ -193,14 +208,12 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onCommandNameChange(command: Command, value: string) {
-    command.name = trim(
-      value ? value.replace(/[\s-]/g, '_').toUpperCase() : value
-    );
+    command.name = trim(formatCommandName(value));
     this.updateErrors();
   }
 
   onOpcodeChange(command: Command, value: string) {
-    command.id = trim(value ? value.toUpperCase() : value);
+    command.id = trim(formatOpcode(value));
     this.updateErrors();
   }
 
@@ -273,7 +286,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onParamNameChange(name: string, param: Param) {
-    param.name = name.startsWith('_') ? name : camelCase(name); // camelCase also trims the value
+    param.name = formatParamName(name); // camelCase also trims the value
     this.updateErrors();
   }
 
@@ -437,10 +450,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   isParamNameDuplicate(name: string) {
-    return (
-      !!name &&
-      this.getAllParams().filter((param) => param.name === name).length > 1
-    );
+    return isParamNameDuplicate(this.command, name);
   }
 
   drop(event: CdkDragDrop<Param[]>, newSource: SourceType) {
@@ -498,59 +508,42 @@ export class CommandEditorComponent implements OnInit {
     }
   }
 
-  private getAllParams() {
-    return [...(this.command.input ?? []), ...(this.command.output ?? [])];
-  }
-
   private updateAttributeError() {
     this.errors.invalidAttributeCombo = isAnyAttributeInvalid(this.command);
   }
 
   private updateDuplicateNameError() {
-    this.errors.duplicateName = (this.commands ?? []).some(
-      (command) =>
-        command.name === this.command.name && command.id !== this.command.id
+    this.errors.duplicateName = hasDuplicateNameError(
+      this.command,
+      this.commands
     );
   }
 
   private updateDuplicateParamNameError() {
-    this.errors.duplicateParamName = this.getAllParams().some((param) =>
-      this.isParamNameDuplicate(param.name)
-    );
+    this.errors.duplicateParamName = hasDuplicateParamNameError(this.command);
   }
 
   private updateNoOutputParamsError() {
-    this.errors.noConstructorWithoutOutputParams =
-      !!this.command.attrs?.is_constructor && !this.command.output?.length;
+    this.errors.noConstructorWithoutOutputParams = hasNoOutputParamsError(
+      this.command
+    );
   }
 
   private updateEmptyNameError() {
-    this.errors.emptyName = !this.command.name;
+    this.errors.emptyName = hasEmptyNameError(this.command);
   }
 
   private updateEmptyOpcodeError() {
-    this.errors.emptyOpcode = !this.command.id;
+    this.errors.emptyOpcode = hasEmptyOpcodeError(this.command);
   }
 
   private noSelfInStaticMethod() {
-    this.errors.noSelfInStaticMethod =
-      !!this.command.attrs?.is_static &&
-      this.getAllParams().some((p) => p.name === SELF);
+    this.errors.noSelfInStaticMethod = hasSelfInStaticMethod(this.command);
   }
 
   private missingSelfParamInMethod() {
-    const { is_static, is_keyword, is_nop, is_unsupported, is_constructor } =
-      this.command.attrs ?? {};
-    const { class: className, member, num_params } = this.command;
-    this.errors.missingSelfParamInMethod =
-      !is_static &&
-      !is_keyword &&
-      !is_nop &&
-      !is_unsupported &&
-      !is_constructor &&
-      !!className &&
-      !!member &&
-      num_params > 0 &&
-      !this.getAllParams().some((p) => p.name === SELF);
+    this.errors.missingSelfParamInMethod = hasMissingSelfParamInMethod(
+      this.command
+    );
   }
 }

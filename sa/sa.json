@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620201480273
+    "last_update": 1620203033126
   },
   "extensions": [
     {
@@ -14836,17 +14836,17 @@
           "short_desc": "Changes an IPL-placed object model"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "03B7",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SwitchProcessing",
           "name": "SWITCH_WORLD_PROCESSING",
           "num_params": 1,
@@ -30275,40 +30275,45 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "distance",
+              "type": "float"
+            },
+            {
+              "name": "duration",
+              "type": "int"
+            },
+            {
+              "name": "stuck",
+              "type": "bool"
+            },
+            {
+              "name": "flipped",
+              "type": "bool"
+            },
+            {
+              "name": "warp",
+              "type": "bool"
+            },
+            {
+              "name": "pathId",
+              "type": "int"
+            }
+          ],
           "id": "072F",
           "name": "ADD_STUCK_CAR_CHECK_WITH_WARP",
           "num_params": 7,
           "short_desc": "Attempts to automatically restore vehicles that get stuck or flipped",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "StuckCarCheck",
+          "member": "AddWithWarp"
         },
         {
           "id": "0730",
@@ -47107,8 +47112,8 @@
           ],
           "output": [
             {
-              "name": "_p2",
-              "type": "any",
+              "name": "name",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -47143,8 +47148,8 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "modelId",
+              "type": "model_ide"
             }
           ],
           "id": "0ADD",

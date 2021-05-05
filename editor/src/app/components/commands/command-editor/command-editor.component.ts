@@ -7,7 +7,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { camelCase, capitalize, trim, uniq } from 'lodash';
+import { capitalize, trim, uniq } from 'lodash';
 import {
   CdkDragDrop,
   moveItemInArray,

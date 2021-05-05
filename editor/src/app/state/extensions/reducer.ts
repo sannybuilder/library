@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import {
   Command,
+  DEFAULT_EXTENSION,
   Entity,
   Extension,
   Game,
@@ -155,6 +156,19 @@ function upsertBy<T extends object, Key extends keyof T>(
 }
 
 function getEntities(extensions: Extension[]): Record<string, Entity[]> {
+  const defaultEntities =
+    extensions
+      .find((e) => e.name === DEFAULT_EXTENSION)
+      ?.commands.reduce((m, command: Command) => {
+        if (command.attrs?.is_constructor) {
+          const name = last(command.output)?.type;
+          if (name) {
+            m.add(name);
+          }
+        }
+        return m;
+      }, new Set<string>()) ?? new Set();
+
   return extensions.reduce((m, e) => {
     const dynamicClasses = new Set<string>();
     const staticClasses = new Set<string>();
@@ -165,9 +179,14 @@ function getEntities(extensions: Extension[]): Record<string, Entity[]> {
           dynamicClasses.add(name);
         }
       } else if (command.class) {
-        staticClasses.add(command.class);
+        if (defaultEntities.has(command.class)) {
+          dynamicClasses.add(command.class);
+        } else {
+          staticClasses.add(command.class);
+        }
       }
     }
+
     const dynamicClassesArray = [...dynamicClasses].sort();
     const staticClassesArray = [...staticClasses]
       .filter((name) => !dynamicClassesArray.includes(name))

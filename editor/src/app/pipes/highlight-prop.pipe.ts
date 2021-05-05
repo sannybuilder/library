@@ -8,7 +8,9 @@ export class HlPropPipe implements PipeTransform {
 
   transform(command: any, propKey: string) {
     return this._s.bypassSecurityTrustHtml(
-      command[FUSEJS_OPTIONS.fusejsHighlightKey]?.[propKey] ?? command[propKey]
+      command[FUSEJS_OPTIONS.fusejsHighlightKey]?.[propKey] ??
+        command[propKey] ??
+        ''
     );
   }
 }

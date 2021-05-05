@@ -9,14 +9,7 @@ import {
 } from '@angular/core';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
-import {
-  cloneDeep,
-  isEqual,
-  omit,
-  sortedUniqBy,
-  orderBy,
-  flatten,
-} from 'lodash';
+import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 
 import {
   Command,
@@ -181,7 +174,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       : of([])
     ).pipe(
       map((entities) =>
-        sortedUniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
+        uniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
       )
     );
   }

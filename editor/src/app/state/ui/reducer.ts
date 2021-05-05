@@ -105,6 +105,7 @@ export const uiReducer = createReducer(
     viewMode,
     commandToDisplayOrEdit: command,
     extensionToDisplayOrEdit: extension,
+    snippetToDisplayOrEdit: undefined,
   })),
   on(displayOrEditSnippet, (state, { snippet }) => ({
     ...state,

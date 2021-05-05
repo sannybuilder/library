@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { flatten, orderBy, sortedUniqBy } from 'lodash';
+import { flatten, orderBy, uniqBy } from 'lodash';
 import { of, zip } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ export class FilterPanelComponent {
         : of([]);
     }),
     map((entities) =>
-      sortedUniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
+      uniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
     )
   );
 

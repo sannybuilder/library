@@ -12,7 +12,7 @@ export const ATTRIBUTE_RULES: Partial<
   is_keyword: { disallowed: ['is_constructor', 'is_destructor', 'is_static'] },
 };
 
-export function isAnyAttributeInvalid(command: Command): boolean {
+export function doesCommandHaveAnyAttributeInvalid(command: Command): boolean {
   const entries = Object.entries(command.attrs ?? {}) as [Attribute, boolean][];
 
   return !entries.reduce((m, [k, v]) => {
@@ -35,7 +35,7 @@ export function isAnyAttributeInvalid(command: Command): boolean {
   }, true);
 }
 
-export function hasDuplicateNameError(
+export function doesCommandHaveDuplicateName(
   command: Command,
   otherCommands: Command[] | undefined
 ) {
@@ -44,39 +44,39 @@ export function hasDuplicateNameError(
   );
 }
 
-export function isParamNameDuplicate(command: Command, name: string) {
+export function isCommandParamNameDuplicate(command: Command, name: string) {
   return (
     !!name &&
     commandParams(command).filter((param) => param.name === name).length > 1
   );
 }
 
-export function hasDuplicateParamNameError(command: Command) {
+export function doesCommandHaveDuplicateParamName(command: Command) {
   return commandParams(command).some((param) =>
-    isParamNameDuplicate(command, param.name)
+    isCommandParamNameDuplicate(command, param.name)
   );
 }
 
-export function hasNoOutputParamsError(command: Command) {
+export function doesConstructorCommandHaveNoOutputParams(command: Command) {
   return !!command.attrs?.is_constructor && !command.output?.length;
 }
 
-export function hasEmptyNameError(command: Command) {
+export function doesCommandHaveEmptyName(command: Command) {
   return !command.name;
 }
 
-export function hasEmptyOpcodeError(command: Command) {
+export function doesCommandHaveEmptyId(command: Command) {
   return !command.id;
 }
 
-export function hasSelfInStaticMethod(command: Command) {
+export function doesCommandHaveSelfInStaticMethod(command: Command) {
   return (
     !!command.attrs?.is_static &&
     commandParams(command).some((p) => p.name === SELF)
   );
 }
 
-export function hasMissingSelfParamInMethod(command: Command) {
+export function doesCommandHaveMissingSelfParamInMethod(command: Command) {
   const { is_static, is_keyword, is_nop, is_unsupported, is_constructor } =
     command.attrs ?? {};
   const { class: className, member, num_params } = command;

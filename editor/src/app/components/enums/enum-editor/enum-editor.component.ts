@@ -10,7 +10,15 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { capitalizeFirst, isStringEnum } from '../../../utils';
+import {
+  capitalizeFirst,
+  doesEnumHaveDuplicateField,
+  doesEnumHaveEmptyName,
+  doesEnumHaveOneEmptyField,
+  isEmptyEnum,
+  isFieldNameDuplicate,
+  isStringEnum,
+} from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
 import { trim } from 'lodash';
 
@@ -161,27 +169,24 @@ export class EnumEditorComponent {
   }
 
   isFieldNameDuplicate(fieldName: string) {
-    return (
-      !!fieldName &&
-      this.enumToEdit.fields.filter(([name]) => fieldName === name).length > 1
-    );
+    return isFieldNameDuplicate(fieldName, this.enumToEdit);
   }
 
   private updateEmptyEnumNameError() {
-    this.errors.emptyEnumName = !this.enumToEdit.name;
+    this.errors.emptyEnumName = doesEnumHaveEmptyName(this.enumToEdit);
   }
 
   private updateEmptyFieldNameError() {
-    this.errors.emptyFieldName = this.enumToEdit.fields.some(([name]) => !name);
+    this.errors.emptyFieldName = doesEnumHaveOneEmptyField(this.enumToEdit);
   }
 
   private updateDuplicateFieldNameError() {
-    this.errors.duplicateFieldName = this.enumToEdit.fields.some(([name]) =>
-      this.isFieldNameDuplicate(name)
+    this.errors.duplicateFieldName = doesEnumHaveDuplicateField(
+      this.enumToEdit
     );
   }
 
   private updateEmptyEnum() {
-    this.errors.emptyEnum = this.enumToEdit.fields.length === 0;
+    this.errors.emptyEnum = isEmptyEnum(this.enumToEdit);
   }
 }

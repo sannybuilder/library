@@ -25,3 +25,14 @@ export const evaluateEnumValues = (
     }
   });
 };
+
+export function isFieldNameDuplicate(fieldName: string, enumRaw: EnumRaw) {
+  return (
+    !!fieldName &&
+    enumRaw.fields.filter(([name]) => fieldName === name).length > 1
+  );
+}
+
+export function isEmptyEnum(enumRaw: EnumRaw) {
+  return enumRaw.fields.length === 0;
+}

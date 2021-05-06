@@ -29,7 +29,7 @@ import { Command, Game, GameLibrary, PrimitiveType } from '../../models';
 import {
   commandParams,
   getSameCommands,
-  isAnyAttributeInvalid,
+  doesCommandHaveAnyAttributeInvalid,
   replaceType,
 } from '../../utils';
 import { AuthFacade } from '../auth/facade';
@@ -231,7 +231,7 @@ export class ExtensionsEffects {
         tap(({ extensions }) => {
           extensions.forEach((extension) =>
             extension.commands.forEach((command) => {
-              if (isAnyAttributeInvalid(command)) {
+              if (doesCommandHaveAnyAttributeInvalid(command)) {
                 console.warn(
                   `Invalid combination of attributes: extension ${extension.name}, opcode: ${command.id}`
                 );

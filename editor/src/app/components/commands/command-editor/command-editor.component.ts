@@ -30,17 +30,17 @@ import {
 } from '../../../models';
 import { SelectorComponent } from '../../common/selector/selector.component';
 import {
-  isAnyAttributeInvalid,
+  doesCommandHaveAnyAttributeInvalid,
   capitalizeFirst,
   smash,
-  isParamNameDuplicate,
-  hasDuplicateNameError,
-  hasDuplicateParamNameError,
-  hasNoOutputParamsError,
-  hasEmptyNameError,
-  hasEmptyOpcodeError,
-  hasSelfInStaticMethod,
-  hasMissingSelfParamInMethod,
+  doesCommandHaveDuplicateName,
+  isCommandParamNameDuplicate,
+  doesCommandHaveDuplicateParamName,
+  doesConstructorCommandHaveNoOutputParams,
+  doesCommandHaveEmptyName,
+  doesCommandHaveEmptyId,
+  doesCommandHaveSelfInStaticMethod,
+  doesCommandHaveMissingSelfParamInMethod,
   formatParamName,
   formatCommandName,
   formatOpcode,
@@ -450,7 +450,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   isParamNameDuplicate(name: string) {
-    return isParamNameDuplicate(this.command, name);
+    return isCommandParamNameDuplicate(this.command, name);
   }
 
   drop(event: CdkDragDrop<Param[]>, newSource: SourceType) {
@@ -509,40 +509,46 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private updateAttributeError() {
-    this.errors.invalidAttributeCombo = isAnyAttributeInvalid(this.command);
+    this.errors.invalidAttributeCombo = doesCommandHaveAnyAttributeInvalid(
+      this.command
+    );
   }
 
   private updateDuplicateNameError() {
-    this.errors.duplicateName = hasDuplicateNameError(
+    this.errors.duplicateName = doesCommandHaveDuplicateName(
       this.command,
       this.commands
     );
   }
 
   private updateDuplicateParamNameError() {
-    this.errors.duplicateParamName = hasDuplicateParamNameError(this.command);
+    this.errors.duplicateParamName = doesCommandHaveDuplicateParamName(
+      this.command
+    );
   }
 
   private updateNoOutputParamsError() {
-    this.errors.noConstructorWithoutOutputParams = hasNoOutputParamsError(
+    this.errors.noConstructorWithoutOutputParams = doesConstructorCommandHaveNoOutputParams(
       this.command
     );
   }
 
   private updateEmptyNameError() {
-    this.errors.emptyName = hasEmptyNameError(this.command);
+    this.errors.emptyName = doesCommandHaveEmptyName(this.command);
   }
 
   private updateEmptyOpcodeError() {
-    this.errors.emptyOpcode = hasEmptyOpcodeError(this.command);
+    this.errors.emptyOpcode = doesCommandHaveEmptyId(this.command);
   }
 
   private noSelfInStaticMethod() {
-    this.errors.noSelfInStaticMethod = hasSelfInStaticMethod(this.command);
+    this.errors.noSelfInStaticMethod = doesCommandHaveSelfInStaticMethod(
+      this.command
+    );
   }
 
   private missingSelfParamInMethod() {
-    this.errors.missingSelfParamInMethod = hasMissingSelfParamInMethod(
+    this.errors.missingSelfParamInMethod = doesCommandHaveMissingSelfParamInMethod(
       this.command
     );
   }

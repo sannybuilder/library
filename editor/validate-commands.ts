@@ -4,15 +4,15 @@ import {
   formatCommandName,
   formatOpcode,
   formatParamName,
-  hasDuplicateNameError,
-  hasDuplicateParamNameError,
-  hasEmptyNameError,
-  hasEmptyOpcodeError,
-  hasMissingSelfParamInMethod,
-  hasNoOutputParamsError,
-  hasSelfInStaticMethod,
-  isAnyAttributeInvalid,
   capitalizeFirst,
+  doesCommandHaveAnyAttributeInvalid,
+  doesCommandHaveDuplicateName,
+  doesCommandHaveDuplicateParamName,
+  doesCommandHaveEmptyId,
+  doesCommandHaveEmptyName,
+  doesCommandHaveMissingSelfParamInMethod,
+  doesCommandHaveSelfInStaticMethod,
+  doesConstructorCommandHaveNoOutputParams,
 } from './src/app/utils';
 import { Command, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -26,14 +26,14 @@ const translations = JSON.parse(translationFile);
 let exitStatus = 0;
 
 const errorHandlers = {
-  invalidAttributeCombo: isAnyAttributeInvalid,
-  duplicateParamName: hasDuplicateParamNameError,
-  duplicateName: hasDuplicateNameError,
-  noConstructorWithoutOutputParams: hasNoOutputParamsError,
-  emptyName: hasEmptyNameError,
-  emptyOpcode: hasEmptyOpcodeError,
-  noSelfInStaticMethod: hasSelfInStaticMethod,
-  missingSelfParamInMethod: hasMissingSelfParamInMethod,
+  invalidAttributeCombo: doesCommandHaveAnyAttributeInvalid,
+  duplicateParamName: doesCommandHaveDuplicateParamName,
+  duplicateName: doesCommandHaveDuplicateName,
+  noConstructorWithoutOutputParams: doesConstructorCommandHaveNoOutputParams,
+  emptyName: doesCommandHaveEmptyName,
+  emptyOpcode: doesCommandHaveEmptyId,
+  noSelfInStaticMethod: doesCommandHaveSelfInStaticMethod,
+  missingSelfParamInMethod: doesCommandHaveMissingSelfParamInMethod,
 };
 
 forEach(content.extensions, (extension) => {

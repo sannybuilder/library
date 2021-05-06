@@ -50,7 +50,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
   entities$: Observable<Entity[]> = this._extensions.extensionNames$.pipe(
-    switchMap((extensions) => this.getExtensionsEntities(extensions))
+    switchMap((extensions) => this.getExtensionsEntities(extensions)),
+    map((entities) => orderBy(entities, 'name'))
   );
 
   command?: Command;

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620391761714
+    "last_update": 1620420766665
   },
   "extensions": [
     {
@@ -7600,7 +7600,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             },
             {
@@ -7701,7 +7701,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -11266,35 +11266,35 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "groundZ",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "02CE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "GetGroundZFor3DCoord",
           "name": "GET_GROUND_Z_FOR_3D_COORD",
           "num_params": 4,
-          "output": [
-            {
-              "name": "_p4",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Stores the ground position at the specified coordinates"
         },
         {
@@ -11666,17 +11666,17 @@
           "short_desc": "Gets the car's speed"
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Cutscene",
           "id": "02E4",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "Load",
           "name": "LOAD_CUTSCENE",
           "num_params": 1,
@@ -12511,7 +12511,7 @@
               "type": "Car"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -15592,17 +15592,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Hud",
           "id": "03E3",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetSpritesDrawBeforeFade",
           "name": "SET_SPRITES_DRAW_BEFORE_FADE",
           "num_params": 1,
@@ -17941,18 +17941,18 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_any"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Streaming",
           "id": "0488",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "IsModelAvailable",
           "name": "IS_MODEL_AVAILABLE",
           "num_params": 1,
@@ -18082,7 +18082,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -19779,35 +19779,35 @@
           "short_desc": "Loads the specified IFP File"
         },
         {
+          "input": [
+            {
+              "name": "animationFile",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Streaming",
           "id": "04EE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "HasAnimationLoaded",
           "name": "HAS_ANIMATION_LOADED",
           "num_params": 1,
           "short_desc": "Returns true if the specified IFP file is loaded"
         },
         {
+          "input": [
+            {
+              "name": "animationFile",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "04EF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "RemoveAnimation",
           "name": "REMOVE_ANIMATION",
           "num_params": 1,
@@ -26778,48 +26778,53 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "xRotation",
+              "type": "float"
+            },
+            {
+              "name": "yRotation",
+              "type": "float"
+            },
+            {
+              "name": "zRotation",
+              "type": "float"
+            },
+            {
+              "name": "tilt",
+              "type": "float"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "id": "067C",
           "name": "ATTACH_CAMERA_TO_CHAR",
           "num_params": 9,
           "short_desc": "Keeps the camera relative to the actor with the specified offset",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "AttachToChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "067D",
@@ -27115,24 +27120,26 @@
           "member": "TogglePedThreatScanner"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "doorId",
+              "type": "int"
+            },
+            {
+              "name": "visibility",
+              "type": "bool"
+            }
+          ],
           "id": "0689",
           "name": "POP_CAR_DOOR",
           "num_params": 3,
           "short_desc": "Removes the specified car door component from the car",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "PopDoor"
         },
         {
           "input": [
@@ -28344,32 +28351,40 @@
           "member": "GoToCoordWhileAiming"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "numFires",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "06C3",
           "name": "GET_NUMBER_OF_FIRES_IN_RANGE",
           "num_params": 5,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetNumberOfFiresInRange"
         },
         {
           "input": [
@@ -29681,28 +29696,30 @@
           "member": "AttackPlayer"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Plane"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "minAltitude",
+              "type": "float"
+            },
+            {
+              "name": "maxAltitude",
+              "type": "float"
+            }
+          ],
           "id": "070F",
           "name": "PLANE_FLY_IN_DIRECTION",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Plane",
+          "member": "FlyInDirection"
         },
         {
           "id": "0710",
@@ -39102,28 +39119,36 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "ignoreWaves",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "092E",
           "name": "GET_WATER_HEIGHT_AT_COORDS",
           "num_params": 4,
           "short_desc": "Gets the height of the water at the specified 2D coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetWaterHeightAtCoords",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "092F",
@@ -40548,28 +40573,33 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "0980",
           "name": "EXTINGUISH_FIRE_AT_POINT",
           "num_params": 4,
           "short_desc": "Removes all fires within the specified area",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "ExtinguishFireAtPoint"
         },
         {
           "id": "0981",

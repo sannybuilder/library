@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620425782182
+    "last_update": 1620498426772
   },
   "extensions": [
     {
@@ -8944,31 +8944,31 @@
           "short_desc": "Generates a random float between the ranges specified"
         },
         {
+          "input": [
+            {
+              "name": "min",
+              "type": "int"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Math",
           "id": "0209",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "RandomIntInRange",
           "name": "GENERATE_RANDOM_INT_IN_RANGE",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p3",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Generates a random integer between the ranges specified"
         },
         {
@@ -13087,17 +13087,17 @@
           "short_desc": "Sets the RGBA to draw the text at"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Text",
           "id": "0341",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetJustify",
           "name": "SET_TEXT_JUSTIFY",
           "num_params": 1,
@@ -14258,17 +14258,17 @@
           "short_desc": "Loads a texture from the most recently loaded "
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Txd",
           "id": "0390",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            }
-          ],
           "member": "Load",
           "name": "LOAD_TEXTURE_DICTIONARY",
           "num_params": 1,
@@ -20678,16 +20678,21 @@
           "member": "HasBeenDamagedByCar"
         },
         {
+          "input": [
+            {
+              "name": "channel",
+              "type": "int"
+            }
+          ],
           "id": "051E",
           "name": "GET_RADIO_CHANNEL",
           "num_params": 1,
           "short_desc": "Returns the current radio station that is being played",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "GetRadioChannel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "051F",
@@ -21411,31 +21416,31 @@
           "short_desc": "Creates a driver in the vehicle"
         },
         {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "seatId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Char",
           "id": "0561",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "CreateRandomAsPassenger",
           "name": "CREATE_RANDOM_CHAR_AS_PASSENGER",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p3",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Creates a passenger in a vehicle seat"
         },
         {
@@ -24414,24 +24419,29 @@
           "member": "GoToCoordAnyMeans"
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "float"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "id": "0604",
           "name": "GET_HEADING_FROM_VECTOR_2D",
           "num_params": 3,
           "short_desc": "Gets the angle for the XY offset",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Math",
+          "member": "GetHeadingFromVector2D",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -24617,20 +24627,22 @@
           "member": "IsPlaybackGoingOn"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "meleeAccuracy",
+              "type": "float"
+            }
+          ],
           "id": "060F",
           "name": "SET_SENSE_RANGE",
           "num_params": 2,
           "short_desc": "Sets the characters melee accuracy",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetSenseRange"
         },
         {
           "id": "0610",
@@ -25862,20 +25874,28 @@
           "member": "LookAtObject"
         },
         {
+          "input": [
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0656",
           "name": "LIMIT_ANGLE",
           "num_params": 2,
           "short_desc": "Gets the exact angle of an angle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Math",
+          "member": "LimitAngle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -28697,16 +28717,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "06D7",
           "name": "SWITCH_RANDOM_TRAINS",
           "num_params": 1,
           "short_desc": "Sets whether trains are generated",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SwitchRandomTrains",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "06D8",
@@ -29356,23 +29381,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "06FF",
           "name": "ARE_ANY_CHARS_NEAR_CHAR",
           "num_params": 2,
           "short_desc": "Returns true if any characters are within range of the character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "AreAnyCharsNearChar"
         },
         {
           "id": "0700",
@@ -30525,76 +30552,92 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "model",
+              "type": "model_any"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "id": "073E",
           "name": "GET_RANDOM_CAR_IN_SPHERE_NO_SAVE",
           "num_params": 6,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetRandomCarInSphereNoSave",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "civilian",
+              "type": "bool"
+            },
+            {
+              "name": "gang",
+              "type": "bool"
+            },
+            {
+              "name": "criminal",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "073F",
           "name": "GET_RANDOM_CHAR_IN_SPHERE",
           "num_params": 8,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetRandomCharInSphere",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0740",
@@ -35967,16 +36010,21 @@
           "member": "SetDirtLevel"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0879",
           "name": "SET_GANG_WARS_ACTIVE",
           "num_params": 1,
           "short_desc": "Sets whether gang wars can be started by the player or enemy gangs",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetGangWarsActive",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "087A",
@@ -35984,8 +36032,11 @@
           "num_params": 0,
           "short_desc": "Returns true if there is a gang war happening",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
+          "member": "IsGangWarGoingOn"
         },
         {
           "input": [
@@ -36677,16 +36728,21 @@
           "member": "AttackPlayerUsingDogFight"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08A3",
           "name": "CAN_TRIGGER_GANG_WAR_WHEN_ON_A_MISSION",
           "num_params": 1,
           "short_desc": "Allows the player to provoke turf wars while a mission is active",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "CanTriggerGangWarWhenOnAMission",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -36723,24 +36779,26 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "doorId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "float"
+            }
+          ],
           "id": "08A6",
           "name": "OPEN_CAR_DOOR_A_BIT",
           "num_params": 3,
           "short_desc": "Sets the angle of a car door",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "OpenDoorABit"
         },
         {
           "input": [
@@ -36812,16 +36870,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08AC",
           "name": "SET_GANG_WARS_TRAINING_MISSION",
           "num_params": 1,
           "short_desc": "Disables highlighting of gang territory on the map and radar",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetGangWarsTrainingMission",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -36908,16 +36971,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "gxt_key"
+            }
+          ],
           "id": "08B3",
           "name": "SET_ZONE_FOR_GANG_WARS_TRAINING",
           "num_params": 1,
           "short_desc": "Sets the zone as the only zone where a turf war can be provoked",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetZoneForGangWarsTraining",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08B4",
@@ -37301,7 +37369,9 @@
           "id": "08CA",
           "name": "INIT_ZONE_POPULATION_SETTINGS",
           "num_params": 0,
-          "short_desc": "Resets all changes made to the zone info"
+          "short_desc": "Resets all changes made to the zone info",
+          "class": "World",
+          "member": "InitZonePopulationSettings"
         },
         {
           "input": [
@@ -37981,16 +38051,21 @@
           "member": "SetAsStealable"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08EA",
           "name": "SET_CREATE_RANDOM_GANG_MEMBERS",
           "num_params": 1,
           "short_desc": "Sets whether gang members will spawn",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetCreateRandomGangMembers",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08EB",
@@ -38202,28 +38277,43 @@
           "member": "SetFreebies"
         },
         {
+          "input": [
+            {
+              "name": "maxSize",
+              "type": "int"
+            }
+          ],
           "id": "08F4",
           "name": "SET_SCRIPT_LIMIT_TO_GANG_SIZE",
           "num_params": 1,
           "short_desc": "Sets the maximum amount of members that the player can recruit",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetScriptLimitToGangSize",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08F5",
           "name": "MAKE_PLAYER_GANG_DISAPPEAR",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Player",
+          "member": "MakeGangDisappear",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08F6",
           "name": "MAKE_PLAYER_GANG_REAPPEAR",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Player",
+          "member": "MakeGangReappear",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08F7",
@@ -38556,22 +38646,32 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "gxt_key"
+            }
+          ],
           "id": "090C",
           "name": "SET_SPECIFIC_ZONE_TO_TRIGGER_GANG_WAR",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetSpecificZoneToTriggerGangWar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "090D",
           "name": "CLEAR_SPECIFIC_ZONES_TO_TRIGGER_GANG_WAR",
           "num_params": 0,
-          "short_desc": "Enables turf wars to be provoked in all zones"
+          "short_desc": "Enables turf wars to be provoked in all zones",
+          "class": "World",
+          "member": "ClearSpecificZonesToTriggerGangWar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -40036,28 +40136,30 @@
           "member": "IsStuckUnderCar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "doorId",
+              "type": "int"
+            },
+            {
+              "name": "latch",
+              "type": "int"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            }
+          ],
           "id": "095E",
           "name": "CONTROL_CAR_DOOR",
           "num_params": 4,
           "short_desc": "Sets the cars door angle and latch state",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "ControlDoor"
         },
         {
           "input": [
@@ -40640,16 +40742,21 @@
           "member": "SetForceDieInCar"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0983",
           "name": "SET_ONLY_CREATE_GANG_MEMBERS",
           "num_params": 1,
           "short_desc": "If set to 1, gangs will appear everywhere, like when \"Gangs control the streets\" cheat is activated",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetOnlyCreateGangMembers",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0984",
@@ -41051,16 +41158,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "099E",
           "name": "SET_CREATE_RANDOM_COPS",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetCreateRandomCops",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -41412,24 +41524,33 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "model_ide",
+              "source": "var_any"
+            },
+            {
+              "name": "class",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "09B2",
           "name": "GET_RANDOM_CAR_MODEL_IN_MEMORY",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "GetRandomCarModelInMemory",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -42833,8 +42954,11 @@
           "num_params": 0,
           "short_desc": "Returns TRUE if the player provoked a gang war or is defending territory",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
+          "member": "IsGangWarFightingGoingOn"
         },
         {
           "id": "0A04",
@@ -43002,7 +43126,9 @@
           "short_desc": "Returns true if the current language set is different from the previous language set",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Game",
+          "member": "HasLanguageChanged"
         },
         {
           "input": [
@@ -47257,32 +47383,35 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "findNext",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "any"
-            },
+              "name": "skipDead",
+              "type": "bool"
+            }
+          ],
+          "output": [
             {
-              "name": "_p7",
-              "type": "any"
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "id": "0AE1",
@@ -47298,32 +47427,35 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "findNext",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "any"
-            },
+              "name": "skipDead",
+              "type": "bool"
+            }
+          ],
+          "output": [
             {
-              "name": "_p7",
-              "type": "any"
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
             }
           ],
           "id": "0AE2",
@@ -47339,28 +47471,31 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "any"
-            },
+              "name": "findNext",
+              "type": "bool"
+            }
+          ],
+          "output": [
             {
-              "name": "_p6",
-              "type": "any"
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
             }
           ],
           "id": "0AE3",

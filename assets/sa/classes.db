@@ -45,6 +45,7 @@ Streaming
 StuckCarCheck
 Task
 Text
+Train
 Txd
 Weather
 Widget
@@ -1307,6 +1308,23 @@ StringFormat,0AD3,0,0,("_p1: any" "_p2: any" "_p3: any")
 UseCommands,03F0,0,0,("state%b")
 $END
 
+$Train
+$BEGIN
+Create,06D8,0,0,("type%i" "x%f" "y%f" "z%f" "direction%b" "handle: Train")
+Delete,07BD,0,0,("self: Train")
+FindDirection,09E3,1,0,("self: Train")
+GetCaboose,06DE,0,0,("self: Train" "caboose: Car")
+GetCarriage,078A,0,0,("self: Train" "number%i" "carriage: Car")
+HasDerailed,0981,1,0,("self: Train")
+IsNextStationAllowed,0A06,1,0,("self: Train")
+MarkAsNoLongerNeeded,07BE,0,0,("self: Train")
+SetCoordinates,07C7,0,0,("self: Train" "x%f" "y%f" "z%f")
+SetCruiseSpeed,06DD,0,0,("self: Train" "speed%f")
+SetForcedToSlowDown,09CF,0,0,("self: Train" "state%b")
+SetSpeed,06DC,0,0,("self: Train" "speed%f")
+SkipToNextAllowedStation,0A07,0,0,("self: Train")
+$END
+
 $Txd
 $BEGIN
 DrawSprite,038D,0,0,("memorySlot%i" "offsetLeft%f" "offsetTop%f" "width%f" "height%f" "r%i" "g%i" "b%i" "a%i")
@@ -1364,6 +1382,8 @@ ClearAreaOfCars,03BA,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 ClearAreaOfChars,042B,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 ClearSpecificZonesToTriggerGangWar,090D,0,0,()
 CreateRandomCarForCarPark,03C5,0,0,("x%f" "y%f" "z%f" "heading%f")
+DeleteAllTrains,06DB,0,0,()
+DeleteMissionTrains,06D9,0,0,()
 ExtinguishFireAtPoint,0980,0,0,("x%f" "y%f" "z%f" "radius%f")
 ForceAllVehicleLightsOff,0A37,0,0,("state%b")
 GetDeadCharPickupCoords,04A5,0,0,("char: Char" "x%f" "y%f" "z%f")
@@ -1390,6 +1410,7 @@ IsGangWarFightingGoingOn,0A03,1,0,()
 IsGangWarGoingOn,087A,1,0,()
 IsMoneyPickupAtCoords,09DA,1,0,("x%f" "y%f" "z%f")
 IsPointObscuredByAMissionEntity,038A,1,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
+MarkMissionTrainsAsNoLongerNeeded,06DA,0,0,()
 RemoveAllScriptFires,031A,0,0,()
 SetCarDensityMultiplier,01EB,0,0,("multiplier%f")
 SetCreateRandomCops,099E,0,0,("state%b")

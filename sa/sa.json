@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620537447768
+    "last_update": 1620547354017
   },
   "extensions": [
     {
@@ -28738,102 +28738,134 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "direction",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Train",
+              "source": "var_any"
+            }
+          ],
           "id": "06D8",
           "name": "CREATE_MISSION_TRAIN",
           "num_params": 6,
           "short_desc": "Creates a script handled train from a predefined type (the type dictates how long the train is and the varieties of carriages) and sets the direction for the train to head in",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "id": "06D9",
           "name": "DELETE_MISSION_TRAINS",
           "num_params": 0,
-          "short_desc": "Destroys all script-created trains"
+          "short_desc": "Destroys all script-created trains",
+          "class": "World",
+          "member": "DeleteMissionTrains",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "06DA",
           "name": "MARK_MISSION_TRAINS_AS_NO_LONGER_NEEDED",
           "num_params": 0,
-          "short_desc": "Marks the train as no longer needed by the script, allowing it to be deleted by the game"
+          "short_desc": "Marks the train as no longer needed by the script, allowing it to be deleted by the game",
+          "class": "World",
+          "member": "MarkMissionTrainsAsNoLongerNeeded",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "06DB",
           "name": "DELETE_ALL_TRAINS",
           "num_params": 0,
-          "short_desc": "Destroys all trains, including those that are not created by the script"
+          "short_desc": "Destroys all trains, including those that are not created by the script",
+          "class": "World",
+          "member": "DeleteAllTrains",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            }
+          ],
           "id": "06DC",
           "name": "SET_TRAIN_SPEED",
           "num_params": 2,
           "short_desc": "Sets the trains acceleration",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "SetSpeed"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            }
+          ],
           "id": "06DD",
           "name": "SET_TRAIN_CRUISE_SPEED",
           "num_params": 2,
           "short_desc": "Sets the trains speed",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "SetCruiseSpeed"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            }
+          ],
+          "output": [
+            {
+              "name": "caboose",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "id": "06DE",
           "name": "GET_TRAIN_CABOOSE",
           "num_params": 2,
           "short_desc": "Gets the handle of the last carriage (known as the \"caboose\")",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "GetCaboose"
         },
         {
           "input": [
@@ -31865,24 +31897,29 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            },
+            {
+              "name": "number",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "carriage",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "id": "078A",
           "name": "GET_TRAIN_CARRIAGE",
           "num_params": 3,
           "short_desc": "Gets the nth train carriage",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "GetCarriage"
         },
         {
           "id": "078B",
@@ -32589,28 +32626,35 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            }
+          ],
           "id": "07BD",
           "name": "DELETE_MISSION_TRAIN",
           "num_params": 1,
           "short_desc": "Removes the specified script created train",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "Delete",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            }
+          ],
           "id": "07BE",
           "name": "MARK_MISSION_TRAIN_AS_NO_LONGER_NEEDED",
           "num_params": 1,
           "short_desc": "Removes the specified script created train from the list of trains that the game shouldn't delete",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "MarkAsNoLongerNeeded"
         },
         {
           "input": [
@@ -32805,28 +32849,30 @@
           "member": "SetQuaternion"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "id": "07C7",
           "name": "SET_MISSION_TRAIN_COORDINATES",
           "num_params": 4,
           "short_desc": "Puts the train on the rails nearest to the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "SetCoordinates"
         },
         {
           "id": "07C8",
@@ -40713,19 +40759,21 @@
           "member": "ExtinguishFireAtPoint"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            }
+          ],
           "id": "0981",
           "name": "HAS_TRAIN_DERAILED",
           "num_params": 1,
           "short_desc": "Returns true if the train has derailed (usually from going too fast)",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Train",
+          "member": "HasDerailed"
         },
         {
           "id": "0982",
@@ -42087,20 +42135,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09CF",
           "name": "SET_TRAIN_FORCED_TO_SLOW_DOWN",
           "num_params": 2,
           "short_desc": "Sets whether the train should stop at each station it encounters",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "SetForcedToSlowDown"
         },
         {
           "input": [
@@ -42476,16 +42526,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            }
+          ],
           "id": "09E3",
           "name": "FIND_TRAIN_DIRECTION",
           "num_params": 1,
           "short_desc": "Returns true if the train is travelling clockwise, around San Andreas",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Train",
+          "member": "FindDirection"
         },
         {
           "id": "09E4",
@@ -42983,31 +43038,35 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            }
+          ],
           "id": "0A06",
           "name": "IS_NEXT_STATION_ALLOWED",
           "num_params": 1,
           "short_desc": "Returns true if the next station is accessible (at the start of the game, railroad blocks prevent the player from travelling to stations whose area is not unlocked)",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Train",
+          "member": "IsNextStationAllowed"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Train"
+            }
+          ],
           "id": "0A07",
           "name": "SKIP_TO_NEXT_ALLOWED_STATION",
           "num_params": 1,
           "short_desc": "Puts the script created train at the next allowed station",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Train",
+          "member": "SkipToNextAllowedStation"
         },
         {
           "id": "0A08",

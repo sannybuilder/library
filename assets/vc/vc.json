@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620647180323
+    "last_update": 1620202459168
   },
   "extensions": [
     {
@@ -10,10 +10,7 @@
           "id": "0000",
           "name": "NOP",
           "num_params": 0,
-          "short_desc": "Makes no effect and is commonly used to pad CLEO scripts with extra space to avoid the jump-at-zero-offset bug.",
-          "attrs": {
-            "is_keyword": true
-          }
+          "short_desc": "Makes no effect and is commonly used to pad CLEO scripts with extra space to avoid the jump-at-zero-offset bug."
         },
         {
           "input": [
@@ -3528,11 +3525,11 @@
               "type": "gxt_key"
             },
             {
-              "name": "time",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "style",
+              "name": "_p3",
               "type": "int"
             }
           ],
@@ -3553,11 +3550,11 @@
               "type": "gxt_key"
             },
             {
-              "name": "time",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "flag",
+              "name": "_p3",
               "type": "int"
             }
           ],
@@ -3578,11 +3575,11 @@
               "type": "gxt_key"
             },
             {
-              "name": "time",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "flag",
+              "name": "_p3",
               "type": "int"
             }
           ],
@@ -3610,7 +3607,7 @@
           },
           "class": "Text",
           "id": "00BE",
-          "member": "ClearPrints",
+          "member": "Clear",
           "name": "CLEAR_PRINTS",
           "num_params": 0,
           "short_desc": "Clears all priority text and some styles of big texts"
@@ -3688,56 +3685,52 @@
           "short_desc": "Returns the amount of minutes left until the clock matches the time specified"
         },
         {
-          "input": [
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "radius",
-              "type": "float"
-            }
-          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Camera",
           "id": "00C2",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "float"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            }
+          ],
           "member": "IsPointOnScreen",
           "name": "IS_POINT_ON_SCREEN",
           "num_params": 4,
           "short_desc": "Returns true if any part of the radius of the specified point is visible on screen"
         },
         {
+          "attrs": {
+            "is_nop": true
+          },
           "id": "00C3",
           "name": "DEBUG_ON",
           "num_params": 0,
-          "short_desc": "",
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Debugger",
-          "member": "On"
+          "short_desc": "Does nothing"
         },
         {
+          "attrs": {
+            "is_nop": true
+          },
           "id": "00C4",
           "name": "DEBUG_OFF",
           "num_params": 0,
-          "short_desc": "",
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Debugger",
-          "member": "Off"
+          "short_desc": "Does nothing"
         },
         {
           "attrs": {
@@ -3876,32 +3869,32 @@
           "num_params": 0
         },
         {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_keyword": true
           },
           "id": "00D6",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "name": "IF",
           "num_params": 1,
           "short_desc": "Begins a conditional statement with the specified number of conditions"
         },
         {
-          "input": [
-            {
-              "name": "",
-              "type": "label"
-            }
-          ],
           "attrs": {
             "is_branch": true,
             "is_keyword": true
           },
           "id": "00D7",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "label"
+            }
+          ],
           "name": "LAUNCH_MISSION",
           "num_params": 1,
           "short_desc": "Launches a submission script"
@@ -3955,7 +3948,7 @@
           "member": "StoreCarIsIn",
           "name": "STORE_CAR_PLAYER_IS_IN",
           "num_params": 2,
-          "short_desc": "Returns the current vehicle of the player and adds it to the mission cleanup list"
+          "short_desc": ""
         },
         {
           "input": [
@@ -3997,7 +3990,7 @@
           "member": "IsInCar",
           "name": "IS_PLAYER_IN_CAR",
           "num_params": 2,
-          "short_desc": "Returns true if the player is in the specified vehicle"
+          "short_desc": ""
         },
         {
           "input": [
@@ -4006,7 +3999,7 @@
               "type": "Char"
             },
             {
-              "name": "modelId",
+              "name": "vehicleModelId",
               "type": "model_ide"
             }
           ],
@@ -4039,7 +4032,7 @@
           "member": "IsInModel",
           "name": "IS_PLAYER_IN_MODEL",
           "num_params": 2,
-          "short_desc": "Returns true if the specified player is driving a vehicle with the specified model"
+          "short_desc": ""
         },
         {
           "input": [
@@ -4106,358 +4099,358 @@
           "num_params": 0
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E3",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeans2D",
           "name": "LOCATE_PLAYER_ANY_MEANS_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E4",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFoot2D",
           "name": "LOCATE_PLAYER_ON_FOOT_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E5",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCar2D",
           "name": "LOCATE_PLAYER_IN_CAR_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E6",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedAnyMeans2D",
           "name": "LOCATE_STOPPED_PLAYER_ANY_MEANS_2D",
           "num_params": 6,
           "short_desc": "Returns true if the player stopped near the specified 2D point"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E7",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedOnFoot2D",
           "name": "LOCATE_STOPPED_PLAYER_ON_FOOT_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E8",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedInCar2D",
           "name": "LOCATE_STOPPED_PLAYER_IN_CAR_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00E9",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansChar2D",
           "name": "LOCATE_PLAYER_ANY_MEANS_CHAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00EA",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootChar2D",
           "name": "LOCATE_PLAYER_ON_FOOT_CHAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00EB",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarChar2D",
           "name": "LOCATE_PLAYER_IN_CAR_CHAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "Sphere"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00EC",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeans2D",
           "name": "LOCATE_CHAR_ANY_MEANS_2D",
           "num_params": 6,
@@ -4470,11 +4463,11 @@
               "type": "Char"
             },
             {
-              "name": "x",
+              "name": "xCoord",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "yCoord",
               "type": "float"
             },
             {
@@ -4486,8 +4479,8 @@
               "type": "float"
             },
             {
-              "name": "drawSphere",
-              "type": "bool"
+              "name": "_p6",
+              "type": "int"
             }
           ],
           "attrs": {
@@ -4501,1009 +4494,1009 @@
           "short_desc": "Returns true if the character is in the specified area on foot, irrelevant of height"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00EE",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCar2D",
           "name": "LOCATE_CHAR_IN_CAR_2D",
           "num_params": 6,
           "short_desc": "Returns true if the character is in a car in the specified area, irrelevant of height"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00EF",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedAnyMeans2D",
           "name": "LOCATE_STOPPED_CHAR_ANY_MEANS_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00F0",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedOnFoot2D",
           "name": "LOCATE_STOPPED_CHAR_ON_FOOT_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00F1",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedInCar2D",
           "name": "LOCATE_STOPPED_CHAR_IN_CAR_2D",
           "num_params": 6,
           "short_desc": "Returns true if the character is near the specified point with the specified radius and is in a car which is not moving"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00F2",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansChar2D",
           "name": "LOCATE_CHAR_ANY_MEANS_CHAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00F3",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootChar2D",
           "name": "LOCATE_CHAR_ON_FOOT_CHAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00F4",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarChar2D",
           "name": "LOCATE_CHAR_IN_CAR_CHAR_2D",
           "num_params": 5,
           "short_desc": "Returns true if the character is in a car, which is in radius of another character"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00F5",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeans3D",
           "name": "LOCATE_PLAYER_ANY_MEANS_3D",
           "num_params": 8,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00F6",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFoot3D",
           "name": "LOCATE_PLAYER_ON_FOOT_3D",
           "num_params": 8,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00F7",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCar3D",
           "name": "LOCATE_PLAYER_IN_CAR_3D",
           "num_params": 8,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00F8",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedAnyMeans3D",
           "name": "LOCATE_STOPPED_PLAYER_ANY_MEANS_3D",
           "num_params": 8,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00F9",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedOnFoot3D",
           "name": "LOCATE_STOPPED_PLAYER_ON_FOOT_3D",
           "num_params": 8,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00FA",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedInCar3D",
           "name": "LOCATE_STOPPED_PLAYER_IN_CAR_3D",
           "num_params": 8,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00FB",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansChar3D",
           "name": "LOCATE_PLAYER_ANY_MEANS_CHAR_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00FC",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootChar3D",
           "name": "LOCATE_PLAYER_ON_FOOT_CHAR_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "00FD",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarChar3D",
           "name": "LOCATE_PLAYER_IN_CAR_CHAR_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00FE",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeans3D",
           "name": "LOCATE_CHAR_ANY_MEANS_3D",
           "num_params": 8,
           "short_desc": "Sets up a point on the map where the character's presence can be detected"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "00FF",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFoot3D",
           "name": "LOCATE_CHAR_ON_FOOT_3D",
           "num_params": 8,
           "short_desc": "Sets up a point on the map where the character's presence can be detected"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0100",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCar3D",
           "name": "LOCATE_CHAR_IN_CAR_3D",
           "num_params": 8,
           "short_desc": "Sets up a point on the map where the character's presence can be detected"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0101",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedAnyMeans3D",
           "name": "LOCATE_STOPPED_CHAR_ANY_MEANS_3D",
           "num_params": 8,
           "short_desc": "Sets up a point on the map where the character's presence can be detected"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0102",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedOnFoot3D",
           "name": "LOCATE_STOPPED_CHAR_ON_FOOT_3D",
           "num_params": 8,
           "short_desc": "Sets up a point on the map where the character's presence can be detected"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0103",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateStoppedInCar3D",
           "name": "LOCATE_STOPPED_CHAR_IN_CAR_3D",
           "num_params": 8,
           "short_desc": "Sets up a point on the map where the character's presence can be detected"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0104",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansChar3D",
           "name": "LOCATE_CHAR_ANY_MEANS_CHAR_3D",
           "num_params": 6,
           "short_desc": "Returns true if one character is in radius of the other character, with the optional addition of a sphere surrounding the character"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0105",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootChar3D",
           "name": "LOCATE_CHAR_ON_FOOT_CHAR_3D",
           "num_params": 6,
           "short_desc": "Sets up a radius from a character where another character's presence can be detected"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0106",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarChar3D",
           "name": "LOCATE_CHAR_IN_CAR_CHAR_3D",
           "num_params": 6,
@@ -6457,7 +6450,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "014E",
           "input": [
             {
@@ -6478,7 +6471,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "014F",
           "input": [
             {
@@ -6495,7 +6488,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "0150",
           "input": [
             {
@@ -6516,7 +6509,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "0151",
           "input": [
             {
@@ -8808,164 +8801,164 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "01AD",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "Locate2D",
           "name": "LOCATE_CAR_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "01AE",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateStopped2D",
           "name": "LOCATE_STOPPED_CAR_2D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "01AF",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "Locate3D",
           "name": "LOCATE_CAR_3D",
           "num_params": 8,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Car",
           "id": "01B0",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "LocateStopped3D",
           "name": "LOCATE_STOPPED_CAR_3D",
           "num_params": 8,
@@ -9000,7 +8993,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             },
             {
@@ -9111,7 +9104,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -10315,346 +10308,346 @@
           "short_desc": "Gets the square root of a number"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "01FC",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansCar2D",
           "name": "LOCATE_PLAYER_ANY_MEANS_CAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "01FD",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootCar2D",
           "name": "LOCATE_PLAYER_ON_FOOT_CAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "01FE",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarCar2D",
           "name": "LOCATE_PLAYER_IN_CAR_CAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "01FF",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansCar3D",
           "name": "LOCATE_PLAYER_ANY_MEANS_CAR_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0200",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootCar3D",
           "name": "LOCATE_PLAYER_ON_FOOT_CAR_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Player",
           "id": "0201",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarCar3D",
           "name": "LOCATE_PLAYER_IN_CAR_CAR_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0202",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansCar2D",
           "name": "LOCATE_CHAR_ANY_MEANS_CAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0203",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootCar2D",
           "name": "LOCATE_CHAR_ON_FOOT_CAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0204",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarCar2D",
           "name": "LOCATE_CHAR_IN_CAR_CAR_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "vehicle",
-              "type": "Car"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0205",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansCar3D",
           "name": "LOCATE_CHAR_ANY_MEANS_CAR_3D",
           "num_params": 6,
@@ -10667,7 +10660,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "targetCar",
               "type": "Car"
             },
             {
@@ -10683,8 +10676,8 @@
               "type": "float"
             },
             {
-              "name": "drawSphere",
-              "type": "bool"
+              "name": "_p6",
+              "type": "int"
             }
           ],
           "attrs": {
@@ -12786,7 +12779,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "02A3",
           "member": "SwitchWidescreen",
           "name": "SWITCH_WIDESCREEN",
@@ -14261,17 +14254,17 @@
           "short_desc": "Gets the car's speed"
         },
         {
-          "input": [
-            {
-              "name": "name",
-              "type": "string"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "Cutscene",
           "id": "02E4",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "string"
+            }
+          ],
           "member": "Load",
           "name": "LOAD_CUTSCENE",
           "num_params": 1,
@@ -15162,7 +15155,7 @@
               "type": "Car"
             },
             {
-              "name": "weaponType",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
@@ -15803,52 +15796,52 @@
           "short_desc": "Sets the RGBA to draw the text at"
         },
         {
-          "input": [
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "Text",
           "id": "0341",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "member": "SetJustify",
           "name": "SET_TEXT_JUSTIFY",
           "num_params": 1,
           "short_desc": "Sets the text to be drawn justified, which means the text will wrap in order to fill an even rectangle of space"
         },
         {
-          "input": [
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "Text",
           "id": "0342",
-          "member": "SetCenter",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "member": "SetCentre",
           "name": "SET_TEXT_CENTRE",
           "num_params": 1,
           "short_desc": "Centers the text"
         },
         {
-          "input": [
-            {
-              "name": "width",
-              "type": "float"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "Text",
           "id": "0343",
-          "member": "SetWrapX",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "float"
+            }
+          ],
+          "member": "SetWrapx",
           "name": "SET_TEXT_WRAPX",
           "num_params": 1,
           "short_desc": "Sets the line width of the text"
@@ -16901,46 +16894,46 @@
         {
           "input": [
             {
-              "name": "memorySlot",
+              "name": "_p1",
               "type": "int"
             },
             {
-              "name": "offsetLeft",
+              "name": "_p2",
               "type": "float"
             },
             {
-              "name": "offsetTop",
+              "name": "_p3",
               "type": "float"
             },
             {
-              "name": "width",
+              "name": "_p4",
               "type": "float"
             },
             {
-              "name": "height",
+              "name": "_p5",
               "type": "float"
             },
             {
-              "name": "r",
+              "name": "_p6",
               "type": "int"
             },
             {
-              "name": "g",
+              "name": "_p7",
               "type": "int"
             },
             {
-              "name": "b",
+              "name": "_p8",
               "type": "int"
             },
             {
-              "name": "a",
+              "name": "_p9",
               "type": "int"
             }
           ],
           "attrs": {
             "is_static": true
           },
-          "class": "Txd",
+          "class": "Screen",
           "id": "038D",
           "member": "DrawSprite",
           "name": "DRAW_SPRITE",
@@ -16985,7 +16978,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "038E",
           "member": "DrawRect",
           "name": "DRAW_RECT",
@@ -16993,42 +16986,42 @@
           "short_desc": "Draws a box at the specified on screen X and Y position, with the specified size and RGBA colors"
         },
         {
-          "input": [
-            {
-              "name": "memorySlot",
-              "type": "int"
-            },
-            {
-              "name": "spriteName",
-              "type": "string"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
           "class": "Txd",
           "id": "038F",
-          "member": "LoadSprite",
-          "name": "LOAD_SPRITE",
-          "num_params": 2,
-          "short_desc": "Loads a sprite from the most recently loaded texture dictionary (0390)"
-        },
-        {
           "input": [
             {
-              "name": "name",
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
               "type": "string"
             }
           ],
+          "member": "LoadSprite",
+          "name": "LOAD_SPRITE",
+          "num_params": 2,
+          "short_desc": "Loads a texture from the most recently loaded "
+        },
+        {
           "attrs": {
             "is_static": true
           },
           "class": "Txd",
           "id": "0390",
-          "member": "LoadDictionary",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "string"
+            }
+          ],
+          "member": "Load",
           "name": "LOAD_TEXTURE_DICTIONARY",
           "num_params": 1,
-          "short_desc": "Loads the texture dictionary for use in drawing sprites (038D) on the screen"
+          "short_desc": "Changes the .txd file that the game will read from when loading a texture "
         },
         {
           "attrs": {
@@ -17127,7 +17120,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "0396",
           "member": "FreezeTimer",
           "name": "FREEZE_ONSCREEN_TIMER",
@@ -17905,7 +17898,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "03C3",
           "input": [
             {
@@ -17930,7 +17923,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "03C4",
           "input": [
             {
@@ -18483,17 +18476,17 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "03E3",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "member": "SetSpritesDrawBeforeFade",
           "name": "SET_SPRITES_DRAW_BEFORE_FADE",
           "num_params": 1,
@@ -18545,18 +18538,18 @@
           "short_desc": "Removes the text box from the screen"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Screen",
+          "id": "03E7",
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
           ],
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Hud",
-          "id": "03E7",
-          "member": "FlashObject",
+          "member": "FlashHudObject",
           "name": "FLASH_HUD_OBJECT",
           "num_params": 1,
           "short_desc": "Makes a specific part of the HUD disappear and reappear several times"
@@ -18663,18 +18656,18 @@
           "short_desc": "Makes the player safe, putting the character in a safe location"
         },
         {
-          "input": [
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_static": true
           },
-          "class": "Text",
+          "class": "Screen",
           "id": "03F0",
-          "member": "UseCommands",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "member": "UseTextCommands",
           "name": "USE_TEXT_COMMANDS",
           "num_params": 1,
           "short_desc": "Enables text and texture drawing"
@@ -20026,7 +20019,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "044D",
           "input": [
             {
@@ -20677,210 +20670,210 @@
           "short_desc": "Returns the ID of the character's current weapon"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Object"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0471",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansObject2D",
           "name": "LOCATE_CHAR_ANY_MEANS_OBJECT_2D",
           "num_params": 5,
           "short_desc": "Returns true if the character is near the object"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Object"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0472",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootObject2D",
           "name": "LOCATE_CHAR_ON_FOOT_OBJECT_2D",
           "num_params": 5,
           "short_desc": "Returns true if character is near the object on foot"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Object"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0473",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarObject2D",
           "name": "LOCATE_CHAR_IN_CAR_OBJECT_2D",
           "num_params": 5,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Object"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0474",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateAnyMeansObject3D",
           "name": "LOCATE_CHAR_ANY_MEANS_OBJECT_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Object"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0475",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateOnFootObject3D",
           "name": "LOCATE_CHAR_ON_FOOT_OBJECT_3D",
           "num_params": 6,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "handle",
-              "type": "Object"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "int"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Char",
           "id": "0476",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "LocateInCarObject3D",
           "name": "LOCATE_CHAR_IN_CAR_OBJECT_3D",
           "num_params": 6,
@@ -22438,32 +22431,32 @@
           "short_desc": ""
         },
         {
+          "class": "Heli",
+          "id": "04D0",
           "input": [
             {
-              "name": "self",
-              "type": "Heli"
+              "name": "_p1",
+              "type": "int"
             },
             {
-              "name": "angle",
+              "name": "_p2",
               "type": "float"
             }
           ],
-          "class": "Heli",
-          "id": "04D0",
           "member": "SetOrientation",
           "name": "SET_HELI_ORIENTATION",
           "num_params": 2,
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Heli"
-            }
-          ],
           "class": "Heli",
           "id": "04D1",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "member": "ClearOrientation",
           "name": "CLEAR_HELI_ORIENTATION",
           "num_params": 1,
@@ -22850,82 +22843,82 @@
           "short_desc": "Reloads the area at the specified coordinates"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Object"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Object",
           "id": "04E5",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            }
+          ],
           "member": "Locate2D",
           "name": "LOCATE_OBJECT_2D",
           "num_params": 6,
           "short_desc": "Returns true if the object is near the specified coordinates"
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Object"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "xRadius",
-              "type": "float"
-            },
-            {
-              "name": "yRadius",
-              "type": "float"
-            },
-            {
-              "name": "zRadius",
-              "type": "float"
-            },
-            {
-              "name": "drawSphere",
-              "type": "bool"
-            }
-          ],
           "attrs": {
             "is_condition": true
           },
           "class": "Object",
           "id": "04E6",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "_p6",
+              "type": "float"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "int"
+            }
+          ],
           "member": "Locate3D",
           "name": "LOCATE_OBJECT_3D",
           "num_params": 8,
@@ -23309,7 +23302,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "04F7",
           "input": [
             {
@@ -25105,31 +25098,31 @@
           "short_desc": "Creates a driver in the vehicle"
         },
         {
-          "input": [
-            {
-              "name": "vehicle",
-              "type": "Car"
-            },
-            {
-              "name": "seatId",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Char",
           "id": "0561",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "CreateRandomAsPassenger",
           "name": "CREATE_RANDOM_CHAR_AS_PASSENGER",
           "num_params": 3,
+          "output": [
+            {
+              "name": "_p3",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "short_desc": "Creates a passenger in a vehicle seat"
         },
         {
@@ -25536,7 +25529,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "057B",
           "member": "WantedStarsAreFlashing",
           "name": "WANTED_STARS_ARE_FLASHING",
@@ -25650,7 +25643,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Hud",
+          "class": "Screen",
           "id": "0581",
           "member": "DisplayRadar",
           "name": "DISPLAY_RADAR",
@@ -25761,18 +25754,18 @@
           "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
           "class": "Char",
           "id": "0588",
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "member": "SetLoadCollisionFlag",
           "name": "SET_LOAD_COLLISION_FOR_CHAR_FLAG",
           "num_params": 2,

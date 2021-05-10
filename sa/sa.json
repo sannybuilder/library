@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620646944086
+    "last_update": 1620649079427
   },
   "extensions": [
     {
@@ -14346,33 +14346,33 @@
           "short_desc": "Plays various music/soundtracks with the specified ID, such as the San Andreas main theme"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "clearParticles",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "0395",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ],
           "member": "ClearArea",
           "name": "CLEAR_AREA",
           "num_params": 5,
@@ -15542,17 +15542,17 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "multiplier",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "03DE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            }
-          ],
           "member": "SetPedDensityMultiplier",
           "name": "SET_PED_DENSITY_MULTIPLIER",
           "num_params": 1,
@@ -33752,20 +33752,25 @@
           "short_desc": "Puts the player in the crane at the building site in Las Venturras"
         },
         {
+          "input": [
+            {
+              "name": "interiorName",
+              "type": "string"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "07FB",
           "name": "SWITCH_ENTRY_EXIT",
           "num_params": 2,
           "short_desc": "Locates the enex marker via the specified name and sets whether it is visible and usable",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SwitchEntryExit",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07FC",
@@ -36874,16 +36879,21 @@
           "member": "IsDoorFullyOpen"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08A8",
           "name": "SET_ALWAYS_DRAW_3D_MARKERS",
           "num_params": 1,
           "short_desc": "Enables an increase in the distance that markers hovering above entities can be seen from",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetAlwaysDraw3DMarkers",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08A9",
@@ -36941,26 +36951,28 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             }
           ],
           "id": "08AD",
           "name": "SET_CHAR_HAS_USED_ENTRY_EXIT",
           "num_params": 4,
-          "short_desc": "Locates the entry/exit marker in the specified radius of the specified coordinates and links it to the character, also setting the appropriate interior ID for the character and setting the appropriate sky color if the character is player controlled"
+          "short_desc": "Locates the entry/exit marker in the specified radius of the specified coordinates and links it to the character, also setting the appropriate interior ID for the character and setting the appropriate sky color if the character is player controlled",
+          "class": "Char",
+          "member": "SetHasUsedEntryExit"
         },
         {
           "id": "08AE",
@@ -37784,28 +37796,30 @@
           "member": "SetColumn"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Blip"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "08DC",
           "name": "SET_BLIP_ENTRY_EXIT",
           "num_params": 4,
           "short_desc": "Assigns the blip to the specified entrance/exit marker",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Blip",
+          "member": "SetEntryExit"
         },
         {
           "id": "08DD",
@@ -38060,16 +38074,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08E7",
           "name": "DISABLE_ALL_ENTRY_EXITS",
           "num_params": 1,
           "short_desc": "Disables all entry/exit markers",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "DisableAllEntryExits",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08E8",
@@ -39832,32 +39851,40 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "094C",
           "name": "GET_POSITION_OF_ENTRY_EXIT_CHAR_USED",
           "num_params": 5,
           "short_desc": "Returns the coordinates and heading of the entry (enex) marker the character used to get to the current interior",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetPositionOfEntryExitCharUsed"
         },
         {
           "id": "094D",
@@ -41631,32 +41658,37 @@
           "member": "GetDoorLockStatus"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "bitmask",
+              "type": "int"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09B4",
           "name": "SET_CLOSEST_ENTRY_EXIT_FLAG",
           "num_params": 5,
           "short_desc": "This command is like 098E, except it finds the appropriate enex marker via it's position instead of it's name",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetClosestEntryExitFlag",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09B5",
@@ -42596,16 +42628,21 @@
           "short_desc": "Draws colored light in radius of the specified point"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09E6",
           "name": "ENABLE_BURGLARY_HOUSES",
           "num_params": 1,
           "short_desc": "Switches enex markers used for burglary missions on or off",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "EnableBurglaryHouses",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44055,44 +44092,57 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "3DMarker",
+              "source": "var_any"
+            }
+          ],
           "id": "0A40",
           "name": "CREATE_USER_3D_MARKER",
           "num_params": 5,
           "short_desc": "Creates a marker similar to the yellow enex markers",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "3DMarker",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "3DMarker"
+            }
+          ],
           "id": "0A41",
           "name": "REMOVE_USER_3D_MARKER",
           "num_params": 1,
           "short_desc": "Destroys a marker created with 0A40",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "3DMarker",
+          "member": "Remove",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "id": "0A42",

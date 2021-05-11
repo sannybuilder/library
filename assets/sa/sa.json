@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620732737202
+    "last_update": 1620749305249
   },
   "extensions": [
     {
@@ -10451,6 +10451,13 @@
           "short_desc": ""
         },
         {
+          "output": [
+            {
+              "name": "mode",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -10459,13 +10466,6 @@
           "member": "GetControllerMode",
           "name": "GET_CONTROLLER_MODE",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "short_desc": "Returns the controller mode"
         },
         {
@@ -32388,39 +32388,43 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Trailer"
+            },
+            {
+              "name": "cab",
+              "type": "Car"
+            }
+          ],
           "id": "07AB",
           "name": "IS_TRAILER_ATTACHED_TO_CAB",
           "num_params": 2,
           "short_desc": "Returns true if CAR A has CAR B attached to it like a trailer",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Trailer",
+          "member": "IsAttachedToCab"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Trailer"
+            },
+            {
+              "name": "cab",
+              "type": "Car"
+            }
+          ],
           "id": "07AC",
           "name": "DETACH_TRAILER_FROM_CAB",
           "num_params": 2,
           "short_desc": "Detaches the trailer from the car which it is attached to",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Trailer",
+          "member": "DetachFromCab"
         },
         {
           "id": "07AD",
@@ -36522,20 +36526,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Trailer"
+            },
+            {
+              "name": "cab",
+              "type": "Car"
+            }
+          ],
           "id": "0893",
           "name": "ATTACH_TRAILER_TO_CAB",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Trailer",
+          "member": "AttachToCab"
         },
         {
           "id": "0894",
@@ -43488,20 +43494,20 @@
           "member": "PlayAnimSecondary"
         },
         {
-          "id": "0A1B",
-          "name": "IS_CHAR_TOUCHING_CHAR",
-          "num_params": 2,
-          "short_desc": "Returns true if one character is touching the other",
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "other",
+              "name": "handle",
               "type": "Char"
             }
           ],
+          "id": "0A1B",
+          "name": "IS_CHAR_TOUCHING_CHAR",
+          "num_params": 2,
+          "short_desc": "Returns true if one character is touching the other",
           "attrs": {
             "is_condition": true
           },
@@ -44188,16 +44194,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "mult",
+              "type": "float"
+            }
+          ],
           "id": "0A45",
           "name": "SET_RAILTRACK_RESISTANCE_MULT",
           "num_params": 1,
           "short_desc": "Sets the friction/slowdown rate on all rail tracks",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetRailtrackResistanceMult",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A46",

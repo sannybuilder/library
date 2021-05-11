@@ -47,6 +47,7 @@ Streaming
 StuckCarCheck
 Task
 Text
+Trailer
 Train
 Txd
 Weather
@@ -472,7 +473,7 @@ IsStoppedInAreaOnFoot3D,01A9,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f
 IsStuckUnderCar,095D,1,0,("self: Char")
 IsSwimming,0965,1,0,("self: Char")
 IsTalking,094D,1,0,("self: Char")
-IsTouchingChar,0A1B,1,0,("self: Char" "other: Char")
+IsTouchingChar,0A1B,1,0,("self: Char" "handle: Char")
 IsTouchingObject,0179,1,0,("self: Char" "handle: Object")
 IsTouchingObjectOnFoot,023B,1,0,("self: Char" "handle: Object")
 IsTouchingVehicle,0547,1,0,("self: Char" "handle: Car")
@@ -903,7 +904,7 @@ $END
 
 $Pad
 $BEGIN
-GetControllerMode,0293,0,0,("_p1%i")
+GetControllerMode,0293,0,0,("mode%i")
 GetPositionOfAnalogueSticks,0494,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4%i" "_p5%i")
 GetState,00E2,0,0,("joypadsId: Pad" "buttonId: Button" "state%i")
 IsButtonPressed,00E1,1,0,("joypadsId: Pad" "buttonId: Button")
@@ -1324,6 +1325,13 @@ StringFormat,0AD3,0,0,("_p1: any" "_p2: any" "_p3: any")
 UseCommands,03F0,0,0,("state%b")
 $END
 
+$Trailer
+$BEGIN
+AttachToCab,0893,0,0,("self: Trailer" "cab: Car")
+DetachFromCab,07AC,0,0,("self: Trailer" "cab: Car")
+IsAttachedToCab,07AB,1,0,("self: Trailer" "cab: Car")
+$END
+
 $Train
 $BEGIN
 Create,06D8,0,0,("type%i" "x%f" "y%f" "z%f" "direction%b" "handle: Train")
@@ -1441,6 +1449,7 @@ SetGangWarsActive,0879,0,0,("state%b")
 SetGangWarsTrainingMission,08AC,0,0,("state%b")
 SetOnlyCreateGangMembers,0983,0,0,("state%b")
 SetPedDensityMultiplier,03DE,0,0,("multiplier%f")
+SetRailtrackResistanceMult,0A45,0,0,("mult%f")
 SetScriptLimitToGangSize,08F4,0,0,("maxSize%i")
 SetSpecificZoneToTriggerGangWar,090C,0,0,("zone%s")
 SetVisibilityOfClosestObjectOfType,0363,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_any" "state%b")

@@ -291,7 +291,7 @@ IsInAreaOnFoot3D,01A6,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%
 IsInCar,00DB,1,0,("self: Char" "handle: Car")
 IsInCharsGroup,031F,1,0,("_p1%i" "_p2%i")
 IsInControl,03E9,1,0,("_p1%i")
-IsInModel,00DD,1,0,("self: Char" "modelId: model_ide")
+IsInModel,00DD,1,0,("self: Char" "vehiclemodelId: model_ide")
 IsInPlayersGroup,0320,1,0,("_p1%i" "_p2%i")
 IsInZone,0154,1,0,("self: Char" "zoneId%s")
 IsLyingDown,047F,1,0,("_p1%i")
@@ -645,8 +645,8 @@ $END
 $Pad
 $BEGIN
 GetControllerMode,0293,0,0,("_p1%i")
-GetState,00E2,0,0,("padId%i" "buttonId%i" "state%i")
-IsButtonPressed,00E1,1,0,("_p1%i" "_p2%i")
+GetState,00E2,0,0,("joypadsId: Pad" "buttonId: Button" "state%i")
+IsButtonPressed,00E1,1,0,("joypadsId: Pad" "buttonId: Button")
 Shake,015B,0,0,("_p1%i" "_p2%i" "_p3%i")
 $END
 
@@ -747,7 +747,7 @@ IsInAreaInCar3D,019D,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f
 IsInAreaOnFoot2D,0197,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 IsInAreaOnFoot3D,019C,1,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%i")
 IsInCar,00DC,1,0,("self: Player" "handle: Car")
-IsInModel,00DE,1,0,("self: Player" "modelId: model_ide")
+IsInModel,00DE,1,0,("self: Player" "vehiclemodelId: model_ide")
 IsInRemoteMode,0241,1,0,("self: Player")
 IsInTaxi,02DE,1,0,("self: Player")
 IsInZone,0121,1,0,("self: Player" "zone: gxt_key")
@@ -790,7 +790,7 @@ LocateInCar2D,00E5,1,0,("self: Player" "x%f" "y%f" "xRadius%f" "yRadius%f" "draw
 LocateInCar3D,00F7,1,0,("self: Player" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateInCarCar2D,01FE,1,0,("self: Player" "handle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateInCarCar3D,0201,1,0,("self: Player" "handle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
-LocateInCarChar2D,00EB,1,0,("self: Player" "handle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateInCarChar2D,00EB,1,0,("self: Player" "handle: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateInCarChar3D,00FD,1,0,("self: Player" "handle: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateOnFoot2D,00E4,1,0,("self: Player" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFoot3D,00F6,1,0,("self: Player" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
@@ -846,7 +846,7 @@ $END
 $Rc
 $BEGIN
 BlowUpBuggy,0409,0,0,()
-GiveCarToPlayer,010C,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f")
+GiveCarToPlayer,010C,0,0,("handle: Player" "x%f" "y%f" "z%f" "angle%f")
 GiveModelToPlayer,046E,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%i")
 $END
 

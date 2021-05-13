@@ -281,6 +281,9 @@ export class CommandEditorComponent implements OnInit {
       case 'g':
         param.type = PrimitiveType.gxt_key;
         break;
+      case 'z':
+        param.type = PrimitiveType.zone_key;
+        break;
     }
     this.updateErrors();
   }
@@ -387,6 +390,13 @@ export class CommandEditorComponent implements OnInit {
 
     if (['state', 'flag'].includes(name) && type !== PrimitiveType.boolean) {
       return PrimitiveType.boolean;
+    }
+
+    if (
+      ['x', 'y', 'z', 'angle'].includes(name) &&
+      type !== PrimitiveType.float
+    ) {
+      return PrimitiveType.float;
     }
 
     // suggest the type if the input name is same called
@@ -528,9 +538,8 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private updateNoOutputParamsError() {
-    this.errors.noConstructorWithoutOutputParams = doesConstructorCommandHaveNoOutputParams(
-      this.command
-    );
+    this.errors.noConstructorWithoutOutputParams =
+      doesConstructorCommandHaveNoOutputParams(this.command);
   }
 
   private updateEmptyNameError() {
@@ -548,8 +557,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private missingSelfParamInMethod() {
-    this.errors.missingSelfParamInMethod = doesCommandHaveMissingSelfParamInMethod(
-      this.command
-    );
+    this.errors.missingSelfParamInMethod =
+      doesCommandHaveMissingSelfParamInMethod(this.command);
   }
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { isStringEnum } from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
 
 @Component({
@@ -8,6 +9,16 @@ import { EnumRaw, Game } from '../../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EnumOverviewComponent {
-  @Input() enumToView: EnumRaw;
+  private _enumToView: EnumRaw;
+  isStringEnum = false;
+
+  @Input() set enumToView(val: EnumRaw) {
+    this._enumToView = val;
+    this.isStringEnum = isStringEnum(val.fields);
+  }
+  get enumToView() {
+    return this._enumToView;
+  }
+
   @Input() enumGames: Game[];
 }

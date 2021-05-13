@@ -32,6 +32,7 @@ function primitiveTypes(game: Game): PrimitiveType[] {
     PrimitiveType.model_any,
     PrimitiveType.model_ide,
     PrimitiveType.gxt_key,
+    PrimitiveType.zone_key,
   ];
 
   if (game === Game.SA) {

@@ -24,6 +24,7 @@ export enum PrimitiveType {
   string = 'string',
   string128 = 'string128',
   gxt_key = 'gxt_key',
+  zone_key = 'zone_key',
   model_any = 'model_any',
   model_ide = 'model_ide',
   int_script_id = 'script_id',

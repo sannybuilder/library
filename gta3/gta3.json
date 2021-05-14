@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1620967825017
+    "last_update": 1620968923400
   },
   "extensions": [
     {
@@ -6726,7 +6726,7 @@
           "member": "DisplayCounter",
           "name": "DISPLAY_ONSCREEN_COUNTER",
           "num_params": 2,
-          "short_desc": "Displays an onscreen counter, either as a number or bar"
+          "short_desc": "Displays an onscreen counter, either shown in numbers or as a bar"
         },
         {
           "input": [
@@ -6747,15 +6747,10 @@
           "short_desc": "Removes the onscreen counter (0150 or 03C4)"
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Zone",
-          "id": "0152",
           "input": [
             {
-              "name": "_p1",
-              "type": "string"
+              "name": "zone",
+              "type": "zone_key"
             },
             {
               "name": "_p2",
@@ -6822,6 +6817,11 @@
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Zone",
+          "id": "0152",
           "member": "SetCarInfo",
           "name": "SET_ZONE_CAR_INFO",
           "num_params": 17,
@@ -6857,54 +6857,54 @@
           "short_desc": "Returns true if the character is in the specified zone"
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "dayOrNight",
+              "type": "DayOrNight"
+            },
+            {
+              "name": "density",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Zone",
           "id": "0155",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "SetCarDensity",
           "name": "SET_CAR_DENSITY",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Sets the car traffic density in the specified zone during the day or at night"
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "dayOrNight",
+              "type": "DayOrNight"
+            },
+            {
+              "name": "density",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Zone",
           "id": "0156",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "string"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "SetPedDensity",
           "name": "SET_PED_DENSITY",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Sets the pedestrian density in the specified zone during the day or at night"
         },
         {
           "input": [
@@ -7018,15 +7018,10 @@
           "short_desc": "Shakes the player's joypad at the specified intensity for the specified time"
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Zone",
-          "id": "015C",
           "input": [
             {
-              "name": "_p1",
-              "type": "string"
+              "name": "zone",
+              "type": "zone_key"
             },
             {
               "name": "_p2",
@@ -7069,6 +7064,11 @@
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Zone",
+          "id": "015C",
           "member": "SetPedInfo",
           "name": "SET_ZONE_PED_INFO",
           "num_params": 11,
@@ -7384,15 +7384,15 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "r",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "g",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "b",
               "type": "int"
             }
           ],
@@ -7404,7 +7404,7 @@
           "member": "SetFadingColor",
           "name": "SET_FADING_COLOUR",
           "num_params": 3,
-          "short_desc": "Sets the RGB color of the fade command"
+          "short_desc": "Sets the RGB color of the fade command (016A)"
         },
         {
           "input": [
@@ -9485,34 +9485,34 @@
           "short_desc": "Sets whether player control is enabled"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "WeaponType"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Weather",
           "id": "01B5",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "Force",
           "name": "FORCE_WEATHER",
           "num_params": 1,
-          "short_desc": "Forces the game weather to the specified value"
+          "short_desc": "Forces the game weather to the specified type"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "WeatherType"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Weather",
           "id": "01B6",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "ForceNow",
           "name": "FORCE_WEATHER_NOW",
           "num_params": 1,
@@ -22138,21 +22138,21 @@
           "short_desc": "Overrides the police station level (island)"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Weather",
           "id": "0421",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "ForceRain",
           "name": "FORCE_RAIN",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Forces rain everywhere"
         },
         {
           "input": [

@@ -43,8 +43,7 @@ forEach(content.extensions, (extension) => {
         console.error(
           `Error: ${translations?.ui?.errors?.command?.[key]}, id: ${command.id}, extension: ${extension.name}`
         );
-        // benign errors for now
-        // exitStatus = 1;
+        exitStatus = 1;
       }
     });
     validateFormatting(command, extension.name);

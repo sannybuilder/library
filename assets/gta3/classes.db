@@ -117,7 +117,7 @@ PointAtPoint,0160,0,0,("x%f" "y%f" "z%f" "switchStyle%i")
 Restore,015A,0,0,()
 RestoreJumpcut,02EB,0,0,()
 SetBehindPlayer,0373,0,0,()
-SetFadingColor,0169,0,0,("_p1%i" "_p2%i" "_p3%i")
+SetFadingColor,0169,0,0,("r%i" "g%i" "b%i")
 SetFixedPosition,015F,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 SetGenerateCarsAround,03EA,0,0,("_p1%i")
 SetInFrontOfPlayer,03C8,0,0,()
@@ -1003,9 +1003,9 @@ $END
 
 $Weather
 $BEGIN
-Force,01B5,0,0,("_p1%i")
-ForceNow,01B6,0,0,("_p1%i")
-ForceRain,0421,0,0,("_p1%i")
+Force,01B5,0,0,("type: WeaponType")
+ForceNow,01B6,0,0,("type: WeatherType")
+ForceRain,0421,0,0,("state%b")
 Release,01B7,0,0,()
 Restore,0252,0,0,()
 Store,0251,0,0,()
@@ -1049,11 +1049,11 @@ $END
 
 $Zone
 $BEGIN
-SetCarDensity,0155,0,0,("_p1%s" "_p2%i" "_p3%i")
-SetCarInfo,0152,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i" "_p14%i" "_p15%i" "_p16%i" "_p17%i")
+SetCarDensity,0155,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i")
+SetCarInfo,0152,0,0,("zone: zone_key" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i" "_p14%i" "_p15%i" "_p16%i" "_p17%i")
 SetGroup,0324,0,0,("_p1%s" "_p2%i" "_p3%i")
-SetPedDensity,0156,0,0,("_p1%s" "_p2%i" "_p3%i")
-SetPedInfo,015C,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i")
+SetPedDensity,0156,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i")
+SetPedInfo,015C,0,0,("zone: zone_key" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i")
 $END
 
 #EOF

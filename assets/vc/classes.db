@@ -34,6 +34,7 @@ Rc
 Restart
 ScriptFire
 Shortcut
+Sound
 Sphere
 Stat
 Streaming
@@ -53,8 +54,7 @@ $END
 
 $Audio
 $BEGIN
-AddContinuousSound,018D,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5%i")
-AddOneOffSound,018C,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i")
+AddOneOffSound,018C,0,0,("x%f" "y%f" "z%f" "soundId%i")
 ClearMissionAudio,040D,0,0,("_p1%i")
 HasMissionAudioFinished,03D2,1,0,("_p1%i")
 HasMissionAudioLoaded,03D0,1,0,("_p1%i")
@@ -65,7 +65,6 @@ PlayEndOfGameTune,043F,0,0,()
 PlayMissionAudio,03D1,0,0,("_p1%i")
 PlayMissionPassedTune,0394,0,0,("_p1%i")
 PoliceRadioMessage,03AA,0,0,("_p1%f" "_p2%f" "_p3%f")
-RemoveSound,018E,0,0,("_p1%i")
 SetMissionAudioPosition,03D7,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f")
 SetMusicDoesFade,043C,0,0,("state%b")
 SetRadioChannel,041E,0,0,("_p1%i" "_p2%i")
@@ -384,7 +383,7 @@ SetObjFleeOnFootAlways,01CF,0,0,("self: Char" "fromChar: Char")
 SetObjFleeOnFootTillSafe,0193,0,0,("self: Char")
 SetObjFleePlayerOnFootAlways,01D0,0,0,("self: Char" "fromPlayer: Player")
 SetObjFleePlayerOnFootTillSafe,01CE,0,0,("self: Char" "fromPlayer: Player")
-SetObjFollowRoute,01E1,0,0,("self: Char" "_p2%i" "mode%i")
+SetObjFollowRoute,01E1,0,0,("self: Char" "routeId%i" "mode: FollowRoute")
 SetObjGotoAreaOnFoot,01DA,0,0,("self: Char" "_p2%f" "_p3%f" "_p4%f" "_p5%f")
 SetObjGotoCoordOnFoot,0211,0,0,("self: Char" "x%f" "y%f")
 SetObjGotoOnFoot,01D1,0,0,("self: Char" "toChar: Char")
@@ -639,13 +638,13 @@ $END
 
 $Path
 $BEGIN
-AddRoutePoint,01E2,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f")
+AddRoutePoint,01E2,0,0,("routeId%i" "x%f" "y%f" "z%f")
 GetClosestCarNode,02C1,0,0,("xCoord%f" "yCoord%f" "zCoord%f" "x%f" "y%f" "z%f")
 GetClosestCarNodeWithHeading,03D3,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f")
 GetClosestCharNode,02C0,0,0,("xCoord%f" "yCoord%f" "zCoord%f" "x%f" "y%f" "z%f")
 GetClosestStraightRoad,04B9,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%f" "_p9%f" "_p10%f" "_p11%f" "_p12%f")
 GetNthClosestCarNode,04D3,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5%f" "_p6%f" "_p7%f")
-RemoveRoute,03AC,0,0,("_p1%i")
+RemoveRoute,03AC,0,0,("routeId%i")
 SwitchPedRoadsOff,022B,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 SwitchPedRoadsOn,022A,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 SwitchRoadsOff,01E8,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
@@ -854,6 +853,12 @@ ClearTaxi,0557,0,0,()
 SetDropoffPointForMission,058E,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f")
 SetPickupPoint,058D,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f")
 SetUpTaxi,0556,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%f")
+$END
+
+$Sound
+$BEGIN
+AddContinuous,018D,0,0,("x%f" "y%f" "z%f" "soundId%i" "handle: Sound")
+Remove,018E,0,0,("self: Sound")
 $END
 
 $Sphere

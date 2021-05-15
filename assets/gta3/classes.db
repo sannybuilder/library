@@ -37,6 +37,7 @@ Rampage
 Rc
 Restart
 ScriptFire
+Sound
 Sphere
 Stat
 Streaming
@@ -55,8 +56,7 @@ $END
 
 $Audio
 $BEGIN
-AddContinuousSound,018D,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5%i")
-AddOneOffSound,018C,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i")
+AddOneOffSound,018C,0,0,("x%f" "y%f" "z%f" "soundId%i")
 ClearMissionAudio,040D,0,0,()
 HasMissionAudioFinished,03D2,1,0,()
 HasMissionAudioLoaded,03D0,1,0,()
@@ -66,7 +66,6 @@ PlayEndOfGameTune,043F,0,0,()
 PlayMissionAudio,03D1,0,0,()
 PlayMissionPassedTune,0394,0,0,("_p1%i")
 PoliceRadioMessage,03AA,0,0,("_p1%f" "_p2%f" "_p3%f")
-RemoveSound,018E,0,0,("_p1%i")
 SetMissionAudioPosition,03D7,0,0,("_p1%f" "_p2%f" "_p3%f")
 SetMusicDoesFade,043C,0,0,("state%b")
 SetRadioChannel,041E,0,0,("_p1%i" "_p2%i")
@@ -383,7 +382,7 @@ SetObjFleeOnFootTillSafe,01CD,0,0,("self: Char" "fromChar: Char")
 SetObjFleePlayerOnFootAlways,01D0,0,0,("self: Char" "fromPlayer: Player")
 SetObjFleePlayerOnFootTillSafe,01CE,0,0,("self: Char" "fromPlayer: Player")
 SetObjFollowCharInFormation,030B,0,0,("self: Char" "_p2%i" "_p3%i")
-SetObjFollowRoute,01E1,0,0,("self: Char" "_p2%i" "mode%i")
+SetObjFollowRoute,01E1,0,0,("self: Char" "routeId%i" "mode: FollowRoute")
 SetObjGotoAreaAnyMeans,029D,0,0,("self: Char" "_p2%f" "_p3%f" "_p4%f" "_p5%f")
 SetObjGotoAreaOnFoot,01DA,0,0,("self: Char" "_p2%f" "_p3%f" "_p4%f" "_p5%f")
 SetObjGotoCoordOnFoot,0211,0,0,("self: Char" "x%f" "y%f")
@@ -662,7 +661,7 @@ $END
 
 $Path
 $BEGIN
-AddRoutePoint,01E2,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f")
+AddRoutePoint,01E2,0,0,("routeId%i" "x%f" "y%f" "z%f")
 GetClosestCarNode,02C1,0,0,("xCoord%f" "yCoord%f" "zCoord%f" "x%f" "y%f" "z%f")
 GetClosestCarNodeWithHeading,03D3,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f")
 GetClosestCarNodeWithHeadingAwayPoint,0462,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%f" "_p9%f")
@@ -670,7 +669,7 @@ GetClosestCarNodeWithHeadingTowardsPoint,0461,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%
 GetClosestCharNode,02C0,0,0,("xCoord%f" "yCoord%f" "zCoord%f" "x%f" "y%f" "z%f")
 MarkPedRoadsBetweenLevels,0427,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 MarkRoadsBetweenLevels,0426,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
-RemoveRoute,03AC,0,0,("_p1%i")
+RemoveRoute,03AC,0,0,("routeId%i")
 SwitchPedRoadsOff,022B,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
 SwitchPedRoadsOffAngled,0399,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f")
 SwitchPedRoadsOn,022A,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
@@ -874,6 +873,12 @@ CreateCharFire,0326,0,0,("char: Char" "handle: ScriptFire")
 IsExtinguished,02D0,1,0,("self: ScriptFire")
 Remove,02D1,0,0,("self: ScriptFire")
 SetAudio,0444,0,0,("self: ScriptFire" "state%b")
+$END
+
+$Sound
+$BEGIN
+AddContinuous,018D,0,0,("x%f" "y%f" "z%f" "soundId%i" "handle: Sound")
+Remove,018E,0,0,("self: Sound")
 $END
 
 $Sphere

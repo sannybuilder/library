@@ -41,6 +41,7 @@ Restart
 ScriptFire
 Searchlight
 Sequence
+Sound
 Sphere
 Stat
 Streaming
@@ -68,14 +69,13 @@ $END
 
 $Audio
 $BEGIN
-AddOneOffSound,018C,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i")
+AddOneOffSound,018C,0,0,("x%f" "y%f" "z%f" "soundId%i")
 ClearMissionAudio,040D,0,0,("_p1%i")
 HasMissionAudioFinished,03D2,1,0,("_p1%i")
 HasMissionAudioLoaded,03D0,1,0,("_p1%i")
 LoadMissionAudio,03CF,0,0,("_p1%i" "_p2%s")
 PlayMissionAudio,03D1,0,0,("_p1%i")
 PlayMissionPassedTune,0394,0,0,("_p1%i")
-RemoveSound,018E,0,0,("_p1%i")
 SetMissionAudioPosition,03D7,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f")
 SetMusicDoesFade,043C,0,0,("state%b")
 $END
@@ -1089,6 +1089,11 @@ Clear,061B,0,0,("self: Sequence")
 Close,0616,0,0,("self: Sequence")
 Open,0615,0,0,("handle: Sequence")
 SetToRepeat,0643,0,0,("self: Sequence" "state%b")
+$END
+
+$Sound
+$BEGIN
+Remove,018E,0,0,("self: Sound")
 $END
 
 $Sphere

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621031160108
+    "last_update": 1621042455419
   },
   "extensions": [
     {
@@ -8126,86 +8126,84 @@
           "short_desc": "Changes the display of the specified blip"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "soundId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Audio",
           "id": "018C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ],
           "member": "AddOneOffSound",
           "name": "ADD_ONE_OFF_SOUND",
           "num_params": 4,
           "short_desc": "Plays a sound with the specified ID at the specified X, Y and Z coordinates"
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Audio",
-          "id": "018D",
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "soundId",
               "type": "int"
             }
           ],
-          "member": "AddContinuousSound",
-          "name": "ADD_CONTINUOUS_SOUND",
-          "num_params": 5,
           "output": [
             {
-              "name": "_p5",
-              "type": "int",
+              "name": "handle",
+              "type": "Sound",
               "source": "var_any"
             }
           ],
+          "attrs": {
+            "is_static": true,
+            "is_constructor": true
+          },
+          "class": "Sound",
+          "id": "018D",
+          "member": "AddContinuous",
+          "name": "ADD_CONTINUOUS_SOUND",
+          "num_params": 5,
           "short_desc": "Creates a continuous sound at the specified coordinates and stores the handle to a variable"
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Audio",
-          "id": "018E",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Sound"
             }
           ],
-          "member": "RemoveSound",
+          "class": "Sound",
+          "id": "018E",
+          "member": "Remove",
           "name": "REMOVE_SOUND",
           "num_params": 1,
-          "short_desc": "Stops the sound with the specified ID"
+          "short_desc": "Stops the sound"
         },
         {
           "input": [
@@ -10247,12 +10245,12 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "routeId",
               "type": "int"
             },
             {
               "name": "mode",
-              "type": "int"
+              "type": "FollowRoute"
             }
           ],
           "class": "Char",
@@ -10260,36 +10258,36 @@
           "member": "SetObjFollowRoute",
           "name": "SET_CHAR_OBJ_FOLLOW_ROUTE",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Makes the character follow along the specified route"
         },
         {
+          "input": [
+            {
+              "name": "routeId",
+              "type": "int"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Path",
           "id": "01E2",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "AddRoutePoint",
           "name": "ADD_ROUTE_POINT",
           "num_params": 4,
-          "short_desc": ""
+          "short_desc": "Adds a new waypoint to the route with the specified id"
         },
         {
           "input": [
@@ -20050,21 +20048,21 @@
           "short_desc": "Makes the car stronger"
         },
         {
+          "input": [
+            {
+              "name": "routeId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Path",
           "id": "03AC",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "RemoveRoute",
           "name": "REMOVE_ROUTE",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Clears all waypoints in the route with the specified id"
         },
         {
           "attrs": {

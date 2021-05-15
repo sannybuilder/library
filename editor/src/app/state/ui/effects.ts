@@ -51,92 +51,102 @@ export class UiEffects {
     this._actions$.pipe(
       ofType(onListEnter),
       withLatestFrom(this._ui.canEdit$),
-      switchMap(([{ opcode, extension, enumName, className }, canEdit]) => {
-        if (enumName) {
-          if (enumName === 'all') {
-            return [displayEnumsList()];
-          }
-          return this._enums.enums$.pipe(
-            first((v): v is Enums => !!v),
-            map((enums) => {
-              const name =
-                enumName.toLowerCase() === 'new'
-                  ? ''
-                  : capitalizeFirst(enumName);
-              const enumToEdit = enums[name];
-              const isNew = !enumToEdit;
+      switchMap(
+        ([{ opcode, extension, enumName, className, action }, canEdit]) => {
+          if (enumName) {
+            if (enumName === 'all') {
+              return [displayEnumsList()];
+            }
+            return this._enums.enums$.pipe(
+              first((v): v is Enums => !!v),
+              map((enums) => {
+                const name =
+                  enumName.toLowerCase() === 'new'
+                    ? ''
+                    : capitalizeFirst(enumName);
+                const enumToEdit = enums[name];
+                const isNew = !enumToEdit;
 
-              if (isNew) {
-                if (!canEdit) {
-                  return stopEditOrDisplay();
+                if (isNew) {
+                  if (!canEdit) {
+                    return stopEditOrDisplay();
+                  }
+                  return displayOrEditEnum({
+                    enumToEdit: { isNew, name, fields: [] },
+                    viewMode: ViewMode.EditEnum,
+                  });
                 }
+
                 return displayOrEditEnum({
-                  enumToEdit: { isNew, name, fields: [] },
-                  viewMode: ViewMode.EditEnum,
+                  enumToEdit: {
+                    isNew,
+                    name,
+                    fields: Object.entries(enumToEdit),
+                  },
+                  viewMode:
+                    action === 'edit' ? ViewMode.EditEnum : ViewMode.ViewEnum,
                 });
-              }
-
-              return displayOrEditEnum({
-                enumToEdit: { isNew, name, fields: Object.entries(enumToEdit) },
-                viewMode: ViewMode.ViewEnum,
-              });
-            })
-          );
-        }
-
-        if (className) {
-          if (className === 'all') {
-            return [displayClassesList()];
+              })
+            );
           }
-          return this._extensions.entities$.pipe(
-            first((v): v is Record<string, Entity[]> => !!v),
-            map((entities) => {
-              if (flatMap(entities).some((e) => e.name === className)) {
-                return displayClassOverview({ className });
-              } else {
-                return stopEditOrDisplay();
-              }
-            })
-          );
-        }
 
-        if (opcode && extension) {
-          return this._extensions.extensions$.pipe(
-            first<Extension[]>(Boolean),
-            map((extensions) => {
-              const commandId =
-                opcode.toLowerCase() === 'new' ? '' : opcodify(opcode);
-              const commandToEdit = extensions
-                .find((e) => e.name === extension)
-                ?.commands.find(({ id }) => id === commandId);
-
-              const isNew = !commandToEdit;
-              if (isNew) {
-                if (!canEdit) {
+          if (className) {
+            if (className === 'all') {
+              return [displayClassesList()];
+            }
+            return this._extensions.entities$.pipe(
+              first((v): v is Record<string, Entity[]> => !!v),
+              map((entities) => {
+                if (flatMap(entities).some((e) => e.name === className)) {
+                  return displayClassOverview({ className });
+                } else {
                   return stopEditOrDisplay();
                 }
+              })
+            );
+          }
+
+          if (opcode && extension) {
+            return this._extensions.extensions$.pipe(
+              first<Extension[]>(Boolean),
+              map((extensions) => {
+                const commandId =
+                  opcode.toLowerCase() === 'new' ? '' : opcodify(opcode);
+                const commandToEdit = extensions
+                  .find((e) => e.name === extension)
+                  ?.commands.find(({ id }) => id === commandId);
+
+                const isNew = !commandToEdit;
+                if (isNew) {
+                  if (!canEdit) {
+                    return stopEditOrDisplay();
+                  }
+                  return displayOrEditCommandInfo({
+                    extension,
+                    command: {
+                      id: commandId,
+                      name: '',
+                      num_params: 0,
+                    },
+                    viewMode: ViewMode.EditCommand,
+                  });
+                }
+
                 return displayOrEditCommandInfo({
                   extension,
-                  command: {
-                    id: commandId,
-                    name: '',
-                    num_params: 0,
-                  },
-                  viewMode: ViewMode.EditCommand,
+                  command: commandToEdit!,
+                  viewMode:
+                    action === 'edit'
+                      ? ViewMode.EditCommand
+                      : ViewMode.ViewCommand,
                 });
-              }
+              })
+            );
+          }
 
-              return displayOrEditCommandInfo({
-                extension,
-                command: commandToEdit!,
-                viewMode: ViewMode.ViewCommand,
-              });
-            })
-          );
+          return [stopEditOrDisplay()];
         }
-
-        return [stopEditOrDisplay()];
-      })
+      )
     )
   );
 

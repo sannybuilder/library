@@ -21,15 +21,17 @@ export class GameFacade {
     extension,
     enumName,
     className,
+    action,
   }: {
     game: Game;
     extension: string;
     opcode?: string;
     enumName?: string;
     className?: string;
+    action?: string;
   }) {
     this.store$.dispatch(
-      onListEnter({ game, opcode, extension, enumName, className })
+      onListEnter({ game, opcode, extension, enumName, className, action })
     );
   }
 }

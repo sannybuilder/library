@@ -35,7 +35,13 @@
               ></div>
 
               <div
-                class="col-9 order-1 d-flex justify-content-end align-items-center"
+                class="
+                  col-9
+                  order-1
+                  d-flex
+                  justify-content-end
+                  align-items-center
+                "
                 [ngClass]="{
                   'col-md-11': narrowed,
                   'col-md-4': !narrowed,
@@ -57,8 +63,13 @@
                 <a
                   *ngIf="canEdit"
                   class="btn small text-muted"
-                  href="#"
-                  (click)="onEdit(row.command, row.extension)"
+                  [routerLink]="[
+                    '/',
+                    game,
+                    row.extension,
+                    row.command.id,
+                    'edit'
+                  ]"
                   >{{ "ui.shared.edit" | translate }}</a
                 >
 

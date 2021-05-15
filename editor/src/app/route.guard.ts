@@ -48,6 +48,7 @@ export class RouteGuard implements CanActivate {
         game,
         className,
         extension: DEFAULT_EXTENSION,
+        action: segments.shift(),
       });
       return true;
     }
@@ -58,6 +59,7 @@ export class RouteGuard implements CanActivate {
         game,
         enumName,
         extension: DEFAULT_EXTENSION,
+        action: segments.shift(),
       });
       return true;
     }
@@ -69,6 +71,7 @@ export class RouteGuard implements CanActivate {
       game,
       extension,
       opcode,
+      action: segments.shift(),
     });
 
     return true;

@@ -132,14 +132,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  onEditCommand(command: Command, extension: string) {
-    this._ui.editCommandInfo(command, extension);
-  }
-
-  onEditEnum(enumToEdit: EnumRaw) {
-    this._ui.editEnum(enumToEdit);
-  }
-
   onDeleteEnum() {
     this.enumToDisplayOrEdit = { name: '', fields: [], isNew: false };
     this._onSaveEnum();
@@ -170,9 +162,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._snippets.getSnippet(extension, opcode);
   }
   getExtensionsEntities(extensions: string[]) {
-    return (extensions?.length
-      ? zip(...extensions.map((e) => this._extensions.getExtensionEntities(e)))
-      : of([])
+    return (
+      extensions?.length
+        ? zip(
+            ...extensions.map((e) => this._extensions.getExtensionEntities(e))
+          )
+        : of([])
     ).pipe(
       map((entities) =>
         uniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
@@ -237,11 +232,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   resetChanges(viewMode: ViewMode) {
     if (viewMode === ViewMode.EditCommand) {
-      this.onEditCommand(this.oldCommand!, this.oldExtension!);
+      this._ui.editCommandInfo(this.oldCommand!, this.oldExtension!);
       this.snippet = this.oldSnippet;
     }
     if (viewMode === ViewMode.EditEnum) {
-      this.onEditEnum(this.oldEnumToEdit!);
+      this._ui.editEnum(this.oldEnumToEdit!);
     }
     return false;
   }

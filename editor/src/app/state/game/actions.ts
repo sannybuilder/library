@@ -9,6 +9,7 @@ export const onListEnter = createAction(
     opcode?: string;
     enumName?: string;
     className?: string;
+    action?: string;
   }>()
 );
 

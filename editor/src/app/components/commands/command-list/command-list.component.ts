@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Command, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
@@ -19,10 +13,6 @@ export class CommandListComponent {
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
-  @Output() edit: EventEmitter<{
-    command: Command;
-    extension: string;
-  }> = new EventEmitter();
 
   loading$ = this._extensions.loading$;
   currentPage$ = this._ui.currentPage$;
@@ -34,11 +24,6 @@ export class CommandListComponent {
     private _snippets: SnippetsFacade,
     private _ui: UiFacade
   ) {}
-
-  onEdit(command: Command, extension: string) {
-    this.edit.emit({ command, extension });
-    return false;
-  }
 
   getSnippet(extension: string, opcode: string) {
     return this._snippets.getSnippet(extension, opcode);

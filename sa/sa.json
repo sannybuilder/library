@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621043982270
+    "last_update": 1621066993531
   },
   "extensions": [
     {
@@ -22256,28 +22256,39 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
           "id": "059D",
           "name": "SHUFFLE_CARD_DECKS",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "CardDecks",
+          "member": "Shuffle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "number",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "059E",
           "name": "FETCH_NEXT_CARD",
           "num_params": 1,
-          "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "short_desc": "Returns a random number between 1 and 52, inclusive.",
+          "class": "CardDecks",
+          "member": "FetchNextCard",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -24592,36 +24603,46 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DecisionMakerChar",
+              "source": "var_any"
+            }
+          ],
           "id": "060A",
           "name": "LOAD_CHAR_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "Creates a decision maker with the specified type",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMakerChar",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "maskOrHandle",
+              "type": "DecisionMakerChar"
+            }
+          ],
           "id": "060B",
           "name": "SET_CHAR_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "Sets the decision maker for the character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetDecisionMaker"
         },
         {
           "id": "060C",
@@ -26022,16 +26043,21 @@
           "member": "GetCoordinates"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DecisionMaker"
+            }
+          ],
           "id": "065C",
           "name": "REMOVE_DECISION_MAKER",
           "num_params": 1,
           "short_desc": "Removes the decision maker",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMaker",
+          "member": "Remove",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "id": "065D",
@@ -27816,36 +27842,46 @@
           "member": "GetSpeed"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Group"
+            },
+            {
+              "name": "maskOrHandle",
+              "type": "DecisionMakerGroup"
+            }
+          ],
           "id": "06AD",
           "name": "SET_GROUP_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "Sets the decision maker for a group of characters",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Group",
+          "member": "SetDecisionMaker"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DecisionMakerGroup",
+              "source": "var_any"
+            }
+          ],
           "id": "06AE",
           "name": "LOAD_GROUP_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "Creates a decision maker for use on groups of actors",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMakerGroup",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "id": "06AF",
@@ -29630,64 +29666,68 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DecisionMakerChar"
+            },
+            {
+              "name": "eventId",
+              "type": "int"
+            }
+          ],
           "id": "0708",
           "name": "CLEAR_CHAR_DECISION_MAKER_EVENT_RESPONSE",
           "num_params": 2,
           "short_desc": "Resets the task for the event of the specified decision maker",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMakerChar",
+          "member": "ClearEventResponse"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DecisionMakerChar"
+            },
+            {
+              "name": "eventId",
+              "type": "int"
+            },
+            {
+              "name": "taskId",
+              "type": "int"
+            },
+            {
+              "name": "respect",
+              "type": "float"
+            },
+            {
+              "name": "hate",
+              "type": "float"
+            },
+            {
+              "name": "like",
+              "type": "float"
+            },
+            {
+              "name": "dislike",
+              "type": "float"
+            },
+            {
+              "name": "inCar",
+              "type": "bool"
+            },
+            {
+              "name": "onFoot",
+              "type": "bool"
+            }
+          ],
           "id": "0709",
           "name": "ADD_CHAR_DECISION_MAKER_EVENT_RESPONSE",
           "num_params": 9,
           "short_desc": "Sets which action should occur according to the event on the following parameters",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMakerChar",
+          "member": "AddEventResponse"
         },
         {
           "input": [
@@ -30869,64 +30909,68 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DecisionMakerGroup"
+            },
+            {
+              "name": "eventId",
+              "type": "int"
+            }
+          ],
           "id": "0749",
           "name": "CLEAR_GROUP_DECISION_MAKER_EVENT_RESPONSE",
           "num_params": 2,
           "short_desc": "Resets the task for the event of the specified group decision maker",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMakerGroup",
+          "member": "ClearEventResponse"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DecisionMakerGroup"
+            },
+            {
+              "name": "eventId",
+              "type": "int"
+            },
+            {
+              "name": "taskId",
+              "type": "int"
+            },
+            {
+              "name": "respect",
+              "type": "float"
+            },
+            {
+              "name": "hate",
+              "type": "float"
+            },
+            {
+              "name": "like",
+              "type": "float"
+            },
+            {
+              "name": "dislike",
+              "type": "float"
+            },
+            {
+              "name": "inCar",
+              "type": "bool"
+            },
+            {
+              "name": "onFoot",
+              "type": "bool"
+            }
+          ],
           "id": "074A",
           "name": "ADD_GROUP_DECISION_MAKER_EVENT_RESPONSE",
           "num_params": 9,
           "short_desc": "Sets which action should occur according to the event on the following parameters",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMakerGroup",
+          "member": "AddEventResponse"
         },
         {
           "id": "074B",
@@ -32661,20 +32705,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "decisionMakerChar",
+              "type": "DecisionMakerChar"
+            }
+          ],
           "id": "07BC",
           "name": "TASK_SET_CHAR_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "Sets the decision maker used by the specified actor",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Task",
+          "member": "SetCharDecisionMaker",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -33418,36 +33467,52 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "maskOrOtherHandle",
+              "type": "DecisionMakerChar"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DecisionMakerChar",
+              "source": "var_any"
+            }
+          ],
           "id": "07E5",
           "name": "COPY_CHAR_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "Copies a decision makers data to another decision maker",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "DecisionMakerChar",
+          "member": "Copy"
         },
         {
+          "input": [
+            {
+              "name": "mask",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DecisionMakerGroup",
+              "source": "var_any"
+            }
+          ],
           "id": "07E6",
           "name": "COPY_GROUP_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "Copies a group decision makers data to another decision maker",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "DecisionMakerGroup",
+          "member": "Copy"
         },
         {
           "input": [
@@ -40717,20 +40782,28 @@
           "member": "IsWithinBrainActivationRange"
         },
         {
+          "input": [
+            {
+              "name": "mask",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DecisionMakerChar",
+              "source": "var_any"
+            }
+          ],
           "id": "0978",
           "name": "COPY_SHARED_CHAR_DECISION_MAKER",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "DecisionMakerChar",
+          "member": "CopyShared",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "id": "0979",
@@ -42888,19 +42961,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DecisionMaker"
+            }
+          ],
           "id": "09F2",
           "name": "DOES_DECISION_MAKER_EXIST",
           "num_params": 1,
           "short_desc": "Returns true if the specified decision maker exists",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "DecisionMaker",
+          "member": "DoesExist"
         },
         {
           "id": "09F3",

@@ -10,11 +10,15 @@ Boat
 Camera
 Car
 CarGenerator
+CardDecks
 Char
 Clock
 Credits
 Cutscene
 Debugger
+DecisionMaker
+DecisionMakerChar
+DecisionMakerGroup
 DynamicLibrary
 File
 Fs
@@ -358,6 +362,12 @@ SetHasBeenOwned,0A17,0,0,("self: CarGenerator" "state%b")
 Switch,014C,0,0,("self: CarGenerator" "amount%i")
 $END
 
+$CardDecks
+$BEGIN
+FetchNextCard,059E,0,0,("number%i")
+Shuffle,059D,0,0,("type%i")
+$END
+
 $Char
 $BEGIN
 AddAmmo,0114,0,0,("self: Char" "weaponId: WeaponType" "ammo%i")
@@ -537,6 +547,7 @@ SetCoordinatesDontWarpGang,08C7,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetCoordinatesDontWarpGangNoOffset,09BC,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetCoordinatesNoOffset,0972,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetCurrentWeapon,01B9,0,0,("self: Char" "weaponType: WeaponType")
+SetDecisionMaker,060B,0,0,("self: Char" "maskOrHandle: DecisionMakerChar")
 SetDropsWeaponsWhenDead,087E,0,0,("self: Char" "state%b")
 SetDrownsInWater,04D8,0,0,("self: Char" "state%b")
 SetDruggedUp,09A7,0,0,("self: Char" "state%b")
@@ -622,6 +633,29 @@ Line,0052,0,0,("f1%f" "f2%f" "f3%f" "f4%f" "f5%f" "f6%f")
 WriteLog,0A66,0,0,("_p1: string128")
 WriteLogFloat,0A68,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4: string128")
 WriteLogInt,0A67,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4: string128")
+$END
+
+$DecisionMaker
+$BEGIN
+DoesExist,09F2,1,0,("self: DecisionMaker")
+Remove,065C,0,0,("self: DecisionMaker")
+$END
+
+$DecisionMakerChar
+$BEGIN
+AddEventResponse,0709,0,0,("self: DecisionMakerChar" "eventId%i" "taskId%i" "respect%f" "hate%f" "like%f" "dislike%f" "inCar%b" "onFoot%b")
+ClearEventResponse,0708,0,0,("self: DecisionMakerChar" "eventId%i")
+Copy,07E5,0,0,("maskOrOtherHandle: DecisionMakerChar" "handle: DecisionMakerChar")
+CopyShared,0978,0,0,("mask%i" "handle: DecisionMakerChar")
+Load,060A,0,0,("type%i" "handle: DecisionMakerChar")
+$END
+
+$DecisionMakerGroup
+$BEGIN
+AddEventResponse,074A,0,0,("self: DecisionMakerGroup" "eventId%i" "taskId%i" "respect%f" "hate%f" "like%f" "dislike%f" "inCar%b" "onFoot%b")
+ClearEventResponse,0749,0,0,("self: DecisionMakerGroup" "eventId%i")
+Copy,07E6,0,0,("mask%i" "handle: DecisionMakerGroup")
+Load,06AE,0,0,("type%i" "handle: DecisionMakerGroup")
 $END
 
 $DynamicLibrary
@@ -720,6 +754,7 @@ DoesExist,07FD,1,0,("self: Group")
 GetMember,092B,0,0,("self: Group" "slotId%i" "handle: Char")
 GetSize,07F6,0,0,("self: Group" "numLeaders%i" "numMembers%i")
 Remove,0632,0,0,("self: Group")
+SetDecisionMaker,06AD,0,0,("self: Group" "maskOrHandle: DecisionMakerGroup")
 SetDefaultTaskAllocator,07B3,0,0,("self: Group" "_p2%i")
 SetFollowStatus,0940,0,0,("self: Group" "state%b")
 SetLeader,0630,0,0,("self: Group" "handle: Char")
@@ -1233,6 +1268,7 @@ PlayAnimSecondary,0A1A,0,0,("handle: Char" "animationFile%s" "animationName%s" "
 PlayAnimWithFlags,088A,0,0,("handle: Char" "animationName%s" "animationFile%s" "frameDelta%f" "loop%b" "lockX%b" "lockY%b" "lockF%b" "time%i" "disableForce%b" "disableLockZ%b")
 Say,05C1,0,0,("handle: Char" "phraseId%i")
 ScratchHead,05C8,0,0,("handle: Char")
+SetCharDecisionMaker,07BC,0,0,("char: Char" "decisionMakerChar: DecisionMakerChar")
 SetIgnoreWeaponRangeFlag,099F,0,0,("handle: Char" "state%b")
 ShakeFist,05C2,0,0,("handle: Char")
 ShootAtChar,074D,0,0,("handle: Char" "target: Char" "time%i")

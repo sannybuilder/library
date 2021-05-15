@@ -3,6 +3,7 @@
 #CLASSESLIST
 
 3DMarker
+Attractor
 Audio
 AudioStream
 Blip
@@ -69,6 +70,13 @@ $3DMarker
 $BEGIN
 Create,0A40,0,0,("x%f" "y%f" "z%f" "color%i" "handle: 3DMarker")
 Remove,0A41,0,0,("self: 3DMarker")
+$END
+
+$Attractor
+$BEGIN
+Add,061D,0,0,("x%f" "y%f" "z%f" "angle%f" "_p5%f" "sequence: Sequence" "handle: Attractor")
+AddPedTypeAsUser,0680,0,0,("self: Attractor" "pedType: PedType")
+Clear,061E,0,0,("self: Attractor")
 $END
 
 $Audio
@@ -382,6 +390,7 @@ ClearTasks,0687,0,0,("self: Char")
 ClearTasksImmediately,0792,0,0,("self: Char")
 Create,009A,0,0,("pedType: PedType" "model: model_ide" "x%f" "y%f" "z%f" "handle: Char")
 CreateAsPassenger,01C8,0,0,("vehicle: Car" "pedType: PedType" "modelId: model_ide" "seatId%i" "handle: Char")
+CreateAtAttractor,0621,0,0,("pedType: PedType" "model: model_ide" "taskId%i" "attractor: Attractor" "handle: Char")
 CreateInsideCar,0129,0,0,("vehicleHandle: Car" "pedType: PedType" "modelId: model_ide" "handle: Char")
 CreateRandom,0376,0,0,("x%f" "y%f" "z%f" "handle: Char")
 CreateRandomAsDriver,0560,0,0,("vehicle: Car" "handle: Char")
@@ -433,6 +442,7 @@ HasGotWeapon,0491,1,0,("self: Char" "weaponType: WeaponType")
 HasSpottedChar,0364,1,0,("self: Char" "handle: Char")
 HasSpottedCharInFront,09ED,1,0,("self: Char" "handle: Char")
 HideWeaponForScriptedCutscene,06AB,0,0,("self: Char" "state%b")
+IsAtScriptedAttractor,0642,1,0,("self: Char" "handle: Attractor")
 IsAttachedToAnyCar,0A32,1,0,("self: Char")
 IsCurrentWeapon,02D8,1,0,("self: Char" "weaponId: WeaponType")
 IsDead,0118,1,0,("self: Char")
@@ -874,6 +884,7 @@ Delete,0108,0,0,("self: Object")
 DoesExist,03CA,1,0,("self: Object")
 DoesHaveThisModel,09CC,1,0,("self: Object" "modelId: model_ide")
 DontRemove,01C7,0,0,("self: Object")
+EnableDisabledAttractors,0A0A,0,0,("self: Object" "state%b")
 FreezePosition,0550,0,0,("self: Object" "state%b")
 GetAnimCurrentTime,0839,0,0,("self: Object" "animationName%s" "time%f")
 GetCoordinates,01BB,0,0,("self: Object" "x%f" "y%f" "z%f")
@@ -1285,6 +1296,7 @@ TogglePedThreatScanner,0688,0,0,("handle: Char" "_p2%b" "_p3%b" "_p4%b")
 TurnCharToFaceChar,0639,0,0,("char: Char" "target: Char")
 TurnCharToFaceCoord,06BA,0,0,("handle: Char" "x%f" "y%f" "z%f")
 UseAtm,05C7,0,0,("handle: Char")
+UseAttractor,074C,0,0,("char: Char" "attractor: Attractor")
 UseClosestMapAttractor,08A0,0,0,("handle: Char" "radius%f" "model: model_ide" "fromX%f" "fromY%f" "fromZ%f" "name%s")
 UseMobilePhone,0729,0,0,("handle: Char" "start%b")
 WalkAlongsideChar,0859,0,0,("handle: Char" "target: Char")

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621066993531
+    "last_update": 1621068039597
   },
   "extensions": [
     {
@@ -24944,52 +24944,65 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            },
+            {
+              "name": "_p5",
+              "type": "float"
+            },
+            {
+              "name": "sequence",
+              "type": "Sequence"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Attractor",
+              "source": "var_any"
+            }
+          ],
           "id": "061D",
           "name": "ADD_ATTRACTOR",
           "num_params": 7,
           "short_desc": "Adds a ped attractor",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Attractor",
+          "member": "Add",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Attractor"
+            }
+          ],
           "id": "061E",
           "name": "CLEAR_ATTRACTOR",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Attractor",
+          "member": "Clear",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "id": "061F",
@@ -25010,32 +25023,40 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "pedType",
+              "type": "PedType"
+            },
+            {
+              "name": "model",
+              "type": "model_ide"
+            },
+            {
+              "name": "taskId",
+              "type": "int"
+            },
+            {
+              "name": "attractor",
+              "type": "Attractor"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "0621",
           "name": "CREATE_CHAR_AT_ATTRACTOR",
           "num_params": 5,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "CreateAtAttractor",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "input": [
@@ -25615,23 +25636,25 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Attractor"
+            }
+          ],
           "id": "0642",
           "name": "IS_CHAR_AT_SCRIPTED_ATTRACTOR",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsAtScriptedAttractor"
         },
         {
           "id": "0643",
@@ -26987,20 +27010,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Attractor"
+            },
+            {
+              "name": "pedType",
+              "type": "PedType"
+            }
+          ],
           "id": "0680",
           "name": "ADD_PEDTYPE_AS_ATTRACTOR_USER",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Attractor",
+          "member": "AddPedTypeAsUser"
         },
         {
           "input": [
@@ -31021,20 +31046,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "attractor",
+              "type": "Attractor"
+            }
+          ],
           "id": "074C",
           "name": "TASK_USE_ATTRACTOR",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Task",
+          "member": "UseAttractor",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43297,20 +43327,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A0A",
           "name": "ENABLE_DISABLED_ATTRACTORS_ON_OBJECT",
           "num_params": 2,
           "short_desc": "When enabled, the object will attract spawned peds to interact with it",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "EnableDisabledAttractors"
         },
         {
           "id": "0A0B",

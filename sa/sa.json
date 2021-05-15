@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621068039597
+    "last_update": 1621083381395
   },
   "extensions": [
     {
@@ -8925,7 +8925,7 @@
               "type": "Char"
             },
             {
-              "name": "targetCar",
+              "name": "handle",
               "type": "Car"
             },
             {
@@ -8941,8 +8941,8 @@
               "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
           "attrs": {
@@ -17677,7 +17677,7 @@
             },
             {
               "name": "drawSphere",
-              "type": "int"
+              "type": "bool"
             }
           ],
           "attrs": {
@@ -18338,36 +18338,38 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "minAltitude",
+              "type": "float"
+            },
+            {
+              "name": "maxAltitude",
+              "type": "float"
+            }
+          ],
           "id": "04A2",
           "name": "HELI_GOTO_COORDS",
           "num_params": 6,
           "short_desc": "Makes the helicopter fly to the specified location, keeping a specific Z height/altitude",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "GotoCoords"
         },
         {
           "attrs": {
@@ -32636,7 +32638,7 @@
               "type": "Group"
             },
             {
-              "name": "_p2",
+              "name": "commandId",
               "type": "int"
             }
           ],
@@ -46783,7 +46785,8 @@
           "num_params": 3,
           "short_desc": "Gets the coordinates of the location targetted in the game map",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_condition": true
           },
           "class": "World",
           "member": "GetTargetBlipCoords"

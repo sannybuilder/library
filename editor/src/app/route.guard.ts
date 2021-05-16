@@ -1,12 +1,13 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { DEFAULT_EXTENSION, Game } from './models';
+import { DEFAULT_EXTENSION, Game, GameTitle } from './models';
 import { AuthFacade, GameFacade } from './state';
 
 @Injectable({ providedIn: 'root' })
@@ -25,7 +26,11 @@ export class AuthGuard implements CanActivate {
 
 @Injectable({ providedIn: 'root' })
 export class RouteGuard implements CanActivate {
-  constructor(private _router: Router, private _game: GameFacade) {}
+  constructor(
+    private _router: Router,
+    private _game: GameFacade,
+    private _title: Title
+  ) {}
 
   canActivate(_next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const segments = getSegmentsFromUrl(this._router, state.url);
@@ -39,6 +44,7 @@ export class RouteGuard implements CanActivate {
     if (!game) {
       return this.goHome();
     }
+    this._title.setTitle(`Sanny Builder Library :: ${GameTitle[game]}`);
 
     const subPath = segments.shift();
     if (subPath === 'classes') {
@@ -79,10 +85,6 @@ export class RouteGuard implements CanActivate {
 
   goHome() {
     return this._router.parseUrl('/');
-  }
-
-  goGame(game: string) {
-    return this._router.parseUrl('/' + game);
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621242245274
+    "last_update": 1621258139726
   },
   "extensions": [
     {
@@ -31617,8 +31617,8 @@
           "name": "SET_ZONE_GANG_STRENGTH",
           "num_params": 3,
           "short_desc": "Sets the density of the gang members in the specified zone",
-          "class": "World",
-          "member": "SetZoneGangStrength",
+          "class": "Zone",
+          "member": "SetGangStrength",
           "attrs": {
             "is_static": true
           }
@@ -32567,8 +32567,8 @@
           "id": "07A8",
           "name": "SET_AREA51_SAM_SITE",
           "num_params": 1,
-          "short_desc": "",
-          "class": "Zone",
+          "short_desc": "Enables or disables the SAM site at the Area 51",
+          "class": "Game",
           "member": "SetArea51SamSite",
           "attrs": {
             "is_static": true
@@ -36340,7 +36340,7 @@
           "name": "SET_GANG_WARS_ACTIVE",
           "num_params": 1,
           "short_desc": "Sets whether gang wars can be started by the player or enemy gangs",
-          "class": "World",
+          "class": "Game",
           "member": "SetGangWarsActive",
           "attrs": {
             "is_static": true
@@ -36355,7 +36355,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "World",
+          "class": "Game",
           "member": "IsGangWarGoingOn"
         },
         {
@@ -37060,7 +37060,7 @@
           "name": "CAN_TRIGGER_GANG_WAR_WHEN_ON_A_MISSION",
           "num_params": 1,
           "short_desc": "Allows the player to provoke turf wars while a mission is active",
-          "class": "World",
+          "class": "Game",
           "member": "CanTriggerGangWarWhenOnAMission",
           "attrs": {
             "is_static": true
@@ -37207,7 +37207,7 @@
           "name": "SET_GANG_WARS_TRAINING_MISSION",
           "num_params": 1,
           "short_desc": "Disables highlighting of gang territory on the map and radar",
-          "class": "World",
+          "class": "Game",
           "member": "SetGangWarsTrainingMission",
           "attrs": {
             "is_static": true
@@ -37303,15 +37303,15 @@
           "input": [
             {
               "name": "zone",
-              "type": "string"
+              "type": "zone_key"
             }
           ],
           "id": "08B3",
           "name": "SET_ZONE_FOR_GANG_WARS_TRAINING",
           "num_params": 1,
           "short_desc": "Sets the zone as the only zone where a turf war can be provoked",
-          "class": "World",
-          "member": "SetZoneForGangWarsTraining",
+          "class": "Zone",
+          "member": "SetForGangWarsTraining",
           "attrs": {
             "is_static": true
           }
@@ -37699,8 +37699,8 @@
           "name": "INIT_ZONE_POPULATION_SETTINGS",
           "num_params": 0,
           "short_desc": "Resets all changes made to the zone info",
-          "class": "World",
-          "member": "InitZonePopulationSettings",
+          "class": "Zone",
+          "member": "InitPopulationSettings",
           "attrs": {
             "is_static": true
           }
@@ -38585,8 +38585,8 @@
           "name": "GET_NAME_OF_INFO_ZONE",
           "num_params": 4,
           "short_desc": "Gets the name of the zone at the specified coordinates",
-          "class": "World",
-          "member": "GetNameOfInfoZone",
+          "class": "Zone",
+          "member": "GetName",
           "attrs": {
             "is_static": true
           }
@@ -38638,7 +38638,7 @@
           "name": "SET_SCRIPT_LIMIT_TO_GANG_SIZE",
           "num_params": 1,
           "short_desc": "Sets the maximum amount of members that the player can recruit",
-          "class": "World",
+          "class": "Game",
           "member": "SetScriptLimitToGangSize",
           "attrs": {
             "is_static": true
@@ -39000,15 +39000,15 @@
           "input": [
             {
               "name": "zone",
-              "type": "string"
+              "type": "zone_key"
             }
           ],
           "id": "090C",
           "name": "SET_SPECIFIC_ZONE_TO_TRIGGER_GANG_WAR",
           "num_params": 1,
           "short_desc": "",
-          "class": "World",
-          "member": "SetSpecificZoneToTriggerGangWar",
+          "class": "Zone",
+          "member": "SetTriggerGangWar",
           "attrs": {
             "is_static": true
           }
@@ -39018,7 +39018,7 @@
           "name": "CLEAR_SPECIFIC_ZONES_TO_TRIGGER_GANG_WAR",
           "num_params": 0,
           "short_desc": "Enables turf wars to be provoked in all zones",
-          "class": "World",
+          "class": "Game",
           "member": "ClearSpecificZonesToTriggerGangWar",
           "attrs": {
             "is_static": true
@@ -42023,7 +42023,7 @@
           "input": [
             {
               "name": "zone",
-              "type": "gxt_key"
+              "type": "zone_key"
             },
             {
               "name": "state",
@@ -42034,11 +42034,11 @@
           "name": "SET_ZONE_NO_COPS",
           "num_params": 2,
           "short_desc": "Sets whether cops should be prevented from spawning in the specified area",
-          "class": "World",
+          "class": "Zone",
           "attrs": {
             "is_static": true
           },
-          "member": "SetZoneNoCops"
+          "member": "SetNoCops"
         },
         {
           "id": "09B8",
@@ -43364,7 +43364,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "World",
+          "class": "Game",
           "member": "IsGangWarFightingGoingOn"
         },
         {
@@ -43538,7 +43538,8 @@
           "num_params": 0,
           "short_desc": "Returns true if the current language set is different from the previous language set",
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Game",
           "member": "HasLanguageChanged"
@@ -44265,7 +44266,7 @@
           "name": "FORCE_ALL_VEHICLE_LIGHTS_OFF",
           "num_params": 1,
           "short_desc": "Disables all vehicle lights from being rendered if enabled",
-          "class": "World",
+          "class": "Game",
           "member": "ForceAllVehicleLightsOff",
           "attrs": {
             "is_static": true

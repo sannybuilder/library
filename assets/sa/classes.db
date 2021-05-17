@@ -1008,6 +1008,7 @@ GetClosestCharNode,02C0,0,0,("xCoord%f" "yCoord%f" "zCoord%f" "x%f" "y%f" "z%f")
 GetClosestStraightRoad,04B9,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%f" "_p9%f" "_p10%f" "_p11%f" "_p12%f")
 GetNthClosestCarNode,04D3,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i" "_p5%f" "_p6%f" "_p7%f")
 LoadPathNodesInArea,0606,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f")
+ReleaseNodes,0607,0,0,()
 SwitchPedRoadsOff,022B,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 SwitchPedRoadsOn,022A,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 SwitchRoadsOff,01E8,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
@@ -1198,6 +1199,7 @@ $END
 
 $Streaming
 $BEGIN
+GetAreaVisible,077E,0,0,("interiorId%i")
 GetNameOfVehicleModel,0ADB,0,0,("modelId: model_ide" "name%s")
 GetRandomCarModelInMemory,09B2,0,0,("_p1%b" "modelId: model_ide" "class%i")
 HasAnimationLoaded,04EE,1,0,("animationFile%s")
@@ -1216,7 +1218,7 @@ RequestAnimation,04ED,0,0,("animationFile%s")
 RequestCarRecording,07C0,0,0,("pathId%i")
 RequestCollision,04E4,0,0,("x%f" "y%f")
 RequestModel,0247,0,0,("modelId: model_any")
-SetAreaVisible,04BB,0,0,("_p1%i")
+SetAreaVisible,04BB,0,0,("interiorId%i")
 Switch,03AF,0,0,("state%b")
 UnloadSpecialCharacter,0296,0,0,("slotId%i")
 $END
@@ -1496,12 +1498,16 @@ GetDistanceBetweenCoords2D,0509,0,0,("fromX%f" "fromY%f" "toX%f" "toZ%f" "distan
 GetDistanceBetweenCoords3D,050A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "distance%f")
 GetGroundZFor3DCoord,02CE,0,0,("x%f" "y%f" "z%f" "groundZ%f")
 GetNameOfInfoZone,08F1,0,0,("x%f" "y%f" "z%f" "name%s")
+GetNumberOfFiresInArea,0786,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "numFires%i")
 GetNumberOfFiresInRange,06C3,0,0,("x%f" "y%f" "z%f" "radius%f" "numFires%i")
+GetParkingNodeInArea,0810,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "x%f" "y%f" "z%f")
+GetPercentageTaggedInArea,0702,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "percent%i")
 GetRandomCarInSphereNoSave,073E,0,0,("x%f" "y%f" "z%f" "radius%f" "model: model_any" "handle: Car")
 GetRandomCarInSphereNoSaveRecursive,0AE2,0,0,("x%f" "y%f" "z%f" "radius%f" "findNext%b" "skipDead%b" "handle: Car")
 GetRandomCarOfTypeInAngledAreaNoSave,09C0,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "angle%f" "char: Char" "vehicle: Car")
 GetRandomCarOfTypeInArea,0327,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "model: model_ide" "handle: Car")
 GetRandomCarOfTypeInAreaNoSave,053E,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "model: model_ide" "handle: Car")
+GetRandomCharInAreaOffsetNoSave,0A3E,0,0,("x%f" "y%f" "z%f" "radiusX%f" "radiusY%f" "radiusZ%f" "handle: Char")
 GetRandomCharInSphere,073F,0,0,("x%f" "y%f" "z%f" "radius%f" "civilian%b" "gang%b" "criminal%b" "handle: Char")
 GetRandomCharInSphereNoBrain,08E5,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: Char")
 GetRandomCharInSphereNoSaveRecursive,0AE1,0,0,("x%f" "y%f" "z%f" "radius%f" "findNext%b" "skipDead%b" "handle: Char")
@@ -1519,10 +1525,11 @@ IsFlameInAngledArea3D,072E,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" 
 IsGangWarFightingGoingOn,0A03,1,0,()
 IsGangWarGoingOn,087A,1,0,()
 IsMoneyPickupAtCoords,09DA,1,0,("x%f" "y%f" "z%f")
-IsPointObscuredByAMissionEntity,038A,1,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
+IsPointObscuredByAMissionEntity,038A,1,0,("x%f" "y%f" "z%f" "radiusX%f" "radiusY%f" "radiusZ%f")
 IsProjectileInArea,02EE,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 MarkMissionTrainsAsNoLongerNeeded,06DA,0,0,()
 RemoveAllScriptFires,031A,0,0,()
+RemoveOilPuddlesInArea,07DF,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f")
 SetAlwaysDraw3DMarkers,08A8,0,0,("state%b")
 SetCarDensityMultiplier,01EB,0,0,("multiplier%f")
 SetClosestEntryExitFlag,09B4,0,0,("x%f" "y%f" "radius%f" "bitmask%i" "state%b")
@@ -1552,6 +1559,7 @@ $Zone
 $BEGIN
 GetGangStrength,076D,0,0,("zone: zone_key" "gangId: Gang" "density%i")
 GetRandomChar,02DD,0,0,("zone: zone_key" "civilian%b" "gang%b" "criminalOrProstitute%b" "handle: Char")
+SetArea51SamSite,07A8,0,0,("state%b")
 $END
 
 #EOF

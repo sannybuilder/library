@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621200947571
+    "last_update": 1621218265178
   },
   "extensions": [
     {
@@ -9664,7 +9664,7 @@
           "input": [
             {
               "name": "gangId",
-              "type": "int"
+              "type": "Gang"
             },
             {
               "name": "weaponId1",
@@ -9683,8 +9683,8 @@
           "name": "SET_GANG_WEAPONS",
           "num_params": 4,
           "short_desc": "Sets the weapons that the specified gang can use",
-          "class": "Game",
-          "member": "SetGangWeapons",
+          "class": "Gang",
+          "member": "SetWeapons",
           "attrs": {
             "is_static": true
           }
@@ -31577,44 +31577,57 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "zoneId",
+              "type": "zone_key"
+            },
+            {
+              "name": "gangId",
+              "type": "Gang"
+            },
+            {
+              "name": "density",
+              "type": "int"
+            }
+          ],
           "id": "076C",
           "name": "SET_ZONE_GANG_STRENGTH",
           "num_params": 3,
-          "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "short_desc": "Sets the density of the gang members in the specified zone",
+          "class": "World",
+          "member": "SetZoneGangStrength",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "zoneId",
+              "type": "zone_key"
+            },
+            {
+              "name": "gangId",
+              "type": "Gang"
+            }
+          ],
+          "output": [
+            {
+              "name": "density",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "076D",
           "name": "GET_ZONE_GANG_STRENGTH",
           "num_params": 3,
-          "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "short_desc": "Returns the density of the gang members in the specified zone",
+          "class": "World",
+          "member": "GetZoneGangStrength",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "076E",

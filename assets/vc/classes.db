@@ -1014,7 +1014,6 @@ GetDistanceBetweenCoords3D,050A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%
 GetGroundZFor3DCoord,02CE,0,0,("x%f" "y%f" "z%f" "groundZ%f")
 GetRandomCarOfTypeInArea,0327,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "model: model_ide" "handle: Car")
 GetRandomCarOfTypeInAreaNoSave,053E,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i")
-GetRandomCharInZone,02DD,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5: Char")
 GetRandomCopInArea,0469,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "cop%b" "swat%b" "fbi%b" "army%b" "vice%b" "handle: Char")
 GetRandomIceCreamCustomerInArea,058F,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6%i" "_p7%i" "_p8: Char")
 HasGlassBeenShatteredNearby,0523,1,0,("_p1%f" "_p2%f" "_p3%f")
@@ -1038,10 +1037,11 @@ $END
 
 $Zone
 $BEGIN
-SetCarInfo,0152,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i")
-SetCivilianCarInfo,04EC,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i")
-SetGroup,0324,0,0,("_p1%s" "_p2%i" "_p3%i")
-SetPedInfo,015C,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i")
+GetRandomChar,02DD,0,0,("zone: zone_key" "civilian%b" "gang%b" "criminalOrProstitute%b" "handle: Char")
+SetCarInfo,0152,0,0,("zone: zone_key" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i")
+SetCivilianCarInfo,04EC,0,0,("zone: zone_key" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i")
+SetGroup,0324,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "_p3%i")
+SetPedInfo,015C,0,0,("zone: zone_key" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i")
 $END
 
 #EOF

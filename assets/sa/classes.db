@@ -60,6 +60,7 @@ Txd
 Weather
 Widget
 World
+Zone
 
 #CLASSES
 $
@@ -1501,11 +1502,9 @@ GetRandomCharInSphere,073F,0,0,("x%f" "y%f" "z%f" "radius%f" "civilian%b" "gang%
 GetRandomCharInSphereNoBrain,08E5,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: Char")
 GetRandomCharInSphereNoSaveRecursive,0AE1,0,0,("x%f" "y%f" "z%f" "radius%f" "findNext%b" "skipDead%b" "handle: Char")
 GetRandomCharInSphereOnlyDrugsBuyers,089E,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: Char")
-GetRandomCharInZone,02DD,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5: Char")
 GetRandomObjectInSphereNoSaveRecursive,0AE3,0,0,("x%f" "y%f" "z%f" "radius%f" "findNext%b" "handle: Object")
 GetTargetBlipCoords,0AB6,1,0,("x%f" "y%f" "z%f")
 GetWaterHeightAtCoords,092E,0,0,("x%f" "y%f" "ignoreWaves%b" "height%f")
-GetZoneGangStrength,076D,0,0,("zoneId: zone_key" "gangId: Gang" "density%i")
 InitZonePopulationSettings,08CA,0,0,()
 IsAnyPickupAtCoords,048C,1,0,("x%f" "y%f" "z%f")
 IsAreaOccupied,0339,1,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i")
@@ -1543,6 +1542,12 @@ SwapNearestBuildingModel,03B6,0,0,("x%f" "y%f" "z%f" "radius%f" "fromModelId: mo
 SwitchEntryExit,07FB,0,0,("interiorName%s" "state%b")
 SwitchProcessing,03B7,0,0,("state%b")
 SwitchRandomTrains,06D7,0,0,("state%b")
+$END
+
+$Zone
+$BEGIN
+GetGangStrength,076D,0,0,("zone: zone_key" "gangId: Gang" "density%i")
+GetRandomChar,02DD,0,0,("zone: zone_key" "civilian%b" "gang%b" "criminalOrProstitute%b" "handle: Char")
 $END
 
 #EOF

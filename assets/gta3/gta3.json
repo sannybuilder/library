@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621221443469
+    "last_update": 1621225729355
   },
   "extensions": [
     {
@@ -6757,63 +6757,63 @@
               "type": "DayOrNight"
             },
             {
-              "name": "_p3",
+              "name": "density",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "mafia",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "triad",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "diablo",
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "yakuza",
               "type": "int"
             },
             {
-              "name": "_p8",
+              "name": "yardie",
               "type": "int"
             },
             {
-              "name": "_p9",
+              "name": "colombian",
               "type": "int"
             },
             {
-              "name": "_p10",
+              "name": "hood",
               "type": "int"
             },
             {
-              "name": "_p11",
+              "name": "cop",
               "type": "int"
             },
             {
-              "name": "_p12",
+              "name": "poor",
               "type": "int"
             },
             {
-              "name": "_p13",
+              "name": "rich",
               "type": "int"
             },
             {
-              "name": "_p14",
+              "name": "executive",
               "type": "int"
             },
             {
-              "name": "_p15",
+              "name": "worker",
               "type": "int"
             },
             {
-              "name": "_p16",
+              "name": "special",
               "type": "int"
             },
             {
-              "name": "_p17",
+              "name": "big",
               "type": "int"
             }
           ],
@@ -15293,28 +15293,28 @@
           }
         },
         {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "World",
-          "id": "02DD",
           "input": [
             {
-              "name": "_p1",
-              "type": "string"
+              "name": "zone",
+              "type": "zone_key"
             }
           ],
-          "member": "GetRandomCharInZone",
-          "name": "GET_RANDOM_CHAR_IN_ZONE",
-          "num_params": 2,
           "output": [
             {
-              "name": "_p2",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
-          "short_desc": "Gets a pedestrian in the specified town, if the pedtype matches the specified values"
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Zone",
+          "id": "02DD",
+          "member": "GetRandomChar",
+          "name": "GET_RANDOM_CHAR_IN_ZONE",
+          "num_params": 2,
+          "short_desc": "Gets a random character in the specified zone"
         },
         {
           "input": [
@@ -16883,25 +16883,25 @@
           "short_desc": "Makes the boat stay motionless in the water"
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Zone",
-          "id": "0324",
           "input": [
             {
-              "name": "_p1",
-              "type": "string"
+              "name": "zone",
+              "type": "zone_key"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "dayOrNight",
+              "type": "DayOrNight"
             },
             {
               "name": "_p3",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Zone",
+          "id": "0324",
           "member": "SetGroup",
           "name": "SET_ZONE_GROUP",
           "num_params": 3,
@@ -16996,31 +16996,31 @@
           }
         },
         {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "World",
-          "id": "0328",
           "input": [
             {
-              "name": "_p1",
-              "type": "string"
+              "name": "zone",
+              "type": "zone_key"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_ide"
             }
           ],
-          "member": "GetRandomCarOfTypeInZone",
-          "name": "GET_RANDOM_CAR_OF_TYPE_IN_ZONE",
-          "num_params": 3,
           "output": [
             {
-              "name": "_p3",
+              "name": "handle",
               "type": "Car",
               "source": "var_any"
             }
           ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Zone",
+          "id": "0328",
+          "member": "GetRandomCarOfType",
+          "name": "GET_RANDOM_CAR_OF_TYPE_IN_ZONE",
+          "num_params": 3,
           "short_desc": ""
         },
         {
@@ -23713,14 +23713,9 @@
           }
         },
         {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "World",
-          "id": "046A",
           "input": [
             {
-              "name": "_p1",
+              "name": "zone",
               "type": "string"
             },
             {
@@ -23744,16 +23739,21 @@
               "type": "int"
             }
           ],
-          "member": "GetRandomCopInZone",
-          "name": "GET_RANDOM_COP_IN_ZONE",
-          "num_params": 7,
           "output": [
             {
-              "name": "_p7",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Zone",
+          "id": "046A",
+          "member": "GetRandomCop",
+          "name": "GET_RANDOM_COP_IN_ZONE",
+          "num_params": 7,
           "short_desc": ""
         },
         {

@@ -1032,11 +1032,8 @@ ForceRandomPedType,03DF,0,0,("_p1%i")
 GetClosestObjectOfType,045D,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%i" "_p6: Object")
 GetGroundZFor3DCoord,02CE,0,0,("x%f" "y%f" "z%f" "groundZ%f")
 GetRandomCarOfTypeInArea,0327,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "model: model_ide" "handle: Car")
-GetRandomCarOfTypeInZone,0328,0,0,("_p1%s" "_p2%i" "_p3: Car")
 GetRandomCharInArea,02DC,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "handle: Char")
-GetRandomCharInZone,02DD,0,0,("_p1%s" "_p2: Char")
 GetRandomCopInArea,0469,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "cop%b" "swat%b" "fbi%b" "army%b" "vice%b" "handle: Char")
-GetRandomCopInZone,046A,0,0,("_p1%s" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7: Char")
 IsAreaOccupied,0339,1,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i")
 IsExplosionInArea,0356,1,0,("explosionType%i" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 IsExplosionInZone,0357,1,0,("_p1%i" "_p2%s")
@@ -1058,9 +1055,12 @@ $END
 
 $Zone
 $BEGIN
+GetRandomCarOfType,0328,0,0,("zone: zone_key" "modelId: model_ide" "handle: Car")
+GetRandomChar,02DD,0,0,("zone: zone_key" "handle: Char")
+GetRandomCop,046A,0,0,("zone%s" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "handle: Char")
 SetCarDensity,0155,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i")
-SetCarInfo,0152,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i" "_p12%i" "_p13%i" "_p14%i" "_p15%i" "_p16%i" "_p17%i")
-SetGroup,0324,0,0,("_p1%s" "_p2%i" "_p3%i")
+SetCarInfo,0152,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i" "mafia%i" "triad%i" "diablo%i" "yakuza%i" "yardie%i" "colombian%i" "hood%i" "cop%i" "poor%i" "rich%i" "executive%i" "worker%i" "special%i" "big%i")
+SetGroup,0324,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "_p3%i")
 SetPedDensity,0156,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i")
 SetPedInfo,015C,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%i" "_p8%i" "_p9%i" "_p10%i" "_p11%i")
 $END

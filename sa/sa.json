@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621240115702
+    "last_update": 1621242245274
   },
   "extensions": [
     {
@@ -14123,38 +14123,38 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radiusX",
+              "type": "float"
+            },
+            {
+              "name": "radiusY",
+              "type": "float"
+            },
+            {
+              "name": "radiusZ",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "World",
           "id": "038A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            }
-          ],
           "member": "IsPointObscuredByAMissionEntity",
           "name": "IS_POINT_OBSCURED_BY_A_MISSION_ENTITY",
           "num_params": 6,
@@ -18889,17 +18889,17 @@
           "short_desc": "Sets the speed of the car"
         },
         {
+          "input": [
+            {
+              "name": "interiorId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Streaming",
           "id": "04BB",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetAreaVisible",
           "name": "SET_AREA_VISIBLE",
           "num_params": 1,
@@ -24622,7 +24622,12 @@
           "id": "0607",
           "name": "RELEASE_PATH_NODES",
           "num_params": 0,
-          "short_desc": "Removes areas forbidden for scripted cars set up by 0606"
+          "short_desc": "Removes areas forbidden for scripted cars set up by 0606",
+          "class": "Path",
+          "member": "ReleaseNodes",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0608",
@@ -29601,32 +29606,40 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "percent",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0702",
           "name": "GET_PERCENTAGE_TAGGED_IN_AREA",
           "num_params": 5,
           "short_desc": "Gets the percentage of the number of tags sprayed in the area",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetPercentageTaggedInArea",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -31871,16 +31884,22 @@
           "member": "GetPitch"
         },
         {
+          "output": [
+            {
+              "name": "interiorId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "077E",
           "name": "GET_AREA_VISIBLE",
           "num_params": 1,
           "short_desc": "Gets the current interior ID",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "GetAreaVisible",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "077F",
@@ -32007,40 +32026,48 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomZ",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopZ",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "numFires",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0786",
           "name": "GET_NUMBER_OF_FIRES_IN_AREA",
           "num_params": 7,
           "short_desc": "Gets the number of fires within the specified area",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetNumberOfFiresInArea",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0787",
@@ -32531,16 +32558,21 @@
           "member": "Jetpack"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "07A8",
           "name": "SET_AREA51_SAM_SITE",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "SetArea51SamSite",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07A9",
@@ -33436,28 +33468,33 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            }
+          ],
           "id": "07DF",
           "name": "REMOVE_OIL_PUDDLES_IN_AREA",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "RemoveOilPuddlesInArea",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07E0",
@@ -34345,48 +34382,58 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomZ",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopZ",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0810",
           "name": "GET_PARKING_NODE_IN_AREA",
           "num_params": 9,
           "short_desc": "Stores the coordinates of the nearest car park node in the specified area",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetParkingNodeInArea",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0811",
@@ -44305,40 +44352,48 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radiusX",
+              "type": "float"
+            },
+            {
+              "name": "radiusY",
+              "type": "float"
+            },
+            {
+              "name": "radiusZ",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "0A3E",
           "name": "GET_RANDOM_CHAR_IN_AREA_OFFSET_NO_SAVE",
           "num_params": 7,
           "short_desc": "Returns the first char in the ped pool within radius of the specified point",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetRandomCharInAreaOffsetNoSave",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A3F",

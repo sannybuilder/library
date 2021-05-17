@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621220880662
+    "last_update": 1621225700446
   },
   "extensions": [
     {
@@ -11568,40 +11568,40 @@
           }
         },
         {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "World",
-          "id": "02DD",
           "input": [
             {
-              "name": "_p1",
-              "type": "string"
+              "name": "zone",
+              "type": "zone_key"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "civilian",
+              "type": "bool"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "gang",
+              "type": "bool"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "criminalOrProstitute",
+              "type": "bool"
             }
           ],
-          "member": "GetRandomCharInZone",
-          "name": "GET_RANDOM_CHAR_IN_ZONE",
-          "num_params": 5,
           "output": [
             {
-              "name": "_p5",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
-          "short_desc": "Gets a pedestrian in the specified town, if the pedtype matches the specified values"
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Zone",
+          "id": "02DD",
+          "member": "GetRandomChar",
+          "name": "GET_RANDOM_CHAR_IN_ZONE",
+          "num_params": 5,
+          "short_desc": "Gets a random character in the specified zone whose pedtype matches the specified values"
         },
         {
           "id": "02DE",
@@ -31604,7 +31604,7 @@
         {
           "input": [
             {
-              "name": "zoneId",
+              "name": "zone",
               "type": "zone_key"
             },
             {
@@ -31623,8 +31623,8 @@
           "name": "GET_ZONE_GANG_STRENGTH",
           "num_params": 3,
           "short_desc": "Returns the density of the gang members in the specified zone",
-          "class": "World",
-          "member": "GetZoneGangStrength",
+          "class": "Zone",
+          "member": "GetGangStrength",
           "attrs": {
             "is_static": true
           }

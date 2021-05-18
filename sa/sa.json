@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621326509084
+    "last_update": 1621336111920
   },
   "extensions": [
     {
@@ -17532,37 +17532,37 @@
           "short_desc": "Returns the number of members which are in a group of the character"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Player"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            },
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Rc",
           "id": "046E",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            }
-          ],
           "member": "GiveModelToPlayer",
           "name": "GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER",
           "num_params": 6,
@@ -22507,28 +22507,30 @@
           "member": "GetRotationVelocity"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "id": "05A7",
           "name": "ADD_VELOCITY_RELATIVE_TO_OBJECT_VELOCITY",
           "num_params": 4,
           "short_desc": "Sets the objects velocity",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "AddVelocityRelative"
         },
         {
           "input": [
@@ -27127,32 +27129,34 @@
           "member": "AttachToCar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "collisionDetection",
+              "type": "bool"
+            }
+          ],
           "id": "0682",
           "name": "DETACH_OBJECT",
           "num_params": 5,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "Detach"
         },
         {
           "input": [
@@ -29247,45 +29251,56 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "06E9",
           "name": "REQUEST_VEHICLE_MOD",
           "num_params": 1,
           "short_desc": "Loads the upgrade model and any associated models",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
-        },
-        {
-          "id": "06EA",
-          "name": "HAS_VEHICLE_MOD_LOADED",
-          "num_params": 1,
-          "short_desc": "Returns true if the vehicle upgrade model has loaded",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
+          "class": "Streaming",
+          "member": "RequestVehicleMod",
           "attrs": {
-            "is_condition": true
+            "is_static": true
           }
         },
         {
           "input": [
             {
-              "name": "self",
-              "type": "Car"
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
+          "id": "06EA",
+          "name": "HAS_VEHICLE_MOD_LOADED",
+          "num_params": 1,
+          "short_desc": "Returns true if the vehicle upgrade model has loaded",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "HasVehicleModLoaded"
+        },
+        {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
             }
           ],
           "id": "06EB",
           "name": "MARK_VEHICLE_MOD_AS_NO_LONGER_NEEDED",
           "num_params": 1,
           "short_desc": "Marks the vehicle upgrade model as no longer needed, allowing it to be unloaded by the streamer",
-          "class": "Car",
-          "member": "MarkModAsNoLongerNeeded"
+          "class": "Streaming",
+          "member": "MarkVehicleModAsNoLongerNeeded",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -30101,59 +30116,67 @@
           "member": "SetStayInSlowLane"
         },
         {
+          "input": [
+            {
+              "name": "player",
+              "type": "Player"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "id": "0715",
           "name": "TAKE_REMOTE_CONTROL_OF_CAR",
           "num_params": 2,
           "short_desc": "Puts the specified player in control of a remote-control vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Rc",
+          "member": "TakeOfCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            },
+            {
+              "name": "smashed",
+              "type": "bool"
+            },
+            {
+              "name": "0716IsClosestObjectOfTypeSmashedOrDamaged1062116317753Radius10ModelGrassplantSmashed0Damaged1",
+              "type": "bool"
+            }
+          ],
           "id": "0716",
           "name": "IS_CLOSEST_OBJECT_OF_TYPE_SMASHED_OR_DAMAGED",
           "num_params": 7,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
+          "member": "IsClosestObjectOfTypeSmashedOrDamaged"
         },
         {
           "id": "0717",
@@ -33843,35 +33866,38 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "07F0",
           "name": "HAS_OBJECT_OF_TYPE_BEEN_SMASHED",
           "num_params": 5,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
+          "member": "HasObjectOfTypeBeenSmashed"
         },
         {
           "input": [
@@ -35961,32 +35987,40 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
           "id": "0866",
           "name": "GET_CLOSEST_STEALABLE_OBJECT",
           "num_params": 5,
           "short_desc": "Gets the closest object which can be stolen for burglary missions",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "GetClosestStealableObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0867",

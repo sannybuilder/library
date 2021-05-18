@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621313347634
+    "last_update": 1621326509084
   },
   "extensions": [
     {
@@ -42454,8 +42454,11 @@
           "num_params": 0,
           "short_desc": "Returns true if subtitles are switched on in the settings menu",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "AreSubtitlesSwitchedOn"
         },
         {
           "input": [
@@ -42712,20 +42715,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09D7",
           "name": "FORCE_INTERIOR_LIGHTING_FOR_PLAYER",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Player",
+          "member": "ForceInteriorLighting"
         },
         {
           "id": "09D8",
@@ -42806,16 +42811,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "id": "09DD",
           "name": "MAKE_ROOM_IN_PLAYER_GANG_FOR_MISSION_PEDS",
           "num_params": 1,
           "short_desc": "Ensures there is x amount of space for new members to be added to the players gang",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "MakeRoomInPlayerGangForMissionPeds",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09DE",
@@ -43000,38 +43010,43 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "red",
+              "type": "int"
             },
             {
-              "name": "_p5",
-              "type": "any"
+              "name": "green",
+              "type": "int"
             },
             {
-              "name": "_p6",
-              "type": "any"
+              "name": "blue",
+              "type": "int"
             },
             {
-              "name": "_p7",
-              "type": "any"
+              "name": "radius",
+              "type": "float"
             }
           ],
           "id": "09E5",
           "name": "DRAW_LIGHT_WITH_RANGE",
           "num_params": 7,
-          "short_desc": "Draws colored light in radius of the specified point"
+          "short_desc": "Draws colored light in radius of the specified point",
+          "class": "Fx",
+          "member": "DrawLightWithRange",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43130,16 +43145,21 @@
           "member": "TakeOffGoggles"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09EC",
           "name": "ALLOW_FIXED_CAMERA_COLLISION",
           "num_params": 1,
           "short_desc": "Makes the camera remain behind the player when in any garage",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "AllowFixedCollision",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43247,20 +43267,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09F4",
           "name": "IGNORE_HEIGHT_DIFFERENCE_FOLLOWING_NODES",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "IgnoreHeightDifferenceFollowingNodes"
         },
         {
           "id": "09F5",
@@ -43398,24 +43420,29 @@
           "member": "ResetHydraulics"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "id": "09FF",
           "name": "SET_RESPAWN_POINT_FOR_DURATION_OF_MISSION",
           "num_params": 3,
           "short_desc": "Overrides the respawn point",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Restart",
+          "member": "SetRespawnPointForDurationOfMission",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A00",
@@ -43578,28 +43605,33 @@
           "member": "EnableDisabledAttractors"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "id": "0A0B",
           "name": "LOAD_SCENE_IN_DIRECTION",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "LoadSceneInDirection",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43628,16 +43660,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "textStyle",
+              "type": "TextStyle"
+            }
+          ],
           "id": "0A0E",
           "name": "CLEAR_THIS_PRINT_BIG_NOW",
           "num_params": 1,
           "short_desc": "Removes the print big text with the specified style from the screen",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Text",
+          "member": "ClearThisPrintBigNow",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A0F",
@@ -43724,7 +43761,12 @@
           "id": "0A13",
           "name": "MANAGE_ALL_POPULATION",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Game",
+          "member": "ManageAllPopulation",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43909,20 +43951,22 @@
           "member": "IsTouchingChar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A1C",
           "name": "DISABLE_HELI_AUDIO",
           "num_params": 2,
           "short_desc": "When set to 0, helicopter sounds will be muted",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "DisableAudio"
         },
         {
           "input": [
@@ -44061,38 +44105,53 @@
           "member": "HighlightItem"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A24",
           "name": "SET_DISABLE_MILITARY_ZONES",
           "num_params": 1,
           "short_desc": "Causes the players wanted level to be set at 4 when in restricted areas",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "SetDisableMilitaryZones",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            }
+          ],
           "id": "0A25",
           "name": "SET_CAMERA_POSITION_UNFIXED",
           "num_params": 2,
           "short_desc": "Sets the position of the camera to an offset of the targeted entity",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetPositionUnfixed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A26",
           "name": "SET_RADIO_TO_PLAYERS_FAVOURITE_STATION",
           "num_params": 0,
-          "short_desc": "Sets the radio station of the vehicle the player is currently in to the favourite station, retrieved from the stats (ID 326)"
+          "short_desc": "Sets the radio station of the vehicle the player is currently in to the favourite station, retrieved from the stats (ID 326)",
+          "class": "Game",
+          "member": "SetRadioToPlayersFavouriteStation",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44148,19 +44207,22 @@
           "member": "IsClimbing"
         },
         {
+          "input": [
+            {
+              "name": "gxt",
+              "type": "gxt_key"
+            }
+          ],
           "id": "0A2A",
           "name": "IS_THIS_HELP_MESSAGE_BEING_DISPLAYED",
           "num_params": 1,
           "short_desc": "Returns true if a help message with the specified GXT entry is being displayed",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Text",
+          "member": "IsThisHelpMessageBeingDisplayed"
         },
         {
           "id": "0A2B",
@@ -44168,32 +44230,45 @@
           "num_params": 0,
           "short_desc": "Returns true if widescreen is switched on in the display settings",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsWidescreenOnInOptions"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
           ],
           "id": "0A2C",
           "name": "DRAW_SUBTITLES_BEFORE_FADE",
           "num_params": 1,
-          "short_desc": "Used to disable text from disappearing when the screen fades out"
+          "short_desc": "Used to disable text from disappearing when the screen fades out",
+          "class": "Text",
+          "member": "DrawSubtitlesBeforeFade",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
           ],
           "id": "0A2D",
           "name": "DRAW_ODDJOB_TITLE_BEFORE_FADE",
           "num_params": 1,
-          "short_desc": "Used to disable styled text from disappearing when the screen fades out"
+          "short_desc": "Used to disable styled text from disappearing when the screen fades out",
+          "class": "Text",
+          "member": "DrawOddjobTitleBeforeFade",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44237,16 +44312,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A2F",
           "name": "SET_PHOTO_CAMERA_EFFECT",
           "num_params": 1,
           "short_desc": "Puts the camera in first person mode if the player is holding a weapon with a first person shooting mode (such as a sniper rifle or camera)",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetPhotoEffect",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A30",
@@ -44403,35 +44483,39 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "0A3A",
           "name": "IS_LAST_BUILDING_MODEL_SHOT_BY_PLAYER",
           "num_params": 2,
           "short_desc": "Returns true if the player had just shot the building model specified",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "IsLastBuildingModelShot"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "id": "0A3B",
           "name": "CLEAR_LAST_BUILDING_MODEL_SHOT_BY_PLAYER",
           "num_params": 1,
           "short_desc": "Resets the status of the last model the player has shot",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Player",
+          "member": "ClearLastBuildingModelShot"
         },
         {
           "id": "0A3C",
@@ -44450,16 +44534,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A3D",
           "name": "ACTIVATE_PIMP_CHEAT",
           "num_params": 1,
           "short_desc": "When enabled, sleeping with a prostitute earns you money instead of taking it away from you",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "ActivatePimpCheat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44506,16 +44595,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A3F",
           "name": "SET_SCRIPT_COOP_GAME",
           "num_params": 1,
           "short_desc": "Sets an unused flag at address 0x96A8A8",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetScriptCoopGame",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44583,19 +44677,29 @@
           "id": "0A43",
           "name": "GET_RID_OF_PLAYER_PROSTITUTE",
           "num_params": 0,
-          "short_desc": "Cancels any prostitute invitations received in-game and makes any current prostitutes quit"
+          "short_desc": "Cancels any prostitute invitations received in-game and makes any current prostitutes quit",
+          "class": "Game",
+          "member": "GetRidOfPlayerProstitute",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A44",
           "name": "DISPLAY_NON_MINIGAME_HELP_MESSAGES",
           "num_params": 1,
           "short_desc": "Overrides the text block set by 09BD",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Text",
+          "member": "DisplayNonMinigameHelpMessages",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

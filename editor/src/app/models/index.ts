@@ -146,6 +146,7 @@ export enum ViewMode {
   EditCommand = 'EditCommand',
   ViewCommand = 'ViewCommand',
   ViewClass = 'ViewClass',
+  EditClass = 'EditClass',
   ViewEnum = 'ViewEnum',
   EditEnum = 'EditEnum',
   ViewAllClasses = 'ViewAllClasses',

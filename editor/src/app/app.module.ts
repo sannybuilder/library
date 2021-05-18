@@ -92,6 +92,7 @@ import {
 import {
   ClassOverviewComponent,
   ClassListComponent,
+  ClassEditorComponent,
 } from './components/classes';
 
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -145,6 +146,7 @@ export function loadTranslations(
     EnumGamesComponent,
     EnumListComponent,
     ClassListComponent,
+    ClassEditorComponent,
   ],
   imports: [
     BrowserModule,

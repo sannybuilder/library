@@ -43,7 +43,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   onDestroy$ = new Subject();
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
-  classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
   game$ = this._game.game$;
   canEdit$ = this._ui.canEdit$;
@@ -60,6 +59,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   oldSnippet?: string;
   extension?: string;
   oldExtension?: string;
+  classToDisplayOrEdit?: string;
   enumToDisplayOrEdit?: EnumRaw;
   oldEnumToEdit?: EnumRaw;
   screenSize: number;
@@ -119,6 +119,13 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.oldCommand = cloneDeep(this.command);
         this.oldExtension = extension;
         this.extension = extension;
+        this.ref.detectChanges();
+      });
+
+    this._ui.classToDisplayOrEdit$
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((classToEdit) => {
+        this.classToDisplayOrEdit = classToEdit;
         this.ref.detectChanges();
       });
   }

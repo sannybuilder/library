@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621343521338
+    "last_update": 1621344716248
   },
   "extensions": [
     {
@@ -11140,34 +11140,41 @@
           "id": "02BA",
           "name": "GET_NUMBER_OF_CARS_COLLECTED_BY_GARAGE",
           "num_params": 0,
-          "short_desc": ""
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "id": "02BB",
           "name": "HAS_CAR_BEEN_TAKEN_TO_GARAGE",
           "num_params": 0,
-          "short_desc": "",
           "attrs": {
-            "is_condition": true
+            "is_unsupported": true
           }
         },
         {
           "id": "02BC",
           "name": "SET_SWAT_REQUIRED",
           "num_params": 0,
-          "short_desc": ""
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "id": "02BD",
           "name": "SET_FBI_REQUIRED",
           "num_params": 0,
-          "short_desc": ""
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "id": "02BE",
           "name": "SET_ARMY_REQUIRED",
           "num_params": 0,
-          "short_desc": ""
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "input": [
@@ -11751,36 +11758,44 @@
           "short_desc": "Returns true if the character is firing a weapon"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "cashAmount",
+              "type": "int"
+            },
+            {
+              "name": "permanent",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Pickup",
+              "source": "var_any"
+            }
+          ],
           "id": "02E1",
           "name": "CREATE_MONEY_PICKUP",
           "num_params": 6,
           "short_desc": "Creates a money pickup with the specified cash value",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Pickup",
+          "attrs": {
+            "is_constructor": true
+          },
+          "member": "CreateMoney"
         },
         {
           "input": [
@@ -12688,18 +12703,16 @@
           "id": "031F",
           "name": "IS_CHAR_IN_CHARS_GROUP",
           "num_params": 0,
-          "short_desc": "",
           "attrs": {
-            "is_condition": true
+            "is_unsupported": true
           }
         },
         {
           "id": "0320",
           "name": "IS_CHAR_IN_PLAYERS_GROUP",
           "num_params": 0,
-          "short_desc": "",
           "attrs": {
-            "is_condition": true
+            "is_unsupported": true
           }
         },
         {
@@ -14473,24 +14486,26 @@
           "short_desc": "Makes an object moveable"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "animName",
+              "type": "string"
+            },
+            {
+              "name": "animSpeed",
+              "type": "float"
+            }
+          ],
           "id": "0393",
           "name": "SET_CHAR_ANIM_SPEED",
           "num_params": 3,
           "short_desc": "Makes an actor perform an animation at the specified speed",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetAnimSpeed"
         },
         {
           "attrs": {
@@ -16516,16 +16531,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "radioStation",
+              "type": "int"
+            }
+          ],
           "id": "041E",
           "name": "SET_RADIO_CHANNEL",
           "num_params": 1,
           "short_desc": "Sets the current radio station that is playing, if the player is in a vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "SetRadioChannel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "041F",
@@ -17133,7 +17153,9 @@
           "id": "044C",
           "name": "LOAD_COLLISION_WITH_SCREEN",
           "num_params": 0,
-          "short_desc": "Loads an island with a greeting message"
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "id": "044D",

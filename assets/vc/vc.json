@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621344678701
+    "last_update": 1621428759901
   },
   "extensions": [
     {
@@ -12651,36 +12651,36 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Rampage",
+          "class": "Player",
           "id": "0297",
-          "member": "ResetNumOfModelsKilledByPlayer",
+          "member": "ResetNumOfModelsKilled",
           "name": "RESET_NUM_OF_MODELS_KILLED_BY_PLAYER",
           "num_params": 0,
           "short_desc": "Resets the count of how many times the player has destroyed a certain model"
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Rampage",
-          "id": "0298",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_ide"
             }
           ],
-          "member": "GetNumOfModelsKilledByPlayer",
-          "name": "GET_NUM_OF_MODELS_KILLED_BY_PLAYER",
-          "num_params": 2,
           "output": [
             {
-              "name": "_p2",
+              "name": "num",
               "type": "int",
               "source": "var_any"
             }
           ],
-          "short_desc": "Gets the amount of times the player has destroyed a specific model"
+          "class": "Player",
+          "id": "0298",
+          "member": "GetNumOfModelsKilled",
+          "name": "GET_NUM_OF_MODELS_KILLED_BY_PLAYER",
+          "num_params": 2,
+          "short_desc": "Gets the amount of times the player has destroyed a specific model",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "attrs": {
@@ -14431,21 +14431,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "02ED",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetCollectableTotal",
           "name": "SET_COLLECTABLE1_TOTAL",
           "num_params": 1,
-          "short_desc": "Specifies the total ammount of hidden packages to collect"
+          "short_desc": "Specifies the total amount of hidden packages to collect"
         },
         {
           "attrs": {
@@ -17399,16 +17399,16 @@
           "short_desc": "Returns true if the char is male"
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
           "attrs": {
             "is_keyword": true
           },
           "id": "03A4",
-          "input": [
-            {
-              "name": "",
-              "type": "string"
-            }
-          ],
           "name": "SCRIPT_NAME",
           "num_params": 1,
           "short_desc": "Names the current script"
@@ -17925,29 +17925,30 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "timer",
+              "type": "int",
+              "source": "var_global"
+            },
+            {
+              "name": "direction",
+              "type": "TimerDirection"
+            },
+            {
+              "name": "text",
+              "type": "gxt_key"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Hud",
           "id": "03C3",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "string"
-            }
-          ],
           "member": "DisplayTimerWithString",
           "name": "DISPLAY_ONSCREEN_TIMER_WITH_STRING",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Creates a countdown or countup onscreen timer with the text"
         },
         {
           "input": [
@@ -18571,8 +18572,8 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "object",
+              "type": "HudObject"
             }
           ],
           "attrs": {

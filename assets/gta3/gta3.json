@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621428759887
+    "last_update": 1621432408927
   },
   "extensions": [
     {
@@ -14581,21 +14581,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "02BC",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetSwatRequired",
           "name": "SET_SWAT_REQUIRED",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets patrol cars to Police cars and Enforcers"
         },
         {
           "attrs": {
@@ -14606,12 +14606,12 @@
           "num_params": 0
         },
         {
-          "attrs": {
-            "is_unsupported": true
-          },
           "id": "02BE",
           "name": "SET_ARMY_REQUIRED",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "input": [
@@ -14741,21 +14741,21 @@
           "short_desc": "Makes the car drive to the specified X, Y and Z coordinates"
         },
         {
+          "input": [
+            {
+              "name": "_zero",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Pacman",
           "id": "02C3",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "StartRace",
           "name": "START_PACMAN_RACE",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Creates a collection of donkey magazine pickups"
         },
         {
           "attrs": {
@@ -14766,9 +14766,16 @@
           "member": "StartRecord",
           "name": "START_PACMAN_RECORD",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Stores the current player's position for debugging purposes during the pacman race"
         },
         {
+          "output": [
+            {
+              "name": "num",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -14777,14 +14784,7 @@
           "member": "GetNumberOfPowerPillsEaten",
           "name": "GET_NUMBER_OF_POWER_PILLS_EATEN",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "short_desc": ""
+          "short_desc": "Gets the number of donkey magazine pickups collected"
         },
         {
           "attrs": {
@@ -14795,42 +14795,49 @@
           "member": "Clear",
           "name": "CLEAR_PACMAN",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Removes all donkey magazine and platinum pickups"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "distance",
+              "type": "float"
+            },
+            {
+              "name": "count",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Pacman",
           "id": "02C7",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ],
           "member": "StartScramble",
           "name": "START_PACMAN_SCRAMBLE",
           "num_params": 5,
-          "short_desc": ""
+          "short_desc": "Creates a collection of platinum pickups nearby the specified location"
         },
         {
+          "output": [
+            {
+              "name": "num",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -14839,14 +14846,7 @@
           "member": "GetNumberOfPowerPillsCarried",
           "name": "GET_NUMBER_OF_POWER_PILLS_CARRIED",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "short_desc": ""
+          "short_desc": "Gets the number of platinum pickups collected in a vehicle"
         },
         {
           "attrs": {
@@ -14857,7 +14857,7 @@
           "member": "ClearNumberOfPowerPillsCarried",
           "name": "CLEAR_NUMBER_OF_POWER_PILLS_CARRIED",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Clears the number of platinum pickups collected in a vehicle"
         },
         {
           "input": [
@@ -15211,32 +15211,32 @@
           "member": "ClearNumberOfPowerPillsEaten",
           "name": "CLEAR_NUMBER_OF_POWER_PILLS_EATEN",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Clears the number of donkey magazine pickups collected"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Pacman",
           "id": "02DA",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "AddPowerPill",
           "name": "ADD_POWER_PILL",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Creates a single donkey magazine pickup"
         },
         {
           "input": [
@@ -20496,25 +20496,26 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "timer",
+              "type": "int",
+              "source": "var_global"
+            },
+            {
+              "name": "text",
+              "type": "gxt_key"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Hud",
           "id": "03C3",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "string"
-            }
-          ],
           "member": "DisplayTimerWithString",
           "name": "DISPLAY_ONSCREEN_TIMER_WITH_STRING",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Creates a countdown onscreen timer with the text"
         },
         {
           "input": [

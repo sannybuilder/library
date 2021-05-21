@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621626492543
+    "last_update": 1621626746855
   },
   "extensions": [
     {
@@ -37121,7 +37121,12 @@
           "id": "088E",
           "name": "SET_TIME_ONE_DAY_FORWARD",
           "num_params": 0,
-          "short_desc": "Progresses the game to the next day"
+          "short_desc": "Progresses the game to the next day",
+          "class": "Clock",
+          "member": "SetTimeOneDayForward",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "088F",
@@ -37133,20 +37138,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "timer",
+              "type": "int",
+              "source": "var_global"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
           "id": "0890",
           "name": "SET_TIMER_BEEP_COUNTDOWN_TIME",
           "num_params": 2,
           "short_desc": "Starts a sound when the timer reaches the specified number of seconds",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Hud",
+          "member": "SetTimerBeepCountdownTime",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0891",
@@ -42231,16 +42242,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09A6",
           "name": "SHOW_BLIPS_ON_ALL_LEVELS",
           "num_params": 1,
           "short_desc": "Enables entity blips showing on the radar and map while in interiors",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "ShowBlipsOnAllLevels",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09A7",

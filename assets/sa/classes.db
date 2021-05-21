@@ -736,7 +736,6 @@ $END
 $Fx
 $BEGIN
 AddBigGunFlash,058A,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
-AddExplosionNoSound,0565,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%i")
 DrawCorona,024F,0,0,("x%f" "y%f" "z%f" "size%f" "type: Corona" "flareType: FlareType" "r%i" "g%i" "b%i")
 DrawLightWithRange,09E5,0,0,("x%f" "y%f" "z%f" "red%i" "green%i" "blue%i" "radius%f")
 DrawShadow,016F,0,0,("shadowType: ShadowType" "x%f" "y%f" "z%f" "angle%f" "length%f" "intensity%i" "r%i" "g%i" "b%i")
@@ -1573,7 +1572,8 @@ $END
 
 $World
 $BEGIN
-AddExplosion,020C,0,0,("x%f" "y%f" "z%f" "modeId: ExplosionMode")
+AddExplosion,020C,0,0,("x%f" "y%f" "z%f" "type: ExplosionType")
+AddExplosionNoSound,0565,0,0,("x%f" "y%f" "z%f" "type: ExplosionType")
 AddExplosionVariableShake,0948,0,0,("x%f" "y%f" "z%f" "type%i" "shake%f")
 AddSetPiece,04F8,0,0,("_p1%i" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f" "_p7%f" "_p8%f" "_p9%f" "_p10%f" "_p11%f" "_p12%f" "_p13%f")
 ClearAllScriptRoadblocks,04C1,0,0,()
@@ -1618,7 +1618,7 @@ IsAnyPickupAtCoords,048C,1,0,("x%f" "y%f" "z%f")
 IsAreaOccupied,0339,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "solid%b" "car%b" "char%b" "object%b" "particle%b")
 IsClosestObjectOfTypeSmashedOrDamaged,0716,1,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_ide" "smashed%b" "damaged%b")
 IsCopVehicleInArea3DNoSave,09C3,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
-IsExplosionInArea,0356,1,0,("explosionType%i" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+IsExplosionInArea,0356,1,0,("explosionType: ExplosionType" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 IsFlameInAngledArea2D,072D,1,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "angle%f" "drawSphere%b")
 IsFlameInAngledArea3D,072E,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "angle%f" "drawSphere%b")
 IsMoneyPickupAtCoords,09DA,1,0,("x%f" "y%f" "z%f")

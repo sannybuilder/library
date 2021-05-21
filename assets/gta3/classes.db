@@ -493,8 +493,7 @@ $END
 
 $DrugRun
 $BEGIN
-CreateFloatingPackage,035B,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4: Pickup")
-FindDropOffPlaneCoordinates,035A,0,0,("_p1%f" "_p2%f" "_p3%f")
+FindDropOffPlaneCoordinates,035A,0,0,("x%f" "y%f" "z%f")
 FindDrugPlaneCoordinates,03A6,0,0,("_p1%f" "_p2%f" "_p3%f")
 HasBeenCompleted,033B,1,0,()
 HasDropOffPlaneBeenShotDown,0359,1,0,()
@@ -524,7 +523,6 @@ ClearThreatForPedType,03F2,0,0,("_p1%i" "_p2%i")
 CreateCollectable,02EC,0,0,("x%f" "y%f" "z%f")
 FailCurrentMission,045C,0,0,()
 GetCollectablesCollected,03E1,0,0,("_p1%i")
-HasResprayHappened,0329,1,0,("_p1%i")
 HasSaveGameFinished,03D9,1,0,()
 IsFrench,040B,1,0,()
 IsGerman,040C,1,0,()
@@ -565,6 +563,7 @@ Deactivate,02B9,0,0,("self: Garage")
 DoesContainCar,0422,1,0,("self: Garage" "vehicle: Car")
 GetNumberOfCarsCollected,02BA,0,0,("self: Garage" "_p2%i")
 HasCarBeenTaken,02BB,1,0,("self: Garage" "_p2%i")
+HasResprayHappened,0329,1,0,("self: Garage")
 HasSlotBeenFilled,03D4,1,0,("self: Garage" "_p2%i")
 IsCarIn,021C,1,0,("self: Garage")
 IsClosed,03B1,1,0,("self: Garage")
@@ -704,6 +703,7 @@ $END
 $Pickup
 $BEGIN
 Create,0213,0,0,("modelId: model_any" "pickupType%i" "x%f" "y%f" "z%f" "handle: Pickup")
+CreateFloatingPackage,035B,0,0,("x%f" "y%f" "z%f" "handle: Pickup")
 CreateMoney,02E1,0,0,("x%f" "y%f" "z%f" "cashAmount%i" "handle: Pickup")
 CreateWithAmmo,032B,0,0,("modelId: model_any" "pickupType%i" "ammo%i" "x%f" "y%f" "z%f" "handle: Pickup")
 DropMine,02F0,0,0,("x%f" "y%f" "z%f")
@@ -1022,7 +1022,7 @@ $END
 
 $World
 $BEGIN
-AddExplosion,020C,0,0,("x%f" "y%f" "z%f" "modeId: ExplosionMode")
+AddExplosion,020C,0,0,("x%f" "y%f" "z%f" "type: ExplosionType")
 ClearArea,0395,0,0,("x%f" "y%f" "z%f" "radius%f" "clearParticles%b")
 ClearAreaOfCars,03BA,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 ClearAreaOfChars,042B,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
@@ -1035,8 +1035,8 @@ GetRandomCarOfTypeInArea,0327,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f"
 GetRandomCharInArea,02DC,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "handle: Char")
 GetRandomCopInArea,0469,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "cop%b" "swat%b" "fbi%b" "army%b" "vice%b" "handle: Char")
 IsAreaOccupied,0339,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "solid%b" "car%b" "char%b" "object%b" "particle%b")
-IsExplosionInArea,0356,1,0,("explosionType%i" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
-IsExplosionInZone,0357,1,0,("_p1%i" "_p2%s")
+IsExplosionInArea,0356,1,0,("explosionType: ExplosionType" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+IsExplosionInZone,0357,1,0,("explosionType: ExplosionType" "zone: zone_key")
 IsPointObscuredByAMissionEntity,038A,1,0,("x%f" "y%f" "z%f" "radiusX%f" "radiusY%f" "radiusZ%f")
 IsProjectileInArea,02EE,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 IsSniperBulletInArea,037E,1,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621517209785
+    "last_update": 1621585117785
   },
   "extensions": [
     {
@@ -19361,36 +19361,38 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Plane"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "minAltitude",
+              "type": "float"
+            },
+            {
+              "name": "maxAltitude",
+              "type": "float"
+            }
+          ],
           "id": "04D2",
           "name": "PLANE_GOTO_COORDS",
           "num_params": 6,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Plane",
+          "member": "GotoCoords"
         },
         {
           "attrs": {
@@ -28360,8 +28362,11 @@
           "num_params": 0,
           "short_desc": "Returns true if the cutscene has finished loading",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Cutscene",
+          "member": "HasLoaded"
         },
         {
           "input": [
@@ -28916,16 +28921,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "06D0",
           "name": "SWITCH_EMERGENCY_SERVICES",
           "num_params": 1,
           "short_desc": "Sets whether emergency traffic spawns",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SwitchEmergencyServices",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "06D1",
@@ -29783,7 +29793,12 @@
           "id": "0701",
           "name": "SKIP_CUTSCENE_END",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Cutscene",
+          "member": "SkipEnd",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -30140,28 +30155,30 @@
           "member": "FlyInDirection"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Plane"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
           "id": "0710",
           "name": "PLANE_FOLLOW_ENTITY",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Plane",
+          "member": "FollowEntity"
         },
         {
           "id": "0711",
@@ -31068,52 +31085,56 @@
           "member": "HasBeenArrested"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Plane"
+            },
+            {
+              "name": "throttle",
+              "type": "float"
+            }
+          ],
           "id": "0742",
           "name": "SET_PLANE_THROTTLE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Plane",
+          "member": "SetThrottle"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "minAltitude",
+              "type": "float"
+            },
+            {
+              "name": "maxAltitude",
+              "type": "float"
+            }
+          ],
           "id": "0743",
           "name": "HELI_LAND_AT_COORDS",
           "num_params": 6,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "LandAtCoords"
         },
         {
           "id": "0744",
@@ -31346,24 +31367,26 @@
           "member": "ShootAtChar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            }
+          ],
           "id": "074E",
           "name": "SET_INFORM_RESPECTED_FRIENDS",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetInformRespectedFriends"
         },
         {
           "input": [
@@ -31955,40 +31978,55 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "iplName",
+              "type": "string"
+            }
+          ],
           "id": "0776",
           "name": "REQUEST_IPL",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "RequestIpl",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "iplName",
+              "type": "string"
+            }
+          ],
           "id": "0777",
           "name": "REMOVE_IPL",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "RemoveIpl",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "iplName",
+              "type": "string"
+            }
+          ],
           "id": "0778",
           "name": "REMOVE_IPL_DISCREETLY",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "RemoveIplDiscreetly",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0779",
@@ -32106,32 +32144,34 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "minAltitude",
+              "type": "float"
+            },
+            {
+              "name": "maxAltitude",
+              "type": "any"
+            }
+          ],
           "id": "0780",
           "name": "HELI_KEEP_ENTITY_IN_VIEW",
           "num_params": 5,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "KeepEntityInView"
         },
         {
           "id": "0781",
@@ -32292,16 +32332,18 @@
           "member": "AttachWinch"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            }
+          ],
           "id": "0789",
           "name": "RELEASE_ENTITY_FROM_WINCH",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "ReleaseEntityFromWinch"
         },
         {
           "input": [
@@ -32329,28 +32371,35 @@
           "member": "GetCarriage"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            }
+          ],
+          "output": [
+            {
+              "name": "char",
+              "type": "Char",
+              "source": "var_any"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car",
+              "source": "var_any"
+            },
+            {
+              "name": "object",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
           "id": "078B",
           "name": "GRAB_ENTITY_ON_WINCH",
           "num_params": 4,
           "short_desc": "Retrieves the entity attached to the helis magnet and returns to specific variables depending on the entities type",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "GrabEntityOnWinch"
         },
         {
           "id": "078C",
@@ -33015,20 +33064,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "id": "07BB",
           "name": "ACTIVATE_HELI_SPEED_CHEAT",
           "num_params": 2,
           "short_desc": "Provides the heli with extra thrust power",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "ActivateSpeedCheat"
         },
         {
           "input": [
@@ -33655,19 +33706,22 @@
           "member": "SetShootRate"
         },
         {
+          "input": [
+            {
+              "name": "modeId",
+              "type": "model_ide"
+            }
+          ],
           "id": "07DE",
           "name": "IS_MODEL_IN_CDIMAGE",
           "num_params": 1,
           "short_desc": "Returns true if a file for the model exists",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsModelInCdimage"
         },
         {
           "input": [
@@ -33764,40 +33818,53 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
+          "output": [
+            {
+              "name": "leftBottomBackX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "leftBottomBackY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "leftBottomBackZ",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "rightTopFrontX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "rightTopFrontY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "rightTopFrontZ",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "07E4",
           "name": "GET_MODEL_DIMENSIONS",
           "num_params": 7,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "GetModelDimensions",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -34448,20 +34515,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
+          "output": [
+            {
+              "name": "numPeds",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0806",
           "name": "GET_TOTAL_NUMBER_OF_PEDS_KILLED_BY_PLAYER",
           "num_params": 2,
           "short_desc": "Gets the number of peds killed by the player since the last reset (0297)",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Player",
+          "member": "GetTotalNumberOfPedsKilled"
         },
         {
           "id": "0807",
@@ -34969,49 +35041,58 @@
           "member": "SetEngineBroken"
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "081E",
           "name": "IS_THIS_MODEL_A_BOAT",
           "num_params": 1,
           "short_desc": "Returns true if the model is the model of a boat",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsThisModelABoat"
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "081F",
           "name": "IS_THIS_MODEL_A_PLANE",
           "num_params": 1,
           "short_desc": "Returns true if the model is the model of a plane",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsThisModelAPlane"
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "0820",
           "name": "IS_THIS_MODEL_A_HELI",
           "num_params": 1,
           "short_desc": "Returns true if the model is the model of a helicopter",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsThisModelAHeli"
         },
         {
           "id": "0821",
@@ -35716,16 +35797,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "084D",
           "name": "ACTIVATE_INTERIOR_PEDS",
           "num_params": 1,
           "short_desc": "Enables ped spawning in interiors",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "ActivateInteriorPeds",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -35816,20 +35902,22 @@
           "member": "SetCanBeVisiblyDamaged"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Heli"
+            },
+            {
+              "name": "distance",
+              "type": "int"
+            }
+          ],
           "id": "0853",
           "name": "SET_HELI_REACHED_TARGET_DISTANCE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Heli",
+          "member": "SetReachedTargetDistance"
         },
         {
           "id": "0854",
@@ -36092,28 +36180,33 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0864",
           "name": "ENABLE_ENTRY_EXIT_PLAYER_GROUP_WARPING",
           "num_params": 4,
           "short_desc": "Enables the entry/exit marker in the specified radius of the coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "EnableEntryExitPlayerGroupWarping",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0865",
@@ -37321,20 +37414,22 @@
           "member": "ControlMovablePart"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08A5",
           "name": "WINCH_CAN_PICK_VEHICLE_UP",
           "num_params": 2,
           "short_desc": "Sets whether the vehicle can be picked up using the magno-crane",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "WinchCanPickUp"
         },
         {
           "input": [
@@ -38009,8 +38104,11 @@
           "num_params": 0,
           "short_desc": "Returns true if the player is pressing a key used to skip cutscenes or the game has been minimised",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Pad",
+          "member": "IsSkipCutsceneButtonPressed"
         },
         {
           "id": "08D1",
@@ -38051,16 +38149,22 @@
           "member": "SetScale"
         },
         {
+          "output": [
+            {
+              "name": "type",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "08D3",
           "name": "GET_CURRENT_POPULATION_ZONE_TYPE",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "GetCurrentPopulationZoneType",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38430,16 +38534,22 @@
           ]
         },
         {
+          "output": [
+            {
+              "name": "percentage",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "08E2",
           "name": "GET_TERRITORY_UNDER_CONTROL_PERCENTAGE",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "GetTerritoryUnderControlPercentage",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38986,18 +39096,20 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "color",
+              "type": "int"
             }
           ],
           "id": "08FB",
           "name": "SET_COORD_BLIP_APPEARANCE",
           "num_params": 2,
-          "short_desc": "Similar to 0165, except this command does not work on tracking blips, has different colors and does not support direct RGBA setting"
+          "short_desc": "Similar to 0165, except this command does not work on tracking blips, has different colors and does not support direct RGBA setting",
+          "class": "Blip",
+          "member": "SetCoordAppearance"
         },
         {
           "id": "08FC",
@@ -39132,20 +39244,22 @@
           "short_desc": "Returns the RGBA of the specified HUD color"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0905",
           "name": "LOCK_DOOR",
           "num_params": 2,
           "short_desc": "When set to 0, it locks the door at it's current rotation and allows a door object to be pushed open by entities once",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "LockDoor"
         },
         {
           "id": "0906",
@@ -39664,16 +39778,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0923",
           "name": "SWITCH_AMBIENT_PLANES",
           "num_params": 1,
           "short_desc": "Enables or disables planes",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SwitchAmbientPlanes",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0924",
@@ -40300,32 +40419,37 @@
           "member": "SetSayContext"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            },
+            {
+              "name": "shake",
+              "type": "float"
+            }
+          ],
           "id": "0948",
           "name": "ADD_EXPLOSION_VARIABLE_SHAKE",
           "num_params": 5,
           "short_desc": "Creates an explosion at the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "AddExplosionVariableShake",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0949",
@@ -40990,16 +41114,21 @@
           "member": "IsBig"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "096A",
           "name": "SWITCH_POLICE_HELIS",
           "num_params": 1,
           "short_desc": "Sets whether ghetto birds spawn",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SwitchPoliceHelis",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "096B",

@@ -24,6 +24,7 @@ import {
   selectExtensions,
   displayClassOverview,
   displayOrEditEnum,
+  toggleInlineMethodDescription,
 } from './actions';
 import * as selector from './selectors';
 
@@ -38,6 +39,9 @@ export class UiFacade {
   searchTerm$ = this.store$.select(selector.searchTerm);
   displaySearchBar$ = this.store$.select(selector.displaySearchBar);
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
+  displayInlineMethodDescription$ = this.store$.select(
+    selector.displayInlineMethodDescription
+  );
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
   currentPage$ = this.store$.select(selector.currentPage);
   commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
@@ -89,6 +93,10 @@ export class UiFacade {
 
   toggleCommandListElements(flag: boolean) {
     this.store$.dispatch(toggleCommandListElements({ flag }));
+  }
+
+  toggleInlineMethodDescription() {
+    this.store$.dispatch(toggleInlineMethodDescription());
   }
 
   displayCommandInfo(command: Command, extension: string) {

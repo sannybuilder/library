@@ -5,6 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { UiFacade } from '../../../state';
 import { Command, Game } from '../../../models';
 
 @Component({
@@ -16,6 +17,8 @@ import { Command, Game } from '../../../models';
 export class ClassOverviewComponent {
   private _classCommands: Array<{ command: Command; extension: string }>;
   isThisClassFromOtherExtension: boolean;
+  displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
+
   @Input() game: Game;
   @Input() className: string;
   @Input() set classCommands(
@@ -35,8 +38,15 @@ export class ClassOverviewComponent {
     extension: string;
   }> = new EventEmitter();
 
+  constructor(private _ui: UiFacade) {}
+
   onView(command: Command, extension: string) {
     this.view.emit({ command, extension });
+    return false;
+  }
+
+  toggleInlineDesc() {
+    this._ui.toggleInlineMethodDescription();
     return false;
   }
 }

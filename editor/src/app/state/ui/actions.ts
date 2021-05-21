@@ -33,6 +33,10 @@ export const toggleCommandListElements = createAction(
   props<{ flag: boolean }>()
 );
 
+export const toggleInlineMethodDescription = createAction(
+  '[ui] toggle inline method description'
+);
+
 export const displayOrEditCommandInfo = createAction(
   '[ui] display or edit command',
   props<{ command: Command; extension: string; viewMode: ViewMode }>()

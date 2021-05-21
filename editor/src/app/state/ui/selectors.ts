@@ -76,6 +76,11 @@ export const displayLastUpdated = createSelector(
   (state: UiState) => state.displayLastUpdated
 );
 
+export const displayInlineMethodDescription = createSelector(
+  state,
+  (state: UiState) => state.displayInlineMethodDescription
+);
+
 export const commandToDisplayOrEdit = createSelector(
   state,
   (state: UiState) => state.commandToDisplayOrEdit

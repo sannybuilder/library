@@ -1,15 +1,29 @@
 <h5>{{ "ui.classOverview.title" | translate }}</h5>
 
+<p class="text-right">
+  <a href="#" (click)="toggleInlineDesc()">{{
+    "ui.classOverview.toggleInlineDescription" | translate
+  }}</a>
+</p>
+
 <pre *ngIf="classCommands" class="sample">
 class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension:classCommands[0].extension } }}</span>
 <ng-container *ngFor="let classCommand of classCommands"><ng-container 
     *ngTemplateOutlet="memberTemplate; 
-    context: { command: classCommand.command, extension: classCommand.extension }"
+    context: { command: classCommand.command, extension: classCommand.extension, displayInlineDescription: displayInlineDescription$ | async }"
   ></ng-container>
 </ng-container>end
 </pre>
 
-<ng-template #memberTemplate let-command="command" let-extension="extension">
+<ng-template
+  #memberTemplate
+  let-command="command"
+  let-extension="extension"
+  let-displayInlineDescription="displayInlineDescription"
+>
+  <span class="comment" *ngIf="command.short_desc && displayInlineDescription">
+    &nbsp;// {{ command.short_desc }} <br />
+  </span>
   &nbsp;<code *ngIf="command.class && command.member">
     <ng-container *ngIf="command.attrs?.is_constructor"
       >constructor
@@ -49,4 +63,5 @@ class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment
         | translate: { extension: extension }
     }}
   </span>
+  <br *ngIf="displayInlineDescription" />
 </ng-template>

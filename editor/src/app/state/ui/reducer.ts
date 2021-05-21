@@ -17,6 +17,7 @@ import {
   displayOrEditEnum,
   displayClassesList,
   displayEnumsList,
+  toggleInlineMethodDescription,
 } from './actions';
 
 export interface GameState {
@@ -28,6 +29,7 @@ export interface UiState {
   searchTerm: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
+  displayInlineMethodDescription: boolean;
   selectedAttributesOnly: Attribute[];
   selectedAttributesExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
@@ -69,6 +71,7 @@ export const initialState: UiState = {
   ...defaultFilterState,
   displayLastUpdated: false,
   displaySearchBar: false,
+  displayInlineMethodDescription: false,
   viewMode: ViewMode.None,
   currentPage: 1,
 };
@@ -99,6 +102,10 @@ export const uiReducer = createReducer(
     ...state,
     displaySearchBar: flag,
     displayLastUpdated: flag,
+  })),
+  on(toggleInlineMethodDescription, (state) => ({
+    ...state,
+    displayInlineMethodDescription: !state.displayInlineMethodDescription,
   })),
   on(displayOrEditCommandInfo, (state, { command, extension, viewMode }) => ({
     ...state,

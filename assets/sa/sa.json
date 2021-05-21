@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621626746855
+    "last_update": 1621626983036
   },
   "extensions": [
     {
@@ -18175,17 +18175,17 @@
           "short_desc": "Shuts a character up"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Rc",
           "id": "048A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetEnableDetonate",
           "name": "SET_ENABLE_RC_DETONATE",
           "num_params": 1,
@@ -22387,20 +22387,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "counter",
+              "type": "int",
+              "source": "var_global"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "059C",
           "name": "SET_ONSCREEN_COUNTER_FLASH_WHEN_FIRST_DISPLAYED",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Hud",
+          "member": "SetOnscreenCounterFlashWhenFirstDisplayed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -37138,6 +37144,10 @@
           }
         },
         {
+          "id": "0890",
+          "name": "SET_TIMER_BEEP_COUNTDOWN_TIME",
+          "num_params": 2,
+          "short_desc": "Starts a sound when the timer reaches the specified number of seconds",
           "input": [
             {
               "name": "timer",
@@ -37149,12 +37159,8 @@
               "type": "int"
             }
           ],
-          "id": "0890",
-          "name": "SET_TIMER_BEEP_COUNTDOWN_TIME",
-          "num_params": 2,
-          "short_desc": "Starts a sound when the timer reaches the specified number of seconds",
           "class": "Hud",
-          "member": "SetTimerBeepCountdownTime",
+          "member": "SetTimerBeep",
           "attrs": {
             "is_static": true
           }

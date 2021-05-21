@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621615220511
+    "last_update": 1621625667477
   },
   "extensions": [
     {
@@ -27521,44 +27521,60 @@
           "member": "IsTargettingAnything"
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "068D",
           "name": "GET_ACTIVE_CAMERA_COORDINATES",
           "num_params": 3,
           "short_desc": "Stores the cameras coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "GetActiveCoordinates",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "068E",
           "name": "GET_ACTIVE_CAMERA_POINT_AT",
           "num_params": 3,
           "short_desc": "Gets the coordinates the camera is pointing to",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "GetActivePointAt",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "068F",
@@ -30647,16 +30663,21 @@
           "member": "WarpCharIntoCarAsPassenger"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "072C",
           "name": "SWITCH_COPS_ON_BIKES",
           "num_params": 1,
           "short_desc": "Disables the game from creating police bikes and their riders on the roads",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SwitchCopsOnBikes",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -31598,16 +31619,21 @@
           "member": "PlayAnim"
         },
         {
+          "input": [
+            {
+              "name": "zoom",
+              "type": "int"
+            }
+          ],
           "id": "075B",
           "name": "SET_RADAR_ZOOM",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Hud",
+          "member": "SetRadarZoom",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "075C",
@@ -33480,16 +33506,22 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "day",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "07D0",
           "name": "GET_CURRENT_DAY_OF_WEEK",
           "num_params": 1,
           "short_desc": "Returns an integer representation of the in-game day of the week",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Clock",
+          "member": "GetCurrentDayOfWeek",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07D1",
@@ -35387,20 +35419,27 @@
           ]
         },
         {
+          "output": [
+            {
+              "name": "day",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "month",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0835",
           "name": "GET_CURRENT_DATE",
           "num_params": 2,
           "short_desc": "Returns the in-game day of the month and month of the year",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Clock",
+          "member": "GetCurrentDate",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -35631,20 +35670,22 @@
           "member": "SetAreaVisible"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "id": "0841",
           "name": "SELECT_WEAPONS_FOR_VEHICLE",
           "num_params": 2,
           "short_desc": "Sets the vehicle to use it's secondary guns",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SelectWeapons"
         },
         {
           "input": [
@@ -36584,44 +36625,49 @@
           "member": "SetOnlyDamagedByPlayer"
         },
         {
+          "input": [
+            {
+              "name": "xFrom",
+              "type": "float"
+            },
+            {
+              "name": "yFrom",
+              "type": "float"
+            },
+            {
+              "name": "zFrom",
+              "type": "float"
+            },
+            {
+              "name": "xTo",
+              "type": "float"
+            },
+            {
+              "name": "yTo",
+              "type": "float"
+            },
+            {
+              "name": "zTo",
+              "type": "float"
+            },
+            {
+              "name": "quantity",
+              "type": "int"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
           "id": "0876",
           "name": "CREATE_BIRDS",
           "num_params": 8,
           "short_desc": "Creates a flock of birds flying in the specified direction",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "CreateBirds",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0877",
@@ -37607,28 +37653,38 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08B1",
           "name": "SET_NIGHT_VISION",
           "num_params": 1,
           "short_desc": "Enables night vision effects",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetNightVision",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08B2",
           "name": "SET_INFRARED_VISION",
           "num_params": 1,
           "short_desc": "Enables thermal vision effects",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetInfraredVision",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38111,24 +38167,32 @@
           "member": "IsSkipCutsceneButtonPressed"
         },
         {
+          "output": [
+            {
+              "name": "xOffset",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "yOffset",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "zOffset",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "08D1",
           "name": "GET_CUTSCENE_OFFSET",
           "num_params": 3,
           "short_desc": "Stores the offset of the currently loaded cutscene",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Cutscene",
+          "member": "GetOffset",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38427,16 +38491,21 @@
           "member": "SetEntryExit"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08DD",
           "name": "SWITCH_DEATH_PENALTIES",
           "num_params": 1,
           "short_desc": "Sets whether or not the player loses his weapons and inventory when taken to hospital",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SwitchDeathPenalties",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38522,16 +38591,22 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "numTags",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "08E1",
           "name": "FIND_NUMBER_TAGS_TAGGED",
           "num_params": 1,
           "short_desc": "Gets the number of spraytags painted over",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "FindNumberTagsTagged",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -38764,40 +38839,45 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "velocityX",
+              "type": "float"
+            },
+            {
+              "name": "velocityY",
+              "type": "float"
+            },
+            {
+              "name": "velocityZ",
+              "type": "float"
+            },
+            {
+              "name": "density",
+              "type": "int"
+            }
+          ],
           "id": "08EB",
           "name": "ADD_SPARKS",
           "num_params": 7,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "AddSparks",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -39044,16 +39124,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "08F8",
           "name": "SHOW_UPDATE_STATS",
           "num_params": 1,
           "short_desc": "Displays help boxes indicating that the players stats have been updated",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "ShowUpdateStats",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08F9",
@@ -40799,60 +40884,65 @@
           "member": "HasBeenUprooted"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "velocityX",
+              "type": "float"
+            },
+            {
+              "name": "velocityY",
+              "type": "float"
+            },
+            {
+              "name": "velocityZ",
+              "type": "float"
+            },
+            {
+              "name": "red",
+              "type": "int"
+            },
+            {
+              "name": "green",
+              "type": "int"
+            },
+            {
+              "name": "blue",
+              "type": "int"
+            },
+            {
+              "name": "alpha",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "float"
+            },
+            {
+              "name": "lastFactor",
+              "type": "float"
+            }
+          ],
           "id": "095C",
           "name": "ADD_SMOKE_PARTICLE",
           "num_params": 12,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            },
-            {
-              "name": "_p11",
-              "type": "any"
-            },
-            {
-              "name": "_p12",
-              "type": "any"
-            }
-          ]
+          "class": "Fx",
+          "member": "AddSmokeParticle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "095D",
@@ -41200,7 +41290,12 @@
           "id": "0970",
           "name": "FORCE_DEATH_RESTART",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Game",
+          "member": "ForceDeathRestart",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0971",
@@ -41586,7 +41681,12 @@
           "id": "0986",
           "name": "CLEAR_ALL_SCRIPT_FIRE_FLAGS",
           "num_params": 0,
-          "short_desc": "Marks all fires as no longer needed, allowing them to disappear"
+          "short_desc": "Marks all fires as no longer needed, allowing them to disappear",
+          "class": "World",
+          "member": "ClearAllScriptFireFlags",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -41923,8 +42023,11 @@
           "num_params": 0,
           "short_desc": "Returns true if night vision is active",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsNightVisionActive"
         },
         {
           "input": [
@@ -42053,16 +42156,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09A3",
           "name": "DRAW_CROSSHAIR",
           "num_params": 1,
           "short_desc": "Sets whether the HUD should always display weapon aiming crosshairs, used in the mission 'Catalyst' where the player must throw crates of ammo to Ryder",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Hud",
+          "member": "DrawCrosshair",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09A4",
@@ -42201,16 +42309,21 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09AC",
           "name": "HIDE_ALL_FRONTEND_BLIPS",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "HideAllFrontendBlips",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09AD",
@@ -42957,7 +43070,12 @@
           "id": "09D4",
           "name": "CLEAR_WANTED_LEVEL_IN_GARAGE",
           "num_params": 0,
-          "short_desc": "Suspends the current players wanted level"
+          "short_desc": "Suspends the current players wanted level",
+          "class": "Game",
+          "member": "ClearWantedLevelInGarage",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09D5",
@@ -44369,28 +44487,30 @@
           "member": "ImproveByCheating"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Menu"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "colorSlot",
+              "type": "int"
+            },
+            {
+              "name": "row",
+              "type": "int"
+            }
+          ],
           "id": "0A22",
           "name": "CHANGE_CAR_COLOUR_FROM_MENU",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Menu",
+          "member": "ChangeCarColour"
         },
         {
           "input": [

@@ -18,6 +18,7 @@ Cutscene
 CutsceneHead
 CutsceneObject
 Debugger
+DrugDropOff
 DrugRun
 Fx
 Game
@@ -491,15 +492,19 @@ Off,00C4,0,0,()
 On,00C3,0,0,()
 $END
 
+$DrugDropOff
+$BEGIN
+FindPlaneCoordinates,035A,0,0,("x%f" "y%f" "z%f")
+HasPlaneBeenShotDown,0359,1,0,()
+Start,0358,0,0,()
+$END
+
 $DrugRun
 $BEGIN
-FindDropOffPlaneCoordinates,035A,0,0,("x%f" "y%f" "z%f")
-FindDrugPlaneCoordinates,03A6,0,0,("x%f" "y%f" "z%f")
-HasDropOffPlaneBeenShotDown,0359,1,0,()
-HasDrugPlaneBeenShotDown,033C,1,0,()
-HasDrugRunBeenCompleted,033B,1,0,()
-StartDrugDropOff,0358,0,0,()
-StartDrugRun,033A,0,0,()
+FindPlaneCoordinates,03A6,0,0,("x%f" "y%f" "z%f")
+HasBeenCompleted,033B,1,0,()
+HasPlaneBeenShotDown,033C,1,0,()
+Start,033A,0,0,()
 $END
 
 $Fx

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621602143299
+    "last_update": 1621604824123
   },
   "extensions": [
     {
@@ -17384,10 +17384,10 @@
           },
           "class": "DrugRun",
           "id": "033A",
-          "member": "Start",
+          "member": "StartDrugRun",
           "name": "START_DRUG_RUN",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Creates a plane flying along the prerecorded path in the 'S.A.M.' mission"
         },
         {
           "attrs": {
@@ -17396,10 +17396,10 @@
           },
           "class": "DrugRun",
           "id": "033B",
-          "member": "HasBeenCompleted",
+          "member": "HasDrugRunBeenCompleted",
           "name": "HAS_DRUG_RUN_BEEN_COMPLETED",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Returns true if the plane in the 'S.A.M.' mission has landed"
         },
         {
           "attrs": {
@@ -17411,7 +17411,7 @@
           "member": "HasDrugPlaneBeenShotDown",
           "name": "HAS_DRUG_PLANE_BEEN_SHOT_DOWN",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Returns true if the plane in the 'S.A.M.' mission has been destroyed"
         },
         {
           "input": [
@@ -19937,6 +19937,23 @@
           "short_desc": "Changes the type of garage and target model "
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -19945,24 +19962,7 @@
           "member": "FindDrugPlaneCoordinates",
           "name": "FIND_DRUG_PLANE_COORDINATES",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "_p2",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "_p3",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "short_desc": ""
+          "short_desc": "Stores the current coordinates of the plane in the 'S.A.M.' mission"
         },
         {
           "attrs": {

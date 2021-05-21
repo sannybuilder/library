@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621610993907
+    "last_update": 1621615256924
   },
   "extensions": [
     {
@@ -11676,7 +11676,7 @@
             },
             {
               "name": "type",
-              "type": "int"
+              "type": "GarageType"
             }
           ],
           "output": [
@@ -11724,7 +11724,7 @@
             },
             {
               "name": "type",
-              "type": "int"
+              "type": "GarageType"
             },
             {
               "name": "modelId",
@@ -14547,7 +14547,7 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "_zero",
               "type": "int",
               "source": "var_any"
             }
@@ -14557,7 +14557,10 @@
           "member": "GetNumberOfCarsCollected",
           "name": "GET_NUMBER_OF_CARS_COLLECTED_BY_GARAGE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns the number of vehicles collected by the garage (always 0)",
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -14566,19 +14569,20 @@
               "type": "Garage"
             },
             {
-              "name": "_p2",
+              "name": "importSlot",
               "type": "int"
             }
           ],
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_nop": true
           },
           "class": "Garage",
           "id": "02BB",
           "member": "HasCarBeenTaken",
           "name": "HAS_CAR_BEEN_TAKEN_TO_GARAGE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if the garage collected a vehicle from the predefined list (UNUSED)"
         },
         {
           "input": [
@@ -15918,7 +15922,7 @@
             },
             {
               "name": "type",
-              "type": "int"
+              "type": "GarageType"
             }
           ],
           "class": "Garage",
@@ -19922,7 +19926,7 @@
             },
             {
               "name": "type",
-              "type": "int"
+              "type": "GarageType"
             },
             {
               "name": "modelId",
@@ -20842,7 +20846,7 @@
               "type": "Garage"
             },
             {
-              "name": "_p2",
+              "name": "importSlot",
               "type": "int"
             }
           ],
@@ -20854,7 +20858,7 @@
           "member": "HasSlotBeenFilled",
           "name": "HAS_IMPORT_GARAGE_SLOT_BEEN_FILLED",
           "num_params": 2,
-          "short_desc": "Returns true if the import slot has been filled"
+          "short_desc": "Returns true if the import garage has collected a vehicle from the predefined list"
         },
         {
           "input": [

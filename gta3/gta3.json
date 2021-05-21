@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621517209751
+    "last_update": 1621602143299
   },
   "extensions": [
     {
@@ -11387,8 +11387,8 @@
               "type": "float"
             },
             {
-              "name": "modeId",
-              "type": "ExplosionMode"
+              "name": "type",
+              "type": "ExplosionType"
             }
           ],
           "attrs": {
@@ -17024,18 +17024,17 @@
           "short_desc": ""
         },
         {
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          },
-          "class": "Game",
-          "id": "0329",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Garage",
+          "id": "0329",
           "member": "HasResprayHappened",
           "name": "HAS_RESPRAY_HAPPENED",
           "num_params": 1,
@@ -17883,7 +17882,7 @@
           "input": [
             {
               "name": "explosionType",
-              "type": "int"
+              "type": "ExplosionType"
             },
             {
               "name": "leftBottomX",
@@ -17922,26 +17921,26 @@
           "short_desc": "Returns true if there is an explosion of the specified type in the specified area"
         },
         {
+          "input": [
+            {
+              "name": "explosionType",
+              "type": "ExplosionType"
+            },
+            {
+              "name": "zone",
+              "type": "zone_key"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "World",
           "id": "0357",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "string"
-            }
-          ],
           "member": "IsExplosionInZone",
           "name": "IS_EXPLOSION_IN_ZONE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if an explosion of the specified type happened in the zone"
         },
         {
           "attrs": {
@@ -17952,7 +17951,7 @@
           "member": "StartDrugDropOff",
           "name": "START_DRUG_DROP_OFF",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Creates a plane flying along the prerecorded path in the 'A Drop In The Ocean' mission"
         },
         {
           "attrs": {
@@ -17964,9 +17963,26 @@
           "member": "HasDropOffPlaneBeenShotDown",
           "name": "HAS_DROP_OFF_PLANE_BEEN_SHOT_DOWN",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Returns true if the plane in the 'A Drop In The Ocean' mission has been destroyed"
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -17975,56 +17991,39 @@
           "member": "FindDropOffPlaneCoordinates",
           "name": "FIND_DROP_OFF_PLANE_COORDINATES",
           "num_params": 3,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "_p2",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "_p3",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "short_desc": ""
+          "short_desc": "Stores the current coordinates of the plane in the 'A Drop In The Ocean' mission"
         },
         {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "DrugRun",
-          "id": "035B",
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z",
               "type": "float"
             }
           ],
-          "member": "CreateFloatingPackage",
-          "name": "CREATE_FLOATING_PACKAGE",
-          "num_params": 4,
           "output": [
             {
-              "name": "_p4",
+              "name": "handle",
               "type": "Pickup",
               "source": "var_any"
             }
           ],
-          "short_desc": ""
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Pickup",
+          "id": "035B",
+          "member": "CreateFloatingPackage",
+          "name": "CREATE_FLOATING_PACKAGE",
+          "num_params": 4,
+          "short_desc": "Creates a pickup of type FloatingPackage at the given coordinates"
         },
         {
           "input": [

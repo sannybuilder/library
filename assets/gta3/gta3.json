@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621617514565
+    "last_update": 1621658094840
   },
   "extensions": [
     {
@@ -19308,7 +19308,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Txd",
+          "class": "Hud",
           "id": "038D",
           "member": "DrawSprite",
           "name": "DRAW_SPRITE",
@@ -19318,35 +19318,35 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "width",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "height",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "r",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "g",
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "b",
               "type": "int"
             },
             {
-              "name": "_p8",
+              "name": "a",
               "type": "int"
             }
           ],
@@ -19446,21 +19446,21 @@
           "short_desc": "Makes a character perform an animation at the specified speed"
         },
         {
+          "input": [
+            {
+              "name": "soundId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Audio",
           "id": "0394",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "PlayMissionPassedTune",
           "name": "PLAY_MISSION_PASSED_TUNE",
           "num_params": 1,
-          "short_desc": "Plays various music/soundtracks with the specified ID, such as the San Andreas main theme"
+          "short_desc": "Plays an audio file with the specified ID from the Audio directory"
         },
         {
           "input": [
@@ -19713,65 +19713,65 @@
           "short_desc": "Makes the vehicle watertight, meaning character's inside will not be harmed if the vehicle is submerged in water"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "strengthX",
+              "type": "float"
+            },
+            {
+              "name": "strengthY",
+              "type": "float"
+            },
+            {
+              "name": "strengthZ",
+              "type": "float"
+            },
+            {
+              "name": "scale",
+              "type": "float"
+            },
+            {
+              "name": "r",
+              "type": "int"
+            },
+            {
+              "name": "g",
+              "type": "int"
+            },
+            {
+              "name": "b",
+              "type": "int"
+            },
+            {
+              "name": "durationInMs",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Fx",
           "id": "039D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "float"
-            },
-            {
-              "name": "_p8",
-              "type": "float"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
-            },
-            {
-              "name": "_p10",
-              "type": "int"
-            },
-            {
-              "name": "_p11",
-              "type": "int"
-            },
-            {
-              "name": "_p12",
-              "type": "int"
-            }
-          ],
           "member": "AddMovingParticleEffect",
           "name": "ADD_MOVING_PARTICLE_EFFECT",
           "num_params": 12,
-          "short_desc": ""
+          "short_desc": "Adds a moving particle effect"
         },
         {
           "input": [
@@ -19916,7 +19916,7 @@
           "id": "03A4",
           "name": "SCRIPT_NAME",
           "num_params": 1,
-          "short_desc": "Names the current script"
+          "short_desc": "Assigns a new name to the current script"
         },
         {
           "input": [
@@ -20068,21 +20068,21 @@
           "short_desc": "Clears all waypoints in the route with the specified id"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "03AD",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SwitchRubbish",
           "name": "SWITCH_RUBBISH",
           "num_params": 1,
-          "short_desc": "Toggles garbage"
+          "short_desc": "Toggles garbage on the streets"
         },
         {
           "input": [
@@ -20119,7 +20119,7 @@
           "member": "RemoveParticleEffectsInArea",
           "name": "REMOVE_PARTICLE_EFFECTS_IN_AREA",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Removes all particle effects in the specified area"
         },
         {
           "input": [
@@ -20181,7 +20181,7 @@
           "member": "Start",
           "name": "START_CATALINA_HELI",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Creates a heli flying in the 'The Exchange' mission "
         },
         {
           "attrs": {
@@ -20192,7 +20192,7 @@
           "member": "TakeOff",
           "name": "CATALINA_HELI_TAKE_OFF",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Makes the heli in the 'The Exchange' mission to take off"
         },
         {
           "attrs": {
@@ -20203,7 +20203,7 @@
           "member": "Remove",
           "name": "REMOVE_CATALINA_HELI",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Deletes the heli flying in the 'The Exchange' mission"
         },
         {
           "attrs": {
@@ -20215,7 +20215,7 @@
           "member": "HasBeenShotDown",
           "name": "HAS_CATALINA_HELI_BEEN_SHOT_DOWN",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Returns true if the player damaged the heli flying in the 'The Exchange' mission"
         },
         {
           "input": [
@@ -20301,7 +20301,7 @@
           "member": "Grab",
           "name": "GRAB_CATALINA_HELI",
           "num_params": 1,
-          "short_desc": "Returns a handle of the Catalina's heli"
+          "short_desc": "Returns a handle of the heli created with 03B2"
         },
         {
           "input": [
@@ -20416,7 +20416,7 @@
           "member": "FlyAway",
           "name": "CATALINA_HELI_FLY_AWAY",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Makes the heli in the 'The Exchange' mission to fly high in the sky"
         },
         {
           "input": [
@@ -20895,25 +20895,25 @@
           "short_desc": "Clears the styled GXT from the screen"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Audio",
           "id": "03D7",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "SetMissionAudioPosition",
           "name": "SET_MISSION_AUDIO_POSITION",
           "num_params": 3,
@@ -21058,21 +21058,21 @@
           "short_desc": "Sets the amount of pedestrians to spawn in the game"
         },
         {
+          "input": [
+            {
+              "name": "pedType",
+              "type": "PedType"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "03DF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "ForceRandomPedType",
           "name": "FORCE_RANDOM_PED_TYPE",
           "num_params": 1,
-          "short_desc": "Forces a model on all randomly spawning peds"
+          "short_desc": "Forces the game to spawn only pedestrians with the given ped type"
         },
         {
           "input": [
@@ -21092,6 +21092,13 @@
           "short_desc": "Causes the next text to be drawn before the fade is drawn"
         },
         {
+          "output": [
+            {
+              "name": "num",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -21100,14 +21107,7 @@
           "member": "GetCollectablesCollected",
           "name": "GET_COLLECTABLE1S_COLLECTED",
           "num_params": 1,
-          "output": [
-            {
-              "name": "_p1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "short_desc": "Gets the number of collectable1s collected"
+          "short_desc": "Gets the number of hidden packages collected"
         },
         {
           "input": [
@@ -21337,46 +21337,46 @@
           "short_desc": "Enables text and texture drawing"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "PedType"
+            },
+            {
+              "name": "threatMask",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "03F1",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "SetThreatForPedType",
           "name": "SET_THREAT_FOR_PED_TYPE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Sets the ped type's hostility to other ped types"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "PedType"
+            },
+            {
+              "name": "threatMask",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "03F2",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "ClearThreatForPedType",
           "name": "CLEAR_THREAT_FOR_PED_TYPE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Clears the ped type's hostility to other ped types"
         },
         {
           "input": [
@@ -21889,25 +21889,22 @@
           "short_desc": ""
         },
         {
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Game",
-          "id": "0413",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
+          "id": "0413",
           "member": "SetGetOutOfJailFree",
           "name": "SET_GET_OUT_OF_JAIL_FREE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Sets get out of jail free for the player"
         },
         {
           "input": [
@@ -22345,26 +22342,26 @@
           "short_desc": "Does nothing"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "PedType"
+            },
+            {
+              "name": "threatMask",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Game",
           "id": "042A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
           "member": "IsThreatForPedType",
           "name": "IS_THREAT_FOR_PED_TYPE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if the ped type is hostile to other ped types"
         },
         {
           "input": [

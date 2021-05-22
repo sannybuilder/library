@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621655390411
+    "last_update": 1621671041775
   },
   "extensions": [
     {
@@ -20518,7 +20518,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "World",
+          "class": "Math",
           "id": "0509",
           "member": "GetDistanceBetweenCoords2D",
           "name": "GET_DISTANCE_BETWEEN_COORDS_2D",
@@ -20562,7 +20562,7 @@
           "attrs": {
             "is_static": true
           },
-          "class": "World",
+          "class": "Math",
           "id": "050A",
           "member": "GetDistanceBetweenCoords3D",
           "name": "GET_DISTANCE_BETWEEN_COORDS_3D",
@@ -22553,32 +22553,40 @@
           "member": "IsStatic"
         },
         {
+          "input": [
+            {
+              "name": "xVector1",
+              "type": "float"
+            },
+            {
+              "name": "yVector1",
+              "type": "float"
+            },
+            {
+              "name": "xVector2",
+              "type": "float"
+            },
+            {
+              "name": "yVector2",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "angle",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "05A4",
           "name": "GET_ANGLE_BETWEEN_2D_VECTORS",
           "num_params": 5,
           "short_desc": "Gets the angle between the 2D vectors",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Math",
+          "member": "GetAngleBetween2DVectors",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "05A5",
@@ -28445,40 +28453,45 @@
           "member": "DrivePointRoute"
         },
         {
+          "input": [
+            {
+              "name": "fromX",
+              "type": "float"
+            },
+            {
+              "name": "fromY",
+              "type": "float"
+            },
+            {
+              "name": "fromZ",
+              "type": "float"
+            },
+            {
+              "name": "toX",
+              "type": "float"
+            },
+            {
+              "name": "toY",
+              "type": "float"
+            },
+            {
+              "name": "toZ",
+              "type": "float"
+            },
+            {
+              "name": "energy",
+              "type": "int"
+            }
+          ],
           "id": "06BC",
           "name": "FIRE_SINGLE_BULLET",
           "num_params": 7,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "FireSingleBullet",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "06BD",
@@ -31200,44 +31213,54 @@
           "member": "StartsInAir"
         },
         {
+          "input": [
+            {
+              "name": "relationshipType",
+              "type": "RelationshipType"
+            },
+            {
+              "name": "ofPedType",
+              "type": "PedType"
+            },
+            {
+              "name": "toPedType",
+              "type": "PedType"
+            }
+          ],
           "id": "0746",
           "name": "SET_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "Sets the attitude of peds with one pedtype towards peds of another pedtype",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetRelationship",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "relationshipType",
+              "type": "RelationshipType"
+            },
+            {
+              "name": "ofPedType",
+              "type": "PedType"
+            },
+            {
+              "name": "toPedType",
+              "type": "PedType"
+            }
+          ],
           "id": "0747",
           "name": "CLEAR_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "ClearRelationship",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0748",
@@ -31313,52 +31336,57 @@
           "member": "AddEventResponse"
         },
         {
+          "input": [
+            {
+              "name": "memorySlot",
+              "type": "int"
+            },
+            {
+              "name": "offsetLeft",
+              "type": "float"
+            },
+            {
+              "name": "offsetTop",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            },
+            {
+              "name": "red",
+              "type": "int"
+            },
+            {
+              "name": "green",
+              "type": "int"
+            },
+            {
+              "name": "blue",
+              "type": "int"
+            },
+            {
+              "name": "alpha",
+              "type": "int"
+            }
+          ],
           "id": "074B",
           "name": "DRAW_SPRITE_WITH_ROTATION",
           "num_params": 10,
           "short_desc": "This is an extended version of 038D with scale and angle parameters",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            }
-          ]
+          "class": "Hud",
+          "member": "DrawSpriteWithRotation",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -32089,8 +32117,8 @@
               "type": "Char"
             },
             {
-              "name": "relationshipId",
-              "type": "int"
+              "name": "relationshipType",
+              "type": "RelationshipType"
             },
             {
               "name": "pedType",
@@ -32105,40 +32133,44 @@
           "member": "SetRelationship"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "relationshipType",
+              "type": "RelationshipType"
+            },
+            {
+              "name": "toPedType",
+              "type": "PedType"
+            }
+          ],
           "id": "077B",
           "name": "CLEAR_CHAR_RELATIONSHIP",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "ClearRelationship"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "relationshipType",
+              "type": "RelationshipType"
+            }
+          ],
           "id": "077C",
           "name": "CLEAR_ALL_CHAR_RELATIONSHIPS",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "ClearAllRelationships"
         },
         {
           "input": [
@@ -34003,27 +34035,30 @@
           "member": "DrivePointRouteAdvanced"
         },
         {
+          "input": [
+            {
+              "name": "ofPedType",
+              "type": "PedType"
+            },
+            {
+              "name": "toPedType",
+              "type": "PedType"
+            },
+            {
+              "name": "relationshipType",
+              "type": "RelationshipType"
+            }
+          ],
           "id": "07E8",
           "name": "IS_RELATIONSHIP_SET",
           "num_params": 3,
           "short_desc": "Returns true if the specified relationship between ped types is set",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsRelationshipSet"
         },
         {
           "id": "07E9",

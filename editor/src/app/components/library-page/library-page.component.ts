@@ -28,6 +28,7 @@ import {
   UiFacade,
   GameFacade,
   EnumsFacade,
+  ClassesFacade,
 } from '../../state';
 import { FUSEJS_OPTIONS } from '../../utils';
 
@@ -72,6 +73,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _snippets: SnippetsFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
+    private _classes: ClassesFacade,
     private ref: ChangeDetectorRef
   ) {}
 
@@ -80,6 +82,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this._extensions.loadExtensions(game);
       this._snippets.loadSnippets(game);
       this._enums.loadEnums(game);
+      this._classes.loadClasses(game);
     });
   }
 

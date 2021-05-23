@@ -57,6 +57,10 @@ import { gameReducer } from './state/game/reducer';
 import { EnumsEffects } from './state/enums/effects';
 import { enumsReducer } from './state/enums/reducer';
 
+// classes state
+import { ClassesEffects } from './state/classes/effects';
+import { classesReducer } from './state/classes/reducer';
+
 import { ConfigModule } from './config';
 import { AuthGuard, RouteGuard } from './route.guard';
 import { AppComponent } from './app.component';
@@ -191,6 +195,7 @@ export function loadTranslations(
       game: gameReducer,
       snippets: snippetsReducer,
       ui: uiReducer,
+      classes: classesReducer,
     }),
     EffectsModule.forRoot([
       AuthEffects,
@@ -199,6 +204,7 @@ export function loadTranslations(
       ExtensionsEffects,
       SnippetsEffects,
       UiEffects,
+      ClassesEffects,
     ]),
     DragDropModule,
 

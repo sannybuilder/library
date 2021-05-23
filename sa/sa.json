@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621714192620
+    "last_update": 1621757752649
   },
   "extensions": [
     {
@@ -39370,30 +39370,41 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "hudObject",
+              "type": "HudObject"
+            }
+          ],
+          "output": [
+            {
+              "name": "red",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "green",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "blue",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
+              "name": "alpha",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0904",
           "name": "GET_HUD_COLOUR",
           "num_params": 5,
-          "short_desc": "Returns the RGBA of the specified HUD color"
+          "short_desc": "Returns the RGBA of the specified HUD color",
+          "class": "Hud",
+          "member": "GetColour",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -39639,7 +39650,12 @@
           "id": "0915",
           "name": "SET_WEATHER_TO_APPROPRIATE_TYPE_NOW",
           "num_params": 0,
-          "short_desc": "Sets the current weather ID according to the game clock and the players current town number"
+          "short_desc": "Sets the current weather ID according to the game clock and the players current town number",
+          "class": "Weather",
+          "member": "SetToAppropriateTypeNow",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -39947,20 +39963,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "enable",
+              "type": "bool"
+            },
+            {
+              "name": "pitchBlack",
+              "type": "int"
+            }
+          ],
           "id": "0924",
           "name": "SET_DARKNESS_EFFECT",
           "num_params": 2,
           "short_desc": "Darkens the game",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetDarknessEffect",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0925",
@@ -40259,36 +40280,41 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "leftTopX",
+              "type": "float"
+            },
+            {
+              "name": "leftTopY",
+              "type": "float"
+            },
+            {
+              "name": "rightBottomX",
+              "type": "float"
+            },
+            {
+              "name": "rightBottomY",
+              "type": "float"
+            },
+            {
+              "name": "header",
+              "type": "gxt_key"
+            },
+            {
+              "name": "zIndex",
+              "type": "int"
+            }
+          ],
           "id": "0937",
           "name": "DRAW_WINDOW",
           "num_params": 6,
           "short_desc": "Draws a black box with styled text from corner A to corner B",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Hud",
+          "member": "DrawWindow",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0938",
@@ -40390,16 +40416,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "093D",
           "name": "SET_CINEMA_CAMERA",
           "num_params": 1,
           "short_desc": "Locks the camera on cinematic vehicle mode",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetCinema",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "093E",
@@ -40620,20 +40651,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Pickup"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "id": "094A",
           "name": "UPDATE_PICKUP_MONEY_PER_DAY",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Pickup",
+          "member": "UpdateMoneyPerDay"
         },
         {
           "input": [
@@ -41798,16 +41831,21 @@
           "member": "GetCurrentPaintjob"
         },
         {
+          "input": [
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
           "id": "0989",
           "name": "SET_HELP_MESSAGE_BOX_SIZE",
           "num_params": 1,
           "short_desc": "Sets the global width of text boxes displayed on screen",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Text",
+          "member": "SetHelpMessageBoxSize",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "098A",
@@ -42002,28 +42040,38 @@
           "member": "SetHeading"
         },
         {
+          "input": [
+            {
+              "name": "totalRespect",
+              "type": "int"
+            }
+          ],
           "id": "0997",
           "name": "SET_MISSION_RESPECT_TOTAL",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "SetMissionRespectTotal",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
           "id": "0998",
           "name": "AWARD_PLAYER_MISSION_RESPECT",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Stat",
+          "member": "AwardPlayerMissionRespect",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0999",
@@ -42818,16 +42866,21 @@
           "member": "GetRandomCarOfTypeInAngledAreaNoSave"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09C1",
           "name": "ADD_NEXT_MESSAGE_TO_PREVIOUS_BRIEFS",
           "num_params": 1,
           "short_desc": "Sets whether the next text is added to the brief in the menu",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Text",
+          "member": "AddNextMessageToPreviousBriefs",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09C2",
@@ -43248,7 +43301,12 @@
           "id": "09D9",
           "name": "USE_DETONATOR",
           "num_params": 0,
-          "short_desc": "Detonates all satchel charges and car bombs planted by the player"
+          "short_desc": "Detonates all satchel charges and car bombs planted by the player",
+          "class": "Player",
+          "member": "UseDetonator",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09DA",
@@ -43848,8 +43906,11 @@
           "num_params": 0,
           "short_desc": "Returns true if the player just exited the menu on the last frame",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "HasGameJustReturnedFromFrontend"
         },
         {
           "output": [
@@ -45245,16 +45306,21 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A48",
           "name": "ALLOW_PAUSE_IN_WIDESCREEN",
           "num_params": 1,
           "short_desc": "Enables the player to access the pause menu while widescreen is enabled",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "AllowPauseInWidescreen",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A49",

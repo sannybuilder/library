@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1622037479348
+    "last_update": 1622052646408
   },
   "extensions": [
     {
@@ -20345,27 +20345,29 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "skin",
+              "type": "string"
+            },
+            {
+              "name": "bodyPart",
+              "type": "BodyPart"
+            }
+          ],
           "id": "0500",
           "name": "IS_PLAYER_WEARING",
           "num_params": 3,
           "short_desc": "Returns true if the players specified bodypart uses the specified texture",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "IsWearing"
         },
         {
           "input": [
@@ -20621,16 +20623,22 @@
           "short_desc": "Makes the specified car have no collision with the specified object"
         },
         {
+          "output": [
+            {
+              "name": "level",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "050F",
           "name": "GET_MAX_WANTED_LEVEL",
           "num_params": 1,
           "short_desc": "Gets the maximum wanted level the player can receive",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "GetMaxWantedLevel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0510",
@@ -28520,59 +28528,62 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "fromX",
+              "type": "float"
+            },
+            {
+              "name": "fromY",
+              "type": "float"
+            },
+            {
+              "name": "fromZ",
+              "type": "float"
+            },
+            {
+              "name": "toX",
+              "type": "float"
+            },
+            {
+              "name": "toY",
+              "type": "float"
+            },
+            {
+              "name": "toZ",
+              "type": "float"
+            },
+            {
+              "name": "buildings",
+              "type": "bool"
+            },
+            {
+              "name": "cars",
+              "type": "bool"
+            },
+            {
+              "name": "chars",
+              "type": "bool"
+            },
+            {
+              "name": "objects",
+              "type": "bool"
+            },
+            {
+              "name": "particles",
+              "type": "bool"
+            }
+          ],
           "id": "06BD",
           "name": "IS_LINE_OF_SIGHT_CLEAR",
           "num_params": 11,
           "short_desc": "Checks if there is something in the range of the two specified points",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            },
-            {
-              "name": "_p11",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsLineOfSightClear"
         },
         {
           "input": [
@@ -31884,20 +31895,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
           "id": "0767",
           "name": "SET_ZONE_POPULATION_TYPE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "SetPopulationType",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0768",
@@ -31916,20 +31932,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "strength",
+              "type": "int"
+            }
+          ],
           "id": "076A",
           "name": "SET_ZONE_DEALER_STRENGTH",
           "num_params": 2,
           "short_desc": "Sets the total number of drug dealers in the zone",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "SetDealerStrength",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -32023,8 +32044,11 @@
           "num_params": 0,
           "short_desc": "Returns true if a priority GXT string is displayed on screen",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Text",
+          "member": "IsMessageBeingDisplayed"
         },
         {
           "id": "0770",
@@ -32912,36 +32936,46 @@
           "member": "KillCharOnFootTimed"
         },
         {
+          "input": [
+            {
+              "name": "xCoord",
+              "type": "float"
+            },
+            {
+              "name": "yCoord",
+              "type": "float"
+            },
+            {
+              "name": "zCoord",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "07A6",
           "name": "GET_NEAREST_TAG_POSITION",
           "num_params": 6,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "GetNearestTagPosition",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -35870,28 +35904,36 @@
           "member": "GetCityIsIn"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "name",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0843",
           "name": "GET_NAME_OF_ZONE",
           "num_params": 4,
           "short_desc": "Gets the name of the info zone at the specified coordinates",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "GetNameOfZone",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0844",
@@ -36757,20 +36799,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
           "id": "0874",
           "name": "SET_ZONE_POPULATION_RACE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "SetPopulationRace",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -39286,28 +39333,34 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "bodyPart",
+              "type": "BodyPart"
+            }
+          ],
+          "output": [
+            {
+              "name": "textureHash",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "modelHash",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "08F7",
           "name": "GET_CLOTHES_ITEM",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Player",
+          "member": "GetClothesItem"
         },
         {
           "input": [
@@ -39414,8 +39467,11 @@
           "num_params": 0,
           "short_desc": "Returns true if any help message is being displayed",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Text",
+          "member": "IsHelpMessageBeingDisplayed"
         },
         {
           "input": [
@@ -39795,20 +39851,25 @@
           "member": "WinchCanPickUp"
         },
         {
+          "input": [
+            {
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0917",
           "name": "SWITCH_AUDIO_ZONE",
           "num_params": 2,
           "short_desc": "Sets whether the IPL defined audio for the specified area should play",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Zone",
+          "member": "SwitchAudio",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0918",
@@ -40970,16 +41031,22 @@
           "short_desc": ""
         },
         {
+          "output": [
+            {
+              "name": "maxNum",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0956",
           "name": "FIND_MAX_NUMBER_OF_GROUP_MEMBERS",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "FindMaxNumberOfGroupMembers",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

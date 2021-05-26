@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1622053828989
+    "last_update": 1622054951315
   },
   "extensions": [
     {
@@ -40975,34 +40975,44 @@
           "member": "EnableSpeech"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "id": "0950",
           "name": "SET_UP_SKIP",
           "num_params": 4,
           "short_desc": "Fades out the screen and teleports the player to the specified coordinates and angle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Skip",
+          "member": "SetUp",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0951",
           "name": "CLEAR_SKIP",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Skip",
+          "member": "Clear",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0952",
@@ -42698,28 +42708,33 @@
           "member": "IsInAnyTrain"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "id": "09AF",
           "name": "SET_UP_SKIP_AFTER_MISSION",
           "num_params": 4,
           "short_desc": "Fades the screen out and teleports the player to the specified coordinates and angle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Skip",
+          "member": "SetUpAfterMission",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43629,32 +43644,37 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "09E0",
           "name": "SET_UP_SKIP_FOR_SPECIFIC_VEHICLE",
           "num_params": 5,
           "short_desc": "Specifically teleports the player to the specified coordinates and sets the specified angle when in the specified car",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Skip",
+          "member": "SetUpForSpecificVehicle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -45199,32 +45219,37 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "0A35",
           "name": "SET_UP_SKIP_FOR_VEHICLE_FINISHED_BY_SCRIPT",
           "num_params": 5,
           "short_desc": "When the player enters the specified car, the screen will fade out and it will be put at those coordinates and at that angle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Skip",
+          "member": "SetUpForVehicleFinishedByScript",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A36",
@@ -45232,8 +45257,11 @@
           "num_params": 0,
           "short_desc": "Returns true if the trip skip created with 0A35 has finished teleporting the vehicle and is ready to allow the script to fade in",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Skip",
+          "member": "IsWaitingForScriptToFadeIn"
         },
         {
           "input": [

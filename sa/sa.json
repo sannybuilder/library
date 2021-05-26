@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1622019380930
+    "last_update": 1622020191944
   },
   "extensions": [
     {
@@ -27186,40 +27186,45 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "tilt",
+              "type": "float"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "id": "067E",
           "name": "ATTACH_CAMERA_TO_CHAR_LOOK_AT_CHAR",
           "num_params": 7,
           "short_desc": "Puts the camera on the character like with 067C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "AttachToCharLookAtChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -29275,16 +29280,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "06E0",
           "name": "SET_TWO_PLAYER_CAMERA_MODE",
           "num_params": 1,
           "short_desc": "Enables the cooperative camera mode",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetTwoPlayerMode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -29638,16 +29648,21 @@
           "member": "SetSeparationRange"
         },
         {
+          "input": [
+            {
+              "name": "distance",
+              "type": "float"
+            }
+          ],
           "id": "06F1",
           "name": "LIMIT_TWO_PLAYER_DISTANCE",
           "num_params": 1,
           "short_desc": "Sets how far apart players can get on 2 Player Mode",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "LimitTwoPlayerDistance",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "06F2",
@@ -34545,8 +34560,11 @@
           "num_params": 0,
           "short_desc": "Returns true if the game is in 2 Player Mode",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "Is2PlayerGameGoingOn"
         },
         {
           "output": [
@@ -35264,16 +35282,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0822",
           "name": "SET_FIRST_PERSON_IN_CAR_CAMERA_MODE",
           "num_params": 1,
           "short_desc": "Enables vehicle bumper view for the camera",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetFirstPersonInCarMode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -35363,16 +35386,21 @@
           "member": "ConnectLods"
         },
         {
+          "input": [
+            {
+              "name": "limit",
+              "type": "int"
+            }
+          ],
           "id": "0828",
           "name": "SET_MAX_FIRE_GENERATIONS",
           "num_params": 1,
           "short_desc": "Sets the limit on how many fires can be created from other fires when \"propagation\" was enabled on 02CF",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetMaxFireGenerations",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -35531,20 +35559,25 @@
           "member": "HasBeenPhotographed"
         },
         {
+          "input": [
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            }
+          ],
           "id": "0834",
           "name": "DO_CAMERA_BUMP",
           "num_params": 2,
           "short_desc": "Bumps the camera in the specified direction as if it had collided",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "DoBump",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -36424,19 +36457,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "interiorId",
+              "type": "int"
+            }
+          ],
           "id": "0867",
           "name": "IS_PROCEDURAL_INTERIOR_ACTIVE",
           "num_params": 1,
           "short_desc": "Returns true in interactive interiors",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsProceduralInteriorActive"
         },
         {
           "id": "0868",
@@ -40005,28 +40041,33 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "from",
+              "type": "float"
+            },
+            {
+              "name": "to",
+              "type": "float"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "ease",
+              "type": "bool"
+            }
+          ],
           "id": "0922",
           "name": "CAMERA_SET_LERP_FOV",
           "num_params": 4,
           "short_desc": "Sets the cameras zoom factors",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetLerpFov",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -40070,7 +40111,12 @@
           "id": "0925",
           "name": "CAMERA_RESET_NEW_SCRIPTABLES",
           "num_params": 0,
-          "short_desc": "Stops the camera propagating, interpolating, shaking and zooming"
+          "short_desc": "Stops the camera propagating, interpolating, shaking and zooming",
+          "class": "Camera",
+          "member": "ResetNewScriptables",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0926",
@@ -42203,24 +42249,29 @@
           "member": "ChangePlaybackToUseAi"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            },
+            {
+              "name": "timeInMs",
+              "type": "float"
+            },
+            {
+              "name": "intensity",
+              "type": "float"
+            }
+          ],
           "id": "099C",
           "name": "CAMERA_SET_SHAKE_SIMULATION_SIMPLE",
           "num_params": 3,
           "short_desc": "Jiggles the camera in a variety of different ways",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetShakeSimulationSimple",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "099D",
@@ -42536,16 +42587,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "mode",
+              "type": "int"
+            }
+          ],
           "id": "09AD",
           "name": "SET_PLAYER_IN_CAR_CAMERA_MODE",
           "num_params": 1,
           "short_desc": "Changes the camera mode on the current vehicle, just like when the user presses the 'change view' key",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "SetPlayerInCarMode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09AE",
@@ -45129,16 +45185,22 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "mode",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0A39",
           "name": "GET_PLAYER_IN_CAR_CAMERA_MODE",
           "num_params": 1,
           "short_desc": "Gets the players chosen camera mode of the current vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "GetPlayerInCarMode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

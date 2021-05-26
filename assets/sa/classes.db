@@ -48,6 +48,7 @@ Restart
 ScriptFire
 Searchlight
 Sequence
+Skip
 Sound
 Sphere
 Stat
@@ -1323,6 +1324,16 @@ Clear,061B,0,0,("self: Sequence")
 Close,0616,0,0,("self: Sequence")
 Open,0615,0,0,("handle: Sequence")
 SetToRepeat,0643,0,0,("self: Sequence" "state%b")
+$END
+
+$Skip
+$BEGIN
+Clear,0951,0,0,()
+IsWaitingForScriptToFadeIn,0A36,1,0,()
+SetUp,0950,0,0,("x%f" "y%f" "z%f" "heading%f")
+SetUpAfterMission,09AF,0,0,("x%f" "y%f" "z%f" "heading%f")
+SetUpForSpecificVehicle,09E0,0,0,("x%f" "y%f" "z%f" "heading%f" "handle: Car")
+SetUpForVehicleFinishedByScript,0A35,0,0,("x%f" "y%f" "z%f" "heading%f" "handle: Car")
 $END
 
 $Sound

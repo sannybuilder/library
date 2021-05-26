@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1621900487522
+    "last_update": 1622019380930
   },
   "extensions": [
     {
@@ -20394,36 +20394,44 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "pedType",
+              "type": "PedType"
+            },
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "id": "0503",
           "name": "CREATE_SWAT_ROPE",
           "num_params": 6,
           "short_desc": "Creates a character descending from a rope",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "CreateSwatRope",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "id": "0504",
@@ -27041,76 +27049,86 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Car"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "tilt",
+              "type": "float"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "id": "067A",
           "name": "ATTACH_CAMERA_TO_VEHICLE_LOOK_AT_VEHICLE",
           "num_params": 7,
           "short_desc": "Puts the camera on the vehicle like in 0679",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "AttachToVehicleLookAtVehicle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "tilt",
+              "type": "float"
+            },
+            {
+              "name": "switchStyle",
+              "type": "int"
+            }
+          ],
           "id": "067B",
           "name": "ATTACH_CAMERA_TO_VEHICLE_LOOK_AT_CHAR",
           "num_params": 7,
           "short_desc": "Attaches the camera to the vehicle and points it at the specified character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "Camera",
+          "member": "AttachToVehicleLookAtChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -27503,7 +27521,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -27511,11 +27529,8 @@
           "name": "TASK_EVERYONE_LEAVE_CAR",
           "num_params": 1,
           "short_desc": "Makes all passengers of the car leave it",
-          "class": "Task",
-          "member": "EveryoneLeaveCar",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "Car",
+          "member": "TaskEveryoneLeave"
         },
         {
           "input": [
@@ -27656,40 +27671,44 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "panelId",
+              "type": "int"
+            },
+            {
+              "name": "visibility",
+              "type": "bool"
+            }
+          ],
           "id": "0697",
           "name": "POP_CAR_PANEL",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "PopPanel"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "panelId",
+              "type": "int"
+            }
+          ],
           "id": "0698",
           "name": "FIX_CAR_PANEL",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "FixPanel"
         },
         {
           "input": [
@@ -27935,48 +27954,50 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "xOffset",
+              "type": "float"
+            },
+            {
+              "name": "yOffset",
+              "type": "float"
+            },
+            {
+              "name": "zOffset",
+              "type": "float"
+            },
+            {
+              "name": "position",
+              "type": "int"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "_p8",
+              "type": "float"
+            },
+            {
+              "name": "weaponType",
+              "type": "WeaponType"
+            }
+          ],
           "id": "06A7",
           "name": "ATTACH_CHAR_TO_BIKE",
           "num_params": 9,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "AttachToBike"
         },
         {
           "input": [
@@ -29374,76 +29395,96 @@
           "member": "CharArrestChar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "nth",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "model_ide",
+              "source": "var_any"
+            }
+          ],
           "id": "06E5",
           "name": "GET_AVAILABLE_VEHICLE_MOD",
           "num_params": 3,
           "short_desc": "Gets the nth upgrade model index of the specified vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetAvailableMod"
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
+          "output": [
+            {
+              "name": "type",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "06E6",
           "name": "GET_VEHICLE_MOD_TYPE",
           "num_params": 2,
           "short_desc": "Gets the upgrade slot the upgrade model is for",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "GetVehicleModType",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
+          "output": [
+            {
+              "name": "mod",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "06E7",
           "name": "ADD_VEHICLE_MOD",
           "num_params": 3,
           "short_desc": "Adds an upgrade to the car",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "AddMod"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "mod",
+              "type": "int"
+            }
+          ],
           "id": "06E8",
           "name": "REMOVE_VEHICLE_MOD",
           "num_params": 2,
           "short_desc": "Destroys the specified component on a car",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "RemoveMod"
         },
         {
           "input": [
@@ -30837,20 +30878,22 @@
           "member": "AddWithWarp"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "panelId",
+              "type": "int"
+            }
+          ],
           "id": "0730",
           "name": "DAMAGE_CAR_PANEL",
           "num_params": 2,
           "short_desc": "Damages a panel on the car",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "DamagePanel"
         },
         {
           "input": [
@@ -32598,72 +32641,88 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            }
+          ],
+          "output": [
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0796",
           "name": "GET_ROPE_HEIGHT_FOR_OBJECT",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "GetRopeHeight"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
           "id": "0797",
           "name": "SET_ROPE_HEIGHT_FOR_OBJECT",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "SetRopeHeight"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            }
+          ],
+          "output": [
+            {
+              "name": "vehicle",
+              "type": "Car",
+              "source": "var_any"
+            },
+            {
+              "name": "char",
+              "type": "Char",
+              "source": "var_any"
+            },
+            {
+              "name": "object",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
           "id": "0798",
           "name": "GRAB_ENTITY_ON_ROPE_FOR_OBJECT",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "GrabEntityOnRope"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            }
+          ],
           "id": "0799",
           "name": "RELEASE_ENTITY_FROM_ROPE_FOR_OBJECT",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Object",
+          "member": "ReleaseEntityFromRope"
         },
         {
           "id": "079A",
@@ -34811,20 +34870,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "id": "0811",
           "name": "GET_CAR_CHAR_IS_USING",
           "num_params": 2,
           "short_desc": "Stores a handle for the vehicle the character is in or entering",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetCarIsUsing"
         },
         {
           "input": [
@@ -36096,24 +36160,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "rotationSpeed",
+              "type": "float"
+            }
+          ],
           "id": "0858",
           "name": "SET_HEADING_FOR_ATTACHED_PLAYER",
           "num_params": 3,
           "short_desc": "Sets the view angle for the player attached to an object or vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Player",
+          "member": "SetHeadingForAttached"
         },
         {
           "input": [
@@ -36966,24 +37032,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "orientation",
+              "type": "int"
+            },
+            {
+              "name": "headingLimit",
+              "type": "float"
+            }
+          ],
           "id": "0887",
           "name": "SET_HEADING_LIMIT_FOR_ATTACHED_CHAR",
           "num_params": 3,
           "short_desc": "Sets the heading limit for a character attached to an object or vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetHeadingLimitForAttached"
         },
         {
           "input": [
@@ -37010,28 +37078,35 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0889",
           "name": "GET_DEAD_CHAR_COORDINATES",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetCoordinatesOfDied"
         },
         {
           "input": [
@@ -41341,24 +41416,29 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "modId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "model_ide",
+              "source": "var_any"
+            }
+          ],
           "id": "096D",
           "name": "GET_CURRENT_CAR_MOD",
           "num_params": 3,
           "short_desc": "Gets the model of the component installed on the specified slot of the vehicle",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetCurrentMod"
         },
         {
           "id": "096E",
@@ -43848,16 +43928,21 @@
           "member": "IgnoreHeightDifferenceFollowingNodes"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "09F5",
           "name": "SHUT_ALL_CHARS_UP",
           "num_params": 1,
           "short_desc": "Prevents all peds from attempting to start conversations with the player",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "ShutAllCharsUp",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09F6",

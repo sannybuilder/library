@@ -25,7 +25,7 @@ export const selectClass = createAction(
 
 export const updateSearchTerm = createAction(
   '[ui] update search term',
-  props<{ term: string }>()
+  props<{ searchTerm: string; autoOpenSingleResult?: boolean }>()
 );
 
 export const toggleCommandListElements = createAction(

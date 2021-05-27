@@ -30,6 +30,7 @@ import {
   groupBy,
   mergeMap,
   first,
+  skip,
 } from 'rxjs/operators';
 
 import { Entity, Enums, Extension, Game, ViewMode } from '../../models';
@@ -52,7 +53,10 @@ export class UiEffects {
       ofType(onListEnter),
       withLatestFrom(this._ui.canEdit$),
       switchMap(
-        ([{ opcode, extension, enumName, className, action }, canEdit]) => {
+        ([
+          { opcode, extension, enumName, className, action, searchTerm },
+          canEdit,
+        ]) => {
           if (enumName) {
             if (enumName === 'all') {
               return [displayEnumsList()];
@@ -144,6 +148,12 @@ export class UiEffects {
             );
           }
 
+          if (searchTerm) {
+            return [
+              updateSearchTerm({ searchTerm, autoOpenSingleResult: true }),
+            ];
+          }
+
           return [stopEditOrDisplay()];
         }
       )
@@ -180,6 +190,26 @@ export class UiEffects {
           index !== undefined && index >= 0 && currentPage !== index
       ),
       map(([index]) => changePage({ index: Math.ceil((index! + 1) / 100) }))
+    )
+  );
+
+  updateSearchTerm$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updateSearchTerm),
+      filter(({ autoOpenSingleResult }) => !!autoOpenSingleResult),
+      switchMap(() =>
+        this._ui.rows$.pipe(
+          skip(2), // todo: fragile
+          filter((rows) => rows?.length === 1)
+        )
+      ),
+      map((rows) =>
+        displayOrEditCommandInfo({
+          command: rows![0].command,
+          extension: rows![0].extension!,
+          viewMode: ViewMode.ViewCommand,
+        })
+      )
     )
   );
 

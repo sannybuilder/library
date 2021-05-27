@@ -10,6 +10,7 @@ export const onListEnter = createAction(
     enumName?: string;
     className?: string;
     action?: string;
+    searchTerm?: string;
   }>()
 );
 

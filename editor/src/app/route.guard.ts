@@ -33,7 +33,10 @@ export class RouteGuard implements CanActivate {
   ) {}
 
   canActivate(_next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const segments = getSegmentsFromUrl(this._router, state.url);
+    const { segments, searchTerm } = getSegmentsFromUrl(
+      this._router,
+      state.url
+    );
 
     if (segments.length === 0) {
       return this.goHome();
@@ -78,6 +81,7 @@ export class RouteGuard implements CanActivate {
       extension,
       opcode,
       action: segments.shift(),
+      searchTerm,
     });
 
     return true;
@@ -88,11 +92,17 @@ export class RouteGuard implements CanActivate {
   }
 }
 
-function getSegmentsFromUrl(router: Router, url: string): string[] {
+function getSegmentsFromUrl(
+  router: Router,
+  url: string
+): { segments: string[]; searchTerm?: string } {
   const tree = router.parseUrl(url);
-  return (
-    tree.root?.children?.primary?.segments.map((segment) => segment.path) ?? []
-  );
+  return {
+    searchTerm: tree.queryParams?.q,
+    segments:
+      tree.root?.children?.primary?.segments.map((segment) => segment.path) ??
+      [],
+  };
 }
 
 function getGame(game: string | undefined): Game | undefined {

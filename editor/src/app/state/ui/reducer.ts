@@ -93,8 +93,7 @@ export const uiReducer = createReducer(
         : 'selectedAttributesExcept']: selectedAttributes,
     };
   }),
-
-  on(updateSearchTerm, (state, { term: searchTerm }) => ({
+  on(updateSearchTerm, (state, { searchTerm }) => ({
     ...state,
     searchTerm,
   })),

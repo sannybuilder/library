@@ -87,8 +87,8 @@ export class UiFacade {
     this.store$.dispatch(toggleAttribute({ attribute, modifier }));
   }
 
-  updateSearch(term: string) {
-    this.store$.dispatch(updateSearchTerm({ term }));
+  updateSearch(searchTerm: string) {
+    this.store$.dispatch(updateSearchTerm({ searchTerm }));
   }
 
   toggleCommandListElements(flag: boolean) {

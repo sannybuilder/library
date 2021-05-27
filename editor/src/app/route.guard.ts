@@ -109,7 +109,7 @@ function getGame(game: string | undefined): Game | undefined {
   if (game === 'gta3') {
     return Game.GTA3;
   }
-  if (game === 'vc') {
+  if (game === 'vc' || game === 'vc_mobile') {
     return Game.VC;
   }
   if (game === 'sa' || game === 'sa_mobile') {

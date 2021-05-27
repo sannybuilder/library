@@ -48,6 +48,7 @@ Restart
 ScriptFire
 Searchlight
 Sequence
+Shopping
 Skip
 Sound
 Sphere
@@ -1322,6 +1323,23 @@ Clear,061B,0,0,("self: Sequence")
 Close,0616,0,0,("self: Sequence")
 Open,0615,0,0,("handle: Sequence")
 SetToRepeat,0643,0,0,("self: Sequence" "state%b")
+$END
+
+$Shopping
+$BEGIN
+AddPriceModifier,08C8,0,0,("itemId%i" "modifier%i")
+BuyItem,0790,0,0,("itemId%i")
+ClearLoaded,087C,0,0,()
+GetExtraInfo,0783,0,0,("itemId%i" "flag%i" "value%i")
+GetItem,0760,0,0,("nth%i" "id%i")
+GetLoaded,07B0,0,0,("name%s")
+GetNameOfItem,078C,0,0,("itemId%i" "name%s")
+GetNumberOfItems,075F,0,0,("numItems%i")
+GetPriceOfItem,0761,0,0,("itemId%i" "price%i")
+HasPlayerBoughtItem,0942,1,0,("itemId%i")
+Load,075E,0,0,("name%s")
+LoadPrices,075D,0,0,("sectionName%s")
+RemovePriceModifier,08C9,0,0,("itemId%i")
 $END
 
 $Skip

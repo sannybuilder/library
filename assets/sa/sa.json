@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1622119351273
+    "last_update": 1622133159895
   },
   "extensions": [
     {
@@ -31768,72 +31768,104 @@
           "member": "DoesExist"
         },
         {
+          "input": [
+            {
+              "name": "sectionName",
+              "type": "string"
+            }
+          ],
           "id": "075D",
           "name": "LOAD_PRICES",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "LoadPrices",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
           "id": "075E",
           "name": "LOAD_SHOP",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "Load",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "numItems",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "075F",
           "name": "GET_NUMBER_OF_ITEMS_IN_SHOP",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "GetNumberOfItems",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "nth",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "id",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0760",
           "name": "GET_ITEM_IN_SHOP",
           "num_params": 2,
           "short_desc": "Returns an identifier for an item associated with the shopping data entry",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "GetItem",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "itemId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "price",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0761",
           "name": "GET_PRICE_OF_ITEM",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "GetPriceOfItem",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -32372,24 +32404,32 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "itemId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0783",
           "name": "GET_SHOPPING_EXTRA_INFO",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "GetExtraInfo",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -32568,20 +32608,28 @@
           "member": "GrabEntityOnWinch"
         },
         {
+          "input": [
+            {
+              "name": "itemId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "name",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "078C",
           "name": "GET_NAME_OF_ITEM",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "GetNameOfItem",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "078D",
@@ -32623,16 +32671,21 @@
           "member": "Climb"
         },
         {
+          "input": [
+            {
+              "name": "itemId",
+              "type": "int"
+            }
+          ],
           "id": "0790",
           "name": "BUY_ITEM",
           "num_params": 1,
           "short_desc": "Charges the player for the purchase of the item and in many cases, automatically gives the item to the player",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "BuyItem",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0791",
@@ -33122,16 +33175,22 @@
           "member": "GetGroup"
         },
         {
+          "output": [
+            {
+              "name": "name",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "07B0",
           "name": "GET_LOADED_SHOP",
           "num_params": 1,
           "short_desc": "Returns the name of currently loaded subsection in shopping",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "GetLoaded",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07B1",
@@ -36968,7 +37027,12 @@
           "id": "087C",
           "name": "CLEAR_LOADED_SHOP",
           "num_params": 0,
-          "short_desc": "Releases the loaded shopping data"
+          "short_desc": "Releases the loaded shopping data",
+          "class": "Shopping",
+          "member": "ClearLoaded",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "087D",
@@ -38287,32 +38351,42 @@
           "member": "SetCoordinatesDontWarpGang"
         },
         {
+          "input": [
+            {
+              "name": "itemId",
+              "type": "int"
+            },
+            {
+              "name": "modifier",
+              "type": "int"
+            }
+          ],
           "id": "08C8",
           "name": "ADD_PRICE_MODIFIER",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "AddPriceModifier",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "itemId",
+              "type": "int"
+            }
+          ],
           "id": "08C9",
           "name": "REMOVE_PRICE_MODIFIER",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Shopping",
+          "member": "RemovePriceModifier",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08CA",
@@ -40697,19 +40771,22 @@
           "member": "SetClipIfColliding"
         },
         {
+          "input": [
+            {
+              "name": "itemId",
+              "type": "int"
+            }
+          ],
           "id": "0942",
           "name": "HAS_PLAYER_BOUGHT_ITEM",
           "num_params": 1,
           "short_desc": "Returns true if the shopping item has been bought",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Shopping",
+          "member": "HasPlayerBoughtItem"
         },
         {
           "id": "0943",

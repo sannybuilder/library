@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1622133159895
+    "last_update": 1622137185518
   },
   "extensions": [
     {
@@ -15478,53 +15478,53 @@
           "short_desc": "Loads a specified sound from the audio files"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Audio",
           "id": "03D0",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "HasMissionAudioLoaded",
           "name": "HAS_MISSION_AUDIO_LOADED",
           "num_params": 1,
           "short_desc": "Returns true if the audio has loaded"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Audio",
           "id": "03D1",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "PlayMissionAudio",
           "name": "PLAY_MISSION_AUDIO",
           "num_params": 1,
           "short_desc": "Plays an audio"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Audio",
           "id": "03D2",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "HasMissionAudioFinished",
           "name": "HAS_MISSION_AUDIO_FINISHED",
           "num_params": 1,
@@ -15621,29 +15621,29 @@
           "short_desc": "Clears the styled GXT from the screen"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Audio",
           "id": "03D7",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "SetMissionAudioPosition",
           "name": "SET_MISSION_AUDIO_POSITION",
           "num_params": 4,
@@ -16332,17 +16332,17 @@
           "short_desc": "Returns true if the game language is set to German"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Audio",
           "id": "040D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "ClearMissionAudio",
           "name": "CLEAR_MISSION_AUDIO",
           "num_params": 1,
@@ -20901,7 +20901,7 @@
           "name": "GET_RADIO_CHANNEL",
           "num_params": 1,
           "short_desc": "Returns the current radio station that is being played",
-          "class": "Game",
+          "class": "Audio",
           "member": "GetRadioChannel",
           "attrs": {
             "is_static": true
@@ -40912,20 +40912,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "0949",
           "name": "ATTACH_MISSION_AUDIO_TO_CHAR",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "AttachMissionAudioToChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -41845,60 +41850,75 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "soundId",
+              "type": "int"
+            }
+          ],
           "id": "097A",
           "name": "REPORT_MISSION_AUDIO_EVENT_AT_POSITION",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "ReportMissionAudioEventAtPosition",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Object"
+            },
+            {
+              "name": "soundId",
+              "type": "int"
+            }
+          ],
           "id": "097B",
           "name": "REPORT_MISSION_AUDIO_EVENT_AT_OBJECT",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "ReportMissionAudioEventAtObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            },
+            {
+              "name": "handle",
+              "type": "Object"
+            }
+          ],
           "id": "097C",
           "name": "ATTACH_MISSION_AUDIO_TO_OBJECT",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "AttachMissionAudioToObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44098,20 +44118,25 @@
           "short_desc": "Resets any changes made with 09EF"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "soundId",
+              "type": "int"
+            }
+          ],
           "id": "09F1",
           "name": "REPORT_MISSION_AUDIO_EVENT_AT_CHAR",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "ReportMissionAudioEventAtChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44193,20 +44218,25 @@
           "member": "SetGetOutUpsideDownCar"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Car"
+            },
+            {
+              "name": "soundId",
+              "type": "int"
+            }
+          ],
           "id": "09F7",
           "name": "REPORT_MISSION_AUDIO_EVENT_AT_CAR",
           "num_params": 2,
           "short_desc": "Plays the audio event at the cars position",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "ReportMissionAudioEventAtCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09F8",
@@ -44684,20 +44714,25 @@
           "member": "HasBeenResprayed"
         },
         {
+          "input": [
+            {
+              "name": "slotId",
+              "type": "int"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "id": "0A16",
           "name": "ATTACH_MISSION_AUDIO_TO_CAR",
           "num_params": 2,
           "short_desc": "Sets the loaded audio to play at the vehicle's location",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "AttachMissionAudioToCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -45035,7 +45070,7 @@
           "name": "SET_RADIO_TO_PLAYERS_FAVOURITE_STATION",
           "num_params": 0,
           "short_desc": "Sets the radio station of the vehicle the player is currently in to the favourite station, retrieved from the stats (ID 326)",
-          "class": "Game",
+          "class": "Audio",
           "member": "SetRadioToPlayersFavouriteStation",
           "attrs": {
             "is_static": true

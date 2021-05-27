@@ -30,7 +30,7 @@ import {
   groupBy,
   mergeMap,
   first,
-  skip,
+  take,
 } from 'rxjs/operators';
 
 import { Entity, Enums, Extension, Game, ViewMode } from '../../models';
@@ -198,8 +198,12 @@ export class UiEffects {
       ofType(updateSearchTerm),
       filter(({ autoOpenSingleResult }) => !!autoOpenSingleResult),
       switchMap(() =>
-        this._ui.rows$.pipe(
-          skip(2), // todo: fragile
+        // note: flatten this observable to make this logic only work once in the app lifetime
+        this._ui.selectedExtensions$.pipe(
+          filter((e) => !!e?.length),
+          take(1),
+          switchMap(() => this._ui.rows$),
+          take(1),
           filter((rows) => rows?.length === 1)
         )
       ),

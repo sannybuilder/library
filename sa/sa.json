@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1622171790766,
-    "version": "0.0.1",
+    "last_update": 1622189820313,
+    "version": "0.0.2",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -30447,16 +30447,21 @@
           "member": "IsClosestObjectOfTypeSmashedOrDamaged"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "0717",
           "name": "START_SETTING_UP_CONVERSATION",
           "num_params": 1,
           "short_desc": "Starts a conversation between the character and the player and clears the conversation lines",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Conversation",
+          "member": "StartSettingUp",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0718",
@@ -30471,26 +30476,34 @@
           "id": "0719",
           "name": "FINISH_SETTING_UP_CONVERSATION",
           "num_params": 0,
-          "short_desc": "Begins a script controlled conversation"
+          "short_desc": "Begins a script controlled conversation",
+          "class": "Conversation",
+          "member": "FinishSettingUp",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "speech",
+              "type": "gxt_key"
+            }
+          ],
           "id": "071A",
           "name": "IS_CONVERSATION_AT_NODE",
           "num_params": 2,
           "short_desc": "Returns true if the conversation is at the specified node",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Conversation",
+          "member": "IsAtNode"
         },
         {
           "id": "071B",
@@ -37553,35 +37566,43 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "089B",
           "name": "IS_PLAYER_IN_POSITION_FOR_CONVERSATION",
           "num_params": 1,
           "short_desc": "Returns true if there is a conversation going on between the character and the player and both the character and the player are able to communicate with one another",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Conversation",
+          "member": "IsPlayerInPosition"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "089C",
           "name": "ENABLE_CONVERSATION",
           "num_params": 2,
           "short_desc": "Pauses the scripted conversation assigned to the specified character",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Conversation",
+          "member": "Enable",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "089D",
@@ -39208,16 +39229,21 @@
           "member": "GetClass"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
           "id": "08ED",
           "name": "CLEAR_CONVERSATION_FOR_CHAR",
           "num_params": 1,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Conversation",
+          "member": "ClearForChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -42662,36 +42688,41 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "question",
+              "type": "gxt_key"
+            },
+            {
+              "name": "positiveAnswer",
+              "type": "gxt_key"
+            },
+            {
+              "name": "negativeAnswer",
+              "type": "gxt_key"
+            },
+            {
+              "name": "questionSoundId",
+              "type": "int"
+            },
+            {
+              "name": "positiveAnswerSoundId",
+              "type": "int"
+            },
+            {
+              "name": "negativeAnswerSoundId",
+              "type": "int"
+            }
+          ],
           "id": "09A4",
           "name": "SET_UP_CONVERSATION_NODE_WITH_SPEECH",
           "num_params": 6,
           "short_desc": "Specifies the dialogue GXT's and audio ID's",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Conversation",
+          "member": "SetUpNodeWithSpeech"
         },
         {
           "id": "09A5",
@@ -42771,20 +42802,25 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "speech",
+              "type": "gxt_key"
+            },
+            {
+              "name": "speechSoundId",
+              "type": "int"
+            }
+          ],
           "id": "09AA",
           "name": "SET_UP_CONVERSATION_END_NODE_WITH_SPEECH",
           "num_params": 2,
           "short_desc": "Sets the speech ID for the specified conversation response node",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Conversation",
+          "member": "SetUpEndNodeWithSpeech",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44809,36 +44845,41 @@
           "member": "SetHasBeenOwned"
         },
         {
+          "input": [
+            {
+              "name": "question",
+              "type": "gxt_key"
+            },
+            {
+              "name": "positiveAnswer",
+              "type": "gxt_key"
+            },
+            {
+              "name": "negativeAnswer",
+              "type": "gxt_key"
+            },
+            {
+              "name": "questionSoundId",
+              "type": "int"
+            },
+            {
+              "name": "positiveAnswerSoundId",
+              "type": "int"
+            },
+            {
+              "name": "negativeAnswerSoundId",
+              "type": "int"
+            }
+          ],
           "id": "0A18",
           "name": "SET_UP_CONVERSATION_NODE_WITH_SCRIPTED_SPEECH",
           "num_params": 6,
           "short_desc": "Adds a new line to the scripted conversation",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "Conversation",
+          "member": "SetUpNodeWithScriptedSpeech",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -45516,20 +45557,25 @@
           "member": "ClearLastBuildingModelShot"
         },
         {
+          "input": [
+            {
+              "name": "speech",
+              "type": "gxt_key"
+            },
+            {
+              "name": "speechSoundId",
+              "type": "int"
+            }
+          ],
           "id": "0A3C",
           "name": "SET_UP_CONVERSATION_END_NODE_WITH_SCRIPTED_SPEECH",
           "num_params": 2,
           "short_desc": "Sets the script audio ID (see 03CF) for the specified conversation response node",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Conversation",
+          "member": "SetUpEndNodeWithScriptedSpeech",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -45736,7 +45782,12 @@
           "id": "0A47",
           "name": "FINISH_SETTING_UP_CONVERSATION_NO_SUBTITLES",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Conversation",
+          "member": "FinishSettingUpNoSubtitles",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

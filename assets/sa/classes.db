@@ -15,6 +15,7 @@ CardDecks
 Char
 Checkpoint
 Clock
+Conversation
 Credits
 Cutscene
 Debugger
@@ -705,6 +706,21 @@ SetTimeOfDay,00C0,0,0,("hours%i" "minutes%i")
 SetTimeOneDayForward,088E,0,0,()
 SetTimeScale,015D,0,0,("scale%f")
 Store,0253,0,0,()
+$END
+
+$Conversation
+$BEGIN
+ClearForChar,08ED,0,0,("handle: Char")
+Enable,089C,0,0,("handle: Char" "state%b")
+FinishSettingUp,0719,0,0,()
+FinishSettingUpNoSubtitles,0A47,0,0,()
+IsAtNode,071A,1,0,("handle: Char" "speech: gxt_key")
+IsPlayerInPosition,089B,1,0,("handle: Char")
+SetUpEndNodeWithScriptedSpeech,0A3C,0,0,("speech: gxt_key" "speechSoundId%i")
+SetUpEndNodeWithSpeech,09AA,0,0,("speech: gxt_key" "speechSoundId%i")
+SetUpNodeWithScriptedSpeech,0A18,0,0,("question: gxt_key" "positiveAnswer: gxt_key" "negativeAnswer: gxt_key" "questionSoundId%i" "positiveAnswerSoundId%i" "negativeAnswerSoundId%i")
+SetUpNodeWithSpeech,09A4,0,0,("question: gxt_key" "positiveAnswer: gxt_key" "negativeAnswer: gxt_key" "questionSoundId%i" "positiveAnswerSoundId%i" "negativeAnswerSoundId%i")
+StartSettingUp,0717,0,0,("handle: Char")
 $END
 
 $Credits

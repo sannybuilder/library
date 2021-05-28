@@ -129,8 +129,8 @@ export class EnumEditorComponent {
     }
   }
 
-  addNewField() {
-    this.enumToEdit.fields.push(['', '']);
+  addNewField(name = '', value = '') {
+    this.enumToEdit.fields.push([name, value]);
     this.updateErrors();
   }
 
@@ -152,6 +152,36 @@ export class EnumEditorComponent {
   onFieldValueChange(val: string, field: [string, string | number | null]) {
     field[1] = trim(val);
     this.updateErrors();
+  }
+
+  onContentPaste(
+    event: ClipboardEvent,
+    field: [string, string | number | null]
+  ) {
+    const dataTransfer = event?.clipboardData;
+    const text = dataTransfer?.getData('text');
+    if (!text || field[0]) {
+      return;
+    }
+
+    text.split('\n').forEach((line, i) => {
+      let name = line.trim();
+      let value = '';
+
+      const parts = name.split(/[=,\t]/).map((p) => p.trim());
+      if (parts.length === 2) {
+        name = capitalizeFirst(parts[0])!;
+        value = parts[1];
+      }
+
+      if (i === 0) {
+        field[0] = name;
+        field[1] = value;
+      } else {
+        this.addNewField(name, value);
+      }
+    });
+    return false;
   }
 
   evaluateValue(index: number): string {

@@ -50,6 +50,7 @@ export class ExtensionsEffects {
               game,
               extensions: response.extensions,
               lastUpdate: response.meta.last_update,
+              version: response.meta.version,
             }),
             registerFileContent({
               fileName: GameLibrary[game],
@@ -136,11 +137,14 @@ export class ExtensionsEffects {
         // distinctUntilChanged<ReturnType<typeof updateGameCommands>>(isEqual),
         switchMap(({ game }) =>
           this._extensions.getGameExtensions(game).pipe(
-            tap((extensions) => {
-              this._changes.registerExtensionsChange(
-                GameLibrary[game],
-                extensions
-              );
+            withLatestFrom(this._extensions.version$),
+            tap(([extensions, version]) => {
+              this._changes.registerExtensionsChange({
+                fileName: GameLibrary[game],
+                content: extensions,
+                url: 'https://library.sannybuilder.com/#/' + game,
+                version: bumpVersion(version),
+              });
             })
           )
         )
@@ -308,4 +312,13 @@ function shouldUpdateOtherGames(
   }
 
   return true;
+}
+
+function bumpVersion(version?: string): string {
+  if (!version) {
+    return '0.0.1';
+  }
+  const parts = version.split('.');
+  const last = parts.pop() ?? '0';
+  return [...parts, isNaN(+last) ? 0 : +last + 1].join('.');
 }

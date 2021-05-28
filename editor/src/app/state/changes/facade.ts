@@ -22,8 +22,20 @@ export class ChangesFacade {
 
   constructor(private store$: Store) {}
 
-  registerExtensionsChange(fileName: string, content: Extension[]) {
-    this.store$.dispatch(registerExtensionsChange({ fileName, content }));
+  registerExtensionsChange({
+    fileName,
+    version,
+    url,
+    content,
+  }: {
+    fileName: string;
+    version: string;
+    url: string;
+    content: Extension[];
+  }) {
+    this.store$.dispatch(
+      registerExtensionsChange({ fileName, version, url, content })
+    );
   }
 
   registerSnippetChange(fileName: string, content: string) {

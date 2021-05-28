@@ -22,6 +22,7 @@ export interface GameState {
   loading: boolean;
   entities?: Record<string, Entity[]>;
   lastUpdate?: number;
+  version?: string;
   supportInfo: SupportInfo;
 }
 export interface ExtensionsState {
@@ -39,13 +40,16 @@ export const extensionsReducer = createReducer(
       loading: true,
     })
   ),
-  on(loadExtensionsSuccess, (state, { game, extensions, lastUpdate }) =>
-    updateState(state, game, {
-      extensions,
-      lastUpdate,
-      entities: getEntities(extensions),
-      loading: false,
-    })
+  on(
+    loadExtensionsSuccess,
+    (state, { game, extensions, version, lastUpdate }) =>
+      updateState(state, game, {
+        extensions,
+        lastUpdate,
+        version,
+        entities: getEntities(extensions),
+        loading: false,
+      })
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(

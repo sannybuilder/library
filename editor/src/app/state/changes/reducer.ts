@@ -39,11 +39,13 @@ export const initialState: ChangesState = {
 
 export const changesReducer = createReducer(
   initialState,
-  on(registerExtensionsChange, (state, { fileName, content }) => {
+  on(registerExtensionsChange, (state, { fileName, version, url, content }) => {
     const newContent = JSON.stringify(
       {
         meta: {
           last_update: Date.now(),
+          version,
+          url,
         },
         extensions: stripBody(content),
       },

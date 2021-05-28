@@ -53,6 +53,8 @@ struct Extension {
 #[derive(Serialize, Deserialize, Debug)]
 struct Meta {
     last_update: u64,
+    url: String,
+    version: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

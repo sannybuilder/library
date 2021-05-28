@@ -3,7 +3,12 @@ import { Enums, Extension } from '../../models';
 
 export const registerExtensionsChange = createAction(
   '[changes] register extensions',
-  props<{ fileName: string; content: Extension[] }>()
+  props<{
+    fileName: string;
+    version: string;
+    url: string;
+    content: Extension[];
+  }>()
 );
 
 export const registerSnippetChange = createAction(

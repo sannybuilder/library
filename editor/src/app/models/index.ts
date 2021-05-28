@@ -189,6 +189,8 @@ export type ParamType = Entity | Primitive | Enum;
 export interface LoadExtensionsResponse {
   meta: {
     last_update: number;
+    version: string;
+    url: string;
   };
   extensions: Extension[];
 }

@@ -3,9 +3,8 @@ import { Command, Extension, Game, SupportInfo } from '../../models';
 import { game } from '../game/selectors';
 import { ExtensionsState, GameState } from './reducer';
 
-export const extensionsState = createFeatureSelector<ExtensionsState>(
-  'extensions'
-);
+export const extensionsState =
+  createFeatureSelector<ExtensionsState>('extensions');
 
 export const state = createSelector(
   extensionsState,
@@ -85,4 +84,9 @@ export const commandSupportInfo = createSelector(
 export const hasAnyLoadingInProgress = createSelector(
   extensionsState,
   (state: ExtensionsState) => Object.values(state.games).some((s) => s?.loading)
+);
+
+export const version = createSelector(
+  state,
+  (state: GameState | undefined) => state?.version
 );

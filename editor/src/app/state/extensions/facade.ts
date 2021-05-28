@@ -20,6 +20,7 @@ export class ExtensionsFacade {
   entities$ = this.store$.select(selector.entities);
   loading$ = this.store$.select(selector.loading);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
+  version$ = this.store$.select(selector.version);
   hasAnyLoadingInProgress$ = this.store$.select(
     selector.hasAnyLoadingInProgress
   );

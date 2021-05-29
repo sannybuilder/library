@@ -55,6 +55,7 @@ Skip
 Sound
 Sphere
 Stat
+StreamedScript
 Streaming
 StuckCarCheck
 Task
@@ -1464,6 +1465,21 @@ SetMissionRespectTotal,0997,0,0,("totalRespect%i")
 SetProgressTotal,030D,0,0,("maxProgress%i")
 SetTotalNumberOfMissions,042C,0,0,("numMissions%i")
 ShowUpdateStats,08F8,0,0,("state%b")
+$END
+
+$StreamedScript
+$BEGIN
+AllocateToObject,0929,0,0,("id: script_id" "objectModelId: model_ide" "priority%i" "radius%f" "type%i")
+AllocateToRandomPed,0928,0,0,("id: script_id" "pedModelId: model_ide" "priority%i")
+GetNumberOfInstances,0926,0,0,("id: script_id" "numScripts%i")
+HasLoaded,08AB,1,0,("id: script_id")
+MarkAsNoLongerNeeded,090F,0,0,("id: script_id")
+RegisterAttractorScriptBrainForCodeUse,0884,0,0,("id: script_id" "_p2%s")
+RegisterScriptBrainForCodeUse,07D3,0,0,("id: script_id" "_p2%s")
+Remove,0910,0,0,("id: script_id")
+StartNew,0913,0,0,("id: script_id" "args: arguments")
+Stream,08A9,0,0,("id: script_id")
+SwitchObjectBrains,0A46,0,0,("type%i" "state%b")
 $END
 
 $Streaming

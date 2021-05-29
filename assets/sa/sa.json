@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1622310568018,
-    "version": "0.0.11",
+    "last_update": 1622319223367,
+    "version": "0.0.12",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -33889,20 +33889,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            },
+            {
+              "name": "_p2",
+              "type": "string"
+            }
+          ],
           "id": "07D3",
           "name": "REGISTER_SCRIPT_BRAIN_FOR_CODE_USE",
           "num_params": 2,
           "short_desc": "Sets the name for the script brain, enabling it to be initiated by the EXE",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "RegisterScriptBrainForCodeUse",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07D4",
@@ -37307,20 +37312,25 @@
           "member": "AttachToCharBone"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            },
+            {
+              "name": "_p2",
+              "type": "string"
+            }
+          ],
           "id": "0884",
           "name": "REGISTER_ATTRACTOR_SCRIPT_BRAIN_FOR_CODE_USE",
           "num_params": 2,
           "short_desc": "Registers a script brain for the specified ped attractor",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "RegisterAttractorScriptBrainForCodeUse",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0885",
@@ -38010,16 +38020,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            }
+          ],
           "id": "08A9",
           "name": "STREAM_SCRIPT",
           "num_params": 1,
           "short_desc": "Loads a script from the script",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "Stream",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08AA",
@@ -38031,19 +38046,22 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            }
+          ],
           "id": "08AB",
           "name": "HAS_STREAMED_SCRIPT_LOADED",
           "num_params": 1,
           "short_desc": "Returns true if the script has finished loading",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ],
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "StreamedScript",
+          "member": "HasLoaded"
         },
         {
           "input": [
@@ -39997,28 +40015,38 @@
           "member": "SetActiveItem"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            }
+          ],
           "id": "090F",
           "name": "MARK_STREAMED_SCRIPT_AS_NO_LONGER_NEEDED",
           "num_params": 1,
           "short_desc": "Ends the specified script brain",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "MarkAsNoLongerNeeded",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            }
+          ],
           "id": "0910",
           "name": "REMOVE_STREAMED_SCRIPT",
           "num_params": 1,
           "short_desc": "Releases the specified script brain",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "Remove",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0911",
@@ -40055,20 +40083,26 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
           "id": "0913",
           "name": "START_NEW_STREAMED_SCRIPT",
           "num_params": 2,
           "short_desc": "Runs the external script with the specified ID",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "StartNew",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          }
         },
         {
           "id": "0914",
@@ -40467,20 +40501,28 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            }
+          ],
+          "output": [
+            {
+              "name": "numScripts",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0926",
           "name": "GET_NUMBER_OF_INSTANCES_OF_STREAMED_SCRIPT",
           "num_params": 2,
           "short_desc": "Gets the number of instances of a script",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "GetNumberOfInstances",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0927",
@@ -40492,52 +40534,62 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            },
+            {
+              "name": "pedModelId",
+              "type": "model_ide"
+            },
+            {
+              "name": "priority",
+              "type": "int"
+            }
+          ],
           "id": "0928",
           "name": "ALLOCATE_STREAMED_SCRIPT_TO_RANDOM_PED",
           "num_params": 3,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "AllocateToRandomPed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "script_id"
+            },
+            {
+              "name": "objectModelId",
+              "type": "model_ide"
+            },
+            {
+              "name": "priority",
+              "type": "int"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
           "id": "0929",
           "name": "ALLOCATE_STREAMED_SCRIPT_TO_OBJECT",
           "num_params": 5,
           "short_desc": "Tells the engine to start a script when the player is within the range of the specified model",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "AllocateToObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "092A",
@@ -45994,20 +46046,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "id": "0A46",
           "name": "SWITCH_OBJECT_BRAINS",
           "num_params": 2,
           "short_desc": "Sets whether the specified streamed script ('external') used for interactive objects can be streamed in",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "StreamedScript",
+          "member": "SwitchObjectBrains",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A47",

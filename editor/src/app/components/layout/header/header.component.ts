@@ -30,6 +30,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     map((event) => {
       const parts = event.url.split('/');
+      if (parts[1] === 'vc_mobile') {
+        return 'vc';
+      }
+      if (parts[1] === 'sa_mobile') {
+        return 'sa';
+      }
       return parts[1];
     })
   );

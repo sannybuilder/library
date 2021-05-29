@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1622275985195,
-    "version": "0.0.9",
+    "last_update": 1622277348643,
+    "version": "0.0.10",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -26948,20 +26948,25 @@
           "member": "DiveAndGetUp"
         },
         {
+          "input": [
+            {
+              "name": "vehicleModel",
+              "type": "model_ide"
+            },
+            {
+              "name": "plateText",
+              "type": "string"
+            }
+          ],
           "id": "0674",
           "name": "CUSTOM_PLATE_FOR_NEXT_CAR",
           "num_params": 2,
           "short_desc": "Sets the numberplate of the next car to be spawned with the specified model",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "CustomPlateForNextCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0675",
@@ -29933,10 +29938,10 @@
           "name": "SKIP_CUTSCENE_END",
           "num_params": 0,
           "short_desc": "",
-          "class": "Cutscene",
-          "member": "SkipEnd",
+          "class": "Skip",
+          "member": "CutsceneEnd",
           "attrs": {
-            "is_static": true
+            "is_keyword": true
           }
         },
         {
@@ -30071,16 +30076,20 @@
           "member": "SkipInPlaybackRecorded"
         },
         {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            }
+          ],
           "id": "0707",
           "name": "SKIP_CUTSCENE_START_INTERNAL",
           "num_params": 1,
           "short_desc": "Enables skipping of the current scene",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          }
         },
         {
           "input": [
@@ -30994,16 +31003,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "vehicleModelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "0733",
           "name": "DONT_SUPPRESS_CAR_MODEL",
           "num_params": 1,
           "short_desc": "Allows the specified car model to spawn for car generators",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "CarGenerator",
+          "member": "DontSuppressCarModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0734",
@@ -32158,20 +32172,25 @@
           "member": "SetIsTargetPriority"
         },
         {
+          "input": [
+            {
+              "name": "vehicleModelId",
+              "type": "model_ide"
+            },
+            {
+              "name": "townId",
+              "type": "int"
+            }
+          ],
           "id": "0771",
           "name": "CUSTOM_PLATE_DESIGN_FOR_NEXT_CAR",
           "num_params": 2,
           "short_desc": "Sets the town ID of the license plate which is created on the specified model, affecting which texture is chosen for the plate",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "CustomPlateDesignForNextCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -32970,16 +32989,21 @@
           "member": "PerformSequenceFromProgress"
         },
         {
+          "input": [
+            {
+              "name": "moveState",
+              "type": "int"
+            }
+          ],
           "id": "07A1",
           "name": "SET_NEXT_DESIRED_MOVE_STATE",
           "num_params": 1,
           "short_desc": "Sets how the character chooses to go to it's destination in the next task without a parameter specifying this",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Char",
+          "member": "SetNextDesiredMoveState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07A2",
@@ -44375,34 +44399,44 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "vehicleModelId",
+              "type": "model_ide"
+            },
+            {
+              "name": "distance",
+              "type": "float"
+            },
+            {
+              "name": "altitude",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            }
+          ],
           "id": "09EF",
           "name": "SET_VEHICLE_CAMERA_TWEAK",
           "num_params": 4,
           "short_desc": "Sets the position the camera automatically moves to while driving a vehicle of the specified type",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Car",
+          "member": "SetCameraTweak",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "09F0",
           "name": "RESET_VEHICLE_CAMERA_TWEAK",
           "num_params": 0,
-          "short_desc": "Resets any changes made with 09EF"
+          "short_desc": "Resets any changes made with 09EF",
+          "class": "Car",
+          "member": "ResetCameraTweak",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

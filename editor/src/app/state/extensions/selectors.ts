@@ -86,7 +86,8 @@ export const hasAnyLoadingInProgress = createSelector(
   (state: ExtensionsState) => Object.values(state.games).some((s) => s?.loading)
 );
 
-export const version = createSelector(
-  state,
-  (state: GameState | undefined) => state?.version
+export const gameVersion = createSelector(
+  extensionsState,
+  (state: ExtensionsState, props: { game: Game }) =>
+    state.games[props.game]?.version
 );

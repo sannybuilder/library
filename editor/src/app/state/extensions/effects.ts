@@ -137,7 +137,7 @@ export class ExtensionsEffects {
         // distinctUntilChanged<ReturnType<typeof updateGameCommands>>(isEqual),
         switchMap(({ game }) =>
           this._extensions.getGameExtensions(game).pipe(
-            withLatestFrom(this._extensions.version$),
+            withLatestFrom(this._extensions.getGameVersion(game)),
             tap(([extensions, version]) => {
               this._changes.registerExtensionsChange({
                 fileName: GameLibrary[game],

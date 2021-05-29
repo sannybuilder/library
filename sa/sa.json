@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1622261118129,
-    "version": "0.0.8",
+    "last_update": 1622275985195,
+    "version": "0.0.9",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -19087,40 +19087,45 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomZ",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopZ",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
           "id": "04C0",
           "name": "CREATE_SCRIPT_ROADBLOCK",
           "num_params": 7,
           "short_desc": "Creates a roadblock in the specified area with the specified type",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "CreateScriptRoadblock",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "attrs": {
@@ -23561,27 +23566,37 @@
           "id": "05D6",
           "name": "FLUSH_ROUTE",
           "num_params": 0,
-          "short_desc": "Flushes the task route"
+          "short_desc": "Flushes the task route",
+          "class": "Path",
+          "member": "FlushRoute",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "id": "05D7",
           "name": "EXTEND_ROUTE",
           "num_params": 3,
           "short_desc": "Adds a point to the task route",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            }
-          ]
+          "class": "Path",
+          "member": "ExtendRoute",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -30962,16 +30977,21 @@
           "member": "SetRoll"
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "model_ide"
+            }
+          ],
           "id": "0732",
           "name": "SUPPRESS_CAR_MODEL",
           "num_params": 1,
           "short_desc": "Prevents the specified car model from spawning for car generators",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "CarGenerator",
+          "member": "SuppressCarModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0733",
@@ -30989,7 +31009,12 @@
           "id": "0734",
           "name": "DONT_SUPPRESS_ANY_CAR_MODELS",
           "num_params": 0,
-          "short_desc": "Resets the disabled car model list for car generators"
+          "short_desc": "Resets the disabled car model list for car generators",
+          "class": "CarGenerator",
+          "member": "DontSuppressAnyCarModels",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0735",
@@ -31658,35 +31683,45 @@
           "id": "0754",
           "name": "FLUSH_PATROL_ROUTE",
           "num_params": 0,
-          "short_desc": "Clears all previous patrol data to start a new patrol route, which can be used in combination with 0755 to create patrol routes"
+          "short_desc": "Clears all previous patrol data to start a new patrol route, which can be used in combination with 0755 to create patrol routes",
+          "class": "Path",
+          "member": "FlushPatrolRoute",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "animationName",
+              "type": "string"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            }
+          ],
           "id": "0755",
           "name": "EXTEND_PATROL_ROUTE",
           "num_params": 5,
           "short_desc": "Adds a new point to the patrol route",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            }
-          ]
+          "class": "Path",
+          "member": "ExtendPatrolRoute",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0756",
@@ -32737,13 +32772,23 @@
           "id": "0793",
           "name": "STORE_CLOTHES_STATE",
           "num_params": 0,
-          "short_desc": "Stores the players current clothes to later be restored with 0794"
+          "short_desc": "Stores the players current clothes to later be restored with 0794",
+          "class": "Player",
+          "member": "StoreClothesState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0794",
           "name": "RESTORE_CLOTHES_STATE",
           "num_params": 0,
-          "short_desc": "Restores the players clothes stored with 0793"
+          "short_desc": "Restores the players clothes stored with 0793",
+          "class": "Player",
+          "member": "RestoreClothesState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0795",
@@ -33231,28 +33276,38 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "_p2",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "_p3",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "_p4",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "07B1",
           "name": "GET_BEAT_PROXIMITY",
           "num_params": 4,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            }
-          ]
+          "class": "Audio",
+          "member": "GetBeatProximity",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "07B2",
@@ -35117,76 +35172,81 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "startX",
+              "type": "float"
+            },
+            {
+              "name": "startY",
+              "type": "float"
+            },
+            {
+              "name": "startZ",
+              "type": "float"
+            },
+            {
+              "name": "startRadiusX",
+              "type": "float"
+            },
+            {
+              "name": "startRadiusY",
+              "type": "float"
+            },
+            {
+              "name": "startRadiusZ",
+              "type": "float"
+            },
+            {
+              "name": "finishX",
+              "type": "float"
+            },
+            {
+              "name": "finishY",
+              "type": "float"
+            },
+            {
+              "name": "finishZ",
+              "type": "float"
+            },
+            {
+              "name": "finishRadiusX",
+              "type": "float"
+            },
+            {
+              "name": "finishRadiusY",
+              "type": "float"
+            },
+            {
+              "name": "finishRadiusZ",
+              "type": "float"
+            },
+            {
+              "name": "cameraX",
+              "type": "float"
+            },
+            {
+              "name": "cameraY",
+              "type": "float"
+            },
+            {
+              "name": "cameraZ",
+              "type": "float"
+            },
+            {
+              "name": "reward",
+              "type": "int"
+            }
+          ],
           "id": "0814",
           "name": "ADD_STUNT_JUMP",
           "num_params": 16,
           "short_desc": "Creates a trigger for a Unique Jump bonus",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            },
-            {
-              "name": "_p8",
-              "type": "any"
-            },
-            {
-              "name": "_p9",
-              "type": "any"
-            },
-            {
-              "name": "_p10",
-              "type": "any"
-            },
-            {
-              "name": "_p11",
-              "type": "any"
-            },
-            {
-              "name": "_p12",
-              "type": "any"
-            },
-            {
-              "name": "_p13",
-              "type": "any"
-            },
-            {
-              "name": "_p14",
-              "type": "any"
-            },
-            {
-              "name": "_p15",
-              "type": "any"
-            },
-            {
-              "name": "_p16",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "AddStuntJump",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -35652,36 +35712,41 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomZ",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopZ",
+              "type": "float"
+            }
+          ],
           "id": "0830",
           "name": "SET_POOL_TABLE_COORDS",
           "num_params": 6,
           "short_desc": "Creates a pool collision object",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            },
-            {
-              "name": "_p3",
-              "type": "any"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            }
-          ]
+          "class": "World",
+          "member": "SetPoolTableCoords",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0831",
@@ -41767,13 +41832,23 @@
           "id": "096B",
           "name": "STORE_CAR_MOD_STATE",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Car",
+          "member": "StoreModState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "096C",
           "name": "RESTORE_CAR_MOD_STATE",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "",
+          "class": "Car",
+          "member": "RestoreModState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -42509,7 +42584,10 @@
           "num_params": 0,
           "short_desc": "",
           "class": "Path",
-          "member": "UnmarkAllRoadNodesAsDontWander"
+          "member": "UnmarkAllRoadNodesAsDontWander",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

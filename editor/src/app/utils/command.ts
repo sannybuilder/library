@@ -81,7 +81,7 @@ export function linkify(content: string) {
   }
 
   return content.replace(
-    /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/,
+    /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/g,
     '<a href="#" data-id="$&">$&</a>'
   );
 }

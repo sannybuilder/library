@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Attribute, Command, Game, Param, SupportInfo } from '../../../models';
 
 @Component({
@@ -30,8 +36,14 @@ export class CommandInfoComponent {
   @Input() game: Game;
   @Input() enumNames: string[] = [];
   @Input() extension: string;
+  @Output() descriptionClick = new EventEmitter();
 
   isEnumParam(param: Param) {
     return this.enumNames.includes(param.type);
+  }
+
+  interceptDescriptionClick(event: MouseEvent, extension: string) {
+    this.descriptionClick.next({ event, extension });
+    return false;
   }
 }

@@ -37,6 +37,7 @@ export class ClassOverviewComponent {
     command: Command;
     extension: string;
   }> = new EventEmitter();
+  @Output() descriptionClick = new EventEmitter();
 
   constructor(private _ui: UiFacade) {}
 
@@ -47,6 +48,11 @@ export class ClassOverviewComponent {
 
   toggleInlineDesc() {
     this._ui.toggleInlineMethodDescription();
+    return false;
+  }
+
+  interceptDescriptionClick(event: MouseEvent, extension: string) {
+    this.descriptionClick.next({ event, extension });
     return false;
   }
 }

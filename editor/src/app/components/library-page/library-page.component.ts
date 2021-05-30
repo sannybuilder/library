@@ -30,6 +30,7 @@ import {
   EnumsFacade,
 } from '../../state';
 import { FUSEJS_OPTIONS } from '../../utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'scl-library-page',
@@ -72,6 +73,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _snippets: SnippetsFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
+    private _router: Router,
     private ref: ChangeDetectorRef
   ) {}
 
@@ -156,6 +158,17 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onCancel() {
     this._ui.stopEditOrDisplay();
+  }
+
+  onDescriptionClick(e: MouseEvent, game: Game, extension: string) {
+    if ((e.target as Element)?.tagName === 'A') {
+      const id = (e.target as Element).attributes.getNamedItem(
+        'data-id'
+      )?.value;
+      if (id) {
+        this._router.navigate(['/', game, extension, id]);
+      }
+    }
   }
 
   getSnippet(extension: string, opcode: string) {

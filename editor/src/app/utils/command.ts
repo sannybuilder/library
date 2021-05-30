@@ -74,3 +74,14 @@ export function formatCommandName(name: string | undefined) {
 export function formatOpcode(opcode: string) {
   return opcode ? opcode.toUpperCase() : opcode;
 }
+
+export function linkify(content: string) {
+  if (!content) {
+    return content;
+  }
+
+  return content.replace(
+    /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/,
+    '<a href="#" data-id="$&">$&</a>'
+  );
+}

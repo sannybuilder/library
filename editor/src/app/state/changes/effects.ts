@@ -122,6 +122,26 @@ export class ChangesEffects {
     { dispatch: false }
   );
 
+  preventReload$ = createEffect(
+    () =>
+      this._facade.hasChanges$.pipe(
+        distinctUntilChanged(),
+        tap((hasChanges: boolean) => {
+          if (hasChanges) {
+            window.addEventListener('beforeunload', this._unload);
+          } else {
+            window.removeEventListener('beforeunload', this._unload);
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  private _unload(e: BeforeUnloadEvent) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+
   constructor(
     private _actions$: Actions,
     private _facade: ChangesFacade,

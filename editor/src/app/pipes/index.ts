@@ -7,5 +7,6 @@ export * from './parametrify.pipe';
 export * from './input-params.pipe';
 export * from './output-params.pipe';
 export * from './single-param.pipe';
-export * from './highlight-prop.pipe';
+export * from './sanitize.pipe';
 export * from './linkify.pipe';
+export * from './prop-extract.pipe';

@@ -19,7 +19,7 @@
                 <a
                   [routerLink]="['/', game, row.extension, row.command.id]"
                   [name]="row.command.id"
-                  [innerHTML]="row.command | hlProp: 'id'"
+                  [innerHTML]="row.command | propExtract: 'id' | sanitize"
                 ></a>
               </div>
 
@@ -31,7 +31,7 @@
                   'order-md-2': narrowed,
                   'order-md-1': !narrowed
                 }"
-                [innerHTML]="row.command | hlProp: 'name'"
+                [innerHTML]="row.command | propExtract: 'name' | sanitize"
               ></div>
 
               <div
@@ -92,8 +92,13 @@
                 >
                   <div
                     class="my-2"
-                    (click)="interceptDescriptionClick($event, row.extension)"
-                    [innerHTML]="row.command | hlProp: 'short_desc'"
+                    (click)="interceptDescriptionClick($event)"
+                    [innerHTML]="
+                      row.command
+                        | propExtract: 'short_desc'
+                        | linkify: game:row.extension
+                        | sanitize
+                    "
                   ></div>
                 </ng-container>
 
@@ -118,10 +123,14 @@
                       <a
                         [routerLink]="['/', game, 'classes', row.command.class]"
                         ><span
-                          [innerHTML]="row.command | hlProp: 'class'"
+                          [innerHTML]="
+                            row.command | propExtract: 'class' | sanitize
+                          "
                         ></span></a
                       >.<span
-                        [innerHTML]="row.command | hlProp: 'member'"
+                        [innerHTML]="
+                          row.command | propExtract: 'member' | sanitize
+                        "
                       ></span
                       >{{ row.command | inputParams }}</code
                     >
@@ -133,10 +142,14 @@
                         [routerLink]="['/', game, 'classes', row.command.class]"
                       >
                         <span
-                          [innerHTML]="row.command | hlProp: 'class'"
+                          [innerHTML]="
+                            row.command | propExtract: 'class' | sanitize
+                          "
                         ></span></a
                       >.<span
-                        [innerHTML]="row.command | hlProp: 'member'"
+                        [innerHTML]="
+                          row.command | propExtract: 'member' | sanitize
+                        "
                       ></span
                       >{{ row.command | classParams }}</code
                     >

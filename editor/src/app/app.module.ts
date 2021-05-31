@@ -27,8 +27,9 @@ import {
   InputParamsPipe,
   OutputParamsPipe,
   SingleParamPipe,
-  HlPropPipe,
+  SanitizePipe,
   LinkifyPipe,
+  PropExtractPipe,
 } from './pipes';
 
 // extensions state
@@ -126,8 +127,9 @@ export function loadTranslations(
     InputParamsPipe,
     OutputParamsPipe,
     SingleParamPipe,
-    HlPropPipe,
+    SanitizePipe,
     LinkifyPipe,
+    PropExtractPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

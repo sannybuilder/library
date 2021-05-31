@@ -42,8 +42,8 @@ export class CommandInfoComponent {
     return this.enumNames.includes(param.type);
   }
 
-  interceptDescriptionClick(event: MouseEvent, extension: string) {
-    this.descriptionClick.next({ event, extension });
+  interceptDescriptionClick(event: MouseEvent) {
+    this.descriptionClick.next(event);
     return false;
   }
 }

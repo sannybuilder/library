@@ -24,8 +24,8 @@
     <div
       *ngIf="!command.attrs?.is_unsupported && !command.attrs?.is_nop"
       class="mb-3"
-      (click)="interceptDescriptionClick($event, extension)"
-      [innerHTML]="command.short_desc | linkify"
+      (click)="interceptDescriptionClick($event)"
+      [innerHTML]="command.short_desc | linkify: game:extension | sanitize"
     ></div>
     <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
       {{ "ui.commandList.unsupported" | translate }}

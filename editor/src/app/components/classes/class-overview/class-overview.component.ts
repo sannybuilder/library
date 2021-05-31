@@ -51,8 +51,8 @@ export class ClassOverviewComponent {
     return false;
   }
 
-  interceptDescriptionClick(event: MouseEvent, extension: string) {
-    this.descriptionClick.next({ event, extension });
+  interceptDescriptionClick(event: MouseEvent) {
+    this.descriptionClick.next(event);
     return false;
   }
 }

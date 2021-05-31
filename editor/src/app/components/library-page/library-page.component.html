@@ -57,9 +57,7 @@
               screenSize >= 1200 &&
               screenSize < 1700
             "
-            (descriptionClick)="
-              onDescriptionClick($event.event, game, $event.extension)
-            "
+            (descriptionClick)="onDescriptionClick($event)"
           ></scl-command-list>
         </main>
 
@@ -148,9 +146,7 @@
         [snippet]="getSnippet(extension, command.id) | async"
         [supportInfo]="getCommandSupportInfo(command, extension) | async"
         [extension]="extension"
-        (descriptionClick)="
-          onDescriptionClick($event.event, game, $event.extension)
-        "
+        (descriptionClick)="onDescriptionClick($event)"
       >
       </scl-command-info>
       <scl-class-overview
@@ -158,9 +154,7 @@
         [game]="game"
         [className]="classToDisplay$ | async"
         [classCommands]="classCommands$ | async"
-        (descriptionClick)="
-          onDescriptionClick($event.event, game, $event.extension)
-        "
+        (descriptionClick)="onDescriptionClick($event)"
       ></scl-class-overview>
       <scl-class-list
         *ngIf="viewMode === ViewMode.ViewAllClasses"

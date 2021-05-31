@@ -30,8 +30,8 @@ class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment
   <span class="comment" *ngIf="command.short_desc && displayInlineDescription">
     &nbsp;//
     <span
-      (click)="interceptDescriptionClick($event, extension)"
-      [innerHTML]="command.short_desc | linkify"
+      (click)="interceptDescriptionClick($event)"
+      [innerHTML]="command.short_desc | linkify: game:extension | sanitize"
     ></span>
     <br />
   </span>

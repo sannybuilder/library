@@ -1,14 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { linkify } from '../utils';
+import { Game } from '../models';
 
 @Pipe({
   name: 'linkify',
 })
 export class LinkifyPipe implements PipeTransform {
-  constructor(private _s: DomSanitizer) {}
+  transform(content: string, game: Game, extension: string) {
+    if (!content) {
+      return content;
+    }
 
-  transform(value: string) {
-    return this._s.bypassSecurityTrustHtml(linkify(value));
+    return content.replace(
+      /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/g,
+      `<a href="#/${game}/${extension}/$&">$&</a>`
+    );
   }
 }

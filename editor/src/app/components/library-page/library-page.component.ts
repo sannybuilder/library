@@ -160,13 +160,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._ui.stopEditOrDisplay();
   }
 
-  onDescriptionClick(e: MouseEvent, game: Game, extension: string) {
+  onDescriptionClick(e: MouseEvent) {
     if ((e.target as Element)?.tagName === 'A') {
-      const id = (e.target as Element).attributes.getNamedItem(
-        'data-id'
-      )?.value;
-      if (id) {
-        this._router.navigate(['/', game, extension, id]);
+      const href = (e.target as Element).attributes.getNamedItem('href')?.value;
+      if (href) {
+        const parts = href.split('/');
+        this._router.navigate(['/', ...parts.slice(1)]);
       }
     }
   }

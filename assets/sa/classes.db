@@ -37,6 +37,7 @@ Hud
 Math
 Memory
 Menu
+Mouse
 Object
 Pad
 Particle
@@ -757,6 +758,7 @@ $END
 
 $Cutscene
 $BEGIN
+AppendToNext,08F0,0,0,("_p1%s" "_p2%s")
 Clear,02EA,0,0,()
 GetOffset,08D1,0,0,("xOffset%f" "yOffset%f" "zOffset%f")
 GetTime,02E8,0,0,("time%i")
@@ -855,6 +857,7 @@ AllowPauseInWidescreen,0A48,0,0,("state%b")
 AreAnyCarCheatsActivated,0445,1,0,()
 AreMeasurementsInMetres,0424,1,0,()
 AreSubtitlesSwitchedOn,09C8,1,0,()
+AttachAnimsToModel,08E8,0,0,("pedModelId%i" "animationFile%s")
 AutoSave,0A72,0,0,()
 AwardAchievement,0A8E,0,0,("_p1%i")
 CanTriggerGangWarWhenOnAMission,08A3,0,0,("state%b")
@@ -900,9 +903,11 @@ SetAllTaxisHaveNitro,0572,0,0,("state%b")
 SetArea51SamSite,07A8,0,0,("state%b")
 SetCollectableTotal,02ED,0,0,("amount%i")
 SetEveryoneIgnorePlayer,03BF,0,0,("handle: Player" "state%b")
+SetForceRandomCarModel,09BF,0,0,("modelId: model_ide")
 SetFreeResprays,0335,0,0,("state%b")
 SetGangWarsActive,0879,0,0,("state%b")
 SetGangWarsTrainingMission,08AC,0,0,("state%b")
+SetGunshotSenseRangeForRiot2,098A,0,0,("range%f")
 SetInfraredVision,08B2,0,0,("state%b")
 SetIsInStadium,057E,0,0,("state%b")
 SetMaxFireGenerations,0828,0,0,("limit%i")
@@ -1077,6 +1082,12 @@ SetColumnOrientation,08D6,0,0,("self: Menu" "column%i" "alignment%i")
 SetColumnWidth,09DB,0,0,("self: Menu" "column%i" "width%i")
 SetItemWith2Numbers,08EF,0,0,("self: Menu" "column%i" "row%i" "gxt: gxt_key" "number1%i" "number2%i")
 SetItemWithNumber,08EE,0,0,("self: Menu" "column%i" "row%i" "gxt: gxt_key" "number%i")
+$END
+
+$Mouse
+$BEGIN
+GetMovement,0A4A,0,0,("offsetX%f" "offsetY%f")
+IsUsingVerticalInversion,0A4C,1,0,()
 $END
 
 $Object

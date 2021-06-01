@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1622557068489,
-    "version": "0.0.20",
+    "last_update": 1622572867867,
+    "version": "0.0.21",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -39288,20 +39288,25 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "pedModelId",
+              "type": "int"
+            },
+            {
+              "name": "animationFile",
+              "type": "string"
+            }
+          ],
           "id": "08E8",
           "name": "ATTACH_ANIMS_TO_MODEL",
           "num_params": 2,
           "short_desc": "Sets an animation pack to be loaded along with the specified model",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "AttachAnimsToModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "08E9",
@@ -39482,20 +39487,25 @@
           "member": "SetItemWith2Numbers"
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "string"
+            },
+            {
+              "name": "_p2",
+              "type": "string"
+            }
+          ],
           "id": "08F0",
           "name": "APPEND_TO_NEXT_CUTSCENE",
           "num_params": 2,
           "short_desc": "",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Cutscene",
+          "member": "AppendToNext",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -42467,16 +42477,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "range",
+              "type": "float"
+            }
+          ],
           "id": "098A",
           "name": "SET_GUNSHOT_SENSE_RANGE_FOR_RIOT2",
           "num_params": 1,
           "short_desc": "Only ever used in the mission \"Los Desperados\" during the Riot stage of the game",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetGunshotSenseRangeForRiot2",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "098B",
@@ -43494,16 +43509,21 @@
           "member": "IsMinigameInProgress"
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_ide"
+            }
+          ],
           "id": "09BF",
           "name": "SET_FORCE_RANDOM_CAR_MODEL",
           "num_params": 1,
           "short_desc": "Forces all cars spawned to have the specified model",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            }
-          ]
+          "class": "Game",
+          "member": "SetForceRandomCarModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -46104,20 +46124,27 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "offsetX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "offsetY",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0A4A",
           "name": "GET_PC_MOUSE_MOVEMENT",
           "num_params": 2,
           "short_desc": "Gives the offset of the mouse or right thumbstick movement",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ]
+          "class": "Mouse",
+          "member": "GetMovement",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0A4B",
@@ -46137,8 +46164,11 @@
           "num_params": 0,
           "short_desc": "Returns true if the players settings are set to invert the mouse",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Mouse",
+          "member": "IsUsingVerticalInversion"
         },
         {
           "id": "0A4D",

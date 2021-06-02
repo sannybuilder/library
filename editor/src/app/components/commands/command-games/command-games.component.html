@@ -1,7 +1,9 @@
 <ng-container *ngFor="let item of supportInfo">
-  <a [routerLink]="['/', item.game, extension, command.id]">
+  <a
+    [routerLink]="['/', item.game, extension, command.id]"
+    *ngIf="item.level > SupportLevel.Unsupported"
+  >
     <scl-icon
-      *ngIf="item.level > SupportLevel.Unsupported"
       [ngClass]="{
         'diff-params': item.level === SupportLevel.SupportedDiffParams
       }"

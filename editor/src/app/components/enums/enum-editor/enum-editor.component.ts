@@ -175,10 +175,10 @@ export class EnumEditorComponent {
       }
 
       if (i === 0) {
-        field[0] = name;
+        field[0] = capitalizeFirst(name);
         field[1] = value;
       } else {
-        this.addNewField(name, value);
+        this.addNewField(capitalizeFirst(name), value);
       }
     });
     return false;

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1622736580599,
-    "version": "0.0.18",
+    "last_update": 1622813318554,
+    "version": "0.0.19",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -23404,7 +23404,7 @@
           "input": [
             {
               "name": "type",
-              "type": "int"
+              "type": "SetPieceType"
             },
             {
               "name": "fromX",
@@ -23463,7 +23463,7 @@
           "member": "AddSetPiece",
           "name": "ADD_SET_PIECE",
           "num_params": 13,
-          "short_desc": "create an area for the generation of police as in the police stations."
+          "short_desc": "Creates a trigger zone for police to appear during chases"
         },
         {
           "input": [
@@ -24200,30 +24200,30 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "World",
           "id": "0523",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "HasGlassBeenShatteredNearby",
           "name": "HAS_GLASS_BEEN_SHATTERED_NEARBY",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Checks if glass has been shattered near the specified location"
         },
         {
           "input": [
@@ -24711,7 +24711,7 @@
           "member": "RemoveEverythingForHugeCutscene",
           "name": "REMOVE_EVERYTHING_FOR_HUGE_CUTSCENE",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Stops processing of everything in the world to free up the game memory"
         },
         {
           "input": [
@@ -24743,42 +24743,42 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "player",
+              "type": "Player"
+            },
+            {
+              "name": "offsetX",
+              "type": "float"
+            },
+            {
+              "name": "offsetY",
+              "type": "float"
+            },
+            {
+              "name": "offsetZ",
+              "type": "float"
+            },
+            {
+              "name": "model1",
+              "type": "model_ide"
+            },
+            {
+              "name": "model2",
+              "type": "model_ide"
+            }
+          ],
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "World",
           "id": "0548",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            }
-          ],
           "member": "CheckForPedModelAroundPlayer",
           "name": "CHECK_FOR_PED_MODEL_AROUND_PLAYER",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Returns true if there is a pedestrian of the given model in the specified area around the player"
         },
         {
           "input": [
@@ -24848,21 +24848,21 @@
           "short_desc": "Makes the game use GXT Entries from the specified GXT Table"
         },
         {
+          "input": [
+            {
+              "name": "scrollbarMessage",
+              "type": "ScrollbarMessage"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "054D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetTonightsEvent",
           "name": "SET_TONIGHTS_EVENT",
           "num_params": 1,
-          "short_desc": "Sets whether to display a message at the stadium"
+          "short_desc": "Sets the scrollbar message at Hyman Memorial Stadium"
         },
         {
           "input": [
@@ -25035,21 +25035,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "055A",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "AddPornLeafletToRubbish",
           "name": "ADD_PORN_LEAFLET_TO_RUBBISH",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets visibility of secondary rubbish"
         },
         {
           "attrs": {
@@ -25986,51 +25986,51 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            },
+            {
+              "name": "allowCivilian",
+              "type": "int"
+            },
+            {
+              "name": "allowGangMember",
+              "type": "int"
+            },
+            {
+              "name": "allowCriminal",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "World",
           "id": "058F",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            }
-          ],
           "member": "GetRandomIceCreamCustomerInArea",
           "name": "GET_RANDOM_ICE_CREAM_CUSTOMER_IN_AREA",
           "num_params": 8,
-          "output": [
-            {
-              "name": "_p8",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "short_desc": ""
         },
         {
@@ -26042,33 +26042,33 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "topRightX",
+              "type": "float"
+            },
+            {
+              "name": "topRightY",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "0591",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "UnlockAllCarDoorsInArea",
           "name": "UNLOCK_ALL_CAR_DOORS_IN_AREA",
           "num_params": 4,
-          "short_desc": ""
+          "short_desc": "Unlocks all car doors in the specified rectangular area"
         },
         {
           "input": [

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1623001615488,
-    "version": "0.0.23",
+    "last_update": 1623003728255,
+    "version": "0.0.24",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -3777,26 +3777,26 @@
           "short_desc": "Returns true if any part of the radius of the specified point is visible on screen"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Debugger",
           "id": "00C3",
+          "member": "On",
           "name": "DEBUG_ON",
           "num_params": 0,
-          "short_desc": "",
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Debugger",
-          "member": "On"
+          "short_desc": "Enables the debug mode"
         },
         {
-          "id": "00C4",
-          "name": "DEBUG_OFF",
-          "num_params": 0,
-          "short_desc": "",
           "attrs": {
             "is_static": true
           },
           "class": "Debugger",
-          "member": "Off"
+          "id": "00C4",
+          "member": "Off",
+          "name": "DEBUG_OFF",
+          "num_params": 0,
+          "short_desc": "Disables the debug mode"
         },
         {
           "attrs": {
@@ -4199,7 +4199,7 @@
           "member": "LocateAnyMeans2D",
           "name": "LOCATE_PLAYER_ANY_MEANS_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the player is near the specified 2D point either on foot or in a vehicle"
+          "short_desc": "Returns true if the player is within the specified 2D area either on foot or in a vehicle"
         },
         {
           "input": [
@@ -4236,7 +4236,7 @@
           "member": "LocateOnFoot2D",
           "name": "LOCATE_PLAYER_ON_FOOT_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the player is near the specified 2D point on foot"
+          "short_desc": "Returns true if the player is within the specified 2D area on foot"
         },
         {
           "input": [
@@ -4273,7 +4273,7 @@
           "member": "LocateInCar2D",
           "name": "LOCATE_PLAYER_IN_CAR_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the player is near the specified 2D point in a vehicle"
+          "short_desc": "Returns true if the player is within the specified 2D area in a vehicle"
         },
         {
           "input": [
@@ -4310,7 +4310,7 @@
           "member": "LocateStoppedAnyMeans2D",
           "name": "LOCATE_STOPPED_PLAYER_ANY_MEANS_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the player stopped near the specified 2D point either on foot or in a vehicle"
+          "short_desc": "Returns true if the player stopped within the specified 2D area either on foot or in a vehicle"
         },
         {
           "input": [
@@ -4347,7 +4347,7 @@
           "member": "LocateStoppedOnFoot2D",
           "name": "LOCATE_STOPPED_PLAYER_ON_FOOT_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the player stopped near the specified 2D point on foot"
+          "short_desc": "Returns true if the player stopped within the specified 2D area on foot"
         },
         {
           "input": [
@@ -4384,7 +4384,7 @@
           "member": "LocateStoppedInCar2D",
           "name": "LOCATE_STOPPED_PLAYER_IN_CAR_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the player stopped near the specified 2D point in a vehicle"
+          "short_desc": "Returns true if the player stopped within the specified 2D area in a vehicle"
         },
         {
           "input": [
@@ -4393,7 +4393,7 @@
               "type": "Player"
             },
             {
-              "name": "handle",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -4417,7 +4417,7 @@
           "member": "LocateAnyMeansChar2D",
           "name": "LOCATE_PLAYER_ANY_MEANS_CHAR_2D",
           "num_params": 5,
-          "short_desc": "Returns true if the player is near the specified character either on foot or in a vehicle"
+          "short_desc": "Returns true if the player is either on foot or in a vehicle nearby the specified character"
         },
         {
           "input": [
@@ -4426,7 +4426,7 @@
               "type": "Player"
             },
             {
-              "name": "handle",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -4450,7 +4450,7 @@
           "member": "LocateOnFootChar2D",
           "name": "LOCATE_PLAYER_ON_FOOT_CHAR_2D",
           "num_params": 5,
-          "short_desc": "Returns true if the player is near the specified character on foot"
+          "short_desc": "Returns true if the player is on foot nearby the specified character"
         },
         {
           "input": [
@@ -4459,7 +4459,7 @@
               "type": "Player"
             },
             {
-              "name": "handle",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -4483,7 +4483,7 @@
           "member": "LocateInCarChar2D",
           "name": "LOCATE_PLAYER_IN_CAR_CHAR_2D",
           "num_params": 5,
-          "short_desc": "Returns true if the player is near the specified character in a vehicle"
+          "short_desc": "Returns true if the player is in a vehicle nearby the specified character"
         },
         {
           "input": [
@@ -4520,7 +4520,7 @@
           "member": "LocateAnyMeans2D",
           "name": "LOCATE_CHAR_ANY_MEANS_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is near the specified point, irrelevant of height"
+          "short_desc": "Returns true if the character is within the specified 2D area either on foot or in a vehicle"
         },
         {
           "input": [
@@ -4557,7 +4557,7 @@
           "member": "LocateOnFoot2D",
           "name": "LOCATE_CHAR_ON_FOOT_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is in the specified area on foot, irrelevant of height"
+          "short_desc": "Returns true if the character is within the specified 2D area on foot"
         },
         {
           "input": [
@@ -4594,7 +4594,7 @@
           "member": "LocateInCar2D",
           "name": "LOCATE_CHAR_IN_CAR_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is in a car in the specified area, irrelevant of height"
+          "short_desc": "Returns true if the character is within the specified 2D area in a vehicle"
         },
         {
           "input": [
@@ -4631,7 +4631,7 @@
           "member": "LocateStoppedAnyMeans2D",
           "name": "LOCATE_STOPPED_CHAR_ANY_MEANS_2D",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Returns true if the character stopped in the specified 2D area either on foot or in a vehicle"
         },
         {
           "input": [
@@ -4668,7 +4668,7 @@
           "member": "LocateStoppedOnFoot2D",
           "name": "LOCATE_STOPPED_CHAR_ON_FOOT_2D",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Returns true if the character stopped in the specified 2D area on foot"
         },
         {
           "input": [
@@ -4705,7 +4705,7 @@
           "member": "LocateStoppedInCar2D",
           "name": "LOCATE_STOPPED_CHAR_IN_CAR_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is near the specified point with the specified radius and is in a car which is not moving"
+          "short_desc": "Returns true if the character stopped in the specified 2D area in a vehicle"
         },
         {
           "input": [
@@ -4714,7 +4714,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "otherChar",
               "type": "Char"
             },
             {
@@ -4738,7 +4738,7 @@
           "member": "LocateAnyMeansChar2D",
           "name": "LOCATE_CHAR_ANY_MEANS_CHAR_2D",
           "num_params": 5,
-          "short_desc": ""
+          "short_desc": "Returns true if the character is either on foot or in a vehicle nearby the other character"
         },
         {
           "input": [
@@ -4747,7 +4747,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "otherChar",
               "type": "Char"
             },
             {
@@ -4771,7 +4771,7 @@
           "member": "LocateOnFootChar2D",
           "name": "LOCATE_CHAR_ON_FOOT_CHAR_2D",
           "num_params": 5,
-          "short_desc": ""
+          "short_desc": "Returns true if the character is on foot nearby the other character"
         },
         {
           "input": [
@@ -4780,7 +4780,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "otherChar",
               "type": "Char"
             },
             {
@@ -4804,7 +4804,7 @@
           "member": "LocateInCarChar2D",
           "name": "LOCATE_CHAR_IN_CAR_CHAR_2D",
           "num_params": 5,
-          "short_desc": "Returns true if the character is in a car, which is in radius of another character"
+          "short_desc": "Returns true if the character is in a vehicle nearby the other character"
         },
         {
           "input": [
@@ -4984,7 +4984,7 @@
           "member": "LocateStoppedAnyMeans3D",
           "name": "LOCATE_STOPPED_PLAYER_ANY_MEANS_3D",
           "num_params": 8,
-          "short_desc": ""
+          "short_desc": "Returns true if the player stopped in the specified 3D area either on foot or in a vehicle"
         },
         {
           "input": [
@@ -5365,7 +5365,7 @@
           "member": "LocateStoppedAnyMeans3D",
           "name": "LOCATE_STOPPED_CHAR_ANY_MEANS_3D",
           "num_params": 8,
-          "short_desc": "Sets up a point on the map where the character's presence can be detected"
+          "short_desc": "Returns true if the character stopped in the specified 3D area either on foot or in a vehicle"
         },
         {
           "input": [
@@ -5455,7 +5455,7 @@
           "member": "LocateStoppedInCar3D",
           "name": "LOCATE_STOPPED_CHAR_IN_CAR_3D",
           "num_params": 8,
-          "short_desc": "Sets up a point on the map where the character's presence can be detected"
+          "short_desc": "Returns true if the character stopped in the specified 3D area in a vehicle"
         },
         {
           "input": [

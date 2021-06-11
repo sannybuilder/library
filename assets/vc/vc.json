@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1623003728255,
-    "version": "0.0.24",
+    "last_update": 1623452034018,
+    "version": "0.0.25",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -22391,7 +22391,7 @@
           "member": "SwitchSecurity",
           "name": "SWITCH_SECURITY_CAMERA",
           "num_params": 1,
-          "short_desc": "Switches the security camera"
+          "short_desc": "Displays a green scan line overlay on the screen"
         },
         {
           "attrs": {
@@ -23490,8 +23490,8 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "withFade",
+              "type": "bool"
             }
           ],
           "attrs": {
@@ -23663,29 +23663,29 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "World",
           "id": "0503",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            }
-          ],
           "member": "CreateSwatRope",
           "name": "CREATE_SWAT_ROPE",
           "num_params": 3,
-          "short_desc": "Creates a character descending from a rope"
+          "short_desc": "Creates a SWAT character coming down from a rope at the coordinates"
         },
         {
           "attrs": {
@@ -23704,46 +23704,46 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "_unused",
+              "type": "model_ide"
+            },
+            {
+              "name": "component1",
+              "type": "int"
+            },
+            {
+              "name": "component2",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Car",
           "id": "0506",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
           "member": "SetModelComponents",
           "name": "SET_CAR_MODEL_COMPONENTS",
           "num_params": 3,
           "short_desc": "Sets the variation of the next car to be created"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Camera",
           "id": "0507",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SwitchLift",
           "name": "SWITCH_LIFT_CAMERA",
           "num_params": 1,
-          "short_desc": "Applies a camera overlay"
+          "short_desc": "Displays a white interference overlay on the screen"
         },
         {
           "input": [
@@ -24923,21 +24923,21 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "level",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Game",
           "id": "0552",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetRiotIntensity",
           "name": "SET_RIOT_INTENSITY",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets the riot sound volume level (0-127)"
         },
         {
           "attrs": {
@@ -24964,49 +24964,49 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            },
+            {
+              "name": "dropoffX",
+              "type": "float"
+            },
+            {
+              "name": "dropoffY",
+              "type": "float"
+            },
+            {
+              "name": "dropoffZ",
+              "type": "float"
+            },
+            {
+              "name": "dropoffAngle",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Shortcut",
           "id": "0556",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "float"
-            },
-            {
-              "name": "_p8",
-              "type": "float"
-            }
-          ],
           "member": "SetUpTaxi",
           "name": "SET_UP_TAXI_SHORTCUT",
           "num_params": 8,
-          "short_desc": ""
+          "short_desc": "Sets up both the pick-up and drop-off points of the taxi shortcut"
         },
         {
           "attrs": {
@@ -25017,7 +25017,7 @@
           "member": "ClearTaxi",
           "name": "CLEAR_TAXI_SHORTCUT",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Clears any taxi shortcut that is set up by 0556 or 058E"
         },
         {
           "attrs": {
@@ -25053,40 +25053,40 @@
           "short_desc": "Sets visibility of secondary rubbish"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "type",
+              "type": "Clothing"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Pickup",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
             "is_constructor": true
           },
           "class": "Pickup",
           "id": "055B",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ],
           "member": "CreateClothes",
           "name": "CREATE_CLOTHES_PICKUP",
           "num_params": 5,
-          "output": [
-            {
-              "name": "_p5",
-              "type": "Pickup",
-              "source": "var_any"
-            }
-          ],
-          "short_desc": ""
+          "short_desc": "Creates a clothing pickup at the location"
         },
         {
           "attrs": {
@@ -25181,7 +25181,7 @@
               "type": "Car"
             },
             {
-              "name": "seatId",
+              "name": "seat",
               "type": "int"
             }
           ],
@@ -25614,34 +25614,34 @@
           "short_desc": ""
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Weather",
           "id": "057C",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "SetAllowHurricanes",
           "name": "SET_ALLOW_HURRICANES",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Allows hurricane weather"
         },
         {
+          "input": [
+            {
+              "name": "track",
+              "type": "AnnouncementTrack"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Audio",
           "id": "057D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "member": "PlayAnnouncement",
           "name": "PLAY_ANNOUNCEMENT",
           "num_params": 1,
@@ -25673,7 +25673,7 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "num",
               "type": "int",
               "source": "var_any"
             }
@@ -25683,7 +25683,7 @@
           "member": "GetBusFaresCollected",
           "name": "GET_BUS_FARES_COLLECTED_BY_PLAYER",
           "num_params": 2,
-          "short_desc": "Returns the number of coach passengers"
+          "short_desc": "Gets the bus fares collected by the player"
         },
         {
           "input": [
@@ -25929,62 +25929,62 @@
           "short_desc": "Gets the progress of completion as a percentage"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Shortcut",
           "id": "058D",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "SetPickupPoint",
           "name": "SET_SHORTCUT_PICKUP_POINT",
           "num_params": 4,
-          "short_desc": ""
+          "short_desc": "Sets the taxi shortcut pick-up point for mission"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
           "class": "Shortcut",
           "id": "058E",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "float"
-            },
-            {
-              "name": "_p2",
-              "type": "float"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            }
-          ],
           "member": "SetDropoffPointForMission",
           "name": "SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION",
           "num_params": 4,
-          "short_desc": ""
+          "short_desc": "Sets the taxi shortcut pick-up point for mission"
         },
         {
           "input": [

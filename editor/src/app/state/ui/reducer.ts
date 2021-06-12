@@ -74,7 +74,7 @@ export const initialState: UiState = {
   displayLastUpdated: false,
   displaySearchBar: false,
   displayInlineMethodDescription: false,
-  displayOpcodePresentation: true,
+  displayOpcodePresentation: false,
   viewMode: ViewMode.None,
   currentPage: 1,
 };

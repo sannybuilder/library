@@ -18,6 +18,7 @@ import {
   displayClassesList,
   displayEnumsList,
   toggleInlineMethodDescription,
+  toggleOpcodePresentation,
 } from './actions';
 
 export interface GameState {
@@ -30,6 +31,7 @@ export interface UiState {
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
   displayInlineMethodDescription: boolean;
+  displayOpcodePresentation: boolean;
   selectedAttributesOnly: Attribute[];
   selectedAttributesExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
@@ -72,6 +74,7 @@ export const initialState: UiState = {
   displayLastUpdated: false,
   displaySearchBar: false,
   displayInlineMethodDescription: false,
+  displayOpcodePresentation: true,
   viewMode: ViewMode.None,
   currentPage: 1,
 };
@@ -105,6 +108,10 @@ export const uiReducer = createReducer(
   on(toggleInlineMethodDescription, (state) => ({
     ...state,
     displayInlineMethodDescription: !state.displayInlineMethodDescription,
+  })),
+  on(toggleOpcodePresentation, (state) => ({
+    ...state,
+    displayOpcodePresentation: !state.displayOpcodePresentation,
   })),
   on(displayOrEditCommandInfo, (state, { command, extension, viewMode }) => ({
     ...state,

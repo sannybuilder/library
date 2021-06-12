@@ -50,6 +50,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   canEdit$ = this._ui.canEdit$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
+  displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
   entities$: Observable<Entity[]> = this._extensions.extensionNames$.pipe(
     switchMap((extensions) => this.getExtensionsEntities(extensions)),
     map((entities) => orderBy(entities, 'name'))
@@ -168,6 +169,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this._router.navigate(['/', ...parts.slice(1)]);
       }
     }
+  }
+
+  toggleOpcodePresentation() {
+    this._ui.toggleOpcodePresentation();
+    return false;
   }
 
   getSnippet(extension: string, opcode: string) {

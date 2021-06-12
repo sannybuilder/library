@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Command } from '../models';
+import { outputParams } from '../utils';
 import { braceify, stringify } from './params';
 
 @Pipe({
   name: 'outputParams',
 })
 export class OutputParamsPipe implements PipeTransform {
-  transform(value: Command): string {
-    if (!value.num_params) {
+  transform(command: Command): string {
+    if (!command.num_params) {
       return '';
     }
-    const output = value?.output ?? [];
-    return braceify(stringify(output, ' '), '[]');
+    return braceify(stringify(outputParams(command), ' '), '[]');
   }
 }

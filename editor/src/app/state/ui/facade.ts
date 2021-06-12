@@ -25,6 +25,7 @@ import {
   displayClassOverview,
   displayOrEditEnum,
   toggleInlineMethodDescription,
+  toggleOpcodePresentation,
 } from './actions';
 import * as selector from './selectors';
 
@@ -41,6 +42,9 @@ export class UiFacade {
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
   displayInlineMethodDescription$ = this.store$.select(
     selector.displayInlineMethodDescription
+  );
+  displayOpcodePresentation$ = this.store$.select(
+    selector.displayOpcodePresentation
   );
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
   currentPage$ = this.store$.select(selector.currentPage);
@@ -97,6 +101,10 @@ export class UiFacade {
 
   toggleInlineMethodDescription() {
     this.store$.dispatch(toggleInlineMethodDescription());
+  }
+
+  toggleOpcodePresentation() {
+    this.store$.dispatch(toggleOpcodePresentation());
   }
 
   displayCommandInfo(command: Command, extension: string) {

@@ -21,6 +21,12 @@ export function stringifyWithColon(p: Param) {
     .join(': ');
 }
 
+export function stringifyTypeAndSource(p: Param) {
+  return [[stringifySource(p.source)].filter(Boolean).join(' '), p.type]
+    .filter(Boolean)
+    .join(' ');
+}
+
 export function braceify(value: string, braces: '[]' | '()') {
   return `${braces[0]}${value}${braces[1]}`;
 }

@@ -30,6 +30,7 @@ import {
   SanitizePipe,
   LinkifyPipe,
   PropExtractPipe,
+  OpcodeParamsPipe,
 } from './pipes';
 
 // extensions state
@@ -130,6 +131,7 @@ export function loadTranslations(
     SanitizePipe,
     LinkifyPipe,
     PropExtractPipe,
+    OpcodeParamsPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

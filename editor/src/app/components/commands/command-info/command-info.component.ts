@@ -36,6 +36,7 @@ export class CommandInfoComponent {
   @Input() game: Game;
   @Input() enumNames: string[] = [];
   @Input() extension: string;
+  @Input() displayOpcodePresentation: boolean;
   @Output() descriptionClick = new EventEmitter();
 
   isEnumParam(param: Param) {

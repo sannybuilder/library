@@ -10,3 +10,4 @@ export * from './single-param.pipe';
 export * from './sanitize.pipe';
 export * from './linkify.pipe';
 export * from './prop-extract.pipe';
+export * from './opcode-params.pipe';

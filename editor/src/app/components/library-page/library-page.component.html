@@ -89,6 +89,13 @@
           class="mr-auto"
           >{{ "ui.shared.resetChanges" | translate }}</a
         >
+        <a
+          href="#"
+          *ngIf="viewMode === ViewMode.ViewCommand"
+          (click)="toggleOpcodePresentation()"
+          class="mr-auto"
+          >{{ "ui.shared.toggleOpcode" | translate }}</a
+        >
         <button
           type="button"
           class="btn btn-outline-secondary"
@@ -146,6 +153,7 @@
         [snippet]="getSnippet(extension, command.id) | async"
         [supportInfo]="getCommandSupportInfo(command, extension) | async"
         [extension]="extension"
+        [displayOpcodePresentation]="displayOpcodePresentation$ | async"
         (descriptionClick)="onDescriptionClick($event)"
       >
       </scl-command-info>

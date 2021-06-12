@@ -37,6 +37,10 @@ export const toggleInlineMethodDescription = createAction(
   '[ui] toggle inline method description'
 );
 
+export const toggleOpcodePresentation = createAction(
+  '[ui] toggle opcode presentation'
+);
+
 export const displayOrEditCommandInfo = createAction(
   '[ui] display or edit command',
   props<{ command: Command; extension: string; viewMode: ViewMode }>()

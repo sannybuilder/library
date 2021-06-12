@@ -81,6 +81,11 @@ export const displayInlineMethodDescription = createSelector(
   (state: UiState) => state.displayInlineMethodDescription
 );
 
+export const displayOpcodePresentation = createSelector(
+  state,
+  (state: UiState) => state.displayOpcodePresentation
+);
+
 export const commandToDisplayOrEdit = createSelector(
   state,
   (state: UiState) => state.commandToDisplayOrEdit

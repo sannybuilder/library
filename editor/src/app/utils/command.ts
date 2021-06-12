@@ -43,9 +43,15 @@ export function getSameCommands(
 }
 
 export function commandParams(command: Command) {
-  const input = command?.input ?? [];
-  const output = command?.output ?? [];
-  return [...input, ...output];
+  return [...inputParams(command), ...outputParams(command)];
+}
+
+export function inputParams(command: Command) {
+  return command?.input ?? [];
+}
+
+export function outputParams(command: Command) {
+  return command?.output ?? [];
 }
 
 export function replaceType(

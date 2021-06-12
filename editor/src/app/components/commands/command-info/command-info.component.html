@@ -124,14 +124,22 @@
     <div class="row">
       <div class="col-2 col-sm-1 text-center">{{ i + 1 }}</div>
       <div class="col-10 col-sm-11">
-        <ng-container *ngIf="!isEnumParam(param); else enumParam">
+        <ng-container *ngIf="isPrimitiveType(param); else nonPrimitive">
           {{ param | singleParam }}
         </ng-container>
       </div>
     </div>
-    <ng-template #enumParam>
+    <ng-template #nonPrimitive>
       {{ param.name }}:
-      <a [routerLink]="['/', game, 'enums', param.type]">{{ param.type }}</a>
+      <a
+        [routerLink]="[
+          '/',
+          game,
+          isEnumParam(param) ? 'enums' : 'classes',
+          param.type
+        ]"
+        >{{ param.type }}</a
+      >
     </ng-template>
   </ng-container>
 </ng-template>

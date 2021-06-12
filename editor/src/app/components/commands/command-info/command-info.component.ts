@@ -5,7 +5,14 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Attribute, Command, Game, Param, SupportInfo } from '../../../models';
+import {
+  Attribute,
+  Command,
+  Game,
+  Param,
+  ParamType,
+  SupportInfo,
+} from '../../../models';
 
 @Component({
   selector: 'scl-command-info',
@@ -16,6 +23,16 @@ import { Attribute, Command, Game, Param, SupportInfo } from '../../../models';
 export class CommandInfoComponent {
   private _command: Command;
   private _attrs: Attribute[];
+  private _primitives: string[] = [];
+  private _enumNames: string[] = [];
+
+  @Input() set types(val: ParamType[]) {
+    this._primitives = val
+      .filter((v) => v.type === 'primitive')
+      .map((p) => p.name);
+
+    this._enumNames = val.filter((v) => v.type === 'enum').map((p) => p.name);
+  }
 
   @Input() set command(val: Command) {
     this._command = val;
@@ -34,13 +51,16 @@ export class CommandInfoComponent {
   @Input() supportInfo: SupportInfo;
   @Input() snippet?: string;
   @Input() game: Game;
-  @Input() enumNames: string[] = [];
   @Input() extension: string;
   @Input() displayOpcodePresentation: boolean;
   @Output() descriptionClick = new EventEmitter();
 
+  isPrimitiveType(param: Param) {
+    return this._primitives.includes(param.type);
+  }
+
   isEnumParam(param: Param) {
-    return this.enumNames.includes(param.type);
+    return this._enumNames.includes(param.type);
   }
 
   interceptDescriptionClick(event: MouseEvent) {

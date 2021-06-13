@@ -19,7 +19,7 @@ export function stringifyWithColon(p: Param) {
   return [
     [
       stringifySource(p.source),
-      p.name ? `<span style="color:yellow">${p.name}</span>` : p.name,
+      p.name ? `<span class="param-name">${p.name}</span>` : p.name,
     ]
       .filter(Boolean)
       .join(' '),

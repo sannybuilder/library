@@ -34,7 +34,7 @@ export class OpcodeParamsPipe implements PipeTransform {
 
   private _tranformParamName(p: Param) {
     return p.name
-      ? `<span style="color:yellow">${snakeCase(p.name)}</span>`
+      ? `<span class="param-name">${snakeCase(p.name)}</span>`
       : p.name;
   }
 }

@@ -69,7 +69,6 @@
     </ng-container>
 
     <ng-container *ngIf="displayOpcodePresentation">
-      <br />
       <code
         >{{ command.id | opcode }}: {{ command.name | lowercase }}
         <span [innerHTML]="command | opcodeParams | sanitize"></span
@@ -121,7 +120,10 @@
 <ng-container *ngIf="snippet">
   <hr />
   <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
-  <pre class="sample">{{ snippet | parametrify: command }}</pre>
+  <pre
+    class="sample"
+    [innerHTML]="snippet | parametrify: command | sanitize"
+  ></pre>
 </ng-container>
 
 <ng-template #paramTemplate let-params>

@@ -72,8 +72,8 @@
       <br />
       <code
         >{{ command.id | opcode }}: {{ command.name | lowercase }}
-        {{ command | opcodeParams }}</code
-      >
+        <span [innerHTML]="command | opcodeParams | sanitize"></span
+      ></code>
     </ng-container>
 
     <div *ngIf="command.input?.length > 0" class="mt-3">

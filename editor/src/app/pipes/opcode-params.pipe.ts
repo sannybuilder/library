@@ -13,16 +13,28 @@ export class OpcodeParamsPipe implements PipeTransform {
       return '';
     }
     const input = stringify(inputParams(command), ' ', (p: Param) =>
-      [snakeCase(p.name), braceify(stringifyTypeAndSource(p), '[]')].join(' ')
+      [
+        this._tranformParamName(p),
+        braceify(stringifyTypeAndSource(p), '[]'),
+      ].join(' ')
     );
 
     const output = stringify(outputParams(command), ' ', (p: Param) =>
-      [snakeCase(p.name), braceify(stringifyTypeAndSource(p), '[]')].join(' ')
+      [
+        this._tranformParamName(p),
+        braceify(stringifyTypeAndSource(p), '[]'),
+      ].join(' ')
     );
 
     if (output) {
       return `${input} store_to ${output}`;
     }
     return input;
+  }
+
+  private _tranformParamName(p: Param) {
+    return p.name
+      ? `<span style="color:yellow">${snakeCase(p.name)}</span>`
+      : p.name;
   }
 }

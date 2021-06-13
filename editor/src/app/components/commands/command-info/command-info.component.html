@@ -39,18 +39,22 @@
     </div>
 
     <ng-container *ngIf="command.attrs?.is_keyword">
-      <code>{{ command.name | lowercase }} {{ command | keywordParams }}</code>
+      <code
+        >{{ command.name | lowercase }}
+        <span [innerHTML]="command | keywordParams | sanitize"></span
+      ></code>
     </ng-container>
 
     <ng-container *ngIf="command.class && command.member">
       <ng-container *ngIf="command.attrs?.is_constructor">
         <code>
-          {{ command | outputParams }} =
+          <span [innerHTML]="command | outputParams | sanitize"></span> =
           <a [routerLink]="['/', game, 'classes', command.class]">{{
             command.class
           }}</a
-          >.{{ command.member }}{{ command | inputParams }}</code
-        >
+          >.{{ command.member
+          }}<span [innerHTML]="command | inputParams | sanitize"></span
+        ></code>
       </ng-container>
 
       <ng-container *ngIf="!command.attrs?.is_constructor">
@@ -58,8 +62,9 @@
           ><a [routerLink]="['/', game, 'classes', command.class]">{{
             command.class
           }}</a
-          >.{{ command.member }}{{ command | classParams }}</code
-        >
+          >.{{ command.member
+          }}<span [innerHTML]="command | classParams | sanitize"></span
+        ></code>
       </ng-container>
     </ng-container>
 
@@ -124,13 +129,15 @@
     <div class="row">
       <div class="col-2 col-sm-1 text-center">{{ i + 1 }}</div>
       <div class="col-10 col-sm-11">
-        <ng-container *ngIf="isPrimitiveType(param); else nonPrimitive">
-          {{ param | singleParam }}
-        </ng-container>
+        <span
+          *ngIf="isPrimitiveType(param); else nonPrimitive"
+          [innerHTML]="param | singleParam | sanitize"
+        ></span>
       </div>
     </div>
     <ng-template #nonPrimitive>
-      {{ param.name }}:
+      <span style="color: yellow">{{ param.name }}</span
+      >:
       <a
         [routerLink]="[
           '/',

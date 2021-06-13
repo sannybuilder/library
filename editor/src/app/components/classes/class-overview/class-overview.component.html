@@ -41,7 +41,7 @@ class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment
       <a [routerLink]="['/', game, extension, command.id]">{{
         command.member
       }}</a
-      >{{ command | inputParams }}:
+      ><span [innerHTML]="command | inputParams | sanitize"></span>:
       {{ command.output[command.output.length - 1].type }}
     </ng-container>
     <ng-container *ngIf="command.attrs?.is_destructor"
@@ -49,7 +49,7 @@ class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment
       <a [routerLink]="['/', game, extension, command.id]">{{
         command.member
       }}</a
-      >{{ command | inputParams }}
+      ><span [innerHTML]="command | inputParams | sanitize"></span>
     </ng-container>
 
     <ng-container
@@ -62,8 +62,8 @@ class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment
           strike: command.attrs?.is_nop || command.attrs?.is_unsupported
         }"
         >{{ command.member }}</a
-      >{{ command | classParams }}</ng-container
-    > </code
+      ><span [innerHTML]="command | classParams | sanitize"></span
+    ></ng-container> </code
   ><span
     *ngIf="extension !== 'default' && !isThisClassFromOtherExtension"
     class="comment"

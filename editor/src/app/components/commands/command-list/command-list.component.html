@@ -112,14 +112,19 @@
                 <ng-container *ngIf="row.command.attrs?.is_keyword">
                   <code
                     >{{ row.command.name | lowercase }}
-                    {{ row.command | keywordParams }}</code
-                  >
+                    <span
+                      [innerHTML]="row.command | keywordParams | sanitize"
+                    ></span
+                  ></code>
                 </ng-container>
 
                 <ng-container *ngIf="row.command.class && row.command.member">
                   <ng-container *ngIf="row.command.attrs?.is_constructor">
                     <code>
-                      {{ row.command | outputParams }} =
+                      <span
+                        [innerHTML]="row.command | outputParams | sanitize"
+                      ></span>
+                      =
                       <a
                         [routerLink]="['/', game, 'classes', row.command.class]"
                         ><span
@@ -132,8 +137,10 @@
                           row.command | propExtract: 'member' | sanitize
                         "
                       ></span
-                      >{{ row.command | inputParams }}</code
-                    >
+                      ><span
+                        [innerHTML]="row.command | inputParams | sanitize"
+                      ></span
+                    ></code>
                   </ng-container>
 
                   <ng-container *ngIf="!row.command.attrs?.is_constructor">
@@ -151,8 +158,10 @@
                           row.command | propExtract: 'member' | sanitize
                         "
                       ></span
-                      >{{ row.command | classParams }}</code
-                    >
+                      ><span
+                        [innerHTML]="row.command | classParams | sanitize"
+                      ></span
+                    ></code>
                   </ng-container>
                 </ng-container>
 

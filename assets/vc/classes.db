@@ -449,12 +449,12 @@ $END
 $Cutscene
 $BEGIN
 Clear,02EA,0,0,()
-CreateDustEffectForHeli,0598,0,0,("_p1%i" "_p2%f" "_p3%i")
+CreateDustEffectForHeli,0598,0,0,("heliObject: CutsceneObject" "radius%f" "density%i")
 DisableShadows,0522,0,0,()
 GetTime,02E8,0,0,("time%i")
 HasFinished,02E9,1,0,()
 Load,02E4,0,0,("name%s")
-LoadUncompressedAnim,0569,0,0,("_p1%s")
+LoadUncompressedAnim,0569,0,0,("animation%s")
 SetAnimToLoop,04BC,0,0,("animName%s")
 SetOffset,0244,0,0,("x%f" "y%f" "z%f")
 Start,02E7,0,0,()
@@ -479,7 +479,7 @@ $END
 
 $Fx
 $BEGIN
-AddBigGunFlash,058A,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4%f" "_p5%f" "_p6%f")
+AddBigGunFlash,058A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f")
 AddMovingParticleEffect,039D,0,0,("type%i" "x%f" "y%f" "z%f" "strengthX%f" "strengthY%f" "strengthZ%f" "scale%f" "r%i" "g%i" "b%i" "durationInMs%i")
 CreateSingleParticle,0437,0,0,("type%i" "x%f" "y%f" "z%f" "strengthX%f" "strengthY%f" "strengthZ%f" "scale%f")
 DrawCorona,024F,0,0,("x%f" "y%f" "z%f" "size%f" "type: Corona" "flareType: FlareType" "r%i" "g%i" "b%i")
@@ -854,7 +854,7 @@ $BEGIN
 ClearTaxi,0557,0,0,()
 SetDropoffPointForMission,058E,0,0,("x%f" "y%f" "z%f" "angle%f")
 SetPickupPoint,058D,0,0,("x%f" "y%f" "z%f" "angle%f")
-SetUpTaxi,0556,0,0,("x%f" "y%f" "z%f" "angle%f" "dropoffX%f" "dropoffY%f" "dropoffZ%f" "dropoffAngle%f")
+SetUpTaxi,0556,0,0,("pickUpX%f" "pickUpY%f" "pickUpZ%f" "pickUpAngle%f" "dropoffX%f" "dropoffY%f" "dropoffZ%f" "dropoffAngle%f")
 $END
 
 $Sound

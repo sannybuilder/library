@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1623772138795,
-    "version": "0.0.33",
+    "last_update": 1623774077832,
+    "version": "0.0.34",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -2968,7 +2968,7 @@
           "member": "Create",
           "name": "CREATE_CHAR",
           "num_params": 6,
-          "short_desc": "Creates a character at the specified coordinates, with the specified model and pedtype"
+          "short_desc": "Creates a character at the specified location, with the specified model and pedtype"
         },
         {
           "attrs": {
@@ -3003,7 +3003,7 @@
           "member": "WanderDir",
           "name": "CHAR_WANDER_DIR",
           "num_params": 2,
-          "short_desc": "Sets the character wander direction"
+          "short_desc": "Sets the character's wander direction"
         },
         {
           "attrs": {
@@ -3059,7 +3059,7 @@
           "member": "SetIdle",
           "name": "CHAR_SET_IDLE",
           "num_params": 1,
-          "short_desc": "Set chat objective wait on foot."
+          "short_desc": "Sets the character's objective to stay idle"
         },
         {
           "input": [
@@ -3090,11 +3090,9 @@
           "member": "GetCoordinates",
           "name": "GET_CHAR_COORDINATES",
           "num_params": 4,
-          "short_desc": "Returns the character's 3D coordinates"
+          "short_desc": "Returns the character's coordinates"
         },
         {
-          "class": "Char",
-          "id": "00A1",
           "input": [
             {
               "name": "self",
@@ -3113,10 +3111,12 @@
               "type": "float"
             }
           ],
+          "class": "Char",
+          "id": "00A1",
           "member": "SetCoordinates",
           "name": "SET_CHAR_COORDINATES",
           "num_params": 4,
-          "short_desc": "Puts the character at the specified X, Y and Z coordinates"
+          "short_desc": "Puts the character at the specified location"
         },
         {
           "attrs": {
@@ -3161,7 +3161,7 @@
           "member": "IsInArea2D",
           "name": "IS_CHAR_IN_AREA_2D",
           "num_params": 6,
-          "short_desc": "Checks if the character is in the specified rectangular zone"
+          "short_desc": "Checks if the character is in the specified 2D area"
         },
         {
           "input": [
@@ -3206,7 +3206,7 @@
           "member": "IsInArea3D",
           "name": "IS_CHAR_IN_AREA_3D",
           "num_params": 8,
-          "short_desc": "Returns true if the character is in the specified area cube"
+          "short_desc": "Returns true if the character is in the specified 3D area"
         },
         {
           "input": [
@@ -3242,7 +3242,7 @@
           "member": "Create",
           "name": "CREATE_CAR",
           "num_params": 5,
-          "short_desc": "Creates a car at the specified coordinates, with the specified model"
+          "short_desc": "Creates a vehicle at the specified location, with the specified model"
         },
         {
           "attrs": {
@@ -3344,7 +3344,7 @@
           "member": "GetCoordinates",
           "name": "GET_CAR_COORDINATES",
           "num_params": 4,
-          "short_desc": "Stores the X, Y and Z position of the specified car into separate variables"
+          "short_desc": "Returns the vehicle's coordinates"
         },
         {
           "input": [
@@ -3387,7 +3387,7 @@
               "type": "Car"
             },
             {
-              "name": "speed",
+              "name": "maxSpeed",
               "type": "float"
             }
           ],
@@ -3396,7 +3396,7 @@
           "member": "SetCruiseSpeed",
           "name": "SET_CAR_CRUISE_SPEED",
           "num_params": 2,
-          "short_desc": "Enables the specified car to drive at any speed under the specified float value"
+          "short_desc": "Enables the specified car to drive at any speed under the specified value"
         },
         {
           "input": [
@@ -3414,7 +3414,7 @@
           "member": "SetDrivingStyle",
           "name": "SET_CAR_DRIVING_STYLE",
           "num_params": 2,
-          "short_desc": "Sets the vehicle's driving style"
+          "short_desc": "Sets the behavior of the vehicle's AI driver"
         },
         {
           "input": [
@@ -3432,7 +3432,7 @@
           "member": "SetMission",
           "name": "SET_CAR_MISSION",
           "num_params": 2,
-          "short_desc": "Sets the AI driver behavior"
+          "short_desc": "Sets the mission of the vehicle's AI driver"
         },
         {
           "input": [
@@ -3469,7 +3469,7 @@
           "member": "IsInArea2D",
           "name": "IS_CAR_IN_AREA_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the vehicle is located in the specified rectangular zone"
+          "short_desc": "Returns true if the vehicle is located in the specified 2D area"
         },
         {
           "input": [
@@ -3514,7 +3514,7 @@
           "member": "IsInArea3D",
           "name": "IS_CAR_IN_AREA_3D",
           "num_params": 8,
-          "short_desc": "Returns true if the specified vehicle is within the specified cubic zone"
+          "short_desc": "Returns true if the specified vehicle is within the specified 3D area"
         },
         {
           "attrs": {
@@ -7472,7 +7472,7 @@
           "member": "SetAmmo",
           "name": "SET_PLAYER_AMMO",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Sets the amount of ammo the player has in the specified weapon"
         },
         {
           "attrs": {
@@ -7566,7 +7566,7 @@
           "member": "IsHealthGreater",
           "name": "IS_PLAYER_HEALTH_GREATER",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if the player's health is above the specified value"
         },
         {
           "input": [
@@ -7791,7 +7791,7 @@
           "member": "AddOneOffSound",
           "name": "ADD_ONE_OFF_SOUND",
           "num_params": 4,
-          "short_desc": "Plays a sound with the specified ID at the specified X, Y and Z coordinates"
+          "short_desc": "Plays a sound with the specified ID at the specified location"
         },
         {
           "input": [
@@ -7828,7 +7828,7 @@
           "member": "AddContinuous",
           "name": "ADD_CONTINUOUS_SOUND",
           "num_params": 5,
-          "short_desc": "Creates a continuous sound at the specified coordinates and stores the handle to a variable"
+          "short_desc": "Creates a continuous sound at the specified location"
         },
         {
           "input": [
@@ -8404,7 +8404,7 @@
           "member": "IsInAreaOnFoot2D",
           "name": "IS_CHAR_IN_AREA_ON_FOOT_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is within the specified rectangular zone on foot"
+          "short_desc": "Returns true if the character is within the specified 2D zone on foot"
         },
         {
           "input": [
@@ -8441,7 +8441,7 @@
           "member": "IsInAreaInCar2D",
           "name": "IS_CHAR_IN_AREA_IN_CAR_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is within the specified rectangular zone in a vehicle"
+          "short_desc": "Returns true if the character is within the specified 2D zone in a vehicle"
         },
         {
           "input": [
@@ -8515,7 +8515,7 @@
           "member": "IsStoppedInAreaOnFoot2D",
           "name": "IS_CHAR_STOPPED_IN_AREA_ON_FOOT_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is standing still within the 2D rectangle"
+          "short_desc": "Returns true if the character is standing still within the 2D area"
         },
         {
           "input": [
@@ -8552,7 +8552,7 @@
           "member": "IsStoppedInAreaInCar2D",
           "name": "IS_CHAR_STOPPED_IN_AREA_IN_CAR_2D",
           "num_params": 6,
-          "short_desc": "Returns true if the specified character is in a motionless vehicle within the 2D rectangle"
+          "short_desc": "Returns true if the character is in a motionless vehicle within the 2D area"
         },
         {
           "input": [
@@ -9032,7 +9032,7 @@
               "type": "Player"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             },
             {
@@ -9093,7 +9093,7 @@
           "member": "SetControl",
           "name": "SET_PLAYER_CONTROL",
           "num_params": 2,
-          "short_desc": "Sets whether player control is enabled"
+          "short_desc": "Sets whether player's control is enabled"
         },
         {
           "input": [
@@ -9147,7 +9147,7 @@
               "type": "Player"
             },
             {
-              "name": "type",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -9156,7 +9156,7 @@
           "member": "SetCurrentWeapon",
           "name": "SET_CURRENT_PLAYER_WEAPON",
           "num_params": 2,
-          "short_desc": "Sets the weapon for the player"
+          "short_desc": "Sets the player's currently held weapon"
         },
         {
           "input": [
@@ -9165,7 +9165,7 @@
               "type": "Char"
             },
             {
-              "name": "type",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -9174,7 +9174,7 @@
           "member": "SetCurrentWeapon",
           "name": "SET_CURRENT_CHAR_WEAPON",
           "num_params": 2,
-          "short_desc": "Sets the specified character's currently held weapon"
+          "short_desc": "Sets the character's currently held weapon"
         },
         {
           "attrs": {
@@ -9213,7 +9213,7 @@
           "member": "GetCoordinates",
           "name": "GET_OBJECT_COORDINATES",
           "num_params": 4,
-          "short_desc": "Gets the objects XYZ position"
+          "short_desc": "Gets the object's coordinates"
         },
         {
           "input": [
@@ -9239,7 +9239,7 @@
           "member": "SetCoordinates",
           "name": "SET_OBJECT_COORDINATES",
           "num_params": 4,
-          "short_desc": "Puts the specified object at the specified coordinates"
+          "short_desc": "Puts the object at the specified location"
         },
         {
           "output": [
@@ -9443,7 +9443,7 @@
           "member": "CreateAsPassenger",
           "name": "CREATE_CHAR_AS_PASSENGER",
           "num_params": 5,
-          "short_desc": "Creates a character in the passenger seat of a car"
+          "short_desc": "Creates a character in the passenger seat of the vehicle"
         },
         {
           "input": [
@@ -9532,7 +9532,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "fromPlayer",
               "type": "Player"
             }
           ],
@@ -9550,7 +9550,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "fromChar",
               "type": "Char"
             }
           ],
@@ -9749,7 +9749,7 @@
           "member": "SetObjGotoAreaOnFoot",
           "name": "SET_CHAR_OBJ_GOTO_AREA_ON_FOOT",
           "num_params": 5,
-          "short_desc": "Sets the character's objective to walk into the specified rectangular area"
+          "short_desc": "Sets the character's objective to walk into the specified 2D area"
         },
         {
           "attrs": {
@@ -14078,7 +14078,7 @@
           "member": "IsShootingInArea",
           "name": "IS_PLAYER_SHOOTING_IN_AREA",
           "num_params": 6,
-          "short_desc": "Returns true if the player fired a weapon within the specified rectangular zone"
+          "short_desc": "Returns true if the player fired a weapon within the specified 2D zone"
         },
         {
           "attrs": {

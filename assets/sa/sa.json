@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1623675414590,
-    "version": "0.0.40",
+    "last_update": 1623726522995,
+    "version": "0.0.41",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -18057,7 +18057,7 @@
           "member": "CanSeeDeadChar",
           "name": "CAN_CHAR_SEE_DEAD_CHAR",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if the character sees a dead body of the given type"
         },
         {
           "id": "0481",
@@ -18171,7 +18171,7 @@
           "member": "ShutUp",
           "name": "SHUT_CHAR_UP",
           "num_params": 2,
-          "short_desc": "Shuts a character up"
+          "short_desc": "Sets the character ability to talk"
         },
         {
           "input": [
@@ -18586,11 +18586,6 @@
           "short_desc": "Returns appropriate coordinates for creating a pickup by a dead character"
         },
         {
-          "attrs": {
-            "is_constructor": true
-          },
-          "class": "Pickup",
-          "id": "04A6",
           "input": [
             {
               "name": "x",
@@ -18605,17 +18600,14 @@
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "revenueLimit",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "revenueRate",
               "type": "int"
             }
           ],
-          "member": "CreateProtection",
-          "name": "CREATE_PROTECTION_PICKUP",
-          "num_params": 6,
           "output": [
             {
               "name": "handle",
@@ -18623,7 +18615,15 @@
               "source": "var_any"
             }
           ],
-          "short_desc": ""
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Pickup",
+          "id": "04A6",
+          "member": "CreateProtection",
+          "name": "CREATE_PROTECTION_PICKUP",
+          "num_params": 6,
+          "short_desc": "Creates an asset revenue pickup"
         },
         {
           "input": [
@@ -18925,7 +18925,7 @@
             },
             {
               "name": "weaponModel",
-              "type": "int",
+              "type": "model_ide",
               "source": "var_any"
             }
           ],

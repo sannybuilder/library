@@ -163,7 +163,7 @@ $Boat
 $BEGIN
 Anchor,0323,0,0,("self: Boat" "state%b")
 Goto,02D3,0,0,("self: Boat" "x%f" "y%f" "z%f")
-SetCruiseSpeed,02DB,0,0,("self: Boat" "speed%f")
+SetCruiseSpeed,02DB,0,0,("self: Boat" "maxSpeed%f")
 Stop,02D4,0,0,("self: Boat")
 $END
 
@@ -448,7 +448,7 @@ $END
 
 $Char
 $BEGIN
-AddAmmo,0114,0,0,("self: Char" "weaponId: WeaponType" "ammo%i")
+AddAmmo,0114,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 AddArmour,035F,0,0,("self: Char" "armour%i")
 AttachToBike,06A7,0,0,("self: Char" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "position%i" "_p7%f" "_p8%f" "weaponType: WeaponType")
 AttachToCar,0464,0,0,("self: Char" "handle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "position%i" "angleLimit%f" "weaponType: WeaponType")
@@ -596,7 +596,7 @@ LocateAnyMeans2D,00EC,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "dra
 LocateAnyMeans3D,00FE,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateAnyMeansCar2D,0202,1,0,("self: Char" "handle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeansCar3D,0205,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
-LocateAnyMeansChar2D,00F2,1,0,("self: Char" "otherChar: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateAnyMeansChar2D,00F2,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeansChar3D,0104,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateAnyMeansObject2D,0471,1,0,("self: Char" "handle: Object" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeansObject3D,0474,1,0,("self: Char" "handle: Object" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
@@ -612,7 +612,7 @@ LocateOnFoot2D,00ED,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawS
 LocateOnFoot3D,00FF,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateOnFootCar2D,0203,1,0,("self: Char" "handle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFootCar3D,0206,1,0,("self: Char" "handle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
-LocateOnFootChar2D,00F3,1,0,("self: Char" "otherChar: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateOnFootChar2D,00F3,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFootChar3D,0105,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateOnFootObject2D,0472,1,0,("self: Char" "handle: Object" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFootObject3D,0475,1,0,("self: Char" "handle: Object" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
@@ -716,7 +716,7 @@ $BEGIN
 GetCurrentDate,0835,0,0,("day%i" "month%i")
 GetCurrentDayOfWeek,07D0,0,0,("day%i")
 GetGameTimer,01BD,0,0,("time%i")
-GetMinutesToTimeOfDay,00C1,0,0,("hours%i" "minutes%i" "time%i")
+GetMinutesToTimeOfDay,00C1,0,0,("hours%i" "minutes%i" "minutesLeft%i")
 GetTimeOfDay,00BF,0,0,("hours%i" "minutes%i")
 Restore,0254,0,0,()
 SetTimeOfDay,00C0,0,0,("hours%i" "minutes%i")

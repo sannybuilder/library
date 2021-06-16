@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1623812302215,
-    "version": "0.0.30",
+    "last_update": 1623850596479,
+    "version": "0.0.31",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -12884,7 +12884,7 @@
           "member": "RestartCriticalMission",
           "name": "RESTART_CRITICAL_MISSION",
           "num_params": 4,
-          "short_desc": "Fades the screen and puts the player at the point"
+          "short_desc": "Fades the screen and puts the player at the location"
         },
         {
           "input": [
@@ -13383,7 +13383,7 @@
           "member": "SetHeedThreats",
           "name": "SET_CHAR_HEED_THREATS",
           "num_params": 2,
-          "short_desc": "Tells the game to make the specified character attack whoever attacks him"
+          "short_desc": "Makes the character attack whoever attacks them"
         },
         {
           "input": [
@@ -13401,13 +13401,13 @@
           "member": "SetHeedThreats",
           "name": "SET_PLAYER_HEED_THREATS",
           "num_params": 2,
-          "short_desc": "Tells the game to make the specified player to attack whoever attacks him"
+          "short_desc": "Makes the player to attack whoever attacks them"
         },
         {
           "output": [
             {
               "name": "mode",
-              "type": "int",
+              "type": "ControllerMode",
               "source": "var_any"
             }
           ],
@@ -13471,7 +13471,7 @@
           "member": "UnloadSpecialCharacter",
           "name": "UNLOAD_SPECIAL_CHARACTER",
           "num_params": 1,
-          "short_desc": "Releases the special character, freeing game memory"
+          "short_desc": "Releases the special character (023C), freeing game memory"
         },
         {
           "attrs": {
@@ -13482,7 +13482,7 @@
           "member": "ResetNumOfModelsKilled",
           "name": "RESET_NUM_OF_MODELS_KILLED_BY_PLAYER",
           "num_params": 0,
-          "short_desc": "Resets the count of how many times the player has destroyed a certain model"
+          "short_desc": "Resets the count of how many times the player has destroyed a certain model (0298)"
         },
         {
           "input": [
@@ -13503,7 +13503,7 @@
           "member": "GetNumOfModelsKilled",
           "name": "GET_NUM_OF_MODELS_KILLED_BY_PLAYER",
           "num_params": 2,
-          "short_desc": "Gets the amount of times the player has destroyed a specific model",
+          "short_desc": "Returns the amount of times the player has destroyed a specific model",
           "attrs": {
             "is_static": true
           }
@@ -13520,7 +13520,7 @@
           "member": "Activate",
           "name": "ACTIVATE_GARAGE",
           "num_params": 1,
-          "short_desc": "Activates a garage"
+          "short_desc": "Activates the garage"
         },
         {
           "attrs": {
@@ -13572,7 +13572,7 @@
           "member": "CreateNoOffset",
           "name": "CREATE_OBJECT_NO_OFFSET",
           "num_params": 5,
-          "short_desc": "Creates an object without offset at the coordinates point"
+          "short_desc": "Creates an object without offset at the location"
         },
         {
           "input": [
@@ -13644,7 +13644,7 @@
           "member": "IsStopped",
           "name": "IS_PLAYER_STOPPED",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns true if the player is not moving"
         },
         {
           "input": [
@@ -13680,7 +13680,7 @@
           "id": "02A1",
           "name": "MESSAGE_WAIT",
           "num_params": 2,
-          "short_desc": "Same as WAIT but allows to skip the wait time by pressing X on the pad"
+          "short_desc": "Same as 0001 but allows to skip the wait time by pressing X on the pad"
         },
         {
           "input": [
@@ -13713,7 +13713,7 @@
           "member": "AddParticleEffect",
           "name": "ADD_PARTICLE_EFFECT",
           "num_params": 5,
-          "short_desc": "Adds a particle effect at the location"
+          "short_desc": "Adds a particle effect at the location, or removes it if the last argument is true"
         },
         {
           "input": [
@@ -13886,7 +13886,7 @@
           "member": "AddSpriteForCoord",
           "name": "ADD_SPRITE_BLIP_FOR_COORD",
           "num_params": 5,
-          "short_desc": "Adds a sprite blip to the coordinates point"
+          "short_desc": "Adds a sprite blip to the location"
         },
         {
           "input": [
@@ -13990,7 +13990,7 @@
           "member": "SetProofs",
           "name": "SET_CAR_PROOFS",
           "num_params": 6,
-          "short_desc": "Gives vehicle the specified immunities"
+          "short_desc": "Sets the vehicle's immunities"
         },
         {
           "input": [
@@ -14544,7 +14544,7 @@
           "member": "Deactivate",
           "name": "DEACTIVATE_GARAGE",
           "num_params": 1,
-          "short_desc": "Deactivates the specified garage"
+          "short_desc": "Deactivates the garage"
         },
         {
           "input": [
@@ -14645,31 +14645,31 @@
         {
           "input": [
             {
-              "name": "xCoord",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "yCoord",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "zCoord",
+              "name": "z",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "x",
+              "name": "nodeX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "y",
+              "name": "nodeY",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "z",
+              "name": "nodeZ",
               "type": "float",
               "source": "var_any"
             }
@@ -14682,36 +14682,36 @@
           "member": "GetClosestCharNode",
           "name": "GET_CLOSEST_CHAR_NODE",
           "num_params": 6,
-          "short_desc": "Stores the nearest path from the specified coordinates that a pedestrian can walk on"
+          "short_desc": "Returns the nearest path node from the specified coordinates that a pedestrian can walk on"
         },
         {
           "input": [
             {
-              "name": "xCoord",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "yCoord",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "zCoord",
+              "name": "z",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "x",
+              "name": "nodeX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "y",
+              "name": "nodeY",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "z",
+              "name": "nodeZ",
               "type": "float",
               "source": "var_any"
             }
@@ -14724,7 +14724,7 @@
           "member": "GetClosestCarNode",
           "name": "GET_CLOSEST_CAR_NODE",
           "num_params": 6,
-          "short_desc": "Stores the nearest path from the specified coordinates that a vehicle can drive on"
+          "short_desc": "Returns the nearest path note from the specified coordinates that a vehicle can drive on"
         },
         {
           "input": [
@@ -14767,7 +14767,7 @@
           "member": "StartRace",
           "name": "START_PACMAN_RACE",
           "num_params": 1,
-          "short_desc": "Creates a collection of donkey magazine pickups"
+          "short_desc": "Creates a predefined collection of donkey magazine pickups"
         },
         {
           "attrs": {
@@ -14796,7 +14796,7 @@
           "member": "GetNumberOfPowerPillsEaten",
           "name": "GET_NUMBER_OF_POWER_PILLS_EATEN",
           "num_params": 1,
-          "short_desc": "Gets the number of donkey magazine pickups collected"
+          "short_desc": "Returns the number of donkey magazine pickups (02C3) collected"
         },
         {
           "attrs": {
@@ -14807,7 +14807,7 @@
           "member": "Clear",
           "name": "CLEAR_PACMAN",
           "num_params": 0,
-          "short_desc": "Removes all donkey magazine and platinum pickups"
+          "short_desc": "Removes all donkey magazine (02C3) and platinum (02C7) pickups"
         },
         {
           "input": [
@@ -14858,7 +14858,7 @@
           "member": "GetNumberOfPowerPillsCarried",
           "name": "GET_NUMBER_OF_POWER_PILLS_CARRIED",
           "num_params": 1,
-          "short_desc": "Gets the number of platinum pickups collected in a vehicle"
+          "short_desc": "Returns the number of platinum pickups (02C7) collected in a vehicle"
         },
         {
           "attrs": {
@@ -14869,7 +14869,7 @@
           "member": "ClearNumberOfPowerPillsCarried",
           "name": "CLEAR_NUMBER_OF_POWER_PILLS_CARRIED",
           "num_params": 0,
-          "short_desc": "Clears the number of platinum pickups collected in a vehicle"
+          "short_desc": "Clears the number of platinum pickups (02C7) collected in a vehicle"
         },
         {
           "input": [
@@ -14972,7 +14972,7 @@
           "member": "GetGroundZFor3DCoord",
           "name": "GET_GROUND_Z_FOR_3D_COORD",
           "num_params": 4,
-          "short_desc": "Stores the ground position at the specified coordinates"
+          "short_desc": "Stores the ground position at the location"
         },
         {
           "input": [
@@ -15004,7 +15004,7 @@
           "member": "Create",
           "name": "START_SCRIPT_FIRE",
           "num_params": 4,
-          "short_desc": "Creates a fire at the specified coordinates"
+          "short_desc": "Creates a script fire at the location"
         },
         {
           "input": [
@@ -15021,7 +15021,7 @@
           "member": "IsExtinguished",
           "name": "IS_SCRIPT_FIRE_EXTINGUISHED",
           "num_params": 1,
-          "short_desc": "Returns true if the fire has been put out"
+          "short_desc": "Returns true if the script fire has been put out"
         },
         {
           "input": [
@@ -15038,7 +15038,7 @@
           "member": "Remove",
           "name": "REMOVE_SCRIPT_FIRE",
           "num_params": 1,
-          "short_desc": "Removes the script created fire"
+          "short_desc": "Removes the script fire"
         },
         {
           "input": [
@@ -15082,7 +15082,7 @@
           "member": "Goto",
           "name": "BOAT_GOTO_COORDS",
           "num_params": 4,
-          "short_desc": "Makes the boat sail to the specified coordinates"
+          "short_desc": "Makes the boat sail to the location"
         },
         {
           "input": [
@@ -15133,7 +15133,7 @@
           "member": "IsShootingInArea",
           "name": "IS_PLAYER_SHOOTING_IN_AREA",
           "num_params": 6,
-          "short_desc": "Returns true if the player fired a weapon within the specified 2D zone"
+          "short_desc": "Returns true if the player fired a weapon within the specified 2D area"
         },
         {
           "input": [
@@ -15170,7 +15170,7 @@
           "member": "IsShootingInArea",
           "name": "IS_CHAR_SHOOTING_IN_AREA",
           "num_params": 6,
-          "short_desc": "Returns true if the character fired a weapon within the specified 2D zone"
+          "short_desc": "Returns true if the character fired a weapon within the specified 2D area"
         },
         {
           "input": [
@@ -15179,7 +15179,7 @@
               "type": "Player"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -15200,7 +15200,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -15223,7 +15223,7 @@
           "member": "ClearNumberOfPowerPillsEaten",
           "name": "CLEAR_NUMBER_OF_POWER_PILLS_EATEN",
           "num_params": 0,
-          "short_desc": "Clears the number of donkey magazine pickups collected"
+          "short_desc": "Clears the number of donkey magazine pickups (02C3) collected"
         },
         {
           "input": [
@@ -15299,7 +15299,7 @@
           "member": "GetRandomCharInArea",
           "name": "GET_RANDOM_CHAR_IN_AREA",
           "num_params": 5,
-          "short_desc": "",
+          "short_desc": "Returns the handle of a random pedestrian in the specified 2D area",
           "attrs": {
             "is_static": true
           }
@@ -15326,7 +15326,7 @@
           "member": "GetRandomChar",
           "name": "GET_RANDOM_CHAR_IN_ZONE",
           "num_params": 2,
-          "short_desc": "Gets a random character in the specified zone"
+          "short_desc": "Returns the handle of a random pedestrian in the map zone"
         },
         {
           "input": [
@@ -15343,7 +15343,7 @@
           "member": "IsInTaxi",
           "name": "IS_PLAYER_IN_TAXI",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns true if the player vehicle's model is Taxi (110), Cabbie (128), or Borgnine (148)"
         },
         {
           "input": [
@@ -15360,7 +15360,7 @@
           "member": "IsShooting",
           "name": "IS_PLAYER_SHOOTING",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns true if the player is firing a weapon"
         },
         {
           "input": [
@@ -15431,7 +15431,7 @@
           "member": "SetAccuracy",
           "name": "SET_CHAR_ACCURACY",
           "num_params": 2,
-          "short_desc": "Affects how often the character will hit it's target when attacking with a weapon"
+          "short_desc": "Affects how often the character will hit the target when attacking with a weapon"
         },
         {
           "input": [
@@ -15493,7 +15493,7 @@
           "member": "Create",
           "name": "CREATE_CUTSCENE_OBJECT",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Creates a new custscene object with the specified model"
         },
         {
           "input": [
@@ -15511,7 +15511,7 @@
           "member": "SetAnim",
           "name": "SET_CUTSCENE_ANIM",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Sets the animation of the cuscene object"
         },
         {
           "attrs": {
@@ -15522,7 +15522,7 @@
           "member": "Start",
           "name": "START_CUTSCENE",
           "num_params": 0,
-          "short_desc": "Begins the loaded cutscene"
+          "short_desc": "Starts the loaded cutscene (02E4)"
         },
         {
           "output": [
@@ -15540,7 +15540,7 @@
           "member": "GetTime",
           "name": "GET_CUTSCENE_TIME",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns the time in milliseconds passed since the custcene has started (02E7)"
         },
         {
           "attrs": {
@@ -15563,7 +15563,7 @@
           "member": "Clear",
           "name": "CLEAR_CUTSCENE",
           "num_params": 0,
-          "short_desc": "Ends the current cutscene"
+          "short_desc": "Ends the current cutscene, freeing game memory"
         },
         {
           "attrs": {
@@ -15599,7 +15599,7 @@
           "member": "CreateCollectable",
           "name": "CREATE_COLLECTABLE1",
           "num_params": 3,
-          "short_desc": "Creates a hidden package pickup at the specified location"
+          "short_desc": "Creates a hidden package pickup at the location"
         },
         {
           "input": [
@@ -15616,7 +15616,7 @@
           "member": "SetCollectableTotal",
           "name": "SET_COLLECTABLE1_TOTAL",
           "num_params": 1,
-          "short_desc": "Specifies the total amount of hidden packages to collect"
+          "short_desc": "Sets the total amount of hidden packages to collect"
         },
         {
           "input": [
@@ -15654,7 +15654,7 @@
           "member": "IsProjectileInArea",
           "name": "IS_PROJECTILE_IN_AREA",
           "num_params": 6,
-          "short_desc": "Returns true if the projectile is in the specified area"
+          "short_desc": "Returns true if a projectile is in the specified 3D area"
         },
         {
           "input": [
@@ -15692,7 +15692,7 @@
           "member": "DestroyProjectilesInArea",
           "name": "DESTROY_PROJECTILES_IN_AREA",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Destroys all projectiles in the specified 3D area"
         },
         {
           "input": [
@@ -15717,7 +15717,7 @@
           "member": "DropMine",
           "name": "DROP_MINE",
           "num_params": 3,
-          "short_desc": "Creates a mine pickup at the specified location"
+          "short_desc": "Creates a mine pickup at the location"
         },
         {
           "input": [
@@ -15742,7 +15742,7 @@
           "member": "DropNauticalMine",
           "name": "DROP_NAUTICAL_MINE",
           "num_params": 3,
-          "short_desc": "Creates a nautical mine pickup at the specified location"
+          "short_desc": "Creates a nautical mine pickup at the location"
         },
         {
           "input": [
@@ -15768,7 +15768,7 @@
         {
           "input": [
             {
-              "name": "modelId",
+              "name": "cutsceneModelId",
               "type": "model_ide"
             },
             {
@@ -15784,7 +15784,7 @@
           "member": "LoadSpecialModel",
           "name": "LOAD_SPECIAL_MODEL",
           "num_params": 2,
-          "short_desc": "Loads a special model as a cutscene object"
+          "short_desc": "Loads a model with the given name as a cutscene model id (GTA III: 185-189, VC: 285-289)"
         },
         {
           "input": [
@@ -15812,7 +15812,7 @@
           "member": "Create",
           "name": "CREATE_CUTSCENE_HEAD",
           "num_params": 3,
-          "short_desc": ""
+          "short_desc": "Creates a head attached to the cutscene object (02E5)"
         },
         {
           "input": [

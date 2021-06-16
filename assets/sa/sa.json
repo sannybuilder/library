@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1623812224526,
-    "version": "0.0.46",
+    "last_update": 1623849847740,
+    "version": "0.0.47",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -10587,7 +10587,7 @@
           "output": [
             {
               "name": "mode",
-              "type": "int",
+              "type": "ControllerMode",
               "source": "var_any"
             }
           ],
@@ -10642,7 +10642,7 @@
           "member": "UnloadSpecialCharacter",
           "name": "UNLOAD_SPECIAL_CHARACTER",
           "num_params": 1,
-          "short_desc": "Releases the special character, freeing game memory"
+          "short_desc": "Releases the special character (023C), freeing game memory"
         },
         {
           "input": [
@@ -10695,7 +10695,7 @@
           "member": "Activate",
           "name": "ACTIVATE_GARAGE",
           "num_params": 1,
-          "short_desc": "Activates a garage"
+          "short_desc": "Activates the garage"
         },
         {
           "id": "029A",
@@ -10739,7 +10739,7 @@
           "member": "CreateNoOffset",
           "name": "CREATE_OBJECT_NO_OFFSET",
           "num_params": 5,
-          "short_desc": "Creates an object without offset at the coordinates point"
+          "short_desc": "Creates an object without offset at the location"
         },
         {
           "id": "029C",
@@ -10919,7 +10919,7 @@
           "member": "AddSpriteForCoord",
           "name": "ADD_SPRITE_BLIP_FOR_COORD",
           "num_params": 5,
-          "short_desc": "Adds a sprite blip to the coordinates point"
+          "short_desc": "Adds a sprite blip to the location"
         },
         {
           "input": [
@@ -11023,7 +11023,7 @@
           "member": "SetProofs",
           "name": "SET_CAR_PROOFS",
           "num_params": 6,
-          "short_desc": "Gives vehicle the specified immunities"
+          "short_desc": "Sets the vehicle's immunities"
         },
         {
           "id": "02AD",
@@ -11133,7 +11133,7 @@
           "member": "Deactivate",
           "name": "DEACTIVATE_GARAGE",
           "num_params": 1,
-          "short_desc": "Deactivates the specified garage"
+          "short_desc": "Deactivates the garage"
         },
         {
           "id": "02BA",
@@ -11195,31 +11195,31 @@
         {
           "input": [
             {
-              "name": "xCoord",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "yCoord",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "zCoord",
+              "name": "z",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "x",
+              "name": "nodeX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "y",
+              "name": "nodeY",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "z",
+              "name": "nodeZ",
               "type": "float",
               "source": "var_any"
             }
@@ -11232,36 +11232,36 @@
           "member": "GetClosestCharNode",
           "name": "GET_CLOSEST_CHAR_NODE",
           "num_params": 6,
-          "short_desc": "Stores the nearest path from the specified coordinates that a pedestrian can walk on"
+          "short_desc": "Returns the nearest path node from the specified coordinates that a pedestrian can walk on"
         },
         {
           "input": [
             {
-              "name": "xCoord",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "yCoord",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "zCoord",
+              "name": "z",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "x",
+              "name": "nodeX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "y",
+              "name": "nodeY",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "z",
+              "name": "nodeZ",
               "type": "float",
               "source": "var_any"
             }
@@ -11274,7 +11274,7 @@
           "member": "GetClosestCarNode",
           "name": "GET_CLOSEST_CAR_NODE",
           "num_params": 6,
-          "short_desc": "Stores the nearest path from the specified coordinates that a vehicle can drive on"
+          "short_desc": "Returns the nearest path note from the specified coordinates that a vehicle can drive on"
         },
         {
           "input": [
@@ -11447,7 +11447,7 @@
           "member": "GetGroundZFor3DCoord",
           "name": "GET_GROUND_Z_FOR_3D_COORD",
           "num_params": 4,
-          "short_desc": "Stores the ground position at the specified coordinates"
+          "short_desc": "Stores the ground position at the location"
         },
         {
           "input": [
@@ -11504,7 +11504,7 @@
           "member": "IsExtinguished",
           "name": "IS_SCRIPT_FIRE_EXTINGUISHED",
           "num_params": 1,
-          "short_desc": "Returns true if the fire has been put out"
+          "short_desc": "Returns true if the script fire has been put out"
         },
         {
           "input": [
@@ -11521,7 +11521,7 @@
           "member": "Remove",
           "name": "REMOVE_SCRIPT_FIRE",
           "num_params": 1,
-          "short_desc": "Removes the script created fire"
+          "short_desc": "Removes the script fire"
         },
         {
           "id": "02D2",
@@ -11555,7 +11555,7 @@
           "member": "Goto",
           "name": "BOAT_GOTO_COORDS",
           "num_params": 4,
-          "short_desc": "Makes the boat sail to the specified coordinates"
+          "short_desc": "Makes the boat sail to the location"
         },
         {
           "input": [
@@ -11614,7 +11614,7 @@
           "member": "IsShootingInArea",
           "name": "IS_CHAR_SHOOTING_IN_AREA",
           "num_params": 6,
-          "short_desc": "Returns true if the character fired a weapon within the specified 2D zone"
+          "short_desc": "Returns true if the character fired a weapon within the specified 2D area"
         },
         {
           "id": "02D7",
@@ -11631,7 +11631,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -11812,7 +11812,7 @@
           "member": "SetAccuracy",
           "name": "SET_CHAR_ACCURACY",
           "num_params": 2,
-          "short_desc": "Affects how often the character will hit it's target when attacking with a weapon"
+          "short_desc": "Affects how often the character will hit the target when attacking with a weapon"
         },
         {
           "input": [
@@ -11879,7 +11879,7 @@
           "member": "Start",
           "name": "START_CUTSCENE",
           "num_params": 0,
-          "short_desc": "Begins the loaded cutscene"
+          "short_desc": "Starts the loaded cutscene (02E4)"
         },
         {
           "output": [
@@ -11897,7 +11897,7 @@
           "member": "GetTime",
           "name": "GET_CUTSCENE_TIME",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns the time in milliseconds passed since the custcene has started (02E7)"
         },
         {
           "attrs": {
@@ -11920,7 +11920,7 @@
           "member": "Clear",
           "name": "CLEAR_CUTSCENE",
           "num_params": 0,
-          "short_desc": "Ends the current cutscene"
+          "short_desc": "Ends the current cutscene, freeing game memory"
         },
         {
           "attrs": {
@@ -11971,7 +11971,7 @@
           "member": "SetCollectableTotal",
           "name": "SET_COLLECTABLE1_TOTAL",
           "num_params": 1,
-          "short_desc": "Specifies the total amount of hidden packages to collect"
+          "short_desc": "Sets the total amount of hidden packages to collect"
         },
         {
           "input": [
@@ -12009,7 +12009,7 @@
           "member": "IsProjectileInArea",
           "name": "IS_PROJECTILE_IN_AREA",
           "num_params": 6,
-          "short_desc": "Returns true if the projectile is in the specified area"
+          "short_desc": "Returns true if a projectile is in the specified 3D area"
         },
         {
           "id": "02EF",

@@ -81,6 +81,17 @@ export const commandSupportInfo = createSelector(
   ) => supportInfo?.[props.extension]?.[props.command.id]
 );
 
+export const commandRelated = createSelector(
+  extensions,
+  (
+    extensions: Extension[] | undefined,
+    props: { extension: string; command: Command }
+  ) =>
+    extensions
+      ?.find((e) => e.name === props.extension)
+      ?.commands?.filter((c) => c.short_desc?.includes(props.command.id))
+);
+
 export const hasAnyLoadingInProgress = createSelector(
   extensionsState,
   (state: ExtensionsState) => Object.values(state.games).some((s) => s?.loading)

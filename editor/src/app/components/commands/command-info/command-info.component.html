@@ -117,6 +117,23 @@
   </div>
 </ng-container>
 
+<ng-container *ngIf="relatedCommands?.length">
+  <hr />
+  <div class="row mb-2">
+    <div class="col-12">
+      <h5>{{ "ui.commandOverview.seeAlsoSubtitle" | translate }}</h5>
+      <ul class="list-unstyled">
+        <li *ngFor="let relatedCommand of relatedCommands">
+          <a [routerLink]="['/', game, extension, relatedCommand.id]">{{
+            relatedCommand.name
+          }}</a>
+          &ndash; {{ relatedCommand.short_desc }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>
+
 <ng-container *ngIf="snippet">
   <hr />
   <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>

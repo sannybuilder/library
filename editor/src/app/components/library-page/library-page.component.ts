@@ -220,6 +220,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._extensions.getCommandSupportInfo(command, extension);
   }
 
+  findRelatedCommands(command: Command, extension: string) {
+    return this._extensions.findRelatedCommands(command, extension);
+  }
+
   getEnum(enumName: string) {
     return this._enums.getEnumFields(enumName);
   }

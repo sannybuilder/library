@@ -95,6 +95,13 @@ export class ExtensionsFacade {
     });
   }
 
+  findRelatedCommands(command: Command, extension: string) {
+    return this.store$.select(selector.commandRelated, {
+      command,
+      extension,
+    });
+  }
+
   initSupportInfo() {
     this.store$.dispatch(initSupportInfo());
   }

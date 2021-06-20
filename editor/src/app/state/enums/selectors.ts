@@ -13,7 +13,7 @@ export const enums = createSelector(
 );
 
 export const enumNames = createSelector(enums, (enums) =>
-  Object.keys(enums ?? {})
+  Object.keys(enums ?? {}).sort()
 );
 
 export const enumFields = createSelector(

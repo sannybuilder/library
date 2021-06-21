@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624198987466,
-    "version": "0.0.49",
+    "last_update": 1624246491510,
+    "version": "0.0.50",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -9136,7 +9136,7 @@
             },
             {
               "name": "pickupType",
-              "type": "int"
+              "type": "PickupType"
             },
             {
               "name": "x",
@@ -9166,7 +9166,7 @@
           "member": "Create",
           "name": "CREATE_PICKUP",
           "num_params": 6,
-          "short_desc": "Creates a pickup with the given model and type at the location"
+          "short_desc": "Creates a pickup with the given model and type"
         },
         {
           "attrs": {
@@ -12084,7 +12084,7 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "angle",
               "type": "float"
             }
           ],
@@ -12103,12 +12103,12 @@
           "member": "Sin",
           "name": "SIN",
           "num_params": 2,
-          "short_desc": "Gets the X Coord of an angle"
+          "short_desc": "Returns the sine of the angle"
         },
         {
           "input": [
             {
-              "name": "num",
+              "name": "angle",
               "type": "float"
             }
           ],
@@ -12127,7 +12127,7 @@
           "member": "Cos",
           "name": "COS",
           "num_params": 2,
-          "short_desc": "Gets the Y Coord of an angle"
+          "short_desc": "Returns the cosine of the angle"
         },
         {
           "input": [
@@ -12148,7 +12148,7 @@
           "member": "GetForwardX",
           "name": "GET_CAR_FORWARD_X",
           "num_params": 2,
-          "short_desc": "Gets the sine of the vehicle's angle"
+          "short_desc": "Returns the X coord of the vehicle's angle"
         },
         {
           "input": [
@@ -12169,7 +12169,7 @@
           "member": "GetForwardY",
           "name": "GET_CAR_FORWARD_Y",
           "num_params": 2,
-          "short_desc": "Gets the Y Angle of the vehicle's angle"
+          "short_desc": "Returns the Y coord of the vehicle's angle"
         },
         {
           "input": [
@@ -12187,7 +12187,7 @@
           "member": "ChangeType",
           "name": "CHANGE_GARAGE_TYPE",
           "num_params": 2,
-          "short_desc": "Set the garage type for the specified garage"
+          "short_desc": "Sets the garage's type"
         },
         {
           "id": "02FB",
@@ -12638,7 +12638,7 @@
           "member": "RemoveAllScriptFires",
           "name": "REMOVE_ALL_SCRIPT_FIRES",
           "num_params": 0,
-          "short_desc": "Puts out all fires"
+          "short_desc": "Removes all script fires (02CF)"
         },
         {
           "id": "031B",
@@ -12663,7 +12663,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -12675,7 +12675,7 @@
           "member": "HasBeenDamagedByWeapon",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_WEAPON",
           "num_params": 2,
-          "short_desc": "Returns true if the specified character has been hit by the specified weapon"
+          "short_desc": "Returns true if the character has been hit by the specified weapon"
         },
         {
           "input": [
@@ -12696,7 +12696,7 @@
           "member": "HasBeenDamagedByWeapon",
           "name": "HAS_CAR_BEEN_DAMAGED_BY_WEAPON",
           "num_params": 2,
-          "short_desc": "Returns true if the specified car is damaged by the specified weapon"
+          "short_desc": "Returns true if the vehicle has been hit by the specified weapon"
         },
         {
           "id": "031F",
@@ -12784,7 +12784,7 @@
           "member": "CreateCarFire",
           "name": "START_CAR_FIRE",
           "num_params": 2,
-          "short_desc": "Creates a fire on the specified car"
+          "short_desc": "Creates a script fire on the vehicle"
         },
         {
           "input": [
@@ -12808,7 +12808,7 @@
           "member": "CreateCharFire",
           "name": "START_CHAR_FIRE",
           "num_params": 2,
-          "short_desc": "Creates fire on the specified character"
+          "short_desc": "Creates a script fire on the character"
         },
         {
           "input": [
@@ -12845,9 +12845,9 @@
           "member": "GetRandomCarOfTypeInArea",
           "name": "GET_RANDOM_CAR_OF_TYPE_IN_AREA",
           "num_params": 6,
-          "short_desc": "Gets a random car with the specified model in the specified area",
+          "short_desc": "Returns the handle of a random car with the specified model in the specified 2D area, or -1 otherwise",
           "attrs": {
-            "is_static": true
+            "is_constructor": true
           }
         },
         {
@@ -12892,7 +12892,7 @@
             },
             {
               "name": "pickupType",
-              "type": "int"
+              "type": "PickupType"
             },
             {
               "name": "ammo",
@@ -13072,7 +13072,7 @@
           "member": "SetVisible",
           "name": "SET_CHAR_VISIBLE",
           "num_params": 2,
-          "short_desc": "Sets the character's visibility"
+          "short_desc": "Sets whether the character is visible or not"
         },
         {
           "input": [
@@ -13088,7 +13088,7 @@
           "id": "0338",
           "name": "SET_CAR_VISIBLE",
           "num_params": 2,
-          "short_desc": "Sets the vehicles visibility",
+          "short_desc": "Sets whether the vehicle is visible or not",
           "class": "Car",
           "member": "SetVisible"
         },
@@ -13148,7 +13148,7 @@
           "member": "IsAreaOccupied",
           "name": "IS_AREA_OCCUPIED",
           "num_params": 11,
-          "short_desc": "Returns true if there is anything with the specified properties within the specified area"
+          "short_desc": "Returns true if there is anything with the specified properties within the 3D area"
         },
         {
           "id": "033A",
@@ -13255,7 +13255,7 @@
           "member": "SetColor",
           "name": "SET_TEXT_COLOUR",
           "num_params": 4,
-          "short_desc": "Sets the RGBA to draw the text at"
+          "short_desc": "Sets the color of the text letters"
         },
         {
           "input": [
@@ -13340,7 +13340,7 @@
           "member": "SetBackground",
           "name": "SET_TEXT_BACKGROUND",
           "num_params": 1,
-          "short_desc": "Gives the text a background"
+          "short_desc": "Gives the text a background (0346)"
         },
         {
           "id": "0346",
@@ -13443,7 +13443,7 @@
           "member": "Rotate",
           "name": "ROTATE_OBJECT",
           "num_params": 4,
-          "short_desc": "Rotates the objects Z Angle from the first value to the second"
+          "short_desc": "Rotates the object from one angle to another, optionally accounting for a collision during the rotation"
         },
         {
           "input": [
@@ -13602,7 +13602,7 @@
           "member": "IsExplosionInArea",
           "name": "IS_EXPLOSION_IN_AREA",
           "num_params": 7,
-          "short_desc": "Returns true if there is an explosion of the specified type in the specified area"
+          "short_desc": "Returns true if there is an explosion of the specified type in the 3D area"
         },
         {
           "id": "0357",
@@ -13707,7 +13707,7 @@
               "type": "Char"
             },
             {
-              "name": "armour",
+              "name": "amount",
               "type": "int"
             }
           ],
@@ -13716,7 +13716,7 @@
           "member": "AddArmour",
           "name": "ADD_ARMOUR_TO_CHAR",
           "num_params": 2,
-          "short_desc": "Increases the character's armour by the specified value"
+          "short_desc": "Increases the character's armour by the specified value to the maximum of 100.0"
         },
         {
           "input": [

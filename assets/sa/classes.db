@@ -449,7 +449,7 @@ $END
 $Char
 $BEGIN
 AddAmmo,0114,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
-AddArmour,035F,0,0,("self: Char" "armour%i")
+AddArmour,035F,0,0,("self: Char" "amount%i")
 AttachToBike,06A7,0,0,("self: Char" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "position%i" "_p7%f" "_p8%f" "weaponType: WeaponType")
 AttachToCar,0464,0,0,("self: Char" "handle: Car" "xOffset%f" "yOffset%f" "zOffset%f" "position%i" "angleLimit%f" "weaponType: WeaponType")
 AttachToObject,04F4,0,0,("self: Char" "handle: Object" "xOffset%f" "yOffset%f" "zOffset%f" "orientation%i" "angleLimit%f" "weaponType: WeaponType")
@@ -513,7 +513,7 @@ GiveWeapon,01B2,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 HasBeenArrested,0741,1,0,("self: Char")
 HasBeenDamagedByCar,051B,1,0,("self: Char" "handle: Car")
 HasBeenDamagedByChar,051A,1,0,("self: Char" "handle: Char")
-HasBeenDamagedByWeapon,031D,1,0,("self: Char" "weaponId: WeaponType")
+HasBeenDamagedByWeapon,031D,1,0,("self: Char" "weaponType: WeaponType")
 HasBeenPhotographed,04C5,1,0,("self: Char")
 HasGotWeapon,0491,1,0,("self: Char" "weaponType: WeaponType")
 HasSpottedChar,0364,1,0,("self: Char" "handle: Char")
@@ -1032,7 +1032,7 @@ $BEGIN
 Abs,0097,0,0,("number%f")
 ConvertMetresToFeet,0425,0,0,("num%f" "result%f")
 ConvertMetresToFeetInt,042D,0,0,("num%i" "result%i")
-Cos,02F7,0,0,("num%f" "result%f")
+Cos,02F7,0,0,("angle%f" "result%f")
 GetAngleBetween2DVectors,05A4,0,0,("xVector1%f" "yVector1%f" "xVector2%f" "yVector2%f" "angle%f")
 GetDistanceBetweenCoords2D,0509,0,0,("fromX%f" "fromY%f" "toX%f" "toZ%f" "distance%f")
 GetDistanceBetweenCoords3D,050A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "distance%f")
@@ -1043,7 +1043,7 @@ Pow,0AEE,0,0,("number%f" "power%f" "result%f")
 Random,0099,0,0,()
 RandomFloatInRange,0208,0,0,("min%f" "max%f" "result%f")
 RandomIntInRange,0209,0,0,("min%i" "max%i" "result%i")
-Sin,02F6,0,0,("num%f" "result%f")
+Sin,02F6,0,0,("angle%f" "result%f")
 Sqrt,01FB,0,0,("num%f" "result%f")
 $END
 
@@ -1248,7 +1248,7 @@ $END
 
 $Pickup
 $BEGIN
-Create,0213,0,0,("modelId: model_any" "pickupType%i" "x%f" "y%f" "z%f" "handle: Pickup")
+Create,0213,0,0,("modelId: model_any" "pickupType: PickupType" "x%f" "y%f" "z%f" "handle: Pickup")
 CreateForsaleProperty,0518,0,0,("x%f" "y%f" "z%f" "price%i" "message: gxt_key" "handle: Pickup")
 CreateHorseshoe,0959,0,0,("x%f" "y%f" "z%f" "handle: Pickup")
 CreateLockedProperty,0517,0,0,("x%f" "y%f" "z%f" "message: gxt_key" "handle: Pickup")
@@ -1256,7 +1256,7 @@ CreateMoney,02E1,0,0,("x%f" "y%f" "z%f" "cashAmount%i" "permanent%b" "handle: Pi
 CreateOyster,095A,0,0,("x%f" "y%f" "z%f" "handle: Pickup")
 CreateProtection,04A6,0,0,("x%f" "y%f" "z%f" "revenueLimit%i" "revenueRate%i" "handle: Pickup")
 CreateSnapshot,0958,0,0,("x%f" "y%f" "z%f" "handle: Pickup")
-CreateWithAmmo,032B,0,0,("modelId: model_any" "pickupType%i" "ammo%i" "x%f" "y%f" "z%f" "handle: Pickup")
+CreateWithAmmo,032B,0,0,("modelId: model_any" "pickupType: PickupType" "ammo%i" "x%f" "y%f" "z%f" "handle: Pickup")
 DoesExist,09D1,1,0,("self: Pickup")
 GetCoordinates,065B,0,0,("self: Pickup" "x%f" "y%f" "z%f")
 HasBeenCollected,0214,1,0,("self: Pickup")

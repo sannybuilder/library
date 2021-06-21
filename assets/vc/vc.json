@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624198987573,
-    "version": "0.0.38",
+    "last_update": 1624246491495,
+    "version": "0.0.39",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -11020,7 +11020,7 @@
             },
             {
               "name": "pickupType",
-              "type": "int"
+              "type": "PickupType"
             },
             {
               "name": "x",
@@ -11050,7 +11050,7 @@
           "member": "Create",
           "name": "CREATE_PICKUP",
           "num_params": 6,
-          "short_desc": "Creates a pickup with the given model and type at the location"
+          "short_desc": "Creates a pickup with the given model and type"
         },
         {
           "attrs": {
@@ -14597,7 +14597,7 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "angle",
               "type": "float"
             }
           ],
@@ -14616,12 +14616,12 @@
           "member": "Sin",
           "name": "SIN",
           "num_params": 2,
-          "short_desc": "Gets the X Coord of an angle"
+          "short_desc": "Returns the sine of the angle"
         },
         {
           "input": [
             {
-              "name": "num",
+              "name": "angle",
               "type": "float"
             }
           ],
@@ -14640,7 +14640,7 @@
           "member": "Cos",
           "name": "COS",
           "num_params": 2,
-          "short_desc": "Gets the Y Coord of an angle"
+          "short_desc": "Returns the cosine of the angle"
         },
         {
           "input": [
@@ -14661,7 +14661,7 @@
           "member": "GetForwardX",
           "name": "GET_CAR_FORWARD_X",
           "num_params": 2,
-          "short_desc": "Gets the sine of the vehicle's angle"
+          "short_desc": "Returns the X coord of the vehicle's angle"
         },
         {
           "input": [
@@ -14682,7 +14682,7 @@
           "member": "GetForwardY",
           "name": "GET_CAR_FORWARD_Y",
           "num_params": 2,
-          "short_desc": "Gets the Y Angle of the vehicle's angle"
+          "short_desc": "Returns the Y coord of the vehicle's angle"
         },
         {
           "input": [
@@ -14700,7 +14700,7 @@
           "member": "ChangeType",
           "name": "CHANGE_GARAGE_TYPE",
           "num_params": 2,
-          "short_desc": "Set the garage type for the specified garage"
+          "short_desc": "Sets the garage's type"
         },
         {
           "attrs": {
@@ -15185,7 +15185,7 @@
           "member": "SetRunning",
           "name": "SET_CHAR_RUNNING",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Makes the character run"
         },
         {
           "attrs": {
@@ -15196,7 +15196,7 @@
           "member": "RemoveAllScriptFires",
           "name": "REMOVE_ALL_SCRIPT_FIRES",
           "num_params": 0,
-          "short_desc": "Puts out all fires"
+          "short_desc": "Removes all script fires (02CF)"
         },
         {
           "attrs": {
@@ -15221,7 +15221,7 @@
               "type": "Char"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -15233,7 +15233,7 @@
           "member": "HasBeenDamagedByWeapon",
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_WEAPON",
           "num_params": 2,
-          "short_desc": "Returns true if the specified character has been hit by the specified weapon"
+          "short_desc": "Returns true if the character has been hit by the specified weapon"
         },
         {
           "input": [
@@ -15254,7 +15254,7 @@
           "member": "HasBeenDamagedByWeapon",
           "name": "HAS_CAR_BEEN_DAMAGED_BY_WEAPON",
           "num_params": 2,
-          "short_desc": "Returns true if the specified car is damaged by the specified weapon"
+          "short_desc": "Returns true if the vehicle has been hit by the specified weapon"
         },
         {
           "input": [
@@ -15263,7 +15263,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "leader",
               "type": "Char"
             }
           ],
@@ -15275,7 +15275,7 @@
           "member": "IsInCharsGroup",
           "name": "IS_CHAR_IN_CHARS_GROUP",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if the character is part of the leader's group (01DE)"
         },
         {
           "input": [
@@ -15284,7 +15284,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "leader",
               "type": "Player"
             }
           ],
@@ -15296,7 +15296,7 @@
           "member": "IsInPlayersGroup",
           "name": "IS_CHAR_IN_PLAYERS_GROUP",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Returns true if the character is part of the leader's group (01DF)"
         },
         {
           "input": [
@@ -15367,7 +15367,7 @@
           "member": "SetGroup",
           "name": "SET_ZONE_GROUP",
           "num_params": 3,
-          "short_desc": "Assigns one of the ped groups defined in pedgrp.dat to the zone"
+          "short_desc": "Assigns one of the ped groups defined in pedgrp.dat to the map zone"
         },
         {
           "input": [
@@ -15391,7 +15391,7 @@
           "member": "CreateCarFire",
           "name": "START_CAR_FIRE",
           "num_params": 2,
-          "short_desc": "Creates a fire on the specified car"
+          "short_desc": "Creates a script fire on the vehicle"
         },
         {
           "input": [
@@ -15415,7 +15415,7 @@
           "member": "CreateCharFire",
           "name": "START_CHAR_FIRE",
           "num_params": 2,
-          "short_desc": "Creates fire on the specified character"
+          "short_desc": "Creates a script fire on the character"
         },
         {
           "input": [
@@ -15452,9 +15452,9 @@
           "member": "GetRandomCarOfTypeInArea",
           "name": "GET_RANDOM_CAR_OF_TYPE_IN_AREA",
           "num_params": 6,
-          "short_desc": "Gets a random car with the specified model in the specified area",
+          "short_desc": "Returns the handle of a random car with the specified model in the specified 2D area, or -1 otherwise",
           "attrs": {
-            "is_static": true
+            "is_constructor": true
           }
         },
         {
@@ -15507,7 +15507,7 @@
             },
             {
               "name": "pickupType",
-              "type": "int"
+              "type": "PickupType"
             },
             {
               "name": "ammo",
@@ -15550,7 +15550,7 @@
               "type": "Car"
             },
             {
-              "name": "handle",
+              "name": "target",
               "type": "Car"
             }
           ],
@@ -15559,7 +15559,7 @@
           "member": "SetRamCar",
           "name": "SET_CAR_RAM_CAR",
           "num_params": 2,
-          "short_desc": "Sets the car's goal to ram another car"
+          "short_desc": "Sets the AI driver's mission to ram another car (similar to 00AF with RamCarFaraway)"
         },
         {
           "attrs": {
@@ -15706,7 +15706,7 @@
           "member": "SetVisible",
           "name": "SET_CHAR_VISIBLE",
           "num_params": 2,
-          "short_desc": "Sets the character's visibility"
+          "short_desc": "Sets whether the character is visible or not"
         },
         {
           "attrs": {
@@ -15772,7 +15772,7 @@
           "member": "IsAreaOccupied",
           "name": "IS_AREA_OCCUPIED",
           "num_params": 11,
-          "short_desc": "Returns true if there is anything with the specified properties within the specified area"
+          "short_desc": "Returns true if there is anything with the specified properties within the 3D area"
         },
         {
           "attrs": {
@@ -15879,7 +15879,7 @@
           "member": "SetColor",
           "name": "SET_TEXT_COLOUR",
           "num_params": 4,
-          "short_desc": "Sets the RGBA to draw the text at"
+          "short_desc": "Sets the color of the text letters"
         },
         {
           "input": [
@@ -15955,7 +15955,7 @@
           "member": "SetBackground",
           "name": "SET_TEXT_BACKGROUND",
           "num_params": 1,
-          "short_desc": "Gives the text a background"
+          "short_desc": "Gives the text a background (0346)"
         },
         {
           "attrs": {
@@ -16049,7 +16049,7 @@
           "member": "Rotate",
           "name": "ROTATE_OBJECT",
           "num_params": 4,
-          "short_desc": "Rotates the objects Z Angle from the first value to the second"
+          "short_desc": "Rotates the object from one angle to another, optionally accounting for a collision during the rotation"
         },
         {
           "input": [
@@ -16143,7 +16143,7 @@
               "type": "Char"
             },
             {
-              "name": "skin",
+              "name": "modelName",
               "type": "string"
             }
           ],
@@ -16152,7 +16152,7 @@
           "member": "Undress",
           "name": "UNDRESS_CHAR",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Removes the character and requests a new special model to load"
         },
         {
           "input": [
@@ -16166,7 +16166,7 @@
           "member": "Dress",
           "name": "DRESS_CHAR",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Respawns the character using the model requested with 0352"
         },
         {
           "attrs": {
@@ -16274,7 +16274,7 @@
           "member": "MakeTargettable",
           "name": "MAKE_OBJECT_TARGETTABLE",
           "num_params": 1,
-          "short_desc": "Makes the object targettable"
+          "short_desc": "Makes the object targettable (ability to be auto-aimed)"
         },
         {
           "input": [
@@ -16292,7 +16292,7 @@
           "member": "AddArmour",
           "name": "ADD_ARMOUR_TO_PLAYER",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Increases the character's armour by the specified value to the maximum of 100.0"
         },
         {
           "input": [
@@ -16301,7 +16301,7 @@
               "type": "Char"
             },
             {
-              "name": "armour",
+              "name": "amount",
               "type": "int"
             }
           ],
@@ -16310,7 +16310,7 @@
           "member": "AddArmour",
           "name": "ADD_ARMOUR_TO_CHAR",
           "num_params": 2,
-          "short_desc": "Increases the character's armour by the specified value"
+          "short_desc": "Increases the character's armour by the specified value to the maximum of 100.0"
         },
         {
           "input": [

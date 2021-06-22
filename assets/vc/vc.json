@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624338038233,
-    "version": "0.0.41",
+    "last_update": 1624379369065,
+    "version": "0.0.42",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -12913,7 +12913,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -12949,7 +12949,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -18367,7 +18367,7 @@
           "member": "ClearThisPrint",
           "name": "CLEAR_THIS_PRINT",
           "num_params": 1,
-          "short_desc": "Clears the print from the screen"
+          "short_desc": "Removes the priority text from the screen"
         },
         {
           "input": [
@@ -18384,7 +18384,7 @@
           "member": "ClearThisBigPrint",
           "name": "CLEAR_THIS_BIG_PRINT",
           "num_params": 1,
-          "short_desc": "Clears the styled GXT from the screen"
+          "short_desc": "Removes the styled text from the screen"
         },
         {
           "input": [
@@ -18524,7 +18524,7 @@
           "member": "ForceRandomPedType",
           "name": "FORCE_RANDOM_PED_TYPE",
           "num_params": 1,
-          "short_desc": "Forces the game to spawn only pedestrians with the given ped type"
+          "short_desc": "Forces the game to spawn only pedestrians of the given type"
         },
         {
           "attrs": {
@@ -18550,7 +18550,7 @@
           "member": "GetCollectablesCollected",
           "name": "GET_COLLECTABLE1S_COLLECTED",
           "num_params": 1,
-          "short_desc": "Gets the number of hidden packages collected"
+          "short_desc": "Returns the number of hidden packages collected"
         },
         {
           "input": [
@@ -19170,7 +19170,7 @@
           "member": "BlowUpBuggy",
           "name": "BLOW_UP_RC_BUGGY",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Destroys the remote-control vehicle"
         },
         {
           "attrs": {
@@ -19261,7 +19261,7 @@
           "member": "SetUsePednodeSeek",
           "name": "SET_CHAR_USE_PEDNODE_SEEK",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Sets whether the character should follow paths set for pedestrians"
         },
         {
           "attrs": {
@@ -19295,7 +19295,7 @@
           "member": "SetFreeHealthCare",
           "name": "SET_FREE_HEALTH_CARE",
           "num_params": 2,
-          "short_desc": "Makes the player receive free medical treatment once, meaning the player does not lose cash when they die"
+          "short_desc": "Sets whether the player loses the cash when gets wasted (works once)"
         },
         {
           "attrs": {
@@ -19354,7 +19354,7 @@
               "type": "Player"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -19370,7 +19370,7 @@
           "member": "GetAmmoInWeapon",
           "name": "GET_AMMO_IN_PLAYER_WEAPON",
           "num_params": 3,
-          "short_desc": "Gets the ammo of the player's weapon "
+          "short_desc": "Gets the amount of ammo in the specified weapon of the player"
         },
         {
           "attrs": {
@@ -19482,7 +19482,7 @@
           "member": "SetTraction",
           "name": "SET_CAR_TRACTION",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Overrides the default vehicle traction value of 1.0"
         },
         {
           "attrs": {
@@ -19499,26 +19499,27 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "meters",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "result",
+              "name": "feet",
               "type": "float",
               "source": "var_any"
             }
           ],
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           },
           "class": "Math",
           "id": "0425",
           "member": "ConvertMetresToFeet",
           "name": "CONVERT_METRES_TO_FEET",
           "num_params": 2,
-          "short_desc": "Converts the given floating-point number of metres to feet and stores the result in the variable"
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "attrs": {
@@ -19552,7 +19553,7 @@
           "member": "SetAvoidLevelTransitions",
           "name": "SET_CAR_AVOID_LEVEL_TRANSITIONS",
           "num_params": 2,
-          "short_desc": "Causes the vehicle to prefer paths which travel along the same altitude"
+          "short_desc": "Sets whether the vehicle will avoid paths between levels (0426)"
         },
         {
           "attrs": {
@@ -19627,26 +19628,27 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "meters",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "result",
+              "name": "feet",
               "type": "int",
               "source": "var_any"
             }
           ],
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           },
           "class": "Math",
           "id": "042D",
-          "member": "ConvertMetresToFeetInt",
+          "member": "ConvertMetresToFeet",
           "name": "CONVERT_METRES_TO_FEET_INT",
           "num_params": 2,
-          "short_desc": "Converts the given integer number of metres to an imperial value and stores the result in the variable"
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "input": [
@@ -19705,7 +19707,7 @@
               "type": "Car"
             },
             {
-              "name": "seatId",
+              "name": "seatIndex",
               "type": "int"
             }
           ],
@@ -19717,7 +19719,7 @@
           "member": "IsPassengerSeatFree",
           "name": "IS_CAR_PASSENGER_SEAT_FREE",
           "num_params": 2,
-          "short_desc": "Returns true if the specified passenger seat is empty"
+          "short_desc": "Returns true if the specified car seat is empty"
         },
         {
           "attrs": {
@@ -20716,7 +20718,7 @@
           "member": "GiveModelToPlayer",
           "name": "GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER",
           "num_params": 6,
-          "short_desc": "Puts the player in control of a radio controlled vehicle"
+          "short_desc": "Puts the player in control of a remote-control vehicle"
         },
         {
           "input": [

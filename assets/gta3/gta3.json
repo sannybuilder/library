@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624338266295,
-    "version": "0.0.36",
+    "last_update": 1624379369052,
+    "version": "0.0.37",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -13740,7 +13740,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -13768,7 +13768,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -13796,7 +13796,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -13832,7 +13832,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -13868,7 +13868,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -20769,7 +20769,7 @@
           "member": "LoadMissionAudio",
           "name": "LOAD_MISSION_AUDIO",
           "num_params": 1,
-          "short_desc": "Loads a specified sound from the audio files"
+          "short_desc": "Loads the file from the audio directory"
         },
         {
           "attrs": {
@@ -20781,7 +20781,7 @@
           "member": "HasMissionAudioLoaded",
           "name": "HAS_MISSION_AUDIO_LOADED",
           "num_params": 0,
-          "short_desc": "Returns true if the audio has loaded"
+          "short_desc": "Returns true if the mission audio has loaded (03CF)"
         },
         {
           "attrs": {
@@ -20792,7 +20792,7 @@
           "member": "PlayMissionAudio",
           "name": "PLAY_MISSION_AUDIO",
           "num_params": 0,
-          "short_desc": "Plays an audio"
+          "short_desc": "Plays the loaded sound (03CF)"
         },
         {
           "attrs": {
@@ -20804,7 +20804,7 @@
           "member": "HasMissionAudioFinished",
           "name": "HAS_MISSION_AUDIO_FINISHED",
           "num_params": 0,
-          "short_desc": "Returns true if the audio is no longer playing"
+          "short_desc": "Returns true if the audio (03CF) is no longer playing"
         },
         {
           "input": [
@@ -20889,7 +20889,7 @@
           "member": "ClearThisPrint",
           "name": "CLEAR_THIS_PRINT",
           "num_params": 1,
-          "short_desc": "Clears the print from the screen"
+          "short_desc": "Removes the priority text from the screen"
         },
         {
           "input": [
@@ -20906,7 +20906,7 @@
           "member": "ClearThisBigPrint",
           "name": "CLEAR_THIS_BIG_PRINT",
           "num_params": 1,
-          "short_desc": "Clears the styled GXT from the screen"
+          "short_desc": "Removes the styled text from the screen"
         },
         {
           "input": [
@@ -20931,7 +20931,7 @@
           "member": "SetMissionAudioPosition",
           "name": "SET_MISSION_AUDIO_POSITION",
           "num_params": 3,
-          "short_desc": "Sets an audio's location"
+          "short_desc": "Sets the location of the mission audio (03CF) where it can be heard"
         },
         {
           "attrs": {
@@ -20978,11 +20978,11 @@
             },
             {
               "name": "color",
-              "type": "int"
+              "type": "BlipColor"
             },
             {
               "name": "display",
-              "type": "int"
+              "type": "BlipDisplay"
             }
           ],
           "output": [
@@ -21034,7 +21034,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -21086,7 +21086,7 @@
           "member": "ForceRandomPedType",
           "name": "FORCE_RANDOM_PED_TYPE",
           "num_params": 1,
-          "short_desc": "Forces the game to spawn only pedestrians with the given ped type"
+          "short_desc": "Forces the game to spawn only pedestrians of the given type"
         },
         {
           "input": [
@@ -21121,7 +21121,7 @@
           "member": "GetCollectablesCollected",
           "name": "GET_COLLECTABLE1S_COLLECTED",
           "num_params": 1,
-          "short_desc": "Gets the number of hidden packages collected"
+          "short_desc": "Returns the number of hidden packages collected"
         },
         {
           "input": [
@@ -21242,7 +21242,7 @@
           "member": "IsInControl",
           "name": "IS_CHAR_IN_CONTROL",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns true if the character can move"
         },
         {
           "input": [
@@ -21563,7 +21563,7 @@
           "member": "SetStaysInCurrentLevel",
           "name": "SET_CHAR_STAYS_IN_CURRENT_LEVEL",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Forces the AI-controlled character to stay on the current island"
         },
         {
           "input": [
@@ -21757,7 +21757,7 @@
           "member": "BlowUpBuggy",
           "name": "BLOW_UP_RC_BUGGY",
           "num_params": 0,
-          "short_desc": ""
+          "short_desc": "Destroys the remote-control vehicle"
         },
         {
           "input": [
@@ -21809,7 +21809,7 @@
           "member": "ClearMissionAudio",
           "name": "CLEAR_MISSION_AUDIO",
           "num_params": 0,
-          "short_desc": "Unloads the audio, freeing game memory"
+          "short_desc": "Unloads the mission audio (03CF), freeing game memory"
         },
         {
           "input": [
@@ -21826,7 +21826,7 @@
           "member": "SetFadeInAfterNextArrest",
           "name": "SET_FADE_IN_AFTER_NEXT_ARREST",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets whether the next arrest will cause the screen to fade in"
         },
         {
           "input": [
@@ -21843,7 +21843,7 @@
           "member": "SetFadeInAfterNextDeath",
           "name": "SET_FADE_IN_AFTER_NEXT_DEATH",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets whether the next death will cause the screen to fade in"
         },
         {
           "input": [
@@ -21882,7 +21882,7 @@
           "member": "SetUsePednodeSeek",
           "name": "SET_CHAR_USE_PEDNODE_SEEK",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Sets whether the character should follow paths set for pedestrians"
         },
         {
           "input": [
@@ -21900,7 +21900,7 @@
           "member": "SwitchWeapons",
           "name": "SWITCH_VEHICLE_WEAPONS",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Enables or disabled guns on the vehicle that has them (e.g. boats)"
         },
         {
           "input": [
@@ -21918,7 +21918,7 @@
           "member": "SetGetOutOfJailFree",
           "name": "SET_GET_OUT_OF_JAIL_FREE",
           "num_params": 2,
-          "short_desc": "Sets get out of jail free for the player"
+          "short_desc": "Sets whether the player loses the cash when gets busted (works once)"
         },
         {
           "input": [
@@ -21936,7 +21936,7 @@
           "member": "SetFreeHealthCare",
           "name": "SET_FREE_HEALTH_CARE",
           "num_params": 2,
-          "short_desc": "Makes the player receive free medical treatment once, meaning the player does not lose cash when they die"
+          "short_desc": "Sets whether the player loses the cash when gets wasted (works once)"
         },
         {
           "input": [
@@ -22008,7 +22008,7 @@
               "type": "Player"
             },
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType"
             }
           ],
@@ -22024,7 +22024,7 @@
           "member": "GetAmmoInWeapon",
           "name": "GET_AMMO_IN_PLAYER_WEAPON",
           "num_params": 3,
-          "short_desc": "Gets the ammo of the player's weapon "
+          "short_desc": "Gets the amount of ammo in the specified weapon of the player"
         },
         {
           "input": [
@@ -22047,7 +22047,7 @@
           "id": "041A",
           "name": "GET_AMMO_IN_CHAR_WEAPON",
           "num_params": 3,
-          "short_desc": "Gets the amount of ammo in the specified characters weapon",
+          "short_desc": "Gets the amount of ammo in the specified weapon of the character",
           "class": "Char",
           "member": "GetAmmoInWeapon"
         },
@@ -22206,7 +22206,7 @@
           "member": "SetTraction",
           "name": "SET_CAR_TRACTION",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Overrides the default vehicle traction value of 1.0"
         },
         {
           "attrs": {
@@ -22223,26 +22223,27 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "meters",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "result",
+              "name": "feet",
               "type": "float",
               "source": "var_any"
             }
           ],
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           },
           "class": "Math",
           "id": "0425",
           "member": "ConvertMetresToFeet",
           "name": "CONVERT_METRES_TO_FEET",
           "num_params": 2,
-          "short_desc": "Converts the given floating-point number of metres to feet and stores the result in the variable"
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "input": [
@@ -22279,7 +22280,7 @@
           "member": "MarkRoadsBetweenLevels",
           "name": "MARK_ROADS_BETWEEN_LEVELS",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Marks all car path nodes in the given 3D area as transitional between two levels (islands)"
         },
         {
           "input": [
@@ -22316,7 +22317,7 @@
           "member": "MarkPedRoadsBetweenLevels",
           "name": "MARK_PED_ROADS_BETWEEN_LEVELS",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Marks all ped path nodes in the given 3D area as transitional between two levels (islands)"
         },
         {
           "input": [
@@ -22334,7 +22335,7 @@
           "member": "SetAvoidLevelTransitions",
           "name": "SET_CAR_AVOID_LEVEL_TRANSITIONS",
           "num_params": 2,
-          "short_desc": "Causes the vehicle to prefer paths which travel along the same altitude"
+          "short_desc": "Sets whether the vehicle will avoid paths between levels (0426)"
         },
         {
           "attrs": {
@@ -22434,26 +22435,27 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "meters",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "result",
+              "name": "feet",
               "type": "int",
               "source": "var_any"
             }
           ],
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           },
           "class": "Math",
           "id": "042D",
-          "member": "ConvertMetresToFeetInt",
+          "member": "ConvertMetresToFeet",
           "name": "CONVERT_METRES_TO_FEET_INT",
           "num_params": 2,
-          "short_desc": "Converts the given integer number of metres to an imperial value and stores the result in the variable"
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "input": [
@@ -22512,7 +22514,7 @@
               "type": "Car"
             },
             {
-              "name": "seatId",
+              "name": "seatIndex",
               "type": "int"
             }
           ],
@@ -22524,7 +22526,7 @@
           "member": "IsPassengerSeatFree",
           "name": "IS_CAR_PASSENGER_SEAT_FREE",
           "num_params": 2,
-          "short_desc": "Returns true if the specified passenger seat is empty"
+          "short_desc": "Returns true if the specified car seat is empty"
         },
         {
           "input": [
@@ -22533,7 +22535,7 @@
               "type": "Car"
             },
             {
-              "name": "seatId",
+              "name": "seatIndex",
               "type": "int"
             }
           ],
@@ -22547,7 +22549,7 @@
           "id": "0432",
           "name": "GET_CHAR_IN_CAR_PASSENGER_SEAT",
           "num_params": 3,
-          "short_desc": "Returns the character that is sitting in the specified car seat",
+          "short_desc": "Returns the handle of a character sitting in the specified car seat",
           "class": "Car",
           "member": "GetCharInPassengerSeat"
         },
@@ -23824,7 +23826,7 @@
           "member": "GiveModelToPlayer",
           "name": "GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER",
           "num_params": 6,
-          "short_desc": "Puts the player in control of a radio controlled vehicle"
+          "short_desc": "Puts the player in control of a remote-control vehicle"
         },
         {
           "input": [

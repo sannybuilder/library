@@ -224,7 +224,7 @@ SetOnPathToPlayer,0450,0,0,("self: Car")
 SetOnlyDamagedByPlayer,02AA,0,0,("self: Car" "state%b")
 SetProofs,02AC,0,0,("self: Car" "bulletProof%b" "fireProof%b" "explosionProof%b" "collisionProof%b" "meleeProof%b")
 SetRamCar,032C,0,0,("self: Car" "target: Car")
-SetStatus,03A2,0,0,("self: Car" "status%i")
+SetStatus,03A2,0,0,("self: Car" "status: EntityStatus")
 SetStaysInCurrentLevel,03FB,0,0,("self: Car" "state%b")
 SetStrong,03AB,0,0,("self: Car" "state%b")
 SetTaxiLight,0216,0,0,("self: Car" "state%b")
@@ -281,7 +281,7 @@ GetHealth,0226,0,0,("self: Char" "health%i")
 GetNumberOfFollowers,046D,0,0,("self: Char" "number%i")
 GiveWeapon,01B2,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 HasBeenDamagedByWeapon,031D,1,0,("self: Char" "weaponType: WeaponType")
-HasSpottedChar,0364,1,0,("self: Char" "handle: Char")
+HasSpottedChar,0364,1,0,("self: Char" "target: Char")
 HasSpottedPlayer,0123,1,0,("self: Char" "player: Player")
 IsCurrentWeapon,02D8,1,0,("self: Char" "weaponType: WeaponType")
 IsDead,0118,1,0,("self: Char")
@@ -424,7 +424,7 @@ TurnToFacePlayer,020F,0,0,("self: Char" "player: Player")
 Undress,0352,0,0,("self: Char" "modelName%s")
 WanderDir,009C,0,0,("self: Char" "direction%i")
 WarpFromCarToCoord,0362,0,0,("self: Char" "x%f" "y%f" "z%f")
-WarpIntoCar,036A,0,0,("self: Char" "handle: Car")
+WarpIntoCar,036A,0,0,("self: Char" "vehicle: Car")
 $END
 
 $ChaseScene
@@ -509,7 +509,7 @@ $END
 
 $Fx
 $BEGIN
-AddMovingParticleEffect,039D,0,0,("type%i" "x%f" "y%f" "z%f" "strengthX%f" "strengthY%f" "strengthZ%f" "scale%f" "r%i" "g%i" "b%i" "durationInMs%i")
+AddMovingParticleEffect,039D,0,0,("particle: ParticleObject" "x%f" "y%f" "z%f" "strengthX%f" "strengthY%f" "strengthZ%f" "scale%f" "r%i" "g%i" "b%i" "durationInMs%i")
 AddParticleEffect,02A2,0,0,("type%i" "x%f" "y%f" "z%f" "remove%b")
 CreateSingleParticle,0437,0,0,("type%i" "x%f" "y%f" "z%f" "strengthX%f" "strengthY%f" "strengthZ%f" "scale%f")
 DrawCorona,024F,0,0,("x%f" "y%f" "z%f" "size%f" "type: Corona" "flareType: FlareType" "r%i" "g%i" "b%i")
@@ -633,7 +633,7 @@ SetDrawLast,0418,0,0,("self: Object" "state%b")
 SetDynamic,0392,0,0,("self: Object" "state%b")
 SetHeading,0177,0,0,("self: Object" "heading%f")
 SetRotation,0453,0,0,("self: Object" "x%f" "y%f" "z%f")
-SetVelocity,0381,0,0,("self: Object" "x%f" "y%f" "z%f")
+SetVelocity,0381,0,0,("self: Object" "xSpeed%f" "ySpeed%f" "zSpeed%f")
 Slide,034E,1,0,("self: Object" "fromX%f" "fromY%f" "fromZ%f" "xSpeed%f" "ySpeed%f" "zSpeed%f" "collisionCheck%b")
 $END
 
@@ -842,7 +842,7 @@ StoreWantedLevel,01C0,0,0,("self: Player" "wantedLevel%i")
 TurnToFaceChar,0210,0,0,("self: Player" "char: Char")
 TurnToFaceCoord,01BF,0,0,("self: Player" "x%f" "y%f" "z%f")
 WarpFromCarToCoord,012A,0,0,("self: Player" "x%f" "y%f" "z%f")
-WarpIntoCar,0369,0,0,("self: Player" "handle: Car")
+WarpIntoCar,0369,0,0,("self: Player" "vehicle: Car")
 $END
 
 $Rampage

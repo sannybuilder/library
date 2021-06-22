@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624247193046,
-    "version": "0.0.51",
+    "last_update": 1624338266310,
+    "version": "0.0.52",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -9905,7 +9905,7 @@
           "member": "RequestModel",
           "name": "REQUEST_MODEL",
           "num_params": 1,
-          "short_desc": "Loads a model"
+          "short_desc": "Requests a new model to load"
         },
         {
           "input": [
@@ -13730,7 +13730,7 @@
           "member": "Open",
           "name": "OPEN_GARAGE",
           "num_params": 1,
-          "short_desc": "Opens the specified garage"
+          "short_desc": "Opens the garage"
         },
         {
           "input": [
@@ -13744,7 +13744,7 @@
           "member": "Close",
           "name": "CLOSE_GARAGE",
           "num_params": 1,
-          "short_desc": "Closes the specified garage"
+          "short_desc": "Closes the garage"
         },
         {
           "input": [
@@ -13770,7 +13770,7 @@
           "member": "WarpFromCarToCoord",
           "name": "WARP_CHAR_FROM_CAR_TO_COORD",
           "num_params": 4,
-          "short_desc": "Removes the character from their car and places him at the specified coordinates"
+          "short_desc": "Pulls the character out of their car and places at the location"
         },
         {
           "input": [
@@ -13816,14 +13816,14 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "target",
               "type": "Char"
             }
           ],
           "id": "0364",
           "name": "HAS_CHAR_SPOTTED_CHAR",
           "num_params": 2,
-          "short_desc": "Returns true if the first actor can see the second",
+          "short_desc": "Returns true if the character can see the target character",
           "attrs": {
             "is_condition": true
           },
@@ -13886,7 +13886,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "vehicle",
               "type": "Car"
             }
           ],
@@ -13895,7 +13895,7 @@
           "member": "WarpIntoCar",
           "name": "WARP_CHAR_INTO_CAR",
           "num_params": 2,
-          "short_desc": "Puts the character in the specified car"
+          "short_desc": "Puts the character in the specified vehicle"
         },
         {
           "id": "036B",
@@ -14133,15 +14133,15 @@
               "type": "Object"
             },
             {
-              "name": "x",
+              "name": "xSpeed",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "ySpeed",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "zSpeed",
               "type": "float"
             }
           ],
@@ -14150,7 +14150,7 @@
           "member": "SetVelocity",
           "name": "SET_OBJECT_VELOCITY",
           "num_params": 4,
-          "short_desc": "Throws the object towards the specified offset"
+          "short_desc": "Sets the object's velocity"
         },
         {
           "input": [
@@ -14168,7 +14168,7 @@
           "member": "SetCollision",
           "name": "SET_OBJECT_COLLISION",
           "num_params": 2,
-          "short_desc": "Turns collision on or off for an object"
+          "short_desc": "Sets the object's collision detection"
         },
         {
           "id": "0383",
@@ -14295,7 +14295,7 @@
           "member": "LoadAllModelsNow",
           "name": "LOAD_ALL_MODELS_NOW",
           "num_params": 0,
-          "short_desc": "Loads any requested models"
+          "short_desc": "Synchronously load any requested models (0247 or 0353)"
         },
         {
           "input": [
@@ -14321,7 +14321,7 @@
           "member": "AddToVelocity",
           "name": "ADD_TO_OBJECT_VELOCITY",
           "num_params": 4,
-          "short_desc": "Adds values to the object's velocity vector"
+          "short_desc": "Adds the given vector to the object's velocity (0381)"
         },
         {
           "input": [
@@ -14370,7 +14370,7 @@
           "member": "DrawSprite",
           "name": "DRAW_SPRITE",
           "num_params": 9,
-          "short_desc": "Draws a texture at the specified on-screen X and Y coordinates, with the specified size and RGBA color"
+          "short_desc": "Draws a loaded texture (038F) at the specified on-screen X and Y coordinates, with the specified size and RGBA color"
         },
         {
           "input": [
@@ -14464,7 +14464,7 @@
           "member": "Remove",
           "name": "REMOVE_TEXTURE_DICTIONARY",
           "num_params": 0,
-          "short_desc": "Unloads all currently loaded textures, as well as texture dictionaries, freeing game memory"
+          "short_desc": "Unloads all currently loaded textures (038F), as well as texture dictionaries (0390), freeing game memory"
         },
         {
           "input": [
@@ -14482,7 +14482,10 @@
           "member": "SetDynamic",
           "name": "SET_OBJECT_DYNAMIC",
           "num_params": 2,
-          "short_desc": "Makes an object moveable"
+          "short_desc": "Makes the object moveable",
+          "attrs": {
+            "is_keyword": true
+          }
         },
         {
           "input": [
@@ -14554,7 +14557,7 @@
           "member": "ClearArea",
           "name": "CLEAR_AREA",
           "num_params": 5,
-          "short_desc": "Clears an area at the specified coordinates, removing all vehicles and pedestrians"
+          "short_desc": "Clears the area, removing all vehicles and pedestrians"
         },
         {
           "input": [
@@ -14571,7 +14574,7 @@
           "member": "FreezeTimer",
           "name": "FREEZE_ONSCREEN_TIMER",
           "num_params": 1,
-          "short_desc": "Makes the on-screen timer stop incrementing"
+          "short_desc": "Makes the on-screen timer stop updating"
         },
         {
           "input": [
@@ -14589,7 +14592,7 @@
           "member": "SwitchSiren",
           "name": "SWITCH_CAR_SIREN",
           "num_params": 2,
-          "short_desc": "Enables or disables a car's siren"
+          "short_desc": "Sets whether the car's alarm can be activated"
         },
         {
           "id": "0398",
@@ -14639,7 +14642,7 @@
           "member": "SetWatertight",
           "name": "SET_CAR_WATERTIGHT",
           "num_params": 2,
-          "short_desc": "Makes the vehicle watertight, meaning character's inside will not be harmed if the vehicle is submerged in water"
+          "short_desc": "Makes the vehicle watertight, meaning characters inside will not be harmed if the vehicle is submerged in water"
         },
         {
           "id": "039D",
@@ -14665,7 +14668,7 @@
           "member": "SetCantBeDraggedOut",
           "name": "SET_CHAR_CANT_BE_DRAGGED_OUT",
           "num_params": 2,
-          "short_desc": "Locks a character while in a car"
+          "short_desc": "Locks the character while in a car"
         },
         {
           "input": [
@@ -14734,7 +14737,7 @@
             },
             {
               "name": "status",
-              "type": "int"
+              "type": "EntityStatus"
             }
           ],
           "class": "Car",
@@ -14759,7 +14762,7 @@
           "member": "IsMale",
           "name": "IS_CHAR_MALE",
           "num_params": 1,
-          "short_desc": "Returns true if the char is male"
+          "short_desc": "Returns true if the character is male"
         },
         {
           "input": [
@@ -14870,7 +14873,7 @@
           "member": "SetStrong",
           "name": "SET_CAR_STRONG",
           "num_params": 2,
-          "short_desc": "Makes the car stronger"
+          "short_desc": "Makes the car more resistant to damage"
         },
         {
           "id": "03AC",
@@ -14918,7 +14921,7 @@
           "member": "Switch",
           "name": "SWITCH_STREAMING",
           "num_params": 1,
-          "short_desc": "Sets whether the map should be streamed"
+          "short_desc": "Sets the streaming of additional models like peds, cars, and maps"
         },
         {
           "input": [
@@ -14935,7 +14938,7 @@
           "member": "IsOpen",
           "name": "IS_GARAGE_OPEN",
           "num_params": 1,
-          "short_desc": "Returns true if the garage door is open"
+          "short_desc": "Returns true if the garage's door is open"
         },
         {
           "input": [
@@ -14952,7 +14955,7 @@
           "member": "IsClosed",
           "name": "IS_GARAGE_CLOSED",
           "num_params": 1,
-          "short_desc": "Returns true if the garage door is closed"
+          "short_desc": "Returns true if the garage's door is closed"
         },
         {
           "id": "03B2",
@@ -15021,7 +15024,7 @@
           "member": "SwapNearestBuildingModel",
           "name": "SWAP_NEAREST_BUILDING_MODEL",
           "num_params": 6,
-          "short_desc": "Changes an IPL-placed object model"
+          "short_desc": "Swaps a map model with another map model nearest to the center of the search area"
         },
         {
           "input": [
@@ -15038,7 +15041,7 @@
           "member": "SwitchProcessing",
           "name": "SWITCH_WORLD_PROCESSING",
           "num_params": 1,
-          "short_desc": "Sets whether to load world collision"
+          "short_desc": "Sets whether the game should render the world or only the cutscene objects"
         },
         {
           "id": "03B8",
@@ -15091,7 +15094,7 @@
           "member": "ClearAreaOfCars",
           "name": "CLEAR_AREA_OF_CARS",
           "num_params": 6,
-          "short_desc": "Clears all cars from a specified area"
+          "short_desc": "Clears all cars in the specified 3D area"
         },
         {
           "id": "03BB",
@@ -15135,7 +15138,7 @@
           "member": "Create",
           "name": "ADD_SPHERE",
           "num_params": 5,
-          "short_desc": "Creates a static sphere at the specified coordinates, with the specified radius"
+          "short_desc": "Creates a static sphere at the location, with the specified radius"
         },
         {
           "input": [
@@ -15202,7 +15205,7 @@
           "member": "StoreCarIsInNoSave",
           "name": "STORE_CAR_CHAR_IS_IN_NO_SAVE",
           "num_params": 2,
-          "short_desc": "Gets the character's vehicle handle without marking it as used by the script, therefore allowing it to be deleted by the game at any time"
+          "short_desc": "Returns the character's vehicle handle without marking it as used by the script, therefore allowing it to be deleted by the game at any time"
         },
         {
           "id": "03C1",
@@ -15347,7 +15350,7 @@
           "id": "03C9",
           "name": "IS_CAR_VISIBLY_DAMAGED",
           "num_params": 1,
-          "short_desc": "Returns true if the car is damaged",
+          "short_desc": "Returns true if any of the car components is visibly damaged or lost",
           "attrs": {
             "is_condition": true
           },

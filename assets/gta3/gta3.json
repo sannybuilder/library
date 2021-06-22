@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624388613247,
-    "version": "0.0.38",
+    "last_update": 1624405804718,
+    "version": "0.0.39",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -23121,7 +23121,7 @@
           "member": "SetRotation",
           "name": "SET_OBJECT_ROTATION",
           "num_params": 4,
-          "short_desc": "Sets an objects X, Y and Z rotation"
+          "short_desc": "Sets the object rotation along X, Y and Z axis"
         },
         {
           "output": [
@@ -23194,7 +23194,7 @@
           "member": "IsTargettingAnyChar",
           "name": "IS_PLAYER_TARGETTING_ANY_CHAR",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns true if the player is aiming at any character"
         },
         {
           "input": [
@@ -23251,7 +23251,7 @@
           "id": "0459",
           "name": "TERMINATE_ALL_SCRIPTS_WITH_THIS_NAME",
           "num_params": 1,
-          "short_desc": "Ends the script with the specified name, freeing game memory"
+          "short_desc": "Ends any script which name (03A4) matches the given string"
         },
         {
           "input": [
@@ -23324,7 +23324,7 @@
           "member": "FailCurrentMission",
           "name": "FAIL_CURRENT_MISSION",
           "num_params": 0,
-          "short_desc": "Aborts the mission"
+          "short_desc": "Terminates the active mission by executing its mission cleanup routine"
         },
         {
           "input": [
@@ -23361,7 +23361,7 @@
           "member": "GetClosestObjectOfType",
           "name": "GET_CLOSEST_OBJECT_OF_TYPE",
           "num_params": 6,
-          "short_desc": "Returns the handle of an object with the specified model in the specified 2D area, or -1 otherwise",
+          "short_desc": "Returns the handle of an object with the specified model located in the 2D area, or -1 otherwise",
           "attrs": {
             "is_constructor": true
           }
@@ -23408,7 +23408,7 @@
           "member": "SetAllOccupantsLeave",
           "name": "SET_ALL_OCCUPANTS_OF_CAR_LEAVE_CAR",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets the driver and all passengers' objective to leave the vehicle"
         },
         {
           "input": [
@@ -23567,7 +23567,7 @@
           "member": "GetDebugPointAt",
           "name": "GET_DEBUG_CAMERA_POINT_AT",
           "num_params": 3,
-          "short_desc": "Stores the X, Y and Z coordinates the debug camera is pointing to"
+          "short_desc": "Stores the location the debug camera is pointing to"
         },
         {
           "input": [
@@ -23576,7 +23576,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "vehicle",
               "type": "Car"
             },
             {
@@ -23609,7 +23609,7 @@
           "member": "AttachToCar",
           "name": "ATTACH_CHAR_TO_CAR",
           "num_params": 8,
-          "short_desc": "Puts character into a turret on a car, allowing them to shoot"
+          "short_desc": "Puts character into a turret on the vehicle, allowing them to shoot"
         },
         {
           "input": [
@@ -23623,7 +23623,7 @@
           "member": "DetachFromCar",
           "name": "DETACH_CHAR_FROM_CAR",
           "num_params": 1,
-          "short_desc": "Removes the character from turret mode"
+          "short_desc": "Removes the character from turret mode (0464)"
         },
         {
           "input": [
@@ -23641,7 +23641,7 @@
           "member": "SetChangeLane",
           "name": "SET_CAR_CHANGE_LANE",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Set's whether the AI driver will occupy the fast (left) lane on a two-way road"
         },
         {
           "input": [
@@ -23669,7 +23669,7 @@
           "member": "ClearLastWeaponDamage",
           "name": "CLEAR_CAR_LAST_WEAPON_DAMAGE",
           "num_params": 1,
-          "short_desc": "Clears a vehicle's last weapon damage"
+          "short_desc": "Clears the vehicle's last weapon damage"
         },
         {
           "input": [
@@ -23702,7 +23702,7 @@
           "member": "GetRandomCopInArea",
           "name": "GET_RANDOM_COP_IN_AREA",
           "num_params": 5,
-          "short_desc": "Returns the handle of a random law enforcement pedestrian in the specified 2D area, or -1 otherwise",
+          "short_desc": "Returns the handle of a random law enforcement pedestrian in the 2D area, or -1 otherwise",
           "attrs": {
             "is_constructor": true
           }
@@ -23711,7 +23711,7 @@
           "input": [
             {
               "name": "zone",
-              "type": "string"
+              "type": "zone_key"
             }
           ],
           "output": [
@@ -23729,7 +23729,7 @@
           "member": "GetRandomCop",
           "name": "GET_RANDOM_COP_IN_ZONE",
           "num_params": 2,
-          "short_desc": "Gets a random law enforcement ped in the specified zone"
+          "short_desc": "Returns the handle of a random law enforcement ped in the map zone"
         },
         {
           "input": [
@@ -23738,7 +23738,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "vehicle",
               "type": "Car"
             }
           ],
@@ -23768,7 +23768,7 @@
           "member": "GetDriver",
           "name": "GET_DRIVER_OF_CAR",
           "num_params": 2,
-          "short_desc": "Returns the car's driver"
+          "short_desc": "Returns the car's driver handle"
         },
         {
           "input": [
@@ -23789,7 +23789,7 @@
           "member": "GetNumberOfFollowers",
           "name": "GET_NUMBER_OF_FOLLOWERS",
           "num_params": 2,
-          "short_desc": "Returns the number of members which are in a group of the character"
+          "short_desc": "Returns the number of members which are in a group of the character (01DE)"
         },
         {
           "input": [
@@ -23837,7 +23837,7 @@
           ],
           "output": [
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType",
               "source": "var_any"
             }
@@ -23847,7 +23847,7 @@
           "member": "GetCurrentWeapon",
           "name": "GET_CURRENT_PLAYER_WEAPON",
           "num_params": 2,
-          "short_desc": "Stores the weapon that the player is currently holding"
+          "short_desc": "Returns the type of weapon that the player is currently holding"
         },
         {
           "input": [
@@ -23858,7 +23858,7 @@
           ],
           "output": [
             {
-              "name": "weaponId",
+              "name": "weaponType",
               "type": "WeaponType",
               "source": "var_any"
             }
@@ -23868,7 +23868,7 @@
           "member": "GetCurrentWeapon",
           "name": "GET_CURRENT_CHAR_WEAPON",
           "num_params": 2,
-          "short_desc": "Returns the ID of the character's current weapon"
+          "short_desc": "Returns the type of weapon that the character is currently holding"
         },
         {
           "input": [
@@ -23877,7 +23877,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "object",
               "type": "Object"
             },
             {
@@ -23910,7 +23910,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "object",
               "type": "Object"
             },
             {
@@ -23943,7 +23943,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "object",
               "type": "Object"
             },
             {
@@ -23967,7 +23967,7 @@
           "member": "LocateInCarObject2D",
           "name": "LOCATE_CHAR_IN_CAR_OBJECT_2D",
           "num_params": 5,
-          "short_desc": ""
+          "short_desc": "Returns true if character is near the object in car"
         },
         {
           "input": [
@@ -23976,7 +23976,7 @@
               "type": "Char"
             },
             {
-              "name": "handle",
+              "name": "object",
               "type": "Object"
             },
             {
@@ -24004,7 +24004,7 @@
           "member": "LocateAnyMeansObject3D",
           "name": "LOCATE_CHAR_ANY_MEANS_OBJECT_3D",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Returns true if the character is near the object"
         },
         {
           "input": [
@@ -24041,7 +24041,7 @@
           "member": "LocateOnFootObject3D",
           "name": "LOCATE_CHAR_ON_FOOT_OBJECT_3D",
           "num_params": 6,
-          "short_desc": ""
+          "short_desc": "Returns true if the character is near the object on foot"
         },
         {
           "input": [
@@ -24078,7 +24078,7 @@
           "member": "LocateInCarObject3D",
           "name": "LOCATE_CHAR_IN_CAR_OBJECT_3D",
           "num_params": 6,
-          "short_desc": "Returns true if the character is in radius of the specified object"
+          "short_desc": "Returns true if the character is near the object in car"
         },
         {
           "input": [
@@ -24183,7 +24183,7 @@
           "member": "LocateSniperBullet2D",
           "name": "LOCATE_SNIPER_BULLET_2D",
           "num_params": 5,
-          "short_desc": "Checks if there is a sniper bullet flying in the specified 2D area"
+          "short_desc": "Returns true if a sniper bullet is flying in the specified 2D area"
         },
         {
           "input": [
@@ -24225,7 +24225,7 @@
           "member": "LocateSniperBullet3D",
           "name": "LOCATE_SNIPER_BULLET_3D",
           "num_params": 7,
-          "short_desc": "Checks if there is a sniper bullet flying within the specified cube"
+          "short_desc": "Returns true if a sniper bullet is flying in the specified 3D area"
         },
         {
           "input": [
@@ -24249,7 +24249,7 @@
           "member": "GetNumberOfSeatsInModel",
           "name": "GET_NUMBER_OF_SEATS_IN_MODEL",
           "num_params": 2,
-          "short_desc": "Stores the number of seats in the vehicle model"
+          "short_desc": "Returns the number of seats in the vehicle model"
         },
         {
           "input": [
@@ -24266,7 +24266,7 @@
           "member": "IsOnAnyBike",
           "name": "IS_PLAYER_ON_ANY_BIKE",
           "num_params": 1,
-          "short_desc": "Returns true if the player is driving a motorbike"
+          "short_desc": "Returns true if the player is driving a bike"
         },
         {
           "input": [
@@ -24283,7 +24283,7 @@
           "member": "IsLyingDown",
           "name": "IS_CHAR_LYING_DOWN",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Returns true if the character has fallen"
         },
         {
           "input": [
@@ -24321,7 +24321,7 @@
           "member": "SetEnterCarRangeMultiplier",
           "name": "SET_ENTER_CAR_RANGE_MULTIPLIER",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets a multiplier for the range of a character's ability to go and occupy a vehicle"
         },
         {
           "input": [
@@ -24338,7 +24338,7 @@
           "member": "SetThreatReactionRangeMultiplier",
           "name": "SET_THREAT_REACTION_RANGE_MULTIPLIER",
           "num_params": 1,
-          "short_desc": ""
+          "short_desc": "Sets a multiplier for the range of a character's ability to react on deadly events around"
         }
       ]
     }

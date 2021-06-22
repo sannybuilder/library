@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624338266310,
-    "version": "0.0.52",
+    "last_update": 1624379369077,
+    "version": "0.0.53",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -10865,7 +10865,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -10901,7 +10901,7 @@
             },
             {
               "name": "sprite",
-              "type": "int"
+              "type": "RadarSprite"
             }
           ],
           "output": [
@@ -15604,7 +15604,7 @@
           "member": "ClearThisPrint",
           "name": "CLEAR_THIS_PRINT",
           "num_params": 1,
-          "short_desc": "Clears the print from the screen"
+          "short_desc": "Removes the priority text from the screen"
         },
         {
           "input": [
@@ -15621,7 +15621,7 @@
           "member": "ClearThisBigPrint",
           "name": "CLEAR_THIS_BIG_PRINT",
           "num_params": 1,
-          "short_desc": "Clears the styled GXT from the screen"
+          "short_desc": "Removes the styled text from the screen"
         },
         {
           "input": [
@@ -16415,7 +16415,7 @@
           "member": "SetFreeHealthCare",
           "name": "SET_FREE_HEALTH_CARE",
           "num_params": 2,
-          "short_desc": "Makes the player receive free medical treatment once, meaning the player does not lose cash when they die"
+          "short_desc": "Sets whether the player loses the cash when gets wasted (works once)"
         },
         {
           "id": "0415",
@@ -16496,7 +16496,7 @@
           "id": "041A",
           "name": "GET_AMMO_IN_CHAR_WEAPON",
           "num_params": 3,
-          "short_desc": "Gets the amount of ammo in the specified characters weapon",
+          "short_desc": "Gets the amount of ammo in the specified weapon of the character",
           "class": "Char",
           "member": "GetAmmoInWeapon"
         },
@@ -16598,7 +16598,7 @@
           "member": "SetTraction",
           "name": "SET_CAR_TRACTION",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Overrides the default vehicle traction value of 1.0"
         },
         {
           "attrs": {
@@ -16615,26 +16615,27 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "meters",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "result",
+              "name": "feet",
               "type": "float",
               "source": "var_any"
             }
           ],
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           },
           "class": "Math",
           "id": "0425",
           "member": "ConvertMetresToFeet",
           "name": "CONVERT_METRES_TO_FEET",
           "num_params": 2,
-          "short_desc": "Converts the given floating-point number of metres to feet and stores the result in the variable"
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "id": "0426",
@@ -16668,7 +16669,7 @@
           "member": "SetAvoidLevelTransitions",
           "name": "SET_CAR_AVOID_LEVEL_TRANSITIONS",
           "num_params": 2,
-          "short_desc": "Causes the vehicle to prefer paths which travel along the same altitude"
+          "short_desc": "Sets whether the vehicle will avoid paths between levels (0426)"
         },
         {
           "id": "0429",
@@ -16743,26 +16744,27 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "meters",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "result",
+              "name": "feet",
               "type": "int",
               "source": "var_any"
             }
           ],
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           },
           "class": "Math",
           "id": "042D",
-          "member": "ConvertMetresToFeetInt",
+          "member": "ConvertMetresToFeet",
           "name": "CONVERT_METRES_TO_FEET_INT",
           "num_params": 2,
-          "short_desc": "Converts the given integer number of metres to an imperial value and stores the result in the variable"
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "input": [
@@ -16823,7 +16825,7 @@
               "type": "Car"
             },
             {
-              "name": "seatId",
+              "name": "seatIndex",
               "type": "int"
             }
           ],
@@ -16835,7 +16837,7 @@
           "member": "IsPassengerSeatFree",
           "name": "IS_CAR_PASSENGER_SEAT_FREE",
           "num_params": 2,
-          "short_desc": "Returns true if the specified passenger seat is empty"
+          "short_desc": "Returns true if the specified car seat is empty"
         },
         {
           "input": [
@@ -16844,7 +16846,7 @@
               "type": "Car"
             },
             {
-              "name": "seatId",
+              "name": "seatIndex",
               "type": "int"
             }
           ],
@@ -16858,7 +16860,7 @@
           "id": "0432",
           "name": "GET_CHAR_IN_CAR_PASSENGER_SEAT",
           "num_params": 3,
-          "short_desc": "Returns the character that is sitting in the specified car seat",
+          "short_desc": "Returns the handle of a character sitting in the specified car seat",
           "class": "Car",
           "member": "GetCharInPassengerSeat"
         },
@@ -17705,7 +17707,7 @@
           "member": "GiveModelToPlayer",
           "name": "GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER",
           "num_params": 6,
-          "short_desc": "Puts the player in control of a radio controlled vehicle"
+          "short_desc": "Puts the player in control of a remote-control vehicle"
         },
         {
           "id": "046F",

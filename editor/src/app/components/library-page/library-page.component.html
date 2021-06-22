@@ -117,6 +117,13 @@
         >
           {{ "ui.shared.edit" | translate }}
         </a>
+        <a
+          *ngIf="viewMode === ViewMode.ViewAllEnums && (canEdit$ | async)"
+          class="btn btn-outline-success"
+          [routerLink]="['/', game, 'enums', 'new']"
+        >
+          {{ "ui.layout.new" | translate }}
+        </a>
         <button
           *ngIf="
             viewMode === ViewMode.EditCommand || viewMode === ViewMode.EditEnum

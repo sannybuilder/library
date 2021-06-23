@@ -166,10 +166,14 @@
       >
       </scl-command-info>
       <scl-class-overview
-        *ngIf="viewMode === ViewMode.ViewClass"
+        *ngIf="
+          viewMode === ViewMode.ViewClass &&
+          (classToDisplay$ | async) as classToDisplay
+        "
         [game]="game"
-        [className]="classToDisplay$ | async"
+        [className]="classToDisplay"
         [classCommands]="classCommands$ | async"
+        [classOrigin]="getClassOrigin(classToDisplay) | async"
         (descriptionClick)="onDescriptionClick($event)"
       ></scl-class-overview>
       <scl-class-list

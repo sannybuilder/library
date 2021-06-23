@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { UiFacade } from '../../../state';
-import { Command, Game } from '../../../models';
+import { Command, DEFAULT_EXTENSION, Game } from '../../../models';
 
 @Component({
   selector: 'scl-class-overview',
@@ -15,24 +15,13 @@ import { Command, Game } from '../../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassOverviewComponent {
-  private _classCommands: Array<{ command: Command; extension: string }>;
-  isThisClassFromOtherExtension: boolean;
+  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
 
   @Input() game: Game;
   @Input() className: string;
-  @Input() set classCommands(
-    val: Array<{ command: Command; extension: string }>
-  ) {
-    this._classCommands = val;
-    this.isThisClassFromOtherExtension = val.every(
-      (c) => c.extension !== 'default'
-    );
-  }
-  get classCommands() {
-    return this._classCommands;
-  }
-
+  @Input() classOrigin: string;
+  @Input() classCommands: Array<{ command: Command; extension: string }>;
   @Output() view: EventEmitter<{
     command: Command;
     extension: string;

@@ -19,6 +19,7 @@ import {
   Attribute,
   Command,
   CommandAttributes,
+  DEFAULT_EXTENSION,
   Game,
   GameSupportInfo,
   Param,
@@ -231,7 +232,7 @@ export class CommandEditorComponent implements OnInit {
     let newName = trim(val);
     if (!newName) {
       console.warn('extension can not be empty, using "default"');
-      newName = 'default';
+      newName = DEFAULT_EXTENSION;
     }
     this.extensionChange.emit(newName);
     this.updateErrors();

@@ -14,7 +14,6 @@ import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 import {
   Command,
   DEFAULT_EXTENSION,
-  Entity,
   Enum,
   EnumRaw,
   Game,
@@ -51,10 +50,23 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
   displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
-  entities$: Observable<Entity[]> = this._extensions.extensionNames$.pipe(
-    switchMap((extensions) => this.getExtensionsEntities(extensions)),
-    map((entities) => orderBy(entities, 'name'))
-  );
+  entities$: Observable<Array<{ origin: string; name: string }>> =
+    this._extensions.extensionNames$.pipe(
+      switchMap((extensions) =>
+        this.getExtensionsEntities(extensions).pipe(
+          switchMap((entities) =>
+            zip(
+              ...entities.map((e) =>
+                this.getClassOrigin(e.name).pipe(
+                  map((origin) => ({ origin, name: e.name }))
+                )
+              )
+            )
+          )
+        )
+      ),
+      map((entities) => orderBy(entities, 'name'))
+    );
 
   command?: Command;
   oldCommand?: Command;
@@ -230,6 +242,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getGamesWhereEnumExists(enumName: string) {
     return this._enums.getGamesWhereEnumExists(enumName);
+  }
+
+  getClassOrigin(className: string) {
+    return this._extensions.getClassOrigin(className);
   }
 
   @HostListener('window:resize', [])

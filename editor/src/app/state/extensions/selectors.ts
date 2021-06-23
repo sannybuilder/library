@@ -1,5 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Command, Extension, Game, SupportInfo } from '../../models';
+import {
+  Command,
+  DEFAULT_EXTENSION,
+  Extension,
+  Game,
+  SupportInfo,
+} from '../../models';
 import { game } from '../game/selectors';
 import { ExtensionsState, GameState } from './reducer';
 
@@ -101,4 +107,11 @@ export const gameVersion = createSelector(
   extensionsState,
   (state: ExtensionsState, props: { game: Game }) =>
     state.games[props.game]?.version
+);
+
+export const classOrigin = createSelector(
+  extensions,
+  (extensions: Extension[] | undefined, props: { className: string }) =>
+    extensions?.find((e) => e.commands.some((c) => c.class === props.className))
+      ?.name ?? DEFAULT_EXTENSION
 );

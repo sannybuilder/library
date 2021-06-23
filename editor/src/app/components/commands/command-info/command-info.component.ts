@@ -8,6 +8,7 @@ import {
 import {
   Attribute,
   Command,
+  DEFAULT_EXTENSION,
   Game,
   Param,
   ParamType,
@@ -21,6 +22,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandInfoComponent {
+  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   private _command: Command;
   private _attrs: Attribute[];
   private _primitives: string[] = [];

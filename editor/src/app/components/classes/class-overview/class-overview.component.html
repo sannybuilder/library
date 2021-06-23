@@ -7,7 +7,7 @@
 </p>
 
 <pre *ngIf="classCommands" class="sample">
-class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension:classCommands[0].extension } }}</span>
+class {{ className }} <span *ngIf="classOrigin !== DEFAULT_EXTENSION" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension:classCommands[0].extension } }}</span>
 <ng-container *ngFor="let classCommand of classCommands; let isLast=last"><ng-container 
     *ngTemplateOutlet="memberTemplate; 
     context: { 
@@ -65,7 +65,7 @@ class {{ className }} <span *ngIf="isThisClassFromOtherExtension" class="comment
       ><span [innerHTML]="command | classParams | sanitize"></span
     ></ng-container> </code
   ><span
-    *ngIf="extension !== 'default' && !isThisClassFromOtherExtension"
+    *ngIf="extension !== DEFAULT_EXTENSION && classOrigin === DEFAULT_EXTENSION"
     class="comment"
   >
     //

@@ -15,7 +15,7 @@ import {
   loadExtensionsSuccess,
   updateGameCommands,
 } from './actions';
-import { sortBy, last } from 'lodash';
+import { sortBy, last, orderBy } from 'lodash';
 
 export interface GameState {
   extensions: Extension[];
@@ -44,7 +44,9 @@ export const extensionsReducer = createReducer(
     loadExtensionsSuccess,
     (state, { game, extensions, version, lastUpdate }) =>
       updateState(state, game, {
-        extensions,
+        extensions: orderBy(extensions, (e) =>
+          e.name === DEFAULT_EXTENSION ? -1 : 1
+        ),
         lastUpdate,
         version,
         entities: getEntities(extensions),

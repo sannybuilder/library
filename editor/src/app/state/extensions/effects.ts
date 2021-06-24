@@ -324,7 +324,7 @@ function shouldUpdateOtherGames(
 
 function bumpVersion(version?: string): string {
   if (!version) {
-    return '0.0.1';
+    return '0.1';
   }
   const parts = version.split('.');
   const last = parts.pop() ?? '0';

@@ -11,6 +11,7 @@ export class FooterComponent {
   displayLastUpdate$ = this._ui.displayLastUpdated$;
   hasChanges$ = this._changes.hasChanges$;
   isUpdating$ = this._changes.isUpdating$;
+  version$ = this._extensions.version$;
 
   constructor(
     private _changes: ChangesFacade,

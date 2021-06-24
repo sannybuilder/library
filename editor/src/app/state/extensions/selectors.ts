@@ -109,6 +109,11 @@ export const gameVersion = createSelector(
     state.games[props.game]?.version
 );
 
+export const version = createSelector(
+  state,
+  (state: GameState | undefined) => state?.version
+);
+
 export const classOrigin = createSelector(
   extensions,
   (extensions: Extension[] | undefined, props: { className: string }) =>

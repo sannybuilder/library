@@ -69,7 +69,7 @@ export class SnippetsEffects {
         // distinctUntilChanged(isEqual),
         tap(({ game, content, extension, opcode }) => {
           const fileName = `${game}/snippets/${extension}/${opcode}.txt`;
-          this._changes.registerSnippetChange(fileName, content);
+          this._changes.registerTextFileChange(fileName, content);
         })
       ),
     { dispatch: false }

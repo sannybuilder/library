@@ -25,7 +25,13 @@ import {
 import { ExtensionsService } from './service';
 import { ExtensionsFacade } from './facade';
 import { ChangesFacade } from '../changes/facade';
-import { Command, Game, GameLibrary, PrimitiveType } from '../../models';
+import {
+  Command,
+  Game,
+  GameLibrary,
+  GameVersion,
+  PrimitiveType,
+} from '../../models';
 import {
   commandParams,
   getSameCommands,
@@ -138,13 +144,15 @@ export class ExtensionsEffects {
         switchMap(({ game }) =>
           this._extensions.getGameExtensions(game).pipe(
             withLatestFrom(this._extensions.getGameVersion(game)),
-            tap(([extensions, version]) => {
+            tap(([extensions, oldVersion]) => {
+              const version = bumpVersion(oldVersion);
               this._changes.registerExtensionsChange({
+                version,
                 fileName: GameLibrary[game],
                 content: extensions,
                 url: 'https://library.sannybuilder.com/#/' + game,
-                version: bumpVersion(version),
               });
+              this._changes.registerTextFileChange(GameVersion[game], version);
             })
           )
         )

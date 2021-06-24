@@ -5,7 +5,7 @@ import {
   clearChanges,
   initializeGithub,
   registerExtensionsChange,
-  registerSnippetChange,
+  registerTextFileChange,
   registerEnumChange,
   submitChanges,
   registerFileContent,
@@ -38,8 +38,8 @@ export class ChangesFacade {
     );
   }
 
-  registerSnippetChange(fileName: string, content: string) {
-    this.store$.dispatch(registerSnippetChange({ fileName, content }));
+  registerTextFileChange(fileName: string, content: string) {
+    this.store$.dispatch(registerTextFileChange({ fileName, content }));
   }
 
   registerEnumChange(fileName: string, content: Enums) {

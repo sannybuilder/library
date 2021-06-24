@@ -11,7 +11,7 @@ export const registerExtensionsChange = createAction(
   }>()
 );
 
-export const registerSnippetChange = createAction(
+export const registerTextFileChange = createAction(
   '[changes] register snippet',
   props<{ fileName: string; content: string }>()
 );

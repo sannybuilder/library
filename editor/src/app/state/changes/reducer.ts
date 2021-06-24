@@ -14,7 +14,7 @@ import {
   registerFileContent,
   registerEnumChange,
   registerExtensionsChange,
-  registerSnippetChange,
+  registerTextFileChange,
   submitChanges,
   submitChangesFail,
   submitChangesSuccess,
@@ -62,7 +62,7 @@ export const changesReducer = createReducer(
       },
     };
   }),
-  on(registerSnippetChange, (state, { fileName, content }) => {
+  on(registerTextFileChange, (state, { fileName, content }) => {
     return {
       ...state,
       hasChanges: true,

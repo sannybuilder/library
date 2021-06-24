@@ -121,6 +121,12 @@ export const GameLibrary: Record<Game, string> = {
   [Game.SA]: 'sa/sa.json',
 };
 
+export const GameVersion: Record<Game, string> = {
+  [Game.GTA3]: 'gta3/version.txt',
+  [Game.VC]: 'vc/version.txt',
+  [Game.SA]: 'sa/version.txt',
+};
+
 export const GameSnippets: Record<Game, string> = {
   [Game.GTA3]: 'gta3/snippets.json',
   [Game.VC]: 'vc/snippets.json',

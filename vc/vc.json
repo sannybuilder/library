@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624688350157,
-    "version": "0.50",
+    "last_update": 1624733313012,
+    "version": "0.51",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -1386,14 +1386,6 @@
           },
           "id": "004B",
           "name": "IS_FLOAT_VAR_NOT_EQUAL_TO_FLOAT_LVAR",
-          "num_params": 0
-        },
-        {
-          "attrs": {
-            "is_unsupported": true
-          },
-          "id": "004C",
-          "name": "GOTO_IF_TRUE",
           "num_params": 0
         },
         {
@@ -15915,14 +15907,6 @@
           "attrs": {
             "is_unsupported": true
           },
-          "id": "0349",
-          "name": "SET_TEXT_FONT",
-          "num_params": 0
-        },
-        {
-          "attrs": {
-            "is_unsupported": true
-          },
           "id": "034A",
           "name": "INDUSTRIAL_PASSED",
           "num_params": 0
@@ -26181,6 +26165,22 @@
         {
           "input": [
             {
+              "name": "",
+              "type": "label"
+            }
+          ],
+          "id": "004C",
+          "name": "GOTO_IF_TRUE",
+          "num_params": 1,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Transfers the script execution to the label if the condition result is true"
+        },
+        {
+          "input": [
+            {
               "name": "textureType",
               "type": "ShadowTextureType"
             },
@@ -26226,6 +26226,41 @@
           "num_params": 10,
           "class": "Fx",
           "member": "DrawShadow",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "style",
+              "type": "int"
+            }
+          ],
+          "id": "0349",
+          "name": "SET_TEXT_FONT",
+          "num_params": 1,
+          "class": "Text",
+          "member": "SetFont",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Sets the text draw font"
+        },
+        {
+          "output": [
+            {
+              "name": "versionId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E5",
+          "name": "GET_GAME_VERSION",
+          "num_params": 1,
+          "class": "Game",
+          "member": "GetVersion",
+          "short_desc": "Get the version id of the game",
           "attrs": {
             "is_static": true
           }

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1624736316072,
-    "version": "0.73",
+    "last_update": 1624758394778,
+    "version": "0.74",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -49911,12 +49911,12 @@
         {
           "input": [
             {
-              "name": "path",
+              "name": "fileName",
               "type": "string"
             }
           ],
           "id": "0B00",
-          "name": "SCRIPT_FS_DELETEFILE",
+          "name": "DELETE_FILE",
           "num_params": 1,
           "class": "Fs",
           "member": "DeleteFile",
@@ -49924,7 +49924,7 @@
             "is_static": true,
             "is_condition": true
           },
-          "short_desc": "closes a previously opened file. If the close is successful, the result of the logical operation is set to TRUE, otherwise it is FALSE."
+          "short_desc": "Deletes a file at the given path and returns true if the operation is successful"
         },
         {
           "input": [
@@ -49933,12 +49933,12 @@
               "type": "string"
             },
             {
-              "name": "result",
+              "name": "recursive",
               "type": "bool"
             }
           ],
           "id": "0B01",
-          "name": "SCRIPT_FS_DELETEDIRECTORY",
+          "name": "DELETE_DIRECTORY",
           "num_params": 2,
           "class": "Fs",
           "attrs": {
@@ -49946,23 +49946,23 @@
             "is_condition": true
           },
           "member": "DeleteDirectory",
-          "short_desc": "Delete the directory with everything inside it. Returns TRUE if successful. Otherwise FALSE"
+          "short_desc": "Deletes a directory at the given path and returns true if the operation is successful"
         },
         {
           "input": [
             {
-              "name": "path",
+              "name": "fileName",
               "type": "string"
             },
             {
-              "name": "toPath",
+              "name": "newFileName",
               "type": "string"
             }
           ],
           "id": "0B02",
-          "name": "SCRIPT_FS_MOVEFILE",
+          "name": "MOVE_FILE",
           "num_params": 2,
-          "short_desc": "Move a file from one place to another. Returns TRUE if there were no problems. Otherwise FALSE",
+          "short_desc": "Moves an existing file and returns true if the operation is successful",
           "class": "Fs",
           "member": "MoveFile",
           "attrs": {
@@ -49977,12 +49977,12 @@
               "type": "string"
             },
             {
-              "name": "toPath",
+              "name": "newPath",
               "type": "string"
             }
           ],
           "id": "0B03",
-          "name": "SCRIPT_FS_MOVEDIR",
+          "name": "MOVE_DIRECTORY",
           "num_params": 2,
           "class": "Fs",
           "member": "MoveDirectory",
@@ -49990,25 +49990,25 @@
             "is_static": true,
             "is_condition": true
           },
-          "short_desc": "It does the same as OP 02BF but applied to directories(folders). Returns TRUE if successful. Otherwise FALSE"
+          "short_desc": "Moves an existing directory and returns true if the operation is successful"
         },
         {
           "input": [
             {
-              "name": "path",
+              "name": "fileName",
               "type": "string"
             },
             {
-              "name": "toPath",
+              "name": "newFileName",
               "type": "string"
             }
           ],
           "id": "0B04",
-          "name": "SCRIPT_FS_COPYFILE",
+          "name": "COPY_FILE",
           "num_params": 2,
           "class": "Fs",
           "member": "CopyFile",
-          "short_desc": "Copy the file from one directory and paste it into another. Returns TRUE if successful, otherwise FALSE",
+          "short_desc": "Copies an existing file to a new file and returns true if the operation is successful",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -50021,14 +50021,14 @@
               "type": "string"
             },
             {
-              "name": "toPath",
+              "name": "newPath",
               "type": "string"
             }
           ],
           "id": "0B05",
-          "name": "SCRIPT_FS_COPYDIR",
+          "name": "COPY_DIRECTORY",
           "num_params": 2,
-          "short_desc": "It does the same as OP 0B04 but applied to directories(folders). Returns TRUE if successful. Otherwise FALSE",
+          "short_desc": "Copies an existing directory to a new directory and returns true if the operation is successful",
           "class": "Fs",
           "member": "CopyDirectory",
           "attrs": {

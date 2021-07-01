@@ -35,6 +35,7 @@ Heli
 Hid
 Hud
 IniFile
+KillFrenzy
 Math
 Memory
 Menu
@@ -46,7 +47,6 @@ Path
 Pickup
 Plane
 Player
-Rampage
 Rc
 Restart
 ScriptFire
@@ -1049,6 +1049,13 @@ WriteInt,0AF1,0,0,("value%i" "path%s" "section%s" "key%s")
 WriteString,0AF5,0,0,("value%s" "path%s" "section%s" "key%s")
 $END
 
+$KillFrenzy
+$BEGIN
+Fail,09C2,0,0,()
+ReadStatus,01FA,0,0,("status%i")
+Start,01F9,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
+$END
+
 $Math
 $BEGIN
 Abs,0097,0,0,("number%f")
@@ -1369,13 +1376,6 @@ StoreScore,010B,0,0,("self: Player" "money%i")
 StoreWantedLevel,01C0,0,0,("self: Player" "wantedLevel%i")
 TakeOffGoggles,09EB,0,0,("self: Player" "animate%b")
 UseDetonator,09D9,0,0,()
-$END
-
-$Rampage
-$BEGIN
-Fail,09C2,0,0,()
-ReadKillFrenzyStatus,01FA,0,0,("status%i")
-StartKillFrenzy,01F9,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
 $END
 
 $Rc

@@ -20,6 +20,7 @@ Gang
 Garage
 Heli
 Hud
+KillFrenzy
 Math
 Object
 ObjectPath
@@ -29,7 +30,6 @@ Phone
 Pickup
 Plane
 Player
-Rampage
 Rc
 Restart
 ScriptFire
@@ -570,6 +570,12 @@ SwitchWidescreen,02A3,0,0,("state%b")
 WantedStarsAreFlashing,057B,1,0,()
 $END
 
+$KillFrenzy
+$BEGIN
+ReadStatus,01FA,0,0,("status%i")
+Start,01F9,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
+$END
+
 $Math
 $BEGIN
 Abs,0097,0,0,("number%f")
@@ -814,12 +820,6 @@ StoreWantedLevel,01C0,0,0,("self: Player" "wantedLevel%i")
 TurnToFaceChar,0210,0,0,("self: Player" "char: Char")
 WarpFromCarToCoord,012A,0,0,("self: Player" "x%f" "y%f" "z%f")
 WarpIntoCar,0369,0,0,("self: Player" "vehicle: Car")
-$END
-
-$Rampage
-$BEGIN
-ReadKillFrenzyStatus,01FA,0,0,("status%i")
-StartKillFrenzy,01F9,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
 $END
 
 $Rc

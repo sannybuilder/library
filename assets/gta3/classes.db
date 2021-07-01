@@ -25,6 +25,7 @@ Game
 Gang
 Garage
 Hud
+KillFrenzy
 Math
 Object
 Pacman
@@ -34,7 +35,6 @@ Path
 Phone
 Pickup
 Player
-Rampage
 Rc
 Restart
 ScriptFire
@@ -596,6 +596,13 @@ SetSpritesDrawBeforeFade,03E3,0,0,("state%b")
 SwitchWidescreen,02A3,0,0,("state%b")
 $END
 
+$KillFrenzy
+$BEGIN
+ReadStatus,01FA,0,0,("status%i")
+Start,01F9,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
+StartHeadshot,0367,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
+$END
+
 $Math
 $BEGIN
 Abs,0097,0,0,("number%f")
@@ -843,13 +850,6 @@ TurnToFaceChar,0210,0,0,("self: Player" "char: Char")
 TurnToFaceCoord,01BF,0,0,("self: Player" "x%f" "y%f" "z%f")
 WarpFromCarToCoord,012A,0,0,("self: Player" "x%f" "y%f" "z%f")
 WarpIntoCar,0369,0,0,("self: Player" "vehicle: Car")
-$END
-
-$Rampage
-$BEGIN
-ReadKillFrenzyStatus,01FA,0,0,("status%i")
-StartHeadshot,0367,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
-StartKillFrenzy,01F9,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_ide" "targetModel2: model_ide" "targetModel3: model_ide" "targetModel4: model_ide" "betaSoundsAndMessages%b")
 $END
 
 $Rc

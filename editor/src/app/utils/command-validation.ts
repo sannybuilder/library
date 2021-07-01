@@ -92,3 +92,7 @@ export function doesCommandHaveMissingSelfParamInMethod(command: Command) {
     !commandParams(command).some((p) => p.name === SELF)
   );
 }
+
+export function doesCommandDescriptionHaveTrailingPeriod(command: Command) {
+  return !!command.short_desc?.endsWith('.');
+}

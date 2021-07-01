@@ -45,6 +45,7 @@ import {
   formatParamName,
   formatCommandName,
   formatOpcode,
+  doesCommandDescriptionHaveTrailingPeriod,
 } from '../../../utils';
 
 type ErrorType =
@@ -55,7 +56,8 @@ type ErrorType =
   | 'invalidAttributeCombo'
   | 'noConstructorWithoutOutputParams'
   | 'noSelfInStaticMethod'
-  | 'missingSelfParamInMethod';
+  | 'missingSelfParamInMethod'
+  | 'trailingPeriodInDescription';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -90,6 +92,7 @@ export class CommandEditorComponent implements OnInit {
     noConstructorWithoutOutputParams: false,
     noSelfInStaticMethod: false,
     missingSelfParamInMethod: false,
+    trailingPeriodInDescription: false,
   };
   errorMessages: string[] = [];
 
@@ -182,6 +185,7 @@ export class CommandEditorComponent implements OnInit {
     emptyOpcode: this.updateEmptyOpcodeError,
     noSelfInStaticMethod: this.noSelfInStaticMethod,
     missingSelfParamInMethod: this.missingSelfParamInMethod,
+    trailingPeriodInDescription: this.trailingPeriodInDescriptionError,
   };
 
   isDirty: boolean;
@@ -560,5 +564,10 @@ export class CommandEditorComponent implements OnInit {
   private missingSelfParamInMethod() {
     this.errors.missingSelfParamInMethod =
       doesCommandHaveMissingSelfParamInMethod(this.command);
+  }
+
+  private trailingPeriodInDescriptionError() {
+    this.errors.trailingPeriodInDescription =
+      doesCommandDescriptionHaveTrailingPeriod(this.command);
   }
 }

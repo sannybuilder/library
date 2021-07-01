@@ -13,6 +13,7 @@ import {
   doesCommandHaveMissingSelfParamInMethod,
   doesCommandHaveSelfInStaticMethod,
   doesConstructorCommandHaveNoOutputParams,
+  doesCommandDescriptionHaveTrailingPeriod,
 } from './src/app/utils';
 import { Command, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -34,6 +35,7 @@ const errorHandlers = {
   emptyOpcode: doesCommandHaveEmptyId,
   noSelfInStaticMethod: doesCommandHaveSelfInStaticMethod,
   missingSelfParamInMethod: doesCommandHaveMissingSelfParamInMethod,
+  trailingPeriodInDescription: doesCommandDescriptionHaveTrailingPeriod,
 };
 
 forEach(content.extensions, (extension) => {

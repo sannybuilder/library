@@ -46,6 +46,7 @@ import {
   formatCommandName,
   formatOpcode,
   doesCommandDescriptionHaveTrailingPeriod,
+  doesCommandDescriptionNotStartWith3rdPersonVerb,
 } from '../../../utils';
 
 type ErrorType =
@@ -57,7 +58,8 @@ type ErrorType =
   | 'noConstructorWithoutOutputParams'
   | 'noSelfInStaticMethod'
   | 'missingSelfParamInMethod'
-  | 'trailingPeriodInDescription';
+  | 'trailingPeriodInDescription'
+  | 'no3rdPersonVerb';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -93,6 +95,7 @@ export class CommandEditorComponent implements OnInit {
     noSelfInStaticMethod: false,
     missingSelfParamInMethod: false,
     trailingPeriodInDescription: false,
+    no3rdPersonVerb: false,
   };
   errorMessages: string[] = [];
 
@@ -186,6 +189,7 @@ export class CommandEditorComponent implements OnInit {
     noSelfInStaticMethod: this.noSelfInStaticMethod,
     missingSelfParamInMethod: this.missingSelfParamInMethod,
     trailingPeriodInDescription: this.trailingPeriodInDescriptionError,
+    no3rdPersonVerb: this.no3rdPersonVerbError,
   };
 
   isDirty: boolean;
@@ -569,5 +573,10 @@ export class CommandEditorComponent implements OnInit {
   private trailingPeriodInDescriptionError() {
     this.errors.trailingPeriodInDescription =
       doesCommandDescriptionHaveTrailingPeriod(this.command);
+  }
+
+  private no3rdPersonVerbError() {
+    this.errors.no3rdPersonVerb =
+      doesCommandDescriptionNotStartWith3rdPersonVerb(this.command);
   }
 }

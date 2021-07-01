@@ -96,3 +96,11 @@ export function doesCommandHaveMissingSelfParamInMethod(command: Command) {
 export function doesCommandDescriptionHaveTrailingPeriod(command: Command) {
   return !!command.short_desc?.endsWith('.');
 }
+
+export function doesCommandDescriptionNotStartWith3rdPersonVerb(
+  command: Command
+) {
+  return (
+    !!command.short_desc && !command.short_desc?.split(' ')[0]?.endsWith('s')
+  );
+}

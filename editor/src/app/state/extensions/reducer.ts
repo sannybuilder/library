@@ -251,11 +251,6 @@ function getSupportLevel(
     return SupportLevel.DoesNotExist;
   }
 
-  // same ids, but different names (e.g. 03E2)
-  if (command.name !== otherCommand.name) {
-    return SupportLevel.SupportedDiffParams;
-  }
-
   const attrs = command.attrs || {};
   const otherAttrs = otherCommand.attrs || {};
 
@@ -266,6 +261,12 @@ function getSupportLevel(
   if (is_nop) {
     return SupportLevel.Nop;
   }
+
+  // same ids, but different names (e.g. 03E2)
+  if (command.name !== otherCommand.name) {
+    return SupportLevel.SupportedDiffParams;
+  }
+
   if (
     otherCommand.num_params !== command.num_params &&
     !otherAttrs.is_unsupported

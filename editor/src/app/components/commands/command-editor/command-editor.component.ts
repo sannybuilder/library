@@ -284,9 +284,6 @@ export class CommandEditorComponent implements OnInit {
       case 'o':
         param.type = PrimitiveType.model_any;
         break;
-      case 'm':
-        param.type = PrimitiveType.model_ide;
-        break;
       case 'g':
         param.type = PrimitiveType.gxt_key;
         break;

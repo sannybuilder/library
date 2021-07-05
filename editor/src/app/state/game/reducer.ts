@@ -30,7 +30,9 @@ function primitiveTypes(game: Game): PrimitiveType[] {
     PrimitiveType.label,
     PrimitiveType.string,
     PrimitiveType.model_any,
-    PrimitiveType.model_ide,
+    PrimitiveType.model_char,
+    PrimitiveType.model_object,
+    PrimitiveType.model_vehicle,
     PrimitiveType.gxt_key,
     PrimitiveType.zone_key,
   ];

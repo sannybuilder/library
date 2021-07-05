@@ -26,7 +26,9 @@ export enum PrimitiveType {
   gxt_key = 'gxt_key',
   zone_key = 'zone_key',
   model_any = 'model_any',
-  model_ide = 'model_ide',
+  model_char = 'model_char',
+  model_object = 'model_object',
+  model_vehicle = 'model_vehicle',
   int_script_id = 'script_id',
 }
 

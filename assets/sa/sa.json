@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1625516166625,
-    "version": "0.91",
+    "last_update": 1625521912043,
+    "version": "0.92",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -10667,7 +10667,7 @@
             },
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "output": [
@@ -20445,7 +20445,7 @@
             },
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_char"
             },
             {
               "name": "x",
@@ -25336,8 +25336,8 @@
               "type": "PedType"
             },
             {
-              "name": "model",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_char"
             },
             {
               "name": "taskId",
@@ -27021,8 +27021,8 @@
         {
           "input": [
             {
-              "name": "vehicleModel",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_vehicle"
             },
             {
               "name": "plateText",
@@ -29557,21 +29557,21 @@
               "type": "Car"
             },
             {
-              "name": "nth",
-              "type": "int"
+              "name": "slotId",
+              "type": "ModSlot"
             }
           ],
           "output": [
             {
               "name": "modelId",
-              "type": "model_ide",
+              "type": "model_object",
               "source": "var_any"
             }
           ],
           "id": "06E5",
           "name": "GET_AVAILABLE_VEHICLE_MOD",
           "num_params": 3,
-          "short_desc": "Gets the nth upgrade model index of the specified vehicle",
+          "short_desc": "Returns a model id available for the vehicle's mod slot, or -1 otherwise",
           "class": "Car",
           "member": "GetAvailableMod"
         },
@@ -29579,20 +29579,20 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_object"
             }
           ],
           "output": [
             {
-              "name": "type",
-              "type": "int",
+              "name": "slotId",
+              "type": "ModSlot",
               "source": "var_any"
             }
           ],
           "id": "06E6",
           "name": "GET_VEHICLE_MOD_TYPE",
           "num_params": 2,
-          "short_desc": "Gets the upgrade slot the upgrade model is for",
+          "short_desc": "Returns a slot the upgrade model is for",
           "class": "Streaming",
           "member": "GetVehicleModType",
           "attrs": {
@@ -29607,12 +29607,12 @@
             },
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_object"
             }
           ],
           "output": [
             {
-              "name": "mod",
+              "name": "handle",
               "type": "int",
               "source": "var_any"
             }
@@ -29620,7 +29620,7 @@
           "id": "06E7",
           "name": "ADD_VEHICLE_MOD",
           "num_params": 3,
-          "short_desc": "Adds an upgrade to the car",
+          "short_desc": "Adds a new mod with the model to the vehicle",
           "class": "Car",
           "member": "AddMod"
         },
@@ -29631,14 +29631,14 @@
               "type": "Car"
             },
             {
-              "name": "mod",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_object"
             }
           ],
           "id": "06E8",
           "name": "REMOVE_VEHICLE_MOD",
           "num_params": 2,
-          "short_desc": "Destroys the specified component on a car",
+          "short_desc": "Removes the vehicle's mod with the specified model",
           "class": "Car",
           "member": "RemoveMod"
         },
@@ -29646,7 +29646,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_object"
             }
           ],
           "id": "06E9",
@@ -29663,7 +29663,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_object"
             }
           ],
           "id": "06EA",
@@ -29681,7 +29681,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_object"
             }
           ],
           "id": "06EB",
@@ -30564,7 +30564,7 @@
             },
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_object"
             },
             {
               "name": "smashed",
@@ -31095,7 +31095,7 @@
           "input": [
             {
               "name": "model",
-              "type": "model_ide"
+              "type": "model_vehicle"
             }
           ],
           "id": "0732",
@@ -31111,8 +31111,8 @@
         {
           "input": [
             {
-              "name": "vehicleModelId",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_vehicle"
             }
           ],
           "id": "0733",
@@ -31279,7 +31279,7 @@
             },
             {
               "name": "model",
-              "type": "model_any"
+              "type": "model_vehicle"
             }
           ],
           "output": [
@@ -32280,8 +32280,8 @@
         {
           "input": [
             {
-              "name": "vehicleModelId",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_vehicle"
             },
             {
               "name": "townId",
@@ -32564,7 +32564,7 @@
           "output": [
             {
               "name": "modelId",
-              "type": "model_ide",
+              "type": "model_object",
               "source": "var_any"
             }
           ],
@@ -34215,7 +34215,7 @@
           "input": [
             {
               "name": "modeId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "id": "07DE",
@@ -34327,7 +34327,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "output": [
@@ -34598,7 +34598,7 @@
             },
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_object"
             }
           ],
           "id": "07F0",
@@ -35588,7 +35588,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "id": "081E",
@@ -35606,7 +35606,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "id": "081F",
@@ -35624,7 +35624,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "id": "0820",
@@ -36624,7 +36624,7 @@
           "input": [
             {
               "name": "model",
-              "type": "model_ide"
+              "type": "model_vehicle"
             },
             {
               "name": "x",
@@ -37967,8 +37967,8 @@
               "type": "float"
             },
             {
-              "name": "model",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_object"
             },
             {
               "name": "fromX",
@@ -40380,8 +40380,8 @@
               "type": "float"
             },
             {
-              "name": "objectModelId",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_object"
             },
             {
               "name": "attractorName",
@@ -40402,7 +40402,7 @@
           "class": "World",
           "member": "GetUserOfClosestMapAttractor",
           "attrs": {
-            "is_static": true
+            "is_constructor": true
           }
         },
         {
@@ -40672,8 +40672,8 @@
               "type": "script_id"
             },
             {
-              "name": "pedModelId",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_char"
             },
             {
               "name": "priority",
@@ -40683,7 +40683,7 @@
           "id": "0928",
           "name": "ALLOCATE_STREAMED_SCRIPT_TO_RANDOM_PED",
           "num_params": 3,
-          "short_desc": "",
+          "short_desc": "Makes the game start an ambient script when the player is nearby a character of the specified model",
           "class": "StreamedScript",
           "member": "AllocateToRandomPed",
           "attrs": {
@@ -40697,8 +40697,8 @@
               "type": "script_id"
             },
             {
-              "name": "objectModelId",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_object"
             },
             {
               "name": "priority",
@@ -40716,7 +40716,7 @@
           "id": "0929",
           "name": "ALLOCATE_STREAMED_SCRIPT_TO_OBJECT",
           "num_params": 5,
-          "short_desc": "Tells the engine to start a script when the player is within the range of the specified model",
+          "short_desc": "Makes the game start an ambient script when the player is nearby an object of the specified model",
           "class": "StreamedScript",
           "member": "AllocateToObject",
           "attrs": {
@@ -42072,7 +42072,7 @@
           "output": [
             {
               "name": "modelId",
-              "type": "model_ide",
+              "type": "model_object",
               "source": "var_any"
             }
           ],
@@ -42506,15 +42506,15 @@
               "type": "float"
             },
             {
-              "name": "objectModelId",
-              "type": "model_any"
+              "name": "modelId",
+              "type": "model_object"
             },
             {
               "name": "solid",
               "type": "bool"
             },
             {
-              "name": "handle",
+              "name": "target",
               "type": "Char"
             }
           ],
@@ -43345,7 +43345,7 @@
           "output": [
             {
               "name": "modelId",
-              "type": "model_ide",
+              "type": "model_vehicle",
               "source": "var_any"
             },
             {
@@ -43634,13 +43634,13 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_vehicle"
             }
           ],
           "id": "09BF",
           "name": "SET_FORCE_RANDOM_CAR_MODEL",
           "num_params": 1,
-          "short_desc": "Forces all cars spawned to have the specified model",
+          "short_desc": "Forces all cars spawned to be of the specified model",
           "class": "Game",
           "member": "SetForceRandomCarModel",
           "attrs": {
@@ -43912,13 +43912,13 @@
             },
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "id": "09CC",
           "name": "DOES_OBJECT_HAVE_THIS_MODEL",
           "num_params": 2,
-          "short_desc": "Returns true if the objects model is the model specified",
+          "short_desc": "Returns true if the object's model is the model specified",
           "attrs": {
             "is_condition": true
           },
@@ -44595,8 +44595,8 @@
         {
           "input": [
             {
-              "name": "vehicleModelId",
-              "type": "model_ide"
+              "name": "modelId",
+              "type": "model_vehicle"
             },
             {
               "name": "distance",
@@ -45954,13 +45954,13 @@
             },
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_any"
             }
           ],
           "id": "0A3A",
           "name": "IS_LAST_BUILDING_MODEL_SHOT_BY_PLAYER",
           "num_params": 2,
-          "short_desc": "Returns true if the player had just shot the building model specified",
+          "short_desc": "Returns true if the player's last shot model is the model specified",
           "attrs": {
             "is_condition": true
           },
@@ -49414,7 +49414,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_vehicle"
             }
           ],
           "output": [
@@ -49456,13 +49456,13 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_ide"
+              "type": "model_vehicle"
             }
           ],
           "id": "0ADD",
           "name": "SPAWN_VEHICLE_BY_CHEATING",
           "num_params": 1,
-          "short_desc": "",
+          "short_desc": "Creates a vehicle with the model (no pre-loading needed) in front of the player",
           "class": "World",
           "member": "SpawnVehicleByCheating",
           "attrs": {

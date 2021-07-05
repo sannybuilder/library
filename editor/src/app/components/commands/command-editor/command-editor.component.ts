@@ -282,6 +282,7 @@ export class CommandEditorComponent implements OnInit {
         param.type = PrimitiveType.label;
         break;
       case 'o':
+      case 'm':
         param.type = PrimitiveType.model_any;
         break;
       case 'g':

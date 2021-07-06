@@ -49,11 +49,12 @@
       <ng-container *ngIf="command.attrs?.is_constructor">
         <code>
           <span [innerHTML]="command | outputParams | sanitize"></span> =
-          <a [routerLink]="['/', game, 'classes', command.class]">{{
-            command.class
-          }}</a
-          >.{{ command.member
-          }}<span [innerHTML]="command | inputParams | sanitize"></span
+          <a
+            class="identifier"
+            [routerLink]="['/', game, 'classes', command.class]"
+            >{{ command.class }}</a
+          >.<span class="identifier">{{ command.member }}</span
+          ><span [innerHTML]="command | inputParams | sanitize"></span
         ></code>
       </ng-container>
 

@@ -10,13 +10,13 @@
 <h5>{{ "ui.enumOverview.title" | translate }}</h5>
 
 <pre *ngIf="enumToView?.fields" class="sample">
-enum {{ enumToView.name }} 
+enum <span class="identifier">{{ enumToView.name }}</span> 
 <ng-container *ngFor="let field of enumToView.fields"><ng-container *ngTemplateOutlet="fieldTemplate; context: { field: field }"></ng-container></ng-container>end
 </pre>
 
 <ng-template #fieldTemplate let-field="field">
-  &nbsp; {{ field[0]
-  }}{{
+  &nbsp; <span class="identifier">{{ field[0] }}</span
+  >{{
     field[1] !== null
       ? " = " + (isStringEnum ? '"' : "") + field[1] + (isStringEnum ? '"' : "")
       : ""

@@ -3,9 +3,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   HostListener,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
@@ -38,6 +40,8 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('sidebar') sidebar: ElementRef<HTMLDivElement>;
+
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   ViewMode = ViewMode;
   onDestroy$ = new Subject();
@@ -79,6 +83,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
   editorHasError = false;
+  sidebarCollapsed = false;
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -291,6 +296,15 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       return isEqual(this.enumToDisplayOrEdit, this.oldEnumToEdit);
     }
     return true;
+  }
+
+  toggleSidebar() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+
+    this.sidebar.nativeElement.classList.toggle(
+      'collapsed',
+      this.sidebarCollapsed
+    );
   }
 
   private _onSaveCommand() {

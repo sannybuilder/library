@@ -17,6 +17,18 @@
   .left-rail {
     order: 0;
     height: calc(100vh - 10rem);
+
+    &.collapsed {
+      max-width: 60px;
+      overflow: hidden;
+
+      scl-download-panel,
+      scl-filter-panel {
+        visibility: hidden;
+      }
+    }
+
+    transition: max-width 0.3s;
   }
   .right-rail {
     order: 2;
@@ -30,4 +42,20 @@ main {
 
 .breadcrumb {
   margin-bottom: 0;
+}
+
+.collapse-button {
+  position: fixed;
+  bottom: 36px;
+  left: 18px;
+}
+
+.sidebar-icon {
+  line-height: 1;
+}
+
+:host-context(.has-unsubmitted-changes) {
+  .collapse-button {
+    bottom: 86px;
+  }
 }

@@ -16,12 +16,14 @@ export class LinkifyPipe implements PipeTransform {
       `<a href="#/${game}/${extension}/$&">$&</a>`
     );
 
-    const paramNames = commandParams(command).map((p) => p.name);
-    return paramNames.reduce((m, v) => {
-      if (!v) {
+    return commandParams(command).reduce((m, p) => {
+      const { name } = p;
+      if (!name) {
         return m;
       }
-      const re = new RegExp(`\\b${v}\\b`, 'gi');
+      const needle = name === 'self' ? p.type : name;
+
+      const re = new RegExp(`\\b${needle}\\b`, 'i');
       return m.replace(re, `<span class="identifier">$&</span>`);
     }, links);
   }

@@ -15,13 +15,22 @@ export class LinkifyPipe implements PipeTransform {
       /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/g,
       `<a href="#/${game}/${extension}/$&">$&</a>`
     );
+    const carAliases = ['car', 'vehicle'];
+    const charAliases = ['ped', 'character', 'char'];
 
     return commandParams(command).reduce((m, p) => {
       const { name } = p;
       if (!name) {
         return m;
       }
-      const needle = name === 'self' ? p.type : name;
+      let needle = name === 'self' ? p.type : name;
+
+      if (carAliases.includes(needle.toLowerCase())) {
+        needle = carAliases.join('|');
+      }
+      if (charAliases.includes(needle.toLowerCase())) {
+        needle = charAliases.join('|');
+      }
 
       const re = new RegExp(`\\b${needle}\\b`, 'i');
       return m.replace(re, `<span class="identifier">$&</span>`);

@@ -17,6 +17,7 @@ import { Command, DEFAULT_EXTENSION, Game } from '../../../models';
 export class ClassOverviewComponent {
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
+  filterQuery = '';
 
   @Input() game: Game;
   @Input() className: string;

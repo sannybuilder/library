@@ -1,14 +1,36 @@
 <h5>{{ "ui.classOverview.title" | translate }}</h5>
 
-<p class="text-right">
-  <a href="#" (click)="toggleInlineDesc()">{{
-    "ui.classOverview.toggleInlineDescription" | translate
-  }}</a>
-</p>
+<div class="row mb-2">
+  <div class="col-12 col-md-6">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [placeholder]="'ui.classOverview.filterMethods' | translate"
+        [(ngModel)]="filterQuery"
+      />
+      <button
+        class="btn btn-outline-secondary mx-2 d-none d-sm-inline-block"
+        type="button"
+        (click)="filterQuery = ''"
+      >
+        {{ "ui.header.searchClear" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <p class="text-right">
+      <a href="#" (click)="toggleInlineDesc()">{{
+        "ui.classOverview.toggleInlineDescription" | translate
+      }}</a>
+    </p>
+  </div>
+</div>
 
 <pre *ngIf="classCommands" class="sample">
 class <span class="identifier">{{ className }}</span> <span *ngIf="classOrigin !== DEFAULT_EXTENSION" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension: classOrigin } }}</span>
-<ng-container *ngFor="let classCommand of classCommands; let isLast=last"><ng-container 
+<ng-container *ngFor="let classCommand of classCommands | filterMethods: filterQuery; let isLast=last"><ng-container 
     *ngTemplateOutlet="memberTemplate; 
     context: { 
       command: classCommand.command, 

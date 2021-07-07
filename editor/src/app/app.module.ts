@@ -31,6 +31,7 @@ import {
   LinkifyPipe,
   PropExtractPipe,
   OpcodeParamsPipe,
+  FilterMethodsPipe,
 } from './pipes';
 
 // extensions state
@@ -132,6 +133,7 @@ export function loadTranslations(
     LinkifyPipe,
     PropExtractPipe,
     OpcodeParamsPipe,
+    FilterMethodsPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

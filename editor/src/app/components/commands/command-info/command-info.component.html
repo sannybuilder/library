@@ -29,7 +29,9 @@
       "
       class="mb-3"
       (click)="interceptDescriptionClick($event)"
-      [innerHTML]="command.short_desc | linkify: game:extension | sanitize"
+      [innerHTML]="
+        command.short_desc | linkify: game:extension:command | sanitize
+      "
     ></div>
     <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
       {{ "ui.commandList.unsupported" | translate }}

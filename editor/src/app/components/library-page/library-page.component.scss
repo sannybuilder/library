@@ -16,7 +16,17 @@
 
   .left-rail {
     order: 0;
-    height: calc(100vh - 10rem);
+    height: calc(100vh - 14rem);
+
+    :host-context(.scrolled-down) & {
+      height: calc(100vh - 9rem);
+    }
+    :host-context(.has-unsubmitted-changes) & {
+      height: calc(100vh - 14rem - 50px);
+    }
+    :host-context(.has-unsubmitted-changes.scrolled-down) & {
+      height: calc(100vh - 9rem - 50px);
+    }
 
     &.collapsed {
       max-width: 60px;

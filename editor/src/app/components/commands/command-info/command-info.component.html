@@ -9,10 +9,10 @@
 </div>
 
 <div class="row mb-2">
-  <div class="col-12 col-md-1">
+  <div class="col-12 col-md-2">
     <h5>{{ command.id }}</h5>
   </div>
-  <div class="col-12 col-md-11 d-flex text-break">
+  <div class="col-12 col-md-10 d-flex text-break">
     <h5>{{ command.name }}</h5>
   </div>
 </div>
@@ -100,7 +100,13 @@
   </div>
 </div>
 
-<ng-container *ngIf="attrs.length || extension !== DEFAULT_EXTENSION">
+<ng-container
+  *ngIf="
+    attrs.length ||
+    extension !== DEFAULT_EXTENSION ||
+    command?.input[0]?.name === 'self'
+  "
+>
   <hr />
   <div class="row mb-2">
     <div class="col-12">
@@ -113,6 +119,18 @@
               | translate: { extension: extension }
           "
         ></li>
+        <li *ngIf="command?.input[0]?.name === 'self'">
+          <code class="d-inline"
+            ><span class="identifier">self</span>: {{ command.class }}</code
+          >
+          must be
+          <a
+            [routerLink]="['/', game]"
+            [queryParams]="{ q: 'constructor:' + command.class }"
+            >created</a
+          >
+          before using this command.
+        </li>
         <li *ngFor="let attr of attrs">
           {{ "ui.attributes." + attr | translate }}.
         </li>

@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Command, Game } from '../models';
 import { commandParams } from '../utils';
+import { words } from 'lodash';
 
 @Pipe({
   name: 'linkify',
@@ -15,22 +16,22 @@ export class LinkifyPipe implements PipeTransform {
       /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/g,
       `<a href="#/${game}/${extension}/$&">$&</a>`
     );
-    const carAliases = ['car', 'vehicle'];
-    const charAliases = ['ped', 'character', 'char'];
+    const aliases = [
+      ['car', 'vehicle'],
+      ['ped', 'character', 'char'],
+      ['number', 'num'],
+    ];
 
     return commandParams(command).reduce((m, p) => {
       const { name } = p;
-      if (!name) {
-        return m;
-      }
-      let needle = name === 'self' ? p.type : name;
 
-      if (carAliases.includes(needle.toLowerCase())) {
-        needle = carAliases.join('|');
-      }
-      if (charAliases.includes(needle.toLowerCase())) {
-        needle = charAliases.join('|');
-      }
+      let needle = name === 'self' || !name ? p.type : words(name).join(' ');
+
+      aliases.forEach((alias) => {
+        if (alias.includes(needle.toLowerCase())) {
+          needle = alias.join('|');
+        }
+      });
 
       const re = new RegExp(`\\b${needle}\\b`, 'i');
       return m.replace(re, `<span class="identifier">$&</span>`);

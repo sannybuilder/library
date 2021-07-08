@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1625785060342,
-    "version": "0.61",
+    "last_update": 1625786647657,
+    "version": "0.62",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -3064,19 +3064,20 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "Char"
+              "name": "handle",
+              "type": "any"
             }
           ],
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Char",
           "id": "00A2",
           "member": "IsStillAlive",
           "name": "IS_CHAR_STILL_ALIVE",
           "num_params": 1,
-          "short_desc": "Returns true if the specified character exists and is still alive"
+          "short_desc": "Returns true if the handle is a valid character handle who is still alive (opposite of 0118)"
         },
         {
           "input": [
@@ -3327,19 +3328,20 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "Car"
+              "name": "handle",
+              "type": "any"
             }
           ],
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Car",
           "id": "00AC",
           "member": "IsStillAlive",
           "name": "IS_CAR_STILL_ALIVE",
           "num_params": 1,
-          "short_desc": "Returns true if the vehicle exists and is still alive (exact opposite of 0119)"
+          "short_desc": "Returns true if the handle is a valid vehicle handle that is still alive (opposite of 0119)"
         },
         {
           "input": [
@@ -5885,55 +5887,58 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "any"
+            }
+          ],
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Player",
           "id": "0117",
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            }
-          ],
           "member": "IsDead",
           "name": "IS_PLAYER_DEAD",
           "num_params": 1,
-          "short_desc": "Returns true if the player is dead (wasted)"
+          "short_desc": "Returns true if the handle is an invalid player handle or the player is dead (wasted)"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "any"
+            }
+          ],
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Char",
           "id": "0118",
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            }
-          ],
           "member": "IsDead",
           "name": "IS_CHAR_DEAD",
           "num_params": 1,
-          "short_desc": "Returns true if the character is dead (wasted)"
+          "short_desc": "Returns true if the handle is an invalid character handle or the character is dead (wasted)"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "any"
+            }
+          ],
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
           "class": "Car",
           "id": "0119",
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            }
-          ],
           "member": "IsDead",
           "name": "IS_CAR_DEAD",
           "num_params": 1,
-          "short_desc": "Returns true if the car has been destroyed (wrecked) or doesn't exist (invalid handle)"
+          "short_desc": "Returns true if the handle is an invalid vehicle handle or the vehicle has been destroyed (wrecked)"
         },
         {
           "input": [
@@ -20668,7 +20673,7 @@
           "member": "DoesExist",
           "name": "DOES_OBJECT_EXIST",
           "num_params": 1,
-          "short_desc": "Returns true if the handle is a valid object handle (similar to 056D, 056E)"
+          "short_desc": "Returns true if the handle is a valid object handle"
         },
         {
           "input": [

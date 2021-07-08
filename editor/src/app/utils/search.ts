@@ -12,6 +12,31 @@ export const FUSEJS_OPTIONS = {
   fusejsHighlightKey: '_highlight',
 };
 
+type QueryFilter = (c: Command, query: string) => boolean;
+
+const ConstructorHandler: QueryFilter = (c, q) => {
+  return Boolean(
+    c.attrs?.is_constructor && c.output?.[0]?.type?.toLowerCase() === q
+  );
+};
+
+const DestructorHandler: QueryFilter = (c, q) => {
+  return Boolean(c.attrs?.is_destructor && c.class?.toLowerCase() === q);
+};
+
+const ConditionHandler: QueryFilter = (c, q) => {
+  return Boolean(c.attrs?.is_condition && c.class?.toLowerCase() === q);
+};
+
+const SpecialQueryHandlers: Record<string, QueryFilter> = {
+  'constructor:': ConstructorHandler,
+  'c:': ConstructorHandler,
+  'destructor:': DestructorHandler,
+  'd:': DestructorHandler,
+  'condition:': ConditionHandler,
+  'if:': ConditionHandler,
+};
+
 export function search(list: Command[], searchTerms: string) {
   if (!searchTerms || searchTerms.length < 3) {
     return list;
@@ -19,9 +44,19 @@ export function search(list: Command[], searchTerms: string) {
 
   // hack for opcode search
   const options =
-    searchTerms?.length === 4 && searchTerms[0] === '0'
+    searchTerms.length === 4 && searchTerms[0] === '0'
       ? { ...FUSEJS_OPTIONS, threshold: 0.0 }
       : FUSEJS_OPTIONS;
+
+  // search queries
+  if (searchTerms.includes(':')) {
+    for (const [k, v] of Object.entries(SpecialQueryHandlers)) {
+      if (searchTerms.startsWith(k)) {
+        const query = searchTerms.substring(k.length).toLowerCase();
+        return list.filter((c) => v(c, query));
+      }
+    }
+  }
 
   const fuse = new Fuse(list, options);
   return handleHighlight(fuse.search(searchTerms), options.fusejsHighlightKey);

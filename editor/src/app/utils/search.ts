@@ -33,16 +33,26 @@ const ParamHandler: QueryFilter = (c, q) => {
   return Boolean(commandParams(c).some((p) => p.type.toLowerCase() === q));
 };
 
-const SpecialQueryHandlers: Record<string, QueryFilter> = {
-  'constructor:': ConstructorHandler,
-  'c:': ConstructorHandler,
-  'destructor:': DestructorHandler,
-  'd:': DestructorHandler,
-  'condition:': ConditionHandler,
-  'if:': ConditionHandler,
-  'param:': ParamHandler,
-  'p:': ParamHandler,
-};
+function getQueryHandlers() {
+  const SpecialQueryHandlers: Record<string, QueryFilter> = {
+    'constructor:': ConstructorHandler,
+    'c:': ConstructorHandler,
+    'destructor:': DestructorHandler,
+    'd:': DestructorHandler,
+    'condition:': ConditionHandler,
+    'if:': ConditionHandler,
+    'param:': ParamHandler,
+    'p:': ParamHandler,
+  };
+
+  const entries = Object.entries(SpecialQueryHandlers);
+  const inverted: Array<[string, QueryFilter]> = entries.map(([k, v]) => [
+    '!' + k,
+    (c, q) => !v(c, q),
+  ]);
+
+  return entries.concat(inverted);
+}
 
 export function search(list: Command[], searchTerms: string) {
   if (!searchTerms || searchTerms.length < 3) {
@@ -62,7 +72,7 @@ export function search(list: Command[], searchTerms: string) {
   if (searchTerms.includes(':')) {
     query = '';
     const filters: Array<[QueryFilter, string]> = [];
-    const entries = Object.entries(SpecialQueryHandlers);
+    const entries = getQueryHandlers();
 
     for (const word of split(searchTerms, ' ').filter(
       (w) => w.trim().length > 0

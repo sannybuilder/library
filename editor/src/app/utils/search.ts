@@ -1,6 +1,7 @@
 import Fuse from 'fuse.js';
-import { get, set, omit, cloneDeep } from 'lodash';
+import { get, set, omit, cloneDeep, split } from 'lodash';
 import { Command } from '../models';
+import { commandParams } from './command';
 
 export const FUSEJS_OPTIONS = {
   keys: ['name', 'short_desc', 'id', 'class', 'member'],
@@ -28,6 +29,10 @@ const ConditionHandler: QueryFilter = (c, q) => {
   return Boolean(c.attrs?.is_condition && c.class?.toLowerCase() === q);
 };
 
+const ParamHandler: QueryFilter = (c, q) => {
+  return Boolean(commandParams(c).some((p) => p.type.toLowerCase() === q));
+};
+
 const SpecialQueryHandlers: Record<string, QueryFilter> = {
   'constructor:': ConstructorHandler,
   'c:': ConstructorHandler,
@@ -35,6 +40,8 @@ const SpecialQueryHandlers: Record<string, QueryFilter> = {
   'd:': DestructorHandler,
   'condition:': ConditionHandler,
   'if:': ConditionHandler,
+  'param:': ParamHandler,
+  'p:': ParamHandler,
 };
 
 export function search(list: Command[], searchTerms: string) {
@@ -48,18 +55,37 @@ export function search(list: Command[], searchTerms: string) {
       ? { ...FUSEJS_OPTIONS, threshold: 0.0 }
       : FUSEJS_OPTIONS;
 
-  // search queries
+  let filtered = list;
+  let query = searchTerms;
+
+  // special search queries
   if (searchTerms.includes(':')) {
-    for (const [k, v] of Object.entries(SpecialQueryHandlers)) {
-      if (searchTerms.startsWith(k)) {
-        const query = searchTerms.substring(k.length).toLowerCase();
-        return list.filter((c) => v(c, query));
+    query = '';
+    const filters: Array<[QueryFilter, string]> = [];
+    const entries = Object.entries(SpecialQueryHandlers);
+
+    for (const word of split(searchTerms, ' ').filter(
+      (w) => w.trim().length > 0
+    )) {
+      const entry = entries.find(([k, _]) => word.startsWith(k));
+
+      if (entry) {
+        const input = word.substring(entry[0].length).toLowerCase();
+        filters.push([entry[1], input]);
+      } else {
+        query = query + ' ' + word;
       }
+    }
+
+    filtered = list.filter((c) => filters.every(([h, i]) => h(c, i)));
+
+    if (!query) {
+      return filtered;
     }
   }
 
-  const fuse = new Fuse(list, options);
-  return handleHighlight(fuse.search(searchTerms), options.fusejsHighlightKey);
+  const fuse = new Fuse(filtered, options);
+  return handleHighlight(fuse.search(query), options.fusejsHighlightKey);
 }
 
 function handleHighlight(result: any[], fusejsHighlightKey: string) {

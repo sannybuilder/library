@@ -101,15 +101,22 @@
           href="#"
           *ngIf="!noChanges(viewMode)"
           (click)="resetChanges(viewMode)"
-          class="mr-auto"
+          class="mr-auto w-50"
           >{{ "ui.shared.resetChanges" | translate }}</a
         >
         <a
           href="#"
           *ngIf="viewMode === ViewMode.ViewCommand"
           (click)="toggleOpcodePresentation()"
-          class="mr-auto"
+          class="mr-auto w-50"
           >{{ "ui.shared.toggleOpcode" | translate }}</a
+        >
+        <a
+          *ngIf="viewMode === ViewMode.ViewEnum"
+          [routerLink]="['/', game]"
+          [queryParams]="{ q: 'type:' + enumToDisplayOrEdit.name }"
+          class="mr-auto w-50"
+          >{{ "ui.shared.findEnumUsages" | translate }}</a
         >
         <button
           type="button"

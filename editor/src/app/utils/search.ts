@@ -15,26 +15,26 @@ export const FUSEJS_OPTIONS = {
 
 type QueryFilter = (c: Command, query: string) => boolean;
 
+const match = (a: string, b?: string) => !a || b?.toLowerCase() === a;
+
 const ConstructorHandler: QueryFilter = (c, q) => {
-  return Boolean(
-    c.attrs?.is_constructor && c.output?.[0]?.type?.toLowerCase() === q
-  );
+  return Boolean(c.attrs?.is_constructor && match(q, c.output?.[0]?.type));
 };
 
 const DestructorHandler: QueryFilter = (c, q) => {
-  return Boolean(c.attrs?.is_destructor && c.class?.toLowerCase() === q);
+  return Boolean(c.attrs?.is_destructor && match(q, c.class));
 };
 
 const ConditionHandler: QueryFilter = (c, q) => {
-  return Boolean(c.attrs?.is_condition && c.class?.toLowerCase() === q);
+  return Boolean(c.attrs?.is_condition && match(q, c.class));
 };
 
 const ParamNameHandler: QueryFilter = (c, q) => {
-  return Boolean(commandParams(c).some((p) => p.name.toLowerCase() === q));
+  return Boolean(commandParams(c).some((p) => match(q, p.name)));
 };
 
 const TypeHandler: QueryFilter = (c, q) => {
-  return Boolean(commandParams(c).some((p) => p.type.toLowerCase() === q));
+  return Boolean(commandParams(c).some((p) => match(q, p.type)));
 };
 
 function getQueryHandlers() {
@@ -61,7 +61,7 @@ function getQueryHandlers() {
 }
 
 export function search(list: Command[], searchTerms: string) {
-  if (!searchTerms || searchTerms.length < 3) {
+  if (!searchTerms || (searchTerms.length < 3 && !searchTerms.includes(':'))) {
     return list;
   }
 

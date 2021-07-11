@@ -1,8 +1,14 @@
 <ng-container *ngIf="viewMode$ | async as viewMode">
   <ng-container *ngIf="game$ | async as game">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 col-xl-2 left-rail" #sidebar>
+      <div
+        class="row"
+        *ngIf="{ collapsed: isSidebarCollapsed$ | async } as sidebar"
+      >
+        <div
+          class="col-12 col-xl-2 left-rail"
+          [ngClass]="{ collapsed: sidebar.collapsed }"
+        >
           <scl-download-panel [game]="game"></scl-download-panel>
           <scl-filter-panel [game]="game"></scl-filter-panel>
           <button
@@ -10,12 +16,16 @@
             (click)="toggleSidebar()"
           >
             <div class="d-flex align-items-center">
-              <ng-container *ngTemplateOutlet="collapseIcon"></ng-container>
-              <span
-                *ngIf="!sidebarCollapsed"
-                [title]="'ui.layout.collapseSidebar' | translate"
-                >{{ "ui.layout.collapseSidebar" | translate }}</span
-              >
+              <scl-icon-button
+                *ngIf="sidebar.collapsed"
+                icon="uncollapse"
+              ></scl-icon-button>
+
+              <scl-icon-button
+                *ngIf="!sidebar.collapsed"
+                icon="collapse"
+                [label]="'ui.layout.collapseSidebar' | translate"
+              ></scl-icon-button>
             </div>
           </button>
         </div>
@@ -23,10 +33,10 @@
         <main
           class="col-12"
           [ngClass]="{
-            'col-xl-5': viewMode !== ViewMode.None && !sidebarCollapsed,
-            'col-xl-8': viewMode === ViewMode.None && !sidebarCollapsed,
-            'col-xl-6': viewMode !== ViewMode.None && sidebarCollapsed,
-            'col-xl-9': viewMode === ViewMode.None && sidebarCollapsed
+            'col-xl-5': viewMode !== ViewMode.None && !sidebar.collapsed,
+            'col-xl-8': viewMode === ViewMode.None && !sidebar.collapsed,
+            'col-xl-6': viewMode !== ViewMode.None && sidebar.collapsed,
+            'col-xl-9': viewMode === ViewMode.None && sidebar.collapsed
           }"
         >
           <div class="d-flex flex-row align-items-center mb-3">
@@ -130,7 +140,7 @@
         <scl-icon-button
           *ngIf="viewMode === ViewMode.ViewClass"
           [icon]="
-            (displayInlineDescription$ | async) ? 'no-comments' : 'comments'
+            (displayInlineDescription$ | async) ? 'comments' : 'no-comments'
           "
           (clicked)="toggleInlineDesc()"
           [title]="'ui.classOverview.toggleInlineDescription' | translate"
@@ -155,7 +165,7 @@
 
         <button
           type="button"
-          class="btn btn-outline-secondary"
+          class="btn btn-outline-secondary ml-auto"
           (click)="onCancel()"
         >
           {{ "ui.shared.close" | translate }}
@@ -261,47 +271,3 @@
     </ng-template>
   </ng-container>
 </ng-container>
-
-<ng-template #collapseIcon>
-  <span
-    [title]="'ui.layout.uncollapseSidebar' | translate"
-    class="sidebar-icon"
-  >
-    <svg
-      *ngIf="!sidebarCollapsed"
-      xmlns="http://www.w3.org/2000/svg"
-      width="12"
-      height="12"
-      fill="currentColor"
-      class="bi bi-chevron-double-left"
-      viewBox="0 0 16 16"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-      />
-      <path
-        fill-rule="evenodd"
-        d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-      />
-    </svg>
-
-    <svg
-      *ngIf="sidebarCollapsed"
-      xmlns="http://www.w3.org/2000/svg"
-      width="12"
-      height="12"
-      fill="currentColor"
-      class="bi bi-chevron-double-right"
-      viewBox="0 0 16 16"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"
-      />
-      <path
-        fill-rule="evenodd"
-        d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"
-      /></svg
-  ></span>
-</ng-template>

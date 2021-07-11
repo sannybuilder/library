@@ -28,6 +28,7 @@ import {
   toggleOpcodePresentation,
   toggleSearchHelp,
   dismissSearchHelp,
+  toggleSidebar,
 } from './actions';
 import * as selector from './selectors';
 
@@ -43,6 +44,7 @@ export class UiFacade {
   displaySearchBar$ = this.store$.select(selector.displaySearchBar);
   displaySearchHelp$ = this.store$.select(selector.displaySearchHelp);
   isSearchHelpDismissed$ = this.store$.select(selector.isSearchHelpDismissed);
+  isSidebarCollapsed$ = this.store$.select(selector.isSidebarCollapsed);
 
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
   displayInlineMethodDescription$ = this.store$.select(
@@ -110,6 +112,10 @@ export class UiFacade {
 
   toggleOpcodePresentation() {
     this.store$.dispatch(toggleOpcodePresentation());
+  }
+
+  toggleSidebar() {
+    this.store$.dispatch(toggleSidebar());
   }
 
   displayCommandInfo(command: Command, extension: string) {

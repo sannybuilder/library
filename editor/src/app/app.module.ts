@@ -125,7 +125,16 @@ export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: [{ ui: ['isSearchHelpDismissed'] }],
+    keys: [
+      {
+        ui: [
+          'isSearchHelpDismissed',
+          'displayOpcodePresentation',
+          'displayInlineMethodDescription',
+          'isSidebarCollapsed',
+        ],
+      },
+    ],
     rehydrate: true,
   })(reducer);
 }

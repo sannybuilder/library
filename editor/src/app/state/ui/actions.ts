@@ -81,3 +81,5 @@ export const toggleSearchHelp = createAction(
 );
 
 export const dismissSearchHelp = createAction('[ui] dismiss search help');
+
+export const toggleSidebar = createAction('[ui] toggle sidebar');

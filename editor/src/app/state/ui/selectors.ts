@@ -217,3 +217,8 @@ export const isSearchHelpDismissed = createSelector(
   state,
   (state: UiState) => state.isSearchHelpDismissed
 );
+
+export const isSidebarCollapsed = createSelector(
+  state,
+  (state: UiState) => state.isSidebarCollapsed
+);

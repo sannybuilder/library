@@ -21,6 +21,7 @@ import {
   toggleOpcodePresentation,
   toggleSearchHelp,
   dismissSearchHelp,
+  toggleSidebar,
 } from './actions';
 
 export interface GameState {
@@ -32,8 +33,9 @@ export interface UiState {
   searchTerm: string;
   displaySearchBar: boolean;
   displayLastUpdated: boolean;
-  displayInlineMethodDescription: boolean;
-  displayOpcodePresentation: boolean;
+  displayInlineMethodDescription: boolean; // this should match localStorageSyncReducer in AppModule
+  displayOpcodePresentation: boolean; // this should match localStorageSyncReducer in AppModule
+  isSidebarCollapsed: boolean; // this should match localStorageSyncReducer in AppModule
   selectedAttributesOnly: Attribute[];
   selectedAttributesExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
@@ -81,6 +83,7 @@ export const initialState: UiState = {
   displayOpcodePresentation: false,
   displaySearchHelp: false,
   isSearchHelpDismissed: false,
+  isSidebarCollapsed: false,
   viewMode: ViewMode.None,
   currentPage: 1,
 };
@@ -211,6 +214,10 @@ export const uiReducer = createReducer(
     ...state,
     isSearchHelpDismissed: true,
     displaySearchHelp: false,
+  })),
+  on(toggleSidebar, (state) => ({
+    ...state,
+    isSidebarCollapsed: !state.isSidebarCollapsed,
   }))
 );
 

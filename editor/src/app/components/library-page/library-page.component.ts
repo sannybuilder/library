@@ -74,6 +74,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     );
 
   displaySearchHelp$ = this._ui.displaySearchHelp$;
+  isSidebarCollapsed$ = this._ui.isSidebarCollapsed$;
 
   command?: Command;
   oldCommand?: Command;
@@ -86,7 +87,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
   editorHasError = false;
-  sidebarCollapsed = false;
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -318,12 +318,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   toggleSidebar() {
-    this.sidebarCollapsed = !this.sidebarCollapsed;
-
-    this.sidebar.nativeElement.classList.toggle(
-      'collapsed',
-      this.sidebarCollapsed
-    );
+    this._ui.toggleSidebar();
   }
 
   toggleInlineDesc() {

@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   activeRoute$ = this._router.events.pipe(
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     map((event) => {
-      const parts = event.url.split('/');
+      const parts = event.url.split(/[\/?]/);
       if (parts[1] === 'vc_mobile') {
         return 'vc';
       }

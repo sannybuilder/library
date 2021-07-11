@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -15,6 +15,7 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { environment } from '../environments/environment';
 
@@ -117,6 +118,16 @@ export function loadTranslations(
   };
 }
 
+export function localStorageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
+  return localStorageSync({
+    keys: [{ ui: ['isSearchHelpDismissed'] }],
+    rehydrate: true,
+  })(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -189,15 +200,18 @@ export function loadTranslations(
       ],
       { useHash: false, onSameUrlNavigation: 'reload' }
     ),
-    StoreModule.forRoot({
-      auth: authReducer,
-      changes: changesReducer,
-      enums: enumsReducer,
-      extensions: extensionsReducer,
-      game: gameReducer,
-      snippets: snippetsReducer,
-      ui: uiReducer,
-    }),
+    StoreModule.forRoot(
+      {
+        auth: authReducer,
+        changes: changesReducer,
+        enums: enumsReducer,
+        extensions: extensionsReducer,
+        game: gameReducer,
+        snippets: snippetsReducer,
+        ui: uiReducer,
+      },
+      { metaReducers }
+    ),
     EffectsModule.forRoot([
       AuthEffects,
       ChangesEffects,
@@ -207,7 +221,6 @@ export function loadTranslations(
       UiEffects,
     ]),
     DragDropModule,
-
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({

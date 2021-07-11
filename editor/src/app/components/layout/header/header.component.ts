@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   Game = Game;
   KNOWN_LANGUAGES = KNOWN_LANGUAGES;
   games = Object.values(Game);
+  displaySearchHelp$ = this._ui.displaySearchHelp$;
+  isSearchHelpDismissed$ = this._ui.isSearchHelpDismissed$;
 
   displaySearchBar$ = this._ui.displaySearchBar$;
   isAuthorized$ = this._auth.isAuthorized$;
@@ -88,5 +90,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this._cookies.set('sblang', lang, 30, '/', this._config.cookieDomain);
     }
     return false;
+  }
+
+  toggleSearchHelp(shouldDisplay: boolean) {
+    this._ui.toggleSearchHelp({ shouldDisplay, force: false });
+  }
+
+  dismissSearchHelp() {
+    this._ui.dismissSearchHelp();
+  }
+
+  forceSearchHelp() {
+    this._ui.toggleSearchHelp({ shouldDisplay: true, force: true });
   }
 }

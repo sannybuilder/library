@@ -74,3 +74,10 @@ export const displayClassOverview = createAction(
   '[ui] display class overview',
   props<{ className: string }>()
 );
+
+export const toggleSearchHelp = createAction(
+  '[ui] toggle search help',
+  props<{ shouldDisplay: boolean; force: boolean }>()
+);
+
+export const dismissSearchHelp = createAction('[ui] dismiss search help');

@@ -29,7 +29,11 @@ const ConditionHandler: QueryFilter = (c, q) => {
   return Boolean(c.attrs?.is_condition && c.class?.toLowerCase() === q);
 };
 
-const ParamHandler: QueryFilter = (c, q) => {
+const ParamNameHandler: QueryFilter = (c, q) => {
+  return Boolean(commandParams(c).some((p) => p.name.toLowerCase() === q));
+};
+
+const TypeHandler: QueryFilter = (c, q) => {
   return Boolean(commandParams(c).some((p) => p.type.toLowerCase() === q));
 };
 
@@ -41,8 +45,10 @@ function getQueryHandlers() {
     'd:': DestructorHandler,
     'condition:': ConditionHandler,
     'if:': ConditionHandler,
-    'param:': ParamHandler,
-    'p:': ParamHandler,
+    'param:': ParamNameHandler,
+    'p:': ParamNameHandler,
+    'type:': TypeHandler,
+    't:': TypeHandler,
   };
 
   const entries = Object.entries(SpecialQueryHandlers);

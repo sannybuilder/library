@@ -72,6 +72,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       map((entities) => orderBy(entities, 'name'))
     );
 
+  displaySearchHelp$ = this._ui.displaySearchHelp$;
+
   command?: Command;
   oldCommand?: Command;
   snippet?: string;
@@ -92,7 +94,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _game: GameFacade,
     private _enums: EnumsFacade,
     private _router: Router,
-    private ref: ChangeDetectorRef
+    private _ref: ChangeDetectorRef,
+    private _el: ElementRef
   ) {}
 
   ngOnInit() {
@@ -116,15 +119,30 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
       this.snippet = snippet;
       this.oldSnippet = snippet;
-      this.ref.detectChanges();
+      this._ref.detectChanges();
     });
+
+    this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
+      this.snippet = snippet;
+      this.oldSnippet = snippet;
+      this._ref.detectChanges();
+    });
+
+    this.displaySearchHelp$
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((shouldDisplay) => {
+        (this._el.nativeElement as HTMLElement).classList.toggle(
+          'fade',
+          shouldDisplay
+        );
+      });
 
     this._ui.enumToDisplayOrEdit$
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((enumToEdit) => {
         this.enumToDisplayOrEdit = cloneDeep(enumToEdit);
         this.oldEnumToEdit = cloneDeep(enumToEdit);
-        this.ref.detectChanges();
+        this._ref.detectChanges();
       });
 
     combineLatest([
@@ -139,7 +157,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.oldCommand = cloneDeep(this.command);
         this.oldExtension = extension;
         this.extension = extension;
-        this.ref.detectChanges();
+        this._ref.detectChanges();
       });
   }
 

@@ -19,6 +19,8 @@ import {
   displayEnumsList,
   toggleInlineMethodDescription,
   toggleOpcodePresentation,
+  toggleSearchHelp,
+  dismissSearchHelp,
 } from './actions';
 
 export interface GameState {
@@ -42,6 +44,8 @@ export interface UiState {
   currentPage: number | 'all';
   games: Record<Game, GameState>;
   classToDisplay?: string;
+  displaySearchHelp: boolean;
+  isSearchHelpDismissed: boolean; // this should match localStorageSyncReducer in AppModule
 }
 
 const defaultFilterState: {
@@ -75,6 +79,8 @@ export const initialState: UiState = {
   displaySearchBar: false,
   displayInlineMethodDescription: false,
   displayOpcodePresentation: false,
+  displaySearchHelp: false,
+  isSearchHelpDismissed: false,
   viewMode: ViewMode.None,
   currentPage: 1,
 };
@@ -196,6 +202,15 @@ export const uiReducer = createReducer(
   on(displayEnumsList, (state) => ({
     ...state,
     viewMode: ViewMode.ViewAllEnums,
+  })),
+  on(toggleSearchHelp, (state, { shouldDisplay, force }) => ({
+    ...state,
+    displaySearchHelp: (!state.isSearchHelpDismissed || force) && shouldDisplay,
+  })),
+  on(dismissSearchHelp, (state) => ({
+    ...state,
+    isSearchHelpDismissed: true,
+    displaySearchHelp: false,
   }))
 );
 

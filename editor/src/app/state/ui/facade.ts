@@ -26,6 +26,8 @@ import {
   displayOrEditEnum,
   toggleInlineMethodDescription,
   toggleOpcodePresentation,
+  toggleSearchHelp,
+  dismissSearchHelp,
 } from './actions';
 import * as selector from './selectors';
 
@@ -39,6 +41,9 @@ export class UiFacade {
   );
   searchTerm$ = this.store$.select(selector.searchTerm);
   displaySearchBar$ = this.store$.select(selector.displaySearchBar);
+  displaySearchHelp$ = this.store$.select(selector.displaySearchHelp);
+  isSearchHelpDismissed$ = this.store$.select(selector.isSearchHelpDismissed);
+
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
   displayInlineMethodDescription$ = this.store$.select(
     selector.displayInlineMethodDescription
@@ -159,5 +164,19 @@ export class UiFacade {
 
   displayClassOverview(className: string) {
     this.store$.dispatch(displayClassOverview({ className }));
+  }
+
+  toggleSearchHelp({
+    shouldDisplay,
+    force,
+  }: {
+    shouldDisplay: boolean;
+    force: boolean;
+  }) {
+    this.store$.dispatch(toggleSearchHelp({ shouldDisplay, force }));
+  }
+
+  dismissSearchHelp() {
+    this.store$.dispatch(dismissSearchHelp());
   }
 }

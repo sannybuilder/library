@@ -207,3 +207,13 @@ export const classToDisplayCommands = createSelector(
     ]);
   }
 );
+
+export const displaySearchHelp = createSelector(
+  state,
+  (state: UiState) => state.displaySearchHelp
+);
+
+export const isSearchHelpDismissed = createSelector(
+  state,
+  (state: UiState) => state.isSearchHelpDismissed
+);

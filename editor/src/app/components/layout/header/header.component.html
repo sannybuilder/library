@@ -134,22 +134,131 @@
       <div class="col-xl-2"></div>
       <div class="col-12 col-xl-5 d-flex align-items-center">
         <form class="form-inline flex-nowrap flex-grow-1">
-          <input
-            name="search"
-            class="search-bar search-bar-control form-control w-100"
-            type="search"
-            [placeholder]="'ui.header.searchPlaceholder' | translate"
-            autofocus
-            [ngModel]="searchTerm$ | async"
-            (ngModelChange)="onSearchUpdate($event)"
-          />
-          <button
-            class="btn search-bar-control btn-outline-secondary mx-2 d-none d-sm-inline-block"
-            type="button"
-            (click)="clear()"
+          <div class="input-group search-bar-control w-100">
+            <input
+              name="search"
+              class="search-bar form-control"
+              type="search"
+              [placeholder]="'ui.header.searchPlaceholder' | translate"
+              autofocus
+              (focus)="toggleSearchHelp(true)"
+              (blur)="toggleSearchHelp(false)"
+              [ngModel]="searchTerm$ | async"
+              (ngModelChange)="onSearchUpdate($event)"
+            />
+
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                [title]="'ui.header.searchHelp' | translate"
+                (click)="forceSearchHelp()"
+              >
+                <ng-container *ngTemplateOutlet="helpIcon"></ng-container>
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                [title]="'ui.header.searchClear' | translate"
+                (click)="clear()"
+              >
+                <ng-container *ngTemplateOutlet="clearIcon"></ng-container>
+              </button>
+            </div>
+          </div>
+          <div
+            class="card search-help d-none"
+            [ngClass]="{
+              'd-none': (displaySearchHelp$ | async) !== true
+            }"
           >
-            {{ "ui.header.searchClear" | translate }}
-          </button>
+            <div class="card-body">
+              <p>Search supports special queries:</p>
+
+              <ul>
+                <li>
+                  <code
+                    >constructor:<span class="identifier"
+                      >&lt;className&gt;</span
+                    ></code
+                  >
+                  or
+                  <code
+                    >c:<span class="identifier">&lt;className&gt;</span></code
+                  >
+                  - find all constructor commands for
+                  <span class="identifier">&lt;className&gt;</span>
+                </li>
+                <li>
+                  <code
+                    >destructor:<span class="identifier"
+                      >&lt;className&gt;</span
+                    ></code
+                  >
+                  or
+                  <code
+                    >d:<span class="identifier">&lt;className&gt;</span></code
+                  >
+                  - find all destructor commands for
+                  <span class="identifier">&lt;className&gt;</span>
+                </li>
+                <li>
+                  <code
+                    >condition:<span class="identifier"
+                      >&lt;className&gt;</span
+                    ></code
+                  >
+                  or
+                  <code
+                    >if:<span class="identifier">&lt;className&gt;</span></code
+                  >
+                  - find all condition methods for
+                  <span class="identifier">&lt;className&gt;</span>
+                </li>
+                <li>
+                  <code
+                    >type:<span class="identifier">&lt;typeName&gt;</span></code
+                  >
+                  or
+                  <code
+                    >t:<span class="identifier">&lt;typeName&gt;</span></code
+                  >
+                  - find all commands where one of the params has the type
+                  <span class="identifier">&lt;typeName&gt;</span>
+                </li>
+                <li>
+                  <code
+                    >param:<span class="identifier"
+                      >&lt;paramName&gt;</span
+                    ></code
+                  >
+                  or
+                  <code
+                    >p:<span class="identifier">&lt;paramName&gt;</span></code
+                  >
+                  - find all commands where one of the params has the name
+                  <span class="identifier">&lt;paramName&gt;</span>
+                </li>
+              </ul>
+
+              <p>
+                Each query can be inverted by prepending with <code>!</code>,
+                e.g. <code>!if:player</code>
+              </p>
+
+              <hr />
+              <p class="text-right">
+                <button
+                  type="button"
+                  (mousedown)="dismissSearchHelp()"
+                  (click)="dismissSearchHelp()"
+                  class="btn btn-outline-success"
+                >
+                  {{ "ui.shared.dismiss" | translate }}
+                </button>
+              </p>
+            </div>
+          </div>
 
           <button
             class="navbar-toggler ml-auto"
@@ -254,4 +363,34 @@
 
 <ng-template #dummyAvatar>
   <div class="dummy-avatar" [title]="'ui.header.noAvatar' | translate"></div>
+</ng-template>
+
+<ng-template #clearIcon>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-x"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+    />
+  </svg>
+</ng-template>
+
+<ng-template #helpIcon>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-question"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
+    />
+  </svg>
 </ng-template>

@@ -37,6 +37,10 @@ const TypeHandler: QueryFilter = (c, q) => {
   return Boolean(commandParams(c).some((p) => match(q, p.type)));
 };
 
+const IdHandler: QueryFilter = (c, q) => {
+  return Boolean(match(q, c.id));
+};
+
 function getQueryHandlers() {
   const SpecialQueryHandlers: Record<string, QueryFilter> = {
     'constructor:': ConstructorHandler,
@@ -49,6 +53,7 @@ function getQueryHandlers() {
     'p:': ParamNameHandler,
     'type:': TypeHandler,
     't:': TypeHandler,
+    'id:': IdHandler,
   };
 
   const entries = Object.entries(SpecialQueryHandlers);
@@ -61,21 +66,27 @@ function getQueryHandlers() {
 }
 
 export function search(list: Command[], searchTerms: string) {
-  if (!searchTerms || (searchTerms.length < 3 && !searchTerms.includes(':'))) {
+  let query = searchTerms.trim();
+
+  if (!query || (query.length < 3 && !query.includes(':'))) {
     return list;
   }
 
-  // hack for opcode search
-  const options =
-    searchTerms.length === 4 && searchTerms[0] === '0'
-      ? { ...FUSEJS_OPTIONS, threshold: 0.0 }
-      : FUSEJS_OPTIONS;
+  const options = { ...FUSEJS_OPTIONS };
+
+  if (query.length === 4 && query[0] === '0') {
+    // opcode id search
+    options.threshold = 0.0;
+  }
 
   let filtered = list;
-  let query = searchTerms;
 
-  // special search queries
-  if (searchTerms.includes(':')) {
+  if (query.startsWith('"') && query.endsWith('"')) {
+    // exact search
+    options.threshold = 0.0;
+    query = query.substring(1, query.length - 1);
+  } else if (searchTerms.includes(':')) {
+    // special search queries
     query = '';
     const filters: Array<[QueryFilter, string]> = [];
     const entries = getQueryHandlers();

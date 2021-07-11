@@ -325,6 +325,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  toggleInlineDesc() {
+    this._ui.toggleInlineMethodDescription();
+    return false;
+  }
+
   private _onSaveCommand() {
     this._extensions.updateCommand({
       newExtension: this.extension!,

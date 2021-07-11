@@ -52,11 +52,6 @@ export class ClassOverviewComponent {
     return false;
   }
 
-  toggleInlineDesc() {
-    this._ui.toggleInlineMethodDescription();
-    return false;
-  }
-
   interceptDescriptionClick(event: MouseEvent) {
     this.descriptionClick.next(event);
     return false;

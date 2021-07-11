@@ -11,13 +11,13 @@
         [placeholder]="'ui.classOverview.filterMethods' | translate"
         [(ngModel)]="filterQuery"
       />
-      <button
-        class="btn btn-outline-secondary mx-2 d-none d-sm-inline-block"
-        type="button"
-        (click)="filterQuery = ''"
-      >
-        {{ "ui.header.searchClear" | translate }}
-      </button>
+      <div class="input-group-append">
+        <scl-icon-button
+          icon="clear"
+          [title]="'ui.header.searchClear' | translate"
+          (clicked)="filterQuery = ''"
+        ></scl-icon-button>
+      </div>
     </div>
   </div>
 </div>
@@ -30,7 +30,6 @@ class <span class="identifier">{{ className }}</span> <span
     context: { 
       command: classCommand.command, 
       extension: classCommand.extension, 
-      displayInlineDescription: displayInlineDescription$ | async,
       isLast: isLast
     }"
   ></ng-container>
@@ -41,7 +40,6 @@ class <span class="identifier">{{ className }}</span> <span
   #memberTemplate
   let-command="command"
   let-extension="extension"
-  let-displayInlineDescription="displayInlineDescription"
   let-isLast="isLast"
 >
   <span class="comment" *ngIf="command.short_desc && displayInlineDescription">

@@ -5,7 +5,6 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { UiFacade } from '../../../state';
 import { Command, DEFAULT_EXTENSION, Game } from '../../../models';
 
 type ClassCommand = { command: Command; extension: string };
@@ -19,10 +18,10 @@ type ClassCommand = { command: Command; extension: string };
 export class ClassOverviewComponent {
   private _classCommands: ClassCommand[];
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
-  displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
   filterQuery = '';
   commandsHaveSameOrigin = true;
 
+  @Input() displayInlineDescription: boolean;
   @Input() game: Game;
   @Input() className: string;
   @Input() classOrigin: string;
@@ -44,8 +43,6 @@ export class ClassOverviewComponent {
     extension: string;
   }> = new EventEmitter();
   @Output() descriptionClick = new EventEmitter();
-
-  constructor(private _ui: UiFacade) {}
 
   onView(command: Command, extension: string) {
     this.view.emit({ command, extension });

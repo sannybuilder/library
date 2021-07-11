@@ -3,6 +3,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormsModule } from '@angular/forms';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -71,6 +72,8 @@ import {
   ModalComponent,
   PaginationComponent,
   SelectorComponent,
+  IconButtonComponent,
+  CopyButtonComponent,
 } from './components/common';
 
 import {
@@ -164,6 +167,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     EnumGamesComponent,
     EnumListComponent,
     ClassListComponent,
+    IconButtonComponent,
+    CopyButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -221,6 +226,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       UiEffects,
     ]),
     DragDropModule,
+    ClipboardModule,
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({

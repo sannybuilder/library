@@ -54,6 +54,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
   displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
+  displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
   entities$: Observable<Array<{ origin: string; name: string }>> =
     this._extensions.extensionNames$.pipe(
       switchMap((extensions) =>
@@ -328,6 +329,44 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   toggleInlineDesc() {
     this._ui.toggleInlineMethodDescription();
     return false;
+  }
+
+  getPermaLink({
+    viewMode,
+    game,
+    extension,
+    commandId,
+    enumName,
+    className,
+  }: {
+    viewMode: ViewMode;
+    game: Game;
+    extension?: string;
+    commandId?: string;
+    enumName?: string;
+    className?: string;
+  }) {
+    const base = 'https://library.sannybuilder.com/#';
+    if (viewMode === ViewMode.ViewAllClasses) {
+      return [base, game, 'classes'].join('/');
+    }
+    if (viewMode === ViewMode.ViewAllEnums) {
+      return [base, game, 'enums'].join('/');
+    }
+
+    if (viewMode === ViewMode.ViewClass) {
+      return [base, game, 'classes', className].join('/');
+    }
+
+    if (viewMode === ViewMode.ViewEnum) {
+      return [base, game, 'enums', enumName].join('/');
+    }
+
+    if (viewMode === ViewMode.ViewCommand) {
+      return [base, game, extension, commandId].join('/');
+    }
+
+    return undefined;
   }
 
   private _onSaveCommand() {

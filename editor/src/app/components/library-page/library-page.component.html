@@ -97,34 +97,62 @@
 
     <ng-template #modalFooter>
       <div class="modal-footer d-flex">
-        <a
-          href="#"
+        <scl-copy-button
+          *ngIf="
+            getPermaLink({
+              viewMode: viewMode,
+              game: game,
+              extension: extension,
+              commandId: command?.id,
+              enumName: enumToDisplayOrEdit?.name,
+              className: (classToDisplay$ | async)
+            }) as url
+          "
+          [text]="url"
+          icon="share"
+          #shareBtn
+          [title]="
+            (shareBtn.hasJustCopied
+              ? 'ui.shared.copied'
+              : 'ui.shared.shareLink'
+            ) | translate
+          "
+        ></scl-copy-button>
+
+        <scl-icon-button
           *ngIf="!noChanges(viewMode)"
-          (click)="resetChanges(viewMode)"
-          class="mr-auto w-50"
-          >{{ "ui.shared.resetChanges" | translate }}</a
+          icon="revert"
+          [title]="'ui.shared.resetChanges' | translate"
+          (clicked)="resetChanges(viewMode)"
         >
-        <a
-          href="#"
+        </scl-icon-button>
+
+        <scl-icon-button
           *ngIf="viewMode === ViewMode.ViewClass"
-          (click)="toggleInlineDesc()"
-          class="mr-auto w-50"
-          >{{ "ui.classOverview.toggleInlineDescription" | translate }}</a
-        >
-        <a
-          href="#"
+          [icon]="
+            (displayInlineDescription$ | async) ? 'no-comments' : 'comments'
+          "
+          (clicked)="toggleInlineDesc()"
+          [title]="'ui.classOverview.toggleInlineDescription' | translate"
+        ></scl-icon-button>
+
+        <scl-icon-button
           *ngIf="viewMode === ViewMode.ViewCommand"
-          (click)="toggleOpcodePresentation()"
-          class="mr-auto w-50"
-          >{{ "ui.shared.toggleOpcode" | translate }}</a
+          [icon]="(displayOpcodePresentation$ | async) ? 'eye-fill' : 'eye'"
+          [title]="'ui.shared.toggleOpcode' | translate"
+          (clicked)="toggleOpcodePresentation()"
         >
-        <a
+        </scl-icon-button>
+
+        <scl-icon-button
           *ngIf="viewMode === ViewMode.ViewEnum"
+          icon="search"
           [routerLink]="['/', game]"
           [queryParams]="{ q: 'type:' + enumToDisplayOrEdit.name }"
-          class="mr-auto w-50"
-          >{{ "ui.shared.findEnumUsages" | translate }}</a
+          [title]="'ui.shared.findEnumUsages' | translate"
         >
+        </scl-icon-button>
+
         <button
           type="button"
           class="btn btn-outline-secondary"
@@ -203,6 +231,7 @@
         [className]="classToDisplay"
         [classCommands]="classCommands$ | async"
         [classOrigin]="getClassOrigin(classToDisplay) | async"
+        [displayInlineDescription]="displayInlineDescription$ | async"
         (descriptionClick)="onDescriptionClick($event)"
       ></scl-class-overview>
       <scl-class-list

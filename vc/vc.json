@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1626037301230,
-    "version": "0.76",
+    "last_update": 1626117442559,
+    "version": "0.77",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -26273,6 +26273,27 @@
           "short_desc": "Sets the text draw font"
         },
         {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "05DE",
+          "name": "START_CUSTOM_SCRIPT",
+          "num_params": 2,
+          "attrs": {
+            "is_branch": true,
+            "is_variadic": true,
+            "is_keyword": true
+          },
+          "short_desc": "Loads a file with compiled SCM instructions at the given path and runs a new custom script"
+        },
+        {
           "output": [
             {
               "name": "versionId",
@@ -26286,6 +26307,103 @@
           "class": "Game",
           "member": "GetVersion",
           "short_desc": "Returns the version id of the game",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonId",
+              "type": "Button"
+            },
+            {
+              "name": "sensitivity",
+              "type": "int"
+            }
+          ],
+          "id": "0601",
+          "name": "IS_BUTTON_PRESSED_ON_PAD",
+          "num_params": 2,
+          "class": "Pad",
+          "member": "IsButtonPressedOn",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonId",
+              "type": "Button"
+            },
+            {
+              "name": "sensitivity",
+              "type": "int"
+            }
+          ],
+          "id": "0602",
+          "name": "EMULATE_BUTTON_PRESS_ON_PAD",
+          "num_params": 2,
+          "class": "Pad",
+          "member": "EmulateButtonPressOn",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "id": "0603",
+          "name": "IS_CAMERA_IN_WIDESCREEN_MODE",
+          "num_params": 0,
+          "class": "Camera",
+          "member": "IsInWidescreenMode",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "weaponType",
+              "type": "WeaponType"
+            }
+          ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0604",
+          "name": "GET_MODEL_ID_FROM_WEAPON_ID",
+          "num_params": 2,
+          "class": "Game",
+          "member": "GetModelIdFromWeaponId",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_any"
+            }
+          ],
+          "output": [
+            {
+              "name": "weaponType",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0605",
+          "name": "GET_WEAPON_ID_FROM_MODEL_ID",
+          "num_params": 2,
+          "class": "Game",
+          "member": "GetWeaponIdFromModelId",
           "attrs": {
             "is_static": true
           }

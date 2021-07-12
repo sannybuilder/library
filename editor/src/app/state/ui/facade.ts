@@ -176,8 +176,8 @@ export class UiFacade {
     shouldDisplay,
     force,
   }: {
-    shouldDisplay: boolean;
-    force: boolean;
+    shouldDisplay?: boolean;
+    force?: boolean;
   }) {
     this.store$.dispatch(toggleSearchHelp({ shouldDisplay, force }));
   }

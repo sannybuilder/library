@@ -77,7 +77,7 @@ export const displayClassOverview = createAction(
 
 export const toggleSearchHelp = createAction(
   '[ui] toggle search help',
-  props<{ shouldDisplay: boolean; force: boolean }>()
+  props<{ shouldDisplay?: boolean; force?: boolean }>()
 );
 
 export const dismissSearchHelp = createAction('[ui] dismiss search help');

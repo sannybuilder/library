@@ -93,7 +93,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggleSearchHelp(shouldDisplay: boolean) {
-    this._ui.toggleSearchHelp({ shouldDisplay, force: false });
+    this._ui.toggleSearchHelp({ shouldDisplay });
   }
 
   dismissSearchHelp() {
@@ -101,6 +101,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   forceSearchHelp() {
-    this._ui.toggleSearchHelp({ shouldDisplay: true, force: true });
+    this._ui.toggleSearchHelp({ force: true });
   }
 }

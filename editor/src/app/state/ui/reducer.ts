@@ -206,10 +206,13 @@ export const uiReducer = createReducer(
     ...state,
     viewMode: ViewMode.ViewAllEnums,
   })),
-  on(toggleSearchHelp, (state, { shouldDisplay, force }) => ({
-    ...state,
-    displaySearchHelp: (!state.isSearchHelpDismissed || force) && shouldDisplay,
-  })),
+  on(toggleSearchHelp, (state, { shouldDisplay, force }) => {
+    const displaySearchHelp = force
+      ? !state.displaySearchHelp
+      : !state.isSearchHelpDismissed && !!shouldDisplay;
+
+    return { ...state, displaySearchHelp };
+  }),
   on(dismissSearchHelp, (state) => ({
     ...state,
     isSearchHelpDismissed: true,

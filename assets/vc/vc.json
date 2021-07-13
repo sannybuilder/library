@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1626153987919,
-    "version": "0.79",
+    "last_update": 1626155655140,
+    "version": "0.80",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -26323,10 +26323,10 @@
             }
           ],
           "id": "0601",
-          "name": "IS_BUTTON_PRESSED_ON_PAD",
+          "name": "IS_BUTTON_PRESSED_WITH_SENSITIVITY",
           "num_params": 2,
           "class": "Pad",
-          "member": "IsButtonPressedOn",
+          "member": "IsButtonPressedWithSensitivity",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -26344,10 +26344,10 @@
             }
           ],
           "id": "0602",
-          "name": "EMULATE_BUTTON_PRESS_ON_PAD",
+          "name": "EMULATE_BUTTON_PRESS_WITH_SENSITIVITY",
           "num_params": 2,
           "class": "Pad",
-          "member": "EmulateButtonPressOn",
+          "member": "EmulateButtonPressWithSensitivity",
           "attrs": {
             "is_static": true
           }
@@ -26378,10 +26378,10 @@
             }
           ],
           "id": "0604",
-          "name": "GET_MODEL_ID_FROM_WEAPON_ID",
+          "name": "GET_WEAPONTYPE_MODEL",
           "num_params": 2,
           "class": "Weapon",
-          "member": "GetModelId",
+          "member": "GetModel",
           "attrs": {
             "is_static": true
           }
@@ -26407,6 +26407,100 @@
           "member": "GetIdFromModelId",
           "attrs": {
             "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address1",
+              "type": "int"
+            },
+            {
+              "name": "address2",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "id": "0606",
+          "name": "SET_MEMORY_OFFSET",
+          "num_params": 3,
+          "class": "Memory",
+          "member": "SetOffset",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "weatherType",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0607",
+          "name": "GET_CURRENT_WEATHER",
+          "num_params": 1,
+          "class": "Weather",
+          "member": "Get",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "screenX",
+              "type": "float"
+            },
+            {
+              "name": "screenY",
+              "type": "float"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "id": "0608",
+          "name": "DISPLAY_TEXT_STRING",
+          "num_params": 3,
+          "class": "Text",
+          "member": "DisplayString",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "screenX",
+              "type": "float"
+            },
+            {
+              "name": "screenY",
+              "type": "float"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0609",
+          "name": "DISPLAY_TEXT_FORMATTED",
+          "num_params": 4,
+          "class": "Text",
+          "member": "DisplayFormatted",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
           }
         }
       ]

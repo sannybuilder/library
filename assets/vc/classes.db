@@ -22,6 +22,7 @@ Heli
 Hud
 KillFrenzy
 Math
+Memory
 Object
 ObjectPath
 Pad
@@ -592,6 +593,11 @@ Sin,02F6,0,0,("angle%f" "result%f")
 Sqrt,01FB,0,0,("num%f" "result%f")
 $END
 
+$Memory
+$BEGIN
+SetOffset,0606,0,0,("address1%i" "address2%i" "vp%b")
+$END
+
 $Object
 $BEGIN
 AddToVelocity,038C,0,0,("self: Object" "x%f" "y%f" "z%f")
@@ -640,11 +646,11 @@ $END
 
 $Pad
 $BEGIN
-EmulateButtonPressOn,0602,0,0,("buttonId: Button" "sensitivity%i")
+EmulateButtonPressWithSensitivity,0602,0,0,("buttonId: Button" "sensitivity%i")
 GetControllerMode,0293,0,0,("mode: ControllerMode")
 GetPositionOfAnalogueSticks,0494,0,0,("pad: Pad" "leftStickX%i" "leftStickY%i" "rightStickX%i" "rightStickY%i")
 IsButtonPressed,00E1,1,0,("pad: Pad" "buttonId: Button")
-IsButtonPressedOn,0601,1,0,("buttonId: Button" "sensitivity%i")
+IsButtonPressedWithSensitivity,0601,1,0,("buttonId: Button" "sensitivity%i")
 IsInCarFireButtonPressed,0585,1,0,()
 SetDrunkInputDelay,03FD,0,0,("pad: Pad" "delay%i")
 $END
@@ -956,6 +962,8 @@ ClearSmallPrints,03EB,0,0,()
 ClearThisBigPrint,03D6,0,0,("key: gxt_key")
 ClearThisPrint,03D5,0,0,("key: gxt_key")
 Display,033E,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key")
+DisplayFormatted,0609,0,0,("screenX%f" "screenY%f" "text%s" )
+DisplayString,0608,0,0,("screenX%f" "screenY%f" "text%s")
 DisplayWith2Numbers,045B,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num1%i" "num2%i")
 DisplayWithNumber,045A,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num%i")
 LoadMissionText,054C,0,0,("tableName%s")
@@ -996,13 +1004,14 @@ $END
 $Weapon
 $BEGIN
 GetIdFromModelId,0605,0,0,("modelId: model_object" "weaponType%i")
-GetModelId,0604,0,0,("weaponType: WeaponType" "modelId: model_object")
+GetModel,0604,0,0,("weaponType: WeaponType" "modelId: model_object")
 $END
 
 $Weather
 $BEGIN
 Force,01B5,0,0,("type: WeatherType")
 ForceNow,01B6,0,0,("type: WeatherType")
+Get,0607,0,0,("weatherType%i")
 Release,01B7,0,0,()
 SetAllowHurricanes,057C,0,0,("state%b")
 $END

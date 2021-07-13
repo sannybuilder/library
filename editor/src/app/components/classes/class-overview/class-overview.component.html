@@ -60,7 +60,7 @@ class <span class="identifier">{{ className }}</span> <span
       <a
         class="identifier"
         [routerLink]="['/', game, extension, command.id]"
-        [title]="command.short_desc"
+        [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
       ><span [innerHTML]="command | inputParams | sanitize"></span>:
       {{ command.output[command.output.length - 1].type }}
@@ -70,7 +70,7 @@ class <span class="identifier">{{ className }}</span> <span
       <a
         class="identifier"
         [routerLink]="['/', game, extension, command.id]"
-        [title]="command.short_desc"
+        [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
       ><span [innerHTML]="command | inputParams | sanitize"></span>
     </ng-container>
@@ -85,7 +85,7 @@ class <span class="identifier">{{ className }}</span> <span
         [ngClass]="{
           strike: command.attrs?.is_nop || command.attrs?.is_unsupported
         }"
-        [title]="command.short_desc"
+        [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
       ><span [innerHTML]="command | classParams | sanitize"></span
     ></ng-container> </code

@@ -92,10 +92,28 @@ export const commandRelated = createSelector(
   (
     extensions: Extension[] | undefined,
     props: { extension: string; command: Command }
-  ) =>
-    extensions
-      ?.find((e) => e.name === props.extension)
-      ?.commands?.filter((c) => c.short_desc?.includes(props.command.id))
+  ) => {
+    const commands = extensions?.find(
+      (e) => e.name === props.extension
+    )?.commands;
+    if (!commands) {
+      return;
+    }
+
+    const { id, name, class: className, member, attrs } = props.command;
+    const referenced = commands.filter((c) => c.short_desc?.includes(id)) ?? [];
+
+    const overloads = attrs?.is_overload
+      ? commands.filter((c) => {
+          return (
+            c.id !== id &&
+            (c.name === name || (c.class === className && c.member === member))
+          );
+        })
+      : [];
+
+    return [...referenced, ...overloads];
+  }
 );
 
 export const hasAnyLoadingInProgress = createSelector(

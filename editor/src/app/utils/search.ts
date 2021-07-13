@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js';
 import { get, set, omit, cloneDeep, split } from 'lodash';
 import { Command } from '../models';
-import { commandParams } from './command';
+import { commandParams, normalizeId } from './command';
 
 export const FUSEJS_OPTIONS = {
   keys: ['name', 'short_desc', 'id', 'class', 'member'],
@@ -38,7 +38,7 @@ const TypeHandler: QueryFilter = (c, q) => {
 };
 
 const IdHandler: QueryFilter = (c, q) => {
-  return Boolean(match(q, c.id));
+  return Boolean(match(normalizeId(q), c.id));
 };
 
 function getQueryHandlers() {
@@ -74,8 +74,9 @@ export function search(list: Command[], searchTerms: string) {
 
   const options = { ...FUSEJS_OPTIONS };
 
-  if (query.length === 4 && query[0] === '0') {
+  if (query.length === 4 && (query[0] === '0' || query[0] === '8')) {
     // opcode id search
+    query = normalizeId(query);
     options.threshold = 0.0;
   }
 

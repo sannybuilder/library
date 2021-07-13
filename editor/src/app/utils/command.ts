@@ -80,3 +80,14 @@ export function formatCommandName(name: string | undefined) {
 export function formatOpcode(opcode: string) {
   return opcode ? opcode.toUpperCase() : opcode;
 }
+
+export function normalizeId(id: string): string {
+  if (id.length !== 4) {
+    return id;
+  }
+  if (id[0] === '8') {
+    // normalize negative form
+    return '0' + id.slice(1);
+  }
+  return id;
+}

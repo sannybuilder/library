@@ -40,7 +40,8 @@ export function doesCommandHaveDuplicateName(
   otherCommands: Command[] | undefined
 ) {
   return (otherCommands ?? []).some(
-    ({ name, id }) => name === command.name && id !== command.id
+    ({ name, id }) =>
+      name === command.name && id !== command.id && !command.attrs?.is_overload
   );
 }
 

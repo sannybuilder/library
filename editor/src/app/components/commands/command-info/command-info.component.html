@@ -17,152 +17,156 @@
 
 <hr />
 
-<div class="row mb-2">
-  <div class="col-12">
-    <div
-      *ngIf="
-        !command.attrs?.is_unsupported &&
-        !command.attrs?.is_nop &&
-        command.short_desc
-      "
-      class="mb-3"
-      (click)="interceptDescriptionClick($event)"
-      [innerHTML]="
-        command.short_desc | linkify: game:extension:command | sanitize
-      "
-    ></div>
-    <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
-      {{ "ui.commandList.unsupported" | translate }}
-    </div>
-    <div *ngIf="command.attrs?.is_nop" class="mb-3">
-      {{ "ui.commandList.nop" | translate }}
-    </div>
-
-    <ng-container *ngIf="command.attrs?.is_keyword">
-      <code
-        >{{ command.name | lowercase }}
-        <span [innerHTML]="command | keywordParams | sanitize"></span
-      ></code>
-    </ng-container>
-
-    <ng-container *ngIf="command.class && command.member">
-      <ng-container *ngIf="command.attrs?.is_constructor">
-        <code>
-          <span [innerHTML]="command | outputParams | sanitize"></span> =
-          <a
-            class="identifier"
-            [routerLink]="['/', game, 'classes', command.class]"
-            >{{ command.class }}</a
-          >.<span class="identifier">{{ command.member }}</span
-          ><span [innerHTML]="command | inputParams | sanitize"></span
-        ></code>
-      </ng-container>
-
-      <ng-container *ngIf="!command.attrs?.is_constructor">
-        <code
-          ><a
-            class="identifier"
-            [routerLink]="['/', game, 'classes', command.class]"
-            >{{ command.class }}</a
-          >.<span class="identifier">{{ command.member }}</span
-          ><span [innerHTML]="command | classParams | sanitize"></span
-        ></code>
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="displayOpcodePresentation">
-      <code
-        >{{ command.id | opcode }}: {{ command.name | lowercase }}
-        <span [innerHTML]="command | opcodeParams | sanitize"></span
-      ></code>
-    </ng-container>
-
-    <div *ngIf="command.input?.length > 0" class="mt-3">
-      <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
-
-      <ng-container
-        *ngTemplateOutlet="paramTemplate; context: { $implicit: command.input }"
-      ></ng-container>
-    </div>
-
-    <div *ngIf="command.output?.length > 0" class="mt-3">
-      <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
-
-      <ng-container
-        *ngTemplateOutlet="
-          paramTemplate;
-          context: { $implicit: command.output }
+<div class="scroll-container">
+  <div class="row mb-2">
+    <div class="col-12">
+      <div
+        *ngIf="
+          !command.attrs?.is_unsupported &&
+          !command.attrs?.is_nop &&
+          command.short_desc
         "
-      ></ng-container>
-    </div>
-  </div>
-</div>
+        class="mb-3"
+        (click)="interceptDescriptionClick($event)"
+        [innerHTML]="
+          command.short_desc | linkify: game:extension:command | sanitize
+        "
+      ></div>
+      <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
+        {{ "ui.commandList.unsupported" | translate }}
+      </div>
+      <div *ngIf="command.attrs?.is_nop" class="mb-3">
+        {{ "ui.commandList.nop" | translate }}
+      </div>
 
-<ng-container
-  *ngIf="
-    attrs.length ||
-    extension !== DEFAULT_EXTENSION ||
-    command?.input[0]?.name === 'self'
-  "
->
-  <hr />
-  <div class="row mb-2">
-    <div class="col-12">
-      <h5>{{ "ui.commandOverview.notesSubtitle" | translate }}</h5>
-      <ul class="list-unstyled">
-        <li
-          *ngIf="extension !== DEFAULT_EXTENSION"
-          [innerHTML]="
-            'ui.commandOverview.withExtension'
-              | translate: { extension: extension }
+      <ng-container *ngIf="command.attrs?.is_keyword">
+        <code
+          >{{ command.name | lowercase }}
+          <span [innerHTML]="command | keywordParams | sanitize"></span
+        ></code>
+      </ng-container>
+
+      <ng-container *ngIf="command.class && command.member">
+        <ng-container *ngIf="command.attrs?.is_constructor">
+          <code>
+            <span [innerHTML]="command | outputParams | sanitize"></span> =
+            <a
+              class="identifier"
+              [routerLink]="['/', game, 'classes', command.class]"
+              >{{ command.class }}</a
+            >.<span class="identifier">{{ command.member }}</span
+            ><span [innerHTML]="command | inputParams | sanitize"></span
+          ></code>
+        </ng-container>
+
+        <ng-container *ngIf="!command.attrs?.is_constructor">
+          <code
+            ><a
+              class="identifier"
+              [routerLink]="['/', game, 'classes', command.class]"
+              >{{ command.class }}</a
+            >.<span class="identifier">{{ command.member }}</span
+            ><span [innerHTML]="command | classParams | sanitize"></span
+          ></code>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="displayOpcodePresentation">
+        <code
+          >{{ command.id | opcode }}: {{ command.name | lowercase }}
+          <span [innerHTML]="command | opcodeParams | sanitize"></span
+        ></code>
+      </ng-container>
+
+      <div *ngIf="command.input?.length > 0" class="mt-3">
+        <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
+
+        <ng-container
+          *ngTemplateOutlet="
+            paramTemplate;
+            context: { $implicit: command.input }
           "
-        ></li>
-        <li *ngIf="command?.input[0]?.name === 'self'">
-          <code class="d-inline"
-            ><span class="identifier">self</span>: {{ command.class }}</code
-          >
-          must
-          <a
-            [routerLink]="['/', game]"
-            [queryParams]="{ q: 'constructor:' + command.class }"
-            >exist</a
-          >
-          prior to using this command.
-        </li>
-        <li *ngFor="let attr of attrs">
-          {{ "ui.attributes." + attr | translate }}.
-        </li>
-      </ul>
+        ></ng-container>
+      </div>
+
+      <div *ngIf="command.output?.length > 0" class="mt-3">
+        <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
+
+        <ng-container
+          *ngTemplateOutlet="
+            paramTemplate;
+            context: { $implicit: command.output }
+          "
+        ></ng-container>
+      </div>
     </div>
   </div>
-</ng-container>
 
-<ng-container *ngIf="relatedCommands?.length">
-  <hr />
-  <div class="row mb-2">
-    <div class="col-12">
-      <h5>{{ "ui.commandOverview.seeAlsoSubtitle" | translate }}</h5>
-      <ul class="list-unstyled">
-        <li *ngFor="let relatedCommand of relatedCommands">
-          <a [routerLink]="['/', game, extension, relatedCommand.id]">{{
-            relatedCommand.name
-          }}</a>
-          &ndash; {{ relatedCommand.short_desc }}
-        </li>
-      </ul>
+  <ng-container
+    *ngIf="
+      attrs.length ||
+      extension !== DEFAULT_EXTENSION ||
+      command?.input[0]?.name === 'self'
+    "
+  >
+    <hr />
+    <div class="row mb-2">
+      <div class="col-12">
+        <h5>{{ "ui.commandOverview.notesSubtitle" | translate }}</h5>
+        <ul class="list-unstyled">
+          <li
+            *ngIf="extension !== DEFAULT_EXTENSION"
+            [innerHTML]="
+              'ui.commandOverview.withExtension'
+                | translate: { extension: extension }
+            "
+          ></li>
+          <li *ngIf="command?.input[0]?.name === 'self'">
+            <code class="d-inline"
+              ><span class="identifier">self</span>: {{ command.class }}</code
+            >
+            must
+            <a
+              [routerLink]="['/', game]"
+              [queryParams]="{ q: 'constructor:' + command.class }"
+              >exist</a
+            >
+            prior to using this command.
+          </li>
+          <li *ngFor="let attr of attrs">
+            {{ "ui.attributes." + attr | translate }}.
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
 
-<ng-container *ngIf="snippet">
-  <hr />
-  <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
-  <pre
-    class="sample"
-    [innerHTML]="snippet | parametrify: command | sanitize"
-  ></pre>
-</ng-container>
+  <ng-container *ngIf="relatedCommands?.length">
+    <hr />
+    <div class="row mb-2">
+      <div class="col-12">
+        <h5>{{ "ui.commandOverview.seeAlsoSubtitle" | translate }}</h5>
+        <ul class="list-unstyled">
+          <li *ngFor="let relatedCommand of relatedCommands">
+            <a [routerLink]="['/', game, extension, relatedCommand.id]">{{
+              relatedCommand.name
+            }}</a>
+            &ndash; {{ relatedCommand.short_desc }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
 
+  <ng-container *ngIf="snippet">
+    <hr />
+    <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
+    <pre
+      class="sample"
+      [innerHTML]="snippet | parametrify: command | sanitize"
+    ></pre>
+  </ng-container>
+</div>
 <ng-template #paramTemplate let-params>
   <ng-container *ngFor="let param of params; let i = index">
     <div class="row">

@@ -16,410 +16,415 @@
 
 <hr />
 
-<div class="row mb-2">
-  <div class="col-12 flex-row d-flex justify-content-end">
-    <button
-      *ngIf="canClone()"
-      [disabled]="isInvalid"
-      class="btn btn-outline-secondary mr-2 dropdown-toggle"
-      data-toggle="dropdown"
-      data-offset="0,0"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      {{ "ui.shared.clone" | translate }}
-    </button>
-    <div class="dropdown-menu">
-      <span
-        class="dropdown-item"
-        *ngFor="let target of cloneTargets"
-        (click)="cloneCommand(target.value)"
-        >{{ target.name }}</span
+<div class="scroll-container">
+  <div class="row mb-2">
+    <div class="col-12 flex-row d-flex justify-content-end">
+      <button
+        *ngIf="canClone()"
+        [disabled]="isInvalid"
+        class="btn btn-outline-secondary mr-2 dropdown-toggle"
+        data-toggle="dropdown"
+        data-offset="0,0"
+        aria-haspopup="true"
+        aria-expanded="false"
       >
-    </div>
-    <button class="btn btn-outline-secondary text-nowrap" (click)="addInput()">
-      {{ "ui.commandEditor.addInput" | translate }}
-    </button>
-    <scl-icon-button
-      class="ml-3 text-danger"
-      icon="delete"
-      (clicked)="deleteCommand()"
-      [title]="'ui.commandEditor.deleteCommand' | translate"
-    >
-    </scl-icon-button>
-  </div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-12 col-xl-4">
-    <div class="input-group">
-      <span class="input-group-text">{{
-        "ui.commandEditor.fieldOpcode" | translate
-      }}</span>
-      <input
-        type="text"
-        class="form-control"
-        maxlength="4"
-        (blur)="opcodify(command)"
-        [ngModel]="command.id"
-        (ngModelChange)="onOpcodeChange(command, $event)"
-        [ngClass]="{
-          'is-invalid': isDirty && errors.emptyOpcode
-        }"
-      />
+        {{ "ui.shared.clone" | translate }}
+      </button>
+      <div class="dropdown-menu">
+        <span
+          class="dropdown-item"
+          *ngFor="let target of cloneTargets"
+          (click)="cloneCommand(target.value)"
+          >{{ target.name }}</span
+        >
+      </div>
+      <button
+        class="btn btn-outline-secondary text-nowrap"
+        (click)="addInput()"
+      >
+        {{ "ui.commandEditor.addInput" | translate }}
+      </button>
+      <scl-icon-button
+        class="ml-3 text-danger"
+        icon="delete"
+        (clicked)="deleteCommand()"
+        [title]="'ui.commandEditor.deleteCommand' | translate"
+      >
+      </scl-icon-button>
     </div>
   </div>
-  <div class="col-12 col-xl-8">
-    <div class="input-group">
-      <span class="input-group-text d-none d-md-inline">{{
-        "ui.commandEditor.fieldCommandLong" | translate
-      }}</span>
-      <span class="input-group-text d-inline d-md-none">{{
-        "ui.commandEditor.fieldCommandShort" | translate
-      }}</span>
-      <input
-        type="text"
-        class="form-control"
-        [ngModel]="command.name | uppercase"
-        (ngModelChange)="onCommandNameChange(command, $event)"
-        [ngClass]="{
-          'is-invalid': isDirty && errors.emptyName
-        }"
-      />
+
+  <div class="row mb-2">
+    <div class="col-12 col-xl-4">
+      <div class="input-group">
+        <span class="input-group-text">{{
+          "ui.commandEditor.fieldOpcode" | translate
+        }}</span>
+        <input
+          type="text"
+          class="form-control"
+          maxlength="4"
+          (blur)="opcodify(command)"
+          [ngModel]="command.id"
+          (ngModelChange)="onOpcodeChange(command, $event)"
+          [ngClass]="{
+            'is-invalid': isDirty && errors.emptyOpcode
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-xl-8">
+      <div class="input-group">
+        <span class="input-group-text d-none d-md-inline">{{
+          "ui.commandEditor.fieldCommandLong" | translate
+        }}</span>
+        <span class="input-group-text d-inline d-md-none">{{
+          "ui.commandEditor.fieldCommandShort" | translate
+        }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [ngModel]="command.name | uppercase"
+          (ngModelChange)="onCommandNameChange(command, $event)"
+          [ngClass]="{
+            'is-invalid': isDirty && errors.emptyName
+          }"
+        />
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row mb-2">
-  <div class="col-12">
-    <scl-selector
-      [label]="'ui.commandEditor.fieldExtension' | translate"
-      [model]="extension"
-      (modelChange)="onExtensionChange($event)"
-      [choices]="extensionNames"
-    ></scl-selector>
-  </div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-12 col-md-6">
-    <div class="input-group">
+  <div class="row mb-2">
+    <div class="col-12">
       <scl-selector
-        class="flex-grow-1"
-        [model]="command.class"
-        [label]="'ui.commandEditor.fieldClass' | translate"
-        (modelChange)="onClassChange(command, $event)"
-        [choices]="classes"
-        [canInput]="true"
-        [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
+        [label]="'ui.commandEditor.fieldExtension' | translate"
+        [model]="extension"
+        (modelChange)="onExtensionChange($event)"
+        [choices]="extensionNames"
       ></scl-selector>
     </div>
-    <div
-      class="mb-1"
-      *ngIf="
-        !command.attrs?.is_keyword &&
-        !command.attrs?.is_nop &&
-        !command.class &&
-        suggestedClassName
-      "
-    >
-      <small
-        >{{ "ui.commandEditor.suggestion" | translate }}:
-        <a
-          href="#"
-          (click)="(command.class = suggestedClassName) && updateErrors()"
-          >{{ suggestedClassName }}</a
-        ></small
-      >
-    </div>
   </div>
-  <div class="col-12 col-md-6">
-    <div class="input-group">
-      <span class="input-group-text">{{
-        "ui.commandEditor.fieldMember" | translate
-      }}</span>
-      <input
-        type="text"
-        [disabled]="
-          command.attrs?.is_keyword || command.attrs?.is_nop || !command.class
+
+  <div class="row mb-2">
+    <div class="col-12 col-md-6">
+      <div class="input-group">
+        <scl-selector
+          class="flex-grow-1"
+          [model]="command.class"
+          [label]="'ui.commandEditor.fieldClass' | translate"
+          (modelChange)="onClassChange(command, $event)"
+          [choices]="classes"
+          [canInput]="true"
+          [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
+        ></scl-selector>
+      </div>
+      <div
+        class="mb-1"
+        *ngIf="
+          !command.attrs?.is_keyword &&
+          !command.attrs?.is_nop &&
+          !command.class &&
+          suggestedClassName
         "
-        class="form-control"
-        [ngModel]="command.member"
-        (ngModelChange)="onMemberChange(command, $event)"
-      />
-    </div>
-    <div
-      class="mb-1"
-      *ngIf="
-        !command.attrs?.is_keyword &&
-        !command.attrs?.is_nop &&
-        !command.member &&
-        suggestedClassMember
-      "
-    >
-      <small
-        >{{ "ui.commandEditor.suggestion" | translate }}:
-        <a
-          href="#"
-          (click)="(command.member = suggestedClassMember) && updateErrors()"
-        >
-          {{ suggestedClassMember }}</a
-        ></small
       >
-    </div>
-  </div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-12">
-    <div class="input-group">
-      <span class="input-group-text d-none d-md-inline">{{
-        "ui.commandEditor.fieldShortDescriptionLong" | translate
-      }}</span>
-      <span class="input-group-text d-inline d-md-none">{{
-        "ui.commandEditor.fieldShortDescriptionShort" | translate
-      }}</span>
-      <input
-        type="text"
-        [ngModel]="command.short_desc"
-        (ngModelChange)="onShortDescriptionChange(command, $event)"
-        class="form-control"
-        [disabled]="command.attrs?.is_nop"
-      />
-    </div>
-  </div>
-</div>
-
-<ng-container cdkDropListGroup>
-  <div
-    cdkDropList
-    [cdkDropListData]="command.input"
-    [ngClass]="{ 'empty-list': !command.input?.length }"
-    (cdkDropListDropped)="drop($event, SourceType.any)"
-  >
-    <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
-
-    <div
-      *ngFor="let param of command.input; let i = index"
-      cdkDrag
-      cdkDragBoundary="scl-command-editor"
-      class="d-flex"
-    >
-      <div class="row mb-2 w-100">
-        <div class="col-12 col-lg-4">
-          <div class="input-group">
-            <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
-            <ng-container
-              *ngTemplateOutlet="paramTemplate; context: { param: param }"
-            ></ng-container>
-          </div>
-          <div
-            class="mb-1"
-            *ngIf="getSuggestedInputName(i) as suggestedInputName"
-          >
-            <small
-              >{{ "ui.commandEditor.suggestion" | translate }}:
-              <a
-                href="#"
-                (click)="(param.name = suggestedInputName) && updateErrors()"
-              >
-                {{ suggestedInputName }}</a
-              ></small
-            >
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4">
-          <scl-selector
-            [ngClass]="{ invalid: param.type === PrimitiveType.any }"
-            [(model)]="param.type"
-            [choices]="paramTypes"
-            (keydown)="onTypeKeyDown($event, param)"
-            [canInput]="false"
-          ></scl-selector>
-          <div
-            class="mb-1"
-            *ngIf="getSuggestedInputType(i) as suggestedInputType"
-          >
-            <small
-              >{{ "ui.commandEditor.suggestion" | translate }}:
-              <a
-                href="#"
-                (click)="(param.type = suggestedInputType) && updateErrors()"
-              >
-                {{ suggestedInputType }}</a
-              ></small
-            >
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4">
-          <scl-selector
-            [model]="getDefaultInputSource(param)"
-            (modelChange)="onParamSourceUpdate($event, param)"
-            [choices]="sources"
-            [canInput]="false"
-            [narrowDropdown]="true"
-          ></scl-selector>
-        </div>
-      </div>
-      <div>
-        <scl-icon-button
-          class="ml-3"
-          icon="delete"
-          (clicked)="deleteInput(i)"
-          [title]="'ui.commandEditor.deleteParam' | translate"
+        <small
+          >{{ "ui.commandEditor.suggestion" | translate }}:
+          <a
+            href="#"
+            (click)="(command.class = suggestedClassName) && updateErrors()"
+            >{{ suggestedClassName }}</a
+          ></small
         >
-        </scl-icon-button>
       </div>
     </div>
-  </div>
-
-  <div
-    cdkDropList
-    [cdkDropListData]="command.output"
-    [ngClass]="{ 'empty-list': !command.output?.length }"
-    (cdkDropListDropped)="drop($event, SourceType.var_any)"
-  >
-    <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
-    <div
-      *ngFor="let param of command.output; let i = index"
-      cdkDrag
-      cdkDragBoundary="scl-command-editor"
-      class="d-flex"
-    >
-      <div class="row mb-2 w-100">
-        <div class="col-12 col-lg-4">
-          <div class="input-group">
-            <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
-            <ng-container
-              *ngTemplateOutlet="paramTemplate; context: { param: param }"
-            ></ng-container>
-          </div>
-          <div
-            class="mb-1"
-            *ngIf="getSuggestedOutputName(i) as suggestedOutputName"
-          >
-            <small
-              >{{ "ui.commandEditor.suggestion" | translate }}:
-              <a
-                href="#"
-                (click)="(param.name = suggestedOutputName) && updateErrors()"
-              >
-                {{ suggestedOutputName }}</a
-              ></small
-            >
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4">
-          <scl-selector
-            [ngClass]="{ invalid: param.type === PrimitiveType.any }"
-            [(model)]="param.type"
-            [choices]="paramTypes"
-            (keydown)="onTypeKeyDown($event, param)"
-            [canInput]="
-              command.attrs?.is_constructor && i === command.output.length - 1
-            "
-          ></scl-selector>
-          <div
-            class="mb-1"
-            *ngIf="getSuggestedOutputType(i) as suggestedOutputType"
-          >
-            <small
-              >{{ "ui.commandEditor.suggestion" | translate }}:
-              <a
-                href="#"
-                (click)="(param.type = suggestedOutputType) && updateErrors()"
-              >
-                {{ suggestedOutputType }}</a
-              ></small
-            >
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4">
-          <scl-selector
-            [model]="getDefaultOutputSource(param)"
-            (modelChange)="onParamSourceUpdate($event, param)"
-            [choices]="sources"
-            [canInput]="false"
-          ></scl-selector>
-          <div
-            class="mb-1"
-            *ngIf="getSuggestedOutputSource(i) as suggestedOutputSource"
-          >
-            <small
-              >{{ "ui.commandEditor.suggestion" | translate }}:
-              <a
-                href="#"
-                (click)="
-                  onParamSourceUpdate(suggestedOutputSource, param) || false
-                "
-              >
-                {{ suggestedOutputSource }}</a
-              ></small
-            >
-          </div>
-        </div>
-      </div>
-      <div>
-        <scl-icon-button
-          class="ml-3"
-          icon="delete"
-          (clicked)="deleteOutput(i)"
-          [title]="'ui.commandEditor.deleteParam' | translate"
-        >
-        </scl-icon-button>
-      </div>
-    </div>
-  </div>
-</ng-container>
-
-<div class="row mb-2">
-  <div class="col-12">
-    <div class="d-inline-block pr-2" *ngFor="let attr of attrs">
-      <label
-        class="form-check-label"
-        [title]="'ui.attributes.' + attr | translate"
-      >
+    <div class="col-12 col-md-6">
+      <div class="input-group">
+        <span class="input-group-text">{{
+          "ui.commandEditor.fieldMember" | translate
+        }}</span>
         <input
-          type="checkbox"
-          [ngModel]="command.attrs ? command.attrs[attr] : undefined"
-          (ngModelChange)="onAttrChange(command, attr, $event)"
+          type="text"
+          [disabled]="
+            command.attrs?.is_keyword || command.attrs?.is_nop || !command.class
+          "
+          class="form-control"
+          [ngModel]="command.member"
+          (ngModelChange)="onMemberChange(command, $event)"
         />
-        <span class="checkbox"></span>
-        {{ attr }}
-      </label>
-    </div>
-
-    <div class="alert alert-danger mt-3" *ngIf="isInvalid && isDirty">
-      <div *ngFor="let message of errorMessages">
-        {{ message | translate }}
+      </div>
+      <div
+        class="mb-1"
+        *ngIf="
+          !command.attrs?.is_keyword &&
+          !command.attrs?.is_nop &&
+          !command.member &&
+          suggestedClassMember
+        "
+      >
+        <small
+          >{{ "ui.commandEditor.suggestion" | translate }}:
+          <a
+            href="#"
+            (click)="(command.member = suggestedClassMember) && updateErrors()"
+          >
+            {{ suggestedClassMember }}</a
+          ></small
+        >
       </div>
     </div>
   </div>
-</div>
 
-<div class="row mb-2">
-  <div class="col-12">
-    <div class="form-group">
-      <label [for]="command.id + '_snippet'" class="h5">{{
-        "ui.commandEditor.codeSnippetSubtitle" | translate
-      }}</label>
-      <textarea
-        class="form-control"
-        rows="4"
-        [id]="command.id + '_snippet'"
-        [ngModel]="snippet"
-        (ngModelChange)="onSnippetChange($event)"
-      ></textarea>
+  <div class="row mb-2">
+    <div class="col-12">
+      <div class="input-group">
+        <span class="input-group-text d-none d-md-inline">{{
+          "ui.commandEditor.fieldShortDescriptionLong" | translate
+        }}</span>
+        <span class="input-group-text d-inline d-md-none">{{
+          "ui.commandEditor.fieldShortDescriptionShort" | translate
+        }}</span>
+        <input
+          type="text"
+          [ngModel]="command.short_desc"
+          (ngModelChange)="onShortDescriptionChange(command, $event)"
+          class="form-control"
+          [disabled]="command.attrs?.is_nop"
+        />
+      </div>
     </div>
   </div>
-</div>
 
-<ng-template #paramTemplate let-param="param" let-i="i">
-  <input
-    type="text"
-    class="form-control"
-    [ngModel]="param.name"
-    (ngModelChange)="onParamNameChange($event, param)"
-    [ngClass]="{ 'is-invalid': isParamNameDuplicate(param.name) }"
-  />
-</ng-template>
+  <ng-container cdkDropListGroup>
+    <div
+      cdkDropList
+      [cdkDropListData]="command.input"
+      [ngClass]="{ 'empty-list': !command.input?.length }"
+      (cdkDropListDropped)="drop($event, SourceType.any)"
+    >
+      <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
+
+      <div
+        *ngFor="let param of command.input; let i = index"
+        cdkDrag
+        cdkDragBoundary="scl-command-editor"
+        class="d-flex"
+      >
+        <div class="row mb-2 w-100">
+          <div class="col-12 col-lg-4">
+            <div class="input-group">
+              <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
+              <ng-container
+                *ngTemplateOutlet="paramTemplate; context: { param: param }"
+              ></ng-container>
+            </div>
+            <div
+              class="mb-1"
+              *ngIf="getSuggestedInputName(i) as suggestedInputName"
+            >
+              <small
+                >{{ "ui.commandEditor.suggestion" | translate }}:
+                <a
+                  href="#"
+                  (click)="(param.name = suggestedInputName) && updateErrors()"
+                >
+                  {{ suggestedInputName }}</a
+                ></small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <scl-selector
+              [ngClass]="{ invalid: param.type === PrimitiveType.any }"
+              [(model)]="param.type"
+              [choices]="paramTypes"
+              (keydown)="onTypeKeyDown($event, param)"
+              [canInput]="false"
+            ></scl-selector>
+            <div
+              class="mb-1"
+              *ngIf="getSuggestedInputType(i) as suggestedInputType"
+            >
+              <small
+                >{{ "ui.commandEditor.suggestion" | translate }}:
+                <a
+                  href="#"
+                  (click)="(param.type = suggestedInputType) && updateErrors()"
+                >
+                  {{ suggestedInputType }}</a
+                ></small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <scl-selector
+              [model]="getDefaultInputSource(param)"
+              (modelChange)="onParamSourceUpdate($event, param)"
+              [choices]="sources"
+              [canInput]="false"
+              [narrowDropdown]="true"
+            ></scl-selector>
+          </div>
+        </div>
+        <div>
+          <scl-icon-button
+            class="ml-3"
+            icon="delete"
+            (clicked)="deleteInput(i)"
+            [title]="'ui.commandEditor.deleteParam' | translate"
+          >
+          </scl-icon-button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="command.output"
+      [ngClass]="{ 'empty-list': !command.output?.length }"
+      (cdkDropListDropped)="drop($event, SourceType.var_any)"
+    >
+      <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
+      <div
+        *ngFor="let param of command.output; let i = index"
+        cdkDrag
+        cdkDragBoundary="scl-command-editor"
+        class="d-flex"
+      >
+        <div class="row mb-2 w-100">
+          <div class="col-12 col-lg-4">
+            <div class="input-group">
+              <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
+              <ng-container
+                *ngTemplateOutlet="paramTemplate; context: { param: param }"
+              ></ng-container>
+            </div>
+            <div
+              class="mb-1"
+              *ngIf="getSuggestedOutputName(i) as suggestedOutputName"
+            >
+              <small
+                >{{ "ui.commandEditor.suggestion" | translate }}:
+                <a
+                  href="#"
+                  (click)="(param.name = suggestedOutputName) && updateErrors()"
+                >
+                  {{ suggestedOutputName }}</a
+                ></small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <scl-selector
+              [ngClass]="{ invalid: param.type === PrimitiveType.any }"
+              [(model)]="param.type"
+              [choices]="paramTypes"
+              (keydown)="onTypeKeyDown($event, param)"
+              [canInput]="
+                command.attrs?.is_constructor && i === command.output.length - 1
+              "
+            ></scl-selector>
+            <div
+              class="mb-1"
+              *ngIf="getSuggestedOutputType(i) as suggestedOutputType"
+            >
+              <small
+                >{{ "ui.commandEditor.suggestion" | translate }}:
+                <a
+                  href="#"
+                  (click)="(param.type = suggestedOutputType) && updateErrors()"
+                >
+                  {{ suggestedOutputType }}</a
+                ></small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <scl-selector
+              [model]="getDefaultOutputSource(param)"
+              (modelChange)="onParamSourceUpdate($event, param)"
+              [choices]="sources"
+              [canInput]="false"
+            ></scl-selector>
+            <div
+              class="mb-1"
+              *ngIf="getSuggestedOutputSource(i) as suggestedOutputSource"
+            >
+              <small
+                >{{ "ui.commandEditor.suggestion" | translate }}:
+                <a
+                  href="#"
+                  (click)="
+                    onParamSourceUpdate(suggestedOutputSource, param) || false
+                  "
+                >
+                  {{ suggestedOutputSource }}</a
+                ></small
+              >
+            </div>
+          </div>
+        </div>
+        <div>
+          <scl-icon-button
+            class="ml-3"
+            icon="delete"
+            (clicked)="deleteOutput(i)"
+            [title]="'ui.commandEditor.deleteParam' | translate"
+          >
+          </scl-icon-button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="row mb-2">
+    <div class="col-12">
+      <div class="d-inline-block pr-2" *ngFor="let attr of attrs">
+        <label
+          class="form-check-label"
+          [title]="'ui.attributes.' + attr | translate"
+        >
+          <input
+            type="checkbox"
+            [ngModel]="command.attrs ? command.attrs[attr] : undefined"
+            (ngModelChange)="onAttrChange(command, attr, $event)"
+          />
+          <span class="checkbox"></span>
+          {{ attr }}
+        </label>
+      </div>
+
+      <div class="alert alert-danger mt-3" *ngIf="isInvalid && isDirty">
+        <div *ngFor="let message of errorMessages">
+          {{ message | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-12">
+      <div class="form-group">
+        <label [for]="command.id + '_snippet'" class="h5">{{
+          "ui.commandEditor.codeSnippetSubtitle" | translate
+        }}</label>
+        <textarea
+          class="form-control"
+          rows="4"
+          [id]="command.id + '_snippet'"
+          [ngModel]="snippet"
+          (ngModelChange)="onSnippetChange($event)"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #paramTemplate let-param="param" let-i="i">
+    <input
+      type="text"
+      class="form-control"
+      [ngModel]="param.name"
+      (ngModelChange)="onParamNameChange($event, param)"
+      [ngClass]="{ 'is-invalid': isParamNameDuplicate(param.name) }"
+    />
+  </ng-template>
+</div>

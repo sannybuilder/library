@@ -19,6 +19,7 @@ export class CopyButtonComponent {
 
   currentIcon: string;
   isDisabled: boolean;
+  canCopy = 'clipboard' in navigator;
 
   constructor(private _ref: ChangeDetectorRef) {}
 
@@ -27,10 +28,7 @@ export class CopyButtonComponent {
   }
 
   copy() {
-    if ('clipboard' in navigator) {
-      return navigator.clipboard.writeText(this.text).then(() => this.onCopy());
-    }
-    return false;
+    return navigator.clipboard.writeText(this.text).then(() => this.onCopy());
   }
 
   onCopy() {

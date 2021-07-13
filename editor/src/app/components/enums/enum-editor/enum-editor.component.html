@@ -16,118 +16,120 @@
 
 <hr />
 
-<div class="row mb-2">
-  <div class="col-12 col-md-6 mb-2 mb-md-0">
-    <div class="input-group">
-      <span class="input-group-text d-none d-md-inline">{{
-        "ui.enumEditor.name" | translate
-      }}</span>
-      <input
-        type="text"
-        [ngModel]="enumToEdit.name"
-        (ngModelChange)="onEnumNameChange($event)"
-        class="form-control"
-        [placeholder]="'ui.enumEditor.newEnumPlaceholder' | translate"
-        autofocus
-        [ngClass]="{
-          'is-invalid': isDirty && !enumToEdit.name
-        }"
-      />
-    </div>
-  </div>
-
-  <div class="col-12 col-md-6">
-    <div class="input-group justify-content-md-end flex-nowrap">
-      <button
-        *ngIf="canClone()"
-        [disabled]="isInvalid"
-        class="btn btn-outline-secondary mr-2 dropdown-toggle"
-        data-toggle="dropdown"
-        data-offset="0,0"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        {{ "ui.shared.clone" | translate }}
-      </button>
-      <div class="dropdown-menu">
-        <span
-          class="dropdown-item"
-          *ngFor="let target of cloneTargets"
-          (click)="cloneEnum(target.value)"
-          >{{ target.name }}</span
-        >
-      </div>
-      <button
-        class="btn btn-outline-secondary text-nowrap"
-        (click)="addNewField()"
-      >
-        {{ "ui.enumEditor.addField" | translate }}
-      </button>
-      <scl-icon-button
-        *ngIf="!enumToEdit.isNew"
-        class="text-danger ml-4"
-        icon="delete"
-        (clicked)="deleteEnum()"
-        [title]="'ui.enumEditor.deleteEnum' | translate"
-      ></scl-icon-button>
-    </div>
-  </div>
-</div>
-
-<div
-  cdkDropList
-  [cdkDropListData]="enumToEdit.fields"
-  [ngClass]="{ 'empty-list': !enumToEdit.fields.length }"
-  (cdkDropListDropped)="drop($event)"
->
-  <h5>{{ "ui.enumEditor.fields" | translate }}</h5>
-  <div
-    *ngFor="let field of enumToEdit.fields; let i = index"
-    class="d-flex"
-    cdkDrag
-    cdkDragBoundary="scl-enum-editor"
-  >
-    <div class="row mb-2 w-100">
-      <div class="col-12 col-md-6">
-        <div class="input-group">
-          <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
-          <input
-            type="text"
-            class="form-control"
-            (paste)="onContentPaste($event, field)"
-            [placeholder]="'ui.enumEditor.newFieldPlaceholder' | translate"
-            [ngModel]="field[0]"
-            (ngModelChange)="onFieldNameChange($event, field)"
-            [ngClass]="{
-              'is-invalid':
-                isDirty && (isFieldNameDuplicate(field[0]) || !field[0])
-            }"
-          />
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
+<div class="scroll-container">
+  <div class="row mb-2">
+    <div class="col-12 col-md-6 mb-2 mb-md-0">
+      <div class="input-group">
+        <span class="input-group-text d-none d-md-inline">{{
+          "ui.enumEditor.name" | translate
+        }}</span>
         <input
           type="text"
+          [ngModel]="enumToEdit.name"
+          (ngModelChange)="onEnumNameChange($event)"
           class="form-control"
-          [placeholder]="evaluateValue(i)"
-          [ngModel]="field[1]"
-          (ngModelChange)="onFieldValueChange($event, field)"
+          [placeholder]="'ui.enumEditor.newEnumPlaceholder' | translate"
+          autofocus
+          [ngClass]="{
+            'is-invalid': isDirty && !enumToEdit.name
+          }"
         />
       </div>
     </div>
-    <div>
-      <scl-icon-button
-        class="ml-3"
-        icon="delete"
-        (clicked)="deleteField(i)"
-        [title]="'ui.enumEditor.deleteField' | translate"
-      ></scl-icon-button>
+
+    <div class="col-12 col-md-6">
+      <div class="input-group justify-content-md-end flex-nowrap">
+        <button
+          *ngIf="canClone()"
+          [disabled]="isInvalid"
+          class="btn btn-outline-secondary mr-2 dropdown-toggle"
+          data-toggle="dropdown"
+          data-offset="0,0"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ "ui.shared.clone" | translate }}
+        </button>
+        <div class="dropdown-menu">
+          <span
+            class="dropdown-item"
+            *ngFor="let target of cloneTargets"
+            (click)="cloneEnum(target.value)"
+            >{{ target.name }}</span
+          >
+        </div>
+        <button
+          class="btn btn-outline-secondary text-nowrap"
+          (click)="addNewField()"
+        >
+          {{ "ui.enumEditor.addField" | translate }}
+        </button>
+        <scl-icon-button
+          *ngIf="!enumToEdit.isNew"
+          class="text-danger ml-4"
+          icon="delete"
+          (clicked)="deleteEnum()"
+          [title]="'ui.enumEditor.deleteEnum' | translate"
+        ></scl-icon-button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="alert alert-danger mt-3" *ngIf="isInvalid && isDirty">
-  <div *ngFor="let message of errorMessages">
-    {{ message | translate }}
+  <div
+    cdkDropList
+    [cdkDropListData]="enumToEdit.fields"
+    [ngClass]="{ 'empty-list': !enumToEdit.fields.length }"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h5>{{ "ui.enumEditor.fields" | translate }}</h5>
+    <div
+      *ngFor="let field of enumToEdit.fields; let i = index"
+      class="d-flex"
+      cdkDrag
+      cdkDragBoundary="scl-enum-editor"
+    >
+      <div class="row mb-2 w-100">
+        <div class="col-12 col-md-6">
+          <div class="input-group">
+            <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
+            <input
+              type="text"
+              class="form-control"
+              (paste)="onContentPaste($event, field)"
+              [placeholder]="'ui.enumEditor.newFieldPlaceholder' | translate"
+              [ngModel]="field[0]"
+              (ngModelChange)="onFieldNameChange($event, field)"
+              [ngClass]="{
+                'is-invalid':
+                  isDirty && (isFieldNameDuplicate(field[0]) || !field[0])
+              }"
+            />
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <input
+            type="text"
+            class="form-control"
+            [placeholder]="evaluateValue(i)"
+            [ngModel]="field[1]"
+            (ngModelChange)="onFieldValueChange($event, field)"
+          />
+        </div>
+      </div>
+      <div>
+        <scl-icon-button
+          class="ml-3"
+          icon="delete"
+          (clicked)="deleteField(i)"
+          [title]="'ui.enumEditor.deleteField' | translate"
+        ></scl-icon-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger mt-3" *ngIf="isInvalid && isDirty">
+    <div *ngFor="let message of errorMessages">
+      {{ message | translate }}
+    </div>
   </div>
 </div>

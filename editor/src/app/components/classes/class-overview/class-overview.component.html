@@ -10,7 +10,6 @@
         class="form-control filter-methods-input"
         [placeholder]="'ui.classOverview.filterMethods' | translate"
         [(ngModel)]="filterQuery"
-
       />
       <div class="input-group-append">
         <scl-icon-button
@@ -23,7 +22,8 @@
   </div>
 </div>
 
-<pre *ngIf="classCommands" class="sample">
+<div class="scroll-container">
+  <pre *ngIf="classCommands" class="sample">
 class <span class="identifier">{{ className }}</span> <span 
 *ngIf="classOrigin !== DEFAULT_EXTENSION && commandsHaveSameOrigin" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension: classOrigin } }}</span>
 <ng-container *ngFor="let classCommand of classCommands | filterMethods: filterQuery; let isLast=last"><ng-container 
@@ -36,6 +36,7 @@ class <span class="identifier">{{ className }}</span> <span
   ></ng-container>
 </ng-container>end
 </pre>
+</div>
 
 <ng-template
   #memberTemplate

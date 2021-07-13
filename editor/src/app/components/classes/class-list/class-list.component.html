@@ -8,7 +8,8 @@
 
 <h5>{{ "ui.classList.title" | translate }}</h5>
 
-<pre *ngIf="entities" class="sample">
+<div class="scroll-container">
+  <pre *ngIf="entities" class="sample">
 <div *ngFor="let entity of entities"><a 
   [routerLink]="['/', game, 'classes', entity.name]"
   >{{ entity.name }}</a><span class="comment" 
@@ -16,3 +17,4 @@
     "ui.classOverview.onlyWithExtensionInline"
       | translate: { extension: entity.origin }
   }}</span></div></pre>
+</div>

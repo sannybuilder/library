@@ -133,7 +133,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((shouldDisplay) => {
         (this._el.nativeElement as HTMLElement).classList.toggle(
-          'fade',
+          'd-none',
           shouldDisplay
         );
       });

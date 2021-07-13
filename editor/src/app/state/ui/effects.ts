@@ -285,16 +285,6 @@ export class UiEffects {
     )
   );
 
-  displaySearchHelp$ = createEffect(
-    () =>
-      this._ui.displaySearchHelp$.pipe(
-        tap((state) => {
-          this._d.body.classList.toggle('overflow-hidden', state);
-        })
-      ),
-    { dispatch: false }
-  );
-
   constructor(
     private _actions$: Actions,
     private _ui: UiFacade,

@@ -26,10 +26,17 @@ export class CopyButtonComponent {
     return this.isDisabled;
   }
 
+  copy() {
+    if ('clipboard' in navigator) {
+      return navigator.clipboard.writeText(this.text).then(() => this.onCopy());
+    }
+    return false;
+  }
+
   onCopy() {
     this.isDisabled = true;
     this.currentIcon = 'success';
-
+    this._ref.markForCheck();
     setTimeout(() => {
       this.isDisabled = false;
       this.currentIcon = this.icon;

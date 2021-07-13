@@ -42,6 +42,7 @@ StuckCarCheck
 Tank
 Text
 Txd
+Weapon
 Weather
 World
 Zone
@@ -498,9 +499,7 @@ ClearThreatForPedType,03F2,0,0,("type: PedType" "threatMask%i")
 CreateCollectable,02EC,0,0,("x%f" "y%f" "z%f")
 FailCurrentMission,045C,0,0,()
 GetCollectablesCollected,03E1,0,0,("num%i")
-GetModelIdFromWeaponId,0604,0,0,("weaponType: WeaponType" "modelId%i")
 GetVersion,05E5,0,0,("versionId%i")
-GetWeaponIdFromModelId,0605,0,0,("modelId: model_any" "weaponType%i")
 HasSaveGameFinished,03D9,1,0,()
 IsAustralian,059A,1,0,()
 IsFrench,040B,1,0,()
@@ -992,6 +991,12 @@ $BEGIN
 LoadDictionary,0390,0,0,("name%s")
 LoadSprite,038F,0,0,("memorySlot%i" "spriteName%s")
 Remove,0391,0,0,()
+$END
+
+$Weapon
+$BEGIN
+GetIdFromModelId,0605,0,0,("modelId: model_object" "weaponType%i")
+GetModelId,0604,0,0,("weaponType: WeaponType" "modelId: model_object")
 $END
 
 $Weather

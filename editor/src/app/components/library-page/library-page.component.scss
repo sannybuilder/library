@@ -43,6 +43,21 @@
   .right-rail {
     order: 2;
     height: calc(100vh - 12rem);
+
+    :host-context(.scrolled-down) & {
+      height: calc(100vh - 8rem);
+    }
+    :host-context(.has-unsubmitted-changes) & {
+      height: calc(100vh - 12rem - 50px);
+    }
+    :host-context(.has-unsubmitted-changes.scrolled-down) & {
+      height: calc(100vh - 8rem - 50px);
+    }
+
+    &.col-xl-5.extended {
+      flex: 0 0 44%;
+      max-width: 44%;
+    }
   }
 }
 

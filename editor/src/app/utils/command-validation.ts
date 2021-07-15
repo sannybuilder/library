@@ -105,3 +105,10 @@ export function doesCommandDescriptionNotStartWith3rdPersonVerb(
     !!command.short_desc && !command.short_desc?.split(' ')[0]?.endsWith('s')
   );
 }
+
+export function doesConstructorNotReturnHandle(command: Command) {
+  const hasSingleParamHandle =
+    command.output?.length === 1 && command.output[0].name === 'handle';
+
+  return !!command.attrs?.is_constructor && !hasSingleParamHandle;
+}

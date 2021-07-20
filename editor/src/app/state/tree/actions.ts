@@ -14,8 +14,3 @@ export const loadStatements = createAction(
   '[tree] load statements',
   props<{ lang: string }>()
 );
-
-export const loadStatementsSuccess = createAction(
-  '[tree] load statements success',
-  props<{ dictionary: Record<string, string[]> }>()
-);

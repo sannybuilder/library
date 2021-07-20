@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { fromPairs, toPairs } from 'lodash';
 import { TreeNode, TreeNodeId } from '../../models/tree';
-import { state } from '../game/selectors';
 import { back, loadStatements, next, restart } from './actions';
 
 export interface TreeState {
@@ -26,10 +25,11 @@ const STATEMENTS: Record<string, Record<string, string>> = {
     '004E': 'I have           | a script    | and I want to end it',
     '0050': 'I have           | a script    | and I want to call a subroutine',
     '0051': 'I have           | a script    | and I want to return from the current subroutine',
-    '0118': 'I have           | car         | and I want to check     | if it is still alive',
-    '0119': 'I have           | character   | and I want to check     | if they are still alive',
-    '0256': 'I have           | player      | and I want to check     | if they are still alive',
-    '010A': 'I have           | player      | and I want to check     | their money amount',
+    '0118': 'I have           | a car         | and I want to check     | if it is still alive',
+    '0119': 'I have           | a character   | and I want to check     | if they are still alive',
+    '0256': 'I have           | a player      | and I want to check     | if they are still alive',
+    '010A': 'I have           | a player      | and I want to check     | their money amount',
+    // '0226': 'I have           | a character   | and I want to get       | their health value'
   },
   ru: {
     '0053': 'Я хочу создать | игрока',
@@ -166,8 +166,12 @@ function generateTree(lines: string[]) {
         if (buckets[value][bucketName] === 1) {
           // aliased node
           const nextRef = values[column + 1];
-          bucket.add(`${value}:${nextRef}`);
-          enqueue(nextRef, column + 2);
+          if (nextRef) {
+            bucket.add(`${value}:${nextRef}`);
+            enqueue(nextRef, column + 2);
+          } else {
+            bucket.add(`${value}:${id}`);
+          }
         } else {
           // proxy node
           const newBucketName = `80000${bucketName}`;
@@ -216,5 +220,3 @@ function normalizeTree(
     return m;
   }, {} as Record<TreeNodeId, TreeNode>);
 }
-
-// console.log(parseStatements(STATEMENTS));

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect } from '@ngrx/effects';
+import { createEffect } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { switchMap, tap } from 'rxjs/operators';
 import { loadStatements, restart } from './actions';

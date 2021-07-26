@@ -1,15 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { fromPairs, toPairs } from 'lodash';
-import { TreeNode, TreeNodeId } from '../../models/tree';
+import { fromPairs, toPairs, uniq } from 'lodash';
+import { Tree, TreeNode } from '../../models/tree';
 import { back, loadStatements, next, restart } from './actions';
 
 export interface TreeState {
-  tree: {
-    nodes: Record<TreeNodeId, TreeNode>;
-  };
   dictionary: Record<string, string>;
-  currentId: TreeNodeId;
-  history: TreeNodeId[];
+  tree?: Tree;
+  currentNode?: TreeNode;
+  history: TreeNode[];
   historyLine: string[];
 }
 
@@ -29,7 +27,7 @@ const STATEMENTS: Record<string, Record<string, string>> = {
     '0119': 'I have           | a character   | and I want to check     | if they are still alive',
     '0256': 'I have           | a player      | and I want to check     | if they are still alive',
     '010A': 'I have           | a player      | and I want to check     | their money amount',
-    // '0226': 'I have           | a character   | and I want to get       | their health value'
+    '0226': 'I have           | a character   | and I want to get       | their health value'
   },
   ru: {
     '0053': 'Я хочу создать | игрока',
@@ -45,13 +43,40 @@ const STATEMENTS: Record<string, Record<string, string>> = {
     '0119': 'У меня есть    | машина    | , и я хочу проверить        | , что она еще цела',
     '0256': 'У меня есть    | игрок     | , и я хочу проверить        | , что он еще жив',
     '010A': 'У меня есть    | игрок     | , и я хочу проверить        | кол-во денег на счету',
+    '0226': 'У меня есть    | персонаж  | , и я хочу получить         | уровень его здоровья'
   },
 };
 
+function getNext(lines: string[][], level: number): TreeNode[] {
+  const children = uniq(
+    lines.filter((line) => line.length > level).map((line) => line[level])
+  );
+
+  return [
+    ...lines
+      .filter((line) => line.length <= level)
+      .map((line) => {
+        return { id: line[0], next: [] };
+      }),
+
+    ...children.map((id) => {
+      return {
+        id,
+        next: getNext(
+          lines.filter((l) => l[level] === id),
+          level + 1
+        ),
+      };
+    }),
+  ];
+}
+
+function buildTree(lines: string[][]) {
+  return { root: { id: 'root', next: getNext(lines, 1) } };
+}
+
 export const initialState: TreeState = {
-  tree: { nodes: {} },
   dictionary: {},
-  currentId: 'root',
   history: [],
   historyLine: [''],
 };
@@ -59,19 +84,21 @@ export const initialState: TreeState = {
 export const treeReducer = createReducer(
   initialState,
   on(loadStatements, (state, { lang }) => {
-    const { dictionary, lines } = parseStatements(STATEMENTS[lang] || []);
-
-    const nodes = normalizeTree(generateTree(lines));
+    const { dictionary, lines } = parseStatements(
+      STATEMENTS[lang] || STATEMENTS['en'] || []
+    );
+    const tree = buildTree(lines);
     return {
       ...state,
-      tree: { nodes },
+      tree,
+      currentNode: tree.root,
       dictionary,
     };
   }),
-  on(next, (state, { id, lineChunk }) => ({
+  on(next, (state, { node, lineChunk }) => ({
     ...state,
-    currentId: id,
-    history: [...state.history, state.currentId],
+    currentNode: node,
+    history: [...state.history, state.currentNode!],
     historyLine: [...state.historyLine, lineChunk],
   })),
   on(back, (state) => {
@@ -82,16 +109,16 @@ export const treeReducer = createReducer(
     }
     return {
       ...state,
-      currentId: prev,
+      currentNode: prev,
       history: newHistory,
       historyLine: state.historyLine.slice(0, -1),
     };
   }),
   on(restart, (state) => ({
     ...state,
+    currentNode: state.tree?.root,
     history: [],
     historyLine: [''],
-    currentId: 'root',
   }))
 );
 
@@ -111,112 +138,11 @@ function parseStatements(statements: Record<string, string>) {
   const lines = entries.map(([k, v]) => {
     const chunks = v.split('|').map((p) => p.trim());
 
-    return [k, ...chunks.map(getOrInsert)].join(',');
+    return [k, ...chunks.map(getOrInsert)];
   });
 
   return {
     lines,
     dictionary: fromPairs(toPairs(dict)),
   };
-}
-
-function generateTree(lines: string[]) {
-  const tree: Record<string, string[]> = {};
-  const queue: Array<[string, number]> = [['root', 1]];
-  const uniqBuckets = new Set();
-  const valuesList = lines.map((line) => line.split(','));
-  const buckets = getBuckets(valuesList);
-
-  const enqueue = (name: string, column: number) => {
-    if (uniqBuckets.has(name)) {
-      return;
-    }
-    uniqBuckets.add(name);
-    queue.push([name, column]);
-  };
-
-  while (queue.length > 0) {
-    const [bucketName, column] = queue.pop()!;
-    const bucket = new Set<string>();
-
-    for (const values of valuesList) {
-      if (bucketName !== 'root' && values[column - 1] !== bucketName) {
-        continue;
-      }
-
-      const id = values[0];
-      if (column >= values.length) {
-        bucket.add(id);
-        continue;
-      }
-      const value = values[column];
-
-      const numBuckets = Object.keys(buckets[value]).length;
-      if (numBuckets < 2) {
-        // no intermediate nodes needed
-        if (column === values.length - 1) {
-          // terminal node
-          bucket.add(`${value}:${id}`);
-        } else {
-          // next node
-          bucket.add(value);
-          enqueue(value, column + 1);
-        }
-      } else {
-        if (buckets[value][bucketName] === 1) {
-          // aliased node
-          const nextRef = values[column + 1];
-          if (nextRef) {
-            bucket.add(`${value}:${nextRef}`);
-            enqueue(nextRef, column + 2);
-          } else {
-            bucket.add(`${value}:${id}`);
-          }
-        } else {
-          // proxy node
-          const newBucketName = `80000${bucketName}`;
-          bucket.add(`${value}:${newBucketName}`);
-
-          buckets[newBucketName] ??= {};
-          values.splice(column + 1, 0, newBucketName);
-          enqueue(newBucketName, column + 2);
-        }
-      }
-    }
-
-    tree[bucketName] = [...bucket].sort();
-  }
-
-  return tree;
-}
-
-function getBuckets(valuesList: string[][]) {
-  const buckets: Record<string, Record<string, number>> = {};
-
-  for (const values of valuesList) {
-    for (let index = 1; index < values.length; index++) {
-      const bucket = index === 1 ? 'root' : values[index - 1];
-      buckets[values[index]] ??= {};
-      buckets[values[index]][bucket] ??= 0;
-      buckets[values[index]][bucket]++;
-    }
-  }
-  return buckets;
-}
-
-function normalizeTree(
-  nodes: Record<string, string[]>
-): Record<TreeNodeId, TreeNode> {
-  return Object.entries(nodes).reduce((m, [key, node]) => {
-    node.forEach((id, i) => {
-      if (id.includes(':')) {
-        const parts = id.split(':');
-        const newId = parts.join('_');
-        m[newId] = { id: newId, label: parts[0], next: [parts[1]] };
-        node[i] = newId;
-      }
-    });
-    m[key] = { id: key, next: node, label: key, proxy: key.length > 5 };
-    return m;
-  }, {} as Record<TreeNodeId, TreeNode>);
 }

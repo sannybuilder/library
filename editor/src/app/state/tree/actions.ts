@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { TreeNodeId } from '../../models/tree';
+import { TreeNode } from '../../models/tree';
 
 export const next = createAction(
   '[tree] next node',
-  props<{ id: TreeNodeId; lineChunk: string }>()
+  props<{ node: TreeNode; lineChunk: string }>()
 );
 
 export const back = createAction('[tree] go back to previous choice');

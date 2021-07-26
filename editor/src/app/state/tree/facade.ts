@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { back, next, restart } from './actions';
-import { TreeNodeId } from '../../models/tree';
+import { TreeNode } from '../../models/tree';
 import { currentLine, currentNode, dictionary, nextNodes } from './selector';
 
 @Injectable({ providedIn: 'root' })
@@ -13,8 +13,8 @@ export class TreeFacade {
 
   constructor(private _store$: Store) {}
 
-  next(id: TreeNodeId, lineChunk: string) {
-    this._store$.dispatch(next({ id, lineChunk }));
+  next(node: TreeNode, lineChunk: string) {
+    this._store$.dispatch(next({ node, lineChunk }));
   }
 
   back() {

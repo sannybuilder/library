@@ -21,7 +21,7 @@
   >
     <ng-container
       *ngIf="
-        node.opcode && (getCommand(node.opcode) | async) as command;
+        isOpcodeRef(node) && (getCommand(node.id) | async) as command;
         else nextTemplate
       "
     >
@@ -29,7 +29,7 @@
     </ng-container>
 
     <ng-template #nextTemplate>
-      {{ "tree." + node.label | translate | stripPunctuation }}.<ng-container
+      {{ "tree." + node.id | translate | stripPunctuation }}.<ng-container
         *ngIf="!isThisNodeTerminal(node)"
         >..</ng-container
       >

@@ -77,7 +77,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   displaySearchHelp$ = this._ui.displaySearchHelp$;
   isSidebarCollapsed$ = this._ui.isSidebarCollapsed$;
   canGoBackInDecisionTree$ = this._tree.currentNode$.pipe(
-    map((node) => node.id !== 'root')
+    map((node) => node && node.id !== 'root')
   );
 
   command?: Command;

@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
+import { TreeNode } from '../../models/tree';
 import { DEFAULT_EXTENSION, Game } from '../../models';
 import { ExtensionsFacade, TreeFacade } from '../../state';
-import { TreeNode } from '../../models/tree';
-import { isThisNodeTerminal } from '../../utils';
+import { isOpcodeRef, isThisNodeTerminal } from '../../utils';
 
 @Component({
   selector: 'scl-decision-tree',
@@ -15,11 +15,10 @@ import { isThisNodeTerminal } from '../../utils';
 export class DecisionTreeComponent {
   @Input() game: Game;
   nextNodes$ = this._facade.nextNodes$;
-  currentNode$ = this._facade.currentNode$;
   currentLine$ = this._facade.currentLine$;
 
   hasReachedTheEnd$ = this.nextNodes$.pipe(
-    map((nodes) => nodes.every((node) => node.next.length === 0))
+    map((nodes) => !nodes || nodes.every((node) => node.next.length === 0))
   );
 
   constructor(
@@ -30,16 +29,16 @@ export class DecisionTreeComponent {
   ) {}
 
   next(node: TreeNode) {
-    if (node.opcode) {
+    if (this.isOpcodeRef(node)) {
       this._router.navigate(['/', this.game], {
-        queryParams: { q: node.opcode },
+        queryParams: { q: node.id },
       });
     } else {
       if (!node.id) {
         throw new Error(`Node id is missing ! node: ${node}`);
       }
-      const lineChunk = this._translate.instant(['tree', node.label].join('.'));
-      this._facade.next(node.id, lineChunk);
+      const lineChunk = this._translate.instant(['tree', node.id].join('.'));
+      this._facade.next(node, lineChunk);
     }
     return false;
   }
@@ -53,5 +52,9 @@ export class DecisionTreeComponent {
 
   isThisNodeTerminal(node: TreeNode) {
     return isThisNodeTerminal(node);
+  }
+
+  isOpcodeRef(node: TreeNode) {
+    return isOpcodeRef(node);
   }
 }

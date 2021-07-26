@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Game } from '../../models';
 import { TreeNode } from '../../models/tree';
 
 export const next = createAction(
@@ -12,5 +13,5 @@ export const restart = createAction('[tree] restart');
 
 export const loadStatements = createAction(
   '[tree] load statements',
-  props<{ lang: string }>()
+  props<{ game: Game; lang: string }>()
 );

@@ -35,7 +35,7 @@ export class DecisionTreeComponent {
       });
     } else {
       if (!node.id) {
-        throw new Error(`Node id is missing ! node: ${node}`);
+        throw new Error(`Node id is missing! node: ${node}`);
       }
       const lineChunk = this._translate.instant(['tree', node.id].join('.'));
       this._facade.next(node, lineChunk);

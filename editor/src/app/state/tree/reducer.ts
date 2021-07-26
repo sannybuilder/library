@@ -1,7 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { fromPairs, toPairs, uniq } from 'lodash';
+import { fromPairs, partition, toPairs, uniq } from 'lodash';
+
 import { Tree, TreeNode } from '../../models/tree';
 import { back, loadStatements, next, restart } from './actions';
+import statements from './statements';
 
 export interface TreeState {
   dictionary: Record<string, string>;
@@ -11,54 +13,12 @@ export interface TreeState {
   historyLine: string[];
 }
 
-// prettier-ignore
-const STATEMENTS: Record<string, Record<string, string>> = {
-  en: {
-    '0053': 'I want to create | a player',
-    '00A5': 'I want to create | a vehicle',
-    '009A': 'I want to create | a character | standing on foot',
-    '0129': 'I want to create | a character | sitting in the car as   | a driver',
-    '01C8': 'I want to create | a character | sitting in the car as   | a passenger',
-    '0001': 'I have           | a script    | and I want to pause it',
-    '004E': 'I have           | a script    | and I want to end it',
-    '0050': 'I have           | a script    | and I want to call a subroutine',
-    '0051': 'I have           | a script    | and I want to return from the current subroutine',
-    '0118': 'I have           | a car         | and I want to check     | if it is still alive',
-    '0119': 'I have           | a character   | and I want to check     | if they are still alive',
-    '0256': 'I have           | a player      | and I want to check     | if they are still alive',
-    '010A': 'I have           | a player      | and I want to check     | their money amount',
-    '0226': 'I have           | a character   | and I want to get       | their health value'
-  },
-  ru: {
-    '0053': 'Я хочу создать | игрока',
-    '00A5': 'Я хочу создать | машину',
-    '009A': 'Я хочу создать | персонажа  | , который стоит на ногах',
-    '0129': 'Я хочу создать | персонажа  | , который сидит в машине    | , как водитель',
-    '01C8': 'Я хочу создать | персонажа  | , который сидит в машине    | , как пассажир',
-    '0001': 'У меня есть    | скрипт    | , и я хочу приостановить его',
-    '004E': 'У меня есть    | скрипт    | , и я хочу завершить его',
-    '0050': 'У меня есть    | скрипт    | , и я хочу вызвать подпрограмму',
-    '0051': 'У меня есть    | скрипт    | , и я хочу выйти из текущей подпрограммы',
-    '0118': 'У меня есть    | персонаж  | , и я хочу проверить        | , что он еще жив',
-    '0119': 'У меня есть    | машина    | , и я хочу проверить        | , что она еще цела',
-    '0256': 'У меня есть    | игрок     | , и я хочу проверить        | , что он еще жив',
-    '010A': 'У меня есть    | игрок     | , и я хочу проверить        | кол-во денег на счету',
-    '0226': 'У меня есть    | персонаж  | , и я хочу получить         | уровень его здоровья'
-  },
-};
-
 function getNext(lines: string[][], level: number): TreeNode[] {
-  const children = uniq(
-    lines.filter((line) => line.length > level).map((line) => line[level])
-  );
+  const [nodes, leaves] = partition(lines, (line) => line.length > level);
+  const children = uniq(nodes.map((line) => line[level]));
 
   return [
-    ...lines
-      .filter((line) => line.length <= level)
-      .map((line) => {
-        return { id: line[0], next: [] };
-      }),
-
+    ...leaves.map((line) => ({ id: line[0], next: [] })),
     ...children.map((id) => {
       return {
         id,
@@ -83,9 +43,9 @@ export const initialState: TreeState = {
 
 export const treeReducer = createReducer(
   initialState,
-  on(loadStatements, (state, { lang }) => {
+  on(loadStatements, (state, { game, lang }) => {
     const { dictionary, lines } = parseStatements(
-      STATEMENTS[lang] || STATEMENTS['en'] || []
+      statements[game][lang] || statements[game]['en'] || []
     );
     const tree = buildTree(lines);
     return {

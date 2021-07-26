@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { fromPairs, partition, toPairs, uniq } from 'lodash';
+import { fromPairs, partition, toPairs, uniq, isEmpty } from 'lodash';
 
 import { Tree, TreeNode } from '../../models/tree';
 import { back, loadStatements, next, restart } from './actions';
@@ -44,9 +44,10 @@ export const initialState: TreeState = {
 export const treeReducer = createReducer(
   initialState,
   on(loadStatements, (state, { game, lang }) => {
-    const { dictionary, lines } = parseStatements(
-      statements[game][lang] || statements[game]['en'] || []
-    );
+    const s = !isEmpty(statements[game][lang])
+      ? statements[game][lang]
+      : statements[game]['en'];
+    const { dictionary, lines } = parseStatements(s);
     const tree = buildTree(lines);
     return {
       ...state,

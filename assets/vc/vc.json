@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1627496358902,
-    "version": "0.92",
+    "last_update": 1627498187302,
+    "version": "0.94",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -26677,6 +26677,69 @@
           "short_desc": "Gets the corresponding handle of the object located at the given address in memory"
         },
         {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05EC",
+          "name": "GET_THIS_SCRIPT_STRUCT",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "GetThisScriptStruct",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the address of the script struct in the game memory"
+        },
+        {
+          "input": [
+            {
+              "name": "scriptName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05ED",
+          "name": "GET_SCRIPT_STRUCT_NAMED",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetScriptStructNamed",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the address of a running script which name matches the given string or 0 otherwise"
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "int"
+            }
+          ],
+          "id": "05EE",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true,
+            "is_overload": true
+          },
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code"
+        },
+        {
           "input": [
             {
               "name": "buttonId",
@@ -27163,6 +27226,25 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9F",
+          "name": "GET_THIS_SCRIPT_STRUCT",
+          "num_params": 1,
+          "short_desc": "Gets the address of the script struct in the game memory",
+          "class": "Memory",
+          "member": "GetThisScriptStruct",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
           "input": [
             {
               "name": "address",
@@ -27286,6 +27368,50 @@
           "class": "Memory",
           "member": "CallMethodReturn",
           "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "scriptName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AAA",
+          "name": "GET_SCRIPT_STRUCT_NAMED",
+          "num_params": 2,
+          "short_desc": "Gets the address of a running script which name matches the given string or 0 otherwise",
+          "class": "Memory",
+          "member": "GetScriptStructNamed",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "int"
+            }
+          ],
+          "id": "0AB0",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "attrs": {
+            "is_condition": true,
             "is_static": true,
             "is_overload": true
           }

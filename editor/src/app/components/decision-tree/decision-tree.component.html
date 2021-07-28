@@ -1,4 +1,14 @@
 <div class="row mb-2">
+  <div class="col-12 d-flex justify-content-end games-container">
+    <ng-container *ngFor="let game of ['gta3', 'vc', 'sa']">
+      <a [routerLink]="['/', game, 'find']">
+        <scl-icon [game]="game" size="16" [title]="GameTitle[game]"></scl-icon>
+      </a>
+    </ng-container>
+  </div>
+</div>
+
+<div class="row mb-2">
   <div class="col-12 d-flex flex-row">
     <h5 class="mr-3">{{ "ui.tree.title" | translate }}</h5>
   </div>
@@ -35,4 +45,18 @@
       >
     </ng-template>
   </a>
+</div>
+
+<div class="row pt-3 pb-2">
+  <div class="col-12">
+    <small class="text-muted">
+      {{ "ui.tree.wantMore" | translate }}
+      <a
+        href="https://github.com/sannybuilder/dev/discussions/162"
+        target="_blank"
+        class="text-small"
+        >{{ "ui.tree.shareIdeas" | translate }}</a
+      >
+    </small>
+  </div>
 </div>

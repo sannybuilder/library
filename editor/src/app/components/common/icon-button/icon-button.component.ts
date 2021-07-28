@@ -9,5 +9,6 @@ export class IconButtonComponent {
   @Input() icon: string;
   @Input() disabled: boolean;
   @Input() label?: string;
+  @Input() type: 'secondary' | 'success' = 'secondary';
   @Output() clicked = new EventEmitter();
 }

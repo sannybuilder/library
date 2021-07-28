@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
 import { TreeNode } from '../../models/tree';
-import { DEFAULT_EXTENSION, Game } from '../../models';
+import { DEFAULT_EXTENSION, Game, GameTitle } from '../../models';
 import { ExtensionsFacade, TreeFacade } from '../../state';
 import { isOpcodeRef, isThisNodeTerminal } from '../../utils';
 
@@ -13,6 +13,8 @@ import { isOpcodeRef, isThisNodeTerminal } from '../../utils';
   styleUrls: ['./decision-tree.component.scss'],
 })
 export class DecisionTreeComponent {
+  GameTitle = GameTitle;
+
   @Input() game: Game;
   nextNodes$ = this._facade.nextNodes$;
   currentLine$ = this._facade.currentLine$;

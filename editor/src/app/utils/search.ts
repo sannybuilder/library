@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js';
-import { get, set, omit, cloneDeep, split } from 'lodash';
+import { get, set, omit, cloneDeep, split, flatMap, sortBy } from 'lodash';
 import { Command } from '../models';
 import { commandParams, normalizeId } from './command';
 
@@ -73,11 +73,25 @@ export function search(list: Command[], searchTerms: string) {
   }
 
   const options = { ...FUSEJS_OPTIONS };
+  const words = query.split(/\s+|,/);
+  const doesContainOnlyOpcodes = words.every(
+    (w) => w.length === 4 && (w[0] === '0' || w[0] === '8')
+  );
 
-  if (query.length === 4 && (query[0] === '0' || query[0] === '8')) {
-    // opcode id search
-    query = normalizeId(query);
-    options.threshold = 0.0;
+  if (doesContainOnlyOpcodes) {
+    // multi opcode id search
+    return sortBy(
+      flatMap(words, (opcode) => {
+        options.threshold = 0.0;
+
+        const fuse = new Fuse(list, options);
+        return handleHighlight(
+          fuse.search(normalizeId(opcode)),
+          options.fusejsHighlightKey
+        );
+      }),
+      'id'
+    );
   }
 
   let filtered = list;

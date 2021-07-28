@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { Config, CONFIG } from '../../../config';
 import { Game, KNOWN_LANGUAGES } from '../../../models';
-import { UiFacade, AuthFacade } from '../../../state';
+import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 
 @Component({
   selector: 'scl-header',
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   games = Object.values(Game);
   displaySearchHelp$ = this._ui.displaySearchHelp$;
   isSearchHelpDismissed$ = this._ui.isSearchHelpDismissed$;
+  game$ = this._game.game$;
 
   displaySearchBar$ = this._ui.displaySearchBar$;
   isAuthorized$ = this._auth.isAuthorized$;
@@ -48,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _translate: TranslateService,
     private _cookies: CookieService,
+    private _game: GameFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
 

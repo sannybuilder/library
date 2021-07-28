@@ -109,6 +109,7 @@ export const uiReducer = createReducer(
   on(updateSearchTerm, (state, { searchTerm }) => ({
     ...state,
     searchTerm,
+    displaySearchHelp: false,
   })),
   on(toggleCommandListElements, (state, { flag }) => ({
     ...state,

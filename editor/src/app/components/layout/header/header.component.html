@@ -170,6 +170,28 @@
           >
             <div class="card-body">
               <div class="search-help-content">
+                <p>
+                  Regular search forgives minor typos and allows different word
+                  forms, e.g.
+                  <ng-container
+                    *ngTemplateOutlet="searchLink; context: { q: 'playa' }"
+                  ></ng-container>
+                  or
+                  <ng-container
+                    *ngTemplateOutlet="searchLink; context: { q: 'coors' }"
+                  ></ng-container>
+                  .<br />
+                  For
+                  <code>exact search</code> wrap your search query in double
+                  quotes, e.g.
+                  <ng-container
+                    *ngTemplateOutlet="
+                      searchLink;
+                      context: { q: '&quot;get_char_health&quot;' }
+                    "
+                  ></ng-container>
+                </p>
+
                 <p>Search supports special queries:</p>
 
                 <ul>
@@ -251,18 +273,36 @@
 
                 <p>
                   Each query can be inverted by prepending with <code>!</code>,
-                  e.g. <code>!if:player</code>
+                  e.g.
+                  <ng-container
+                    *ngTemplateOutlet="searchLink; context: { q: '!if:player' }"
+                  ></ng-container>
                 </p>
 
                 <p>
-                  Empty queries (e.g. <code>if:</code>) return commands from any
-                  class.
+                  Empty queries (e.g.
+                  <ng-container
+                    *ngTemplateOutlet="searchLink; context: { q: 'if:' }"
+                  ></ng-container>
+                  ) return commands from any class.
                 </p>
 
                 <p>
-                  For <code>exact search</code> wrap your search query in double
-                  quotes, e.g.
-                  <code>"get_char_health"</code>
+                  You can query opcodes, separating them with a comma or a
+                  whitespace, e.g.
+                  <ng-container
+                    *ngTemplateOutlet="
+                      searchLink;
+                      context: { q: '0001,0002,0003' }
+                    "
+                  ></ng-container>
+                  or
+                  <ng-container
+                    *ngTemplateOutlet="
+                      searchLink;
+                      context: { q: '0256 0118 0119' }
+                    "
+                  ></ng-container>
                 </p>
               </div>
               <hr />
@@ -402,22 +442,10 @@
   </svg>
 </ng-template>
 
-<ng-template #loginIcon>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    class="bi bi-box-arrow-in-right"
-    viewBox="0 0 16 16"
+<ng-template #searchLink let-q="q">
+  <code
+    ><a [routerLink]="['/', game$ | async]" [queryParams]="{ q: q }">{{
+      q
+    }}</a></code
   >
-    <path
-      fill-rule="evenodd"
-      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"
-    />
-    <path
-      fill-rule="evenodd"
-      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
-    />
-  </svg>
 </ng-template>

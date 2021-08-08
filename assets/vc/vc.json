@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1628395037052,
-    "version": "0.99",
+    "last_update": 1628449168753,
+    "version": "0.100",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -27185,6 +27185,28 @@
         {
           "input": [
             {
+              "name": "scriptFileName",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0600",
+          "name": "STREAM_CUSTOM_SCRIPT",
+          "num_params": 2,
+          "attrs": {
+            "is_keyword": true,
+            "is_overload": true,
+            "is_variadic": true,
+            "is_branch": true
+          },
+          "short_desc": "Loads a file with compiled SCM instructions at the given path and runs a new custom script"
+        },
+        {
+          "input": [
+            {
               "name": "buttonId",
               "type": "Button"
             },
@@ -27579,7 +27601,8 @@
           "attrs": {
             "is_keyword": true,
             "is_variadic": true,
-            "is_branch": true
+            "is_branch": true,
+            "is_overload": true
           }
         },
         {
@@ -27688,7 +27711,7 @@
         {
           "input": [
             {
-              "name": "fileName",
+              "name": "filePathName",
               "type": "string"
             },
             {
@@ -27730,6 +27753,75 @@
           "attrs": {
             "is_destructor": true
           }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "output": [
+            {
+              "name": "size",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9C",
+          "name": "GET_FILE_SIZE",
+          "num_params": 2,
+          "short_desc": "Gets the file size in bytes",
+          "class": "File",
+          "member": "GetSize"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "destination",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9D",
+          "name": "READ_FROM_FILE",
+          "num_params": 3,
+          "short_desc": "Reads the specified number of bytes from the opened file and writes them to the memory region starting from the address of the destination variable",
+          "class": "File",
+          "member": "Read"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "source",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9E",
+          "name": "WRITE_TO_FILE",
+          "num_params": 3,
+          "short_desc": "Copies the specified number of bytes of the memory region starting from the address of the source variable to the file",
+          "class": "File",
+          "member": "Write"
         },
         {
           "output": [

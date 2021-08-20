@@ -19,3 +19,6 @@ cargo run snippets ../gta3/snippets > ../editor/src/assets/gta3/snippets.json
 cargo run snippets ../vc/snippets > ../editor/src/assets/vc/snippets.json
 cargo run snippets ../sa/snippets > ../editor/src/assets/sa/snippets.json
 
+cargo run keywords ../gta3/gta3.json > ../editor/src/assets/gta3/keywords.txt
+cargo run keywords ../vc/vc.json > ../editor/src/assets/vc/keywords.txt
+cargo run keywords ../sa/sa.json > ../editor/src/assets/sa/keywords.txt

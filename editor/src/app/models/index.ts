@@ -117,6 +117,12 @@ export const GameEnumsAssets: Record<Game, string> = {
   [Game.SA]: 'assets/sa/enums.txt',
 };
 
+export const GameKeywordsAssets: Record<Game, string> = {
+  [Game.GTA3]: 'assets/gta3/keywords.txt',
+  [Game.VC]: 'assets/vc/keywords.txt',
+  [Game.SA]: 'assets/sa/keywords.txt',
+};
+
 export const GameLibrary: Record<Game, string> = {
   [Game.GTA3]: 'gta3/gta3.json',
   [Game.VC]: 'vc/vc.json',

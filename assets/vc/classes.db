@@ -500,6 +500,7 @@ $END
 
 $Fs
 $BEGIN
+DoesFileExist,0AAB,1,0,("filePachName%s")
 SetCurrentDirectory,0A99,0,0,("path: any")
 $END
 
@@ -623,10 +624,12 @@ $END
 
 $Memory
 $BEGIN
+Allocate,0AC8,0,0,("size%i" "address%i")
 CallFunction,0AA5,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments")
 CallFunctionReturn,0AA7,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
 CallMethod,0AA6,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments")
 CallMethodReturn,0AA8,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
+Free,0AC9,0,0,("address%i")
 GetLabelPointer,0AC6,0,0,( "address%i")
 GetObjectPointer,0A98,0,0,("object: Object" "address%i")
 GetObjectRef,0AEC,0,0,("address%i" "handle: Object")

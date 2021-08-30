@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1630344455654,
-    "version": "0.109",
+    "last_update": 1630347856043,
+    "version": "0.110",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -28146,6 +28146,24 @@
         {
           "input": [
             {
+              "name": "filePachName",
+              "type": "string"
+            }
+          ],
+          "id": "0AAB",
+          "name": "DOES_FILE_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if a file at the given path exists",
+          "class": "Fs",
+          "member": "DoesFileExist",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
               "name": "keyCode",
               "type": "int"
             }
@@ -28273,6 +28291,47 @@
           "attrs": {
             "is_static": true,
             "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AC8",
+          "name": "ALLOCATE_MEMORY",
+          "num_params": 2,
+          "short_desc": "Allocates a chunk of memory of the given size and stores its address to the variable",
+          "class": "Memory",
+          "member": "Allocate",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "id": "0AC9",
+          "name": "FREE_MEMORY",
+          "num_params": 1,
+          "short_desc": "Frees the memory allocated with 0AC8",
+          "class": "Memory",
+          "member": "Free",
+          "attrs": {
+            "is_static": true
           }
         },
         {

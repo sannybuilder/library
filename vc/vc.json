@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1630087643113,
-    "version": "0.108",
+    "last_update": 1630344455654,
+    "version": "0.109",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -27856,7 +27856,7 @@
           "id": "0A9F",
           "name": "GET_THIS_SCRIPT_STRUCT",
           "num_params": 1,
-          "short_desc": "Gets the address of the script struct in the game memory",
+          "short_desc": "Gets the address of the current script structure in the game memory",
           "class": "Memory",
           "member": "GetThisScriptStruct",
           "attrs": {
@@ -27888,6 +27888,76 @@
           "attrs": {
             "is_keyword": true,
             "is_branch": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "libraryFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA2",
+          "name": "LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "id": "0AA3",
+          "name": "FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "Free",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA4",
+          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
           }
         },
         {
@@ -28034,6 +28104,18 @@
             "is_static": true,
             "is_overload": true,
             "is_variadic": true
+          }
+        },
+        {
+          "id": "0AA9",
+          "name": "IS_GAME_VERSION_ORIGINAL",
+          "num_params": 0,
+          "short_desc": "Returns true if the game version is vanilla 1.0",
+          "class": "Game",
+          "member": "IsVersionOriginal",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
           }
         },
         {

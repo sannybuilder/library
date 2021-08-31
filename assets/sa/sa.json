@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1630421338088,
-    "version": "0.140",
+    "last_update": 1630439102002,
+    "version": "0.141",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -49302,7 +49302,7 @@
           "output": [
             {
               "name": "memory",
-              "type": "int",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -49335,7 +49335,7 @@
           "output": [
             {
               "name": "memory",
-              "type": "int",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -49404,7 +49404,7 @@
               "source": "var_any"
             },
             {
-              "name": "bufferSize",
+              "name": "size",
               "type": "int"
             }
           ],
@@ -49442,15 +49442,15 @@
         {
           "input": [
             {
-              "name": "file",
+              "name": "self",
               "type": "File"
             },
             {
-              "name": "formattedText",
+              "name": "format",
               "type": "string"
             },
             {
-              "name": "data",
+              "name": "args",
               "type": "arguments"
             }
           ],
@@ -49458,39 +49458,43 @@
           "name": "WRITE_FORMATTED_STRING_TO_FILE",
           "num_params": 3,
           "short_desc": "Writes a formatted string to the file",
-          "class": "Fs",
-          "member": "WriteFormattedStringToFile",
+          "class": "File",
+          "member": "WriteFormattedString",
           "attrs": {
-            "is_static": true
+            "is_variadic": true
           }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "File"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "format",
+              "type": "string"
             },
             {
-              "name": "_p3",
-              "type": "any"
-            },
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "output": [
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "memory",
+              "type": "string",
+              "source": "var_any"
             }
           ],
           "id": "0ADA",
           "name": "SCAN_FILE",
           "num_params": 4,
           "short_desc": "",
-          "class": "Fs",
-          "member": "ScanFile",
+          "class": "File",
+          "member": "Scan",
           "attrs": {
-            "is_static": true
+            "is_condition": true,
+            "is_variadic": true
           }
         },
         {
@@ -49502,7 +49506,7 @@
           ],
           "output": [
             {
-              "name": "name",
+              "name": "carName",
               "type": "string",
               "source": "var_any"
             }
@@ -49511,11 +49515,11 @@
           "name": "GET_NAME_OF_VEHICLE_MODEL",
           "num_params": 2,
           "short_desc": "",
+          "class": "Streaming",
+          "member": "GetNameOfVehicleModel",
           "attrs": {
             "is_static": true
-          },
-          "class": "Streaming",
-          "member": "GetNameOfVehicleModel"
+          }
         },
         {
           "input": [
@@ -49561,8 +49565,8 @@
           ],
           "output": [
             {
-              "name": "_p1",
-              "type": "any",
+              "name": "memory",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -50420,5 +50424,6 @@
         }
       ]
     }
-  ]
+  ],
+  "classes": []
 }

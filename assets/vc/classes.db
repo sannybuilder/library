@@ -496,8 +496,12 @@ GetSize,0A9C,0,0,("self: File" "size%i")
 IsEndReached,0AD6,1,0,("self: File")
 Open,0A9A,1,0,("filePathName%s" "mode: FileMode" "handle: File")
 Read,0A9D,0,0,("self: File" "size%i" "destination%i")
+ReadString,0AD7,1,0,("self: File" "buffer%s" "size%i")
+Scan,0ADA,1,0,("self: File" "format%s" "args: arguments" "memory%s")
 Seek,0AD5,1,0,("self: File" "offset%i" "origin: SeekOrigin")
 Write,0A9E,0,0,("self: File" "size%i" "source%i")
+WriteFormattedString,0AD9,0,0,("self: File" "format%s" "args: arguments")
+WriteString,0AD8,1,0,("self: File" "source%s")
 $END
 
 $Fs
@@ -704,6 +708,7 @@ IsButtonPressedWithSensitivity,0601,1,0,("buttonId: Button" "sensitivity%i")
 IsInCarFireButtonPressed,0585,1,0,()
 IsKeyPressed,0AB0,1,0,("keyCode%i")
 SetDrunkInputDelay,03FD,0,0,("pad: Pad" "delay%i")
+TestCheat,0ADC,1,0,("input%s")
 $END
 
 $Path
@@ -975,6 +980,7 @@ $END
 
 $Streaming
 $BEGIN
+GetNameOfVehicleModel,0ADB,0,0,("modelId: model_vehicle" "carName%s")
 HasAnimationLoaded,04EE,1,0,("animationFile%s")
 HasModelLoaded,0248,1,0,("modelId: model_any")
 HasSpecialCharacterLoaded,023D,1,0,("slotId%i")
@@ -1007,6 +1013,7 @@ $END
 
 $Text
 $BEGIN
+AddLabel,0ADF,0,0,("dynamicKey: gxt_key" "text%s")
 ClearHelp,03E6,0,0,()
 ClearPrints,00BE,0,0,()
 ClearSmallPrints,03EB,0,0,()
@@ -1017,6 +1024,7 @@ DisplayFormatted,0609,0,0,("screenX%f" "screenY%f" "text%s" )
 DisplayString,0608,0,0,("screenX%f" "screenY%f" "text%s")
 DisplayWith2Numbers,045B,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num1%i" "num2%i")
 DisplayWithNumber,045A,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num%i")
+GetLabelString,0ADE,0,0,("key: gxt_key" "memory%s")
 LoadMissionText,054C,0,0,("tableName%s")
 Print,00BB,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintBig,00BA,0,0,("key: gxt_key" "time%i" "style: TextStyle")
@@ -1041,7 +1049,8 @@ PrintWith6Numbers,0308,0,0,("key: gxt_key" "num1%i" "num2%i" "num3%i" "num4%i" "
 PrintWithNumber,01E4,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
 PrintWithNumberBig,01E3,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextStyle")
 PrintWithNumberNow,01E5,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
-ScanString,0AD4,0,0,("text%s" "format%s" "args: arguments" "memory%i")
+RemoveLabel,0AE0,0,0,("dynamicKey: gxt_key")
+ScanString,0AD4,0,0,("text%s" "format%s" "args: arguments" "memory%s")
 SetBackground,0345,0,0,("state%b")
 SetCenter,0342,0,0,("state%b")
 SetColor,0340,0,0,("red%i" "green%i" "blue%i" "alpha%i")
@@ -1051,7 +1060,7 @@ SetProportional,0348,0,0,("state%b")
 SetRightJustify,03E4,0,0,("state%b")
 SetScale,033F,0,0,("widthScale%f" "heightScale%f")
 SetWrapX,0343,0,0,("width%f")
-StringFormat,0AD3,0,0,("text%s" "args: arguments" "memory%i")
+StringFormat,0AD3,0,0,("text%s" "args: arguments" "memory%s")
 UseCommands,03F0,0,0,("state%b")
 $END
 
@@ -1113,6 +1122,7 @@ SetExtraColors,04F9,0,0,("color%i" "fade%b")
 SetPedDensityMultiplier,03DE,0,0,("multiplier%f")
 SetTonightsEvent,054D,0,0,("scrollbarMessage: ScrollbarMessage")
 SetVisibilityOfClosestObjectOfType,0363,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_object" "state%b")
+SpawnVehicleByCheating,0ADD,0,0,("modelId: model_vehicle")
 SwapNearestBuildingModel,03B6,0,0,("x%f" "y%f" "z%f" "radius%f" "fromModelId: model_object" "toModelId: model_object")
 SwitchProcessing,03B7,0,0,("state%b")
 SwitchRubbish,03AD,0,0,("state%b")

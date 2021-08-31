@@ -140,6 +140,7 @@ export const classOrigin = createSelector(
 );
 
 export const classesMeta = createSelector(
-  state,
-  (state: GameState | undefined) => state?.classesMeta ?? []
+  extensionsState,
+  (state: ExtensionsState, props: { game: Game }) =>
+    state.games[props.game]?.classesMeta ?? []
 );

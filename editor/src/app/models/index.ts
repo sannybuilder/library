@@ -177,14 +177,12 @@ export type Modifier = 'except' | 'only';
 
 export type SupportInfo = Record<string, Record<string, GameSupportInfo[]>>;
 
-export type ClassesMeta = Record<
-  string,
-  {
-    desc: string;
-    constructable: boolean;
-    extends?: string;
-  }
->;
+export type ClassesMeta = Array<{
+  name: string;
+  desc: string;
+  constructable: boolean;
+  extends?: string;
+}>;
 
 export interface GameSupportInfo {
   game: Game;
@@ -225,10 +223,9 @@ export interface LoadExtensionsResponse {
   extensions: Extension[];
 }
 
-export interface LoadClassesMetaResponse {
-  [key: string]: {
-    desc: string;
-    constructable: boolean;
-    extends?: string;
-  };
-}
+export type LoadClassesMetaResponse = Array<{
+  name: string;
+  desc: string;
+  constructable: boolean;
+  extends?: string;
+}>;

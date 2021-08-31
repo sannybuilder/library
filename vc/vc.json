@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1630421338150,
-    "version": "0.116",
+    "last_update": 1630439297058,
+    "version": "0.117",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -28536,7 +28536,7 @@
           "output": [
             {
               "name": "memory",
-              "type": "int",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -28569,7 +28569,7 @@
           "output": [
             {
               "name": "memory",
-              "type": "int",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -28624,6 +28624,232 @@
           "member": "IsEndReached",
           "attrs": {
             "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "buffer",
+              "type": "string",
+              "source": "var_any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0AD7",
+          "name": "READ_STRING_FROM_FILE",
+          "num_params": 3,
+          "short_desc": "Reads data from the file into the buffer until either the end of buffer is reached, the newline character is read, or the end-of-file is reached, whichever comes first",
+          "class": "File",
+          "member": "ReadString",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "id": "0AD8",
+          "name": "WRITE_STRING_TO_FILE",
+          "num_params": 2,
+          "short_desc": "Copies data from the source string to the file up to but not including the null character",
+          "class": "File",
+          "member": "WriteString",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AD9",
+          "name": "WRITE_FORMATTED_STRING_TO_FILE",
+          "num_params": 3,
+          "short_desc": "Writes a formatted string to the file",
+          "class": "File",
+          "member": "WriteFormattedString",
+          "attrs": {
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "memory",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ADA",
+          "name": "SCAN_FILE",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "File",
+          "member": "Scan",
+          "attrs": {
+            "is_condition": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_vehicle"
+            }
+          ],
+          "output": [
+            {
+              "name": "carName",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ADB",
+          "name": "GET_NAME_OF_VEHICLE_MODEL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Streaming",
+          "member": "GetNameOfVehicleModel",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "input",
+              "type": "string"
+            }
+          ],
+          "id": "0ADC",
+          "name": "TEST_CHEAT",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified string of letters has been typed on the keyboard",
+          "class": "Pad",
+          "member": "TestCheat",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_vehicle"
+            }
+          ],
+          "id": "0ADD",
+          "name": "SPAWN_VEHICLE_BY_CHEATING",
+          "num_params": 1,
+          "short_desc": "Creates a vehicle with the model (no pre-loading needed) in front of the player",
+          "class": "World",
+          "member": "SpawnVehicleByCheating",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "output": [
+            {
+              "name": "memory",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ADE",
+          "name": "GET_TEXT_LABEL_STRING",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "GetLabelString",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "dynamicKey",
+              "type": "gxt_key"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "id": "0ADF",
+          "name": "ADD_TEXT_LABEL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "AddLabel",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "dynamicKey",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0AE0",
+          "name": "REMOVE_TEXT_LABEL",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Text",
+          "member": "RemoveLabel",
+          "attrs": {
+            "is_static": true
           }
         },
         {
@@ -28980,6 +29206,232 @@
           "short_desc": "Writes a value to the game memory"
         }
       ]
+    }
+  ],
+  "classes": [
+    {
+      "name": "Blip",
+      "constructable": true,
+      "desc": "Markers and Radar Icons"
+    },
+    {
+      "name": "Car",
+      "constructable": true,
+      "desc": "Script Vehicles"
+    },
+    {
+      "name": "CarGenerator",
+      "constructable": true,
+      "desc": "Parking Lots"
+    },
+    {
+      "name": "Char",
+      "constructable": true,
+      "desc": "Script Characters (Actors)"
+    },
+    {
+      "name": "CutsceneObject",
+      "constructable": true,
+      "desc": "Cutscene Objects"
+    },
+    {
+      "name": "Garage",
+      "constructable": true,
+      "desc": "Garages"
+    },
+    {
+      "name": "Object",
+      "constructable": true,
+      "desc": "Script Objects"
+    },
+    {
+      "name": "ObjectPath",
+      "constructable": true,
+      "desc": "Pre-recorded script paths"
+    },
+    {
+      "name": "Phone",
+      "constructable": true,
+      "desc": "Phone Booth Calls and Messages"
+    },
+    {
+      "name": "Pickup",
+      "constructable": true,
+      "desc": "Interactive Script Objects"
+    },
+    {
+      "name": "Player",
+      "constructable": true,
+      "desc": "The Main Character Controlled by a Player"
+    },
+    {
+      "name": "ScriptFire",
+      "constructable": true,
+      "desc": "Script Fires"
+    },
+    {
+      "name": "Sound",
+      "constructable": true,
+      "desc": "Positionable Audio Effects"
+    },
+    {
+      "name": "Sphere",
+      "constructable": true,
+      "desc": "Cylinder Markers"
+    },
+    {
+      "name": "Boat",
+      "constructable": true,
+      "extends": "Car",
+      "desc": "Boats"
+    },
+    {
+      "name": "Heli",
+      "constructable": true,
+      "extends": "Car",
+      "desc": "Choppers"
+    },
+    {
+      "name": "Plane",
+      "constructable": true,
+      "extends": "Car",
+      "desc": "Planes"
+    },
+    {
+      "name": "Tank",
+      "constructable": true,
+      "extends": "Car",
+      "desc": "Tanks"
+    },
+    {
+      "name": "Audio",
+      "constructable": false,
+      "desc": "Audio Effects"
+    },
+    {
+      "name": "Camera",
+      "constructable": false,
+      "desc": "Camera/View Manipulation"
+    },
+    {
+      "name": "Clock",
+      "constructable": false,
+      "desc": "Time Manipulation"
+    },
+    {
+      "name": "Credits",
+      "constructable": false,
+      "desc": "End-Game Credits"
+    },
+    {
+      "name": "Cutscene",
+      "constructable": false,
+      "desc": "Mission Cutscenes"
+    },
+    {
+      "name": "Debugger",
+      "constructable": false,
+      "desc": "Various Debugging Utilities"
+    },
+    {
+      "name": "Fx",
+      "constructable": false,
+      "desc": "Various 2D Effects (Shadows, Lights, Coronas, Particles)"
+    },
+    {
+      "name": "Game",
+      "constructable": false,
+      "desc": "Game State"
+    },
+    {
+      "name": "Gang",
+      "constructable": false,
+      "desc": "Gangs Configuration"
+    },
+    {
+      "name": "Hud",
+      "constructable": false,
+      "desc": "Game UI"
+    },
+    {
+      "name": "KillFrenzy",
+      "constructable": false,
+      "desc": "Rampages Logic"
+    },
+    {
+      "name": "Math",
+      "constructable": false,
+      "desc": "Math and Conversion Utilities"
+    },
+    {
+      "name": "Pad",
+      "constructable": false,
+      "desc": "Input Controls"
+    },
+    {
+      "name": "Path",
+      "constructable": false,
+      "desc": "Path Configuration And Lookup"
+    },
+    {
+      "name": "Rc",
+      "constructable": false,
+      "desc": "Remote-Controlled Cars"
+    },
+    {
+      "name": "Restart",
+      "constructable": false,
+      "desc": "Configuration of Respawn Points"
+    },
+    {
+      "name": "Shortcut",
+      "constructable": false,
+      "desc": "Mission Shortcut Taxi"
+    },
+    {
+      "name": "Stat",
+      "constructable": false,
+      "desc": "Game Statistics"
+    },
+    {
+      "name": "Streaming",
+      "constructable": false,
+      "desc": "Loading Game Assets"
+    },
+    {
+      "name": "StuckCarCheck",
+      "constructable": false,
+      "desc": "Stuck Cars Check"
+    },
+    {
+      "name": "Text",
+      "constructable": false,
+      "desc": "Text Messages"
+    },
+    {
+      "name": "Txd",
+      "constructable": false,
+      "desc": "Texture Dictionaries"
+    },
+    {
+      "name": "Weapon",
+      "constructable": false,
+      "desc": "Weapons"
+    },
+    {
+      "name": "Weather",
+      "constructable": false,
+      "desc": "Weather Control"
+    },
+    {
+      "name": "World",
+      "constructable": false,
+      "desc": "Traffic, Population and other Physical Entities"
+    },
+    {
+      "name": "Zone",
+      "constructable": false,
+      "desc": "Game Map Areas Configuration"
     }
   ]
 }

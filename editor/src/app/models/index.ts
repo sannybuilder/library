@@ -129,6 +129,12 @@ export const GameLibrary: Record<Game, string> = {
   [Game.SA]: 'sa/sa.json',
 };
 
+export const GameClassesMeta: Record<Game, string> = {
+  [Game.GTA3]: 'gta3/classes.json',
+  [Game.VC]: 'vc/classes.json',
+  [Game.SA]: 'sa/classes.json',
+};
+
 export const GameVersion: Record<Game, string> = {
   [Game.GTA3]: 'gta3/version.txt',
   [Game.VC]: 'vc/version.txt',
@@ -171,6 +177,15 @@ export type Modifier = 'except' | 'only';
 
 export type SupportInfo = Record<string, Record<string, GameSupportInfo[]>>;
 
+export type ClassesMeta = Record<
+  string,
+  {
+    desc: string;
+    constructable: boolean;
+    extends?: string;
+  }
+>;
+
 export interface GameSupportInfo {
   game: Game;
   level: SupportLevel;
@@ -208,4 +223,12 @@ export interface LoadExtensionsResponse {
     url: string;
   };
   extensions: Extension[];
+}
+
+export interface LoadClassesMetaResponse {
+  [key: string]: {
+    desc: string;
+    constructable: boolean;
+    extends?: string;
+  };
 }

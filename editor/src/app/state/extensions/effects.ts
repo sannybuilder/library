@@ -17,6 +17,8 @@ import {
   cloneCommand,
   GameCommandUpdate,
   initSupportInfo,
+  loadClassesMeta,
+  loadClassesMetaSuccess,
   loadExtensions,
   loadExtensionsSuccess,
   updateCommands,
@@ -62,6 +64,23 @@ export class ExtensionsEffects {
               fileName: GameLibrary[game],
               lastUpdate: response.meta.last_update,
               content: JSON.stringify(response, null, 2),
+            }),
+          ])
+        )
+      )
+    )
+  );
+
+  loadClassesMeta$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadClassesMeta),
+      withLatestFrom(this._auth.authToken$),
+      concatMap(([{ game }, accessToken]) =>
+        this._service.loadClassesMeta(game, accessToken).pipe(
+          switchMap((response) => [
+            loadClassesMetaSuccess({
+              game,
+              classes: response,
             }),
           ])
         )
@@ -143,14 +162,18 @@ export class ExtensionsEffects {
         // distinctUntilChanged<ReturnType<typeof updateGameCommands>>(isEqual),
         switchMap(({ game }) =>
           this._extensions.getGameExtensions(game).pipe(
-            withLatestFrom(this._extensions.getGameVersion(game)),
-            tap(([extensions, oldVersion]) => {
+            withLatestFrom(
+              this._extensions.getGameVersion(game),
+              this._extensions.getGameClassesMeta(game)
+            ),
+            tap(([extensions, oldVersion, classesMeta]) => {
               const version = bumpVersion(oldVersion);
               this._changes.registerExtensionsChange({
                 version,
                 fileName: GameLibrary[game],
                 content: extensions,
                 url: 'https://library.sannybuilder.com/#/' + game,
+                classesMeta,
               });
               this._changes.registerTextFileChange(GameVersion[game], version);
             })

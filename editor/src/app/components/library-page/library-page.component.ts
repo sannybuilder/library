@@ -107,6 +107,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     Object.values(Game).forEach((game) => {
       this._extensions.loadExtensions(game);
+      this._extensions.loadClasses(game);
       this._snippets.loadSnippets(game);
       this._enums.loadEnums(game);
     });

@@ -39,29 +39,33 @@ export const initialState: ChangesState = {
 
 export const changesReducer = createReducer(
   initialState,
-  on(registerExtensionsChange, (state, { fileName, version, url, content }) => {
-    const newContent = JSON.stringify(
-      {
-        meta: {
-          last_update: Date.now(),
-          version,
-          url,
+  on(
+    registerExtensionsChange,
+    (state, { fileName, version, url, content, classesMeta }) => {
+      const newContent = JSON.stringify(
+        {
+          meta: {
+            last_update: Date.now(),
+            version,
+            url,
+          },
+          extensions: stripBody(content),
+          classes: classesMeta,
         },
-        extensions: stripBody(content),
-      },
-      null,
-      2
-    );
+        null,
+        2
+      );
 
-    return {
-      ...state,
-      hasChanges: true,
-      changes: {
-        ...state.changes,
-        [fileName]: newContent,
-      },
-    };
-  }),
+      return {
+        ...state,
+        hasChanges: true,
+        changes: {
+          ...state.changes,
+          [fileName]: newContent,
+        },
+      };
+    }
+  ),
   on(registerTextFileChange, (state, { fileName, content }) => {
     return {
       ...state,

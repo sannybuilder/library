@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  ClassesMeta,
   Command,
   DEFAULT_EXTENSION,
   Entity,
@@ -11,6 +12,7 @@ import {
 } from '../../models';
 import {
   initSupportInfo,
+  loadClassesMetaSuccess,
   loadExtensions,
   loadExtensionsSuccess,
   updateGameCommands,
@@ -24,6 +26,7 @@ export interface GameState {
   lastUpdate?: number;
   version?: string;
   supportInfo: SupportInfo;
+  classesMeta: ClassesMeta;
 }
 export interface ExtensionsState {
   games: Partial<Record<Game, GameState>>;
@@ -52,6 +55,11 @@ export const extensionsReducer = createReducer(
         entities: getEntities(extensions),
         loading: false,
       })
+  ),
+  on(loadClassesMetaSuccess, (state, { game, classes }) =>
+    updateState(state, game, {
+      classesMeta: classes,
+    })
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(

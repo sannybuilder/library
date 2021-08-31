@@ -7,6 +7,7 @@ import {
   loadExtensions,
   cloneCommand,
   initSupportInfo,
+  loadClassesMeta,
 } from './actions';
 import * as selector from './selectors';
 
@@ -28,6 +29,10 @@ export class ExtensionsFacade {
 
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });
+  }
+
+  getGameClassesMeta(game: Game) {
+    return this.store$.select(selector.classesMeta, { game });
   }
 
   getGameVersion(game: Game) {
@@ -73,6 +78,10 @@ export class ExtensionsFacade {
 
   loadExtensions(game: Game) {
     this.store$.dispatch(loadExtensions({ game }));
+  }
+
+  loadClasses(game: Game) {
+    this.store$.dispatch(loadClassesMeta({ game }));
   }
 
   cloneCommand({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Enums, Extension } from '../../models';
+import { ClassesMeta, Enums, Extension } from '../../models';
 import {
   clearChanges,
   initializeGithub,
@@ -27,14 +27,16 @@ export class ChangesFacade {
     version,
     url,
     content,
+    classesMeta,
   }: {
     fileName: string;
     version: string;
     url: string;
     content: Extension[];
+    classesMeta: ClassesMeta;
   }) {
     this.store$.dispatch(
-      registerExtensionsChange({ fileName, version, url, content })
+      registerExtensionsChange({ fileName, version, url, content, classesMeta })
     );
   }
 

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1630451122257,
-    "version": "0.141",
+    "last_update": 1630609186635,
+    "version": "0.142",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -48660,7 +48660,7 @@
           "num_params": 3,
           "short_desc": "Stores the handles of a ped and vehicle being closest to the char or -1 otherwise",
           "class": "Char",
-          "member": "GetClosestEntities"
+          "member": "StoreClosestEntities"
         },
         {
           "output": [
@@ -48700,7 +48700,7 @@
           ],
           "output": [
             {
-              "name": "number",
+              "name": "numGear",
               "type": "int",
               "source": "var_any"
             }
@@ -49273,7 +49273,7 @@
           ],
           "output": [
             {
-              "name": "target",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
@@ -49291,7 +49291,7 @@
         {
           "input": [
             {
-              "name": "text",
+              "name": "textFormat",
               "type": "string"
             },
             {
@@ -49773,7 +49773,7 @@
         {
           "input": [
             {
-              "name": "dirPath",
+              "name": "dirName",
               "type": "string"
             }
           ],
@@ -49784,24 +49784,25 @@
           "class": "Fs",
           "member": "CreateDirectory",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_condition": true
           }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "filePathName",
+              "type": "string"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "fileName",
+              "type": "string"
             }
           ],
           "output": [
             {
-              "name": "_p3",
-              "type": "any",
+              "name": "handle",
+              "type": "File",
               "source": "var_any"
             }
           ],
@@ -49809,23 +49810,24 @@
           "name": "FIND_FIRST_FILE",
           "num_params": 3,
           "short_desc": "",
-          "class": "Fs",
-          "member": "FindFirstFile",
+          "class": "File",
+          "member": "FindFirst",
           "attrs": {
-            "is_static": true
+            "is_constructor": true,
+            "is_condition": true
           }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "File"
             }
           ],
           "output": [
             {
-              "name": "_p2",
-              "type": "any",
+              "name": "fileName",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -49833,29 +49835,25 @@
           "name": "FIND_NEXT_FILE",
           "num_params": 2,
           "short_desc": "",
-          "class": "Fs",
-          "member": "FindNextFile",
+          "class": "File",
+          "member": "FindNext",
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "self",
+              "type": "File"
             }
           ],
           "id": "0AE8",
           "name": "FIND_CLOSE",
           "num_params": 1,
           "short_desc": "",
-          "class": "Fs",
-          "member": "FindClose",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "File",
+          "member": "FindClose"
         },
         {
           "output": [
@@ -49954,16 +49952,19 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "number",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
-            },
+              "name": "format",
+              "type": "string"
+            }
+          ],
+          "output": [
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
             }
           ],
           "id": "0AED",

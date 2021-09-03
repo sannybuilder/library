@@ -2,11 +2,7 @@
 
 An attempt to build a complete and consistent class system and commands documentation spanning GTA 3D series games. Heavily based on original naming conventions.
 
-Currently under early development. Contributions are welcome!
-
 Available online at https://library.sannybuilder.com/
-
-Introductory post on Patreon: https://www.patreon.com/posts/49241369
 
 Discuss: https://github.com/sannybuilder/dev/discussions/136
 
@@ -18,7 +14,7 @@ Discuss: https://github.com/sannybuilder/dev/discussions/136
 - Has an advanced filtering and searching functionality
 - Provides information on support of the command in other games
 - Has a convenient online editor for authorized users (see Contributing) where changes could be committed from the browser to GitHub
-- Provides the most recent classes.db and enums.txt files for download and use with Sanny Builder
+- Provides the most recent `classes.db`, `keywords.txt` and `enums.txt` files for download and use with Sanny Builder
 - Has the responsive design for using on mobile devices
 
 ## Contributing

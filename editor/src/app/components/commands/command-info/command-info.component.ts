@@ -56,6 +56,7 @@ export class CommandInfoComponent {
   @Input() extension: string;
   @Input() displayOpcodePresentation: boolean;
   @Input() relatedCommands: Command[] | undefined;
+  @Input() classDesc?: string;
   @Output() descriptionClick = new EventEmitter();
 
   isPrimitiveType(param: Param) {

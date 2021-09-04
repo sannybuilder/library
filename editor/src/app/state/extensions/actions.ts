@@ -12,11 +12,6 @@ export const loadExtensions = createAction(
   props<{ game: Game }>()
 );
 
-export const loadClassesMeta = createAction(
-  '[extensions] load classes meta',
-  props<{ game: Game }>()
-);
-
 export const loadExtensionsSuccess = createAction(
   '[extensions] load success',
   props<{
@@ -24,13 +19,6 @@ export const loadExtensionsSuccess = createAction(
     extensions: Extension[];
     version: string;
     lastUpdate: number;
-  }>()
-);
-
-export const loadClassesMetaSuccess = createAction(
-  '[extensions] load classes meta success',
-  props<{
-    game: Game;
     classes: ClassesMeta;
   }>()
 );

@@ -107,7 +107,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     Object.values(Game).forEach((game) => {
       this._extensions.loadExtensions(game);
-      this._extensions.loadClasses(game);
       this._snippets.loadSnippets(game);
       this._enums.loadEnums(game);
     });
@@ -276,6 +275,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getClassOrigin(className: string) {
     return this._extensions.getClassOrigin(className);
+  }
+
+  getClassDesc(game: Game, className: string) {
+    return this._extensions.getClassMeta(game, className);
+  }
+
+  getClassesMeta(game: Game) {
+    return this._extensions.getGameClassesMeta(game);
   }
 
   @HostListener('window:resize', [])

@@ -7,7 +7,6 @@ import {
   loadExtensions,
   cloneCommand,
   initSupportInfo,
-  loadClassesMeta,
 } from './actions';
 import * as selector from './selectors';
 
@@ -80,10 +79,6 @@ export class ExtensionsFacade {
     this.store$.dispatch(loadExtensions({ game }));
   }
 
-  loadClasses(game: Game) {
-    this.store$.dispatch(loadClassesMeta({ game }));
-  }
-
   cloneCommand({
     command,
     extension,
@@ -108,6 +103,10 @@ export class ExtensionsFacade {
       command,
       extension,
     });
+  }
+
+  getClassMeta(game: Game, className: string) {
+    return this.store$.select(selector.classMeta, { game, className });
   }
 
   initSupportInfo() {

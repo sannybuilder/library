@@ -12,7 +12,7 @@
   <pre *ngIf="entities" class="sample">
 <div *ngFor="let entity of entities"><a 
   [routerLink]="['/', game, 'classes', entity.name]"
-  >{{ entity.name }}</a><span class="comment" 
+  >{{ entity.name }}</a><span class="comment" *ngIf="getClassDesc(entity.name) as desc"> // {{ desc }}</span><span class="identifier" 
   *ngIf="entity.origin !== DEFAULT_EXTENSION"> // {{
     "ui.classOverview.onlyWithExtensionInline"
       | translate: { extension: entity.origin }

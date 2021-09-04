@@ -129,12 +129,6 @@ export const GameLibrary: Record<Game, string> = {
   [Game.SA]: 'sa/sa.json',
 };
 
-export const GameClassesMeta: Record<Game, string> = {
-  [Game.GTA3]: 'gta3/classes.json',
-  [Game.VC]: 'vc/classes.json',
-  [Game.SA]: 'sa/classes.json',
-};
-
 export const GameVersion: Record<Game, string> = {
   [Game.GTA3]: 'gta3/version.txt',
   [Game.VC]: 'vc/version.txt',
@@ -221,11 +215,5 @@ export interface LoadExtensionsResponse {
     url: string;
   };
   extensions: Extension[];
+  classes: ClassesMeta;
 }
-
-export type LoadClassesMetaResponse = Array<{
-  name: string;
-  desc: string;
-  constructable: boolean;
-  extends?: string;
-}>;

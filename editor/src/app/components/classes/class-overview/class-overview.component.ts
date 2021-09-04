@@ -25,6 +25,7 @@ export class ClassOverviewComponent {
   @Input() game: Game;
   @Input() className: string;
   @Input() classOrigin: string;
+  @Input() classDesc?: string;
   @Input() set classCommands(val: ClassCommand[]) {
     this._classCommands = val;
 

@@ -23,8 +23,11 @@
 </div>
 
 <div class="scroll-container">
-  <pre *ngIf="classCommands" class="sample">
-class <span class="identifier">{{ className }}</span> <span 
+  <pre
+    *ngIf="classCommands"
+    class="sample"
+  ><span class="comment" *ngIf="classDesc">// {{ classDesc }}
+</span>class <span class="identifier">{{ className }}</span> <span 
 *ngIf="classOrigin !== DEFAULT_EXTENSION && commandsHaveSameOrigin" class="comment">// {{ "ui.classOverview.onlyWithExtension" | translate: { extension: classOrigin } }}</span>
 <ng-container *ngFor="let classCommand of classCommands | filterMethods: filterQuery; let isLast=last"><ng-container 
     *ngTemplateOutlet="memberTemplate; 

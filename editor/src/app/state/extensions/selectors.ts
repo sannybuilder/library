@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
+  ClassesMeta,
   Command,
   DEFAULT_EXTENSION,
   Extension,
@@ -143,4 +144,10 @@ export const classesMeta = createSelector(
   extensionsState,
   (state: ExtensionsState, props: { game: Game }) =>
     state.games[props.game]?.classesMeta ?? []
+);
+
+export const classMeta = createSelector(
+  classesMeta,
+  (meta: ClassesMeta, props: { game: Game; className: string }) =>
+    meta.find((m) => m.name === props.className)
 );

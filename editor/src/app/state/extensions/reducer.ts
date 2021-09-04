@@ -12,7 +12,6 @@ import {
 } from '../../models';
 import {
   initSupportInfo,
-  loadClassesMetaSuccess,
   loadExtensions,
   loadExtensionsSuccess,
   updateGameCommands,
@@ -45,7 +44,7 @@ export const extensionsReducer = createReducer(
   ),
   on(
     loadExtensionsSuccess,
-    (state, { game, extensions, version, lastUpdate }) =>
+    (state, { game, extensions, version, lastUpdate, classes }) =>
       updateState(state, game, {
         extensions: orderBy(extensions, (e) =>
           e.name === DEFAULT_EXTENSION ? -1 : 1
@@ -54,12 +53,8 @@ export const extensionsReducer = createReducer(
         version,
         entities: getEntities(extensions),
         loading: false,
+        classesMeta: classes,
       })
-  ),
-  on(loadClassesMetaSuccess, (state, { game, classes }) =>
-    updateState(state, game, {
-      classesMeta: classes,
-    })
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(

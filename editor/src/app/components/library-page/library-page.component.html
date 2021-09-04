@@ -269,6 +269,7 @@
         [relatedCommands]="findRelatedCommands(command, extension) | async"
         [extension]="extension"
         [displayOpcodePresentation]="displayOpcodePresentation$ | async"
+        [classDesc]="(getClassDesc(game, command.class) | async)?.desc"
         (descriptionClick)="onDescriptionClick($event)"
       >
       </scl-command-info>
@@ -281,6 +282,7 @@
         [className]="classToDisplay"
         [classCommands]="classCommands$ | async"
         [classOrigin]="getClassOrigin(classToDisplay) | async"
+        [classDesc]="(getClassDesc(game, classToDisplay) | async)?.desc"
         [displayInlineDescription]="displayInlineDescription$ | async"
         (descriptionClick)="onDescriptionClick($event)"
       ></scl-class-overview>
@@ -288,6 +290,7 @@
         *ngIf="viewMode === ViewMode.ViewAllClasses"
         [game]="game"
         [entities]="entities$ | async"
+        [meta]="getClassesMeta(game) | async"
       ></scl-class-list>
       <scl-enum-overview
         *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"

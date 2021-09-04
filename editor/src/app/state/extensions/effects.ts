@@ -17,8 +17,6 @@ import {
   cloneCommand,
   GameCommandUpdate,
   initSupportInfo,
-  loadClassesMeta,
-  loadClassesMetaSuccess,
   loadExtensions,
   loadExtensionsSuccess,
   updateCommands,
@@ -59,28 +57,12 @@ export class ExtensionsEffects {
               extensions: response.extensions,
               lastUpdate: response.meta.last_update,
               version: response.meta.version,
+              classes: response.classes,
             }),
             registerFileContent({
               fileName: GameLibrary[game],
               lastUpdate: response.meta.last_update,
               content: JSON.stringify(response, null, 2),
-            }),
-          ])
-        )
-      )
-    )
-  );
-
-  loadClassesMeta$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(loadClassesMeta),
-      withLatestFrom(this._auth.authToken$),
-      concatMap(([{ game }, accessToken]) =>
-        this._service.loadClassesMeta(game, accessToken).pipe(
-          switchMap((response) => [
-            loadClassesMetaSuccess({
-              game,
-              classes: response,
             }),
           ])
         )

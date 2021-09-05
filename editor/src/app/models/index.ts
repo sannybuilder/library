@@ -171,12 +171,12 @@ export type Modifier = 'except' | 'only';
 
 export type SupportInfo = Record<string, Record<string, GameSupportInfo[]>>;
 
-export type ClassesMeta = Array<{
+export interface ClassMeta {
   name: string;
   desc: string;
   constructable: boolean;
   extends?: string;
-}>;
+}
 
 export interface GameSupportInfo {
   game: Game;
@@ -215,5 +215,5 @@ export interface LoadExtensionsResponse {
     url: string;
   };
   extensions: Extension[];
-  classes: ClassesMeta;
+  classes: ClassMeta[];
 }

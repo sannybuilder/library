@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Command, DEFAULT_EXTENSION, Game } from '../../../models';
+import { ClassMeta, Command, DEFAULT_EXTENSION, Game } from '../../../models';
 
 type ClassCommand = { command: Command; extension: string };
 
@@ -25,7 +25,7 @@ export class ClassOverviewComponent {
   @Input() game: Game;
   @Input() className: string;
   @Input() classOrigin: string;
-  @Input() classDesc?: string;
+  @Input() meta?: ClassMeta;
   @Input() set classCommands(val: ClassCommand[]) {
     this._classCommands = val;
 

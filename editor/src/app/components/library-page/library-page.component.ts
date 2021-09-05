@@ -277,7 +277,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._extensions.getClassOrigin(className);
   }
 
-  getClassDesc(game: Game, className: string) {
+  getClassMeta(game: Game, className: string) {
     return this._extensions.getClassMeta(game, className);
   }
 

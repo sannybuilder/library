@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ClassesMeta, DEFAULT_EXTENSION, Game } from '../../../models';
+import { ClassMeta, DEFAULT_EXTENSION, Game } from '../../../models';
 
 @Component({
   selector: 'scl-class-list',
@@ -12,9 +12,9 @@ export class ClassListComponent {
 
   @Input() game: Game;
   @Input() entities: Array<{ origin: string; name: string }>;
-  @Input() meta: ClassesMeta;
+  @Input() classesMeta: ClassMeta[];
 
   getClassDesc(className: string) {
-    return this.meta?.find((m) => m.name === className)?.desc;
+    return this.classesMeta?.find((m) => m.name === className)?.desc;
   }
 }

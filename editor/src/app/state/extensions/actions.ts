@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ClassesMeta, Command, Extension, Game } from '../../models';
+import { ClassMeta, Command, Extension, Game } from '../../models';
 
 export interface GameCommandUpdate {
   command: Command;
@@ -19,7 +19,7 @@ export const loadExtensionsSuccess = createAction(
     extensions: Extension[];
     version: string;
     lastUpdate: number;
-    classes: ClassesMeta;
+    classes: ClassMeta[];
   }>()
 );
 

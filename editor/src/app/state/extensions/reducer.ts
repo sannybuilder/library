@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  ClassesMeta,
+  ClassMeta,
   Command,
   DEFAULT_EXTENSION,
   Entity,
@@ -25,7 +25,7 @@ export interface GameState {
   lastUpdate?: number;
   version?: string;
   supportInfo: SupportInfo;
-  classesMeta: ClassesMeta;
+  classesMeta: ClassMeta[];
 }
 export interface ExtensionsState {
   games: Partial<Record<Game, GameState>>;
@@ -51,7 +51,7 @@ export const extensionsReducer = createReducer(
         ),
         lastUpdate,
         version,
-        entities: getEntities(extensions),
+        entities: getEntities(extensions, classes),
         loading: false,
         classesMeta: classes,
       })
@@ -99,7 +99,7 @@ export const extensionsReducer = createReducer(
       state.games[game]?.extensions ?? []
     );
 
-    const entities = getEntities(extensions);
+    const entities = getEntities(extensions, state.games[game]?.classesMeta);
     return updateState(state, game, {
       extensions,
       entities,
@@ -164,7 +164,10 @@ function upsertBy<T extends object, Key extends keyof T>(
   return newCollection;
 }
 
-function getEntities(extensions: Extension[]): Record<string, Entity[]> {
+function getEntities(
+  extensions: Extension[],
+  classesMeta: ClassMeta[] | undefined
+): Record<string, Entity[]> {
   const defaultEntities =
     extensions
       .find((e) => e.name === DEFAULT_EXTENSION)
@@ -188,7 +191,10 @@ function getEntities(extensions: Extension[]): Record<string, Entity[]> {
           dynamicClasses.add(name);
         }
       } else if (command.class) {
-        if (defaultEntities.has(command.class)) {
+        if (
+          defaultEntities.has(command.class) ||
+          classesMeta?.find((m) => m.name === command.class && m.constructable)
+        ) {
           dynamicClasses.add(command.class);
         } else {
           staticClasses.add(command.class);

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1631352020962,
-    "version": "0.126",
+    "last_update": 1631354074585,
+    "version": "0.127",
     "url": "https://library.sannybuilder.com/#/vc"
   },
   "extensions": [
@@ -29835,6 +29835,78 @@
           },
           "class": "IniFile",
           "member": "WriteString"
+        }
+      ]
+    },
+    {
+      "name": "memory",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "libraryMemory",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0BA2",
+          "name": "MEMORY_LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "class": "DynamicLibrary",
+          "member": "MemoryLoad",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "id": "0BA3",
+          "name": "MEMORY_FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "class": "DynamicLibrary",
+          "member": "MemoryFree",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0BA4",
+          "name": "MEMORY_GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "class": "DynamicLibrary",
+          "member": "MemoryGetProcedure",
+          "attrs": {
+            "is_condition": true
+          }
         }
       ]
     }

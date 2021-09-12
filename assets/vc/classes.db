@@ -28,6 +28,7 @@ IniFile
 KillFrenzy
 Math
 Memory
+MemoryLibrary
 Object
 ObjectPath
 Pad
@@ -495,9 +496,6 @@ $BEGIN
 Free,0AA3,0,0,("self: DynamicLibrary")
 GetProcedure,0AA4,1,0,("procName%s" "self: DynamicLibrary" "address%i")
 Load,0AA2,1,0,("libraryFileName%s" "handle: DynamicLibrary")
-MemoryFree,0BA3,0,0,("self: DynamicLibrary")
-MemoryGetProcedure,0BA4,1,0,("procName%s" "self: DynamicLibrary" "address%i")
-MemoryLoad,0BA2,1,0,("libraryMemory%i" "handle: DynamicLibrary")
 $END
 
 $File
@@ -677,6 +675,13 @@ PopFloat,0AE9,0,0,("result%f")
 Read,0DD8,0,0,("address%i" "size%i" "ib%b" "result: any")
 SetOffset,0606,0,0,("address1%i" "address2%i" "vp%b")
 Write,0DD9,0,0,("address%i" "value: any" "size%i" "ib%b" "vp%b")
+$END
+
+$MemoryLibrary
+$BEGIN
+Free,0BA3,0,0,("self: MemoryLibrary")
+GetProcedure,0BA4,1,0,("procName%s" "self: MemoryLibrary" "address%i")
+Load,0BA2,1,0,("address%i" "handle: MemoryLibrary")
 $END
 
 $Object

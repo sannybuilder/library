@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1631590374501,
-    "version": "0.78",
+    "last_update": 1631591115329,
+    "version": "0.79",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -24572,6 +24572,741 @@
             "is_static": true
           },
           "short_desc": "Returns true if the current game is an Australian release"
+        },
+        {
+          "id": "05DC",
+          "name": "TERMINATE_THIS_CUSTOM_SCRIPT",
+          "num_params": 0,
+          "attrs": {
+            "is_branch": true,
+            "is_overload": true,
+            "is_keyword": true
+          },
+          "short_desc": "Ends the current custom script, preventing further execution"
+        },
+        {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            }
+          ],
+          "id": "05DD",
+          "name": "TERMINATE_ALL_CUSTOM_SCRIPTS_WITH_THIS_NAME",
+          "num_params": 1,
+          "attrs": {
+            "is_keyword": true,
+            "is_overload": true
+          },
+          "short_desc": "Ends the custom CLEO scripts with the specified name, freeing game memory"
+        },
+        {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "05DE",
+          "name": "START_CUSTOM_SCRIPT",
+          "num_params": 2,
+          "attrs": {
+            "is_branch": true,
+            "is_variadic": true,
+            "is_keyword": true
+          },
+          "short_desc": "Loads a file with compiled SCM instructions at the given path and runs a new custom script(Maximum 7 characters)"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "id": "05DF",
+          "name": "WRITE_MEMORY",
+          "num_params": 4,
+          "class": "Memory",
+          "member": "Write",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          },
+          "short_desc": "Writes a value to the game memory"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E0",
+          "name": "READ_MEMORY",
+          "num_params": 4,
+          "class": "Memory",
+          "member": "Read",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Reads a value from the game memory"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "05E1",
+          "name": "CALL_FUNCTION",
+          "num_params": 4,
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E2",
+          "name": "CALL_FUNCTION_RETURN",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallFunctionReturn",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "struct",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "05E3",
+          "name": "CALL_METHOD",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallMethod",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "struct",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E4",
+          "name": "CALL_METHOD_RETURN",
+          "num_params": 6,
+          "class": "Memory",
+          "member": "CallMethodReturn",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "versionId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E5",
+          "name": "GET_GAME_VERSION",
+          "num_params": 1,
+          "class": "Game",
+          "member": "GetVersion",
+          "short_desc": "Returns the version id of the game",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E6",
+          "name": "GET_PED_POINTER",
+          "num_params": 2,
+          "class": "Memory",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "member": "GetPedPointer",
+          "short_desc": "Gets the address of the ped struct in the game memory by its handle"
+        },
+        {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E7",
+          "name": "GET_VEHICLE_POINTER",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetVehiclePointer",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the address of the vehicle struct in the game memory by its handle"
+        },
+        {
+          "input": [
+            {
+              "name": "object",
+              "type": "Object"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E8",
+          "name": "GET_OBJECT_POINTER",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetObjectPointer",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the address of the object struct in the game memory by its handle"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "05E9",
+          "name": "GET_PED_REF",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetPedRef",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the corresponding handle of the char located at the given address in memory"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "id": "05EA",
+          "name": "GET_VEHICLE_REF",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetVehicleRef",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          },
+          "short_desc": "Gets the corresponding handle of the vehicle located at the given address in memory"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
+          "id": "05EB",
+          "name": "GET_OBJECT_REF",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetObjectRef",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          },
+          "short_desc": "Gets the corresponding handle of the object located at the given address in memory"
+        },
+        {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05EC",
+          "name": "GET_THIS_SCRIPT_STRUCT",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "GetThisScriptStruct",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the address of the script struct in the game memory"
+        },
+        {
+          "input": [
+            {
+              "name": "scriptName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "05ED",
+          "name": "GET_SCRIPT_STRUCT_NAMED",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetScriptStructNamed",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the address of a running script which name matches the given string or 0 otherwise"
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "int"
+            }
+          ],
+          "id": "05EE",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true,
+            "is_overload": true
+          },
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code"
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "findNext",
+              "type": "bool"
+            },
+            {
+              "name": "skipDead",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "05EF",
+          "name": "GET_RANDOM_CHAR_IN_SPHERE_NO_SAVE_RECURSIVE",
+          "num_params": 7,
+          "class": "World",
+          "member": "GetRandomCharInSphereNoSaveRecursive",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "findNext",
+              "type": "bool"
+            },
+            {
+              "name": "skipWrecked",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "id": "05F0",
+          "name": "GET_RANDOM_CAR_IN_SPHERE_NO_SAVE_RECURSIVE",
+          "num_params": 7,
+          "class": "World",
+          "member": "GetRandomCarInSphereNoSaveRecursive",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "findNext",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
+          "id": "05F1",
+          "name": "GET_RANDOM_OBJECT_IN_SPHERE_NO_SAVE_RECURSIVE",
+          "num_params": 6,
+          "class": "World",
+          "member": "GetRandomObjectInSphereNoSaveRecursive",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "05F2",
+          "name": "POP_FLOAT",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "PopFloat",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "number",
+              "type": "float"
+            },
+            {
+              "name": "power",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "05F3",
+          "name": "POW",
+          "num_params": 3,
+          "class": "Math",
+          "member": "Pow",
+          "short_desc": "Returns the specified number raised to the specified power",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "number",
+              "type": "float"
+            },
+            {
+              "name": "base",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "05F4",
+          "name": "LOG",
+          "num_params": 3,
+          "class": "Math",
+          "member": "Log",
+          "attrs": {
+            "is_overload": true,
+            "is_static": true
+          },
+          "short_desc": "Returns the logarithm of the specified number in the specified base"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "params",
+              "type": "arguments"
+            }
+          ],
+          "id": "05F5",
+          "name": "CLEO_CALL",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_variadic": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "numRet",
+              "type": "int"
+            },
+            {
+              "name": "retParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "05F6",
+          "name": "CLEO_RETURN",
+          "num_params": 2,
+          "attrs": {
+            "is_keyword": true,
+            "is_variadic": true,
+            "is_overload": true
+          }
         },
         {
           "input": [

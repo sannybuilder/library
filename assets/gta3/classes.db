@@ -46,6 +46,7 @@ Streaming
 StuckCarCheck
 Text
 Txd
+Weapon
 Weather
 World
 Zone
@@ -115,6 +116,7 @@ GetDebugCoordinates,0454,0,0,("x%f" "y%f" "z%f")
 GetDebugFrontVector,0455,0,0,("x%f" "y%f" "z%f")
 GetDebugPointAt,0463,0,0,("x%f" "y%f" "z%f")
 GetFadingStatus,016B,1,0,()
+IsInWidescreenMode,0603,1,0,()
 IsPointOnScreen,00C2,1,0,("x%f" "y%f" "z%f" "radius%f")
 PointAtCar,0158,0,0,("vehicle: Car" "mode: CameraMode" "switchStyle: SwitchType")
 PointAtChar,0159,0,0,("char: Char" "mode: CameraMode" "switchStyle: SwitchType")
@@ -358,6 +360,7 @@ LocateStoppedOnFoot3D,0102,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRad
 LookAtCharAlways,022C,0,0,("self: Char" "target: Char")
 LookAtPlayerAlways,022D,0,0,("self: Char" "target: Player")
 MarkAsNoLongerNeeded,01C2,0,0,("self: Char")
+PlayAnimation,0673,0,0,("self: Char" "groupId: AnimGroup" "animId%i" "blend%f")
 RemoveElegantly,034F,0,0,("self: Char")
 SetAccuracy,02E2,0,0,("self: Char" "accuracy%i")
 SetAmmo,017B,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
@@ -642,6 +645,7 @@ GetVehiclePointer,05E7,0,0,("vehicle: Car" "address%i")
 GetVehicleRef,05EA,0,0,("address%i" "handle: Car")
 PopFloat,05F2,0,0,("result%f")
 Read,0A8D,0,0,("address%i" "size%i" "vp%b" "result: any")
+SetOffset,0606,0,0,("address1%i" "address2%i" "vp%b")
 Write,0A8C,0,0,("address%i" "size%i" "value: any" "vp%b")
 $END
 
@@ -690,9 +694,11 @@ $END
 
 $Pad
 $BEGIN
+EmulateButtonPressWithSensitivity,0602,0,0,("buttonId: Button" "sensitivity%i")
 GetControllerMode,0293,0,0,("mode: ControllerMode")
 GetState,00E2,0,0,("pad: Pad" "buttonId: Button" "state%i")
 IsButtonPressed,00E1,1,0,("pad: Pad" "buttonId: Button")
+IsButtonPressedWithSensitivity,0601,1,0,("buttonId: Button" "sensitivity%i")
 IsKeyPressed,0AB0,1,0,("keyCode%i")
 Shake,015B,0,0,("pad: Pad" "time%i" "intensity%i")
 $END
@@ -999,6 +1005,8 @@ ClearSmallPrints,03EB,0,0,()
 ClearThisBigPrint,03D6,0,0,("key: gxt_key")
 ClearThisPrint,03D5,0,0,("key: gxt_key")
 Display,033E,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key")
+DisplayFormatted,0609,0,0,("screenX%f" "screenY%f" "text%s" )
+DisplayString,0608,0,0,("screenX%f" "screenY%f" "text%s")
 DisplayWith2Numbers,045B,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num1%i" "num2%i")
 DisplayWithNumber,045A,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num%i")
 Print,00BB,0,0,("key: gxt_key" "time%i" "flag%i")
@@ -1052,11 +1060,18 @@ LoadSprite,038F,0,0,("memorySlot%i" "spriteName%s")
 Remove,0391,0,0,()
 $END
 
+$Weapon
+$BEGIN
+GetModel,0604,0,0,("weaponType: WeaponType" "modelId: model_object")
+GetTypeForModel,0605,0,0,("modelId: model_object" "weaponType: WeaponType")
+$END
+
 $Weather
 $BEGIN
 Force,01B5,0,0,("type: WeatherType")
 ForceNow,01B6,0,0,("type: WeatherType")
 ForceRain,0421,0,0,("state%b")
+GetCurrent,0607,0,0,("weatherType: WeatherType")
 Release,01B7,0,0,()
 Restore,0252,0,0,()
 Store,0251,0,0,()

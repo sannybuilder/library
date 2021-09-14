@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1631645528226,
-    "version": "0.82",
+    "last_update": 1631646238239,
+    "version": "0.83",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -25506,6 +25506,252 @@
           "id": "05FF",
           "name": "BIT_SHL",
           "num_params": 3
+        },
+        {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0600",
+          "name": "STREAM_CUSTOM_SCRIPT",
+          "num_params": 2,
+          "attrs": {
+            "is_keyword": true,
+            "is_overload": true,
+            "is_variadic": true,
+            "is_branch": true
+          },
+          "short_desc": "Loads a file with compiled SCM instructions at the given path and runs a new custom script"
+        },
+        {
+          "input": [
+            {
+              "name": "buttonId",
+              "type": "Button"
+            },
+            {
+              "name": "sensitivity",
+              "type": "int"
+            }
+          ],
+          "id": "0601",
+          "name": "IS_BUTTON_PRESSED_WITH_SENSITIVITY",
+          "num_params": 2,
+          "class": "Pad",
+          "member": "IsButtonPressedWithSensitivity",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "short_desc": "Returns true if the pad's button is pressed with a certain sensitivity"
+        },
+        {
+          "input": [
+            {
+              "name": "buttonId",
+              "type": "Button"
+            },
+            {
+              "name": "sensitivity",
+              "type": "int"
+            }
+          ],
+          "id": "0602",
+          "name": "EMULATE_BUTTON_PRESS_WITH_SENSITIVITY",
+          "num_params": 2,
+          "class": "Pad",
+          "member": "EmulateButtonPressWithSensitivity",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Sets emulate and press pad's button"
+        },
+        {
+          "id": "0603",
+          "name": "IS_CAMERA_IN_WIDESCREEN_MODE",
+          "num_params": 0,
+          "class": "Camera",
+          "member": "IsInWidescreenMode",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Returns true if the camera is in widescreen mode"
+        },
+        {
+          "input": [
+            {
+              "name": "weaponType",
+              "type": "WeaponType"
+            }
+          ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "model_object",
+              "source": "var_any"
+            }
+          ],
+          "id": "0604",
+          "name": "GET_WEAPON_MODEL",
+          "num_params": 2,
+          "class": "Weapon",
+          "member": "GetModel",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Gets the model ID of the weapon according to the weapon type"
+        },
+        {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_object"
+            }
+          ],
+          "output": [
+            {
+              "name": "weaponType",
+              "type": "WeaponType",
+              "source": "var_any"
+            }
+          ],
+          "id": "0605",
+          "name": "GET_WEAPONTYPE_FOR_MODEL",
+          "num_params": 2,
+          "class": "Weapon",
+          "member": "GetTypeForModel",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Gets the type of weapon according to the model ID of the weapon"
+        },
+        {
+          "input": [
+            {
+              "name": "address1",
+              "type": "int"
+            },
+            {
+              "name": "address2",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "id": "0606",
+          "name": "SET_MEMORY_OFFSET",
+          "num_params": 3,
+          "class": "Memory",
+          "member": "SetOffset",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "weatherType",
+              "type": "WeatherType",
+              "source": "var_any"
+            }
+          ],
+          "id": "0607",
+          "name": "GET_CURRENT_WEATHER",
+          "num_params": 1,
+          "class": "Weather",
+          "member": "GetCurrent",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Gets the current weather ID"
+        },
+        {
+          "input": [
+            {
+              "name": "screenX",
+              "type": "float"
+            },
+            {
+              "name": "screenY",
+              "type": "float"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "id": "0608",
+          "name": "DISPLAY_TEXT_STRING",
+          "num_params": 3,
+          "class": "Text",
+          "member": "DisplayString",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "screenX",
+              "type": "float"
+            },
+            {
+              "name": "screenY",
+              "type": "float"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0609",
+          "name": "DISPLAY_TEXT_FORMATTED",
+          "num_params": 4,
+          "class": "Text",
+          "member": "DisplayFormatted",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "groupId",
+              "type": "AnimGroup"
+            },
+            {
+              "name": "animId",
+              "type": "int"
+            },
+            {
+              "name": "blend",
+              "type": "float"
+            }
+          ],
+          "id": "0673",
+          "name": "PLAY_ANIMATION",
+          "num_params": 4,
+          "class": "Char",
+          "member": "PlayAnimation",
+          "short_desc": "Sets the character to play a certain action"
         },
         {
           "input": [

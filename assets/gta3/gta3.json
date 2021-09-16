@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1631689209053,
-    "version": "0.84",
+    "last_update": 1631759258680,
+    "version": "0.85",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -25907,6 +25907,562 @@
           "name": "INT_DIV",
           "num_params": 3,
           "short_desc": "Divides the integer value by another integer value and writes the result into the variable"
+        },
+        {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0A92",
+          "name": "STREAM_CUSTOM_SCRIPT",
+          "num_params": 2,
+          "short_desc": "Loads a file with compiled SCM instructions at the given path and runs a new custom script",
+          "attrs": {
+            "is_keyword": true,
+            "is_variadic": true,
+            "is_branch": true,
+            "is_overload": true
+          }
+        },
+        {
+          "id": "0A93",
+          "name": "TERMINATE_THIS_CUSTOM_SCRIPT",
+          "num_params": 0,
+          "short_desc": "Ends the current custom script, preventing further execution",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A96",
+          "name": "GET_PED_POINTER",
+          "num_params": 2,
+          "short_desc": "Gets the address of the ped struct in the game memory by its handle",
+          "class": "Memory",
+          "member": "GetPedPointer",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A97",
+          "name": "GET_VEHICLE_POINTER",
+          "num_params": 2,
+          "short_desc": "Gets the address of the vehicle struct in the game memory by its handle",
+          "class": "Memory",
+          "member": "GetVehiclePointer",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "object",
+              "type": "Object"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A98",
+          "name": "GET_OBJECT_POINTER",
+          "num_params": 2,
+          "short_desc": "Gets the address of the object struct in the game memory by its handle",
+          "class": "Memory",
+          "member": "GetObjectPointer",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "any"
+            }
+          ],
+          "id": "0A99",
+          "name": "SET_CURRENT_DIRECTORY",
+          "num_params": 1,
+          "short_desc": "Sets the current working directory (cwd) to a predefined location with a value of 0 or 1, or to an arbitrary path with a string value",
+          "class": "Fs",
+          "member": "SetCurrentDirectory",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "filePathName",
+              "type": "string"
+            },
+            {
+              "name": "mode",
+              "type": "FileMode"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "File",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9A",
+          "name": "OPEN_FILE",
+          "num_params": 3,
+          "short_desc": "Opens the file in the specified mode, sets the condition result to True if the open operation has been successful, or to False otherwise, and writes the file handle to the variable",
+          "class": "File",
+          "member": "Open",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "id": "0A9B",
+          "name": "CLOSE_FILE",
+          "num_params": 1,
+          "short_desc": "Closes the file and frees the memory",
+          "class": "File",
+          "member": "Close",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "output": [
+            {
+              "name": "size",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9C",
+          "name": "GET_FILE_SIZE",
+          "num_params": 2,
+          "short_desc": "Gets the file size in bytes",
+          "class": "File",
+          "member": "GetSize"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "destination",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9D",
+          "name": "READ_FROM_FILE",
+          "num_params": 3,
+          "short_desc": "Reads the specified number of bytes from the opened file and writes them to the memory region starting from the address of the destination variable",
+          "class": "File",
+          "member": "Read"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "source",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9E",
+          "name": "WRITE_TO_FILE",
+          "num_params": 3,
+          "short_desc": "Copies the specified number of bytes of the memory region starting from the address of the source variable to the file",
+          "class": "File",
+          "member": "Write"
+        },
+        {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9F",
+          "name": "GET_THIS_SCRIPT_STRUCT",
+          "num_params": 1,
+          "short_desc": "Gets the address of the current script structure in the game memory",
+          "class": "Memory",
+          "member": "GetThisScriptStruct",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            }
+          ],
+          "id": "0AA0",
+          "name": "GOSUB_IF_FALSE",
+          "num_params": 1,
+          "short_desc": "Transfers the script execution to the label as a subroutine if the result of the condition is false",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          }
+        },
+        {
+          "id": "0AA1",
+          "name": "RETURN_IF_FALSE",
+          "num_params": 0,
+          "short_desc": "Returns from the current subroutine if the result of the condition is false",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "libraryFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA2",
+          "name": "LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "id": "0AA3",
+          "name": "FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "Free",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA4",
+          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AA5",
+          "name": "CALL_FUNCTION",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "struct",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AA6",
+          "name": "CALL_METHOD",
+          "num_params": 5,
+          "short_desc": "",
+          "class": "Memory",
+          "member": "CallMethod",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA7",
+          "name": "CALL_FUNCTION_RETURN",
+          "num_params": 5,
+          "short_desc": "",
+          "class": "Memory",
+          "member": "CallFunctionReturn",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "struct",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA8",
+          "name": "CALL_METHOD_RETURN",
+          "num_params": 6,
+          "short_desc": "",
+          "class": "Memory",
+          "member": "CallMethodReturn",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "id": "0AA9",
+          "name": "IS_GAME_VERSION_ORIGINAL",
+          "num_params": 0,
+          "short_desc": "Returns true if the game version is vanilla 1.0",
+          "class": "Game",
+          "member": "IsVersionOriginal",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "scriptName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AAA",
+          "name": "GET_SCRIPT_STRUCT_NAMED",
+          "num_params": 2,
+          "short_desc": "Gets the address of a running script which name matches the given string or 0 otherwise",
+          "class": "Memory",
+          "member": "GetScriptStructNamed",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            }
+          ],
+          "id": "0AAB",
+          "name": "DOES_FILE_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if a file at the given path exists",
+          "class": "Fs",
+          "member": "DoesFileExist",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "input": [

@@ -20,6 +20,9 @@ CutsceneObject
 Debugger
 DrugDropOff
 DrugRun
+DynamicLibrary
+File
+Fs
 Fx
 Game
 Gang
@@ -514,6 +517,28 @@ HasPlaneBeenShotDown,033C,1,0,()
 Start,033A,0,0,()
 $END
 
+$DynamicLibrary
+$BEGIN
+Free,0AA3,0,0,("self: DynamicLibrary")
+GetProcedure,0AA4,1,0,("procName%s" "self: DynamicLibrary" "address%i")
+Load,0AA2,1,0,("libraryFileName%s" "handle: DynamicLibrary")
+$END
+
+$File
+$BEGIN
+Close,0A9B,0,0,("self: File")
+GetSize,0A9C,0,0,("self: File" "size%i")
+Open,0A9A,1,0,("filePathName%s" "mode: FileMode" "handle: File")
+Read,0A9D,0,0,("self: File" "size%i" "destination%i")
+Write,0A9E,0,0,("self: File" "size%i" "source%i")
+$END
+
+$Fs
+$BEGIN
+DoesFileExist,0AAB,1,0,("path%s")
+SetCurrentDirectory,0A99,0,0,("path: any")
+$END
+
 $Fx
 $BEGIN
 AddExplosion,020C,0,0,("x%f" "y%f" "z%f" "type: ExplosionType")
@@ -544,6 +569,7 @@ IsGerman,040C,1,0,()
 IsNasty,0351,1,0,()
 IsPcVersion,0485,1,0,()
 IsThreatForPedType,042A,1,0,("type: PedType" "threatMask%i")
+IsVersionOriginal,0AA9,1,0,()
 SetAllCarsCanBeDamaged,03F4,0,0,("state%b")
 SetAllTaxiLights,021F,0,0,("state%b")
 SetCharsChatting,03F9,0,0,("char1: Char" "char2: Char" "duration%i")
@@ -629,19 +655,19 @@ $END
 
 $Memory
 $BEGIN
-CallFunction,05E1,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments")
-CallFunctionReturn,05E2,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
-CallMethod,05E3,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments")
-CallMethodReturn,05E4,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
+CallFunction,0AA5,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments")
+CallFunctionReturn,0AA7,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
+CallMethod,0AA6,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments")
+CallMethodReturn,0AA8,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
 GetLabelPointer,05F7,0,0,( "address%i")
-GetObjectPointer,05E8,0,0,("object: Object" "address%i")
+GetObjectPointer,0A98,0,0,("object: Object" "address%i")
 GetObjectRef,05EB,0,0,("address%i" "handle: Object")
-GetPedPointer,05E6,0,0,("char: Char" "address%i")
+GetPedPointer,0A96,0,0,("char: Char" "address%i")
 GetPedRef,05E9,0,0,("address%i" "handle: Char")
-GetScriptStructNamed,05ED,0,0,("scriptName%s" "address%i")
-GetThisScriptStruct,05EC,0,0,("address%i")
+GetScriptStructNamed,0AAA,0,0,("scriptName%s" "address%i")
+GetThisScriptStruct,0A9F,0,0,("address%i")
 GetVarPointer,05F8,0,0,( "address%i")
-GetVehiclePointer,05E7,0,0,("vehicle: Car" "address%i")
+GetVehiclePointer,0A97,0,0,("vehicle: Car" "address%i")
 GetVehicleRef,05EA,0,0,("address%i" "handle: Car")
 PopFloat,05F2,0,0,("result%f")
 Read,0A8D,0,0,("address%i" "size%i" "vp%b" "result: any")

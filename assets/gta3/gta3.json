@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1631762311668,
-    "version": "0.90",
+    "last_update": 1631762672303,
+    "version": "0.91",
     "url": "https://library.sannybuilder.com/#/gta3"
   },
   "extensions": [
@@ -3363,6 +3363,53 @@
           "id": "0B1D",
           "name": "BITWISE_SHL_THING_BY_THING",
           "num_params": 2
+        }
+      ]
+    },
+    {
+      "name": "clipboard",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "memory",
+              "type": "any",
+              "source": "var_any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0B20",
+          "name": "READ_CLIPBOARD_DATA",
+          "num_params": 2,
+          "class": "Clipboard",
+          "member": "ReadData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "memory",
+              "type": "any",
+              "source": "var_any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0B21",
+          "name": "WRITE_CLIPBOARD_DATA",
+          "num_params": 2,
+          "class": "Clipboard",
+          "member": "WriteData",
+          "attrs": {
+            "is_static": true
+          }
         }
       ]
     },
@@ -28024,6 +28071,78 @@
           },
           "class": "IniFile",
           "member": "WriteString"
+        }
+      ]
+    },
+    {
+      "name": "memory",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "MemoryLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0BA2",
+          "name": "MEMORY_LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "class": "MemoryLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "MemoryLibrary"
+            }
+          ],
+          "id": "0BA3",
+          "name": "MEMORY_FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "class": "MemoryLibrary",
+          "member": "Free",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "MemoryLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0BA4",
+          "name": "MEMORY_GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "class": "MemoryLibrary",
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
+          }
         }
       ]
     }

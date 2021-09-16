@@ -11,6 +11,7 @@ CarGenerator
 CatalinaHeli
 Char
 ChaseScene
+Clipboard
 Clock
 Crane
 Credits
@@ -32,6 +33,7 @@ IniFile
 KillFrenzy
 Math
 Memory
+MemoryLibrary
 Object
 Pacman
 Pad
@@ -446,6 +448,12 @@ Start,0354,0,0,("startTime%f")
 Stop,0355,0,0,()
 $END
 
+$Clipboard
+$BEGIN
+ReadData,0B20,0,0,("memory: any" "size%i")
+WriteData,0B21,0,0,("memory: any" "size%i")
+$END
+
 $Clock
 $BEGIN
 GetGameTimer,01BD,0,0,("time%i")
@@ -698,6 +706,13 @@ PopFloat,0AE9,0,0,("result%f")
 Read,0A8D,0,0,("address%i" "size%i" "vp%b" "result: any")
 SetOffset,0606,0,0,("address1%i" "address2%i" "vp%b")
 Write,0A8C,0,0,("address%i" "size%i" "value: any" "vp%b")
+$END
+
+$MemoryLibrary
+$BEGIN
+Free,0BA3,0,0,("self: MemoryLibrary")
+GetProcedure,0BA4,1,0,("procName%s" "self: MemoryLibrary" "address%i")
+Load,0BA2,1,0,("address%i" "handle: MemoryLibrary")
 $END
 
 $Object

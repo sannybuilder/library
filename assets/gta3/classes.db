@@ -528,9 +528,15 @@ $File
 $BEGIN
 Close,0A9B,0,0,("self: File")
 GetSize,0A9C,0,0,("self: File" "size%i")
+IsEndReached,0AD6,1,0,("self: File")
 Open,0A9A,1,0,("filePathName%s" "mode: FileMode" "handle: File")
 Read,0A9D,0,0,("self: File" "size%i" "destination%i")
+ReadString,0AD7,1,0,("self: File" "buffer%s" "size%i")
+Scan,0ADA,1,0,("self: File" "format%s" "args: arguments" "text%s")
+Seek,0AD5,1,0,("self: File" "offset%i" "origin: SeekOrigin")
 Write,0A9E,0,0,("self: File" "size%i" "source%i")
+WriteFormattedString,0AD9,0,0,("self: File" "format%s" "args: arguments")
+WriteString,0AD8,1,0,("self: File" "source%s")
 $END
 
 $Fs
@@ -655,18 +661,20 @@ $END
 
 $Memory
 $BEGIN
+Allocate,0AC8,0,0,("size%i" "address%i")
 CallFunction,0AA5,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments")
 CallFunctionReturn,0AA7,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
 CallMethod,0AA6,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments")
 CallMethodReturn,0AA8,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
-GetLabelPointer,05F7,0,0,( "address%i")
+Free,0AC9,0,0,("address%i")
+GetLabelPointer,0AC6,0,0,( "address%i")
 GetObjectPointer,0A98,0,0,("object: Object" "address%i")
 GetObjectRef,05EB,0,0,("address%i" "handle: Object")
 GetPedPointer,0A96,0,0,("char: Char" "address%i")
 GetPedRef,05E9,0,0,("address%i" "handle: Char")
 GetScriptStructNamed,0AAA,0,0,("scriptName%s" "address%i")
 GetThisScriptStruct,0A9F,0,0,("address%i")
-GetVarPointer,05F8,0,0,( "address%i")
+GetVarPointer,0AC7,0,0,( "address%i")
 GetVehiclePointer,0A97,0,0,("vehicle: Car" "address%i")
 GetVehicleRef,05EA,0,0,("address%i" "handle: Car")
 PopFloat,05F2,0,0,("result%f")
@@ -727,6 +735,7 @@ IsButtonPressed,00E1,1,0,("pad: Pad" "buttonId: Button")
 IsButtonPressedWithSensitivity,0601,1,0,("buttonId: Button" "sensitivity%i")
 IsKeyPressed,0AB0,1,0,("keyCode%i")
 Shake,015B,0,0,("pad: Pad" "time%i" "intensity%i")
+TestCheat,0ADC,1,0,("input%s")
 $END
 
 $Pager
@@ -1001,6 +1010,7 @@ $END
 
 $Streaming
 $BEGIN
+GetNameOfVehicleModel,0ADB,0,0,("modelId: model_vehicle" "carName%s")
 HasModelLoaded,0248,1,0,("modelId: model_any")
 HasSpecialCharacterLoaded,023D,1,0,("slotId%i")
 IsCollisionInMemory,03C6,1,0,("level: LevelName")
@@ -1025,6 +1035,7 @@ $END
 
 $Text
 $BEGIN
+AddLabel,0ADF,0,0,("dynamicKey: gxt_key" "text%s")
 ClearHelp,03E6,0,0,()
 ClearPrints,00BE,0,0,()
 ClearSmallPrints,03EB,0,0,()
@@ -1035,14 +1046,23 @@ DisplayFormatted,0609,0,0,("screenX%f" "screenY%f" "text%s" )
 DisplayString,0608,0,0,("screenX%f" "screenY%f" "text%s")
 DisplayWith2Numbers,045B,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num1%i" "num2%i")
 DisplayWithNumber,045A,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num%i")
+GetLabelString,0ADE,0,0,("key: gxt_key" "text%s")
 Print,00BB,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintBig,00BA,0,0,("key: gxt_key" "time%i" "style: TextStyle")
+PrintBigFormatted,0ACF,0,0,("text%s" "time%i" "style: TextStyle" "args: arguments")
 PrintBigQ,0217,0,0,("key: gxt_key" "duration%i" "style: TextStyle")
+PrintBigString,0ACB,0,0,("text%s" "time%i" "style: TextStyle")
+PrintFormatted,0AD0,0,0,("text%s" "time%i" "arg: arguments")
+PrintFormattedNow,0AD1,0,0,("text%s" "time%i" "arg: arguments")
 PrintHelp,03E5,0,0,("key: gxt_key")
+PrintHelpFormatted,0ACE,0,0,("text%s" "args: arguments")
+PrintHelpString,0ACA,0,0,("text%s")
 PrintNow,00BC,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintSoon,00BD,0,0,("key: gxt_key" "time%i" "flag%i")
+PrintString,0ACC,0,0,("text%s" "time%i")
 PrintStringInString,0375,0,0,("templateKey: gxt_key" "replacementKey: gxt_key" "duration%i" "style: TextStyle")
 PrintStringInStringNow,0384,0,0,("templateKey: gxt_key" "replacementKey: gxt_key" "duration%i" "style: TextStyle")
+PrintStringNow,0ACD,0,0,("text%s" "time%i")
 PrintWith2Numbers,02FC,0,0,("key: gxt_key" "num1%i" "num2%i" "duration%i" "style: TextStyle")
 PrintWith2NumbersBig,036D,0,0,("key: gxt_key" "num1%i" "num2%i" "duration%i" "style: TextStyle")
 PrintWith2NumbersNow,02FD,0,0,("key: gxt_key" "num1%i" "num2%i" "duration%i" "style: TextStyle")
@@ -1063,6 +1083,7 @@ PrintWithNumber,01E4,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
 PrintWithNumberBig,01E3,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextStyle")
 PrintWithNumberBigQ,0218,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextStyle")
 PrintWithNumberNow,01E5,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
+ScanString,0AD4,0,0,("str%s" "format%s" "args: arguments" "text%s")
 SetBackground,0345,0,0,("state%b")
 SetBackgroundColor,0346,0,0,("r%i" "g%i" "b%i" "a%i")
 SetBackgroundOnlyText,0347,0,0,("state%b")
@@ -1076,6 +1097,7 @@ SetProportional,0348,0,0,("state%b")
 SetRightJustify,03E4,0,0,("state%b")
 SetScale,033F,0,0,("widthScale%f" "heightScale%f")
 SetWrapX,0343,0,0,("width%f")
+StringFormat,0AD3,0,0,("format%s" "args: arguments" "text%s")
 UseCommands,03F0,0,0,("state%b")
 $END
 
@@ -1133,6 +1155,7 @@ RemoveParticleEffectsInArea,03AE,0,0,("leftBottomX%f" "leftBottomY%f" "leftBotto
 SetCarDensityMultiplier,01EB,0,0,("multiplier%f")
 SetPedDensityMultiplier,03DE,0,0,("multiplier%f")
 SetVisibilityOfClosestObjectOfType,0363,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_object" "state%b")
+SpawnVehicleByCheating,0ADD,0,0,("modelId: model_vehicle")
 SwapNearestBuildingModel,03B6,0,0,("x%f" "y%f" "z%f" "radius%f" "fromModelId: model_object" "toModelId: model_object")
 SwitchProcessing,03B7,0,0,("state%b")
 SwitchRubbish,03AD,0,0,("state%b")

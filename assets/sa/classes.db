@@ -5,6 +5,7 @@
 Attractor
 Audio
 AudioStream
+AudioStream3D
 Blip
 Boat
 Camera
@@ -39,6 +40,7 @@ KillFrenzy
 Math
 Memory
 Menu
+MenuGrid
 Mouse
 Object
 Pad
@@ -118,15 +120,19 @@ GetLength,0AAF,0,0,("self: AudioStream" "length%i")
 GetState,0AB9,0,0,("self: AudioStream" "state%i")
 GetVolume,0ABB,0,0,("self: AudioStream" "volume%f")
 Load,0AAC,1,0,("audioFileName%s" "handle: AudioStream")
-Load3D,0AC1,1,0,("audioFileName%s" "handle: AudioStream")
 Remove,0AAE,0,0,("self: AudioStream")
 SetLooped,0AC0,0,0,("self: AudioStream" "state%b")
-SetPlay3DAtCar,0AC5,0,0,("self: AudioStream" "handle: Car")
-SetPlay3DAtChar,0AC4,0,0,("self: AudioStream" "handle: Char")
-SetPlay3DAtCoords,0AC2,0,0,("self: AudioStream" "x%f" "y%f" "z%f")
-SetPlay3DAtObject,0AC3,0,0,("self: AudioStream" "handle: Object")
 SetState,0AAD,0,0,("self: AudioStream" "state: AudioStreamState")
 SetVolume,0ABC,0,0,("self: AudioStream" "volume%f")
+$END
+
+$AudioStream3D
+$BEGIN
+Load,0AC1,1,0,("audioFileName%s" "handle: AudioStream3D")
+SetPlayAtCar,0AC5,0,0,("self: AudioStream" "handle: Car")
+SetPlayAtChar,0AC4,0,0,("self: AudioStream" "handle: Char")
+SetPlayAtCoords,0AC2,0,0,("self: AudioStream" "x%f" "y%f" "z%f")
+SetPlayAtObject,0AC3,0,0,("self: AudioStream" "handle: Object")
 $END
 
 $Blip
@@ -1104,18 +1110,22 @@ $BEGIN
 ActivateItem,08D9,0,0,("self: Menu" "row%i" "state%b")
 ChangeCarColor,0A22,0,0,("self: Menu" "vehicle: Car" "colorSlot%i" "row%i")
 Create,08D4,0,0,("header: gxt_key" "topLeftX%f" "topLeftY%f" "width%f" "numColumns%i" "interactive%b" "background%b" "alignment%i" "handle: Menu")
-CreateGrid,0964,0,0,("header: gxt_key" "topLeftX%f" "topLeftY%f" "width%f" "numColumns%i" "interactive%b" "background%b" "alignment%i" "handle: Menu")
 Delete,08DA,0,0,("self: Menu")
 GetItemAccepted,08D8,0,0,("self: Menu" "row%i")
 GetItemSelected,08D7,0,0,("self: Menu" "row%i")
 HighlightItem,0A23,0,0,("self: Menu" "row%i" "state%b")
 SetActiveItem,090E,0,0,("self: Menu" "row%i")
-SetActiveItemCarMods,0A75,1,0,("self: Menu" "carcolor%i")
 SetColumn,08DB,0,0,("self: Menu" "column%i" "title: gxt_key" "row0: gxt_key" "row1: gxt_key" "row2: gxt_key" "row3: gxt_key" "row4: gxt_key" "row5: gxt_key" "row6: gxt_key" "row7: gxt_key" "row8: gxt_key" "row9: gxt_key" "row10: gxt_key" "row11: gxt_key")
 SetColumnOrientation,08D6,0,0,("self: Menu" "column%i" "alignment%i")
 SetColumnWidth,09DB,0,0,("self: Menu" "column%i" "width%i")
 SetItemWith2Numbers,08EF,0,0,("self: Menu" "column%i" "row%i" "gxt: gxt_key" "number1%i" "number2%i")
 SetItemWithNumber,08EE,0,0,("self: Menu" "column%i" "row%i" "gxt: gxt_key" "number%i")
+$END
+
+$MenuGrid
+$BEGIN
+Create,0964,0,0,("header: gxt_key" "topLeftX%f" "topLeftY%f" "width%f" "numColumns%i" "interactive%b" "background%b" "alignment%i" "handle: MenuGrid")
+SetActiveItemCarMods,0A75,1,0,("self: MenuGrid" "carcolor%i")
 $END
 
 $Mouse

@@ -117,8 +117,8 @@ export class CommandEditorComponent implements OnInit {
     // validate the new command
     this.updateErrors();
     this.isDirty = false;
-    this.platforms.forEach(p => {
-      p.status = this.hasPlatform(p.name)
+    this.platforms.forEach((p) => {
+      p.status = this.hasPlatform(p.name);
     });
   }
 

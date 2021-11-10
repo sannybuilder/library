@@ -108,7 +108,11 @@ export const commandRelated = createSelector(
       ? commands.filter((c) => {
           return (
             c.id !== id &&
-            (c.name === name || (c.class === className && c.member === member))
+            (c.name === name ||
+              (c.class &&
+                c.member &&
+                c.class === className &&
+                c.member === member))
           );
         })
       : [];

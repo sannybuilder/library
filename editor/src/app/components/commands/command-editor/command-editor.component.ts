@@ -24,6 +24,7 @@ import {
   GameSupportInfo,
   Param,
   ParamType,
+  Platform,
   Primitive,
   PrimitiveType,
   SourceType,
@@ -79,6 +80,8 @@ export class CommandEditorComponent implements OnInit {
 
   PrimitiveType = PrimitiveType;
   SourceType = SourceType;
+  Platform = Platform;
+
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   isNew: boolean;
@@ -101,6 +104,12 @@ export class CommandEditorComponent implements OnInit {
     constructorNotReturningHandle: false,
   };
   errorMessages: string[] = [];
+
+  platforms = [
+    { name: Platform.PC, status: false },
+    { name: Platform.Console, status: false },
+    { name: Platform.Mobile, status: false },
+  ];
 
   @Input() set command(val: Command) {
     this._command = val;
@@ -326,6 +335,43 @@ export class CommandEditorComponent implements OnInit {
       delete command.attrs;
     }
     this.updateErrors();
+  }
+
+  hasAnyPlatform() {
+    return (
+      !this.command.platforms ||
+      !this.command.platforms.length ||
+      this.hasPlatform(Platform.Any)
+    );
+  }
+
+  hasPlatform(platform: Platform) {
+    return this.command.platforms?.includes(platform);
+  }
+
+  setAnyPlatform() {
+    this.command.platforms = [Platform.Any];
+    this.platforms.forEach((p) => {
+      p.status = false;
+    });
+  }
+
+  onPlatformToggle(platform: Platform, event: MouseEvent) {
+    const shouldAdd = !this.hasPlatform(platform);
+    this.command.platforms = this.command.platforms?.filter(
+      (p) => p !== platform && p !== Platform.Any
+    );
+
+    if (shouldAdd) {
+      this.command.platforms ??= [];
+      this.command.platforms.push(platform);
+    }
+
+    const length = this.command.platforms?.length || 0;
+    if (length === 0 || length === this.platforms.length) {
+      this.setAnyPlatform();
+      (event.target as HTMLInputElement).checked = false;
+    }
   }
 
   get suggestedClassName(): string {

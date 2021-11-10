@@ -54,6 +54,13 @@ export const CommandAttributes: Attribute[] = [
   'is_variadic',
 ];
 
+export enum Platform {
+  Any = 'any',
+  PC = 'pc',
+  Console = 'console',
+  Mobile = 'mobile',
+};
+
 export interface Param {
   type: ParamType['name'];
   name: string;
@@ -70,6 +77,7 @@ export interface Command {
   class?: string;
   member?: string;
   short_desc?: string;
+  platforms?: Platform[];
 }
 
 export interface Extension {

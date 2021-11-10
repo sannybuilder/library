@@ -117,6 +117,9 @@ export class CommandEditorComponent implements OnInit {
     // validate the new command
     this.updateErrors();
     this.isDirty = false;
+    this.platforms.forEach(p => {
+      p.status = this.hasPlatform(p.name)
+    });
   }
 
   get command() {
@@ -346,7 +349,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   hasPlatform(platform: Platform) {
-    return this.command.platforms?.includes(platform);
+    return !!this.command.platforms?.includes(platform);
   }
 
   setAnyPlatform() {

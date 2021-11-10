@@ -12,6 +12,7 @@ import {
   Game,
   Param,
   ParamType,
+  Platform,
   SupportInfo,
 } from '../../../models';
 
@@ -28,6 +29,8 @@ export class CommandInfoComponent {
   private _primitives: string[] = [];
   private _enumNames: string[] = [];
 
+  customPlatforms: Platform[] = [];
+
   @Input() set types(val: ParamType[]) {
     this._primitives = val
       .filter((v) => v.type === 'primitive')
@@ -41,6 +44,9 @@ export class CommandInfoComponent {
     this._attrs = Object.entries(val?.attrs ?? {})
       .filter(([_, v]) => v)
       .map(([key]) => key as Attribute);
+
+    this.customPlatforms =
+      this.command.platforms?.filter((p) => p !== Platform.Any) ?? [];
   }
 
   get command(): Command {

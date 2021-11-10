@@ -123,6 +123,24 @@
                 | translate: { extension: extension }
             "
           ></li>
+          <li
+            *ngIf="customPlatforms.length === 1"
+            [innerHTML]="
+              'ui.commandOverview.customPlatform'
+                | translate: { platform: customPlatforms[0] }
+            "
+          ></li>
+          <li
+            *ngIf="customPlatforms.length === 2"
+            [innerHTML]="
+              'ui.commandOverview.customPlatforms'
+                | translate
+                  : {
+                      platform1: customPlatforms[0],
+                      platform2: customPlatforms[1]
+                    }
+            "
+          ></li>
           <li *ngIf="command?.input[0]?.name === 'self'">
             <code class="d-inline"
               ><span class="identifier">self</span>: {{ command.class }}</code

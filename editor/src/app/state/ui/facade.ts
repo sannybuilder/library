@@ -8,6 +8,8 @@ import {
   EnumRaw,
   Game,
   Modifier,
+  Platform,
+  Version,
   ViewMode,
 } from '../../models';
 import { AuthFacade } from '../auth/facade';
@@ -29,6 +31,8 @@ import {
   toggleSearchHelp,
   dismissSearchHelp,
   toggleSidebar,
+  selectPlatforms,
+  selectVersions,
 } from './actions';
 import * as selector from './selectors';
 
@@ -184,5 +188,25 @@ export class UiFacade {
 
   dismissSearchHelp() {
     this.store$.dispatch(dismissSearchHelp());
+  }
+
+  getPlatformCheckedState(platform: Platform) {
+    return this.store$.select(selector.isPlatformSelected, {
+      platform,
+    });
+  }
+
+  selectPlatforms(game: Game, platforms: Platform[], state: boolean) {
+    this.store$.dispatch(selectPlatforms({ game, platforms, state }));
+  }
+
+  getVersionCheckedState(version: Version) {
+    return this.store$.select(selector.isVersionSelected, {
+      version,
+    });
+  }
+
+  selectVersions(game: Game, versions: Version[], state: boolean) {
+    this.store$.dispatch(selectVersions({ game, versions, state }));
   }
 }

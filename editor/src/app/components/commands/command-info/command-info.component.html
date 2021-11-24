@@ -141,6 +141,20 @@
                     }
             "
           ></li>
+          <li
+            *ngIf="customVersions.length === 1"
+            [innerHTML]="
+              'ui.commandOverview.customVersions'
+                | translate: { platform: customVersions[0] }
+            "
+          ></li>
+          <li
+            *ngIf="customVersions.length > 1"
+            [innerHTML]="
+              'ui.commandOverview.customVersions'
+                | translate: { versions: customVersions.join(', ') }
+            "
+          ></li>
           <li *ngIf="command?.input[0]?.name === 'self'">
             <code class="d-inline"
               ><span class="identifier">self</span>: {{ command.class }}</code

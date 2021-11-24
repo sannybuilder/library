@@ -21,7 +21,9 @@ import {
   CommandAttributes,
   DEFAULT_EXTENSION,
   Game,
+  GamePlatforms,
   GameSupportInfo,
+  GameVersions,
   Param,
   ParamType,
   Platform,
@@ -29,6 +31,7 @@ import {
   PrimitiveType,
   SourceType,
   SupportLevel,
+  Version,
 } from '../../../models';
 import { SelectorComponent } from '../../common/selector/selector.component';
 import {
@@ -81,6 +84,7 @@ export class CommandEditorComponent implements OnInit {
   PrimitiveType = PrimitiveType;
   SourceType = SourceType;
   Platform = Platform;
+  Version = Version;
 
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
@@ -105,11 +109,17 @@ export class CommandEditorComponent implements OnInit {
   };
   errorMessages: string[] = [];
 
-  platforms = [
-    { name: Platform.PC, status: false },
-    { name: Platform.Console, status: false },
-    { name: Platform.Mobile, status: false },
-  ];
+  platforms: Array<{ name: Platform; status: boolean }> = [];
+
+  versions: Array<{ name: Version; status: boolean }> = [];
+
+  @Input() set game(val: Game) {
+    this.versions = GameVersions[val].map((name) => ({ name, status: false }));
+    this.platforms = GamePlatforms[val].map((name) => ({
+      name,
+      status: false,
+    }));
+  }
 
   @Input() set command(val: Command) {
     this._command = val;
@@ -119,6 +129,9 @@ export class CommandEditorComponent implements OnInit {
     this.isDirty = false;
     this.platforms.forEach((p) => {
       p.status = this.hasPlatform(p.name);
+    });
+    this.versions.forEach((p) => {
+      p.status = this.hasVersion(p.name);
     });
   }
 
@@ -373,6 +386,43 @@ export class CommandEditorComponent implements OnInit {
     const length = this.command.platforms?.length || 0;
     if (length === 0 || length === this.platforms.length) {
       this.setAnyPlatform();
+      (event.target as HTMLInputElement).checked = false;
+    }
+  }
+
+  hasAnyVersion() {
+    return (
+      !this.command.versions ||
+      !this.command.versions.length ||
+      this.hasVersion(Version.Any)
+    );
+  }
+
+  hasVersion(version: Version) {
+    return !!this.command.versions?.includes(version);
+  }
+
+  setAnyVersion() {
+    this.command.versions = [Version.Any];
+    this.versions.forEach((p) => {
+      p.status = false;
+    });
+  }
+
+  onVersionToggle(version: Version, event: MouseEvent) {
+    const shouldAdd = !this.hasVersion(version);
+    this.command.versions = this.command.versions?.filter(
+      (p) => p !== version && p !== Version.Any
+    );
+
+    if (shouldAdd) {
+      this.command.versions ??= [];
+      this.command.versions.push(version);
+    }
+
+    const length = this.command.versions?.length || 0;
+    if (length === 0 || length === this.versions.length) {
+      this.setAnyVersion();
       (event.target as HTMLInputElement).checked = false;
     }
   }

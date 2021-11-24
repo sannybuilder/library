@@ -14,6 +14,7 @@ import {
   ParamType,
   Platform,
   SupportInfo,
+  Version,
 } from '../../../models';
 
 @Component({
@@ -30,6 +31,7 @@ export class CommandInfoComponent {
   private _enumNames: string[] = [];
 
   customPlatforms: Platform[] = [];
+  customVersions: Version[] = [];
 
   @Input() set types(val: ParamType[]) {
     this._primitives = val
@@ -47,6 +49,9 @@ export class CommandInfoComponent {
 
     this.customPlatforms =
       this.command.platforms?.filter((p) => p !== Platform.Any) ?? [];
+
+    this.customVersions =
+      this.command.versions?.filter((p) => p !== Version.Any) ?? [];
   }
 
   get command(): Command {

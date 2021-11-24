@@ -3,7 +3,16 @@ import { flatten, orderBy, uniqBy } from 'lodash';
 import { of, zip } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { Attribute, CommandAttributes, Game, Modifier } from '../../../models';
+import {
+  Attribute,
+  CommandAttributes,
+  Game,
+  GamePlatforms,
+  GameVersions,
+  Modifier,
+  Platform,
+  Version,
+} from '../../../models';
 import { ExtensionsFacade, UiFacade } from '../../../state';
 
 @Component({
@@ -13,7 +22,17 @@ import { ExtensionsFacade, UiFacade } from '../../../state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterPanelComponent {
-  @Input() game: Game;
+  private _game: Game;
+
+  @Input() set game(val: Game) {
+    this.platforms = GamePlatforms[val];
+    this.versions = GameVersions[val];
+    this._game = val;
+  }
+
+  get game() {
+    return this._game;
+  }
   extensionNames$ = this._extensions.extensionNames$;
   selectedExtensionEntities$ = this._ui.selectedExtensions$.pipe(
     switchMap((extensions) => {
@@ -27,6 +46,10 @@ export class FilterPanelComponent {
   );
 
   attributes = CommandAttributes;
+  platforms: Platform[] = [];
+  versions: Version[] = [];
+  Platform = Platform;
+  Version = Version;
 
   constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
 
@@ -56,5 +79,27 @@ export class FilterPanelComponent {
 
   selectClass(className: string | 'any' | 'none', state: boolean) {
     return this._ui.selectClass(this.game, className, state);
+  }
+
+  selectPlatform(platform: Platform, event: MouseEvent) {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+    target.checked = false;
+    this._ui.selectPlatforms(this.game, [platform], checked);
+  }
+
+  isPlatformChecked(platform: Platform) {
+    return this._ui.getPlatformCheckedState(platform);
+  }
+
+  selectVersion(version: Version, event: MouseEvent) {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+    target.checked = false;
+    this._ui.selectVersions(this.game, [version], checked);
+  }
+
+  isVersionChecked(version: Version) {
+    return this._ui.getVersionCheckedState(version);
   }
 }

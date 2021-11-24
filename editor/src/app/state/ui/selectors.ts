@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { flatMap, sortBy } from 'lodash';
+import { flatMap, intersection, sortBy } from 'lodash';
 import { search } from '../../utils';
-import { Attribute, Command, Game } from '../../models';
+import { Attribute, Command, Game, Platform, Version } from '../../models';
 import { extensions } from '../extensions/selectors';
 import { game } from '../game/selectors';
 import { UiState, GameState } from './reducer';
@@ -34,6 +34,28 @@ export const isExtensionSelected = createSelector(
   selectedExtensions,
   (selectedExtensions: string[] | undefined, props: { extension: string }) =>
     selectedExtensions?.includes(props.extension)
+);
+
+export const selectedPlatforms = createSelector(
+  gameState,
+  (state: GameState | undefined) => state?.selectedPlatforms
+);
+
+export const isPlatformSelected = createSelector(
+  selectedPlatforms,
+  (selectedPlatforms: string[] | undefined, props: { platform: Platform }) =>
+    selectedPlatforms?.includes(props.platform)
+);
+
+export const selectedVersions = createSelector(
+  gameState,
+  (state: GameState | undefined) => state?.selectedVersions
+);
+
+export const isVersionSelected = createSelector(
+  selectedVersions,
+  (selectedVersions: string[] | undefined, props: { version: Version }) =>
+    selectedVersions?.includes(props.version)
 );
 
 export const selectedClasses = createSelector(
@@ -123,13 +145,17 @@ export const rows = createSelector(
   selectedAttributesExcept,
   searchTerm,
   selectedClasses,
+  selectedPlatforms,
+  selectedVersions,
   (
     extensions,
     selectedExtensions,
     selectedAttributesOnly,
     selectedAttributesExcept,
     searchTerm,
-    selectedClasses
+    selectedClasses,
+    selectedPlatforms,
+    selectedVersions
   ) => {
     const selected = extensions?.filter(({ name }) =>
       selectedExtensions?.includes(name)
@@ -142,7 +168,9 @@ export const rows = createSelector(
           commands,
           selectedAttributesOnly,
           selectedAttributesExcept,
-          selectedClasses
+          selectedClasses,
+          selectedPlatforms,
+          selectedVersions
         );
         return search(filtered, searchTerm).map((command) => ({
           extension,
@@ -157,13 +185,17 @@ function filterCommands(
   commands: Command[],
   only: Attribute[],
   except: Attribute[],
-  classes: string[] | undefined
+  classes: string[] | undefined,
+  selectedPlatforms: Platform[] | undefined,
+  selectedVersions: Version[] | undefined
 ) {
   return commands.filter(
     (command) =>
       only.every((attr) => command.attrs?.[attr]) &&
       !except.some((attr) => command.attrs?.[attr]) &&
-      isClassMatching(command, classes ?? [])
+      isClassMatching(command, classes ?? []) &&
+      isPlatformMatching(command, selectedPlatforms ?? [Platform.Any]) &&
+      isVersionMatching(command, selectedVersions ?? [Version.Any])
   );
 }
 
@@ -176,6 +208,28 @@ function isClassMatching(
   }
   const needle = command.class ?? 'none';
   return classes.includes(needle);
+}
+
+function isPlatformMatching(command: Command, platforms: Platform[]): boolean {
+  if (platforms.includes(Platform.Any)) {
+    return true;
+  }
+  const commandPlatforms = command.platforms ?? [Platform.Any];
+  if (commandPlatforms.includes(Platform.Any)) {
+    return true;
+  }
+  return intersection(platforms, commandPlatforms).length > 0;
+}
+
+function isVersionMatching(command: Command, versions: Version[]): boolean {
+  if (versions.includes(Version.Any)) {
+    return true;
+  }
+  const commandVersions = command.versions ?? [Version.Any];
+  if (commandVersions.includes(Version.Any)) {
+    return true;
+  }
+  return intersection(versions, commandVersions).length > 0;
 }
 
 export const classToDisplay = createSelector(

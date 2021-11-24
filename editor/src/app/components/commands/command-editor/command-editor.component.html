@@ -434,6 +434,37 @@
 
   <div class="row mb-2">
     <div class="col-12">
+      <h5>{{ "ui.commandEditor.versions" | translate }}</h5>
+
+      <div class="d-inline-block pr-2">
+        <label class="form-check-label" [title]="Version.Any">
+          <input
+            type="checkbox"
+            [disabled]="hasAnyVersion()"
+            [checked]="hasAnyVersion()"
+            (click)="setAnyVersion()"
+          />
+          <span class="checkbox"></span>
+          {{ Version.Any }}
+        </label>
+      </div>
+
+      <div class="d-inline-block pr-2" *ngFor="let version of versions">
+        <label class="form-check-label" [title]="version.name">
+          <input
+            type="checkbox"
+            [(ngModel)]="version.status"
+            (click)="onVersionToggle(version.name, $event)"
+          />
+          <span class="checkbox"></span>
+          {{ version.name }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-12">
       <div class="form-group">
         <label [for]="command.id + '_snippet'" class="h5">{{
           "ui.commandEditor.codeSnippetSubtitle" | translate

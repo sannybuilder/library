@@ -59,7 +59,15 @@ export enum Platform {
   PC = 'pc',
   Console = 'console',
   Mobile = 'mobile',
-};
+}
+
+export enum Version {
+  Any = 'any',
+  _10 = '1.0',
+  _11 = '1.1',
+  _20 = '2.0',
+  _unreal10 = '1.0 [DE]',
+}
 
 export interface Param {
   type: ParamType['name'];
@@ -78,6 +86,7 @@ export interface Command {
   member?: string;
   short_desc?: string;
   platforms?: Platform[];
+  versions?: Version[];
 }
 
 export interface Extension {
@@ -159,6 +168,18 @@ export const GameTitle: Record<Game, string> = {
   [Game.GTA3]: 'GTA III',
   [Game.VC]: 'Vice City',
   [Game.SA]: 'San Andreas',
+};
+
+export const GamePlatforms: Record<Game, Platform[]> = {
+  [Game.GTA3]: [Platform.Console, Platform.PC, Platform.Mobile],
+  [Game.VC]: [Platform.Console, Platform.PC, Platform.Mobile],
+  [Game.SA]: [Platform.Console, Platform.PC, Platform.Mobile],
+};
+
+export const GameVersions: Record<Game, Version[]> = {
+  [Game.GTA3]: [Version._10, Version._11, Version._unreal10],
+  [Game.VC]: [Version._10, Version._11, Version._unreal10],
+  [Game.SA]: [Version._10, Version._11, Version._20, Version._unreal10],
 };
 
 export const DEFAULT_EXTENSION = 'default';

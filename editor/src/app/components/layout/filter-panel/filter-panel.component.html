@@ -4,15 +4,119 @@
   *ngIf="extensionNames$ | async as extensionNames"
 >
   <div class="card">
-    <div class="card-header" id="headingOne">
+    <div class="card-header" id="headingFilterPlatforms">
       <h2 class="mb-0">
         <button
           class="btn btn-block text-left"
           type="button"
           data-toggle="collapse"
-          data-target="#collapseOne"
+          data-target="#collapsePlatforms"
           aria-expanded="false"
-          aria-controls="collapseOne"
+          aria-controls="collapsePlatforms"
+        >
+          {{ "ui.filters.filterPlatforms" | translate }}
+        </button>
+      </h2>
+    </div>
+
+    <div
+      id="collapsePlatforms"
+      class="collapse"
+      aria-labelledby="headingFilterPlatforms"
+      data-parent="#left-rail"
+    >
+      <div class="card-body">
+        <div class="d-sm-inline-block d-xl-block pr-2">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isPlatformChecked(Platform.Any) | async"
+              (click)="selectPlatform(Platform.Any, $event)"
+            />
+            <span class="checkbox"></span>
+            {{ "ui.filters.anyPlatform" | translate }}
+          </label>
+        </div>
+        <div
+          class="d-sm-inline-block d-xl-block pr-2"
+          *ngFor="let platform of platforms"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isPlatformChecked(platform) | async"
+              (click)="selectPlatform(platform, $event)"
+            />
+            <span class="checkbox"></span>
+            {{ platform }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFilterVersions">
+      <h2 class="mb-0">
+        <button
+          class="btn btn-block text-left"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseVersions"
+          aria-expanded="false"
+          aria-controls="collapseVersions"
+        >
+          {{ "ui.filters.filterVersions" | translate }}
+        </button>
+      </h2>
+    </div>
+
+    <div
+      id="collapseVersions"
+      class="collapse"
+      aria-labelledby="headingFilterVersions"
+      data-parent="#left-rail"
+    >
+      <div class="card-body">
+        <div class="d-sm-inline-block d-xl-block pr-2">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isVersionChecked(Version.Any) | async"
+              (click)="selectVersion(Version.Any, $event)"
+            />
+            <span class="checkbox"></span>
+            {{ "ui.filters.anyVersion" | translate }}
+          </label>
+        </div>
+        <div
+          class="d-sm-inline-block d-xl-block pr-2"
+          *ngFor="let version of versions"
+        >
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isVersionChecked(version) | async"
+              (click)="selectVersion(version, $event)"
+            />
+            <span class="checkbox"></span>
+            {{ version }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingFilterExtensions">
+      <h2 class="mb-0">
+        <button
+          class="btn btn-block text-left"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseExtensions"
+          aria-expanded="false"
+          aria-controls="collapseExtensions"
         >
           {{ "ui.filters.filterExtensions" | translate }}
         </button>
@@ -20,9 +124,9 @@
     </div>
 
     <div
-      id="collapseOne"
+      id="collapseExtensions"
       class="collapse"
-      aria-labelledby="headingOne"
+      aria-labelledby="headingFilterExtensions"
       data-parent="#left-rail"
     >
       <div class="card-body">
@@ -45,7 +149,7 @@
   </div>
 
   <div class="card">
-    <div class="card-header" id="headingThree">
+    <div class="card-header" id="headingFilterClasses">
       <h2 class="mb-0">
         <button
           class="btn btn-block text-left"
@@ -63,7 +167,7 @@
     <div
       id="collapseThree"
       class="collapse"
-      aria-labelledby="headingThree"
+      aria-labelledby="headingFilterClasses"
       data-parent="#left-rail"
     >
       <div class="card-body">
@@ -112,24 +216,24 @@
   </div>
 
   <div class="card">
-    <div class="card-header" id="headingTwo">
+    <div class="card-header" id="headingFilterAttrs">
       <h2 class="mb-0">
         <button
           class="btn btn-block text-left collapsed"
           type="button"
           data-toggle="collapse"
-          data-target="#collapseTwo"
+          data-target="#collapseAttrs"
           aria-expanded="false"
-          aria-controls="collapseTwo"
+          aria-controls="collapseAttrs"
         >
           {{ "ui.filters.filterAttributes" | translate }}
         </button>
       </h2>
     </div>
     <div
-      id="collapseTwo"
+      id="collapseAttrs"
       class="collapse"
-      aria-labelledby="headingTwo"
+      aria-labelledby="headingFilterAttrs"
       data-parent="#left-rail"
     >
       <div class="card-body">

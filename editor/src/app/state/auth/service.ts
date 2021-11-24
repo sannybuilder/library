@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { CONFIG, Config } from '../../config';
+import { serializeUrlAndParams } from 'src/app/utils';
 
 interface UserResponse {
   login: string;
@@ -27,10 +28,10 @@ export class AuthService {
       client_id: this.clientId,
       scope: 'public_repo',
     };
-    const query = Object.entries(params)
-      .map((v) => v.join('='))
-      .join('&');
-    window.location.href = [this.config.endpoints.oauth, query].join('?');
+    window.location.href = serializeUrlAndParams(
+      this.config.endpoints.oauth,
+      params
+    );
   }
 
   setSession(accessToken: string) {

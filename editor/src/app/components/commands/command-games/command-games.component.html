@@ -1,6 +1,7 @@
 <ng-container *ngFor="let item of supportInfo">
   <a
     [routerLink]="['/', item.game, extension, command.id]"
+    [queryParams]="getQueryParamsForCommand(command, item.game)"
     *ngIf="item.level > SupportLevel.Unsupported"
   >
     <scl-icon

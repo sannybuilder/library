@@ -5,6 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { getQueryParamsForCommand } from '../../../utils';
 import { ClassMeta, Command, DEFAULT_EXTENSION, Game } from '../../../models';
 
 type ClassCommand = { command: Command; extension: string };
@@ -53,5 +54,9 @@ export class ClassOverviewComponent {
   interceptDescriptionClick(event: MouseEvent) {
     this.descriptionClick.next(event);
     return false;
+  }
+
+  getQueryParamsForCommand(command: Command, game: Game) {
+    return getQueryParamsForCommand(command, game);
   }
 }

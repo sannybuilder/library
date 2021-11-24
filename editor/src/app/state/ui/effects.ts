@@ -34,9 +34,21 @@ import {
   take,
 } from 'rxjs/operators';
 
-import { Entity, Enums, Extension, Game, ViewMode } from '../../models';
+import {
+  Entity,
+  Enums,
+  Extension,
+  Game,
+  Platform,
+  Version,
+  ViewMode,
+} from '../../models';
 
-import { capitalizeFirst } from '../../utils';
+import {
+  capitalizeFirst,
+  isPlatformMatching,
+  isVersionMatching,
+} from '../../utils';
 import { flatMap } from 'lodash';
 import { UiFacade } from './facade';
 import { SnippetsFacade } from '../snippets/facade';
@@ -55,7 +67,16 @@ export class UiEffects {
       withLatestFrom(this._ui.canEdit$),
       switchMap(
         ([
-          { opcode, extension, enumName, className, action, searchTerm },
+          {
+            opcode,
+            extension,
+            enumName,
+            className,
+            action,
+            searchTerm,
+            platforms,
+            versions,
+          },
           canEdit,
         ]) => {
           if (action === 'decision-tree') {
@@ -122,7 +143,15 @@ export class UiEffects {
                   opcode.toLowerCase() === 'new' ? '' : opcodify(opcode);
                 const commandToEdit = extensions
                   .find((e) => e.name === extension)
-                  ?.commands.find(({ id }) => id === commandId);
+                  ?.commands.find(
+                    (command) =>
+                      command.id === commandId &&
+                      isPlatformMatching(
+                        command,
+                        platforms ?? [Platform.Any]
+                      ) &&
+                      isVersionMatching(command, versions ?? [Version.Any])
+                  );
 
                 const isNew = !commandToEdit;
                 if (isNew) {

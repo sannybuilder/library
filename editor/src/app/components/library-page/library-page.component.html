@@ -127,7 +127,7 @@
               viewMode: viewMode,
               game: game,
               extension: extension,
-              commandId: command?.id,
+              command: command,
               enumName: enumToDisplayOrEdit?.name,
               className: (classToDisplay$ | async)
             }) as url
@@ -199,6 +199,7 @@
           *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
           class="btn btn-outline-success"
           [routerLink]="['/', game, extension, command.id, 'edit']"
+          [queryParams]="getQueryParamsForCommand(command, game)"
         >
           {{ "ui.shared.edit" | translate }}
         </a>

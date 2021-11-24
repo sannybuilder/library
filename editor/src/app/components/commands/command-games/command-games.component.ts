@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { getQueryParamsForCommand } from '../../../utils';
 import {
   Command,
+  Game,
   GameSupportInfo,
   GameTitle,
   SupportLevel,
@@ -26,4 +28,8 @@ export class CommandGamesComponent {
     [SupportLevel.Nop]: 'ui.commandGames.nop',
     [SupportLevel.DoesNotExist]: 'ui.commandGames.doesNotExist',
   };
+
+  getQueryParamsForCommand(command: Command, game: Game) {
+    return getQueryParamsForCommand(command, game);
+  }
 }

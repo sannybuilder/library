@@ -7,8 +7,15 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { DEFAULT_EXTENSION, Game, GameTitle } from './models';
+import {
+  DEFAULT_EXTENSION,
+  Game,
+  GameTitle,
+  Platform,
+  Version,
+} from './models';
 import { AuthFacade, GameFacade } from './state';
+import { decodePlatforms, decodeVersions } from './utils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -85,12 +92,18 @@ export class RouteGuard implements CanActivate {
     // extensions
     const opcode = segments.shift();
     const extension = subPath || DEFAULT_EXTENSION;
+
+    const platforms = getPlatformsFromUrl(this._router, state.url, game);
+    const versions = getVersionsFromUrl(this._router, state.url, game);
+
     this._game.onListEnter({
       game,
       extension,
       opcode,
       action: segments.shift(),
       searchTerm,
+      platforms,
+      versions,
     });
 
     return true;
@@ -104,7 +117,10 @@ export class RouteGuard implements CanActivate {
 function getSegmentsFromUrl(
   router: Router,
   url: string
-): { segments: string[]; searchTerm?: string } {
+): {
+  segments: string[];
+  searchTerm?: string;
+} {
   const tree = router.parseUrl(url);
   return {
     searchTerm: tree.queryParams?.q,
@@ -112,6 +128,24 @@ function getSegmentsFromUrl(
       tree.root?.children?.primary?.segments.map((segment) => segment.path) ??
       [],
   };
+}
+
+function getPlatformsFromUrl(
+  router: Router,
+  url: string,
+  game: Game
+): Platform[] {
+  const tree = router.parseUrl(url);
+  return decodePlatforms(tree.queryParams?.p, game);
+}
+
+function getVersionsFromUrl(
+  router: Router,
+  url: string,
+  game: Game
+): Version[] {
+  const tree = router.parseUrl(url);
+  return decodeVersions(tree.queryParams?.v, game);
 }
 
 function getGame(game: string | undefined): Game | undefined {

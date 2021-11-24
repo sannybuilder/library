@@ -9,6 +9,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
@@ -31,7 +32,11 @@ import {
   EnumsFacade,
   TreeFacade,
 } from '../../state';
-import { FUSEJS_OPTIONS } from '../../utils';
+import {
+  FUSEJS_OPTIONS,
+  getQueryParamsForCommand,
+  serializeUrlAndParams,
+} from '../../utils';
 import { Router } from '@angular/router';
 
 @Component({
@@ -343,14 +348,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     viewMode,
     game,
     extension,
-    commandId,
+    command,
     enumName,
     className,
   }: {
     viewMode: ViewMode;
     game: Game;
     extension?: string;
-    commandId?: string;
+    command?: Command;
     enumName?: string;
     className?: string;
   }) {
@@ -371,10 +376,22 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (viewMode === ViewMode.ViewCommand) {
-      return [base, game, extension, commandId].join('/');
+      if (!command) {
+        return [base, game, extension].join('/');
+      }
+      const url = [base, game, extension, command.id].join('/');
+
+      return serializeUrlAndParams(
+        url,
+        getQueryParamsForCommand(command, game)
+      );
     }
 
     return undefined;
+  }
+
+  getQueryParamsForCommand(command: Command, game: Game) {
+    return getQueryParamsForCommand(command, game);
   }
 
   treeBack() {

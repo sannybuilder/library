@@ -18,6 +18,7 @@
               <div class="col-3 col-md-1 order-0 d-flex align-items-center">
                 <a
                   [routerLink]="['/', game, row.extension, row.command.id]"
+                  [queryParams]="getQueryParamsForCommand(row.command, game)"
                   [name]="row.command.id"
                   [innerHTML]="row.command | propExtract: 'id' | sanitize"
                 ></a>
@@ -70,12 +71,14 @@
                     row.command.id,
                     'edit'
                   ]"
+                  [queryParams]="getQueryParamsForCommand(row.command, game)"
                   >{{ "ui.shared.edit" | translate }}</a
                 >
 
                 <a
                   class="btn small text-muted"
                   [routerLink]="['/', game, row.extension, row.command.id]"
+                  [queryParams]="getQueryParamsForCommand(row.command, game)"
                   [name]="row.command.id"
                   >{{ "ui.shared.view" | translate }}</a
                 >
@@ -188,6 +191,23 @@
                     }}</pre>
                   </ng-container>
                 </ng-container>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 text-right">
+                <code
+                  *ngFor="let p of row.command.platforms"
+                  class="platform-badge"
+                >
+                  {{ p }}
+                </code>
+                <code
+                  *ngFor="let p of row.command.versions"
+                  class="platform-badge"
+                >
+                  V{{ p }}
+                </code>
               </div>
             </div>
           </div>

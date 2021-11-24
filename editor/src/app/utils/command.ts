@@ -1,4 +1,4 @@
-import { camelCase, pickBy } from 'lodash';
+import { camelCase, intersection, pickBy } from 'lodash';
 import {
   Game,
   Param,
@@ -6,6 +6,10 @@ import {
   SupportLevel,
   GameSupportInfo,
   Command,
+  Platform,
+  GamePlatforms,
+  Version,
+  GameVersions,
 } from '../models';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
@@ -90,4 +94,66 @@ export function normalizeId(id: string): string {
     return '0' + id.slice(1);
   }
   return id;
+}
+
+export function getQueryParamsForCommand(command: Command, game: Game) {
+  const platforms = command.platforms ?? [];
+  const versions = command.versions ?? [];
+
+  const p = platforms.reduce((m, v) => {
+    if (v === Platform.Any) {
+      return m;
+    }
+    return m | (1 << GamePlatforms[game].indexOf(v));
+  }, 0);
+  const v = versions.reduce((m, v) => {
+    if (v === Version.Any) {
+      return m;
+    }
+    return m | (1 << GameVersions[game].indexOf(v));
+  }, 0);
+
+  return { p: p || undefined, v: v || undefined };
+}
+
+export function decodePlatforms(platform: number | undefined, game: Game) {
+  if (!platform) {
+    return [Platform.Any];
+  }
+  return GamePlatforms[game].filter((p, i) => (platform & (1 << i)) !== 0);
+}
+
+export function decodeVersions(version: number | undefined, game: Game) {
+  if (!version) {
+    return [Version.Any];
+  }
+  return GameVersions[game].filter((p, i) => (version & (1 << i)) !== 0);
+}
+
+export function isPlatformMatching(
+  command: Command,
+  platforms: Platform[]
+): boolean {
+  if (platforms.includes(Platform.Any)) {
+    return true;
+  }
+  const commandPlatforms = command.platforms ?? [Platform.Any];
+  if (commandPlatforms.includes(Platform.Any)) {
+    return true;
+  }
+  return intersection(platforms, commandPlatforms).length > 0;
+}
+
+export function isVersionMatching(
+  command: Command,
+  versions: Version[]
+): boolean {
+  if (versions.includes(Version.Any)) {
+    return true;
+  }
+  const commandVersions = command.versions ?? [Version.Any];
+  if (commandVersions.includes(Version.Any)) {
+    return true;
+  }
+  return intersection(versions, commandVersions).length > 0;
 }

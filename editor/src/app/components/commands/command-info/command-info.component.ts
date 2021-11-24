@@ -5,6 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { getQueryParamsForCommand } from '../../../utils';
 import {
   Attribute,
   Command,
@@ -81,5 +82,9 @@ export class CommandInfoComponent {
   interceptDescriptionClick(event: MouseEvent) {
     this.descriptionClick.next(event);
     return false;
+  }
+
+  getQueryParamsForCommand(command: Command, game: Game) {
+    return getQueryParamsForCommand(command, game);
   }
 }

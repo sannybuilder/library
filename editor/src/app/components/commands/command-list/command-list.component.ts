@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { getQueryParamsForCommand } from '../../../utils';
 import { Command, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
@@ -53,5 +54,9 @@ export class CommandListComponent {
   interceptDescriptionClick(event: MouseEvent) {
     this.descriptionClick.next(event);
     return false;
+  }
+
+  getQueryParamsForCommand(command: Command, game: Game) {
+    return getQueryParamsForCommand(command, game);
   }
 }

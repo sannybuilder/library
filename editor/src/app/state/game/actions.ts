@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Game, SupportInfo } from '../../models';
+import { Game, Platform, SupportInfo, Version } from '../../models';
 
 export const onListEnter = createAction(
   '[game] on list enter',
@@ -11,6 +11,8 @@ export const onListEnter = createAction(
     className?: string;
     action?: string;
     searchTerm?: string;
+    platforms?: Platform[];
+    versions?: Version[];
   }>()
 );
 

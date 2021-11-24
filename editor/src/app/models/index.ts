@@ -65,7 +65,9 @@ export enum Version {
   Any = 'any',
   _10 = '1.0',
   _11 = '1.1',
+  _JP = '1.1 [JP]',
   _20 = '2.0',
+  _30 = '3.0',
   _unreal10 = '1.0 [DE]',
 }
 
@@ -178,8 +180,8 @@ export const GamePlatforms: Record<Game, Platform[]> = {
 
 export const GameVersions: Record<Game, Version[]> = {
   [Game.GTA3]: [Version._10, Version._11, Version._unreal10],
-  [Game.VC]: [Version._10, Version._11, Version._unreal10],
-  [Game.SA]: [Version._10, Version._11, Version._20, Version._unreal10],
+  [Game.VC]: [Version._10, Version._JP, Version._unreal10],
+  [Game.SA]: [Version._10, Version._30, Version._unreal10],
 };
 
 export const DEFAULT_EXTENSION = 'default';

@@ -144,8 +144,8 @@
           <li
             *ngIf="customVersions.length === 1"
             [innerHTML]="
-              'ui.commandOverview.customVersions'
-                | translate: { platform: customVersions[0] }
+              'ui.commandOverview.customVersion'
+                | translate: { version: customVersions[0] }
             "
           ></li>
           <li
@@ -182,9 +182,11 @@
         <h5>{{ "ui.commandOverview.seeAlsoSubtitle" | translate }}</h5>
         <ul class="list-unstyled">
           <li *ngFor="let relatedCommand of relatedCommands">
-            <a [routerLink]="['/', game, extension, relatedCommand.id]">{{
-              relatedCommand.name
-            }}</a>
+            <a
+              [routerLink]="['/', game, extension, relatedCommand.id]"
+              [queryParams]="getQueryParamsForCommand(relatedCommand, game)"
+              >{{ relatedCommand.name }}</a
+            >
             &ndash; {{ relatedCommand.short_desc }}
           </li>
         </ul>

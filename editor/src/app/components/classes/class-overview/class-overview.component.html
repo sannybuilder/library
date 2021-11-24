@@ -63,6 +63,7 @@
       <a
         class="identifier"
         [routerLink]="['/', game, extension, command.id]"
+        [queryParams]="getQueryParamsForCommand(command, game)"
         [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
       ><span [innerHTML]="command | inputParams | sanitize"></span>:
@@ -73,6 +74,7 @@
       <a
         class="identifier"
         [routerLink]="['/', game, extension, command.id]"
+        [queryParams]="getQueryParamsForCommand(command, game)"
         [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
       ><span [innerHTML]="command | inputParams | sanitize"></span>
@@ -85,6 +87,7 @@
       ><a
         class="identifier"
         [routerLink]="['/', game, extension, command.id]"
+        [queryParams]="getQueryParamsForCommand(command, game)"
         [ngClass]="{
           strike: command.attrs?.is_nop || command.attrs?.is_unsupported
         }"

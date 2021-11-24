@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { flatMap, intersection, sortBy } from 'lodash';
-import { search } from '../../utils';
+import { isPlatformMatching, isVersionMatching, search } from '../../utils';
 import { Attribute, Command, Game, Platform, Version } from '../../models';
 import { extensions } from '../extensions/selectors';
 import { game } from '../game/selectors';
@@ -210,28 +210,6 @@ function isClassMatching(
   return classes.includes(needle);
 }
 
-function isPlatformMatching(command: Command, platforms: Platform[]): boolean {
-  if (platforms.includes(Platform.Any)) {
-    return true;
-  }
-  const commandPlatforms = command.platforms ?? [Platform.Any];
-  if (commandPlatforms.includes(Platform.Any)) {
-    return true;
-  }
-  return intersection(platforms, commandPlatforms).length > 0;
-}
-
-function isVersionMatching(command: Command, versions: Version[]): boolean {
-  if (versions.includes(Version.Any)) {
-    return true;
-  }
-  const commandVersions = command.versions ?? [Version.Any];
-  if (commandVersions.includes(Version.Any)) {
-    return true;
-  }
-  return intersection(versions, commandVersions).length > 0;
-}
-
 export const classToDisplay = createSelector(
   state,
   (state: UiState) => state.classToDisplay
@@ -240,14 +218,21 @@ export const classToDisplay = createSelector(
 export const classToDisplayCommands = createSelector(
   extensions,
   classToDisplay,
-  (extensions, classToDisplay) => {
+  selectedPlatforms,
+  selectedVersions,
+  (extensions, classToDisplay, selectedPlatforms, selectedVersions) => {
     if (!classToDisplay) {
       return undefined;
     }
 
     const extensionCommands = flatMap(extensions, (extension) => {
       return extension.commands
-        .filter((command) => command.class === classToDisplay)
+        .filter(
+          (command) =>
+            command.class === classToDisplay &&
+            isPlatformMatching(command, selectedPlatforms ?? [Platform.Any]) &&
+            isVersionMatching(command, selectedVersions ?? [Version.Any])
+        )
         .map((command) => ({ command, extension: extension.name }));
     });
 

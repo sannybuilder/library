@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Game } from '../../models';
+import { Game, Platform, Version } from '../../models';
 import { onListEnter } from './actions';
 import * as selector from './selectors';
 
@@ -23,6 +23,8 @@ export class GameFacade {
     className,
     action,
     searchTerm,
+    platforms,
+    versions,
   }: {
     game: Game;
     extension: string;
@@ -31,6 +33,8 @@ export class GameFacade {
     className?: string;
     action?: string;
     searchTerm?: string;
+    platforms?: Platform[];
+    versions?: Version[];
   }) {
     this.store$.dispatch(
       onListEnter({
@@ -41,6 +45,8 @@ export class GameFacade {
         className,
         action,
         searchTerm,
+        platforms,
+        versions,
       })
     );
   }

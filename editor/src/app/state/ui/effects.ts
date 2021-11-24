@@ -11,6 +11,7 @@ import {
   displayOrEditCommandInfo,
   displayOrEditEnum,
   displayOrEditSnippet,
+  preselectFiltersByGameName,
   resetFilters,
   scrollTop,
   selectClass,
@@ -315,6 +316,13 @@ export class UiEffects {
       map(([_, extensions, game]) =>
         selectExtensions({ game, extensions, state: true })
       )
+    )
+  );
+
+  platformAndVersionFilters$ = createEffect(() =>
+    this._game.gameName$.pipe(
+      tap(console.log),
+      map((gameName) => preselectFiltersByGameName({ gameName }))
     )
   );
 

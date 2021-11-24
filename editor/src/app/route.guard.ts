@@ -15,7 +15,7 @@ import {
   Version,
 } from './models';
 import { AuthFacade, GameFacade } from './state';
-import { decodePlatforms, decodeVersions } from './utils';
+import { decodePlatforms, decodeVersions, getGameByName } from './utils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -49,7 +49,8 @@ export class RouteGuard implements CanActivate {
       return this.goHome();
     }
 
-    const game = getGame(segments.shift());
+    const gameName = segments.shift();
+    const game = getGameByName(gameName);
 
     if (!game) {
       return this.goHome();
@@ -62,6 +63,7 @@ export class RouteGuard implements CanActivate {
 
       this._game.onListEnter({
         game,
+        gameName,
         className,
         extension: DEFAULT_EXTENSION,
         action: segments.shift(),
@@ -73,6 +75,7 @@ export class RouteGuard implements CanActivate {
       const enumName = segments.shift() || 'all';
       this._game.onListEnter({
         game,
+        gameName,
         enumName,
         extension: DEFAULT_EXTENSION,
         action: segments.shift(),
@@ -83,6 +86,7 @@ export class RouteGuard implements CanActivate {
     if (subPath === 'find') {
       this._game.onListEnter({
         game,
+        gameName,
         extension: DEFAULT_EXTENSION,
         action: 'decision-tree',
       });
@@ -98,6 +102,7 @@ export class RouteGuard implements CanActivate {
 
     this._game.onListEnter({
       game,
+      gameName,
       extension,
       opcode,
       action: segments.shift(),
@@ -146,18 +151,4 @@ function getVersionsFromUrl(
 ): Version[] {
   const tree = router.parseUrl(url);
   return decodeVersions(tree.queryParams?.v, game);
-}
-
-function getGame(game: string | undefined): Game | undefined {
-  if (game === 'gta3') {
-    return Game.GTA3;
-  }
-  if (game === 'vc' || game === 'vc_mobile') {
-    return Game.VC;
-  }
-  if (game === 'sa' || game === 'sa_mobile') {
-    return Game.SA;
-  }
-
-  return undefined;
 }

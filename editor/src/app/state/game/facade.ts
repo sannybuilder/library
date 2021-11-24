@@ -13,10 +13,16 @@ export class GameFacade {
     filter((v): v is Game => !!v)
   );
 
+  gameName$ = this.store$.select(selector.gameName).pipe(
+    distinctUntilChanged(),
+    filter((v): v is Game => !!v)
+  );
+
   constructor(private store$: Store) {}
 
   onListEnter({
     game,
+    gameName,
     opcode,
     extension,
     enumName,
@@ -27,6 +33,7 @@ export class GameFacade {
     versions,
   }: {
     game: Game;
+    gameName?: string;
     extension: string;
     opcode?: string;
     enumName?: string;
@@ -39,6 +46,7 @@ export class GameFacade {
     this.store$.dispatch(
       onListEnter({
         game,
+        gameName,
         opcode,
         extension,
         enumName,

@@ -6,3 +6,4 @@ export * from './enum';
 export * from './enum-validation';
 export * from './tree';
 export * from './url';
+export * from './game';

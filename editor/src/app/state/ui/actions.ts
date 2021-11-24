@@ -96,3 +96,8 @@ export const selectVersions = createAction(
   '[ui] change versions selection',
   props<{ game: Game; versions: Version[]; state: boolean }>()
 );
+
+export const preselectFiltersByGameName = createAction(
+  '[ui] preselect filters by game name',
+  props<{ gameName?: string }>()
+);

@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { intersection, partition, without } from 'lodash';
+import { getGameByName } from 'src/app/utils';
 
 import {
   Command,
@@ -35,6 +36,7 @@ import {
   toggleSidebar,
   selectPlatforms,
   selectVersions,
+  preselectFiltersByGameName,
 } from './actions';
 
 export interface GameState {
@@ -78,20 +80,20 @@ const defaultFilterState: {
     gta3: {
       selectedClasses: ['any'],
       selectedExtensions: [],
-      selectedPlatforms: [Platform.Any],
-      selectedVersions: [Version.Any],
+      selectedPlatforms: [],
+      selectedVersions: [],
     },
     vc: {
       selectedClasses: ['any'],
       selectedExtensions: [],
-      selectedPlatforms: [Platform.Any],
-      selectedVersions: [Version.Any],
+      selectedPlatforms: [],
+      selectedVersions: [],
     },
     sa: {
       selectedClasses: ['any'],
       selectedExtensions: [],
-      selectedPlatforms: [Platform.Any],
-      selectedVersions: [Version.Any],
+      selectedPlatforms: [],
+      selectedVersions: [],
     },
   },
 };
@@ -313,6 +315,34 @@ export const uiReducer = createReducer(
     }
 
     return state;
+  }),
+  on(preselectFiltersByGameName, (state, { gameName }) => {
+    const game = getGameByName(gameName);
+    if (!game) {
+      return state;
+    }
+
+    let selectedPlatforms: Platform[] = [Platform.Any];
+    let selectedVersions: Version[] = [Version.Any];
+
+    if (['gta3_unreal', 'vc_unreal', 'sa_unreal'].includes(gameName!)) {
+      selectedPlatforms = [Platform.PC];
+    } else if (['gta3_mobile', 'vc_mobile', 'sa_mobile'].includes(gameName!)) {
+      selectedPlatforms = [Platform.Mobile];
+    }
+
+    if (['gta3_unreal', 'vc_unreal', 'sa_unreal'].includes(gameName!)) {
+      selectedVersions = [Version._unreal10];
+    } else {
+      selectedVersions = GameVersions[game].filter(
+        (v) => v !== Version._unreal10
+      );
+    }
+
+    return updateState(state, game, {
+      selectedPlatforms,
+      selectedVersions,
+    });
   })
 );
 

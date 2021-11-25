@@ -1,4 +1,5 @@
-import { Attribute, Command } from '../models';
+import { intersection } from 'lodash';
+import { Attribute, Command, Platform, Version } from '../models';
 import { commandParams } from './command';
 
 const SELF = 'self';
@@ -39,9 +40,17 @@ export function doesCommandHaveDuplicateName(
   command: Command,
   otherCommands: Command[] | undefined
 ) {
+  const thisCommandPlatforms = command.platforms ?? [Platform.Any];
+  const thisCommandVersions = command.versions ?? [Version.Any];
+
   return (otherCommands ?? []).some(
-    ({ name, id }) =>
-      name === command.name && id !== command.id && !command.attrs?.is_overload
+    ({ name, id, platforms, versions }) =>
+      name === command.name &&
+      id !== command.id &&
+      intersection(thisCommandPlatforms, platforms ?? [Platform.Any]).length >
+        0 &&
+      intersection(thisCommandVersions, versions ?? [Version.Any]).length > 0 &&
+      !command.attrs?.is_overload
   );
 }
 

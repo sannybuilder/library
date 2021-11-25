@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: "14"
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -47,6 +47,18 @@ jobs:
       - name: Compile files
         run: |
           cd generator
+
+          mkdir -p ../editor/dist/editor/assets/gta3_classic
+          mkdir -p ../editor/dist/editor/assets/vc_classic
+          mkdir -p ../editor/dist/editor/assets/sa_classic
+
+          mkdir -p ../editor/dist/editor/assets/gta3_mobile
+          mkdir -p ../editor/dist/editor/assets/vc_mobile
+          mkdir -p ../editor/dist/editor/assets/sa_mobile
+
+          mkdir -p ../editor/dist/editor/assets/gta3_unreal
+          mkdir -p ../editor/dist/editor/assets/vc_unreal
+          mkdir -p ../editor/dist/editor/assets/sa_unreal
 
           cargo run enums ../gta3/enums.json > ../editor/dist/editor/assets/gta3/enums.txt
           cargo run enums ../vc/enums.json > ../editor/dist/editor/assets/vc/enums.txt

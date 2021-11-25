@@ -16,17 +16,17 @@ cargo run snippets ../gta3/snippets > ../editor/src/assets/gta3/snippets.json
 cargo run snippets ../vc/snippets > ../editor/src/assets/vc/snippets.json
 cargo run snippets ../sa/snippets > ../editor/src/assets/sa/snippets.json
 
-mkdir ../editor/src/assets/gta3_classic
-mkdir ../editor/src/assets/vc_classic
-mkdir ../editor/src/assets/sa_classic
+mkdir -p ../editor/src/assets/gta3_classic
+mkdir -p ../editor/src/assets/vc_classic
+mkdir -p ../editor/src/assets/sa_classic
 
-mkdir ../editor/src/assets/gta3_mobile
-mkdir ../editor/src/assets/vc_mobile
-mkdir ../editor/src/assets/sa_mobile
+mkdir -p ../editor/src/assets/gta3_mobile
+mkdir -p ../editor/src/assets/vc_mobile
+mkdir -p ../editor/src/assets/sa_mobile
 
-mkdir ../editor/src/assets/gta3_unreal
-mkdir ../editor/src/assets/vc_unreal
-mkdir ../editor/src/assets/sa_unreal
+mkdir -p ../editor/src/assets/gta3_unreal
+mkdir -p ../editor/src/assets/vc_unreal
+mkdir -p ../editor/src/assets/sa_unreal
 
 cargo run classes ../gta3/gta3.json gta3_classic > ../editor/src/assets/gta3_classic/classes.db
 cargo run classes ../vc/vc.json vc_classic > ../editor/src/assets/vc_classic/classes.db

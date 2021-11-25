@@ -56,6 +56,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
   game$ = this._game.game$;
+  gameName$ = this._game.gameName$;
   canEdit$ = this._ui.canEdit$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;

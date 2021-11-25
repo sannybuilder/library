@@ -39,20 +39,26 @@
             'col-xl-9': viewMode === ViewMode.None && sidebar.collapsed
           }"
         >
-          <div class="d-flex flex-row align-items-center mb-3">
-            <nav aria-label="breadcrumb">
+          <div
+            class="
+              d-flex
+              flex-column flex-sm-row
+              align-items-start align-items-sm-center
+            "
+          >
+            <nav aria-label="breadcrumb" class="mb-3 mr-auto">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                   <a routerLink="/">{{ "ui.header.home" | translate }}</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  {{ game | gameTitle }}
+                  {{ gameName$ | async | gameTitle }}
                 </li>
               </ol>
             </nav>
             <button
               *ngIf="canEdit$ | async"
-              class="btn btn-outline-secondary ml-auto dropdown-toggle"
+              class="btn btn-outline-secondary dropdown-toggle mb-3"
               data-toggle="dropdown"
               data-offset="0,0"
               aria-haspopup="true"
@@ -85,6 +91,15 @@
                 >{{ "ui.layout.newCommand" | translate }}</a
               >
             </div>
+          </div>
+
+          <div class="d-flex flex-row justify-content-center mb-3">
+            <a class="mr-3" [routerLink]="['/', game, 'classes']">{{
+              "ui.header.menuClasses" | translate
+            }}</a>
+            <a [routerLink]="['/', game, 'enums']">{{
+              "ui.header.menuEnums" | translate
+            }}</a>
           </div>
 
           <scl-command-list

@@ -166,10 +166,19 @@ export const GameEnums: Record<Game, string> = {
   [Game.SA]: 'sa/enums.json',
 };
 
-export const GameTitle: Record<Game, string> = {
-  [Game.GTA3]: 'GTA III',
-  [Game.VC]: 'Vice City',
-  [Game.SA]: 'San Andreas',
+export const GameTitle: Record<string, string> = {
+  gta3: 'GTA III',
+  gta3_classic: 'GTA III (Classic)',
+  gta3_mobile: 'GTA III (Mobile)',
+  gta3_unreal: 'GTA III (The Definitive Edition)',
+  vc: 'Vice City',
+  vc_classic: 'Vice City (Classic)',
+  vc_mobile: 'Vice City (Mobile)',
+  vc_unreal: 'Vice City (The Definitive Edition)',
+  sa: 'San Andreas',
+  sa_classic: 'San Andreas (Classic)',
+  sa_mobile: 'San Andreas (Mobile)',
+  sa_unreal: 'San Andreas (The Definitive Edition)',
 };
 
 export const GamePlatforms: Record<Game, Platform[]> = {

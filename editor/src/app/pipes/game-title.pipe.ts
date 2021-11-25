@@ -5,7 +5,7 @@ import { Game, GameTitle } from '../models';
   name: 'gameTitle',
 })
 export class GameTitlePipe implements PipeTransform {
-  transform(game: Game): string {
-    return GameTitle[game] ?? '';
+  transform(gameName: string): string {
+    return GameTitle[gameName] ?? '';
   }
 }

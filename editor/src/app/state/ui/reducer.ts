@@ -322,21 +322,28 @@ export const uiReducer = createReducer(
       return state;
     }
 
-    let selectedPlatforms: Platform[] = [Platform.Any];
-    let selectedVersions: Version[] = [Version.Any];
+    const isRemaster = ['gta3_unreal', 'vc_unreal', 'sa_unreal'].includes(
+      gameName!
+    );
+    const isMobile = ['gta3_mobile', 'vc_mobile', 'sa_mobile'].includes(
+      gameName!
+    );
 
-    if (['gta3_unreal', 'vc_unreal', 'sa_unreal'].includes(gameName!)) {
+    let selectedPlatforms: Platform[] = [];
+    let selectedVersions: Version[] = [];
+
+    if (isRemaster) {
       selectedPlatforms = [Platform.PC];
-    } else if (['gta3_mobile', 'vc_mobile', 'sa_mobile'].includes(gameName!)) {
-      selectedPlatforms = [Platform.Mobile];
-    }
-
-    if (['gta3_unreal', 'vc_unreal', 'sa_unreal'].includes(gameName!)) {
       selectedVersions = [Version._unreal10];
-    } else {
+    } else if (isMobile) {
+      selectedPlatforms = [Platform.Mobile];
       selectedVersions = GameVersions[game].filter(
         (v) => v !== Version._unreal10
       );
+    } else {
+      // classic
+      selectedPlatforms = [Platform.PC];
+      selectedVersions = [Version._10];
     }
 
     return updateState(state, game, {

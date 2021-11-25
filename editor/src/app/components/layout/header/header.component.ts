@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   displaySearchHelp$ = this._ui.displaySearchHelp$;
   isSearchHelpDismissed$ = this._ui.isSearchHelpDismissed$;
   game$ = this._game.game$;
+  gameName$ = this._game.gameName$;
 
   displaySearchBar$ = this._ui.displaySearchBar$;
   isAuthorized$ = this._auth.isAuthorized$;

@@ -4,6 +4,7 @@ import {
   Command,
   EnumRaw,
   Game,
+  GameName,
   Modifier,
   Platform,
   Version,
@@ -99,5 +100,5 @@ export const selectVersions = createAction(
 
 export const preselectFiltersByGameName = createAction(
   '[ui] preselect filters by game name',
-  props<{ gameName?: string }>()
+  props<{ gameName: GameName }>()
 );

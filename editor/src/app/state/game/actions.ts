@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
-import { Game, Platform, SupportInfo, Version } from '../../models';
+import { Game, GameName, Platform, SupportInfo, Version } from '../../models';
 
 export const onListEnter = createAction(
   '[game] on list enter',
   props<{
     game: Game;
-    gameName?: string;
+    gameName: GameName;
     extension: string;
     opcode?: string;
     enumName?: string;

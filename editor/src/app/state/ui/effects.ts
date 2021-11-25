@@ -321,7 +321,6 @@ export class UiEffects {
 
   platformAndVersionFilters$ = createEffect(() =>
     this._game.gameName$.pipe(
-      tap(console.log),
       map((gameName) => preselectFiltersByGameName({ gameName }))
     )
   );

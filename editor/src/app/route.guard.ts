@@ -10,12 +10,18 @@ import {
 import {
   DEFAULT_EXTENSION,
   Game,
+  GameName,
   GameTitle,
   Platform,
   Version,
 } from './models';
 import { AuthFacade, GameFacade } from './state';
-import { decodePlatforms, decodeVersions, getGameByName } from './utils';
+import {
+  decodePlatforms,
+  decodeVersions,
+  getGameByName,
+  isValidGameName,
+} from './utils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -50,6 +56,9 @@ export class RouteGuard implements CanActivate {
     }
 
     const gameName = segments.shift();
+    if (!isValidGameName(gameName)) {
+      return this.goHome();
+    }
     const game = getGameByName(gameName);
 
     if (!game) {

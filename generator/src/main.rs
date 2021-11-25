@@ -36,12 +36,18 @@ struct Command {
     attrs: Option<Attr>,
     class: Option<String>,
     id: String,
-    input: Option<Vec<Param>>,
     member: Option<String>,
     name: String,
     num_params: i32,
-    output: Option<Vec<Param>>,
+    #[serde(default)]
+    input: Vec<Param>,
+    #[serde(default)]
+    output: Vec<Param>,
     short_desc: Option<String>,
+    #[serde(default)]
+    platforms: Vec<String>,
+    #[serde(default)]
+    versions: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -78,11 +84,64 @@ fn visit_dirs(dir: &Path, cb: &mut dyn FnMut(&DirEntry) -> Option<()>) -> io::Re
     Ok(())
 }
 
+fn does_command_match_target(command: &Command, target: &str) -> bool {
+    match target {
+        "gta3_classic" | "vc_classic" | "sa_classic" => {
+            if !command.platforms.is_empty()
+                && !(command.platforms.contains(&"any".to_string())
+                    || command.platforms.contains(&"pc".to_string()))
+            {
+                return false;
+            }
+
+            if !command.versions.is_empty()
+                && !(command.versions.contains(&"any".to_string())
+                    || command.versions.contains(&"1.0".to_string()))
+            {
+                return false;
+            }
+        }
+        "gta3_mobile" | "vc_mobile" | "sa_mobile" => {
+            if !command.platforms.is_empty()
+                && !(command.platforms.contains(&"any".to_string())
+                    || command.platforms.contains(&"mobile".to_string()))
+            {
+                return false;
+            }
+
+            // should be impossible to have 1.0 [DE] on mobile platform (now) but adding this check anyway
+            if command.versions.len() == 1 && command.versions.contains(&"1.0 [DE]".to_string()) {
+                return false;
+            }
+        }
+        "gta3_unreal" | "vc_unreal" | "sa_unreal" => {
+            if !command.platforms.is_empty()
+                && !(command.platforms.contains(&"any".to_string())
+                    || command.platforms.contains(&"pc".to_string()))
+            {
+                return false;
+            }
+
+            if !command.versions.is_empty()
+                && !(command.versions.contains(&"any".to_string())
+                    || command.versions.contains(&"1.0 [DE]".to_string()))
+            {
+                return false;
+            }
+        }
+        _ => {
+            // do nothing
+        }
+    };
+    return true;
+}
+
 fn generate_keywords() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
     let input_file = args
         .get(2)
         .unwrap_or_else(|| panic!("Provide input file name"));
+    let target = args.get(3).unwrap_or_else(|| panic!("Provide target name"));
 
     let content = fs::read_to_string(input_file).unwrap();
     let library = serde_json::from_str::<Library>(content.as_str())?;
@@ -96,6 +155,9 @@ fn generate_keywords() -> Result<()> {
     let mut keywords_list: BTreeMap<String, String> = BTreeMap::new();
 
     for command in commands.into_iter().filter(|command| {
+        if !does_command_match_target(command, &target) {
+            return false;
+        }
         command
             .attrs
             .as_ref()
@@ -142,6 +204,8 @@ fn generate_classes() -> Result<()> {
         .get(2)
         .unwrap_or_else(|| panic!("Provide input file name"));
 
+    let target = args.get(3).unwrap_or_else(|| panic!("Provide target name"));
+
     let content = fs::read_to_string(input_file).unwrap();
     let library = serde_json::from_str::<Library>(content.as_str())?;
 
@@ -155,6 +219,10 @@ fn generate_classes() -> Result<()> {
 
     for command in commands {
         if !command.class.is_some() || !command.member.is_some() {
+            continue;
+        }
+
+        if !does_command_match_target(command, &target) {
             continue;
         }
 
@@ -174,10 +242,8 @@ fn generate_classes() -> Result<()> {
 
         let params: Vec<String> = command
             .input
-            .as_ref()
-            .unwrap_or(&Vec::new())
             .iter()
-            .chain(command.output.as_ref().unwrap_or(&Vec::new()).iter())
+            .chain(command.output.iter())
             .map(|p| {
                 if p.name.len() == 0 {
                     String::from("")

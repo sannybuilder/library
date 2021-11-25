@@ -12,6 +12,7 @@ import {
   GamePlatforms,
   Version,
   GameVersions,
+  GameName,
 } from '../../models';
 import {
   displayOrEditCommandInfo,
@@ -322,12 +323,17 @@ export const uiReducer = createReducer(
       return state;
     }
 
-    const isRemaster = ['gta3_unreal', 'vc_unreal', 'sa_unreal'].includes(
-      gameName!
-    );
-    const isMobile = ['gta3_mobile', 'vc_mobile', 'sa_mobile'].includes(
-      gameName!
-    );
+    const isRemaster = [
+      GameName.gta3_unreal,
+      GameName.vc_unreal,
+      GameName.sa_unreal,
+    ].includes(gameName);
+
+    const isMobile = [
+      GameName.gta3_mobile,
+      GameName.vc_mobile,
+      GameName.sa_mobile,
+    ].includes(gameName);
 
     let selectedPlatforms: Platform[] = [];
     let selectedVersions: Version[] = [];

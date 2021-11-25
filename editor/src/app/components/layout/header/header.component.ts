@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
-import { getGameByName } from 'src/app/utils';
+import { getGameByName, isValidGameName } from 'src/app/utils';
 import { Config, CONFIG } from '../../../config';
 import { Game, KNOWN_LANGUAGES } from '../../../models';
 import { UiFacade, AuthFacade, GameFacade } from '../../../state';
@@ -35,8 +35,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     map((event) => {
       const parts = event.url.split(/[\/?]/);
-      const game = getGameByName(parts[1]);
-      return game || parts[1];
+      const gameName = parts[1];
+      return isValidGameName(gameName) ? getGameByName(gameName) : gameName;
     })
   );
 

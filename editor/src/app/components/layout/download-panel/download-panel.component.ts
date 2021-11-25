@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
-  Game,
   GameClassesAssets,
   GameEnumsAssets,
   GameKeywordsAssets,
+  GameName,
 } from '../../../models';
 
 @Component({
@@ -13,17 +13,17 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DownloadPanelComponent {
-  @Input() game: Game;
+  @Input() gameName: GameName;
 
-  getClasses(game: Game) {
-    return GameClassesAssets[game];
+  getClasses(gameName: GameName) {
+    return GameClassesAssets[gameName];
   }
 
-  getEnums(game: Game) {
-    return GameEnumsAssets[game];
+  getEnums(gameName: GameName) {
+    return GameEnumsAssets[gameName];
   }
 
-  getKeywords(game: Game) {
-    return GameKeywordsAssets[game];
+  getKeywords(gameName: GameName) {
+    return GameKeywordsAssets[gameName];
   }
 }

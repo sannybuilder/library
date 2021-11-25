@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: "12"
+          node-version: "16"
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -47,9 +47,6 @@ jobs:
       - name: Compile files
         run: |
           cd generator
-          cargo run classes ../gta3/gta3.json > ../editor/dist/editor/assets/gta3/classes.db
-          cargo run classes ../vc/vc.json > ../editor/dist/editor/assets/vc/classes.db
-          cargo run classes ../sa/sa.json > ../editor/dist/editor/assets/sa/classes.db
 
           cargo run enums ../gta3/enums.json > ../editor/dist/editor/assets/gta3/enums.txt
           cargo run enums ../vc/enums.json > ../editor/dist/editor/assets/vc/enums.txt
@@ -59,9 +56,37 @@ jobs:
           cargo run snippets ../vc/snippets > ../editor/dist/editor/assets/vc/snippets.json
           cargo run snippets ../sa/snippets > ../editor/dist/editor/assets/sa/snippets.json
 
-          cargo run keywords ../gta3/gta3.json > ../editor/dist/editor/assets/gta3/keywords.txt
-          cargo run keywords ../vc/vc.json > ../editor/dist/editor/assets/vc/keywords.txt
-          cargo run keywords ../sa/sa.json > ../editor/dist/editor/assets/sa/keywords.txt
+
+          # Classic OG releases (PC/1.0)
+
+          cargo run classes ../gta3/gta3.json gta3_classic > ../editor/dist/editor/assets/gta3_classic/classes.db
+          cargo run classes ../vc/vc.json vc_classic > ../editor/dist/editor/assets/vc_classic/classes.db
+          cargo run classes ../sa/sa.json sa_classic > ../editor/dist/editor/assets/sa_classic/classes.db
+
+          cargo run keywords ../gta3/gta3.json gta3_classic > ../editor/dist/editor/assets/gta3_classic/keywords.txt
+          cargo run keywords ../vc/vc.json vc_classic > ../editor/dist/editor/assets/vc_classic/keywords.txt
+          cargo run keywords ../sa/sa.json sa_classic > ../editor/dist/editor/assets/sa_classic/keywords.txt
+
+
+          # Mobile releases
+
+          cargo run classes ../gta3/gta3.json gta3_mobile > ../editor/dist/editor/assets/gta3_mobile/classes.db
+          cargo run classes ../vc/vc.json vc_mobile > ../editor/dist/editor/assets/vc_mobile/classes.db
+          cargo run classes ../sa/sa.json sa_mobile > ../editor/dist/editor/assets/sa_mobile/classes.db
+
+          cargo run keywords ../gta3/gta3.json gta3_mobile > ../editor/dist/editor/assets/gta3_mobile/keywords.txt
+          cargo run keywords ../vc/vc.json vc_mobile > ../editor/dist/editor/assets/vc_mobile/keywords.txt
+          cargo run keywords ../sa/sa.json sa_mobile > ../editor/dist/editor/assets/sa_mobile/keywords.txt
+
+
+          # The Trilogy: The Definitive Edition
+          cargo run classes ../gta3/gta3.json gta3_unreal > ../editor/dist/editor/assets/gta3_unreal/classes.db
+          cargo run classes ../vc/vc.json vc_unreal > ../editor/dist/editor/assets/vc_unreal/classes.db
+          cargo run classes ../sa/sa.json sa_unreal > ../editor/dist/editor/assets/sa_unreal/classes.db
+
+          cargo run keywords ../gta3/gta3.json gta3_unreal > ../editor/dist/editor/assets/gta3_unreal/keywords.txt
+          cargo run keywords ../vc/vc.json vc_unreal > ../editor/dist/editor/assets/vc_unreal/keywords.txt
+          cargo run keywords ../sa/sa.json sa_unreal > ../editor/dist/editor/assets/sa_unreal/keywords.txt
 
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v3

@@ -118,28 +118,72 @@ export enum Game {
   SA = 'sa',
 }
 
+export enum GameName {
+  gta3 = 'gta3',
+  gta3_classic = 'gta3_classic',
+  gta3_mobile = 'gta3_mobile',
+  gta3_unreal = 'gta3_unreal',
+
+  vc = 'vc',
+  vc_classic = 'vc_classic',
+  vc_mobile = 'vc_mobile',
+  vc_unreal = 'vc_unreal',
+
+  sa = 'sa',
+  sa_classic = 'sa_classic',
+  sa_mobile = 'sa_mobile',
+  sa_unreal = 'sa_unreal',
+}
+
 export const GameIcon: Record<Game, string> = {
   [Game.GTA3]: 'assets/gta3.png',
   [Game.VC]: 'assets/vc.png',
   [Game.SA]: 'assets/sa.png',
 };
 
-export const GameClassesAssets: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3/classes.db',
-  [Game.VC]: 'assets/vc/classes.db',
-  [Game.SA]: 'assets/sa/classes.db',
+export const GameClassesAssets: Record<GameName, string> = {
+  [GameName.gta3]: 'assets/gta3_classic/classes.db',
+  [GameName.gta3_classic]: 'assets/gta3_classic/classes.db',
+  [GameName.gta3_mobile]: 'assets/gta3_mobile/classes.db',
+  [GameName.gta3_unreal]: 'assets/gta3_unreal/classes.db',
+  [GameName.vc]: 'assets/vc_classic/classes.db',
+  [GameName.vc_classic]: 'assets/vc_classic/classes.db',
+  [GameName.vc_mobile]: 'assets/vc_mobile/classes.db',
+  [GameName.vc_unreal]: 'assets/vc_unreal/classes.db',
+  [GameName.sa]: 'assets/sa_classic/classes.db',
+  [GameName.sa_classic]: 'assets/sa_classic/classes.db',
+  [GameName.sa_mobile]: 'assets/sa_mobile/classes.db',
+  [GameName.sa_unreal]: 'assets/sa_unreal/classes.db',
 };
 
-export const GameEnumsAssets: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3/enums.txt',
-  [Game.VC]: 'assets/vc/enums.txt',
-  [Game.SA]: 'assets/sa/enums.txt',
+export const GameEnumsAssets: Record<GameName, string> = {
+  [GameName.gta3]: 'assets/gta3_classic/enums.txt',
+  [GameName.gta3_classic]: 'assets/gta3_classic/enums.txt',
+  [GameName.gta3_mobile]: 'assets/gta3_mobile/enums.txt',
+  [GameName.gta3_unreal]: 'assets/gta3_unreal/enums.txt',
+  [GameName.vc]: 'assets/vc_classic/enums.txt',
+  [GameName.vc_classic]: 'assets/vc_classic/enums.txt',
+  [GameName.vc_mobile]: 'assets/vc_mobile/enums.txt',
+  [GameName.vc_unreal]: 'assets/vc_unreal/enums.txt',
+  [GameName.sa]: 'assets/sa_classic/enums.txt',
+  [GameName.sa_classic]: 'assets/sa_classic/enums.txt',
+  [GameName.sa_mobile]: 'assets/sa_mobile/enums.txt',
+  [GameName.sa_unreal]: 'assets/sa_unreal/enums.txt',
 };
 
-export const GameKeywordsAssets: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3/keywords.txt',
-  [Game.VC]: 'assets/vc/keywords.txt',
-  [Game.SA]: 'assets/sa/keywords.txt',
+export const GameKeywordsAssets: Record<GameName, string> = {
+  [GameName.gta3]: 'assets/gta3_classic/keywords.txt',
+  [GameName.gta3_classic]: 'assets/gta3_classic/keywords.txt',
+  [GameName.gta3_mobile]: 'assets/gta3_mobile/keywords.txt',
+  [GameName.gta3_unreal]: 'assets/gta3_unreal/keywords.txt',
+  [GameName.vc]: 'assets/vc_classic/keywords.txt',
+  [GameName.vc_classic]: 'assets/vc_classic/keywords.txt',
+  [GameName.vc_unreal]: 'assets/vc_unreal/keywords.txt',
+  [GameName.vc_mobile]: 'assets/vc_mobile/keywords.txt',
+  [GameName.sa]: 'assets/sa_classic/keywords.txt',
+  [GameName.sa_classic]: 'assets/sa_classic/keywords.txt',
+  [GameName.sa_mobile]: 'assets/sa_mobile/keywords.txt',
+  [GameName.sa_unreal]: 'assets/sa_unreal/keywords.txt',
 };
 
 export const GameLibrary: Record<Game, string> = {
@@ -166,19 +210,34 @@ export const GameEnums: Record<Game, string> = {
   [Game.SA]: 'sa/enums.json',
 };
 
-export const GameTitle: Record<string, string> = {
-  gta3: 'GTA III',
-  gta3_classic: 'GTA III (Classic)',
-  gta3_mobile: 'GTA III (Mobile)',
-  gta3_unreal: 'GTA III (The Definitive Edition)',
-  vc: 'Vice City',
-  vc_classic: 'Vice City (Classic)',
-  vc_mobile: 'Vice City (Mobile)',
-  vc_unreal: 'Vice City (The Definitive Edition)',
-  sa: 'San Andreas',
-  sa_classic: 'San Andreas (Classic)',
-  sa_mobile: 'San Andreas (Mobile)',
-  sa_unreal: 'San Andreas (The Definitive Edition)',
+export const GameTitle: Record<GameName, string> = {
+  [GameName.gta3]: 'GTA III (Classic)',
+  [GameName.gta3_classic]: 'GTA III (Classic)',
+  [GameName.gta3_mobile]: 'GTA III (Mobile)',
+  [GameName.gta3_unreal]: 'GTA III (The Definitive Edition)',
+  [GameName.vc]: 'Vice City (Classic)',
+  [GameName.vc_classic]: 'Vice City (Classic)',
+  [GameName.vc_mobile]: 'Vice City (Mobile)',
+  [GameName.vc_unreal]: 'Vice City (The Definitive Edition)',
+  [GameName.sa]: 'San Andreas (Classic)',
+  [GameName.sa_classic]: 'San Andreas (Classic)',
+  [GameName.sa_mobile]: 'San Andreas (Mobile)',
+  [GameName.sa_unreal]: 'San Andreas (The Definitive Edition)',
+};
+
+export const GameTitleSimple: Record<GameName, string> = {
+  [GameName.gta3]: 'GTA III',
+  [GameName.gta3_classic]: 'GTA III',
+  [GameName.gta3_mobile]: 'GTA III',
+  [GameName.gta3_unreal]: 'GTA III',
+  [GameName.vc]: 'Vice City',
+  [GameName.vc_classic]: 'Vice City',
+  [GameName.vc_mobile]: 'Vice City',
+  [GameName.vc_unreal]: 'Vice City',
+  [GameName.sa]: 'San Andreas',
+  [GameName.sa_classic]: 'San Andreas',
+  [GameName.sa_mobile]: 'San Andreas',
+  [GameName.sa_unreal]: 'San Andreas',
 };
 
 export const GamePlatforms: Record<Game, Platform[]> = {

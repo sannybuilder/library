@@ -1,10 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { flatMap, intersection, sortBy } from 'lodash';
+import { flatMap, sortBy } from 'lodash';
 import { isPlatformMatching, isVersionMatching, search } from '../../utils';
 import { Attribute, Command, Game, Platform, Version } from '../../models';
 import { extensions } from '../extensions/selectors';
 import { game } from '../game/selectors';
 import { UiState, GameState } from './reducer';
+import { selectedPlatforms, selectedVersions } from '../version/selectors';
 
 export const state = createFeatureSelector<UiState>('ui');
 
@@ -34,28 +35,6 @@ export const isExtensionSelected = createSelector(
   selectedExtensions,
   (selectedExtensions: string[] | undefined, props: { extension: string }) =>
     selectedExtensions?.includes(props.extension)
-);
-
-export const selectedPlatforms = createSelector(
-  gameState,
-  (state: GameState | undefined) => state?.selectedPlatforms
-);
-
-export const isPlatformSelected = createSelector(
-  selectedPlatforms,
-  (selectedPlatforms: string[] | undefined, props: { platform: Platform }) =>
-    selectedPlatforms?.includes(props.platform)
-);
-
-export const selectedVersions = createSelector(
-  gameState,
-  (state: GameState | undefined) => state?.selectedVersions
-);
-
-export const isVersionSelected = createSelector(
-  selectedVersions,
-  (selectedVersions: string[] | undefined, props: { version: Version }) =>
-    selectedVersions?.includes(props.version)
 );
 
 export const selectedClasses = createSelector(

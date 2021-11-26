@@ -61,6 +61,10 @@ import { UiEffects } from './state/ui/effects';
 // game state
 import { gameReducer } from './state/game/reducer';
 
+// version state
+import { versionReducer } from './state/version/reducer';
+import { VersionEffects } from './state/version/effects';
+
 // enums state
 import { EnumsEffects } from './state/enums/effects';
 import { enumsReducer } from './state/enums/reducer';
@@ -234,6 +238,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
         snippets: snippetsReducer,
         ui: uiReducer,
         tree: treeReducer,
+        version: versionReducer,
       },
       { metaReducers }
     ),
@@ -245,6 +250,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       SnippetsEffects,
       UiEffects,
       TreeEffects,
+      VersionEffects,
     ]),
     DragDropModule,
     ClipboardModule,

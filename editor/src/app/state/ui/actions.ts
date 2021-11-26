@@ -4,10 +4,7 @@ import {
   Command,
   EnumRaw,
   Game,
-  GameName,
   Modifier,
-  Platform,
-  Version,
   ViewMode,
 } from '../../models';
 
@@ -87,18 +84,3 @@ export const toggleSearchHelp = createAction(
 export const dismissSearchHelp = createAction('[ui] dismiss search help');
 
 export const toggleSidebar = createAction('[ui] toggle sidebar');
-
-export const selectPlatforms = createAction(
-  '[ui] change platforms selection',
-  props<{ game: Game; platforms: Platform[]; state: boolean }>()
-);
-
-export const selectVersions = createAction(
-  '[ui] change versions selection',
-  props<{ game: Game; versions: Version[]; state: boolean }>()
-);
-
-export const preselectFiltersByGameName = createAction(
-  '[ui] preselect filters by game name',
-  props<{ gameName: GameName }>()
-);

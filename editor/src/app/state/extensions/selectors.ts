@@ -1,13 +1,17 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { isPlatformMatching, isVersionMatching, smash } from '../../utils';
 import {
   ClassMeta,
   Command,
   DEFAULT_EXTENSION,
   Extension,
   Game,
+  Platform,
   SupportInfo,
+  Version,
 } from '../../models';
 import { game } from '../game/selectors';
+import { selectedPlatforms, selectedVersions } from '../version/selectors';
 import { ExtensionsState, GameState } from './reducer';
 
 export const extensionsState =
@@ -22,7 +26,30 @@ export const state = createSelector(
 
 export const extensions = createSelector(
   state,
-  (state: GameState | undefined) => state?.extensions
+  selectedPlatforms,
+  selectedVersions,
+  (
+    state: GameState | undefined,
+    selectedPlatforms: Platform[] | undefined,
+    selectedVersions: Version[] | undefined
+  ) => {
+    const extensions = state?.extensions ?? [];
+
+    const filtered = extensions
+      .map((e) => {
+        return {
+          ...e,
+          commands: e.commands.filter(
+            (c) =>
+              isPlatformMatching(c, selectedPlatforms ?? [Platform.Any]) &&
+              isVersionMatching(c, selectedVersions ?? [Version.Any])
+          ),
+        };
+      })
+      .filter((e) => e.commands.length > 0);
+
+    return filtered.length ? filtered : undefined;
+  }
 );
 
 export const entities = createSelector(

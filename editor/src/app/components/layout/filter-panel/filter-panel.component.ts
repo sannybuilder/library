@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { flatten, orderBy, uniqBy } from 'lodash';
 import { of, zip } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { VersionFacade } from 'src/app/state/version/facade';
 
 import {
   Attribute,
@@ -51,7 +52,11 @@ export class FilterPanelComponent {
   Platform = Platform;
   Version = Version;
 
-  constructor(private _extensions: ExtensionsFacade, private _ui: UiFacade) {}
+  constructor(
+    private _extensions: ExtensionsFacade,
+    private _ui: UiFacade,
+    private _version: VersionFacade
+  ) {}
 
   selectExtension(extension: string, state: boolean) {
     this._ui.selectExtensions(this.game, [extension], state);
@@ -85,21 +90,21 @@ export class FilterPanelComponent {
     const target = event.target as HTMLInputElement;
     const checked = target.checked;
     target.checked = false;
-    this._ui.selectPlatforms(this.game, [platform], checked);
+    this._version.selectPlatforms(this.game, [platform], checked);
   }
 
   isPlatformChecked(platform: Platform) {
-    return this._ui.getPlatformCheckedState(platform);
+    return this._version.getPlatformCheckedState(platform);
   }
 
   selectVersion(version: Version, event: MouseEvent) {
     const target = event.target as HTMLInputElement;
     const checked = target.checked;
     target.checked = false;
-    this._ui.selectVersions(this.game, [version], checked);
+    this._version.selectVersions(this.game, [version], checked);
   }
 
   isVersionChecked(version: Version) {
-    return this._ui.getVersionCheckedState(version);
+    return this._version.getVersionCheckedState(version);
   }
 }

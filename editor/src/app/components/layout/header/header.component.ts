@@ -4,9 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
-import { getGameByName, isValidGameName } from 'src/app/utils';
+import { getBaseGame, getBaseGames, isValidGame } from '../../../utils';
 import { Config, CONFIG } from '../../../config';
-import { Game, KNOWN_LANGUAGES } from '../../../models';
+import { KNOWN_LANGUAGES } from '../../../models';
 import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 
 @Component({
@@ -15,13 +15,11 @@ import { UiFacade, AuthFacade, GameFacade } from '../../../state';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  Game = Game;
+  baseGames = getBaseGames();
   KNOWN_LANGUAGES = KNOWN_LANGUAGES;
-  games = Object.values(Game);
   displaySearchHelp$ = this._ui.displaySearchHelp$;
   isSearchHelpDismissed$ = this._ui.isSearchHelpDismissed$;
   game$ = this._game.game$;
-  gameName$ = this._game.gameName$;
 
   displaySearchBar$ = this._ui.displaySearchBar$;
   isAuthorized$ = this._auth.isAuthorized$;
@@ -35,8 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
     map((event) => {
       const parts = event.url.split(/[\/?]/);
-      const gameName = parts[1];
-      return isValidGameName(gameName) ? getGameByName(gameName) : gameName;
+      const maybeGame = parts[1];
+      return isValidGame(maybeGame) ? getBaseGame(maybeGame) : maybeGame;
     })
   );
 

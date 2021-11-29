@@ -23,12 +23,42 @@ const STATEMENTS: Record<Game, Record<string, Record<string, string>>> = {
     ru: merge({}, get(sharedRU, 'default'), get(gta3RU, 'default')),
     cn: merge({}, get(sharedCN, 'default'), get(gta3CN, 'default')),
   },
+  gta3_mobile: {
+    en: merge({}, get(sharedEN, 'default'), get(gta3EN, 'default')),
+    ru: merge({}, get(sharedRU, 'default'), get(gta3RU, 'default')),
+    cn: merge({}, get(sharedCN, 'default'), get(gta3CN, 'default')),
+  },
+  gta3_unreal: {
+    en: merge({}, get(sharedEN, 'default'), get(gta3EN, 'default')),
+    ru: merge({}, get(sharedRU, 'default'), get(gta3RU, 'default')),
+    cn: merge({}, get(sharedCN, 'default'), get(gta3CN, 'default')),
+  },
   vc: {
     en: merge({}, get(sharedEN, 'default'), get(vcEN, 'default')),
     ru: merge({}, get(sharedRU, 'default'), get(vcRU, 'default')),
     cn: merge({}, get(sharedCN, 'default'), get(vcCN, 'default')),
   },
+  vc_mobile: {
+    en: merge({}, get(sharedEN, 'default'), get(vcEN, 'default')),
+    ru: merge({}, get(sharedRU, 'default'), get(vcRU, 'default')),
+    cn: merge({}, get(sharedCN, 'default'), get(vcCN, 'default')),
+  },
+  vc_unreal: {
+    en: merge({}, get(sharedEN, 'default'), get(vcEN, 'default')),
+    ru: merge({}, get(sharedRU, 'default'), get(vcRU, 'default')),
+    cn: merge({}, get(sharedCN, 'default'), get(vcCN, 'default')),
+  },
   sa: {
+    en: merge({}, get(sharedEN, 'default'), get(saEN, 'default')),
+    ru: merge({}, get(sharedRU, 'default'), get(saRU, 'default')),
+    cn: merge({}, get(sharedCN, 'default'), get(saCN, 'default')),
+  },
+  sa_mobile: {
+    en: merge({}, get(sharedEN, 'default'), get(saEN, 'default')),
+    ru: merge({}, get(sharedRU, 'default'), get(saRU, 'default')),
+    cn: merge({}, get(sharedCN, 'default'), get(saCN, 'default')),
+  },
+  sa_unreal: {
     en: merge({}, get(sharedEN, 'default'), get(saEN, 'default')),
     ru: merge({}, get(sharedRU, 'default'), get(saRU, 'default')),
     cn: merge({}, get(sharedCN, 'default'), get(saCN, 'default')),

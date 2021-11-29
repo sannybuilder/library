@@ -4,7 +4,6 @@ import { onListEnter } from './actions';
 
 export interface GameState {
   game?: Game;
-  gameName?: string;
   primitiveTypes: PrimitiveType[];
 }
 
@@ -14,10 +13,9 @@ export const initialState: GameState = {
 
 export const gameReducer = createReducer(
   initialState,
-  on(onListEnter, (state, { game, gameName }) => ({
+  on(onListEnter, (state, { game }) => ({
     ...state,
     game,
-    gameName,
     primitiveTypes: primitiveTypes(game),
   }))
 );

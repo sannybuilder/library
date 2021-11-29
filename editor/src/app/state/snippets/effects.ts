@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   concatMap,
+  distinctUntilChanged,
   map,
   switchMap,
   take,
@@ -17,7 +18,7 @@ import {
 } from './actions';
 import { SnippetsService } from './service';
 import { ChangesFacade } from '../changes/facade';
-import { GameSupportInfo } from '../../models';
+import { GameSnippets, GameSupportInfo } from '../../models';
 import { getSameCommands } from '../../utils';
 import { GameFacade } from '../game/facade';
 import { ExtensionsFacade } from '../extensions/facade';
@@ -27,6 +28,9 @@ export class SnippetsEffects {
   loadSnippets$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadSnippets),
+      distinctUntilChanged(
+        (a, b) => GameSnippets[a.game] === GameSnippets[b.game]
+      ),
       concatMap(({ game }) =>
         this.service
           .loadSnippets(game)

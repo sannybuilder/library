@@ -1,16 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { intersection, partition, without } from 'lodash';
-import { getGameByName } from 'src/app/utils';
 
-import {
-  Command,
-  ViewMode,
-  Attribute,
-  Game,
-  EnumRaw,
-  Platform,
-  Version,
-} from '../../models';
+import { Command, ViewMode, Attribute, Game, EnumRaw } from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
@@ -74,11 +65,35 @@ const defaultFilterState: {
       selectedClasses: ['any'],
       selectedExtensions: [],
     },
+    gta3_mobile: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    gta3_unreal: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
     vc: {
       selectedClasses: ['any'],
       selectedExtensions: [],
     },
+    vc_mobile: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    vc_unreal: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
     sa: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    sa_mobile: {
+      selectedClasses: ['any'],
+      selectedExtensions: [],
+    },
+    sa_unreal: {
       selectedClasses: ['any'],
       selectedExtensions: [],
     },

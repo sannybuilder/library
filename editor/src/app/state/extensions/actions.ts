@@ -47,4 +47,7 @@ export const cloneCommand = createAction(
   }>()
 );
 
-export const initSupportInfo = createAction('[extensions] init support info');
+export const initSupportInfo = createAction(
+  '[extensions] init support info',
+  props<{ game: Game }>()
+);

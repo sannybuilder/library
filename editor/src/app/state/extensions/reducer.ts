@@ -16,7 +16,8 @@ import {
   loadExtensionsSuccess,
   updateGameCommands,
 } from './actions';
-import { sortBy, last, orderBy } from 'lodash';
+import { sortBy, last, orderBy, pick } from 'lodash';
+import { getGameVariations, getSamePlatformAndVersion } from '../../utils';
 
 export interface GameState {
   extensions: Extension[];
@@ -44,17 +45,24 @@ export const extensionsReducer = createReducer(
   ),
   on(
     loadExtensionsSuccess,
-    (state, { game, extensions, version, lastUpdate, classes }) =>
-      updateState(state, game, {
-        extensions: orderBy(extensions, (e) =>
-          e.name === DEFAULT_EXTENSION ? -1 : 1
-        ),
-        lastUpdate,
-        version,
-        entities: getEntities(extensions, classes),
-        loading: false,
-        classesMeta: classes,
-      })
+    (state, { game, extensions, version, lastUpdate, classes }) => {
+      const games = [game, ...getGameVariations(game)];
+
+      return games.reduce(
+        (m, v) =>
+          updateState(m, v, {
+            extensions: orderBy(extensions, (e) =>
+              e.name === DEFAULT_EXTENSION ? -1 : 1
+            ),
+            lastUpdate,
+            version,
+            entities: getEntities(extensions, classes),
+            loading: false,
+            classesMeta: classes,
+          }),
+        state
+      );
+    }
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(
@@ -105,12 +113,16 @@ export const extensionsReducer = createReducer(
       entities,
     });
   }),
-  on(initSupportInfo, (state) => {
-    return Object.entries(state.games).reduce((s, [game, gameState]) => {
+  on(initSupportInfo, (state, { game }) => {
+    const sameGames = pick(
+      state.games,
+      getSamePlatformAndVersion(game as Game)
+    );
+    return Object.entries(sameGames).reduce((s, [game, gameState]) => {
       return updateState(s, game as Game, {
         supportInfo: getSupportInfo(
           gameState!.extensions,
-          state.games,
+          sameGames,
           game as Game
         ),
       });

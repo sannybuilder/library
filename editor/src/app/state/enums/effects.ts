@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   concatMap,
+  distinctUntilChanged,
   filter,
   map,
   switchMap,
@@ -30,6 +31,7 @@ export class EnumsEffects {
   loadEnums$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnums),
+      distinctUntilChanged((a, b) => GameEnums[a.game] === GameEnums[b.game]),
       withLatestFrom(this._auth.authToken$),
       concatMap(([{ game }, accessToken]) =>
         this._service

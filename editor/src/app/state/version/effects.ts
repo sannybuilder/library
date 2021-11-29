@@ -3,14 +3,12 @@ import { createEffect } from '@ngrx/effects';
 import { map } from 'rxjs/operators';
 
 import { GameFacade } from '../game/facade';
-import { preselectFiltersByGameName } from './actions';
+import { preselectFiltersByGame } from './actions';
 
 @Injectable({ providedIn: 'root' })
 export class VersionEffects {
   platformAndVersionFilters$ = createEffect(() =>
-    this._game.gameName$.pipe(
-      map((gameName) => preselectFiltersByGameName({ gameName }))
-    )
+    this._game.game$.pipe(map((game) => preselectFiltersByGame({ game })))
   );
 
   constructor(private _game: GameFacade) {}

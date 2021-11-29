@@ -10,18 +10,12 @@ import {
 import {
   DEFAULT_EXTENSION,
   Game,
-  GameName,
   GameTitle,
   Platform,
   Version,
 } from './models';
 import { AuthFacade, GameFacade } from './state';
-import {
-  decodePlatforms,
-  decodeVersions,
-  getGameByName,
-  isValidGameName,
-} from './utils';
+import { decodePlatforms, decodeVersions, isValidGame } from './utils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -55,13 +49,8 @@ export class RouteGuard implements CanActivate {
       return this.goHome();
     }
 
-    const gameName = segments.shift();
-    if (!isValidGameName(gameName)) {
-      return this.goHome();
-    }
-    const game = getGameByName(gameName);
-
-    if (!game) {
+    const game = segments.shift();
+    if (!isValidGame(game)) {
       return this.goHome();
     }
     this._title.setTitle(`Sanny Builder Library :: ${GameTitle[game]}`);
@@ -72,7 +61,6 @@ export class RouteGuard implements CanActivate {
 
       this._game.onListEnter({
         game,
-        gameName,
         className,
         extension: DEFAULT_EXTENSION,
         action: segments.shift(),
@@ -84,7 +72,6 @@ export class RouteGuard implements CanActivate {
       const enumName = segments.shift() || 'all';
       this._game.onListEnter({
         game,
-        gameName,
         enumName,
         extension: DEFAULT_EXTENSION,
         action: segments.shift(),
@@ -95,7 +82,6 @@ export class RouteGuard implements CanActivate {
     if (subPath === 'find') {
       this._game.onListEnter({
         game,
-        gameName,
         extension: DEFAULT_EXTENSION,
         action: 'decision-tree',
       });
@@ -111,7 +97,6 @@ export class RouteGuard implements CanActivate {
 
     this._game.onListEnter({
       game,
-      gameName,
       extension,
       opcode,
       action: segments.shift(),

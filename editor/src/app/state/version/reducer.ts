@@ -1,17 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import { partition, without } from 'lodash';
-import { getGameByName } from 'src/app/utils';
+import { isValidGame } from '../../utils';
 import {
   Game,
-  GameName,
   GamePlatforms,
   GameVersions,
   Platform,
-  PrimitiveType,
   Version,
 } from '../../models';
 import {
-  preselectFiltersByGameName,
+  preselectFiltersByGame,
   selectPlatforms,
   selectVersions,
 } from './actions';
@@ -33,11 +31,35 @@ const defaultFilterState: {
       selectedPlatforms: [],
       selectedVersions: [],
     },
+    gta3_mobile: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
+    gta3_unreal: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
     vc: {
       selectedPlatforms: [],
       selectedVersions: [],
     },
+    vc_mobile: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
+    vc_unreal: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
     sa: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
+    sa_mobile: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
+    sa_unreal: {
       selectedPlatforms: [],
       selectedVersions: [],
     },
@@ -116,23 +138,22 @@ export const versionReducer = createReducer(
 
     return state;
   }),
-  on(preselectFiltersByGameName, (state, { gameName }) => {
-    const game = getGameByName(gameName);
-    if (!game) {
+  on(preselectFiltersByGame, (state, { game }) => {
+    if (!isValidGame(game)) {
       return state;
     }
 
     const isRemaster = [
-      GameName.gta3_unreal,
-      GameName.vc_unreal,
-      GameName.sa_unreal,
-    ].includes(gameName);
+      Game.gta3_unreal,
+      Game.vc_unreal,
+      Game.sa_unreal,
+    ].includes(game);
 
     const isMobile = [
-      GameName.gta3_mobile,
-      GameName.vc_mobile,
-      GameName.sa_mobile,
-    ].includes(gameName);
+      Game.gta3_mobile,
+      Game.vc_mobile,
+      Game.sa_mobile,
+    ].includes(game);
 
     let selectedPlatforms: Platform[] = [];
     let selectedVersions: Version[] = [];

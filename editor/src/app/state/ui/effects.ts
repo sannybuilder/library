@@ -213,8 +213,10 @@ export class UiEffects {
   );
 
   commandPage$ = createEffect(() =>
-    combineLatest([this._ui.rows$, this._ui.commandToDisplayOrEdit$]).pipe(
-      map(([rows, command]) =>
+    this._actions$.pipe(
+      ofType(displayOrEditCommandInfo),
+      withLatestFrom(this._ui.rows$),
+      map(([{ command }, rows]) =>
         rows?.findIndex((row) => row.command?.id === command?.id)
       ),
       withLatestFrom(this._ui.currentPage$),

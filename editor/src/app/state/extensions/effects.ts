@@ -10,6 +10,7 @@ import {
   map,
   take,
   filter,
+  distinctUntilChanged,
 } from 'rxjs/operators';
 import { flatMap, groupBy, flatten } from 'lodash';
 
@@ -37,6 +38,7 @@ import {
   getSameCommands,
   doesCommandHaveAnyAttributeInvalid,
   replaceType,
+  getBaseGame,
 } from '../../utils';
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
@@ -48,6 +50,9 @@ export class ExtensionsEffects {
   loadExtensions$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadExtensions),
+      distinctUntilChanged(
+        (a, b) => GameLibrary[a.game] === GameLibrary[b.game]
+      ),
       withLatestFrom(this._auth.authToken$),
       concatMap(([{ game }, accessToken]) =>
         this._service.loadExtensions(game, accessToken).pipe(
@@ -131,7 +136,9 @@ export class ExtensionsEffects {
               batch: batch as GameCommandUpdate[],
             })
           ),
-          initSupportInfo(),
+          ...Object.entries(groups).map(([game]) =>
+            initSupportInfo({ game: game as Game })
+          ),
         ];
       })
     )
@@ -154,7 +161,7 @@ export class ExtensionsEffects {
                 version,
                 fileName: GameLibrary[game],
                 content: extensions,
-                url: 'https://library.sannybuilder.com/#/' + game,
+                url: 'https://library.sannybuilder.com/#/' + getBaseGame(game),
                 classesMeta,
               });
               this._changes.registerTextFileChange(GameVersion[game], version);
@@ -260,12 +267,14 @@ export class ExtensionsEffects {
     { dispatch: false }
   );
 
+  // wait for all files to load then update support info after each game change
   initSupportInfo$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadExtensionsSuccess),
       withLatestFrom(this._extensions.hasAnyLoadingInProgress$),
       filter(([_, hasAnyLoadingInProgress]) => !hasAnyLoadingInProgress),
-      map(() => initSupportInfo())
+      switchMap(() => this._game.game$),
+      map((game) => initSupportInfo({ game }))
     )
   );
 
@@ -282,7 +291,7 @@ export class ExtensionsEffects {
             { command, newExtension: extension, oldExtension: extension },
           ],
         }),
-        initSupportInfo(),
+        initSupportInfo({ game }),
       ])
     )
   );

@@ -109,7 +109,7 @@ export class ExtensionsFacade {
     return this.store$.select(selector.classMeta, { game, className });
   }
 
-  initSupportInfo() {
-    this.store$.dispatch(initSupportInfo());
+  initSupportInfo(game: Game) {
+    this.store$.dispatch(initSupportInfo({ game }));
   }
 }

@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GameName, GameTitle } from '../models';
+import { Game, GameTitle } from '../models';
 
 @Pipe({
   name: 'gameTitle',
 })
 export class GameTitlePipe implements PipeTransform {
-  transform(gameName: GameName): string {
-    return GameTitle[gameName] ?? '';
+  transform(game: Game): string {
+    return GameTitle[game] ?? '';
   }
 }

@@ -1,57 +1,67 @@
-import { Game, GameName } from '../models';
+import { Game } from '../models';
 
-export function isValidGameName(name: string | undefined): name is GameName {
+export function isValidGame(name: string | undefined): name is Game {
   if (!name) {
     return false;
   }
   const names: string[] = [
-    GameName.gta3,
-    GameName.gta3_classic,
-    GameName.gta3_mobile,
-    GameName.gta3_unreal,
-    GameName.vc,
-    GameName.vc_classic,
-    GameName.vc_mobile,
-    GameName.vc_unreal,
-    GameName.sa,
-    GameName.sa_classic,
-    GameName.sa_mobile,
-    GameName.sa_unreal,
+    Game.GTA3,
+    Game.gta3_mobile,
+    Game.gta3_unreal,
+    Game.VC,
+    Game.vc_mobile,
+    Game.vc_unreal,
+    Game.SA,
+    Game.sa_mobile,
+    Game.sa_unreal,
   ];
   return names.includes(name);
 }
 
-export function getGameByName(name: GameName): Game {
-  if (
-    [
-      GameName.gta3,
-      GameName.gta3_classic,
-      GameName.gta3_mobile,
-      GameName.gta3_unreal,
-    ].includes(name as GameName)
-  ) {
-    return Game.GTA3;
+export function getBaseGame(game: Game): Game {
+  switch (game) {
+    case Game.gta3_mobile:
+    case Game.gta3_unreal:
+      return Game.GTA3;
+    case Game.vc_mobile:
+    case Game.vc_unreal:
+      return Game.VC;
+    case Game.sa_mobile:
+    case Game.sa_unreal:
+      return Game.SA;
   }
-  if (
-    [
-      GameName.vc,
-      GameName.vc_classic,
-      GameName.vc_mobile,
-      GameName.vc_unreal,
-    ].includes(name as GameName)
-  ) {
-    return Game.VC;
-  }
-  if (
-    [
-      GameName.sa,
-      GameName.sa_classic,
-      GameName.sa_mobile,
-      GameName.sa_unreal,
-    ].includes(name as GameName)
-  ) {
-    return Game.SA;
-  }
+  return game;
+}
 
-  throw new Error('unknown game name');
+export function getGameVariations(name: Game): Game[] {
+  switch (name) {
+    case Game.GTA3:
+      return [Game.gta3_mobile, Game.gta3_unreal];
+    case Game.VC:
+      return [Game.vc_mobile, Game.vc_unreal];
+    case Game.SA:
+      return [Game.sa_mobile, Game.sa_unreal];
+  }
+  return [];
+}
+
+export function getBaseGames(): Game[] {
+  return [Game.GTA3, Game.VC, Game.SA];
+}
+
+export function getSamePlatformAndVersion(game: Game): Game[] {
+  switch (game) {
+    case Game.GTA3:
+    case Game.VC:
+    case Game.SA:
+      return [Game.GTA3, Game.VC, Game.SA];
+    case Game.gta3_mobile:
+    case Game.vc_mobile:
+    case Game.sa_mobile:
+      return [Game.gta3_mobile, Game.vc_mobile, Game.sa_mobile];
+    case Game.gta3_unreal:
+    case Game.vc_unreal:
+    case Game.sa_unreal:
+      return [Game.gta3_unreal, Game.vc_unreal, Game.sa_unreal];
+  }
 }

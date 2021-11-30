@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { TreeNode } from '../../models/tree';
 import { DEFAULT_EXTENSION, Game, GameTitle } from '../../models';
 import { ExtensionsFacade, TreeFacade } from '../../state';
-import { isOpcodeRef, isThisNodeTerminal } from '../../utils';
+import { getBaseGames, isOpcodeRef, isThisNodeTerminal } from '../../utils';
 
 @Component({
   selector: 'scl-decision-tree',
@@ -14,6 +14,7 @@ import { isOpcodeRef, isThisNodeTerminal } from '../../utils';
 })
 export class DecisionTreeComponent {
   GameTitle = GameTitle;
+  baseGames = getBaseGames();
 
   @Input() game: Game;
   nextNodes$ = this._facade.nextNodes$;

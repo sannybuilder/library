@@ -3,7 +3,7 @@ import {
   GameClassesAssets,
   GameEnumsAssets,
   GameKeywordsAssets,
-  GameName,
+  Game,
 } from '../../../models';
 
 @Component({
@@ -13,17 +13,17 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DownloadPanelComponent {
-  @Input() gameName: GameName;
+  @Input() game: Game;
 
-  getClasses(gameName: GameName) {
-    return GameClassesAssets[gameName];
+  getClasses(game: Game) {
+    return GameClassesAssets[game];
   }
 
-  getEnums(gameName: GameName) {
-    return GameEnumsAssets[gameName];
+  getEnums(game: Game) {
+    return GameEnumsAssets[game];
   }
 
-  getKeywords(gameName: GameName) {
-    return GameKeywordsAssets[gameName];
+  getKeywords(game: Game) {
+    return GameKeywordsAssets[game];
   }
 }

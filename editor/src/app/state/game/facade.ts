@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Game, GameName, Platform, Version } from '../../models';
+import { Game, Platform, Version } from '../../models';
 import { onListEnter } from './actions';
 import * as selector from './selectors';
 
@@ -13,16 +13,10 @@ export class GameFacade {
     filter((v): v is Game => !!v)
   );
 
-  gameName$ = this.store$.select(selector.gameName).pipe(
-    distinctUntilChanged(),
-    filter((v): v is GameName => !!v)
-  );
-
   constructor(private store$: Store) {}
 
   onListEnter({
     game,
-    gameName,
     opcode,
     extension,
     enumName,
@@ -33,7 +27,6 @@ export class GameFacade {
     versions,
   }: {
     game: Game;
-    gameName: GameName;
     extension: string;
     opcode?: string;
     enumName?: string;
@@ -46,7 +39,6 @@ export class GameFacade {
     this.store$.dispatch(
       onListEnter({
         game,
-        gameName,
         opcode,
         extension,
         enumName,

@@ -9,12 +9,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Location } from '@angular/common';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 
 import {
+  BaseGame,
   Command,
   DEFAULT_EXTENSION,
   Enum,
@@ -56,7 +56,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
   game$ = this._game.game$;
-  gameName$ = this._game.gameName$;
   canEdit$ = this._ui.canEdit$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
@@ -111,7 +110,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    Object.values(Game).forEach((game) => {
+    Object.values(BaseGame).forEach((game) => {
       this._extensions.loadExtensions(game);
       this._snippets.loadSnippets(game);
       this._enums.loadEnums(game);

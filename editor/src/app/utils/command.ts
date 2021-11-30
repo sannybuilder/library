@@ -97,37 +97,39 @@ export function normalizeId(id: string): string {
 }
 
 export function getQueryParamsForCommand(command: Command, game: Game) {
-  const platforms = command.platforms ?? [];
-  const versions = command.versions ?? [];
+  // const platforms = command.platforms ?? [];
+  // const versions = command.versions ?? [];
 
-  const p = platforms.reduce((m, v) => {
-    if (v === Platform.Any) {
-      return m;
-    }
-    return m | (1 << GamePlatforms[game].indexOf(v));
-  }, 0);
-  const v = versions.reduce((m, v) => {
-    if (v === Version.Any) {
-      return m;
-    }
-    return m | (1 << GameVersions[game].indexOf(v));
-  }, 0);
+  // const p = platforms.reduce((m, v) => {
+  //   if (v === Platform.Any) {
+  //     return m;
+  //   }
+  //   return m | (1 << GamePlatforms[game].indexOf(v));
+  // }, 0);
+  // const v = versions.reduce((m, v) => {
+  //   if (v === Version.Any) {
+  //     return m;
+  //   }
+  //   return m | (1 << GameVersions[game].indexOf(v));
+  // }, 0);
 
-  return { p: p || undefined, v: v || undefined };
+  return {};
 }
 
 export function decodePlatforms(platform: number | undefined, game: Game) {
-  if (!platform) {
-    return [Platform.Any];
-  }
-  return GamePlatforms[game].filter((p, i) => (platform & (1 << i)) !== 0);
+  return [Platform.Any];
+  // if (!platform) {
+  //   return [Platform.Any];
+  // }
+  // return GamePlatforms[game].filter((p, i) => (platform & (1 << i)) !== 0);
 }
 
 export function decodeVersions(version: number | undefined, game: Game) {
-  if (!version) {
-    return [Version.Any];
-  }
-  return GameVersions[game].filter((p, i) => (version & (1 << i)) !== 0);
+  return [Version.Any];
+  // if (!version) {
+  //   return [Version.Any];
+  // }
+  // return GameVersions[game].filter((p, i) => (version & (1 << i)) !== 0);
 }
 
 export function isPlatformMatching(

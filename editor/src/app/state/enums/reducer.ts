@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { EnumRaw, Enums, Game } from '../../models';
 import { loadEnumsSuccess, renameGameEnum, updateGameEnum } from './actions';
 import { fromPairs, mapValues } from 'lodash';
-import { evaluateEnumValues, smash } from '../../utils';
+import { evaluateEnumValues, getGameVariations, smash } from '../../utils';
 
 export interface EnumsState {
   enums: Partial<Record<Game, Enums>>;
@@ -14,9 +14,10 @@ export const initialState: EnumsState = {
 
 export const enumsReducer = createReducer(
   initialState,
-  on(loadEnumsSuccess, (state, { game, enums }) =>
-    updateState(state, game, enums)
-  ),
+  on(loadEnumsSuccess, (state, { game, enums }) => {
+    const games = [game, ...getGameVariations(game)];
+    return games.reduce((m, v) => updateState(m, v, enums), state);
+  }),
   on(updateGameEnum, (state, { enumToEdit, oldEnumToEdit, game }) => {
     const newState = {
       [oldEnumToEdit.name]: enumToEdit.fields?.length

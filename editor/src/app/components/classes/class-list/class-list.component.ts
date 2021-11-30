@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { getSamePlatformAndVersion } from '../../../utils';
 import { ClassMeta, DEFAULT_EXTENSION, Game } from '../../../models';
 
 @Component({
@@ -8,11 +9,20 @@ import { ClassMeta, DEFAULT_EXTENSION, Game } from '../../../models';
 })
 export class ClassListComponent {
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
-  games: string[] = Object.values(Game);
+  private _game: Game;
+  games: Game[];
 
-  @Input() game: Game;
   @Input() entities: Array<{ origin: string; name: string }>;
   @Input() classesMeta: ClassMeta[];
+
+  @Input() set game(val: Game) {
+    this.games = getSamePlatformAndVersion(val);
+    this._game = val;
+  }
+
+  get game() {
+    return this._game;
+  }
 
   getClassDesc(className: string) {
     return this.classesMeta?.find((m) => m.name === className)?.desc;

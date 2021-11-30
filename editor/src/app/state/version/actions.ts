@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Game, GameName, Platform, Version } from '../../models';
+import { Game, Platform, Version } from '../../models';
 
 export const selectPlatforms = createAction(
   '[version] change platforms selection',
@@ -11,7 +11,7 @@ export const selectVersions = createAction(
   props<{ game: Game; versions: Version[]; state: boolean }>()
 );
 
-export const preselectFiltersByGameName = createAction(
-  '[version] preselect filters by game name',
-  props<{ gameName: GameName }>()
+export const preselectFiltersByGame = createAction(
+  '[version] preselect filters by game',
+  props<{ game: Game }>()
 );

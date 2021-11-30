@@ -17,22 +17,26 @@ import * as saEN from '../../../../../sa/statements/en.json';
 import * as saRU from '../../../../../sa/statements/ru.json';
 import * as saCN from '../../../../../sa/statements/cn.json';
 
+const getStatements = (en: object, ru: object, cn: object) => ({
+  en: merge({}, get(sharedEN, 'default'), get(en, 'default')),
+  ru: merge({}, get(sharedRU, 'default'), get(ru, 'default')),
+  cn: merge({}, get(sharedCN, 'default'), get(cn, 'default')),
+});
+
+const gta3Statements = getStatements(gta3EN, gta3RU, gta3CN);
+const vcStatements = getStatements(vcEN, vcRU, vcCN);
+const saStatements = getStatements(saEN, saRU, saCN);
+
 const STATEMENTS: Record<Game, Record<string, Record<string, string>>> = {
-  gta3: {
-    en: merge({}, get(sharedEN, 'default'), get(gta3EN, 'default')),
-    ru: merge({}, get(sharedRU, 'default'), get(gta3RU, 'default')),
-    cn: merge({}, get(sharedCN, 'default'), get(gta3CN, 'default')),
-  },
-  vc: {
-    en: merge({}, get(sharedEN, 'default'), get(vcEN, 'default')),
-    ru: merge({}, get(sharedRU, 'default'), get(vcRU, 'default')),
-    cn: merge({}, get(sharedCN, 'default'), get(vcCN, 'default')),
-  },
-  sa: {
-    en: merge({}, get(sharedEN, 'default'), get(saEN, 'default')),
-    ru: merge({}, get(sharedRU, 'default'), get(saRU, 'default')),
-    cn: merge({}, get(sharedCN, 'default'), get(saCN, 'default')),
-  },
+  gta3: gta3Statements,
+  gta3_mobile: gta3Statements,
+  gta3_unreal: gta3Statements,
+  vc: vcStatements,
+  vc_mobile: vcStatements,
+  vc_unreal: vcStatements,
+  sa: saStatements,
+  sa_mobile: saStatements,
+  sa_unreal: saStatements,
 };
 
 export default STATEMENTS;

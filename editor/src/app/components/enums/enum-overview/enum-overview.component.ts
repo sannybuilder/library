@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { isStringEnum } from '../../../utils';
+import { getSamePlatformAndVersion, isStringEnum } from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
 
 @Component({
@@ -12,6 +12,11 @@ export class EnumOverviewComponent {
   private _enumToView: EnumRaw;
   isStringEnum = false;
 
+  @Input() game: Game;
+  @Input() enumGames: Game[];
+
+  games: Game[] = [];
+
   @Input() set enumToView(val: EnumRaw) {
     this._enumToView = val;
     this.isStringEnum = isStringEnum(val.fields);
@@ -20,5 +25,11 @@ export class EnumOverviewComponent {
     return this._enumToView;
   }
 
-  @Input() enumGames: Game[];
+  ngOnChanges() {
+    if (this.game && this.enumGames) {
+      const sameGames = getSamePlatformAndVersion(this.game);
+
+      this.games = this.enumGames.filter((game) => sameGames.includes(game));
+    }
+  }
 }

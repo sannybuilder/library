@@ -207,8 +207,8 @@ export class UiEffects {
     merge(
       this._actions$.pipe(
         ofType(toggleAttribute, selectExtensions, selectClass, updateSearchTerm)
-      ),
-      this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
+      )
+      // this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
     ).pipe(mapTo(changePage({ index: 1 })))
   );
 

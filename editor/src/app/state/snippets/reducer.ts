@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { smash } from '../../utils';
+import { getGameVariations, smash } from '../../utils';
 import { ExtensionSnippets, Game } from '../../models';
 import { loadSnippetsSuccess, updateGameSnippet } from './actions';
 
@@ -13,9 +13,10 @@ export const initialState: SnippetsState = {
 
 export const snippetsReducer = createReducer(
   initialState,
-  on(loadSnippetsSuccess, (state, { game, extensionSnippets }) =>
-    updateState(state, game, extensionSnippets)
-  ),
+  on(loadSnippetsSuccess, (state, { game, extensionSnippets }) => {
+    const games = [game, ...getGameVariations(game)];
+    return games.reduce((m, v) => updateState(m, v, extensionSnippets), state);
+  }),
   on(updateGameSnippet, (state, { game, extension, opcode, content }) =>
     updateState(state, game, {
       [extension]: {

@@ -155,15 +155,15 @@ export const GameClassesAssets: Record<Game, string> = {
 };
 
 export const GameEnumsAssets: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3_classic/enums.txt',
-  [Game.gta3_mobile]: 'assets/gta3_mobile/enums.txt',
-  [Game.gta3_unreal]: 'assets/gta3_unreal/enums.txt',
-  [Game.VC]: 'assets/vc_classic/enums.txt',
-  [Game.vc_mobile]: 'assets/vc_mobile/enums.txt',
-  [Game.vc_unreal]: 'assets/vc_unreal/enums.txt',
-  [Game.SA]: 'assets/sa_classic/enums.txt',
-  [Game.sa_mobile]: 'assets/sa_mobile/enums.txt',
-  [Game.sa_unreal]: 'assets/sa_unreal/enums.txt',
+  [Game.GTA3]: 'assets/gta3/enums.txt',
+  [Game.gta3_mobile]: 'assets/gta3/enums.txt',
+  [Game.gta3_unreal]: 'assets/gta3/enums.txt',
+  [Game.VC]: 'assets/vc/enums.txt',
+  [Game.vc_mobile]: 'assets/vc/enums.txt',
+  [Game.vc_unreal]: 'assets/vc/enums.txt',
+  [Game.SA]: 'assets/sa/enums.txt',
+  [Game.sa_mobile]: 'assets/sa/enums.txt',
+  [Game.sa_unreal]: 'assets/sa/enums.txt',
 };
 
 export const GameKeywordsAssets: Record<Game, string> = {

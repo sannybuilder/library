@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { getSamePlatformAndVersion } from '../../../utils';
+import { getSameEdition } from '../../../utils';
 import { ClassMeta, DEFAULT_EXTENSION, Game } from '../../../models';
 
 @Component({
@@ -16,7 +16,7 @@ export class ClassListComponent {
   @Input() classesMeta: ClassMeta[];
 
   @Input() set game(val: Game) {
-    this.games = getSamePlatformAndVersion(val);
+    this.games = getSameEdition(val);
     this._game = val;
   }
 

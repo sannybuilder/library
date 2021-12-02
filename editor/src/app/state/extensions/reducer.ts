@@ -9,6 +9,8 @@ import {
   GameSupportInfo,
   SupportInfo,
   SupportLevel,
+  GamePlatforms,
+  GameVersions,
 } from '../../models';
 import {
   initSupportInfo,
@@ -17,7 +19,11 @@ import {
   updateGameCommands,
 } from './actions';
 import { sortBy, last, orderBy, pick } from 'lodash';
-import { getGameVariations, getSamePlatformAndVersion } from '../../utils';
+import {
+  getGameVariations,
+  isPlatformMatching,
+  isVersionMatching,
+} from '../../utils';
 
 export interface GameState {
   extensions: Extension[];
@@ -48,20 +54,33 @@ export const extensionsReducer = createReducer(
     (state, { game, extensions, version, lastUpdate, classes }) => {
       const games = [game, ...getGameVariations(game)];
 
-      return games.reduce(
-        (m, v) =>
-          updateState(m, v, {
-            extensions: orderBy(extensions, (e) =>
-              e.name === DEFAULT_EXTENSION ? -1 : 1
-            ),
-            lastUpdate,
-            version,
-            entities: getEntities(extensions, classes),
-            loading: false,
-            classesMeta: classes,
-          }),
-        state
-      );
+      const filterByEdition = (extensions: Extension[], g: Game) =>
+        extensions
+          .map((e) => {
+            return {
+              ...e,
+              commands: e.commands.filter(
+                (c) =>
+                  isPlatformMatching(c, GamePlatforms[g]) &&
+                  isVersionMatching(c, GameVersions[g])
+              ),
+            };
+          })
+          .filter((e) => e.commands.length > 0);
+
+      return games.reduce((m, v) => {
+        const filtered = filterByEdition(extensions, v);
+        return updateState(m, v, {
+          extensions: orderBy(filtered, (e) =>
+            e.name === DEFAULT_EXTENSION ? -1 : 1
+          ),
+          lastUpdate,
+          version,
+          entities: getEntities(filtered, classes),
+          loading: false,
+          classesMeta: classes,
+        });
+      }, state);
     }
   ),
   on(updateGameCommands, (state, { game, batch }) => {
@@ -114,19 +133,23 @@ export const extensionsReducer = createReducer(
     });
   }),
   on(initSupportInfo, (state, { game }) => {
-    const sameGames = pick(
-      state.games,
-      getSamePlatformAndVersion(game as Game)
-    );
-    return Object.entries(sameGames).reduce((s, [game, gameState]) => {
-      return updateState(s, game as Game, {
-        supportInfo: getSupportInfo(
-          gameState!.extensions,
-          sameGames,
-          game as Game
-        ),
-      });
-    }, state);
+    return updateState(state, game as Game, {
+      supportInfo: getSupportInfo(
+        state.games[game]!.extensions,
+        {
+          [Game.GTA3]: state.games[Game.GTA3],
+          [Game.VC]: state.games[Game.VC],
+          [Game.SA]: state.games[Game.SA],
+          [Game.gta3_mobile]: state.games[Game.gta3_mobile],
+          [Game.vc_mobile]: state.games[Game.vc_mobile],
+          [Game.sa_mobile]: state.games[Game.sa_mobile],
+          [Game.gta3_unreal]: state.games[Game.gta3_unreal],
+          [Game.vc_unreal]: state.games[Game.vc_unreal],
+          [Game.sa_unreal]: state.games[Game.sa_unreal],
+        },
+        game as Game
+      ),
+    });
   })
 );
 

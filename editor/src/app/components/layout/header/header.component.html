@@ -32,24 +32,23 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <scl-icon
-                [game]="game"
-                class="d-none d-md-inline-block"
-              ></scl-icon>
               <span class="align-middle pl-1">{{
                 game | gameTitleSimple
               }}</span></a
             >
             <div class="dropdown-menu">
-              <a class="dropdown-item" [routerLink]="['/', game]">{{
-                game | gameTitle
-              }}</a>
-              <a class="dropdown-item" [routerLink]="['/', game + '_mobile']">{{
-                game + "_mobile" | gameTitle
-              }}</a>
-              <a class="dropdown-item" [routerLink]="['/', game + '_unreal']">{{
-                game + "_unreal" | gameTitle
-              }}</a>
+              <a class="dropdown-item" [routerLink]="['/', game]">
+                <scl-icon [game]="game" size="16"></scl-icon>
+                {{ game | gameTitle }}</a
+              >
+              <a class="dropdown-item" [routerLink]="['/', game + '_mobile']">
+                <scl-icon [game]="game + '_mobile'" size="16"></scl-icon>
+                {{ game + "_mobile" | gameTitle }}</a
+              >
+              <a class="dropdown-item" [routerLink]="['/', game + '_unreal']">
+                <scl-icon [game]="game + '_unreal'" size="16"></scl-icon>
+                {{ game + "_unreal" | gameTitle }}</a
+              >
             </div>
           </li>
         </ul>
@@ -372,21 +371,25 @@
                 [routerLink]="['/', game]"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                >{{ game | gameTitle }}</a
+                ><scl-icon [game]="game" size="16"></scl-icon>
+                {{ game | gameTitle }}</a
               >
               <a
                 class="dropdown-item"
                 [routerLink]="['/', game + '_mobile']"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                >{{ game + "_mobile" | gameTitle }}</a
+              >
+                <scl-icon [game]="game + '_mobile'" size="16"></scl-icon>
+                {{ game + "_mobile" | gameTitle }}</a
               >
               <a
                 class="dropdown-item"
                 [routerLink]="['/', game + '_unreal']"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                >{{ game + "_unreal" | gameTitle }}</a
+                ><scl-icon [game]="game + '_unreal'" size="16"></scl-icon>
+                {{ game + "_unreal" | gameTitle }}</a
               >
               <div class="dropdown-divider"></div>
             </ng-container>

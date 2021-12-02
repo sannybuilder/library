@@ -14,7 +14,6 @@ import { takeUntil, map, switchMap } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 
 import {
-  BaseGame,
   Command,
   DEFAULT_EXTENSION,
   Enum,
@@ -34,6 +33,7 @@ import {
 } from '../../state';
 import {
   FUSEJS_OPTIONS,
+  getBaseGames,
   getQueryParamsForCommand,
   serializeUrlAndParams,
 } from '../../utils';
@@ -110,7 +110,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    Object.values(BaseGame).forEach((game) => {
+    getBaseGames().forEach((game) => {
       this._extensions.loadExtensions(game);
       this._snippets.loadSnippets(game);
       this._enums.loadEnums(game);

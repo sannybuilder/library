@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { getSamePlatformAndVersion, isStringEnum } from '../../../utils';
+import { getSameEdition, isStringEnum } from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
 
 @Component({
@@ -27,7 +27,7 @@ export class EnumOverviewComponent {
 
   ngOnChanges() {
     if (this.game && this.enumGames) {
-      const sameGames = getSamePlatformAndVersion(this.game);
+      const sameGames = getSameEdition(this.game);
 
       this.games = this.enumGames.filter((game) => sameGames.includes(game));
     }

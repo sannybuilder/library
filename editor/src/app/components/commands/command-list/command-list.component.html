@@ -15,41 +15,7 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-3 col-md-1 order-0 d-flex align-items-center">
-                <a
-                  [routerLink]="['/', game, row.extension, row.command.id]"
-                  [queryParams]="getQueryParamsForCommand(row.command, game)"
-                  [name]="row.command.id"
-                  [innerHTML]="row.command | propExtract: 'id' | sanitize"
-                ></a>
-              </div>
-
-              <div
-                class="col-12 order-2 d-flex align-items-center text-break"
-                [ngClass]="{
-                  'col-md-12': narrowed,
-                  'col-md-7': !narrowed,
-                  'order-md-2': narrowed,
-                  'order-md-1': !narrowed
-                }"
-                [innerHTML]="row.command | propExtract: 'name' | sanitize"
-              ></div>
-
-              <div
-                class="
-                  col-9
-                  order-1
-                  d-flex
-                  justify-content-end
-                  align-items-center
-                "
-                [ngClass]="{
-                  'col-md-11': narrowed,
-                  'col-md-4': !narrowed,
-                  'order-md-1': narrowed,
-                  'order-md-2': !narrowed
-                }"
-              >
+              <div class="col-12 d-flex justify-content-end">
                 <scl-command-games
                   class="mr-2"
                   *ngIf="
@@ -76,6 +42,7 @@
                 >
 
                 <a
+                  style="margin-right: -0.75rem"
                   class="btn small text-muted"
                   [routerLink]="['/', game, row.extension, row.command.id]"
                   [queryParams]="getQueryParamsForCommand(row.command, game)"
@@ -83,6 +50,34 @@
                   >{{ "ui.shared.view" | translate }}</a
                 >
               </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-1 order-0 d-flex align-items-center">
+                <a
+                  [routerLink]="['/', game, row.extension, row.command.id]"
+                  [queryParams]="getQueryParamsForCommand(row.command, game)"
+                  [name]="row.command.id"
+                  [innerHTML]="row.command | propExtract: 'id' | sanitize"
+                ></a>
+              </div>
+
+              <div
+                class="
+                  col-12
+                  order-2
+                  d-flex
+                  align-items-center
+                  text-break
+                  mt-3 mt-sm-0
+                "
+                [ngClass]="{
+                  'col-sm-11': narrowed,
+                  'col-sm-8': !narrowed,
+                  'order-sm-2': narrowed,
+                  'order-sm-1': !narrowed
+                }"
+                [innerHTML]="row.command | propExtract: 'name' | sanitize"
+              ></div>
             </div>
 
             <div class="row">

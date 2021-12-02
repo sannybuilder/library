@@ -92,7 +92,7 @@ export class CommandEditorComponent implements OnInit {
   paramTypes: string[] = [];
   classes: string[] = [];
   primitives: PrimitiveType[] = [];
-  cloneTargets: Array<{ name: string; value: Game }> = [];
+  cloneTargets: Game[] = [];
 
   errors: Record<ErrorType, boolean> = {
     emptyName: false,
@@ -145,15 +145,12 @@ export class CommandEditorComponent implements OnInit {
   @Input() set supportInfo(val: GameSupportInfo[] | undefined) {
     this._supportInfo = val;
 
-    const games = Object.entries(Game);
-    this.cloneTargets = games
-      .filter(([_, game]) =>
-        val?.some(
-          (info) =>
-            info.game === game && info.level === SupportLevel.DoesNotExist
-        )
+    const games = Object.values(Game);
+    this.cloneTargets = games.filter((game) =>
+      val?.some(
+        (info) => info.game === game && info.level === SupportLevel.DoesNotExist
       )
-      .map(([name, value]) => ({ name, value }));
+    );
   }
 
   get supportInfo() {

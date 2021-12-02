@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { getSamePlatformAndVersion } from '../../../utils';
+import { getSameEdition } from '../../../utils';
 import { Game } from '../../../models';
 
 @Component({
@@ -12,7 +12,7 @@ export class EnumListComponent {
   games: Game[];
   @Input() enumNames: string[];
   @Input() set game(val: Game) {
-    this.games = getSamePlatformAndVersion(val);
+    this.games = getSameEdition(val);
     this._game = val;
   }
 

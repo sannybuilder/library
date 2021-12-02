@@ -190,6 +190,9 @@
           [routerLink]="['/', game]"
           [queryParams]="{ q: 'type:' + enumToDisplayOrEdit.name }"
           [title]="'ui.shared.findEnumUsages' | translate"
+          (click)="
+            viewMode !== ViewMode.None && screenSize < 1200 && onCancel()
+          "
         >
         </scl-icon-button>
 

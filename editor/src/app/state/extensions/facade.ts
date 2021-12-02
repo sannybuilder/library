@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { Command, Extension, Game } from '../../models';
 import {
   updateCommands,
   loadExtensions,
   cloneCommand,
   initSupportInfo,
+  init,
 } from './actions';
 import * as selector from './selectors';
 
@@ -76,8 +77,20 @@ export class ExtensionsFacade {
     );
   }
 
+  init() {
+    this.store$.dispatch(init());
+  }
+
   loadExtensions(game: Game) {
-    this.store$.dispatch(loadExtensions({ game }));
+    this.getGameExtensions(game)
+      .pipe(
+        take(1),
+        filter((x) => !x.length),
+        tap(() => {
+          this.store$.dispatch(loadExtensions({ game }));
+        })
+      )
+      .subscribe();
   }
 
   cloneCommand({

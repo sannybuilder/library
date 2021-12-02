@@ -110,11 +110,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    getBaseGames().forEach((game) => {
-      this._extensions.loadExtensions(game);
-      this._snippets.loadSnippets(game);
-      this._enums.loadEnums(game);
-    });
+    this._extensions.init();
   }
 
   ngOnDestroy() {
@@ -126,6 +122,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.detectScreenSize();
     this._ui.toggleCommandListElements(true);
+
+    getBaseGames().forEach((game) => {
+      this._extensions.loadExtensions(game);
+      this._snippets.loadSnippets(game);
+      this._enums.loadEnums(game);
+    });
 
     this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
       this.snippet = snippet;

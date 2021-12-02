@@ -17,6 +17,7 @@ import { flatMap, groupBy, flatten } from 'lodash';
 import {
   cloneCommand,
   GameCommandUpdate,
+  init,
   initSupportInfo,
   loadExtensions,
   loadExtensionsSuccess,
@@ -48,6 +49,14 @@ import { Action } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
+  init$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(init),
+      withLatestFrom(this._game.game$),
+      map(([_, game]) => loadExtensions({ game: getBaseGame(game) }))
+    )
+  );
+
   loadExtensions$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadExtensions),

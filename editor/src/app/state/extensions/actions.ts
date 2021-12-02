@@ -7,6 +7,8 @@ export interface GameCommandUpdate {
   oldExtension: string;
 }
 
+export const init = createAction('[extensions] init');
+
 export const loadExtensions = createAction(
   '[extensions] load',
   props<{ game: Game }>()

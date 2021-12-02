@@ -4,6 +4,8 @@
 
 Attractor
 Audio
+AudioStream
+AudioStream3D
 Blip
 Boat
 Camera
@@ -12,6 +14,7 @@ CarGenerator
 CardDecks
 Char
 Checkpoint
+Clipboard
 Clock
 Conversation
 Crane
@@ -21,6 +24,9 @@ Debugger
 DecisionMaker
 DecisionMakerChar
 DecisionMakerGroup
+DynamicLibrary
+File
+Fs
 Fx
 Game
 Gang
@@ -28,8 +34,10 @@ Garage
 Group
 Heli
 Hud
+IniFile
 KillFrenzy
 Math
+Memory
 Menu
 MenuGrid
 Mouse
@@ -103,6 +111,27 @@ SetMusicDoesFade,043C,0,0,("state%b")
 SetRadioChannel,041E,0,0,("channel: RadioChannel")
 SetRadioToPlayersFavouriteStation,0A26,0,0,()
 StopBeatTrack,0955,0,0,()
+$END
+
+$AudioStream
+$BEGIN
+GetLength,0AAF,0,0,("self: AudioStream" "length%i")
+GetState,0AB9,0,0,("self: AudioStream" "state%i")
+GetVolume,0ABB,0,0,("self: AudioStream" "volume%f")
+Load,0AAC,1,0,("audioFileName%s" "handle: AudioStream")
+Remove,0AAE,0,0,("self: AudioStream")
+SetLooped,0AC0,0,0,("self: AudioStream" "state%b")
+SetState,0AAD,0,0,("self: AudioStream" "state: AudioStreamState")
+SetVolume,0ABC,0,0,("self: AudioStream" "volume%f")
+$END
+
+$AudioStream3D
+$BEGIN
+Load,0AC1,1,0,("audioFileName%s" "handle: AudioStream3D")
+SetPlayAtCar,0AC5,0,0,("self: AudioStream" "handle: Car")
+SetPlayAtChar,0AC4,0,0,("self: AudioStream" "handle: Char")
+SetPlayAtCoords,0AC2,0,0,("self: AudioStream" "x%f" "y%f" "z%f")
+SetPlayAtObject,0AC3,0,0,("self: AudioStream" "handle: Object")
 $END
 
 $Blip
@@ -208,6 +237,7 @@ ChangeColor,0229,0,0,("self: Car" "primaryColor%i" "secondaryColor%i")
 ChangePlaybackToUseAi,099B,0,0,("self: Car")
 ClearLastDamageEntity,054F,0,0,("self: Car")
 ClearLastWeaponDamage,0468,0,0,("self: Car")
+CleoSetEngineOn,0ABF,0,0,("self: Car" "state%b")
 CloseAllDoors,0508,0,0,("self: Car")
 ControlDoor,095E,0,0,("self: Car" "door: CarDoor" "latch%i" "angle%f")
 ControlHydraulics,07F5,0,0,("self: Car" "_p2%f" "_p3%f" "_p4%f" "_p5%f")
@@ -239,6 +269,7 @@ GetCharInPassengerSeat,0432,0,0,("self: Car" "seatIndex%i" "handle: Char")
 GetClass,08EC,0,0,("self: Car" "class%i")
 GetColors,03F3,0,0,("self: Car" "primaryColour%i" "secondaryColour%i")
 GetCoordinates,00AA,0,0,("self: Car" "x%f" "y%f" "z%f")
+GetCurrentGear,0AB8,0,0,("self: Car" "gear%i")
 GetCurrentMod,096D,0,0,("self: Car" "slot: ModSlot" "modelId: model_object")
 GetCurrentPaintjob,0988,0,0,("self: Car" "paintjobNumber%i")
 GetDoorAngleRatio,095F,0,0,("self: Car" "door: CarDoor" "ratio%f")
@@ -256,6 +287,7 @@ GetModelValue,09E1,0,0,("self: Car" "value%i")
 GetMovingComponentOffset,098D,0,0,("self: Car" "offset%f")
 GetNumAvailablePaintjobs,06EC,0,0,("self: Car" "numPaintjobs%i")
 GetNumColors,097D,0,0,("self: Car" "count%i")
+GetNumberOfGears,0AB7,0,0,("self: Car" "numGear%i")
 GetNumberOfPassengers,01E9,0,0,("self: Car" "count%i")
 GetOffsetInWorldCoords,0407,0,0,("self: Car" "xOffset%f" "yOffset%f" "zOffset%f" "x%f" "y%f" "z%f")
 GetPitch,077D,0,0,("self: Car" "angle%f")
@@ -280,6 +312,7 @@ IsDead,0119,1,0,("handle: any")
 IsDoorDamaged,09BB,1,0,("self: Car" "door: CarDoor")
 IsDoorFullyOpen,08A7,1,0,("self: Car" "door: CarDoor")
 IsEmergencyServices,0975,1,0,("self: Car")
+IsEngineOn,0ABE,1,0,("self: Car")
 IsHealthGreater,0185,1,0,("self: Car" "health%i")
 IsInAirProper,01F3,1,0,("self: Car")
 IsInArea2D,00B0,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
@@ -292,6 +325,7 @@ IsOnFire,0495,1,0,("self: Car")
 IsOnScreen,02CA,1,0,("self: Car")
 IsPassengerSeatFree,0431,1,0,("self: Car" "seatIndex%i")
 IsPlaybackGoingOn,060E,1,0,("self: Car")
+IsSirenOn,0ABD,1,0,("self: Car")
 IsStopped,01C1,1,0,("self: Car")
 IsStoppedInArea2D,01AB,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
 IsStoppedInArea3D,01AC,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
@@ -663,6 +697,7 @@ StopFacialTalk,0968,0,0,("self: Char")
 StoreCarIsAttachedToNoSave,0A33,0,0,("self: Char" "handle: Car")
 StoreCarIsIn,00D9,0,0,("self: Char" "handle: Car")
 StoreCarIsInNoSave,03C0,0,0,("self: Char" "handle: Car")
+StoreClosestEntities,0AB5,0,0,("self: Char" "charHandle: Char" "carHandle: Car")
 WarpFromCarToCoord,0362,0,0,("self: Char" "x%f" "y%f" "z%f")
 WarpIntoCar,036A,0,0,("self: Char" "vehicle: Car")
 WarpIntoCarAsPassenger,0430,0,0,("self: Char" "handle: Car" "seatId%i")
@@ -674,6 +709,12 @@ Create,06D5,0,0,("type%i" "x%f" "y%f" "z%f" "pointX%f" "pointY%f" "pointZ%f" "ra
 Delete,06D6,0,0,("self: Checkpoint")
 SetCoords,07F3,0,0,("self: Checkpoint" "x%f" "y%f" "z%f")
 SetHeading,0996,0,0,("self: Checkpoint" "heading%f")
+$END
+
+$Clipboard
+$BEGIN
+ReadData,0B20,0,0,("memory: any" "size%i")
+WriteData,0B21,0,0,("memory: any" "size%i")
 $END
 
 $Clock
@@ -766,6 +807,45 @@ Copy,07E6,0,0,("mask%i" "handle: DecisionMakerGroup")
 Load,06AE,0,0,("type%i" "handle: DecisionMakerGroup")
 $END
 
+$DynamicLibrary
+$BEGIN
+Free,0AA3,0,0,("self: DynamicLibrary")
+GetProcedure,0AA4,1,0,("procName%s" "self: DynamicLibrary" "address%i")
+Load,0AA2,1,0,("libraryFileName%s" "handle: DynamicLibrary")
+$END
+
+$File
+$BEGIN
+Close,0A9B,0,0,("self: File")
+FindClose,0AE8,0,0,("self: File")
+FindFirst,0AE6,1,0,("filePathName%s" "fileName%s" "handle: File")
+FindNext,0AE7,1,0,("self: File" "fileName%s")
+GetSize,0A9C,0,0,("self: File" "size%i")
+IsEndReached,0AD6,1,0,("self: File")
+Open,0A9A,1,0,("filePathName%s" "mode: FileMode" "handle: File")
+Read,0A9D,0,0,("self: File" "size%i" "destination%i")
+ReadString,0AD7,1,0,("self: File" "buffer%s" "size%i")
+Scan,0ADA,1,0,("self: File" "format%s" "args: arguments" "text%s")
+Seek,0AD5,1,0,("self: File" "offset%i" "origin: SeekOrigin")
+Write,0A9E,0,0,("self: File" "size%i" "source%i")
+WriteFormattedString,0AD9,0,0,("self: File" "format%s" "args: arguments")
+WriteString,0AD8,1,0,("self: File" "source%s")
+$END
+
+$Fs
+$BEGIN
+CopyDirectory,0B05,1,0,("dirPath%s" "newDirPath%s")
+CopyFile,0B04,1,0,("fileName%s" "newFileName%s")
+CreateDirectory,0AE5,1,0,("dirName%s")
+DeleteDirectory,0B01,1,0,("dirPath%s" "recursive%b")
+DeleteFile,0B00,1,0,("fileName%s")
+DoesDirectoryExist,0AE4,1,0,("dirPath%s")
+DoesFileExist,0AAB,1,0,("path%s")
+MoveDirectory,0B03,1,0,("dirPath%s" "newDirPath%s")
+MoveFile,0B02,1,0,("fileName%s" "newFileName%s")
+SetCurrentDirectory,0A99,0,0,("path: any")
+$END
+
 $Fx
 $BEGIN
 AddBigGunFlash,058A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f")
@@ -818,6 +898,7 @@ IsPcUsingJoypad,0A4B,1,0,()
 IsPcVersion,0485,1,0,()
 IsProceduralInteriorActive,0867,1,0,("interiorId%i")
 IsRelationshipSet,07E8,1,0,("ofPedType: PedType" "toPedType: PedType" "relationshipType: RelationshipType")
+IsVersionOriginal,0AA9,1,0,()
 IsWidescreenOnInOptions,0A2B,1,0,()
 LimitTwoPlayerDistance,06F1,0,0,("distance%f")
 MakeRoomInPlayerGangForMissionPeds,09DD,0,0,("_p1%i")
@@ -941,6 +1022,16 @@ SetTimerBeepCountdownTime,0890,0,0,("timer%i" "timeInSec%i")
 SwitchWidescreen,02A3,0,0,("state%b")
 $END
 
+$IniFile
+$BEGIN
+ReadFloat,0AF2,0,0,("path%s" "section%s" "key%s" "value%f")
+ReadInt,0AF0,0,0,("path%s" "section%s" "key%s" "value%i")
+ReadString,0AF4,0,0,("path%s" "section%s" "key%s" "value%s")
+WriteFloat,0AF3,0,0,("value%f" "path%s" "section%s" "key%s")
+WriteInt,0AF1,0,0,("value%i" "path%s" "section%s" "key%s")
+WriteString,0AF5,0,0,("value%s" "path%s" "section%s" "key%s")
+$END
+
 $KillFrenzy
 $BEGIN
 Fail,09C2,0,0,()
@@ -958,11 +1049,36 @@ GetDistanceBetweenCoords2D,0509,0,0,("fromX%f" "fromY%f" "toX%f" "toZ%f" "distan
 GetDistanceBetweenCoords3D,050A,0,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "distance%f")
 GetHeadingFromVector2D,0604,0,0,("x%f" "y%f" "heading%f")
 LimitAngle,0656,0,0,("value%f" "result%f")
+Log,0AEF,0,0,("number%f" "base%f" "result%f")
+Pow,0AEE,0,0,("number%f" "power%f" "result%f")
 Random,0099,0,0,()
 RandomFloatInRange,0208,0,0,("min%f" "max%f" "result%f")
 RandomIntInRange,0209,0,0,("min%i" "max%i" "result%i")
 Sin,02F6,0,0,("angle%f" "result%f")
 Sqrt,01FB,0,0,("num%f" "result%f")
+$END
+
+$Memory
+$BEGIN
+Allocate,0AC8,0,0,("size%i" "address%i")
+CallFunction,0AA5,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments")
+CallFunctionReturn,0AA7,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
+CallMethod,0AA6,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments")
+CallMethodReturn,0AA8,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
+Free,0AC9,0,0,("address%i")
+GetLabelPointer,0AC6,0,0,( "address%i")
+GetObjectPointer,0A98,0,0,("object: Object" "address%i")
+GetObjectRef,0AEC,0,0,("address%i" "handle: Object")
+GetPedPointer,0A96,0,0,("char: Char" "address%i")
+GetPedRef,0AEA,0,0,("address%i" "handle: Char")
+GetScriptStructNamed,0AAA,0,0,("scriptName%s" "address%i")
+GetThisScriptStruct,0A9F,0,0,("address%i")
+GetVarPointer,0AC7,0,0,( "address%i")
+GetVehiclePointer,0A97,0,0,("vehicle: Car" "address%i")
+GetVehicleRef,0AEB,0,0,("address%i" "handle: Car")
+PopFloat,0AE9,0,0,("result%f")
+Read,0A8D,0,0,("address%i" "size%i" "vp%b" "result: any")
+Write,0A8C,0,0,("address%i" "size%i" "value: any" "vp%b")
 $END
 
 $Menu
@@ -1090,6 +1206,7 @@ GetControllerMode,0293,0,0,("mode: ControllerMode")
 GetPositionOfAnalogueSticks,0494,0,0,("pad: Pad" "leftStickX%i" "leftStickY%i" "rightStickX%i" "rightStickY%i")
 GetState,00E2,0,0,("pad: Pad" "buttonId: Button" "state%i")
 IsButtonPressed,00E1,1,0,("pad: Pad" "buttonId: Button")
+IsKeyPressed,0AB0,1,0,("keyCode%i")
 IsSkipCutsceneButtonPressed,08D0,1,0,()
 SetDrunkInputDelay,03FD,0,0,("pad: Pad" "delay%i")
 SetPlayerCycleWeaponButton,0992,0,0,("playerId: Player" "state%b")
@@ -1099,6 +1216,7 @@ SetPlayerEnterCarButton,07CC,0,0,("playerId: Player" "state%b")
 SetPlayerFireButton,0881,0,0,("playerId: Player" "state%b")
 SetPlayerJumpButton,0901,0,0,("playerId: Player" "state%b")
 Shake,015B,0,0,("pad: Pad" "time%i" "intensity%i")
+TestCheat,0ADC,1,0,("input%s")
 $END
 
 $Particle
@@ -1189,6 +1307,7 @@ DisableSprint,06AF,0,0,("self: Player" "state%b")
 EnsureHasDriveByWeapon,0563,0,0,("self: Player" "ammo%i")
 ForceInteriorLighting,09D7,0,0,("self: Player" "state%b")
 GetChar,01F5,0,0,("self: Player" "handle: Char")
+GetCharIsTargeting,0AD2,1,0,("self: Player" "handle: Char")
 GetCityIsIn,0842,0,0,("self: Player" "cityId%i")
 GetClothesItem,08F7,0,0,("self: Player" "bodyPart: BodyPart" "textureHash%i" "modelHash%i")
 GetGroup,07AF,0,0,("self: Player" "handle: Group")
@@ -1212,7 +1331,7 @@ IsPerformingWheelie,07F1,1,0,("self: Player")
 IsPlaying,0256,1,0,("self: Player")
 IsPressingHorn,0122,1,0,("self: Player")
 IsScoreGreater,010A,1,0,("self: Player" "money%i")
-IsTargettingAnything,068C,1,0,("self: Player")
+IsTargetingAnything,068C,1,0,("self: Player")
 IsTargettingChar,0457,1,0,("self: Player" "handle: Char")
 IsTargettingObject,0458,1,0,("self: Player" "handle: Object")
 IsUsingJetpack,0A0C,1,0,("self: Player")
@@ -1389,6 +1508,7 @@ $Streaming
 $BEGIN
 GetAreaVisible,077E,0,0,("interiorId%i")
 GetModelDimensions,07E4,0,0,("modelId: model_any" "leftBottomBackX%f" "leftBottomBackY%f" "leftBottomBackZ%f" "rightTopFrontX%f" "rightTopFrontY%f" "rightTopFrontZ%f")
+GetNameOfVehicleModel,0ADB,0,0,("modelId: model_vehicle" "carName%s")
 GetRandomCarModelInMemory,09B2,0,0,("_p1%b" "modelId: model_vehicle" "class%i")
 GetVehicleModType,06E6,0,0,("modelId: model_object" "slotId: ModSlot")
 HasAnimationLoaded,04EE,1,0,("animationFile%s")
@@ -1534,6 +1654,7 @@ $END
 
 $Text
 $BEGIN
+AddLabel,0ADF,0,0,("dynamicKey: gxt_key" "text%s")
 AddNextMessageToPreviousBriefs,09C1,0,0,("state%b")
 ClearHelp,03E6,0,0,()
 ClearPrints,00BE,0,0,()
@@ -1549,18 +1670,27 @@ DisplayWithNumber,045A,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num%i")
 DrawOddjobTitleBeforeFade,0A2D,0,0,("state%b")
 DrawSubtitlesBeforeFade,0A2C,0,0,("state%b")
 ForceBigMessageAndCounter,09EE,0,0,("state%b")
+GetLabelString,0ADE,0,0,("key: gxt_key" "text%s")
 IsHelpMessageBeingDisplayed,08FE,1,0,()
 IsMessageBeingDisplayed,076F,1,0,()
 IsThisHelpMessageBeingDisplayed,0A2A,1,0,("gxt: gxt_key")
 LoadMissionText,054C,0,0,("tableName%s")
 Print,00BB,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintBig,00BA,0,0,("key: gxt_key" "time%i" "style: TextStyle")
+PrintBigFormatted,0ACF,0,0,("text%s" "time%i" "style: TextStyle" "args: arguments")
 PrintBigQ,0217,0,0,("key: gxt_key" "duration%i" "style: TextStyle")
+PrintBigString,0ACB,0,0,("text%s" "time%i" "style: TextStyle")
+PrintFormatted,0AD0,0,0,("text%s" "time%i" "arg: arguments")
+PrintFormattedNow,0AD1,0,0,("text%s" "time%i" "arg: arguments")
 PrintHelp,03E5,0,0,("key: gxt_key")
 PrintHelpForever,0512,0,0,("key: gxt_key")
 PrintHelpForeverWithNumber,0513,0,0,("gxt: gxt_key" "number%i")
+PrintHelpFormatted,0ACE,0,0,("text%s" "args: arguments")
+PrintHelpString,0ACA,0,0,("text%s")
 PrintNow,00BC,0,0,("key: gxt_key" "time%i" "flag%i")
+PrintString,0ACC,0,0,("text%s" "time%i")
 PrintStringInStringNow,0384,0,0,("templateKey: gxt_key" "replacementKey: gxt_key" "duration%i" "style: TextStyle")
+PrintStringNow,0ACD,0,0,("text%s" "time%i")
 PrintWith2NumbersBig,036D,0,0,("key: gxt_key" "num1%i" "num2%i" "duration%i" "style: TextStyle")
 PrintWith2NumbersNow,02FD,0,0,("key: gxt_key" "num1%i" "num2%i" "duration%i" "style: TextStyle")
 PrintWith3Numbers,02FF,0,0,("key: gxt_key" "num1%i" "num2%i" "num3%i" "duration%i" "style: TextStyle")
@@ -1570,6 +1700,8 @@ PrintWith6Numbers,0308,0,0,("key: gxt_key" "num1%i" "num2%i" "num3%i" "num4%i" "
 PrintWithNumber,01E4,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
 PrintWithNumberBig,01E3,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextStyle")
 PrintWithNumberNow,01E5,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
+RemoveLabel,0AE0,0,0,("dynamicKey: gxt_key")
+ScanString,0AD4,0,0,("str%s" "format%s" "args: arguments" "text%s")
 SetAreaName,0A19,0,0,("name%s")
 SetBackground,0345,0,0,("state%b")
 SetCenter,0342,0,0,("state%b")
@@ -1586,6 +1718,8 @@ SetProportional,0348,0,0,("state%b")
 SetRightJustify,03E4,0,0,("state%b")
 SetScale,033F,0,0,("widthScale%f" "heightScale%f")
 SetWrapX,0343,0,0,("width%f")
+StringFloatFormat,0AED,0,0,("number%f" "format%s" "text%s")
+StringFormat,0AD3,0,0,("format%s" "args: arguments" "text%s")
 UseCommands,03F0,0,0,("state%b")
 $END
 
@@ -1672,14 +1806,18 @@ GetNumberOfFiresInRange,06C3,0,0,("x%f" "y%f" "z%f" "radius%f" "numFires%i")
 GetParkingNodeInArea,0810,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "x%f" "y%f" "z%f")
 GetPercentageTaggedInArea,0702,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "percent%i")
 GetRandomCarInSphereNoSave,073E,0,0,("x%f" "y%f" "z%f" "radius%f" "model: model_vehicle" "handle: Car")
+GetRandomCarInSphereNoSaveRecursive,0AE2,1,0,("x%f" "y%f" "z%f" "radius%f" "findNext%b" "skipWrecked%b" "handle: Car")
 GetRandomCarOfTypeInAngledAreaNoSave,09C0,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "angle%f" "char: Char" "vehicle: Car")
 GetRandomCarOfTypeInArea,0327,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "modelId: model_vehicle" "handle: Car")
 GetRandomCarOfTypeInAreaNoSave,053E,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "modelId: model_vehicle" "handle: Car")
 GetRandomCharInAreaOffsetNoSave,0A3E,0,0,("x%f" "y%f" "z%f" "radiusX%f" "radiusY%f" "radiusZ%f" "handle: Char")
 GetRandomCharInSphere,073F,0,0,("x%f" "y%f" "z%f" "radius%f" "civilian%b" "gang%b" "criminal%b" "handle: Char")
 GetRandomCharInSphereNoBrain,08E5,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: Char")
+GetRandomCharInSphereNoSaveRecursive,0AE1,1,0,("x%f" "y%f" "z%f" "radius%f" "findNext%b" "skipDead%b" "handle: Char")
 GetRandomCharInSphereOnlyDrugsBuyers,089E,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: Char")
+GetRandomObjectInSphereNoSaveRecursive,0AE3,1,0,("x%f" "y%f" "z%f" "radius%f" "findNext%b" "handle: Object")
 GetSoundLevelAtCoords,0855,0,0,("handle: Char" "x%f" "y%f" "z%f" "level%f")
+GetTargetCoords,0AB6,1,0,("x%f" "y%f" "z%f")
 GetUserOfClosestMapAttractor,091C,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_object" "attractorName%s" "handle: Char")
 GetWaterHeightAtCoords,092E,0,0,("x%f" "y%f" "ignoreWaves%b" "height%f")
 HasObjectOfTypeBeenSmashed,07F0,1,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_object")
@@ -1711,6 +1849,7 @@ SetPoolTableCoords,0830,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "ri
 SetRailtrackResistanceMult,0A45,0,0,("mult%f")
 SetTagStatusInArea,0703,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "percent%i")
 SetVisibilityOfClosestObjectOfType,0363,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_object" "state%b")
+SpawnVehicleByCheating,0ADD,0,0,("modelId: model_vehicle")
 SwapNearestBuildingModel,03B6,0,0,("x%f" "y%f" "z%f" "radius%f" "fromModelId: model_object" "toModelId: model_object")
 SwitchEntryExit,07FB,0,0,("interiorName%s" "state%b")
 SwitchProcessing,03B7,0,0,("state%b")

@@ -44,6 +44,7 @@ import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
 import { renameGameEnum } from '../enums/actions';
 import { registerFileContent } from '../changes/actions';
+import { Action } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -53,23 +54,32 @@ export class ExtensionsEffects {
       distinctUntilChanged(
         (a, b) => GameLibrary[a.game] === GameLibrary[b.game]
       ),
-      withLatestFrom(this._auth.authToken$),
-      concatMap(([{ game }, accessToken]) =>
+      withLatestFrom(this._auth.authToken$, this._auth.isAuthorized$),
+      concatMap(([{ game }, accessToken, isAuthorized]) =>
         this._service.loadExtensions(game, accessToken).pipe(
-          switchMap((response) => [
-            loadExtensionsSuccess({
-              game,
-              extensions: response.extensions,
-              lastUpdate: response.meta.last_update,
-              version: response.meta.version,
-              classes: response.classes,
-            }),
-            registerFileContent({
-              fileName: GameLibrary[game],
-              lastUpdate: response.meta.last_update,
-              content: JSON.stringify(response, null, 2),
-            }),
-          ])
+          switchMap((response) => {
+            const actions: Action[] = [
+              loadExtensionsSuccess({
+                game,
+                extensions: response.extensions,
+                lastUpdate: response.meta.last_update,
+                version: response.meta.version,
+                classes: response.classes,
+              }),
+            ];
+
+            if (isAuthorized) {
+              actions.push(
+                registerFileContent({
+                  fileName: GameLibrary[game],
+                  lastUpdate: response.meta.last_update,
+                  content: JSON.stringify(response, null, 2),
+                })
+              );
+            }
+
+            return actions;
+          })
         )
       )
     )
@@ -274,7 +284,9 @@ export class ExtensionsEffects {
       withLatestFrom(this._extensions.hasAnyLoadingInProgress$),
       filter(([_, hasAnyLoadingInProgress]) => !hasAnyLoadingInProgress),
       switchMap(() => this._game.game$),
-      map((game) => initSupportInfo({ game }))
+      withLatestFrom(this._extensions.supportInfo$),
+      filter(([_, supportInfo]) => !supportInfo),
+      map(([game]) => initSupportInfo({ game }))
     )
   );
 

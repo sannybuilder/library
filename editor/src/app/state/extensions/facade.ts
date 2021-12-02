@@ -21,6 +21,7 @@ export class ExtensionsFacade {
   loading$ = this.store$.select(selector.loading);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
   version$ = this.store$.select(selector.version);
+  supportInfo$ = this.store$.select(selector.supportInfo);
 
   hasAnyLoadingInProgress$ = this.store$.select(
     selector.hasAnyLoadingInProgress

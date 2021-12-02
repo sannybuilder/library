@@ -135,12 +135,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this._ref.detectChanges();
     });
 
-    this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
-      this.snippet = snippet;
-      this.oldSnippet = snippet;
-      this._ref.detectChanges();
-    });
-
     this.displaySearchHelp$
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((shouldDisplay) => {

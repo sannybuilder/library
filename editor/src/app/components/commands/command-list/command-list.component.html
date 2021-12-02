@@ -13,7 +13,7 @@
     >
       <div class="col-12">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body pt-3">
             <div class="row">
               <div class="col-12 d-flex justify-content-end">
                 <scl-command-games
@@ -51,36 +51,23 @@
                 >
               </div>
             </div>
-            <div class="row">
-              <div class="col-12 col-sm-1 order-0 d-flex align-items-center">
+            <div class="row mt-3">
+              <div class="col-12 d-flex flex-row">
                 <a
+                  class="mr-3"
                   [routerLink]="['/', game, row.extension, row.command.id]"
                   [queryParams]="getQueryParamsForCommand(row.command, game)"
                   [name]="row.command.id"
                   [innerHTML]="row.command | propExtract: 'id' | sanitize"
                 ></a>
+                <div
+                  class="text-break"
+                  [innerHTML]="row.command | propExtract: 'name' | sanitize"
+                ></div>
               </div>
-
-              <div
-                class="
-                  col-12
-                  order-2
-                  d-flex
-                  align-items-center
-                  text-break
-                  mt-3 mt-sm-0
-                "
-                [ngClass]="{
-                  'col-sm-11': narrowed,
-                  'col-sm-8': !narrowed,
-                  'order-sm-2': narrowed,
-                  'order-sm-1': !narrowed
-                }"
-                [innerHTML]="row.command | propExtract: 'name' | sanitize"
-              ></div>
             </div>
 
-            <div class="row">
+            <div class="row mt-3">
               <div class="col-12">
                 <ng-container
                   *ngIf="
@@ -89,7 +76,6 @@
                   "
                 >
                   <div
-                    class="my-2"
                     (click)="interceptDescriptionClick($event)"
                     [innerHTML]="
                       row.command
@@ -181,7 +167,7 @@
                         | async as snippet
                     "
                   >
-                    <pre class="sample">{{
+                    <pre class="sample mt-3">{{
                       snippet | parametrify: row.command
                     }}</pre>
                   </ng-container>

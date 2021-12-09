@@ -31,7 +31,9 @@ import {
   Command,
   Game,
   GameLibrary,
+  GamePlatforms,
   GameVersion,
+  GameVersions,
   PrimitiveType,
 } from '../../models';
 import {
@@ -309,7 +311,15 @@ export class ExtensionsEffects {
         updateGameCommands({
           game,
           batch: [
-            { command, newExtension: extension, oldExtension: extension },
+            {
+              command: {
+                ...command,
+                platforms: GamePlatforms[game],
+                versions: GameVersions[game],
+              },
+              newExtension: extension,
+              oldExtension: extension,
+            },
           ],
         }),
         initSupportInfo({ game }),

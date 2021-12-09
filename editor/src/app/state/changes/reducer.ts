@@ -102,7 +102,7 @@ export const changesReducer = createReducer(
           adaptor: createGitHubAdaptor({
             owner: 'sannybuilder',
             repo: 'library',
-            ref: 'heads/master',
+            ref: 'heads/dev',
             token: accessToken,
           }),
         })

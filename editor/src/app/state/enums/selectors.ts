@@ -30,7 +30,7 @@ export const gameEnums = createSelector(
 export const gamesWhereExist = createSelector(
   state,
   (state: EnumsState, props: { enumName: string }) => {
-    return (Object.keys(state.enums) as Game[]).filter(
+    return Object.values(Game).filter(
       (game: Game) => !!state.enums[game]?.[props.enumName]
     );
   }

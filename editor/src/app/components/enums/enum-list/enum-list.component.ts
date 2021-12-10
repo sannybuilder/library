@@ -12,7 +12,7 @@ export class EnumListComponent {
   games: Game[];
   @Input() enumNames: string[];
   @Input() set game(val: Game) {
-    this.games = getSameEdition(val);
+    this.games = Object.values(Game);
     this._game = val;
   }
 

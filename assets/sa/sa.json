@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1639157370416,
-    "version": "0.200",
+    "last_update": 1639162390183,
+    "version": "0.201",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -20183,8 +20183,8 @@
               "source": "var_global"
             },
             {
-              "name": "direction",
-              "type": "TimerDirection"
+              "name": "display",
+              "type": "CounterDisplay"
             },
             {
               "name": "slot",
@@ -46333,6 +46333,3428 @@
           "attrs": {
             "is_condition": true
           }
+        },
+        {
+          "id": "0A4F",
+          "name": "FINISHED_WITH_XBOX_PLAYER2",
+          "num_params": 0,
+          "short_desc": "",
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "id": "0A50",
+          "name": "DO_DEBUG_STUFF",
+          "num_params": 0,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "DoStuff",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A51",
+          "name": "IS_WIDGET_PRESSED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is touched",
+          "class": "Widget",
+          "member": "IsPressed",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A52",
+          "name": "IS_WIDGET_RELEASED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is pressed and released",
+          "class": "Widget",
+          "member": "IsReleased",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A53",
+          "name": "IS_WIDGET_DOUBLETAPPED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is double-tapped",
+          "class": "Widget",
+          "member": "IsDoubletapped",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A54",
+          "name": "IS_WIDGET_SWIPED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is swiped",
+          "class": "Widget",
+          "member": "IsSwiped",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A55",
+          "name": "IS_WIDGET_SWIPED_LEFT",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is swiped left",
+          "class": "Widget",
+          "member": "IsSwipedLeft",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A56",
+          "name": "IS_WIDGET_SWIPED_RIGHT",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is swiped right",
+          "class": "Widget",
+          "member": "IsSwipedRight",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "missionPage",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "missionNum",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A57",
+          "name": "DO_MISSION_SKIP",
+          "num_params": 2,
+          "short_desc": "Checks whether the task is skipped (debugging function, the game has a menu page for selecting a task, and you can choose to skip a task. The official version of the game is not enabled), if you skip the task, return to the page where the current task is located, and the ID of the current task. This command is always invalid in the mobile version of SA, returns false, and the returned 2 values are 0",
+          "class": "Debugger",
+          "member": "DoMissionSkip",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "missionNum",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A58",
+          "name": "GET_MISSION_NUM",
+          "num_params": 1,
+          "short_desc": "Returns the ID of the next task (0A57), otherwise -1",
+          "class": "Debugger",
+          "member": "GetMissionNum",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "missionPage",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A59",
+          "name": "GET_MISSION_PAGE",
+          "num_params": 1,
+          "short_desc": "Returns the page where the next task (0A57) is located, otherwise 0",
+          "class": "Debugger",
+          "member": "GetMissionPage",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "_p2",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A5A",
+          "name": "GET_WIDGET_VALUE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "GetValue",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "_p2",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "_p3",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A5B",
+          "name": "GET_WIDGET_VALUE2",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "GetValue2",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "offsetLeft",
+              "type": "float"
+            },
+            {
+              "name": "offsetTop",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A5C",
+          "name": "DISPLAY_TEXT_WIDGET",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "DisplayText",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "screenX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "screenY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "scaleX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "scaleY",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A5D",
+          "name": "GET_WIDGET_POSITION",
+          "num_params": 5,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "GetPosition",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            }
+          ],
+          "id": "0A5E",
+          "name": "SET_WIDGET_VALUE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetValue",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "rangeX",
+              "type": "float"
+            },
+            {
+              "name": "rangeY",
+              "type": "float"
+            }
+          ],
+          "id": "0A5F",
+          "name": "SET_WIDGET_SLIDER_RANGE",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetSliderRange",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A60",
+          "name": "ADD_WIDGET_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "AddFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A61",
+          "name": "REMOVE_WIDGET_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "RemoveFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A62",
+          "name": "ADD_BUTTON_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "AddButtonFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A63",
+          "name": "REMOVE_BUTTON_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "RemoveButtonFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "id": "0A64",
+          "name": "IS_TOUCH_ENABLED",
+          "num_params": 0,
+          "short_desc": "",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Hid",
+          "member": "IsTouchEnabled",
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "id": "0A65",
+          "name": "IS_FINALBUILD",
+          "num_params": 0,
+          "short_desc": "Returns true if this is the final build of the game (always true)",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsFinalbuild",
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A66",
+          "name": "WRITE_LOG",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "WriteLog",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A67",
+          "name": "WRITE_LOG_INT",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "WriteLogInt",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "float"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A68",
+          "name": "WRITE_LOG_FLOAT",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "WriteLogFloat",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "menuName",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A69",
+          "name": "CREATE_SHOP_WIDGET",
+          "num_params": 1,
+          "short_desc": "Creates a touch-type store menu interface unique to the mobile version of SA",
+          "class": "Widget",
+          "member": "CreateShopMenu",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "itemName",
+              "type": "gxt_key"
+            },
+            {
+              "name": "price",
+              "type": "int"
+            }
+          ],
+          "id": "0A6A",
+          "name": "ADD_SHOP_ITEM",
+          "num_params": 2,
+          "short_desc": "Adds product items and prices to the store menu interface (0A69)",
+          "class": "Widget",
+          "member": "AddShopItem",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A6B",
+          "name": "DELETE_WIDGET",
+          "num_params": 1,
+          "short_desc": "Removes a widget icon from the screen (cannot be restored)",
+          "class": "Widget",
+          "member": "Delete",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
+          "id": "0A6C",
+          "name": "SET_EQUIPPED_ITEM",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetEquippedItem",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A6D",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditional",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "textureName",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A6E",
+          "name": "SET_WIDGET_TEXTURE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetTexture",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "id": "0A6F",
+          "name": "CHECKPOINT_SAVE",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Game",
+          "member": "CheckPointSave",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "offsetLeft",
+              "type": "float"
+            },
+            {
+              "name": "offsetTop",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "scale",
+              "type": "float"
+            }
+          ],
+          "id": "0A70",
+          "name": "DISPLAY_TEXT_CLAMPED",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Text",
+          "member": "DisplayClamped",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "offsetLeft",
+              "type": "float"
+            },
+            {
+              "name": "offsetTop",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "number",
+              "type": "int"
+            },
+            {
+              "name": "scale",
+              "type": "float"
+            }
+          ],
+          "id": "0A71",
+          "name": "DISPLAY_TEXT_WITH_NUMBER_CLAMPED",
+          "num_params": 5,
+          "short_desc": "",
+          "class": "Text",
+          "member": "DisplayWithNumberClamped",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "id": "0A72",
+          "name": "AUTO_SAVE",
+          "num_params": 0,
+          "short_desc": "Saves the game progress (with setting SaveGameStateType to 1)",
+          "class": "Game",
+          "member": "AutoSave",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "id": "0A73",
+          "name": "SET_WIDGET_VALUE3",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetValue3",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "bool"
+            }
+          ],
+          "id": "0A74",
+          "name": "IS_CHECKPOINT_RESUMING",
+          "num_params": 1,
+          "short_desc": "",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsCheckPointResuming",
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "MenuGrid"
+            },
+            {
+              "name": "carcolor",
+              "type": "int"
+            }
+          ],
+          "id": "0A75",
+          "name": "SET_ACTIVE_MENU_ITEM_CAR_MODS",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "MenuGrid",
+          "member": "SetActiveItemCarMods",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "hidId",
+              "type": "int"
+            }
+          ],
+          "id": "0A76",
+          "name": "HID_IMPLEMENTS",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Hid",
+          "member": "Implements",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "id": "0A77",
+          "name": "CHECKPOINT_SAVE_ODDJOB",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Game",
+          "member": "CheckpointSaveOddjob",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A78",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouch",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A79",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_HID",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalHid",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7A",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_CLASSIC",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchClassic",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7B",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_ADAPTED",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchAdapted",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7C",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_HID_JOYPAD",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalHidJoypad",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7D",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_HID_KEYBOARD",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalHidKeyboard",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7E",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_ANALOG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchAnalog",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7F",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_DIGITAL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchDigital",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A80",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_FLICK",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchFlick",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A81",
+          "name": "PRINT_HELP_CONDITIONAL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditional",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A82",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditionalTouch",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A83",
+          "name": "PRINT_HELP_CONDITIONAL_HID",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditionalHid",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A84",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH_CLASSIC",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditionalTouchClassic",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A85",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH_ADAPTED",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalTouchAdapted",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A86",
+          "name": "PRINT_HELP_CONDITIONAL_HID_JOYPAD",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalHidJoypad",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A87",
+          "name": "PRINT_HELP_CONDITIONAL_HID_KEYBOARD",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalHidKeyboard",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A88",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH_ANALOG",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalTouchAnalog",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            }
+          ],
+          "id": "0A89",
+          "name": "SET_WIDGET_VALUE2",
+          "num_params": 3,
+          "class": "Widget",
+          "member": "SetValue2",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A8A",
+          "name": "SET_WIDGET_INFO",
+          "num_params": 8,
+          "class": "Widget",
+          "member": "SetInfo",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A8B",
+          "name": "SET_WIDGET_INFO2",
+          "num_params": 7,
+          "class": "Widget",
+          "member": "SetInfo2",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "id": "0A8C",
+          "name": "LOAD_ALL_STREAMING_MODELS",
+          "num_params": 0,
+          "class": "Streaming",
+          "member": "LoadAllModels",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Loads all models immediately, faster than 038B",
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "hidId",
+              "type": "int"
+            }
+          ],
+          "id": "0A8D",
+          "name": "IS_HID_RELEASED",
+          "num_params": 1,
+          "class": "Hid",
+          "member": "IsReleased",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "id": "0A8E",
+          "name": "AWARD_ACHIEVEMENT",
+          "num_params": 1,
+          "class": "Game",
+          "member": "AwardAchievement",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Awards the achievement in the REMASTERED version of SA",
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "id": "0A8F",
+          "name": "SET_PLAYER_WEAPON_LOCK_ON_TARGET",
+          "num_params": 0,
+          "class": "Player",
+          "member": "SetWeaponLockOnTarget",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "hidId",
+              "type": "int"
+            }
+          ],
+          "id": "0A90",
+          "name": "IS_HID_PRESSED",
+          "num_params": 1,
+          "class": "Hid",
+          "member": "IsPressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "console",
+            "mobile"
+          ]
+        },
+        {
+          "id": "0A4F",
+          "name": "FINISHED_WITH_XBOX_PLAYER2",
+          "num_params": 0,
+          "short_desc": "",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "id": "0A50",
+          "name": "DO_DEBUG_STUFF",
+          "num_params": 0,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "DoStuff",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A51",
+          "name": "IS_WIDGET_PRESSED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is touched",
+          "class": "Widget",
+          "member": "IsPressed",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A52",
+          "name": "IS_WIDGET_RELEASED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is pressed and released",
+          "class": "Widget",
+          "member": "IsReleased",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A53",
+          "name": "IS_WIDGET_DOUBLETAPPED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is double-tapped",
+          "class": "Widget",
+          "member": "IsDoubletapped",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A54",
+          "name": "IS_WIDGET_SWIPED",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is swiped",
+          "class": "Widget",
+          "member": "IsSwiped",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A55",
+          "name": "IS_WIDGET_SWIPED_LEFT",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is swiped left",
+          "class": "Widget",
+          "member": "IsSwipedLeft",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A56",
+          "name": "IS_WIDGET_SWIPED_RIGHT",
+          "num_params": 1,
+          "short_desc": "Returns true if the button widget icon on the screen is swiped right",
+          "class": "Widget",
+          "member": "IsSwipedRight",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "missionPage",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "missionNum",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A57",
+          "name": "DO_MISSION_SKIP",
+          "num_params": 2,
+          "short_desc": "Checks whether the task is skipped (debugging function, the game has a menu page for selecting a task, and you can choose to skip a task. The official version of the game is not enabled), if you skip the task, return to the page where the current task is located, and the ID of the current task. This command is always invalid in the mobile version of SA, returns false, and the returned 2 values are 0",
+          "class": "Debugger",
+          "member": "DoMissionSkip",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "missionNum",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A58",
+          "name": "GET_MISSION_NUM",
+          "num_params": 1,
+          "short_desc": "Returns the ID of the next task (0A57), otherwise -1",
+          "class": "Debugger",
+          "member": "GetMissionNum",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "missionPage",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A59",
+          "name": "GET_MISSION_PAGE",
+          "num_params": 1,
+          "short_desc": "Returns the page where the next task (0A57) is located, otherwise 0",
+          "class": "Debugger",
+          "member": "GetMissionPage",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "_p2",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A5A",
+          "name": "GET_WIDGET_VALUE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "GetValue",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "_p2",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "_p3",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A5B",
+          "name": "GET_WIDGET_VALUE2",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "GetValue2",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "offsetLeft",
+              "type": "float"
+            },
+            {
+              "name": "offsetTop",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A5C",
+          "name": "DISPLAY_TEXT_WIDGET",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "DisplayText",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "screenX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "screenY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "scaleX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "scaleY",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A5D",
+          "name": "GET_WIDGET_POSITION",
+          "num_params": 5,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "GetPosition",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            }
+          ],
+          "id": "0A5E",
+          "name": "SET_WIDGET_VALUE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetValue",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "rangeX",
+              "type": "float"
+            },
+            {
+              "name": "rangeY",
+              "type": "float"
+            }
+          ],
+          "id": "0A5F",
+          "name": "SET_WIDGET_SLIDER_RANGE",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetSliderRange",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A60",
+          "name": "ADD_WIDGET_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "AddFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A61",
+          "name": "REMOVE_WIDGET_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "RemoveFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A62",
+          "name": "ADD_BUTTON_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "AddButtonFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "id": "0A63",
+          "name": "REMOVE_BUTTON_FLAG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "RemoveButtonFlag",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "id": "0A64",
+          "name": "IS_TOUCH_ENABLED",
+          "num_params": 0,
+          "short_desc": "",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Hid",
+          "member": "IsTouchEnabled",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "id": "0A65",
+          "name": "IS_FINALBUILD",
+          "num_params": 0,
+          "short_desc": "Returns true if this is the final build of the game (always true)",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsFinalbuild",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A66",
+          "name": "WRITE_LOG",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "WriteLog",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A67",
+          "name": "WRITE_LOG_INT",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "WriteLogInt",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "float"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            },
+            {
+              "name": "_p4",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A68",
+          "name": "WRITE_LOG_FLOAT",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Debugger",
+          "member": "WriteLogFloat",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "menuName",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A69",
+          "name": "CREATE_SHOP_WIDGET",
+          "num_params": 1,
+          "short_desc": "Creates a touch-type store menu interface unique to the mobile version of SA",
+          "class": "Widget",
+          "member": "CreateShopMenu",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "itemName",
+              "type": "gxt_key"
+            },
+            {
+              "name": "price",
+              "type": "int"
+            }
+          ],
+          "id": "0A6A",
+          "name": "ADD_SHOP_ITEM",
+          "num_params": 2,
+          "short_desc": "Adds product items and prices to the store menu interface (0A69)",
+          "class": "Widget",
+          "member": "AddShopItem",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            }
+          ],
+          "id": "0A6B",
+          "name": "DELETE_WIDGET",
+          "num_params": 1,
+          "short_desc": "Removes a widget icon from the screen (cannot be restored)",
+          "class": "Widget",
+          "member": "Delete",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            }
+          ],
+          "id": "0A6C",
+          "name": "SET_EQUIPPED_ITEM",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetEquippedItem",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A6D",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditional",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "textureName",
+              "type": "string128",
+              "source": "literal"
+            }
+          ],
+          "id": "0A6E",
+          "name": "SET_WIDGET_TEXTURE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetTexture",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "id": "0A6F",
+          "name": "CHECKPOINT_SAVE",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Game",
+          "member": "CheckPointSave",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "offsetLeft",
+              "type": "float"
+            },
+            {
+              "name": "offsetTop",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "scale",
+              "type": "float"
+            }
+          ],
+          "id": "0A70",
+          "name": "DISPLAY_TEXT_CLAMPED",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Text",
+          "member": "DisplayClamped",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "offsetLeft",
+              "type": "float"
+            },
+            {
+              "name": "offsetTop",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "number",
+              "type": "int"
+            },
+            {
+              "name": "scale",
+              "type": "float"
+            }
+          ],
+          "id": "0A71",
+          "name": "DISPLAY_TEXT_WITH_NUMBER_CLAMPED",
+          "num_params": 5,
+          "short_desc": "",
+          "class": "Text",
+          "member": "DisplayWithNumberClamped",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "id": "0A72",
+          "name": "AUTO_SAVE",
+          "num_params": 0,
+          "short_desc": "Saves the game progress (with setting SaveGameStateType to 1)",
+          "class": "Game",
+          "member": "AutoSave",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "id": "0A73",
+          "name": "SET_WIDGET_VALUE3",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Widget",
+          "member": "SetValue3",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "bool"
+            }
+          ],
+          "id": "0A74",
+          "name": "IS_CHECKPOINT_RESUMING",
+          "num_params": 1,
+          "short_desc": "",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsCheckPointResuming",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "MenuGrid"
+            },
+            {
+              "name": "carcolor",
+              "type": "int"
+            }
+          ],
+          "id": "0A75",
+          "name": "SET_ACTIVE_MENU_ITEM_CAR_MODS",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "MenuGrid",
+          "member": "SetActiveItemCarMods",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "hidId",
+              "type": "int"
+            }
+          ],
+          "id": "0A76",
+          "name": "HID_IMPLEMENTS",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Hid",
+          "member": "Implements",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "id": "0A77",
+          "name": "CHECKPOINT_SAVE_ODDJOB",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Game",
+          "member": "CheckpointSaveOddjob",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A78",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouch",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A79",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_HID",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalHid",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7A",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_CLASSIC",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchClassic",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7B",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_ADAPTED",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchAdapted",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7C",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_HID_JOYPAD",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalHidJoypad",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7D",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_HID_KEYBOARD",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalHidKeyboard",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7E",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_ANALOG",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchAnalog",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A7F",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_DIGITAL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchDigital",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A80",
+          "name": "PRINT_HELP_FOREVER_CONDITIONAL_TOUCH_FLICK",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpForeverConditionalTouchFlick",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A81",
+          "name": "PRINT_HELP_CONDITIONAL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditional",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A82",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditionalTouch",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A83",
+          "name": "PRINT_HELP_CONDITIONAL_HID",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditionalHid",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A84",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH_CLASSIC",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpConditionalTouchClassic",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A85",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH_ADAPTED",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalTouchAdapted",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A86",
+          "name": "PRINT_HELP_CONDITIONAL_HID_JOYPAD",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalHidJoypad",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A87",
+          "name": "PRINT_HELP_CONDITIONAL_HID_KEYBOARD",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalHidKeyboard",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            }
+          ],
+          "id": "0A88",
+          "name": "PRINT_HELP_CONDITIONAL_TOUCH_ANALOG",
+          "num_params": 2,
+          "class": "Text",
+          "member": "PrintHelpConditionalTouchAnalog",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "float"
+            },
+            {
+              "name": "_p3",
+              "type": "float"
+            }
+          ],
+          "id": "0A89",
+          "name": "SET_WIDGET_VALUE2",
+          "num_params": 3,
+          "class": "Widget",
+          "member": "SetValue2",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            },
+            {
+              "name": "_p7",
+              "type": "float"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A8A",
+          "name": "SET_WIDGET_INFO",
+          "num_params": 8,
+          "class": "Widget",
+          "member": "SetInfo",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "widgetId",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            },
+            {
+              "name": "_p6",
+              "type": "int"
+            },
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0A8B",
+          "name": "SET_WIDGET_INFO2",
+          "num_params": 7,
+          "class": "Widget",
+          "member": "SetInfo2",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "id": "0A8C",
+          "name": "LOAD_ALL_STREAMING_MODELS",
+          "num_params": 0,
+          "class": "Streaming",
+          "member": "LoadAllModels",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Loads all models immediately, faster than 038B",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "hidId",
+              "type": "int"
+            }
+          ],
+          "id": "0A8D",
+          "name": "IS_HID_RELEASED",
+          "num_params": 1,
+          "class": "Hid",
+          "member": "IsReleased",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
+          "id": "0A8E",
+          "name": "AWARD_ACHIEVEMENT",
+          "num_params": 1,
+          "class": "Game",
+          "member": "AwardAchievement",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Awards the achievement in the REMASTERED version of SA",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "id": "0A8F",
+          "name": "SET_PLAYER_WEAPON_LOCK_ON_TARGET",
+          "num_params": 0,
+          "class": "Player",
+          "member": "SetWeaponLockOnTarget",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "hidId",
+              "type": "int"
+            }
+          ],
+          "id": "0A90",
+          "name": "IS_HID_PRESSED",
+          "num_params": 1,
+          "class": "Hid",
+          "member": "IsPressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
         }
       ]
     },
@@ -49233,6 +52655,239 @@
           },
           "platforms": [
             "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "int"
+            }
+          ],
+          "id": "0C00",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C01",
+          "name": "INT_ADD",
+          "num_params": 3,
+          "short_desc": "Adds together two integer values and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C02",
+          "name": "INT_SUB",
+          "num_params": 3,
+          "short_desc": "Subtracts the integer value from another integer value and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C03",
+          "name": "INT_MUL",
+          "num_params": 3,
+          "short_desc": "Multiplies two integer values and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C04",
+          "name": "INT_DIV",
+          "num_params": 3,
+          "short_desc": "Divides the integer value by another integer value and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "id": "0C05",
+          "name": "TERMINATE_THIS_CUSTOM_SCRIPT",
+          "num_params": 0,
+          "short_desc": "Ends the current custom script, preventing further execution",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD8",
+          "name": "READ_MEMORY",
+          "num_params": 4,
+          "class": "Memory",
+          "member": "Read",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Reads a value from the game memory",
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "id": "0DD9",
+          "name": "WRITE_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Write",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Writes a value to the game memory",
+          "platforms": [
+            "mobile"
           ],
           "versions": [
             "1.0"

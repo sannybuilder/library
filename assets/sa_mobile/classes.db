@@ -27,9 +27,11 @@ Gang
 Garage
 Group
 Heli
+Hid
 Hud
 KillFrenzy
 Math
+Memory
 Menu
 MenuGrid
 Mouse
@@ -61,6 +63,7 @@ Txd
 User3DMarker
 Weapon
 Weather
+Widget
 World
 Zone
 
@@ -738,9 +741,16 @@ $END
 
 $Debugger
 $BEGIN
+DoMissionSkip,0A57,1,0,("missionPage%i" "missionNum%i")
+DoStuff,0A50,0,0,()
+GetMissionNum,0A58,1,0,("missionNum%i")
+GetMissionPage,0A59,1,0,("missionPage%i")
 IsDebugCameraOn,05A0,1,0,()
 Line,0052,0,0,("f1%f" "f2%f" "f3%f" "f4%f" "f5%f" "f6%f")
 SaveStringToDebugFile,05B6,0,0,("msg: string128")
+WriteLog,0A66,0,0,("_p1: string128")
+WriteLogFloat,0A68,0,0,("_p1%f" "_p2%f" "_p3%f" "_p4: string128")
+WriteLogInt,0A67,0,0,("_p1%i" "_p2%i" "_p3%i" "_p4: string128")
 $END
 
 $DecisionMaker
@@ -791,7 +801,11 @@ AreAnyCarCheatsActivated,0445,1,0,()
 AreMeasurementsInMeters,0424,1,0,()
 AreSubtitlesSwitchedOn,09C8,1,0,()
 AttachAnimsToModel,08E8,0,0,("pedModelId%i" "animationFile%s")
+AutoSave,0A72,0,0,()
+AwardAchievement,0A8E,0,0,("_p1%i")
 CanTriggerGangWarWhenOnAMission,08A3,0,0,("state%b")
+CheckPointSave,0A6F,0,0,("_p1%i")
+CheckpointSaveOddjob,0A77,0,0,("_p1%i")
 ClearRelationship,0747,0,0,("relationshipType: RelationshipType" "ofPedType: PedType" "toPedType: PedType")
 ClearSpecificZonesToTriggerGangWar,090D,0,0,()
 ClearWantedLevelInGarage,09D4,0,0,()
@@ -809,6 +823,8 @@ HasSaveGameFinished,03D9,1,0,()
 HideAllFrontendBlips,09AC,0,0,("state%b")
 Is2PlayerGameGoingOn,0800,1,0,()
 IsAustralian,059A,1,0,()
+IsCheckPointResuming,0A74,1,0,("_p1%b")
+IsFinalbuild,0A65,1,0,()
 IsGangWarFightingGoingOn,0A03,1,0,()
 IsGangWarGoingOn,087A,1,0,()
 IsGerman,040C,1,0,()
@@ -914,6 +930,14 @@ SetReachedTargetDistance,0853,0,0,("self: Heli" "distance%i")
 SetStabiliser,04DF,0,0,("self: Heli" "state%b")
 $END
 
+$Hid
+$BEGIN
+Implements,0A76,1,0,("hidId%i")
+IsPressed,0A90,1,0,("hidId%i")
+IsReleased,0A8D,1,0,("hidId%i")
+IsTouchEnabled,0A64,1,0,()
+$END
+
 $Hud
 $BEGIN
 ClearCounter,0151,0,0,("counter%i")
@@ -921,7 +945,7 @@ ClearTimer,014F,0,0,("timer%i")
 Display,0826,0,0,("state%b")
 DisplayCarNames,09B9,0,0,("state%b")
 DisplayCounterWithString,03C4,0,0,("counter%i" "display: CounterDisplay" "text: gxt_key")
-DisplayNthCounterWithString,04F7,0,0,("counter%i" "direction: TimerDirection" "slot%i" "text: gxt_key")
+DisplayNthCounterWithString,04F7,0,0,("counter%i" "display: CounterDisplay" "slot%i" "text: gxt_key")
 DisplayRadar,0581,0,0,("state%b")
 DisplayTimer,014E,0,0,("timer%i" "direction: TimerDirection")
 DisplayTimerWithString,03C3,0,0,("timer%i" "direction: TimerDirection" "text: gxt_key")
@@ -965,6 +989,12 @@ Sin,02F6,0,0,("angle%f" "result%f")
 Sqrt,01FB,0,0,("num%f" "result%f")
 $END
 
+$Memory
+$BEGIN
+Read,0DD8,0,0,("address%i" "size%i" "ib%b" "result: any")
+Write,0DD9,0,0,("address%i" "value: any" "size%i" "ib%b" "vp%b")
+$END
+
 $Menu
 $BEGIN
 ActivateItem,08D9,0,0,("self: Menu" "row%i" "state%b")
@@ -985,6 +1015,7 @@ $END
 $MenuGrid
 $BEGIN
 Create,0964,0,0,("header: gxt_key" "topLeftX%f" "topLeftY%f" "width%f" "numColumns%i" "interactive%b" "background%b" "alignment%i" "handle: MenuGrid")
+SetActiveItemCarMods,0A75,1,0,("self: MenuGrid" "carcolor%i")
 $END
 
 $Mouse
@@ -1237,6 +1268,7 @@ SetIgnorePolice,01F7,0,0,("self: Player" "state%b")
 SetModel,09C7,0,0,("self: Player" "modelId%i")
 SetMood,04E3,0,0,("self: Player" "mood: PlayerMood" "time%i")
 SetNeverGetsTired,0330,0,0,("self: Player" "state%b")
+SetWeaponLockOnTarget,0A8F,0,0,()
 StoreClothesState,0793,0,0,()
 StoreScore,010B,0,0,("self: Player" "money%i")
 StoreWantedLevel,01C0,0,0,("self: Player" "wantedLevel%i")
@@ -1402,6 +1434,7 @@ IsThisModelABoat,081E,1,0,("modelId: model_any")
 IsThisModelACar,0A01,1,0,("modelId: model_any")
 IsThisModelAHeli,0820,1,0,("modelId: model_any")
 IsThisModelAPlane,081F,1,0,("modelId: model_any")
+LoadAllModels,0A8C,0,0,()
 LoadAllModelsNow,038B,0,0,()
 LoadScene,03CB,0,0,("x%f" "y%f" "z%f")
 LoadSceneInDirection,0A0B,0,0,("x%f" "y%f" "z%f" "heading%f")
@@ -1542,10 +1575,12 @@ ClearThisBigPrint,03D6,0,0,("key: gxt_key")
 ClearThisPrint,03D5,0,0,("key: gxt_key")
 ClearThisPrintBigNow,0A0E,0,0,("textStyle: TextStyle")
 Display,033E,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key")
+DisplayClamped,0A70,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "scale%f")
 DisplayNonMinigameHelpMessages,0A44,0,0,("state%b")
 DisplayWith2Numbers,045B,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num1%i" "num2%i")
 DisplayWithFloat,07FC,0,0,("leftTopX%f" "leftTopY%f" "key: gxt_key" "value%f" "precision%i")
 DisplayWithNumber,045A,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "num%i")
+DisplayWithNumberClamped,0A71,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key" "number%i" "scale%f")
 DrawOddjobTitleBeforeFade,0A2D,0,0,("state%b")
 DrawSubtitlesBeforeFade,0A2C,0,0,("state%b")
 ForceBigMessageAndCounter,09EE,0,0,("state%b")
@@ -1557,7 +1592,25 @@ Print,00BB,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintBig,00BA,0,0,("key: gxt_key" "time%i" "style: TextStyle")
 PrintBigQ,0217,0,0,("key: gxt_key" "duration%i" "style: TextStyle")
 PrintHelp,03E5,0,0,("key: gxt_key")
+PrintHelpConditional,0A81,0,0,("key: gxt_key" "type%i")
+PrintHelpConditionalHid,0A83,0,0,("key: gxt_key" "type%i")
+PrintHelpConditionalHidJoypad,0A86,0,0,("key: gxt_key" "type%i")
+PrintHelpConditionalHidKeyboard,0A87,0,0,("key: gxt_key" "type%i")
+PrintHelpConditionalTouch,0A82,0,0,("key: gxt_key" "type%i")
+PrintHelpConditionalTouchAdapted,0A85,0,0,("key: gxt_key" "type%i")
+PrintHelpConditionalTouchAnalog,0A88,0,0,("key: gxt_key" "type%i")
+PrintHelpConditionalTouchClassic,0A84,0,0,("key: gxt_key" "type%i")
 PrintHelpForever,0512,0,0,("key: gxt_key")
+PrintHelpForeverConditional,0A6D,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalHid,0A79,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalHidJoypad,0A7C,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalHidKeyboard,0A7D,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalTouch,0A78,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalTouchAdapted,0A7B,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalTouchAnalog,0A7E,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalTouchClassic,0A7A,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalTouchDigital,0A7F,0,0,("key: gxt_key" "type%i")
+PrintHelpForeverConditionalTouchFlick,0A80,0,0,("key: gxt_key" "type%i")
 PrintHelpForeverWithNumber,0513,0,0,("gxt: gxt_key" "number%i")
 PrintNow,00BC,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintStringInStringNow,0384,0,0,("templateKey: gxt_key" "replacementKey: gxt_key" "duration%i" "style: TextStyle")
@@ -1639,6 +1692,35 @@ ForceNow,01B6,0,0,("type: WeatherType")
 Release,01B7,0,0,()
 SetHeathazeEffect,08FD,0,0,("state%b")
 SetToAppropriateTypeNow,0915,0,0,()
+$END
+
+$Widget
+$BEGIN
+AddButtonFlag,0A62,0,0,("widgetId%i" "flag%i")
+AddFlag,0A60,0,0,("widgetId%i" "flag%i")
+AddShopItem,0A6A,0,0,("itemName: gxt_key" "price%i")
+CreateShopMenu,0A69,0,0,("menuName: gxt_key")
+Delete,0A6B,0,0,("widgetId%i")
+DisplayText,0A5C,0,0,("offsetLeft%f" "offsetTop%f" "key: gxt_key")
+GetPosition,0A5D,0,0,("widgetId%i" "screenX%f" "screenY%f" "scaleX%f" "scaleY%f")
+GetValue,0A5A,0,0,("widgetId%i" "_p2%f")
+GetValue2,0A5B,0,0,("widgetId%i" "_p2%f" "_p3%f")
+IsDoubletapped,0A53,1,0,("widgetId%i")
+IsPressed,0A51,1,0,("widgetId%i")
+IsReleased,0A52,1,0,("widgetId%i")
+IsSwiped,0A54,1,0,("widgetId%i")
+IsSwipedLeft,0A55,1,0,("widgetId%i")
+IsSwipedRight,0A56,1,0,("widgetId%i")
+RemoveButtonFlag,0A63,0,0,("widgetId%i" "flag%i")
+RemoveFlag,0A61,0,0,("widgetId%i" "flag%i")
+SetEquippedItem,0A6C,0,0,("widgetId%i" "_p2%i")
+SetInfo,0A8A,0,0,("widgetId%i" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "_p7%f" "key: gxt_key")
+SetInfo2,0A8B,0,0,("widgetId%i" "_p2%i" "_p3%i" "_p4%i" "_p5%i" "_p6%i" "key: gxt_key")
+SetSliderRange,0A5F,0,0,("widgetId%i" "rangeX%f" "rangeY%f")
+SetTexture,0A6E,0,0,("widgetId%i" "textureName: string128")
+SetValue,0A5E,0,0,("widgetId%i" "_p2%f")
+SetValue2,0A89,0,0,("widgetId%i" "_p2%f" "_p3%f")
+SetValue3,0A73,0,0,("widgetId%i" "x%f" "y%f" "z%f")
 $END
 
 $World

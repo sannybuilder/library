@@ -125,11 +125,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
     Object.values(Game).forEach((game) => {
       this._extensions.loadExtensions(game);
+      this._enums.loadEnums(game);
     });
 
     getBaseGames().forEach((game) => {
       this._snippets.loadSnippets(game);
-      this._enums.loadEnums(game);
     });
 
     this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {

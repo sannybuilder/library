@@ -114,13 +114,13 @@ export const KNOWN_LANGUAGES = ['en', 'ru', 'cn'];
 
 export enum Game {
   GTA3 = 'gta3',
-  gta3_mobile = 'gta3_mobile',
-  gta3_unreal = 'gta3_unreal',
   VC = 'vc',
-  vc_mobile = 'vc_mobile',
-  vc_unreal = 'vc_unreal',
   SA = 'sa',
+  gta3_mobile = 'gta3_mobile',
+  vc_mobile = 'vc_mobile',
   sa_mobile = 'sa_mobile',
+  gta3_unreal = 'gta3_unreal',
+  vc_unreal = 'vc_unreal',
   sa_unreal = 'sa_unreal',
 }
 
@@ -210,14 +210,14 @@ export const GameSnippets: Record<Game, string> = {
 
 export const GameEnums: Record<Game, string> = {
   [Game.GTA3]: 'gta3/enums.json',
-  [Game.gta3_mobile]: 'gta3/enums.json',
-  [Game.gta3_unreal]: 'gta3/enums.json',
+  [Game.gta3_mobile]: 'gta3_mobile/enums.json',
+  [Game.gta3_unreal]: 'gta3_unreal/enums.json',
   [Game.VC]: 'vc/enums.json',
-  [Game.vc_mobile]: 'vc/enums.json',
-  [Game.vc_unreal]: 'vc/enums.json',
+  [Game.vc_mobile]: 'vc_mobile/enums.json',
+  [Game.vc_unreal]: 'vc_unreal/enums.json',
   [Game.SA]: 'sa/enums.json',
-  [Game.sa_mobile]: 'sa/enums.json',
-  [Game.sa_unreal]: 'sa/enums.json',
+  [Game.sa_mobile]: 'sa_mobile/enums.json',
+  [Game.sa_unreal]: 'sa_unreal/enums.json',
 };
 
 export const GameTitle: Record<Game, string> = {

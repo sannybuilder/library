@@ -186,14 +186,14 @@ export const GameLibrary: Record<Game, string> = {
 
 export const GameVersion: Record<Game, string> = {
   [Game.GTA3]: 'gta3/version.txt',
-  [Game.gta3_mobile]: 'gta3/version.txt',
-  [Game.gta3_unreal]: 'gta3/version.txt',
+  [Game.gta3_mobile]: 'gta3/version_mobile.txt',
+  [Game.gta3_unreal]: 'gta3/version_unreal.txt',
   [Game.VC]: 'vc/version.txt',
-  [Game.vc_mobile]: 'vc/version.txt',
-  [Game.vc_unreal]: 'vc/version.txt',
+  [Game.vc_mobile]: 'vc/version_mobile.txt',
+  [Game.vc_unreal]: 'vc/version_unreal.txt',
   [Game.SA]: 'sa/version.txt',
-  [Game.sa_mobile]: 'sa/version.txt',
-  [Game.sa_unreal]: 'sa/version.txt',
+  [Game.sa_mobile]: 'sa/version_mobile.txt',
+  [Game.sa_unreal]: 'sa/version_unreal.txt',
 };
 
 export const GameSnippets: Record<Game, string> = {

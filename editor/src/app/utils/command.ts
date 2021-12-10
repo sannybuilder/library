@@ -159,3 +159,10 @@ export function isVersionMatching(
   }
   return intersection(versions, commandVersions).length > 0;
 }
+
+export function isSameEdition(command: Command, game: Game) {
+  return (
+    isPlatformMatching(command, GamePlatforms[game]) &&
+    isVersionMatching(command, GameVersions[game])
+  );
+}

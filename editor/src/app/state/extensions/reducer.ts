@@ -9,8 +9,6 @@ import {
   GameSupportInfo,
   SupportInfo,
   SupportLevel,
-  GamePlatforms,
-  GameVersions,
 } from '../../models';
 import {
   initSupportInfo,
@@ -18,12 +16,7 @@ import {
   loadExtensionsSuccess,
   updateGameCommands,
 } from './actions';
-import { sortBy, last, orderBy, pick } from 'lodash';
-import {
-  getGameVariations,
-  isPlatformMatching,
-  isVersionMatching,
-} from '../../utils';
+import { sortBy, last, orderBy, difference } from 'lodash';
 
 export interface GameState {
   extensions: Extension[];
@@ -52,35 +45,16 @@ export const extensionsReducer = createReducer(
   on(
     loadExtensionsSuccess,
     (state, { game, extensions, version, lastUpdate, classes }) => {
-      const games = [game, ...getGameVariations(game)];
-
-      const filterByEdition = (extensions: Extension[], g: Game) =>
-        extensions
-          .map((e) => {
-            return {
-              ...e,
-              commands: e.commands.filter(
-                (c) =>
-                  isPlatformMatching(c, GamePlatforms[g]) &&
-                  isVersionMatching(c, GameVersions[g])
-              ),
-            };
-          })
-          .filter((e) => e.commands.length > 0);
-
-      return games.reduce((m, v) => {
-        const filtered = filterByEdition(extensions, v);
-        return updateState(m, v, {
-          extensions: orderBy(filtered, (e) =>
-            e.name === DEFAULT_EXTENSION ? -1 : 1
-          ),
-          lastUpdate,
-          version,
-          entities: getEntities(filtered, classes),
-          loading: false,
-          classesMeta: classes,
-        });
-      }, state);
+      return updateState(state, game, {
+        extensions: orderBy(extensions, (e) =>
+          e.name === DEFAULT_EXTENSION ? -1 : 1
+        ),
+        lastUpdate,
+        version,
+        entities: getEntities(extensions, classes),
+        loading: false,
+        classesMeta: classes,
+      });
     }
   ),
   on(updateGameCommands, (state, { game, batch }) => {
@@ -88,14 +62,14 @@ export const extensionsReducer = createReducer(
       (memo, { command: newCommand, newExtension: name, oldExtension }) => {
         memo = upsertBy(
           memo,
+          (extension) => extension.name === name,
           'name',
-          name,
           (e) => ({
             ...e,
             commands: upsertBy(
               e.commands,
+              (command) => commandMatcher(command, newCommand),
               'id',
-              newCommand.id,
               () => (newCommand.id && newCommand.name ? newCommand : null),
               () => (newCommand.id && newCommand.name ? newCommand : null)
             ),
@@ -111,17 +85,26 @@ export const extensionsReducer = createReducer(
         }
 
         // remove from previous collection
-        return upsertBy(memo, 'name', oldExtension, (e) => {
-          const commands = upsertBy(e.commands, 'id', newCommand.id);
-          if (!commands.length) {
-            // remove previous collection if it is empty
-            return null;
+        return upsertBy(
+          memo,
+          (extension) => extension.name === oldExtension,
+          'name',
+          (e) => {
+            const commands = upsertBy(
+              e.commands,
+              (command) => commandMatcher(command, newCommand),
+              'id'
+            );
+            if (!commands.length) {
+              // remove previous collection if it is empty
+              return null;
+            }
+            return {
+              ...e,
+              commands,
+            };
           }
-          return {
-            ...e,
-            commands,
-          };
-        });
+        );
       },
       state.games[game]?.extensions ?? []
     );
@@ -169,8 +152,8 @@ function updateState(
 
 function upsertBy<T extends object, Key extends keyof T>(
   collection: T[],
-  key: Key,
-  needle: T[Key],
+  matcher: (element: T) => boolean,
+  sortKey: Key,
   onFound: (element: T) => T | null = () => null,
   onDefault: () => T | null = () => null
 ): T[] {
@@ -178,7 +161,7 @@ function upsertBy<T extends object, Key extends keyof T>(
   const newCollection: T[] = [];
 
   for (const item of collection) {
-    if (item[key] === needle) {
+    if (matcher(item)) {
       found = true;
       const newItem = onFound(item);
       if (newItem !== null) {
@@ -192,7 +175,7 @@ function upsertBy<T extends object, Key extends keyof T>(
     const newItem = onDefault();
     if (newItem !== null) {
       newCollection.push(newItem);
-      return sortBy(newCollection, key);
+      return sortBy(newCollection, sortKey);
     }
   }
 
@@ -330,4 +313,12 @@ function getSupportLevel(
   }
 
   return SupportLevel.Supported;
+}
+
+export function commandMatcher(a: Command, b: Command) {
+  return (
+    a.id === b.id &&
+    difference(a.versions ?? [], b.versions ?? []).length === 0 &&
+    difference(a.platforms ?? [], b.platforms ?? []).length === 0
+  );
 }

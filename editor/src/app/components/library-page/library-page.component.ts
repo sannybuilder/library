@@ -123,8 +123,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.detectScreenSize();
     this._ui.toggleCommandListElements(true);
 
-    getBaseGames().forEach((game) => {
+    Object.values(Game).forEach((game) => {
       this._extensions.loadExtensions(game);
+    });
+
+    getBaseGames().forEach((game) => {
       this._snippets.loadSnippets(game);
       this._enums.loadEnums(game);
     });

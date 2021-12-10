@@ -156,9 +156,7 @@ export class ExtensionsEffects {
               batch: batch as GameCommandUpdate[],
             })
           ),
-          ...Object.entries(groups).map(([game]) =>
-            initSupportInfo({ game: game as Game })
-          ),
+          ...Object.values(Game).map((game) => initSupportInfo({ game })),
         ];
       })
     )

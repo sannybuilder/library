@@ -174,26 +174,26 @@ export const GameKeywordsAssets: Record<Game, string> = {
 
 export const GameLibrary: Record<Game, string> = {
   [Game.GTA3]: 'gta3/gta3.json',
-  [Game.gta3_mobile]: 'gta3/gta3_mobile.json',
-  [Game.gta3_unreal]: 'gta3/gta3_unreal.json',
+  [Game.gta3_mobile]: 'gta3_mobile/gta3_mobile.json',
+  [Game.gta3_unreal]: 'gta3_unreal/gta3_unreal.json',
   [Game.VC]: 'vc/vc.json',
-  [Game.vc_mobile]: 'vc/vc_mobile.json',
-  [Game.vc_unreal]: 'vc/vc_unreal.json',
+  [Game.vc_mobile]: 'vc_mobile/vc_mobile.json',
+  [Game.vc_unreal]: 'vc_unreal/vc_unreal.json',
   [Game.SA]: 'sa/sa.json',
-  [Game.sa_mobile]: 'sa/sa_mobile.json',
-  [Game.sa_unreal]: 'sa/sa_unreal.json',
+  [Game.sa_mobile]: 'sa_mobile/sa_mobile.json',
+  [Game.sa_unreal]: 'sa_unreal/sa_unreal.json',
 };
 
 export const GameVersion: Record<Game, string> = {
   [Game.GTA3]: 'gta3/version.txt',
-  [Game.gta3_mobile]: 'gta3/version_mobile.txt',
-  [Game.gta3_unreal]: 'gta3/version_unreal.txt',
+  [Game.gta3_mobile]: 'gta3_mobile/version.txt',
+  [Game.gta3_unreal]: 'gta3_unreal/version.txt',
   [Game.VC]: 'vc/version.txt',
-  [Game.vc_mobile]: 'vc/version_mobile.txt',
-  [Game.vc_unreal]: 'vc/version_unreal.txt',
+  [Game.vc_mobile]: 'vc_mobile/version.txt',
+  [Game.vc_unreal]: 'vc_unreal/version.txt',
   [Game.SA]: 'sa/version.txt',
-  [Game.sa_mobile]: 'sa/version_mobile.txt',
-  [Game.sa_unreal]: 'sa/version_unreal.txt',
+  [Game.sa_mobile]: 'sa_mobile/version.txt',
+  [Game.sa_unreal]: 'sa_unreal/version.txt',
 };
 
 export const GameSnippets: Record<Game, string> = {

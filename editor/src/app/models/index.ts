@@ -137,13 +137,13 @@ export const GameIcon: Record<Game, string> = {
 };
 
 export const GameClassesAssets: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3_classic/classes.db',
+  [Game.GTA3]: 'assets/gta3/classes.db',
   [Game.gta3_mobile]: 'assets/gta3_mobile/classes.db',
   [Game.gta3_unreal]: 'assets/gta3_unreal/classes.db',
-  [Game.VC]: 'assets/vc_classic/classes.db',
+  [Game.VC]: 'assets/vc/classes.db',
   [Game.vc_mobile]: 'assets/vc_mobile/classes.db',
   [Game.vc_unreal]: 'assets/vc_unreal/classes.db',
-  [Game.SA]: 'assets/sa_classic/classes.db',
+  [Game.SA]: 'assets/sa/classes.db',
   [Game.sa_mobile]: 'assets/sa_mobile/classes.db',
   [Game.sa_unreal]: 'assets/sa_unreal/classes.db',
 };
@@ -161,13 +161,13 @@ export const GameEnumsAssets: Record<Game, string> = {
 };
 
 export const GameKeywordsAssets: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3_classic/keywords.txt',
+  [Game.GTA3]: 'assets/gta3/keywords.txt',
   [Game.gta3_mobile]: 'assets/gta3_mobile/keywords.txt',
   [Game.gta3_unreal]: 'assets/gta3_unreal/keywords.txt',
-  [Game.VC]: 'assets/vc_classic/keywords.txt',
+  [Game.VC]: 'assets/vc/keywords.txt',
   [Game.vc_unreal]: 'assets/vc_unreal/keywords.txt',
   [Game.vc_mobile]: 'assets/vc_mobile/keywords.txt',
-  [Game.SA]: 'assets/sa_classic/keywords.txt',
+  [Game.SA]: 'assets/sa/keywords.txt',
   [Game.sa_mobile]: 'assets/sa_mobile/keywords.txt',
   [Game.sa_unreal]: 'assets/sa_unreal/keywords.txt',
 };

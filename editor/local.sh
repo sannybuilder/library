@@ -22,9 +22,9 @@ cargo run snippets ../gta3/snippets > ../editor/src/assets/gta3/snippets.json
 cargo run snippets ../vc/snippets > ../editor/src/assets/vc/snippets.json
 cargo run snippets ../sa/snippets > ../editor/src/assets/sa/snippets.json
 
-mkdir -p ../editor/src/assets/gta3_classic
-mkdir -p ../editor/src/assets/vc_classic
-mkdir -p ../editor/src/assets/sa_classic
+mkdir -p ../editor/src/assets/gta3
+mkdir -p ../editor/src/assets/vc
+mkdir -p ../editor/src/assets/sa
 
 mkdir -p ../editor/src/assets/gta3_mobile
 mkdir -p ../editor/src/assets/vc_mobile
@@ -34,13 +34,13 @@ mkdir -p ../editor/src/assets/gta3_unreal
 mkdir -p ../editor/src/assets/vc_unreal
 mkdir -p ../editor/src/assets/sa_unreal
 
-cargo run classes ../gta3/gta3.json gta3_classic > ../editor/src/assets/gta3_classic/classes.db
-cargo run classes ../vc/vc.json vc_classic > ../editor/src/assets/vc_classic/classes.db
-cargo run classes ../sa/sa.json sa_classic > ../editor/src/assets/sa_classic/classes.db
+cargo run classes ../gta3/gta3.json gta3_classic > ../editor/src/assets/gta3/classes.db
+cargo run classes ../vc/vc.json vc_classic > ../editor/src/assets/vc/classes.db
+cargo run classes ../sa/sa.json sa_classic > ../editor/src/assets/sa/classes.db
 
-cargo run keywords ../gta3/gta3.json gta3_classic > ../editor/src/assets/gta3_classic/keywords.txt
-cargo run keywords ../vc/vc.json vc_classic > ../editor/src/assets/vc_classic/keywords.txt
-cargo run keywords ../sa/sa.json sa_classic > ../editor/src/assets/sa_classic/keywords.txt
+cargo run keywords ../gta3/gta3.json gta3_classic > ../editor/src/assets/gta3/keywords.txt
+cargo run keywords ../vc/vc.json vc_classic > ../editor/src/assets/vc/keywords.txt
+cargo run keywords ../sa/sa.json sa_classic > ../editor/src/assets/sa/keywords.txt
 
 cargo run classes ../gta3/gta3_mobile.json gta3_mobile > ../editor/src/assets/gta3_mobile/classes.db
 cargo run classes ../vc/vc_mobile.json vc_mobile > ../editor/src/assets/vc_mobile/classes.db

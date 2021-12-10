@@ -207,8 +207,8 @@ export class UiEffects {
     merge(
       this._actions$.pipe(
         ofType(toggleAttribute, selectExtensions, selectClass, updateSearchTerm)
-      )
-      // this._actions$.pipe(ofType(onListEnter)).pipe(filter((x) => !x.opcode))
+        ),
+        this._game.game$ // needed as the current page may not exist in the chosen game resulting in the empty list
     ).pipe(mapTo(changePage({ index: 1 })))
   );
 

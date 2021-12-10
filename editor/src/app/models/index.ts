@@ -174,14 +174,14 @@ export const GameKeywordsAssets: Record<Game, string> = {
 
 export const GameLibrary: Record<Game, string> = {
   [Game.GTA3]: 'gta3/gta3.json',
-  [Game.gta3_mobile]: 'gta3/gta3.json',
-  [Game.gta3_unreal]: 'gta3/gta3.json',
+  [Game.gta3_mobile]: 'gta3/gta3_mobile.json',
+  [Game.gta3_unreal]: 'gta3/gta3_unreal.json',
   [Game.VC]: 'vc/vc.json',
-  [Game.vc_mobile]: 'vc/vc.json',
-  [Game.vc_unreal]: 'vc/vc.json',
+  [Game.vc_mobile]: 'vc/vc_mobile.json',
+  [Game.vc_unreal]: 'vc/vc_unreal.json',
   [Game.SA]: 'sa/sa.json',
-  [Game.sa_mobile]: 'sa/sa.json',
-  [Game.sa_unreal]: 'sa/sa.json',
+  [Game.sa_mobile]: 'sa/sa_mobile.json',
+  [Game.sa_unreal]: 'sa/sa_unreal.json',
 };
 
 export const GameVersion: Record<Game, string> = {

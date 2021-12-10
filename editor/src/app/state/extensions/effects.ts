@@ -41,7 +41,6 @@ import {
   getSameCommands,
   doesCommandHaveAnyAttributeInvalid,
   replaceType,
-  getBaseGame,
 } from '../../utils';
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
@@ -55,7 +54,7 @@ export class ExtensionsEffects {
     this._actions$.pipe(
       ofType(init),
       withLatestFrom(this._game.game$),
-      map(([_, game]) => loadExtensions({ game: getBaseGame(game) }))
+      map(([_, game]) => loadExtensions({ game }))
     )
   );
 
@@ -182,7 +181,7 @@ export class ExtensionsEffects {
                 version,
                 fileName: GameLibrary[game],
                 content: extensions,
-                url: 'https://library.sannybuilder.com/#/' + getBaseGame(game),
+                url: 'https://library.sannybuilder.com/#/' + game,
                 classesMeta,
               });
               this._changes.registerTextFileChange(GameVersion[game], version);

@@ -1,5 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { isPlatformMatching, isVersionMatching, smash } from '../../utils';
+import {
+  getGameVariations,
+  isPlatformMatching,
+  isVersionMatching,
+} from '../../utils';
 import {
   ClassMeta,
   Command,
@@ -12,7 +16,8 @@ import {
 } from '../../models';
 import { game } from '../game/selectors';
 import { selectedPlatforms, selectedVersions } from '../version/selectors';
-import { ExtensionsState, GameState } from './reducer';
+import { commandMatcher, ExtensionsState, GameState } from './reducer';
+import { map, mapKeys, mergeWith, unionWith } from 'lodash';
 
 export const extensionsState =
   createFeatureSelector<ExtensionsState>('extensions');
@@ -61,6 +66,42 @@ export const gameExtensions = createSelector(
   extensionsState,
   (state: ExtensionsState, props: { game: Game }) =>
     state.games[props.game]?.extensions ?? []
+);
+
+export const getAllEditionsExtensions = createSelector(
+  extensionsState,
+  (state: ExtensionsState, props: { game: Game }) => {
+    const games = [props.game, ...getGameVariations(props.game)];
+
+    return games.reduce((m, v) => {
+      const extensions = state.games[v]?.extensions ?? [];
+
+      return map(
+        mergeWith(
+          {},
+          mapKeys(m, (v) => v.name),
+          mapKeys(extensions, (v) => v.name),
+          (extension1, extension2) => {
+            return mergeWith(
+              {},
+              extension1,
+              extension2,
+              (objValue, srcValue, key) => {
+                if (key === 'commands') {
+                  return unionWith(
+                    objValue,
+                    srcValue,
+                    (c1: Command, c2: Command) => commandMatcher(c1, c2)
+                  );
+                }
+                return undefined;
+              }
+            );
+          }
+        )
+      );
+    }, [] as Extension[]);
+  }
 );
 
 export const extensionNames = createSelector(

@@ -177,18 +177,22 @@
 
             <div class="row">
               <div class="col-12 text-right">
-                <code
-                  *ngFor="let p of row.command.platforms"
-                  class="platform-badge"
-                >
-                  {{ p }}
-                </code>
-                <code
-                  *ngFor="let p of row.command.versions"
-                  class="platform-badge"
-                >
-                  V{{ p }}
-                </code>
+                <ng-container *ngFor="let p of row.command.platforms">
+                  <ng-container *ngIf="p !== 'any'">
+                    <code class="platform-badge">
+                      {{ p }}
+                    </code>
+                  </ng-container>
+                </ng-container>
+
+                <ng-container *ngFor="let p of row.command.versions">
+                  <ng-container *ngIf="p !== 'any'">
+                    <code class="platform-badge">
+                      V{{ p }}
+                    </code>
+                  </ng-container>
+                </ng-container>
+
               </div>
             </div>
           </div>

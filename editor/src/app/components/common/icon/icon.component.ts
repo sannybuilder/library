@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Game, GameIcon } from '../../../models';
+import { GameIcon } from '../../../models/game-icon';
+import { Game } from '../../../models';
 
 @Component({
   selector: 'scl-icon',

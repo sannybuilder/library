@@ -124,8 +124,6 @@ export enum Game {
   sa_unreal = 'sa_unreal',
 }
 
-export { GameIcon } from './game-icon';
-
 export const GameClassesAssets: Record<Game, string> = {
   [Game.GTA3]: 'assets/gta3/classes.db',
   [Game.gta3_mobile]: 'assets/gta3_mobile/classes.db',

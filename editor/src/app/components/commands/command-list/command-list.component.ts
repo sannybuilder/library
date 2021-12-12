@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { getQueryParamsForCommand } from '../../../utils';
-import { Command, Game } from '../../../models';
+import { Command, DEFAULT_EXTENSION, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
@@ -26,6 +26,8 @@ export class CommandListComponent {
   currentPage$ = this._ui.currentPage$;
   rows$ = this._ui.rows$;
   rowsCount$ = this.rows$.pipe(map((rows) => rows?.length ?? 0));
+
+  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
 
   constructor(
     private _extensions: ExtensionsFacade,

@@ -46,8 +46,8 @@ import {
 
 import {
   capitalizeFirst,
-  isPlatformMatching,
-  isVersionMatching,
+  isPlatformMatchingExact,
+  isVersionMatchingExact,
 } from '../../utils';
 import { flatMap } from 'lodash';
 import { UiFacade } from './facade';
@@ -141,16 +141,16 @@ export class UiEffects {
               map((extensions) => {
                 const commandId =
                   opcode.toLowerCase() === 'new' ? '' : opcodify(opcode);
+                const neededPlatforms = platforms ?? [Platform.Any];
+                const neededVersions = versions ?? [Version.Any];
+
                 const commandToEdit = extensions
                   .find((e) => e.name === extension)
                   ?.commands.find(
                     (command) =>
                       command.id === commandId &&
-                      isPlatformMatching(
-                        command,
-                        platforms ?? [Platform.Any]
-                      ) &&
-                      isVersionMatching(command, versions ?? [Version.Any])
+                      isPlatformMatchingExact(command, neededPlatforms) &&
+                      isVersionMatchingExact(command, neededVersions)
                   );
 
                 const isNew = !commandToEdit;
@@ -207,8 +207,8 @@ export class UiEffects {
     merge(
       this._actions$.pipe(
         ofType(toggleAttribute, selectExtensions, selectClass, updateSearchTerm)
-        ),
-        this._game.game$ // needed as the current page may not exist in the chosen game resulting in the empty list
+      ),
+      this._game.game$ // needed as the current page may not exist in the chosen game resulting in the empty list
     ).pipe(mapTo(changePage({ index: 1 })))
   );
 

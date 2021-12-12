@@ -248,8 +248,6 @@ function getSupportInfo(
             ? command
             : getCommand(state[v3]?.extensions, name, command),
           command,
-          game,
-          v3
         ),
       }));
       return m2;
@@ -269,9 +267,7 @@ function getCommand(
 
 function getSupportLevel(
   command: Command | undefined,
-  otherCommand: Command,
-  game: Game,
-  otherGame: Game
+  otherCommand: Command
 ) {
   // no command with the same id
   if (!command) {
@@ -301,15 +297,15 @@ function getSupportLevel(
     return SupportLevel.SupportedDiffParams;
   }
 
-  // ugly workaround for Garage commands in SA
-  // they have the same names and number of parameters
-  // but unlike their GTA3/VC predecessors they are all static
-  if (
-    command.class === 'Garage' &&
-    game !== otherGame &&
-    [game, otherGame].includes(Game.SA)
-  ) {
-    return SupportLevel.SupportedDiffParams;
+  // same number of parameters but different types (e.g. Garage)
+  const p1 = command.input?.length ?? 0;
+  const p2 = otherCommand.input?.length ?? 0;
+  if (p1 == p2 && !otherAttrs.is_nop && !otherAttrs.is_unsupported) {
+    const types1 = command.input?.map((p) => p.type) ?? [];
+    const types2 = otherCommand.input?.map((p) => p.type) ?? [];
+    if (difference(types1, types2).length) {
+      return SupportLevel.SupportedDiffParams;
+    }
   }
 
   return SupportLevel.Supported;

@@ -17,6 +17,7 @@ import {
   updateGameCommands,
 } from './actions';
 import { sortBy, last, orderBy, difference } from 'lodash';
+import { matchArrays } from '../../utils';
 
 export interface GameState {
   extensions: Extension[];
@@ -297,7 +298,7 @@ function getSupportLevel(command: Command | undefined, otherCommand: Command) {
   // same number of parameters but different types (e.g. Garage)
   const p1 = command.input?.length ?? 0;
   const p2 = otherCommand.input?.length ?? 0;
-  if (p1 == p2 && !otherAttrs.is_nop && !otherAttrs.is_unsupported) {
+  if (p1 === p2 && p1 > 0 && !otherAttrs.is_nop && !otherAttrs.is_unsupported) {
     const types1 = command.input?.map((p) => p.type) ?? [];
     const types2 = otherCommand.input?.map((p) => p.type) ?? [];
     if (difference(types1, types2).length) {
@@ -308,7 +309,7 @@ function getSupportLevel(command: Command | undefined, otherCommand: Command) {
   return SupportLevel.Supported;
 }
 
-export function commandMatcher(a: Command, b: Command) {
+function commandMatcher(a: Command, b: Command) {
   return (
     a.id === b.id &&
     matchArrays(a.versions, b.versions) &&
@@ -316,14 +317,3 @@ export function commandMatcher(a: Command, b: Command) {
   );
 }
 
-function matchArrays<T>(a1: T[] | undefined, a2: T[] | undefined): boolean {
-  const arr1 = a1 ?? [];
-  const arr2 = a2 ?? [];
-  const len1 = arr1.length;
-  const len2 = arr2.length;
-
-  if (len1 !== len2) {
-    return false;
-  }
-  return difference(arr1, arr2).length === 0;
-}

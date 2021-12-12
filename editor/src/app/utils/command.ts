@@ -1,4 +1,4 @@
-import { camelCase, intersection, pickBy } from 'lodash';
+import { camelCase, difference, intersection, pickBy } from 'lodash';
 import {
   Game,
   Param,
@@ -97,39 +97,39 @@ export function normalizeId(id: string): string {
 }
 
 export function getQueryParamsForCommand(command: Command, game: Game) {
-  // const platforms = command.platforms ?? [];
-  // const versions = command.versions ?? [];
+  const platforms = command.platforms ?? [];
+  const versions = command.versions ?? [];
 
-  // const p = platforms.reduce((m, v) => {
-  //   if (v === Platform.Any) {
-  //     return m;
-  //   }
-  //   return m | (1 << GamePlatforms[game].indexOf(v));
-  // }, 0);
-  // const v = versions.reduce((m, v) => {
-  //   if (v === Version.Any) {
-  //     return m;
-  //   }
-  //   return m | (1 << GameVersions[game].indexOf(v));
-  // }, 0);
+  const p =
+    platforms.reduce((m, v) => {
+      if (v === Platform.Any) {
+        return m;
+      }
+      return m | (1 << GamePlatforms[game].indexOf(v));
+    }, 0) || undefined;
+  const v =
+    versions.reduce((m, v) => {
+      if (v === Version.Any) {
+        return m;
+      }
+      return m | (1 << GameVersions[game].indexOf(v));
+    }, 0) || undefined;
 
-  return {};
+  return { p, v };
 }
 
 export function decodePlatforms(platform: number | undefined, game: Game) {
-  return [Platform.Any];
-  // if (!platform) {
-  //   return [Platform.Any];
-  // }
-  // return GamePlatforms[game].filter((p, i) => (platform & (1 << i)) !== 0);
+  if (!platform) {
+    return [Platform.Any];
+  }
+  return GamePlatforms[game].filter((p, i) => (platform & (1 << i)) !== 0);
 }
 
 export function decodeVersions(version: number | undefined, game: Game) {
-  return [Version.Any];
-  // if (!version) {
-  //   return [Version.Any];
-  // }
-  // return GameVersions[game].filter((p, i) => (version & (1 << i)) !== 0);
+  if (!version) {
+    return [Version.Any];
+  }
+  return GameVersions[game].filter((p, i) => (version & (1 << i)) !== 0);
 }
 
 export function isPlatformMatching(
@@ -160,9 +160,45 @@ export function isVersionMatching(
   return intersection(versions, commandVersions).length > 0;
 }
 
-export function isSameEdition(command: Command, game: Game) {
-  return (
-    isPlatformMatching(command, GamePlatforms[game]) &&
-    isVersionMatching(command, GameVersions[game])
-  );
+export function isPlatformMatchingExact(
+  command: Command,
+  platforms: Platform[]
+): boolean {
+  if (platforms.includes(Platform.Any)) {
+    return true;
+  }
+  const commandPlatforms = command.platforms ?? [Platform.Any];
+  if (commandPlatforms.includes(Platform.Any)) {
+    return true;
+  }
+  return matchArrays(platforms, commandPlatforms);
+}
+
+export function isVersionMatchingExact(
+  command: Command,
+  versions: Version[]
+): boolean {
+  if (versions.includes(Version.Any)) {
+    return true;
+  }
+  const commandVersions = command.versions ?? [Version.Any];
+  if (commandVersions.includes(Version.Any)) {
+    return true;
+  }
+  return matchArrays(versions, commandVersions);
+}
+
+export function matchArrays<T>(
+  a1: T[] | undefined,
+  a2: T[] | undefined
+): boolean {
+  const arr1 = a1 ?? [];
+  const arr2 = a2 ?? [];
+  const len1 = arr1.length;
+  const len2 = arr2.length;
+
+  if (len1 !== len2) {
+    return false;
+  }
+  return difference(arr1, arr2).length === 0;
 }

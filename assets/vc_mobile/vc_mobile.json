@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1639296913928,
-    "version": "0.204",
+    "last_update": 1639304164557,
+    "version": "0.205",
     "url": "https://library.sannybuilder.com/#/vc_mobile"
   },
   "extensions": [
@@ -26267,6 +26267,63 @@
             "1.0"
           ],
           "short_desc": "calls function. If the function has parameters, you need to use the command 0DD3 to set the parameters of the function before using this command"
+        },
+        {
+          "input": [
+            {
+              "name": "regId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0DD3",
+          "name": "SET_REGISTER_VALUE",
+          "num_params": 2,
+          "class": "Memory",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Befores using 0DD2 to call the function, pass the function parameters by setting the value of the register R0-R3",
+          "member": "SetRegisterValue"
+        },
+        {
+          "input": [
+            {
+              "name": "regId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD4",
+          "name": "GET_REGISTER_VALUE",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetRegisterValue",
+          "versions": [
+            "1.0"
+          ],
+          "platforms": [
+            "mobile"
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Afters calling the function with 0DD2, get the return value of the function through the value of register R0/R1"
         },
         {
           "input": [

@@ -247,7 +247,7 @@ function getSupportInfo(
           game === v3
             ? command
             : getCommand(state[v3]?.extensions, name, command),
-          command,
+          command
         ),
       }));
       return m2;
@@ -265,10 +265,7 @@ function getCommand(
   return extension?.commands?.find((c) => c.id === command.id);
 }
 
-function getSupportLevel(
-  command: Command | undefined,
-  otherCommand: Command
-) {
+function getSupportLevel(command: Command | undefined, otherCommand: Command) {
   // no command with the same id
   if (!command) {
     return SupportLevel.DoesNotExist;
@@ -314,7 +311,19 @@ function getSupportLevel(
 export function commandMatcher(a: Command, b: Command) {
   return (
     a.id === b.id &&
-    difference(a.versions ?? [], b.versions ?? []).length === 0 &&
-    difference(a.platforms ?? [], b.platforms ?? []).length === 0
+    matchArrays(a.versions, b.versions) &&
+    matchArrays(a.platforms, b.platforms)
   );
+}
+
+function matchArrays<T>(a1: T[] | undefined, a2: T[] | undefined): boolean {
+  const arr1 = a1 ?? [];
+  const arr2 = a2 ?? [];
+  const len1 = arr1.length;
+  const len2 = arr2.length;
+
+  if (len1 !== len2) {
+    return false;
+  }
+  return difference(arr1, arr2).length === 0;
 }

@@ -1,5 +1,15 @@
 import Fuse from 'fuse.js';
-import { get, set, omit, cloneDeep, split, flatMap, sortBy } from 'lodash';
+import {
+  get,
+  set,
+  omit,
+  cloneDeep,
+  split,
+  flatMap,
+  sortBy,
+  uniqWith,
+  isEqual,
+} from 'lodash';
 import { Command } from '../models';
 import { commandParams, normalizeId } from './command';
 
@@ -135,7 +145,7 @@ function handleHighlight(result: any[], fusejsHighlightKey: string) {
     const item = cloneDeep(matchObject.item);
     item[fusejsHighlightKey] = omit(item, fusejsHighlightKey);
     for (const match of matchObject.matches) {
-      const indices: number[][] = match.indices;
+      const indices: number[][] = uniqWith(match.indices, isEqual);
 
       let highlightOffset = 0;
 

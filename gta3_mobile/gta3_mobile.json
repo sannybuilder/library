@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1639977456262,
-    "version": "0.215",
+    "last_update": 1639986547873,
+    "version": "0.216",
     "url": "https://library.sannybuilder.com/#/gta3_mobile"
   },
   "extensions": [
@@ -24405,7 +24405,8 @@
           "class": "Memory",
           "member": "CallFunction",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           },
           "platforms": [
             "mobile"
@@ -24712,7 +24713,7 @@
           "attrs": {
             "is_keyword": true
           },
-          "short_desc": "Sets the value of the global shared variable in CLEO, Var id can be any integer value. Please note that you cannot use a variable with ID 0 to save custom data, because all scripts that use the CLEO menu GUI use a shared global variable with ID 0, which represents the state of anything on the screen. If its value is 0, the script can be displayed and the CLEO menu GUI can be opened. If the value is 1, it is closed and the CLEO menu cannot be opened. ID 0 always represents the status value of the CLEO menu. You can use other ID values ​​to save data"
+          "short_desc": "Sets the value of the global shared variable in CLEO, Var id can be any integer value. Please note that you cannot use a variable with ID 0 to save custom data, because all scripts that use the CLEO menu GUI use a shared global variable with ID 0, which represents the state of anything on the screen. If its value is 0, the script can be displayed and the CLEO menu GUI can be opened. If the value is 1, it is closed and the CLEO menu cannot be opened. ID 0 always represents the status value of the CLEO menu. You can use other ID values to save data"
         },
         {
           "input": [
@@ -24741,6 +24742,47 @@
             "is_keyword": true
           },
           "short_desc": "Gets the value of the CLEO global shared variable. See 0DDC"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0DDE",
+          "name": "CALL_FUNCTION",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Calls a game function using specified address, if add_ib is set to 1 then adds an imagebase. Pairs of ['type', value] follow and indicate with which result type and params this function must be called. Specifying result is optional, just as specifing params if function has none"
         }
       ]
     }

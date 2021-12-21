@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1639986547873,
-    "version": "0.216",
+    "last_update": 1640070650060,
+    "version": "0.217",
     "url": "https://library.sannybuilder.com/#/gta3_mobile"
   },
   "extensions": [
@@ -24335,6 +24335,34 @@
         {
           "input": [
             {
+              "name": "pad",
+              "type": "Pad"
+            },
+            {
+              "name": "touchPoints",
+              "type": "TouchPoints"
+            }
+          ],
+          "id": "00E1",
+          "name": "IS_BUTTON_PRESSED",
+          "num_params": 2,
+          "class": "Hid",
+          "member": "IsButtonPressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Ifs the touch point of the screen has been pressed, it returns true. See 0DE0 and 0DE1"
+        },
+        {
+          "input": [
+            {
               "name": "",
               "type": "label"
             }
@@ -24783,6 +24811,82 @@
             "1.0"
           ],
           "short_desc": "Calls a game function using specified address, if add_ib is set to 1 then adds an imagebase. Pairs of ['type', value] follow and indicate with which result type and params this function must be called. Specifying result is optional, just as specifing params if function has none"
+        },
+        {
+          "input": [
+            {
+              "name": "touchPoints",
+              "type": "TouchPoints"
+            },
+            {
+              "name": "mintime",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DE0",
+          "name": "GET_TOUCH_POINT_STATE",
+          "num_params": 3,
+          "class": "Hid",
+          "member": "GetTouchPointState",
+          "short_desc": "Returns result of the requested touch action check, can be 0 or 1. On PSP always returns 0. Touch points is the CLEO Android engine implemented touch detection system which divides touchscreen into 9 parts called touch points, they can be used to detect timed touche, How long to touch an area at the minimum",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "touchPointsStart",
+              "type": "TouchPoints"
+            },
+            {
+              "name": "touchPointsEnd",
+              "type": "TouchPoints"
+            },
+            {
+              "name": "mintime",
+              "type": "int"
+            },
+            {
+              "name": "maxtime",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DE1",
+          "name": "GET_TOUCH_SLIDE_STATE",
+          "num_params": 5,
+          "class": "Hid",
+          "member": "GetTouchSlideState",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns the state of the Touch points area of ​​the swipe screen.  Swipe from one area to another, and set the sliding time range, See 0DE0"
         }
       ]
     }

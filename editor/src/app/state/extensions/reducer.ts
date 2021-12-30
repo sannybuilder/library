@@ -16,8 +16,8 @@ import {
   loadExtensionsSuccess,
   updateGameCommands,
 } from './actions';
-import { sortBy, last, orderBy, difference } from 'lodash';
-import { matchArrays } from '../../utils';
+import { sortBy, last, orderBy } from 'lodash';
+import { areTypesCompatible, matchArrays } from '../../utils';
 
 export interface GameState {
   extensions: Extension[];
@@ -301,8 +301,11 @@ function getSupportLevel(command: Command | undefined, otherCommand: Command) {
   if (p1 === p2 && p1 > 0 && !otherAttrs.is_nop && !otherAttrs.is_unsupported) {
     const types1 = command.input?.map((p) => p.type) ?? [];
     const types2 = otherCommand.input?.map((p) => p.type) ?? [];
-    if (difference(types1, types2).length) {
-      return SupportLevel.SupportedDiffParams;
+
+    for (let i = 0; i < p1; i += 1) {
+      if (!areTypesCompatible(types1[i], types2[i])) {
+        return SupportLevel.SupportedDiffParams;
+      }
     }
   }
 
@@ -316,4 +319,3 @@ function commandMatcher(a: Command, b: Command) {
     matchArrays(a.platforms, b.platforms)
   );
 }
-

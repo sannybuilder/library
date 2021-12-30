@@ -10,6 +10,7 @@ import {
   GamePlatforms,
   Version,
   GameVersions,
+  PrimitiveType,
 } from '../models';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
@@ -201,4 +202,60 @@ export function matchArrays<T>(
     return false;
   }
   return difference(arr1, arr2).length === 0;
+}
+
+function isPrimitive(type: string) {
+  return Object.values(PrimitiveType).includes(type as PrimitiveType);
+}
+
+function isInt(type: string) {
+  return [
+    PrimitiveType.int,
+    PrimitiveType.boolean,
+    PrimitiveType.int_script_id,
+    PrimitiveType.label,
+    PrimitiveType.model_any,
+    PrimitiveType.model_char,
+    PrimitiveType.model_object,
+    PrimitiveType.model_vehicle,
+  ].includes(type as PrimitiveType);
+}
+
+function isFloat(type: string) {
+  return type === PrimitiveType.float;
+}
+
+function isString(type: string) {
+  return [
+    PrimitiveType.gxt_key,
+    PrimitiveType.string,
+    PrimitiveType.string128,
+    PrimitiveType.zone_key,
+  ].includes(type as PrimitiveType);
+}
+
+export function areTypesCompatible(type1: string, type2: string) {
+  if (type1 === type2 || [type1, type2].includes(PrimitiveType.any)) {
+    return true;
+  }
+
+  const isInt1 = isInt(type1);
+  const isInt2 = isInt(type2);
+
+  if (isInt1 || isInt2) {
+    if ((isInt1 && isInt2) || !isPrimitive(type1) || !isPrimitive(type2)) {
+      return true;
+    }
+    return false;
+  }
+
+  if (isFloat(type1) && isFloat(type2)) {
+    return true;
+  }
+
+  if (isString(type1) && isString(type2)) {
+    return true;
+  }
+
+  return false;
 }

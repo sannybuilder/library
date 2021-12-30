@@ -35,7 +35,7 @@ export function stringifyTypeAndSource(p: Param) {
     .join(' ');
 }
 
-export function braceify(value: string, braces: '[]' | '()') {
+export function braceify(value: string, braces: '[]' | '()' | '{}') {
   return `${braces[0]}${value}${braces[1]}`;
 }
 

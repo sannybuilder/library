@@ -57,40 +57,69 @@
                 </li>
               </ol>
             </nav>
-            <button
-              *ngIf="canEdit$ | async"
-              class="btn btn-outline-secondary dropdown-toggle mb-3"
-              data-toggle="dropdown"
-              data-offset="0,0"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <svg
-                style="margin-top: -3px"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-plus"
-                viewBox="0 0 16 16"
+
+            <div>
+              <button
+                class="btn btn-outline-secondary dropdown-toggle mb-3"
+                data-toggle="dropdown"
+                data-offset="0,0"
+                aria-haspopup="true"
+                aria-expanded="false"
               >
-                <path
-                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                />
-              </svg>
-              {{ "ui.layout.new" | translate }}
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a
-                class="dropdown-item"
-                [routerLink]="['/', game, 'enums', 'new']"
-                >{{ "ui.layout.newEnum" | translate }}</a
+                Format
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div
+                  class="dropdown-item d-sm-inline-block d-xl-block pr-2"
+                  *ngFor="let s of ['Classes', 'Opcodes', 'JavaScript']"
+                >
+                  <label
+                    class="form-check-label"
+                    (click)="$event.stopPropagation()"
+                  >
+                    <input type="checkbox" />
+                    <span class="checkbox"></span>
+                    {{ s }}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                *ngIf="canEdit$ | async"
+                class="btn btn-outline-secondary dropdown-toggle mb-3 ml-2"
+                data-toggle="dropdown"
+                data-offset="0,0"
+                aria-haspopup="true"
+                aria-expanded="false"
               >
-              <a
-                class="dropdown-item"
-                [routerLink]="['/', game, DEFAULT_EXTENSION, 'new']"
-                >{{ "ui.layout.newCommand" | translate }}</a
-              >
+                <svg
+                  style="margin-top: -3px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-plus"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                  />
+                </svg>
+                {{ "ui.layout.new" | translate }}
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/', game, 'enums', 'new']"
+                  >{{ "ui.layout.newEnum" | translate }}</a
+                >
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/', game, DEFAULT_EXTENSION, 'new']"
+                  >{{ "ui.layout.newCommand" | translate }}</a
+                >
+              </div>
             </div>
           </div>
 

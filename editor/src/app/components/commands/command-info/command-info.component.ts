@@ -34,6 +34,8 @@ export class CommandInfoComponent {
   customPlatforms: Platform[] = [];
   customVersions: Version[] = [];
 
+  displayJsPresentation = true;
+
   @Input() set types(val: ParamType[]) {
     this._primitives = val
       .filter((v) => v.type === 'primitive')

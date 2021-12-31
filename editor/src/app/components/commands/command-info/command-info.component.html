@@ -218,6 +218,7 @@
       <span class="param-name">{{ param.name }}</span
       >:
       <a
+        *ngIf="isEnumParam(param) || isClassParam(param); else plainType"
         [routerLink]="[
           '/',
           game,
@@ -227,5 +228,7 @@
         >{{ param.type }}</a
       >
     </ng-template>
+
+    <ng-template #plainType>{{ param.type }}</ng-template>
   </ng-container>
 </ng-template>

@@ -30,6 +30,7 @@ export class CommandInfoComponent {
   private _attrs: Attribute[];
   private _primitives: string[] = [];
   private _enumNames: string[] = [];
+  private _classNames: string[] = [];
 
   customPlatforms: Platform[] = [];
   customVersions: Version[] = [];
@@ -40,6 +41,9 @@ export class CommandInfoComponent {
       .map((p) => p.name);
 
     this._enumNames = val.filter((v) => v.type === 'enum').map((p) => p.name);
+    this._classNames = val
+      .filter((v) => v.type === 'static' || v.type === 'dynamic')
+      .map((p) => p.name);
   }
 
   @Input() set command(val: Command) {
@@ -77,6 +81,10 @@ export class CommandInfoComponent {
 
   isEnumParam(param: Param) {
     return this._enumNames.includes(param.type);
+  }
+
+  isClassParam(param: Param) {
+    return this._classNames.includes(param.type);
   }
 
   interceptDescriptionClick(event: MouseEvent) {

@@ -52,6 +52,7 @@ import {
   doesCommandDescriptionHaveTrailingPeriod,
   doesCommandDescriptionNotStartWith3rdPersonVerb,
   doesConstructorNotReturnHandle,
+  doesVariadicCommandNotHaveArgumentsParameter,
 } from '../../../utils';
 
 type ErrorType =
@@ -65,7 +66,8 @@ type ErrorType =
   | 'missingSelfParamInMethod'
   | 'trailingPeriodInDescription'
   | 'no3rdPersonVerb'
-  | 'constructorNotReturningHandle';
+  | 'constructorNotReturningHandle'
+  | 'variadicNotHavingArguments';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -106,6 +108,7 @@ export class CommandEditorComponent implements OnInit {
     trailingPeriodInDescription: false,
     no3rdPersonVerb: false,
     constructorNotReturningHandle: false,
+    variadicNotHavingArguments: false,
   };
   errorMessages: string[] = [];
 
@@ -216,6 +219,7 @@ export class CommandEditorComponent implements OnInit {
     trailingPeriodInDescription: this.trailingPeriodInDescriptionError,
     no3rdPersonVerb: this.no3rdPersonVerbError,
     constructorNotReturningHandle: this.constructorNotReturningHandleError,
+    variadicNotHavingArguments: this.variadicNotHavingArgumentsError
   };
 
   isDirty: boolean;
@@ -680,6 +684,12 @@ export class CommandEditorComponent implements OnInit {
 
   private constructorNotReturningHandleError() {
     this.errors.constructorNotReturningHandle = doesConstructorNotReturnHandle(
+      this.command
+    );
+  }
+
+  private variadicNotHavingArgumentsError() {
+    this.errors.variadicNotHavingArguments = doesVariadicCommandNotHaveArgumentsParameter(
       this.command
     );
   }

@@ -1,5 +1,11 @@
 import { intersection } from 'lodash';
-import { Attribute, Command, Platform, Version } from '../models';
+import {
+  Attribute,
+  Command,
+  Platform,
+  PrimitiveType,
+  Version,
+} from '../models';
 import { commandParams } from './command';
 
 const SELF = 'self';
@@ -120,4 +126,11 @@ export function doesConstructorNotReturnHandle(command: Command) {
     command.output?.length === 1 && command.output[0].name === 'handle';
 
   return !!command.attrs?.is_constructor && !hasSingleParamHandle;
+}
+
+export function doesVariadicCommandNotHaveArgumentsParameter(command: Command) {
+  return (
+    !!command.attrs?.is_variadic &&
+    !commandParams(command).some((p) => p.type === PrimitiveType.arguments)
+  );
 }

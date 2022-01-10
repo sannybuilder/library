@@ -16,6 +16,7 @@ import {
   doesCommandDescriptionHaveTrailingPeriod,
   doesCommandDescriptionNotStartWith3rdPersonVerb,
   doesConstructorNotReturnHandle,
+  doesVariadicCommandNotHaveArgumentsParameter
 } from './src/app/utils';
 import { Command, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -40,6 +41,7 @@ const errorHandlers = {
   trailingPeriodInDescription: doesCommandDescriptionHaveTrailingPeriod,
   no3rdPersonVerb: doesCommandDescriptionNotStartWith3rdPersonVerb,
   constructorNotReturningHandle: doesConstructorNotReturnHandle,
+  variadicNotHavingArguments: doesVariadicCommandNotHaveArgumentsParameter
 };
 
 forEach(content.extensions, (extension) => {

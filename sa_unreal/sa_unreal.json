@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1641448415724,
-    "version": "0.208",
+    "last_update": 1641831790068,
+    "version": "0.209",
     "url": "https://library.sannybuilder.com/#/sa_unreal"
   },
   "extensions": [
@@ -47998,6 +47998,73 @@
           "short_desc": "Reads a value of the given size from the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true)",
           "attrs": {
             "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0C08",
+          "name": "CALL_FUNCTION",
+          "num_params": 4,
+          "short_desc": "Calls a function at the address with the given arguments",
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C09",
+          "name": "CALL_FUNCTION_RETURN",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallFunctionReturn",
+          "short_desc": "Calls a function and writes the result into the variable following the arguments list",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
           }
         }
       ]

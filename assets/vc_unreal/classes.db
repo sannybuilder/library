@@ -22,6 +22,7 @@ Heli
 Hud
 KillFrenzy
 Math
+Memory
 Object
 ObjectPath
 Pad
@@ -588,6 +589,14 @@ Sin,02F6,0,0,("angle%f" "result%f")
 Sqrt,01FB,0,0,("num%f" "result%f")
 $END
 
+$Memory
+$BEGIN
+CallFunction,0C08,0,0,("address%i" "ib%b" "numParams%i" "funcParams: arguments")
+CallFunctionReturn,0C09,0,0,("address%i" "ib%b" "numParams%i" "funcParams: arguments" "funcRet: any")
+Read,0C07,0,0,("address%i" "size%i" "vp%b" "ib%b" "value: any")
+Write,0C06,0,0,("address%i" "size%i" "value: any" "vp%b" "ib%b")
+$END
+
 $Object
 $BEGIN
 AddToVelocity,038C,0,0,("self: Object" "x%f" "y%f" "z%f")
@@ -640,6 +649,7 @@ GetControllerMode,0293,0,0,("mode: ControllerMode")
 GetPositionOfAnalogueSticks,0494,0,0,("pad: Pad" "leftStickX%i" "leftStickY%i" "rightStickX%i" "rightStickY%i")
 IsButtonPressed,00E1,1,0,("pad: Pad" "buttonId: Button")
 IsInCarFireButtonPressed,0585,1,0,()
+IsKeyPressed,0C00,1,0,("keyCode%i")
 SetDrunkInputDelay,03FD,0,0,("pad: Pad" "delay%i")
 $END
 

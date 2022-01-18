@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1642177360026,
-    "version": "0.203",
+    "last_update": 1642545355713,
+    "version": "0.204",
     "url": "https://library.sannybuilder.com/#/gta3_unreal"
   },
   "extensions": [
@@ -24379,6 +24379,190 @@
             "1.0"
           ],
           "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "int"
+            }
+          ],
+          "id": "0C00",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "id": "0C06",
+          "name": "WRITE_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Write",
+          "short_desc": "Writes a value of the given size at the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true) to modify read-only code",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C07",
+          "name": "READ_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Read",
+          "short_desc": "Reads a value of the given size from the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true)",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0C08",
+          "name": "CALL_FUNCTION",
+          "num_params": 4,
+          "short_desc": "Calls a function at the address with the given arguments",
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C09",
+          "name": "CALL_FUNCTION_RETURN",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallFunctionReturn",
+          "short_desc": "Calls a function and writes the result into the variable following the arguments list",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
         }
       ]
     }

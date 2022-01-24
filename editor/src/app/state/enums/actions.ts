@@ -31,6 +31,7 @@ export const renameGameEnum = createAction(
     game: Game;
     newEnumName: string;
     oldEnumName: string;
+    isAffected: boolean;
   }>()
 );
 

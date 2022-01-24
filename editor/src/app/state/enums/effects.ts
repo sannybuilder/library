@@ -81,6 +81,7 @@ export class EnumsEffects {
           game,
           newEnumName: enumToEdit.name,
           oldEnumName: oldEnumToEdit.name,
+          isAffected: false
         })
       )
     )

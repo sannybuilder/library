@@ -60,7 +60,15 @@ export const extensionsReducer = createReducer(
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(
-      (memo, { command: newCommand, newExtension: name, oldExtension }) => {
+      (
+        memo,
+        {
+          command: newCommand,
+          newExtension: name,
+          oldExtension,
+          ignoreVersionAndPlatform,
+        }
+      ) => {
         memo = upsertBy(
           memo,
           (extension) => extension.name === name,
@@ -69,7 +77,8 @@ export const extensionsReducer = createReducer(
             ...e,
             commands: upsertBy(
               e.commands,
-              (command) => commandMatcher(command, newCommand),
+              (command) =>
+                commandMatcher(command, newCommand, ignoreVersionAndPlatform),
               'id',
               () => (newCommand.id && newCommand.name ? newCommand : null),
               () => (newCommand.id && newCommand.name ? newCommand : null)
@@ -93,7 +102,8 @@ export const extensionsReducer = createReducer(
           (e) => {
             const commands = upsertBy(
               e.commands,
-              (command) => commandMatcher(command, newCommand),
+              (command) =>
+                commandMatcher(command, newCommand, ignoreVersionAndPlatform),
               'id'
             );
             if (!commands.length) {
@@ -240,7 +250,14 @@ function getEntities(
   }, {} as Record<string, Entity[]>);
 }
 
-function commandMatcher(a: Command, b: Command) {
+function commandMatcher(
+  a: Command,
+  b: Command,
+  ignoreVersionAndPlatform: boolean
+) {
+  if (ignoreVersionAndPlatform) {
+    return a.id === b.id;
+  }
   return (
     a.id === b.id &&
     matchArrays(a.versions, b.versions) &&

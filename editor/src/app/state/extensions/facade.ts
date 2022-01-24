@@ -68,7 +68,7 @@ export class ExtensionsFacade {
   }) {
     this.store$.dispatch(
       updateCommands({
-        batch: [{ command, newExtension, oldExtension }],
+        batch: [{ command, newExtension, oldExtension, ignoreVersionAndPlatform: false }],
       })
     );
   }

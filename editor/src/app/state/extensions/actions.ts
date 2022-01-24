@@ -5,6 +5,7 @@ export interface GameCommandUpdate {
   command: Command;
   newExtension: string;
   oldExtension: string;
+  ignoreVersionAndPlatform: boolean;
 }
 
 export const init = createAction('[extensions] init');

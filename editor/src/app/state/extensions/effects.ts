@@ -126,14 +126,16 @@ export class ExtensionsEffects {
                         command,
                         newExtension,
                         oldExtension,
+                        ignoreVersionAndPlatform: d.game !== game,
                       }));
                     } else {
-                      return {
+                      return [{
                         game,
                         command,
                         newExtension,
                         oldExtension,
-                      };
+                        ignoreVersionAndPlatform: false,
+                      }];
                     }
                   })
                 );
@@ -145,6 +147,7 @@ export class ExtensionsEffects {
                   command,
                   newExtension,
                   oldExtension,
+                  ignoreVersionAndPlatform: false,
                 },
               ]);
             }
@@ -198,7 +201,7 @@ export class ExtensionsEffects {
   renameEnum$ = createEffect(() =>
     this._actions$.pipe(
       ofType(renameGameEnum),
-      switchMap(({ game, oldEnumName, newEnumName }) =>
+      switchMap(({ game, oldEnumName, newEnumName, isAffected }) =>
         this._extensions.getGameExtensions(game).pipe(
           // take(1),
           switchMap((extensions) => {
@@ -224,6 +227,9 @@ export class ExtensionsEffects {
                   },
                 }))
             );
+            if (isAffected) {
+              return of({ affectedCommands, otherGames: [] });
+            }
             return zip(
               ...affectedCommands.map(({ extension, command }) => {
                 return this._extensions.getCommandSupportInfo(
@@ -254,6 +260,7 @@ export class ExtensionsEffects {
               game,
               batch: affectedCommands.map(({ extension, command }) => ({
                 command,
+                ignoreVersionAndPlatform: isAffected,
                 oldExtension: extension,
                 newExtension: extension,
               })),
@@ -263,6 +270,7 @@ export class ExtensionsEffects {
                 game: otherGame,
                 newEnumName,
                 oldEnumName,
+                isAffected: true,
               })
             ),
           ])
@@ -316,6 +324,7 @@ export class ExtensionsEffects {
               },
               newExtension: extension,
               oldExtension: extension,
+              ignoreVersionAndPlatform: false,
             },
           ],
         }),

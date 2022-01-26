@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Game, GameLibrary, LoadExtensionsResponse, SupportInfo } from '../../models';
+import {
+  Game,
+  GameLibrary,
+  LoadExtensionsResponse,
+  SupportInfo,
+} from '../../models';
 import { GitHubService } from '../github/service';
 
 @Injectable({ providedIn: 'root' })
@@ -15,10 +20,9 @@ export class ExtensionsService {
     );
   }
 
-  loadSupportInfo(accessToken?: string) {
-    return this._github.loadFileGracefully<Record<Game, SupportInfo>>(
-      'support-info.json',
-      accessToken,
+  loadSupportInfo() {
+    return this._github.loadFileFromAssets<Record<Game, SupportInfo>>(
+      'support-info.json'
     );
   }
 }

@@ -23,7 +23,7 @@ export class GitHubService {
   loadFileGracefully<T extends object>(
     fileName: string,
     accessToken: string | undefined,
-    game?: Game
+    game: Game
   ): Observable<T> {
     return this._http
       .get<T>(Location.joinWithSlash(this._config.endpoints.base, fileName))
@@ -35,7 +35,7 @@ export class GitHubService {
   loadFileFromApi<T extends object>(
     fileName: string,
     accessToken: string | undefined,
-    game?: Game
+    game: Game
   ): Observable<T> {
     const ts = Date.now().toString();
     const headers = accessToken
@@ -46,9 +46,7 @@ export class GitHubService {
       : undefined;
     return this._http
       .get<GetRepoContentResponseDataDirectory>(
-        game
-          ? Location.joinWithSlash(this._config.endpoints.contents, game)
-          : this._config.endpoints.contents,
+        Location.joinWithSlash(this._config.endpoints.contents, game),
         {
           headers,
         }
@@ -65,11 +63,14 @@ export class GitHubService {
             })
             .pipe(map((blob) => JSON.parse(atob(blob.content)) as T));
         }),
-        catchError(() =>
-          this._http.get<T>(Location.joinWithSlash('/assets', fileName), {
-            params: { ts },
-          })
-        )
+        catchError(() => this.loadFileFromAssets<T>(fileName))
       );
+  }
+
+  loadFileFromAssets<T extends object>(fileName: string) {
+    const ts = Date.now().toString();
+    return this._http.get<T>(Location.joinWithSlash('/assets', fileName), {
+      params: { ts },
+    });
   }
 }

@@ -21,6 +21,7 @@ import {
   initSupportInfo,
   loadExtensions,
   loadExtensionsSuccess,
+  loadSupportInfo,
   updateCommands,
   updateGameCommands,
 } from './actions';
@@ -285,16 +286,11 @@ export class ExtensionsEffects {
     { dispatch: false }
   );
 
-  // wait for all files to load then update support info after each game change
-  initSupportInfo$ = createEffect(() =>
+  loadSupportInfo$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(loadExtensionsSuccess),
-      withLatestFrom(this._extensions.hasAnyLoadingInProgress$),
-      filter(([_, hasAnyLoadingInProgress]) => !hasAnyLoadingInProgress),
-      switchMap(() => this._game.game$),
-      withLatestFrom(this._extensions.supportInfo$),
-      filter(([_, supportInfo]) => !supportInfo),
-      map(([game]) => initSupportInfo({ game }))
+      ofType(init),
+      switchMap(() => this._service.loadSupportInfo()),
+      map((data) => loadSupportInfo({ data }))
     )
   );
 

@@ -24,10 +24,6 @@ export class ExtensionsFacade {
   version$ = this.store$.select(selector.version);
   supportInfo$ = this.store$.select(selector.supportInfo);
 
-  hasAnyLoadingInProgress$ = this.store$.select(
-    selector.hasAnyLoadingInProgress
-  );
-
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });
   }

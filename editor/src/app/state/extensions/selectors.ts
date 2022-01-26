@@ -121,11 +121,6 @@ export const commandRelated = createSelector(
   }
 );
 
-export const hasAnyLoadingInProgress = createSelector(
-  extensionsState,
-  (state: ExtensionsState) => Object.values(state.games).some((s) => s?.loading)
-);
-
 export const gameVersion = createSelector(
   extensionsState,
   (state: ExtensionsState, props: { game: Game }) =>

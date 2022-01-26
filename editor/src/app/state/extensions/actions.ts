@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ClassMeta, Command, Extension, Game } from '../../models';
+import { ClassMeta, Command, Extension, Game, SupportInfo } from '../../models';
 
 export interface GameCommandUpdate {
   command: Command;
@@ -52,4 +52,10 @@ export const cloneCommand = createAction(
 export const initSupportInfo = createAction(
   '[extensions] init support info',
   props<{ game: Game }>()
+);
+
+
+export const loadSupportInfo = createAction(
+  '[extensions] load support info',
+  props<{ data: Record<Game, SupportInfo> }>()
 );

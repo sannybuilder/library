@@ -10,7 +10,8 @@ import type { components } from '@octokit/openapi-types';
 import { Observable } from 'rxjs';
 
 export type GetRepoContentResponseDataBlob = components['schemas']['blob'];
-export type GetRepoContentResponseDataDirectory = components['schemas']['content-directory'];
+export type GetRepoContentResponseDataDirectory =
+  components['schemas']['content-directory'];
 
 @Injectable({ providedIn: 'root' })
 export class GitHubService {
@@ -22,7 +23,7 @@ export class GitHubService {
   loadFileGracefully<T extends object>(
     fileName: string,
     accessToken: string | undefined,
-    game: Game
+    game?: Game
   ): Observable<T> {
     return this._http
       .get<T>(Location.joinWithSlash(this._config.endpoints.base, fileName))
@@ -34,7 +35,7 @@ export class GitHubService {
   loadFileFromApi<T extends object>(
     fileName: string,
     accessToken: string | undefined,
-    game: Game
+    game?: Game
   ): Observable<T> {
     const ts = Date.now().toString();
     const headers = accessToken
@@ -45,7 +46,9 @@ export class GitHubService {
       : undefined;
     return this._http
       .get<GetRepoContentResponseDataDirectory>(
-        Location.joinWithSlash(this._config.endpoints.contents, game),
+        game
+          ? Location.joinWithSlash(this._config.endpoints.contents, game)
+          : this._config.endpoints.contents,
         {
           headers,
         }

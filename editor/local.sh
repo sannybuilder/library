@@ -10,6 +10,8 @@ mkdir -p ../editor/src/assets/gta3_unreal
 mkdir -p ../editor/src/assets/vc_unreal
 mkdir -p ../editor/src/assets/sa_unreal
 
+npm run generate:support-info src/assets/support-info.json
+
 cd ../gta3
 cp *.json ../editor/src/assets/gta3
 cd ../vc

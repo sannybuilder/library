@@ -77,17 +77,6 @@ export class ExtensionsFacade {
     this.store$.dispatch(init());
   }
 
-  loadExtensions(game: Game) {
-    this.getGameExtensions(game)
-      .pipe(
-        take(1),
-        filter((x) => !x.length),
-        tap(() => {
-          this.store$.dispatch(loadExtensions({ game }));
-        })
-      )
-      .subscribe();
-  }
 
   cloneCommand({
     command,

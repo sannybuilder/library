@@ -11,6 +11,7 @@ import {
   take,
   filter,
   distinctUntilChanged,
+  first,
 } from 'rxjs/operators';
 import { flatMap, groupBy, flatten } from 'lodash';
 
@@ -51,11 +52,14 @@ import { Action } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
-  init$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(init),
-      withLatestFrom(this._game.game$),
-      map(([_, game]) => loadExtensions({ game }))
+  extensions$ = createEffect(() =>
+    this._game.game$.pipe(
+      switchMap((game) =>
+        this._extensions.getGameExtensions(game).pipe(
+          first((e) => !e.length),
+          map(() => loadExtensions({ game }))
+        )
+      )
     )
   );
 

@@ -4,6 +4,7 @@ import {
   concatMap,
   distinctUntilChanged,
   filter,
+  first,
   map,
   switchMap,
   tap,
@@ -24,10 +25,22 @@ import { ChangesFacade } from '../changes/facade';
 import { EnumsFacade } from './facade';
 import { GameEnums } from '../../models';
 import { AuthFacade } from '../auth/facade';
+import { ExtensionsFacade } from '../extensions/facade';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class EnumsEffects {
+  enums$ = createEffect(() =>
+    this._game.game$.pipe(
+      switchMap((game) =>
+        this._extensions.getGameExtensions(game).pipe(
+          first((e) => !e.length),
+          map(() => loadEnums({ game }))
+        )
+      )
+    )
+  );
+
   loadEnums$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnums),
@@ -111,6 +124,7 @@ export class EnumsEffects {
     private _service: EnumsService,
     private _changes: ChangesFacade,
     private _enums: EnumsFacade,
+    private _extensions: ExtensionsFacade,
     private _auth: AuthFacade,
     private _router: Router
   ) {}

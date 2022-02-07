@@ -111,4 +111,16 @@ export class ExtensionsFacade {
   initSupportInfo(game: Game) {
     this.store$.dispatch(initSupportInfo({ game }));
   }
+
+  loadExtensions(game: Game) {
+    this.getGameExtensions(game)
+      .pipe(
+        take(1),
+        filter((x) => !x.length),
+        tap(() => {
+          this.store$.dispatch(loadExtensions({ game }));
+        })
+      )
+      .subscribe();
+  }
 }

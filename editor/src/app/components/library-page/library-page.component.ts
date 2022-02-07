@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
-import { takeUntil, map, switchMap } from 'rxjs/operators';
+import { takeUntil, map, switchMap, filter, take } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 
 import {
@@ -123,6 +123,15 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.detectScreenSize();
     this._ui.toggleCommandListElements(true);
 
+    this.canEdit$.pipe(take(1), filter(Boolean)).subscribe(() => {
+      Object.values(Game).forEach((game) => {
+        this._extensions.loadExtensions(game);
+      });
+
+      Object.values(Game).forEach((game) => {
+        this._enums.loadEnums(game);
+      });
+    });
 
     getBaseGames().forEach((game) => {
       this._snippets.loadSnippets(game);

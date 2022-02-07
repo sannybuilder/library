@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1642177359873,
-    "version": "0.205",
+    "last_update": 1644272683267,
+    "version": "0.206",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -48968,27 +48968,28 @@
         {
           "input": [
             {
-              "name": "filePathName",
+              "name": "searchMask",
               "type": "string"
             },
             {
               "name": "fileName",
-              "type": "string"
+              "type": "string",
+              "source": "var_any"
             }
           ],
           "output": [
             {
               "name": "handle",
-              "type": "File",
+              "type": "FindFile",
               "source": "var_any"
             }
           ],
           "id": "0AE6",
           "name": "FIND_FIRST_FILE",
           "num_params": 3,
-          "short_desc": "",
-          "class": "File",
-          "member": "FindFirst",
+          "short_desc": "Searches a directory for a file or subdirectory with a name that matches a specific name (or partial name if wildcards are used)",
+          "class": "FindFile",
+          "member": "First",
           "attrs": {
             "is_constructor": true,
             "is_condition": true
@@ -49004,7 +49005,7 @@
           "input": [
             {
               "name": "self",
-              "type": "File"
+              "type": "FindFile"
             }
           ],
           "output": [
@@ -49017,9 +49018,9 @@
           "id": "0AE7",
           "name": "FIND_NEXT_FILE",
           "num_params": 2,
-          "short_desc": "",
-          "class": "File",
-          "member": "FindNext",
+          "short_desc": "Continues a file search from a previous call to 0AE6",
+          "class": "FindFile",
+          "member": "Next",
           "attrs": {
             "is_condition": true
           },
@@ -49034,15 +49035,15 @@
           "input": [
             {
               "name": "self",
-              "type": "File"
+              "type": "FindFile"
             }
           ],
           "id": "0AE8",
           "name": "FIND_CLOSE",
           "num_params": 1,
-          "short_desc": "",
-          "class": "File",
-          "member": "FindClose",
+          "short_desc": "Closes a file search handle opened by 0AE6",
+          "class": "FindFile",
+          "member": "Close",
           "platforms": [
             "pc"
           ],

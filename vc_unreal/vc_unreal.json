@@ -1,10 +1,227 @@
 {
   "meta": {
-    "last_update": 1642971682573,
-    "version": "0.207",
+    "last_update": 1644678204499,
+    "version": "0.208",
     "url": "https://library.sannybuilder.com/#/vc_unreal"
   },
   "extensions": [
+    {
+      "name": "CLEO",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "touch",
+              "type": "Pad"
+            },
+            {
+              "name": "touchPoints",
+              "type": "TouchPoints"
+            }
+          ],
+          "id": "00E1",
+          "name": "IS_BUTTON_PRESSED",
+          "num_params": 2,
+          "class": "Hid",
+          "member": "IsButtonPressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "int"
+            }
+          ],
+          "id": "0C00",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "id": "0C06",
+          "name": "WRITE_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Write",
+          "short_desc": "Writes a value of the given size at the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true) to modify read-only code",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C07",
+          "name": "READ_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Read",
+          "short_desc": "Reads a value of the given size from the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true)",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0C08",
+          "name": "CALL_FUNCTION",
+          "num_params": 4,
+          "short_desc": "Calls a function at the address with the given arguments",
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C09",
+          "name": "CALL_FUNCTION_RETURN",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallFunctionReturn",
+          "short_desc": "Calls a function and writes the result into the variable following the arguments list",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        }
+      ]
+    },
     {
       "name": "default",
       "commands": [
@@ -26183,169 +26400,38 @@
       ]
     },
     {
-      "name": "CLEO",
+      "name": "ini",
       "commands": [
         {
           "input": [
             {
-              "name": "touch",
-              "type": "Pad"
+              "name": "path",
+              "type": "string"
             },
             {
-              "name": "touchPoints",
-              "type": "TouchPoints"
-            }
-          ],
-          "id": "00E1",
-          "name": "IS_BUTTON_PRESSED",
-          "num_params": 2,
-          "class": "Hid",
-          "member": "IsButtonPressed",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
-        },
-        {
-          "input": [
-            {
-              "name": "keyCode",
-              "type": "int"
-            }
-          ],
-          "id": "0C00",
-          "name": "IS_KEY_PRESSED",
-          "num_params": 1,
-          "class": "Pad",
-          "member": "IsKeyPressed",
-          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
+              "name": "section",
+              "type": "string"
             },
             {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            },
-            {
-              "name": "vp",
-              "type": "bool"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            }
-          ],
-          "id": "0C06",
-          "name": "WRITE_MEMORY",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "Write",
-          "short_desc": "Writes a value of the given size at the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true) to modify read-only code",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "vp",
-              "type": "bool"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
+              "name": "key",
+              "type": "string"
             }
           ],
           "output": [
             {
               "name": "value",
-              "type": "any",
+              "type": "int",
               "source": "var_any"
             }
           ],
-          "id": "0C07",
-          "name": "READ_MEMORY",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "Read",
-          "short_desc": "Reads a value of the given size from the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true)",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "funcParams",
-              "type": "arguments"
-            }
-          ],
-          "id": "0C08",
-          "name": "CALL_FUNCTION",
+          "id": "0AF0",
+          "name": "READ_INT_FROM_INI_FILE",
           "num_params": 4,
-          "short_desc": "Calls a function at the address with the given arguments",
-          "class": "Memory",
-          "member": "CallFunction",
+          "class": "IniFile",
+          "member": "ReadInt",
+          "short_desc": "Reads an integer value from the ini file",
           "attrs": {
-            "is_static": true,
-            "is_variadic": true
+            "is_static": true
           },
           "platforms": [
             "pc"
@@ -26357,39 +26443,177 @@
         {
           "input": [
             {
-              "name": "address",
+              "name": "value",
               "type": "int"
             },
             {
-              "name": "ib",
-              "type": "bool"
+              "name": "path",
+              "type": "string"
             },
             {
-              "name": "numParams",
-              "type": "int"
+              "name": "section",
+              "type": "string"
             },
             {
-              "name": "funcParams",
-              "type": "arguments"
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF1",
+          "name": "WRITE_INT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteInt",
+          "short_desc": "Writes the integer value to the ini file",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
             }
           ],
           "output": [
             {
-              "name": "funcRet",
-              "type": "any",
+              "name": "value",
+              "type": "float",
               "source": "var_any"
             }
           ],
-          "id": "0C09",
-          "name": "CALL_FUNCTION_RETURN",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "CallFunctionReturn",
-          "short_desc": "Calls a function and writes the result into the variable following the arguments list",
+          "id": "0AF2",
+          "name": "READ_FLOAT_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadFloat",
+          "short_desc": "Reads a floating-point value from the ini file",
           "attrs": {
-            "is_static": true,
-            "is_variadic": true
+            "is_static": true
           },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "float"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF3",
+          "name": "WRITE_FLOAT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteFloat",
+          "short_desc": "Writes the floating-point value to the ini file",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF4",
+          "name": "READ_STRING_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadString",
+          "short_desc": "Reads a string value from the ini file",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "string"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF5",
+          "name": "WRITE_STRING_TO_INI_FILE",
+          "num_params": 4,
+          "short_desc": "Writes the string value to the ini file",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "IniFile",
+          "member": "WriteString",
           "platforms": [
             "pc"
           ],

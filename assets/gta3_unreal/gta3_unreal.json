@@ -1,7 +1,7 @@
 {
   "meta": {
     "last_update": 1644789227186,
-    "version": "0.207",
+    "version": "0.208",
     "url": "https://library.sannybuilder.com/#/gta3_unreal"
   },
   "extensions": [
@@ -24789,7 +24789,82 @@
           ]
         }
       ]
-    }
+    },
+    {
+      "name": "dylib",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "libraryFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA2",
+          "name": "LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "id": "0AA3",
+          "name": "FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "Free",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA4",
+          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "DynamicLibrary",
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
+          }
+        }
+      ]
+    }    
   ],
   "classes": [
     {

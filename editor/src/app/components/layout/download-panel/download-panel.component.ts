@@ -4,6 +4,7 @@ import {
   GameEnumsAssets,
   GameKeywordsAssets,
   Game,
+  GameEnumsJsAssets,
 } from '../../../models';
 
 @Component({
@@ -25,5 +26,9 @@ export class DownloadPanelComponent {
 
   getKeywords(game: Game) {
     return GameKeywordsAssets[game];
+  }
+
+  getEnumsJs(game: Game) {
+    return GameEnumsJsAssets[game];
   }
 }

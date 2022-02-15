@@ -208,6 +208,18 @@ export const GameEnums: Record<Game, string> = {
   [Game.sa_unreal]: 'sa_unreal/enums.json',
 };
 
+export const GameEnumsJsAssets: Record<Game, string> = {
+  [Game.GTA3]: 'assets/gta3/enums.js',
+  [Game.VC]: 'assets/vc/enums.js',
+  [Game.SA]: 'assets/sa/enums.js',
+  [Game.gta3_mobile]: 'assets/gta3_mobile/enums.js',
+  [Game.vc_mobile]: 'assets/vc_mobile/enums.js',
+  [Game.sa_mobile]: 'assets/sa_mobile/enums.js',
+  [Game.gta3_unreal]: 'assets/gta3_unreal/enums.js',
+  [Game.vc_unreal]: 'assets/vc_unreal/enums.js',
+  [Game.sa_unreal]: 'assets/sa_unreal/enums.js',
+};
+
 export const GameTitle: Record<Game, string> = {
   [Game.GTA3]: 'GTA III (Classic)',
   [Game.VC]: 'Vice City (Classic)',

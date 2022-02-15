@@ -12,6 +12,18 @@ mkdir -p ../editor/src/assets/sa_unreal
 
 npm run generate:support-info src/assets/support-info.json
 
+npm run generate:enums ../gta3/enums.json src/assets/gta3/enums.js
+npm run generate:enums ../vc/enums.json src/assets/vc/enums.js
+npm run generate:enums ../sa/enums.json src/assets/sa/enums.js
+
+npm run generate:enums ../gta3_mobile/enums.json src/assets/gta3_mobile/enums.js
+npm run generate:enums ../vc_mobile/enums.json src/assets/vc_mobile/enums.js
+npm run generate:enums ../sa_mobile/enums.json src/assets/sa_mobile/enums.js
+
+npm run generate:enums ../gta3_unreal/enums.json src/assets/gta3_unreal/enums.js
+npm run generate:enums ../vc_unreal/enums.json src/assets/vc_unreal/enums.js
+npm run generate:enums ../sa_unreal/enums.json src/assets/sa_unreal/enums.js
+
 cd ../gta3
 cp *.json ../editor/src/assets/gta3
 cd ../vc

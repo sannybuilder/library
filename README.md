@@ -1,5 +1,7 @@
 # Sanny Builder Library
 
+[![Discord](https://img.shields.io/discord/911487285990674473?style=for-the-badge)](https://discord.gg/d5dZSfgBZr)
+
 An attempt to build a complete and consistent class system and commands documentation spanning GTA 3D series games. Heavily based on original naming conventions.
 
 Available online at https://library.sannybuilder.com/

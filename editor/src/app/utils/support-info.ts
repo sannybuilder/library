@@ -49,7 +49,7 @@ function getSupportLevel(command: Command | undefined, otherCommand: Command) {
 
   // same ids, but different names (e.g. 03E2)
   if (command.name !== otherCommand.name) {
-    return SupportLevel.SupportedDiffParams;
+    return SupportLevel.Unsupported;
   }
 
   if (

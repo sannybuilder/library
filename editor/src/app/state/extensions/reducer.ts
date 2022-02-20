@@ -80,7 +80,16 @@ export const extensionsReducer = createReducer(
               (command) =>
                 commandMatcher(command, newCommand, ignoreVersionAndPlatform),
               'id',
-              () => (newCommand.id && newCommand.name ? newCommand : null),
+              (c) =>
+                newCommand.id && newCommand.name
+                  ? ignoreVersionAndPlatform
+                    ? {
+                        ...newCommand,
+                        platforms: c.platforms,
+                        versions: c.versions,
+                      }
+                    : newCommand
+                  : null,
               () => (newCommand.id && newCommand.name ? newCommand : null)
             ),
           }),

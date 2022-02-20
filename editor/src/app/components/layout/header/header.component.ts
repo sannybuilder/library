@@ -3,7 +3,12 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
-import { debounceTime, filter, map } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+} from 'rxjs/operators';
 import { getBaseGame, getBaseGames, isValidGame } from '../../../utils';
 import { Config, CONFIG } from '../../../config';
 import { KNOWN_LANGUAGES } from '../../../models';
@@ -49,9 +54,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.searchDebounced$.pipe(debounceTime(300)).subscribe((value) => {
-      this._ui.updateSearch(value);
-    });
+    this.searchDebounced$
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((value) => {
+        this._ui.updateSearch(value);
+      });
   }
 
   ngOnDestroy() {

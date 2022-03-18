@@ -2,11 +2,12 @@ import { intersection } from 'lodash';
 import {
   Attribute,
   Command,
+  Param,
   Platform,
   PrimitiveType,
   Version,
 } from '../models';
-import { commandParams } from './command';
+import { commandParams, inputParams, outputParams } from './command';
 
 const SELF = 'self';
 
@@ -61,9 +62,10 @@ export function doesCommandHaveDuplicateName(
 }
 
 export function isCommandParamNameDuplicate(command: Command, name: string) {
+  const f = (p: Param) => p.name === name;
+  const hasDups = (items: Param[]) => items.filter(f).length > 1;
   return (
-    !!name &&
-    commandParams(command).filter((param) => param.name === name).length > 1
+    !!name && (hasDups(inputParams(command)) || hasDups(outputParams(command)))
   );
 }
 

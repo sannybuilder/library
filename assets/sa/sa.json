@@ -1,10 +1,3393 @@
 {
   "meta": {
-    "last_update": 1647634045471,
-    "version": "0.215",
+    "last_update": 1647722013444,
+    "version": "0.216",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
+    {
+      "name": "CLEO",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "touch",
+              "type": "Pad"
+            },
+            {
+              "name": "touchPoints",
+              "type": "TouchPoints"
+            }
+          ],
+          "id": "00E1",
+          "name": "IS_BUTTON_PRESSED",
+          "num_params": 2,
+          "class": "Hid",
+          "member": "IsButtonPressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "id": "0A8C",
+          "name": "WRITE_MEMORY",
+          "num_params": 4,
+          "short_desc": "Writes a value to the game memory",
+          "class": "Memory",
+          "member": "Write",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A8D",
+          "name": "READ_MEMORY",
+          "num_params": 4,
+          "short_desc": "Reads a value from the game memory",
+          "class": "Memory",
+          "member": "Read",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A8E",
+          "name": "INT_ADD",
+          "num_params": 3,
+          "short_desc": "Adds together two integer values and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A8F",
+          "name": "INT_SUB",
+          "num_params": 3,
+          "short_desc": "Subtracts the integer value from another integer value and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A90",
+          "name": "INT_MUL",
+          "num_params": 3,
+          "short_desc": "Multiplies two integer values and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A91",
+          "name": "INT_DIV",
+          "num_params": 3,
+          "short_desc": "Divides the integer value by another integer value and writes the result into the variable",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0A92",
+          "name": "STREAM_CUSTOM_SCRIPT",
+          "num_params": 2,
+          "short_desc": "Loads a file with compiled SCM instructions at the given path and runs a new custom script",
+          "attrs": {
+            "is_keyword": true,
+            "is_variadic": true,
+            "is_branch": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "id": "0A93",
+          "name": "TERMINATE_THIS_CUSTOM_SCRIPT",
+          "num_params": 0,
+          "short_desc": "Ends the current custom script, preventing further execution",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0A94",
+          "name": "LOAD_AND_LAUNCH_CUSTOM_MISSION",
+          "num_params": 2,
+          "short_desc": "",
+          "attrs": {
+            "is_keyword": true,
+            "is_variadic": true,
+            "is_branch": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "id": "0A95",
+          "name": "SAVE_THIS_CUSTOM_SCRIPT",
+          "num_params": 0,
+          "short_desc": "Prevents the script from restart when the save file is loaded",
+          "attrs": {
+            "is_keyword": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A96",
+          "name": "GET_PED_POINTER",
+          "num_params": 2,
+          "short_desc": "Gets the address of the ped struct in the game memory by its handle",
+          "class": "Memory",
+          "member": "GetPedPointer",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A97",
+          "name": "GET_VEHICLE_POINTER",
+          "num_params": 2,
+          "short_desc": "Gets the address of the vehicle struct in the game memory by its handle",
+          "class": "Memory",
+          "member": "GetVehiclePointer",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "object",
+              "type": "Object"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A98",
+          "name": "GET_OBJECT_POINTER",
+          "num_params": 2,
+          "short_desc": "Gets the address of the object struct in the game memory by its handle",
+          "class": "Memory",
+          "member": "GetObjectPointer",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "any"
+            }
+          ],
+          "id": "0A99",
+          "name": "SET_CURRENT_DIRECTORY",
+          "num_params": 1,
+          "short_desc": "Sets the current working directory (cwd) to a predefined location with a value of 0 or 1, or to an arbitrary path with a string value",
+          "class": "Fs",
+          "member": "SetCurrentDirectory",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "filePathName",
+              "type": "string"
+            },
+            {
+              "name": "mode",
+              "type": "FileMode"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "File",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9A",
+          "name": "OPEN_FILE",
+          "num_params": 3,
+          "short_desc": "Opens the file in the specified mode, sets the condition result to True if the open operation has been successful, or to False otherwise, and writes the file handle to the variable",
+          "class": "File",
+          "member": "Open",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "id": "0A9B",
+          "name": "CLOSE_FILE",
+          "num_params": 1,
+          "short_desc": "Closes the file and frees the memory",
+          "class": "File",
+          "member": "Close",
+          "attrs": {
+            "is_destructor": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "output": [
+            {
+              "name": "size",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9C",
+          "name": "GET_FILE_SIZE",
+          "num_params": 2,
+          "short_desc": "Gets the file size in bytes",
+          "class": "File",
+          "member": "GetSize",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "destination",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9D",
+          "name": "READ_FROM_FILE",
+          "num_params": 3,
+          "short_desc": "Reads the specified number of bytes from the opened file and writes them to the memory region starting from the address of the destination variable",
+          "class": "File",
+          "member": "Read",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "source",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9E",
+          "name": "WRITE_TO_FILE",
+          "num_params": 3,
+          "short_desc": "Copies the specified number of bytes of the memory region starting from the address of the source variable to the file",
+          "class": "File",
+          "member": "Write",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9F",
+          "name": "GET_THIS_SCRIPT_STRUCT",
+          "num_params": 1,
+          "short_desc": "Gets the address of the current script structure in the game memory",
+          "class": "Memory",
+          "member": "GetThisScriptStruct",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            }
+          ],
+          "id": "0AA0",
+          "name": "GOSUB_IF_FALSE",
+          "num_params": 1,
+          "short_desc": "Transfers the script execution to the label as a subroutine if the result of the condition is false",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "id": "0AA1",
+          "name": "RETURN_IF_FALSE",
+          "num_params": 0,
+          "short_desc": "Returns from the current subroutine if the result of the condition is false",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "libraryFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA2",
+          "name": "LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "short_desc": "Loads the specified module (usually a dynamic-link library (DLL)) into the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "id": "0AA3",
+          "name": "FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "short_desc": "Frees the loaded dynamic-link library (DLL) module and unloads it from the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Free",
+          "attrs": {
+            "is_destructor": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA4",
+          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "short_desc": "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL)",
+          "class": "DynamicLibrary",
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AA5",
+          "name": "CALL_FUNCTION",
+          "num_params": 4,
+          "short_desc": "Calls a function at the address with the given arguments and the calling convention defined by the pop parameter where 0 means 'stdcall' and a value equal to numParams means  'cdecl'",
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "struct",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AA6",
+          "name": "CALL_METHOD",
+          "num_params": 5,
+          "short_desc": "Calls a method of the object (struct) with the given arguments and the 'thiscall' calling convention (pop is always 0)",
+          "class": "Memory",
+          "member": "CallMethod",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA7",
+          "name": "CALL_FUNCTION_RETURN",
+          "num_params": 5,
+          "short_desc": "Calls a function similarly to 0AA5 and writes the result into the variable following the arguments list",
+          "class": "Memory",
+          "member": "CallFunctionReturn",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "struct",
+              "type": "int"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "pop",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA8",
+          "name": "CALL_METHOD_RETURN",
+          "num_params": 6,
+          "short_desc": "Calls a method of the object (struct) similarly to 0AA6 and writes the result into the variable following the arguments list",
+          "class": "Memory",
+          "member": "CallMethodReturn",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "id": "0AA9",
+          "name": "IS_GAME_VERSION_ORIGINAL",
+          "num_params": 0,
+          "short_desc": "Returns true if the game version is vanilla 1.0",
+          "class": "Game",
+          "member": "IsVersionOriginal",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "scriptName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AAA",
+          "name": "GET_SCRIPT_STRUCT_NAMED",
+          "num_params": 2,
+          "short_desc": "Gets the address of a running script which name matches the given string or 0 otherwise",
+          "class": "Memory",
+          "member": "GetScriptStructNamed",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            }
+          ],
+          "id": "0AAB",
+          "name": "DOES_FILE_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if a file at the given path exists",
+          "class": "Fs",
+          "member": "DoesFileExist",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "audioFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "AudioStream",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AAC",
+          "name": "LOAD_AUDIO_STREAM",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "state",
+              "type": "AudioStreamState"
+            }
+          ],
+          "id": "0AAD",
+          "name": "SET_AUDIO_STREAM_STATE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream",
+          "member": "SetState",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "id": "0AAE",
+          "name": "REMOVE_AUDIO_STREAM",
+          "num_params": 1,
+          "short_desc": "",
+          "attrs": {
+            "is_destructor": true
+          },
+          "class": "AudioStream",
+          "member": "Remove",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "length",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AAF",
+          "name": "GET_AUDIO_STREAM_LENGTH",
+          "num_params": 2,
+          "short_desc": "Gets the audio stream length in seconds",
+          "class": "AudioStream",
+          "member": "GetLength",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "id": "0AB0",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "params",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AB1",
+          "name": "CLEO_CALL",
+          "num_params": 3,
+          "short_desc": "",
+          "attrs": {
+            "is_keyword": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "numRet",
+              "type": "int"
+            },
+            {
+              "name": "retParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AB2",
+          "name": "CLEO_RETURN",
+          "num_params": 2,
+          "short_desc": "",
+          "attrs": {
+            "is_keyword": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "varId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0AB3",
+          "name": "SET_CLEO_SHARED_VAR",
+          "num_params": 2,
+          "short_desc": "",
+          "attrs": {
+            "is_keyword": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "varId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AB4",
+          "name": "GET_CLEO_SHARED_VAR",
+          "num_params": 2,
+          "short_desc": "",
+          "attrs": {
+            "is_keyword": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "charHandle",
+              "type": "Char",
+              "source": "var_any"
+            },
+            {
+              "name": "carHandle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AB5",
+          "name": "STORE_CLOSEST_ENTITIES",
+          "num_params": 3,
+          "short_desc": "Stores the handles of a ped and vehicle being closest to the char or -1 otherwise",
+          "class": "Char",
+          "member": "StoreClosestEntities",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AB6",
+          "name": "GET_TARGET_BLIP_COORDS",
+          "num_params": 3,
+          "short_desc": "Gets the coordinates of the location targeted in the game map",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "class": "World",
+          "member": "GetTargetCoords",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "numGear",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AB7",
+          "name": "GET_CAR_NUMBER_OF_GEARS",
+          "num_params": 2,
+          "short_desc": "Gets the total number of gears of the vehicle and stores it to the variable",
+          "class": "Car",
+          "member": "GetNumberOfGears",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "gear",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AB8",
+          "name": "GET_CAR_CURRENT_GEAR",
+          "num_params": 2,
+          "short_desc": "Returns the current gear of the vehicle",
+          "class": "Car",
+          "member": "GetCurrentGear",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AB9",
+          "name": "GET_AUDIO_STREAM_STATE",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream",
+          "member": "GetState",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "scriptFileName",
+              "type": "string"
+            }
+          ],
+          "id": "0ABA",
+          "name": "TERMINATE_ALL_CUSTOM_SCRIPTS_WITH_THIS_NAME",
+          "num_params": 1,
+          "short_desc": "Ends the custom CLEO scripts with the specified name, freeing game memory",
+          "attrs": {
+            "is_keyword": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "volume",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ABB",
+          "name": "GET_AUDIO_STREAM_VOLUME",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream",
+          "member": "GetVolume",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "volume",
+              "type": "float"
+            }
+          ],
+          "id": "0ABC",
+          "name": "SET_AUDIO_STREAM_VOLUME",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream",
+          "member": "SetVolume",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "id": "0ABD",
+          "name": "IS_CAR_SIREN_ON",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Car",
+          "member": "IsSirenOn",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "id": "0ABE",
+          "name": "IS_CAR_ENGINE_ON",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Car",
+          "member": "IsEngineOn",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
+          "id": "0ABF",
+          "name": "CLEO_SET_CAR_ENGINE_ON",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Car",
+          "member": "CleoSetEngineOn",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
+          "id": "0AC0",
+          "name": "SET_AUDIO_STREAM_LOOPED",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream",
+          "member": "SetLooped",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "audioFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "AudioStream3D",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AC1",
+          "name": "LOAD_3D_AUDIO_STREAM",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream3D",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "id": "0AC2",
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_COORDS",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtCoords",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "handle",
+              "type": "Object"
+            }
+          ],
+          "id": "0AC3",
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_OBJECT",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtObject",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "handle",
+              "type": "Char"
+            }
+          ],
+          "id": "0AC4",
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CHAR",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtChar",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
+          "id": "0AC5",
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CAR",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtCar",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AC6",
+          "name": "GET_LABEL_POINTER",
+          "num_params": 2,
+          "short_desc": "Stores the absolute address of a code location marked with the label",
+          "class": "Memory",
+          "member": "GetLabelPointer",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AC7",
+          "name": "GET_VAR_POINTER",
+          "num_params": 2,
+          "short_desc": "Stores the absolute address of the variable",
+          "class": "Memory",
+          "member": "GetVarPointer",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AC8",
+          "name": "ALLOCATE_MEMORY",
+          "num_params": 2,
+          "short_desc": "Allocates a chunk of memory of the given size and stores its address to the variable",
+          "class": "Memory",
+          "member": "Allocate",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "id": "0AC9",
+          "name": "FREE_MEMORY",
+          "num_params": 1,
+          "short_desc": "Frees the memory allocated with 0AC8",
+          "class": "Memory",
+          "member": "Free",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "id": "0ACA",
+          "name": "PRINT_HELP_STRING",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintHelpString",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "style",
+              "type": "TextStyle"
+            }
+          ],
+          "id": "0ACB",
+          "name": "PRINT_BIG_STRING",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintBigString",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
+          "id": "0ACC",
+          "name": "PRINT_STRING",
+          "num_params": 2,
+          "short_desc": "Displays the text (provided as a string literal or an address) similarly to 00BB",
+          "class": "Text",
+          "member": "PrintString",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
+          "id": "0ACD",
+          "name": "PRINT_STRING_NOW",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintStringNow",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "0ACE",
+          "name": "PRINT_HELP_FORMATTED",
+          "num_params": 2,
+          "short_desc": "Displays a black text box for a few seconds respecting the format of the String entered",
+          "class": "Text",
+          "member": "PrintHelpFormatted",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "style",
+              "type": "TextStyle"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "0ACF",
+          "name": "PRINT_BIG_FORMATTED",
+          "num_params": 4,
+          "short_desc": "Displays a styled message for the specified time respecting the format of the String entered",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "class": "Text",
+          "member": "PrintBigFormatted",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "arg",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AD0",
+          "name": "PRINT_FORMATTED",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintFormatted",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "arg",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AD1",
+          "name": "PRINT_FORMATTED_NOW",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Text",
+          "member": "PrintFormattedNow",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AD2",
+          "name": "GET_CHAR_PLAYER_IS_TARGETING",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Player",
+          "member": "GetCharIsTargeting",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AD3",
+          "name": "STRING_FORMAT",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Text",
+          "member": "StringFormat",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "str",
+              "type": "string"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AD4",
+          "name": "SCAN_STRING",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "Text",
+          "member": "ScanString",
+          "attrs": {
+            "is_static": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            },
+            {
+              "name": "origin",
+              "type": "SeekOrigin"
+            }
+          ],
+          "id": "0AD5",
+          "name": "FILE_SEEK",
+          "num_params": 3,
+          "short_desc": "Sets the position of the file to the given offset from the origin",
+          "class": "File",
+          "member": "Seek",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "id": "0AD6",
+          "name": "IS_END_OF_FILE_REACHED",
+          "num_params": 1,
+          "short_desc": "Returns true if the end of the specified file has been reached",
+          "class": "File",
+          "member": "IsEndReached",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "buffer",
+              "type": "string",
+              "source": "var_any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0AD7",
+          "name": "READ_STRING_FROM_FILE",
+          "num_params": 3,
+          "short_desc": "Reads data from the file into the buffer until either the end of buffer is reached, the newline character is read, or the end-of-file is reached, whichever comes first",
+          "class": "File",
+          "member": "ReadString",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "id": "0AD8",
+          "name": "WRITE_STRING_TO_FILE",
+          "num_params": 2,
+          "short_desc": "Copies data from the source string to the file up to but not including the null character",
+          "class": "File",
+          "member": "WriteString",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AD9",
+          "name": "WRITE_FORMATTED_STRING_TO_FILE",
+          "num_params": 3,
+          "short_desc": "Writes a formatted string to the file",
+          "class": "File",
+          "member": "WriteFormattedString",
+          "attrs": {
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ADA",
+          "name": "SCAN_FILE",
+          "num_params": 4,
+          "short_desc": "",
+          "class": "File",
+          "member": "Scan",
+          "attrs": {
+            "is_condition": true,
+            "is_variadic": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_vehicle"
+            }
+          ],
+          "output": [
+            {
+              "name": "carName",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ADB",
+          "name": "GET_NAME_OF_VEHICLE_MODEL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Streaming",
+          "member": "GetNameOfVehicleModel",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "input",
+              "type": "string"
+            }
+          ],
+          "id": "0ADC",
+          "name": "TEST_CHEAT",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified string of letters has been typed on the keyboard",
+          "class": "Pad",
+          "member": "TestCheat",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_vehicle"
+            }
+          ],
+          "id": "0ADD",
+          "name": "SPAWN_VEHICLE_BY_CHEATING",
+          "num_params": 1,
+          "short_desc": "Creates a vehicle with the model (no pre-loading needed) in front of the player",
+          "class": "World",
+          "member": "SpawnVehicleByCheating",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "key",
+              "type": "gxt_key"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ADE",
+          "name": "GET_TEXT_LABEL_STRING",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "GetLabelString",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "dynamicKey",
+              "type": "gxt_key"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "id": "0ADF",
+          "name": "ADD_TEXT_LABEL",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Text",
+          "member": "AddLabel",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "dynamicKey",
+              "type": "gxt_key"
+            }
+          ],
+          "id": "0AE0",
+          "name": "REMOVE_TEXT_LABEL",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Text",
+          "member": "RemoveLabel",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "findNext",
+              "type": "bool"
+            },
+            {
+              "name": "skipDead",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AE1",
+          "name": "GET_RANDOM_CHAR_IN_SPHERE_NO_SAVE_RECURSIVE",
+          "num_params": 7,
+          "short_desc": "",
+          "class": "World",
+          "member": "GetRandomCharInSphereNoSaveRecursive",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "findNext",
+              "type": "bool"
+            },
+            {
+              "name": "skipWrecked",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AE2",
+          "name": "GET_RANDOM_CAR_IN_SPHERE_NO_SAVE_RECURSIVE",
+          "num_params": 7,
+          "short_desc": "",
+          "class": "World",
+          "member": "GetRandomCarInSphereNoSaveRecursive",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "findNext",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AE3",
+          "name": "GET_RANDOM_OBJECT_IN_SPHERE_NO_SAVE_RECURSIVE",
+          "num_params": 6,
+          "short_desc": "",
+          "class": "World",
+          "member": "GetRandomObjectInSphereNoSaveRecursive",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "dirPath",
+              "type": "string"
+            }
+          ],
+          "id": "0AE4",
+          "name": "DOES_DIRECTORY_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if a directory at the given path exists",
+          "class": "Fs",
+          "member": "DoesDirectoryExist",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "dirName",
+              "type": "string"
+            }
+          ],
+          "id": "0AE5",
+          "name": "CREATE_DIRECTORY",
+          "num_params": 1,
+          "short_desc": "Creates a directory at the given path",
+          "class": "Fs",
+          "member": "CreateDirectory",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "searchMask",
+              "type": "string"
+            },
+            {
+              "name": "fileName",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "FindFile",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AE6",
+          "name": "FIND_FIRST_FILE",
+          "num_params": 3,
+          "short_desc": "Searches a directory for a file or subdirectory with a name that matches a specific name (or partial name if wildcards are used)",
+          "class": "FindFile",
+          "member": "First",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "FindFile"
+            }
+          ],
+          "output": [
+            {
+              "name": "fileName",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AE7",
+          "name": "FIND_NEXT_FILE",
+          "num_params": 2,
+          "short_desc": "Continues a file search from a previous call to 0AE6",
+          "class": "FindFile",
+          "member": "Next",
+          "attrs": {
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "FindFile"
+            }
+          ],
+          "id": "0AE8",
+          "name": "FIND_CLOSE",
+          "num_params": 1,
+          "short_desc": "Closes a file search handle opened by 0AE6",
+          "class": "FindFile",
+          "member": "Close",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AE9",
+          "name": "POP_FLOAT",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Memory",
+          "member": "PopFloat",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AEA",
+          "name": "GET_PED_REF",
+          "num_params": 2,
+          "short_desc": "Gets the corresponding handle of the char located at the given address in memory",
+          "class": "Memory",
+          "member": "GetPedRef",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AEB",
+          "name": "GET_VEHICLE_REF",
+          "num_params": 2,
+          "short_desc": "Gets the corresponding handle of the vehicle located at the given address in memory",
+          "class": "Memory",
+          "member": "GetVehicleRef",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AEC",
+          "name": "GET_OBJECT_REF",
+          "num_params": 2,
+          "short_desc": "Gets the corresponding handle of the object located at the given address in memory",
+          "class": "Memory",
+          "member": "GetObjectRef",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "number",
+              "type": "float"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AED",
+          "name": "STRING_FLOAT_FORMAT",
+          "num_params": 3,
+          "short_desc": "",
+          "class": "Text",
+          "member": "StringFloatFormat",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "number",
+              "type": "float"
+            },
+            {
+              "name": "power",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AEE",
+          "name": "POW",
+          "num_params": 3,
+          "short_desc": "Returns the specified number raised to the specified power",
+          "class": "Math",
+          "member": "Pow",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "number",
+              "type": "float"
+            },
+            {
+              "name": "base",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AEF",
+          "name": "LOG",
+          "num_params": 3,
+          "short_desc": "Returns the logarithm of the specified number in the specified base",
+          "class": "Math",
+          "member": "Log",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CLEO+",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "status",
+              "type": "CarAlarm",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E00",
+          "name": "GET_CAR_ALARM",
+          "num_params": 2,
+          "class": "Car",
+          "member": "GetAlarm",
+          "short_desc": "Returns the status of the car's alarm"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "status",
+              "type": "CarAlarm"
+            }
+          ],
+          "id": "0E61",
+          "name": "SET_CAR_ALARM",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetAlarm",
+          "short_desc": "Sets the status of the car's alarm"
+        }
+      ]
+    },
+    {
+      "name": "bitwise",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B10",
+          "name": "BIT_AND",
+          "num_params": 3,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B11",
+          "name": "BIT_OR",
+          "num_params": 3,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B12",
+          "name": "BIT_XOR",
+          "num_params": 3,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B13",
+          "name": "BIT_NOT",
+          "num_params": 2,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B14",
+          "name": "BIT_MOD",
+          "num_params": 3,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B15",
+          "name": "BIT_SHR",
+          "num_params": 3,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B16",
+          "name": "BIT_SHL",
+          "num_params": 3,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "id": "0B17",
+          "name": "BITWISE_AND_THING_WITH_THING",
+          "num_params": 2,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "id": "0B18",
+          "name": "BITWISE_OR_THING_WITH_THING",
+          "num_params": 2,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "id": "0B19",
+          "name": "BITWISE_XOR_THING_WITH_THING",
+          "num_params": 2,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B1A",
+          "name": "BITWISE_NOT",
+          "num_params": 1,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "id": "0B1B",
+          "name": "BITWISE_MOD_THING_BY_THING",
+          "num_params": 2,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "id": "0B1C",
+          "name": "BITWISE_SHR_THING_BY_THING",
+          "num_params": 2,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int"
+            }
+          ],
+          "id": "0B1D",
+          "name": "BITWISE_SHL_THING_BY_THING",
+          "num_params": 2,
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "clipboard",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "memory",
+              "type": "any",
+              "source": "var_any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0B20",
+          "name": "READ_CLIPBOARD_DATA",
+          "num_params": 2,
+          "class": "Clipboard",
+          "member": "ReadData",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "memory",
+              "type": "any",
+              "source": "var_any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0B21",
+          "name": "WRITE_CLIPBOARD_DATA",
+          "num_params": 2,
+          "class": "Clipboard",
+          "member": "WriteData",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        }
+      ]
+    },
     {
       "name": "default",
       "commands": [
@@ -46337,3345 +49720,6 @@
       ]
     },
     {
-      "name": "CLEO",
-      "commands": [
-        {
-          "input": [
-            {
-              "name": "touch",
-              "type": "Pad"
-            },
-            {
-              "name": "touchPoints",
-              "type": "TouchPoints"
-            }
-          ],
-          "id": "00E1",
-          "name": "IS_BUTTON_PRESSED",
-          "num_params": 2,
-          "class": "Hid",
-          "member": "IsButtonPressed",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            },
-            {
-              "name": "vp",
-              "type": "bool"
-            }
-          ],
-          "id": "0A8C",
-          "name": "WRITE_MEMORY",
-          "num_params": 4,
-          "short_desc": "Writes a value to the game memory",
-          "class": "Memory",
-          "member": "Write",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "vp",
-              "type": "bool"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A8D",
-          "name": "READ_MEMORY",
-          "num_params": 4,
-          "short_desc": "Reads a value from the game memory",
-          "class": "Memory",
-          "member": "Read",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A8E",
-          "name": "INT_ADD",
-          "num_params": 3,
-          "short_desc": "Adds together two integer values and writes the result into the variable",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A8F",
-          "name": "INT_SUB",
-          "num_params": 3,
-          "short_desc": "Subtracts the integer value from another integer value and writes the result into the variable",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A90",
-          "name": "INT_MUL",
-          "num_params": 3,
-          "short_desc": "Multiplies two integer values and writes the result into the variable",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A91",
-          "name": "INT_DIV",
-          "num_params": 3,
-          "short_desc": "Divides the integer value by another integer value and writes the result into the variable",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "scriptFileName",
-              "type": "string"
-            },
-            {
-              "name": "",
-              "type": "arguments"
-            }
-          ],
-          "id": "0A92",
-          "name": "STREAM_CUSTOM_SCRIPT",
-          "num_params": 2,
-          "short_desc": "Loads a file with compiled SCM instructions at the given path and runs a new custom script",
-          "attrs": {
-            "is_keyword": true,
-            "is_variadic": true,
-            "is_branch": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "id": "0A93",
-          "name": "TERMINATE_THIS_CUSTOM_SCRIPT",
-          "num_params": 0,
-          "short_desc": "Ends the current custom script, preventing further execution",
-          "attrs": {
-            "is_keyword": true,
-            "is_branch": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "scriptFileName",
-              "type": "string"
-            },
-            {
-              "name": "",
-              "type": "arguments"
-            }
-          ],
-          "id": "0A94",
-          "name": "LOAD_AND_LAUNCH_CUSTOM_MISSION",
-          "num_params": 2,
-          "short_desc": "",
-          "attrs": {
-            "is_keyword": true,
-            "is_variadic": true,
-            "is_branch": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "id": "0A95",
-          "name": "SAVE_THIS_CUSTOM_SCRIPT",
-          "num_params": 0,
-          "short_desc": "Prevents the script from restart when the save file is loaded",
-          "attrs": {
-            "is_keyword": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "char",
-              "type": "Char"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A96",
-          "name": "GET_PED_POINTER",
-          "num_params": 2,
-          "short_desc": "Gets the address of the ped struct in the game memory by its handle",
-          "class": "Memory",
-          "member": "GetPedPointer",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "vehicle",
-              "type": "Car"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A97",
-          "name": "GET_VEHICLE_POINTER",
-          "num_params": 2,
-          "short_desc": "Gets the address of the vehicle struct in the game memory by its handle",
-          "class": "Memory",
-          "member": "GetVehiclePointer",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "object",
-              "type": "Object"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A98",
-          "name": "GET_OBJECT_POINTER",
-          "num_params": 2,
-          "short_desc": "Gets the address of the object struct in the game memory by its handle",
-          "class": "Memory",
-          "member": "GetObjectPointer",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "path",
-              "type": "any"
-            }
-          ],
-          "id": "0A99",
-          "name": "SET_CURRENT_DIRECTORY",
-          "num_params": 1,
-          "short_desc": "Sets the current working directory (cwd) to a predefined location with a value of 0 or 1, or to an arbitrary path with a string value",
-          "class": "Fs",
-          "member": "SetCurrentDirectory",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "filePathName",
-              "type": "string"
-            },
-            {
-              "name": "mode",
-              "type": "FileMode"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "File",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9A",
-          "name": "OPEN_FILE",
-          "num_params": 3,
-          "short_desc": "Opens the file in the specified mode, sets the condition result to True if the open operation has been successful, or to False otherwise, and writes the file handle to the variable",
-          "class": "File",
-          "member": "Open",
-          "attrs": {
-            "is_constructor": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            }
-          ],
-          "id": "0A9B",
-          "name": "CLOSE_FILE",
-          "num_params": 1,
-          "short_desc": "Closes the file and frees the memory",
-          "class": "File",
-          "member": "Close",
-          "attrs": {
-            "is_destructor": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            }
-          ],
-          "output": [
-            {
-              "name": "size",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9C",
-          "name": "GET_FILE_SIZE",
-          "num_params": 2,
-          "short_desc": "Gets the file size in bytes",
-          "class": "File",
-          "member": "GetSize",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "destination",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9D",
-          "name": "READ_FROM_FILE",
-          "num_params": 3,
-          "short_desc": "Reads the specified number of bytes from the opened file and writes them to the memory region starting from the address of the destination variable",
-          "class": "File",
-          "member": "Read",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "source",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9E",
-          "name": "WRITE_TO_FILE",
-          "num_params": 3,
-          "short_desc": "Copies the specified number of bytes of the memory region starting from the address of the source variable to the file",
-          "class": "File",
-          "member": "Write",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9F",
-          "name": "GET_THIS_SCRIPT_STRUCT",
-          "num_params": 1,
-          "short_desc": "Gets the address of the current script structure in the game memory",
-          "class": "Memory",
-          "member": "GetThisScriptStruct",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "label"
-            }
-          ],
-          "id": "0AA0",
-          "name": "GOSUB_IF_FALSE",
-          "num_params": 1,
-          "short_desc": "Transfers the script execution to the label as a subroutine if the result of the condition is false",
-          "attrs": {
-            "is_keyword": true,
-            "is_branch": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "id": "0AA1",
-          "name": "RETURN_IF_FALSE",
-          "num_params": 0,
-          "short_desc": "Returns from the current subroutine if the result of the condition is false",
-          "attrs": {
-            "is_keyword": true,
-            "is_branch": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "libraryFileName",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "DynamicLibrary",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AA2",
-          "name": "LOAD_DYNAMIC_LIBRARY",
-          "num_params": 2,
-          "short_desc": "Loads the specified module (usually a dynamic-link library (DLL)) into the address space of the game",
-          "class": "DynamicLibrary",
-          "member": "Load",
-          "attrs": {
-            "is_constructor": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "DynamicLibrary"
-            }
-          ],
-          "id": "0AA3",
-          "name": "FREE_DYNAMIC_LIBRARY",
-          "num_params": 1,
-          "short_desc": "Frees the loaded dynamic-link library (DLL) module and unloads it from the address space of the game",
-          "class": "DynamicLibrary",
-          "member": "Free",
-          "attrs": {
-            "is_destructor": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "procName",
-              "type": "string"
-            },
-            {
-              "name": "self",
-              "type": "DynamicLibrary"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AA4",
-          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
-          "num_params": 3,
-          "short_desc": "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL)",
-          "class": "DynamicLibrary",
-          "member": "GetProcedure",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "pop",
-              "type": "int"
-            },
-            {
-              "name": "funcParams",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AA5",
-          "name": "CALL_FUNCTION",
-          "num_params": 4,
-          "short_desc": "Calls a function at the address with the given arguments and the calling convention defined by the pop parameter where 0 means 'stdcall' and a value equal to numParams means  'cdecl'",
-          "class": "Memory",
-          "member": "CallFunction",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "struct",
-              "type": "int"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "pop",
-              "type": "int"
-            },
-            {
-              "name": "funcParams",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AA6",
-          "name": "CALL_METHOD",
-          "num_params": 5,
-          "short_desc": "Calls a method of the object (struct) with the given arguments and the 'thiscall' calling convention (pop is always 0)",
-          "class": "Memory",
-          "member": "CallMethod",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "pop",
-              "type": "int"
-            },
-            {
-              "name": "funcParams",
-              "type": "arguments"
-            }
-          ],
-          "output": [
-            {
-              "name": "funcRet",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AA7",
-          "name": "CALL_FUNCTION_RETURN",
-          "num_params": 5,
-          "short_desc": "Calls a function similarly to 0AA5 and writes the result into the variable following the arguments list",
-          "class": "Memory",
-          "member": "CallFunctionReturn",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "struct",
-              "type": "int"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "pop",
-              "type": "int"
-            },
-            {
-              "name": "funcParams",
-              "type": "arguments"
-            }
-          ],
-          "output": [
-            {
-              "name": "funcRet",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AA8",
-          "name": "CALL_METHOD_RETURN",
-          "num_params": 6,
-          "short_desc": "Calls a method of the object (struct) similarly to 0AA6 and writes the result into the variable following the arguments list",
-          "class": "Memory",
-          "member": "CallMethodReturn",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "id": "0AA9",
-          "name": "IS_GAME_VERSION_ORIGINAL",
-          "num_params": 0,
-          "short_desc": "Returns true if the game version is vanilla 1.0",
-          "class": "Game",
-          "member": "IsVersionOriginal",
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "scriptName",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AAA",
-          "name": "GET_SCRIPT_STRUCT_NAMED",
-          "num_params": 2,
-          "short_desc": "Gets the address of a running script which name matches the given string or 0 otherwise",
-          "class": "Memory",
-          "member": "GetScriptStructNamed",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "path",
-              "type": "string"
-            }
-          ],
-          "id": "0AAB",
-          "name": "DOES_FILE_EXIST",
-          "num_params": 1,
-          "short_desc": "Returns true if a file at the given path exists",
-          "class": "Fs",
-          "member": "DoesFileExist",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "audioFileName",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "AudioStream",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AAC",
-          "name": "LOAD_AUDIO_STREAM",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream",
-          "member": "Load",
-          "attrs": {
-            "is_constructor": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            },
-            {
-              "name": "state",
-              "type": "AudioStreamState"
-            }
-          ],
-          "id": "0AAD",
-          "name": "SET_AUDIO_STREAM_STATE",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream",
-          "member": "SetState",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            }
-          ],
-          "id": "0AAE",
-          "name": "REMOVE_AUDIO_STREAM",
-          "num_params": 1,
-          "short_desc": "",
-          "attrs": {
-            "is_destructor": true
-          },
-          "class": "AudioStream",
-          "member": "Remove",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            }
-          ],
-          "output": [
-            {
-              "name": "length",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AAF",
-          "name": "GET_AUDIO_STREAM_LENGTH",
-          "num_params": 2,
-          "short_desc": "Gets the audio stream length in seconds",
-          "class": "AudioStream",
-          "member": "GetLength",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "keyCode",
-              "type": "KeyCode"
-            }
-          ],
-          "id": "0AB0",
-          "name": "IS_KEY_PRESSED",
-          "num_params": 1,
-          "class": "Pad",
-          "member": "IsKeyPressed",
-          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "label"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "params",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AB1",
-          "name": "CLEO_CALL",
-          "num_params": 3,
-          "short_desc": "",
-          "attrs": {
-            "is_keyword": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "numRet",
-              "type": "int"
-            },
-            {
-              "name": "retParams",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AB2",
-          "name": "CLEO_RETURN",
-          "num_params": 2,
-          "short_desc": "",
-          "attrs": {
-            "is_keyword": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "varId",
-              "type": "int"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            }
-          ],
-          "id": "0AB3",
-          "name": "SET_CLEO_SHARED_VAR",
-          "num_params": 2,
-          "short_desc": "",
-          "attrs": {
-            "is_keyword": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "varId",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AB4",
-          "name": "GET_CLEO_SHARED_VAR",
-          "num_params": 2,
-          "short_desc": "",
-          "attrs": {
-            "is_keyword": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            }
-          ],
-          "output": [
-            {
-              "name": "charHandle",
-              "type": "Char",
-              "source": "var_any"
-            },
-            {
-              "name": "carHandle",
-              "type": "Car",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AB5",
-          "name": "STORE_CLOSEST_ENTITIES",
-          "num_params": 3,
-          "short_desc": "Stores the handles of a ped and vehicle being closest to the char or -1 otherwise",
-          "class": "Char",
-          "member": "StoreClosestEntities",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "output": [
-            {
-              "name": "x",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "y",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "z",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AB6",
-          "name": "GET_TARGET_BLIP_COORDS",
-          "num_params": 3,
-          "short_desc": "Gets the coordinates of the location targeted in the game map",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "class": "World",
-          "member": "GetTargetCoords",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            }
-          ],
-          "output": [
-            {
-              "name": "numGear",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AB7",
-          "name": "GET_CAR_NUMBER_OF_GEARS",
-          "num_params": 2,
-          "short_desc": "Gets the total number of gears of the vehicle and stores it to the variable",
-          "class": "Car",
-          "member": "GetNumberOfGears",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            }
-          ],
-          "output": [
-            {
-              "name": "gear",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AB8",
-          "name": "GET_CAR_CURRENT_GEAR",
-          "num_params": 2,
-          "short_desc": "Returns the current gear of the vehicle",
-          "class": "Car",
-          "member": "GetCurrentGear",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            }
-          ],
-          "output": [
-            {
-              "name": "state",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AB9",
-          "name": "GET_AUDIO_STREAM_STATE",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream",
-          "member": "GetState",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "scriptFileName",
-              "type": "string"
-            }
-          ],
-          "id": "0ABA",
-          "name": "TERMINATE_ALL_CUSTOM_SCRIPTS_WITH_THIS_NAME",
-          "num_params": 1,
-          "short_desc": "Ends the custom CLEO scripts with the specified name, freeing game memory",
-          "attrs": {
-            "is_keyword": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            }
-          ],
-          "output": [
-            {
-              "name": "volume",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "id": "0ABB",
-          "name": "GET_AUDIO_STREAM_VOLUME",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream",
-          "member": "GetVolume",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            },
-            {
-              "name": "volume",
-              "type": "float"
-            }
-          ],
-          "id": "0ABC",
-          "name": "SET_AUDIO_STREAM_VOLUME",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream",
-          "member": "SetVolume",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            }
-          ],
-          "id": "0ABD",
-          "name": "IS_CAR_SIREN_ON",
-          "num_params": 1,
-          "short_desc": "",
-          "class": "Car",
-          "member": "IsSirenOn",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            }
-          ],
-          "id": "0ABE",
-          "name": "IS_CAR_ENGINE_ON",
-          "num_params": 1,
-          "short_desc": "",
-          "class": "Car",
-          "member": "IsEngineOn",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Car"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
-          "id": "0ABF",
-          "name": "CLEO_SET_CAR_ENGINE_ON",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "Car",
-          "member": "CleoSetEngineOn",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            },
-            {
-              "name": "state",
-              "type": "bool"
-            }
-          ],
-          "id": "0AC0",
-          "name": "SET_AUDIO_STREAM_LOOPED",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream",
-          "member": "SetLooped",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "audioFileName",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "AudioStream3D",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AC1",
-          "name": "LOAD_3D_AUDIO_STREAM",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream3D",
-          "member": "Load",
-          "attrs": {
-            "is_constructor": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            }
-          ],
-          "id": "0AC2",
-          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_COORDS",
-          "num_params": 4,
-          "short_desc": "",
-          "class": "AudioStream3D",
-          "member": "SetPlayAtCoords",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            },
-            {
-              "name": "handle",
-              "type": "Object"
-            }
-          ],
-          "id": "0AC3",
-          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_OBJECT",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream3D",
-          "member": "SetPlayAtObject",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            },
-            {
-              "name": "handle",
-              "type": "Char"
-            }
-          ],
-          "id": "0AC4",
-          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CHAR",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream3D",
-          "member": "SetPlayAtChar",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "AudioStream"
-            },
-            {
-              "name": "handle",
-              "type": "Car"
-            }
-          ],
-          "id": "0AC5",
-          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CAR",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "AudioStream3D",
-          "member": "SetPlayAtCar",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "label"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AC6",
-          "name": "GET_LABEL_POINTER",
-          "num_params": 2,
-          "short_desc": "Stores the absolute address of a code location marked with the label",
-          "class": "Memory",
-          "member": "GetLabelPointer",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AC7",
-          "name": "GET_VAR_POINTER",
-          "num_params": 2,
-          "short_desc": "Stores the absolute address of the variable",
-          "class": "Memory",
-          "member": "GetVarPointer",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AC8",
-          "name": "ALLOCATE_MEMORY",
-          "num_params": 2,
-          "short_desc": "Allocates a chunk of memory of the given size and stores its address to the variable",
-          "class": "Memory",
-          "member": "Allocate",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            }
-          ],
-          "id": "0AC9",
-          "name": "FREE_MEMORY",
-          "num_params": 1,
-          "short_desc": "Frees the memory allocated with 0AC8",
-          "class": "Memory",
-          "member": "Free",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            }
-          ],
-          "id": "0ACA",
-          "name": "PRINT_HELP_STRING",
-          "num_params": 1,
-          "short_desc": "",
-          "class": "Text",
-          "member": "PrintHelpString",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "time",
-              "type": "int"
-            },
-            {
-              "name": "style",
-              "type": "TextStyle"
-            }
-          ],
-          "id": "0ACB",
-          "name": "PRINT_BIG_STRING",
-          "num_params": 3,
-          "short_desc": "",
-          "class": "Text",
-          "member": "PrintBigString",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "time",
-              "type": "int"
-            }
-          ],
-          "id": "0ACC",
-          "name": "PRINT_STRING",
-          "num_params": 2,
-          "short_desc": "Displays the text (provided as a string literal or an address) similarly to 00BB",
-          "class": "Text",
-          "member": "PrintString",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "time",
-              "type": "int"
-            }
-          ],
-          "id": "0ACD",
-          "name": "PRINT_STRING_NOW",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "Text",
-          "member": "PrintStringNow",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "id": "0ACE",
-          "name": "PRINT_HELP_FORMATTED",
-          "num_params": 2,
-          "short_desc": "Displays a black text box for a few seconds respecting the format of the String entered",
-          "class": "Text",
-          "member": "PrintHelpFormatted",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "time",
-              "type": "int"
-            },
-            {
-              "name": "style",
-              "type": "TextStyle"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "id": "0ACF",
-          "name": "PRINT_BIG_FORMATTED",
-          "num_params": 4,
-          "short_desc": "Displays a styled message for the specified time respecting the format of the String entered",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "class": "Text",
-          "member": "PrintBigFormatted",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "time",
-              "type": "int"
-            },
-            {
-              "name": "arg",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AD0",
-          "name": "PRINT_FORMATTED",
-          "num_params": 3,
-          "short_desc": "",
-          "class": "Text",
-          "member": "PrintFormatted",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "time",
-              "type": "int"
-            },
-            {
-              "name": "arg",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AD1",
-          "name": "PRINT_FORMATTED_NOW",
-          "num_params": 3,
-          "short_desc": "",
-          "class": "Text",
-          "member": "PrintFormattedNow",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Player"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AD2",
-          "name": "GET_CHAR_PLAYER_IS_TARGETING",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "Player",
-          "member": "GetCharIsTargeting",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "format",
-              "type": "string"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "output": [
-            {
-              "name": "text",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AD3",
-          "name": "STRING_FORMAT",
-          "num_params": 3,
-          "short_desc": "",
-          "class": "Text",
-          "member": "StringFormat",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "str",
-              "type": "string"
-            },
-            {
-              "name": "format",
-              "type": "string"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "output": [
-            {
-              "name": "text",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AD4",
-          "name": "SCAN_STRING",
-          "num_params": 4,
-          "short_desc": "",
-          "class": "Text",
-          "member": "ScanString",
-          "attrs": {
-            "is_static": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            },
-            {
-              "name": "offset",
-              "type": "int"
-            },
-            {
-              "name": "origin",
-              "type": "SeekOrigin"
-            }
-          ],
-          "id": "0AD5",
-          "name": "FILE_SEEK",
-          "num_params": 3,
-          "short_desc": "Sets the position of the file to the given offset from the origin",
-          "class": "File",
-          "member": "Seek",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            }
-          ],
-          "id": "0AD6",
-          "name": "IS_END_OF_FILE_REACHED",
-          "num_params": 1,
-          "short_desc": "Returns true if the end of the specified file has been reached",
-          "class": "File",
-          "member": "IsEndReached",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            },
-            {
-              "name": "buffer",
-              "type": "string",
-              "source": "var_any"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "id": "0AD7",
-          "name": "READ_STRING_FROM_FILE",
-          "num_params": 3,
-          "short_desc": "Reads data from the file into the buffer until either the end of buffer is reached, the newline character is read, or the end-of-file is reached, whichever comes first",
-          "class": "File",
-          "member": "ReadString",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            },
-            {
-              "name": "source",
-              "type": "string"
-            }
-          ],
-          "id": "0AD8",
-          "name": "WRITE_STRING_TO_FILE",
-          "num_params": 2,
-          "short_desc": "Copies data from the source string to the file up to but not including the null character",
-          "class": "File",
-          "member": "WriteString",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            },
-            {
-              "name": "format",
-              "type": "string"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AD9",
-          "name": "WRITE_FORMATTED_STRING_TO_FILE",
-          "num_params": 3,
-          "short_desc": "Writes a formatted string to the file",
-          "class": "File",
-          "member": "WriteFormattedString",
-          "attrs": {
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            },
-            {
-              "name": "format",
-              "type": "string"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "output": [
-            {
-              "name": "text",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0ADA",
-          "name": "SCAN_FILE",
-          "num_params": 4,
-          "short_desc": "",
-          "class": "File",
-          "member": "Scan",
-          "attrs": {
-            "is_condition": true,
-            "is_variadic": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "modelId",
-              "type": "model_vehicle"
-            }
-          ],
-          "output": [
-            {
-              "name": "carName",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0ADB",
-          "name": "GET_NAME_OF_VEHICLE_MODEL",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "Streaming",
-          "member": "GetNameOfVehicleModel",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "input",
-              "type": "string"
-            }
-          ],
-          "id": "0ADC",
-          "name": "TEST_CHEAT",
-          "num_params": 1,
-          "short_desc": "Returns true if the specified string of letters has been typed on the keyboard",
-          "class": "Pad",
-          "member": "TestCheat",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "modelId",
-              "type": "model_vehicle"
-            }
-          ],
-          "id": "0ADD",
-          "name": "SPAWN_VEHICLE_BY_CHEATING",
-          "num_params": 1,
-          "short_desc": "Creates a vehicle with the model (no pre-loading needed) in front of the player",
-          "class": "World",
-          "member": "SpawnVehicleByCheating",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "key",
-              "type": "gxt_key"
-            }
-          ],
-          "output": [
-            {
-              "name": "text",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0ADE",
-          "name": "GET_TEXT_LABEL_STRING",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "Text",
-          "member": "GetLabelString",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "dynamicKey",
-              "type": "gxt_key"
-            },
-            {
-              "name": "text",
-              "type": "string"
-            }
-          ],
-          "id": "0ADF",
-          "name": "ADD_TEXT_LABEL",
-          "num_params": 2,
-          "short_desc": "",
-          "class": "Text",
-          "member": "AddLabel",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "dynamicKey",
-              "type": "gxt_key"
-            }
-          ],
-          "id": "0AE0",
-          "name": "REMOVE_TEXT_LABEL",
-          "num_params": 1,
-          "short_desc": "",
-          "class": "Text",
-          "member": "RemoveLabel",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "radius",
-              "type": "float"
-            },
-            {
-              "name": "findNext",
-              "type": "bool"
-            },
-            {
-              "name": "skipDead",
-              "type": "bool"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AE1",
-          "name": "GET_RANDOM_CHAR_IN_SPHERE_NO_SAVE_RECURSIVE",
-          "num_params": 7,
-          "short_desc": "",
-          "class": "World",
-          "member": "GetRandomCharInSphereNoSaveRecursive",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "radius",
-              "type": "float"
-            },
-            {
-              "name": "findNext",
-              "type": "bool"
-            },
-            {
-              "name": "skipWrecked",
-              "type": "bool"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Car",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AE2",
-          "name": "GET_RANDOM_CAR_IN_SPHERE_NO_SAVE_RECURSIVE",
-          "num_params": 7,
-          "short_desc": "",
-          "class": "World",
-          "member": "GetRandomCarInSphereNoSaveRecursive",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "radius",
-              "type": "float"
-            },
-            {
-              "name": "findNext",
-              "type": "bool"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Object",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AE3",
-          "name": "GET_RANDOM_OBJECT_IN_SPHERE_NO_SAVE_RECURSIVE",
-          "num_params": 6,
-          "short_desc": "",
-          "class": "World",
-          "member": "GetRandomObjectInSphereNoSaveRecursive",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "dirPath",
-              "type": "string"
-            }
-          ],
-          "id": "0AE4",
-          "name": "DOES_DIRECTORY_EXIST",
-          "num_params": 1,
-          "short_desc": "Returns true if a directory at the given path exists",
-          "class": "Fs",
-          "member": "DoesDirectoryExist",
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "dirName",
-              "type": "string"
-            }
-          ],
-          "id": "0AE5",
-          "name": "CREATE_DIRECTORY",
-          "num_params": 1,
-          "short_desc": "Creates a directory at the given path",
-          "class": "Fs",
-          "member": "CreateDirectory",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "searchMask",
-              "type": "string"
-            },
-            {
-              "name": "fileName",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "FindFile",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AE6",
-          "name": "FIND_FIRST_FILE",
-          "num_params": 3,
-          "short_desc": "Searches a directory for a file or subdirectory with a name that matches a specific name (or partial name if wildcards are used)",
-          "class": "FindFile",
-          "member": "First",
-          "attrs": {
-            "is_constructor": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "FindFile"
-            }
-          ],
-          "output": [
-            {
-              "name": "fileName",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AE7",
-          "name": "FIND_NEXT_FILE",
-          "num_params": 2,
-          "short_desc": "Continues a file search from a previous call to 0AE6",
-          "class": "FindFile",
-          "member": "Next",
-          "attrs": {
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "FindFile"
-            }
-          ],
-          "id": "0AE8",
-          "name": "FIND_CLOSE",
-          "num_params": 1,
-          "short_desc": "Closes a file search handle opened by 0AE6",
-          "class": "FindFile",
-          "member": "Close",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "output": [
-            {
-              "name": "result",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AE9",
-          "name": "POP_FLOAT",
-          "num_params": 1,
-          "short_desc": "",
-          "class": "Memory",
-          "member": "PopFloat",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AEA",
-          "name": "GET_PED_REF",
-          "num_params": 2,
-          "short_desc": "Gets the corresponding handle of the char located at the given address in memory",
-          "class": "Memory",
-          "member": "GetPedRef",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Car",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AEB",
-          "name": "GET_VEHICLE_REF",
-          "num_params": 2,
-          "short_desc": "Gets the corresponding handle of the vehicle located at the given address in memory",
-          "class": "Memory",
-          "member": "GetVehicleRef",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "Object",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AEC",
-          "name": "GET_OBJECT_REF",
-          "num_params": 2,
-          "short_desc": "Gets the corresponding handle of the object located at the given address in memory",
-          "class": "Memory",
-          "member": "GetObjectRef",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "number",
-              "type": "float"
-            },
-            {
-              "name": "format",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "text",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AED",
-          "name": "STRING_FLOAT_FORMAT",
-          "num_params": 3,
-          "short_desc": "",
-          "class": "Text",
-          "member": "StringFloatFormat",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "number",
-              "type": "float"
-            },
-            {
-              "name": "power",
-              "type": "float"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AEE",
-          "name": "POW",
-          "num_params": 3,
-          "short_desc": "Returns the specified number raised to the specified power",
-          "class": "Math",
-          "member": "Pow",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "number",
-              "type": "float"
-            },
-            {
-              "name": "base",
-              "type": "float"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AEF",
-          "name": "LOG",
-          "num_params": 3,
-          "short_desc": "Returns the logarithm of the specified number in the specified base",
-          "class": "Math",
-          "member": "Log",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "bitwise",
-      "commands": [
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B10",
-          "name": "BIT_AND",
-          "num_params": 3,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B11",
-          "name": "BIT_OR",
-          "num_params": 3,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B12",
-          "name": "BIT_XOR",
-          "num_params": 3,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B13",
-          "name": "BIT_NOT",
-          "num_params": 2,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B14",
-          "name": "BIT_MOD",
-          "num_params": 3,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B15",
-          "name": "BIT_SHR",
-          "num_params": 3,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B16",
-          "name": "BIT_SHL",
-          "num_params": 3,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "id": "0B17",
-          "name": "BITWISE_AND_THING_WITH_THING",
-          "num_params": 2,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "id": "0B18",
-          "name": "BITWISE_OR_THING_WITH_THING",
-          "num_params": 2,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "id": "0B19",
-          "name": "BITWISE_XOR_THING_WITH_THING",
-          "num_params": 2,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0B1A",
-          "name": "BITWISE_NOT",
-          "num_params": 1,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "id": "0B1B",
-          "name": "BITWISE_MOD_THING_BY_THING",
-          "num_params": 2,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "id": "0B1C",
-          "name": "BITWISE_SHR_THING_BY_THING",
-          "num_params": 2,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "",
-              "type": "int"
-            }
-          ],
-          "id": "0B1D",
-          "name": "BITWISE_SHL_THING_BY_THING",
-          "num_params": 2,
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "clipboard",
-      "commands": [
-        {
-          "input": [
-            {
-              "name": "memory",
-              "type": "any",
-              "source": "var_any"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "id": "0B20",
-          "name": "READ_CLIPBOARD_DATA",
-          "num_params": 2,
-          "class": "Clipboard",
-          "member": "ReadData",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "memory",
-              "type": "any",
-              "source": "var_any"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "id": "0B21",
-          "name": "WRITE_CLIPBOARD_DATA",
-          "num_params": 2,
-          "class": "Clipboard",
-          "member": "WriteData",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        }
-      ]
-    },
-    {
       "name": "file",
       "commands": [
         {
@@ -49835,236 +49879,6 @@
             "is_static": true,
             "is_condition": true
           },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "ini",
-      "commands": [
-        {
-          "input": [
-            {
-              "name": "path",
-              "type": "string"
-            },
-            {
-              "name": "section",
-              "type": "string"
-            },
-            {
-              "name": "key",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "value",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AF0",
-          "name": "READ_INT_FROM_INI_FILE",
-          "num_params": 4,
-          "class": "IniFile",
-          "member": "ReadInt",
-          "short_desc": "Reads an integer value from the ini file",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "value",
-              "type": "int"
-            },
-            {
-              "name": "path",
-              "type": "string"
-            },
-            {
-              "name": "section",
-              "type": "string"
-            },
-            {
-              "name": "key",
-              "type": "string"
-            }
-          ],
-          "id": "0AF1",
-          "name": "WRITE_INT_TO_INI_FILE",
-          "num_params": 4,
-          "class": "IniFile",
-          "member": "WriteInt",
-          "short_desc": "Writes the integer value to the ini file",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "path",
-              "type": "string"
-            },
-            {
-              "name": "section",
-              "type": "string"
-            },
-            {
-              "name": "key",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "value",
-              "type": "float",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AF2",
-          "name": "READ_FLOAT_FROM_INI_FILE",
-          "num_params": 4,
-          "class": "IniFile",
-          "member": "ReadFloat",
-          "short_desc": "Reads a floating-point value from the ini file",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "value",
-              "type": "float"
-            },
-            {
-              "name": "path",
-              "type": "string"
-            },
-            {
-              "name": "section",
-              "type": "string"
-            },
-            {
-              "name": "key",
-              "type": "string"
-            }
-          ],
-          "id": "0AF3",
-          "name": "WRITE_FLOAT_TO_INI_FILE",
-          "num_params": 4,
-          "class": "IniFile",
-          "member": "WriteFloat",
-          "short_desc": "Writes the floating-point value to the ini file",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "path",
-              "type": "string"
-            },
-            {
-              "name": "section",
-              "type": "string"
-            },
-            {
-              "name": "key",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "value",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AF4",
-          "name": "READ_STRING_FROM_INI_FILE",
-          "num_params": 4,
-          "class": "IniFile",
-          "member": "ReadString",
-          "short_desc": "Reads a string value from the ini file",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "value",
-              "type": "string"
-            },
-            {
-              "name": "path",
-              "type": "string"
-            },
-            {
-              "name": "section",
-              "type": "string"
-            },
-            {
-              "name": "key",
-              "type": "string"
-            }
-          ],
-          "id": "0AF5",
-          "name": "WRITE_STRING_TO_INI_FILE",
-          "num_params": 4,
-          "short_desc": "Writes the string value to the ini file",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "class": "IniFile",
-          "member": "WriteString",
           "platforms": [
             "pc"
           ],
@@ -51641,6 +51455,236 @@
           "attrs": {
             "is_static": true
           },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ini",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF0",
+          "name": "READ_INT_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadInt",
+          "short_desc": "Reads an integer value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "int"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF1",
+          "name": "WRITE_INT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteInt",
+          "short_desc": "Writes the integer value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF2",
+          "name": "READ_FLOAT_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadFloat",
+          "short_desc": "Reads a floating-point value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "float"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF3",
+          "name": "WRITE_FLOAT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteFloat",
+          "short_desc": "Writes the floating-point value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF4",
+          "name": "READ_STRING_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadString",
+          "short_desc": "Reads a string value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "string"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF5",
+          "name": "WRITE_STRING_TO_INI_FILE",
+          "num_params": 4,
+          "short_desc": "Writes the string value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "class": "IniFile",
+          "member": "WriteString",
           "platforms": [
             "pc"
           ],

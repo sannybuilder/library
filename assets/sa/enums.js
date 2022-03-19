@@ -1183,3 +1183,8 @@ export const KeyCode = {
   "Pa1": 253,
   "OemClear": 254
 };
+export const CarAlarm = {
+  "Off": 0,
+  "On": 1,
+  "Active": 2
+};

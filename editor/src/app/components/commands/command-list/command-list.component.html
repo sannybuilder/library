@@ -178,20 +178,22 @@
             <div class="row mt-3">
               <div class="col-12 text-right">
                 <ng-container *ngIf="row.extension !== DEFAULT_EXTENSION">
-                  <code class="platform-badge gold">
-                    {{ row.extension }}
-                  </code>
+                  <a class="badge-spacing" [routerLink]="['/', game, row.extension]">
+                    <code class="platform-badge gold">
+                      {{ row.extension }}
+                    </code>
+                  </a>
                 </ng-container>
 
                 <ng-container *ngFor="let p of row.command.versions">
                   <ng-container *ngIf="p !== 'any'">
-                    <code class="platform-badge"> V{{ p }} </code>
+                    <code class="platform-badge badge-spacing"> V{{ p }} </code>
                   </ng-container>
                 </ng-container>
 
                 <ng-container *ngFor="let p of row.command.platforms">
                   <ng-container *ngIf="p !== 'any'">
-                    <code class="platform-badge">
+                    <code class="platform-badge badge-spacing">
                       {{ p }}
                     </code>
                   </ng-container>

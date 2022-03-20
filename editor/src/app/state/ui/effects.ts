@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { combineLatest, merge } from 'rxjs';
+import { merge } from 'rxjs';
 import {
   changePage,
   displayClassesList,
@@ -64,7 +64,7 @@ export class UiEffects {
   viewOnLoad$ = createEffect(() =>
     this._actions$.pipe(
       ofType(onListEnter),
-      withLatestFrom(this._ui.canEdit$),
+      withLatestFrom(this._ui.canEdit$, this._game.game$),
       switchMap(
         ([
           {
@@ -78,6 +78,7 @@ export class UiEffects {
             versions,
           },
           canEdit,
+          game,
         ]) => {
           if (action === 'decision-tree') {
             return [displayDecisionTree()];
@@ -187,7 +188,28 @@ export class UiEffects {
             ];
           }
 
-          return [stopEditOrDisplay()];
+          // toggle extensions
+          return this._extensions.extensions$.pipe(
+            tap((extensions) => {
+              if (extension) {
+                this._ui.selectExtensions(
+                  game,
+                  extensions
+                    .filter((e) => e.name !== extension)
+                    .map((e) => e.name),
+                  false
+                );
+                this._ui.selectExtensions(game, [extension], true);
+              } else {
+                this._ui.selectExtensions(
+                  game,
+                  extensions.map((e) => e.name),
+                  true
+                );
+              }
+            }),
+            map(() => stopEditOrDisplay())
+          );
         }
       )
     )

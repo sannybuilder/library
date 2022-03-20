@@ -27,7 +27,7 @@ export class GameFacade {
     versions,
   }: {
     game: Game;
-    extension: string;
+    extension?: string;
     opcode?: string;
     enumName?: string;
     className?: string;

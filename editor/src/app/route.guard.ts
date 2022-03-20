@@ -90,7 +90,7 @@ export class RouteGuard implements CanActivate {
 
     // extensions
     const opcode = segments.shift();
-    const extension = subPath || DEFAULT_EXTENSION;
+    const extension = subPath;
 
     const platforms = getPlatformsFromUrl(this._router, state.url, game);
     const versions = getVersionsFromUrl(this._router, state.url, game);

@@ -5,7 +5,7 @@ export const onListEnter = createAction(
   '[game] on list enter',
   props<{
     game: Game;
-    extension: string;
+    extension?: string;
     opcode?: string;
     enumName?: string;
     className?: string;

@@ -106,8 +106,7 @@ export function doesCommandHaveMissingSelfParamInMethod(command: Command) {
     !is_constructor &&
     !!className &&
     !!member &&
-    num_params > 0 &&
-    !commandParams(command).some((p) => p.name === SELF)
+    (!num_params || !commandParams(command).some((p) => p.name === SELF))
   );
 }
 

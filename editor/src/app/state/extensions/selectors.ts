@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { uniqBy } from 'lodash';
 import {
   ClassMeta,
   Command,
@@ -8,7 +9,7 @@ import {
   SupportInfo,
 } from '../../models';
 import { game } from '../game/selectors';
-import {  ExtensionsState, GameState } from './reducer';
+import { ExtensionsState, GameState } from './reducer';
 
 export const extensionsState =
   createFeatureSelector<ExtensionsState>('extensions');
@@ -97,6 +98,7 @@ export const commandRelated = createSelector(
     const commands = extensions?.find(
       (e) => e.name === props.extension
     )?.commands;
+
     if (!commands) {
       return;
     }
@@ -117,7 +119,22 @@ export const commandRelated = createSelector(
         })
       : [];
 
-    return [...referenced, ...overloads];
+    const get_set_pairs = [];
+    if (name?.startsWith('GET_')) {
+      const setter = name.replace('GET_', 'SET_');
+      const pair = commands.find((c) => c.name === setter);
+      if (pair) {
+        get_set_pairs.push(pair);
+      }
+    } else if (name?.startsWith('SET_')) {
+      const getter = name.replace('SET_', 'GET_');
+      const pair = commands.find((c) => c.name === getter);
+      if (pair) {
+        get_set_pairs.push(pair);
+      }
+    }
+
+    return uniqBy([...referenced, ...overloads, ...get_set_pairs], 'id');
   }
 );
 

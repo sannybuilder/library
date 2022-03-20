@@ -28,7 +28,7 @@
     class="sample"
   ><span class="comment" *ngIf="meta?.desc as classDesc">// {{ classDesc }}
 </span>class <span class="identifier">{{ className }}</span><span *ngIf="meta?.extends as extends"> extends <a [routerLink]="['/', game, 'classes', extends]" class="identifier">{{ extends }}</a></span> <span 
-*ngIf="classOrigin !== DEFAULT_EXTENSION && commandsHaveSameOrigin" class="comment">// <span [innerHTML]="'ui.classOverview.onlyWithExtension' | translate: { extension: classOrigin }"></span></span>
+*ngIf="classOrigin !== DEFAULT_EXTENSION && commandsHaveSameOrigin" class="comment">// <span [innerHTML]="'ui.classOverview.onlyWithExtension' | translate: { extension: classOrigin, game: game }"></span></span>
 <ng-container *ngFor="let classCommand of classCommands | filterMethods: filterQuery; let isLast=last"><ng-container 
     *ngTemplateOutlet="memberTemplate; 
     context: { 
@@ -106,7 +106,7 @@
     <span
       [innerHTML]="
         'ui.classOverview.onlyWithExtensionInline'
-          | translate: { extension: extension }
+          | translate: { extension: extension, game: game }
       "
     ></span>
   </span>

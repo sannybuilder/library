@@ -103,54 +103,10 @@
                 </ng-container>
 
                 <ng-container *ngIf="row.command.class && row.command.member">
-                  <ng-container *ngIf="row.command.attrs?.is_constructor">
-                    <code>
-                      <span
-                        [innerHTML]="row.command | outputParams | sanitize"
-                      ></span>
-                      =
-                      <a
-                        class="identifier"
-                        [routerLink]="['/', game, 'classes', row.command.class]"
-                        ><span
-                          [innerHTML]="
-                            row.command | propExtract: 'class' | sanitize
-                          "
-                        ></span></a
-                      >.<span
-                        class="identifier"
-                        [innerHTML]="
-                          row.command | propExtract: 'member' | sanitize
-                        "
-                      ></span
-                      ><span
-                        [innerHTML]="row.command | inputParams | sanitize"
-                      ></span
-                    ></code>
-                  </ng-container>
-
-                  <ng-container *ngIf="!row.command.attrs?.is_constructor">
-                    <code>
-                      <a
-                        class="identifier"
-                        [routerLink]="['/', game, 'classes', row.command.class]"
-                      >
-                        <span
-                          [innerHTML]="
-                            row.command | propExtract: 'class' | sanitize
-                          "
-                        ></span></a
-                      >.<span
-                        class="identifier"
-                        [innerHTML]="
-                          row.command | propExtract: 'member' | sanitize
-                        "
-                      ></span
-                      ><span
-                        [innerHTML]="row.command | classParams | sanitize"
-                      ></span
-                    ></code>
-                  </ng-container>
+                  <scl-formatter-class
+                    [game]="game"
+                    [command]="row.command"
+                  ></scl-formatter-class>
                 </ng-container>
 
                 <ng-container

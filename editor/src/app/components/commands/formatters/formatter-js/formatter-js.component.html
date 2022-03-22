@@ -1,0 +1,19 @@
+<code *ngIf="command.class && command.member">
+  <ng-container *ngIf="command.output?.length === 1">
+    var {{ command.output[0].name }} =
+  </ng-container>
+  <ng-container *ngIf="command.output?.length > 1"> var result = </ng-container>
+
+  <a
+    class="identifier"
+    [attr.title]="classDesc"
+    [routerLink]="['/', game, 'classes', command.class]"
+    >{{ getClassName(command) }}</a
+  >.<span class="identifier">{{
+    !command.attrs?.is_constructor && !command.attrs?.is_static
+      ? lowerFirst(command.member)
+      : command.member
+  }}</span
+  ><span [innerHTML]="command | inputParamsJs | sanitize"></span
+  ><ng-container *ngIf="command.attrs?.is_condition">: bool</ng-container></code
+>

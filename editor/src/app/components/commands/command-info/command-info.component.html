@@ -47,37 +47,28 @@
       </ng-container>
 
       <ng-container *ngIf="command.class && command.member">
-        <ng-container *ngIf="command.attrs?.is_constructor">
-          <code>
-            <span [innerHTML]="command | outputParams | sanitize"></span> =
-            <a
-              class="identifier"
-              [attr.title]="classDesc"
-              [routerLink]="['/', game, 'classes', command.class]"
-              >{{ command.class }}</a
-            >.<span class="identifier">{{ command.member }}</span
-            ><span [innerHTML]="command | inputParams | sanitize"></span
-          ></code>
-        </ng-container>
-
-        <ng-container *ngIf="!command.attrs?.is_constructor">
-          <code
-            ><a
-              class="identifier"
-              [attr.title]="classDesc"
-              [routerLink]="['/', game, 'classes', command.class]"
-              >{{ command.class }}</a
-            >.<span class="identifier">{{ command.member }}</span
-            ><span [innerHTML]="command | classParams | sanitize"></span
-          ></code>
-        </ng-container>
+        <scl-formatter-class
+          class="formatter"
+          [game]="game"
+          [command]="command"
+          [classDesc]="classDesc"
+        ></scl-formatter-class>
       </ng-container>
 
       <ng-container *ngIf="displayOpcodePresentation">
-        <code
-          >{{ command.id | opcode }}: {{ command.name | lowercase }}
-          <span [innerHTML]="command | opcodeParams | sanitize"></span
-        ></code>
+        <scl-formatter-opcode
+          class="formatter"
+          [command]="command"
+        ></scl-formatter-opcode>
+      </ng-container>
+
+      <ng-container *ngIf="displayJsPresentation">
+        <scl-formatter-js
+          class="formatter"
+          [game]="game"
+          [command]="command"
+          [classDesc]="classDesc"
+        ></scl-formatter-js>
       </ng-container>
 
       <div *ngIf="command.input?.length > 0" class="mt-3">

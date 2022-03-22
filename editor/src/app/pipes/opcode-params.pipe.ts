@@ -27,14 +27,16 @@ export class OpcodeParamsPipe implements PipeTransform {
     );
 
     if (output) {
-      return `${input} store_to ${output}`;
+      return `${input} <span class="identifier">store_to</span> ${output}`;
     }
     return input;
   }
 
   private _tranformParamName(p: Param) {
     return p.name
-      ? `<span class="param-name">${snakeCase(p.name)}</span>`
+      ? `<span class="param-name">${
+          p.name.startsWith('_') ? p.name : snakeCase(p.name)
+        }</span>`
       : p.name;
   }
 }

@@ -36,6 +36,8 @@ import {
   OpcodeParamsPipe,
   FilterMethodsPipe,
   StripPunctuationPipe,
+  InputParamsJsPipe,
+  OutputParamsJsPipe,
 } from './pipes';
 
 // extensions state
@@ -91,6 +93,9 @@ import {
   CommandInfoComponent,
   CommandListComponent,
   CommandGamesComponent,
+  FormatterClassComponent,
+  FormatterOpcodeComponent,
+  FormatterJsComponent,
 } from './components/commands';
 
 import {
@@ -162,6 +167,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     GameTitleSimplePipe,
     ParametrifyPipe,
     InputParamsPipe,
+    InputParamsJsPipe,
+    OutputParamsJsPipe,
     OutputParamsPipe,
     SingleParamPipe,
     SanitizePipe,
@@ -192,6 +199,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     IconButtonComponent,
     CopyButtonComponent,
     DecisionTreeComponent,
+    FormatterClassComponent,
+    FormatterOpcodeComponent,
+    FormatterJsComponent,
   ],
   imports: [
     BrowserModule,

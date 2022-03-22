@@ -14,3 +14,5 @@ export * from './opcode-params.pipe';
 export * from './filter-methods';
 export * from './strip-punctuation';
 export * from './game-title-simple.pipe';
+export * from './input-params-js.pipe';
+export * from './output-params-js.pipe';

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1648399173076,
-    "version": "0.227",
+    "last_update": 1648402281411,
+    "version": "0.228",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -17428,9 +17428,9 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Game",
+          "class": "Mission",
           "id": "045C",
-          "member": "FailCurrentMission",
+          "member": "Fail",
           "name": "FAIL_CURRENT_MISSION",
           "num_params": 0,
           "short_desc": "Terminates the active mission by executing its mission cleanup routine"
@@ -29474,7 +29474,7 @@
             },
             {
               "name": "missionId",
-              "type": "int"
+              "type": "CarMission"
             },
             {
               "name": "cruiseSpeed",
@@ -29482,7 +29482,7 @@
             },
             {
               "name": "drivingStyle",
-              "type": "int"
+              "type": "CarDrivingStyle"
             }
           ],
           "id": "06E1",
@@ -49649,10 +49649,12 @@
           "name": "IS_ON_MISSION",
           "num_params": 0,
           "attrs": {
-            "is_keyword": true,
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns true if the player is on a mission (the variable set in 0180 is not zero)"
+          "short_desc": "Returns true if the player is on a mission (the variable set in 0180 is not zero)",
+          "class": "Mission",
+          "member": "IsOn"
         },
         {
           "id": "0E20",

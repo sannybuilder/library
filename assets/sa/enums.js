@@ -1188,3 +1188,24 @@ export const CarAlarm = {
   "On": 1,
   "Active": 2
 };
+export const VehicleSubclass = {
+  "Automobile": 0,
+  "Mtruck": 1,
+  "Quad": 2,
+  "Heli": 3,
+  "Plane": 4,
+  "Boat": 5,
+  "Train": 6,
+  "Fheli": 7,
+  "Fplane": 8,
+  "Bike": 9,
+  "Bmx": 10,
+  "Trailer": 11
+};
+export const EntityType = {
+  "Other": 0,
+  "Building": 1,
+  "Object": 2,
+  "Ped": 3,
+  "Vehicle": 4
+};

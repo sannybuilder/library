@@ -42,6 +42,7 @@ Math
 Memory
 Menu
 MenuGrid
+Mission
 Mouse
 Object
 Pad
@@ -893,7 +894,6 @@ ClearRelationship,0747,0,0,("relationshipType: RelationshipType" "ofPedType: Ped
 ClearSpecificZonesToTriggerGangWar,090D,0,0,()
 ClearWantedLevelInGarage,09D4,0,0,()
 EnableEntryExitPlayerGroupWarping,0864,0,0,("x%f" "y%f" "radius%f" "state%b")
-FailCurrentMission,045C,0,0,()
 FindMaxNumberOfGroupMembers,0956,0,0,("maxNum%i")
 ForceAllVehicleLightsOff,0A37,0,0,("state%b")
 ForceDeathRestart,0970,0,0,()
@@ -1182,6 +1182,12 @@ $END
 $MenuGrid
 $BEGIN
 Create,0964,0,0,("header: gxt_key" "topLeftX%f" "topLeftY%f" "width%f" "numColumns%i" "interactive%b" "background%b" "alignment%i" "handle: MenuGrid")
+$END
+
+$Mission
+$BEGIN
+Fail,045C,0,0,()
+IsOn,0E1D,1,0,()
 $END
 
 $Mouse
@@ -1645,7 +1651,7 @@ AimGunAtChar,0635,0,0,("char: Char" "target: Char" "time%i")
 AimGunAtCoord,0667,0,0,("handle: Char" "x%f" "y%f" "z%f" "time%i")
 CarDriveToCoord,05D1,0,0,("driver: Char" "vehicle: Car" "x%f" "y%f" "z%f" "speed%f" "_p7%i" "_p8%i" "drivingStyle: CarDrivingStyle")
 CarDriveWander,05D2,0,0,("char: Char" "vehicle: Car" "speed%f" "drivingStyle%i")
-CarMission,06E1,0,0,("char: Char" "vehicle: Car" "targetVehicle: Car" "missionId%i" "cruiseSpeed%f" "drivingStyle%i")
+CarMission,06E1,0,0,("char: Char" "vehicle: Car" "targetVehicle: Car" "missionId: CarMission" "cruiseSpeed%f" "drivingStyle: CarDrivingStyle")
 CarTempAction,06C7,0,0,("char: Char" "vehicle: Car" "actionId%i" "time%i")
 CharArrestChar,06E4,0,0,("char: Char" "target: Char")
 CharSlideToCoord,07CD,0,0,("handle: Char" "x%f" "y%f" "z%f" "angle%f" "radius%f")

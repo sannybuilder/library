@@ -108,7 +108,16 @@ function validateFormatting(command: Command, extension: string): void {
     exitStatus = 1;
   }
 
-  commandParams(command).forEach((param: Param) => {
+  const params = commandParams(command);
+
+  if (params.length !== command.num_params) {
+    console.error(
+      `Error: num_params must be equal to the sum of input and output parameters, id: ${command.id}, extension: ${extension}`
+    );
+    exitStatus = 1;
+  }
+
+  params.forEach((param: Param) => {
     if (trim(formatParamName(param.name)) !== param.name) {
       console.error(
         `Error: param name is not properly formatted, expected ${trim(

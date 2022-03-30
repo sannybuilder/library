@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1648651690858,
-    "version": "0.232",
+    "last_update": 1648675879350,
+    "version": "0.233",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -46393,7 +46393,7 @@
           "id": "0A8C",
           "name": "WRITE_MEMORY",
           "num_params": 4,
-          "short_desc": "Writes a value to the game memory",
+          "short_desc": "Writes the value at the memory address",
           "class": "Memory",
           "member": "Write",
           "attrs": {
@@ -49279,6 +49279,38 @@
         {
           "input": [
             {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0D4E",
+          "name": "READ_STRUCT_OFFSET",
+          "num_params": 4,
+          "class": "Memory",
+          "member": "ReadStructOffset",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Reads a value from the given offset from the memory address"
+        },
+        {
+          "input": [
+            {
               "name": "self",
               "type": "Car"
             }
@@ -49727,6 +49759,31 @@
           "short_desc": "Gets the mouse sensibility set in the game options"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "fixGround",
+              "type": "bool"
+            },
+            {
+              "name": "fixBrightness",
+              "type": "bool"
+            },
+            {
+              "name": "fadeIn",
+              "type": "bool"
+            }
+          ],
+          "id": "0E24",
+          "name": "FIX_CHAR_GROUND_BRIGHTNESS_AND_FADE_IN",
+          "num_params": 4,
+          "class": "Char",
+          "member": "FixGroundBrightnessAndFadeIn"
+        },
+        {
           "id": "0E25",
           "name": "IS_ON_CUTSCENE",
           "num_params": 0,
@@ -49759,6 +49816,70 @@
             "is_static": true
           },
           "short_desc": "Checks if the weapon has the specified fire type"
+        },
+        {
+          "input": [
+            {
+              "name": "x1",
+              "type": "float"
+            },
+            {
+              "name": "y1",
+              "type": "float"
+            },
+            {
+              "name": "x2",
+              "type": "float"
+            },
+            {
+              "name": "y2",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "angle",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E27",
+          "name": "GET_ANGLE_FROM_TWO_COORDS",
+          "num_params": 5,
+          "class": "Math",
+          "member": "GetAngleFromTwoCoords",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0E28",
+          "name": "WRITE_STRUCT_OFFSET",
+          "num_params": 4,
+          "class": "Memory",
+          "member": "WriteStructOffset",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Writes the value at the given offset from the memory address"
         },
         {
           "input": [

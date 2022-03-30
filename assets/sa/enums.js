@@ -1216,3 +1216,11 @@ export const ImGuiCond = {
   "FirstUseEver": 4,
   "Appearing": 8
 };
+export const WeaponFire = {
+  "Melee": 0,
+  "InstantHit": 1,
+  "Projectile": 2,
+  "AreaEffect": 3,
+  "Camera": 4,
+  "Use": 5
+};

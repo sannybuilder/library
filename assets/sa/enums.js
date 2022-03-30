@@ -1209,3 +1209,10 @@ export const EntityType = {
   "Ped": 3,
   "Vehicle": 4
 };
+export const ImGuiCond = {
+  "None": 0,
+  "Always": 1,
+  "Once": 2,
+  "FirstUseEver": 4,
+  "Appearing": 8
+};

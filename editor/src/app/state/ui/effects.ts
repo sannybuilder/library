@@ -8,6 +8,7 @@ import {
   displayClassOverview,
   displayDecisionTree,
   displayEnumsList,
+  displayJsonGenerator,
   displayOrEditCommandInfo,
   displayOrEditEnum,
   displayOrEditSnippet,
@@ -85,8 +86,11 @@ export class UiEffects {
           if (action === 'decision-tree') {
             return [displayDecisionTree()];
           }
-          if (action === 'generate-json' && generateJsonModel) {
-            return [generateNewJson({ model: generateJsonModel })];
+          if (action === 'generate-json') {
+            if (generateJsonModel) {
+              return [generateNewJson({ model: generateJsonModel })];
+            }
+            return [displayJsonGenerator()];
           }
           if (enumName) {
             if (enumName === 'all') {

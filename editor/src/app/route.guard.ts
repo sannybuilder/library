@@ -99,6 +99,13 @@ export class RouteGuard implements CanActivate {
           generateJsonModel: { fileName, selectedExtensions },
         });
         return true;
+      } else {
+        this._game.onListEnter({
+          game,
+          extension: DEFAULT_EXTENSION,
+          action: 'generate-json'
+        });
+        return true;
       }
     }
 

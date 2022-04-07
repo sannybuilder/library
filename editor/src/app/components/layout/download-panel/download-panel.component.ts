@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   GameClassesAssets,
   GameEnumsAssets,
@@ -16,7 +16,6 @@ import {
 })
 export class DownloadPanelComponent {
   @Input() game: Game;
-  @Output() generate = new EventEmitter()
 
   getClasses(game: Game) {
     return GameClassesAssets[game];
@@ -36,10 +35,5 @@ export class DownloadPanelComponent {
 
   getExtensions(game: Game) {
     return GameLibrary[game];
-  }
-
-  customize() {
-    this.generate.emit(); 
-    return false;
   }
 }

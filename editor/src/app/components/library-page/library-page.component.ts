@@ -420,10 +420,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._tree.restart();
   }
 
-  onGenerateJson() {
-    this._ui.displayJsonGenerator();
-  }
-
   updateGenerateJsonModel(model: GenerateJsonModel) {
     this.generateJsonModel = model;
   }

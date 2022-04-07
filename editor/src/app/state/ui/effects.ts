@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { merge } from 'rxjs';
+import { combineLatest, merge } from 'rxjs';
 import {
   changePage,
   displayClassesList,
@@ -355,43 +355,44 @@ export class UiEffects {
     () =>
       this._actions$.pipe(
         ofType(generateNewJson),
-        withLatestFrom(
-          this._extensions.extensions$,
-          this._game.game$,
-          this._extensions.version$,
-          this._extensions.classesMeta$,
-          this._extensions.lastUpdate$
-        ),
+        switchMap(({ model }) => {
+          return combineLatest([
+            this._game.game$,
+            this._extensions.extensions$,
+            this._extensions.version$,
+            this._extensions.lastUpdate$,
+            this._extensions.classesMeta$,
+          ]).pipe(
+            take(1),
+            tap(([game, extensions, version, last_update, classes]) => {
+              const { selectedExtensions } = model;
 
-        tap(
-          ([{ model }, extensions, game, version, classesMeta, lastUpdate]) => {
-            const { selectedExtensions } = model;
+              const content = {
+                meta: {
+                  version,
+                  last_update,
+                  url: 'https://library.sannybuilder.com/#/' + game,
+                },
+                extensions: extensions.filter((e: any) =>
+                  selectedExtensions.includes(e.name)
+                ),
+                classes,
+              };
 
-            const content = {
-              meta: {
-                version,
-                last_update: lastUpdate,
-                url: 'https://library.sannybuilder.com/#/' + game,
-              },
-              extensions: extensions.filter((e) =>
-                selectedExtensions.includes(e.name)
-              ),
-              classes: classesMeta,
-            };
-
-            const element = document.createElement('a');
-            element.setAttribute(
-              'href',
-              'data:text/plain;charset=utf-8,' +
-                encodeURIComponent(JSON.stringify(content, null, 2))
-            );
-            element.setAttribute('download', model.fileName);
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-          }
-        )
+              const element = document.createElement('a');
+              element.setAttribute(
+                'href',
+                'data:text/plain;charset=utf-8,' +
+                  encodeURIComponent(JSON.stringify(content, null, 2))
+              );
+              element.setAttribute('download', model.fileName);
+              element.style.display = 'none';
+              document.body.appendChild(element);
+              element.click();
+              document.body.removeChild(element);
+            })
+          );
+        })
       ),
     { dispatch: false }
   );

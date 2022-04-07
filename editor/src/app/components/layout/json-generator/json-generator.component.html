@@ -1,0 +1,41 @@
+<h5>{{ "ui.generateJson.title" | translate }}</h5>
+
+<hr />
+
+<div class="row mb-3">
+  <div class="col-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-text">{{
+        "ui.generateJson.fileName" | translate
+      }}</span>
+      <input
+        type="text"
+        class="form-control"
+        [placeholder]="'File name'"
+        [(ngModel)]="fileName"
+        (ngModelChange)="emit()"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <p>{{ "ui.generateJson.selectExtensions" | translate }}</p>
+    <div
+      class="d-sm-inline-block d-xl-block pr-2"
+      *ngFor="let name of extensionNames"
+    >
+      <label class="form-check-label">
+        <input
+          type="checkbox"
+          [(ngModel)]="state[name]"
+          (ngModelChange)="emit()"
+        />
+        <span class="checkbox"></span>
+        {{ name }}
+      </label>
+    </div>
+  </div>
+</div>
+

@@ -156,14 +156,19 @@ export const classOrigin = createSelector(
       ?.name ?? DEFAULT_EXTENSION
 );
 
-export const classesMeta = createSelector(
+export const gameClassesMeta = createSelector(
   extensionsState,
   (state: ExtensionsState, props: { game: Game }) =>
     state.games[props.game]?.classesMeta ?? []
 );
 
 export const classMeta = createSelector(
-  classesMeta,
+  gameClassesMeta,
   (classesMeta: ClassMeta[], props: { game: Game; className: string }) =>
     classesMeta.find((m) => m.name === props.className)
+);
+
+export const classesMeta = createSelector(
+  state,
+  (state: GameState | undefined) => state?.classesMeta
 );

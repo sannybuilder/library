@@ -4,6 +4,7 @@ import {
   Command,
   EnumRaw,
   Game,
+  GenerateJsonModel,
   Modifier,
   ViewMode,
 } from '../../models';
@@ -84,3 +85,10 @@ export const toggleSearchHelp = createAction(
 export const dismissSearchHelp = createAction('[ui] dismiss search help');
 
 export const toggleSidebar = createAction('[ui] toggle sidebar');
+
+export const displayJsonGenerator = createAction('[ui] display json generator');
+
+export const generateNewJson = createAction(
+  '[ui] generate new json',
+  props<{ model: GenerateJsonModel }>()
+);

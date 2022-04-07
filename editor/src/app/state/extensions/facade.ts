@@ -23,13 +23,14 @@ export class ExtensionsFacade {
   lastUpdate$ = this.store$.select(selector.lastUpdate);
   version$ = this.store$.select(selector.version);
   supportInfo$ = this.store$.select(selector.supportInfo);
+  classesMeta$ = this.store$.select(selector.classesMeta);
 
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });
   }
 
   getGameClassesMeta(game: Game) {
-    return this.store$.select(selector.classesMeta, { game });
+    return this.store$.select(selector.gameClassesMeta, { game });
   }
 
   getGameVersion(game: Game) {

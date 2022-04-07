@@ -23,6 +23,7 @@ import {
   toggleSearchHelp,
   dismissSearchHelp,
   toggleSidebar,
+  displayJsonGenerator,
 } from './actions';
 
 export interface GameState {
@@ -251,6 +252,10 @@ export const uiReducer = createReducer(
   on(toggleSidebar, (state) => ({
     ...state,
     isSidebarCollapsed: !state.isSidebarCollapsed,
+  })),
+  on(displayJsonGenerator, (state) => ({
+    ...state,
+    viewMode: ViewMode.ViewGenerateJson,
   }))
 );
 

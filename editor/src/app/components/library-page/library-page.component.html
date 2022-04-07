@@ -9,7 +9,10 @@
           class="col-12 col-xl-2 left-rail"
           [ngClass]="{ collapsed: sidebar.collapsed }"
         >
-          <scl-download-panel [game]="game"></scl-download-panel>
+          <scl-download-panel
+            [game]="game"
+            (generate)="onGenerateJson()"
+          ></scl-download-panel>
           <scl-filter-panel [game]="game"></scl-filter-panel>
           <button
             class="btn btn-sm collapse-button d-none d-xl-block"
@@ -40,11 +43,7 @@
           }"
         >
           <div
-            class="
-              d-flex
-              flex-column flex-sm-row
-              align-items-start align-items-sm-center
-            "
+            class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center"
           >
             <nav aria-label="breadcrumb" class="mb-3 mr-auto">
               <ol class="breadcrumb">
@@ -126,9 +125,27 @@
       </div>
     </div>
 
-    <scl-modal *ngIf="viewMode !== ViewMode.None && screenSize < 1200">
+    <scl-modal
+      *ngIf="
+        viewMode !== ViewMode.None &&
+        viewMode !== ViewMode.ViewGenerateJson &&
+        screenSize < 1200
+      "
+    >
       <div class="modal-body">
         <ng-container *ngTemplateOutlet="rightRail"></ng-container>
+      </div>
+      <ng-container class="modal-footer">
+        <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+      </ng-container>
+    </scl-modal>
+
+    <scl-modal *ngIf="viewMode === ViewMode.ViewGenerateJson">
+      <div class="modal-body">
+        <scl-json-generator
+          [extensionNames]="extensionNames$ | async"
+          (changed)="updateGenerateJsonModel($event)"
+        ></scl-json-generator>
       </div>
       <ng-container class="modal-footer">
         <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
@@ -257,6 +274,15 @@
           (click)="treeRestart()"
         >
           {{ "ui.tree.startOver" | translate }}
+        </button>
+
+        <button
+          *ngIf="viewMode === ViewMode.ViewGenerateJson"
+          type="button"
+          class="btn btn-outline-success"
+          (click)="generateJson()"
+        >
+          {{ "ui.layout.downloads" | translate }}
         </button>
       </div>
     </ng-template>

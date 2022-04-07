@@ -7,6 +7,7 @@ import {
   Command,
   EnumRaw,
   Game,
+  GenerateJsonModel,
   Modifier,
   ViewMode,
 } from '../../models';
@@ -29,6 +30,8 @@ import {
   toggleSearchHelp,
   dismissSearchHelp,
   toggleSidebar,
+  displayJsonGenerator,
+  generateNewJson,
 } from './actions';
 import * as selector from './selectors';
 
@@ -184,5 +187,13 @@ export class UiFacade {
 
   dismissSearchHelp() {
     this.store$.dispatch(dismissSearchHelp());
+  }
+
+  displayJsonGenerator() {
+    this.store$.dispatch(displayJsonGenerator());
+  }
+
+  generateNewJson(model: GenerateJsonModel) {
+    this.store$.dispatch(generateNewJson({ model }));
   }
 }

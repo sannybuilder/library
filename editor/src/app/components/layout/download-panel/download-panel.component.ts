@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   GameClassesAssets,
   GameEnumsAssets,
   GameKeywordsAssets,
   Game,
   GameEnumsJsAssets,
+  GameLibrary,
 } from '../../../models';
 
 @Component({
@@ -15,6 +16,7 @@ import {
 })
 export class DownloadPanelComponent {
   @Input() game: Game;
+  @Output() generate = new EventEmitter()
 
   getClasses(game: Game) {
     return GameClassesAssets[game];
@@ -30,5 +32,14 @@ export class DownloadPanelComponent {
 
   getEnumsJs(game: Game) {
     return GameEnumsJsAssets[game];
+  }
+
+  getExtensions(game: Game) {
+    return GameLibrary[game];
+  }
+
+  customize() {
+    this.generate.emit(); 
+    return false;
   }
 }

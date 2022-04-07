@@ -98,6 +98,7 @@ import {
   HeaderComponent,
   DownloadPanelComponent,
   FilterPanelComponent,
+  JsonGeneratorComponent
 } from './components/layout';
 
 import {
@@ -192,6 +193,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     IconButtonComponent,
     CopyButtonComponent,
     DecisionTreeComponent,
+    JsonGeneratorComponent,
   ],
   imports: [
     BrowserModule,

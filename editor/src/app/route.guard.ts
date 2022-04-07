@@ -88,6 +88,20 @@ export class RouteGuard implements CanActivate {
       return true;
     }
 
+    if (subPath === 'generate') {
+      const params = segments.shift();
+      if (params) {
+        const [fileName, ...selectedExtensions] = params.split(',');
+        this._game.onListEnter({
+          game,
+          extension: DEFAULT_EXTENSION,
+          action: 'generate-json',
+          generateJsonModel: { fileName, selectedExtensions },
+        });
+        return true;
+      }
+    }
+
     // extensions
     const opcode = segments.shift();
     const extension = subPath;

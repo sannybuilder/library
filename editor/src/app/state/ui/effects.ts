@@ -11,6 +11,7 @@ import {
   displayOrEditCommandInfo,
   displayOrEditEnum,
   displayOrEditSnippet,
+  generateNewJson,
   resetFilters,
   scrollTop,
   selectClass,
@@ -76,12 +77,16 @@ export class UiEffects {
             searchTerm,
             platforms,
             versions,
+            generateJsonModel,
           },
           canEdit,
           game,
         ]) => {
           if (action === 'decision-tree') {
             return [displayDecisionTree()];
+          }
+          if (action === 'generate-json' && generateJsonModel) {
+            return [generateNewJson({ model: generateJsonModel })];
           }
           if (enumName) {
             if (enumName === 'all') {
@@ -340,6 +345,51 @@ export class UiEffects {
         selectExtensions({ game, extensions, state: true })
       )
     )
+  );
+
+  generateNewJson$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(generateNewJson),
+        withLatestFrom(
+          this._extensions.extensions$,
+          this._game.game$,
+          this._extensions.version$,
+          this._extensions.classesMeta$,
+          this._extensions.lastUpdate$
+        ),
+
+        tap(
+          ([{ model }, extensions, game, version, classesMeta, lastUpdate]) => {
+            const { selectedExtensions } = model;
+
+            const content = {
+              meta: {
+                version,
+                last_update: lastUpdate,
+                url: 'https://library.sannybuilder.com/#/' + game,
+              },
+              extensions: extensions.filter((e) =>
+                selectedExtensions.includes(e.name)
+              ),
+              classes: classesMeta,
+            };
+
+            const element = document.createElement('a');
+            element.setAttribute(
+              'href',
+              'data:text/plain;charset=utf-8,' +
+                encodeURIComponent(JSON.stringify(content, null, 2))
+            );
+            element.setAttribute('download', model.fileName);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+          }
+        )
+      ),
+    { dispatch: false }
   );
 
   constructor(

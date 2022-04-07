@@ -19,6 +19,7 @@ import {
   Enum,
   EnumRaw,
   Game,
+  GenerateJsonModel,
   ParamType,
   Primitive,
   ViewMode,
@@ -96,6 +97,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   screenSize: number;
   viewMode: ViewMode = ViewMode.None;
   editorHasError = false;
+  generateJsonModel: GenerateJsonModel;
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -379,6 +381,18 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       return [base, game, 'enums', enumName].join('/');
     }
 
+    if (viewMode === ViewMode.ViewGenerateJson && this.generateJsonModel) {
+      return [
+        base,
+        game,
+        'generate',
+        [
+          this.generateJsonModel.fileName,
+          this.generateJsonModel.selectedExtensions,
+        ].join(','),
+      ].join('/');
+    }
+
     if (viewMode === ViewMode.ViewCommand) {
       if (!command) {
         return [base, game, extension].join('/');
@@ -404,6 +418,19 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   treeRestart() {
     this._tree.restart();
+  }
+
+  onGenerateJson() {
+    this._ui.displayJsonGenerator();
+  }
+
+  updateGenerateJsonModel(model: GenerateJsonModel) {
+    this.generateJsonModel = model;
+  }
+
+  generateJson() {
+    this._ui.generateNewJson(this.generateJsonModel);
+    this._ui.stopEditOrDisplay();
   }
 
   private _onSaveCommand() {

@@ -280,6 +280,7 @@ export enum ViewMode {
   ViewAllClasses = 'ViewAllClasses',
   ViewAllEnums = 'ViewAllEnums',
   ViewDecisionTree = 'ViewDecisionTree',
+  ViewGenerateJson = 'ViewGenerateJson',
 }
 
 export type Modifier = 'except' | 'only';
@@ -331,4 +332,9 @@ export interface LoadExtensionsResponse {
   };
   extensions: Extension[];
   classes: ClassMeta[];
+}
+
+export interface GenerateJsonModel {
+  selectedExtensions: string[];
+  fileName: string;
 }

@@ -95,7 +95,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   enumToDisplayOrEdit?: EnumRaw;
   oldEnumToEdit?: EnumRaw;
   screenSize: number;
-  viewMode: ViewMode = ViewMode.None;
   editorHasError = false;
   generateJsonModel: GenerateJsonModel;
 
@@ -427,6 +426,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   generateJson() {
     this._ui.generateNewJson(this.generateJsonModel);
     this._ui.stopEditOrDisplay();
+  }
+
+  shouldDisplayRightRail(viewMode: ViewMode) {
+    return ![ViewMode.None, ViewMode.ViewGenerateJson].includes(viewMode);
   }
 
   private _onSaveCommand() {

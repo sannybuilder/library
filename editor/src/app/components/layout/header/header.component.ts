@@ -9,9 +9,9 @@ import {
   filter,
   map,
 } from 'rxjs/operators';
-import { getBaseGame, getBaseGames, isValidGame } from '../../../utils';
+import { getBaseGame, getBaseGames, getGameVariations, isValidGame } from '../../../utils';
 import { Config, CONFIG } from '../../../config';
-import { KNOWN_LANGUAGES } from '../../../models';
+import { Game, KNOWN_LANGUAGES } from '../../../models';
 import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 
 @Component({
@@ -106,5 +106,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   forceSearchHelp() {
     this._ui.toggleSearchHelp({ force: true });
+  }
+
+  getGameVariations(game: Game) {
+    return getGameVariations(game)
   }
 }

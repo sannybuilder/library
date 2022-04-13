@@ -154,6 +154,8 @@ export const extensionsReducer = createReducer(
           [Game.gta3_unreal]: state.games[Game.gta3_unreal],
           [Game.vc_unreal]: state.games[Game.vc_unreal],
           [Game.sa_unreal]: state.games[Game.sa_unreal],
+          [Game.unknown_x86]: state.games[Game.unknown_x86],
+          [Game.unknown_x64]: state.games[Game.unknown_x64],
         },
         game as Game
       ),

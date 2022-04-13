@@ -98,6 +98,14 @@ const defaultFilterState: {
       selectedClasses: ['any'],
       selectedExtensions: [],
     },
+    unknown_x86: {
+      selectedClasses: ['any'],
+      selectedExtensions: []
+    },
+    unknown_x64: {
+      selectedClasses: ['any'],
+      selectedExtensions: []
+    }
   },
 };
 

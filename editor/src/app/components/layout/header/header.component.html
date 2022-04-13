@@ -41,13 +41,13 @@
                 <scl-icon [game]="game" size="16"></scl-icon>
                 {{ game | gameTitle }}</a
               >
-              <a class="dropdown-item" [routerLink]="['/', game + '_mobile']">
-                <scl-icon [game]="game + '_mobile'" size="16"></scl-icon>
-                {{ game + "_mobile" | gameTitle }}</a
+              <a
+                *ngFor="let v of getGameVariations(game)"
+                class="dropdown-item"
+                [routerLink]="['/', v]"
               >
-              <a class="dropdown-item" [routerLink]="['/', game + '_unreal']">
-                <scl-icon [game]="game + '_unreal'" size="16"></scl-icon>
-                {{ game + "_unreal" | gameTitle }}</a
+                <scl-icon [game]="v" size="16"></scl-icon>
+                {{ v | gameTitle }}</a
               >
             </div>
           </li>
@@ -101,7 +101,7 @@
             data-display="static"
           >
             <ng-container *ngTemplateOutlet="translateIcon"></ng-container>
-            <span class="align-middle pl-1">{{
+            <span class="align-middle pl-1 d-none d-md-inline">{{
               "ui.header.switchLanguage" | translate
             }}</span></a
           >
@@ -375,21 +375,14 @@
                 {{ game | gameTitle }}</a
               >
               <a
+                *ngFor="let v of getGameVariations(game)"
                 class="dropdown-item"
-                [routerLink]="['/', game + '_mobile']"
+                [routerLink]="['/', v]"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
               >
-                <scl-icon [game]="game + '_mobile'" size="16"></scl-icon>
-                {{ game + "_mobile" | gameTitle }}</a
-              >
-              <a
-                class="dropdown-item"
-                [routerLink]="['/', game + '_unreal']"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                ><scl-icon [game]="game + '_unreal'" size="16"></scl-icon>
-                {{ game + "_unreal" | gameTitle }}</a
+                <scl-icon [game]="v" size="16"></scl-icon>
+                {{ v | gameTitle }}</a
               >
               <div class="dropdown-divider"></div>
             </ng-container>

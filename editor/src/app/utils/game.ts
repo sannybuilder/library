@@ -5,13 +5,14 @@ const GameEditions = {
   [Game.GTA3]: [Game.GTA3, Game.gta3_mobile, Game.gta3_unreal],
   [Game.VC]: [Game.VC, Game.vc_mobile, Game.vc_unreal],
   [Game.SA]: [Game.SA, Game.sa_mobile, Game.sa_unreal],
+  [Game.unknown_x86]: [Game.unknown_x86, Game.unknown_x64],
 };
 
 export function isValidGame(name: string | undefined): name is Game {
   if (!name) {
     return false;
   }
-
+ 
   return flatten(Object.values(GameEditions)).includes(name as Game);
 }
 
@@ -49,5 +50,9 @@ export function getSameEdition(game: Game): Game[] {
     case Game.vc_unreal:
     case Game.sa_unreal:
       return [Game.gta3_unreal, Game.vc_unreal, Game.sa_unreal];
+    case Game.unknown_x86:
+      return [Game.unknown_x86, Game.unknown_x64]
+    case Game.unknown_x64:
+      return [Game.unknown_x86, Game.unknown_x64]
   }
 }

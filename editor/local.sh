@@ -10,6 +10,9 @@ mkdir -p ../editor/src/assets/gta3_unreal
 mkdir -p ../editor/src/assets/vc_unreal
 mkdir -p ../editor/src/assets/sa_unreal
 
+mkdir -p ../editor/src/assets/unknown_x86
+mkdir -p ../editor/src/assets/unknown_x64
+
 npm run generate:support-info src/assets/support-info.json
 
 npm run generate:enums ../gta3/enums.json src/assets/gta3/enums.js
@@ -23,6 +26,9 @@ npm run generate:enums ../sa_mobile/enums.json src/assets/sa_mobile/enums.js
 npm run generate:enums ../gta3_unreal/enums.json src/assets/gta3_unreal/enums.js
 npm run generate:enums ../vc_unreal/enums.json src/assets/vc_unreal/enums.js
 npm run generate:enums ../sa_unreal/enums.json src/assets/sa_unreal/enums.js
+
+npm run generate:enums ../unknown_x86/enums.json src/assets/unknown_x86/enums.js
+npm run generate:enums ../unknown_x64/enums.json src/assets/unknown_x64/enums.js
 
 cd ../gta3
 cp *.json ../editor/src/assets/gta3
@@ -42,6 +48,10 @@ cd ../vc_unreal
 cp *.json ../editor/src/assets/vc_unreal
 cd ../sa_unreal
 cp *.json ../editor/src/assets/sa_unreal
+cd ../unknown_x86
+cp *.json ../editor/src/assets/unknown_x86
+cd ../unknown_x64
+cp *.json ../editor/src/assets/unknown_x64
 
 cd ../generator
 
@@ -60,6 +70,9 @@ cargo run enums ../sa_unreal/enums.json > ../editor/src/assets/sa_unreal/enums.t
 cargo run snippets ../gta3/snippets > ../editor/src/assets/gta3/snippets.json
 cargo run snippets ../vc/snippets > ../editor/src/assets/vc/snippets.json
 cargo run snippets ../sa/snippets > ../editor/src/assets/sa/snippets.json
+
+cargo run snippets ../unknown_x86/snippets > ../editor/src/assets/unknown_x86/snippets.json
+cargo run snippets ../unknown_x64/snippets > ../editor/src/assets/unknown_x64/snippets.json
 
 cargo run classes ../gta3/gta3.json gta3_classic > ../editor/src/assets/gta3/classes.db
 cargo run classes ../vc/vc.json vc_classic > ../editor/src/assets/vc/classes.db

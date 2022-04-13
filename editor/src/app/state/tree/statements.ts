@@ -21,6 +21,17 @@ import * as saRU from '../../../../../sa/statements/ru.json';
 import * as saCN from '../../../../../sa/statements/cn.json';
 import * as saBN from '../../../../../sa/statements/bn.json';
 
+import * as unkEN from '../../../../../unknown_x86/statements/en.json';
+import * as unkRU from '../../../../../unknown_x86/statements/ru.json';
+import * as unkCN from '../../../../../unknown_x86/statements/cn.json';
+import * as unkBN from '../../../../../unknown_x86/statements/bn.json';
+
+import * as unk64EN from '../../../../../unknown_x64/statements/en.json';
+import * as unk64RU from '../../../../../unknown_x64/statements/ru.json';
+import * as unk64CN from '../../../../../unknown_x64/statements/cn.json';
+import * as unk64BN from '../../../../../unknown_x64/statements/bn.json';
+
+
 const getStatements = (en: object, ru: object, cn: object, bn: object) => ({
   en: merge({}, get(sharedEN, 'default'), get(en, 'default')),
   ru: merge({}, get(sharedRU, 'default'), get(ru, 'default')),
@@ -31,6 +42,8 @@ const getStatements = (en: object, ru: object, cn: object, bn: object) => ({
 const gta3Statements = getStatements(gta3EN, gta3RU, gta3CN, gta3BN);
 const vcStatements = getStatements(vcEN, vcRU, vcCN, vcBN);
 const saStatements = getStatements(saEN, saRU, saCN, saBN);
+const unkStatements = getStatements(unkEN, unkRU, unkCN, unkBN);
+const unk64Statements = getStatements(unk64EN, unk64RU, unk64CN, unk64BN);
 
 const STATEMENTS: Record<Game, Record<string, Record<string, string>>> = {
   gta3: gta3Statements,
@@ -42,6 +55,8 @@ const STATEMENTS: Record<Game, Record<string, Record<string, string>>> = {
   sa: saStatements,
   sa_mobile: saStatements,
   sa_unreal: saStatements,
+  unknown_x86: unkStatements,
+  unknown_x64: unk64Statements,
 };
 
 export default STATEMENTS;

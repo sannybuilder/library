@@ -122,9 +122,11 @@ export enum Game {
   gta3_unreal = 'gta3_unreal',
   vc_unreal = 'vc_unreal',
   sa_unreal = 'sa_unreal',
+  unknown_x86 = 'unknown_x86',
+  unknown_x64 = 'unknown_x64'
 }
 
-export const GameClassesAssets: Record<Game, string> = {
+export const GameClassesAssets: Partial<Record<Game, string>> = {
   [Game.GTA3]: 'assets/gta3/classes.db',
   [Game.VC]: 'assets/vc/classes.db',
   [Game.SA]: 'assets/sa/classes.db',
@@ -136,7 +138,7 @@ export const GameClassesAssets: Record<Game, string> = {
   [Game.sa_unreal]: 'assets/sa_unreal/classes.db',
 };
 
-export const GameEnumsAssets: Record<Game, string> = {
+export const GameEnumsAssets: Partial<Record<Game, string>> = {
   [Game.GTA3]: 'assets/gta3/enums.txt',
   [Game.VC]: 'assets/vc/enums.txt',
   [Game.SA]: 'assets/sa/enums.txt',
@@ -148,7 +150,7 @@ export const GameEnumsAssets: Record<Game, string> = {
   [Game.sa_unreal]: 'assets/sa_unreal/enums.txt',
 };
 
-export const GameKeywordsAssets: Record<Game, string> = {
+export const GameKeywordsAssets: Partial<Record<Game, string>> = {
   [Game.GTA3]: 'assets/gta3/keywords.txt',
   [Game.VC]: 'assets/vc/keywords.txt',
   [Game.SA]: 'assets/sa/keywords.txt',
@@ -170,6 +172,8 @@ export const GameLibrary: Record<Game, string> = {
   [Game.gta3_unreal]: 'gta3_unreal/gta3_unreal.json',
   [Game.vc_unreal]: 'vc_unreal/vc_unreal.json',
   [Game.sa_unreal]: 'sa_unreal/sa_unreal.json',
+  [Game.unknown_x86]: 'unknown_x86/unknown_x86.json',
+  [Game.unknown_x64]: 'unknown_x64/unknown_x64.json',
 };
 
 export const GameVersion: Record<Game, string> = {
@@ -182,6 +186,8 @@ export const GameVersion: Record<Game, string> = {
   [Game.gta3_unreal]: 'gta3_unreal/version.txt',
   [Game.vc_unreal]: 'vc_unreal/version.txt',
   [Game.sa_unreal]: 'sa_unreal/version.txt',
+  [Game.unknown_x86]: 'unknown_x86/version.txt',
+  [Game.unknown_x64]: 'unknown_x64/version.txt',
 };
 
 export const GameSnippets: Record<Game, string> = {
@@ -194,6 +200,8 @@ export const GameSnippets: Record<Game, string> = {
   [Game.gta3_unreal]: 'gta3/snippets.json',
   [Game.vc_unreal]: 'vc/snippets.json',
   [Game.sa_unreal]: 'sa/snippets.json',
+  [Game.unknown_x86]: 'unknown_x86/snippets.json',
+  [Game.unknown_x64]: 'unknown_x64/snippets.json',
 };
 
 export const GameEnums: Record<Game, string> = {
@@ -206,6 +214,8 @@ export const GameEnums: Record<Game, string> = {
   [Game.gta3_unreal]: 'gta3_unreal/enums.json',
   [Game.vc_unreal]: 'vc_unreal/enums.json',
   [Game.sa_unreal]: 'sa_unreal/enums.json',
+  [Game.unknown_x86]: 'unknown_x86/enums.json',
+  [Game.unknown_x64]: 'unknown_x64/enums.json',
 };
 
 export const GameEnumsJsAssets: Record<Game, string> = {
@@ -218,6 +228,8 @@ export const GameEnumsJsAssets: Record<Game, string> = {
   [Game.gta3_unreal]: 'assets/gta3_unreal/enums.js',
   [Game.vc_unreal]: 'assets/vc_unreal/enums.js',
   [Game.sa_unreal]: 'assets/sa_unreal/enums.js',
+  [Game.unknown_x86]: 'assets/unknown_x86/enums.js',
+  [Game.unknown_x64]: 'assets/unknown_x64/enums.js',
 };
 
 export const GameTitle: Record<Game, string> = {
@@ -230,6 +242,8 @@ export const GameTitle: Record<Game, string> = {
   [Game.gta3_unreal]: 'GTA III (The Definitive Edition)',
   [Game.vc_unreal]: 'Vice City (The Definitive Edition)',
   [Game.sa_unreal]: 'San Andreas (The Definitive Edition)',
+  [Game.unknown_x86]: 'Unknown (32 bit)',
+  [Game.unknown_x64]: 'Unknown (64 bit)',
 };
 
 export const GameTitleSimple: Record<Game, string> = {
@@ -242,6 +256,8 @@ export const GameTitleSimple: Record<Game, string> = {
   [Game.gta3_unreal]: 'GTA III',
   [Game.vc_unreal]: 'Vice City',
   [Game.sa_unreal]: 'San Andreas',
+  [Game.unknown_x86]: 'Unknown',
+  [Game.unknown_x64]: 'Unknown',
 };
 
 export const GamePlatforms: Record<Game, Platform[]> = {
@@ -254,6 +270,8 @@ export const GamePlatforms: Record<Game, Platform[]> = {
   [Game.gta3_unreal]: [Platform.PC],
   [Game.vc_unreal]: [Platform.PC],
   [Game.sa_unreal]: [Platform.PC],
+  [Game.unknown_x86]: [Platform.PC],
+  [Game.unknown_x64]: [Platform.PC],
 };
 
 export const GameVersions: Record<Game, Version[]> = {
@@ -266,6 +284,8 @@ export const GameVersions: Record<Game, Version[]> = {
   [Game.gta3_unreal]: [Version._unreal10],
   [Game.vc_unreal]: [Version._unreal10],
   [Game.sa_unreal]: [Version._unreal10],
+  [Game.unknown_x86]: [Version._10],
+  [Game.unknown_x64]: [Version._10],
 };
 
 export const DEFAULT_EXTENSION = 'default';

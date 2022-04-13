@@ -63,6 +63,14 @@ const defaultFilterState: {
       selectedPlatforms: [],
       selectedVersions: [],
     },
+    unknown_x86: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
+    unknown_x64: {
+      selectedPlatforms: [],
+      selectedVersions: [],
+    },
   },
 };
 

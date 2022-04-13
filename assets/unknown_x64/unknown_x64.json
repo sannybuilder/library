@@ -1,0 +1,694 @@
+{
+  "meta": {
+    "version": "0.1",
+    "last_update": 1649867441297,
+    "url": "https://library.sannybuilder.com/#/unknown_x64"
+  },
+  "extensions": [
+    {
+      "name": "dylib",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "libraryFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA2",
+          "name": "LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "short_desc": "Loads the specified module (usually a dynamic-link library (DLL)) into the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "id": "0AA3",
+          "name": "FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "short_desc": "Frees the loaded dynamic-link library (DLL) module and unloads it from the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Free",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA4",
+          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "short_desc": "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL)",
+          "class": "DynamicLibrary",
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "ini",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF0",
+          "name": "READ_INT_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadInt",
+          "short_desc": "Reads an integer value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "int"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF1",
+          "name": "WRITE_INT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteInt",
+          "short_desc": "Writes the integer value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF2",
+          "name": "READ_FLOAT_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadFloat",
+          "short_desc": "Reads a floating-point value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "float"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF3",
+          "name": "WRITE_FLOAT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteFloat",
+          "short_desc": "Writes the floating-point value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF4",
+          "name": "READ_STRING_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadString",
+          "short_desc": "Reads a string value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "string"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "id": "0AF5",
+          "name": "WRITE_STRING_TO_INI_FILE",
+          "num_params": 4,
+          "short_desc": "Writes the string value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "class": "IniFile",
+          "member": "WriteString",
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        }
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "name": "Attractor",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Audio",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "AudioStream",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "AudioStream3D",
+      "constructable": true,
+      "extends": "AudioStream",
+      "desc": ""
+    },
+    {
+      "name": "Blip",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Boat",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Camera",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Car",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "CarGenerator",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "CardDecks",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Char",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Checkpoint",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Clipboard",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Clock",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Conversation",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Crane",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Credits",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Cutscene",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Debugger",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "DecisionMaker",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "DecisionMakerChar",
+      "constructable": true,
+      "extends": "DecisionMaker",
+      "desc": ""
+    },
+    {
+      "name": "DecisionMakerGroup",
+      "constructable": true,
+      "extends": "DecisionMaker",
+      "desc": ""
+    },
+    {
+      "name": "DynamicLibrary",
+      "constructable": true,
+      "desc": "Loading DLL files and finding exported functions"
+    },
+    {
+      "name": "File",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "FindFile",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Fs",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Fx",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Game",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Gang",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Garage",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Group",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Heli",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Hid",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Hud",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "ImGui",
+      "constructable": false,
+      "desc": "ImGui integration"
+    },
+    {
+      "name": "IniFile",
+      "constructable": false,
+      "desc": "Reading and writing .ini files"
+    },
+    {
+      "name": "KillFrenzy",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Math",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Memory",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Menu",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "MenuGrid",
+      "constructable": true,
+      "extends": "Menu",
+      "desc": ""
+    },
+    {
+      "name": "Mission",
+      "constructable": false,
+      "desc": "Current Mission control"
+    },
+    {
+      "name": "Mouse",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Object",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Pad",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Particle",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Path",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Pickup",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Plane",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Player",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Rc",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Restart",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "ScriptFire",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Searchlight",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Sequence",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Shopping",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Skip",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Sound",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Sphere",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Stat",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "StreamedScript",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Streaming",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "StuckCarCheck",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Task",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Text",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Trailer",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Train",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Txd",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "User3DMarker",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Weapon",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Weather",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Widget",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "World",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Zone",
+      "constructable": false,
+      "desc": ""
+    }
+  ]
+}

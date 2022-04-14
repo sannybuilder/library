@@ -242,8 +242,8 @@ export const GameTitle: Record<Game, string> = {
   [Game.gta3_unreal]: 'GTA III (The Definitive Edition)',
   [Game.vc_unreal]: 'Vice City (The Definitive Edition)',
   [Game.sa_unreal]: 'San Andreas (The Definitive Edition)',
-  [Game.unknown_x86]: 'Unknown (32 bit)',
-  [Game.unknown_x64]: 'Unknown (64 bit)',
+  [Game.unknown_x86]: 'Unknown (32-bit)',
+  [Game.unknown_x64]: 'Unknown (64-bit)',
 };
 
 export const GameTitleSimple: Record<Game, string> = {

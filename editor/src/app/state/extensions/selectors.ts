@@ -172,3 +172,9 @@ export const classesMeta = createSelector(
   state,
   (state: GameState | undefined) => state?.classesMeta
 );
+
+
+export const commandsToDelete = createSelector(
+  state,
+  (state: GameState | undefined) => state?.commandsToDelete
+);

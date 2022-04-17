@@ -13,6 +13,7 @@ import {
   loadExtensions,
   loadExtensionsSuccess,
   loadSupportInfo,
+  markCommandsToDelete,
   updateGameCommands,
 } from './actions';
 import { sortBy, last, orderBy } from 'lodash';
@@ -27,6 +28,7 @@ export interface GameState {
   version?: string;
   supportInfo: SupportInfo;
   classesMeta: ClassMeta[];
+  commandsToDelete: string[];
 }
 export interface ExtensionsState {
   games: Partial<Record<Game, GameState>>;
@@ -81,16 +83,20 @@ export const extensionsReducer = createReducer(
                 commandMatcher(command, newCommand, ignoreVersionAndPlatform),
               'id',
               (c) =>
-                newCommand.id && newCommand.name
-                  ? ignoreVersionAndPlatform
-                    ? {
-                        ...newCommand,
-                        platforms: c.platforms,
-                        versions: c.versions,
-                      }
-                    : newCommand
-                  : null,
-              () => (newCommand.id && newCommand.name ? newCommand : null)
+                state.games[game]?.commandsToDelete.includes(newCommand.name)
+                  ? null
+                  : ignoreVersionAndPlatform
+                  ? {
+                      ...newCommand,
+                      platforms: c.platforms,
+                      versions: c.versions,
+                    }
+                  : newCommand,
+
+              () =>
+                state.games[game]?.commandsToDelete.includes(newCommand.name)
+                  ? null
+                  : newCommand
             ),
           }),
           () => ({
@@ -133,6 +139,7 @@ export const extensionsReducer = createReducer(
     return updateState(state, game, {
       extensions,
       entities,
+      commandsToDelete: []
     });
   }),
   on(loadSupportInfo, (state, { data }) => {
@@ -159,6 +166,11 @@ export const extensionsReducer = createReducer(
         },
         game as Game
       ),
+    });
+  }),
+  on(markCommandsToDelete, (state, { names, game }) => {
+    return updateState(state, game, {
+      commandsToDelete: names,
     });
   })
 );

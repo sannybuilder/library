@@ -55,8 +55,12 @@ export const initSupportInfo = createAction(
   props<{ game: Game }>()
 );
 
-
 export const loadSupportInfo = createAction(
   '[extensions] load support info',
   props<{ data: Record<Game, SupportInfo> }>()
+);
+
+export const markCommandsToDelete = createAction(
+  '[extensions] mark commands to delete',
+  props<{ names: string[], game: Game }>()
 );

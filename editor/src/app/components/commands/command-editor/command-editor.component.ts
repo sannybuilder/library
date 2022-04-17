@@ -429,7 +429,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   get suggestedClassName(): string {
-    const parts = this.command.name!.split('_');
+    const parts = this.command.name.split('_');
 
     switch (parts[1]?.toUpperCase()) {
       case 'PLAYER':
@@ -460,7 +460,7 @@ export class CommandEditorComponent implements OnInit {
   get suggestedClassMember(): string {
     const className = this.suggestedClassName;
     if (className && this.command.class === className) {
-      const parts = this.command.name!.split('_');
+      const parts = this.command.name.split('_');
       parts.splice(1, 1);
       return parts.map(capitalize).join('');
     }

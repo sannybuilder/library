@@ -8,6 +8,7 @@ import {
   cloneCommand,
   initSupportInfo,
   init,
+  markCommandsToDelete,
 } from './actions';
 import * as selector from './selectors';
 
@@ -24,6 +25,7 @@ export class ExtensionsFacade {
   version$ = this.store$.select(selector.version);
   supportInfo$ = this.store$.select(selector.supportInfo);
   classesMeta$ = this.store$.select(selector.classesMeta);
+  commandsToDelete$ = this.store$.select(selector.commandsToDelete);
 
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });
@@ -123,5 +125,9 @@ export class ExtensionsFacade {
         })
       )
       .subscribe();
+  }
+
+  markCommandsToDelete(names: string[], game: Game) {
+    this.store$.dispatch(markCommandsToDelete({ names, game }));
   }
 }

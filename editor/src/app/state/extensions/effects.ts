@@ -103,12 +103,12 @@ export class ExtensionsEffects {
   updateCommands$ = createEffect(() =>
     this._actions$.pipe(
       ofType(updateCommands),
-      withLatestFrom(this._game.game$),
-      switchMap(([{ batch }, game]) => {
+      withLatestFrom(this._game.game$, this._extensions.commandsToDelete$),
+      switchMap(([{ batch }, game, commandsToDelete]) => {
         return zip(
           ...batch.map(({ command, newExtension, oldExtension }) => {
             // find copies of this command in other games to propagate the changes
-            if (command.id && command.name) {
+            if (!commandsToDelete?.includes(command.name)) {
               return this._extensions
                 .getCommandSupportInfo(command, oldExtension)
                 .pipe(
@@ -129,27 +129,40 @@ export class ExtensionsEffects {
                         ignoreVersionAndPlatform: d.game !== game,
                       }));
                     } else {
-                      return [{
+                      return [
+                        {
+                          game,
+                          command,
+                          newExtension,
+                          oldExtension,
+                          ignoreVersionAndPlatform: false,
+                        },
+                      ];
+                    }
+                  })
+                );
+            } else {
+              return this._extensions
+                .getCommandSupportInfo(command, oldExtension)
+                .pipe(
+                  take(1),
+                  map((supportInfo) => {
+                    // delete command only from this game
+                    return [
+                      {
                         game,
                         command,
                         newExtension,
                         oldExtension,
                         ignoreVersionAndPlatform: false,
-                      }];
-                    }
+                      },
+                      // also update supportinfo for other games where this command is present
+                      ...getSameCommands(supportInfo, game)
+                        .filter((d) => d.game !== game)
+                        .map((d) => ({ game: d.game })),
+                    ];
                   })
                 );
-            } else {
-              // if there is no id or name (deleting flow) - update only this game
-              return of([
-                {
-                  game,
-                  command,
-                  newExtension,
-                  oldExtension,
-                  ignoreVersionAndPlatform: false,
-                },
-              ]);
             }
           })
         );
@@ -158,13 +171,17 @@ export class ExtensionsEffects {
         const groups = groupBy(flatten(updates), 'game');
 
         return [
-          ...Object.entries(groups).map(([game, batch]) =>
-            updateGameCommands({
-              game: game as Game,
-              batch: batch as GameCommandUpdate[],
-            })
+          ...Object.entries(groups)
+            .filter(([_, group]) => group.some((batch) => 'command' in batch))
+            .map(([game, batch]) =>
+              updateGameCommands({
+                game: game as Game,
+                batch: batch as GameCommandUpdate[],
+              })
+            ),
+          ...Object.entries(groups).map(([game]) =>
+            initSupportInfo({ game: game as Game })
           ),
-          ...Object.values(Game).map((game) => initSupportInfo({ game })),
         ];
       })
     )

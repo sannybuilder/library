@@ -106,14 +106,22 @@ export function getQueryParamsForCommand(command: Command, game: Game) {
       if (v === Platform.Any) {
         return m;
       }
-      return m | (1 << GamePlatforms[game].indexOf(v));
+      const index = GamePlatforms[game].indexOf(v);
+      if (index === -1) {
+        return m;
+      }
+      return m | (1 << index);
     }, 0) || undefined;
   const v =
     versions.reduce((m, v) => {
       if (v === Version.Any) {
         return m;
       }
-      return m | (1 << GameVersions[game].indexOf(v));
+      const index = GameVersions[game].indexOf(v);
+      if (index === -1) {
+        return m;
+      }
+      return m | (1 << index);
     }, 0) || undefined;
 
   return { p, v };

@@ -1,6 +1,13 @@
 <ng-container *ngFor="let item of supportInfo">
   <a
-    [routerLink]="['/', item.game, extension, command.id]"
+    [routerLink]="[
+      '/',
+      item.game,
+      item.extension,
+      doesGameRequireOpcode(item.game)
+        ? command.id || command.name
+        : command.name
+    ]"
     [queryParams]="getQueryParamsForCommand(command, item.game)"
     *ngIf="item.level > SupportLevel.Unsupported"
   >

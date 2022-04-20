@@ -6,7 +6,7 @@ export const onListEnter = createAction(
   props<{
     game: Game;
     extension?: string;
-    opcode?: string;
+    id?: string;
     enumName?: string;
     className?: string;
     action?: string;

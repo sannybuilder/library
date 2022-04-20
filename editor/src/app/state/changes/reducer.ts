@@ -123,7 +123,7 @@ function stripBody(extensions: Extension[]) {
       pickBy(
         {
           ...c,
-          id: c.id,
+          id: c.id || null,
           attrs: c.attrs ? smash(c.attrs) : c.attrs,
           class: c.attrs?.is_unsupported ? null : c.class,
           member: c.attrs?.is_unsupported ? null : c.member,

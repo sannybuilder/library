@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { getQueryParamsForCommand } from '../../../utils';
+import { doesGameRequireOpcode, getQueryParamsForCommand } from '../../../utils';
 import { Command, DEFAULT_EXTENSION, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
@@ -35,8 +35,8 @@ export class CommandListComponent {
     private _ui: UiFacade
   ) {}
 
-  getSnippet(extension: string, opcode: string) {
-    return this._snippets.getSnippet(extension, opcode);
+  getSnippet(extension: string, id: string) {
+    return this._snippets.getSnippet(extension, id);
   }
 
   getCommandSupportInfo(command: Command, extension: string) {
@@ -60,5 +60,9 @@ export class CommandListComponent {
 
   getQueryParamsForCommand(command: Command, game: Game) {
     return getQueryParamsForCommand(command, game);
+  }
+
+  get doesGameRequireOpcode() {
+    return doesGameRequireOpcode(this.game);
   }
 }

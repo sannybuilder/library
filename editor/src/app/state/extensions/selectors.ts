@@ -57,7 +57,7 @@ export const extensionCommand = createSelector(
   ) =>
     extensions
       ?.find((e) => e.name === props.extension)
-      ?.commands?.find((c) => c.id === props.id)
+      ?.commands?.find((c) => (c.id || c.name) === props.id)
 );
 
 export const loading = createSelector(
@@ -86,7 +86,13 @@ export const commandSupportInfo = createSelector(
   (
     supportInfo: SupportInfo | undefined,
     props: { command: Command; extension: string }
-  ) => supportInfo?.[props.extension]?.[props.command.id]
+  ) => {
+    const extension = supportInfo?.[props.extension];
+    if (!extension) {
+      return;
+    }
+    return extension[props.command.id || props.command.name];
+  }
 );
 
 export const commandRelated = createSelector(
@@ -108,14 +114,12 @@ export const commandRelated = createSelector(
 
     const overloads = attrs?.is_overload
       ? commands.filter((c) => {
-          return (
-            c.id !== id &&
-            (c.name === name ||
-              (c.class &&
-                c.member &&
-                c.class === className &&
-                c.member === member))
-          );
+          const haveSameId = c.id === id;
+          const haveSameName = c.name === name;
+          const haveSameClass =
+            c.class && c.member && c.class === className && c.member === member;
+
+          return (!id || !haveSameId) && (haveSameName || haveSameClass);
         })
       : [];
 
@@ -172,7 +176,6 @@ export const classesMeta = createSelector(
   state,
   (state: GameState | undefined) => state?.classesMeta
 );
-
 
 export const commandsToDelete = createSelector(
   state,

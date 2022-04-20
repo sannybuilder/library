@@ -8,10 +8,10 @@ import * as selector from './selectors';
 export class SnippetsFacade {
   constructor(private store$: Store) {}
 
-  getSnippet(extension: string, opcode: string) {
+  getSnippet(extension: string, id: string) {
     return this.store$.select(selector.snippets, {
       extension,
-      opcode,
+      id,
     });
   }
 

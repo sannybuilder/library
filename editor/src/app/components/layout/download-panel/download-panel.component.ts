@@ -15,18 +15,21 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DownloadPanelComponent {
-  @Input() game: Game;
+  private _game: Game;
 
-  getClasses(game: Game) {
-    return GameClassesAssets[game];
+  sbFiles: Array<{ name: string; path: string | undefined }> = [];
+
+  @Input() set game(game: Game) {
+    this._game = game;
+    this.sbFiles = [
+      { name: 'classes.db', path: GameClassesAssets[game] },
+      { name: 'enums.txt', path: GameEnumsAssets[game] },
+      { name: 'keywords.txt', path: GameKeywordsAssets[game] },
+    ].filter(({ path }) => path);
   }
 
-  getEnums(game: Game) {
-    return GameEnumsAssets[game];
-  }
-
-  getKeywords(game: Game) {
-    return GameKeywordsAssets[game];
+  get game() {
+    return this._game;
   }
 
   getEnumsJs(game: Game) {

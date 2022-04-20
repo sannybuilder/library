@@ -56,3 +56,7 @@ export function getSameEdition(game: Game): Game[] {
       return [Game.unknown_x86, Game.unknown_x64]
   }
 }
+
+export function doesGameRequireOpcode(game: Game): boolean {
+  return game !== Game.unknown_x86 && game !== Game.unknown_x64;
+}

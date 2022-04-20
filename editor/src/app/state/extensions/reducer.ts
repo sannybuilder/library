@@ -83,26 +83,24 @@ export const extensionsReducer = createReducer(
                 commandMatcher(command, newCommand, ignoreVersionAndPlatform),
               'id',
               (c) =>
-                state.games[game]?.commandsToDelete.includes(newCommand.name)
+                state.games[game]?.commandsToDelete?.includes(newCommand.name)
                   ? null
                   : ignoreVersionAndPlatform
                   ? {
                       ...newCommand,
+                      id: c.id,
                       platforms: c.platforms,
                       versions: c.versions,
                     }
                   : newCommand,
 
               () =>
-                state.games[game]?.commandsToDelete.includes(newCommand.name)
+                state.games[game]?.commandsToDelete?.includes(newCommand.name)
                   ? null
                   : newCommand
             ),
           }),
-          () => ({
-            name,
-            commands: [newCommand],
-          })
+          () => ({ name, commands: [newCommand] })
         );
 
         if (name === oldExtension) {
@@ -125,10 +123,7 @@ export const extensionsReducer = createReducer(
               // remove previous collection if it is empty
               return null;
             }
-            return {
-              ...e,
-              commands,
-            };
+            return { ...e, commands };
           }
         );
       },
@@ -139,7 +134,7 @@ export const extensionsReducer = createReducer(
     return updateState(state, game, {
       extensions,
       entities,
-      commandsToDelete: []
+      commandsToDelete: [],
     });
   }),
   on(loadSupportInfo, (state, { data }) => {
@@ -278,11 +273,12 @@ function commandMatcher(
   b: Command,
   ignoreVersionAndPlatform: boolean
 ) {
+  const matches = a.id && b.id ? a.id === b.id : a.name === b.name;
   if (ignoreVersionAndPlatform) {
-    return a.id === b.id;
+    return matches;
   }
   return (
-    a.id === b.id &&
+    matches &&
     matchArrays(a.versions, b.versions) &&
     matchArrays(a.platforms, b.platforms)
   );

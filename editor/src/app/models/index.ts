@@ -256,8 +256,8 @@ export const GameTitleSimple: Record<Game, string> = {
   [Game.gta3_unreal]: 'GTA III',
   [Game.vc_unreal]: 'Vice City',
   [Game.sa_unreal]: 'San Andreas',
-  [Game.unknown_x86]: 'Unknown',
-  [Game.unknown_x64]: 'Unknown',
+  [Game.unknown_x86]: 'Other',
+  [Game.unknown_x64]: 'Other',
 };
 
 export const GamePlatforms: Record<Game, Platform[]> = {
@@ -317,6 +317,7 @@ export interface ClassMeta {
 export interface GameSupportInfo {
   game: Game;
   level: SupportLevel;
+  extension?: string; // only when command exists
 }
 
 export enum SupportLevel {

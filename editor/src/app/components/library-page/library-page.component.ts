@@ -33,6 +33,7 @@ import {
   TreeFacade,
 } from '../../state';
 import {
+  doesGameRequireOpcode,
   FUSEJS_OPTIONS,
   getBaseGames,
   getQueryParamsForCommand,
@@ -227,8 +228,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return false;
   }
 
-  getSnippet(extension: string, opcode: string) {
-    return this._snippets.getSnippet(extension, opcode);
+  getSnippet(extension: string, id: string) {
+    return this._snippets.getSnippet(extension, id);
   }
   getExtensionsEntities(extensions: string[]) {
     return (
@@ -396,7 +397,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       if (!command) {
         return [base, game, extension].join('/');
       }
-      const url = [base, game, extension, command.id].join('/');
+      const url = [base, game, extension, command.id || command.name].join('/');
 
       return serializeUrlAndParams(
         url,
@@ -430,6 +431,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   shouldDisplayRightRail(viewMode: ViewMode) {
     return ![ViewMode.None, ViewMode.ViewGenerateJson].includes(viewMode);
+  }
+
+  doesGameRequireOpcode(game: Game) {
+    return doesGameRequireOpcode(game);
   }
 
   private _onSaveCommand() {

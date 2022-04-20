@@ -3,14 +3,13 @@
     <scl-command-games
       [supportInfo]="supportInfo"
       [command]="command"
-      [extension]="extension"
     ></scl-command-games>
   </div>
 </div>
 
 <div class="row mb-2">
   <div class="col-12 d-flex flex-row">
-    <h5 class="mr-3">{{ command.id }}</h5>
+    <h5 class="mr-3" *ngIf="command.id">{{ command.id }}</h5>
     <h5 class="text-break">{{ command.name }}</h5>
   </div>
 </div>
@@ -73,7 +72,7 @@
         </ng-container>
       </ng-container>
 
-      <ng-container *ngIf="displayOpcodePresentation">
+      <ng-container *ngIf="displayOpcodePresentation && command.id">
         <code
           >{{ command.id | opcode }}: {{ command.name | lowercase }}
           <span [innerHTML]="command | opcodeParams | sanitize"></span
@@ -183,7 +182,12 @@
         <ul class="list-unstyled">
           <li *ngFor="let relatedCommand of relatedCommands">
             <a
-              [routerLink]="['/', game, extension, relatedCommand.id]"
+              [routerLink]="[
+                '/',
+                game,
+                extension,
+                relatedCommand.id || relatedCommand.name
+              ]"
               [queryParams]="getQueryParamsForCommand(relatedCommand, game)"
               >{{ relatedCommand.name }}</a
             >

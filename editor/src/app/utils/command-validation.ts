@@ -53,7 +53,7 @@ export function doesCommandHaveDuplicateName(
   return (otherCommands ?? []).some(
     ({ name, id, platforms, versions }) =>
       name === command.name &&
-      id !== command.id &&
+      (id && id !== command.id) &&
       intersection(thisCommandPlatforms, platforms ?? [Platform.Any]).length >
         0 &&
       intersection(thisCommandVersions, versions ?? [Version.Any]).length > 0 &&

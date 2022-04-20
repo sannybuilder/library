@@ -62,7 +62,7 @@
       >constructor
       <a
         class="identifier"
-        [routerLink]="['/', game, extension, command.id]"
+        [routerLink]="['/', game, extension, command.id || command.name]"
         [queryParams]="getQueryParamsForCommand(command, game)"
         [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
@@ -73,7 +73,7 @@
       >destructor
       <a
         class="identifier"
-        [routerLink]="['/', game, extension, command.id]"
+        [routerLink]="['/', game, extension, command.id || command.name]"
         [queryParams]="getQueryParamsForCommand(command, game)"
         [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
@@ -86,7 +86,7 @@
       <ng-container *ngIf="command.attrs?.is_static">static </ng-container
       ><a
         class="identifier"
-        [routerLink]="['/', game, extension, command.id]"
+        [routerLink]="['/', game, extension, command.id || command.name]"
         [queryParams]="getQueryParamsForCommand(command, game)"
         [ngClass]="{
           strike: command.attrs?.is_nop || command.attrs?.is_unsupported

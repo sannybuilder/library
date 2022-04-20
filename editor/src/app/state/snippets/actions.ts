@@ -18,5 +18,5 @@ export const updateSnippet = createAction(
 
 export const updateGameSnippet = createAction(
   '[snippets] update for the given game',
-  props<{ game: Game; extension: string; opcode: string; content: string }>()
+  props<{ game: Game; extension: string; id: string; content: string }>()
 );

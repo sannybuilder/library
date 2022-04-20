@@ -53,6 +53,7 @@ import {
   doesCommandDescriptionNotStartWith3rdPersonVerb,
   doesConstructorNotReturnHandle,
   doesVariadicCommandNotHaveArgumentsParameter,
+  doesGameRequireOpcode,
 } from '../../../utils';
 
 type ErrorType =
@@ -91,6 +92,7 @@ export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   isNew: boolean;
+  doesGameRequireOpcode: boolean;
   paramTypes: string[] = [];
   classes: string[] = [];
   primitives: PrimitiveType[] = [];
@@ -122,6 +124,7 @@ export class CommandEditorComponent implements OnInit {
       name,
       status: false,
     }));
+    this.doesGameRequireOpcode = doesGameRequireOpcode(val);
   }
 
   @Input() set command(val: Command) {
@@ -658,7 +661,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private updateEmptyOpcodeError() {
-    this.errors.emptyOpcode = doesCommandHaveEmptyId(this.command);
+    this.errors.emptyOpcode = this.doesGameRequireOpcode && doesCommandHaveEmptyId(this.command);
   }
 
   private noSelfInStaticMethod() {

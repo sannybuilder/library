@@ -11,10 +11,10 @@ export const snippets = createSelector(
   (
     state: SnippetsState,
     game: Game | undefined,
-    props: { extension: string; opcode: string }
+    props: { extension: string; id: string }
   ) => {
     return game
-      ? state.extensionSnippets[game]?.[props.extension]?.[props.opcode] ?? ''
+      ? state.extensionSnippets[game]?.[props.extension]?.[props.id] ?? ''
       : '';
   }
 );

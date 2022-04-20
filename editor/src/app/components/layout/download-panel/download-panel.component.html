@@ -1,7 +1,21 @@
 <div class="card mb-3">
   <div class="card-body flex-column">
     <h5 class="mb-3">{{ "ui.layout.downloads" | translate }}</h5>
-    <ul class="nav navbar-dark flex-row flex-xl-column">
+
+    <ul
+      *ngIf="sbFiles.length > 0"
+      class="nav navbar-dark flex-row flex-xl-column align-items-center align-items-xl-start"
+    >
+      <h6 class="mr-2 mt-2">{{ "ui.layout.forSannyBuilder" | translate }}:</h6>
+      <li class="pr-2" *ngFor="let file of sbFiles">
+        <a [href]="file.path" target="_blank" download>{{ file.name }}</a>
+      </li>
+    </ul>
+
+    <ul
+      class="nav navbar-dark flex-row flex-xl-column align-items-center align-items-xl-start mt-xl-2"
+    >
+      <h6 class="mr-2 mt-2">{{ "ui.layout.forCleoRedux" | translate }}:</h6>
       <li class="pr-2">
         <a [href]="'/assets/' + getExtensions(game)" target="_blank" download
           >{{ game }}.json</a
@@ -12,16 +26,13 @@
         >)
       </li>
       <li class="pr-2">
-        <a *ngIf="getClasses(game) as link" [href]="link" target="_blank" download>classes.db</a>
-      </li>
-      <li class="pr-2">
-        <a *ngIf="getEnums(game) as link" [href]="link" target="_blank" download>enums.txt</a>
-      </li>
-      <li class="pr-2">
-        <a *ngIf="getEnumsJs(game) as link" [href]="link" target="_blank" download>enums.js</a>
-      </li>
-      <li class="pr-2">
-        <a *ngIf="getKeywords(game) as link" [href]="link" target="_blank" download>keywords.txt</a>
+        <a
+          *ngIf="getEnumsJs(game) as link"
+          [href]="link"
+          target="_blank"
+          download
+          >enums.js</a
+        >
       </li>
     </ul>
   </div>

@@ -114,7 +114,7 @@ export class ExtensionsEffects {
                 .pipe(
                   withLatestFrom(
                     this._extensions.getExtensionCommand({
-                      id: command.id,
+                      id: command.id || command.name,
                       extension: oldExtension,
                     })
                   ),
@@ -305,7 +305,7 @@ export class ExtensionsEffects {
             extension.commands.forEach((command) => {
               if (doesCommandHaveAnyAttributeInvalid(command)) {
                 console.warn(
-                  `Invalid combination of attributes: extension ${extension.name}, opcode: ${command.id}`
+                  `Invalid combination of attributes: extension ${extension.name}, command: ${command.name}`
                 );
               }
             })
@@ -327,7 +327,12 @@ export class ExtensionsEffects {
     this._actions$.pipe(
       ofType(cloneCommand),
       tap(({ game, command, extension }) => {
-        this._router.navigate(['/', game, extension, command.id]);
+        this._router.navigate([
+          '/',
+          game,
+          extension,
+          command.id || command.name,
+        ]);
       }),
       switchMap(({ game, command, extension }) => [
         updateGameCommands({

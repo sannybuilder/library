@@ -15,15 +15,20 @@ export function getSupportInfo(
 ): SupportInfo {
   return extensions.reduce((m, { name, commands }) => {
     m[name] = commands.reduce((m2, command) => {
-      m2[command.id] = (Object.keys(state) as Game[]).map((v3) => ({
-        game: v3,
-        level: getSupportLevel(
-          game === v3
-            ? command
-            : getCommand(state[v3]?.extensions, name, command),
-          command
-        ),
-      }));
+      m2[command.id || command.name] = (Object.keys(state) as Game[]).map(
+        (v3) => {
+          const { extension, command: otherCommand } =
+            getCommand(state[v3]?.extensions, command) || {};
+          return {
+            game: v3,
+            level: getSupportLevel(
+              game === v3 ? command : otherCommand,
+              command
+            ),
+            extension,
+          };
+        }
+      );
       return m2;
     }, {} as Record<string, GameSupportInfo[]>);
     return m;
@@ -78,9 +83,24 @@ function getSupportLevel(command: Command | undefined, otherCommand: Command) {
 
 function getCommand(
   extensions: Extension[] | undefined,
-  extensionName: string,
   command: Command
-): Command | undefined {
-  const extension = extensions?.find((e) => e.name === extensionName);
-  return extension?.commands?.find((c) => c.id === command.id);
+): { command: Command; extension: string } | undefined {
+  if (!extensions) {
+    return;
+  }
+  const matcher = (c: Command) =>
+    c.id && command.id ? c.id === command.id : c.name === command.name;
+  for (const extension of extensions) {
+    const command = extension.commands.find(matcher);
+    if (command) {
+      return { command, extension: extension.name };
+    }
+  }
+  return undefined;
+  // const extension = extensions?.find((e) => e.name === extensionName);
+  // return extension?.commands?.find((c) => {
+  //   const matches =
+  //     c.id && command.id ? c.id === command.id : c.name === command.name;
+  //   return matches;
+  // });
 }

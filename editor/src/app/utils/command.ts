@@ -12,6 +12,7 @@ import {
   GameVersions,
   PrimitiveType,
 } from '../models';
+import { HEX_DIGITS, HEX_NEGATION } from './hex';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
 export function smash(value: object) {
@@ -87,12 +88,12 @@ export function formatOpcode(opcode: string) {
 }
 
 export function normalizeId(id: string): string {
-  if (id.length !== 4) {
+  if (!isOpcode(id)) {
     return id;
   }
-  if (id[0] === '8') {
+  if (HEX_NEGATION[id[0]]) {
     // normalize negative form
-    return '0' + id.slice(1);
+    return HEX_NEGATION[id[0]] + id.slice(1);
   }
   return id;
 }
@@ -266,4 +267,8 @@ export function areTypesCompatible(type1: string, type2: string) {
   }
 
   return false;
+}
+
+export function isOpcode(s: string): boolean {
+  return s.length === 4 && s.split('').every((c) => HEX_DIGITS.includes(c));
 }

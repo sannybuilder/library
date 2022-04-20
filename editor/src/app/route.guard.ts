@@ -103,14 +103,14 @@ export class RouteGuard implements CanActivate {
         this._game.onListEnter({
           game,
           extension: DEFAULT_EXTENSION,
-          action: 'generate-json'
+          action: 'generate-json',
         });
         return true;
       }
     }
 
     // extensions
-    const opcode = segments.shift();
+    const id = segments.shift();
     const extension = subPath;
 
     const platforms = getPlatformsFromUrl(this._router, state.url, game);
@@ -119,7 +119,7 @@ export class RouteGuard implements CanActivate {
     this._game.onListEnter({
       game,
       extension,
-      opcode,
+      id,
       action: segments.shift(),
       searchTerm,
       platforms,

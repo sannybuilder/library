@@ -23,7 +23,6 @@
                     let supportInfo
                   "
                   [supportInfo]="supportInfo"
-                  [extension]="row.extension"
                   [command]="row.command"
                 ></scl-command-games>
 
@@ -34,7 +33,7 @@
                     '/',
                     game,
                     row.extension,
-                    row.command.id,
+                    row.command.id || row.command.name,
                     'edit'
                   ]"
                   [queryParams]="getQueryParamsForCommand(row.command, game)"
@@ -44,26 +43,43 @@
                 <a
                   style="margin-right: -0.75rem"
                   class="btn small text-muted"
-                  [routerLink]="['/', game, row.extension, row.command.id]"
+                  [routerLink]="[
+                    '/',
+                    game,
+                    row.extension,
+                    row.command.id || row.command.name
+                  ]"
                   [queryParams]="getQueryParamsForCommand(row.command, game)"
-                  [name]="row.command.id"
+                  [name]="row.command.id || row.command.name"
                   >{{ "ui.shared.view" | translate }}</a
                 >
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-12 d-flex flex-row">
-                <a
-                  class="mr-3"
-                  [routerLink]="['/', game, row.extension, row.command.id]"
-                  [queryParams]="getQueryParamsForCommand(row.command, game)"
-                  [name]="row.command.id"
-                  [innerHTML]="row.command | propExtract: 'id' | sanitize"
-                ></a>
-                <div
-                  class="text-break"
-                  [innerHTML]="row.command | propExtract: 'name' | sanitize"
-                ></div>
+                <ng-container *ngIf="doesGameRequireOpcode; else nameAsLink">
+                  <a
+                    class="mr-3"
+                    [routerLink]="['/', game, row.extension, row.command.id]"
+                    [queryParams]="getQueryParamsForCommand(row.command, game)"
+                    [name]="row.command.id"
+                    [innerHTML]="row.command | propExtract: 'id' | sanitize"
+                  ></a>
+                  <div
+                    class="text-break"
+                    [innerHTML]="row.command | propExtract: 'name' | sanitize"
+                  ></div>
+                </ng-container>
+
+                <ng-template #nameAsLink>
+                  <a
+                    class="text-break"
+                    [routerLink]="['/', game, row.extension, row.command.name]"
+                    [queryParams]="getQueryParamsForCommand(row.command, game)"
+                    [name]="row.command.name"
+                    [innerHTML]="row.command | propExtract: 'name' | sanitize"
+                  ></a>
+                </ng-template>
               </div>
             </div>
 
@@ -163,8 +179,10 @@
                 >
                   <ng-container
                     *ngIf="
-                      getSnippet(row.extension, row.command.id)
-                        | async as snippet
+                      getSnippet(
+                        row.extension,
+                        row.command.id || row.command.name
+                      ) | async as snippet
                     "
                   >
                     <pre class="sample mt-3">{{
@@ -178,7 +196,10 @@
             <div class="row mt-3">
               <div class="col-12 text-right">
                 <ng-container *ngIf="row.extension !== DEFAULT_EXTENSION">
-                  <a class="badge-spacing" [routerLink]="['/', game, row.extension]">
+                  <a
+                    class="badge-spacing"
+                    [routerLink]="['/', game, row.extension]"
+                  >
                     <code class="platform-badge gold">
                       {{ row.extension }}
                     </code>

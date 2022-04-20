@@ -186,7 +186,7 @@
         ></scl-icon-button>
 
         <scl-icon-button
-          *ngIf="viewMode === ViewMode.ViewCommand"
+          *ngIf="viewMode === ViewMode.ViewCommand && doesGameRequireOpcode(game)"
           [icon]="(displayOpcodePresentation$ | async) ? 'eye-fill' : 'eye'"
           [title]="'ui.shared.toggleOpcode' | translate"
           (clicked)="toggleOpcodePresentation()"
@@ -224,7 +224,7 @@
         <a
           *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
           class="btn btn-outline-success"
-          [routerLink]="['/', game, extension, command.id, 'edit']"
+          [routerLink]="['/', game, extension, command.id || command.name, 'edit']"
           [queryParams]="getQueryParamsForCommand(command, game)"
         >
           {{ "ui.shared.edit" | translate }}
@@ -301,7 +301,7 @@
         [command]="command"
         [game]="game"
         [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
-        [snippet]="getSnippet(extension, command.id) | async"
+        [snippet]="getSnippet(extension, command.id || command.name) | async"
         [supportInfo]="getCommandSupportInfo(command, extension) | async"
         [relatedCommands]="findRelatedCommands(command, extension) | async"
         [extension]="extension"

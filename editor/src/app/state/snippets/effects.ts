@@ -57,7 +57,7 @@ export class SnippetsEffects {
                 game: d.game,
                 content,
                 extension,
-                opcode: command.id,
+                id: command.id || command.name,
               })
             )
           )
@@ -71,8 +71,8 @@ export class SnippetsEffects {
       this.actions$.pipe(
         ofType(updateGameSnippet),
         // distinctUntilChanged(isEqual),
-        tap(({ game, content, extension, opcode }) => {
-          const fileName = `${game}/snippets/${extension}/${opcode}.txt`;
+        tap(({ game, content, extension, id }) => {
+          const fileName = `${game}/snippets/${extension}/${id}.txt`;
           this._changes.registerTextFileChange(fileName, content);
         })
       ),

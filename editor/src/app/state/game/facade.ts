@@ -17,7 +17,7 @@ export class GameFacade {
 
   onListEnter({
     game,
-    opcode,
+    id,
     extension,
     enumName,
     className,
@@ -29,7 +29,7 @@ export class GameFacade {
   }: {
     game: Game;
     extension?: string;
-    opcode?: string;
+    id?: string;
     enumName?: string;
     className?: string;
     action?: string;
@@ -41,7 +41,7 @@ export class GameFacade {
     this.store$.dispatch(
       onListEnter({
         game,
-        opcode,
+        id,
         extension,
         enumName,
         className,

@@ -11,7 +11,7 @@ import {
   isEqual,
 } from 'lodash';
 import { Command } from '../models';
-import { commandParams, normalizeId } from './command';
+import { commandParams, isOpcode, normalizeId } from './command';
 
 export const FUSEJS_OPTIONS = {
   keys: ['name', 'short_desc', 'id', 'class', 'member'],
@@ -84,9 +84,7 @@ export function search(list: Command[], searchTerms: string) {
 
   const options = { ...FUSEJS_OPTIONS };
   const words = query.split(/\s+|,/);
-  const doesContainOnlyOpcodes = words.every(
-    (w) => w.length === 4 && (w[0] === '0' || w[0] === '8')
-  );
+  const doesContainOnlyOpcodes = words.every(isOpcode);
 
   if (doesContainOnlyOpcodes) {
     // multi opcode id search

@@ -37,6 +37,7 @@ import {
 } from 'rxjs/operators';
 
 import {
+  Command,
   Entity,
   Enums,
   Extension,
@@ -48,6 +49,7 @@ import {
 
 import {
   capitalizeFirst,
+  isOpcode,
   isPlatformMatchingExact,
   isVersionMatchingExact,
 } from '../../utils';
@@ -70,7 +72,7 @@ export class UiEffects {
       switchMap(
         ([
           {
-            opcode,
+            id,
             extension,
             enumName,
             className,
@@ -145,20 +147,25 @@ export class UiEffects {
             );
           }
 
-          if (opcode && extension) {
+          if (id && extension) {
             return this._extensions.extensions$.pipe(
               first<Extension[]>(Boolean),
               map((extensions) => {
-                const commandId =
-                  opcode.toLowerCase() === 'new' ? '' : opcodify(opcode);
+                if (id?.toLowerCase() === 'new') {
+                  id = '';
+                }
                 const neededPlatforms = platforms ?? [Platform.Any];
                 const neededVersions = versions ?? [Version.Any];
+
+                const opcode = id && isOpcode(id) ? id : undefined;
+                const commandName = id && !isOpcode(id) ? id : undefined;
 
                 const commandToEdit = extensions
                   .find((e) => e.name === extension)
                   ?.commands.find(
                     (command) =>
-                      command.id === commandId &&
+                      ((opcode && command.id === opcode) ||
+                        (commandName && command.name === commandName)) &&
                       isPlatformMatchingExact(command, neededPlatforms) &&
                       isVersionMatchingExact(command, neededVersions)
                   );
@@ -171,8 +178,8 @@ export class UiEffects {
                   return displayOrEditCommandInfo({
                     extension,
                     command: {
-                      id: commandId,
-                      name: '',
+                      id: opcode || '',
+                      name: commandName || '',
                       num_params: 0,
                     },
                     viewMode: ViewMode.EditCommand,
@@ -228,7 +235,7 @@ export class UiEffects {
     this._actions$.pipe(
       ofType(displayOrEditCommandInfo),
       switchMap(({ command, extension }) =>
-        this._snippets.getSnippet(extension, command.id)
+        this._snippets.getSnippet(extension, command.id || command.name)
       ),
       map((snippet) => displayOrEditSnippet({ snippet }))
     )
@@ -247,9 +254,12 @@ export class UiEffects {
     this._actions$.pipe(
       ofType(displayOrEditCommandInfo),
       withLatestFrom(this._ui.rows$),
-      map(([{ command }, rows]) =>
-        rows?.findIndex((row) => row.command?.id === command?.id)
-      ),
+      map(([{ command }, rows]) => {
+        const finder = command.id
+          ? (c: Command) => c.id === command.id
+          : (c: Command) => c.name === command.name;
+        return rows?.findIndex((row) => finder(row.command))
+      }),
       withLatestFrom(this._ui.currentPage$),
       filter(
         ([index, currentPage]) =>

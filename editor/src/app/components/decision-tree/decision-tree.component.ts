@@ -46,15 +46,15 @@ export class DecisionTreeComponent {
     return false;
   }
 
-  getCommand(id: string) {
+  getCommand(commandId: string) {
+    const [id, extension] = commandId.split(':');
     return this._extensions.getExtensionCommand({
       id,
-      extension: DEFAULT_EXTENSION,
+      extension: extension || DEFAULT_EXTENSION,
     });
   }
 
   isThisNodeTerminal(node: TreeNode) {
     return isThisNodeTerminal(node);
   }
-
 }

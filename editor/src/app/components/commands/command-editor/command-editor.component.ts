@@ -54,11 +54,16 @@ import {
   doesConstructorNotReturnHandle,
   doesVariadicCommandNotHaveArgumentsParameter,
   doesGameRequireOpcode,
+  normalizeId,
+  doesCommandHaveInvalidOpcode,
+  doesCommandHaveOutOfRangeOpcode,
 } from '../../../utils';
 
 type ErrorType =
   | 'emptyName'
   | 'emptyOpcode'
+  | 'invalidOpcode'
+  | 'outOfRangeOpcode'
   | 'duplicateName'
   | 'duplicateParamName'
   | 'invalidAttributeCombo'
@@ -101,6 +106,8 @@ export class CommandEditorComponent implements OnInit {
   errors: Record<ErrorType, boolean> = {
     emptyName: false,
     emptyOpcode: false,
+    invalidOpcode: false,
+    outOfRangeOpcode: false,
     invalidAttributeCombo: false,
     duplicateName: false,
     duplicateParamName: false,
@@ -217,12 +224,14 @@ export class CommandEditorComponent implements OnInit {
     noConstructorWithoutOutputParams: this.updateNoOutputParamsError,
     emptyName: this.updateEmptyNameError,
     emptyOpcode: this.updateEmptyOpcodeError,
+    invalidOpcode: this.updateInvalidOpcodeError,
+    outOfRangeOpcode: this.updateOutOfRangeOpcodeError,
     noSelfInStaticMethod: this.noSelfInStaticMethod,
     missingSelfParamInMethod: this.missingSelfParamInMethod,
     trailingPeriodInDescription: this.trailingPeriodInDescriptionError,
     no3rdPersonVerb: this.no3rdPersonVerbError,
     constructorNotReturningHandle: this.constructorNotReturningHandleError,
-    variadicNotHavingArguments: this.variadicNotHavingArgumentsError
+    variadicNotHavingArguments: this.variadicNotHavingArgumentsError,
   };
 
   isDirty: boolean;
@@ -290,7 +299,10 @@ export class CommandEditorComponent implements OnInit {
   }
 
   opcodify(command: Command) {
-    command.id = trim(opcodify(command.id));
+    if (command.id) {
+      command.id = trim(opcodify(command.id));
+      this.updateErrors();
+    }
   }
 
   onTypeKeyDown(key: string, param: Param) {
@@ -573,6 +585,10 @@ export class CommandEditorComponent implements OnInit {
     return '';
   }
 
+  get suggestedOpcodeId(): string {
+    return normalizeId(this.command.id);
+  }
+
   isParamNameDuplicate(name: string) {
     return isCommandParamNameDuplicate(this.command, name);
   }
@@ -661,7 +677,19 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private updateEmptyOpcodeError() {
-    this.errors.emptyOpcode = this.doesGameRequireOpcode && doesCommandHaveEmptyId(this.command);
+    this.errors.emptyOpcode =
+      this.doesGameRequireOpcode && doesCommandHaveEmptyId(this.command);
+  }
+
+  private updateInvalidOpcodeError() {
+    this.errors.invalidOpcode =
+      this.doesGameRequireOpcode && doesCommandHaveInvalidOpcode(this.command);
+  }
+
+  private updateOutOfRangeOpcodeError() {
+    this.errors.outOfRangeOpcode =
+      this.doesGameRequireOpcode &&
+      doesCommandHaveOutOfRangeOpcode(this.command);
   }
 
   private noSelfInStaticMethod() {
@@ -692,8 +720,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private variadicNotHavingArgumentsError() {
-    this.errors.variadicNotHavingArguments = doesVariadicCommandNotHaveArgumentsParameter(
-      this.command
-    );
+    this.errors.variadicNotHavingArguments =
+      doesVariadicCommandNotHaveArgumentsParameter(this.command);
   }
 }

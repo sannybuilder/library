@@ -18,6 +18,8 @@ import {
   doesConstructorNotReturnHandle,
   doesVariadicCommandNotHaveArgumentsParameter,
   doesGameRequireOpcode,
+  doesCommandHaveInvalidOpcode,
+  doesCommandHaveOutOfRangeOpcode,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -31,6 +33,7 @@ const translations = JSON.parse(translationFile);
 let exitStatus = 0;
 
 const noopHandler = () => false;
+const isOpcodeRequired = doesGameRequireOpcode(game as Game);
 
 const errorHandlers = {
   invalidAttributeCombo: doesCommandHaveAnyAttributeInvalid,
@@ -38,8 +41,10 @@ const errorHandlers = {
   duplicateName: doesCommandHaveDuplicateName,
   noConstructorWithoutOutputParams: doesConstructorCommandHaveNoOutputParams,
   emptyName: doesCommandHaveEmptyName,
-  emptyOpcode: doesGameRequireOpcode(game as Game)
-    ? doesCommandHaveEmptyId
+  emptyOpcode: isOpcodeRequired ? doesCommandHaveEmptyId : noopHandler,
+  invalidOpcode: isOpcodeRequired ? doesCommandHaveInvalidOpcode : noopHandler,
+  outOfRangeOpcode: isOpcodeRequired
+    ? doesCommandHaveOutOfRangeOpcode
     : noopHandler,
   noSelfInStaticMethod: doesCommandHaveSelfInStaticMethod,
   missingSelfParamInMethod: doesCommandHaveMissingSelfParamInMethod,

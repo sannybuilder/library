@@ -67,9 +67,23 @@
           [ngModel]="command.id"
           (ngModelChange)="onOpcodeChange(command, $event)"
           [ngClass]="{
-            'is-invalid': isDirty && errors.emptyOpcode
+            'is-invalid':
+              isDirty &&
+              (errors.emptyOpcode ||
+                errors.invalidOpcode ||
+                errors.outOfRangeOpcode)
           }"
         />
+      </div>
+      <div class="mb-1" *ngIf="errors.outOfRangeOpcode">
+        <small
+          >{{ "ui.commandEditor.suggestion" | translate }}:
+          <a
+            href="#"
+            (click)="(command.id = suggestedOpcodeId) && updateErrors()"
+            >{{ suggestedOpcodeId }}</a
+          ></small
+        >
       </div>
     </div>
     <div class="col-12 col-xl-8">

@@ -7,7 +7,8 @@ import {
   PrimitiveType,
   Version,
 } from '../models';
-import { commandParams, inputParams, outputParams } from './command';
+import { commandParams, inputParams, isOpcode, outputParams } from './command';
+import { HEX_NEGATION } from './hex';
 
 const SELF = 'self';
 
@@ -53,7 +54,8 @@ export function doesCommandHaveDuplicateName(
   return (otherCommands ?? []).some(
     ({ name, id, platforms, versions }) =>
       name === command.name &&
-      (id && id !== command.id) &&
+      id &&
+      id !== command.id &&
       intersection(thisCommandPlatforms, platforms ?? [Platform.Any]).length >
         0 &&
       intersection(thisCommandVersions, versions ?? [Version.Any]).length > 0 &&
@@ -92,6 +94,15 @@ export function doesCommandHaveSelfInStaticMethod(command: Command) {
     !!command.attrs?.is_static &&
     commandParams(command).some((p) => p.name === SELF)
   );
+}
+
+export function doesCommandHaveInvalidOpcode(command: Command) {
+  return !doesCommandHaveEmptyId(command) && !isOpcode(command.id);
+}
+
+export function doesCommandHaveOutOfRangeOpcode(command: Command) {
+  const hasOpcode = !doesCommandHaveEmptyId(command) && isOpcode(command.id);
+  return hasOpcode && !!HEX_NEGATION[command.id[0]];
 }
 
 export function doesCommandHaveMissingSelfParamInMethod(command: Command) {

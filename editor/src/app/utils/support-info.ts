@@ -97,10 +97,4 @@ function getCommand(
     }
   }
   return undefined;
-  // const extension = extensions?.find((e) => e.name === extensionName);
-  // return extension?.commands?.find((c) => {
-  //   const matches =
-  //     c.id && command.id ? c.id === command.id : c.name === command.name;
-  //   return matches;
-  // });
 }

@@ -31,19 +31,30 @@ import * as unk64RU from '../../../../../unknown_x64/statements/ru.json';
 import * as unk64CN from '../../../../../unknown_x64/statements/cn.json';
 import * as unk64BN from '../../../../../unknown_x64/statements/bn.json';
 
-
-const getStatements = (en: object, ru: object, cn: object, bn: object) => ({
-  en: merge({}, get(sharedEN, 'default'), get(en, 'default')),
-  ru: merge({}, get(sharedRU, 'default'), get(ru, 'default')),
-  cn: merge({}, get(sharedCN, 'default'), get(cn, 'default')),
-  bn: merge({}, get(sharedBN, 'default'), get(bn, 'default')),
+const getStatements = (
+  shared: boolean,
+  en: object,
+  ru: object,
+  cn: object,
+  bn: object
+) => ({
+  en: merge({}, shared ? get(sharedEN, 'default') : {}, get(en, 'default')),
+  ru: merge({}, shared ? get(sharedRU, 'default') : {}, get(ru, 'default')),
+  cn: merge({}, shared ? get(sharedCN, 'default') : {}, get(cn, 'default')),
+  bn: merge({}, shared ? get(sharedBN, 'default') : {}, get(bn, 'default')),
 });
 
-const gta3Statements = getStatements(gta3EN, gta3RU, gta3CN, gta3BN);
-const vcStatements = getStatements(vcEN, vcRU, vcCN, vcBN);
-const saStatements = getStatements(saEN, saRU, saCN, saBN);
-const unkStatements = getStatements(unkEN, unkRU, unkCN, unkBN);
-const unk64Statements = getStatements(unk64EN, unk64RU, unk64CN, unk64BN);
+const gta3Statements = getStatements(true, gta3EN, gta3RU, gta3CN, gta3BN);
+const vcStatements = getStatements(true, vcEN, vcRU, vcCN, vcBN);
+const saStatements = getStatements(true, saEN, saRU, saCN, saBN);
+const unkStatements = getStatements(false, unkEN, unkRU, unkCN, unkBN);
+const unk64Statements = getStatements(
+  false,
+  unk64EN,
+  unk64RU,
+  unk64CN,
+  unk64BN
+);
 
 const STATEMENTS: Record<Game, Record<string, Record<string, string>>> = {
   gta3: gta3Statements,

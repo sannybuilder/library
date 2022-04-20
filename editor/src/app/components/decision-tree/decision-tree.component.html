@@ -30,10 +30,7 @@
     (click)="next(node)"
   >
     <ng-container
-      *ngIf="
-        isOpcodeRef(node) && (getCommand(node.id) | async) as command;
-        else nextTemplate
-      "
+      *ngIf="getCommand(node.id) | async as command; else nextTemplate"
     >
       {{ "ui.tree.useCommand" | translate: { command: command.name } }}
     </ng-container>

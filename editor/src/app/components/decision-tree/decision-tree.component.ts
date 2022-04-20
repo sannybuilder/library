@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { TreeNode } from '../../models/tree';
 import { DEFAULT_EXTENSION, Game, GameTitle } from '../../models';
 import { ExtensionsFacade, TreeFacade } from '../../state';
-import { getBaseGames, isOpcodeRef, isThisNodeTerminal } from '../../utils';
+import { getBaseGames, isThisNodeTerminal } from '../../utils';
 
 @Component({
   selector: 'scl-decision-tree',
@@ -32,7 +32,7 @@ export class DecisionTreeComponent {
   ) {}
 
   next(node: TreeNode) {
-    if (this.isOpcodeRef(node)) {
+    if (node.next.length === 0) {
       this._router.navigate(['/', this.game], {
         queryParams: { q: node.id },
       });
@@ -57,7 +57,4 @@ export class DecisionTreeComponent {
     return isThisNodeTerminal(node);
   }
 
-  isOpcodeRef(node: TreeNode) {
-    return isOpcodeRef(node);
-  }
 }

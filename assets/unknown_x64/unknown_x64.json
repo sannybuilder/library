@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "0.200",
-    "last_update": 1649867441297,
+    "last_update": 1650511687484,
+    "version": "0.201",
     "url": "https://library.sannybuilder.com/#/unknown_x64"
   },
   "extensions": [
@@ -298,6 +298,124 @@
           "versions": [
             "1.0"
           ]
+        }
+      ]
+    },
+    {
+      "name": "memops",
+      "commands": [
+        {
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_IMAGE_BASE",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "GetImageBase",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "pattern",
+              "type": "string"
+            },
+            {
+              "name": "count",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_PATTERN",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "GetPattern",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "ALLOC_TRAMPOLINE",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "AllocTrampoline",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "READ_RELATIVE_OFFSET",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "ReadRelativeOffset",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
+          "name": "WRITE_RELATIVE_OFFSET",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "WriteRelativeOffset",
+          "attrs": {
+            "is_static": true
+          }
         }
       ]
     }

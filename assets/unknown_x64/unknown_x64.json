@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1650739552635,
-    "version": "0.204",
+    "last_update": 1651685148480,
+    "version": "0.205",
     "url": "https://library.sannybuilder.com/#/unknown_x64"
   },
   "extensions": [
@@ -78,6 +78,1235 @@
       ]
     },
     {
+      "name": "imgui",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "windowName",
+              "type": "string"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            },
+            {
+              "name": "noTitleBar",
+              "type": "bool"
+            },
+            {
+              "name": "noResize",
+              "type": "bool"
+            },
+            {
+              "name": "noMove",
+              "type": "bool"
+            },
+            {
+              "name": "autoResize",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_BEGIN",
+          "num_params": 7,
+          "short_desc": "Creates the window",
+          "class": "ImGui",
+          "member": "Begin",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END",
+          "num_params": 0,
+          "class": "ImGui",
+          "member": "End",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Ends the window"
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "isChecked",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "isChecked",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_CHECKBOX",
+          "num_params": 3,
+          "short_desc": "Creates the checkbox",
+          "class": "ImGui",
+          "member": "Checkbox",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonName",
+              "type": "string"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_BUTTON",
+          "num_params": 3,
+          "short_desc": "Creates the button",
+          "class": "ImGui",
+          "member": "Button",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonName",
+              "type": "string"
+            },
+            {
+              "name": "red",
+              "type": "float"
+            },
+            {
+              "name": "green",
+              "type": "float"
+            },
+            {
+              "name": "blue",
+              "type": "float"
+            },
+            {
+              "name": "alpha",
+              "type": "float"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_COLOR_BUTTON",
+          "num_params": 7,
+          "short_desc": "Creates the button with custom colors",
+          "class": "ImGui",
+          "member": "ButtonColored",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonName",
+              "type": "string"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_INVISIBLE_BUTTON",
+          "num_params": 3,
+          "short_desc": "Creates the invisible button",
+          "class": "ImGui",
+          "member": "ButtonInvisible",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_WINDOW_POS",
+          "num_params": 3,
+          "short_desc": "Sets the current window position. Must be called inside Begin()...End()",
+          "class": "ImGui",
+          "member": "SetWindowPos",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_WINDOW_SIZE",
+          "num_params": 3,
+          "short_desc": "Sets the current window size. Must be called inside Begin()...End()",
+          "class": "ImGui",
+          "member": "SetWindowSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_NEXT_WINDOW_POS",
+          "num_params": 3,
+          "short_desc": "Sets the current window position. Applies to the next window ( aka Begin() )",
+          "class": "ImGui",
+          "member": "SetNextWindowPos",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_NEXT_WINDOW_SIZE",
+          "num_params": 3,
+          "short_desc": "Sets the current window size. Applies to the next window ( aka Begin() )",
+          "class": "ImGui",
+          "member": "SetNextWindowSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_DUMMY",
+          "num_params": 2,
+          "short_desc": "Creates the dummy widget. Used for spacing",
+          "class": "ImGui",
+          "member": "Dummy",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_TEXT",
+          "num_params": 1,
+          "short_desc": "Creates the text line",
+          "class": "ImGui",
+          "member": "Text",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_TEXT_DISABLED",
+          "num_params": 1,
+          "short_desc": "Creates the text line with the disabled color ( Grayish by default )",
+          "class": "ImGui",
+          "member": "TextDisabled",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_TEXT_WRAPPED",
+          "num_params": 1,
+          "short_desc": "Creates the text line that wraps to a newline if the text goes beyond the window width",
+          "class": "ImGui",
+          "member": "TextWrapped",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "red",
+              "type": "float"
+            },
+            {
+              "name": "green",
+              "type": "float"
+            },
+            {
+              "name": "blue",
+              "type": "float"
+            },
+            {
+              "name": "alpha",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_TEXT_COLORED",
+          "num_params": 5,
+          "short_desc": "Creates the text line of the given RGBA color (0.0f-1.0f)",
+          "class": "ImGui",
+          "member": "TextColored",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_BULLET_TEXT",
+          "num_params": 1,
+          "short_desc": "Creates the text line with a bullet point",
+          "class": "ImGui",
+          "member": "TextWithBullet",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_SET_TOOLTIP",
+          "num_params": 1,
+          "short_desc": "Creates the popup window with the given text",
+          "class": "ImGui",
+          "member": "SetTooltip",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_SAMELINE",
+          "num_params": 0,
+          "short_desc": "Appends the next widget to the same line as the previous widget",
+          "class": "ImGui",
+          "member": "SameLine",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_NEWLINE",
+          "num_params": 0,
+          "short_desc": "Creates a new line for the next widget",
+          "class": "ImGui",
+          "member": "NewLine",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_SPACING",
+          "num_params": 0,
+          "short_desc": "Adds some spacing after the previous widget",
+          "class": "ImGui",
+          "member": "Spacing",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_SEPARATOR",
+          "num_params": 0,
+          "short_desc": "Adds a horizontal separator line",
+          "class": "ImGui",
+          "member": "Separator",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_NEXT_COLUMN",
+          "num_params": 0,
+          "short_desc": "Puts the next widgets on the next column. Used alongside 0C16",
+          "class": "ImGui",
+          "member": "NextColumn",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "count",
+              "type": "int"
+            }
+          ],
+          "name": "IMGUI_COLUMNS",
+          "num_params": 1,
+          "short_desc": "Divides the window width into N columns. Close this with Columns(1)",
+          "class": "ImGui",
+          "member": "Columns",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "fps",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_FRAMERATE",
+          "num_params": 1,
+          "short_desc": "Returns game FPS",
+          "class": "Game",
+          "member": "GetFramerate",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "version",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_VERSION",
+          "num_params": 1,
+          "short_desc": "Returns the ImGui version",
+          "class": "ImGui",
+          "member": "GetVersion",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "version",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_PLUGIN_VERSION",
+          "num_params": 1,
+          "short_desc": "Returns the ImGuiRedux version",
+          "class": "ImGui",
+          "member": "GetPluginVersion",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "show",
+              "type": "bool"
+            }
+          ],
+          "name": "IMGUI_SET_CURSOR_VISIBLE",
+          "num_params": 1,
+          "short_desc": "Toggles the cursor",
+          "class": "ImGui",
+          "member": "SetCursorVisible",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_DISPLAY_SIZE",
+          "num_params": 2,
+          "class": "ImGui",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetDisplaySize",
+          "short_desc": "Returns the width & height of the display"
+        },
+        {
+          "output": [
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_FRAME_HEIGHT",
+          "num_params": 1,
+          "short_desc": "Returns the ImGui frame height",
+          "class": "ImGui",
+          "member": "GetFrameHeight",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_WINDOW_POS",
+          "num_params": 2,
+          "short_desc": "Returns the x,y coordinates of the window on the screen",
+          "class": "ImGui",
+          "member": "GetWindowPos",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_WINDOW_SIZE",
+          "num_params": 2,
+          "short_desc": "Returns the width and height of the window",
+          "class": "ImGui",
+          "member": "GetWindowSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_CALC_TEXT_SIZE",
+          "num_params": 3,
+          "short_desc": "Returns the width and height of the given text",
+          "class": "ImGui",
+          "member": "CalcTextSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_WINDOW_CONTENT_REGION_WIDTH",
+          "num_params": 1,
+          "short_desc": "Returns the content region width of the window",
+          "class": "ImGui",
+          "member": "GetWindowContentRegionWidth",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "active",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_BEGIN_MAINMENUBAR",
+          "num_params": 2,
+          "short_desc": "Creates the main menu bar",
+          "class": "ImGui",
+          "member": "BeginMainMenuBar",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END_MAINMENUBAR",
+          "num_params": 0,
+          "short_desc": "Ends the main menu bar",
+          "class": "ImGui",
+          "member": "EndMainMenuBar",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "selected",
+              "type": "bool"
+            },
+            {
+              "name": "enabled",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "clicked",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_MENU_ITEM",
+          "num_params": 4,
+          "short_desc": "Adds the menu item",
+          "class": "ImGui",
+          "member": "MenuItem",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "clicked",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_SELECTABLE",
+          "num_params": 2,
+          "short_desc": "Adds the selectable widget",
+          "class": "ImGui",
+          "member": "Selectable",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_BEGIN_CHILD",
+          "num_params": 1,
+          "short_desc": "Creates a child window widget inside the main window",
+          "class": "ImGui",
+          "member": "BeginChild",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END_CHILD",
+          "num_params": 0,
+          "short_desc": "Ends the child window widget created with 0C25",
+          "class": "ImGui",
+          "member": "EndChild",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_PUSH_ITEM_WIDTH",
+          "num_params": 1,
+          "short_desc": "Sets the item width for the next widgets",
+          "class": "ImGui",
+          "member": "PushItemWidth",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_POP_ITEM_WIDTH",
+          "num_params": 0,
+          "short_desc": "Removes the pushed item width (0C27) from the stack",
+          "class": "ImGui",
+          "member": "PopItemWidth",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "open",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_COLLAPSING_HEADER",
+          "num_params": 2,
+          "short_desc": "Adds the collapsing header",
+          "class": "ImGui",
+          "member": "CollapsingHeader",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "int"
+            },
+            {
+              "name": "min",
+              "type": "int"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_SLIDER_INT",
+          "num_params": 5,
+          "short_desc": "Creates the int slider input",
+          "class": "ImGui",
+          "member": "SliderInt",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "float"
+            },
+            {
+              "name": "min",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_SLIDER_FLOAT",
+          "num_params": 5,
+          "short_desc": "Creates the float slider input",
+          "class": "ImGui",
+          "member": "SliderFloat",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "float"
+            },
+            {
+              "name": "min",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_INPUT_FLOAT",
+          "num_params": 5,
+          "short_desc": "Creates the float input",
+          "class": "ImGui",
+          "member": "InputFloat",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "int"
+            },
+            {
+              "name": "min",
+              "type": "int"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_INPUT_INT",
+          "num_params": 5,
+          "short_desc": "Creates the int input",
+          "class": "ImGui",
+          "member": "InputInt",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_INPUT_TEXT",
+          "num_params": 2,
+          "short_desc": "Creates the text input",
+          "class": "ImGui",
+          "member": "InputText",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "selectedBtn",
+              "type": "int"
+            },
+            {
+              "name": "btnNo",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_RADIO_BUTTON",
+          "num_params": 4,
+          "short_desc": "Creates the radio button",
+          "class": "ImGui",
+          "member": "RadioButton",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "red",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "green",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "blue",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "alpha",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_COLOR_PICKER",
+          "num_params": 5,
+          "short_desc": "Creates the color picker and sets the default color (0.0f-1.0f)",
+          "class": "ImGui",
+          "member": "ColorPicker",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_BEGIN_FRAME",
+          "num_params": 1,
+          "short_desc": "Creates a unique frame with its own space in memory. End it with 0C32. MUST BE UNIQUE!",
+          "class": "ImGui",
+          "member": "BeginFrame",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END_FRAME",
+          "num_params": 0,
+          "short_desc": "Ends unique ImGui frame",
+          "class": "ImGui",
+          "member": "EndFrame",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_ACTIVE",
+          "num_params": 2,
+          "short_desc": "Returns true if the previous widget is in active state",
+          "class": "ImGui",
+          "member": "IsItemActive",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_CLICKED",
+          "num_params": 2,
+          "short_desc": "Returns true if the previous widget is clicked",
+          "class": "ImGui",
+          "member": "IsItemClicked",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_FOCUSED",
+          "num_params": 2,
+          "short_desc": "Returns true if the previous widget is focused",
+          "class": "ImGui",
+          "member": "IsItemFocused",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_HOVERED",
+          "num_params": 2,
+          "short_desc": "Returns true if the previous widget is hovered with mouse",
+          "class": "ImGui",
+          "member": "IsItemHovered",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            },
+            {
+              "name": "count",
+              "type": "int"
+            },
+            {
+              "name": "spacing",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_SCALING_SIZE",
+          "num_params": 5,
+          "short_desc": "Returns the width and height scaling factor based on the window size",
+          "class": "ImGui",
+          "member": "GetScalingSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "alpha",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_SET_NEXT_WINDOW_TRANSPARENCY",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "SetNextWindowTransparency",
+          "short_desc": "Sets the background transparency of next window (0.0f-1.0f)",
+          "attrs": {
+            "is_static": true
+          }
+        }
+      ]
+    },
+    {
       "name": "ini",
       "commands": [
         {
@@ -110,13 +1339,7 @@
           "attrs": {
             "is_static": true,
             "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
+          }
         },
         {
           "input": [
@@ -145,13 +1368,7 @@
           "attrs": {
             "is_static": true,
             "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
+          }
         },
         {
           "input": [
@@ -183,13 +1400,7 @@
           "attrs": {
             "is_static": true,
             "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
+          }
         },
         {
           "input": [
@@ -218,13 +1429,7 @@
           "attrs": {
             "is_static": true,
             "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
+          }
         },
         {
           "input": [
@@ -256,13 +1461,7 @@
           "attrs": {
             "is_static": true,
             "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
+          }
         },
         {
           "input": [
@@ -291,13 +1490,7 @@
             "is_condition": true
           },
           "class": "IniFile",
-          "member": "WriteString",
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
+          "member": "WriteString"
         }
       ]
     },

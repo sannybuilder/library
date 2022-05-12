@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1652385333547,
-    "version": "0.239",
+    "last_update": 1652391957394,
+    "version": "0.240",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -49517,11 +49517,11 @@
           "name": "GET_RAIN_INTENSITY",
           "num_params": 1,
           "class": "Weather",
-          "member": "GetRainIntensity",
-          "short_desc": "Returns the rain intensity",
           "attrs": {
             "is_static": true
-          }
+          },
+          "member": "GetRainIntensity",
+          "short_desc": "Gets rain intensity in range of 0.0 to 1.0"
         },
         {
           "input": [
@@ -49534,11 +49534,11 @@
           "name": "SET_RAIN_INTENSITY",
           "num_params": 1,
           "class": "Weather",
-          "member": "SetRainIntensity",
-          "short_desc": "Sets the rain intensity",
           "attrs": {
             "is_static": true
-          }
+          },
+          "member": "SetRainIntensity",
+          "short_desc": "Sets rain intensity in range of 0.0 to 1.0"
         },
         {
           "input": [
@@ -49756,6 +49756,260 @@
           "member": "GetType"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "totalVars",
+              "type": "int"
+            }
+          ],
+          "id": "0E14",
+          "name": "INIT_EXTENDED_CHAR_VARS",
+          "num_params": 3,
+          "class": "Char",
+          "member": "InitExtendedVars",
+          "short_desc": "Inits additional variables for this char. Identifier can be \"AUTO\" for unique ID based on script pointer",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "varNumber",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0E15",
+          "name": "SET_EXTENDED_CHAR_VAR",
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetExtendedVar",
+          "short_desc": "Sets extended var value for this char. Requires initialization (0E14), otherwise returns false",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "varNumber",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E16",
+          "name": "GET_EXTENDED_CHAR_VAR",
+          "num_params": 4,
+          "class": "Char",
+          "member": "GetExtendedVar",
+          "short_desc": "Gets extended var value for this char. Returns false if not initialized (0E14)",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "totalVars",
+              "type": "int"
+            }
+          ],
+          "id": "0E17",
+          "name": "INIT_EXTENDED_CAR_VARS",
+          "num_params": 3,
+          "class": "Car",
+          "member": "InitExtendedVars",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Inits additional variables for this car. Identifier can be \"AUTO\" for unique ID based on script pointer"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "varNumber",
+              "type": "int"
+            }
+          ],
+          "id": "0E18",
+          "name": "SET_EXTENDED_CAR_VAR",
+          "num_params": 3,
+          "class": "Car",
+          "member": "SetExtendedVar",
+          "short_desc": "Sets extended var value for this car. Requires initialization (0E17), otherwise returns false",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "varNumber",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E19",
+          "name": "GET_EXTENDED_CAR_VAR",
+          "num_params": 4,
+          "class": "Car",
+          "member": "GetExtendedCarVar",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Gets extended var value for this car. Returns false if not initialized (0E17)"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "totalVars",
+              "type": "int"
+            }
+          ],
+          "id": "0E1A",
+          "name": "INIT_EXTENDED_OBJECT_VARS",
+          "num_params": 3,
+          "class": "Object",
+          "member": "InitExtendedVars",
+          "short_desc": "Inits additional variables for this object. Identifier can be \"AUTO\" for unique ID based on script pointer",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "varNumber",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0E1B",
+          "name": "SET_EXTENDED_OBJECT_VAR",
+          "num_params": 4,
+          "short_desc": "Sets extended var value for this object. Requires initialization (0E1A), otherwise returns false",
+          "class": "Object",
+          "member": "SetExtendedVar",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "identifier",
+              "type": "string"
+            },
+            {
+              "name": "varNumber",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E1C",
+          "name": "GET_EXTENDED_OBJECT_VAR",
+          "num_params": 4,
+          "short_desc": "Gets extended var value for this char. Returns false if not initialized (0E1A)",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
+          "member": "GetExtendedVar"
+        },
+        {
           "id": "0E1D",
           "name": "IS_ON_MISSION",
           "num_params": 0,
@@ -49766,6 +50020,111 @@
           "short_desc": "Returns true if the player is on a mission (the variable set in 0180 is not zero)",
           "class": "Mission",
           "member": "IsOn"
+        },
+        {
+          "input": [
+            {
+              "name": "rwTextureOrSprite",
+              "type": "int"
+            },
+            {
+              "name": "drawEvent",
+              "type": "DrawEvent"
+            },
+            {
+              "name": "posX",
+              "type": "float"
+            },
+            {
+              "name": "posY",
+              "type": "float"
+            },
+            {
+              "name": "sizeX",
+              "type": "float"
+            },
+            {
+              "name": "sizeY",
+              "type": "float"
+            },
+            {
+              "name": "angle",
+              "type": "float"
+            },
+            {
+              "name": "depth",
+              "type": "float"
+            },
+            {
+              "name": "fixAr",
+              "type": "bool"
+            },
+            {
+              "name": "maskVertCount",
+              "type": "int"
+            },
+            {
+              "name": "maskVertArray",
+              "type": "int"
+            },
+            {
+              "name": "red",
+              "type": "int"
+            },
+            {
+              "name": "green",
+              "type": "int"
+            },
+            {
+              "name": "blue",
+              "type": "int"
+            },
+            {
+              "name": "alpha",
+              "type": "int"
+            }
+          ],
+          "id": "0E1E",
+          "name": "DRAW_TEXTURE_PLUS",
+          "num_params": 15,
+          "class": "Txd",
+          "member": "DrawTexturePlus",
+          "short_desc": "Draws RwTexture or sprite ID once on specific drawing event and optional mask, no limits",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "k",
+              "type": "float"
+            },
+            {
+              "name": "mode",
+              "type": "EaseMode"
+            },
+            {
+              "name": "way",
+              "type": "EaseWay"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E1F",
+          "name": "EASE",
+          "num_params": 4,
+          "class": "Math",
+          "member": "Ease",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Eases k value in range of 0.0 to 1.0, resulting in a easing value based on mode and way, useful for smooth animations"
         },
         {
           "id": "0E20",
@@ -49999,6 +50358,102 @@
             "is_static": true
           },
           "short_desc": "Calculates the Fractal Brownian Motion (fBm) summation of 1D Perlin Simplex noise"
+        },
+        {
+          "input": [
+            {
+              "name": "rwTextureOrRadarSprite",
+              "type": "any"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "short",
+              "type": "bool"
+            },
+            {
+              "name": "red",
+              "type": "int"
+            },
+            {
+              "name": "green",
+              "type": "int"
+            },
+            {
+              "name": "blue",
+              "type": "int"
+            },
+            {
+              "name": "alpha",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "CleoBlip",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E2A",
+          "name": "ADD_CLEO_BLIP",
+          "num_params": 9,
+          "class": "CleoBlip",
+          "attrs": {
+            "is_constructor": true
+          },
+          "member": "Add",
+          "short_desc": "Creates a blip that don't saves, supports any texture, alpha and don't hits the blip limit"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "CleoBlip"
+            }
+          ],
+          "id": "0E2B",
+          "name": "REMOVE_CLEO_BLIP",
+          "num_params": 1,
+          "class": "CleoBlip",
+          "member": "Remove",
+          "short_desc": ""
+        },
+        {
+          "output": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E2C",
+          "name": "GET_CURRENT_SAVE_SLOT",
+          "num_params": 1,
+          "class": "Game",
+          "short_desc": "Gets loaded save slot number. -1 if new game",
+          "member": "GetCurrentSaveSlot",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "id": "0E2D",
+          "name": "IS_GAME_FIRST_START",
+          "num_params": 0,
+          "class": "Game",
+          "member": "IsFirstStart",
+          "short_desc": "Is first gameplay start (game was not reloaded)",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "input": [

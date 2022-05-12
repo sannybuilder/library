@@ -1224,3 +1224,33 @@ export const WeaponFire = {
   "Camera": 4,
   "Use": 5
 };
+export const DrawEvent = {
+  "BeforeDrawing": 0,
+  "AfterDrawing": 1,
+  "BeforeHud": 2,
+  "AfterHud": 3,
+  "BeforeRadar": 4,
+  "AfterRadar": 5,
+  "BeforeRadarOverlay": 6,
+  "AfterRadarOverlay": 7,
+  "BeforeBlips": 8,
+  "AfterBlips": 9,
+  "AfterFade": 10
+};
+export const EaseMode = {
+  "Quadratic": 0,
+  "Cubic": 1,
+  "Quartic": 2,
+  "Quintic": 3,
+  "Sinusoidal": 4,
+  "Exponential": 5,
+  "Circular": 6,
+  "Elastic": 7,
+  "Back": 8,
+  "Bounce": 9
+};
+export const EaseWay = {
+  "In": 0,
+  "Out": 1,
+  "InOut": 2
+};

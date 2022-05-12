@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1652380818824,
-    "version": "0.238",
+    "last_update": 1652385333547,
+    "version": "0.239",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -49279,6 +49279,48 @@
         {
           "input": [
             {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "maxHealth",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0D39",
+          "name": "GET_CHAR_MAX_HEALTH",
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetMaxHealth",
+          "short_desc": ""
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "string"
+            },
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0D4C",
+          "name": "GET_STRING_LENGTH",
+          "num_params": 2,
+          "class": "Text",
+          "member": "GetStringLength",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
               "name": "address",
               "type": "int"
             },
@@ -49307,6 +49349,24 @@
             "is_static": true
           },
           "short_desc": "Reads a value from the given offset from the memory address"
+        },
+        {
+          "output": [
+            {
+              "name": "type",
+              "type": "WeatherType",
+              "source": "var_any"
+            }
+          ],
+          "id": "0D59",
+          "name": "GET_CURRENT_WEATHER",
+          "num_params": 1,
+          "class": "Weather",
+          "member": "GetCurrent",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Gets weather type that is being blended from"
         },
         {
           "input": [
@@ -49423,7 +49483,7 @@
           "num_params": 1,
           "class": "Weather",
           "member": "GetNext",
-          "short_desc": "Returns the upcoming weather type",
+          "short_desc": "Gets weather type that is being blended to",
           "attrs": {
             "is_static": true
           }
@@ -49440,7 +49500,7 @@
           "num_params": 1,
           "class": "Weather",
           "member": "SetNext",
-          "short_desc": "Sets the upcoming weather type",
+          "short_desc": "Sets weather type which will be blend to",
           "attrs": {
             "is_static": true
           }
@@ -49588,7 +49648,13 @@
           ],
           "id": "0E0E",
           "name": "GET_CURRENT_RESOLUTION",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Game",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetCurrentResolution",
+          "short_desc": "Gets the game window width and height resolution"
         },
         {
           "input": [
@@ -49615,7 +49681,13 @@
           ],
           "id": "0E0F",
           "name": "GET_FIXED_XY_ASPECT_RATIO",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Hud",
+          "member": "GetFixedXyAspectRatio",
+          "short_desc": "Gets x and y values based on window aspect ratio, useful for text and hud scaling",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0E10",
@@ -49659,7 +49731,8 @@
           "name": "GET_VEHICLE_SUBCLASS",
           "num_params": 2,
           "class": "Car",
-          "member": "GetSubclass"
+          "member": "GetSubclass",
+          "short_desc": "Returns vehicle subclass, useful to check if vehicle is motorbike, bicycle, trailer etc"
         },
         {
           "input": [
@@ -49944,6 +50017,55 @@
           "class": "Car",
           "member": "SetAlarm",
           "short_desc": "Sets the status of the car's alarm"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "enableCamera",
+              "type": "bool"
+            },
+            {
+              "name": "separateCars",
+              "type": "bool"
+            }
+          ],
+          "id": "0EA0",
+          "name": "SET_CHAR_SECOND_PLAYER",
+          "num_params": 3,
+          "class": "Char",
+          "member": "SetSecondPlayer",
+          "short_desc": "Sets this char as controlled by player two"
+        },
+        {
+          "input": [
+            {
+              "name": "restoreCamera",
+              "type": "bool"
+            }
+          ],
+          "id": "0EA1",
+          "name": "DISABLE_SECOND_PLAYER",
+          "num_params": 1,
+          "class": "Game",
+          "member": "DisableSecondPlayer",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "id": "0EA2",
+          "name": "FIX_TWO_PLAYERS_SEPARATED_CARS",
+          "num_params": 0,
+          "class": "Game",
+          "member": "FixTwoPlayersSeparatedCars",
+          "short_desc": "Enables fixes for making two players use separated cars",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

@@ -1254,3 +1254,8 @@ export const EaseWay = {
   "Out": 1,
   "InOut": 2
 };
+export const ChangeMoney = {
+  "Set": 0,
+  "Add": 1,
+  "Remove": 2
+};

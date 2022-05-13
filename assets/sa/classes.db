@@ -17,6 +17,7 @@ Checkpoint
 CleoBlip
 Clipboard
 Clock
+ColPoint
 Conversation
 Crane
 Credits
@@ -306,6 +307,7 @@ GetSpeed,02E3,0,0,("self: Car" "speed%f")
 GetSpeedVector,06A2,0,0,("self: Car" "x%f" "y%b" "z%b")
 GetSubclass,0E12,0,0,("self: Car" "subclass: VehicleSubclass")
 GetUprightValue,083F,0,0,("self: Car" "value%f")
+GetWeaponDamageLastFrame,0EB6,1,0,("self: Car" "char: Char" "weaponType: WeaponType" "intensity%f")
 GiveNonPlayerNitro,09E9,0,0,("self: Car")
 GivePaintjob,06ED,0,0,("self: Car" "paintjobId%i")
 GotoCoordinates,00A7,0,0,("self: Car" "x%f" "y%f" "z%f")
@@ -683,6 +685,7 @@ SetHasUsedEntryExit,08AD,0,0,("self: Char" "x%f" "y%f" "radius%f")
 SetHeading,0173,0,0,("self: Char" "heading%f")
 SetHeadingLimitForAttached,0887,0,0,("self: Char" "orientation%i" "headingLimit%f")
 SetHealth,0223,0,0,("self: Char" "health%i")
+SetIgnoreDamageAnims,0ED9,0,0,("self: Char" )
 SetInformRespectedFriends,074E,0,0,("self: Char" "radius%f" "_p3%i")
 SetIsChrisCriminal,0433,0,0,("self: Char" "state%b")
 SetIsTargetPriority,0770,0,0,("self: Char" "state%b")
@@ -759,6 +762,11 @@ SetTimeOfDay,00C0,0,0,("hours%i" "minutes%i")
 SetTimeOneDayForward,088E,0,0,()
 SetTimeScale,015D,0,0,("scale%f")
 Store,0253,0,0,()
+$END
+
+$ColPoint
+$BEGIN
+GetCoordinates,0EE1,0,0,("self: ColPoint" "x%f" "y%f" "z%f")
 $END
 
 $Conversation
@@ -1062,6 +1070,8 @@ FlashObject,03E7,0,0,("object: HudObject")
 FreezeTimer,0396,0,0,("state%b")
 GetColor,0904,0,0,("hudObject: HudObject" "red%i" "green%i" "blue%i" "alpha%i")
 GetFixedXyAspectRatio,0E0F,0,0,("x%f" "y%f" "x%f" "y%f")
+IsRadarVisible,0EB8,1,0,()
+IsVisible,0EB9,1,0,()
 SetOnscreenCounterFlashWhenFirstDisplayed,059C,0,0,("counter%i" "state%b")
 SetRadarZoom,075B,0,0,("zoom%i")
 SetSpritesDrawBeforeFade,03E3,0,0,("state%b")
@@ -1178,6 +1188,7 @@ CallFunction,0AA5,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments"
 CallFunctionReturn,0AA7,0,0,("address%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
 CallMethod,0AA6,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments")
 CallMethodReturn,0AA8,0,0,("address%i" "struct%i" "numParams%i" "pop%i" "funcParams: arguments" "funcRet: any")
+Copy,0D27,0,0,("from: any" "to: any" "size%i")
 Free,0AC9,0,0,("address%i")
 GetLabelPointer,0AC6,0,0,( "address%i")
 GetObjectPointer,0A98,0,0,("object: Object" "address%i")
@@ -1189,11 +1200,14 @@ GetThisScriptStruct,0A9F,0,0,("address%i")
 GetVarPointer,0AC7,0,0,( "address%i")
 GetVehiclePointer,0A97,0,0,("vehicle: Car" "address%i")
 GetVehicleRef,0AEB,0,0,("address%i" "handle: Car")
+MakeNop,0E6A,0,0,("address%i" "size%i")
 PopFloat,0AE9,0,0,("result%f")
 Read,0A8D,0,0,("address%i" "size%i" "vp%b" "result: any")
 ReadStructOffset,0D4E,0,0,("address%i" "offset%i" "size%i" "result: any")
+ReadStructOffsetMulti,0EE2,0,0,("address%i" "offset%i" "count%i" "size%i" "results: arguments")
 Write,0A8C,0,0,("address%i" "size%i" "value: any" "vp%b")
 WriteStructOffset,0E28,0,0,("address%i" "offset%i" "size%i" "value: any")
+WriteStructOffsetMulti,0EE3,0,0,("address%i" "offset%i" "count%i" "size%i" "params: arguments")
 $END
 
 $Menu
@@ -1223,6 +1237,7 @@ $BEGIN
 Fail,045C,0,0,()
 Finish,00D8,0,0,()
 IsOn,0E1D,1,0,()
+IsOnScriptedCutscene,0EB7,1,0,()
 LoadAndLaunchInternal,0417,0,0,("index%i")
 $END
 
@@ -1431,6 +1446,7 @@ AlterWantedLevelNoDrop,010E,0,0,("self: Player" "wantedLevel%i")
 ApplyBrakesToCar,0221,0,0,("self: Player" "state%b")
 BuildModel,070D,0,0,("self: Player")
 CanStartMission,03EE,1,0,("self: Player")
+ChangeMoney,0E5E,0,0,("self: Player" "mode: ChangeMoney" "value%i")
 ClearLastBuildingModelShot,0A3B,0,0,("self: Player")
 ClearWantedLevel,0110,0,0,("self: Player")
 Create,0053,0,0,("modelId: model_char" "x%f" "y%f" "z%f" "handle: Player")
@@ -1639,6 +1655,7 @@ $END
 $Streaming
 $BEGIN
 GetAreaVisible,077E,0,0,("interiorId%i")
+GetModelByName,0E9C,0,0,("name%s" "modelId: model_any")
 GetModelDimensions,07E4,0,0,("modelId: model_any" "leftBottomBackX%f" "leftBottomBackY%f" "leftBottomBackZ%f" "rightTopFrontX%f" "rightTopFrontY%f" "rightTopFrontZ%f")
 GetNameOfVehicleModel,0ADB,0,0,("modelId: model_vehicle" "carName%s")
 GetRandomCarModelInMemory,09B2,0,0,("_p1%b" "modelId: model_vehicle" "class%i")

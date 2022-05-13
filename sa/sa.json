@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1652391957394,
-    "version": "0.240",
+    "last_update": 1652403816316,
+    "version": "0.241",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -46337,6 +46337,28 @@
           "attrs": {
             "is_condition": true
           }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "mode",
+              "type": "ChangeMoney"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            }
+          ],
+          "id": "0E5E",
+          "name": "CHANGE_PLAYER_MONEY",
+          "num_params": 3,
+          "class": "Player",
+          "member": "ChangeMoney",
+          "short_desc": "Changes player money by set, add or remove"
         }
       ]
     },
@@ -49279,6 +49301,80 @@
         {
           "input": [
             {
+              "name": "from",
+              "type": "any"
+            },
+            {
+              "name": "to",
+              "type": "any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0D27",
+          "name": "COPY_MEMORY",
+          "num_params": 3,
+          "class": "Memory",
+          "member": "Copy",
+          "short_desc": "Copies each memory byte from to",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "scriptPointer",
+              "type": "int"
+            },
+            {
+              "name": "varIndex",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0D2E",
+          "name": "SET_SCRIPT_VAR",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Sets value for script variable in index"
+        },
+        {
+          "input": [
+            {
+              "name": "scriptPointer",
+              "type": "int"
+            },
+            {
+              "name": "varIndex",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0D2F",
+          "name": "GET_SCRIPT_VAR",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Gets value from script variable index"
+        },
+        {
+          "input": [
+            {
               "name": "self",
               "type": "Char"
             }
@@ -50476,6 +50572,50 @@
         {
           "input": [
             {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0E6A",
+          "name": "MAKE_NOP",
+          "num_params": 2,
+          "short_desc": "Fills memory address with 0x90 with given size",
+          "class": "Memory",
+          "member": "MakeNop",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "model_any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E9C",
+          "name": "GET_MODEL_BY_NAME",
+          "num_params": 2,
+          "class": "Streaming",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetModelByName"
+        },
+        {
+          "input": [
+            {
               "name": "self",
               "type": "Char"
             },
@@ -50521,6 +50661,542 @@
           "attrs": {
             "is_static": true
           }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "weaponType",
+              "type": "WeaponType"
+            },
+            {
+              "name": "intensity",
+              "type": "float"
+            }
+          ],
+          "id": "0EB6",
+          "name": "GET_CAR_WEAPON_DAMAGE_LAST_FRAME",
+          "num_params": 4,
+          "short_desc": "Gets car damage by weapon last frame. Char can be invalid, and returns false if no damage last frame",
+          "class": "Car",
+          "member": "GetWeaponDamageLastFrame",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "id": "0EB7",
+          "name": "IS_ON_SCRIPTED_CUTSCENE",
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Mission",
+          "member": "IsOnScriptedCutscene",
+          "short_desc": "Checks if is playing scripted mission cutscene, that is, original widescreen borders are toggled on"
+        },
+        {
+          "id": "0EB8",
+          "name": "IS_RADAR_VISIBLE",
+          "num_params": 0,
+          "class": "Hud",
+          "member": "IsRadarVisible",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "id": "0EB9",
+          "name": "IS_HUD_VISIBLE",
+          "num_params": 0,
+          "class": "Hud",
+          "member": "IsVisible",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "id": "0ED0",
+          "name": "RETURN_SCRIPT_EVENT",
+          "num_params": 0,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Returns from script event"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varSaveSlot",
+              "type": "any"
+            }
+          ],
+          "id": "0ED1",
+          "name": "SET_SCRIPT_EVENT_SAVE_CONFIRMATION",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event during save, just before the game is saved"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varChar",
+              "type": "Char"
+            }
+          ],
+          "id": "0ED2",
+          "name": "SET_SCRIPT_EVENT_CHAR_CREATE",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event just after some char is created"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varCar",
+              "type": "Car"
+            }
+          ],
+          "id": "0ED4",
+          "name": "SET_SCRIPT_EVENT_CAR_DELETE",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event just before some car is being deleted"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varCar",
+              "type": "Car"
+            }
+          ],
+          "id": "0ED5",
+          "name": "SET_SCRIPT_EVENT_CAR_CREATE",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event just after some car is created"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varObject",
+              "type": "Object"
+            }
+          ],
+          "id": "0ED6",
+          "name": "SET_SCRIPT_EVENT_OBJECT_DELETE",
+          "num_params": 3,
+          "short_desc": "Toggles script event just before some object is being deleted",
+          "attrs": {
+            "is_branch": true,
+            "is_keyword": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varObject",
+              "type": "Object"
+            }
+          ],
+          "id": "0ED7",
+          "name": "SET_SCRIPT_EVENT_OBJECT_CREATE",
+          "num_params": 3,
+          "short_desc": "Toggles script event just after some object is created",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varJustPaused",
+              "type": "bool"
+            }
+          ],
+          "id": "0ED8",
+          "name": "SET_SCRIPT_EVENT_ON_MENU",
+          "num_params": 3,
+          "short_desc": "Toggles script event to run during pause menu, or when just paused the game",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "id": "0ED9",
+          "name": "SET_CHAR_IGNORE_DAMAGE_ANIMS",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetIgnoreDamageAnims"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varChar",
+              "type": "Char"
+            }
+          ],
+          "id": "0EDA",
+          "name": "SET_SCRIPT_EVENT_CHAR_PROCESS",
+          "num_params": 3,
+          "short_desc": "Toggles script event to run on each char once per frame",
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varCar",
+              "type": "Car"
+            }
+          ],
+          "id": "0EDB",
+          "name": "SET_SCRIPT_EVENT_CAR_PROCESS",
+          "num_params": 3,
+          "attrs": {
+            "is_branch": true,
+            "is_keyword": true
+          },
+          "short_desc": "Toggles script event to run on each car once per frame"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varObject",
+              "type": "Object"
+            }
+          ],
+          "id": "0EDC",
+          "name": "SET_SCRIPT_EVENT_OBJECT_PROCESS",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event to run on each object once per frame. May be slow"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "entity",
+              "type": "any"
+            }
+          ],
+          "id": "0EDD",
+          "name": "SET_SCRIPT_EVENT_BUILDING_PROCESS",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event to run on each building (CBuilding/Entity) once per frame. CAUTION! Very slow"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varChar",
+              "type": "Char"
+            }
+          ],
+          "id": "0EDE",
+          "name": "SET_SCRIPT_EVENT_CHAR_DAMAGE",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event when some char receives any damage. Use 0EB5 to get damage data"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varCar",
+              "type": "Car"
+            }
+          ],
+          "id": "0EDF",
+          "name": "SET_SCRIPT_EVENT_CAR_WEAPON_DAMAGE",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event to run when some car is damaged by weapon. Use 0EB6 to get damage data"
+        },
+        {
+          "input": [
+            {
+              "name": "add",
+              "type": "bool"
+            },
+            {
+              "name": "label",
+              "type": "label"
+            },
+            {
+              "name": "varCharOwner",
+              "type": "Char"
+            },
+            {
+              "name": "varEntityVictim",
+              "type": "any"
+            },
+            {
+              "name": "varWeaponType",
+              "type": "WeaponType"
+            },
+            {
+              "name": "varColPoint",
+              "type": "any"
+            }
+          ],
+          "id": "0EE0",
+          "name": "SET_SCRIPT_EVENT_BULLET_IMPACT",
+          "num_params": 6,
+          "attrs": {
+            "is_keyword": true,
+            "is_branch": true
+          },
+          "short_desc": "Toggles script event to run when bullet impact. Char and entity can be invalid"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "ColPoint"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0EE1",
+          "name": "GET_COLPOINT_COORDINATES",
+          "num_params": 4,
+          "class": "ColPoint",
+          "member": "GetCoordinates"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            },
+            {
+              "name": "count",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "results",
+              "type": "arguments",
+              "source": "var_any"
+            }
+          ],
+          "id": "0EE2",
+          "name": "READ_STRUCT_OFFSET_MULTI",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "ReadStructOffsetMulti",
+          "short_desc": "Reads a value from the given offset from the memory address multiple times as array/vector",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            },
+            {
+              "name": "count",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "params",
+              "type": "arguments"
+            }
+          ],
+          "id": "0EE3",
+          "name": "WRITE_STRUCT_OFFSET_MULTI",
+          "num_params": 5,
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Memory",
+          "member": "WriteStructOffsetMulti",
+          "short_desc": "Writes the value at the given offset from the memory address multiple times as array/vector"
         },
         {
           "input": [

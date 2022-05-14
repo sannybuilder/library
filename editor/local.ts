@@ -7,7 +7,7 @@ const { execSync } = require('child_process');
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
 
-run('npm run generate:support-info dist/editor/assets/support-info.json');
+run('npm run generate:support-info src/assets/support-info.json');
 
 // GENERATE DATA FILES
 games.forEach((game) => {
@@ -16,14 +16,11 @@ games.forEach((game) => {
   const enumsJson = join('../', game, `enums.json`);
 
   [
-    `npm run validate:commands ${gameJson} ${game}`,
-    `npm run validate:enums ${enumsJson}`,
     `[ -d ${assets} ] || mkdir ${assets}`,
-
     `npm run generate:enums ${enumsJson} ${join(assets, 'enums.js')}`,
-    `cp ${gameJson} ${assets}`,
-    `cp ${enumsJson} ${assets}`,
-  ].forEach(run);
+  ].forEach((x) => run(x));
+
+  run(`cp *.json ../editor/src/assets/${game}`, join('..', game));
 
   if (!game.includes('unknown')) {
     let dest = assetsDirCargo(game);
@@ -43,22 +40,20 @@ games.forEach((game) => {
 });
 
 function assetsDir(game: string) {
-  return join('dist', 'editor', 'assets', game);
+  return join('src', 'assets', game);
 }
 
 function assetsDirCargo(game: string) {
   return join('..', 'editor', assetsDir(game));
 }
 
-function run(cmd: string) {
+function run(cmd: string, cwd = process.cwd()) {
   execSync(cmd, {
+    cwd,
     stdio: [0, 1, 2],
   });
 }
 
 function cargo(cmd: string) {
-  execSync(cmd, {
-    cwd: '../generator',
-    stdio: [0, 1, 2],
-  });
+  run(cmd, '../generator');
 }

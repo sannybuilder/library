@@ -26,134 +26,16 @@ jobs:
           cd editor
           npm install
 
-          npm run validate:commands ../gta3/gta3.json gta3
-          npm run validate:commands ../vc/vc.json vc
-          npm run validate:commands ../sa/sa.json sa
-          npm run validate:commands ../gta3_mobile/gta3_mobile.json gta3_mobile
-          npm run validate:commands ../vc_mobile/vc_mobile.json vc_mobile
-          npm run validate:commands ../sa_mobile/sa_mobile.json sa_mobile
-          npm run validate:commands ../gta3_unreal/gta3_unreal.json gta3_unreal
-          npm run validate:commands ../vc_unreal/vc_unreal.json vc_unreal
-          npm run validate:commands ../sa_unreal/sa_unreal.json sa_unreal
-          npm run validate:commands ../unknown_x86/unknown_x86.json unknown_x86
-          npm run validate:commands ../unknown_x64/unknown_x64.json unknown_x64
-
-          npm run validate:enums ../gta3/enums.json
-          npm run validate:enums ../vc/enums.json
-          npm run validate:enums ../sa/enums.json
-          npm run validate:enums ../gta3_mobile/enums.json
-          npm run validate:enums ../vc_mobile/enums.json
-          npm run validate:enums ../sa_mobile/enums.json
-          npm run validate:enums ../gta3_unreal/enums.json
-          npm run validate:enums ../vc_unreal/enums.json
-          npm run validate:enums ../sa_unreal/enums.json
-          npm run validate:enums ../unknown_x86/enums.json
-          npm run validate:enums ../unknown_x64/enums.json
-
           npm run build
           cp src/404.html dist/editor
-
-          mkdir -p dist/editor/assets/gta3
-          mkdir -p dist/editor/assets/vc
-          mkdir -p dist/editor/assets/sa
-          mkdir -p dist/editor/assets/gta3_mobile
-          mkdir -p dist/editor/assets/vc_mobile
-          mkdir -p dist/editor/assets/sa_mobile
-          mkdir -p dist/editor/assets/gta3_unreal
-          mkdir -p dist/editor/assets/vc_unreal
-          mkdir -p dist/editor/assets/sa_unreal
-          mkdir -p dist/editor/assets/unknown_x86
-          mkdir -p dist/editor/assets/unknown_x64
-
           npm run generate:support-info dist/editor/assets/support-info.json
-
-          npm run generate:enums ../gta3/enums.json dist/editor/assets/gta3/enums.js
-          npm run generate:enums ../vc/enums.json dist/editor/assets/vc/enums.js
-          npm run generate:enums ../sa/enums.json dist/editor/assets/sa/enums.js
-          npm run generate:enums ../gta3_mobile/enums.json dist/editor/assets/gta3_mobile/enums.js
-          npm run generate:enums ../vc_mobile/enums.json dist/editor/assets/vc_mobile/enums.js
-          npm run generate:enums ../sa_mobile/enums.json dist/editor/assets/sa_mobile/enums.js
-          npm run generate:enums ../gta3_unreal/enums.json dist/editor/assets/gta3_unreal/enums.js
-          npm run generate:enums ../vc_unreal/enums.json dist/editor/assets/vc_unreal/enums.js
-          npm run generate:enums ../sa_unreal/enums.json dist/editor/assets/sa_unreal/enums.js
-          npm run generate:enums ../unknown_x86/enums.json dist/editor/assets/unknown_x86/enums.js
-          npm run generate:enums ../unknown_x64/enums.json dist/editor/assets/unknown_x64/enums.js
-
-          cp ../gta3/gta3.json dist/editor/assets/gta3
-          cp ../vc/vc.json dist/editor/assets/vc
-          cp ../sa/sa.json dist/editor/assets/sa
-          cp ../gta3_mobile/gta3_mobile.json dist/editor/assets/gta3_mobile
-          cp ../vc_mobile/vc_mobile.json dist/editor/assets/vc_mobile
-          cp ../sa_mobile/sa_mobile.json dist/editor/assets/sa_mobile
-          cp ../gta3_unreal/gta3_unreal.json dist/editor/assets/gta3_unreal
-          cp ../vc_unreal/vc_unreal.json dist/editor/assets/vc_unreal
-          cp ../sa_unreal/sa_unreal.json dist/editor/assets/sa_unreal
-          cp ../unknown_x86/unknown_x86.json dist/editor/assets/unknown_x86
-          cp ../unknown_x64/unknown_x64.json dist/editor/assets/unknown_x64
-
-          cp ../gta3/enums.json dist/editor/assets/gta3
-          cp ../vc/enums.json dist/editor/assets/vc
-          cp ../sa/enums.json dist/editor/assets/sa
-          cp ../gta3_mobile/enums.json dist/editor/assets/gta3_mobile
-          cp ../vc_mobile/enums.json dist/editor/assets/vc_mobile
-          cp ../sa_mobile/enums.json dist/editor/assets/sa_mobile
-          cp ../gta3_unreal/enums.json dist/editor/assets/gta3_unreal
-          cp ../vc_unreal/enums.json dist/editor/assets/vc_unreal
-          cp ../sa_unreal/enums.json dist/editor/assets/sa_unreal
-          cp ../unknown_x86/enums.json dist/editor/assets/unknown_x86
-          cp ../unknown_x64/enums.json dist/editor/assets/unknown_x64
-
-      - name: Compile files
-        run: |
-          cd generator
-
-          cargo run enums ../gta3/enums.json > ../editor/dist/editor/assets/gta3/enums.txt
-          cargo run enums ../vc/enums.json > ../editor/dist/editor/assets/vc/enums.txt
-          cargo run enums ../sa/enums.json > ../editor/dist/editor/assets/sa/enums.txt
-          cargo run enums ../gta3_mobile/enums.json > ../editor/dist/editor/assets/gta3_mobile/enums.txt
-          cargo run enums ../vc_mobile/enums.json > ../editor/dist/editor/assets/vc_mobile/enums.txt
-          cargo run enums ../sa_mobile/enums.json > ../editor/dist/editor/assets/sa_mobile/enums.txt
-          cargo run enums ../gta3_unreal/enums.json > ../editor/dist/editor/assets/gta3_unreal/enums.txt
-          cargo run enums ../vc_unreal/enums.json > ../editor/dist/editor/assets/vc_unreal/enums.txt
-          cargo run enums ../sa_unreal/enums.json > ../editor/dist/editor/assets/sa_unreal/enums.txt
-
+          npm run ci
+          cd ../generator
           cargo run snippets ../gta3/snippets > ../editor/dist/editor/assets/gta3/snippets.json
           cargo run snippets ../vc/snippets > ../editor/dist/editor/assets/vc/snippets.json
           cargo run snippets ../sa/snippets > ../editor/dist/editor/assets/sa/snippets.json
           cargo run snippets ../unknown_x86/snippets > ../editor/dist/editor/assets/unknown_x86/snippets.json
           cargo run snippets ../unknown_x64/snippets > ../editor/dist/editor/assets/unknown_x64/snippets.json
-
-          # Classic OG releases (PC/1.0)
-
-          cargo run classes ../gta3/gta3.json gta3_classic > ../editor/dist/editor/assets/gta3/classes.db
-          cargo run classes ../vc/vc.json vc_classic > ../editor/dist/editor/assets/vc/classes.db
-          cargo run classes ../sa/sa.json sa_classic > ../editor/dist/editor/assets/sa/classes.db
-
-          cargo run keywords ../gta3/gta3.json gta3_classic > ../editor/dist/editor/assets/gta3/keywords.txt
-          cargo run keywords ../vc/vc.json vc_classic > ../editor/dist/editor/assets/vc/keywords.txt
-          cargo run keywords ../sa/sa.json sa_classic > ../editor/dist/editor/assets/sa/keywords.txt
-
-
-          # Mobile releases
-
-          cargo run classes ../gta3_mobile/gta3_mobile.json gta3_mobile > ../editor/dist/editor/assets/gta3_mobile/classes.db
-          cargo run classes ../vc_mobile/vc_mobile.json vc_mobile > ../editor/dist/editor/assets/vc_mobile/classes.db
-          cargo run classes ../sa_mobile/sa_mobile.json sa_mobile > ../editor/dist/editor/assets/sa_mobile/classes.db
-
-          cargo run keywords ../gta3_mobile/gta3_mobile.json gta3_mobile > ../editor/dist/editor/assets/gta3_mobile/keywords.txt
-          cargo run keywords ../vc_mobile/vc_mobile.json vc_mobile > ../editor/dist/editor/assets/vc_mobile/keywords.txt
-          cargo run keywords ../sa_mobile/sa_mobile.json sa_mobile > ../editor/dist/editor/assets/sa_mobile/keywords.txt
-
-
-          # The Trilogy: The Definitive Edition
-
-          cargo run classes ../gta3_unreal/gta3_unreal.json gta3_unreal > ../editor/dist/editor/assets/gta3_unreal/classes.db
-          cargo run classes ../vc_unreal/vc_unreal.json vc_unreal > ../editor/dist/editor/assets/vc_unreal/classes.db
-          cargo run classes ../sa_unreal/sa_unreal.json sa_unreal > ../editor/dist/editor/assets/sa_unreal/classes.db
-
-          cargo run keywords ../gta3_unreal/gta3_unreal.json gta3_unreal > ../editor/dist/editor/assets/gta3_unreal/keywords.txt
-          cargo run keywords ../vc_unreal/vc_unreal.json vc_unreal > ../editor/dist/editor/assets/vc_unreal/keywords.txt
-          cargo run keywords ../sa_unreal/sa_unreal.json sa_unreal > ../editor/dist/editor/assets/sa_unreal/keywords.txt
 
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v3

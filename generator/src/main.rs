@@ -86,7 +86,7 @@ fn visit_dirs(dir: &Path, cb: &mut dyn FnMut(&DirEntry) -> Option<()>) -> io::Re
 
 fn does_command_match_target(command: &Command, target: &str) -> bool {
     match target {
-        "gta3_classic" | "vc_classic" | "sa_classic" => {
+        "gta3" | "vc" | "sa" => {
             if !command.platforms.is_empty()
                 && !(command.platforms.contains(&"any".to_string())
                     || command.platforms.contains(&"pc".to_string()))

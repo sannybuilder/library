@@ -116,7 +116,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    this.onDestroy$.next();
+    this.onDestroy$.next(undefined);
     this.onDestroy$.complete();
     this._ui.toggleCommandListElements(false);
   }

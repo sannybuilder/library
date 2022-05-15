@@ -1,4 +1,10 @@
-import { Game } from 'src/app/models';
+import {
+  Game,
+  GameClassesAssets,
+  GameEnumsAssets,
+  GameKeywordsAssets,
+  GameSnippets,
+} from './src/app/models';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -25,21 +31,24 @@ games.forEach((game) => {
     `cp ${enumsJson} ${assets}`,
   ].forEach(run);
 
-  if (!game.includes('unknown')) {
-    let dest = assetsDirCargo(game);
-    [
-      `cargo run enums ${enumsJson} > ${join(dest, 'enums.txt')}`,
-      `cargo run classes ${gameJson} ${game} > ${join(dest, 'classes.db')}`,
-      `cargo run keywords ${gameJson} ${game} > ${join(dest, 'keywords.txt')}`,
-    ].forEach(cargo);
+  let dest = assetsDirCargo(game);
+  if (GameEnumsAssets[game]) {
+    cargo(`cargo run enums ${enumsJson} > ${join(dest, 'enums.txt')}`);
   }
-});
-
-// GENERATE SNIPPETS
-['gta3', 'vc', 'sa', 'unknown_x86', 'unknown_x64'].forEach((game) => {
-  const assets = assetsDirCargo(game);
-  const srcDir = join('..', game, 'snippets');
-  cargo(`cargo run snippets ${srcDir} > ${assets}/snippets.json`);
+  if (GameClassesAssets[game]) {
+    cargo(
+      `cargo run classes ${gameJson} ${game} > ${join(dest, 'classes.db')}`
+    );
+  }
+  if (GameKeywordsAssets[game]) {
+    cargo(
+      `cargo run keywords ${gameJson} ${game} > ${join(dest, 'keywords.txt')}`
+    );
+  }
+  if (GameSnippets[game].includes(game)) {
+    const srcDir = join('..', game, 'snippets');
+    cargo(`cargo run snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
+  }
 });
 
 function assetsDir(game: string) {

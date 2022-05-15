@@ -132,17 +132,41 @@ const r = <T>(cb: (game: Game) => T) =>
     return m;
   }, {} as Record<Game, T>);
 
-export const GameClassesAssets: Partial<Record<Game, string>> = r(
-  (game) => `assets/${game}/classes.db`
-);
+export const GameClassesAssets: Partial<Record<Game, string>> = {
+  [Game.gta3]: 'assets/gta3/classes.db',
+  [Game.vc]: 'assets/vc/classes.db',
+  [Game.sa]: 'assets/sa/classes.db',
+  [Game.gta3_mobile]: 'assets/gta3_mobile/classes.db',
+  [Game.vc_mobile]: 'assets/vc_mobile/classes.db',
+  [Game.sa_mobile]: 'assets/sa_mobile/classes.db',
+  [Game.gta3_unreal]: 'assets/gta3_unreal/classes.db',
+  [Game.vc_unreal]: 'assets/vc_unreal/classes.db',
+  [Game.sa_unreal]: 'assets/sa_unreal/classes.db',
+};
 
-export const GameEnumsAssets: Partial<Record<Game, string>> = r(
-  (game) => `assets/${game}/enums.txt`
-);
+export const GameEnumsAssets: Partial<Record<Game, string>> = {
+  [Game.gta3]: 'assets/gta3/enums.txt',
+  [Game.vc]: 'assets/vc/enums.txt',
+  [Game.sa]: 'assets/sa/enums.txt',
+  [Game.gta3_mobile]: 'assets/gta3_mobile/enums.txt',
+  [Game.vc_mobile]: 'assets/vc_mobile/enums.txt',
+  [Game.sa_mobile]: 'assets/sa_mobile/enums.txt',
+  [Game.gta3_unreal]: 'assets/gta3_unreal/enums.txt',
+  [Game.vc_unreal]: 'assets/vc_unreal/enums.txt',
+  [Game.sa_unreal]: 'assets/sa_unreal/enums.txt',
+};
 
-export const GameKeywordsAssets: Partial<Record<Game, string>> = r(
-  (game) => `assets/${game}/keywords.txt`
-);
+export const GameKeywordsAssets: Partial<Record<Game, string>> = {
+  [Game.gta3]: 'assets/gta3/keywords.txt',
+  [Game.vc]: 'assets/vc/keywords.txt',
+  [Game.sa]: 'assets/sa/keywords.txt',
+  [Game.gta3_mobile]: 'assets/gta3_mobile/keywords.txt',
+  [Game.vc_mobile]: 'assets/vc_mobile/keywords.txt',
+  [Game.sa_mobile]: 'assets/sa_mobile/keywords.txt',
+  [Game.gta3_unreal]: 'assets/gta3_unreal/keywords.txt',
+  [Game.vc_unreal]: 'assets/vc_unreal/keywords.txt',
+  [Game.sa_unreal]: 'assets/sa_unreal/keywords.txt',
+};
 
 export const GameLibrary: Record<Game, string> = r(
   (game) => `${game}/${game}.json`
@@ -152,9 +176,19 @@ export const GameVersion: Record<Game, string> = r(
   (game) => `${game}/version.txt`
 );
 
-export const GameSnippets: Record<Game, string> = r(
-  (game) => `${game}/snippets.json`
-);
+export const GameSnippets: Record<Game, string> = {
+  [Game.gta3]: 'gta3/snippets.json',
+  [Game.vc]: 'vc/snippets.json',
+  [Game.sa]: 'sa/snippets.json',
+  [Game.gta3_mobile]: 'gta3/snippets.json',
+  [Game.vc_mobile]: 'vc/snippets.json',
+  [Game.sa_mobile]: 'sa/snippets.json',
+  [Game.gta3_unreal]: 'gta3/snippets.json',
+  [Game.vc_unreal]: 'vc/snippets.json',
+  [Game.sa_unreal]: 'sa/snippets.json',
+  [Game.unknown_x86]: 'unknown_x86/snippets.json',
+  [Game.unknown_x64]: 'unknown_x86/snippets.json',
+};
 
 export const GameEnums: Record<Game, string> = r(
   (game) => `${game}/enums.json`

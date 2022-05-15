@@ -124,6 +124,7 @@ export enum Game {
   sa_unreal = 'sa_unreal',
   unknown_x86 = 'unknown_x86',
   unknown_x64 = 'unknown_x64',
+  gta_iv = 'gta_iv',
 }
 
 const r = <T>(cb: (game: Game) => T) =>
@@ -188,6 +189,7 @@ export const GameSnippets: Record<Game, string> = {
   [Game.sa_unreal]: 'sa/snippets.json',
   [Game.unknown_x86]: 'unknown_x86/snippets.json',
   [Game.unknown_x64]: 'unknown_x86/snippets.json',
+  [Game.gta_iv]: 'gta_iv/snippets.json',
 };
 
 export const GameEnums: Record<Game, string> = r(
@@ -210,6 +212,7 @@ export const GameTitle: Record<Game, string> = {
   [Game.sa_unreal]: 'San Andreas (The Definitive Edition)',
   [Game.unknown_x86]: 'Unknown (32-bit)',
   [Game.unknown_x64]: 'Unknown (64-bit)',
+  [Game.gta_iv]: 'GTA IV',
 };
 
 export const GameTitleSimple: Record<Game, string> = {

@@ -61,52 +61,13 @@ const defaultFilterState: {
   searchTerm: '',
   selectedAttributesOnly: [],
   selectedAttributesExcept: ['is_nop', 'is_unsupported'],
-  games: {
-    gta3: {
+  games: Object.values(Game).reduce((m, v) => {
+    m[v] = {
       selectedClasses: ['any'],
       selectedExtensions: [],
-    },
-    gta3_mobile: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    gta3_unreal: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    vc: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    vc_mobile: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    vc_unreal: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    sa: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    sa_mobile: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    sa_unreal: {
-      selectedClasses: ['any'],
-      selectedExtensions: [],
-    },
-    unknown_x86: {
-      selectedClasses: ['any'],
-      selectedExtensions: []
-    },
-    unknown_x64: {
-      selectedClasses: ['any'],
-      selectedExtensions: []
-    }
-  },
+    };
+    return m;
+  }, {} as Record<Game, GameState>),
 };
 
 export const initialState: UiState = {

@@ -44,9 +44,12 @@ export const initialState: TreeState = {
 export const treeReducer = createReducer(
   initialState,
   on(loadStatements, (state, { game, lang }) => {
-    const s = !isEmpty(statements[game][lang])
-      ? statements[game][lang]
-      : statements[game]['en'];
+    if (!statements[game]) {
+      return state;
+    }
+    const s = !isEmpty(statements[game]![lang])
+      ? statements[game]![lang]
+      : statements[game]!['en'];
     const { dictionary, lines } = parseStatements(s);
     const tree = buildTree(lines);
     return {

@@ -113,9 +113,9 @@ export interface EnumRaw {
 export const KNOWN_LANGUAGES = ['en', 'ru', 'cn', 'bn', 'es', 'fr'];
 
 export enum Game {
-  GTA3 = 'gta3',
-  VC = 'vc',
-  SA = 'sa',
+  gta3 = 'gta3',
+  vc = 'vc',
+  sa = 'sa',
   gta3_mobile = 'gta3_mobile',
   vc_mobile = 'vc_mobile',
   sa_mobile = 'sa_mobile',
@@ -123,119 +123,51 @@ export enum Game {
   vc_unreal = 'vc_unreal',
   sa_unreal = 'sa_unreal',
   unknown_x86 = 'unknown_x86',
-  unknown_x64 = 'unknown_x64'
+  unknown_x64 = 'unknown_x64',
 }
 
-export const GameClassesAssets: Partial<Record<Game, string>> = {
-  [Game.GTA3]: 'assets/gta3/classes.db',
-  [Game.VC]: 'assets/vc/classes.db',
-  [Game.SA]: 'assets/sa/classes.db',
-  [Game.gta3_mobile]: 'assets/gta3_mobile/classes.db',
-  [Game.vc_mobile]: 'assets/vc_mobile/classes.db',
-  [Game.sa_mobile]: 'assets/sa_mobile/classes.db',
-  [Game.gta3_unreal]: 'assets/gta3_unreal/classes.db',
-  [Game.vc_unreal]: 'assets/vc_unreal/classes.db',
-  [Game.sa_unreal]: 'assets/sa_unreal/classes.db',
-};
+const r = <T>(cb: (game: Game) => T) =>
+  Object.values(Game).reduce((m, v) => {
+    m[v] = cb(v);
+    return m;
+  }, {} as Record<Game, T>);
 
-export const GameEnumsAssets: Partial<Record<Game, string>> = {
-  [Game.GTA3]: 'assets/gta3/enums.txt',
-  [Game.VC]: 'assets/vc/enums.txt',
-  [Game.SA]: 'assets/sa/enums.txt',
-  [Game.gta3_mobile]: 'assets/gta3_mobile/enums.txt',
-  [Game.vc_mobile]: 'assets/vc_mobile/enums.txt',
-  [Game.sa_mobile]: 'assets/sa_mobile/enums.txt',
-  [Game.gta3_unreal]: 'assets/gta3_unreal/enums.txt',
-  [Game.vc_unreal]: 'assets/vc_unreal/enums.txt',
-  [Game.sa_unreal]: 'assets/sa_unreal/enums.txt',
-};
+export const GameClassesAssets: Partial<Record<Game, string>> = r(
+  (game) => `assets/${game}/classes.db`
+);
 
-export const GameKeywordsAssets: Partial<Record<Game, string>> = {
-  [Game.GTA3]: 'assets/gta3/keywords.txt',
-  [Game.VC]: 'assets/vc/keywords.txt',
-  [Game.SA]: 'assets/sa/keywords.txt',
-  [Game.gta3_mobile]: 'assets/gta3_mobile/keywords.txt',
-  [Game.vc_mobile]: 'assets/vc_mobile/keywords.txt',
-  [Game.sa_mobile]: 'assets/sa_mobile/keywords.txt',
-  [Game.gta3_unreal]: 'assets/gta3_unreal/keywords.txt',
-  [Game.vc_unreal]: 'assets/vc_unreal/keywords.txt',
-  [Game.sa_unreal]: 'assets/sa_unreal/keywords.txt',
-};
+export const GameEnumsAssets: Partial<Record<Game, string>> = r(
+  (game) => `assets/${game}/enums.txt`
+);
 
-export const GameLibrary: Record<Game, string> = {
-  [Game.GTA3]: 'gta3/gta3.json',
-  [Game.VC]: 'vc/vc.json',
-  [Game.SA]: 'sa/sa.json',
-  [Game.gta3_mobile]: 'gta3_mobile/gta3_mobile.json',
-  [Game.vc_mobile]: 'vc_mobile/vc_mobile.json',
-  [Game.sa_mobile]: 'sa_mobile/sa_mobile.json',
-  [Game.gta3_unreal]: 'gta3_unreal/gta3_unreal.json',
-  [Game.vc_unreal]: 'vc_unreal/vc_unreal.json',
-  [Game.sa_unreal]: 'sa_unreal/sa_unreal.json',
-  [Game.unknown_x86]: 'unknown_x86/unknown_x86.json',
-  [Game.unknown_x64]: 'unknown_x64/unknown_x64.json',
-};
+export const GameKeywordsAssets: Partial<Record<Game, string>> = r(
+  (game) => `assets/${game}/keywords.txt`
+);
 
-export const GameVersion: Record<Game, string> = {
-  [Game.GTA3]: 'gta3/version.txt',
-  [Game.VC]: 'vc/version.txt',
-  [Game.SA]: 'sa/version.txt',
-  [Game.gta3_mobile]: 'gta3_mobile/version.txt',
-  [Game.vc_mobile]: 'vc_mobile/version.txt',
-  [Game.sa_mobile]: 'sa_mobile/version.txt',
-  [Game.gta3_unreal]: 'gta3_unreal/version.txt',
-  [Game.vc_unreal]: 'vc_unreal/version.txt',
-  [Game.sa_unreal]: 'sa_unreal/version.txt',
-  [Game.unknown_x86]: 'unknown_x86/version.txt',
-  [Game.unknown_x64]: 'unknown_x64/version.txt',
-};
+export const GameLibrary: Record<Game, string> = r(
+  (game) => `${game}/${game}.json`
+);
 
-export const GameSnippets: Record<Game, string> = {
-  [Game.GTA3]: 'gta3/snippets.json',
-  [Game.VC]: 'vc/snippets.json',
-  [Game.SA]: 'sa/snippets.json',
-  [Game.gta3_mobile]: 'gta3/snippets.json',
-  [Game.vc_mobile]: 'vc/snippets.json',
-  [Game.sa_mobile]: 'sa/snippets.json',
-  [Game.gta3_unreal]: 'gta3/snippets.json',
-  [Game.vc_unreal]: 'vc/snippets.json',
-  [Game.sa_unreal]: 'sa/snippets.json',
-  [Game.unknown_x86]: 'unknown_x86/snippets.json',
-  [Game.unknown_x64]: 'unknown_x64/snippets.json',
-};
+export const GameVersion: Record<Game, string> = r(
+  (game) => `${game}/version.txt`
+);
 
-export const GameEnums: Record<Game, string> = {
-  [Game.GTA3]: 'gta3/enums.json',
-  [Game.VC]: 'vc/enums.json',
-  [Game.SA]: 'sa/enums.json',
-  [Game.gta3_mobile]: 'gta3_mobile/enums.json',
-  [Game.vc_mobile]: 'vc_mobile/enums.json',
-  [Game.sa_mobile]: 'sa_mobile/enums.json',
-  [Game.gta3_unreal]: 'gta3_unreal/enums.json',
-  [Game.vc_unreal]: 'vc_unreal/enums.json',
-  [Game.sa_unreal]: 'sa_unreal/enums.json',
-  [Game.unknown_x86]: 'unknown_x86/enums.json',
-  [Game.unknown_x64]: 'unknown_x64/enums.json',
-};
+export const GameSnippets: Record<Game, string> = r(
+  (game) => `${game}/snippets.json`
+);
 
-export const GameEnumsJsAssets: Record<Game, string> = {
-  [Game.GTA3]: 'assets/gta3/enums.js',
-  [Game.VC]: 'assets/vc/enums.js',
-  [Game.SA]: 'assets/sa/enums.js',
-  [Game.gta3_mobile]: 'assets/gta3_mobile/enums.js',
-  [Game.vc_mobile]: 'assets/vc_mobile/enums.js',
-  [Game.sa_mobile]: 'assets/sa_mobile/enums.js',
-  [Game.gta3_unreal]: 'assets/gta3_unreal/enums.js',
-  [Game.vc_unreal]: 'assets/vc_unreal/enums.js',
-  [Game.sa_unreal]: 'assets/sa_unreal/enums.js',
-  [Game.unknown_x86]: 'assets/unknown_x86/enums.js',
-  [Game.unknown_x64]: 'assets/unknown_x64/enums.js',
-};
+export const GameEnums: Record<Game, string> = r(
+  (game) => `${game}/enums.json`
+);
+
+export const GameEnumsJsAssets: Record<Game, string> = r(
+  (game) => `assets/${game}/enums.js`
+);
 
 export const GameTitle: Record<Game, string> = {
-  [Game.GTA3]: 'GTA III (Classic)',
-  [Game.VC]: 'Vice City (Classic)',
-  [Game.SA]: 'San Andreas (Classic)',
+  [Game.gta3]: 'GTA III (Classic)',
+  [Game.vc]: 'Vice City (Classic)',
+  [Game.sa]: 'San Andreas (Classic)',
   [Game.gta3_mobile]: 'GTA III (Mobile)',
   [Game.vc_mobile]: 'Vice City (Mobile)',
   [Game.sa_mobile]: 'San Andreas (Mobile)',
@@ -247,45 +179,42 @@ export const GameTitle: Record<Game, string> = {
 };
 
 export const GameTitleSimple: Record<Game, string> = {
-  [Game.GTA3]: 'GTA III',
-  [Game.VC]: 'Vice City',
-  [Game.SA]: 'San Andreas',
+  ...r(() => 'Other'),
+  [Game.gta3]: 'GTA III',
+  [Game.vc]: 'Vice City',
+  [Game.sa]: 'San Andreas',
   [Game.gta3_mobile]: 'GTA III',
   [Game.vc_mobile]: 'Vice City',
   [Game.sa_mobile]: 'San Andreas',
   [Game.gta3_unreal]: 'GTA III',
   [Game.vc_unreal]: 'Vice City',
   [Game.sa_unreal]: 'San Andreas',
-  [Game.unknown_x86]: 'Other',
-  [Game.unknown_x64]: 'Other',
 };
 
 export const GamePlatforms: Record<Game, Platform[]> = {
-  [Game.GTA3]: [Platform.PC],
-  [Game.VC]: [Platform.PC],
-  [Game.SA]: [Platform.PC],
+  ...r(() => [Platform.PC]),
+  [Game.gta3]: [Platform.PC],
+  [Game.vc]: [Platform.PC],
+  [Game.sa]: [Platform.PC],
   [Game.gta3_mobile]: [Platform.Console, Platform.Mobile],
   [Game.vc_mobile]: [Platform.Console, Platform.Mobile],
   [Game.sa_mobile]: [Platform.Console, Platform.Mobile],
   [Game.gta3_unreal]: [Platform.PC],
   [Game.vc_unreal]: [Platform.PC],
   [Game.sa_unreal]: [Platform.PC],
-  [Game.unknown_x86]: [Platform.PC],
-  [Game.unknown_x64]: [Platform.PC],
 };
 
 export const GameVersions: Record<Game, Version[]> = {
-  [Game.GTA3]: [Version._10, Version._11],
-  [Game.VC]: [Version._10, Version._JP],
-  [Game.SA]: [Version._10],
+  ...r(() => [Version._10]),
+  [Game.gta3]: [Version._10, Version._11],
+  [Game.vc]: [Version._10, Version._JP],
+  [Game.sa]: [Version._10],
   [Game.gta3_mobile]: [Version._10],
   [Game.vc_mobile]: [Version._10],
   [Game.sa_mobile]: [Version._10, Version._30],
   [Game.gta3_unreal]: [Version._unreal10],
   [Game.vc_unreal]: [Version._unreal10],
   [Game.sa_unreal]: [Version._unreal10],
-  [Game.unknown_x86]: [Version._10],
-  [Game.unknown_x64]: [Version._10],
 };
 
 export const DEFAULT_EXTENSION = 'default';

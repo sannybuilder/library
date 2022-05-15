@@ -56,7 +56,7 @@ const unk64Statements = getStatements(
   unk64BN
 );
 
-const STATEMENTS: Record<Game, Record<string, Record<string, string>>> = {
+const STATEMENTS: Partial<Record<Game, Record<string, Record<string, string>>>> = {
   gta3: gta3Statements,
   gta3_mobile: gta3Statements,
   gta3_unreal: gta3Statements,

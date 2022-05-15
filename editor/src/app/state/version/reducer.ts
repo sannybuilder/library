@@ -26,52 +26,13 @@ export interface VersionState {
 const defaultFilterState: {
   games: Record<Game, GameState>;
 } = {
-  games: {
-    gta3: {
+  games: Object.values(Game).reduce((m, v) => {
+    m[v] = {
       selectedPlatforms: [],
       selectedVersions: [],
-    },
-    gta3_mobile: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    gta3_unreal: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    vc: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    vc_mobile: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    vc_unreal: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    sa: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    sa_mobile: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    sa_unreal: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    unknown_x86: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-    unknown_x64: {
-      selectedPlatforms: [],
-      selectedVersions: [],
-    },
-  },
+    };
+    return m;
+  }, {} as Record<Game, GameState>),
 };
 
 export const initialState: VersionState = {

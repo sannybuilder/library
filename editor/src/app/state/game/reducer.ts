@@ -37,7 +37,7 @@ function primitiveTypes(game: Game): PrimitiveType[] {
     PrimitiveType.zone_key,
   ];
 
-  if (game === Game.SA) {
+  if (game === Game.sa) {
     types.push(PrimitiveType.string128, PrimitiveType.int_script_id);
   }
 

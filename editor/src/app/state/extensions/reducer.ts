@@ -146,19 +146,10 @@ export const extensionsReducer = createReducer(
     return updateState(state, game as Game, {
       supportInfo: getSupportInfo(
         state.games[game]!.extensions,
-        {
-          [Game.GTA3]: state.games[Game.GTA3],
-          [Game.VC]: state.games[Game.VC],
-          [Game.SA]: state.games[Game.SA],
-          [Game.gta3_mobile]: state.games[Game.gta3_mobile],
-          [Game.vc_mobile]: state.games[Game.vc_mobile],
-          [Game.sa_mobile]: state.games[Game.sa_mobile],
-          [Game.gta3_unreal]: state.games[Game.gta3_unreal],
-          [Game.vc_unreal]: state.games[Game.vc_unreal],
-          [Game.sa_unreal]: state.games[Game.sa_unreal],
-          [Game.unknown_x86]: state.games[Game.unknown_x86],
-          [Game.unknown_x64]: state.games[Game.unknown_x64],
-        },
+        Object.values(Game).reduce((m, v) => {
+          m[v] = state.games[v]!;
+          return m;
+        }, {} as Record<Game, GameState>),
         game as Game
       ),
     });

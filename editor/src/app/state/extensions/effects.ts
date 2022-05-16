@@ -43,6 +43,7 @@ import {
   getSameCommands,
   doesCommandHaveAnyAttributeInvalid,
   replaceType,
+  GameEditions,
 } from '../../utils';
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
@@ -120,7 +121,11 @@ export class ExtensionsEffects {
                   ),
                   take(1),
                   map(([supportInfo, oldCommand]) => {
-                    if (shouldUpdateOtherGames(command, oldCommand)) {
+                    if (
+                      // disable cross-update for IV/Unknown
+                      !GameEditions[Game.unknown_x86].includes(game) &&
+                      shouldUpdateOtherGames(command, oldCommand)
+                    ) {
                       return getSameCommands(supportInfo, game).map((d) => ({
                         game: d.game,
                         command,

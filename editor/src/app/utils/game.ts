@@ -1,7 +1,7 @@
 import { flatten } from 'lodash';
 import { Game } from '../models';
 
-const GameEditions = {
+export const GameEditions = {
   [Game.gta3]: [Game.gta3, Game.gta3_mobile, Game.gta3_unreal],
   [Game.vc]: [Game.vc, Game.vc_mobile, Game.vc_unreal],
   [Game.sa]: [Game.sa, Game.sa_mobile, Game.sa_unreal],

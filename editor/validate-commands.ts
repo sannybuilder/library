@@ -59,7 +59,7 @@ forEach(content.extensions, (extension) => {
     Object.entries(errorHandlers).forEach(([key, cb]) => {
       if (cb(command, extension.commands)) {
         console.error(
-          `Error: ${translations?.ui?.errors?.command?.[key]}, id: ${command.id}, extension: ${extension.name}`
+          `Error: ${translations?.ui?.errors?.command?.[key]}, name: ${command.name}, extension: ${extension.name}`
         );
         exitStatus = 1;
       }

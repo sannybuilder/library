@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1652732610373,
-    "version": "0.6",
+    "last_update": 1652733213049,
+    "version": "0.7",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -927,7 +927,9 @@
           ],
           "name": "ADD_SCORE",
           "num_params": 2,
-          "short_desc": "Adds money to the player"
+          "short_desc": "Adds money to the player",
+          "class": "Player",
+          "member": "AddScore"
         },
         {
           "input": [
@@ -34048,17 +34050,22 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
               "type": "Player"
-            },
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
+              "name": "wantedLevel",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "STORE_WANTED_LEVEL",
-          "num_params": 2
+          "num_params": 2,
+          "short_desc": "Returns the player's current wanted level",
+          "class": "Player",
+          "member": "StoreWantedLevel"
         },
         {
           "name": "STREAM_CUTSCENE",

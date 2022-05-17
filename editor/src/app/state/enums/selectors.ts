@@ -9,7 +9,7 @@ export const enums = createSelector(
   state,
   game,
   (state: EnumsState, game: Game | undefined) =>
-    game ? state.enums[game] : undefined
+    game ? state.enums[game] ?? {} : undefined
 );
 
 export const enumNames = createSelector(enums, (enums) =>

@@ -7,6 +7,10 @@
 <h5>{{ "ui.enumList.title" | translate }}</h5>
 
 <div class="scroll-container">
-  <pre *ngIf="enumNames" class="sample">
+  <pre *ngIf="enumNames.length; else noEnums" class="sample">
 <div *ngFor="let enumName of enumNames"><a [routerLink]="['/', game, 'enums', enumName]">{{ enumName }}</a></div></pre>
 </div>
+
+<ng-template #noEnums>
+  <div class="my-3">{{ "ui.enumList.noEnums" | translate }}</div>
+</ng-template>

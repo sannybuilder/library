@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1652793363224,
+    "last_update": 1652794243121,
     "version": "0.11",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
@@ -38,13 +38,19 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "result",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "ABSF",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Math",
+          "member": "Absf",
+          "short_desc": "Returns the absolute value of the given floating-point value",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -55,13 +61,19 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "result",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "ABSI",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Math",
+          "short_desc": "Returns the absolute value of the given integer value",
+          "member": "Absi",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ACOS",
@@ -116,7 +128,7 @@
               "type": "Heli"
             },
             {
-              "name": "cheat",
+              "name": "power",
               "type": "int"
             }
           ],
@@ -1160,9 +1172,6 @@
               "type": "int"
             }
           ],
-          "name": "ADD_SPAWN_BLOCKING_AREA",
-          "num_params": 4,
-          "short_desc": "Adds an area where players can't spawn"
         },
         {
           "name": "ADD_SPHERE",
@@ -1187,11 +1196,19 @@
             },
             {
               "name": "_p5",
-              "type": "int"
-            }
+              "name": "handle",
+              "type": "Sphere",
           ],
           "output": [
-            {
+          ],
+          "name": "ADD_SPHERE",
+          "num_params": 6,
+          "short_desc": "Creates a sphere",
+          "class": "Sphere",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
               "name": "_p6",
               "type": "int",
               "source": "var_any"
@@ -1826,7 +1843,7 @@
         },
         {
           "input": [
-            {
+              "name": "state",
               "name": "self",
               "type": "Boat"
             },
@@ -1858,7 +1875,7 @@
           ],
           "name": "ANCHOR_OBJECT",
           "num_params": 3,
-          "short_desc": "Anchors or lets loose an object"
+              "name": "self",
         },
         {
           "input": [
@@ -1908,7 +1925,9 @@
             },
             {
               "name": "_p12",
-              "type": "int"
+          "short_desc": "Applies force to a car. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)",
+          "class": "Car",
+          "member": "ApplyForce"
             }
           ],
           "name": "APPLY_FORCE_TO_CAR",

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1652790655096,
-    "version": "0.8",
+    "last_update": 1652791369797,
+    "version": "0.9",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -19502,7 +19502,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -19510,7 +19510,10 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsUpsidedown",
+          "short_desc": "Returns true if the car is upside down"
         },
         {
           "name": "IS_CAR_VISIBLY_DAMAGED",
@@ -19519,7 +19522,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -19527,12 +19530,14 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsWaitingForWorldCollision"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -19544,26 +19549,30 @@
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsArmed"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "IS_CHAR_DEAD",
           "num_params": 1,
-          "short_desc": "Checks if the specified character is dead or not",
+          "short_desc": "Returns true if the character is dead",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsDead"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -19571,7 +19580,10 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsDucking",
+          "short_desc": "Returns true if the character is crouching"
         },
         {
           "input": [
@@ -47292,8 +47304,6 @@
         },
         {
           "name": "SPOT_CHECK5",
-          "input": [],
-          "output": [],
           "attrs": {
             "is_condition": true
           },
@@ -47301,8 +47311,6 @@
         },
         {
           "name": "SPOT_CHECK6",
-          "input": [],
-          "output": [],
           "attrs": {
             "is_condition": true
           },
@@ -47310,8 +47318,6 @@
         },
         {
           "name": "SPOT_CHECK7",
-          "input": [],
-          "output": [],
           "attrs": {
             "is_condition": true
           },
@@ -47319,8 +47325,6 @@
         },
         {
           "name": "SPOT_CHECK8",
-          "input": [],
-          "output": [],
           "attrs": {
             "is_condition": true
           },
@@ -47341,7 +47345,6 @@
               "source": "var_any"
             }
           ],
-          "attrs": {},
           "num_params": 2
         },
         {
@@ -47367,7 +47370,6 @@
               "source": "var_any"
             }
           ],
-          "attrs": {},
           "num_params": 4
         },
         {
@@ -47393,7 +47395,6 @@
               "source": "var_any"
             }
           ],
-          "attrs": {},
           "num_params": 4
         },
         {
@@ -47427,35 +47428,22 @@
               "source": "var_any"
             }
           ],
-          "attrs": {},
           "num_params": 6
         },
         {
           "name": "GET_NETWORK_JOIN_FAIL",
-          "input": [],
-          "output": [],
-          "attrs": {},
           "num_params": 0
         },
         {
           "name": "NETWORK_HAS_STRICT_NAT",
-          "input": [],
-          "output": [],
-          "attrs": {},
           "num_params": 0
         },
         {
           "name": "NETWORK_IS_SESSION_ADVERTISE",
-          "input": [],
-          "output": [],
-          "attrs": {},
           "num_params": 0
         },
         {
           "name": "REGISTER_MOD",
-          "input": [],
-          "output": [],
-          "attrs": {},
           "num_params": 0
         },
         {
@@ -47474,8 +47462,6 @@
               "type": "int"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 3
         },
         {
@@ -47486,8 +47472,6 @@
               "type": "string"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 1
         },
         {
@@ -47522,8 +47506,6 @@
               "type": "any"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 7
         },
         {
@@ -47538,8 +47520,6 @@
               "type": "int"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 2
         },
         {
@@ -47554,8 +47534,6 @@
               "type": "string"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 2
         },
         {
@@ -47590,8 +47568,6 @@
               "type": "any"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 7
         },
         {
@@ -47614,8 +47590,6 @@
               "type": "int"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 4
         },
         {
@@ -47646,8 +47620,6 @@
               "type": "any"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 6
         },
         {
@@ -47674,8 +47646,6 @@
               "type": "int"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 5
         },
         {
@@ -47698,8 +47668,6 @@
               "type": "int"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 4
         },
         {
@@ -47726,8 +47694,6 @@
               "type": "int"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 5
         },
         {
@@ -47745,7 +47711,6 @@
               "source": "var_any"
             }
           ],
-          "attrs": {},
           "num_params": 2
         },
         {
@@ -47768,8 +47733,6 @@
               "type": "int"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 4
         },
         {
@@ -47780,8 +47743,6 @@
               "type": "any"
             }
           ],
-          "output": [],
-          "attrs": {},
           "num_params": 1
         }
       ]

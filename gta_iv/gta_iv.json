@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1652797029957,
-    "version": "0.12",
+    "last_update": 1652799596152,
+    "version": "0.13",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -153,8 +153,6 @@
           "num_params": 2
         },
         {
-          "name": "ACTIVATE_MENU_ITEM",
-          "num_params": 3,
           "input": [
             {
               "name": "self",
@@ -165,10 +163,12 @@
               "type": "int"
             },
             {
-              "name": "activate",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "ACTIVATE_MENU_ITEM",
+          "num_params": 3,
           "class": "Menu",
           "member": "ActivateItem",
           "short_desc": ""
@@ -329,15 +329,20 @@
               "type": "float"
             }
           ],
-          "name": "ADD_BLIP_FOR_CONTACT",
-          "num_params": 4,
           "output": [
             {
-              "name": "pBlip",
+              "name": "handle",
               "type": "Blip",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "ADD_BLIP_FOR_CONTACT",
+          "num_params": 4,
+          "class": "Blip",
+          "member": "AddForContact",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "input": [
@@ -420,8 +425,6 @@
           }
         },
         {
-          "name": "ADD_BLIP_FOR_WEAPON",
-          "num_params": 4,
           "input": [
             {
               "name": "x",
@@ -438,11 +441,18 @@
           ],
           "output": [
             {
-              "name": "blip",
-              "type": "int",
+              "name": "handle",
+              "type": "Blip",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "ADD_BLIP_FOR_WEAPON",
+          "num_params": 4,
+          "class": "Blip",
+          "member": "AddForWeapon",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "input": [
@@ -676,7 +686,12 @@
           ],
           "name": "ADD_EXPLOSION",
           "num_params": 8,
-          "short_desc": "Creates an explosion with given parameters. Do NOT over use. It will stop rendering the explosion graphics/camera shake"
+          "short_desc": "Creates an explosion with given parameters. Do NOT over use. It will stop rendering the explosion graphics/camera shake",
+          "class": "Fx",
+          "member": "AddExplosion",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -1132,7 +1147,7 @@
               "type": "Player"
             },
             {
-              "name": "score",
+              "name": "money",
               "type": "int"
             }
           ],
@@ -1145,13 +1160,15 @@
         {
           "input": [
             {
-              "name": "pickup",
+              "name": "self",
               "type": "Pickup"
             }
           ],
           "name": "ADD_SIMPLE_BLIP_FOR_PICKUP",
           "num_params": 1,
-          "short_desc": "Adds a simple blip on the map corresponding to the pickups position"
+          "short_desc": "Adds a simple blip on the map corresponding to the pickups position",
+          "class": "Pickup",
+          "member": "AddSimpleBlip"
         },
         {
           "input": [
@@ -1626,24 +1643,34 @@
         {
           "input": [
             {
-              "name": "allow",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "ALLOW_EMERGENCY_SERVICES",
           "num_params": 1,
-          "short_desc": "Switches the emergency services on and off"
+          "short_desc": "Switches the emergency services on and off",
+          "class": "Game",
+          "member": "AllowEmergencyServices",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "allow",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "ALLOW_GAME_TO_PAUSE_FOR_STREAMING",
           "num_params": 1,
-          "short_desc": "Allows the game to pause for streaming, or switches the function off"
+          "short_desc": "Allows the game to pause for streaming, or switches the function off",
+          "class": "Game",
+          "member": "AllowToPauseForStreaming",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -1728,17 +1755,19 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "allow",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "ALLOW_REACTION_ANIMS",
           "num_params": 2,
-          "short_desc": "Allows reaction animations on a character"
+          "short_desc": "Allows reaction animations on a character",
+          "class": "Char",
+          "member": "AllowReactionAnims"
         },
         {
           "input": [

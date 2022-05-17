@@ -1172,6 +1172,9 @@
               "type": "int"
             }
           ],
+          "name": "ADD_SPAWN_BLOCKING_AREA",
+          "num_params": 4,
+          "short_desc": "Adds an area where players can't spawn"
         },
         {
           "name": "ADD_SPHERE",
@@ -1196,24 +1199,21 @@
             },
             {
               "name": "_p5",
-              "name": "handle",
-              "type": "Sphere",
+              "type": "int"
+            }
           ],
           "output": [
+            {
+              "name": "handle",
+              "type": "Sphere",
+              "source": "var_any"
+            }
           ],
-          "name": "ADD_SPHERE",
-          "num_params": 6,
-          "short_desc": "Creates a sphere",
           "class": "Sphere",
           "member": "Create",
           "attrs": {
             "is_constructor": true
           }
-              "name": "_p6",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
         },
         {
           "input": [
@@ -1843,12 +1843,12 @@
         },
         {
           "input": [
-              "name": "state",
+            {
               "name": "self",
               "type": "Boat"
             },
             {
-              "name": "anchor",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -1875,12 +1875,12 @@
           ],
           "name": "ANCHOR_OBJECT",
           "num_params": 3,
-              "name": "self",
+          "short_desc": "Anchors or lets loose an object"
         },
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -1925,11 +1925,11 @@
             },
             {
               "name": "_p12",
-          "short_desc": "Applies force to a car. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)",
-          "class": "Car",
-          "member": "ApplyForce"
+              "type": "int"
             }
           ],
+          "class": "Car",
+          "member": "ApplyForce",
           "name": "APPLY_FORCE_TO_CAR",
           "num_params": 12,
           "short_desc": "Applies force to a car. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)"

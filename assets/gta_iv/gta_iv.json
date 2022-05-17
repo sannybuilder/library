@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1652793363224,
+    "last_update": 1652794243121,
     "version": "0.11",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
@@ -38,13 +38,19 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "result",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "ABSF",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Math",
+          "member": "Absf",
+          "short_desc": "Returns the absolute value of the given floating-point value",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -55,13 +61,19 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "result",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "ABSI",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Math",
+          "short_desc": "Returns the absolute value of the given integer value",
+          "member": "Absi",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ACOS",
@@ -116,7 +128,7 @@
               "type": "Heli"
             },
             {
-              "name": "cheat",
+              "name": "power",
               "type": "int"
             }
           ],
@@ -1192,11 +1204,16 @@
           ],
           "output": [
             {
-              "name": "_p6",
-              "type": "int",
+              "name": "handle",
+              "type": "Sphere",
               "source": "var_any"
             }
-          ]
+          ],
+          "class": "Sphere",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "input": [
@@ -1831,7 +1848,7 @@
               "type": "Boat"
             },
             {
-              "name": "anchor",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -1863,7 +1880,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -1911,6 +1928,8 @@
               "type": "int"
             }
           ],
+          "class": "Car",
+          "member": "ApplyForce",
           "name": "APPLY_FORCE_TO_CAR",
           "num_params": 12,
           "short_desc": "Applies force to a car. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)"

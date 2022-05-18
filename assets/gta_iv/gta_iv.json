@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1652884514644,
-    "version": "0.15",
+    "last_update": 1652890724810,
+    "version": "0.16",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -2894,7 +2894,12 @@
           ],
           "name": "AWARD_ACHIEVEMENT",
           "num_params": 1,
-          "short_desc": "Awards specified achievement to current player. Use HAS_ACHIEVEMENT_BEEN_PASSED to check if the achievement has been passed"
+          "short_desc": "Awards specified achievement to current player. Use HAS_ACHIEVEMENT_BEEN_PASSED to check if the achievement has been passed",
+          "class": "Game",
+          "member": "AwardAchievement",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "AWARD_NETWORK_POINTS",
@@ -8842,8 +8847,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            },
+            {
+              "name": "ammo",
+              "type": "int"
+            }
+          ],
           "name": "ENSURE_PLAYER_HAS_DRIVE_BY_WEAPON",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Player",
+          "member": "EnsureHasDriveByWeapon",
+          "short_desc": "Sets the amount of ammo a player has during a driveby"
         },
         {
           "input": [
@@ -18832,8 +18850,11 @@
           "name": "HAS_ACHIEVEMENT_BEEN_PASSED",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "HasAchievementBeenPassed"
         },
         {
           "input": [
@@ -49565,7 +49586,12 @@
         },
         {
           "name": "RESET_ACHIEVEMENTS_AWARD",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "ResetAchievementsAward",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "RESET_ADDITIONAL_POPULATION_MODELS",

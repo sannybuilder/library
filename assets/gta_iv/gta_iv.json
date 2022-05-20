@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1653026652377,
-    "version": "0.18",
+    "last_update": 1653059285424,
+    "version": "0.19",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -16700,12 +16700,10 @@
         {
           "input": [
             {
-              "name": "padIndex",
+              "name": "pad",
               "type": "int"
             }
           ],
-          "name": "GET_POSITION_OF_ANALOGUE_STICKS",
-          "num_params": 5,
           "output": [
             {
               "name": "pLeftX",
@@ -16728,6 +16726,8 @@
               "source": "var_any"
             }
           ],
+          "name": "GET_POSITION_OF_ANALOGUE_STICKS",
+          "num_params": 5,
           "class": "Pad",
           "member": "GetPositionOfAnalogueSticks",
           "short_desc": "Returns the offset of the specified Left/Right, Up/Down, Look Left/Look Right and Look Up/Look Down keys",
@@ -20446,7 +20446,7 @@
         {
           "input": [
             {
-              "name": "padIndex",
+              "name": "pad",
               "type": "int"
             },
             {
@@ -20456,15 +20456,18 @@
           ],
           "name": "IS_BUTTON_JUST_PRESSED",
           "num_params": 2,
-          "short_desc": "Gets if a specified button is pressed or not. Not really sure what the difference is from IS_BUTTON_PRESSED",
+          "short_desc": "Gets if a specified button is pressed or not",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Pad",
+          "member": "IsButtonJustPressed"
         },
         {
           "input": [
             {
-              "name": "padIndex",
+              "name": "pad",
               "type": "int"
             },
             {
@@ -22214,7 +22217,7 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "pad",
               "type": "int"
             },
             {
@@ -22225,13 +22228,16 @@
           "name": "IS_CONTROL_JUST_PRESSED",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Pad",
+          "member": "IsControlJustPressed"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "pad",
               "type": "int"
             },
             {
@@ -22242,8 +22248,11 @@
           "name": "IS_CONTROL_PRESSED",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Pad",
+          "member": "IsControlPressed"
         },
         {
           "name": "IS_CONVERSATION_AT_NODE",
@@ -40717,15 +40726,15 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "pad",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "intensity",
               "type": "int"
             }
           ],

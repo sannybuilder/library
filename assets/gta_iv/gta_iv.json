@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1653498858106,
-    "version": "0.20",
+    "last_update": 1653667543098,
+    "version": "0.21",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -5484,12 +5484,12 @@
         {
           "input": [
             {
-              "name": "type",
-              "type": "RelationshipGroup"
+              "name": "pedType",
+              "type": "int"
             },
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_char"
             },
             {
               "name": "x",
@@ -5502,22 +5502,24 @@
             {
               "name": "z",
               "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "bool"
             }
           ],
-          "name": "CREATE_CHAR",
-          "num_params": 7,
-          "short_desc": "Creates a new character inside the specified vehicle",
           "output": [
             {
-              "name": "pPed",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_CHAR",
+          "num_params": 6,
+          "short_desc": "Creates a character at the specified location, with the specified model and pedtype",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "class": "Char",
+          "member": "Create"
         },
         {
           "input": [
@@ -5526,32 +5528,33 @@
               "type": "Car"
             },
             {
-              "name": "charType",
+              "name": "pedType",
               "type": "int"
             },
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_char"
             },
             {
-              "name": "passengerIndex",
+              "name": "seatId",
               "type": "int"
             }
           ],
-          "name": "CREATE_CHAR_AS_PASSENGER",
-          "num_params": 5,
           "output": [
             {
-              "name": "pPed",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_CHAR_AS_PASSENGER",
+          "num_params": 5,
           "class": "Char",
           "member": "CreateAsPassenger",
           "short_desc": "Creates a character with the specified model in the passenger seat of the vehicle",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -5561,28 +5564,29 @@
               "type": "Car"
             },
             {
-              "name": "charType",
+              "name": "pedType",
               "type": "int"
             },
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_char"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "name": "CREATE_CHAR_INSIDE_CAR",
           "num_params": 4,
           "short_desc": "Creates a character in the driver's seat of the vehicle",
-          "output": [
-            {
-              "name": "pPed",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "class": "Char",
           "member": "CreateInsideCar",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1653672869961,
+    "last_update": 1653673425446,
     "version": "0.22",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
@@ -5062,14 +5062,19 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "handle",
               "type": "Player",
               "source": "var_any"
             }
           ],
           "name": "CONVERT_INT_TO_PLAYERINDEX",
           "num_params": 2,
-          "short_desc": "Returns the Player Index from the Player ID. Use GET_PLAYER_ID to get the current player's ID"
+          "short_desc": "Returns the Player Handle from the Player ID. Use GET_PLAYER_ID to get the current player's ID",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Player",
+          "member": "GetHandleFromId"
         },
         {
           "input": [
@@ -6919,7 +6924,12 @@
         },
         {
           "name": "DISABLE_END_CREDITS_FADE",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Credits",
+          "member": "DisableFade",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "DISABLE_FRONTEND_RADIO",
@@ -8830,7 +8840,12 @@
         },
         {
           "name": "ENABLE_END_CREDITS_FADE",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Credits",
+          "member": "EnableFade",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ENABLE_FANCY_WATER",
@@ -16529,14 +16544,19 @@
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "playerId",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_PLAYER_ID",
           "num_params": 1,
-          "short_desc": "Returns the Current Player's ID. The Player ID is meaningless for other script functions and should be converted to a Player Index before its used by calling CONVERT_INT_TO_PLAYERINDEX"
+          "short_desc": "Returns the Current Player's ID. The Player ID is meaningless for other script functions and should be converted to a Player Index before its used by calling CONVERT_INT_TO_PLAYERINDEX",
+          "class": "Player",
+          "member": "GetId",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -34624,14 +34644,19 @@
           }
         },
         {
-          "name": "SET_CREDITS_TO_RENDER_BEFORE_FADE",
-          "num_params": 1,
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CREDITS_TO_RENDER_BEFORE_FADE",
+          "num_params": 1,
+          "class": "Credits",
+          "member": "SetToRenderBeforeFade",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -41280,7 +41305,12 @@
         },
         {
           "name": "START_END_CREDITS_MUSIC",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Credits",
+          "member": "StartMusic",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "START_FIRING_AMNESTY",
@@ -41961,7 +41991,12 @@
         },
         {
           "name": "STOP_END_CREDITS_MUSIC",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Credits",
+          "member": "StopMusic",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "STOP_MOBILE_PHONE_RINGING",

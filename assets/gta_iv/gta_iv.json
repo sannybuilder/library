@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1653673425446,
-    "version": "0.22",
+    "last_update": 1653708280847,
+    "version": "0.23",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -13626,20 +13626,25 @@
         {
           "input": [
             {
-              "name": "value",
+              "name": "text",
               "type": "string"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "hash",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_HASH_KEY",
           "num_params": 2,
-          "short_desc": "Returns the CRC hash of the input string"
+          "short_desc": "Returns the hash of the input string",
+          "class": "Text",
+          "member": "GetHashKey",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -22484,27 +22489,33 @@
           "input": [
             {
               "name": "key",
-              "type": "int"
+              "type": "Key"
             }
           ],
           "name": "IS_GAME_KEYBOARD_KEY_JUST_PRESSED",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Pad",
+          "member": "IsGameKeyboardKeyJustPressed"
         },
         {
           "input": [
             {
               "name": "key",
-              "type": "int"
+              "type": "Key"
             }
           ],
           "name": "IS_GAME_KEYBOARD_KEY_PRESSED",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Pad",
+          "member": "IsGameKeyboardKeyPressed"
         },
         {
           "name": "IS_GAME_KEYBOARD_NAV_DOWN_PRESSED",

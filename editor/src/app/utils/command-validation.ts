@@ -66,9 +66,14 @@ export function doesCommandHaveDuplicateName(
 export function isCommandParamNameDuplicate(command: Command, name: string) {
   const f = (p: Param) => p.name === name;
   const hasDups = (items: Param[]) => items.filter(f).length > 1;
-  return (
-    !!name && (hasDups(inputParams(command)) || hasDups(outputParams(command)))
+  const hasAnyDups =  (
+    (hasDups(inputParams(command)) || hasDups(outputParams(command)))
   );
+  if (name) {
+    return hasAnyDups;
+  }
+  // multiple empty param names are not allowed in class context
+  return !!(command.class && command.member && hasAnyDups);
 }
 
 export function doesCommandHaveDuplicateParamName(command: Command) {

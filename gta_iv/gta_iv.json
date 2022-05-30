@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1653708280847,
-    "version": "0.23",
+    "last_update": 1653878730640,
+    "version": "0.24",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -971,7 +971,7 @@
         {
           "input": [
             {
-              "name": "add",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -3139,7 +3139,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -3147,13 +3147,15 @@
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "BREAK_CAR_DOOR",
           "num_params": 3,
-          "short_desc": "Breaks or repairs a car door"
+          "short_desc": "Breaks or repairs a car door",
+          "class": "Car",
+          "member": "BreakDoor"
         },
         {
           "name": "BREAKPOINT",
@@ -5411,7 +5413,7 @@
             },
             {
               "name": "model",
-              "type": "int"
+              "type": "model_vehicle"
             },
             {
               "name": "_p8",
@@ -5442,15 +5444,21 @@
               "type": "bool"
             }
           ],
-          "name": "CREATE_CAR_GENERATOR",
-          "num_params": 15,
           "output": [
             {
               "name": "handle",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_CAR_GENERATOR",
+          "num_params": 15,
+          "class": "CarGenerator",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          }
         },
         {
           "name": "CREATE_CAR_GENERATOR_WITH_PLATE",
@@ -5638,8 +5646,8 @@
         {
           "input": [
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_vehicle"
             },
             {
               "name": "x",
@@ -5848,7 +5856,7 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "type",
               "type": "int"
             },
             {
@@ -5862,26 +5870,23 @@
             {
               "name": "z",
               "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "bool"
             }
           ],
-          "name": "CREATE_MISSION_TRAIN",
-          "num_params": 6,
           "output": [
             {
-              "name": "pTrain",
+              "name": "handle",
               "type": "Train",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_MISSION_TRAIN",
+          "num_params": 5,
           "class": "Train",
           "member": "Create",
           "short_desc": "Creates a script handled train from a predefined type (the type dictates how long the train is and the varieties of carriages) and sets the direction for the train to head in",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -5911,26 +5916,23 @@
             {
               "name": "amount",
               "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "bool"
             }
           ],
-          "name": "CREATE_MONEY_PICKUP",
-          "num_params": 6,
           "output": [
             {
-              "name": "pPickup",
+              "name": "handle",
               "type": "Pickup",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_MONEY_PICKUP",
+          "num_params": 5,
           "class": "Pickup",
           "member": "CreateMoney",
           "short_desc": "Creates a money pickup with the specified cash value",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -5950,8 +5952,8 @@
         {
           "input": [
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_object"
             },
             {
               "name": "x",
@@ -5964,27 +5966,29 @@
             {
               "name": "z",
               "type": "float"
-            },
+            }
+          ],
+          "output": [
             {
-              "name": "_p6",
-              "type": "bool"
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
             }
           ],
           "name": "CREATE_OBJECT",
-          "num_params": 6,
-          "output": [
-            {
-              "name": "pObj",
-              "type": "Object",
-              "source": "var_any"
-            }
-          ]
+          "num_params": 5,
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "class": "Object",
+          "member": "Create"
         },
         {
           "input": [
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_object"
             },
             {
               "name": "x",
@@ -5997,27 +6001,30 @@
             {
               "name": "z",
               "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "bool"
             }
           ],
-          "name": "CREATE_OBJECT_NO_OFFSET",
-          "num_params": 6,
           "output": [
             {
-              "name": "pObj",
+              "name": "handle",
               "type": "Object",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_OBJECT_NO_OFFSET",
+          "num_params": 5,
+          "class": "Object",
+          "member": "CreateNoOffset",
+          "attrs": {
+            "is_static": true,
+            "is_constructor": true
+          },
+          "short_desc": "Creates an object without offset at the location"
         },
         {
           "input": [
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_object"
             },
             {
               "name": "pickupType",
@@ -6034,21 +6041,23 @@
             {
               "name": "z",
               "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "bool"
             }
           ],
-          "name": "CREATE_PICKUP",
-          "num_params": 7,
           "output": [
             {
-              "name": "pPickup",
+              "name": "handle",
               "type": "Pickup",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_PICKUP",
+          "num_params": 6,
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "class": "Pickup",
+          "member": "Create"
         },
         {
           "input": [
@@ -6102,8 +6111,8 @@
         {
           "input": [
             {
-              "name": "model",
-              "type": "int"
+              "name": "hash",
+              "type": "model_object"
             },
             {
               "name": "pickupType",
@@ -6126,20 +6135,21 @@
               "type": "float"
             }
           ],
-          "name": "CREATE_PICKUP_WITH_AMMO",
-          "num_params": 7,
           "output": [
             {
-              "name": "pPickup",
+              "name": "handle",
               "type": "Pickup",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_PICKUP_WITH_AMMO",
+          "num_params": 7,
           "class": "Pickup",
           "member": "CreateWithAmmo",
           "short_desc": "Creates a weapon pickup, giving the player the specified amount of ammo when they pick it up",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -6161,20 +6171,21 @@
               "type": "float"
             }
           ],
-          "name": "CREATE_PLAYER",
-          "num_params": 5,
-          "short_desc": "Creates a player at the specified location",
           "output": [
             {
-              "name": "pPlayerIndex",
+              "name": "handle",
               "type": "Player",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_PLAYER",
+          "num_params": 5,
+          "short_desc": "Creates a player at the specified location",
           "class": "Player",
           "member": "Create",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -6250,20 +6261,21 @@
               "type": "Car"
             }
           ],
-          "name": "CREATE_RANDOM_CHAR_AS_DRIVER",
-          "num_params": 2,
           "output": [
             {
-              "name": "pPed",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_RANDOM_CHAR_AS_DRIVER",
+          "num_params": 2,
           "class": "Char",
           "member": "CreateRandomAsDriver",
           "short_desc": "Creates a driver in the vehicle",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -6277,20 +6289,21 @@
               "type": "int"
             }
           ],
-          "name": "CREATE_RANDOM_CHAR_AS_PASSENGER",
-          "num_params": 3,
           "output": [
             {
-              "name": "pPed",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_RANDOM_CHAR_AS_PASSENGER",
+          "num_params": 3,
           "class": "Char",
           "member": "CreateRandomAsPassenger",
           "short_desc": "Creates a random character in the passenger seat of the vehicle",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -31509,7 +31522,7 @@
               "type": "Blip"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -32804,35 +32817,35 @@
           "short_desc": "Sets the car on a specific route"
         },
         {
-          "name": "SET_CAR_STAY_IN_FAST_LANE",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_CAR_STAY_IN_FAST_LANE",
+          "num_params": 2,
           "class": "Car",
           "member": "SetStayInFastLane",
           "short_desc": ""
         },
         {
-          "name": "SET_CAR_STAY_IN_SLOW_LANE",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_CAR_STAY_IN_SLOW_LANE",
+          "num_params": 2,
           "class": "Car",
           "member": "SetStayInSlowLane",
           "short_desc": ""

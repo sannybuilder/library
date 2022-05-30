@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1653155768918,
-    "version": "0.206",
+    "last_update": 1653936383805,
+    "version": "0.207",
     "url": "https://library.sannybuilder.com/#/unknown_x64"
   },
   "extensions": [
@@ -1540,28 +1540,6 @@
         {
           "input": [
             {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "value",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "name": "ALLOC_TRAMPOLINE",
-          "num_params": 2,
-          "class": "Memory",
-          "member": "AllocTrampoline",
-          "attrs": {
-            "is_static": true
-          }
-        },
-        {
-          "input": [
-            {
               "name": "address",
               "type": "int"
             }
@@ -1579,7 +1557,8 @@
           "member": "ReadRelativeOffset",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Reads a 32-bit value referenced by a relative offset at the address"
         },
         {
           "input": [
@@ -1588,7 +1567,7 @@
               "type": "int"
             },
             {
-              "name": "value",
+              "name": "nearAddress",
               "type": "int"
             }
           ],
@@ -1598,7 +1577,8 @@
           "member": "WriteRelativeOffset",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Replaces an offset at the address with the offset to the near address (use ALLOC_NEAR)"
         },
         {
           "input": [
@@ -1627,6 +1607,29 @@
             "is_condition": true
           },
           "short_desc": "Returns an address of a memory chunk with the given index in a list of matches for the pattern"
+        },
+        {
+          "input": [
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "nearAddress",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "ALLOC_NEAR",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "AllocNear",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Allocates a chunk of memory of the given size near to the memory page of the main exe module"
         }
       ]
     }

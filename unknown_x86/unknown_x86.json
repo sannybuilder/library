@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1653155768917,
-    "version": "0.202",
+    "last_update": 1654359941899,
+    "version": "0.203",
     "url": "https://library.sannybuilder.com/#/unknown_x86"
   },
   "extensions": [
@@ -1514,6 +1514,122 @@
           },
           "class": "IniFile",
           "member": "WriteString"
+        }
+      ]
+    },
+    {
+      "name": "memops",
+      "commands": [
+        {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_IMAGE_BASE",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "GetImageBase",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns the address of the main exe module"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "READ_RELATIVE_OFFSET",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "ReadRelativeOffset",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Reads a 32-bit value referenced by a relative offset at the address"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "nearAddress",
+              "type": "int"
+            }
+          ],
+          "name": "WRITE_RELATIVE_OFFSET",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "WriteRelativeOffset",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Replaces an offset at the address with the offset to the near address (use ALLOC_NEAR)"
+        },
+        {
+          "input": [
+            {
+              "name": "pattern",
+              "type": "string"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "FIND_PATTERN",
+          "num_params": 3,
+          "class": "Memory",
+          "member": "FindPattern",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "short_desc": "Returns an address of a memory chunk with the given index in a list of matches for the pattern"
+        },
+        {
+          "input": [
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "nearAddress",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "ALLOC_NEAR",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "AllocNear",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Allocates a chunk of memory of the given size near to the memory page of the main exe module"
         }
       ]
     }

@@ -41,5 +41,8 @@ function primitiveTypes(game: Game): PrimitiveType[] {
     types.push(PrimitiveType.string128, PrimitiveType.int_script_id);
   }
 
+  if (game === Game.gta_iv) {
+    types.push(PrimitiveType.vector3);
+  }
   return types.sort();
 }

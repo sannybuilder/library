@@ -30,6 +30,7 @@ export enum PrimitiveType {
   model_object = 'model_object',
   model_vehicle = 'model_vehicle',
   int_script_id = 'script_id',
+  vector3 = 'Vector3'
 }
 
 export enum SourceType {

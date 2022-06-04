@@ -261,6 +261,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       : StoreDevtoolsModule.instrument({
           maxAge: 50,
           logOnly: false,
+          autoPause: true
         }),
   ],
   exports: [],

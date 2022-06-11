@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1654966463643,
-    "version": "0.28",
+    "last_update": 1654969754497,
+    "version": "0.29",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -6626,33 +6626,41 @@
           "num_params": 1,
           "class": "Car",
           "member": "Delete",
-          "short_desc": "Removes the vehicle from the game"
+          "short_desc": "Removes the vehicle from the game",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "input": [
             {
-              "name": "handle",
-              "type": "int"
+              "name": "self",
+              "type": "CarGenerator"
             }
           ],
           "name": "DELETE_CAR_GENERATOR",
-          "num_params": 1
+          "num_params": 1,
+          "class": "CarGenerator",
+          "member": "Delete",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
-          "name": "DELETE_CHAR",
-          "num_params": 1,
-          "output": [
+          "input": [
             {
-              "name": "pPed",
+              "name": "self",
               "type": "Char",
               "source": "var_any"
             }
           ],
+          "name": "DELETE_CHAR",
+          "num_params": 1,
           "class": "Char",
           "member": "Delete",
           "short_desc": "Removes the character from the game and mission cleanup list, freeing game memory",
           "attrs": {
-            "is_static": true
+            "is_destructor": true
           }
         },
         {
@@ -6699,20 +6707,20 @@
           "short_desc": "Removes the specified panel from the screen"
         },
         {
-          "name": "DELETE_MISSION_TRAIN",
-          "num_params": 1,
-          "output": [
+          "input": [
             {
-              "name": "pTrain",
+              "name": "self",
               "type": "Train",
               "source": "var_any"
             }
           ],
+          "name": "DELETE_MISSION_TRAIN",
+          "num_params": 1,
           "class": "Train",
           "member": "Delete",
           "short_desc": "Removes the specified script created train",
           "attrs": {
-            "is_static": true
+            "is_destructor": true
           }
         },
         {
@@ -6726,25 +6734,37 @@
           }
         },
         {
-          "name": "DELETE_OBJECT",
-          "num_params": 1,
-          "output": [
+          "input": [
             {
-              "name": "pObj",
+              "name": "self",
               "type": "Object",
               "source": "var_any"
             }
           ],
+          "name": "DELETE_OBJECT",
+          "num_params": 1,
           "class": "Object",
           "member": "Delete",
           "short_desc": "Destroys the object, freeing game memory",
           "attrs": {
-            "is_static": true
+            "is_destructor": true
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "name": "DELETE_PLAYER",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "Delete",
+          "attrs": {
+            "is_destructor": true
+          },
+          "short_desc": "Removes the player"
         },
         {
           "name": "DELETE_WIDGET",
@@ -35808,18 +35828,18 @@
           "num_params": 2
         },
         {
-          "name": "SET_HAS_BEEN_OWNED_FOR_CAR_GENERATOR",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "CarGenerator"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_HAS_BEEN_OWNED_FOR_CAR_GENERATOR",
+          "num_params": 2,
           "class": "CarGenerator",
           "member": "SetHasBeenOwned",
           "short_desc": "Sets whether the player will not receive a wanted level when entering a vehicle from this generator when the police is around"

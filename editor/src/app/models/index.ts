@@ -326,3 +326,5 @@ export interface GenerateJsonModel {
   selectedExtensions: string[];
   fileName: string;
 }
+
+export const SELF = 'self';

@@ -5,18 +5,18 @@ import {
   Param,
   Platform,
   PrimitiveType,
+  SELF,
   Version,
 } from '../models';
 import { commandParams, inputParams, isOpcode, outputParams } from './command';
 import { HEX_NEGATION } from './hex';
-
-const SELF = 'self';
 
 export const ATTRIBUTE_RULES: Partial<
   Record<Attribute, { allowed?: Attribute[]; disallowed?: Attribute[] }>
 > = {
   is_unsupported: { allowed: [] },
   is_constructor: { disallowed: ['is_destructor'] },
+  is_destructor: { disallowed: ['is_static'] },
   is_nop: { allowed: ['is_condition', 'is_static'] },
   is_keyword: { disallowed: ['is_constructor', 'is_destructor', 'is_static'] },
 };

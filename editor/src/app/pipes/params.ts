@@ -12,6 +12,8 @@ export function stringifySource(source: SourceType) {
       return 'local var';
     case SourceType.literal:
       return 'literal';
+    case SourceType.pointer:
+        return 'pointer';
   }
 }
 

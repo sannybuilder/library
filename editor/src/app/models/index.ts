@@ -39,6 +39,7 @@ export enum SourceType {
   var_global = 'var_global',
   var_local = 'var_local',
   literal = 'literal',
+  pointer = 'pointer',
 }
 
 export const CommandAttributes: Attribute[] = [

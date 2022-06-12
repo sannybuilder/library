@@ -215,6 +215,7 @@ export class CommandEditorComponent implements OnInit {
     SourceType.var_global,
     SourceType.var_local,
     SourceType.literal,
+    SourceType.pointer,
   ];
 
   readonly errorHandlers: Record<ErrorType, () => void> = {

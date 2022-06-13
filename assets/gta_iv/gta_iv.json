@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1655071342430,
-    "version": "0.33",
+    "last_update": 1655089774965,
+    "version": "0.34",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -6237,20 +6237,20 @@
               "type": "float"
             }
           ],
-          "name": "CREATE_RANDOM_CHAR",
-          "num_params": 4,
           "output": [
             {
-              "name": "pPed",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
+          "name": "CREATE_RANDOM_CHAR",
+          "num_params": 4,
           "class": "Char",
           "member": "CreateRandom",
           "short_desc": "Creates a character with a randomised model and pedtype at the specified coordinates",
           "attrs": {
-            "is_static": true
+            "is_constructor": true
           }
         },
         {
@@ -26411,37 +26411,37 @@
           "short_desc": "Marks the car as being part of a convoy, which seems to follow a path set by 0994"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car",
+              "source": "pointer"
+            }
+          ],
           "name": "MARK_CAR_AS_NO_LONGER_NEEDED",
           "num_params": 1,
           "short_desc": "Allows the vehicle to be deleted by the game if necessary, and also removes it from the mission cleanup list, if applicable",
-          "output": [
-            {
-              "name": "pVehicle",
-              "type": "Car",
-              "source": "var_any"
-            }
-          ],
           "class": "Car",
           "member": "MarkAsNoLongerNeeded",
           "attrs": {
-            "is_static": true
+            "is_destructor": true
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char",
+              "source": "pointer"
+            }
+          ],
           "name": "MARK_CHAR_AS_NO_LONGER_NEEDED",
           "num_params": 1,
           "short_desc": "Allows the character to be deleted by the game if necessary, and also removes them from the mission cleanup list, if applicable",
-          "output": [
-            {
-              "name": "pPed",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ],
           "class": "Char",
           "member": "MarkAsNoLongerNeeded",
           "attrs": {
-            "is_static": true
+            "is_destructor": true
           }
         },
         {
@@ -26484,20 +26484,20 @@
           }
         },
         {
-          "name": "MARK_OBJECT_AS_NO_LONGER_NEEDED",
-          "num_params": 1,
-          "output": [
+          "input": [
             {
-              "name": "pObj",
+              "name": "self",
               "type": "Object",
-              "source": "var_any"
+              "source": "pointer"
             }
           ],
+          "name": "MARK_OBJECT_AS_NO_LONGER_NEEDED",
+          "num_params": 1,
           "class": "Object",
           "member": "MarkAsNoLongerNeeded",
           "short_desc": "Allows the object to be deleted by the game if necessary, and also removes it from the mission cleanup list, if applicable",
           "attrs": {
-            "is_static": true
+            "is_destructor": true
           }
         },
         {
@@ -33149,13 +33149,15 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "SET_CHAR_AS_MISSION_CHAR",
           "num_params": 1,
-          "short_desc": "Makes the specified character a mission character. Before you can use any other SET_CHAR_ functions on a character you didn't create, you have to set them as mission chars. It is essentially the opposite of MARK_CHAR_AS_NO_LONGER_NEEDED"
+          "short_desc": "Makes the specified character a mission character. Before you can use any other SET_CHAR_ functions on a character you didn't create, you have to set them as mission chars. It is essentially the opposite of MARK_CHAR_AS_NO_LONGER_NEEDED",
+          "class": "Char",
+          "member": "SetAsMissionChar"
         },
         {
           "name": "SET_CHAR_BLEEDING",

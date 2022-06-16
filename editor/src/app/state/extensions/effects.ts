@@ -50,6 +50,7 @@ import { GameFacade } from '../game/facade';
 import { renameGameEnum } from '../enums/actions';
 import { registerFileContent } from '../changes/actions';
 import { Action } from '@ngrx/store';
+import { unpackSupportInfo } from 'src/app/utils/support-info';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {
@@ -324,7 +325,7 @@ export class ExtensionsEffects {
     this._actions$.pipe(
       ofType(init),
       switchMap(() => this._service.loadSupportInfo()),
-      map((data) => loadSupportInfo({ data }))
+      map((data) => loadSupportInfo({ data: unpackSupportInfo(data) }))
     )
   );
 

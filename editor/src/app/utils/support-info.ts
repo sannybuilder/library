@@ -3,10 +3,59 @@ import {
   Command,
   Extension,
   Game,
+  GameId,
   GameSupportInfo,
+  PackedSupportInfo,
   SupportInfo,
   SupportLevel,
 } from '../models';
+
+export function getPackedSupportInfo(
+  extensions: Extension[],
+  state: Record<Game, { extensions: Extension[] } | undefined>,
+  game: Game
+) {
+  return extensions.reduce((m, { name, commands }) => {
+    m[name] = commands.reduce((m2, command) => {
+      m2[command.id || command.name] = (Object.keys(state) as Game[]).map(
+        (v3) => {
+          const { extension, command: otherCommand } =
+            getCommand(state[v3]?.extensions, command) || {};
+          return [
+            GameId[v3],
+            getSupportLevel(game === v3 ? command : otherCommand, command),
+            extension,
+          ];
+        }
+      );
+      return m2;
+    }, {} as Record<string, PackedSupportInfo[]>);
+    return m;
+  }, {} as Record<string, Record<string, PackedSupportInfo[]>>);
+}
+
+export function unpackSupportInfo(
+  data: Record<Game, Record<string, Record<string, PackedSupportInfo[]>>>
+): Record<Game, SupportInfo> {
+  const idToGame = Object.values(Game);
+  return Object.entries(data).reduce((m, [game, supportInfo]) => {
+    m[game as Game] = Object.entries(supportInfo).reduce(
+      (m2, [ext, commands]) => {
+        m2[ext] = Object.entries(commands).reduce((m3, [name, infos]) => {
+          m3[name] = infos.map(([id, level, extension]) => ({
+            game: idToGame[id],
+            level,
+            extension,
+          }));
+          return m3;
+        }, {} as Record<string, GameSupportInfo[]>);
+        return m2;
+      },
+      {} as SupportInfo
+    );
+    return m;
+  }, {} as Record<Game, SupportInfo>);
+}
 
 export function getSupportInfo(
   extensions: Extension[],

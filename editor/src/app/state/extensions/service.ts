@@ -4,7 +4,7 @@ import {
   Game,
   GameLibrary,
   LoadExtensionsResponse,
-  SupportInfo,
+  PackedSupportInfo,
 } from '../../models';
 import { GitHubService } from '../github/service';
 
@@ -21,8 +21,8 @@ export class ExtensionsService {
   }
 
   loadSupportInfo() {
-    return this._github.loadFileFromAssets<Record<Game, SupportInfo>>(
-      'support-info.json'
-    );
+    return this._github.loadFileFromAssets<
+      Record<Game, Record<string, Record<string, PackedSupportInfo[]>>>
+    >('support-info.json');
   }
 }

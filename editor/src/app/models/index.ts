@@ -30,7 +30,7 @@ export enum PrimitiveType {
   model_object = 'model_object',
   model_vehicle = 'model_vehicle',
   int_script_id = 'script_id',
-  vector3 = 'Vector3'
+  vector3 = 'Vector3',
 }
 
 export enum SourceType {
@@ -129,11 +129,13 @@ export enum Game {
   gta_iv = 'gta_iv',
 }
 
-const r = <T>(cb: (game: Game) => T) =>
-  Object.values(Game).reduce((m, v) => {
-    m[v] = cb(v);
+const r = <T>(cb: (game: Game, index: number) => T) =>
+  Object.values(Game).reduce((m, v, index) => {
+    m[v] = cb(v, index);
     return m;
   }, {} as Record<Game, T>);
+
+export const GameId: Record<Game, number> = r((_, index) => index);
 
 export const GameClassesAssets: Partial<Record<Game, string>> = {
   [Game.gta3]: 'assets/gta3/classes.db',
@@ -287,6 +289,8 @@ export interface GameSupportInfo {
   level: SupportLevel;
   extension?: string; // only when command exists
 }
+
+export type PackedSupportInfo = [number, SupportLevel, string | undefined];
 
 export enum SupportLevel {
   DoesNotExist = -2,

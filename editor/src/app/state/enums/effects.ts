@@ -18,6 +18,8 @@ import {
   renameGameEnum,
   updateEnum,
   updateGameEnum,
+  loadEnumsInfo,
+  loadEnumsInfoSuccess,
 } from './actions';
 import { GameFacade } from '../game/facade';
 import { EnumsService } from './service';
@@ -81,7 +83,7 @@ export class EnumsEffects {
           game,
           newEnumName: enumToEdit.name,
           oldEnumName: oldEnumToEdit.name,
-          isAffected: false
+          isAffected: false,
         })
       )
     )
@@ -116,6 +118,14 @@ export class EnumsEffects {
           oldEnumToEdit: enumToClone,
         })
       )
+    )
+  );
+
+  loadEnumsInfo$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadEnumsInfo),
+      switchMap(() => this._service.loadEnumsInfo()),
+      map((data) => loadEnumsInfoSuccess({ data }))
     )
   );
 

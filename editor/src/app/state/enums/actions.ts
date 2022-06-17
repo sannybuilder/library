@@ -42,3 +42,10 @@ export const cloneEnum = createAction(
     enumToClone: EnumRaw;
   }>()
 );
+
+export const loadEnumsInfo = createAction('[game] load enums info');
+
+export const loadEnumsInfoSuccess = createAction(
+  '[game] load enums info success',
+  props<{ data: Record<Game, string[]> }>()
+);

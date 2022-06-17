@@ -61,7 +61,7 @@ import { ChangesFacade } from '../changes/facade';
 import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
-import { opcodify } from '../../pipes';
+import { loadEnumsSuccess } from '../enums/actions';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -258,7 +258,7 @@ export class UiEffects {
         const finder = command.id
           ? (c: Command) => c.id === command.id
           : (c: Command) => c.name === command.name;
-        return rows?.findIndex((row) => finder(row.command))
+        return rows?.findIndex((row) => finder(row.command));
       }),
       withLatestFrom(this._ui.currentPage$),
       filter(
@@ -405,6 +405,31 @@ export class UiEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  loadEnumsSuccess$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadEnumsSuccess),
+      withLatestFrom(this._ui.enumToDisplayOrEdit$, this._ui.viewMode$),
+      filter(
+        ([{ enums }, enumToEdit]) =>
+          !!enumToEdit &&
+          !!enumToEdit.name &&
+          !!enums &&
+          !!enums[enumToEdit.name]
+      ),
+      map(([{ enums }, enumToEdit, viewMode]) => {
+        let { isNew, name } = enumToEdit!;
+        return displayOrEditEnum({
+          enumToEdit: {
+            isNew,
+            name,
+            fields: Object.entries(enums![enumToEdit!.name!]),
+          },
+          viewMode,
+        });
+      })
+    )
   );
 
   constructor(

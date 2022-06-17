@@ -1,6 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { EnumRaw, Enums, Game } from '../../models';
-import { loadEnumsSuccess, renameGameEnum, updateGameEnum } from './actions';
+import {
+  loadEnumsSuccess,
+  renameGameEnum,
+  updateGameEnum,
+  loadEnumsInfoSuccess,
+} from './actions';
 import { fromPairs, mapValues } from 'lodash';
 import { evaluateEnumValues, smash } from '../../utils';
 
@@ -35,6 +40,18 @@ export const enumsReducer = createReducer(
       [oldEnumName]: undefined,
       [newEnumName]: newEnumName ? currentEnum : undefined,
     });
+  }),
+  on(loadEnumsInfoSuccess, (state, { data }) => {
+    return Object.entries(data).reduce((s, [game, names]) => {
+      return updateState(
+        s,
+        game as Game,
+        names.reduce((m, v) => {
+          m[v] ??= {};
+          return m;
+        }, (state.enums[game as Game] as Enums) ?? {})
+      );
+    }, state);
   })
 );
 

@@ -113,6 +113,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this._extensions.init();
+    this._enums.loadEnumsInfo();
   }
 
   ngOnDestroy() {

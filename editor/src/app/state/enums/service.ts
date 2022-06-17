@@ -11,4 +11,10 @@ export class EnumsService {
   loadEnums(game: Game, accessToken?: string): Observable<Enums> {
     return this._github.loadFileGracefully(GameEnums[game], accessToken, game);
   }
+
+  loadEnumsInfo() {
+    return this._github.loadFileFromAssets<Record<Game, string[]>>(
+      'enums-info.json'
+    );
+  }
 }

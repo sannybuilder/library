@@ -14,6 +14,7 @@ const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
 
 run('npm run generate:support-info src/assets/support-info.json');
+run('npm run generate:enums-info src/assets/enums-info.json');
 
 // GENERATE DATA FILES
 games.forEach((game) => {

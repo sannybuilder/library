@@ -1259,3 +1259,9 @@ export const ChangeMoney = {
   "Add": 1,
   "Remove": 2
 };
+export const ImGuiDir = {
+  "Left": 0,
+  "Right": 1,
+  "Up": 2,
+  "Down": 3
+};

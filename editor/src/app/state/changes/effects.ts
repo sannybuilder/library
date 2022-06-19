@@ -76,8 +76,9 @@ export class ChangesEffects {
                 withLatestFrom(this._facade.snapshots$),
                 map(([response, snapshots]) => {
                   const hasBeenChangedInRemote =
+                    snapshots[file.path] &&
                     response.meta.last_update !==
-                    snapshots[file.path].lastUpdate;
+                      snapshots[file.path].lastUpdate;
 
                   if (hasBeenChangedInRemote) {
                     const patch = diff.createPatch(

@@ -234,19 +234,12 @@ export const GameTitleSimple: Record<Game, string> = {
 
 export const GamePlatforms: Record<Game, Platform[]> = {
   ...r(() => [Platform.PC]),
-  [Game.gta3]: [Platform.PC],
-  [Game.vc]: [Platform.PC],
-  [Game.sa]: [Platform.PC],
   [Game.gta3_mobile]: [Platform.Console, Platform.Mobile],
   [Game.vc_mobile]: [Platform.Console, Platform.Mobile],
   [Game.sa_mobile]: [Platform.Console, Platform.Mobile],
-  [Game.gta3_unreal]: [Platform.PC],
-  [Game.vc_unreal]: [Platform.PC],
-  [Game.sa_unreal]: [Platform.PC],
 };
 
 export const GameVersions: Record<Game, Version[]> = {
-  ...r(() => [Version._10]),
   [Game.gta3]: [Version._10, Version._11],
   [Game.vc]: [Version._10, Version._JP],
   [Game.sa]: [Version._10],
@@ -256,6 +249,9 @@ export const GameVersions: Record<Game, Version[]> = {
   [Game.gta3_unreal]: [Version._unreal10],
   [Game.vc_unreal]: [Version._unreal10],
   [Game.sa_unreal]: [Version._unreal10],
+  [Game.gta_iv]: [Version._10],
+  [Game.unknown_x86]: [],
+  [Game.unknown_x64]: []
 };
 
 export const DEFAULT_EXTENSION = 'default';

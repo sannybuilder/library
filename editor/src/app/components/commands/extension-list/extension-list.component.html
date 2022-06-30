@@ -1,0 +1,20 @@
+<div class="row mb-2">
+  <div class="col-12 d-flex justify-content-end">
+    <a *ngFor="let game of games" [routerLink]="['/', game, 'extensions']">
+      <scl-icon [game]="game" size="16"></scl-icon>
+    </a>
+  </div>
+</div>
+
+<h5>{{ "ui.extensionList.title" | translate }}</h5>
+
+<div class="scroll-container">
+  <pre
+    *ngIf="extensions.length; else noExtensions"
+    class="sample"
+  ><div *ngFor="let extension of extensions"><a [routerLink]="['/', game, extension.name]">{{ extension.name }}</a></div></pre>
+</div>
+
+<ng-template #noExtensions>
+  <div class="my-3">{{ "ui.extensionList.noExtensions" | translate }}</div>
+</ng-template>

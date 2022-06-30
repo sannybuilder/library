@@ -17,6 +17,7 @@ import {
   displayOrEditEnum,
   displayClassesList,
   displayEnumsList,
+  displayExtensionList,
   displayDecisionTree,
   toggleInlineMethodDescription,
   toggleOpcodePresentation,
@@ -27,7 +28,7 @@ import {
 } from './actions';
 
 export interface GameState {
-  selectedExtensions: string[];
+  selectedExtensions: Array<string | 'any'>;
   selectedClasses: Array<string | 'any' | 'none'>;
 }
 
@@ -151,24 +152,42 @@ export const uiReducer = createReducer(
     ...state,
     ...defaultFilterState,
   })),
-  on(selectExtensions, (state, { game, extensions, state: forceSelect }) => {
-    const selectedExtensions = state.games[game]?.selectedExtensions ?? [];
-    const [selected, unselected] = partition(extensions, (extension) =>
-      selectedExtensions.includes(extension)
-    );
+  on(
+    selectExtensions,
+    (state, { game, extensions, state: forceSelect, extensionNames }) => {
+      const selectedExtensions = state.games[game]?.selectedExtensions ?? [];
 
-    if (forceSelect && unselected.length > 0) {
-      return updateState(state, game, {
-        selectedExtensions: [...selectedExtensions, ...unselected],
-      });
+      const selectIf = (condition: boolean, extensions: string[]) => {
+        return updateState(state, game, {
+          selectedExtensions: condition ? extensions : ['any'],
+        });
+      };
+
+      if (extensions.includes('any')) {
+        return selectIf(!forceSelect, extensionNames);
+      }
+      const [selected, unselected] = partition(extensions, (extension) =>
+        selectedExtensions.includes(extension)
+      );
+
+      if (forceSelect && unselected.length > 0) {
+        const newSelection = [...selectedExtensions, ...unselected].filter(
+          (p) => p !== 'any'
+        );
+
+        return selectIf(
+          newSelection.length !== extensionNames.length,
+          newSelection
+        );
+      }
+      if (!forceSelect && selected.length > 0) {
+        const newSelection = without(selectedExtensions, ...selected);
+        return selectIf(newSelection.length !== 0, newSelection);
+      }
+
+      return state;
     }
-    if (!forceSelect && selected.length > 0) {
-      return updateState(state, game, {
-        selectedExtensions: without(selectedExtensions, ...selected),
-      });
-    }
-    return state;
-  }),
+  ),
   on(selectClass, (state, { game, className, state: forceSelect }) => {
     const selectedClasses = state.games[game]?.selectedClasses ?? [];
     const specials = ['none', 'any'];
@@ -201,6 +220,10 @@ export const uiReducer = createReducer(
   on(displayEnumsList, (state) => ({
     ...state,
     viewMode: ViewMode.ViewAllEnums,
+  })),
+  on(displayExtensionList, (state) => ({
+    ...state,
+    viewMode: ViewMode.ViewAllExtensions,
   })),
   on(displayDecisionTree, (state) => ({
     ...state,

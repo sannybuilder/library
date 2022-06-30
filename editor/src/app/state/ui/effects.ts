@@ -8,6 +8,7 @@ import {
   displayClassOverview,
   displayDecisionTree,
   displayEnumsList,
+  displayExtensionList,
   displayJsonGenerator,
   displayOrEditCommandInfo,
   displayOrEditEnum,
@@ -204,23 +205,32 @@ export class UiEffects {
             ];
           }
 
+          if (extension === 'all') {
+            return [displayExtensionList()];
+          }
           // toggle extensions
           return this._extensions.extensions$.pipe(
             tap((extensions) => {
+              const extensionNames = extensions.map((e) => e.name);
               if (extension) {
                 this._ui.selectExtensions(
                   game,
-                  extensions
-                    .filter((e) => e.name !== extension)
-                    .map((e) => e.name),
-                  false
+                  extensionNames.filter((name) => name !== extension),
+                  false,
+                  extensionNames
                 );
-                this._ui.selectExtensions(game, [extension], true);
+                this._ui.selectExtensions(
+                  game,
+                  [extension],
+                  true,
+                  extensionNames
+                );
               } else {
                 this._ui.selectExtensions(
                   game,
-                  extensions.map((e) => e.name),
-                  true
+                  extensionNames,
+                  true,
+                  extensionNames
                 );
               }
             }),
@@ -342,8 +352,18 @@ export class UiEffects {
             const removed = p.filter((e) => !c.includes(e));
 
             return [
-              selectExtensions({ game, extensions: added, state: true }),
-              selectExtensions({ game, extensions: removed, state: false }),
+              selectExtensions({
+                game,
+                extensions: added,
+                state: true,
+                extensionNames: c,
+              }),
+              selectExtensions({
+                game,
+                extensions: removed,
+                state: false,
+                extensionNames: c,
+              }),
             ].filter(({ extensions }) => extensions.length > 0);
           })
         )
@@ -356,7 +376,12 @@ export class UiEffects {
       ofType(resetFilters),
       withLatestFrom(this._extensions.extensionNames$, this._game.game$),
       map(([_, extensions, game]) =>
-        selectExtensions({ game, extensions, state: true })
+        selectExtensions({
+          game,
+          extensions,
+          state: true,
+          extensionNames: extensions,
+        })
       )
     )
   );

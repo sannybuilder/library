@@ -89,6 +89,7 @@
             {{ "ui.filters.anyVersion" | translate }}
           </label>
         </div>
+        <hr />
         <div
           class="d-sm-inline-block d-xl-block pr-2"
           *ngFor="let version of versions"
@@ -130,6 +131,18 @@
       data-parent="#left-rail"
     >
       <div class="card-body">
+        <div class="d-sm-inline-block d-xl-block pr-2">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="isExtensionChecked('any') | async"
+              (click)="selectExtension('any', extensionNames, $event)"
+            />
+            <span class="checkbox"></span>
+            {{ "ui.filters.anyExtension" | translate }}
+          </label>
+        </div>
+        <hr />
         <div
           class="d-sm-inline-block d-xl-block pr-2"
           *ngFor="let name of extensionNames"
@@ -138,7 +151,7 @@
             <input
               type="checkbox"
               [ngModel]="isExtensionChecked(name) | async"
-              (ngModelChange)="selectExtension(name, $event)"
+              (click)="selectExtension(name, extensionNames, $event)"
             />
             <span class="checkbox"></span>
             {{ name }}

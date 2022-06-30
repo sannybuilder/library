@@ -91,6 +91,7 @@ import {
   CommandInfoComponent,
   CommandListComponent,
   CommandGamesComponent,
+  ExtensionListComponent,
 } from './components/commands';
 
 import {
@@ -194,6 +195,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     CopyButtonComponent,
     DecisionTreeComponent,
     JsonGeneratorComponent,
+    ExtensionListComponent,
   ],
   imports: [
     BrowserModule,

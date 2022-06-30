@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { flatten, orderBy, uniqBy } from 'lodash';
 import { of, zip } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { VersionFacade } from 'src/app/state/version/facade';
 
 import {
@@ -36,7 +36,11 @@ export class FilterPanelComponent {
   }
   extensionNames$ = this._extensions.extensionNames$;
   selectedExtensionEntities$ = this._ui.selectedExtensions$.pipe(
-    switchMap((extensions) => {
+    withLatestFrom(this.extensionNames$),
+    switchMap(([selectedExtensions, extensionNames]) => {
+      const extensions = selectedExtensions?.includes('any')
+        ? extensionNames
+        : selectedExtensions;
       return extensions?.length
         ? zip(...extensions.map((e) => this.getExtensionEntities(e)))
         : of([]);
@@ -58,8 +62,15 @@ export class FilterPanelComponent {
     private _version: VersionFacade
   ) {}
 
-  selectExtension(extension: string, state: boolean) {
-    this._ui.selectExtensions(this.game, [extension], state);
+  selectExtension(
+    extension: string,
+    extensionNames: string[],
+    event: MouseEvent
+  ) {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+    target.checked = false;
+    this._ui.selectExtensions(this.game, [extension], checked, extensionNames);
   }
 
   isExtensionChecked(extension: string) {

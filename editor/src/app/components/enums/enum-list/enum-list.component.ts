@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { getSameEdition } from '../../../utils';
 import { Game } from '../../../models';
 
 @Component({

@@ -44,7 +44,6 @@ export class RouteGuard implements CanActivate {
       this._router,
       state.url
     );
-
     if (segments.length === 0) {
       return this.goHome();
     }
@@ -107,6 +106,14 @@ export class RouteGuard implements CanActivate {
         });
         return true;
       }
+    }
+
+    if (subPath === 'extensions') {
+      this._game.onListEnter({
+        game,
+        extension: 'all',
+      });
+      return true;
     }
 
     // extensions

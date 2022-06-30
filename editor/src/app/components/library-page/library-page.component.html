@@ -91,6 +91,9 @@
           </div>
 
           <div class="d-flex flex-row justify-content-center mb-3">
+            <a class="mr-3" [routerLink]="['/', game, 'extensions']">{{
+              "ui.header.menuExtensions" | translate
+            }}</a>
             <a class="mr-3" [routerLink]="['/', game, 'classes']">{{
               "ui.header.menuClasses" | translate
             }}</a>
@@ -186,7 +189,9 @@
         ></scl-icon-button>
 
         <scl-icon-button
-          *ngIf="viewMode === ViewMode.ViewCommand && doesGameRequireOpcode(game)"
+          *ngIf="
+            viewMode === ViewMode.ViewCommand && doesGameRequireOpcode(game)
+          "
           [icon]="(displayOpcodePresentation$ | async) ? 'eye-fill' : 'eye'"
           [title]="'ui.shared.toggleOpcode' | translate"
           (clicked)="toggleOpcodePresentation()"
@@ -224,7 +229,13 @@
         <a
           *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
           class="btn btn-outline-success"
-          [routerLink]="['/', game, extension, command.id || command.name, 'edit']"
+          [routerLink]="[
+            '/',
+            game,
+            extension,
+            command.id || command.name,
+            'edit'
+          ]"
           [queryParams]="getQueryParamsForCommand(command, game)"
         >
           {{ "ui.shared.edit" | translate }}
@@ -329,6 +340,11 @@
         [entities]="entities$ | async"
         [classesMeta]="getClassesMeta(game) | async"
       ></scl-class-list>
+      <scl-extension-list
+        *ngIf="viewMode === ViewMode.ViewAllExtensions"
+        [game]="game"
+        [extensions]="getGameExtensions(game) | async"
+      ></scl-extension-list>
       <scl-enum-overview
         *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"
         [enumToView]="enumToDisplayOrEdit"

@@ -33,8 +33,10 @@ export const selectedExtensions = createSelector(
 
 export const isExtensionSelected = createSelector(
   selectedExtensions,
-  (selectedExtensions: string[] | undefined, props: { extension: string }) =>
-    selectedExtensions?.includes(props.extension)
+  (
+    selectedExtensions: string[] | undefined,
+    props: { extension: string | 'any' }
+  ) => selectedExtensions?.includes(props.extension)
 );
 
 export const selectedClasses = createSelector(
@@ -136,8 +138,10 @@ export const rows = createSelector(
     selectedPlatforms,
     selectedVersions
   ) => {
-    const selected = extensions?.filter(({ name }) =>
-      selectedExtensions?.includes(name)
+    const selected = extensions?.filter(
+      ({ name }) =>
+        selectedExtensions?.includes('any') ||
+        selectedExtensions?.includes(name)
     );
 
     return (

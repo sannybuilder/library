@@ -298,6 +298,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._extensions.getGameClassesMeta(game);
   }
 
+  getGameExtensions(game: Game) {
+    return this._extensions.getGameExtensions(game);
+  }
+
   @HostListener('window:resize', [])
   private detectScreenSize() {
     this.screenSize = window.innerWidth;
@@ -373,6 +377,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (viewMode === ViewMode.ViewAllEnums) {
       return [base, game, 'enums'].join('/');
+    }
+    if (viewMode === ViewMode.ViewAllExtensions) {
+      return [base, game, 'extensions'].join('/');
     }
 
     if (viewMode === ViewMode.ViewClass) {

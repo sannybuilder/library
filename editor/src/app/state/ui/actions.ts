@@ -11,7 +11,12 @@ import {
 
 export const selectExtensions = createAction(
   '[ui] change extensions selection',
-  props<{ game: Game; extensions: string[]; state: boolean }>()
+  props<{
+    game: Game;
+    extensions: string[];
+    state: boolean;
+    extensionNames: string[];
+  }>()
 );
 
 export const toggleAttribute = createAction(
@@ -57,6 +62,7 @@ export const displayOrEditEnum = createAction(
   props<{ enumToEdit: EnumRaw; viewMode: ViewMode }>()
 );
 
+export const displayExtensionList = createAction('[ui] display extension list');
 export const displayClassesList = createAction('[ui] display classes list');
 export const displayEnumsList = createAction('[ui] display enums list');
 export const displayDecisionTree = createAction('[ui] display decision tree');

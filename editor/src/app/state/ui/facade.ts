@@ -32,6 +32,7 @@ import {
   toggleSidebar,
   displayJsonGenerator,
   generateNewJson,
+  displayExtensionList,
 } from './actions';
 import * as selector from './selectors';
 
@@ -163,8 +164,8 @@ export class UiFacade {
     this.store$.dispatch(resetFilters());
   }
 
-  selectExtensions(game: Game, extensions: string[], state: boolean) {
-    this.store$.dispatch(selectExtensions({ game, extensions, state }));
+  selectExtensions(game: Game, extensions: string[], state: boolean, extensionNames: string[]) {
+    this.store$.dispatch(selectExtensions({ game, extensions, state, extensionNames }));
   }
 
   selectClass(game: Game, className: string, state: boolean) {
@@ -195,5 +196,9 @@ export class UiFacade {
 
   generateNewJson(model: GenerateJsonModel) {
     this.store$.dispatch(generateNewJson({ model }));
+  }
+
+  displayExtensionList() {
+    this.store$.dispatch(displayExtensionList());
   }
 }

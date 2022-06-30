@@ -265,6 +265,7 @@ export enum ViewMode {
   EditEnum = 'EditEnum',
   ViewAllClasses = 'ViewAllClasses',
   ViewAllEnums = 'ViewAllEnums',
+  ViewAllExtensions = 'ViewAllExtensions',
   ViewDecisionTree = 'ViewDecisionTree',
   ViewGenerateJson = 'ViewGenerateJson',
 }

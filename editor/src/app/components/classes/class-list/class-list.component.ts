@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { getSameEdition } from '../../../utils';
 import { ClassMeta, DEFAULT_EXTENSION, Game } from '../../../models';
 
 @Component({
@@ -16,7 +15,7 @@ export class ClassListComponent {
   @Input() classesMeta: ClassMeta[];
 
   @Input() set game(val: Game) {
-    this.games = getSameEdition(val);
+    this.games = Object.values(Game);
     this._game = val;
   }
 

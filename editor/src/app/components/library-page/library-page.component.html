@@ -105,6 +105,7 @@
           <scl-command-list
             [game]="game"
             [canEdit]="canEdit$ | async"
+            [gameExtensions]="getGameExtensions(game) | async"
             [narrowed]="
               shouldDisplayRightRail(viewMode) &&
               screenSize >= 1200 &&
@@ -318,6 +319,7 @@
         [extension]="extension"
         [displayOpcodePresentation]="displayOpcodePresentation$ | async"
         [classDesc]="(getClassMeta(game, command.class) | async)?.desc"
+        [gameExtensions]="getGameExtensions(game) | async"
         (descriptionClick)="onDescriptionClick($event)"
       >
       </scl-command-info>
@@ -331,6 +333,7 @@
         [classCommands]="classCommands$ | async"
         [classOrigin]="getClassOrigin(classToDisplay) | async"
         [meta]="getClassMeta(game, classToDisplay) | async"
+        [gameExtensions]="getGameExtensions(game) | async"
         [displayInlineDescription]="displayInlineDescription$ | async"
         (descriptionClick)="onDescriptionClick($event)"
       ></scl-class-overview>

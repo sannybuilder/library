@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { doesGameRequireOpcode, getQueryParamsForCommand } from '../../../utils';
-import { Command, DEFAULT_EXTENSION, Game } from '../../../models';
+import { Command, DEFAULT_EXTENSION, Extension, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
@@ -17,6 +17,7 @@ import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandListComponent {
+  @Input() gameExtensions: Extension[];
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;

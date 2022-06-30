@@ -10,6 +10,7 @@ import {
   Attribute,
   Command,
   DEFAULT_EXTENSION,
+  Extension,
   Game,
   Param,
   ParamType,
@@ -73,6 +74,7 @@ export class CommandInfoComponent {
   @Input() displayOpcodePresentation: boolean;
   @Input() relatedCommands: Command[] | undefined;
   @Input() classDesc?: string;
+  @Input() gameExtensions: Extension[];
   @Output() descriptionClick = new EventEmitter();
 
   isPrimitiveType(param: Param) {

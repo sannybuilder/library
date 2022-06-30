@@ -6,7 +6,13 @@ import {
   Output,
 } from '@angular/core';
 import { getQueryParamsForCommand } from '../../../utils';
-import { ClassMeta, Command, DEFAULT_EXTENSION, Game } from '../../../models';
+import {
+  ClassMeta,
+  Command,
+  DEFAULT_EXTENSION,
+  Extension,
+  Game,
+} from '../../../models';
 
 type ClassCommand = { command: Command; extension: string };
 
@@ -22,6 +28,7 @@ export class ClassOverviewComponent {
   filterQuery = '';
   commandsHaveSameOrigin = true;
 
+  @Input() gameExtensions: Extension[];
   @Input() displayInlineDescription: boolean;
   @Input() game: Game;
   @Input() className: string;

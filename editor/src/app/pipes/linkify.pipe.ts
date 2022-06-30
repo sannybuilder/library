@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Command, Game } from '../models';
+import { Command, Extension, Game } from '../models';
 import { commandParams } from '../utils';
 import { words } from 'lodash';
 
@@ -7,14 +7,37 @@ import { words } from 'lodash';
   name: 'linkify',
 })
 export class LinkifyPipe implements PipeTransform {
-  transform(content: string, game: Game, extension: string, command: Command) {
-    if (!content) {
-      return content;
+  transform(command: Command, game: Game, extensions: Extension[]) {
+    if (!command.short_desc) {
+      return '';
     }
 
-    const links = content.replace(
+    // todo: gradually replace ids with names
+    const linkedIds = command.short_desc.replace(
       /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/g,
-      `<a href="#/${game}/${extension}/$&">$&</a>`
+      (id) => {
+        const extension = extensions.find((e) =>
+          e.commands.find((c) => c.id === id)
+        );
+        if (!extension) {
+          return id;
+        }
+
+        return `<a href="#/${game}/${extension.name}/${id}">${id}</a>`;
+      }
+    );
+    const linkedNames = linkedIds.replace(
+      /(\W)([A-Z\d_]+)(\W|$)/g,
+      (match, p1, name, p3) => {
+        const extension = extensions.find((e) =>
+          e.commands.find((c) => c.name === name)
+        );
+        if (!extension) {
+          return match;
+        }
+
+        return `${p1}<a href="#/${game}/${extension.name}/${name}">${name}</a>${p3}`;
+      }
     );
     const aliases = [
       ['car', 'vehicle'],
@@ -35,6 +58,6 @@ export class LinkifyPipe implements PipeTransform {
 
       const re = new RegExp(`\\b${needle}\\b`, 'i');
       return m.replace(re, `<span class="identifier">$&</span>`);
-    }, links);
+    }, linkedNames);
   }
 }

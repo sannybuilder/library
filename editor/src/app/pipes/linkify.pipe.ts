@@ -26,19 +26,20 @@ export class LinkifyPipe implements PipeTransform {
         return `<a href="#/${game}/${extension.name}/${id}">${id}</a>`;
       }
     );
-    const linkedNames = linkedIds.replace(
-      /(\W)([A-Z\d_]+)(\W|$)/g,
-      (match, p1, name, p3) => {
-        const extension = extensions.find((e) =>
-          e.commands.find((c) => c.name === name)
-        );
-        if (!extension) {
-          return match;
-        }
-
-        return `${p1}<a href="#/${game}/${extension.name}/${name}">${name}</a>${p3}`;
+    const re =
+      game === Game.bully
+        ? /(\W)([A-Z][A-Za-z]+)(\W|$)/g
+        : /(\W)([A-Z\d_]+)(\W|$)/g;
+    const linkedNames = linkedIds.replace(re, (match, p1, name, p3) => {
+      const extension = extensions.find((e) =>
+        e.commands.find((c) => c.name === name)
+      );
+      if (!extension) {
+        return match;
       }
-    );
+
+      return `${p1}<a href="#/${game}/${extension.name}/${name}">${name}</a>${p3}`;
+    });
     const aliases = [
       ['car', 'vehicle'],
       ['ped', 'character', 'char'],

@@ -5,7 +5,7 @@ export const GameEditions = {
   [Game.gta3]: [Game.gta3, Game.gta3_mobile, Game.gta3_unreal],
   [Game.vc]: [Game.vc, Game.vc_mobile, Game.vc_unreal],
   [Game.sa]: [Game.sa, Game.sa_mobile, Game.sa_unreal],
-  [Game.unknown_x86]: [Game.unknown_x86, Game.unknown_x64, Game.gta_iv, Game.bully],
+  [Game.unknown_x86]: [Game.bully, Game.gta_iv, Game.unknown_x86, Game.unknown_x64],
 };
 
 export function isValidGame(name: string | undefined): name is Game {
@@ -33,7 +33,7 @@ export function getGameVariations(game: Game): Game[] {
     Object.values(GameEditions).find((v) => v!.includes(game)) ??
     GameEditions[Game.unknown_x86];
 
-  return edition?.filter((g) => g !== game) ?? [];
+  return edition ?? [];
 }
 
 export function getSameEdition(game: Game): Game[] {

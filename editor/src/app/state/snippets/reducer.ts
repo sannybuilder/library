@@ -14,7 +14,7 @@ export const initialState: SnippetsState = {
 export const snippetsReducer = createReducer(
   initialState,
   on(loadSnippetsSuccess, (state, { game, extensionSnippets }) => {
-    const games = [game, ...getGameVariations(game)];
+    const games = getGameVariations(game);
     return games.reduce((m, v) => updateState(m, v, extensionSnippets), state);
   }),
   on(updateGameSnippet, (state, { game, extension, id, content }) =>

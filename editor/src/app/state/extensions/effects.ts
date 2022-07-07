@@ -123,7 +123,7 @@ export class ExtensionsEffects {
                   take(1),
                   map(([supportInfo, oldCommand]) => {
                     if (
-                      // disable cross-update for IV/Unknown
+                      // disable cross-update for non-GTA3D games
                       !GameEditions[Game.unknown_x86].includes(game) &&
                       shouldUpdateOtherGames(command, oldCommand)
                     ) {

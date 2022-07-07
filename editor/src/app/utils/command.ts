@@ -1,4 +1,10 @@
-import { camelCase, difference, intersection, pickBy } from 'lodash';
+import {
+  camelCase,
+  difference,
+  intersection,
+  pickBy,
+  upperFirst,
+} from 'lodash';
 import {
   Game,
   Param,
@@ -79,8 +85,19 @@ export function formatParamName(name: string) {
   return name.startsWith('_') ? name : camelCase(name);
 }
 
-export function formatCommandName(name: string | undefined) {
+export function formatCommandNameScreaming(name: string | undefined) {
   return name ? name.replace(/[\s-]/g, '_').toUpperCase() : name;
+}
+
+export function formatCommandNameUpFirst(name: string | undefined) {
+  return name ? upperFirst(name) : name;
+}
+
+export function getDefaultCommandNameFormatter(game: Game) {
+  if (game === Game.bully) {
+    return formatCommandNameUpFirst;
+  }
+  return formatCommandNameScreaming;
 }
 
 export function formatOpcode(opcode: string) {

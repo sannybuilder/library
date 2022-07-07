@@ -47,7 +47,7 @@ import {
   doesCommandHaveSelfInStaticMethod,
   doesCommandHaveMissingSelfParamInMethod,
   formatParamName,
-  formatCommandName,
+  getDefaultCommandNameFormatter,
   formatOpcode,
   doesCommandDescriptionHaveTrailingPeriod,
   doesCommandDescriptionNotStartWith3rdPersonVerb,
@@ -102,6 +102,7 @@ export class CommandEditorComponent implements OnInit {
   classes: string[] = [];
   primitives: PrimitiveType[] = [];
   cloneTargets: Game[] = [];
+  defaultCommandNameFormatter: (name: string | undefined) => string | undefined;
 
   errors: Record<ErrorType, boolean> = {
     emptyName: false,
@@ -132,6 +133,7 @@ export class CommandEditorComponent implements OnInit {
       status: false,
     }));
     this.doesGameRequireOpcode = doesGameRequireOpcode(val);
+    this.defaultCommandNameFormatter = getDefaultCommandNameFormatter(val);
   }
 
   @Input() set command(val: Command) {
@@ -260,7 +262,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onCommandNameChange(command: Command, value: string) {
-    command.name = trim(formatCommandName(value));
+    command.name = trim(this.defaultCommandNameFormatter(value));
     this.updateErrors();
   }
 

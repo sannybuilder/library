@@ -1,7 +1,7 @@
 import { forEach, trim } from 'lodash';
 import {
   commandParams,
-  formatCommandName,
+  getDefaultCommandNameFormatter,
   formatOpcode,
   formatParamName,
   capitalizeFirst,
@@ -34,6 +34,7 @@ let exitStatus = 0;
 
 const noopHandler = () => false;
 const isOpcodeRequired = doesGameRequireOpcode(game as Game);
+const commandNameFormatter = getDefaultCommandNameFormatter(game as Game);
 
 const errorHandlers = {
   invalidAttributeCombo: doesCommandHaveAnyAttributeInvalid,
@@ -71,10 +72,10 @@ forEach(content.extensions, (extension) => {
 process.exit(exitStatus);
 
 function validateFormatting(command: Command, extension: string): void {
-  if (trim(formatCommandName(command.name)) !== command.name) {
+  if (trim(commandNameFormatter(command.name)) !== command.name) {
     console.error(
       `Error: command name is not properly formatted, expected ${trim(
-        formatCommandName(command.name)
+        commandNameFormatter(command.name)
       )}, command: ${command.name}, extension: ${extension}`
     );
     exitStatus = 1;

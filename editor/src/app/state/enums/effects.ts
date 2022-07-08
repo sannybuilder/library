@@ -4,11 +4,12 @@ import {
   concatMap,
   distinctUntilChanged,
   filter,
-  first,
+  groupBy,
   map,
   switchMap,
   tap,
   withLatestFrom,
+  take,
 } from 'rxjs/operators';
 
 import {
@@ -34,12 +35,10 @@ import { Router } from '@angular/router';
 export class EnumsEffects {
   enums$ = createEffect(() =>
     this._game.game$.pipe(
-      switchMap((game) =>
-        this._extensions.getGameExtensions(game).pipe(
-          first((e) => !e.length),
-          map(() => loadEnums({ game }))
-        )
-      )
+      // for each requested game, load enum file once
+      groupBy((game) => game),
+      concatMap((group$) => group$.pipe(take(1))),
+      map((game) => loadEnums({ game }))
     )
   );
 

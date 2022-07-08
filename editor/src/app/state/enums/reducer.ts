@@ -64,7 +64,9 @@ function updateState(
     ...state,
     enums: {
       ...state.enums,
-      [game]: smash({ ...(state.enums[game] ?? {}), ...newState }),
+      // enforce the game's state as an object
+      // it lets enums$ emit a truthy value and pass the emptyness check in the Ui onload effect
+      [game]: smash({ ...(state.enums[game] ?? {}), ...newState }) ?? {},
     },
   };
 }

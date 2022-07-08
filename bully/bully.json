@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1657246552171,
-    "version": "0.3",
+    "last_update": 1657308416971,
+    "version": "0.4",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -45,8 +45,21 @@
           "short_desc": "Sets the current in-game time"
         },
         {
+          "output": [
+            {
+              "name": "time",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "GetTimer",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Clock",
+          "member": "GetGameTimer",
+          "short_desc": "Returns the time passed in milliseconds since the game started",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -326,8 +339,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PlayerSetControl",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "SetControllable",
+          "short_desc": "Sets whether the player character can be controlled. Setting false makes the player frozen",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerStopAllActionControllers",
@@ -695,11 +720,23 @@
         },
         {
           "name": "PauseGameClock",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Clock",
+          "member": "Pause",
+          "short_desc": "Freezes the game clock timer. Use Unpause to reset",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "UnpauseGameClock",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Clock",
+          "member": "Unpause",
+          "short_desc": "Unfreezes game clock timer. Resets effect of Pause",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ClockIsPaused",
@@ -831,19 +868,53 @@
         },
         {
           "name": "CameraDefaultFOV",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Camera",
+          "member": "ResetFov",
+          "short_desc": "Sets camera field of view to default value. Resets changes made from SetFov",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "time",
+              "type": "int"
+            },
+            {
+              "name": "direction",
+              "type": "Fade"
+            }
+          ],
           "name": "CameraFade",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Camera",
+          "member": "DoFade",
+          "short_desc": "Fades the screen for the specified time",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CameraSetConvCam",
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "CameraSetWidescreen",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Camera",
+          "member": "SetWidescreen",
+          "short_desc": "Sets the game camera to widescreen mode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CameraSetPath",
@@ -918,12 +989,37 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "fov",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "CameraGetFOV",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Camera",
+          "member": "GetFov",
+          "short_desc": "Returns the camera current field of view",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "fov",
+              "type": "int"
+            }
+          ],
           "name": "CameraSetFOV",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Camera",
+          "member": "SetFov",
+          "short_desc": "Sets the camera field of view to given value. Use ResetFov to change back to default",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CameraSetSecondTarget",
@@ -1231,11 +1327,23 @@
         },
         {
           "name": "AreaClearAllPeds",
-          "num_params": 0
+          "num_params": 0,
+          "class": "World",
+          "member": "ClearAllPeds",
+          "short_desc": "Removes all pedestrian from the area",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "AreaClearAllVehicles",
-          "num_params": 0
+          "num_params": 0,
+          "class": "World",
+          "member": "ClearAllVehicles",
+          "short_desc": "Removes all vehicle from the area",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "IsStreamingBusy",
@@ -1395,11 +1503,23 @@
         },
         {
           "name": "AreaClearAllExplosions",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Removes all explosion from the nearby area",
+          "class": "World",
+          "member": "ClearAllExplosions",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "AreaClearAllProjectiles",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Removes all projectile from the nearby area",
+          "class": "World",
+          "member": "ClearAllProjectiles",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "AreaTriggerIsValid",
@@ -1821,8 +1941,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedSetAsleep",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetAsleep",
+          "short_desc": "Sets the character as asleep"
         },
         {
           "name": "PedSetStatsType",
@@ -1896,9 +2029,9 @@
           ],
           "name": "PedCreateXYZ",
           "num_params": 5,
-          "class": "Ped",
+          "class": "Char",
           "member": "Create",
-          "short_desc": "Creates a ped at the specified location",
+          "short_desc": "Creates a character at the specified location",
           "attrs": {
             "is_constructor": true
           }
@@ -1928,8 +2061,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedStop",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "StopAction",
+          "short_desc": "Stops any action character was performing"
         },
         {
           "name": "PedFaceHeading",
@@ -2016,8 +2158,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "model",
+              "type": "int"
+            }
+          ],
           "name": "PedIsInVehicle",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "IsInVehicle",
+          "short_desc": "Returns true if character is riding a specific vehicle"
         },
         {
           "name": "PedIsInAnyVehicle",
@@ -2064,8 +2219,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedIsOnVehicle",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "IsOnVehicle",
+          "short_desc": "Returns true if character is on any vehicle"
         },
         {
           "name": "PedGetWhoHitMeLast",
@@ -2152,12 +2316,34 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "model",
+              "type": "int"
+            }
+          ],
           "name": "PedClearWeapon",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Removes a specific weapon model from character",
+          "class": "Char",
+          "member": "ClearWeapon"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedClearAllWeapons",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "ClearAllWeapons",
+          "short_desc": "Removes all the character weapons"
         },
         {
           "name": "PedClearHitRecord",
@@ -2172,8 +2358,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "ped",
+              "type": "Ped"
+            }
+          ],
           "name": "PedIsValid",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "IsValid",
+          "short_desc": "Returns true if the given Ped handle is valid",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "PedIsPlayer",
@@ -2232,8 +2431,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedMakeTargetable",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetTargertable",
+          "short_desc": "Makes the character targetable"
         },
         {
           "name": "PedShowHealthBar",
@@ -3878,8 +4090,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "mission",
+              "type": "string"
+            }
+          ],
           "name": "IsMissionCompleated",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Mission",
+          "member": "IsCompleted",
+          "short_desc": "Returns true if the given mission was completed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "IsMissionAvailable",

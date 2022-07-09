@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1657321264079,
-    "version": "0.5",
+    "last_update": 1657339688041,
+    "version": "0.6",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -9,17 +9,17 @@
       "name": "default",
       "commands": [
         {
-          "attrs": {
-            "is_static": true
-          },
           "input": [
             {
-              "name": "money",
+              "name": "amount",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
           "class": "Player",
-          "member": "AddScore",
+          "member": "AddMoney",
           "name": "PlayerAddMoney",
           "num_params": 1,
           "short_desc": "Adds to the player's money"
@@ -427,12 +427,37 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ],
           "name": "PlayerSetMoney",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "SetMoney",
+          "short_desc": "Sets the new money amount for the player",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "amount",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerGetMoney",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "GetMoney",
+          "short_desc": "Returns the current amount of player's money",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerSetHighRisk",

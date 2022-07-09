@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1657343580597,
-    "version": "0.8",
+    "last_update": 1657376839974,
+    "version": "0.9",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -327,16 +327,59 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "name": "PlayerSetPosXYZ",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Player",
+          "member": "SetCoordinates",
+          "short_desc": "Puts the player at the specified location",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerSetPosPoint",
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerGetPosXYZ",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Player",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetCoordinates",
+          "short_desc": "Returns the player's coordinates"
         },
         {
           "input": [
@@ -359,8 +402,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "name": "PlayerFaceHeading",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "SetHeading",
+          "short_desc": "Sets the player's heading (z-angle)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerIsInTrigger",
@@ -1636,13 +1691,13 @@
           "output": [
             {
               "name": "handle",
-              "type": "Vehicle",
+              "type": "Car",
               "source": "var_any"
             }
           ],
           "name": "VehicleCreateXYZ",
           "num_params": 5,
-          "class": "Vehicle",
+          "class": "Car",
           "member": "Create",
           "attrs": {
             "is_constructor": true
@@ -1710,8 +1765,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "name": "VehicleFaceHeading",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Car",
+          "member": "SetHeading",
+          "short_desc": "Sets the vehicle's heading (z-angle)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "VehicleSetColours",
@@ -2099,8 +2166,20 @@
           "short_desc": "Stops any action character was performing"
         },
         {
+          "input": [
+            {
+              "name": "heading",
+              "type": "float"
+            }
+          ],
           "name": "PedFaceHeading",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "SetHeading",
+          "short_desc": "Sets the character's heading (z-angle)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PedFaceXYZ",
@@ -2793,8 +2872,21 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetHeading",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "GetHeading",
+          "short_desc": "Returns the character's heading (z-angle)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PedTargetVehicle",

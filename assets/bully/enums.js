@@ -1,4 +1,9 @@
-export const Outfits = {
+export const Fade = {
+  "Out": 0,
+  "In": 1,
+  "None": 2
+};
+export const Outfit = {
   "Starting": "Starting",
   "Halloween": "Halloween",
   "BoxingNg": "Boxing NG",
@@ -12,9 +17,4 @@ export const Outfits = {
   "FastFood": "Fast Food",
   "Wrestling": "Wrestling",
   "Underwear": "Underwear"
-};
-export const Fade = {
-  "Out": 0,
-  "In": 1,
-  "None": 2
 };

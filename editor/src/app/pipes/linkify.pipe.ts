@@ -28,8 +28,8 @@ export class LinkifyPipe implements PipeTransform {
     );
     const re =
       game === Game.bully
-        ? /(\W)([A-Z][A-Za-z]+)(\W|$)/g
-        : /(\W)([A-Z\d_]+)(\W|$)/g;
+        ? /(\W)([A-Z][A-Za-z]+)(\b)/g
+        : /(\W)([A-Z\d_]+)(\b)/g;
     const linkedNames = linkedIds.replace(re, (match, p1, name, p3) => {
       const extension = extensions.find((e) =>
         e.commands.find((c) => c.name === name)

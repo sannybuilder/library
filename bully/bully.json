@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1657475268116,
-    "version": "0.14",
+    "last_update": 1657478475234,
+    "version": "0.15",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -1878,18 +1878,19 @@
         {
           "input": [
             {
+              "name": "self",
+              "type": "Car"
+            },
+            {
               "name": "heading",
               "type": "float"
             }
           ],
           "name": "VehicleFaceHeading",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Car",
           "member": "SetHeading",
-          "short_desc": "Sets the vehicle's heading (z-angle)",
-          "attrs": {
-            "is_static": true
-          }
+          "short_desc": "Sets the vehicle's heading (z-angle)"
         },
         {
           "name": "VehicleSetColours",
@@ -1919,7 +1920,7 @@
             },
             {
               "name": "modelId",
-              "type": "int"
+              "type": "model_vehicle"
             }
           ],
           "name": "VehicleIsModel",
@@ -1974,8 +1975,8 @@
         {
           "input": [
             {
-              "name": "car",
-              "type": "Car"
+              "name": "handle",
+              "type": "any"
             }
           ],
           "name": "VehicleIsValid",
@@ -2344,18 +2345,19 @@
         {
           "input": [
             {
+              "name": "self",
+              "type": "Char"
+            },
+            {
               "name": "heading",
               "type": "float"
             }
           ],
           "name": "PedFaceHeading",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "SetHeading",
-          "short_desc": "Sets the character's heading (z-angle)",
-          "attrs": {
-            "is_static": true
-          }
+          "short_desc": "Sets the character's heading (z-angle)"
         },
         {
           "name": "PedFaceXYZ",
@@ -2458,8 +2460,20 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedIsInAnyVehicle",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "IsInAnyVehicle",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Returns true if character is in any vehicle"
         },
         {
           "name": "PedIsStandingOnVehicle",
@@ -2511,7 +2525,7 @@
           "name": "PedIsOnVehicle",
           "num_params": 1,
           "class": "Char",
-          "member": "IsInAnyCar",
+          "member": "IsOnVehicle",
           "short_desc": "Returns true if character is on any vehicle",
           "attrs": {
             "is_condition": true
@@ -3083,21 +3097,21 @@
           "num_params": 0
         },
         {
-          "output": [
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
             {
               "name": "heading",
-              "type": "float",
-              "source": "var_any"
+              "type": "float"
             }
           ],
           "name": "PedGetHeading",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "GetHeading",
-          "short_desc": "Returns the character's heading (z-angle)",
-          "attrs": {
-            "is_static": true
-          }
+          "short_desc": "Returns the character's heading (z-angle)"
         },
         {
           "name": "PedTargetVehicle",

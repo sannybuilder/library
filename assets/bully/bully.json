@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1657460298374,
-    "version": "0.13",
+    "last_update": 1657475268116,
+    "version": "0.14",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -482,8 +482,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PlayerIsInAnyVehicle",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Returns true if player is in any vehicle",
+          "class": "Player",
+          "member": "InAnyVehicle",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
         },
         {
           "name": "PlayerPutOnBike",
@@ -498,12 +511,37 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerGetHealth",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Returns the current health of the player",
+          "class": "Player",
+          "member": "GetHealth",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "health",
+              "type": "int"
+            }
+          ],
           "name": "PlayerSetHealth",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "SetHealth",
+          "short_desc": "Sets player health to the specified value",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerSetInvulnerable",
@@ -1250,12 +1288,37 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "interiorId",
+              "type": "int"
+            }
+          ],
           "name": "AreaSetVisible",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "SetAreaVisible",
+          "short_desc": "Sets the visibility of an interior area",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "interiorId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "AreaGetVisible",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "GetAreaVisible",
+          "short_desc": "Gets the current interior ID",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "AreaActivatePopulationTrigger",
@@ -1849,8 +1912,24 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "modelId",
+              "type": "int"
+            }
+          ],
           "name": "VehicleIsModel",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Car",
+          "member": "IsModel",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Returns true if vehicle model is the same as specified model id"
         },
         {
           "name": "VehicleGetModelId",
@@ -1893,8 +1972,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "car",
+              "type": "Car"
+            }
+          ],
           "name": "VehicleIsValid",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Car",
+          "member": "IsValid",
+          "short_desc": "Returns true if the vehicle is valid",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "CarGetDamageNumber",
@@ -1917,8 +2009,24 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "VehicleGetHealth",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Car",
+          "member": "GetHealth",
+          "short_desc": "Returns current health of the vehicle"
         },
         {
           "name": "VehicleSetStatic",
@@ -2426,12 +2534,41 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetHealth",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Returns the health of the character",
+          "class": "Char",
+          "member": "GetHealth"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "health",
+              "type": "int"
+            }
+          ],
           "name": "PedSetHealth",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Sets the character health to the specified value",
+          "class": "Char",
+          "member": "SetHealth"
         },
         {
           "name": "PedIsDead",

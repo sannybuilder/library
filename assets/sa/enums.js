@@ -149,10 +149,6 @@ export const Button = {
   "Leftshock": 18,
   "Rightshock": 19
 };
-export const Pad = {
-  "Pad1": 0,
-  "Pad2": 1
-};
 export const AnimGroup = {
   "Man": "man",
   "Shuffle": "shuffle",
@@ -1264,4 +1260,8 @@ export const ImGuiDir = {
   "Right": 1,
   "Up": 2,
   "Down": 3
+};
+export const PadId = {
+  "Pad1": 0,
+  "Pad2": 1
 };

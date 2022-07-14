@@ -87,10 +87,6 @@ export const Button = {
   "LeftShock": 18,
   "RightShock": 19
 };
-export const Pad = {
-  "Pad1": 0,
-  "Pad2": 1
-};
 export const AnimGroup = {
   "Man": 0,
   "Van": 1,
@@ -1048,4 +1044,8 @@ export const ImGuiCond = {
   "Once": 2,
   "FirstUseEver": 4,
   "Appearing": 8
+};
+export const PadId = {
+  "Pad1": 0,
+  "Pad2": 1
 };

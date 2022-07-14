@@ -63,10 +63,6 @@ export const Button = {
   "Leftshock": 18,
   "Rightshock": 19
 };
-export const Pad = {
-  "Pad1": 0,
-  "Pad2": 1
-};
 export const AnimGroup = {
   "Man": 0,
   "Player": 1,
@@ -728,4 +724,8 @@ export const TouchPoints = {
   "RightTop": 7,
   "RightCenter": 8,
   "RightBottom": 9
+};
+export const PadId = {
+  "Pad1": 0,
+  "Pad2": 1
 };

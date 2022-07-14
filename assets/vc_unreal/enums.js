@@ -87,10 +87,6 @@ export const Button = {
   "LeftShock": 18,
   "RightShock": 19
 };
-export const Pad = {
-  "Pad1": 0,
-  "Pad2": 1
-};
 export const AnimGroup = {
   "Man": 0,
   "Van": 1,
@@ -1041,4 +1037,8 @@ export const KeyCode = {
   "Noname": 252,
   "Pa1": 253,
   "OemClear": 254
+};
+export const PadId = {
+  "Pad1": 0,
+  "Pad2": 1
 };

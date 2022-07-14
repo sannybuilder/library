@@ -24,7 +24,7 @@ games.forEach((game) => {
 
   [
     `npm run validate:commands ${gameJson} ${game}`,
-    `npm run validate:enums ${enumsJson}`,
+    `npm run validate:enums ${enumsJson} ${game}`,
     `[ -d ${assets} ] || mkdir ${assets}`,
 
     `npm run generate:enums ${enumsJson} ${join(assets, 'enums.js')}`,

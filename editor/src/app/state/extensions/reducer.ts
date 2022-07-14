@@ -16,8 +16,8 @@ import {
   markCommandsToDelete,
   updateGameCommands,
 } from './actions';
-import { sortBy, last, orderBy } from 'lodash';
-import { matchArrays } from '../../utils';
+import { sortBy, orderBy } from 'lodash';
+import { matchArrays, getEntities } from '../../utils';
 import { getSupportInfo } from '../../utils/support-info';
 
 export interface GameState {
@@ -205,58 +205,6 @@ function upsertBy<T extends object, Key extends keyof T>(
   }
 
   return newCollection;
-}
-
-function getEntities(
-  extensions: Extension[],
-  classesMeta: ClassMeta[] | undefined
-): Record<string, Entity[]> {
-  const defaultEntities =
-    extensions
-      .find((e) => e.name === DEFAULT_EXTENSION)
-      ?.commands.reduce((m, command: Command) => {
-        if (command.attrs?.is_constructor) {
-          const name = last(command.output)?.type;
-          if (name) {
-            m.add(name);
-          }
-        }
-        return m;
-      }, new Set<string>()) ?? new Set();
-
-  return extensions.reduce((m, e) => {
-    const dynamicClasses = new Set<string>();
-    const staticClasses = new Set<string>();
-    for (const command of e.commands) {
-      if (command.attrs?.is_constructor) {
-        const name = last(command.output)?.type;
-        if (name) {
-          dynamicClasses.add(name);
-        }
-      } else if (command.class) {
-        if (
-          defaultEntities.has(command.class) ||
-          classesMeta?.find((m) => m.name === command.class && m.constructable)
-        ) {
-          dynamicClasses.add(command.class);
-        } else {
-          staticClasses.add(command.class);
-        }
-      }
-    }
-
-    const dynamicClassesArray = [...dynamicClasses].sort();
-    const staticClassesArray = [...staticClasses]
-      .filter((name) => !dynamicClassesArray.includes(name))
-      .sort();
-    (m[e.name] ??= []).push(
-      ...dynamicClassesArray.map(
-        (name) => ({ name, type: 'dynamic' } as Entity)
-      ),
-      ...staticClassesArray.map((name) => ({ name, type: 'static' } as Entity))
-    );
-    return m;
-  }, {} as Record<string, Entity[]>);
 }
 
 function commandMatcher(

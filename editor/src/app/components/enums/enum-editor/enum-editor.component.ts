@@ -15,6 +15,7 @@ import {
   doesEnumHaveDuplicateField,
   doesEnumHaveEmptyName,
   doesEnumHaveOneEmptyField,
+  doesEnumNameConflict,
   isEmptyEnum,
   isFieldNameDuplicate,
   isStringEnum,
@@ -26,7 +27,8 @@ type ErrorType =
   | 'emptyEnumName'
   | 'emptyFieldName'
   | 'duplicateFieldName'
-  | 'emptyEnum';
+  | 'emptyEnum'
+  | 'nameConflict';
 
 @Component({
   selector: 'scl-enum-editor',
@@ -66,12 +68,14 @@ export class EnumEditorComponent {
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
   @Output() delete: EventEmitter<void> = new EventEmitter();
   @Output() clone: EventEmitter<Game> = new EventEmitter();
+  @Input() entityNames: { entities: string[]; enums: string[] };
 
   errors: Record<ErrorType, boolean> = {
     emptyEnumName: false,
     emptyFieldName: false,
     emptyEnum: false,
     duplicateFieldName: false,
+    nameConflict: false,
   };
   errorMessages: string[] = [];
   isDirty: boolean;
@@ -82,6 +86,7 @@ export class EnumEditorComponent {
     emptyFieldName: this.updateEmptyFieldNameError,
     duplicateFieldName: this.updateDuplicateFieldNameError,
     emptyEnum: this.updateEmptyEnum,
+    nameConflict: this.updateNameConflictError,
   };
 
   deleteEnum() {
@@ -218,5 +223,18 @@ export class EnumEditorComponent {
 
   private updateEmptyEnum() {
     this.errors.emptyEnum = isEmptyEnum(this.enumToEdit);
+  }
+
+  private updateNameConflictError() {
+    const names = [
+      ...this.entityNames.entities,
+      ...this.entityNames.enums.filter(
+        (e) => this.enumToEdit.isNew || e !== this.enumToEdit.name
+      ),
+    ];
+    this.errors.nameConflict = doesEnumNameConflict(
+      this.enumToEdit.name,
+      names
+    );
   }
 }

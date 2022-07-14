@@ -1,15 +1,23 @@
-import { toPairs, trim } from 'lodash';
-import { EnumRaw } from 'src/app/models';
+import { flatten, orderBy, toPairs, trim, uniqBy } from 'lodash';
+import {
+  EnumRaw,
+  Game,
+  GameLibrary,
+  LoadExtensionsResponse,
+} from './src/app/models';
 import {
   capitalizeFirst,
   doesEnumHaveDuplicateField,
   doesEnumHaveEmptyName,
   doesEnumHaveOneEmptyField,
+  doesEnumNameConflict,
+  getEntities,
   isEmptyEnum,
 } from './src/app/utils';
 
+const { join } = require('path');
 const { readFileSync } = require('fs');
-const [inputFile] = process.argv.slice(2);
+const [inputFile, game] = process.argv.slice(2);
 const file = readFileSync(inputFile);
 const content: Record<
   string,
@@ -17,6 +25,14 @@ const content: Record<
 > = JSON.parse(file);
 const translationFile = readFileSync('./src/assets/i18n/en.json');
 const translations = JSON.parse(translationFile);
+const { extensions, classes } = loadExtensions(
+  join('..', GameLibrary[game as Game])
+);
+const entities = getEntities(extensions, classes);
+const entityNames = uniqBy(
+  orderBy(flatten(Object.values(entities)), ['type', 'name']),
+  'name'
+).map(({ name }) => name);
 
 let exitStatus = 0;
 
@@ -45,6 +61,7 @@ Object.entries(content).forEach(([enumName, enumFields]) => {
   Object.entries(enumFields).forEach(([fieldName, fieldValue]) => {
     validateField(fieldName, fieldValue, enumName);
   });
+  validateEnumNameCase(enumName);
 });
 
 process.exit(exitStatus);
@@ -88,6 +105,22 @@ function validateField(
       `Error: field value is not properly formatted, expected ${capitalizeFirst(
         trim(value)
       )}, enum: '${enumName}', field: '${name}'`
+    );
+    exitStatus = 1;
+  }
+}
+
+function loadExtensions(path: string) {
+  const file = readFileSync(path);
+  const content: LoadExtensionsResponse = JSON.parse(file);
+
+  return content;
+}
+
+function validateEnumNameCase(enumName: string) {
+  if (doesEnumNameConflict(enumName, [...entityNames])) {
+    console.error(
+      `Error: enum name "${enumName}" conflicts with another class name`
     );
     exitStatus = 1;
   }

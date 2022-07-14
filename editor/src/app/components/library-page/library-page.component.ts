@@ -81,6 +81,13 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       map((entities) => orderBy(entities, 'name'))
     );
 
+  classAndEnumNames$ = combineLatest([this.entities$, this.enumNames$]).pipe(
+    map(([entities, enums]) => ({
+      enums,
+      entities: entities.map((e) => e.name),
+    }))
+  );
+
   displaySearchHelp$ = this._ui.displaySearchHelp$;
   isSidebarCollapsed$ = this._ui.isSidebarCollapsed$;
   canGoBackInDecisionTree$ = this._tree.currentNode$.pipe(

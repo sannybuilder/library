@@ -12,3 +12,7 @@ export function doesEnumHaveOneEmptyField(enumRaw: EnumRaw) {
 export function doesEnumHaveDuplicateField(enumRaw: EnumRaw) {
   return enumRaw.fields.some(([name]) => isFieldNameDuplicate(name, enumRaw));
 }
+
+export function doesEnumNameConflict(enumName: string, names: string[]) {
+  return names.includes(enumName);
+}

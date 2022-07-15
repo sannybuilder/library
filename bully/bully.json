@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1657513070438,
-    "version": "0.16",
+    "last_update": 1657913497144,
+    "version": "0.17",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -2323,16 +2323,42 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "int"
+            }
+          ],
           "name": "WeaponRequestModel",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "RequestWeaponModel",
+          "short_desc": "Requests a weapon model and returns true when the model is available",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "WeaponGetType",
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "int"
+            }
+          ],
           "name": "PedRequestModel",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Requests a ped model and returns true when the model is available",
+          "class": "Streaming",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "member": "RequestPedModel"
         },
         {
           "name": "PedDelete",
@@ -4069,8 +4095,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "int"
+            }
+          ],
           "name": "PickupRequestModel",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Requests a pickup model and returns true when the model is available",
+          "class": "Streaming",
+          "member": "RequestPickupModel",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "PickupIsInAreaXYZ",
@@ -6327,15 +6366,33 @@
         },
         {
           "name": "HUDSaveVisibility",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Hud",
+          "member": "SaveVisibility",
+          "short_desc": "Saves the current visibility state of game HUD. This can be restored using RestoreVisibility",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "HUDClearAllElements",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Hud",
+          "member": "ClearAllElements",
+          "short_desc": "Clears all the game HUD elements from display. Usually wrapped inside SaveVisibility & RestoreVisibility calls",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "HUDRestoreVisibility",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Restores the previously saved visibility state. SaveVisibility must be called prior to this",
+          "class": "Hud",
+          "member": "RestoreVisibility",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "RadarLockOnFloor",

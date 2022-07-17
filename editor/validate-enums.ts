@@ -61,7 +61,7 @@ Object.entries(content).forEach(([enumName, enumFields]) => {
   Object.entries(enumFields).forEach(([fieldName, fieldValue]) => {
     validateField(fieldName, fieldValue, enumName);
   });
-  validateEnumNameCase(enumName);
+  validateEnumNameDuplicate(enumName);
 });
 
 process.exit(exitStatus);
@@ -117,7 +117,7 @@ function loadExtensions(path: string) {
   return content;
 }
 
-function validateEnumNameCase(enumName: string) {
+function validateEnumNameDuplicate(enumName: string) {
   if (doesEnumNameConflict(enumName, [...entityNames])) {
     console.error(
       `Error: enum name "${enumName}" conflicts with another class name`

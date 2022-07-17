@@ -226,12 +226,15 @@ export class EnumEditorComponent {
   }
 
   private updateNameConflictError() {
-    const names = [
-      ...this.entityNames.entities,
-      ...this.entityNames.enums.filter(
-        (e) => this.enumToEdit.isNew || e !== this.enumToEdit.name
-      ),
-    ];
+    const names = this.entityNames
+      ? [
+          ...this.entityNames.entities,
+          ...this.entityNames.enums.filter(
+            (e) => this.enumToEdit.isNew || e !== this.enumToEdit.name
+          ),
+        ]
+      : [];
+
     this.errors.nameConflict = doesEnumNameConflict(
       this.enumToEdit.name,
       names

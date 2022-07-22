@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1658262477515,
-    "version": "0.19",
+    "last_update": 1658471307641,
+    "version": "0.20",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -512,8 +512,20 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "name": "PlayerPutOnBike",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "PutOnBike",
+          "short_desc": "Puts the player on the specified bike",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerDetachFromVehicle",
@@ -622,8 +634,21 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerGetBikeId",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "GetBikeHandle",
+          "short_desc": "Returns the bike handle player is riding",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerGetLastBikeId",
@@ -886,16 +911,47 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "weatherId",
+              "type": "int"
+            }
+          ],
           "name": "WeatherSet",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Weather",
+          "member": "Set",
+          "short_desc": "Sets game weather to specified ID",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "weatherId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "WeatherGet",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Weather",
+          "member": "Get",
+          "short_desc": "Returns the current weatherId",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "WeatherRelease",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Allows the game to continue its usual weather pattern",
+          "class": "Weather",
+          "member": "Release",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PauseGameClock",
@@ -939,7 +995,13 @@
         },
         {
           "name": "WeatherForceSnow",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Weather",
+          "member": "ForceSnow",
+          "short_desc": "Forces upcoming weather to snow weather",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "BlipAddXYZ",
@@ -3141,8 +3203,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "handle",
+              "type": "Car"
+            }
+          ],
           "name": "PedPutOnBike",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "PutOnBike",
+          "short_desc": "Puts character on the specified bike"
         },
         {
           "name": "PedSetPunishmentPoints",

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1658633485904,
-    "version": "0.21",
+    "last_update": 1658644166569,
+    "version": "0.22",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -569,8 +569,20 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PlayerSetInvulnerable",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "SetInvulnerable",
+          "short_desc": "Makes player immue to damage",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerActivateCombatSphere",
@@ -589,8 +601,21 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "playerChar",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerGetPedIndex",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Returns char handle of the player",
+          "class": "Player",
+          "member": "GetPedHandle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -699,8 +724,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "int"
+            }
+          ],
           "name": "PlayerHasWeapon",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "short_desc": "Returns true if player has specified weapon model",
+          "member": "HasWeapon",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "PlayerFixToBackOfVehicle",
@@ -2262,8 +2300,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "int"
+            }
+          ],
           "name": "ModelNotNeeded",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "ModelNotNeeded",
+          "short_desc": "Releases the specified model, freeing game memory",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PedSetAlpha",
@@ -2731,12 +2781,38 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedSetInvulnerable",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "short_desc": "Makes char immue to damage",
+          "member": "SetInvulnerable"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedSetInvulnerableToPlayer",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "short_desc": "Makes char immue to player damage",
+          "member": "SetInvulnerableToPlayer"
         },
         {
           "name": "PedSetCheering",
@@ -3277,8 +3353,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "model",
+              "type": "int"
+            }
+          ],
           "name": "PedHasWeapon",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "HasWeapon",
+          "short_desc": "Returns true if char has specified weapon model"
         },
         {
           "name": "PedJump",
@@ -3841,12 +3930,36 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "int"
+            }
+          ],
           "name": "PlayerHasItem",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "HasItem",
+          "short_desc": "Returns true if player has specified item model",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "int"
+            }
+          ],
           "name": "RemovePlayerItem",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "RemoveItem",
+          "short_desc": "Removes an item from the player ",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ItemGetCurrentNum",

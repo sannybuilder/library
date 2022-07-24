@@ -18,3 +18,9 @@ export const Outfit = {
   "Wrestling": "Wrestling",
   "Underwear": "Underwear"
 };
+export const AreaVisible = {
+  "Outside": 0,
+  "SchoolToilet": 2,
+  "GymToilet": 13,
+  "DormToilet": 35
+};

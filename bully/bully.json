@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1658644166569,
-    "version": "0.22",
+    "last_update": 1658707567359,
+    "version": "0.23",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -1929,8 +1929,20 @@
           "short_desc": "Creates a vehicle at the specified location"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "name": "VehicleDelete",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Car",
+          "attrs": {
+            "is_destructor": true
+          },
+          "member": "Delete",
+          "short_desc": "Removes the vehicle from the game"
         },
         {
           "input": [
@@ -1962,8 +1974,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "maxSpeed",
+              "type": "float"
+            }
+          ],
           "name": "VehicleSetCruiseSpeed",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Sets the vehicle's max speed",
+          "class": "Car",
+          "member": "SetCruiseSpeed"
         },
         {
           "name": "VehicleOverrideAmbientCruiseSpeed",
@@ -1994,8 +2019,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "name": "VehicleStop",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Car",
+          "member": "StopVehicle",
+          "short_desc": "Stops any task vehicle was performing"
         },
         {
           "name": "VehicleIsInTrigger",
@@ -2095,8 +2129,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "VehicleEnableSiren",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetSirenEnabled",
+          "short_desc": "Sets whether the car's alarm can be activated"
         },
         {
           "input": [
@@ -2124,8 +2171,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "VehicleEnableEngine",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetEngineEnabled",
+          "short_desc": "Sets whether the vehicle's engine is turned on or off"
         },
         {
           "name": "VehicleCreateCarGenerator",
@@ -2168,8 +2228,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "VehicleSirenAllwaysOn",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Sets the vehicle alarm to be always on",
+          "class": "Car",
+          "member": "SetSirenAlwaysOn"
         },
         {
           "name": "VehicleBikeForceBoundingSphereUpdate",
@@ -3267,12 +3340,34 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            }
+          ],
           "name": "PedWarpIntoCar",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Warps the character into the specified vehicle as driver",
+          "class": "Char",
+          "member": "WrapIntoCar"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedWarpOutOfCar",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Wraps the character out of the current vehicle",
+          "class": "Char",
+          "member": "WarpOutOfCar"
         },
         {
           "name": "PedPickup",

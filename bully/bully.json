@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1661045692166,
-    "version": "0.24",
+    "last_update": 1661066819188,
+    "version": "0.25",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -1889,7 +1889,14 @@
         },
         {
           "name": "AreaIsLoading",
-          "num_params": 0
+          "num_params": 0,
+          "class": "World",
+          "member": "IsAreaLoading",
+          "short_desc": "Returns true if nearby area assets are being loaded",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "AreaRegisterAreaScript",
@@ -2379,8 +2386,25 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "primaryColor",
+              "type": "int"
+            },
+            {
+              "name": "secondaryColor",
+              "type": "int"
+            }
+          ],
           "name": "VehicleSetColor",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Car",
+          "member": "SetColor",
+          "short_desc": "Sets the car's primary and secondary colors"
         },
         {
           "name": "CanCreateVehicleNearXYZ",
@@ -4137,8 +4161,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "seconds",
+              "type": "int"
+            }
+          ],
           "name": "MissionTimerStart",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Mission",
+          "member": "StartMissionTimer",
+          "short_desc": "Starts a new mission timer",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MissionTimerStartFixed",
@@ -4154,7 +4190,14 @@
         },
         {
           "name": "MissionTimerHasFinished",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Mission",
+          "member": "HasTimerFinished",
+          "short_desc": "Returns true if the mission timer has finished",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "MissionTimerGetTimeRemaining",
@@ -4165,8 +4208,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "model_any"
+            }
+          ],
           "name": "GiveItemToPlayer",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "GiveItem",
+          "short_desc": "Gives the specified item model to player",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4968,8 +5023,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "missionName",
+              "type": "string"
+            }
+          ],
           "name": "ForceStartMission",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Mission",
+          "member": "ForceStartMission",
+          "short_desc": "Starts the specified mission instantly",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ForceMissionAvailable",
@@ -4996,8 +5063,21 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "missionName",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "name": "MissionGetCurrentName",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Mission",
+          "member": "GetCurrentMissionName",
+          "short_desc": "Returns the name of the current mission",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MissionSetCompletedCount",

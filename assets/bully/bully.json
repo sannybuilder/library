@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1658707567359,
-    "version": "0.23",
+    "last_update": 1661045692166,
+    "version": "0.24",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -188,12 +188,82 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "fromX",
+              "type": "float"
+            },
+            {
+              "name": "fromY",
+              "type": "float"
+            },
+            {
+              "name": "toX",
+              "type": "float"
+            },
+            {
+              "name": "toY",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "distance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "DistanceBetweenCoords2d",
-          "num_params": 0
+          "num_params": 5,
+          "class": "Math",
+          "member": "GetDistanceBetweenCoords2D",
+          "short_desc": "Gets the distance between two points",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "fromX",
+              "type": "float"
+            },
+            {
+              "name": "fromY",
+              "type": "float"
+            },
+            {
+              "name": "fromZ",
+              "type": "float"
+            },
+            {
+              "name": "toX",
+              "type": "float"
+            },
+            {
+              "name": "toY",
+              "type": "float"
+            },
+            {
+              "name": "toZ",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "distance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "DistanceBetweenCoords3d",
-          "num_params": 0
+          "num_params": 7,
+          "class": "Math",
+          "member": "GetDistanceBetweenCoords3D",
+          "short_desc": "Gets the distance between two points",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "FlushStreamingContents",
@@ -288,8 +358,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "animGroup",
+              "type": "string"
+            }
+          ],
           "name": "RequestAnimGroup",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "RequestAnimGroup",
+          "short_desc": "Requests a new anim group to load",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "HasAnimGroupLoaded",
@@ -720,8 +802,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "name": "PlayerSetPosSimple",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Player",
+          "member": "SetCoordinatesSimple",
+          "short_desc": "Puts the player at the specified location",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -834,7 +936,14 @@
         },
         {
           "name": "PlayerFellAsleep",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "class": "Player",
+          "member": "HasFallenAsleep",
+          "short_desc": "Returns true if player has fallen asleep"
         },
         {
           "name": "PlayerRecordAttackTime",
@@ -1241,7 +1350,13 @@
         },
         {
           "name": "CameraReturnToPlayer",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Camera",
+          "member": "ReturnToPlayer",
+          "short_desc": "Sets the camera focus back to the player",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CameraSetConversationPath",
@@ -1651,7 +1766,14 @@
         },
         {
           "name": "IsStreamingBusy",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Streaming",
+          "member": "IsBusy",
+          "short_desc": "Returns true if the game is streaming assets",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "AreaSetPunishmentAlertLevels",
@@ -3505,8 +3627,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedDismissAllAllies",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "DismissAllies",
+          "short_desc": "Dismisses alliance with other characters"
         },
         {
           "name": "PedSetAllyAutoEngage",
@@ -3589,8 +3720,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedSetInfiniteSprint",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetInfiniteSprint",
+          "short_desc": "Marks the character able to sprint infinitely"
         },
         {
           "name": "PedSetUniqueModelStatus",
@@ -4721,7 +4865,14 @@
         },
         {
           "name": "MissionActive",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Mission",
+          "member": "IsActive",
+          "short_desc": "Is any mission currently active",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "MissionActiveSpecific",

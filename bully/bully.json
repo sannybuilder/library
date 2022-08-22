@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1661086911411,
-    "version": "0.26",
+    "last_update": 1661199695116,
+    "version": "0.27",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -5656,32 +5656,87 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "name": "MinigameCreate",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Minigame",
+          "member": "Create",
+          "short_desc": "Creates a new minigame (Flag is only true for races)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MinigameDestroy",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Minigame",
+          "short_desc": "Destroys an existing minigame",
+          "member": "Destroy",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MinigameStart",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Starts the minigame",
+          "class": "Minigame",
+          "member": "Start",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MinigameEnd",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Minigame",
+          "member": "End",
+          "short_desc": "Ends an ongoing minigame",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MinigameIsReady",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Returns true if the minigame is ready",
+          "class": "Minigame",
+          "member": "IsReady",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "MinigameIsActive",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Minigame",
+          "member": "IsActive",
+          "short_desc": "Returns true if a minigame is currently active",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "MinigameIsSuccess",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Minigame",
+          "member": "IsSuccess",
+          "short_desc": "Returns true if the minigame was completed successfully",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "GetNextShootingGalleryID",
@@ -5689,7 +5744,13 @@
         },
         {
           "name": "MinigameEnableHUD",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Minigame",
+          "member": "SetHud",
+          "short_desc": "Sets the minigame HUD state",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MinigameSetElapsedGameTime",
@@ -5749,7 +5810,14 @@
         },
         {
           "name": "MinigameIsHighScore",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Minigame",
+          "member": "IsHighScore",
+          "short_desc": "Returns true if a new high score was set",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "MinigameSetHighScoreFromID",

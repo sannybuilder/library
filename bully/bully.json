@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1661199695116,
-    "version": "0.27",
+    "last_update": 1661222800695,
+    "version": "0.28",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -7186,8 +7186,56 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "outfit",
+              "type": "string"
+            },
+            {
+              "name": "head",
+              "type": "string"
+            },
+            {
+              "name": "torso",
+              "type": "string"
+            },
+            {
+              "name": "leftWrist",
+              "type": "string"
+            },
+            {
+              "name": "rightWrist",
+              "type": "string"
+            },
+            {
+              "name": "legs",
+              "type": "string"
+            },
+            {
+              "name": "feet",
+              "type": "string"
+            },
+            {
+              "name": "flag1",
+              "type": "bool"
+            },
+            {
+              "name": "flag2",
+              "type": "bool"
+            }
+          ],
           "name": "ClothingDefineOutfit",
-          "num_params": 0
+          "num_params": 10,
+          "class": "Clothing",
+          "member": "DefineOutfit",
+          "short_desc": "Defines a new outfit",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ClothingSetPlayer",
@@ -7196,15 +7244,19 @@
         {
           "input": [
             {
-              "name": "outfit",
-              "type": "Outfit"
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "flag",
+              "type": "bool"
             }
           ],
           "name": "ClothingSetPlayerOutfit",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Clothing",
           "member": "SetPlayerOutfit",
-          "short_desc": "Changes the player's clothes. Use ClothingBuildPlayer to update the model",
+          "short_desc": "Changes the player's clothes. Outfit must be predefined using DefineOutfit. Use BuildPlayer to update the model",
           "attrs": {
             "is_static": true
           }
@@ -7230,12 +7282,32 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
           "name": "ClothingIsWearingOutfit",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Clothing",
+          "member": "IsWearingOutfit",
+          "short_desc": "Returns true if player is wearing the specified outfit",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "ClothingIsWearingAnyOutfit",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Clothing",
+          "member": "IsWearingAnyOutfit",
+          "short_desc": "Returns true if player is wearing any outfit"
         },
         {
           "name": "ClothingGivePlayer",
@@ -7246,8 +7318,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "string",
+              "type": "string"
+            }
+          ],
           "name": "ClothingGivePlayerOutfit",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Clothing",
+          "member": "GivePlayerOutfit",
+          "short_desc": "Gives player the specified outfit. Outfit must be predefined using DefineOutfit",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ClothingLock",
@@ -7267,10 +7351,6 @@
         },
         {
           "name": "ClothingRestore",
-          "num_params": 0
-        },
-        {
-          "name": "ClothingOverlay",
           "num_params": 0
         },
         {

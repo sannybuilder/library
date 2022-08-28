@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1660184535051,
-    "version": "0.40",
+    "last_update": 1661710660621,
+    "version": "0.41",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -7577,7 +7577,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -7585,7 +7585,10 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "DoesHaveRoof",
+          "short_desc": "Returns true if the car has a roof"
         },
         {
           "input": [
@@ -7738,14 +7741,18 @@
             },
             {
               "name": "model",
-              "type": "int"
+              "type": "model_object"
             }
           ],
           "name": "DOES_OBJECT_OF_TYPE_EXIST_AT_COORDS",
           "num_params": 5,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Object",
+          "member": "DoesOfTypeExistAtCoords",
+          "short_desc": "Returns true if an object with the given model exists at the location"
         },
         {
           "input": [

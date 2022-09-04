@@ -254,8 +254,8 @@ export const GameVersions: Record<Game, Version[]> = {
   [Game.sa_unreal]: [Version._unreal10],
   [Game.gta_iv]: [Version._10],
   [Game.bully]: [Version._10],
-  [Game.unknown_x86]: [],
-  [Game.unknown_x64]: []
+  [Game.unknown_x86]: [Version.Any],
+  [Game.unknown_x64]: [Version.Any]
 };
 
 export const DEFAULT_EXTENSION = 'default';

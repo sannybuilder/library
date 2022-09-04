@@ -110,7 +110,8 @@ export const commandRelated = createSelector(
     }
 
     const { id, name, class: className, member, attrs } = props.command;
-    const referenced = commands.filter((c) => c.short_desc?.includes(id)) ?? [];
+    const referenced =
+      commands.filter((c) => id && c.short_desc?.includes(id)) ?? [];
 
     const overloads = attrs?.is_overload
       ? commands.filter((c) => {

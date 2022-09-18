@@ -128,6 +128,8 @@ export enum Game {
   unknown_x64 = 'unknown_x64',
   gta_iv = 'gta_iv',
   bully = 'bully',
+  lcs = 'lcs',
+  vcs = 'vcs',
 }
 
 const r = <T>(cb: (game: Game, index: number) => T) =>
@@ -148,6 +150,8 @@ export const GameClassesAssets: Partial<Record<Game, string>> = {
   [Game.gta3_unreal]: 'assets/gta3_unreal/classes.db',
   [Game.vc_unreal]: 'assets/vc_unreal/classes.db',
   [Game.sa_unreal]: 'assets/sa_unreal/classes.db',
+  [Game.lcs]: 'assets/lcs/classes.db',
+  [Game.vcs]: 'assets/vcs/classes.db',
 };
 
 export const GameEnumsAssets: Partial<Record<Game, string>> = {
@@ -160,6 +164,8 @@ export const GameEnumsAssets: Partial<Record<Game, string>> = {
   [Game.gta3_unreal]: 'assets/gta3_unreal/enums.txt',
   [Game.vc_unreal]: 'assets/vc_unreal/enums.txt',
   [Game.sa_unreal]: 'assets/sa_unreal/enums.txt',
+  [Game.lcs]: 'assets/lcs/enums.txt',
+  [Game.vcs]: 'assets/vcs/enums.txt',
 };
 
 export const GameKeywordsAssets: Partial<Record<Game, string>> = {
@@ -172,6 +178,8 @@ export const GameKeywordsAssets: Partial<Record<Game, string>> = {
   [Game.gta3_unreal]: 'assets/gta3_unreal/keywords.txt',
   [Game.vc_unreal]: 'assets/vc_unreal/keywords.txt',
   [Game.sa_unreal]: 'assets/sa_unreal/keywords.txt',
+  [Game.lcs]: 'assets/lcs/keywords.txt',
+  [Game.vcs]: 'assets/vcs/keywords.txt',
 };
 
 export const GameLibrary: Record<Game, string> = r(
@@ -196,6 +204,8 @@ export const GameSnippets: Record<Game, string> = {
   [Game.unknown_x64]: 'unknown_x86/snippets.json',
   [Game.gta_iv]: 'gta_iv/snippets.json',
   [Game.bully]: 'bully/snippets.json',
+  [Game.lcs]: 'lcs/snippets.json',
+  [Game.vcs]: 'vcs/snippets.json',
 };
 
 export const GameEnums: Record<Game, string> = r(
@@ -220,6 +230,8 @@ export const GameTitle: Record<Game, string> = {
   [Game.unknown_x64]: 'Unknown (64-bit)',
   [Game.gta_iv]: 'GTA IV',
   [Game.bully]: 'Bully: Scholarship Edition',
+  [Game.lcs]: 'GTA Liberty City Stories',
+  [Game.vcs]: 'GTA Vice City Stories',
 };
 
 export const GameTitleSimple: Record<Game, string> = {
@@ -255,7 +267,9 @@ export const GameVersions: Record<Game, Version[]> = {
   [Game.gta_iv]: [Version._10],
   [Game.bully]: [Version._10],
   [Game.unknown_x86]: [Version.Any],
-  [Game.unknown_x64]: [Version.Any]
+  [Game.unknown_x64]: [Version.Any],
+  [Game.lcs]: [Version._10],
+  [Game.vcs]: [Version._10],
 };
 
 export const DEFAULT_EXTENSION = 'default';

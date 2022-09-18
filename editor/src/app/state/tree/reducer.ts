@@ -45,7 +45,7 @@ export const treeReducer = createReducer(
   initialState,
   on(loadStatements, (state, { game, lang }) => {
     if (!statements[game]) {
-      return state;
+      return initialState;
     }
     const s = !isEmpty(statements[game]![lang])
       ? statements[game]![lang]

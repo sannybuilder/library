@@ -305,7 +305,7 @@ export interface GameSupportInfo {
   extension?: string; // only when command exists
 }
 
-export type PackedSupportInfo = [number, SupportLevel, string | undefined];
+export type PackedSupportInfo = [SupportLevel, string | undefined];
 
 export enum SupportLevel {
   DoesNotExist = -2,

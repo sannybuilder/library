@@ -22,9 +22,8 @@ export function getPackedSupportInfo(
           const { extension, command: otherCommand } =
             getCommand(state[v3]?.extensions, command) || {};
           return [
-            GameId[v3],
             getSupportLevel(game === v3 ? command : otherCommand, command),
-            extension,
+            extension === 'default' ? '' : extension,
           ];
         }
       );
@@ -42,10 +41,10 @@ export function unpackSupportInfo(
     m[game as Game] = Object.entries(supportInfo).reduce(
       (m2, [ext, commands]) => {
         m2[ext] = Object.entries(commands).reduce((m3, [name, infos]) => {
-          m3[name] = infos.map(([id, level, extension]) => ({
+          m3[name] = infos.map(([level, extension], id) => ({
             game: idToGame[id],
             level,
-            extension,
+            extension: extension === '' ? 'default' : extension,
           }));
           return m3;
         }, {} as Record<string, GameSupportInfo[]>);

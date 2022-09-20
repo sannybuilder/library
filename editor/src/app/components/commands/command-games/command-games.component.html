@@ -4,9 +4,7 @@
       '/',
       item.game,
       item.extension,
-      doesGameRequireOpcode(item.game)
-        ? command.id || command.name
-        : command.name
+      getKey(command, item.game)
     ]"
     [queryParams]="getQueryParamsForCommand(command, item.game)"
     *ngIf="item.level > SupportLevel.Unsupported"

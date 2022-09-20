@@ -9,6 +9,7 @@ import {
   SupportInfo,
   SupportLevel,
 } from '../models';
+import { doesGameRequireOpcode, getBaseGame } from './game';
 
 export function getPackedSupportInfo(
   extensions: Extension[],
@@ -18,11 +19,18 @@ export function getPackedSupportInfo(
   return extensions.reduce((m, { name, commands }) => {
     m[name] = commands.reduce((m2, command) => {
       m2[command.id || command.name] = (Object.keys(state) as Game[]).map(
-        (v3) => {
+        (otherGame) => {
           const { extension, command: otherCommand } =
-            getCommand(state[v3]?.extensions, command) || {};
+            getCommand(
+              state[otherGame]?.extensions,
+              command,
+              getMatchingKey(game, otherGame)
+            ) || {};
           return [
-            getSupportLevel(game === v3 ? command : otherCommand, command),
+            getSupportLevel(
+              game === otherGame ? command : otherCommand,
+              command
+            ),
             extension === 'default' ? '' : extension,
           ];
         }
@@ -64,13 +72,17 @@ export function getSupportInfo(
   return extensions.reduce((m, { name, commands }) => {
     m[name] = commands.reduce((m2, command) => {
       m2[command.id || command.name] = (Object.keys(state) as Game[]).map(
-        (v3) => {
+        (otherGame) => {
           const { extension, command: otherCommand } =
-            getCommand(state[v3]?.extensions, command) || {};
+            getCommand(
+              state[otherGame]?.extensions,
+              command,
+              getMatchingKey(game, otherGame)
+            ) || {};
           return {
-            game: v3,
+            game: otherGame,
             level: getSupportLevel(
-              game === v3 ? command : otherCommand,
+              game === otherGame ? command : otherCommand,
               command
             ),
             extension,
@@ -131,13 +143,13 @@ function getSupportLevel(command: Command | undefined, otherCommand: Command) {
 
 function getCommand(
   extensions: Extension[] | undefined,
-  command: Command
+  command: Command,
+  key: 'id' | 'name'
 ): { command: Command; extension: string } | undefined {
   if (!extensions) {
     return;
   }
-  const matcher = (c: Command) =>
-    c.id && command.id ? c.id === command.id : c.name === command.name;
+  const matcher = (c: Command) => c[key] === command[key];
   for (const extension of extensions) {
     const command = extension.commands.find(matcher);
     if (command) {
@@ -145,4 +157,14 @@ function getCommand(
     }
   }
   return undefined;
+}
+
+export function getMatchingKey(game: Game, otherGame: Game): 'id' | 'name' {
+  if ([getBaseGame(game), getBaseGame(otherGame)].includes(Game.unknown_x86)) {
+    return 'name';
+  }
+
+  return doesGameRequireOpcode(game) && doesGameRequireOpcode(otherGame)
+    ? 'id'
+    : 'name';
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { doesGameRequireOpcode, getQueryParamsForCommand } from '../../../utils';
+import { getQueryParamsForCommand, getMatchingKey } from '../../../utils';
 import {
   Command,
   Game,
@@ -19,6 +19,7 @@ export class CommandGamesComponent {
   SupportLevel = SupportLevel;
   @Input() supportInfo: GameSupportInfo[];
   @Input() command: Command;
+  @Input() game: Game;
 
   readonly TEXT_KEYS: Record<SupportLevel, string> = {
     [SupportLevel.Supported]: 'ui.commandGames.same',
@@ -32,7 +33,8 @@ export class CommandGamesComponent {
     return getQueryParamsForCommand(command, game);
   }
 
-  doesGameRequireOpcode(game: Game) {
-    return doesGameRequireOpcode(game);
+  getKey(command: Command, game: Game) {
+    const key = getMatchingKey(game, this.game);
+    return command[key];
   }
 }

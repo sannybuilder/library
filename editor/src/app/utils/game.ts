@@ -5,7 +5,14 @@ export const GameEditions = {
   [Game.gta3]: [Game.gta3, Game.gta3_mobile, Game.gta3_unreal],
   [Game.vc]: [Game.vc, Game.vc_mobile, Game.vc_unreal],
   [Game.sa]: [Game.sa, Game.sa_mobile, Game.sa_unreal],
-  [Game.unknown_x86]: [Game.bully, Game.gta_iv, Game.lcs, Game.vcs, Game.unknown_x86, Game.unknown_x64],
+  [Game.unknown_x86]: [
+    Game.bully,
+    Game.gta_iv,
+    Game.lcs,
+    Game.vcs,
+    Game.unknown_x86,
+    Game.unknown_x64,
+  ],
 };
 
 export function isValidGame(name: string | undefined): name is Game {
@@ -70,5 +77,7 @@ export function doesGameRequireOpcode(game: Game): boolean {
     Game.gta3_unreal,
     Game.vc_unreal,
     Game.sa_unreal,
+    Game.lcs,
+    Game.vcs,
   ].includes(game);
 }

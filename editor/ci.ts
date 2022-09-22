@@ -47,6 +47,8 @@ games.forEach((game) => {
       ].includes(game)
     ) {
       run(`cp ../shared/docs ${assets} -r`);
+    } else {
+      run(`cp ../${game}/docs ${assets} -r`);
     }
   } catch {}
 

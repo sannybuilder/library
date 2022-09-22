@@ -46,6 +46,11 @@ games.forEach((game) => {
         `cp ../shared/docs ../editor/src/assets/${game} -r`,
         join('..', game)
       );
+    } else {
+      run(
+        `cp ../${game}/docs ../editor/src/assets/${game} -r`,
+        join('..', game)
+      );
     }
   } catch {}
 

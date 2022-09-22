@@ -49,9 +49,9 @@ games.forEach((game) => {
       ].includes(game)
     ) {
       run(`cp ../shared/docs ${assets} -r`);
-    } else {
-      run(`cp ../${game}/docs ${assets} -r`);
     }
+    // overwrite shared docs with game specific docs
+    run(`cp ../${game}/docs ${assets} -r`);
   } catch {}
 
   let dest = assetsDirCargo(game);

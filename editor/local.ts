@@ -48,12 +48,13 @@ games.forEach((game) => {
         `cp ../shared/docs ../editor/src/assets/${game} -r`,
         join('..', game)
       );
-    } else {
-      run(
-        `cp ../${game}/docs ../editor/src/assets/${game} -r`,
-        join('..', game)
-      );
     }
+    // overwrite shared docs with game specific docs
+    run(
+      `cp ../${game}/docs ../editor/src/assets/${game} -r`,
+      join('..', game)
+    );
+  
   } catch {}
 
   let dest = assetsDirCargo(game);

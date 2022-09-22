@@ -107,7 +107,11 @@
     <div class="row mb-2">
       <div class="col-12">
         <h5>{{ "ui.commandOverview.descriptionSubtitle" | translate }}</h5>
-        <div [innerHTML]="fullDescription | markdown"></div>
+        <div
+          [innerHTML]="
+            fullDescription | markdown | linkify: game:gameExtensions | sanitize
+          "
+        ></div>
       </div>
     </div>
   </ng-container>

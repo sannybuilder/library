@@ -7,13 +7,14 @@ import { words } from 'lodash';
   name: 'linkify',
 })
 export class LinkifyPipe implements PipeTransform {
-  transform(command: Command, game: Game, extensions: Extension[]) {
-    if (!command.short_desc) {
+  transform(command: Command | string, game: Game, extensions: Extension[]) {
+    const short_desc = typeof command === 'string' ? command : command.short_desc;
+    if (!short_desc) {
       return '';
     }
 
     // todo: gradually replace ids with names
-    const linkedIds = command.short_desc.replace(
+    const linkedIds = short_desc.replace(
       /0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]/g,
       (id) => {
         const extension = extensions.find((e) =>
@@ -45,6 +46,10 @@ export class LinkifyPipe implements PipeTransform {
       ['ped', 'character', 'char'],
       ['number', 'num'],
     ];
+
+    if (typeof command === 'string') {
+      return linkedNames;
+    }
 
     return commandParams(command).reduce((m, p) => {
       const { name } = p;

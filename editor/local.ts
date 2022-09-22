@@ -40,6 +40,8 @@ games.forEach((game) => {
         Game.gta3_unreal,
         Game.vc_unreal,
         Game.sa_unreal,
+        Game.lcs,
+        Game.vcs,
       ].includes(game)
     ) {
       run(

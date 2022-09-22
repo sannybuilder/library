@@ -36,6 +36,7 @@ import {
   OpcodeParamsPipe,
   FilterMethodsPipe,
   StripPunctuationPipe,
+  MarkdownPipe,
 } from './pipes';
 
 // extensions state
@@ -69,6 +70,10 @@ import { VersionEffects } from './state/version/effects';
 import { EnumsEffects } from './state/enums/effects';
 import { enumsReducer } from './state/enums/reducer';
 
+// articles state
+import { ArticlesEffects } from './state/articles/effects';
+import { articlesReducer } from './state/articles/reducer';
+
 // tree state
 import { treeReducer } from './state/tree/reducer';
 import { TreeEffects } from './state/tree/effects';
@@ -99,7 +104,7 @@ import {
   HeaderComponent,
   DownloadPanelComponent,
   FilterPanelComponent,
-  JsonGeneratorComponent
+  JsonGeneratorComponent,
 } from './components/layout';
 
 import {
@@ -172,6 +177,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     OpcodeParamsPipe,
     FilterMethodsPipe,
     StripPunctuationPipe,
+    MarkdownPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,
@@ -243,6 +249,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
         ui: uiReducer,
         tree: treeReducer,
         version: versionReducer,
+        articles: articlesReducer,
       },
       { metaReducers }
     ),
@@ -255,6 +262,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       UiEffects,
       TreeEffects,
       VersionEffects,
+      ArticlesEffects,
     ]),
     DragDropModule,
     ClipboardModule,
@@ -263,7 +271,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       : StoreDevtoolsModule.instrument({
           maxAge: 50,
           logOnly: false,
-          autoPause: true
+          autoPause: true,
         }),
   ],
   exports: [],

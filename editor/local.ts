@@ -28,6 +28,26 @@ games.forEach((game) => {
   ].forEach((x) => run(x));
 
   run(`cp *.json ../editor/src/assets/${game}`, join('..', game));
+  try {
+    if (
+      [
+        Game.gta3,
+        Game.vc,
+        Game.sa,
+        Game.gta3_mobile,
+        Game.vc_mobile,
+        Game.sa_mobile,
+        Game.gta3_unreal,
+        Game.vc_unreal,
+        Game.sa_unreal,
+      ].includes(game)
+    ) {
+      run(
+        `cp ../shared/docs ../editor/src/assets/${game} -r`,
+        join('..', game)
+      );
+    }
+  } catch {}
 
   let dest = assetsDirCargo(game);
   if (GameEnumsAssets[game]) {

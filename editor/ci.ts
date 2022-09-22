@@ -32,6 +32,24 @@ games.forEach((game) => {
     `cp ${enumsJson} ${assets}`,
   ].forEach(run);
 
+  try {
+    if (
+      [
+        Game.gta3,
+        Game.vc,
+        Game.sa,
+        Game.gta3_mobile,
+        Game.vc_mobile,
+        Game.sa_mobile,
+        Game.gta3_unreal,
+        Game.vc_unreal,
+        Game.sa_unreal,
+      ].includes(game)
+    ) {
+      run(`cp ../shared/docs ${assets} -r`);
+    }
+  } catch {}
+
   let dest = assetsDirCargo(game);
   if (GameEnumsAssets[game]) {
     cargo(`cargo run enums ${enumsJson} > ${join(dest, 'enums.txt')}`);

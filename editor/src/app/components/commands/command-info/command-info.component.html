@@ -102,6 +102,16 @@
     </div>
   </div>
 
+  <ng-container *ngIf="fullDescription">
+    <hr />
+    <div class="row mb-2">
+      <div class="col-12">
+        <h5>{{ "ui.commandOverview.descriptionSubtitle" | translate }}</h5>
+        <div [innerHTML]="fullDescription | markdown"></div>
+      </div>
+    </div>
+  </ng-container>
+
   <ng-container
     *ngIf="
       attrs.length ||

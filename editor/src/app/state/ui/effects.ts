@@ -63,6 +63,7 @@ import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
 import { loadEnumsSuccess } from '../enums/actions';
+import { ArticlesFacade } from '../articles/facade';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -249,6 +250,16 @@ export class UiEffects {
       ),
       map((snippet) => displayOrEditSnippet({ snippet }))
     )
+  );
+
+  displayOrEditArticle$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(displayOrEditCommandInfo),
+        filter(({ viewMode }) => viewMode === ViewMode.ViewCommand),
+        tap(({ command }) => this._articles.loadArticle(command.name))
+      ),
+    { dispatch: false }
   );
 
   resetPagination$ = createEffect(() =>
@@ -465,6 +476,7 @@ export class UiEffects {
     private _changes: ChangesFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
+    private _articles: ArticlesFacade,
     @Inject(DOCUMENT) private _d: Document
   ) {}
 }

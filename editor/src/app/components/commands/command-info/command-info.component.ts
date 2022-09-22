@@ -75,6 +75,7 @@ export class CommandInfoComponent {
   @Input() relatedCommands: Command[] | undefined;
   @Input() classDesc?: string;
   @Input() gameExtensions: Extension[];
+  @Input() fullDescription?: string;
   @Output() descriptionClick = new EventEmitter();
 
   isPrimitiveType(param: Param) {

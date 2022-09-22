@@ -31,6 +31,7 @@ import {
   GameFacade,
   EnumsFacade,
   TreeFacade,
+  ArticlesFacade
 } from '../../state';
 import {
   doesGameRequireOpcode,
@@ -115,7 +116,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _enums: EnumsFacade,
     private _router: Router,
     private _ref: ChangeDetectorRef,
-    private _el: ElementRef
+    private _el: ElementRef,
+    private _articles: ArticlesFacade
   ) {}
 
   ngOnInit() {
@@ -307,6 +309,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getGameExtensions(game: Game) {
     return this._extensions.getGameExtensions(game);
+  }
+
+  getFullDescription(command: Command) {
+    return this._articles.currentArticle$;
   }
 
   @HostListener('window:resize', [])

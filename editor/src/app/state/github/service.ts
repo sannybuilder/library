@@ -73,4 +73,10 @@ export class GitHubService {
       params: { ts },
     });
   }
+
+  loadMarkdown(fileName: string) {
+    return this._http.get(Location.joinWithSlash('/assets', fileName), {
+      responseType: 'text',
+    });
+  }
 }

@@ -1,0 +1,1 @@
+Does nothing. The script engine ignores it and immediately continues to the next command. 0000 is often put at the beginning of CLEO scripts to avoid the [jump-at-zero-offset bug](http://www.gtaforums.com/index.php?showtopic=211077&view=findpost&p=4492136). 

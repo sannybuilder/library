@@ -257,7 +257,11 @@ export class UiEffects {
       this._actions$.pipe(
         ofType(displayOrEditCommandInfo),
         filter(({ viewMode }) => viewMode === ViewMode.ViewCommand),
-        tap(({ command }) => this._articles.loadArticle(command.name))
+        tap(({ command }) => {
+          if (!command.attrs?.is_nop && !command.attrs?.is_unsupported) {
+            this._articles.loadArticle(command.name);
+          }
+        })
       ),
     { dispatch: false }
   );

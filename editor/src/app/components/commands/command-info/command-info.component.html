@@ -102,7 +102,13 @@
     </div>
   </div>
 
-  <ng-container *ngIf="fullDescription">
+  <ng-container
+    *ngIf="
+      !command.attrs?.is_unsupported &&
+      !command.attrs?.is_nop &&
+      fullDescription
+    "
+  >
     <hr />
     <div class="row mb-2">
       <div class="col-12">

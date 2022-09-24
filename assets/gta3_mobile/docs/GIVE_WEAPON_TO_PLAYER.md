@@ -1,0 +1,1 @@
+This opcode adds to your weapon ammo and sets the weapon as the current one for you. If you do not have the weapon, the weapon is given to you and replaces any weapon of the same slot. Using this opcode requires loading the weapon model through 0247 or else the weapon might not be visible which can crash the game.

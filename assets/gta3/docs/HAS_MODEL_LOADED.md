@@ -1,0 +1,1 @@
+This command returns true if the model has been loaded. A model can load in a number of ways, including using command  0247  or traveling to the location of a placed object  that uses the model. The check can be avoided if command  038B  is used.

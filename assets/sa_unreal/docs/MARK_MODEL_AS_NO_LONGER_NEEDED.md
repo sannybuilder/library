@@ -1,0 +1,1 @@
+This command marks the model as unneeded, usually after it is requested through command 0247 . The reference to the model doesn't disappear immediately so it's possible, though not recommended, to spawn objects without requesting the model again after this command is used.

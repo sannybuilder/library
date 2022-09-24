@@ -123,17 +123,19 @@ export class ExtensionsEffects {
                   take(1),
                   map(([supportInfo, oldCommand]) => {
                     if (
-                      // disable cross-update for non-GTA3D games
-                      !GameEditions[Game.unknown_x86].includes(game) &&
+                      // Other games should not trigger cross game updates, nor should they be updated
+                      !isOtherGame(game) &&
                       shouldUpdateOtherGames(command, oldCommand)
                     ) {
-                      return getSameCommands(supportInfo, game).map((d) => ({
-                        game: d.game,
-                        command,
-                        newExtension,
-                        oldExtension,
-                        ignoreVersionAndPlatform: d.game !== game,
-                      }));
+                      return getSameCommands(supportInfo, game)
+                        .filter((d) => !isOtherGame(d.game))
+                        .map((d) => ({
+                          game: d.game,
+                          command,
+                          newExtension,
+                          oldExtension,
+                          ignoreVersionAndPlatform: d.game !== game,
+                        }));
                     } else {
                       return [
                         {
@@ -408,4 +410,8 @@ function bumpVersion(version?: string): string {
   const parts = version.split('.');
   const last = parts.pop() ?? '0';
   return [...parts, isNaN(+last) ? 0 : +last + 1].join('.');
+}
+
+function isOtherGame(game: Game) {
+  return GameEditions[Game.unknown_x86].includes(game);
 }

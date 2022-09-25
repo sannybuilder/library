@@ -1,4 +1,4 @@
-import { getBaseGame } from 'src/app/utils';
+import { getBaseGame } from './src/app/utils';
 import {
   Game,
   GameClassesAssets,

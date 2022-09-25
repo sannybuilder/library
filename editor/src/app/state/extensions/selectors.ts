@@ -128,22 +128,27 @@ export const commandRelated = createSelector(
         })
       : [];
 
-    const get_set_pairs = [];
-    if (name?.startsWith('GET_')) {
+    const owners = ['_CHAR', '_CAR', '_PLAYER', '_OBJECT'];
+    const variations: Command[] = [];
+    const addVariant = (variant: string) => {
+      const v = commands.find((c) => c.name === variant);
+      if (v) {
+        variations.push(v);
+      }
+    };
+
+    if (name.startsWith('GET_')) {
       const setter = name.replace('GET_', 'SET_');
-      const pair = commands.find((c) => c.name === setter);
-      if (pair) {
-        get_set_pairs.push(pair);
-      }
-    } else if (name?.startsWith('SET_')) {
+      addVariant(setter);
+    } else if (name.startsWith('SET_')) {
       const getter = name.replace('SET_', 'GET_');
-      const pair = commands.find((c) => c.name === getter);
-      if (pair) {
-        get_set_pairs.push(pair);
-      }
+      addVariant(getter);
+    } else if (owners.some((o) => name.endsWith(o))) {
+      const baseName = name.replace(/_[A-Z]+$/, '');
+      owners.forEach((o) => addVariant(baseName + o));
     }
 
-    return uniqBy([...referenced, ...overloads, ...get_set_pairs], 'id');
+    return uniqBy([...referenced, ...overloads, ...variations], 'id');
   }
 );
 

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1664039684083,
-    "version": "0.5",
+    "last_update": 1664130016697,
+    "version": "0.6",
     "url": "https://library.sannybuilder.com/#/lcs"
   },
   "extensions": [
@@ -3082,7 +3082,7 @@
           "member": "IsStillAlive",
           "name": "IS_CHAR_STILL_ALIVE",
           "num_params": 1,
-          "short_desc": "Returns true if the handle is a valid character handle who is still alive (opposite of 0118)"
+          "short_desc": "Returns true if the handle is a valid character handle who is still alive (opposite of IS_CHAR_DEAD)"
         },
         {
           "input": [
@@ -3346,7 +3346,7 @@
           "member": "IsStillAlive",
           "name": "IS_CAR_STILL_ALIVE",
           "num_params": 1,
-          "short_desc": "Returns true if the handle is a valid vehicle handle that is still alive (opposite of 0119)"
+          "short_desc": "Returns true if the handle is a valid vehicle handle that is still alive (opposite of IS_CAR_DEAD)"
         },
         {
           "input": [
@@ -5864,12 +5864,12 @@
               "type": "int"
             }
           ],
-          "class": "Player",
           "id": "0118",
-          "member": "AddAmmo",
           "name": "ADD_AMMO_TO_PLAYER",
           "num_params": 3,
-          "short_desc": "Adds the specified amount of ammo to the player's weapon"
+          "attrs": {
+            "is_unsupported": true
+          }
         },
         {
           "input": [
@@ -5902,15 +5902,21 @@
           "num_params": 0
         },
         {
-          "id": "011B",
-          "name": "COMMAND_011B",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p0",
-              "type": "any"
+              "name": "self",
+              "type": "Player"
             }
-          ]
+          ],
+          "id": "011B",
+          "name": "IS_PLAYER_STILL_ALIVE",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
+          "member": "IsStillAlive",
+          "short_desc": "Checks if the player is not dead (not wasted), opposite of IS_PLAYER_DEAD"
         },
         {
           "input": [

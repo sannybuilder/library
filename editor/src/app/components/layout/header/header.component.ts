@@ -9,9 +9,15 @@ import {
   filter,
   map,
 } from 'rxjs/operators';
-import { getBaseGame, getBaseGames, getGameVariations, isValidGame } from '../../../utils';
+import {
+  GameEditions,
+  getBaseGame,
+  getBaseGames,
+  getGameVariations,
+  isValidGame,
+} from '../../../utils';
 import { Config, CONFIG } from '../../../config';
-import { Game, KNOWN_LANGUAGES } from '../../../models';
+import { KNOWN_LANGUAGES } from '../../../models';
 import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 
 @Component({
@@ -108,7 +114,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this._ui.toggleSearchHelp({ force: true });
   }
 
-  getGameVariations(game: Game) {
-    return getGameVariations(game)
+  getGameVariations(game: keyof typeof GameEditions) {
+    return getGameVariations(game);
   }
 }

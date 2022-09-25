@@ -23,8 +23,8 @@ export function isValidGame(name: string | undefined): name is Game {
   return flatten(Object.values(GameEditions)).includes(name as Game);
 }
 
-export function getBaseGames(): Game[] {
-  return Object.keys(GameEditions) as Game[];
+export function getBaseGames() {
+  return Object.keys(GameEditions) as Array<keyof typeof GameEditions>;
 }
 
 export function getBaseGame(game: Game): Game {
@@ -35,12 +35,8 @@ export function getBaseGame(game: Game): Game {
   );
 }
 
-export function getGameVariations(game: Game): Game[] {
-  const edition =
-    Object.values(GameEditions).find((v) => v!.includes(game)) ??
-    GameEditions[Game.unknown_x86];
-
-  return edition ?? [];
+export function getGameVariations(baseGame: keyof typeof GameEditions): Game[] {
+  return GameEditions[baseGame];
 }
 
 export function getSameEdition(game: Game): Game[] {

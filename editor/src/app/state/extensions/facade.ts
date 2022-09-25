@@ -100,10 +100,11 @@ export class ExtensionsFacade {
     });
   }
 
-  findRelatedCommands(command: Command, extension: string) {
+  findRelatedCommands(command: Command, extension: string, game: Game) {
     return this.store$.select(selector.commandRelated, {
       command,
       extension,
+      game
     });
   }
 

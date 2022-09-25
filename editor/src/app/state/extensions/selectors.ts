@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { uniqBy } from 'lodash';
+import { doesGameRequireOpcode } from '../../utils';
 import {
   ClassMeta,
   Command,
@@ -99,7 +100,7 @@ export const commandRelated = createSelector(
   extensions,
   (
     extensions: Extension[] | undefined,
-    props: { extension: string; command: Command }
+    props: { extension: string; command: Command, game: Game }
   ) => {
     const commands = extensions?.find(
       (e) => e.name === props.extension
@@ -119,12 +120,12 @@ export const commandRelated = createSelector(
 
     const overloads = attrs?.is_overload
       ? commands.filter((c) => {
-          const haveSameId = c.id === id;
-          const haveSameName = c.name === name;
-          const haveSameClass =
+          const hasSameId = c.id === id;
+          const hasSameName = c.name === name;
+          const hasSameClass =
             c.class && c.member && c.class === className && c.member === member;
 
-          return (!id || !haveSameId) && (haveSameName || haveSameClass);
+          return (!id || !hasSameId) && (hasSameName || hasSameClass);
         })
       : [];
 
@@ -145,10 +146,13 @@ export const commandRelated = createSelector(
       addVariant(getter);
     } else if (owners.some((o) => name.endsWith(o))) {
       const baseName = name.replace(/_[A-Z]+$/, '');
-      owners.forEach((o) => addVariant(baseName + o));
+      owners
+        .filter((o) => !name.endsWith(o))
+        .forEach((o) => addVariant(baseName + o));
     }
 
-    return uniqBy([...referenced, ...overloads, ...variations], 'id');
+    const key = doesGameRequireOpcode(props.game) ? 'id' : 'name';
+    return uniqBy([...referenced, ...overloads, ...variations], key);
   }
 );
 

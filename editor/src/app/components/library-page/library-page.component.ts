@@ -283,8 +283,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._extensions.getCommandSupportInfo(command, extension);
   }
 
-  findRelatedCommands(command: Command, extension: string) {
-    return this._extensions.findRelatedCommands(command, extension);
+  findRelatedCommands(command: Command, extension: string, game: Game) {
+    return this._extensions.findRelatedCommands(command, extension, game);
   }
 
   getEnum(enumName: string) {

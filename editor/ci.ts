@@ -1,3 +1,4 @@
+import { getBaseGame } from './src/app/utils';
 import {
   Game,
   GameClassesAssets,
@@ -49,7 +50,14 @@ games.forEach((game) => {
       ].includes(game)
     ) {
       run(`cp ../shared/docs ${assets} -r`);
+
+      const baseGame = getBaseGame(game);
+      // use base game docs for mobile and definitive editions
+      if (baseGame != game && baseGame != Game.unknown_x86) {
+        run(`cp ../${baseGame}/docs ${assets} -r`);
+      }
     }
+
     // overwrite shared docs with game specific docs
     run(`cp ../${game}/docs ${assets} -r`);
   } catch {}

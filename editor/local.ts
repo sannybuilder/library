@@ -49,14 +49,14 @@ games.forEach((game) => {
         `cp ../shared/docs ../editor/src/assets/${game} -r`,
         join('..', game)
       );
-    }
-    const baseGame = getBaseGame(game);
-    // use base game docs for mobile and definitive editions
-    if (baseGame != game && baseGame != Game.unknown_x86) {
-      run(
-        `cp ../${baseGame}/docs ../editor/src/assets/${game} -r`,
-        join('..', game)
-      );
+      const baseGame = getBaseGame(game);
+      // use base game docs for mobile and definitive editions
+      if (baseGame != game && baseGame != Game.unknown_x86) {
+        run(
+          `cp ../${baseGame}/docs ../editor/src/assets/${game} -r`,
+          join('..', game)
+        );
+      }
     }
     // overwrite shared docs with game specific docs
     run(`cp ../${game}/docs ../editor/src/assets/${game} -r`, join('..', game));

@@ -52,6 +52,7 @@ import {
   capitalizeFirst,
   isOpcode,
   isPlatformMatchingExact,
+  isSupported,
   isVersionMatchingExact,
 } from '../../utils';
 import { flatMap } from 'lodash';
@@ -258,7 +259,7 @@ export class UiEffects {
         ofType(displayOrEditCommandInfo),
         filter(({ viewMode }) => viewMode === ViewMode.ViewCommand),
         tap(({ command }) => {
-          if (!command.attrs?.is_nop && !command.attrs?.is_unsupported) {
+          if (isSupported(command.attrs)) {
             this._articles.loadArticle(command.name);
           }
         })

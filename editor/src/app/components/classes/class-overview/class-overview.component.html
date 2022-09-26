@@ -86,9 +86,7 @@
         class="identifier"
         [routerLink]="['/', game, extension, command.id || command.name]"
         [queryParams]="getQueryParamsForCommand(command, game)"
-        [ngClass]="{
-          strike: command.attrs?.is_nop || command.attrs?.is_unsupported
-        }"
+        [ngClass]="{ strike: !isSupported(command) }"
         [title]="command.short_desc || 'ui.shared.noDescription' | translate"
         >{{ command.member }}</a
       ><span [innerHTML]="command | classParams | sanitize"></span

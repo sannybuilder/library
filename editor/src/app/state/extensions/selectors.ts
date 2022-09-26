@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { uniqBy } from 'lodash';
-import { doesGameRequireOpcode } from '../../utils';
+import { doesGameRequireOpcode, isSupported } from '../../utils';
 import {
   ClassMeta,
   Command,
@@ -100,7 +100,7 @@ export const commandRelated = createSelector(
   extensions,
   (
     extensions: Extension[] | undefined,
-    props: { extension: string; command: Command, game: Game }
+    props: { extension: string; command: Command; game: Game }
   ) => {
     const commands = extensions?.find(
       (e) => e.name === props.extension
@@ -152,7 +152,9 @@ export const commandRelated = createSelector(
     }
 
     const key = doesGameRequireOpcode(props.game) ? 'id' : 'name';
-    return uniqBy([...referenced, ...overloads, ...variations], key);
+    return uniqBy([...referenced, ...overloads, ...variations], key).filter(
+      (c) => isSupported(c.attrs)
+    );
   }
 );
 

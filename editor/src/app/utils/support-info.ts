@@ -1,4 +1,4 @@
-import { areTypesCompatible } from './command';
+import { areTypesCompatible, isSupported } from './command';
 import {
   Command,
   Extension,
@@ -127,7 +127,7 @@ function getSupportLevel(command: Command | undefined, otherCommand: Command) {
   // same number of parameters but different types (e.g. Garage)
   const p1 = command.input?.length ?? 0;
   const p2 = otherCommand.input?.length ?? 0;
-  if (p1 === p2 && p1 > 0 && !otherAttrs.is_nop && !otherAttrs.is_unsupported) {
+  if (p1 === p2 && p1 > 0 && isSupported(otherAttrs)) {
     const types1 = command.input?.map((p) => p.type) ?? [];
     const types2 = otherCommand.input?.map((p) => p.type) ?? [];
 

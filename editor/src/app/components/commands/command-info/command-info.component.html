@@ -21,11 +21,7 @@
   <div class="row mb-2">
     <div class="col-12">
       <div
-        *ngIf="
-          !command.attrs?.is_unsupported &&
-          !command.attrs?.is_nop &&
-          command.short_desc
-        "
+        *ngIf="isSupported(command) && command.short_desc"
         class="mb-3"
         (click)="interceptDescriptionClick($event)"
         [innerHTML]="command | linkify: game:gameExtensions | sanitize"

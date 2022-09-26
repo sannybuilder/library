@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { getQueryParamsForCommand } from '../../../utils';
+import { getQueryParamsForCommand, isSupported } from '../../../utils';
 import {
   ClassMeta,
   Command,
@@ -65,5 +65,9 @@ export class ClassOverviewComponent {
 
   getQueryParamsForCommand(command: Command, game: Game) {
     return getQueryParamsForCommand(command, game);
+  }
+
+  isSupported(command: Command) {
+    return isSupported(command.attrs);
   }
 }

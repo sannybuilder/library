@@ -17,6 +17,7 @@ import {
   Version,
   GameVersions,
   PrimitiveType,
+  Attr,
 } from '../models';
 import { HEX_DIGITS, HEX_NEGATION } from './hex';
 
@@ -288,4 +289,8 @@ export function areTypesCompatible(type1: string, type2: string) {
 
 export function isOpcode(s: string): boolean {
   return s.length === 4 && s.split('').every((c) => HEX_DIGITS.includes(c));
+}
+
+export function isSupported(attrs?: Partial<Attr>): boolean {
+  return !attrs?.is_unsupported && !attrs?.is_nop;
 }

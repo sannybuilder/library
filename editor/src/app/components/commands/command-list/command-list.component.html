@@ -86,12 +86,7 @@
 
             <div class="row mt-3">
               <div class="col-12">
-                <ng-container
-                  *ngIf="
-                    !row.command.attrs?.is_unsupported &&
-                    !row.command.attrs?.is_nop
-                  "
-                >
+                <ng-container *ngIf="isSupported(row.command)">
                   <div
                     (click)="interceptDescriptionClick($event)"
                     [innerHTML]="
@@ -171,8 +166,7 @@
                   *ngIf="
                     !row.command.attrs?.is_keyword &&
                     !(row.command.class && row.command.member) &&
-                    !row.command.attrs?.is_unsupported &&
-                    !row.command.attrs?.is_nop
+                    isSupported(row.command)
                   "
                 >
                   <ng-container
@@ -183,7 +177,10 @@
                       ) | async as snippet
                     "
                   >
-                    <pre class="sample mt-3" [innerHTML]="snippet | parametrify: row.command"></pre>
+                    <pre
+                      class="sample mt-3"
+                      [innerHTML]="snippet | parametrify: row.command"
+                    ></pre>
                   </ng-container>
                 </ng-container>
               </div>

@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { doesGameRequireOpcode, getQueryParamsForCommand } from '../../../utils';
+import { doesGameRequireOpcode, getQueryParamsForCommand, isSupported } from '../../../utils';
 import { Command, DEFAULT_EXTENSION, Extension, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
@@ -65,5 +65,9 @@ export class CommandListComponent {
 
   get doesGameRequireOpcode() {
     return doesGameRequireOpcode(this.game);
+  }
+
+  isSupported(command: Command) {
+    return isSupported(command.attrs)
   }
 }

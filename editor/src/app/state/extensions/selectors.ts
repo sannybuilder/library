@@ -129,28 +129,17 @@ export const commandRelated = createSelector(
         })
       : [];
 
-    const owners = ['_CHAR', '_CAR', '_PLAYER', '_OBJECT'];
-    const variations: Command[] = [];
-    const addVariant = (variant: string) => {
-      const v = commands.find((c) => c.name === variant);
-      if (v) {
-        variations.push(v);
-      }
-    };
-
-    if (name.startsWith('GET_')) {
-      const setter = name.replace('GET_', 'SET_');
-      addVariant(setter);
-    } else if (name.startsWith('SET_')) {
-      const getter = name.replace('SET_', 'GET_');
-      addVariant(getter);
-    } else if (owners.some((o) => name.endsWith(o))) {
-      const baseName = name.replace(/_[A-Z]+$/, '');
-      owners
-        .filter((o) => !name.endsWith(o))
-        .forEach((o) => addVariant(baseName + o));
-    }
-
+    const variations = makeVariations(
+      name,
+      {
+        starters: [['GET_', 'SET_']],
+        endings: [
+          ['_CHAR', '_CAR', '_PLAYER', '_OBJECT'],
+          ['_ON', '_OFF'],
+        ],
+      },
+      commands
+    );
     const key = doesGameRequireOpcode(props.game) ? 'id' : 'name';
     return uniqBy([...referenced, ...overloads, ...variations], key).filter(
       (c) => isSupported(c.attrs)
@@ -197,3 +186,41 @@ export const commandsToDelete = createSelector(
   state,
   (state: GameState | undefined) => state?.commandsToDelete
 );
+
+function makeVariations(
+  name: string,
+  { starters, endings }: { starters: string[][]; endings: string[][] },
+  commands: Command[]
+) {
+  const variations: Command[] = [];
+  const addVariant = (variant: string) => {
+    const v = commands.find((c) => c.name === variant);
+    if (v) {
+      variations.push(v);
+    }
+  };
+
+  starters.forEach((s) => {
+    s.forEach((prefix) => {
+      if (name.startsWith(prefix)) {
+        const baseName = name.replace(prefix, '');
+        s.filter((o) => !name.startsWith(o)).forEach((o) =>
+          addVariant(o + baseName)
+        );
+      }
+    });
+  });
+
+  endings.forEach((e) => {
+    e.forEach((suffix) => {
+      if (name.endsWith(suffix)) {
+        const baseName = name.replace(/_[A-Z]+$/, '');
+        e.filter((o) => !name.endsWith(o)).forEach((o) =>
+          addVariant(baseName + o)
+        );
+      }
+    });
+  });
+
+  return variations;
+}

@@ -206,7 +206,12 @@
               [queryParams]="getQueryParamsForCommand(relatedCommand, game)"
               >{{ relatedCommand.name }}</a
             >
-            &ndash; {{ relatedCommand.short_desc }}
+            &ndash;
+            {{
+              relatedCommand.short_desc
+                ? relatedCommand.short_desc
+                : ("ui.shared.noDescription" | translate)
+            }}
           </li>
         </ul>
       </div>

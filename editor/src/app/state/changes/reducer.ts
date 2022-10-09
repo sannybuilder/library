@@ -131,6 +131,7 @@ function stripBody(extensions: Extension[]) {
           short_desc: isUnsupported ? null : c.short_desc,
           input: isUnsupported ? null : c.input?.map(stripSourceAny),
           output: isUnsupported ? null : c.output?.map(stripSourceAny),
+          num_params: isUnsupported ? 0 : c.num_params,
         },
         (x) => x !== null && (!Array.isArray(x) || x.length > 0)
       );

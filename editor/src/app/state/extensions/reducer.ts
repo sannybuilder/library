@@ -87,12 +87,12 @@ export const extensionsReducer = createReducer(
                   ? null
                   : ignoreVersionAndPlatform
                   ? {
-                      ...newCommand,
+                      ...ensureOverload(newCommand, c),
                       id: c.id,
                       platforms: c.platforms,
                       versions: c.versions,
                     }
-                  : newCommand,
+                  : ensureOverload(newCommand, c),
 
               () =>
                 state.games[game]?.commandsToDelete?.includes(newCommand.name)
@@ -221,4 +221,14 @@ function commandMatcher(
     matchArrays(a.versions, b.versions) &&
     matchArrays(a.platforms, b.platforms)
   );
+}
+
+function ensureOverload(newCommand: Command, oldCommand: Command): Command {
+  return {
+    ...newCommand,
+    attrs: {
+      ...(newCommand.attrs ?? {}),
+      is_overload: oldCommand.attrs?.is_overload,
+    },
+  };
 }

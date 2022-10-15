@@ -1,0 +1,1 @@
+This command adds a square blip in the radar to the coordinates point. It is almost equivalent to command ADD_BLIP_FOR_COORD but without preset properties and, likewise, a marker cannot be displayed for this blip. The default scale of the blip is 1.

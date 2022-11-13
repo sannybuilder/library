@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1668331032353,
-    "version": "0.44",
+    "last_update": 1668351247465,
+    "version": "0.45",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -8383,16 +8383,21 @@
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "radius",
               "type": "float"
             },
             {
-              "name": "_p8",
+              "name": "intensity",
               "type": "float"
             }
           ],
           "name": "DRAW_LIGHT_WITH_RANGE",
-          "num_params": 8
+          "num_params": 8,
+          "class": "Fx",
+          "member": "DrawLightWithRange",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -14008,19 +14013,21 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "roomHash",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "name": "GET_KEY_FOR_CHAR_IN_ROOM",
           "num_params": 2,
-          "output": [
-            {
-              "name": "pKey",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetKeyInRoom"
         },
         {
           "name": "GET_KEY_FOR_DUMMY_CHAR_IN_ROOM",

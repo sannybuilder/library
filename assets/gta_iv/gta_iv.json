@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1664039692494,
-    "version": "0.43",
+    "last_update": 1668331032353,
+    "version": "0.44",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -1002,7 +1002,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -1012,7 +1012,9 @@
           ],
           "name": "ADD_OBJECT_TO_INTERIOR_ROOM_BY_NAME",
           "num_params": 2,
-          "short_desc": "Adds an object to the interior room denoted by its name"
+          "short_desc": "Adds an object to the interior room denoted by its name",
+          "class": "Object",
+          "member": "AddToInteriorRoomByName"
         },
         {
           "name": "ADD_PED_QUEUE",
@@ -6911,16 +6913,18 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
-              "name": "_p2",
+              "name": "value",
               "type": "bool"
             }
           ],
           "name": "DIM_BLIP",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "SetDim"
         },
         {
           "input": [
@@ -7478,7 +7482,12 @@
           ],
           "name": "DO_SCREEN_FADE_IN",
           "num_params": 1,
-          "short_desc": "Fades in the screen and turns on the sound of the game. Can be called only after DO_SCREEN_FADE_OUT"
+          "short_desc": "Fades in the screen and turns on the sound of the game. Can be called only after DO_SCREEN_FADE_OUT",
+          "class": "Camera",
+          "member": "DoFadeIn",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7499,7 +7508,12 @@
           ],
           "name": "DO_SCREEN_FADE_OUT",
           "num_params": 1,
-          "short_desc": "Fades out the screen and turns off the sound of the game. To fade in the screen and turn on the sound call DO_SCREEN_FADE_IN"
+          "short_desc": "Fades out the screen and turns off the sound of the game. To fade in the screen and turn on the sound call DO_SCREEN_FADE_IN",
+          "class": "Camera",
+          "member": "DoFadeOut",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -8111,7 +8125,12 @@
           ],
           "name": "DRAW_CHECKPOINT_WITH_ALPHA",
           "num_params": 8,
-          "short_desc": "Draws a checkpoint same as DRAW_CHECKPOINT but has an alpha value also for the color"
+          "short_desc": "Draws a checkpoint same as DRAW_CHECKPOINT but has an alpha value also for the color",
+          "class": "Checkpoint",
+          "member": "DrawWithAlpha",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -13167,19 +13186,21 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "pValue",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "GET_ENGINE_HEALTH",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "GetEngineHealth"
         },
         {
           "output": [
@@ -13876,15 +13897,20 @@
               "type": "float"
             }
           ],
-          "name": "GET_INTERIOR_AT_COORDS",
-          "num_params": 4,
           "output": [
             {
               "name": "pInterior",
               "type": "Interior",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_INTERIOR_AT_COORDS",
+          "num_params": 4,
+          "class": "Game",
+          "member": "GetInteriorAtCoords",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -25135,7 +25161,12 @@
             }
           ],
           "name": "LOAD_SCENE_FOR_ROOM_BY_KEY",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Streaming",
+          "member": "LoadSceneForRoomByKey",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "LOAD_SETTINGS",
@@ -27905,7 +27936,12 @@
           ],
           "name": "PLAY_AUDIO_EVENT",
           "num_params": 1,
-          "short_desc": "Plays an audio event anywhere"
+          "short_desc": "Plays an audio event anywhere",
+          "class": "Audio",
+          "member": "PlayEvent",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -32542,11 +32578,11 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "flag0",
+              "name": "state",
               "type": "bool"
             },
             {
@@ -32556,7 +32592,9 @@
           ],
           "name": "SET_CAR_ENGINE_ON",
           "num_params": 3,
-          "short_desc": "Turns the vehicles engine on or off, depending on the state put into it"
+          "short_desc": "Turns the vehicles engine on or off, depending on the state put into it",
+          "class": "Car",
+          "member": "SetEngineOn"
         },
         {
           "name": "SET_CAR_EXISTS_ON_ALL_MACHINES",
@@ -32758,13 +32796,15 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
           "name": "SET_CAR_ON_GROUND_PROPERLY",
           "num_params": 1,
-          "short_desc": "Tries to put the vehicle on the ground properly"
+          "short_desc": "Tries to put the vehicle on the ground properly",
+          "class": "Car",
+          "member": "SetOnGroundProperly"
         },
         {
           "input": [
@@ -34484,7 +34524,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34493,7 +34533,9 @@
             }
           ],
           "name": "SET_CHAR_WILL_FLY_THROUGH_WINDSCREEN",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetFlyThroughWindscreen"
         },
         {
           "input": [
@@ -35511,7 +35553,12 @@
             }
           ],
           "name": "SET_GAME_CAM_HEADING",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Camera",
+          "member": "SetHeading",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -36554,7 +36601,12 @@
             }
           ],
           "name": "SET_MISSION_FLAG",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Mission",
+          "member": "SetFlag",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_MISSION_PASSED_CASH",
@@ -38906,7 +38958,7 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -38915,7 +38967,9 @@
             }
           ],
           "name": "SET_ROOM_FOR_CAR_BY_NAME",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetRoomByName"
         },
         {
           "input": [
@@ -38934,7 +38988,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -38943,7 +38997,9 @@
             }
           ],
           "name": "SET_ROOM_FOR_CHAR_BY_NAME",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetRoomByName"
         },
         {
           "name": "SET_ROOM_FOR_DUMMY_CHAR_BY_KEY",
@@ -46970,7 +47026,12 @@
         {
           "name": "TERMINATE_THIS_SCRIPT",
           "num_params": 0,
-          "short_desc": "Ends the current script, preventing further execution"
+          "short_desc": "Ends the current script, preventing further execution",
+          "class": "Mission",
+          "member": "TerminateThisScript",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "THIS_SCRIPT_IS_SAFE_FOR_NETWORK_GAME",
@@ -47096,7 +47157,12 @@
           ],
           "name": "TRIGGER_MISSION_COMPLETE_AUDIO",
           "num_params": 1,
-          "short_desc": "Plays a mission complete audio usually heard when a mission is completed. The audio are located in the gps.rfp file. Valid values include 6-7, 10-11, 15, 18, 24-25, 27-28, 33-35, 42-43, 50-69, 71. Using other numbers will not play any audio. The audio will only play if a mission complete audio is not currently playing"
+          "short_desc": "Plays a mission complete audio usually heard when a mission is completed. The audio are located in the gps.rfp file. Valid values include 6-7, 10-11, 15, 18, 24-25, 27-28, 33-35, 42-43, 50-69, 71. Using other numbers will not play any audio. The audio will only play if a mission complete audio is not currently playing",
+          "class": "Audio",
+          "member": "TriggerMissionComplete",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

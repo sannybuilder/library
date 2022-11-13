@@ -195,3 +195,12 @@ export const Key = {
   "RightWindows": 220,
   "Appmenu": 221
 };
+export const Language = {
+  "English": 0,
+  "French": 1,
+  "German": 2,
+  "Italian": 3,
+  "Spanish": 4,
+  "Russian": 5,
+  "Japanese": 6
+};

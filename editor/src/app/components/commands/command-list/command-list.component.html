@@ -64,11 +64,11 @@
                     [routerLink]="['/', game, row.extension, row.command.id]"
                     [queryParams]="getQueryParamsForCommand(row.command, game)"
                     [name]="row.command.id"
-                    [innerHTML]="row.command | propExtract: 'id' | sanitize"
+                    [innerHTML]="row.command | propExtract : 'id' | sanitize"
                   ></a>
                   <div
                     class="text-break"
-                    [innerHTML]="row.command | propExtract: 'name' | sanitize"
+                    [innerHTML]="row.command | propExtract : 'name' | sanitize"
                   ></div>
                 </ng-container>
 
@@ -78,7 +78,7 @@
                     [routerLink]="['/', game, row.extension, row.command.name]"
                     [queryParams]="getQueryParamsForCommand(row.command, game)"
                     [name]="row.command.name"
-                    [innerHTML]="row.command | propExtract: 'name' | sanitize"
+                    [innerHTML]="row.command | propExtract : 'name' | sanitize"
                   ></a>
                 </ng-template>
               </div>
@@ -90,7 +90,7 @@
                   <div
                     (click)="interceptDescriptionClick($event)"
                     [innerHTML]="
-                      row.command | linkify: game:gameExtensions | sanitize
+                      row.command | linkify : game : gameExtensions | sanitize
                     "
                   ></div>
                 </ng-container>
@@ -123,13 +123,13 @@
                         [routerLink]="['/', game, 'classes', row.command.class]"
                         ><span
                           [innerHTML]="
-                            row.command | propExtract: 'class' | sanitize
+                            row.command | propExtract : 'class' | sanitize
                           "
                         ></span></a
                       >.<span
                         class="identifier"
                         [innerHTML]="
-                          row.command | propExtract: 'member' | sanitize
+                          row.command | propExtract : 'member' | sanitize
                         "
                       ></span
                       ><span
@@ -146,13 +146,13 @@
                       >
                         <span
                           [innerHTML]="
-                            row.command | propExtract: 'class' | sanitize
+                            row.command | propExtract : 'class' | sanitize
                           "
                         ></span></a
                       >.<span
                         class="identifier"
                         [innerHTML]="
-                          row.command | propExtract: 'member' | sanitize
+                          row.command | propExtract : 'member' | sanitize
                         "
                       ></span
                       ><span
@@ -179,7 +179,7 @@
                   >
                     <pre
                       class="sample mt-3"
-                      [innerHTML]="snippet | parametrify: row.command"
+                      [innerHTML]="snippet | parametrify : row.command"
                     ></pre>
                   </ng-container>
                 </ng-container>
@@ -247,4 +247,8 @@
     role="status"
     *ngIf="loading$ | async"
   ></div>
+
+  <div *ngIf="loadingError$ | async" class="error">
+    {{ "ui.commandList.errorLoading" | translate }}
+  </div>
 </ng-template>

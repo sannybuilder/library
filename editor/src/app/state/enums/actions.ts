@@ -8,6 +8,10 @@ export const loadEnumsSuccess = createAction(
   props<{ game: Game; enums: Enums }>()
 );
 
+export const loadEnumsError = createAction(
+  '[enums] load error',
+);
+
 export const updateEnum = createAction(
   '[enums] update enum',
   props<{

@@ -26,6 +26,11 @@ export const loadExtensionsSuccess = createAction(
   }>()
 );
 
+export const loadExtensionsError = createAction(
+  '[extensions] load error',
+  props<{ game: Game }>()
+)
+
 export const updateCommands = createAction(
   '[extensions] batch update commands',
   props<{
@@ -58,6 +63,10 @@ export const initSupportInfo = createAction(
 export const loadSupportInfo = createAction(
   '[extensions] load support info',
   props<{ data: Record<Game, SupportInfo> }>()
+);
+
+export const loadSupportInfoError = createAction(
+  '[extensions] load support info error',
 );
 
 export const markCommandsToDelete = createAction(

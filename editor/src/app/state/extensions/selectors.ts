@@ -66,6 +66,11 @@ export const loading = createSelector(
   (state: GameState | undefined) => state?.loading
 );
 
+export const loadingError = createSelector(
+  state,
+  (state: GameState | undefined) => state?.loadingError
+);
+
 export const extensionEntities = createSelector(
   state,
   (state: GameState | undefined, props: { extension: string }) =>

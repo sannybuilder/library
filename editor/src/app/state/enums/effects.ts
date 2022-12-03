@@ -10,6 +10,7 @@ import {
   tap,
   withLatestFrom,
   take,
+  catchError,
 } from 'rxjs/operators';
 
 import {
@@ -21,6 +22,7 @@ import {
   updateGameEnum,
   loadEnumsInfo,
   loadEnumsInfoSuccess,
+  loadEnumsError,
 } from './actions';
 import { GameFacade } from '../game/facade';
 import { EnumsService } from './service';
@@ -30,6 +32,7 @@ import { GameEnums } from '../../models';
 import { AuthFacade } from '../auth/facade';
 import { ExtensionsFacade } from '../extensions/facade';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class EnumsEffects {
@@ -48,9 +51,10 @@ export class EnumsEffects {
       distinctUntilChanged((a, b) => GameEnums[a.game] === GameEnums[b.game]),
       withLatestFrom(this._auth.authToken$),
       concatMap(([{ game }, accessToken]) =>
-        this._service
-          .loadEnums(game, accessToken)
-          .pipe(map((enums) => loadEnumsSuccess({ game, enums })))
+        this._service.loadEnums(game, accessToken).pipe(
+          map((enums) => loadEnumsSuccess({ game, enums })),
+          catchError(() => of(loadEnumsError()))
+        )
       )
     )
   );
@@ -123,8 +127,12 @@ export class EnumsEffects {
   loadEnumsInfo$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnumsInfo),
-      switchMap(() => this._service.loadEnumsInfo()),
-      map((data) => loadEnumsInfoSuccess({ data }))
+      switchMap(() =>
+        this._service.loadEnumsInfo().pipe(
+          map((data) => loadEnumsInfoSuccess({ data })),
+          catchError(() => of(loadEnumsError()))
+        )
+      )
     )
   );
 

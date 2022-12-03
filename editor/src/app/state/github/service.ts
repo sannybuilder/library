@@ -1,13 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, timeout } from 'rxjs/operators';
+import type { components } from '@octokit/openapi-types';
+import { Observable } from 'rxjs';
 
 import { CONFIG, Config } from '../../config';
 import { Game } from '../../models';
-
-import type { components } from '@octokit/openapi-types';
-import { Observable } from 'rxjs';
 
 export type GetRepoContentResponseDataBlob = components['schemas']['blob'];
 export type GetRepoContentResponseDataDirectory =
@@ -28,6 +27,7 @@ export class GitHubService {
     return this._http
       .get<T>(Location.joinWithSlash(this._config.endpoints.base, fileName))
       .pipe(
+        timeout(3000),
         catchError(() => this.loadFileFromApi<T>(fileName, accessToken, game))
       );
   }
@@ -37,7 +37,6 @@ export class GitHubService {
     accessToken: string | undefined,
     game: Game
   ): Observable<T> {
-    const ts = Date.now().toString();
     const headers = accessToken
       ? new HttpHeaders({
           'Content-Type': 'application/json',
@@ -47,20 +46,17 @@ export class GitHubService {
     return this._http
       .get<GetRepoContentResponseDataDirectory>(
         Location.joinWithSlash(this._config.endpoints.contents, game),
-        {
-          headers,
-        }
+        { headers }
       )
       .pipe(
+        timeout(3000),
         switchMap((dir) => {
           const { git_url } = dir.find((file) => file.path === fileName) ?? {};
           if (!git_url) {
             throw new Error(`File ${fileName} not found in the repo`);
           }
           return this._http
-            .get<GetRepoContentResponseDataBlob>(git_url, {
-              headers,
-            })
+            .get<GetRepoContentResponseDataBlob>(git_url, { headers })
             .pipe(map((blob) => JSON.parse(atob(blob.content)) as T));
         }),
         catchError(() => this.loadFileFromAssets<T>(fileName))
@@ -69,9 +65,11 @@ export class GitHubService {
 
   loadFileFromAssets<T extends object>(fileName: string) {
     const ts = Date.now().toString();
-    return this._http.get<T>(Location.joinWithSlash('/assets', fileName), {
-      params: { ts },
-    });
+    return this._http
+      .get<T>(Location.joinWithSlash('/assets', fileName), {
+        params: { ts },
+      })
+      .pipe(timeout(3000));
   }
 
   loadMarkdown(fileName: string) {

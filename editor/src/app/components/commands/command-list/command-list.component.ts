@@ -24,6 +24,7 @@ export class CommandListComponent {
   @Output() descriptionClick = new EventEmitter();
 
   loading$ = this._extensions.loading$;
+  loadingError$ = this._extensions.loadingError$;
   currentPage$ = this._ui.currentPage$;
   rows$ = this._ui.rows$;
   rowsCount$ = this.rows$.pipe(map((rows) => rows?.length ?? 0));

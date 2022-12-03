@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
+  catchError,
   concatMap,
   distinctUntilChanged,
   map,
@@ -12,6 +13,7 @@ import {
 
 import {
   loadSnippets,
+  loadSnippetsError,
   loadSnippetsSuccess,
   updateGameSnippet,
   updateSnippet,
@@ -22,6 +24,7 @@ import { GameSnippets, GameSupportInfo } from '../../models';
 import { getSameCommands } from '../../utils';
 import { GameFacade } from '../game/facade';
 import { ExtensionsFacade } from '../extensions/facade';
+import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SnippetsEffects {
@@ -32,13 +35,12 @@ export class SnippetsEffects {
         (a, b) => GameSnippets[a.game] === GameSnippets[b.game]
       ),
       concatMap(({ game }) =>
-        this.service
-          .loadSnippets(game)
-          .pipe(
-            map((extensionSnippets) =>
-              loadSnippetsSuccess({ game, extensionSnippets })
-            )
-          )
+        this.service.loadSnippets(game).pipe(
+          map((extensionSnippets) =>
+            loadSnippetsSuccess({ game, extensionSnippets })
+          ),
+          catchError(() => of(loadSnippetsError()))
+        )
       )
     )
   );

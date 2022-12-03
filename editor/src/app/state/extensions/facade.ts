@@ -21,6 +21,7 @@ export class ExtensionsFacade {
   extensionNames$ = this.store$.select(selector.extensionNames);
   entities$ = this.store$.select(selector.entities);
   loading$ = this.store$.select(selector.loading);
+  loadingError$ = this.store$.select(selector.loadingError);
   lastUpdate$ = this.store$.select(selector.lastUpdate);
   version$ = this.store$.select(selector.version);
   supportInfo$ = this.store$.select(selector.supportInfo);

@@ -8,7 +8,9 @@ import { GitHubService } from '../github';
 export class SnippetsService {
   constructor(private _github: GitHubService) {}
 
-  loadSnippets(game: keyof typeof GameEditions): Observable<ExtensionSnippets> {
+  loadSnippets(
+    game: keyof typeof GameEditions
+  ): Observable<ExtensionSnippets> {
     return this._github.loadFileFromAssets(GameSnippets[game]);
   }
 }

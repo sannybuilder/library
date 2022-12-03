@@ -9,9 +9,9 @@ import {
   concatMap,
   map,
   take,
-  filter,
   distinctUntilChanged,
   first,
+  catchError,
 } from 'rxjs/operators';
 import { flatMap, groupBy, flatten } from 'lodash';
 
@@ -21,8 +21,10 @@ import {
   init,
   initSupportInfo,
   loadExtensions,
+  loadExtensionsError,
   loadExtensionsSuccess,
   loadSupportInfo,
+  loadSupportInfoError,
   updateCommands,
   updateGameCommands,
 } from './actions';
@@ -96,7 +98,8 @@ export class ExtensionsEffects {
             }
 
             return actions;
-          })
+          }),
+          catchError(() => of(loadExtensionsError({ game })))
         )
       )
     )
@@ -326,8 +329,12 @@ export class ExtensionsEffects {
   loadSupportInfo$ = createEffect(() =>
     this._actions$.pipe(
       ofType(init),
-      switchMap(() => this._service.loadSupportInfo()),
-      map((data) => loadSupportInfo({ data: unpackSupportInfo(data) }))
+      switchMap(() =>
+        this._service.loadSupportInfo().pipe(
+          map((data) => loadSupportInfo({ data: unpackSupportInfo(data) })),
+          catchError(() => of(loadSupportInfoError()))
+        )
+      )
     )
   );
 

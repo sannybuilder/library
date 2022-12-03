@@ -11,6 +11,7 @@ import {
 import {
   initSupportInfo,
   loadExtensions,
+  loadExtensionsError,
   loadExtensionsSuccess,
   loadSupportInfo,
   markCommandsToDelete,
@@ -23,6 +24,7 @@ import { getSupportInfo } from '../../utils/support-info';
 export interface GameState {
   extensions: Extension[];
   loading: boolean;
+  loadingError?: boolean;
   entities?: Record<string, Entity[]>;
   lastUpdate?: number;
   version?: string;
@@ -43,6 +45,7 @@ export const extensionsReducer = createReducer(
   on(loadExtensions, (state, { game }) =>
     updateState(state, game, {
       loading: true,
+      loadingError: false,
     })
   ),
   on(
@@ -56,9 +59,13 @@ export const extensionsReducer = createReducer(
         version,
         entities: getEntities(extensions, classes),
         loading: false,
+        loadingError: false,
         classesMeta: classes,
       });
     }
+  ),
+  on(loadExtensionsError, (state, { game }) =>
+    updateState(state, game, { loading: false, loadingError: true })
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(

@@ -15,6 +15,10 @@ export const loadSnippetsSuccess = createAction(
   }>()
 );
 
+export const loadSnippetsError = createAction(
+  '[snippets] load error'
+);
+
 export const updateSnippet = createAction(
   '[snippets] update',
   props<{ extension: string; command: Command; content: string }>()

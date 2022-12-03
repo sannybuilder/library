@@ -124,9 +124,20 @@ import { LibraryPageComponent } from './components/library-page/library-page.com
 import { KNOWN_LANGUAGES } from './models';
 import { DecisionTreeComponent } from './components/decision-tree/decision-tree.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { catchError, timeout } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+class CustomTranslateLoader extends TranslateHttpLoader {
+  getTranslation(lang: string) {
+    return super.getTranslation(lang).pipe(
+      timeout(3000),
+      catchError(() => of({}))
+    );
+  }
+}
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new CustomTranslateLoader(http);
 }
 
 export function loadTranslations(

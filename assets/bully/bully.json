@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1670624141006,
-    "version": "0.30",
+    "last_update": 1670805753960,
+    "version": "0.31",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -771,16 +771,16 @@
         {
           "output": [
             {
-              "name": "playerChar",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
           ],
           "name": "PlayerGetPedIndex",
           "num_params": 1,
-          "short_desc": "Returns char handle of the player",
+          "short_desc": "Returns the char handle for the player",
           "class": "Player",
-          "member": "GetPedHandle",
+          "member": "GetChar",
           "attrs": {
             "is_static": true
           }
@@ -3709,8 +3709,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedSetEffectedByGravity",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Sets whether or not the specified Ped is effected by gravity",
+          "class": "Char",
+          "member": "SetEffectedByGravity"
         },
         {
           "name": "PedActionControllerUpdate",

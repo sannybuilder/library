@@ -1,0 +1,1 @@
+This command adds the integer value to the player's current amount of money. A negative value subtracts the player's money.

@@ -117,24 +117,26 @@ export const changesReducer = createReducer(
 );
 
 function stripBody(extensions: Extension[]) {
-  return extensions.map((e) => ({
-    ...e,
-    commands: e.commands.map((c) => {
-      const isUnsupported = !!c.attrs?.is_unsupported;
-      return pickBy(
-        {
-          ...c,
-          id: c.id || null,
-          attrs: c.attrs ? smash(c.attrs) : c.attrs,
-          class: isUnsupported ? null : c.class,
-          member: isUnsupported ? null : c.member,
-          short_desc: isUnsupported ? null : c.short_desc,
-          input: isUnsupported ? null : c.input?.map(stripSourceAny),
-          output: isUnsupported ? null : c.output?.map(stripSourceAny),
-          num_params: isUnsupported ? 0 : c.num_params,
-        },
-        (x) => x !== null && (!Array.isArray(x) || x.length > 0)
-      );
-    }),
-  }));
+  return extensions
+    .map((e) => ({
+      ...e,
+      commands: e.commands.map((c) => {
+        const isUnsupported = !!c.attrs?.is_unsupported;
+        return pickBy(
+          {
+            ...c,
+            id: c.id || null,
+            attrs: c.attrs ? smash(c.attrs) : c.attrs,
+            class: isUnsupported ? null : c.class,
+            member: isUnsupported ? null : c.member,
+            short_desc: isUnsupported ? null : c.short_desc,
+            input: isUnsupported ? null : c.input?.map(stripSourceAny),
+            output: isUnsupported ? null : c.output?.map(stripSourceAny),
+            num_params: isUnsupported ? 0 : c.num_params,
+          },
+          (x) => x !== null && (!Array.isArray(x) || x.length > 0)
+        );
+      }),
+    }))
+    .filter((e) => e.commands.length > 0);
 }

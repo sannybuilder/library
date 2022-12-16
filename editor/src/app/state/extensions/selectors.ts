@@ -145,10 +145,25 @@ export const commandRelated = createSelector(
       },
       commands
     );
+    const methodVariations =
+      className && member
+        ? makeMethodVariations(
+            className,
+            member,
+            {
+              starters: [['Get', 'Set']],
+              endings: [
+                ['On', 'Off'],
+              ],
+            },
+            commands
+          )
+        : [];
     const key = doesGameRequireOpcode(props.game) ? 'id' : 'name';
-    return uniqBy([...referenced, ...overloads, ...variations], key).filter(
-      (c) => isSupported(c.attrs)
-    );
+    return uniqBy(
+      [...referenced, ...overloads, ...variations, ...methodVariations],
+      key
+    ).filter((c) => isSupported(c.attrs));
   }
 );
 
@@ -222,6 +237,48 @@ function makeVariations(
         const baseName = name.replace(/_[A-Z]+$/, '');
         e.filter((o) => !name.endsWith(o)).forEach((o) =>
           addVariant(baseName + o)
+        );
+      }
+    });
+  });
+
+  return variations;
+}
+
+function makeMethodVariations(
+  className: string,
+  method: string,
+  { starters, endings }: { starters: string[][]; endings: string[][] },
+  commands: Command[]
+) {
+  const variations: Command[] = [];
+  const addVariant = (className: string, method: string) => {
+    const v = commands.find(
+      (c) => c.class === className && c.member === method
+    );
+    if (v) {
+      variations.push(v);
+    }
+  };
+
+  starters.forEach((s) => {
+    s.forEach((prefix) => {
+      if (method.startsWith(prefix)) {
+        const baseName = method.replace(prefix, '');
+        s.filter((o) => !method.startsWith(o)).forEach((o) =>
+          addVariant(className, o + baseName)
+        );
+      }
+    });
+  });
+
+  endings.forEach((e) => {
+    e.forEach((suffix) => {
+      let pos = method.lastIndexOf(suffix);
+      if (pos >= 0) {
+        const baseName = method.substring(0, pos);
+        e.filter((o) => !method.endsWith(o)).forEach((o) =>
+          addVariant(className, baseName + o)
         );
       }
     });

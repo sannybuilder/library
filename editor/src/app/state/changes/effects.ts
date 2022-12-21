@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { from, of, zip } from 'rxjs';
 import {
@@ -7,6 +8,7 @@ import {
   tap,
   map,
   withLatestFrom,
+  catchError,
 } from 'rxjs/operators';
 import * as diff from 'diff';
 
@@ -103,7 +105,15 @@ export class ChangesEffects {
           withLatestFrom(this._facade.github$),
           switchMap(([files, github]) => {
             return from(github!.writeFiles(files)).pipe(
-              switchMap(() => [submitChangesSuccess(), reloadPage()])
+              switchMap(() => [submitChangesSuccess(), reloadPage()]),
+              catchError((e: HttpErrorResponse) => {
+                if (e?.status === 404) {
+                  alert(
+                    'Error: your account does not have write access to the library. Please contact the library maintainer to request access.'
+                  );
+                }
+                return of(submitChangesFail());
+              })
             );
           })
         );

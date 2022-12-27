@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1672157049582,
-    "version": "0.40",
+    "last_update": 1672159020676,
+    "version": "0.41",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -878,7 +878,7 @@
           "num_params": 1,
           "class": "Player",
           "member": "GetNumTimesBusted",
-          "short_desc": "Returns a number of times the player got busted",
+          "short_desc": "Returns a number of times the player got busted in the current game session",
           "attrs": {
             "is_static": true
           }
@@ -1253,8 +1253,44 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radarIcon",
+              "type": "int"
+            },
+            {
+              "name": "blipStyle",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
           "name": "BlipAddXYZ",
-          "num_params": 0
+          "num_params": 6,
+          "class": "Blip",
+          "member": "AddXyz",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "short_desc": "Adds a new blip at coordinates"
         },
         {
           "name": "BlipAddSave",
@@ -1265,12 +1301,33 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Blip"
+            }
+          ],
           "name": "BlipRemove",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Blip",
+          "member": "Remove",
+          "short_desc": "Removes the blip",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "BlipRemoveFromChar",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "RemoveBlip",
+          "short_desc": "Removes a blip from char"
         },
         {
           "name": "BlipAddArrow",
@@ -1281,12 +1338,76 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "radarIcon",
+              "type": "int"
+            },
+            {
+              "name": "blipStyle",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            },
+            {
+              "name": "_p5",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
           "name": "AddBlipForChar",
-          "num_params": 0
+          "num_params": 6,
+          "class": "Blip",
+          "member": "AddForChar",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "short_desc": "Adds a new blip for the char"
         },
         {
+          "input": [
+            {
+              "name": "car",
+              "type": "Car"
+            },
+            {
+              "name": "radarIcon",
+              "type": "int"
+            },
+            {
+              "name": "blipStyle",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
           "name": "AddBlipForCar",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Blip",
+          "member": "AddForCar",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "short_desc": "Adds a new blip for the vehicle"
         },
         {
           "name": "AddBlipForProp",
@@ -4079,8 +4200,23 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "target",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetTargetPed",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetTargetPed"
         },
         {
           "name": "PedIsUsingProp",

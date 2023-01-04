@@ -9,6 +9,7 @@ import {
   Version,
 } from '../models';
 import { commandParams, inputParams, isOpcode, outputParams } from './command';
+import { isValidIdentifier } from './enum-validation';
 import { HEX_NEGATION } from './hex';
 
 export const ATTRIBUTE_RULES: Partial<
@@ -150,4 +151,13 @@ export function doesVariadicCommandNotHaveArgumentsParameter(command: Command) {
     !!command.attrs?.is_variadic &&
     !commandParams(command).some((p) => p.type === PrimitiveType.arguments)
   );
+}
+
+
+export function doesCommandHaveAnInvalidClassName(command: Command) {
+  return !!command.class && !isValidIdentifier(command.class);
+}
+
+export function doesCommandHaveAnInvalidMethodName(command: Command) {
+  return !!command.member && !isValidIdentifier(command.member);
 }

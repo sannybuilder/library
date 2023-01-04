@@ -16,6 +16,8 @@ import {
   doesEnumHaveEmptyName,
   doesEnumHaveOneEmptyField,
   doesEnumNameConflict,
+  doesEnumHaveInvalidFieldName,
+  doesEnumHaveInvalidName,
   isEmptyEnum,
   isFieldNameDuplicate,
   isStringEnum,
@@ -28,7 +30,9 @@ type ErrorType =
   | 'emptyFieldName'
   | 'duplicateFieldName'
   | 'emptyEnum'
-  | 'nameConflict';
+  | 'nameConflict'
+  | 'invalidEnumName'
+  | 'invalidEnumFieldName';
 
 @Component({
   selector: 'scl-enum-editor',
@@ -75,6 +79,8 @@ export class EnumEditorComponent {
     emptyFieldName: false,
     emptyEnum: false,
     duplicateFieldName: false,
+    invalidEnumFieldName: false,
+    invalidEnumName: false,
     nameConflict: false,
   };
   errorMessages: string[] = [];
@@ -85,6 +91,8 @@ export class EnumEditorComponent {
     emptyEnumName: this.updateEmptyEnumNameError,
     emptyFieldName: this.updateEmptyFieldNameError,
     duplicateFieldName: this.updateDuplicateFieldNameError,
+    invalidEnumFieldName: this.updateInvalidEnumFieldNameError,
+    invalidEnumName: this.updateInvalidEnumNameError,
     emptyEnum: this.updateEmptyEnum,
     nameConflict: this.updateNameConflictError,
   };
@@ -217,6 +225,18 @@ export class EnumEditorComponent {
 
   private updateDuplicateFieldNameError() {
     this.errors.duplicateFieldName = doesEnumHaveDuplicateField(
+      this.enumToEdit
+    );
+  }
+
+  private updateInvalidEnumFieldNameError() {
+    this.errors.invalidEnumFieldName = doesEnumHaveInvalidFieldName(
+      this.enumToEdit
+    );
+  }
+
+  private updateInvalidEnumNameError() {
+    this.errors.invalidEnumName = doesEnumHaveInvalidName(
       this.enumToEdit
     );
   }

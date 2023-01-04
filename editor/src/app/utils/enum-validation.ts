@@ -16,3 +16,15 @@ export function doesEnumHaveDuplicateField(enumRaw: EnumRaw) {
 export function doesEnumNameConflict(enumName: string, names: string[]) {
   return names.includes(enumName);
 }
+
+export function doesEnumHaveInvalidName(enumRaw: EnumRaw) {
+  return !isValidIdentifier(enumRaw.name);
+}
+
+export function doesEnumHaveInvalidFieldName(enumRaw: EnumRaw) {
+  return enumRaw.fields.some(([name]) => !isValidIdentifier(name));
+}
+
+export function isValidIdentifier(str: string) {
+  return /^[a-z_$][a-z0-9_$]*$/i.test(str);
+}

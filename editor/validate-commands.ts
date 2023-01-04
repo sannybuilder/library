@@ -20,6 +20,8 @@ import {
   doesGameRequireOpcode,
   doesCommandHaveInvalidOpcode,
   doesCommandHaveOutOfRangeOpcode,
+  doesCommandHaveAnInvalidClassName,
+  doesCommandHaveAnInvalidMethodName,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -53,6 +55,8 @@ const errorHandlers = {
   no3rdPersonVerb: doesCommandDescriptionNotStartWith3rdPersonVerb,
   constructorNotReturningHandle: doesConstructorNotReturnHandle,
   variadicNotHavingArguments: doesVariadicCommandNotHaveArgumentsParameter,
+  invalidClassName: doesCommandHaveAnInvalidClassName,
+  invalidMethodName: doesCommandHaveAnInvalidMethodName
 };
 
 forEach(content.extensions, (extension) => {

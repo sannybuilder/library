@@ -57,6 +57,8 @@ import {
   normalizeId,
   doesCommandHaveInvalidOpcode,
   doesCommandHaveOutOfRangeOpcode,
+  doesCommandHaveAnInvalidClassName,
+  doesCommandHaveAnInvalidMethodName,
 } from '../../../utils';
 
 type ErrorType =
@@ -73,7 +75,9 @@ type ErrorType =
   | 'trailingPeriodInDescription'
   | 'no3rdPersonVerb'
   | 'constructorNotReturningHandle'
-  | 'variadicNotHavingArguments';
+  | 'variadicNotHavingArguments'
+  | 'invalidClassName'
+  | 'invalidMethodName'
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -119,6 +123,9 @@ export class CommandEditorComponent implements OnInit {
     no3rdPersonVerb: false,
     constructorNotReturningHandle: false,
     variadicNotHavingArguments: false,
+    invalidClassName: false,
+    invalidMethodName: false,
+
   };
   errorMessages: string[] = [];
 
@@ -235,6 +242,8 @@ export class CommandEditorComponent implements OnInit {
     no3rdPersonVerb: this.no3rdPersonVerbError,
     constructorNotReturningHandle: this.constructorNotReturningHandleError,
     variadicNotHavingArguments: this.variadicNotHavingArgumentsError,
+    invalidClassName: this.invalidClassNameError,
+    invalidMethodName: this.invalidMethodNameError,
   };
 
   isDirty: boolean;
@@ -725,5 +734,13 @@ export class CommandEditorComponent implements OnInit {
   private variadicNotHavingArgumentsError() {
     this.errors.variadicNotHavingArguments =
       doesVariadicCommandNotHaveArgumentsParameter(this.command);
+  }
+
+  private invalidClassNameError() {
+    this.errors.invalidClassName = doesCommandHaveAnInvalidClassName(this.command);
+  }
+
+  private invalidMethodNameError() {
+    this.errors.invalidMethodName = doesCommandHaveAnInvalidMethodName(this.command);
   }
 }

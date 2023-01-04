@@ -11,6 +11,8 @@ import {
   doesEnumHaveEmptyName,
   doesEnumHaveOneEmptyField,
   doesEnumNameConflict,
+  doesEnumHaveInvalidName,
+  doesEnumHaveInvalidFieldName,
   getEntities,
   isEmptyEnum,
 } from './src/app/utils';
@@ -40,6 +42,8 @@ const errorHandlers = {
   emptyEnumName: doesEnumHaveEmptyName,
   emptyFieldName: doesEnumHaveOneEmptyField,
   duplicateFieldName: doesEnumHaveDuplicateField,
+  invalidEnumName: doesEnumHaveInvalidName,
+  invalidEnumFieldName: doesEnumHaveInvalidFieldName,
   emptyEnum: isEmptyEnum,
 };
 

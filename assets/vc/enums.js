@@ -415,7 +415,7 @@ export const GarageType = {
   "CollectCars2": 9,
   "CollectCars3": 10,
   "ForCarToComeOutOf": 11,
-  "60Seconds": 12,
+  "_60Seconds": 12,
   "Crusher": 13,
   "MissionKeepCar": 14,
   "ForScriptToOpen": 15,

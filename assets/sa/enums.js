@@ -737,7 +737,7 @@ export const PickupType = {
   "PropertyForSale": 18,
   "MoneyDoesntdisappear": 19,
   "Snapshot": 20,
-  "2P": 21,
+  "SecondPlayer": 21,
   "OnceForMission": 22
 };
 export const EntityStatus = {

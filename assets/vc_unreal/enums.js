@@ -1042,3 +1042,17 @@ export const PadId = {
   "Pad1": 0,
   "Pad2": 1
 };
+export const ZoneKey = {
+  "EscobarInternational": "A_PORT",
+  "OceanBeach": "BEACH1",
+  "WashingtonBeach": "BEACH2",
+  "VicePoint": "BEACH3",
+  "Viceport": "DOCKS",
+  "Downtown": "DTOWN",
+  "LeafLinks": "GOLFC",
+  "LittleHaiti": "HAITI",
+  "LittleHavana": "HAVANA",
+  "JunkYard": "JUNKY",
+  "PrawnIsland": "PORNI",
+  "StarfishIsland": "STARI"
+};

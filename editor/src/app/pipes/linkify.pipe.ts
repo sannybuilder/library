@@ -66,7 +66,7 @@ export class LinkifyPipe implements PipeTransform {
         }
       });
 
-      const re = new RegExp(`\\b${needle}\\b`, 'i');
+      const re = new RegExp(`\\b${needle}\\b`, 'ig');
       return m.replace(re, `<span class="param-name">$&</span>`);
     }, linkedNames);
   }

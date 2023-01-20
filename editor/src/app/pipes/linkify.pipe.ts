@@ -3,12 +3,15 @@ import { Command, Extension, Game } from '../models';
 import { commandParams } from '../utils';
 import { words } from 'lodash';
 
+const reAscii = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+
 @Pipe({
   name: 'linkify',
 })
 export class LinkifyPipe implements PipeTransform {
   transform(command: Command | string, game: Game, extensions: Extension[]) {
-    const short_desc = typeof command === 'string' ? command : command.short_desc;
+    const short_desc =
+      typeof command === 'string' ? command : command.short_desc;
     if (!short_desc) {
       return '';
     }
@@ -54,7 +57,8 @@ export class LinkifyPipe implements PipeTransform {
     return commandParams(command).reduce((m, p) => {
       const { name } = p;
 
-      let needle = name === 'self' || !name ? p.type : words(name).join(' ');
+      let needle =
+        name === 'self' || !name ? p.type : words(name, reAscii).join(' ');
 
       aliases.forEach((alias) => {
         if (alias.includes(needle.toLowerCase())) {

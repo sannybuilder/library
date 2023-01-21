@@ -1,0 +1,1 @@
+This command sets Shoreside Vale as complete. There are no effects associated with this command. The original script called this command only once, after completion of "The Exchange". The status set with this command is saved in block 17 of the save file .

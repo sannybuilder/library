@@ -1,0 +1,1 @@
+This command adds to the "Pizza's Delivered" stat ( GXT key `ST_PIZZ`). The stat initially starts with a value of 0 and does not appear in the stats menu until its value is greater than 0. The parameter can be any integer value, including negative ones. The value set with this command is saved in block 19 of the save file .

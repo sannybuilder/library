@@ -1,0 +1,1 @@
+This command sets the visibility of the secondary rubbish as seen in command 03AD . In the PS2 version, the secondary rubbish used porn leaflets as the texture but the PC version uses the texture `newspaper02_64` from GTA III. This command was used only once in Vice City, after the mission "Dildo Dodo".

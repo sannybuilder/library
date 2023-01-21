@@ -1,0 +1,1 @@
+This command creates a single donkey magazine pickup. Only one can be created at a time; calling the command again removes the previous one. No object model appears and only the halo appears but collecting the pickup increases the number of donkey magazine pickups collected  by 1. This command was never called in the original script  of GTA III.

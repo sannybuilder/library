@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674533015884,
-    "version": "0.51",
+    "last_update": 1674581547518,
+    "version": "0.52",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -4570,12 +4570,14 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
           "name": "CLEAR_OBJECT_LAST_DAMAGE_ENTITY",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Object",
+          "member": "ClearLastDamageEntity"
         },
         {
           "name": "CLEAR_OBJECT_LAST_WEAPON_DAMAGE",
@@ -5015,18 +5017,18 @@
           "num_params": 5
         },
         {
-          "name": "CONNECT_LODS",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Object"
             },
             {
-              "name": "obj1",
+              "name": "lod",
               "type": "Object"
             }
           ],
+          "name": "CONNECT_LODS",
+          "num_params": 2,
           "class": "Object",
           "member": "ConnectLods",
           "short_desc": "Sets which LOD object should show when the object is being viewed from far away"
@@ -7678,7 +7680,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
@@ -7705,7 +7707,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
@@ -7713,7 +7715,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "DoesHavePhysics"
         },
         {
           "name": "DOES_OBJECT_HAVE_THIS_MODEL",
@@ -8882,18 +8886,18 @@
           ]
         },
         {
-          "name": "ENABLE_DISABLED_ATTRACTORS_ON_OBJECT",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Object"
             },
             {
-              "name": "enable",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "ENABLE_DISABLED_ATTRACTORS_ON_OBJECT",
+          "num_params": 2,
           "class": "Object",
           "member": "EnableDisabledAttractors",
           "short_desc": "Sets whether the object attracts spawned peds to interact with it"
@@ -10152,18 +10156,20 @@
           "short_desc": "Sets whether the object's position remains unchanged"
         },
         {
-          "name": "FREEZE_OBJECT_POSITION_AND_DONT_LOAD_COLLISION",
-          "num_params": 2,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "freeze",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "FREEZE_OBJECT_POSITION_AND_DONT_LOAD_COLLISION",
+          "num_params": 2,
+          "class": "Object",
+          "member": "FreezePositionAndDontLoadCollision"
         },
         {
           "name": "FREEZE_ONSCREEN_TIMER",
@@ -12427,8 +12433,6 @@
           }
         },
         {
-          "name": "GET_CLOSEST_STEALABLE_OBJECT",
-          "num_params": 5,
           "input": [
             {
               "name": "x",
@@ -12449,11 +12453,13 @@
           ],
           "output": [
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object",
               "source": "var_any"
             }
           ],
+          "name": "GET_CLOSEST_STEALABLE_OBJECT",
+          "num_params": 5,
           "class": "World",
           "member": "GetClosestStealableObject",
           "short_desc": "Gets the closest object which can be stolen for burglary missions",
@@ -15785,15 +15791,15 @@
               "type": "Object"
             }
           ],
-          "name": "GET_OBJECT_HEADING",
-          "num_params": 2,
           "output": [
             {
-              "name": "pHeading",
+              "name": "heading",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_OBJECT_HEADING",
+          "num_params": 2,
           "class": "Object",
           "member": "GetHeading",
           "short_desc": "Returns the object's heading (z-angle)"
@@ -15805,15 +15811,15 @@
               "type": "Object"
             }
           ],
-          "name": "GET_OBJECT_HEALTH",
-          "num_params": 2,
           "output": [
             {
-              "name": "pHealth",
+              "name": "health",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_OBJECT_HEALTH",
+          "num_params": 2,
           "class": "Object",
           "member": "GetHealth",
           "short_desc": ""
@@ -15845,15 +15851,15 @@
               "type": "Object"
             }
           ],
-          "name": "GET_OBJECT_MODEL",
-          "num_params": 2,
           "output": [
             {
-              "name": "pModel",
+              "name": "model",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_OBJECT_MODEL",
+          "num_params": 2,
           "class": "Object",
           "member": "GetModel",
           "short_desc": "Returns the object's model index"
@@ -15877,8 +15883,6 @@
           "short_desc": "Returns the object the specified ped is holding"
         },
         {
-          "name": "GET_OBJECT_QUATERNION",
-          "num_params": 5,
           "input": [
             {
               "name": "self",
@@ -15887,26 +15891,28 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "_p5",
+              "name": "w",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_OBJECT_QUATERNION",
+          "num_params": 5,
           "class": "Object",
           "member": "GetQuaternion",
           "short_desc": "Gets the object's quaternion"
@@ -15948,22 +15954,20 @@
               "type": "Object"
             }
           ],
-          "name": "GET_OBJECT_SPEED",
-          "num_params": 2,
           "output": [
             {
-              "name": "pSpeed",
+              "name": "speed",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_OBJECT_SPEED",
+          "num_params": 2,
           "class": "Object",
           "member": "GetSpeed",
           "short_desc": "Gets the speed of the object"
         },
         {
-          "name": "GET_OBJECT_TURN_MASS",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
@@ -15972,11 +15976,13 @@
           ],
           "output": [
             {
-              "name": "turnmass",
+              "name": "turnMass",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_OBJECT_TURN_MASS",
+          "num_params": 2,
           "class": "Object",
           "member": "GetTurnMass",
           "short_desc": "Returns the object's turn mass"
@@ -19650,7 +19656,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -19662,16 +19668,18 @@
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "HasBeenDamagedByCar"
         },
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             }
           ],
@@ -19679,7 +19687,9 @@
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "HasBeenDamagedByChar"
         },
         {
           "name": "HAS_OBJECT_BEEN_DAMAGED_BY_WEAPON",
@@ -22143,7 +22153,7 @@
               "type": "Char"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
@@ -22163,7 +22173,7 @@
               "type": "Char"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
@@ -23232,7 +23242,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
@@ -23240,7 +23250,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "IsOnFire"
         },
         {
           "name": "IS_OBJECT_ON_PLAYER_MACHINE",
@@ -23304,26 +23316,28 @@
           "short_desc": "Returns true if the object is not moving"
         },
         {
-          "name": "IS_OBJECT_TOUCHING_OBJECT",
-          "num_params": 2,
           "input": [
             {
-              "name": "obj0",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "obj1",
+              "name": "object",
               "type": "Object"
             }
           ],
+          "name": "IS_OBJECT_TOUCHING_OBJECT",
+          "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "IsTouchingObject"
         },
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -23335,7 +23349,9 @@
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "IsUpright"
         },
         {
           "input": [
@@ -24034,7 +24050,7 @@
               "type": "Player"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
@@ -24824,19 +24840,19 @@
           "num_params": 0
         },
         {
-          "name": "IS_VEHICLE_TOUCHING_OBJECT",
-          "num_params": 2,
-          "short_desc": "Returns true if the vehicle is in contact with the object",
           "input": [
             {
               "name": "self",
               "type": "Car"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
+          "name": "IS_VEHICLE_TOUCHING_OBJECT",
+          "num_params": 2,
+          "short_desc": "Returns true if the vehicle is in contact with the object",
           "attrs": {
             "is_condition": true
           },
@@ -26380,16 +26396,18 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "targettable",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "MAKE_OBJECT_TARGETTABLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Object",
+          "member": "MakeTargettable"
         },
         {
           "name": "MAKE_PLAYER_FIRE_PROOF",
@@ -37089,7 +37107,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -37099,7 +37117,9 @@
           ],
           "name": "SET_OBJECT_ALPHA",
           "num_params": 2,
-          "short_desc": "Sets object's alpha. 0 is fully invisible, 255 is fully visible"
+          "short_desc": "Sets object's alpha. 0 is fully invisible, 255 is fully visible",
+          "class": "Object",
+          "member": "SetAlpha"
         },
         {
           "input": [
@@ -37174,7 +37194,7 @@
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -37185,18 +37205,20 @@
           "member": "SetAsStealable"
         },
         {
-          "name": "SET_OBJECT_CCD",
-          "num_params": 2,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_OBJECT_CCD",
+          "num_params": 2,
+          "class": "Object",
+          "member": "SetCcd"
         },
         {
           "input": [
@@ -37205,7 +37227,7 @@
               "type": "Object"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -37241,18 +37263,18 @@
           "short_desc": "Puts the object at the specified location"
         },
         {
-          "name": "SET_OBJECT_DRAW_LAST",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_OBJECT_DRAW_LAST",
+          "num_params": 2,
           "class": "Object",
           "member": "SetDrawLast",
           "short_desc": "Sets the specified object to always draw on top of other objects"
@@ -37285,7 +37307,7 @@
               "type": "Object"
             },
             {
-              "name": "value",
+              "name": "heading",
               "type": "float"
             }
           ],
@@ -37313,11 +37335,9 @@
           "short_desc": ""
         },
         {
-          "name": "SET_OBJECT_INITIAL_ROTATION_VELOCITY",
-          "num_params": 4,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -37332,12 +37352,16 @@
               "name": "z",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_OBJECT_INITIAL_ROTATION_VELOCITY",
+          "num_params": 4,
+          "class": "Object",
+          "member": "SetInitialRotationVelocity"
         },
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -37354,36 +37378,42 @@
             }
           ],
           "name": "SET_OBJECT_INITIAL_VELOCITY",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Object",
+          "member": "SetInitialVelocity"
         },
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_OBJECT_INVINCIBLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Object",
+          "member": "SetInvincible"
         },
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "lights",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_OBJECT_LIGHTS",
           "num_params": 2,
-          "short_desc": "Sets the light of the object"
+          "short_desc": "Sets the light of the object",
+          "class": "Object",
+          "member": "SetLights"
         },
         {
           "input": [
@@ -37492,19 +37522,19 @@
               "type": "Object"
             },
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "w",
               "type": "float"
             }
           ],
@@ -37532,18 +37562,18 @@
           "member": "SetRecordsCollisions"
         },
         {
-          "name": "SET_OBJECT_RENDER_SCORCHED",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_OBJECT_RENDER_SCORCHED",
+          "num_params": 2,
           "class": "Object",
           "member": "SetRenderScorched",
           "short_desc": "Makes the object look like it has been burnt"
@@ -37597,16 +37627,18 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_OBJECT_USED_IN_POOL_GAME",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Object",
+          "member": "SetUsedInPoolGame"
         },
         {
           "input": [
@@ -37615,7 +37647,7 @@
               "type": "Object"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -43724,11 +43756,11 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -48192,18 +48224,18 @@
           "num_params": 2
         },
         {
-          "name": "WINCH_CAN_PICK_OBJECT_UP",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Object"
             },
             {
-              "name": "can",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "WINCH_CAN_PICK_OBJECT_UP",
+          "num_params": 2,
           "class": "Object",
           "member": "WinchCanPickUp",
           "short_desc": "Sets whether the object can be picked up with the magnocrane"

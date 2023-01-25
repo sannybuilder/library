@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674673395196,
-    "version": "0.56",
+    "last_update": 1674674825204,
+    "version": "0.57",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -76,21 +76,26 @@
           }
         },
         {
-          "name": "ACOS",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
+              "name": "number",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "value",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "ACOS",
+          "num_params": 2,
+          "class": "Math",
+          "member": "Acos",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -2268,19 +2273,24 @@
         {
           "input": [
             {
-              "name": "value",
+              "name": "number",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "value",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "ASIN",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Math",
+          "member": "Asin",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -11764,16 +11774,16 @@
               "type": "Char"
             }
           ],
-          "name": "GET_CHAR_HEIGHT_ABOVE_GROUND",
-          "num_params": 2,
-          "short_desc": "Returns the actor's distance from ground",
           "output": [
             {
-              "name": "pValue",
+              "name": "height",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CHAR_HEIGHT_ABOVE_GROUND",
+          "num_params": 2,
+          "short_desc": "Returns the actor's distance from ground",
           "class": "Char",
           "member": "GetHeightAboveGround"
         },
@@ -13624,12 +13634,10 @@
           }
         },
         {
-          "name": "GET_GROUP_FORMATION",
-          "num_params": 2,
           "input": [
             {
-              "name": "group",
-              "type": "int"
+              "name": "self",
+              "type": "Group"
             }
           ],
           "output": [
@@ -13638,15 +13646,17 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_GROUP_FORMATION",
+          "num_params": 2,
+          "class": "Group",
+          "member": "GetFormation"
         },
         {
-          "name": "GET_GROUP_FORMATION_SPACING",
-          "num_params": 2,
           "input": [
             {
-              "name": "group",
-              "type": "int"
+              "name": "self",
+              "type": "Group"
             }
           ],
           "output": [
@@ -13655,24 +13665,30 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_GROUP_FORMATION_SPACING",
+          "num_params": 2,
+          "class": "Group",
+          "member": "GetFormationSpacing"
         },
         {
           "input": [
             {
-              "name": "group",
+              "name": "self",
               "type": "Group"
+            }
+          ],
+          "output": [
+            {
+              "name": "char",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "name": "GET_GROUP_LEADER",
           "num_params": 2,
-          "output": [
-            {
-              "name": "pPed",
-              "type": "Char",
-              "source": "var_any"
-            }
-          ]
+          "class": "Group",
+          "member": "GetLeader"
         },
         {
           "input": [
@@ -15244,25 +15260,27 @@
           }
         },
         {
-          "name": "GET_NTH_GROUP_MEMBER",
-          "num_params": 3,
           "input": [
             {
-              "name": "group",
-              "type": "int"
+              "name": "self",
+              "type": "Group"
             },
             {
-              "name": "n",
+              "name": "nth",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_NTH_GROUP_MEMBER",
+          "num_params": 3,
+          "class": "Group",
+          "member": "GetNthMember"
         },
         {
           "input": [
@@ -16389,19 +16407,21 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "groupIndex",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "name": "GET_PED_GROUP_INDEX",
           "num_params": 2,
-          "output": [
-            {
-              "name": "pIndex",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetGroupIndex"
         },
         {
           "name": "GET_PED_MODEL_FROM_INDEX",
@@ -23606,7 +23626,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -23614,7 +23634,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsInGroup"
         },
         {
           "input": [
@@ -34634,17 +34656,19 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_WILL_MOVE_WHEN_INJURED",
           "num_params": 2,
-          "short_desc": "Determines if an injured ped will move in agony. Ped is injured if they are on the ground after being shot, but have not died yet"
+          "short_desc": "Determines if an injured ped will move in agony. Ped is injured if they are on the ground after being shot, but have not died yet",
+          "class": "Char",
+          "member": "SetWillMoveWhenInjured"
         },
         {
           "input": [
@@ -35762,15 +35786,20 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "SET_GRAVITY_OFF",
           "num_params": 1,
           "short_desc": "Turns off gravity. Vehicles are not affected by this. Once objects leave the ground, they can float away",
-          "input": [
-            {
-              "name": "set",
-              "type": "bool"
-            }
-          ]
+          "class": "Game",
+          "member": "SetGravityOff",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -35862,7 +35891,7 @@
         {
           "input": [
             {
-              "name": "group",
+              "name": "self",
               "type": "Group"
             },
             {
@@ -35872,22 +35901,26 @@
           ],
           "name": "SET_GROUP_FORMATION",
           "num_params": 2,
-          "short_desc": "Sets the the group formation to the type specified"
+          "short_desc": "Sets the the group formation to the type specified",
+          "class": "Group",
+          "member": "SetFormation"
         },
         {
           "input": [
             {
-              "name": "group",
+              "name": "self",
               "type": "Group"
             },
             {
-              "name": "space",
+              "name": "spacing",
               "type": "float"
             }
           ],
           "name": "SET_GROUP_FORMATION_SPACING",
           "num_params": 2,
-          "short_desc": "Sets the spacing, in meters, for the npc members of a group"
+          "short_desc": "Sets the spacing, in meters, for the npc members of a group",
+          "class": "Group",
+          "member": "SetFormationSpacing"
         },
         {
           "input": [
@@ -39722,7 +39755,7 @@
         {
           "input": [
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -43866,7 +43899,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -43876,7 +43909,12 @@
           ],
           "name": "TASK_COMBAT_HATED_TARGETS_AROUND_CHAR",
           "num_params": 2,
-          "short_desc": "Makes the character attack any enemies to it, or to the group it is in, who are within the radius of the char. character will continue to follow group leader, though will move slower while firing"
+          "short_desc": "Makes the character attack any enemies to it, or to the group it is in, who are within the radius of the char. character will continue to follow group leader, though will move slower while firing",
+          "class": "Task",
+          "member": "CombatHatedTargetsAroundChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -45274,14 +45312,19 @@
           "num_params": 3
         },
         {
-          "name": "TASK_LEAVE_GROUP",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             }
-          ]
+          ],
+          "name": "TASK_LEAVE_GROUP",
+          "num_params": 1,
+          "class": "Task",
+          "member": "LeaveGroup",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TASK_LOOK_ABOUT",

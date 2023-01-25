@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674677972581,
-    "version": "0.59",
+    "last_update": 1674680587320,
+    "version": "0.60",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -33436,18 +33436,18 @@
           "short_desc": "Makes a character bleed"
         },
         {
-          "name": "SET_CHAR_BULLETPROOF_VEST",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_CHAR_BULLETPROOF_VEST",
+          "num_params": 2,
           "class": "Char",
           "member": "SetBulletproofVest",
           "short_desc": "Specifies that the character should only use upper-body damage animations, meaning they can still run if shot in the legs etc"
@@ -33476,7 +33476,7 @@
               "type": "Char"
             },
             {
-              "name": "enabled",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -33489,16 +33489,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_CAN_SMASH_GLASS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetCanSmashGlass"
         },
         {
           "input": [
@@ -33520,16 +33522,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "rate",
+              "name": "animRate",
               "type": "float"
             }
           ],
           "name": "SET_CHAR_CLIMB_ANIM_RATE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetClimbAnimRate"
         },
         {
           "input": [
@@ -33551,7 +33555,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33568,7 +33572,9 @@
             }
           ],
           "name": "SET_CHAR_COMPONENT_VARIATION",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetComponentVariation"
         },
         {
           "input": [
@@ -33673,16 +33679,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "visble",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_CURRENT_WEAPON_VISIBLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetCurrentWeaponVisible"
         },
         {
           "input": [
@@ -33704,22 +33712,26 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "SET_CHAR_DECISION_MAKER_TO_DEFAULT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "SetDecisionMakerToDefault"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "SET_CHAR_DEFAULT_COMPONENT_VARIATION",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "SetDefaultComponentVariation"
         },
         {
           "name": "SET_CHAR_DEFENSIVE_AREA_ATTACHED_TO_CAR",
@@ -33774,30 +33786,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "heading",
+              "name": "desiredHeading",
               "type": "float"
             }
           ],
           "name": "SET_CHAR_DESIRED_HEADING",
-          "num_params": 2
-        },
-        {
-          "input": [
-            {
-              "name": "ped",
-              "type": "Char"
-            },
-            {
-              "name": "allow",
-              "type": "bool"
-            }
-          ],
-          "name": "SET_CHAR_DIES_INSTANTLY_IN_WATER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetDesiredHeading"
         },
         {
           "input": [
@@ -33806,7 +33806,23 @@
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
+              "type": "bool"
+            }
+          ],
+          "name": "SET_CHAR_DIES_INSTANTLY_IN_WATER",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetDiesInstantlyInWater"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -33819,16 +33835,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_DROWNS_IN_SINKING_VEHICLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetDrownsInSinkingVehicle"
         },
         {
           "input": [
@@ -33854,7 +33872,7 @@
               "type": "Char"
             },
             {
-              "name": "drugged",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -33867,35 +33885,39 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_DUCKING",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetDucking"
         },
         {
-          "name": "SET_CHAR_DUCKING_TIMED",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "timed",
+              "name": "time",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_CHAR_DUCKING_TIMED",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetDuckingTimed"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33905,7 +33927,9 @@
           ],
           "name": "SET_CHAR_FIRE_DAMAGE_MULTIPLIER",
           "num_params": 2,
-          "short_desc": "Does nothing"
+          "short_desc": "Does nothing",
+          "class": "Char",
+          "member": "SetFireDamageMultiplier"
         },
         {
           "input": [
@@ -33914,7 +33938,7 @@
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -33927,7 +33951,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33936,7 +33960,9 @@
             }
           ],
           "name": "SET_CHAR_GESTURE_GROUP",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetGestureGroup"
         },
         {
           "input": [
@@ -33958,16 +33984,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "gravity",
               "type": "float"
             }
           ],
           "name": "SET_CHAR_GRAVITY",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetGravity"
         },
         {
           "name": "SET_CHAR_HAS_BEEN_CREATED_IN_INTERIOR",
@@ -34013,31 +34041,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_IN_CUTSCENE",
-          "num_params": 2
-        },
-        {
-          "input": [
-            {
-              "name": "ped",
-              "type": "Char"
-            },
-            {
-              "name": "enable",
-              "type": "bool"
-            }
-          ],
-          "name": "SET_CHAR_INVINCIBLE",
           "num_params": 2,
-          "short_desc": "Sets the character to invincible, if set to true"
+          "class": "Char",
+          "member": "SetInCutscene"
         },
         {
           "input": [
@@ -34046,7 +34061,24 @@
               "type": "Char"
             },
             {
-              "name": "enable",
+              "name": "state",
+              "type": "bool"
+            }
+          ],
+          "name": "SET_CHAR_INVINCIBLE",
+          "num_params": 2,
+          "short_desc": "Sets the character to invincible, if set to true",
+          "class": "Char",
+          "member": "SetInvincible"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -34093,7 +34125,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34102,12 +34134,14 @@
             }
           ],
           "name": "SET_CHAR_MAX_TIME_IN_WATER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMaxTimeInWater"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34116,49 +34150,57 @@
             }
           ],
           "name": "SET_CHAR_MAX_TIME_UNDERWATER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMaxTimeUnderwater"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_MELEE_ACTION_FLAG0",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMeleeActionFlag0"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_MELEE_ACTION_FLAG1",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMeleeActionFlag1"
         },
         {
-          "name": "SET_CHAR_MELEE_ACTION_FLAG2",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CHAR_MELEE_ACTION_FLAG2",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMeleeActionFlag2"
         },
         {
           "input": [
@@ -34201,7 +34243,7 @@
               "type": "Char"
             },
             {
-              "name": "amount",
+              "name": "money",
               "type": "int"
             }
           ],
@@ -34214,7 +34256,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34223,7 +34265,9 @@
             }
           ],
           "name": "SET_CHAR_MOVE_ANIM_SPEED_MULTIPLIER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMoveAnimSpeedMultiplier"
         },
         {
           "name": "SET_CHAR_NAME_DEBUG",
@@ -34252,16 +34296,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_NEVER_TARGETTED",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetNeverTargetted"
         },
         {
           "input": [
@@ -34369,57 +34415,65 @@
           "short_desc": "Sets a ped's prop (hats, glasses, etc) variation, similar to component variations"
         },
         {
-          "name": "SET_CHAR_PROVIDE_COVERING_FIRE",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CHAR_PROVIDE_COVERING_FIRE",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetProvideCoveringFire"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "SET_CHAR_RANDOM_COMPONENT_VARIATION",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "SetRandomComponentVariation"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_READY_TO_BE_EXECUTED",
           "num_params": 2,
-          "short_desc": "Makes \"crosshair\" flash when you targeting this ped (in parameter 1) with pistol"
+          "short_desc": "Makes \"crosshair\" flash when you targeting this ped (in parameter 1) with pistol",
+          "class": "Char",
+          "member": "SetReadyToBeExecuted"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_READY_TO_BE_STUNNED",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetReadyToBeStunned"
         },
         {
           "input": [
@@ -34579,30 +34633,32 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_USES_DEAFULT_ANIM_GROUP_WHEN_FLEEING",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetUsesDeafultAnimGroupWhenFleeing"
         },
         {
-          "name": "SET_CHAR_USES_UPPERBODY_DAMAGE_ANIMS_ONLY",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_CHAR_USES_UPPERBODY_DAMAGE_ANIMS_ONLY",
+          "num_params": 2,
           "class": "Char",
           "member": "SetUsesUpperbodyDamageAnimsOnly",
           "short_desc": ""
@@ -34667,18 +34723,20 @@
           "short_desc": "Sets whether police should chase the character"
         },
         {
-          "name": "SET_CHAR_WATCH_MELEE",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CHAR_WATCH_MELEE",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWatchMelee"
         },
         {
           "input": [
@@ -34703,30 +34761,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_WILL_COWER_INSTEAD_OF_FLEEING",
-          "num_params": 2
-        },
-        {
-          "input": [
-            {
-              "name": "ped",
-              "type": "Char"
-            },
-            {
-              "name": "value",
-              "type": "bool"
-            }
-          ],
-          "name": "SET_CHAR_WILL_DO_DRIVEBYS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillCowerInsteadOfFleeing"
         },
         {
           "input": [
@@ -34735,7 +34781,23 @@
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
+              "type": "bool"
+            }
+          ],
+          "name": "SET_CHAR_WILL_DO_DRIVEBYS",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillDoDrivebys"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -34747,16 +34809,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_WILL_LEAVE_CAR_IN_COMBAT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillLeaveCarInCombat"
         },
         {
           "input": [
@@ -34778,58 +34842,66 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_WILL_ONLY_FIRE_WITH_CLEAR_LOS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillOnlyFireWithClearLos"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_WILL_REMAIN_ON_BOAT_AFTER_MISSION_ENDS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillRemainOnBoatAfterMissionEnds"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_WILL_USE_CARS_IN_COMBAT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillUseCarsInCombat"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_WILL_USE_COVER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillUseCover"
         },
         {
           "input": [
@@ -36451,7 +36523,7 @@
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -38324,12 +38396,17 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PICKUPS_FIX_CARS",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetPickupsFixCars",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_PLANE_THROTTLE",
@@ -38416,12 +38493,17 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PLAYER_CAN_DROP_WEAPONS_IN_CAR",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetPlayerCanDropWeaponsInCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -44024,7 +44106,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -44037,7 +44119,12 @@
             }
           ],
           "name": "TASK_COMBAT_HATED_TARGETS_AROUND_CHAR_TIMED",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Task",
+          "member": "CombatHatedTargetsAroundCharTimed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47373,14 +47460,16 @@
           "short_desc": "Converts the integer value to a floating-point number"
         },
         {
-          "name": "TOGGLE_CHAR_DUCKING",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
-          ]
+          ],
+          "name": "TOGGLE_CHAR_DUCKING",
+          "num_params": 1,
+          "class": "Char",
+          "member": "ToggleDucking"
         },
         {
           "name": "TOGGLE_TOPLEVEL_SPRITE",
@@ -47959,14 +48048,16 @@
           "num_params": 0
         },
         {
-          "name": "UNSET_CHAR_MELEE_MOVEMENT_CONSTAINT_BOX",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
-          ]
+          ],
+          "name": "UNSET_CHAR_MELEE_MOVEMENT_CONSTAINT_BOX",
+          "num_params": 1,
+          "class": "Char",
+          "member": "UnsetMeleeMovementConstaintBox"
         },
         {
           "name": "UPDATE_LOAD_SCENE",
@@ -48311,7 +48402,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -48319,12 +48410,14 @@
               "type": "Car"
             },
             {
-              "name": "seatIndex",
+              "name": "seatId",
               "type": "int"
             }
           ],
           "name": "WARP_CHAR_FROM_CAR_TO_CAR",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Char",
+          "member": "WarpFromCarToCar"
         },
         {
           "input": [
@@ -48379,7 +48472,7 @@
               "type": "Car"
             },
             {
-              "name": "seatIndex",
+              "name": "seatId",
               "type": "int"
             }
           ],
@@ -49453,24 +49546,24 @@
           ]
         },
         {
-          "name": "GET_CHAR_ALLOWED_TO_RUN_ON_BOATS",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
+          "name": "GET_CHAR_ALLOWED_TO_RUN_ON_BOATS",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetAllowedToRunOnBoats"
         },
         {
-          "name": "GET_CHAR_ANIM_BLEND_AMOUNT",
-          "num_params": 4,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -49488,76 +49581,90 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_ANIM_BLEND_AMOUNT",
+          "num_params": 4,
+          "class": "Char",
+          "member": "GetAnimBlendAmount"
         },
         {
-          "name": "GET_CHAR_MAX_MOVE_BLEND_RATIO",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "blendRatio",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_MAX_MOVE_BLEND_RATIO",
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetMaxMoveBlendRatio"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "GET_CHAR_MOVEMENT_ANIMS_BLOCKED",
           "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
+          "member": "GetMovementAnimsBlocked"
+        },
+        {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
-          "attrs": {
-            "is_condition": true
-          }
-        },
-        {
           "name": "GET_CHAR_WALK_ALONGSIDE_LEADER_WHEN_APPROPRIATE",
           "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
+          "member": "GetWalkAlongsideLeaderWhenAppropriate"
+        },
+        {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
-          "attrs": {
-            "is_condition": true
-          }
-        },
-        {
           "name": "GET_CHAR_WILL_TRY_TO_LEAVE_BOAT_AFTER_LEADER",
           "num_params": 1,
-          "input": [
-            {
-              "name": "ped",
-              "type": "Char"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetWillTryToLeaveBoatAfterLeader"
         },
         {
-          "name": "GET_CHAR_WILL_TRY_TO_LEAVE_WATER",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
+          "name": "GET_CHAR_WILL_TRY_TO_LEAVE_WATER",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetWillTryToLeaveWater"
         },
         {
           "name": "GET_CURRENT_STACK_SIZE",
@@ -50638,25 +50745,25 @@
           ]
         },
         {
-          "name": "SET_CHAR_ALLOWED_TO_RUN_ON_BOATS",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CHAR_ALLOWED_TO_RUN_ON_BOATS",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetAllowedToRunOnBoats"
         },
         {
-          "name": "SET_CHAR_ANIM_BLEND_OUT_DELTA",
-          "num_params": 4,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -50671,14 +50778,16 @@
               "name": "delta",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CHAR_ANIM_BLEND_OUT_DELTA",
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetAnimBlendOutDelta"
         },
         {
-          "name": "SET_CHAR_COORDINATES_DONT_CLEAR_PLAYER_TASKS",
-          "num_params": 4,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -50693,42 +50802,48 @@
               "name": "z",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CHAR_COORDINATES_DONT_CLEAR_PLAYER_TASKS",
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetCoordinatesDontClearPlayerTasks"
         },
         {
-          "name": "SET_CHAR_MAX_MOVE_BLEND_RATIO",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
               "name": "ratio",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CHAR_MAX_MOVE_BLEND_RATIO",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMaxMoveBlendRatio"
         },
         {
-          "name": "SET_CHAR_MOVEMENT_ANIMS_BLOCKED",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CHAR_MOVEMENT_ANIMS_BLOCKED",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMovementAnimsBlocked"
         },
         {
-          "name": "SET_CHAR_PROP_INDEX_TEXTURE",
-          "num_params": 4,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -50743,49 +50858,59 @@
               "name": "_p4",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_CHAR_PROP_INDEX_TEXTURE",
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetPropIndexTexture"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "SET_CHAR_WALK_ALONGSIDE_LEADER_WHEN_APPROPRIATE",
           "num_params": 2,
+          "class": "Char",
+          "member": "SetWalkAlongsideLeaderWhenAppropriate"
+        },
+        {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
-        },
-        {
+          ],
           "name": "SET_CHAR_WILL_TRY_TO_LEAVE_BOAT_AFTER_LEADER",
           "num_params": 2,
-          "input": [
-            {
-              "name": "ped",
-              "type": "Char"
-            },
-            {
-              "name": "set",
-              "type": "bool"
-            }
-          ]
+          "class": "Char",
+          "member": "SetWillTryToLeaveBoatAfterLeader"
         },
         {
-          "name": "SET_CHAR_WILL_TRY_TO_LEAVE_WATER",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CHAR_WILL_TRY_TO_LEAVE_WATER",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWillTryToLeaveWater"
         },
         {
           "name": "SET_DANCE_SHAKE_ACTIVE_THIS_UPDATE",

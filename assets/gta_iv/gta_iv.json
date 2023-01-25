@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674675968866,
-    "version": "0.58",
+    "last_update": 1674677972581,
+    "version": "0.59",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -4407,12 +4407,14 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "CLEAR_CHAR_LAST_DAMAGE_BONE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "ClearLastDamageBone"
         },
         {
           "input": [
@@ -4443,16 +4445,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "CLEAR_CHAR_PROP",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "ClearProp"
         },
         {
           "input": [
@@ -4478,12 +4482,14 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "CLEAR_CHAR_SECONDARY_TASK",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "ClearSecondaryTask"
         },
         {
           "input": [
@@ -6350,15 +6356,21 @@
               "type": "float"
             }
           ],
-          "name": "CREATE_RANDOM_FEMALE_CHAR",
-          "num_params": 4,
           "output": [
             {
-              "name": "pPed",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_RANDOM_FEMALE_CHAR",
+          "num_params": 4,
+          "class": "Char",
+          "member": "CreateRandomFemale",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -6375,15 +6387,21 @@
               "type": "float"
             }
           ],
-          "name": "CREATE_RANDOM_MALE_CHAR",
-          "num_params": 4,
           "output": [
             {
-              "name": "pPed",
+              "name": "handle",
               "type": "Char",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_RANDOM_MALE_CHAR",
+          "num_params": 4,
+          "class": "Char",
+          "member": "CreateRandomMale",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -9825,12 +9843,14 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "FORCE_CHAR_TO_DROP_WEAPON",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "ForceToDropWeapon"
         },
         {
           "input": [
@@ -11721,21 +11741,23 @@
           ]
         },
         {
-          "name": "GET_CHAR_GRAVITY",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "gravity",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_GRAVITY",
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetGravity"
         },
         {
           "input": [
@@ -11844,24 +11866,26 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "output": [
             {
-              "name": "pBone",
+              "name": "boneId",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CHAR_LAST_DAMAGE_BONE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetLastDamageBone"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -11869,12 +11893,14 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetMeleeActionFlag0"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -11882,20 +11908,24 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetMeleeActionFlag1"
         },
         {
-          "name": "GET_CHAR_MELEE_ACTION_FLAG2",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
+          "name": "GET_CHAR_MELEE_ACTION_FLAG2",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetMeleeActionFlag2"
         },
         {
           "input": [
@@ -11920,26 +11950,26 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "money",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CHAR_MONEY",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetMoney"
         },
         {
-          "name": "GET_CHAR_MOVE_ANIM_SPEED_MULTIPLIER",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -11949,7 +11979,11 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_MOVE_ANIM_SPEED_MULTIPLIER",
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetMoveAnimSpeedMultiplier"
         },
         {
           "input": [
@@ -11975,7 +12009,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -11983,20 +12017,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "ped",
-              "type": "Char"
-            }
-          ],
-          "name": "GET_CHAR_READY_TO_BE_STUNNED",
-          "num_params": 1,
-          "attrs": {
-            "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetReadyToBeExecuted"
         },
         {
           "input": [
@@ -12005,15 +12028,30 @@
               "type": "Char"
             }
           ],
-          "name": "GET_CHAR_SPEED",
-          "num_params": 2,
+          "name": "GET_CHAR_READY_TO_BE_STUNNED",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
+          "member": "GetReadyToBeStunned"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "output": [
             {
-              "name": "pValue",
+              "name": "speed",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CHAR_SPEED",
+          "num_params": 2,
           "class": "Char",
           "member": "GetSpeed",
           "short_desc": "Returns the actor's movement speed"
@@ -12128,7 +12166,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -12136,7 +12174,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetWillCowerInsteadOfFleeing"
         },
         {
           "name": "GET_CINEMATIC_CAM",
@@ -19285,17 +19325,19 @@
           "short_desc": "Returns true if the vehicle has been hit by the specified weapon"
         },
         {
-          "name": "HAS_CAR_BEEN_DROPPED_OFF",
-          "num_params": 1,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
+          "name": "HAS_CAR_BEEN_DROPPED_OFF",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "HasBeenDroppedOff"
         },
         {
           "input": [
@@ -19331,22 +19373,24 @@
           "member": "HasCarRecordingBeenLoaded"
         },
         {
-          "name": "HAS_CAR_STOPPED_BECAUSE_OF_LIGHT",
-          "num_params": 1,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
+          "name": "HAS_CAR_STOPPED_BECAUSE_OF_LIGHT",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "HasStoppedBecauseOfLight"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -19362,7 +19406,9 @@
           "num_params": 3,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "HasAnimFinished"
         },
         {
           "name": "HAS_CHAR_BEEN_ARRESTED",
@@ -19403,7 +19449,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -19411,7 +19457,7 @@
               "type": "Char"
             },
             {
-              "name": "_p3",
+              "name": "flag",
               "type": "bool"
             }
           ],
@@ -19419,7 +19465,9 @@
           "num_params": 3,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "HasBeenDamagedByChar"
         },
         {
           "input": [
@@ -20085,7 +20133,7 @@
               "type": "Char"
             },
             {
-              "name": "hide",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -20749,7 +20797,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -20757,12 +20805,14 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsAMissionCar"
         },
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -20770,7 +20820,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsAttached"
         },
         {
           "input": [
@@ -21067,11 +21119,9 @@
           "short_desc": "Returns true if the specified car seat is empty"
         },
         {
-          "name": "IS_CAR_PLAYING_ANIM",
-          "num_params": 3,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -21083,14 +21133,18 @@
               "type": "string"
             }
           ],
+          "name": "IS_CAR_PLAYING_ANIM",
+          "num_params": 3,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsPlayingAnim"
         },
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -21098,7 +21152,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsSirenOn"
         },
         {
           "input": [
@@ -21119,7 +21175,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -21127,7 +21183,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsStoppedAtTrafficLights"
         },
         {
           "name": "IS_CAR_STOPPED_IN_AREA_2D",
@@ -21332,7 +21390,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -21348,12 +21406,14 @@
           "num_params": 3,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsFacingChar"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -21361,7 +21421,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsFatallyInjured"
         },
         {
           "input": [
@@ -21397,7 +21459,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -21405,7 +21467,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsGettingUp"
         },
         {
           "name": "IS_CHAR_HEAD_MISSING",
@@ -21798,7 +21862,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -21806,7 +21870,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsInMeleeCombat"
         },
         {
           "input": [
@@ -21883,7 +21949,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -21891,7 +21957,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsInjured"
         },
         {
           "input": [
@@ -21948,7 +22016,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -21956,7 +22024,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsOnFire"
         },
         {
           "input": [
@@ -21997,7 +22067,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -22013,20 +22083,24 @@
           "num_params": 3,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsPlayingAnim"
         },
         {
-          "name": "IS_CHAR_RESPONDING_TO_ANY_EVENT",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
+          "name": "IS_CHAR_RESPONDING_TO_ANY_EVENT",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsRespondingToAnyEvent"
         },
         {
           "input": [
@@ -22035,7 +22109,7 @@
               "type": "Char"
             },
             {
-              "name": "eventid",
+              "name": "eventId",
               "type": "int"
             }
           ],
@@ -22103,7 +22177,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -22111,7 +22185,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsSittingIdle"
         },
         {
           "input": [
@@ -22280,7 +22356,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -22289,12 +22365,14 @@
           "short_desc": "Returns whether the specified character is currently trying to enter a locked car",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsTryingToEnterALockedCar"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -22302,7 +22380,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsUsingAnyScenario"
         },
         {
           "name": "IS_CHAR_USING_MAP_ATTRACTOR",
@@ -22323,7 +22403,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -22335,12 +22415,14 @@
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsUsingScenario"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -22348,7 +22430,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsVisible"
         },
         {
           "input": [
@@ -23465,7 +23549,12 @@
         },
         {
           "name": "IS_PARTY_MODE",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "IsPartyMode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "IS_PAUSE_MENU_ACTIVE",
@@ -30303,12 +30392,14 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "REMOVE_CHAR_DEFENSIVE_AREA",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "RemoveDefensiveArea"
         },
         {
           "input": [
@@ -33128,7 +33219,7 @@
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "accuracy",
               "type": "int"
             }
           ],
@@ -33972,7 +34063,7 @@
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],

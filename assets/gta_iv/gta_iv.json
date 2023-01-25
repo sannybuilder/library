@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674600931532,
-    "version": "0.54",
+    "last_update": 1674667123488,
+    "version": "0.55",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -1788,17 +1788,19 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
-              "name": "allow",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "ALLOW_PLAYER_TO_CARRY_NON_MISSION_OBJECTS",
           "num_params": 2,
-          "short_desc": "Allows the player to pickup small random litter. If set to 0, the player can't pick up objects. Objects already in Niko's hand will still be held on"
+          "short_desc": "Allows the player to pickup small random litter. If set to 0, the player can't pick up objects. Objects already in Niko's hand will still be held on",
+          "class": "Player",
+          "member": "AllowToCarryNonMissionObjects"
         },
         {
           "input": [
@@ -4635,13 +4637,15 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             }
           ],
           "name": "CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_PED",
           "num_params": 1,
-          "short_desc": "Clears the last ped damaged for the specific Player"
+          "short_desc": "Clears the last ped damaged for the specific Player",
+          "class": "Player",
+          "member": "ClearHasDamagedAtLeastOnePed"
         },
         {
           "name": "CLEAR_PLAYER_HAS_DAMAGED_AT_LEAST_ONE_VEHICLE",
@@ -6996,17 +7000,19 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
-              "name": "disabled",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "DISABLE_PLAYER_LOCKON",
           "num_params": 2,
-          "short_desc": "Sets if the player can lock on"
+          "short_desc": "Sets if the player can lock on",
+          "class": "Player",
+          "member": "DisableLockon"
         },
         {
           "input": [
@@ -7015,7 +7021,7 @@
               "type": "Player"
             },
             {
-              "name": "disabled",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -7033,13 +7039,18 @@
         {
           "input": [
             {
-              "name": "display",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "DISPLAY_AMMO",
           "num_params": 1,
-          "short_desc": "Toggles display of player's ammo values for the currently selected weapon"
+          "short_desc": "Toggles display of player's ammo values for the currently selected weapon",
+          "class": "Hud",
+          "member": "DisplayAmmo",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7055,13 +7066,18 @@
         {
           "input": [
             {
-              "name": "display",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "DISPLAY_CASH",
           "num_params": 1,
-          "short_desc": "Toggles display of player's cash value and cash additives (when cash is added/removed)"
+          "short_desc": "Toggles display of player's cash value and cash additives (when cash is added/removed)",
+          "class": "Hud",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "DisplayCash"
         },
         {
           "input": [
@@ -7206,7 +7222,7 @@
         {
           "input": [
             {
-              "name": "display",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -14276,15 +14292,15 @@
           ]
         },
         {
-          "name": "GET_MAX_WANTED_LEVEL",
-          "num_params": 1,
           "output": [
             {
-              "name": "pMaxWantedLevel",
+              "name": "maxWantedLevel",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_MAX_WANTED_LEVEL",
+          "num_params": 1,
           "class": "Game",
           "member": "GetMaxWantedLevel",
           "short_desc": "Gets the maximum wanted level the player can receive",
@@ -16571,7 +16587,7 @@
           ],
           "output": [
             {
-              "name": "pPed",
+              "name": "char",
               "type": "Char",
               "source": "var_any"
             }
@@ -16607,16 +16623,16 @@
               "type": "Player"
             }
           ],
-          "name": "GET_PLAYER_GROUP",
-          "num_params": 2,
-          "short_desc": "",
           "output": [
             {
-              "name": "pGroup",
+              "name": "group",
               "type": "Group",
               "source": "var_any"
             }
           ],
+          "name": "GET_PLAYER_GROUP",
+          "num_params": 2,
+          "short_desc": "",
           "class": "Player",
           "member": "GetGroup"
         },
@@ -16630,7 +16646,7 @@
         {
           "output": [
             {
-              "name": "playerId",
+              "name": "id",
               "type": "int",
               "source": "var_any"
             }
@@ -16651,15 +16667,15 @@
               "type": "Player"
             }
           ],
-          "name": "GET_PLAYER_MAX_ARMOUR",
-          "num_params": 2,
           "output": [
             {
-              "name": "pMaxArmour",
+              "name": "maxArmour",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_PLAYER_MAX_ARMOUR",
+          "num_params": 2,
           "class": "Player",
           "member": "GetMaxArmor",
           "short_desc": ""
@@ -19821,7 +19837,7 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             }
           ],
@@ -19830,7 +19846,9 @@
           "short_desc": "Returns true if the player has damaged at least one ped",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "HasDamagedAtLeastOnePed"
         },
         {
           "name": "HAS_PLAYER_DAMAGED_AT_LEAST_ONE_VEHICLE",
@@ -19902,9 +19920,12 @@
           "name": "HAS_RESPRAY_HAPPENED",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns true if the players car has been resprayed by the garage"
+          "short_desc": "Returns true if the players car has been resprayed by the garage",
+          "class": "Game",
+          "member": "HasResprayHappened"
         },
         {
           "input": [
@@ -23799,7 +23820,7 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             }
           ],
@@ -23808,7 +23829,9 @@
           "short_desc": "Returns true if the player is free for ambient tasks",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "IsFreeForAmbientTask"
         },
         {
           "name": "IS_PLAYER_IN_INFO_ZONE",
@@ -24738,8 +24761,11 @@
           "num_params": 0,
           "short_desc": "Checks if player is using an XBox 360 controller at the time of the call to this function",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsUsingController"
         },
         {
           "input": [
@@ -25007,18 +25033,18 @@
           }
         },
         {
-          "name": "LISTEN_TO_PLAYER_GROUP_COMMANDS",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "LISTEN_TO_PLAYER_GROUP_COMMANDS",
+          "num_params": 2,
           "class": "Char",
           "member": "ListenToPlayerGroupCommands",
           "short_desc": ""
@@ -26410,18 +26436,18 @@
           "member": "MakeTargettable"
         },
         {
-          "name": "MAKE_PLAYER_FIRE_PROOF",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Player"
             },
             {
-              "name": "proof",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "MAKE_PLAYER_FIRE_PROOF",
+          "num_params": 2,
           "class": "Player",
           "member": "MakeFireProof",
           "short_desc": "Makes the player immune to fire"
@@ -28252,7 +28278,7 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             }
           ],
@@ -28260,7 +28286,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "HasChar"
         },
         {
           "name": "PLAYER_HAS_FLASHING_STAR_AFTER_OFFENCE",
@@ -32843,7 +32871,7 @@
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -34873,18 +34901,18 @@
           "num_params": 1
         },
         {
-          "name": "SET_DEATH_WEAPONS_PERSIST",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_DEATH_WEAPONS_PERSIST",
+          "num_params": 2,
           "class": "Char",
           "member": "SetDeathWeaponsPersist",
           "short_desc": "Prevents pickups, which are created when this character dies, from disappearing until picked up by the player"
@@ -35270,11 +35298,11 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "player",
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -35528,26 +35556,26 @@
           "short_desc": "Sets the camera mode when driving"
         },
         {
-          "name": "SET_FREE_HEALTH_CARE",
-          "num_params": 2,
-          "short_desc": "Sets whether the player loses the cash when gets wasted (works once)",
           "input": [
             {
               "name": "self",
               "type": "Player"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_FREE_HEALTH_CARE",
+          "num_params": 2,
+          "short_desc": "Sets whether the player loses the cash when gets wasted (works once)",
           "class": "Player",
           "member": "SetFreeHealthCare"
         },
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -35567,7 +35595,7 @@
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -36034,7 +36062,7 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "size",
               "type": "float"
             }
           ],
@@ -36381,7 +36409,7 @@
         {
           "input": [
             {
-              "name": "lvl",
+              "name": "maxWantedLevel",
               "type": "int"
             }
           ],
@@ -37094,7 +37122,7 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -37425,7 +37453,7 @@
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -38217,7 +38245,7 @@
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -38263,7 +38291,7 @@
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -38362,7 +38390,7 @@
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -38373,18 +38401,18 @@
           "short_desc": "Defines whether the player can reload their gun faster"
         },
         {
-          "name": "SET_PLAYER_GROUP_RECRUITMENT",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Player"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_PLAYER_GROUP_RECRUITMENT",
+          "num_params": 2,
           "class": "Player",
           "member": "SetGroupRecruitment",
           "short_desc": ""
@@ -38396,7 +38424,7 @@
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -38407,18 +38435,18 @@
           "short_desc": "Controls the players ability to tell their group to wait and automatically orders any group members to continue following"
         },
         {
-          "name": "SET_PLAYER_GROUP_TO_FOLLOW_NEVER",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Player"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_PLAYER_GROUP_TO_FOLLOW_NEVER",
+          "num_params": 2,
           "class": "Player",
           "member": "SetGroupToFollowNever",
           "short_desc": "Sets whether the player's group stops following the player, even if the player uses the \"group follow\" button"
@@ -38436,16 +38464,18 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PLAYER_INVINCIBLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Player",
+          "member": "SetInvincible"
         },
         {
           "name": "SET_PLAYER_INVISIBLE_TO_AI",
@@ -38461,14 +38491,14 @@
           }
         },
         {
-          "name": "SET_PLAYER_IS_IN_STADIUM",
-          "num_params": 1,
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_PLAYER_IS_IN_STADIUM",
+          "num_params": 1,
           "class": "Game",
           "member": "SetIsInStadium",
           "short_desc": "Greys out the radar",
@@ -38479,13 +38509,18 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PLAYER_KEEPS_WEAPONS_WHEN_RESPAWNED",
           "num_params": 1,
-          "short_desc": "Sets if the player keeps his weapons after dying and respawning"
+          "short_desc": "Sets if the player keeps his weapons after dying and respawning",
+          "class": "Game",
+          "member": "SetPlayerKeepsWeaponsWhenRespawned",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_PLAYER_MAY_ONLY_ENTER_THIS_VEHICLE",
@@ -38533,7 +38568,7 @@
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -38618,19 +38653,22 @@
         {
           "input": [
             {
-              "name": "self",
+              "name": "player",
               "type": "Player"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_POLICE_IGNORE_PLAYER",
           "num_params": 2,
-          "class": "Player",
-          "member": "SetIgnorePolice",
-          "short_desc": "Sets whether cops should ignore the player regardless of wanted level"
+          "class": "Game",
+          "member": "SetPoliceIgnorePlayer",
+          "short_desc": "Sets whether cops should ignore the player regardless of wanted level",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -40282,18 +40320,18 @@
           }
         },
         {
-          "name": "SET_UPSIDEDOWN_CAR_NOT_DAMAGED",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_UPSIDEDOWN_CAR_NOT_DAMAGED",
+          "num_params": 2,
           "class": "Car",
           "member": "SetUpsidedownNotDamaged",
           "short_desc": "Disables the car from exploding when it is upside down, as long as the player is not in the vehicle"
@@ -40529,7 +40567,7 @@
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -40986,14 +41024,14 @@
           "short_desc": "Opens the Xbox 360 Guide asking you to select a profile"
         },
         {
-          "name": "SHOW_UPDATE_STATS",
-          "num_params": 1,
           "input": [
             {
-              "name": "show",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SHOW_UPDATE_STATS",
+          "num_params": 1,
           "class": "Stat",
           "member": "ShowUpdateStats",
           "short_desc": "Displays help boxes indicating that the players stats have been updated",
@@ -42345,15 +42383,15 @@
               "type": "Player"
             }
           ],
-          "name": "STORE_SCORE",
-          "num_params": 2,
           "output": [
             {
-              "name": "value",
+              "name": "money",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "STORE_SCORE",
+          "num_params": 2,
           "class": "Player",
           "member": "StoreScore",
           "short_desc": "Returns the player's money"
@@ -42377,7 +42415,7 @@
           ],
           "output": [
             {
-              "name": "value",
+              "name": "wantedLevel",
               "type": "int",
               "source": "var_any"
             }
@@ -51677,11 +51715,10 @@
           "num_params": 5
         },
         {
-          "name": "GET_PLAYER_MAX_HEALTH",
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
           "output": [
@@ -51691,7 +51728,10 @@
               "source": "var_any"
             }
           ],
-          "num_params": 2
+          "name": "GET_PLAYER_MAX_HEALTH",
+          "num_params": 2,
+          "class": "Player",
+          "member": "GetMaxHealth"
         },
         {
           "name": "PRINT_STRING_WITH_SUBSTRING_GIVEN_HASH_KEY_NOW",

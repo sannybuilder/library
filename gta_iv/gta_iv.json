@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674680587320,
-    "version": "0.60",
+    "last_update": 1674682461319,
+    "version": "0.61",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -3906,7 +3906,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3918,12 +3918,14 @@
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "flag",
               "type": "bool"
             }
           ],
           "name": "CHANGE_CHAR_SIT_IDLE_ANIM",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Char",
+          "member": "ChangeSitIdleAnim"
         },
         {
           "input": [
@@ -11521,7 +11523,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -11533,15 +11535,17 @@
               "type": "string"
             }
           ],
-          "name": "GET_CHAR_ANIM_CURRENT_TIME",
-          "num_params": 4,
           "output": [
             {
-              "name": "pValue",
+              "name": "time",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_ANIM_CURRENT_TIME",
+          "num_params": 4,
+          "class": "Char",
+          "member": "GetAnimCurrentTime"
         },
         {
           "name": "GET_CHAR_ANIM_EVENT_TIME",
@@ -11551,11 +11555,9 @@
           }
         },
         {
-          "name": "GET_CHAR_ANIM_IS_EVENT",
-          "num_params": 4,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -11571,14 +11573,18 @@
               "type": "bool"
             }
           ],
+          "name": "GET_CHAR_ANIM_IS_EVENT",
+          "num_params": 4,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetAnimIsEvent"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -11590,15 +11596,17 @@
               "type": "string"
             }
           ],
-          "name": "GET_CHAR_ANIM_TOTAL_TIME",
-          "num_params": 4,
           "output": [
             {
-              "name": "pValue",
+              "name": "totalTime",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_ANIM_TOTAL_TIME",
+          "num_params": 4,
+          "class": "Char",
+          "member": "GetAnimTotalTime"
         },
         {
           "name": "GET_CHAR_AREA_VISIBLE",
@@ -11660,7 +11668,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -11670,51 +11678,53 @@
           ],
           "output": [
             {
-              "name": "_p3",
+              "name": "variation",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CHAR_DRAWABLE_VARIATION",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Char",
+          "member": "GetDrawableVariation"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
               "name": "_p2",
               "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "name": "GET_CHAR_EXTRACTED_DISPLACEMENT",
           "num_params": 5,
-          "output": [
-            {
-              "name": "x",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "y",
-              "type": "float",
-              "source": "var_any"
-            },
-            {
-              "name": "z",
-              "type": "float",
-              "source": "var_any"
-            }
-          ]
+          "class": "Char",
+          "member": "GetExtractedDisplacement"
         },
         {
-          "name": "GET_CHAR_EXTRACTED_VELOCITY",
-          "num_params": 5,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -11738,7 +11748,11 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_EXTRACTED_VELOCITY",
+          "num_params": 5,
+          "class": "Char",
+          "member": "GetExtractedVelocity"
         },
         {
           "input": [
@@ -11988,7 +12002,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -11996,15 +12010,17 @@
               "type": "bool"
             }
           ],
-          "name": "GET_CHAR_PROP_INDEX",
-          "num_params": 3,
           "output": [
             {
-              "name": "pIndex",
+              "name": "propIndex",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CHAR_PROP_INDEX",
+          "num_params": 3,
+          "class": "Char",
+          "member": "GetPropIndex"
         },
         {
           "input": [
@@ -18668,30 +18684,30 @@
               "type": "Car"
             }
           ],
-          "name": "GET_VEHICLE_QUATERNION",
-          "num_params": 5,
           "output": [
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "_p5",
+              "name": "w",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_VEHICLE_QUATERNION",
+          "num_params": 5,
           "class": "Car",
           "member": "GetQuaternion",
           "short_desc": "Gets the quaternion values of the car"
@@ -31039,16 +31055,18 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "reset",
+              "name": "flag",
               "type": "bool"
             }
           ],
           "name": "RESET_CAR_WHEELS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "ResetWheels"
         },
         {
           "name": "RESET_CONSOLE_COMMAND",
@@ -32533,28 +32551,26 @@
           "num_params": 2
         },
         {
-          "name": "SET_CAR_ALWAYS_CREATE_SKIDS",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_CAR_ALWAYS_CREATE_SKIDS",
+          "num_params": 2,
           "class": "Car",
           "member": "SetAlwaysCreateSkids",
           "short_desc": ""
         },
         {
-          "name": "SET_CAR_ANIM_CURRENT_TIME",
-          "num_params": 4,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -32569,14 +32585,16 @@
               "name": "time",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAR_ANIM_CURRENT_TIME",
+          "num_params": 4,
+          "class": "Car",
+          "member": "SetAnimCurrentTime"
         },
         {
-          "name": "SET_CAR_ANIM_SPEED",
-          "num_params": 4,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -32591,7 +32609,11 @@
               "name": "speed",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAR_ANIM_SPEED",
+          "num_params": 4,
+          "class": "Car",
+          "member": "SetAnimSpeed"
         },
         {
           "input": [
@@ -32613,7 +32635,7 @@
               "type": "Car"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -32630,7 +32652,7 @@
               "type": "Car"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -32654,7 +32676,7 @@
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -32667,7 +32689,7 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -32676,7 +32698,9 @@
             }
           ],
           "name": "SET_CAR_COLOUR_COMBINATION",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetColourCombination"
         },
         {
           "input": [
@@ -32745,27 +32769,29 @@
           }
         },
         {
-          "name": "SET_CAR_DISTANCE_AHEAD_MULTIPLIER",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
               "name": "multiplier",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAR_DISTANCE_AHEAD_MULTIPLIER",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetDistanceAheadMultiplier"
         },
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "door",
+              "name": "doorId",
               "type": "int"
             },
             {
@@ -32778,7 +32804,9 @@
             }
           ],
           "name": "SET_CAR_DOOR_LATCHED",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Car",
+          "member": "SetDoorLatched"
         },
         {
           "input": [
@@ -32876,7 +32904,7 @@
               "type": "Car"
             },
             {
-              "name": "dir",
+              "name": "heading",
               "type": "float"
             }
           ],
@@ -32893,7 +32921,7 @@
               "type": "Car"
             },
             {
-              "name": "value",
+              "name": "health",
               "type": "int"
             }
           ],
@@ -32920,35 +32948,39 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CAR_IN_CUTSCENE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetInCutscene"
         },
         {
-          "name": "SET_CAR_LANE_SHIFT",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
               "name": "shift",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAR_LANE_SHIFT",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetLaneShift"
         },
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -32957,7 +32989,9 @@
             }
           ],
           "name": "SET_CAR_LIGHT_MULTIPLIER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetLightMultiplier"
         },
         {
           "name": "SET_CAR_LIGHTS_ON",
@@ -32969,7 +33003,7 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -32978,25 +33012,29 @@
             }
           ],
           "name": "SET_CAR_LIVERY",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetLivery"
         },
         {
-          "name": "SET_CAR_NOT_DAMAGED_BY_RELATIONSHIP_GROUP",
-          "num_params": 3,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "flag",
               "type": "bool"
             },
             {
-              "name": "group",
+              "name": "relationshipGroup",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_CAR_NOT_DAMAGED_BY_RELATIONSHIP_GROUP",
+          "num_params": 3,
+          "class": "Car",
+          "member": "SetNotDamagedByRelationshipGroup"
         },
         {
           "input": [
@@ -33031,20 +33069,22 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "flag",
               "type": "bool"
             },
             {
-              "name": "group",
+              "name": "relationshipGroup",
               "type": "int"
             }
           ],
           "name": "SET_CAR_ONLY_DAMAGED_BY_RELATIONSHIP_GROUP",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Car",
+          "member": "SetOnlyDamagedByRelationshipGroup"
         },
         {
           "input": [
@@ -33141,7 +33181,7 @@
               "type": "Car"
             },
             {
-              "name": "strong",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -33175,7 +33215,7 @@
               "type": "Car"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -33186,18 +33226,18 @@
           "member": "SetVisible"
         },
         {
-          "name": "SET_CAR_WATERTIGHT",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_CAR_WATERTIGHT",
+          "num_params": 2,
           "class": "Car",
           "member": "SetWatertight",
           "short_desc": "Makes the vehicle watertight, meaning characters inside will not be harmed if the vehicle is submerged in water"
@@ -33232,7 +33272,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33241,7 +33281,9 @@
             }
           ],
           "name": "SET_CHAR_ALL_ANIMS_SPEED",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetAllAnimsSpeed"
         },
         {
           "input": [
@@ -33284,7 +33326,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33317,12 +33359,14 @@
             }
           ],
           "name": "SET_CHAR_ANGLED_DEFENSIVE_AREA",
-          "num_params": 8
+          "num_params": 8,
+          "class": "Char",
+          "member": "SetAngledDefensiveArea"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33339,7 +33383,9 @@
             }
           ],
           "name": "SET_CHAR_ANIM_CURRENT_TIME",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetAnimCurrentTime"
         },
         {
           "name": "SET_CHAR_ANIM_PLAYING_FLAG",
@@ -33369,7 +33415,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33386,7 +33432,9 @@
             }
           ],
           "name": "SET_CHAR_ANIM_SPEED",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetAnimSpeed"
         },
         {
           "input": [
@@ -34205,7 +34253,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34234,7 +34282,9 @@
             }
           ],
           "name": "SET_CHAR_MELEE_MOVEMENT_CONSTAINT_BOX",
-          "num_params": 7
+          "num_params": 7,
+          "class": "Char",
+          "member": "SetMeleeMovementConstaintBox"
         },
         {
           "input": [
@@ -34312,7 +34362,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34320,12 +34370,14 @@
               "type": "int"
             },
             {
-              "name": "enable",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_CHAR_NOT_DAMAGED_BY_RELATIONSHIP_GROUP",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Char",
+          "member": "SetNotDamagedByRelationshipGroup"
         },
         {
           "input": [
@@ -34347,20 +34399,22 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             },
             {
-              "name": "relgroup",
+              "name": "relationshipGroup",
               "type": "int"
             }
           ],
           "name": "SET_CHAR_ONLY_DAMAGED_BY_RELATIONSHIP_GROUP",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Char",
+          "member": "SetOnlyDamagedByRelationshipGroup"
         },
         {
           "input": [
@@ -34398,7 +34452,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34412,7 +34466,9 @@
           ],
           "name": "SET_CHAR_PROP_INDEX",
           "num_params": 3,
-          "short_desc": "Sets a ped's prop (hats, glasses, etc) variation, similar to component variations"
+          "short_desc": "Sets a ped's prop (hats, glasses, etc) variation, similar to component variations",
+          "class": "Char",
+          "member": "SetPropIndex"
         },
         {
           "input": [
@@ -34499,7 +34555,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34509,7 +34565,9 @@
           ],
           "name": "SET_CHAR_RELATIONSHIP_GROUP",
           "num_params": 2,
-          "short_desc": "Assigns the ped specified in Parameter 1 to the relationship group specified in Parameter 2"
+          "short_desc": "Assigns the ped specified in Parameter 1 to the relationship group specified in Parameter 2",
+          "class": "Char",
+          "member": "SetRelationshipGroup"
         },
         {
           "input": [
@@ -34573,7 +34631,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -34594,7 +34652,9 @@
             }
           ],
           "name": "SET_CHAR_SPHERE_DEFENSIVE_AREA",
-          "num_params": 5
+          "num_params": 5,
+          "class": "Char",
+          "member": "SetSphereDefensiveArea"
         },
         {
           "input": [
@@ -40824,19 +40884,19 @@
               "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "w",
               "type": "float"
             }
           ],
@@ -50661,18 +50721,20 @@
           ]
         },
         {
-          "name": "SET_CAR_ALLOWED_TO_DROWN",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "allowed",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_CAR_ALLOWED_TO_DROWN",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetAllowedToDrown"
         },
         {
           "name": "SET_CAR_FOV_FADE_MULT",

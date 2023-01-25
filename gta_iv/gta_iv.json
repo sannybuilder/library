@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674667123488,
-    "version": "0.55",
+    "last_update": 1674673395196,
+    "version": "0.56",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -392,7 +392,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
@@ -3724,7 +3724,7 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
@@ -3733,7 +3733,9 @@
             }
           ],
           "name": "CHANGE_BLIP_ALPHA",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "ChangeAlpha"
         },
         {
           "input": [
@@ -6923,7 +6925,7 @@
               "type": "Blip"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -9640,30 +9642,34 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
-              "name": "on",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "FLASH_BLIP",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "Flash"
         },
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
-              "name": "on",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "FLASH_BLIP_ALT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "FlashAlt"
         },
         {
           "name": "FLASH_RADAR",
@@ -10565,12 +10571,10 @@
           "num_params": 4
         },
         {
-          "name": "GET_BLIP_ALPHA",
-          "num_params": 2,
           "input": [
             {
-              "name": "blip",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             }
           ],
           "output": [
@@ -10579,24 +10583,30 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_BLIP_ALPHA",
+          "num_params": 2,
+          "class": "Blip",
+          "member": "GetAlpha"
         },
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
+            }
+          ],
+          "output": [
+            {
+              "name": "colour",
+              "type": "ColourIndex",
+              "source": "var_any"
             }
           ],
           "name": "GET_BLIP_COLOUR",
           "num_params": 2,
-          "output": [
-            {
-              "name": "pColour",
-              "type": "ColourIndex",
-              "source": "var_any"
-            }
-          ]
+          "class": "Blip",
+          "member": "GetColour"
         },
         {
           "input": [
@@ -10729,36 +10739,40 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "name",
               "type": "string",
               "source": "var_any"
             }
           ],
           "name": "GET_BLIP_NAME",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "GetName"
         },
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "sprite",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_BLIP_SPRITE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "GetSprite"
         },
         {
           "name": "GET_BUFFERED_ASCII",
@@ -20510,7 +20524,7 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             }
           ],
@@ -20518,7 +20532,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Blip",
+          "member": "IsShortRange"
         },
         {
           "input": [
@@ -31664,30 +31680,34 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_BLIP_AS_SHORT_RANGE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "SetAsShortRange"
         },
         {
           "input": [
             {
-              "name": "blip",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_BLIP_MARKER_LONG_DISTANCE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "SetMarkerLongDistance"
         },
         {
           "input": [

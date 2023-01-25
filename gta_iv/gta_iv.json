@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674674825204,
-    "version": "0.57",
+    "last_update": 1674675968866,
+    "version": "0.58",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -3291,11 +3291,21 @@
         },
         {
           "name": "CAM_RESTORE",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Camera",
+          "member": "Restore",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CAM_RESTORE_JUMPCUT",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Camera",
+          "member": "RestoreJumpcut",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CAM_SEQUENCE_CLOSE",
@@ -12031,7 +12041,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -12041,13 +12051,15 @@
           ],
           "output": [
             {
-              "name": "_p3",
+              "name": "variation",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CHAR_TEXTURE_VARIATION",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Char",
+          "member": "GetTextureVariation"
         },
         {
           "input": [
@@ -21354,7 +21366,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -21362,7 +21374,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsGesturing"
         },
         {
           "input": [
@@ -39522,7 +39536,7 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -48298,7 +48312,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -48308,7 +48322,9 @@
           ],
           "name": "WASH_VEHICLE_TEXTURES",
           "num_params": 2,
-          "short_desc": "Removes the dirt on the texture of the specified vehicle"
+          "short_desc": "Removes the dirt on the texture of the specified vehicle",
+          "class": "Car",
+          "member": "WashTextures"
         },
         {
           "input": [

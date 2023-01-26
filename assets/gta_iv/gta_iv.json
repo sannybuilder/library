@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674768243027,
-    "version": "0.62",
+    "last_update": 1674769915274,
+    "version": "0.63",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -490,13 +490,15 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
           "name": "ADD_CAR_TO_MISSION_DELETION_LIST",
           "num_params": 1,
-          "short_desc": "Adds the specified vehicle to the mission deletion list (to be deleted after the mission is finished)"
+          "short_desc": "Adds the specified vehicle to the mission deletion list (to be deleted after the mission is finished)",
+          "class": "Car",
+          "member": "AddToMissionDeletionList"
         },
         {
           "input": [
@@ -2415,11 +2417,11 @@
         {
           "input": [
             {
-              "name": "car0",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "car1",
+              "name": "car",
               "type": "Car"
             },
             {
@@ -2453,7 +2455,9 @@
           ],
           "name": "ATTACH_CAR_TO_CAR",
           "num_params": 9,
-          "short_desc": "Attaches two Vehicles together. Rotation are in radians. If the 'Absolute offsets' boolean is true the offsets are absolute (to the world) otherwise they are relative (to the vehicle)"
+          "short_desc": "Attaches two Vehicles together. Rotation are in radians. If the 'Absolute offsets' boolean is true the offsets are absolute (to the world) otherwise they are relative (to the vehicle)",
+          "class": "Car",
+          "member": "AttachToCar"
         },
         {
           "name": "ATTACH_CAR_TO_CAR_PHYSICALLY",
@@ -2556,7 +2560,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -2618,7 +2622,9 @@
           ],
           "name": "ATTACH_OBJECT_TO_CAR_PHYSICALLY",
           "num_params": 15,
-          "short_desc": "Attaches an Object to a Vehicle Physically"
+          "short_desc": "Attaches an Object to a Vehicle Physically",
+          "class": "Object",
+          "member": "AttachToCarPhysically"
         },
         {
           "input": [
@@ -2771,7 +2777,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -2813,7 +2819,9 @@
           ],
           "name": "ATTACH_PED_TO_CAR_PHYSICALLY",
           "num_params": 10,
-          "short_desc": "Attaches a Ped to a Vehicle physically"
+          "short_desc": "Attaches a Ped to a Vehicle physically",
+          "class": "Char",
+          "member": "AttachToCarPhysically"
         },
         {
           "input": [
@@ -9152,27 +9160,32 @@
           "num_params": 3
         },
         {
-          "name": "EXP",
-          "num_params": 2,
-          "short_desc": "Explodes the specified vehicle with an explosion or not",
           "input": [
             {
-              "name": "_p1",
+              "name": "number",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "value",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "EXP",
+          "num_params": 2,
+          "short_desc": "",
+          "class": "Math",
+          "member": "Exp",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -9186,7 +9199,9 @@
           ],
           "name": "EXPLODE_CAR",
           "num_params": 3,
-          "short_desc": "Explodes the specified vehicle with an explosion or not"
+          "short_desc": "Explodes the specified vehicle with an explosion or not",
+          "class": "Car",
+          "member": "Explode"
         },
         {
           "input": [
@@ -11098,16 +11113,16 @@
               "type": "Char"
             }
           ],
-          "name": "GET_CAR_CHAR_IS_USING",
-          "num_params": 2,
-          "short_desc": "Stores a handle for the vehicle the character is in or entering",
           "output": [
             {
-              "name": "pVehicle",
+              "name": "vehicle",
               "type": "Car",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_CHAR_IS_USING",
+          "num_params": 2,
+          "short_desc": "Stores a handle for the vehicle the character is in or entering",
           "class": "Char",
           "member": "GetCarIsUsing"
         },
@@ -11202,15 +11217,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_DOOR_LOCK_STATUS",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "status",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_DOOR_LOCK_STATUS",
+          "num_params": 2,
           "class": "Car",
           "member": "GetDoorLockStatus",
           "short_desc": "Returns the door lock mode of the vehicle"
@@ -11241,15 +11256,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_FORWARD_X",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "x",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_FORWARD_X",
+          "num_params": 2,
           "class": "Car",
           "member": "GetForwardX",
           "short_desc": "Returns the X coord of the vehicle's angle"
@@ -11261,15 +11276,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_FORWARD_Y",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "y",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_FORWARD_Y",
+          "num_params": 2,
           "class": "Car",
           "member": "GetForwardY",
           "short_desc": "Returns the Y coord of the vehicle's angle"
@@ -11415,15 +11430,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_PITCH",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "pitch",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_PITCH",
+          "num_params": 2,
           "class": "Car",
           "member": "GetPitch",
           "short_desc": "Returns the X Angle of the vehicle"
@@ -11435,15 +11450,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_ROLL",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "roll",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_ROLL",
+          "num_params": 2,
           "class": "Car",
           "member": "GetRoll",
           "short_desc": "Returns the Y Angle of the vehicle"
@@ -24985,11 +25000,11 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "window",
+              "name": "windowId",
               "type": "int"
             }
           ],
@@ -24998,7 +25013,9 @@
           "short_desc": "Checks whether the specified vehicle window is intact",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsWindowIntact"
         },
         {
           "input": [
@@ -30381,17 +30398,19 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "windnum",
+              "name": "windowId",
               "type": "int"
             }
           ],
           "name": "REMOVE_CAR_WINDOW",
           "num_params": 2,
-          "short_desc": "Removes a window of the specified vehicle"
+          "short_desc": "Removes a window of the specified vehicle",
+          "class": "Car",
+          "member": "RemoveWindow"
         },
         {
           "input": [
@@ -40745,17 +40764,19 @@
         {
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_VEH_ALARM",
           "num_params": 2,
-          "short_desc": "Marks the specified vehicle to have or not the alarm activated. Deactivating the alarm, also stops any alarm sound and hazard lights. Activating the alarm does not produce any sound or visual effect.Only tested this on a locked car"
+          "short_desc": "Marks the specified vehicle to have or not the alarm activated. Deactivating the alarm, also stops any alarm sound and hazard lights. Activating the alarm does not produce any sound or visual effect.Only tested this on a locked car",
+          "class": "Car",
+          "member": "SetAlarm"
         },
         {
           "name": "SET_VEH_ALARM_DURATION",
@@ -40788,47 +40809,53 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "on",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_VEH_HAZARDLIGHTS",
           "num_params": 2,
-          "short_desc": "Turns on or off the hazard lights of the specified vehicle"
+          "short_desc": "Turns on or off the hazard lights of the specified vehicle",
+          "class": "Car",
+          "member": "SetHazardlights"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "SET_VEH_INDICATORLIGHTS",
           "num_params": 2,
           "short_desc": "Turns on or off all the indicator lights of a specified vehicle",
-          "input": [
-            {
-              "name": "veh",
-              "type": "Car"
-            },
-            {
-              "name": "set",
-              "type": "bool"
-            }
-          ]
+          "class": "Car",
+          "member": "SetIndicatorLights"
         },
         {
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_VEH_INTERIORLIGHT",
           "num_params": 2,
-          "short_desc": "Turns on or off the interior light of the specified vehicle"
+          "short_desc": "Turns on or off the interior light of the specified vehicle",
+          "class": "Car",
+          "member": "SetInteriorLight"
         },
         {
           "input": [
@@ -41370,7 +41397,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -41380,7 +41407,9 @@
           ],
           "name": "SHUT_CAR_DOOR",
           "num_params": 2,
-          "short_desc": "Closes a door of the specified vehicle. To open a door call OPEN CAR DOOR"
+          "short_desc": "Closes a door of the specified vehicle. To open a door call OPEN CAR DOOR",
+          "class": "Car",
+          "member": "ShutDoor"
         },
         {
           "input": [
@@ -41597,7 +41626,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -41607,7 +41636,9 @@
           ],
           "name": "SOUND_CAR_HORN",
           "num_params": 2,
-          "short_desc": "Sounds the car horn for the specified amount of milliseconds.If the vehicle has no driver, nothing will happen"
+          "short_desc": "Sounds the car horn for the specified amount of milliseconds.If the vehicle has no driver, nothing will happen",
+          "class": "Car",
+          "member": "SoundHorn"
         },
         {
           "name": "SPECIFY_SCRIPT_POPULATION_ZONE_AREA",

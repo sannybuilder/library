@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674682461319,
-    "version": "0.61",
+    "last_update": 1674768243027,
+    "version": "0.62",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -2463,11 +2463,11 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             },
             {
@@ -2501,7 +2501,9 @@
           ],
           "name": "ATTACH_CAR_TO_OBJECT",
           "num_params": 9,
-          "short_desc": "Attaches a vehicle to an object"
+          "short_desc": "Attaches a vehicle to an object",
+          "class": "Car",
+          "member": "AttachToObject"
         },
         {
           "name": "ATTACH_CAR_TO_OBJECT_PHYSICALLY",
@@ -2720,7 +2722,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -2762,7 +2764,9 @@
           ],
           "name": "ATTACH_PED_TO_CAR",
           "num_params": 10,
-          "short_desc": "Attaches a ped to a vehicle"
+          "short_desc": "Attaches a ped to a vehicle",
+          "class": "Char",
+          "member": "AttachToCar"
         },
         {
           "input": [
@@ -8984,18 +8988,20 @@
           "num_params": 0
         },
         {
-          "name": "ENABLE_GPS_IN_VEHICLE",
-          "num_params": 2,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "enable",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "ENABLE_GPS_IN_VEHICLE",
+          "num_params": 2,
+          "class": "Car",
+          "member": "EnableGps"
         },
         {
           "input": [
@@ -9810,14 +9816,14 @@
           "num_params": 2
         },
         {
-          "name": "FORCE_ALL_VEHICLE_LIGHTS_OFF",
-          "num_params": 1,
           "input": [
             {
-              "name": "off",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "FORCE_ALL_VEHICLE_LIGHTS_OFF",
+          "num_params": 1,
           "class": "Game",
           "member": "ForceAllVehicleLightsOff",
           "short_desc": "Disables all vehicle lights from being rendered if enabled",
@@ -9967,7 +9973,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -9976,7 +9982,9 @@
             }
           ],
           "name": "FORCE_PED_TO_FLEE_WHILST_DRIVING_VEHICLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "ForceToFleeWhilstDrivingVehicle"
         },
         {
           "input": [
@@ -10141,7 +10149,7 @@
               "type": "Car"
             },
             {
-              "name": "frozen",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -11273,15 +11281,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_HEADING",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "heading",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_HEADING",
+          "num_params": 2,
           "class": "Car",
           "member": "GetHeading",
           "short_desc": "Returns the vehicle's heading (z-angle)"
@@ -13860,7 +13868,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -13886,13 +13894,15 @@
           ],
           "output": [
             {
-              "name": "_p7",
+              "name": "height",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "GET_HEIGHT_OF_VEHICLE",
-          "num_params": 7
+          "num_params": 7,
+          "class": "Car",
+          "member": "GetHeight"
         },
         {
           "name": "GET_HELP_MESSAGE_BOX_SIZE",
@@ -18615,19 +18625,21 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "dirtLevel",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "name": "GET_VEHICLE_DIRT_LEVEL",
           "num_params": 2,
-          "output": [
-            {
-              "name": "pIntensity",
-              "type": "float",
-              "source": "var_any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetDirtLevel"
         },
         {
           "input": [
@@ -19228,14 +19240,16 @@
           ]
         },
         {
-          "name": "HAND_VEHICLE_CONTROL_BACK_TO_PLAYER",
-          "num_params": 1,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             }
-          ]
+          ],
+          "name": "HAND_VEHICLE_CONTROL_BACK_TO_PLAYER",
+          "num_params": 1,
+          "class": "Car",
+          "member": "HandControlBackToPlayer"
         },
         {
           "input": [
@@ -19961,17 +19975,19 @@
           "member": "HasDamagedAtLeastOnePed"
         },
         {
-          "name": "HAS_PLAYER_DAMAGED_AT_LEAST_ONE_VEHICLE",
-          "num_params": 1,
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             }
           ],
+          "name": "HAS_PLAYER_DAMAGED_AT_LEAST_ONE_VEHICLE",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "HasDamagedAtLeastOneVehicle"
         },
         {
           "name": "HAS_PLAYER_RANK_BEEN_UPGRADED",
@@ -24987,7 +25003,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -25000,7 +25016,9 @@
           "short_desc": "Returns true if the vehicle extra of specified ID is turned on for the specified vehicle",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "IsExtraTurnedOn"
         },
         {
           "input": [
@@ -35527,14 +35545,14 @@
           "num_params": 1
         },
         {
-          "name": "SET_ENABLE_RC_DETONATE",
-          "num_params": 1,
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_ENABLE_RC_DETONATE",
+          "num_params": 1,
           "class": "Rc",
           "member": "SetEnableDetonate",
           "short_desc": "Enables a remote-control vehicle detonation",
@@ -36647,16 +36665,18 @@
         {
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_LOUD_VEHICLE_RADIO",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetLoudRadio"
         },
         {
           "input": [
@@ -38096,16 +38116,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PED_DONT_USE_VEHICLE_SPECIFIC_ANIMS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetDontUseVehicleSpecificAnims"
         },
         {
           "input": [
@@ -40811,7 +40833,7 @@
         {
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -40820,7 +40842,9 @@
             }
           ],
           "name": "SET_VEHICLE_ALPHA",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetAlpha"
         },
         {
           "name": "SET_VEHICLE_AREA_VISIBLE",
@@ -40832,16 +40856,18 @@
         {
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_VEHICLE_CAN_BE_TARGETTED",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetCanBeTargetted"
         },
         {
           "input": [
@@ -40850,7 +40876,7 @@
               "type": "Car"
             },
             {
-              "name": "intensity",
+              "name": "dirtLevel",
               "type": "float"
             }
           ],
@@ -40909,16 +40935,18 @@
         {
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "val",
+              "name": "bias",
               "type": "float"
             }
           ],
           "name": "SET_VEHICLE_STEER_BIAS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetSteerBias"
         },
         {
           "name": "SET_VIEWPORT",
@@ -45663,7 +45691,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -45680,7 +45708,12 @@
             }
           ],
           "name": "TASK_LOOK_AT_VEHICLE",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Task",
+          "member": "TaskLookAtVehicle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47917,7 +47950,7 @@
         {
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -47925,13 +47958,15 @@
               "type": "int"
             },
             {
-              "name": "turnoff",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "TURN_OFF_VEHICLE_EXTRA",
           "num_params": 3,
-          "short_desc": "Enables the vehicle extra of the specified id for the specified vehicle. NOTE: Use false to turn ON and true to turn OFF the extra"
+          "short_desc": "Enables the vehicle extra of the specified id for the specified vehicle. NOTE: Use false to turn ON and true to turn OFF the extra",
+          "class": "Car",
+          "member": "TurnOffExtra"
         },
         {
           "name": "TURN_ON_RADIOHUD_IN_LOBBY",
@@ -48351,19 +48386,21 @@
           ]
         },
         {
-          "name": "VEHICLE_CAN_BE_TARGETTED_BY_HS_MISSILE",
-          "num_params": 2,
-          "short_desc": "Returns a boolean indicating whether the specified vehicle can be targetted and followed by a heat seeking missile",
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "VEHICLE_CAN_BE_TARGETTED_BY_HS_MISSILE",
+          "num_params": 2,
+          "short_desc": "Returns a boolean indicating whether the specified vehicle can be targetted and followed by a heat seeking missile",
+          "class": "Car",
+          "member": "CanBeTargettedByHsMissile"
         },
         {
           "input": [
@@ -48372,7 +48409,7 @@
               "type": "Car"
             },
             {
-              "name": "cover",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -49176,18 +49213,20 @@
           "num_params": 0
         },
         {
-          "name": "SET_VEHICLE_EXPLODES_ON_HIGH_EXPLOSION_DAMAGE",
-          "num_params": 2,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_VEHICLE_EXPLODES_ON_HIGH_EXPLOSION_DAMAGE",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetExplodesOnHighExplosionDamage"
         },
         {
           "name": "STOP_SYNCING_SCRIPT_ANIMATIONS",
@@ -50145,11 +50184,9 @@
           ]
         },
         {
-          "name": "GET_VEHICLE_COMPONENT_INFO",
-          "num_params": 6,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -50178,45 +50215,53 @@
               "source": "var_any"
             }
           ],
+          "name": "GET_VEHICLE_COMPONENT_INFO",
+          "num_params": 6,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "GetComponentInfo"
         },
         {
-          "name": "GET_VEHICLE_ENGINE_REVS",
-          "num_params": 2,
-          "short_desc": "Gets the engine revs",
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "engineRevs",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_VEHICLE_ENGINE_REVS",
+          "num_params": 2,
+          "short_desc": "Gets the engine revs",
+          "class": "Car",
+          "member": "GetEngineRevs"
         },
         {
-          "name": "GET_VEHICLE_GEAR",
-          "num_params": 2,
-          "short_desc": "Gets the current vehicle gear and returns it as a number from 1 to 5 if the car moves forward, or false if it moves backward",
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "gear",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_VEHICLE_GEAR",
+          "num_params": 2,
+          "short_desc": "Gets the current vehicle gear and returns it as a number from 1 to 5 if the car moves forward, or false if it moves backward",
+          "class": "Car",
+          "member": "GetGear"
         },
         {
           "name": "IS_CAR_IN_ANGLED_AREA_2D",
@@ -51432,42 +51477,48 @@
           ]
         },
         {
-          "name": "SET_VEHICLE_ALWAYS_RENDER",
-          "num_params": 1,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             }
-          ]
+          ],
+          "name": "SET_VEHICLE_ALWAYS_RENDER",
+          "num_params": 1,
+          "class": "Car",
+          "member": "SetAlwaysRender"
         },
         {
-          "name": "SET_VEHICLE_DEFORMATION_MULT",
-          "num_params": 2,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
               "name": "multiplier",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_VEHICLE_DEFORMATION_MULT",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetDeformationMult"
         },
         {
-          "name": "SET_VEHICLE_RENDER_SCORCHED",
-          "num_params": 2,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_VEHICLE_RENDER_SCORCHED",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetRenderScorched"
         },
         {
           "name": "SHAKE_PAD_IN_CUTSCENE",
@@ -51536,14 +51587,16 @@
           "num_params": 0
         },
         {
-          "name": "STOP_VEHICLE_ALWAYS_RENDER",
-          "num_params": 1,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             }
-          ]
+          ],
+          "name": "STOP_VEHICLE_ALWAYS_RENDER",
+          "num_params": 1,
+          "class": "Car",
+          "member": "StopAlwaysRender"
         },
         {
           "name": "TASK_FOLLOW_NAV_MESH_AND_SLIDE_TO_COORD_HDG_RATE",

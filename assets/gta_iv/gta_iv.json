@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674769915274,
-    "version": "0.63",
+    "last_update": 1674837952789,
+    "version": "0.64",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -3806,7 +3806,7 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
@@ -3816,12 +3816,14 @@
           ],
           "name": "CHANGE_BLIP_NAME_FROM_ASCII",
           "num_params": 2,
-          "short_desc": "Changes blip's name which is displayed while covering it with cursor on the map"
+          "short_desc": "Changes blip's name which is displayed while covering it with cursor on the map",
+          "class": "Blip",
+          "member": "ChangeNameFromAscii"
         },
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
@@ -3830,12 +3832,14 @@
             }
           ],
           "name": "CHANGE_BLIP_NAME_FROM_TEXT_FILE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "ChangeNameFromTextFile"
         },
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
@@ -3844,7 +3848,9 @@
             }
           ],
           "name": "CHANGE_BLIP_PRIORITY",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Blip",
+          "member": "ChangePriority"
         },
         {
           "input": [
@@ -5806,15 +5812,21 @@
               "type": "bool"
             }
           ],
-          "name": "CREATE_GROUP",
-          "num_params": 3,
           "output": [
             {
-              "name": "pGroup",
+              "name": "handle",
               "type": "Group",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_GROUP",
+          "num_params": 3,
+          "class": "Group",
+          "member": "Create",
+          "attrs": {
+            "is_static": true,
+            "is_constructor": true
+          }
         },
         {
           "input": [
@@ -7027,7 +7039,12 @@
         {
           "name": "DISABLE_FRONTEND_RADIO",
           "num_params": 0,
-          "short_desc": "Disables the main vehicle radio. The radio will fade out instead of instantly turning off. Other radio sources like background music or the faint radio heard outside of the vehicle will still be heard. The radio can be reenabled using ENABLE_FRONTEND_RADIO"
+          "short_desc": "Disables the main vehicle radio. The radio will fade out instead of instantly turning off. Other radio sources like background music or the faint radio heard outside of the vehicle will still be heard. The radio can be reenabled using ENABLE_FRONTEND_RADIO",
+          "class": "Game",
+          "member": "DisableFrontendRadio",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7136,12 +7153,17 @@
         {
           "input": [
             {
-              "name": "display",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "DISPLAY_FRONTEND_MAP_BLIPS",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "DisplayFrontendMapBlips",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -8993,7 +9015,12 @@
         },
         {
           "name": "ENABLE_FRONTEND_RADIO",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "EnableFrontendRadio",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -9364,15 +9391,15 @@
           }
         },
         {
-          "name": "FIND_MAX_NUMBER_OF_GROUP_MEMBERS",
-          "num_params": 1,
           "output": [
             {
-              "name": "_p1",
+              "name": "maxNumMembers",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "FIND_MAX_NUMBER_OF_GROUP_MEMBERS",
+          "num_params": 1,
           "class": "Game",
           "member": "FindMaxNumberOfGroupMembers",
           "short_desc": "",
@@ -10532,19 +10559,21 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "animGroup",
               "type": "string",
               "source": "var_any"
             }
           ],
           "name": "GET_ANIM_GROUP_FROM_CHAR",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetAnimGroup"
         },
         {
           "name": "GET_ASCII_JUST_PRESSED",
@@ -15690,8 +15719,6 @@
           }
         },
         {
-          "name": "GET_NUMBER_OF_FOLLOWERS",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
@@ -15700,11 +15727,13 @@
           ],
           "output": [
             {
-              "name": "followers",
+              "name": "numFollowers",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_NUMBER_OF_FOLLOWERS",
+          "num_params": 2,
           "class": "Char",
           "member": "GetNumberOfFollowers",
           "short_desc": "Returns the number of members which are in a group of the character (01DE)"
@@ -19147,11 +19176,11 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             },
             {
@@ -19160,7 +19189,9 @@
             }
           ],
           "name": "GIVE_PED_PICKUP_OBJECT",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Char",
+          "member": "GivePickupObject"
         },
         {
           "name": "GIVE_PLAYER_HELMET",
@@ -19959,7 +19990,7 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
@@ -19971,7 +20002,9 @@
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "HasCollectedPickup"
         },
         {
           "input": [
@@ -22931,7 +22964,7 @@
               "type": "Char"
             },
             {
-              "name": "g",
+              "name": "group",
               "type": "Group"
             }
           ],
@@ -38221,16 +38254,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PED_IS_BLIND_RAGING",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetIsBlindRaging"
         },
         {
           "input": [
@@ -39014,12 +39049,17 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_POLICE_RADAR_BLIPS",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetPoliceRadarBlips",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -45873,7 +45913,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -45898,7 +45938,12 @@
             }
           ],
           "name": "TASK_PICKUP_AND_CARRY_OBJECT",
-          "num_params": 6
+          "num_params": 6,
+          "class": "Task",
+          "member": "PickupAndCarryObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -49417,18 +49462,20 @@
           ]
         },
         {
-          "name": "CHANGE_BLIP_ROTATION",
-          "num_params": 2,
           "input": [
             {
-              "name": "blip",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
               "name": "rotation",
               "type": "int"
             }
-          ]
+          ],
+          "name": "CHANGE_BLIP_ROTATION",
+          "num_params": 2,
+          "class": "Blip",
+          "member": "ChangeRotation"
         },
         {
           "name": "CLAN_CREATE",

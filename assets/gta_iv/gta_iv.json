@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1674837952789,
-    "version": "0.64",
+    "last_update": 1674853145541,
+    "version": "0.65",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -10208,7 +10208,7 @@
               "type": "Car"
             },
             {
-              "name": "frozen",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -11066,36 +11066,36 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "animname0",
+              "type": "string"
+            },
+            {
+              "name": "animname1",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "time",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "GET_CAR_ANIM_CURRENT_TIME",
           "num_params": 4,
-          "input": [
-            {
-              "name": "car",
-              "type": "Car"
-            },
-            {
-              "name": "animname0",
-              "type": "string"
-            },
-            {
-              "name": "animname1",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "time",
-              "type": "float",
-              "source": "var_any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetAnimCurrentTime"
         },
         {
-          "name": "GET_CAR_ANIM_TOTAL_TIME",
-          "num_params": 4,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -11113,7 +11113,11 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAR_ANIM_TOTAL_TIME",
+          "num_params": 4,
+          "class": "Car",
+          "member": "GetAnimTotalTime"
         },
         {
           "name": "GET_CAR_BLOCKING_CAR",
@@ -11162,21 +11166,21 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_COLOURS",
-          "num_params": 3,
-          "short_desc": "Gets the car's primary and secondary colors",
           "output": [
             {
-              "name": "pColour1",
+              "name": "colour1",
               "type": "ColourIndex",
               "source": "var_any"
             },
             {
-              "name": "pColour2",
+              "name": "colour2",
               "type": "ColourIndex",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_COLOURS",
+          "num_params": 3,
+          "short_desc": "Gets the car's primary and secondary colors",
           "class": "Car",
           "member": "GetColors"
         },
@@ -11213,7 +11217,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -11229,15 +11233,17 @@
               "type": "float"
             }
           ],
-          "name": "GET_CAR_DEFORMATION_AT_POS",
-          "num_params": 5,
           "output": [
             {
-              "name": "pDeformation",
+              "name": "deformation",
               "type": "Vector3",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAR_DEFORMATION_AT_POS",
+          "num_params": 5,
+          "class": "Car",
+          "member": "GetDeformationAtPos"
         },
         {
           "input": [
@@ -11359,11 +11365,9 @@
           "short_desc": "Returns the vehicle's health"
         },
         {
-          "name": "GET_CAR_LIVERY",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -11373,7 +11377,11 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAR_LIVERY",
+          "num_params": 2,
+          "class": "Car",
+          "member": "GetLivery"
         },
         {
           "name": "GET_CAR_MASS",
@@ -11493,21 +11501,23 @@
           "short_desc": "Returns the Y Angle of the vehicle"
         },
         {
-          "name": "GET_CAR_SIREN_HEALTH",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "health",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAR_SIREN_HEALTH",
+          "num_params": 2,
+          "class": "Car",
+          "member": "GetSirenHealth"
         },
         {
           "input": [
@@ -11516,15 +11526,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_SPEED",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "speed",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_SPEED",
+          "num_params": 2,
           "class": "Car",
           "member": "GetSpeed",
           "short_desc": "Gets the car's speed"
@@ -11555,15 +11565,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_CAR_UPRIGHT_VALUE",
-          "num_params": 2,
           "output": [
             {
-              "name": "pValue",
+              "name": "value",
               "type": "float",
               "source": "var_any"
             }
           ],
+          "name": "GET_CAR_UPRIGHT_VALUE",
+          "num_params": 2,
           "class": "Car",
           "member": "GetUprightValue",
           "short_desc": "Gets the car's vertical angle"
@@ -12338,8 +12348,6 @@
           "member": "GetClosestCarNode"
         },
         {
-          "name": "GET_CLOSEST_CAR_NODE_FAVOUR_DIRECTION",
-          "num_params": 8,
           "input": [
             {
               "name": "_p1",
@@ -12380,9 +12388,14 @@
               "source": "var_any"
             }
           ],
+          "name": "GET_CLOSEST_CAR_NODE_FAVOUR_DIRECTION",
+          "num_params": 8,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetClosestCarNodeFavourDirection"
         },
         {
           "input": [
@@ -12507,8 +12520,11 @@
           "name": "GET_CLOSEST_MAJOR_CAR_NODE",
           "num_params": 6,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetClosestMajorCarNode"
         },
         {
           "input": [
@@ -13336,15 +13352,15 @@
               "type": "Car"
             }
           ],
-          "name": "GET_DRIVER_OF_CAR",
-          "num_params": 2,
           "output": [
             {
-              "name": "pPed",
+              "name": "char",
               "type": "Char",
               "source": "var_any"
             }
           ],
+          "name": "GET_DRIVER_OF_CAR",
+          "num_params": 2,
           "class": "Car",
           "member": "GetDriver",
           "short_desc": "Returns the car's driver handle"
@@ -14984,8 +15000,6 @@
           "num_params": 2
         },
         {
-          "name": "GET_NEXT_CLOSEST_CAR_NODE",
-          "num_params": 6,
           "input": [
             {
               "name": "x",
@@ -15017,13 +15031,16 @@
               "source": "var_any"
             }
           ],
+          "name": "GET_NEXT_CLOSEST_CAR_NODE",
+          "num_params": 6,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetNextClosestCarNode"
         },
         {
-          "name": "GET_NEXT_CLOSEST_CAR_NODE_FAVOUR_DIRECTION",
-          "num_params": 7,
           "input": [
             {
               "name": "x",
@@ -15060,13 +15077,16 @@
               "source": "var_any"
             }
           ],
+          "name": "GET_NEXT_CLOSEST_CAR_NODE_FAVOUR_DIRECTION",
+          "num_params": 7,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetNextClosestCarNodeFavourDirection"
         },
         {
-          "name": "GET_NEXT_CLOSEST_CAR_NODE_WITH_HEADING",
-          "num_params": 7,
           "input": [
             {
               "name": "x",
@@ -15103,9 +15123,14 @@
               "source": "var_any"
             }
           ],
+          "name": "GET_NEXT_CLOSEST_CAR_NODE_WITH_HEADING",
+          "num_params": 7,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetNextClosestCarNodeWithHeading"
         },
         {
           "input": [
@@ -15147,8 +15172,11 @@
           "name": "GET_NEXT_CLOSEST_CAR_NODE_WITH_HEADING_ON_ISLAND",
           "num_params": 7,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetNextClosestCarNodeWithHeadingOnIsland"
         },
         {
           "input": [
@@ -15271,8 +15299,11 @@
           "name": "GET_NTH_CLOSEST_CAR_NODE_FAVOUR_DIRECTION",
           "num_params": 9,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetNthClosestCarNodeFavourDirection"
         },
         {
           "input": [
@@ -15378,8 +15409,11 @@
           "name": "GET_NTH_CLOSEST_CAR_NODE_WITH_HEADING_ON_ISLAND",
           "num_params": 10,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetNthClosestCarNodeWithHeadingOnIsland"
         },
         {
           "input": [
@@ -15446,21 +15480,23 @@
           "short_desc": ""
         },
         {
-          "name": "GET_NUM_CAR_LIVERIES",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "num",
+              "name": "numLiveries",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_NUM_CAR_LIVERIES",
+          "num_params": 2,
+          "class": "Car",
+          "member": "GetNumLiveries"
         },
         {
           "name": "GET_NUM_CONSOLE_COMMAND_TOKENS",
@@ -17130,15 +17166,20 @@
               "type": "int"
             }
           ],
-          "name": "GET_RANDOM_CAR_BACK_BUMPER_IN_SPHERE",
-          "num_params": 7,
           "output": [
             {
-              "name": "veh",
+              "name": "handle",
               "type": "Car",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_RANDOM_CAR_BACK_BUMPER_IN_SPHERE",
+          "num_params": 7,
+          "class": "World",
+          "member": "GetRandomCarBackBumperInSphere",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -17171,15 +17212,20 @@
               "type": "bool"
             }
           ],
-          "name": "GET_RANDOM_CAR_FRONT_BUMPER_IN_SPHERE_NO_SAVE",
-          "num_params": 8,
           "output": [
             {
               "name": "handle",
-              "type": "int",
+              "type": "Car",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_RANDOM_CAR_FRONT_BUMPER_IN_SPHERE_NO_SAVE",
+          "num_params": 8,
+          "class": "World",
+          "member": "GetRandomCarFrontBumperInSphereNoSave",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -17264,12 +17310,10 @@
               "type": "bool"
             },
             {
-              "name": "if",
+              "name": "_p1",
               "type": "0"
             }
           ],
-          "name": "GET_RANDOM_CAR_MODEL_IN_MEMORY",
-          "num_params": 4,
           "output": [
             {
               "name": "pHash",
@@ -17281,7 +17325,14 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_RANDOM_CAR_MODEL_IN_MEMORY",
+          "num_params": 4,
+          "class": "Streaming",
+          "member": "GetRandomCarModelInMemory",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -17339,8 +17390,11 @@
           "name": "GET_RANDOM_CAR_NODE",
           "num_params": 11,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetRandomCarNode"
         },
         {
           "name": "GET_RANDOM_CAR_OF_TYPE_IN_ANGLED_AREA_NO_SAVE",
@@ -19200,17 +19254,19 @@
         {
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "give",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "GIVE_PLAYER_RAGDOLL_CONTROL",
           "num_params": 2,
-          "short_desc": "Makes the user be able to move Niko while he is in ragdoll mode. Ragdoll modes include being drunk and bailing out of a moving car"
+          "short_desc": "Makes the user be able to move Niko while he is in ragdoll mode. Ragdoll modes include being drunk and bailing out of a moving car",
+          "class": "Player",
+          "member": "GiveRagdollControl"
         },
         {
           "name": "GIVE_REMOTE_CONTROLLED_MODEL_TO_PLAYER",
@@ -23687,7 +23743,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -23695,7 +23751,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsAttachedToAnyCar"
         },
         {
           "input": [
@@ -23835,11 +23893,9 @@
           }
         },
         {
-          "name": "IS_PED_LOOKING_AT_CAR",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -23847,9 +23903,13 @@
               "type": "Car"
             }
           ],
+          "name": "IS_PED_LOOKING_AT_CAR",
+          "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsLookingAtCar"
         },
         {
           "name": "IS_PED_LOOKING_AT_OBJECT",
@@ -28264,11 +28324,9 @@
           "num_params": 2
         },
         {
-          "name": "PLAY_CAR_ANIM",
-          "num_params": 6,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -28292,9 +28350,13 @@
               "type": "bool"
             }
           ],
+          "name": "PLAY_CAR_ANIM",
+          "num_params": 6,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "PlayAnim"
         },
         {
           "input": [
@@ -38105,7 +38167,12 @@
             }
           ],
           "name": "SET_PARKED_CAR_DENSITY_MULTIPLIER",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetParkedCarDensityMultiplier",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38518,16 +38585,18 @@
         {
           "input": [
             {
-              "name": "pickup",
-              "type": "Object"
+              "name": "self",
+              "type": "Pickup"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PICKUP_COLLECTABLE_BY_CAR",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Pickup",
+          "member": "SetCollectableByCar"
         },
         {
           "input": [
@@ -39110,12 +39179,17 @@
         {
           "input": [
             {
-              "name": "density",
+              "name": "multiplier",
               "type": "float"
             }
           ],
           "name": "SET_RANDOM_CAR_DENSITY_MULTIPLIER",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetRandomCarDensityMultiplier",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -41604,17 +41678,19 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "windownum",
+              "name": "windowId",
               "type": "int"
             }
           ],
           "name": "SMASH_CAR_WINDOW",
           "num_params": 2,
-          "short_desc": "Smashes the specified window"
+          "short_desc": "Smashes the specified window",
+          "class": "Car",
+          "member": "SmashWindow"
         },
         {
           "input": [
@@ -42557,16 +42633,18 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "stop",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "STOP_CAR_BREAKING",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "StopBreaking"
         },
         {
           "name": "STOP_CHAR_FACIAL_TALK",
@@ -43594,11 +43672,11 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "car",
               "type": "Car"
             },
             {
@@ -43639,16 +43717,21 @@
             }
           ],
           "name": "TASK_CAR_DRIVE_TO_COORD",
-          "num_params": 11
+          "num_params": 11,
+          "class": "Task",
+          "member": "CarDriveToCoord",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "car",
               "type": "Car"
             },
             {
@@ -43689,7 +43772,12 @@
             }
           ],
           "name": "TASK_CAR_DRIVE_TO_COORD_NOT_AGAINST_TRAFFIC",
-          "num_params": 11
+          "num_params": 11,
+          "class": "Task",
+          "member": "CarDriveToCoordNotAgainstTraffic",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43722,11 +43810,11 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "vehicle",
+              "name": "car",
               "type": "Car"
             },
             {
@@ -43756,16 +43844,21 @@
           ],
           "name": "TASK_CAR_MISSION",
           "num_params": 8,
-          "short_desc": "Makes the character use the vehicle to follow the target vehicle The character will get in the driver of the vehicle automatically"
+          "short_desc": "Makes the character use the vehicle to follow the target vehicle The character will get in the driver of the vehicle automatically",
+          "class": "Task",
+          "member": "CarMission",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "vehicle",
+              "name": "car",
               "type": "Car"
             },
             {
@@ -43802,16 +43895,21 @@
             }
           ],
           "name": "TASK_CAR_MISSION_COORS_TARGET",
-          "num_params": 10
+          "num_params": 10,
+          "class": "Task",
+          "member": "CarMissionCoorsTarget",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "vehicle",
+              "name": "car",
               "type": "Car"
             },
             {
@@ -43848,16 +43946,21 @@
             }
           ],
           "name": "TASK_CAR_MISSION_COORS_TARGET_NOT_AGAINST_TRAFFIC",
-          "num_params": 10
+          "num_params": 10,
+          "class": "Task",
+          "member": "CarMissionCoorsTargetNotAgainstTraffic",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "vehicle",
+              "name": "car",
               "type": "Car"
             },
             {
@@ -43886,7 +43989,12 @@
             }
           ],
           "name": "TASK_CAR_MISSION_NOT_AGAINST_TRAFFIC",
-          "num_params": 8
+          "num_params": 8,
+          "class": "Task",
+          "member": "CarMissionNotAgainstTraffic",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -48837,8 +48945,6 @@
           "num_params": 0
         },
         {
-          "name": "GET_RANDOM_CAR_NODE_INCLUDE_SWITCHED_OFF_NODES",
-          "num_params": 11,
           "input": [
             {
               "name": "x",
@@ -48891,9 +48997,14 @@
               "source": "var_any"
             }
           ],
+          "name": "GET_RANDOM_CAR_NODE_INCLUDE_SWITCHED_OFF_NODES",
+          "num_params": 11,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Path",
+          "member": "GetRandomCarNodeIncludeSwitchedOffNodes"
         },
         {
           "name": "GET_STREAM_PLAYTIME",

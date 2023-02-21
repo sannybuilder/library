@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1676153923667,
-    "version": "0.70",
+    "last_update": 1677009696352,
+    "version": "0.71",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -3983,7 +3983,12 @@
             }
           ],
           "name": "CHANGE_PICKUP_BLIP_DISPLAY",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "ChangePickupBlipDisplay",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -3993,7 +3998,12 @@
             }
           ],
           "name": "CHANGE_PICKUP_BLIP_PRIORITY",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "ChangePickupBlipPriority",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4003,17 +4013,27 @@
             }
           ],
           "name": "CHANGE_PICKUP_BLIP_SCALE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "ChangePickupBlipScale",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "sprite",
+              "name": "blipSprite",
               "type": "int"
             }
           ],
           "name": "CHANGE_PICKUP_BLIP_SPRITE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "ChangePickupBlipSprite",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4743,12 +4763,14 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
           "name": "CLEAR_ROOM_FOR_CAR",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Car",
+          "member": "ClearRoom"
         },
         {
           "input": [
@@ -6509,11 +6531,9 @@
           "short_desc": "Returns false"
         },
         {
-          "name": "DAMAGE_CAR",
-          "num_params": 7,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -6540,7 +6560,11 @@
               "name": "flag",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "DAMAGE_CAR",
+          "num_params": 7,
+          "class": "Car",
+          "member": "Damage"
         },
         {
           "input": [
@@ -6924,12 +6948,14 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
           "name": "DETACH_CAR",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Car",
+          "member": "Detach"
         },
         {
           "input": [
@@ -6963,16 +6989,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "DETACH_PED_FROM_WITHIN_CAR",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "DetachFromWithinCar"
         },
         {
           "name": "DID_SAVE_COMPLETE_SUCCESSFULLY",
@@ -8967,12 +8995,17 @@
         {
           "input": [
             {
-              "name": "enable",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "ENABLE_CHASE_AUDIO",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "EnableChaseAudio",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ENABLE_CONVERSATION",
@@ -9285,23 +9318,23 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "explode",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "EXPLODE_CAR_IN_CUTSCENE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "ExplodeInCutscene"
         },
         {
-          "name": "EXPLODE_CAR_IN_CUTSCENE_SHAKE_AND_BIT",
-          "num_params": 4,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -9316,7 +9349,11 @@
               "name": "flag2",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "EXPLODE_CAR_IN_CUTSCENE_SHAKE_AND_BIT",
+          "num_params": 4,
+          "class": "Car",
+          "member": "ExplodeInCutsceneShakeAndBit"
         },
         {
           "input": [
@@ -9366,12 +9403,14 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
           "name": "EXTINGUISH_CAR_FIRE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Car",
+          "member": "ExtinguishFire"
         },
         {
           "input": [
@@ -10521,15 +10560,20 @@
           }
         },
         {
-          "name": "GET_ACCEPT_BUTTON",
-          "num_params": 1,
           "output": [
             {
               "name": "_p1",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_ACCEPT_BUTTON",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "GetAcceptButton",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -12945,19 +12989,21 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "number",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CURRENT_PLAYBACK_NUMBER_FOR_CAR",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "GetCurrentPlaybackNumber"
         },
         {
           "name": "GET_CURRENT_POLICE_CAR_MODEL",
@@ -13432,7 +13478,7 @@
           ],
           "output": [
             {
-              "name": "pValue",
+              "name": "health",
               "type": "float",
               "source": "var_any"
             }
@@ -19223,7 +19269,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -19233,7 +19279,9 @@
           ],
           "name": "GIVE_PED_AMBIENT_OBJECT",
           "num_params": 2,
-          "short_desc": "Gives an ambient object to the character, and plays proper ambient animations for some of the objects. Model must be loaded before calling this function, or game might crash"
+          "short_desc": "Gives an ambient object to the character, and plays proper ambient animations for some of the objects. Model must be loaded before calling this function, or game might crash",
+          "class": "Char",
+          "member": "GiveAmbientObject"
         },
         {
           "input": [
@@ -23171,9 +23219,12 @@
           "name": "IS_IN_CAR_FIRE_BUTTON_PRESSED",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns true if the attack button is being pressed"
+          "short_desc": "Returns true if the attack button is being pressed",
+          "class": "Pad",
+          "member": "IsInCarFireButtonPressed"
         },
         {
           "name": "IS_IN_LAN_MODE",
@@ -23264,8 +23315,11 @@
           "name": "IS_MEMORY_CARD_IN_USE",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsMemoryCardInUse"
         },
         {
           "name": "IS_MESSAGE_BEING_DISPLAYED",
@@ -28199,12 +28253,17 @@
         {
           "input": [
             {
-              "name": "num",
+              "name": "number",
               "type": "int"
             }
           ],
           "name": "OVERRIDE_NUMBER_OF_PARKED_CARS",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "OverrideNumberOfParkedCars",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PANIC_SCREAM",
@@ -31808,7 +31867,12 @@
         },
         {
           "name": "SET_ALL_CAR_GENERATORS_BACK_TO_ACTIVE",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "SetAllCarGeneratorsBackToActive",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -33382,7 +33446,12 @@
         },
         {
           "name": "SET_CAR_STOP_CLONING",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "SetCarStopCloning",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -36132,18 +36201,20 @@
           ]
         },
         {
-          "name": "SET_GANG_CAR",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_GANG_CAR",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetGang"
         },
         {
           "name": "SET_GANG_WEAPONS",
@@ -37327,7 +37398,12 @@
             }
           ],
           "name": "SET_MONEY_CARRIED_BY_ALL_NEW_PEDS",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetMoneyCarriedByAllNewPeds",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_MONEY_PICKUP_NETWORK_REGEN_TIME",
@@ -40190,7 +40266,7 @@
               "type": "Car"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -43141,12 +43217,17 @@
         {
           "input": [
             {
-              "name": "on",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SWITCH_ARROW_ABOVE_BLIPPED_PICKUPS",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SwitchArrowAboveBlippedPickups",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43473,7 +43554,7 @@
         {
           "input": [
             {
-              "name": "on",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -43597,7 +43678,7 @@
         {
           "input": [
             {
-              "name": "on",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -45801,16 +45882,21 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "vehicle",
+              "name": "car",
               "type": "Car"
             }
           ],
           "name": "TASK_LEAVE_CAR_DONT_CLOSE_DOOR",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Task",
+          "member": "LeaveCarDontCloseDoor",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -45835,7 +45921,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -45848,7 +45934,12 @@
             }
           ],
           "name": "TASK_LEAVE_CAR_IN_DIRECTION",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Task",
+          "member": "LeaveCarInDirection",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -46336,7 +46427,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -46373,7 +46464,12 @@
             }
           ],
           "name": "TASK_PLAY_ANIM_SECONDARY_IN_CAR",
-          "num_params": 9
+          "num_params": 9,
+          "class": "Task",
+          "member": "PlayAnimSecondaryInCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47104,7 +47200,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47138,7 +47234,12 @@
           ],
           "name": "TASK_SIT_DOWN_ON_SEAT",
           "num_params": 8,
-          "short_desc": "Makes ped sit on seat place (on world point p4 (x), p5 (y), p6 (z)) with specific facing angle (p7) and ped`s own 'seat animation' which can be changed with CHANGE_CHAR_SIT_IDLE_ANIM"
+          "short_desc": "Makes ped sit on seat place (on world point p4 (x), p5 (y), p6 (z)) with specific facing angle (p7) and ped`s own 'seat animation' which can be changed with CHANGE_CHAR_SIT_IDLE_ANIM",
+          "class": "Task",
+          "member": "SitDownOnSeat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TASK_SIT_DOWN_PLAY_ANIM",
@@ -48300,17 +48401,19 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "UNLOCK_RAGDOLL",
           "num_params": 2,
-          "short_desc": "Turns off ragdoll for the character. When ragdoll is turned off, movements that relies on ragdoll animations will use prerecorded animations in a way similar to previous games. If the animation doesn't exist, awkward or no movement happens"
+          "short_desc": "Turns off ragdoll for the character. When ragdoll is turned off, movements that relies on ragdoll animations will use prerecorded animations in a way similar to previous games. If the animation doesn't exist, awkward or no movement happens",
+          "class": "Char",
+          "member": "UnlockRagdoll"
         },
         {
           "name": "UNMARK_ALL_ROAD_NODES_AS_DONT_WANDER",
@@ -48939,22 +49042,24 @@
           ]
         },
         {
-          "name": "CHANGE_TERRITORY_BLIP_SCALE",
-          "num_params": 3,
           "input": [
             {
-              "name": "blip",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float"
             }
-          ]
+          ],
+          "name": "CHANGE_TERRITORY_BLIP_SCALE",
+          "num_params": 3,
+          "class": "Blip",
+          "member": "ChangeTerritoryScale"
         },
         {
           "name": "DETACH_OBJECT_NO_COLLIDE",
@@ -49690,11 +49795,21 @@
         },
         {
           "name": "DISABLE_HELI_CHASE_CAM_BONNET_NITRO_FIX",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "DisableHeliChaseCamBonnetNitroFix",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "DISABLE_HELI_CHASE_CAM_THIS_UPDATE",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "DisableHeliChaseCamThisUpdate",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "DISABLE_INTERMEZZO_CAMS",
@@ -51051,74 +51166,109 @@
           "member": "SetAllowedToDrown"
         },
         {
-          "name": "SET_CAR_FOV_FADE_MULT",
-          "num_params": 1,
           "input": [
             {
               "name": "multiplier",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAR_FOV_FADE_MULT",
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetCarFovFadeMult",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "maxFov",
+              "type": "float"
+            }
+          ],
           "name": "SET_CAR_FOV_MAX",
           "num_params": 1,
-          "input": [
-            {
-              "name": "maxfov",
-              "type": "float"
-            }
-          ]
+          "class": "Game",
+          "member": "SetCarFovMax",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "minFov",
+              "type": "float"
+            }
+          ],
           "name": "SET_CAR_FOV_MIN",
           "num_params": 1,
-          "input": [
-            {
-              "name": "minfov",
-              "type": "float"
-            }
-          ]
+          "class": "Game",
+          "member": "SetCarFovMin",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "SET_CAR_FOV_RATE",
-          "num_params": 1,
           "input": [
             {
               "name": "rate",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAR_FOV_RATE",
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetCarFovRate",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "speed",
+              "type": "float"
+            }
+          ],
           "name": "SET_CAR_FOV_START_SPEED",
           "num_params": 1,
+          "class": "Game",
+          "member": "SetCarFovStartSpeed",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "speed",
               "type": "float"
             }
-          ]
-        },
-        {
+          ],
           "name": "SET_CAR_FOV_START_SPEED_BOAT",
           "num_params": 1,
-          "input": [
-            {
-              "name": "speed",
-              "type": "float"
-            }
-          ]
+          "class": "Game",
+          "member": "SetCarFovStartSpeedBoat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "SET_CAR_MOTION_BLUR_EFFECT_BOAT",
-          "num_params": 1,
           "input": [
             {
               "name": "blur",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAR_MOTION_BLUR_EFFECT_BOAT",
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetCarMotionBlurEffectBoat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -51466,8 +51616,6 @@
           ]
         },
         {
-          "name": "SET_MONEY_CARRIED_BY_PED_WITH_MODEL",
-          "num_params": 3,
           "input": [
             {
               "name": "model",
@@ -51481,7 +51629,14 @@
               "name": "m1",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_MONEY_CARRIED_BY_PED_WITH_MODEL",
+          "num_params": 3,
+          "class": "Game",
+          "member": "SetMoneyCarriedByPedWithModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_NETWORK_PED_USING_PARACHUTE",
@@ -51826,30 +51981,32 @@
           "num_params": 0
         },
         {
-          "name": "START_PLAYBACK_RECORDED_CAR_WITH_OFFSET",
-          "num_params": 5,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "carRec",
+              "name": "pathId",
               "type": "int"
             },
             {
-              "name": "x",
+              "name": "offsetX",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "offsetY",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "offsetZ",
               "type": "float"
             }
-          ]
+          ],
+          "name": "START_PLAYBACK_RECORDED_CAR_WITH_OFFSET",
+          "num_params": 5,
+          "class": "Car",
+          "member": "StartPlaybackRecordedWithOffset"
         },
         {
           "name": "STOP_KILL_TRACKING",

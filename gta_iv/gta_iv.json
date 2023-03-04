@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1677009696352,
-    "version": "0.71",
+    "last_update": 1677953617849,
+    "version": "0.72",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -9565,19 +9565,22 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "position",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "FIND_POSITION_IN_RECORDING",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "FindPositionInRecording",
+          "short_desc": ""
         },
         {
           "name": "FIND_PRIMARY_POPULATION_ZONE_GROUP",
@@ -9637,19 +9640,21 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "timePosition",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "FIND_TIME_POSITION_IN_RECORDING",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "FindTimePositionInRecording"
         },
         {
           "name": "FIND_TRAIN_DIRECTION",
@@ -12995,7 +13000,7 @@
           ],
           "output": [
             {
-              "name": "number",
+              "name": "pathNumber",
               "type": "int",
               "source": "var_any"
             }
@@ -19602,7 +19607,7 @@
         {
           "input": [
             {
-              "name": "carRec",
+              "name": "pathNumber",
               "type": "int"
             }
           ],
@@ -30610,7 +30615,7 @@
         {
           "input": [
             {
-              "name": "carRec",
+              "name": "pathNumber",
               "type": "int"
             }
           ],
@@ -31109,7 +31114,7 @@
         {
           "input": [
             {
-              "name": "carRecId",
+              "name": "pathNumber",
               "type": "int"
             }
           ],
@@ -39358,11 +39363,9 @@
           "num_params": 1
         },
         {
-          "name": "SET_RECORDING_TO_POINT_NEAREST_TO_COORS",
-          "num_params": 4,
           "input": [
             {
-              "name": "cat",
+              "name": "self",
               "type": "Car"
             },
             {
@@ -39377,7 +39380,11 @@
               "name": "z",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_RECORDING_TO_POINT_NEAREST_TO_COORS",
+          "num_params": 4,
+          "class": "Car",
+          "member": "SetRecordingToPointNearestToCoors"
         },
         {
           "input": [
@@ -41746,8 +41753,8 @@
         {
           "input": [
             {
-              "name": "carRec",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
               "name": "time",
@@ -41755,7 +41762,9 @@
             }
           ],
           "name": "SKIP_TIME_IN_PLAYBACK_RECORDED_CAR",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "SkipTimeInPlaybackRecorded"
         },
         {
           "input": [
@@ -42351,7 +42360,7 @@
               "type": "Car"
             },
             {
-              "name": "carRec",
+              "name": "pathNumber",
               "type": "int"
             }
           ],
@@ -42362,18 +42371,18 @@
           "short_desc": "Assigns a car to a path"
         },
         {
-          "name": "START_PLAYBACK_RECORDED_CAR_LOOPED",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "pathNumber",
               "type": "int"
             }
           ],
+          "name": "START_PLAYBACK_RECORDED_CAR_LOOPED",
+          "num_params": 2,
           "class": "Car",
           "member": "StartPlaybackRecordedLooped",
           "short_desc": "Starts looped playback of a recorded car path"
@@ -42385,7 +42394,7 @@
               "type": "Car"
             },
             {
-              "name": "carRec",
+              "name": "pathNumber",
               "type": "int"
             }
           ],
@@ -43709,8 +43718,11 @@
           "name": "SYNCH_RECORDING_WITH_WATER",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "SynchRecordingWithWater"
         },
         {
           "input": [
@@ -44622,7 +44634,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             }
           ],
@@ -51987,7 +51999,7 @@
               "type": "Car"
             },
             {
-              "name": "pathId",
+              "name": "pathNumber",
               "type": "int"
             },
             {

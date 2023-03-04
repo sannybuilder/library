@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1677953617849,
-    "version": "0.72",
+    "last_update": 1677955334577,
+    "version": "0.73",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -14074,8 +14074,6 @@
           "member": "GetHeight"
         },
         {
-          "name": "GET_HELP_MESSAGE_BOX_SIZE",
-          "num_params": 2,
           "output": [
             {
               "name": "x",
@@ -14087,7 +14085,14 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_HELP_MESSAGE_BOX_SIZE",
+          "num_params": 2,
+          "class": "Text",
+          "member": "GetHelpMessageBoxSize",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GET_HOST_ID",
@@ -14473,15 +14478,20 @@
           ]
         },
         {
-          "name": "GET_LINE_HEIGHT",
-          "num_params": 1,
           "output": [
             {
-              "name": "_p1",
+              "name": "height",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_LINE_HEIGHT",
+          "num_params": 1,
+          "class": "Text",
+          "member": "GetLineHeight",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GET_LOCAL_GAMERLEVEL_FROM_PROFILESETTINGS",
@@ -14626,8 +14636,6 @@
           "short_desc": "Returns the last row of a panel selected with the sprint key"
         },
         {
-          "name": "GET_MENU_ITEM_SELECTED",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
@@ -14636,11 +14644,13 @@
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "row",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_MENU_ITEM_SELECTED",
+          "num_params": 2,
           "class": "Menu",
           "member": "GetItemSelected",
           "short_desc": "Returns the currently highlighted row in a panel"
@@ -19321,18 +19331,20 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "GIVE_PED_HELMET",
           "num_params": 1,
-          "short_desc": "Gives a helmet to the specified ped"
+          "short_desc": "Gives a helmet to the specified ped",
+          "class": "Char",
+          "member": "GiveHelmet"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -19342,7 +19354,9 @@
           ],
           "name": "GIVE_PED_HELMET_WITH_OPTS",
           "num_params": 2,
-          "short_desc": "Gives a helmet to the specified ped with parameter (P2). If P2 = 0 - ped will drop the helmet after 4-5 seconds. Just like Nico gets out from bike, taking off and drop his helmet. But if P2 = 1, ped will never takes off his helmet"
+          "short_desc": "Gives a helmet to the specified ped with parameter (P2). If P2 = 0 - ped will drop the helmet after 4-5 seconds. Just like Nico gets out from bike, taking off and drop his helmet. But if P2 = 1, ped will never takes off his helmet",
+          "class": "Char",
+          "member": "GiveHelmetWithOpts"
         },
         {
           "input": [
@@ -20366,18 +20380,20 @@
           }
         },
         {
-          "name": "HELI_AUDIO_SHOULD_SKIP_STARTUP",
-          "num_params": 2,
           "input": [
             {
-              "name": "heli",
-              "type": "Car"
+              "name": "self",
+              "type": "Heli"
             },
             {
-              "name": "skip",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "HELI_AUDIO_SHOULD_SKIP_STARTUP",
+          "num_params": 2,
+          "class": "Heli",
+          "member": "AudioShouldSkipStartup"
         },
         {
           "input": [
@@ -23158,8 +23174,8 @@
         {
           "input": [
             {
-              "name": "heli",
-              "type": "Car"
+              "name": "self",
+              "type": "Heli"
             },
             {
               "name": "flag0",
@@ -23178,7 +23194,9 @@
           "num_params": 4,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Heli",
+          "member": "IsPartBroken"
         },
         {
           "name": "IS_HELP_MESSAGE_BEING_DISPLAYED",
@@ -24942,7 +24960,7 @@
         {
           "input": [
             {
-              "name": "gxtentry",
+              "name": "gxtEntry",
               "type": "string"
             },
             {
@@ -24953,13 +24971,16 @@
           "name": "IS_THIS_HELP_MESSAGE_WITH_NUMBER_BEING_DISPLAYED",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Text",
+          "member": "IsThisHelpMessageWithNumberBeingDisplayed"
         },
         {
           "input": [
             {
-              "name": "gxtentry",
+              "name": "gxtEntry",
               "type": "string"
             },
             {
@@ -24970,8 +24991,11 @@
           "name": "IS_THIS_HELP_MESSAGE_WITH_STRING_BEING_DISPLAYED",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Text",
+          "member": "IsThisHelpMessageWithStringBeingDisplayed"
         },
         {
           "name": "IS_THIS_MACHINE_THE_SERVER",
@@ -30838,16 +30862,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "removed",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "REMOVE_PED_HELMET",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "RemoveHelmet"
         },
         {
           "name": "REMOVE_PED_QUEUE",
@@ -36619,19 +36645,19 @@
           "member": "SetBladesFullSpeed"
         },
         {
-          "name": "SET_HELI_STABILISER",
-          "num_params": 2,
-          "short_desc": "Limits the amount a helicopter can tilt",
           "input": [
             {
               "name": "self",
               "type": "Heli"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SET_HELI_STABILISER",
+          "num_params": 2,
+          "short_desc": "Limits the amount a helicopter can tilt",
           "class": "Heli",
           "member": "SetStabiliser"
         },
@@ -38466,18 +38492,20 @@
           "num_params": 2
         },
         {
-          "name": "SET_PED_HELMET_TEXTURE_INDEX",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "index",
+              "name": "textureIndex",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_PED_HELMET_TEXTURE_INDEX",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetHelmetTextureIndex"
         },
         {
           "input": [
@@ -39625,12 +39653,17 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_ROCKET_LAUNCHER_FREEBIE_IN_HELI",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetRocketLauncherFreebieInHeli",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -40526,12 +40559,17 @@
         {
           "input": [
             {
-              "name": "lineHeight",
+              "name": "mult",
               "type": "float"
             }
           ],
           "name": "SET_TEXT_LINE_HEIGHT_MULT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Text",
+          "member": "SetLineHeightMult",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -40578,11 +40616,11 @@
         {
           "input": [
             {
-              "name": "w",
+              "name": "width",
               "type": "float"
             },
             {
-              "name": "h",
+              "name": "height",
               "type": "float"
             }
           ],
@@ -43535,14 +43573,14 @@
           }
         },
         {
-          "name": "SWITCH_POLICE_HELIS",
-          "num_params": 1,
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
+          "name": "SWITCH_POLICE_HELIS",
+          "num_params": 1,
           "class": "Game",
           "member": "SwitchPoliceHelis",
           "short_desc": "Sets whether ghetto birds spawn",
@@ -45630,7 +45668,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -45648,7 +45686,12 @@
           ],
           "name": "TASK_GUARD_CURRENT_POSITION",
           "num_params": 4,
-          "short_desc": "Makes the character guard their current position for the specified duration"
+          "short_desc": "Makes the character guard their current position for the specified duration",
+          "class": "Task",
+          "member": "GuardCurrentPosition",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -46927,14 +46970,14 @@
           }
         },
         {
-          "name": "TASK_SHAKE_FIST",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             }
           ],
+          "name": "TASK_SHAKE_FIST",
+          "num_params": 1,
           "class": "Task",
           "member": "ShakeFist",
           "short_desc": "Makes the actor lift their hand up in the air angrily",
@@ -47648,7 +47691,7 @@
               "type": "Char"
             },
             {
-              "name": "use",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -50936,40 +50979,50 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "gxtEntry",
+              "type": "string"
+            },
+            {
+              "name": "number1",
+              "type": "int"
+            },
+            {
+              "name": "number2",
+              "type": "int"
+            }
+          ],
           "name": "PRINT_HELP_FOREVER_WITH_TWO_NUMBERS",
           "num_params": 3,
-          "input": [
-            {
-              "name": "gxtentry",
-              "type": "string"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "class": "Text",
+          "member": "PrintHelpForeverWithTwoNumbers",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "PRINT_HELP_WITH_TWO_NUMBERS",
-          "num_params": 3,
           "input": [
             {
-              "name": "gxtentry",
+              "name": "gxtEntry",
               "type": "string"
             },
             {
-              "name": "_p2",
+              "name": "number1",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "number2",
               "type": "int"
             }
-          ]
+          ],
+          "name": "PRINT_HELP_WITH_TWO_NUMBERS",
+          "num_params": 3,
+          "class": "Text",
+          "member": "PrintHelpWithTwoNumbers",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "REGISTER_MODEL_FOR_RANK_POINTS",
@@ -51537,15 +51590,13 @@
           ]
         },
         {
-          "name": "SET_HELI_FORCE_ENGINE_ON",
-          "num_params": 3,
           "input": [
             {
-              "name": "heli",
-              "type": "Car"
+              "name": "self",
+              "type": "Heli"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
@@ -51555,7 +51606,11 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "SET_HELI_FORCE_ENGINE_ON",
+          "num_params": 3,
+          "class": "Heli",
+          "member": "SetForceEngineOn"
         },
         {
           "name": "SET_HELP_MESSAGE_BOX_SIZE_F",
@@ -51707,18 +51762,20 @@
           ]
         },
         {
-          "name": "SET_PED_HELI_PILOT_RESPECTS_MINIMUMM_HEIGHT",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_PED_HELI_PILOT_RESPECTS_MINIMUMM_HEIGHT",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetHeliPilotRespectsMinimumMHeight"
         },
         {
           "name": "SET_PED_INSTANT_BLENDS_WEAPON_ANIMS",

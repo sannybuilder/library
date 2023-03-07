@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1678219159634,
-    "version": "0.75",
+    "last_update": 1678220338956,
+    "version": "0.76",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -12868,26 +12868,36 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "model",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "GET_CURRENT_BASIC_COP_MODEL",
           "num_params": 1,
-          "output": [
-            {
-              "name": "pModel",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Streaming",
+          "member": "GetCurrentBasicCopModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "GET_CURRENT_BASIC_POLICE_CAR_MODEL",
-          "num_params": 1,
           "output": [
             {
-              "name": "pModel",
+              "name": "model",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CURRENT_BASIC_POLICE_CAR_MODEL",
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "GetCurrentBasicPoliceCarModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -12913,15 +12923,20 @@
           "short_desc": "Returns the type of weapon that the character is currently holding"
         },
         {
-          "name": "GET_CURRENT_COP_MODEL",
-          "num_params": 1,
           "output": [
             {
-              "name": "pModel",
+              "name": "model",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CURRENT_COP_MODEL",
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "GetCurrentCopModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GET_CURRENT_DATE",
@@ -12965,14 +12980,19 @@
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "episode",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CURRENT_EPISODE",
           "num_params": 1,
-          "short_desc": "Returns an episode number: 0 - Grand Theft Auto 4 (original story), 1 - The Lost And Damned, 2 - The Ballad of Gay Tony"
+          "short_desc": "Returns an episode number: 0 - Grand Theft Auto 4 (original story), 1 - The Lost And Damned, 2 - The Ballad of Gay Tony",
+          "class": "Game",
+          "member": "GetCurrentEpisode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -13011,15 +13031,20 @@
           "member": "GetCurrentPlaybackNumber"
         },
         {
-          "name": "GET_CURRENT_POLICE_CAR_MODEL",
-          "num_params": 1,
           "output": [
             {
-              "name": "pModel",
+              "name": "model",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CURRENT_POLICE_CAR_MODEL",
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "GetCurrentPoliceCarModel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GET_CURRENT_POPULATION_ZONE_TYPE",
@@ -13041,84 +13066,111 @@
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "conversationLine",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CURRENT_SCRIPTED_CONVERSATION_LINE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "GetCurrentScriptedConversationLine",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "train",
+              "name": "self",
               "type": "Train"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "station",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_CURRENT_STATION_FOR_TRAIN",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Train",
+          "member": "GetCurrentStation"
         },
         {
+          "output": [
+            {
+              "name": "model",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "GET_CURRENT_TAXI_CAR_MODEL",
           "num_params": 1,
+          "class": "Streaming",
+          "member": "GetCurrentTaxiCarModel",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "output": [
             {
-              "name": "pModel",
+              "name": "weather",
               "type": "int",
               "source": "var_any"
             }
-          ]
-        },
-        {
+          ],
           "name": "GET_CURRENT_WEATHER",
           "num_params": 1,
+          "class": "Game",
+          "member": "GetCurrentWeather",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "output": [
             {
-              "name": "pWeather",
+              "name": "weatherParam0",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "weatherParam1",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "weatherParam2",
               "type": "int",
               "source": "var_any"
             }
-          ]
-        },
-        {
+          ],
           "name": "GET_CURRENT_WEATHER_FULL",
           "num_params": 3,
-          "output": [
-            {
-              "name": "weatherparam0",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "weatherparam1",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "weatherparam2",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Game",
+          "member": "GetCurrentWeatherFull",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "GET_CURRENT_ZONE_SCUMMINESS",
-          "num_params": 1,
           "output": [
             {
-              "name": "_p1",
+              "name": "scumminess",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CURRENT_ZONE_SCUMMINESS",
+          "num_params": 1,
+          "class": "Game",
+          "member": "GetCurrentZoneScumminess",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -24232,11 +24284,11 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             }
           ],
@@ -24245,7 +24297,9 @@
           "short_desc": "Returns true if the character is aiming at the specified ped/character",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "IsFreeAimingAtChar"
         },
         {
           "input": [
@@ -33698,11 +33752,9 @@
           "member": "SetAnimCurrentTime"
         },
         {
-          "name": "SET_CHAR_ANIM_PLAYING_FLAG",
-          "num_params": 4,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -33718,9 +33770,13 @@
               "type": "bool"
             }
           ],
+          "name": "SET_CHAR_ANIM_PLAYING_FLAG",
+          "num_params": 4,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "SetAnimPlayingFlag"
         },
         {
           "input": [
@@ -34096,15 +34152,13 @@
           "num_params": 0
         },
         {
-          "name": "SET_CHAR_DEFENSIVE_AREA_ATTACHED_TO_PED",
-          "num_params": 10,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "pednext",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -34139,7 +34193,11 @@
               "name": "_p10",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_CHAR_DEFENSIVE_AREA_ATTACHED_TO_PED",
+          "num_params": 10,
+          "class": "Char",
+          "member": "SetDefensiveAreaAttachedToPed"
         },
         {
           "input": [
@@ -44216,7 +44274,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -44250,7 +44308,12 @@
           ],
           "name": "TASK_CAR_MISSION_PED_TARGET",
           "num_params": 8,
-          "short_desc": "Makes the character use the vehicle to follow the target char. The character will get in the driver of the vehicle automatically"
+          "short_desc": "Makes the character use the vehicle to follow the target char. The character will get in the driver of the vehicle automatically",
+          "class": "Task",
+          "member": "CarMissionPedTarget",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TASK_CAR_MISSION_PED_TARGET_NOT_AGAINST_TRAFFIC",

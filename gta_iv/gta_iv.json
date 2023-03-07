@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1677957076896,
-    "version": "0.74",
+    "last_update": 1678219159634,
+    "version": "0.75",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -35795,7 +35795,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -35805,7 +35805,9 @@
           ],
           "name": "SET_DRIVE_TASK_CRUISE_SPEED",
           "num_params": 2,
-          "short_desc": "Sets the driving speed for a specified Ped"
+          "short_desc": "Sets the driving speed for a specified Ped",
+          "class": "Char",
+          "member": "SetDriveTaskCruiseSpeed"
         },
         {
           "input": [
@@ -38700,16 +38702,18 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_PED_WONT_ATTACK_PLAYER_WITHOUT_WANTED_LEVEL",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetWontAttackPlayerWithoutWantedLevel"
         },
         {
           "input": [
@@ -43765,16 +43769,18 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "out",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "TAKE_CAR_OUT_OF_PARKED_CARS_BUDGET",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Car",
+          "member": "TakeOutOfParkedCarsBudget"
         },
         {
           "name": "TAKE_REMOTE_CONTROL_OF_CAR",
@@ -46322,21 +46328,26 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "taskSequence",
-              "type": "TaskSequence"
+              "name": "sequence",
+              "type": "Sequence"
             }
           ],
           "name": "TASK_PERFORM_SEQUENCE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Task",
+          "member": "PerformSequence",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -46353,12 +46364,17 @@
             }
           ],
           "name": "TASK_PERFORM_SEQUENCE_FROM_PROGRESS",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Task",
+          "member": "PerformSequenceFromProgress",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -46367,7 +46383,12 @@
             }
           ],
           "name": "TASK_PERFORM_SEQUENCE_LOCALLY",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Task",
+          "member": "PerformSequenceLocally",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47266,19 +47287,19 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float"
             },
             {
@@ -47291,7 +47312,12 @@
             }
           ],
           "name": "TASK_SHOOT_AT_COORD",
-          "num_params": 6
+          "num_params": 6,
+          "class": "Task",
+          "member": "ShootAtCoord",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47316,7 +47342,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47334,12 +47360,17 @@
           ],
           "name": "TASK_SIT_DOWN",
           "num_params": 4,
-          "short_desc": "Makes handled ped (P1) sit down right now. Ped will get up automaticly after time (p4) is up"
+          "short_desc": "Makes handled ped (P1) sit down right now. Ped will get up automaticly after time (p4) is up",
+          "class": "Task",
+          "member": "SitDown",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47357,12 +47388,17 @@
           ],
           "name": "TASK_SIT_DOWN_INSTANTLY",
           "num_params": 4,
-          "short_desc": "Makes handled ped (P1) sit down right now. Ped will get up automaticly after time (p4) is up"
+          "short_desc": "Makes handled ped (P1) sit down right now. Ped will get up automaticly after time (p4) is up",
+          "class": "Task",
+          "member": "SitDownInstantly",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47403,12 +47439,17 @@
             }
           ],
           "name": "TASK_SIT_DOWN_ON_NEAREST_OBJECT",
-          "num_params": 10
+          "num_params": 10,
+          "class": "Task",
+          "member": "SitDownOnNearestObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47449,7 +47490,12 @@
             }
           ],
           "name": "TASK_SIT_DOWN_ON_OBJECT",
-          "num_params": 10
+          "num_params": 10,
+          "class": "Task",
+          "member": "SitDownOnObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47530,11 +47576,11 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "fleeFromPed",
+              "name": "fromChar",
               "type": "Char"
             },
             {
@@ -47547,7 +47593,12 @@
             }
           ],
           "name": "TASK_SMART_FLEE_CHAR_PREFERRING_PAVEMENTS",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Task",
+          "member": "SmartFleeCharPreferringPavements",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47586,11 +47637,9 @@
           }
         },
         {
-          "name": "TASK_SMART_FLEE_POINT_PREFERRING_PAVEMENTS",
-          "num_params": 6,
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47613,7 +47662,14 @@
               "name": "timeProb",
               "type": "int"
             }
-          ]
+          ],
+          "name": "TASK_SMART_FLEE_POINT_PREFERRING_PAVEMENTS",
+          "num_params": 6,
+          "class": "Task",
+          "member": "SmartFleePointPreferringPavements",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TASK_SPACE_SHIP_GO_TO_COORD",
@@ -47622,7 +47678,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47655,7 +47711,12 @@
             }
           ],
           "name": "TASK_STAND_GUARD",
-          "num_params": 8
+          "num_params": 8,
+          "class": "Task",
+          "member": "StandGuard",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -47680,7 +47741,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47688,15 +47749,15 @@
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "z",
               "type": "float"
             },
             {
@@ -47705,12 +47766,17 @@
             }
           ],
           "name": "TASK_START_SCENARIO_AT_POSITION",
-          "num_params": 6
+          "num_params": 6,
+          "class": "Task",
+          "member": "StartScenarioAtPosition",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47723,12 +47789,17 @@
             }
           ],
           "name": "TASK_START_SCENARIO_IN_PLACE",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Task",
+          "member": "StartScenarioInPlace",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47737,7 +47808,12 @@
             }
           ],
           "name": "TASK_SWAP_WEAPON",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Task",
+          "member": "SwapWeapon",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TASK_SWIM_TO_COORD",
@@ -47906,7 +47982,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47915,12 +47991,17 @@
             }
           ],
           "name": "TASK_USE_MOBILE_PHONE_TIMED",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Task",
+          "member": "UseMobilePhoneTimed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47941,12 +48022,17 @@
             }
           ],
           "name": "TASK_USE_NEAREST_SCENARIO_TO_POS",
-          "num_params": 5
+          "num_params": 5,
+          "class": "Task",
+          "member": "UseNearestScenarioToPos",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -47967,7 +48053,12 @@
             }
           ],
           "name": "TASK_USE_NEAREST_SCENARIO_TO_POS_WARP",
-          "num_params": 5
+          "num_params": 5,
+          "class": "Task",
+          "member": "UseNearestScenarioToPosWarp",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TASK_WALK_ALONGSIDE_CHAR",
@@ -52293,11 +52384,9 @@
           "member": "StopAlwaysRender"
         },
         {
-          "name": "TASK_FOLLOW_NAV_MESH_AND_SLIDE_TO_COORD_HDG_RATE",
-          "num_params": 9,
           "input": [
             {
-              "name": "ped",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -52332,7 +52421,14 @@
               "name": "rate",
               "type": "float"
             }
-          ]
+          ],
+          "name": "TASK_FOLLOW_NAV_MESH_AND_SLIDE_TO_COORD_HDG_RATE",
+          "num_params": 9,
+          "class": "Task",
+          "member": "FollowNavMeshAndSlideToCoordHdgRate",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TASK_PLAY_ANIM_WITH_FLAGS_AND_START_PHASE",

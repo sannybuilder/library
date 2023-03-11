@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1678220338956,
-    "version": "0.76",
+    "last_update": 1678562926362,
+    "version": "0.77",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -994,7 +994,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -1004,7 +1004,9 @@
           ],
           "name": "ADD_OBJECT_TO_INTERIOR_ROOM_BY_KEY",
           "num_params": 2,
-          "short_desc": "Adds an object to the interior room denoted by the key"
+          "short_desc": "Adds an object to the interior room denoted by the key",
+          "class": "Object",
+          "member": "AddToInteriorRoomByKey"
         },
         {
           "input": [
@@ -1947,7 +1949,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -1961,7 +1963,9 @@
           ],
           "name": "ANCHOR_OBJECT",
           "num_params": 3,
-          "short_desc": "Anchors or lets loose an object"
+          "short_desc": "Anchors or lets loose an object",
+          "class": "Object",
+          "member": "Anchor"
         },
         {
           "input": [
@@ -2023,7 +2027,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -2073,12 +2077,14 @@
           ],
           "name": "APPLY_FORCE_TO_OBJECT",
           "num_params": 12,
-          "short_desc": "Applies force to an object. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)"
+          "short_desc": "Applies force to an object. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)",
+          "class": "Object",
+          "member": "ApplyForce"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -2128,7 +2134,9 @@
           ],
           "name": "APPLY_FORCE_TO_PED",
           "num_params": 12,
-          "short_desc": "Applies force to an ped. Params 6,7,8 does not seem to work in animated or ragdolled state. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)"
+          "short_desc": "Applies force to an ped. Params 6,7,8 does not seem to work in animated or ragdolled state. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)",
+          "class": "Char",
+          "member": "ApplyForce"
         },
         {
           "input": [
@@ -2517,11 +2525,11 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "v",
+              "name": "vehicle",
               "type": "Car"
             },
             {
@@ -2555,7 +2563,9 @@
           ],
           "name": "ATTACH_OBJECT_TO_CAR",
           "num_params": 9,
-          "short_desc": "Attaches an object to a car"
+          "short_desc": "Attaches an object to a car",
+          "class": "Object",
+          "member": "AttachToCar"
         },
         {
           "input": [
@@ -2629,11 +2639,11 @@
         {
           "input": [
             {
-              "name": "obj0",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "obj1AttachTo",
+              "name": "object",
               "type": "Object"
             },
             {
@@ -2667,7 +2677,9 @@
           ],
           "name": "ATTACH_OBJECT_TO_OBJECT",
           "num_params": 9,
-          "short_desc": "Attaches 2 Objects together"
+          "short_desc": "Attaches 2 Objects together",
+          "class": "Object",
+          "member": "AttachToObject"
         },
         {
           "name": "ATTACH_OBJECT_TO_OBJECT_PHYSICALLY",
@@ -2677,15 +2689,15 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "c",
+              "name": "char",
               "type": "Char"
             },
             {
-              "name": "bone",
+              "name": "boneId",
               "type": "int"
             },
             {
@@ -2719,7 +2731,9 @@
           ],
           "name": "ATTACH_OBJECT_TO_PED",
           "num_params": 10,
-          "short_desc": "Attaches an object to the ped"
+          "short_desc": "Attaches an object to the ped",
+          "class": "Object",
+          "member": "AttachToPed"
         },
         {
           "name": "ATTACH_OBJECT_TO_PED_PHYSICALLY",
@@ -2826,15 +2840,15 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             },
             {
-              "name": "pedbone",
+              "name": "pedBone",
               "type": "int"
             },
             {
@@ -2868,23 +2882,22 @@
           ],
           "name": "ATTACH_PED_TO_OBJECT",
           "num_params": 10,
-          "short_desc": "Attaches a Ped to an Object"
+          "short_desc": "Attaches a Ped to an Object",
+          "class": "Char",
+          "member": "AttachToObject"
         },
         {
-          "name": "ATTACH_PED_TO_OBJECT_PHYSICALLY",
-          "num_params": 10,
-          "short_desc": "Attaches a Ped to an Object Physically",
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             },
             {
-              "name": "pedbone",
+              "name": "pedBone",
               "type": "int"
             },
             {
@@ -2915,7 +2928,12 @@
               "name": "_p10",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "ATTACH_PED_TO_OBJECT_PHYSICALLY",
+          "num_params": 10,
+          "short_desc": "Attaches a Ped to an Object Physically",
+          "class": "Char",
+          "member": "AttachToObjectPhysically"
         },
         {
           "name": "ATTACH_PED_TO_SHIMMY_EDGE",
@@ -4795,12 +4813,14 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
           "name": "CLEAR_ROOM_FOR_OBJECT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Object",
+          "member": "ClearRoom"
         },
         {
           "input": [
@@ -6960,7 +6980,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -6970,7 +6990,9 @@
           ],
           "name": "DETACH_OBJECT",
           "num_params": 2,
-          "short_desc": "Detaches the object from its host"
+          "short_desc": "Detaches the object from its host",
+          "class": "Object",
+          "member": "Detach"
         },
         {
           "input": [
@@ -9453,12 +9475,14 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
           "name": "EXTINGUISH_OBJECT_FIRE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Object",
+          "member": "ExtinguishFire"
         },
         {
           "name": "FAIL_KILL_FRENZY",
@@ -14494,11 +14518,9 @@
           "num_params": 2
         },
         {
-          "name": "GET_LEVEL_DESIGN_COORDS_FOR_OBJECT",
-          "num_params": 6,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -14527,7 +14549,11 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_LEVEL_DESIGN_COORDS_FOR_OBJECT",
+          "num_params": 6,
+          "class": "Object",
+          "member": "GetLevelDesignCoords"
         },
         {
           "output": [
@@ -16051,54 +16077,58 @@
           "num_params": 2
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "animName0",
+              "type": "string"
+            },
+            {
+              "name": "animName1",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "time",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "GET_OBJECT_ANIM_CURRENT_TIME",
           "num_params": 4,
-          "input": [
-            {
-              "name": "obj",
-              "type": "Object"
-            },
-            {
-              "name": "animname0",
-              "type": "string"
-            },
-            {
-              "name": "animname1",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "time",
-              "type": "float",
-              "source": "var_any"
-            }
-          ]
+          "class": "Object",
+          "member": "GetAnimCurrentTime"
         },
         {
-          "name": "GET_OBJECT_ANIM_TOTAL_TIME",
-          "num_params": 4,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "animname0",
+              "name": "animName0",
               "type": "string"
             },
             {
-              "name": "animname1",
+              "name": "animName1",
               "type": "string"
             }
           ],
           "output": [
             {
-              "name": "time",
+              "name": "totalTime",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_OBJECT_ANIM_TOTAL_TIME",
+          "num_params": 4,
+          "class": "Object",
+          "member": "GetAnimTotalTime"
         },
         {
           "input": [
@@ -16133,7 +16163,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -16143,13 +16173,15 @@
           ],
           "output": [
             {
-              "name": "_p3",
+              "name": "health",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "GET_OBJECT_FRAGMENT_DAMAGE_HEALTH",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Object",
+          "member": "GetFragmentDamageHealth"
         },
         {
           "input": [
@@ -20185,17 +20217,19 @@
           "member": "HasCollidedWithAnything"
         },
         {
-          "name": "HAS_OBJECT_FRAGMENT_ROOT_BEEN_DAMAGED",
-          "num_params": 1,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
+          "name": "HAS_OBJECT_FRAGMENT_ROOT_BEEN_DAMAGED",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "HasFragmentRootBeenDamaged"
         },
         {
           "input": [
@@ -23769,15 +23803,15 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "animname0",
+              "name": "animName0",
               "type": "string"
             },
             {
-              "name": "animname1",
+              "name": "animName1",
               "type": "string"
             }
           ],
@@ -23785,7 +23819,9 @@
           "num_params": 3,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "IsPlayingAnim"
         },
         {
           "name": "IS_OBJECT_REASSIGNMENT_IN_PROGRESS",
@@ -23959,11 +23995,11 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
@@ -23971,7 +24007,9 @@
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsAttachedToObject"
         },
         {
           "input": [
@@ -24029,7 +24067,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -24037,7 +24075,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsHoldingAnObject"
         },
         {
           "input": [
@@ -24113,21 +24153,23 @@
           "member": "IsLookingAtCar"
         },
         {
-          "name": "IS_PED_LOOKING_AT_OBJECT",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
+          "name": "IS_PED_LOOKING_AT_OBJECT",
+          "num_params": 2,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsLookingAtObject"
         },
         {
           "input": [
@@ -25561,7 +25603,12 @@
         },
         {
           "name": "LOAD_ALL_OBJECTS_NOW",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Streaming",
+          "member": "LoadAllObjectsNow",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -28504,12 +28551,17 @@
               "type": "string"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
           "name": "PLAY_AUDIO_EVENT_FROM_OBJECT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Audio",
+          "member": "PlayAudioEventFromObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -28671,12 +28723,17 @@
               "type": "string"
             },
             {
-              "name": "obj",
+              "name": "object",
               "type": "Object"
             }
           ],
           "name": "PLAY_SOUND_FROM_OBJECT",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Audio",
+          "member": "PlaySoundFromObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -28757,12 +28814,14 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
           "name": "PLAY_STREAM_FROM_OBJECT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Object",
+          "member": "PlayStream"
         },
         {
           "input": [
@@ -30963,12 +31022,14 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
           "name": "REMOVE_PROJTEX_FROM_OBJECT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Object",
+          "member": "RemoveProjtex"
         },
         {
           "input": [
@@ -31913,16 +31974,18 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_ACTIVATE_OBJECT_PHYSICS_AS_SOON_AS_IT_IS_UNFROZEN",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Object",
+          "member": "SetActivatePhysicsAsSoonAsItIsUnfrozen"
         },
         {
           "name": "SET_ADVANCED_BOOL_IN_DECISION_MAKER",
@@ -37824,15 +37887,15 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "animname0",
+              "name": "animName0",
               "type": "string"
             },
             {
-              "name": "animname1",
+              "name": "animName1",
               "type": "string"
             },
             {
@@ -37841,42 +37904,46 @@
             }
           ],
           "name": "SET_OBJECT_ANIM_CURRENT_TIME",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Object",
+          "member": "SetAnimCurrentTime"
         },
         {
-          "name": "SET_OBJECT_ANIM_PLAYING_FLAG",
-          "num_params": 4,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "animname0",
+              "name": "animName0",
               "type": "string"
             },
             {
-              "name": "animname1",
+              "name": "animName1",
               "type": "string"
             },
             {
               "name": "flag",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_OBJECT_ANIM_PLAYING_FLAG",
+          "num_params": 4,
+          "class": "Object",
+          "member": "SetAnimPlayingFlag"
         },
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
-              "name": "animname0",
+              "name": "animName0",
               "type": "string"
             },
             {
-              "name": "animname1",
+              "name": "animName1",
               "type": "string"
             },
             {
@@ -37885,7 +37952,9 @@
             }
           ],
           "name": "SET_OBJECT_ANIM_SPEED",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Object",
+          "member": "SetAnimSpeed"
         },
         {
           "input": [
@@ -38135,7 +38204,7 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
@@ -38180,7 +38249,9 @@
             }
           ],
           "name": "SET_OBJECT_PHYSICS_PARAMS",
-          "num_params": 11
+          "num_params": 11,
+          "class": "Object",
+          "member": "SetPhysicsParams"
         },
         {
           "input": [
@@ -41057,13 +41128,18 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_USE_HIGHDOF",
           "num_params": 1,
-          "short_desc": "Sets the use of high \"depth of vision.\" It only works when the blur filter is on and has no effect when it's off. It mainly creates more blur to mid-distance objects"
+          "short_desc": "Sets the use of high \"depth of vision.\" It only works when the blur filter is on and has no effect when it's off. It mainly creates more blur to mid-distance objects",
+          "class": "Game",
+          "member": "SetUseHighdof",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -42432,12 +42508,14 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
           "name": "START_OBJECT_FIRE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Object",
+          "member": "StartFire"
         },
         {
           "name": "START_PED_MOBILE_RINGING",
@@ -49470,18 +49548,20 @@
           "member": "ChangeTerritoryScale"
         },
         {
-          "name": "DETACH_OBJECT_NO_COLLIDE",
-          "num_params": 2,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             },
             {
               "name": "flag",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "DETACH_OBJECT_NO_COLLIDE",
+          "num_params": 2,
+          "class": "Object",
+          "member": "DetachNoCollide"
         },
         {
           "name": "DISPLAY_GRIME_THIS_FRAME",
@@ -50620,17 +50700,19 @@
           }
         },
         {
-          "name": "GET_IS_STICKY_BOMB_STUCK_TO_OBJECT",
-          "num_params": 1,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
+          "name": "GET_IS_STICKY_BOMB_STUCK_TO_OBJECT",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Object",
+          "member": "GetIsStickyBombStuck"
         },
         {
           "name": "GET_IS_STICKY_BOMB_STUCK_TO_VEHICLE",
@@ -50756,21 +50838,23 @@
           ]
         },
         {
-          "name": "GET_NUMBER_OF_STICKY_BOMBS_STUCK_TO_OBJECT",
-          "num_params": 2,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "number",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_NUMBER_OF_STICKY_BOMBS_STUCK_TO_OBJECT",
+          "num_params": 2,
+          "class": "Object",
+          "member": "GetNumberOfStickyBombsStuck"
         },
         {
           "name": "GET_NUMBER_OF_STICKY_BOMBS_STUCK_TO_VEHICLE",
@@ -50800,17 +50884,19 @@
           ]
         },
         {
-          "name": "GET_PED_STEERS_AROUND_OBJECTS",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
+          "name": "GET_PED_STEERS_AROUND_OBJECTS",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetSteersAroundObjects"
         },
         {
           "name": "GET_PED_STEERS_AROUND_PEDS",
@@ -51435,14 +51521,16 @@
           ]
         },
         {
-          "name": "REMOVE_PTFX_FROM_OBJECT",
-          "num_params": 1,
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
             }
-          ]
+          ],
+          "name": "REMOVE_PTFX_FROM_OBJECT",
+          "num_params": 1,
+          "class": "Object",
+          "member": "RemovePtfx"
         },
         {
           "name": "REPORT_CRIME",
@@ -52173,18 +52261,20 @@
           ]
         },
         {
-          "name": "SET_PED_STEERS_AROUND_OBJECTS",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_PED_STEERS_AROUND_OBJECTS",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetSteersAroundObjects"
         },
         {
           "name": "SET_PED_STEERS_AROUND_PEDS",

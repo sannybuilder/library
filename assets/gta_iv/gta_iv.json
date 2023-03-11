@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1678562926362,
-    "version": "0.77",
+    "last_update": 1678575535574,
+    "version": "0.78",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -1060,24 +1060,26 @@
           "short_desc": "Adds a ped to the mission deletion list"
         },
         {
-          "name": "ADD_PICKUP_TO_INTERIOR_ROOM_BY_KEY",
-          "num_params": 2,
-          "short_desc": "Adds a pickup to the interior room denoted by the key",
           "input": [
             {
-              "name": "pickup",
-              "type": "Object"
+              "name": "self",
+              "type": "Pickup"
             },
             {
               "name": "roomHash",
               "type": "int"
             }
-          ]
+          ],
+          "name": "ADD_PICKUP_TO_INTERIOR_ROOM_BY_KEY",
+          "num_params": 2,
+          "short_desc": "Adds a pickup to the interior room denoted by the key",
+          "class": "Pickup",
+          "member": "AddToInteriorRoomByKey"
         },
         {
           "input": [
             {
-              "name": "pickup",
+              "name": "self",
               "type": "Pickup"
             },
             {
@@ -1087,7 +1089,9 @@
           ],
           "name": "ADD_PICKUP_TO_INTERIOR_ROOM_BY_NAME",
           "num_params": 2,
-          "short_desc": "Adds a pickup to the interior room denoted by its name"
+          "short_desc": "Adds a pickup to the interior room denoted by its name",
+          "class": "Pickup",
+          "member": "AddToInteriorRoomByName"
         },
         {
           "input": [
@@ -1773,13 +1777,18 @@
         {
           "input": [
             {
-              "name": "allow",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "ALLOW_MULTIPLE_DRIVEBY_PICKUPS",
           "num_params": 1,
-          "short_desc": "Allows multiple driveby pickups"
+          "short_desc": "Allows multiple driveby pickups",
+          "class": "Game",
+          "member": "AllowMultipleDrivebyPickups",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ALLOW_NETWORK_POPULATION_GROUP_CYCLING",
@@ -3905,18 +3914,20 @@
           "member": "ChangeSprite"
         },
         {
-          "name": "CHANGE_BLIP_TEAM_RELEVANCE",
-          "num_params": 2,
           "input": [
             {
-              "name": "blip",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
               "name": "relevance",
               "type": "int"
             }
-          ]
+          ],
+          "name": "CHANGE_BLIP_TEAM_RELEVANCE",
+          "num_params": 2,
+          "class": "Blip",
+          "member": "ChangeTeamRelevance"
         },
         {
           "input": [
@@ -3991,7 +4002,12 @@
             }
           ],
           "name": "CHANGE_PICKUP_BLIP_COLOUR",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "ChangePickupBlipColour",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4069,7 +4085,7 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
@@ -4079,29 +4095,31 @@
           ],
           "name": "CHANGE_PLAYER_MODEL",
           "num_params": 2,
-          "short_desc": "Changes the Players Model"
+          "short_desc": "Changes the Players Model",
+          "class": "Player",
+          "member": "ChangeModel"
         },
         {
-          "name": "CHANGE_PLAYER_PHONE_MODEL",
-          "num_params": 2,
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
               "name": "model",
               "type": "int"
             }
-          ]
+          ],
+          "name": "CHANGE_PLAYER_PHONE_MODEL",
+          "num_params": 2,
+          "class": "Player",
+          "member": "ChangePhoneModel"
         },
         {
-          "name": "CHANGE_PLAYER_PHONE_MODEL_OFFSETS",
-          "num_params": 7,
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
               "name": "x0",
@@ -4127,7 +4145,11 @@
               "name": "z1",
               "type": "float"
             }
-          ]
+          ],
+          "name": "CHANGE_PLAYER_PHONE_MODEL_OFFSETS",
+          "num_params": 7,
+          "class": "Player",
+          "member": "ChangePhoneModelOffsets"
         },
         {
           "name": "CHEAT_HAPPENED_RECENTLY",
@@ -6201,15 +6223,21 @@
               "type": "float"
             }
           ],
-          "name": "CREATE_PICKUP_ROTATE",
-          "num_params": 10,
           "output": [
             {
-              "name": "pPickup",
+              "name": "handle",
               "type": "Pickup",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_PICKUP_ROTATE",
+          "num_params": 10,
+          "class": "Pickup",
+          "member": "CreateRotate",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7357,13 +7385,18 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "DISPLAY_PLAYER_NAMES",
           "num_params": 1,
-          "short_desc": "Displays players' names if the parameter set to true. It removes only names but not circles above players' heads"
+          "short_desc": "Displays players' names if the parameter set to true. It removes only names but not circles above players' heads",
+          "class": "Game",
+          "member": "DisplayPlayerNames",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -8139,15 +8172,20 @@
           "input": [
             {
               "name": "player",
-              "type": "int"
+              "type": "Player"
             },
             {
-              "name": "dont",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "DONT_DISPATCH_COPS_FOR_PLAYER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Game",
+          "member": "DontDispatchCopsForPlayer",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "DONT_DISPLAY_LOADING_ON_FADE_THIS_FRAME",
@@ -10631,7 +10669,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -10641,7 +10679,7 @@
           ],
           "output": [
             {
-              "name": "pAmmo",
+              "name": "ammo",
               "type": "int",
               "source": "var_any"
             }
@@ -10650,7 +10688,9 @@
           "num_params": 3,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "GetAmmoInClip"
         },
         {
           "input": [
@@ -14638,7 +14678,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -14646,15 +14686,17 @@
               "type": "int"
             }
           ],
-          "name": "GET_MAX_AMMO_IN_CLIP",
-          "num_params": 3,
           "output": [
             {
-              "name": "pMaxAmmo",
+              "name": "ammo",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_MAX_AMMO_IN_CLIP",
+          "num_params": 3,
+          "class": "Char",
+          "member": "GetMaxAmmoInClip"
         },
         {
           "output": [
@@ -16998,22 +17040,24 @@
           "member": "GetChar"
         },
         {
-          "name": "GET_PLAYER_COLOUR",
-          "num_params": 2,
-          "short_desc": "Gets the color of specific player and returns it as ID according to the list specified in the description of function: SET_PLAYER_COLOUR",
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "colour",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_PLAYER_COLOUR",
+          "num_params": 2,
+          "short_desc": "Gets the color of specific player and returns it as ID according to the list specified in the description of function: SET_PLAYER_COLOUR",
+          "class": "Player",
+          "member": "GetColour"
         },
         {
           "input": [
@@ -17107,26 +17151,36 @@
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "index",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_PLAYER_RADIO_STATION_INDEX",
           "num_params": 1,
-          "short_desc": "Returns the index of the current radio station in the player's vehicle"
+          "short_desc": "Returns the index of the current radio station in the player's vehicle",
+          "class": "Game",
+          "member": "GetPlayerRadioStationIndex",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "name",
               "type": "string",
               "source": "var_any"
             }
           ],
           "name": "GET_PLAYER_RADIO_STATION_NAME",
           "num_params": 1,
-          "short_desc": "Returns the name of the current radio station in the player's vehicle"
+          "short_desc": "Returns the name of the current radio station in the player's vehicle",
+          "class": "Game",
+          "member": "GetPlayerRadioStationName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GET_PLAYER_RADIO_STATION_NAME_ROLL",
@@ -17142,22 +17196,22 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
               "type": "Player"
             }
           ],
           "name": "GET_PLAYER_RANK_LEVEL_DURING_MP",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Player",
+          "member": "GetRankLevelDuringMp"
         },
         {
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
-          "name": "GET_PLAYER_RGB_COLOUR",
-          "num_params": 4,
           "output": [
             {
               "name": "r",
@@ -17174,7 +17228,11 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_PLAYER_RGB_COLOUR",
+          "num_params": 4,
+          "class": "Player",
+          "member": "GetRgbColour"
         },
         {
           "input": [
@@ -17839,12 +17897,10 @@
           ]
         },
         {
-          "name": "GET_ROOM_KEY_FROM_PICKUP",
-          "num_params": 2,
           "input": [
             {
-              "name": "pickup",
-              "type": "int"
+              "name": "self",
+              "type": "Pickup"
             }
           ],
           "output": [
@@ -17853,7 +17909,11 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_ROOM_KEY_FROM_PICKUP",
+          "num_params": 2,
+          "class": "Pickup",
+          "member": "GetRoomKey"
         },
         {
           "name": "GET_ROOM_NAME_FROM_CHAR_DEBUG",
@@ -24231,17 +24291,19 @@
           }
         },
         {
-          "name": "IS_PEDS_VEHICLE_HOT",
-          "num_params": 1,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
+          "name": "IS_PEDS_VEHICLE_HOT",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsVehicleHot"
         },
         {
           "name": "IS_PLACE_CAR_BOMB_ACTIVE",
@@ -24526,15 +24588,17 @@
         {
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
           "name": "IS_PLAYER_READY_FOR_CUTSCENE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Player",
+          "member": "IsReadyForCutscene"
         },
         {
           "input": [
@@ -25214,8 +25278,11 @@
           "name": "IS_THIS_MODEL_A_VEHICLE",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsThisModelAVehicle"
         },
         {
           "input": [
@@ -26891,7 +26958,12 @@
         {
           "name": "LOCK_LAZLOW_STATION",
           "num_params": 0,
-          "short_desc": "Disables the radio station Integrity 2.0. If the station is being played, the radio will be turned off. The station will not be accessible in the game, neither in a vehicle nor in the pause menu. The station can be enabled using UNLOCK_LAZLOW_STATION"
+          "short_desc": "Disables the radio station Integrity 2.0. If the station is being played, the radio will be turned off. The station will not be accessible in the game, neither in a vehicle nor in the pause menu. The station can be enabled using UNLOCK_LAZLOW_STATION",
+          "class": "Game",
+          "member": "LockLazlowStation",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -28484,7 +28556,12 @@
             }
           ],
           "name": "PICKUPS_PASS_TIME",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "PickupsPassTime",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PLACE_OBJECT_RELATIVE_TO_CAR",
@@ -28584,12 +28661,17 @@
               "type": "string"
             },
             {
-              "name": "veh",
+              "name": "vehicle",
               "type": "Car"
             }
           ],
           "name": "PLAY_AUDIO_EVENT_FROM_VEHICLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Audio",
+          "member": "PlayAudioEventFromVehicle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -28790,12 +28872,17 @@
               "type": "string"
             },
             {
-              "name": "veh",
+              "name": "vehicle",
               "type": "Car"
             }
           ],
           "name": "PLAY_SOUND_FROM_VEHICLE",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Audio",
+          "member": "PlaySoundFromVehicle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -31008,16 +31095,18 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
-              "name": "remove",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "REMOVE_PLAYER_HELMET",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Player",
+          "member": "RemoveHelmet"
         },
         {
           "input": [
@@ -31043,15 +31132,17 @@
           "short_desc": "Removes any particle effects from the specified ped"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ],
           "name": "REMOVE_PTFX_FROM_VEHICLE",
           "num_params": 1,
           "short_desc": "Removes any particle effects from the vehicle",
-          "input": [
-            {
-              "name": "veh",
-              "type": "Car"
-            }
-          ]
+          "class": "Car",
+          "member": "RemovePtfx"
         },
         {
           "name": "REMOVE_RC_BUGGY",
@@ -31111,7 +31202,12 @@
         },
         {
           "name": "REMOVE_TEMPORARY_RADAR_BLIPS_FOR_PICKUPS",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "RemoveTemporaryRadarBlipsForPickups",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -31197,12 +31293,17 @@
         {
           "input": [
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "RENDER_WEAPON_PICKUPS_BIGGER",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "RenderWeaponPickupsBigger",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -31624,7 +31725,12 @@
           ],
           "name": "RETUNE_RADIO_TO_STATION_INDEX",
           "num_params": 1,
-          "short_desc": "Retunes the radio in the player's vehicle to the station with given index"
+          "short_desc": "Retunes the radio in the player's vehicle to the station with given index",
+          "class": "Game",
+          "member": "RetuneRadioToStationIndex",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -31635,7 +31741,12 @@
           ],
           "name": "RETUNE_RADIO_TO_STATION_NAME",
           "num_params": 1,
-          "short_desc": "Retunes the radio in the player's vehicle to the station with given name. If the player is not in a vehicle already, the radio will be retuned the next time the player is in a vehicle"
+          "short_desc": "Retunes the radio in the player's vehicle to the station with given name. If the player is not in a vehicle already, the radio will be retuned the next time the player is in a vehicle",
+          "class": "Game",
+          "member": "RetuneRadioToStationName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "RETUNE_RADIO_UP",
@@ -32135,7 +32246,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -32149,7 +32260,9 @@
           ],
           "name": "SET_AMMO_IN_CLIP",
           "num_params": 3,
-          "short_desc": "Sets ammo in the given weapon to the given amount"
+          "short_desc": "Sets ammo in the given weapon to the given amount",
+          "class": "Char",
+          "member": "SetAmmoInClip"
         },
         {
           "input": [
@@ -35952,12 +36065,17 @@
         {
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_ENABLE_NEAR_CLIP_SCAN",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetEnableNearClipScan",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -36444,18 +36562,20 @@
           "num_params": 4
         },
         {
-          "name": "SET_GPS_VOICE_FOR_VEHICLE",
-          "num_params": 2,
           "input": [
             {
-              "name": "veh",
+              "name": "self",
               "type": "Car"
             },
             {
               "name": "voiceId",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_GPS_VOICE_FOR_VEHICLE",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetGpsVoice"
         },
         {
           "input": [
@@ -39964,17 +40084,19 @@
         {
           "input": [
             {
-              "name": "blip",
+              "name": "self",
               "type": "Blip"
             },
             {
-              "name": "value",
+              "name": "state",
               "type": "bool"
             }
           ],
           "name": "SET_ROUTE",
           "num_params": 2,
-          "short_desc": "Draws the path on the map and radar to a specified blip (like for a waypoint). Color of the route depends on color of blip"
+          "short_desc": "Draws the path on the map and radar to a specified blip (like for a waypoint). Color of the route depends on color of blip",
+          "class": "Blip",
+          "member": "SetRoute"
         },
         {
           "input": [
@@ -43879,8 +44001,6 @@
           }
         },
         {
-          "name": "SYNCH_AMBIENT_PLANES",
-          "num_params": 2,
           "input": [
             {
               "name": "_p1",
@@ -43890,7 +44010,14 @@
               "name": "_p2",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SYNCH_AMBIENT_PLANES",
+          "num_params": 2,
+          "class": "Game",
+          "member": "SynchAmbientPlanes",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SYNCH_RECORDING_WITH_WATER",
@@ -49495,8 +49622,6 @@
           "short_desc": "Sets whether the object can be picked up with the magnocrane"
         },
         {
-          "name": "ADD_BLIP_FOR_GANG_TERRITORY",
-          "num_params": 6,
           "input": [
             {
               "name": "x0",
@@ -49521,11 +49646,19 @@
           ],
           "output": [
             {
-              "name": "blip",
-              "type": "int",
+              "name": "handle",
+              "type": "Blip",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "ADD_BLIP_FOR_GANG_TERRITORY",
+          "num_params": 6,
+          "class": "Blip",
+          "member": "AddForGangTerritory",
+          "attrs": {
+            "is_static": true,
+            "is_constructor": true
+          }
         },
         {
           "input": [
@@ -49838,14 +49971,19 @@
           "num_params": 0
         },
         {
-          "name": "SET_AMBIENT_PLANES_SPEED_MULTIPLIER",
-          "num_params": 1,
           "input": [
             {
               "name": "multiplier",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_AMBIENT_PLANES_SPEED_MULTIPLIER",
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetAmbientPlanesSpeedMultiplier",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_BIKE_RIDER_WILL_PUT_FOOT_DOWN_WHEN_STOPPED",
@@ -50059,14 +50197,19 @@
           ]
         },
         {
-          "name": "SET_TIME_CYCLE_FAR_CLIP_DISABLED",
-          "num_params": 1,
           "input": [
             {
-              "name": "set",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_TIME_CYCLE_FAR_CLIP_DISABLED",
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetTimeCycleFarClipDisabled",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_VEH_ALARM_DURATION",
@@ -50159,8 +50302,6 @@
           "num_params": 0
         },
         {
-          "name": "ADD_BLIP_FOR_RADIUS",
-          "num_params": 5,
           "input": [
             {
               "name": "x",
@@ -50181,11 +50322,19 @@
           ],
           "output": [
             {
-              "name": "blip",
-              "type": "int",
+              "name": "handle",
+              "type": "Blip",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "ADD_BLIP_FOR_RADIUS",
+          "num_params": 5,
+          "class": "Blip",
+          "member": "AddForRadius",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          }
         },
         {
           "name": "ADD_EXPLOSION_WITH_DIRECTION",
@@ -51478,14 +51627,19 @@
           ]
         },
         {
-          "name": "REMOVE_BLIP_AND_CLEAR_INDEX",
-          "num_params": 1,
           "input": [
             {
-              "name": "blip",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             }
-          ]
+          ],
+          "name": "REMOVE_BLIP_AND_CLEAR_INDEX",
+          "num_params": 1,
+          "class": "Blip",
+          "member": "RemoveAndClearIndex",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "name": "REMOVE_PROJTEX_IN_RANGE",
@@ -52475,18 +52629,20 @@
           ]
         },
         {
-          "name": "SHOW_BLIP_ON_ALTIMETER",
-          "num_params": 2,
           "input": [
             {
-              "name": "blip",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "show",
+              "name": "state",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SHOW_BLIP_ON_ALTIMETER",
+          "num_params": 2,
+          "class": "Blip",
+          "member": "ShowOnAltimeter"
         },
         {
           "name": "START_KILL_TRACKING",

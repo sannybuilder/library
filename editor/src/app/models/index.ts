@@ -9,7 +9,6 @@ export interface Attr {
   is_destructor: boolean;
   is_static: boolean;
   is_overload: boolean;
-  is_variadic: boolean;
 }
 
 export type Attribute = keyof Attr;
@@ -53,7 +52,6 @@ export const CommandAttributes: Attribute[] = [
   'is_segment',
   'is_static',
   'is_unsupported',
-  'is_variadic',
 ];
 
 export enum Platform {

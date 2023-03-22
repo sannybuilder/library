@@ -16,7 +16,6 @@ import {
   doesCommandDescriptionHaveTrailingPeriod,
   doesCommandDescriptionNotStartWith3rdPersonVerb,
   doesConstructorNotReturnHandle,
-  doesVariadicCommandNotHaveArgumentsParameter,
   doesGameRequireOpcode,
   doesCommandHaveInvalidOpcode,
   doesCommandHaveOutOfRangeOpcode,
@@ -54,7 +53,6 @@ const errorHandlers = {
   trailingPeriodInDescription: doesCommandDescriptionHaveTrailingPeriod,
   no3rdPersonVerb: doesCommandDescriptionNotStartWith3rdPersonVerb,
   constructorNotReturningHandle: doesConstructorNotReturnHandle,
-  variadicNotHavingArguments: doesVariadicCommandNotHaveArgumentsParameter,
   invalidClassName: doesCommandHaveAnInvalidClassName,
   invalidMethodName: doesCommandHaveAnInvalidMethodName
 };

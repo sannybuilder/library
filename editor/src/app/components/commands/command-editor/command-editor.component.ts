@@ -52,7 +52,6 @@ import {
   doesCommandDescriptionHaveTrailingPeriod,
   doesCommandDescriptionNotStartWith3rdPersonVerb,
   doesConstructorNotReturnHandle,
-  doesVariadicCommandNotHaveArgumentsParameter,
   doesGameRequireOpcode,
   normalizeId,
   doesCommandHaveInvalidOpcode,
@@ -75,7 +74,6 @@ type ErrorType =
   | 'trailingPeriodInDescription'
   | 'no3rdPersonVerb'
   | 'constructorNotReturningHandle'
-  | 'variadicNotHavingArguments'
   | 'invalidClassName'
   | 'invalidMethodName'
 
@@ -122,7 +120,6 @@ export class CommandEditorComponent implements OnInit {
     trailingPeriodInDescription: false,
     no3rdPersonVerb: false,
     constructorNotReturningHandle: false,
-    variadicNotHavingArguments: false,
     invalidClassName: false,
     invalidMethodName: false,
 
@@ -241,7 +238,6 @@ export class CommandEditorComponent implements OnInit {
     trailingPeriodInDescription: this.trailingPeriodInDescriptionError,
     no3rdPersonVerb: this.no3rdPersonVerbError,
     constructorNotReturningHandle: this.constructorNotReturningHandleError,
-    variadicNotHavingArguments: this.variadicNotHavingArgumentsError,
     invalidClassName: this.invalidClassNameError,
     invalidMethodName: this.invalidMethodNameError,
   };
@@ -729,11 +725,6 @@ export class CommandEditorComponent implements OnInit {
     this.errors.constructorNotReturningHandle = doesConstructorNotReturnHandle(
       this.command
     );
-  }
-
-  private variadicNotHavingArgumentsError() {
-    this.errors.variadicNotHavingArguments =
-      doesVariadicCommandNotHaveArgumentsParameter(this.command);
   }
 
   private invalidClassNameError() {

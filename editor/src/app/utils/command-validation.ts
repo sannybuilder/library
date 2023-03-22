@@ -146,14 +146,6 @@ export function doesConstructorNotReturnHandle(command: Command) {
   return !!command.attrs?.is_constructor && !hasSingleParamHandle;
 }
 
-export function doesVariadicCommandNotHaveArgumentsParameter(command: Command) {
-  return (
-    !!command.attrs?.is_variadic &&
-    !commandParams(command).some((p) => p.type === PrimitiveType.arguments)
-  );
-}
-
-
 export function doesCommandHaveAnInvalidClassName(command: Command) {
   return !!command.class && !isValidIdentifier(command.class);
 }

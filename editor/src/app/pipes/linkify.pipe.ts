@@ -57,6 +57,10 @@ export class LinkifyPipe implements PipeTransform {
     return commandParams(command).reduce((m, p) => {
       const { name } = p;
 
+      if (name === 'a') {
+        return m;
+      }
+
       let needle =
         name === 'self' || !name ? p.type : words(name, reAscii).join(' ');
 

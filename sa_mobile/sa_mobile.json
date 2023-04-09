@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1676237905745,
-    "version": "0.261",
+    "last_update": 1681062932174,
+    "version": "0.262",
     "url": "https://library.sannybuilder.com/#/sa_mobile"
   },
   "extensions": [
@@ -25127,14 +25127,14 @@
           "output": [
             {
               "name": "time",
-              "type": "int",
+              "type": "float",
               "source": "var_any"
             }
           ],
           "id": "0613",
           "name": "GET_CHAR_ANIM_CURRENT_TIME",
           "num_params": 3,
-          "short_desc": "Returns the progress of the animation on the actor, ranging from 0",
+          "short_desc": "Returns the progress of the animation on the actor, ranging from 0.0 to 1.0",
           "class": "Char",
           "member": "GetAnimCurrentTime"
         },
@@ -25250,8 +25250,8 @@
           ],
           "output": [
             {
-              "name": "time",
-              "type": "int",
+              "name": "totalTime",
+              "type": "float",
               "source": "var_any"
             }
           ],
@@ -29862,14 +29862,19 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
           ],
           "id": "06F3",
           "name": "SET_PLAYER_PLAYER_TARGETING",
           "num_params": 1,
-          "short_desc": "Enables each player to target the other player"
+          "short_desc": "Enables each player to target the other player",
+          "class": "Game",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SetPlayerPlayerTargeting"
         },
         {
           "id": "06F4",
@@ -29990,14 +29995,19 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "state",
+              "type": "bool"
             }
           ],
           "id": "06FA",
           "name": "SET_PLAYERS_CAN_BE_IN_SEPARATE_CARS",
           "num_params": 1,
-          "short_desc": "Sets whether the players can be in separate cars during a 2-player mission"
+          "short_desc": "Sets whether the players can be in separate cars during a 2-player mission",
+          "class": "Game",
+          "member": "SetPlayersCanBeInSeparateCars",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "06FB",
@@ -31628,11 +31638,11 @@
               "type": "float"
             },
             {
-              "name": "height",
+              "name": "width",
               "type": "float"
             },
             {
-              "name": "width",
+              "name": "height",
               "type": "float"
             },
             {
@@ -31934,7 +31944,7 @@
               "type": "string"
             },
             {
-              "name": "framedelta",
+              "name": "frameDelta",
               "type": "float"
             },
             {
@@ -32328,14 +32338,14 @@
             },
             {
               "name": "townId",
-              "type": "int"
+              "type": "Town"
             }
           ],
           "id": "0771",
           "name": "CUSTOM_PLATE_DESIGN_FOR_NEXT_CAR",
           "num_params": 2,
           "short_desc": "Sets the town ID of the license plate which is created on the specified model, affecting which texture is chosen for the plate",
-          "class": "Car",
+          "class": "Streaming",
           "member": "CustomPlateDesignForNextCar",
           "attrs": {
             "is_static": true
@@ -33164,7 +33174,7 @@
           "name": "SET_NEXT_DESIRED_MOVE_STATE",
           "num_params": 1,
           "short_desc": "Sets how the character chooses to go to their destination in the next task without a parameter specifying this",
-          "class": "Char",
+          "class": "Game",
           "member": "SetNextDesiredMoveState",
           "attrs": {
             "is_static": true
@@ -34503,16 +34513,16 @@
         {
           "input": [
             {
+              "name": "relationshipType",
+              "type": "RelationshipType"
+            },
+            {
               "name": "ofPedType",
               "type": "PedType"
             },
             {
               "name": "toPedType",
               "type": "PedType"
-            },
-            {
-              "name": "relationshipType",
-              "type": "RelationshipType"
             }
           ],
           "id": "07E8",

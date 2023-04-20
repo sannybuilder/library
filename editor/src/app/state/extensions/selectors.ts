@@ -116,12 +116,10 @@ export const commandRelated = createSelector(
     }
 
     const { id, name, class: className, member, attrs } = props.command;
-    const referenced =
-      commands.filter(
-        (c) =>
-          (id && c.short_desc?.includes(id)) ||
-          (name && c.short_desc?.includes(name))
-      ) ?? [];
+    const re = new RegExp(`\\b${id}\\b|\\b${name}\\b`);
+    const referenced = commands.filter(
+      (c) => c.short_desc && re.test(c.short_desc)
+    );
 
     const overloads = attrs?.is_overload
       ? commands.filter((c) => {
@@ -152,9 +150,7 @@ export const commandRelated = createSelector(
             member,
             {
               starters: [['Get', 'Set']],
-              endings: [
-                ['On', 'Off'],
-              ],
+              endings: [['On', 'Off']],
             },
             commands
           )

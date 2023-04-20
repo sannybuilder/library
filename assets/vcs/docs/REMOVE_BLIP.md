@@ -1,0 +1,1 @@
+This command removes the specified blip created by a Blip constructor command. It also removes any properties associated to it when it was created like an arrow or a sphere.

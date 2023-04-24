@@ -1,0 +1,1 @@
+This command ends the cutscene started by command START_CUTSCENE. It clears all effects created by LOAD_CUTSCENE.

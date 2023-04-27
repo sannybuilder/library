@@ -1,0 +1,1 @@
+This command adds a fractal part to an integer value of the global variable and stores the result into the local variable. For example, a value of `4` is converted into `4.0` as a result.

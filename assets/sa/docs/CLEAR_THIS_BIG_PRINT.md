@@ -1,0 +1,1 @@
+This command clears the big message. It seems to work only on style `1` messages after the fading sequence has ended. It has no effect on any other styles; use CLEAR_PRINTS instead to clear all text including big messages.

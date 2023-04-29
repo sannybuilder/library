@@ -9,6 +9,7 @@ export * from './output-params.pipe';
 export * from './single-param.pipe';
 export * from './sanitize.pipe';
 export * from './linkify.pipe';
+export * from './linkify-classes.pipe';
 export * from './prop-extract.pipe';
 export * from './opcode-params.pipe';
 export * from './filter-methods';

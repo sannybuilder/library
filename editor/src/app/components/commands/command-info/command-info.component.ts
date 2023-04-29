@@ -31,7 +31,7 @@ export class CommandInfoComponent {
   private _attrs: Attribute[];
   private _primitives: string[] = [];
   private _enumNames: string[] = [];
-  private _classNames: string[] = [];
+  classNames: string[] = [];
 
   customPlatforms: Platform[] = [];
   customVersions: Version[] = [];
@@ -42,7 +42,7 @@ export class CommandInfoComponent {
       .map((p) => p.name);
 
     this._enumNames = val.filter((v) => v.type === 'enum').map((p) => p.name);
-    this._classNames = val
+    this.classNames = val
       .filter((v) => v.type === 'static' || v.type === 'dynamic')
       .map((p) => p.name);
   }
@@ -87,7 +87,7 @@ export class CommandInfoComponent {
   }
 
   isClassParam(param: Param) {
-    return this._classNames.includes(param.type);
+    return this.classNames.includes(param.type);
   }
 
   interceptDescriptionClick(event: MouseEvent) {

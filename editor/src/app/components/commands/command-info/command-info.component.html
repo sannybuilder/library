@@ -24,7 +24,7 @@
         *ngIf="isSupported(command) && command.short_desc"
         class="mb-3"
         (click)="interceptDescriptionClick($event)"
-        [innerHTML]="command | linkify: game:gameExtensions | sanitize"
+        [innerHTML]="command | linkify : game : gameExtensions | sanitize"
       ></div>
       <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
         {{ "ui.commandList.unsupported" | translate }}
@@ -111,7 +111,11 @@
         <h5>{{ "ui.commandOverview.descriptionSubtitle" | translate }}</h5>
         <div
           [innerHTML]="
-            fullDescription | markdown | linkify: game:gameExtensions | sanitize
+            fullDescription
+              | markdown
+              | linkify : game : gameExtensions
+              | linkifyClasses : game : classNames
+              | sanitize
           "
         ></div>
       </div>
@@ -134,14 +138,14 @@
             *ngIf="extension !== DEFAULT_EXTENSION"
             [innerHTML]="
               'ui.commandOverview.withExtension'
-                | translate: { extension: extension, game: game }
+                | translate : { extension: extension, game: game }
             "
           ></li>
           <li
             *ngIf="customPlatforms.length === 1"
             [innerHTML]="
               'ui.commandOverview.customPlatform'
-                | translate: { platform: customPlatforms[0] }
+                | translate : { platform: customPlatforms[0] }
             "
           ></li>
           <li
@@ -159,14 +163,14 @@
             *ngIf="customVersions.length === 1"
             [innerHTML]="
               'ui.commandOverview.customVersion'
-                | translate: { version: customVersions[0] }
+                | translate : { version: customVersions[0] }
             "
           ></li>
           <li
             *ngIf="customVersions.length > 1"
             [innerHTML]="
               'ui.commandOverview.customVersions'
-                | translate: { versions: customVersions.join(', ') }
+                | translate : { versions: customVersions.join(', ') }
             "
           ></li>
           <li *ngIf="command?.input[0]?.name === 'self'">
@@ -223,7 +227,7 @@
     <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
     <pre
       class="sample"
-      [innerHTML]="snippet | parametrify: command | sanitize"
+      [innerHTML]="snippet | parametrify : command | sanitize"
     ></pre>
   </ng-container>
 </div>

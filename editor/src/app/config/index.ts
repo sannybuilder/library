@@ -8,6 +8,7 @@ export interface Config {
   cookieDomain: string;
   features: {
     shouldBeAuthorizedToEdit: boolean;
+    analytics: boolean;
   };
   endpoints: {
     base: string;

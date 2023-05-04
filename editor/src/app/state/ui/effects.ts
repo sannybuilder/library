@@ -65,6 +65,7 @@ import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
 import { loadEnumsSuccess } from '../enums/actions';
 import { ArticlesFacade } from '../articles/facade';
+import { AnalyticService } from '../../analytics';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -258,10 +259,15 @@ export class UiEffects {
       this._actions$.pipe(
         ofType(displayOrEditCommandInfo),
         filter(({ viewMode }) => viewMode === ViewMode.ViewCommand),
-        tap(({ command }) => {
+        withLatestFrom(this._game.game$),
+        tap(([{ command }, game]) => {
           if (isSupported(command.attrs)) {
             this._articles.loadArticle(command.name);
           }
+          this._analytics.trackEvent('command_view', {
+            name: command.name,
+            game: game,
+          });
         })
       ),
     { dispatch: false }
@@ -482,6 +488,7 @@ export class UiEffects {
     private _game: GameFacade,
     private _enums: EnumsFacade,
     private _articles: ArticlesFacade,
+    private _analytics: AnalyticService,
     @Inject(DOCUMENT) private _d: Document
   ) {}
 }

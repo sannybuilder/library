@@ -8,6 +8,7 @@ export const environment: Config = {
   production: false,
   features: {
     shouldBeAuthorizedToEdit: false,
+    analytics: false,
   },
   cookieDomain: 'localhost',
   endpoints: {

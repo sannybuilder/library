@@ -5,6 +5,7 @@ export const environment: Config = {
   cookieDomain: '.sannybuilder.com',
   features: {
     shouldBeAuthorizedToEdit: true,
+    analytics: true,
   },
   endpoints: {
     base: 'https://raw.githubusercontent.com/sannybuilder/library/master',

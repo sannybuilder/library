@@ -1384,3 +1384,13 @@ export const PadId = {
   "Pad1": 0,
   "Pad2": 1
 };
+export const TaskStatus = {
+  "WaitingToStartTask": 0,
+  "PerformingTask": 1,
+  "DormantTask": 2,
+  "VacantStage": 3,
+  "GroupTaskStage": 4,
+  "AttractorScriptTaskStage": 5,
+  "SecondaryTaskStage": 6,
+  "FinishedTask": 7
+};

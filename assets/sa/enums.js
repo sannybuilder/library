@@ -1347,3 +1347,13 @@ export const ImGuiStyleVar = {
   "ButtonTextAlign": 23,
   "SelectableTextAlign": 24
 };
+export const TaskStatus = {
+  "WaitingToStartTask": 0,
+  "PerformingTask": 1,
+  "DormantTask": 2,
+  "VacantStage": 3,
+  "GroupTaskStage": 4,
+  "AttractorScriptTaskStage": 5,
+  "SecondaryTaskStage": 6,
+  "FinishedTask": 7
+};

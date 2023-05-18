@@ -12,7 +12,7 @@
   <pre
     *ngIf="extensions.length; else noExtensions"
     class="sample"
-  ><div *ngFor="let extension of extensions"><a [routerLink]="['/', game, extension.name]">{{ extension.name }}</a></div></pre>
+  ><div *ngFor="let extension of extensions"><a [routerLink]="['/', game, extension.name]">{{ extension.name }}</a> <span class="secondary">({{ "ui.extensionList.numCommands" | translate: { total: extension.commands.length } }})</span></div></pre>
 </div>
 
 <ng-template #noExtensions>

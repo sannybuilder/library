@@ -6,7 +6,7 @@ declare var gtag: (...args: unknown[]) => {};
 @Injectable({
   providedIn: 'root',
 })
-export class AnalyticService {
+export class AnalyticsService {
   constructor(@Inject(CONFIG) private _config: Config) {}
 
   trackEvent(eventName: string, data: object) {

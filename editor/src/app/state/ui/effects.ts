@@ -65,7 +65,7 @@ import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
 import { loadEnumsSuccess } from '../enums/actions';
 import { ArticlesFacade } from '../articles/facade';
-import { AnalyticService } from '../../analytics';
+import { AnalyticsService } from '../../analytics';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -488,7 +488,7 @@ export class UiEffects {
     private _game: GameFacade,
     private _enums: EnumsFacade,
     private _articles: ArticlesFacade,
-    private _analytics: AnalyticService,
+    private _analytics: AnalyticsService,
     @Inject(DOCUMENT) private _d: Document
   ) {}
 }

@@ -49,11 +49,13 @@ export function unpackSupportInfo(
     m[game as Game] = Object.entries(supportInfo).reduce(
       (m2, [ext, commands]) => {
         m2[ext] = Object.entries(commands).reduce((m3, [name, infos]) => {
-          m3[name] = infos.map(([level, extension], id) => ({
-            game: idToGame[id],
-            level,
-            extension: extension === '' ? 'default' : extension,
-          }));
+          m3[name] = infos
+            .slice(0, idToGame.length)
+            .map(([level, extension], id) => ({
+              game: idToGame[id],
+              level,
+              extension: extension === '' ? 'default' : extension,
+            }));
           return m3;
         }, {} as Record<string, GameSupportInfo[]>);
         return m2;

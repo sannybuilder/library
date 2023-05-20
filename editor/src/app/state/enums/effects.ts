@@ -30,9 +30,9 @@ import { ChangesFacade } from '../changes/facade';
 import { EnumsFacade } from './facade';
 import { GameEnums } from '../../models';
 import { AuthFacade } from '../auth/facade';
-import { ExtensionsFacade } from '../extensions/facade';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { isEqual } from 'lodash';
 
 @Injectable({ providedIn: 'root' })
 export class EnumsEffects {
@@ -63,6 +63,9 @@ export class EnumsEffects {
     this._actions$.pipe(
       ofType(updateEnum),
       // distinctUntilChanged(isEqual),
+      filter(({ enumToEdit, oldEnumToEdit }) => {
+        return !isEqual(enumToEdit.fields, oldEnumToEdit.fields);
+      }),
       withLatestFrom(this._game.game$),
       map(([{ enumToEdit, oldEnumToEdit }, game]) =>
         updateGameEnum({
@@ -74,14 +77,19 @@ export class EnumsEffects {
     )
   );
 
+  // the rename effect must go after the update effect
+  // because if we rename and change an enum at the same time
+  // existing enum fields should updated before the enum renamed, 
+  // or we get a duplicate
   renameGameEnums$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(updateGameEnum),
+      ofType(updateEnum),
       filter(
         ({ enumToEdit, oldEnumToEdit }) =>
           enumToEdit.name !== oldEnumToEdit.name
       ),
-      map(({ game, enumToEdit, oldEnumToEdit }) =>
+      withLatestFrom(this._game.game$),
+      map(([{ enumToEdit, oldEnumToEdit }, game]) =>
         renameGameEnum({
           game,
           newEnumName: enumToEdit.name,
@@ -99,6 +107,7 @@ export class EnumsEffects {
         ofType(updateGameEnum, renameGameEnum),
         switchMap(({ game }) =>
           this._enums.getGameEnums(game).pipe(
+            take(1),
             tap((enums) => {
               this._changes.registerEnumChange(GameEnums[game], enums);
             })
@@ -142,7 +151,6 @@ export class EnumsEffects {
     private _service: EnumsService,
     private _changes: ChangesFacade,
     private _enums: EnumsFacade,
-    private _extensions: ExtensionsFacade,
     private _auth: AuthFacade,
     private _router: Router
   ) {}

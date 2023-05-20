@@ -145,9 +145,11 @@ export const extensionsReducer = createReducer(
     });
   }),
   on(loadSupportInfo, (state, { data }) => {
-    return Object.entries(data).reduce((memo, [game, supportInfo]) => {
-      return updateState(memo, game as Game, { supportInfo });
-    }, state);
+    return Object.entries(data)
+      .filter(([game]) => Game[game as Game])
+      .reduce((memo, [game, supportInfo]) => {
+        return updateState(memo, game as Game, { supportInfo });
+      }, state);
   }),
   on(initSupportInfo, (state, { game }) => {
     return updateState(state, game as Game, {

@@ -42,16 +42,18 @@ export const enumsReducer = createReducer(
     });
   }),
   on(loadEnumsInfoSuccess, (state, { data }) => {
-    return Object.entries(data).reduce((s, [game, names]) => {
-      return updateState(
-        s,
-        game as Game,
-        names.reduce((m, v) => {
-          m[v] ??= {};
-          return m;
-        }, (state.enums[game as Game] as Enums) ?? {})
-      );
-    }, state);
+    return Object.entries(data)
+      .filter(([game]) => Game[game as Game])
+      .reduce((s, [game, names]) => {
+        return updateState(
+          s,
+          game as Game,
+          names.reduce((m, v) => {
+            m[v] ??= {};
+            return m;
+          }, (state.enums[game as Game] as Enums) ?? {})
+        );
+      }, state);
   })
 );
 

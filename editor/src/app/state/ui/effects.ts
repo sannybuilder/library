@@ -273,6 +273,38 @@ export class UiEffects {
     { dispatch: false }
   );
 
+  preloadEnums$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(displayOrEditEnum),
+        first(({ viewMode }) => viewMode === ViewMode.EditEnum),
+        tap(() => {
+          Object.values(Game).forEach((game) => {
+            this._extensions.loadExtensions(game);
+          });
+          Object.values(Game).forEach((game) => {
+            this._enums.loadEnums(game);
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // we need to preload extensions and enums for cross-edits to work
+  preloadExtensions$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(displayOrEditCommandInfo),
+        first(({ viewMode }) => viewMode === ViewMode.EditCommand),
+        tap(() => {
+          Object.values(Game).forEach((game) => {
+            this._extensions.loadExtensions(game);
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
   resetPagination$ = createEffect(() =>
     merge(
       this._actions$.pipe(

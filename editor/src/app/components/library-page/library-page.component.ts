@@ -135,17 +135,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.detectScreenSize();
     this._ui.toggleCommandListElements(true);
 
-    this.canEdit$.pipe(take(1), filter(Boolean)).subscribe(() => {
-      // we need to preload extensions for cross-edits to work
-      Object.values(Game).forEach((game) => {
-        this._extensions.loadExtensions(game);
-      });
-
-      // Object.values(Game).forEach((game) => {
-      //   this._enums.loadEnums(game);
-      // });
-    });
-
     getBaseGames().forEach((game) => {
       this._snippets.loadSnippets(game);
     });

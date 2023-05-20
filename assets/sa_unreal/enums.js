@@ -1396,10 +1396,3 @@ export const DrivingMode = {
   "AvoidCarsObeyLights": 5,
   "AvoidCarsStopForPedsObeyLights": 6
 };
-export const CarDrivingStyle = {
-  "StopForCars": 0,
-  "SlowDownForCars": 1,
-  "AvoidCars": 2,
-  "PloughThrough": 3,
-  "StopForCarsIgnoreLights": 4
-};

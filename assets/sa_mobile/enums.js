@@ -195,6 +195,13 @@ export const CounterDisplay = {
   "Number": 0,
   "Bar": 1
 };
+export const CarDrivingStyle = {
+  "StopForCars": 0,
+  "SlowDownForCars": 1,
+  "AvoidCars": 2,
+  "PloughThrough": 3,
+  "StopForCarsIgnoreLights": 4
+};
 export const CarMission = {
   "None": 0,
   "Cruise": 1,
@@ -1030,11 +1037,4 @@ export const TaskStatus = {
   "AttractorScriptTaskStage": 5,
   "SecondaryTaskStage": 6,
   "FinishedTask": 7
-};
-export const DrivingMode = {
-  "StopForCars": 0,
-  "SlowDownForCars": 1,
-  "AvoidCars": 2,
-  "PloughThrough": 3,
-  "StopForCarsIgnoreLights": 4
 };

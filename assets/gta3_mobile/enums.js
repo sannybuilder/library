@@ -117,6 +117,13 @@ export const WeatherType = {
   "Rainy": 2,
   "Foggy": 3
 };
+export const CarDrivingStyle = {
+  "StopForCars": 0,
+  "SlowDownForCars": 1,
+  "AvoidCars": 2,
+  "PloughThrough": 3,
+  "StopForCarsIgnoreLights": 4
+};
 export const CarMission = {
   "None": 0,
   "Cruise": 1,
@@ -721,11 +728,4 @@ export const TouchPoints = {
 export const PadId = {
   "Pad1": 0,
   "Pad2": 1
-};
-export const DrivingMode = {
-  "StopForCars": 0,
-  "SlowDownForCars": 1,
-  "AvoidCars": 2,
-  "PloughThrough": 3,
-  "StopForCarsIgnoreLights": 4
 };

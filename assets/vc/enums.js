@@ -184,13 +184,6 @@ export const MoveState = {
   "Sprint": 5,
   "Thrown": 6
 };
-export const CarDrivingStyle = {
-  "StopForCars": 0,
-  "SlowDownForCars": 1,
-  "AvoidCars": 2,
-  "PloughThrough": 3,
-  "StopForCarsIgnoreLights": 4
-};
 export const CarMission = {
   "None": 0,
   "Cruise": 1,
@@ -1130,4 +1123,11 @@ export const ImGuiStyleVar = {
   "TabRounding": 22,
   "ButtonTextAlign": 23,
   "SelectableTextAlign": 24
+};
+export const DrivingMode = {
+  "StopForCars": 0,
+  "SlowDownForCars": 1,
+  "AvoidCars": 2,
+  "PloughThrough": 3,
+  "StopForCarsIgnoreLights": 4
 };

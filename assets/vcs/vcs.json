@@ -1,13 +1,234 @@
 {
   "meta": {
-    "last_update": 1663461327695,
-    "version": "0.1",
+    "last_update": 1689470518303,
+    "version": "0.2",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
     {
       "name": "default",
-      "commands": []
+      "commands": [
+        {
+          "id": "0000",
+          "name": "NOP",
+          "num_params": 0,
+          "short_desc": "Has no effect and is commonly used to pad CLEO scripts with extra space to avoid the jump-at-zero-offset bug",
+          "attrs": {
+            "is_keyword": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "time",
+              "type": "int"
+            }
+          ],
+          "attrs": {
+            "is_keyword": true
+          },
+          "id": "0001",
+          "name": "WAIT",
+          "num_params": 1,
+          "short_desc": "Pauses the script execution for specified amount of time in milliseconds"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            }
+          ],
+          "attrs": {
+            "is_branch": true,
+            "is_keyword": true,
+            "is_segment": true
+          },
+          "id": "0002",
+          "name": "GOTO",
+          "num_params": 1,
+          "short_desc": "Transfers the script execution to the label unconditionally"
+        },
+        {
+          "input": [
+            {
+              "name": "intensity",
+              "type": "int"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
+          "id": "0003",
+          "member": "Shake",
+          "name": "SHAKE_CAM",
+          "num_params": 1,
+          "short_desc": "Shakes the camera with the given intensity"
+        },
+        {
+          "id": "0004",
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int",
+              "source": "literal"
+            }
+          ],
+          "name": "SET_VAR_INT",
+          "num_params": 2,
+          "short_desc": "Sets the integer value of the VAR"
+        },
+        {
+          "id": "0005",
+          "input": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "float",
+              "source": "literal"
+            }
+          ],
+          "name": "SET_VAR_FLOAT",
+          "num_params": 2,
+          "short_desc": "Sets the float value of the VAR"
+        },
+        {
+          "id": "0006",
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int",
+              "source": "literal"
+            }
+          ],
+          "name": "SET_VAR_TEXT_LABEL",
+          "num_params": 2,
+          "short_desc": "Stores a short string into a variable"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "float",
+              "source": "literal"
+            }
+          ],
+          "id": "0031",
+          "name": "ADD_TIMED_VAL_TO_FLOAT_VAR",
+          "num_params": 2,
+          "short_desc": "Multiplies the delta time since the last frame by the specified value and adds the result to the specified variable"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0032",
+          "name": "ADD_TIMED_FLOAT_VAR_TO_FLOAT_VAR",
+          "num_params": 2,
+          "short_desc": "Multiplies the delta time since the last frame by the float value of the variable and adds the result to another variable"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "float",
+              "source": "literal"
+            }
+          ],
+          "id": "0033",
+          "name": "SUB_TIMED_VAL_FROM_FLOAT_VAR",
+          "num_params": 2,
+          "short_desc": "Multiplies the delta time since the last frame by the specified float value and subtracts the result from the specified variable"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0034",
+          "name": "SUB_TIMED_FLOAT_VAR_FROM_FLOAT_VAR",
+          "num_params": 2,
+          "short_desc": "Multiplies the delta time since the last frame by the value of the specified variable and subtracts the result from the specified variable"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0038",
+          "name": "CSET_VAR_INT_TO_VAR_FLOAT",
+          "num_params": 2,
+          "short_desc": "Converts the float in the second variable to an integer (via flooring) and stores the result into the first variable"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0039",
+          "name": "CSET_VAR_FLOAT_TO_VAR_INT",
+          "num_params": 2,
+          "short_desc": "Converts the integer value of the second variable to a float and stores the result in the first variable"
+        }
+      ]
     }
   ],
   "classes": []

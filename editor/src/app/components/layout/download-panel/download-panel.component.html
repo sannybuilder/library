@@ -8,7 +8,7 @@
     >
       <h6 class="mr-2 mt-2">{{ "ui.layout.forSannyBuilder" | translate }}:</h6>
       <li class="pr-2" *ngFor="let file of sbFiles">
-        <a [href]="file.path" target="_blank" download>{{ file.name }}</a>
+        <a [href]="file.path" target="_blank" download [attr.translate]="'no'">{{ file.name }}</a>
       </li>
     </ul>
 
@@ -17,7 +17,7 @@
     >
       <h6 class="mr-2 mt-2">{{ "ui.layout.forCleoRedux" | translate }}:</h6>
       <li class="pr-2">
-        <a [href]="'/assets/' + getExtensions(game)" target="_blank" download
+        <a [href]="'/assets/' + getExtensions(game)" target="_blank" download [attr.translate]="'no'"
           >{{ game }}.json</a
         >
         (<a [routerLink]="['/', game, 'generate']">{{
@@ -31,6 +31,7 @@
           [href]="link"
           target="_blank"
           download
+          [attr.translate]="'no'"
           >enums.js</a
         >
       </li>

@@ -32,7 +32,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <span class="align-middle pl-1">{{
+              <span class="align-middle pl-1" [attr.translate]="'no'">{{
                 game | gameTitleSimple
               }}</span></a
             >
@@ -41,6 +41,7 @@
                 *ngFor="let v of getGameVariations(game)"
                 class="dropdown-item"
                 [routerLink]="['/', v]"
+                [attr.translate]="'no'"
               >
                 <scl-icon [game]="v" size="16"></scl-icon>
                 {{ v | gameTitle }}</a
@@ -360,7 +361,7 @@
             <div class="dropdown-divider"></div>
 
             <ng-container *ngFor="let game of baseGames">
-              <p class="pl-3 mb-1">
+              <p class="pl-3 mb-1" [attr.translate]="'no'">
                 {{ game | gameTitleSimple }}
               </p>
               <a
@@ -369,6 +370,7 @@
                 [routerLink]="['/', v]"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
+                [attr.translate]="'no'"
               >
                 <scl-icon [game]="v" size="16"></scl-icon>
                 {{ v | gameTitle }}</a

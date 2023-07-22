@@ -41,7 +41,7 @@
           class="d-sm-inline-block d-xl-block pr-2"
           *ngFor="let platform of platforms"
         >
-          <label class="form-check-label">
+          <label class="form-check-label" [attr.translate]="'no'">
             <input
               type="checkbox"
               [ngModel]="isPlatformChecked(platform) | async"
@@ -94,7 +94,7 @@
           class="d-sm-inline-block d-xl-block pr-2"
           *ngFor="let version of versions"
         >
-          <label class="form-check-label">
+          <label class="form-check-label" [attr.translate]="'no'">
             <input
               type="checkbox"
               [ngModel]="isVersionChecked(version) | async"
@@ -147,7 +147,7 @@
           class="d-sm-inline-block d-xl-block pr-2"
           *ngFor="let name of extensionNames"
         >
-          <label class="form-check-label">
+          <label class="form-check-label" [attr.translate]="'no'">
             <input
               type="checkbox"
               [ngModel]="isExtensionChecked(name) | async"
@@ -211,7 +211,7 @@
           class="d-sm-inline-block d-xl-block pr-2"
           *ngFor="let entity of selectedExtensionEntities$ | async"
         >
-          <label class="form-check-label">
+          <label class="form-check-label" [attr.translate]="'no'">
             <input
               type="checkbox"
               [ngModel]="isClassChecked(entity.name) | async"
@@ -282,6 +282,7 @@
     <label
       class="form-check-label"
       [title]="'ui.attributes.' + attribute | translate"
+      [attr.translate]="'no'"
     >
       <input
         type="checkbox"

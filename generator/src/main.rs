@@ -21,6 +21,7 @@ struct Attr {
     is_segment: Option<bool>,
     is_static: Option<bool>,
     is_unsupported: Option<bool>,
+    is_positional: Option<bool>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

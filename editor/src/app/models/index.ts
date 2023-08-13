@@ -112,7 +112,7 @@ export interface EnumRaw {
   isNew: boolean;
 }
 
-export const KNOWN_LANGUAGES = ['en', 'ru', 'cn', 'bn', 'es', 'fr', 'tw-cn', 'tr'];
+export const KNOWN_LANGUAGES = ['en', 'ru', 'cn', 'bn', 'es', 'fr', 'tw-cn', 'tr', 'id'];
 
 export enum Game {
   gta3 = 'gta3',

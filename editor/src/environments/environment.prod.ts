@@ -6,6 +6,7 @@ export const environment: Config = {
   features: {
     shouldBeAuthorizedToEdit: true,
     analytics: true,
+    shouldDisplaySearchHelpOnInitialLoad: false,
   },
   endpoints: {
     base: 'https://raw.githubusercontent.com/sannybuilder/library/master',

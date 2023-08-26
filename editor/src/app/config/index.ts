@@ -9,6 +9,7 @@ export interface Config {
   features: {
     shouldBeAuthorizedToEdit: boolean;
     analytics: boolean;
+    shouldDisplaySearchHelpOnInitialLoad: boolean;
   };
   endpoints: {
     base: string;

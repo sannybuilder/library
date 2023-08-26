@@ -103,7 +103,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggleSearchHelp(shouldDisplay: boolean) {
-    this._ui.toggleSearchHelp({ shouldDisplay });
+    if (this._config.features.shouldDisplaySearchHelpOnInitialLoad) {
+      this._ui.toggleSearchHelp({ shouldDisplay });
+    }
   }
 
   dismissSearchHelp() {

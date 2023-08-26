@@ -9,6 +9,7 @@ export const environment: Config = {
   features: {
     shouldBeAuthorizedToEdit: false,
     analytics: false,
+    shouldDisplaySearchHelpOnInitialLoad: false,
   },
   cookieDomain: 'localhost',
   endpoints: {

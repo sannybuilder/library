@@ -408,7 +408,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       if (!command) {
         return [base, game, extension].join('/');
       }
-      const url = [base, game, extension, command.id || command.name].join('/');
+      const url = ["https://sannybuilder.com/lib", game, extension, command.id || command.name].join('/');
 
       return serializeUrlAndParams(
         url,

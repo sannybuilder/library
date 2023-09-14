@@ -1359,3 +1359,20 @@ export const DrivingMode = {
   "AvoidCarsObeyLights": 5,
   "AvoidCarsStopForPedsObeyLights": 6
 };
+export const HudColours = {
+  "Red": 0,
+  "Green": 1,
+  "BlueDark": 2,
+  "BlueLight": 3,
+  "White": 4,
+  "Black": 5,
+  "Orange": 6,
+  "Purple": 7,
+  "Grey": 8,
+  "RedDark": 9,
+  "GreenDark": 10,
+  "OrangeLight": 11,
+  "GreyDark": 12,
+  "Blue": 13,
+  "Yellow": 14
+};

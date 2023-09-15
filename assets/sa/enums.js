@@ -1471,3 +1471,8 @@ export const Cheats = {
   "TaxiNitro": 91,
   "Kerala": 92
 };
+export const Align = {
+  "center": 0,
+  "left": 1,
+  "right": 2
+};

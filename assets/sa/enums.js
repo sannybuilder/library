@@ -1476,3 +1476,12 @@ export const Align = {
   "left": 1,
   "right": 2
 };
+export const ModelInfoType = {
+  "Atomic": 1,
+  "Time": 3,
+  "Weapon": 4,
+  "Clump": 5,
+  "Vehicle": 6,
+  "Ped": 7,
+  "Lod": 8
+};

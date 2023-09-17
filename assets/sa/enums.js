@@ -1490,3 +1490,9 @@ export const ListType = {
   "float": 1,
   "string": 2
 };
+export const WeaponSkill = {
+  "Poor": 0,
+  "Std": 1,
+  "Pro": 2,
+  "Cop": 3
+};

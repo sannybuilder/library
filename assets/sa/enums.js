@@ -1485,3 +1485,8 @@ export const ModelInfoType = {
   "Ped": 7,
   "Lod": 8
 };
+export const ListType = {
+  "int": 0,
+  "float": 1,
+  "string": 2
+};

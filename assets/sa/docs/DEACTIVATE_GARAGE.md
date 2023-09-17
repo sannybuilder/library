@@ -1,0 +1,1 @@
+This command deactivates the garage. It can be reactivated by using ACTIVATE_GARAGE. Normal garage functions will be limited, like save garages not opening, spray shops not being able to finish spraying, and bomb shops not being able to finish fitting the bomb.

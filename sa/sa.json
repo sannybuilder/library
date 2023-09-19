@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695093484845,
-    "version": "0.364",
+    "last_update": 1695099792206,
+    "version": "0.365",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -52097,7 +52097,7 @@
             {
               "name": "weaponInfo",
               "type": "int",
-              "source": "pointer"
+              "source": "var_any"
             }
           ],
           "id": "0E83",
@@ -52149,6 +52149,36 @@
           ],
           "output": [
             {
+              "name": "model1",
+              "type": "model_any",
+              "source": "var_any"
+            },
+            {
+              "name": "model2",
+              "type": "model_any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E85",
+          "name": "GET_WEAPONINFO_MODELS",
+          "num_params": 3,
+          "class": "Weapon",
+          "short_desc": "Returns the model1 and model2 of the current weaponInfo struct",
+          "member": "GetWeaponInfoModels",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "weaponInfo",
+              "type": "int",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
               "name": "flags",
               "type": "int",
               "source": "var_any"
@@ -52160,6 +52190,31 @@
           "class": "Weapon",
           "short_desc": "Returns the flags of the specified WeaponInfo struct",
           "member": "GetWeaponInfoFlags",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "weaponInfo",
+              "type": "int",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
+              "name": "animGroup",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E87",
+          "name": "GET_WEAPONINFO_ANIMGROUP",
+          "num_params": 2,
+          "class": "Weapon",
+          "short_desc": "Returns the FireType of the current weaponInfo struct",
+          "member": "GetWeaponInfoAnimGroup",
           "attrs": {
             "is_static": true
           }
@@ -52188,6 +52243,98 @@
           "attrs": {
             "is_static": true
           }
+        },
+        {
+          "input": [
+            {
+              "name": "weaponInfo",
+              "type": "int",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
+              "name": "fireType",
+              "type": "WeaponFire",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E89",
+          "name": "GET_WEAPONINFO_FIRE_TYPE",
+          "num_params": 2,
+          "class": "Weapon",
+          "short_desc": "Returns the FireType of the current weaponInfo struct",
+          "member": "GetWeaponinfoFireType",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "weaponInfo",
+              "type": "int",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
+              "name": "weaponSlot",
+              "type": "WeaponSlot",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E8A",
+          "name": "GET_WEAPONINFO_SLOT",
+          "num_params": 2,
+          "class": "Weapon",
+          "short_desc": "Returns the weaponSlot of the current weaponInfo struct",
+          "member": "GetWeaponInfoSlot",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "weaponState",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E8B",
+          "name": "GET_CHAR_WEAPON_STATE",
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetWeaponState",
+          "short_desc": "Returns the character's current weaponState"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "weaponClip",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E8C",
+          "name": "GET_CHAR_WEAPON_CLIP",
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetCharWeaponClip",
+          "short_desc": "Returns the character's current WeaponClip"
         },
         {
           "input": [

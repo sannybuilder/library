@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695092083240,
-    "version": "0.363",
+    "last_update": 1695093484845,
+    "version": "0.364",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -52113,6 +52113,35 @@
         {
           "input": [
             {
+              "name": "weaponType",
+              "type": "WeaponType"
+            },
+            {
+              "name": "weaponSkill",
+              "type": "WeaponSkill"
+            }
+          ],
+          "output": [
+            {
+              "name": "weaponInfo",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E84",
+          "name": "GET_WEAPONINFO",
+          "num_params": 3,
+          "class": "Weapon",
+          "short_desc": "Returns a pointer to the weaponInfo struct of the the specified weaponType and weaponSkill",
+          "member": "GetWeaponInfo",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
               "name": "weaponInfo",
               "type": "int",
               "source": "pointer"
@@ -52131,6 +52160,31 @@
           "class": "Weapon",
           "short_desc": "Returns the flags of the specified WeaponInfo struct",
           "member": "GetWeaponInfoFlags",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "weaponInfo",
+              "type": "int",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
+              "name": "totalClip",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0E88",
+          "name": "GET_WEAPONINFO_TOTAL_CLIP",
+          "num_params": 2,
+          "class": "Weapon",
+          "short_desc": "Returns the totalClip size for the current weaponInfo struct",
+          "member": "GetWeaponInfoTotalClip",
           "attrs": {
             "is_static": true
           }

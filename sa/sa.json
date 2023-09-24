@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695583036580,
-    "version": "0.381",
+    "last_update": 1695585640632,
+    "version": "0.382",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -46458,27 +46458,6 @@
           "attrs": {
             "is_condition": true
           }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            }
-          ],
-          "output": [
-            {
-              "name": "pedStat",
-              "type": "PedStat",
-              "source": "var_any"
-            }
-          ],
-          "id": "0EB1",
-          "name": "GET_CHAR_STAT_ID",
-          "num_params": 2,
-          "class": "Char",
-          "member": "GetStatId",
-          "short_desc": "Returns the specified character's pedStat ID (data\\pedstats.dat)"
         }
       ]
     },
@@ -53014,6 +52993,27 @@
         {
           "input": [
             {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "pedStat",
+              "type": "PedStat",
+              "source": "var_any"
+            }
+          ],
+          "id": "0EB1",
+          "name": "GET_CHAR_STAT_ID",
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetStatId",
+          "short_desc": "Returns the specified character's pedStat ID (data\\pedstats.dat)"
+        },
+        {
+          "input": [
+            {
               "name": "offsetX",
               "type": "float"
             },
@@ -53289,6 +53289,36 @@
             "is_static": true
           },
           "short_desc": "Generates a randomFloat from min to < max with seed"
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "id": "0EBE",
+          "name": "LOCATE_CAMERA_DISTANCE_TO_COORDINATES",
+          "num_params": 4,
+          "class": "Camera",
+          "member": "LocateDistanceToCoordinates",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "short_desc": "Returns True if the camera is located within the specified radius of the coordinates"
         },
         {
           "id": "0ED0",
@@ -53751,6 +53781,81 @@
           "class": "Memory",
           "member": "WriteStructOffsetMulti",
           "short_desc": "Writes the value at the given offset from the memory address multiple times as array/vector"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "character",
+              "type": "Char"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "id": "0EE4",
+          "name": "LOCATE_CHAR_DISTANCE_TO_CHAR",
+          "num_params": 3,
+          "class": "Char",
+          "member": "LocateDistanceToChar",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Returns True if the character(self) is within the radius of the specified character"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "car",
+              "type": "Car"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "id": "0EE5",
+          "name": "LOCATE_CHAR_DISTANCE_TO_CAR",
+          "num_params": 3,
+          "short_desc": "Returns True if the character is within the radius of the specified car",
+          "class": "Char",
+          "member": "LocateDistanceToCar",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "id": "0EE6",
+          "name": "LOCATE_CHAR_DISTANCE_TO_OBJECT",
+          "num_params": 3,
+          "short_desc": "Returns True if the character is within the radius of the specified object",
+          "class": "Char",
+          "member": "LocateDistanceToObject",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [

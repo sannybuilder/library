@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695510150969,
-    "version": "0.369",
+    "last_update": 1695514434019,
+    "version": "0.370",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -52583,6 +52583,23 @@
         {
           "input": [
             {
+              "name": "modelId",
+              "type": "model_any"
+            }
+          ],
+          "id": "0EA3",
+          "name": "REMOVE_MODEL_IF_UNUSED",
+          "num_params": 1,
+          "class": "Streaming",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "RemoveModelIfUnused",
+          "short_desc": "Removes the specified ModelID from memory if unused"
+        },
+        {
+          "input": [
+            {
               "name": "self",
               "type": "Char"
             }
@@ -52596,6 +52613,99 @@
             "is_condition": true
           },
           "short_desc": "Returns True if the character is on fire"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "alive",
+              "type": "bool"
+            },
+            {
+              "name": "inCar",
+              "type": "bool"
+            },
+            {
+              "name": "onFoot",
+              "type": "bool"
+            },
+            {
+              "name": "seenInFront",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "closestCop",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "0EA5",
+          "name": "GET_CLOSEST_COP_NEAR_CHAR",
+          "num_params": 7,
+          "class": "Char",
+          "member": "GetClosestCop",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Returns the handle of the closestCop to the specified character"
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            },
+            {
+              "name": "alive",
+              "type": "bool"
+            },
+            {
+              "name": "inCar",
+              "type": "bool"
+            },
+            {
+              "name": "onFoot",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "closestCop",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "0EA6",
+          "name": "GET_CLOSEST_COP_NEAR_POS",
+          "num_params": 8,
+          "class": "World",
+          "member": "GetClosestCopNearPos",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Returns the closestCop to the specified coordinates"
         },
         {
           "input": [

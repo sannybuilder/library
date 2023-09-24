@@ -1756,3 +1756,7 @@ export const PedStat = {
   "StdMission": 41,
   "Coward": 42
 };
+export const StringFind = {
+  "First": 0,
+  "Last": 1
+};

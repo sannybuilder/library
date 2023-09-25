@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695605417567,
-    "version": "0.389",
+    "last_update": 1695620848301,
+    "version": "0.390",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -53329,7 +53329,7 @@
           ],
           "output": [
             {
-              "name": "pointer",
+              "name": "address",
               "type": "int",
               "source": "var_any"
             }
@@ -53338,8 +53338,8 @@
           "name": "GET_FX_SYSTEM_POINTER",
           "num_params": 2,
           "class": "Fx",
-          "member": "GetPointer",
-          "short_desc": "Returns a pointer to the specified FX system"
+          "member": "GetAddress",
+          "short_desc": "Returns the address of the specified FX system"
         },
         {
           "input": [
@@ -53428,9 +53428,8 @@
         {
           "input": [
             {
-              "name": "stringPointer",
-              "type": "int",
-              "source": "pointer"
+              "name": "stringAddress",
+              "type": "int"
             }
           ],
           "id": "0EC2",
@@ -53441,14 +53440,13 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Sets the string at the specified pointer to all upper case"
+          "short_desc": "Sets the string at the specified address to all upper case"
         },
         {
           "input": [
             {
-              "name": "stringPointer",
-              "type": "int",
-              "source": "pointer"
+              "name": "stringAddress",
+              "type": "int"
             }
           ],
           "id": "0EC3",
@@ -53459,7 +53457,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Sets the string at the specified pointer to all lower case"
+          "short_desc": "Sets the string at the specified address to all lower case"
         },
         {
           "input": [
@@ -53469,7 +53467,7 @@
             },
             {
               "name": "stringOrigin",
-              "type": "string128"
+              "type": "string"
             },
             {
               "name": "strFind",
@@ -53497,13 +53495,13 @@
         {
           "input": [
             {
-              "name": "stringPointer",
+              "name": "stringAddress",
               "type": "int",
               "source": "pointer"
             },
             {
               "name": "index",
-              "type": "any"
+              "type": "int"
             }
           ],
           "id": "0EC5",
@@ -53514,7 +53512,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Cuts stringPointer at the specified character index"
+          "short_desc": "Cuts stringAddress at the specified character index"
         },
         {
           "input": [
@@ -54275,13 +54273,11 @@
           "input": [
             {
               "name": "entityA",
-              "type": "int",
-              "source": "pointer"
+              "type": "int"
             },
             {
               "name": "entityB",
-              "type": "int",
-              "source": "pointer"
+              "type": "int"
             },
             {
               "name": "radius",

@@ -2193,3 +2193,9 @@ export const VehicleDummy = {
   "MiscposA": 13,
   "MiscposB": 14
 };
+export const CarNode = {
+  "DoorRF": 8,
+  "DoorRR": 9,
+  "DoorLF": 10,
+  "DoorLR": 11
+};

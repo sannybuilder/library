@@ -2225,3 +2225,13 @@ export const CarNode = {
   "MiscD": 22,
   "MiscE": 23
 };
+export const RwCombine = {
+  "Replace": 0,
+  "PreConcat": 1,
+  "PostConcat": 2
+};
+export const RenderwareCombine = {
+  "Replace": 0,
+  "PreConcat": 1,
+  "PostConcat": 2
+};

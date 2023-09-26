@@ -2230,8 +2230,3 @@ export const RwCombine = {
   "PreConcat": 1,
   "PostConcat": 2
 };
-export const RenderwareCombine = {
-  "Replace": 0,
-  "PreConcat": 1,
-  "PostConcat": 2
-};

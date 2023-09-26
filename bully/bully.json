@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1672159020676,
-    "version": "0.41",
+    "last_update": 1695742847498,
+    "version": "0.42",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -399,7 +399,13 @@
         },
         {
           "name": "ResetYearbookPhotos",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "ResetYearbookPhotos",
+          "short_desc": "Resets the game yearbook photos"
         },
         {
           "name": "IsValidYearbookPhotoOfPed",
@@ -442,16 +448,47 @@
           "short_desc": "Sets whether the punishers react only to the player"
         },
         {
+          "input": [
+            {
+              "name": "num",
+              "type": "int"
+            }
+          ],
           "name": "UnlockYearbookPicture",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Game",
+          "short_desc": "Unlocks provided yearbook picture",
+          "member": "UnlockYearbookPicture",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "YearbookIsFull",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "short_desc": "Returns true if the yearbook is full",
+          "member": "IsYearbookFull",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "name": "StopPedProduction",
-          "num_params": 0
+          "num_params": 1,
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
+          "member": "StopPedProduction",
+          "short_desc": "Disables spawning of peds"
         },
         {
           "name": "SetPopulationFastCulling",
@@ -459,7 +496,13 @@
         },
         {
           "name": "PlayerClearLastVehicle",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Player",
+          "member": "ClearLastVehicle",
+          "short_desc": "Removes the last vehicle used by the player",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -802,8 +845,19 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "name": "PlayerWeaponHudLock",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "LockWeaponHud",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerLockButtonInputsExcept",
@@ -997,8 +1051,32 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "areaCode",
+              "type": "int"
+            }
+          ],
           "name": "PlayerSetPosXYZArea",
-          "num_params": 0
+          "num_params": 4,
+          "short_desc": "Sets player position in game",
+          "class": "Player",
+          "member": "SetPosition",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerSetPosPointArea",
@@ -1148,12 +1226,46 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "hour",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "minute",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "ClockGet",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Returns current game time",
+          "class": "Clock",
+          "member": "GetTime",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "unk1",
+              "type": "int"
+            },
+            {
+              "name": "unk2",
+              "type": "int"
+            }
+          ],
           "name": "ClockSetTickRate",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Clock",
+          "member": "SetTickRate",
+          "short_desc": "Sets clock tick rate",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ClockSetEnableMission",
@@ -1224,7 +1336,14 @@
         },
         {
           "name": "ClockIsPaused",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Returns true if game clock is paused",
+          "class": "Clock",
+          "member": "IsPaused",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "name": "PauseSimulation",
@@ -1293,8 +1412,28 @@
           "short_desc": "Adds a new blip at coordinates"
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "name": "BlipAddSave",
-          "num_params": 0
+          "num_params": 3,
+          "short_desc": "Adds save blip to position",
+          "class": "Blip",
+          "member": "AddSaveBlip",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "BlipAddPoint",
@@ -1434,8 +1573,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "name": "RadarSetVisibility",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Sets the radar visibility",
+          "class": "Hud",
+          "member": "SetRadarVisibility",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "BlipSetShortRanged",
@@ -1471,7 +1622,13 @@
         },
         {
           "name": "CameraReset",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Resets the game camera",
+          "class": "Camera",
+          "member": "Reset"
         },
         {
           "name": "CameraSetActive",
@@ -1590,12 +1747,35 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "heading",
+              "type": "int"
+            }
+          ],
           "name": "CameraSetHeading",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Sets the game camera heading",
+          "class": "Camera",
+          "member": "SetHeading",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "name": "CameraAllowChange",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Camera",
+          "member": "AllowChange",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CameraAllowScriptedChange",
@@ -1655,8 +1835,20 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
           "name": "CameraGetActive",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Returns active camera ID",
+          "class": "Camera",
+          "member": "GetActiveCamera",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CameraSetXYZ",

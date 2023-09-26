@@ -2193,9 +2193,35 @@ export const VehicleDummy = {
   "MiscposA": 13,
   "MiscposB": 14
 };
-export const CarNode = {
+export const CarNodeDoor = {
   "DoorRF": 8,
   "DoorRR": 9,
   "DoorLF": 10,
   "DoorLR": 11
+};
+export const CarNode = {
+  "Chassis": 0,
+  "WheelRF": 1,
+  "WheelRM": 2,
+  "WheelRB": 3,
+  "WheelLF": 4,
+  "WheelLM": 5,
+  "WheelLB": 6,
+  "DoorRF": 7,
+  "DoorRR": 8,
+  "DoorLF": 9,
+  "DoorLR": 10,
+  "BumpFront": 11,
+  "BumpRear": 12,
+  "WingRF": 13,
+  "WingLF": 14,
+  "Bonnet": 15,
+  "Boot": 16,
+  "Windscreen": 17,
+  "Exhaust": 18,
+  "MiscA": 19,
+  "MiscB": 20,
+  "MiscC": 21,
+  "MiscD": 22,
+  "MiscE": 23
 };

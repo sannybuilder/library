@@ -2176,3 +2176,20 @@ export const TaskId = {
   "SimpleFinishBrain": 1801,
   "SimplePlayerInCar2": 1802
 };
+export const VehicleDummy = {
+  "Headlight": 0,
+  "Taillight": 1,
+  "Headlights2": 2,
+  "Taillights2": 3,
+  "PedFrontseat": 4,
+  "PedBackseat": 5,
+  "Exhaust": 6,
+  "Engine": 7,
+  "Petrolcap": 8,
+  "AileronPos": 9,
+  "PedArm": 10,
+  "RudderPos": 11,
+  "WingtipPos": 12,
+  "MiscposA": 13,
+  "MiscposB": 14
+};

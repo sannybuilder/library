@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695771789541,
-    "version": "0.421",
+    "last_update": 1695773101548,
+    "version": "0.422",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -51043,7 +51043,7 @@
         {
           "input": [
             {
-              "name": "self",
+              "name": "char",
               "type": "Char"
             },
             {
@@ -51081,28 +51081,34 @@
           ],
           "output": [
             {
-              "name": "renderObject",
-              "type": "int",
+              "name": "self",
+              "type": "RenderObject",
               "source": "var_any"
             }
           ],
           "id": "0E2E",
           "name": "CREATE_RENDER_OBJECT_TO_CHAR_BONE",
           "num_params": 10,
-          "class": "Char",
-          "short_desc": "Creates render object to character bone",
-          "member": "CreateRenderObjectToBone"
+          "class": "RenderObject",
+          "short_desc": "Creates renderObject to character bone",
+          "member": "CreateToBone"
         },
         {
           "input": [
             {
-              "name": "renderObject",
-              "type": "Object"
+              "name": "self",
+              "type": "RenderObject"
             }
           ],
           "id": "0E2F",
           "name": "DELETE_RENDER_OBJECT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "RenderObject",
+          "member": "Delete",
+          "short_desc": "Deletes the renderObject",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "input": [
@@ -51132,8 +51138,8 @@
         {
           "input": [
             {
-              "name": "renderObject",
-              "type": "Object"
+              "name": "self",
+              "type": "RenderObject"
             },
             {
               "name": "visible",
@@ -51142,7 +51148,9 @@
           ],
           "id": "0E31",
           "name": "SET_RENDER_OBJECT_VISIBLE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "RenderObject",
+          "member": "SetVisible"
         },
         {
           "input": [
@@ -51226,6 +51234,32 @@
           "name": "GET_PICKUP_MODEL",
           "num_params": 2,
           "short_desc": "Returns the model of a specified pickup"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "RenderObject"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "id": "0E35",
+          "name": "SET_RENDER_OBJECT_POSITION",
+          "num_params": 4,
+          "class": "RenderObject",
+          "member": "SetPosition",
+          "short_desc": "Sets the position of a renderObject"
         },
         {
           "input": [

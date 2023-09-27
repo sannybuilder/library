@@ -11,8 +11,8 @@
   },
   "CLEO+": {
     "0E32": "",
-    "0E5F": "03C0: store_car_char_is_in_no_save $PLAYER_ACTOR store_to 1@\nrepeat\nwait 0\n  0E5F: car_horn 1@\nuntil timera > 1000",
-    "0E60": "0E60: set_camera_control true",
+    "0E5F": "store_car_char_is_in_no_save $PLAYER_ACTOR store_to 1@\nrepeat\n    wait 0\n    car_horn 1@\nuntil timera > 1000",
+    "0E60": "set_camera_control true",
     "0E64": "",
     "0E83": "get_current_char_weaponinfo $PLAYER_ACTOR store_to 1@\nget_weaponinfo_flags 1@ store_to 2@\nprint_help_formatted \"Weapon Flags %.5X\" 2@",
     "0E84": "get_weaponinfo 22 skill 1 store_to 1@  // Pistol, Std\nget_weaponinfo_total_clip 1@ store_to 2@\nprint_help_formatted \"Total Clip %d\" 2@",
@@ -25,9 +25,9 @@
     "0E8B": "get_char_weapon_state $PLAYER_ACTOR store_to 2@\nprint_help_formatted \"Weapon State %d\" 2@",
     "0E8C": "get_char_weapon_clip $PLAYER_ACTOR store_to 2@\nprint_help_formatted \"Weapon Clip %d\" 2@",
     "0E8D": "repeat\n    wait 0\nuntil is_any_fire_button_pressed 0\nprint_help_formatted \"primary or secondary fire button is pressed\"",
-    "0E92": "if and\n  not is_char_entering_any_car $PLAYER_ACTOR\n  not is_char_in_any_car $PLAYER_ACTOR\n  0E92: is_char_really_in_air $PLAYER_ACTOR                                                       \nthen                                                                                        \n  print_help_formatted \"~g~Char is REALLY in air\"  \nend",
-    "0E93": "if                                                                        \n  0E93: is_car_really_in_air 1@                                           \nthen                                                                      \n  print_help_formatted \"Car is REALLY in air\"\nend",
-    "0E94": "if                                                                        \n  0E94: is_object_really_in_air 1@                                           \nthen                                                                      \n  print_help_formatted \"Object is REALLY in air\"\nend"
+    "0E92": "if and\n    not is_char_entering_any_car $PLAYER_ACTOR\n    not is_char_in_any_car $PLAYER_ACTOR\n    is_char_really_in_air $PLAYER_ACTOR                                                       \nthen                                                                                        \n    print_help_formatted \"~g~Char is REALLY in air\"  \nend",
+    "0E93": "if                                                                        \n    is_car_really_in_air 1@                                           \nthen                                                                      \n    print_help_formatted \"Car is REALLY in air\"\nend",
+    "0E94": "if                                                                        \n    is_object_really_in_air 1@                                           \nthen                                                                      \n    print_help_formatted \"Object is REALLY in air\"\nend"
   },
   "File": {
     "0B02": "move_file <%= input1 %> {to} <%= input2 %>",

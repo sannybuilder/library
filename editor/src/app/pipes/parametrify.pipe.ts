@@ -8,7 +8,11 @@ import { braceify, stringifyWithColon } from './params';
 })
 export class ParametrifyPipe implements PipeTransform {
   transform(snippet: string, command: Command): string {
-    const compiled = template(snippet);
+    const s = snippet.replace(
+      new RegExp('\\b' + command.name + '\\b', 'ig'),
+      '<span class="identifier">$&</span>'
+    );
+    const compiled = template(s);
     const stringify = (key: 'input' | 'output') =>
       (command[key] ?? []).reduce((m, v, i) => {
         m[key + (i + 1)] = braceify(stringifyWithColon(v), '[]');

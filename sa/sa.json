@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695778823618,
-    "version": "0.426",
+    "last_update": 1695780441998,
+    "version": "0.427",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -49995,8 +49995,8 @@
           ],
           "output": [
             {
-              "name": "handle",
-              "type": "any",
+              "name": "address",
+              "type": "ColPoint",
               "source": "var_any"
             },
             {
@@ -50028,7 +50028,75 @@
             "is_static": true
           },
           "class": "ColPoint",
-          "member": "GetCollisionBetweenPoints"
+          "member": "GetCollisionBetweenPoints",
+          "short_desc": "Returns the colPoint, coordinates, and collision entity between two points"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "ColPoint"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0D3B",
+          "name": "GET_COLPOINT_NORMAL_VECTOR",
+          "num_params": 4,
+          "class": "ColPoint",
+          "member": "GetNormalVector",
+          "short_desc": "Returns the vector of the specified ColPoint"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "ColPoint"
+            },
+            {
+              "name": "surfaceType",
+              "type": "int"
+            }
+          ],
+          "id": "0D3C",
+          "name": "GET_COLPOINT_SURFACE",
+          "num_params": 2,
+          "class": "ColPoint",
+          "member": "GetSurface",
+          "short_desc": "Returns the surfaceType of the specified ColPoint"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "ColPoint"
+            },
+            {
+              "name": "depth",
+              "type": "float"
+            }
+          ],
+          "id": "0D3E",
+          "name": "GET_COLPOINT_DEPTH",
+          "num_params": 2,
+          "class": "ColPoint",
+          "member": "GetDepth",
+          "short_desc": "Returns the depth of the specified ColPoint"
         },
         {
           "input": [
@@ -52683,6 +52751,28 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "ColPoint"
+            },
+            {
+              "name": "fromNight",
+              "type": "bool"
+            },
+            {
+              "name": "lighting",
+              "type": "int"
+            }
+          ],
+          "id": "0E6B",
+          "name": "GET_COLPOINT_LIGHTING",
+          "num_params": 3,
+          "class": "ColPoint",
+          "member": "GetLighting",
+          "short_desc": "Returns the lighting of the specified ColPoint"
+        },
+        {
           "output": [
             {
               "name": "intensity",
@@ -55187,8 +55277,8 @@
         {
           "input": [
             {
-              "name": "colPoint",
-              "type": "any"
+              "name": "self",
+              "type": "ColPoint"
             }
           ],
           "output": [
@@ -55213,9 +55303,7 @@
           "num_params": 4,
           "class": "ColPoint",
           "member": "GetCoordinates",
-          "attrs": {
-            "is_static": true
-          }
+          "short_desc": "Returns the coordinates of the specified ColPoint"
         },
         {
           "input": [

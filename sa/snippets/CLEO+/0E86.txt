@@ -1,3 +1,7 @@
-get_current_char_weaponinfo $PLAYER_ACTOR store_to 1@
-get_weaponinfo_flags 1@ store_to 2@
-print_help_formatted "Weapon Flags %.5X" 2@
+const player=0
+int char, weaponInfo, flags
+get_player_char player store_to char
+
+get_current_char_weaponinfo char store_to weaponInfo
+get_weaponinfo_flags weaponInfo store_to flags
+print_help_formatted "WeaponInfo Flags %.5X" flags

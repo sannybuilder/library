@@ -1,3 +1,7 @@
-get_current_char_weaponinfo $PLAYER_ACTOR store_to 1@
-get_weaponinfo_fire_type 1@ store_to 2@
-print_help_formatted "FireType %d" 2@
+const player=0
+int char, weaponInfo, fireType
+get_player_char player store_to char
+
+get_current_char_weaponinfo char store_to weaponInfo
+get_weaponinfo_fire_type weaponInfo store_to fireType
+print_help_formatted "FireType %d" fireType

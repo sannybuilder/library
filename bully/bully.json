@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695742847498,
-    "version": "0.42",
+    "last_update": 1695891673693,
+    "version": "0.43",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -754,8 +754,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "int"
+            },
+            {
+              "name": "ammo",
+              "type": "int"
+            },
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "name": "PlayerSetWeapon",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Player",
+          "member": "SetWeapon",
+          "short_desc": "Gives weapon to player",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PlayerSwapModel",
@@ -3491,8 +3511,25 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "model",
+              "type": "model_any"
+            },
+            {
+              "name": "ammo",
+              "type": "int"
+            }
+          ],
           "name": "PedSetWeapon",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Char",
+          "member": "SetWeapon",
+          "short_desc": "Gives weapon to ped"
         },
         {
           "name": "PedSetWeaponNow",
@@ -4106,8 +4143,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedGetLastHitWeapon",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "GetLastHitWeapon",
+          "short_desc": "Returns last hit weapon id"
         },
         {
           "name": "PedIsAlerted",
@@ -4240,8 +4286,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "model",
+              "type": "model_any"
+            }
+          ],
           "name": "PedDestroyWeapon",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "DestoryWeapon",
+          "short_desc": "Removes weapon from ped"
         },
         {
           "name": "PedGetHeadPos",
@@ -4272,8 +4331,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedGetWeapon",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "GetCurrentWeapon",
+          "short_desc": "Returns peds current weapon model id"
         },
         {
           "name": "PedIsDoingTask",
@@ -4754,8 +4822,24 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "model_any"
+            },
+            {
+              "name": "flag",
+              "type": "bool"
+            }
+          ],
           "name": "GiveWeaponToPlayer",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Player",
+          "member": "GiveWeapon",
+          "short_desc": "Gives weapon to player",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GiveAmmoToPlayer",
@@ -5726,8 +5810,24 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "model",
+              "type": "model_any"
+            },
+            {
+              "name": "range",
+              "type": "int"
+            }
+          ],
           "name": "WeaponSetRangeMultiplier",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Game",
+          "member": "SetWeaponRangeMultiplier",
+          "short_desc": "Sets the range multiplier of weapon model",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "MissionAllowAmbientTransitions",

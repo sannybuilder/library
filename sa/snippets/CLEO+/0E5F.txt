@@ -1,5 +1,16 @@
-store_car_char_is_in_no_save $PLAYER_ACTOR store_to 1@
+const player = 0
+int char, car
+float x,y,z
+
+get_player_char player store_to char
+repeat
+    print_formatted "Find a car to honk." 1000
+    wait 1000
+until is_char_in_any_car char
+
+store_car_char_is_in_no_save char store_to car
+timera = 0
 repeat
     wait 0
-    car_horn 1@
-until timera > 1000
+    car_horn car
+until timera > 5000

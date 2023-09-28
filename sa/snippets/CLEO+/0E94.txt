@@ -1,5 +1,20 @@
-if                                                                        
-    is_object_really_in_air 1@                                           
-then                                                                      
-    print_help_formatted "Object is REALLY in air"
+const CJ_STEAL_TV = 2648, player = 0
+int char, car, object, blip
+float x,y,z
+
+get_player_char player store_to char
+get_offset_from_char_in_world_coords char 0.0 2.0 0.0 x y z
+create_object_no_save CJ_STEAL_TV at x y z offset false ground false store_to object
+set_object_as_stealable object true
+print_formatted "Press ~k~~VEHICLE_ENTER_EXIT~ to pick up the TV" time 4000
+wait 4000
+
+while true
+    wait 0
+    if                                                                    
+        is_object_really_in_air object                                       
+    then                                                                  
+        print_formatted "Object is REALLY in air" 2000
+        wait 2000  
+    end                                                
 end

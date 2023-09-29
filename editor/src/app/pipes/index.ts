@@ -3,7 +3,7 @@ export * from './class-params.pipe';
 export * from './keyword-params.pipe';
 export * from './opcodify';
 export * from './game-title.pipe';
-export * from './parametrify.pipe';
+export * from './codify.pipe';
 export * from './input-params.pipe';
 export * from './output-params.pipe';
 export * from './single-param.pipe';

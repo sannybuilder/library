@@ -43,14 +43,45 @@ function toggleOpcodes(code: string, extensions: Extension[]): string {
   const lines = code.split('\n');
 
   const linesWithOpcodes = lines.map((line) => {
-    const keyword = line.trim().split(' ')[0].toLowerCase();
+    const words = line.split(' ');
+    const reserved = ['', 'repeat', 'until', 'while', 'if', 'then', 'else'];
+
+    let not = false;
+    let keyword = '';
+    let keywordIndex = 0;
+    for (let i = 0; i < words.length; i++) {
+      let word = words[i].toLowerCase();
+
+      if (reserved.includes(word)) {
+        continue;
+      }
+
+      if (word === 'not') {
+        not = true;
+        keywordIndex = i;
+        continue;
+      }
+
+      keyword = word;
+      if (!not) keywordIndex = i;
+      break;
+    }
+
+    if (!keyword) {
+      return line;
+    }
 
     for (let extension of extensions) {
       const command = extension.commands.find(
         (c) => c.name.toLowerCase() === keyword
       );
       if (command) {
-        return `${command.id}: ${line}`;
+        let id = command.id;
+        if (not) {
+          id = (parseInt(id, 16) + 0x8000).toString(16).toUpperCase();
+        }
+        words[keywordIndex] = `${id}: ${words[keywordIndex]}`;
+        return words.join(' ');
       }
     }
     return line;

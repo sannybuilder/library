@@ -227,7 +227,11 @@
     <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
     <pre
       class="sample"
-      [innerHTML]="snippet | parametrify : command | sanitize"
+      [innerHTML]="
+        snippet
+          | parametrify : command : displayOpcodePresentation : gameExtensions
+          | sanitize
+      "
     ></pre>
   </ng-container>
 </div>

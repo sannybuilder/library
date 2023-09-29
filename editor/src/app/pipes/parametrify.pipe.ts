@@ -13,7 +13,7 @@ export class ParametrifyPipe implements PipeTransform {
     showOpcodes: boolean,
     extensions: Extension[]
   ): string {
-    let s = snippet;
+    let s = normalizeTabs(snippet);
     if (showOpcodes) {
       s = toggleOpcodes(s, extensions);
     }
@@ -37,6 +37,11 @@ export class ParametrifyPipe implements PipeTransform {
       return '[invalid code snippet]';
     }
   }
+}
+
+function normalizeTabs(code: string): string {
+  //replace tabs with 4 spaces
+  return code.replace(/\t/g, '    ');
 }
 
 function toggleOpcodes(code: string, extensions: Extension[]): string {

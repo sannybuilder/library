@@ -51,7 +51,7 @@ function format(
   showOpcodes: boolean,
   game: Game
 ): string {
-  const lines = code.split('\n');
+  const lines = code.split('\n').map((line) => line.trimEnd());
 
   const linesWithOpcodes = lines.map((line) => {
     const words = line.split(' ');

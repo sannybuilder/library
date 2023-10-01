@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1696124844982,
-    "version": "0.442",
+    "last_update": 1696126448750,
+    "version": "0.443",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -46458,6 +46458,53 @@
           "attrs": {
             "is_condition": true
           }
+        },
+        {
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0F10",
+          "name": "GET_ACTIVE_CAMERA_ROTATION",
+          "num_params": 3,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Returns the active camera rotation"
+        },
+        {
+          "output": [
+            {
+              "name": "distance",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "closestZ",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0F11",
+          "name": "GET_CLOSEST_WATER_DISTANCE",
+          "num_params": 2,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Returns the closest water distance and z level"
         }
       ]
     },
@@ -56063,7 +56110,10 @@
           ],
           "id": "0EF3",
           "name": "LERP",
-          "num_params": 4
+          "num_params": 4,
+          "attrs": {
+            "is_keyword": true
+          }
         },
         {
           "input": [
@@ -56716,6 +56766,146 @@
           "num_params": 2,
           "attrs": {
             "is_keyword": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "matrix",
+              "type": "int"
+            },
+            {
+              "name": "originX",
+              "type": "float"
+            },
+            {
+              "name": "originY",
+              "type": "float"
+            },
+            {
+              "name": "originZ",
+              "type": "float"
+            },
+            {
+              "name": "dirX",
+              "type": "float"
+            },
+            {
+              "name": "dirY",
+              "type": "float"
+            },
+            {
+              "name": "dirZ",
+              "type": "float"
+            }
+          ],
+          "id": "0F0D",
+          "name": "SET_MATRIX_LOOK_DIRECTION",
+          "num_params": 7,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Sets the matrix look direction"
+        },
+        {
+          "input": [
+            {
+              "name": "range",
+              "type": "float"
+            },
+            {
+              "name": "sourceX",
+              "type": "float"
+            },
+            {
+              "name": "sourceY",
+              "type": "float"
+            },
+            {
+              "name": "sourceZ",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "startX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "startY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "startZ",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "endX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "endY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "endZ",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0F0E",
+          "name": "GET_THIRD_PERSON_CAMERA_TARGET",
+          "num_params": 10,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Returns the third person camera target"
+        },
+        {
+          "output": [
+            {
+              "name": "drawing",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "generating",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0F0F",
+          "name": "GET_DISTANCE_MULTIPLIER",
+          "num_params": 2,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Returns the games drawing and generating distance multipliers"
+        },
+        {
+          "input": [
+            {
+              "name": "cCamera",
+              "type": "int"
+            },
+            {
+              "name": "activeCCam",
+              "type": "int"
+            }
+          ],
+          "id": "0F12",
+          "name": "GET_CAMERA_STRUCT",
+          "num_params": 2,
+          "short_desc": "Returns the address of TheCamera (CCamera) and ActiveCam (CCam)",
+          "class": "Camera",
+          "member": "GetStruct",
+          "attrs": {
+            "is_static": true
           }
         }
       ]

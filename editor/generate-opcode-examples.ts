@@ -55,12 +55,12 @@ function makeLine(command: Command) {
       line += ` @label`;
     } else {
       if (param.name === 'self') {
-        line += ` [${param.type.toLowerCase()}]`;
+        line += ` [${param.type}]`;
       } else {
         if (param.name) {
-          line += ` ${param.type.toLowerCase()} [${param.name}]`;
+          line += ` ${param.name} [${param.type}]`;
         } else {
-          line += ` [${param.type.toLowerCase()}]`;
+          line += ` [${param.type}]`;
         }
       }
     }
@@ -70,9 +70,9 @@ function makeLine(command: Command) {
     line += ' store_to';
     for (let param of output) {
       if (param.name) {
-        line += ` ${param.type.toLowerCase()} [${param.name}]`;
+        line += ` ${param.name} [${param.type}]`;
       } else {
-        line += ` [${param.type.toLowerCase()}]`;
+        line += ` [${param.type}]`;
       }
     }
   }

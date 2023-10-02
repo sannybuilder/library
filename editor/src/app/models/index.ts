@@ -182,6 +182,21 @@ export const GameKeywordsAssets: Partial<Record<Game, string>> = {
   [Game.vcs]: 'assets/vcs/keywords.txt',
 };
 
+export const GameOpcodesTxtAssets: Partial<Record<Game, string>> = {
+  [Game.gta3]: 'assets/gta3/opcodes.txt',
+  [Game.vc]: 'assets/vc/opcodes.txt',
+  [Game.sa]: 'assets/sa/opcodes.txt',
+  [Game.gta3_mobile]: 'assets/gta3_mobile/opcodes.txt',
+  [Game.vc_mobile]: 'assets/vc_mobile/opcodes.txt',
+  [Game.sa_mobile]: 'assets/sa_mobile/opcodes.txt',
+  [Game.gta3_unreal]: 'assets/gta3_unreal/opcodes.txt',
+  [Game.vc_unreal]: 'assets/vc_unreal/opcodes.txt',
+  [Game.sa_unreal]: 'assets/sa_unreal/opcodes.txt',
+  [Game.lcs]: 'assets/lcs/opcodes.txt',
+  [Game.vcs]: 'assets/vcs/opcodes.txt',
+};
+
+
 export const GameLibrary: Record<Game, string> = r(
   (game) => `${game}/${game}.json`
 );

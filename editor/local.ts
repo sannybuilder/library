@@ -1,4 +1,4 @@
-import { getBaseGame } from './src/app/utils';
+import { doesGameRequireOpcode, getBaseGame } from './src/app/utils';
 import {
   Game,
   GameClassesAssets,
@@ -27,6 +27,10 @@ games.forEach((game) => {
     `[ -d ${assets} ] || mkdir ${assets}`,
     `npm run generate:enums ${enumsJson} ${join(assets, 'enums.js')}`,
   ].forEach((x) => run(x));
+
+  if (doesGameRequireOpcode(game)) {
+    run(`npm run generate:opcode-examples ${gameJson} ${join(assets, 'opcodes.txt')}`)
+  }
 
   run(`cp *.json ../editor/src/assets/${game}`, join('..', game));
   try {

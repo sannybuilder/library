@@ -1,0 +1,18 @@
+const player=0, posOffset=120.0, negOffset=-120.0, NumLock = 144
+int Char, Car, Blip
+float x,y,z,x2,y2,z2
+
+get_player_char Player store_to Char   
+while true
+    wait 0
+    if 
+        is_key_just_pressed NumLock
+    then  
+        get_offset_from_char_in_world_coords Char posOffset posOffset posOffset store_to x y z
+        get_offset_from_char_in_world_coords Char negOffset negOffset negOffset store_to x2 y2 z2    
+        get_random_car_of_type_in_angled_area_no_save x2 y2 x y 20.0 #TAXI store_to Car
+        if Car <> -1           
+        then add_blip_for_car Car store_to Blip
+        end
+    end
+end

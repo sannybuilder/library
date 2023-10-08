@@ -139,7 +139,9 @@ export const commandRelated = createSelector(
         endings: [
           ['_CHAR', '_CAR', '_PLAYER', '_OBJECT'],
           ['_ON', '_OFF'],
+          ['_VAR', '_LVAR'],
         ],
+        middle: [['_VAR_', '_LVAR_']],
       },
       commands
     );
@@ -205,7 +207,11 @@ export const commandsToDelete = createSelector(
 
 function makeVariations(
   name: string,
-  { starters, endings }: { starters: string[][]; endings: string[][] },
+  {
+    starters,
+    endings,
+    middle,
+  }: { starters: string[][]; endings: string[][]; middle: Array<[string, string]> },
   commands: Command[]
 ) {
   const variations: Command[] = [];
@@ -236,6 +242,14 @@ function makeVariations(
         );
       }
     });
+  });
+
+  middle.forEach(([m0, m1]) => {
+    if (name.includes(m0)) {
+      addVariant(name.replace(m0, m1));
+    } else if (name.includes(m1)) {
+      addVariant(name.replace(m1, m0));
+    }
   });
 
   return variations;

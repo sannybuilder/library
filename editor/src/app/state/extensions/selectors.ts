@@ -139,7 +139,7 @@ export const commandRelated = createSelector(
         endings: [
           ['_CHAR', '_CAR', '_PLAYER', '_OBJECT'],
           ['_ON', '_OFF'],
-          ['_VAR', '_LVAR'],
+          ['_VAR', '_LVAR', '_CONST'],
         ],
         middle: [
           ['_VAR_', '_LVAR_'],

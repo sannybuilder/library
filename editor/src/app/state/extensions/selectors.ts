@@ -141,7 +141,10 @@ export const commandRelated = createSelector(
           ['_ON', '_OFF'],
           ['_VAR', '_LVAR'],
         ],
-        middle: [['_VAR_', '_LVAR_']],
+        middle: [
+          ['_VAR_', '_LVAR_'],
+          ['_GLOBAL_VAR_', '_LOCAL_VAR_'],
+        ],
       },
       commands
     );

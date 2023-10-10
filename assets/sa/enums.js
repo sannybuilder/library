@@ -2441,3 +2441,15 @@ export const SurfaceType = {
   "Gore": 177,
   "Railtrack": 178
 };
+export const Platform = {
+  "None": 0,
+  "Android": 1,
+  "PSP": 2,
+  "IOS": 3,
+  "FOS": 4,
+  "XBOX": 5,
+  "PS2": 6,
+  "PS3": 7,
+  "Mac": 8,
+  "Windows": 9
+};

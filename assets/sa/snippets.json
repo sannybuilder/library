@@ -10,7 +10,8 @@
     "0AE1": "float x,y,z, radius=15.0\nint Char\nwhile true\n    wait 2000\n    get_active_camera_coordinates store_to x y z\n    if get_random_char_in_sphere_no_save_recursive x y z radius findNext True skipDead True store_to handle Char\n    then explode_char_head Char\n    end\nend",
     "0AE2": "const LockoutPlayerOnly = 3\nfloat x,y,z, radius=10.0\nint Car\nwhile true\n    wait 100\n    get_active_camera_coordinates store_to x y z\n    if get_random_car_in_sphere_no_save_recursive x y z radius findNext True skipWrecked True store_to Car\n    then lock_car_doors Car lockStatus LockoutPlayerOnly\n    end\nend",
     "0B00": "delete_file <%= input1 %>",
-    "0B01": "delete_directory <%= input1 %>"
+    "0B01": "delete_directory <%= input1 %>",
+    "0DD5": "get_platform 0@\nprint_help_formatted \"Platform is %d\" 0@"
   },
   "CLEO+": {
     "0E1D": "const Key_F11=122\nwhile true\n    wait 0\n    if is_key_just_pressed Key_F11\n    then\n        if is_on_mission\n        then set_on_mission False\n        else set_on_mission True\n        end\n    end\nend",

@@ -2453,3 +2453,18 @@ export const Platform = {
   "Mac": 8,
   "Windows": 9
 };
+export const VehicleClass = {
+  "Ignore": -1,
+  "Normal": 0,
+  "PoorFamily": 1,
+  "RichFamily": 2,
+  "Executive": 3,
+  "Worker": 4,
+  "Big": 5,
+  "Taxi": 6,
+  "Moped": 7,
+  "Motorbike": 8,
+  "LeisureBoat": 9,
+  "WorkerBoat": 10,
+  "Bicycle": 11
+};

@@ -2468,3 +2468,8 @@ export const VehicleClass = {
   "WorkerBoat": 10,
   "Bicycle": 11
 };
+export const CarLights = {
+  "NoOverride": 0,
+  "ForceOff": 1,
+  "ForceOn": 2
+};

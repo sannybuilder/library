@@ -54,7 +54,9 @@ export class LinkifyPipe implements PipeTransform {
       return linkedNames;
     }
 
-    return commandParams(command).reduce((m, p) => {
+    const spanTag = '####';
+    const classAttr = '%%%%';
+    const newDescription = commandParams(command).reduce((m, p) => {
       const { name } = p;
 
       if (name === 'a') {
@@ -71,7 +73,12 @@ export class LinkifyPipe implements PipeTransform {
       });
 
       const re = new RegExp(`\\b${needle}\\b`, 'ig');
-      return m.replace(re, `<span class="param-name">$&</span>`);
+      return m.replace(re, `<${spanTag} ${classAttr}>$&</${spanTag}>`);
     }, linkedNames);
+
+    // hacky workaround to avoid replacing <span> tags in the description
+    return newDescription
+      .replace(new RegExp(classAttr, 'g'), 'class="param-name"')
+      .replace(new RegExp(spanTag, 'g'), 'span');
   }
 }

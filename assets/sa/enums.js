@@ -2473,3 +2473,9 @@ export const CarLights = {
   "ForceOff": 1,
   "ForceOn": 2
 };
+export const SeatIndex = {
+  "TandemRear": 0,
+  "FrontRight": 0,
+  "RearLeft": 1,
+  "RearRight": 2
+};

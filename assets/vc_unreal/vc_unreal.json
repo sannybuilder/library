@@ -1,10 +1,272 @@
 {
   "meta": {
-    "last_update": 1697801491826,
-    "version": "0.243",
+    "last_update": 1698009145673,
+    "version": "0.244",
     "url": "https://library.sannybuilder.com/#/vc_unreal"
   },
   "extensions": [
+    {
+      "name": "CLEO",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "touch",
+              "type": "PadId"
+            },
+            {
+              "name": "touchPoints",
+              "type": "TouchPoints"
+            }
+          ],
+          "id": "00E1",
+          "name": "IS_BUTTON_PRESSED",
+          "num_params": 2,
+          "class": "Hid",
+          "member": "IsButtonPressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
+        },
+        {
+          "input": [
+            {
+              "name": "libraryFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AA2",
+          "name": "LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "short_desc": "Loads the specified module (usually a dynamic-link library (DLL)) into the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "id": "0C00",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "id": "0C06",
+          "name": "WRITE_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Write",
+          "short_desc": "Writes a value of the given size at the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true) to modify read-only code",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C07",
+          "name": "READ_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Read",
+          "short_desc": "Reads a value of the given size from the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true)",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "id": "0C08",
+          "name": "CALL_FUNCTION",
+          "num_params": 4,
+          "short_desc": "Calls a function at the address with the given arguments",
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "numParams",
+              "type": "int"
+            },
+            {
+              "name": "funcParams",
+              "type": "arguments"
+            }
+          ],
+          "output": [
+            {
+              "name": "funcRet",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C09",
+          "name": "CALL_FUNCTION_RETURN",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallFunctionReturn",
+          "short_desc": "Calls a function and writes the result into the variable following the arguments list",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "pc"
+          ],
+          "versions": [
+            "1.0 [DE]"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "debug",
+      "commands": [
+        {
+          "id": "00C3",
+          "name": "DEBUG_ON",
+          "num_params": 0,
+          "class": "Debugger",
+          "member": "Enable",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Activates debug features in this script"
+        }
+      ]
+    },
     {
       "name": "default",
       "commands": [
@@ -26233,36 +26495,8 @@
       ]
     },
     {
-      "name": "CLEO",
+      "name": "dylib",
       "commands": [
-        {
-          "input": [
-            {
-              "name": "touch",
-              "type": "PadId"
-            },
-            {
-              "name": "touchPoints",
-              "type": "TouchPoints"
-            }
-          ],
-          "id": "00E1",
-          "name": "IS_BUTTON_PRESSED",
-          "num_params": 2,
-          "class": "Hid",
-          "member": "IsButtonPressed",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
-        },
         {
           "input": [
             {
@@ -26286,195 +26520,52 @@
           "attrs": {
             "is_constructor": true,
             "is_condition": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0"
-          ]
+          }
         },
         {
           "input": [
             {
-              "name": "keyCode",
-              "type": "KeyCode"
+              "name": "self",
+              "type": "DynamicLibrary"
             }
           ],
-          "id": "0C00",
-          "name": "IS_KEY_PRESSED",
+          "id": "0AA3",
+          "name": "FREE_DYNAMIC_LIBRARY",
           "num_params": 1,
-          "class": "Pad",
-          "member": "IsKeyPressed",
-          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "short_desc": "Frees the loaded dynamic-link library (DLL) module and unloads it from the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Free",
           "attrs": {
-            "is_condition": true,
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
+            "is_destructor": true
+          }
         },
         {
           "input": [
             {
-              "name": "address",
-              "type": "int"
+              "name": "procName",
+              "type": "string"
             },
             {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            },
-            {
-              "name": "vp",
-              "type": "bool"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            }
-          ],
-          "id": "0C06",
-          "name": "WRITE_MEMORY",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "Write",
-          "short_desc": "Writes a value of the given size at the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true) to modify read-only code",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "vp",
-              "type": "bool"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
+              "name": "self",
+              "type": "DynamicLibrary"
             }
           ],
           "output": [
             {
-              "name": "value",
-              "type": "any",
+              "name": "address",
+              "type": "int",
               "source": "var_any"
             }
           ],
-          "id": "0C07",
-          "name": "READ_MEMORY",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "Read",
-          "short_desc": "Reads a value of the given size from the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true)",
+          "id": "0AA4",
+          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "short_desc": "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL)",
+          "class": "DynamicLibrary",
+          "member": "GetProcedure",
           "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "funcParams",
-              "type": "arguments"
-            }
-          ],
-          "id": "0C08",
-          "name": "CALL_FUNCTION",
-          "num_params": 4,
-          "short_desc": "Calls a function at the address with the given arguments",
-          "class": "Memory",
-          "member": "CallFunction",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            },
-            {
-              "name": "numParams",
-              "type": "int"
-            },
-            {
-              "name": "funcParams",
-              "type": "arguments"
-            }
-          ],
-          "output": [
-            {
-              "name": "funcRet",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0C09",
-          "name": "CALL_FUNCTION_RETURN",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "CallFunctionReturn",
-          "short_desc": "Calls a function and writes the result into the variable following the arguments list",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "pc"
-          ],
-          "versions": [
-            "1.0 [DE]"
-          ]
+            "is_condition": true
+          }
         }
       ]
     },
@@ -26705,81 +26796,6 @@
           "versions": [
             "1.0 [DE]"
           ]
-        }
-      ]
-    },
-    {
-      "name": "dylib",
-      "commands": [
-        {
-          "input": [
-            {
-              "name": "libraryFileName",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "DynamicLibrary",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AA2",
-          "name": "LOAD_DYNAMIC_LIBRARY",
-          "num_params": 2,
-          "short_desc": "Loads the specified module (usually a dynamic-link library (DLL)) into the address space of the game",
-          "class": "DynamicLibrary",
-          "member": "Load",
-          "attrs": {
-            "is_constructor": true,
-            "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "DynamicLibrary"
-            }
-          ],
-          "id": "0AA3",
-          "name": "FREE_DYNAMIC_LIBRARY",
-          "num_params": 1,
-          "short_desc": "Frees the loaded dynamic-link library (DLL) module and unloads it from the address space of the game",
-          "class": "DynamicLibrary",
-          "member": "Free",
-          "attrs": {
-            "is_destructor": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "procName",
-              "type": "string"
-            },
-            {
-              "name": "self",
-              "type": "DynamicLibrary"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AA4",
-          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
-          "num_params": 3,
-          "short_desc": "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL)",
-          "class": "DynamicLibrary",
-          "member": "GetProcedure",
-          "attrs": {
-            "is_condition": true
-          }
         }
       ]
     }

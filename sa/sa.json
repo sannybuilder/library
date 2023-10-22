@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1698011941837,
+    "last_update": 1698013150146,
     "version": "0.472",
     "url": "https://library.sannybuilder.com/#/sa"
   },
@@ -3643,20 +3643,33 @@
           }
         },
         {
-          "id": "00CD",
-          "name": "REPEAT",
-          "num_params": 0,
-          "attrs": {
-            "is_unsupported": true
-          }
-        },
-        {
+          "input": [
+            {
+              "name": "filename",
+              "type": "string"
+            },
+            {
+              "name": "timestamp",
+              "type": "bool"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
           "id": "00CE",
-          "name": "ENDREPEAT",
-          "num_params": 0,
+          "name": "LOG_TO_FILE",
+          "num_params": 4,
+          "short_desc": "Appends new line to file. Timestamp parameter decides if datetime prefix in format 'DD/MM/YYYY hh:mm:ss.fraction' will be added. Command is not affected by debug mode status",
           "attrs": {
-            "is_unsupported": true
-          }
+            "is_static": true
+          },
+          "class": "Debugger",
+          "member": "LogLine"
         },
         {
           "id": "00CF",
@@ -57628,11 +57641,11 @@
           },
           "short_desc": "Activates debug features in this script"
         },
-              "name": "text",
+        {
           "input": [
             {
               "name": "blocking",
-              "name": "args",
+              "type": "bool",
               "source": "literal"
             },
             {
@@ -57653,6 +57666,27 @@
             "is_static": true
           },
           "short_desc": "Creates debug breakpoint in script. If debug features are currently enabled for this script the command, depending on blocking argument value, will pause entire game or block execution of just this script. Additional message parameter and following arguments can be used to display formatted message on screen when breakpoint is triggered. Execution can be continued by pressing key assigned to this brakepoint (F5-F12, depending on currently catched brakepoint count)"
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "00CD",
+          "name": "TRACE",
+          "num_params": 2,
+          "class": "Debugger",
+          "member": "Trace",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Prints debug message to on screen and writes new line to cleo.log file. If debug features are not enabled for this script then command is ignored. Printing on screen requires 'Level' property in DebugUtils.ini to be '2' or higher"
         }
       ]
     },

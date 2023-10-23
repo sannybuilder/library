@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1698039498014,
+    "last_update": 1698039675213,
     "version": "0.476",
     "url": "https://library.sannybuilder.com/#/sa"
   },
@@ -3632,35 +3632,6 @@
           "attrs": {
             "is_unsupported": true
           }
-        },
-        {
-          "input": [
-            {
-              "name": "filename",
-              "type": "string"
-            },
-            {
-              "name": "timestamp",
-              "type": "bool"
-            },
-            {
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "id": "00CE",
-          "name": "LOG_TO_FILE",
-          "num_params": 4,
-          "short_desc": "Appends new line to file. Timestamp parameter decides if datetime prefix in format 'DD/MM/YYYY hh:mm:ss.fraction' will be added. Command is not affected by debug mode status",
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Debugger",
-          "member": "LogLine"
         },
         {
           "id": "00CF",
@@ -49376,7 +49347,7 @@
             },
             {
               "name": "fullPath",
-              "name": "",
+              "type": "bool"
             }
           ],
           "output": [
@@ -49386,7 +49357,7 @@
               "source": "var_any"
             }
           ],
-          "short_desc": "Expands provided filesystem path to full absolute form. Path param can be relative, starts with 'virtual path' prefix or be already absolute filepath. If result parameter is pointer to target memory please make sure allocated buffer  is large enougt to hold returned string",
+          "id": "2001",
           "name": "GET_SCRIPT_FILENAME",
           "num_params": 3,
           "class": "Fs",
@@ -57743,6 +57714,35 @@
             "is_static": true
           },
           "short_desc": "Prints debug message to on screen and writes new line to cleo.log file. If debug features are not enabled for this script then command is ignored. Printing on screen requires 'Level' property in DebugUtils.ini to be '2' or higher"
+        },
+        {
+          "input": [
+            {
+              "name": "filename",
+              "type": "string"
+            },
+            {
+              "name": "timestamp",
+              "type": "bool"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "00CE",
+          "name": "LOG_TO_FILE",
+          "num_params": 4,
+          "short_desc": "Appends new line to file. Timestamp parameter decides if datetime prefix in format 'DD/MM/YYYY hh:mm:ss.fraction' will be added. Command is not affected by debug mode status",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Debugger",
+          "member": "LogLine"
         }
       ]
     },

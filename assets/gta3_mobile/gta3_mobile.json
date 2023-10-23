@@ -1,640 +1,10 @@
 {
   "meta": {
-    "last_update": 1698009145601,
-    "version": "0.250",
+    "last_update": 1698039845417,
+    "version": "0.251",
     "url": "https://library.sannybuilder.com/#/gta3_mobile"
   },
   "extensions": [
-    {
-      "name": "CLEO",
-      "commands": [
-        {
-          "input": [
-            {
-              "name": "touch",
-              "type": "PadId"
-            },
-            {
-              "name": "touchPoints",
-              "type": "TouchPoints"
-            }
-          ],
-          "id": "00E1",
-          "name": "IS_BUTTON_PRESSED",
-          "num_params": 2,
-          "class": "Hid",
-          "member": "IsButtonPressed",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
-        },
-        {
-          "input": [
-            {
-              "name": "",
-              "type": "label"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DD0",
-          "name": "GET_LABEL_POINTER",
-          "num_params": 2,
-          "class": "Memory",
-          "member": "GetLabelPointer",
-          "short_desc": "Stores the absolute address of a code location marked with the label",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "pointer",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DD1",
-          "name": "FIND_FUNCTION_BY_NAME",
-          "num_params": 2,
-          "short_desc": "Obtains the address of the corresponding function and variable in the game library according to the string pointer",
-          "class": "Memory",
-          "member": "FindFunctionByName",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            }
-          ],
-          "id": "0DD2",
-          "name": "CALL_FUNCTION",
-          "num_params": 1,
-          "class": "Memory",
-          "member": "CallFunction",
-          "attrs": {
-            "is_static": true,
-            "is_overload": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Calls a function at the address with parameters set with 0DD3"
-        },
-        {
-          "input": [
-            {
-              "name": "regId",
-              "type": "int"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            }
-          ],
-          "id": "0DD3",
-          "name": "SET_REGISTER_VALUE",
-          "num_params": 2,
-          "class": "Memory",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Sets the value of the register R0-R3 used as an argument in the function call (0DD2)",
-          "member": "SetRegisterValue"
-        },
-        {
-          "input": [
-            {
-              "name": "regId",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "value",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DD4",
-          "name": "GET_REGISTER_VALUE",
-          "num_params": 2,
-          "class": "Memory",
-          "member": "GetRegisterValue",
-          "versions": [
-            "1.0"
-          ],
-          "platforms": [
-            "mobile"
-          ],
-          "attrs": {
-            "is_static": true
-          },
-          "short_desc": "Returns the value of the register R0/R1 that stores the function result (0DD2)"
-        },
-        {
-          "output": [
-            {
-              "name": "platform",
-              "type": "Platform",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DD5",
-          "name": "GET_PLATFORM",
-          "num_params": 1,
-          "class": "Game",
-          "member": "GetPlatform",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns current game platform"
-        },
-        {
-          "output": [
-            {
-              "name": "versionId",
-              "type": "GameVerInternal",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DD6",
-          "name": "GET_GAME_VERSION",
-          "num_params": 1,
-          "class": "Game",
-          "short_desc": "Returns internal game version",
-          "member": "GetVersion",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DD7",
-          "name": "GET_IMAGE_BASE",
-          "num_params": 1,
-          "class": "Memory",
-          "short_desc": "Returns image base of the main game library",
-          "member": "GetImageBase",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DD8",
-          "name": "READ_MEMORY",
-          "num_params": 4,
-          "class": "Memory",
-          "member": "Read",
-          "attrs": {
-            "is_static": true
-          },
-          "short_desc": "Reads a value from the game memory",
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            },
-            {
-              "name": "vp",
-              "type": "bool"
-            }
-          ],
-          "id": "0DD9",
-          "name": "WRITE_MEMORY",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "Write",
-          "attrs": {
-            "is_static": true
-          },
-          "short_desc": "Writes a value to the game memory",
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "pointer",
-              "type": "int"
-            },
-            {
-              "name": "index",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DDA",
-          "name": "FIND_MEMORY_PATTERN",
-          "num_params": 3,
-          "class": "Memory",
-          "member": "FindPattern",
-          "short_desc": "Searches for the specified byte pattern in main library, if there are few addresses which match this pattern the index is used",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "output": [
-            {
-              "name": "nameHash",
-              "type": "string",
-              "source": "var_any"
-            },
-            {
-              "name": "verHash",
-              "type": "string",
-              "source": "var_any"
-            },
-            {
-              "name": "verCode",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DDB",
-          "name": "GET_GAME_VERSION_EX",
-          "num_params": 3,
-          "class": "Game",
-          "member": "GetVersionEx",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns current game version,  name_hash is a jenkins hash of an Android package name, ver_hash is always a jenkins hash of version string, ver_code is a package version code on Android"
-        },
-        {
-          "input": [
-            {
-              "name": "varId",
-              "type": "int"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            }
-          ],
-          "id": "0DDC",
-          "name": "SET_CLEO_SHARED_VAR",
-          "num_params": 2,
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "attrs": {
-            "is_keyword": true
-          },
-          "short_desc": "Sets the value of the global shared variable in CLEO, Var id can be any integer value. Please note that you cannot use a variable with ID 0 to save custom data, because all scripts that use the CLEO menu GUI use a shared global variable with ID 0, which represents the state of anything on the screen. If its value is 0, the script can be displayed and the CLEO menu GUI can be opened. If the value is 1, it is closed and the CLEO menu cannot be opened. ID 0 always represents the status value of the CLEO menu. You can use other ID values to save data"
-        },
-        {
-          "input": [
-            {
-              "name": "varId",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "any",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DDD",
-          "name": "GET_CLEO_SHARED_VAR",
-          "num_params": 2,
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "attrs": {
-            "is_keyword": true
-          },
-          "short_desc": "Gets the value of the CLEO global shared variable. See 0DDC"
-        },
-        {
-          "input": [
-            {
-              "name": "address",
-              "type": "int"
-            },
-            {
-              "name": "ib",
-              "type": "bool"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            },
-            {
-              "name": "value",
-              "type": "any"
-            },
-            {
-              "name": "",
-              "type": "arguments"
-            }
-          ],
-          "id": "0DDE",
-          "name": "CALL_FUNCTION",
-          "num_params": 5,
-          "class": "Memory",
-          "member": "CallFunction",
-          "attrs": {
-            "is_static": true,
-            "is_overload": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Calls a game function using specified address, if add_ib is set to 1 then adds an imagebase. Pairs of ['type', value] follow and indicate with which result type and params this function must be called. Specifying result is optional, just as specifing params if function has none"
-        },
-        {
-          "input": [
-            {
-              "name": "touchPoints",
-              "type": "TouchPoints"
-            },
-            {
-              "name": "mintime",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "state",
-              "type": "bool",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DE0",
-          "name": "GET_TOUCH_POINT_STATE",
-          "num_params": 3,
-          "class": "Hid",
-          "member": "GetTouchPointState",
-          "short_desc": "Returns result of the requested touch action check, can be 0 or 1. On PSP always returns 0. Touch points is the CLEO Android engine implemented touch detection system which divides touchscreen into 9 parts called touch points, they can be used to detect timed touche, How long to touch an area at the minimum",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "touchPointsStart",
-              "type": "TouchPoints"
-            },
-            {
-              "name": "touchPointsEnd",
-              "type": "TouchPoints"
-            },
-            {
-              "name": "mintime",
-              "type": "int"
-            },
-            {
-              "name": "maxtime",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "state",
-              "type": "bool",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DE1",
-          "name": "GET_TOUCH_SLIDE_STATE",
-          "num_params": 5,
-          "class": "Hid",
-          "member": "GetTouchSlideState",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns the state of the Touch points area of the swipe screen.  Swipe from one area to another, and set the sliding time range, See 0DE0"
-        },
-        {
-          "output": [
-            {
-              "name": "state",
-              "type": "bool",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DE2",
-          "name": "GET_MENU_BUTTON_STATE",
-          "num_params": 1,
-          "class": "Hid",
-          "member": "GetMenuButtonState",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns state of the Android hardware menu button, can be 0 or 1, a lot of devices have no button like this. On PSP always returns 0. Such buttons are only available on old smart phones and semi-smart phones. The current smart phones no longer have such buttons"
-        },
-        {
-          "input": [
-            {
-              "name": "mintime",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "state",
-              "type": "bool",
-              "source": "var_any"
-            }
-          ],
-          "id": "0DE3",
-          "name": "GET_MENU_BUTTON_PRESSED",
-          "num_params": 2,
-          "class": "Hid",
-          "member": "GetMenuButtonPressed",
-          "attrs": {
-            "is_static": true
-          },
-          "platforms": [
-            "mobile"
-          ],
-          "versions": [
-            "1.0"
-          ],
-          "short_desc": "Returns to the state where the Android hardware menu button is pressed at the specified time. See 0DE2"
-        }
-      ]
-    },
-    {
-      "name": "debug",
-      "commands": [
-        {
-          "id": "00C3",
-          "name": "DEBUG_ON",
-          "num_params": 0,
-          "class": "Debugger",
-          "member": "Enable",
-          "attrs": {
-            "is_static": true
-          },
-          "short_desc": "Activates debug features in this script"
-        }
-      ]
-    },
     {
       "name": "default",
       "commands": [
@@ -24960,6 +24330,647 @@
           "name": "SET_ENTER_CAR_RANGE_MULTIPLIER",
           "num_params": 1,
           "short_desc": "Sets a multiplier for the range of a character's ability to go and occupy a vehicle"
+        }
+      ]
+    },
+    {
+      "name": "CLEO",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "touch",
+              "type": "PadId"
+            },
+            {
+              "name": "touchPoints",
+              "type": "TouchPoints"
+            }
+          ],
+          "id": "00E1",
+          "name": "IS_BUTTON_PRESSED",
+          "num_params": 2,
+          "class": "Hid",
+          "member": "IsButtonPressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns true if the touch point of the screen has been pressed. See 0DE0 and 0DE1"
+        },
+        {
+          "input": [
+            {
+              "name": "",
+              "type": "label"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD0",
+          "name": "GET_LABEL_POINTER",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetLabelPointer",
+          "short_desc": "Stores the absolute address of a code location marked with the label",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "pointer",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD1",
+          "name": "FIND_FUNCTION_BY_NAME",
+          "num_params": 2,
+          "short_desc": "Obtains the address of the corresponding function and variable in the game library according to the string pointer",
+          "class": "Memory",
+          "member": "FindFunctionByName",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "id": "0DD2",
+          "name": "CALL_FUNCTION",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Calls a function at the address with parameters set with 0DD3"
+        },
+        {
+          "input": [
+            {
+              "name": "regId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0DD3",
+          "name": "SET_REGISTER_VALUE",
+          "num_params": 2,
+          "class": "Memory",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Sets the value of the register R0-R3 used as an argument in the function call (0DD2)",
+          "member": "SetRegisterValue"
+        },
+        {
+          "input": [
+            {
+              "name": "regId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD4",
+          "name": "GET_REGISTER_VALUE",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "GetRegisterValue",
+          "versions": [
+            "1.0"
+          ],
+          "platforms": [
+            "mobile"
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns the value of the register R0/R1 that stores the function result (0DD2)"
+        },
+        {
+          "output": [
+            {
+              "name": "platform",
+              "type": "Platform",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD5",
+          "name": "GET_PLATFORM",
+          "num_params": 1,
+          "class": "Game",
+          "member": "GetPlatform",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns current game platform"
+        },
+        {
+          "output": [
+            {
+              "name": "versionId",
+              "type": "GameVerInternal",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD6",
+          "name": "GET_GAME_VERSION",
+          "num_params": 1,
+          "class": "Game",
+          "short_desc": "Returns internal game version",
+          "member": "GetVersion",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD7",
+          "name": "GET_IMAGE_BASE",
+          "num_params": 1,
+          "class": "Memory",
+          "short_desc": "Returns image base of the main game library",
+          "member": "GetImageBase",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DD8",
+          "name": "READ_MEMORY",
+          "num_params": 4,
+          "class": "Memory",
+          "member": "Read",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Reads a value from the game memory",
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            }
+          ],
+          "id": "0DD9",
+          "name": "WRITE_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Write",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Writes a value to the game memory",
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "pointer",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DDA",
+          "name": "FIND_MEMORY_PATTERN",
+          "num_params": 3,
+          "class": "Memory",
+          "member": "FindPattern",
+          "short_desc": "Searches for the specified byte pattern in main library, if there are few addresses which match this pattern the index is used",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "output": [
+            {
+              "name": "nameHash",
+              "type": "string",
+              "source": "var_any"
+            },
+            {
+              "name": "verHash",
+              "type": "string",
+              "source": "var_any"
+            },
+            {
+              "name": "verCode",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DDB",
+          "name": "GET_GAME_VERSION_EX",
+          "num_params": 3,
+          "class": "Game",
+          "member": "GetVersionEx",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns current game version,  name_hash is a jenkins hash of an Android package name, ver_hash is always a jenkins hash of version string, ver_code is a package version code on Android"
+        },
+        {
+          "input": [
+            {
+              "name": "varId",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0DDC",
+          "name": "SET_CLEO_SHARED_VAR",
+          "num_params": 2,
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Sets the value of the global shared variable in CLEO, Var id can be any integer value. Please note that you cannot use a variable with ID 0 to save custom data, because all scripts that use the CLEO menu GUI use a shared global variable with ID 0, which represents the state of anything on the screen. If its value is 0, the script can be displayed and the CLEO menu GUI can be opened. If the value is 1, it is closed and the CLEO menu cannot be opened. ID 0 always represents the status value of the CLEO menu. You can use other ID values to save data"
+        },
+        {
+          "input": [
+            {
+              "name": "varId",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DDD",
+          "name": "GET_CLEO_SHARED_VAR",
+          "num_params": 2,
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Gets the value of the CLEO global shared variable. See 0DDC"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "0DDE",
+          "name": "CALL_FUNCTION",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "CallFunction",
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Calls a game function using specified address, if add_ib is set to 1 then adds an imagebase. Pairs of ['type', value] follow and indicate with which result type and params this function must be called. Specifying result is optional, just as specifing params if function has none"
+        },
+        {
+          "input": [
+            {
+              "name": "touchPoints",
+              "type": "TouchPoints"
+            },
+            {
+              "name": "mintime",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DE0",
+          "name": "GET_TOUCH_POINT_STATE",
+          "num_params": 3,
+          "class": "Hid",
+          "member": "GetTouchPointState",
+          "short_desc": "Returns result of the requested touch action check, can be 0 or 1. On PSP always returns 0. Touch points is the CLEO Android engine implemented touch detection system which divides touchscreen into 9 parts called touch points, they can be used to detect timed touche, How long to touch an area at the minimum",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ]
+        },
+        {
+          "input": [
+            {
+              "name": "touchPointsStart",
+              "type": "TouchPoints"
+            },
+            {
+              "name": "touchPointsEnd",
+              "type": "TouchPoints"
+            },
+            {
+              "name": "mintime",
+              "type": "int"
+            },
+            {
+              "name": "maxtime",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DE1",
+          "name": "GET_TOUCH_SLIDE_STATE",
+          "num_params": 5,
+          "class": "Hid",
+          "member": "GetTouchSlideState",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns the state of the Touch points area of the swipe screen.  Swipe from one area to another, and set the sliding time range, See 0DE0"
+        },
+        {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DE2",
+          "name": "GET_MENU_BUTTON_STATE",
+          "num_params": 1,
+          "class": "Hid",
+          "member": "GetMenuButtonState",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns state of the Android hardware menu button, can be 0 or 1, a lot of devices have no button like this. On PSP always returns 0. Such buttons are only available on old smart phones and semi-smart phones. The current smart phones no longer have such buttons"
+        },
+        {
+          "input": [
+            {
+              "name": "mintime",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "id": "0DE3",
+          "name": "GET_MENU_BUTTON_PRESSED",
+          "num_params": 2,
+          "class": "Hid",
+          "member": "GetMenuButtonPressed",
+          "attrs": {
+            "is_static": true
+          },
+          "platforms": [
+            "mobile"
+          ],
+          "versions": [
+            "1.0"
+          ],
+          "short_desc": "Returns to the state where the Android hardware menu button is pressed at the specified time. See 0DE2"
+        }
+      ]
+    },
+    {
+      "name": "debug",
+      "commands": [
+        {
+          "id": "00C3",
+          "name": "DEBUG_ON",
+          "num_params": 0,
+          "class": "Debugger",
+          "member": "Enable",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Activates debug features in this script"
+        },
+        {
+          "id": "00C4",
+          "name": "DEBUG_OFF",
+          "num_params": 0,
+          "class": "Debugger",
+          "member": "Disable",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Deactivates debug features in this script"
         }
       ]
     }

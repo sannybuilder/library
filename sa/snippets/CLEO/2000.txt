@@ -1,22 +1,22 @@
 debug_on // enable trace command
 allocate_memory size 260 store_to address 0@
 
-resolve_filepath "0:" store_to 0@ // virtual path: game root
+resolve_filepath "root:" store_to 0@ // game root directory
 trace "Game installed in %s" 0@
 
-resolve_filepath "0:\data\ped.dat" store_to 0@ // get path to ped.dat
+resolve_filepath "root:\data\ped.dat" store_to 0@ // get path to ped.dat
 trace 0@
 
-resolve_filepath "1:" store_to 0@ // virtual path: user data path
+resolve_filepath "userfiles:" store_to 0@ // game saves location
 trace "User data location:~w~ %s" 0@
 
-resolve_filepath "2:" store_to 0@ // virtual path: this script's source file directory (not affected by 0A99)
+resolve_filepath "." store_to 0@ // this script's source file directory (not affected by 0A99)
 trace "This script dir:~w~ %s" 0@
 
-resolve_filepath "3:" store_to 0@ // virtual path: CLEO directory
+resolve_filepath "cleo:" store_to 0@ // virtual path: CLEO directory
 trace "CLEO dir:~w~ %s" 0@
 
-resolve_filepath "4:" store_to 0@ // virtual path: CLEO modules directory
+resolve_filepath "modules:" store_to 0@ // virtual path: CLEO modules directory
 trace "CLEO modules dir:~w~ %s" 0@
 
 resolve_filepath "" store_to 0@ // relative path
@@ -30,7 +30,7 @@ set_current_directory 1 // user data
 resolve_filepath "" store_to 0@ // relative path
 trace "Script's changed working directory is:~w~ %s" 0@
 
-resolve_filepath "file.txt" store_to 0@ // relative path
+resolve_filepath "file.txt" store_to 0@ // path relative to location set with 0A99
 trace 0@
 
 free_memory 0@

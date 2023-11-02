@@ -173,16 +173,23 @@ export function doesCommandHaveInvalidArgumentWithOperator(command: Command) {
   }
 
   const input = inputParams(command);
+  const output = outputParams(command);
 
   // should have at least one input param
   if (input.length < 1) {
     return true;
   }
 
-  // the first argument should be a variable of any type
+  // should not have more than one output param
+  if (output.length > 1) {
+    return true;
+  }
+
+  // the first output or input argument should be a variable of any type
+  let source = output[0]?.source ?? input[0]?.source;
   if (
     ![SourceType.var_any, SourceType.var_global, SourceType.var_local].includes(
-      input[0].source
+      source
     )
   ) {
     return true;

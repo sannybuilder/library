@@ -6,6 +6,7 @@ import {
   Platform,
   PrimitiveType,
   SELF,
+  SourceType,
   Version,
 } from '../models';
 import { commandParams, inputParams, isOpcode, outputParams } from './command';
@@ -67,9 +68,8 @@ export function doesCommandHaveDuplicateName(
 export function isCommandParamNameDuplicate(command: Command, name: string) {
   const f = (p: Param) => p.name === name;
   const hasDups = (items: Param[]) => items.filter(f).length > 1;
-  const hasAnyDups =  (
-    (hasDups(inputParams(command)) || hasDups(outputParams(command)))
-  );
+  const hasAnyDups =
+    hasDups(inputParams(command)) || hasDups(outputParams(command));
   if (name) {
     return hasAnyDups;
   }
@@ -152,4 +152,41 @@ export function doesCommandHaveAnInvalidClassName(command: Command) {
 
 export function doesCommandHaveAnInvalidMethodName(command: Command) {
   return !!command.member && !isValidIdentifier(command.member);
+}
+
+export function doesCommandHaveInvalidConditionalOperator(command: Command) {
+  if (!command.operator) {
+    return false;
+  }
+  const is_condition = command.attrs?.is_condition;
+  const validConditionalOperators = ['==', '>', '>='];
+
+  if (is_condition) {
+    return !validConditionalOperators.includes(command.operator);
+  }
+  return validConditionalOperators.includes(command.operator);
+}
+
+export function doesCommandHaveInvalidArgumentWithOperator(command: Command) {
+  if (!command.operator) {
+    return false;
+  }
+
+  const input = inputParams(command);
+
+  // should have at least one input param
+  if (input.length < 1) {
+    return true;
+  }
+
+  // the first argument should be a variable of any type
+  if (
+    ![SourceType.var_any, SourceType.var_global, SourceType.var_local].includes(
+      input[0].source
+    )
+  ) {
+    return true;
+  }
+
+  return false;
 }

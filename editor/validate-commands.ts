@@ -21,6 +21,8 @@ import {
   doesCommandHaveOutOfRangeOpcode,
   doesCommandHaveAnInvalidClassName,
   doesCommandHaveAnInvalidMethodName,
+  doesCommandHaveInvalidConditionalOperator,
+  doesCommandHaveInvalidArgumentWithOperator,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -54,7 +56,9 @@ const errorHandlers = {
   no3rdPersonVerb: doesCommandDescriptionNotStartWith3rdPersonVerb,
   constructorNotReturningHandle: doesConstructorNotReturnHandle,
   invalidClassName: doesCommandHaveAnInvalidClassName,
-  invalidMethodName: doesCommandHaveAnInvalidMethodName
+  invalidMethodName: doesCommandHaveAnInvalidMethodName,
+  invalidConditionalOperator: doesCommandHaveInvalidConditionalOperator,
+  invalidArgumentWithOperator: doesCommandHaveInvalidArgumentWithOperator
 };
 
 forEach(content.extensions, (extension) => {

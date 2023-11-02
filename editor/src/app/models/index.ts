@@ -91,6 +91,7 @@ export interface Command {
   short_desc?: string;
   platforms?: Platform[];
   versions?: Version[];
+  operator?: string;
 }
 
 export interface Extension {

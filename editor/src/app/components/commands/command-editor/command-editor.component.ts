@@ -58,6 +58,8 @@ import {
   doesCommandHaveOutOfRangeOpcode,
   doesCommandHaveAnInvalidClassName,
   doesCommandHaveAnInvalidMethodName,
+  doesCommandHaveInvalidConditionalOperator,
+  doesCommandHaveInvalidArgumentWithOperator
 } from '../../../utils';
 
 type ErrorType =
@@ -76,6 +78,8 @@ type ErrorType =
   | 'constructorNotReturningHandle'
   | 'invalidClassName'
   | 'invalidMethodName'
+  | 'invalidConditionalOperator'
+  | 'invalidArgumentWithOperator';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -106,6 +110,26 @@ export class CommandEditorComponent implements OnInit {
   cloneTargets: Game[] = [];
   defaultCommandNameFormatter: (name: string | undefined) => string | undefined;
 
+  operations = [
+    'assignment =',
+    'addition +',
+    'subtraction -',
+    'division /',
+    'timed_addition +=@',
+    'timed_subtraction -=@',
+    'cast_assignment =#',
+    'is_equal_to ==',
+    'is_greater_than >',
+    'is_greater_or_equal_to >=',
+    'and &',
+    'or |',
+    'xor ^',
+    'not ~',
+    'mod %',
+    'shift_left <<',
+    'shift_right >>',
+  ];
+
   errors: Record<ErrorType, boolean> = {
     emptyName: false,
     emptyOpcode: false,
@@ -122,7 +146,8 @@ export class CommandEditorComponent implements OnInit {
     constructorNotReturningHandle: false,
     invalidClassName: false,
     invalidMethodName: false,
-
+    invalidConditionalOperator: false,
+    invalidArgumentWithOperator: false,
   };
   errorMessages: string[] = [];
 
@@ -240,6 +265,8 @@ export class CommandEditorComponent implements OnInit {
     constructorNotReturningHandle: this.constructorNotReturningHandleError,
     invalidClassName: this.invalidClassNameError,
     invalidMethodName: this.invalidMethodNameError,
+    invalidConditionalOperator: this.invalidConditionalOperatorError,
+    invalidArgumentWithOperator: this.invalidArgumentWithOperatorError,
   };
 
   isDirty: boolean;
@@ -283,6 +310,11 @@ export class CommandEditorComponent implements OnInit {
 
   onMemberChange(command: Command, value: string) {
     command.member = capitalizeFirst(value);
+    this.updateErrors();
+  }
+
+  onOperationChange(command: Command, operator: string) {
+    command.operator = operator;
     this.updateErrors();
   }
 
@@ -728,10 +760,26 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private invalidClassNameError() {
-    this.errors.invalidClassName = doesCommandHaveAnInvalidClassName(this.command);
+    this.errors.invalidClassName = doesCommandHaveAnInvalidClassName(
+      this.command
+    );
   }
 
   private invalidMethodNameError() {
-    this.errors.invalidMethodName = doesCommandHaveAnInvalidMethodName(this.command);
+    this.errors.invalidMethodName = doesCommandHaveAnInvalidMethodName(
+      this.command
+    );
+  }
+
+  private invalidConditionalOperatorError() {
+    this.errors.invalidConditionalOperator = doesCommandHaveInvalidConditionalOperator(
+      this.command
+    );
+  }
+
+  private invalidArgumentWithOperatorError() {
+    this.errors.invalidArgumentWithOperator = doesCommandHaveInvalidArgumentWithOperator(
+      this.command
+    );
   }
 }

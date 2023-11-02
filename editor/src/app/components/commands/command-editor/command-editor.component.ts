@@ -114,6 +114,7 @@ export class CommandEditorComponent implements OnInit {
     'assignment =',
     'addition +',
     'subtraction -',
+    'multiplication *',
     'division /',
     'timed_addition +=@',
     'timed_subtraction -=@',

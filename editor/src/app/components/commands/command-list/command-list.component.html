@@ -165,25 +165,16 @@
                 </ng-container>
 
                 <ng-container
-                  *ngIf="
-                    !row.command.attrs?.is_keyword &&
-                    !(row.command.class && row.command.member) &&
-                    isSupported(row.command)
-                  "
+                  *ngIf="row.command.operator && isSupported(row.command)"
                 >
-                  <ng-container
-                    *ngIf="
-                      getSnippet(
-                        row.extension,
-                        row.command.id || row.command.name
-                      ) | async as snippet
+                  <pre
+                    class="sample mt-3"
+                    [innerHTML]="
+                    row.command
+                        | expressify
+                        | codify : row.command : game : false : []
                     "
-                  >
-                    <pre
-                      class="sample mt-3"
-                      [innerHTML]="snippet | codify : row.command : game : false : []"
-                    ></pre>
-                  </ng-container>
+                  ></pre>
                 </ng-container>
               </div>
             </div>

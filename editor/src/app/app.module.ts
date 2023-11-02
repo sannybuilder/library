@@ -38,6 +38,7 @@ import {
   FilterMethodsPipe,
   StripPunctuationPipe,
   MarkdownPipe,
+  ExpressifyPipe,
 } from './pipes';
 
 // extensions state
@@ -192,6 +193,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     FilterMethodsPipe,
     StripPunctuationPipe,
     MarkdownPipe,
+    ExpressifyPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

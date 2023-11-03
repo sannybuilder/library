@@ -167,6 +167,14 @@ export function doesCommandHaveInvalidConditionalOperator(command: Command) {
   return validConditionalOperators.includes(command.operator);
 }
 
+function isVar(source: SourceType | undefined) {
+  return (
+    source === SourceType.var_any ||
+    source === SourceType.var_global ||
+    source === SourceType.var_local
+  );
+}
+
 export function doesCommandHaveInvalidArgumentWithOperator(command: Command) {
   if (!command.operator) {
     return false;
@@ -185,13 +193,17 @@ export function doesCommandHaveInvalidArgumentWithOperator(command: Command) {
     return true;
   }
 
+  // comparison operators should have two input params, with a number on either side
+  if (['==', '>', '>='].includes(command.operator)) {
+    if (output.length > 0 || input.length < 2) {
+      return true;
+    }
+    return !isVar(input[0]?.source) && !isVar(input[1]?.source);
+  }
+
   // the first output or input argument should be a variable of any type
   let source = output[0]?.source ?? input[0]?.source;
-  if (
-    ![SourceType.var_any, SourceType.var_global, SourceType.var_local].includes(
-      source
-    )
-  ) {
+  if (!isVar(source)) {
     return true;
   }
 

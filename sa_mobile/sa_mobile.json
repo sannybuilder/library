@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1698995747530,
-    "version": "0.308",
+    "last_update": 1698996642645,
+    "version": "0.309",
     "url": "https://library.sannybuilder.com/#/sa_mobile"
   },
   "extensions": [
@@ -22946,7 +22946,8 @@
           "id": "05A9",
           "name": "SET_VAR_TEXT_LABEL",
           "num_params": 2,
-          "short_desc": "Copies up to 8 characters from src to dest"
+          "short_desc": "Copies up to 8 characters from src to dest",
+          "operator": "="
         },
         {
           "input": [
@@ -22963,7 +22964,8 @@
           "id": "05AA",
           "name": "SET_LVAR_TEXT_LABEL",
           "num_params": 2,
-          "short_desc": "Copies up to 8 characters from src to dest"
+          "short_desc": "Copies up to 8 characters from src to dest",
+          "operator": "="
         },
         {
           "id": "05AB",
@@ -22999,7 +23001,8 @@
           "short_desc": "Returns true if the two null-terminated strings are equivalent",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "operator": "=="
         },
         {
           "input": [
@@ -23019,7 +23022,8 @@
           "short_desc": "Returns true if the two null-terminated strings are equivalent",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "operator": "=="
         },
         {
           "id": "05AF",
@@ -29328,7 +29332,8 @@
           "id": "06D1",
           "name": "SET_VAR_TEXT_LABEL16",
           "num_params": 2,
-          "short_desc": "Copies up to 16 characters from src to dest"
+          "short_desc": "Copies up to 16 characters from src to dest",
+          "operator": "="
         },
         {
           "input": [
@@ -29345,7 +29350,8 @@
           "id": "06D2",
           "name": "SET_LVAR_TEXT_LABEL16",
           "num_params": 2,
-          "short_desc": "Copies up to 16 characters from src to dest"
+          "short_desc": "Copies up to 16 characters from src to dest",
+          "operator": "="
         },
         {
           "id": "06D3",
@@ -34260,42 +34266,48 @@
           "member": "ApplyForce"
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int",
+              "source": "var_local"
+            },
+            {
+              "name": "_p2",
+              "type": "int",
+              "source": "var_global"
+            }
+          ],
           "id": "07D6",
           "name": "IS_INT_LVAR_EQUAL_TO_INT_VAR",
           "num_params": 2,
           "short_desc": "Returns true if the integer value of the local variable is equivalent to the integer value of the global variable",
+          "attrs": {
+            "is_condition": true
+          },
+          "operator": "=="
+        },
+        {
           "input": [
             {
               "name": "_p1",
-              "type": "any"
+              "type": "float",
+              "source": "var_local"
             },
             {
               "name": "_p2",
-              "type": "any"
+              "type": "float",
+              "source": "var_global"
             }
           ],
-          "attrs": {
-            "is_condition": true
-          }
-        },
-        {
           "id": "07D7",
           "name": "IS_FLOAT_LVAR_EQUAL_TO_FLOAT_VAR",
           "num_params": 2,
           "short_desc": "Returns true if the float value of the local variable is equivalent to the float value of the global variable",
-          "input": [
-            {
-              "name": "_p1",
-              "type": "any"
-            },
-            {
-              "name": "_p2",
-              "type": "any"
-            }
-          ],
           "attrs": {
             "is_condition": true
-          }
+          },
+          "operator": "=="
         },
         {
           "id": "07D8",

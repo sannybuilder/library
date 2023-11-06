@@ -120,10 +120,10 @@ function normalize(extensions: Extension[], game: Game) {
   return extensions
     .map((e) => ({
       ...e,
-      commands: e.commands.map((c) => {
-        const isUnsupported = !!c.attrs?.is_unsupported;
-        return sortBy(
-          pickBy(
+      commands: sortBy(
+        e.commands.map((c) => {
+          const isUnsupported = !!c.attrs?.is_unsupported;
+          return pickBy(
             {
               ...c,
               id: c.id || null,
@@ -138,10 +138,9 @@ function normalize(extensions: Extension[], game: Game) {
               platforms: isPlatformed(game) ? c.platforms : [],
             },
             (x) => x != null && (!Array.isArray(x) || x.length > 0)
-          ),
-          'id'
-        );
-      }),
+          );
+        }, 'id')
+      ),
     }))
     .filter((e) => e.commands.length > 0);
 }

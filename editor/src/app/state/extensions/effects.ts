@@ -217,6 +217,7 @@ export class ExtensionsEffects {
                 content: extensions,
                 url: 'https://library.sannybuilder.com/#/' + game,
                 classesMeta,
+                game,
               });
               this._changes.registerTextFileChange(GameVersion[game], version);
             })

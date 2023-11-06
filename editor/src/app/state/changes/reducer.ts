@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { pickBy } from 'lodash';
+import { pickBy, sortBy } from 'lodash';
 
 import {
   createGitHubAdaptor,
   createKoreFile,
   KoreFile,
 } from '../../state/github';
-import { Extension } from '../../models';
+import { Extension, Game, GamePlatforms, GameVersions } from '../../models';
 import { stripSourceAny, smash } from '../../utils';
 import {
   clearChanges,
@@ -41,7 +41,7 @@ export const changesReducer = createReducer(
   initialState,
   on(
     registerExtensionsChange,
-    (state, { fileName, version, url, content, classesMeta }) => {
+    (state, { fileName, version, url, content, classesMeta, game }) => {
       const newContent = JSON.stringify(
         {
           meta: {
@@ -49,7 +49,7 @@ export const changesReducer = createReducer(
             version,
             url,
           },
-          extensions: stripBody(content),
+          extensions: normalize(content, game),
           classes: classesMeta,
         },
         null,
@@ -116,27 +116,40 @@ export const changesReducer = createReducer(
   })
 );
 
-function stripBody(extensions: Extension[]) {
+function normalize(extensions: Extension[], game: Game) {
   return extensions
     .map((e) => ({
       ...e,
       commands: e.commands.map((c) => {
         const isUnsupported = !!c.attrs?.is_unsupported;
-        return pickBy(
-          {
-            ...c,
-            id: c.id || null,
-            attrs: c.attrs ? smash(c.attrs) : c.attrs,
-            class: isUnsupported ? null : c.class,
-            member: isUnsupported ? null : c.member,
-            short_desc: isUnsupported ? null : c.short_desc,
-            input: isUnsupported ? null : c.input?.map(stripSourceAny),
-            output: isUnsupported ? null : c.output?.map(stripSourceAny),
-            num_params: isUnsupported ? 0 : c.num_params,
-          },
-          (x) => x !== null && (!Array.isArray(x) || x.length > 0)
+        return sortBy(
+          pickBy(
+            {
+              ...c,
+              id: c.id || null,
+              attrs: c.attrs ? smash(c.attrs) : c.attrs,
+              class: isUnsupported ? null : c.class,
+              member: isUnsupported ? null : c.member,
+              short_desc: isUnsupported ? null : c.short_desc,
+              input: isUnsupported ? null : c.input?.map(stripSourceAny),
+              output: isUnsupported ? null : c.output?.map(stripSourceAny),
+              num_params: isUnsupported ? 0 : c.num_params,
+              versions: isVersioned(game) ? c.versions : [],
+              platforms: isPlatformed(game) ? c.platforms : [],
+            },
+            (x) => x != null && (!Array.isArray(x) || x.length > 0)
+          ),
+          'id'
         );
       }),
     }))
     .filter((e) => e.commands.length > 0);
+}
+
+function isVersioned(game: Game): boolean {
+  return GameVersions[game].length > 1;
+}
+
+function isPlatformed(game: Game): boolean {
+  return GamePlatforms[game].length > 1;
 }

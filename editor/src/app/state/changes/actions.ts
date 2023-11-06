@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ClassMeta, Enums, Extension } from '../../models';
+import { ClassMeta, Enums, Extension, Game } from '../../models';
 
 export const registerExtensionsChange = createAction(
   '[changes] register extensions',
@@ -9,6 +9,7 @@ export const registerExtensionsChange = createAction(
     url: string;
     content: Extension[];
     classesMeta: ClassMeta[];
+    game: Game;
   }>()
 );
 

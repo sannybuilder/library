@@ -1,13 +1,14 @@
 /// <reference types="node" />
 
-import { fromPairs } from 'lodash';
-import { Command, Extension } from './src/app/models/index';
+import { Command, Extension, Param } from './src/app/models/index';
 import { opcodify } from './src/app/pipes/opcodify';
 import {
   inputParams,
   isSupported,
   outputParams,
+  stringifyCommandWithOperator,
 } from './src/app/utils';
+import { braceify, stringifyTypeAndSource } from './src/app/pipes/params';
 
 const { readFileSync, writeFileSync } = require('fs');
 const [inFile, outFile] = process.argv.slice(2);
@@ -48,6 +49,12 @@ function makeLine(command: Command) {
   if (command.attrs?.is_condition) {
     line += '  ';
   }
+
+  if (command.operator) {
+    const cb = (param: Param) => braceify(stringifyTypeAndSource(param), '[]');
+    return line + stringifyCommandWithOperator(command, cb, cb);
+  }
+
   line += command.name.toLowerCase();
 
   for (let param of inputParams(command)) {
@@ -67,12 +74,14 @@ function makeLine(command: Command) {
   }
   const output = outputParams(command);
   if (output.length) {
-    line += ' store_to';
     for (let param of output) {
       if (param.name) {
-        line += ` ${param.name} [${param.type}]`;
+        line += ` ${param.name} ${braceify(
+          stringifyTypeAndSource(param),
+          '[]'
+        )}`;
       } else {
-        line += ` [${param.type}]`;
+        line += ` ${braceify(stringifyTypeAndSource(param), '[]')}`;
       }
     }
   }

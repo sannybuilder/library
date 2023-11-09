@@ -294,3 +294,42 @@ export function isOpcode(s: string): boolean {
 export function isSupported(attrs?: Partial<Attr>): boolean {
   return !attrs?.is_unsupported && !attrs?.is_nop;
 }
+
+
+export function stringifyCommandWithOperator<Cb extends (param: Param, i: number) => string>(command: Command, onInput: Cb, onOutput: Cb) {
+    const output = outputParams(command);
+    const input = inputParams(command);
+
+    if (input.length == 1 && !output.length) {
+      // unary
+      return `${command.operator}${onInput(input[0], 0)}`;
+    }
+    if (output.length) {
+      // binary not
+      if (command.operator === '~') {
+        return `${onOutput(output[0], 0)} = ~${onInput(input[0], 0)}`;
+      }
+
+      // ternary
+      return `${onOutput(output[0], 0)} = ${onInput(input[0], 0)} ${command.operator} ${onInput(input[1], 1)}`;
+    }
+
+    switch (command.operator) {
+      // assignment or comparison
+      case '=':
+      case '+=@':
+      case '-=@':
+      case '=#':
+      case '==':
+      case '>':
+      case '>=': {
+        return `${onInput(input[0], 0)} ${command.operator} ${onInput(input[1], 1)}`;
+      }
+
+      // compound assignment
+      default: {
+        return `${onInput(input[0], 0)} ${command.operator}= ${onInput(input[1], 1)}`;
+      }
+    }
+  
+}

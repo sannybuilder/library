@@ -87,6 +87,39 @@ export function doesConstructorCommandHaveNoOutputParams(command: Command) {
   return !!command.attrs?.is_constructor && !command.output?.length;
 }
 
+export function doesGetterCommandReturnNothing(command: Command) {
+  // make no assumptions about commands that don't start with GET_
+  // ignore GET_RID_OF_ because it can not be a getter
+  if (
+    !command.name.startsWith('GET_') ||
+    command.name.startsWith('GET_RID_OF_')
+  ) {
+    return false;
+  }
+
+  // if command already returns something, skip. also skip because we make no assumptions about them
+  if (command.output?.length || command.attrs?.is_unsupported) {
+    return false;
+  }
+
+  // supported command with arguments must have at least one output
+  if (command.num_params > 0) {
+    return true;
+  }
+
+  // if command has no arguments and NOOP, ignore
+  if (command.attrs?.is_nop) {
+    return false;
+  }
+
+  // returns implicit boolean value
+  if (command.attrs?.is_condition) {
+    return false;
+  }
+
+  return true;
+}
+
 export function doesCommandHaveEmptyName(command: Command) {
   return !command.name;
 }

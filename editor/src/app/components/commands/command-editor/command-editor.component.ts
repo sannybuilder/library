@@ -42,6 +42,7 @@ import {
   isCommandParamNameDuplicate,
   doesCommandHaveDuplicateParamName,
   doesConstructorCommandHaveNoOutputParams,
+  doesGetterCommandReturnNothing,
   doesCommandHaveEmptyName,
   doesCommandHaveEmptyId,
   doesCommandHaveSelfInStaticMethod,
@@ -71,6 +72,7 @@ type ErrorType =
   | 'duplicateParamName'
   | 'invalidAttributeCombo'
   | 'noConstructorWithoutOutputParams'
+  | 'noGetterWithoutResult'
   | 'noSelfInStaticMethod'
   | 'missingSelfParamInMethod'
   | 'trailingPeriodInDescription'
@@ -140,6 +142,7 @@ export class CommandEditorComponent implements OnInit {
     duplicateName: false,
     duplicateParamName: false,
     noConstructorWithoutOutputParams: false,
+    noGetterWithoutResult: false,
     noSelfInStaticMethod: false,
     missingSelfParamInMethod: false,
     trailingPeriodInDescription: false,
@@ -254,7 +257,8 @@ export class CommandEditorComponent implements OnInit {
     invalidAttributeCombo: this.updateAttributeError,
     duplicateName: this.updateDuplicateNameError,
     duplicateParamName: this.updateDuplicateParamNameError,
-    noConstructorWithoutOutputParams: this.updateNoOutputParamsError,
+    noConstructorWithoutOutputParams: this.updateNoConstructorWithoutOutputParamsError,
+    noGetterWithoutResult: this.updateNoGetterWithoutResultError,
     emptyName: this.updateEmptyNameError,
     emptyOpcode: this.updateEmptyOpcodeError,
     invalidOpcode: this.updateInvalidOpcodeError,
@@ -650,6 +654,7 @@ export class CommandEditorComponent implements OnInit {
       );
       event.container.data[event.currentIndex].source = newSource;
     }
+    this.updateErrors();
   }
 
   addInput() {
@@ -708,9 +713,14 @@ export class CommandEditorComponent implements OnInit {
     );
   }
 
-  private updateNoOutputParamsError() {
+  private updateNoConstructorWithoutOutputParamsError() {
     this.errors.noConstructorWithoutOutputParams =
       doesConstructorCommandHaveNoOutputParams(this.command);
+  }
+
+  private updateNoGetterWithoutResultError() {
+    this.errors.noGetterWithoutResult =
+      doesGetterCommandReturnNothing(this.command);
   }
 
   private updateEmptyNameError() {

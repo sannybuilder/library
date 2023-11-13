@@ -1,6 +1,5 @@
-int 0@, 1@, 2@, 3@
 debug_on
-
+int 0@, 1@, 2@, 3@
 0@ = -42
 1@ = allocate_memory size 4
 
@@ -8,7 +7,7 @@ debug_on
 write_memory address 1@ size 1 value 0@ vp false
 2@ = read_memory address 1@ size 1 vp false
 3@ = 2@
-0B1E: sign_extend 3@ from_size 1
+sign_extend 3@ from_size 1
 trace "1 BYTE: original value: %d, read value: %d, extended sign: %d" 0@ 2@ 3@
 
 // 2 bytes

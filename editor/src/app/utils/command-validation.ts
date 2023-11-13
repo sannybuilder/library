@@ -101,6 +101,10 @@ export function doesGetterCommandReturnNothing(command: Command) {
   if (command.output?.length || command.attrs?.is_unsupported) {
     return false;
   }
+  // returns implicit boolean value
+  if (command.attrs?.is_condition) {
+    return false;
+  }
 
   // supported command with arguments must have at least one output
   if (command.num_params > 0) {
@@ -109,11 +113,6 @@ export function doesGetterCommandReturnNothing(command: Command) {
 
   // if command has no arguments and NOOP, ignore
   if (command.attrs?.is_nop) {
-    return false;
-  }
-
-  // returns implicit boolean value
-  if (command.attrs?.is_condition) {
     return false;
   }
 

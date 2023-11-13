@@ -45,7 +45,8 @@ const errorHandlers = {
   duplicateParamName: doesCommandHaveDuplicateParamName,
   duplicateName: doesCommandHaveDuplicateName,
   noConstructorWithoutOutputParams: doesConstructorCommandHaveNoOutputParams,
-  noGetterWithoutResult: doesGetterCommandReturnNothing,
+  noGetterWithoutResult:
+    game === Game.gta_iv ? noopHandler : doesGetterCommandReturnNothing,
   emptyName: doesCommandHaveEmptyName,
   emptyOpcode: isOpcodeRequired ? doesCommandHaveEmptyId : noopHandler,
   invalidOpcode: isOpcodeRequired ? doesCommandHaveInvalidOpcode : noopHandler,
@@ -60,7 +61,7 @@ const errorHandlers = {
   invalidClassName: doesCommandHaveAnInvalidClassName,
   invalidMethodName: doesCommandHaveAnInvalidMethodName,
   invalidConditionalOperator: doesCommandHaveInvalidConditionalOperator,
-  invalidArgumentWithOperator: doesCommandHaveInvalidArgumentWithOperator
+  invalidArgumentWithOperator: doesCommandHaveInvalidArgumentWithOperator,
 };
 
 forEach(content.extensions, (extension) => {

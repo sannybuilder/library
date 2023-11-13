@@ -59,7 +59,8 @@
     "0B1A": "~<%= input1 %>",
     "0B1B": "<%= input1 %> %= <%= input2 %>",
     "0B1C": "<%= input1 %> >>= <%= input2 %>",
-    "0B1D": "<%= input1 %> <<= <%= input2 %>"
+    "0B1D": "<%= input1 %> <<= <%= input2 %>",
+    "0B1E": "int 0@, 1@, 2@, 3@\ndebug_on\n\n0@ = -42\n1@ = allocate_memory size 4\n\n// byte\nwrite_memory address 1@ size 1 value 0@ vp false\n2@ = read_memory address 1@ size 1 vp false\n3@ = 2@\n0B1E: sign_extend 3@ from_size 1\ntrace \"1 BYTE: original value: %d, read value: %d, extended sign: %d\" 0@ 2@ 3@\n\n// 2 bytes\nwrite_memory address 1@ size 2 value 0@ vp false\n2@ = read_memory address 1@ size 2 vp false\n3@ = 2@\nsign_extend 3@ from_size 2\ntrace \"2 BYTES: original value: %d, read value: %d, extended sign: %d\" 0@ 2@ 3@\n\n// 3 bytes\nwrite_memory address 1@ size 3 value 0@ vp false\n2@ = read_memory address 1@ size 3 vp false\n3@ = 2@\nsign_extend 3@ from_size 3\ntrace \"3 BYTES: original value: %d, read value: %d, extended sign: %d\" 0@ 2@ 3@\n\n// 4 bytes\nwrite_memory address 1@ size 4 value 0@ vp false\n2@ = read_memory address 1@ size 4 vp false\n3@ = 2@\nsign_extend 3@ from_size 4\ntrace \"4 BYTES: original value: %d, read value: %d, extended sign: %d\" 0@ 2@ 3@"
   },
   "debug": {
     "00C3": "debug_on\nbreakpoint \"testing debug_on opcode\"",

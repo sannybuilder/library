@@ -1,13 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { pickBy, sortBy } from 'lodash';
+
 
 import {
   createGitHubAdaptor,
   createKoreFile,
   KoreFile,
 } from '../../state/github';
-import { Extension, Game, GamePlatforms, GameVersions } from '../../models';
-import { stripSourceAny, smash } from '../../utils';
+import { normalize } from '../../utils';
 import {
   clearChanges,
   initializeGithub,
@@ -116,39 +115,3 @@ export const changesReducer = createReducer(
   })
 );
 
-function normalize(extensions: Extension[], game: Game) {
-  return extensions
-    .map((e) => ({
-      ...e,
-      commands: sortBy(
-        e.commands.map((c) => {
-          const isUnsupported = !!c.attrs?.is_unsupported;
-          return pickBy(
-            {
-              ...c,
-              id: c.id || null,
-              attrs: c.attrs ? smash(c.attrs) : c.attrs,
-              class: isUnsupported || !c.class ? null : c.class,
-              member: isUnsupported || !c.member ? null : c.member,
-              short_desc: isUnsupported ? null : c.short_desc,
-              input: isUnsupported ? null : c.input?.map(stripSourceAny),
-              output: isUnsupported ? null : c.output?.map(stripSourceAny),
-              num_params: isUnsupported ? 0 : c.num_params,
-              versions: isVersioned(game) ? c.versions : [],
-              platforms: isPlatformed(game) ? c.platforms : [],
-            },
-            (x) => x != null && (!Array.isArray(x) || x.length > 0)
-          );
-        }, 'id')
-      ),
-    }))
-    .filter((e) => e.commands.length > 0);
-}
-
-function isVersioned(game: Game): boolean {
-  return GameVersions[game].length > 1;
-}
-
-function isPlatformed(game: Game): boolean {
-  return GamePlatforms[game].length > 1;
-}

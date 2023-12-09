@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1695891673693,
-    "version": "0.43",
+    "last_update": 1702147395877,
+    "version": "0.44",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -2733,8 +2733,8 @@
         {
           "input": [
             {
-              "name": "handle",
-              "type": "any"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "name": "VehicleIsValid",
@@ -2743,7 +2743,6 @@
           "member": "IsValid",
           "short_desc": "Returns true if the vehicle is valid",
           "attrs": {
-            "is_static": true,
             "is_condition": true
           }
         },
@@ -3380,16 +3379,45 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "attacker",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetWhoHitMeLast",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetWhoHitMeLast",
+          "short_desc": "Returns the handle of the ped that hit this ped last"
         },
         {
           "name": "PedGetVehicleWhoHitMeLast",
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "maxHealth",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetMaxHealth",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "GetMaxHealth",
+          "short_desc": "Returns the max health of the character",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PedSetMaxHealth",
@@ -3461,8 +3489,17 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedGetMoney",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Returns the money of the character",
+          "class": "Char",
+          "member": "GetMoney"
         },
         {
           "input": [
@@ -3580,8 +3617,8 @@
         {
           "input": [
             {
-              "name": "handle",
-              "type": "any"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "name": "PedIsValid",
@@ -3590,7 +3627,6 @@
           "member": "IsValid",
           "short_desc": "Returns true if the given handle is a valid character",
           "attrs": {
-            "is_static": true,
             "is_condition": true
           }
         },
@@ -3832,8 +3868,24 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
           "name": "PedGetFlag",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Returns true if the given ped has this flag",
+          "class": "Char",
+          "member": "GetFlag",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "name": "PedSetEntityFlag",
@@ -4452,12 +4504,40 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedIsFemale",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "IsFemale",
+          "short_desc": "Returns true if the given ped is female",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "faction",
+              "type": "PedType",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetFaction",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "GetFaction",
+          "short_desc": "Returns the given ped's faction ID (PedType)"
         },
         {
           "input": [

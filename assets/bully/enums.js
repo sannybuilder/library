@@ -24,3 +24,20 @@ export const AreaVisible = {
   "GymToilet": 13,
   "DormToilet": 35
 };
+export const PedType = {
+  "Prefect": 0,
+  "Nerd": 1,
+  "Jock": 2,
+  "Dropout": 3,
+  "Greaser": 4,
+  "Preppy": 5,
+  "Student": 6,
+  "Cop": 7,
+  "Teacher": 8,
+  "Townsperson": 9,
+  "Shopkeeper": 10,
+  "Bully": 11,
+  "Default": 12,
+  "Player1": 13,
+  "Player2": 14
+};

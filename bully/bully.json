@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702147395877,
-    "version": "0.44",
+    "last_update": 1702240042972,
+    "version": "0.45",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -29,6 +29,10 @@
             {
               "name": "amount",
               "type": "int"
+            },
+            {
+              "name": "bool",
+              "type": "bool"
             }
           ],
           "attrs": {
@@ -37,8 +41,8 @@
           "class": "Player",
           "member": "AddMoney",
           "name": "PlayerAddMoney",
-          "num_params": 1,
-          "short_desc": "Adds to the player's money"
+          "num_params": 2,
+          "short_desc": "Adds to the player's money (unkown bool)"
         },
         {
           "input": [
@@ -757,7 +761,7 @@
           "input": [
             {
               "name": "model",
-              "type": "int"
+              "type": "Weapon"
             },
             {
               "name": "ammo",
@@ -765,7 +769,7 @@
             },
             {
               "name": "flag",
-              "type": "bool"
+              "type": "WeaponFlag"
             }
           ],
           "name": "PlayerSetWeapon",
@@ -877,7 +881,8 @@
           "member": "LockWeaponHud",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Determines wheter or not the players can switch weapons"
         },
         {
           "name": "PlayerLockButtonInputsExcept",
@@ -993,7 +998,7 @@
           "input": [
             {
               "name": "model",
-              "type": "int"
+              "type": "Weapon"
             }
           ],
           "name": "PlayerHasWeapon",
@@ -3125,7 +3130,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_any"
+              "type": "Weapon"
             }
           ],
           "name": "WeaponRequestModel",
@@ -3403,6 +3408,12 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "output": [
             {
               "name": "maxHealth",
@@ -3411,13 +3422,10 @@
             }
           ],
           "name": "PedGetMaxHealth",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "GetMaxHealth",
-          "short_desc": "Returns the max health of the character",
-          "attrs": {
-            "is_static": true
-          }
+          "short_desc": "Returns the max health of the character"
         },
         {
           "name": "PedSetMaxHealth",
@@ -3485,8 +3493,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "amount",
+              "type": "int"
+            }
+          ],
           "name": "PedSetMoney",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetMoney",
+          "short_desc": "Sets the new money amount for the ped"
         },
         {
           "input": [
@@ -3495,8 +3516,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "amount",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetMoney",
-          "num_params": 1,
+          "num_params": 2,
           "short_desc": "Returns the money of the character",
           "class": "Char",
           "member": "GetMoney"
@@ -3555,7 +3583,7 @@
             },
             {
               "name": "model",
-              "type": "model_any"
+              "type": "Weapon"
             },
             {
               "name": "ammo",
@@ -3580,7 +3608,7 @@
             },
             {
               "name": "model",
-              "type": "int"
+              "type": "Weapon"
             }
           ],
           "name": "PedClearWeapon",
@@ -3864,8 +3892,25 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "flag",
+              "type": "PedFlags"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedSetFlag",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Char",
+          "member": "SetFlag",
+          "short_desc": "Sets a ped's flag state via a bool"
         },
         {
           "input": [
@@ -3875,7 +3920,7 @@
             },
             {
               "name": "flag",
-              "type": "int"
+              "type": "PedFlags"
             }
           ],
           "name": "PedGetFlag",
@@ -4148,7 +4193,7 @@
             },
             {
               "name": "model",
-              "type": "int"
+              "type": "Weapon"
             }
           ],
           "name": "PedHasWeapon",
@@ -4201,8 +4246,14 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "weapon",
+              "type": "Weapon"
+            }
+          ],
           "name": "PedGetLastHitWeapon",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "GetLastHitWeapon",
           "short_desc": "Returns last hit weapon id"
@@ -4345,7 +4396,7 @@
             },
             {
               "name": "model",
-              "type": "model_any"
+              "type": "Weapon"
             }
           ],
           "name": "PedDestroyWeapon",
@@ -4389,8 +4440,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "weapon",
+              "type": "Weapon",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetWeapon",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "GetCurrentWeapon",
           "short_desc": "Returns peds current weapon model id"
@@ -4514,7 +4572,7 @@
           "num_params": 1,
           "class": "Char",
           "member": "IsFemale",
-          "short_desc": "Returns true if the given ped is female",
+          "short_desc": "Returns true if the given ped is female (checks if ped's sex is set to 1)",
           "attrs": {
             "is_condition": true
           }
@@ -4905,11 +4963,11 @@
           "input": [
             {
               "name": "model",
-              "type": "model_any"
+              "type": "Weapon"
             },
             {
               "name": "flag",
-              "type": "bool"
+              "type": "WeaponFlag"
             }
           ],
           "name": "GiveWeaponToPlayer",
@@ -5200,7 +5258,7 @@
           "input": [
             {
               "name": "modelId",
-              "type": "model_object"
+              "type": "Pickups"
             },
             {
               "name": "x",
@@ -5893,7 +5951,7 @@
           "input": [
             {
               "name": "model",
-              "type": "model_any"
+              "type": "Weapon"
             },
             {
               "name": "range",

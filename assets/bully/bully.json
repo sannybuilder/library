@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702240042972,
-    "version": "0.45",
+    "last_update": 1702264935831,
+    "version": "0.46",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -3356,8 +3356,24 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            }
+          ],
           "name": "PedIsTargetable",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "IsTargettingPed",
+          "short_desc": "Returns true if the given character is targetting the given ped",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "name": "PedEnterVehicle",
@@ -3469,8 +3485,20 @@
           "member": "SetHealth"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            }
+          ],
           "name": "PedIsDead",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "IsDead",
+          "short_desc": "Returns true if the ped is dead",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "name": "PedSetSpecialRate",
@@ -3543,7 +3571,7 @@
           "name": "PedSetInvulnerable",
           "num_params": 2,
           "class": "Char",
-          "short_desc": "Makes char immue to damage",
+          "short_desc": "Makes char immune to damage",
           "member": "SetInvulnerable"
         },
         {
@@ -3560,7 +3588,7 @@
           "name": "PedSetInvulnerableToPlayer",
           "num_params": 2,
           "class": "Char",
-          "short_desc": "Makes char immue to player damage",
+          "short_desc": "Makes char immune to player damage",
           "member": "SetInvulnerableToPlayer"
         },
         {
@@ -3729,7 +3757,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "SetTargetable",
-          "short_desc": "Makes the character targetable"
+          "short_desc": "Determines wheter or not the character can be targetable"
         },
         {
           "name": "PedShowHealthBar",
@@ -3899,7 +3927,7 @@
             },
             {
               "name": "flag",
-              "type": "PedFlags"
+              "type": "PedFlag"
             },
             {
               "name": "state",
@@ -3920,7 +3948,7 @@
             },
             {
               "name": "flag",
-              "type": "PedFlags"
+              "type": "PedFlag"
             }
           ],
           "name": "PedGetFlag",
@@ -4614,7 +4642,8 @@
           "name": "PedGetTargetPed",
           "num_params": 2,
           "class": "Char",
-          "member": "GetTargetPed"
+          "member": "GetTargetPed",
+          "short_desc": "Returns the character's target handle"
         },
         {
           "name": "PedIsUsingProp",

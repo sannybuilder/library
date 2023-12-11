@@ -4,6 +4,7 @@
     "PedIsTargetable": "// Seems to be bugged and only works for the player targetting another ped.",
     "PedMakeTargetable": "// Only the player is affected by this as other peds can still target this ped regardless of the state.",
     "PedSetActionNode": "playerHandle.setActionNode(\"/Global/Actions/Grapples/Front/Grapples/GrappleOpps/Player/LetGo\", \"Act/Conv/Grapples.act\");",
+    "PedSetGrappleTarget": "// Since setting both the target and grappler to -1 doesn't work as intended (and can even crash the game)\n// You can use this to achieve a more desired result:\nlet playerHandle = Player.GetChar();\nlet grappleTarget = playerHandle.getGrappleTargetPed();\nplayerHandle.setGrappleTarget(-1);\ngrappleTarget.setActionNode(\"/Global/Ambient/Scripted/Empty/EmptyNode/TrueEmptyNode\", \"Act/Anim/Ambient.act\");",
     "VehicleRequestModel": "while (!Streaming.RequestVehicleModel(273)) {\n      wait(0);\n}"
   }
 }

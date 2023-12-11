@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702264935831,
-    "version": "0.46",
+    "last_update": 1702299246492,
+    "version": "0.47",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -42,7 +42,7 @@
           "member": "AddMoney",
           "name": "PlayerAddMoney",
           "num_params": 2,
-          "short_desc": "Adds to the player's money (unkown bool)"
+          "short_desc": "Adds to the player's money (unkown bool). The minimum accepted value is 25, which is 0.25$, values below this number will be ignored. For example 120 turns into 100, which is 1$"
         },
         {
           "input": [
@@ -3892,8 +3892,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "animation",
+              "type": "string"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedIsPlaying",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Char",
+          "member": "IsPlaying",
+          "short_desc": "Returns wheter or not the ped is playing the given action node. It can either be a folder or a specific node. State argument determines if it should check if it is playing or not. Make sure to use Char.isValid before using this or the game will crash!",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "name": "PedMePlaying",

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702303649076,
-    "version": "0.49",
+    "last_update": 1702310636700,
+    "version": "0.50",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -98,11 +98,11 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "button",
+              "type": "Button"
             },
             {
-              "name": "_p2",
+              "name": "player",
               "type": "int"
             }
           ],
@@ -113,16 +113,17 @@
           "attrs": {
             "is_static": true,
             "is_condition": true
-          }
+          },
+          "short_desc": "Returns true if the given button is being pressed (tapped). Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "button",
+              "type": "Button"
             },
             {
-              "name": "_p2",
+              "name": "player",
               "type": "int"
             }
           ],
@@ -133,16 +134,17 @@
           "attrs": {
             "is_condition": true,
             "is_static": true
-          }
+          },
+          "short_desc": "Returns true if the given button is being pressed (hold). Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "button",
+              "type": "Button"
             },
             {
-              "name": "_p2",
+              "name": "player",
               "type": "int"
             }
           ],
@@ -153,7 +155,8 @@
           "attrs": {
             "is_condition": true,
             "is_static": true
-          }
+          },
+          "short_desc": "Returns true if the given button is being released. Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
         },
         {
           "name": "GetStickValue",
@@ -3740,8 +3743,25 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "actionNode",
+              "type": "string"
+            },
+            {
+              "name": "actionTree",
+              "type": "string"
+            }
+          ],
           "name": "PedSetActionNode",
-          "num_params": 0
+          "num_params": 3,
+          "short_desc": "Forces a character to play a specific action node from an action tree",
+          "class": "Char",
+          "member": "SetActionNode"
         },
         {
           "name": "PedSetTaskNode",
@@ -5930,12 +5950,36 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "animGroup",
+              "type": "string"
+            }
+          ],
           "name": "LoadAnimationGroup",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "LoadAnimationGroup",
+          "short_desc": "Forces a anim group to be loaded",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "animGroup",
+              "type": "string"
+            }
+          ],
           "name": "UnLoadAnimationGroup",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Streaming",
+          "member": "UnLoadAnimationGroup",
+          "short_desc": "Unloads a anim group. Use this when an animation group is no longer required, such as the end of a mission",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "FireCreate",

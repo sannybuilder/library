@@ -1140,19 +1140,6 @@ export const BlipIcon = {
   "GgCard": 37,
   "Gnome": 38
 };
-export const BlipsGround = {
-  "YellowCircle1": 1,
-  "BlueBouncingArrow1": 2,
-  "BlueBouncingArrow2": 3,
-  "BigBlueBouncingArrow": 5,
-  "WardrobeBlip": 6,
-  "YellowCircle2": 7,
-  "BlueCircle": 8,
-  "OrangeCircle": 9,
-  "RedCircle": 10,
-  "YellowCircle3": 11,
-  "GreenCircle": 12
-};
 export const BlipVisibility = {
   "Invisible": 0,
   "RadarIcon": 1,
@@ -1542,4 +1529,17 @@ export const EntityFlag = {
   "IgnoreProjectiles": 56,
   "ForceAttackCollision": 57,
   "IgnoreTargetingByPed": 58
+};
+export const BlipStyle = {
+  "YellowCircle1": 1,
+  "BlueBouncingArrow1": 2,
+  "BlueBouncingArrow2": 3,
+  "BigBlueBouncingArrow": 5,
+  "WardrobeBlip": 6,
+  "YellowCircle2": 7,
+  "BlueCircle": 8,
+  "OrangeCircle": 9,
+  "RedCircle": 10,
+  "YellowCircle3": 11,
+  "GreenCircle": 12
 };

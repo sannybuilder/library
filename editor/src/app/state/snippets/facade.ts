@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GameEditions } from '../../utils';
-import { Command } from '../../models';
+import { Command, Game } from '../../models';
 import { loadSnippets, updateSnippet } from './actions';
 import * as selector from './selectors';
 
@@ -28,7 +27,7 @@ export class SnippetsFacade {
     return this.store$.dispatch(updateSnippet({ extension, command, content }));
   }
 
-  loadSnippets(game: keyof typeof GameEditions) {
+  loadSnippets(game: Game) {
     return this.store$.dispatch(loadSnippets({ game }));
   }
 }

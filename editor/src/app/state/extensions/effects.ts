@@ -45,7 +45,7 @@ import {
   getSameCommands,
   doesCommandHaveAnyAttributeInvalid,
   replaceType,
-  GameEditions,
+  isOtherGame,
 } from '../../utils';
 import { AuthFacade } from '../auth/facade';
 import { GameFacade } from '../game/facade';
@@ -418,8 +418,4 @@ function bumpVersion(version?: string): string {
   const parts = version.split('.');
   const last = parts.pop() ?? '0';
   return [...parts, isNaN(+last) ? 0 : +last + 1].join('.');
-}
-
-function isOtherGame(game: Game) {
-  return GameEditions[Game.unknown_x86].includes(game);
 }

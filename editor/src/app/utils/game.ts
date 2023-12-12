@@ -1,7 +1,7 @@
 import { flatten } from 'lodash';
 import { Game } from '../models';
 
-export const GameEditions = {
+export const GameEditions: Partial<Record<Game, Game[]>> = {
   [Game.gta3]: [Game.gta3, Game.gta3_mobile, Game.gta3_unreal],
   [Game.vc]: [Game.vc, Game.vc_mobile, Game.vc_unreal],
   [Game.sa]: [Game.sa, Game.sa_mobile, Game.sa_unreal],
@@ -24,7 +24,7 @@ export function isValidGame(name: string | undefined): name is Game {
 }
 
 export function getBaseGames() {
-  return Object.keys(GameEditions) as Array<keyof typeof GameEditions>;
+  return Object.keys(GameEditions) as Game[];
 }
 
 export function getBaseGame(game: Game): Game {
@@ -35,8 +35,8 @@ export function getBaseGame(game: Game): Game {
   );
 }
 
-export function getGameVariations(baseGame: keyof typeof GameEditions): Game[] {
-  return GameEditions[baseGame];
+export function getGameVariations(game: Game): Game[] {
+  return GameEditions[game] ?? [game];
 }
 
 export function getSameEdition(game: Game): Game[] {
@@ -76,4 +76,8 @@ export function doesGameRequireOpcode(game: Game): boolean {
     Game.lcs,
     Game.vcs,
   ].includes(game);
+}
+
+export function isOtherGame(game: Game) {
+  return getGameVariations(Game.unknown_x86).includes(game);
 }

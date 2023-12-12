@@ -1,16 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { GameEditions } from '../../utils';
 import { Command, ExtensionSnippets, Game } from '../../models';
 
 export const loadSnippets = createAction(
   '[snippets] load',
-  props<{ game: keyof typeof GameEditions }>()
+  props<{ game: Game }>()
 );
 
 export const loadSnippetsSuccess = createAction(
   '[snippets] load success',
   props<{
-    game: keyof typeof GameEditions;
+    game: Game;
     extensionSnippets: ExtensionSnippets;
   }>()
 );

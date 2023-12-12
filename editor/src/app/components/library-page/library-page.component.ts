@@ -31,13 +31,14 @@ import {
   GameFacade,
   EnumsFacade,
   TreeFacade,
-  ArticlesFacade
+  ArticlesFacade,
 } from '../../state';
 import {
   doesGameRequireOpcode,
   FUSEJS_OPTIONS,
   getBaseGames,
   getQueryParamsForCommand,
+  isOtherGame,
   serializeUrlAndParams,
 } from '../../utils';
 import { Router } from '@angular/router';
@@ -135,8 +136,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this.detectScreenSize();
     this._ui.toggleCommandListElements(true);
 
-    getBaseGames().forEach((game) => {
-      this._snippets.loadSnippets(game);
+    this.game$.pipe(takeUntil(this.onDestroy$)).subscribe((game) => {
+      if (isOtherGame(game)) {
+        this._snippets.loadSnippets(game);
+      } else {
+        getBaseGames().forEach((game) => {
+          this._snippets.loadSnippets(game);
+        });
+      }
     });
 
     this.snippet$.pipe(takeUntil(this.onDestroy$)).subscribe((snippet) => {
@@ -408,7 +415,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       if (!command) {
         return [base, game, extension].join('/');
       }
-      const url = ["https://sannybuilder.com/lib", game, extension, command.id || command.name].join('/');
+      const url = [
+        'https://sannybuilder.com/lib',
+        game,
+        extension,
+        command.id || command.name,
+      ].join('/');
 
       return serializeUrlAndParams(
         url,

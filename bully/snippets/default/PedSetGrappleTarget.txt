@@ -1,6 +1,17 @@
 // Since setting both the target and grappler to -1 doesn't work as intended (and can even crash the game)
 // You can use this to achieve a more desired result:
+
+// First get the player and target handle
 let playerHandle = Player.GetChar();
 let grappleTarget = playerHandle.getGrappleTargetPed();
+
+// Then you can do this (makes both characters stop holding eachothers with no anim):
 playerHandle.setGrappleTarget(-1);
 grappleTarget.setActionNode("/Global/Ambient/Scripted/Empty/EmptyNode/TrueEmptyNode", "Act/Anim/Ambient.act");
+
+// or this (pretty much same as above):
+playerHandle.setActionNode("/Global/Ambient/Scripted/Empty/EmptyNode/TrueEmptyNode", "Act/Anim/Ambient.act");
+grappleTarget.setActionNode("/Global/Ambient/Scripted/Empty/EmptyNode/TrueEmptyNode", "Act/Anim/Ambient.act");
+
+// Or alternatively play this animation on the person that started the grab (makes the player, in this case, do the grapple release animation so it effectively makes the player release the target):
+playerHandle.setActionNode("/Global/Actions/Grapples/GrappleReversals/StandingReversals/GrappleBreak/Break_GIVE", "Globals/Grapples.act");

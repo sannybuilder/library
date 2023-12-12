@@ -41,10 +41,6 @@ export const PedType = {
   "Player1": 13,
   "Player2": 14
 };
-export const Cash = {
-  "CoinDollar": 462,
-  "CoinPenny": 463
-};
 export const Weapon = {
   "Fist": -1,
   "None": 0,
@@ -631,7 +627,9 @@ export const Pickups = {
   "TbonePu": 527,
   "Oldmeat": 528,
   "BbagbottleInv": 529,
-  "SmCargo": 530
+  "SmCargo": 530,
+  "CoinDollar": 462,
+  "CoinPenny": 463
 };
 export const WeatherType = {
   "Sunny": 1,
@@ -1542,4 +1540,9 @@ export const BlipStyle = {
   "RedCircle": 10,
   "YellowCircle3": 11,
   "GreenCircle": 12
+};
+export const PickupsButes = {
+  "PermanentMission": "PermanentMission",
+  "PermanentButes": "PermanentButes",
+  "HealthBute": "HealthBute"
 };

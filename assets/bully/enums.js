@@ -1841,3 +1841,20 @@ export const VehicleModel = {
   "Truck": 297,
   "Arc1": 298
 };
+export const SpeechError = {
+  "KSpchItemNotFoundInQueue": 0,
+  "KSpchNoMatchFound": 1,
+  "KSpchCantAddItem": 2,
+  "KSpchEmptyEventPackage": 3,
+  "KSpchNoRandInstalled": 4,
+  "KSpchNoTimerInstalled": 5,
+  "KSpchNoStreamerInstalled": 6,
+  "KSpchTooManySpeechItems": 7,
+  "KSpchNoneFoundAfterMaxAttempts": 8,
+  "KSpchSpeechLibDisabledError": 9,
+  "KNoStopProcInstalledErr": 10,
+  "KNoBusyProcInstalledErr": 11,
+  "KMessageActivelyFilteredErr": 12,
+  "KSpchBadEventNumber": 13,
+  "KSpchNoSpeechHandlerInstalled14": 14
+};

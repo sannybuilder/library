@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702436169389,
-    "version": "0.57",
+    "last_update": 1702525543036,
+    "version": "0.58",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -3292,8 +3292,32 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetPosXYZ",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Char",
+          "member": "GetCoordinates",
+          "short_desc": "Returns the ped's coordinates"
         },
         {
           "name": "PedIsInAreaXYZ",
@@ -3889,8 +3913,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "faction",
+              "type": "PedType"
+            }
+          ],
+          "output": [
+            {
+              "name": "attitude",
+              "type": "PedAttitude",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetPedToTypeAttitude",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Char",
+          "member": "GetAttitudeTowardsFaction",
+          "short_desc": "Returns the attitude ID that this character has against the faction given"
         },
         {
           "name": "PedResetAttitudes",

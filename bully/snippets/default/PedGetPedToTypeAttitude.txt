@@ -1,0 +1,11 @@
+// If you want to quickly check the attitude your target
+// has towards you, the player, and print it at the
+// top center of the screen, you can use the following code:
+
+import {PedType, TextPosition} from '../.config/enums';
+
+let playerHandle = Player.GetChar();
+let targetPed = playerHandle.getTargetPed();
+let attitude = targetPed.getAttitudeTowardsFaction(PedType.Player1);
+
+Text.PrintString(attitude, 1, TextPosition.TopCenter);

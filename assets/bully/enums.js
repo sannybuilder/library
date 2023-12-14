@@ -1005,10 +1005,6 @@ export const PickupsButes = {
   "PermanentButes": "PermanentButes",
   "HealthBute": "HealthBute"
 };
-export const TextPosition = {
-  "TopCenter": 1,
-  "BottomCenter": 2
-};
 export const PedModel = {
   "Player": 0,
   "Defaultped": 1,
@@ -1857,4 +1853,9 @@ export const SpeechError = {
   "KMessageActivelyFilteredErr": 12,
   "KSpchBadEventNumber": 13,
   "KSpchNoSpeechHandlerInstalled14": 14
+};
+export const TextStyle = {
+  "TopCenter": 1,
+  "BottomCenter": 2,
+  "test": 3
 };

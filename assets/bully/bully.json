@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702580871338,
-    "version": "0.62",
+    "last_update": 1702594045331,
+    "version": "0.63",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -114,7 +114,7 @@
             "is_static": true,
             "is_condition": true
           },
-          "short_desc": "Returns true if the given button is being pressed (tapped). Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
+          "short_desc": "Returns true if the given button is being pressed (hold). Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
         },
         {
           "input": [
@@ -135,7 +135,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Returns true if the given button is being pressed (hold). Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
+          "short_desc": "Returns true if the given button is being pressed (tapped). Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
         },
         {
           "input": [
@@ -2909,11 +2909,11 @@
               "type": "string"
             },
             {
-              "name": "timeInSec",
-              "type": "int"
+              "name": "duration",
+              "type": "float"
             },
             {
-              "name": "style",
+              "name": "textStyle",
               "type": "TextStyle"
             }
           ],
@@ -3061,7 +3061,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "SetAsleep",
-          "short_desc": "Sets the character as asleep"
+          "short_desc": "Sets the character as asleep (TODO: what does this mean?)"
         },
         {
           "name": "PedSetStatsType",
@@ -3199,7 +3199,7 @@
           "num_params": 1,
           "class": "Char",
           "member": "ClearObjectives",
-          "short_desc": "Clears char objectives"
+          "short_desc": "Clears char objectives (TODO: specify what ped objectives are)"
         },
         {
           "input": [
@@ -3212,7 +3212,7 @@
           "num_params": 1,
           "class": "Char",
           "member": "StopAction",
-          "short_desc": "Stops any action character was performing"
+          "short_desc": "Stops any action character was performing. Such as making a ped stop attacking another ped"
         },
         {
           "input": [
@@ -3350,7 +3350,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "IsInCar",
-          "short_desc": "Returns true if character is riding a specific vehicle",
+          "short_desc": "Returns true if character is riding a specific vehicle (handle)",
           "attrs": {
             "is_condition": true
           }
@@ -3414,7 +3414,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "IsTargettingPed",
-          "short_desc": "Returns true if the given character is targetting the given ped",
+          "short_desc": "Returns true if the given character is targetting the given ped.  Seems to be bugged and only works for the player targetting another ped",
           "attrs": {
             "is_condition": true
           }
@@ -3461,7 +3461,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "GetWhoHitMeLast",
-          "short_desc": "Returns the handle of the ped that hit this ped last"
+          "short_desc": "Returns the handle of the ped that hit/damaged this ped last"
         },
         {
           "name": "PedGetVehicleWhoHitMeLast",
@@ -3507,7 +3507,7 @@
           ],
           "name": "PedGetHealth",
           "num_params": 2,
-          "short_desc": "Returns the health of the character",
+          "short_desc": "Returns the current health of the character",
           "class": "Char",
           "member": "GetHealth"
         },
@@ -3539,7 +3539,7 @@
           "num_params": 1,
           "class": "Char",
           "member": "IsDead",
-          "short_desc": "Returns true if the ped is dead",
+          "short_desc": "Returns true if the ped is dead (on the ground knocked out and with -100 health)",
           "attrs": {
             "is_condition": true
           }
@@ -3579,7 +3579,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "SetMoney",
-          "short_desc": "Sets the new money amount for the ped"
+          "short_desc": "Sets the new money amount for the ped. Unused mechanic in the game"
         },
         {
           "input": [
@@ -3597,7 +3597,7 @@
           ],
           "name": "PedGetMoney",
           "num_params": 2,
-          "short_desc": "Returns the money of the character",
+          "short_desc": "Returns the money of the character. Unused mechanic in the game, will normally return 0 but you can give money to peds with Char.setMoney",
           "class": "Char",
           "member": "GetMoney"
         },
@@ -3666,7 +3666,7 @@
           "num_params": 3,
           "class": "Char",
           "member": "SetWeapon",
-          "short_desc": "Gives weapon to ped"
+          "short_desc": "Equips a ped with a weapon, and gives it an specific amount of ammo if desired"
         },
         {
           "name": "PedSetWeaponNow",
@@ -3783,7 +3783,7 @@
           ],
           "name": "PedSetActionNode",
           "num_params": 3,
-          "short_desc": "Forces a character to play a specific action node from an action tree (cat/act file)",
+          "short_desc": "Forces a character to play a specific action node (like animations but with embed events) from an action tree (cat/act file)",
           "class": "Char",
           "member": "PlayActionNode"
         },
@@ -4300,7 +4300,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "FleeFrom",
-          "short_desc": "Makes char flee from specified char"
+          "short_desc": "Makes char flee from specified char (as long as they are not busy, like sitting)"
         },
         {
           "name": "PedFaceObjectNow",
@@ -4785,7 +4785,7 @@
           "num_params": 2,
           "class": "Char",
           "member": "GetTargetPed",
-          "short_desc": "Returns the character's target handle"
+          "short_desc": "Returns the character's current target handle"
         },
         {
           "name": "PedIsUsingProp",

@@ -1546,3 +1546,7 @@ export const PickupsButes = {
   "PermanentButes": "PermanentButes",
   "HealthBute": "HealthBute"
 };
+export const TextPosition = {
+  "TopCenter": 1,
+  "BottomCenter": 2
+};

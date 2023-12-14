@@ -1,0 +1,13 @@
+// There are different ways to check if a ped died:
+// You can use this to check if a ped is fully lying on the ground dead:
+let pedIsDead = yourPed.isDead();
+
+// If you want to check if the ped is playing the knocked out animation, you can use this:
+let pedIsDead = false;
+
+if (yourPed.isValid()) {
+	pedIsDead = yourPed.isPlaying("/Global/HitTree/KnockOuts", true);
+}
+
+// Or you can check if the ped is at 0 health, which is exactly when the ped will get knocked out by doing the following:
+let pedIsDead = yourPed.getHealth() <= 0;

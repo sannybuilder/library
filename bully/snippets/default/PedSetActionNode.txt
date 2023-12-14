@@ -1,1 +1,12 @@
-playerHandle.setActionNode("/Global/Actions/Grapples/Front/Grapples/GrappleOpps/Player/LetGo", "Act/Conv/Grapples.act");
+// Simple example that makes the player throw an apple with the frisbee animation upon pressing
+// the attack button
+import {Button, Device, WeaponModel} from '../../.config/enums';
+
+let playerHandle = Player.GetChar();
+let node = "/Global/Books/Books/Actions/Attacks/ThrowActions/FrisbeeThrow/ThrowStart";
+
+if (Pad.IsButtonBeingPressed(Button.Attack, Device.Player1) && !playerHandle.isPlayingActionNode(node, true)) {
+	playerHandle.setWeapon(WeaponModel.Apple);
+	wait(100);
+	playerHandle.playActionNode(node, "Globals/Thrown.act");
+}

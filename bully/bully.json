@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702557887222,
-    "version": "0.60",
+    "last_update": 1702568976210,
+    "version": "0.61",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -3783,9 +3783,9 @@
           ],
           "name": "PedSetActionNode",
           "num_params": 3,
-          "short_desc": "Forces a character to play a specific action node from an action tree",
+          "short_desc": "Forces a character to play a specific action node from an action tree (cat/act file)",
           "class": "Char",
-          "member": "SetActionNode"
+          "member": "PlayActionNode"
         },
         {
           "name": "PedSetTaskNode",
@@ -3990,15 +3990,31 @@
           "name": "PedIsPlaying",
           "num_params": 3,
           "class": "Char",
-          "member": "IsPlaying",
-          "short_desc": "Returns wheter or not the ped is playing the given action node. It can either be a folder or a specific node. State argument determines if it should check if it is playing or not. Make sure to use Char.isValid before using this or the game will crash!",
+          "member": "IsPlayingActionNode",
+          "short_desc": "Returns whether the ped is playing the given action node. It can either be a folder or a specific node. State argument determines if it should check if it is playing or not. Make sure to use Char.isValid before using this or the game will crash!",
           "attrs": {
             "is_condition": true
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "animation",
+              "type": "string"
+            }
+          ],
           "name": "PedMePlaying",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Returns whether the ped is playing a specific action node name. Similar to IsPlayingActionNode but only the last node name is provided. State argument determines if it should check if it is playing or not. Make sure to use Char.isValid before using this or the game will crash!",
+          "class": "Char",
+          "member": "IsPlayingActionNodeSimple",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "name": "PedInRectangle",

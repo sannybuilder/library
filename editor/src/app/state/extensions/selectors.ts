@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { uniqBy } from 'lodash';
-import { doesGameRequireOpcode, isSupported } from '../../utils';
+import { commandParams, doesGameRequireOpcode, isSupported } from '../../utils';
 import {
   ClassMeta,
   Command,
@@ -75,6 +75,25 @@ export const extensionEntities = createSelector(
   state,
   (state: GameState | undefined, props: { extension: string }) =>
     state?.entities?.[props.extension] ?? []
+);
+
+export const extensionTypes = createSelector(
+  extensions,
+  (extensions: Extension[] | undefined) => {
+    const set = extensions?.reduce((m, v) => {
+      for (const c of v.commands) {
+        const params = commandParams(c);
+
+        for (const p of params) {
+          m.add(p.type);
+        }
+      }
+
+      return m;
+    }, new Set());
+
+    return [...set ?? []];
+  }
 );
 
 export const lastUpdate = createSelector(
@@ -214,7 +233,11 @@ function makeVariations(
     starters,
     endings,
     middle,
-  }: { starters: string[][]; endings: string[][]; middle: Array<[string, string]> },
+  }: {
+    starters: string[][];
+    endings: string[][];
+    middle: Array<[string, string]>;
+  },
   commands: Command[]
 ) {
   const variations: Command[] = [];

@@ -8,7 +8,8 @@
 
 <div class="scroll-container" [attr.translate]="'no'">
   <pre *ngIf="enumNames.length; else noEnums" class="sample">
-<div *ngFor="let enumName of enumNames"><a [routerLink]="['/', game, 'enums', enumName]">{{ enumName }}</a></div></pre>
+<div *ngFor="let enumName of enumNames"><a [routerLink]="['/', game, 'enums', enumName]">{{ enumName }}</a><span 
+  class="secondary" *ngIf="isUnused(enumName)"> ({{ "ui.enumList.unused" | translate }})</span></div></pre>
 </div>
 
 <ng-template #noEnums>

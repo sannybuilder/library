@@ -27,6 +27,7 @@ export class ExtensionsFacade {
   supportInfo$ = this.store$.select(selector.supportInfo);
   classesMeta$ = this.store$.select(selector.classesMeta);
   commandsToDelete$ = this.store$.select(selector.commandsToDelete);
+  extensionTypes$ = this.store$.select(selector.extensionTypes);
 
   getGameExtensions(game: Game) {
     return this.store$.select(selector.gameExtensions, { game });

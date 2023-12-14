@@ -10,6 +10,7 @@ export class EnumListComponent {
   private _game: Game;
   games: Game[];
   @Input() enumNames: string[];
+  @Input() extensionTypes: string[];
   @Input() set game(val: Game) {
     this.games = Object.values(Game);
     this._game = val;
@@ -17,5 +18,9 @@ export class EnumListComponent {
 
   get game() {
     return this._game;
+  }
+
+  isUnused(enumName: string) {
+    return this.extensionTypes?.length && !this.extensionTypes.includes(enumName);
   }
 }

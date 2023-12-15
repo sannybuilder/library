@@ -1001,9 +1001,31 @@ export const BlipStyle = {
   "GreenCircle": 12
 };
 export const PickupsButes = {
-  "PermanentMission": "PermanentMission",
+  "Default": "Default",
   "PermanentButes": "PermanentButes",
-  "HealthBute": "HealthBute"
+  "PermanentButesWithCleanUp": "PermanentButesWithCleanUp",
+  "PermanentMission": "PermanentMission",
+  "Permanent2MinRespawn": "Permanent2MinRespawn",
+  "FoodFightButes": "FoodFightButes",
+  "HealthBute": "HealthBute",
+  "HealthBute25": "HealthBute25",
+  "SnowballBute": "SnowballBute",
+  "BrickBute": "BrickBute",
+  "Eggsbute": "Eggsbute",
+  "BrocketBute": "BrocketBute",
+  "SpudGunBute": "SpudGunBute",
+  "CherrybBute": "CherrybBute",
+  "StinkbombBute": "StinkbombBute",
+  "WorldPickup": "WorldPickup",
+  "Mission108StinkBombs": "1_08_StinkBombs",
+  "ItchPowderBute": "ItchPowderBute",
+  "BagMrblsBute": "BagMrblsBute",
+  "SprayCanBute": "SprayCanBute",
+  "ClakeTestBute": "CLAKE_TestBute",
+  "SuperSlingBute": "SuperSlingBute",
+  "DamagedWeapon": "Damaged_Weapon",
+  "PaperStackBute": "PaperStackBute",
+  "AmbientDropCleanup": "AmbientDropCleanup"
 };
 export const PedModel = {
   "Player": 0,

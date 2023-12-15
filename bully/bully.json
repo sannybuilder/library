@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702594045331,
-    "version": "0.63",
+    "last_update": 1702613562087,
+    "version": "0.64",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -2873,11 +2873,11 @@
             },
             {
               "name": "primaryColor",
-              "type": "int"
+              "type": "VehicleColor"
             },
             {
               "name": "secondaryColor",
-              "type": "int"
+              "type": "VehicleColor"
             }
           ],
           "name": "VehicleSetColor",
@@ -4538,12 +4538,38 @@
           "short_desc": "Marks the character able to sprint infinitely"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "status",
+              "type": "PedUniqueStatus"
+            }
+          ],
           "name": "PedSetUniqueModelStatus",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Game",
+          "member": "PedModelSetUniqueStatus",
+          "short_desc": "Sets the ped’s model unique status. This allows you to allow or disallow a ped from naturally spawning or having clones"
         },
         {
+          "output": [
+            {
+              "name": "status",
+              "type": "PedUniqueStatus",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetUniqueModelStatus",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Gets the ped’s model unique status",
+          "class": "Game",
+          "member": "PedModelGetUniqueStatus",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -6335,8 +6361,37 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "bankName",
+              "type": "string"
+            },
+            {
+              "name": "speechId",
+              "type": "SpeechEvent"
+            },
+            {
+              "name": "volume",
+              "type": "SpeechVolume"
+            },
+            {
+              "name": "bool1",
+              "type": "bool"
+            },
+            {
+              "name": "bool2",
+              "type": "bool"
+            }
+          ],
           "name": "SoundPlayScriptedSpeechEvent",
-          "num_params": 0
+          "num_params": 6,
+          "short_desc": "Makes a ped play a sound ID from a specific sound bank. Intended for NIS (Non Interactive Sequences, like cutscenes but in-game instead). Volume can be set alongside two unknown bools",
+          "class": "Char",
+          "member": "PlayScriptedSpeechEvent"
         },
         {
           "name": "SoundPlayScriptedSpeechEvent_2D",
@@ -6392,11 +6447,23 @@
         },
         {
           "name": "SoundDisableSpeech_ActionTree",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "DisableActionTreeSpeech",
+          "short_desc": "Disallows action trees from playing speech events (essentially mutes all peds)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundEnableSpeech_ActionTree",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Game",
+          "member": "EnableActionTreeSpeech",
+          "short_desc": "Allows action trees from playing speech events",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundLoopPlay2D",
@@ -6503,8 +6570,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "eventType",
+              "type": "SpeechEvent"
+            }
+          ],
           "name": "SoundPlayAmbientSpeechEvent",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Makes a ped play a specific sound bank. Intended for peds speaking",
+          "class": "Char",
+          "member": "PlayAmbientSpeechEvent"
         },
         {
           "name": "SoundSetCurrentGoKartRace",

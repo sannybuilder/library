@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1702613562087,
-    "version": "0.64",
+    "last_update": 1702651164599,
+    "version": "0.65",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -8211,47 +8211,47 @@
               "type": "string"
             },
             {
-              "name": "outfit",
+              "name": "localizationName",
               "type": "string"
             },
             {
               "name": "head",
-              "type": "string"
+              "type": "ClothingModel"
             },
             {
               "name": "torso",
-              "type": "string"
+              "type": "ClothingModel"
             },
             {
               "name": "leftWrist",
-              "type": "string"
+              "type": "ClothingModel"
             },
             {
               "name": "rightWrist",
-              "type": "string"
+              "type": "ClothingModel"
             },
             {
               "name": "legs",
-              "type": "string"
+              "type": "ClothingModel"
             },
             {
               "name": "feet",
-              "type": "string"
+              "type": "ClothingModel"
             },
             {
               "name": "flag1",
-              "type": "bool"
+              "type": "ClothingSleeve"
             },
             {
               "name": "flag2",
-              "type": "bool"
+              "type": "ClothingPiece"
             }
           ],
           "name": "ClothingDefineOutfit",
           "num_params": 10,
           "class": "Clothing",
           "member": "DefineOutfit",
-          "short_desc": "Defines a new outfit",
+          "short_desc": "Defines a new outfit or overrides an existing one (see ClothingOutfit enum for a list). You can later assign this outfit with Clothing.SetPlayerOutfit method",
           "attrs": {
             "is_static": true
           }
@@ -8275,7 +8275,7 @@
           "num_params": 2,
           "class": "Clothing",
           "member": "SetPlayerOutfit",
-          "short_desc": "Changes the player's clothes. Outfit must be predefined using DefineOutfit. Use BuildPlayer to update the model",
+          "short_desc": "Changes the player's current outfit. You can use ClothingOutfit enum for existing ones, but you can also make your own outfit using DefineOutfit. Use BuildPlayer to update the model after you set it",
           "attrs": {
             "is_static": true
           }
@@ -8347,7 +8347,7 @@
           "num_params": 1,
           "class": "Clothing",
           "member": "GivePlayerOutfit",
-          "short_desc": "Gives player the specified outfit. Outfit must be predefined using DefineOutfit",
+          "short_desc": "Gives player the specified outfit. Outfit must be predefined using DefineOutfit, you can see ClothingOutfit enum for existing ones",
           "attrs": {
             "is_static": true
           }

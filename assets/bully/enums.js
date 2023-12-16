@@ -2316,3 +2316,26 @@ export const ClothingOutfit = {
   "Alien": "Alien",
   "NerdJimmy": "NerdJimmy"
 };
+export const EventsPed = {
+  "OnDamaged": 0
+};
+export const EventsHash = {
+  "OnObjectCreated": 0,
+  "OnObjectBroken": 3,
+  "Unknown": 4
+};
+export const EventsProp = {
+  "OnBroken": 0,
+  "OnUsed": 1
+};
+export const EventsTrigger = {
+  "OnEnter": 1,
+  "OnImpact": 2,
+  "OnExit": 4,
+  "InTrigger": 5
+};
+export const EventsGlobal = {
+  "OnPropBroken": 1,
+  "OnWalked": 6,
+  "OnPedDamaged": 7
+};

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1701131552582,
-    "version": "0.526",
+    "last_update": 1703028956009,
+    "version": "0.527",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -48995,6 +48995,30 @@
         {
           "input": [
             {
+              "name": "path",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "resolved",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "2000",
+          "name": "RESOLVE_FILEPATH",
+          "num_params": 2,
+          "class": "Fs",
+          "member": "ResolvePath",
+          "short_desc": "Resolves absolute filepath. Path param can be relative, starts with 'virtual path' prefix or be already absolute filepath. If result parameter is pointer to target memory please make sure allocated buffer  is large enougt to hold returned string",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
               "name": "scriptStruct",
               "type": "script_id",
               "source": "var_any"
@@ -49025,26 +49049,26 @@
         {
           "input": [
             {
-              "name": "path",
-              "type": "string"
+              "name": "retParams",
+              "type": "arguments"
             }
           ],
-          "output": [
-            {
-              "name": "resolved",
-              "type": "string",
-              "source": "var_any"
-            }
-          ],
-          "id": "2000",
-          "name": "RESOLVE_FILEPATH",
-          "num_params": 2,
-          "class": "Fs",
-          "member": "ResolvePath",
-          "short_desc": "Resolves absolute filepath. Path param can be relative, starts with 'virtual path' prefix or be already absolute filepath. If result parameter is pointer to target memory please make sure allocated buffer  is large enougt to hold returned string",
+          "id": "2002",
+          "name": "CLEO_RETURN_WITH",
+          "num_params": 1,
+          "short_desc": "Returns from the current SCM function (0AB1) and sets the condition result to true",
           "attrs": {
-            "is_static": true
+            "is_keyword": true
           }
+        },
+        {
+          "id": "2003",
+          "name": "CLEO_RETURN_FALSE",
+          "num_params": 0,
+          "attrs": {
+            "is_keyword": true
+          },
+          "short_desc": "Returns from the current SCM function (0AB1) and sets the condition result to false"
         }
       ]
     },

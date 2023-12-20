@@ -1,0 +1,17 @@
+// get player's current vehicle handle
+// function sets condition result
+:FUNC_GET_PLAYER_CAR
+    if
+        not does_char_exist $scplayer
+    then
+        cleo_return_fail
+    end
+
+    if
+        not is_char_sitting_in_any_car $scplayer
+    then
+        cleo_return_fail
+    end
+
+    int car_handle = store_car_char_is_in_no_save $scplayer
+cleo_return_with true {args} car_handle

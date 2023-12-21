@@ -2428,3 +2428,9 @@ export const PedStimulus = {
   "LateForClass": 85,
   "None": 86
 };
+export const PedFaceTowardsType = {
+  "FaceAwayThenTowards": 0,
+  "Unknown": 1,
+  "FaceTowards1": 2,
+  "FaceTowards2": 3
+};

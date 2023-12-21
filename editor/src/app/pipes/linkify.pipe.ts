@@ -18,7 +18,7 @@ export class LinkifyPipe implements PipeTransform {
 
     // todo: gradually replace ids with names
     const linkedIds = short_desc.replace(
-      /\b0[\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]\b/g,
+      /\b[0-7][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]\b/g,
       (id) => {
         const extension = extensions.find((e) =>
           e.commands.find((c) => c.id === id)

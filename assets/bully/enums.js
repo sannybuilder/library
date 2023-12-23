@@ -13,7 +13,7 @@ export const PedType = {
   "Prefect": 0,
   "Nerd": 1,
   "Jock": 2,
-  "Dropout": 3,
+  "Townie": 3,
   "Greaser": 4,
   "Preppy": 5,
   "Student": 6,

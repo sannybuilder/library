@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1703382905889,
-    "version": "0.79",
+    "last_update": 1703432052157,
+    "version": "0.80",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -8445,8 +8445,24 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "slot",
+              "type": "ClothingSlot"
+            },
+            {
+              "name": "name",
+              "type": "ClothingPiece"
+            }
+          ],
           "name": "ClothingSetPlayer",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Clothing",
+          "member": "Set",
+          "short_desc": "Changes the player's specific clothing piece",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -8462,31 +8478,98 @@
           "name": "ClothingSetPlayerOutfit",
           "num_params": 2,
           "class": "Clothing",
-          "member": "SetPlayerOutfit",
+          "member": "SetOutfit",
           "short_desc": "Changes the player's current outfit. You can use ClothingOutfit enum for existing ones, but you can also make your own outfit using DefineOutfit. Use BuildPlayer to update the model after you set it",
           "attrs": {
             "is_static": true
           }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "ClothingHair"
+            }
+          ],
           "name": "ClothingSetPlayersHair",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Clothing",
+          "member": "SetHair",
+          "short_desc": "Changes the player's haircut",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "slot",
+              "type": "ClothingSlot"
+            }
+          ],
           "name": "ClothingGetPlayer",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Clothing",
+          "member": "Get",
+          "short_desc": "Returns the player's currently equipped clothing item on a specific slot",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "name",
+              "type": "ClothingOutfit",
+              "source": "var_any"
+            }
+          ],
           "name": "ClothingGetPlayerOutfit",
-          "num_params": 0
+          "num_params": 1,
+          "short_desc": "Returns the player's current outfit",
+          "class": "Clothing",
+          "member": "GetOutfit",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "output": [
+            {
+              "name": "name",
+              "type": "ClothingHair",
+              "source": "var_any"
+            }
+          ],
           "name": "ClothingGetPlayersHair",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Clothing",
+          "member": "GetHair",
+          "short_desc": "Returns the player's current hair model",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "ClothingModel"
+            },
+            {
+              "name": "slot",
+              "type": "ClothingModel"
+            }
+          ],
           "name": "ClothingPlayerOwns",
-          "num_params": 0
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Clothing",
+          "member": "IsOwned",
+          "short_desc": "Returns true if the clothing item is owned (in the inventory and specific slot) by the player"
         },
         {
           "input": [
@@ -8517,12 +8600,40 @@
           "short_desc": "Returns true if player is wearing any outfit"
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "ClothingModel"
+            }
+          ],
           "name": "ClothingGivePlayer",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Clothing",
+          "member": "GiveItem",
+          "short_desc": "Gives the player a specific clothing item to their inventory",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "ClothingModel"
+            },
+            {
+              "name": "int",
+              "type": "int"
+            }
+          ],
           "name": "ClothingRemovePlayer",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Clothing",
+          "member": "RemoveItem",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Removes a specific clothing item from the player's inventory. Unknown int"
         },
         {
           "input": [
@@ -8534,8 +8645,8 @@
           "name": "ClothingGivePlayerOutfit",
           "num_params": 1,
           "class": "Clothing",
-          "member": "GivePlayerOutfit",
-          "short_desc": "Gives player the specified outfit. Outfit must be predefined using DefineOutfit, you can see ClothingOutfit enum for existing ones",
+          "member": "GiveOutfit",
+          "short_desc": "Gives player a specified outfit. Outfit must be predefined using DefineOutfit, you can see ClothingOutfit enum for existing ones",
           "attrs": {
             "is_static": true
           }
@@ -8565,7 +8676,7 @@
           "num_params": 0,
           "short_desc": "Rebuilds the player model, applying clothing changes",
           "class": "Clothing",
-          "member": "BuildPlayer",
+          "member": "Refresh",
           "attrs": {
             "is_static": true
           }

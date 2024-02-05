@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1707115859025,
-    "version": "0.546",
+    "last_update": 1707122841420,
+    "version": "0.547",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59614,24 +59614,6 @@
           "input": [
             {
               "name": "address",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "2403",
-          "name": "FORGET_MEMORY",
-          "num_params": 1,
-          "class": "Memory",
-          "member": "Forget",
-          "attrs": {
-            "is_static": true
-          },
-          "short_desc": "Removes block allocated with 0AC8 from CLEO's clean-up list, so memory persists load/start new game events. Forgotten memory still will be released when game closes causing no leaks"
-        },
-        {
-          "input": [
-            {
-              "name": "address",
               "type": "any"
             },
             {
@@ -59656,6 +59638,42 @@
           "class": "Memory",
           "member": "WriteStruct",
           "short_desc": "Writes the value at the given offset from the memory address (see: 2401)"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "2403",
+          "name": "FORGET_MEMORY",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "Forget",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Removes block allocated with 0AC8 from CLEO's clean-up list, so memory persists load/start new game events. Forgotten memory still will be released when game closes causing no leaks"
+        },
+        {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "2404",
+          "name": "GET_LAST_CREATED_CUSTOM_SCRIPT",
+          "num_params": 1,
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Memory",
+          "member": "GetLastCreatedCustomScript",
+          "short_desc": "Gets the address of the last created custom script"
         }
       ]
     }

@@ -234,6 +234,7 @@
   },
   "memory": {
     "2400": "get_var_pointer 0@ {store_to} 5@\nget_var_pointer 1@ {store_to} 6@\n\n2400: copy_memory {src} 5@ {dest} 6@ {size} 2 // replace two bytes in 1@",
-    "2401": "int ptr = get_this_script_struct\n\nint baseIp = read_struct ptr {offset} 0x10 {size} 4 // get CRunningScript::BaseIP\nshortString name = read_struct ptr {offset} 0x08 {size} 4 // get CRunningScript::Name"
+    "2401": "int ptr = get_this_script_struct\n\nint baseIp = read_struct ptr {offset} 0x10 {size} 4 // get CRunningScript::BaseIP\nshortString name = read_struct ptr {offset} 0x08 {size} 8 // get CRunningScript::Name",
+    "2402": "get_vehicle_pointer 0@ {result} 5@\nwrite_struct {address} 5@ {offset} 0x434 {size} 1 {value} 126 // set CVehicle::m_nPrimaryColor"
   }
 }

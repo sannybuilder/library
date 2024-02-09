@@ -1,0 +1,10 @@
+00C3: debug_on // enable trace command
+
+2001: get_script_filename -1 full_path false store_to 0@v
+2101: trace "This script file:~w~ %s" 0@v
+
+0AC8: allocate_memory size 260 store_to address 0@
+0AAA: get_script_struct_named script_name 'main' store_to address 1@
+2001: get_script_filename 1@ full_path true store_to 0@
+2101: trace "Ohter script:~w~ %s" 0@
+0AC9: free_memory 0@

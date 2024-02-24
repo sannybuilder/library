@@ -64,9 +64,18 @@ struct Meta {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+struct ClassMeta {
+    name: String,
+    constructable: bool,
+    extends: Option<String>,
+    desc: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 struct Library {
     meta: Meta,
     extensions: Vec<Extension>,
+    classes: Vec<ClassMeta>,
 }
 
 fn visit_dirs(dir: &Path, cb: &mut dyn FnMut(&DirEntry) -> Option<()>) -> io::Result<()> {
@@ -282,10 +291,7 @@ fn generate_classes() -> Result<()> {
 
     println!("\n#CLASSES");
 
-    for &class_name in classes_names.iter() {
-        println!("${}", class_name.trim());
-        println!("$BEGIN");
-
+    let print_class_members = |class_name: &str| {
         let members = classes_list.get(class_name).unwrap();
         let mut member_names: Vec<&String> = members.keys().collect();
         member_names.sort();
@@ -294,7 +300,17 @@ fn generate_classes() -> Result<()> {
             let description = members.get(member_name).unwrap();
             println!("{},{}", member_name, description);
         }
+    };
 
+    for &class_name in classes_names.iter() {
+        println!("${}", class_name.trim());
+        println!("$BEGIN");
+        if let Some(class_meta) = library.classes.iter().find(|c| c.name == *class_name) {
+            if let Some(ref extends) = class_meta.extends {
+                print_class_members(extends);
+            }
+        }
+        print_class_members(class_name);
         println!("$END\n");
     }
 

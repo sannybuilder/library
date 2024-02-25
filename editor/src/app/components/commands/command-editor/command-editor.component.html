@@ -265,9 +265,10 @@
           <div class="col-12 col-sm-6 col-lg-4">
             <scl-selector
               [ngClass]="{ invalid: param.type === PrimitiveType.any }"
-              [(model)]="param.type"
+              [model]="param.type"
               [choices]="paramTypes"
               (keydown)="onTypeKeyDown($event, param)"
+              (modelChange)="onTypeChange($event, param)"
               [canInput]="false"
             ></scl-selector>
             <div
@@ -346,9 +347,10 @@
           <div class="col-12 col-sm-6 col-lg-4">
             <scl-selector
               [ngClass]="{ invalid: param.type === PrimitiveType.any }"
-              [(model)]="param.type"
+              [model]="param.type"
               [choices]="paramTypes"
               (keydown)="onTypeKeyDown($event, param)"
+              (modelChange)="onTypeChange($event, param)"
               [canInput]="
                 command.attrs?.is_constructor && i === command.output.length - 1
               "

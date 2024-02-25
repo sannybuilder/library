@@ -241,3 +241,9 @@ export function doesCommandHaveInvalidArgumentWithOperator(command: Command) {
 
   return false;
 }
+
+export function doesSelfArgumentHaveInvalidType(command: Command) {
+  return commandParams(command).some(
+    (p) => p.name === SELF && p.type !== command.class
+  );
+}

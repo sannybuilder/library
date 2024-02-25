@@ -60,7 +60,8 @@ import {
   doesCommandHaveAnInvalidClassName,
   doesCommandHaveAnInvalidMethodName,
   doesCommandHaveInvalidConditionalOperator,
-  doesCommandHaveInvalidArgumentWithOperator
+  doesCommandHaveInvalidArgumentWithOperator,
+  doesSelfArgumentHaveInvalidType,
 } from '../../../utils';
 
 type ErrorType =
@@ -81,7 +82,8 @@ type ErrorType =
   | 'invalidClassName'
   | 'invalidMethodName'
   | 'invalidConditionalOperator'
-  | 'invalidArgumentWithOperator';
+  | 'invalidArgumentWithOperator'
+  | 'invalidSelfType';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -152,6 +154,7 @@ export class CommandEditorComponent implements OnInit {
     invalidMethodName: false,
     invalidConditionalOperator: false,
     invalidArgumentWithOperator: false,
+    invalidSelfType: false,
   };
   errorMessages: string[] = [];
 
@@ -272,6 +275,7 @@ export class CommandEditorComponent implements OnInit {
     invalidMethodName: this.invalidMethodNameError,
     invalidConditionalOperator: this.invalidConditionalOperatorError,
     invalidArgumentWithOperator: this.invalidArgumentWithOperatorError,
+    invalidSelfType: this.invalidSelfTypeError,
   };
 
   isDirty: boolean;
@@ -382,6 +386,11 @@ export class CommandEditorComponent implements OnInit {
         param.type = PrimitiveType.zone_key;
         break;
     }
+    this.updateErrors();
+  }
+
+  onTypeChange(key: string, param: Param) {
+    param.type = key;
     this.updateErrors();
   }
 
@@ -792,5 +801,9 @@ export class CommandEditorComponent implements OnInit {
     this.errors.invalidArgumentWithOperator = doesCommandHaveInvalidArgumentWithOperator(
       this.command
     );
+  }
+
+  private invalidSelfTypeError() {
+    this.errors.invalidSelfType = doesSelfArgumentHaveInvalidType(this.command);
   }
 }

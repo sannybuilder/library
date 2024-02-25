@@ -24,6 +24,7 @@ import {
   doesCommandHaveAnInvalidMethodName,
   doesCommandHaveInvalidConditionalOperator,
   doesCommandHaveInvalidArgumentWithOperator,
+  doesSelfArgumentHaveInvalidType,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -62,6 +63,7 @@ const errorHandlers = {
   invalidMethodName: doesCommandHaveAnInvalidMethodName,
   invalidConditionalOperator: doesCommandHaveInvalidConditionalOperator,
   invalidArgumentWithOperator: doesCommandHaveInvalidArgumentWithOperator,
+  invalidSelfType: doesSelfArgumentHaveInvalidType
 };
 
 forEach(content.extensions, (extension) => {

@@ -2495,3 +2495,8 @@ export const AudioStreamAction = {
   "Pause": 2,
   "Resume": 3
 };
+export const AudioStreamState = {
+  "Stopped": -1,
+  "Playing": 1,
+  "Paused": 2
+};

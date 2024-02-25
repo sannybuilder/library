@@ -122,12 +122,6 @@ export const BodyPart = {
   "Hat": 16,
   "SpecialCostume": 17
 };
-export const AudioStreamState = {
-  "Stop": 0,
-  "Play": 1,
-  "Pause": 2,
-  "Resume": 3
-};
 export const FileMode = {
   "ReadText": "rt",
   "WriteText": "wt",
@@ -2494,4 +2488,10 @@ export const SeatIndex = {
   "FrontRight": 0,
   "RearLeft": 1,
   "RearRight": 2
+};
+export const AudioStreamAction = {
+  "Stop": 0,
+  "Play": 1,
+  "Pause": 2,
+  "Resume": 3
 };

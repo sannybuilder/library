@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1703433040406,
-    "version": "0.81",
+    "last_update": 1708822710123,
+    "version": "0.82",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -4695,8 +4695,8 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "Char"
+              "name": "modelId",
+              "type": "model_char"
             },
             {
               "name": "status",
@@ -4705,11 +4705,20 @@
           ],
           "name": "PedSetUniqueModelStatus",
           "num_params": 2,
-          "class": "Game",
+          "class": "Streaming",
           "member": "PedModelSetUniqueStatus",
-          "short_desc": "Sets the ped’s model unique status. This allows you to allow or disallow a ped from naturally spawning or having clones"
+          "short_desc": "Sets the ped’s model unique status. This allows you to allow or disallow a ped from naturally spawning or having clones",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_char"
+            }
+          ],
           "output": [
             {
               "name": "status",
@@ -4718,9 +4727,9 @@
             }
           ],
           "name": "PedGetUniqueModelStatus",
-          "num_params": 1,
+          "num_params": 2,
           "short_desc": "Gets the ped’s model unique status",
-          "class": "Game",
+          "class": "Streaming",
           "member": "PedModelGetUniqueStatus",
           "attrs": {
             "is_static": true

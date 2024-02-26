@@ -1,10 +1,7 @@
 stream_custom_script ".\other_script.s"
 get_script_struct_just_created 11@
 
-// wait for script to end
-12@v = ""
-while 12@v = get_script_filename 11@ {fullPath} false // valid script pointer?
+// wait for script to finish
+while is_script_running 11@
     wait 0
 end
-
-// done

@@ -172,10 +172,9 @@ export function doesCommandDescriptionNotStartWith3rdPersonVerb(
 }
 
 export function doesConstructorNotReturnHandle(command: Command) {
-  const hasSingleParamHandle =
-    command.output?.length === 1 && command.output[0].name === 'handle';
+  const hasHandleOutput = command.output?.some((p) => p.name === 'handle');
 
-  return !!command.attrs?.is_constructor && !hasSingleParamHandle;
+  return !!command.attrs?.is_constructor && !hasHandleOutput;
 }
 
 export function doesCommandHaveAnInvalidClassName(command: Command) {
@@ -248,11 +247,10 @@ export function doesSelfArgumentHaveInvalidType(command: Command) {
   );
 }
 
-
 export function doesOutputHaveInvalidSource(command: Command) {
-  return outputParams(command).some((p) => !isVar(p.source) );
+  return outputParams(command).some((p) => !isVar(p.source));
 }
 
 export function doesInputHaveInvalidSource(command: Command) {
-  return inputParams(command).some((p) => isVar(p.source) );
+  return inputParams(command).some((p) => isVar(p.source) && !command.operator);
 }

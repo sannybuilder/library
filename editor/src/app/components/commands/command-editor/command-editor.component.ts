@@ -62,6 +62,7 @@ import {
   doesCommandHaveInvalidConditionalOperator,
   doesCommandHaveInvalidArgumentWithOperator,
   doesSelfArgumentHaveInvalidType,
+  doesOutputHaveInvalidSource,
 } from '../../../utils';
 
 type ErrorType =
@@ -83,7 +84,8 @@ type ErrorType =
   | 'invalidMethodName'
   | 'invalidConditionalOperator'
   | 'invalidArgumentWithOperator'
-  | 'invalidSelfType';
+  | 'invalidSelfType'
+  | 'invalidOutputSource'
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -155,6 +157,7 @@ export class CommandEditorComponent implements OnInit {
     invalidConditionalOperator: false,
     invalidArgumentWithOperator: false,
     invalidSelfType: false,
+    invalidOutputSource: false,
   };
   errorMessages: string[] = [];
 
@@ -276,6 +279,7 @@ export class CommandEditorComponent implements OnInit {
     invalidConditionalOperator: this.invalidConditionalOperatorError,
     invalidArgumentWithOperator: this.invalidArgumentWithOperatorError,
     invalidSelfType: this.invalidSelfTypeError,
+    invalidOutputSource: this.invalidOutputSourceError,
   };
 
   isDirty: boolean;
@@ -805,5 +809,9 @@ export class CommandEditorComponent implements OnInit {
 
   private invalidSelfTypeError() {
     this.errors.invalidSelfType = doesSelfArgumentHaveInvalidType(this.command);
+  }
+
+  private invalidOutputSourceError() {
+    this.errors.invalidOutputSource = doesOutputHaveInvalidSource(this.command);
   }
 }

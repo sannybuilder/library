@@ -247,3 +247,12 @@ export function doesSelfArgumentHaveInvalidType(command: Command) {
     (p) => p.name === SELF && p.type !== command.class
   );
 }
+
+
+export function doesOutputHaveInvalidSource(command: Command) {
+  return outputParams(command).some((p) => !isVar(p.source) );
+}
+
+export function doesInputHaveInvalidSource(command: Command) {
+  return inputParams(command).some((p) => isVar(p.source) );
+}

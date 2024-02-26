@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1708964889569,
+    "last_update": 1708960605630,
     "version": "0.583",
     "url": "https://library.sannybuilder.com/#/sa"
   },
@@ -46978,6 +46978,138 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "path",
+              "type": "any"
+            }
+          ],
+          "id": "0A99",
+          "name": "SET_CURRENT_DIRECTORY",
+          "num_params": 1,
+          "short_desc": "Sets the current working directory (cwd) to a predefined location with a value of 0 or 1, or to an arbitrary path with a string value",
+          "class": "Fs",
+          "member": "SetCurrentDirectory",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "filePathName",
+              "type": "string"
+            },
+            {
+              "name": "mode",
+              "type": "FileMode"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "File",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9A",
+          "name": "OPEN_FILE",
+          "num_params": 3,
+          "short_desc": "Opens the file in the specified mode, sets the condition result to True if the open operation has been successful, or to False otherwise, and writes the file handle to the variable",
+          "class": "File",
+          "member": "Open",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "id": "0A9B",
+          "name": "CLOSE_FILE",
+          "num_params": 1,
+          "short_desc": "Closes the file and frees the memory",
+          "class": "File",
+          "member": "Close",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "output": [
+            {
+              "name": "size",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9C",
+          "name": "GET_FILE_SIZE",
+          "num_params": 2,
+          "short_desc": "Gets the file size in bytes",
+          "class": "File",
+          "member": "GetSize"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "destination",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9D",
+          "name": "READ_FROM_FILE",
+          "num_params": 3,
+          "short_desc": "Reads the specified number of bytes from the opened file and writes them to the memory region starting from the address of the destination variable",
+          "class": "File",
+          "member": "Read"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "source",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0A9E",
+          "name": "WRITE_TO_FILE",
+          "num_params": 3,
+          "short_desc": "Copies the specified number of bytes of the memory region starting from the address of the source variable to the file",
+          "class": "File",
+          "member": "Write"
+        },
+        {
           "output": [
             {
               "name": "address",
@@ -47263,6 +47395,24 @@
           "member": "GetScriptStructNamed",
           "attrs": {
             "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            }
+          ],
+          "id": "0AAB",
+          "name": "DOES_FILE_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if a file at the given path exists",
+          "class": "Fs",
+          "member": "DoesFileExist",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
           }
         },
         {
@@ -47915,6 +48065,124 @@
         {
           "input": [
             {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "id": "0AD6",
+          "name": "IS_END_OF_FILE_REACHED",
+          "num_params": 1,
+          "short_desc": "Returns true if the end of the specified file has been reached",
+          "class": "File",
+          "member": "IsEndReached",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "buffer",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0AD7",
+          "name": "READ_STRING_FROM_FILE",
+          "num_params": 3,
+          "short_desc": "Reads data from the file into the buffer until either the end of buffer is reached, the newline character is read, or the end-of-file is reached, whichever comes first",
+          "class": "File",
+          "member": "ReadString",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "id": "0AD8",
+          "name": "WRITE_STRING_TO_FILE",
+          "num_params": 2,
+          "short_desc": "Copies data from the source string to the file up to but not including the null character",
+          "class": "File",
+          "member": "WriteString",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AD9",
+          "name": "WRITE_FORMATTED_STRING_TO_FILE",
+          "num_params": 3,
+          "short_desc": "Writes a formatted string to the file",
+          "class": "File",
+          "member": "WriteFormattedString"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "format",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "nValues",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "values",
+              "type": "arguments",
+              "source": "var_any"
+            }
+          ],
+          "id": "0ADA",
+          "name": "SCAN_FILE",
+          "num_params": 4,
+          "short_desc": "Extracts data from a file using fscanf",
+          "class": "File",
+          "member": "Scan",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
               "name": "modelId",
               "type": "model_vehicle"
             }
@@ -48159,6 +48427,42 @@
           "short_desc": "",
           "class": "World",
           "member": "GetRandomObjectInSphereNoSaveRecursive",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "dirPath",
+              "type": "string"
+            }
+          ],
+          "id": "0AE4",
+          "name": "DOES_DIRECTORY_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if a directory at the given path exists",
+          "class": "Fs",
+          "member": "DoesDirectoryExist",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "dirName",
+              "type": "string"
+            }
+          ],
+          "id": "0AE5",
+          "name": "CREATE_DIRECTORY",
+          "num_params": 1,
+          "short_desc": "Creates a directory at the given path",
+          "class": "Fs",
+          "member": "CreateDirectory",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -56584,29 +56888,6 @@
           "input": [
             {
               "name": "self",
-              "type": "File",
-              "source": "var_any"
-            },
-            {
-              "name": "format",
-              "type": "string"
-            },
-            {
-              "name": "args",
-              "type": "arguments"
-            }
-          ],
-          "id": "0AD9",
-          "name": "WRITE_FORMATTED_STRING_TO_FILE",
-          "num_params": 3,
-          "short_desc": "Writes a formatted string to the file",
-          "class": "File",
-          "member": "WriteFormattedString"
-        },
-        {
-          "input": [
-            {
-              "name": "self",
               "type": "AudioStream"
             }
           ],
@@ -57257,295 +57538,6 @@
     {
       "name": "file",
       "commands": [
-        {
-          "input": [
-            {
-              "name": "path",
-              "type": "any"
-            }
-          ],
-          "id": "0A99",
-          "name": "SET_CURRENT_DIRECTORY",
-          "num_params": 1,
-          "short_desc": "Sets the current working directory (cwd) to a predefined location with a value of 0 or 1, or to an arbitrary path with a string value",
-          "class": "Fs",
-          "member": "SetCurrentDirectory",
-          "attrs": {
-            "is_static": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "filePathName",
-              "type": "string"
-            },
-            {
-              "name": "mode",
-              "type": "FileMode"
-            }
-          ],
-          "output": [
-            {
-              "name": "handle",
-              "type": "File",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9A",
-          "name": "OPEN_FILE",
-          "num_params": 3,
-          "short_desc": "Opens the file in the specified mode, sets the condition result to True if the open operation has been successful, or to False otherwise, and writes the file handle to the variable",
-          "class": "File",
-          "member": "Open",
-          "attrs": {
-            "is_constructor": true,
-            "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9B",
-          "name": "CLOSE_FILE",
-          "num_params": 1,
-          "short_desc": "Closes the file and frees the memory",
-          "class": "File",
-          "member": "Close",
-          "attrs": {
-            "is_destructor": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File"
-            }
-          ],
-          "output": [
-            {
-              "name": "size",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9C",
-          "name": "GET_FILE_SIZE",
-          "num_params": 2,
-          "short_desc": "Gets the file size in bytes",
-          "class": "File",
-          "member": "GetSize"
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File",
-              "source": "var_any"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "destination",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9D",
-          "name": "READ_FROM_FILE",
-          "num_params": 3,
-          "short_desc": "Reads the specified number of bytes from the opened file and writes them to the memory region starting from the address of the destination variable",
-          "class": "File",
-          "member": "Read"
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File",
-              "source": "var_any"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            },
-            {
-              "name": "source",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
-          "id": "0A9E",
-          "name": "WRITE_TO_FILE",
-          "num_params": 3,
-          "short_desc": "Copies the specified number of bytes of the memory region starting from the address of the source variable to the file",
-          "class": "File",
-          "member": "Write"
-        },
-        {
-          "input": [
-            {
-              "name": "path",
-              "type": "string"
-            }
-          ],
-          "id": "0AAB",
-          "name": "DOES_FILE_EXIST",
-          "num_params": 1,
-          "short_desc": "Returns true if a file at the given path exists",
-          "class": "Fs",
-          "member": "DoesFileExist",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File",
-              "source": "var_any"
-            }
-          ],
-          "id": "0AD6",
-          "name": "IS_END_OF_FILE_REACHED",
-          "num_params": 1,
-          "short_desc": "Returns true if the end of the specified file has been reached",
-          "class": "File",
-          "member": "IsEndReached",
-          "attrs": {
-            "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File",
-              "source": "var_any"
-            },
-            {
-              "name": "buffer",
-              "type": "int"
-            },
-            {
-              "name": "size",
-              "type": "int"
-            }
-          ],
-          "id": "0AD7",
-          "name": "READ_STRING_FROM_FILE",
-          "num_params": 3,
-          "short_desc": "Reads data from the file into the buffer until either the end of buffer is reached, the newline character is read, or the end-of-file is reached, whichever comes first",
-          "class": "File",
-          "member": "ReadString",
-          "attrs": {
-            "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File",
-              "source": "var_any"
-            },
-            {
-              "name": "source",
-              "type": "string"
-            }
-          ],
-          "id": "0AD8",
-          "name": "WRITE_STRING_TO_FILE",
-          "num_params": 2,
-          "short_desc": "Copies data from the source string to the file up to but not including the null character",
-          "class": "File",
-          "member": "WriteString",
-          "attrs": {
-            "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "File",
-              "source": "var_any"
-            },
-            {
-              "name": "format",
-              "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "nValues",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "values",
-              "type": "arguments",
-              "source": "var_any"
-            }
-          ],
-          "id": "0ADA",
-          "name": "SCAN_FILE",
-          "num_params": 4,
-          "short_desc": "Extracts data from a file using fscanf",
-          "class": "File",
-          "member": "Scan",
-          "attrs": {
-            "is_condition": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "dirPath",
-              "type": "string"
-            }
-          ],
-          "id": "0AE4",
-          "name": "DOES_DIRECTORY_EXIST",
-          "num_params": 1,
-          "short_desc": "Returns true if a directory at the given path exists",
-          "class": "Fs",
-          "member": "DoesDirectoryExist",
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "dirName",
-              "type": "string"
-            }
-          ],
-          "id": "0AE5",
-          "name": "CREATE_DIRECTORY",
-          "num_params": 1,
-          "short_desc": "Creates a directory at the given path",
-          "class": "Fs",
-          "member": "CreateDirectory",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
-          }
-        },
         {
           "input": [
             {

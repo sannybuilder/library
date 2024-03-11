@@ -65,7 +65,7 @@ function makeLine(command: Command) {
         line += ` [${param.type}]`;
       } else {
         if (param.name) {
-          line += ` ${param.name} [${param.type}]`;
+          line += ` {${param.name}} [${param.type}]`;
         } else {
           line += ` [${param.type}]`;
         }
@@ -76,7 +76,7 @@ function makeLine(command: Command) {
   if (output.length) {
     for (let param of output) {
       if (param.name) {
-        line += ` ${param.name} ${braceify(
+        line += ` {${param.name}} ${braceify(
           stringifyTypeAndSource(param),
           '[]'
         )}`;

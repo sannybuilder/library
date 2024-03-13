@@ -198,7 +198,7 @@ export function doesCommandHaveInvalidConditionalOperator(command: Command) {
   return validConditionalOperators.includes(command.operator);
 }
 
-function isVar(source: SourceType | undefined) {
+export function isVarSource(source: SourceType | undefined) {
   return (
     source === SourceType.var_any ||
     source === SourceType.var_global ||
@@ -229,12 +229,12 @@ export function doesCommandHaveInvalidArgumentWithOperator(command: Command) {
     if (output.length > 0 || input.length < 2) {
       return true;
     }
-    return !isVar(input[0]?.source) && !isVar(input[1]?.source);
+    return !isVarSource(input[0]?.source) && !isVarSource(input[1]?.source);
   }
 
   // the first output or input argument should be a variable of any type
   let source = output[0]?.source ?? input[0]?.source;
-  if (!isVar(source)) {
+  if (!isVarSource(source)) {
     return true;
   }
 
@@ -248,9 +248,9 @@ export function doesSelfArgumentHaveInvalidType(command: Command) {
 }
 
 export function doesOutputHaveInvalidSource(command: Command) {
-  return outputParams(command).some((p) => !isVar(p.source));
+  return outputParams(command).some((p) => !isVarSource(p.source));
 }
 
 export function doesInputHaveInvalidSource(command: Command) {
-  return inputParams(command).some((p) => isVar(p.source) && !command.operator);
+  return inputParams(command).some((p) => isVarSource(p.source) && !command.operator);
 }

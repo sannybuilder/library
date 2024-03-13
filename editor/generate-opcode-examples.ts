@@ -5,6 +5,7 @@ import { opcodify } from './src/app/pipes/opcodify';
 import {
   inputParams,
   isSupported,
+  isVarSource,
   outputParams,
   stringifyCommandWithOperator,
 } from './src/app/utils';
@@ -57,7 +58,9 @@ function makeLine(command: Command) {
 
   line += command.name.toLowerCase();
 
-  for (let param of inputParams(command)) {
+  const input = inputParams(command);
+
+  for (let param of input) {
     if (param.type === 'label') {
       line += ` @label`;
     } else {
@@ -65,7 +68,7 @@ function makeLine(command: Command) {
         line += ` [${param.type}]`;
       } else {
         if (param.name) {
-          line += ` {${param.name}} [${param.type}]`;
+          line += ` ${getParamName(param)} [${param.type}]`;
         } else {
           line += ` [${param.type}]`;
         }
@@ -76,7 +79,7 @@ function makeLine(command: Command) {
   if (output.length) {
     for (let param of output) {
       if (param.name) {
-        line += ` {${param.name}} ${braceify(
+        line += ` ${getParamName(param)} ${braceify(
           stringifyTypeAndSource(param),
           '[]'
         )}`;
@@ -86,4 +89,11 @@ function makeLine(command: Command) {
     }
   }
   return line;
+}
+
+function getParamName(param: Param) {
+  if (isVarSource(param.source)) {
+    return `{var_${param.name}}`;
+  }
+  return `{${param.name}}`;
 }

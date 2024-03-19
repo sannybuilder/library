@@ -2505,3 +2505,9 @@ export const AudioStreamType = {
   "Sfx": 1,
   "Music": 2
 };
+export const DriveMode = {
+  "Normal": 0,
+  "Accurate": 1,
+  "Straightline": 2,
+  "Racing": 3
+};

@@ -2500,3 +2500,8 @@ export const AudioStreamState = {
   "Playing": 1,
   "Paused": 2
 };
+export const AudioStreamType = {
+  "None": 0,
+  "Sfx": 1,
+  "Music": 2
+};

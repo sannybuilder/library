@@ -1,10 +1,51 @@
 {
   "meta": {
-    "last_update": 1700767206171,
-    "version": "0.230",
+    "last_update": 1711016767092,
+    "version": "0.231",
     "url": "https://library.sannybuilder.com/#/unknown_x64"
   },
   "extensions": [
+    {
+      "name": "CLEO",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C07",
+          "name": "READ_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Read",
+          "short_desc": "Reads a value of the given size from the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true)",
+          "attrs": {
+            "is_static": true
+          }
+        }
+      ]
+    },
     {
       "name": "dylib",
       "commands": [
@@ -2196,6 +2237,38 @@
     {
       "name": "memops",
       "commands": [
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "vp",
+              "type": "bool"
+            },
+            {
+              "name": "ib",
+              "type": "bool"
+            }
+          ],
+          "name": "WRITE_MEMORY",
+          "num_params": 5,
+          "class": "Memory",
+          "member": "Write",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Writes a value of the given size at the absolute memory address (ib is false) or an offset relative to the image base (ib is true), optionally using VirtualProtect (vp is true) to modify read-only code"
+        },
         {
           "output": [
             {

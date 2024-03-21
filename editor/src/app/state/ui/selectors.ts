@@ -1,6 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { flatMap, sortBy } from 'lodash';
-import { isPlatformMatching, isVersionMatching, search } from '../../utils';
+import {
+  isPlatformMatching,
+  isVersionMatching,
+  search,
+  abbrSearch,
+} from '../../utils';
 import { Attribute, Command, Game, Platform, Version } from '../../models';
 import { extensions } from '../extensions/selectors';
 import { game } from '../game/selectors';
@@ -155,6 +160,13 @@ export const rows = createSelector(
           selectedPlatforms,
           selectedVersions
         );
+        const abbrFound = abbrSearch(filtered, searchTerm);
+        if (abbrFound.length > 0) {
+          return abbrFound.map((command) => ({
+            extension,
+            command,
+          }));
+        }
         return search(filtered, searchTerm).map((command) => ({
           extension,
           command,

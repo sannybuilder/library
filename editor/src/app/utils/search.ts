@@ -75,6 +75,28 @@ function getQueryHandlers() {
   return entries.concat(inverted);
 }
 
+export function abbrSearch(list: Command[], searchTerms: string) {
+  let query = searchTerms.trim();
+
+  if (!query || query.length < 2 || query.includes(':')) {
+    return [];
+  }
+
+  // abbreviation search
+  const candidates = list.filter((c) => {
+    const parts = c.name.split('_');
+    return (
+      query.toLowerCase() ===
+      parts
+        .map((x) => x[0])
+        .join('')
+        .toLowerCase()
+    );
+  });
+
+  return candidates;
+}
+
 export function search(list: Command[], searchTerms: string) {
   let query = searchTerms.trim();
 

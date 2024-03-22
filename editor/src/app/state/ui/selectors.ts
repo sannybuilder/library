@@ -149,30 +149,40 @@ export const rows = createSelector(
         selectedExtensions?.includes(name)
     );
 
-    return (
-      selected &&
-      flatMap(selected, ({ name: extension, commands }) => {
-        const filtered = filterCommands(
-          commands,
-          selectedAttributesOnly,
-          selectedAttributesExcept,
-          selectedClasses,
-          selectedPlatforms,
-          selectedVersions
-        );
-        const abbrFound = abbrSearch(filtered, searchTerm);
-        if (abbrFound.length > 0) {
-          return abbrFound.map((command) => ({
-            extension,
-            command,
-          }));
-        }
-        return search(filtered, searchTerm).map((command) => ({
+    if (!selected) {
+      return [];
+    }
+
+    const result = flatMap(selected, ({ name: extension, commands }) => {
+      const filtered = filterCommands(
+        commands,
+        selectedAttributesOnly,
+        selectedAttributesExcept,
+        selectedClasses,
+        selectedPlatforms,
+        selectedVersions
+      );
+      const abbrFound = abbrSearch(filtered, searchTerm);
+      if (abbrFound.length > 0) {
+        return abbrFound.map((command) => ({
           extension,
           command,
+          _abbrMatch: true,
         }));
-      })
-    );
+      }
+
+      return search(filtered, searchTerm).map((command) => ({
+        extension,
+        command,
+        _abbrMatch: false,
+      }));
+    });
+
+    if (result.find((row) => row._abbrMatch)) {
+      return result.filter((row) => row._abbrMatch);
+    }
+
+    return result;
   }
 );
 

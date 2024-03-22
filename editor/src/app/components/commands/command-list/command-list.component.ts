@@ -27,7 +27,7 @@ export class CommandListComponent {
   loadingError$ = this._extensions.loadingError$;
   currentPage$ = this._ui.currentPage$;
   rows$ = this._ui.rows$;
-  rowsCount$ = this.rows$.pipe(map((rows) => rows?.length ?? 0));
+  rowsCount$ = this.rows$.pipe(map((rows) => rows.length));
 
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
 

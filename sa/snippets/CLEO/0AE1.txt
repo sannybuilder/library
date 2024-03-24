@@ -1,10 +1,24 @@
-float x,y,z, radius=15.0
+float x,y,z
 Char ped
+
 while true
-    wait 2000
-    get_active_camera_coordinates store_to x y z
-    if get_random_char_in_sphere_no_save_recursive x y z radius findNext True skipDead True store_to handle ped
-    then 
-      explode_char_head ped
+    wait 0
+    
+    if
+        test_cheat "1"
+    then
+        get_active_camera_coordinates {store_to} x y z
+        
+        if
+            get_random_char_in_sphere_no_save_recursive {pos} x y z {radius} 30.0 {find_next} false {skip_dead} true {store_to} ped
+        then
+            explode_char_head ped // the first one
+            
+            while get_random_char_in_sphere_no_save_recursive {pos} x y z {radius} 30.0 {find_next} true {skip_dead} true {store_to} ped
+                explode_char_head ped
+            end
+        else
+            print_formatted_now "First not found" {time} 4000
+        end
     end
 end

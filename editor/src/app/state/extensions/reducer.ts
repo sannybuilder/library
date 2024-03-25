@@ -40,6 +40,9 @@ export const initialState: ExtensionsState = {
   games: {},
 };
 
+const sortExtensions = (extensions: Extension[]) =>
+  orderBy(extensions, (e) => (e.name === DEFAULT_EXTENSION ? -1 : 1));
+
 export const extensionsReducer = createReducer(
   initialState,
   on(loadExtensions, (state, { game }) =>
@@ -52,9 +55,7 @@ export const extensionsReducer = createReducer(
     loadExtensionsSuccess,
     (state, { game, extensions, version, lastUpdate, classes }) => {
       return updateState(state, game, {
-        extensions: orderBy(extensions, (e) =>
-          e.name === DEFAULT_EXTENSION ? -1 : 1
-        ),
+        extensions: sortExtensions(extensions),
         lastUpdate,
         version,
         entities: getEntities(extensions, classes),
@@ -139,7 +140,7 @@ export const extensionsReducer = createReducer(
 
     const entities = getEntities(extensions, state.games[game]?.classesMeta);
     return updateState(state, game, {
-      extensions,
+      extensions: sortExtensions(extensions),
       entities,
       commandsToDelete: [],
     });

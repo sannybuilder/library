@@ -251,5 +251,8 @@
     "2401": "int ptr = get_this_script_struct\n\nint baseIp = read_memory_with_offset ptr {offset} 0x10 {size} 4 // get CRunningScript::BaseIP\nshortString name = read_memory_with_offset ptr {offset} 0x08 {size} 4 // get CRunningScript::Name",
     "2402": "get_vehicle_pointer 0@ {result} 5@\nwrite_memory_with_offset {address} 5@ {offset} 0x434 {size} 1 {value} 126 // set CVehicle::m_nPrimaryColor",
     "2404": "stream_custom_script \".\\other_script.s\"\nget_script_struct_just_created 11@\n\n// wait for script to finish\nwhile is_script_running 11@\n    wait 0\nend"
+  },
+  "text": {
+    "2605": "while true\n   wait 0 // draw each frame\n   use_text_commands {state} true\n   display_text_formated {offset_left} 50.0 {offset_top} 200.0 {format} \"Timer: %d\" {args} TIMERA\nend"
   }
 }

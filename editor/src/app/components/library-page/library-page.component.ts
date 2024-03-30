@@ -66,6 +66,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   extensionTypes$ = this._extensions.extensionTypes$;
   displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
+  extensionToCreateCommands$ = this._ui.selectedExtensions$.pipe(
+    map((selectedExtensions) => {
+      if (selectedExtensions?.length === 1) {
+        return selectedExtensions[0];
+      }
+      return DEFAULT_EXTENSION;
+    })
+  );
   entities$: Observable<Array<{ origin: string; name: string }>> =
     this._extensions.extensionNames$.pipe(
       switchMap((extensions) =>

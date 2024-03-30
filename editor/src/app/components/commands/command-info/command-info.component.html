@@ -33,12 +33,7 @@
         {{ "ui.commandList.nop" | translate }}
       </div>
 
-      <ng-container *ngIf="command.attrs?.is_keyword">
-        <code
-          >{{ command.name | lowercase }}
-          <span [innerHTML]="command | keywordParams | sanitize"></span
-        ></code>
-      </ng-container>
+      <ng-container *ngIf="command.attrs?.is_keyword"> </ng-container>
 
       <ng-container *ngIf="command.class && command.member">
         <ng-container *ngIf="command.attrs?.is_constructor">
@@ -66,6 +61,18 @@
           ></code>
         </ng-container>
       </ng-container>
+
+      <ng-container
+        *ngIf="
+          isSupported(command) &&
+          !command.class &&
+          !command.member &&
+          !command.operator
+        "
+        ><code
+          >{{ command.name | lowercase }}
+          <span [innerHTML]="command | keywordParams | sanitize"></span></code
+      ></ng-container>
 
       <ng-container *ngIf="displayOpcodePresentation && command.id">
         <code

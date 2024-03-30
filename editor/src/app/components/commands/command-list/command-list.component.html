@@ -104,15 +104,6 @@
                   "ui.commandList.nop" | translate
                 }}</ng-container>
 
-                <ng-container *ngIf="row.command.attrs?.is_keyword">
-                  <code
-                    >{{ row.command.name | lowercase }}
-                    <span
-                      [innerHTML]="row.command | keywordParams | sanitize"
-                    ></span
-                  ></code>
-                </ng-container>
-
                 <ng-container *ngIf="row.command.class && row.command.member">
                   <ng-container *ngIf="row.command.attrs?.is_constructor">
                     <code>
@@ -170,11 +161,27 @@
                   <pre
                     class="sample mt-3"
                     [innerHTML]="
-                    row.command
+                      row.command
                         | expressify
                         | codify : row.command : game : false : []
                     "
                   ></pre>
+                </ng-container>
+
+                <ng-container
+                  *ngIf="
+                    isSupported(row.command) &&
+                    !row.command.class &&
+                    !row.command.member &&
+                    !row.command.operator
+                  "
+                >
+                  <code
+                    >{{ row.command.name | lowercase }}
+                    <span
+                      [innerHTML]="row.command | keywordParams | sanitize"
+                    ></span
+                  ></code>
                 </ng-container>
               </div>
             </div>

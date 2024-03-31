@@ -2647,3 +2647,34 @@ export const ShadowTextures = {
   "Rcbaron": 8,
   "Lamp": 9
 };
+export const TrafficLightColors = {
+  "Green": 0,
+  "Yellow": 1,
+  "Red": 2
+};
+export const PositionTypes = {
+  "Local": 0,
+  "Global": 1,
+  "World": 2
+};
+export const ProjectileTypes = {
+  "Grenade": 0,
+  "Teargas": 1,
+  "Molotov": 2,
+  "Rocket": 3,
+  "RocketHs": 4,
+  "FreefallBomb": 5,
+  "RocketFlare": 6
+};
+export const CarColors = {
+  "Default": 0,
+  "Primary": 1,
+  "Secondary": 2,
+  "Tertiary": 3,
+  "Quaternary": 4,
+  "AllColors": 5
+};
+export const ParamTypes = {
+  "Int": 0,
+  "Float": 1
+};

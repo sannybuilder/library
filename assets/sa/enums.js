@@ -2568,9 +2568,82 @@ export const VehicleDoors = {
   "Lf": 2,
   "Lr": 3
 };
-export const LightTypes = {
+export const EntityTypes = {
+  "Nothing": 0,
+  "Building": 1,
+  "Vehicle": 2,
+  "Ped": 3,
+  "Object": 4,
+  "Dummy": 5,
+  "Notinpools": 6
+};
+export const EntityClasses = {
+  "Entity": 0,
+  "Building": 1,
+  "Treadable": 2,
+  "Dummy": 3,
+  "Dummy86C198": 4,
+  "Physical": 5,
+  "Object": 6,
+  "Hand": 7,
+  "Projectile": 8,
+  "CutsceneObject": 9,
+  "Ped": 10,
+  "CivilianPed": 11,
+  "CopPed": 12,
+  "EmergencyPed": 13,
+  "PlayerPed": 14,
+  "Vehicle": 15,
+  "Automobile": 16,
+  "Heli": 17,
+  "Mtruck": 18,
+  "Plane": 19,
+  "Quad": 20,
+  "Trailer": 21,
+  "Bike": 22,
+  "Bmx": 23,
+  "Boat": 24,
+  "Train": 25
+};
+export const VehicleClasses = {
+  "Automobile": 0,
+  "Mtruck": 1,
+  "Quad": 2,
+  "Heli": 3,
+  "Plane": 4,
+  "Boat": 5,
+  "Train": 6,
+  "Fheli": 7,
+  "Fplane": 8,
+  "Bike": 9,
+  "Bmx": 10,
+  "Trailer": 11
+};
+export const LightTypesCar = {
   "HeadLightLeft": 0,
   "HeadLightRight": 1,
   "RearLightRight": 2,
   "RearLightLeft": 3
+};
+export const LightTypes = {
+  "Default": 0,
+  "Directional": 1,
+  "Dark": 2,
+  "Global": 3
+};
+export const ShadowTypes = {
+  "Shadow": 0,
+  "Light": 1
+};
+export const ShadowTextures = {
+  "Car": 0,
+  "Ped": 1,
+  "Explosion": 2,
+  "Heli": 3,
+  "Headlight": 4,
+  "Bloodpool": 5,
+  "Headlight1": 6,
+  "Bike": 7,
+  "Rcbaron": 8,
+  "Lamp": 9
 };

@@ -2524,3 +2524,53 @@ export const DriveMode = {
   "Straightline": 2,
   "Racing": 3
 };
+export const ComponentStates = {
+  "Disable": 0,
+  "Ok": 1,
+  "Dam": 2
+};
+export const PrimitiveTypes = {
+  "Naprimtype": 0,
+  "Linelist": 1,
+  "Polyline": 2,
+  "Trilist": 3,
+  "Tristrip": 4,
+  "Trifan": 5,
+  "Pointlist": 6
+};
+export const ShapePriority = {
+  "UnderHud": 0,
+  "OverRadar": 1,
+  "OverHud": 2
+};
+export const BlendValues = {
+  "Zero": 0,
+  "One": 1,
+  "Srccolor": 2,
+  "Invsrccolor": 3,
+  "Srcalpha": 4,
+  "Invsrcalpha": 5,
+  "Destalpha": 6,
+  "Invdestalpha": 7,
+  "Destcolor": 8,
+  "Invdestcolor": 9,
+  "Srcalphasat": 10,
+  "Bothsrcalpha": 11,
+  "Bothinvsrcalpha": 12,
+  "Blendfactor": 13,
+  "Invblendfactor": 14,
+  "Srccolor2": 15,
+  "Invsrccolor2": 16
+};
+export const VehicleDoors = {
+  "Rf": 0,
+  "Rr": 1,
+  "Lf": 2,
+  "Lr": 3
+};
+export const LightTypes = {
+  "HeadLightLeft": 0,
+  "HeadLightRight": 1,
+  "RearLightRight": 2,
+  "RearLightLeft": 3
+};

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1712206094584,
-    "version": "0.657",
+    "last_update": 1712208637625,
+    "version": "0.658",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59449,9 +59449,12 @@
           "name": "LOAD_TEXTURE_FROM_BMP_FILE",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Loads texture from BMP file. Can be used with texture memory option to load file from memory"
+          "short_desc": "Loads texture from BMP file. Can be used with texture memory option to load file from memory",
+          "class": "Texture",
+          "member": "LoadFromBmpFile"
         },
         {
           "input": [
@@ -59471,9 +59474,12 @@
           "name": "LOAD_TEXTURE_FROM_PNG_FILE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Loads texture from PNG file. Can be used with texturememory option to load file from memory"
+          "short_desc": "Loads texture from PNG file. Can be used with texturememory option to load file from memory",
+          "class": "Texture",
+          "member": "LoadFromPngFile"
         },
         {
           "input": [
@@ -59851,19 +59857,27 @@
           "id": "0D7C",
           "name": "LOAD_TEXTURE_FROM_DDS_FILE",
           "num_params": 2,
-          "short_desc": "Lods texture from DDS file"
+          "short_desc": "Loads texture from DDS file",
+          "class": "Texture",
+          "member": "LoadFromDdsFile",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "texture",
-              "type": "any"
+              "name": "self",
+              "type": "Texture"
             }
           ],
           "id": "0D7D",
           "name": "CLEAN_LOADED_TEXTURE",
           "num_params": 1,
-          "short_desc": "Cleans loaded texture"
+          "short_desc": "Cleans loaded texture",
+          "class": "Texture",
+          "member": "CleanLoaded"
         },
         {
           "input": [

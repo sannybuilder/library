@@ -58,7 +58,7 @@ export const extensionsReducer = createReducer(
         extensions: sortExtensions(extensions),
         lastUpdate,
         version,
-        entities: getEntities(extensions, classes),
+        entities: getEntities(extensions, classes, game),
         loading: false,
         loadingError: false,
         classesMeta: classes,
@@ -138,7 +138,7 @@ export const extensionsReducer = createReducer(
       state.games[game]?.extensions ?? []
     );
 
-    const entities = getEntities(extensions, state.games[game]?.classesMeta);
+    const entities = getEntities(extensions, state.games[game]?.classesMeta, game);
     return updateState(state, game, {
       extensions: sortExtensions(extensions),
       entities,

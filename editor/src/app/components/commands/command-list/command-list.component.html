@@ -105,7 +105,7 @@
                 }}</ng-container>
 
                 <ng-container *ngIf="row.command.class && row.command.member">
-                  <ng-container *ngIf="row.command.attrs?.is_constructor">
+                  <ng-container *ngIf="row.command.output?.length">
                     <code>
                       <span
                         [innerHTML]="row.command | outputParams | sanitize"
@@ -131,7 +131,7 @@
                     ></code>
                   </ng-container>
 
-                  <ng-container *ngIf="!row.command.attrs?.is_constructor">
+                  <ng-container *ngIf="!row.command.output?.length">
                     <code>
                       <a
                         class="identifier"

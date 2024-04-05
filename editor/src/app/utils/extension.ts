@@ -5,11 +5,14 @@ import {
   Entity,
   DEFAULT_EXTENSION,
   Command,
+  Game,
 } from '../models';
+import { primitiveTypes } from '../state/game/reducer';
 
 export function getEntities(
   extensions: Extension[],
-  classesMeta: ClassMeta[] | undefined
+  classesMeta: ClassMeta[] | undefined,
+  game: Game
 ): Record<string, Entity[]> {
   const defaultEntities =
     extensions
@@ -24,13 +27,15 @@ export function getEntities(
         return m;
       }, new Set<string>()) ?? new Set();
 
+  const primitives: string[] = primitiveTypes(game);
+
   return extensions.reduce((m, e) => {
     const dynamicClasses = new Set<string>();
     const staticClasses = new Set<string>();
     for (const command of e.commands) {
       if (command.attrs?.is_constructor) {
         const name = last(command.output)?.type;
-        if (name) {
+        if (name && !primitives.includes(name)) {
           dynamicClasses.add(name);
         }
       } else if (command.class) {

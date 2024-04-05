@@ -11,6 +11,6 @@ export class OutputParamsPipe implements PipeTransform {
     if (!command.num_params) {
       return '';
     }
-    return braceify(stringify(outputParams(command), ' '), '[]');
+    return braceify(stringify(outputParams(command), ', '), '[]');
   }
 }

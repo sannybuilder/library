@@ -51,46 +51,32 @@
     &nbsp;//
     <span
       (click)="interceptDescriptionClick($event)"
-      [innerHTML]="command | linkify: game:gameExtensions | sanitize"
+      [innerHTML]="command | linkify : game : gameExtensions | sanitize"
     ></span>
     <br />
   </span>
   &nbsp;<code *ngIf="command.class && command.member">
     <ng-container *ngIf="command.attrs?.is_constructor"
       >constructor
-      <a
-        class="identifier"
-        [routerLink]="['/', game, extension, command.id || command.name]"
-        [queryParams]="getQueryParamsForCommand(command, game)"
-        [title]="command.short_desc || 'ui.shared.noDescription' | translate"
-        >{{ command.member }}</a
-      ><span [innerHTML]="command | inputParams | sanitize"></span>:
-      {{ command.output[command.output.length - 1].type }}
     </ng-container>
     <ng-container *ngIf="command.attrs?.is_destructor"
       >destructor
-      <a
-        class="identifier"
-        [routerLink]="['/', game, extension, command.id || command.name]"
-        [queryParams]="getQueryParamsForCommand(command, game)"
-        [title]="command.short_desc || 'ui.shared.noDescription' | translate"
-        >{{ command.member }}</a
-      ><span [innerHTML]="command | inputParams | sanitize"></span>
     </ng-container>
-
     <ng-container
-      *ngIf="!command.attrs?.is_constructor && !command.attrs?.is_destructor"
-    >
-      <ng-container *ngIf="command.attrs?.is_static">static </ng-container
-      ><a
-        class="identifier"
-        [routerLink]="['/', game, extension, command.id || command.name]"
-        [queryParams]="getQueryParamsForCommand(command, game)"
-        [ngClass]="{ strike: !isSupported(command) }"
-        [title]="command.short_desc || 'ui.shared.noDescription' | translate"
-        >{{ command.member }}</a
-      ><span [innerHTML]="command | classParams | sanitize"></span
-    ></ng-container> </code
+      *ngIf="
+        !command.attrs?.is_constructor &&
+        !command.attrs?.is_destructor &&
+        command.attrs?.is_static
+      "
+      >static </ng-container
+    ><a
+      class="identifier"
+      [routerLink]="['/', game, extension, command.id || command.name]"
+      [queryParams]="getQueryParamsForCommand(command, game)"
+      [ngClass]="{ strike: !isSupported(command) }"
+      [title]="command.short_desc || 'ui.shared.noDescription' | translate"
+      >{{ command.member }}</a
+    ><span [innerHTML]="command | classParams | sanitize"></span> </code
   ><span
     *ngIf="
       extension !== DEFAULT_EXTENSION &&
@@ -102,7 +88,7 @@
     <span
       [innerHTML]="
         'ui.classOverview.onlyWithExtensionInline'
-          | translate: { extension: extension, game: game }
+          | translate : { extension: extension, game: game }
       "
     ></span>
   </span>

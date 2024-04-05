@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Command, PrimitiveType } from '../models';
-import { commandParams } from '../utils';
+import { Command } from '../models';
+import { inputParams, outputParams } from '../utils';
 import { braceify, stringify } from './params';
 
 @Pipe({
@@ -9,13 +9,27 @@ import { braceify, stringify } from './params';
 export class ClassParamsPipe implements PipeTransform {
   transform(command: Command): string {
     let params = '()';
-    if (command.num_params) {
-      params = braceify(stringify(commandParams(command), ', '), '()');
+    if (command.input?.length) {
+      params = braceify(stringify(inputParams(command), ', '), '()');
+    }
+
+    if (command.output?.length) {
+      params = params + ': ';
+      if (command.attrs?.is_condition) {
+        params += 'optional ';
+      }
+      return (
+        params +
+        outputParams(command)
+          .map((p) => p.type)
+          .join(', ')
+      );
     }
 
     if (command.attrs?.is_condition) {
-      return `${params}: ${PrimitiveType.boolean}`;
+      return `${params}: logical`;
     }
+
     return params;
   }
 }

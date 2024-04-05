@@ -30,7 +30,7 @@ const translations = JSON.parse(translationFile);
 const { extensions, classes } = loadExtensions(
   join('..', GameLibrary[game as Game])
 );
-const entities = getEntities(extensions, classes);
+const entities = getEntities(extensions, classes, game as Game);
 const entityNames = uniqBy(
   orderBy(flatten(Object.values(entities)), ['type', 'name']),
   'name'

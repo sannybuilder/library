@@ -18,6 +18,7 @@ import {
   SupportInfo,
   Version,
 } from '../../../models';
+import { stringifySource } from '../../../pipes/params';
 
 @Component({
   selector: 'scl-command-info',
@@ -100,6 +101,10 @@ export class CommandInfoComponent {
   }
 
   isSupported(command: Command) {
-    return isSupported(command.attrs)
+    return isSupported(command.attrs);
+  }
+
+  stringifySource(param: Param) {
+    return stringifySource(param.source);
   }
 }

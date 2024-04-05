@@ -20,7 +20,7 @@ export const gameReducer = createReducer(
   }))
 );
 
-function primitiveTypes(game: Game): PrimitiveType[] {
+export function primitiveTypes(game: Game): PrimitiveType[] {
   const types = [
     PrimitiveType.any,
     PrimitiveType.arguments,

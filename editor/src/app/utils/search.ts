@@ -25,10 +25,12 @@ export const FUSEJS_OPTIONS = {
 
 type QueryFilter = (c: Command, query: string) => boolean;
 
-const match = (a: string, b?: string) => !a || b?.toLowerCase() === a;
+const match = (a: string, b?: string) => !a || b?.toLowerCase() === a.toLowerCase();
 
-const ConstructorHandler: QueryFilter = (c, q) => {
-  return Boolean(c.attrs?.is_constructor && match(q, c.output?.[0]?.type));
+export const ConstructorHandler: QueryFilter = (c, q) => {
+  return Boolean(
+    c.attrs?.is_constructor && c.output?.some((o) => match(q, o.type))
+  );
 };
 
 const DestructorHandler: QueryFilter = (c, q) => {

@@ -5,7 +5,11 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { getQueryParamsForCommand, isSupported } from '../../../utils';
+import {
+  ConstructorHandler,
+  getQueryParamsForCommand,
+  isSupported,
+} from '../../../utils';
 import {
   ClassMeta,
   Command,
@@ -24,14 +28,33 @@ type ClassCommand = { command: Command; extension: string };
 })
 export class ClassOverviewComponent {
   private _classCommands: ClassCommand[];
+  private _gameExtensions: Extension[] = [];
+  private _className: Game;
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   filterQuery = '';
   commandsHaveSameOrigin = true;
+  externalConstructors: Record<
+    string,
+    Array<{ command: Command; extension: string }>
+  > = {};
 
-  @Input() gameExtensions: Extension[];
+  @Input() set gameExtensions(val: Extension[]) {
+    this._gameExtensions = val;
+    this.externalConstructors = this.findExternalConstructors();
+  }
+  get gameExtensions() {
+    return this._gameExtensions;
+  }
+
   @Input() displayInlineDescription: boolean;
   @Input() game: Game;
-  @Input() className: string;
+  @Input() set className(val: Game) {
+    this._className = val;
+    this.externalConstructors = this.findExternalConstructors();
+  }
+  get className() {
+    return this._className;
+  }
   @Input() classOrigin: string;
   @Input() meta?: ClassMeta;
   @Input() set classCommands(val: ClassCommand[]) {
@@ -69,5 +92,29 @@ export class ClassOverviewComponent {
 
   isSupported(command: Command) {
     return isSupported(command.attrs);
+  }
+
+  findExternalConstructors() {
+    if (!this.className || !this.gameExtensions.length) {
+      return {};
+    }
+    return this.gameExtensions.reduce((m, v) => {
+      const cs = v.commands.filter(
+        (c) =>
+          c.class &&
+          c.class !== this.className &&
+          ConstructorHandler(c, this.className)
+      );
+
+      for (const c of cs) {
+        m[c.class!] ??= [];
+        m[c.class!].push({
+          command: c,
+          extension: v.name,
+        });
+      }
+
+      return m;
+    }, {} as Record<string, Array<{ command: Command; extension: string }>>);
   }
 }

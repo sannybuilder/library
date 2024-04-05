@@ -7,7 +7,7 @@ import {
   Command,
   Game,
 } from '../models';
-import { primitiveTypes } from '../state/game/reducer';
+import { primitiveTypes } from './command';
 
 export function getEntities(
   extensions: Extension[],

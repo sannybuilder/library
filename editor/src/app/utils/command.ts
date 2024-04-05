@@ -234,6 +234,33 @@ export function matchArrays<T>(
   return difference(arr1, arr2).length === 0;
 }
 
+export function primitiveTypes(game: Game): PrimitiveType[] {
+  const types = [
+    PrimitiveType.any,
+    PrimitiveType.arguments,
+    PrimitiveType.boolean,
+    PrimitiveType.float,
+    PrimitiveType.int,
+    PrimitiveType.label,
+    PrimitiveType.string,
+    PrimitiveType.model_any,
+    PrimitiveType.model_char,
+    PrimitiveType.model_object,
+    PrimitiveType.model_vehicle,
+    PrimitiveType.gxt_key,
+    PrimitiveType.zone_key,
+  ];
+
+  if (game === Game.sa) {
+    types.push(PrimitiveType.string128, PrimitiveType.int_script_id);
+  }
+
+  if (game === Game.gta_iv) {
+    types.push(PrimitiveType.vector3);
+  }
+  return types.sort();
+}
+
 function isPrimitive(type: string) {
   return Object.values(PrimitiveType).includes(type as PrimitiveType);
 }

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1712209183291,
-    "version": "0.659",
+    "last_update": 1712322979010,
+    "version": "0.660",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -56973,11 +56973,11 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "component",
+              "name": "componentName",
               "type": "string"
             }
           ],
@@ -56994,23 +56994,25 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets world matrix of car component"
+          "short_desc": "Gets matrix of car component",
+          "class": "Car",
+          "member": "GetComponentMatrix"
         },
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "component",
+              "name": "name",
               "type": "string"
             }
           ],
           "output": [
             {
-              "name": "component",
-              "type": "any",
+              "name": "handle",
+              "type": "Component",
               "source": "var_any"
             }
           ],
@@ -57018,9 +57020,12 @@
           "name": "GET_CAR_COMPONENT",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true
           },
-          "short_desc": "Gets car component"
+          "short_desc": "Gets car component by name",
+          "class": "Car",
+          "member": "GetComponent"
         },
         {
           "input": [
@@ -57105,11 +57110,11 @@
         {
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "component",
+              "name": "componentName",
               "type": "string"
             },
             {
@@ -57123,7 +57128,9 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Sets alpha value for car's component model"
+          "short_desc": "Sets alpha value for car's component model",
+          "class": "Car",
+          "member": "SetComponentModelAlpha"
         },
         {
           "input": [
@@ -57373,7 +57380,7 @@
           "output": [
             {
               "name": "child",
-              "type": "any",
+              "type": "Component",
               "source": "var_any"
             }
           ],
@@ -57394,7 +57401,7 @@
           "output": [
             {
               "name": "nextComponent",
-              "type": "any",
+              "type": "Component",
               "source": "var_any"
             }
           ],
@@ -59672,27 +59679,29 @@
         {
           "input": [
             {
-              "name": "component",
-              "type": "any"
+              "name": "self",
+              "type": "Component"
             }
           ],
           "output": [
             {
               "name": "parentComponent",
-              "type": "any",
+              "type": "Component",
               "source": "var_any"
             }
           ],
           "id": "0D74",
           "name": "GET_COMPONENT_PARENT_COMPONENT",
           "num_params": 2,
-          "short_desc": "Gets component parent component"
+          "short_desc": "Gets component parent component",
+          "class": "Component",
+          "member": "GetParentComponent"
         },
         {
           "input": [
             {
-              "name": "component",
-              "type": "any"
+              "name": "self",
+              "type": "Component"
             }
           ],
           "output": [
@@ -59705,7 +59714,9 @@
           "id": "0D75",
           "name": "GET_COMPONENT_NUM_OBJECTS",
           "num_params": 2,
-          "short_desc": "Gets component number of objects"
+          "short_desc": "Gets component number of objects",
+          "class": "Component",
+          "member": "GetNumObjects"
         },
         {
           "input": [

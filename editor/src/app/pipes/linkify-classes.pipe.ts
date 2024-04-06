@@ -11,8 +11,9 @@ export class LinkifyClassesPipe implements PipeTransform {
     }
 
     classes.forEach((className) => {
+      // don't match if the class is inside an html tag
       text = text.replace(
-        new RegExp(`\\b${className}\\b`, 'i'),
+        new RegExp(`(\\b${className}\\b)(?!([^<]+)?>)`, 'i'),
         `<a href="#/${game}/classes/${className}">$&</a>`
       );
     });

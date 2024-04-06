@@ -78,6 +78,7 @@ Train
 Txd
 User3DMarker
 Weapon
+WeaponInfo
 Weather
 World
 Zone
@@ -830,7 +831,7 @@ GetCollisionSurface,0E8E,0,0,("self: Char" "surfaceType: SurfaceType")
 GetCoordinates,00A0,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetCoordinatesOfDied,0889,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetCurrentWeapon,0470,0,0,("self: Char" "weaponType: WeaponType")
-GetCurrentWeaponinfo,0E83,1,0,("self: Char" "weaponInfo%i")
+GetCurrentWeaponinfo,0E83,1,0,("self: Char" "handle: WeaponInfo")
 GetDamageLastFrame,0EB5,1,0,("self: Char" "entity: Char" "weaponType: WeaponType" "bodyPart: BodyPart" "intensity%f")
 GetExtendedVar,0E16,1,0,("self: Char" "identifier%s" "varNumber%i" "value: any")
 GetFear,0EFA,0,0,("self: Char" "fear%i")
@@ -3215,14 +3216,18 @@ $Weapon
 $BEGIN
 GetModel,0781,0,0,("weaponType: WeaponType" "modelId: model_object")
 GetSlot,0782,0,0,("weaponType: WeaponType" "slot%i")
-GetWeaponInfo,0E84,1,0,("weaponType: WeaponType" "weaponSkill: WeaponSkill" "weaponInfo%i")
-GetWeaponInfoAnimGroup,0E87,0,0,("weaponInfo%i" "animGroup: AnimGrp")
-GetWeaponInfoFlags,0E86,0,0,("weaponInfo%i" "flags%i")
-GetWeaponInfoModels,0E85,0,0,("weaponInfo%i" "model1: model_any" "model2: model_any")
-GetWeaponInfoSlot,0E8A,0,0,("weaponInfo%i" "weaponSlot: WeaponSlot")
-GetWeaponInfoTotalClip,0E88,0,0,("weaponInfo%i" "totalClip%i")
-GetWeaponinfoFireType,0E89,0,0,("weaponInfo%i" "fireType: WeaponFire")
+GetWeaponInfo,0E84,1,0,("weaponType: WeaponType" "weaponSkill: WeaponSkill" "handle: WeaponInfo")
 IsFireType,0E26,1,0,("weaponType: WeaponType" "weaponFire: WeaponFire")
+$END
+
+$WeaponInfo
+$BEGIN
+GetAnimgroup,0E87,0,0,("self: WeaponInfo" "animGroup: AnimGrp")
+GetFireType,0E89,0,0,("self: WeaponInfo" "fireType: WeaponFire")
+GetFlags,0E86,0,0,("self: WeaponInfo" "flags%i")
+GetModels,0E85,0,0,("self: WeaponInfo" "model1: model_any" "model2: model_any")
+GetSlot,0E8A,0,0,("self: WeaponInfo" "weaponSlot: WeaponSlot")
+GetTotalClip,0E88,0,0,("self: WeaponInfo" "totalClip%i")
 $END
 
 $Weather

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1712322979010,
-    "version": "0.660",
+    "last_update": 1712437927299,
+    "version": "0.661",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -52913,8 +52913,8 @@
           ],
           "output": [
             {
-              "name": "weaponInfo",
-              "type": "int",
+              "name": "handle",
+              "type": "WeaponInfo",
               "source": "var_any"
             }
           ],
@@ -52925,7 +52925,8 @@
           "member": "GetCurrentWeaponinfo",
           "short_desc": "Returns a pointer to the character's current weaponInfo struct",
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true
           }
         },
         {
@@ -52941,8 +52942,8 @@
           ],
           "output": [
             {
-              "name": "weaponInfo",
-              "type": "int",
+              "name": "handle",
+              "type": "WeaponInfo",
               "source": "var_any"
             }
           ],
@@ -52950,19 +52951,19 @@
           "name": "GET_WEAPONINFO",
           "num_params": 3,
           "class": "Weapon",
-          "short_desc": "Returns a pointer to the weaponInfo struct of the the specified weaponType and weaponSkill",
+          "short_desc": "Returns a pointer to the CWeaponInfo struct of the the specified weaponType and weaponSkill",
           "member": "GetWeaponInfo",
           "attrs": {
-            "is_static": true,
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true,
+            "is_static": true
           }
         },
         {
           "input": [
             {
-              "name": "weaponInfo",
-              "type": "int",
-              "source": "pointer"
+              "name": "self",
+              "type": "WeaponInfo"
             }
           ],
           "output": [
@@ -52980,19 +52981,15 @@
           "id": "0E85",
           "name": "GET_WEAPONINFO_MODELS",
           "num_params": 3,
-          "class": "Weapon",
+          "class": "WeaponInfo",
           "short_desc": "Returns the model1 and model2 of the current weaponInfo struct",
-          "member": "GetWeaponInfoModels",
-          "attrs": {
-            "is_static": true
-          }
+          "member": "GetModels"
         },
         {
           "input": [
             {
-              "name": "weaponInfo",
-              "type": "int",
-              "source": "pointer"
+              "name": "self",
+              "type": "WeaponInfo"
             }
           ],
           "output": [
@@ -53005,19 +53002,15 @@
           "id": "0E86",
           "name": "GET_WEAPONINFO_FLAGS",
           "num_params": 2,
-          "class": "Weapon",
+          "class": "WeaponInfo",
           "short_desc": "Returns the flags of the specified WeaponInfo struct",
-          "member": "GetWeaponInfoFlags",
-          "attrs": {
-            "is_static": true
-          }
+          "member": "GetFlags"
         },
         {
           "input": [
             {
-              "name": "weaponInfo",
-              "type": "int",
-              "source": "pointer"
+              "name": "self",
+              "type": "WeaponInfo"
             }
           ],
           "output": [
@@ -53030,19 +53023,15 @@
           "id": "0E87",
           "name": "GET_WEAPONINFO_ANIMGROUP",
           "num_params": 2,
-          "class": "Weapon",
+          "class": "WeaponInfo",
           "short_desc": "Returns the FireType of the current weaponInfo struct",
-          "member": "GetWeaponInfoAnimGroup",
-          "attrs": {
-            "is_static": true
-          }
+          "member": "GetAnimgroup"
         },
         {
           "input": [
             {
-              "name": "weaponInfo",
-              "type": "int",
-              "source": "pointer"
+              "name": "self",
+              "type": "WeaponInfo"
             }
           ],
           "output": [
@@ -53055,19 +53044,15 @@
           "id": "0E88",
           "name": "GET_WEAPONINFO_TOTAL_CLIP",
           "num_params": 2,
-          "class": "Weapon",
+          "class": "WeaponInfo",
           "short_desc": "Returns the totalClip size for the current weaponInfo struct",
-          "member": "GetWeaponInfoTotalClip",
-          "attrs": {
-            "is_static": true
-          }
+          "member": "GetTotalClip"
         },
         {
           "input": [
             {
-              "name": "weaponInfo",
-              "type": "int",
-              "source": "pointer"
+              "name": "self",
+              "type": "WeaponInfo"
             }
           ],
           "output": [
@@ -53080,19 +53065,15 @@
           "id": "0E89",
           "name": "GET_WEAPONINFO_FIRE_TYPE",
           "num_params": 2,
-          "class": "Weapon",
+          "class": "WeaponInfo",
           "short_desc": "Returns the FireType of the current weaponInfo struct",
-          "member": "GetWeaponinfoFireType",
-          "attrs": {
-            "is_static": true
-          }
+          "member": "GetFireType"
         },
         {
           "input": [
             {
-              "name": "weaponInfo",
-              "type": "int",
-              "source": "pointer"
+              "name": "self",
+              "type": "WeaponInfo"
             }
           ],
           "output": [
@@ -53105,12 +53086,9 @@
           "id": "0E8A",
           "name": "GET_WEAPONINFO_SLOT",
           "num_params": 2,
-          "class": "Weapon",
+          "class": "WeaponInfo",
           "short_desc": "Returns the weaponSlot of the current weaponInfo struct",
-          "member": "GetWeaponInfoSlot",
-          "attrs": {
-            "is_static": true
-          }
+          "member": "GetSlot"
         },
         {
           "input": [

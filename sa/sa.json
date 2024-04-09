@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1712618154452,
-    "version": "0.663",
+    "last_update": 1712695961575,
+    "version": "0.664",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -47154,7 +47154,7 @@
         {
           "input": [
             {
-              "name": "libraryFileName",
+              "name": "fileName",
               "type": "string"
             }
           ],
@@ -49603,7 +49603,7 @@
           ],
           "output": [
             {
-              "name": "address",
+              "name": "handle",
               "type": "ColPoint",
               "source": "var_any"
             },
@@ -49633,7 +49633,8 @@
           "num_params": 20,
           "attrs": {
             "is_condition": true,
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           },
           "class": "ColPoint",
           "member": "GetCollisionBetweenPoints",
@@ -55914,14 +55915,14 @@
         {
           "input": [
             {
-              "name": "library",
+              "name": "fileName",
               "type": "string"
             }
           ],
           "output": [
             {
-              "name": "address",
-              "type": "int",
+              "name": "handle",
+              "type": "DynamicLibrary",
               "source": "var_any"
             }
           ],
@@ -55933,7 +55934,8 @@
           "member": "GetLoadedLibrary",
           "attrs": {
             "is_condition": true,
-            "is_static": true
+            "is_static": true,
+            "is_constructor": true
           }
         },
         {
@@ -56639,30 +56641,36 @@
           "input": [
             {
               "name": "matrixA",
-              "type": "any"
+              "type": "Matrix"
             },
             {
               "name": "matrixB",
-              "type": "any"
+              "type": "Matrix"
             }
           ],
           "output": [
             {
-              "name": "matrix",
-              "type": "any",
+              "name": "handle",
+              "type": "Matrix",
               "source": "var_any"
             }
           ],
           "id": "0D00",
           "name": "MULTIPLY_MATRICES",
           "num_params": 3,
-          "short_desc": "Multiplies matricies"
+          "short_desc": "Multiplies matrices",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "class": "Matrix",
+          "member": "Multiply"
         },
         {
           "input": [
             {
-              "name": "matrix",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             },
             {
               "name": "axisX",
@@ -56688,13 +56696,15 @@
           "id": "0D01",
           "name": "ROTATE_MATRIX_ON_AXIS",
           "num_params": 6,
-          "short_desc": "Rotates matrix on axis"
+          "short_desc": "Rotates matrix on axis",
+          "class": "Matrix",
+          "member": "RotateOnAxis"
         },
         {
           "input": [
             {
-              "name": "matrix",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             }
           ],
           "output": [
@@ -56707,13 +56717,15 @@
           "id": "0D02",
           "name": "GET_MATRIX_X_ANGLE",
           "num_params": 2,
-          "short_desc": "Gets the X angle of matrix (in degrees)"
+          "short_desc": "Gets the X angle of matrix (in degrees)",
+          "class": "Matrix",
+          "member": "GetXAngle"
         },
         {
           "input": [
             {
-              "name": "matrix",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             }
           ],
           "output": [
@@ -56726,13 +56738,15 @@
           "id": "0D03",
           "name": "GET_MATRIX_Y_ANGLE",
           "num_params": 2,
-          "short_desc": "Gets the Y angle of matrix (in degrees)"
+          "short_desc": "Gets the Y angle of matrix (in degrees)",
+          "class": "Matrix",
+          "member": "GetYAngle"
         },
         {
           "input": [
             {
-              "name": "matrix",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             }
           ],
           "output": [
@@ -56745,13 +56759,15 @@
           "id": "0D04",
           "name": "GET_MATRIX_Z_ANGLE",
           "num_params": 2,
-          "short_desc": "Gets the Z angle of matrix (in degrees)"
+          "short_desc": "Gets the Z angle of matrix (in degrees)",
+          "class": "Matrix",
+          "member": "GetZAngle"
         },
         {
           "input": [
             {
-              "name": "matrix",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             },
             {
               "name": "x",
@@ -56769,13 +56785,15 @@
           "id": "0D05",
           "name": "SET_MATRIX_POSITION",
           "num_params": 4,
-          "short_desc": "Sets position for matrix"
+          "short_desc": "Sets position for matrix",
+          "class": "Matrix",
+          "member": "SetPosition"
         },
         {
           "input": [
             {
               "name": "matrix",
-              "type": "any"
+              "type": "Matrix"
             }
           ],
           "output": [
@@ -56816,7 +56834,7 @@
             },
             {
               "name": "matrix",
-              "type": "any"
+              "type": "Matrix"
             }
           ],
           "output": [
@@ -56837,15 +56855,18 @@
             }
           ],
           "id": "0D07",
-          "name": "GET_COORDS_OFFSETS_RELATIVELY_TO_MATRIX",
+          "name": "GET_COORDS_OFFSETS_RELATIVE_TO_MATRIX",
           "num_params": 7,
-          "short_desc": "Gets point relative offset on matrix"
+          "short_desc": "Gets point relative offset on matrix",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "matrix",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             },
             {
               "name": "x",
@@ -56863,29 +56884,33 @@
           "id": "0D08",
           "name": "SET_MATRIX_ROTATION",
           "num_params": 4,
-          "short_desc": "Sets matrix angles"
+          "short_desc": "Sets matrix angles",
+          "class": "Matrix",
+          "member": "Rotate"
         },
         {
           "input": [
             {
-              "name": "source",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             },
             {
               "name": "destination",
-              "type": "any"
+              "type": "Matrix"
             }
           ],
           "id": "0D09",
           "name": "COPY_MATRIX",
           "num_params": 2,
-          "short_desc": "Copies matrix to another matrix"
+          "short_desc": "Copies matrix to another matrix",
+          "class": "Matrix",
+          "member": "Copy"
         },
         {
           "input": [
             {
-              "name": "matrix",
-              "type": "any"
+              "name": "self",
+              "type": "Matrix"
             },
             {
               "name": "x",
@@ -56920,7 +56945,9 @@
           "id": "0D0A",
           "name": "GET_OFFSET_FROM_MATRIX_IN_WORLD_COORDS",
           "num_params": 7,
-          "short_desc": "Gets coords on offset from matrix"
+          "short_desc": "Gets coords on offset from matrix",
+          "class": "Matrix",
+          "member": "GetOffset"
         },
         {
           "input": [
@@ -56961,8 +56988,8 @@
           ],
           "output": [
             {
-              "name": "matrix",
-              "type": "any",
+              "name": "handle",
+              "type": "Matrix",
               "source": "var_any"
             }
           ],
@@ -56970,7 +56997,8 @@
           "name": "GET_CAR_COMPONENT_MATRIX",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true
           },
           "short_desc": "Gets matrix of car component",
           "class": "Car",

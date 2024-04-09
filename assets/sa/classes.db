@@ -43,6 +43,7 @@ IniFile
 KillFrenzy
 List
 Math
+Matrix
 Memory
 Menu
 MenuGrid
@@ -253,7 +254,7 @@ GetCollisionLighting,0E91,0,0,("self: Car" "lighting%f")
 GetCollisionSurface,0E90,0,0,("self: Car" "surfaceType: SurfaceType")
 GetColors,03F3,0,0,("self: Car" "color1%i" "color2%i")
 GetComponent,0D0D,1,0,("self: Car" "name%s" "handle: Component")
-GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "matrix: any")
+GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "handle: Matrix")
 GetCoordinates,00AA,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetCurrentGear,0AB8,0,0,("self: Car" "gear%i")
 GetCurrentMod,096D,0,0,("self: Car" "slot: ModSlot" "modelId: model_object")
@@ -566,7 +567,7 @@ GetCollisionLighting,0E91,0,0,("self: Car" "lighting%f")
 GetCollisionSurface,0E90,0,0,("self: Car" "surfaceType: SurfaceType")
 GetColors,03F3,0,0,("self: Car" "color1%i" "color2%i")
 GetComponent,0D0D,1,0,("self: Car" "name%s" "handle: Component")
-GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "matrix: any")
+GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "handle: Matrix")
 GetCoordinates,00AA,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetCurrentGear,0AB8,0,0,("self: Car" "gear%i")
 GetCurrentMod,096D,0,0,("self: Car" "slot: ModSlot" "modelId: model_object")
@@ -1125,7 +1126,7 @@ $END
 
 $ColPoint
 $BEGIN
-GetCollisionBetweenPoints,0D3A,1,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "buildings%b" "vehicles%b" "peds%b" "objects%b" "dummies%b" "seeThroughCheck%b" "cameraIgnoreCheck%b" "shotThroughCheck%b" "entityToIgnore%i" "address: ColPoint" "outX%f" "outY%f" "outZ%f" "entity%i")
+GetCollisionBetweenPoints,0D3A,1,0,("fromX%f" "fromY%f" "fromZ%f" "toX%f" "toY%f" "toZ%f" "buildings%b" "vehicles%b" "peds%b" "objects%b" "dummies%b" "seeThroughCheck%b" "cameraIgnoreCheck%b" "shotThroughCheck%b" "entityToIgnore%i" "handle: ColPoint" "outX%f" "outY%f" "outZ%f" "entity%i")
 GetCoordinates,0EE1,0,0,("self: ColPoint" "x%f" "y%f" "z%f")
 GetDepth,0D3E,0,0,("self: ColPoint" "depth%f")
 GetLighting,0E6B,0,0,("self: ColPoint" "fromNight%b" "lighting%i")
@@ -1233,9 +1234,9 @@ $END
 $DynamicLibrary
 $BEGIN
 Free,0AA3,0,0,("self: DynamicLibrary")
-GetLoadedLibrary,0EFE,1,0,("library%s" "address%i")
+GetLoadedLibrary,0EFE,1,0,("fileName%s" "handle: DynamicLibrary")
 GetProcedure,0AA4,1,0,("procName%s" "self: DynamicLibrary" "address%i")
-Load,0AA2,1,0,("libraryFileName%s" "handle: DynamicLibrary")
+Load,0AA2,1,0,("fileName%s" "handle: DynamicLibrary")
 $END
 
 $Entity
@@ -1493,7 +1494,7 @@ GetCollisionLighting,0E91,0,0,("self: Car" "lighting%f")
 GetCollisionSurface,0E90,0,0,("self: Car" "surfaceType: SurfaceType")
 GetColors,03F3,0,0,("self: Car" "color1%i" "color2%i")
 GetComponent,0D0D,1,0,("self: Car" "name%s" "handle: Component")
-GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "matrix: any")
+GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "handle: Matrix")
 GetCoordinates,00AA,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetCurrentGear,0AB8,0,0,("self: Car" "gear%i")
 GetCurrentMod,096D,0,0,("self: Car" "slot: ModSlot" "modelId: model_object")
@@ -1903,6 +1904,19 @@ Sqrt,01FB,0,0,("num%f" "result%f")
 ToggleBit,2703,0,0,("number%i" "bitIndex%i" "state%b")
 $END
 
+$Matrix
+$BEGIN
+Copy,0D09,0,0,("self: Matrix" "destination: Matrix")
+GetOffset,0D0A,0,0,("self: Matrix" "x%f" "y%f" "z%f" "x%f" "y%f" "z%f")
+GetXAngle,0D02,0,0,("self: Matrix" "xAngle%f")
+GetYAngle,0D03,0,0,("self: Matrix" "yAngle%f")
+GetZAngle,0D04,0,0,("self: Matrix" "zAngle%f")
+Multiply,0D00,0,0,("matrixA: Matrix" "matrixB: Matrix" "handle: Matrix")
+Rotate,0D08,0,0,("self: Matrix" "x%f" "y%f" "z%f")
+RotateOnAxis,0D01,0,0,("self: Matrix" "axisX%f" "axisY%f" "axisZ%f" "angle%f" "combineOp%i")
+SetPosition,0D05,0,0,("self: Matrix" "x%f" "y%f" "z%f")
+$END
+
 $Memory
 $BEGIN
 Allocate,0AC8,1,0,("size%i" "address%i")
@@ -2243,7 +2257,7 @@ GetCollisionLighting,0E91,0,0,("self: Car" "lighting%f")
 GetCollisionSurface,0E90,0,0,("self: Car" "surfaceType: SurfaceType")
 GetColors,03F3,0,0,("self: Car" "color1%i" "color2%i")
 GetComponent,0D0D,1,0,("self: Car" "name%s" "handle: Component")
-GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "matrix: any")
+GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "handle: Matrix")
 GetCoordinates,00AA,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetCurrentGear,0AB8,0,0,("self: Car" "gear%i")
 GetCurrentMod,096D,0,0,("self: Car" "slot: ModSlot" "modelId: model_object")
@@ -2988,7 +3002,7 @@ GetCollisionLighting,0E91,0,0,("self: Car" "lighting%f")
 GetCollisionSurface,0E90,0,0,("self: Car" "surfaceType: SurfaceType")
 GetColors,03F3,0,0,("self: Car" "color1%i" "color2%i")
 GetComponent,0D0D,1,0,("self: Car" "name%s" "handle: Component")
-GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "matrix: any")
+GetComponentMatrix,0D0C,1,0,("self: Car" "componentName%s" "handle: Matrix")
 GetCoordinates,00AA,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetCurrentGear,0AB8,0,0,("self: Car" "gear%i")
 GetCurrentMod,096D,0,0,("self: Car" "slot: ModSlot" "modelId: model_object")

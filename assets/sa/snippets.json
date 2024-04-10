@@ -246,6 +246,11 @@
   "file": {
     "2301": "6@ = allocate_memory 128\nread_block_from_file 0@ {size} 128 {address} 6@"
   },
+  "math": {
+    "2705": "0@ = random_int_from_list 2 4 8 16 32\nprint_formatted_now {format} \"random %d\" {time} 3000 {args} 0@",
+    "2706": "0@ = random_float_from_list 2.0 4.0 8.0 16.0 32.0\nprint_formatted_now {format} \"random %f\" {time} 3000 {args} 0@",
+    "2707": "0@v = random_float_from_list \"two\" \"four\" \"eight\" \"sixteen\" \"thirtytwo\"\n        print_formatted_now {format} \"random %f\" {time} 3000 {args} 0@v\n        \n        0@s = random_float_from_list 'BANDA10' 'BANDA11' 'BANDA12' 'BANDA13'\n        print_big {key} 0@s {time} 5000 {style} TextStyle.Middle\n        \n        0@ = allocate_memory {size} 64\n        0@ = random_float_from_list \"LONGER_TEST_NUMBER_2\" \"LONGER_TEST_NUMBER_4\" \"LONGER_TEST_NUMBER_8\"\n        print_help_formatted {format} \"random %s\" {args} 0@\n        free_memory {address} 0@"
+  },
   "memory": {
     "2400": "get_var_pointer 0@ {store_to} 5@\nget_var_pointer 1@ {store_to} 6@\n\n2400: copy_memory {src} 5@ {dest} 6@ {size} 2 // replace two bytes in 1@",
     "2401": "int ptr = get_this_script_struct\n\nint baseIp = read_memory_with_offset ptr {offset} 0x10 {size} 4 // get CRunningScript::BaseIP\nshortString name = read_memory_with_offset ptr {offset} 0x08 {size} 4 // get CRunningScript::Name",

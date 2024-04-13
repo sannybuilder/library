@@ -145,44 +145,6 @@ fn does_command_match_target(command: &Command, target: &str) -> bool {
     return true;
 }
 
-fn generate_keywords() -> Result<()> {
-    let args: Vec<String> = std::env::args().collect();
-    let input_file = args
-        .get(2)
-        .unwrap_or_else(|| panic!("Provide input file name"));
-    let target = args.get(3).unwrap_or_else(|| panic!("Provide target name"));
-
-    let content = fs::read_to_string(input_file).unwrap();
-    let library = serde_json::from_str::<Library>(content.as_str())?;
-
-    let commands = library
-        .extensions
-        .iter()
-        .flat_map(|ext| ext.commands.iter())
-        .collect::<Vec<_>>();
-
-    let mut keywords_list: BTreeMap<String, String> = BTreeMap::new();
-
-    for command in commands.into_iter().filter(|command| {
-        if !does_command_match_target(command, &target) {
-            return false;
-        }
-        command
-            .attrs
-            .as_ref()
-            .and_then(|a| a.is_keyword)
-            .unwrap_or(false)
-    }) {
-        keywords_list.insert(command.id.clone(), command.name.to_ascii_lowercase());
-    }
-
-    for (op, name) in keywords_list {
-        println!("{}={}", op, name);
-    }
-
-    Ok(())
-}
-
 fn generate_snippets() -> io::Result<()> {
     let mut snippets: BTreeMap<String, BTreeMap<String, String>> = BTreeMap::new();
     let args: Vec<String> = std::env::args().collect();
@@ -362,7 +324,6 @@ fn main() {
         Some(x) if x == "classes" => generate_classes().ok(),
         Some(x) if x == "snippets" => generate_snippets().ok(),
         Some(x) if x == "enums" => generate_enums().ok(),
-        Some(x) if x == "keywords" => generate_keywords().ok(),
         Some(x) => {
             panic!("unknown action argument {}", x);
         }

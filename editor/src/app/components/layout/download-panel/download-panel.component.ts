@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   GameClassesAssets,
   GameEnumsAssets,
-  GameKeywordsAssets,
   Game,
   GameEnumsJsAssets,
   GameLibrary,
@@ -25,7 +24,6 @@ export class DownloadPanelComponent {
     this.sbFiles = [
       { name: 'classes.db', path: GameClassesAssets[game] },
       { name: 'enums.txt', path: GameEnumsAssets[game] },
-      { name: 'keywords.txt', path: GameKeywordsAssets[game] },
       { name: 'opcodes.txt', path: GameOpcodesTxtAssets[game] },
     ].filter(({ path }) => path);
   }

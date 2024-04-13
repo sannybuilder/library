@@ -3,7 +3,6 @@ import {
   Game,
   GameClassesAssets,
   GameEnumsAssets,
-  GameKeywordsAssets,
   GameSnippets,
 } from './src/app/models';
 
@@ -73,11 +72,6 @@ games.forEach((game) => {
   if (GameClassesAssets[game]) {
     cargo(
       `cargo run classes ${gameJson} ${game} > ${join(dest, 'classes.db')}`
-    );
-  }
-  if (GameKeywordsAssets[game]) {
-    cargo(
-      `cargo run keywords ${gameJson} ${game} > ${join(dest, 'keywords.txt')}`
     );
   }
   if (GameSnippets[game].includes(game)) {

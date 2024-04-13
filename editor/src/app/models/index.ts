@@ -169,20 +169,6 @@ export const GameEnumsAssets: Partial<Record<Game, string>> = {
   [Game.vcs]: 'assets/vcs/enums.txt',
 };
 
-export const GameKeywordsAssets: Partial<Record<Game, string>> = {
-  [Game.gta3]: 'assets/gta3/keywords.txt',
-  [Game.vc]: 'assets/vc/keywords.txt',
-  [Game.sa]: 'assets/sa/keywords.txt',
-  [Game.gta3_mobile]: 'assets/gta3_mobile/keywords.txt',
-  [Game.vc_mobile]: 'assets/vc_mobile/keywords.txt',
-  [Game.sa_mobile]: 'assets/sa_mobile/keywords.txt',
-  [Game.gta3_unreal]: 'assets/gta3_unreal/keywords.txt',
-  [Game.vc_unreal]: 'assets/vc_unreal/keywords.txt',
-  [Game.sa_unreal]: 'assets/sa_unreal/keywords.txt',
-  [Game.lcs]: 'assets/lcs/keywords.txt',
-  [Game.vcs]: 'assets/vcs/keywords.txt',
-};
-
 export const GameOpcodesTxtAssets: Partial<Record<Game, string>> = {
   [Game.gta3]: 'assets/gta3/opcodes.txt',
   [Game.vc]: 'assets/vc/opcodes.txt',

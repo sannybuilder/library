@@ -68,13 +68,13 @@
               height="24"
               [title]="
                 'ui.header.userAvatar'
-                  | translate: { userName: userName$ | async }
+                  | translate : { userName: userName$ | async }
               "
             />
             <span class="pl-2 d-none d-lg-inline-block align-middle"
               >{{
                 "ui.header.greeting"
-                  | translate: { userName: userName$ | async }
+                  | translate : { userName: userName$ | async }
               }}
             </span>
           </a>
@@ -136,17 +136,23 @@
       <div class="col-12 col-xl-6 d-flex align-items-center">
         <form class="form-inline flex-nowrap flex-grow-1">
           <div class="input-group search-bar-control w-100">
-            <input
-              name="search"
-              class="search-bar form-control"
-              type="search"
-              [placeholder]="'ui.header.searchPlaceholder' | translate"
-              autofocus
-              (focus)="toggleSearchHelp(true)"
-              (blur)="toggleSearchHelp(false)"
-              [ngModel]="searchTerm$ | async"
-              (ngModelChange)="onSearchUpdate($event)"
-            />
+            <div class="position-relative search-bar w-100">
+              <input
+                id="search-bar-input"
+                name="search"
+                class="form-control w-100"
+                type="search"
+                [placeholder]="'ui.header.searchPlaceholder' | translate"
+                autofocus
+                data-hotkey="/"
+                (focus)="toggleSearchHelp(true)"
+                (blur)="toggleSearchHelp(false)"
+                [ngModel]="searchTerm$ | async"
+                (ngModelChange)="onSearchUpdate($event)"
+              />
+
+              <span class="search-hotkey-hint"> <kbd>/</kbd> </span>
+            </div>
 
             <div class="input-group-append">
               <scl-icon-button
@@ -155,7 +161,7 @@
                 (clicked)="forceSearchHelp()"
               ></scl-icon-button>
               <scl-icon-button
-                style="margin-left: -1px;"
+                style="margin-left: -1px"
                 icon="clear"
                 [title]="'ui.header.searchClear' | translate"
                 (clicked)="clear()"
@@ -339,7 +345,7 @@
               class="pl-3 mb-1"
               *ngIf="(isAuthorized$ | async) && (userName$ | async) as userName"
             >
-              {{ "ui.header.greeting" | translate: { userName: userName } }}
+              {{ "ui.header.greeting" | translate : { userName: userName } }}
             </p>
 
             <a

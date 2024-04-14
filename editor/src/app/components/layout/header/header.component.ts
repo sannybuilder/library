@@ -18,6 +18,7 @@ import {
 import { Config, CONFIG } from '../../../config';
 import { Game, KNOWN_LANGUAGES } from '../../../models';
 import { UiFacade, AuthFacade, GameFacade } from '../../../state';
+import { install, uninstall } from '@github/hotkey';
 
 @Component({
   selector: 'scl-header',
@@ -64,10 +65,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((value) => {
         this._ui.updateSearch(value);
       });
+
+    const sb = document.querySelector('#search-bar-input');
+    if (sb) {
+      install(sb as HTMLElement);
+    }
   }
 
   ngOnDestroy() {
     this.searchDebounced$.complete();
+    const sb = document.querySelector('#search-bar-input');
+    if (sb) {
+      uninstall(sb as HTMLElement);
+    }
   }
 
   onSearchUpdate(term: string) {

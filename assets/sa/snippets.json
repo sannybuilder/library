@@ -13,7 +13,7 @@
     "0B00": "delete_file <%= input1 %>",
     "0B01": "delete_directory <%= input1 %>",
     "0DD5": "get_platform 0@\nprint_help_formatted \"Platform is %d\" 0@",
-    "2000": ":my_funct\n    cleo_arg_count 31@\n    print_formatted_now \"called with %d arguments\" {time} 3000 {args} 31@\ncleo_return",
+    "2000": ":my_funct\n    get_cleo_arg_count 31@\n    print_formatted_now \"called with %d arguments\" {time} 3000 {args} 31@\ncleo_return",
     "2001": "debug_on // enable trace command\n\nget_script_filename -1 full_path false store_to 0@v\ntrace \"This script file:~w~ %s\" 0@v \n \nallocate_memory size 260 store_to address 0@\nget_script_struct_named script_name 'main' store_to address 1@\nget_script_filename 1@ full_path true store_to 0@\ntrace \"Ohter script:~w~ %s\" 0@\nfree_memory 0@",
     "2002": "cleo_return_with true retArgs 0@",
     "2003": "// get player's current vehicle handle\n// function sets condition result\n:FUNC_GET_PLAYER_CAR\n    if\n        not does_char_exist $scplayer\n    then\n        cleo_return_fail\n    end\n\n    if\n        not is_char_sitting_in_any_car $scplayer\n    then\n        cleo_return_fail\n    end\n\n    int car_handle = store_car_char_is_in_no_save $scplayer\ncleo_return_with true {args} car_handle",

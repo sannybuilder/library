@@ -264,6 +264,24 @@ fn generate_classes() -> Result<()> {
         }
     };
 
+    let extends = |class_name: &str| -> bool {
+        if let Some(class_meta) = library.classes.iter().find(|c| c.name == *class_name) {
+            return class_meta.extends.is_some();
+        }
+        false
+    };
+
+    // move classes that extend other classes to the top
+    classes_names.sort_by(|a, b| {
+        if extends(a) && !extends(b) {
+            std::cmp::Ordering::Less
+        } else if !extends(a) && extends(b) {
+            std::cmp::Ordering::Greater
+        } else {
+            a.cmp(b)
+        }
+    });
+
     for &class_name in classes_names.iter() {
         println!("${}", class_name.trim());
         println!("$BEGIN");

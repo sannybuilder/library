@@ -1193,7 +1193,8 @@ export const KeyCode = {
   "Zoom": 251,
   "Noname": 252,
   "Pa1": 253,
-  "OemClear": 254
+  "OemClear": 254,
+  "Alt": 18
 };
 export const CarAlarm = {
   "Off": 0,

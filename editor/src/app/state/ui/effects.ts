@@ -489,13 +489,14 @@ export class UiEffects {
   loadEnumsSuccess$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnumsSuccess),
-      withLatestFrom(this._ui.enumToDisplayOrEdit$, this._ui.viewMode$),
+      withLatestFrom(this._ui.enumToDisplayOrEdit$, this._ui.viewMode$, this._game.game$),
       filter(
-        ([{ enums }, enumToEdit]) =>
+        ([{ enums, game }, enumToEdit, viewMode, currentGame]) =>
           !!enumToEdit &&
           !!enumToEdit.name &&
           !!enums &&
-          !!enums[enumToEdit.name]
+          !!enums[enumToEdit.name] &&
+          game === currentGame
       ),
       map(([{ enums }, enumToEdit, viewMode]) => {
         let { isNew, name } = enumToEdit!;

@@ -1013,6 +1013,7 @@ export const KeyCode = {
   "Return": 13,
   "Shift": 16,
   "Ctrl": 17,
+  "Alt": 18,
   "Pause": 19,
   "Capital": 20,
   "Kana": 21,
@@ -1193,8 +1194,7 @@ export const KeyCode = {
   "Zoom": 251,
   "Noname": 252,
   "Pa1": 253,
-  "OemClear": 254,
-  "Alt": 18
+  "OemClear": 254
 };
 export const CarAlarm = {
   "Off": 0,

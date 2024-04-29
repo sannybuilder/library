@@ -216,18 +216,14 @@ fn generate_classes() -> Result<()> {
             .iter()
             .chain(command.output.iter())
             .map(|p| {
-                if p.name.len() == 0 {
-                    String::from("")
-                } else {
-                    let _type = match p.r#type.to_ascii_lowercase().as_str() {
-                        "float" => String::from("%f"),
-                        "int" => String::from("%i"),
-                        "string" => String::from("%s"),
-                        "bool" | "boolean" => String::from("%b"),
-                        _ => format!(": {}", p.r#type),
-                    };
-                    format!("\"{}{}\"", p.name, _type)
-                }
+                let _type = match p.r#type.to_ascii_lowercase().as_str() {
+                    "float" => String::from("%f"),
+                    "int" => String::from("%i"),
+                    "string" => String::from("%s"),
+                    "bool" | "boolean" => String::from("%b"),
+                    _ => format!(": {}", p.r#type),
+                };
+                format!("\"{}{}\"", p.name, _type)
             })
             .collect();
 

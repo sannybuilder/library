@@ -60,22 +60,9 @@
         </ng-container>
       </ng-container>
 
-      <ng-container
-        *ngIf="
-          isSupported(command) &&
-          !command.class &&
-          !command.member &&
-          !command.operator
-        "
-        ><code
-          >{{ command.name | lowercase }}
-          <span [innerHTML]="command | keywordParams | sanitize"></span></code
-      ></ng-container>
-
-      <ng-container *ngIf="displayOpcodePresentation && command.id">
+      <ng-container *ngIf="isSupported(command)">
         <code
-          >{{ command.id | opcode }}: {{ command.name | lowercase }}
-          <span [innerHTML]="command | opcodeParams | sanitize"></span
+          ><span [innerHTML]="command | opcodeParams | sanitize"></span
         ></code>
       </ng-container>
 

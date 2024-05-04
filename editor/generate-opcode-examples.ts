@@ -11,6 +11,7 @@ import {
 } from './src/app/utils';
 import {
   braceify,
+  stringify,
   stringifySource,
   stringifyTypeAndSource,
 } from './src/app/pipes/params';
@@ -70,35 +71,23 @@ function makeLine(command: Command) {
   const input = inputParams(command);
 
   if (output.length) {
-    line += output
-      .map((param) => {
-        if (param.name) {
-          return braceify(stringifyWithColon(param), '[]');
-        } else {
-          return braceify(stringifyTypeAndSource(param), '[]');
-        }
-      })
-      .join(', ');
+    line += stringify(outputParams(command), ', ', (p) =>
+      braceify((p.name ? stringifyWithColon : stringifyTypeAndSource)(p), '[]')
+    );
     line += ' = ';
   }
 
-  line += command.name.toLowerCase();
+  line += [
+    command.name.toLowerCase(),
 
-  for (let param of input) {
-    if (param.type === 'label') {
-      line += ` @label`;
-    } else {
-      if (param.name === 'self') {
-        line += ` [${param.type}]`;
-      } else {
-        if (param.name) {
-          line += ` ${getParamName(param)} [${param.type}]`;
-        } else {
-          line += ` [${param.type}]`;
-        }
+    stringify(input, ' ', (param) => {
+      const t = braceify(stringifyTypeAndSource(param), '[]');
+      if (param.name && param.name !== 'self' && param.type !== 'label') {
+        return `${getParamName(param)} ${t}`;
       }
-    }
-  }
+      return t;
+    }),
+  ].join(' ');
 
   return line;
 }

@@ -22,7 +22,6 @@ import { environment } from '../environments/environment';
 
 import {
   ClassParamsPipe,
-  KeywordParamsPipe,
   OpcodePipe,
   GameTitlePipe,
   GameTitleSimplePipe,
@@ -177,7 +176,6 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppComponent,
     CommandListComponent,
     ClassParamsPipe,
-    KeywordParamsPipe,
     OpcodePipe,
     GameTitlePipe,
     GameTitleSimplePipe,

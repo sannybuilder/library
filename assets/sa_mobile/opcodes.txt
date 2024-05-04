@@ -1,6 +1,6 @@
-{0000:} nop 
+{0000:} nop
 {0001:} wait {time} [int]
-{0002:} goto [label]
+{0002:} goto @label
 {0003:} shake_cam {intensity} [int]
 {0004:} [global var int] = [literal int]
 {0005:} [global var float] = [literal float]
@@ -64,11 +64,11 @@
 {0044:}   [global var float] == [global var float]
 {0045:}   [local var float] == [local var float]
 {0046:}   [global var float] == [local var float]
-{004D:} goto_if_false [label]
-{004E:} terminate_this_script 
-{004F:} start_new_script [label] [arguments]
-{0050:} gosub [label]
-{0051:} return 
+{004D:} goto_if_false @label
+{004E:} terminate_this_script
+{004F:} start_new_script @label [arguments]
+{0050:} gosub @label
+{0051:} return
 {0053:} [var handle: Player] = create_player {playerIndex} [int] {x} [float] {y} [float] {z} [float]
 {0058:} [global var int] += [global var int]
 {0059:} [global var float] += [global var float]
@@ -130,12 +130,12 @@
 {0091:} [global var float] =# [local var int]
 {0092:} [local var int] =# [local var float]
 {0093:} [local var float] =# [local var int]
-{0094:} [global var number: int] = abs_var_int 
-{0095:} [local var number: int] = abs_lvar_int 
-{0096:} [global var number: float] = abs_var_float 
-{0097:} [local var number: float] = abs_lvar_float 
-{0098:} [var float] = generate_random_float 
-{0099:} [var int] = generate_random_int 
+{0094:} [global var number: int] = abs_var_int
+{0095:} [local var number: int] = abs_lvar_int
+{0096:} [global var number: float] = abs_var_float
+{0097:} [local var number: float] = abs_lvar_float
+{0098:} [var float] = generate_random_float
+{0099:} [var int] = generate_random_int
 {009A:} [var handle: Char] = create_char {pedType} [PedType] {modelId} [model_char] {x} [float] {y} [float] {z} [float]
 {009B:} delete_char [Char]
 {00A0:} [var x: float], [var y: float], [var z: float] = get_char_coordinates [Char]
@@ -157,14 +157,14 @@
 {00BA:} print_big {key} [gxt_key] {time} [int] {style} [TextStyle]
 {00BB:} print {key} [gxt_key] {time} [int] {flag} [int]
 {00BC:} print_now {key} [gxt_key] {time} [int] {flag} [int]
-{00BE:} clear_prints 
-{00BF:} [var hours: int], [var minutes: int] = get_time_of_day 
+{00BE:} clear_prints
+{00BF:} [var hours: int], [var minutes: int] = get_time_of_day
 {00C0:} set_time_of_day {hours} [int] {minutes} [int]
 {00C1:} [var minutesLeft: int] = get_minutes_to_time_of_day {hours} [int] {minutes} [int]
 {00C2:}   is_point_on_screen {x} [float] {y} [float] {z} [float] {radius} [float]
 {00D6:} if [int]
-{00D7:} launch_mission [label]
-{00D8:} mission_has_finished 
+{00D7:} launch_mission @label
+{00D8:} mission_has_finished
 {00D9:} [var handle: Car] = store_car_char_is_in [Char]
 {00DB:}   is_char_in_car [Char] {vehicle} [Car]
 {00DD:}   is_char_in_model [Char] {modelId} [model_vehicle]
@@ -199,7 +199,7 @@
 {010F:}   is_wanted_level_greater [Player] {wantedLevel} [int]
 {0110:} clear_wanted_level [Player]
 {0111:} set_deatharrest_state {state} [bool]
-{0112:}   has_deatharrest_been_executed 
+{0112:}   has_deatharrest_been_executed
 {0114:} add_ammo_to_char [Char] {weaponType} [WeaponType] {ammo} [int]
 {0117:}   is_player_dead {handle} [any]
 {0118:}   is_char_dead {handle} [any]
@@ -215,7 +215,7 @@
 {0154:}   is_char_in_zone [Char] {zone} [zone_key]
 {0158:} point_camera_at_car {vehicle} [Car] {mode} [CameraMode] {switchStyle} [SwitchType]
 {0159:} point_camera_at_char {char} [Char] {mode} [CameraMode] {switchStyle} [SwitchType]
-{015A:} restore_camera 
+{015A:} restore_camera
 {015B:} shake_pad {pad} [PadId] {time} [int] {intensity} [int]
 {015D:} set_time_scale {scale} [float]
 {015F:} set_fixed_camera_position {x} [float] {y} [float] {z} [float] {xRotation} [float] {yRotation} [float] {zRotation} [float]
@@ -227,7 +227,7 @@
 {0168:} change_blip_scale [Blip] {size} [int]
 {0169:} set_fading_colour {r} [int] {g} [int] {b} [int]
 {016A:} do_fade {time} [int] {direction} [Fade]
-{016B:}   get_fading_status 
+{016B:}   get_fading_status
 {016C:} add_hospital_restart {x} [float] {y} [float] {z} [float] {heading} [float] {townId} [Town]
 {016D:} add_police_restart {x} [float] {y} [float] {z} [float] {heading} [float] {townId} [Town]
 {016E:} override_next_restart {x} [float] {y} [float] {z} [float] {heading} [float]
@@ -272,11 +272,11 @@
 {01B4:} set_player_control [Player] {state} [bool]
 {01B5:} force_weather {type} [WeatherType]
 {01B6:} force_weather_now {type} [WeatherType]
-{01B7:} release_weather 
+{01B7:} release_weather
 {01B9:} set_current_char_weapon [Char] {weaponType} [WeaponType]
 {01BB:} [var x: float], [var y: float], [var z: float] = get_object_coordinates [Object]
 {01BC:} set_object_coordinates [Object] {x} [float] {y} [float] {z} [float]
-{01BD:} [var time: int] = get_game_timer 
+{01BD:} [var time: int] = get_game_timer
 {01C0:} [var wantedLevel: int] = store_wanted_level [Player]
 {01C1:}   is_car_stopped [Car]
 {01C2:} mark_char_as_no_longer_needed [Char]
@@ -298,10 +298,10 @@
 {01F3:}   is_car_in_air_proper [Car]
 {01F4:}   is_car_upsidedown [Car]
 {01F5:} [var handle: Char] = get_player_char [Player]
-{01F6:} cancel_override_restart 
+{01F6:} cancel_override_restart
 {01F7:} set_police_ignore_player {player} [Player] {state} [bool]
 {01F9:} start_kill_frenzy {text} [gxt_key] {weaponType} [WeaponType] {timeInMs} [int] {targetsNum} [int] {targetModel1} [model_any] {targetModel2} [model_any] {targetModel3} [model_any] {targetModel4} [model_any] {betaSoundsAndMessages} [bool]
-{01FA:} [var status: int] = read_kill_frenzy_status 
+{01FA:} [var status: int] = read_kill_frenzy_status
 {01FB:} [var result: float] = sqrt {num} [float]
 {0202:}   locate_char_any_means_car_2d [Char] {vehicle} [Car] {xRadius} [float] {yRadius} [float] {drawSphere} [bool]
 {0203:}   locate_char_on_foot_car_2d [Char] {vehicle} [Car] {xRadius} [float] {yRadius} [float] {drawSphere} [bool]
@@ -341,10 +341,10 @@
 {0248:}   has_model_loaded {modelId} [model_any]
 {0249:} mark_model_as_no_longer_needed {modelId} [model_any]
 {024F:} draw_corona {x} [float] {y} [float] {z} [float] {size} [float] {coronaType} [CoronaType] {flareType} [FlareType] {r} [int] {g} [int] {b} [int]
-{0253:} store_clock 
-{0254:} restore_clock 
+{0253:} store_clock
+{0254:} restore_clock
 {0256:}   is_player_playing [Player]
-{0293:} [var mode: ControllerMode] = get_controller_mode 
+{0293:} [var mode: ControllerMode] = get_controller_mode
 {0294:} set_can_respray_car [Car] {state} [bool]
 {0296:} unload_special_character {slotId} [int]
 {0297:} reset_num_of_models_killed_by_player [Player]
@@ -382,11 +382,11 @@
 {02E2:} set_char_accuracy [Char] {accuracy} [int]
 {02E3:} [var speed: float] = get_car_speed [Car]
 {02E4:} load_cutscene {name} [string]
-{02E7:} start_cutscene 
-{02E8:} [var time: int] = get_cutscene_time 
-{02E9:}   has_cutscene_finished 
-{02EA:} clear_cutscene 
-{02EB:} restore_camera_jumpcut 
+{02E7:} start_cutscene
+{02E8:} [var time: int] = get_cutscene_time
+{02E9:}   has_cutscene_finished
+{02EA:} clear_cutscene
+{02EB:} restore_camera_jumpcut
 {02ED:} set_collectable1_total {amount} [int]
 {02EE:}   is_projectile_in_area {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float]
 {02F2:}   is_char_model [Char] {modelId} [model_char]
@@ -402,9 +402,9 @@
 {0308:} print_with_6_numbers {key} [gxt_key] {num1} [int] {num2} [int] {num3} [int] {num4} [int] {num5} [int] {num6} [int] {duration} [int] {style} [TextStyle]
 {030C:} player_made_progress {progress} [int]
 {030D:} set_progress_total {maxProgress} [int]
-{0317:} register_mission_given 
+{0317:} register_mission_given
 {0318:} register_mission_passed {key} [gxt_key]
-{031A:} remove_all_script_fires 
+{031A:} remove_all_script_fires
 {031D:}   has_char_been_damaged_by_weapon [Char] {weaponType} [WeaponType]
 {031E:}   has_car_been_damaged_by_weapon [Car] {weaponType} [WeaponType]
 {0321:} explode_char_head [Char]
@@ -447,19 +447,19 @@
 {0366:}   has_object_been_damaged [Object]
 {036A:} warp_char_into_car [Char] {vehicle} [Car]
 {036D:} print_with_2_numbers_big {key} [gxt_key] {num1} [int] {num2} [int] {duration} [int] {style} [TextStyle]
-{0373:} set_camera_behind_player 
+{0373:} set_camera_behind_player
 {0376:} [var handle: Char] = create_random_char {x} [float] {y} [float] {z} [float]
 {0381:} set_object_velocity [Object] {xSpeed} [float] {ySpeed} [float] {zSpeed} [float]
 {0382:} set_object_collision [Object] {state} [bool]
 {0384:} print_string_in_string_now {templateKey} [gxt_key] {replacementKey} [gxt_key] {duration} [int] {style} [TextStyle]
 {038A:}   is_point_obscured_by_a_mission_entity {x} [float] {y} [float] {z} [float] {radiusX} [float] {radiusY} [float] {radiusZ} [float]
-{038B:} load_all_models_now 
+{038B:} load_all_models_now
 {038C:} add_to_object_velocity [Object] {x} [float] {y} [float] {z} [float]
 {038D:} draw_sprite {memorySlot} [int] {offsetLeft} [float] {offsetTop} [float] {width} [float] {height} [float] {r} [int] {g} [int] {b} [int] {a} [int]
 {038E:} draw_rect {x} [float] {y} [float] {width} [float] {height} [float] {r} [int] {g} [int] {b} [int] {a} [int]
 {038F:} load_sprite {memorySlot} [int] {spriteName} [string]
 {0390:} load_texture_dictionary {name} [string]
-{0391:} remove_texture_dictionary 
+{0391:} remove_texture_dictionary
 {0392:} set_object_dynamic [Object] {state} [bool]
 {0393:} set_char_anim_speed [Char] {animName} [string] {animSpeed} [float]
 {0394:} play_mission_passed_tune {soundId} [int]
@@ -488,7 +488,7 @@
 {03C4:} display_onscreen_counter_with_string {var_counter} [global var int] {display} [CounterDisplay] {text} [gxt_key]
 {03C5:} create_random_car_for_car_park {x} [float] {y} [float] {z} [float] {heading} [float]
 {03C7:} set_wanted_multiplier {multiplier} [float]
-{03C8:} set_camera_in_front_of_player 
+{03C8:} set_camera_in_front_of_player
 {03C9:}   is_car_visibly_damaged [Car]
 {03CA:}   does_object_exist {handle} [any]
 {03CB:} load_scene {x} [float] {y} [float] {z} [float]
@@ -503,17 +503,17 @@
 {03D5:} clear_this_print {key} [gxt_key]
 {03D6:} clear_this_big_print {key} [gxt_key]
 {03D7:} set_mission_audio_position {slotId} [MissionAudioSlot] {x} [float] {y} [float] {z} [float]
-{03D8:} activate_save_menu 
-{03D9:}   has_save_game_finished 
+{03D8:} activate_save_menu
+{03D9:}   has_save_game_finished
 {03DC:} [var handle: Blip] = add_blip_for_pickup {pickup} [Pickup]
 {03DE:} set_ped_density_multiplier {multiplier} [float]
 {03E0:} set_text_draw_before_fade {state} [bool]
 {03E3:} set_sprites_draw_before_fade {state} [bool]
 {03E4:} set_text_right_justify {state} [bool]
 {03E5:} print_help {key} [gxt_key]
-{03E6:} clear_help 
+{03E6:} clear_help
 {03E7:} flash_hud_object {object} [HudObject]
-{03EB:} clear_small_prints 
+{03EB:} clear_small_prints
 {03ED:} set_upsidedown_car_not_damaged [Car] {state} [bool]
 {03EE:}   can_player_start_mission [Player]
 {03EF:} make_player_safe_for_cutscene [Player]
@@ -525,7 +525,7 @@
 {03FE:} set_char_money [Char] {amount} [int]
 {0400:} [var x: float], [var y: float], [var z: float] = get_offset_from_object_in_world_coords [Object] {xOffset} [float] {yOffset} [float] {zOffset} [float]
 {0407:} [var x: float], [var y: float], [var z: float] = get_offset_from_car_in_world_coords [Car] {xOffset} [float] {yOffset} [float] {zOffset} [float]
-{040C:}   is_german_game 
+{040C:}   is_german_game
 {040D:} clear_mission_audio {slotId} [MissionAudioSlot]
 {0414:} set_free_health_care [Player] {state} [bool]
 {0417:} load_and_launch_mission_internal {index} [int]
@@ -534,7 +534,7 @@
 {041D:} set_near_clip {value} [float]
 {041E:} set_radio_channel {channel} [RadioChannel]
 {0423:} set_car_traction [Car] {traction} [float]
-{0424:}   are_measurements_in_metres 
+{0424:}   are_measurements_in_metres
 {0425:} [var feet: float] = convert_metres_to_feet {meters} [float]
 {0428:} set_car_avoid_level_transitions [Car] {state} [bool]
 {042B:} clear_area_of_chars {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float]
@@ -545,26 +545,26 @@
 {0431:}   is_car_passenger_seat_free [Car] {seatIndex} [SeatIndex]
 {0432:} [var handle: Char] = get_char_in_car_passenger_seat [Car] {seatIndex} [int]
 {0433:} set_char_is_chris_criminal [Char] {state} [bool]
-{0434:} start_credits 
-{0435:} stop_credits 
-{0436:}   are_credits_finished 
+{0434:} start_credits
+{0435:} stop_credits
+{0436:}   are_credits_finished
 {043C:} set_music_does_fade {state} [bool]
 {0441:} [var modelId: model_vehicle] = get_car_model [Car]
-{0445:}   are_any_car_cheats_activated 
+{0445:}   are_any_car_cheats_activated
 {0446:} set_char_suffers_critical_hits [Char] {state} [bool]
 {0448:}   is_char_sitting_in_car [Char] {vehicle} [Car]
 {0449:}   is_char_sitting_in_any_car [Char]
 {044B:}   is_char_on_foot [Char]
 {0453:} set_object_rotation [Object] {x} [float] {y} [float] {z} [float]
-{0454:} [var x: float], [var y: float], [var z: float] = get_debug_camera_coordinates 
+{0454:} [var x: float], [var y: float], [var z: float] = get_debug_camera_coordinates
 {0457:}   is_player_targetting_char [Player] {handle} [Char]
 {0458:}   is_player_targetting_object [Player] {handle} [Object]
 {0459:} terminate_all_scripts_with_this_name {name} [string]
 {045A:} display_text_with_number {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key] {num} [int]
 {045B:} display_text_with_2_numbers {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key] {num1} [int] {num2} [int]
-{045C:} fail_current_mission 
+{045C:} fail_current_mission
 {0460:} set_interpolation_parameters {_p1} [float] {time} [int]
-{0463:} [var x: float], [var y: float], [var z: float] = get_debug_camera_point_at 
+{0463:} [var x: float], [var y: float], [var z: float] = get_debug_camera_point_at
 {0464:} attach_char_to_car [Char] {vehicle} [Car] {xOffset} [float] {yOffset} [float] {zOffset} [float] {position} [int] {angleLimit} [float] {weaponType} [WeaponType]
 {0465:} detach_char_from_car [Char]
 {0466:} set_car_stay_in_fast_lane [Car] {state} [bool]
@@ -584,7 +584,7 @@
 {047A:}   is_char_on_any_bike [Char]
 {0480:}   can_char_see_dead_char [Char] {pedType} [PedType]
 {0484:} [var car: Car] = get_remote_controlled_car {player} [Player]
-{0485:}   is_pc_version 
+{0485:}   is_pc_version
 {0488:}   is_model_available {modelId} [model_any]
 {0489:} shut_char_up [Char] {state} [bool]
 {048A:} set_enable_rc_detonate {state} [bool]
@@ -620,7 +620,7 @@
 {04BB:} set_area_visible {areaId} [Interior]
 {04BD:} mark_car_as_convoy_car [Car] {state} [bool]
 {04C0:} create_script_roadblock {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float] {type} [int]
-{04C1:} clear_all_script_roadblocks 
+{04C1:} clear_all_script_roadblocks
 {04C4:} [var x: float], [var y: float], [var z: float] = get_offset_from_char_in_world_coords [Char] {xOffset} [float] {yOffset} [float] {zOffset} [float]
 {04C5:}   has_char_been_photographed [Char]
 {04C8:}   is_char_in_flying_vehicle [Char]
@@ -635,7 +635,7 @@
 {04D8:} set_char_drowns_in_water [Char] {state} [bool]
 {04D9:} set_object_records_collisions [Object] {state} [bool]
 {04DA:}   has_object_collided_with_anything [Object]
-{04DB:} remove_rc_buggy 
+{04DB:} remove_rc_buggy
 {04DD:} [var armor: int] = get_char_armour [Char]
 {04DF:} set_heli_stabiliser [Heli] {state} [bool]
 {04E0:} set_car_straight_line_distance [Car] {distance} [int]
@@ -668,7 +668,7 @@
 {0509:} [var distance: float] = get_distance_between_coords_2d {fromX} [float] {fromY} [float] {toX} [float] {toZ} [float]
 {050A:} [var distance: float] = get_distance_between_coords_3d {fromX} [float] {fromY} [float] {fromZ} [float] {toX} [float] {toY} [float] {toZ} [float]
 {050E:} sort_out_object_collision_with_car [Object] {handle} [Car]
-{050F:} [var level: int] = get_max_wanted_level 
+{050F:} [var level: int] = get_max_wanted_level
 {0512:} print_help_forever {key} [gxt_key]
 {0513:} print_help_forever_with_number {gxt} [gxt_key] {number} [int]
 {0517:} [var handle: Pickup] = create_locked_property_pickup {x} [float] {y} [float] {z} [float] {message} [gxt_key]
@@ -678,7 +678,7 @@
 {051B:}   has_char_been_damaged_by_car [Char] {handle} [Car]
 {051C:}   has_car_been_damaged_by_char [Car] {handle} [Char]
 {051D:}   has_car_been_damaged_by_car [Car] {other} [Car]
-{051E:} [var channel: RadioChannel] = get_radio_channel 
+{051E:} [var channel: RadioChannel] = get_radio_channel
 {0526:} set_char_stay_in_car_when_jacked [Char] {state} [bool]
 {052C:} set_player_drunkenness [Player] {intensity} [int]
 {053E:} [var handle: Car] = get_random_car_of_type_in_area_no_save {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float] {modelId} [model_vehicle]
@@ -701,7 +701,7 @@
 {0565:} add_explosion_no_sound {x} [float] {y} [float] {z} [float] {type} [ExplosionType]
 {0566:} set_object_area_visible [Object] {areaId} [Interior]
 {0568:} set_char_never_targeted [Char] {state} [bool]
-{056A:}   was_cutscene_skipped 
+{056A:}   was_cutscene_skipped
 {056C:}   is_char_in_any_police_vehicle [Char]
 {056D:}   does_char_exist {handle} [any]
 {056E:}   does_vehicle_exist {handle} [any]
@@ -716,16 +716,16 @@
 {0587:} set_load_collision_for_car_flag [Car] {state} [bool]
 {0588:} set_load_collision_for_char_flag [Char] {state} [bool]
 {058A:} add_big_gun_flash {fromX} [float] {fromY} [float] {fromZ} [float] {toX} [float] {toY} [float] {toZ} [float]
-{058C:} [var percentage: float] = get_progress_percentage 
+{058C:} [var percentage: float] = get_progress_percentage
 {0594:} set_vehicle_to_fade_in [Car] {alpha} [int]
-{0595:} register_oddjob_mission_passed 
+{0595:} register_oddjob_mission_passed
 {0597:}   is_char_ducking [Char]
-{059A:}   is_australian_game 
+{059A:}   is_australian_game
 {059C:} set_onscreen_counter_flash_when_first_displayed {var_counter} [global var int] {state} [bool]
 {059D:} shuffle_card_decks {type} [int]
-{059E:} [var number: int] = fetch_next_card 
+{059E:} [var number: int] = fetch_next_card
 {059F:} [var x: float], [var y: float], [var z: float] = get_object_velocity [Object]
-{05A0:}   is_debug_camera_on 
+{05A0:}   is_debug_camera_on
 {05A1:} add_to_object_rotation_velocity [Object] {x} [float] {y} [float] {z} [float]
 {05A2:} set_object_rotation_velocity [Object] {x} [float] {y} [float] {z} [float]
 {05A3:}   is_object_static [Object]
@@ -764,7 +764,7 @@
 {05D2:} task_car_drive_wander {char} [Char] {vehicle} [Car] {speed} [float] {drivingStyle} [int]
 {05D3:} task_go_straight_to_coord {handle} [Char] {x} [float] {y} [float] {z} [float] {moveState} [MoveState] {time} [int]
 {05D4:} task_achieve_heading {handle} [Char] {heading} [float]
-{05D6:} flush_route 
+{05D6:} flush_route
 {05D7:} extend_route {x} [float] {y} [float] {z} [float]
 {05D8:} task_follow_point_route {handle} [Char] {walkSpeed} [int] {flag} [int]
 {05D9:} task_goto_char {walking} [Char] {target} [Char] {time} [int] {radius} [float]
@@ -800,7 +800,7 @@
 {0604:} [var heading: float] = get_heading_from_vector_2d {x} [float] {y} [float]
 {0605:} task_play_anim {handle} [Char] {animationName} [string] {animationFile} [string] {frameDelta} [float] {loop} [bool] {lockX} [bool] {lockY} [bool] {lockF} [bool] {time} [int]
 {0606:} load_path_nodes_in_area {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float]
-{0607:} release_path_nodes 
+{0607:} release_path_nodes
 {060A:} [var handle: DecisionMakerChar] = load_char_decision_maker {type} [int]
 {060B:} set_char_decision_maker [Char] {maskOrHandle} [DecisionMakerChar]
 {060D:} set_text_dropshadow {intensity} [int] {red} [int] {green} [int] {blue} [int] {alpha} [int]
@@ -810,7 +810,7 @@
 {0612:} set_char_anim_playing_flag [Char] {animationName} [string] {flag} [bool]
 {0613:} [var time: float] = get_char_anim_current_time [Char] {animationName} [string]
 {0614:} set_char_anim_current_time [Char] {animationName} [string] {time} [float]
-{0615:} [var handle: Sequence] = open_sequence_task 
+{0615:} [var handle: Sequence] = open_sequence_task
 {0616:} close_sequence_task [Sequence]
 {0618:} perform_sequence_task [Char] {sequence} [Sequence]
 {0619:} set_char_collision [Char] {state} [bool]
@@ -891,8 +891,8 @@
 {068A:} fix_car_door [Car] {door} [CarDoor]
 {068B:} task_everyone_leave_car [Car]
 {068C:}   is_player_targetting_anything [Player]
-{068D:} [var x: float], [var y: float], [var z: float] = get_active_camera_coordinates 
-{068E:} [var x: float], [var y: float], [var z: float] = get_active_camera_point_at 
+{068D:} [var x: float], [var y: float], [var z: float] = get_active_camera_coordinates
+{068E:} [var x: float], [var y: float], [var z: float] = get_active_camera_point_at
 {0697:} pop_car_panel [Car] {panelId} [int] {visibility} [bool]
 {0698:} fix_car_panel [Car] {panelId} [int]
 {0699:} fix_car_tyre [Car] {tyreId} [int]
@@ -917,7 +917,7 @@
 {06B5:} point_searchlight_at_coord [Searchlight] {x} [float] {y} [float] {z} [float] {speed} [float]
 {06B6:} point_searchlight_at_char [Searchlight] {handle} [Char] {speed} [float]
 {06B7:}   is_char_in_searchlight [Searchlight] {handle} [Char]
-{06B9:}   has_cutscene_loaded 
+{06B9:}   has_cutscene_loaded
 {06BA:} task_turn_char_to_face_coord {handle} [Char] {x} [float] {y} [float] {z} [float]
 {06BB:} task_drive_point_route {char} [Char] {vehicle} [Car] {speed} [int]
 {06BC:} fire_single_bullet {fromX} [float] {fromY} [float] {fromZ} [float] {toX} [float] {toY} [float] {toZ} [float] {energy} [int]
@@ -941,9 +941,9 @@
 {06D6:} delete_checkpoint [Checkpoint]
 {06D7:} switch_random_trains {state} [bool]
 {06D8:} [var handle: Train] = create_mission_train {type} [int] {x} [float] {y} [float] {z} [float] {direction} [bool]
-{06D9:} delete_mission_trains 
-{06DA:} mark_mission_trains_as_no_longer_needed 
-{06DB:} delete_all_trains 
+{06D9:} delete_mission_trains
+{06DA:} mark_mission_trains_as_no_longer_needed
+{06DB:} delete_all_trains
 {06DC:} set_train_speed [Train] {speed} [float]
 {06DD:} set_train_cruise_speed [Train] {speed} [float]
 {06DE:} [var caboose: Car] = get_train_caboose [Train]
@@ -966,7 +966,7 @@
 {06EF:}   is_group_leader [Char] {handle} [Group]
 {06F0:} set_group_separation_range [Group] {range} [float]
 {06F1:} limit_two_player_distance {distance} [float]
-{06F2:} release_two_player_distance 
+{06F2:} release_two_player_distance
 {06F3:} set_player_player_targeting {state} [bool]
 {06F5:} [var x: float], [var y: float], [var z: float] = get_script_fire_coords [ScriptFire]
 {06F8:} [var x: float], [var y: float], [var z: float], [var heading: float] = get_nth_closest_car_node_with_heading {xCoord} [float] {yCoord} [float] {zCoord} [float] {nth} [int]
@@ -974,13 +974,13 @@
 {06FC:}   does_car_have_stuck_car_check [Car]
 {06FD:} set_playback_speed [Car] {speed} [float]
 {06FF:}   are_any_chars_near_char [Char] {radius} [float]
-{0701:} skip_cutscene_end 
+{0701:} skip_cutscene_end
 {0702:} [var percent: int] = get_percentage_tagged_in_area {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float]
 {0703:} set_tag_status_in_area {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float] {percent} [int]
 {0704:} car_goto_coordinates_racing [Car] {x} [float] {y} [float] {z} [float]
 {0705:} start_playback_recorded_car_using_ai [Car] {pathId} [int]
 {0706:} skip_in_playback_recorded_car [Car] {amount} [float]
-{0707:} skip_cutscene_start_internal [label]
+{0707:} skip_cutscene_start_internal @label
 {0708:} clear_char_decision_maker_event_response [DecisionMakerChar] {eventId} [int]
 {0709:} add_char_decision_maker_event_response [DecisionMakerChar] {eventId} [int] {taskId} [int] {respect} [float] {hate} [float] {like} [float] {dislike} [float] {inCar} [bool] {onFoot} [bool]
 {070A:} task_pick_up_object {char} [Char] {object} [Object] {xOffset} [float] {yOffset} [float] {zOffset} [float] {boneId} [int] {_p7} [int] {animationName} [string] {animationFile} [string] {time} [int]
@@ -995,7 +995,7 @@
 {0715:} take_remote_control_of_car {player} [Player] {vehicle} [Car]
 {0716:}   is_closest_object_of_type_smashed_or_damaged {x} [float] {y} [float] {z} [float] {radius} [float] {modelId} [model_object] {smashed} [bool] {damaged} [bool]
 {0717:} start_setting_up_conversation {handle} [Char]
-{0719:} finish_setting_up_conversation 
+{0719:} finish_setting_up_conversation
 {071A:}   is_conversation_at_node {handle} [Char] {speech} [gxt_key]
 {071E:} [var health: int] = get_object_health [Object]
 {071F:} set_object_health [Object] {health} [int]
@@ -1014,7 +1014,7 @@
 {0731:} set_car_roll [Car] {yAngle} [float]
 {0732:} suppress_car_model {model} [model_vehicle]
 {0733:} dont_suppress_car_model {modelId} [model_vehicle]
-{0734:} dont_suppress_any_car_models 
+{0734:} dont_suppress_any_car_models
 {0737:}   is_char_holding_object [Char] {handle} [Object]
 {073B:} set_car_can_go_against_traffic [Car] {state} [bool]
 {073C:} damage_car_door [Car] {door} [CarDoor]
@@ -1035,14 +1035,14 @@
 {074F:}   is_char_responding_to_event [Char] {eventId} [int]
 {0750:} set_object_visible [Object] {state} [bool]
 {0751:} task_flee_char_any_means {handle} [Char] {threat} [Char] {runDistance} [float] {time} [int] {changeCourse} [bool] {_p6} [int] {_p7} [int] {radius} [float]
-{0754:} flush_patrol_route 
+{0754:} flush_patrol_route
 {0755:} extend_patrol_route {x} [float] {y} [float] {z} [float] {animationName} [string] {animationFile} [string]
 {075A:} play_object_anim [Object] {animationName} [string] {animationFile} [string] {frameDelta} [float] {lockF} [bool] {loop} [bool]
 {075B:} set_radar_zoom {zoom} [int]
 {075C:}   does_blip_exist {handle} [any]
 {075D:} load_prices {sectionName} [string]
 {075E:} load_shop {name} [string]
-{075F:} [var numItems: int] = get_number_of_items_in_shop 
+{075F:} [var numItems: int] = get_number_of_items_in_shop
 {0760:} [var id: int] = get_item_in_shop {nth} [int]
 {0761:} [var price: int] = get_price_of_item {itemId} [int]
 {0762:} task_dead {handle} [Char]
@@ -1052,7 +1052,7 @@
 {076B:} [var density: int] = get_zone_dealer_strength {zone} [zone_key]
 {076C:} set_zone_gang_strength {zoneId} [zone_key] {gangId} [GangType] {density} [int]
 {076D:} [var density: int] = get_zone_gang_strength {zone} [zone_key] {gangId} [GangType]
-{076F:}   is_message_being_displayed 
+{076F:}   is_message_being_displayed
 {0770:} set_char_is_target_priority [Char] {state} [bool]
 {0771:} custom_plate_design_for_next_car {modelId} [model_vehicle] {townId} [Town]
 {0772:} task_goto_car {char} [Char] {vehicle} [Car] {time} [int] {radius} [float]
@@ -1063,7 +1063,7 @@
 {077B:} clear_char_relationship [Char] {relationshipType} [RelationshipType] {toPedType} [PedType]
 {077C:} clear_all_char_relationships [Char] {relationshipType} [RelationshipType]
 {077D:} [var angle: float] = get_car_pitch [Car]
-{077E:} [var interiorId: int] = get_area_visible 
+{077E:} [var interiorId: int] = get_area_visible
 {0780:} heli_keep_entity_in_view [Heli] {char} [Char] {vehicle} [Car] {minAltitude} [float] {maxAltitude} [any]
 {0781:} [var modelId: model_object] = get_weapontype_model {weaponType} [WeaponType]
 {0782:} [var slot: int] = get_weapontype_slot {weaponType} [WeaponType]
@@ -1078,15 +1078,15 @@
 {078F:} task_climb {handle} [Char] {flag} [bool]
 {0790:} buy_item {itemId} [int]
 {0792:} clear_char_tasks_immediately [Char]
-{0793:} store_clothes_state 
-{0794:} restore_clothes_state 
+{0793:} store_clothes_state
+{0794:} restore_clothes_state
 {0796:} [var height: float] = get_rope_height_for_object [Object]
 {0797:} set_rope_height_for_object [Object] {height} [float]
 {0798:} [var vehicle: Car], [var char: Char], [var object: Object] = grab_entity_on_rope_for_object [Object]
 {0799:} release_entity_from_rope_for_object [Object]
-{079D:} player_entered_dock_crane 
-{079E:} player_entered_buildingsite_crane 
-{079F:} player_left_crane 
+{079D:} player_entered_dock_crane
+{079E:} player_entered_buildingsite_crane
+{079F:} player_left_crane
 {07A0:} perform_sequence_task_from_progress [Char] {sequence} [Sequence] {_p3} [int] {_p4} [int]
 {07A1:} set_next_desired_move_state {moveState} [MoveState]
 {07A3:} task_goto_char_aiming {handle} [Char] {target} [Char] {radiusFrom} [float] {radiusTo} [float]
@@ -1099,7 +1099,7 @@
 {07AB:}   is_trailer_attached_to_cab [Trailer] {cab} [Car]
 {07AC:} detach_trailer_from_cab [Trailer] {cab} [Car]
 {07AF:} [var handle: Group] = get_player_group [Player]
-{07B0:} [var name: string] = get_loaded_shop 
+{07B0:} [var name: string] = get_loaded_shop
 {07B1:} [var _p2: int], [var _p3: int], [var _p4: int] = get_beat_proximity {_p1} [int]
 {07B3:} set_group_default_task_allocator [Group] {defaultTaskAllocator} [DefaultTaskAllocator]
 {07B4:} set_player_group_recruitment [Player] {state} [bool]
@@ -1119,7 +1119,7 @@
 {07CB:} listen_to_player_group_commands [Char] {state} [bool]
 {07CC:} set_player_enter_car_button {playerId} [Player] {state} [bool]
 {07CD:} task_char_slide_to_coord {handle} [Char] {x} [float] {y} [float] {z} [float] {angle} [float] {radius} [float]
-{07D0:} [var day: int] = get_current_day_of_week 
+{07D0:} [var day: int] = get_current_day_of_week
 {07D3:} register_script_brain_for_code_use {id} [script_id] {_p2} [string]
 {07D5:} apply_force_to_car [Car] {xOffset} [float] {yOffset} [float] {zOffset} [float] {xRotation} [float] {yRotation} [float] {zRotation} [float]
 {07D6:}   [local var int] == [global var int]
@@ -1146,15 +1146,15 @@
 {07F6:} [var numLeaders: int], [var numMembers: int] = get_group_size [Group]
 {07F7:} set_object_collision_damage_effect [Object] {state} [bool]
 {07F8:} set_car_follow_car [Car] {handle} [Car] {radius} [float]
-{07F9:} player_entered_quarry_crane 
-{07FA:} player_entered_las_vegas_crane 
+{07F9:} player_entered_quarry_crane
+{07FA:} player_entered_las_vegas_crane
 {07FB:} switch_entry_exit {interiorName} [string] {state} [bool]
 {07FC:} display_text_with_float {leftTopX} [float] {leftTopY} [float] {key} [gxt_key] {value} [float] {precision} [int]
 {07FD:}   does_group_exist {handle} [any]
 {07FE:} give_melee_attack_to_char [Char] {fightStyle} [FightStyle] {moveId} [int]
 {07FF:} set_car_hydraulics [Car] {state} [bool]
-{0800:}   is_2player_game_going_on 
-{0801:} [var fov: float] = get_camera_fov 
+{0800:}   is_2player_game_going_on
+{0801:} [var fov: float] = get_camera_fov
 {0803:}   does_car_have_hydraulics [Car]
 {0804:} task_char_slide_to_coord_and_play_anim {handle} [Char] {x} [float] {y} [float] {z} [float] {angle} [float] {radius} [float] {animationName} [string] {animationFile} [string] {frameDelta} [float] {loop} [bool] {lockX} [bool] {lockY} [bool] {lockF} [bool] {time} [int]
 {0806:} [var numPeds: int] = get_total_number_of_peds_killed_by_player [Player]
@@ -1186,7 +1186,7 @@
 {0830:} set_pool_table_coords {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float]
 {0833:}   has_object_been_photographed [Object]
 {0834:} do_camera_bump {xOffset} [float] {yOffset} [float]
-{0835:} [var day: int], [var month: int] = get_current_date 
+{0835:} [var day: int], [var month: int] = get_current_date
 {0836:} set_object_anim_speed [Object] {animationName} [string] {speed} [float]
 {0837:}   is_object_playing_anim [Object] {animationName} [string]
 {0839:} [var time: float] = get_object_anim_current_time [Object] {animationName} [string]
@@ -1221,17 +1221,17 @@
 {0864:} enable_entry_exit_player_group_warping {x} [float] {y} [float] {radius} [float] {state} [bool]
 {0866:} [var handle: Object] = get_closest_stealable_object {x} [float] {y} [float] {z} [float] {radius} [float]
 {0867:}   is_procedural_interior_active {interiorId} [int]
-{0871:} switch_start {caseId} [int] {numCases} [int] {hasDefaultCase} [bool] [label] {caseNum1} [int] [label] {caseNum2} [int] [label] {caseNum3} [int] [label] {caseNum4} [int] [label] {caseNum5} [int] [label] {caseNum6} [int] [label] {caseNum7} [int] [label]
-{0872:} switch_continued {caseNum1} [int] [label] {caseNum2} [int] [label] {caseNum3} [int] [label] {caseNum4} [int] [label] {caseNum5} [int] [label] {caseNum6} [int] [label] {caseNum7} [int] [label] {caseNum8} [int] [label] {caseNum9} [int] [label]
+{0871:} switch_start {caseId} [int] {numCases} [int] {hasDefaultCase} [bool] @label {caseNum1} [int] @label {caseNum2} [int] @label {caseNum3} [int] @label {caseNum4} [int] @label {caseNum5} [int] @label {caseNum6} [int] @label {caseNum7} [int] @label
+{0872:} switch_continued {caseNum1} [int] @label {caseNum2} [int] @label {caseNum3} [int] @label {caseNum4} [int] @label {caseNum5} [int] @label {caseNum6} [int] @label {caseNum7} [int] @label {caseNum8} [int] @label {caseNum9} [int] @label
 {0873:} remove_car_recording {pathId} [int]
 {0874:} set_zone_population_race {zone} [zone_key] {_p2} [int]
 {0875:} set_object_only_damaged_by_player [Object] {state} [bool]
 {0876:} create_birds {xFrom} [float] {yFrom} [float] {zFrom} [float] {xTo} [float] {yTo} [float] {zTo} [float] {quantity} [int] {type} [int]
 {0878:} set_vehicle_dirt_level [Car] {level} [float]
 {0879:} set_gang_wars_active {state} [bool]
-{087A:}   is_gang_war_going_on 
+{087A:}   is_gang_war_going_on
 {087B:} give_player_clothes_outside_shop [Player] {textureName} [string] {modelName} [string] {bodyPart} [BodyPart]
-{087C:} clear_loaded_shop 
+{087C:} clear_loaded_shop
 {087D:} set_group_sequence [Group] {sequence} [Sequence]
 {087E:} set_char_drops_weapons_when_dead [Char] {state} [bool]
 {087F:} set_char_never_leaves_group [Char] {state} [bool]
@@ -1245,7 +1245,7 @@
 {088B:} set_vehicle_air_resistance_multiplier [Car] {multiplier} [float]
 {088C:} set_car_coordinates_no_offset [Car] {x} [float] {y} [float] {z} [float]
 {088D:} set_uses_collision_of_closest_object_of_type {x} [float] {y} [float] {z} [float] {radius} [float] {modelId} [model_object] {state} [bool]
-{088E:} set_time_one_day_forward 
+{088E:} set_time_one_day_forward
 {0890:} set_timer_beep_countdown_time {var_timer} [global var int] {timeInSec} [int]
 {0893:} attach_trailer_to_cab [Trailer] {cab} [Car]
 {0897:}   is_vehicle_touching_object [Car] {handle} [Object]
@@ -1292,12 +1292,12 @@
 {08C7:} set_char_coordinates_dont_warp_gang [Char] {x} [float] {y} [float] {z} [float]
 {08C8:} add_price_modifier {itemId} [int] {modifier} [int]
 {08C9:} remove_price_modifier {itemId} [int]
-{08CA:} init_zone_population_settings 
+{08CA:} init_zone_population_settings
 {08CB:} explode_car_in_cutscene_shake_and_bits [Car] {shake} [bool] {effect} [bool] {sound} [bool]
-{08D0:}   is_skip_cutscene_button_pressed 
-{08D1:} [var xOffset: float], [var yOffset: float], [var zOffset: float] = get_cutscene_offset 
+{08D0:}   is_skip_cutscene_button_pressed
+{08D1:} [var xOffset: float], [var yOffset: float], [var zOffset: float] = get_cutscene_offset
 {08D2:} set_object_scale [Object] {scale} [float]
-{08D3:} [var type: int] = get_current_population_zone_type 
+{08D3:} [var type: int] = get_current_population_zone_type
 {08D4:} [var handle: Menu] = create_menu {header} [gxt_key] {topLeftX} [float] {topLeftY} [float] {width} [float] {numColumns} [int] {interactive} [bool] {background} [bool] {alignment} [int]
 {08D6:} set_menu_column_orientation [Menu] {column} [int] {alignment} [int]
 {08D7:} [var row: int] = get_menu_item_selected [Menu]
@@ -1310,8 +1310,8 @@
 {08DE:} switch_arrest_penalties {state} [bool]
 {08DF:} set_extra_hospital_restart_point {x} [float] {y} [float] {z} [float] {radius} [float] {heading} [float]
 {08E0:} set_extra_police_station_restart_point {x} [float] {y} [float] {z} [float] {radius} [float] {heading} [float]
-{08E1:} [var numTags: int] = find_number_tags_tagged 
-{08E2:} [var percentage: int] = get_territory_under_control_percentage 
+{08E1:} [var numTags: int] = find_number_tags_tagged
+{08E2:} [var percentage: int] = get_territory_under_control_percentage
 {08E3:}   is_object_in_angled_area_2d [Object] {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float] {angle} [float] {drawSphere} [bool]
 {08E4:}   is_object_in_angled_area_3d [Object] {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float] {angle} [float] {drawSphere} [bool]
 {08E5:} [var handle: Char] = get_random_char_in_sphere_no_brain {x} [float] {y} [float] {z} [float] {radius} [float]
@@ -1330,15 +1330,15 @@
 {08F2:} vehicle_can_be_targeted_by_hs_missile [Car] {state} [bool]
 {08F3:} set_freebies_in_vehicle [Car] {state} [bool]
 {08F4:} set_script_limit_to_gang_size {maxSize} [int]
-{08F5:} make_player_gang_disappear 
-{08F6:} make_player_gang_reappear 
+{08F5:} make_player_gang_disappear
+{08F6:} make_player_gang_reappear
 {08F7:} [var textureHash: int], [var modelHash: int] = get_clothes_item [Player] {bodyPart} [BodyPart]
 {08F8:} show_update_stats {state} [bool]
 {08F9:}   [global var string] == [string]
 {08FA:}   [local var string] == [string]
 {08FB:} set_coord_blip_appearance [Blip] {color} [int]
 {08FD:} set_heathaze_effect {state} [bool]
-{08FE:}   is_help_message_being_displayed 
+{08FE:}   is_help_message_being_displayed
 {08FF:}   has_object_been_damaged_by_weapon [Object] {weaponType} [WeaponType]
 {0900:} clear_object_last_weapon_damage [Object]
 {0901:} set_player_jump_button {playerId} [Player] {state} [bool]
@@ -1349,13 +1349,13 @@
 {0908:} set_object_turn_mass [Object] {turnMass} [float]
 {0909:} [var turnMass: float] = get_object_turn_mass [Object]
 {090C:} set_specific_zone_to_trigger_gang_war {zone} [zone_key]
-{090D:} clear_specific_zones_to_trigger_gang_war 
+{090D:} clear_specific_zones_to_trigger_gang_war
 {090E:} set_active_menu_item [Menu] {row} [int]
 {090F:} mark_streamed_script_as_no_longer_needed {id} [script_id]
 {0910:} remove_streamed_script {id} [script_id]
 {0912:} set_message_formatting {_p1} [bool] {margin} [int] {width} [int]
 {0913:} start_new_streamed_script {id} [script_id] {args} [arguments]
-{0915:} set_weather_to_appropriate_type_now 
+{0915:} set_weather_to_appropriate_type_now
 {0916:} winch_can_pick_object_up [Object] {state} [bool]
 {0917:} switch_audio_zone {zone} [zone_key] {state} [bool]
 {0918:} set_car_engine_on [Car] {state} [bool]
@@ -1368,7 +1368,7 @@
 {0922:} camera_set_lerp_fov {from} [float] {to} [float] {time} [int] {ease} [bool]
 {0923:} switch_ambient_planes {state} [bool]
 {0924:} set_darkness_effect {enable} [bool] {pitchBlack} [int]
-{0925:} camera_reset_new_scriptables 
+{0925:} camera_reset_new_scriptables
 {0926:} [var numScripts: int] = get_number_of_instances_of_streamed_script {id} [script_id]
 {0928:} allocate_streamed_script_to_random_ped {id} [script_id] {modelId} [model_char] {priority} [int]
 {0929:} allocate_streamed_script_to_object {id} [script_id] {modelId} [model_object] {priority} [int] {radius} [float] {type} [int]
@@ -1377,8 +1377,8 @@
 {092F:} camera_persist_track {state} [bool]
 {0930:} camera_persist_pos {state} [bool]
 {0931:} camera_persist_fov {state} [bool]
-{0933:}   camera_is_vector_move_running 
-{0934:}   camera_is_vector_track_running 
+{0933:}   camera_is_vector_move_running
+{0934:}   camera_is_vector_track_running
 {0936:} camera_set_vector_move {fromX} [float] {fromY} [float] {fromZ} [float] {toX} [float] {toY} [float] {toZ} [float] {time} [int] {ease} [bool]
 {0937:} draw_window {leftTopX} [float] {leftTopY} [float] {rightBottomX} [float] {rightBottomY} [float] {header} [gxt_key] {zIndex} [int]
 {0939:} attach_car_to_object [Car] {handle} [Object] {xOffset} [float] {yOffset} [float] {zOffset} [float] {xRotation} [float] {yRotation} [float] {zRotation} [float]
@@ -1401,12 +1401,12 @@
 {094E:} disable_char_speech [Char] {stopNow} [bool]
 {094F:} enable_char_speech [Char]
 {0950:} set_up_skip {x} [float] {y} [float] {z} [float] {heading} [float]
-{0951:} clear_skip 
+{0951:} clear_skip
 {0952:} preload_beat_track {trackId} [int]
-{0953:} [var status: int] = get_beat_track_status 
-{0954:} play_beat_track 
-{0955:} stop_beat_track 
-{0956:} [var maxNum: int] = find_max_number_of_group_members 
+{0953:} [var status: int] = get_beat_track_status
+{0954:} play_beat_track
+{0955:} stop_beat_track
+{0956:} [var maxNum: int] = find_max_number_of_group_members
 {0957:} vehicle_does_provide_cover [Car] {state} [bool]
 {0958:} [var handle: Pickup] = create_snapshot_pickup {x} [float] {y} [float] {z} [float]
 {0959:} [var handle: Pickup] = create_horseshoe_pickup {x} [float] {y} [float] {z} [float]
@@ -1425,16 +1425,16 @@
 {0968:} stop_char_facial_talk [Char]
 {0969:}   is_big_vehicle [Car]
 {096A:} switch_police_helis {state} [bool]
-{096B:} store_car_mod_state 
-{096C:} restore_car_mod_state 
+{096B:} store_car_mod_state
+{096C:} restore_car_mod_state
 {096D:} [var modelId: model_object] = get_current_car_mod [Car] {slot} [ModSlot]
 {096E:}   is_car_low_rider [Car]
 {096F:}   is_car_street_racer [Car]
-{0970:} force_death_restart 
-{0971:} sync_water 
+{0970:} force_death_restart
+{0971:} sync_water
 {0972:} set_char_coordinates_no_offset [Char] {x} [float] {y} [float] {z} [float]
 {0973:}   does_script_fire_exist {handle} [any]
-{0974:} reset_stuff_upon_resurrection 
+{0974:} reset_stuff_upon_resurrection
 {0975:}   is_emergency_services_vehicle [Car]
 {0976:} kill_fx_system_now [Particle]
 {0977:}   is_object_within_brain_activation_range [Object]
@@ -1449,7 +1449,7 @@
 {0983:} set_only_create_gang_members {state} [bool]
 {0984:} [var model: int] = get_object_model [Object]
 {0985:} set_char_uses_collision_closest_object_of_type {x} [float] {y} [float] {z} [float] {radius} [float] {modelId} [model_object] {state} [bool] {target} [Char]
-{0986:} clear_all_script_fire_flags 
+{0986:} clear_all_script_fire_flags
 {0987:} [var handle: Car] = get_car_blocking_car [Car]
 {0988:} [var paintjobNumber: int] = get_current_vehicle_paintjob [Car]
 {0989:} set_help_message_box_size {size} [int]
@@ -1461,14 +1461,14 @@
 {0991:} pause_current_beat_track {state} [bool]
 {0992:} set_player_cycle_weapon_button {playerId} [Player] {state} [bool]
 {0994:} mark_road_node_as_dont_wander {x} [float] {y} [float] {z} [float]
-{0995:} unmark_all_road_nodes_as_dont_wander 
+{0995:} unmark_all_road_nodes_as_dont_wander
 {0996:} set_checkpoint_heading [Checkpoint] {heading} [float]
 {0997:} set_mission_respect_total {totalRespect} [int]
 {0998:} award_player_mission_respect {value} [int]
 {099A:} set_car_collision [Car] {state} [bool]
 {099B:} change_playback_to_use_ai [Car]
 {099C:} camera_set_shake_simulation_simple {type} [int] {timeInMs} [float] {intensity} [float]
-{099D:}   is_night_vision_active 
+{099D:}   is_night_vision_active
 {099E:} set_create_random_cops {state} [bool]
 {099F:} task_set_ignore_weapon_range_flag {handle} [Char] {state} [bool]
 {09A0:} task_pick_up_second_object {char} [Char] {object} [Object] {xOffset} [float] {yOffset} [float] {zOffset} [float] {boneId} [int] {_p7} [int] {animationName} [string] {animationFile} [string] {time} [int]
@@ -1499,16 +1499,16 @@
 {09BB:}   is_car_door_damaged [Car] {door} [CarDoor]
 {09BC:} set_char_coordinates_dont_warp_gang_no_offset [Char] {x} [float] {y} [float] {z} [float]
 {09BD:} set_minigame_in_progress {state} [bool]
-{09BE:}   is_minigame_in_progress 
+{09BE:}   is_minigame_in_progress
 {09BF:} set_force_random_car_model {modelId} [model_vehicle]
 {09C0:} [var vehicle: Car] = get_random_car_of_type_in_angled_area_no_save {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float] {angle} [float] {modelId} [model_vehicle]
 {09C1:} add_next_message_to_previous_briefs {state} [bool]
-{09C2:} fail_kill_frenzy 
+{09C2:} fail_kill_frenzy
 {09C3:}   is_cop_vehicle_in_area_3d_no_save {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float]
 {09C4:} set_petrol_tank_weakpoint [Car] {state} [bool]
 {09C5:}   is_char_using_map_attractor [Char]
 {09C7:} set_player_model [Player] {modelId} [int]
-{09C8:}   are_subtitles_switched_on 
+{09C8:}   are_subtitles_switched_on
 {09C9:} remove_char_from_car_maintain_position [Char] {vehicle} [Car]
 {09CA:} set_object_proofs [Object] {bulletProof} [bool] {fireProof} [bool] {explosionProof} [bool] {collisionProof} [bool] {meleeProof} [bool]
 {09CB:}   is_car_touching_car [Car] {handle} [Car]
@@ -1517,11 +1517,11 @@
 {09D0:}   is_vehicle_on_all_wheels [Car]
 {09D1:}   does_pickup_exist {handle} [any]
 {09D2:} enable_ambient_crime {state} [bool]
-{09D4:} clear_wanted_level_in_garage 
+{09D4:} clear_wanted_level_in_garage
 {09D5:} [var _p6: int] = set_char_say_context_important [Char] {_p2} [int] {_p3} [bool] {_p4} [bool] {_p5} [bool]
 {09D6:} set_char_say_script [Char] {_p2} [int] {_p3} [bool] {_p4} [bool] {_p5} [bool]
 {09D7:} force_interior_lighting_for_player [Player] {state} [bool]
-{09D9:} use_detonator 
+{09D9:} use_detonator
 {09DA:}   is_money_pickup_at_coords {x} [float] {y} [float] {z} [float]
 {09DB:} set_menu_column_width [Menu] {column} [int] {width} [int]
 {09DD:} make_room_in_player_gang_for_mission_peds {_p1} [int]
@@ -1541,23 +1541,23 @@
 {09ED:}   has_char_spotted_char_in_front [Char] {handle} [Char]
 {09EE:} force_big_message_and_counter {state} [bool]
 {09EF:} set_vehicle_camera_tweak {modelId} [model_vehicle] {distance} [float] {altitude} [float] {angle} [float]
-{09F0:} reset_vehicle_camera_tweak 
+{09F0:} reset_vehicle_camera_tweak
 {09F1:} report_mission_audio_event_at_char {handle} [Char] {soundId} [int]
 {09F2:}   does_decision_maker_exist {handle} [any]
 {09F4:} ignore_height_difference_following_nodes [Char] {state} [bool]
 {09F5:} shut_all_chars_up {state} [bool]
 {09F6:} set_char_get_out_upside_down_car [Char] {state} [bool]
 {09F7:} report_mission_audio_event_at_car {handle} [Car] {soundId} [int]
-{09F8:} do_weapon_stuff_at_start_of_2p_game 
-{09FA:}   has_game_just_returned_from_frontend 
-{09FB:} [var languageSlot: int] = get_current_language 
+{09F8:} do_weapon_stuff_at_start_of_2p_game
+{09FA:}   has_game_just_returned_from_frontend
+{09FB:} [var languageSlot: int] = get_current_language
 {09FC:}   is_object_intersecting_world [Object]
 {09FD:} [var width: int] = get_string_width {entry} [gxt_key]
 {09FE:} reset_vehicle_hydraulics [Car]
 {09FF:} set_respawn_point_for_duration_of_mission {x} [float] {y} [float] {z} [float]
 {0A01:}   is_this_model_a_car {modelId} [model_any]
 {0A02:} switch_on_ground_searchlight [Searchlight] {state} [bool]
-{0A03:}   is_gang_war_fighting_going_on 
+{0A03:}   is_gang_war_fighting_going_on
 {0A06:}   is_next_station_allowed [Train]
 {0A07:} skip_to_next_allowed_station [Train]
 {0A08:} [var width: int] = get_string_width_with_number {gxtEntry} [gxt_key] {number} [any]
@@ -1566,11 +1566,11 @@
 {0A0B:} load_scene_in_direction {x} [float] {y} [float] {z} [float] {heading} [float]
 {0A0C:}   is_player_using_jetpack [Player]
 {0A0E:} clear_this_print_big_now {textStyle} [TextStyle]
-{0A0F:}   has_language_changed 
+{0A0F:}   has_language_changed
 {0A10:} increment_int_stat_no_message {statId} [int] {value} [int]
 {0A11:} set_extra_car_colours [Car] {color3} [int] {color4} [int]
 {0A12:} [var color3: int], [var color4: int] = get_extra_car_colours [Car]
-{0A13:} manage_all_population 
+{0A13:} manage_all_population
 {0A14:} set_no_resprays {state} [bool]
 {0A15:}   has_car_been_resprayed [Car]
 {0A16:} attach_mission_audio_to_car {slotId} [MissionAudioSlot] {handle} [Car]
@@ -1589,12 +1589,12 @@
 {0A23:} highlight_menu_item [Menu] {row} [int] {state} [bool]
 {0A24:} set_disable_military_zones {state} [bool]
 {0A25:} set_camera_position_unfixed {xOffset} [float] {yOffset} [float]
-{0A26:} set_radio_to_players_favourite_station 
+{0A26:} set_radio_to_players_favourite_station
 {0A27:} set_death_weapons_persist [Char] {state} [bool]
 {0A28:} set_swim_speed [Char] {speed} [float]
 {0A29:}   is_player_climbing [Player]
 {0A2A:}   is_this_help_message_being_displayed {gxt} [gxt_key]
-{0A2B:}   is_widescreen_on_in_options 
+{0A2B:}   is_widescreen_on_in_options
 {0A2C:} draw_subtitles_before_fade {state} [bool]
 {0A2D:} draw_oddjob_title_before_fade {state} [bool]
 {0A2E:} task_follow_path_nodes_to_coord_with_radius {handle} [Char] {x} [float] {y} [float] {z} [float] {mode} [int] {time} [int] {radius} [float]
@@ -1604,9 +1604,9 @@
 {0A32:}   is_char_attached_to_any_car [Char]
 {0A33:} [var handle: Car] = store_car_char_is_attached_to_no_save [Char]
 {0A35:} set_up_skip_for_vehicle_finished_by_script {x} [float] {y} [float] {z} [float] {heading} [float] {vehicle} [Car]
-{0A36:}   is_skip_waiting_for_script_to_fade_in 
+{0A36:}   is_skip_waiting_for_script_to_fade_in
 {0A37:} force_all_vehicle_lights_off {state} [bool]
-{0A39:} [var mode: int] = get_player_in_car_camera_mode 
+{0A39:} [var mode: int] = get_player_in_car_camera_mode
 {0A3A:}   is_last_building_model_shot_by_player [Player] {modelId} [model_any]
 {0A3B:} clear_last_building_model_shot_by_player [Player]
 {0A3C:} set_up_conversation_end_node_with_scripted_speech {speech} [gxt_key] {speechSoundId} [int]
@@ -1615,27 +1615,27 @@
 {0A3F:} set_script_coop_game {state} [bool]
 {0A40:} [var handle: User3DMarker] = create_user_3d_marker {x} [float] {y} [float] {z} [float] {color} [int]
 {0A41:} remove_user_3d_marker [User3DMarker]
-{0A43:} get_rid_of_player_prostitute 
+{0A43:} get_rid_of_player_prostitute
 {0A44:} display_non_minigame_help_messages {state} [bool]
 {0A45:} set_railtrack_resistance_mult {mult} [float]
 {0A46:} switch_object_brains {type} [ScriptBrainAttachType] {state} [bool]
-{0A47:} finish_setting_up_conversation_no_subtitles 
+{0A47:} finish_setting_up_conversation_no_subtitles
 {0A48:} allow_pause_in_widescreen {state} [bool]
-{0A4A:} [var deltaX: float], [var deltaY: float] = get_pc_mouse_movement 
-{0A4B:}   is_pc_using_joypad 
-{0A4C:}   is_mouse_using_vertical_inversion 
-{0A4E:}   is_xbox_player2_pressing_start 
-{0A4F:} finished_with_xbox_player2 
-{0A50:} do_debug_stuff 
+{0A4A:} [var deltaX: float], [var deltaY: float] = get_pc_mouse_movement
+{0A4B:}   is_pc_using_joypad
+{0A4C:}   is_mouse_using_vertical_inversion
+{0A4E:}   is_xbox_player2_pressing_start
+{0A4F:} finished_with_xbox_player2
+{0A50:} do_debug_stuff
 {0A51:}   is_widget_pressed {widgetId} [int]
 {0A52:}   is_widget_released {widgetId} [int]
 {0A53:}   is_widget_doubletapped {widgetId} [int]
 {0A54:}   is_widget_swiped {widgetId} [int]
 {0A55:}   is_widget_swiped_left {widgetId} [int]
 {0A56:}   is_widget_swiped_right {widgetId} [int]
-{0A57:}   [var missionPage: int], [var missionNum: int] = do_mission_skip 
-{0A58:}   [var missionNum: int] = get_mission_num 
-{0A59:}   [var missionPage: int] = get_mission_page 
+{0A57:}   [var missionPage: int], [var missionNum: int] = do_mission_skip
+{0A58:}   [var missionNum: int] = get_mission_num
+{0A59:}   [var missionPage: int] = get_mission_page
 {0A5A:} [var _p2: float] = get_widget_value {widgetId} [int]
 {0A5B:} [var _p2: float], [var _p3: float] = get_widget_value2 {widgetId} [int]
 {0A5C:} display_text_widget {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key]
@@ -1647,8 +1647,8 @@
 {0A61:} remove_widget_flag {widgetId} [WidgetId] {widgetFlag} [WidgetFlag]
 {0A62:} add_button_flag {widgetId} [int] {flag} [int]
 {0A63:} remove_button_flag {widgetId} [int] {flag} [int]
-{0A64:}   is_touch_enabled 
-{0A65:}   is_finalbuild 
+{0A64:}   is_touch_enabled
+{0A65:}   is_finalbuild
 {0A66:} write_log {_p1} [literal string128]
 {0A67:} write_log_int {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [literal string128]
 {0A68:} write_log_float {_p1} [float] {_p2} [float] {_p3} [float] {_p4} [literal string128]
@@ -1661,7 +1661,7 @@
 {0A6F:} checkpoint_save {_p1} [int]
 {0A70:} display_text_clamped {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key] {scale} [float]
 {0A71:} display_text_with_number_clamped {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key] {number} [int] {scale} [float]
-{0A72:} auto_save 
+{0A72:} auto_save
 {0A73:} set_widget_value3 {widgetId} [int] {x} [float] {y} [float] {z} [float]
 {0A74:}   is_checkpoint_resuming {_p1} [bool]
 {0A75:}   set_active_menu_item_car_mods [MenuGrid] {carcolor} [int]
@@ -1687,26 +1687,26 @@
 {0A89:} set_widget_value2 {widgetId} [int] {_p2} [float] {_p3} [float]
 {0A8A:} set_widget_info {widgetId} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [float] {key} [gxt_key]
 {0A8B:} set_widget_info2 {widgetId} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {key} [gxt_key]
-{0A8C:} load_all_streaming_models 
+{0A8C:} load_all_streaming_models
 {0A8D:}   is_hid_released {hidId} [int]
 {0A8E:} unlock_achievement {_p1} [int]
-{0A8F:} release_weapon_lock 
+{0A8F:} release_weapon_lock
 {0A90:}   is_hid_pressed {hidId} [int]
-{0DD0:} [var address: int] = get_label_pointer [label]
+{0DD0:} [var address: int] = get_label_pointer @label
 {0DD1:} [var address: int] = find_function_by_name {pointer} [int]
 {0DD2:} call_function {address} [int]
 {0DD3:} set_register_value {regId} [int] {value} [any]
 {0DD4:} [var value: any] = get_register_value {regId} [int]
-{0DD5:} [var platform: Platform] = get_platform 
-{0DD6:} [var versionId: GameVerInternal] = get_game_version 
-{0DD7:} [var address: int] = get_image_base 
+{0DD5:} [var platform: Platform] = get_platform
+{0DD6:} [var versionId: GameVerInternal] = get_game_version
+{0DD7:} [var address: int] = get_image_base
 {0DD8:} [var result: any] = read_memory {address} [int] {size} [int] {ib} [bool]
 {0DD9:} write_memory {address} [int] {value} [any] {size} [int] {ib} [bool] {vp} [bool]
 {0DDA:} [var address: int] = find_memory_pattern {pointer} [int] {index} [int]
-{0DDB:} [var nameHash: string], [var verHash: string], [var verCode: int] = get_game_version_ex 
+{0DDB:} [var nameHash: string], [var verHash: string], [var verCode: int] = get_game_version_ex
 {0DDC:} set_cleo_shared_var {varId} [int] {value} [any]
 {0DDD:} [var result: any] = get_cleo_shared_var {varId} [int]
 {0DE0:} [var state: bool] = get_touch_point_state {touchPoints} [TouchPoints] {mintime} [int]
 {0DE1:} [var state: bool] = get_touch_slide_state {touchPointsStart} [TouchPoints] {touchPointsEnd} [TouchPoints] {mintime} [int] {maxtime} [int]
-{0DE2:} [var state: bool] = get_menu_button_state 
+{0DE2:} [var state: bool] = get_menu_button_state
 {0DE3:} [var state: bool] = get_menu_button_pressed {mintime} [int]

@@ -29,10 +29,16 @@ if (!outFile) {
 
 const { extensions } = loadFile(inFile);
 const lines = [];
+const names = new Set<string>();
 
 for (const { name, commands } of extensions) {
   for (const command of commands) {
     if (isSupported(command.attrs)) {
+      if (names.has(command.name)) {
+        console.warn(`Duplicate command: ${command.name}`);
+        continue;
+      }
+      names.add(command.name);
       lines.push(makeLine(command));
     }
   }
@@ -50,7 +56,7 @@ function loadFile(path: string) {
 }
 
 function makeLine(command: Command) {
-  let line = `${opcodify(command.id)}: `;
+  let line = `{${opcodify(command.id)}:} `;
   if (command.attrs?.is_condition) {
     line += '  ';
   }
@@ -72,7 +78,7 @@ function makeLine(command: Command) {
           return braceify(stringifyTypeAndSource(param), '[]');
         }
       })
-      .join(' ');
+      .join(', ');
     line += ' = ';
   }
 

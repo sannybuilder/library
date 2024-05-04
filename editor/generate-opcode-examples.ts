@@ -81,13 +81,18 @@ function makeLine(command: Command) {
     command.name.toLowerCase(),
 
     stringify(input, ' ', (param) => {
+      if (param.type === 'label') {
+        return '@label';
+      }
       const t = braceify(stringifyTypeAndSource(param), '[]');
-      if (param.name && param.name !== 'self' && param.type !== 'label') {
+      if (param.name && param.name !== 'self') {
         return `${getParamName(param)} ${t}`;
       }
       return t;
     }),
-  ].join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return line;
 }

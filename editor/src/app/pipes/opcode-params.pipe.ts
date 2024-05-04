@@ -42,7 +42,9 @@ export class OpcodeParamsPipe implements PipeTransform {
         }
         return t;
       }),
-    ].join(' ');
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return line;
   }

@@ -9,7 +9,11 @@ import {
   outputParams,
   stringifyCommandWithOperator,
 } from './src/app/utils';
-import { braceify, stringifyTypeAndSource } from './src/app/pipes/params';
+import {
+  braceify,
+  stringifySource,
+  stringifyTypeAndSource,
+} from './src/app/pipes/params';
 
 const { readFileSync, writeFileSync } = require('fs');
 const [inFile, outFile] = process.argv.slice(2);
@@ -56,9 +60,23 @@ function makeLine(command: Command) {
     return line + stringifyCommandWithOperator(command, cb, cb);
   }
 
-  line += command.name.toLowerCase();
-
+  const output = outputParams(command);
   const input = inputParams(command);
+
+  if (output.length) {
+    line += output
+      .map((param) => {
+        if (param.name) {
+          return braceify(stringifyWithColon(param), '[]');
+        } else {
+          return braceify(stringifyTypeAndSource(param), '[]');
+        }
+      })
+      .join(' ');
+    line += ' = ';
+  }
+
+  line += command.name.toLowerCase();
 
   for (let param of input) {
     if (param.type === 'label') {
@@ -75,19 +93,7 @@ function makeLine(command: Command) {
       }
     }
   }
-  const output = outputParams(command);
-  if (output.length) {
-    for (let param of output) {
-      if (param.name) {
-        line += ` ${getParamName(param)} ${braceify(
-          stringifyTypeAndSource(param),
-          '[]'
-        )}`;
-      } else {
-        line += ` ${braceify(stringifyTypeAndSource(param), '[]')}`;
-      }
-    }
-  }
+
   return line;
 }
 
@@ -96,4 +102,10 @@ function getParamName(param: Param) {
     return `{var_${param.name}}`;
   }
   return `{${param.name}}`;
+}
+
+function stringifyWithColon(p: Param) {
+  return [[stringifySource(p.source), p.name].filter(Boolean).join(' '), p.type]
+    .filter(Boolean)
+    .join(': ');
 }

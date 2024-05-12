@@ -2,7 +2,7 @@
   <ul class="pagination justify-content-center">
     <li
       class="page-item"
-      [ngClass]="{ disabled: currentPage < 2 || currentPage === 'all' }"
+      [ngClass]="{ disabled: currentPage === 'all' || currentPage < 2 }"
     >
       <a class="page-link" href="#" (click)="changePage(+currentPage - 1)"
         >&lt;</a
@@ -16,7 +16,7 @@
     <li
       class="page-item"
       [ngClass]="{
-        disabled: currentPage >= total || currentPage === 'all'
+        disabled: currentPage === 'all' || currentPage >= total
       }"
     >
       <a class="page-link" href="#" (click)="changePage(+currentPage + 1)"

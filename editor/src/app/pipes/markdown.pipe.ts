@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as md from 'markdown-it';
+import md from 'markdown-it';
 
 @Pipe({
   name: 'markdown',

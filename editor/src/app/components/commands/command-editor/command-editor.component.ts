@@ -171,6 +171,16 @@ export class CommandEditorComponent implements OnInit {
       name,
       status: false,
     }));
+    this.sources = [
+      SourceType.any,
+      SourceType.var_any,
+      SourceType.var_global,
+      SourceType.var_local,
+      SourceType.literal,
+    ];
+    if (val === Game.gta_iv) {
+      this.sources.push(SourceType.pointer);
+    }
     this.doesGameRequireOpcode = doesGameRequireOpcode(val);
     this.defaultCommandNameFormatter = getDefaultCommandNameFormatter(val);
   }
@@ -250,14 +260,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   readonly attrs: Attribute[] = CommandAttributes;
-  readonly sources = [
-    SourceType.any,
-    SourceType.var_any,
-    SourceType.var_global,
-    SourceType.var_local,
-    SourceType.literal,
-    SourceType.pointer,
-  ];
+  sources: SourceType[] = [];
 
   readonly errorHandlers: Record<ErrorType, () => void> = {
     invalidAttributeCombo: this.updateAttributeError,

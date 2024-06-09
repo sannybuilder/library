@@ -55,13 +55,29 @@ export class QuizComponent {
   incorrectText: string;
 
   getRandomCommand(): Command {
+    const extensionWeights = this.extensions.map((e) =>
+      Math.min(100, e.commands.length)
+    );
     const randomExtension =
-      this.extensions[Math.floor(Math.random() * this.extensions.length)];
+      this.extensions[this.weightedRandom(extensionWeights)];
 
     const commands = randomExtension.commands.filter((c) =>
       isSupported(c.attrs)
     );
     return commands[Math.floor(Math.random() * commands.length)];
+  }
+
+  weightedRandom(weights: number[]): number {
+    const totalWeight = weights.reduce((acc, w) => acc + w, 0);
+    const random = Math.random() * totalWeight;
+    let weightSum = 0;
+    for (let i = 0; i < weights.length; i++) {
+      weightSum += weights[i];
+      if (random < weightSum) {
+        return i;
+      }
+    }
+    return 0;
   }
 
   questionOnDescription(): Command[] {

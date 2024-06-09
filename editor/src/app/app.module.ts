@@ -106,6 +106,7 @@ import {
   DownloadPanelComponent,
   FilterPanelComponent,
   JsonGeneratorComponent,
+  QuizComponent,
 } from './components/layout';
 
 import {
@@ -216,12 +217,14 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     DecisionTreeComponent,
     JsonGeneratorComponent,
     ExtensionListComponent,
+    QuizComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     ConfigModule,
+    FormsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

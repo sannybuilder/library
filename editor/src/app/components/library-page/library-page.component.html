@@ -11,6 +11,7 @@
         >
           <scl-download-panel [game]="game"></scl-download-panel>
           <scl-filter-panel [game]="game"></scl-filter-panel>
+          <scl-quiz [game]="game" [extensions]="extensions$ | async"></scl-quiz>
           <button
             class="btn btn-sm collapse-button d-none d-xl-block"
             (click)="toggleSidebar()"
@@ -47,7 +48,11 @@
                 <li class="breadcrumb-item">
                   <a routerLink="/">{{ "ui.header.home" | translate }}</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page" [attr.translate]="'no'">
+                <li
+                  class="breadcrumb-item active"
+                  aria-current="page"
+                  [attr.translate]="'no'"
+                >
                   <scl-icon [game]="game" size="16"></scl-icon>
                   {{ game | gameTitle }}
                 </li>
@@ -84,7 +89,12 @@
               >
               <a
                 class="dropdown-item"
-                [routerLink]="['/', game, extensionToCreateCommands$ | async, 'new']"
+                [routerLink]="[
+                  '/',
+                  game,
+                  extensionToCreateCommands$ | async,
+                  'new'
+                ]"
                 >{{ "ui.layout.newCommand" | translate }}</a
               >
             </div>
@@ -315,7 +325,9 @@
         [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
         [snippet]="getSnippet(extension, command.id || command.name) | async"
         [supportInfo]="getCommandSupportInfo(command, extension) | async"
-        [relatedCommands]="findRelatedCommands(command, extension, game) | async"
+        [relatedCommands]="
+          findRelatedCommands(command, extension, game) | async
+        "
         [extension]="extension"
         [displayOpcodePresentation]="displayOpcodePresentation$ | async"
         [classDesc]="(getClassMeta(game, command.class) | async)?.desc"

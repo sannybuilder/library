@@ -69,9 +69,13 @@ export class QuizComponent {
     if (!command.short_desc) {
       return this.questionOnDescription();
     }
-    this.question = this.lowerFirst(command.short_desc);
+    this.question = this.getFirstSentence(this.lowerFirst(command.short_desc));
 
     return this.addWrongChoices([command], 'short_desc');
+  }
+
+  getFirstSentence(text: string) {
+    return text.split('. ').shift() as string;
   }
 
   questionOnClass(): Command[] {

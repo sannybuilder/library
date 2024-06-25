@@ -102,8 +102,8 @@ export class UiFacade {
     this.store$.dispatch(toggleAttribute({ attribute, modifier }));
   }
 
-  updateSearch(searchTerm: string) {
-    this.store$.dispatch(updateSearchTerm({ searchTerm }));
+  updateSearch(searchTerm: string, autoOpenSingleResult = false) {
+    this.store$.dispatch(updateSearchTerm({ searchTerm, autoOpenSingleResult }));
   }
 
   toggleCommandListElements(flag: boolean) {

@@ -203,9 +203,7 @@ export class UiEffects {
           }
 
           if (searchTerm) {
-            return [
-              updateSearchTerm({ searchTerm, autoOpenSingleResult: true }),
-            ];
+            this._ui.updateSearch(searchTerm, true);
           }
 
           if (extension === 'all') {
@@ -489,7 +487,11 @@ export class UiEffects {
   loadEnumsSuccess$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnumsSuccess),
-      withLatestFrom(this._ui.enumToDisplayOrEdit$, this._ui.viewMode$, this._game.game$),
+      withLatestFrom(
+        this._ui.enumToDisplayOrEdit$,
+        this._ui.viewMode$,
+        this._game.game$
+      ),
       filter(
         ([{ enums, game }, enumToEdit, viewMode, currentGame]) =>
           !!enumToEdit &&

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1719089717503,
-    "version": "0.235",
+    "last_update": 1719604032731,
+    "version": "0.236",
     "url": "https://library.sannybuilder.com/#/unknown_x64"
   },
   "extensions": [
@@ -130,6 +130,67 @@
           "class": "ImGui",
           "member": "BeginChildEx",
           "short_desc": "Creates a child window widget inside the main window",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "disabled",
+              "type": "bool"
+            }
+          ],
+          "id": "2253",
+          "name": "IMGUI_BEGIN_DISABLED",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "BeginDisabled",
+          "short_desc": "Disables ImGui widgets inside this block",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "id": "2254",
+          "name": "IMGUI_END_DISABLED",
+          "num_params": 0,
+          "class": "ImGui",
+          "member": "EndDisabled",
+          "short_desc": "Closes the ImGui disable block",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "enabled",
+              "type": "bool"
+            }
+          ],
+          "id": "2255",
+          "name": "IMGUI_BEGIN_MENU",
+          "num_params": 2,
+          "class": "ImGui",
+          "member": "BeginMenu",
+          "short_desc": "Begins a ImGui menu block",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "id": "2256",
+          "name": "IMGUI_END_MENU",
+          "num_params": 0,
+          "class": "ImGui",
+          "member": "EndMenu",
+          "short_desc": "Ends a ImGui menu block",
           "attrs": {
             "is_static": true
           }
@@ -1875,20 +1936,14 @@
               "type": "bool"
             }
           ],
-          "output": [
-            {
-              "name": "state",
-              "type": "bool",
-              "source": "var_any"
-            }
-          ],
           "name": "IMGUI_BEGIN",
-          "num_params": 7,
+          "num_params": 6,
           "short_desc": "Creates the window",
           "class": "ImGui",
           "member": "Begin",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_condition": true
           }
         }
       ]

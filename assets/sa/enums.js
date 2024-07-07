@@ -2691,3 +2691,10 @@ export const ParamTypes = {
   "Int": 0,
   "Float": 1
 };
+export const DecisionMakerType = {
+  "Empty": 0,
+  "Normal": 1,
+  "Tough": 2,
+  "Weak": 3,
+  "Steal": 4
+};

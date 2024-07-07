@@ -695,7 +695,12 @@ export const FightStyle = {
   "Elbows": 16
 };
 export const MoveState = {
+  "None": 0,
+  "Still": 1,
+  "TurnLeft": 2,
+  "TurnRight": 3,
   "Walk": 4,
+  "Jog": 5,
   "Run": 6,
   "Sprint": 7
 };

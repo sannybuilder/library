@@ -2698,3 +2698,14 @@ export const DecisionMakerType = {
   "Weak": 3,
   "Steal": 4
 };
+export const DriveByType = {
+  "FixedLeft": 0,
+  "FixedRight": 1,
+  "FixedStartLeft": 2,
+  "FixedStartRight": 3,
+  "AiSide": 4,
+  "FixedFront": 5,
+  "FixedBack": 6,
+  "AiFrontAndBack": 7,
+  "Ai": 8
+};

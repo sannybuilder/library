@@ -2714,3 +2714,9 @@ export const DriveByType = {
   "AiFrontAndBack": 7,
   "Ai": 8
 };
+export const RouteMode = {
+  "Once": 0,
+  "Return": 1,
+  "BackForward": 2,
+  "Loop": 3
+};

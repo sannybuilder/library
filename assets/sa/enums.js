@@ -3027,3 +3027,15 @@ export const StatId = {
   "StartedCat2": 341,
   "StartedCrash1": 342
 };
+export const CheckpointType = {
+  "TubeArrow": 0,
+  "TubeEnd": 1,
+  "Tube": 2,
+  "Torus": 3,
+  "TorusNoFade": 4,
+  "TorusRot": 5,
+  "TorusThrough": 6,
+  "TorusUpDown": 7,
+  "TorusDown": 8,
+  "Num": 9
+};

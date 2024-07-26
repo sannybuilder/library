@@ -37,7 +37,7 @@ for (const { name, commands } of extensions) {
     if (isSupported(command.attrs)) {
       if (names.has(command.name)) {
         console.warn(`Duplicate command: ${command.name}`);
-        continue;
+        // continue;
       }
       names.add(command.name);
       lines.push(makeLine(command));

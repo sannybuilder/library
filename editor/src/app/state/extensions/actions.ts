@@ -35,6 +35,7 @@ export const updateCommands = createAction(
   '[extensions] batch update commands',
   props<{
     batch: GameCommandUpdate[];
+    updateRelated: boolean;
   }>()
 );
 

@@ -66,14 +66,17 @@ export class ExtensionsFacade {
     command,
     newExtension,
     oldExtension,
+    updateRelated,
   }: {
     command: Command;
     newExtension: string;
     oldExtension: string;
+    updateRelated: boolean;
   }) {
     this.store$.dispatch(
       updateCommands({
         batch: [{ command, newExtension, oldExtension, ignoreVersionAndPlatform: false }],
+        updateRelated
       })
     );
   }

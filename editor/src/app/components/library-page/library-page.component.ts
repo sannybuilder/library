@@ -117,6 +117,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   screenSize: number;
   editorHasError = false;
   generateJsonModel: GenerateJsonModel;
+  updateRelatedCommands = true;
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -475,6 +476,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       newExtension: this.extension!,
       oldExtension: this.oldExtension!,
       command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
+      updateRelated: this.updateRelatedCommands,
     });
     if (this.snippet !== this.oldSnippet) {
       this._snippets.updateSnippet({
@@ -485,6 +487,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this._ui.stopEditOrDisplay();
+    this.updateRelatedCommands = true;
   }
 
   private _onSaveEnum() {

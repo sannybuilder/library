@@ -109,7 +109,7 @@ export class ExtensionsEffects {
     this._actions$.pipe(
       ofType(updateCommands),
       withLatestFrom(this._game.game$, this._extensions.commandsToDelete$),
-      switchMap(([{ batch }, game, commandsToDelete]) => {
+      switchMap(([{ batch, updateRelated }, game, commandsToDelete]) => {
         return zip(
           ...batch.map(({ command, newExtension, oldExtension }) => {
             // find copies of this command in other games to propagate the changes
@@ -128,7 +128,8 @@ export class ExtensionsEffects {
                     if (
                       // Other games should not trigger cross game updates, nor should they be updated
                       !isOtherGame(game) &&
-                      shouldUpdateOtherGames(command, oldCommand)
+                      shouldUpdateOtherGames(command, oldCommand) &&
+                      updateRelated
                     ) {
                       return getSameCommands(supportInfo, game)
                         .filter((d) => !isOtherGame(d.game))

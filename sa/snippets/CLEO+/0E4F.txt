@@ -1,0 +1,23 @@
+{$USE CLEO+}
+
+add_text_label {dynamicKey} 'TMR_TXT' {text} "~r~Explosion"
+
+int screenTimer
+display_onscreen_timer_with_string_local {var_timer} screenTimer {direction} TimerDirection.Down {text} 'TMR_TXT'
+screenTimer = 10000 // 10 seconds
+set_timer_beep_countdown_time_local {var_timer} screenTimer {timeInSec} 6 // start beeping when less than 6 seconds left
+
+while true
+    wait 0
+
+    print_formatted_now {text} "Peek time left: %d" {time} 100 {args} screenTimer
+
+    if
+        screenTimer == 0
+    then
+        print_string_now {text} "~r~BOOM!" {time} 3000
+        break // exit the loop
+    end
+end
+
+clear_onscreen_timer_local {var_timer} screenTimer

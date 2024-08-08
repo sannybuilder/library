@@ -98,6 +98,7 @@ import {
   CommandListComponent,
   CommandGamesComponent,
   ExtensionListComponent,
+  CommandDeclarationComponent,
 } from './components/commands';
 
 import {
@@ -218,6 +219,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     JsonGeneratorComponent,
     ExtensionListComponent,
     QuizComponent,
+    CommandDeclarationComponent,
   ],
   imports: [
     BrowserModule,

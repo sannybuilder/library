@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { doesGameRequireOpcode, getQueryParamsForCommand, isSupported } from '../../../utils';
-import { Command, DEFAULT_EXTENSION, Extension, Game } from '../../../models';
+import { Command, DEFAULT_EXTENSION, Extension, ViewContext, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
@@ -21,7 +21,7 @@ export class CommandListComponent {
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
-  @Output() descriptionClick = new EventEmitter();
+  @Input() viewContext: ViewContext;
 
   loading$ = this._extensions.loading$;
   loadingError$ = this._extensions.loadingError$;
@@ -55,11 +55,6 @@ export class CommandListComponent {
     return false;
   }
 
-  interceptDescriptionClick(event: MouseEvent) {
-    this.descriptionClick.next(event);
-    return false;
-  }
-
   getQueryParamsForCommand(command: Command, game: Game) {
     return getQueryParamsForCommand(command, game);
   }
@@ -70,5 +65,12 @@ export class CommandListComponent {
 
   isSupported(command: Command) {
     return isSupported(command.attrs)
+  }
+
+  get baseHref() {
+    if (this.viewContext === ViewContext.Code) {
+      return `/${this.game}/functions`
+    }
+    return `/${this.game}`;
   }
 }

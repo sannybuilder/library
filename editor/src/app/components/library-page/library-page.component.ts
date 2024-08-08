@@ -18,6 +18,7 @@ import {
   DEFAULT_EXTENSION,
   Enum,
   EnumRaw,
+  ViewContext,
   Game,
   GenerateJsonModel,
   ParamType,
@@ -54,12 +55,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   ViewMode = ViewMode;
+  ViewContext = ViewContext;
   onDestroy$ = new Subject();
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
   classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
   game$ = this._game.game$;
+  viewContext$ = this._game.viewContext$;
   canEdit$ = this._ui.canEdit$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
@@ -69,7 +72,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
   extensionToCreateCommands$ = this._ui.selectedExtensions$.pipe(
     map((selectedExtensions) => {
-      if (selectedExtensions?.length === 1) {
+      if (selectedExtensions?.length === 1 && selectedExtensions[0] !== 'any') {
         return selectedExtensions[0];
       }
       return DEFAULT_EXTENSION;
@@ -231,17 +234,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._ui.stopEditOrDisplay();
   }
 
-  onDescriptionClick(e: MouseEvent) {
-    if ((e.target as Element)?.tagName === 'A') {
-      const href = (e.target as Element).attributes.getNamedItem('href')?.value;
-      if (href) {
-        const parts = href.split('/');
-        this._router.navigate(['/', ...parts.slice(1)]);
-      }
-    }
-  }
-
-  toggleOpcodePresentation() {
+  onToggleOpcodePresentation() {
     this._ui.toggleOpcodePresentation();
     return false;
   }
@@ -469,6 +462,13 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   doesGameRequireOpcode(game: Game) {
     return doesGameRequireOpcode(game);
+  }
+
+  baseHref(game: Game, viewContext: ViewContext) {
+    if (viewContext === ViewContext.Code) {
+      return `/${game}/functions`;
+    }
+    return `/${game}`;
   }
 
   private _onSaveCommand() {

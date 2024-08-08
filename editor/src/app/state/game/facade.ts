@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
-import { Game, GenerateJsonModel, Platform, Version } from '../../models';
+import { ViewContext, Game, GenerateJsonModel, Platform, Version } from '../../models';
 import { onListEnter } from './actions';
 import * as selector from './selectors';
 
@@ -12,6 +12,7 @@ export class GameFacade {
     distinctUntilChanged(),
     filter((v): v is Game => !!v)
   );
+  viewContext$ = this.store$.select(selector.viewContext);
 
   constructor(private store$: Store) {}
 
@@ -25,6 +26,7 @@ export class GameFacade {
     searchTerm,
     platforms,
     versions,
+    viewContext,
     generateJsonModel
   }: {
     game: Game;
@@ -36,6 +38,7 @@ export class GameFacade {
     searchTerm?: string;
     platforms?: Platform[];
     versions?: Version[];
+    viewContext?: ViewContext,
     generateJsonModel?: GenerateJsonModel
   }) {
     this.store$.dispatch(
@@ -49,6 +52,7 @@ export class GameFacade {
         searchTerm,
         platforms,
         versions,
+        viewContext,
         generateJsonModel
       })
     );

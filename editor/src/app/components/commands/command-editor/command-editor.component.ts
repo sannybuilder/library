@@ -20,6 +20,7 @@ import {
   Command,
   CommandAttributes,
   DEFAULT_EXTENSION,
+  ViewContext,
   Game,
   GamePlatforms,
   GameSupportInfo,
@@ -100,6 +101,7 @@ const SELF = 'self';
 export class CommandEditorComponent implements OnInit {
   private _command: Command;
   private _supportInfo: GameSupportInfo[] | undefined;
+  private _viewContext: ViewContext;
 
   PrimitiveType = PrimitiveType;
   SourceType = SourceType;
@@ -109,13 +111,24 @@ export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   isNew: boolean;
-  doesGameRequireOpcode: boolean;
   paramTypes: string[] = [];
   classes: string[] = [];
   primitives: PrimitiveType[] = [];
   cloneTargets: Game[] = [];
   defaultCommandNameFormatter: (name: string | undefined) => string | undefined;
 
+  features = {
+    opcode: true,
+    operator: true,
+    cc: false
+  };
+
+  ccs = [
+    'cdecl',
+    'stdcall',
+    'thiscall'
+  ];
+  
   operations = [
     'assignment =',
     'addition +',
@@ -165,6 +178,20 @@ export class CommandEditorComponent implements OnInit {
 
   versions: Array<{ name: Version; status: boolean }> = [];
 
+  @Input() set viewContext(val: ViewContext) {
+    this._viewContext = val;
+
+    if (val === ViewContext.Code) {
+      this.features.opcode = false;
+      this.features.operator = false
+      this.features.cc = true;
+    }
+  }
+
+  get viewContext() {
+    return this._viewContext;
+  }
+
   @Input() set game(val: Game) {
     this.versions = GameVersions[val].map((name) => ({ name, status: false }));
     this.platforms = GamePlatforms[val].map((name) => ({
@@ -181,7 +208,7 @@ export class CommandEditorComponent implements OnInit {
     if (val === Game.gta_iv) {
       this.sources.push(SourceType.pointer);
     }
-    this.doesGameRequireOpcode = doesGameRequireOpcode(val);
+    this.features.opcode = doesGameRequireOpcode(val);
     this.defaultCommandNameFormatter = getDefaultCommandNameFormatter(val);
   }
 
@@ -745,17 +772,17 @@ export class CommandEditorComponent implements OnInit {
 
   private updateEmptyOpcodeError() {
     this.errors.emptyOpcode =
-      this.doesGameRequireOpcode && doesCommandHaveEmptyId(this.command);
+    this.features.opcode && doesCommandHaveEmptyId(this.command);
   }
 
   private updateInvalidOpcodeError() {
     this.errors.invalidOpcode =
-      this.doesGameRequireOpcode && doesCommandHaveInvalidOpcode(this.command);
+    this.features.opcode && doesCommandHaveInvalidOpcode(this.command);
   }
 
   private updateOutOfRangeOpcodeError() {
     this.errors.outOfRangeOpcode =
-      this.doesGameRequireOpcode &&
+    this.features.opcode &&
       doesCommandHaveOutOfRangeOpcode(this.command);
   }
 

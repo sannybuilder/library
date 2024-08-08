@@ -75,8 +75,15 @@ export class ExtensionsFacade {
   }) {
     this.store$.dispatch(
       updateCommands({
-        batch: [{ command, newExtension, oldExtension, ignoreVersionAndPlatform: false }],
-        updateRelated
+        batch: [
+          {
+            command,
+            newExtension,
+            oldExtension,
+            ignoreVersionAndPlatform: false,
+          },
+        ],
+        updateRelated,
       })
     );
   }
@@ -84,7 +91,6 @@ export class ExtensionsFacade {
   init() {
     this.store$.dispatch(init());
   }
-
 
   cloneCommand({
     command,
@@ -109,7 +115,7 @@ export class ExtensionsFacade {
     return this.store$.select(selector.commandRelated, {
       command,
       extension,
-      game
+      game,
     });
   }
 

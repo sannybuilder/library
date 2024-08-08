@@ -11,7 +11,11 @@
         >
           <scl-download-panel [game]="game"></scl-download-panel>
           <scl-filter-panel [game]="game"></scl-filter-panel>
-          <scl-quiz [game]="game" [extensions]="extensions$ | async"></scl-quiz>
+          <scl-quiz
+            *ngIf="(viewContext$ | async) === ViewContext.Script"
+            [game]="game"
+            [extensions]="extensions$ | async"
+          ></scl-quiz>
           <button
             class="btn btn-sm collapse-button d-none d-xl-block"
             (click)="toggleSidebar()"
@@ -97,18 +101,35 @@
                 ]"
                 >{{ "ui.layout.newCommand" | translate }}</a
               >
+              <a
+                class="dropdown-item"
+                [routerLink]="[
+                  '/',
+                  'functions',
+                  game,
+                  extensionToCreateCommands$ | async,
+                  'new'
+                ]"
+                >{{ "ui.layout.newFunction" | translate }}</a
+              >
             </div>
           </div>
 
           <div class="d-flex flex-row justify-content-center mb-3">
+            <a class="mr-3" [routerLink]="['/', game]">{{
+              "ui.header.menuCommands" | translate
+            }}</a>
             <a class="mr-3" [routerLink]="['/', game, 'extensions']">{{
               "ui.header.menuExtensions" | translate
             }}</a>
             <a class="mr-3" [routerLink]="['/', game, 'classes']">{{
               "ui.header.menuClasses" | translate
             }}</a>
-            <a [routerLink]="['/', game, 'enums']">{{
+            <a class="mr-3" [routerLink]="['/', game, 'enums']">{{
               "ui.header.menuEnums" | translate
+            }}</a>
+            <a [routerLink]="['/', game, 'functions']">{{
+              "ui.header.menuFunctions" | translate
             }}</a>
           </div>
 
@@ -116,6 +137,7 @@
             [game]="game"
             [canEdit]="canEdit$ | async"
             [gameExtensions]="getGameExtensions(game) | async"
+            [viewContext]="viewContext$ | async"
             [narrowed]="
               shouldDisplayRightRail(viewMode) &&
               screenSize >= 1200 &&
@@ -192,11 +214,14 @@
 
         <label
           class="form-check-label"
-          *ngIf="viewMode === ViewMode.EditCommand"
+          *ngIf="
+            viewMode === ViewMode.EditCommand &&
+            (viewContext$ | async) === ViewContext.Script
+          "
         >
           <input type="checkbox" [(ngModel)]="updateRelatedCommands" />
           <span class="checkbox"></span>
-          Update related commands
+          {{ "ui.shared.updateRelatedCommands" | translate }}
         </label>
 
         <scl-icon-button
@@ -207,16 +232,6 @@
           (clicked)="toggleInlineDesc()"
           [title]="'ui.classOverview.toggleInlineDescription' | translate"
         ></scl-icon-button>
-
-        <scl-icon-button
-          *ngIf="
-            viewMode === ViewMode.ViewCommand && doesGameRequireOpcode(game)
-          "
-          [icon]="(displayOpcodePresentation$ | async) ? 'eye-fill' : 'eye'"
-          [title]="'ui.shared.toggleOpcode' | translate"
-          (clicked)="toggleOpcodePresentation()"
-        >
-        </scl-icon-button>
 
         <scl-icon-button
           *ngIf="viewMode === ViewMode.ViewEnum"
@@ -250,8 +265,7 @@
           *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
           class="btn btn-outline-success"
           [routerLink]="[
-            '/',
-            game,
+            baseHref(game, viewContext$ | async),
             extension,
             command.id || command.name,
             'edit'
@@ -323,6 +337,7 @@
         [supportInfo]="getCommandSupportInfo(command, extension) | async"
         [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
         [commands]="getExtensionCommands(extension) | async"
+        [viewContext]="viewContext$ | async"
         (hasError)="editorHasError = $event"
         (delete)="onDeleteCommand(command, game)"
         (clone)="onCloneCommand($event)"
@@ -341,8 +356,9 @@
         [displayOpcodePresentation]="displayOpcodePresentation$ | async"
         [classDesc]="(getClassMeta(game, command.class) | async)?.desc"
         [gameExtensions]="getGameExtensions(game) | async"
-        (descriptionClick)="onDescriptionClick($event)"
         [fullDescription]="getFullDescription(command) | async"
+        [viewContext]="viewContext$ | async"
+        (toggleOpcodePresentation)="onToggleOpcodePresentation()"
       >
       </scl-command-info>
       <scl-class-overview

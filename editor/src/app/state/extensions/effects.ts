@@ -67,15 +67,29 @@ export class ExtensionsEffects {
     )
   );
 
+  viewContexts$ = createEffect(() =>
+    this._game.viewContext$.pipe(
+      withLatestFrom(this._game.game$),
+      distinctUntilChanged(),
+      map(([_, game]) =>
+        loadExtensions({
+          game,
+        })
+      )
+    )
+  );
+
   loadExtensions$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadExtensions),
+      withLatestFrom(this._game.viewContext$),
       distinctUntilChanged(
-        (a, b) => GameLibrary[a.game] === GameLibrary[b.game]
+        ([a, ea], [b, eb]) =>
+          GameLibrary[a.game] === GameLibrary[b.game] && ea === eb
       ),
       withLatestFrom(this._auth.authToken$, this._auth.isAuthorized$),
-      concatMap(([{ game }, accessToken, isAuthorized]) =>
-        this._service.loadExtensions(game, accessToken).pipe(
+      concatMap(([[{ game }, viewContext], accessToken, isAuthorized]) =>
+        this._service.loadExtensions(game, viewContext, accessToken).pipe(
           switchMap((response) => {
             const actions: Action[] = [
               loadExtensionsSuccess({

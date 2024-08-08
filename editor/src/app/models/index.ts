@@ -92,6 +92,7 @@ export interface Command {
   platforms?: Platform[];
   versions?: Version[];
   operator?: string;
+  cc?: 'cdecl' | 'stdcall' | 'thiscall'
 }
 
 export interface Extension {
@@ -187,6 +188,11 @@ export const GameOpcodesTxtAssets: Partial<Record<Game, string>> = {
 export const GameLibrary: Record<Game, string> = r(
   (game) => `${game}/${game}.json`
 );
+
+export const GameFunctionLibrary: Record<Game, string> = r(
+  (game) => `${game}/functions.json`
+);
+
 
 export const GameVersion: Record<Game, string> = r(
   (game) => `${game}/version.txt`
@@ -288,6 +294,11 @@ export enum ViewMode {
   ViewAllExtensions = 'ViewAllExtensions',
   ViewDecisionTree = 'ViewDecisionTree',
   ViewGenerateJson = 'ViewGenerateJson',
+}
+
+export enum ViewContext {
+  Script,
+  Code,
 }
 
 export type Modifier = 'except' | 'only';

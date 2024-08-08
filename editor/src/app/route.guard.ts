@@ -9,6 +9,7 @@ import {
 } from '@angular/router';
 import {
   DEFAULT_EXTENSION,
+  ViewContext,
   Game,
   GameTitle,
   Platform,
@@ -73,6 +74,20 @@ export class RouteGuard implements CanActivate {
         game,
         enumName,
         extension: DEFAULT_EXTENSION,
+        action: segments.shift(),
+      });
+      return true;
+    }
+
+    if (subPath === 'functions') {
+      // sa/functions/1.0/0x400000
+      const extension = segments.shift() || '1.0';
+      const functionName = segments.shift();
+      this._game.onListEnter({
+        game,
+        extension,
+        id: functionName,
+        viewContext: ViewContext.Code,
         action: segments.shift(),
       });
       return true;

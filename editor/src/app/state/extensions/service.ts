@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import {
+  ViewContext,
   Game,
+  GameFunctionLibrary,
   GameLibrary,
   LoadExtensionsResponse,
   PackedSupportInfo,
@@ -12,9 +14,15 @@ import { GitHubService } from '../github/service';
 export class ExtensionsService {
   constructor(private _github: GitHubService) {}
 
-  loadExtensions(game: Game, accessToken?: string) {
+  loadExtensions(
+    game: Game,
+    viewContext: ViewContext,
+    accessToken?: string
+  ) {
     return this._github.loadFileGracefully<LoadExtensionsResponse>(
-      GameLibrary[game],
+      viewContext === ViewContext.Script
+        ? GameLibrary[game]
+        : GameFunctionLibrary[game],
       accessToken,
       game
     );

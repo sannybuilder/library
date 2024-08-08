@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Game, GenerateJsonModel, Platform, Version } from '../../models';
+import { ViewContext, Game, GenerateJsonModel, Platform, Version } from '../../models';
 
 export const onListEnter = createAction(
   '[game] on list enter',
@@ -13,6 +13,7 @@ export const onListEnter = createAction(
     searchTerm?: string;
     platforms?: Platform[];
     versions?: Version[];
+    viewContext?: ViewContext,
     generateJsonModel?: GenerateJsonModel
   }>()
 );

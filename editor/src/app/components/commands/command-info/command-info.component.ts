@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { getQueryParamsForCommand, isSupported } from '../../../utils';
+import { doesGameRequireOpcode, getQueryParamsForCommand, isSupported } from '../../../utils';
 import {
   Attribute,
   Command,
@@ -17,6 +17,7 @@ import {
   Platform,
   SupportInfo,
   Version,
+  ViewContext,
 } from '../../../models';
 import { stringifySource } from '../../../pipes/params';
 
@@ -28,6 +29,7 @@ import { stringifySource } from '../../../pipes/params';
 })
 export class CommandInfoComponent {
   DEFAULT_EXTENSION = DEFAULT_EXTENSION;
+  ViewContext = ViewContext;
   private _command: Command;
   private _attrs: Attribute[];
   private _primitives: string[] = [];
@@ -77,7 +79,9 @@ export class CommandInfoComponent {
   @Input() classDesc?: string;
   @Input() gameExtensions: Extension[];
   @Input() fullDescription?: string;
-  @Output() descriptionClick = new EventEmitter();
+  @Input() viewContext: ViewContext;
+
+  @Output() toggleOpcodePresentation = new EventEmitter();
 
   isPrimitiveType(param: Param) {
     return this._primitives.includes(param.type);
@@ -91,11 +95,6 @@ export class CommandInfoComponent {
     return this.classNames.includes(param.type);
   }
 
-  interceptDescriptionClick(event: MouseEvent) {
-    this.descriptionClick.next(event);
-    return false;
-  }
-
   getQueryParamsForCommand(command: Command, game: Game) {
     return getQueryParamsForCommand(command, game);
   }
@@ -106,5 +105,14 @@ export class CommandInfoComponent {
 
   stringifySource(param: Param) {
     return stringifySource(param.source);
+  }
+
+  onToggleOpcodePresentation() {
+    this.toggleOpcodePresentation.emit();
+    return false;
+  }
+
+  doesGameRequireOpcode(game: Game) {
+    return doesGameRequireOpcode(game);
   }
 }

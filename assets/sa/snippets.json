@@ -23,6 +23,7 @@
   },
   "CLEO+": {
     "0E1D": "const Key_F11=122\nwhile true\n    wait 0\n    if is_key_just_pressed Key_F11\n    then\n        if is_on_mission\n        then set_on_mission False\n        else set_on_mission True\n        end\n    end\nend",
+    "0E2A": "CleoBlip ogLocBlip = add_cleo_blip {rwTextureOrRadarSprite} 28 {x} 2486.0 {y} -1650.0 {short} false {red} 64 {green} 255 {blue} 128 {alpha} 255",
     "0E32": "",
     "0E3D": "const Key_F11=122\nwhile true\n    wait 0\n    if is_key_just_pressed Key_F11\n    then\n        if is_on_mission\n        then set_on_mission False\n        else set_on_mission True\n        end\n    end\nend",
     "0E4E": "{$USE CLEO+}\n\nint screenTimer\ndisplay_onscreen_timer_local {var_timer} screenTimer {direction} TimerDirection.Down\nscreenTimer = 10000 // 10 seconds\nset_timer_beep_countdown_time_local {var_timer} screenTimer {timeInSec} 6 // start beeping when less than 6 seconds left\n\nwhile true\n    wait 0\n    \n    print_formatted_now {text} \"Peek time left: %d\" {time} 3000 {args} screenTimer\n    \n    if\n        screenTimer == 0\n    then\n        print_string_now {text} \"Time is up!\" {time} 3000\n        break // exit the loop\n    end    \nend\n\nclear_onscreen_timer_local {var_timer} screenTimer",

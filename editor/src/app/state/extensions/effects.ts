@@ -10,7 +10,6 @@ import {
   map,
   take,
   distinctUntilChanged,
-  first,
   catchError,
 } from 'rxjs/operators';
 import { flatMap, groupBy, flatten } from 'lodash';
@@ -58,24 +57,16 @@ import { unpackSupportInfo } from 'src/app/utils/support-info';
 export class ExtensionsEffects {
   extensions$ = createEffect(() =>
     this._game.game$.pipe(
-      switchMap((game) =>
-        this._extensions.getGameExtensions(game).pipe(
-          first((e) => !e.length),
-          map(() => loadExtensions({ game }))
-        )
-      )
+      distinctUntilChanged(),
+      map((game) => loadExtensions({ game }))
     )
   );
 
   viewContexts$ = createEffect(() =>
     this._game.viewContext$.pipe(
-      withLatestFrom(this._game.game$),
       distinctUntilChanged(),
-      map(([_, game]) =>
-        loadExtensions({
-          game,
-        })
-      )
+      withLatestFrom(this._game.game$),
+      map(([_, game]) => loadExtensions({ game }))
     )
   );
 

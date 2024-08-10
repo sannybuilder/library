@@ -67,7 +67,7 @@ export const extensionsReducer = createReducer(
     }
   ),
   on(loadExtensionsError, (state, { game }) =>
-    updateState(state, game, { loading: false, loadingError: true })
+    updateState(state, game, { loading: false, loadingError: true, extensions: [] })
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(

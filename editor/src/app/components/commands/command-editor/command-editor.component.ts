@@ -64,6 +64,7 @@ import {
   doesCommandHaveInvalidArgumentWithOperator,
   doesSelfArgumentHaveInvalidType,
   doesOutputHaveInvalidSource,
+  primitiveTypes,
 } from '../../../utils';
 
 type ErrorType =
@@ -86,7 +87,7 @@ type ErrorType =
   | 'invalidConditionalOperator'
   | 'invalidArgumentWithOperator'
   | 'invalidSelfType'
-  | 'invalidOutputSource'
+  | 'invalidOutputSource';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -120,15 +121,11 @@ export class CommandEditorComponent implements OnInit {
   features = {
     opcode: true,
     operator: true,
-    cc: false
+    cc: false,
   };
 
-  ccs = [
-    'cdecl',
-    'stdcall',
-    'thiscall'
-  ];
-  
+  ccs = ['cdecl', 'stdcall', 'thiscall'];
+
   operations = [
     'assignment =',
     'addition +',
@@ -183,7 +180,7 @@ export class CommandEditorComponent implements OnInit {
 
     if (val === ViewContext.Code) {
       this.features.opcode = false;
-      this.features.operator = false
+      this.features.operator = false;
       this.features.cc = true;
     }
   }
@@ -293,7 +290,8 @@ export class CommandEditorComponent implements OnInit {
     invalidAttributeCombo: this.updateAttributeError,
     duplicateName: this.updateDuplicateNameError,
     duplicateParamName: this.updateDuplicateParamNameError,
-    noConstructorWithoutOutputParams: this.updateNoConstructorWithoutOutputParamsError,
+    noConstructorWithoutOutputParams:
+      this.updateNoConstructorWithoutOutputParamsError,
     noGetterWithoutResult: this.updateNoGetterWithoutResultError,
     emptyName: this.updateEmptyNameError,
     emptyOpcode: this.updateEmptyOpcodeError,
@@ -389,38 +387,44 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onTypeKeyDown(key: string, param: Param) {
+    const primitives = primitiveTypes(this.game, this.viewContext);
+    let newType;
     switch (key) {
       case 'i':
-        param.type = PrimitiveType.int;
+        newType = PrimitiveType.int;
         break;
       case 'f':
-        param.type = PrimitiveType.float;
+        newType = PrimitiveType.float;
         break;
       case 's':
-        param.type = PrimitiveType.string;
+        newType = PrimitiveType.string;
         break;
       case 'a':
-        param.type = PrimitiveType.arguments;
+        newType = PrimitiveType.arguments;
         break;
       case 'b':
-        param.type = PrimitiveType.boolean;
+        newType = PrimitiveType.boolean;
         break;
       case 'p':
       case 'l':
-        param.type = PrimitiveType.label;
+        newType = PrimitiveType.label;
         break;
       case 'o':
       case 'm':
-        param.type = PrimitiveType.model_any;
+        newType = PrimitiveType.model_any;
         break;
       case 'g':
-        param.type = PrimitiveType.gxt_key;
+        newType = PrimitiveType.gxt_key;
         break;
       case 'z':
-        param.type = PrimitiveType.zone_key;
+        newType = PrimitiveType.zone_key;
         break;
     }
-    this.updateErrors();
+
+    if (newType && newType !== param.type && primitives.includes(newType)) {
+      param.type = newType;
+      this.updateErrors();
+    }
   }
 
   onTypeChange(key: string, param: Param) {
@@ -762,8 +766,9 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private updateNoGetterWithoutResultError() {
-    this.errors.noGetterWithoutResult =
-      doesGetterCommandReturnNothing(this.command);
+    this.errors.noGetterWithoutResult = doesGetterCommandReturnNothing(
+      this.command
+    );
   }
 
   private updateEmptyNameError() {
@@ -772,18 +777,17 @@ export class CommandEditorComponent implements OnInit {
 
   private updateEmptyOpcodeError() {
     this.errors.emptyOpcode =
-    this.features.opcode && doesCommandHaveEmptyId(this.command);
+      this.features.opcode && doesCommandHaveEmptyId(this.command);
   }
 
   private updateInvalidOpcodeError() {
     this.errors.invalidOpcode =
-    this.features.opcode && doesCommandHaveInvalidOpcode(this.command);
+      this.features.opcode && doesCommandHaveInvalidOpcode(this.command);
   }
 
   private updateOutOfRangeOpcodeError() {
     this.errors.outOfRangeOpcode =
-    this.features.opcode &&
-      doesCommandHaveOutOfRangeOpcode(this.command);
+      this.features.opcode && doesCommandHaveOutOfRangeOpcode(this.command);
   }
 
   private noSelfInStaticMethod() {
@@ -826,15 +830,13 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private invalidConditionalOperatorError() {
-    this.errors.invalidConditionalOperator = doesCommandHaveInvalidConditionalOperator(
-      this.command
-    );
+    this.errors.invalidConditionalOperator =
+      doesCommandHaveInvalidConditionalOperator(this.command);
   }
 
   private invalidArgumentWithOperatorError() {
-    this.errors.invalidArgumentWithOperator = doesCommandHaveInvalidArgumentWithOperator(
-      this.command
-    );
+    this.errors.invalidArgumentWithOperator =
+      doesCommandHaveInvalidArgumentWithOperator(this.command);
   }
 
   private invalidSelfTypeError() {

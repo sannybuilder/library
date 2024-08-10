@@ -10,6 +10,7 @@ import {
   map,
 } from 'rxjs/operators';
 import {
+  doesGameHaveNativeDocs,
   getBaseGame,
   getBaseGames,
   getGameVariations,
@@ -127,5 +128,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getGameVariations(game: Game) {
     return getGameVariations(game);
+  }
+
+
+  doesGameHaveNativeDocs(game: Game) {
+    return doesGameHaveNativeDocs(game);
   }
 }

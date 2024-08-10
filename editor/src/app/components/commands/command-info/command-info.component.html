@@ -12,6 +12,9 @@
   <div class="col-12 d-flex flex-row">
     <h5 class="mr-3" *ngIf="command.id">{{ command.id }}</h5>
     <h5 class="text-break" [attr.translate]="'no'">{{ command.name }}</h5>
+    <h5 class="ml-3" *ngIf="viewContext === ViewContext.Code">
+      {{ command.class }}::{{ command.member }}
+    </h5>
   </div>
 </div>
 
@@ -161,8 +164,7 @@
           <li *ngFor="let relatedCommand of relatedCommands">
             <a
               [routerLink]="[
-                '/',
-                game,
+                '../..',
                 extension,
                 relatedCommand.id || relatedCommand.name
               ]"
@@ -246,8 +248,7 @@
       <a
         *ngIf="isEnumParam(param) || isClassParam(param); else plainType"
         [routerLink]="[
-          '/',
-          game,
+          baseHref,
           isEnumParam(param) ? 'enums' : 'classes',
           param.type
         ]"

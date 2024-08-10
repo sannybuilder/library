@@ -6,13 +6,15 @@ import {
   DEFAULT_EXTENSION,
   Command,
   Game,
+  ViewContext,
 } from '../models';
 import { primitiveTypes } from './command';
 
 export function getEntities(
   extensions: Extension[],
   classesMeta: ClassMeta[] | undefined,
-  game: Game
+  game: Game,
+  viewContext: ViewContext
 ): Record<string, Entity[]> {
   const defaultEntities =
     extensions
@@ -27,7 +29,7 @@ export function getEntities(
         return m;
       }, new Set<string>()) ?? new Set();
 
-  const primitives: string[] = primitiveTypes(game);
+  const primitives: string[] = primitiveTypes(game, viewContext);
 
   return extensions.reduce((m, e) => {
     const dynamicClasses = new Set<string>();

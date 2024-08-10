@@ -94,6 +94,7 @@ export class ExtensionsEffects {
             const actions: Action[] = [
               loadExtensionsSuccess({
                 game,
+                viewContext,
                 extensions: response.extensions,
                 lastUpdate: response.meta.last_update,
                 version: response.meta.version,

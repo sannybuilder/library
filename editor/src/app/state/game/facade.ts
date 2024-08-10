@@ -34,7 +34,7 @@ export class GameFacade {
     id?: string;
     enumName?: string;
     className?: string;
-    action?: string;
+    action?: string | null;
     searchTerm?: string;
     platforms?: Platform[];
     versions?: Version[];

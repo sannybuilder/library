@@ -4,6 +4,7 @@ import {
   Game,
   GameLibrary,
   LoadExtensionsResponse,
+  ViewContext,
 } from './src/app/models';
 import {
   capitalizeFirst,
@@ -30,7 +31,7 @@ const translations = JSON.parse(translationFile);
 const { extensions, classes } = loadExtensions(
   join('..', GameLibrary[game as Game])
 );
-const entities = getEntities(extensions, classes, game as Game);
+const entities = getEntities(extensions, classes, game as Game, ViewContext.Script);
 const entityNames = uniqBy(
   orderBy(flatten(Object.values(entities)), ['type', 'name']),
   'name'

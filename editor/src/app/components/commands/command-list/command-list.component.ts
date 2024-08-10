@@ -17,6 +17,8 @@ import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandListComponent {
+  ViewContext = ViewContext;
+  
   @Input() gameExtensions: Extension[];
   @Input() game: Game;
   @Input() canEdit: boolean;
@@ -69,8 +71,8 @@ export class CommandListComponent {
 
   get baseHref() {
     if (this.viewContext === ViewContext.Code) {
-      return `/${this.game}/functions`
+      return `/${this.game}/native/versions`
     }
-    return `/${this.game}`;
+    return `/${this.game}/script/extensions`;
   }
 }

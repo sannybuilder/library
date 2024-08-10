@@ -83,6 +83,22 @@
                     [attr.translate]="'no'"
                   ></a>
                 </ng-template>
+
+                <ng-container *ngIf="viewContext === ViewContext.Code">
+                  <div
+                    class="ml-3 text-break"
+                    [innerHTML]="row.command | propExtract : 'class' | sanitize"
+                    [attr.translate]="'no'"
+                  ></div>
+                  ::
+                  <div
+                    class="text-break"
+                    [innerHTML]="
+                      row.command | propExtract : 'member' | sanitize
+                    "
+                    [attr.translate]="'no'"
+                  ></div>
+                </ng-container>
               </div>
             </div>
 

@@ -35,6 +35,7 @@ import {
   ArticlesFacade,
 } from '../../state';
 import {
+  doesGameHaveNativeDocs,
   doesGameRequireOpcode,
   FUSEJS_OPTIONS,
   getBaseGames,
@@ -372,6 +373,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   getPermaLink({
     viewMode,
     game,
+    viewContext,
     extension,
     command,
     enumName,
@@ -379,6 +381,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }: {
     viewMode: ViewMode;
     game: Game;
+    viewContext: ViewContext;
     extension?: string;
     command?: Command;
     enumName?: string;
@@ -416,12 +419,15 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (viewMode === ViewMode.ViewCommand) {
+      const baseHref =
+        viewContext === ViewContext.Code ? `${game}/native` : `${game}/script`;
+
       if (!command) {
-        return [base, game, extension].join('/');
+        return [base, baseHref, extension].join('/');
       }
       const url = [
         'https://sannybuilder.com/lib',
-        game,
+        baseHref,
         extension,
         command.id || command.name,
       ].join('/');
@@ -464,11 +470,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return doesGameRequireOpcode(game);
   }
 
-  baseHref(game: Game, viewContext: ViewContext) {
-    if (viewContext === ViewContext.Code) {
-      return `/${game}/functions`;
-    }
-    return `/${game}`;
+  doesGameHaveNativeDocs(game: Game) {
+    return doesGameHaveNativeDocs(game);
   }
 
   private _onSaveCommand() {

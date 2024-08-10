@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   ViewContext,
   Game,
-  GameFunctionLibrary,
+  GameNativeLibrary,
   GameLibrary,
   LoadExtensionsResponse,
   PackedSupportInfo,
@@ -22,7 +22,7 @@ export class ExtensionsService {
     return this._github.loadFileGracefully<LoadExtensionsResponse>(
       viewContext === ViewContext.Script
         ? GameLibrary[game]
-        : GameFunctionLibrary[game],
+        : GameNativeLibrary[game],
       accessToken,
       game
     );

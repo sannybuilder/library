@@ -189,8 +189,8 @@ export const GameLibrary: Record<Game, string> = r(
   (game) => `${game}/${game}.json`
 );
 
-export const GameFunctionLibrary: Record<Game, string> = r(
-  (game) => `${game}/functions.json`
+export const GameNativeLibrary: Record<Game, string> = r(
+  (game) => `${game}/native.json`
 );
 
 
@@ -297,8 +297,8 @@ export enum ViewMode {
 }
 
 export enum ViewContext {
-  Script,
-  Code,
+  Script = 'Script',
+  Code = 'Code',
 }
 
 export type Modifier = 'except' | 'only';

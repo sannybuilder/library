@@ -9,7 +9,7 @@ export const onListEnter = createAction(
     id?: string;
     enumName?: string;
     className?: string;
-    action?: string;
+    action?: string | null;
     searchTerm?: string;
     platforms?: Platform[];
     versions?: Version[];

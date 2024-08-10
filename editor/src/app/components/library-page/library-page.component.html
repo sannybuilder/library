@@ -1,413 +1,480 @@
 <ng-container *ngIf="viewMode$ | async as viewMode">
   <ng-container *ngIf="game$ | async as game">
-    <div class="container-fluid">
-      <div
-        class="row"
-        *ngIf="{ collapsed: isSidebarCollapsed$ | async } as sidebar"
-      >
+    <ng-container *ngIf="viewContext$ | async as viewContext">
+      <div class="container-fluid">
         <div
-          class="col-12 col-xl-2 left-rail"
-          [ngClass]="{ collapsed: sidebar.collapsed }"
-        >
-          <scl-download-panel [game]="game"></scl-download-panel>
-          <scl-filter-panel [game]="game"></scl-filter-panel>
-          <scl-quiz
-            *ngIf="(viewContext$ | async) === ViewContext.Script"
-            [game]="game"
-            [extensions]="extensions$ | async"
-          ></scl-quiz>
-          <button
-            class="btn btn-sm collapse-button d-none d-xl-block"
-            (click)="toggleSidebar()"
-          >
-            <div class="d-flex align-items-center">
-              <scl-icon-button
-                *ngIf="sidebar.collapsed"
-                icon="uncollapse"
-              ></scl-icon-button>
-
-              <scl-icon-button
-                *ngIf="!sidebar.collapsed"
-                icon="collapse"
-                [label]="'ui.layout.collapseSidebar' | translate"
-              ></scl-icon-button>
-            </div>
-          </button>
-        </div>
-
-        <main
-          class="col-12"
-          [ngClass]="{
-            'col-xl-5': shouldDisplayRightRail(viewMode) && !sidebar.collapsed,
-            'col-xl-8': !shouldDisplayRightRail(viewMode) && !sidebar.collapsed,
-            'col-xl-6': shouldDisplayRightRail(viewMode) && sidebar.collapsed,
-            'col-xl-9': !shouldDisplayRightRail(viewMode) && sidebar.collapsed
-          }"
+          class="row"
+          *ngIf="{ collapsed: isSidebarCollapsed$ | async } as sidebar"
         >
           <div
-            class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center"
+            class="col-12 col-xl-2 left-rail"
+            [ngClass]="{ collapsed: sidebar.collapsed }"
           >
-            <nav aria-label="breadcrumb" class="mb-3 mr-auto">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a routerLink="/">{{ "ui.header.home" | translate }}</a>
-                </li>
-                <li
-                  class="breadcrumb-item active"
-                  aria-current="page"
-                  [attr.translate]="'no'"
-                >
-                  <scl-icon [game]="game" size="16"></scl-icon>
-                  {{ game | gameTitle }}
-                </li>
-              </ol>
-            </nav>
+            <scl-download-panel [game]="game"></scl-download-panel>
+            <scl-filter-panel [game]="game"></scl-filter-panel>
+            <scl-quiz
+              *ngIf="viewContext === ViewContext.Script"
+              [game]="game"
+              [extensions]="extensions$ | async"
+            ></scl-quiz>
             <button
-              *ngIf="canEdit$ | async"
-              class="btn btn-outline-secondary dropdown-toggle mb-3"
-              data-toggle="dropdown"
-              data-offset="0,0"
-              aria-haspopup="true"
-              aria-expanded="false"
+              class="btn btn-sm collapse-button d-none d-xl-block"
+              (click)="toggleSidebar()"
             >
-              <svg
-                style="margin-top: -3px"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-plus"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                />
-              </svg>
-              {{ "ui.layout.new" | translate }}
+              <div class="d-flex align-items-center">
+                <scl-icon-button
+                  *ngIf="sidebar.collapsed"
+                  icon="uncollapse"
+                ></scl-icon-button>
+
+                <scl-icon-button
+                  *ngIf="!sidebar.collapsed"
+                  icon="collapse"
+                  [label]="'ui.layout.collapseSidebar' | translate"
+                ></scl-icon-button>
+              </div>
             </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a
-                class="dropdown-item"
-                [routerLink]="['/', game, 'enums', 'new']"
-                >{{ "ui.layout.newEnum" | translate }}</a
-              >
-              <a
-                class="dropdown-item"
-                [routerLink]="[
-                  '/',
-                  game,
-                  extensionToCreateCommands$ | async,
-                  'new'
-                ]"
-                >{{ "ui.layout.newCommand" | translate }}</a
-              >
-              <a
-                class="dropdown-item"
-                [routerLink]="[
-                  '/',
-                  'functions',
-                  game,
-                  extensionToCreateCommands$ | async,
-                  'new'
-                ]"
-                >{{ "ui.layout.newFunction" | translate }}</a
-              >
+          </div>
+
+          <main
+            class="col-12"
+            [ngClass]="{
+              'col-xl-5':
+                shouldDisplayRightRail(viewMode) && !sidebar.collapsed,
+              'col-xl-8':
+                !shouldDisplayRightRail(viewMode) && !sidebar.collapsed,
+              'col-xl-6': shouldDisplayRightRail(viewMode) && sidebar.collapsed,
+              'col-xl-9': !shouldDisplayRightRail(viewMode) && sidebar.collapsed
+            }"
+          >
+            <div
+              class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center"
+            >
+              <nav aria-label="breadcrumb" class="mb-3 mr-auto">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a routerLink="/">{{ "ui.header.home" | translate }}</a>
+                  </li>
+                  <li
+                    class="breadcrumb-item"
+                    aria-current="page"
+                    [attr.translate]="'no'"
+                  >
+                    <scl-icon [game]="game" size="16"></scl-icon>
+                    {{ game | gameTitle }}
+                  </li>
+
+                  <li
+                    class="breadcrumb-item position-relative"
+                    aria-current="page"
+                    [attr.translate]="'no'"
+                    *ngIf="doesGameHaveNativeDocs(game)"
+                  >
+                    <span
+                      type="button"
+                      class="dropdown-toggle"
+                      data-toggle="dropdown"
+                      data-offset="0,0"
+                      data-display="static"
+                    >
+                      {{
+                        (viewContext === ViewContext.Code
+                          ? "ui.header.nativeCode"
+                          : "ui.header.scriptCommands"
+                        ) | translate
+                      }}
+                    </span>
+
+                    <div class="dropdown-menu">
+                      <a
+                        [routerLink]="['/', game, 'script']"
+                        class="dropdown-item"
+                        >{{ "ui.header.scriptCommands" | translate }}</a
+                      >
+                      <a
+                        [routerLink]="['/', game, 'native']"
+                        class="dropdown-item"
+                        >{{ "ui.header.nativeCode" | translate }}</a
+                      >
+                    </div>
+                  </li>
+                </ol>
+              </nav>
+
+              <div>
+                <button
+                  *ngIf="canEdit$ | async"
+                  class="btn btn-outline-secondary dropdown-toggle mb-3"
+                  data-toggle="dropdown"
+                  data-offset="0,0"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <svg
+                    style="margin-top: -3px"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-plus"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                    />
+                  </svg>
+                  {{ "ui.layout.new" | translate }}
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a
+                    class="dropdown-item"
+                    *ngIf="viewContext === ViewContext.Script"
+                    [routerLink]="['/', game, 'script', 'enums', 'new']"
+                    >{{ "ui.layout.newEnum" | translate }}</a
+                  >
+                  <a
+                    class="dropdown-item"
+                    *ngIf="viewContext === ViewContext.Script"
+                    [routerLink]="[
+                      '/',
+                      game,
+                      'script',
+                      'extensions',
+                      extensionToCreateCommands$ | async,
+                      'new'
+                    ]"
+                    >{{ "ui.layout.newCommand" | translate }}</a
+                  >
+                  <a
+                    class="dropdown-item"
+                    *ngIf="viewContext === ViewContext.Code"
+                    [routerLink]="[
+                      '/',
+                      game,
+                      'native',
+                      'versions',
+                      '1.0',
+                      'new'
+                    ]"
+                    >{{ "ui.layout.newFunction" | translate }}</a
+                  >
+                </div>
+              </div>
             </div>
+
+            <div class="d-flex flex-row justify-content-center">
+              <ng-container *ngIf="viewContext === ViewContext.Script">
+                <a
+                  class="mr-3"
+                  [routerLink]="['/', game, 'script', 'extensions']"
+                  >{{ "ui.header.menuExtensions" | translate }}</a
+                >
+                <a
+                  class="mr-3"
+                  [routerLink]="['/', game, 'script', 'classes']"
+                  >{{ "ui.header.menuClasses" | translate }}</a
+                >
+                <a class="mr-3" [routerLink]="['/', game, 'script', 'enums']">{{
+                  "ui.header.menuEnums" | translate
+                }}</a>
+              </ng-container>
+            </div>
+
+            <div class="d-flex flex-row justify-content-center mb-3">
+              <ng-container *ngIf="viewContext === ViewContext.Code">
+                <a
+                  class="mr-3"
+                  [routerLink]="['/', game, 'native', 'versions']"
+                  >{{ "ui.header.menuVersions" | translate }}</a
+                >
+
+                <a
+                  class="mr-3"
+                  [routerLink]="['/', game, 'native', 'classes']"
+                  >{{ "ui.header.menuClasses" | translate }}</a
+                >
+              </ng-container>
+            </div>
+
+            <scl-command-list
+              [game]="game"
+              [canEdit]="canEdit$ | async"
+              [gameExtensions]="getGameExtensions(game) | async"
+              [viewContext]="viewContext"
+              [narrowed]="
+                shouldDisplayRightRail(viewMode) &&
+                screenSize >= 1200 &&
+                screenSize < 1700
+              "
+              (descriptionClick)="onDescriptionClick($event)"
+            ></scl-command-list>
+          </main>
+
+          <div
+            class="col-xl-5 right-rail"
+            [ngClass]="{ extended: sidebar.collapsed }"
+            *ngIf="shouldDisplayRightRail(viewMode) && screenSize >= 1200"
+          >
+            <ng-container *ngTemplateOutlet="rightRail"></ng-container>
+            <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
           </div>
-
-          <div class="d-flex flex-row justify-content-center mb-3">
-            <a class="mr-3" [routerLink]="['/', game]">{{
-              "ui.header.menuCommands" | translate
-            }}</a>
-            <a class="mr-3" [routerLink]="['/', game, 'extensions']">{{
-              "ui.header.menuExtensions" | translate
-            }}</a>
-            <a class="mr-3" [routerLink]="['/', game, 'classes']">{{
-              "ui.header.menuClasses" | translate
-            }}</a>
-            <a class="mr-3" [routerLink]="['/', game, 'enums']">{{
-              "ui.header.menuEnums" | translate
-            }}</a>
-            <a [routerLink]="['/', game, 'functions']">{{
-              "ui.header.menuFunctions" | translate
-            }}</a>
-          </div>
-
-          <scl-command-list
-            [game]="game"
-            [canEdit]="canEdit$ | async"
-            [gameExtensions]="getGameExtensions(game) | async"
-            [viewContext]="viewContext$ | async"
-            [narrowed]="
-              shouldDisplayRightRail(viewMode) &&
-              screenSize >= 1200 &&
-              screenSize < 1700
-            "
-            (descriptionClick)="onDescriptionClick($event)"
-          ></scl-command-list>
-        </main>
-
-        <div
-          class="col-xl-5 right-rail"
-          [ngClass]="{ extended: sidebar.collapsed }"
-          *ngIf="shouldDisplayRightRail(viewMode) && screenSize >= 1200"
-        >
-          <ng-container *ngTemplateOutlet="rightRail"></ng-container>
-          <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
         </div>
       </div>
-    </div>
 
-    <scl-modal *ngIf="shouldDisplayRightRail(viewMode) && screenSize < 1200">
-      <div class="modal-body">
-        <ng-container *ngTemplateOutlet="rightRail"></ng-container>
-      </div>
-      <ng-container class="modal-footer">
-        <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
-      </ng-container>
-    </scl-modal>
+      <scl-modal *ngIf="shouldDisplayRightRail(viewMode) && screenSize < 1200">
+        <div class="modal-body">
+          <ng-container *ngTemplateOutlet="rightRail"></ng-container>
+        </div>
+        <ng-container class="modal-footer">
+          <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+        </ng-container>
+      </scl-modal>
 
-    <scl-modal *ngIf="viewMode === ViewMode.ViewGenerateJson">
-      <div class="modal-body">
-        <scl-json-generator
+      <scl-modal *ngIf="viewMode === ViewMode.ViewGenerateJson">
+        <div class="modal-body">
+          <scl-json-generator
+            [game]="game"
+            [extensionNames]="extensionNames$ | async"
+            (changed)="updateGenerateJsonModel($event)"
+          ></scl-json-generator>
+        </div>
+        <ng-container class="modal-footer">
+          <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+        </ng-container>
+      </scl-modal>
+
+      <ng-template #modalFooter>
+        <div class="modal-footer d-flex">
+          <scl-copy-button
+            *ngIf="
+              getPermaLink({
+                viewMode: viewMode,
+                game: game,
+                extension: extension,
+                command: command,
+                enumName: enumToDisplayOrEdit?.name,
+                viewContext: viewContext,
+                className: (classToDisplay$ | async)
+              }) as url
+            "
+            [text]="url"
+            icon="share"
+            #shareBtn
+            [title]="
+              (shareBtn.hasJustCopied
+                ? 'ui.shared.copied'
+                : 'ui.shared.shareLink'
+              ) | translate
+            "
+          ></scl-copy-button>
+
+          <scl-icon-button
+            *ngIf="!noChanges(viewMode)"
+            icon="revert"
+            [title]="'ui.shared.resetChanges' | translate"
+            (clicked)="resetChanges(viewMode)"
+          >
+          </scl-icon-button>
+
+          <label
+            class="form-check-label"
+            *ngIf="
+              viewMode === ViewMode.EditCommand &&
+              viewContext === ViewContext.Script
+            "
+          >
+            <input type="checkbox" [(ngModel)]="updateRelatedCommands" />
+            <span class="checkbox"></span>
+            {{ "ui.shared.updateRelatedCommands" | translate }}
+          </label>
+
+          <scl-icon-button
+            *ngIf="viewMode === ViewMode.ViewClass"
+            [icon]="
+              (displayInlineDescription$ | async) ? 'comments' : 'no-comments'
+            "
+            (clicked)="toggleInlineDesc()"
+            [title]="'ui.classOverview.toggleInlineDescription' | translate"
+          ></scl-icon-button>
+
+          <scl-icon-button
+            *ngIf="viewMode === ViewMode.ViewEnum"
+            icon="search"
+            [routerLink]="['/', game]"
+            [queryParams]="{ q: 'type:' + enumToDisplayOrEdit.name }"
+            [title]="'ui.shared.findEnumUsages' | translate"
+            (click)="screenSize < 1200 && onCancel()"
+          >
+          </scl-icon-button>
+
+          <button
+            *ngIf="
+              viewMode === ViewMode.ViewDecisionTree &&
+              (canGoBackInDecisionTree$ | async)
+            "
+            class="btn btn-outline-secondary"
+            (click)="treeBack()"
+          >
+            {{ "ui.tree.back" | translate }}
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary ml-auto"
+            (click)="onCancel()"
+          >
+            {{ "ui.shared.close" | translate }}
+          </button>
+          <a
+            *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
+            class="btn btn-outline-success"
+            [routerLink]="['edit']"
+            [queryParams]="getQueryParamsForCommand(command, game)"
+          >
+            {{ "ui.shared.edit" | translate }}
+          </a>
+          <a
+            *ngIf="viewMode === ViewMode.ViewEnum && (canEdit$ | async)"
+            class="btn btn-outline-success"
+            [routerLink]="['edit']"
+          >
+            {{ "ui.shared.edit" | translate }}
+          </a>
+          <a
+            *ngIf="viewMode === ViewMode.ViewAllEnums && (canEdit$ | async)"
+            class="btn btn-outline-success"
+            [routerLink]="['/', game, 'enums', 'new']"
+          >
+            {{ "ui.layout.new" | translate }}
+          </a>
+          <button
+            *ngIf="
+              viewMode === ViewMode.EditCommand ||
+              viewMode === ViewMode.EditEnum
+            "
+            [disabled]="shouldDisableSaveButton(viewMode)"
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onSave(viewMode)"
+          >
+            {{ "ui.shared.save" | translate }}
+          </button>
+
+          <button
+            *ngIf="
+              viewMode === ViewMode.ViewDecisionTree &&
+              (canGoBackInDecisionTree$ | async)
+            "
+            class="btn btn-outline-success"
+            (click)="treeRestart()"
+          >
+            {{ "ui.tree.startOver" | translate }}
+          </button>
+
+          <button
+            *ngIf="viewMode === ViewMode.ViewGenerateJson"
+            type="button"
+            class="btn btn-outline-success"
+            (click)="generateJson()"
+          >
+            {{ "ui.layout.downloads" | translate }}
+          </button>
+        </div>
+      </ng-template>
+
+      <ng-template #rightRail>
+        <scl-decision-tree
+          *ngIf="viewMode === ViewMode.ViewDecisionTree"
           [game]="game"
+        ></scl-decision-tree>
+        <scl-command-editor
+          *ngIf="viewMode === ViewMode.EditCommand && command"
+          [game]="game"
+          [command]="command"
+          [(extension)]="extension"
+          [(snippet)]="snippet"
           [extensionNames]="extensionNames$ | async"
-          (changed)="updateGenerateJsonModel($event)"
-        ></scl-json-generator>
-      </div>
-      <ng-container class="modal-footer">
-        <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
-      </ng-container>
-    </scl-modal>
-
-    <ng-template #modalFooter>
-      <div class="modal-footer d-flex">
-        <scl-copy-button
+          [supportInfo]="getCommandSupportInfo(command, extension) | async"
+          [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
+          [commands]="getExtensionCommands(extension) | async"
+          [viewContext]="viewContext"
+          (hasError)="editorHasError = $event"
+          (delete)="onDeleteCommand(command, game)"
+          (clone)="onCloneCommand($event)"
+        ></scl-command-editor>
+        <scl-command-info
+          *ngIf="viewMode === ViewMode.ViewCommand && command"
+          [command]="command"
+          [game]="game"
+          [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
+          [snippet]="getSnippet(extension, command.id || command.name) | async"
+          [supportInfo]="getCommandSupportInfo(command, extension) | async"
+          [relatedCommands]="
+            findRelatedCommands(command, extension, game) | async
+          "
+          [extension]="extension"
+          [displayOpcodePresentation]="displayOpcodePresentation$ | async"
+          [classDesc]="(getClassMeta(game, command.class) | async)?.desc"
+          [gameExtensions]="getGameExtensions(game) | async"
+          [fullDescription]="getFullDescription(command) | async"
+          [viewContext]="viewContext"
+          (toggleOpcodePresentation)="onToggleOpcodePresentation()"
+        >
+        </scl-command-info>
+        <scl-class-overview
           *ngIf="
-            getPermaLink({
-              viewMode: viewMode,
-              game: game,
-              extension: extension,
-              command: command,
-              enumName: enumToDisplayOrEdit?.name,
-              className: (classToDisplay$ | async)
-            }) as url
+            viewMode === ViewMode.ViewClass &&
+            (classToDisplay$ | async) as classToDisplay
           "
-          [text]="url"
-          icon="share"
-          #shareBtn
-          [title]="
-            (shareBtn.hasJustCopied
-              ? 'ui.shared.copied'
-              : 'ui.shared.shareLink'
-            ) | translate
+          [game]="game"
+          [className]="classToDisplay"
+          [classCommands]="classCommands$ | async"
+          [classOrigin]="getClassOrigin(classToDisplay) | async"
+          [meta]="getClassMeta(game, classToDisplay) | async"
+          [gameExtensions]="getGameExtensions(game) | async"
+          [displayInlineDescription]="displayInlineDescription$ | async"
+          (descriptionClick)="onDescriptionClick($event)"
+        ></scl-class-overview>
+        <scl-class-list
+          *ngIf="viewMode === ViewMode.ViewAllClasses"
+          [game]="game"
+          [entities]="entities$ | async"
+          [classesMeta]="getClassesMeta(game) | async"
+          [viewContext]="viewContext"
+        ></scl-class-list>
+        <scl-extension-list
+          *ngIf="viewMode === ViewMode.ViewAllExtensions"
+          [game]="game"
+          [extensions]="getGameExtensions(game) | async"
+          [viewContext]="viewContext"
+        ></scl-extension-list>
+        <scl-enum-overview
+          *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"
+          [enumToView]="enumToDisplayOrEdit"
+          [game]="game"
+          [enumGames]="
+            getGamesWhereEnumExists(enumToDisplayOrEdit.name) | async
           "
-        ></scl-copy-button>
-
-        <scl-icon-button
-          *ngIf="!noChanges(viewMode)"
-          icon="revert"
-          [title]="'ui.shared.resetChanges' | translate"
-          (clicked)="resetChanges(viewMode)"
-        >
-        </scl-icon-button>
-
-        <label
-          class="form-check-label"
-          *ngIf="
-            viewMode === ViewMode.EditCommand &&
-            (viewContext$ | async) === ViewContext.Script
+        ></scl-enum-overview>
+        <scl-enum-editor
+          *ngIf="viewMode === ViewMode.EditEnum && enumToDisplayOrEdit"
+          [game]="game"
+          [enumToEdit]="enumToDisplayOrEdit"
+          [enumGames]="
+            getGamesWhereEnumExists(enumToDisplayOrEdit.name) | async
           "
-        >
-          <input type="checkbox" [(ngModel)]="updateRelatedCommands" />
-          <span class="checkbox"></span>
-          {{ "ui.shared.updateRelatedCommands" | translate }}
-        </label>
-
-        <scl-icon-button
-          *ngIf="viewMode === ViewMode.ViewClass"
-          [icon]="
-            (displayInlineDescription$ | async) ? 'comments' : 'no-comments'
-          "
-          (clicked)="toggleInlineDesc()"
-          [title]="'ui.classOverview.toggleInlineDescription' | translate"
-        ></scl-icon-button>
-
-        <scl-icon-button
-          *ngIf="viewMode === ViewMode.ViewEnum"
-          icon="search"
-          [routerLink]="['/', game]"
-          [queryParams]="{ q: 'type:' + enumToDisplayOrEdit.name }"
-          [title]="'ui.shared.findEnumUsages' | translate"
-          (click)="screenSize < 1200 && onCancel()"
-        >
-        </scl-icon-button>
-
-        <button
-          *ngIf="
-            viewMode === ViewMode.ViewDecisionTree &&
-            (canGoBackInDecisionTree$ | async)
-          "
-          class="btn btn-outline-secondary"
-          (click)="treeBack()"
-        >
-          {{ "ui.tree.back" | translate }}
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-outline-secondary ml-auto"
-          (click)="onCancel()"
-        >
-          {{ "ui.shared.close" | translate }}
-        </button>
-        <a
-          *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
-          class="btn btn-outline-success"
-          [routerLink]="[
-            baseHref(game, viewContext$ | async),
-            extension,
-            command.id || command.name,
-            'edit'
-          ]"
-          [queryParams]="getQueryParamsForCommand(command, game)"
-        >
-          {{ "ui.shared.edit" | translate }}
-        </a>
-        <a
-          *ngIf="viewMode === ViewMode.ViewEnum && (canEdit$ | async)"
-          class="btn btn-outline-success"
-          [routerLink]="['/', game, 'enums', enumToDisplayOrEdit.name, 'edit']"
-        >
-          {{ "ui.shared.edit" | translate }}
-        </a>
-        <a
-          *ngIf="viewMode === ViewMode.ViewAllEnums && (canEdit$ | async)"
-          class="btn btn-outline-success"
-          [routerLink]="['/', game, 'enums', 'new']"
-        >
-          {{ "ui.layout.new" | translate }}
-        </a>
-        <button
-          *ngIf="
-            viewMode === ViewMode.EditCommand || viewMode === ViewMode.EditEnum
-          "
-          [disabled]="shouldDisableSaveButton(viewMode)"
-          type="button"
-          class="btn btn-outline-success"
-          (click)="onSave(viewMode)"
-        >
-          {{ "ui.shared.save" | translate }}
-        </button>
-
-        <button
-          *ngIf="
-            viewMode === ViewMode.ViewDecisionTree &&
-            (canGoBackInDecisionTree$ | async)
-          "
-          class="btn btn-outline-success"
-          (click)="treeRestart()"
-        >
-          {{ "ui.tree.startOver" | translate }}
-        </button>
-
-        <button
-          *ngIf="viewMode === ViewMode.ViewGenerateJson"
-          type="button"
-          class="btn btn-outline-success"
-          (click)="generateJson()"
-        >
-          {{ "ui.layout.downloads" | translate }}
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template #rightRail>
-      <scl-decision-tree
-        *ngIf="viewMode === ViewMode.ViewDecisionTree"
-        [game]="game"
-      ></scl-decision-tree>
-      <scl-command-editor
-        *ngIf="viewMode === ViewMode.EditCommand && command"
-        [game]="game"
-        [command]="command"
-        [(extension)]="extension"
-        [(snippet)]="snippet"
-        [extensionNames]="extensionNames$ | async"
-        [supportInfo]="getCommandSupportInfo(command, extension) | async"
-        [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
-        [commands]="getExtensionCommands(extension) | async"
-        [viewContext]="viewContext$ | async"
-        (hasError)="editorHasError = $event"
-        (delete)="onDeleteCommand(command, game)"
-        (clone)="onCloneCommand($event)"
-      ></scl-command-editor>
-      <scl-command-info
-        *ngIf="viewMode === ViewMode.ViewCommand && command"
-        [command]="command"
-        [game]="game"
-        [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
-        [snippet]="getSnippet(extension, command.id || command.name) | async"
-        [supportInfo]="getCommandSupportInfo(command, extension) | async"
-        [relatedCommands]="
-          findRelatedCommands(command, extension, game) | async
-        "
-        [extension]="extension"
-        [displayOpcodePresentation]="displayOpcodePresentation$ | async"
-        [classDesc]="(getClassMeta(game, command.class) | async)?.desc"
-        [gameExtensions]="getGameExtensions(game) | async"
-        [fullDescription]="getFullDescription(command) | async"
-        [viewContext]="viewContext$ | async"
-        (toggleOpcodePresentation)="onToggleOpcodePresentation()"
-      >
-      </scl-command-info>
-      <scl-class-overview
-        *ngIf="
-          viewMode === ViewMode.ViewClass &&
-          (classToDisplay$ | async) as classToDisplay
-        "
-        [game]="game"
-        [className]="classToDisplay"
-        [classCommands]="classCommands$ | async"
-        [classOrigin]="getClassOrigin(classToDisplay) | async"
-        [meta]="getClassMeta(game, classToDisplay) | async"
-        [gameExtensions]="getGameExtensions(game) | async"
-        [displayInlineDescription]="displayInlineDescription$ | async"
-        (descriptionClick)="onDescriptionClick($event)"
-      ></scl-class-overview>
-      <scl-class-list
-        *ngIf="viewMode === ViewMode.ViewAllClasses"
-        [game]="game"
-        [entities]="entities$ | async"
-        [classesMeta]="getClassesMeta(game) | async"
-      ></scl-class-list>
-      <scl-extension-list
-        *ngIf="viewMode === ViewMode.ViewAllExtensions"
-        [game]="game"
-        [extensions]="getGameExtensions(game) | async"
-      ></scl-extension-list>
-      <scl-enum-overview
-        *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"
-        [enumToView]="enumToDisplayOrEdit"
-        [game]="game"
-        [enumGames]="getGamesWhereEnumExists(enumToDisplayOrEdit.name) | async"
-      ></scl-enum-overview>
-      <scl-enum-editor
-        *ngIf="viewMode === ViewMode.EditEnum && enumToDisplayOrEdit"
-        [game]="game"
-        [enumToEdit]="enumToDisplayOrEdit"
-        [enumGames]="getGamesWhereEnumExists(enumToDisplayOrEdit.name) | async"
-        [entityNames]="classAndEnumNames$ | async"
-        (hasError)="editorHasError = $event"
-        (delete)="onDeleteEnum()"
-        (clone)="onCloneEnum($event)"
-      ></scl-enum-editor>
-      <scl-enum-list
-        *ngIf="viewMode === ViewMode.ViewAllEnums"
-        [game]="game"
-        [enumNames]="enumNames$ | async"
-        [extensionTypes]="extensionTypes$ | async"
-      ></scl-enum-list>
-    </ng-template>
+          [entityNames]="classAndEnumNames$ | async"
+          (hasError)="editorHasError = $event"
+          (delete)="onDeleteEnum()"
+          (clone)="onCloneEnum($event)"
+        ></scl-enum-editor>
+        <scl-enum-list
+          *ngIf="viewMode === ViewMode.ViewAllEnums"
+          [game]="game"
+          [enumNames]="enumNames$ | async"
+          [extensionTypes]="extensionTypes$ | async"
+        ></scl-enum-list>
+      </ng-template>
+    </ng-container>
   </ng-container>
 </ng-container>

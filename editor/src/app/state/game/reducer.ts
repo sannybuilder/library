@@ -20,6 +20,6 @@ export const gameReducer = createReducer(
     ...state,
     game,
     viewContext: viewContext ?? ViewContext.Script,
-    primitiveTypes: primitiveTypes(game),
+    primitiveTypes: primitiveTypes(game, viewContext ?? ViewContext.Script),
   }))
 );

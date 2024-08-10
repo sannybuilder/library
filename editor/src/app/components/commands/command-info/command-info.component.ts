@@ -115,4 +115,11 @@ export class CommandInfoComponent {
   doesGameRequireOpcode(game: Game) {
     return doesGameRequireOpcode(game);
   }
+
+  get baseHref() {
+    if (this.viewContext === ViewContext.Code) {
+      return `/${this.game}/native`
+    }
+    return `/${this.game}/script`;
+  }
 }

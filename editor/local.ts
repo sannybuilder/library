@@ -3,6 +3,7 @@ import {
   Game,
   GameClassesAssets,
   GameEnumsAssets,
+  GameNativeAssets,
   GameSnippets,
 } from './src/app/models';
 
@@ -20,6 +21,7 @@ run('npm run generate:enums-info src/assets/enums-info.json');
 games.forEach((game) => {
   const assets = assetsDir(game);
   const gameJson = join('../', game, `${game}.json`);
+  const nativeJson = join('../', game, `native.json`);
   const enumsJson = join('../', game, `enums.json`);
 
   [
@@ -77,6 +79,9 @@ games.forEach((game) => {
   if (GameSnippets[game].includes(game)) {
     const srcDir = join('..', game, 'snippets');
     cargo(`cargo run snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
+  }
+  if (GameNativeAssets[game]) {
+    cargo(`cargo run native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
   }
 });
 

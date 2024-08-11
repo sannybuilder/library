@@ -26,8 +26,8 @@ export class ExtensionListComponent {
 
   get baseHref() {
     if (this.viewContext === ViewContext.Code) {
-      return `/${this.game}/native`
+      return `/${this.game}/native/versions`
     }
-    return `/${this.game}/script`;
+    return `/${this.game}/script/extensions`;
   }
 }

@@ -9,3 +9,8 @@ export const primitiveTypes = createSelector(
   state,
   (state: GameState) => state.primitiveTypes
 );
+
+export const viewContext = createSelector(
+  state,
+  (state: GameState) => state.viewContext
+);

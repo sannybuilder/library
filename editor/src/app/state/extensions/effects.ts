@@ -10,7 +10,6 @@ import {
   map,
   take,
   distinctUntilChanged,
-  first,
   catchError,
 } from 'rxjs/operators';
 import { flatMap, groupBy, flatten } from 'lodash';
@@ -58,28 +57,35 @@ import { unpackSupportInfo } from 'src/app/utils/support-info';
 export class ExtensionsEffects {
   extensions$ = createEffect(() =>
     this._game.game$.pipe(
-      switchMap((game) =>
-        this._extensions.getGameExtensions(game).pipe(
-          first((e) => !e.length),
-          map(() => loadExtensions({ game }))
-        )
-      )
+      distinctUntilChanged(),
+      map((game) => loadExtensions({ game }))
+    )
+  );
+
+  viewContexts$ = createEffect(() =>
+    this._game.viewContext$.pipe(
+      distinctUntilChanged(),
+      withLatestFrom(this._game.game$),
+      map(([_, game]) => loadExtensions({ game }))
     )
   );
 
   loadExtensions$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadExtensions),
+      withLatestFrom(this._game.viewContext$),
       distinctUntilChanged(
-        (a, b) => GameLibrary[a.game] === GameLibrary[b.game]
+        ([a, ea], [b, eb]) =>
+          GameLibrary[a.game] === GameLibrary[b.game] && ea === eb
       ),
       withLatestFrom(this._auth.authToken$, this._auth.isAuthorized$),
-      concatMap(([{ game }, accessToken, isAuthorized]) =>
-        this._service.loadExtensions(game, accessToken).pipe(
+      concatMap(([[{ game }, viewContext], accessToken, isAuthorized]) =>
+        this._service.loadExtensions(game, viewContext, accessToken).pipe(
           switchMap((response) => {
             const actions: Action[] = [
               loadExtensionsSuccess({
                 game,
+                viewContext,
                 extensions: response.extensions,
                 lastUpdate: response.meta.last_update,
                 version: response.meta.version,

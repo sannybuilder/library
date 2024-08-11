@@ -12,6 +12,9 @@
   <div class="col-12 d-flex flex-row">
     <h5 class="mr-3" *ngIf="command.id">{{ command.id }}</h5>
     <h5 class="text-break" [attr.translate]="'no'">{{ command.name }}</h5>
+    <h5 class="ml-3" *ngIf="viewContext === ViewContext.Code">
+      {{ command.class }}::{{ command.member }}
+    </h5>
   </div>
 </div>
 
@@ -20,51 +23,18 @@
 <div class="scroll-container">
   <div class="row mb-2">
     <div class="col-12">
-      <div
-        *ngIf="isSupported(command) && command.short_desc"
-        class="mb-3"
-        (click)="interceptDescriptionClick($event)"
-        [innerHTML]="command | linkify : game : gameExtensions | sanitize"
-      ></div>
-      <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
-        {{ "ui.commandList.unsupported" | translate }}
-      </div>
-      <div *ngIf="command.attrs?.is_nop" class="mb-3">
-        {{ "ui.commandList.nop" | translate }}
-      </div>
+      <scl-command-declaration
+        [command]="command"
+        [classDesc]="classDesc"
+        [gameExtensions]="gameExtensions"
+        [game]="game"
+      ></scl-command-declaration>
 
-      <ng-container *ngIf="command.class && command.member">
-        <ng-container *ngIf="command.output?.length">
-          <code>
-            <span [innerHTML]="command | outputParams | sanitize"></span> =
-            <a
-              class="identifier"
-              [attr.title]="classDesc"
-              [routerLink]="['/', game, 'classes', command.class]"
-              >{{ command.class }}</a
-            >.<span class="identifier">{{ command.member }}</span
-            ><span [innerHTML]="command | inputParams | sanitize"></span
-          ></code>
-        </ng-container>
-
-        <ng-container *ngIf="!command.output?.length">
-          <code
-            ><a
-              class="identifier"
-              [attr.title]="classDesc"
-              [routerLink]="['/', game, 'classes', command.class]"
-              >{{ command.class }}</a
-            >.<span class="identifier">{{ command.member }}</span
-            ><span [innerHTML]="command | classParams | sanitize"></span
-          ></code>
-        </ng-container>
-      </ng-container>
-
-      <ng-container *ngIf="isSupported(command)">
-        <code
-          ><span [innerHTML]="command | opcodeParams | sanitize"></span
-        ></code>
-      </ng-container>
+      <code
+        *ngIf="isSupported(command) && viewContext === ViewContext.Script"
+        class="mt-3"
+        ><span [innerHTML]="command | opcodeParams | sanitize"></span
+      ></code>
 
       <div *ngIf="command.input?.length > 0" class="mt-3">
         <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
@@ -117,7 +87,7 @@
   <ng-container
     *ngIf="
       attrs.length ||
-      extension !== DEFAULT_EXTENSION ||
+      extension !== getDefaultExtension() ||
       command?.input[0]?.name === 'self'
     "
   >
@@ -127,7 +97,7 @@
         <h5>{{ "ui.commandOverview.notesSubtitle" | translate }}</h5>
         <ul class="list-unstyled">
           <li
-            *ngIf="extension !== DEFAULT_EXTENSION"
+            *ngIf="extension !== getDefaultExtension()"
             [innerHTML]="
               'ui.commandOverview.withExtension'
                 | translate : { extension: extension, game: game }
@@ -194,8 +164,7 @@
           <li *ngFor="let relatedCommand of relatedCommands">
             <a
               [routerLink]="[
-                '/',
-                game,
+                '../..',
                 extension,
                 relatedCommand.id || relatedCommand.name
               ]"
@@ -233,6 +202,16 @@
         "
       ></pre>
 
+      <scl-icon-button
+        *ngIf="doesGameRequireOpcode(game)"
+        class="position-absolute"
+        style="top: 0; right: 40px"
+        [icon]="displayOpcodePresentation ? 'eye-fill' : 'eye'"
+        [title]="'ui.shared.toggleOpcode' | translate"
+        (clicked)="onToggleOpcodePresentation()"
+      >
+      </scl-icon-button>
+
       <scl-copy-button
         class="position-absolute"
         style="top: 0; right: 0"
@@ -269,8 +248,7 @@
       <a
         *ngIf="isEnumParam(param) || isClassParam(param); else plainType"
         [routerLink]="[
-          '/',
-          game,
+          baseHref,
           isEnumParam(param) ? 'enums' : 'classes',
           param.type
         ]"

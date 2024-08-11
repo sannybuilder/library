@@ -4,6 +4,12 @@
   max-width: 400px;
 }
 
+@media (max-width: 576px) {
+  .search-bar {
+    max-width: calc(100% - 90px);
+  }
+}
+
 .navbar {
   padding-left: 0;
   padding-right: 0;
@@ -22,7 +28,8 @@
 
 :host-context(.scrolled-down) {
   @media (min-width: 768px) {
-    .scroll-top, .navbar-toggler {
+    .scroll-top,
+    .navbar-toggler {
       display: inline-block !important;
     }
   }
@@ -76,7 +83,6 @@ a.nav-link.active {
 
 ::placeholder {
   color: $gray-600;
-
 }
 
 #search-bar-input {
@@ -109,4 +115,15 @@ a.nav-link.active {
 .search-help-content {
   overflow: auto;
   max-height: calc(100vh - 240px);
+}
+
+.marker {
+  padding-left: 26px;
+  &::before {
+    content: "•";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+  }
 }

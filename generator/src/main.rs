@@ -35,7 +35,7 @@ struct Param {
 struct Command {
     attrs: Option<Attr>,
     class: Option<String>,
-    id: String,
+    id: Option<String>,
     member: Option<String>,
     name: String,
     num_params: i32,
@@ -48,6 +48,7 @@ struct Command {
     platforms: Vec<String>,
     #[serde(default)]
     versions: Vec<String>,
+    cc: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -227,13 +228,8 @@ fn generate_classes() -> Result<()> {
             })
             .collect();
 
-        let description = format!(
-            "{},{},{},({})",
-            command.id.trim(),
-            is_condition,
-            0,
-            params.join(" ")
-        );
+        let id = command.id.as_ref().unwrap().trim();
+        let description = format!("{},{},{},({})", id, is_condition, 0, params.join(" "));
         map.insert(class_member, description);
     }
 
@@ -332,12 +328,95 @@ fn generate_enums() -> Result<()> {
     Ok(())
 }
 
+fn generate_native() -> Result<()> {
+    let args: Vec<String> = std::env::args().collect();
+    let input_file = args
+        .get(2)
+        .unwrap_or_else(|| panic!("Provide input file name"));
+
+    let version = args
+        .get(3)
+        .unwrap_or_else(|| panic!("Provide version name"));
+
+    let content = fs::read_to_string(input_file).unwrap();
+    let library = serde_json::from_str::<Library>(content.as_str()).unwrap_or_else(|e| {
+        panic!("failed to parse library json file {:?}", e);
+    });
+
+    let commands = library
+        .extensions
+        .iter()
+        .find(|ext| ext.name == *version)
+        .unwrap_or_else(|| {
+            panic!("failed to find extension with name {}", version);
+        })
+        .commands
+        .iter()
+        .collect::<Vec<_>>();
+
+    for command in commands {
+        let mut s = String::from("function ");
+
+        if let Some(class) = command.class.as_ref() {
+            s.push_str(class);
+            s.push_str("_");
+        };
+
+        let Some(member) = command.member.as_ref() else {
+            continue;
+        };
+
+        s.push_str(member);
+        s.push_str("<");
+
+        let Some(cc) = command.cc.as_ref() else {
+            continue;
+        };
+
+        s.push_str(cc);
+        s.push_str(", ");
+        s.push_str(&command.name);
+        s.push_str(">");
+        s.push_str("(");
+
+        for (i, param) in command.input.iter().enumerate() {
+            if i > 0 {
+                s.push_str(", ");
+            }
+
+            s.push_str(&param.r#name);
+            s.push_str(": ");
+            s.push_str(&param.r#type);
+        }
+
+        s.push_str(")");
+
+        if !command.output.is_empty() {
+            s.push_str(": ");
+
+            for (i, param) in command.output.iter().enumerate() {
+                if i > 0 {
+                    s.push_str(", ");
+                }
+
+                s.push_str(&param.r#type);
+                break; // only one output parameter
+            }
+        }
+
+        println!("{}", s);
+    }
+
+    Ok(())
+}
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     match args.get(1) {
         Some(x) if x == "classes" => generate_classes().ok(),
         Some(x) if x == "snippets" => generate_snippets().ok(),
         Some(x) if x == "enums" => generate_enums().ok(),
+        Some(x) if x == "native" => generate_native().ok(),
         Some(x) => {
             panic!("unknown action argument {}", x);
         }

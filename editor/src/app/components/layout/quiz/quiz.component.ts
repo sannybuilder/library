@@ -37,7 +37,7 @@ export class QuizComponent {
 
   @Input() set extensions(value: Extension[]) {
     this._extensions = value;
-    if (value) {
+    if (value && value[0].commands.length > 10) {
       this.nextQuestion();
     }
   }

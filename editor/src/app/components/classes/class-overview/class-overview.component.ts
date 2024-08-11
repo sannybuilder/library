@@ -7,15 +7,16 @@ import {
 } from '@angular/core';
 import {
   ConstructorHandler,
+  getDefaultExtension,
   getQueryParamsForCommand,
   isSupported,
 } from '../../../utils';
 import {
   ClassMeta,
   Command,
-  DEFAULT_EXTENSION,
   Extension,
   Game,
+  ViewContext,
 } from '../../../models';
 
 type ClassCommand = { command: Command; extension: string };
@@ -30,7 +31,6 @@ export class ClassOverviewComponent {
   private _classCommands: ClassCommand[];
   private _gameExtensions: Extension[] = [];
   private _className: Game;
-  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   filterQuery = '';
   commandsHaveSameOrigin = true;
   externalConstructors: Record<
@@ -38,6 +38,7 @@ export class ClassOverviewComponent {
     Array<{ command: Command; extension: string }>
   > = {};
 
+  @Input() viewContext: ViewContext;
   @Input() set gameExtensions(val: Extension[]) {
     this._gameExtensions = val;
     this.externalConstructors = this.findExternalConstructors();
@@ -116,5 +117,16 @@ export class ClassOverviewComponent {
 
       return m;
     }, {} as Record<string, Array<{ command: Command; extension: string }>>);
+  }
+
+  get baseHref() {
+    if (this.viewContext === ViewContext.Code) {
+      return `/${this.game}/native/versions`
+    }
+    return `/${this.game}/script/extensions`;
+  }
+
+  getDefaultExtension() {
+    return getDefaultExtension(this.viewContext);
   }
 }

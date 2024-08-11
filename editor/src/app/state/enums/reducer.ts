@@ -5,6 +5,7 @@ import {
   renameGameEnum,
   updateGameEnum,
   loadEnumsInfoSuccess,
+  loadEnumsError,
 } from './actions';
 import { fromPairs, mapValues } from 'lodash';
 import { evaluateEnumValues, smash } from '../../utils';
@@ -22,6 +23,7 @@ export const enumsReducer = createReducer(
   on(loadEnumsSuccess, (state, { game, enums }) =>
     updateState(state, game, enums)
   ),
+  on(loadEnumsError, (state, { game }) => updateState(state, game, {})),
   on(updateGameEnum, (state, { enumToEdit, oldEnumToEdit, game }) => {
     const newState = {
       [oldEnumToEdit.name]: enumToEdit.fields?.length

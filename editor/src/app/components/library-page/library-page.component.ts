@@ -10,14 +10,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
-import { takeUntil, map, switchMap, filter, take } from 'rxjs/operators';
+import { takeUntil, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 
 import {
   Command,
-  DEFAULT_EXTENSION,
   Enum,
   EnumRaw,
+  ViewContext,
   Game,
   GenerateJsonModel,
   ParamType,
@@ -34,9 +34,11 @@ import {
   ArticlesFacade,
 } from '../../state';
 import {
+  doesGameHaveNativeDocs,
   doesGameRequireOpcode,
   FUSEJS_OPTIONS,
   getBaseGames,
+  getDefaultExtension,
   getQueryParamsForCommand,
   isOtherGame,
   serializeUrlAndParams,
@@ -52,14 +54,15 @@ import { Router } from '@angular/router';
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sidebar') sidebar: ElementRef<HTMLDivElement>;
 
-  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   ViewMode = ViewMode;
+  ViewContext = ViewContext;
   onDestroy$ = new Subject();
   snippet$ = this._ui.snippetToDisplayOrEdit$;
   extensionNames$ = this._extensions.extensionNames$;
   classToDisplay$ = this._ui.classToDisplay$;
   classCommands$ = this._ui.classToDisplayCommands$;
   game$ = this._game.game$;
+  viewContext$ = this._game.viewContext$;
   canEdit$ = this._ui.canEdit$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
@@ -68,11 +71,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
   extensionToCreateCommands$ = this._ui.selectedExtensions$.pipe(
-    map((selectedExtensions) => {
-      if (selectedExtensions?.length === 1) {
+    withLatestFrom(this._game.viewContext$),
+    map(([selectedExtensions, viewContext]) => {
+      if (selectedExtensions?.length === 1 && selectedExtensions[0] !== 'any') {
         return selectedExtensions[0];
       }
-      return DEFAULT_EXTENSION;
+      return this.getDefaultExtension(viewContext);
     })
   );
   entities$: Observable<Array<{ origin: string; name: string }>> =
@@ -231,17 +235,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._ui.stopEditOrDisplay();
   }
 
-  onDescriptionClick(e: MouseEvent) {
-    if ((e.target as Element)?.tagName === 'A') {
-      const href = (e.target as Element).attributes.getNamedItem('href')?.value;
-      if (href) {
-        const parts = href.split('/');
-        this._router.navigate(['/', ...parts.slice(1)]);
-      }
-    }
-  }
-
-  toggleOpcodePresentation() {
+  onToggleOpcodePresentation() {
     this._ui.toggleOpcodePresentation();
     return false;
   }
@@ -379,6 +373,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   getPermaLink({
     viewMode,
     game,
+    viewContext,
     extension,
     command,
     enumName,
@@ -386,6 +381,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }: {
     viewMode: ViewMode;
     game: Game;
+    viewContext: ViewContext;
     extension?: string;
     command?: Command;
     enumName?: string;
@@ -423,12 +419,15 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (viewMode === ViewMode.ViewCommand) {
+      const baseHref =
+        viewContext === ViewContext.Code ? `${game}/native` : `${game}/script`;
+
       if (!command) {
-        return [base, game, extension].join('/');
+        return [base, baseHref, extension].join('/');
       }
       const url = [
         'https://sannybuilder.com/lib',
-        game,
+        baseHref,
         extension,
         command.id || command.name,
       ].join('/');
@@ -469,6 +468,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   doesGameRequireOpcode(game: Game) {
     return doesGameRequireOpcode(game);
+  }
+
+  doesGameHaveNativeDocs(game: Game) {
+    return doesGameHaveNativeDocs(game);
+  }
+
+  getDefaultExtension(viewContext: ViewContext) {
+    return getDefaultExtension(viewContext);
   }
 
   private _onSaveCommand() {

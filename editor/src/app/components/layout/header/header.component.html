@@ -37,15 +37,28 @@
               }}</span></a
             >
             <div class="dropdown-menu">
-              <a
-                *ngFor="let v of getGameVariations(game)"
-                class="dropdown-item"
-                [routerLink]="['/', v]"
-                [attr.translate]="'no'"
-              >
-                <scl-icon [game]="v" size="16"></scl-icon>
-                {{ v | gameTitle }}</a
-              >
+              <ng-container *ngFor="let v of getGameVariations(game)">
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/', v]"
+                  [attr.translate]="'no'"
+                >
+                  <scl-icon [game]="v" size="16"></scl-icon>
+                  {{ v | gameTitle }}</a
+                >
+                <ng-container *ngIf="doesGameHaveNativeDocs(v)">
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'script']"
+                    >{{ "ui.header.scriptCommands" | translate }}</a
+                  >
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'native']"
+                    >{{ "ui.header.nativeCode" | translate }}</a
+                  >
+                </ng-container>
+              </ng-container>
             </div>
           </li>
         </ul>
@@ -356,6 +369,19 @@
             >
               {{ "ui.header.login" | translate }}
             </a>
+            <ng-container *ngIf="isAuthorized$ | async; let isAuthorized">
+              <div class="dropdown-divider"></div>
+              <a
+                *ngIf="profileUrl$ | async; let profileUrl"
+                class="dropdown-item"
+                [href]="profileUrl"
+                target="_blank"
+                >{{ "ui.header.profile" | translate }}</a
+              >
+              <a class="dropdown-item" href="#" (click)="logout()">{{
+                "ui.header.logout" | translate
+              }}</a>
+            </ng-container>
             <div class="dropdown-divider"></div>
             <a
               routerLink="/"
@@ -370,17 +396,32 @@
               <p class="pl-3 mb-1" [attr.translate]="'no'">
                 {{ game | gameTitleSimple }}
               </p>
-              <a
-                *ngFor="let v of getGameVariations(game)"
-                class="dropdown-item"
-                [routerLink]="['/', v]"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                [attr.translate]="'no'"
-              >
-                <scl-icon [game]="v" size="16"></scl-icon>
-                {{ v | gameTitle }}</a
-              >
+              <ng-container *ngFor="let v of getGameVariations(game)">
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/', v]"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  [attr.translate]="'no'"
+                >
+                  <scl-icon [game]="v" size="16"></scl-icon>
+                  {{ v | gameTitle }}</a
+                >
+
+                <ng-container *ngIf="doesGameHaveNativeDocs(v)">
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'script']"
+                    >{{ "ui.header.scriptCommands" | translate }}</a
+                  >
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'native']"
+                    >{{ "ui.header.nativeCode" | translate }}</a
+                  >
+                </ng-container>
+              </ng-container>
+
               <div class="dropdown-divider"></div>
             </ng-container>
 
@@ -394,20 +435,6 @@
               (click)="toggleLanguage(lang)"
               >{{ "ui.lang." + lang | translate }}</a
             >
-
-            <ng-container *ngIf="isAuthorized$ | async; let isAuthorized">
-              <div class="dropdown-divider"></div>
-              <a
-                *ngIf="profileUrl$ | async; let profileUrl"
-                class="dropdown-item"
-                [href]="profileUrl"
-                target="_blank"
-                >{{ "ui.header.profile" | translate }}</a
-              >
-              <a class="dropdown-item" href="#" (click)="logout()">{{
-                "ui.header.logout" | translate
-              }}</a>
-            </ng-container>
           </div>
         </form>
       </div>

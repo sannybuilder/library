@@ -31,8 +31,7 @@
                   *ngIf="canEdit"
                   class="btn small text-muted"
                   [routerLink]="[
-                    '/',
-                    game,
+                    baseHref,
                     row.extension,
                     row.command.id || row.command.name,
                     'edit'
@@ -45,8 +44,7 @@
                   style="margin-right: -0.75rem"
                   class="btn small text-muted"
                   [routerLink]="[
-                    '/',
-                    game,
+                    baseHref,
                     row.extension,
                     row.command.id || row.command.name
                   ]"
@@ -58,10 +56,12 @@
             </div>
             <div class="row mt-3">
               <div class="col-12 d-flex flex-row">
-                <ng-container *ngIf="doesGameRequireOpcode; else nameAsLink">
+                <ng-container
+                  *ngIf="row.command.id !== undefined; else nameAsLink"
+                >
                   <a
                     class="mr-3"
-                    [routerLink]="['/', game, row.extension, row.command.id]"
+                    [routerLink]="[baseHref, row.extension, row.command.id]"
                     [queryParams]="getQueryParamsForCommand(row.command, game)"
                     [name]="row.command.id"
                     [innerHTML]="row.command | propExtract : 'id' | sanitize"
@@ -76,84 +76,39 @@
                 <ng-template #nameAsLink>
                   <a
                     class="text-break"
-                    [routerLink]="['/', game, row.extension, row.command.name]"
+                    [routerLink]="[baseHref, row.extension, row.command.name]"
                     [queryParams]="getQueryParamsForCommand(row.command, game)"
                     [name]="row.command.name"
                     [innerHTML]="row.command | propExtract : 'name' | sanitize"
                     [attr.translate]="'no'"
                   ></a>
                 </ng-template>
+
+                <ng-container *ngIf="viewContext === ViewContext.Code">
+                  <div
+                    class="ml-3 text-break"
+                    [innerHTML]="row.command | propExtract : 'class' | sanitize"
+                    [attr.translate]="'no'"
+                  ></div>
+                  ::
+                  <div
+                    class="text-break"
+                    [innerHTML]="
+                      row.command | propExtract : 'member' | sanitize
+                    "
+                    [attr.translate]="'no'"
+                  ></div>
+                </ng-container>
               </div>
             </div>
 
             <div class="row mt-3">
               <div class="col-12">
-                <ng-container *ngIf="isSupported(row.command)">
-                  <div
-                    (click)="interceptDescriptionClick($event)"
-                    [innerHTML]="
-                      row.command | linkify : game : gameExtensions | sanitize
-                    "
-                  ></div>
-                </ng-container>
-
-                <ng-container *ngIf="row.command.attrs?.is_unsupported">{{
-                  "ui.commandList.unsupported" | translate
-                }}</ng-container>
-                <ng-container *ngIf="row.command.attrs?.is_nop">{{
-                  "ui.commandList.nop" | translate
-                }}</ng-container>
-
-                <ng-container *ngIf="row.command.class && row.command.member">
-                  <ng-container *ngIf="row.command.output?.length">
-                    <code>
-                      <span
-                        [innerHTML]="row.command | outputParams | sanitize"
-                      ></span>
-                      =
-                      <a
-                        class="identifier"
-                        [routerLink]="['/', game, 'classes', row.command.class]"
-                        ><span
-                          [innerHTML]="
-                            row.command | propExtract : 'class' | sanitize
-                          "
-                        ></span></a
-                      >.<span
-                        class="identifier"
-                        [innerHTML]="
-                          row.command | propExtract : 'member' | sanitize
-                        "
-                      ></span
-                      ><span
-                        [innerHTML]="row.command | inputParams | sanitize"
-                      ></span
-                    ></code>
-                  </ng-container>
-
-                  <ng-container *ngIf="!row.command.output?.length">
-                    <code>
-                      <a
-                        class="identifier"
-                        [routerLink]="['/', game, 'classes', row.command.class]"
-                      >
-                        <span
-                          [innerHTML]="
-                            row.command | propExtract : 'class' | sanitize
-                          "
-                        ></span></a
-                      >.<span
-                        class="identifier"
-                        [innerHTML]="
-                          row.command | propExtract : 'member' | sanitize
-                        "
-                      ></span
-                      ><span
-                        [innerHTML]="row.command | classParams | sanitize"
-                      ></span
-                    ></code>
-                  </ng-container>
-                </ng-container>
+                <scl-command-declaration
+                  [game]="game"
+                  [command]="row.command"
+                  [gameExtensions]="gameExtensions"
+                ></scl-command-declaration>
 
                 <ng-container
                   *ngIf="row.command.operator && isSupported(row.command)"
@@ -187,10 +142,10 @@
 
             <div class="row mt-3">
               <div class="col-12 text-right">
-                <ng-container *ngIf="row.extension !== DEFAULT_EXTENSION">
+                <ng-container *ngIf="row.extension !== getDefaultExtension()">
                   <a
                     class="badge-spacing"
-                    [routerLink]="['/', game, row.extension]"
+                    [routerLink]="[baseHref, row.extension]"
                   >
                     <code class="platform-badge gold">
                       {{ row.extension }}

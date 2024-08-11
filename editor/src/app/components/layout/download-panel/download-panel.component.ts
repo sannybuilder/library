@@ -6,6 +6,7 @@ import {
   GameEnumsJsAssets,
   GameLibrary,
   GameOpcodesTxtAssets,
+  GameNativeAssets,
 } from '../../../models';
 
 @Component({
@@ -25,6 +26,7 @@ export class DownloadPanelComponent {
       { name: 'classes.db', path: GameClassesAssets[game] },
       { name: 'enums.txt', path: GameEnumsAssets[game] },
       { name: 'opcodes.txt', path: GameOpcodesTxtAssets[game] },
+      { name: 'native.txt', path: GameNativeAssets[game] },
     ].filter(({ path }) => path);
   }
 

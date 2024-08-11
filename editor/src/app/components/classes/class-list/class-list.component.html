@@ -1,6 +1,6 @@
-<div class="row mb-2">
+<div class="row mb-2" *ngIf="viewContext === ViewContext.Script">
   <div class="col-12 d-flex justify-content-end">
-    <a *ngFor="let game of games" [routerLink]="['/', game, 'classes']">
+    <a *ngFor="let game of games" [routerLink]="[getBaseHref(game), 'classes']">
       <scl-icon [game]="game" size="16"></scl-icon>
     </a>
   </div>
@@ -9,9 +9,15 @@
 <h5>{{ "ui.classList.title" | translate }}</h5>
 
 <div class="scroll-container" [attr.translate]="'no'">
-  <pre *ngIf="entities" class="sample">
+  <pre *ngIf="entities; else noClasses" class="sample">
 <div *ngFor="let entity of entities"><a 
-  [routerLink]="['/', game, 'classes', entity.name]"
+  [routerLink]="[getBaseHref(game), 'classes', entity.name]"
   >{{ entity.name }}</a><span class="secondary" *ngIf="getClassDesc(entity.name) as desc"> // {{ desc }}</span><span class="secondary"
-  *ngIf="entity.origin !== DEFAULT_EXTENSION"> // <span [innerHTML]="'ui.classOverview.onlyWithExtensionInline' | translate: { extension: entity.origin, game: game }"></span></span></div></pre>
+  *ngIf="entity.origin !== getDefaultExtension()"> // <span [innerHTML]="'ui.classOverview.onlyWithExtensionInline' | translate: { extension: entity.origin, game: game }"></span></span></div></pre>
 </div>
+
+<ng-template #noClasses>
+  <div class="my-3">
+    {{ "ui.classOverview.noClasses" | translate }}
+  </div>
+</ng-template>

@@ -92,6 +92,7 @@ export interface Command {
   platforms?: Platform[];
   versions?: Version[];
   operator?: string;
+  cc?: 'cdecl' | 'stdcall' | 'thiscall';
 }
 
 export interface Extension {
@@ -113,7 +114,17 @@ export interface EnumRaw {
   isNew: boolean;
 }
 
-export const KNOWN_LANGUAGES = ['en', 'ru', 'cn', 'bn', 'es', 'fr', 'tw-cn', 'tr', 'id'];
+export const KNOWN_LANGUAGES = [
+  'en',
+  'ru',
+  'cn',
+  'bn',
+  'es',
+  'fr',
+  'tw-cn',
+  'tr',
+  'id',
+];
 
 export enum Game {
   gta3 = 'gta3',
@@ -183,9 +194,16 @@ export const GameOpcodesTxtAssets: Partial<Record<Game, string>> = {
   [Game.vcs]: 'assets/vcs/opcodes.txt',
 };
 
+export const GameNativeAssets: Partial<Record<Game, string>> = {
+  [Game.sa]: 'assets/sa/native.txt',
+};
 
 export const GameLibrary: Record<Game, string> = r(
   (game) => `${game}/${game}.json`
+);
+
+export const GameNativeLibrary: Record<Game, string> = r(
+  (game) => `${game}/native.json`
 );
 
 export const GameVersion: Record<Game, string> = r(
@@ -275,6 +293,7 @@ export const GameVersions: Record<Game, Version[]> = {
 };
 
 export const DEFAULT_EXTENSION = 'default';
+export const DEFAULT_VERSION = '1.0';
 
 export enum ViewMode {
   None = 'None',
@@ -288,6 +307,11 @@ export enum ViewMode {
   ViewAllExtensions = 'ViewAllExtensions',
   ViewDecisionTree = 'ViewDecisionTree',
   ViewGenerateJson = 'ViewGenerateJson',
+}
+
+export enum ViewContext {
+  Script = 'Script',
+  Code = 'Code',
 }
 
 export type Modifier = 'except' | 'only';

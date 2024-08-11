@@ -1,9 +1,9 @@
 import { areTypesCompatible, isSupported } from './command';
 import {
   Command,
+  DEFAULT_EXTENSION,
   Extension,
   Game,
-  GameId,
   GameSupportInfo,
   PackedSupportInfo,
   SupportInfo,
@@ -31,7 +31,7 @@ export function getPackedSupportInfo(
               game === otherGame ? command : otherCommand,
               command
             ),
-            extension === 'default' ? '' : extension,
+            extension === DEFAULT_EXTENSION ? '' : extension,
           ];
         }
       );
@@ -54,7 +54,7 @@ export function unpackSupportInfo(
             .map(([level, extension], id) => ({
               game: idToGame[id],
               level,
-              extension: extension === '' ? 'default' : extension,
+              extension: extension === '' ? DEFAULT_EXTENSION : extension,
             }));
           return m3;
         }, {} as Record<string, GameSupportInfo[]>);

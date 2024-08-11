@@ -1,13 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { doesGameRequireOpcode, getQueryParamsForCommand, isSupported } from '../../../utils';
-import { Command, DEFAULT_EXTENSION, Extension, Game } from '../../../models';
+import {
+  doesGameRequireOpcode,
+  getDefaultExtension,
+  getQueryParamsForCommand,
+  isSupported,
+} from '../../../utils';
+import { Command, Extension, ViewContext, Game } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
@@ -17,19 +16,19 @@ import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandListComponent {
+  ViewContext = ViewContext;
+
   @Input() gameExtensions: Extension[];
   @Input() game: Game;
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
-  @Output() descriptionClick = new EventEmitter();
+  @Input() viewContext: ViewContext;
 
   loading$ = this._extensions.loading$;
   loadingError$ = this._extensions.loadingError$;
   currentPage$ = this._ui.currentPage$;
   rows$ = this._ui.rows$;
   rowsCount$ = this.rows$.pipe(map((rows) => rows.length));
-
-  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -55,11 +54,6 @@ export class CommandListComponent {
     return false;
   }
 
-  interceptDescriptionClick(event: MouseEvent) {
-    this.descriptionClick.next(event);
-    return false;
-  }
-
   getQueryParamsForCommand(command: Command, game: Game) {
     return getQueryParamsForCommand(command, game);
   }
@@ -69,6 +63,17 @@ export class CommandListComponent {
   }
 
   isSupported(command: Command) {
-    return isSupported(command.attrs)
+    return isSupported(command.attrs);
+  }
+
+  get baseHref() {
+    if (this.viewContext === ViewContext.Code) {
+      return `/${this.game}/native/versions`;
+    }
+    return `/${this.game}/script/extensions`;
+  }
+
+  getDefaultExtension() {
+    return getDefaultExtension(this.viewContext);
   }
 }

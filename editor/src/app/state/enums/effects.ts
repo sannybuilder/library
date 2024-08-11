@@ -23,12 +23,13 @@ import {
   loadEnumsInfo,
   loadEnumsInfoSuccess,
   loadEnumsError,
+  loadEnumsInfoError,
 } from './actions';
 import { GameFacade } from '../game/facade';
 import { EnumsService } from './service';
 import { ChangesFacade } from '../changes/facade';
 import { EnumsFacade } from './facade';
-import { GameEnums } from '../../models';
+import { GameEnums, ViewContext } from '../../models';
 import { AuthFacade } from '../auth/facade';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
@@ -45,15 +46,31 @@ export class EnumsEffects {
     )
   );
 
+  viewContexts$ = createEffect(() =>
+    this._game.viewContext$.pipe(
+      distinctUntilChanged(),
+      withLatestFrom(this._game.game$),
+      map(([_, game]) =>
+        loadEnums({
+          game,
+        })
+      )
+    )
+  );
+
   loadEnums$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnums),
-      distinctUntilChanged((a, b) => GameEnums[a.game] === GameEnums[b.game]),
-      withLatestFrom(this._auth.authToken$),
-      concatMap(([{ game }, accessToken]) =>
+      withLatestFrom(this._game.viewContext$, this._auth.authToken$),
+      filter(([_, viewContext]) => viewContext === ViewContext.Script),
+      distinctUntilChanged(
+        ([a, ea], [b, eb]) =>
+          GameEnums[a.game] === GameEnums[b.game] && ea === eb
+      ),
+      concatMap(([{ game }, viewContext, accessToken]) =>
         this._service.loadEnums(game, accessToken).pipe(
           map((enums) => loadEnumsSuccess({ game, enums })),
-          catchError(() => of(loadEnumsError()))
+          catchError(() => of(loadEnumsError({ game })))
         )
       )
     )
@@ -79,7 +96,7 @@ export class EnumsEffects {
 
   // the rename effect must go after the update effect
   // because if we rename and change an enum at the same time
-  // existing enum fields should updated before the enum renamed, 
+  // existing enum fields should updated before the enum renamed,
   // or we get a duplicate
   renameGameEnums$ = createEffect(() =>
     this._actions$.pipe(
@@ -136,10 +153,12 @@ export class EnumsEffects {
   loadEnumsInfo$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadEnumsInfo),
+      withLatestFrom(this._game.viewContext$, this._auth.authToken$),
+      filter(([_, viewContext]) => viewContext === ViewContext.Script),
       switchMap(() =>
         this._service.loadEnumsInfo().pipe(
           map((data) => loadEnumsInfoSuccess({ data })),
-          catchError(() => of(loadEnumsError()))
+          catchError(() => of(loadEnumsInfoError()))
         )
       )
     )

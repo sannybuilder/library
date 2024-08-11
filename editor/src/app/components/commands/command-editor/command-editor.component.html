@@ -55,7 +55,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-12 col-xl-4" *ngIf="doesGameRequireOpcode">
+    <div class="col-12 col-xl-4" *ngIf="features.opcode">
       <div class="input-group">
         <span class="input-group-text">{{
           "ui.commandEditor.fieldOpcode" | translate
@@ -189,7 +189,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-6">
+    <div class="col-6" *ngIf="features.opcode">
       <div class="input-group">
         <scl-selector
           class="flex-grow-1"
@@ -199,6 +199,18 @@
           [choices]="operations"
           [canInput]="false"
           [disabled]="command.class"
+        ></scl-selector>
+      </div>
+    </div>
+    <div class="col-6" *ngIf="features.cc">
+      <div class="input-group">
+        <scl-selector
+          class="flex-grow-1"
+          [model]="command.cc"
+          [label]="'ui.commandEditor.cc' | translate"
+          (modelChange)="onOperationChange(command, $event)"
+          [choices]="ccs"
+          [canInput]="false"
         ></scl-selector>
       </div>
     </div>

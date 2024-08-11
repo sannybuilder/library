@@ -20,9 +20,9 @@ import {
   PrimitiveType,
   Attr,
   Extension,
+  ViewContext,
 } from '../models';
 import { HEX_DIGITS, HEX_NEGATION } from './hex';
-
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
 export function smash(value: object) {
@@ -234,7 +234,19 @@ export function matchArrays<T>(
   return difference(arr1, arr2).length === 0;
 }
 
-export function primitiveTypes(game: Game): PrimitiveType[] {
+export function primitiveTypes(
+  game: Game,
+  viewContext: ViewContext
+): PrimitiveType[] {
+  if (viewContext === ViewContext.Code) {
+    return [
+      PrimitiveType.any,
+      PrimitiveType.boolean,
+      PrimitiveType.float,
+      PrimitiveType.int,
+      PrimitiveType.string,
+    ];
+  }
   const types = [
     PrimitiveType.any,
     PrimitiveType.arguments,
@@ -325,43 +337,51 @@ export function isSupported(attrs?: Partial<Attr>): boolean {
   return !attrs?.is_unsupported && !attrs?.is_nop;
 }
 
+export function stringifyCommandWithOperator<
+  Cb extends (param: Param, i: number) => string
+>(command: Command, onInput: Cb, onOutput: Cb) {
+  const output = outputParams(command);
+  const input = inputParams(command);
 
-export function stringifyCommandWithOperator<Cb extends (param: Param, i: number) => string>(command: Command, onInput: Cb, onOutput: Cb) {
-    const output = outputParams(command);
-    const input = inputParams(command);
-
-    if (input.length == 1 && !output.length) {
-      // unary
-      return `${command.operator}${onInput(input[0], 0)}`;
-    }
-    if (output.length) {
-      // binary not
-      if (command.operator === '~') {
-        return `${onOutput(output[0], 0)} = ~${onInput(input[0], 0)}`;
-      }
-
-      // ternary
-      return `${onOutput(output[0], 0)} = ${onInput(input[0], 0)} ${command.operator} ${onInput(input[1], 1)}`;
+  if (input.length == 1 && !output.length) {
+    // unary
+    return `${command.operator}${onInput(input[0], 0)}`;
+  }
+  if (output.length) {
+    // binary not
+    if (command.operator === '~') {
+      return `${onOutput(output[0], 0)} = ~${onInput(input[0], 0)}`;
     }
 
-    switch (command.operator) {
-      // assignment or comparison
-      case '=':
-      case '+=@':
-      case '-=@':
-      case '=#':
-      case '==':
-      case '>':
-      case '>=': {
-        return `${onInput(input[0], 0)} ${command.operator} ${onInput(input[1], 1)}`;
-      }
+    // ternary
+    return `${onOutput(output[0], 0)} = ${onInput(input[0], 0)} ${
+      command.operator
+    } ${onInput(input[1], 1)}`;
+  }
 
-      // compound assignment
-      default: {
-        return `${onInput(input[0], 0)} ${command.operator}= ${onInput(input[1], 1)}`;
-      }
+  switch (command.operator) {
+    // assignment or comparison
+    case '=':
+    case '+=@':
+    case '-=@':
+    case '=#':
+    case '==':
+    case '>':
+    case '>=': {
+      return `${onInput(input[0], 0)} ${command.operator} ${onInput(
+        input[1],
+        1
+      )}`;
     }
-  
+
+    // compound assignment
+    default: {
+      return `${onInput(input[0], 0)} ${command.operator}= ${onInput(
+        input[1],
+        1
+      )}`;
+    }
+  }
 }
 
 export function normalize(extensions: Extension[], game: Game) {

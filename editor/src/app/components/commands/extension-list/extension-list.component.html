@@ -1,4 +1,4 @@
-<div class="row mb-2">
+<div class="row mb-2" *ngIf="viewContext === ViewContext.Script">
   <div class="col-12 d-flex justify-content-end">
     <a *ngFor="let game of games" [routerLink]="['/', game, 'extensions']">
       <scl-icon [game]="game" size="16"></scl-icon>
@@ -6,15 +6,27 @@
   </div>
 </div>
 
-<h5>{{ "ui.extensionList.title" | translate }}</h5>
+<h5>
+  {{
+    "ui." +
+      (viewContext === ViewContext.Code ? "versionList" : "extensionList") +
+      ".title" | translate
+  }}
+</h5>
 
 <div class="scroll-container" [attr.translate]="'no'">
   <pre
     *ngIf="extensions.length; else noExtensions"
     class="sample"
-  ><div *ngFor="let extension of extensions"><a [routerLink]="['/', game, extension.name]">{{ extension.name }}</a> <span class="secondary">({{ "ui.extensionList.numCommands" | translate: { total: extension.commands.length } }})</span></div></pre>
+  ><div *ngFor="let extension of extensions"><a [routerLink]="[baseHref, extension.name]">{{ extension.name }}</a> <span class="secondary">({{ "ui." + (viewContext === ViewContext.Code ? "versionList" : "extensionList") + ".numCommands" | translate: { total: extension.commands.length } }})</span></div></pre>
 </div>
 
 <ng-template #noExtensions>
-  <div class="my-3">{{ "ui.extensionList.noExtensions" | translate }}</div>
+  <div class="my-3">
+    {{
+      "ui." +
+        (viewContext === ViewContext.Code ? "versionList" : "extensionList") +
+        ".noExtensions" | translate
+    }}
+  </div>
 </ng-template>

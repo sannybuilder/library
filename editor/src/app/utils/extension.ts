@@ -1,4 +1,4 @@
-import { last } from 'lodash';
+import { get, last } from 'lodash';
 import {
   Extension,
   ClassMeta,
@@ -6,17 +6,20 @@ import {
   DEFAULT_EXTENSION,
   Command,
   Game,
+  ViewContext,
+  DEFAULT_VERSION,
 } from '../models';
 import { primitiveTypes } from './command';
 
 export function getEntities(
   extensions: Extension[],
   classesMeta: ClassMeta[] | undefined,
-  game: Game
+  game: Game,
+  viewContext: ViewContext
 ): Record<string, Entity[]> {
   const defaultEntities =
     extensions
-      .find((e) => e.name === DEFAULT_EXTENSION)
+      .find((e) => e.name === getDefaultExtension(viewContext))
       ?.commands.reduce((m, command: Command) => {
         if (command.attrs?.is_constructor) {
           const name = last(command.output)?.type;
@@ -27,7 +30,7 @@ export function getEntities(
         return m;
       }, new Set<string>()) ?? new Set();
 
-  const primitives: string[] = primitiveTypes(game);
+  const primitives: string[] = primitiveTypes(game, viewContext);
 
   return extensions.reduce((m, e) => {
     const dynamicClasses = new Set<string>();
@@ -62,4 +65,9 @@ export function getEntities(
     );
     return m;
   }, {} as Record<string, Entity[]>);
+}
+
+
+export function getDefaultExtension(viewContext: ViewContext) {
+  return viewContext === ViewContext.Code ? DEFAULT_VERSION : DEFAULT_EXTENSION;
 }

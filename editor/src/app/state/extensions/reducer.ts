@@ -7,6 +7,7 @@ import {
   Extension,
   Game,
   SupportInfo,
+  ViewContext,
 } from '../../models';
 import {
   initSupportInfo,
@@ -53,12 +54,12 @@ export const extensionsReducer = createReducer(
   ),
   on(
     loadExtensionsSuccess,
-    (state, { game, extensions, version, lastUpdate, classes }) => {
+    (state, { game, extensions, version, lastUpdate, classes, viewContext }) => {
       return updateState(state, game, {
         extensions: sortExtensions(extensions),
+        entities: getEntities(extensions, classes, game, viewContext),
         lastUpdate,
         version,
-        entities: getEntities(extensions, classes, game),
         loading: false,
         loadingError: false,
         classesMeta: classes,
@@ -66,7 +67,7 @@ export const extensionsReducer = createReducer(
     }
   ),
   on(loadExtensionsError, (state, { game }) =>
-    updateState(state, game, { loading: false, loadingError: true })
+    updateState(state, game, { loading: false, loadingError: true, extensions: [] })
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(
@@ -138,7 +139,7 @@ export const extensionsReducer = createReducer(
       state.games[game]?.extensions ?? []
     );
 
-    const entities = getEntities(extensions, state.games[game]?.classesMeta, game);
+    const entities = getEntities(extensions, state.games[game]?.classesMeta, game, ViewContext.Script);
     return updateState(state, game, {
       extensions: sortExtensions(extensions),
       entities,

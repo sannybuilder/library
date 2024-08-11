@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, inject, NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -7,7 +7,13 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormsModule } from '@angular/forms';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterModule } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  RouterModule,
+  RouterStateSnapshot,
+  UrlMatchResult,
+  UrlSegment,
+} from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
@@ -98,6 +104,7 @@ import {
   CommandListComponent,
   CommandGamesComponent,
   ExtensionListComponent,
+  CommandDeclarationComponent,
 } from './components/commands';
 
 import {
@@ -218,6 +225,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     JsonGeneratorComponent,
     ExtensionListComponent,
     QuizComponent,
+    CommandDeclarationComponent,
   ],
   imports: [
     BrowserModule,
@@ -237,7 +245,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       [
         {
           path: '',
-          canActivate: [AuthGuard],
+          canActivate: [
+            (route: ActivatedRouteSnapshot) =>
+              inject(AuthGuard).canActivate(route),
+          ],
           children: [
             {
               path: '',
@@ -246,7 +257,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
             },
             {
               path: '**',
-              canActivate: [RouteGuard],
+              canActivate: [
+                (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
+                  inject(RouteGuard).canActivate(route, state),
+              ],
               component: LibraryPageComponent,
               runGuardsAndResolvers: 'always',
             },

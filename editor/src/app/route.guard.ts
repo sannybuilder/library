@@ -2,23 +2,22 @@ import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
 import {
-  DEFAULT_EXTENSION,
+  ViewContext,
   Game,
   GameTitle,
   Platform,
   Version,
 } from './models';
 import { AuthFacade, GameFacade } from './state';
-import { decodePlatforms, decodeVersions, isValidGame } from './utils';
+import { decodePlatforms, decodeVersions, getDefaultExtension, isValidGame } from './utils';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class AuthGuard {
   constructor(private _auth: AuthFacade, private location: Location) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
@@ -32,14 +31,14 @@ export class AuthGuard implements CanActivate {
 }
 
 @Injectable({ providedIn: 'root' })
-export class RouteGuard implements CanActivate {
+export class RouteGuard {
   constructor(
     private _router: Router,
     private _game: GameFacade,
     private _title: Title
   ) {}
 
-  canActivate(_next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const { segments, searchTerm } = getSegmentsFromUrl(
       this._router,
       state.url
@@ -54,46 +53,117 @@ export class RouteGuard implements CanActivate {
     }
     this._title.setTitle(`Sanny Builder Library :: ${GameTitle[game]}`);
 
-    const subPath = segments.shift();
-    if (subPath === 'classes') {
-      const className = segments.shift() || 'all';
+    const context = segments.shift();
+    if (!context || !['script', 'native'].includes(context)) {
+      // redirect old /game/<...> under new /game/script route
+      return this._router.navigate(
+        ['/', game, 'script', context, ...segments].filter(Boolean),
+        { queryParams: route.queryParams }
+      );
+    }
+
+    const scope = segments.shift();
+
+    if (scope) {
+      if (
+        ![
+          'extensions',
+          'versions',
+          'find',
+          'generate',
+          'classes',
+          'enums',
+        ].includes(scope)
+      ) {
+        // /:game/:extensionName/ -> /:game/script/extensions/:extensionName/
+        return this._router.navigate(
+          ['/', game, 'script', 'extensions', scope, ...segments].filter(
+            Boolean
+          ),
+          { queryParams: route.queryParams }
+        );
+      }
+
+      if (scope === 'extensions' && context !== 'script') {
+        return this.goHome();
+      }
+      if (scope === 'versions' && context !== 'native') {
+        return this.goHome();
+      }
+    }
+
+    let scopeName, itemName, action;
+    function assertAction(name: string | undefined) {
+      if (name && ['new', 'edit'].includes(name)) {
+        action = name;
+        return segments.length > 0;
+      }
+      return false;
+    }
+
+    scopeName = segments.shift();
+
+    if (assertAction(scopeName)) {
+      return this.goHome();
+    }
+
+    itemName = segments.shift();
+    if (assertAction(itemName)) {
+      return this.goHome();
+    }
+
+    if (!action) {
+      action = segments.shift();
+      if (assertAction(action)) {
+        return this.goHome();
+      }
+    }
+
+    const viewContext =
+      context === 'native' ? ViewContext.Code : ViewContext.Script;
+    const defaultExtension = getDefaultExtension(viewContext);
+
+    if (scope === 'classes') {
+      const className = scopeName || 'all';
 
       this._game.onListEnter({
         game,
         className,
-        extension: DEFAULT_EXTENSION,
-        action: segments.shift(),
+        extension: defaultExtension,
+        action,
+        viewContext,
       });
       return true;
     }
 
-    if (subPath === 'enums') {
-      const enumName = segments.shift() || 'all';
+    if (scope === 'enums') {
+      const enumName = scopeName || 'all';
       this._game.onListEnter({
         game,
         enumName,
-        extension: DEFAULT_EXTENSION,
-        action: segments.shift(),
+        extension: defaultExtension,
+        action,
+        viewContext,
       });
       return true;
     }
 
-    if (subPath === 'find') {
+    if (scope === 'find') {
       this._game.onListEnter({
         game,
-        extension: DEFAULT_EXTENSION,
+        extension: defaultExtension,
         action: 'decision-tree',
       });
       return true;
     }
 
-    if (subPath === 'generate') {
-      const params = segments.shift();
+    if (scope === 'generate') {
+      const params = scopeName;
       if (params) {
         const [fileName, ...selectedExtensions] = params.split(',');
         this._game.onListEnter({
           game,
-          extension: DEFAULT_EXTENSION,
+          extension: defaultExtension,
           action: 'generate-json',
           generateJsonModel: { fileName, selectedExtensions },
         });
@@ -101,24 +171,25 @@ export class RouteGuard implements CanActivate {
       } else {
         this._game.onListEnter({
           game,
-          extension: DEFAULT_EXTENSION,
+          extension: defaultExtension,
           action: 'generate-json',
         });
         return true;
       }
     }
 
-    if (subPath === 'extensions') {
+    if (scope && !scopeName) {
       this._game.onListEnter({
         game,
         extension: 'all',
+        viewContext,
       });
       return true;
     }
 
     // extensions
-    const id = segments.shift();
-    const extension = subPath;
+    const id = itemName;
+    const extension = scopeName;
 
     const platforms = getPlatformsFromUrl(this._router, state.url, game);
     const versions = getVersionsFromUrl(this._router, state.url, game);
@@ -127,10 +198,11 @@ export class RouteGuard implements CanActivate {
       game,
       extension,
       id,
-      action: segments.shift(),
+      action,
       searchTerm,
       platforms,
       versions,
+      viewContext,
     });
 
     return true;

@@ -15,7 +15,7 @@ export const GameEditions: Partial<Record<Game, Game[]>> = {
   ],
 };
 
-export function isValidGame(name: string | undefined): name is Game {
+export function isValidGame(name: string | undefined | null): name is Game {
   if (!name) {
     return false;
   }
@@ -80,4 +80,8 @@ export function doesGameRequireOpcode(game: Game): boolean {
 
 export function isOtherGame(game: Game) {
   return getGameVariations(Game.unknown_x86).includes(game);
+}
+
+export function doesGameHaveNativeDocs(game: Game): boolean {
+  return [Game.sa].includes(game);
 }

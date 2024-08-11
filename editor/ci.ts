@@ -81,7 +81,7 @@ games.forEach((game) => {
     cargo(`cargo run snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
   }
   if (GameNativeAssets[game]) {
-    cargo(`cargo run native ${nativeJson} 1.0 > ${join(dest, 'natives.txt')}`);
+    cargo(`cargo run native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
   }
 });
 

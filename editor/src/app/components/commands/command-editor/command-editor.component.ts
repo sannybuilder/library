@@ -19,7 +19,7 @@ import {
   Attribute,
   Command,
   CommandAttributes,
-  DEFAULT_EXTENSION,
+
   ViewContext,
   Game,
   GamePlatforms,
@@ -65,6 +65,7 @@ import {
   doesSelfArgumentHaveInvalidType,
   doesOutputHaveInvalidSource,
   primitiveTypes,
+  getDefaultExtension,
 } from '../../../utils';
 
 type ErrorType =
@@ -363,7 +364,7 @@ export class CommandEditorComponent implements OnInit {
     let newName = trim(val);
     if (!newName) {
       console.warn('extension can not be empty, using "default"');
-      newName = DEFAULT_EXTENSION;
+      newName = getDefaultExtension(this.viewContext);
     }
     this.extensionChange.emit(newName);
     this.updateErrors();

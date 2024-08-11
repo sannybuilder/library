@@ -153,7 +153,7 @@
                       game,
                       'native',
                       'versions',
-                      '1.0',
+                      extensionToCreateCommands$ | async,
                       'new'
                     ]"
                     >{{ "ui.layout.newFunction" | translate }}</a
@@ -395,7 +395,7 @@
           [(snippet)]="snippet"
           [extensionNames]="extensionNames$ | async"
           [supportInfo]="getCommandSupportInfo(command, extension) | async"
-          [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
+          [types]="getExtensionTypes(extension, getDefaultExtension(viewContext)) | async"
           [commands]="getExtensionCommands(extension) | async"
           [viewContext]="viewContext"
           (hasError)="editorHasError = $event"
@@ -406,7 +406,7 @@
           *ngIf="viewMode === ViewMode.ViewCommand && command"
           [command]="command"
           [game]="game"
-          [types]="getExtensionTypes(extension, DEFAULT_EXTENSION) | async"
+          [types]="getExtensionTypes(extension, getDefaultExtension(viewContext)) | async"
           [snippet]="getSnippet(extension, command.id || command.name) | async"
           [supportInfo]="getCommandSupportInfo(command, extension) | async"
           [relatedCommands]="

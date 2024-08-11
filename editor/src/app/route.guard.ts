@@ -7,7 +7,6 @@ import {
   Router,
 } from '@angular/router';
 import {
-  DEFAULT_EXTENSION,
   ViewContext,
   Game,
   GameTitle,
@@ -15,7 +14,7 @@ import {
   Version,
 } from './models';
 import { AuthFacade, GameFacade } from './state';
-import { decodePlatforms, decodeVersions, isValidGame } from './utils';
+import { decodePlatforms, decodeVersions, getDefaultExtension, isValidGame } from './utils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard {
@@ -122,6 +121,7 @@ export class RouteGuard {
 
     const viewContext =
       context === 'native' ? ViewContext.Code : ViewContext.Script;
+    const defaultExtension = getDefaultExtension(viewContext);
 
     if (scope === 'classes') {
       const className = scopeName || 'all';
@@ -129,7 +129,7 @@ export class RouteGuard {
       this._game.onListEnter({
         game,
         className,
-        extension: DEFAULT_EXTENSION,
+        extension: defaultExtension,
         action,
         viewContext,
       });
@@ -141,7 +141,7 @@ export class RouteGuard {
       this._game.onListEnter({
         game,
         enumName,
-        extension: DEFAULT_EXTENSION,
+        extension: defaultExtension,
         action,
         viewContext,
       });
@@ -151,7 +151,7 @@ export class RouteGuard {
     if (scope === 'find') {
       this._game.onListEnter({
         game,
-        extension: DEFAULT_EXTENSION,
+        extension: defaultExtension,
         action: 'decision-tree',
       });
       return true;
@@ -163,7 +163,7 @@ export class RouteGuard {
         const [fileName, ...selectedExtensions] = params.split(',');
         this._game.onListEnter({
           game,
-          extension: DEFAULT_EXTENSION,
+          extension: defaultExtension,
           action: 'generate-json',
           generateJsonModel: { fileName, selectedExtensions },
         });
@@ -171,7 +171,7 @@ export class RouteGuard {
       } else {
         this._game.onListEnter({
           game,
-          extension: DEFAULT_EXTENSION,
+          extension: defaultExtension,
           action: 'generate-json',
         });
         return true;

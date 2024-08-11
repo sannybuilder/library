@@ -5,11 +5,10 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { doesGameRequireOpcode, getQueryParamsForCommand, isSupported } from '../../../utils';
+import { doesGameRequireOpcode, getDefaultExtension, getQueryParamsForCommand, isSupported } from '../../../utils';
 import {
   Attribute,
   Command,
-  DEFAULT_EXTENSION,
   Extension,
   Game,
   Param,
@@ -28,7 +27,6 @@ import { stringifySource } from '../../../pipes/params';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandInfoComponent {
-  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   ViewContext = ViewContext;
   private _command: Command;
   private _attrs: Attribute[];
@@ -121,5 +119,9 @@ export class CommandInfoComponent {
       return `/${this.game}/native`
     }
     return `/${this.game}/script`;
+  }
+
+  getDefaultExtension() {
+    return getDefaultExtension(this.viewContext)
   }
 }

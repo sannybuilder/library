@@ -10,12 +10,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
-import { takeUntil, map, switchMap, filter, take } from 'rxjs/operators';
+import { takeUntil, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 
 import {
   Command,
-  DEFAULT_EXTENSION,
   Enum,
   EnumRaw,
   ViewContext,
@@ -39,6 +38,7 @@ import {
   doesGameRequireOpcode,
   FUSEJS_OPTIONS,
   getBaseGames,
+  getDefaultExtension,
   getQueryParamsForCommand,
   isOtherGame,
   serializeUrlAndParams,
@@ -54,7 +54,6 @@ import { Router } from '@angular/router';
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sidebar') sidebar: ElementRef<HTMLDivElement>;
 
-  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   ViewMode = ViewMode;
   ViewContext = ViewContext;
   onDestroy$ = new Subject();
@@ -72,11 +71,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
   extensionToCreateCommands$ = this._ui.selectedExtensions$.pipe(
-    map((selectedExtensions) => {
+    withLatestFrom(this._game.viewContext$),
+    map(([selectedExtensions, viewContext]) => {
       if (selectedExtensions?.length === 1 && selectedExtensions[0] !== 'any') {
         return selectedExtensions[0];
       }
-      return DEFAULT_EXTENSION;
+      return this.getDefaultExtension(viewContext);
     })
   );
   entities$: Observable<Array<{ origin: string; name: string }>> =
@@ -472,6 +472,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   doesGameHaveNativeDocs(game: Game) {
     return doesGameHaveNativeDocs(game);
+  }
+
+  getDefaultExtension(viewContext: ViewContext) {
+    return getDefaultExtension(viewContext);
   }
 
   private _onSaveCommand() {

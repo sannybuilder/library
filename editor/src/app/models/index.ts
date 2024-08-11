@@ -293,6 +293,7 @@ export const GameVersions: Record<Game, Version[]> = {
 };
 
 export const DEFAULT_EXTENSION = 'default';
+export const DEFAULT_VERSION = '1.0';
 
 export enum ViewMode {
   None = 'None',

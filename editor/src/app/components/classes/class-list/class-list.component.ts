@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { ClassMeta, DEFAULT_EXTENSION, Game, ViewContext } from '../../../models';
+import {
+  ClassMeta,
+  Game,
+  ViewContext,
+} from '../../../models';
+import { getDefaultExtension } from '../../../utils';
 
 @Component({
   selector: 'scl-class-list',
@@ -8,7 +13,6 @@ import { ClassMeta, DEFAULT_EXTENSION, Game, ViewContext } from '../../../models
 })
 export class ClassListComponent {
   ViewContext = ViewContext;
-  DEFAULT_EXTENSION = DEFAULT_EXTENSION;
   private _game: Game;
   games: Game[];
 
@@ -31,8 +35,12 @@ export class ClassListComponent {
 
   getBaseHref(game: Game) {
     if (this.viewContext === ViewContext.Code) {
-      return `/${game}/native`
+      return `/${game}/native`;
     }
     return `/${game}/script`;
+  }
+
+  getDefaultExtension() {
+    return getDefaultExtension(this.viewContext);
   }
 }

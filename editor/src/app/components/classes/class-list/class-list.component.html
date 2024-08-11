@@ -13,7 +13,7 @@
 <div *ngFor="let entity of entities"><a 
   [routerLink]="[getBaseHref(game), 'classes', entity.name]"
   >{{ entity.name }}</a><span class="secondary" *ngIf="getClassDesc(entity.name) as desc"> // {{ desc }}</span><span class="secondary"
-  *ngIf="entity.origin !== DEFAULT_EXTENSION"> // <span [innerHTML]="'ui.classOverview.onlyWithExtensionInline' | translate: { extension: entity.origin, game: game }"></span></span></div></pre>
+  *ngIf="entity.origin !== getDefaultExtension()"> // <span [innerHTML]="'ui.classOverview.onlyWithExtensionInline' | translate: { extension: entity.origin, game: game }"></span></span></div></pre>
 </div>
 
 <ng-template #noClasses>

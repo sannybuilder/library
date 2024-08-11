@@ -210,6 +210,10 @@ export const GameVersion: Record<Game, string> = r(
   (game) => `${game}/version.txt`
 );
 
+export const GameNativeVersion: Record<Game, string> = r(
+  (game) => `${game}/native_version.txt`
+);
+
 export const GameSnippets: Record<Game, string> = {
   [Game.gta3]: 'gta3/snippets.json',
   [Game.vc]: 'vc/snippets.json',

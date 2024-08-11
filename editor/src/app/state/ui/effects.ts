@@ -45,6 +45,7 @@ import {
   Game,
   Platform,
   Version,
+  ViewContext,
   ViewMode,
 } from '../../models';
 
@@ -275,7 +276,9 @@ export class UiEffects {
     () =>
       this._actions$.pipe(
         ofType(displayOrEditEnum),
-        first(({ viewMode }) => viewMode === ViewMode.EditEnum),
+        withLatestFrom(this._game.viewContext$),
+        filter(([_, viewContext]) => viewContext === ViewContext.Script),
+        first(([{ viewMode }]) => viewMode === ViewMode.EditEnum),
         tap(() => {
           Object.values(Game).forEach((game) => {
             this._extensions.loadExtensions(game);
@@ -293,7 +296,9 @@ export class UiEffects {
     () =>
       this._actions$.pipe(
         ofType(displayOrEditCommandInfo),
-        first(({ viewMode }) => viewMode === ViewMode.EditCommand),
+        withLatestFrom(this._game.viewContext$),
+        filter(([_, viewContext]) => viewContext === ViewContext.Script),
+        first(([{ viewMode }]) => viewMode === ViewMode.EditCommand),
         tap(() => {
           Object.values(Game).forEach((game) => {
             this._extensions.loadExtensions(game);

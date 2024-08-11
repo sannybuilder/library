@@ -34,10 +34,13 @@ import {
   Command,
   Game,
   GameLibrary,
+  GameNativeLibrary,
+  GameNativeVersion,
   GamePlatforms,
   GameVersion,
   GameVersions,
   PrimitiveType,
+  ViewContext,
 } from '../../models';
 import {
   commandParams,
@@ -214,19 +217,28 @@ export class ExtensionsEffects {
           this._extensions.getGameExtensions(game).pipe(
             withLatestFrom(
               this._extensions.getGameVersion(game),
-              this._extensions.getGameClassesMeta(game)
+              this._extensions.getGameClassesMeta(game),
+              this._game.viewContext$
             ),
-            tap(([extensions, oldVersion, classesMeta]) => {
+            tap(([extensions, oldVersion, classesMeta, viewContext]) => {
               const version = bumpVersion(oldVersion);
               this._changes.registerExtensionsChange({
                 version,
-                fileName: GameLibrary[game],
+                fileName:
+                  viewContext === ViewContext.Code
+                    ? GameNativeLibrary[game]
+                    : GameLibrary[game],
                 content: extensions,
                 url: 'https://library.sannybuilder.com/#/' + game,
                 classesMeta,
                 game,
               });
-              this._changes.registerTextFileChange(GameVersion[game], version);
+              this._changes.registerTextFileChange(
+                viewContext === ViewContext.Code
+                  ? GameNativeVersion[game]
+                  : GameVersion[game],
+                version
+              );
             })
           )
         )

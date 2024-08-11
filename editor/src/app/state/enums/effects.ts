@@ -23,6 +23,7 @@ import {
   loadEnumsInfo,
   loadEnumsInfoSuccess,
   loadEnumsError,
+  loadEnumsInfoError,
 } from './actions';
 import { GameFacade } from '../game/facade';
 import { EnumsService } from './service';
@@ -47,8 +48,8 @@ export class EnumsEffects {
 
   viewContexts$ = createEffect(() =>
     this._game.viewContext$.pipe(
-      withLatestFrom(this._game.game$),
       distinctUntilChanged(),
+      withLatestFrom(this._game.game$),
       map(([_, game]) =>
         loadEnums({
           game,
@@ -69,7 +70,7 @@ export class EnumsEffects {
       concatMap(([{ game }, viewContext, accessToken]) =>
         this._service.loadEnums(game, accessToken).pipe(
           map((enums) => loadEnumsSuccess({ game, enums })),
-          catchError(() => of(loadEnumsError()))
+          catchError(() => of(loadEnumsError({ game })))
         )
       )
     )
@@ -157,7 +158,7 @@ export class EnumsEffects {
       switchMap(() =>
         this._service.loadEnumsInfo().pipe(
           map((data) => loadEnumsInfoSuccess({ data })),
-          catchError(() => of(loadEnumsError()))
+          catchError(() => of(loadEnumsInfoError()))
         )
       )
     )

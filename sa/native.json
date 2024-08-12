@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1723417878576,
-    "version": "0.3",
+    "last_update": 1723483035499,
+    "version": "0.4",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -36435,14 +36435,18 @@
           "num_params": 1
         },
         {
-          "name": "0x5625F0",
-          "class": "CWanted",
-          "member": "WorkOutPolicePresence",
-          "cc": "cdecl",
           "input": [
             {
-              "name": "posn",
-              "type": "CVector"
+              "name": "posX",
+              "type": "float"
+            },
+            {
+              "name": "posY",
+              "type": "float"
+            },
+            {
+              "name": "posZ",
+              "type": "float"
             },
             {
               "name": "radius",
@@ -36451,11 +36455,20 @@
           ],
           "output": [
             {
-              "name": "result",
-              "type": "int"
+              "name": "numPolice",
+              "type": "int",
+              "source": "var_any"
             }
           ],
-          "num_params": 3
+          "name": "0x5625F0",
+          "class": "CWanted",
+          "member": "WorkOutPolicePresence",
+          "cc": "cdecl",
+          "num_params": 5,
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns the number of police within the given radius of the specified position"
         },
         {
           "name": "0x562760",

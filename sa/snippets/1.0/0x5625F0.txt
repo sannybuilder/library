@@ -1,0 +1,16 @@
+function CWanted_WorkOutPolicePresence<cdecl, 0x5625F0>(posX: float, posY: float, posZ: float, radius: float): int
+
+const cleo_player = 0
+int cleo_char = get_player_char cleo_player
+float posX, posY, posZ
+
+while true
+    wait 0
+    if
+        test_cheat "p"
+    then
+        posX, posY, posZ = get_char_coordinates cleo_char
+        int numPolice = CWanted_WorkOutPolicePresence(posX, posY, posZ, 14.0) 
+        print_help_formatted "Number of police in range: %d" numPolice
+    end
+end

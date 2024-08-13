@@ -1,0 +1,9 @@
+function CCarGenerator_Get<cdecl, 0x479D60>(index: int): int
+function CTheCarGenerators_RemoveCarGenerators<cdecl, 0x6F3240>(iplID: int) // CTheCarGenerators::RemoveCarGenerators
+
+CarGenerator hJeffersonNRG = create_car_generator 2243.75 -1258.5 24.0 {heading} 90.0 {modelId} #NRG500 {Colors} 86 86 {forceSpawn} True {alarm} 0 {doorLock} 0 {minDelay} 0 {maxDelay} 10000 // Jefferson Alley
+switch_car_generator hJeffersonNRG {amount} 101
+int pCargen = CCarGenerator_Get(hJeffersonNRG)
+write_memory_with_offset {address} pCargen {offset} 0x1C {size} 1 {value} 0xFE // won't save
+wait 1000
+CTheCarGenerators_RemoveCarGenerators(0xFE)

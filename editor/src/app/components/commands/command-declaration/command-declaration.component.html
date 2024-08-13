@@ -24,7 +24,11 @@
     function
 
     <ng-container *ngIf="command.class && command.member"
-      >{{ command.class }}_{{ command.member }}</ng-container
+      ><a
+        [attr.title]="classDesc"
+        [routerLink]="['/', game, 'native', 'classes', command.class]"
+        >{{ command.class }}</a
+      >_{{ command.member }}</ng-container
     >
 
     <ng-container *ngIf="!command.class && command.member">{{

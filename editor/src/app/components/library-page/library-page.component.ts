@@ -388,28 +388,30 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     className?: string;
   }) {
     const base = 'https://library.sannybuilder.com/#';
+    const context = viewContext === ViewContext.Code ? 'native' : 'script';
     if (viewMode === ViewMode.ViewAllClasses) {
-      return [base, game, 'classes'].join('/');
+      return [base, game, context, 'classes'].join('/');
     }
     if (viewMode === ViewMode.ViewAllEnums) {
-      return [base, game, 'enums'].join('/');
+      return [base, game, context, 'enums'].join('/');
     }
     if (viewMode === ViewMode.ViewAllExtensions) {
-      return [base, game, 'extensions'].join('/');
+      return [base, game, context, 'extensions'].join('/');
     }
 
     if (viewMode === ViewMode.ViewClass) {
-      return [base, game, 'classes', className].join('/');
+      return [base, game, context, 'classes', className].join('/');
     }
 
     if (viewMode === ViewMode.ViewEnum) {
-      return [base, game, 'enums', enumName].join('/');
+      return [base, game, context, 'enums', enumName].join('/');
     }
 
     if (viewMode === ViewMode.ViewGenerateJson && this.generateJsonModel) {
       return [
         base,
         game,
+        context,
         'generate',
         [
           this.generateJsonModel.fileName,
@@ -419,16 +421,19 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (viewMode === ViewMode.ViewCommand) {
-      const baseHref =
-        viewContext === ViewContext.Code ? `${game}/native` : `${game}/script`;
+      const path = [
+        game,
+        context,
+        viewContext === ViewContext.Code ? 'versions' : 'extensions',
+        extension,
+      ].join('/');
 
       if (!command) {
-        return [base, baseHref, extension].join('/');
+        return [base, path].join('/');
       }
       const url = [
         'https://sannybuilder.com/lib',
-        baseHref,
-        extension,
+        path,
         command.id || command.name,
       ].join('/');
 

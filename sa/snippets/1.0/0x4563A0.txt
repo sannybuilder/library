@@ -1,0 +1,21 @@
+{$CLEO .cs}
+nop
+
+while true
+    wait 0
+    
+    if
+        test_cheat "1"
+    then
+        print_help_string {text} "Pickups cleared"
+
+        float pos[3]
+        pos[0], pos[1], pos[2] = get_active_camera_coordinates
+       
+        int ptr = get_var_pointer pos
+        
+        CPickups_RemoveUnnecessaryPickups(ptr, 100.0)
+    end
+end
+
+function CPickups_RemoveUnnecessaryPickups<cdecl, 0x4563A0>(posPtr :int, radius :float)

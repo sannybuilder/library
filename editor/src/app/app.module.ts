@@ -1,7 +1,11 @@
 import { APP_INITIALIZER, inject, NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormsModule } from '@angular/forms';
@@ -230,7 +234,6 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule,
     ConfigModule,
     FormsModule,
     TranslateModule.forRoot({
@@ -319,6 +322,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       deps: [TranslateService, CookieService],
       multi: true,
     },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
   bootstrap: [AppComponent],
 })

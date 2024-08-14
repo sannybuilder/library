@@ -203,7 +203,9 @@
       ></pre>
 
       <scl-icon-button
-        *ngIf="doesGameRequireOpcode(game)"
+        *ngIf="
+          doesGameRequireOpcode(game) && viewContext === ViewContext.Script
+        "
         class="position-absolute"
         style="top: 0; right: 40px"
         [icon]="displayOpcodePresentation ? 'eye-fill' : 'eye'"

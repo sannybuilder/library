@@ -1,0 +1,22 @@
+function CGangWars_StartDefensiveGangWar<cdecl, 0x444300>()
+function CGangWars_EndGangWar<cdecl, 0x4464C0>(bool: int)
+
+while true
+    wait 0
+    if test_cheat "i"
+    then
+        wait 0
+        if or
+            is_gang_war_going_on
+            is_gang_war_fighting_going_on
+        then
+            CGangWars_EndGangWar(true)
+            Blip hDefenseBlip = read_memory 0x96AB98 size 4 virtual_protect 0  // CGangWars__RadarBlip
+            if does_blip_exist hDefenseBlip
+            then remove_blip hDefenseBlip
+            end    
+        else
+            CGangWars_StartDefensiveGangWar()    
+        end
+    end
+end

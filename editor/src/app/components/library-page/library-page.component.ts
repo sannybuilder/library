@@ -421,19 +421,20 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (viewMode === ViewMode.ViewCommand) {
-      const path = [
-        game,
-        context,
-        viewContext === ViewContext.Code ? 'versions' : 'extensions',
-        extension,
-      ].join('/');
-
       if (!command) {
-        return [base, path].join('/');
+        return [
+          base,
+          game,
+          context,
+          viewContext === ViewContext.Code ? 'versions' : 'extensions',
+          extension,
+        ].join('/');
       }
       const url = [
         'https://sannybuilder.com/lib',
-        path,
+        game,
+        viewContext === ViewContext.Code ? 'native' : 'script',
+        extension,
         command.id || command.name,
       ].join('/');
 

@@ -19,7 +19,6 @@ import {
   Attribute,
   Command,
   CommandAttributes,
-
   ViewContext,
   Game,
   GamePlatforms,
@@ -66,11 +65,13 @@ import {
   doesOutputHaveInvalidSource,
   primitiveTypes,
   getDefaultExtension,
+  doesCommandHaveEmptyCallingConvention,
 } from '../../../utils';
 
 type ErrorType =
   | 'emptyName'
   | 'emptyOpcode'
+  | 'emptyCallingConvention'
   | 'invalidOpcode'
   | 'outOfRangeOpcode'
   | 'duplicateName'
@@ -151,6 +152,7 @@ export class CommandEditorComponent implements OnInit {
   errors: Record<ErrorType, boolean> = {
     emptyName: false,
     emptyOpcode: false,
+    emptyCallingConvention: false,
     invalidOpcode: false,
     outOfRangeOpcode: false,
     invalidAttributeCombo: false,
@@ -309,6 +311,7 @@ export class CommandEditorComponent implements OnInit {
     invalidArgumentWithOperator: this.invalidArgumentWithOperatorError,
     invalidSelfType: this.invalidSelfTypeError,
     invalidOutputSource: this.invalidOutputSourceError,
+    emptyCallingConvention: this.emptyCallingConventionError,
   };
 
   isDirty: boolean;
@@ -357,6 +360,11 @@ export class CommandEditorComponent implements OnInit {
 
   onOperationChange(command: Command, operator: string) {
     command.operator = operator;
+    this.updateErrors();
+  }
+
+  onCcChange(command: Command, cc: Command['cc']) {
+    command.cc = cc;
     this.updateErrors();
   }
 
@@ -846,5 +854,11 @@ export class CommandEditorComponent implements OnInit {
 
   private invalidOutputSourceError() {
     this.errors.invalidOutputSource = doesOutputHaveInvalidSource(this.command);
+  }
+
+  private emptyCallingConventionError() {
+    this.errors.emptyCallingConvention =
+      this.viewContext === ViewContext.Code &&
+      doesCommandHaveEmptyCallingConvention(this.command);
   }
 }

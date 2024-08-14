@@ -208,9 +208,10 @@
           class="flex-grow-1"
           [model]="command.cc"
           [label]="'ui.commandEditor.cc' | translate"
-          (modelChange)="onOperationChange(command, $event)"
+          (modelChange)="onCcChange(command, $event)"
           [choices]="ccs"
           [canInput]="false"
+          [invalid]="isDirty && errors.emptyCallingConvention"
         ></scl-selector>
       </div>
     </div>

@@ -26,7 +26,7 @@ import {
   doesCommandHaveInvalidArgumentWithOperator,
   doesSelfArgumentHaveInvalidType,
   doesOutputHaveInvalidSource,
-  doesInputHaveInvalidSource,
+  doesCommandHaveEmptyCallingConvention,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -67,6 +67,7 @@ const errorHandlers = {
   invalidArgumentWithOperator: doesCommandHaveInvalidArgumentWithOperator,
   invalidSelfType: doesSelfArgumentHaveInvalidType,
   invalidOutputSource: doesOutputHaveInvalidSource,
+  emptyCallingConvention: doesCommandHaveEmptyCallingConvention,
   // invalidInputSource: doesInputHaveInvalidSource,
 };
 

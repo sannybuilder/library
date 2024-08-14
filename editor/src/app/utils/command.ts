@@ -90,7 +90,14 @@ export function formatParamName(name: string) {
 }
 
 export function formatCommandNameScreaming(name: string | undefined) {
-  return name ? name.replace(/[\s-]/g, '_').toUpperCase() : name;
+  if (!name) {
+    return name;
+  }
+  let formatted = name.replace(/[\s-]/g, '_');
+  if (name.startsWith('0x') || name.startsWith('0X')) {
+    return `0x${formatted.slice(2).toUpperCase()}`;
+  }
+  return formatted.toUpperCase();
 }
 
 export function formatCommandNameUpFirst(name: string | undefined) {

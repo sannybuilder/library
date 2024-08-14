@@ -36,6 +36,7 @@ export class SelectorComponent {
   @Input() canInput = true;
   @Input() disabled = false;
   @Input() narrowDropdown = false;
+  @Input() invalid = false;
 
   freeInput: string;
 

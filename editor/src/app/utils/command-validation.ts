@@ -127,6 +127,10 @@ export function doesCommandHaveEmptyId(command: Command) {
   return !command.id;
 }
 
+export function doesCommandHaveEmptyCallingConvention(command: Command) {
+  return !command.cc;
+}
+
 export function doesCommandHaveSelfInStaticMethod(command: Command) {
   return (
     !!command.attrs?.is_static &&

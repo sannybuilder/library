@@ -14,16 +14,16 @@ export class CodifyPipe implements PipeTransform {
     showOpcodes: boolean,
     extensions: Extension[]
   ): string {
-    let normalized = normalizeTabs(code);
+    let normalized = normalize(code);
     let formatted = format(normalized, command, extensions, showOpcodes, game);
     let compiled = compileTemplate(formatted, command);
     return compiled;
   }
 }
 
-function normalizeTabs(code: string): string {
-  //replace tabs with 4 spaces
-  return code.replace(/\t/g, '    ');
+function normalize(code: string): string {
+  // replace tabs with 4 spaces, and angle brackets with html entities
+  return code.replace(/\t/g, '    ').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function compileTemplate(code: string, command: Command): string {

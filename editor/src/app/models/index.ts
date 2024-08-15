@@ -376,3 +376,5 @@ export interface GenerateJsonModel {
 }
 
 export const SELF = 'self';
+
+export type SyntaxKind = 'sb_command' | 'sb_class' | 'cleo_redux';

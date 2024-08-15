@@ -1,7 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import { intersection, partition, without } from 'lodash';
 
-import { Command, ViewMode, Attribute, Game, EnumRaw } from '../../models';
+import {
+  Command,
+  ViewMode,
+  Attribute,
+  Game,
+  EnumRaw,
+  SyntaxKind,
+} from '../../models';
 import {
   displayOrEditCommandInfo,
   stopEditOrDisplay,
@@ -25,6 +32,7 @@ import {
   dismissSearchHelp,
   toggleSidebar,
   displayJsonGenerator,
+  switchSyntaxKind,
 } from './actions';
 
 export interface GameState {
@@ -44,6 +52,7 @@ export interface UiState {
   commandToDisplayOrEdit?: Command;
   extensionToDisplayOrEdit?: string;
   snippetToDisplayOrEdit?: string;
+  selectedSyntaxKind: SyntaxKind;
   enumToDisplayOrEdit?: EnumRaw;
   viewMode: ViewMode;
   currentPage: number | 'all';
@@ -82,6 +91,7 @@ export const initialState: UiState = {
   isSidebarCollapsed: false,
   viewMode: ViewMode.None,
   currentPage: 1,
+  selectedSyntaxKind: 'sb_command',
 };
 
 export const uiReducer = createReducer(
@@ -248,6 +258,10 @@ export const uiReducer = createReducer(
   on(displayJsonGenerator, (state) => ({
     ...state,
     viewMode: ViewMode.ViewGenerateJson,
+  })),
+  on(switchSyntaxKind, (state, { syntaxKind }) => ({
+    ...state,
+    selectedSyntaxKind: syntaxKind,
   }))
 );
 

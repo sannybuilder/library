@@ -27,14 +27,11 @@
         [command]="command"
         [classDesc]="classDesc"
         [gameExtensions]="gameExtensions"
+        [viewContext]="viewContext"
         [game]="game"
+        [syntaxKind]="syntaxKind"
+        (switchSyntaxKind)="onSwitchSyntaxKind($event)"
       ></scl-command-declaration>
-
-      <code
-        *ngIf="isSupported(command) && viewContext === ViewContext.Script"
-        class="mt-3"
-        ><span [innerHTML]="command | opcodeParams | sanitize"></span
-      ></code>
 
       <div *ngIf="command.input?.length > 0" class="mt-3">
         <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>

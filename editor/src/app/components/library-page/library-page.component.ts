@@ -23,6 +23,7 @@ import {
   ParamType,
   Primitive,
   ViewMode,
+  SyntaxKind,
 } from '../../models';
 import {
   ExtensionsFacade,
@@ -70,6 +71,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   extensionTypes$ = this._extensions.extensionTypes$;
   displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
+  selectedSyntaxKind$ = this._ui.selectedSyntaxKind$;
   extensionToCreateCommands$ = this._ui.selectedExtensions$.pipe(
     withLatestFrom(this._game.viewContext$),
     map(([selectedExtensions, viewContext]) => {
@@ -482,6 +484,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getDefaultExtension(viewContext: ViewContext) {
     return getDefaultExtension(viewContext);
+  }
+
+  onChangeSyntaxKind(syntaxKind: SyntaxKind) {
+    this._ui.switchSyntaxKind(syntaxKind)
   }
 
   private _onSaveCommand() {

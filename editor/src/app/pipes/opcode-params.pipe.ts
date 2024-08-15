@@ -14,10 +14,6 @@ import {
 })
 export class OpcodeParamsPipe implements PipeTransform {
   transform(command: Command): string {
-    if (!command.num_params) {
-      return '';
-    }
-
     const output = outputParams(command);
     const input = inputParams(command);
 

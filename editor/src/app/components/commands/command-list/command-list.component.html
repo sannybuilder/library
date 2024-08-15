@@ -108,35 +108,11 @@
                   [game]="game"
                   [command]="row.command"
                   [gameExtensions]="gameExtensions"
+                  [viewContext]="viewContext"
+                  [withToggle]="false"
+                  [syntaxKind]="syntaxKind"
                 ></scl-command-declaration>
 
-                <ng-container
-                  *ngIf="row.command.operator && isSupported(row.command)"
-                >
-                  <pre
-                    class="sample mt-3"
-                    [innerHTML]="
-                      row.command
-                        | expressify
-                        | codify : row.command : game : false : []
-                    "
-                  ></pre>
-                </ng-container>
-
-                <ng-container
-                  *ngIf="
-                    isSupported(row.command) &&
-                    !row.command.class &&
-                    !row.command.member &&
-                    !row.command.operator
-                  "
-                >
-                  <code>
-                    <span
-                      [innerHTML]="row.command | opcodeParams | sanitize"
-                    ></span
-                  ></code>
-                </ng-container>
               </div>
             </div>
 

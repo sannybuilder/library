@@ -38,9 +38,9 @@ export class CodifyPipe implements PipeTransform {
     extensions: Extension[]
   ): string {
     let normalized = normalize(code);
-    let formatted = format(normalized, command, extensions, showOpcodes, game);
-    let compiled = compileTemplate(formatted, command);
-    return compiled;
+    let compiled = compileTemplate(normalized, command);
+    let formatted = format(compiled, command, extensions, showOpcodes, game);
+    return formatted;
   }
 }
 

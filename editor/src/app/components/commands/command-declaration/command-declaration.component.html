@@ -14,7 +14,7 @@
 
 <ng-container
   [ngTemplateOutlet]="
-    (viewContext$ | async) === ViewContext.Code ? Function : ScriptCommand
+    viewContext === ViewContext.Code ? Function : ScriptCommand
   "
 >
 </ng-container>
@@ -44,9 +44,53 @@
 </ng-template>
 
 <ng-template #ScriptCommand>
-  <ng-container *ngIf="command.class && command.member">
-    <ng-container *ngIf="command.output?.length">
-      <code>
+  <ul class="nav" *ngIf="command.class && command.member && withToggle">
+    <li class="nav-item">
+      <a
+        class="nav-link pl-0"
+        [ngClass]="{ active: syntaxKind === 'sb_command' }"
+        href="#"
+        (click)="changeSyntaxTab('sb_command')"
+        >{{ "ui.commandOverview.sbCommandSyntax" | translate }}</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [ngClass]="{ active: syntaxKind === 'sb_class' }"
+        href="#"
+        (click)="changeSyntaxTab('sb_class')"
+        >{{ "ui.commandOverview.sbClassSyntax" | translate }}</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [ngClass]="{ active: syntaxKind === 'cleo_redux' }"
+        href="#"
+        (click)="changeSyntaxTab('cleo_redux')"
+        >{{ "ui.commandOverview.cleoReduxSyntax" | translate }}</a
+      >
+    </li>
+  </ul>
+
+  <ng-container *ngIf="syntaxKind === 'sb_command'">
+    <code *ngIf="isSupported(command) && !command.operator" class="mt-3"
+      ><span [innerHTML]="command | opcodeParams | sanitize"></span
+    ></code>
+
+    <code *ngIf="command.operator && isSupported(command)" class="mt-3">
+      <span
+        [innerHTML]="
+          command | expressify | codify : command : game : false : []
+        "
+      ></span>
+    </code>
+  </ng-container>
+
+  <ng-container *ngIf="syntaxKind === 'sb_class'">
+    <code class="mt-3" *ngIf="command.class && command.member">
+      <ng-container *ngIf="command.output?.length">
         <span [innerHTML]="command | outputParams | sanitize"></span> =
         <a
           class="identifier"
@@ -54,20 +98,52 @@
           [routerLink]="['/', game, 'script', 'classes', command.class]"
           >{{ command.class }}</a
         >.<span class="identifier">{{ command.member }}</span
-        ><span [innerHTML]="command | inputParams | sanitize"></span
-      ></code>
-    </ng-container>
+        ><span [innerHTML]="command | inputParams | sanitize"></span>
+      </ng-container>
 
-    <ng-container *ngIf="!command.output?.length">
-      <code
-        ><a
+      <ng-container *ngIf="!command.output?.length">
+        <a
           class="identifier"
           [attr.title]="classDesc"
           [routerLink]="['/', game, 'script', 'classes', command.class]"
           >{{ command.class }}</a
         >.<span class="identifier">{{ command.member }}</span
-        ><span [innerHTML]="command | classParams | sanitize"></span
-      ></code>
-    </ng-container>
+        ><span [innerHTML]="command | classParams | sanitize"></span>
+      </ng-container>
+    </code>
+  </ng-container>
+
+  <ng-container *ngIf="syntaxKind === 'cleo_redux'">
+    <code class="mt-3" *ngIf="command.class && command.member">
+      <ng-container *ngIf="command.output?.length">
+        <span *ngIf="command.output.length > 1">&#123;&nbsp;</span>
+        <span [innerHTML]="command | outputParams | sanitize"></span>
+        <span *ngIf="command.output.length > 1">&nbsp;&#125;</span> =
+      </ng-container>
+
+      <a
+        class="identifier"
+        [attr.title]="classDesc"
+        [routerLink]="['/', game, 'script', 'classes', command.class]"
+        >{{
+            command.attrs?.is_static || command.attrs?.is_constructor
+              ? command.class
+              : "[" + command.input?.[0]?.type + "]"
+        }}</a
+      >.<span class="identifier">{{
+        command.attrs?.is_static || command.attrs?.is_constructor
+          ? upFirst(command.member)
+          : lowerFirst(command.member)
+      }}</span>
+
+      <span
+        [innerHTML]="
+          command
+            | inputParams
+              : !command.attrs?.is_static && !command.attrs?.is_constructor
+            | sanitize
+        "
+      ></span>
+    </code>
   </ng-container>
 </ng-template>

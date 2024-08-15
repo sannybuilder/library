@@ -175,6 +175,7 @@ export function localStorageSyncReducer(
           'displayOpcodePresentation',
           'displayInlineMethodDescription',
           'isSidebarCollapsed',
+          'selectedSyntaxKind'
         ],
       },
     ],

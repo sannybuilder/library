@@ -15,6 +15,7 @@ import {
   ParamType,
   Platform,
   SupportInfo,
+  SyntaxKind,
   Version,
   ViewContext,
 } from '../../../models';
@@ -78,8 +79,11 @@ export class CommandInfoComponent {
   @Input() gameExtensions: Extension[];
   @Input() fullDescription?: string;
   @Input() viewContext: ViewContext;
+  @Input() syntaxKind: SyntaxKind;
+
 
   @Output() toggleOpcodePresentation = new EventEmitter();
+  @Output() switchSyntaxKind = new EventEmitter();
 
   isPrimitiveType(param: Param) {
     return this._primitives.includes(param.type);
@@ -107,6 +111,11 @@ export class CommandInfoComponent {
 
   onToggleOpcodePresentation() {
     this.toggleOpcodePresentation.emit();
+    return false;
+  }
+
+  onSwitchSyntaxKind(syntaxKind: SyntaxKind) {
+    this.switchSyntaxKind.emit(syntaxKind);
     return false;
   }
 

@@ -9,6 +9,7 @@ import {
   Game,
   GenerateJsonModel,
   Modifier,
+  SyntaxKind,
   ViewMode,
 } from '../../models';
 import { AuthFacade } from '../auth/facade';
@@ -33,6 +34,7 @@ import {
   displayJsonGenerator,
   generateNewJson,
   displayExtensionList,
+  switchSyntaxKind,
 } from './actions';
 import * as selector from './selectors';
 
@@ -58,6 +60,7 @@ export class UiFacade {
     selector.displayOpcodePresentation
   );
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
+  selectedSyntaxKind$ = this.store$.select(selector.selectedSyntaxKind);
   currentPage$ = this.store$.select(selector.currentPage);
   commandToDisplayOrEdit$ = this.store$.select(selector.commandToDisplayOrEdit);
   extensionToDisplayOrEdit$ = this.store$.select(
@@ -200,5 +203,9 @@ export class UiFacade {
 
   displayExtensionList() {
     this.store$.dispatch(displayExtensionList());
+  }
+
+  switchSyntaxKind(syntaxKind: SyntaxKind) {
+    this.store$.dispatch(switchSyntaxKind({ syntaxKind }))
   }
 }

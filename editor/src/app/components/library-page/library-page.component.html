@@ -210,6 +210,7 @@
                 screenSize < 1700
               "
               (descriptionClick)="onDescriptionClick($event)"
+              [syntaxKind]="selectedSyntaxKind$ | async"
             ></scl-command-list>
           </main>
 
@@ -428,6 +429,8 @@
           [fullDescription]="getFullDescription(command) | async"
           [viewContext]="viewContext"
           (toggleOpcodePresentation)="onToggleOpcodePresentation()"
+          [syntaxKind]="selectedSyntaxKind$ | async"
+          (switchSyntaxKind)="onChangeSyntaxKind($event)"
         >
         </scl-command-info>
         <scl-class-overview

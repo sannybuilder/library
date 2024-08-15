@@ -6,7 +6,7 @@ import {
   getQueryParamsForCommand,
   isSupported,
 } from '../../../utils';
-import { Command, Extension, ViewContext, Game } from '../../../models';
+import { Command, Extension, ViewContext, Game, SyntaxKind } from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
@@ -23,6 +23,7 @@ export class CommandListComponent {
   @Input() canEdit: boolean;
   @Input() narrowed: boolean;
   @Input() viewContext: ViewContext;
+  @Input() syntaxKind: SyntaxKind;
 
   loading$ = this._extensions.loading$;
   loadingError$ = this._extensions.loadingError$;

@@ -7,10 +7,13 @@ import { braceify, stringify } from './params';
   name: 'inputParams',
 })
 export class InputParamsPipe implements PipeTransform {
-  transform(command: Command): string {
+  transform(command: Command, skipFirst: boolean = false): string {
     if (!command.num_params) {
       return '()';
     }
-    return braceify(stringify(inputParams(command), ', '), '()');
+    return braceify(
+      stringify(inputParams(command).slice(skipFirst ? 1 : 0), ', '),
+      '()'
+    );
   }
 }

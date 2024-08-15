@@ -6,9 +6,15 @@ import {
   Output,
 } from '@angular/core';
 import { isSupported } from '../../../utils';
-import { Command, Extension, ViewContext, Game } from '../../../models';
+import {
+  Command,
+  Extension,
+  ViewContext,
+  Game,
+  SyntaxKind,
+} from '../../../models';
 import { Router } from '@angular/router';
-import { GameFacade } from 'src/app/state';
+import { lowerFirst, upperFirst } from 'lodash';
 
 @Component({
   selector: 'scl-command-declaration',
@@ -21,12 +27,14 @@ export class CommandDeclarationComponent {
   @Input() command: Command;
   @Input() classDesc?: string;
   @Input() game: Game;
+  @Input() viewContext: ViewContext;
+  @Input() withToggle = true;
   @Input() gameExtensions: Extension[];
+  @Input() syntaxKind: SyntaxKind;
   @Output() descriptionClick = new EventEmitter();
+  @Output() switchSyntaxKind = new EventEmitter();
 
-  constructor(private _router: Router, private _game: GameFacade) {}
-  
-  viewContext$ = this._game.viewContext$;
+  constructor(private _router: Router) {}
 
   isSupported(command: Command) {
     return isSupported(command.attrs);
@@ -45,5 +53,18 @@ export class CommandDeclarationComponent {
         this._router.navigate(['/', ...parts.slice(1)]);
       }
     }
+  }
+
+  changeSyntaxTab(syntaxKind: SyntaxKind) {
+    this.switchSyntaxKind.emit(syntaxKind);
+    return false;
+  }
+
+  upFirst(name: string) {
+    return upperFirst(name);
+  }
+
+  lowerFirst(name: string) {
+    return lowerFirst(name);
   }
 }

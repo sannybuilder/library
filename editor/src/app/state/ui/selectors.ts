@@ -266,3 +266,8 @@ export const isSidebarCollapsed = createSelector(
   state,
   (state: UiState) => state.isSidebarCollapsed
 );
+
+export const selectedSyntaxKind = createSelector(
+  state,
+  (state: UiState) => state.selectedSyntaxKind
+);

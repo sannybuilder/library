@@ -6,6 +6,7 @@ import {
   Game,
   GenerateJsonModel,
   Modifier,
+  SyntaxKind,
   ViewMode,
 } from '../../models';
 
@@ -97,4 +98,9 @@ export const displayJsonGenerator = createAction('[ui] display json generator');
 export const generateNewJson = createAction(
   '[ui] generate new json',
   props<{ model: GenerateJsonModel }>()
+);
+
+export const switchSyntaxKind = createAction(
+  '[ui] switch syntax kind',
+  props<{ syntaxKind: SyntaxKind }>()
 );

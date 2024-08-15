@@ -20,7 +20,6 @@ export const ATTRIBUTE_RULES: Partial<
   is_constructor: { disallowed: ['is_destructor'] },
   is_destructor: { disallowed: ['is_static'] },
   is_nop: { allowed: ['is_condition', 'is_static'] },
-  is_keyword: { disallowed: ['is_constructor', 'is_destructor', 'is_static'] },
 };
 
 export function doesCommandHaveAnyAttributeInvalid(command: Command): boolean {
@@ -148,12 +147,11 @@ export function doesCommandHaveOutOfRangeOpcode(command: Command) {
 }
 
 export function doesCommandHaveMissingSelfParamInMethod(command: Command) {
-  const { is_static, is_keyword, is_nop, is_unsupported, is_constructor } =
+  const { is_static, is_nop, is_unsupported, is_constructor } =
     command.attrs ?? {};
   const { class: className, member, num_params } = command;
   return (
     !is_static &&
-    !is_keyword &&
     !is_nop &&
     !is_unsupported &&
     !is_constructor &&

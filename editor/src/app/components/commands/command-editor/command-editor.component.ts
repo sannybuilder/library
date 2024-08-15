@@ -66,6 +66,7 @@ import {
   primitiveTypes,
   getDefaultExtension,
   doesCommandHaveEmptyCallingConvention,
+  filterAttributes,
 } from '../../../utils';
 
 type ErrorType =
@@ -105,6 +106,7 @@ export class CommandEditorComponent implements OnInit {
   private _command: Command;
   private _supportInfo: GameSupportInfo[] | undefined;
   private _viewContext: ViewContext;
+  private _game: Game;
 
   PrimitiveType = PrimitiveType;
   SourceType = SourceType;
@@ -186,6 +188,16 @@ export class CommandEditorComponent implements OnInit {
       this.features.operator = false;
       this.features.cc = true;
     }
+
+    this.attrs = filterAttributes(
+      CommandAttributes,
+      this.game,
+      this.viewContext
+    );
+  }
+
+  get game() {
+    return this._game;
   }
 
   get viewContext() {
@@ -193,6 +205,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   @Input() set game(val: Game) {
+    this._game = val;
     this.versions = GameVersions[val].map((name) => ({ name, status: false }));
     this.platforms = GamePlatforms[val].map((name) => ({
       name,
@@ -210,6 +223,11 @@ export class CommandEditorComponent implements OnInit {
     }
     this.features.opcode = doesGameRequireOpcode(val);
     this.defaultCommandNameFormatter = getDefaultCommandNameFormatter(val);
+    this.attrs = filterAttributes(
+      CommandAttributes,
+      this.game,
+      this.viewContext
+    );
   }
 
   @Input() set command(val: Command) {
@@ -286,7 +304,7 @@ export class CommandEditorComponent implements OnInit {
     this.classes = [...dynamics, ...statics];
   }
 
-  readonly attrs: Attribute[] = CommandAttributes;
+  attrs: Attribute[];
   sources: SourceType[] = [];
 
   readonly errorHandlers: Record<ErrorType, () => void> = {

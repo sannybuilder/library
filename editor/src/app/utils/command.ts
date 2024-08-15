@@ -21,6 +21,7 @@ import {
   Attr,
   Extension,
   ViewContext,
+  Attribute,
 } from '../models';
 import { HEX_DIGITS, HEX_NEGATION } from './hex';
 
@@ -426,4 +427,39 @@ function isVersioned(game: Game): boolean {
 
 function isPlatformed(game: Game): boolean {
   return GamePlatforms[game].length > 1;
+}
+
+export function filterAttributes(
+  attrs: Attribute[],
+  game: Game,
+  viewContext: ViewContext
+): Attribute[] {
+  return attrs.filter((a) => {
+    switch (a) {
+      case 'is_branch': // 0002, 004D
+      case 'is_positional': // 024F
+      case 'is_segment': // 0002
+        return (
+          [
+            Game.gta3,
+            Game.gta3_mobile,
+            Game.gta3_unreal,
+            Game.vc,
+            Game.vc_mobile,
+            Game.vc_unreal,
+            Game.sa,
+            Game.sa_mobile,
+            Game.sa_unreal,
+            Game.lcs,
+            Game.vcs,
+          ].includes(game) && viewContext === ViewContext.Script
+        );
+
+      case 'is_unsupported':
+        return viewContext === ViewContext.Script;
+
+      default:
+        return true;
+    }
+  });
 }

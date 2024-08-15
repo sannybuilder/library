@@ -129,17 +129,12 @@
           (modelChange)="onClassChange(command, $event)"
           [choices]="classes"
           [canInput]="true"
-          [disabled]="command.attrs?.is_keyword || command.attrs?.is_nop"
+          [disabled]="command.attrs?.is_nop"
         ></scl-selector>
       </div>
       <div
         class="mb-1"
-        *ngIf="
-          !command.attrs?.is_keyword &&
-          !command.attrs?.is_nop &&
-          !command.class &&
-          suggestedClassName
-        "
+        *ngIf="!command.attrs?.is_nop && !command.class && suggestedClassName"
       >
         <small
           >{{ "ui.commandEditor.suggestion" | translate }}:
@@ -158,9 +153,7 @@
         }}</span>
         <input
           type="text"
-          [disabled]="
-            command.attrs?.is_keyword || command.attrs?.is_nop || !command.class
-          "
+          [disabled]="command.attrs?.is_nop || !command.class"
           class="form-control"
           [ngModel]="command.member"
           (ngModelChange)="onMemberChange(command, $event)"
@@ -169,10 +162,7 @@
       <div
         class="mb-1"
         *ngIf="
-          !command.attrs?.is_keyword &&
-          !command.attrs?.is_nop &&
-          !command.member &&
-          suggestedClassMember
+          !command.attrs?.is_nop && !command.member && suggestedClassMember
         "
       >
         <small
@@ -421,7 +411,7 @@
     </div>
   </ng-container>
 
-  <div class="row mb-2">
+  <div class="row my-3">
     <div class="col-12">
       <div class="d-inline-block pr-2" *ngFor="let attr of attrs">
         <label
@@ -516,7 +506,7 @@
         }}</label>
         <textarea
           class="form-control monospaced"
-          rows="4"
+          rows="8"
           [id]="command.name + '_snippet'"
           [ngModel]="snippet"
           (ngModelChange)="onSnippetChange($event)"

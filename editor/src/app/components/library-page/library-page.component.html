@@ -11,7 +11,10 @@
             [ngClass]="{ collapsed: sidebar.collapsed }"
           >
             <scl-download-panel [game]="game"></scl-download-panel>
-            <scl-filter-panel [game]="game"></scl-filter-panel>
+            <scl-filter-panel
+              [game]="game"
+              [viewContext]="viewContext"
+            ></scl-filter-panel>
             <scl-quiz
               *ngIf="viewContext === ViewContext.Script"
               [game]="game"
@@ -395,7 +398,10 @@
           [(snippet)]="snippet"
           [extensionNames]="extensionNames$ | async"
           [supportInfo]="getCommandSupportInfo(command, extension) | async"
-          [types]="getExtensionTypes(extension, getDefaultExtension(viewContext)) | async"
+          [types]="
+            getExtensionTypes(extension, getDefaultExtension(viewContext))
+              | async
+          "
           [commands]="getExtensionCommands(extension) | async"
           [viewContext]="viewContext"
           (hasError)="editorHasError = $event"
@@ -406,7 +412,10 @@
           *ngIf="viewMode === ViewMode.ViewCommand && command"
           [command]="command"
           [game]="game"
-          [types]="getExtensionTypes(extension, getDefaultExtension(viewContext)) | async"
+          [types]="
+            getExtensionTypes(extension, getDefaultExtension(viewContext))
+              | async
+          "
           [snippet]="getSnippet(extension, command.id || command.name) | async"
           [supportInfo]="getCommandSupportInfo(command, extension) | async"
           [relatedCommands]="

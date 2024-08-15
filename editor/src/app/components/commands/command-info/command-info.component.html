@@ -185,8 +185,34 @@
 
   <ng-container *ngIf="snippet">
     <hr />
-    <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
 
+    <div class="d-flex justify-content-between align-items-center">
+      <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
+      <div class="d-flex mb-2">
+        <scl-icon-button
+          class="mr-1"
+          *ngIf="
+            doesGameRequireOpcode(game) && viewContext === ViewContext.Script
+          "
+          [icon]="displayOpcodePresentation ? 'eye-fill' : 'eye'"
+          [title]="'ui.shared.toggleOpcode' | translate"
+          (clicked)="onToggleOpcodePresentation()"
+        >
+        </scl-icon-button>
+
+        <scl-copy-button
+          [text]="codeSnippet.innerText"
+          icon="copy"
+          #clipboardBtn
+          [title]="
+            (clipboardBtn.hasJustCopied
+              ? 'ui.shared.copied'
+              : 'ui.shared.copyToClipboard'
+            ) | translate
+          "
+        ></scl-copy-button>
+      </div>
+    </div>
     <div class="position-relative">
       <pre
         class="sample"
@@ -201,32 +227,6 @@
             | sanitize
         "
       ></pre>
-
-      <scl-icon-button
-        *ngIf="
-          doesGameRequireOpcode(game) && viewContext === ViewContext.Script
-        "
-        class="position-absolute"
-        style="top: 0; right: 40px"
-        [icon]="displayOpcodePresentation ? 'eye-fill' : 'eye'"
-        [title]="'ui.shared.toggleOpcode' | translate"
-        (clicked)="onToggleOpcodePresentation()"
-      >
-      </scl-icon-button>
-
-      <scl-copy-button
-        class="position-absolute"
-        style="top: 0; right: 0"
-        [text]="codeSnippet.innerText"
-        icon="copy"
-        #clipboardBtn
-        [title]="
-          (clipboardBtn.hasJustCopied
-            ? 'ui.shared.copied'
-            : 'ui.shared.copyToClipboard'
-          ) | translate
-        "
-      ></scl-copy-button>
     </div>
   </ng-container>
 </div>

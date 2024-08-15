@@ -15,7 +15,6 @@ struct Attr {
     is_condition: Option<bool>,
     is_constructor: Option<bool>,
     is_destructor: Option<bool>,
-    is_keyword: Option<bool>,
     is_nop: Option<bool>,
     is_overload: Option<bool>,
     is_segment: Option<bool>,

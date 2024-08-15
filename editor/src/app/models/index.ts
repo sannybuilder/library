@@ -1,7 +1,6 @@
 export interface Attr {
   is_branch: boolean;
   is_segment: boolean;
-  is_keyword: boolean;
   is_condition: boolean;
   is_nop: boolean;
   is_unsupported: boolean;
@@ -47,7 +46,6 @@ export const CommandAttributes: Attribute[] = [
   'is_condition',
   'is_constructor',
   'is_destructor',
-  'is_keyword',
   'is_nop',
   'is_overload',
   'is_segment',

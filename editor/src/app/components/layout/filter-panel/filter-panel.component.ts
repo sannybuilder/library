@@ -13,8 +13,10 @@ import {
   Modifier,
   Platform,
   Version,
+  ViewContext,
 } from '../../../models';
 import { ExtensionsFacade, UiFacade } from '../../../state';
+import { filterAttributes } from '../../../utils';
 
 @Component({
   selector: 'scl-filter-panel',
@@ -24,11 +26,23 @@ import { ExtensionsFacade, UiFacade } from '../../../state';
 })
 export class FilterPanelComponent {
   private _game: Game;
+  private _viewContext: ViewContext;
+
+  @Input() set viewContext(val: ViewContext) {
+    this._viewContext = val;
+    this.attributes = filterAttributes(CommandAttributes, this.game, this.viewContext);
+  }
+
+  get viewContext() {
+    return this._viewContext;
+  }
 
   @Input() set game(val: Game) {
     this.platforms = GamePlatforms[val];
     this.versions = GameVersions[val];
     this._game = val;
+
+    this.attributes = filterAttributes(CommandAttributes, this.game, this.viewContext);
   }
 
   get game() {
@@ -50,7 +64,7 @@ export class FilterPanelComponent {
     )
   );
 
-  attributes = CommandAttributes;
+  attributes: Attribute[];
   platforms: Platform[] = [];
   versions: Version[] = [];
   Platform = Platform;

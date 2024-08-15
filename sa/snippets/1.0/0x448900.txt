@@ -6,10 +6,13 @@ float Vector[3]
 
 while true
     wait 200
-    Vector[0], Vector[1], Vector[2] = get_char_coordinates cleo_char
-    int pVector = get_var_pointer Vector
-    int bInGarage = CGarages_IsPointWithinHideOutGarage(pVector)
-    if is_bit_set bInGarage {bitIndex} 0
-    then add_score cleo_player {money} 1
+    if is_player_playing cleo_char
+    then 
+        Vector[0], Vector[1], Vector[2] = get_char_coordinates cleo_char
+        int pVector = get_var_pointer Vector
+        int bInGarage = CGarages_IsPointWithinHideOutGarage(pVector)
+        if is_bit_set bInGarage {bitIndex} 0
+        then add_score cleo_player {money} 1
+        end
     end
 end

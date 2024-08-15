@@ -1,0 +1,15 @@
+function CGarages_IsPointWithinHideOutGarage<cdecl, 0x448900>(pCVector: int): int
+
+const cleo_player = 0
+int cleo_char = get_player_char cleo_player
+float Vector[3]
+
+while true
+    wait 200
+    Vector[0], Vector[1], Vector[2] = get_char_coordinates cleo_char
+    int pVector = get_var_pointer Vector
+    int bInGarage = CGarages_IsPointWithinHideOutGarage(pVector)
+    if is_bit_set bInGarage {bitIndex} 0
+    then add_score cleo_player {money} 1
+    end
+end

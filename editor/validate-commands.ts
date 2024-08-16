@@ -59,13 +59,15 @@ const errorHandlers = {
   missingSelfParamInMethod: doesCommandHaveMissingSelfParamInMethod,
   trailingPeriodInDescription: doesCommandDescriptionHaveTrailingPeriod,
   no3rdPersonVerb: doesCommandDescriptionNotStartWith3rdPersonVerb,
-  constructorNotReturningHandle: doesConstructorNotReturnHandle,
+  constructorNotReturningHandle: doesConstructorNotReturnHandle, //script only
   invalidClassName: doesCommandHaveAnInvalidClassName,
   invalidMethodName: doesCommandHaveAnInvalidMethodName,
   invalidConditionalOperator: doesCommandHaveInvalidConditionalOperator,
   invalidArgumentWithOperator: doesCommandHaveInvalidArgumentWithOperator,
   invalidSelfType: doesSelfArgumentHaveInvalidType,
   invalidOutputSource: doesOutputHaveInvalidSource,
+  // emptyCallingConvention: doesCommandHaveEmptyCallingConvention //code only
+
   // invalidInputSource: doesInputHaveInvalidSource,
 };
 

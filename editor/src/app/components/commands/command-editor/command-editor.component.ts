@@ -839,9 +839,9 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private constructorNotReturningHandleError() {
-    this.errors.constructorNotReturningHandle = doesConstructorNotReturnHandle(
-      this.command
-    );
+    this.errors.constructorNotReturningHandle =
+      this.viewContext === ViewContext.Script &&
+      doesConstructorNotReturnHandle(this.command);
   }
 
   private invalidClassNameError() {

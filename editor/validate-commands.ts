@@ -46,7 +46,7 @@ const errorHandlers = {
   invalidAttributeCombo: doesCommandHaveAnyAttributeInvalid,
   duplicateParamName: doesCommandHaveDuplicateParamName,
   duplicateName: doesCommandHaveDuplicateName,
-  noConstructorWithoutOutputParams: doesConstructorCommandHaveNoOutputParams,
+  noConstructorWithoutOutputParams: doesConstructorCommandHaveNoOutputParams,//script only
   noGetterWithoutResult:
     game === Game.gta_iv ? noopHandler : doesGetterCommandReturnNothing,
   emptyName: doesCommandHaveEmptyName,

@@ -1,0 +1,31 @@
+{$CLEO .cs}
+script_name {name} "ch_gun"
+
+while true
+    wait 250
+    
+    if and
+        is_player_playing $player1
+        test_cheat "gun"
+    then
+        int ammo = give_player_weapon(38) // this is actually CLEO_CALL command
+        print_help_formatted {text} "%d bullets!" {args} ammo
+    end
+end
+
+terminate_this_script
+
+
+function GIVE_PLAYER_WEAPON(weaponType :int) : int
+    int modelIdx = get_weapontype_model {weapon_type} weaponType
+    request_model {modelId} modelIdx
+    load_all_models_now
+    
+    give_weapon_to_char $scplayer {weaponType} weaponType {ammo} 100
+    
+    mark_model_as_no_longer_needed {modelId} modelIdx
+    
+    // check and return ammo count
+    int ammo = get_ammo_in_char_weapon $scplayer {weaponType} weaponType
+    cleo_return 1 ammo
+end

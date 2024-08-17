@@ -789,7 +789,6 @@ export class CommandEditorComponent implements OnInit {
 
   private updateNoConstructorWithoutOutputParamsError() {
     this.errors.noConstructorWithoutOutputParams =
-      this.viewContext === ViewContext.Script &&
       doesConstructorCommandHaveNoOutputParams(this.command);
   }
 

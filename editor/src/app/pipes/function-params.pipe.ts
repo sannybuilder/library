@@ -17,7 +17,7 @@ export class FunctionParamsPipe implements PipeTransform {
             if (primitives.includes(p.type as PrimitiveType) || !simpleTypes) {
               return p;
             }
-            return { ...p, type: `int /* ${p.type} */` };
+            return { ...p, type: `int {${p.type}}` };
           }),
           ', ',
           stringifyWithColonNoHighlight
@@ -36,7 +36,7 @@ export class FunctionParamsPipe implements PipeTransform {
             if (primitives.includes(p.type as PrimitiveType) || !simpleTypes) {
               return p.type;
             }
-            return `int /* ${p.type} */`;
+            return `int {${p.type}}`;
           })
           .join(', ')
       );

@@ -41,6 +41,13 @@ export function getEntities(
         if (name && !primitives.includes(name)) {
           dynamicClasses.add(name);
         }
+        if (
+          viewContext === ViewContext.Code &&
+          command.cc === 'thiscall' &&
+          command.class
+        ) {
+          dynamicClasses.add(command.class);
+        }
       } else if (command.class) {
         if (
           defaultEntities.has(command.class) ||
@@ -66,7 +73,6 @@ export function getEntities(
     return m;
   }, {} as Record<string, Entity[]>);
 }
-
 
 export function getDefaultExtension(viewContext: ViewContext) {
   return viewContext === ViewContext.Code ? DEFAULT_VERSION : DEFAULT_EXTENSION;

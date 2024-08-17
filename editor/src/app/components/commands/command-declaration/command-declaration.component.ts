@@ -28,7 +28,8 @@ export class CommandDeclarationComponent {
   @Input() classDesc?: string;
   @Input() game: Game;
   @Input() viewContext: ViewContext;
-  @Input() withToggle = true;
+  @Input() withToggle: boolean;
+  @Input() withCopyButton: boolean;
   @Input() gameExtensions: Extension[];
   @Input() syntaxKind: SyntaxKind;
   @Output() descriptionClick = new EventEmitter();

@@ -500,18 +500,55 @@
 
   <div class="row mb-2">
     <div class="col-12">
+      <ul class="nav mb-2">
+        <li class="nav-item">
+          <a
+            class="nav-link pl-0"
+            [ngClass]="{ active: !displaySnippetPreview }"
+            href="#"
+            (click)="displaySnippetPreview = false; $event.preventDefault()"
+            >{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [ngClass]="{ active: displaySnippetPreview }"
+            href="#"
+            (click)="displaySnippetPreview = true; $event.preventDefault()"
+            >Preview</a
+          >
+        </li>
+      </ul>
+
       <div class="form-group">
-        <label [for]="command.name + '_snippet'" class="h5">{{
-          "ui.commandEditor.codeSnippetSubtitle" | translate
-        }}</label>
-        <textarea
-          class="form-control monospaced"
-          rows="8"
-          [id]="command.name + '_snippet'"
-          [ngModel]="snippet"
-          (ngModelChange)="onSnippetChange($event)"
-          spellcheck="false"
-        ></textarea>
+        <div [ngClass]="{ 'd-none': displaySnippetPreview }">
+          <textarea
+            class="form-control monospaced"
+            #snippetText
+            rows="8"
+            [id]="command.name + '_snippet'"
+            [ngModel]="snippet"
+            (ngModelChange)="onSnippetChange($event)"
+            spellcheck="false"
+          ></textarea>
+
+          <div class="mt-2" *ngIf="codeTokens.length">
+            {{ "ui.commandEditor.availableTokens" | translate }}:
+            <a
+              href="#"
+              (click)="pasteToken(token)"
+              *ngFor="let token of codeTokens"
+              class="btn badge badge-secondary"
+              >{{ token }}</a
+            >
+          </div>
+        </div>
+        <pre
+          *ngIf="displaySnippetPreview"
+          class="sample"
+          [innerHTML]="snippetText.value | codify : command : game | sanitize"
+        ></pre>
       </div>
     </div>
   </div>

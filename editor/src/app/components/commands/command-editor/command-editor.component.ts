@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   ChangeDetectionStrategy,
+  ElementRef,
 } from '@angular/core';
 import { capitalize, trim, uniq } from 'lodash';
 import {
@@ -103,6 +104,8 @@ const SELF = 'self';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandEditorComponent implements OnInit {
+  @ViewChild('snippetText') snippetText: ElementRef<HTMLTextAreaElement>;
+
   private _command: Command;
   private _supportInfo: GameSupportInfo[] | undefined;
   private _viewContext: ViewContext;
@@ -116,11 +119,13 @@ export class CommandEditorComponent implements OnInit {
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
   isNew: boolean;
+  displaySnippetPreview: boolean;
   paramTypes: string[] = [];
   classes: string[] = [];
   primitives: PrimitiveType[] = [];
   cloneTargets: Game[] = [];
   defaultCommandNameFormatter: (name: string | undefined) => string | undefined;
+  codeTokens: string[] = [];
 
   features = {
     opcode: true,
@@ -187,6 +192,7 @@ export class CommandEditorComponent implements OnInit {
       this.features.opcode = false;
       this.features.operator = false;
       this.features.cc = true;
+      this.codeTokens = ['<%= decl %>'];
     }
 
     this.attrs = filterAttributes(
@@ -790,6 +796,19 @@ export class CommandEditorComponent implements OnInit {
     if (!this.isInvalid) {
       this.clone.emit(game);
     }
+  }
+
+  pasteToken(token: string) {
+    const snippet = this.snippetText.nativeElement;
+    const start = snippet.selectionStart;
+    const end = snippet.selectionEnd;
+    const text = snippet.value;
+    snippet.value = `${text.slice(0, start)}${token}${text.slice(end)}`;
+    snippet.focus();
+    snippet.selectionStart = start + token.length;
+    snippet.selectionEnd = start + token.length;
+
+    return false;
   }
 
   onIsConstructorToggle(command: Command) {

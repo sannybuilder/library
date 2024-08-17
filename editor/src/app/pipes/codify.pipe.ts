@@ -4,6 +4,7 @@ import { template } from 'lodash';
 import { braceify, stringifyWithColon } from './params';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-pascal';
+import { FunctionParamsPipe } from './function-params.pipe';
 
 Prism.languages.sb = Prism.languages.extend('pascal', {
   keyword: [
@@ -35,10 +36,10 @@ export class CodifyPipe implements PipeTransform {
     command: Command,
     game: Game,
     showOpcodes: boolean,
-    extensions: Extension[]
+    extensions: Extension[] = []
   ): string {
     let normalized = normalize(code);
-    let compiled = compileTemplate(normalized, command);
+    let compiled = compileTemplate(normalized, command, game);
     let formatted = format(compiled, command, extensions, showOpcodes, game);
     return formatted;
   }
@@ -49,7 +50,7 @@ function normalize(code: string): string {
   return code.replace(/\t/g, '    ');
 }
 
-function compileTemplate(code: string, command: Command): string {
+function compileTemplate(code: string, command: Command, game: Game): string {
   const compiled = template(code);
   const stringify = (key: 'input' | 'output') =>
     (command[key] ?? []).reduce((m, v, i) => {
@@ -61,10 +62,33 @@ function compileTemplate(code: string, command: Command): string {
     return compiled({
       ...stringify('input'),
       ...stringify('output'),
+      decl: generateDeclaration(command, game),
     });
   } catch {
     return '[invalid code snippet]';
   }
+}
+
+function generateDeclaration(command: Command, game: Game): string {
+  if (!command.member) {
+    return '';
+  }
+
+  let declaration = 'function ';
+
+  if (command.class) {
+    declaration += `${command.class}_${command.member}`;
+  } else {
+    declaration += command.member;
+  }
+
+  if (command.cc && command.name) {
+    declaration += `<${command.cc}, ${command.name}>`;
+  }
+
+  declaration += new FunctionParamsPipe().transform(command, game, true);
+
+  return declaration;
 }
 
 function format(

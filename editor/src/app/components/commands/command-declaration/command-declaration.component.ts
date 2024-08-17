@@ -29,6 +29,7 @@ export class CommandDeclarationComponent {
   @Input() game: Game;
   @Input() viewContext: ViewContext;
   @Input() withToggle: boolean;
+  @Input() simpleTypes: boolean;
   @Input() withCopyButton: boolean;
   @Input() gameExtensions: Extension[];
   @Input() syntaxKind: SyntaxKind;

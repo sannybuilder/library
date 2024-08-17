@@ -383,6 +383,23 @@ export class CommandEditorComponent implements OnInit {
 
   onCcChange(command: Command, cc: Command['cc']) {
     command.cc = cc;
+
+    // prefill the fields for thiscall methods
+    if (this.viewContext === ViewContext.Code) {
+      if (command.cc === 'thiscall') {
+        if (command.class) {
+          if (!command.input || !command.input.length) {
+            command.input = [
+              {
+                name: SELF,
+                type: command.class,
+                source: DEFAULT_INPUT_SOURCE,
+              },
+            ];
+          }
+        }
+      }
+    }
     this.updateErrors();
   }
 
@@ -482,6 +499,11 @@ export class CommandEditorComponent implements OnInit {
     const compressed = smash(command.attrs);
     if (compressed) {
       command.attrs = compressed;
+      if (this.viewContext === ViewContext.Code) {
+        command.attrs.is_constructor && this.onIsConstructorToggle(command);
+        command.attrs.is_destructor && this.onIsDestructorToggle(command);
+        command.attrs.is_condition && this.onIsConditionToggle(command);
+      }
     } else {
       delete command.attrs;
     }
@@ -765,6 +787,79 @@ export class CommandEditorComponent implements OnInit {
   cloneCommand(game: Game) {
     if (!this.isInvalid) {
       this.clone.emit(game);
+    }
+  }
+
+  onIsConstructorToggle(command: Command) {
+    if (!command.cc) {
+      command.cc = 'thiscall';
+    }
+    if (command.class) {
+      if (!command.output || !command.output.length) {
+        command.output = [
+          {
+            name: 'handle',
+            type: command.class || this.suggestedClassName,
+            source: SourceType.var_any,
+          },
+        ];
+        command.num_params++;
+      }
+      if (!command.input || !command.input.length) {
+        command.input = [
+          {
+            name: SELF,
+            type: command.class,
+            source: DEFAULT_INPUT_SOURCE,
+          },
+        ];
+      }
+
+      if (!command.short_desc) {
+        command.short_desc = `Initializes a ${command.class} struct`;
+      }
+    }
+
+    if (!command.member) {
+      command.member = 'ctor';
+    }
+  }
+
+  onIsDestructorToggle(command: Command) {
+    if (!command.cc) {
+      command.cc = 'thiscall';
+    }
+    if (command.class) {
+      if (!command.input || !command.input.length) {
+        command.input = [
+          {
+            name: SELF,
+            type: command.class,
+            source: DEFAULT_INPUT_SOURCE,
+          },
+        ];
+      }
+
+      if (!command.short_desc) {
+        command.short_desc = `Deinitializes the ${command.class} struct`;
+      }
+    }
+
+    if (!command.member) {
+      command.member = 'dtor';
+    }
+  }
+
+  onIsConditionToggle(command: Command) {
+    if (!command.output || !command.output.length) {
+      command.output = [
+        {
+          name: 'state',
+          type: 'bool',
+          source: SourceType.var_any,
+        },
+      ];
+      command.num_params++;
     }
   }
 

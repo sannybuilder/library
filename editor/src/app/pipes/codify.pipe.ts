@@ -45,7 +45,7 @@ export class CodifyPipe implements PipeTransform {
 }
 
 function normalize(code: string): string {
-  // replace tabs with 4 spaces, and angle brackets with html entities
+  // replace tabs with 4 spaces
   return code.replace(/\t/g, '    ');
 }
 

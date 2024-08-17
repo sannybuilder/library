@@ -48,6 +48,8 @@ import {
   StripPunctuationPipe,
   MarkdownPipe,
   ExpressifyPipe,
+  FunctionParamsPipe,
+  HighlightPipe,
 } from './pipes';
 
 // extensions state
@@ -205,6 +207,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     StripPunctuationPipe,
     MarkdownPipe,
     ExpressifyPipe,
+    FunctionParamsPipe,
+    HighlightPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

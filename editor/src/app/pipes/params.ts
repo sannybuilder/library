@@ -13,7 +13,7 @@ export function stringifySource(source: SourceType) {
     case SourceType.literal:
       return 'literal';
     case SourceType.pointer:
-        return 'pointer';
+      return 'pointer';
   }
 }
 
@@ -30,6 +30,21 @@ export function stringifyWithColon(p: Param) {
     .filter(Boolean)
     .join(': ');
 }
+
+export function stringifyWithColonNoHighlight(p: Param) {
+  return [
+    [
+      stringifySource(p.source),
+      p.name
+    ]
+      .filter(Boolean)
+      .join(' '),
+    p.type,
+  ]
+    .filter(Boolean)
+    .join(': ');
+}
+
 
 export function stringifyTypeAndSource(p: Param) {
   return [[stringifySource(p.source)].filter(Boolean).join(' '), p.type]

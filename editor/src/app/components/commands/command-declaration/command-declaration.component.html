@@ -88,14 +88,19 @@
       ><{{ command.cc }}{{ ", " + command.name }}></ng-container
     >
 
-    <span [innerHTML]="command | classParams | sanitize"></span>
+    <span
+      class="code"
+      [innerHTML]="
+        command | functionParams : game : simpleTypes | highlight | sanitize
+      "
+    ></span>
   </code>
 </ng-template>
 
 <ng-template #ScriptCommand>
   <ng-container *ngIf="syntaxKind === 'sb_command'">
     <code *ngIf="isSupported(command) && !command.operator" class="mt-3"
-      ><span [innerHTML]="command | opcodeParams | sanitize"></span
+      ><span class="code" [innerHTML]="command | opcodeParams | sanitize"></span
     ></code>
 
     <code *ngIf="command.operator && isSupported(command)" class="mt-3">

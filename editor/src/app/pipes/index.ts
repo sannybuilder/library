@@ -16,3 +16,5 @@ export * from './strip-punctuation';
 export * from './game-title-simple.pipe';
 export { MarkdownPipe } from './markdown.pipe';
 export * from './expressify.pipe';
+export * from './function-params.pipe';
+export * from './highlight.pipe';

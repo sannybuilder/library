@@ -1,0 +1,33 @@
+int pVector1 = get_label_pointer @cvector1
+int pVector2 = get_label_pointer @cvector2
+int pVector3 = get_label_pointer @cvector3
+
+CVector_ctor(pVector1, 10.0, 20.0, 30.0)
+CVector_ctor(pVector2, 15.0, 25.0, 35.0)
+CVector_Add(pVector3, pVector1, pVector2)
+
+float x = read_memory_with_offset pVector3 0 4
+float y = read_memory_with_offset pVector3 4 4
+float z = read_memory_with_offset pVector3 8 4
+
+print_help_formatted "vec (%.2f, %.2f, %.2f)" x y z
+
+terminate_this_script
+
+const sizeOf_CVector = 12
+:cvector1
+hex
+00(sizeOf_CVector)
+end
+:cvector2
+hex
+00(sizeOf_CVector)
+end
+:cvector3
+hex
+00(sizeOf_CVector)
+end
+
+
+<%= decl %>
+function CVector_ctor<thiscall, 0x406D20>(self: int {CVector}, x: float, y: float, z: float)

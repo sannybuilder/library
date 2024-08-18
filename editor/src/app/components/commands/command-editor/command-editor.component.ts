@@ -836,6 +836,7 @@ export class CommandEditorComponent implements OnInit {
             source: DEFAULT_INPUT_SOURCE,
           },
         ];
+        command.num_params++;
       }
 
       if (!command.short_desc) {
@@ -861,6 +862,7 @@ export class CommandEditorComponent implements OnInit {
             source: DEFAULT_INPUT_SOURCE,
           },
         ];
+        command.num_params++;
       }
 
       if (!command.short_desc) {

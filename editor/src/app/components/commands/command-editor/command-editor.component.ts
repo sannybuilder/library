@@ -380,6 +380,8 @@ export class CommandEditorComponent implements OnInit {
   onMemberChange(command: Command, value: string) {
     if (this.viewContext === ViewContext.Script) {
       command.member = capitalizeFirst(value);
+    } else {
+      command.member = value;
     }
     this.updateErrors();
   }

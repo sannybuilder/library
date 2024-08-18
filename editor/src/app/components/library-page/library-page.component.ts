@@ -132,7 +132,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _game: GameFacade,
     private _tree: TreeFacade,
     private _enums: EnumsFacade,
-    private _router: Router,
     private _ref: ChangeDetectorRef,
     private _el: ElementRef,
     private _articles: ArticlesFacade
@@ -487,16 +486,24 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onChangeSyntaxKind(syntaxKind: SyntaxKind) {
-    this._ui.switchSyntaxKind(syntaxKind)
+    this._ui.switchSyntaxKind(syntaxKind);
   }
 
   private _onSaveCommand() {
-    this._extensions.updateCommand({
-      newExtension: this.extension!,
-      oldExtension: this.oldExtension!,
-      command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
-      updateRelated: this.updateRelatedCommands,
-    });
+    if (
+      !isEqual(this.command, this.oldCommand) ||
+      this.extension !== this.oldExtension
+    ) {
+      this._extensions.updateCommand({
+        newExtension: this.extension!,
+        oldExtension: this.oldExtension!,
+        command: omit(
+          this.command,
+          FUSEJS_OPTIONS.fusejsHighlightKey
+        ) as Command,
+        updateRelated: this.updateRelatedCommands,
+      });
+    }
     if (this.snippet !== this.oldSnippet) {
       this._snippets.updateSnippet({
         extension: this.extension!,

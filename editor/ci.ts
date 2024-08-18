@@ -35,7 +35,12 @@ games.forEach((game) => {
   ].forEach(run);
 
   if (doesGameRequireOpcode(game)) {
-    run(`npm run generate:opcode-examples ${gameJson} ${join(assets, 'opcodes.txt')}`)
+    run(
+      `npm run generate:opcode-examples ${gameJson} ${join(
+        assets,
+        'opcodes.txt'
+      )}`
+    );
   }
 
   try {
@@ -68,20 +73,21 @@ games.forEach((game) => {
   } catch {}
 
   let dest = assetsDirCargo(game);
+
+  run(`cargo build`, '../generator');
+
   if (GameEnumsAssets[game]) {
-    cargo(`cargo run enums ${enumsJson} > ${join(dest, 'enums.txt')}`);
+    cargo(`enums ${enumsJson} > ${join(dest, 'enums.txt')}`);
   }
   if (GameClassesAssets[game]) {
-    cargo(
-      `cargo run classes ${gameJson} ${game} > ${join(dest, 'classes.db')}`
-    );
+    cargo(`classes ${gameJson} ${game} > ${join(dest, 'classes.db')}`);
   }
   if (GameSnippets[game].includes(game)) {
     const srcDir = join('..', game, 'snippets');
-    cargo(`cargo run snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
+    cargo(`snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
   }
   if (GameNativeAssets[game]) {
-    cargo(`cargo run native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
+    cargo(`native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
   }
 });
 
@@ -93,15 +99,14 @@ function assetsDirCargo(game: string) {
   return join('..', 'editor', assetsDir(game));
 }
 
-function run(cmd: string) {
+function run(cmd: string, cwd = process.cwd()) {
   execSync(cmd, {
+    cwd,
     stdio: [0, 1, 2],
   });
 }
 
 function cargo(cmd: string) {
-  execSync(cmd, {
-    cwd: '../generator',
-    stdio: [0, 1, 2],
-  });
+  console.log(`generating "${cmd}"`);
+  run(`"../generator/target/debug/generator.exe" ${cmd}`, '../generator');
 }

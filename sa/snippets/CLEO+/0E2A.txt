@@ -11,5 +11,11 @@ load_sprite 2 "4spider"
 int spiderTXD = get_texture_from_sprite {sprite} 2
 write_memory 0xB4E690 4 spiderTXD False // CVehicleModelInfo::ms_pLightsOnTexture
 CleoBlip bSpider = add_cleo_blip {RadarSprite} -2 {pos} 2598.5 -1750.0 {short} True {rgba} 0 0 255 255 // use the sprite index but negative
-
 remove_texture_dictionary
+
+{$USE newOpcodes}
+if
+    int myTXD = load_texture_from_png_file {png} "CLEO\myImage.png"
+then
+    CleoBlip bBlip = add_cleo_blip {rwTexture} myTXD {pos} 2598.5 -1850.0 {short} True {rgba} 255 255 255 255
+end

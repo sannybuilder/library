@@ -16,6 +16,7 @@ const games: Game[] = JSON.parse(gamesRaw);
 
 run('npm run generate:support-info src/assets/support-info.json');
 run('npm run generate:enums-info src/assets/enums-info.json');
+run(`cargo build`, '../generator');
 
 // GENERATE DATA FILES
 games.forEach((game) => {
@@ -73,8 +74,6 @@ games.forEach((game) => {
   } catch {}
 
   let dest = assetsDirCargo(game);
-
-  run(`cargo build`, '../generator');
 
   if (GameEnumsAssets[game]) {
     cargo(`enums ${enumsJson} > ${join(dest, 'enums.txt')}`);

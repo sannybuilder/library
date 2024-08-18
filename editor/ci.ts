@@ -32,7 +32,7 @@ games.forEach((game) => {
     `npm run generate:enums ${enumsJson} ${join(assets, 'enums.js')}`,
     `cp ${gameJson} ${assets}`,
     `cp ${enumsJson} ${assets}`,
-  ].forEach(run);
+  ].forEach(x => run(x));
 
   if (doesGameRequireOpcode(game)) {
     run(

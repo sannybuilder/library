@@ -21,6 +21,13 @@ export class LinkifyPipe implements PipeTransform {
       return '';
     }
 
+    const base = [
+      game,
+      viewContext === ViewContext.Code
+        ? 'native/versions'
+        : 'script/extensions',
+    ].join('/');
+
     // todo: gradually replace ids with names
     const linkedIds = short_desc.replace(
       /\b[0-7][\dA-Fa-f][\dA-Fa-f][\dA-Fa-f]\b/g,
@@ -32,11 +39,7 @@ export class LinkifyPipe implements PipeTransform {
           return id;
         }
 
-        return `<a href="#/${game}/${
-          viewContext === ViewContext.Code
-            ? 'native/versions'
-            : 'script/extensions'
-        }/${extension.name}/${id}">${id}</a>`;
+        return `<a href="#/${base}/${extension.name}/${id}">${id}</a>`;
       }
     );
     const re =
@@ -51,7 +54,7 @@ export class LinkifyPipe implements PipeTransform {
         return match;
       }
 
-      return `${p1}<a href="#/${game}/${extension.name}/${name}">${name}</a>${p3}`;
+      return `${p1}<a href="#/${base}/${extension.name}/${name}">${name}</a>${p3}`;
     });
     const aliases = [
       ['car', 'vehicle'],

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Command, Extension, Game } from '../models';
+import { Command, Extension, Game, ViewContext } from '../models';
 import { commandParams } from '../utils';
 import { words } from 'lodash';
 
@@ -9,7 +9,12 @@ const reAscii = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
   name: 'linkify',
 })
 export class LinkifyPipe implements PipeTransform {
-  transform(command: Command | string, game: Game, extensions: Extension[]) {
+  transform(
+    command: Command | string,
+    game: Game,
+    extensions: Extension[],
+    viewContext: ViewContext
+  ) {
     const short_desc =
       typeof command === 'string' ? command : command.short_desc;
     if (!short_desc) {
@@ -27,7 +32,11 @@ export class LinkifyPipe implements PipeTransform {
           return id;
         }
 
-        return `<a href="#/${game}/${extension.name}/${id}">${id}</a>`;
+        return `<a href="#/${game}/${
+          viewContext === ViewContext.Code
+            ? 'native/versions'
+            : 'script/extensions'
+        }/${extension.name}/${id}">${id}</a>`;
       }
     );
     const re =

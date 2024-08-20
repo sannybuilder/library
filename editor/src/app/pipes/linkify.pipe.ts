@@ -15,8 +15,8 @@ export class LinkifyPipe implements PipeTransform {
     extensions: Extension[],
     viewContext: ViewContext
   ) {
-    const short_desc =
-      typeof command === 'string' ? command : command.short_desc;
+    const short_desc = getShortDesc(command);
+
     if (!short_desc) {
       return '';
     }
@@ -93,4 +93,17 @@ export class LinkifyPipe implements PipeTransform {
       .replace(new RegExp(classAttr, 'g'), 'class="param-name"')
       .replace(new RegExp(spanTag, 'g'), 'span');
   }
+}
+
+function getShortDesc(
+  command: string | Command | (Command & { _highlight: Command })
+) {
+  if (typeof command === 'string') {
+    return command;
+  }
+  if ('_highlight' in command) {
+    return command._highlight.short_desc;
+  }
+
+  return command.short_desc;
 }

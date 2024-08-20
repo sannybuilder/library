@@ -13,14 +13,23 @@ import {
 import { Command } from '../models';
 import { commandParams, isOpcode, normalizeId } from './command';
 
-export const FUSEJS_OPTIONS = {
-  keys: ['name', 'short_desc', 'id', 'class', 'member'],
+export const FUSEJS_OPTIONS: Fuse.IFuseOptions<Command> & {
+  fusejsHighlightKey: string;
+} = {
+  keys: [
+    { name: 'name', weight: 5.0 },
+    { name: 'member', weight: 2.5 },
+    { name: 'class', weight: 2.0 },
+    { name: 'short_desc', weight: 1.5 },
+    { name: 'id', weight: 0.5 },
+  ],
   includeMatches: true,
-  shouldSort: true,
+  shouldSort: false,
   threshold: 0.3,
   ignoreLocation: true,
   minMatchCharLength: 3,
   fusejsHighlightKey: '_highlight',
+  includeScore: true,
 };
 
 type QueryFilter = (c: Command, query: string) => boolean;
@@ -107,7 +116,7 @@ export function search(list: Command[], searchTerms: string) {
   }
 
   const options = { ...FUSEJS_OPTIONS };
-  const words = query.split(/\s+|,/);
+  const words = query.split(/\s+|,\s*|\./);
   const doesContainOnlyOpcodes = words.every(isOpcode);
 
   if (doesContainOnlyOpcodes) {
@@ -165,6 +174,7 @@ export function search(list: Command[], searchTerms: string) {
 function handleHighlight(result: any[], fusejsHighlightKey: string) {
   return result.map((matchObject) => {
     const item = cloneDeep(matchObject.item);
+    item.score = matchObject.score;
     item[fusejsHighlightKey] = omit(item, fusejsHighlightKey);
     for (const match of matchObject.matches) {
       const indices: number[][] = uniqWith(match.indices, isEqual);
@@ -176,7 +186,7 @@ function handleHighlight(result: any[], fusejsHighlightKey: string) {
         key += `[${match.arrayIndex}]`;
       }
 
-      for (const indice of indices) {
+      for (const indice of mergeIntervals(indices)) {
         const initialValue = get(item[fusejsHighlightKey], key).toString();
 
         const startOffset = indice[0] + highlightOffset;
@@ -195,4 +205,27 @@ function handleHighlight(result: any[], fusejsHighlightKey: string) {
 
     return item;
   });
+}
+
+function mergeIntervals(intervals: Array<number[]>) {
+  const sorted = sortBy(intervals, (v) => v[0]);
+
+  const merged = [sorted[0]];
+
+  for (const [begin, end] of sorted) {
+    const prevEnd = merged[merged.length - 1]![1];
+    if (begin > prevEnd) {
+      // no overlap
+      merged.push([begin, end]);
+    } else {
+      if (end > prevEnd) {
+        // partial overlap
+        merged[merged.length - 1]![1] = end;
+      } else {
+        // full overlap
+      }
+    }
+  }
+
+  return merged;
 }

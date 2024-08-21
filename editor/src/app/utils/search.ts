@@ -223,9 +223,7 @@ function handleHighlight(
 }
 
 function mergeIntervals(intervals: Array<number[]>) {
-  const sorted = sortBy(intervals, (v) => v[0]).filter(
-    ([begin, end]) => end - begin >= 2
-  );
+  const sorted = sortBy(intervals, (v) => v[0]);
 
   const merged = [sorted[0]];
 

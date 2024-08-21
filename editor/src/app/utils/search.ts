@@ -17,7 +17,7 @@ export const FUSEJS_OPTIONS: Fuse.IFuseOptions<Command> & {
   fusejsHighlightKey: string;
 } = {
   keys: [
-    { name: 'name', weight: 5.0 },
+    { name: 'name', weight: 50.0 },
     { name: 'member', weight: 2.5 },
     { name: 'class', weight: 2.0 },
     { name: 'short_desc', weight: 1.5 },
@@ -26,8 +26,8 @@ export const FUSEJS_OPTIONS: Fuse.IFuseOptions<Command> & {
   includeMatches: true,
   shouldSort: false,
   threshold: 0.3,
-  ignoreLocation: true,
-  minMatchCharLength: 3,
+  location: 150,
+  minMatchCharLength: 2,
   fusejsHighlightKey: '_highlight',
   includeScore: true,
   useExtendedSearch: true,
@@ -223,7 +223,9 @@ function handleHighlight(
 }
 
 function mergeIntervals(intervals: Array<number[]>) {
-  const sorted = sortBy(intervals, (v) => v[0]);
+  const sorted = sortBy(intervals, (v) => v[0]).filter(
+    ([begin, end]) => end - begin >= 2
+  );
 
   const merged = [sorted[0]];
 

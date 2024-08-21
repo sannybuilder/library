@@ -1,4 +1,4 @@
-import Fuse from 'fuse.js';
+import Fuse, { IFuseOptions } from 'fuse.js';
 import {
   get,
   set,
@@ -13,7 +13,7 @@ import {
 import { Command } from '../models';
 import { commandParams, isOpcode, normalizeId } from './command';
 
-export const FUSEJS_OPTIONS: Fuse.IFuseOptions<Command> & {
+export const FUSEJS_OPTIONS: IFuseOptions<Command> & {
   fusejsHighlightKey: string;
 } = {
   keys: [

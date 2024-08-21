@@ -30,11 +30,13 @@ export const FUSEJS_OPTIONS: Fuse.IFuseOptions<Command> & {
   minMatchCharLength: 3,
   fusejsHighlightKey: '_highlight',
   includeScore: true,
+  useExtendedSearch: true,
 };
 
 type QueryFilter = (c: Command, query: string) => boolean;
 
-const match = (a: string, b?: string) => !a || b?.toLowerCase() === a.toLowerCase();
+const match = (a: string, b?: string) =>
+  !a || b?.toLowerCase() === a.toLowerCase();
 
 export const ConstructorHandler: QueryFilter = (c, q) => {
   return Boolean(
@@ -117,18 +119,20 @@ export function search(list: Command[], searchTerms: string) {
 
   const options = { ...FUSEJS_OPTIONS };
   const words = query.split(/\s+|,\s*|\./);
-  const doesContainOnlyOpcodes = words.every(isOpcode);
+  const wordsFiltered = words.filter((x) => x.toLowerCase() !== 'fade');
+  const doesContainOnlyOpcodes =
+    wordsFiltered.length > 0 && wordsFiltered.every(isOpcode);
 
   if (doesContainOnlyOpcodes) {
     // multi opcode id search
+    options.threshold = 0.0;
     return sortBy(
       flatMap(words, (opcode) => {
-        options.threshold = 0.0;
-
         const fuse = new Fuse(list, options);
         return handleHighlight(
           fuse.search(normalizeId(opcode)),
-          options.fusejsHighlightKey
+          options.fusejsHighlightKey,
+          words
         );
       }),
       'id'
@@ -168,10 +172,15 @@ export function search(list: Command[], searchTerms: string) {
   }
 
   const fuse = new Fuse(filtered, options);
-  return handleHighlight(fuse.search(query), options.fusejsHighlightKey);
+  return handleHighlight(fuse.search(query), options.fusejsHighlightKey, words);
 }
 
-function handleHighlight(result: any[], fusejsHighlightKey: string) {
+function handleHighlight(
+  result: any[],
+  fusejsHighlightKey: string,
+  words: string[]
+) {
+  const wordLookup = words.map((w) => w.toLowerCase());
   return result.map((matchObject) => {
     const item = cloneDeep(matchObject.item);
     item.score = matchObject.score;
@@ -186,12 +195,18 @@ function handleHighlight(result: any[], fusejsHighlightKey: string) {
         key += `[${match.arrayIndex}]`;
       }
 
-      for (const indice of mergeIntervals(indices)) {
+      for (const [intervalStart, intervalEnd] of mergeIntervals(indices)) {
         const initialValue = get(item[fusejsHighlightKey], key).toString();
 
-        const startOffset = indice[0] + highlightOffset;
-        const endOffset = indice[1] + highlightOffset + 1;
+        const startOffset = intervalStart + highlightOffset;
+        const endOffset = intervalEnd + highlightOffset + 1;
         const highlightedTerm = initialValue.substring(startOffset, endOffset);
+
+        // boost exact match
+        const highlightedTermLookup = highlightedTerm.toLowerCase();
+        if (wordLookup.includes(highlightedTermLookup)) {
+          item.score *= 1e-2;
+        }
         const newValue =
           initialValue.substring(0, startOffset) +
           '<em>' +

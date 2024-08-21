@@ -90,6 +90,9 @@ export class UiEffects {
           canEdit,
           game,
         ]) => {
+          if (searchTerm) {
+            this._ui.updateSearch(searchTerm, true);
+          }
           if (action === 'decision-tree') {
             return [displayDecisionTree()];
           }
@@ -201,10 +204,6 @@ export class UiEffects {
                 });
               })
             );
-          }
-
-          if (searchTerm) {
-            this._ui.updateSearch(searchTerm, true);
           }
 
           if (extension === 'all') {

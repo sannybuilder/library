@@ -16,7 +16,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist/editor",
             "index": "src/index.html",
@@ -36,7 +36,8 @@
               "includePaths": ["src"]
             },
             "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "ngswConfigPath": "ngsw-config.json",
+            "externalDependencies": ["node_modules/bootstrap"]
           },
           "configurations": {
             "dev": {

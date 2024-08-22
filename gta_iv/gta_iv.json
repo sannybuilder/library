@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1700767206283,
-    "version": "0.79",
+    "last_update": 1724360525756,
+    "version": "0.80",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -15,7 +15,7 @@
         {
           "input": [
             {
-              "name": "abort",
+              "name": "_p1",
               "type": "bool"
             }
           ],
@@ -27,7 +27,13 @@
             }
           ],
           "name": "ABORT_SCRIPTED_CONVERSATION",
-          "num_params": 2
+          "num_params": 2,
+          "short_desc": "Interrupts scripted conversation when the parameter is set to false",
+          "class": "Conversation",
+          "member": "AbortScripted",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -826,29 +832,34 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "speakerId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
+              "name": "speechName",
               "type": "string"
             },
             {
-              "name": "_p5",
+              "name": "gxtName",
               "type": "string"
+            },
+            {
+              "name": "listenerId",
+              "type": "int"
+            },
+            {
+              "name": "volumeType",
+              "type": "int"
             }
           ],
           "name": "ADD_LINE_TO_CONVERSATION",
           "num_params": 5,
-          "short_desc": "Adds a line to a conversation"
+          "short_desc": "Adds a line to a conversation",
+          "class": "Conversation",
+          "member": "AddLine",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -857,17 +868,22 @@
               "type": "int"
             },
             {
-              "name": "name",
+              "name": "speechName",
               "type": "string"
             },
             {
-              "name": "text",
+              "name": "gxtName",
               "type": "string"
             }
           ],
           "name": "ADD_LINE_TO_MOBILE_PHONE_CALL",
           "num_params": 3,
-          "short_desc": "Adds a line to a mobile phone call"
+          "short_desc": "Adds a line to a mobile phone call",
+          "class": "Conversation",
+          "member": "AddLineToMobilePhoneCall",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ADD_LINE_TO_SCRIPTED_CONVERSATION",
@@ -941,24 +957,26 @@
         {
           "input": [
             {
-              "name": "id",
+              "name": "speakerId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "voiceName",
+              "type": "string"
             }
           ],
           "name": "ADD_NEW_CONVERSATION_SPEAKER",
           "num_params": 3,
           "short_desc": "Adds a new conversation speaker",
-          "output": [
-            {
-              "name": "_p3",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Conversation",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "AddNewSpeaker"
         },
         {
           "name": "ADD_NEW_FRONTEND_CONVERSATION_SPEAKER",
@@ -13135,8 +13153,8 @@
           ],
           "name": "GET_CURRENT_SCRIPTED_CONVERSATION_LINE",
           "num_params": 1,
-          "class": "Game",
-          "member": "GetCurrentScriptedConversationLine",
+          "class": "Conversation",
+          "member": "GetCurrentScriptedLine",
           "attrs": {
             "is_static": true
           }
@@ -24917,8 +24935,11 @@
           "name": "IS_SCRIPTED_CONVERSATION_ONGOING",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Conversation",
+          "member": "IsScriptedOngoing"
         },
         {
           "input": [
@@ -28298,7 +28319,12 @@
         },
         {
           "name": "NEW_SCRIPTED_CONVERSATION",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Conversation",
+          "member": "NewScripted",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "OBFUSCATE_INT",
@@ -28500,7 +28526,12 @@
             }
           ],
           "name": "PAUSE_SCRIPTED_CONVERSATION",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Conversation",
+          "member": "PauseScripted",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PED_QUEUE_CONSIDER_PEDS_WITH_FLAG_FALSE",
@@ -42090,7 +42121,12 @@
         },
         {
           "name": "SKIP_TO_NEXT_SCRIPTED_CONVERSATION_LINE",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Conversation",
+          "member": "SkipToNextScriptedLine",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43028,7 +43064,12 @@
             }
           ],
           "name": "START_SCRIPT_CONVERSATION",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Conversation",
+          "member": "StartScript",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

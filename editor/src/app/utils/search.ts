@@ -1,10 +1,9 @@
-import Fuse, { IFuseOptions } from 'fuse.js';
+import Fuse, { FuseResult, IFuseOptions } from 'fuse.js';
 import {
   get,
   set,
   omit,
   cloneDeep,
-  split,
   flatMap,
   sortBy,
   uniqWith,
@@ -23,20 +22,27 @@ export const FUSEJS_OPTIONS: IFuseOptions<Command> & {
     { name: 'short_desc', weight: 1.5 },
     { name: 'id', weight: 0.5 },
   ],
-  includeMatches: true,
   shouldSort: false,
   threshold: 0.3,
-  location: 150,
-  minMatchCharLength: 2,
+  location: 0,
+  distance: 500,
+  ignoreLocation: false,
+  minMatchCharLength: 3,
   fusejsHighlightKey: '_highlight',
   includeScore: true,
+  includeMatches: true,
   useExtendedSearch: true,
 };
+
+const OPCODE_WORDS = ['beef', 'cafe', 'dead', 'deaf', 'face', 'fade', 'feed'];
 
 type QueryFilter = (c: Command, query: string) => boolean;
 
 const match = (a: string, b?: string) =>
   !a || b?.toLowerCase() === a.toLowerCase();
+
+const includes = (a: string, b?: string) =>
+  !a || b?.toLowerCase().includes(a.toLowerCase());
 
 export const ConstructorHandler: QueryFilter = (c, q) => {
   return Boolean(
@@ -64,6 +70,26 @@ const IdHandler: QueryFilter = (c, q) => {
   return Boolean(match(normalizeId(q), c.id));
 };
 
+const ContainsHandler: QueryFilter = (c, q) => {
+  if (includes(q, c.class)) {
+    return true;
+  }
+  if (includes(q, c.member)) {
+    return true;
+  }
+  if (includes(q, c.short_desc)) {
+    return true;
+  }
+  if (includes(q, c.name)) {
+    return true;
+  }
+  if (includes(q, c.id)) {
+    return true;
+  }
+
+  return false;
+};
+
 function getQueryHandlers() {
   const SpecialQueryHandlers: Record<string, QueryFilter> = {
     'constructor:': ConstructorHandler,
@@ -77,6 +103,7 @@ function getQueryHandlers() {
     'type:': TypeHandler,
     't:': TypeHandler,
     'id:': IdHandler,
+    'contains:': ContainsHandler,
   };
 
   const entries = Object.entries(SpecialQueryHandlers);
@@ -113,70 +140,106 @@ export function abbrSearch(list: Command[], searchTerms: string) {
 export function search(list: Command[], searchTerms: string) {
   let query = searchTerms.trim();
 
-  if (!query || (query.length < 3 && !query.includes(':'))) {
+  if (!query || query.length < 3) {
     return list;
   }
 
-  const options = { ...FUSEJS_OPTIONS };
-  const words = query.split(/\s+|,\s*|\./);
-  const wordsFiltered = words.filter((x) => x.toLowerCase() !== 'fade');
-  const doesContainOnlyOpcodes =
-    wordsFiltered.length > 0 && wordsFiltered.every(isOpcode);
+  let bucket: string[] = [];
+  let inQuotes = false;
+  let s = '';
+  const sep = [' ', '.', ','];
 
-  if (doesContainOnlyOpcodes) {
+  for (let c of [...query.split(''), ' ']) {
+    if (c === '"') {
+      if (inQuotes) {
+        // close exact match sequence
+        if (s.length) {
+          bucket.push(`contains:${s}`);
+          s = '';
+        }
+        inQuotes = false;
+      } else {
+        // open exact match sequence
+        inQuotes = true;
+      }
+      continue;
+    }
+
+    if (inQuotes) {
+      // build up exact match sequence
+      s += c;
+      continue;
+    }
+
+    if (sep.includes(c)) {
+      // word separator
+      if (s.length > 0) {
+        if (s.length < 3) {
+          // exact match for short words
+          bucket.push(`contains:${s}`);
+        } else {
+          bucket.push(s);
+        }
+        s = '';
+      }
+
+      continue;
+    }
+
+    s += c;
+  }
+  const options = { ...FUSEJS_OPTIONS };
+
+  if (
+    bucket.every(isOpcode) &&
+    !bucket.some((w) => OPCODE_WORDS.includes(w.toLowerCase()))
+  ) {
     // multi opcode id search
     options.threshold = 0.0;
     return sortBy(
-      flatMap(words, (opcode) => {
+      flatMap(bucket, (opcode) => {
         const fuse = new Fuse(list, options);
         return handleHighlight(
           fuse.search(normalizeId(opcode)),
           options.fusejsHighlightKey,
-          words
+          bucket
         );
       }),
       'id'
     );
   }
 
-  let filtered = list;
+  const filters: Array<[QueryFilter, string]> = [];
+  const handlers = getQueryHandlers();
+  let fuzzyWords = [];
 
-  if (query.startsWith('"') && query.endsWith('"')) {
-    // exact search
-    options.threshold = 0.0;
-    query = query.substring(1, query.length - 1);
-  } else if (searchTerms.includes(':')) {
-    // special search queries
-    query = '';
-    const filters: Array<[QueryFilter, string]> = [];
-    const entries = getQueryHandlers();
+  for (const word of bucket) {
+    const entry = handlers.find(([k, _]) => word.startsWith(k));
 
-    for (const word of split(searchTerms, ' ').filter(
-      (w) => w.trim().length > 0
-    )) {
-      const entry = entries.find(([k, _]) => word.startsWith(k));
-
-      if (entry) {
-        const input = word.substring(entry[0].length).toLowerCase();
-        filters.push([entry[1], input]);
-      } else {
-        query = query + ' ' + word;
-      }
-    }
-
-    filtered = list.filter((c) => filters.every(([h, i]) => h(c, i)));
-
-    if (!query) {
-      return filtered;
+    if (entry) {
+      const input = word.substring(entry[0].length).toLowerCase();
+      filters.push([entry[1], input]);
+    } else {
+      fuzzyWords.push(word);
     }
   }
 
+  const filtered = list.filter((c) => filters.every(([h, i]) => h(c, i)));
+
+  if (!fuzzyWords.length) {
+    return filtered;
+  }
+
   const fuse = new Fuse(filtered, options);
-  return handleHighlight(fuse.search(query), options.fusejsHighlightKey, words);
+  return handleHighlight(
+    fuse.search(fuzzyWords.join(' ')),
+    options.fusejsHighlightKey,
+    fuzzyWords
+  );
 }
 
 function handleHighlight(
-  result: any[],
+  result: FuseResult<any>[],
   fusejsHighlightKey: string,
   words: string[]
 ) {
@@ -185,14 +248,17 @@ function handleHighlight(
     const item = cloneDeep(matchObject.item);
     item.score = matchObject.score;
     item[fusejsHighlightKey] = omit(item, fusejsHighlightKey);
+    if (!matchObject.matches) {
+      return item;
+    }
     for (const match of matchObject.matches) {
       const indices: number[][] = uniqWith(match.indices, isEqual);
 
       let highlightOffset = 0;
 
-      let key: string = match.key;
-      if (get(item[fusejsHighlightKey], key).constructor === Array) {
-        key += `[${match.arrayIndex}]`;
+      let key = match.key;
+      if (!key) {
+        continue;
       }
 
       for (const [intervalStart, intervalEnd] of mergeIntervals(indices)) {

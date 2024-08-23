@@ -14,13 +14,16 @@ export const loadSnippetsSuccess = createAction(
   }>()
 );
 
-export const loadSnippetsError = createAction(
-  '[snippets] load error'
-);
+export const loadSnippetsError = createAction('[snippets] load error');
 
 export const updateSnippet = createAction(
   '[snippets] update',
-  props<{ extension: string; command: Command; content: string }>()
+  props<{
+    extension: string;
+    command: Command;
+    content: string;
+    updateRelated: boolean;
+  }>()
 );
 
 export const updateGameSnippet = createAction(

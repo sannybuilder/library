@@ -127,7 +127,13 @@ export function normalizeId(id: string): string {
   return id;
 }
 
-export function getQueryParamsForCommand(command: Command, game: Game) {
+export function getQueryParamsForCommand(
+  command: Command | undefined,
+  game: Game
+) {
+  if (!command) {
+    return {};
+  }
   const platforms = command.platforms ?? [];
   const versions = command.versions ?? [];
 

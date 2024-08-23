@@ -509,6 +509,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         extension: this.extension!,
         command: this.command!,
         content: this.snippet!,
+        updateRelated: this.updateRelatedCommands,
       });
     }
 

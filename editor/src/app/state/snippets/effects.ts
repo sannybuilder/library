@@ -21,7 +21,7 @@ import {
 import { SnippetsService } from './service';
 import { ChangesFacade } from '../changes/facade';
 import { GameSnippets, GameSupportInfo } from '../../models';
-import { getSameCommands } from '../../utils';
+import { getSameCommands, isOtherGame } from '../../utils';
 import { GameFacade } from '../game/facade';
 import { ExtensionsFacade } from '../extensions/facade';
 import { of } from 'rxjs';
@@ -50,19 +50,36 @@ export class SnippetsEffects {
       ofType(updateSnippet),
       // distinctUntilChanged(isEqual),
       withLatestFrom(this._game.game$),
-      switchMap(([{ content, extension, command }, game]) => {
+      switchMap(([{ content, extension, command, updateRelated }, game]) => {
         return this._extensions.getCommandSupportInfo(command, extension).pipe(
           take(1),
-          switchMap((supportInfo?: GameSupportInfo[]) =>
-            getSameCommands(supportInfo, game).map((d) =>
-              updateGameSnippet({
-                game: d.game,
-                content,
-                extension,
-                id: command.id || command.name,
-              })
-            )
-          )
+          switchMap((supportInfo?: GameSupportInfo[]) => {
+            if (
+              // Other games should not trigger cross game updates, nor should they be updated
+              !isOtherGame(game) &&
+              updateRelated
+            ) {
+              return getSameCommands(supportInfo, game)
+                .filter((d) => !isOtherGame(d.game))
+                .map((d) =>
+                  updateGameSnippet({
+                    game: d.game,
+                    content,
+                    extension,
+                    id: command.id || command.name,
+                  })
+                );
+            } else {
+              return [
+                updateGameSnippet({
+                  game,
+                  content,
+                  extension,
+                  id: command.id || command.name,
+                }),
+              ];
+            }
+          })
         );
       })
     )

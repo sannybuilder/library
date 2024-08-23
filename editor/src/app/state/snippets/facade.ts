@@ -19,12 +19,14 @@ export class SnippetsFacade {
     extension,
     command,
     content,
+    updateRelated,
   }: {
     extension: string;
     command: Command;
     content: string;
+    updateRelated: boolean;
   }) {
-    return this.store$.dispatch(updateSnippet({ extension, command, content }));
+    return this.store$.dispatch(updateSnippet({ extension, command, content, updateRelated }));
   }
 
   loadSnippets(game: Game) {

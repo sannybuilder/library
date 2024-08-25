@@ -100,7 +100,6 @@ function format(
   game: Game
 ): string {
   const highlightName = getName(command);
-  debugger;
   const opcodified = showOpcodes ? opcodify(code, extensions) : code;
   const highlighted = Prism.highlight(
     opcodified,

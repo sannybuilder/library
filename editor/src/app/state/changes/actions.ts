@@ -47,3 +47,14 @@ export const validateAndWriteFiles = createAction(
   '[changes] validate and write files',
   props<{ files: Array<{ path: string; content: string }> }>()
 );
+
+export const loadLastRevision = createAction('[changes] load last revision');
+
+export const loadLastRevisionSuccess = createAction(
+  '[changes] load last revision success',
+  props<{ revision: string }>()
+);
+
+export const loadLastRevisionFail = createAction(
+  '[changes] load last revision fail'
+);

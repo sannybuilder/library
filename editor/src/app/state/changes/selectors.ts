@@ -27,3 +27,8 @@ export const isUpdating = createSelector(
   state,
   (state: ChangesState) => state.isUpdating
 );
+
+export const lastRevision = createSelector(
+  state,
+  (state: ChangesState) => state.lastRevision
+);

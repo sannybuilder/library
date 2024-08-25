@@ -11,6 +11,7 @@ import { Game } from '../../models';
 export type GetRepoContentResponseDataBlob = components['schemas']['blob'];
 export type GetRepoContentResponseDataDirectory =
   components['schemas']['content-directory'];
+export type GetRepoContentResponseCommit = components['schemas']['commit'];
 
 @Injectable({ providedIn: 'root' })
 export class GitHubService {
@@ -76,5 +77,24 @@ export class GitHubService {
     return this._http.get(Location.joinWithSlash('/assets', fileName), {
       responseType: 'text',
     });
+  }
+
+  getRevision(accessToken: string | undefined) {
+    const ts = Date.now().toString();
+    const headers = accessToken
+      ? new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        })
+      : undefined;
+    return this._http
+      .get<GetRepoContentResponseCommit>(this._config.endpoints.revision, {
+        headers,
+        params: { ts },
+      })
+      .pipe(
+        timeout(3000),
+        map(({ sha }) => sha)
+      );
   }
 }

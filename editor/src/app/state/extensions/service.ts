@@ -14,11 +14,7 @@ import { GitHubService } from '../github/service';
 export class ExtensionsService {
   constructor(private _github: GitHubService) {}
 
-  loadExtensions(
-    game: Game,
-    viewContext: ViewContext,
-    accessToken?: string
-  ) {
+  loadExtensions(game: Game, viewContext: ViewContext, accessToken?: string) {
     return this._github.loadFileGracefully<LoadExtensionsResponse>(
       viewContext === ViewContext.Script
         ? GameLibrary[game]

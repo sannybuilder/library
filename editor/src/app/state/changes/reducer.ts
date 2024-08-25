@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 
-
 import {
   createGitHubAdaptor,
   createKoreFile,
@@ -17,6 +16,7 @@ import {
   submitChanges,
   submitChangesFail,
   submitChangesSuccess,
+  loadLastRevisionSuccess,
 } from './actions';
 
 type FileName = string;
@@ -27,6 +27,7 @@ export interface ChangesState {
   lastUpdate?: number;
   isUpdating: boolean;
   hasChanges: boolean;
+  lastRevision?: string;
 }
 
 export const initialState: ChangesState = {
@@ -112,6 +113,9 @@ export const changesReducer = createReducer(
       ...state,
       snapshots: { ...state.snapshots, [fileName]: { lastUpdate, content } },
     };
-  })
+  }),
+  on(loadLastRevisionSuccess, (state, { revision }) => ({
+    ...state,
+    lastRevision: revision,
+  }))
 );
-

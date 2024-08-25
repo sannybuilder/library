@@ -17,6 +17,7 @@ export const environment: Config = {
     oauth: 'https://github.com/login/oauth/authorize',
     user: 'https://api.github.com/user',
     contents: 'https://api.github.com/repos/sannybuilder/library/contents',
+    revision: 'https://api.github.com/repos/sannybuilder/library/commits/HEAD',
   },
 };
 

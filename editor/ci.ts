@@ -33,7 +33,7 @@ games.forEach((game) => {
     `npm run generate:enums ${enumsJson} ${join(assets, 'enums.js')}`,
     `cp ${gameJson} ${assets}`,
     `cp ${enumsJson} ${assets}`,
-  ].forEach(x => run(x));
+  ].forEach((x) => run(x));
 
   if (doesGameRequireOpcode(game)) {
     run(
@@ -89,6 +89,16 @@ games.forEach((game) => {
     cargo(`native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
   }
 });
+
+// ADD CURRENT COMMIT SHA TO INDEX.HTML
+const sha = execSync('git rev-parse HEAD').toString().trim();
+const indexHtml = 'dist/editor/index.html';
+const indexHtmlContent = readFileSync(indexHtml, 'utf-8');
+const newContent = indexHtmlContent.replace(
+  '<!-- SHA -->',
+  `<script>window.commitSha = '${sha}';</script>`
+);
+require('fs').writeFileSync(indexHtml, newContent);
 
 function assetsDir(game: string) {
   return join('dist', 'editor', 'assets', game);

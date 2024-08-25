@@ -13,6 +13,9 @@ import {
 import * as diff from 'diff';
 
 import {
+  loadLastRevision,
+  loadLastRevisionFail,
+  loadLastRevisionSuccess,
   reloadPage,
   submitChanges,
   submitChangesFail,
@@ -146,6 +149,19 @@ export class ChangesEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  loadLastRevision$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadLastRevision),
+      withLatestFrom(this._auth.authToken$),
+      switchMap(([, accessToken]) => {
+        return this._gitHub.getRevision(accessToken).pipe(
+          map((revision) => loadLastRevisionSuccess({ revision })),
+          catchError(() => of(loadLastRevisionFail()))
+        );
+      })
+    )
   );
 
   private _unload(e: BeforeUnloadEvent) {

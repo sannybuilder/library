@@ -3040,11 +3040,11 @@ export const CheckpointType = {
   "Num": 9
 };
 export const WheelId = {
-  "BikeFront": 0,
-  "BikeRear": 1,
   "FrontLeft": 0,
   "RearLeft": 1,
   "FrontRight": 2,
   "RearRight": 3,
-  "Any": 4
+  "Any": 4,
+  "BikeFront": 0,
+  "BikeRear": 1
 };

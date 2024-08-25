@@ -90,11 +90,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       install(sb as HTMLElement);
     }
 
-    this.updatePolling$ = interval(120000)
-      .pipe(tap(() => this._changes.loadLastRevision()))
-      .subscribe();
+    // this.updatePolling$ = interval(120000)
+    //   .pipe(tap(() => this._changes.loadLastRevision()))
+    //   .subscribe();
 
-    this._changes.loadLastRevision();
+    // this._changes.loadLastRevision();
   }
 
   ngOnDestroy() {

@@ -3039,3 +3039,10 @@ export const CheckpointType = {
   "TorusDown": 8,
   "Num": 9
 };
+export const WheelId = {
+  "FrontLeft": 0,
+  "RearLeft": 1,
+  "FrontRight": 2,
+  "RearRight": 3,
+  "Any": 4
+};

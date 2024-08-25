@@ -15,6 +15,7 @@ Prism.languages.sb = Prism.languages.extend('pascal', {
     },
   ],
   number: [
+    { pattern: /[0-9a-fA-F]{4}:/, alias: 'opcode' },
     {
       pattern:
         /(?:\b0x(?:[\da-f]+(?:\.[\da-f]*)?|\.[\da-f]+)(?:p[+-]?\d+)?|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?)[ful]{0,4}/i,
@@ -98,26 +99,89 @@ function format(
   showOpcodes: boolean,
   game: Game
 ): string {
-  const highlightName = command.name.startsWith('0x')
-    ? `${command.class}_${command.member}`
-    : command.name;
-
-  const tokenized = Prism.highlight(
-    code,
+  const highlightName = getName(command);
+  debugger;
+  const opcodified = showOpcodes ? opcodify(code, extensions) : code;
+  const highlighted = Prism.highlight(
+    opcodified,
     { ...Prism.languages.sb, function: new RegExp(highlightName, 'i') },
     'sb'
   );
+  return linkify(highlighted, extensions, game);
+}
 
-  const lines = tokenized.split('\n').map((line) => line.trimEnd());
+function matches(s1: string, s2: string) {
+  return s1.toLowerCase() === s2.toLowerCase();
+}
+
+function opcodify(text: string, extensions: Extension[]): string {
+  return text
+    .split('\n')
+    .map((line) => line.trimEnd())
+    .map((line) => {
+      const words = line.split(' ');
+      const reserved = ['', 'repeat', 'until', 'while', 'if', 'then', 'else'];
+
+      let not = false;
+      let keyword = '';
+      let opcodeIndex = 0;
+
+      for (let i = 0; i < words.length; i++) {
+        let word = words[i].toLowerCase();
+
+        if (reserved.includes(word)) {
+          continue;
+        }
+
+        if (matches(word, 'not')) {
+          not = true;
+          opcodeIndex = i;
+          continue;
+        }
+
+        keyword = word;
+        if (!not) opcodeIndex = i;
+        break;
+      }
+
+      if (!keyword) {
+        return line;
+      }
+
+      for (let extension of extensions) {
+        const command = extension.commands.find((c) =>
+          matches(c.name, keyword)
+        );
+        if (command) {
+          let id = command.id;
+          if (not) {
+            id = (parseInt(id, 16) + 0x8000).toString(16).toUpperCase();
+          }
+
+          words[opcodeIndex] = [id, words[opcodeIndex]].join(': ');
+
+          return words.join(' ');
+        }
+      }
+      return line;
+    })
+    .join('\n');
+}
+
+function linkify(text: string, extensions: Extension[], game: Game): string {
+  const lines = text.split('\n').map((line) => line.trimEnd());
   const linesWithOpcodes = lines.map((line) => {
     const words = line.split(' ');
-    const reserved = ['', 'repeat', 'until', 'while', 'if', 'then', 'else'];
-
-    let not = false;
-    let keyword = '';
-    let keywordIndex = 0;
-    let opcodeIndex = 0;
-    let shouldHighlight = false;
+    const reserved = [
+      '',
+      'repeat',
+      'until',
+      'while',
+      'if',
+      'then',
+      'else',
+      'not',
+    ];
 
     for (let i = 0; i < words.length; i++) {
       let word = words[i].toLowerCase();
@@ -126,45 +190,22 @@ function format(
         continue;
       }
 
-      if (matches(word, 'not')) {
-        not = true;
-        keywordIndex = opcodeIndex = i;
-        continue;
-      }
+      for (let extension of extensions) {
+        const command = extension.commands.find((c) =>
+          matches(getName(c), word)
+        );
+        if (command) {
+          const base = command.name.startsWith('0x')
+            ? 'native/versions'
+            : 'script/extensions';
+          words[i] = `<a class="identifier" href="#/${game}/${base}/${
+            extension.name
+          }/${command.id || command.name}" title="${command.short_desc}">${
+            words[i]
+          }</a>`;
 
-      keyword = word;
-      shouldHighlight = matches(keyword, command.name);
-      if (!not) opcodeIndex = i;
-      keywordIndex = i;
-      break;
-    }
-
-    if (!keyword) {
-      return line;
-    }
-
-    for (let extension of extensions) {
-      const command = extension.commands.find((c) => matches(c.name, keyword));
-      if (command) {
-        let id = command.id;
-        if (not) {
-          id = (parseInt(id, 16) + 0x8000).toString(16).toUpperCase();
+          return words.join(' ');
         }
-
-        if (shouldHighlight) {
-          words[
-            keywordIndex
-          ] = `<span class="identifier">${words[keywordIndex]}</span>`;
-        } else {
-          words[keywordIndex] = `<a href="#/${game}/${extension.name}/${
-            command.id || command.name
-          }" title="${command.short_desc}">${words[keywordIndex]}</a>`;
-        }
-
-        if (showOpcodes) {
-          words[opcodeIndex] = [id, words[opcodeIndex]].join(': ');
-        }
-        return words.join(' ');
       }
     }
     return line;
@@ -173,6 +214,8 @@ function format(
   return linesWithOpcodes.join('\n');
 }
 
-function matches(s1: string, s2: string) {
-  return s1.toLowerCase() === s2.toLowerCase();
+function getName(command: Command) {
+  return command.name.startsWith('0x')
+    ? `${command.class}_${command.member}`
+    : command.name;
 }

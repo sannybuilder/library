@@ -14,28 +14,31 @@
 
 <div class="d-flex justify-content-between align-items-center">
   <div>
-    <ul class="nav" *ngIf="command.class && command.member && withToggle">
+    <ul
+      class="nav flex-nowrap"
+      *ngIf="command.class && command.member && withToggle"
+    >
       <li class="nav-item">
         <a
-          class="nav-link pl-0"
+          class="nav-link p-0 small"
           [ngClass]="{ active: syntaxKind === 'sb_command' }"
           href="#"
           (click)="changeSyntaxTab('sb_command')"
           >{{ "ui.commandOverview.sbCommandSyntax" | translate }}</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item ml-3">
         <a
-          class="nav-link"
+          class="nav-link p-0 small"
           [ngClass]="{ active: syntaxKind === 'sb_class' }"
           href="#"
           (click)="changeSyntaxTab('sb_class')"
           >{{ "ui.commandOverview.sbClassSyntax" | translate }}</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item ml-3" *ngIf="hasCLEOReduxSupport(game)">
         <a
-          class="nav-link"
+          class="nav-link p-0 small"
           [ngClass]="{ active: syntaxKind === 'cleo_redux' }"
           href="#"
           (click)="changeSyntaxTab('cleo_redux')"

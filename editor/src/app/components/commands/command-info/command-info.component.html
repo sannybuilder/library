@@ -29,9 +29,11 @@
         [gameExtensions]="gameExtensions"
         [viewContext]="viewContext"
         [game]="game"
-        [syntaxKind]="syntaxKind"
+        [syntaxKind]="defaultSyntaxKind"
         (switchSyntaxKind)="onSwitchSyntaxKind($event)"
-        [withToggle]="viewContext === ViewContext.Script"
+        [withToggle]="
+          (viewContext === ViewContext.Script) && doesGameRequireOpcode(game)
+        "
         [withCopyButton]="true"
         [simpleTypes]="true"
       ></scl-command-declaration>

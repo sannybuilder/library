@@ -1,5 +1,5 @@
 import { flatten } from 'lodash';
-import { Game } from '../models';
+import { Game, SyntaxKind } from '../models';
 
 export const GameEditions: Partial<Record<Game, Game[]>> = {
   [Game.gta3]: [Game.gta3, Game.gta3_mobile, Game.gta3_unreal],
@@ -84,4 +84,18 @@ export function isOtherGame(game: Game) {
 
 export function doesGameHaveNativeDocs(game: Game): boolean {
   return [Game.sa].includes(game);
+}
+
+export function hasCLEOReduxSupport(game: Game): boolean {
+  return ![Game.gta3_mobile, Game.vc_mobile, Game.sa_mobile].includes(game);
+}
+
+export function getDefaultSyntaxKind(game: Game, kind: SyntaxKind): SyntaxKind {
+  if (!doesGameRequireOpcode(game)) {
+    return 'cleo_redux';
+  }
+  if (!hasCLEOReduxSupport(game) && kind === 'cleo_redux') {
+    return 'sb_command';
+  }
+  return kind;
 }

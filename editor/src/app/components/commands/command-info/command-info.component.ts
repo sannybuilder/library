@@ -5,7 +5,13 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { doesGameRequireOpcode, getDefaultExtension, getQueryParamsForCommand, isSupported } from '../../../utils';
+import {
+  doesGameRequireOpcode,
+  getDefaultExtension,
+  getDefaultSyntaxKind,
+  getQueryParamsForCommand,
+  isSupported,
+} from '../../../utils';
 import {
   Attribute,
   Command,
@@ -81,7 +87,6 @@ export class CommandInfoComponent {
   @Input() viewContext: ViewContext;
   @Input() syntaxKind: SyntaxKind;
 
-
   @Output() toggleOpcodePresentation = new EventEmitter();
   @Output() switchSyntaxKind = new EventEmitter();
 
@@ -125,12 +130,16 @@ export class CommandInfoComponent {
 
   get baseHref() {
     if (this.viewContext === ViewContext.Code) {
-      return `/${this.game}/native`
+      return `/${this.game}/native`;
     }
     return `/${this.game}/script`;
   }
 
   getDefaultExtension() {
-    return getDefaultExtension(this.viewContext)
+    return getDefaultExtension(this.viewContext);
+  }
+
+  get defaultSyntaxKind(): SyntaxKind {
+    return getDefaultSyntaxKind(this.game, this.syntaxKind);
   }
 }

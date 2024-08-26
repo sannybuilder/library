@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { isSupported } from '../../../utils';
+import { hasCLEOReduxSupport, isSupported } from '../../../utils';
 import {
   Command,
   Extension,
@@ -68,5 +68,9 @@ export class CommandDeclarationComponent {
 
   lowerFirst(name: string) {
     return lowerFirst(name);
+  }
+
+  hasCLEOReduxSupport(game: Game) {
+    return hasCLEOReduxSupport(game);
   }
 }

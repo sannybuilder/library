@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import {
-  doesGameRequireOpcode,
   getDefaultExtension,
+  getDefaultSyntaxKind,
   getQueryParamsForCommand,
   isSupported,
 } from '../../../utils';
@@ -59,10 +59,6 @@ export class CommandListComponent {
     return getQueryParamsForCommand(command, game);
   }
 
-  get doesGameRequireOpcode() {
-    return doesGameRequireOpcode(this.game);
-  }
-
   isSupported(command: Command) {
     return isSupported(command.attrs);
   }
@@ -76,5 +72,9 @@ export class CommandListComponent {
 
   getDefaultExtension() {
     return getDefaultExtension(this.viewContext);
+  }
+
+  get defaultSyntaxKind(): SyntaxKind {
+    return getDefaultSyntaxKind(this.game, this.syntaxKind);
   }
 }

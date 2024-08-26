@@ -95,10 +95,10 @@ function validateFormatting(command: Command, extension: string): void {
     exitStatus = 1;
   }
 
-  if (isOpcodeRequired && trim(formatOpcode(command.id)) !== command.id) {
+  if (isOpcodeRequired && trim(formatOpcode(command.id!)) !== command.id) {
     console.error(
       `Error: command id is not properly formatted, expected ${trim(
-        formatOpcode(command.id)
+        formatOpcode(command.id!)
       )}, command: ${command.name}, extension: ${extension}`
     );
     exitStatus = 1;

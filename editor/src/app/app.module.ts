@@ -50,6 +50,7 @@ import {
   ExpressifyPipe,
   FunctionParamsPipe,
   HighlightPipe,
+  NativeParamsPipe,
 } from './pipes';
 
 // extensions state
@@ -209,6 +210,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     ExpressifyPipe,
     FunctionParamsPipe,
     HighlightPipe,
+    NativeParamsPipe,
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,

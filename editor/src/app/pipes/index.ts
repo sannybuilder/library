@@ -18,3 +18,4 @@ export { MarkdownPipe } from './markdown.pipe';
 export * from './expressify.pipe';
 export * from './function-params.pipe';
 export * from './highlight.pipe';
+export * from './native-params.pipe'

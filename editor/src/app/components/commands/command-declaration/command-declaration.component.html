@@ -73,24 +73,14 @@
 
 <ng-template #Function>
   <code>
-    function
-
-    <ng-container *ngIf="command.class && command.member"
-      ><a
-        [attr.title]="classDesc"
-        [routerLink]="['/', game, 'native', 'classes', command.class]"
-        >{{ command.class }}</a
-      >_{{ command.member }}</ng-container
-    >
-
-    <ng-container *ngIf="!command.class && command.member">{{
-      command.member
-    }}</ng-container>
-
-    <ng-container *ngIf="command.cc"
-      ><{{ command.cc }}{{ ", " + command.name }}></ng-container
-    >
-
+    function @if(command.class && command.member) {
+    <a
+      [attr.title]="classDesc"
+      [routerLink]="['/', game, 'native', 'classes', command.class]"
+      >{{ command.class }}</a
+    >_{{ command.member }}} @else {{{ command.member }}}
+    @if(command.cc){&lt;<span class="identifier">{{ command.cc }}</span
+    >{{ ", " + command.name }}&gt;}
     <span
       class="code"
       [innerHTML]="
@@ -101,7 +91,12 @@
 </ng-template>
 
 <ng-template #ScriptCommand>
-  <ng-container *ngIf="syntaxKind === 'sb_command'">
+  <ng-container
+    *ngIf="
+      syntaxKind === 'sb_command' ||
+      (syntaxKind === 'sb_class' && (!command.class || !command.member))
+    "
+  >
     <code *ngIf="isSupported(command) && !command.operator" class="mt-3">
       @if(command.output?.length) {
       <span [innerHTML]="command | outputParams | sanitize"></span>
@@ -141,13 +136,14 @@
   </ng-container>
 
   <ng-container *ngIf="syntaxKind === 'cleo_redux'">
-    <code class="mt-3" *ngIf="command.class && command.member">
+    <code class="mt-3">
       <ng-container *ngIf="command.output?.length">
         <span *ngIf="command.output.length > 1">&#123;&nbsp;</span>
         <span [innerHTML]="command | outputParams | sanitize"></span>
         <span *ngIf="command.output.length > 1">&nbsp;&#125;</span> =
       </ng-container>
 
+      @if(command.class && command.member) {
       <a
         class="identifier"
         [attr.title]="classDesc"
@@ -171,6 +167,10 @@
             | sanitize
         "
       ></span>
+      } @else { native<span
+        [innerHTML]="command | nativeParams | sanitize"
+      ></span>
+      }
     </code>
   </ng-container>
 </ng-template>

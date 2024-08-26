@@ -57,7 +57,7 @@ function loadFile(path: string) {
 }
 
 function makeLine(command: Command) {
-  let line = `{${opcodify(command.id)}:} `;
+  let line = `{${opcodify(command.id!)}:} `;
   if (command.attrs?.is_condition) {
     line += '  ';
   }

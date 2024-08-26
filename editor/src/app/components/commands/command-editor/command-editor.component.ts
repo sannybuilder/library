@@ -737,7 +737,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   get suggestedOpcodeId(): string {
-    return normalizeId(this.command.id);
+    return normalizeId(this.command.id!);
   }
 
   isParamNameDuplicate(name: string) {

@@ -186,7 +186,7 @@ export class UiEffects {
                   return displayOrEditCommandInfo({
                     extension,
                     command: {
-                      id: opcode || '',
+                      id: opcode,
                       name: commandName || '',
                       num_params: 0,
                     },

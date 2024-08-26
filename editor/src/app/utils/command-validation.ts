@@ -138,12 +138,12 @@ export function doesCommandHaveSelfInStaticMethod(command: Command) {
 }
 
 export function doesCommandHaveInvalidOpcode(command: Command) {
-  return !doesCommandHaveEmptyId(command) && !isOpcode(command.id);
+  return !doesCommandHaveEmptyId(command) && !isOpcode(command.id!);
 }
 
 export function doesCommandHaveOutOfRangeOpcode(command: Command) {
-  const hasOpcode = !doesCommandHaveEmptyId(command) && isOpcode(command.id);
-  return hasOpcode && !!HEX_NEGATION[command.id[0]];
+  const hasOpcode = !doesCommandHaveEmptyId(command) && isOpcode(command.id!);
+  return hasOpcode && !!HEX_NEGATION[command.id![0]];
 }
 
 export function doesCommandHaveMissingSelfParamInMethod(command: Command) {
@@ -254,5 +254,7 @@ export function doesOutputHaveInvalidSource(command: Command) {
 }
 
 export function doesInputHaveInvalidSource(command: Command) {
-  return inputParams(command).some((p) => isVarSource(p.source) && !command.operator);
+  return inputParams(command).some(
+    (p) => isVarSource(p.source) && !command.operator
+  );
 }

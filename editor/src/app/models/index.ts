@@ -78,7 +78,7 @@ export interface Param {
 }
 
 export interface Command {
-  id: string;
+  id?: string;
   name: string;
   attrs?: Partial<Attr>;
   num_params: number;

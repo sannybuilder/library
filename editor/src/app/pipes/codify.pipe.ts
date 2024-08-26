@@ -153,6 +153,9 @@ function opcodify(text: string, extensions: Extension[]): string {
         );
         if (command) {
           let id = command.id;
+          if (!id) {
+            return line;
+          }
           if (not) {
             id = (parseInt(id, 16) + 0x8000).toString(16).toUpperCase();
           }

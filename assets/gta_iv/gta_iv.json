@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1724360525756,
-    "version": "0.80",
+    "last_update": 1724796317354,
+    "version": "0.81",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -366,7 +366,8 @@
           "member": "AddForContact",
           "attrs": {
             "is_constructor": true
-          }
+          },
+          "short_desc": "Creates a blip that is visible when the player is not on a mission"
         },
         {
           "input": [
@@ -33939,11 +33940,11 @@
               "type": "Char"
             },
             {
-              "name": "animName0",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "animName1",
+              "name": "animName",
               "type": "string"
             },
             {
@@ -33954,7 +33955,8 @@
           "name": "SET_CHAR_ANIM_CURRENT_TIME",
           "num_params": 4,
           "class": "Char",
-          "member": "SetAnimCurrentTime"
+          "member": "SetAnimCurrentTime",
+          "short_desc": "Sets the current character animation time (from 0.0. to 1.0)"
         },
         {
           "input": [
@@ -33963,11 +33965,11 @@
               "type": "Char"
             },
             {
-              "name": "animName0",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "animName1",
+              "name": "animName",
               "type": "string"
             },
             {
@@ -33990,11 +33992,11 @@
               "type": "Char"
             },
             {
-              "name": "animName0",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "animName1",
+              "name": "animName",
               "type": "string"
             },
             {
@@ -34005,7 +34007,8 @@
           "name": "SET_CHAR_ANIM_SPEED",
           "num_params": 4,
           "class": "Char",
-          "member": "SetAnimSpeed"
+          "member": "SetAnimSpeed",
+          "short_desc": "Sets the current character animation speed. A negative speed value makes the animation reversed"
         },
         {
           "input": [
@@ -44688,56 +44691,56 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "heading",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "radius",
               "type": "float"
             },
             {
-              "name": "_p7",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p8",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p9",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
-              "name": "_p10",
+              "name": "loop",
               "type": "bool"
             },
             {
-              "name": "_p11",
+              "name": "lockX",
               "type": "bool"
             },
             {
-              "name": "_p12",
+              "name": "lockY",
               "type": "bool"
             },
             {
-              "name": "_p13",
+              "name": "keepLastFrame",
               "type": "bool"
             },
             {
-              "name": "_p14",
-              "type": "bool"
+              "name": "time",
+              "type": "int"
             }
           ],
           "name": "TASK_CHAR_SLIDE_TO_COORD_AND_PLAY_ANIM",
@@ -46739,35 +46742,35 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "loop",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "lockX",
+              "type": "bool"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "lockY",
+              "type": "bool"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "keepLastFrame",
+              "type": "bool"
             },
             {
-              "name": "_p9",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -46787,45 +46790,11 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
-              "type": "string"
-            },
-            {
-              "name": "_p4",
-              "type": "any"
-            },
-            {
-              "name": "_p5",
-              "type": "any"
-            },
-            {
-              "name": "_p6",
-              "type": "any"
-            },
-            {
-              "name": "_p7",
-              "type": "any"
-            }
-          ],
-          "name": "TASK_PLAY_ANIM_FACIAL",
-          "num_params": 7
-        },
-        {
-          "input": [
-            {
-              "name": "ped",
-              "type": "Char"
-            },
-            {
-              "name": "animname0",
-              "type": "string"
-            },
-            {
-              "name": "animname1",
+              "name": "animGroup",
               "type": "string"
             },
             {
@@ -46843,19 +46812,59 @@
             {
               "name": "_p7",
               "type": "int"
+            }
+          ],
+          "name": "TASK_PLAY_ANIM_FACIAL",
+          "num_params": 7,
+          "class": "Task",
+          "member": "PlayAnimFacial",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Makes the character perform a facial animation"
+        },
+        {
+          "input": [
+            {
+              "name": "ped",
+              "type": "Char"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "animName",
+              "type": "string"
             },
             {
-              "name": "_p9",
+              "name": "animGroup",
+              "type": "string"
+            },
+            {
+              "name": "blendSpeed",
+              "type": "float"
+            },
+            {
+              "name": "loop",
+              "type": "bool"
+            },
+            {
+              "name": "lockX",
+              "type": "bool"
+            },
+            {
+              "name": "lockY",
+              "type": "bool"
+            },
+            {
+              "name": "keepLastFrame",
+              "type": "bool"
+            },
+            {
+              "name": "time",
               "type": "int"
             }
           ],
           "name": "TASK_PLAY_ANIM_NON_INTERRUPTABLE",
           "num_params": 9,
-          "short_desc": "Makes the character perform an animation",
+          "short_desc": "Makes the character perform an animation like TASK_PLAY_ANIM, except it will not be disturbed by any events",
           "class": "Task",
           "member": "PlayAnimNonInterruptable",
           "attrs": {
@@ -46896,35 +46905,35 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "loop",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "lockX",
+              "type": "bool"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "lockY",
+              "type": "bool"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "keepLastFrame",
+              "type": "bool"
             },
             {
-              "name": "_p9",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -46944,15 +46953,15 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
@@ -46991,35 +47000,35 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "loop",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "lockX",
+              "type": "bool"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "lockY",
+              "type": "bool"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "keepLastFrame",
+              "type": "bool"
             },
             {
-              "name": "_p9",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47038,35 +47047,35 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "loop",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "lockX",
+              "type": "bool"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "lockY",
+              "type": "bool"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "keepLastFrame",
+              "type": "bool"
             },
             {
-              "name": "_p9",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47085,35 +47094,35 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "loop",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "lockX",
+              "type": "bool"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "lockY",
+              "type": "bool"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "keepLastFrame",
+              "type": "bool"
             },
             {
-              "name": "_p9",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47132,15 +47141,15 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "blendSpeed",
               "type": "float"
             },
             {
@@ -47195,7 +47204,7 @@
               "type": "string"
             },
             {
-              "name": "animSet",
+              "name": "animGroup",
               "type": "string"
             },
             {
@@ -51992,11 +52001,11 @@
               "type": "Char"
             },
             {
-              "name": "animName0",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "animName1",
+              "name": "animName",
               "type": "string"
             },
             {
@@ -52779,20 +52788,18 @@
           }
         },
         {
-          "name": "TASK_PLAY_ANIM_WITH_FLAGS_AND_START_PHASE",
-          "num_params": 7,
           "input": [
             {
               "name": "ped",
               "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "animName",
+              "type": "string"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "animGroup",
+              "type": "string"
             },
             {
               "name": "_p4",
@@ -52810,7 +52817,14 @@
               "name": "_p7",
               "type": "any"
             }
-          ]
+          ],
+          "name": "TASK_PLAY_ANIM_WITH_FLAGS_AND_START_PHASE",
+          "num_params": 7,
+          "class": "Task",
+          "member": "TaskPlayWithFlagsAndStartPhase",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "UPDATE_PLAYER_LCPD_SCORE",

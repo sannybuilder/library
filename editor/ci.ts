@@ -21,6 +21,8 @@ import { run as validateEnums } from './validate-enums';
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
 
+run(`[ -d dist/editor/assets ] || mkdir -p dist/editor/assets`);
+
 generateSupportInfo('dist/editor/assets/support-info.json');
 generateEnumsInfo('dist/editor/assets/enums-info.json');
 
@@ -93,14 +95,14 @@ games.forEach((game) => {
 });
 
 // ADD CURRENT COMMIT SHA TO INDEX.HTML
-const sha = execSync('git rev-parse HEAD').toString().trim();
-const indexHtml = 'dist/editor/index.html';
-const indexHtmlContent = readFileSync(indexHtml, 'utf-8');
-const newContent = indexHtmlContent.replace(
-  '<!-- SHA -->',
-  `<script>window.commitSha = '${sha}';</script>`
-);
-require('fs').writeFileSync(indexHtml, newContent);
+// const sha = execSync('git rev-parse HEAD').toString().trim();
+// const indexHtml = 'dist/editor/index.html';
+// const indexHtmlContent = readFileSync(indexHtml, 'utf-8');
+// const newContent = indexHtmlContent.replace(
+//   '<!-- SHA -->',
+//   `<script>window.commitSha = '${sha}';</script>`
+// );
+// require('fs').writeFileSync(indexHtml, newContent);
 
 function assetsDir(game: string) {
   return join('dist', 'editor', 'assets', game);

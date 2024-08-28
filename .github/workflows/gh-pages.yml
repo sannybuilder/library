@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,20 +17,54 @@ jobs:
         with:
           node-version: lts/*
 
-      - uses: dtolnay/rust-toolchain@stable
-
-      - name: Build gh-pages
+      - name: Build Angular
         run: |
           cd editor
           npm install
-
           npm run build
           cp src/404.html dist/editor
-          npm run ci
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: editor/dist/editor
+          retention-days: 1
+
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Generate and Validate
+        run: |
+          cd editor
+          bun ci.ts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: assets
+          path: editor/dist/editor
+          retention-days: 1
+
+  deploy:
+    needs: [build, check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: 
+          merge-multiple: true
 
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./editor/dist/editor
+          publish_dir: ./
           cname: library.sannybuilder.com

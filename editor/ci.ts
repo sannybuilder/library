@@ -11,11 +11,19 @@ const { join } = require('path');
 const { readFileSync } = require('fs');
 const { execSync } = require('child_process');
 
+import { run as generateEnumsInfo } from './generate-enums-info';
+import { run as generateEnums } from './generate-enums';
+import { run as generateOpcodeExamples } from './generate-opcode-examples';
+import { run as generateSupportInfo } from './generate-support-info';
+import { run as validateCommands } from './validate-commands';
+import { run as validateEnums } from './validate-enums';
+
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
 
-run('npm run generate:support-info dist/editor/assets/support-info.json');
-run('npm run generate:enums-info dist/editor/assets/enums-info.json');
+generateSupportInfo('dist/editor/assets/support-info.json');
+generateEnumsInfo('dist/editor/assets/enums-info.json');
+
 run(`cargo build`, '../generator');
 
 // GENERATE DATA FILES
@@ -25,23 +33,17 @@ games.forEach((game) => {
   const nativeJson = join('../', game, `native.json`);
   const enumsJson = join('../', game, `enums.json`);
 
-  [
-    `npm run validate:commands ${gameJson} ${game}`,
-    `npm run validate:enums ${enumsJson} ${game}`,
-    `[ -d ${assets} ] || mkdir ${assets}`,
+  validateCommands(gameJson, game);
+  validateEnums(enumsJson, game);
+  run(`[ -d ${assets} ] || mkdir ${assets}`);
+  generateEnums(enumsJson, join(assets, 'enums.js'));
 
-    `npm run generate:enums ${enumsJson} ${join(assets, 'enums.js')}`,
-    `cp ${gameJson} ${assets}`,
-    `cp ${enumsJson} ${assets}`,
-  ].forEach((x) => run(x));
+  [`cp ${gameJson} ${assets}`, `cp ${enumsJson} ${assets}`].forEach((x) =>
+    run(x)
+  );
 
   if (doesGameRequireOpcode(game)) {
-    run(
-      `npm run generate:opcode-examples ${gameJson} ${join(
-        assets,
-        'opcodes.txt'
-      )}`
-    );
+    generateOpcodeExamples(gameJson, join(assets, 'opcodes.txt'));
   }
 
   try {

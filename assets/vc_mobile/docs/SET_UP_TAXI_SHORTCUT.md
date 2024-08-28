@@ -1,0 +1,1 @@
+This command sets up both the pick-up and drop-off points of the taxi shortcut. A marked Kaufman Cabs is immediately spawned at the pick-up point. The rest of the behavior of the taxi shortcut is equivalent to SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION. An active taxi shortcut can be cleared without riding it by calling CLEAR_TAXI_SHORTCUT or by setting up another taxi shortcut.

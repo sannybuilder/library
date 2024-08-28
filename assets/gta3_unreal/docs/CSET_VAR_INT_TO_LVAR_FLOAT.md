@@ -1,0 +1,1 @@
+This command truncates a floating-point value of the local variable and stores its integral part into the global variable. For example, converting a value of `4.1` or `4.9` both produces `4` as a result.

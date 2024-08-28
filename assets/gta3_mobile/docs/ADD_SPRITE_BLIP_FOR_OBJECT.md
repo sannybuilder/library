@@ -1,0 +1,1 @@
+This command adds a sprite blip in the radar denoting the location of the object and a marker above the object. Both the blip and marker can be removed using REMOVE_BLIP. This command was never called in the original script of GTA III.

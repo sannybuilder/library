@@ -1,0 +1,1 @@
+This command returns a handle of the character driving the vehicle. It is important to validate the vehicle handle before using it, otherwise, the game may crash. If the vehicle has no driver, the result will be `-1`.

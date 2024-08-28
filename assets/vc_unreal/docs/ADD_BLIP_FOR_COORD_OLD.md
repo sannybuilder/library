@@ -1,0 +1,1 @@
+This command adds a square blip in the radar to the coordinates point. It is almost equivalent to ADD_BLIP_FOR_COORD but without preset properties and, likewise, a marker cannot be displayed for this blip. The default scale of the blip is `1`. In Vice City, the color of the blip is always set to 5 (purple) regardless of what color you set so the color parameter is useless.

@@ -1,0 +1,2808 @@
+{
+  "meta": {
+    "last_update": 1722575309383,
+    "version": "0.238",
+    "url": "https://library.sannybuilder.com/#/unknown_x64"
+  },
+  "extensions": [
+    {
+      "name": "dylib",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "libraryFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DynamicLibrary",
+              "source": "var_any"
+            }
+          ],
+          "name": "LOAD_DYNAMIC_LIBRARY",
+          "num_params": 2,
+          "short_desc": "Loads the specified module (usually a dynamic-link library (DLL)) into the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "name": "FREE_DYNAMIC_LIBRARY",
+          "num_params": 1,
+          "short_desc": "Frees the loaded dynamic-link library (DLL) module and unloads it from the address space of the game",
+          "class": "DynamicLibrary",
+          "member": "Free",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "procName",
+              "type": "string"
+            },
+            {
+              "name": "self",
+              "type": "DynamicLibrary"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_DYNAMIC_LIBRARY_PROCEDURE",
+          "num_params": 3,
+          "short_desc": "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL)",
+          "class": "DynamicLibrary",
+          "member": "GetProcedure",
+          "attrs": {
+            "is_condition": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "imgui",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            }
+          ],
+          "id": "2251",
+          "name": "IMGUI_SET_COLUMN_WIDTH",
+          "num_params": 2,
+          "class": "ImGui",
+          "member": "SetColumnWidth",
+          "short_desc": "Sets the width of the column",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            },
+            {
+              "name": "border",
+              "type": "bool"
+            },
+            {
+              "name": "flags",
+              "type": "int"
+            }
+          ],
+          "id": "2252",
+          "name": "IMGUI_BEGIN_CHILDEX",
+          "num_params": 5,
+          "class": "ImGui",
+          "member": "BeginChildEx",
+          "short_desc": "Creates a child window widget inside the main window",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "disabled",
+              "type": "bool"
+            }
+          ],
+          "id": "2253",
+          "name": "IMGUI_BEGIN_DISABLED",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "BeginDisabled",
+          "short_desc": "Disables ImGui widgets inside this block",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "id": "2254",
+          "name": "IMGUI_END_DISABLED",
+          "num_params": 0,
+          "class": "ImGui",
+          "member": "EndDisabled",
+          "short_desc": "Closes the ImGui disable block",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "enabled",
+              "type": "bool"
+            }
+          ],
+          "id": "2255",
+          "name": "IMGUI_BEGIN_MENU",
+          "num_params": 2,
+          "class": "ImGui",
+          "member": "BeginMenu",
+          "short_desc": "Begins a ImGui menu block",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "id": "2256",
+          "name": "IMGUI_END_MENU",
+          "num_params": 0,
+          "class": "ImGui",
+          "member": "EndMenu",
+          "short_desc": "Ends a ImGui menu block",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END",
+          "num_params": 0,
+          "class": "ImGui",
+          "member": "End",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Ends the window"
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "isChecked",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_CHECKBOX",
+          "num_params": 3,
+          "short_desc": "Creates the checkbox",
+          "class": "ImGui",
+          "member": "Checkbox",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonName",
+              "type": "string"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_BUTTON",
+          "num_params": 3,
+          "short_desc": "Creates the button",
+          "class": "ImGui",
+          "member": "Button",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonName",
+              "type": "string"
+            },
+            {
+              "name": "red",
+              "type": "float"
+            },
+            {
+              "name": "green",
+              "type": "float"
+            },
+            {
+              "name": "blue",
+              "type": "float"
+            },
+            {
+              "name": "alpha",
+              "type": "float"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_COLOR_BUTTON",
+          "num_params": 7,
+          "short_desc": "Creates the button with custom colors",
+          "class": "ImGui",
+          "member": "ButtonColored",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "buttonName",
+              "type": "string"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_INVISIBLE_BUTTON",
+          "num_params": 3,
+          "short_desc": "Creates the invisible button",
+          "class": "ImGui",
+          "member": "ButtonInvisible",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_WINDOW_POS",
+          "num_params": 3,
+          "short_desc": "Sets the current window position. Must be called inside Begin()...End()",
+          "class": "ImGui",
+          "member": "SetWindowPos",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_WINDOW_SIZE",
+          "num_params": 3,
+          "short_desc": "Sets the current window size. Must be called inside Begin()...End()",
+          "class": "ImGui",
+          "member": "SetWindowSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_NEXT_WINDOW_POS",
+          "num_params": 3,
+          "short_desc": "Sets the current window position. Applies to the next window ( aka Begin() )",
+          "class": "ImGui",
+          "member": "SetNextWindowPos",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            },
+            {
+              "name": "imGuiCond",
+              "type": "ImGuiCond"
+            }
+          ],
+          "name": "IMGUI_SET_NEXT_WINDOW_SIZE",
+          "num_params": 3,
+          "short_desc": "Sets the current window size. Applies to the next window ( aka Begin() )",
+          "class": "ImGui",
+          "member": "SetNextWindowSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_DUMMY",
+          "num_params": 2,
+          "short_desc": "Creates the dummy widget. Used for spacing",
+          "class": "ImGui",
+          "member": "Dummy",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_TEXT",
+          "num_params": 1,
+          "short_desc": "Creates the text line",
+          "class": "ImGui",
+          "member": "Text",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_TEXT_DISABLED",
+          "num_params": 1,
+          "short_desc": "Creates the text line with the disabled color ( Grayish by default )",
+          "class": "ImGui",
+          "member": "TextDisabled",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_TEXT_WRAPPED",
+          "num_params": 1,
+          "short_desc": "Creates the text line that wraps to a newline if the text goes beyond the window width",
+          "class": "ImGui",
+          "member": "TextWrapped",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "red",
+              "type": "float"
+            },
+            {
+              "name": "green",
+              "type": "float"
+            },
+            {
+              "name": "blue",
+              "type": "float"
+            },
+            {
+              "name": "alpha",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_TEXT_COLORED",
+          "num_params": 5,
+          "short_desc": "Creates the text line of the given RGBA color (0.0f-1.0f)",
+          "class": "ImGui",
+          "member": "TextColored",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_BULLET_TEXT",
+          "num_params": 1,
+          "short_desc": "Creates the text line with a bullet point",
+          "class": "ImGui",
+          "member": "TextWithBullet",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_SET_TOOLTIP",
+          "num_params": 1,
+          "short_desc": "Creates the popup window with the given text",
+          "class": "ImGui",
+          "member": "SetTooltip",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_SAMELINE",
+          "num_params": 0,
+          "short_desc": "Appends the next widget to the same line as the previous widget",
+          "class": "ImGui",
+          "member": "SameLine",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_NEWLINE",
+          "num_params": 0,
+          "short_desc": "Creates a new line for the next widget",
+          "class": "ImGui",
+          "member": "NewLine",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_SPACING",
+          "num_params": 0,
+          "short_desc": "Adds some spacing after the previous widget",
+          "class": "ImGui",
+          "member": "Spacing",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_SEPARATOR",
+          "num_params": 0,
+          "short_desc": "Adds a horizontal separator line",
+          "class": "ImGui",
+          "member": "Separator",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_NEXT_COLUMN",
+          "num_params": 0,
+          "short_desc": "Puts the next widgets on the next column. Used alongside 0C16",
+          "class": "ImGui",
+          "member": "NextColumn",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "count",
+              "type": "int"
+            }
+          ],
+          "name": "IMGUI_COLUMNS",
+          "num_params": 1,
+          "short_desc": "Divides the window width into N columns. Close this with Columns(1)",
+          "class": "ImGui",
+          "member": "Columns",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "fps",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_FRAMERATE",
+          "num_params": 1,
+          "short_desc": "Returns game FPS",
+          "class": "Game",
+          "member": "GetFramerate",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "version",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_VERSION",
+          "num_params": 1,
+          "short_desc": "Returns the ImGui version",
+          "class": "ImGui",
+          "member": "GetVersion",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "version",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_PLUGIN_VERSION",
+          "num_params": 1,
+          "short_desc": "Returns the ImGuiRedux version",
+          "class": "ImGui",
+          "member": "GetPluginVersion",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "show",
+              "type": "bool"
+            }
+          ],
+          "name": "IMGUI_SET_CURSOR_VISIBLE",
+          "num_params": 1,
+          "short_desc": "Toggles the cursor",
+          "class": "ImGui",
+          "member": "SetCursorVisible",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_DISPLAY_SIZE",
+          "num_params": 2,
+          "class": "ImGui",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetDisplaySize",
+          "short_desc": "Returns the width & height of the display"
+        },
+        {
+          "output": [
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_FRAME_HEIGHT",
+          "num_params": 1,
+          "short_desc": "Returns the ImGui frame height",
+          "class": "ImGui",
+          "member": "GetFrameHeight",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_WINDOW_POS",
+          "num_params": 3,
+          "short_desc": "Returns the x,y coordinates of the window on the screen",
+          "class": "ImGui",
+          "member": "GetWindowPos",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_WINDOW_SIZE",
+          "num_params": 3,
+          "short_desc": "Returns the width and height of the window",
+          "class": "ImGui",
+          "member": "GetWindowSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_CALC_TEXT_SIZE",
+          "num_params": 3,
+          "short_desc": "Returns the width and height of the given text",
+          "class": "ImGui",
+          "member": "CalcTextSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "width",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_WINDOW_CONTENT_REGION_WIDTH",
+          "num_params": 2,
+          "short_desc": "Returns the content region width of the window",
+          "class": "ImGui",
+          "member": "GetWindowContentRegionWidth",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_BEGIN_MAINMENUBAR",
+          "num_params": 1,
+          "short_desc": "Creates the main menu bar",
+          "class": "ImGui",
+          "member": "BeginMainMenuBar",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END_MAINMENUBAR",
+          "num_params": 0,
+          "short_desc": "Ends the main menu bar",
+          "class": "ImGui",
+          "member": "EndMainMenuBar",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "selected",
+              "type": "bool"
+            },
+            {
+              "name": "enabled",
+              "type": "bool"
+            }
+          ],
+          "name": "IMGUI_MENU_ITEM",
+          "num_params": 3,
+          "short_desc": "Adds the menu item",
+          "class": "ImGui",
+          "member": "MenuItem",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "selected",
+              "type": "bool"
+            }
+          ],
+          "name": "IMGUI_SELECTABLE",
+          "num_params": 2,
+          "short_desc": "Adds the selectable widget",
+          "class": "ImGui",
+          "member": "Selectable",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_BEGIN_CHILD",
+          "num_params": 1,
+          "short_desc": "Creates a child window widget inside the main window",
+          "class": "ImGui",
+          "member": "BeginChild",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END_CHILD",
+          "num_params": 0,
+          "short_desc": "Ends the child window widget created with 0C25",
+          "class": "ImGui",
+          "member": "EndChild",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "width",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_PUSH_ITEM_WIDTH",
+          "num_params": 1,
+          "short_desc": "Sets the item width for the next widgets",
+          "class": "ImGui",
+          "member": "PushItemWidth",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_POP_ITEM_WIDTH",
+          "num_params": 0,
+          "short_desc": "Removes the pushed item width (0C27) from the stack",
+          "class": "ImGui",
+          "member": "PopItemWidth",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_COLLAPSING_HEADER",
+          "num_params": 1,
+          "short_desc": "Adds the collapsing header",
+          "class": "ImGui",
+          "member": "CollapsingHeader",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "int"
+            },
+            {
+              "name": "min",
+              "type": "int"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_SLIDER_INT",
+          "num_params": 5,
+          "short_desc": "Creates the int slider input",
+          "class": "ImGui",
+          "member": "SliderInt",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "float"
+            },
+            {
+              "name": "min",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_SLIDER_FLOAT",
+          "num_params": 5,
+          "short_desc": "Creates the float slider input",
+          "class": "ImGui",
+          "member": "SliderFloat",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "float"
+            },
+            {
+              "name": "min",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_INPUT_FLOAT",
+          "num_params": 5,
+          "short_desc": "Creates the float input",
+          "class": "ImGui",
+          "member": "InputFloat",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "initValue",
+              "type": "int"
+            },
+            {
+              "name": "min",
+              "type": "int"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_INPUT_INT",
+          "num_params": 5,
+          "short_desc": "Creates the int input",
+          "class": "ImGui",
+          "member": "InputInt",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_INPUT_TEXT",
+          "num_params": 2,
+          "short_desc": "Creates the text input",
+          "class": "ImGui",
+          "member": "InputText",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "selectedBtn",
+              "type": "int"
+            },
+            {
+              "name": "btnNo",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "val",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_RADIO_BUTTON",
+          "num_params": 4,
+          "short_desc": "Creates the radio button",
+          "class": "ImGui",
+          "member": "RadioButton",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "label",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "red",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "green",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "blue",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "alpha",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_COLOR_PICKER",
+          "num_params": 5,
+          "short_desc": "Creates the color picker and sets the default color (0-255)",
+          "class": "ImGui",
+          "member": "ColorPicker",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_BEGIN_FRAME",
+          "num_params": 1,
+          "short_desc": "Creates a unique frame with its own space in memory. End it with 0C32. MUST BE UNIQUE!",
+          "class": "ImGui",
+          "member": "BeginFrame",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "name": "IMGUI_END_FRAME",
+          "num_params": 0,
+          "short_desc": "Ends unique ImGui frame",
+          "class": "ImGui",
+          "member": "EndFrame",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_ACTIVE",
+          "num_params": 1,
+          "short_desc": "Returns true if the previous widget is in active state",
+          "class": "ImGui",
+          "member": "IsItemActive",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_CLICKED",
+          "num_params": 1,
+          "short_desc": "Returns true if the previous widget is clicked",
+          "class": "ImGui",
+          "member": "IsItemClicked",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_FOCUSED",
+          "num_params": 1,
+          "short_desc": "Returns true if the previous widget is focused",
+          "class": "ImGui",
+          "member": "IsItemFocused",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_IS_ITEM_HOVERED",
+          "num_params": 1,
+          "short_desc": "Returns true if the previous widget is hovered with mouse",
+          "class": "ImGui",
+          "member": "IsItemHovered",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "uniqueId",
+              "type": "string"
+            },
+            {
+              "name": "count",
+              "type": "int"
+            },
+            {
+              "name": "spacing",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_SCALING_SIZE",
+          "num_params": 5,
+          "short_desc": "Returns the width and height scaling factor based on the window size",
+          "class": "ImGui",
+          "member": "GetScalingSize",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "alpha",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_SET_NEXT_WINDOW_TRANSPARENCY",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "SetNextWindowTransparency",
+          "short_desc": "Sets the background transparency of next window (0.0f-1.0f)",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_SET_MESSAGE",
+          "num_params": 1,
+          "class": "ImGui",
+          "short_desc": "Displays a text message on top left corner of the screen. Useful for games without `showTextBox(...)` support",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SetMessage"
+        },
+        {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "imGuiDir",
+              "type": "ImGuiDir"
+            }
+          ],
+          "name": "IMGUI_ARROW_BUTTON",
+          "num_params": 2,
+          "class": "ImGui",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "short_desc": "Creates the arrow button in the specified direction",
+          "member": "ButtonArrow"
+        },
+        {
+          "name": "IMGUI_BULLET",
+          "num_params": 0,
+          "class": "ImGui",
+          "short_desc": "Creates a bullet point",
+          "member": "Bullet",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "options",
+              "type": "string"
+            },
+            {
+              "name": "selection",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "selected",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_COMBO",
+          "num_params": 4,
+          "class": "ImGui",
+          "member": "ComboBox",
+          "short_desc": "Creates a combo box widget. Pass options separated by commas \"item1,item2,item3\"",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "image",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_IMAGE_BUTTON",
+          "num_params": 4,
+          "class": "ImGui",
+          "member": "ButtonImage",
+          "short_desc": "Creates a ImGui button with specified image",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "image",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_LOAD_IMAGE",
+          "num_params": 2,
+          "class": "ImGui",
+          "member": "LoadImage",
+          "short_desc": "Loads a image file from disk. Relative to CLEO directory",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "image",
+              "type": "int"
+            }
+          ],
+          "name": "IMGUI_FREE_IMAGE",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "FreeImage",
+          "short_desc": "Frees a loaded image data",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_TEXT_CENTERED",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "TextCentered",
+          "short_desc": "Displays a center aligned ImGui text widget",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "imGuiStyleVar",
+              "type": "ImGuiStyleVar"
+            },
+            {
+              "name": "val",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_PUSH_STYLE_VAR",
+          "num_params": 2,
+          "class": "ImGui",
+          "member": "PushStyleVar",
+          "short_desc": "Pushes a ImGuiStyleVar value to the stack. Use PopStyleVar to undo the effect",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "imGuiStyleVar",
+              "type": "ImGuiStyleVar"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_PUSH_STYLE_VAR2",
+          "num_params": 3,
+          "class": "ImGui",
+          "member": "PushStyleVar2",
+          "short_desc": "Pushes a ImGuiStyleVar value to the stack. Use PopStyleVar to undo the effect",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "imGuiCol",
+              "type": "ImGuiCol"
+            },
+            {
+              "name": "r",
+              "type": "int"
+            },
+            {
+              "name": "g",
+              "type": "int"
+            },
+            {
+              "name": "b",
+              "type": "int"
+            },
+            {
+              "name": "a",
+              "type": "int"
+            }
+          ],
+          "name": "IMGUI_PUSH_STYLE_COLOR",
+          "num_params": 5,
+          "class": "ImGui",
+          "member": "PushStyleColor",
+          "short_desc": "Pushes a ImGuiCol value to the stack. Use PopStyleColor to undo the effect",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "count",
+              "type": "int"
+            }
+          ],
+          "name": "IMGUI_POP_STYLE_VAR",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "PopStyleVar",
+          "short_desc": "Removes the recent imGuiStyleVar from the stack",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "count",
+              "type": "int"
+            }
+          ],
+          "name": "IMGUI_POP_STYLE_COLOR",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "PopStyleColor",
+          "short_desc": "Removes the recent ImGuiCol from the stack",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "tabNames",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "index",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_TABS",
+          "num_params": 3,
+          "class": "ImGui",
+          "member": "Tabs",
+          "short_desc": "Pass tab names separated by comma. Returns the index of the visible tab",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "r",
+              "type": "float"
+            },
+            {
+              "name": "g",
+              "type": "float"
+            },
+            {
+              "name": "b",
+              "type": "float"
+            },
+            {
+              "name": "a",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_SET_IMAGE_BG_COLOR",
+          "num_params": 4,
+          "class": "ImGui",
+          "member": "SetImageBgColor",
+          "short_desc": "Sets image background color",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "r",
+              "type": "float"
+            },
+            {
+              "name": "g",
+              "type": "float"
+            },
+            {
+              "name": "b",
+              "type": "float"
+            },
+            {
+              "name": "a",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_SET_IMAGE_TINT_COLOR",
+          "num_params": 4,
+          "class": "ImGui",
+          "member": "SetImageTintColor",
+          "short_desc": "Sets image tint color",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "drawList",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_FOREGROUND_DRAWLIST",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "GetForegroundDrawList",
+          "short_desc": "Returns pointer to foreground draw list",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "drawList",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_BACKGROUND_DRAWLIST",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "GetBackgroundDrawList",
+          "short_desc": "Returns pointer to ImGui background drawlist",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "drawList",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_GET_WINDOW_DRAWLIST",
+          "num_params": 1,
+          "class": "ImGui",
+          "member": "GetWindowDrawlist",
+          "short_desc": "Returns pointer to ImGui window drawList",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "drawList",
+              "type": "int"
+            },
+            {
+              "name": "posX",
+              "type": "float"
+            },
+            {
+              "name": "posY",
+              "type": "float"
+            },
+            {
+              "name": "r",
+              "type": "int"
+            },
+            {
+              "name": "g",
+              "type": "int"
+            },
+            {
+              "name": "b",
+              "type": "int"
+            },
+            {
+              "name": "a",
+              "type": "int"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_DRAWLIST_ADD_TEXT",
+          "num_params": 8,
+          "class": "ImGui",
+          "member": "AddText",
+          "short_desc": "Adds text at specified position",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "drawList",
+              "type": "int"
+            },
+            {
+              "name": "p1X",
+              "type": "float"
+            },
+            {
+              "name": "p1Y",
+              "type": "float"
+            },
+            {
+              "name": "p2X",
+              "type": "float"
+            },
+            {
+              "name": "p2Y",
+              "type": "float"
+            },
+            {
+              "name": "r",
+              "type": "int"
+            },
+            {
+              "name": "g",
+              "type": "int"
+            },
+            {
+              "name": "b",
+              "type": "int"
+            },
+            {
+              "name": "a",
+              "type": "int"
+            },
+            {
+              "name": "thickness",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_DRAWLIST_ADD_LINE",
+          "num_params": 10,
+          "class": "ImGui",
+          "member": "AddLine",
+          "short_desc": "Adds a line form point A to B",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "val",
+              "type": "int"
+            }
+          ],
+          "name": "IMGUI_SET_ITEM_INT",
+          "num_params": 2,
+          "class": "ImGui",
+          "member": "SetItemValueInt",
+          "short_desc": "Sets the value of input int & slider int widget",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "val",
+              "type": "float"
+            }
+          ],
+          "name": "IMGUI_SET_ITEM_FLOAT",
+          "num_params": 2,
+          "short_desc": "Sets the value of input float & slider float widget",
+          "class": "ImGui",
+          "member": "SetItemValueFloat",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "val",
+              "type": "string"
+            }
+          ],
+          "name": "IMGUI_SET_ITEM_TEXT",
+          "num_params": 2,
+          "short_desc": "Sets value of input text widget",
+          "class": "ImGui",
+          "member": "SetItemValueText",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "windowName",
+              "type": "string"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            },
+            {
+              "name": "noTitleBar",
+              "type": "bool"
+            },
+            {
+              "name": "noResize",
+              "type": "bool"
+            },
+            {
+              "name": "noMove",
+              "type": "bool"
+            },
+            {
+              "name": "autoResize",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "IMGUI_BEGIN",
+          "num_params": 7,
+          "short_desc": "Creates the window",
+          "class": "ImGui",
+          "member": "Begin",
+          "attrs": {
+            "is_static": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "ini",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "READ_INT_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadInt",
+          "short_desc": "Reads an integer value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "int"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "name": "WRITE_INT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteInt",
+          "short_desc": "Writes the integer value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "READ_FLOAT_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadFloat",
+          "short_desc": "Reads a floating-point value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "float"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "name": "WRITE_FLOAT_TO_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "WriteFloat",
+          "short_desc": "Writes the floating-point value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "name": "READ_STRING_FROM_INI_FILE",
+          "num_params": 4,
+          "class": "IniFile",
+          "member": "ReadString",
+          "short_desc": "Reads a string value from the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "value",
+              "type": "string"
+            },
+            {
+              "name": "path",
+              "type": "string"
+            },
+            {
+              "name": "section",
+              "type": "string"
+            },
+            {
+              "name": "key",
+              "type": "string"
+            }
+          ],
+          "name": "WRITE_STRING_TO_INI_FILE",
+          "num_params": 4,
+          "short_desc": "Writes the string value to the ini file",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "class": "IniFile",
+          "member": "WriteString"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "commands": [
+        {
+          "output": [
+            {
+              "name": "x",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_CURSOR_POS",
+          "num_params": 2,
+          "class": "Mouse",
+          "member": "GetCursorPos",
+          "short_desc": "Returns the position of the mouse cursor",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "int"
+            },
+            {
+              "name": "y",
+              "type": "int"
+            }
+          ],
+          "name": "SET_CURSOR_POS",
+          "num_params": 2,
+          "class": "Mouse",
+          "member": "SetCursorPos",
+          "short_desc": "Sets the position of the mouse cursor",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "name": "IS_KEY_DOWN",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyDown",
+          "short_desc": "Returns true if a keyboard or mouse button has just been pressed",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "name": "IS_KEY_UP",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyUp",
+          "short_desc": "Returns true if a keyboard or mouse button has just been released",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "output": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_LAST_KEY",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "GetLastKey",
+          "short_desc": "Returns the code of the last pressed button",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "input",
+              "type": "string"
+            }
+          ],
+          "name": "TEST_CHEAT",
+          "num_params": 1,
+          "class": "Pad",
+          "short_desc": "Returns true if the specified sequence of alphanumeric characters has just been typed on the keyboard",
+          "member": "TestCheat",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "short_desc": "Returns true if a keyboard or mouse button is being pressed",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "name": "HOLD_KEY",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "HoldKey",
+          "short_desc": "Holds down a keyboard or mouse button until it gets released with RELEASE_KEY",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "name": "RELEASE_KEY",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "ReleaseKey",
+          "short_desc": "Releases a keyboard or mouse button after HOLD_KEY",
+          "attrs": {
+            "is_static": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "memops",
+      "commands": [
+        {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_IMAGE_BASE",
+          "num_params": 1,
+          "class": "Memory",
+          "member": "GetImageBase",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns the address of the main exe module"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "READ_RELATIVE_OFFSET",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "ReadRelativeOffset",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Reads a 32-bit value referenced by a relative offset at the address"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "nearAddress",
+              "type": "int"
+            }
+          ],
+          "name": "WRITE_RELATIVE_OFFSET",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "WriteRelativeOffset",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Replaces an offset at the address with the offset to the near address (use ALLOC_NEAR)"
+        },
+        {
+          "input": [
+            {
+              "name": "pattern",
+              "type": "string"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "FIND_PATTERN",
+          "num_params": 3,
+          "class": "Memory",
+          "member": "FindPattern",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "short_desc": "Returns an address of a memory chunk with the given index in a list of matches for the pattern"
+        },
+        {
+          "input": [
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "nearAddress",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "ALLOC_NEAR",
+          "num_params": 2,
+          "class": "Memory",
+          "member": "AllocNear",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Allocates a chunk of memory of the given size near to the memory page of the main exe module"
+        }
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "name": "Attractor",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Audio",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "AudioStream",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "AudioStream3D",
+      "constructable": true,
+      "extends": "AudioStream",
+      "desc": ""
+    },
+    {
+      "name": "Blip",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Boat",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Camera",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Car",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "CarGenerator",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "CardDecks",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Char",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Checkpoint",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Clipboard",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Clock",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Conversation",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Crane",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Credits",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Cutscene",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Debugger",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "DecisionMaker",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "DecisionMakerChar",
+      "constructable": true,
+      "extends": "DecisionMaker",
+      "desc": ""
+    },
+    {
+      "name": "DecisionMakerGroup",
+      "constructable": true,
+      "extends": "DecisionMaker",
+      "desc": ""
+    },
+    {
+      "name": "DynamicLibrary",
+      "constructable": true,
+      "desc": "Loading DLL files and finding exported functions"
+    },
+    {
+      "name": "File",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "FindFile",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Fs",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Fx",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Game",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Gang",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Garage",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Group",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Heli",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Hid",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Hud",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "ImGui",
+      "constructable": false,
+      "desc": "ImGui integration"
+    },
+    {
+      "name": "IniFile",
+      "constructable": false,
+      "desc": "Reading and writing .ini files"
+    },
+    {
+      "name": "KillFrenzy",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Math",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Memory",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Menu",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "MenuGrid",
+      "constructable": true,
+      "extends": "Menu",
+      "desc": ""
+    },
+    {
+      "name": "Mission",
+      "constructable": false,
+      "desc": "Current Mission control"
+    },
+    {
+      "name": "Mouse",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Object",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Pad",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Particle",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Path",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Pickup",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Plane",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Player",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Rc",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Restart",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "ScriptFire",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Searchlight",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Sequence",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Shopping",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Skip",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Sound",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Sphere",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Stat",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "StreamedScript",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Streaming",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "StuckCarCheck",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Task",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Text",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Trailer",
+      "constructable": true,
+      "extends": "Car",
+      "desc": ""
+    },
+    {
+      "name": "Train",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Txd",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "User3DMarker",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "Weapon",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Weather",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Widget",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "World",
+      "constructable": false,
+      "desc": ""
+    },
+    {
+      "name": "Zone",
+      "constructable": false,
+      "desc": ""
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+This command writes a value at the memory address. The address must be an absolute memory address. If the address is not writable by default (e.g. inside a code section), use virtual_protect `1`.
+
+A `size` can be any positive number. Sizes `1`, `2`, and `4` write one byte, two bytes, or four bytes of `value` respectively. Other sizes act as a number of contiguous writes of the same value. For example, size `6` writes `value` six times, starting from the `address`. It can be used to fill a memory region with a value. A common use case is to NOP out some code instructions by overwriting them with `0x90` (NOP) `size` times.

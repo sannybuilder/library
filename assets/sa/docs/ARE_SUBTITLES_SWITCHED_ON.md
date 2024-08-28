@@ -1,0 +1,1 @@
+This conditional command returns true if the subtitles menu option is switched on.

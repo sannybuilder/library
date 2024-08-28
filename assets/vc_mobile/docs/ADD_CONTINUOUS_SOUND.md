@@ -1,0 +1,1 @@
+This command adds a continuous looping sound effect at the coordinates point. The sound index does not match the SFX table; it is based on a list hardcoded within the game. Sounds can be stopped by calling REMOVE_SOUND.

@@ -31,7 +31,7 @@ import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
 export function run(inputFile: string, game: Game) {
   console.log(`Validating commands in ${inputFile}`);
-  
+
   const { readFileSync } = require('fs');
   const file = readFileSync(inputFile);
   const content: LoadExtensionsResponse = JSON.parse(file);
@@ -87,7 +87,9 @@ export function run(inputFile: string, game: Game) {
     });
   });
 
-  process.exit(exitStatus);
+  if (exitStatus) {
+    process.exit(exitStatus);
+  }
 
   function validateFormatting(command: Command, extension: string): void {
     if (trim(commandNameFormatter(command.name)) !== command.name) {

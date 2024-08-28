@@ -20,7 +20,7 @@ import {
 
 export function run(inputFile: string, game: Game) {
   console.log(`Validating enums in ${inputFile}`);
-  
+
   const { join } = require('path');
   const { readFileSync } = require('fs');
   const file = readFileSync(inputFile);
@@ -76,7 +76,9 @@ export function run(inputFile: string, game: Game) {
     validateEnumNameDuplicate(enumName);
   });
 
-  process.exit(exitStatus);
+  if (exitStatus) {
+    process.exit(exitStatus);
+  }
 
   function validateEnumName(name: string) {
     if (capitalizeFirst(trim(name)) !== name) {

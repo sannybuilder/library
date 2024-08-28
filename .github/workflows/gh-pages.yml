@@ -3,10 +3,10 @@ name: gh-pages
 on:
   push:
     branches:
-      - master
+      - ci
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,17 +17,32 @@ jobs:
         with:
           node-version: lts/*
 
-      - uses: dtolnay/rust-toolchain@stable
-
-      - name: Build gh-pages
+      - name: Build Angular
         run: |
           cd editor
           npm install
-
           npm run build
           cp src/404.html dist/editor
-          npm run ci
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Generate and Validate
+        run: bun ci.ts
+
+  deploy:
+    needs: [build, check]
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:

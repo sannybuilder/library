@@ -1,11 +1,5 @@
 import { doesGameRequireOpcode, getBaseGame } from './src/app/utils';
-import {
-  Game,
-  GameClassesAssets,
-  GameEnumsAssets,
-  GameNativeAssets,
-  GameSnippets,
-} from './src/app/models';
+import { Game } from './src/app/models';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -26,13 +20,10 @@ run(`[ -d dist/editor/assets ] || mkdir -p dist/editor/assets`);
 generateSupportInfo('dist/editor/assets/support-info.json');
 generateEnumsInfo('dist/editor/assets/enums-info.json');
 
-run(`cargo build`, '../generator');
-
 // GENERATE DATA FILES
 games.forEach((game) => {
   const assets = assetsDir(game);
   const gameJson = join('../', game, `${game}.json`);
-  const nativeJson = join('../', game, `native.json`);
   const enumsJson = join('../', game, `enums.json`);
 
   validateCommands(gameJson, game);
@@ -76,22 +67,6 @@ games.forEach((game) => {
     // overwrite shared docs with game specific docs
     run(`cp ../${game}/docs ${assets} -r`);
   } catch {}
-
-  let dest = assetsDirCargo(game);
-
-  if (GameEnumsAssets[game]) {
-    cargo(`enums ${enumsJson} > ${join(dest, 'enums.txt')}`);
-  }
-  if (GameClassesAssets[game]) {
-    cargo(`classes ${gameJson} ${game} > ${join(dest, 'classes.db')}`);
-  }
-  if (GameSnippets[game].includes(game)) {
-    const srcDir = join('..', game, 'snippets');
-    cargo(`snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
-  }
-  if (GameNativeAssets[game]) {
-    cargo(`native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
-  }
 });
 
 // ADD CURRENT COMMIT SHA TO INDEX.HTML
@@ -108,18 +83,9 @@ function assetsDir(game: string) {
   return join('dist', 'editor', 'assets', game);
 }
 
-function assetsDirCargo(game: string) {
-  return join('..', 'editor', assetsDir(game));
-}
-
 function run(cmd: string, cwd = process.cwd()) {
   execSync(cmd, {
     cwd,
     stdio: [0, 1, 2],
   });
-}
-
-function cargo(cmd: string) {
-  console.log(`generating "${cmd}"`);
-  run(`"../generator/target/debug/generator" ${cmd}`, '../generator');
 }

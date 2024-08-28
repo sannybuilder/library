@@ -41,8 +41,6 @@ jobs:
         with:
           bun-version: latest
 
-      - uses: dtolnay/rust-toolchain@stable
-
       - name: Generate and Validate
         run: |
           cd editor
@@ -54,8 +52,28 @@ jobs:
           path: editor/dist/editor
           retention-days: 1
 
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Generate
+        run: |
+          cd editor
+          bun cargo.ts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cargo
+          path: editor/dist/editor
+          retention-days: 1
+
   deploy:
-    needs: [build, check]
+    needs: [build, check, compile]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4

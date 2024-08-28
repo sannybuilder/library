@@ -21,7 +21,7 @@ import { run as validateEnums } from './validate-enums';
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
 
-run(`[ -d dist/editor ] || mkdir dist/editor`);
+run(`[ -d dist/editor ] || mkdir -p dist/editor`);
 
 generateSupportInfo('dist/editor/assets/support-info.json');
 generateEnumsInfo('dist/editor/assets/enums-info.json');

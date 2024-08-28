@@ -28,7 +28,7 @@ games.forEach((game) => {
 
   validateCommands(gameJson, game);
   validateEnums(enumsJson, game);
-  run(`[ -d ${assets} ] || mkdir ${assets}`);
+  run(`[ -d ${assets} ] || mkdir -p ${assets}`);
   generateEnums(enumsJson, join(assets, 'enums.js'));
 
   [`cp ${gameJson} ${assets}`, `cp ${enumsJson} ${assets}`].forEach((x) =>

@@ -22,7 +22,7 @@ games.forEach((game) => {
   const nativeJson = join('../', game, `native.json`);
   const enumsJson = join('../', game, `enums.json`);
 
-  run(`[ -d ${assets} ] || mkdir ${assets}`);
+  run(`[ -d ${assets} ] || mkdir -p ${assets}`);
   let dest = assetsDirCargo(game);
 
   if (GameEnumsAssets[game]) {

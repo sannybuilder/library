@@ -1,1 +1,0 @@
-This command adds to the "Property Budget" stat ( GXT key `ST_PROP`). The stat initially starts with a value of 0 and its value appears in the stats menu formatted as $0.00. The parameter can be any integer value, including negative ones. The value set with this command is saved in block 19 of the save file .

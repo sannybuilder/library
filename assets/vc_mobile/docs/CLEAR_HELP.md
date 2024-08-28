@@ -1,1 +1,0 @@
-This command clears all help messages (PRINT_HELP) that are being displayed on the screen.

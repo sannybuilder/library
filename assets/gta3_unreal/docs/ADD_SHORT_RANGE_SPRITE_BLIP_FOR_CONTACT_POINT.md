@@ -1,1 +1,0 @@
-This command adds a sprite blip in the radar to the contact point and a marker at the point. The blip's short range means it disappears from the radar if it is outside the radar's range; the blip still appears in the pause menu's map. The blip and marker disappear entirely during missions and reappear when the mission ends.

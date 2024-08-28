@@ -1,1 +1,0 @@
-This command adds a short sound effect at the coordinates point. Certain sound effects are independent of the point and can be heard anywhere. The sound index does not match the SFX table; it is based on a list hardcoded within the game. Many of the SFX sounds are a combination of or altered from the base sound files.

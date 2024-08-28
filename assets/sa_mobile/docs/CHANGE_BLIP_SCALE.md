@@ -1,1 +1,0 @@
-This command changes the scale of the specified blip. It has no effect on blips that use sprites. All commands that can create a blip defaults the scale to `3`. The original script uses values between `1` and `3` but values between `0` and `65535` can be used.

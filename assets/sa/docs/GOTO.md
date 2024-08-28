@@ -1,1 +1,0 @@
-This command is used in unconditional jumps, which allow the game to continue processing the script starting at the location of the label.

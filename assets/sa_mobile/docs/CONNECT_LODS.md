@@ -1,1 +1,0 @@
-This command connects the object to the LOD object. Objects created by the script (e.g. CREATE_OBJECT) do not have an LOD associated to it, even if the object was assigned an LOD in the IPL file. The object is normally the one seen up close and its LOD is normally the one seen far away.

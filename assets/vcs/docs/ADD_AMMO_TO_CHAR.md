@@ -1,1 +1,0 @@
-This command adds ammo to the character's weapon. If the character does not have the weapon or another weapon of the same slot, nothing happens. If the character does not have the weapon but does have another weapon of the same slot, ammo will be added for that weapon instead.

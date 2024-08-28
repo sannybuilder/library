@@ -1,1 +1,0 @@
-This command is used in conditional jumps; its primary usage is in conditional statements. The destination point is identified by a label, which is then used as a parameter. In Sanny Builder where higher-level syntax is supported, the command is built into the syntax wherever conditional statements like `if-then-else` are used.

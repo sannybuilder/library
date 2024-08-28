@@ -1,1 +1,0 @@
-This command adds ammo to the character's weapon. If the character does not have the weapon, the weapon will be given to it along with ammo. This command was never called in the original script of GTA III.

@@ -1,1 +1,0 @@
-This conditional command returns true if the wanted stars are suspended, which only happens after you drive into a Pay 'n' Spray while wanted and the wanted stars flash for a while. The original script called this command only once to inform about the suspended wanted level feature.

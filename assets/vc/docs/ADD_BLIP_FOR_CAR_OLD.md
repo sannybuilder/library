@@ -1,1 +1,0 @@
-This command adds a square blip in the radar denoting the location of the vehicle. It is almost equivalent to ADD_BLIP_FOR_CAR but without preset properties. The default scale of the blip is `1`. The color of the blip is always set to 4 (yellow) regardless of what color you set so the color parameter is useless.

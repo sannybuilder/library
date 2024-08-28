@@ -1,1 +1,0 @@
-This command loads the sprite from the texture dictionary loaded through LOAD_TEXTURE_DICTIONARY into the memory slot. Any upper case letters (A-Z) are converted to lower case by the game internally. DRAW_SPRITE is used to draw the sprite onto the screen.

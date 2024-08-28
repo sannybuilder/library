@@ -1,1 +1,0 @@
-This command clears the number of platinum pickups collected in the player's current vehicle. This also resets all effects caused by collecting the platinum pickups  for the vehicle. The command has no effect if the player is not in a vehicle.

@@ -1,1 +1,0 @@
-This command stops the execution of all script s with this name. Scripts can be named through SCRIPT_NAME and more than one scripts can have the same name. Any upper case letters (A-Z) are converted to lower case by the game internally.

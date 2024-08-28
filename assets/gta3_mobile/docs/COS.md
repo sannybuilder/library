@@ -1,1 +1,0 @@
-This command takes the cosine of the floating-point value in degrees and stores the result into a variable. The result will always be between `-1.0` and `1.0`. Internally, the game converts the value to radians (3.1415927 &times; value &times; 0.0055555557), then takes cosine of that in radians.

@@ -1,1 +1,0 @@
-This command ends the cutscene started by command START_CUTSCENE. It clears all effects created by LOAD_CUTSCENE. In Vice City, cutscene shadows disabled through DISABLE_CUTSCENE_SHADOWS is reenabled and all effects created by REMOVE_EVERYTHING_FOR_HUGE_CUTSCENE are cleared.

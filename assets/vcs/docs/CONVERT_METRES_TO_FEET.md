@@ -1,1 +1,0 @@
-This command "converts" floating-point values from meters to feet. By "convert", this means dividing the value by `0.3`. The more precise conversion would be to [divide by 0.3048](http://www.wolframalpha.com/input/?i=convert+1+foot+to+meters).

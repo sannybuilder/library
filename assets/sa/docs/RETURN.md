@@ -1,1 +1,0 @@
-This command exits the current subroutine and continues execution from the command following the last called GOSUB. If RETURN is encountered before any GOSUB was called, the game will crash.

@@ -1,1 +1,0 @@
-Returns the Current Player's ID. The Player ID is meaningless for other script functions and should be converted to a Player Index before its used by calling CONVERT_INT_TO_PLAYERINDEX.

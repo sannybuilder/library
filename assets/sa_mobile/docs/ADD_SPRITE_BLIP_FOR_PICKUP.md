@@ -1,1 +1,0 @@
-This opcode adds a sprite blip in the radar denoting the location of the pickup and a marker (arrow) above the pickup. Both the blip and marker can be removed using REMOVE_BLIP or if the pickup is removed by any means. For pickup types that allow the pickup to respawn, the blip and marker will not reappear when it respawns.

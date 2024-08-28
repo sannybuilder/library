@@ -1,3 +1,0 @@
-The `gosub` instruction is similar to the `goto` instruction, but it saves the current offset before the jump so that it can be returned to (with the RETURN instruction). The jumped-to offset is equivalent to the start of a subroutine. Execution of this subroutine ends when the `return` instruction is read, at which point execution continues from the instruction after the `gosub`.
-
-Subroutines allow for procedural programming in scripts, which can reduce code repetition, increase readability and reduce size. Subroutines may be called from within other subroutines (like a Matryoshka doll ), but nesting more than `6` subroutine calls will crash the game. Procedures are an important part of the structure of mission scripts.

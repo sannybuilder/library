@@ -1,1 +1,0 @@
-This command sets the upcoming weather type. The current weather will transition to the weather type but the weather does not immediately change. To immediately change the weather, use FORCE_WEATHER_NOW. The value set with this command is saved in block 0 of the save file.

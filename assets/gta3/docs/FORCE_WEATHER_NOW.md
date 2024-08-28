@@ -1,1 +1,0 @@
-This command sets the weather type immediately. Values outside the possible range of weather types up to 255 produce weird results. The value set with this command is saved in block 0 of the save file.

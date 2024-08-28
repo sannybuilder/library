@@ -1,1 +1,0 @@
-This command instantly deletes the character from the game. If the character does not exist, the game will crash. 

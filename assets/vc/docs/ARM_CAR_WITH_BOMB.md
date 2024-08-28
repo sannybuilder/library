@@ -1,1 +1,0 @@
-This command arms the car with the car bomb. It has no effect on boats or trains. Arming car bomb stage `4` (active timed bomb) will not work as expected; entering the car will produce a secondary soft ticking noise and will not blow up the car.

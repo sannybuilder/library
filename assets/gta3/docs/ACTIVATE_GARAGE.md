@@ -1,1 +1,0 @@
-This command activates the garage, which can be deactivated through command DEACTIVATE_GARAGE. For [garage type](/#/gta3/enums/GarageType) `ForCarToComeOutOf`, this command has an additional function of allowing the door of the garage to open.

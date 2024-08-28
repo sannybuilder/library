@@ -1,1 +1,0 @@
-This command stores the x, y, and z-coordinates of the center of mass of the character's body. It is roughly `+1.04` z higher than the z-coordinate of the character's feet, which is used when setting the character's coordinates using SET_CHAR_COORDINATES. If the character is in a vehicle, the command gets the coordinates of the center of mass of the vehicle's body instead.

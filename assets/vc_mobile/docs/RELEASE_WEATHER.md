@@ -1,1 +1,0 @@
-This command releases weather forced by FORCE_WEATHER or FORCE_WEATHER_NOW so that the weather starts updating in its usual manner. Exactly the same effect can be achieved by calling FORCE_WEATHER with the value of `-1`.

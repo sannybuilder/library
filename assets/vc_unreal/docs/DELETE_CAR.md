@@ -1,1 +1,0 @@
-This command instantly removes an existing vehicle from the game world. Passing an invalid handle makes no effect. The vehicle handle is also removed from the mission cleanup list if called within a mission script.

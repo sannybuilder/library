@@ -1,1 +1,0 @@
-Normally when raining, raindrops do not appear if you are inside cull zones with attribute `8`. This command forces raindrops to appear in zones with this attribute. The command has no effect on the rain weather itself. The original script called this command only once, during the introduction sequence.

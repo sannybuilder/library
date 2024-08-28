@@ -1,1 +1,0 @@
-This command increments by `1` to the "People saved in an Ambulance" stat (GXT key `FEST_LS`). The stat will initially start with a value of `0`. The value set with this command is saved in block 17 of the save file in GTA III.

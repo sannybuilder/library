@@ -1,3 +1,0 @@
-This command creates an object at the coordinates point. The z-coordinate uses the base rather than the center of the object's bounding box. Use CREATE_OBJECT_NO_OFFSET to create an object without this offset. It is not required to load the model (like through REQUEST_MODEL) to create the object. The object must already have an entry in the `object.dat` file in order for them to be stable. Without an entry, the object can become unstable and when that happens the game will crash.
-
-In GTA III and Vice City, there are two models that exhibit unique behaviors when created: `money.dff` and `package1.dff`. They will appear just like a regular pickup (rotating, glowing coronas, and emitting light) but they can't be picked up and they have collision.

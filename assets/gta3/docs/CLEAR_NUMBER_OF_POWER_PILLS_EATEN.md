@@ -1,1 +1,0 @@
-This command clears the number of donkey magazine pickups collected.

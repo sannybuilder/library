@@ -1,0 +1,1 @@
+This command adds to the "Number of bloodring kills" stat ( GXT key `ST_BRK`). The stat will initially start with a value of 0 but it is only displayed in the stats menu when the value is greater than it. The parameter can be any integer value, including negative ones. The value set with this command is saved in block 19 of the save file .

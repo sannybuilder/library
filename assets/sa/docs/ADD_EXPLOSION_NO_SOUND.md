@@ -1,0 +1,1 @@
+This command creates a soundless explosion at the coordinates point. These are real explosions so they cause damage, and shake the camera.

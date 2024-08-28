@@ -1,0 +1,1 @@
+This command draws the sprite loaded through LOAD_SPRITE. The games draw sprites in a similar manner to intro text so it requires USE_TEXT_COMMANDS to draw properly. Unlike intro text, the positions and dimensions are absolute and does not scale with resolution. Drawing an invalid sprite will result in a colored rectangle.

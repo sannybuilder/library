@@ -1,0 +1,1 @@
+This command sets the audio of the fire, which can be created using START_SCRIPT_FIRE, START_CAR_FIRE, or START_CHAR_FIRE. The audio of the fire is on by default. The command is used in "Silence The Sneak" to permit only one of the four fires, which are created at the same location, to emit audio so that the game would not be excessively loud.

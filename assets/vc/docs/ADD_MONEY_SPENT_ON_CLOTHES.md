@@ -1,0 +1,1 @@
+This command adds to the "Fashion Budget" stat ( GXT key `ST_FASH`). The stat initially starts with a value of 0 and its value appears in the stats menu formatted as $0.00. The parameter can be any integer value, including negative ones. The value set with this command is saved in block 19 of the save file .

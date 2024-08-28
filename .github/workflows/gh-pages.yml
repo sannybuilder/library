@@ -37,7 +37,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
 
       - name: Generate and Validate
-        run: bun ci.ts
+        run: |
+          cd editor
+          bun ci.ts
 
   deploy:
     needs: [build, check]

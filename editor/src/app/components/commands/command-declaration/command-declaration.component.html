@@ -16,7 +16,10 @@
   <div>
     <ul
       class="nav flex-nowrap"
-      *ngIf="command.class && command.member && withToggle"
+      *ngIf="
+        ((command.class && command.member) || hasCLEOReduxSupport(game)) &&
+        withToggle
+      "
     >
       <li class="nav-item">
         <a
@@ -27,7 +30,7 @@
           >{{ "ui.commandOverview.sbCommandSyntax" | translate }}</a
         >
       </li>
-      <li class="nav-item ml-3">
+      <li class="nav-item ml-3" *ngIf="command.class && command.member">
         <a
           class="nav-link p-0 small"
           [ngClass]="{ active: syntaxKind === 'sb_class' }"

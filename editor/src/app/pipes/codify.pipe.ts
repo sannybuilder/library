@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Command, Extension, Game } from '../models';
 import { template } from 'lodash';
-import { braceify, stringifyWithColon } from './params';
+import { braceify, stringifyWithColonNoHighlight } from './params';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-pascal';
 import { FunctionParamsPipe } from './function-params.pipe';
@@ -55,7 +55,7 @@ function compileTemplate(code: string, command: Command, game: Game): string {
   const compiled = template(code);
   const stringify = (key: 'input' | 'output') =>
     (command[key] ?? []).reduce((m, v, i) => {
-      m[key + (i + 1)] = braceify(stringifyWithColon(v), '[]');
+      m[key + (i + 1)] = braceify(stringifyWithColonNoHighlight(v), '[]');
       return m;
     }, {} as Record<string, string>);
 

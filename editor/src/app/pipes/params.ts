@@ -1,9 +1,7 @@
 import { Param, SourceType } from '../models';
 
-export function stringifySource(source: SourceType) {
+export function stringifySource(source?: SourceType) {
   switch (source) {
-    case SourceType.any:
-      return '';
     case SourceType.var_any:
       return 'var';
     case SourceType.var_global:
@@ -14,6 +12,8 @@ export function stringifySource(source: SourceType) {
       return 'literal';
     case SourceType.pointer:
       return 'pointer';
+    default:
+      return '';
   }
 }
 

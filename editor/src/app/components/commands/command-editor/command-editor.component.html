@@ -179,7 +179,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-6" *ngIf="features.opcode">
+    <div class="col-12 col-md-6" *ngIf="features.opcode">
       <div class="input-group">
         <scl-selector
           class="flex-grow-1"
@@ -192,7 +192,7 @@
         ></scl-selector>
       </div>
     </div>
-    <div class="col-6" *ngIf="features.cc">
+    <div class="col-12 col-md-6" *ngIf="features.cc">
       <div class="input-group">
         <scl-selector
           class="flex-grow-1"
@@ -296,6 +296,7 @@
               [choices]="sources"
               [canInput]="false"
               [narrowDropdown]="true"
+              [disabled]="viewContext !== ViewContext.Script"
             ></scl-selector>
           </div>
         </div>
@@ -379,6 +380,7 @@
               (modelChange)="onParamSourceUpdate($event, param)"
               [choices]="sources"
               [canInput]="false"
+              [disabled]="viewContext !== ViewContext.Script"
             ></scl-selector>
             <div
               class="mb-1"

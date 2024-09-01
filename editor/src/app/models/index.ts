@@ -74,7 +74,7 @@ export enum Version {
 export interface Param {
   type: ParamType['name'];
   name: string;
-  source: SourceType;
+  source?: SourceType;
 }
 
 export interface Command {

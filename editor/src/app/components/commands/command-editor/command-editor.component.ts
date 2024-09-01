@@ -115,6 +115,7 @@ export class CommandEditorComponent implements OnInit {
   SourceType = SourceType;
   Platform = Platform;
   Version = Version;
+  ViewContext = ViewContext;
 
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
@@ -373,7 +374,11 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onClassChange(command: Command, value: string) {
-    command.class = capitalizeFirst(value);
+    if (this.viewContext === ViewContext.Script) {
+      command.class = capitalizeFirst(value);
+    } else {
+      command.class = value;
+    }
     this.updateErrors();
   }
 
@@ -758,7 +763,9 @@ export class CommandEditorComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      event.container.data[event.currentIndex].source = newSource;
+      if (this.viewContext === ViewContext.Script) {
+        event.container.data[event.currentIndex].source = newSource;
+      }
     }
     this.updateErrors();
   }
@@ -823,7 +830,7 @@ export class CommandEditorComponent implements OnInit {
           {
             name: 'handle',
             type: command.class || this.suggestedClassName,
-            source: SourceType.var_any,
+            source: DEFAULT_INPUT_SOURCE,
           },
         ];
         command.num_params++;
@@ -881,7 +888,7 @@ export class CommandEditorComponent implements OnInit {
         {
           name: 'state',
           type: 'bool',
-          source: SourceType.var_any,
+          source: DEFAULT_INPUT_SOURCE,
         },
       ];
       command.num_params++;
@@ -991,7 +998,9 @@ export class CommandEditorComponent implements OnInit {
   }
 
   private invalidOutputSourceError() {
-    this.errors.invalidOutputSource = doesOutputHaveInvalidSource(this.command);
+    this.errors.invalidOutputSource =
+      this.viewContext === ViewContext.Script &&
+      doesOutputHaveInvalidSource(this.command);
   }
 
   private emptyCallingConventionError() {

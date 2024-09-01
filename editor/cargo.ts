@@ -5,6 +5,7 @@ import {
   GameNativeAssets,
   GameSnippets,
 } from './src/app/models';
+import { run as validateNative } from './validate-native';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -36,6 +37,7 @@ games.forEach((game) => {
     cargo(`snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
   }
   if (GameNativeAssets[game]) {
+    validateNative(nativeJson, game);
     cargo(`native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
   }
 });

@@ -96,7 +96,7 @@ export function formatCommandNameScreaming(name: string | undefined) {
   }
   let formatted = name.replace(/[\s-]/g, '_');
   if (name.startsWith('0x') || name.startsWith('0X')) {
-    return `0x${formatted.slice(2).toUpperCase()}`;
+    return `0x${formatted.replace(/^0+/, '').slice(2).toUpperCase()}`;
   }
   return formatted.toUpperCase();
 }

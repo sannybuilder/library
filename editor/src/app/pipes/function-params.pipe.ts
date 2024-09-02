@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Command, Game, PrimitiveType, ViewContext } from '../models';
 import { inputParams, outputParams, primitiveTypes } from '../utils';
 import { braceify, stringify, stringifyWithColonNoHighlight } from './params';
+import { without } from 'lodash';
 
 @Pipe({
   name: 'functionParams',
@@ -9,7 +10,10 @@ import { braceify, stringify, stringifyWithColonNoHighlight } from './params';
 export class FunctionParamsPipe implements PipeTransform {
   transform(command: Command, game: Game, simpleTypes: boolean): string {
     let params = '()';
-    let primitives = primitiveTypes(game, ViewContext.Code);
+    let primitives = without(
+      primitiveTypes(game, ViewContext.Code),
+      PrimitiveType.boolean
+    );
     if (command.input?.length) {
       params = braceify(
         stringify(

@@ -1,0 +1,20 @@
+Char playerChar = get_player_char 0
+float pos[3]
+
+spawn_vehicle_by_cheating #INFERNUS
+
+pos[0], pos[1], pos[2] = get_char_coordinates playerChar
+
+int pPos = get_var_pointer pos
+
+int addr = CWorld_FindNearestObjectOfType(#INFERNUS, pPos, 50.0, false, false, {vehicles} true, false, false, false)
+
+if addr > 0
+then
+    Car infernus = get_vehicle_ref addr
+    Blip b = add_blip_for_car infernus
+else
+    print_help_formatted "Car not found"
+end
+
+terminate_this_script

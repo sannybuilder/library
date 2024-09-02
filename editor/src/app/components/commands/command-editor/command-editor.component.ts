@@ -494,6 +494,9 @@ export class CommandEditorComponent implements OnInit {
   }
 
   getDefaultOutputSource(param: Param) {
+    if (this.viewContext === ViewContext.Code) {
+      return SourceType.any;
+    }
     return param.source ?? DEFAULT_OUTPUT_SOURCE;
   }
 

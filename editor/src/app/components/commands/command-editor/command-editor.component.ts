@@ -68,6 +68,7 @@ import {
   getDefaultExtension,
   doesCommandHaveEmptyCallingConvention,
   filterAttributes,
+  filterSources,
 } from '../../../utils';
 
 type ErrorType =
@@ -196,6 +197,7 @@ export class CommandEditorComponent implements OnInit {
       this.codeTokens = ['<%= decl %>'];
     }
 
+    this.sources = filterSources(this.game, this.viewContext);
     this.attrs = filterAttributes(
       CommandAttributes,
       this.game,
@@ -218,16 +220,7 @@ export class CommandEditorComponent implements OnInit {
       name,
       status: false,
     }));
-    this.sources = [
-      SourceType.any,
-      SourceType.var_any,
-      SourceType.var_global,
-      SourceType.var_local,
-      SourceType.literal,
-    ];
-    if (val === Game.gta_iv) {
-      this.sources.push(SourceType.pointer);
-    }
+    this.sources = filterSources(this.game, this.viewContext);
     this.features.opcode = doesGameRequireOpcode(val);
     this.defaultCommandNameFormatter = getDefaultCommandNameFormatter(val);
     this.attrs = filterAttributes(

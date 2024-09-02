@@ -473,3 +473,27 @@ export function filterAttributes(
     }
   });
 }
+
+export function filterSources(
+  game: Game,
+  viewContext: ViewContext
+) {
+  if (viewContext === ViewContext.Code) {
+    return [
+      SourceType.any,
+      SourceType.pointer
+    ]
+  }
+  const sources = [
+    SourceType.any,
+    SourceType.var_any,
+    SourceType.var_global,
+    SourceType.var_local,
+    SourceType.literal,
+  ];
+  if (game === Game.gta_iv) {
+    sources.push(SourceType.pointer);
+  }
+
+  return sources;
+}

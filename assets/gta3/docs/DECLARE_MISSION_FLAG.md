@@ -14,7 +14,7 @@ Common uses for the ONMISSION variable are:
   ```
     $ONMISSION = 1
   ```
-- This allows the mission to be cancelled in case of player being dead or busted. When the mission is over, you have to set the ONMISSION variable to 0.
+  This allows the mission to be cancelled in case of player being dead or busted. When the mission is over, you have to set the ONMISSION variable to 0.
   ```
     $ONMISSION = 0
   ```

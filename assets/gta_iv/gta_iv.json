@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1724796317354,
-    "version": "0.81",
+    "last_update": 1725309676973,
+    "version": "0.82",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -7292,7 +7292,12 @@
             }
           ],
           "name": "DISPLAY_HELP_TEXT_THIS_FRAME",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Text",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "DisplayHelpThisFrame"
         },
         {
           "input": [
@@ -7493,9 +7498,6 @@
           }
         },
         {
-          "name": "DISPLAY_TEXT_WITH_3_NUMBERS",
-          "num_params": 6,
-          "short_desc": "Draws a GXT entry text with three additional integer numbers",
           "input": [
             {
               "name": "x",
@@ -7510,18 +7512,26 @@
               "type": "string"
             },
             {
-              "name": "_p4",
+              "name": "number1",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "number2",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "number3",
               "type": "int"
             }
-          ]
+          ],
+          "name": "DISPLAY_TEXT_WITH_3_NUMBERS",
+          "num_params": 6,
+          "short_desc": "Draws a GXT entry text with three additional integer numbers",
+          "class": "Text",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "DisplayWith3Numbers"
         },
         {
           "input": [
@@ -7576,7 +7586,12 @@
           ],
           "name": "DISPLAY_TEXT_WITH_LITERAL_STRING",
           "num_params": 4,
-          "short_desc": "Draws gxt entry with the literal string (4th parameter) at coordinates x, y.\"~e~\" in the gxt text will be replaced with the string. Use \"STRING\" or (\"PZ_STRING\") gxt entry (which is just \"~e~\") to just display the literal string"
+          "short_desc": "Draws gxt entry with the literal string (4th parameter) at coordinates x, y.\"~e~\" in the gxt text will be replaced with the string. Use \"STRING\" or (\"PZ_STRING\") gxt entry (which is just \"~e~\") to just display the literal string",
+          "class": "Text",
+          "member": "DisplayWithLiteralString",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7627,7 +7642,12 @@
           ],
           "name": "DISPLAY_TEXT_WITH_STRING",
           "num_params": 4,
-          "short_desc": "Draws a GXT entry text with an additional string"
+          "short_desc": "Draws a GXT entry text with an additional string",
+          "class": "Text",
+          "member": "DisplayWithString",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7654,7 +7674,12 @@
           ],
           "name": "DISPLAY_TEXT_WITH_TWO_LITERAL_STRINGS",
           "num_params": 5,
-          "short_desc": "Draws a GXT entry text with two additional strings"
+          "short_desc": "Draws a GXT entry text with two additional strings",
+          "class": "Text",
+          "member": "DisplayWithTwoLiteralStrings",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7681,7 +7706,12 @@
           ],
           "name": "DISPLAY_TEXT_WITH_TWO_STRINGS",
           "num_params": 5,
-          "short_desc": "Draws a GXT entry text with two additional non-literal strings"
+          "short_desc": "Draws a GXT entry text with two additional non-literal strings",
+          "class": "Text",
+          "member": "DisplayWithTwoStrings",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "DO_AUTO_SAVE",
@@ -29697,9 +29727,6 @@
           }
         },
         {
-          "name": "PRINT_STRING_WITH_LITERAL_STRING",
-          "num_params": 4,
-          "short_desc": "Prints the string specified in P2, for the amount of time in milliseconds in P3, at the bottom of the screen",
           "input": [
             {
               "name": "gxtentry",
@@ -29717,12 +29744,24 @@
               "name": "flag",
               "type": "int"
             }
-          ]
+          ],
+          "name": "PRINT_STRING_WITH_LITERAL_STRING",
+          "num_params": 4,
+          "short_desc": "Prints the string specified in P2, for the amount of time in milliseconds in P3, at the bottom of the screen",
+          "class": "Text",
+          "member": "PrintStringWithLiteralString",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
               "name": "gxtName",
+              "type": "string"
+            },
+            {
+              "name": "string",
               "type": "string"
             },
             {
@@ -29737,13 +29776,11 @@
           "name": "PRINT_STRING_WITH_LITERAL_STRING_NOW",
           "num_params": 4,
           "short_desc": "Prints the string specified in P2, for the amount of time in milliseconds in P3, at the bottom of the screen",
-          "output": [
-            {
-              "name": "text",
-              "type": "void",
-              "source": "var_any"
-            }
-          ]
+          "class": "Text",
+          "member": "PrintStringWithLiteralStringNow",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PRINT_STRING_WITH_TWO_LITERAL_STRINGS",
@@ -53117,19 +53154,18 @@
           "num_params": 2
         },
         {
-          "name": "DISPLAY_TEXT_SUBSTRING",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "string",
+              "type": "string"
             },
             {
               "name": "_p4",
@@ -53148,10 +53184,15 @@
               "type": "any"
             }
           ],
-          "num_params": 7
+          "name": "DISPLAY_TEXT_SUBSTRING",
+          "num_params": 7,
+          "class": "Text",
+          "member": "DisplaySubstring",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "DISPLAY_TEXT_WITH_BLIP_NAME",
           "input": [
             {
               "name": "x",
@@ -53170,26 +53211,31 @@
               "type": "int"
             }
           ],
-          "num_params": 4
+          "name": "DISPLAY_TEXT_WITH_BLIP_NAME",
+          "num_params": 4,
+          "class": "Text",
+          "member": "DisplayWithBlipName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "DISPLAY_TEXT_WITH_LITERAL_SUBSTRING",
           "input": [
             {
-              "name": "_p1",
-              "type": "any"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "any"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "any"
+              "name": "string1",
+              "type": "string"
             },
             {
-              "name": "_p4",
-              "type": "any"
+              "name": "string2",
+              "type": "string"
             },
             {
               "name": "_p5",
@@ -53200,10 +53246,15 @@
               "type": "any"
             }
           ],
-          "num_params": 6
+          "name": "DISPLAY_TEXT_WITH_LITERAL_SUBSTRING",
+          "num_params": 6,
+          "class": "Text",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "DisplayWithLiteralSubstring"
         },
         {
-          "name": "DISPLAY_TEXT_WITH_STRING_AND_INT",
           "input": [
             {
               "name": "x",
@@ -53226,10 +53277,15 @@
               "type": "int"
             }
           ],
-          "num_params": 5
+          "name": "DISPLAY_TEXT_WITH_STRING_AND_INT",
+          "num_params": 5,
+          "class": "Text",
+          "member": "DisplayWithStringAndInt",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "DISPLAY_TEXT_WITH_SUBSTRING_GIVEN_HASH_KEY",
           "input": [
             {
               "name": "x",
@@ -53248,10 +53304,15 @@
               "type": "int"
             }
           ],
-          "num_params": 4
+          "name": "DISPLAY_TEXT_WITH_SUBSTRING_GIVEN_HASH_KEY",
+          "num_params": 4,
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
+          "member": "DisplayWithSubstringGivenHashKey"
         },
         {
-          "name": "DISPLAY_TEXT_WITH_TWO_SUBSTRINGS_GIVEN_HASH_KEYS",
           "input": [
             {
               "name": "x",
@@ -53274,7 +53335,13 @@
               "type": "int"
             }
           ],
-          "num_params": 5
+          "name": "DISPLAY_TEXT_WITH_TWO_SUBSTRINGS_GIVEN_HASH_KEYS",
+          "num_params": 5,
+          "class": "Text",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "DisplayWithTwoSubstringsGivenHashKeys"
         },
         {
           "input": [

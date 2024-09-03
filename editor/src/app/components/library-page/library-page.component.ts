@@ -327,8 +327,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       return true;
     }
     if (viewMode === ViewMode.EditCommand) {
-      // class & member should be both empty or both filed
-      return !!this.command?.class !== !!this.command?.member;
+      return false;
     }
     if (viewMode === ViewMode.EditEnum) {
       return false;

@@ -89,12 +89,18 @@
     </div>
     <div class="col-12 col-xl-8">
       <div class="input-group">
+        @if(viewContext === ViewContext.Script){
         <span class="input-group-text d-none d-md-inline">{{
           "ui.commandEditor.fieldCommandLong" | translate
         }}</span>
         <span class="input-group-text d-inline d-md-none">{{
           "ui.commandEditor.fieldCommandShort" | translate
         }}</span>
+        } @else {
+        <span class="input-group-text">{{
+          "ui.commandEditor.fieldAddress" | translate
+        }}</span>
+        }
         <input
           type="text"
           class="form-control"
@@ -153,7 +159,10 @@
         }}</span>
         <input
           type="text"
-          [disabled]="command.attrs?.is_nop || !command.class"
+          [disabled]="
+            viewContext === ViewContext.Script &&
+            (command.attrs?.is_nop || !command.class)
+          "
           class="form-control"
           [ngModel]="command.member"
           (ngModelChange)="onMemberChange(command, $event)"

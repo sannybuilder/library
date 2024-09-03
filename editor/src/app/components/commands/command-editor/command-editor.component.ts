@@ -69,6 +69,8 @@ import {
   doesCommandHaveEmptyCallingConvention,
   filterAttributes,
   filterSources,
+  doesScriptCommandHaveEmptyMember,
+  doesNativeFunctionHaveNoName,
 } from '../../../utils';
 
 type ErrorType =
@@ -92,7 +94,8 @@ type ErrorType =
   | 'invalidConditionalOperator'
   | 'invalidArgumentWithOperator'
   | 'invalidSelfType'
-  | 'invalidOutputSource';
+  | 'invalidOutputSource'
+  | 'emptyMember';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -180,6 +183,7 @@ export class CommandEditorComponent implements OnInit {
     invalidArgumentWithOperator: false,
     invalidSelfType: false,
     invalidOutputSource: false,
+    emptyMember: false,
   };
   errorMessages: string[] = [];
 
@@ -330,6 +334,7 @@ export class CommandEditorComponent implements OnInit {
     invalidSelfType: this.invalidSelfTypeError,
     invalidOutputSource: this.invalidOutputSourceError,
     emptyCallingConvention: this.emptyCallingConventionError,
+    emptyMember: this.emptyMemberError,
   };
 
   isDirty: boolean;
@@ -1003,5 +1008,13 @@ export class CommandEditorComponent implements OnInit {
     this.errors.emptyCallingConvention =
       this.viewContext === ViewContext.Code &&
       doesCommandHaveEmptyCallingConvention(this.command);
+  }
+
+  private emptyMemberError() {
+    this.errors.emptyMember =
+      (this.viewContext === ViewContext.Code &&
+        doesNativeFunctionHaveNoName(this.command)) ||
+      (this.viewContext === ViewContext.Script &&
+        doesScriptCommandHaveEmptyMember(this.command));
   }
 }

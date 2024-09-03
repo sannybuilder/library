@@ -258,3 +258,11 @@ export function doesInputHaveInvalidSource(command: Command) {
     (p) => isVarSource(p.source) && !command.operator
   );
 }
+
+export function doesScriptCommandHaveEmptyMember(command: Command) {
+  return !!command.class && !command.member && !command.attrs?.is_nop;
+}
+
+export function doesNativeFunctionHaveNoName(command: Command) {
+  return !command.member;
+}

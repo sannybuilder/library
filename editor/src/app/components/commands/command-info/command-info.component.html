@@ -12,8 +12,12 @@
   <div class="col-12 d-flex flex-row">
     <h5 class="mr-3" *ngIf="command.id">{{ command.id }}</h5>
     <h5 class="text-break" [attr.translate]="'no'">{{ command.name }}</h5>
-    <h5 class="ml-3" *ngIf="viewContext === ViewContext.Code">
-      {{ command.class }}::{{ command.member }}
+    <h5
+      class="ml-3"
+      *ngIf="viewContext === ViewContext.Code"
+      [attr.translate]="'no'"
+    >
+      {{ command | nativeName }}
     </h5>
   </div>
 </div>

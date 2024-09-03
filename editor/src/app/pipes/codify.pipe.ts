@@ -26,6 +26,16 @@ Prism.languages.sb = Prism.languages.extend('pascal', {
     pattern: /\/\*[\s\S]*?\*\/|\{[\s\S]*?\}|\/\/.*/,
     greedy: true,
   },
+  string: [
+    {
+      pattern: /'(?:[^'\\]|\\.)*'/,
+      greedy: true,
+    },
+    {
+      pattern: /"(?:[^"\\]|\\.)*"/,
+      greedy: true,
+    },
+  ],
 });
 
 @Pipe({

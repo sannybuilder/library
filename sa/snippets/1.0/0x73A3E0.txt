@@ -1,10 +1,3 @@
-// Sanny Builder 4
-// mode: GTA SA(v1.0 - SBL)
-{$CLEO .cs}
-
-wait 0
-wait 0
-
 int modelIdx = get_weapontype_model {weapon_type} WeaponType.Ak47
 request_model {modelId} modelIdx
 load_all_models_now
@@ -16,9 +9,6 @@ while true
     
     WEAPON_ADD_SHELL($scplayer, 7) 
 end
-
-terminate_this_custom_script
-
 
 function WEAPON_ADD_SHELL(charHandle :int, weaponSlot :int)
     float pos[3]
@@ -39,5 +29,3 @@ function WEAPON_ADD_SHELL(charHandle :int, weaponSlot :int)
         
     CWeapon_AddGunshell(weaponPtr, pedPtr, posPtr, dirPtr, 5.0)
 end
-
-<%= decl %>

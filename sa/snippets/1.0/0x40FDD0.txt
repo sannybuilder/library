@@ -1,3 +1,5 @@
+function CVector_ctor<thiscall, 0x406D20>(self: int {CVector}, x: float, y: float, z: float)
+
 int pVector1 = get_label_pointer @cvector1
 int pVector2 = get_label_pointer @cvector2
 int pVector3 = get_label_pointer @cvector3
@@ -12,7 +14,7 @@ float z = read_memory_with_offset pVector3 8 4
 
 print_help_formatted "vec (%.2f, %.2f, %.2f)" x y z
 
-terminate_this_script
+jump @skip
 
 const sizeOf_CVector = 12
 :cvector1
@@ -28,6 +30,4 @@ hex
 00(sizeOf_CVector)
 end
 
-
-<%= decl %>
-function CVector_ctor<thiscall, 0x406D20>(self: int {CVector}, x: float, y: float, z: float)
+:skip

@@ -36,7 +36,7 @@
         [syntaxKind]="defaultSyntaxKind"
         (switchSyntaxKind)="onSwitchSyntaxKind($event)"
         [withToggle]="
-          (viewContext === ViewContext.Script) && doesGameRequireOpcode(game)
+          viewContext === ViewContext.Script && doesGameRequireOpcode(game)
         "
         [withCopyButton]="true"
         [simpleTypes]="true"
@@ -225,6 +225,7 @@
         #codeSnippet
         [innerHTML]="
           snippet
+            | snippetify
             | codify
               : command
               : game

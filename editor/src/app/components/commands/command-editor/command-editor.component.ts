@@ -198,7 +198,7 @@ export class CommandEditorComponent implements OnInit {
       this.features.opcode = false;
       this.features.operator = false;
       this.features.cc = true;
-      this.codeTokens = ['<%= decl %>'];
+      this.codeTokens = [];
     }
 
     this.sources = filterSources(this.game, this.viewContext);

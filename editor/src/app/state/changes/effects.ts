@@ -13,6 +13,8 @@ import {
 import * as diff from 'diff';
 
 import {
+  loadGitTree,
+  loadGitTreeSuccess,
   loadLastRevision,
   loadLastRevisionFail,
   loadLastRevisionSuccess,
@@ -158,6 +160,19 @@ export class ChangesEffects {
       switchMap(([, accessToken]) => {
         return this._gitHub.getRevision(accessToken).pipe(
           map((revision) => loadLastRevisionSuccess({ revision })),
+          catchError(() => of(loadLastRevisionFail()))
+        );
+      })
+    )
+  );
+
+  gitTree$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadGitTree),
+      withLatestFrom(this._auth.authToken$),
+      switchMap(([, accessToken]) => {
+        return this._gitHub.getTree(accessToken).pipe(
+          map((tree) => loadGitTreeSuccess({ tree })),
           catchError(() => of(loadLastRevisionFail()))
         );
       })

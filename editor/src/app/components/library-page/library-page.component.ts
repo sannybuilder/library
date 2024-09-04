@@ -33,6 +33,7 @@ import {
   EnumsFacade,
   TreeFacade,
   ArticlesFacade,
+  ChangesFacade,
 } from '../../state';
 import {
   doesGameHaveNativeDocs,
@@ -44,7 +45,6 @@ import {
   isOtherGame,
   serializeUrlAndParams,
 } from '../../utils';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'scl-library-page',
@@ -134,12 +134,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _enums: EnumsFacade,
     private _ref: ChangeDetectorRef,
     private _el: ElementRef,
-    private _articles: ArticlesFacade
+    private _articles: ArticlesFacade,
+    private _changes: ChangesFacade
   ) {}
 
   ngOnInit() {
     this._extensions.init();
     this._enums.loadEnumsInfo();
+    this._changes.loadGitTree();
   }
 
   ngOnDestroy() {
@@ -313,8 +315,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._extensions.getGameExtensions(game);
   }
 
-  getFullDescription(command: Command) {
-    return this._articles.currentArticle$;
+  getFullDescription() {
+    return combineLatest([
+      this._articles.currentArticle$,
+      this._articles.source$,
+    ]).pipe(map((a) => a.filter(Boolean)));
   }
 
   @HostListener('window:resize', [])

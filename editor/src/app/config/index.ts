@@ -17,6 +17,7 @@ export interface Config {
     user: string;
     contents: string;
     revision: string;
+    tree: string;
   };
 }
 

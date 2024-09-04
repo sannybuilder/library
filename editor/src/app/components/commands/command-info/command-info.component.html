@@ -70,16 +70,29 @@
     *ngIf="
       !command.attrs?.is_unsupported &&
       !command.attrs?.is_nop &&
-      fullDescription
+      fullDescription?.length
     "
   >
     <hr />
     <div class="row mb-2">
       <div class="col-12">
-        <h5>{{ "ui.commandOverview.descriptionSubtitle" | translate }}</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>
+            {{ "ui.commandOverview.descriptionSubtitle" | translate }}
+          </h5>
+          <div class="d-flex mb-2" *ngIf="fullDescription[1] as path">
+            <a
+              target="_blank"
+              [href]="
+                'https://github.com/sannybuilder/library/edit/master/' + path
+              "
+              >Edit</a
+            >
+          </div>
+        </div>
         <div
           [innerHTML]="
-            fullDescription
+            fullDescription[0]
               | markdown
               | linkify : game : gameExtensions : viewContext
               | linkifyClasses : game : classNames : viewContext

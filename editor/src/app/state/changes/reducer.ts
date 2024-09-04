@@ -17,6 +17,7 @@ import {
   submitChangesFail,
   submitChangesSuccess,
   loadLastRevisionSuccess,
+  loadGitTreeSuccess,
 } from './actions';
 
 type FileName = string;
@@ -28,6 +29,7 @@ export interface ChangesState {
   isUpdating: boolean;
   hasChanges: boolean;
   lastRevision?: string;
+  gitTree: string[];
 }
 
 export const initialState: ChangesState = {
@@ -35,6 +37,7 @@ export const initialState: ChangesState = {
   snapshots: {},
   isUpdating: false,
   hasChanges: false,
+  gitTree: [],
 };
 
 export const changesReducer = createReducer(
@@ -117,5 +120,16 @@ export const changesReducer = createReducer(
   on(loadLastRevisionSuccess, (state, { revision }) => ({
     ...state,
     lastRevision: revision,
+  })),
+  on(loadGitTreeSuccess, (state, { tree }) => ({
+    ...state,
+    gitTree: tree
+      .filter(
+        (file) =>
+          file.type === 'blob' &&
+          file.path &&
+          (file.path.endsWith('.md') || file.path.endsWith('.txt'))
+      )
+      .map((file) => file.path!),
   }))
 );

@@ -7,3 +7,8 @@ export const currentArticle = createSelector(
   state,
   (state: ArticlesState | undefined) => state?.currentArticle
 );
+
+export const source = createSelector(
+  state,
+  (state: ArticlesState | undefined) => state?.source
+);

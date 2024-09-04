@@ -7,5 +7,5 @@ export const loadArticle = createAction(
 
 export const loadArticleSuccess = createAction(
   '[Articles] Load Article Success',
-  props<{ content: string }>()
+  props<{ content: string, source: string }>()
 );

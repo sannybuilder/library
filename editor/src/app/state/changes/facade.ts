@@ -10,8 +10,10 @@ import {
   submitChanges,
   registerFileContent,
   loadLastRevision,
+  loadGitTree,
 } from './actions';
 import * as selector from './selectors';
+import { filter, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ChangesFacade {
@@ -21,6 +23,7 @@ export class ChangesFacade {
   snapshots$ = this.store$.select(selector.snapshots);
   github$ = this.store$.select(selector.github);
   lastRevision$ = this.store$.select(selector.lastRevision);
+  tree$ = this.store$.select(selector.tree);
 
   constructor(private store$: Store) {}
 
@@ -40,7 +43,14 @@ export class ChangesFacade {
     game: Game;
   }) {
     this.store$.dispatch(
-      registerExtensionsChange({ fileName, version, url, content, classesMeta, game })
+      registerExtensionsChange({
+        fileName,
+        version,
+        url,
+        content,
+        classesMeta,
+        game,
+      })
     );
   }
 
@@ -80,5 +90,9 @@ export class ChangesFacade {
 
   loadLastRevision() {
     this.store$.dispatch(loadLastRevision());
+  }
+
+  loadGitTree() {
+    this.store$.dispatch(loadGitTree());
   }
 }

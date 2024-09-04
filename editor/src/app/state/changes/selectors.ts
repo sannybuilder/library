@@ -32,3 +32,8 @@ export const lastRevision = createSelector(
   state,
   (state: ChangesState) => state.lastRevision
 );
+
+export const tree = createSelector(
+  state,
+  (state: ChangesState) => state.gitTree
+);

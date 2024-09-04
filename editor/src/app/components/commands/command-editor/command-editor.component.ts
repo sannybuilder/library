@@ -669,7 +669,7 @@ export class CommandEditorComponent implements OnInit {
       (name || this.getSuggestedInputName(index)) === SELF
     ) {
       const suggestion = this.command.class || this.suggestedClassName;
-      return this.paramTypes.includes(suggestion) ? suggestion : '';
+      return this.paramTypes.includes(`class ${suggestion}`) ? suggestion : '';
     }
 
     if (['state', 'flag'].includes(name) && type !== PrimitiveType.boolean) {

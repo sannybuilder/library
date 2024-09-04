@@ -28,9 +28,15 @@ export class FilterPanelComponent {
   private _game: Game;
   private _viewContext: ViewContext;
 
+  isSnippetOnly$ = this._ui.isSnippetOnly$;
+
   @Input() set viewContext(val: ViewContext) {
     this._viewContext = val;
-    this.attributes = filterAttributes(CommandAttributes, this.game, this.viewContext);
+    this.attributes = filterAttributes(
+      CommandAttributes,
+      this.game,
+      this.viewContext
+    );
   }
 
   get viewContext() {
@@ -42,7 +48,11 @@ export class FilterPanelComponent {
     this.versions = GameVersions[val];
     this._game = val;
 
-    this.attributes = filterAttributes(CommandAttributes, this.game, this.viewContext);
+    this.attributes = filterAttributes(
+      CommandAttributes,
+      this.game,
+      this.viewContext
+    );
   }
 
   get game() {
@@ -131,5 +141,9 @@ export class FilterPanelComponent {
 
   isVersionChecked(version: Version) {
     return this._version.getVersionCheckedState(version);
+  }
+
+  toggleSnippetOnly() {
+    this._ui.toggleSnippetOnlySearch();
   }
 }

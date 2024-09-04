@@ -11,6 +11,7 @@ import { extensions } from '../extensions/selectors';
 import { game } from '../game/selectors';
 import { UiState, GameState } from './reducer';
 import { selectedPlatforms, selectedVersions } from '../version/selectors';
+import { tree as gitTree } from '../changes/selectors';
 
 export const state = createFeatureSelector<UiState>('ui');
 
@@ -124,6 +125,11 @@ export const currentPage = createSelector(
   (state: UiState) => state.currentPage
 );
 
+export const isSnippetOnly = createSelector(
+  state,
+  (state: UiState) => state.isSnippetOnly
+);
+
 export const rows = createSelector(
   extensions,
   selectedExtensions,
@@ -133,6 +139,9 @@ export const rows = createSelector(
   selectedClasses,
   selectedPlatforms,
   selectedVersions,
+  isSnippetOnly,
+  gitTree,
+  game,
   (
     extensions,
     selectedExtensions,
@@ -141,7 +150,10 @@ export const rows = createSelector(
     searchTerm,
     selectedClasses,
     selectedPlatforms,
-    selectedVersions
+    selectedVersions,
+    isSnippetOnly,
+    gitTree,
+    game
   ) => {
     const selected = extensions?.filter(
       ({ name }) =>
@@ -155,7 +167,7 @@ export const rows = createSelector(
 
     const result = sortBy(
       flatMap(selected, ({ name: extension, commands }) => {
-        const filtered = filterCommands(
+        let filtered = filterCommands(
           commands,
           selectedAttributesOnly,
           selectedAttributesExcept,
@@ -163,6 +175,9 @@ export const rows = createSelector(
           selectedPlatforms,
           selectedVersions
         );
+        if (isSnippetOnly && game) {
+          filtered = filterBySnippets(filtered, gitTree, extension, game);
+        }
         const abbrFound = abbrSearch(filtered, searchTerm);
         if (abbrFound.length > 0) {
           return abbrFound.map((command) => ({
@@ -204,6 +219,17 @@ function filterCommands(
       isPlatformMatching(command, selectedPlatforms ?? [Platform.Any]) &&
       isVersionMatching(command, selectedVersions ?? [Version.Any])
   );
+}
+
+function filterBySnippets(
+  commands: Command[],
+  tree: string[],
+  extension: string,
+  game: Game
+) {
+  return commands.filter((c) => {
+    return tree.includes(`${game}/snippets/${extension}/${c.id || c.name}.txt`);
+  });
 }
 
 function isClassMatching(

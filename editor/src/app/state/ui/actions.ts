@@ -104,3 +104,5 @@ export const switchSyntaxKind = createAction(
   '[ui] switch syntax kind',
   props<{ syntaxKind: SyntaxKind }>()
 );
+
+export const toggleSnippetOnlySearch = createAction('[ui] toggle snippet only search');

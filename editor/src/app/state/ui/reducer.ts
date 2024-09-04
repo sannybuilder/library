@@ -33,6 +33,7 @@ import {
   toggleSidebar,
   displayJsonGenerator,
   switchSyntaxKind,
+  toggleSnippetOnlySearch,
 } from './actions';
 
 export interface GameState {
@@ -60,17 +61,20 @@ export interface UiState {
   classToDisplay?: string;
   displaySearchHelp: boolean;
   isSearchHelpDismissed: boolean; // this should match localStorageSyncReducer in AppModule
+  isSnippetOnly: boolean;
 }
 
 const defaultFilterState: {
   searchTerm: string;
   selectedAttributesOnly: Attribute[];
   selectedAttributesExcept: Attribute[];
+  isSnippetOnly: boolean;
   games: Record<Game, GameState>;
 } = {
   searchTerm: '',
   selectedAttributesOnly: [],
   selectedAttributesExcept: ['is_nop', 'is_unsupported'],
+  isSnippetOnly: false,
   games: Object.values(Game).reduce((m, v) => {
     m[v] = {
       selectedClasses: ['any'],
@@ -262,7 +266,11 @@ export const uiReducer = createReducer(
   on(switchSyntaxKind, (state, { syntaxKind }) => ({
     ...state,
     selectedSyntaxKind: syntaxKind,
-  }))
+  })),
+  on(toggleSnippetOnlySearch, (state) => ({
+    ...state,
+    isSnippetOnly: !state.isSnippetOnly,
+  })),
 );
 
 function updateState(state: UiState, game: Game, newState: Partial<GameState>) {

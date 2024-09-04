@@ -35,6 +35,7 @@ import {
   generateNewJson,
   displayExtensionList,
   switchSyntaxKind,
+  toggleSnippetOnlySearch,
 } from './actions';
 import * as selector from './selectors';
 
@@ -73,6 +74,7 @@ export class UiFacade {
 
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
+  isSnippetOnly$ = this.store$.select(selector.isSnippetOnly);
 
   getAttributeCheckedState(attribute: Attribute, modifier: Modifier) {
     return this.store$.select(
@@ -207,5 +209,9 @@ export class UiFacade {
 
   switchSyntaxKind(syntaxKind: SyntaxKind) {
     this.store$.dispatch(switchSyntaxKind({ syntaxKind }))
+  }
+
+  toggleSnippetOnlySearch() {
+    this.store$.dispatch(toggleSnippetOnlySearch())
   }
 }

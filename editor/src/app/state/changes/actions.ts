@@ -48,20 +48,11 @@ export const validateAndWriteFiles = createAction(
   props<{ files: Array<{ path: string; content: string }> }>()
 );
 
-export const loadLastRevision = createAction('[changes] load last revision');
-
-export const loadLastRevisionSuccess = createAction(
-  '[changes] load last revision success',
-  props<{ revision: string }>()
-);
-
-export const loadLastRevisionFail = createAction(
-  '[changes] load last revision fail'
-);
-
 export const loadGitTree = createAction('[changes] load git tree');
+
 export const loadGitTreeSuccess = createAction(
   '[changes] load git tree success',
   props<{ tree: Array<{ path?: string; type?: string }> }>()
 );
+
 export const loadGitTreeFail = createAction('[changes] load git tree fail');

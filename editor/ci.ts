@@ -69,16 +69,6 @@ games.forEach((game) => {
   } catch {}
 });
 
-// ADD CURRENT COMMIT SHA TO INDEX.HTML
-// const sha = execSync('git rev-parse HEAD').toString().trim();
-// const indexHtml = 'dist/editor/index.html';
-// const indexHtmlContent = readFileSync(indexHtml, 'utf-8');
-// const newContent = indexHtmlContent.replace(
-//   '<!-- SHA -->',
-//   `<script>window.commitSha = '${sha}';</script>`
-// );
-// require('fs').writeFileSync(indexHtml, newContent);
-
 function assetsDir(game: string) {
   return join('dist', 'editor', 'assets', game);
 }

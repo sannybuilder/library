@@ -11,7 +11,6 @@ import { Game } from '../../models';
 export type GetRepoContentResponseDataBlob = components['schemas']['blob'];
 export type GetRepoContentResponseDataDirectory =
   components['schemas']['content-directory'];
-export type GetRepoCommit = components['schemas']['commit'];
 export type GetRepoTree = components['schemas']['git-tree'];
 
 @Injectable({ providedIn: 'root' })
@@ -78,25 +77,6 @@ export class GitHubService {
     return this._http.get(Location.joinWithSlash('/assets', fileName), {
       responseType: 'text',
     });
-  }
-
-  getRevision(accessToken: string | undefined) {
-    const ts = Date.now().toString();
-    const headers = accessToken
-      ? new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        })
-      : undefined;
-    return this._http
-      .get<GetRepoCommit>(this._config.endpoints.revision, {
-        headers,
-        params: { ts },
-      })
-      .pipe(
-        timeout(3000),
-        map(({ sha }) => sha)
-      );
   }
 
   getTree(accessToken: string | undefined) {

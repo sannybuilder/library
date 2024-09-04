@@ -2,13 +2,12 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
-import { interval, Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
   filter,
   map,
-  tap,
 } from 'rxjs/operators';
 import {
   doesGameHaveNativeDocs,
@@ -19,12 +18,7 @@ import {
 } from '../../../utils';
 import { Config, CONFIG } from '../../../config';
 import { Game, KNOWN_LANGUAGES } from '../../../models';
-import {
-  UiFacade,
-  AuthFacade,
-  GameFacade,
-  ChangesFacade,
-} from '../../../state';
+import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 import { install, uninstall } from '@github/hotkey';
 
 @Component({
@@ -46,17 +40,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   profileUrl$ = this._auth.profileUrl$;
   searchTerm$ = this._ui.searchTerm$;
   searchDebounced$ = new Subject<string>();
-  hasUpdateOnRemote$ = this._changes.lastRevision$.pipe(
-    map((lastRevision) => {
-      const { commitSha } = window as any;
-      if (!lastRevision || !commitSha) {
-        return false;
-      }
-
-      return lastRevision !== commitSha;
-    })
-  );
-  updatePolling$: Subscription;
 
   activeRoute$ = this._router.events.pipe(
     filter((event): event is NavigationEnd => event instanceof NavigationEnd),
@@ -74,7 +57,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _translate: TranslateService,
     private _cookies: CookieService,
     private _game: GameFacade,
-    private _changes: ChangesFacade,
     @Inject(CONFIG) private _config: Config
   ) {}
 
@@ -89,17 +71,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (sb) {
       install(sb as HTMLElement);
     }
-
-    // this.updatePolling$ = interval(120000)
-    //   .pipe(tap(() => this._changes.loadLastRevision()))
-    //   .subscribe();
-
-    // this._changes.loadLastRevision();
   }
 
   ngOnDestroy() {
     this.searchDebounced$.complete();
-    this.updatePolling$.unsubscribe();
     const sb = document.querySelector('#search-bar-input');
     if (sb) {
       uninstall(sb as HTMLElement);

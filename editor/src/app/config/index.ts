@@ -16,7 +16,6 @@ export interface Config {
     oauth: string;
     user: string;
     contents: string;
-    revision: string;
     tree: string;
   };
 }

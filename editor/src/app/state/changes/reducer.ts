@@ -16,7 +16,6 @@ import {
   submitChanges,
   submitChangesFail,
   submitChangesSuccess,
-  loadLastRevisionSuccess,
   loadGitTreeSuccess,
 } from './actions';
 
@@ -28,7 +27,6 @@ export interface ChangesState {
   lastUpdate?: number;
   isUpdating: boolean;
   hasChanges: boolean;
-  lastRevision?: string;
   gitTree: string[];
 }
 
@@ -117,10 +115,6 @@ export const changesReducer = createReducer(
       snapshots: { ...state.snapshots, [fileName]: { lastUpdate, content } },
     };
   }),
-  on(loadLastRevisionSuccess, (state, { revision }) => ({
-    ...state,
-    lastRevision: revision,
-  })),
   on(loadGitTreeSuccess, (state, { tree }) => ({
     ...state,
     gitTree: tree

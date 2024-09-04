@@ -14,10 +14,8 @@ import * as diff from 'diff';
 
 import {
   loadGitTree,
+  loadGitTreeFail,
   loadGitTreeSuccess,
-  loadLastRevision,
-  loadLastRevisionFail,
-  loadLastRevisionSuccess,
   reloadPage,
   submitChanges,
   submitChangesFail,
@@ -153,19 +151,6 @@ export class ChangesEffects {
     { dispatch: false }
   );
 
-  loadLastRevision$ = createEffect(() =>
-    this._actions$.pipe(
-      ofType(loadLastRevision),
-      withLatestFrom(this._auth.authToken$),
-      switchMap(([, accessToken]) => {
-        return this._gitHub.getRevision(accessToken).pipe(
-          map((revision) => loadLastRevisionSuccess({ revision })),
-          catchError(() => of(loadLastRevisionFail()))
-        );
-      })
-    )
-  );
-
   gitTree$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadGitTree),
@@ -173,7 +158,7 @@ export class ChangesEffects {
       switchMap(([, accessToken]) => {
         return this._gitHub.getTree(accessToken).pipe(
           map((tree) => loadGitTreeSuccess({ tree })),
-          catchError(() => of(loadLastRevisionFail()))
+          catchError(() => of(loadGitTreeFail()))
         );
       })
     )

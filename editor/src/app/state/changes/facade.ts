@@ -9,7 +9,6 @@ import {
   registerEnumChange,
   submitChanges,
   registerFileContent,
-  loadLastRevision,
   loadGitTree,
 } from './actions';
 import * as selector from './selectors';
@@ -22,7 +21,6 @@ export class ChangesFacade {
   changes$ = this.store$.select(selector.changes);
   snapshots$ = this.store$.select(selector.snapshots);
   github$ = this.store$.select(selector.github);
-  lastRevision$ = this.store$.select(selector.lastRevision);
   tree$ = this.store$.select(selector.tree);
 
   constructor(private store$: Store) {}
@@ -86,10 +84,6 @@ export class ChangesFacade {
     this.store$.dispatch(
       registerFileContent({ fileName, lastUpdate, content })
     );
-  }
-
-  loadLastRevision() {
-    this.store$.dispatch(loadLastRevision());
   }
 
   loadGitTree() {

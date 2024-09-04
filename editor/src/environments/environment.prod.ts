@@ -13,7 +13,6 @@ export const environment: Config = {
     oauth: 'https://github.com/login/oauth/authorize',
     user: 'https://api.github.com/user',
     contents: 'https://api.github.com/repos/sannybuilder/library/contents',
-    revision: 'https://api.github.com/repos/sannybuilder/library/commits/HEAD',
     tree: 'https://api.github.com/repos/sannybuilder/library/git/trees/HEAD?recursive=1',
   },
 };

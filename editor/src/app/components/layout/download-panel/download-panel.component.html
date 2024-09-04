@@ -1,40 +1,63 @@
 <div class="card mb-3">
-  <div class="card-body flex-column">
-    <h5 class="mb-3">{{ "ui.layout.downloads" | translate }}</h5>
-
-    <ul
-      *ngIf="sbFiles.length > 0"
-      class="nav navbar-dark flex-row flex-xl-column align-items-center align-items-xl-start"
+  <div class="flex-column">
+    <button
+      class="btn btn-block text-left"
+      type="button"
+      data-toggle="collapse"
+      data-target="#collapseDownload"
+      aria-expanded="false"
+      aria-controls="collapseDownload"
     >
-      <h6 class="mr-2 mt-2">{{ "ui.layout.forSannyBuilder" | translate }}:</h6>
-      <li class="pr-2" *ngFor="let file of sbFiles">
-        <a [href]="file.path" target="_blank" download [attr.translate]="'no'">{{ file.name }}</a>
-      </li>
-    </ul>
+      {{ "ui.layout.downloads" | translate }}
+    </button>
 
-    <ul
-      class="nav navbar-dark flex-row flex-xl-column align-items-center align-items-xl-start mt-xl-2"
-    >
-      <h6 class="mr-2 mt-2">{{ "ui.layout.forCleoRedux" | translate }}:</h6>
-      <li class="pr-2">
-        <a [href]="'/assets/' + getExtensions(game)" target="_blank" download [attr.translate]="'no'"
-          >{{ game }}.json</a
-        >
-        (<a [routerLink]="['/', game, 'script', 'generate']">{{
-          "ui.layout.customJson" | translate
-        }}</a
-        >)
-      </li>
-      <li class="pr-2">
-        <a
-          *ngIf="getEnumsJs(game) as link"
-          [href]="link"
-          target="_blank"
-          download
-          [attr.translate]="'no'"
-          >enums.js</a
-        >
-      </li>
-    </ul>
+    <div id="collapseDownload" class="collapse card-body">
+      <ul
+        *ngIf="sbFiles.length > 0"
+        class="nav navbar-dark flex-row flex-xl-column align-items-center align-items-xl-start"
+      >
+        <h6 class="mr-2 mt-2">
+          {{ "ui.layout.forSannyBuilder" | translate }}:
+        </h6>
+        <li class="pr-2" *ngFor="let file of sbFiles">
+          <a
+            [href]="file.path"
+            target="_blank"
+            download
+            [attr.translate]="'no'"
+            >{{ file.name }}</a
+          >
+        </li>
+      </ul>
+
+      <ul
+        class="nav navbar-dark flex-row flex-xl-column align-items-center align-items-xl-start mt-xl-2"
+      >
+        <h6 class="mr-2 mt-2">{{ "ui.layout.forCleoRedux" | translate }}:</h6>
+        <li class="pr-2">
+          <a
+            [href]="'/assets/' + getExtensions(game)"
+            target="_blank"
+            download
+            [attr.translate]="'no'"
+            >{{ game }}.json</a
+          >
+          (<a [routerLink]="['/', game, 'script', 'generate']">{{
+            "ui.layout.customJson" | translate
+          }}</a
+          >)
+        </li>
+        <li class="pr-2">
+          <a
+            *ngIf="getEnumsJs(game) as link"
+            [href]="link"
+            target="_blank"
+            download
+            [attr.translate]="'no'"
+            >enums.js</a
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

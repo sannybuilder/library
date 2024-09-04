@@ -21,7 +21,6 @@
     "0A8F": "<%= output1 %> = <%= input1 %> - <%= input2 %>",
     "0A90": "<%= output1 %> = <%= input1 %> * <%= input2 %>",
     "0A91": "<%= output1 %> = <%= input1 %> / <%= input2 %>",
-    "0A99": "",
     "0AA2": "int iTemp\nif or\n    load_dynamic_library \"SilentPatchIII.asi\" store_to iTemp\n    load_dynamic_library \"SilentPatchVC.asi\" store_to iTemp\n    load_dynamic_library \"SilentPatchSA.asi\" store_to iTemp\nthen\n    print_help_formatted \"SilentPatch is Active\"\nend",
     "0AB0": "while true\n    wait 0\n\n    if\n        is_key_pressed {keyCode} KeyCode.F8\n    then\n        print_help_formatted {text} \"~r~Key pressed!\"\n\n        \n        // wait for key release\n        while is_key_pressed {keyCode} KeyCode.F8\n            wait 0\n        end\n        \n        print_help_formatted {text} \"~g~Key released!\"\n    end\nend",
     "0AB1": "while true\n    wait 250\n    \n    if and\n        is_player_playing $player1\n        test_cheat \"gun\"\n    then\n        int ammo = GIVE_PLAYER_WEAPON(38) // this is actually CLEO_CALL command\n        print_help_formatted {text} \"%d bullets!\" {args} ammo\n    end\nend\n\nfunction GIVE_PLAYER_WEAPON(weaponType :int) : int\n    int modelIdx = get_weapontype_model {weapon_type} weaponType\n    request_model {modelId} modelIdx\n    load_all_models_now\n    \n    give_weapon_to_char $scplayer {weaponType} weaponType {ammo} 100\n    \n    mark_model_as_no_longer_needed {modelId} modelIdx\n    \n    // check and return ammo count\n    int ammo = get_ammo_in_char_weapon $scplayer {weaponType} weaponType\n    cleo_return 1 ammo\nend",
@@ -42,13 +41,11 @@
   "CLEO+": {
     "0E1D": "const Key_F11=122\nwhile true\n    wait 0\n    if is_key_just_pressed Key_F11\n    then\n        if is_on_mission\n        then set_on_mission False\n        else set_on_mission True\n        end\n    end\nend",
     "0E2A": "{$USE CLEO+}\n\nCleoBlip ogLocBlip = add_cleo_blip {rwTextureOrRadarSprite} 28 {x} 2486.0 {y} -1650.0 {short} false {red} 64 {green} 255 {blue} 128 {alpha} 255\n\nload_texture_dictionary 'LD_TATT' // in models\\txd\\\nload_sprite 1 \"5cross2\" // Rose\nint roseTXD = get_texture_from_sprite {sprite} 1\nCleoBlip bRose = add_cleo_blip {rwTexture} roseTXD {pos} 2598.5 -1650.0 {short} True {rgba} 255 0 0 255\n\nload_sprite 2 \"4spider\"\nint spiderTXD = get_texture_from_sprite {sprite} 2\nwrite_memory 0xB4E690 4 spiderTXD False // CVehicleModelInfo::ms_pLightsOnTexture\nCleoBlip bSpider = add_cleo_blip {RadarSprite} -2 {pos} 2598.5 -1750.0 {short} True {rgba} 0 0 255 255 // use the sprite index but negative\nremove_texture_dictionary\n\n{$USE newOpcodes}\nif\n    int myTXD = load_texture_from_png_file {png} \"CLEO\\myImage.png\"\nthen\n    CleoBlip bBlip = add_cleo_blip {rwTexture} myTXD {pos} 2598.5 -1850.0 {short} True {rgba} 255 255 255 255\nend",
-    "0E32": "",
     "0E3D": "const Key_F11=122\nwhile true\n    wait 0\n    if is_key_just_pressed Key_F11\n    then\n        if is_on_mission\n        then set_on_mission False\n        else set_on_mission True\n        end\n    end\nend",
     "0E4E": "{$USE CLEO+}\n\nint screenTimer\ndisplay_onscreen_timer_local {var_timer} screenTimer {direction} TimerDirection.Down\nscreenTimer = 10000 // 10 seconds\nset_timer_beep_countdown_time_local {var_timer} screenTimer {timeInSec} 6 // start beeping when less than 6 seconds left\n\nwhile true\n    wait 0\n    \n    print_formatted_now {text} \"Peek time left: %d\" {time} 3000 {args} screenTimer\n    \n    if\n        screenTimer == 0\n    then\n        print_string_now {text} \"Time is up!\" {time} 3000\n        break // exit the loop\n    end    \nend\n\nclear_onscreen_timer_local {var_timer} screenTimer",
     "0E4F": "{$USE CLEO+}\n\nadd_text_label {dynamicKey} 'TMR_TXT' {text} \"~r~Explosion\"\n\nint screenTimer\ndisplay_onscreen_timer_with_string_local {var_timer} screenTimer {direction} TimerDirection.Down {text} 'TMR_TXT'\nscreenTimer = 10000 // 10 seconds\nset_timer_beep_countdown_time_local {var_timer} screenTimer {timeInSec} 6 // start beeping when less than 6 seconds left\n\nwhile true\n    wait 0\n\n    print_formatted_now {text} \"Peek time left: %d\" {time} 100 {args} screenTimer\n\n    if\n        screenTimer == 0\n    then\n        print_string_now {text} \"~r~BOOM!\" {time} 3000\n        break // exit the loop\n    end\nend\n\nclear_onscreen_timer_local {var_timer} screenTimer",
     "0E5F": "const player=0\nint char, car\nfloat x,y,z\n\nget_player_char player store_to char\nrepeat\n    print_formatted \"Find a car to honk.\" 1000\n    wait 1000\nuntil is_char_in_any_car char\n\nstore_car_char_is_in_no_save char store_to car\ntimera = 0\nrepeat\n    wait 0\n    car_horn car\nuntil timera > 5000",
     "0E60": "set_camera_control false\nprint_help_formatted \"Camera control is OFF\"\nwait 10000\nset_camera_control true\nprint_help_formatted \"Camera control is ON\"",
-    "0E64": "",
     "0E83": "const player=0\nint char, weaponInfo, flags\nget_player_char player store_to char\n\nget_current_char_weaponinfo char store_to weaponInfo\nget_weaponinfo_flags weaponInfo store_to flags\nprint_help_formatted \"WeaponInfo Flags %.5X\" flags",
     "0E84": "const Pistol=22, Std=1\nint weaponInfo, totalClip\n\nget_weaponinfo Pistol skill Std store_to weaponInfo\nget_weaponinfo_total_clip weaponInfo store_to totalClip\nprint_help_formatted \"Total Clip %d\" totalClip",
     "0E85": "const player=0\nint char, weaponInfo, model1, model2\nget_player_char player store_to char\n\nget_current_char_weaponinfo char store_to weaponInfo\nget_weaponinfo_models weaponInfo store_to model1 model2\nprint_help_formatted \"Weapon Models~n~%d~n~%d\" model1 model2",
@@ -108,8 +105,6 @@
     "2102": "2102: log_to_file \".\\myLog.txt\" timestamp true text \"Line with timestamp prefix\"\n2102: log_to_file \".\\myLog.txt\" timestamp false text \"Now just the line. Timer value is: %d\" TIMERA\n\n2102: log_to_file \"userfiles:\\myUserLog.txt\" timestamp false text \"Log file in game saves location!\""
   },
   "default": {
-    "0001": "",
-    "0002": "",
     "0003": "// shakes camera for 5 seconds\nTIMERA = 0\nwhile TIMERA < 5000\n    wait 0\n    shake_cam 50\nend",
     "0004": "<%= input1 %> = <%= input2 %>",
     "0005": "<%= input1 %> = <%= input2 %>",
@@ -173,7 +168,6 @@
     "0044": "<%= input1 %> == <%= input2 %>",
     "0045": "<%= input1 %> == <%= input2 %>",
     "0046": "<%= input1 %> == <%= input2 %>",
-    "0053": "",
     "0058": "<%= input1 %> += <%= input2 %>",
     "0059": "<%= input1 %> += <%= input2 %>",
     "005A": "<%= input1 %> += <%= input2 %>",
@@ -206,7 +200,6 @@
     "0075": "<%= input1 %> /= <%= input2 %>",
     "0076": "<%= input1 %> /= <%= input2 %>",
     "0077": "<%= input1 %> /= <%= input2 %>",
-    "007C": "",
     "0084": "<%= input1 %> = <%= input2 %>",
     "0085": "<%= input1 %> = <%= input2 %>",
     "0086": "<%= input1 %> = <%= input2 %>",
@@ -272,8 +265,7 @@
     "09C0": "const player=0, posOffset=120.0, negOffset=-120.0, NumLock = 144\nint Char, Car, Blip\nfloat x,y,z,x2,y2,z2\n\nget_player_char Player store_to Char   \nwhile true\n    wait 0\n    if \n        is_key_just_pressed NumLock\n    then  \n        get_offset_from_char_in_world_coords Char posOffset posOffset posOffset store_to x y z\n        get_offset_from_char_in_world_coords Char negOffset negOffset negOffset store_to x2 y2 z2    \n        get_random_car_of_type_in_angled_area_no_save x2 y2 x y 20.0 #TAXI store_to Car\n        if Car <> -1           \n        then add_blip_for_car Car store_to Blip\n        end\n    end\nend",
     "09C7": "request_model 105\nload_all_models_now\nset_player_model $scplayer model_to 105\nmark_model_as_no_longer_needed 105",
     "0A08": "0A08: get_gxt_string_1number 'BJ_0' number 0@ width_to 1@  // ~1~",
-    "0A1A": "request_animation \"GANGS\" // not needed for \"PED\"!\nload_all_models_now\n\ntask_play_anim_secondary {handle} $scplayer {animationName} \"PRTIAL_GNGTLKE\" {animationFile} \"GANGS\" {blendSpeed} 0.2 {loop} true {lockX} false {lockY} false {keepLastFrame} false {time} -1\n\nremove_animation {animationFile} \"GANGS\" // not allowed for \"PED\"",
-    "0A75": ""
+    "0A1A": "request_animation \"GANGS\" // not needed for \"PED\"!\nload_all_models_now\n\ntask_play_anim_secondary {handle} $scplayer {animationName} \"PRTIAL_GNGTLKE\" {animationFile} \"GANGS\" {blendSpeed} 0.2 {loop} true {lockX} false {lockY} false {keepLastFrame} false {time} -1\n\nremove_animation {animationFile} \"GANGS\" // not allowed for \"PED\""
   },
   "file": {
     "2301": "6@ = allocate_memory 128\nread_block_from_file 0@ {size} 128 {address} 6@",

@@ -686,14 +686,14 @@ export class CommandEditorComponent implements OnInit {
     // suggest the type if the input name is same called
     const split = (word: string) =>
       word.split(/(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/);
-    const last = (list: unknown[]) => list && list[list.length - 1];
+    const last = (list: string[]) => list && list[list.length - 1];
     const cmp = (a: string, b: string) => a.toLowerCase() === b.toLowerCase();
 
-    const lastWord = last(split(name));
+    let lastWord = last(split(name));
 
     if (typeof lastWord === 'string') {
-      if (cmp(lastWord, 'vehicle') && type !== 'Car') {
-        return 'Car';
+      if (cmp(lastWord, 'vehicle')) {
+        lastWord = 'Car';
       }
 
       for (const paramType of this.paramTypes) {

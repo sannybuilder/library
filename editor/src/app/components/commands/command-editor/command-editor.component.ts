@@ -409,6 +409,7 @@ export class CommandEditorComponent implements OnInit {
                 source: DEFAULT_INPUT_SOURCE,
               },
             ];
+            command.num_params++;
           }
         }
       }
@@ -738,7 +739,9 @@ export class CommandEditorComponent implements OnInit {
       this.command.attrs?.is_constructor &&
       this.command.output?.[index]?.source === SourceType.any
     ) {
-      return SourceType.var_any;
+      if (this.viewContext === ViewContext.Script) {
+        return DEFAULT_OUTPUT_SOURCE;
+      }
     }
     return '';
   }

@@ -1,0 +1,17 @@
+This command checks if the vehicle's model belongs to the emergency vehicle category. The list of emergency vehicles is predefined within the game and includes law enforcement vehicles, ambulances, and firetrucks:
+
+* 407 (#FIRETRUK)
+* 416 (#AMBULAN)
+* 427 (#ENFORCER)
+* 430 (#PREDATOR)
+* 432 (#RHINO)
+* 433 (#BARRACKS)
+* 490 (#FBIRANCH)
+* 523 (#COPBIKE)
+* 528 (#FBITRUCK)
+* 544 (#FIRELA)
+* 596 (#COPCARLA)
+* 597 (#COPCARSF)
+* 598 (#COPCARVG)
+* 599 (#COPCARRU)
+* 601 (#SWATVAN)

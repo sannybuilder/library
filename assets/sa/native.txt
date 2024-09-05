@@ -217,7 +217,7 @@ function CBirds_Render<cdecl, 0x712810>()
 function CBirds_HandleGunShot<cdecl, 0x712E40>(pointA: int, pointB: int)
 function CBouncingPanel_ResetPanel<thiscall, 0x6F4910>(self: CBouncingPanel)
 function CBouncingPanel_SetPanel<thiscall, 0x6F4920>(self: CBouncingPanel, frameId: int, axis: int, angleLimit: float)
-function CBouncingPanel_ProcessPanel<thiscall, 0x6F49A0>(self: CBouncingPanel, vehicle: int, frame: int, arg2: CVector, arg3: CVector, arg4: float, arg5: float)
+function CBouncingPanel_ProcessPanel<thiscall, 0x6F49A0>(self: CBouncingPanel, vehicle: CVehicle, frame: int, arg2: CVector, arg3: CVector, arg4: float, arg5: float)
 function CBoundingBox_CBoundingBox<thiscall, 0x40FAF0>(self: CBoundingBox)
 function CBrightLights_RenderOutGeometryBuffer<cdecl, 0x722150>()
 function CBrightLights_Render<cdecl, 0x7241C0>()
@@ -235,7 +235,7 @@ function CBulletTraces_AddTrace<cdecl, 0x726AF0>(start: int, end: int, weaponTyp
 function CBulletTraces_Init<cdecl, 0x721D50>()
 function CCamera_AddShakeSimple<thiscall, 0x50D240>(self: CCamera, duration: int, type: int, intensity: int)
 function CCamera_AllowShootingWith2PlayersInCar<thiscall, 0x50C280>(self: CCamera, bAllowShootingWith2PlayersInCar: int)
-function CCamera_ApplyVehicleCameraTweaks<thiscall, 0x50A480>(self: CCamera, vehicle: int)
+function CCamera_ApplyVehicleCameraTweaks<thiscall, 0x50A480>(self: CCamera, vehicle: CVehicle)
 function CCamera_AvoidTheGeometry<thiscall, 0x514030>(self: CCamera, arg2: int, arg3: int, arg4: int, fov: int)
 function CCamera_CalculateDerivedValues<thiscall, 0x5150E0>(self: CCamera, bForMirror: int, bOriented: int)
 function CCamera_CalculateFrustumPlanes<thiscall, 0x514D60>(self: CCamera, bForMirror: int)
@@ -277,7 +277,7 @@ function CCamera_GetScreenRect<thiscall, 0x50AB50>(self: CCamera, pRect: int)
 function CCamera_Get_Just_Switched_Status<thiscall, 0x50AE10>(self: CCamera): int
 function CCamera_HandleCameraMotionForDucking<thiscall, 0x50CFA0>(self: CCamera, ped: int, source: int, targPosn: int, arg5: int)
 function CCamera_HandleCameraMotionForDuckingDuringAim<thiscall, 0x50D090>(self: CCamera, ped: int, source: int, targPosn: int, arg5: int)
-function CCamera_ImproveNearClip<thiscall, 0x516B20>(self: CCamera, pVehicle: int, pPed: int, source: int, targPosn: int)
+function CCamera_ImproveNearClip<thiscall, 0x516B20>(self: CCamera, pVehicle: CVehicle, pPed: int, source: int, targPosn: int)
 function CCamera_Init<thiscall, 0x5BC520>(self: CCamera)
 function CCamera_InitCameraVehicleTweaks<thiscall, 0x50A3B0>(self: CCamera)
 function CCamera_InitialiseScriptableComponents<thiscall, 0x50D2D0>(self: CCamera): int
@@ -347,21 +347,21 @@ function CCamera_VectorMoveLinear<thiscall, 0x50D160>(self: CCamera, moveLinearP
 function CCamera_VectorMoveRunning<thiscall, 0x4748A0>(self: CCamera): int
 function CCamera_VectorTrackLinear<thiscall, 0x50D1D0>(self: CCamera, trackLinearStartPoint: int, trackLinearEndPoint: int, duration: int, bEase: int)
 function CCamera_VectorTrackRunning<thiscall, 0x474870>(self: CCamera): int
-function CCarAI_BackToCruisingIfNoWantedLevel<cdecl, 0x41BFA0>(pVehicle: int)
-function CCarAI_CarHasReasonToStop<cdecl, 0x41C050>(pVehicle: int)
-function CCarAI_AddPoliceCarOccupants<cdecl, 0x41C070>(pVehicle: int, arg2: bool)
-function CCarAI_AddAmbulanceOccupants<cdecl, 0x41C4A0>(pVehicle: int)
-function CCarAI_AddFiretruckOccupants<cdecl, 0x41C600>(pVehicle: int)
-function CCarAI_TellOccupantsToLeaveCar<cdecl, 0x41C760>(pVehicle: int)
-function CCarAI_TellCarToFollowOtherCar<cdecl, 0x41C960>(pVehicle1: int, pVehicle2: int, radius: float)
+function CCarAI_BackToCruisingIfNoWantedLevel<cdecl, 0x41BFA0>(pVehicle: CVehicle)
+function CCarAI_CarHasReasonToStop<cdecl, 0x41C050>(pVehicle: CVehicle)
+function CCarAI_AddPoliceCarOccupants<cdecl, 0x41C070>(pVehicle: CVehicle, arg2: bool)
+function CCarAI_AddAmbulanceOccupants<cdecl, 0x41C4A0>(pVehicle: CVehicle)
+function CCarAI_AddFiretruckOccupants<cdecl, 0x41C600>(pVehicle: CVehicle)
+function CCarAI_TellOccupantsToLeaveCar<cdecl, 0x41C760>(pVehicle: CVehicle)
+function CCarAI_TellCarToFollowOtherCar<cdecl, 0x41C960>(pVehicle1: CVehicle, pVehicle2: CVehicle, radius: float)
 function CCarAI_FindPoliceBikeMissionForWantedLevel<cdecl, 0x41CA40>(): int
 function CCarAI_FindPoliceBoatMissionForWantedLevel<cdecl, 0x41CA50>(): int
-function CCarAI_FindPoliceCarSpeedForWantedLevel<cdecl, 0x41CAA0>(pVehicle: int): int
-function CCarAI_GetCarToGoToCoors<cdecl, 0x41CE30>(pVehicle1: int, pVector: int, drivingStyle: int, bSpeedLimit20: bool): float
-function CCarAI_GetCarToParkAtCoors<cdecl, 0x41D350>(pVehicle: int, pVector: int): float
-function CCarAI_MellowOutChaseSpeed<cdecl, 0x41D3D0>(pVehicle: int)
-function CCarAI_MakeWayForCarWithSiren<cdecl, 0x41D660>(pVehicle: int)
-function CCarAI_UpdateCarAI<cdecl, 0x41DA30>(pVehicle: int)
+function CCarAI_FindPoliceCarSpeedForWantedLevel<cdecl, 0x41CAA0>(pVehicle: CVehicle): int
+function CCarAI_GetCarToGoToCoors<cdecl, 0x41CE30>(pVehicle1: CVehicle, pVector: int, drivingStyle: int, bSpeedLimit20: bool): float
+function CCarAI_GetCarToParkAtCoors<cdecl, 0x41D350>(pVehicle: CVehicle, pVector: int): float
+function CCarAI_MellowOutChaseSpeed<cdecl, 0x41D3D0>(pVehicle: CVehicle)
+function CCarAI_MakeWayForCarWithSiren<cdecl, 0x41D660>(pVehicle: CVehicle)
+function CCarAI_UpdateCarAI<cdecl, 0x41DA30>(pVehicle: CVehicle)
 function CCarAI_FindPoliceCarMissionForWantedLevel<cdecl, 0x41C9D0>(): int
 function CCarCtrl_ChooseBoatModel<cdecl, 0x421970>(): int
 function CCarCtrl_ChooseCarModelToLoad<cdecl, 0x421900>(arg1: int): int
@@ -369,19 +369,19 @@ function CCarCtrl_ChooseGangCarModel<cdecl, 0x421A40>(arg1: int): int
 function CCarCtrl_ChooseModel<cdecl, 0x424CE0>(arg1: int): int
 function CCarCtrl_ChoosePoliceCarModel<cdecl, 0x421980>(arg0: int): int
 function CCarCtrl_ClearInterestingVehicleList<cdecl, 0x423F00>()
-function CCarCtrl_ClipTargetOrientationToLink<cdecl, 0x422760>(pVehicle: int, arg2: CCarPathLinkAddress, arg3: char, arg4: int, arg5: float, arg6: float)
+function CCarCtrl_ClipTargetOrientationToLink<cdecl, 0x422760>(pVehicle: CVehicle, arg2: CCarPathLinkAddress, arg3: char, arg4: int, arg5: float, arg6: float)
 function CCarCtrl_CreateCarForScript<cdecl, 0x431F80>(modelid: int, posn: CVector, missionCleanUpFlag: int): int
-function CCarCtrl_CreateConvoy<cdecl, 0x42C740>(pVehicle: int, arg2: int): int
-function CCarCtrl_CreatePoliceChase<cdecl, 0x42C2B0>(pVehicle: int, arg2: int, nodeAddress: CNodeAddress): int
-function CCarCtrl_DealWithBend_Racing<cdecl, 0x428040>(pVehicle: int, linkAddress1: CCarPathLinkAddress, linkAddress2: CCarPathLinkAddress, linkAddress3: CCarPathLinkAddress, linkAddress4: CCarPathLinkAddress, arg6: char, arg7: char, arg8: char, arg9: char, arg10: float, arg11: int, arg12: int, arg13: int, arg14: int, pVector: int): int
-function CCarCtrl_DragCarToPoint<cdecl, 0x42EC90>(pVehicle: int, pVector: int)
-function CCarCtrl_FindAngleToWeaveThroughTraffic<cdecl, 0x4325C0>(pVehicle: int, pPhysical: int, arg3: float, arg4: float, arg5: float): float
+function CCarCtrl_CreateConvoy<cdecl, 0x42C740>(pVehicle: CVehicle, arg2: int): int
+function CCarCtrl_CreatePoliceChase<cdecl, 0x42C2B0>(pVehicle: CVehicle, arg2: int, nodeAddress: CNodeAddress): int
+function CCarCtrl_DealWithBend_Racing<cdecl, 0x428040>(pVehicle: CVehicle, linkAddress1: CCarPathLinkAddress, linkAddress2: CCarPathLinkAddress, linkAddress3: CCarPathLinkAddress, linkAddress4: CCarPathLinkAddress, arg6: char, arg7: char, arg8: char, arg9: char, arg10: float, arg11: int, arg12: int, arg13: int, arg14: int, pVector: int): int
+function CCarCtrl_DragCarToPoint<cdecl, 0x42EC90>(pVehicle: CVehicle, pVector: int)
+function CCarCtrl_FindAngleToWeaveThroughTraffic<cdecl, 0x4325C0>(pVehicle: CVehicle, pPhysical: int, arg3: float, arg4: float, arg5: float): float
 function CCarCtrl_FindIntersection2Lines<cdecl, 0x4226F0>(arg1: float, arg2: float, arg3: float, arg4: float, arg5: float, arg6: float, arg7: float, arg8: float, arg9: int, arg10: int)
-function CCarCtrl_FindLinksToGoWithTheseNodes<cdecl, 0x42B470>(pVehicle: int)
-function CCarCtrl_FindMaximumSpeedForThisCarInTraffic<cdecl, 0x434400>(pVehicle: int): float
-function CCarCtrl_FindNodesThisCarIsNearestTo<cdecl, 0x42BD20>(pVehicle: int, nodeAddress1: CNodeAddress&, nodeAddress2: CNodeAddress&)
+function CCarCtrl_FindLinksToGoWithTheseNodes<cdecl, 0x42B470>(pVehicle: CVehicle)
+function CCarCtrl_FindMaximumSpeedForThisCarInTraffic<cdecl, 0x434400>(pVehicle: CVehicle): float
+function CCarCtrl_FindNodesThisCarIsNearestTo<cdecl, 0x42BD20>(pVehicle: CVehicle, nodeAddress1: CNodeAddress&, nodeAddress2: CNodeAddress&)
 function CCarCtrl_FindPathDirection<cdecl, 0x422090>(nodeAddress1: CNodeAddress, nodeAddress2: CNodeAddress, nodeAddress3: CNodeAddress, arg4: int): int
-function CCarCtrl_FindPercDependingOnDistToLink<cdecl, 0x422620>(pVehicle: int, linkAddress: CCarPathLinkAddress): float
+function CCarCtrl_FindPercDependingOnDistToLink<cdecl, 0x422620>(pVehicle: CVehicle, linkAddress: CCarPathLinkAddress): float
 function CCarCtrl_FindSequenceElement<cdecl, 0x421770>(arg1: int): int
 function CCarCtrl_FindSpeedMultiplier<cdecl, 0x4224E0>(arg1: float, arg2: float, arg3: float, arg4: float): float
 function CCarCtrl_FindSpeedMultiplierWithSpeedFromNodes<cdecl, 0x424130>(arg1: char): float
@@ -403,49 +403,49 @@ function CCarCtrl_GetNewVehicleDependingOnCarModel<cdecl, 0x421440>(modelId: int
 function CCarCtrl_Init<cdecl, 0x4212E0>()
 function CCarCtrl_InitSequence<cdecl, 0x421740>(sequenceElements: int)
 function CCarCtrl_IsAnyoneParking<cdecl, 0x42C250>(): int
-function CCarCtrl_IsThisAnAppropriateNode<cdecl, 0x42DAB0>(pVehicle: int, nodeAddress1: CNodeAddress, nodeAddress2: CNodeAddress, nodeAddress3: CNodeAddress, arg5: bool): int
-function CCarCtrl_IsThisVehicleInteresting<cdecl, 0x423EA0>(pVehicle: int): int
-function CCarCtrl_JoinCarWithRoadAccordingToMission<cdecl, 0x432CB0>(pVehicle: int)
-function CCarCtrl_JoinCarWithRoadSystem<cdecl, 0x42F5A0>(pVehicle: int)
-function CCarCtrl_JoinCarWithRoadSystemGotoCoors<cdecl, 0x42F870>(pVehicle: int, posn: CVector const&, unused: bool, bIsBoat: bool): int
-function CCarCtrl_PickNextNodeAccordingStrategy<cdecl, 0x432B10>(pVehicle: int): int
-function CCarCtrl_PickNextNodeRandomly<cdecl, 0x42DE80>(pVehicle: int)
-function CCarCtrl_PickNextNodeToChaseCar<cdecl, 0x426EF0>(pVehicle: int, xDest: float, yDest: float, zDest: float): int
-function CCarCtrl_PickNextNodeToFollowPath<cdecl, 0x427740>(pVehicle: int): int
+function CCarCtrl_IsThisAnAppropriateNode<cdecl, 0x42DAB0>(pVehicle: CVehicle, nodeAddress1: CNodeAddress, nodeAddress2: CNodeAddress, nodeAddress3: CNodeAddress, arg5: bool): int
+function CCarCtrl_IsThisVehicleInteresting<cdecl, 0x423EA0>(pVehicle: CVehicle): int
+function CCarCtrl_JoinCarWithRoadAccordingToMission<cdecl, 0x432CB0>(pVehicle: CVehicle)
+function CCarCtrl_JoinCarWithRoadSystem<cdecl, 0x42F5A0>(pVehicle: CVehicle)
+function CCarCtrl_JoinCarWithRoadSystemGotoCoors<cdecl, 0x42F870>(pVehicle: CVehicle, posn: CVector const&, unused: bool, bIsBoat: bool): int
+function CCarCtrl_PickNextNodeAccordingStrategy<cdecl, 0x432B10>(pVehicle: CVehicle): int
+function CCarCtrl_PickNextNodeRandomly<cdecl, 0x42DE80>(pVehicle: CVehicle)
+function CCarCtrl_PickNextNodeToChaseCar<cdecl, 0x426EF0>(pVehicle: CVehicle, xDest: float, yDest: float, zDest: float): int
+function CCarCtrl_PickNextNodeToFollowPath<cdecl, 0x427740>(pVehicle: CVehicle): int
 function CCarCtrl_PossiblyFireHSMissile<cdecl, 0x429600>(pEntityLauncher: int, pTargetEntity: int)
-function CCarCtrl_PossiblyRemoveVehicle<cdecl, 0x424F80>(pVehicle: int)
+function CCarCtrl_PossiblyRemoveVehicle<cdecl, 0x424F80>(pVehicle: CVehicle)
 function CCarCtrl_PruneVehiclesOfInterest<cdecl, 0x423F10>()
 function CCarCtrl_ReInit<cdecl, 0x4213B0>()
-function CCarCtrl_ReconsiderRoute<cdecl, 0x42FC40>(pVehicle: int)
-function CCarCtrl_RegisterVehicleOfInterest<cdecl, 0x423DE0>(pVehicle: int)
+function CCarCtrl_ReconsiderRoute<cdecl, 0x42FC40>(pVehicle: CVehicle)
+function CCarCtrl_RegisterVehicleOfInterest<cdecl, 0x423DE0>(pVehicle: CVehicle)
 function CCarCtrl_RemoveCarsIfThePoolGetsFull<cdecl, 0x4322B0>()
 function CCarCtrl_RemoveDistantCars<cdecl, 0x42CD10>()
-function CCarCtrl_RemoveFromInterestingVehicleList<cdecl, 0x423ED0>(pVehicle: int)
-function CCarCtrl_ScanForPedDanger<cdecl, 0x42CE40>(pVehicle: int)
+function CCarCtrl_RemoveFromInterestingVehicleList<cdecl, 0x423ED0>(pVehicle: CVehicle)
+function CCarCtrl_ScanForPedDanger<cdecl, 0x42CE40>(pVehicle: CVehicle)
 function CCarCtrl_ScriptGenerateOneEmergencyServicesCar<cdecl, 0x42FBC0>(modelId: int, posn: CVector): int
-function CCarCtrl_SetCoordsOfScriptCar<cdecl, 0x4342A0>(pVehicle: int, x: float, y: float, z: float, arg5: int, arg6: int)
-function CCarCtrl_SetUpDriverAndPassengersForVehicle<cdecl, 0x4217C0>(pVehicle: int, arg2: int, arg3: int, arg4: bool, arg5: bool, passengersNum: int)
-function CCarCtrl_SlowCarDownForCarsSectorList<cdecl, 0x432420>(ptrList: CPtrList&, pVehicle: int, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: float)
-function CCarCtrl_SlowCarDownForObject<cdecl, 0x426220>(pEntity: int, pVehicle: int, arg3: int, arg4: float)
-function CCarCtrl_SlowCarDownForObjectsSectorList<cdecl, 0x42D4F0>(ptrList: CPtrList&, pVehicle: int, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: float)
+function CCarCtrl_SetCoordsOfScriptCar<cdecl, 0x4342A0>(pVehicle: CVehicle, x: float, y: float, z: float, arg5: int, arg6: int)
+function CCarCtrl_SetUpDriverAndPassengersForVehicle<cdecl, 0x4217C0>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: bool, arg5: bool, passengersNum: int)
+function CCarCtrl_SlowCarDownForCarsSectorList<cdecl, 0x432420>(ptrList: CPtrList&, pVehicle: CVehicle, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: float)
+function CCarCtrl_SlowCarDownForObject<cdecl, 0x426220>(pEntity: int, pVehicle: CVehicle, arg3: int, arg4: float)
+function CCarCtrl_SlowCarDownForObjectsSectorList<cdecl, 0x42D4F0>(ptrList: CPtrList&, pVehicle: CVehicle, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: float)
 function CCarCtrl_SlowCarDownForOtherCar<cdecl, 0x42D0E0>(pCar1: int, pCar2: int, arg3: int, arg4: float)
-function CCarCtrl_SlowCarDownForPedsSectorList<cdecl, 0x425440>(ptrList: CPtrList&, pVehicle: int, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: float)
-function CCarCtrl_SlowCarOnRailsDownForTrafficAndLights<cdecl, 0x434790>(pVehicle: int)
-function CCarCtrl_SteerAIBoatWithPhysicsAttackingPlayer<cdecl, 0x428DE0>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAIBoatWithPhysicsCirclingPlayer<cdecl, 0x429090>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAIBoatWithPhysicsHeadingForTarget<cdecl, 0x428BE0>(pVehicle: int, arg2: float, arg3: float, arg4: int, arg5: int, arg6: int)
-function CCarCtrl_SteerAICarBlockingPlayerForwardAndBack<cdecl, 0x422B20>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAICarParkParallel<cdecl, 0x433BA0>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAICarParkPerpendicular<cdecl, 0x433EA0>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAICarTowardsPointInEscort<cdecl, 0x4336D0>(pVehicle1: int, pVehicle2: int, arg3: float, arg4: float, arg5: int, arg6: int, arg7: int, arg8: int)
-function CCarCtrl_SteerAICarWithPhysics<cdecl, 0x437C20>(pVehicle: int)
-function CCarCtrl_SteerAICarWithPhysicsFollowPath<cdecl, 0x434900>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAICarWithPhysicsFollowPath_Racing<cdecl, 0x435830>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAICarWithPhysicsFollowPreRecordedPath<cdecl, 0x432DD0>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
-function CCarCtrl_SteerAICarWithPhysicsHeadingForTarget<cdecl, 0x433280>(pVehicle: int, pTarget: int, arg3: float, arg4: float, arg5: int, arg6: int, arg7: int, arg8: int)
-function CCarCtrl_SteerAICarWithPhysicsTryingToBlockTarget<cdecl, 0x4335E0>(pVehicle: int, unusued: int, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: int, arg9: int, arg10: int)
-function CCarCtrl_SteerAICarWithPhysicsTryingToBlockTarget_Stop<cdecl, 0x428990>(pVehicle: int, x: float, y: float, arg4: float, arg5: float, arg6: int, arg7: int, arg8: int, arg9: int)
-function CCarCtrl_SteerAICarWithPhysics_OnlyMission<cdecl, 0x436A90>(pVehicle: int, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SlowCarDownForPedsSectorList<cdecl, 0x425440>(ptrList: CPtrList&, pVehicle: CVehicle, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: float)
+function CCarCtrl_SlowCarOnRailsDownForTrafficAndLights<cdecl, 0x434790>(pVehicle: CVehicle)
+function CCarCtrl_SteerAIBoatWithPhysicsAttackingPlayer<cdecl, 0x428DE0>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAIBoatWithPhysicsCirclingPlayer<cdecl, 0x429090>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAIBoatWithPhysicsHeadingForTarget<cdecl, 0x428BE0>(pVehicle: CVehicle, arg2: float, arg3: float, arg4: int, arg5: int, arg6: int)
+function CCarCtrl_SteerAICarBlockingPlayerForwardAndBack<cdecl, 0x422B20>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAICarParkParallel<cdecl, 0x433BA0>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAICarParkPerpendicular<cdecl, 0x433EA0>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAICarTowardsPointInEscort<cdecl, 0x4336D0>(pVehicle1: CVehicle, pVehicle2: CVehicle, arg3: float, arg4: float, arg5: int, arg6: int, arg7: int, arg8: int)
+function CCarCtrl_SteerAICarWithPhysics<cdecl, 0x437C20>(pVehicle: CVehicle)
+function CCarCtrl_SteerAICarWithPhysicsFollowPath<cdecl, 0x434900>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAICarWithPhysicsFollowPath_Racing<cdecl, 0x435830>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAICarWithPhysicsFollowPreRecordedPath<cdecl, 0x432DD0>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
+function CCarCtrl_SteerAICarWithPhysicsHeadingForTarget<cdecl, 0x433280>(pVehicle: CVehicle, pTarget: int, arg3: float, arg4: float, arg5: int, arg6: int, arg7: int, arg8: int)
+function CCarCtrl_SteerAICarWithPhysicsTryingToBlockTarget<cdecl, 0x4335E0>(pVehicle: CVehicle, unusued: int, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: int, arg9: int, arg10: int)
+function CCarCtrl_SteerAICarWithPhysicsTryingToBlockTarget_Stop<cdecl, 0x428990>(pVehicle: CVehicle, x: float, y: float, arg4: float, arg5: float, arg6: int, arg7: int, arg8: int, arg9: int)
+function CCarCtrl_SteerAICarWithPhysics_OnlyMission<cdecl, 0x436A90>(pVehicle: CVehicle, arg2: int, arg3: int, arg4: int, arg5: int)
 function CCarCtrl_SteerAIHeliAsPoliceHeli<cdecl, 0x42AAD0>(pAutomobile: int)
 function CCarCtrl_SteerAIHeliFlyingAwayFromPlayer<cdecl, 0x42ACB0>(pAutomobile: int)
 function CCarCtrl_SteerAIHeliToCrashAndBurn<cdecl, 0x4238E0>(pAutomobile: int)
@@ -456,45 +456,45 @@ function CCarCtrl_SteerAIHeliTowardsTargetCoors<cdecl, 0x42A630>(pAutomobile: in
 function CCarCtrl_SteerAIPlaneToCrashAndBurn<cdecl, 0x423880>(pAutomobile: int)
 function CCarCtrl_SteerAIPlaneToFollowEntity<cdecl, 0x4237F0>(pAutomobile: int)
 function CCarCtrl_SteerAIPlaneTowardsTargetCoors<cdecl, 0x423790>(pAutomobile: int)
-function CCarCtrl_StopCarIfNodesAreInvalid<cdecl, 0x422590>(pVehicle: int): int
-function CCarCtrl_SwitchBetweenPhysicsAndGhost<cdecl, 0x4222A0>(pVehicle: int)
-function CCarCtrl_SwitchVehicleToRealPhysics<cdecl, 0x423FC0>(pVehicle: int)
-function CCarCtrl_TestCollisionBetween2MovingRects<cdecl, 0x425B30>(pVehicle1: int, pVehicle2: int, arg3: float, arg4: float, pVector1: int, pVector2: int): float
-function CCarCtrl_TestCollisionBetween2MovingRects_OnlyFrontBumper<cdecl, 0x425F70>(pVehicle1: int, pVehicle2: int, arg3: float, arg4: float, pVector1: int, pVector2: int): float
-function CCarCtrl_TestWhetherToFirePlaneGuns<cdecl, 0x429520>(pVehicle: int, pTarget: int)
-function CCarCtrl_ThisVehicleShouldTryNotToTurn<cdecl, 0x421FE0>(pVehicle: int): int
-function CCarCtrl_TriggerDogFightMoves<cdecl, 0x429300>(pVehicle1: int, pVehicle2: int)
-function CCarCtrl_UpdateCarCount<cdecl, 0x424000>(pVehicle: int, bDecrease: int)
-function CCarCtrl_UpdateCarOnRails<cdecl, 0x436540>(pVehicle: int)
-function CCarCtrl_WeaveForObject<cdecl, 0x426BC0>(pEntity: int, pVehicle: int, arg3: int, arg4: int)
-function CCarCtrl_WeaveForOtherCar<cdecl, 0x426350>(pEntity: int, pVehicle: int, arg3: int, arg4: int)
-function CCarCtrl_WeaveThroughCarsSectorList<cdecl, 0x42D680>(ptrList: CPtrList&, pVehicle: int, pPhysical: int, arg4: float, arg5: float, arg6: float, arg7: float, arg8: int, arg9: int)
-function CCarCtrl_WeaveThroughObjectsSectorList<cdecl, 0x42D950>(ptrList: CPtrList&, pVehicle: int, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: int)
-function CCarCtrl_WeaveThroughPedsSectorList<cdecl, 0x42D7E0>(ptrList: CPtrList&, pVehicle: int, pPhysical: int, arg4: float, arg5: float, arg6: float, arg7: float, arg8: int, arg9: int)
-function CCarEnterExit_CarHasDoorToClose<cdecl, 0x64EE10>(vehicle: int, doorId: int): int
-function CCarEnterExit_CarHasDoorToOpen<cdecl, 0x64EDD0>(vehicle: int, doorId: int): int
-function CCarEnterExit_CarHasOpenableDoor<cdecl, 0x64EE50>(vehicle: int, doorIdUnusedArg: int, ped: int): int
-function CCarEnterExit_CarHasPartiallyOpenDoor<cdecl, 0x64EE70>(vehicle: int, doorId: int): int
-function CCarEnterExit_ComputeDoorFlag<cdecl, 0x64E550>(vehicle: int, doorId: int, bCheckVehicleType: bool): int
-function CCarEnterExit_ComputeOppositeDoorFlag<cdecl, 0x64E610>(vehicle: int, doorId: int, bCheckVehicleType: bool): int
-function CCarEnterExit_ComputePassengerIndexFromCarDoor<cdecl, 0x64F1E0>(vehicle: int, doorId: int): int
-function CCarEnterExit_ComputeSlowJackedPed<cdecl, 0x64F070>(vehicle: int, doorId: int): int
-function CCarEnterExit_ComputeTargetDoorToEnterAsPassenger<cdecl, 0x64F190>(pVehicle: int, nPassengerNum: int): int
-function CCarEnterExit_ComputeTargetDoorToExit<cdecl, 0x64F110>(pVehicle: int, pPed: int): int
-function CCarEnterExit_GetNearestCarDoor<cdecl, 0x6528F0>(pPed: int, pVehicle: int, outPos: int, doorId: int): int
-function CCarEnterExit_GetNearestCarPassengerDoor<cdecl, 0x650BB0>(ped: int, vehicle: int, outVec: int, doorId: int, flag1: bool, flag2: bool, flag3: bool): int
-function CCarEnterExit_GetPositionToOpenCarDoor<cdecl, 0x64E740>(out: int, vehicle: int, doorId: int): int
-function CCarEnterExit_IsCarDoorInUse<cdecl, 0x64EC90>(vehicle: int, door1Id: int, door2Id: int): int
-function CCarEnterExit_IsCarDoorReady<cdecl, 0x64ED90>(vehicle: int, doorId: int): int
-function CCarEnterExit_IsCarQuickJackPossible<cdecl, 0x64EF00>(vehicle: int, doorId: int, ped: int): int
-function CCarEnterExit_IsCarSlowJackRequired<cdecl, 0x64EF70>(vehicle: int, doorId: int): int
+function CCarCtrl_StopCarIfNodesAreInvalid<cdecl, 0x422590>(pVehicle: CVehicle): int
+function CCarCtrl_SwitchBetweenPhysicsAndGhost<cdecl, 0x4222A0>(pVehicle: CVehicle)
+function CCarCtrl_SwitchVehicleToRealPhysics<cdecl, 0x423FC0>(pVehicle: CVehicle)
+function CCarCtrl_TestCollisionBetween2MovingRects<cdecl, 0x425B30>(pVehicle1: CVehicle, pVehicle2: CVehicle, arg3: float, arg4: float, pVector1: int, pVector2: int): float
+function CCarCtrl_TestCollisionBetween2MovingRects_OnlyFrontBumper<cdecl, 0x425F70>(pVehicle1: CVehicle, pVehicle2: CVehicle, arg3: float, arg4: float, pVector1: int, pVector2: int): float
+function CCarCtrl_TestWhetherToFirePlaneGuns<cdecl, 0x429520>(pVehicle: CVehicle, pTarget: int)
+function CCarCtrl_ThisVehicleShouldTryNotToTurn<cdecl, 0x421FE0>(pVehicle: CVehicle): int
+function CCarCtrl_TriggerDogFightMoves<cdecl, 0x429300>(pVehicle1: CVehicle, pVehicle2: CVehicle)
+function CCarCtrl_UpdateCarCount<cdecl, 0x424000>(pVehicle: CVehicle, bDecrease: int)
+function CCarCtrl_UpdateCarOnRails<cdecl, 0x436540>(pVehicle: CVehicle)
+function CCarCtrl_WeaveForObject<cdecl, 0x426BC0>(pEntity: int, pVehicle: CVehicle, arg3: int, arg4: int)
+function CCarCtrl_WeaveForOtherCar<cdecl, 0x426350>(pEntity: int, pVehicle: CVehicle, arg3: int, arg4: int)
+function CCarCtrl_WeaveThroughCarsSectorList<cdecl, 0x42D680>(ptrList: CPtrList&, pVehicle: CVehicle, pPhysical: int, arg4: float, arg5: float, arg6: float, arg7: float, arg8: int, arg9: int)
+function CCarCtrl_WeaveThroughObjectsSectorList<cdecl, 0x42D950>(ptrList: CPtrList&, pVehicle: CVehicle, arg3: float, arg4: float, arg5: float, arg6: float, arg7: int, arg8: int)
+function CCarCtrl_WeaveThroughPedsSectorList<cdecl, 0x42D7E0>(ptrList: CPtrList&, pVehicle: CVehicle, pPhysical: int, arg4: float, arg5: float, arg6: float, arg7: float, arg8: int, arg9: int)
+function CCarEnterExit_CarHasDoorToClose<cdecl, 0x64EE10>(vehicle: CVehicle, doorId: int): int
+function CCarEnterExit_CarHasDoorToOpen<cdecl, 0x64EDD0>(vehicle: CVehicle, doorId: int): int
+function CCarEnterExit_CarHasOpenableDoor<cdecl, 0x64EE50>(vehicle: CVehicle, doorIdUnusedArg: int, ped: int): int
+function CCarEnterExit_CarHasPartiallyOpenDoor<cdecl, 0x64EE70>(vehicle: CVehicle, doorId: int): int
+function CCarEnterExit_ComputeDoorFlag<cdecl, 0x64E550>(vehicle: CVehicle, doorId: int, bCheckVehicleType: bool): int
+function CCarEnterExit_ComputeOppositeDoorFlag<cdecl, 0x64E610>(vehicle: CVehicle, doorId: int, bCheckVehicleType: bool): int
+function CCarEnterExit_ComputePassengerIndexFromCarDoor<cdecl, 0x64F1E0>(vehicle: CVehicle, doorId: int): int
+function CCarEnterExit_ComputeSlowJackedPed<cdecl, 0x64F070>(vehicle: CVehicle, doorId: int): int
+function CCarEnterExit_ComputeTargetDoorToEnterAsPassenger<cdecl, 0x64F190>(pVehicle: CVehicle, nPassengerNum: int): int
+function CCarEnterExit_ComputeTargetDoorToExit<cdecl, 0x64F110>(pVehicle: CVehicle, pPed: int): int
+function CCarEnterExit_GetNearestCarDoor<cdecl, 0x6528F0>(pPed: int, pVehicle: CVehicle, outPos: int, doorId: int): int
+function CCarEnterExit_GetNearestCarPassengerDoor<cdecl, 0x650BB0>(ped: int, vehicle: CVehicle, outVec: int, doorId: int, flag1: bool, flag2: bool, flag3: bool): int
+function CCarEnterExit_GetPositionToOpenCarDoor<cdecl, 0x64E740>(out: int, vehicle: CVehicle, doorId: int): int
+function CCarEnterExit_IsCarDoorInUse<cdecl, 0x64EC90>(vehicle: CVehicle, door1Id: int, door2Id: int): int
+function CCarEnterExit_IsCarDoorReady<cdecl, 0x64ED90>(vehicle: CVehicle, doorId: int): int
+function CCarEnterExit_IsCarQuickJackPossible<cdecl, 0x64EF00>(vehicle: CVehicle, doorId: int, ped: int): int
+function CCarEnterExit_IsCarSlowJackRequired<cdecl, 0x64EF70>(vehicle: CVehicle, doorId: int): int
 function CCarEnterExit_IsClearToDriveAway<cdecl, 0x6509B0>(outVehicle: int): int
-function CCarEnterExit_IsPathToDoorBlockedByVehicleCollisionModel<cdecl, 0x651210>(ped: int, vehicle: int, pos: int): int
-function CCarEnterExit_IsPedHealthy<cdecl, 0x64EEE0>(vehicle: int): int
-function CCarEnterExit_IsPlayerToQuitCarEnter<cdecl, 0x64F240>(ped: int, vehicle: int, startTime: int, task: int): int
+function CCarEnterExit_IsPathToDoorBlockedByVehicleCollisionModel<cdecl, 0x651210>(ped: int, vehicle: CVehicle, pos: int): int
+function CCarEnterExit_IsPedHealthy<cdecl, 0x64EEE0>(vehicle: CVehicle): int
+function CCarEnterExit_IsPlayerToQuitCarEnter<cdecl, 0x64F240>(ped: int, vehicle: CVehicle, startTime: int, task: int): int
 function CCarEnterExit_IsRoomForPedToLeaveCar<cdecl, 0x6504C0>(veh: int, doorId: int, pos: int): int
-function CCarEnterExit_IsVehicleHealthy<cdecl, 0x64EEC0>(vehicle: int): int
-function CCarEnterExit_IsVehicleStealable<cdecl, 0x6510D0>(vehicle: int, ped: int): int
+function CCarEnterExit_IsVehicleHealthy<cdecl, 0x64EEC0>(vehicle: CVehicle): int
+function CCarEnterExit_IsVehicleStealable<cdecl, 0x6510D0>(vehicle: CVehicle, ped: int): int
 function CCarGenerator_CheckForBlockage<thiscall, 0x6F32E0>(self: CCarGenerator, modelId: int): int
 function CCarGenerator_CheckIfWithinRangeOfAnyPlayers<thiscall, 0x6F2F40>(self: CCarGenerator): int
 function CCarGenerator_DoInternalProcessing<thiscall, 0x6F34D0>(self: CCarGenerator)
@@ -597,7 +597,7 @@ function CCollision_ProcessLineTriangle<cdecl, 0x4140F0>(line: CColLine const&, 
 function CCollision_ProcessVerticalLineTriangle<cdecl, 0x4147E0>(line: CColLine const&, verts: int, tri: CColTriangle const&, triPlane: CColTrianglePlane const&, colPoint: CColPoint&, maxTouchDistance: float&, collPoly: int): int
 function CCollision_IsStoredPolyStillValidVerticalLine<cdecl, 0x414D70>(lineOrigin: CVector const&, lineDist: float, colPoint: CColPoint&, collPoly: int): int
 function CCollision_GetBoundingBoxFromTwoSpheres<cdecl, 0x415230>(bbox: int, sphere1: int, sphere2: int)
-function CCollision_IsThisVehicleSittingOnMe<cdecl, 0x4152C0>(vehicle: int, vehicleOnMe: int): int
+function CCollision_IsThisVehicleSittingOnMe<cdecl, 0x4152C0>(vehicle: CVehicle, vehicleOnMe: CVehicle): int
 function CCollision_CheckCameraCollisionPeds<cdecl, 0x415320>(sectorX: int, sectorY: int, pos: int, dir: int, arg4: int): int
 function CCollision_CheckPeds<cdecl, 0x4154A0>(pos: int, dir: int, arg2: int): int
 function CCollision_SphereCastVsBBox<cdecl, 0x415590>(sphere1: int, sphere2: int, box: int): int
@@ -766,7 +766,7 @@ function CDarkel_DrawMessages<cdecl, 0x43CEC0>()
 function CDarkel_ReadStatus<cdecl, 0x43D1E0>(): int
 function CDarkel_RegisterKillNotByPlayer<cdecl, 0x43D210>(pKilledPed: int)
 function CDarkel_ThisPedShouldBeKilledForFrenzy<cdecl, 0x43D2F0>(pPed: int): int
-function CDarkel_ThisVehicleShouldBeKilledForFrenzy<cdecl, 0x43D350>(pVehicle: int): int
+function CDarkel_ThisVehicleShouldBeKilledForFrenzy<cdecl, 0x43D350>(pVehicle: CVehicle): int
 function CDarkel_StartFrenzy<cdecl, 0x43D3B0>(weapontype: eWeaponType, timelimit: int, killsNeeded: int, modelToKill: int, pStartMessage: int, modelToKill2: int, modelToKill3: int, modelToKill4: int, bStandardSoundAndMessages: bool, bNeedHeadShot: bool)
 function CDarkel_ResetModelsKilledByPlayer<cdecl, 0x43D6A0>(playerid: int)
 function CDarkel_QueryModelsKilledByPlayer<cdecl, 0x43D6C0>(player: int, modelid: int): int
@@ -777,7 +777,7 @@ function CDarkel_Update<cdecl, 0x43DAC0>()
 function CDarkel_ResetOnPlayerDeath<cdecl, 0x43DC10>()
 function CDarkel_FailKillFrenzy<cdecl, 0x43DC60>()
 function CDarkel_RegisterKillByPlayer<cdecl, 0x43DCD0>(pKilledPed: int, damageWeaponId: eWeaponType, bHeadShotted: bool, arg4: int)
-function CDarkel_RegisterCarBlownUpByPlayer<cdecl, 0x43DF20>(pVehicle: int, arg2: int)
+function CDarkel_RegisterCarBlownUpByPlayer<cdecl, 0x43DF20>(pVehicle: CVehicle, arg2: int)
 function CDate_operator<<thiscall, 0x618D90>(self: CDate, rhs: CDate const &): int
 function CDate_operator==<thiscall, 0x618DF0>(self: CDate, rhs: CDate const &): int
 function CDate_operator><thiscall, 0x618D30>(self: CDate, rhs: CDate const &>(gaddrof(CDate::operator): int
@@ -795,8 +795,8 @@ function CDirectory_WriteDirFile<thiscall, 0x532410>(self: CDirectory, filename:
 function CDirectory_DirectoryInfo* CDirectory<thiscall, 0x532450>(self: CDirectory, name: int): int
 function CDirectory_DirectoryInfo* CDirectory<thiscall, 0x5324A0>(self: CDirectory, name: int, outOffset: int, outStreamingSize: int): int
 function CDirectory_DirectoryInfo* CDirectory<thiscall, 0x5324D0>(self: CDirectory, key: int, outOffset: int, outStreamingSize: int): int
-function CDoor_Process<thiscall, 0x6F4040>(self: CDoor, vehicle: int, arg1: CVector&, arg2: CVector&, arg3: CVector&): int
-function CDoor_ProcessImpact<thiscall, 0x6F4540>(self: CDoor, vehicle: int, arg1: CVector&, arg2: CVector&, arg3: CVector&): int
+function CDoor_Process<thiscall, 0x6F4040>(self: CDoor, vehicle: CVehicle, arg1: CVector&, arg2: CVector&, arg3: CVector&): int
+function CDoor_ProcessImpact<thiscall, 0x6F4540>(self: CDoor, vehicle: CVehicle, arg1: CVector&, arg2: CVector&, arg3: CVector&): int
 function CDoor_Open<thiscall, 0x6F4790>(self: CDoor, openRatio: float)
 function CDoor_GetAngleOpenRatio<thiscall, 0x6F47E0>(self: CDoor): float
 function CDoor_IsClosed<thiscall, 0x6F4800>(self: CDoor): int
@@ -1200,7 +1200,7 @@ function CPedGroup_FindDistanceToFurthestMember<thiscall, 0x5FB010>(self: CPedGr
 function CPedGroup_FindDistanceToNearestMember<thiscall, 0x5FB0A0>(self: CPedGroup, ppOutNearestMember: int): float
 function CPedGroup_Flush<thiscall, 0x5FB790>(self: CPedGroup)
 function CPedGroup_GetClosestGroupPed<thiscall, 0x5FACD0>(self: CPedGroup, ped: int, pOutDistance: int): int
-function CPedGroup_IsAnyoneUsingCar<thiscall, 0x5F7DB0>(self: CPedGroup, vehicle: int): int
+function CPedGroup_IsAnyoneUsingCar<thiscall, 0x5F7DB0>(self: CPedGroup, vehicle: CVehicle): int
 function CPedGroup_PlayerGaveCommand_Attack<thiscall, 0x5F7CC0>(self: CPedGroup, playerPed: int, ped: int)
 function CPedGroup_PlayerGaveCommand_Gather<thiscall, 0x5FAB60>(self: CPedGroup, ped: int)
 function CPedGroup_Process<thiscall, 0x5FC7E0>(self: CPedGroup)
@@ -1344,7 +1344,7 @@ function CPickup_FindTextIndexForString<cdecl, 0x455500>(message: int)
 function CPickup_FindStringForTextIndex<cdecl, 0x455540>(index: int): int
 function CPickup_Remove<thiscall, 0x4556C0>(self: CPickup)
 function CPickup_GiveUsAPickUpObject<thiscall, 0x4567E0>(self: CPickup, pObject: int, objectPoolSlotIndex: int)
-function CPickup_Update<thiscall, 0x457410>(self: CPickup, playerPed: int, vehicle: int, playerId: int): int
+function CPickup_Update<thiscall, 0x457410>(self: CPickup, playerPed: int, vehicle: CVehicle, playerId: int): int
 function CPickup_ProcessGunShot<thiscall, 0x4588B0>(self: CPickup, origin: int, target: int)
 function CPickups_AddToCollectedPickupsArray<cdecl, 0x455240>(handle: int)
 function CPickups_CreatePickupCoorsCloseToCoors<cdecl, 0x458A80>(inX: float, inY: float, inZ: float, outX: int, outY: int, outZ: int)
@@ -1459,7 +1459,7 @@ function CPools_GetObjectRef<cdecl, 0x550020>(object: int): int
 function CPools_GetPed<cdecl, 0x54FF90>(handle: int): int
 function CPools_GetPedRef<cdecl, 0x54FF60>(ped: int): int
 function CPools_GetVehicle<cdecl, 0x54FFF0>(handle: int): int
-function CPools_GetVehicleRef<cdecl, 0x54FFC0>(vehicle: int): int
+function CPools_GetVehicleRef<cdecl, 0x54FFC0>(vehicle: CVehicle): int
 function CPools_Initialise<cdecl, 0x550F10>()
 function CPools_Load<cdecl, 0x5D0890>(): int
 function CPools_LoadObjectPool<cdecl, 0x5D4A40>(): int
@@ -1732,8 +1732,8 @@ function CStats_UpdateStatsWhenSprinting<cdecl, 0x55C660>()
 function CStats_UpdateStatsWhenRunning<cdecl, 0x55C6F0>()
 function CStats_UpdateStatsWhenCycling<cdecl, 0x55C780>(arg0: bool, bmx: int)
 function CStats_UpdateStatsWhenSwimming<cdecl, 0x55C990>(arg0: bool, arg1: bool)
-function CStats_UpdateStatsWhenDriving<cdecl, 0x55CAC0>(vehicle: int)
-function CStats_UpdateStatsWhenFlying<cdecl, 0x55CC00>(vehicle: int)
+function CStats_UpdateStatsWhenDriving<cdecl, 0x55CAC0>(vehicle: CVehicle)
+function CStats_UpdateStatsWhenFlying<cdecl, 0x55CC00>(vehicle: CVehicle)
 function CStats_UpdateStatsWhenOnMotorBike<cdecl, 0x55CD60>(bike: int)
 function CStats_UpdateStatsWhenWeaponHit<cdecl, 0x55CEB0>(weaponType: int)
 function CStats_UpdateStatsWhenFighting<cdecl, 0x55CFA0>()
@@ -1800,7 +1800,7 @@ function CStreamingInfo_Init<thiscall, 0x407460>(self: CStreamingInfo)
 function CStreamingInfo_RemoveFromList<thiscall, 0x4074E0>(self: CStreamingInfo)
 function CStreamingInfo_SetCdPosnAndSize<thiscall, 0x4075E0>(self: CStreamingInfo, cdPosn: int, cdSize: int)
 function CStuckCarCheck_AddCarToCheck<thiscall, 0x465970>(self: CStuckCarCheck, carHandle: int, distance: int, time: int, a5: int, bStuck: int, bFlipped: int, bWarp: int, pathId: int)
-function CStuckCarCheck_AttemptToWarpVehicle<thiscall, 0x463A60>(self: CStuckCarCheck, vehicle: int, origin: int, orientation: float): int
+function CStuckCarCheck_AttemptToWarpVehicle<thiscall, 0x463A60>(self: CStuckCarCheck, vehicle: CVehicle, origin: int, orientation: float): int
 function CStuckCarCheck_ClearStuckFlagForCar<thiscall, 0x463C40>(self: CStuckCarCheck, carHandle: int)
 function CStuckCarCheck_HasCarBeenStuckForAWhile<thiscall, 0x463C00>(self: CStuckCarCheck, carHandle: int): int
 function CStuckCarCheck_Init<thiscall, 0x4639E0>(self: CStuckCarCheck)
@@ -1812,9 +1812,9 @@ function CTaskComplexProstituteSolicit_CTaskComplexProstituteSolicit<thiscall, 0
 function CTaskComplexProstituteSolicit_CreateSubTask<thiscall, 0x666360>(self: CTaskComplexProstituteSolicit, taskId: int, pProstitute: int): int
 function CTaskComplexProstituteSolicit_GetRidOfPlayerProstitute<cdecl, 0x661D30>()
 function CTaskComplexProstituteSolicit_IsTaskValid<cdecl, 0x661BB0>(pProstitute: int, pClient: int): int
-function CTaskUtilityLineUpPedWithCar_GetLocalPositionToOpenCarDoor<thiscall, 0x64FC10>(self: CTaskUtilityLineUpPedWithCar, unused: int, pVehicle: int, arg3: float, pAnimBlendAssoc: int): int
-function CTaskUtilityLineUpPedWithCar_ProcessPed<thiscall, 0x6513A0>(self: CTaskUtilityLineUpPedWithCar, pPed: int, pVehicle: int, pAnimBlendAssoc: int)
-function CTaskUtilityLineUpPedWithCar_GetPositionToOpenCarDoor<thiscall, 0x650A80>(self: CTaskUtilityLineUpPedWithCar, unused: int, pVehicle: int, arg2: float, pAnimBlendAssoc: int): int
+function CTaskUtilityLineUpPedWithCar_GetLocalPositionToOpenCarDoor<thiscall, 0x64FC10>(self: CTaskUtilityLineUpPedWithCar, unused: int, pVehicle: CVehicle, arg3: float, pAnimBlendAssoc: int): int
+function CTaskUtilityLineUpPedWithCar_ProcessPed<thiscall, 0x6513A0>(self: CTaskUtilityLineUpPedWithCar, pPed: int, pVehicle: CVehicle, pAnimBlendAssoc: int)
+function CTaskUtilityLineUpPedWithCar_GetPositionToOpenCarDoor<thiscall, 0x650A80>(self: CTaskUtilityLineUpPedWithCar, unused: int, pVehicle: CVehicle, arg2: float, pAnimBlendAssoc: int): int
 function CTheCarGenerators_CreateCarGenerator<cdecl, 0x6F31A0>(x: float, y: float, z: float, angle: float, modelId: int, color1: int, color2: int, forceSpawn: int, alarmChances: int, doorLockChances: int, minDelay: int, maxDelay: int, iplId: int, bOwnedbyplayer: int): int
 function CTheScripts_AddScriptCheckpoint<cdecl, 0x4935A0>(atX: float, atY: float, atZ: float, pointToX: float, pointToY: float, pointToZ: float, radius: float, type: int): int
 function CTheScripts_AddScriptEffectSystem<cdecl, 0x492F90>(a1: int): int
@@ -1832,7 +1832,7 @@ function CTheScripts_IsEntityWithinSearchLight<cdecl, 0x493900>(index: int, pEnt
 function CTheScripts_IsPedStopped<cdecl, 0x486110>(ped: int): int
 function CTheScripts_IsPlayerOnAMission<cdecl, 0x464D50>(): int
 function CTheScripts_IsPointWithinSearchLight<cdecl, 0x493280>(pointPosn: int, index: int): int
-function CTheScripts_IsVehicleStopped<cdecl, 0x4861F0>(pVehicle: int): int
+function CTheScripts_IsVehicleStopped<cdecl, 0x4861F0>(pVehicle: CVehicle): int
 function CTheScripts_RemoveFromWaitingForScriptBrainArray<cdecl, 0x46ABC0>(a1: int, modelIndex: int): int
 function CTheScripts_ScriptAttachAnimGroupToCharModel<cdecl, 0x474800>(modelId: int, ifpName: int): int
 function CTheScripts_StartNewScript<cdecl, 0x464C90>(startIp: int): int
@@ -1863,7 +1863,7 @@ function CUpsideDownCarCheck_HasCarBeenUpsideDownForAWhile<thiscall, 0x463940>(s
 function CUpsideDownCarCheck_Init<thiscall, 0x463810>(self: CUpsideDownCarCheck)
 function CUpsideDownCarCheck_RemoveCarFromCheck<thiscall, 0x463910>(self: CUpsideDownCarCheck, carHandle: int)
 function CUpsideDownCarCheck_UpdateTimers<thiscall, 0x4655E0>(self: CUpsideDownCarCheck)
-function CUpsideDownCarCheck_IsCarUpsideDown<cdecl, 0x4655A0>(pVehicle: int): int
+function CUpsideDownCarCheck_IsCarUpsideDown<cdecl, 0x4655A0>(pVehicle: CVehicle): int
 function CUpsideDownCarCheck_IsCarUpsideDown<cdecl, 0x4655A0>(carhandle: int): int
 function CVisibilityPlugins_AtomicConstructor<cdecl, 0x732150>(object: int)
 function CVisibilityPlugins_AtomicCopyConstructor<cdecl, 0x732170>(object: int, originalObject: int)
@@ -1996,20 +1996,20 @@ function CWeapon_Initialise<thiscall, 0x73B4A0>(self: CWeapon, weaponType: eWeap
 function CWeapon_DoBulletImpact<thiscall, 0x73B550>(self: CWeapon, owner: int, victim: int, startPoint: int, endPoint: int, colPoint: int, arg5: int)
 function CWeapon_TakePhotograph<thiscall, 0x73C1F0>(self: CWeapon, owner: int, point: int): int
 function CWeapon_SetUpPelletCol<thiscall, 0x73C710>(self: CWeapon, numPellets: int, owner: int, victim: int, point: CVector&, colPoint: CColPoint&, outMatrix: CMatrix&)
-function CWeapon_FireInstantHitFromCar2<thiscall, 0x73CBA0>(self: CWeapon, startPoint: CVector, endPoint: CVector, vehicle: int, owner: int)
+function CWeapon_FireInstantHitFromCar2<thiscall, 0x73CBA0>(self: CWeapon, startPoint: CVector, endPoint: CVector, vehicle: CVehicle, owner: int)
 function CWeapon_DoDoomAiming<cdecl, 0x73CDC0>(owner: int, start: int, end: int)
-function CWeapon_DoTankDoomAiming<cdecl, 0x73D1E0>(vehicle: int, owner: int, startPoint: int, endPoint: int)
-function CWeapon_DoDriveByAutoAiming<cdecl, 0x73D720>(owner: int, vehicle: int, startPoint: int, endPoint: int, canAimVehicles: bool)
+function CWeapon_DoTankDoomAiming<cdecl, 0x73D1E0>(vehicle: CVehicle, owner: int, startPoint: int, endPoint: int)
+function CWeapon_DoDriveByAutoAiming<cdecl, 0x73D720>(owner: int, vehicle: CVehicle, startPoint: int, endPoint: int, canAimVehicles: bool)
 function CWeapon_Update<thiscall, 0x73DB40>(self: CWeapon, owner: int)
 function CWeapon_CanBeUsedFor2Player<thiscall, 0x73DEF0>(self: CWeapon): int
 function CWeapon_FindNearestTargetEntityWithScreenCoors<cdecl, 0x73E240>(screenX: float, screenY: float, range: float, point: CVector, outX: int, outY: int)
 function CWeapon_EvaluateTargetForHeatSeekingMissile<cdecl, 0x73E560>(entity: int, posn: CVector&, direction: CVector&, distanceMultiplier: float, fromVehicle: bool, lastEntity: int): float
 function CWeapon_DoWeaponEffect<thiscall, 0x73E690>(self: CWeapon, origin: CVector, target: CVector)
 function CWeapon_FireAreaEffect<thiscall, 0x73E800>(self: CWeapon, firingEntity: int, origin: int, targetEntity: int, target: int): int
-function CWeapon_FireInstantHitFromCar<thiscall, 0x73EC40>(self: CWeapon, vehicle: int, leftSide: bool, rightSide: bool): int
+function CWeapon_FireInstantHitFromCar<thiscall, 0x73EC40>(self: CWeapon, vehicle: CVehicle, leftSide: bool, rightSide: bool): int
 function CWeapon_CheckForShootingVehicleOccupant<cdecl, 0x73F480>(pCarEntity: int, colPoint: int, weaponType: eWeaponType, origin: CVector const&, target: CVector const&): int
 function CWeapon_PickTargetForHeatSeekingMissile<cdecl, 0x73F910>(origin: CVector, direction: CVector, distanceMultiplier: float, ignoreEntity: int, fromVehicle: bool, lastEntity: int): int
-function CWeapon_FireFromCar<thiscall, 0x73FA20>(self: CWeapon, vehicle: int, leftSide: bool, rightSide: bool)
+function CWeapon_FireFromCar<thiscall, 0x73FA20>(self: CWeapon, vehicle: CVehicle, leftSide: bool, rightSide: bool)
 function CWeapon_FireInstantHit<thiscall, 0x73FB10>(self: CWeapon, firingEntity: int, origin: int, muzzlePosn: int, targetEntity: int, target: int, originForDriveBy: int, arg6: bool, muzzle: bool): int
 function CWeapon_FireProjectile<thiscall, 0x741360>(self: CWeapon, firingEntity: int, origin: int, targetEntity: int, target: int, force: float): int
 function CWeapon_FireM16_1stPerson<thiscall, 0x741C00>(self: CWeapon, owner: int): int
@@ -2059,7 +2059,7 @@ function CWorld_CallOffChaseForAreaSectorListPeds<cdecl, 0x563D00>(ptrList: CPtr
 function CWorld_CameraToIgnoreThisObject<cdecl, 0x563F40>(entity: int): int
 function CWorld_FindPlayerSlotWithPedPointer<cdecl, 0x563FA0>(ptr: int): int
 function CWorld_FindPlayerSlotWithRemoteVehiclePointer<cdecl, 0x563FD0>(ptr: int): int
-function CWorld_FindPlayerSlotWithVehiclePointer<cdecl, 0x564000>(vehiclePtr: int)
+function CWorld_FindPlayerSlotWithVehiclePointer<cdecl, 0x564000>(vehicle: CVehicle)
 function CWorld_ShutDown<cdecl, 0x564050>()
 function CWorld_ClearForRestart<cdecl, 0x564360>()
 function CWorld_ProcessVerticalLineSector_FillGlobeColPoints<cdecl, 0x564420>(sector: CSector&, repeatSector: CRepeatSector&, colLine: CColLine const&, outEntity: int, buildings: bool, vehicles: bool, peds: bool, objects: bool, dummies: bool, doSeeThroughCheck: bool, outCollPoly: int): int

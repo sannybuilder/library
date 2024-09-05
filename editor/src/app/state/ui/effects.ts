@@ -20,6 +20,7 @@ import {
   selectExtensions,
   stopEditOrDisplay,
   toggleAttribute,
+  toggleSnippetOnlySearch,
   updateSearchTerm,
 } from './actions';
 import {
@@ -310,7 +311,13 @@ export class UiEffects {
   resetPagination$ = createEffect(() =>
     merge(
       this._actions$.pipe(
-        ofType(toggleAttribute, selectExtensions, selectClass, updateSearchTerm)
+        ofType(
+          toggleAttribute,
+          selectExtensions,
+          selectClass,
+          updateSearchTerm,
+          toggleSnippetOnlySearch
+        )
       ),
       this._game.game$ // needed as the current page may not exist in the chosen game resulting in the empty list
     ).pipe(mapTo(changePage({ index: 1 })))

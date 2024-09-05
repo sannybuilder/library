@@ -556,7 +556,12 @@
         <pre
           *ngIf="displaySnippetPreview"
           class="sample"
-          [innerHTML]="snippetText.value | snippetify | codify : command : game | sanitize"
+          [innerHTML]="
+            snippetText.value
+              | snippetify : viewContext
+              | codify : command : game
+              | sanitize
+          "
         ></pre>
       </div>
     </div>

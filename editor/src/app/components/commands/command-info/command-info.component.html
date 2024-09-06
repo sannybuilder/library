@@ -11,14 +11,18 @@
 <div class="row mb-2">
   <div class="col-12 d-flex flex-row">
     <h5 class="mr-3" *ngIf="command.id">{{ command.id }}</h5>
-    <h5 class="text-break" [attr.translate]="'no'">{{ command.name }}</h5>
+    <h5
+      [ngClass]="{ 'text-break': command.name.length > 10 }"
+      [attr.translate]="'no'"
+    >
+      {{ command.name }}
+    </h5>
     <h5
       class="ml-3"
       *ngIf="viewContext === ViewContext.Code"
       [attr.translate]="'no'"
-    >
-      {{ command | nativeName }}
-    </h5>
+      [innerHTML]="command | nativeName | sanitize"
+    ></h5>
   </div>
 </div>
 

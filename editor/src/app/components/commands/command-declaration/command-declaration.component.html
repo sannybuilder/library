@@ -81,7 +81,7 @@
       [attr.title]="classDesc"
       [routerLink]="['/', game, 'native', 'classes', command.class]"
       >{{ command.class }}</a
-    >_{{ command.member }}} @else {{{ command.member }}}
+    >_<wbr />{{ command.member }}} @else {{{ command.member }}}
     @if(command.cc){&lt;<span class="identifier">{{ command.cc }}</span
     >{{ ", " + command.name }}&gt;}
     <span
@@ -140,7 +140,7 @@
   </ng-container>
 
   <ng-container *ngIf="syntaxKind === 'cleo_redux'">
-    <code class="mt-3">
+    <code class="mt-3 text-break">
       <ng-container *ngIf="command.output?.length">
         <span *ngIf="command.output.length > 1">&#123;&nbsp;</span>
         <span [innerHTML]="command | outputParams | sanitize"></span>

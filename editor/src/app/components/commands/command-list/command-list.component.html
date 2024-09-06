@@ -73,7 +73,7 @@
 
                 <ng-template #nameAsLink>
                   <a
-                    class="text-break"
+                    [ngClass]="{ 'text-break': row.command.name.length > 10 }"
                     [routerLink]="[baseHref, row.extension, row.command.name]"
                     [queryParams]="getQueryParamsForCommand(row.command, game)"
                     [name]="row.command.name"

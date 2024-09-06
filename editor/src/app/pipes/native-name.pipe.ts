@@ -10,6 +10,6 @@ export class NativeNamePipe implements PipeTransform {
     const extractor = new PropExtractPipe();
     const className = extractor.transform(command, 'class');
     const memberName = extractor.transform(command, 'member');
-    return [className, memberName].filter(Boolean).join('::');
+    return [className, memberName].filter(Boolean).join('::<wbr>');
   }
 }

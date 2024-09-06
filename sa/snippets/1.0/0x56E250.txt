@@ -1,0 +1,15 @@
+while true
+    wait 0
+    int pos = FindPlayerCentreOfWorld(-1)
+    PrintVector(pos)
+end
+
+function PrintVector(vec: int {CVector})
+    float x = Memory.ReadWithOffset(vec, 0, 4)
+    float y = Memory.ReadWithOffset(vec, 4, 4)
+    float z = Memory.ReadWithOffset(vec, 8, 4)
+
+    use_text_commands true
+    set_text_wrapx 640.0
+    display_text_formatted 0 0 "x: %.2f y: %.2f z: %.2f" x y z
+end

@@ -1,36 +1,13 @@
+function CCheat_VehicleCheat<cdecl, 0x43A0B0>(vehicleModelId: int): int
+
 const modelId = #COPCARLA
-
-spawn_vehicle_by_cheating modelId
-
-if int v = FindVehicleNearby(modelId, 50.0)
+int vehicle = CCheat_VehicleCheat(modelId)
+int res = CVehicle_IsLawEnforcementVehicle(vehicle)
+if is_bit_set res 0
 then
-    int res = CVehicle_IsLawEnforcementVehicle(v)
-    if is_bit_set res 0
-    then
-        print_formatted "Car %d is law enforcement" 5000 modelId
-    else
-        print_formatted "Car %d is not law enforcement" 5000 modelId
-    end
+    print_formatted "%d is law enforcement" 5000 modelId
 else
-    print_formatted "Vehicle not found"   
+    print_formatted "%d is not law enforcement" 5000 modelId
 end
 
 terminate_this_script
-
-
-function FindVehicleNearby(model: int, radius: float): optional int {CVehicle*}
-    function CWorld_FindNearestObjectOfType<cdecl, 0x5693F0>(modelId: int, point: int {CVector const&}, radius: float, b2D: int {bool}, buildings: int {bool}, vehicles: int {bool}, peds: int {bool}, objects: int {bool}, dummies: int {bool}): int {CEntity}
-
-    Char playerChar = get_player_char 0
-    float pos[3]
-    pos[0], pos[1], pos[2] = get_char_coordinates playerChar
-    
-    int pPos = get_var_pointer pos
-    int addr = CWorld_FindNearestObjectOfType(modelId, pPos, 50.0, false, false, {vehicles} true, false, false, false)
-    
-    if addr > 0
-    then
-        return addr
-    end
-    cleo_return_fail
-end

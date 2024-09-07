@@ -8,10 +8,10 @@ Available online at https://library.sannybuilder.com/
 
 ## Features
 
-- All scripting commands for GTA III, Vice City and San Andreas, including CLEO4, CLEO5 and CLEO Redux extensions, complete with types and examples
+- All scripting commands for GTA III, Vice City and San Andreas, including [CLEO4](https://github.com/cleolibrary/CLEO4), [CLEO5](https://github.com/cleolibrary/CLEO5) and [CLEO Redux](https://github.com/cleolibrary/CLEO-Redux) extensions, complete with types and examples
 - Advanced filtering and search functionality
 - Convenient online editor for authorized users (see Contributing) that allows changes to be committed directly from the browser to GitHub
-- Up-to-date configuration files for use with Sanny Builder 4 and CLEO Redux
+- Up-to-date configuration files for use with [Sanny Builder 4](https://sannybuilder.com/) and [CLEO Redux](https://re.cleo.li/)
 - Responsive design optimized for mobile devices
 
 ## Contributing

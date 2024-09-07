@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1725675365118,
-    "version": "0.32",
+    "last_update": 1725737571137,
+    "version": "0.33",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -45197,7 +45197,62 @@
           "num_params": 2,
           "member": "FindPlayerCentreOfWorld",
           "cc": "cdecl",
-          "short_desc": "Returns a position vector of the given player. Use -1 for the current player"
+          "short_desc": "Returns a position vector of the given player. Use -1 for the current player",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "playerIndex",
+              "type": "int"
+            },
+            {
+              "name": "includeRemote",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "vehicle",
+              "type": "CVehicle"
+            }
+          ],
+          "name": "0x56E0D0",
+          "num_params": 3,
+          "member": "FindPlayerVehicle",
+          "cc": "cdecl",
+          "short_desc": "Returns a pointer to the player's current vehicle, or 0 if the player is not driving any",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "result",
+              "type": "CVector"
+            },
+            {
+              "name": "playerIndex",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "CVector"
+            }
+          ],
+          "name": "0x56E010",
+          "num_params": 3,
+          "member": "FindPlayerCoors",
+          "cc": "cdecl",
+          "short_desc": "Returns a position vector of the given player. Use -1 for the current player",
+          "attrs": {
+            "is_static": true
+          }
         }
       ]
     }

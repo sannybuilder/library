@@ -1,0 +1,1 @@
+This command gets the number of collected donkey magazine pickups, which can be created through START_PACMAN_RACE or ADD_POWER_PILL. The number can be reset through CLEAR_NUMBER_OF_POWER_PILLS_EATEN or by recreating the pickups through START_PACMAN_RACE.

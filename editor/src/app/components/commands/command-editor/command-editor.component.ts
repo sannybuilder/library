@@ -33,6 +33,7 @@ import {
   SourceType,
   SupportLevel,
   Version,
+  Extension,
 } from '../../../models';
 import { SelectorComponent } from '../../common/selector/selector.component';
 import {
@@ -114,6 +115,7 @@ export class CommandEditorComponent implements OnInit {
   private _supportInfo: GameSupportInfo[] | undefined;
   private _viewContext: ViewContext;
   private _game: Game;
+  private _extensions: Extension[] = [];
 
   PrimitiveType = PrimitiveType;
   SourceType = SourceType;
@@ -186,6 +188,7 @@ export class CommandEditorComponent implements OnInit {
     emptyMember: false,
   };
   errorMessages: string[] = [];
+  extensionNames: string[] = [];
 
   platforms: Array<{ name: Platform; status: boolean }> = [];
 
@@ -254,7 +257,14 @@ export class CommandEditorComponent implements OnInit {
 
   @Input() snippet: string;
   @Input() extension: string;
-  @Input() extensionNames: string[];
+  @Input() set extensions(val: Extension[]) {
+    this.extensionNames = val.map((e) => e.name);
+    this._extensions = val;
+
+  }
+  get extensions() {
+    return this._extensions;
+  }
   @Input() set supportInfo(val: GameSupportInfo[] | undefined) {
     this._supportInfo = val;
 

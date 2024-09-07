@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Command, Extension, Game } from '../models';
 import { template } from 'lodash';
 import { braceify, stringifyWithColonNoHighlight } from './params';
+import { functionName, generateFunctionDeclaration } from '../utils';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-pascal';
-import { FunctionParamsPipe } from './function-params.pipe';
 
 Prism.languages.sb = Prism.languages.extend('pascal', {
   keyword: [
@@ -73,33 +73,11 @@ function compileTemplate(code: string, command: Command, game: Game): string {
     return compiled({
       ...stringify('input'),
       ...stringify('output'),
-      decl: generateDeclaration(command, game),
+      decl: generateFunctionDeclaration(command, game),
     });
   } catch {
     return '[invalid code snippet]';
   }
-}
-
-function generateDeclaration(command: Command, game: Game): string {
-  if (!command.member) {
-    return '';
-  }
-
-  let declaration = 'function ';
-
-  if (command.class) {
-    declaration += `${command.class}_${command.member}`;
-  } else {
-    declaration += command.member;
-  }
-
-  if (command.cc && command.name) {
-    declaration += `<${command.cc}, ${command.name}>`;
-  }
-
-  declaration += new FunctionParamsPipe().transform(command, game, true);
-
-  return declaration;
 }
 
 function format(
@@ -110,9 +88,13 @@ function format(
   game: Game
 ): string {
   const highlightName = getName(command);
+  const isNativeFunction = command.name.startsWith('0x');
   const opcodified = showOpcodes ? opcodify(code, extensions) : code;
+  const declaratified = isNativeFunction
+    ? declaratify(opcodified, extensions, game)
+    : opcodified;
   const highlighted = Prism.highlight(
-    opcodified,
+    declaratified,
     { ...Prism.languages.sb, function: new RegExp(highlightName, 'i') },
     'sb'
   );
@@ -180,54 +162,66 @@ function opcodify(text: string, extensions: Extension[]): string {
     .join('\n');
 }
 
-function linkify(text: string, extensions: Extension[], game: Game): string {
-  const lines = text.split('\n').map((line) => line.trimEnd());
-  const linesWithOpcodes = lines.map((line) => {
-    const words = line.split(' ');
-    const reserved = [
-      '',
-      'repeat',
-      'until',
-      'while',
-      'if',
-      'then',
-      'else',
-      'not',
-    ];
+function declaratify(
+  text: string,
+  extensions: Extension[],
+  game: Game
+): string {
+  const foundFunctions: Set<Command> = new Set();
+  const names = text.match(/\b\w+\b/g) ?? [];
 
-    for (let i = 0; i < words.length; i++) {
-      let word = words[i].toLowerCase();
-
-      if (reserved.includes(word)) {
-        continue;
-      }
-
-      for (let extension of extensions) {
-        const command = extension.commands.find((c) =>
-          matches(getName(c), word)
-        );
-        if (command) {
-          const base = command.name.startsWith('0x')
-            ? 'native/versions'
-            : 'script/extensions';
-          words[i] = `<a class="identifier" href="#/${game}/${base}/${
-            extension.name
-          }/${command.id || command.name}" title="${command.short_desc}">${
-            words[i]
-          }</a>`;
-
-          return words.join(' ');
-        }
+  for (let name of names) {
+    for (let extension of extensions) {
+      const command = extension.commands.find((c) =>
+        matches(functionName(c), name)
+      );
+      if (command) {
+        foundFunctions.add(command);
       }
     }
-    return line;
-  });
+  }
 
-  return linesWithOpcodes.join('\n');
+  const decls = [...foundFunctions]
+    .map((command) => generateFunctionDeclaration(command, game))
+    .concat(['', '']);
+  return decls.join('\n') + text;
+}
+
+function linkify(text: string, extensions: Extension[], game: Game): string {
+  const reserved = [
+    '',
+    'repeat',
+    'until',
+    'while',
+    'if',
+    'then',
+    'else',
+    'not',
+  ];
+
+  return text.replace(/\b\w+\b/g, (match) => {
+    if (reserved.includes(match)) {
+      return match;
+    }
+    for (let extension of extensions) {
+      const command = extension.commands.find((c) =>
+        matches(getName(c), match)
+      );
+      if (command) {
+        const isNativeFunction = command.name.startsWith('0x');
+        const base = isNativeFunction ? 'native/versions' : 'script/extensions';
+
+        return `<a class="identifier" href="#/${game}/${base}/${
+          extension.name
+        }/${command.id || command.name}" title="${
+          command.short_desc || ''
+        }">${match}</a>`;
+      }
+    }
+    return match;
+  });
 }
 
 function getName(command: Command) {
-  return command.name.startsWith('0x')
-    ? `${command.class}_${command.member}`
-    : command.name;
+  return command.name.startsWith('0x') ? functionName(command) : command.name;
 }

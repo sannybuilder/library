@@ -9,3 +9,4 @@ export * from './url';
 export * from './game';
 export * from './extension';
 export * from './support-info';
+export * from './functions';

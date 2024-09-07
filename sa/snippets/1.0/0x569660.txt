@@ -1,0 +1,13 @@
+Char player_char = get_player_char 0
+
+while true
+    wait 0
+    
+    float x, y, _
+    x, y, _ = get_char_coordinates player_char
+
+    float z = CWorld_FindGroundZForCoord(x, y)
+    use_text_commands true
+    display_text_formatted 10.0 0 "Z coord: %.2f" z 
+    
+end // while

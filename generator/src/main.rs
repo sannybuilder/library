@@ -354,7 +354,15 @@ fn generate_native() -> Result<()> {
         .collect::<Vec<_>>();
 
     for command in commands {
-        let mut s = String::from("function ");
+        let mut s = String::from("");
+
+        if let Some(ref short_desc) = command.short_desc {
+            s.push_str("/// ");
+            s.push_str(short_desc);
+            s.push_str("\n");
+        }
+
+        s.push_str("function ");
 
         if let Some(class) = command.class.as_ref() {
             s.push_str(class);

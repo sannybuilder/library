@@ -73,7 +73,7 @@ function compileTemplate(code: string, command: Command, game: Game): string {
     return compiled({
       ...stringify('input'),
       ...stringify('output'),
-      decl: generateFunctionDeclaration(command, game),
+      // decl: generateFunctionDeclaration(command, game),
     });
   } catch {
     return '[invalid code snippet]';
@@ -182,7 +182,11 @@ function declaratify(
   }
 
   const decls = [...foundFunctions]
-    .map((command) => generateFunctionDeclaration(command, game))
+    .map(
+      (command) =>
+        (command.short_desc ? `/// ${command.short_desc}\n` : '') +
+        generateFunctionDeclaration(command, game)
+    )
     .concat(['', '']);
   return decls.join('\n') + text;
 }

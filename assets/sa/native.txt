@@ -1,13 +1,24 @@
+/// Sets the current vector to the sum of two other vectors
 function CVector_Add<thiscall, 0x40FDD0>(self: CVector, vector1: CVector, vector2: CVector)
+/// Initializes a CEntity struct
 function CEntity_ctor<thiscall, 0x532A90>(self: CEntity): CEntity
+/// Initializes a CVector2D struct
 function CVector2D_ctor<thiscall, 0x404360>(self: CVector2D, x: float, y: float): CVector2D
+/// Returns true if the point is within a hideout garage
 function CGarages_IsPointWithinHideOutGarage<cdecl, 0x448900>(point: CVector): bool
+/// Initializes a CVector struct
 function CVector_ctor<thiscall, 0x406D20>(self: CVector, x: float, y: float, z: float): CVector
+/// Resets the zones revealed to restore the map fog
 function CTheZones_ResetZonesRevealed<cdecl, 0x572110>()
+/// Clears all stunt jumps so new jumps can be created
 function CStuntJumpManager_ShutdownForRestart<cdecl, 0x49CB10>()
+/// Starts an offensive gang war
 function CGangWars_StartOffensiveGangWar<cdecl, 0x446050>()
+/// Starts a defensive gang war
 function CGangWars_StartDefensiveGangWar<cdecl, 0x444300>()
+/// Ends any offensive or defensive gang wars going on
 function CGangWars_EndGangWar<cdecl, 0x4464C0>()
+/// Removes all CarGenerators from the specified iplStream
 function CTheCarGenerators_RemoveCarGenerators<cdecl, 0x6F3240>(iplStream: int)
 function C_PcSave_PopulateSlotInfo<thiscall, 0x619140>(self: C_PcSave)
 function C_PcSave_DeleteSlot<thiscall, 0x6190D0>(self: C_PcSave, slot: int): int
@@ -71,6 +82,7 @@ function CAEWeaponAudioEntity_PlayChainsawStopSound<thiscall, 0x504AA0>(self: CA
 function CAEWeaponAudioEntity_PlayCameraSound<thiscall, 0x5046F0>(self: CAEWeaponAudioEntity, entity: int, audioEventId: int, audability: float)
 function CAEWeaponAudioEntity_Initialise<thiscall, 0x503450>(self: CAEWeaponAudioEntity)
 function CAnimatedBuilding_CAnimatedBuilding<thiscall, 0x537A10>(self: CAnimatedBuilding)
+/// Initializes a CAnimBlendAssocGroup struct
 function CAnimBlendAssocGroup_ctor<thiscall, 0x4CDE70>(self: CAnimBlendAssocGroup): CAnimBlendAssocGroup
 function CAnimBlendAssocGroup_CopyAnimation<thiscall, 0x4CE0B0>(self: CAnimBlendAssocGroup, animName: int): int
 function CAnimBlendAssocGroup_CopyAnimation<thiscall, 0x4CE130>(self: CAnimBlendAssocGroup, id: int): int
@@ -82,6 +94,7 @@ function CAnimBlendAssocGroup_GetAnimation<thiscall, 0x4CE040>(self: CAnimBlendA
 function CAnimBlendAssocGroup_GetAnimation<thiscall, 0x4CE090>(self: CAnimBlendAssocGroup, id: int): int
 function CAnimBlendAssocGroup_GetAnimationId<thiscall, 0x4CE1B0>(self: CAnimBlendAssocGroup, animName: int): int
 function CAnimBlendAssocGroup_InitEmptyAssociations<thiscall, 0x4CDFB0>(self: CAnimBlendAssocGroup, pClump: int)
+/// Deinitializes the CAnimBlendAssocGroup struct
 function CAnimBlendAssocGroup_dtor<thiscall, 0x4CE1D0>(self: CAnimBlendAssocGroup)
 function CAnimBlendAssociation_AllocateAnimBlendNodeArray<thiscall, 0x4CE9F0>(self: CAnimBlendAssociation, count: int)
 function CAnimBlendAssociation_FreeAnimBlendNodeArray<thiscall, 0x4CEA40>(self: CAnimBlendAssociation)
@@ -128,6 +141,7 @@ function CAnimBlendNode_NextKeyFrameNoCalc<thiscall, 0x4CFB90>(self: CAnimBlendN
 function CAnimBlendNode_SetupKeyFrameCompressed<thiscall, 0x4D0650>(self: CAnimBlendNode): int
 function CAnimBlendNode_Update<thiscall, 0x4D06C0>(self: CAnimBlendNode, vector: CVector&, qauternion: CQuaternion&, arg3: float): int
 function CAnimBlendNode_UpdateCompressed<thiscall, 0x4D08D0>(self: CAnimBlendNode, vector: CVector&, quaternion: CQuaternion&, arg3: float): int
+/// Initializes a CAnimBlendSequence struct
 function CAnimBlendSequence_CAnimBlendSequence<thiscall, 0x4D0C10>(self: CAnimBlendSequence): CAnimBlendSequence
 function CAnimBlendSequence_CompressKeyframes<thiscall, 0x4D0F40>(self: CAnimBlendSequence, arg1: int)
 function CAnimBlendSequence_GetDataSize<thiscall, 0x4D0C90>(self: CAnimBlendSequence, arg1: bool): int
@@ -138,6 +152,7 @@ function CAnimBlendSequence_SetBoneTag<thiscall, 0x4D0C70>(self: CAnimBlendSeque
 function CAnimBlendSequence_SetName<thiscall, 0x4D0C50>(self: CAnimBlendSequence, string: int)
 function CAnimBlendSequence_SetNumFrames<thiscall, 0x4D0CD0>(self: CAnimBlendSequence, count: int, arg2: bool, arg3: bool, arg4: int)
 function CAnimBlendSequence_Uncompress<thiscall, 0x4D0D40>(self: CAnimBlendSequence, arg1: int)
+/// Deinitializes the CAnimBlendSequence struct
 function CAnimBlendSequence_dtor<thiscall, 0x4D0C30>(self: CAnimBlendSequence)
 function CAnimBlendStaticAssociation_AllocateSequenceArray<thiscall, 0x4CE960>(self: CAnimBlendStaticAssociation, count: int)
 function CAnimBlendStaticAssociation_FreeSequenceArray<thiscall, 0x4CE9A0>(self: CAnimBlendStaticAssociation)
@@ -505,6 +520,7 @@ function CCarGenerator_SwitchOn<thiscall, 0x6F32C0>(self: CCarGenerator)
 function CCarGenerator_CalcNextGen<cdecl, 0x6F2E40>(): int
 function CCarGenerator_Get<cdecl, 0x479D60>(index: int): int
 function CCarPathLink_OneWayLaneOffset<thiscall, 0x44DB00>(self: CCarPathLink): float
+/// Spawns a vehicle of this model in front of the player
 function CCheat_VehicleCheat<cdecl, 0x43A0B0>(vehicleModelId: int): int
 function CCheat_ResetCheats<cdecl, 0x438450>()
 function CCheckpoint_Render<thiscall, 0x725C00>(self: CCheckpoint)
@@ -642,7 +658,9 @@ function CCollisionData_GetShadTrianglePoint<thiscall, 0x40F640>(self: CCollisio
 function CCollisionData_RemoveTrianglePlanes<thiscall, 0x40F6A0>(self: CCollisionData)
 function CCollisionData_SetLinkPtr<thiscall, 0x40F6C0>(self: CCollisionData, link: int)
 function CCollisionData_GetLinkPtr<thiscall, 0x40F6E0>(self: CCollisionData): int
+/// Initializes a CColModel struct
 function CColModel_ctor<thiscall, 0x40FB60>(self: CColModel): CColModel
+/// Deinitializes the CColModel struct
 function CColModel_dtor<thiscall, 0x40F700>(self: CColModel)
 function CColModel_MakeMultipleAlloc<thiscall, 0x40F740>(self: CColModel)
 function CColModel_operator=<thiscall, 0x40F7C0>(self: CColModel, colModel: CColModel const&): int
@@ -785,8 +803,11 @@ function CDate_PopulateDateFields<thiscall, 0x618E30>(self: CDate, seconds: int,
 function CDecisionSimple_Set<thiscall, 0x600730>(self: CDecisionSimple, taskTypes: int, chances: int, count: int)
 function CDecisionSimple_MakeDecision<thiscall, 0x6007A0>(self: CDecisionSimple, taskType: int, outTaskType: short&, outDecisionIndex: int&)
 function CDecisionSimple_SetDefault<thiscall, 0x604220>(self: CDecisionSimple)
+/// Initializes a CDirectory struct
 function CDirectory_ctor<thiscall, 0x532290>(self: CDirectory): CDirectory
+/// Initializes a CDirectory struct
 function CDirectory_ctor<thiscall, 0x5322A0>(self: CDirectory, capacity: int): CDirectory
+/// Deinitializes the CDirectory struct
 function CDirectory_dtor<thiscall, 0x5322D0>(self: CDirectory)
 function CDirectory_Init<thiscall, 0x5322F0>(self: CDirectory, capacity: int, entries: int)
 function CDirectory_AddItem<thiscall, 0x532310>(self: CDirectory, entry: DirectoryInfo const&)
@@ -1017,7 +1038,9 @@ function CMatrix_Scale<thiscall, 0x459350>(self: CMatrix, scale: float)
 function CMatrix_Scale<thiscall, 0x459350>(self: CMatrix, x: float, y: float, z: float)
 function CMatrixLink_Insert<thiscall, 0x54E8F0>(self: CMatrixLink, where: int)
 function CMatrixLink_Remove<thiscall, 0x54E910>(self: CMatrixLink)
+/// Initializes a CMenuManager struct
 function CMenuManager_ctor<thiscall, 0x574350>(self: CMenuManager): CMenuManager
+/// Deinitializes the CMenuManager struct
 function CMenuManager_dtor<thiscall, 0x579440>(self: CMenuManager)
 function CMenuManager_AdditionalOptionInput<thiscall, 0x5773D0>(self: CMenuManager, input: char, enter: char): int
 function CMenuManager_CentreMousePointer<thiscall, 0x57C520>(self: CMenuManager)
@@ -1508,6 +1531,7 @@ function CPtrNodeDoubleLink_operator delete<cdecl, 0x5523D0>(data: int)
 function CPtrNodeSingleLink_operator new<cdecl, 0x552380>(size: int): int
 function CPtrNodeSingleLink_operator delete<cdecl, 0x552390>(data: int)
 function CQuadTreeNode_AddItem<thiscall, 0x552CD0>(self: CQuadTreeNode, item: int, rect: CRect const&)
+/// Initializes a CQuadTreeNode struct
 function CQuadTreeNode_ctor<thiscall, 0x552830>(self: CQuadTreeNode, rect: CRect const&, startLevel: int): CQuadTreeNode
 function CQuadTreeNode_DeleteItem<thiscall, 0x552A40>(self: CQuadTreeNode, item: int)
 function CQuadTreeNode_DeleteItem<thiscall, 0x552A90>(self: CQuadTreeNode, item: int, rect: CRect const&)
@@ -1522,6 +1546,7 @@ function CQuadTreeNode_InSector<thiscall, 0x5526A0>(self: CQuadTreeNode, rect: C
 function CQuadTreeNode_InitPool<thiscall, 0x552C00>(self: CQuadTreeNode)
 function CQuadTreeNode_operator delete<cdecl, 0x552C90>(data: int)
 function CQuadTreeNode_operator new<cdecl, 0x552C80>(size: int): int
+/// Deinitializes the CQuadTreeNode struct
 function CQuadTreeNode_dtor<thiscall, 0x552520>(self: CQuadTreeNode)
 function CRegisteredMotionBlurStreak_Update<thiscall, 0x721EE0>(self: CRegisteredMotionBlurStreak)
 function CRegisteredMotionBlurStreak_Render<thiscall, 0x721F70>(self: CRegisteredMotionBlurStreak)
@@ -1742,6 +1767,7 @@ function CStats_UpdateStatsAddToHealth<cdecl, 0x55D030>(addToHealth: int)
 function CStats_ModifyStat<cdecl, 0x55D090>(stat: int, value: float)
 function CStats_Save<cdecl, 0x5D3B40>(): int
 function CStats_Load<cdecl, 0x5D3BF0>(): int
+/// Returns the index of the named script in CStreamedScript
 function CStreamedScripts_FindStreamedScript<thiscall, 0x470740>(cStreamedScripts: int, scriptname: string): int
 function CStreamedScripts_FindStreamedScriptQuiet<thiscall, 0x4706F0>(self: CStreamedScripts, scriptName: int): int
 function CStreamedScripts_GetProperIndexFromIndexUsedByScript<thiscall, 0x470810>(self: CStreamedScripts, scmIndex: int): int
@@ -1964,6 +1990,7 @@ function CWanted_SetWantedLevel<thiscall, 0x562470>(self: CWanted, level: int)
 function CWanted_CheatWantedLevel<thiscall, 0x562540>(self: CWanted, level: int)
 function CWanted_SetWantedLevelNoDrop<thiscall, 0x562570>(self: CWanted, level: int)
 function CWanted_ClearWantedLevelAndGoOnParole<thiscall, 0x5625A0>(self: CWanted)
+/// Returns the number of police within the given radius of the specified position
 function CWanted_WorkOutPolicePresence<cdecl, 0x5625F0>(posX: float, posY: float, posZ: float, radius: float): int
 function CWanted_UpdateCrimesQ<thiscall, 0x562760>(self: CWanted)
 function CWanted_IsClosestCop<thiscall, 0x5627D0>(self: CWanted, ped: int, numCopsToCheck: int): int
@@ -1991,6 +2018,7 @@ function CWeapon_HasWeaponAmmoToBeUsed<thiscall, 0x73B2A0>(self: CWeapon): int
 function CWeapon_ProcessLineOfSight<cdecl, 0x73B300>(startPoint: CVector const&, endPoint: CVector const&, outColPoint: CColPoint&, outEntity: int, weaponType: eWeaponType, arg5: int, buildings: bool, vehicles: bool, peds: bool, objects: bool, dummies: bool, arg11: bool, doIgnoreCameraCheck: bool): int
 function CWeapon_StopWeaponEffect<thiscall, 0x73B360>(self: CWeapon)
 function CWeapon_TargetWeaponRangeMultiplier<cdecl, 0x73B380>(victim: int, weaponOwner: int): float
+/// Initializes a CWeapon struct
 function CWeapon_ctor<thiscall, 0x73B430>(self: CWeapon, weaponType: eWeaponType, ammo: int): CWeapon
 function CWeapon_Initialise<thiscall, 0x73B4A0>(self: CWeapon, weaponType: eWeaponType, ammo: int, owner: int)
 function CWeapon_DoBulletImpact<thiscall, 0x73B550>(self: CWeapon, owner: int, victim: int, startPoint: int, endPoint: int, colPoint: int, arg5: int)
@@ -2014,7 +2042,9 @@ function CWeapon_FireInstantHit<thiscall, 0x73FB10>(self: CWeapon, firingEntity:
 function CWeapon_FireProjectile<thiscall, 0x741360>(self: CWeapon, firingEntity: int, origin: int, targetEntity: int, target: int, force: float): int
 function CWeapon_FireM16_1stPerson<thiscall, 0x741C00>(self: CWeapon, owner: int): int
 function CWeapon_Fire<thiscall, 0x742300>(self: CWeapon, firingEntity: int, origin: int, muzzlePosn: int, targetEntity: int, target: int, originForDriveBy: int): int
+/// Initializes a CWeaponEffects struct
 function CWeaponEffects_ctor<thiscall, 0x742A90>(self: CWeaponEffects): CWeaponEffects
+/// Deinitializes the CWeaponEffects struct
 function CWeaponEffects_dtor<thiscall, 0x742AA0>(self: CWeaponEffects)
 function CWeaponEffects_Init<cdecl, 0x742AB0>()
 function CWeaponEffects_Shutdown<cdecl, 0x742B80>()
@@ -2106,6 +2136,7 @@ function CWorld_FindObjectsIntersectingCube<cdecl, 0x568DD0>(cornerA: CVector co
 function CWorld_FindObjectsIntersectingAngledCollisionBox<cdecl, 0x568FF0>(box: CBox const&, transform: CMatrix const&, point: CVector const&, x1: float, y1: float, x2: float, y2: float, outCount: int, maxCount: int, outEntities: int, buildings: bool, vehicles: bool, peds: bool, objects: bool, dummies: bool)
 function CWorld_FindMissionEntitiesIntersectingCube<cdecl, 0x569240>(cornerA: CVector const&, cornerB: CVector const&, outCount: int, maxCount: int, outEntities: int, vehicles: bool, peds: bool, objects: bool)
 function CWorld_FindNearestObjectOfType<cdecl, 0x5693F0>(modelId: int, point: CVector const&, radius: float, b2D: bool, buildings: bool, vehicles: bool, peds: bool, objects: bool, dummies: bool): CEntity
+/// Returns the Z-coordinate at given XY coordinates
 function CWorld_FindGroundZForCoord<cdecl, 0x569660>(x: float, y: float): float
 function CWorld_FindGroundZFor3DCoord<cdecl, 0x5696C0>(x: float, y: float, z: float, outResult: int, outEntity: int): float
 function CWorld_FindRoofZFor3DCoord<cdecl, 0x569750>(x: float, y: float, z: float, outResult: int): float
@@ -2161,17 +2192,29 @@ function D3DTextureBuffer_Pop<thiscall, 0x72FF40>(self: D3DTextureBuffer): int
 function D3DTextureBuffer_Pop<thiscall, 0x72FF60>(self: D3DTextureBuffer, format: int, width: int, height: int, bOneLevel: int): int
 function D3DTextureBuffer_Push<thiscall, 0x72FFF0>(self: D3DTextureBuffer, texture: int): int
 function D3DTextureBuffer_PushWithoutIncreasingCounter<thiscall, 0x730AD0>(self: D3DTextureBuffer, texture: int): int
+/// Initializes a List_c struct
 function List_c_ctor<thiscall, 0x4A8DD0>(self: List_c): List_c
+/// Deinitializes the List_c struct
 function List_c_dtor<thiscall, 0x4A8DE0>(self: List_c)
 function List_c_RemoveHead<thiscall, 0x4A8E70>(self: List_c): int
 function List_c_GetItemOffset<thiscall, 0x4A9010>(self: List_c, bFromHead: bool, iOffset: int): int
+/// Initializes a ListItem_c struct
 function ListItem_c_ctor<thiscall, 0x4A8DB0>(self: ListItem_c): ListItem_c
+/// Deinitializes the ListItem_c struct
 function ListItem_c_dtor<thiscall, 0x4A8DC0>(self: ListItem_c)
+/// Finds the first occurrence of a substring in a string and returns a pointer to it
 function strstr<cdecl, 0x822650>(str: string, substr: string): string
+/// Interprets a floating point value in a byte string pointed to by str
 function atof<cdecl, 0x823CEE>(str: string): float
+/// Interprets an integer value in a byte string pointed to by str. The implied radix is always 10
 function atoi<cdecl, 0x82258E>(str: string): int
+/// Initializes a CVehicle struct
 function CVehicle_ctor<thiscall, 0x6D5F10>(self: CVehicle): CVehicle
+/// Checks if the vehicle is a law enforcement vehicle
 function CVehicle_IsLawEnforcementVehicle<thiscall, 0x6D2370>(self: CVehicle): bool
+/// Returns a position vector of the given player. Use -1 for the current player
 function FindPlayerCentreOfWorld<cdecl, 0x56E250>(playerIndex: int): CVector
+/// Returns a pointer to the player's current vehicle, or 0 if the player is not driving any
 function FindPlayerVehicle<cdecl, 0x56E0D0>(playerIndex: int, includeRemote: bool): CVehicle
+/// Returns a position vector of the given player. Use -1 for the current player
 function FindPlayerCoors<cdecl, 0x56E010>(result: CVector, playerIndex: int): CVector

@@ -71,7 +71,7 @@ function CAEWeaponAudioEntity_PlayChainsawStopSound<thiscall, 0x504AA0>(self: CA
 function CAEWeaponAudioEntity_PlayCameraSound<thiscall, 0x5046F0>(self: CAEWeaponAudioEntity, entity: int, audioEventId: int, audability: float)
 function CAEWeaponAudioEntity_Initialise<thiscall, 0x503450>(self: CAEWeaponAudioEntity)
 function CAnimatedBuilding_CAnimatedBuilding<thiscall, 0x537A10>(self: CAnimatedBuilding)
-function CAnimBlendAssocGroup_CAnimBlendAssocGroup<thiscall, 0x4CDE70>(self: CAnimBlendAssocGroup)
+function CAnimBlendAssocGroup_ctor<thiscall, 0x4CDE70>(self: CAnimBlendAssocGroup): CAnimBlendAssocGroup
 function CAnimBlendAssocGroup_CopyAnimation<thiscall, 0x4CE0B0>(self: CAnimBlendAssocGroup, animName: int): int
 function CAnimBlendAssocGroup_CopyAnimation<thiscall, 0x4CE130>(self: CAnimBlendAssocGroup, id: int): int
 function CAnimBlendAssocGroup_CreateAssociations<thiscall, 0x4CE220>(self: CAnimBlendAssocGroup, szBlockName: int)
@@ -82,7 +82,7 @@ function CAnimBlendAssocGroup_GetAnimation<thiscall, 0x4CE040>(self: CAnimBlendA
 function CAnimBlendAssocGroup_GetAnimation<thiscall, 0x4CE090>(self: CAnimBlendAssocGroup, id: int): int
 function CAnimBlendAssocGroup_GetAnimationId<thiscall, 0x4CE1B0>(self: CAnimBlendAssocGroup, animName: int): int
 function CAnimBlendAssocGroup_InitEmptyAssociations<thiscall, 0x4CDFB0>(self: CAnimBlendAssocGroup, pClump: int)
-function CAnimBlendAssocGroup_~CAnimBlendAssocGroup<thiscall, 0x4CE1D0>(self: CAnimBlendAssocGroup)
+function CAnimBlendAssocGroup_dtor<thiscall, 0x4CE1D0>(self: CAnimBlendAssocGroup)
 function CAnimBlendAssociation_AllocateAnimBlendNodeArray<thiscall, 0x4CE9F0>(self: CAnimBlendAssociation, count: int)
 function CAnimBlendAssociation_FreeAnimBlendNodeArray<thiscall, 0x4CEA40>(self: CAnimBlendAssociation)
 function CAnimBlendAssociation_GetNode<thiscall, 0x4CEB60>(self: CAnimBlendAssociation, nodeIndex: int): int
@@ -128,7 +128,7 @@ function CAnimBlendNode_NextKeyFrameNoCalc<thiscall, 0x4CFB90>(self: CAnimBlendN
 function CAnimBlendNode_SetupKeyFrameCompressed<thiscall, 0x4D0650>(self: CAnimBlendNode): int
 function CAnimBlendNode_Update<thiscall, 0x4D06C0>(self: CAnimBlendNode, vector: CVector&, qauternion: CQuaternion&, arg3: float): int
 function CAnimBlendNode_UpdateCompressed<thiscall, 0x4D08D0>(self: CAnimBlendNode, vector: CVector&, quaternion: CQuaternion&, arg3: float): int
-function CAnimBlendSequence_CAnimBlendSequence<thiscall, 0x4D0C10>(self: CAnimBlendSequence)
+function CAnimBlendSequence_CAnimBlendSequence<thiscall, 0x4D0C10>(self: CAnimBlendSequence): CAnimBlendSequence
 function CAnimBlendSequence_CompressKeyframes<thiscall, 0x4D0F40>(self: CAnimBlendSequence, arg1: int)
 function CAnimBlendSequence_GetDataSize<thiscall, 0x4D0C90>(self: CAnimBlendSequence, arg1: bool): int
 function CAnimBlendSequence_MoveMemorY<thiscall, 0x4D1150>(self: CAnimBlendSequence): int
@@ -138,7 +138,7 @@ function CAnimBlendSequence_SetBoneTag<thiscall, 0x4D0C70>(self: CAnimBlendSeque
 function CAnimBlendSequence_SetName<thiscall, 0x4D0C50>(self: CAnimBlendSequence, string: int)
 function CAnimBlendSequence_SetNumFrames<thiscall, 0x4D0CD0>(self: CAnimBlendSequence, count: int, arg2: bool, arg3: bool, arg4: int)
 function CAnimBlendSequence_Uncompress<thiscall, 0x4D0D40>(self: CAnimBlendSequence, arg1: int)
-function CAnimBlendSequence_~CAnimBlendSequence<thiscall, 0x4D0C30>(self: CAnimBlendSequence)
+function CAnimBlendSequence_dtor<thiscall, 0x4D0C30>(self: CAnimBlendSequence)
 function CAnimBlendStaticAssociation_AllocateSequenceArray<thiscall, 0x4CE960>(self: CAnimBlendStaticAssociation, count: int)
 function CAnimBlendStaticAssociation_FreeSequenceArray<thiscall, 0x4CE9A0>(self: CAnimBlendStaticAssociation)
 function CAnimBlendStaticAssociation_Init<thiscall, 0x4CEC20>(self: CAnimBlendStaticAssociation, clump: int, hierarchy: int)
@@ -642,8 +642,8 @@ function CCollisionData_GetShadTrianglePoint<thiscall, 0x40F640>(self: CCollisio
 function CCollisionData_RemoveTrianglePlanes<thiscall, 0x40F6A0>(self: CCollisionData)
 function CCollisionData_SetLinkPtr<thiscall, 0x40F6C0>(self: CCollisionData, link: int)
 function CCollisionData_GetLinkPtr<thiscall, 0x40F6E0>(self: CCollisionData): int
-function CColModel_CColModel<thiscall, 0x40FB60>(self: CColModel)
-function CColModel_~CColModel<thiscall, 0x40F700>(self: CColModel)
+function CColModel_ctor<thiscall, 0x40FB60>(self: CColModel): CColModel
+function CColModel_dtor<thiscall, 0x40F700>(self: CColModel)
 function CColModel_MakeMultipleAlloc<thiscall, 0x40F740>(self: CColModel)
 function CColModel_operator=<thiscall, 0x40F7C0>(self: CColModel, colModel: CColModel const&): int
 function CColModel_AllocateData<thiscall, 0x40F810>(self: CColModel)
@@ -785,9 +785,9 @@ function CDate_PopulateDateFields<thiscall, 0x618E30>(self: CDate, seconds: int,
 function CDecisionSimple_Set<thiscall, 0x600730>(self: CDecisionSimple, taskTypes: int, chances: int, count: int)
 function CDecisionSimple_MakeDecision<thiscall, 0x6007A0>(self: CDecisionSimple, taskType: int, outTaskType: short&, outDecisionIndex: int&)
 function CDecisionSimple_SetDefault<thiscall, 0x604220>(self: CDecisionSimple)
-function CDirectory_CDirectory<thiscall, 0x532290>(self: CDirectory)
-function CDirectory_CDirectory<thiscall, 0x5322A0>(self: CDirectory, capacity: int)
-function CDirectory_~CDirectory<thiscall, 0x5322D0>(self: CDirectory)
+function CDirectory_ctor<thiscall, 0x532290>(self: CDirectory): CDirectory
+function CDirectory_ctor<thiscall, 0x5322A0>(self: CDirectory, capacity: int): CDirectory
+function CDirectory_dtor<thiscall, 0x5322D0>(self: CDirectory)
 function CDirectory_Init<thiscall, 0x5322F0>(self: CDirectory, capacity: int, entries: int)
 function CDirectory_AddItem<thiscall, 0x532310>(self: CDirectory, entry: DirectoryInfo const&)
 function CDirectory_ReadDirFile<thiscall, 0x532350>(self: CDirectory, filename: int)
@@ -1017,8 +1017,8 @@ function CMatrix_Scale<thiscall, 0x459350>(self: CMatrix, scale: float)
 function CMatrix_Scale<thiscall, 0x459350>(self: CMatrix, x: float, y: float, z: float)
 function CMatrixLink_Insert<thiscall, 0x54E8F0>(self: CMatrixLink, where: int)
 function CMatrixLink_Remove<thiscall, 0x54E910>(self: CMatrixLink)
-function CMenuManager_CMenuManager<thiscall, 0x574350>(self: CMenuManager)
-function CMenuManager_~CMenuManager<thiscall, 0x579440>(self: CMenuManager)
+function CMenuManager_ctor<thiscall, 0x574350>(self: CMenuManager): CMenuManager
+function CMenuManager_dtor<thiscall, 0x579440>(self: CMenuManager)
 function CMenuManager_AdditionalOptionInput<thiscall, 0x5773D0>(self: CMenuManager, input: char, enter: char): int
 function CMenuManager_CentreMousePointer<thiscall, 0x57C520>(self: CMenuManager)
 function CMenuManager_CheckCodesForControls<thiscall, 0x57DB20>(self: CMenuManager, code: int): int
@@ -1508,7 +1508,7 @@ function CPtrNodeDoubleLink_operator delete<cdecl, 0x5523D0>(data: int)
 function CPtrNodeSingleLink_operator new<cdecl, 0x552380>(size: int): int
 function CPtrNodeSingleLink_operator delete<cdecl, 0x552390>(data: int)
 function CQuadTreeNode_AddItem<thiscall, 0x552CD0>(self: CQuadTreeNode, item: int, rect: CRect const&)
-function CQuadTreeNode_CQuadTreeNode<thiscall, 0x552830>(self: CQuadTreeNode, rect: CRect const&, startLevel: int)
+function CQuadTreeNode_ctor<thiscall, 0x552830>(self: CQuadTreeNode, rect: CRect const&, startLevel: int): CQuadTreeNode
 function CQuadTreeNode_DeleteItem<thiscall, 0x552A40>(self: CQuadTreeNode, item: int)
 function CQuadTreeNode_DeleteItem<thiscall, 0x552A90>(self: CQuadTreeNode, item: int, rect: CRect const&)
 function CQuadTreeNode_FindSector<thiscall, 0x5525A0>(self: CQuadTreeNode, rect: CRect const&): int
@@ -1522,7 +1522,7 @@ function CQuadTreeNode_InSector<thiscall, 0x5526A0>(self: CQuadTreeNode, rect: C
 function CQuadTreeNode_InitPool<thiscall, 0x552C00>(self: CQuadTreeNode)
 function CQuadTreeNode_operator delete<cdecl, 0x552C90>(data: int)
 function CQuadTreeNode_operator new<cdecl, 0x552C80>(size: int): int
-function CQuadTreeNode_~CQuadTreeNode<thiscall, 0x552520>(self: CQuadTreeNode)
+function CQuadTreeNode_dtor<thiscall, 0x552520>(self: CQuadTreeNode)
 function CRegisteredMotionBlurStreak_Update<thiscall, 0x721EE0>(self: CRegisteredMotionBlurStreak)
 function CRegisteredMotionBlurStreak_Render<thiscall, 0x721F70>(self: CRegisteredMotionBlurStreak)
 function CRenderer_Init<cdecl, 0x5531C0>()
@@ -2014,8 +2014,8 @@ function CWeapon_FireInstantHit<thiscall, 0x73FB10>(self: CWeapon, firingEntity:
 function CWeapon_FireProjectile<thiscall, 0x741360>(self: CWeapon, firingEntity: int, origin: int, targetEntity: int, target: int, force: float): int
 function CWeapon_FireM16_1stPerson<thiscall, 0x741C00>(self: CWeapon, owner: int): int
 function CWeapon_Fire<thiscall, 0x742300>(self: CWeapon, firingEntity: int, origin: int, muzzlePosn: int, targetEntity: int, target: int, originForDriveBy: int): int
-function CWeaponEffects_CWeaponEffects<thiscall, 0x742A90>(self: CWeaponEffects)
-function CWeaponEffects_~CWeaponEffects<thiscall, 0x742AA0>(self: CWeaponEffects)
+function CWeaponEffects_ctor<thiscall, 0x742A90>(self: CWeaponEffects): CWeaponEffects
+function CWeaponEffects_dtor<thiscall, 0x742AA0>(self: CWeaponEffects)
 function CWeaponEffects_Init<cdecl, 0x742AB0>()
 function CWeaponEffects_Shutdown<cdecl, 0x742B80>()
 function CWeaponEffects_IsLockedOn<cdecl, 0x742BD0>(crosshairId: int): int
@@ -2161,12 +2161,12 @@ function D3DTextureBuffer_Pop<thiscall, 0x72FF40>(self: D3DTextureBuffer): int
 function D3DTextureBuffer_Pop<thiscall, 0x72FF60>(self: D3DTextureBuffer, format: int, width: int, height: int, bOneLevel: int): int
 function D3DTextureBuffer_Push<thiscall, 0x72FFF0>(self: D3DTextureBuffer, texture: int): int
 function D3DTextureBuffer_PushWithoutIncreasingCounter<thiscall, 0x730AD0>(self: D3DTextureBuffer, texture: int): int
-function List_c_List_c<thiscall, 0x4A8DD0>(self: List_c)
-function List_c_~List_c<thiscall, 0x4A8DE0>(self: List_c)
+function List_c_ctor<thiscall, 0x4A8DD0>(self: List_c): List_c
+function List_c_dtor<thiscall, 0x4A8DE0>(self: List_c)
 function List_c_RemoveHead<thiscall, 0x4A8E70>(self: List_c): int
 function List_c_GetItemOffset<thiscall, 0x4A9010>(self: List_c, bFromHead: bool, iOffset: int): int
-function ListItem_c_ListItem_c<thiscall, 0x4A8DB0>(self: ListItem_c)
-function ListItem_c_~ListItem_c<thiscall, 0x4A8DC0>(self: ListItem_c)
+function ListItem_c_ctor<thiscall, 0x4A8DB0>(self: ListItem_c): ListItem_c
+function ListItem_c_dtor<thiscall, 0x4A8DC0>(self: ListItem_c)
 function strstr<cdecl, 0x822650>(str: string, substr: string): string
 function atof<cdecl, 0x823CEE>(str: string): float
 function atoi<cdecl, 0x82258E>(str: string): int

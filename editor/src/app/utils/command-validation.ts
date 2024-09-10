@@ -1,6 +1,7 @@
 import { intersection } from 'lodash';
 import {
   Attribute,
+  ClassMeta,
   Command,
   Param,
   Platform,
@@ -265,4 +266,12 @@ export function doesScriptCommandHaveEmptyMember(command: Command) {
 
 export function doesNativeFunctionHaveNoName(command: Command) {
   return !command.member;
+}
+
+export function wrongConstructorType(command: Command, classMeta: ClassMeta[]) {
+  return (
+    command.attrs?.is_constructor &&
+    classMeta.find((c) => c.name === command.class)?.constructable &&
+    command.output?.[0]?.type !== command.class
+  );
 }

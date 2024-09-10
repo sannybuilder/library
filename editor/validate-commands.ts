@@ -26,6 +26,7 @@ import {
   doesCommandHaveInvalidArgumentWithOperator,
   doesSelfArgumentHaveInvalidType,
   doesOutputHaveInvalidSource,
+  wrongConstructorType,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -164,5 +165,12 @@ export function run(inputFile: string, game: Game) {
         exitStatus = 1;
       }
     });
+
+    if (wrongConstructorType(command, content.classes)) {
+      console.error(
+        `Error: constructor type must match the class type, command: ${command.name}, extension: ${extension}`
+      );
+      exitStatus = 1;
+    }
   }
 }

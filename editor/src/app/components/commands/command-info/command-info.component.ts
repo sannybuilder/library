@@ -79,15 +79,12 @@ export class CommandInfoComponent {
   @Input() snippet?: string;
   @Input() game: Game;
   @Input() extension: string;
-  @Input() displayOpcodePresentation: boolean;
   @Input() relatedCommands: Command[] | undefined;
   @Input() classDesc?: string;
   @Input() gameExtensions: Extension[];
   @Input() fullDescription?: string;
   @Input() viewContext: ViewContext;
   @Input() syntaxKind: SyntaxKind;
-
-  @Output() toggleOpcodePresentation = new EventEmitter();
   @Output() switchSyntaxKind = new EventEmitter();
 
   isPrimitiveType(param: Param) {
@@ -112,11 +109,6 @@ export class CommandInfoComponent {
 
   stringifySource(param: Param) {
     return stringifySource(param.source);
-  }
-
-  onToggleOpcodePresentation() {
-    this.toggleOpcodePresentation.emit();
-    return false;
   }
 
   onSwitchSyntaxKind(syntaxKind: SyntaxKind) {

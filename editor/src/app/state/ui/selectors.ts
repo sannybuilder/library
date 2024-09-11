@@ -299,3 +299,8 @@ export const selectedSyntaxKind = createSelector(
   state,
   (state: UiState) => state.selectedSyntaxKind
 );
+
+export const displayFunctionDeclaration = createSelector(
+  state,
+  (state: UiState) => state.displayFunctionDeclaration
+);

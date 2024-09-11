@@ -1,0 +1,57 @@
+<div
+  class="d-flex justify-content-between align-items-center"
+  *ngIf="showControls"
+>
+  <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
+  <div class="d-flex mb-2">
+    <button
+      class="btn btn-outline-secondary mr-1"
+      *ngIf="doesGameRequireOpcode(game) && viewContext === ViewContext.Script"
+      [title]="'ui.shared.toggleOpcode' | translate"
+      (click)="onToggleOpcodePresentation()"
+      [ngClass]="{ active: displayOpcodePresentation$ | async }"
+    >
+      OP
+    </button>
+
+    <button
+      class="btn btn-outline-secondary mr-1"
+      *ngIf="viewContext === ViewContext.Code"
+      [title]="'ui.shared.toggleFunction' | translate"
+      (click)="onToggleFunctionDefinitions()"
+      [ngClass]="{ active: displayFunctionDeclaration$ | async }"
+    >
+      FN
+    </button>
+
+    <scl-copy-button
+      [text]="codeSnippet.innerText"
+      icon="copy"
+      #clipboardBtn
+      [title]="
+        (clipboardBtn.hasJustCopied
+          ? 'ui.shared.copied'
+          : 'ui.shared.copyToClipboard'
+        ) | translate
+      "
+    ></scl-copy-button>
+  </div>
+</div>
+<div class="position-relative">
+  <pre
+    class="sample"
+    #codeSnippet
+    [innerHTML]="
+      snippet
+        | codify
+          : {
+              command: command,
+              game: game,
+              extensions: gameExtensions,
+              showOpcodes: displayOpcodePresentation$ | async,
+              showFuncDeclarations: displayFunctionDeclaration$ | async
+            }
+        | sanitize
+    "
+  ></pre>
+</div>

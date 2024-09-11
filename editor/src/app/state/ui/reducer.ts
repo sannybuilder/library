@@ -34,6 +34,7 @@ import {
   displayJsonGenerator,
   switchSyntaxKind,
   toggleSnippetOnlySearch,
+  toggleFunctionDeclaration,
 } from './actions';
 
 export interface GameState {
@@ -47,6 +48,7 @@ export interface UiState {
   displayLastUpdated: boolean;
   displayInlineMethodDescription: boolean; // this should match localStorageSyncReducer in AppModule
   displayOpcodePresentation: boolean; // this should match localStorageSyncReducer in AppModule
+  displayFunctionDeclaration: boolean; // this should match localStorageSyncReducer in AppModule
   isSidebarCollapsed: boolean; // this should match localStorageSyncReducer in AppModule
   selectedAttributesOnly: Attribute[];
   selectedAttributesExcept: Attribute[];
@@ -90,6 +92,7 @@ export const initialState: UiState = {
   displaySearchBar: false,
   displayInlineMethodDescription: false,
   displayOpcodePresentation: false,
+  displayFunctionDeclaration: false,
   displaySearchHelp: false,
   isSearchHelpDismissed: false,
   isSidebarCollapsed: false,
@@ -271,6 +274,10 @@ export const uiReducer = createReducer(
     ...state,
     isSnippetOnly: !state.isSnippetOnly,
   })),
+  on(toggleFunctionDeclaration, (state) => ({
+    ...state,
+    displayFunctionDeclaration: !state.displayFunctionDeclaration,
+  }))
 );
 
 function updateState(state: UiState, game: Game, newState: Partial<GameState>) {

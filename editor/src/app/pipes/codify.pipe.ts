@@ -44,14 +44,17 @@ Prism.languages.sb = Prism.languages.extend('pascal', {
 export class CodifyPipe implements PipeTransform {
   transform(
     code: string,
-    command: Command,
-    game: Game,
-    showOpcodes: boolean,
-    extensions: Extension[] = []
+    options: {
+      command: Command;
+      game: Game;
+      showOpcodes: boolean;
+      showFuncDeclarations: boolean;
+      extensions: Extension[];
+    }
   ): string {
     let normalized = normalize(code);
-    let compiled = compileTemplate(normalized, command, game);
-    let formatted = format(compiled, command, extensions, showOpcodes, game);
+    let compiled = compileTemplate(normalized, options.command, options.game);
+    let formatted = format(compiled, options);
     return formatted;
   }
 }
@@ -73,7 +76,6 @@ function compileTemplate(code: string, command: Command, game: Game): string {
     return compiled({
       ...stringify('input'),
       ...stringify('output'),
-      // decl: generateFunctionDeclaration(command, game),
     });
   } catch {
     return '[invalid code snippet]';
@@ -82,15 +84,23 @@ function compileTemplate(code: string, command: Command, game: Game): string {
 
 function format(
   code: string,
-  command: Command,
-  extensions: Extension[],
-  showOpcodes: boolean,
-  game: Game
+  {
+    command,
+    game,
+    showOpcodes = false,
+    showFuncDeclarations = false,
+    extensions = [],
+  }: {
+    command: Command;
+    game: Game;
+    showOpcodes?: boolean;
+    showFuncDeclarations?: boolean;
+    extensions?: Extension[];
+  }
 ): string {
   const highlightName = getName(command);
-  const isNativeFunction = command.name.startsWith('0x');
   const opcodified = showOpcodes ? opcodify(code, extensions) : code;
-  const declaratified = isNativeFunction
+  const declaratified = showFuncDeclarations
     ? declaratify(opcodified, extensions, game)
     : opcodified;
   const highlighted = Prism.highlight(

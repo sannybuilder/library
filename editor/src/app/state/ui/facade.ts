@@ -36,6 +36,7 @@ import {
   displayExtensionList,
   switchSyntaxKind,
   toggleSnippetOnlySearch,
+  toggleFunctionDeclaration,
 } from './actions';
 import * as selector from './selectors';
 
@@ -59,6 +60,9 @@ export class UiFacade {
   );
   displayOpcodePresentation$ = this.store$.select(
     selector.displayOpcodePresentation
+  );
+  displayFunctionDeclaration$ = this.store$.select(
+    selector.displayFunctionDeclaration  
   );
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
   selectedSyntaxKind$ = this.store$.select(selector.selectedSyntaxKind);
@@ -121,6 +125,10 @@ export class UiFacade {
 
   toggleOpcodePresentation() {
     this.store$.dispatch(toggleOpcodePresentation());
+  }
+
+  toggleFunctionDeclaration() {
+    this.store$.dispatch(toggleFunctionDeclaration());
   }
 
   toggleSidebar() {

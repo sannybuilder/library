@@ -69,7 +69,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   enumNames$ = this._enums.enumNames$;
   extensions$ = this._extensions.extensions$;
   extensionTypes$ = this._extensions.extensionTypes$;
-  displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
   selectedSyntaxKind$ = this._ui.selectedSyntaxKind$;
   extensionToCreateCommands$ = this._ui.selectedExtensions$.pipe(
@@ -236,11 +235,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onCancel() {
     this._ui.stopEditOrDisplay();
-  }
-
-  onToggleOpcodePresentation() {
-    this._ui.toggleOpcodePresentation();
-    return false;
   }
 
   getSnippet(extension: string, id: string) {

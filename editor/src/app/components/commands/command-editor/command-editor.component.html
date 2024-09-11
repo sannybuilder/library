@@ -553,15 +553,15 @@
             >
           </div>
         </div>
-        <pre
+        <scl-command-snippet
           *ngIf="displaySnippetPreview"
-          class="sample"
-          [innerHTML]="
-            snippetText.value
-              | codify : command : game : false : extensions
-              | sanitize
-          "
-        ></pre>
+          [snippet]="snippetText.value"
+          [game]="game"
+          [viewContext]="viewContext"
+          [command]="command"
+          [gameExtensions]="extensions"
+          [showControls]="false"
+        ></scl-command-snippet>
       </div>
     </div>
   </div>

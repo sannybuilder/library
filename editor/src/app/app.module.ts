@@ -113,6 +113,7 @@ import {
   CommandGamesComponent,
   ExtensionListComponent,
   CommandDeclarationComponent,
+  CommandSnippetComponent,
 } from './components/commands';
 
 import {
@@ -179,7 +180,8 @@ export function localStorageSyncReducer(
           'displayOpcodePresentation',
           'displayInlineMethodDescription',
           'isSidebarCollapsed',
-          'selectedSyntaxKind'
+          'selectedSyntaxKind',
+          'displayFunctionDeclaration'
         ],
       },
     ],
@@ -239,6 +241,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     ExtensionListComponent,
     QuizComponent,
     CommandDeclarationComponent,
+    CommandSnippetComponent
   ],
   imports: [
     BrowserModule,

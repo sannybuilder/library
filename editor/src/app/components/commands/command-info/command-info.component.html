@@ -209,48 +209,13 @@
   <ng-container *ngIf="snippet">
     <hr />
 
-    <div class="d-flex justify-content-between align-items-center">
-      <h5>{{ "ui.commandEditor.codeSnippetSubtitle" | translate }}</h5>
-      <div class="d-flex mb-2">
-        <scl-icon-button
-          class="mr-1"
-          *ngIf="
-            doesGameRequireOpcode(game) && viewContext === ViewContext.Script
-          "
-          [icon]="displayOpcodePresentation ? 'eye-fill' : 'eye'"
-          [title]="'ui.shared.toggleOpcode' | translate"
-          (clicked)="onToggleOpcodePresentation()"
-        >
-        </scl-icon-button>
-
-        <scl-copy-button
-          [text]="codeSnippet.innerText"
-          icon="copy"
-          #clipboardBtn
-          [title]="
-            (clipboardBtn.hasJustCopied
-              ? 'ui.shared.copied'
-              : 'ui.shared.copyToClipboard'
-            ) | translate
-          "
-        ></scl-copy-button>
-      </div>
-    </div>
-    <div class="position-relative">
-      <pre
-        class="sample"
-        #codeSnippet
-        [innerHTML]="
-          snippet
-            | codify
-              : command
-              : game
-              : displayOpcodePresentation
-              : gameExtensions
-            | sanitize
-        "
-      ></pre>
-    </div>
+    <scl-command-snippet
+      [snippet]="snippet"
+      [game]="game"
+      [viewContext]="viewContext"
+      [command]="command"
+      [gameExtensions]="gameExtensions"
+    ></scl-command-snippet>
   </ng-container>
 </div>
 <ng-template #paramTemplate let-params>

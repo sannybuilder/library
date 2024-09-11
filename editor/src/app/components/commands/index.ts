@@ -4,3 +4,4 @@ export * from './command-info/command-info.component';
 export * from './command-list/command-list.component';
 export * from './extension-list/extension-list.component';
 export * from './command-declaration/command-declaration.component';
+export * from './command-snippet/command-snippet.component';

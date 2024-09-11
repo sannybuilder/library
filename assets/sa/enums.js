@@ -3406,3 +3406,10 @@ export const SpeechId = {
   "PainEnd": 354,
   "End": 355
 };
+export const CarDoorState = {
+  "Intact": 0,
+  "SwingingFree": 1,
+  "Bashed": 2,
+  "BashedAndSwingingFree": 3,
+  "Missing": 4
+};

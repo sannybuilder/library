@@ -92,7 +92,7 @@ export const initialState: UiState = {
   displaySearchBar: false,
   displayInlineMethodDescription: false,
   displayOpcodePresentation: false,
-  displayFunctionDeclaration: false,
+  displayFunctionDeclaration: true,
   displaySearchHelp: false,
   isSearchHelpDismissed: false,
   isSidebarCollapsed: false,

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1722575325691,
-    "version": "0.235",
+    "last_update": 1726244929456,
+    "version": "0.236",
     "url": "https://library.sannybuilder.com/#/unknown_x86"
   },
   "extensions": [
@@ -74,6 +74,67 @@
           "attrs": {
             "is_condition": true
           }
+        }
+      ]
+    },
+    {
+      "name": "file",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "filePathName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "File",
+              "source": "var_any"
+            }
+          ],
+          "name": "OPEN_FILE",
+          "num_params": 2,
+          "class": "File",
+          "member": "Open",
+          "short_desc": "Opens the file at the specified path. Returns the file identifier (handle), which starts with 0 if the operation was successful, otherwise -1 will be returned",
+          "attrs": {
+            "is_constructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            }
+          ],
+          "name": "CLOSE_FILE",
+          "num_params": 1,
+          "class": "File",
+          "member": "Close",
+          "short_desc": "Closes the file and frees the memory",
+          "attrs": {
+            "is_destructor": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "File"
+            },
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "name": "WRITE_STRING_TO_FILE",
+          "num_params": 2,
+          "class": "File",
+          "member": "WriteString",
+          "short_desc": "Copies data from the source string to the file"
         }
       ]
     },

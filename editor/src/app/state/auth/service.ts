@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   setSession(accessToken: string) {
-    this.cookieService.set(this.sessionKey, accessToken, 2);
+    this.cookieService.set(this.sessionKey, accessToken, 14);
   }
 
   getSession(): string {

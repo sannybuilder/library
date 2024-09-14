@@ -2515,10 +2515,15 @@ export const CarLights = {
   "ForceOn": 2
 };
 export const SeatIndex = {
-  "TandemRear": 0,
   "FrontRight": 0,
   "RearLeft": 1,
-  "RearRight": 2
+  "RearRight": 2,
+  "Passenger4": 3,
+  "Passenger5": 4,
+  "Passenger6": 5,
+  "Passenger7": 6,
+  "Passenger8": 7,
+  "BikeRear": 0
 };
 export const AudioStreamAction = {
   "Stop": 0,

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Command } from '../models';
+import { Command, SELF } from '../models';
 import { inputParams } from '../utils';
 import { braceify, stringify } from './params';
 
@@ -7,13 +7,13 @@ import { braceify, stringify } from './params';
   name: 'inputParams',
 })
 export class InputParamsPipe implements PipeTransform {
-  transform(command: Command, skipFirst: boolean = false): string {
+  transform(command: Command, skipSelf: boolean = false): string {
     if (!command.num_params) {
       return '()';
     }
-    return braceify(
-      stringify(inputParams(command).slice(skipFirst ? 1 : 0), ', '),
-      '()'
-    );
+    const params = skipSelf
+      ? inputParams(command).filter((p) => p.name !== SELF)
+      : inputParams(command);
+    return braceify(stringify(params, ', '), '()');
   }
 }

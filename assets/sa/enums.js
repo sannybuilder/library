@@ -2541,20 +2541,6 @@ export const ComponentStates = {
   "Ok": 1,
   "Dam": 2
 };
-export const PrimitiveTypes = {
-  "Naprimtype": 0,
-  "Linelist": 1,
-  "Polyline": 2,
-  "Trilist": 3,
-  "Tristrip": 4,
-  "Trifan": 5,
-  "Pointlist": 6
-};
-export const ShapePriority = {
-  "UnderHud": 0,
-  "OverRadar": 1,
-  "OverHud": 2
-};
 export const BlendValues = {
   "Zero": 0,
   "One": 1,
@@ -2677,14 +2663,6 @@ export const ProjectileTypes = {
   "RocketHs": 4,
   "FreefallBomb": 5,
   "RocketFlare": 6
-};
-export const CarColors = {
-  "Default": 0,
-  "Primary": 1,
-  "Secondary": 2,
-  "Tertiary": 3,
-  "Quaternary": 4,
-  "AllColors": 5
 };
 export const ParamTypes = {
   "Int": 0,

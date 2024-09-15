@@ -187,7 +187,7 @@ export const rows = createSelector(
           }));
         }
 
-        return search(filtered, searchTerm).map((command) => ({
+        return search(filtered, searchTerm, game!).map((command) => ({
           extension,
           command,
           _abbrMatch: false,

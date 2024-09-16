@@ -984,3 +984,8 @@ export const SeatId = {
   "Passenger7": 6,
   "Passenger8": 7
 };
+export const SeekOrigin = {
+  "Begin": 0,
+  "Current": 1,
+  "End": 2
+};

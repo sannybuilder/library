@@ -984,8 +984,11 @@ export const SeatId = {
   "Passenger7": 6,
   "Passenger8": 7
 };
-export const SeekOrigin = {
-  "Begin": 0,
-  "Current": 1,
-  "End": 2
+export const FileMode = {
+  "ReadText": "rt",
+  "WriteText": "wt",
+  "AppendText": "at",
+  "ReadBinary": "rb",
+  "WriteBinary": "wb",
+  "AppendBinary": "ab"
 };

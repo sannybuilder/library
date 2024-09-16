@@ -1162,3 +1162,11 @@ export const SeatId = {
   "Passenger8": 7,
   "BikeRear": 0
 };
+export const FileMode = {
+  "ReadText": "rt",
+  "WriteText": "wt",
+  "AppendText": "at",
+  "ReadBinary": "rb",
+  "WriteBinary": "wb",
+  "AppendBinary": "ab"
+};

@@ -133,6 +133,7 @@ export class CommandEditorComponent implements OnInit {
   cloneTargets: Game[] = [];
   defaultCommandNameFormatter: (name: string | undefined) => string | undefined;
   codeTokens: string[] = [];
+  games: Game[] = Object.values(Game);
 
   features = {
     opcode: true,
@@ -285,6 +286,7 @@ export class CommandEditorComponent implements OnInit {
   @Output() hasError: EventEmitter<boolean> = new EventEmitter();
   @Output() delete: EventEmitter<void> = new EventEmitter();
   @Output() clone: EventEmitter<Game> = new EventEmitter();
+  @Output() copyFrom: EventEmitter<Game> = new EventEmitter();
 
   @Input() set types(val: ParamType[]) {
     const prefixes: Record<ParamType['type'], string> = {
@@ -820,6 +822,10 @@ export class CommandEditorComponent implements OnInit {
     if (!this.isInvalid) {
       this.clone.emit(game);
     }
+  }
+
+  copyFromCommand(game: Game) {
+    this.copyFrom.emit(game);
   }
 
   pasteToken(token: string) {

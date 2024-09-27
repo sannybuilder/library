@@ -20,6 +20,25 @@
   <div class="row mb-2">
     <div class="col-12 flex-row d-flex justify-content-end">
       <button
+        [disabled]="!command.name"
+        class="btn btn-outline-secondary mr-2 dropdown-toggle"
+        data-toggle="dropdown"
+        data-offset="0,0"
+        aria-haspopup="true"
+        aria-expanded="false"
+        [title]="'ui.commandEditor.copyFromHint' | translate"
+      >
+        {{ "ui.commandEditor.copyFrom" | translate }}
+      </button>
+      <div class="dropdown-menu">
+        <span
+          class="dropdown-item"
+          *ngFor="let target of games"
+          (click)="copyFromCommand(target)"
+          >{{ target | gameTitle }}</span
+        >
+      </div>
+      <button
         *ngIf="canClone()"
         [disabled]="isInvalid"
         class="btn btn-outline-secondary mr-2 dropdown-toggle"

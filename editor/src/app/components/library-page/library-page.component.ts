@@ -10,7 +10,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { combineLatest, Observable, of, Subject, zip } from 'rxjs';
-import { takeUntil, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  takeUntil,
+  map,
+  switchMap,
+  withLatestFrom,
+  take,
+} from 'rxjs/operators';
 import { cloneDeep, isEqual, omit, uniqBy, orderBy, flatten } from 'lodash';
 
 import {
@@ -231,6 +237,30 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       command: this.command!,
       extension: this.extension!,
     });
+  }
+
+  onCopyFromCommand(game: Game) {
+    const name = this.command?.name;
+    if (!name) {
+      return;
+    }
+    this._extensions
+      .getGameExtensions(game)
+      .pipe(take(1))
+      .subscribe((extensions) => {
+        for (const extension of extensions) {
+          for (const command of extension.commands) {
+            if (command.name === name) {
+              this.command = {
+                ...cloneDeep(command),
+                name: command.name,
+                id: command.id,
+              };
+              return;
+            }
+          }
+        }
+      });
   }
 
   onCancel() {

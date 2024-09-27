@@ -2,12 +2,54 @@
 
 #CLASSESLIST
 Camera
+Car
+Char
+Math
 Player
 
 #CLASSES
 $Camera
 $BEGIN
 Shake,0003,0,0,("intensity%i")
+$END
+
+$Car
+$BEGIN
+Create,0048,0,0,("modelId: model_vehicle" "x%f" "y%f" "z%f" "handle: Car")
+Delete,0049,0,0,("self: Car")
+GetCoordinates,004D,0,0,("self: Car" "x%f" "y%f" "z%f")
+GotoCoordinates,004A,0,0,("self: Car" "x%f" "y%f" "z%f")
+IsInArea2D,0053,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
+IsInArea3D,0054,0,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
+IsStillAlive,004F,1,0,("self: Car")
+SetCoordinates,004E,0,0,("self: Car" "x%f" "y%f" "z%f")
+SetCruiseSpeed,0050,0,0,("self: Car" "maxSpeed%f")
+SetDrivingStyle,0051,0,0,("self: Car" "drivingStyle%i")
+SetIdle,004C,0,0,("self: Car")
+SetMission,0052,0,0,("self: Car" "carMission%i")
+WanderRandomly,004B,0,0,("self: Car")
+$END
+
+$Char
+$BEGIN
+Create,003E,0,0,("pedType%i" "modelId: model_char" "x%f" "y%f" "z%f" "handle: Char")
+Delete,003F,0,0,("self: Char")
+FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
+GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
+IsInArea2D,0046,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
+IsInArea3D,0047,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
+IsStillAlive,0045,1,0,("self: Char")
+SetCoordinates,0044,0,0,("self: Char" "x%f" "y%f" "z%f")
+SetIdle,0042,0,0,("self: Char")
+WanderDir,0040,0,0,("self: Char" "direction%i")
+$END
+
+$Math
+$BEGIN
+AbsFloat,003B,0,0,("%f")
+AbsInt,003A,0,0,("%i")
+RandomFloat,003C,0,0,("%f")
+RandomInt,003D,0,0,("%i")
 $END
 
 $Player

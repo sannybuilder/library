@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727463442049,
-    "version": "0.10",
+    "last_update": 1727478008502,
+    "version": "0.11",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -700,7 +700,7 @@
           "id": "0026",
           "name": "RETURN",
           "num_params": 0,
-          "short_desc": "Returns from the current subroutine (0025)"
+          "short_desc": "Returns from the current subroutine (0025) or function (037A, 037B)"
         },
         {
           "input": [
@@ -1751,222 +1751,310 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "style",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0055",
-          "name": "COMMAND_0055",
-          "num_params": 3
+          "member": "PrintBig",
+          "name": "PRINT_BIG",
+          "num_params": 3,
+          "short_desc": "Displays a styled message for the specified time"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "flag",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0056",
-          "name": "COMMAND_0056",
-          "num_params": 3
+          "member": "Print",
+          "name": "PRINT",
+          "num_params": 3,
+          "short_desc": "Displays a message positioned on the bottom of the screen for the specified time"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "flag",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0057",
-          "name": "COMMAND_0057",
-          "num_params": 3
+          "member": "PrintNow",
+          "name": "PRINT_NOW",
+          "num_params": 3,
+          "short_desc": "Displays a message positioned on the bottom of the screen for the specified time"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "flag",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0058",
-          "name": "COMMAND_0058",
-          "num_params": 3
+          "member": "PrintSoon",
+          "name": "PRINT_SOON",
+          "num_params": 3,
+          "short_desc": "Displays a message for the specified time when there are no other messages being printed"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0059",
-          "name": "COMMAND_0059",
-          "num_params": 0
+          "member": "ClearPrints",
+          "name": "CLEAR_PRINTS",
+          "num_params": 0,
+          "short_desc": "Clears all priority text and some styles of big texts"
         },
         {
-          "input": [
+          "output": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "hours",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "minutes",
+              "type": "int",
+              "source": "var_any"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Clock",
           "id": "005A",
-          "name": "COMMAND_005A",
-          "num_params": 2
+          "member": "GetTimeOfDay",
+          "name": "GET_TIME_OF_DAY",
+          "num_params": 2,
+          "short_desc": "Returns the number of hours and minutes passed since midnight"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "hours",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "minutes",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Clock",
           "id": "005B",
-          "name": "COMMAND_005B",
-          "num_params": 2
+          "member": "SetTimeOfDay",
+          "name": "SET_TIME_OF_DAY",
+          "num_params": 2,
+          "short_desc": "Sets the current in-game time"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "hours",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "minutes",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "minutesLeft",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Clock",
           "id": "005C",
-          "name": "COMMAND_005C",
-          "num_params": 3
+          "member": "GetMinutesToTimeOfDay",
+          "name": "GET_MINUTES_TO_TIME_OF_DAY",
+          "num_params": 3,
+          "short_desc": "Returns the number of minutes left until the clock matches the time specified"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "radius",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "005D",
-          "name": "COMMAND_005D",
-          "num_params": 4
+          "member": "IsPointOnScreen",
+          "name": "IS_POINT_ON_SCREEN",
+          "num_params": 4,
+          "short_desc": "Returns true if any part of the radius of the specified point is visible on screen"
         },
         {
           "id": "005E",
-          "name": "COMMAND_005E",
-          "num_params": 0
+          "name": "RETURN_TRUE",
+          "num_params": 0,
+          "short_desc": "Returns from the current subroutine (0025) or function (037A, 037B) and sets the condition result to true",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "005F",
-          "name": "COMMAND_005F",
-          "num_params": 0
+          "name": "RETURN_FALSE",
+          "num_params": 0,
+          "short_desc": "Returns from the current subroutine (0025) or function (037A, 037B) and sets the condition result to false",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int"
             }
           ],
           "id": "0078",
-          "name": "COMMAND_0078",
-          "num_params": 1
+          "name": "IF",
+          "num_params": 1,
+          "short_desc": "Begins a conditional statement with the specified number of conditions"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "label"
             }
           ],
           "id": "0079",
-          "name": "COMMAND_0079",
-          "num_params": 1
+          "name": "LAUNCH_MISSION",
+          "num_params": 1,
+          "short_desc": "Launches a submission script"
         },
         {
           "id": "007A",
-          "name": "COMMAND_007A",
-          "num_params": 0
+          "name": "MISSION_HAS_FINISHED",
+          "num_params": 0,
+          "short_desc": "Resets multiple settings that are usually set during missions and in some scripts",
+          "class": "Mission",
+          "member": "Finish",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
           "id": "007B",
-          "name": "COMMAND_007B",
-          "num_params": 2
+          "member": "StoreCarIsIn",
+          "name": "STORE_CAR_CHAR_IS_IN",
+          "num_params": 2,
+          "short_desc": "Returns the current vehicle of the character and adds it to the mission cleanup list"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "007C",
-          "name": "COMMAND_007C",
-          "num_params": 2
+          "member": "IsInCar",
+          "name": "IS_CHAR_IN_CAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the character is in the specified vehicle"
         },
         {
           "input": [

@@ -253,8 +253,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
             if (command.name === name) {
               this.command = {
                 ...cloneDeep(command),
-                name: command.name,
-                id: command.id,
+                id: this.command?.id || command.id,
               };
               return;
             }

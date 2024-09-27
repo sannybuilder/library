@@ -4,12 +4,16 @@
 Camera
 Car
 Char
+Clock
 Math
+Mission
 Player
+Text
 
 #CLASSES
 $Camera
 $BEGIN
+IsPointOnScreen,005D,1,0,("x%f" "y%f" "z%f" "radius%f")
 Shake,0003,0,0,("intensity%i")
 $END
 
@@ -38,10 +42,19 @@ FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
 IsInArea2D,0046,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
 IsInArea3D,0047,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
+IsInCar,007C,1,0,("self: Char" "vehicle: Car")
 IsStillAlive,0045,1,0,("self: Char")
 SetCoordinates,0044,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetIdle,0042,0,0,("self: Char")
+StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
 WanderDir,0040,0,0,("self: Char" "direction%i")
+$END
+
+$Clock
+$BEGIN
+GetMinutesToTimeOfDay,005C,0,0,("hours%i" "minutes%i" "minutesLeft%i")
+GetTimeOfDay,005A,0,0,("hours%i" "minutes%i")
+SetTimeOfDay,005B,0,0,("hours%i" "minutes%i")
 $END
 
 $Math
@@ -52,9 +65,23 @@ RandomFloat,003C,0,0,("%f")
 RandomInt,003D,0,0,("%i")
 $END
 
+$Mission
+$BEGIN
+Finish,007A,0,0,()
+$END
+
 $Player
 $BEGIN
 Create,0028,0,0,("index%i" "x%f" "y%f" "z%f" "handle: Char")
+$END
+
+$Text
+$BEGIN
+ClearPrints,0059,0,0,()
+Print,0056,0,0,("key: gxt_key" "time%i" "flag%i")
+PrintBig,0055,0,0,("key: gxt_key" "time%i" "style%i")
+PrintNow,0057,0,0,("key: gxt_key" "time%i" "flag%i")
+PrintSoon,0058,0,0,("key: gxt_key" "time%i" "flag%i")
 $END
 
 #EOF

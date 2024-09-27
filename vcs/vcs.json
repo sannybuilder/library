@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727456704377,
-    "version": "0.8",
+    "last_update": 1727458550938,
+    "version": "0.9",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -568,7 +568,7 @@
             }
           ],
           "id": "001D",
-          "name": "IS_FLOAT_LVAR_EQUAL_TO_NUMBER",
+          "name": "IS_FLOAT_VAR_EQUAL_TO_NUMBER",
           "num_params": 2,
           "operator": "==",
           "attrs": {
@@ -641,34 +641,34 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "label"
             }
           ],
           "id": "0021",
-          "name": "COMMAND_0021",
-          "num_params": 1
+          "name": "GOTO_IF_TRUE",
+          "num_params": 1,
+          "short_desc": "Transfers the script execution to the label if the condition result is true"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "label"
             }
           ],
           "id": "0022",
-          "name": "COMMAND_0022",
-          "num_params": 1
+          "name": "GOTO_IF_FALSE",
+          "num_params": 1,
+          "short_desc": "Transfers the script execution to the label if the condition result is false"
         },
         {
           "id": "0023",
-          "name": "COMMAND_0023",
-          "num_params": 0
+          "name": "TERMINATE_THIS_SCRIPT",
+          "num_params": 0,
+          "short_desc": "Ends the current script, preventing further execution"
         },
         {
-          "id": "0024",
-          "name": "COMMAND_0024",
-          "num_params": 2,
           "input": [
             {
               "name": "",
@@ -678,7 +678,11 @@
               "name": "",
               "type": "arguments"
             }
-          ]
+          ],
+          "id": "0024",
+          "name": "START_NEW_SCRIPT",
+          "num_params": 2,
+          "short_desc": "Starts a new script at the specified label"
         },
         {
           "input": [
@@ -702,32 +706,35 @@
           "input": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "float"
             },
             {
               "name": "_p2",
-              "type": "int"
+              "type": "float"
             },
             {
               "name": "_p3",
-              "type": "int"
+              "type": "float"
             },
             {
               "name": "_p4",
-              "type": "int"
+              "type": "float"
             },
             {
               "name": "_p5",
-              "type": "int"
+              "type": "float"
             },
             {
               "name": "_p6",
-              "type": "int"
+              "type": "float"
             }
           ],
           "id": "0027",
-          "name": "COMMAND_0027",
-          "num_params": 6
+          "name": "LINE",
+          "num_params": 6,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -769,122 +776,146 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0029",
-          "name": "COMMAND_0029",
-          "num_params": 2
+          "name": "ADD_INT_VAR_TO_INT_VAR",
+          "num_params": 2,
+          "operator": "+"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "002A",
-          "name": "COMMAND_002A",
-          "num_params": 2
+          "name": "ADD_FLOAT_VAR_TO_FLOAT_VAR",
+          "num_params": 2,
+          "operator": "+"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "002B",
-          "name": "COMMAND_002B",
-          "num_params": 2
+          "name": "SUB_INT_VAR_FROM_INT_VAR",
+          "num_params": 2,
+          "operator": "-"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "002C",
-          "name": "COMMAND_002C",
-          "num_params": 2
+          "name": "SUB_FLOAT_VAR_FROM_FLOAT_VAR",
+          "num_params": 2,
+          "operator": "-"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "002D",
-          "name": "COMMAND_002D",
-          "num_params": 2
+          "name": "MULT_INT_VAR_BY_INT_VAR",
+          "num_params": 2,
+          "operator": "*"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "002E",
-          "name": "COMMAND_002E",
-          "num_params": 2
+          "name": "MULT_FLOAT_VAR_BY_FLOAT_VAR",
+          "num_params": 2,
+          "operator": "*"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "002F",
-          "name": "COMMAND_002F",
-          "num_params": 2
+          "name": "DIV_INT_VAR_BY_INT_VAR",
+          "num_params": 2,
+          "operator": "/"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "0030",
-          "name": "COMMAND_0030",
-          "num_params": 2
+          "name": "DIV_FLOAT_VAR_BY_FLOAT_VAR",
+          "num_params": 2,
+          "operator": "/"
         },
         {
           "input": [
@@ -902,7 +933,8 @@
           "id": "0031",
           "name": "ADD_TIMED_VAL_TO_FLOAT_VAR",
           "num_params": 2,
-          "short_desc": "Multiplies the delta time since the last frame by the specified value and adds the result to the specified variable"
+          "short_desc": "Multiplies the delta time since the last frame by the specified value and adds the result to the specified variable",
+          "operator": "+=@"
         },
         {
           "input": [
@@ -920,7 +952,8 @@
           "id": "0032",
           "name": "ADD_TIMED_FLOAT_VAR_TO_FLOAT_VAR",
           "num_params": 2,
-          "short_desc": "Multiplies the delta time since the last frame by the float value of the variable and adds the result to another variable"
+          "short_desc": "Multiplies the delta time since the last frame by the float value of the variable and adds the result to another variable",
+          "operator": "+=@"
         },
         {
           "input": [
@@ -938,7 +971,8 @@
           "id": "0033",
           "name": "SUB_TIMED_VAL_FROM_FLOAT_VAR",
           "num_params": 2,
-          "short_desc": "Multiplies the delta time since the last frame by the specified float value and subtracts the result from the specified variable"
+          "short_desc": "Multiplies the delta time since the last frame by the specified float value and subtracts the result from the specified variable",
+          "operator": "-=@"
         },
         {
           "input": [
@@ -956,52 +990,62 @@
           "id": "0034",
           "name": "SUB_TIMED_FLOAT_VAR_FROM_FLOAT_VAR",
           "num_params": 2,
-          "short_desc": "Multiplies the delta time since the last frame by the value of the specified variable and subtracts the result from the specified variable"
+          "short_desc": "Multiplies the delta time since the last frame by the value of the specified variable and subtracts the result from the specified variable",
+          "operator": "-=@"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0035",
-          "name": "COMMAND_0035",
-          "num_params": 2
+          "name": "SET_VAR_INT_TO_VAR_INT",
+          "num_params": 2,
+          "operator": "="
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "0036",
-          "name": "COMMAND_0036",
-          "num_params": 2
+          "name": "SET_VAR_FLOAT_TO_VAR_FLOAT",
+          "num_params": 2,
+          "operator": "="
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "string",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "string",
+              "source": "var_any"
             }
           ],
           "id": "0037",
-          "name": "COMMAND_0037",
-          "num_params": 2
+          "name": "SET_VAR_TEXT_LABEL_TO_VAR_TEXT_LABEL",
+          "num_params": 2,
+          "operator": "="
         },
         {
           "input": [
@@ -1019,7 +1063,8 @@
           "id": "0038",
           "name": "CSET_VAR_INT_TO_VAR_FLOAT",
           "num_params": 2,
-          "short_desc": "Converts the float in the second variable to an integer (via flooring) and stores the result into the first variable"
+          "short_desc": "Converts the float in the second variable to an integer (via flooring) and stores the result into the first variable",
+          "operator": "=#"
         },
         {
           "input": [
@@ -1037,7 +1082,8 @@
           "id": "0039",
           "name": "CSET_VAR_FLOAT_TO_VAR_INT",
           "num_params": 2,
-          "short_desc": "Converts the integer value of the second variable to a float and stores the result in the first variable"
+          "short_desc": "Converts the integer value of the second variable to a float and stores the result in the first variable",
+          "operator": "=#"
         },
         {
           "input": [

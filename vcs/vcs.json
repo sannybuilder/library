@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727458550938,
-    "version": "0.9",
+    "last_update": 1727463442049,
+    "version": "0.10",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -1088,121 +1088,165 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "",
               "type": "int"
             }
           ],
           "id": "003A",
-          "name": "COMMAND_003A",
-          "num_params": 1
+          "name": "ABS_VAR_INT",
+          "num_params": 1,
+          "short_desc": "Returns the absolute value of the integer variable",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Math",
+          "member": "AbsInt"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float"
             }
           ],
           "id": "003B",
-          "name": "COMMAND_003B",
-          "num_params": 1
+          "name": "ABS_LVAR_FLOAT",
+          "num_params": 1,
+          "short_desc": "Returns the absolute value of the float variable",
+          "class": "Math",
+          "member": "AbsFloat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "input": [
+          "output": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "003C",
-          "name": "COMMAND_003C",
-          "num_params": 1
+          "name": "GENERATE_RANDOM_FLOAT",
+          "num_params": 1,
+          "short_desc": "Returns a random float between 0.0 to 1.0",
+          "class": "Math",
+          "member": "RandomFloat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "input": [
+          "output": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "003D",
-          "name": "COMMAND_003D",
-          "num_params": 1
+          "name": "GENERATE_RANDOM_INT",
+          "num_params": 1,
+          "class": "Math",
+          "member": "RandomInt",
+          "short_desc": "Returns a random integer between 0 and 65535",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "pedType",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_char"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
-            },
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "id": "003E",
-          "name": "COMMAND_003E",
-          "num_params": 6
+          "name": "CREATE_CHAR",
+          "num_params": 6,
+          "short_desc": "Creates a character at the specified location, with the specified model and pedtype",
+          "class": "Char",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "id": "003F",
-          "name": "COMMAND_003F",
-          "num_params": 1
+          "name": "DELETE_CHAR",
+          "num_params": 1,
+          "class": "Char",
+          "member": "Delete",
+          "attrs": {
+            "is_destructor": true
+          },
+          "short_desc": "Removes the character from the game and mission cleanup list, freeing game memory"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "direction",
               "type": "int"
             }
           ],
           "id": "0040",
-          "name": "COMMAND_0040",
-          "num_params": 2
+          "name": "CHAR_WANDER_DIR",
+          "num_params": 2,
+          "class": "Char",
+          "member": "WanderDir",
+          "short_desc": "Sets the character's wander direction"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
               "name": "_p5",
@@ -1214,401 +1258,495 @@
             }
           ],
           "id": "0041",
-          "name": "COMMAND_0041",
-          "num_params": 6
+          "name": "CHAR_FOLLOW_PATH",
+          "num_params": 6,
+          "class": "Char",
+          "member": "FollowPath",
+          "short_desc": "Sets the character's follow path"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "id": "0042",
-          "name": "COMMAND_0042",
-          "num_params": 1
+          "name": "CHAR_SET_IDLE",
+          "num_params": 1,
+          "class": "Char",
+          "member": "SetIdle",
+          "short_desc": "Sets the character's objective to stay idle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "0043",
-          "name": "COMMAND_0043",
-          "num_params": 4
+          "name": "GET_CHAR_COORDINATES",
+          "num_params": 4,
+          "class": "Char",
+          "member": "GetCoordinates",
+          "short_desc": "Returns the character's coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
           "id": "0044",
-          "name": "COMMAND_0044",
-          "num_params": 4
+          "name": "SET_CHAR_COORDINATES",
+          "num_params": 4,
+          "class": "Char",
+          "member": "SetCoordinates",
+          "short_desc": "Puts the character at the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "id": "0045",
-          "name": "COMMAND_0045",
-          "num_params": 1
+          "name": "IS_CHAR_STILL_ALIVE",
+          "num_params": 1,
+          "class": "Char",
+          "member": "IsStillAlive",
+          "short_desc": "Returns true if the handle is a valid character handle who is still alive",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
           "id": "0046",
-          "name": "COMMAND_0046",
-          "num_params": 6
+          "name": "IS_CHAR_IN_AREA_2D",
+          "num_params": 6,
+          "class": "Char",
+          "member": "IsInArea2D",
+          "short_desc": "Returns true if the character is within the specified 2D area",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
           "id": "0047",
-          "name": "COMMAND_0047",
-          "num_params": 8
+          "name": "IS_CHAR_IN_AREA_3D",
+          "num_params": 8,
+          "class": "Char",
+          "member": "IsInArea3D",
+          "short_desc": "Returns true if the character is within the specified 3D area",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_vehicle"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
             }
           ],
           "id": "0048",
-          "name": "COMMAND_0048",
-          "num_params": 5
+          "name": "CREATE_CAR",
+          "num_params": 5,
+          "class": "Car",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          },
+          "short_desc": "Creates a vehicle at the specified location, with the specified model"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "id": "0049",
-          "name": "COMMAND_0049",
-          "num_params": 1
+          "name": "DELETE_CAR",
+          "num_params": 1,
+          "class": "Car",
+          "member": "Delete",
+          "attrs": {
+            "is_destructor": true
+          },
+          "short_desc": "Removes the vehicle from the game"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
           "id": "004A",
-          "name": "COMMAND_004A",
-          "num_params": 4
+          "name": "CAR_GOTO_COORDINATES",
+          "num_params": 4,
+          "class": "Car",
+          "member": "GotoCoordinates",
+          "short_desc": "Makes the AI drive to the specified location by any means"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "id": "004B",
-          "name": "COMMAND_004B",
-          "num_params": 1
+          "name": "CAR_WANDER_RANDOMLY",
+          "num_params": 1,
+          "class": "Car",
+          "member": "WanderRandomly",
+          "short_desc": "Clears any current tasks the vehicle has and makes it drive around aimlessly"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "id": "004C",
-          "name": "COMMAND_004C",
-          "num_params": 1
+          "name": "CAR_SET_IDLE",
+          "num_params": 1,
+          "class": "Car",
+          "member": "SetIdle",
+          "short_desc": "Sets the car's mission to idle (MISSION_NONE), stopping any driving activity"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "004D",
-          "name": "COMMAND_004D",
-          "num_params": 4
+          "name": "GET_CAR_COORDINATES",
+          "num_params": 4,
+          "class": "Car",
+          "member": "GetCoordinates",
+          "short_desc": "Returns the vehicle's coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
           "id": "004E",
-          "name": "COMMAND_004E",
-          "num_params": 4
+          "name": "SET_CAR_COORDINATES",
+          "num_params": 4,
+          "class": "Car",
+          "member": "SetCoordinates",
+          "short_desc": "Puts the vehicle at the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "id": "004F",
-          "name": "COMMAND_004F",
-          "num_params": 1
+          "name": "IS_CAR_STILL_ALIVE",
+          "num_params": 1,
+          "short_desc": "Returns true if the handle is a valid vehicle handle that is still alive",
+          "class": "Car",
+          "member": "IsStillAlive",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "maxSpeed",
+              "type": "float"
             }
           ],
           "id": "0050",
-          "name": "COMMAND_0050",
-          "num_params": 2
+          "name": "SET_CAR_CRUISE_SPEED",
+          "num_params": 2,
+          "short_desc": "Sets the vehicle's max speed",
+          "class": "Car",
+          "member": "SetCruiseSpeed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "drivingStyle",
               "type": "int"
             }
           ],
           "id": "0051",
-          "name": "COMMAND_0051",
-          "num_params": 2
+          "name": "SET_CAR_DRIVING_STYLE",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetDrivingStyle",
+          "short_desc": "Sets the behavior of the vehicle's AI driver"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "carMission",
               "type": "int"
             }
           ],
           "id": "0052",
-          "name": "COMMAND_0052",
-          "num_params": 2
+          "name": "SET_CAR_MISSION",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetMission",
+          "short_desc": "Sets the mission of the vehicle's AI driver"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
           "id": "0053",
-          "name": "COMMAND_0053",
-          "num_params": 6
+          "name": "IS_CAR_IN_AREA_2D",
+          "num_params": 6,
+          "class": "Car",
+          "member": "IsInArea2D",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Returns true if the vehicle is located within the specified 2D area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
           "id": "0054",
-          "name": "COMMAND_0054",
-          "num_params": 8
+          "name": "IS_CAR_IN_AREA_3D",
+          "num_params": 8,
+          "short_desc": "Returns true if the vehicle is located within the specified 3D area",
+          "class": "Car",
+          "member": "IsInArea3D"
         },
         {
           "input": [

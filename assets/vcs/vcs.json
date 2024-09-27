@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1689470518303,
-    "version": "0.2",
+    "last_update": 1727450582602,
+    "version": "0.3",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -12,10 +12,7 @@
           "id": "0000",
           "name": "NOP",
           "num_params": 0,
-          "short_desc": "Has no effect and is commonly used to pad CLEO scripts with extra space to avoid the jump-at-zero-offset bug",
-          "attrs": {
-            
-          }
+          "short_desc": "Has no effect and is commonly used to pad CLEO scripts with extra space to avoid the jump-at-zero-offset bug"
         },
         {
           "input": [
@@ -24,9 +21,6 @@
               "type": "int"
             }
           ],
-          "attrs": {
-            
-          },
           "id": "0001",
           "name": "WAIT",
           "num_params": 1,
@@ -41,7 +35,6 @@
           ],
           "attrs": {
             "is_branch": true,
-            
             "is_segment": true
           },
           "id": "0002",
@@ -119,6 +112,43 @@
           "name": "SET_VAR_TEXT_LABEL",
           "num_params": 2,
           "short_desc": "Stores a short string into a variable"
+        },
+        {
+          "input": [
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "id": "0028",
+          "name": "CREATE_PLAYER",
+          "num_params": 5,
+          "class": "Player",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "short_desc": "Creates a player at the specified location"
         },
         {
           "input": [

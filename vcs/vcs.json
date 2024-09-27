@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727454469149,
-    "version": "0.6",
+    "last_update": 1727455807300,
+    "version": "0.7",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -60,7 +60,6 @@
           "short_desc": "Shakes the camera with the given intensity"
         },
         {
-          "id": "0004",
           "input": [
             {
               "name": "",
@@ -73,12 +72,13 @@
               "source": "literal"
             }
           ],
+          "id": "0004",
           "name": "SET_VAR_INT",
           "num_params": 2,
-          "short_desc": "Sets the integer value of the VAR"
+          "short_desc": "Sets the integer value of the VAR",
+          "operator": "="
         },
         {
-          "id": "0005",
           "input": [
             {
               "name": "",
@@ -91,12 +91,32 @@
               "source": "literal"
             }
           ],
+          "id": "0005",
           "name": "SET_VAR_FLOAT",
           "num_params": 2,
-          "short_desc": "Sets the float value of the VAR"
+          "short_desc": "Sets the float value of the VAR",
+          "operator": "="
         },
         {
+          "input": [
+            {
+              "name": "",
+              "type": "string",
+              "source": "var_any"
+            },
+            {
+              "name": "",
+              "type": "string",
+              "source": "literal"
+            }
+          ],
           "id": "0006",
+          "name": "SET_VAR_TEXT_LABEL",
+          "num_params": 2,
+          "short_desc": "Stores a short string into a variable",
+          "operator": "="
+        },
+        {
           "input": [
             {
               "name": "",
@@ -107,131 +127,138 @@
               "name": "",
               "type": "int",
               "source": "literal"
-            }
-          ],
-          "name": "SET_VAR_TEXT_LABEL",
-          "num_params": 2,
-          "short_desc": "Stores a short string into a variable"
-        },
-        {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
             }
           ],
           "id": "0007",
-          "name": "COMMAND_0007",
-          "num_params": 2
+          "name": "ADD_VAL_TO_INT_VAR",
+          "num_params": 2,
+          "operator": "+"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "literal"
             }
           ],
           "id": "0008",
-          "name": "COMMAND_0008",
-          "num_params": 2
+          "name": "ADD_VAL_TO_FLOAT_VAR",
+          "num_params": 2,
+          "operator": "+"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
           "id": "0009",
-          "name": "COMMAND_0009",
-          "num_params": 2
+          "name": "SUB_VAL_FROM_INT_VAR",
+          "num_params": 2,
+          "operator": "-"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "literal"
             }
           ],
           "id": "000A",
-          "name": "COMMAND_000A",
-          "num_params": 2
+          "name": "SUB_VAL_FROM_FLOAT_VAR",
+          "num_params": 2,
+          "operator": "-"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
           "id": "000B",
-          "name": "COMMAND_000B",
-          "num_params": 2
+          "name": "MULT_INT_VAR_BY_VAL",
+          "num_params": 2,
+          "operator": "*"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "literal"
             }
           ],
           "id": "000C",
-          "name": "COMMAND_000C",
-          "num_params": 2
+          "name": "MULT_FLOAT_VAR_BY_VAL",
+          "num_params": 2,
+          "operator": "*"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
           "id": "000D",
-          "name": "COMMAND_000D",
-          "num_params": 2
+          "name": "DIV_INT_VAR_BY_VAL",
+          "num_params": 2,
+          "operator": "/"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "float",
+              "source": "literal"
             }
           ],
           "id": "000E",
-          "name": "COMMAND_000E",
-          "num_params": 2
+          "name": "DIV_FLOAT_VAR_BY_VAL",
+          "num_params": 2,
+          "operator": "/"
         },
         {
           "input": [

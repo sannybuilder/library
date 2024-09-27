@@ -11,6 +11,7 @@ enum Status {
 
 const NUM_CHOICES = 3;
 const ANSWER_RETAIN_TIME = 8000;
+const MAX_ITERATIONS = 50;
 
 @Component({
   selector: 'scl-quiz',
@@ -80,10 +81,13 @@ export class QuizComponent {
     return 0;
   }
 
-  questionOnDescription(): Command[] {
+  questionOnDescription(iteration: number): Command[] {
+    if (iteration > MAX_ITERATIONS) {
+      return [];
+    }
     const command = this.getRandomCommand();
     if (!command.short_desc) {
-      return this.questionOnDescription();
+      return this.questionOnDescription(iteration + 1);
     }
     this.question = this.getFirstSentence(this.lowerFirst(command.short_desc));
 
@@ -94,10 +98,13 @@ export class QuizComponent {
     return text.split('. ').shift() as string;
   }
 
-  questionOnClass(): Command[] {
+  questionOnClass(iteration: number): Command[] {
+    if (iteration > MAX_ITERATIONS) {
+      return [];
+    }
     const command = this.getRandomCommand();
     if (!command.class) {
-      return this.questionOnClass();
+      return this.questionOnClass(iteration + 1);
     }
 
     this.question = `is part of the class ${command.class}`;
@@ -105,10 +112,13 @@ export class QuizComponent {
     return this.addWrongChoices([command], 'class');
   }
 
-  questionOnNumParams(): Command[] {
+  questionOnNumParams(iteration: number): Command[] {
+    if (iteration > MAX_ITERATIONS) {
+      return [];
+    }
     const command = this.getRandomCommand();
     if (!command.num_params) {
-      return this.questionOnNumParams();
+      return this.questionOnNumParams(iteration + 1);
     }
 
     this.question = `takes ${command.num_params} parameters`;
@@ -117,8 +127,13 @@ export class QuizComponent {
   }
 
   addWrongChoices(choices: Command[], field: keyof Command): Command[] {
+    let iteration = 0;
     while (choices.length < NUM_CHOICES) {
       const choice = this.getRandomCommand();
+
+      if (iteration++ > MAX_ITERATIONS) {
+        return [];
+      }
 
       if (choices.find((c) => c.name === choice.name)) {
         continue;
@@ -133,7 +148,7 @@ export class QuizComponent {
   }
 
   nextQuestion() {
-    const questionPicker: Array<[() => Command[], number]> = [
+    const questionPicker: Array<[(iteration: number) => Command[], number]> = [
       [this.questionOnDescription, 60],
       [this.questionOnNumParams, 80],
       [this.questionOnClass, 100],
@@ -141,7 +156,7 @@ export class QuizComponent {
     const pickIndex = Math.random() * 100;
     const choices = questionPicker
       .find(([_, prob]) => pickIndex <= prob)![0]
-      .call(this);
+      .call(this, 0);
 
     this.answers = choices
       .map((c, i) => ({

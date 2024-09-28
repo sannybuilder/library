@@ -3,8 +3,10 @@
 #CLASSESLIST
 Camera
 Car
+CarGenerator
 Char
 Clock
+Hud
 Math
 Mission
 Object
@@ -12,11 +14,18 @@ Pad
 Player
 Rc
 Text
+Zone
 
 #CLASSES
 $Camera
 $BEGIN
 IsPointOnScreen,005D,1,0,("x%f" "y%f" "z%f" "radius%f")
+PointAtCar,00B4,0,0,("vehicle: Car" "mode: CameraMode" "switchStyle: SwitchType")
+PointAtChar,00B5,0,0,("char: Char" "mode: CameraMode" "switchStyle: SwitchType")
+PointAtPlayer,00B3,0,0,("player: Player" "mode: CameraMode" "switchStyle: SwitchType")
+PointAtPoint,00BA,0,0,("x%f" "y%f" "z%f" "switchStyle: SwitchType")
+Restore,00B6,0,0,()
+SetFixedPosition,00B9,0,0,("x%f" "y%f" "z%f" "xRotation%f" "yRotation%f" "zRotation%f")
 Shake,0003,0,0,("intensity%i")
 $END
 
@@ -25,10 +34,13 @@ $BEGIN
 Create,0048,0,0,("modelId: model_vehicle" "x%f" "y%f" "z%f" "handle: Car")
 Delete,0049,0,0,("self: Car")
 GetCoordinates,004D,0,0,("self: Car" "x%f" "y%f" "z%f")
+GiveAlarm,00A7,0,0,("self: Car")
 GotoCoordinates,004A,0,0,("self: Car" "x%f" "y%f" "z%f")
+IsCrushed,00A8,1,0,("self: Car")
 IsDead,00A0,1,0,("handle: any")
 IsInArea2D,0053,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
 IsInArea3D,0054,0,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
+IsModel,00A6,1,0,("self: Car" "modelId: model_vehicle")
 IsStillAlive,004F,1,0,("self: Car")
 SetCoordinates,004E,0,0,("self: Car" "x%f" "y%f" "z%f")
 SetCruiseSpeed,0050,0,0,("self: Car" "maxSpeed%f")
@@ -38,10 +50,17 @@ SetMission,0052,0,0,("self: Car" "carMission%i")
 WanderRandomly,004B,0,0,("self: Car")
 $END
 
+$CarGenerator
+$BEGIN
+Create,00A9,0,0,("x%f" "y%f" "z%f" "heading%f" "modelId: model_vehicle" "primaryColor%i" "secondaryColor%i" "forceSpawn%b" "alarmChance%i" "doorLockChance%i" "minDelay%i" "maxDelay%i" "handle: CarGenerator")
+Switch,00AA,0,0,("self: CarGenerator" "amount%i")
+$END
+
 $Char
 $BEGIN
 AddAmmo,009E,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 Create,003E,0,0,("pedType%i" "modelId: model_char" "x%f" "y%f" "z%f" "handle: Char")
+CreateInsideCar,00A4,0,0,("vehicle: Car" "pedType: PedType" "modelId: model_char" "handle: Char")
 Delete,003F,0,0,("self: Char")
 FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
@@ -51,6 +70,8 @@ IsInArea2D,0046,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" 
 IsInArea3D,0047,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
 IsInCar,007C,1,0,("self: Char" "vehicle: Car")
 IsInModel,007D,1,0,("self: Char" "modelId: model_vehicle")
+IsInZone,00B0,1,0,("self: Char" "zone: zone_key")
+IsObjectivePassed,00A3,1,0,("self: Char")
 IsStillAlive,0045,1,0,("self: Char")
 LocateAnyMeans2D,0080,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeans3D,0089,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
@@ -72,6 +93,7 @@ LocateStoppedOnFoot2D,0084,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f"
 LocateStoppedOnFoot3D,008D,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 SetCoordinates,0044,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetIdle,0042,0,0,("self: Char")
+SetObjNoObj,00A2,0,0,("self: Char")
 StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
 WanderDir,0040,0,0,("self: Char" "direction%i")
 $END
@@ -81,6 +103,15 @@ $BEGIN
 GetMinutesToTimeOfDay,005C,0,0,("hours%i" "minutes%i" "minutesLeft%i")
 GetTimeOfDay,005A,0,0,("hours%i" "minutes%i")
 SetTimeOfDay,005B,0,0,("hours%i" "minutes%i")
+SetTimeScale,00B8,0,0,("scale%f")
+$END
+
+$Hud
+$BEGIN
+ClearCounter,00AE,0,0,("counter%i")
+ClearTimer,00AC,0,0,("timer%i")
+DisplayCounter,00AD,0,0,("counter%i" "display: CounterDisplay")
+DisplayTimer,00AB,0,0,("timer%i" "direction: TimerDirection")
 $END
 
 $Math
@@ -114,6 +145,7 @@ AlterWantedLevel,0098,0,0,("self: Player" "wantedLevel%i")
 AlterWantedLevelNoDrop,0099,0,0,("self: Player" "wantedLevel%i")
 ClearWantedLevel,009B,0,0,("self: Player")
 Create,0028,0,0,("index%i" "x%f" "y%f" "z%f" "handle: Char")
+HasBeenArrested,00A5,1,0,("self: Player")
 IsScoreGreater,0095,1,0,("self: Player" "money%i")
 IsWantedLevelGreater,009A,1,0,("self: Player" "wantedLevel%i")
 StoreScore,0096,0,0,("self: Player" "money%i")
@@ -131,6 +163,12 @@ Print,0056,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintBig,0055,0,0,("key: gxt_key" "time%i" "style%i")
 PrintNow,0057,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintSoon,0058,0,0,("key: gxt_key" "time%i" "flag%i")
+$END
+
+$Zone
+$BEGIN
+SetCarInfo,00AF,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i" "gang1%i" "gang2%i" "gang3%i" "gang4%i" "gang5%i" "gang6%i" "gang7%i" "gang8%i" "gang9%i" "gang10%i")
+SetPedInfo,00B7,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i" "gang1%i" "gang2%i" "gang3%i" "gang4%i" "gang5%i" "gang6%i" "gang7%i" "gang8%i" "gang9%i" "gang10%i")
 $END
 
 #EOF

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727564621080,
-    "version": "0.13",
+    "last_update": 1727566856646,
+    "version": "0.14",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -3132,519 +3132,635 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "00A2",
-          "name": "COMMAND_00A2",
-          "num_params": 1
+          "member": "SetObjNoObj",
+          "name": "SET_CHAR_OBJ_NO_OBJ",
+          "num_params": 1,
+          "short_desc": "Clears the character's current objective"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "00A3",
-          "name": "COMMAND_00A3",
-          "num_params": 1
+          "member": "IsObjectivePassed",
+          "name": "IS_CHAR_OBJECTIVE_PASSED",
+          "num_params": 1,
+          "short_desc": "Returns true if the character has completed their objective"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "pedType",
+              "type": "PedType"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_char"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Char",
           "id": "00A4",
-          "name": "COMMAND_00A4",
-          "num_params": 4
+          "member": "CreateInsideCar",
+          "name": "CREATE_CHAR_INSIDE_CAR",
+          "num_params": 4,
+          "short_desc": "Creates a character in the driver's seat of the vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "00A5",
-          "name": "COMMAND_00A5",
-          "num_params": 1
+          "member": "HasBeenArrested",
+          "name": "HAS_PLAYER_BEEN_ARRESTED",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified player is being arrested (busted)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_vehicle"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
           "id": "00A6",
-          "name": "COMMAND_00A6",
-          "num_params": 2
+          "member": "IsModel",
+          "name": "IS_CAR_MODEL",
+          "num_params": 2,
+          "short_desc": "Returns true if the vehicle has the specified model"
         },
         {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
           "id": "00A7",
-          "name": "COMMAND_00A7",
-          "num_params": 1
+          "name": "GIVE_CAR_ALARM",
+          "num_params": 1,
+          "class": "Car",
+          "member": "GiveAlarm",
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            }
+          ]
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
           "id": "00A8",
-          "name": "COMMAND_00A8",
-          "num_params": 1
+          "member": "IsCrushed",
+          "name": "IS_CAR_CRUSHED",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified vehicle has been crushed by the car crusher"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "modelId",
+              "type": "model_vehicle"
+            },
+            {
+              "name": "primaryColor",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "secondaryColor",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "forceSpawn",
+              "type": "bool"
+            },
+            {
+              "name": "alarmChance",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "doorLockChance",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "minDelay",
               "type": "int"
             },
             {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
-            },
-            {
-              "name": "_p10",
-              "type": "int"
-            },
-            {
-              "name": "_p11",
-              "type": "int"
-            },
-            {
-              "name": "_p12",
-              "type": "int"
-            },
-            {
-              "name": "_p13",
+              "name": "maxDelay",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "CarGenerator",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "CarGenerator",
           "id": "00A9",
-          "name": "COMMAND_00A9",
-          "num_params": 13
+          "member": "Create",
+          "name": "CREATE_CAR_GENERATOR",
+          "num_params": 13,
+          "short_desc": "Initializes a parked car generator"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "CarGenerator"
             },
             {
-              "name": "_p2",
+              "name": "amount",
               "type": "int"
             }
           ],
+          "class": "CarGenerator",
           "id": "00AA",
-          "name": "COMMAND_00AA",
-          "num_params": 2
+          "member": "Switch",
+          "name": "SWITCH_CAR_GENERATOR",
+          "num_params": 2,
+          "short_desc": "Specifies the number of times the car generator spawns a car (101 - infinite)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "timer",
+              "type": "int",
+              "source": "var_global"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "direction",
+              "type": "TimerDirection"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "00AB",
-          "name": "COMMAND_00AB",
-          "num_params": 2
+          "member": "DisplayTimer",
+          "name": "DISPLAY_ONSCREEN_TIMER",
+          "num_params": 2,
+          "short_desc": "Creates a countdown or countup onscreen timer"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "timer",
+              "type": "int",
+              "source": "var_global"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "00AC",
-          "name": "COMMAND_00AC",
-          "num_params": 1
+          "member": "ClearTimer",
+          "name": "CLEAR_ONSCREEN_TIMER",
+          "num_params": 1,
+          "short_desc": "Removes the onscreen timer"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "counter",
+              "type": "int",
+              "source": "var_global"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "display",
+              "type": "CounterDisplay"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "00AD",
-          "name": "COMMAND_00AD",
-          "num_params": 2
+          "member": "DisplayCounter",
+          "name": "DISPLAY_ONSCREEN_COUNTER",
+          "num_params": 2,
+          "short_desc": "Displays an onscreen counter, either shown in numbers or as a bar"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "counter",
+              "type": "int",
+              "source": "var_global"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "00AE",
-          "name": "COMMAND_00AE",
-          "num_params": 1
+          "member": "ClearCounter",
+          "name": "CLEAR_ONSCREEN_COUNTER",
+          "num_params": 1,
+          "short_desc": "Removes the onscreen counter (00AC)"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "dayOrNight",
+              "type": "DayOrNight"
+            },
+            {
+              "name": "density",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "gang1",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "gang2",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "gang3",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "gang4",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "gang5",
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "gang6",
               "type": "int"
             },
             {
-              "name": "_p8",
+              "name": "gang7",
               "type": "int"
             },
             {
-              "name": "_p9",
+              "name": "gang8",
               "type": "int"
             },
             {
-              "name": "_p10",
+              "name": "gang9",
               "type": "int"
             },
             {
-              "name": "_p11",
-              "type": "int"
-            },
-            {
-              "name": "_p12",
-              "type": "int"
-            },
-            {
-              "name": "_p13",
+              "name": "gang10",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Zone",
           "id": "00AF",
-          "name": "COMMAND_00AF",
-          "num_params": 13
+          "member": "SetCarInfo",
+          "name": "SET_ZONE_CAR_INFO",
+          "num_params": 13,
+          "short_desc": "Sets the zone's peds, gangs, and cops spawn density in car"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "zone",
+              "type": "zone_key"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "00B0",
-          "name": "COMMAND_00B0",
-          "num_params": 2
+          "member": "IsInZone",
+          "name": "IS_CHAR_IN_ZONE",
+          "num_params": 2,
+          "short_desc": "Returns true if the character is in the specified map zone"
         },
         {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
+          "attrs": {
+            "is_unsupported": true
+          },
           "id": "00B1",
-          "name": "COMMAND_00B1",
-          "num_params": 3
+          "name": "SET_CAR_DENSITY",
+          "num_params": 0
         },
         {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
+          "attrs": {
+            "is_unsupported": true
+          },
           "id": "00B2",
-          "name": "COMMAND_00B2",
-          "num_params": 3
-        },
-        {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
-          "id": "00B3",
-          "name": "COMMAND_00B3",
-          "num_params": 3
-        },
-        {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
-          "id": "00B4",
-          "name": "COMMAND_00B4",
-          "num_params": 3
-        },
-        {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
-          "id": "00B5",
-          "name": "COMMAND_00B5",
-          "num_params": 3
-        },
-        {
-          "id": "00B6",
-          "name": "COMMAND_00B6",
+          "name": "SET_PED_DENSITY",
           "num_params": 0
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "player",
+              "type": "Player"
+            },
+            {
+              "name": "mode",
+              "type": "CameraMode"
+            },
+            {
+              "name": "switchStyle",
+              "type": "SwitchType"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
+          "id": "00B3",
+          "member": "PointAtPlayer",
+          "name": "POINT_CAMERA_AT_PLAYER",
+          "num_params": 3,
+          "short_desc": "Attaches the camera to the specified player"
+        },
+        {
+          "input": [
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "mode",
+              "type": "CameraMode"
+            },
+            {
+              "name": "switchStyle",
+              "type": "SwitchType"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
+          "id": "00B4",
+          "member": "PointAtCar",
+          "name": "POINT_CAMERA_AT_CAR",
+          "num_params": 3,
+          "short_desc": "Attaches the camera to the specified vehicle"
+        },
+        {
+          "input": [
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "mode",
+              "type": "CameraMode"
+            },
+            {
+              "name": "switchStyle",
+              "type": "SwitchType"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
+          "id": "00B5",
+          "member": "PointAtChar",
+          "name": "POINT_CAMERA_AT_CHAR",
+          "num_params": 3,
+          "short_desc": "Attaches the camera to the specified character"
+        },
+        {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
+          "id": "00B6",
+          "member": "Restore",
+          "name": "RESTORE_CAMERA",
+          "num_params": 0,
+          "short_desc": "Restores the camera to its usual position"
+        },
+        {
+          "input": [
+            {
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "dayOrNight",
+              "type": "DayOrNight"
+            },
+            {
+              "name": "density",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "gang1",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "gang2",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "gang3",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "gang4",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "gang5",
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "gang6",
               "type": "int"
             },
             {
-              "name": "_p8",
+              "name": "gang7",
               "type": "int"
             },
             {
-              "name": "_p9",
+              "name": "gang8",
               "type": "int"
             },
             {
-              "name": "_p10",
+              "name": "gang9",
               "type": "int"
             },
             {
-              "name": "_p11",
-              "type": "int"
-            },
-            {
-              "name": "_p12",
-              "type": "int"
-            },
-            {
-              "name": "_p13",
+              "name": "gang10",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Zone",
           "id": "00B7",
-          "name": "COMMAND_00B7",
-          "num_params": 13
+          "member": "SetPedInfo",
+          "name": "SET_ZONE_PED_INFO",
+          "num_params": 13,
+          "short_desc": "Sets the zone's peds, gangs, and cops spawn density on foot"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "scale",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Clock",
           "id": "00B8",
-          "name": "COMMAND_00B8",
-          "num_params": 1
+          "member": "SetTimeScale",
+          "name": "SET_TIME_SCALE",
+          "num_params": 1,
+          "short_desc": "Sets the game to run at the specified speed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "xRotation",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "yRotation",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "zRotation",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "00B9",
-          "name": "COMMAND_00B9",
-          "num_params": 6
+          "member": "SetFixedPosition",
+          "name": "SET_FIXED_CAMERA_POSITION",
+          "num_params": 6,
+          "short_desc": "Sets the camera's position and rotation"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "switchStyle",
+              "type": "SwitchType"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "00BA",
-          "name": "COMMAND_00BA",
-          "num_params": 4
+          "member": "PointAtPoint",
+          "name": "POINT_CAMERA_AT_POINT",
+          "num_params": 4,
+          "short_desc": "Points the camera at the specified location and applies the position set by 0159"
         },
         {
           "input": [

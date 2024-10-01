@@ -48,7 +48,7 @@ export class QuizComponent {
   }
 
   question: string;
-  answers: { option: string; correct: boolean }[];
+  answers: { option: string; correct: boolean }[] = [];
 
   correctCommand: string;
   correctExtension: string;

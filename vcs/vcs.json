@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727566856646,
-    "version": "0.14",
+    "last_update": 1727752283056,
+    "version": "0.15",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -3765,692 +3765,912 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             }
           ],
+          "class": "Blip",
           "id": "00BB",
-          "name": "COMMAND_00BB",
-          "num_params": 1
+          "member": "Remove",
+          "name": "REMOVE_BLIP",
+          "num_params": 1,
+          "short_desc": "Removes the blip",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "color",
+              "type": "BlipColor"
             }
           ],
+          "class": "Blip",
           "id": "00BC",
-          "name": "COMMAND_00BC",
-          "num_params": 2
+          "member": "ChangeColor",
+          "name": "CHANGE_BLIP_COLOUR",
+          "num_params": 2,
+          "short_desc": "Sets the blip's color"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Blip",
           "id": "00BD",
-          "name": "COMMAND_00BD",
-          "num_params": 2
+          "member": "Dim",
+          "name": "DIM_BLIP",
+          "num_params": 2,
+          "short_desc": "Sets whether the blip should appear dimmed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "colour",
+              "type": "BlipColor"
             },
             {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
+              "name": "display",
+              "type": "BlipDisplay"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00BE",
-          "name": "COMMAND_00BE",
-          "num_params": 6
+          "member": "AddForCoordOld",
+          "name": "ADD_BLIP_FOR_COORD_OLD",
+          "num_params": 6,
+          "short_desc": "Adds a blip with properties at the location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "_p2",
+              "name": "size",
               "type": "int"
             }
           ],
+          "class": "Blip",
           "id": "00BF",
-          "name": "COMMAND_00BF",
-          "num_params": 2
+          "member": "ChangeScale",
+          "name": "CHANGE_BLIP_SCALE",
+          "num_params": 2,
+          "short_desc": "Sets the blip's size"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00C0",
-          "name": "COMMAND_00C0",
-          "num_params": 2
+          "member": "AddForCar",
+          "name": "ADD_BLIP_FOR_CAR",
+          "num_params": 2,
+          "short_desc": "Adds a blip and a marker to the vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "char",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00C1",
-          "name": "COMMAND_00C1",
-          "num_params": 2
+          "member": "AddForChar",
+          "name": "ADD_BLIP_FOR_CHAR",
+          "num_params": 2,
+          "short_desc": "Adds a blip and a marker to the character"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "object",
+              "type": "Object"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00C2",
-          "name": "COMMAND_00C2",
-          "num_params": 2
+          "member": "AddForObject",
+          "name": "ADD_BLIP_FOR_OBJECT",
+          "num_params": 2,
+          "short_desc": "Adds a blip and a marker to the object"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00C3",
-          "name": "COMMAND_00C3",
-          "num_params": 4
+          "member": "AddForCoord",
+          "name": "ADD_BLIP_FOR_COORD",
+          "num_params": 4,
+          "short_desc": "Adds a blip to the location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Blip"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "display",
+              "type": "BlipDisplay"
             }
           ],
+          "class": "Blip",
           "id": "00C4",
-          "name": "COMMAND_00C4",
-          "num_params": 2
+          "member": "ChangeDisplay",
+          "name": "CHANGE_BLIP_DISPLAY",
+          "num_params": 2,
+          "short_desc": "Changes the display of the specified blip"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "sprite",
+              "type": "RadarSprite"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00C5",
-          "name": "COMMAND_00C5",
-          "num_params": 5
+          "member": "AddSpriteForContactPoint",
+          "name": "ADD_SPRITE_BLIP_FOR_CONTACT_POINT",
+          "num_params": 5,
+          "short_desc": "Adds a sprite blip to the contact point"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "sprite",
+              "type": "RadarSprite"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00C6",
-          "name": "COMMAND_00C6",
-          "num_params": 5
+          "member": "AddSpriteForCoord",
+          "name": "ADD_SPRITE_BLIP_FOR_COORD",
+          "num_params": 5,
+          "short_desc": "Adds a sprite blip to the location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "sprite",
+              "type": "RadarSprite"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "00C7",
-          "name": "COMMAND_00C7",
-          "num_params": 5
+          "member": "AddShortRangeSpriteForCoord",
+          "name": "ADD_SHORT_RANGE_SPRITE_BLIP_FOR_COORD",
+          "num_params": 5,
+          "short_desc": "Adds a sprite blip for the specified coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "r",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "g",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "b",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "00C8",
-          "name": "COMMAND_00C8",
-          "num_params": 3
+          "member": "SetFadingColor",
+          "name": "SET_FADING_COLOUR",
+          "num_params": 3,
+          "short_desc": "Sets the RGB color of the fade command (00C9)"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "direction",
+              "type": "Fade"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "00C9",
-          "name": "COMMAND_00C9",
-          "num_params": 2
+          "member": "DoFade",
+          "name": "DO_FADE",
+          "num_params": 2,
+          "short_desc": "Fades the screen for the specified time"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "00CA",
-          "name": "COMMAND_00CA",
-          "num_params": 0
+          "member": "GetFadingStatus",
+          "name": "GET_FADING_STATUS",
+          "num_params": 0,
+          "short_desc": "Returns true if the screen is fading (00C9)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Restart",
           "id": "00CB",
-          "name": "COMMAND_00CB",
-          "num_params": 4
+          "member": "AddHospital",
+          "name": "ADD_HOSPITAL_RESTART",
+          "num_params": 4,
+          "short_desc": "Adds a new location where the player can respawn after death"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Restart",
           "id": "00CC",
-          "name": "COMMAND_00CC",
-          "num_params": 4
+          "member": "AddPolice",
+          "name": "ADD_POLICE_RESTART",
+          "num_params": 4,
+          "short_desc": "Adds a new location where the player can respawn after arrest"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Restart",
           "id": "00CD",
-          "name": "COMMAND_00CD",
-          "num_params": 4
+          "member": "OverrideNext",
+          "name": "OVERRIDE_NEXT_RESTART",
+          "num_params": 4,
+          "short_desc": "Forces this location to be the next respawn location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
           "id": "00CE",
-          "name": "COMMAND_00CE",
-          "num_params": 2
+          "member": "GetHeading",
+          "name": "GET_CHAR_HEADING",
+          "num_params": 2,
+          "short_desc": "Returns the character's heading (z-angle)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "class": "Char",
           "id": "00CF",
-          "name": "COMMAND_00CF",
-          "num_params": 2
+          "member": "SetHeading",
+          "name": "SET_CHAR_HEADING",
+          "num_params": 2,
+          "short_desc": "Sets the character's heading (z-angle)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "00D0",
-          "name": "COMMAND_00D0",
-          "num_params": 2
+          "member": "GetHeading",
+          "name": "GET_CAR_HEADING",
+          "num_params": 2,
+          "short_desc": "Returns the vehicle's heading (z-angle)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "class": "Car",
           "id": "00D1",
-          "name": "COMMAND_00D1",
-          "num_params": 2
+          "member": "SetHeading",
+          "name": "SET_CAR_HEADING",
+          "num_params": 2,
+          "short_desc": "Sets the vehicle's heading (z-angle)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             }
           ],
+          "output": [
+            {
+              "name": "heading",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Object",
           "id": "00D2",
-          "name": "COMMAND_00D2",
-          "num_params": 2
+          "member": "GetHeading",
+          "name": "GET_OBJECT_HEADING",
+          "num_params": 2,
+          "short_desc": "Returns the object's heading (z-angle)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "class": "Object",
           "id": "00D3",
-          "name": "COMMAND_00D3",
-          "num_params": 2
+          "member": "SetHeading",
+          "name": "SET_OBJECT_HEADING",
+          "num_params": 2,
+          "short_desc": "Sets the object's heading (z-angle)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "object",
+              "type": "Object"
             }
           ],
           "id": "00D4",
-          "name": "COMMAND_00D4",
-          "num_params": 2
+          "name": "IS_CHAR_TOUCHING_OBJECT",
+          "num_params": 2,
+          "short_desc": "Returns true if the character is colliding with the specified object",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
+          "member": "IsTouchingObject"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponType",
+              "type": "WeaponType"
             },
             {
-              "name": "_p3",
+              "name": "ammo",
               "type": "int"
             }
           ],
           "id": "00D5",
-          "name": "COMMAND_00D5",
-          "num_params": 3
+          "name": "SET_CHAR_AMMO",
+          "num_params": 3,
+          "short_desc": "Sets the amount of ammo the character has in the specified weapon",
+          "class": "Char",
+          "member": "SetAmmo"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "flag",
+              "type": "int",
+              "source": "var_global"
             }
           ],
           "id": "00D6",
-          "name": "COMMAND_00D6",
-          "num_params": 1
+          "name": "DECLARE_MISSION_FLAG",
+          "num_params": 1,
+          "short_desc": "Links the global variable to the specific hardcoded flag that defines is there an active mission or not"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "health",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "00D7",
-          "name": "COMMAND_00D7",
-          "num_params": 2
+          "member": "IsHealthGreater",
+          "name": "IS_CHAR_HEALTH_GREATER",
+          "num_params": 2,
+          "short_desc": "Returns true if the character's health is over the specified value"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "health",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
           "id": "00D8",
-          "name": "COMMAND_00D8",
-          "num_params": 2
+          "member": "IsHealthGreater",
+          "name": "IS_CAR_HEALTH_GREATER",
+          "num_params": 2,
+          "short_desc": "Returns true if the car's health is over the specified value"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "soundId",
+              "type": "ScriptSound"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sound",
           "id": "00D9",
-          "name": "COMMAND_00D9",
-          "num_params": 4
+          "member": "AddOneOffSound",
+          "name": "ADD_ONE_OFF_SOUND",
+          "num_params": 4,
+          "short_desc": "Plays a sound with the specified ID at the location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "soundId",
+              "type": "ScriptSound"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Sound",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true,
+            "is_constructor": true
+          },
+          "class": "Sound",
           "id": "00DA",
-          "name": "COMMAND_00DA",
-          "num_params": 5
+          "member": "AddContinuous",
+          "name": "ADD_CONTINUOUS_SOUND",
+          "num_params": 5,
+          "short_desc": "Creates a continuous sound at the location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Sound"
             }
           ],
+          "class": "Sound",
           "id": "00DB",
-          "name": "COMMAND_00DB",
-          "num_params": 1
+          "member": "Remove",
+          "name": "REMOVE_SOUND",
+          "num_params": 1,
+          "short_desc": "Stops the sound"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
           "id": "00DC",
-          "name": "COMMAND_00DC",
-          "num_params": 1
+          "member": "IsStuckOnRoof",
+          "name": "IS_CAR_STUCK_ON_ROOF",
+          "num_params": 1,
+          "short_desc": "Returns true if the car has been upside down for more than 2 seconds (requires 0190)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "class": "Car",
           "id": "00DD",
-          "name": "COMMAND_00DD",
-          "num_params": 1
+          "member": "AddUpsidedownCheck",
+          "name": "ADD_UPSIDEDOWN_CAR_CHECK",
+          "num_params": 1,
+          "short_desc": "Activates upside-down car check for the car"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "class": "Car",
           "id": "00DE",
-          "name": "COMMAND_00DE",
-          "num_params": 1
+          "member": "RemoveUpsidedownCheck",
+          "name": "REMOVE_UPSIDEDOWN_CAR_CHECK",
+          "num_params": 1,
+          "short_desc": "Deactivates upside-down car check (00DD) for the car"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "00DF",
-          "name": "COMMAND_00DF",
-          "num_params": 1
+          "member": "SetObjWaitOnFoot",
+          "name": "SET_CHAR_OBJ_WAIT_ON_FOOT",
+          "num_params": 1,
+          "short_desc": "Sets the character's objective to stay idle on foot"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "00E0",
-          "name": "COMMAND_00E0",
-          "num_params": 1
+          "member": "SetObjFleeOnFootTillSafe",
+          "name": "SET_CHAR_OBJ_FLEE_ON_FOOT_TILL_SAFE",
+          "num_params": 1,
+          "short_desc": "Sets the character's objective to run away"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "class": "Char",
           "id": "00E1",
-          "name": "COMMAND_00E1",
-          "num_params": 4
+          "member": "SetObjGuardSpot",
+          "name": "SET_CHAR_OBJ_GUARD_SPOT",
+          "num_params": 4,
+          "short_desc": "Sets the character's objective to guard the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             }
           ],
+          "class": "Char",
           "id": "00E2",
-          "name": "COMMAND_00E2",
-          "num_params": 5
+          "member": "SetObjGuardArea",
+          "name": "SET_CHAR_OBJ_GUARD_AREA",
+          "num_params": 5,
+          "short_desc": "Sets the character's objective to guard the specified 2D area"
         },
         {
           "input": [

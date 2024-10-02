@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1726244929452,
-    "version": "0.84",
+    "last_update": 1727874566192,
+    "version": "0.85",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -28968,21 +28968,31 @@
           "name": "PLAY_STREAM_FROM_OBJECT",
           "num_params": 1,
           "class": "Object",
-          "member": "PlayStream"
+          "member": "PlayStream",
+          "short_desc": "Plays the sound from the object. The sound must be pre-loaded with PRELOAD_STREAM or PRELOAD_STREAM_WITH_START_OFFSET"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "PLAY_STREAM_FROM_PED",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Plays the sound from the ped. The sound must be pre-loaded with PRELOAD_STREAM or PRELOAD_STREAM_WITH_START_OFFSET",
+          "class": "Char",
+          "member": "PlayStream"
         },
         {
           "name": "PLAY_STREAM_FRONTEND",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "PlayStreamFrontend",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Plays the sound that was previously loaded with PRELOAD_STREAM or PRELOAD_STREAM_WITH_START_OFFSET"
         },
         {
           "input": [
@@ -29403,32 +29413,40 @@
         {
           "input": [
             {
-              "name": "name",
+              "name": "soundName",
               "type": "string"
             }
           ],
           "name": "PRELOAD_STREAM",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Audio",
+          "member": "PreloadStream",
+          "short_desc": "Does a preload of sound and returns true if successful. soundName is a string from pc/audio/config/SOUNDS.DAT15"
         },
         {
           "input": [
             {
-              "name": "streamName",
+              "name": "soundName",
               "type": "string"
             },
             {
-              "name": "startOffset",
+              "name": "startOffsetInMs",
               "type": "int"
             }
           ],
           "name": "PRELOAD_STREAM_WITH_START_OFFSET",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Does a preload of sound with a start offset (in milliseconds) and returns true if successful. soundName is a string from pc/audio/config/SOUNDS.DAT15",
+          "class": "Audio",
+          "member": "PreloadStreamWithStartOffset"
         },
         {
           "input": [
@@ -43349,7 +43367,13 @@
         },
         {
           "name": "STOP_STREAM",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "StopStream",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Stops the previously running sound (see PLAY_STREAM_FRONTEND)"
         },
         {
           "name": "STORE_CAR_CHAR_IS_IN",

@@ -16,6 +16,7 @@ Player
 Rc
 Restart
 Sound
+Streaming
 Text
 Zone
 
@@ -285,6 +286,14 @@ $BEGIN
 AddContinuous,00DA,0,0,("x%f" "y%f" "z%f" "soundId: ScriptSound" "handle: Sound")
 AddOneOffSound,00D9,0,0,("x%f" "y%f" "z%f" "soundId: ScriptSound")
 Remove,00DB,0,0,("self: Sound")
+$END
+
+$Streaming
+$BEGIN
+HasModelLoaded,0161,1,0,("modelId: model_any")
+LoadAllModelsNow,0228,0,0,()
+MarkModelAsNoLongerNeeded,0162,0,0,("modelId: model_any")
+RequestModel,0160,0,0,("modelId: model_any")
 $END
 
 $Text

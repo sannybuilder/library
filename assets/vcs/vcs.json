@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727913522667,
-    "version": "0.18",
+    "last_update": 1728064646814,
+    "version": "0.19",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -7154,35 +7154,54 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_any"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0160",
-          "name": "COMMAND_0160",
-          "num_params": 1
+          "member": "RequestModel",
+          "name": "REQUEST_MODEL",
+          "num_params": 1,
+          "short_desc": "Requests a new model to load"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_any"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0161",
-          "name": "COMMAND_0161",
-          "num_params": 1
+          "member": "HasModelLoaded",
+          "name": "HAS_MODEL_LOADED",
+          "num_params": 1,
+          "short_desc": "Returns true if the model is available for creation"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_any"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0162",
-          "name": "COMMAND_0162",
-          "num_params": 1
+          "member": "MarkModelAsNoLongerNeeded",
+          "name": "MARK_MODEL_AS_NO_LONGER_NEEDED",
+          "num_params": 1,
+          "short_desc": "Releases the specified model, freeing game memory"
         },
         {
           "input": [
@@ -10181,9 +10200,15 @@
           "num_params": 6
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0228",
-          "name": "COMMAND_0228",
-          "num_params": 0
+          "member": "LoadAllModelsNow",
+          "name": "LOAD_ALL_MODELS_NOW",
+          "num_params": 0,
+          "short_desc": "Loads any requested models (0160) synchronously"
         },
         {
           "input": [

@@ -7,11 +7,17 @@ Car
 CarGenerator
 Char
 Clock
+Fx
+Game
+Garage
 Hud
+KillFrenzy
 Math
 Mission
 Object
 Pad
+Path
+Pickup
 Player
 Rc
 Restart
@@ -19,15 +25,20 @@ Sound
 Streaming
 Text
 Weather
+World
 Zone
 
 #CLASSES
 $Player
 $BEGIN
 AddAmmo,009E,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
+ClearThreatSearch,0127,0,0,("self: Char")
 Create,003E,0,0,("pedType%i" "modelId: model_char" "x%f" "y%f" "z%f" "handle: Char")
+CreateAsPassenger,0118,0,0,("vehicle: Car" "pedType: PedType" "modelId: model_char" "seat: SeatId" "handle: Char")
 CreateInsideCar,00A4,0,0,("vehicle: Car" "pedType: PedType" "modelId: model_char" "handle: Char")
 Delete,003F,0,0,("self: Char")
+DontRemove,0115,0,0,("self: Char")
+FollowChar,0119,0,0,("self: Char" "leader: Char")
 FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetHeading,00CE,0,0,("self: Char" "heading%f")
@@ -53,16 +64,23 @@ IsStoppedInAreaInCar3D,00FF,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "l
 IsStoppedInAreaOnFoot2D,00F9,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
 IsStoppedInAreaOnFoot3D,00FE,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
 IsTouchingObject,00D4,1,0,("self: Char" "object: Object")
+LeaveGroup,011A,0,0,("self: Char")
 LocateAnyMeans2D,0080,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeans3D,0089,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LocateAnyMeansCar2D,0132,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateAnyMeansCar3D,0135,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateAnyMeansChar2D,0086,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeansChar3D,008F,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateInCar2D,0082,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateInCar3D,008B,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LocateInCarCar2D,0134,1,0,("self: Char" "handle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateInCarCar3D,0137,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateInCarChar2D,0088,1,0,("self: Char" "otherChar: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateInCarChar3D,0091,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateOnFoot2D,0081,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFoot3D,008A,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LocateOnFootCar2D,0133,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateOnFootCar3D,0136,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateOnFootChar2D,0087,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFootChar3D,0090,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateStoppedAnyMeans2D,0083,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
@@ -71,6 +89,7 @@ LocateStoppedInCar2D,0085,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" 
 LocateStoppedInCar3D,008E,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateStoppedOnFoot2D,0084,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateStoppedOnFoot3D,008D,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+MarkAsNoLongerNeeded,0112,0,0,("self: Char")
 SetAmmo,00D5,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 SetCoordinates,0044,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetCurrentWeapon,010B,0,0,("self: Char" "weaponType: WeaponType")
@@ -102,6 +121,7 @@ SetObjWaitOnFoot,00DF,0,0,("self: Char")
 SetObjWalkToChar,00F3,0,0,("self: Char" "target: Char")
 SetThreatSearch,00A1,0,0,("self: Char" "pedThreat%i")
 StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
+TurnToFaceChar,013E,0,0,("self: Char" "char: Char")
 TurnToFaceCoord,010F,0,0,("self: Char" "x%f" "y%f" "z%f")
 WanderDir,0040,0,0,("self: Char" "direction%i")
 AddScore,0094,0,0,("self: Player" "money%i")
@@ -154,31 +174,43 @@ $BEGIN
 AddUpsidedownCheck,00DD,0,0,("self: Car")
 Create,0048,0,0,("modelId: model_vehicle" "x%f" "y%f" "z%f" "handle: Car")
 Delete,0049,0,0,("self: Car")
+DontRemove,0116,0,0,("self: Car")
+Explode,013B,0,0,("self: Car")
 GetCoordinates,004D,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetHeading,00D0,0,0,("self: Car" "heading%f")
+GetMaximumNumberOfPassengers,0124,0,0,("self: Car" "count%i")
+GetNumberOfPassengers,0123,0,0,("self: Car" "count%i")
 GiveAlarm,00A7,0,0,("self: Car")
 GotoCoordinates,004A,0,0,("self: Car" "x%f" "y%f" "z%f")
 IsCrushed,00A8,1,0,("self: Car")
 IsDead,00A0,1,0,("handle: any")
 IsHealthGreater,00D8,1,0,("self: Car" "health%i")
+IsInAirProper,012C,1,0,("self: Car")
 IsInArea2D,0053,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
 IsInArea3D,0054,0,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
 IsModel,00A6,1,0,("self: Car" "modelId: model_vehicle")
 IsStillAlive,004F,1,0,("self: Car")
+IsStopped,0111,1,0,("self: Car")
 IsStoppedInArea2D,0100,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
 IsStoppedInArea3D,0101,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
 IsStuckOnRoof,00DC,1,0,("self: Car")
+IsUpright,013D,1,0,("self: Car")
+IsUpsidedown,012D,1,0,("self: Car")
 Locate2D,0102,1,0,("self: Car" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 Locate3D,0104,1,0,("self: Car" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateStopped2D,0103,1,0,("self: Car" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateStopped3D,0105,1,0,("self: Car" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LockDoors,013A,0,0,("self: Car" "lockStatus: CarLock")
+MarkAsNoLongerNeeded,0113,0,0,("self: Car")
 RemoveUpsidedownCheck,00DE,0,0,("self: Car")
 SetCoordinates,004E,0,0,("self: Car" "x%f" "y%f" "z%f")
 SetCruiseSpeed,0050,0,0,("self: Car" "maxSpeed%f")
 SetDrivingStyle,0051,0,0,("self: Car" "drivingStyle%i")
 SetHeading,00D1,0,0,("self: Car" "heading%f")
+SetHeavy,0126,0,0,("self: Car" "state%b")
 SetIdle,004C,0,0,("self: Car")
 SetMission,0052,0,0,("self: Car" "carMission%i")
+SetTaxiLights,0142,0,0,("self: Car" "state%b")
 WanderRandomly,004B,0,0,("self: Car")
 $END
 
@@ -191,9 +223,13 @@ $END
 $Char
 $BEGIN
 AddAmmo,009E,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
+ClearThreatSearch,0127,0,0,("self: Char")
 Create,003E,0,0,("pedType%i" "modelId: model_char" "x%f" "y%f" "z%f" "handle: Char")
+CreateAsPassenger,0118,0,0,("vehicle: Car" "pedType: PedType" "modelId: model_char" "seat: SeatId" "handle: Char")
 CreateInsideCar,00A4,0,0,("vehicle: Car" "pedType: PedType" "modelId: model_char" "handle: Char")
 Delete,003F,0,0,("self: Char")
+DontRemove,0115,0,0,("self: Char")
+FollowChar,0119,0,0,("self: Char" "leader: Char")
 FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetHeading,00CE,0,0,("self: Char" "heading%f")
@@ -219,16 +255,23 @@ IsStoppedInAreaInCar3D,00FF,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "l
 IsStoppedInAreaOnFoot2D,00F9,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
 IsStoppedInAreaOnFoot3D,00FE,1,0,("self: Char" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
 IsTouchingObject,00D4,1,0,("self: Char" "object: Object")
+LeaveGroup,011A,0,0,("self: Char")
 LocateAnyMeans2D,0080,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeans3D,0089,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LocateAnyMeansCar2D,0132,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateAnyMeansCar3D,0135,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateAnyMeansChar2D,0086,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateAnyMeansChar3D,008F,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateInCar2D,0082,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateInCar3D,008B,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LocateInCarCar2D,0134,1,0,("self: Char" "handle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateInCarCar3D,0137,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateInCarChar2D,0088,1,0,("self: Char" "otherChar: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateInCarChar3D,0091,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateOnFoot2D,0081,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFoot3D,008A,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LocateOnFootCar2D,0133,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "drawSphere%b")
+LocateOnFootCar3D,0136,1,0,("self: Char" "vehicle: Car" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateOnFootChar2D,0087,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateOnFootChar3D,0090,1,0,("self: Char" "target: Char" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateStoppedAnyMeans2D,0083,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
@@ -237,6 +280,7 @@ LocateStoppedInCar2D,0085,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" 
 LocateStoppedInCar3D,008E,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateStoppedOnFoot2D,0084,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateStoppedOnFoot3D,008D,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+MarkAsNoLongerNeeded,0112,0,0,("self: Char")
 SetAmmo,00D5,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 SetCoordinates,0044,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetCurrentWeapon,010B,0,0,("self: Char" "weaponType: WeaponType")
@@ -268,6 +312,7 @@ SetObjWaitOnFoot,00DF,0,0,("self: Char")
 SetObjWalkToChar,00F3,0,0,("self: Char" "target: Char")
 SetThreatSearch,00A1,0,0,("self: Char" "pedThreat%i")
 StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
+TurnToFaceChar,013E,0,0,("self: Char" "char: Char")
 TurnToFaceCoord,010F,0,0,("self: Char" "x%f" "y%f" "z%f")
 WanderDir,0040,0,0,("self: Char" "direction%i")
 $END
@@ -281,6 +326,24 @@ SetTimeOfDay,005B,0,0,("hours%i" "minutes%i")
 SetTimeScale,00B8,0,0,("scale%f")
 $END
 
+$Fx
+$BEGIN
+AddExplosion,013C,0,0,("x%f" "y%f" "z%f" "type: ExplosionType")
+$END
+
+$Game
+$BEGIN
+SetMaxWantedLevel,0128,0,0,("wantedLevel%i")
+SetPoliceIgnorePlayer,012E,0,0,("player: Player" "state%b")
+$END
+
+$Garage
+$BEGIN
+Create,0145,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "frontX%f" "frontY%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "type: GarageType" "handle: Garage")
+IsCarInMission,0147,1,0,("self: Garage")
+SetTargetCarForMission,0146,0,0,("self: Garage" "vehicle: Car")
+$END
+
 $Hud
 $BEGIN
 ClearCounter,00AE,0,0,("counter%i")
@@ -289,12 +352,21 @@ DisplayCounter,00AD,0,0,("counter%i" "display: CounterDisplay")
 DisplayTimer,00AB,0,0,("timer%i" "direction: TimerDirection")
 $END
 
+$KillFrenzy
+$BEGIN
+ReadStatus,0130,0,0,("status%i")
+Start,012F,0,0,("text: gxt_key" "weaponType: WeaponType" "timeInMs%i" "targetsNum%i" "targetModel1: model_any" "targetModel2: model_any" "targetModel3: model_any" "targetModel4: model_any" "betaSoundsAndMessages%b")
+$END
+
 $Math
 $BEGIN
 AbsFloat,003B,0,0,("%f")
 AbsInt,003A,0,0,("%i")
 RandomFloat,003C,0,0,("%f")
+RandomFloatInRange,0138,0,0,("min%f" "max%f" "result%f")
 RandomInt,003D,0,0,("%i")
+RandomIntInRange,0139,0,0,("min%i" "max%i" "result%i")
+Sqrt,0131,0,0,("num%f" "result%f")
 $END
 
 $Mission
@@ -306,8 +378,10 @@ $Object
 $BEGIN
 Create,0092,0,0,("modelId: model_object" "x%f" "y%f" "z%f" "handle: Object")
 Delete,0093,0,0,("self: Object")
+DontRemove,0117,0,0,("self: Object")
 GetCoordinates,010C,0,0,("self: Object" "x%f" "y%f" "z%f")
 GetHeading,00D2,0,0,("self: Object" "heading%f")
+MarkAsNoLongerNeeded,0114,0,0,("self: Object")
 SetCoordinates,010D,0,0,("self: Object" "x%f" "y%f" "z%f")
 SetHeading,00D3,0,0,("self: Object" "heading%f")
 $END
@@ -315,6 +389,19 @@ $END
 $Pad
 $BEGIN
 IsButtonPressed,007F,1,0,("pad%i" "buttonId%i")
+$END
+
+$Path
+$BEGIN
+SwitchRoadsOff,0122,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+SwitchRoadsOn,0121,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+$END
+
+$Pickup
+$BEGIN
+Create,013F,0,0,("modelId: model_object" "pickupType: PickupType" "x%f" "y%f" "z%f" "handle: Pickup")
+HasBeenCollected,0140,1,0,("self: Pickup")
+Remove,0141,0,0,("self: Pickup")
 $END
 
 $Rc
@@ -349,14 +436,25 @@ $BEGIN
 ClearPrints,0059,0,0,()
 Print,0056,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintBig,0055,0,0,("key: gxt_key" "time%i" "style%i")
+PrintBigQ,0143,0,0,("key: gxt_key" "duration%i" "style: TextStyle")
 PrintNow,0057,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintSoon,0058,0,0,("key: gxt_key" "time%i" "flag%i")
+PrintWithNumber,011E,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
+PrintWithNumberBig,011D,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextStyle")
+PrintWithNumberBigQ,0144,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextStyle")
+PrintWithNumberNow,011F,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
+PrintWithNumberSoon,0120,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
 $END
 
 $Weather
 $BEGIN
 Force,0109,0,0,("type: WeatherType")
 Release,010A,0,0,()
+$END
+
+$World
+$BEGIN
+SetCarDensityMultiplier,0125,0,0,("multiplier%f")
 $END
 
 $Zone

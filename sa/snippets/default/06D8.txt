@@ -1,0 +1,32 @@
+if
+    test_cheat "train"
+then
+    float pos[3]
+    pos[0], pos[1], pos[2] = get_char_coordinates $scplayer
+    
+    warp_char_from_car_to_coord $scplayer {pos} pos[0] pos[1] pos[2] // remove player from car if in any
+    delete_mission_trains
+
+    request_model #TRAM
+    request_model #FREIGHT // freight train locomotive
+    request_model #STREAK // passenger train locomotive
+    request_model #FREIFLAT // freight flat railroad car
+    request_model #FREIBOX // freight box railroad car
+    request_model #STREAKC // passenger railroad car
+    load_all_models_now // force load now
+    
+    int trainType = generate_random_int_in_range {min} 0 {max} 16
+    
+    int trainHandle = create_mission_train {type} trainType {pos} pos[0] pos[1] pos[2] {direction} true
+                    
+    mark_model_as_no_longer_needed #FREIGHT
+    mark_model_as_no_longer_needed #STREAK
+    mark_model_as_no_longer_needed #FREIFLAT
+    mark_model_as_no_longer_needed #FREIBOX
+    mark_model_as_no_longer_needed #STREAKC
+    
+    warp_char_into_car $scplayer {vehicle} trainHandle
+    point_camera_at_car {vehicle} trainHandle {mode} CameraMode.CamOnAString {switchStyle} SwitchType.JumpCut
+    restore_camera
+    print_help_formatted {text} "Train type: %d" {args} trainType
+end

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1728178774961,
-    "version": "0.21",
+    "last_update": 1728532615657,
+    "version": "0.22",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -7201,394 +7201,509 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0148",
-          "name": "COMMAND_0148",
-          "num_params": 1
+          "member": "SetFreeBombs",
+          "name": "SET_FREE_BOMBS",
+          "num_params": 1,
+          "short_desc": "Sets whether the player can use bomb shops for free"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
           "id": "0149",
-          "name": "COMMAND_0149",
-          "num_params": 1
+          "member": "IsArmedWithAnyBomb",
+          "name": "IS_CAR_ARMED_WITH_ANY_BOMB",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified vehicle has a car bomb installed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
           "id": "014A",
-          "name": "COMMAND_014A",
-          "num_params": 2
+          "member": "ApplyBrakesToCar",
+          "name": "APPLY_BRAKES_TO_PLAYERS_CAR",
+          "num_params": 2,
+          "short_desc": "Applies brakes to the player's car"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "health",
               "type": "int"
             }
           ],
+          "class": "Char",
           "id": "014B",
-          "name": "COMMAND_014B",
-          "num_params": 2
+          "member": "SetHealth",
+          "name": "SET_CHAR_HEALTH",
+          "num_params": 2,
+          "short_desc": "Sets the character's health"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "health",
               "type": "int"
             }
           ],
+          "class": "Car",
           "id": "014C",
-          "name": "COMMAND_014C",
-          "num_params": 2
+          "member": "SetHealth",
+          "name": "SET_CAR_HEALTH",
+          "num_params": 2,
+          "short_desc": "Sets the vehicle's health"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
           "id": "014D",
-          "name": "COMMAND_014D",
-          "num_params": 2
+          "member": "GetHealth",
+          "name": "GET_CHAR_HEALTH",
+          "num_params": 2,
+          "short_desc": "Returns the character's health"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "014E",
-          "name": "COMMAND_014E",
-          "num_params": 2
+          "member": "GetHealth",
+          "name": "GET_CAR_HEALTH",
+          "num_params": 2,
+          "short_desc": "Returns the vehicle's health"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "status",
+              "type": "BombType"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
           "id": "014F",
-          "name": "COMMAND_014F",
-          "num_params": 2
+          "member": "IsArmedWithBomb",
+          "name": "IS_CAR_ARMED_WITH_BOMB",
+          "num_params": 2,
+          "short_desc": "Returns true if the vehicle is armed with a bomb of the specified status"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "color1",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "color2",
               "type": "int"
             }
           ],
+          "class": "Car",
           "id": "0150",
-          "name": "COMMAND_0150",
-          "num_params": 3
+          "member": "ChangeColor",
+          "name": "CHANGE_CAR_COLOUR",
+          "num_params": 3,
+          "short_desc": "Sets the car's primary and secondary colors"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Path",
           "id": "0151",
-          "name": "COMMAND_0151",
-          "num_params": 6
+          "member": "SwitchPedRoadsOn",
+          "name": "SWITCH_PED_ROADS_ON",
+          "num_params": 6,
+          "short_desc": "Allows pedestrians to walk into the specified area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Path",
           "id": "0152",
-          "name": "COMMAND_0152",
-          "num_params": 6
+          "member": "SwitchPedRoadsOff",
+          "name": "SWITCH_PED_ROADS_OFF",
+          "num_params": 6,
+          "short_desc": "Forbids pedestrians to walk into the specified area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "target",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "0153",
-          "name": "COMMAND_0153",
-          "num_params": 2
+          "member": "LookAtCharAlways",
+          "name": "CHAR_LOOK_AT_CHAR_ALWAYS",
+          "num_params": 2,
+          "short_desc": "Makes the character to keep looking at the direction of the other character"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "0154",
-          "name": "COMMAND_0154",
-          "num_params": 1
+          "member": "StopLooking",
+          "name": "STOP_CHAR_LOOKING",
+          "num_params": 1,
+          "short_desc": "Makes the character to stop looking at the other character (0153)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "gangId",
+              "type": "GangType"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelId1",
+              "type": "model_char"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "modelId2",
+              "type": "model_char"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Gang",
           "id": "0155",
-          "name": "COMMAND_0155",
-          "num_params": 3
+          "member": "SetPedModels",
+          "name": "SET_GANG_PED_MODELS",
+          "num_params": 3,
+          "short_desc": "Sets the models used by members of the specified gang"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "gangId",
+              "type": "GangType"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_vehicle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Gang",
           "id": "0156",
-          "name": "COMMAND_0156",
-          "num_params": 2
+          "member": "SetCarModel",
+          "name": "SET_GANG_CAR_MODEL",
+          "num_params": 2,
+          "short_desc": "Sets the car used by members of the specified gang"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "gangId",
+              "type": "GangType"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponType1",
+              "type": "WeaponType"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "weaponType2",
+              "type": "WeaponType"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Gang",
           "id": "0157",
-          "name": "COMMAND_0157",
-          "num_params": 3
+          "member": "SetWeapons",
+          "name": "SET_GANG_WEAPONS",
+          "num_params": 3,
+          "short_desc": "Sets the weapons that the specified gang can use"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             }
           ],
+          "class": "Char",
           "id": "0158",
-          "name": "COMMAND_0158",
-          "num_params": 3
+          "member": "SetObjRunToCoord",
+          "name": "SET_CHAR_OBJ_RUN_TO_COORD",
+          "num_params": 3,
+          "short_desc": "Sets the character's objective to run at the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "slotId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelName",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0159",
-          "name": "COMMAND_0159",
-          "num_params": 2
+          "member": "LoadSpecialCharacter",
+          "name": "LOAD_SPECIAL_CHARACTER",
+          "num_params": 2,
+          "short_desc": "Requests a special character's model to be loaded into the specified slot"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "slotId",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "015A",
-          "name": "COMMAND_015A",
-          "num_params": 1
+          "member": "HasSpecialCharacterLoaded",
+          "name": "HAS_SPECIAL_CHARACTER_LOADED",
+          "num_params": 1,
+          "short_desc": "Returns true if the special character's model (0159) is available for creation"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "015B",
-          "name": "COMMAND_015B",
-          "num_params": 1
+          "member": "IsInRemoteMode",
+          "name": "IS_PLAYER_IN_REMOTE_MODE",
+          "num_params": 1,
+          "short_desc": "Returns true if the player is controlling a remote-control vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "bombType",
+              "type": "BombType"
             }
           ],
           "id": "015C",
-          "name": "COMMAND_015C",
-          "num_params": 2
+          "name": "ARM_CAR_WITH_BOMB",
+          "num_params": 2,
+          "class": "Car",
+          "member": "ArmWithBomb",
+          "short_desc": "Arms the vehicle with a bomb of the given type (In SA, this command only supports the mobile version)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "pedstat",
+              "type": "PedStat"
             }
           ],
+          "class": "Char",
           "id": "015D",
-          "name": "COMMAND_015D",
-          "num_params": 2
+          "member": "SetPersonality",
+          "name": "SET_CHAR_PERSONALITY",
+          "num_params": 2,
+          "short_desc": "Sets the ped stat of the character"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Cutscene",
           "id": "015E",
-          "name": "COMMAND_015E",
-          "num_params": 3
+          "member": "SetOffset",
+          "name": "SET_CUTSCENE_OFFSET",
+          "num_params": 3,
+          "short_desc": "Sets the position for a cutscene"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "animGroup",
+              "type": "AnimGroup"
             }
           ],
+          "class": "Char",
           "id": "015F",
-          "name": "COMMAND_015F",
-          "num_params": 2
+          "member": "SetAnimGroup",
+          "name": "SET_ANIM_GROUP_FOR_CHAR",
+          "num_params": 2,
+          "short_desc": "Sets the animation group for the character"
         },
         {
           "input": [
@@ -7645,118 +7760,167 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Phone",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Phone",
           "id": "0163",
-          "name": "COMMAND_0163",
-          "num_params": 3
+          "member": "Grab",
+          "name": "GRAB_PHONE",
+          "num_params": 3,
+          "short_desc": "Gets the phone at the specified X and Y coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Phone"
             }
           ],
+          "class": "Phone",
           "id": "0164",
-          "name": "COMMAND_0164",
-          "num_params": 1
+          "member": "TurnOff",
+          "name": "TURN_PHONE_OFF",
+          "num_params": 1,
+          "short_desc": "Disables the phone from ringing"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "size",
+              "type": "float"
+            },
+            {
+              "name": "coronaType",
+              "type": "CoronaType"
+            },
+            {
+              "name": "flareType",
+              "type": "FlareType"
+            },
+            {
+              "name": "r",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "g",
               "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
+              "name": "b",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true,
+            "is_positional": true
+          },
+          "class": "Fx",
           "id": "0165",
-          "name": "COMMAND_0165",
-          "num_params": 9
+          "member": "DrawCorona",
+          "name": "DRAW_CORONA",
+          "num_params": 9,
+          "short_desc": "Displays a corona at the specified location"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Weather",
           "id": "0166",
-          "name": "COMMAND_0166",
-          "num_params": 0
+          "member": "Store",
+          "name": "STORE_WEATHER",
+          "num_params": 0,
+          "short_desc": "Saves the weather (type, interpolation value and the amount of rain fallen)"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Weather",
           "id": "0167",
-          "name": "COMMAND_0167",
-          "num_params": 0
+          "member": "Restore",
+          "name": "RESTORE_WEATHER",
+          "num_params": 0,
+          "short_desc": "Restores the weather previously saved with STORE_WEATHER"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Clock",
           "id": "0168",
-          "name": "COMMAND_0168",
-          "num_params": 0
+          "member": "Store",
+          "name": "STORE_CLOCK",
+          "num_params": 0,
+          "short_desc": "Saves the current time in game"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Clock",
           "id": "0169",
-          "name": "COMMAND_0169",
-          "num_params": 0
+          "member": "Restore",
+          "name": "RESTORE_CLOCK",
+          "num_params": 0,
+          "short_desc": "Restores the game time to the time when it was saved with STORE_CLOCK"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Restart",
           "id": "016A",
-          "name": "COMMAND_016A",
-          "num_params": 4
+          "member": "CriticalMission",
+          "name": "RESTART_CRITICAL_MISSION",
+          "num_params": 4,
+          "short_desc": "Fades the screen and puts the player at the location"
         },
         {
           "input": [

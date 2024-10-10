@@ -7,8 +7,10 @@ Car
 CarGenerator
 Char
 Clock
+Cutscene
 Fx
 Game
+Gang
 Garage
 Hud
 KillFrenzy
@@ -17,6 +19,7 @@ Mission
 Object
 Pad
 Path
+Phone
 Pickup
 Player
 Rc
@@ -42,6 +45,7 @@ FollowChar,0119,0,0,("self: Char" "leader: Char")
 FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetHeading,00CE,0,0,("self: Char" "heading%f")
+GetHealth,014D,0,0,("self: Char" "health%i")
 GiveWeapon,0106,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 IsDead,009F,1,0,("handle: any")
 IsHealthGreater,00D7,1,0,("self: Char" "health%i")
@@ -89,11 +93,14 @@ LocateStoppedInCar2D,0085,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" 
 LocateStoppedInCar3D,008E,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateStoppedOnFoot2D,0084,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateStoppedOnFoot3D,008D,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LookAtCharAlways,0153,0,0,("self: Char" "target: Char")
 MarkAsNoLongerNeeded,0112,0,0,("self: Char")
 SetAmmo,00D5,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
+SetAnimGroup,015F,0,0,("self: Char" "animGroup: AnimGroup")
 SetCoordinates,0044,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetCurrentWeapon,010B,0,0,("self: Char" "weaponType: WeaponType")
 SetHeading,00CF,0,0,("self: Char" "heading%f")
+SetHealth,014B,0,0,("self: Char" "health%i")
 SetIdle,0042,0,0,("self: Char")
 SetObjAimGunAtChar,00F4,0,0,("self: Char" "target: Char")
 SetObjDestroyCar,00EC,0,0,("self: Char" "vehicle: Car")
@@ -114,12 +121,15 @@ SetObjKillCharOnFoot,00E4,0,0,("self: Char" "target: Char")
 SetObjLeaveAnyCar,00F1,0,0,("self: Char")
 SetObjLeaveCar,00E8,0,0,("self: Char" "vehicle: Car")
 SetObjNoObj,00A2,0,0,("self: Char")
+SetObjRunToCoord,0158,0,0,("self: Char" "x%f" "y%f")
 SetObjSprintToCoord,00F5,0,0,("self: Char" "x%f" "y%f")
 SetObjStealAnyCar,00F0,0,0,("self: Char")
 SetObjWaitInCar,00E3,0,0,("self: Char")
 SetObjWaitOnFoot,00DF,0,0,("self: Char")
 SetObjWalkToChar,00F3,0,0,("self: Char" "target: Char")
+SetPersonality,015D,0,0,("self: Char" "pedstat: PedStat")
 SetThreatSearch,00A1,0,0,("self: Char" "pedThreat%i")
+StopLooking,0154,0,0,("self: Char")
 StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
 TurnToFaceChar,013E,0,0,("self: Char" "char: Char")
 TurnToFaceCoord,010F,0,0,("self: Char" "x%f" "y%f" "z%f")
@@ -127,9 +137,11 @@ WanderDir,0040,0,0,("self: Char" "direction%i")
 AddScore,0094,0,0,("self: Player" "money%i")
 AlterWantedLevel,0098,0,0,("self: Player" "wantedLevel%i")
 AlterWantedLevelNoDrop,0099,0,0,("self: Player" "wantedLevel%i")
+ApplyBrakesToCar,014A,0,0,("self: Player" "state%b")
 ClearWantedLevel,009B,0,0,("self: Player")
 Create,0028,0,0,("index%i" "x%f" "y%f" "z%f" "handle: Player")
 HasBeenArrested,00A5,1,0,("self: Player")
+IsInRemoteMode,015B,1,0,("self: Player")
 IsScoreGreater,0095,1,0,("self: Player" "money%i")
 IsWantedLevelGreater,009A,1,0,("self: Player" "wantedLevel%i")
 SetControl,0107,0,0,("self: Player" "state%b")
@@ -172,16 +184,21 @@ $END
 $Car
 $BEGIN
 AddUpsidedownCheck,00DD,0,0,("self: Car")
+ArmWithBomb,015C,0,0,("self: Car" "bombType: BombType")
+ChangeColor,0150,0,0,("self: Car" "color1%i" "color2%i")
 Create,0048,0,0,("modelId: model_vehicle" "x%f" "y%f" "z%f" "handle: Car")
 Delete,0049,0,0,("self: Car")
 DontRemove,0116,0,0,("self: Car")
 Explode,013B,0,0,("self: Car")
 GetCoordinates,004D,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetHeading,00D0,0,0,("self: Car" "heading%f")
+GetHealth,014E,0,0,("self: Car" "health%i")
 GetMaximumNumberOfPassengers,0124,0,0,("self: Car" "count%i")
 GetNumberOfPassengers,0123,0,0,("self: Car" "count%i")
 GiveAlarm,00A7,0,0,("self: Car")
 GotoCoordinates,004A,0,0,("self: Car" "x%f" "y%f" "z%f")
+IsArmedWithAnyBomb,0149,1,0,("self: Car")
+IsArmedWithBomb,014F,1,0,("self: Car" "status: BombType")
 IsCrushed,00A8,1,0,("self: Car")
 IsDead,00A0,1,0,("handle: any")
 IsHealthGreater,00D8,1,0,("self: Car" "health%i")
@@ -207,6 +224,7 @@ SetCoordinates,004E,0,0,("self: Car" "x%f" "y%f" "z%f")
 SetCruiseSpeed,0050,0,0,("self: Car" "maxSpeed%f")
 SetDrivingStyle,0051,0,0,("self: Car" "drivingStyle%i")
 SetHeading,00D1,0,0,("self: Car" "heading%f")
+SetHealth,014C,0,0,("self: Car" "health%i")
 SetHeavy,0126,0,0,("self: Car" "state%b")
 SetIdle,004C,0,0,("self: Car")
 SetMission,0052,0,0,("self: Car" "carMission%i")
@@ -233,6 +251,7 @@ FollowChar,0119,0,0,("self: Char" "leader: Char")
 FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetHeading,00CE,0,0,("self: Char" "heading%f")
+GetHealth,014D,0,0,("self: Char" "health%i")
 GiveWeapon,0106,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 IsDead,009F,1,0,("handle: any")
 IsHealthGreater,00D7,1,0,("self: Char" "health%i")
@@ -280,11 +299,14 @@ LocateStoppedInCar2D,0085,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" 
 LocateStoppedInCar3D,008E,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
 LocateStoppedOnFoot2D,0084,1,0,("self: Char" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
 LocateStoppedOnFoot3D,008D,1,0,("self: Char" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+LookAtCharAlways,0153,0,0,("self: Char" "target: Char")
 MarkAsNoLongerNeeded,0112,0,0,("self: Char")
 SetAmmo,00D5,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
+SetAnimGroup,015F,0,0,("self: Char" "animGroup: AnimGroup")
 SetCoordinates,0044,0,0,("self: Char" "x%f" "y%f" "z%f")
 SetCurrentWeapon,010B,0,0,("self: Char" "weaponType: WeaponType")
 SetHeading,00CF,0,0,("self: Char" "heading%f")
+SetHealth,014B,0,0,("self: Char" "health%i")
 SetIdle,0042,0,0,("self: Char")
 SetObjAimGunAtChar,00F4,0,0,("self: Char" "target: Char")
 SetObjDestroyCar,00EC,0,0,("self: Char" "vehicle: Car")
@@ -305,12 +327,15 @@ SetObjKillCharOnFoot,00E4,0,0,("self: Char" "target: Char")
 SetObjLeaveAnyCar,00F1,0,0,("self: Char")
 SetObjLeaveCar,00E8,0,0,("self: Char" "vehicle: Car")
 SetObjNoObj,00A2,0,0,("self: Char")
+SetObjRunToCoord,0158,0,0,("self: Char" "x%f" "y%f")
 SetObjSprintToCoord,00F5,0,0,("self: Char" "x%f" "y%f")
 SetObjStealAnyCar,00F0,0,0,("self: Char")
 SetObjWaitInCar,00E3,0,0,("self: Char")
 SetObjWaitOnFoot,00DF,0,0,("self: Char")
 SetObjWalkToChar,00F3,0,0,("self: Char" "target: Char")
+SetPersonality,015D,0,0,("self: Char" "pedstat: PedStat")
 SetThreatSearch,00A1,0,0,("self: Char" "pedThreat%i")
+StopLooking,0154,0,0,("self: Char")
 StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
 TurnToFaceChar,013E,0,0,("self: Char" "char: Char")
 TurnToFaceCoord,010F,0,0,("self: Char" "x%f" "y%f" "z%f")
@@ -322,19 +347,35 @@ $BEGIN
 GetGameTimer,010E,0,0,("time%i")
 GetMinutesToTimeOfDay,005C,0,0,("hours%i" "minutes%i" "minutesLeft%i")
 GetTimeOfDay,005A,0,0,("hours%i" "minutes%i")
+Restore,0169,0,0,()
 SetTimeOfDay,005B,0,0,("hours%i" "minutes%i")
 SetTimeScale,00B8,0,0,("scale%f")
+Store,0168,0,0,()
+$END
+
+$Cutscene
+$BEGIN
+SetOffset,015E,0,0,("x%f" "y%f" "z%f")
 $END
 
 $Fx
 $BEGIN
 AddExplosion,013C,0,0,("x%f" "y%f" "z%f" "type: ExplosionType")
+DrawCorona,0165,0,0,("x%f" "y%f" "z%f" "size%f" "coronaType: CoronaType" "flareType: FlareType" "r%i" "g%i" "b%i")
 $END
 
 $Game
 $BEGIN
+SetFreeBombs,0148,0,0,("state%b")
 SetMaxWantedLevel,0128,0,0,("wantedLevel%i")
 SetPoliceIgnorePlayer,012E,0,0,("player: Player" "state%b")
+$END
+
+$Gang
+$BEGIN
+SetCarModel,0156,0,0,("gangId: GangType" "modelId: model_vehicle")
+SetPedModels,0155,0,0,("gangId: GangType" "modelId1: model_char" "modelId2: model_char")
+SetWeapons,0157,0,0,("gangId: GangType" "weaponType1: WeaponType" "weaponType2: WeaponType")
 $END
 
 $Garage
@@ -393,8 +434,16 @@ $END
 
 $Path
 $BEGIN
+SwitchPedRoadsOff,0152,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+SwitchPedRoadsOn,0151,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 SwitchRoadsOff,0122,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 SwitchRoadsOn,0121,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+$END
+
+$Phone
+$BEGIN
+Grab,0163,0,0,("x%f" "y%f" "handle: Phone")
+TurnOff,0164,0,0,("self: Phone")
 $END
 
 $Pickup
@@ -413,6 +462,7 @@ $Restart
 $BEGIN
 AddHospital,00CB,0,0,("x%f" "y%f" "z%f" "heading%f")
 AddPolice,00CC,0,0,("x%f" "y%f" "z%f" "heading%f")
+CriticalMission,016A,0,0,("x%f" "y%f" "z%f" "heading%f")
 OverrideNext,00CD,0,0,("x%f" "y%f" "z%f" "heading%f")
 $END
 
@@ -426,7 +476,9 @@ $END
 $Streaming
 $BEGIN
 HasModelLoaded,0161,1,0,("modelId: model_any")
+HasSpecialCharacterLoaded,015A,1,0,("slotId%i")
 LoadAllModelsNow,0228,0,0,()
+LoadSpecialCharacter,0159,0,0,("slotId%i" "modelName%s")
 MarkModelAsNoLongerNeeded,0162,0,0,("modelId: model_any")
 RequestModel,0160,0,0,("modelId: model_any")
 $END
@@ -450,6 +502,8 @@ $Weather
 $BEGIN
 Force,0109,0,0,("type: WeatherType")
 Release,010A,0,0,()
+Restore,0167,0,0,()
+Store,0166,0,0,()
 $END
 
 $World

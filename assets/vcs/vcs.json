@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1728660365648,
-    "version": "0.23",
+    "last_update": 1728751847264,
+    "version": "0.24",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -9139,752 +9139,1008 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Boat"
             }
           ],
+          "class": "Boat",
           "id": "01C0",
-          "name": "COMMAND_01C0",
-          "num_params": 1
+          "member": "Stop",
+          "name": "BOAT_STOP",
+          "num_params": 1,
+          "short_desc": "Turns off the car's engine"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "01C1",
-          "name": "COMMAND_01C1",
-          "num_params": 6
+          "member": "IsShootingInArea",
+          "name": "IS_PLAYER_SHOOTING_IN_AREA",
+          "num_params": 6,
+          "short_desc": "Returns true if the player fired a weapon within the specified 2D area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponType",
+              "type": "WeaponType"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "01C2",
-          "name": "COMMAND_01C2",
-          "num_params": 2
+          "member": "IsCurrentWeapon",
+          "name": "IS_CURRENT_CHAR_WEAPON",
+          "num_params": 2,
+          "short_desc": "Returns true if the character is holding the given type of weapon"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Boat"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "maxSpeed",
+              "type": "float"
             }
           ],
+          "class": "Boat",
           "id": "01C3",
-          "name": "COMMAND_01C3",
-          "num_params": 2
+          "member": "SetCruiseSpeed",
+          "name": "SET_BOAT_CRUISE_SPEED",
+          "num_params": 2,
+          "short_desc": "Sets the boat's max speed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "class": "World",
           "id": "01C4",
-          "name": "COMMAND_01C4",
-          "num_params": 8
+          "member": "GetRandomCharInArea",
+          "name": "GET_RANDOM_CHAR_IN_AREA",
+          "num_params": 5,
+          "short_desc": "Returns the handle of a random pedestrian in the specified 2D area, or -1 otherwise",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "01C5",
-          "name": "COMMAND_01C5",
-          "num_params": 1
+          "member": "IsInTaxi",
+          "name": "IS_PLAYER_IN_TAXI",
+          "num_params": 1,
+          "short_desc": "Returns true if the player is driving a taxi"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "01C6",
-          "name": "COMMAND_01C6",
-          "num_params": 1
+          "member": "IsShooting",
+          "name": "IS_PLAYER_SHOOTING",
+          "num_params": 1,
+          "short_desc": "Returns true if the player is firing a weapon"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "01C7",
-          "name": "COMMAND_01C7",
-          "num_params": 1
+          "member": "IsShooting",
+          "name": "IS_CHAR_SHOOTING",
+          "num_params": 1,
+          "short_desc": "Returns true if the character is firing a weapon"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
+              "name": "cashAmount",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Pickup",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Pickup",
           "id": "01C8",
-          "name": "COMMAND_01C8",
-          "num_params": 5
+          "member": "CreateMoney",
+          "name": "CREATE_MONEY_PICKUP",
+          "num_params": 5,
+          "short_desc": "Creates a money pickup with the specified cash value"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "accuracy",
               "type": "int"
             }
           ],
+          "class": "Char",
           "id": "01C9",
-          "name": "COMMAND_01C9",
-          "num_params": 2
+          "member": "SetAccuracy",
+          "name": "SET_CHAR_ACCURACY",
+          "num_params": 2,
+          "short_desc": "Affects how often the character will hit the target when attacking with a weapon"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "speed",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "01CA",
-          "name": "COMMAND_01CA",
-          "num_params": 2
+          "member": "GetSpeed",
+          "name": "GET_CAR_SPEED",
+          "num_params": 2,
+          "short_desc": "Gets the car's speed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "name",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Cutscene",
           "id": "01CB",
-          "name": "COMMAND_01CB",
-          "num_params": 1
+          "member": "Load",
+          "name": "LOAD_CUTSCENE",
+          "num_params": 1,
+          "short_desc": "Loads the data for the specified cutscene"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Cutscene",
           "id": "01CC",
-          "name": "COMMAND_01CC",
-          "num_params": 0
+          "member": "Start",
+          "name": "START_CUTSCENE",
+          "num_params": 0,
+          "short_desc": "Starts the loaded cutscene (01CB)"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Cutscene",
           "id": "01CD",
-          "name": "COMMAND_01CD",
-          "num_params": 0
+          "member": "HasFinished",
+          "name": "HAS_CUTSCENE_FINISHED",
+          "num_params": 0,
+          "short_desc": "Returns true if the cutscene has finished"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Cutscene",
           "id": "01CE",
-          "name": "COMMAND_01CE",
-          "num_params": 0
+          "member": "Clear",
+          "name": "CLEAR_CUTSCENE",
+          "num_params": 0,
+          "short_desc": "Ends the current cutscene, freeing game memory"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "01CF",
-          "name": "COMMAND_01CF",
-          "num_params": 0
+          "member": "RestoreJumpcut",
+          "name": "RESTORE_CAMERA_JUMPCUT",
+          "num_params": 0,
+          "short_desc": "Restores the camera, putting it back behind the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "01D0",
-          "name": "COMMAND_01D0",
-          "num_params": 2
+          "member": "IsModel",
+          "name": "IS_CHAR_MODEL",
+          "num_params": 2,
+          "short_desc": "Returns true if the character's model ID is equivalent to the model ID passed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "cutsceneModelId",
+              "type": "model_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelName",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "01D1",
-          "name": "COMMAND_01D1",
-          "num_params": 2
+          "member": "LoadSpecialModel",
+          "name": "LOAD_SPECIAL_MODEL",
+          "num_params": 2,
+          "short_desc": "Loads a model with the given name as a cutscene model id"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "angle",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Math",
           "id": "01D2",
-          "name": "COMMAND_01D2",
-          "num_params": 2
+          "member": "Sin",
+          "name": "SIN",
+          "num_params": 2,
+          "short_desc": "Returns the sine of the angle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "angle",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Math",
           "id": "01D3",
-          "name": "COMMAND_01D3",
-          "num_params": 2
+          "member": "Cos",
+          "name": "COS",
+          "num_params": 2,
+          "short_desc": "Returns the cosine of the angle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "01D4",
-          "name": "COMMAND_01D4",
-          "num_params": 2
+          "member": "GetForwardX",
+          "name": "GET_CAR_FORWARD_X",
+          "num_params": 2,
+          "short_desc": "Returns the X coord of the vehicle's angle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "01D5",
-          "name": "COMMAND_01D5",
-          "num_params": 2
+          "member": "GetForwardY",
+          "name": "GET_CAR_FORWARD_Y",
+          "num_params": 2,
+          "short_desc": "Returns the Y coord of the vehicle's angle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "type",
+              "type": "GarageType"
             }
           ],
+          "class": "Garage",
           "id": "01D6",
-          "name": "COMMAND_01D6",
-          "num_params": 2
+          "member": "ChangeType",
+          "name": "CHANGE_GARAGE_TYPE",
+          "num_params": 2,
+          "short_desc": "Sets the garage's type"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "craneX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "craneY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "pickupZoneX1",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "pickupZoneY1",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "pickupZoneX2",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "pickupZoneY2",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "dropOffX",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "dropOffY",
+              "type": "float"
             },
             {
-              "name": "_p9",
-              "type": "int"
+              "name": "dropOffZ",
+              "type": "float"
             },
             {
-              "name": "_p10",
-              "type": "int"
+              "name": "dropOffAngle",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Crane",
           "id": "01D7",
-          "name": "COMMAND_01D7",
-          "num_params": 10
+          "member": "ActivateCrusher",
+          "name": "ACTIVATE_CRUSHER_CRANE",
+          "num_params": 10,
+          "short_desc": "Activates a crusher crane located within 100.0 units of the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "num1",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "num2",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "style",
+              "type": "TextStyle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "01D8",
-          "name": "COMMAND_01D8",
-          "num_params": 5
+          "member": "PrintWith2Numbers",
+          "name": "PRINT_WITH_2_NUMBERS",
+          "num_params": 5,
+          "short_desc": "Displays a styled message in which the first two ~1~ tokens are substituted with the specified numbers"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "num1",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "num2",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "style",
+              "type": "TextStyle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "01D9",
-          "name": "COMMAND_01D9",
-          "num_params": 5
+          "member": "PrintWith2NumbersNow",
+          "name": "PRINT_WITH_2_NUMBERS_NOW",
+          "num_params": 5,
+          "short_desc": "Displays a styled message in which the first two ~1~ tokens are substituted with the specified numbers"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "num1",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "num2",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "style",
+              "type": "TextStyle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "01DA",
-          "name": "COMMAND_01DA",
-          "num_params": 5
+          "member": "PrintWith2NumbersSoon",
+          "name": "PRINT_WITH_2_NUMBERS_SOON",
+          "num_params": 5,
+          "short_desc": "Displays a styled message with the 2 specified numbers when there are no other messages being printed"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "num1",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "num2",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "num3",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
+              "name": "style",
+              "type": "TextStyle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "01DB",
-          "name": "COMMAND_01DB",
-          "num_params": 6
+          "member": "PrintWith3Numbers",
+          "name": "PRINT_WITH_3_NUMBERS",
+          "num_params": 6,
+          "short_desc": "Displays a styled message in which the first three ~1~ tokens are substituted with the specified numbers"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "num1",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "num2",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "num3",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
+              "name": "style",
+              "type": "TextStyle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "01DC",
-          "name": "COMMAND_01DC",
-          "num_params": 6
+          "member": "PrintWith3NumbersSoon",
+          "name": "PRINT_WITH_3_NUMBERS_SOON",
+          "num_params": 6,
+          "short_desc": "Displays a styled message in which the first three ~1~ tokens are substituted with the specified numbers"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "num1",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "num2",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "num3",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "num4",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "style",
+              "type": "TextStyle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "01DD",
-          "name": "COMMAND_01DD",
-          "num_params": 7
+          "member": "PrintWith4Numbers",
+          "name": "PRINT_WITH_4_NUMBERS",
+          "num_params": 7,
+          "short_desc": "Displays a styled message in which the first four ~1~ tokens are substituted with the specified numbers"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "key",
+              "type": "gxt_key"
+            },
+            {
+              "name": "num1",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "num2",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "num3",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "num4",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "num5",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "num6",
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "duration",
               "type": "int"
             },
             {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
+              "name": "style",
+              "type": "TextStyle"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "01DE",
-          "name": "COMMAND_01DE",
-          "num_params": 9
+          "member": "PrintWith6Numbers",
+          "name": "PRINT_WITH_6_NUMBERS",
+          "num_params": 9,
+          "short_desc": "Displays a styled message in which the first six ~1~ tokens are substituted with the specified numbers"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "progress",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01DF",
-          "name": "COMMAND_01DF",
-          "num_params": 1
+          "member": "PlayerMadeProgress",
+          "name": "PLAYER_MADE_PROGRESS",
+          "num_params": 1,
+          "short_desc": "Increases the progress made stat by the specified amount"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "maxProgress",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E0",
-          "name": "COMMAND_01E0",
-          "num_params": 1
+          "member": "SetProgressTotal",
+          "name": "SET_PROGRESS_TOTAL",
+          "num_params": 1,
+          "short_desc": "Sets the maximum progress the player can reach"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "distance",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E1",
-          "name": "COMMAND_01E1",
-          "num_params": 1
+          "member": "RegisterJumpDistance",
+          "name": "REGISTER_JUMP_DISTANCE",
+          "num_params": 1,
+          "short_desc": "Saves the highest insane jump distance stat"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "height",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E2",
-          "name": "COMMAND_01E2",
-          "num_params": 1
+          "member": "RegisterJumpHeight",
+          "name": "REGISTER_JUMP_HEIGHT",
+          "num_params": 1,
+          "short_desc": "Saves the highest insane jump height stat"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "flips",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E3",
-          "name": "COMMAND_01E3",
-          "num_params": 1
+          "member": "RegisterJumpFlips",
+          "name": "REGISTER_JUMP_FLIPS",
+          "num_params": 1,
+          "short_desc": "Saves the highest insane jump flips stat"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "spins",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E4",
-          "name": "COMMAND_01E4",
-          "num_params": 1
+          "member": "RegisterJumpSpins",
+          "name": "REGISTER_JUMP_SPINS",
+          "num_params": 1,
+          "short_desc": "Saves the highest insane jump rotation stat"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "stunt",
+              "type": "StuntType"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E5",
-          "name": "COMMAND_01E5",
-          "num_params": 1
+          "member": "RegisterJumpStunt",
+          "name": "REGISTER_JUMP_STUNT",
+          "num_params": 1,
+          "short_desc": "Saves the best insane stunt stat"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E6",
-          "name": "COMMAND_01E6",
-          "num_params": 0
+          "member": "RegisterUniqueJumpFound",
+          "name": "REGISTER_UNIQUE_JUMP_FOUND",
+          "num_params": 0,
+          "short_desc": "Increments the completed number of unique stunt jumps stat by 1"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "total",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E7",
-          "name": "COMMAND_01E7",
-          "num_params": 1
+          "member": "SetUniqueJumpsTotal",
+          "name": "SET_UNIQUE_JUMPS_TOTAL",
+          "num_params": 1,
+          "short_desc": "Sets the total number of unique stunt jumps stat"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E8",
-          "name": "COMMAND_01E8",
-          "num_params": 0
+          "member": "RegisterPassengerDroppedOffTaxi",
+          "name": "REGISTER_PASSENGER_DROPPED_OFF_TAXI",
+          "num_params": 0,
+          "short_desc": "Increments the number of passengers dropped off stat by 1"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "cashAmount",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01E9",
-          "name": "COMMAND_01E9",
-          "num_params": 1
+          "member": "RegisterMoneyMadeTaxi",
+          "name": "REGISTER_MONEY_MADE_TAXI",
+          "num_params": 1,
+          "short_desc": "Adds the value to the cash made in taxi stat"
         },
         {
           "id": "01EA",
-          "name": "COMMAND_01EA",
+          "name": "REGISTER_MISSION_GIVEN",
           "num_params": 0
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "key",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "01EB",
-          "name": "COMMAND_01EB",
-          "num_params": 1
+          "member": "RegisterMissionPassed",
+          "name": "REGISTER_MISSION_PASSED",
+          "num_params": 1,
+          "short_desc": "Sets the GXT of the last mission passed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "01EC",
-          "name": "COMMAND_01EC",
-          "num_params": 2
+          "member": "SetRunning",
+          "name": "SET_CHAR_RUNNING",
+          "num_params": 2,
+          "short_desc": "Makes the character run"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "01ED",
-          "name": "COMMAND_01ED",
-          "num_params": 0
+          "member": "RemoveAllScriptFires",
+          "name": "REMOVE_ALL_SCRIPT_FIRES",
+          "num_params": 0,
+          "short_desc": "Removes all script fires (01BC)"
         },
         {
           "input": [

@@ -416,7 +416,10 @@ export const BlipColor = {
   "Purple": 5,
   "Cyan": 6,
   "Threat": 7,
-  "Destination": 8
+  "Destination": 8,
+  "BlueFix": 337234175,
+  "PurpleFix": -939472641,
+  "CyanFix": 13172735
 };
 export const ScriptBrainAttachType = {
   "Ped": 0,

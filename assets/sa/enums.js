@@ -3409,3 +3409,8 @@ export const SetPieceType = {
   "TwoCarsBlockingPlayerFromSide": 6,
   "TwoCarsRammingPlayerFromSide": 7
 };
+export const CoordAppearance = {
+  "Normal": 0,
+  "Friend": 1,
+  "Enemy": 2
+};

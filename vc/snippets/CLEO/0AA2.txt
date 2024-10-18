@@ -1,8 +1,8 @@
-int iTemp
-if or
-    load_dynamic_library "SilentPatchIII.asi" store_to iTemp
-    load_dynamic_library "SilentPatchVC.asi" store_to iTemp
-    load_dynamic_library "SilentPatchSA.asi" store_to iTemp
+int iTmp
+if and
+    not iTmp = load_dynamic_library {fileName} "SilentPatchIII.asi"
+    not iTmp = load_dynamic_library {fileName} "SilentPatchVC.asi"
+    not iTmp = load_dynamic_library {fileName} "SilentPatchSA.asi"
 then
-    print_help_formatted "SilentPatch is Active"
+    print_help_formatted "SilentPatch not detected!"
 end

@@ -1,0 +1,37 @@
+int libCleo
+if
+    not libCleo = load_dynamic_library "CLEO.asi"
+then
+    print_help_formatted {text} "~r~ERROR:~s~ Failed to load CLEO.asi"
+    terminate_this_script
+end
+
+
+// approach 1
+int procAddr
+if 
+    not procAddr = get_dynamic_library_procedure "_CLEO_GetVersion@0" {library} libCleo
+then
+    print_help_formatted {text} "~r~ERROR:~s~ Failed to get CLEO_GetVersion procedure"
+    terminate_this_script
+end
+
+int ver = call_function_return procAddr {params} 0 {pop} 0
+print_help_formatted {text} "CLEO version is %X" ver
+
+
+wait 3000
+
+
+// approach 2 - use Sanny Builder 4 foreign functions syntax
+function Export_Arg_0_Ret<stdcall>() : int // define function type
+Export_Arg_0_Ret CLEO_GetGameDirectory // variable
+if
+    not CLEO_GetGameDirectory = get_dynamic_library_procedure "_CLEO_GetGameDirectory@0" {library} libCleo
+then
+    print_help_formatted {text} "~r~ERROR:~s~ Failed to get CLEO_GetGameDirectory procedure"
+    terminate_this_script
+end
+
+int dir = CLEO_GetGameDirectory()
+print_help_formatted {text} "Game directory is: %s" dir

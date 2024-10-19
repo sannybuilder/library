@@ -55,7 +55,7 @@ export class CodifyPipe implements PipeTransform {
     let normalized = normalize(code);
     let compiled = compileTemplate(normalized, options.command, options.game);
     let formatted = format(compiled, options);
-    return formatted;
+    return formatted.trim();
   }
 }
 
@@ -105,7 +105,10 @@ function format(
     : opcodified;
   const highlighted = Prism.highlight(
     declaratified,
-    { ...Prism.languages.sb, function: new RegExp(highlightName, 'i') },
+    {
+      ...Prism.languages.sb,
+      function: new RegExp(`\\b${highlightName}\\b`, 'i'),
+    },
     'sb'
   );
   return linkify(highlighted, extensions, game);

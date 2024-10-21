@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1729054981052,
-    "version": "0.26",
+    "last_update": 1729548367248,
+    "version": "0.27",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -12223,13 +12223,19 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "key",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0267",
-          "name": "COMMAND_0267",
-          "num_params": 1
+          "member": "PrintHelp",
+          "name": "PRINT_HELP",
+          "num_params": 1,
+          "short_desc": "Displays a black text box for a few seconds"
         },
         {
           "id": "0268",
@@ -15402,13 +15408,19 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "key",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0323",
-          "name": "COMMAND_0323",
-          "num_params": 1
+          "member": "PrintHelpForever",
+          "name": "PRINT_HELP_FOREVER",
+          "num_params": 1,
+          "short_desc": "Shows a text box which stays on screen until it is removed by another command"
         },
         {
           "input": [
@@ -19120,48 +19132,66 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "name",
+              "type": "string",
+              "source": "var_any"
             }
           ],
           "id": "0426",
-          "name": "COMMAND_0426",
-          "num_params": 4
+          "name": "GET_NAME_OF_ZONE",
+          "num_params": 4,
+          "short_desc": "Gets the name of the zone at the specified coordinates",
+          "class": "Zone",
+          "member": "GetName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "name",
+              "type": "string",
+              "source": "var_any"
             }
           ],
           "id": "0427",
-          "name": "COMMAND_0427",
-          "num_params": 4
+          "name": "GET_NAME_OF_INFO_ZONE",
+          "num_params": 4,
+          "short_desc": "Gets the name of the info zone at the specified coordinates",
+          "class": "Zone",
+          "member": "GetName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -20517,8 +20547,15 @@
         },
         {
           "id": "0474",
-          "name": "COMMAND_0474",
-          "num_params": 0
+          "name": "IS_HELP_MESSAGE_BEING_DISPLAYED",
+          "num_params": 0,
+          "short_desc": "Returns true if any help message is being displayed",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Text",
+          "member": "IsHelpMessageBeingDisplayed"
         },
         {
           "input": [
@@ -20678,13 +20715,16 @@
           "output": [
             {
               "name": "handle",
-              "type": "int",
+              "type": "User3DMarker",
               "source": "var_any"
             }
           ],
           "id": "0479",
-          "name": "COMMAND_0479",
+          "name": "CREATE_USER_3D_MARKER",
           "num_params": 5,
+          "short_desc": "Creates a marker similar to the enex markers",
+          "class": "User3DMarker",
+          "member": "Create",
           "attrs": {
             "is_constructor": true
           }
@@ -20692,13 +20732,19 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "User3DMarker"
             }
           ],
           "id": "047A",
-          "name": "COMMAND_047A",
-          "num_params": 1
+          "name": "REMOVE_USER_3D_MARKER",
+          "num_params": 1,
+          "short_desc": "Destroys a marker created with 0479",
+          "class": "User3DMarker",
+          "member": "Remove",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "input": [

@@ -321,3 +321,8 @@ export const SeatId = {
   "Passenger8": 7,
   "BikeRear": 0
 };
+export const Align = {
+  "Center": 0,
+  "Left": 1,
+  "Right": 2
+};

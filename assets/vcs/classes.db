@@ -31,6 +31,7 @@ Sound
 Stat
 Streaming
 Text
+User3DMarker
 Weather
 World
 Zone
@@ -577,9 +578,12 @@ $END
 $Text
 $BEGIN
 ClearPrints,0059,0,0,()
+IsHelpMessageBeingDisplayed,0474,1,0,()
 Print,0056,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintBig,0055,0,0,("key: gxt_key" "time%i" "style%i")
 PrintBigQ,0143,0,0,("key: gxt_key" "duration%i" "style: TextStyle")
+PrintHelp,0267,0,0,("key: gxt_key")
+PrintHelpForever,0323,0,0,("key: gxt_key")
 PrintNow,0057,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintSoon,0058,0,0,("key: gxt_key" "time%i" "flag%i")
 PrintWith2Numbers,01D8,0,0,("key: gxt_key" "num1%i" "num2%i" "duration%i" "style: TextStyle")
@@ -594,6 +598,12 @@ PrintWithNumberBig,011D,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextSty
 PrintWithNumberBigQ,0144,0,0,("key: gxt_key" "num%i" "duration%i" "style: TextStyle")
 PrintWithNumberNow,011F,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
 PrintWithNumberSoon,0120,0,0,("key: gxt_key" "num%i" "duration%i" "flag%i")
+$END
+
+$User3DMarker
+$BEGIN
+Create,0479,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: User3DMarker")
+Remove,047A,0,0,("self: User3DMarker")
 $END
 
 $Weather
@@ -614,6 +624,7 @@ $END
 
 $Zone
 $BEGIN
+GetName,0427,0,0,("x%f" "y%f" "z%f" "name%s")
 SetCarDensity,00B1,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i")
 SetCarInfo,00AF,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i" "gang1%i" "gang2%i" "gang3%i" "gang4%i" "gang5%i" "gang6%i" "gang7%i" "gang8%i" "gang9%i" "gang10%i")
 SetPedDensity,00B2,0,0,("zone: zone_key" "dayOrNight: DayOrNight" "density%i")

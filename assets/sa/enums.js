@@ -1516,9 +1516,9 @@ export const Cheats = {
   "Kerala": 92
 };
 export const Align = {
-  "center": 0,
-  "left": 1,
-  "right": 2
+  "Center": 0,
+  "Left": 1,
+  "Right": 2
 };
 export const ModelInfoType = {
   "Atomic": 1,

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1729548367248,
-    "version": "0.27",
+    "last_update": 1729560246147,
+    "version": "0.28",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -12644,13 +12644,19 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "index",
               "type": "int"
             }
           ],
           "id": "0289",
-          "name": "COMMAND_0289",
-          "num_params": 1
+          "name": "LOAD_AND_LAUNCH_MISSION_INTERNAL",
+          "num_params": 1,
+          "short_desc": "Loads a mission from the list defined in the main.scm header",
+          "class": "Mission",
+          "member": "LoadAndLaunchInternal",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -14113,77 +14119,109 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
           "id": "02E2",
-          "name": "COMMAND_02E2",
-          "num_params": 2
+          "name": "SET_VAR_INT_TO_CONSTANT",
+          "num_params": 2,
+          "short_desc": "Assigns the variable to the integer constant",
+          "operator": "="
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
           "id": "02E3",
-          "name": "COMMAND_02E3",
-          "num_params": 2
+          "name": "IS_INT_VAR_GREATER_THAN_CONSTANT",
+          "num_params": 2,
+          "short_desc": "Returns true if the value of the variable is greater than the integer constant",
+          "operator": ">"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
           "id": "02E4",
-          "name": "COMMAND_02E4",
-          "num_params": 2
+          "name": "IS_CONSTANT_GREATER_THAN_INT_VAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the integer constant is greater than the value of the variable",
+          "operator": ">"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
           "id": "02E5",
-          "name": "COMMAND_02E5",
-          "num_params": 2
+          "name": "IS_INT_VAR_GREATER_OR_EQUAL_TO_CONSTANT",
+          "num_params": 2,
+          "short_desc": "Returns true if the value of the variable is equal to or greater than the integer constant ",
+          "operator": ">="
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "literal"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "",
+              "type": "int",
+              "source": "var_any"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
           "id": "02E6",
-          "name": "COMMAND_02E6",
-          "num_params": 2
+          "name": "IS_CONSTANT_GREATER_OR_EQUAL_TO_INT_VAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the integer constant is equal to or greater than the value of the variable",
+          "operator": ">="
         },
         {
           "input": [
@@ -22739,8 +22777,13 @@
         },
         {
           "id": "04F2",
-          "name": "COMMAND_04F2",
-          "num_params": 0
+          "name": "IS_THIS_SCRIPT_A_MISSION",
+          "num_params": 0,
+          "short_desc": "Returns true if the current script is a mission (0079, 0289)",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
         },
         {
           "input": [

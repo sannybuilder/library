@@ -742,7 +742,8 @@ function CCustomCarPlateMgr_Shutdown<cdecl, 0x6FD720>(): int
 function CCustomCarPlateMgr_GetMapRegionPlateDesign<cdecl, 0x6FD7A0>(): int
 function CCustomCarPlateMgr_LoadPlatecharsetDat<cdecl, 0x6FDC00>(filename: int, data: int, arg2: int, arg3: int): int
 function CCustomCarPlateMgr_SetupMaterialPlatebackTexture<cdecl, 0x6FDE50>(material: int, plateType: int): int
-function CCustomCarPlateMgr_CreatePlateTexture<cdecl, 0x6FDEA0>(text: int, plateType: int): int
+/// Creates a new RwTexture with text for a car number plate
+function CCustomCarPlateMgr_CreatePlateTexture<cdecl, 0x6FDEA0>(text: string, plateType: int): int
 function CCustomCarPlateMgr_SetupClumpAfterVehicleUpgrade<cdecl, 0x6FDFE0>(clump: int, plateMaterial: int, plateType: int): int
 function CCustomCarPlateMgr_SetupMaterialPlateTexture<cdecl, 0x6FE020>(material: int, plateText: int, plateType: int): int
 function CCustomCarPlateMgr_SetupClump<cdecl, 0x6FE0F0>(clump: int, plateText: int, plateType: int): int
@@ -2220,3 +2221,11 @@ function FindPlayerVehicle<cdecl, 0x56E0D0>(playerIndex: int, includeRemote: boo
 function FindPlayerCoors<cdecl, 0x56E010>(result: CVector, playerIndex: int): CVector
 /// Calculates the value of the arc sine of num. Num should be in range -1.0..1.0
 function asin<cdecl, 0x4207A0>(num: float): float
+/// Destroys a RwTexture created with RwTextureCreate
+function RwTextureDestroy<cdecl, 0x7F3820>(texture: int)
+/// Creates new RwTexture from RwRaster
+function RwTextureCreate<cdecl, 0x7F37C0>(raster: int)
+/// Creates new RwRaster
+function RwRasterCreate<cdecl, 0x7FB230>(width: int, height: int, depth: int, flags: int): int
+/// Destroys an instance of RwRaster
+function RwRasterDestroy<cdecl, 0x7FB020>(raster: int)

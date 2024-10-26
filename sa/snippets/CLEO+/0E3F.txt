@@ -6,7 +6,7 @@ while true
     
     float screenPos[2]
     float screenSize[2]
-    screenPos[0], screenPos[1], screenSize[0], screenSize[1] = convert_3d_to_screen_2d {pos} pos[0] pos[1] pos[2] {nearClip} 1 {farClip} 10
+    screenPos[0], screenPos[1], screenSize[0], screenSize[1] = convert_3d_to_screen_2d {pos} pos[0] pos[1] pos[2] {nearClip} true {farClip} true
     
     use_text_commands {state} true
     
@@ -16,8 +16,6 @@ while true
     set_text_scale {widthScale} screenSize[0] {heightScale} screenSize[1]
     
     set_text_edge {size} 1 {RGBA} 0 0 0 255
-
     set_text_centre {state} true
-    
     display_text_formatted {offsetLeft} screenPos[0] {offsetTop} screenPos[1] {format} "Player"
 end

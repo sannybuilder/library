@@ -1,0 +1,23 @@
+while true
+    wait 0
+    
+    float pos[3]
+    pos[0], pos[1], pos[2] = get_offset_from_char_in_world_coords $scplayer {offset} 0.0 0.0 1.0 // above head
+    
+    float screenPos[2]
+    float screenSize[2]
+    screenPos[0], screenPos[1], screenSize[0], screenSize[1] = convert_3d_to_screen_2d {pos} pos[0] pos[1] pos[2] {nearClip} 1 {farClip} 10
+    
+    use_text_commands {state} true
+    
+    // calculate our font proportions
+    screenSize[0] = screenSize[1]
+    screenSize[0] *= 0.3 
+    set_text_scale {widthScale} screenSize[0] {heightScale} screenSize[1]
+    
+    set_text_edge {size} 1 {RGBA} 0 0 0 255
+
+    set_text_centre {state} true
+    
+    display_text_formatted {offsetLeft} screenPos[0] {offsetTop} screenPos[1] {format} "Player"
+end

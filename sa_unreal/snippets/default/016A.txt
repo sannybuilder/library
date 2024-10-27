@@ -1,0 +1,15 @@
+// fade to black
+do_fade {time} 2000 {direction} Fade.Out
+set_player_control $player1 {state} false
+
+// wait for screen to be black
+while get_fading_status
+    wait 0
+end
+
+// do something in secret
+set_camera_in_front_of_player
+
+// reveal
+set_player_control $player1 {state} true
+do_fade {time} 2000 {direction} Fade.In

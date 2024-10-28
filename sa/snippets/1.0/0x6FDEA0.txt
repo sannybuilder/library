@@ -1,0 +1,33 @@
+Player p = 0
+Char playerChar = p.GetChar()
+
+while true
+    wait 0
+    if 
+        playerChar.IsInAnyCar()
+    then
+        int vehicle = playerChar.StoreCarIsInNoSave()
+        int pVehicle = Memory.GetVehiclePointer(vehicle)
+        
+        int hours, minutes 
+        hours, minutes = Clock.GetTimeOfDay()
+        longstring plateText
+        string_format plateText " %d %d " hours minutes
+        updateCarPlateText(pVehicle, plateText)
+    end    
+end // while
+
+
+function updateCarPlateText(pVehicle: int, plateText: string)
+    unloadCarPlateTexture(pVehicle)
+    int plateTexture = CCustomCarPlateMgr_CreatePlateTexture(plateText, -1)
+    write_memory_with_offset {address} pVehicle {offset} 0x588 {size} 4 {value} plateTexture
+end
+
+function unloadCarPlateTexture(pVehicle: int)    
+    int pCustomCarPlate = read_memory_with_offset {address} pVehicle {offset} 0x588 {size} 4
+    if is_truthy pCustomCarPlate
+    then
+        RwTextureDestroy(pCustomCarPlate)
+    end
+end

@@ -1,13 +1,13 @@
-// $sw4_health_display stores health bar in original game. Safe to use, except if "Ghetto Drive By" mission is in progress
+const screenCounter = $sw4_health_display // global variable safe to use, unless "Ghetto Drive By" mission is in progress
 
-set_onscreen_counter_flash_when_first_displayed {var_counter} $sw4_health_display {state} true
+set_onscreen_counter_flash_when_first_displayed {var_counter} screenCounter {state} true
 
-display_onscreen_counter_with_string {var_counter} $sw4_health_display {display} CounterDisplay.Bar {text} 'DEAD' // WASTED
-$sw4_health_display = 10 // start with 10%
+display_onscreen_counter_with_string {var_counter} screenCounter {display} CounterDisplay.Bar {text} 'DEAD' // WASTED
+screenCounter = 10 // start with 10%
 
 // animate the bar
-while $sw4_health_display < 100
-    $sw4_health_display += 1
+while screenCounter < 100
+    screenCounter += 1
     wait 100 
 end
 
@@ -15,4 +15,4 @@ end
 wait 1000
 
 // cleanup
-clear_onscreen_counter {var_counter} $sw4_health_display
+clear_onscreen_counter {var_counter} screenCounter

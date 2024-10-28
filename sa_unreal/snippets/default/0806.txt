@@ -1,0 +1,16 @@
+int prevKillCount = get_total_number_of_peds_killed_by_player $player1
+while true
+    wait 250
+    
+    int killCount = get_total_number_of_peds_killed_by_player $player1
+    killCount -= prevKillCount
+    
+    if
+        killCount > 0
+    then
+        print_formatted_now {format} "Another %d bites the dust!" {time} 3000 {args} killCount
+        add_one_off_sound {pos} 0.0 0.0 0.0 {soundId} ScriptSound.SoundCheckpointRed
+    end
+    
+    prevKillCount = get_total_number_of_peds_killed_by_player $player1
+end

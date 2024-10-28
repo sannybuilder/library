@@ -96,7 +96,7 @@
     "00C3": "debug_on\nbreakpoint \"testing debug_on opcode\"",
     "00C4": "debug_off\nbreakpoint \"testing debug_off opcode\" // will be ignored",
     "2100": "00C3: debug_on\n2100: breakpoint // pause game\n2100: breakpoint false // pause this script\n2100: breakpoint \"blocking\" // pause game with message\n2100: breakpoint false \"not blocking\" // pause script with message\n2100: breakpoint \"Time is: %d\" TIMERA // pause game with formatted message\n2100: breakpoint false \"Value is: ~g~%d\" 0@ // pause script with formatted message",
-    "2101": "00C3: debug_on\n\n2101: trace \"Hello world!\"\n\n0001: wait 1000\n2101: trace \"Time: %d, ~g~Variable: %d\" TIMERA 0@",
+    "2101": "debug_on\n\ntrace \"Hello world!\"\n\nwait {time} 1000\ntrace \"Time: %d, ~g~Variable: %d\" TIMERA 0@",
     "2102": "2102: log_to_file \".\\myLog.txt\" timestamp true text \"Line with timestamp prefix\"\n2102: log_to_file \".\\myLog.txt\" timestamp false text \"Now just the line. Timer value is: %d\" TIMERA\n\n2102: log_to_file \"userfiles:\\myUserLog.txt\" timestamp false text \"Log file in game saves location!\""
   },
   "default": {

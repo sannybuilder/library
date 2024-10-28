@@ -1,1 +1,18 @@
+// $sw4_health_display stores health bar in original game. Safe to use, except if "Ghetto Drive By" mission is in progress
+
+set_onscreen_counter_flash_when_first_displayed {var_counter} $sw4_health_display {state} true
+
 display_onscreen_counter_with_string {var_counter} $sw4_health_display {display} CounterDisplay.Bar {text} 'DEAD' // WASTED
+$sw4_health_display = 10 // start with 10%
+
+// animate the bar
+while $sw4_health_display < 100
+    $sw4_health_display += 1
+    wait 100 
+end
+
+// display for one more second
+wait 1000
+
+// cleanup
+clear_onscreen_counter {var_counter} $sw4_health_display

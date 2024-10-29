@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1727874566192,
-    "version": "0.85",
+    "last_update": 1730202946490,
+    "version": "0.86",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -229,7 +229,12 @@
           ],
           "name": "ACTIVATE_SCRIPTED_CAMS",
           "num_params": 2,
-          "short_desc": "Activates the scripted camera"
+          "short_desc": "Activates the scripted cameras",
+          "class": "Camera",
+          "member": "ActivateScripted",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ACTIVATE_VECTOR_MAP",
@@ -4686,7 +4691,13 @@
             }
           ],
           "name": "CLEAR_NAMED_CUTSCENE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Cutscene",
+          "member": "ClearNamed",
+          "short_desc": "Ends the specified cutscene, freeing game memory",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CLEAR_NETWORK_RESTART_NODE_GROUP_LIST",
@@ -13108,8 +13119,8 @@
         {
           "output": [
             {
-              "name": "_p1",
-              "type": "int",
+              "name": "languageId",
+              "type": "Language",
               "source": "var_any"
             }
           ],
@@ -13117,7 +13128,7 @@
           "num_params": 1,
           "class": "Game",
           "member": "GetCurrentLanguage",
-          "short_desc": "Returns the current language set in the menu language settings",
+          "short_desc": "Returns the current language",
           "attrs": {
             "is_static": true
           }
@@ -20822,7 +20833,12 @@
           ],
           "name": "INIT_CUTSCENE",
           "num_params": 1,
-          "short_desc": "Loads a cutscene with the name"
+          "short_desc": "Loads a cutscene with the name",
+          "class": "Cutscene",
+          "member": "Init",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "INIT_DEBUG_WIDGETS",
@@ -36537,7 +36553,8 @@
           "member": "SetHeading",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sets the game camera heading"
         },
         {
           "input": [
@@ -36547,7 +36564,13 @@
             }
           ],
           "name": "SET_GAME_CAM_PITCH",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Camera",
+          "member": "SetPitch",
+          "short_desc": "Sets the game camera pitch",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_GAME_CAMERA_CONTROLS_ACTIVE",
@@ -42532,7 +42555,13 @@
             }
           ],
           "name": "START_CUTSCENE_NOW",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Cutscene",
+          "member": "StartNow",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Loads and then starts the cutscene"
         },
         {
           "name": "START_END_CREDITS_MUSIC",

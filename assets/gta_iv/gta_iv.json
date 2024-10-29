@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1730202946490,
-    "version": "0.86",
+    "last_update": 1730218628225,
+    "version": "0.87",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -2398,8 +2398,8 @@
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "obj",
@@ -2408,13 +2408,15 @@
           ],
           "name": "ATTACH_CAM_TO_OBJECT",
           "num_params": 2,
-          "short_desc": "Attaches a camera to an object"
+          "short_desc": "Attaches a camera to an object",
+          "class": "Camera",
+          "member": "AttachToObject"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "ped",
@@ -2423,13 +2425,15 @@
           ],
           "name": "ATTACH_CAM_TO_PED",
           "num_params": 2,
-          "short_desc": "Attaches a camera to a pedestrian"
+          "short_desc": "Attaches a camera to a ped",
+          "class": "Camera",
+          "member": "AttachToPed"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "veh",
@@ -2438,22 +2442,26 @@
           ],
           "name": "ATTACH_CAM_TO_VEHICLE",
           "num_params": 2,
-          "short_desc": "Attaches a camera to a vehicle"
+          "short_desc": "Attaches a camera to a vehicle",
+          "class": "Camera",
+          "member": "AttachToVehicle"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Camera"
+            },
+            {
+              "name": "viewportId",
+              "type": "int"
+            }
+          ],
           "name": "ATTACH_CAM_TO_VIEWPORT",
           "num_params": 2,
           "short_desc": "Attaches a camera to a viewport",
-          "input": [
-            {
-              "name": "cam",
-              "type": "int"
-            },
-            {
-              "name": "viewportid",
-              "type": "int"
-            }
-          ]
+          "class": "Camera",
+          "member": "AttachToViewport"
         },
         {
           "input": [
@@ -3315,7 +3323,7 @@
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             },
             {
@@ -3340,7 +3348,9 @@
           "short_desc": "Checks if the specified camera has a clear line-of-sight towards the specified sphere.Environment (walls, buildings, ground) blocks the line of sight. Because the function has not been fully tested it is not known if objects, peds and vehicles block the line of sight",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Camera",
+          "member": "IsSphereVisible"
         },
         {
           "input": [
@@ -5488,15 +5498,21 @@
               "type": "int"
             }
           ],
-          "name": "CREATE_CAM",
-          "num_params": 2,
           "output": [
             {
-              "name": "camera",
+              "name": "handle",
               "type": "Camera",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_CAM",
+          "num_params": 2,
+          "class": "Camera",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          },
+          "member": "Create"
         },
         {
           "input": [
@@ -6967,7 +6983,13 @@
         },
         {
           "name": "DESTROY_ALL_CAMS",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Camera",
+          "member": "DestroyAll",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Destroys all scripted cameras"
         },
         {
           "name": "DESTROY_ALL_SCRIPT_VIEWPORTS",
@@ -6976,12 +6998,18 @@
         {
           "input": [
             {
-              "name": "camera",
-              "type": "Camera"
+              "name": "self",
+              "type": "Camera",
+              "source": "pointer"
             }
           ],
           "name": "DESTROY_CAM",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_destructor": true
+          },
+          "class": "Camera",
+          "member": "Destroy"
         },
         {
           "name": "DESTROY_MOBILE_PHONE",
@@ -11118,12 +11146,10 @@
           }
         },
         {
-          "name": "GET_CAM_FAR_CLIP",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
           ],
           "output": [
@@ -11132,49 +11158,57 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAM_FAR_CLIP",
+          "num_params": 2,
+          "class": "Camera",
+          "member": "GetFarClip"
         },
         {
-          "name": "GET_CAM_FAR_DOF",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
           ],
           "output": [
             {
-              "name": "fardof",
+              "name": "depthOfField",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAM_FAR_DOF",
+          "num_params": 2,
+          "class": "Camera",
+          "member": "GetFarDof",
+          "short_desc": "Gets the camera's far depth of field"
         },
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
+            }
+          ],
+          "output": [
+            {
+              "name": "fieldOfView",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "name": "GET_CAM_FOV",
           "num_params": 2,
-          "output": [
-            {
-              "name": "fov",
-              "type": "float",
-              "source": "var_any"
-            }
-          ]
+          "class": "Camera",
+          "member": "GetFov",
+          "short_desc": "Gets the camera's field of view"
         },
         {
-          "name": "GET_CAM_MOTION_BLUR",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
           ],
           "output": [
@@ -11183,15 +11217,17 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAM_MOTION_BLUR",
+          "num_params": 2,
+          "class": "Camera",
+          "member": "GetMotionBlur"
         },
         {
-          "name": "GET_CAM_NEAR_CLIP",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
           ],
           "output": [
@@ -11200,34 +11236,39 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAM_NEAR_CLIP",
+          "num_params": 2,
+          "class": "Camera",
+          "member": "GetNearClip"
         },
         {
-          "name": "GET_CAM_NEAR_DOF",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
           ],
           "output": [
             {
-              "name": "dof",
+              "name": "depthOfField",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAM_NEAR_DOF",
+          "num_params": 2,
+          "class": "Camera",
+          "member": "GetNearDof",
+          "short_desc": "Gets the camera's nearest depth of field"
         },
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             }
           ],
-          "name": "GET_CAM_POS",
-          "num_params": 4,
           "output": [
             {
               "name": "x",
@@ -11244,17 +11285,20 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAM_POS",
+          "num_params": 4,
+          "class": "Camera",
+          "short_desc": "Gets the camera position",
+          "member": "GetPos"
         },
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             }
           ],
-          "name": "GET_CAM_ROT",
-          "num_params": 4,
           "output": [
             {
               "name": "angleX",
@@ -11271,7 +11315,12 @@
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_CAM_ROT",
+          "num_params": 4,
+          "class": "Camera",
+          "member": "GetRot",
+          "short_desc": "Gets the camera rotation"
         },
         {
           "name": "GET_CAM_STATE",
@@ -13932,16 +13981,21 @@
           "num_params": 0
         },
         {
-          "name": "GET_GAME_CAM",
-          "num_params": 1,
-          "short_desc": "Gets the main game camera which is rotated around player's character with mouse",
           "output": [
             {
-              "name": "camera",
+              "name": "cam",
               "type": "Camera",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_GAME_CAM",
+          "num_params": 1,
+          "short_desc": "Gets the main game camera which is rotated around player's character",
+          "class": "Camera",
+          "member": "GetGameCam",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GET_GAME_CAM_CHILD",
@@ -21207,7 +21261,7 @@
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             }
           ],
@@ -21215,7 +21269,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Camera",
+          "member": "IsActive"
         },
         {
           "name": "IS_CAM_COLLIDING",
@@ -21244,7 +21300,7 @@
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             }
           ],
@@ -21252,7 +21308,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Camera",
+          "member": "IsPropagating"
         },
         {
           "name": "IS_CAM_SEQUENCE_COMPLETE",
@@ -29224,24 +29282,27 @@
           "num_params": 1
         },
         {
-          "name": "POINT_CAM_AT_CAM",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
-              "name": "camnext",
+              "name": "camNext",
               "type": "int"
             }
-          ]
+          ],
+          "name": "POINT_CAM_AT_CAM",
+          "num_params": 2,
+          "class": "Camera",
+          "member": "PointAtCam",
+          "short_desc": "Points the camera to another camera. Use UNPOINT_CAM to detach the camera"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "x",
@@ -29257,13 +29318,16 @@
             }
           ],
           "name": "POINT_CAM_AT_COORD",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Camera",
+          "member": "PointAtCoord",
+          "short_desc": "Points the camera to the coordinates. Use UNPOINT_CAM to detach the camera"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "obj",
@@ -29271,13 +29335,16 @@
             }
           ],
           "name": "POINT_CAM_AT_OBJECT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "PointAtObject",
+          "short_desc": "Points the camera to the object. Use UNPOINT_CAM to detach the camera"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "ped",
@@ -29286,13 +29353,15 @@
           ],
           "name": "POINT_CAM_AT_PED",
           "num_params": 2,
-          "short_desc": "Points a camera(param 1) to PED (param 2). After using you have to upoint camera with UNPOINT_CAM native"
+          "short_desc": "Points the camera to the ped. Use UNPOINT_CAM to detach the camera",
+          "class": "Camera",
+          "member": "PointAtPed"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "veh",
@@ -29300,7 +29369,10 @@
             }
           ],
           "name": "POINT_CAM_AT_VEHICLE",
-          "num_params": 2
+          "num_params": 2,
+          "short_desc": "Points the camera to the vehicle. Use UNPOINT_CAM to detach the camera",
+          "class": "Camera",
+          "member": "PointAtVehicle"
         },
         {
           "name": "POINT_FIXED_CAM",
@@ -32531,23 +32603,25 @@
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             },
             {
-              "name": "value",
+              "name": "active",
               "type": "bool"
             }
           ],
           "name": "SET_CAM_ACTIVE",
           "num_params": 2,
-          "short_desc": "Deactivates a specific camera (freezes it) if the second parameter is set to false"
+          "short_desc": "Deactivates a specific camera (freezes it) if the second parameter is set to false",
+          "class": "Camera",
+          "member": "SetActive"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "x",
@@ -32563,13 +32637,15 @@
             }
           ],
           "name": "SET_CAM_ATTACH_OFFSET",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Camera",
+          "member": "SetAttachOffset"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "set",
@@ -32577,7 +32653,9 @@
             }
           ],
           "name": "SET_CAM_ATTACH_OFFSET_IS_RELATIVE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetAttachOffsetIsRelative"
         },
         {
           "input": [
@@ -32588,7 +32666,12 @@
           ],
           "name": "SET_CAM_BEHIND_PED",
           "num_params": 1,
-          "short_desc": "Sets the camera behind the player"
+          "short_desc": "Sets the game camera behind the player",
+          "class": "Camera",
+          "member": "SetBehindPed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -32627,8 +32710,8 @@
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "x",
@@ -32648,13 +32731,16 @@
             }
           ],
           "name": "SET_CAM_DOF_FOCUSPOINT",
-          "num_params": 5
+          "num_params": 5,
+          "class": "Camera",
+          "member": "SetDofFocuspoint",
+          "short_desc": "Sets the depth of field focus point of the camera"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "clip",
@@ -32662,35 +32748,43 @@
             }
           ],
           "name": "SET_CAM_FAR_CLIP",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetFarClip"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
-              "name": "fardof",
+              "name": "depthOfField",
               "type": "float"
             }
           ],
           "name": "SET_CAM_FAR_DOF",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetFarDof",
+          "short_desc": "Sets the far depth of field of the camera"
         },
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             },
             {
-              "name": "fov",
+              "name": "fieldOfView",
               "type": "float"
             }
           ],
           "name": "SET_CAM_FOV",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetFov",
+          "short_desc": "Sets the field of view of the camera"
         },
         {
           "input": [
@@ -32700,7 +32794,12 @@
             }
           ],
           "name": "SET_CAM_IN_FRONT_OF_PED",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Camera",
+          "member": "SetInFrontOfPed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_CAM_INHERIT_ROLL_OBJECT",
@@ -32777,19 +32876,19 @@
         {
           "input": [
             {
-              "name": "cam0",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "cam1",
-              "type": "int"
+              "type": "Camera"
             },
             {
               "name": "cam2",
-              "type": "int"
+              "type": "Camera"
             },
             {
-              "name": "time",
+              "name": "timeInMs",
               "type": "int"
             },
             {
@@ -32798,13 +32897,16 @@
             }
           ],
           "name": "SET_CAM_INTERP_STYLE_CORE",
-          "num_params": 5
+          "num_params": 5,
+          "class": "Camera",
+          "member": "SetInterpStyleCore",
+          "short_desc": "Does interpolation between the first and second camera"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "_p2",
@@ -32824,21 +32926,26 @@
             }
           ],
           "name": "SET_CAM_INTERP_STYLE_DETAILED",
-          "num_params": 5
+          "num_params": 5,
+          "short_desc": "Configures camera interpolation",
+          "class": "Camera",
+          "member": "SetInterpStyleDetailed"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
-              "name": "blur",
+              "name": "motionBlur",
               "type": "float"
             }
           ],
           "name": "SET_CAM_MOTION_BLUR",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetMotionBlur"
         },
         {
           "input": [
@@ -32857,8 +32964,8 @@
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "clip",
@@ -32866,27 +32973,32 @@
             }
           ],
           "name": "SET_CAM_NEAR_CLIP",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetNearClip"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
-              "name": "dof",
+              "name": "depthOfField",
               "type": "float"
             }
           ],
           "name": "SET_CAM_NEAR_DOF",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetNearDof",
+          "short_desc": "Sets the nearest depth of field of the camera"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "x",
@@ -32902,13 +33014,15 @@
             }
           ],
           "name": "SET_CAM_POINT_OFFSET",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Camera",
+          "member": "SetPointOffset"
         },
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "set",
@@ -32916,12 +33030,14 @@
             }
           ],
           "name": "SET_CAM_POINT_OFFSET_IS_RELATIVE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetPointOffsetIsRelative"
         },
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             },
             {
@@ -32938,12 +33054,15 @@
             }
           ],
           "name": "SET_CAM_POS",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Camera",
+          "member": "SetPos",
+          "short_desc": "Sets the camera position"
         },
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             },
             {
@@ -32953,26 +33072,31 @@
           ],
           "name": "SET_CAM_PROPAGATE",
           "num_params": 2,
-          "short_desc": "Switches the main game view to a specific camera. Only one camera can be active at the same time"
+          "short_desc": "Switches the main game view to a specific camera. Only one camera can be active at the same time",
+          "class": "Camera",
+          "member": "SetPropagate"
         },
         {
-          "name": "SET_CAM_ROLL",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "roll",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_CAM_ROLL",
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetRoll",
+          "short_desc": "Sets the camera roll"
         },
         {
           "input": [
             {
-              "name": "camera",
+              "name": "self",
               "type": "Camera"
             },
             {
@@ -32989,7 +33113,10 @@
             }
           ],
           "name": "SET_CAM_ROT",
-          "num_params": 4
+          "num_params": 4,
+          "short_desc": "Sets the camera rotation",
+          "class": "Camera",
+          "member": "SetRot"
         },
         {
           "input": [
@@ -37193,12 +37320,18 @@
               "type": "bool"
             },
             {
-              "name": "_p2",
+              "name": "timeInMs",
               "type": "int"
             }
           ],
           "name": "SET_INTERP_FROM_GAME_TO_SCRIPT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetInterpFromGameToScript",
+          "short_desc": "Does interpolation from game camera to scripted camera",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -37207,12 +37340,18 @@
               "type": "bool"
             },
             {
-              "name": "_p2",
+              "name": "timeInMs",
               "type": "int"
             }
           ],
           "name": "SET_INTERP_FROM_SCRIPT_TO_GAME",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Camera",
+          "member": "SetInterpFromScriptToGame",
+          "short_desc": "Does interpolation from scripted camera to game camera",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -49094,12 +49233,15 @@
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
           ],
           "name": "UNATTACH_CAM",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Camera",
+          "member": "Unattach",
+          "short_desc": "Detaches the previously attached camera to an entity"
         },
         {
           "input": [
@@ -49248,13 +49390,15 @@
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
           ],
           "name": "UNPOINT_CAM",
           "num_params": 1,
-          "short_desc": "Unpoints pointed camera (for example with POINT_CAM_AT_PED)"
+          "short_desc": "Unpoints pointed camera",
+          "class": "Camera",
+          "member": "Unpoint"
         },
         {
           "name": "UNREGISTER_SCRIPT_WITH_AUDIO",

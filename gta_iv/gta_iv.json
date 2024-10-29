@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1730218628225,
-    "version": "0.87",
+    "last_update": 1730219436473,
+    "version": "0.88",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -2408,7 +2408,7 @@
           ],
           "name": "ATTACH_CAM_TO_OBJECT",
           "num_params": 2,
-          "short_desc": "Attaches a camera to an object",
+          "short_desc": "Attaches a camera to an object. Use UNATTACH_CAM to detach the camera",
           "class": "Camera",
           "member": "AttachToObject"
         },
@@ -2425,7 +2425,7 @@
           ],
           "name": "ATTACH_CAM_TO_PED",
           "num_params": 2,
-          "short_desc": "Attaches a camera to a ped",
+          "short_desc": "Attaches a camera to a ped. Use UNATTACH_CAM to detach the camera",
           "class": "Camera",
           "member": "AttachToPed"
         },
@@ -2442,7 +2442,7 @@
           ],
           "name": "ATTACH_CAM_TO_VEHICLE",
           "num_params": 2,
-          "short_desc": "Attaches a camera to a vehicle",
+          "short_desc": "Attaches a camera to a vehicle. Use UNATTACH_CAM to detach the camera",
           "class": "Camera",
           "member": "AttachToVehicle"
         },
@@ -7844,8 +7844,11 @@
           "num_params": 1,
           "short_desc": "Returns a boolean indicating if the specified camera handle is allocated in the game",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Camera",
+          "member": "DoesExist"
         },
         {
           "name": "DOES_CAMERA_EXIST_WITH_NETWORK_ID",
@@ -33121,8 +33124,8 @@
         {
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             },
             {
               "name": "_p2",
@@ -33134,7 +33137,9 @@
             }
           ],
           "name": "SET_CAM_SHAKE",
-          "num_params": 3
+          "num_params": 3,
+          "class": "Camera",
+          "member": "SetShake"
         },
         {
           "name": "SET_CAM_SPLINE_CUSTOM_SPEED_GRAPH",
@@ -36276,21 +36281,23 @@
         {
           "input": [
             {
-              "name": "cam",
-              "type": "Cam"
+              "name": "self",
+              "type": "Camera"
             },
             {
-              "name": "val",
+              "name": "value",
               "type": "float"
             },
             {
-              "name": "time",
+              "name": "timeInMs",
               "type": "int"
             }
           ],
           "name": "SET_DRUNK_CAM",
           "num_params": 3,
-          "short_desc": "Sets the specified camera to the 'drunken' mode"
+          "short_desc": "Sets the specified camera to the 'drunken' mode",
+          "class": "Camera",
+          "member": "SetDrunk"
         },
         {
           "input": [

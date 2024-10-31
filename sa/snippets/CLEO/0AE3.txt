@@ -1,0 +1,41 @@
+while true
+    wait {time} 0 // once every render frame
+
+    float x, y, z
+    x, y, z = get_active_camera_coordinates
+        
+    // iterate near objects
+    int handle = get_random_object_in_sphere_no_save_recursive {pos} x y z {radius} 50.0 {findNext} false // initialize search, get first
+    while handle <> -1 // found!
+        DRAW_OBJECT_INFO(handle) // call function for every found object
+
+        handle = get_random_object_in_sphere_no_save_recursive {pos} x y z {radius} 50.0 {findNext} true // get next
+    end
+end
+
+
+// display text at 3d coordinates
+function DRAW_OBJECT_INFO(obj :int)
+    int modelIdx = get_object_model obj
+
+    float pos[3]
+    pos[0], pos[1], pos[2] = get_object_coordinates obj
+
+    float screenPos[2]
+    float screenSize[2]
+    screenPos[0], screenPos[1], screenSize[0], screenSize[1] = convert_3d_to_screen_2d {pos} pos[0] pos[1] pos[2] {nearClip} true {farClip} true
+    
+    use_text_commands {state} true
+    
+    // calculate our font proportions
+    screenSize[0] = screenSize[1]
+    screenSize[0] *= 0.3 
+    set_text_scale {widthScale} screenSize[0] {heightScale} screenSize[1]
+    
+    set_text_centre {state} true
+    
+    set_text_colour {rgb} 255 255 0 {alpha} 255
+    set_text_edge {size} 1 {RGBA} 0 0 0 64
+    
+    display_text_formatted {offsetLeft} screenPos[0] {offsetTop} screenPos[1] {format} "%d" {args} modelIdx
+end

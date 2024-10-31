@@ -1,10 +1,16 @@
-const LockoutPlayerOnly = 3
-float x,y,z, radius=10.0
-int Car
 while true
-    wait 100
-    get_active_camera_coordinates store_to x y z
-    if get_random_car_in_sphere_no_save_recursive x y z radius findNext True skipWrecked True store_to Car
-    then lock_car_doors Car lockStatus LockoutPlayerOnly
+    wait {time} 100
+
+    float x, y, z
+    x, y, z = get_active_camera_coordinates
+    
+    int color = generate_random_int_in_range {min} 0 {max} 9
+    
+    // iterate near cars
+    int handle = get_random_car_in_sphere_no_save_recursive {pos} x y z {radius} 40.0 {findNext} true {skipWrecked} true // initialize search, get first
+    while handle <> -1 // found!
+        change_car_colour handle {color1} color {color2} color
+        
+        handle = get_random_car_in_sphere_no_save_recursive {pos} x y z {radius} 40.0 {findNext} true {skipWrecked} true // get next
     end
 end

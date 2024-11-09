@@ -3495,3 +3495,13 @@ export const Event = {
   "StuckInAir": 93,
   "DontJoinGroup": 94
 };
+export const DecisionMakerCharTemplate = {
+  "Gang": 65536,
+  "Cop": 65537,
+  "RandomNorm": 65538,
+  "RandomTough": 65539,
+  "RandomWeak": 65540,
+  "Fireman": 65541,
+  "Empty": 65542,
+  "Indoors": 65543
+};

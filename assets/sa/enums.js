@@ -3505,3 +3505,7 @@ export const DecisionMakerCharTemplate = {
   "Empty": 65542,
   "Indoors": 65543
 };
+export const DecisionMakerGroupTemplate = {
+  "Random": 65544,
+  "Random2": 65545
+};

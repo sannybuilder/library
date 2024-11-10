@@ -2676,7 +2676,8 @@ export const DecisionMakerType = {
   "Normal": 1,
   "Tough": 2,
   "Weak": 3,
-  "Steal": 4
+  "Steal": 4,
+  "Mission": 5
 };
 export const DriveByType = {
   "FixedLeft": 0,

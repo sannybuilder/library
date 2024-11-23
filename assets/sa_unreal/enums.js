@@ -1819,3 +1819,25 @@ export const Event = {
   "StuckInAir": 93,
   "DontJoinGroup": 94
 };
+export const ZoneType = {
+  "Business": 0,
+  "Desert": 1,
+  "Entertainment": 2,
+  "Countryside": 3,
+  "ResidentialRich": 4,
+  "ResidentialAverage": 5,
+  "ResidentialPoor": 6,
+  "Gangland": 7,
+  "Beach": 8,
+  "Shopping": 9,
+  "Park": 10,
+  "Industry": 11,
+  "EntertainmentBusy": 12,
+  "ShoppingBusy": 13,
+  "ShoppingPosh": 14,
+  "ResidentialRichSecluded": 15,
+  "Airport": 16,
+  "GolfClub": 17,
+  "OutOfTownFactory": 18,
+  "AirportRunway": 19
+};

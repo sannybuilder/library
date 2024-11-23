@@ -1485,3 +1485,21 @@ export const ZoneType = {
   "OutOfTownFactory": 18,
   "AirportRunway": 19
 };
+export const RaceSet = {
+  "Other": 0,
+  "Black": 1,
+  "White": 2,
+  "BlackWhite": 3,
+  "Oriental": 4,
+  "BlackOriental": 5,
+  "OrientalWhite": 6,
+  "BlackOrientalWhite": 7,
+  "Hispanic": 8,
+  "BlackHispanic": 9,
+  "HispanicWhite": 10,
+  "BlackHispanicWhite": 11,
+  "HispanicOriental": 12,
+  "BlackHispanicOriental": 13,
+  "HispanicOrientalWhite": 14,
+  "BlackHispanicOrientalWhite": 15
+};

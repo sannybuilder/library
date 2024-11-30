@@ -1,10 +1,10 @@
 debug_on // enable trace command
 
-get_script_filename -1 full_path false store_to 0@v
-trace "This script file:~w~ %s" 0@v 
+LongString name = get_script_filename {address} -1 {fullPath} false
+trace "This script file:~w~ %s" name
  
-allocate_memory size 260 store_to address 0@
-get_script_struct_named script_name 'main' store_to address 1@
-get_script_filename 1@ full_path true store_to 0@
-trace "Ohter script:~w~ %s" 0@
-free_memory 0@
+int script = get_script_struct_named {scriptName} "main"
+int str = allocate_memory {size} 260
+str = get_script_filename {address} script {fullPath} true
+trace "Ohter script:~w~ %s" str
+free_memory str

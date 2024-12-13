@@ -1,4 +1,5 @@
 int playerChar = get_player_char 0
-int entity = get_ped_pointer playerChar
-CAEWeaponAudioEntity_WeaponFire wf = entity + 0x394
-wf(22, entity, 145)
+int charPtr = get_ped_pointer playerChar
+int weaponAudioPtr = charPtr + 0x394
+const weaponType = 22 // Pistol
+CAEWeaponAudioEntity_WeaponFire(weaponAudioPtr, weaponType, charPtr, 145)

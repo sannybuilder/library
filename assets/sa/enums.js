@@ -2491,7 +2491,7 @@ export const Platform = {
   "PSP": 2,
   "IOS": 3,
   "FOS": 4,
-  "XBOX": 5,
+  "XBox": 5,
   "PS2": 6,
   "PS3": 7,
   "Mac": 8,

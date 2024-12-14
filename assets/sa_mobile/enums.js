@@ -980,7 +980,14 @@ export const DefaultTaskAllocator = {
 export const Platform = {
   "None": 0,
   "Android": 1,
-  "PSP": 2
+  "Psp": 2,
+  "Ios": 3,
+  "Fos": 4,
+  "Xbox": 5,
+  "Ps2": 6,
+  "Ps3": 7,
+  "Mac": 8,
+  "Windows": 9
 };
 export const GameVerInternal = {
   "VER_NONE": 0,

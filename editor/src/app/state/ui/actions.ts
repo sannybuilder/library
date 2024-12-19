@@ -67,6 +67,8 @@ export const displayExtensionList = createAction('[ui] display extension list');
 export const displayClassesList = createAction('[ui] display classes list');
 export const displayEnumsList = createAction('[ui] display enums list');
 export const displayDecisionTree = createAction('[ui] display decision tree');
+export const displayFilters = createAction('[ui] display filters');
+export const displayDownloads = createAction('[ui] display downloads');
 
 export const stopEditOrDisplay = createAction('[ui] stop edit or display');
 

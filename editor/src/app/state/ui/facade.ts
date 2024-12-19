@@ -37,6 +37,8 @@ import {
   switchSyntaxKind,
   toggleSnippetOnlySearch,
   toggleFunctionDeclaration,
+  displayFilters,
+  displayDownloads,
 } from './actions';
 import * as selector from './selectors';
 
@@ -221,5 +223,13 @@ export class UiFacade {
 
   toggleSnippetOnlySearch() {
     this.store$.dispatch(toggleSnippetOnlySearch())
+  }
+
+  displayFilters() {
+    this.store$.dispatch(displayFilters())
+  }
+
+  displayDownloads() {
+    this.store$.dispatch(displayDownloads())
   }
 }

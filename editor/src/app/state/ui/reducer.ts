@@ -35,6 +35,8 @@ import {
   switchSyntaxKind,
   toggleSnippetOnlySearch,
   toggleFunctionDeclaration,
+  displayFilters,
+  displayDownloads,
 } from './actions';
 
 export interface GameState {
@@ -245,6 +247,14 @@ export const uiReducer = createReducer(
   on(displayDecisionTree, (state) => ({
     ...state,
     viewMode: ViewMode.ViewDecisionTree,
+  })),
+  on(displayFilters, (state) => ({
+    ...state,
+    viewMode: ViewMode.ViewFilters,
+  })),
+  on(displayDownloads, (state) => ({
+    ...state,
+    viewMode: ViewMode.ViewDownloads,
   })),
   on(toggleSearchHelp, (state, { shouldDisplay, force }) => {
     const displaySearchHelp = force

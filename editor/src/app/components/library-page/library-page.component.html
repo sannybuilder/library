@@ -9,8 +9,25 @@
           <div
             class="col-12 col-xl-2 left-rail"
             [ngClass]="{ collapsed: sidebar.collapsed }"
+            *ngIf="screenSize >= 1200"
           >
-            <scl-download-panel [game]="game"></scl-download-panel>
+            <div class="card mb-3">
+              <div class="flex-column">
+                <button
+                  class="btn btn-block text-left"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseDownload"
+                  aria-expanded="false"
+                  aria-controls="collapseDownload"
+                >
+                  {{ "ui.layout.downloads" | translate }}
+                </button>
+                <div id="collapseDownload" class="collapse card-body">
+                  <scl-download-panel [game]="game"></scl-download-panel>
+                </div>
+              </div>
+            </div>
             <scl-filter-panel
               [game]="game"
               [viewContext]="viewContext"
@@ -50,12 +67,10 @@
               'col-xl-9': !shouldDisplayRightRail(viewMode) && sidebar.collapsed
             }"
           >
-            <div
-              class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center"
-            >
+            <div class="d-flex flex-row align-items-center">
               <nav aria-label="breadcrumb" class="mb-3 mr-auto">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
+                  <li class="breadcrumb-item" *ngIf="screenSize > 767">
                     <a routerLink="/">{{ "ui.header.home" | translate }}</a>
                   </li>
                   <li
@@ -64,8 +79,14 @@
                     aria-current="page"
                     [attr.translate]="'no'"
                   >
-                    <scl-icon [game]="game" size="16"></scl-icon>
-                    {{ game | gameTitle }}
+                    <scl-icon
+                      [game]="game"
+                      [title]="game | gameTitle"
+                      size="16"
+                    ></scl-icon>
+                    <span class="d-none d-md-inline pl-2">{{
+                      game | gameTitle
+                    }}</span>
                   </li>
 
                   <li
@@ -105,7 +126,7 @@
                 </ol>
               </nav>
 
-              <div>
+              <div class="d-flex flex-row">
                 <button
                   *ngIf="canEdit$ | async"
                   class="btn btn-outline-secondary dropdown-toggle mb-3"
@@ -113,6 +134,7 @@
                   data-offset="0,0"
                   aria-haspopup="true"
                   aria-expanded="false"
+                  [title]="'ui.layout.new' | translate"
                 >
                   <svg
                     style="margin-top: -3px"
@@ -127,7 +149,9 @@
                       d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
                     />
                   </svg>
-                  {{ "ui.layout.new" | translate }}
+                  <span class="d-none d-sm-inline">{{
+                    "ui.layout.new" | translate
+                  }}</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                   <a
@@ -163,6 +187,56 @@
                     >{{ "ui.layout.newFunction" | translate }}</a
                   >
                 </div>
+
+                <button
+                  class="btn btn-outline-secondary mb-3 ml-2"
+                  *ngIf="screenSize < 1200"
+                  (click)="displayDownloads()"
+                  [title]="'ui.layout.downloads' | translate"
+                >
+                  <svg
+                    style="margin-top: -4px"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-download"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"
+                    />
+                    <path
+                      d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"
+                    />
+                  </svg>
+                  <span class="d-none d-sm-inline pl-2">{{
+                    "ui.layout.downloads" | translate
+                  }}</span>
+                </button>
+
+                <button
+                  class="btn btn-outline-secondary mb-3 ml-2"
+                  *ngIf="screenSize < 1200"
+                  (click)="displayFilters()"
+                  [title]="'ui.layout.filter' | translate"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-filter"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"
+                    />
+                  </svg>
+                  <span class="d-none d-sm-inline pl-2">{{
+                    "ui.layout.filter" | translate
+                  }}</span>
+                </button>
               </div>
             </div>
 
@@ -242,6 +316,27 @@
             [extensionNames]="extensionNames$ | async"
             (changed)="updateGenerateJsonModel($event)"
           ></scl-json-generator>
+        </div>
+        <ng-container class="modal-footer">
+          <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+        </ng-container>
+      </scl-modal>
+
+      <scl-modal *ngIf="viewMode === ViewMode.ViewFilters">
+        <div class="modal-body">
+          <scl-filter-panel
+            [game]="game"
+            [viewContext]="viewContext"
+          ></scl-filter-panel>
+        </div>
+        <ng-container class="modal-footer">
+          <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+        </ng-container>
+      </scl-modal>
+
+      <scl-modal *ngIf="viewMode === ViewMode.ViewDownloads">
+        <div class="modal-body">
+          <scl-download-panel [game]="game"></scl-download-panel>
         </div>
         <ng-container class="modal-footer">
           <ng-container *ngTemplateOutlet="modalFooter"></ng-container>

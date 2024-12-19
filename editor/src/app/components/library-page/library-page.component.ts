@@ -496,8 +496,21 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._ui.stopEditOrDisplay();
   }
 
+  displayFilters() {
+    this._ui.displayFilters();
+  }
+
+  displayDownloads() {
+    this._ui.displayDownloads();
+  }
+
   shouldDisplayRightRail(viewMode: ViewMode) {
-    return ![ViewMode.None, ViewMode.ViewGenerateJson].includes(viewMode);
+    return ![
+      ViewMode.None,
+      ViewMode.ViewGenerateJson,
+      ViewMode.ViewFilters,
+      ViewMode.ViewDownloads,
+    ].includes(viewMode);
   }
 
   doesGameRequireOpcode(game: Game) {

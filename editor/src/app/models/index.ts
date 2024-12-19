@@ -309,6 +309,8 @@ export enum ViewMode {
   ViewAllExtensions = 'ViewAllExtensions',
   ViewDecisionTree = 'ViewDecisionTree',
   ViewGenerateJson = 'ViewGenerateJson',
+  ViewFilters = 'ViewFilters',
+  ViewDownloads = 'ViewDownloads',
 }
 
 export enum ViewContext {

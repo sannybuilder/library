@@ -727,7 +727,8 @@ export const TouchPoints = {
 };
 export const PadId = {
   "Pad1": 0,
-  "Pad2": 1
+  "Pad2": 1,
+  "Touch": 3
 };
 export const DrivingMode = {
   "StopForCars": 0,

@@ -1,0 +1,1 @@
+Positive values add money and negative values subtract money from the player. Only values that are multiple of 25 are accepted; the minimum value is 25, which is 0.25$. Values below 25 will be rounded down. For example, 120 turns into 100, which is 1$.

@@ -2859,3 +2859,16 @@ export const Language = {
   "Russian": 6,
   "Japanese": 7
 };
+export const MissionEndStingerType = {
+  "OnFoot": 0,
+  "OnFootDupe1": 1,
+  "OnFootDupe2": 2,
+  "OnFootDupe3": 3,
+  "Nerd": 4,
+  "OnFootDupe4": 5,
+  "OnFootDupe5": 6,
+  "Romance": 7,
+  "Bike": 8,
+  "Class": 9,
+  "Generic": 10
+};

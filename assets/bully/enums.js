@@ -2849,3 +2849,13 @@ export const ClothingHair = {
   "PTaper03": "P_Taper_03",
   "PTaper04": "P_Taper_04"
 };
+export const Language = {
+  "American": 0,
+  "French": 1,
+  "German": 2,
+  "Italian": 3,
+  "Spanish": 4,
+  "British": 5,
+  "Russian": 6,
+  "Japanese": 7
+};

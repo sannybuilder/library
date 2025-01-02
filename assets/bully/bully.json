@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1735850567872,
-    "version": "0.92",
+    "last_update": 1735853373021,
+    "version": "0.93",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -445,7 +445,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Sets whether the punishers react only to the player"
+          "short_desc": "Sets whether punishers (e.g., cops, prefects) will exclusively target the player or also pursue characters with punishment points"
         },
         {
           "input": [
@@ -1134,7 +1134,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Sets a minimum number of punishments points for the player"
+          "short_desc": "Sets the minimum cap on how low the player's punishment points can go"
         },
         {
           "name": "PlayerSetTakeDamageWhenAttachedToVehicle",
@@ -4424,8 +4424,20 @@
           "short_desc": "Puts character on the specified bike"
         },
         {
+          "input": [
+            {
+              "name": "points",
+              "type": "int"
+            }
+          ],
           "name": "PedSetPunishmentPoints",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Char",
+          "member": "SetPunishmentPoints",
+          "short_desc": "Sets a number of punishment points for the character",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

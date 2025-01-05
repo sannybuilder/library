@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1736094251637,
-    "version": "0.100",
+    "last_update": 1736099847382,
+    "version": "0.101",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -8841,28 +8841,110 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "collectible",
+              "type": "CollectiblesList"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "CollectiblesSetTypeAvailable",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Collectible",
+          "member": "SetAvailable",
+          "short_desc": "Sets whether a collectible type will be available to be collected (will actually spawn) or not",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "callback",
+              "type": "any"
+            }
+          ],
           "name": "CollectiblesOnCollectedCallback",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Collectible",
+          "member": "SetOnCollectedCallback",
+          "short_desc": "Sets the callback that will be triggered when a collectible is collected",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CollectiblesSetAllAsCollected",
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "collectible",
+              "type": "CollectiblesList"
+            }
+          ],
+          "output": [
+            {
+              "name": "count",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "CollectiblesGetNumCollectable",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Collectible",
+          "member": "GetMaxCount",
+          "short_desc": "Returns the maximum number of collectibles of a specific type that can be collected",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "collectible",
+              "type": "CollectiblesList"
+            }
+          ],
+          "output": [
+            {
+              "name": "count",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "CollectiblesGetNumCollected",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Collectible",
+          "member": "GetCollectedCount",
+          "short_desc": "Returns how many collectibles of a specific type were collected/destroyed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "collectible",
+              "type": "CollectiblesList"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "CollectibleOnMapEnable",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Collectible",
+          "member": "ShowOnMap",
+          "short_desc": "Sets whether the specific collectible will or not be visible on the map",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "TutorialStart",

@@ -901,18 +901,6 @@ export const TextStyle = {
   "MiddleTop": 1,
   "MiddleBottomSmall": 2
 };
-export const SpeechVolume = {
-  "Genric": "genric",
-  "Generic": "generic",
-  "Small": "small",
-  "Speech": "speech",
-  "SpeechX3": "SpeechX3",
-  "Medium": "medium",
-  "Large": "large",
-  "Xtralarge": "xtralarge",
-  "Jumbo": "jumbo",
-  "Supersize": "supersize"
-};
 export const SpeechEvent = {
   "AllyAboutToLeave": "ALLY_ABOUT_TO_LEAVE",
   "AllyAcceptAlliance": "ALLY_ACCEPT_ALLIANCE",
@@ -3227,4 +3215,16 @@ export const CollectiblesList = {
   "GgCards": 3,
   "Pumpkins": 4,
   "Tombstones": 5
+};
+export const AudioVolume = {
+  "Genric": "genric",
+  "Generic": "generic",
+  "Small": "small",
+  "Speech": "speech",
+  "SpeechX3": "SpeechX3",
+  "Medium": "medium",
+  "Large": "large",
+  "Xtralarge": "xtralarge",
+  "Jumbo": "jumbo",
+  "Supersize": "supersize"
 };

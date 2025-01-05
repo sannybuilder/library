@@ -3137,3 +3137,17 @@ export const MusicList = {
   "MsXmasJingleMiracleLow": "MS_XmasJingleMiracleLow.rsm",
   "MsXmasJingleMiracleMid": "MS_XmasJingleMiracleMid.rsm"
 };
+export const MiniObjectiveType = {
+  "ArcadeRace": 0,
+  "Unknown": 1,
+  "DestroyablesPumpkins": 3,
+  "DestroyablesTombstones": 4,
+  "DestroyablesGnome": 5,
+  "CollectibleCards": 6,
+  "GotAllCollectibles": 13,
+  "Yearbook": 14,
+  "GoKartRaces": 15,
+  "DefeatPirate": 16,
+  "CollectibleBands": 18,
+  "HalloweenStart": 19
+};

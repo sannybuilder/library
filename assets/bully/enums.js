@@ -3139,7 +3139,7 @@ export const MusicList = {
 };
 export const MiniObjectiveType = {
   "ArcadeRace": 0,
-  "Unknown": 1,
+  "Bought100Sodas": 1,
   "DestroyablesPumpkins": 3,
   "DestroyablesTombstones": 4,
   "DestroyablesGnome": 5,

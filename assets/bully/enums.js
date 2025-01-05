@@ -3138,18 +3138,18 @@ export const MusicList = {
   "MsXmasJingleMiracleMid": "MS_XmasJingleMiracleMid.rsm"
 };
 export const MiniObjectiveType = {
-  "ArcadeRace": 0,
+  "ArcadeRaceFinished": 0,
   "Bought100Sodas": 1,
-  "DestroyablesPumpkins": 3,
-  "DestroyablesTombstones": 4,
-  "DestroyablesGnome": 5,
-  "CollectibleCards": 6,
+  "CollectedAllPumpkins": 3,
+  "CollectedAllTombstones": 4,
+  "CollectedAllGnomes": 5,
+  "CollectedAllGgCards": 6,
   "GotAllCollectibles": 13,
-  "Yearbook": 14,
-  "GoKartRaces": 15,
-  "DefeatPirate": 16,
-  "CollectibleBands": 18,
-  "HalloweenStart": 19
+  "YearbookCompleted": 14,
+  "FinishedGoKartRaces": 15,
+  "DefeatedPirate": 16,
+  "CollectedAllRubberBands": 18,
+  "HalloweenStarted": 19
 };
 export const ItemModel = {
   "ClwnPant": 464,
@@ -3164,7 +3164,7 @@ export const ItemModel = {
   "BigWatch": 473,
   "GeekCard": 474,
   "FlowerGift": 475,
-  "Radio": 476,
+  "RadioTransistor": 476,
   "PaperStack": 477,
   "ChocBox": 478,
   "AdmisTicket": 479,
@@ -3219,4 +3219,12 @@ export const ItemModel = {
   "Oldmeat": 528,
   "BbagbottleInv": 529,
   "SmCargo": 530
+};
+export const CollectiblesList = {
+  "Gnomes": 0,
+  "Transistors": 1,
+  "RubberBands": 2,
+  "GgCards": 3,
+  "Pumpkins": 4,
+  "Tombstones": 5
 };

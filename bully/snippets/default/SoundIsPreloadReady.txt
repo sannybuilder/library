@@ -1,0 +1,15 @@
+// Intended to be used for big files, and in a loop to make sure it doesn't play until it actually fully loaded.
+// Preload the music
+Audio.PreloadMusicNoLoop("1-06_HoboNIS.rsm", 1);
+
+// Variable to track the start time
+var startTime = Clock.GetGameTimer();
+
+do {
+    // If the timer exceeds 7000 ms, break the loop
+    if (Clock.GetGameTimer() - startTime > 7000) {
+        break;
+    }
+} while (!Audio.IsPreloadComplete());
+
+Audio.PlayPreloadedMusic();

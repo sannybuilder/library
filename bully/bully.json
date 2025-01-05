@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1736116534958,
-    "version": "0.104",
+    "last_update": 1736118796189,
+    "version": "0.105",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -6713,8 +6713,20 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "ambienceName",
+              "type": "string"
+            }
+          ],
           "name": "SoundPlayAmbience",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Audio",
+          "member": "PlayAmbience",
+          "short_desc": "Plays an ambience sound",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -6746,47 +6758,150 @@
         },
         {
           "name": "SoundStopStream",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "StopMusic",
+          "short_desc": "Stops the current music",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundFadeoutStream",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "StopMusicWithFadeOut",
+          "short_desc": "Stops the current music, but with a fade out effect",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundFadeoutAmbience",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "StopAmbienceFadeOut",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Stops the current ambience with a fade out effect"
         },
         {
           "name": "SoundStartFireAlarm",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "StartFireAlarm",
+          "short_desc": "Starts playing the fire alarm noise",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundStopFireAlarm",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "short_desc": "Stops playing the fire alarm noise",
+          "member": "StopFireAlarm",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "musicName",
+              "type": "string"
+            },
+            {
+              "name": "volume",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            },
+            {
+              "name": "min",
+              "type": "int"
+            }
+          ],
           "name": "SoundPreloadStream",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Audio",
+          "member": "PreloadMusic",
+          "short_desc": "Preloads music, to later be played with Audio.PlayPreloadedMusic()",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundIsPreloadReady",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Checks if music haas been preloaded fully",
+          "class": "Audio",
+          "member": "IsMusicPreloadComplete",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "soundName",
+              "type": "string"
+            },
+            {
+              "name": "volume",
+              "type": "float"
+            },
+            {
+              "name": "max",
+              "type": "int"
+            },
+            {
+              "name": "min",
+              "type": "int"
+            }
+          ],
           "name": "SoundPreloadStreamNoLoop",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Audio",
+          "member": "PreloadMusicNoLoop",
+          "short_desc": "Preloads non looped music, like stingers/tunes, to later be played with Audio.PlayPreloadedMusic()",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundPlayPreloadedStream",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Plays the last preloaded music",
+          "class": "Audio",
+          "member": "PlayPreloadedMusic",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundPause",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "Pause",
+          "short_desc": "Pauses all sounds",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundContinue",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "Resume",
+          "short_desc": "Resumes playing sounds if sounds were paused",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundInitScreamer",
@@ -6803,7 +6918,7 @@
               "type": "string"
             },
             {
-              "name": "speechId",
+              "name": "speechEvent",
               "type": "SpeechEvent"
             },
             {
@@ -6830,23 +6945,80 @@
           "num_params": 7,
           "short_desc": "Makes a ped play a sound ID from a specific sound bank. Intended for NIS (Non Interactive Sequences, like cutscenes but in-game instead). Volume can be set alongside two unknown bools",
           "class": "Char",
-          "member": "PlayScriptedSpeechEvent"
+          "member": "PlaySpeech"
         },
         {
+          "input": [
+            {
+              "name": "speechName",
+              "type": "string"
+            },
+            {
+              "name": "bool",
+              "type": "bool"
+            },
+            {
+              "name": "volumeType",
+              "type": "AudioVolume"
+            }
+          ],
           "name": "SoundPlayScriptedSpeechEvent_2D",
-          "num_params": 0
+          "num_params": 3,
+          "short_desc": "Plays a ped voice",
+          "class": "Audio",
+          "member": "PlaySpeech",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "bankName",
+              "type": "string"
+            },
+            {
+              "name": "speechId",
+              "type": "int"
+            },
+            {
+              "name": "volumeType",
+              "type": "AudioVolume"
+            },
+            {
+              "name": "bool",
+              "type": "bool"
+            }
+          ],
           "name": "SoundPreloadSpeech",
-          "num_params": 0
+          "num_params": 5,
+          "class": "Char",
+          "member": "PreloadSpeech",
+          "short_desc": "Preloads a ped speech"
         },
         {
           "name": "SoundPlayPreloadedSpeech",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "PlayPreloadedSpeech",
+          "short_desc": "Plays the last preloaded speech",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundIsSpeechPreloaded",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Checks if speech sounds have been preloaded fully",
+          "class": "Audio",
+          "member": "IsSpeechPreloadComplete",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundSpeechPlaying",

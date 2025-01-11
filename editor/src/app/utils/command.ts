@@ -474,15 +474,9 @@ export function filterAttributes(
   });
 }
 
-export function filterSources(
-  game: Game,
-  viewContext: ViewContext
-) {
+export function filterSources(game: Game, viewContext: ViewContext) {
   if (viewContext === ViewContext.Code) {
-    return [
-      SourceType.any,
-      SourceType.pointer
-    ]
+    return [SourceType.any, SourceType.pointer];
   }
   const sources = [
     SourceType.any,

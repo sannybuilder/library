@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1736119512278,
-    "version": "0.106",
+    "last_update": 1736691581160,
+    "version": "0.107",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -1103,7 +1103,7 @@
               "type": "float"
             },
             {
-              "name": "interiorId",
+              "name": "areaId",
               "type": "Interior"
             }
           ],
@@ -1111,7 +1111,7 @@
           "num_params": 4,
           "short_desc": "Puts the player at the specified location with desired interior included",
           "class": "Player",
-          "member": "SetCoordinatesAndInterior",
+          "member": "SetCoordinatesAndArea",
           "attrs": {
             "is_static": true
           }
@@ -5233,12 +5233,60 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "visible",
+              "type": "bool"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "unknownState",
+              "type": "bool"
+            }
+          ],
           "name": "GeometryInstance",
-          "num_params": 0
+          "num_params": 6,
+          "class": "Prop",
+          "member": "CreateOrUpdateGeometry",
+          "short_desc": "Sets the data of a specific world entity",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "alpha",
+              "type": "float"
+            }
+          ],
           "name": "GeometryAlpha",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Prop",
+          "member": "SetAlpha",
+          "short_desc": "Sets the alpha of a prop",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "CreatePersistentEntity",
@@ -5257,8 +5305,31 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "flag",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "flagState",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "GetGeometryFlagState",
-          "num_params": 0
+          "num_params": 3,
+          "short_desc": "Gets the current state of a flag of a prop",
+          "class": "Prop",
+          "member": "GetFlag",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "LoadCutscene",
@@ -5532,8 +5603,33 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Effect"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "areaId",
+              "type": "Interior"
+            }
+          ],
           "name": "EffectRegisterInArea",
-          "num_params": 0
+          "num_params": 5,
+          "class": "Effect",
+          "member": "RegisterInArea",
+          "short_desc": "Registers a particle effect within an area (unknown exact usage)"
         },
         {
           "name": "EffectUnregisterInArea",
@@ -5544,24 +5640,114 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Effect"
+            },
+            {
+              "name": "killDelay",
+              "type": "float"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "EffectSlowKill",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Effect",
+          "member": "KillWithDelay",
+          "short_desc": "Kills an effect slowly overtime"
         },
         {
+          "input": [
+            {
+              "name": "effectName",
+              "type": "Effects"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Effect",
+              "source": "var_any"
+            }
+          ],
           "name": "EffectCreate",
-          "num_params": 0
+          "num_params": 5,
+          "class": "Effect",
+          "member": "Create",
+          "short_desc": "Creates a particle system effect at the desired position",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "name": "EffectIsRunning",
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Effect"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "name": "EffectSetPosition",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Effect",
+          "member": "SetCoordinates",
+          "short_desc": "Puts the effect at the specified location"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Effect"
+            },
+            {
+              "name": "pitch",
+              "type": "float"
+            },
+            {
+              "name": "yaw",
+              "type": "float"
+            },
+            {
+              "name": "roll",
+              "type": "float"
+            }
+          ],
           "name": "EffectSetDirection",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Effect",
+          "member": "SetAngles",
+          "short_desc": "Sets the direction of an effect"
         },
         {
           "name": "EffectSetSphereDirection",
@@ -5576,16 +5762,53 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Effect"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "EffectSetNightOnly",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Effect",
+          "member": "OnlyShowDuringNight",
+          "short_desc": "Determines wheter or not the effect only shows up during night time (8 PM - 8 AM)"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "EffectSetGymnFireOn",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Effect",
+          "member": "TheGymIsBurningEffectsEnable",
+          "short_desc": "Toggles the visibility of the The Gym is Burning particle effects",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "alpha",
+              "type": "float"
+            }
+          ],
           "name": "EffectSetGymnFireAlpha",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Effect",
+          "member": "TheGymIsBurningEffectsSetAlpha",
+          "short_desc": "Sets the alpha of The Gym Is Burning effects",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "EffectBlindedbyMud",
@@ -5596,12 +5819,60 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "areaId",
+              "type": "Interior"
+            }
+          ],
           "name": "EffectTurnOffWindowGlowInArea",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Effect",
+          "member": "DisableWindowGlowInArea",
+          "short_desc": "Enables a day time window glow effect in a specific coordinate within an area",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "areaId",
+              "type": "Interior"
+            }
+          ],
           "name": "EffectTurnOnWindowGlowInArea",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Effect",
+          "member": "EnableWindowGlowInArea",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Enables a day time window glow in a specific coordinate within an area"
         },
         {
           "input": [
@@ -5831,8 +6102,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "streamNormal",
+              "type": "bool"
+            },
+            {
+              "name": "generateCollision",
+              "type": "bool"
+            }
+          ],
           "name": "PAnimCreate",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Prop",
+          "member": "CreateAnimated",
+          "short_desc": "Creates a world geometry that can be animated (PAnim/Animated Prop)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PAnimCreateSGTarget",

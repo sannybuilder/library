@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1736693160042,
-    "version": "0.108",
+    "last_update": 1736696450591,
+    "version": "0.109",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -152,8 +152,27 @@
           "short_desc": "Returns true if the given button is being released. Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)"
         },
         {
+          "input": [
+            {
+              "name": "stick",
+              "type": "StickType"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "GetStickValue",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Pad",
+          "member": "GetStickValue",
+          "short_desc": "Returns a value from -1.0 (down/left) to 1.0 (up/right) of the given stick",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "ImportScript",

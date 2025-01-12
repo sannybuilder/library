@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1736697356660,
-    "version": "0.110",
+    "last_update": 1736713284955,
+    "version": "0.111",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -158,7 +158,7 @@
               "type": "StickType"
             },
             {
-              "name": "playerId",
+              "name": "player",
               "type": "int"
             }
           ],
@@ -173,7 +173,7 @@
           "num_params": 3,
           "class": "Pad",
           "member": "GetStickValue",
-          "short_desc": "Returns a value from -1.0 (down/left) to 1.0 (up/right) of the given stick. playerId is 0 is for player 1 and 1 is for player 2",
+          "short_desc": "Returns a value from -1.0 (down/left) to 1.0 (up/right) of the given stick. Player argument should be 0 for player1 (main device being usually keyboard) and 1 for player2 (controller if keyboard is main device)",
           "attrs": {
             "is_static": true
           }
@@ -921,8 +921,24 @@
           "short_desc": "Determines wheter or not the players can switch weapons"
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            },
+            {
+              "name": "button",
+              "type": "Button"
+            }
+          ],
           "name": "PlayerLockButtonInputsExcept",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Pad",
+          "member": "LockInputsExcept",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Sets an state where all button inputs are locked except the provided ones"
         },
         {
           "name": "PlayerSetClassSkipCount",
@@ -1127,7 +1143,7 @@
             },
             {
               "name": "areaId",
-              "type": "Interior"
+              "type": "AreaId"
             }
           ],
           "name": "PlayerSetPosXYZArea",
@@ -2027,7 +2043,7 @@
           "input": [
             {
               "name": "areaId",
-              "type": "Interior"
+              "type": "AreaId"
             }
           ],
           "name": "AreaSetVisible",
@@ -2043,7 +2059,7 @@
           "output": [
             {
               "name": "areaId",
-              "type": "Interior",
+              "type": "AreaId",
               "source": "var_any"
             }
           ],
@@ -5645,7 +5661,7 @@
             },
             {
               "name": "areaId",
-              "type": "Interior"
+              "type": "AreaId"
             }
           ],
           "name": "EffectRegisterInArea",
@@ -5857,7 +5873,7 @@
             },
             {
               "name": "areaId",
-              "type": "Interior"
+              "type": "AreaId"
             }
           ],
           "name": "EffectTurnOffWindowGlowInArea",
@@ -5885,7 +5901,7 @@
             },
             {
               "name": "areaId",
-              "type": "Interior"
+              "type": "AreaId"
             }
           ],
           "name": "EffectTurnOnWindowGlowInArea",
@@ -8928,16 +8944,40 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "string",
+              "type": "string"
+            }
+          ],
           "name": "StruggleButtonSetText",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Hud",
+          "member": "SetStruggleButtonsText",
+          "short_desc": "Sets the text for the struggle button display",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "StruggleButtonSetButton",
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "StruggleButtonSetDisplay",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Hud",
+          "member": "ShowStruggleButtons",
+          "short_desc": "Sets the visibility for the struggle button (displays text/buttons at the bottom center of the screen)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

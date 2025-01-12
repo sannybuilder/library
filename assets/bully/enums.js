@@ -4061,3 +4061,9 @@ export const AnimationGroup = {
   "XSleigh": "x_sleigh",
   "XTedy": "x_tedy"
 };
+export const StickType = {
+  "LeftHorizontal": 16,
+  "LeftVertical": 17,
+  "RightHorizontal": 18,
+  "RightVertical": 19
+};

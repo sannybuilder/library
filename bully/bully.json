@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1736691581160,
-    "version": "0.107",
+    "last_update": 1736693160042,
+    "version": "0.108",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -377,7 +377,7 @@
           "input": [
             {
               "name": "animGroup",
-              "type": "string"
+              "type": "AnimationGroup"
             }
           ],
           "name": "RequestAnimGroup",
@@ -6130,8 +6130,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PAnimExists",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Prop",
+          "member": "Exists",
+          "short_desc": "Checks if a specific prop exists",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
         },
         {
           "name": "PAnimDelete",
@@ -6187,11 +6207,29 @@
         },
         {
           "name": "PAnimShowHealthBar",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Shows the healthbar of an animated prop",
+          "class": "Prop",
+          "member": "ShowHealthbar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
           "name": "PAnimHideHealthBar",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Prop",
+          "member": "HideHealthbar",
+          "short_desc": "Hides the healthbar of an animated prop",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PAnimIsOpen",
@@ -6254,8 +6292,27 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "actionNode",
+              "type": "string"
+            },
+            {
+              "name": "actionTree",
+              "type": "string"
+            }
+          ],
           "name": "PAnimSetActionNode",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Prop",
+          "member": "PlayActionNode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PAnimResetAllDamageable",
@@ -6266,8 +6323,27 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "name": "PAnimGetHealth",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Prop",
+          "member": "GetHealth",
+          "short_desc": "Gets the current health of an animated prop",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "PAnimSetPropFlag",
@@ -6614,7 +6690,7 @@
           "input": [
             {
               "name": "animGroup",
-              "type": "string"
+              "type": "AnimationGroup"
             }
           ],
           "name": "LoadAnimationGroup",
@@ -6630,7 +6706,7 @@
           "input": [
             {
               "name": "animGroup",
-              "type": "string"
+              "type": "AnimationGroup"
             }
           ],
           "name": "UnLoadAnimationGroup",

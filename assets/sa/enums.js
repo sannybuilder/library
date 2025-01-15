@@ -3550,3 +3550,12 @@ export const RaceSet = {
   "HispanicOrientalWhite": 14,
   "BlackHispanicOrientalWhite": 15
 };
+export const FightMoves = {
+  "ClearAll": 0,
+  "Unknown1": 1,
+  "Unknown2": 2,
+  "Unknown3": 3,
+  "Unknown4": 4,
+  "Unknown5": 5,
+  "All": 6
+};

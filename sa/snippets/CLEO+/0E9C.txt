@@ -1,3 +1,10 @@
 const ModelName = "NRG500"
 int MyModel = get_model_by_name {name} ModelName
-print_help_formatted "Model ID of %s = %d" ModelName MyModel
+print_help_formatted "Model ID of %s = %d" ModelName MyModel 
+wait 3000
+
+const FakeName = "OMG999"
+if MyModel = get_model_by_name {name} FakeName
+then print_help_formatted "Model ID of %s = %d" FakeName MyModel
+else print_help_formatted "%s is not a valid model name" FakeName
+end

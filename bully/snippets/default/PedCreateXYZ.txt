@@ -1,0 +1,8 @@
+// Spawning a ped with a model that was not loaded into memory previously
+let pedName = PedModel.StudentGary;
+
+Streaming.RequestPedModel(pedName);
+wait(100)
+ped = Char.Create(pedName, spawnX, spawnY, coords.z);
+
+// It is however reccomended to instead precache the models, once, at the start of the script, not during runtime when spawning peds to avoid having to use a delay when spawning the peds.

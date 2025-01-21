@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1737473667853,
-    "version": "0.118",
+    "last_update": 1737475610157,
+    "version": "0.119",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -99,8 +99,15 @@
               "type": "Device"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "IsButtonPressed",
-          "num_params": 2,
+          "num_params": 3,
           "class": "Pad",
           "member": "IsButtonPressed",
           "attrs": {
@@ -120,8 +127,15 @@
               "type": "Device"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "IsButtonBeingPressed",
-          "num_params": 2,
+          "num_params": 3,
           "class": "Pad",
           "member": "IsButtonBeingPressed",
           "attrs": {
@@ -141,8 +155,15 @@
               "type": "Device"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "IsButtonBeingReleased",
-          "num_params": 2,
+          "num_params": 3,
           "class": "Pad",
           "member": "IsButtonBeingReleased",
           "attrs": {
@@ -487,8 +508,14 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "YearbookIsFull",
-          "num_params": 0,
+          "num_params": 1,
           "class": "Game",
           "short_desc": "Returns true if the yearbook is full",
           "member": "IsYearbookFull",
@@ -510,7 +537,7 @@
             "is_static": true
           },
           "class": "World",
-          "member": "StopPedProduction",
+          "member": "StopAmbientPedProduction",
           "short_desc": "Disables spawning of peds"
         },
         {
@@ -666,10 +693,11 @@
           "num_params": 0
         },
         {
-          "input": [
+          "output": [
             {
               "name": "vehicle",
-              "type": "Car"
+              "type": "Car",
+              "source": "var_any"
             }
           ],
           "name": "PlayerIsInVehicle",
@@ -683,10 +711,11 @@
           }
         },
         {
-          "input": [
+          "output": [
             {
               "name": "state",
-              "type": "bool"
+              "type": "bool",
+              "source": "var_any"
             }
           ],
           "name": "PlayerIsInAnyVehicle",
@@ -1053,8 +1082,15 @@
               "type": "WeaponModel"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerHasWeapon",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Player",
           "short_desc": "Returns true if player has specified weapon model",
           "member": "HasWeapon",
@@ -1192,8 +1228,15 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerFellAsleep",
-          "num_params": 0,
+          "num_params": 1,
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -1424,8 +1467,15 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "ClockIsPaused",
-          "num_params": 0,
+          "num_params": 1,
           "short_desc": "Returns true if game clock is paused",
           "class": "Clock",
           "member": "IsPaused",
@@ -1930,8 +1980,15 @@
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "CameraGetActive",
-          "num_params": 1,
+          "num_params": 2,
           "short_desc": "Returns active camera ID",
           "class": "Camera",
           "member": "GetActiveCamera",
@@ -2301,8 +2358,15 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "IsStreamingBusy",
-          "num_params": 0,
+          "num_params": 1,
           "class": "Streaming",
           "member": "IsBusy",
           "short_desc": "Returns true if the game is streaming assets",
@@ -2424,8 +2488,15 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "AreaIsLoading",
-          "num_params": 0,
+          "num_params": 1,
           "class": "World",
           "member": "IsAreaLoading",
           "short_desc": "Returns true if nearby area assets are being loaded",
@@ -2616,8 +2687,15 @@
               "type": "VehicleModel"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "VehicleRequestModel",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Streaming",
           "member": "RequestVehicleModel",
           "short_desc": "Requests a vehicle model and returns true when the model is available",
@@ -2815,8 +2893,15 @@
               "type": "VehicleModel"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "VehicleIsModel",
-          "num_params": 2,
+          "num_params": 3,
           "class": "Car",
           "member": "IsModel",
           "attrs": {
@@ -2884,8 +2969,15 @@
               "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "VehicleIsValid",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Car",
           "member": "IsValid",
           "short_desc": "Returns true if the vehicle is valid",
@@ -3305,8 +3397,15 @@
               "type": "WeaponModel"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "WeaponRequestModel",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Streaming",
           "member": "RequestWeaponModel",
           "short_desc": "Requests a weapon model and returns true when the model is available",
@@ -3326,8 +3425,15 @@
               "type": "model_char"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedRequestModel",
-          "num_params": 1,
+          "num_params": 2,
           "short_desc": "Requests a ped model and returns true when the model is available",
           "class": "Streaming",
           "attrs": {
@@ -3550,8 +3656,15 @@
               "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsInVehicle",
-          "num_params": 2,
+          "num_params": 3,
           "class": "Char",
           "member": "IsInCar",
           "short_desc": "Returns true if character is riding a specific vehicle (handle)",
@@ -3560,10 +3673,11 @@
           }
         },
         {
-          "input": [
+          "output": [
             {
               "name": "self",
-              "type": "Char"
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "name": "PedIsInAnyVehicle",
@@ -3614,8 +3728,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsTargetable",
-          "num_params": 2,
+          "num_params": 3,
           "class": "Char",
           "member": "IsTargettingPed",
           "short_desc": "Returns true if the given character is targetting the given ped.  Seems to be bugged and only works for the player targetting another ped",
@@ -3638,8 +3759,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsOnVehicle",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "IsOnVehicle",
           "short_desc": "Returns true if character is on any vehicle",
@@ -3739,8 +3867,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsDead",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "IsDead",
           "short_desc": "Returns true if the ped is dead (on the ground knocked out and with -100 health)",
@@ -3925,8 +4060,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsValid",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "IsValid",
           "short_desc": "Returns true if the given handle is a valid character",
@@ -4218,8 +4360,15 @@
               "type": "bool"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsPlaying",
-          "num_params": 3,
+          "num_params": 4,
           "class": "Char",
           "member": "IsPlayingActionNode",
           "short_desc": "Returns whether the ped is playing the given action node. It can either be a folder or a specific node. State argument determines if it should check if it is playing or not. Make sure to use Char.isValid before using this or the game will crash!",
@@ -4238,8 +4387,15 @@
               "type": "string"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedMePlaying",
-          "num_params": 2,
+          "num_params": 3,
           "short_desc": "Returns whether the ped is playing a specific action node name. Similar to IsPlayingActionNode but only the last node name is provided. State argument determines if it should check if it is playing or not. Make sure to use Char.isValid before using this or the game will crash!",
           "class": "Char",
           "member": "IsPlayingActionNodeSimple",
@@ -4299,8 +4455,15 @@
               "type": "PedFlag"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetFlag",
-          "num_params": 2,
+          "num_params": 3,
           "short_desc": "Returns true if the given ped has this flag",
           "class": "Char",
           "member": "GetFlag",
@@ -4600,8 +4763,15 @@
               "type": "WeaponModel"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedHasWeapon",
-          "num_params": 2,
+          "num_params": 3,
           "class": "Char",
           "member": "HasWeapon",
           "short_desc": "Returns true if char has specified weapon model"
@@ -4804,8 +4974,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsInCombat",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "IsInCombat",
           "short_desc": "Returns true if the ped is in combat/attacking another ped/prop",
@@ -5100,8 +5277,15 @@
               "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsFemale",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Char",
           "member": "IsFemale",
           "short_desc": "Returns true if the given ped is female (checks if ped's sex is set to 1)",
@@ -5162,8 +5346,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "weaponToCheck",
+              "type": "WeaponModel"
+            }
+          ],
+          "output": [
+            {
+              "name": "ammoCount",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "name": "PedGetAmmoCount",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Char",
+          "member": "GetWeaponAmmo",
+          "short_desc": "Returns the current ammo of a specific weapon of the char"
         },
         {
           "name": "PedSetGlobalAttitude_IgnoreTruants",
@@ -5454,11 +5658,29 @@
         },
         {
           "name": "StopAmbientPedAttacks",
-          "num_params": 0
+          "num_params": 0,
+          "class": "World",
+          "member": "StopAmbientPedAttacks",
+          "short_desc": "Stops all ambient (naturally spawned) attacks",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "SetAmbientPedsIgnoreStimuli",
-          "num_params": 0
+          "num_params": 1,
+          "class": "World",
+          "member": "AmbientPedsIgnoreStimuli",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Sets wheter or not ambient (naturally spawned) peds should ignore all stimuli"
         },
         {
           "name": "EnterNIS",
@@ -5501,8 +5723,15 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "MissionTimerHasFinished",
-          "num_params": 0,
+          "num_params": 1,
           "class": "Mission",
           "member": "HasTimerFinished",
           "short_desc": "Returns true if the mission timer has finished",
@@ -5542,8 +5771,15 @@
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerHasItem",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Player",
           "member": "HasItem",
           "short_desc": "Returns true if player has specified item model",
@@ -5608,8 +5844,21 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "WeaponEquipped",
-          "num_params": 0
+          "num_params": 1,
+          "class": "Player",
+          "member": "HasAnyWeaponEquipped",
+          "short_desc": "Returns true if the player has any weapon currently equipped",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GameGetPedStat",
@@ -6128,8 +6377,15 @@
               "type": "PickupModel"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PickupRequestModel",
-          "num_params": 1,
+          "num_params": 2,
           "short_desc": "Requests a pickup model and returns true when the model is available",
           "class": "Streaming",
           "member": "RequestPickupModel",
@@ -6620,8 +6876,15 @@
               "type": "string"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "IsMissionCompleated",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Mission",
           "member": "IsCompleted",
           "short_desc": "Returns true if the given mission was completed",
@@ -6986,8 +7249,15 @@
               "type": "MiniObjectiveType"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "MiniObjectiveGetIsComplete",
-          "num_params": 1,
+          "num_params": 2,
           "class": "MiniObjective",
           "member": "IsCompleted",
           "short_desc": "Returns true if the given mini objective was completed",
@@ -7478,7 +7748,13 @@
         },
         {
           "name": "SoundStopCurrentSpeechEvent",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Audio",
+          "member": "StopCurrentSpeechEvents",
+          "short_desc": "Stops all currently playing speech events",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SoundStopAmbiences",
@@ -7800,8 +8076,15 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "MinigameIsReady",
-          "num_params": 0,
+          "num_params": 1,
           "short_desc": "Returns true if the minigame is ready",
           "class": "Minigame",
           "member": "IsReady",
@@ -7811,8 +8094,15 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "MinigameIsActive",
-          "num_params": 0,
+          "num_params": 1,
           "class": "Minigame",
           "member": "IsActive",
           "short_desc": "Returns true if a minigame is currently active",
@@ -7822,10 +8112,17 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "MinigameIsSuccess",
-          "num_params": 0,
+          "num_params": 1,
           "class": "Minigame",
-          "member": "IsSuccess",
+          "member": "WasSuccessfullyCompleted",
           "short_desc": "Returns true if the minigame was completed successfully",
           "attrs": {
             "is_static": true,
@@ -7903,10 +8200,17 @@
           "num_params": 0
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "MinigameIsHighScore",
-          "num_params": 0,
+          "num_params": 1,
           "class": "Minigame",
-          "member": "IsHighScore",
+          "member": "ReachedNewHighScore",
           "short_desc": "Returns true if a new high score was set",
           "attrs": {
             "is_static": true,
@@ -9418,8 +9722,15 @@
               "type": "ClothingSlot"
             }
           ],
+          "output": [
+            {
+              "name": "name",
+              "type": "ClothingModel",
+              "source": "var_any"
+            }
+          ],
           "name": "ClothingGetPlayer",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Clothing",
           "member": "Get",
           "short_desc": "Returns the player's currently equipped clothing item on a specific slot",
@@ -9472,8 +9783,15 @@
               "type": "ClothingModel"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "ClothingPlayerOwns",
-          "num_params": 2,
+          "num_params": 3,
           "attrs": {
             "is_condition": true,
             "is_static": true
@@ -9489,8 +9807,15 @@
               "type": "string"
             }
           ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "ClothingIsWearingOutfit",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Clothing",
           "member": "IsWearingOutfit",
           "short_desc": "Returns true if player is wearing the specified outfit",
@@ -9500,8 +9825,15 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "ClothingIsWearingAnyOutfit",
-          "num_params": 0,
+          "num_params": 1,
           "attrs": {
             "is_condition": true,
             "is_static": true

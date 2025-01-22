@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1737475610157,
-    "version": "0.119",
+    "last_update": 1737525206957,
+    "version": "0.120",
     "url": "https://library.sannybuilder.com/#/bully"
   },
   "extensions": [
@@ -681,8 +681,27 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "trigger",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PlayerIsInTrigger",
-          "num_params": 0
+          "num_params": 2,
+          "short_desc": "Returns true if the player is inside the given trigger",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Player",
+          "member": "IsInTrigger"
         },
         {
           "name": "PlayerIsInAreaXYZ",
@@ -2118,7 +2137,7 @@
           "name": "AreaSetVisible",
           "num_params": 1,
           "class": "Streaming",
-          "member": "SetAreaVisible",
+          "member": "SetCurrentArea",
           "short_desc": "Sets the visibility of an interior area",
           "attrs": {
             "is_static": true
@@ -2135,7 +2154,7 @@
           "name": "AreaGetVisible",
           "num_params": 1,
           "class": "Streaming",
-          "member": "GetAreaVisible",
+          "member": "GetCurrentArea",
           "short_desc": "Gets the current interior ID",
           "attrs": {
             "is_static": true
@@ -2842,8 +2861,28 @@
           "short_desc": "Stops any task vehicle was performing"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "trigger",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "VehicleIsInTrigger",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Car",
+          "member": "IsInTrigger",
+          "short_desc": "Returns true if the vehicle is inside the given trigger"
         },
         {
           "input": [
@@ -3250,8 +3289,29 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "target",
+              "type": "Char"
+            },
+            {
+              "name": "int",
+              "type": "int"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedAttack",
-          "num_params": 0
+          "num_params": 4,
+          "class": "Char",
+          "member": "Attack",
+          "short_desc": "Makes the char attack another char"
         },
         {
           "name": "PedRemovePedFromIgnoreList",
@@ -3307,12 +3367,50 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "prop",
+              "type": "string"
+            }
+          ],
           "name": "PedAttackProp",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "AttackProp",
+          "short_desc": "Makes the char attack the given prop name"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "prop",
+              "type": "string"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
           "name": "PedAttackPropOffset",
-          "num_params": 0
+          "num_params": 5,
+          "class": "Char",
+          "member": "AttackPropWithOffset",
+          "short_desc": "Makes the char attack the given prop name with a coordinate offset from it"
         },
         {
           "name": "PedRemoveCurrentObjective",
@@ -4081,8 +4179,28 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "trigger",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "PedIsInTrigger",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Char",
+          "member": "IsInTrigger",
+          "short_desc": "Returns true if the char is inside the given trigger"
         },
         {
           "name": "PedRestrictToTrigger",
@@ -4142,8 +4260,21 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
           "name": "PedIgnoreAttacks",
-          "num_params": 0
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetIgnoreAttacks",
+          "short_desc": "Sets wheter or not the ped should ignore and not react to being attacked"
         },
         {
           "name": "PedIgnoreStimuli",
@@ -6288,8 +6419,31 @@
           "num_params": 0
         },
         {
+          "input": [
+            {
+              "name": "objectType",
+              "type": "PickupModel"
+            },
+            {
+              "name": "trigger",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
           "name": "ObjectTypeIsInTrigger",
-          "num_params": 0
+          "num_params": 3,
+          "class": "Pickup",
+          "member": "IsInTrigger",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns true if a pickup model is inside the given trigger"
         },
         {
           "name": "ObjectRemovePickupsInTrigger",

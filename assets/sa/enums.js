@@ -3559,3 +3559,9 @@ export const FightMoves = {
   "Unknown5": 5,
   "All": 6
 };
+export const Facing = {
+  "Forward": 0,
+  "Left": 1,
+  "Back": 2,
+  "Right": 3
+};

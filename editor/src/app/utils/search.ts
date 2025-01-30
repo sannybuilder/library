@@ -170,7 +170,11 @@ function parseQuery(searchTerms: string) {
         if (isOpcode(s) && !OPCODE_WORDS.includes(s)) {
           bucket.push(`id:${s}`);
         } else {
-          bucket.push(`contains:${s}`);
+          if (s.includes(':')) {
+            bucket.push(s);
+          } else {
+            bucket.push(`contains:${s}`);
+          }
         }
         s = '';
       }

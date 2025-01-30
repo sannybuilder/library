@@ -5,20 +5,9 @@ import Fuse, {
   IFuseOptions,
   RangeTuple,
 } from 'fuse.js';
-import {
-  get,
-  set,
-  omit,
-  cloneDeep,
-  flatMap,
-  sortBy,
-  uniqWith,
-  isEqual,
-  uniqBy,
-} from 'lodash';
+import { get, set, omit, cloneDeep, sortBy, uniqWith, isEqual } from 'lodash';
 import { Command, Game } from '../models';
 import { commandParams, isOpcode, normalizeId } from './command';
-import { doesGameRequireOpcode } from './game';
 
 export const FUSEJS_OPTIONS: IFuseOptions<Command> & {
   fusejsHighlightKey: string;
@@ -126,7 +115,7 @@ function getQueryHandlers() {
 export function abbrSearch(list: Command[], searchTerms: string) {
   let query = searchTerms.trim();
 
-  if (!query || query.length < 2 || query.includes(':')) {
+  if (!query || query.length < 3 || query.includes(':')) {
     return [];
   }
 
@@ -145,12 +134,8 @@ export function abbrSearch(list: Command[], searchTerms: string) {
   return candidates;
 }
 
-export function search(list: Command[], searchTerms: string, game: Game) {
+function parseQuery(searchTerms: string) {
   let query = searchTerms.trim();
-
-  if (!query || query.length < 3) {
-    return list;
-  }
 
   let bucket: string[] = [];
   let inQuotes = false;
@@ -182,11 +167,10 @@ export function search(list: Command[], searchTerms: string, game: Game) {
     if (sep.includes(c)) {
       // word separator
       if (s.length > 0) {
-        if (s.length < 3) {
-          // exact match for short words
-          bucket.push(`contains:${s}`);
+        if (isOpcode(s) && !OPCODE_WORDS.includes(s)) {
+          bucket.push(`id:${s}`);
         } else {
-          bucket.push(s);
+          bucket.push(`contains:${s}`);
         }
         s = '';
       }
@@ -196,32 +180,9 @@ export function search(list: Command[], searchTerms: string, game: Game) {
 
     s += c;
   }
-  const options = { ...FUSEJS_OPTIONS };
-
-  const key = doesGameRequireOpcode(game) ? 'id' : 'name';
-
-  if (
-    bucket.every(isOpcode) &&
-    !bucket.some((w) => OPCODE_WORDS.includes(w.toLowerCase()))
-  ) {
-    // multi opcode id search
-    options.threshold = 0.0;
-    return sortBy(
-      flatMap(bucket, (opcode) => {
-        const fuse = new Fuse(list, options);
-        return handleHighlight(
-          fuse.search(normalizeId(opcode)),
-          options.fusejsHighlightKey,
-          bucket
-        );
-      }),
-      key
-    );
-  }
 
   const filters: Array<[QueryFilter, string]> = [];
   const handlers = getQueryHandlers();
-  let fuzzyWords = [];
 
   for (const word of bucket) {
     const entry = handlers.find(([k, _]) => word.startsWith(k));
@@ -230,78 +191,137 @@ export function search(list: Command[], searchTerms: string, game: Game) {
       const input = word.substring(entry[0].length).toLowerCase();
       filters.push([entry[1], input]);
     } else {
-      fuzzyWords.push(word);
+      throw new Error(`Invalid search query ${word}`);
     }
   }
+  return filters;
+}
 
-  const filtered = list.filter((c) => filters.every(([h, i]) => h(c, i)));
+function scoreResult(command: Command, filters: [QueryFilter, string][]) {
+  const matches: FuseResultMatch[] = [];
+  let score = 0;
 
-  if (!fuzzyWords.length) {
-    return filtered;
-  }
+  (FUSEJS_OPTIONS.keys as Array<FuseOptionKeyObject<unknown>>).forEach(
+    ({ name, weight = 1 }) => {
+      const prop: string = get(command, name);
+      if (!prop) {
+        return;
+      }
 
-  const exactmatch = handleHighlight(
-    filtered
-      .filter((c) => {
-        return fuzzyWords.every((w) => {
-          return (
-            includes(w, c.class) ||
-            includes(w, c.member) ||
-            includes(w, c.short_desc) ||
-            includes(w, c.name) ||
-            includes(w, c.id)
-          );
-        });
-      })
-      .map((w) => {
-        const matches: FuseResultMatch[] = [];
+      const indices: RangeTuple[] = [];
+      const lowerProp = prop.toLowerCase();
 
-        (FUSEJS_OPTIONS.keys as Array<FuseOptionKeyObject<unknown>>)
-          .map((k) => k.name as string)
-          .forEach((key) => {
-            const value: string = get(w, key);
-            if (!value) {
-              return;
-            }
+      for (const [_, word] of filters) {
+        let index = lowerProp.indexOf(word.toLowerCase());
+        if (index === -1) {
+          score += weight; // punish partial results
+        }
+        while (index !== -1) {
+          score -= weight / (index + 1); // lower's better
+          indices.push([index, index + word.length - 1]);
+          index = lowerProp.indexOf(word.toLowerCase(), index + 1);
+        }
+      }
 
-            const indices: RangeTuple[] = [];
-            const lowerValue = value.toLowerCase();
+      // more consumed's better
+      const usePct =
+        filters.reduce((m, [_, { length }]) => m + length, 0) / prop.length;
+      score -= weight * usePct;
 
-            for (const word of fuzzyWords) {
-              let index = lowerValue.indexOf(word.toLowerCase());
-              while (index !== -1) {
-                indices.push([index, index + word.length]);
-                index = lowerValue.indexOf(word.toLowerCase(), index + 1);
+      if (indices.length) {
+        matches.push({ indices, key: name as string, value: prop });
+      }
+    }
+  );
+
+  return { item: command, score, matches, refIndex: 0 };
+}
+
+export function exactSearch(list: Command[], searchTerms: string, game: Game) {
+  const filters = parseQuery(searchTerms);
+  const options = { ...FUSEJS_OPTIONS };
+
+  // try to find exact match for all words
+  const fullmatch = list.filter((c) => filters.every(([h, i]) => h(c, i)));
+
+  const result = fullmatch.length
+    ? fullmatch
+    : // if some words are not found, use only some words
+      list.filter((c) => filters.some(([h, i]) => i.length > 2 && h(c, i)));
+
+  const scored = result.map((command) => scoreResult(command, filters));
+
+  return handleHighlight(scored, options.fusejsHighlightKey);
+}
+
+function fuzzySearch(list: Command[], searchTerms: string, game: Game) {
+  const filters = parseQuery(searchTerms);
+  const options = { ...FUSEJS_OPTIONS };
+
+  const fuzzymatch = list
+    .map((command) => {
+      const matches: FuseResultMatch[] = [];
+      let score = 1;
+
+      (FUSEJS_OPTIONS.keys as Array<FuseOptionKeyObject<unknown>>).forEach(
+        ({ name, weight = 1 }) => {
+          const value: string = get(command, name);
+          if (!value) {
+            return;
+          }
+
+          const indices: RangeTuple[] = [];
+          const lowerValue = value.toLowerCase();
+
+          for (const [_, word] of filters) {
+            let index = lowerValue.indexOf(word.toLowerCase());
+            if (index !== -1) {
+              indices.push([index, index + word.length]);
+              index = lowerValue.indexOf(word.toLowerCase(), index + 1);
+              score /= weight; // lower's better
+            } else {
+              const fuse = new Fuse([command], {
+                ...options,
+                keys: [{ name, weight }],
+                minMatchCharLength: word.length - 1,
+              });
+              const found = fuse.search(word);
+
+              if (found.length) {
+                for (const f of found) {
+                  for (const m of f.matches!) {
+                    for (const i of m.indices) {
+                      indices.push(i);
+                    }
+                  }
+                }
+                score *= found[0].score ?? 1; // lower's better
               }
             }
+          }
 
-            if (indices.length) {
-              matches.push({ indices, key, value });
-            }
-          });
+          if (indices.length) {
+            matches.push({ indices, key: name as string, value });
+          }
+        }
+      );
 
-        return { item: w, score: 0, matches, refIndex: 0 };
-      }),
-    options.fusejsHighlightKey,
-    fuzzyWords
-  );
+      if (matches.length > 0) {
+        return { item: command, score, matches, refIndex: 0 };
+      }
 
-  const fuse = new Fuse(filtered, options);
-  const fuzzymatch = handleHighlight(
-    fuse.search(fuzzyWords.join(' ')),
-    options.fusejsHighlightKey,
-    fuzzyWords
-  );
+      return;
+    })
 
-  return uniqBy(exactmatch.concat(fuzzymatch), key);
+    .filter(Boolean) as FuseResult<any>[];
+
+  return handleHighlight(fuzzymatch, options.fusejsHighlightKey);
 }
 
 function handleHighlight(
   result: FuseResult<any>[],
-  fusejsHighlightKey: string,
-  words: string[]
+  fusejsHighlightKey: string
 ) {
-  const wordLookup = words.map((w) => w.toLowerCase());
   return result.map((matchObject) => {
     const item = cloneDeep(matchObject.item);
     item.score = matchObject.score;
@@ -325,12 +345,6 @@ function handleHighlight(
         const startOffset = intervalStart + highlightOffset;
         const endOffset = intervalEnd + highlightOffset + 1;
         const highlightedTerm = initialValue.substring(startOffset, endOffset);
-
-        // boost exact match
-        const highlightedTermLookup = highlightedTerm.toLowerCase();
-        if (wordLookup.includes(highlightedTermLookup)) {
-          item.score *= 1e-2;
-        }
         const newValue =
           initialValue.substring(0, startOffset) +
           '<em>' +

@@ -3,7 +3,7 @@ import { flatMap, sortBy } from 'lodash';
 import {
   isPlatformMatching,
   isVersionMatching,
-  search,
+  exactSearch,
   abbrSearch,
 } from '../../utils';
 import { Attribute, Command, Game, Platform, Version } from '../../models';
@@ -165,8 +165,10 @@ export const rows = createSelector(
       return [];
     }
 
-    const result = sortBy(
-      flatMap(selected, ({ name: extension, commands }) => {
+    const filter = (
+      cb: (commands: Command[], searchTerm: string, game: Game) => Command[]
+    ) => {
+      return flatMap(selected, ({ name: extension, commands }) => {
         let filtered = filterCommands(
           commands,
           selectedAttributesOnly,
@@ -178,28 +180,33 @@ export const rows = createSelector(
         if (isSnippetOnly && game) {
           filtered = filterBySnippets(filtered, gitTree, extension, game);
         }
-        const abbrFound = abbrSearch(filtered, searchTerm);
-        if (abbrFound.length > 0) {
-          return abbrFound.map((command) => ({
-            extension,
-            command,
-            _abbrMatch: true,
-          }));
-        }
 
-        return search(filtered, searchTerm, game!).map((command) => ({
+        if (searchTerm) {
+          filtered = cb(filtered, searchTerm, game!);
+        }
+        return filtered.map((command) => ({
           extension,
           command,
-          _abbrMatch: false,
         }));
-      }),
-      'command.score'
-    );
-    if (result.find((row) => row._abbrMatch)) {
-      return result.filter((row) => row._abbrMatch);
+      });
+    };
+
+    const abbrFound = filter(abbrSearch);
+    if (abbrFound.length > 0) {
+      return abbrFound;
     }
 
-    return result;
+    // try all words, exactly as spelled first
+    const exactmatch = filter(exactSearch);
+    if (exactmatch.length > 0) {
+      return sortBy(exactmatch, 'command.score');
+    }
+
+    return [];
+
+    // our last resort, try each word individually, fuzzy when possible
+    // const fuzzymatch = filter(fuzzySearch);
+    // return sortBy(fuzzymatch, 'command.score');
   }
 );
 

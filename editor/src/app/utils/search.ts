@@ -215,7 +215,10 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
       const indices: RangeTuple[] = [];
       const lowerProp = prop.toLowerCase();
 
-      for (const [_, word] of filters) {
+      for (const [handler, word] of filters) {
+        if (handler !== ContainsHandler) {
+          continue;
+        }
         let index = lowerProp.indexOf(word.toLowerCase());
         if (index === -1) {
           score += weight; // punish partial results

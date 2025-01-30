@@ -3565,3 +3565,8 @@ export const Facing = {
   "Back": 2,
   "Right": 3
 };
+export const CarPlateDesign = {
+  "SanFierro": 0,
+  "LasVenturas": 1,
+  "LosSantos": 2
+};

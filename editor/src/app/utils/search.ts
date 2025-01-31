@@ -195,7 +195,7 @@ function parseQuery(searchTerms: string) {
       const input = word.substring(entry[0].length).toLowerCase();
       filters.push([entry[1], input]);
     } else {
-      throw new Error(`Invalid search query ${word}`);
+      filters.push([ContainsHandler, word]);
     }
   }
   return filters;
@@ -214,6 +214,7 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
 
       const indices: RangeTuple[] = [];
       const lowerProp = prop.toLowerCase();
+      let usePct = 0;
 
       for (const [handler, word] of filters) {
         if (handler !== ContainsHandler) {
@@ -228,11 +229,11 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
           indices.push([index, index + word.length - 1]);
           index = lowerProp.indexOf(word.toLowerCase(), index + 1);
         }
+
+        // more consumed's better
+        usePct += word.length / prop.length;
       }
 
-      // more consumed's better
-      const usePct =
-        filters.reduce((m, [_, { length }]) => m + length, 0) / prop.length;
       score -= weight * usePct;
 
       if (indices.length) {

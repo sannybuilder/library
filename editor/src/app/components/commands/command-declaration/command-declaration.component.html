@@ -128,8 +128,12 @@
         class="identifier"
         [attr.title]="classDesc"
         [routerLink]="['/', game, 'script', 'classes', command.class]"
-        >{{ command.class }}</a
-      >.<span class="identifier">{{ command.member }}</span>
+        [innerHTML]="command | propExtract : 'class' | sanitize"
+      ></a
+      >.<span
+        class="identifier"
+        [innerHTML]="command | propExtract : 'member' | sanitize"
+      ></span>
 
       @if (command.output?.length) {
       <span [innerHTML]="command | inputParams | sanitize"></span>

@@ -236,15 +236,22 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
       let usePct = 0;
 
       for (const [handler, word] of filters) {
-        if (handler !== ContainsHandler) {
+        let index = lowerProp.indexOf(word.toLowerCase());
+
+        if (index === -1) {
+          // don't reorder results based on custom filters
+          if (handler !== ContainsHandler) {
+            // demote partial results
+            score += weight;
+          }
+
           continue;
         }
-        let index = lowerProp.indexOf(word.toLowerCase());
-        if (index === -1) {
-          score += weight; // punish partial results
-        }
         while (index !== -1) {
-          score -= weight / (index + 1); // lower's better
+          // don't reorder results based on custom filters
+          if (handler !== ContainsHandler) {
+            score -= weight / (index + 1); // lower's better
+          }
           indices.push([index, index + word.length - 1]);
           index = lowerProp.indexOf(word.toLowerCase(), index + 1);
         }

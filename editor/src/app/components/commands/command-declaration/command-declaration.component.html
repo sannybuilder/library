@@ -156,16 +156,21 @@
         class="identifier"
         [attr.title]="classDesc"
         [routerLink]="['/', game, 'script', 'classes', command.class]"
-        >{{
+        [innerHTML]="
+          (command.attrs?.is_static || command.attrs?.is_constructor
+            ? (command | propExtract : 'class')
+            : '[' + (command | propExtract : 'class') + ']'
+          ) | sanitize
+        "
+      ></a
+      >.<span
+        class="identifier"
+        [innerHTML]="
           command.attrs?.is_static || command.attrs?.is_constructor
-            ? command.class
-            : "[" + command.class + "]"
-        }}</a
-      >.<span class="identifier">{{
-        command.attrs?.is_static || command.attrs?.is_constructor
-          ? upFirst(command.member)
-          : lowerFirst(command.member)
-      }}</span>
+            ? upFirst(command | propExtract : 'member')
+            : lowerFirst(command | propExtract : 'member')
+        "
+      ></span>
 
       <span
         [innerHTML]="

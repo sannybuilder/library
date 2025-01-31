@@ -5,6 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { omit } from 'lodash';
 import {
   doesGameRequireOpcode,
   getDefaultExtension,
@@ -56,7 +57,7 @@ export class CommandInfoComponent {
   }
 
   @Input() set command(val: Command) {
-    this._command = val;
+    this._command = omit(val, '_highlight');
     this._attrs = Object.entries(val?.attrs ?? {})
       .filter(([_, v]) => v)
       .map(([key]) => key as Attribute);

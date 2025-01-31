@@ -146,7 +146,7 @@ function parseQuery(searchTerms: string) {
   let inQuotes = false;
   let s = '';
   let prevSep = '';
-  const sep = [' ', '.', ',', '(', ')'];
+  const sep = [' ', '.', ',', '(', ')', '[', ']'];
 
   for (let c of [...query.split(''), ' ']) {
     if (c === '"') {

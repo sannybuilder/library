@@ -1,10 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { flatMap, sortBy } from 'lodash';
+import { flatMap, sortBy, uniqBy } from 'lodash';
 import {
   isPlatformMatching,
   isVersionMatching,
   exactSearch,
   abbrSearch,
+  partialSearch,
+  doesGameRequireOpcode,
 } from '../../utils';
 import { Attribute, Command, Game, Platform, Version } from '../../models';
 import { extensions } from '../extensions/selectors';
@@ -192,23 +194,29 @@ export const rows = createSelector(
     };
 
     const abbrFound = filter(abbrSearch);
-    if (abbrFound.length > 0) {
-      return abbrFound;
-    }
 
-    // try all words, exactly as spelled first
     const exactmatch = filter(exactSearch);
     if (exactmatch.length > 0) {
-      return sortBy(exactmatch, 'command.score');
+      return mergeWithAbbr(exactmatch, abbrFound, game!);
     }
 
-    return [];
-
-    // our last resort, try each word individually, fuzzy when possible
-    // const fuzzymatch = filter(fuzzySearch);
-    // return sortBy(fuzzymatch, 'command.score');
+    const partialmatch = filter(partialSearch);
+    return mergeWithAbbr(partialmatch, abbrFound, game!);
   }
 );
+
+function mergeWithAbbr<T = { command: Command; extension: string }>(
+  filtered: T[],
+  abbr: T[],
+  game: Game
+) {
+  const sorted = sortBy(filtered, 'command.score');
+  if (abbr.length > 0) {
+    const key = doesGameRequireOpcode(game) ? 'id' : 'name';
+    return uniqBy(abbr.concat(sorted), 'command.' + key);
+  }
+  return sorted;
+}
 
 function filterCommands(
   commands: Command[],

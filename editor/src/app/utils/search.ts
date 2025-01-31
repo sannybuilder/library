@@ -41,6 +41,9 @@ const match = (a: string, b?: string) =>
 const includes = (a: string, b?: string) =>
   !a || b?.toLowerCase().includes(a.toLowerCase());
 
+const starts = (a: string, b?: string) =>
+  !a || b?.toLowerCase().startsWith(a.toLowerCase());
+
 export const ConstructorHandler: QueryFilter = (c, q) => {
   return Boolean(
     c.attrs?.is_constructor && c.output?.some((o) => match(q, o.type))
@@ -101,6 +104,8 @@ function getQueryHandlers() {
     't:': TypeHandler,
     'id:': IdHandler,
     'contains:': ContainsHandler,
+    'class:': (c, q) => Boolean(match(q, c.class)),
+    'member:': (c, q) => Boolean(starts(q, c.member)),
   };
 
   const entries = Object.entries(SpecialQueryHandlers);
@@ -140,7 +145,8 @@ function parseQuery(searchTerms: string) {
   let bucket: string[] = [];
   let inQuotes = false;
   let s = '';
-  const sep = [' ', '.', ','];
+  let prevSep = '';
+  const sep = [' ', '.', ',', '(', ')'];
 
   for (let c of [...query.split(''), ' ']) {
     if (c === '"') {
@@ -167,7 +173,19 @@ function parseQuery(searchTerms: string) {
     if (sep.includes(c)) {
       // word separator
       if (s.length > 0) {
-        if (isOpcode(s) && !OPCODE_WORDS.includes(s)) {
+        // ignore content in braces
+        if (prevSep === ')') {
+          prevSep = c;
+          continue;
+        }
+        if (prevSep === '(') {
+          continue;
+        }
+        if (c === '.') {
+          bucket.push(`class:${s}`);
+        } else if (prevSep === '.') {
+          bucket.push(`member:${s}`);
+        } else if (isOpcode(s) && !OPCODE_WORDS.includes(s)) {
           bucket.push(`id:${s}`);
         } else {
           if (s.includes(':')) {
@@ -179,6 +197,7 @@ function parseQuery(searchTerms: string) {
         s = '';
       }
 
+      prevSep = c;
       continue;
     }
 
@@ -245,17 +264,27 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
   return { item: command, score, matches, refIndex: 0 };
 }
 
-export function exactSearch(list: Command[], searchTerms: string, game: Game) {
+export function exactSearch(list: Command[], searchTerms: string) {
   const filters = parseQuery(searchTerms);
   const options = { ...FUSEJS_OPTIONS };
 
   // try to find exact match for all words
-  const fullmatch = list.filter((c) => filters.every(([h, i]) => h(c, i)));
+  const result = list.filter((c) => filters.every(([h, i]) => h(c, i)));
+  const scored = result.map((command) => scoreResult(command, filters));
 
-  const result = fullmatch.length
-    ? fullmatch
-    : // if some words are not found, use only some words
-      list.filter((c) => filters.some(([h, i]) => i.length > 2 && h(c, i)));
+  return handleHighlight(scored, options.fusejsHighlightKey);
+}
+
+export function partialSearch(list: Command[], searchTerms: string) {
+  const filters = parseQuery(searchTerms);
+  const options = { ...FUSEJS_OPTIONS };
+
+  // try to find exact match for some words
+  const result = list.filter((c) =>
+    filters
+      .filter(([h, i]) => h === ContainsHandler && i.length > 2)
+      .some(([h, i]) => h(c, i))
+  );
 
   const scored = result.map((command) => scoreResult(command, filters));
 

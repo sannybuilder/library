@@ -146,9 +146,11 @@ function parseQuery(searchTerms: string) {
   let inQuotes = false;
   let s = '';
   let prevSep = '';
-  const sep = [' ', '.', ',', '(', ')', '[', ']'];
+  const sep = [' ', '.', ',', '(', ')', '[', ']', '::'];
 
-  for (let c of [...query.split(''), ' ']) {
+  const chars = [...query.split(''), ' '];
+  for (let i = 0; i < chars.length; i += 1) {
+    let c = chars[i];
     if (c === '"') {
       if (inQuotes) {
         // close exact match sequence
@@ -168,6 +170,12 @@ function parseQuery(searchTerms: string) {
       // build up exact match sequence
       s += c;
       continue;
+    }
+
+    if (c === ':' && chars[i + 1] === ':') {
+      //:: is a single token in native class::method
+      c = '::';
+      i += 1;
     }
 
     if (sep.includes(c)) {

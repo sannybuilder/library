@@ -193,7 +193,7 @@ export const rows = createSelector(
       });
     };
 
-    const abbrFound = filter(abbrSearch);
+    const abbrFound = searchTerm ? filter(abbrSearch) : [];
 
     const exactmatch = filter(exactSearch);
     if (exactmatch.length > 0) {

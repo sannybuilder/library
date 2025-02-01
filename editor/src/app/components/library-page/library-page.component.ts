@@ -210,7 +210,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onSave(viewMode: ViewMode) {
     if (viewMode === ViewMode.EditCommand) {
-      this._onSaveCommand();
+      this._onSaveCommand(false);
     }
     if (viewMode === ViewMode.EditEnum) {
       this._onSaveEnum();
@@ -228,7 +228,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onDeleteCommand(command: Command, game: Game) {
     this._extensions.markCommandsToDelete([command.name], game);
-    this._onSaveCommand();
+    this._onSaveCommand(true);
   }
 
   onCloneCommand(game: Game) {
@@ -529,8 +529,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._ui.switchSyntaxKind(syntaxKind);
   }
 
-  private _onSaveCommand() {
+  private _onSaveCommand(force: boolean) {
     if (
+      force ||
       !isEqual(this.command, this.oldCommand) ||
       this.extension !== this.oldExtension
     ) {

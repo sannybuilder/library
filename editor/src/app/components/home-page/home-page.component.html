@@ -10,9 +10,8 @@
 
       <p class="lead" [innerHTML]="'ui.homePage.extensions' | translate"></p>
 
-      <p class="lead" [innerHTML]="'ui.homePage.explore' | translate"></p>
-
       <p class="lead">{{ "ui.homePage.thanksTo" | translate }}:</p>
+
       <ul class="list-unstyled">
         <li>
           <a href="https://www.gtagmodding.com/opcode-database"
@@ -30,9 +29,36 @@
           >
         </li>
         <li>
-          <a href="https://github.com/DK22Pac/plugin-sdk">https://github.com/DK22Pac/plugin-sdk</a>
+          <a href="https://github.com/DK22Pac/plugin-sdk"
+            >https://github.com/DK22Pac/plugin-sdk</a
+          >
         </li>
       </ul>
+
+      <p class="lead" [innerHTML]="'ui.homePage.explore' | translate"></p>
+
+      <div class="card my-4">
+        <div class="card-body">
+          <h4>{{ "ui.homePage.latestNews" | translate }}:</h4>
+
+          <div *ngFor="let news of feed$ | async | slice : 0 : feedLimit">
+            <div>
+              <span class="pr-3">{{ news.date }}</span>
+              <span [innerHTML]="news.content | sanitize"></span>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <button
+              class="btn small btn-outline-secondary"
+              *ngIf="feedLimit !== 999"
+              (click)="feedLimit = 999"
+            >
+              {{ "ui.homePage.showAll" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -8,6 +8,7 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  withLatestFrom,
 } from 'rxjs/operators';
 import {
   doesGameHaveNativeDocs,
@@ -20,6 +21,7 @@ import { Config, CONFIG } from '../../../config';
 import { Game, KNOWN_LANGUAGES } from '../../../models';
 import { UiFacade, AuthFacade, GameFacade } from '../../../state';
 import { install, uninstall } from '@github/hotkey';
+import { AnalyticsService } from '../../../analytics';
 
 @Component({
   selector: 'scl-header',
@@ -57,13 +59,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _translate: TranslateService,
     private _cookies: CookieService,
     private _game: GameFacade,
+    private _analytics: AnalyticsService,
     @Inject(CONFIG) private _config: Config
   ) {}
 
   ngOnInit() {
     this.searchDebounced$
-      .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((value) => {
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        withLatestFrom(this.game$)
+      )
+      .subscribe(([value, game]) => {
+        this._analytics.trackEvent('search', { search_term: value, game });
         this._ui.updateSearch(value);
       });
 

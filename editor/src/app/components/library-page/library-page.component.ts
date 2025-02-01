@@ -210,12 +210,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onSave(viewMode: ViewMode) {
     if (viewMode === ViewMode.EditCommand) {
-      if (
-        !isEqual(this.command, this.oldCommand) ||
-        this.extension !== this.oldExtension
-      ) {
-        this._onSaveCommand();
-      }
+      this._onSaveCommand();
     }
     if (viewMode === ViewMode.EditEnum) {
       this._onSaveEnum();
@@ -535,12 +530,20 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private _onSaveCommand() {
-    this._extensions.updateCommand({
-      newExtension: this.extension!,
-      oldExtension: this.oldExtension!,
-      command: omit(this.command, FUSEJS_OPTIONS.fusejsHighlightKey) as Command,
-      updateRelated: this.updateRelatedCommands,
-    });
+    if (
+      !isEqual(this.command, this.oldCommand) ||
+      this.extension !== this.oldExtension
+    ) {
+      this._extensions.updateCommand({
+        newExtension: this.extension!,
+        oldExtension: this.oldExtension!,
+        command: omit(
+          this.command,
+          FUSEJS_OPTIONS.fusejsHighlightKey
+        ) as Command,
+        updateRelated: this.updateRelatedCommands,
+      });
+    }
     if (this.snippet !== this.oldSnippet) {
       this._snippets.updateSnippet({
         extension: this.extension!,

@@ -1,7 +1,12 @@
-request_model #WHEEL_LR1
-while not has_model_loaded #WHEEL_LR1
-  wait 0
-end
+const UPGRADE_MODEL = #WHEEL_LR1
+request_model UPGRADE_MODEL
+load_all_models_now
 
 int pCheatCar = CCheat_VehicleCheat(#MTBIKE)
-CVehicle_AddVehicleUpgrade(pCheatCar, #WHEEL_LR1)
+if 
+    pCheatCar <> 0
+then 
+    CVehicle_AddVehicleUpgrade(pCheatCar, UPGRADE_MODEL)
+else
+    print_help_formatted "~r~Vehicle cannot be spawned by cheat at this location."
+end

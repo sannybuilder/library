@@ -263,6 +263,10 @@ export function primitiveTypes(
       PrimitiveType.float,
       PrimitiveType.int,
       PrimitiveType.string,
+      PrimitiveType.model_any,
+      PrimitiveType.model_char,
+      PrimitiveType.model_object,
+      PrimitiveType.model_vehicle,
     ];
   }
   const types = [

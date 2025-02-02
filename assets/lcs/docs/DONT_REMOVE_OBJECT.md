@@ -1,0 +1,1 @@
+When a object is created inside a mission launched through LOAD_AND_LAUNCH_MISSION_INTERNAL (and LAUNCH_MISSION in GTA III and Vice City), it is added to the mission cleanup list so that calling MISSION_HAS_FINISHED marks the object as no longer needed. This command prevents that from happening by removing it from the list.

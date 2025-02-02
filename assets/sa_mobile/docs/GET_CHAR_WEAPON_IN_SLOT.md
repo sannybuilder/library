@@ -1,0 +1,1 @@
+This command gets the weapon type, ammo, and model in the weapon slot of the character. The model index is derived from the model id column in the `weapon.dat` file. If there is no weapon for that slot, the weapon type returns `0` and the model returns `-1`.

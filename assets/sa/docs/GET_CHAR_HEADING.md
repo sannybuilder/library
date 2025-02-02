@@ -1,4 +1,4 @@
-This command gets the heading (z angle) of the character.
+Here is how to map the compass direction to the heading degrees:
 
 | Compass | Degrees |
 | ------- | ------- |

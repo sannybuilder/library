@@ -42,7 +42,11 @@ export function functionParamList(
   let params = '()';
   let primitives = without(
     primitiveTypes(game, ViewContext.Code),
-    PrimitiveType.boolean
+    PrimitiveType.boolean,
+    PrimitiveType.model_any,
+    PrimitiveType.model_char,
+    PrimitiveType.model_object,
+    PrimitiveType.model_vehicle
   );
   if (command.input?.length) {
     params = braceify(

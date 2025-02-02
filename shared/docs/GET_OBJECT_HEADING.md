@@ -6,3 +6,4 @@ Here is how to map the compass direction to the heading degrees:
 | West    | 90°     |
 | South   | 180°    |
 | East    | 270°    |
+

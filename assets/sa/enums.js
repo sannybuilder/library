@@ -3570,3 +3570,6 @@ export const CarPlateDesign = {
   "LasVenturas": 1,
   "LosSantos": 2
 };
+export const DecisionMakerGroupType = {
+  "MissionNorm": 0
+};

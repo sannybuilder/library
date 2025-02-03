@@ -293,7 +293,11 @@
           <div
             class="col-xl-5 right-rail"
             [ngClass]="{ extended: sidebar.collapsed }"
-            *ngIf="shouldDisplayRightRail(viewMode) && screenSize >= 1200"
+            *ngIf="
+              shouldDisplayRightRail(viewMode) &&
+              screenSize >= 1200 &&
+              !isFullScreenMode
+            "
           >
             <ng-container *ngTemplateOutlet="rightRail"></ng-container>
             <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
@@ -301,7 +305,15 @@
         </div>
       </div>
 
-      <scl-modal *ngIf="shouldDisplayRightRail(viewMode) && screenSize < 1200" (close)="onCancel()">
+      <scl-modal
+        *ngIf="
+          shouldDisplayRightRail(viewMode) && (screenSize < 1200 || isFullScreenMode)
+        "
+        [size]="screenSize >= 1200 ? 'modal-xl' : 'modal-lg'"
+        (close)="
+          (screenSize < 1200 || isFullScreenMode) && onCancel(); isFullScreenMode = false
+        "
+      >
         <div class="modal-body">
           <ng-container *ngTemplateOutlet="rightRail"></ng-container>
         </div>
@@ -310,7 +322,10 @@
         </ng-container>
       </scl-modal>
 
-      <scl-modal *ngIf="viewMode === ViewMode.ViewGenerateJson" (close)="onCancel()">
+      <scl-modal
+        *ngIf="viewMode === ViewMode.ViewGenerateJson"
+        (close)="onCancel()"
+      >
         <div class="modal-body">
           <scl-json-generator
             [game]="game"
@@ -335,7 +350,10 @@
         </ng-container>
       </scl-modal>
 
-      <scl-modal *ngIf="viewMode === ViewMode.ViewDownloads" (close)="onCancel()">
+      <scl-modal
+        *ngIf="viewMode === ViewMode.ViewDownloads"
+        (close)="onCancel()"
+      >
         <div class="modal-body">
           <scl-download-panel [game]="game"></scl-download-panel>
         </div>
@@ -368,6 +386,30 @@
               ) | translate
             "
           ></scl-copy-button>
+
+          <scl-icon-button
+            *ngIf="
+              shouldDisplayRightRail(viewMode) &&
+              screenSize >= 1200 &&
+              !isFullScreenMode
+            "
+            icon="fullscreen"
+            [title]="'ui.shared.openFullScreenMode' | translate"
+            (clicked)="isFullScreenMode = true"
+          >
+          </scl-icon-button>
+
+          <scl-icon-button
+            *ngIf="
+              shouldDisplayRightRail(viewMode) &&
+              screenSize >= 1200 &&
+              isFullScreenMode
+            "
+            icon="fullscreen-exit"
+            [title]="'ui.shared.exitFullScreenMode' | translate"
+            (clicked)="isFullScreenMode = false"
+          >
+          </scl-icon-button>
 
           <scl-icon-button
             *ngIf="!noChanges(viewMode)"

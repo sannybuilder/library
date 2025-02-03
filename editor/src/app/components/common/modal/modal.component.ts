@@ -4,6 +4,7 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
+  Input,
 } from '@angular/core';
 import { Modal } from 'bootstrap';
 import jQuery from 'jquery';
@@ -14,11 +15,11 @@ import jQuery from 'jquery';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements AfterViewInit, OnDestroy {
+  @Input() size: string = 'modal-lg';
   @Output() close = new EventEmitter();
 
   private _handle: Modal;
   private _element: HTMLElement;
-
   private _close = this.onClose.bind(this);
 
   ngAfterViewInit() {

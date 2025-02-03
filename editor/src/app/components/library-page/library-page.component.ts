@@ -129,6 +129,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   editorHasError = false;
   generateJsonModel: GenerateJsonModel;
   updateRelatedCommands = true;
+  isFullScreenMode = false;
 
   constructor(
     private _extensions: ExtensionsFacade,

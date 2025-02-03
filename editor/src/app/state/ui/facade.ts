@@ -77,6 +77,7 @@ export class UiFacade {
   viewMode$ = this.store$.select(selector.viewMode);
   snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
   rows$ = this.store$.select(selector.rows);
+  appliedFilters$ = this.store$.select(selector.appliedFilters);
 
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);

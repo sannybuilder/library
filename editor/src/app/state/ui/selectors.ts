@@ -132,6 +132,65 @@ export const isSnippetOnly = createSelector(
   (state: UiState) => state.isSnippetOnly
 );
 
+export const appliedFilters = createSelector(
+  selectedExtensions,
+  selectedAttributesOnly,
+  selectedAttributesExcept,
+  searchTerm,
+  selectedClasses,
+  selectedPlatforms,
+  selectedVersions,
+  isSnippetOnly,
+  (
+    selectedExtensions,
+    selectedAttributesOnly,
+    selectedAttributesExcept,
+    searchTerm,
+    selectedClasses,
+    selectedPlatforms,
+    selectedVersions,
+    isSnippetOnly
+  ) => {
+
+    const query = [];
+
+    if (searchTerm) {
+      query.push({ key: 'ui.filters.withTerm', value: searchTerm });
+    } else {
+      query.push({ key: 'ui.filters.anyCommand', value: '' });
+    }
+    if (selectedExtensions && !selectedExtensions.includes('any')) {
+      query.push({ key: 'ui.filters.withExtensions', value: selectedExtensions });
+    }
+
+    if (selectedAttributesOnly.length) {
+      query.push({ key: 'ui.filters.withAttrs', value: selectedAttributesOnly });
+    }
+
+    if (selectedAttributesExcept.length) {
+      query.push({ key: 'ui.filters.withoutAttrs', value: selectedAttributesExcept });
+    }
+
+    if (selectedPlatforms && selectedPlatforms?.length > 1) {
+      query.push({ key: 'ui.filters.withPlatforms', value: selectedPlatforms });
+    }
+
+    if (selectedVersions && selectedVersions?.length > 1) {
+      query.push({ key: 'ui.filters.withVersions', value: selectedVersions });
+    }
+
+    if (selectedClasses?.length && !selectedClasses.includes('any')) {
+      query.push({ key: 'ui.filters.withClasses', value: selectedClasses });
+    }
+
+    if (isSnippetOnly) {
+      query.push({ key: 'ui.filters.withSnippet', value: '' });
+    }
+
+    return query;
+  }
+);
+
 export const rows = createSelector(
   extensions,
   selectedExtensions,

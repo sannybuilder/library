@@ -151,10 +151,14 @@
     <ng-template #noResults>
       <ng-container *ngIf="(rowsCount$ | async) === 0">
         <p>
-          {{ "ui.commandList.emptyResult" | translate }}.
-          <a href="#" (click)="resetFilters()">{{
-            "ui.commandList.emptyResultReset" | translate
-          }}</a
+          {{ "ui.filters.emptyResult" | translate }}
+          <ng-container *ngFor="let f of appliedFilters$ | async">
+            <span [innerHTML]="f.key | translate : { value: f.value }"></span>
+            {{ " " }} </ng-container
+          >.
+          {{ "ui.filters.adjustFilters" | translate }}
+          <a href="#" (click)="resetFilters()">
+            {{ "ui.filters.resetFilters" | translate }}</a
           >.
         </p>
       </ng-container>

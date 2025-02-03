@@ -301,7 +301,7 @@
         </div>
       </div>
 
-      <scl-modal *ngIf="shouldDisplayRightRail(viewMode) && screenSize < 1200">
+      <scl-modal *ngIf="shouldDisplayRightRail(viewMode) && screenSize < 1200" (close)="onCancel()">
         <div class="modal-body">
           <ng-container *ngTemplateOutlet="rightRail"></ng-container>
         </div>
@@ -310,7 +310,7 @@
         </ng-container>
       </scl-modal>
 
-      <scl-modal *ngIf="viewMode === ViewMode.ViewGenerateJson">
+      <scl-modal *ngIf="viewMode === ViewMode.ViewGenerateJson" (close)="onCancel()">
         <div class="modal-body">
           <scl-json-generator
             [game]="game"
@@ -323,7 +323,7 @@
         </ng-container>
       </scl-modal>
 
-      <scl-modal *ngIf="viewMode === ViewMode.ViewFilters">
+      <scl-modal *ngIf="viewMode === ViewMode.ViewFilters" (close)="onCancel()">
         <div class="modal-body">
           <scl-filter-panel
             [game]="game"
@@ -335,7 +335,7 @@
         </ng-container>
       </scl-modal>
 
-      <scl-modal *ngIf="viewMode === ViewMode.ViewDownloads">
+      <scl-modal *ngIf="viewMode === ViewMode.ViewDownloads" (close)="onCancel()">
         <div class="modal-body">
           <scl-download-panel [game]="game"></scl-download-panel>
         </div>

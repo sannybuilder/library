@@ -1,5 +1,12 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Modal } from 'bootstrap';
+import jQuery from 'jquery';
 
 @Component({
   selector: 'scl-modal',
@@ -7,26 +14,31 @@ import { Modal } from 'bootstrap';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements AfterViewInit, OnDestroy {
+  @Output() close = new EventEmitter();
+
   private _handle: Modal;
+  private _element: HTMLElement;
+
+  private _close = this.onClose.bind(this);
 
   ngAfterViewInit() {
-    this._handle = new Modal(document.getElementById('modal')!, {
+    this._element = document.getElementById('modal')!;
+    this._handle = new Modal(this._element, {
       backdrop: 'static',
       keyboard: true,
     });
-    this.open();
+    this._handle.show();
+
+    jQuery(this._element).on('hidden.bs.modal', this._close);
   }
 
   ngOnDestroy() {
-    this.close();
-    this._handle.dispose();
-  }
-
-  public open() {
-    this._handle.show();
-  }
-
-  public close() {
     this._handle.hide();
+    this._handle.dispose();
+    jQuery(this._element).off('hidden.bs.modal', this._close);
+  }
+
+  onClose() {
+    this.close.emit();
   }
 }

@@ -378,3 +378,8 @@ export const displayFunctionDeclaration = createSelector(
   state,
   (state: UiState) => state.displayFunctionDeclaration
 );
+
+export const isHotkeyInfoDismissed = createSelector(
+  state,
+  (state: UiState) => state.isHotkeyInfoDismissed
+);

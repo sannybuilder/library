@@ -76,6 +76,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   extensions$ = this._extensions.extensions$;
   extensionTypes$ = this._extensions.extensionTypes$;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
+  isHotkeyInfoDismissed$ = this._ui.isHotkeyInfoDismissed$;
   selectedSyntaxKind$ = this._ui.selectedSyntaxKind$;
   extensionToCreateCommands$ = this._ui.selectedExtensions$.pipe(
     withLatestFrom(this._game.viewContext$),
@@ -528,6 +529,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onChangeSyntaxKind(syntaxKind: SyntaxKind) {
     this._ui.switchSyntaxKind(syntaxKind);
+  }
+
+  dismissHotkeysInfo() {
+    this._ui.dismissHotkeysInfo();
   }
 
   private _onSaveCommand(force: boolean) {

@@ -32,6 +32,19 @@
               [game]="game"
               [viewContext]="viewContext"
             ></scl-filter-panel>
+            <div class="card mb-3" *ngIf="(isHotkeyInfoDismissed$ | async) === false">
+              <div class="card-body">
+                <scl-hotkeys-info></scl-hotkeys-info>
+
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="dismissHotkeysInfo()"
+                >
+                  {{ "ui.shared.dismiss" | translate }}
+                </button>
+              </div>
+            </div>
             <scl-quiz
               *ngIf="viewContext === ViewContext.Script"
               [game]="game"
@@ -307,11 +320,13 @@
 
       <scl-modal
         *ngIf="
-          shouldDisplayRightRail(viewMode) && (screenSize < 1200 || isFullScreenMode)
+          shouldDisplayRightRail(viewMode) &&
+          (screenSize < 1200 || isFullScreenMode)
         "
         [size]="screenSize >= 1200 ? 'modal-xl' : 'modal-lg'"
         (close)="
-          (screenSize < 1200 || isFullScreenMode) && onCancel(); isFullScreenMode = false
+          (screenSize < 1200 || isFullScreenMode) && onCancel();
+          isFullScreenMode = false
         "
       >
         <div class="modal-body">

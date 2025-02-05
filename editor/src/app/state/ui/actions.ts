@@ -110,3 +110,5 @@ export const switchSyntaxKind = createAction(
 export const toggleSnippetOnlySearch = createAction('[ui] toggle snippet only search');
 
 export const toggleFunctionDeclaration = createAction('[ui] toggle function declaration');
+
+export const dismissHotkeysInfo = createAction('[ui] dismiss hotkeys info');

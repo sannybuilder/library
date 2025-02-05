@@ -39,6 +39,7 @@ import {
   toggleFunctionDeclaration,
   displayFilters,
   displayDownloads,
+  dismissHotkeysInfo,
 } from './actions';
 import * as selector from './selectors';
 
@@ -66,6 +67,7 @@ export class UiFacade {
   displayFunctionDeclaration$ = this.store$.select(
     selector.displayFunctionDeclaration  
   );
+  isHotkeyInfoDismissed$ = this.store$.select(selector.isHotkeyInfoDismissed);
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
   selectedSyntaxKind$ = this.store$.select(selector.selectedSyntaxKind);
   currentPage$ = this.store$.select(selector.currentPage);
@@ -232,5 +234,9 @@ export class UiFacade {
 
   displayDownloads() {
     this.store$.dispatch(displayDownloads())
+  }
+
+  dismissHotkeysInfo() {
+    this.store$.dispatch(dismissHotkeysInfo());
   }
 }

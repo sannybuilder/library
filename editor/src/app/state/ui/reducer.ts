@@ -37,6 +37,7 @@ import {
   toggleFunctionDeclaration,
   displayFilters,
   displayDownloads,
+  dismissHotkeysInfo,
 } from './actions';
 
 export interface GameState {
@@ -52,6 +53,7 @@ export interface UiState {
   displayOpcodePresentation: boolean; // this should match localStorageSyncReducer in AppModule
   displayFunctionDeclaration: boolean; // this should match localStorageSyncReducer in AppModule
   isSidebarCollapsed: boolean; // this should match localStorageSyncReducer in AppModule
+  isHotkeyInfoDismissed: boolean; // this should match localStorageSyncReducer in AppModule
   selectedAttributesOnly: Attribute[];
   selectedAttributesExcept: Attribute[];
   commandToDisplayOrEdit?: Command;
@@ -95,6 +97,7 @@ export const initialState: UiState = {
   displayInlineMethodDescription: false,
   displayOpcodePresentation: false,
   displayFunctionDeclaration: true,
+  isHotkeyInfoDismissed: false,
   displaySearchHelp: false,
   isSearchHelpDismissed: false,
   isSidebarCollapsed: false,
@@ -287,6 +290,10 @@ export const uiReducer = createReducer(
   on(toggleFunctionDeclaration, (state) => ({
     ...state,
     displayFunctionDeclaration: !state.displayFunctionDeclaration,
+  })),
+  on(dismissHotkeysInfo, (state) => ({
+    ...state,
+    isHotkeyInfoDismissed: true,
   }))
 );
 

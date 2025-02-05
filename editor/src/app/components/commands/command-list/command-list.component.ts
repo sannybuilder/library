@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import {
   getDefaultExtension,
@@ -6,7 +13,13 @@ import {
   getQueryParamsForCommand,
   isSupported,
 } from '../../../utils';
-import { Command, Extension, ViewContext, Game, SyntaxKind } from '../../../models';
+import {
+  Command,
+  Extension,
+  ViewContext,
+  Game,
+  SyntaxKind,
+} from '../../../models';
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
@@ -35,7 +48,9 @@ export class CommandListComponent {
   constructor(
     private _extensions: ExtensionsFacade,
     private _snippets: SnippetsFacade,
-    private _ui: UiFacade
+    private _ui: UiFacade,
+    private _elementRef: ElementRef,
+    private _router: Router
   ) {}
 
   getSnippet(extension: string, id: string) {
@@ -77,5 +92,49 @@ export class CommandListComponent {
 
   get defaultSyntaxKind(): SyntaxKind {
     return getDefaultSyntaxKind(this.game, this.syntaxKind);
+  }
+
+  navigateToCommand(row: { extension: string; command: Command }) {
+    this._router.navigate(
+      [this.baseHref, row.extension, row.command.id || row.command.name],
+      {
+        queryParams: getQueryParamsForCommand(row.command, this.game),
+      }
+    );
+  }
+
+  // Focus on the next/previous card when the tilde key is pressed
+  @HostListener('window:keydown', ['$event'])
+  onTildePress(event: KeyboardEvent) {
+    if (document.body.classList.contains('modal-open')) {
+      return;
+    }
+    if (event.key === '`' || event.key === '~') {
+      const cards = this._elementRef.nativeElement.querySelectorAll('.card');
+      if (!cards.length) {
+        return;
+      }
+      let index = Array.from(cards).indexOf(
+        document.activeElement as HTMLElement
+      );
+
+      if (event.key === '~') {
+        index--;
+      } else {
+        index++;
+      }
+      if (index < 0) {
+        index = cards.length - 1;
+      } else if (index >= cards.length) {
+        index = 0;
+      }
+
+      cards[index].focus();
+      cards[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      });
+    }
   }
 }

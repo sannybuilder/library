@@ -104,6 +104,7 @@ import {
   SelectorComponent,
   IconButtonComponent,
   CopyButtonComponent,
+  HotkeysInfoComponent,
 } from './components/common';
 
 import {
@@ -181,7 +182,8 @@ export function localStorageSyncReducer(
           'displayInlineMethodDescription',
           'isSidebarCollapsed',
           'selectedSyntaxKind',
-          'displayFunctionDeclaration'
+          'displayFunctionDeclaration',
+          'isHotkeyInfoDismissed'
         ],
       },
     ],
@@ -241,7 +243,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     ExtensionListComponent,
     QuizComponent,
     CommandDeclarationComponent,
-    CommandSnippetComponent
+    CommandSnippetComponent,
+    HotkeysInfoComponent,
   ],
   imports: [
     BrowserModule,

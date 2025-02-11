@@ -434,7 +434,14 @@ function bumpVersion(version?: string): string {
   if (!version) {
     return '0.1';
   }
-  const parts = version.split('.');
-  const last = parts.pop() ?? '0';
-  return [...parts, isNaN(+last) ? 0 : +last + 1].join('.');
+  const [major, minor] = version.split('.');
+  let newMinor = isNaN(+minor) ? 0 : +minor;
+  let newMajor = isNaN(+major) ? 0 : +major;
+
+  newMinor += 1;
+  if (newMinor > 999) {
+    newMinor = 0;
+    newMajor += 1;
+  }
+  return [newMajor, newMinor].join('.');
 }

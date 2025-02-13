@@ -39,7 +39,8 @@ Prism.languages.sb = Prism.languages.extend('pascal', {
 });
 
 @Pipe({
-  name: 'codify',
+    name: 'codify',
+    standalone: false
 })
 export class CodifyPipe implements PipeTransform {
   transform(

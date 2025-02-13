@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Game, GenerateJsonModel } from '../../../models';
 
 @Component({
-  selector: 'scl-json-generator',
-  templateUrl: './json-generator.component.html',
-  styleUrls: ['./json-generator.component.scss'],
+    selector: 'scl-json-generator',
+    templateUrl: './json-generator.component.html',
+    styleUrls: ['./json-generator.component.scss'],
+    standalone: false
 })
 export class JsonGeneratorComponent {
   state: Record<string, boolean> = {};

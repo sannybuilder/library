@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Game } from '../../../models';
 
 @Component({
-  selector: 'scl-enum-list',
-  templateUrl: './enum-list.component.html',
-  styleUrls: ['./enum-list.component.scss'],
+    selector: 'scl-enum-list',
+    templateUrl: './enum-list.component.html',
+    styleUrls: ['./enum-list.component.scss'],
+    standalone: false
 })
 export class EnumListComponent {
   private _game: Game;

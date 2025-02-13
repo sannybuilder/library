@@ -3,7 +3,8 @@ import { Command, Game } from '../models';
 import { functionParamList } from '../utils';
 
 @Pipe({
-  name: 'functionParams',
+    name: 'functionParams',
+    standalone: false
 })
 export class FunctionParamsPipe implements PipeTransform {
   transform(command: Command, game: Game, simpleTypes: boolean): string {

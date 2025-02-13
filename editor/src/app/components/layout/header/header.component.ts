@@ -24,9 +24,10 @@ import { install, uninstall } from '@github/hotkey';
 import { AnalyticsService } from '../../../analytics';
 
 @Component({
-  selector: 'scl-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'scl-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   baseGames = getBaseGames();

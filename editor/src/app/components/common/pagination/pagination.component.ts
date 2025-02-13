@@ -8,10 +8,11 @@ import {
 import { chunk } from 'lodash';
 
 @Component({
-  selector: 'scl-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-pagination',
+    templateUrl: './pagination.component.html',
+    styleUrls: ['./pagination.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PaginationComponent {
   readonly pageSize = 100;

@@ -29,10 +29,11 @@ import {
 import { stringifySource } from '../../../pipes/params';
 
 @Component({
-  selector: 'scl-command-info',
-  templateUrl: './command-info.component.html',
-  styleUrls: ['./command-info.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-command-info',
+    templateUrl: './command-info.component.html',
+    styleUrls: ['./command-info.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CommandInfoComponent {
   ViewContext = ViewContext;

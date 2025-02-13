@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'stripPunctuation',
+    name: 'stripPunctuation',
+    standalone: false
 })
 export class StripPunctuationPipe implements PipeTransform {
   transform(value: string): string {

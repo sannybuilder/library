@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Game, ViewContext } from '../models';
 
 @Pipe({
-  name: 'linkifyClasses',
+    name: 'linkifyClasses',
+    standalone: false
 })
 export class LinkifyClassesPipe implements PipeTransform {
   transform(

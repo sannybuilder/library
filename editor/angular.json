@@ -16,12 +16,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser-esbuild",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/editor",
+            "outputPath": {
+              "base": "dist/editor"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -33,21 +36,24 @@
             "scripts": [],
             "allowedCommonJsDependencies": ["lodash", "bootstrap"],
             "stylePreprocessorOptions": {
-              "includePaths": ["src"]
+              "includePaths": [
+                "src",
+                "."
+              ]
             },
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json",
-            "externalDependencies": ["node_modules/bootstrap"]
+            "serviceWorker": "ngsw-config.json",
+            "externalDependencies": [
+              "node_modules/bootstrap"
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "dev": {
-              "buildOptimizer": false,
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": true,
               "aot": false,
               "namedChunks": true,
-              "vendorChunk": true,
               "baseHref": ""
             },
             "production": {
@@ -62,9 +68,7 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
               "aot": true,
-              "buildOptimizer": true,
               "baseHref": "",
               "budgets": [
                 {
@@ -82,7 +86,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
             "buildTarget": "editor:build",
             "proxyConfig": "proxy.conf.json"
@@ -97,7 +101,7 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "editor:build"
           }

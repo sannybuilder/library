@@ -22,10 +22,11 @@ import {
 type ClassCommand = { command: Command; extension: string };
 
 @Component({
-  selector: 'scl-class-overview',
-  templateUrl: './class-overview.component.html',
-  styleUrls: ['./class-overview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-class-overview',
+    templateUrl: './class-overview.component.html',
+    styleUrls: ['./class-overview.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ClassOverviewComponent {
   private _classCommands: ClassCommand[];

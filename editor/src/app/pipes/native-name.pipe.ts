@@ -3,7 +3,8 @@ import { Command } from '../models';
 import { PropExtractPipe } from './prop-extract.pipe';
 
 @Pipe({
-  name: 'nativeName',
+    name: 'nativeName',
+    standalone: false
 })
 export class NativeNamePipe implements PipeTransform {
   transform(command: Command): string {

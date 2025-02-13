@@ -2,9 +2,10 @@ import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject } from '@angular/core';
 
 @Component({
-  selector: 'scl-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'scl-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent {
   private _lastScroll = 0;

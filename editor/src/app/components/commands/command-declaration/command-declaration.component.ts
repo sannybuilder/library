@@ -17,10 +17,11 @@ import { Router } from '@angular/router';
 import { lowerFirst, upperFirst } from 'lodash';
 
 @Component({
-  selector: 'scl-command-declaration',
-  templateUrl: './command-declaration.component.html',
-  styleUrls: ['./command-declaration.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-command-declaration',
+    templateUrl: './command-declaration.component.html',
+    styleUrls: ['./command-declaration.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CommandDeclarationComponent {
   ViewContext = ViewContext;

@@ -3,10 +3,11 @@ import { GameIcon } from '../../../models/game-icon';
 import { Game } from '../../../models';
 
 @Component({
-  selector: 'scl-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-icon',
+    templateUrl: './icon.component.html',
+    styleUrls: ['./icon.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class IconComponent {
   GameIcon = GameIcon;

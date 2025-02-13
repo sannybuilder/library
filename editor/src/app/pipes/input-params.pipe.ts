@@ -4,7 +4,8 @@ import { inputParams } from '../utils';
 import { braceify, stringify } from './params';
 
 @Pipe({
-  name: 'inputParams',
+    name: 'inputParams',
+    standalone: false
 })
 export class InputParamsPipe implements PipeTransform {
   transform(command: Command, skipSelf: boolean = false): string {

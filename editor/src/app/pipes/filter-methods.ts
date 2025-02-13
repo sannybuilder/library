@@ -1,7 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Command } from '../models';
 
-@Pipe({ name: 'filterMethods' })
+@Pipe({
+    name: 'filterMethods',
+    standalone: false
+})
 export class FilterMethodsPipe implements PipeTransform {
   constructor() {}
 

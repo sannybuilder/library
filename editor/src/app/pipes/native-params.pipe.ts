@@ -4,7 +4,8 @@ import { inputParams } from '../utils';
 import { braceify, stringify } from './params';
 
 @Pipe({
-  name: 'nativeParams',
+    name: 'nativeParams',
+    standalone: false
 })
 export class NativeParamsPipe implements PipeTransform {
   transform(command: Command): string {

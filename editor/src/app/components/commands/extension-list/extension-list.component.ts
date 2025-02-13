@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Extension, Game, ViewContext } from 'src/app/models';
 
 @Component({
-  selector: 'scl-extension-list',
-  templateUrl: './extension-list.component.html',
-  styleUrls: ['./extension-list.component.scss'],
+    selector: 'scl-extension-list',
+    templateUrl: './extension-list.component.html',
+    styleUrls: ['./extension-list.component.scss'],
+    standalone: false
 })
 export class ExtensionListComponent {
   ViewContext = ViewContext;

@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import md from 'markdown-it';
 
 @Pipe({
-  name: 'markdown',
+    name: 'markdown',
+    standalone: false
 })
 export class MarkdownPipe implements PipeTransform {
   transform(content: string): string {

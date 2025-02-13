@@ -53,10 +53,11 @@ import {
 } from '../../utils';
 
 @Component({
-  selector: 'scl-library-page',
-  templateUrl: './library-page.component.html',
-  styleUrls: ['./library-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-library-page',
+    templateUrl: './library-page.component.html',
+    styleUrls: ['./library-page.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sidebar') sidebar: ElementRef<HTMLDivElement>;

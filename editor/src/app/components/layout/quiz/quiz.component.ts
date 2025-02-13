@@ -14,9 +14,10 @@ const ANSWER_RETAIN_TIME = 8000;
 const MAX_ITERATIONS = 50;
 
 @Component({
-  selector: 'scl-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+    selector: 'scl-quiz',
+    templateUrl: './quiz.component.html',
+    styleUrls: ['./quiz.component.scss'],
+    standalone: false
 })
 export class QuizComponent {
   Status = Status;

@@ -4,9 +4,10 @@ import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'scl-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss'],
+    selector: 'scl-home-page',
+    templateUrl: './home-page.component.html',
+    styleUrls: ['./home-page.component.scss'],
+    standalone: false
 })
 export class HomePageComponent implements OnInit {
   feed$ = this._http.get(

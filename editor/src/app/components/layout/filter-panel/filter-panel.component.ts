@@ -19,10 +19,11 @@ import { ExtensionsFacade, UiFacade } from '../../../state';
 import { filterAttributes } from '../../../utils';
 
 @Component({
-  selector: 'scl-filter-panel',
-  templateUrl: './filter-panel.component.html',
-  styleUrls: ['./filter-panel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-filter-panel',
+    templateUrl: './filter-panel.component.html',
+    styleUrls: ['./filter-panel.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FilterPanelComponent {
   private _game: Game;

@@ -10,9 +10,10 @@ import { Modal } from 'bootstrap';
 import jQuery from 'jquery';
 
 @Component({
-  selector: 'scl-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+    selector: 'scl-modal',
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.scss'],
+    standalone: false
 })
 export class ModalComponent implements AfterViewInit, OnDestroy {
   @Input() size: string = 'modal-lg';

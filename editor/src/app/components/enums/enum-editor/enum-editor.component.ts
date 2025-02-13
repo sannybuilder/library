@@ -35,10 +35,11 @@ type ErrorType =
   | 'invalidEnumFieldName';
 
 @Component({
-  selector: 'scl-enum-editor',
-  templateUrl: './enum-editor.component.html',
-  styleUrls: ['./enum-editor.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-enum-editor',
+    templateUrl: './enum-editor.component.html',
+    styleUrls: ['./enum-editor.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class EnumEditorComponent {
   private _enumToEdit: EnumRaw;

@@ -10,10 +10,11 @@ import {
 } from '../../../models';
 
 @Component({
-  selector: 'scl-download-panel',
-  templateUrl: './download-panel.component.html',
-  styleUrls: ['./download-panel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-download-panel',
+    templateUrl: './download-panel.component.html',
+    styleUrls: ['./download-panel.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DownloadPanelComponent {
   private _game: Game;

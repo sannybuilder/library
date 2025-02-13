@@ -4,10 +4,11 @@ import { Command, Extension, ViewContext, Game } from '../../../models';
 import { UiFacade } from 'src/app/state';
 
 @Component({
-  selector: 'scl-command-snippet',
-  templateUrl: './command-snippet.component.html',
-  styleUrls: ['./command-snippet.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-command-snippet',
+    templateUrl: './command-snippet.component.html',
+    styleUrls: ['./command-snippet.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CommandSnippetComponent {
   ViewContext = ViewContext;

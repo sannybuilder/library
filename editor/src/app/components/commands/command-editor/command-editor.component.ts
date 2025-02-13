@@ -103,10 +103,11 @@ const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
 const SELF = 'self';
 
 @Component({
-  selector: 'scl-command-editor',
-  templateUrl: './command-editor.component.html',
-  styleUrls: ['./command-editor.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-command-editor',
+    templateUrl: './command-editor.component.html',
+    styleUrls: ['./command-editor.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CommandEditorComponent implements OnInit {
   @ViewChild('snippetText') snippetText: ElementRef<HTMLTextAreaElement>;

@@ -3,10 +3,11 @@ import { isStringEnum } from '../../../utils';
 import { EnumRaw, Game } from '../../../models';
 
 @Component({
-  selector: 'scl-enum-overview',
-  templateUrl: './enum-overview.component.html',
-  styleUrls: ['./enum-overview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-enum-overview',
+    templateUrl: './enum-overview.component.html',
+    styleUrls: ['./enum-overview.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class EnumOverviewComponent {
   private _enumToView: EnumRaw;

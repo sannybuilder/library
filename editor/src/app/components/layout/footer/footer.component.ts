@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { UiFacade, ChangesFacade, ExtensionsFacade } from '../../../state';
 
 @Component({
-  selector: 'scl-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+    selector: 'scl-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss'],
+    standalone: false
 })
 export class FooterComponent {
   lastUpdate$ = this._extensions.lastUpdate$;

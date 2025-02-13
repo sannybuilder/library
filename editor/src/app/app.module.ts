@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, inject, NgModule } from '@angular/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import {
@@ -331,12 +331,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   providers: [
     CookieService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: loadTranslations,
-      deps: [TranslateService, CookieService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+        const initializerFn = (loadTranslations)(inject(TranslateService), inject(CookieService));
+        return initializerFn();
+      }),
     provideHttpClient(withInterceptorsFromDi()),
   ],
   bootstrap: [AppComponent],

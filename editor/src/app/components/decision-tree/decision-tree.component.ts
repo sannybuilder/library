@@ -8,9 +8,10 @@ import { ExtensionsFacade, TreeFacade } from '../../state';
 import { getBaseGames, isThisNodeTerminal } from '../../utils';
 
 @Component({
-  selector: 'scl-decision-tree',
-  templateUrl: './decision-tree.component.html',
-  styleUrls: ['./decision-tree.component.scss'],
+    selector: 'scl-decision-tree',
+    templateUrl: './decision-tree.component.html',
+    styleUrls: ['./decision-tree.component.scss'],
+    standalone: false
 })
 export class DecisionTreeComponent {
   GameTitle = GameTitle;

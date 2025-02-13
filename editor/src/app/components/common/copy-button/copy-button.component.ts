@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'scl-copy-button',
-  templateUrl: './copy-button.component.html',
-  styleUrls: ['./copy-button.component.scss'],
+    selector: 'scl-copy-button',
+    templateUrl: './copy-button.component.html',
+    styleUrls: ['./copy-button.component.scss'],
+    standalone: false
 })
 export class CopyButtonComponent {
   private _icon: string;

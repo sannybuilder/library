@@ -8,7 +8,8 @@ import {
 } from './params';
 
 @Pipe({
-  name: 'opcodeParams',
+    name: 'opcodeParams',
+    standalone: false
 })
 export class OpcodeParamsPipe implements PipeTransform {
   transform(command: Command): string {

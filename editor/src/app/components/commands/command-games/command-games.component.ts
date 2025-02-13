@@ -9,10 +9,11 @@ import {
 } from '../../../models';
 
 @Component({
-  selector: 'scl-command-games',
-  templateUrl: './command-games.component.html',
-  styleUrls: ['./command-games.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-command-games',
+    templateUrl: './command-games.component.html',
+    styleUrls: ['./command-games.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CommandGamesComponent {
   GameTitle = GameTitle;

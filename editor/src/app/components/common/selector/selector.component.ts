@@ -11,10 +11,11 @@ interface Choice {
   value: string;
 }
 @Component({
-  selector: 'scl-selector',
-  templateUrl: './selector.component.html',
-  styleUrls: ['./selector.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'scl-selector',
+    templateUrl: './selector.component.html',
+    styleUrls: ['./selector.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SelectorComponent {
   private _choicesUi: Choice[];

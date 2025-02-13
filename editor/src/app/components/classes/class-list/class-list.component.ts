@@ -7,9 +7,10 @@ import {
 import { getDefaultExtension } from '../../../utils';
 
 @Component({
-  selector: 'scl-class-list',
-  templateUrl: './class-list.component.html',
-  styleUrls: ['./class-list.component.scss'],
+    selector: 'scl-class-list',
+    templateUrl: './class-list.component.html',
+    styleUrls: ['./class-list.component.scss'],
+    standalone: false
 })
 export class ClassListComponent {
   ViewContext = ViewContext;

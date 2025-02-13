@@ -3,7 +3,8 @@ import { Command } from '../models';
 import { stringifyCommandWithOperator } from '../utils';
 
 @Pipe({
-  name: 'expressify',
+    name: 'expressify',
+    standalone: false
 })
 export class ExpressifyPipe implements PipeTransform {
   transform(command: Command): string {

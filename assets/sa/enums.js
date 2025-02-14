@@ -3573,3 +3573,9 @@ export const CarPlateDesign = {
 export const DecisionMakerGroupType = {
   "MissionNorm": 0
 };
+export const Level = {
+  "Generic": 0,
+  "LosAngeles": 1,
+  "SanFrancisco": 2,
+  "LasVegas": 3
+};

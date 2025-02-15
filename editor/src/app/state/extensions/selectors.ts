@@ -92,7 +92,7 @@ export const extensionTypes = createSelector(
       return m;
     }, new Set());
 
-    return [...set ?? []];
+    return [...(set ?? [])];
   }
 );
 
@@ -154,7 +154,11 @@ export const commandRelated = createSelector(
     const variations = makeVariations(
       name,
       {
-        starters: [['GET_', 'SET_']],
+        starters: [
+          ['GET_', 'SET_'],
+          ['READ_', 'WRITE_'],
+          ['CREATE_', 'DELETE_'],
+        ],
         endings: [
           ['_CHAR', '_CAR', '_PLAYER', '_OBJECT'],
           ['_ON', '_OFF'],
@@ -179,9 +183,32 @@ export const commandRelated = createSelector(
             commands
           )
         : [];
+    const siblings = [];
+    const commandWords = name.split('_');
+    if (commandWords.length > 2) {
+      for (const command of commands) {
+        const candidateWords = command.name.split('_');
+        if (
+          commandWords.length === candidateWords.length &&
+          commandWords[0] === candidateWords[0] &&
+          commandWords[commandWords.length - 1] ===
+            candidateWords[candidateWords.length - 1] &&
+          commandWords.filter((word, index) => word !== candidateWords[index])
+            .length === 1
+        ) {
+          siblings.push(command);
+        }
+      }
+    }
     const key = doesGameRequireOpcode(props.game) ? 'id' : 'name';
     return uniqBy(
-      [...referenced, ...overloads, ...variations, ...methodVariations],
+      [
+        ...referenced,
+        ...overloads,
+        ...variations,
+        ...methodVariations,
+        ...siblings,
+      ],
       key
     ).filter((c) => isSupported(c.attrs));
   }

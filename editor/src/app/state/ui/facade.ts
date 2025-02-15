@@ -65,7 +65,7 @@ export class UiFacade {
     selector.displayOpcodePresentation
   );
   displayFunctionDeclaration$ = this.store$.select(
-    selector.displayFunctionDeclaration  
+    selector.displayFunctionDeclaration
   );
   isHotkeyInfoDismissed$ = this.store$.select(selector.isHotkeyInfoDismissed);
   selectedExtensions$ = this.store$.select(selector.selectedExtensions);
@@ -117,7 +117,9 @@ export class UiFacade {
   }
 
   updateSearch(searchTerm: string, autoOpenSingleResult = false) {
-    this.store$.dispatch(updateSearchTerm({ searchTerm, autoOpenSingleResult }));
+    this.store$.dispatch(
+      updateSearchTerm({ searchTerm, autoOpenSingleResult })
+    );
   }
 
   toggleCommandListElements(flag: boolean) {
@@ -182,8 +184,15 @@ export class UiFacade {
     this.store$.dispatch(resetFilters());
   }
 
-  selectExtensions(game: Game, extensions: string[], state: boolean, extensionNames: string[]) {
-    this.store$.dispatch(selectExtensions({ game, extensions, state, extensionNames }));
+  selectExtensions(
+    game: Game,
+    extensions: string[],
+    state: boolean,
+    extensionNames: string[]
+  ) {
+    this.store$.dispatch(
+      selectExtensions({ game, extensions, state, extensionNames })
+    );
   }
 
   selectClass(game: Game, className: string, state: boolean) {
@@ -221,19 +230,19 @@ export class UiFacade {
   }
 
   switchSyntaxKind(syntaxKind: SyntaxKind) {
-    this.store$.dispatch(switchSyntaxKind({ syntaxKind }))
+    this.store$.dispatch(switchSyntaxKind({ syntaxKind }));
   }
 
   toggleSnippetOnlySearch() {
-    this.store$.dispatch(toggleSnippetOnlySearch())
+    this.store$.dispatch(toggleSnippetOnlySearch());
   }
 
   displayFilters() {
-    this.store$.dispatch(displayFilters())
+    this.store$.dispatch(displayFilters());
   }
 
   displayDownloads() {
-    this.store$.dispatch(displayDownloads())
+    this.store$.dispatch(displayDownloads());
   }
 
   dismissHotkeysInfo() {

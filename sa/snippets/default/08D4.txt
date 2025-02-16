@@ -1,0 +1,18 @@
+add_text_label {dynamicKey} 'MENUTIT' {text} "Title"
+add_text_label {dynamicKey} 'MENU01' {text} "Option 1"
+add_text_label {dynamicKey} 'MENU02' {text} "Option 2"
+add_text_label {dynamicKey} 'MENU03' {text} "Option 3"
+
+int menuHandle = create_menu {header} 'MENUTIT' {xy} 32.0 150.0 {width} 180.0 {numColumns} 1 {interactive} true {background} true {alignment} Align.Center
+set_menu_column menuHandle {column} 0 {title} 'DUMMY' {rows} 'MENU01' 'MENU02' 'MENU03' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY' 'DUMMY'
+
+// wait for user choice
+int choice
+repeat
+    wait {time} 0
+    choice = get_menu_item_accepted menuHandle
+until choice >= 0
+
+delete_menu menuHandle
+
+print_help_formatted {text} "Selected index: %d" {args} choice

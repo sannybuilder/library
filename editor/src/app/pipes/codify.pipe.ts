@@ -39,8 +39,8 @@ Prism.languages.sb = Prism.languages.extend('pascal', {
 });
 
 @Pipe({
-    name: 'codify',
-    standalone: false
+  name: 'codify',
+  standalone: false,
 })
 export class CodifyPipe implements PipeTransform {
   transform(
@@ -51,6 +51,7 @@ export class CodifyPipe implements PipeTransform {
       showOpcodes: boolean;
       showFuncDeclarations: boolean;
       extensions: Extension[];
+      extension: string;
     }
   ): string {
     let normalized = normalize(code);
@@ -91,16 +92,20 @@ function format(
     showOpcodes = false,
     showFuncDeclarations = false,
     extensions = [],
+    extension,
   }: {
     command: Command;
     game: Game;
     showOpcodes?: boolean;
     showFuncDeclarations?: boolean;
     extensions?: Extension[];
+    extension: string;
   }
 ): string {
   const highlightName = getName(command);
-  const opcodified = showOpcodes ? opcodify(code, extensions) : code;
+  const opcodified = showOpcodes
+    ? opcodify(code, extensions, command, extension)
+    : code;
   const declaratified = showFuncDeclarations
     ? declaratify(opcodified, extensions, game)
     : opcodified;
@@ -112,14 +117,19 @@ function format(
     },
     'sb'
   );
-  return linkify(highlighted, extensions, game);
+  return linkify(highlighted, extensions, game, command, extension);
 }
 
 function matches(s1: string, s2: string) {
   return s1.toLowerCase() === s2.toLowerCase();
 }
 
-function opcodify(text: string, extensions: Extension[]): string {
+function opcodify(
+  text: string,
+  extensions: Extension[],
+  command: Command,
+  extension: string
+): string {
   return text
     .split('\n')
     .map((line) => line.trimEnd())
@@ -153,24 +163,22 @@ function opcodify(text: string, extensions: Extension[]): string {
         return line;
       }
 
-      for (let extension of extensions) {
-        const command = extension.commands.find((c) =>
-          matches(c.name, keyword)
-        );
-        if (command) {
-          let id = command.id;
-          if (!id) {
-            return line;
-          }
-          if (not) {
-            id = (parseInt(id, 16) + 0x8000).toString(16).toUpperCase();
-          }
+      const found = findCommand(extensions, keyword, command, extension);
 
-          words[opcodeIndex] = [id, words[opcodeIndex]].join(': ');
-
-          return words.join(' ');
+      if (found) {
+        let id = found.command.id;
+        if (!id) {
+          return line;
         }
+        if (not) {
+          id = (parseInt(id, 16) + 0x8000).toString(16).toUpperCase();
+        }
+
+        words[opcodeIndex] = [id, words[opcodeIndex]].join(': ');
+
+        return words.join(' ');
       }
+
       return line;
     })
     .join('\n');
@@ -205,7 +213,13 @@ function declaratify(
   return decls.join('\n') + text;
 }
 
-function linkify(text: string, extensions: Extension[], game: Game): string {
+function linkify(
+  text: string,
+  extensions: Extension[],
+  game: Game,
+  command: Command,
+  extension: string
+): string {
   const reserved = [
     '',
     'repeat',
@@ -221,23 +235,48 @@ function linkify(text: string, extensions: Extension[], game: Game): string {
     if (reserved.includes(match)) {
       return match;
     }
-    for (let extension of extensions) {
-      const command = extension.commands.find((c) =>
-        matches(getName(c), match)
-      );
-      if (command) {
-        const isNativeFunction = command.name.startsWith('0x');
-        const base = isNativeFunction ? 'native/versions' : 'script/extensions';
 
-        return `<a class="identifier" href="#/${game}/${base}/${
-          extension.name
-        }/${command.id || command.name}" title="${
-          command.short_desc || ''
-        }">${match}</a>`;
-      }
+    const found = findCommand(extensions, match, command, extension);
+
+    if (found) {
+      const isNativeFunction = found.command.name.startsWith('0x');
+      const base = isNativeFunction ? 'native/versions' : 'script/extensions';
+
+      return `<a class="identifier" href="#/${game}/${base}/${
+        found.extension
+      }/${found.command.id || found.command.name}" title="${
+        found.command.short_desc || ''
+      }">${match}</a>`;
     }
     return match;
   });
+}
+
+function findCommand(
+  extensions: Extension[],
+  keyword: string,
+  command: Command,
+  extension: string
+) {
+  for (let { name, commands } of extensions) {
+    const found = commands.find((c) => {
+      const commandName = getName(c);
+      if (!matches(commandName, keyword)) {
+        return false;
+      }
+      if (!matches(c.name, command.name)) {
+        return true;
+      }
+
+      // in case of duplicate name in different extensions, pick one that matches the extension of the snippet command
+      return extension === name;
+    });
+
+    if (found) {
+      return { command: found, extension: name };
+    }
+  }
+  return null;
 }
 
 function getName(command: Command) {

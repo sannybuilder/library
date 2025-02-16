@@ -18,6 +18,7 @@ export class CommandSnippetComponent {
   @Input() command: Command;
   @Input() gameExtensions: Extension[];
   @Input() showControls: boolean = true;
+  @Input() extension: Extension;
 
   displayOpcodePresentation$ = this._ui.displayOpcodePresentation$;
   displayFunctionDeclaration$ = this._ui.displayFunctionDeclaration$;

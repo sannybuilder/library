@@ -1,0 +1,20 @@
+{$CLEO .cs}
+{$USE Cleo+}
+
+debug_on // enable trace command
+
+set_script_event_on_menu {add} true {callback} EVENT_ON_MENU {varJustPaused} 0@
+
+// main loop
+while true
+    wait {time} 1000
+    trace "main loop"
+end
+
+
+// event handler
+function EVENT_ON_MENU(justPaused: int)
+    trace "EVENT_ON_MENU: %d" justPaused
+
+    return_script_event
+end

@@ -1,0 +1,1 @@
+This command gets a random integer between `0` and `65535` and stores the result to a variable. It only returns a fixed range of `0` and `65535`. To return a custom range, use GENERATE_RANDOM_INT_IN_RANGE instead.

@@ -1,0 +1,1 @@
+This command was intended to return a random integer between `0` and `65535` and store the result to a variable. However due a bug it only returns a fixed range of `0` and `32767`. An unofficial patch for the PC version called "SilentPatch" fixes this problem. To return a custom range, use GENERATE_RANDOM_INT_IN_RANGE instead.

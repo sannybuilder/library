@@ -1,0 +1,1 @@
+This conditional command returns true if the character is dead, which happens when its health reaches `0`. It also returns true if the character does not exist, which is extremely useful to check in order to prevent unnecessary game crashes when using other commands that require the existence of the character. It behaves exactly opposite to IS_CHAR_STILL_ALIVE.

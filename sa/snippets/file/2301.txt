@@ -1,2 +1,9 @@
-6@ = allocate_memory 128
-read_block_from_file 0@ {size} 128 {address} 6@
+int f = open_file "root:\stream.ini" "rb" // file must be open in binary mode
+int size = get_file_size f
+int buf = allocate_memory size
+
+read_block_from_file f size buf // read file to allocated buffer
+
+trace buf
+
+free_memory buf

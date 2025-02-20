@@ -1,10 +1,36 @@
-00C3: debug_on // enable trace command
+debug_on // enable trace command
+int buf = allocate_memory size 260 
 
-2001: get_script_filename -1 full_path false store_to 0@v
-2101: trace "This script file:~w~ %s" 0@v
+buf = resolve_filepath "root:" // game root directory
+trace "Game installed in %s" 0@
 
-0AC8: allocate_memory size 260 store_to address 0@
-0AAA: get_script_struct_named script_name 'main' store_to address 1@
-2001: get_script_filename 1@ full_path true store_to 0@
-2101: trace "Ohter script:~w~ %s" 0@
-0AC9: free_memory 0@
+buf = resolve_filepath "root:\data\ped.dat" // get path to ped.dat
+trace buf
+
+buf = resolve_filepath "user:" // game saves location
+trace "User data location:~w~ %s" buf
+
+buf = resolve_filepath "." // this script's source file directory (not affected by 0A99)
+trace "This script dir:~w~ %s" buf
+
+buf = resolve_filepath "cleo:" // virtual path: CLEO directory
+trace "CLEO dir:~w~ %s" buf
+
+buf = resolve_filepath "modules:" // virtual path: CLEO modules directory
+trace "CLEO modules dir:~w~ %s" buf
+
+buf = resolve_filepath "" // relative path
+trace "Script's working directory is:~w~ %s" buf
+
+buf = resolve_filepath "file.txt" // relative path 
+trace buf
+
+set_current_directory 1 // user data
+
+buf = resolve_filepath "" // relative path
+trace "Script's changed working directory is:~w~ %s" buf
+
+buf = resolve_filepath "file.txt" // path relative to location set with 0A99
+trace buf
+
+free_memory buf

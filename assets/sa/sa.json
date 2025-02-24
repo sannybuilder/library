@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740369680615,
-    "version": "0.849",
+    "last_update": 1740382395805,
+    "version": "0.850",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59929,7 +59929,74 @@
           "member": "Spawn",
           "attrs": {
             "is_static": true
+          },
+          "short_desc": "Sends a \"SendSpawn\" RPC (ID = 52) to SAMP Server. Teleports our actor to spawn as well"
+        },
+        {
+          "output": [
+            {
+              "name": "pointer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AF7",
+          "name": "SAMP_GET_BASE_ADDRESS",
+          "num_params": 1,
+          "short_desc": "Returns a pointer to the memory address of samp.dll"
+        },
+        {
+          "input": [
+            {
+              "name": "format",
+              "type": "string"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
+            }
+          ],
+          "id": "0AF8",
+          "name": "SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT",
+          "num_params": 3,
+          "short_desc": "Adds one line of colored message to the chat. Take note that this chat message is not sent to server, meaning is only visible in our client. Can process formatted string. The text coloring in hex is 0xAARRGGBB (A = Alpha, R = Red, G = Green, B = Blue)"
+        },
+        {
+          "input": [
+            {
+              "name": "message",
+              "type": "string"
+            }
+          ],
+          "id": "0AF9",
+          "name": "SAMP_SEND_CHAT_MESSAGE_TO_SERVER",
+          "num_params": 1,
+          "short_desc": "Sends a message or command to the server. Take note that this opcode can only process literal strings. So passing a formatted string with arguments will treat it as a literal string while the passed arguments are ignored"
+        },
+        {
+          "id": "0AFA",
+          "name": "SAMP_IS_AVAILABLE",
+          "num_params": 0,
+          "short_desc": "Returns true if SAMP structures were initialized. Used when checking if gta sa is running on SAMP or in Single Player",
+          "attrs": {
+            "is_condition": true
           }
+        },
+        {
+          "input": [
+            {
+              "name": "classid",
+              "type": "int"
+            }
+          ],
+          "id": "0AFB",
+          "name": "SAMP_SEND_REQUEST_CLASS_TO_SERVER",
+          "num_params": 1,
+          "short_desc": "Sends RequestClass RPC (ID = 128) to Server"
         }
       ]
     },

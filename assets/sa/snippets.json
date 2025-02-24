@@ -78,6 +78,14 @@
     "0ED8": "{$CLEO .cs}\n{$USE Cleo+}\n\ndebug_on // enable trace command\n\nset_script_event_on_menu {add} true {callback} EVENT_ON_MENU {varJustPaused} 0@\n\n// main loop\nwhile true\n    wait {time} 1000\n    trace \"main loop\"\nend\n\n\n// event handler\nfunction EVENT_ON_MENU(justPaused: int)\n    trace \"EVENT_ON_MENU: %d\" justPaused\n\n    return_script_event\nend",
     "0F16": "const Key_F11=122\nwhile true\n    wait 0\n    if is_key_just_pressed Key_F11\n    then\n        if is_on_mission\n        then set_on_mission False\n        else set_on_mission True\n        end\n    end\nend"
   },
+  "SAMPFUNCS": {
+    "0AF6": "{0AF6:} SAMP_SPAWN_PLAYER",
+    "0AF7": "int sampaddr\n{0AF7:} sampaddr = SAMP_GET_BASE_ADDRESS",
+    "0AF8": "{0AF8:} SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT {format} \"Script Initialized!\" {color} 0xFF00FFFF {args} // shows a literal string as teal colored text\n{0AF8:} SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT {format} \"WeaponID: %d, Weapon Damage: %f, WeaponName:%s\" {color} 0xFF00FFFF {args} 24 14@ \"Desert Eagle\" // shows a formatted string as teal colored text",
+    "0AF9": "// Sends a String Constant to Server.\n{0AF9:} SAMP_SEND_CHAT_MESSAGE_TO_SERVER \"Hello Everyone!\"\n{0AF9:} SAMP_SEND_CHAT_MESSAGE_TO_SERVER \"/cmds\"\n\n// Sends the string pointed by msgPtr variable to Server\nint msgPtr\n... // do something to msgPtr\n{0AF9:} SAMP_SEND_CHAT_MESSAGE_TO_SERVER msgPtr",
+    "0AFA": "if {0AFA:} SAMP_IS_AVAILABLE\nthen\n    // gta_sa is running in SAMP\nelse\n    // samp is still loading its structures, or gta_sa is running in single player\nend\n\n\n// samp.dll takes time to initialize its structures, executing samp-related opcodes will lead to gta_sa crash. To avoid this, we must wait indefinitely until samp is fully initialized.\nrepeat\n    wait 100\nuntil {0AFA:} SAMP_IS_AVAILABLE\n\n// the rest of the code",
+    "0AFB": "int targetClassID\n// do something to targetClassID\n{0AFB:} SAMP_SEND_REQUEST_CLASS_TO_SERVER {classid} targetClassID\n\n\n{0AFB:} SAMP_SEND_REQUEST_CLASS_TO_SERVER {classid} 13"
+  },
   "audio": {
     "2500": "while is_audio_stream_playing 0@\n    wait 0\nend",
     "2501": "set_audio_stream_speed 0@ {speed} 0.25\nfloat duration = get_audio_stream_duration 0@\nprint_formatted_now \"It will take %f seconds to play this sound\" {time} 5000 {args} duration",

@@ -3727,3 +3727,151 @@ export const SampRpc = {
   "ScrWorldVehicleRemove": 165,
   "ScrWorldPlayerDeath": 166
 };
+export const SampPacket = {
+  "InternalPing": 6,
+  "Ping": 7,
+  "PingOpenConnections": 8,
+  "ConnectedPong": 9,
+  "RequestStaticData": 10,
+  "ConnectionRequest": 11,
+  "AuthKey": 12,
+  "BroadcastPings": 14,
+  "SecuredConnectionResponse": 15,
+  "SecuredConnectionConfirmation": 16,
+  "RpcMapping": 17,
+  "SetRandomNumberSeed": 19,
+  "Rpc": 20,
+  "RpcReply": 21,
+  "DetectLostConnections": 23,
+  "OpenConnectionRequest": 24,
+  "OpenConnectionReply": 25,
+  "ConnectionCookie": 26,
+  "RsaPublicKeyMismatch": 28,
+  "ConnectionAttemptFailed": 29,
+  "NewIncomingConnection": 30,
+  "NoFreeIncomingConnections1": 31,
+  "NoFreeIncomingConnections2": 32,
+  "ConnectionLost": 33,
+  "ConnectionRequestAccepted": 34,
+  "InitializeEncryption": 35,
+  "ConnectionBanned": 36,
+  "InvalidPassword": 37,
+  "ModifiedPacket": 38,
+  "Pong": 39,
+  "Timestamp": 40,
+  "ReceivedStaticData": 41,
+  "RemoteDisconnectionNotification": 42,
+  "RemoteConnectionLost": 43,
+  "RemoteNewIncomingConnection": 44,
+  "RemoteExistingConnection": 45,
+  "RemoteStaticData": 46,
+  "AdvertiseSystem": 56,
+  "DriverSync": 200,
+  "RconCommand": 201,
+  "RconResponse": 202,
+  "AimSync": 203,
+  "WeaponsUpdate": 204,
+  "StatsUpdate": 205,
+  "BulletSync": 206,
+  "OnFootSync": 207,
+  "MarkerSync": 208,
+  "UnoccupiedVehicleSync": 209,
+  "TrailerSync": 210,
+  "PassengerSync": 211,
+  "SpectatorSync": 212
+};
+export const SampBitStreamDataType = {
+  "Byte": 0,
+  "Bool": 1,
+  "Short": 2,
+  "Int": 3,
+  "Float": 4,
+  "Array": 5,
+  "BitStream": 6
+};
+export const SampPriority = {
+  "System": 0,
+  "High": 1,
+  "Medium": 2,
+  "Low": 3
+};
+export const SampReliability = {
+  "Unreliable": 6,
+  "UnreliableSequenced": 7,
+  "Reliable": 8,
+  "ReliableOrdered": 9,
+  "ReliableSequenced": 10
+};
+export const SampSendRateType = {
+  "Onfoot": 1,
+  "Incar": 2,
+  "Aims": 3
+};
+export const SampTextStyles = {
+  "FcrNone": 0,
+  "FcrBold": 1,
+  "FcrItalics": 2,
+  "FcrBorder": 4,
+  "FcrShadow": 8,
+  "FcrUnderline": 16,
+  "FcrStrikeout": 32
+};
+export const SampScmEvent = {
+  "Paintjob": 1,
+  "Upgrade": 2,
+  "Color": 3,
+  "ModShopEnterExit": 4
+};
+export const SampSpecialAction = {
+  "None": 0,
+  "Duck": 1,
+  "UseJetPack": 2,
+  "EnterVehicle": 3,
+  "ExitVehicle": 4,
+  "Dance1": 5,
+  "Dance2": 6,
+  "Dance3": 7,
+  "Dance4": 8,
+  "HandsUp": 10,
+  "UseCellphone": 11,
+  "Sitting": 12,
+  "StopUseCellphone": 13,
+  "DrinkBeer": 20,
+  "SmokeCiggy": 21,
+  "DrinkWine": 22,
+  "DrinkSprunk": 23,
+  "Cuffed": 24,
+  "Carry": 25,
+  "Urinate": 68
+};
+export const SampDialogStyle = {
+  "Msgbox": 0,
+  "Input": 1,
+  "List": 2,
+  "Password": 3,
+  "Tablist": 4,
+  "TablistHeaders": 5
+};
+export const SampCursorModes = {
+  "Disabled": 0,
+  "LockkeysNocursor": 1,
+  "LockCamAndControl": 2,
+  "LockCam": 3,
+  "LockCamNoCursor": 4
+};
+export const SampRakNetHookParam = {
+  "Bitstream": 0,
+  "Packetid": 1,
+  "Priority": 2,
+  "Reliability": 3,
+  "Orderingchannel": 4,
+  "Shifttimestamp": 5
+};
+export const SampD3DPrimitiveType = {
+  "PointList": 1,
+  "LineList": 2,
+  "LineStrip": 3,
+  "TriangleList": 4,
+  "TriangleStrip": 5,
+  "TriangleFan": 6
+};

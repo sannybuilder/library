@@ -244,9 +244,9 @@ function linkify(
 
       return `<a class="identifier" href="#/${game}/${base}/${
         found.extension
-      }/${found.command.id || found.command.name}" title="${
+      }/${found.command.id || found.command.name}" title="${(
         found.command.short_desc || ''
-      }">${match}</a>`;
+      ).replace(/"/g, '&quot;')}">${match}</a>`;
     }
     return match;
   });

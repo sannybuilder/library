@@ -148,14 +148,19 @@
     <div class="col-12 col-md-6">
       <div class="input-group">
         <scl-selector
-          class="flex-grow-1"
           [model]="command.class"
           [label]="'ui.commandEditor.fieldClass' | translate"
           (modelChange)="onClassChange(command, $event)"
           [choices]="classes"
-          [canInput]="true"
           [disabled]="command.attrs?.is_nop"
         ></scl-selector>
+        <div class="input-group-append h-100">
+          <scl-icon-button
+            icon="clear"
+            [title]="'ui.commandEditor.clearClassName' | translate"
+            (clicked)="(command.class = '') || updateErrors()"
+          ></scl-icon-button>
+        </div>
       </div>
       <div
         class="mb-1"

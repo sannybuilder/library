@@ -9,7 +9,7 @@ import { braceify, stringify } from './params';
 })
 export class NativeParamsPipe implements PipeTransform {
   transform(command: Command): string {
-    if (!command.num_params) {
+    if (!command.num_params || !command.input?.length) {
       return `("${command.name}")`;
     }
     return braceify(

@@ -224,8 +224,9 @@ export const uiReducer = createReducer(
       });
     }
     if (!forceSelect && isSelected) {
+      const newSelection = without(filtered, className);
       return updateState(state, game, {
-        selectedClasses: without(filtered, className),
+        selectedClasses: newSelection.length !== 0 ? newSelection : ['any'],
       });
     }
     return state;

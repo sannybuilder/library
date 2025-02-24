@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740382395805,
-    "version": "0.850",
+    "last_update": 1740401867403,
+    "version": "0.851",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59997,6 +59997,205 @@
           "name": "SAMP_SEND_REQUEST_CLASS_TO_SERVER",
           "num_params": 1,
           "short_desc": "Sends RequestClass RPC (ID = 128) to Server"
+        },
+        {
+          "input": [
+            {
+              "name": "vehicleid",
+              "type": "int"
+            },
+            {
+              "name": "type",
+              "type": "int"
+            },
+            {
+              "name": "param1",
+              "type": "int"
+            },
+            {
+              "name": "param2",
+              "type": "int"
+            }
+          ],
+          "id": "0AFC",
+          "name": "SAMP_SEND_SCM_EVENT_TO_SERVER",
+          "num_params": 4,
+          "short_desc": "Sends RPC (ID = 96) information about vehicle modification to the server"
+        },
+        {
+          "input": [
+            {
+              "name": "actionid",
+              "type": "int"
+            }
+          ],
+          "id": "0AFD",
+          "name": "SAMP_SET_SPECIAL_ACTION",
+          "num_params": 1,
+          "short_desc": "Sets the special action for our Player. Our Actor will perform this special action as well. Executing this opcode is like receiving a \"SetPlayerSpecialAction\" RPC (ID = 88) from the Server"
+        },
+        {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            },
+            {
+              "name": "weaponid",
+              "type": "int"
+            }
+          ],
+          "id": "0AFE",
+          "name": "SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER",
+          "num_params": 2,
+          "short_desc": "Sends a \"DeathNotification\" RPC (ID = 53) to Server. This will tell the server that our local player got killed by the specified player using a specific weapon. Set PlayerID = 0xFFFF to indicate that our local player died by natural means (falling, drowned/toxicated)"
+        },
+        {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0AFF",
+          "name": "SAMP_GET_VEHICLE_HANDLE_BY_VEHICLE_ID",
+          "num_params": 2,
+          "short_desc": "Returns the vehicle handle using its samp vehicle id. Returns 0 If the vehicle is not in the stream zone"
+        },
+        {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B20",
+          "name": "SAMP_GET_ACTOR_HANDLE_BY_PLAYER_ID",
+          "num_params": 2,
+          "short_desc": "Returns the actor handle using the Player ID. Returns -1 if the player is not in the stream zone"
+        },
+        {
+          "id": "0B21",
+          "name": "SAMP_IS_CHAT_OPENED",
+          "num_params": 0,
+          "short_desc": "Checks if the chat box is open/visible",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "type",
+              "type": "int"
+            },
+            {
+              "name": "delay",
+              "type": "int"
+            }
+          ],
+          "id": "0B22",
+          "name": "SAMP_SET_SEND_RATE",
+          "num_params": 2,
+          "short_desc": "Sets the periodic delay (in milliseconds) of sending specific data type to Server"
+        },
+        {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "id": "0B23",
+          "name": "SAMP_IS_PLAYER_CONNECTED",
+          "num_params": 1,
+          "short_desc": "Returns true if REMOTE Player with the given ID is connected. Take note: Our LOCAL Player is not a REMOTE Player. So Passing the ID of our local player to this opcode will return false",
+          "attrs": {
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "playerstruct",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B24",
+          "name": "SAMP_GET_PLAYER_STRUCT_PTR",
+          "num_params": 2,
+          "short_desc": "Returns the player's samp structure. Returns 0 (NULL Pointer) if player isn't connected"
+        },
+        {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "health",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B25",
+          "name": "SAMP_GET_PLAYER_HEALTH",
+          "num_params": 2,
+          "short_desc": "Gets the amount of health the player has. Take note that Actor Health is Different from Player Health. It is possible for both of them to have different values. But the server uses the Player Health value"
+        },
+        {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "armor",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B26",
+          "name": "SAMP_GET_PLAYER_ARMOR",
+          "num_params": 2,
+          "short_desc": "Gets the amount of armor a player has. Take note that Actor Armor is Different from Player Armor. In SAMP, It is possible for both of them to have different values. But the server uses the Player Armor value"
+        },
+        {
+          "input": [
+            {
+              "name": "statusid",
+              "type": "int"
+            }
+          ],
+          "id": "0B27",
+          "name": "SAMP_SET_GAMESTATE",
+          "num_params": 1,
+          "short_desc": "Sets the connection status to the server. Useful when attempting to reconnect or disconnect to server"
         }
       ]
     },

@@ -84,7 +84,19 @@
     "0AF8": "{0AF8:} SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT {format} \"Script Initialized!\" {color} 0xFF00FFFF {args} // shows a literal string as teal colored text\n{0AF8:} SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT {format} \"WeaponID: %d, Weapon Damage: %f, WeaponName:%s\" {color} 0xFF00FFFF {args} 24 14@ \"Desert Eagle\" // shows a formatted string as teal colored text",
     "0AF9": "// Sends a String Constant to Server.\n{0AF9:} SAMP_SEND_CHAT_MESSAGE_TO_SERVER \"Hello Everyone!\"\n{0AF9:} SAMP_SEND_CHAT_MESSAGE_TO_SERVER \"/cmds\"\n\n// Sends the string pointed by msgPtr variable to Server\nint msgPtr\n... // do something to msgPtr\n{0AF9:} SAMP_SEND_CHAT_MESSAGE_TO_SERVER msgPtr",
     "0AFA": "if {0AFA:} SAMP_IS_AVAILABLE\nthen\n    // gta_sa is running in SAMP\nelse\n    // samp is still loading its structures, or gta_sa is running in single player\nend\n\n\n// samp.dll takes time to initialize its structures, executing samp-related opcodes will lead to gta_sa crash. To avoid this, we must wait indefinitely until samp is fully initialized.\nrepeat\n    wait 100\nuntil {0AFA:} SAMP_IS_AVAILABLE\n\n// the rest of the code",
-    "0AFB": "int targetClassID\n// do something to targetClassID\n{0AFB:} SAMP_SEND_REQUEST_CLASS_TO_SERVER {classid} targetClassID\n\n\n{0AFB:} SAMP_SEND_REQUEST_CLASS_TO_SERVER {classid} 13"
+    "0AFB": "int targetClassID\n// do something to targetClassID\n{0AFB:} SAMP_SEND_REQUEST_CLASS_TO_SERVER {classid} targetClassID\n\n\n{0AFB:} SAMP_SEND_REQUEST_CLASS_TO_SERVER {classid} 13",
+    "0AFC": "int myVehicleID\n// do something to myVehicleID\n{0AFC:} SAMP_SEND_SCM_EVENT_TO_SERVER {vehicleid} myVehicleID {type} 1 {param1} 2 {param2} 0 // informs the server that myVehicleID's paintjob changed into style1 = 2, style2 = 0.",
+    "0AFD": "{0AFD:} SAMP_SET_SPECIAL_ACTION {actionid} 8 // makes our player actor perform dance 4",
+    "0AFE": "{0AFE:} SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER {playerid} 15 {weaponid} 31 // tells the server I got killed by player 15 using M4 gun\n{0AFE:} SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER {playerid} 0xFFFF {weaponid} 53 // tells the server that I died naturally by falling\n\nint killerID, killerWeapon\n// do something\n{0AFE:} SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER {playerid} killerID {weaponid} killerWeapon",
+    "0AFF": "int myVehicleHandle, myVehicleID\n// do something to myVehicleID\n{0AFF:} {handle} myVehicleHandle = SAMP_GET_VEHICLE_HANDLE_BY_VEHICLE_ID {id} myVehicleID\n// do something to myVehicleHandle",
+    "0B20": "int targetActor, targetPlayer\n// do something to targetPlayer\n{0B20:} {handle} targetActor = SAMP_GET_ACTOR_HANDLE_BY_PLAYER_ID {id} targetPlayer\n// do something to targetActor",
+    "0B21": "if {0B21:} SAMP_IS_CHAT_OPENED\nthen // chat box is visible\nelse // chat box is hidden\nend",
+    "0B22": "{0B22:} SAMP_SET_SEND_RATE {type} 1 {delay} 150 // periodically synchronize our onfoot data to server every 50ms\n{0B22:} SAMP_SET_SEND_RATE {type} 3 {delay} 200 // periodically synchronize our incar data to server every 200ms\n{0B22:} SAMP_SET_SEND_RATE {type} 2 {delay} 50 // periodically synchronize our aim data to server every 50ms",
+    "0B23": "if {0B23:} SAMP_IS_PLAYER_CONNECTED {id} 13 // checks if player 13 is connected\nthen // player 13 is connected\nelse // player 13 does not exist\nend",
+    "0B24": "int targetPlayerStruct\n{0B24:} {playerstruct} playerStruct = SAMP_GET_PLAYER_STRUCT_PTR {playerid} 15 // get pointer to player 15's struct",
+    "0B25": "int targetHealth, targetplayer\n// do something to targetplayer\n{0B25:} {health} targetHealth = SAMP_GET_PLAYER_HEALTH {playerid} targetplayer",
+    "0B26": "int targetArmor, targetPlayer\n// do something to targetPlayer\n{0B26:} {armor} targetArmor = SAMP_GET_PLAYER_ARMOR {playerid} targetPlayer",
+    "0B27": "{0B27:} SAMP_SET_GAMESTATE {statusid} 5 // disconnect to server"
   },
   "audio": {
     "2500": "while is_audio_stream_playing 0@\n    wait 0\nend",

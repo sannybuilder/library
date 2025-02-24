@@ -105,6 +105,7 @@ import {
   IconButtonComponent,
   CopyButtonComponent,
   HotkeysInfoComponent,
+  GameLinksComponent,
 } from './components/common';
 
 import {
@@ -245,6 +246,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     CommandDeclarationComponent,
     CommandSnippetComponent,
     HotkeysInfoComponent,
+    GameLinksComponent,
   ],
   imports: [
     BrowserModule,

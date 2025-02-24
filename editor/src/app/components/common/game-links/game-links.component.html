@@ -1,0 +1,25 @@
+<div class="d-none d-sm-block">
+  <ng-container *ngTemplateOutlet="items"></ng-container>
+</div>
+
+<div class="dropdown d-block d-sm-none">
+  <button
+    class="btn small text-muted d-inline-block dropdown-toggle"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    {{ "ui.shared.gameSupport" | translate }}
+  </button>
+  <div class="dropdown-menu">
+    <ng-container *ngTemplateOutlet="items"></ng-container>
+  </div>
+</div>
+
+<ng-template #items>
+  <ng-container *ngFor="let link of links">
+    <a class="d-inline-block ml-2 p-2 p-sm-0" [routerLink]="link.route">
+      <scl-icon [game]="link.game" size="16"></scl-icon>
+    </a>
+  </ng-container>
+</ng-template>

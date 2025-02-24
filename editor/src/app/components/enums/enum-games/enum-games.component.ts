@@ -10,4 +10,8 @@ import { Game } from 'src/app/models';
 export class EnumGamesComponent {
   @Input() games: Game[];
   @Input() enumName: string;
+
+  getGameLinks() {
+    return this.games.map(game => ({ game, route: ['/', game, 'enums', this.enumName]}))
+  }
 }

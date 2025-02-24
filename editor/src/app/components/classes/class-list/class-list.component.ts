@@ -1,16 +1,12 @@
 import { Component, Input } from '@angular/core';
-import {
-  ClassMeta,
-  Game,
-  ViewContext,
-} from '../../../models';
+import { ClassMeta, Game, ViewContext } from '../../../models';
 import { getDefaultExtension } from '../../../utils';
 
 @Component({
-    selector: 'scl-class-list',
-    templateUrl: './class-list.component.html',
-    styleUrls: ['./class-list.component.scss'],
-    standalone: false
+  selector: 'scl-class-list',
+  templateUrl: './class-list.component.html',
+  styleUrls: ['./class-list.component.scss'],
+  standalone: false,
 })
 export class ClassListComponent {
   ViewContext = ViewContext;
@@ -43,5 +39,12 @@ export class ClassListComponent {
 
   getDefaultExtension() {
     return getDefaultExtension(this.viewContext);
+  }
+
+  getGameLinks() {
+    return this.games.map((game) => ({
+      game,
+      route: [this.getBaseHref(game), 'classes'],
+    }));
   }
 }

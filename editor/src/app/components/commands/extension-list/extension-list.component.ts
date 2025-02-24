@@ -31,4 +31,11 @@ export class ExtensionListComponent {
     }
     return `/${this.game}/script/extensions`;
   }
+
+  getGameLinks() {
+    return this.games.map((game) => ({
+      game,
+      route: ['/', game, 'extensions'],
+    }));
+  }
 }

@@ -3875,3 +3875,8 @@ export const SampD3DPrimitiveType = {
   "TriangleStrip": 5,
   "TriangleFan": 6
 };
+export const SampDisconnectReason = {
+  "TimeoutOrCrashed": 0,
+  "Quit": 1,
+  "KickedOrBanned": 2
+};

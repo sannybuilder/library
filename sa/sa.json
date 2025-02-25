@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740413348648,
-    "version": "0.853",
+    "last_update": 1740456804048,
+    "version": "0.854",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60065,7 +60065,7 @@
             }
           ],
           "id": "0AFF",
-          "name": "SAMP_GET_VEHICLE_HANDLE_BY_VEHICLE_ID",
+          "name": "SAMP_GET_CAR_HANDLE_BY_CAR_ID",
           "num_params": 2,
           "short_desc": "Returns the vehicle handle using its samp vehicle id. Returns 0 If the car is not in the stream zone"
         },
@@ -60084,7 +60084,7 @@
             }
           ],
           "id": "0B20",
-          "name": "SAMP_GET_ACTOR_HANDLE_BY_PLAYER_ID",
+          "name": "SAMP_GET_CHAR_HANDLE_BY_PLAYER_ID",
           "num_params": 2,
           "short_desc": "Returns the character handle using the Player ID. Returns -1 if the player is not in the stream zone"
         },
@@ -60196,6 +60196,116 @@
           "name": "SAMP_SET_GAMESTATE",
           "num_params": 1,
           "short_desc": "Sets the connection status to the server. Useful when attempting to reconnect or disconnect to server"
+        },
+        {
+          "input": [
+            {
+              "name": "reasonid",
+              "type": "SampDisconnectReason"
+            }
+          ],
+          "id": "0B28",
+          "name": "SAMP_SEND_DISCONNECTED_TO_SERVER",
+          "num_params": 1,
+          "short_desc": "Sends a \"Disconnected\" RPC (ID = 138) to the server. Take note that a Server does not normally receive a disconnection RPC with reason = SampDisconnectReason.TimeoutOrCrashed"
+        },
+        {
+          "input": [
+            {
+              "name": "nickname",
+              "type": "string"
+            }
+          ],
+          "id": "0B29",
+          "name": "SAMP_SET_LOCAL_NICKNAME",
+          "num_params": 1,
+          "short_desc": "Changes our Local Nickname. Take note that this new nickname will only be visible at our client, meaning that the server is unaffected and the remote players will not see our nickname changed"
+        },
+        {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "ping",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B2A",
+          "name": "SAMP_GET_PLAYER_PING",
+          "num_params": 2,
+          "short_desc": "Returns the ping of the specified player"
+        },
+        {
+          "input": [
+            {
+              "name": "handle",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "id",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B2B",
+          "name": "SAMP_GET_PLAYER_ID_BY_CHAR_HANDLE",
+          "num_params": 2,
+          "short_desc": "Returns the samp player's id controlling the character handle"
+        },
+        {
+          "input": [
+            {
+              "name": "handle",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "id",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B2C",
+          "name": "SAMP_GET_CAR_ID_BY_CAR_HANDLE",
+          "num_params": 2,
+          "short_desc": "Returns the SAMP vehicle ID using its car handle"
+        },
+        {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B2F",
+          "name": "SAMP_GET_STREAMED_OUT_PLAYER_COORD",
+          "num_params": 4,
+          "short_desc": "Gets the 3D Coordinates of a player who is outside the stream zone, if the server allows it. Take note that the server rounds down the coordinate values for data compression purposes. Meaning that the returned coordinates of this opcode have discrepancies towards the correct coordinates"
         }
       ]
     },

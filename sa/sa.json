@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740460264476,
-    "version": "0.856",
+    "last_update": 1740500568445,
+    "version": "0.857",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60046,7 +60046,7 @@
           "id": "0AFE",
           "name": "SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER",
           "num_params": 2,
-          "short_desc": "Sends a \"DeathNotification\" RPC (ID = 53) to Server. This will tell the server that our local player got killed by the specified player using a specific weapon. Set PlayerID = 0xFFFF to indicate that our local player died by natural means (falling, drowned/toxicated)"
+          "short_desc": "Sends a \"DeathNotification\" RPC (ID = 53) to Server. This will tell the server that our local player got killed by the specified player using a specific weapon. Set PlayerID = 0xFFFF to indicate that our local player died by natural means (falling, drowned/toxicated). Take note that this command will not actually kill our local character. Use Opcode 05BE or Opcode 0321 Separately to do so"
         },
         {
           "input": [
@@ -60303,83 +60303,88 @@
           "id": "0B2F",
           "name": "SAMP_GET_STREAMED_OUT_PLAYER_COORD",
           "num_params": 4,
-          "short_desc": "Gets the 3D Coordinates of a player who is outside the stream zone, if the server allows it. Take note that the server rounds down the coordinate values for data compression purposes. Meaning that the returned coordinates of this opcode have discrepancies towards the correct coordinates"
+          "short_desc": "Returns the 3D Coordinates of a player who is outside the stream zone, if the server allows it. Take note that the server rounds down the coordinate values for data compression purposes. Meaning that the returned coordinates of this opcode have discrepancies compared to the correct coordinates"
         },
         {
+          "input": [
+            {
+              "name": "carid",
+              "type": "int"
+            },
+            {
+              "name": "ispassenger",
+              "type": "bool"
+            }
+          ],
           "id": "0B30",
           "name": "SAMP_SEND_ENTER_CAR",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sends an \"EnterCar\" RPC (ID = 26) to Server. Take note that this opcode does not command our character to actually enter the car. Execute Opcode 05CA or Opcode 05CB separately to do so"
         },
         {
+          "input": [
+            {
+              "name": "carid",
+              "type": "int"
+            }
+          ],
           "id": "0B31",
           "name": "SAMP_SEND_EXIT_CAR",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sends an \"ExitCar\" RPC (ID = 154) to Server. Take note that this opcode does not command our character to actually exit the car. Execute Opcode 05CD/0633/05CF/09F6 separately to do so"
         },
         {
           "id": "0B32",
-          "name": "SAMP_SEND_SPAWN",
-          "num_params": 0
+          "name": "SAMP_SEND_SPAWN_TO_SERVER",
+          "num_params": 0,
+          "short_desc": "Sends a \"SendSpawn\" RPC (ID = 52) to SAMP Server. Take note that unlike opcode 0AF6, this does opcode does not actually teleport our Player Character to Spawn. Fact: Our client naturally sends this RPC, 2 seconds before our player spawns automatically. "
         },
         {
+          "input": [
+            {
+              "name": "carid",
+              "type": "int"
+            },
+            {
+              "name": "bodyflags",
+              "type": "int"
+            },
+            {
+              "name": "doorflags",
+              "type": "int"
+            },
+            {
+              "name": "lightflags",
+              "type": "int"
+            },
+            {
+              "name": "wheelflags",
+              "type": "int"
+            }
+          ],
           "id": "0B33",
           "name": "SAMP_SEND_DAMAGE_CAR",
           "num_params": 5,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sends a \"CarDamaged\" RPC (ID = 106) to the Server. This is to update the server the component damage flags of our car. Take note that these damage flags were bitfields. Where for each bitfield, 0 = functional, 1 = damaged "
         },
         {
+          "input": [
+            {
+              "name": "chatcommand",
+              "type": "int"
+            },
+            {
+              "name": "callbacklabel",
+              "type": "int"
+            }
+          ],
           "id": "0B34",
-          "name": "SAMP_REGISTER_CLIENT_COMMAND",
+          "name": "SAMP_REGISTER_CLIENT_SIDED_COMMAND",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Registers a callback hooked from a client sided chat command"
         },
         {
           "id": "0B35",

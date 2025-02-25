@@ -1,0 +1,9 @@
+// Makes our Character exit his current Car and then informs SAMP about it
+int myCar, myCarID
+if IS_CHAR_SITTING_IN_ANY_CAR {Char} $PLAYER_ACTOR
+then
+    {car} myCar = STORE_CAR_CHAR_IS_IN_NO_SAVE {char} $PLAYER_ACTOR
+    TASK_LEAVE_ANY_CAR {handle} $PLAYER_ACTOR
+    {id} myCarID = SAMP_GET_CAR_ID {handle} myCar
+    SAMP_SEND_EXIT_CAR {carid} myCarID
+end

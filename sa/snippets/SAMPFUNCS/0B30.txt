@@ -1,0 +1,26 @@
+///////////////////////////////Example 1///////////////////////////////
+// enter car as driver then inform samp about it.
+int targetCar, targetCarID
+// do something to targetCar
+if DOES_VEHICLE_EXIST {handle} targetCar
+then
+    TASK_ENTER_CAR_AS_DRIVER {char} $PLAYER_ACTOR {vehicle} targetCar {time} 10000
+
+    {id} targetCarID = SAMP_GET_CAR_ID {handle} targetCar
+    SAMP_SEND_ENTER_CAR {carid} targetCarID  {ispassenger} false
+
+    TASK_ENTER_CAR_AS_PASSENGER {char} [Char] {vehicle} [Car] {time} [int] {seat} [SeatId]
+end
+
+///////////////////////////////Example 2///////////////////////////////
+
+// enter car as passenger then inform samp about it.
+int targetCar, targetCarID
+// do something to targetCar
+if DOES_VEHICLE_EXIST {handle} targetCar
+then
+    TASK_ENTER_CAR_AS_PASSENGER {char} $PLAYER_ACTOR {vehicle} targetCar {time} 10000 {seat} 0 // first passenger seat, hijack if necessary
+
+    {id} targetCarID = SAMP_GET_CAR_ID {handle} targetCar
+    SAMP_SEND_ENTER_CAR {carid} targetCarID  {ispassenger} true
+end

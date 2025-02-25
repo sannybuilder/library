@@ -1,0 +1,22 @@
+// Script Example
+// Our Local Character will die after typing /killme to SAMP chat
+
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+// wait for SAMP to fully initialize
+REPEAT
+    wait 100
+UNTIL SAMP_IS_AVAILABLE
+
+SAMP_REGISTER_CLIENT_SIDED_COMMAND {chatcommand} "killme" {callbacklabel} @ChatCallback_KillMe
+
+// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
+PAUSE_THREAD {streamid} 0 // Pauses the main thread
+// This part of the main thread will not be reached unless the main thread is resumed
+
+:ChatCallback_KillMe
+    TASK_DIE {handle} $PLAYER_ACTOR // kill our local character
+    SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER {playerid} 0xFFFF {weaponid} WeaponType.UziDriveby // inform the server that I died by natural means(toxicated)
+SAMP_CMD_RET // end of callback

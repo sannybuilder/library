@@ -4,7 +4,7 @@ int targetCar, targetCarID
 // do something to targetCar
 if DOES_VEHICLE_EXIST {handle} targetCar
 then
-    TASK_ENTER_CAR_AS_DRIVER {char} $PLAYER_ACTOR {vehicle} targetCar {time} 10000
+    TASK_ENTER_CAR_AS_DRIVER {char} $scplayer {vehicle} targetCar {time} 10000
 
     {id} targetCarID = SAMP_GET_CAR_ID {handle} targetCar
     SAMP_SEND_ENTER_CAR {carid} targetCarID  {ispassenger} false
@@ -19,7 +19,7 @@ int targetCar, targetCarID
 // do something to targetCar
 if DOES_VEHICLE_EXIST {handle} targetCar
 then
-    TASK_ENTER_CAR_AS_PASSENGER {char} $PLAYER_ACTOR {vehicle} targetCar {time} 10000 {seat} 0 // first passenger seat, hijack if necessary
+    TASK_ENTER_CAR_AS_PASSENGER {char} $scplayer {vehicle} targetCar {time} 10000 {seat} 0 // first passenger seat, hijack if necessary
 
     {id} targetCarID = SAMP_GET_CAR_ID {handle} targetCar
     SAMP_SEND_ENTER_CAR {carid} targetCarID  {ispassenger} true

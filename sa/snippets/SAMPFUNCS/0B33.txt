@@ -1,8 +1,26 @@
-// Peeling Car Troll Example
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
 
-int myCarID
-// do something to myCarID
-SAMP_SEND_DAMAGE_CAR {carid} myCarID {bodyflags} 0x00000000 {doorflags} 0x00000000 {lightflags} 0x00 {wheelflags} 0x00 // tells the server that all components of our car are functional
-wait 1000
-SAMP_SEND_DAMAGE_CAR {carid} myCarID {bodyflags} 0xFFFFFFFF {doorflags} 0xFFFFFFFF {lightflags} 0xFF {wheelflags} 0xFF // tells the server that all components of our car are damaged
-wait 1000
+REPEAT
+    wait 100
+until SAMP_IS_AVAILABLE
+
+// Peeling Car Troll Example
+while true
+    int myCar, myCarID
+    wait 1000
+    if IS_CHAR_SITTING_IN_ANY_CAR {char} $scplayer
+    then
+        myCar = STORE_CAR_CHAR_IS_IN_NO_SAVE {char} $scplayer
+        myCarID = SAMP_GET_CAR_ID {handle} myCar
+        SAMP_SEND_DAMAGE_CAR {carid} myCarID {bodyflags} 0x00000000 {doorflags} 0x00000000 {lightflags} 0x00 {wheelflags} 0x00 // tells the server that all components of our car are functional
+    end
+    wait 1000
+    if IS_CHAR_SITTING_IN_ANY_CAR {char} $scplayer
+    then
+        myCar = STORE_CAR_CHAR_IS_IN_NO_SAVE {char} $scplayer
+        myCarID = SAMP_GET_CAR_ID {handle} myCar
+        SAMP_SEND_DAMAGE_CAR {carid} myCarID {bodyflags} 0xFFFFFFFF {doorflags} 0xFFFFFFFF {lightflags} 0xFF {wheelflags} 0xFF // tells the server that all components of our car are damaged
+    end
+end

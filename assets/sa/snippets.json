@@ -99,9 +99,9 @@
     "0B27": "SAMP_SET_GAMESTATE {statusid} SampGameState.Disconnected // disconnect to server",
     "0B28": "SAMP_SEND_DISCONNECTED_TO_SERVER {reasonid} SampDisconnectReason.KickedOrBanned",
     "0B29": "SAMP_SET_LOCAL_NICKNAME {nickname} \"ajom\" // locally change our nickname into ajom",
-    "0B2A": "// get my ping\nint myPlayerID, myPing\n{id} myPlayerID = SAMP_GET_PLAYER_ID_BY_CHAR_HANDLE {handle} $PLAYER_ACTOR\n{ping} myPing = SAMP_GET_PLAYER_PING {playerid} myPlayerID",
+    "0B2A": "// get my ping\nint myPlayerID, myPing\nint playerChar = get_player_char 0\n{id} myPlayerID = SAMP_GET_PLAYER_ID {handle} playerChar\n{ping} myPing = SAMP_GET_PLAYER_PING {playerid} myPlayerID",
     "0B2B": "// get my player id\nint char = get_player_char 0\nint myID = SAMP_GET_PLAYER_ID {handle} char",
-    "0B2C": "int targetHandle\n// do something to targetHandle\nint targetID = SAMP_GET_PLAYER_ID {handle} targetHandle",
+    "0B2C": "int targetHandle\n// do something to targetHandle\nint targetID = SAMP_GET_CAR_ID {handle} targetHandle",
     "0B2F": "int targetPlayer\n// do something to targetPlayer\n\n// passing to an array\nfloat targetCoord[3]\n{xyz} targetCoord = SAMP_GET_STREAMED_OUT_PLAYER_COORD {playerid} targetPlayer\n\n// passing to variables\nfloat targetX, targetY, targetZ\n{x} targetX, {y} targetY, {z} targetZ = SAMP_GET_STREAMED_OUT_PLAYER_COORD {playerid} targetPlayer"
   },
   "audio": {

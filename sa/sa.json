@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740565567584,
-    "version": "0.861",
+    "last_update": 1740582543907,
+    "version": "0.862",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60747,7 +60747,7 @@
         {
           "output": [
             {
-              "name": "id",
+              "name": "dialogid",
               "type": "int",
               "source": "var_any"
             }
@@ -60761,131 +60761,156 @@
           "short_desc": "Returns the ID of the currently opened dialog. If the dialog is not opened, returns the ID of the last opened dialog instead. Can be used as a condition that evaluates as false if no dialog has been opened since the start of the game"
         },
         {
+          "output": [
+            {
+              "name": "statusid",
+              "type": "SampGameState",
+              "source": "var_any"
+            }
+          ],
           "id": "0B4F",
           "name": "SAMP_GET_GAMESTATE",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the connection status to the server"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Object",
+              "source": "var_any"
+            }
+          ],
           "id": "0B50",
           "name": "SAMP_GET_OBJECT_BY_ID",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the handle of an object using its SAMP ID. Can be used as a condition which evaluates as true if the object is streamed"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Pickup",
+              "source": "var_any"
+            }
+          ],
           "id": "0B51",
           "name": "SAMP_GET_PICKUP_BY_ID",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the handle of a pickup using its SAMP ID. Can be used as a condition which evaluates as true if the pickup is streamed"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Object"
+            }
+          ],
+          "output": [
+            {
+              "name": "id",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B52",
           "name": "SAMP_GET_OBJECT_ID",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the SAMP ID of an object using its handle. Can be used as a condition which evaluates as true it's from the SAMP Object Pool"
         },
         {
+          "input": [
+            {
+              "name": "handle",
+              "type": "Pickup"
+            }
+          ],
+          "output": [
+            {
+              "name": "id",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B53",
           "name": "SAMP_GET_PICKUP_ID",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the SAMP ID of a pickup using its handle. Can be used as a condition which evaluates as true it's from the SAMP Pickup Pool"
         },
         {
+          "output": [
+            {
+              "name": "itemscount",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B54",
-          "name": "SAMP_GET_LISTBOX_SIZE",
+          "name": "SAMP_GET_ITEMS_COUNT_OF_LAST_OPENED_DIALOG",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the total number of items found on the currently opened dialog's list. If the dialog is not opened, the last opened dialog is used instead. Can be used as a condition which evaluates as false if, the dialog does not have a list style attribute, or no dialog has been opened since the start of the game"
         },
         {
+          "input": [
+            {
+              "name": "worldcoordx",
+              "type": "float"
+            },
+            {
+              "name": "worldcoordy",
+              "type": "float"
+            },
+            {
+              "name": "worldcoordz",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "screencoordx",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "screencoordy",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B55",
-          "name": "SAMP_CONVERT_3D_COORDS_TO_SCREEN",
+          "name": "SF_CONVERT_3D_COORDS_TO_WINDOW_SCREEN_COORDS",
           "num_params": 5,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Converts 3D coordinates from the world into window screen coordinates (pixels)"
         },
         {
           "id": "0B56",
@@ -61538,35 +61563,36 @@
           ]
         },
         {
-          "id": "0B68",
-          "name": "SAMP_RENDER_DRAW_LINE",
-          "num_params": 6,
           "input": [
             {
-              "name": "_p1",
+              "name": "fromcoordx",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "fromcoordy",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "tocoordx",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "tocoordy",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "tickness",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "color",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B68",
+          "name": "SF_RENDER_DRAW_LINE",
+          "num_params": 6,
+          "short_desc": "Draws a line between two window screen coordinates"
         },
         {
           "id": "0B69",

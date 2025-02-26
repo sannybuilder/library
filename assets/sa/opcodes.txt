@@ -2184,20 +2184,20 @@
 {0B38:} samp_connect_to_server {serverip} [string] {port} [int]
 {0B39:} [var stringbufferserverip: int], [var port: int] = samp_get_current_server_address
 {0B3A:} [var stringbufferservername: int] = samp_get_current_server_name
-{0B3B:} samp_show_dialog {id} [int] {name} [int] {content} [int] {leftormiddlebuttonname} [int] {rightbuttonname} [int] {style} [int]
+{0B3B:} samp_show_dialog {id} [int] {name} [int] {content} [int] {leftormiddlebuttonname} [int] {rightbuttonname} [int] {type} [int]
 {0B3C:}   samp_has_dialog_responded {dialogid} [int] {buttonidstore} [int] {listitemidstore} [int] {inputtextwritetostringbuffer} [int]
 {0B43:} samp_cmd_ret
-{0B44:}   samp_create_3d_text {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int]
-{0B45:}   samp_destroy_3d_text {_p1} [int]
-{0B46:}   samp_is_3d_text_defined {_p1} [int]
-{0B47:}   samp_close_current_dialog_with_button {_p1} [int]
-{0B48:}   samp_get_current_dialog_list_item {_p1} [int]
-{0B49:}   samp_set_current_dialog_list_item {_p1} [int]
-{0B4A:}   samp_get_current_dialog_editbox_text {_p1} [int]
-{0B4B:}   samp_set_current_dialog_editbox_text {_p1} [int]
-{0B4C:}   samp_is_dialog_active {_p1} [int]
-{0B4D:}   samp_get_current_dialog_type {_p1} [int]
-{0B4E:}   samp_get_current_dialog_id {_p1} [int]
+{0B44:}   [var 3Dtextid: int] = samp_create_3d_text {text} [string] {color} [int] {coordx} [float] {coordy} [float] {coordz} [float] {visibilityradius} [float] {showbehindwalls} [bool] {attachedplayerid} [int] {attachedcarid} [int]
+{0B45:}   samp_destroy_3d_text {3Dtextid} [int]
+{0B46:}   samp_is_3d_text_defined {3Dtextid} [int]
+{0B47:}   samp_close_current_dialog_with_button {buttonid} [int]
+{0B48:}   [var itemid: int] = samp_get_current_dialog_list_item
+{0B49:}   samp_select_list_item_from_current_dialog {itemid} [int]
+{0B4A:}   [var stringbuffer: int] = samp_get_current_dialog_editbox_text
+{0B4B:}   samp_set_current_dialog_editbox_text {text} [string]
+{0B4C:}   samp_is_dialog_active {dialogid} [int]
+{0B4D:}   [var typeid: int] = samp_get_type_of_last_opened_dialog
+{0B4E:}   [var id: int] = samp_get_id_of_last_opened_dialog
 {0B4F:} samp_get_gamestate {_p1} [int]
 {0B50:}   samp_get_object_by_id {_p1} [int] {_p2} [int]
 {0B51:}   samp_get_pickup_by_id {_p1} [int] {_p2} [int]

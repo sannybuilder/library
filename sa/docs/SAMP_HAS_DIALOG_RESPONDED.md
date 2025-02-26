@@ -1,0 +1,3 @@
+* Passing a variable to ***buttonidstore*** will return the pressed button id to this variable. You can Pass a **NULL Pointer** *(buttonidstore = 0)* to indicate that you don't need this.
+* Passing a variable to ***listitemidstore*** will return the id of the selected item of its list to this variable. You can Pass a **NULL Pointer** *(listitemidstore = 0)* to indicate that you don't need this.
+* Passing a variable to ***inputtextwritetostringbuffer*** will write the input text as string into this variable. You can Pass a **NULL Pointer** *(inputtextwritetostringbuffer = 0)* to indicate that you don't need this.

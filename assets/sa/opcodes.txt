@@ -2197,14 +2197,14 @@
 {0B4B:}   samp_set_current_dialog_editbox_text {text} [string]
 {0B4C:}   samp_is_dialog_active {dialogid} [int]
 {0B4D:}   [var typeid: int] = samp_get_type_of_last_opened_dialog
-{0B4E:}   [var id: int] = samp_get_id_of_last_opened_dialog
-{0B4F:} samp_get_gamestate {_p1} [int]
-{0B50:}   samp_get_object_by_id {_p1} [int] {_p2} [int]
-{0B51:}   samp_get_pickup_by_id {_p1} [int] {_p2} [int]
-{0B52:}   samp_get_object_id {_p1} [int] {_p2} [int]
-{0B53:}   samp_get_pickup_id {_p1} [int] {_p2} [int]
-{0B54:}   samp_get_listbox_size {_p1} [int]
-{0B55:}   samp_convert_3d_coords_to_screen {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
+{0B4E:}   [var dialogid: int] = samp_get_id_of_last_opened_dialog
+{0B4F:} [var statusid: SampGameState] = samp_get_gamestate
+{0B50:}   [var handle: Object] = samp_get_object_by_id {id} [int]
+{0B51:}   [var handle: Pickup] = samp_get_pickup_by_id {id} [int]
+{0B52:}   [var id: int] = samp_get_object_id {handle} [Object]
+{0B53:}   [var id: int] = samp_get_pickup_id {handle} [Pickup]
+{0B54:}   [var itemscount: int] = samp_get_items_count_of_last_opened_dialog
+{0B55:}   [var screencoordx: int], [var screencoordy: int] = sf_convert_3d_coords_to_window_screen_coords {worldcoordx} [float] {worldcoordy} [float] {worldcoordz} [float]
 {0B56:} samp_set_game_key {_p1} [int] {_p2} [int]
 {0B57:}   samp_get_player_animation {_p1} [int] {_p2} [int]
 {0B58:}   samp_get_animation_name {_p1} [int] {_p2} [int] {_p3} [int]
@@ -2241,7 +2241,7 @@
 {0B8B:}   raknet_send_bit_stream {_p1} [int]
 {0B66:} samp_from_argb {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {0B67:} samp_to_argb {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
-{0B68:} samp_render_draw_line {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
+{0B68:} sf_render_draw_line {fromcoordx} [int] {fromcoordy} [int] {tocoordx} [int] {tocoordy} [int] {tickness} [int] {color} [int]
 {0B69:} samp_render_draw_box {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {0B6A:} samp_render_draw_box_with_border {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int]
 {0B6B:} samp_render_get_font_draw_length {_p1} [int] {_p2} [int] {_p3} [int]

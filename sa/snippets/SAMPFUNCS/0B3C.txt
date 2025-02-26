@@ -1,0 +1,16 @@
+// Example 1: Simple Dialog Response Check
+if SAMP_HAS_DIALOG_RESPONDED {dialogid} 117 {buttonidstore} 0  {buttonidstore} 0 {inputtextwritetostringbuffer} 0
+then // we have responded to dialog 117
+else // we are still interacting with dialog 117, or dialog 117 still hasn't shown up.
+end
+
+
+// Example 2: Get Pressed Button ID, Selected Item ID, and the Input Text
+int whichButton, whichItem
+int inputtedText = ALLOCATE_MEMORY {size} 300
+if SAMP_HAS_DIALOG_RESPONDED {dialogid} 117 {buttonidstore} whichButton  {buttonidstore} whichItem {inputtextwritetostringbuffer} inputtedText
+then // we have responded to dialog 117
+    do something to whichButton, whichItem, and inputtedText
+else // we are still interacting with dialog 117, or dialog 117 still hasn't shown up.
+end
+FREE_MEMORY {address} inputtedText

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740542496200,
-    "version": "0.859",
+    "last_update": 1740548490665,
+    "version": "0.860",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60411,7 +60411,7 @@
           ],
           "output": [
             {
-              "name": "pointer",
+              "name": "stringpointernickname",
               "type": "int",
               "source": "var_any"
             }
@@ -60422,122 +60422,135 @@
           "short_desc": "Returns a pointer to the nickname of the specified player"
         },
         {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "color",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B37",
           "name": "SAMP_GET_PLAYER_COLOR",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the color of the specified player in 0xAARRGGBB format"
         },
         {
+          "input": [
+            {
+              "name": "serverip",
+              "type": "string"
+            },
+            {
+              "name": "port",
+              "type": "int"
+            }
+          ],
           "id": "0B38",
           "name": "SAMP_CONNECT_TO_SERVER",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Connects to the specified samp server information. Take note that our client will force disconnect to the currently connected server. You can use domain name instead of ip address"
         },
         {
+          "output": [
+            {
+              "name": "stringbufferserverip",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "port",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B39",
           "name": "SAMP_GET_CURRENT_SERVER_ADDRESS",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the server's IP address and port. Take note that the server ip written to the string buffer is always in ip address format (not in domain name format)"
         },
         {
+          "output": [
+            {
+              "name": "stringbufferservername",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B3A",
           "name": "SAMP_GET_CURRENT_SERVER_NAME",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Writes the server name to the buffer variable"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "name",
+              "type": "int"
+            },
+            {
+              "name": "content",
+              "type": "int"
+            },
+            {
+              "name": "leftormiddlebuttonname",
+              "type": "int"
+            },
+            {
+              "name": "rightbuttonname",
+              "type": "int"
+            },
+            {
+              "name": "style",
+              "type": "int"
+            }
+          ],
           "id": "0B3B",
           "name": "SAMP_SHOW_DIALOG",
           "num_params": 6,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Shows an artificial SAMP dialog with specified parameter attributes"
         },
         {
+          "input": [
+            {
+              "name": "dialogid",
+              "type": "int"
+            },
+            {
+              "name": "buttonidstore",
+              "type": "int"
+            },
+            {
+              "name": "listitemidstore",
+              "type": "int"
+            },
+            {
+              "name": "inputtextwritetostringbuffer",
+              "type": "int"
+            }
+          ],
           "id": "0B3C",
           "name": "SAMP_HAS_DIALOG_RESPONDED",
           "num_params": 4,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns logical true if the last submitted SAMP Dialog is equal to the specified dialogid"
         },
         {
           "id": "0B43",
           "name": "SAMP_CMD_RET",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Marks the end of the callback created by Opcode 0B34. Used as its returning statement"
         },
         {
           "id": "0B44",

@@ -1,0 +1,29 @@
+// Example 1: attach a 3D text to our character or car
+int attachedID, my3DTextID
+if IS_CHAR_SITTING_IN_ANY_CAR $scplayer
+then // attach a red 3d text at the top of my car
+    int myCar = STORE_CAR_CHAR_IS_IN_NO_SAVE $scplayer
+    int myCarModel = GET_CAR_MODEL myCar
+    float offsetZ, unused
+    unused, unused, unused, unused, unused, offsetZ = get_model_dimensions {modelId} myCarModel
+    offsetZ += 2.0 // elevate
+    attachedID = SAMP_GET_CAR_ID {handle} myCar
+    if my3DTextID = SAMP_CREATE_3D_TEXT {text} "I'm InCar" {color} 0xFFFF0000 {coordx} 0.0 {coordy} 0.0 {coordz} offsetZ {visibilityradius} 10.0 {showbehindwalls} true {attachedplayerid} -1 {attachedcarid} attachedID
+    then // my3DTextID has been created successfully
+        // do something to my3DTextID
+    end
+else // attach a purple 3d text at my character's back
+    attachedID = SAMP_GET_PLAYER_ID {handle} $scplayer
+    if my3DTextID = SAMP_CREATE_3D_TEXT {text} "I'm Onfoot" {color} 0xFFFF00FF {coordx} 0.0 {coordy} -2.0 {coordz} 0.0 {visibilityradius} 10.0 {showbehindwalls} true {attachedplayerid} attachedID {attachedcarid} -1
+    then // my3DTextID has been created successfully
+        // do something to my3DTextID
+    end
+end
+
+
+// Example 2: Create a yellow 3D Text at specified world coordinate
+int my3DTextID
+if my3DTextID = SAMP_CREATE_3D_TEXT {text} "Hello World!" {color} 0xFFFFFF00 {coordx} 1324.14 {coordy} -2032.44 {coordz} 50.13 {visibilityradius} 50.0 {showbehindwalls} false {attachedplayerid} -1 {attachedcarid} -1
+then // my3DTextID has been created successfully
+    // do something to my3DTextID
+end

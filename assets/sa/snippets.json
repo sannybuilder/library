@@ -98,7 +98,7 @@
     "0B26": "int targetArmor, targetPlayer\n// do something to targetPlayer\n{armor} targetArmor = SAMP_GET_PLAYER_ARMOR {playerid} targetPlayer",
     "0B27": "SAMP_SET_GAMESTATE {statusid} SampGameState.Disconnected // disconnect to server",
     "0B28": "SAMP_SEND_DISCONNECTED_TO_SERVER {reasonid} SampDisconnectReason.KickedOrBanned",
-    "0B29": "SAMP_SET_LOCAL_NICKNAME {nickname} \"ajom\" // locally change our nickname into ajom",
+    "0B29": "SAMP_SET_LOCAL_NICKNAME {nickname} \"ajom\" // locally change our nickname into ajom\n\n\nint strBuf = ALLOCATE_MEMORY {size} 30\n// write something to strBuf as a valid string\nSAMP_SET_LOCAL_NICKNAME {nickname} strBuf // locally change our nickname into ajom\nFREE_MEMORY {address} strBuf",
     "0B2A": "// get my ping\nint myPlayerID, myPing\nint playerChar = get_player_char 0\n{id} myPlayerID = SAMP_GET_PLAYER_ID {handle} playerChar\n{ping} myPing = SAMP_GET_PLAYER_PING {playerid} myPlayerID",
     "0B2B": "// get my player id\nint char = get_player_char 0\nint myID = SAMP_GET_PLAYER_ID {handle} char",
     "0B2C": "int targetHandle\n// do something to targetHandle\nint targetID = SAMP_GET_CAR_ID {handle} targetHandle",
@@ -113,7 +113,9 @@
     "0B37": "int targetPlayer\n// do something to targetPlayer\nint targetColor = SAMP_GET_PLAYER_COLOR {playerid} targetPlayer",
     "0B38": "SAMP_CONNECT_TO_SERVER {stringserverip} \"127.0.0.1\" {port} 7777 // connect to our local server using its ip counterpart\n\nwait 10000\n\nSAMP_CONNECT_TO_SERVER {stringserverip} \"localhost\" {port} 7777 // connect to our local server using its domain name counterpart\n\nwait 10000\n\nSAMP_CONNECT_TO_SERVER {stringserverip} \"51.79.255.181\" {port} 7778 // connect to a certain remote server by ip\n\nwait 10000\n\nSAMP_CONNECT_TO_SERVER {stringserverip} \"samp.ugbase.eu\" {port} 7777 // connect to a certain remote server by domain name",
     "0B39": "// Example 1, how to correctly write the server IP to string variable 1@v\nconst\n    port = 0@\n    strBuf = 1@\nend\nstrBuf = GET_VAR_POINTER strBuf // get pointer to self\nstrBuf, port = SAMP_GET_CURRENT_SERVER_ADDRESS\n// server ip in string format has been written to strBuf. This string occupies 16 bytes to satisfy the string ip(uses 1@, 2@, 3@, 4@)\n\n// Example 2, write server IP to a temporarily allocated memory\nint strBuf, port\nstrBuf = ALLOCATE_MEMORY {size} 16\nstrBuf, port = SAMP_GET_CURRENT_SERVER_ADDRESS\n// server ip in string format has been written at the allocated memory region strBuf\n// do something to strBuf and port\nFREE_MEMORY {address} strBuf // free this temporary memory region to avoid memory leak",
-    "0B3A": "int strBuf = ALLOCATE_MEMORY {size} 256\nstrBuf = SAMP_GET_CURRENT_SERVER_NAME\n// do something to strBuf\nFREE_MEMORY strBuf"
+    "0B3A": "int strBuf = ALLOCATE_MEMORY {size} 256\nstrBuf = SAMP_GET_CURRENT_SERVER_NAME\n// do something to strBuf\nFREE_MEMORY strBuf",
+    "0B3C": "// Example 1: Simple Dialog Response Check\nif SAMP_HAS_DIALOG_RESPONDED {dialogid} 117 {buttonidstore} 0  {buttonidstore} 0 {inputtextwritetostringbuffer} 0\nthen // we have responded to dialog 117\nelse // we are still interacting with dialog 117, or dialog 117 still hasn't shown up.\nend\n\n\n// Example 2: Get Pressed Button ID, Selected Item ID, and the Input Text\nint whichButton, whichItem\nint inputtedText = ALLOCATE_MEMORY {size} 300\nif SAMP_HAS_DIALOG_RESPONDED {dialogid} 117 {buttonidstore} whichButton  {buttonidstore} whichItem {inputtextwritetostringbuffer} inputtedText\nthen // we have responded to dialog 117\n    do something to whichButton, whichItem, and inputtedText\nelse // we are still interacting with dialog 117, or dialog 117 still hasn't shown up.\nend\nFREE_MEMORY {address} inputtedText",
+    "0B43": "// See Opcode 0B34 for example usage"
   },
   "audio": {
     "2500": "while is_audio_stream_playing 0@\n    wait 0\nend",

@@ -1,0 +1,1 @@
+ Take note that the server rounds down the coordinate values for data compression purposes. Meaning that the returned coordinates of this opcode have discrepancies compared to the correct coordinates

@@ -1,0 +1,1 @@
+Take note that Character Armor is Different from Player Armor. In SAMP, It is possible for both of them to have different values. But the server uses the Player Armor value

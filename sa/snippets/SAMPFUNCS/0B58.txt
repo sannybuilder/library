@@ -1,0 +1,17 @@
+int myPlayerID = samp_get_player_id {handle} $scplayer
+int myAnimID = samp_get_player_animation {playerid} myPlayerID
+int strBufFileName = allocate_memory {size} 20
+int strBufAnimName = allocate_memory {size} 20
+strBufFileName, strBufAnimName = SAMP_GET_ANIMATION_NAME {animid} myAnimID
+
+// do something to strBufFileName and strBufAnimName
+
+if strBufFileName, strBufAnimName = SAMP_GET_ANIMATION_NAME {animid} 8237 // <<<< test invalid id
+then
+    // this will not be reached
+else
+    // expected to reach here
+end
+
+FREE_MEMORY {address} strBufFileName
+FREE_MEMORY {address} strBufAnimName

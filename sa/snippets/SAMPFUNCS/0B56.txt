@@ -1,0 +1,25 @@
+if IS_CHAR_ON_FOOT $scplayer
+then
+    // sprint leftwards for 1 second
+    TIMERA = 0
+    repeat
+        SF_SET_BUTTON {buttonid} Button.LeftStickX {state} -128 // press run leftwards key
+        SF_SET_BUTTON {buttonid} Button.Cross {state} -128 // press Sprint key
+        wait 0
+    until TIMERA > 1000
+
+    // sprint rightwards for 1 second
+    TIMERA = 0
+    repeat
+        SF_SET_BUTTON {buttonid} Button.LeftStickX {state} 128 // press run rightwards key
+        SF_SET_BUTTON {buttonid} Button.Cross {state} -128 // press Sprint key
+        wait 0
+    until TIMERA > 1000
+
+    // fire weapon for 3 seconds
+    TIMERA = 0
+    repeat
+        SF_SET_BUTTON {buttonid} Button.Circle {state} 255 // press fire key
+        wait 0
+    until TIMERA > 3000
+end

@@ -1,0 +1,1 @@
+Take note: Our LOCAL Player is not a REMOTE Player. So Passing the ID of our local player to this opcode will return false

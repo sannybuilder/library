@@ -1,0 +1,1 @@
+Keep in mind that this command allocates memory, so don't forget to manually destroy this object using opcode 0B3E to free it from memory

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740614899127,
-    "version": "0.863",
+    "last_update": 1740627016058,
+    "version": "0.864",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60913,114 +60913,135 @@
           "short_desc": "Converts 3D coordinates from the world into window screen coordinates (pixels)"
         },
         {
-          "id": "0B56",
-          "name": "SAMP_SET_GAME_KEY",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "buttonid",
+              "type": "Button"
             },
             {
-              "name": "_p2",
+              "name": "behaviorvalue",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B56",
+          "name": "SF_SET_BUTTON",
+          "num_params": 2,
+          "short_desc": "Sets the press status of a game (NOT keyboard) key"
         },
         {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "animid",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B57",
           "name": "SAMP_GET_PLAYER_ANIMATION",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the SAMP ID of the animation currently being played by the specified player. Can be used as a condition which evaluates as true if the player is streamed"
         },
         {
+          "input": [
+            {
+              "name": "animid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "filename",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "animname",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B58",
           "name": "SAMP_GET_ANIMATION_NAME",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Writes the filename and animname of the animation using its SAMP ID. Can be used as a condition which evaluates as true if animid is valid"
         },
         {
+          "input": [
+            {
+              "name": "animname",
+              "type": "string"
+            },
+            {
+              "name": "filename",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "animid",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B59",
           "name": "SAMP_GET_ANIMATION_ID",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the Animation SAMP ID using its name and the file it was loaded from. Can be used as a condition that returns false if the provided filename and animname has no corresponding animid"
         },
         {
+          "output": [
+            {
+              "name": "width",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B5A",
-          "name": "SAMP_GET_SCREEN_RESOLUTION",
+          "name": "SF_GET_SCREEN_RESOLUTION",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the current window screen resolution in pixels"
         },
         {
+          "input": [
+            {
+              "name": "itemid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "stringbufferitemtext",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B5B",
-          "name": "SAMP_GET_LISTBOX_ITEM",
+          "name": "SAMP_GET_LISTBOX_ITEM_TEXT_OF_DIALOG",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Writes the text of an item from the currently opened dialog's list. Can be used as a condition which evaluates as true if a dialog is opened with valid itemid"
         },
         {
           "id": "0B5D",
@@ -61049,9 +61070,6 @@
           ]
         },
         {
-          "id": "0B5F",
-          "name": "SAMP_CONVERT_WINDOW_SCREEN_COORDS_TO_GAME",
-          "num_params": 4,
           "input": [
             {
               "name": "_p1",
@@ -61069,7 +61087,10 @@
               "name": "_p4",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B5F",
+          "name": "SAMP_CONVERT_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS",
+          "num_params": 4
         },
         {
           "id": "0B60",
@@ -61095,18 +61116,19 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
           "id": "0B5C",
           "name": "SAMP_IS_PLAYER_PAUSED",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Evaluates as logical true if the specified player is in paused state (players who were afk))"
         },
         {
           "id": "0B61",

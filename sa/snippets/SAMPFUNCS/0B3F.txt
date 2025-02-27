@@ -1,0 +1,15 @@
+int myBitstream = SAMP_RAKNET_CREATE_BITSTREAM
+SAMP_RAKNET_BITSTREAM_WRITE myBitstream {value} 0x83FF3ABC {datatype} SampBitStreamDataType.Int {datasize} DataTypeSize.Int // example command that increases the Write Pointer by 4
+int testValue = SAMP_RAKNET_BITSTREAM_READ myBitstream {datatype} SampBitStreamDataType.Short {datasize} DataTypeSize.Short // example command that increases the Read Pointer by 2
+// expected: testValue = 0x3ABC
+int checkWriteOffset, checkReadOffset
+checkWriteOffset = SAMP_RAKNET_BITSTREAM_GET_WRITE_OFFSET myBitstream
+checkReadOffset = SAMP_RAKNET_BITSTREAM_GET_READ_OFFSET myBitstream
+// expected: checkWriteOffset = 4
+// expected: checkReadOffset = 2
+
+SAMP_RAKNET_RESET_BITSTREAM myBitstream
+checkWriteOffset = SAMP_RAKNET_BITSTREAM_GET_WRITE_OFFSET myBitstream
+checkReadOffset = SAMP_RAKNET_BITSTREAM_GET_READ_OFFSET myBitstream
+// expected: checkWriteOffset = 0
+// expected: checkReadOffset = 0

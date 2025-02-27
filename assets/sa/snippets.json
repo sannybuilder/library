@@ -136,6 +136,9 @@
     "0B55": "int targetActor\nif targetActor = GET_CHAR_PLAYER_IS_TARGETING $player1\nthen\n    // get target screen coordinates\n    float worldX, worldY, worldZ\n    worldX, worldY, worldZ = GET_CHAR_COORDINATES targetActor\n    int targetScreenX, targetScreenY = SF_CONVERT_3D_COORDS_TO_WINDOW_SCREEN_COORDS {worldcoordx} worldX {worldcoordy} worldY {worldcoordz} worldZ\n\n    // get my screen coordinates\n    worldX, worldY, worldZ = GET_CHAR_COORDINATES $scplayer\n    int myScreenX, myScreenY = SF_CONVERT_3D_COORDS_TO_WINDOW_SCREEN_COORDS {worldcoordx} worldX {worldcoordy} worldY {worldcoordz} worldZ\n\n    // draw a teal-colored line from me to target\n    SF_RENDER_DRAW_LINE {fromcoordx} myScreenX {fromcoordy} myScreenY {tocoordx} targetScreenX {tocoordy} targetScreenY {tickness} 2 {color} 0xFF00FFFF\nend",
     "0B68": "// draw a green line at the window screen\nSF_RENDER_DRAW_LINE {fromcoordx} 100 {fromcoordy} 150 {tocoordx} 720 {tocoordy} 300 {tickness} 1 {color} 0xFF00FF00"
   },
+  "Sphere": {
+    "2880": "Sphere s = add_sphere 0 0 0 2.0\nset_sphere_color s 0 255 0"
+  },
   "audio": {
     "2500": "while is_audio_stream_playing 0@\n    wait 0\nend",
     "2501": "set_audio_stream_speed 0@ {speed} 0.25\nfloat duration = get_audio_stream_duration 0@\nprint_formatted_now \"It will take %f seconds to play this sound\" {time} 5000 {args} duration",

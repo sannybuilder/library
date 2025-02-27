@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740678919288,
-    "version": "0.866",
+    "last_update": 1740683062501,
+    "version": "0.867",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59959,9 +59959,9 @@
             }
           ],
           "id": "0AF8",
-          "name": "SAMP_SEND_CLIENT_SIDE_MESSAGE_TO_CHAT",
+          "name": "SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT",
           "num_params": 3,
-          "short_desc": "Adds one line of colored message to the chat. Take note that this chat message is not sent to server, meaning is only visible in our client. Can process formatted string. The text coloring in hex is 0xAARRGGBB (A = Alpha, R = Red, G = Green, B = Blue)"
+          "short_desc": "Adds one line of colored message to the chat"
         },
         {
           "input": [
@@ -59973,7 +59973,7 @@
           "id": "0AF9",
           "name": "SAMP_SEND_CHAT_MESSAGE_TO_SERVER",
           "num_params": 1,
-          "short_desc": "Sends a message or command to the server. Take note that this opcode can only process literal strings. So passing a formatted string with arguments will treat it as a literal string while the passed arguments are ignored"
+          "short_desc": "Sends a message or command to the server"
         },
         {
           "id": "0AFA",
@@ -59994,7 +59994,7 @@
           "id": "0AFB",
           "name": "SAMP_SEND_REQUEST_CLASS_TO_SERVER",
           "num_params": 1,
-          "short_desc": "Sends RequestClass RPC (ID = 128) to Server"
+          "short_desc": "Sends SampRpc.RequestClass to Server"
         },
         {
           "input": [
@@ -60018,7 +60018,7 @@
           "id": "0AFC",
           "name": "SAMP_SEND_SCM_EVENT_TO_SERVER",
           "num_params": 4,
-          "short_desc": "Sends RPC (ID = 96) information about car modification to the server"
+          "short_desc": "Sends SampRpc.ScmEvent information about car modification to the server"
         },
         {
           "input": [
@@ -60030,7 +60030,7 @@
           "id": "0AFD",
           "name": "SAMP_SET_SPECIAL_ACTION",
           "num_params": 1,
-          "short_desc": "Sets the special action for our Player. Our character will perform this special action as well. Executing this opcode is like receiving a \"SetPlayerSpecialAction\" RPC (ID = 88) from the Server"
+          "short_desc": "Sets the special action for our Player"
         },
         {
           "input": [
@@ -60046,7 +60046,7 @@
           "id": "0AFE",
           "name": "SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER",
           "num_params": 2,
-          "short_desc": "Sends a \"DeathNotification\" RPC (ID = 53) to Server. This will tell the server that our local player got killed by the specified player using a specific weapon. Set PlayerID = 0xFFFF to indicate that our local player died by natural means (falling, drowned/toxicated). Take note that this command will not actually kill our local character. Use Opcode 05BE or Opcode 0321 Separately to do so"
+          "short_desc": "Sends SampRpc.Death to Server without our character actually dying"
         },
         {
           "input": [
@@ -60119,9 +60119,9 @@
             }
           ],
           "id": "0B23",
-          "name": "SAMP_IS_PLAYER_CONNECTED",
+          "name": "SAMP_IS_REMOTE_PLAYER_CONNECTED",
           "num_params": 1,
-          "short_desc": "Returns true if REMOTE Player with the given ID is connected. Take note: Our LOCAL Player is not a REMOTE Player. So Passing the ID of our local player to this opcode will return false",
+          "short_desc": "Returns true if REMOTE Player with the given ID is connected",
           "attrs": {
             "is_condition": true
           }
@@ -60162,7 +60162,7 @@
           "id": "0B25",
           "name": "SAMP_GET_PLAYER_HEALTH",
           "num_params": 2,
-          "short_desc": "Gets the amount of health the player has. Take note that Character Health is Different from Player Health. It is possible for both of them to have different values. But the server uses the Player Health value"
+          "short_desc": "Gets the amount of health the specified player has"
         },
         {
           "input": [
@@ -60181,7 +60181,7 @@
           "id": "0B26",
           "name": "SAMP_GET_PLAYER_ARMOR",
           "num_params": 2,
-          "short_desc": "Gets the amount of armor a player has. Take note that Character Armor is Different from Player Armor. In SAMP, It is possible for both of them to have different values. But the server uses the Player Armor value"
+          "short_desc": "Gets the amount of armor the specified player has"
         },
         {
           "input": [
@@ -60205,7 +60205,7 @@
           "id": "0B28",
           "name": "SAMP_SEND_DISCONNECTED_TO_SERVER",
           "num_params": 1,
-          "short_desc": "Sends a \"Disconnected\" RPC (ID = 138) to the server. Take note that a Server does not normally receive a disconnection RPC with reason = SampDisconnectReason.TimeoutOrCrashed"
+          "short_desc": "Sends SampRpc.ScrServerQuit to the server without actually disconnecting our client to the server"
         },
         {
           "input": [
@@ -60217,7 +60217,7 @@
           "id": "0B29",
           "name": "SAMP_SET_LOCAL_NICKNAME",
           "num_params": 1,
-          "short_desc": "Changes our Local Nickname. Take note that this new nickname will only be visible at our client, meaning that the server is unaffected and the remote players will not see our nickname changed"
+          "short_desc": "Changes our Local Nickname"
         },
         {
           "input": [
@@ -60303,7 +60303,7 @@
           "id": "0B2F",
           "name": "SAMP_GET_STREAMED_OUT_PLAYER_COORD",
           "num_params": 4,
-          "short_desc": "Returns the 3D Coordinates of a player who is outside the stream zone, if the server allows it. Take note that the server rounds down the coordinate values for data compression purposes. Meaning that the returned coordinates of this opcode have discrepancies compared to the correct coordinates"
+          "short_desc": "Returns the 3D Coordinates of a player who is outside the stream zone, if the server allows it"
         },
         {
           "input": [
@@ -60555,7 +60555,7 @@
             }
           ],
           "id": "0B3D",
-          "name": "RAKNET_CREATE_BITSTREAM",
+          "name": "SAMP_RAKNET_CREATE_BITSTREAM",
           "num_params": 1,
           "short_desc": "Creates a new raknet bitstream object",
           "class": "Bitstream",
@@ -60565,58 +60565,69 @@
           }
         },
         {
+          "output": [
+            {
+              "name": "self",
+              "type": "Bitstream",
+              "source": "var_any"
+            }
+          ],
           "id": "0B3E",
-          "name": "RAKNET_DELETE_BIT_STREAM",
+          "name": "SAMP_RAKNET_DELETE_BITSTREAM",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_destructor": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "Delete",
+          "short_desc": "Remove's the specified bitstream object, freeing it from memory"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
           "id": "0B3F",
-          "name": "RAKNET_RESET_BIT_STREAM",
+          "name": "SAMP_RAKNET_RESET_BITSTREAM",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Resets all parameters/clears BitStream",
+          "class": "Bitstream",
+          "member": "Reset"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "value",
+              "type": "int"
+            },
+            {
+              "name": "datatype",
+              "type": "SampBitStreamDataType"
+            },
+            {
+              "name": "datasize",
+              "type": "int"
+            }
+          ],
           "id": "0B40",
-          "name": "RAKNET_BIT_STREAM_WRITE",
+          "name": "SAMP_RAKNET_BITSTREAM_WRITE",
           "num_params": 4,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "Write",
+          "short_desc": "Writes a specified value with datatype and datasize at the \"write pointer\" of the specified bitstream, then advances its \"write pointer\" by the same size"
         },
         {
           "id": "0B41",

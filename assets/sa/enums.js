@@ -3880,3 +3880,10 @@ export const SampDisconnectReason = {
   "Quit": 1,
   "KickedOrBanned": 2
 };
+export const DataTypeSize = {
+  "Byte": 1,
+  "Bool": 1,
+  "Short": 2,
+  "Int": 4,
+  "Float": 4
+};

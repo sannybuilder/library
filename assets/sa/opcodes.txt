@@ -2151,7 +2151,7 @@
 {0D7F:} draw_2d_sprite_with_gradient {texture} [int] {cornerAx} [float] {cornerAy} [float] {cornerBx} [float] {cornerBy} [float] {red0} [int] {green0} [int] {blue0} [int] {alpha0} [int] {red1} [int] {green1} [int] {blue1} [int] {alpha1} [int] {red2} [int] {green2} [int] {blue2} [int] {alpha2} [int] {red3} [int] {green3} [int] {blue3} [int] {alpha3} [int] {angle} [float]
 {0AF6:} samp_spawn_local_player
 {0AF7:} [var pointer: int] = samp_get_base_address
-{0AF8:} samp_send_client_side_message_to_chat {format} [string] {color} [int] {args} [arguments]
+{0AF8:} samp_add_client_sided_message_to_chat {format} [string] {color} [int] {args} [arguments]
 {0AF9:} samp_send_chat_message_to_server {message} [string]
 {0AFA:}   samp_is_available
 {0AFB:} samp_send_request_class_to_server {classid} [int]
@@ -2162,7 +2162,7 @@
 {0B20:} [var handle: Char] = samp_get_player_char_by_id {id} [int]
 {0B21:}   samp_is_chat_open
 {0B22:} samp_set_send_rate {type} [SampSendRateType] {delay} [int]
-{0B23:}   samp_is_player_connected {id} [int]
+{0B23:}   samp_is_remote_player_connected {id} [int]
 {0B24:} [var playerstruct: int] = samp_get_player_struct {playerid} [int]
 {0B25:} [var health: int] = samp_get_player_health {playerid} [int]
 {0B26:} [var armor: int] = samp_get_player_armor {playerid} [int]
@@ -2186,10 +2186,10 @@
 {0B3A:} [var stringbufferservername: int] = samp_get_current_server_name
 {0B3B:} samp_show_dialog {id} [int] {name} [int] {content} [int] {leftormiddlebuttonname} [int] {rightbuttonname} [int] {type} [int]
 {0B3C:}   samp_has_dialog_responded {dialogid} [int] {buttonidstore} [int] {listitemidstore} [int] {inputtextwritetostringbuffer} [int]
-{0B3D:} [var handle: Bitstream] = raknet_create_bitstream
-{0B3E:}   raknet_delete_bit_stream {_p1} [int]
-{0B3F:}   raknet_reset_bit_stream {_p1} [int]
-{0B40:}   raknet_bit_stream_write {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{0B3D:} [var handle: Bitstream] = samp_raknet_create_bitstream
+{0B3E:}   [var self: Bitstream] = samp_raknet_delete_bitstream
+{0B3F:}   samp_raknet_reset_bitstream [Bitstream]
+{0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [int] {datatype} [SampBitStreamDataType] {datasize} [int]
 {0B41:}   raknet_send_rpc_extended {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
 {0B42:}   raknet_send_bit_stream_extended {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {0B43:} samp_cmd_ret

@@ -1,0 +1,12 @@
+int myRCONCommand = ALLOCATE_MEMORY 58
+myRCONCommand = STRING_FORMAT "This_is_a_very_long_String_Example_we_will_send_to_Server"
+int textLength = SF_STRLEN myRCONCommand
+    // Construct a Bitstream holding a SampRpc.RconCommand data
+int myBitStream = SAMP_RAKNET_CREATE_BITSTREAM // create bitstream object with class Bitstream
+SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} SampRpc.RconCommand {datatype} SampBitStreamDataType.Byte {datasize} DataTypeSize.Byte // PacketID
+SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} textLength {datatype} SampBitStreamDataType.Int {datasize} DataTypeSize.Int // TextLength
+SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} myRCONCommand {datatype} SampBitStreamDataType.Array {datasize} textLength // CMDText
+    //
+// Bitstream is ready to be transmitted
+SAMP_RAKNET_SEND_RAW_BITSTREAM_TO_SERVER {bitstream} myBitStream {priorityid} SampPriority.Medium {reliabilityid} SampReliability.ReliableOrdered {orderingchannel} 0
+FREE_MEMORY myRCONCommand

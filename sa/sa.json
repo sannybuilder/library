@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740733697391,
-    "version": "0.868",
+    "last_update": 1740773262767,
+    "version": "0.869",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60630,64 +60630,70 @@
           "short_desc": "Writes a specified value with datatype and datasize at the \"write pointer\" of the specified bitstream, then advances its \"write pointer\" by the same size"
         },
         {
+          "input": [
+            {
+              "name": "rpcid",
+              "type": "SampRpc"
+            },
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "priorityid",
+              "type": "SampPriority"
+            },
+            {
+              "name": "reliabilityid",
+              "type": "SampReliability"
+            },
+            {
+              "name": "orderingchannel",
+              "type": "int"
+            },
+            {
+              "name": "shifttimestamp",
+              "type": "int"
+            }
+          ],
           "id": "0B41",
-          "name": "RAKNET_SEND_RPC_EXTENDED",
+          "name": "SAMP_RAKNET_SEND_BITSTREAM_AS_RPC_TO_SERVER",
           "num_params": 6,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sends a BitStream as an RPC with the specified parameters",
+          "class": "Bitstream",
+          "member": "SendAsRpc"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "priorityid",
+              "type": "SampPriority"
+            },
+            {
+              "name": "reliabilityid",
+              "type": "SampReliability"
+            },
+            {
+              "name": "orderingchannel",
+              "type": "int"
+            }
+          ],
           "id": "0B42",
-          "name": "RAKNET_SEND_BIT_STREAM_EXTENDED",
+          "name": "SAMP_RAKNET_SEND_RAW_BITSTREAM_TO_SERVER",
           "num_params": 4,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "SendRaw",
+          "short_desc": "Sends a Raw BitStream with the specified parameters. Commonly used to send dacket data to server"
         },
         {
           "id": "0B43",
@@ -64506,9 +64512,6 @@
           ]
         },
         {
-          "id": "0C17",
-          "name": "SAMP_STRLEN",
-          "num_params": 2,
           "input": [
             {
               "name": "_p1",
@@ -64518,7 +64521,10 @@
               "name": "_p2",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0C17",
+          "name": "SF_STRLEN",
+          "num_params": 2
         },
         {
           "id": "0C18",

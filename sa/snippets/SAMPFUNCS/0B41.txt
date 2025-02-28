@@ -1,0 +1,15 @@
+if IS_CHAR_SITTING_IN_ANY_CAR $scplayer
+then
+    int myCar = STORE_CAR_CHAR_IS_IN_NO_SAVE $scplayer
+    int myCarID = SAMP_GET_CAR_ID myCar
+        // Construct a Bitstream holding a SampRpc.DamageCar data
+    int myBitStream = SAMP_RAKNET_CREATE_BITSTREAM // create bitstream object with class Bitstream
+    SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} myCarID {datatype} SampBitStreamDataType.Short {datasize} DataTypeSize.Short // CarID
+    SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} 0xFFFFFFFF {datatype} SampBitStreamDataType.Int {datasize} DataTypeSize.Int // bodyflags
+    SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} 0xFFFFFFFF {datatype} SampBitStreamDataType.Int {datasize} DataTypeSize.Int // doorflags
+    SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} 0xFF {datatype} SampBitStreamDataType.Byte {datasize} DataTypeSize.Byte // lightflags
+    SAMP_RAKNET_BITSTREAM_WRITE myBitStream {value} 0xFF {datatype} SampBitStreamDataType.Byte {datasize} DataTypeSize.Byte // wheelflags
+        //
+    // Bitstream is ready to be transmitted
+    SAMP_RAKNET_SEND_BITSTREAM_AS_RPC_TO_SERVER {rpcid} SampRpc.DamageCar {bitstream} myBitStream {priorityid} SampPriority.Medium {reliabilityid} SampReliability.ReliableOrdered {orderingchannel} 0 {shifttimestamp} 0
+end

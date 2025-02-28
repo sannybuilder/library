@@ -1,0 +1,20 @@
+debug_on // enable trace command
+
+if
+    int fileaHandle = open_file {filePathName} "root:\cleo\.cleo.log" {mode} "rt"
+then
+    int buffer = allocate_memory {size} 64
+    if
+        read_string_from_file fileaHandle {storeTo} buffer {maxLength} 64
+    then
+        trace "Read data: %s" buffer
+    else
+        trace "Failed to read data"
+    end
+    
+    // cleanup
+    free_memory {address} buffer
+    close_file fileaHandle
+else
+    trace "Failed to open the file"
+end

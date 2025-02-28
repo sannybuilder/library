@@ -1,0 +1,1 @@
+Can be used as a condition that evaluates as false if no dialog has been opened since the start of the game

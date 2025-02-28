@@ -1,0 +1,1 @@
+Can be used as a condition which evaluates as true it's from the SAMP Object Pool

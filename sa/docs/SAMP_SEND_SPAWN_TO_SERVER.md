@@ -1,0 +1,2 @@
+* Unlike opcode 0AF6, this does opcode does not actually teleport our Player Character to Spawn(Fake RPC).
+* Fact: Our client naturally sends this RPC, 2 seconds before our player spawns automatically.

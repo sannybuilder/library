@@ -1,0 +1,2 @@
+* This command updates the server about the component damage flags of a specified car, but this does not mean that this car has the actual damage(Fake RPC).
+* Damage Flags are bitfields. Where for each bitfield, 0 = functional, 1 = damaged.

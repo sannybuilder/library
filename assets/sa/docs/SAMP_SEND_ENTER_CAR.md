@@ -1,0 +1,1 @@
+This opcode does not instruct our character to actually enter the car(Fake RPC). Execute Opcode 05CA or Opcode 05CB separately to do so

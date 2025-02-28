@@ -1,0 +1,1 @@
+The server ip written to the string buffer is always in ip address format (not in domain name format)

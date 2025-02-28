@@ -1,0 +1,1 @@
+This opcode does not instruct our character to actually exit the car(Fake RPC). Execute Opcode 05CD/0633/05CF/09F6 separately to do so

@@ -1,0 +1,1 @@
+Can be used as a condition which evaluates as false if, the dialog does not have a list style attribute, or no dialog has been opened since the start of the game

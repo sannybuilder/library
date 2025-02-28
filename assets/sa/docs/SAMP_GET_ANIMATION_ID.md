@@ -1,0 +1,1 @@
+Can be used as a condition that returns false if the provided filename and animname has no corresponding animid

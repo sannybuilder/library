@@ -1,0 +1,1 @@
+When used as a logical condition, this command is evaluated as true if parameters were provided after the command keyword

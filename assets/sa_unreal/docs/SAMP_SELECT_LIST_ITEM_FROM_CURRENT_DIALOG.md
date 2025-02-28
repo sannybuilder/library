@@ -1,0 +1,1 @@
+Can be used as a condition which evaluates as true if the dialog is opened, has a list style attribute, and has that itemid

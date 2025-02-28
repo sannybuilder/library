@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740683062501,
-    "version": "0.867",
+    "last_update": 1740733697391,
+    "version": "0.868",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59928,7 +59928,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Sends a \"SendSpawn\" RPC (ID = 52) to SAMP Server. Teleports our actor to spawn as well"
+          "short_desc": "Sends SampRpc.Spawn to SAMP Server. Teleports our actor to spawn as well"
         },
         {
           "output": [
@@ -60319,7 +60319,7 @@
           "id": "0B30",
           "name": "SAMP_SEND_ENTER_CAR",
           "num_params": 2,
-          "short_desc": "Sends an \"EnterCar\" RPC (ID = 26) to Server. Take note that this opcode does not command our character to actually enter the car. Execute Opcode 05CA or Opcode 05CB separately to do so"
+          "short_desc": "Sends SampRpc.EnterCar to Server"
         },
         {
           "input": [
@@ -60331,13 +60331,13 @@
           "id": "0B31",
           "name": "SAMP_SEND_EXIT_CAR",
           "num_params": 1,
-          "short_desc": "Sends an \"ExitCar\" RPC (ID = 154) to Server. Take note that this opcode does not command our character to actually exit the car. Execute Opcode 05CD/0633/05CF/09F6 separately to do so"
+          "short_desc": "Sends SampRpc.ExitCar to Server"
         },
         {
           "id": "0B32",
           "name": "SAMP_SEND_SPAWN_TO_SERVER",
           "num_params": 0,
-          "short_desc": "Sends a \"SendSpawn\" RPC (ID = 52) to SAMP Server. Take note that unlike opcode 0AF6, this does opcode does not actually teleport our Player Character to Spawn. Fact: Our client naturally sends this RPC, 2 seconds before our player spawns automatically. "
+          "short_desc": "Sends a SampRpc.Spawn to SAMP Server without spawning our character"
         },
         {
           "input": [
@@ -60365,7 +60365,7 @@
           "id": "0B33",
           "name": "SAMP_SEND_DAMAGE_CAR",
           "num_params": 5,
-          "short_desc": "Sends a \"CarDamaged\" RPC (ID = 106) to the Server. This is to update the server the component damage flags of our car. Take note that these damage flags were bitfields. Where for each bitfield, 0 = functional, 1 = damaged "
+          "short_desc": "Sends a SampRpc.DamageCar to the Server"
         },
         {
           "input": [
@@ -60400,7 +60400,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns a pointer to a string containing the parameters of the last command entered. When used as a logical condition, this command is evaluated as true if parameters were provided after the command keyword"
+          "short_desc": "Returns a pointer to a string containing the parameters of the last command entered"
         },
         {
           "input": [
@@ -60454,7 +60454,7 @@
           "id": "0B38",
           "name": "SAMP_CONNECT_TO_SERVER",
           "num_params": 2,
-          "short_desc": "Connects to the specified samp server information. Take note that our client will force disconnect to the currently connected server. You can use domain name instead of ip address"
+          "short_desc": "Connects to the specified samp server information"
         },
         {
           "output": [
@@ -60472,7 +60472,7 @@
           "id": "0B39",
           "name": "SAMP_GET_CURRENT_SERVER_ADDRESS",
           "num_params": 2,
-          "short_desc": "Returns the server's IP address and port. Take note that the server ip written to the string buffer is always in ip address format (not in domain name format)"
+          "short_desc": "Returns the server's IP address and port"
         },
         {
           "output": [
@@ -60747,7 +60747,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Creates an artificial SAMP 3D text with the specified parameter attributes. This command can be used as a condition that is evaluated as true if the 3D Text has been created"
+          "short_desc": "Creates an artificial SAMP 3D text with the specified parameter attributes"
         },
         {
           "input": [
@@ -60762,7 +60762,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Destroys a 3D text using it's ID. Can be used as a condition which evaluates as true if the 3D text existed before being destroyed"
+          "short_desc": "Destroys a 3D text using it's ID"
         },
         {
           "input": [
@@ -60792,7 +60792,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Closes the currently opened dialog with an indication of the button pressed. This command will send SampRpc.DialogResponse to the Server as well. Can be used as a condition which evaluates as true if the dialog is opened before being closed by this command. Most servers commonly uses buttonid = 0 meaning cancel/no/reject, buttonid = 1 meaning submit/yes/accept"
+          "short_desc": "Closes the currently opened dialog with an indication of the button pressed"
         },
         {
           "output": [
@@ -60808,7 +60808,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the ID of the currently selected item on the list. If this command used as a condition, evaluates as true if a dialog is opened and has a list style attribute"
+          "short_desc": "Returns the ID of the currently selected item on the list"
         },
         {
           "input": [
@@ -60823,7 +60823,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Selects the id of an element in the dialog list. Can be used as a condition which evaluates as true if the dialog is opened, has a list style attribute, and has that itemid"
+          "short_desc": "Selects the id of an element in the dialog list"
         },
         {
           "output": [
@@ -60839,7 +60839,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Writes the current text from a field in a dialog to the buffer. Can be used as a condition which evaluates as true if a dialog is opened and has an edit style attribute"
+          "short_desc": "Writes the current text from a field in a dialog to the buffer"
         },
         {
           "input": [
@@ -60854,7 +60854,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Sets the text of the edit field of the dialog box. Can be used as a condition which evaluates as true if a dialog is opened and has an edit style attribute"
+          "short_desc": "Sets the text of the edit field of the dialog box"
         },
         {
           "input": [
@@ -60885,7 +60885,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the style of the currently opened dialog. If the dialog is not opened, returns the style of the last opened dialog instead. Can be used as a condition that evaluates as false if no dialog has been opened since the start of the game"
+          "short_desc": "Returns the style of the currently opened dialog. If the dialog is not opened, returns the style of the last opened dialog instead"
         },
         {
           "output": [
@@ -60901,7 +60901,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the ID of the currently opened dialog. If the dialog is not opened, returns the ID of the last opened dialog instead. Can be used as a condition that evaluates as false if no dialog has been opened since the start of the game"
+          "short_desc": "Returns the ID of the currently opened dialog. If the dialog is not opened, returns the ID of the last opened dialog instead"
         },
         {
           "output": [
@@ -60936,7 +60936,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the handle of an object using its SAMP ID. Can be used as a condition which evaluates as true if the object is streamed"
+          "short_desc": "Returns the handle of an object using its SAMP ID"
         },
         {
           "input": [
@@ -60958,7 +60958,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the handle of a pickup using its SAMP ID. Can be used as a condition which evaluates as true if the pickup is streamed"
+          "short_desc": "Returns the handle of a pickup using its SAMP ID"
         },
         {
           "input": [
@@ -60980,7 +60980,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the SAMP ID of an object using its handle. Can be used as a condition which evaluates as true it's from the SAMP Object Pool"
+          "short_desc": "Returns the SAMP ID of an object using its handle"
         },
         {
           "input": [
@@ -61002,7 +61002,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the SAMP ID of a pickup using its handle. Can be used as a condition which evaluates as true it's from the SAMP Pickup Pool"
+          "short_desc": "Returns the SAMP ID of a pickup using its handle"
         },
         {
           "output": [
@@ -61018,7 +61018,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the total number of items found on the currently opened dialog's list. If the dialog is not opened, the last opened dialog is used instead. Can be used as a condition which evaluates as false if, the dialog does not have a list style attribute, or no dialog has been opened since the start of the game"
+          "short_desc": "Returns the total number of items found on the currently opened dialog's list. If the dialog is not opened, the last opened dialog is used instead"
         },
         {
           "input": [
@@ -61091,7 +61091,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the SAMP ID of the animation currently being played by the specified player. Can be used as a condition which evaluates as true if the player is streamed"
+          "short_desc": "Returns the SAMP ID of the animation currently being played by the specified player"
         },
         {
           "input": [
@@ -61118,7 +61118,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Writes the filename and animname of the animation using its SAMP ID. Can be used as a condition which evaluates as true if animid is valid"
+          "short_desc": "Writes the filename and animname of the animation using its SAMP ID"
         },
         {
           "input": [
@@ -61144,7 +61144,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the Animation SAMP ID using its name and the file it was loaded from. Can be used as a condition that returns false if the provided filename and animname has no corresponding animid"
+          "short_desc": "Returns the Animation SAMP ID using its name and the file it was loaded from"
         },
         {
           "output": [
@@ -61184,7 +61184,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Writes the text of an item from the currently opened dialog's list. Can be used as a condition which evaluates as true if a dialog is opened with valid itemid"
+          "short_desc": "Writes the text of an item from the currently opened dialog's list"
         },
         {
           "input": [
@@ -61199,7 +61199,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Evaluates as logical true if the specified player is in paused state (players who were afk))"
+          "short_desc": "Evaluates as logical true if the specified player is in paused state (or AFK)"
         },
         {
           "id": "0B5D",

@@ -58,7 +58,9 @@ Pickup
 Plane
 Player
 Rc
+RenderFont
 RenderObject
+RenderTexture
 Restart
 ScriptFire
 Searchlight
@@ -2802,6 +2804,15 @@ SetEnableDetonateOnContact,04D6,0,0,("state%b")
 TakeCar,0715,0,0,("player: Player" "vehicle: Car")
 $END
 
+$RenderFont
+$BEGIN
+Create,0B6D,0,0,("fontname%s" "size%i" "flags%i" "handle: RenderFont")
+Delete,0B6E,1,0,("self: RenderFont")
+DrawText,0B6F,0,0,("self: RenderFont" "text%s" "coordx%i" "coordy%i" "color%i")
+GetDrawHeight,0B6C,0,0,("self: RenderFont" "height%i")
+GetDrawWidth,0B6B,0,0,("self: RenderFont" "text%s" "width%i")
+$END
+
 $RenderObject
 $BEGIN
 CreateToCharBone,0E2E,0,0,("char: Char" "modelId: model_object" "pedBone: PedBone" "x%f" "y%f" "z%f" "rx%f" "ry%f" "rz%f" "handle: RenderObject")
@@ -2811,6 +2822,13 @@ SetPosition,0E35,0,0,("self: RenderObject" "x%f" "y%f" "z%f")
 SetRotation,0E36,0,0,("self: RenderObject" "x%f" "y%f" "z%f")
 SetScale,0E37,0,0,("self: RenderObject" "x%f" "y%f" "z%f")
 SetVisible,0E31,0,0,("self: RenderObject" "visible%b")
+$END
+
+$RenderTexture
+$BEGIN
+Draw,0B73,0,0,("self: RenderTexture" "coordx%i" "coordy%i" "width%i" "height%i" "heading%f" "contrast%i")
+Load,0B71,1,0,("filepath%s" "handle: RenderTexture")
+Release,0B72,1,0,("self: RenderTexture")
 $END
 
 $Restart

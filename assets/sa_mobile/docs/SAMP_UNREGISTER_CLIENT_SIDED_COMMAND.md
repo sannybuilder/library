@@ -1,0 +1,1 @@
+By default, our inputted chatcommands are received by the server. But when a callback is hooked on a chatcommand, then that chatcommand will not be sent to the server. This poses a problem if that chatcommand has server sided meaning. So Calling this command will allow the server to receive that chatcommand once again.

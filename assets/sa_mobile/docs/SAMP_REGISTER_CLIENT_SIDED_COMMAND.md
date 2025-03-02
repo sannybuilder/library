@@ -1,3 +1,4 @@
+* When a callback is hooked on a chatcommand, then everytime we type this chatcommand, it will not be sent to the server. To reverse this behavior, call Opcode 0B63 for the affected chatcommand.
 * The chat command trigger text will be **/\<chatcommand\>** . For example:
   * if chatcommand = **"killme"** then you need to type **/killme** in chat
   * if chatcommand = **"/killme"** then you need to type **//killme** in chat

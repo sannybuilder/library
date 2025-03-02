@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740911072455,
-    "version": "0.870",
+    "last_update": 1740928903870,
+    "version": "0.871",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -61437,7 +61437,7 @@
             }
           ],
           "id": "0B67",
-          "name": "SAMP_ARGB_TO_HEX",
+          "name": "SF_ARGB_TO_HEX",
           "num_params": 5,
           "short_desc": "mixes color channels into 0xAARRGGBB colorcode format"
         },
@@ -61538,204 +61538,247 @@
           "short_desc": "Draws a rectangular area with border at the specified coordinates"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "RenderFont"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "width",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B6B",
-          "name": "SAMP_RENDER_GET_FONT_DRAW_LENGTH",
+          "name": "SF_RENDER_GET_DRAW_WIDTH_OF_TEXT_WITH_FONT",
           "num_params": 3,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the width (in pixels) that will be occupied by the text with font",
+          "class": "RenderFont",
+          "member": "GetDrawWidth"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "RenderFont"
+            }
+          ],
+          "output": [
+            {
+              "name": "height",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B6C",
-          "name": "SAMP_RENDER_GET_FONT_DRAW_HEIGHT",
+          "name": "SF_RENDER_GET_FONT_DRAW_HEIGHT",
           "num_params": 2,
+          "short_desc": "Returns the height (in pixels) occupied by any text that uses the specified font",
+          "class": "RenderFont",
+          "member": "GetDrawHeight"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "fontname",
+              "type": "string"
+            },
+            {
+              "name": "size",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "flags",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "RenderFont",
+              "source": "var_any"
+            }
+          ],
           "id": "0B6D",
-          "name": "SAMP_RENDER_CREATE_FONT",
+          "name": "SF_RENDER_CREATE_FONT",
           "num_params": 4,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Creates a RenderFont Object",
+          "class": "RenderFont",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "RenderFont"
+            }
+          ],
           "id": "0B6E",
-          "name": "SAMP_RENDER_RELEASE_FONT",
+          "name": "SF_RENDER_DELETE_FONT",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_destructor": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Destroys the specified font object, freeing it from memory",
+          "class": "RenderFont",
+          "member": "Delete"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "RenderFont"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "coordx",
+              "type": "int"
+            },
+            {
+              "name": "coordy",
+              "type": "int"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            }
+          ],
           "id": "0B6F",
-          "name": "SAMP_RENDER_FONT_DRAW_TEXT",
+          "name": "SF_RENDER_DRAW_TEXT_WITH_FONT",
           "num_params": 5,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Draws text using the specified font",
+          "class": "RenderFont",
+          "member": "DrawText"
         },
         {
+          "input": [
+            {
+              "name": "coordx",
+              "type": "int"
+            },
+            {
+              "name": "coordy",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "int"
+            },
+            {
+              "name": "height",
+              "type": "int"
+            },
+            {
+              "name": "cornercount",
+              "type": "int"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            }
+          ],
           "id": "0B70",
-          "name": "SAMP_RENDER_DRAW_POLYGON",
+          "name": "SF_RENDER_DRAW_POLYGON",
           "num_params": 7,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Draws a polygon with the specified parameters"
         },
         {
+          "input": [
+            {
+              "name": "filepath",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "RenderTexture",
+              "source": "var_any"
+            }
+          ],
           "id": "0B71",
-          "name": "SAMP_RENDER_LOAD_TEXTURE_FROM_FILE",
+          "name": "SF_RENDER_LOAD_TEXTURE_FROM_FILE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Loads a file (any image, or txd) as RenderTexture Object",
+          "class": "RenderTexture",
+          "member": "Load"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "RenderTexture"
+            }
+          ],
           "id": "0B72",
-          "name": "SAMP_RENDER_RELEASE_TEXTURE",
+          "name": "SF_RENDER_RELEASE_TEXTURE",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_destructor": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "RenderTexture",
+          "member": "Release",
+          "short_desc": "Releases the RenderTexture Object, freeing it from memory"
         },
         {
-          "id": "0B73",
-          "name": "SAMP_RENDER_DRAW_TEXTURE",
-          "num_params": 7,
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "RenderTexture"
+            },
+            {
+              "name": "coordx",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "coordy",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "width",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "height",
               "type": "int"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
+              "name": "contrast",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B73",
+          "name": "SF_RENDER_DRAW_TEXTURE",
+          "num_params": 7,
+          "class": "RenderTexture",
+          "member": "Draw",
+          "short_desc": "Draws the texture on the screen"
         },
         {
           "id": "0B74",

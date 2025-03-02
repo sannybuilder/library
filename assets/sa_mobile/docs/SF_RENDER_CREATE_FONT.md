@@ -1,0 +1,2 @@
+* For more info about fontname and flags, read Font API's by Microsoft.
+* RenderFont objects created by this command allocates memory and needs to be manually destroyed by Opcode 0B6E if not used anymore to free it from memory.

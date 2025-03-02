@@ -1,0 +1,2 @@
+* coordx and coordy must be in window screen coordinate system format
+* color must be in 0xAARRGGBB format where A = Alpha, R = Red, G = Green, B = Blue

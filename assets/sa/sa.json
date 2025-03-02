@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740773262767,
-    "version": "0.869",
+    "last_update": 1740911072455,
+    "version": "0.870",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -61208,76 +61208,90 @@
           "short_desc": "Evaluates as logical true if the specified player is in paused state (or AFK)"
         },
         {
+          "input": [
+            {
+              "name": "isvisible",
+              "type": "bool"
+            }
+          ],
           "id": "0B5D",
-          "name": "SAMP_TOGGLE_CURSOR",
+          "name": "SAMP_SET_CURSOR_VISIBILITY",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the visibility status of mouse cursor"
         },
         {
+          "output": [
+            {
+              "name": "windowscreencoordx",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "windowscreencoordy",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B5E",
-          "name": "SAMP_GET_CURSOR_POS",
+          "name": "SF_GET_CURSOR_COORD",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the mouse cursor's window screen coordinates in pixels"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "windowscreencoordx",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
+              "name": "windowscreencoordy",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "gamescreencoordx",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "gamescreencoordy",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0B5F",
-          "name": "SAMP_CONVERT_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS",
-          "num_params": 4
+          "name": "SF_CONVERT_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS",
+          "num_params": 4,
+          "short_desc": "Returns the GameScreen Coordinates counterpart of the specified WindowScreen Coordinates"
         },
         {
-          "id": "0B60",
-          "name": "SAMP_CONVERT_GAME_SCREEN_COORDS_TO_WINDOW",
-          "num_params": 4,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "gamescreencoordx",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
+              "name": "gamescreencoordy",
+              "type": "float"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "windowscreencoordx",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "windowscreencoordy",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B60",
+          "name": "SF_CONVERT_GAME_SCREEN_COORDS_TO_WINDOW_SCREEN_COORDS",
+          "num_params": 4,
+          "short_desc": "Returns the WindowScreen Coordinates counterpart of the specified GameScreen Coordinates"
         },
         {
           "id": "0B61",
@@ -61285,125 +61299,147 @@
           "num_params": 0,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "short_desc": "Evaluates as logical true if our local player has been spawned already"
         },
         {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "specialactionid",
+              "type": "SampSpecialAction",
+              "source": "var_any"
+            }
+          ],
           "id": "0B62",
           "name": "SAMP_GET_PLAYER_SPECIAL_ACTION",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the special action ID of the specified player"
         },
         {
+          "input": [
+            {
+              "name": "chatcommand",
+              "type": "string"
+            }
+          ],
           "id": "0B63",
-          "name": "SAMP_UNREGISTER_CLIENT_COMMAND",
+          "name": "SAMP_UNREGISTER_CLIENT_SIDED_COMMAND",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Removes all callbacks hooked from a client sided chat command created by Opcode 0B63, suppressing all its callback's operation "
         },
         {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
           "id": "0B64",
           "name": "SAMP_IS_PLAYER_NPC",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Checks if the specified player is an NPC"
         },
         {
+          "input": [
+            {
+              "name": "playerid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "score",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B65",
           "name": "SAMP_GET_PLAYER_SCORE",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the current score of the specified player"
         },
         {
+          "input": [
+            {
+              "name": "color",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "alpha",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "red",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "green",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "blue",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B66",
-          "name": "SAMP_FROM_ARGB",
+          "name": "SF_HEX_TO_ARGB",
           "num_params": 5,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Splits 0xAARRGGBB colorcode format into individial color channels"
         },
         {
-          "id": "0B67",
-          "name": "SAMP_TO_ARGB",
-          "num_params": 5,
           "input": [
             {
-              "name": "_p1",
+              "name": "alpha",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "red",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "green",
               "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
+              "name": "blue",
               "type": "int"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "color",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B67",
+          "name": "SAMP_ARGB_TO_HEX",
+          "num_params": 5,
+          "short_desc": "mixes color channels into 0xAARRGGBB colorcode format"
         },
         {
           "input": [
@@ -61438,66 +61474,68 @@
           "short_desc": "Draws a line between two window screen coordinates"
         },
         {
-          "id": "0B69",
-          "name": "SAMP_RENDER_DRAW_BOX",
-          "num_params": 5,
           "input": [
             {
-              "name": "_p1",
+              "name": "coordx",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "coordy",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "width",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "height",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "color",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B69",
+          "name": "SF_RENDER_DRAW_BOX_NO_BORDER",
+          "num_params": 5,
+          "short_desc": "Draws a rectangular area at the specified coordinates"
         },
         {
-          "id": "0B6A",
-          "name": "SAMP_RENDER_DRAW_BOX_WITH_BORDER",
-          "num_params": 7,
           "input": [
             {
-              "name": "_p1",
+              "name": "coordx",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "coordy",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "width",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "height",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "color",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "bordersize",
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "bordercolor",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B6A",
+          "name": "SF_RENDER_DRAW_BOX_WITH_BORDER",
+          "num_params": 7,
+          "short_desc": "Draws a rectangular area with border at the specified coordinates"
         },
         {
           "id": "0B6B",
@@ -62175,32 +62213,36 @@
           "num_params": 0,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "short_desc": "Checks if the mouse cursor is visible"
         },
         {
+          "input": [
+            {
+              "name": "mode",
+              "type": "SampCursorMode"
+            }
+          ],
           "id": "0B8D",
           "name": "SAMP_SET_CURSOR_MODE",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the cursor mode"
         },
         {
+          "output": [
+            {
+              "name": "mode",
+              "type": "SampCursorMode",
+              "source": "var_any"
+            }
+          ],
           "id": "0B8E",
           "name": "SAMP_GET_CURSOR_MODE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the current mouse cursor mode"
         },
         {
           "id": "0B8F",

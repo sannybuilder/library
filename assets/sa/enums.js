@@ -3852,13 +3852,6 @@ export const SampDialogStyle = {
   "Tablist": 4,
   "TablistHeaders": 5
 };
-export const SampCursorModes = {
-  "Disabled": 0,
-  "LockkeysNocursor": 1,
-  "LockCamAndControl": 2,
-  "LockCam": 3,
-  "LockCamNoCursor": 4
-};
 export const SampRakNetHookParam = {
   "Bitstream": 0,
   "Packetid": 1,
@@ -3886,4 +3879,11 @@ export const DataTypeSize = {
   "Short": 2,
   "Int": 4,
   "Float": 4
+};
+export const SampCursorMode = {
+  "Disabled": 0,
+  "LockkeysNocursor": 1,
+  "LockCamAndControl": 2,
+  "LockCam": 3,
+  "LockCamNoCursor": 4
 };

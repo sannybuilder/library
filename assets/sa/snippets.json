@@ -148,7 +148,23 @@
     "0B5A": "int screenwidth, screenheight = SAMP_GET_SCREEN_RESOLUTION\n// do something to screenwidth and screenheight",
     "0B5B": "int strBufItemText = ALLOCATE_MEMORY {size} 300\nif strBufItemText = SAMP_GET_LISTBOX_ITEM_TEXT_OF_DIALOG {itemid} 3\nthen // opened dialog has itemid 3\n    // do something to strBufItemText\nelse // dialog or itemid 3 not found\nend\nFREE_MEMORY strBufItemText",
     "0B5C": "int testedPlayer\n// do something to testedPlayer\nif SAMP_IS_PLAYER_PAUSED {playerid} testedPlayer\nthen // player is AFK\nelse // player is active\nend",
-    "0B68": "// draw a green line at the window screen\nSF_RENDER_DRAW_LINE {fromcoordx} 100 {fromcoordy} 150 {tocoordx} 720 {tocoordy} 300 {tickness} 1 {color} 0xFF00FF00"
+    "0B5D": "SAMP_SET_CURSOR_VISIBILITY true  // show the mouse cursor\nSAMP_SET_CURSOR_VISIBILITY false // hide the mouse cursor",
+    "0B5E": "int coordX,coordY = SF_GET_CURSOR_COORD",
+    "0B5F": "int myWindowScreenCoordX, myWindowScreenCoordY = SF_GET_SCREEN_RESOLUTION\nfloat myGameScreenCoordX, myGameScreenCoordY = SF_CONVERT_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS {windowscreencoordx} myWindowScreenCoordX {windowscreencoordy} myWindowScreenCoordY",
+    "0B60": "int myWindowScreenCoordX, myWindowScreenCoordY = SF_CONVERT_GAME_SCREEN_COORDS_TO_WINDOW_SCREEN_COORDS {gamescreencoordx} 315.19 {gamescreencoordy} 98.89",
+    "0B61": "if SAMP_IS_LOCAL_PLAYER_SPAWNED\nthen // our local player had spawned already\nelse // our local player hasn't spawned yet\nend",
+    "0B62": "int mySpecialAction\nint myPlayerID = SAMP_GET_PLAYER_ID $scplayer\nif mySpecialAction = SAMP_GET_PLAYER_SPECIAL_ACTION myPlayerID\nthen\n    // do something to mySpecialAction\nelse // myPlayerID is not connected\nend",
+    "0B63": "SAMP_UNREGISTER_CLIENT_SIDED_COMMAND {chatcommand} \"greedisgood\"",
+    "0B64": "if SAMP_IS_PLAYER_NPC {playerid} 17\nthen // player 17 is an NPC\nelse // player 17 is not an NPC\nend",
+    "0B65": "int mySpecialAction\nint myPlayerID = SAMP_GET_PLAYER_ID $scplayer\nif myScore = SAMP_GET_PLAYER_SCORE myPlayerID\nthen\n    // do something to myScore\nelse // myPlayerID is not connected\nend",
+    "0B66": "int a, r, g, b = SF_HEX_TO_ARGB {color} 0xFF00FF37\n// expected: a = 0xFF, r = 0x00, g = 0xFF, b = 0x37",
+    "0B67": "int colorCode = SAMP_ARGB_TO_HEX {alpha} 0xFF {red} 0x5A {green} 0x14 {blue} 0xCA\n// expected: colorCode = 0xFF5A14CA",
+    "0B68": "// draw a green line at the window screen\nSF_RENDER_DRAW_LINE {fromcoordx} 100 {fromcoordy} 150 {tocoordx} 720 {tocoordy} 300 {tickness} 1 {color} 0xFF00FF00",
+    "0B69": "SF_RENDER_DRAW_BOX_NO_BORDER {coordx} 10 {coordy} 300 {width} 600 {height} 400 {color} 0xFFFF7F00 // create orange rectangle",
+    "0B6A": "SF_RENDER_DRAW_BOX_WITH_BORDER {coordx} 10 {coordy} 300 {width} 600 {height} 400 {color} 0xFFFF7F00 {bordersize} 10 {bordercolor} 0xFFFF00FF  // create orange rectangle with purple border",
+    "0B8C": "if SAMP_IS_CURSOR_ACTIVE\nthen // mouse cursor is visible\nelse // mouse cursor is hidden\nend",
+    "0B8D": "SAMP_SET_CURSOR_MODE SampCursorMode.LockCamAndControl // Enables the Mouse Cursor",
+    "0B8E": "int cursorMode = SAMP_GET_CURSOR_MODE"
   },
   "Sphere": {
     "2880": "Sphere s = add_sphere 0 0 0 2.0\nset_sphere_color s 0 255 0"

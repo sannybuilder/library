@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740992885346,
-    "version": "0.872",
+    "last_update": 1741008902287,
+    "version": "0.873",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -61927,66 +61927,79 @@
           "short_desc": "Returns a pointer to RakPeer"
         },
         {
+          "input": [
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B7C",
           "name": "SAMP_GET_RAKCLIENT_FUNC_BY_INDEX",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the address of the RakClientInterface virtual method table function by index"
         },
         {
+          "input": [
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B7D",
           "name": "SAMP_GET_RPC_FUNC_BY_INDEX",
           "num_params": 2,
           "attrs": {
             "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          }
         },
         {
+          "input": [
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B7E",
           "name": "SAMP_GET_RPC_NODE_BY_INDEX",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to the RPC structure at index"
         },
         {
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B7F",
           "name": "SAMP_GET_SAMP_INFO_POINTER",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to a SampInfo structure"
         },
         {
           "input": [
@@ -62013,236 +62026,276 @@
           "short_desc": "Creates a DXUTDialog Object with Title"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            }
+          ],
+          "output": [
+            {
+              "name": "eventid",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "controlid",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B81",
-          "name": "SAMP_DIALOG_POP",
+          "name": "SF_DXUT_DIALOG_POP",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the last event and component ID that occurred with the specified dialog",
+          "class": "DxutDialog",
+          "member": "Pop"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            },
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "relcoordx",
+              "type": "int"
+            },
+            {
+              "name": "relcoordy",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "int"
+            },
+            {
+              "name": "height",
+              "type": "int"
+            }
+          ],
           "id": "0B82",
-          "name": "SAMP_DIALOG_ADD_BUTTON",
+          "name": "SF_DXUT_DIALOG_ADD_BUTTON",
           "num_params": 7,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Adds a button on the DXUTDialog",
+          "class": "DxutDialog",
+          "member": "AddButton"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            },
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "coordx",
+              "type": "int"
+            },
+            {
+              "name": "coordy",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "int"
+            },
+            {
+              "name": "height",
+              "type": "int"
+            }
+          ],
           "id": "0B83",
-          "name": "SAMP_DIALOG_ADD_CHECKBOX",
+          "name": "SF_DXUT_DIALOG_ADD_CHECKBOX",
           "num_params": 7,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            }
-          ]
+          "class": "DxutDialog",
+          "member": "AddCheckbox",
+          "short_desc": "Creates a checkbox on the DxutDialog"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            },
+            {
+              "name": "coordx",
+              "type": "int"
+            },
+            {
+              "name": "coordy",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "int"
+            },
+            {
+              "name": "height",
+              "type": "int"
+            }
+          ],
           "id": "0B84",
-          "name": "SAMP_DIALOG_SET_POSITION_SIZE",
+          "name": "SF_DXUT_DIALOG_SET_COORDS_AND_DIMS",
           "num_params": 5,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the coordinates and dimensions of the DxutDialog",
+          "class": "DxutDialog",
+          "member": "SetCoordsAndDims"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            }
+          ],
+          "output": [
+            {
+              "name": "coordx",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "coordy",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "width",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "height",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B85",
-          "name": "SAMP_DIALOG_GET_POSITION_SIZE",
+          "name": "SF_DXUT_DIALOG_GET_COORDS_AND_DIMS",
           "num_params": 5,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "class": "DxutDialog",
+          "member": "GetCoordsAndDims",
+          "short_desc": "Returns the Coordinates and Dimensions of the DxutDialog"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            },
+            {
+              "name": "isvisible",
+              "type": "bool"
+            }
+          ],
           "id": "0B86",
-          "name": "SAMP_DIALOG_SET_VISIBLE",
+          "name": "SF_DXUT_DIALOG_SET_VISIBILITY",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the visibility status of the DxutDialog",
+          "class": "DxutDialog",
+          "member": "Visibility"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            }
+          ],
           "id": "0B87",
-          "name": "SAMP_DIALOG_IS_VISIBLE",
+          "name": "SF_DXUT_DIALOG_IS_VISIBLE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "DxutDialog",
+          "member": "IsVisible",
+          "short_desc": "Checks if the DxutDialog is visible"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            },
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "initialtext",
+              "type": "string"
+            },
+            {
+              "name": "coordx",
+              "type": "int"
+            },
+            {
+              "name": "coordy",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "int"
+            },
+            {
+              "name": "height",
+              "type": "int"
+            }
+          ],
           "id": "0B88",
-          "name": "SAMP_DIALOG_ADD_EDITBOX",
+          "name": "SF_DXUT_DIALOG_ADD_EDITBOX",
           "num_params": 7,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Creates a text input field on a DxutDialog",
+          "class": "DxutDialog",
+          "member": "AddEditbox"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "DxutDialog"
+            },
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B89",
-          "name": "SAMP_DIALOG_GET_CONTROL_TEXT",
+          "name": "SF_DXUT_DIALOG_GET_TEXT_OF_CONTROL",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Gets the text of a control using its ID",
+          "class": "DxutDialog",
+          "member": "GetControlText"
         },
         {
           "id": "0B8A",

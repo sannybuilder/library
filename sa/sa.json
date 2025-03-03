@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1740928903870,
-    "version": "0.871",
+    "last_update": 1740992885346,
+    "version": "0.872",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -61781,133 +61781,150 @@
           "short_desc": "Draws the texture on the screen"
         },
         {
+          "input": [
+            {
+              "name": "chatlineid",
+              "type": "int"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            },
+            {
+              "name": "prefix",
+              "type": "string"
+            },
+            {
+              "name": "textcolor",
+              "type": "int"
+            },
+            {
+              "name": "prefixcolor",
+              "type": "int"
+            }
+          ],
           "id": "0B74",
-          "name": "SAMP_SET_CHAT_STRING",
+          "name": "SAMP_SET_CHAT_LINE_PARAMS",
           "num_params": 5,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Changes the chat line parameters to custom ones"
         },
         {
+          "input": [
+            {
+              "name": "chatlineid",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "stringbuffertext",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "stringbufferprefix",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "textcolor",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "prefixcolor",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B75",
-          "name": "SAMP_GET_CHAT_STRING",
+          "name": "SAMP_GET_CHAT_LINE_PARAMS",
           "num_params": 5,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the chat string parameters"
         },
         {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
           "id": "0B76",
           "name": "SAMP_SET_CHAT_INPUT_TEXT",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Overwrites the content written at the chat input box"
         },
         {
+          "output": [
+            {
+              "name": "stringbuffertext",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B77",
           "name": "SAMP_GET_CHAT_INPUT_TEXT",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the current text in the chat input box"
         },
         {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
           "id": "0B78",
-          "name": "SAMP_LOG",
+          "name": "SF_CONSOLE_LOG",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "arguments"
-            }
-          ]
+          "short_desc": "Adds a line to the SAMPFUNCS console and logs it"
         },
         {
+          "input": [
+            {
+              "name": "isvisible",
+              "type": "bool"
+            }
+          ],
           "id": "0B79",
-          "name": "SAMP_ENABLE_CHAT_INPUT",
+          "name": "SAMP_SET_CHAT_INPUT_VISIBILITY",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the visibility status (open/closed) of the chat input box"
         },
         {
+          "output": [
+            {
+              "name": "pointer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B7A",
           "name": "SAMP_GET_RAKCLIENT_INTERFACE",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to a RakClientInterface object"
         },
         {
+          "output": [
+            {
+              "name": "pointer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0B7B",
           "name": "SAMP_GET_RAKPEER",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to RakPeer"
         },
         {
           "id": "0B7C",
@@ -61972,19 +61989,28 @@
           ]
         },
         {
-          "id": "0B80",
-          "name": "SAMP_DIALOG_CREATE",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "title",
+              "type": "string"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "DxutDialog",
+              "source": "var_any"
+            }
+          ],
+          "id": "0B80",
+          "name": "SF_DXUT_CREATE_DIALOG",
+          "num_params": 2,
+          "class": "DxutDialog",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true
+          },
+          "short_desc": "Creates a DXUTDialog Object with Title"
         },
         {
           "id": "0B81",

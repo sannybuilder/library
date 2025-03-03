@@ -2182,16 +2182,16 @@
 {0B36:} [var stringpointernickname: int] = samp_get_player_nickname {playerid} [int]
 {0B37:} [var color: int] = samp_get_player_color {playerid} [int]
 {0B38:} samp_connect_to_server {serverip} [string] {port} [int]
-{0B39:} [var stringbufferserverip: int], [var port: int] = samp_get_current_server_address
-{0B3A:} [var stringbufferservername: int] = samp_get_current_server_name
+{0B39:} [var port: int] = samp_get_current_server_address {var_bufferserverip} [var string]
+{0B3A:} samp_get_current_server_name {var_buffer} [var int]
 {0B3B:} samp_show_dialog {id} [int] {name} [int] {content} [int] {leftormiddlebuttonname} [int] {rightbuttonname} [int] {type} [int]
-{0B3C:}   samp_has_dialog_responded {dialogid} [int] {buttonidstore} [int] {listitemidstore} [int] {inputtextwritetostringbuffer} [int]
+{0B3C:}   samp_has_dialog_responded {dialogid} [int] {buttonidstore} [int] {listitemidstore} [int] {bufferinputtext} [int]
 {0B3D:} [var handle: Bitstream] = samp_raknet_create_bitstream
 {0B3E:}   [var self: Bitstream] = samp_raknet_delete_bitstream
 {0B3F:}   samp_raknet_reset_bitstream [Bitstream]
 {0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [int] {datatype} [SampBitStreamDataType] {datasize} [int]
-{0B41:}   samp_raknet_send_bitstream_as_rpc_to_server {rpcid} [SampRpc] [Bitstream] {priorityid} [SampPriority] {reliabilityid} [SampReliability] {orderingchannel} [int] {shifttimestamp} [int]
-{0B42:}   samp_raknet_send_raw_bitstream_to_server [Bitstream] {priorityid} [SampPriority] {reliabilityid} [SampReliability] {orderingchannel} [int]
+{0B41:}   samp_raknet_send_rpc_with_params_to_server {rpcid} [SampRpc] [Bitstream] {priorityid} [SampPriority] {reliabilityid} [SampReliability] {orderingchannel} [int] {shifttimestamp} [int]
+{0B42:}   samp_raknet_send_packet_with_params_to_server [Bitstream] {priorityid} [SampPriority] {reliabilityid} [SampReliability] {orderingchannel} [int]
 {0B43:} samp_cmd_ret
 {0B44:}   [var 3Dtextid: int] = samp_create_3d_text {text} [string] {color} [int] {coordx} [float] {coordy} [float] {coordz} [float] {visibilityradius} [float] {showbehindwalls} [bool] {attachedplayerid} [int] {attachedcarid} [int]
 {0B45:}   samp_destroy_3d_text {3Dtextid} [int]
@@ -2199,7 +2199,7 @@
 {0B47:}   samp_close_current_dialog_with_button {buttonid} [int]
 {0B48:}   [var itemid: int] = samp_get_current_dialog_list_item
 {0B49:}   samp_select_list_item_from_current_dialog {itemid} [int]
-{0B4A:}   [var stringbuffer: int] = samp_get_current_dialog_editbox_text
+{0B4A:}   samp_get_current_dialog_editbox_text {var_buffer} [var int]
 {0B4B:}   samp_set_current_dialog_editbox_text {text} [string]
 {0B4C:}   samp_is_dialog_active {dialogid} [int]
 {0B4D:}   [var typeid: int] = samp_get_type_of_last_opened_dialog
@@ -2216,7 +2216,7 @@
 {0B58:}   [var filename: int], [var animname: int] = samp_get_animation_name {animid} [int]
 {0B59:}   [var animid: int] = samp_get_animation_id {animname} [string] {filename} [string]
 {0B5A:} [var width: int], [var height: int] = sf_get_screen_resolution
-{0B5B:}   [var stringbufferitemtext: int] = samp_get_listbox_item_text_of_dialog {itemid} [int]
+{0B5B:}   samp_get_listbox_item_text_of_dialog {itemid} [int] {var_buffer} [var int]
 {0B5C:}   samp_is_player_paused {playerid} [int]
 {0B5D:} samp_set_cursor_visibility {isvisible} [bool]
 {0B5E:} [var windowscreencoordx: int], [var windowscreencoordy: int] = sf_get_cursor_coord
@@ -2242,9 +2242,9 @@
 {0B72:}   sf_render_release_texture [RenderTexture]
 {0B73:} sf_render_draw_texture [RenderTexture] {coordx} [int] {coordy} [int] {width} [int] {height} [int] {heading} [float] {contrast} [int]
 {0B74:}   samp_set_chat_line_params {chatlineid} [int] {text} [string] {prefix} [string] {textcolor} [int] {prefixcolor} [int]
-{0B75:}   [var stringbuffertext: int], [var stringbufferprefix: int], [var textcolor: int], [var prefixcolor: int] = samp_get_chat_line_params {chatlineid} [int]
+{0B75:}   [var textcolor: int], [var prefixcolor: int] = samp_get_chat_line_params {chatlineid} [int] {buffertext} [int] {bufferprefix} [int]
 {0B76:} samp_set_chat_input_text {text} [string]
-{0B77:}   [var stringbuffertext: int] = samp_get_chat_input_text
+{0B77:}   samp_get_chat_input_text {buffer} [int]
 {0B78:} sf_console_log {text} [string]
 {0B79:} samp_set_chat_input_visibility {isvisible} [bool]
 {0B7A:} [var pointer: int] = samp_get_rakclient_interface
@@ -2263,12 +2263,12 @@
 {0B87:}   sf_dxut_dialog_is_visible [DxutDialog]
 {0B88:} sf_dxut_dialog_add_editbox [DxutDialog] {id} [int] {initialtext} [string] {coordx} [int] {coordy} [int] {width} [int] {height} [int]
 {0B89:}   [var text: int] = sf_dxut_dialog_get_text_of_control [DxutDialog] {id} [int]
-{0B8A:}   raknet_send_rpc {_p1} [int] {_p2} [int]
-{0B8B:}   raknet_send_bit_stream {_p1} [int]
+{0B8A:}   samp_raknet_send_rpc_to_server {rpcid} [SampRpc] [Bitstream]
+{0B8B:}   samp_raknet_send_packet_to_server [Bitstream]
 {0B8C:}   samp_is_cursor_active
 {0B8D:} samp_set_cursor_mode {mode} [SampCursorMode]
 {0B8E:}   [var mode: SampCursorMode] = samp_get_cursor_mode
-{0B8F:} samp_convert_screen_coords_to_world_3d {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
+{0B8F:} sf_convert_window_screen_coords_to_world_coords {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
 {0B90:} samp_dialog_set_control_visibility {_p1} [int] {_p2} [int] {_p3} [int]
 {0B91:} samp_dialog_add_static {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int]
 {0B92:}   samp_dialog_is_checkbox_checked {_p1} [int] {_p2} [int]

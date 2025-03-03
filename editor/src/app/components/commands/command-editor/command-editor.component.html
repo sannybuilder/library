@@ -73,9 +73,9 @@
     </div>
   </div>
 
-  <div class="row mb-2">
+  <div class="row">
     <div class="col-12 col-xl-4" *ngIf="features.opcode">
-      <div class="input-group">
+      <div class="input-group mb-2">
         <span class="input-group-text">{{
           "ui.commandEditor.fieldOpcode" | translate
         }}</span>
@@ -107,7 +107,7 @@
       </div>
     </div>
     <div class="col-12 col-xl-8">
-      <div class="input-group">
+      <div class="input-group mb-2">
         @if(viewContext === ViewContext.Script){
         <span class="input-group-text d-none d-md-inline">{{
           "ui.commandEditor.fieldCommandLong" | translate
@@ -135,18 +135,27 @@
 
   <div class="row mb-2">
     <div class="col-12">
-      <scl-selector
-        [label]="'ui.commandEditor.fieldExtension' | translate"
-        [model]="extension"
-        (modelChange)="onExtensionChange($event)"
-        [choices]="extensionNames"
-      ></scl-selector>
+      <div class="input-group">
+        <scl-selector
+          [label]="'ui.commandEditor.fieldExtension' | translate"
+          [model]="extension"
+          (modelChange)="onExtensionChange($event)"
+          [choices]="extensionNames"
+        ></scl-selector>
+        <div class="input-group-append h-100">
+          <scl-icon-button
+            icon="clear"
+            [title]="'ui.commandEditor.clearField' | translate"
+            (clicked)="(extension = '') || updateErrors()"
+          ></scl-icon-button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="row mb-2">
+  <div class="row">
     <div class="col-12 col-md-6">
-      <div class="input-group">
+      <div class="input-group mb-2">
         <scl-selector
           [model]="command.class"
           [label]="'ui.commandEditor.fieldClass' | translate"
@@ -157,7 +166,7 @@
         <div class="input-group-append h-100">
           <scl-icon-button
             icon="clear"
-            [title]="'ui.commandEditor.clearClassName' | translate"
+            [title]="'ui.commandEditor.clearField' | translate"
             (clicked)="(command.class = '') || updateErrors()"
           ></scl-icon-button>
         </div>
@@ -177,7 +186,7 @@
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="input-group">
+      <div class="input-group mb-2">
         <span class="input-group-text">{{
           "ui.commandEditor.fieldMember" | translate
         }}</span>
@@ -191,6 +200,13 @@
           [ngModel]="command.member"
           (ngModelChange)="onMemberChange(command, $event)"
         />
+        <div class="input-group-append h-100">
+          <scl-icon-button
+            icon="clear"
+            [title]="'ui.commandEditor.clearField' | translate"
+            (clicked)="(command.member = '') || updateErrors()"
+          ></scl-icon-button>
+        </div>
       </div>
       <div
         class="mb-1"
@@ -223,6 +239,13 @@
           [canInput]="false"
           [disabled]="command.class"
         ></scl-selector>
+        <div class="input-group-append h-100">
+          <scl-icon-button
+            icon="clear"
+            [title]="'ui.commandEditor.clearField' | translate"
+            (clicked)="(command.operator = '') || updateErrors()"
+          ></scl-icon-button>
+        </div>
       </div>
     </div>
     <div class="col-12 col-md-6" *ngIf="features.cc">
@@ -303,7 +326,6 @@
               [ngClass]="{ invalid: param.type === PrimitiveType.any }"
               [model]="param.type"
               [choices]="paramTypes"
-              (keydown)="onTypeKeyDown($event, param)"
               (modelChange)="onTypeChange($event, param)"
               [canInput]="false"
             ></scl-selector>
@@ -342,6 +364,14 @@
           </scl-icon-button>
         </div>
       </div>
+    </div>
+
+    <div class="col-12">
+      <span class="identifier" *ngIf="focused"
+        >Tip: press <kbd>i</kbd>, <kbd>f</kbd>, <kbd>s</kbd>, <kbd>a</kbd>,
+        <kbd>b</kbd>, <kbd>l</kbd>, <kbd>m</kbd>, <kbd>g</kbd>, <kbd>z</kbd> to
+        quickly select a built-in type
+      </span>
     </div>
 
     <div
@@ -385,7 +415,6 @@
               [ngClass]="{ invalid: param.type === PrimitiveType.any }"
               [model]="param.type"
               [choices]="paramTypes"
-              (keydown)="onTypeKeyDown($event, param)"
               (modelChange)="onTypeChange($event, param)"
               [canInput]="
                 command.attrs?.is_constructor && i === command.output.length - 1
@@ -596,6 +625,8 @@
       type="text"
       class="form-control"
       [ngModel]="param.name"
+      (focus)="focused = true"
+      (blur)="focused = false"
       (ngModelChange)="onParamNameChange($event, param)"
       [ngClass]="{ 'is-invalid': isParamNameDuplicate(param.name) }"
     />

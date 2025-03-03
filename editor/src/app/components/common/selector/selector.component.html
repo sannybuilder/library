@@ -20,6 +20,10 @@
           <span *ngIf="choice.prefix" class="text-muted"
             >{{ choice.prefix }}&nbsp;&nbsp;</span
           >{{ choice.value }}
+
+          <kbd class="float-right" *ngIf="choice.hotkey">{{
+            choice.hotkey
+          }}</kbd>
         </button>
       </div>
       <div class="dropdown-item input-group" *ngIf="canInput">
@@ -47,7 +51,6 @@
     class="form-control"
     [ngModel]="model"
     readonly
-    (keydown)="onkeydown($event)"
     [ngClass]="{ 'is-invalid': invalid }"
   />
 </div>

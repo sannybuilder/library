@@ -103,11 +103,11 @@ const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
 const SELF = 'self';
 
 @Component({
-    selector: 'scl-command-editor',
-    templateUrl: './command-editor.component.html',
-    styleUrls: ['./command-editor.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'scl-command-editor',
+  templateUrl: './command-editor.component.html',
+  styleUrls: ['./command-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CommandEditorComponent implements OnInit {
   @ViewChild('snippetText') snippetText: ElementRef<HTMLTextAreaElement>;
@@ -191,9 +191,7 @@ export class CommandEditorComponent implements OnInit {
   };
   errorMessages: string[] = [];
   extensionNames: string[] = [];
-
   platforms: Array<{ name: Platform; status: boolean }> = [];
-
   versions: Array<{ name: Version; status: boolean }> = [];
 
   @Input() set viewContext(val: ViewContext) {
@@ -262,7 +260,6 @@ export class CommandEditorComponent implements OnInit {
   @Input() set extensions(val: Extension[]) {
     this.extensionNames = val.map((e) => e.name);
     this._extensions = val;
-
   }
   get extensions() {
     return this._extensions;
@@ -303,7 +300,12 @@ export class CommandEditorComponent implements OnInit {
       static: statics,
     }: Record<ParamType['type'], string[]> = val.reduce(
       (m, v) => {
-        m[v.type].push(`${prefixes[v.type]} ${v.name}`);
+        const words = [prefixes[v.type], v.name];
+        if (v.type === 'primitive' && this.getPrimitiveTypeHotkey(v.name)) {
+          words.push(`hotkey:${this.getPrimitiveTypeHotkey(v.name)}`);
+        }
+
+        m[v.type].push(words.join(' '));
         return m;
       },
       {
@@ -457,44 +459,21 @@ export class CommandEditorComponent implements OnInit {
     }
   }
 
-  onTypeKeyDown(key: string, param: Param) {
-    const primitives = primitiveTypes(this.game, this.viewContext);
-    let newType;
-    switch (key) {
-      case 'i':
-        newType = PrimitiveType.int;
-        break;
-      case 'f':
-        newType = PrimitiveType.float;
-        break;
-      case 's':
-        newType = PrimitiveType.string;
-        break;
-      case 'a':
-        newType = PrimitiveType.arguments;
-        break;
-      case 'b':
-        newType = PrimitiveType.boolean;
-        break;
-      case 'p':
-      case 'l':
-        newType = PrimitiveType.label;
-        break;
-      case 'o':
-      case 'm':
-        newType = PrimitiveType.model_any;
-        break;
-      case 'g':
-        newType = PrimitiveType.gxt_key;
-        break;
-      case 'z':
-        newType = PrimitiveType.zone_key;
-        break;
-    }
-
-    if (newType && newType !== param.type && primitives.includes(newType)) {
-      param.type = newType;
-      this.updateErrors();
+  getPrimitiveTypeHotkey(name: string) {
+    switch (name) {
+      case PrimitiveType.int:
+      case PrimitiveType.float:
+      case PrimitiveType.string:
+      case PrimitiveType.arguments:
+      case PrimitiveType.boolean:
+      case PrimitiveType.label:
+      case PrimitiveType.model_any:
+      case PrimitiveType.gxt_key:
+      case PrimitiveType.gxt_key:
+      case PrimitiveType.zone_key:
+        return name[0];
+      default:
+        return undefined;
     }
   }
 

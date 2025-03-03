@@ -1,0 +1,1 @@
+* coordx, coordy, width, height are window screen values.

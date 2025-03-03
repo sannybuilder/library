@@ -1,0 +1,1 @@
+Can be used as a condition which evaluates as false if DxutDialog object is invalid.

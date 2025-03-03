@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741008902287,
-    "version": "0.873",
+    "last_update": 1741016623724,
+    "version": "0.874",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60457,12 +60457,14 @@
           "short_desc": "Connects to the specified samp server information"
         },
         {
-          "output": [
+          "input": [
             {
-              "name": "stringbufferserverip",
-              "type": "int",
+              "name": "bufferserverip",
+              "type": "string",
               "source": "var_any"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "port",
               "type": "int",
@@ -60475,9 +60477,9 @@
           "short_desc": "Returns the server's IP address and port"
         },
         {
-          "output": [
+          "input": [
             {
-              "name": "stringbufferservername",
+              "name": "buffer",
               "type": "int",
               "source": "var_any"
             }
@@ -60534,7 +60536,7 @@
               "type": "int"
             },
             {
-              "name": "inputtextwritetostringbuffer",
+              "name": "bufferinputtext",
               "type": "int"
             }
           ],
@@ -60657,14 +60659,14 @@
             }
           ],
           "id": "0B41",
-          "name": "SAMP_RAKNET_SEND_BITSTREAM_AS_RPC_TO_SERVER",
+          "name": "SAMP_RAKNET_SEND_RPC_WITH_PARAMS_TO_SERVER",
           "num_params": 6,
           "attrs": {
             "is_condition": true
           },
           "short_desc": "Sends a BitStream as an RPC with the specified parameters",
           "class": "Bitstream",
-          "member": "SendAsRpc"
+          "member": "SendAsRpcWithParams"
         },
         {
           "input": [
@@ -60686,14 +60688,14 @@
             }
           ],
           "id": "0B42",
-          "name": "SAMP_RAKNET_SEND_RAW_BITSTREAM_TO_SERVER",
+          "name": "SAMP_RAKNET_SEND_PACKET_WITH_PARAMS_TO_SERVER",
           "num_params": 4,
           "attrs": {
             "is_condition": true
           },
           "class": "Bitstream",
-          "member": "SendRaw",
-          "short_desc": "Sends a Raw BitStream with the specified parameters. Commonly used to send dacket data to server"
+          "member": "SendAsPacketWithParams",
+          "short_desc": "Sends a Packet BitStream with the specified parameters. Commonly used to send dacket data to server"
         },
         {
           "id": "0B43",
@@ -60832,9 +60834,9 @@
           "short_desc": "Selects the id of an element in the dialog list"
         },
         {
-          "output": [
+          "input": [
             {
-              "name": "stringbuffer",
+              "name": "buffer",
               "type": "int",
               "source": "var_any"
             }
@@ -61175,11 +61177,9 @@
             {
               "name": "itemid",
               "type": "int"
-            }
-          ],
-          "output": [
+            },
             {
-              "name": "stringbufferitemtext",
+              "name": "buffer",
               "type": "int",
               "source": "var_any"
             }
@@ -61190,7 +61190,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Writes the text of an item from the currently opened dialog's list"
+          "short_desc": "Writes the text of an item with specific id from the currently opened dialog's list, to buffer"
         },
         {
           "input": [
@@ -61816,19 +61816,17 @@
             {
               "name": "chatlineid",
               "type": "int"
+            },
+            {
+              "name": "buffertext",
+              "type": "int"
+            },
+            {
+              "name": "bufferprefix",
+              "type": "int"
             }
           ],
           "output": [
-            {
-              "name": "stringbuffertext",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "stringbufferprefix",
-              "type": "int",
-              "source": "var_any"
-            },
             {
               "name": "textcolor",
               "type": "int",
@@ -61861,11 +61859,10 @@
           "short_desc": "Overwrites the content written at the chat input box"
         },
         {
-          "output": [
+          "input": [
             {
-              "name": "stringbuffertext",
-              "type": "int",
-              "source": "var_any"
+              "name": "buffer",
+              "type": "int"
             }
           ],
           "id": "0B77",
@@ -62298,36 +62295,42 @@
           "member": "GetControlText"
         },
         {
+          "input": [
+            {
+              "name": "rpcid",
+              "type": "SampRpc"
+            },
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
           "id": "0B8A",
-          "name": "RAKNET_SEND_RPC",
+          "name": "SAMP_RAKNET_SEND_RPC_TO_SERVER",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sends BitStream as RPC to Server",
+          "class": "Bitstream",
+          "member": "SendAsRpc"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
           "id": "0B8B",
-          "name": "RAKNET_SEND_BIT_STREAM",
+          "name": "SAMP_RAKNET_SEND_PACKET_TO_SERVER",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "SendAsPacket",
+          "short_desc": "Sends Packet BitStream to Server"
         },
         {
           "id": "0B8C",
@@ -62367,9 +62370,6 @@
           "short_desc": "Returns the current mouse cursor mode"
         },
         {
-          "id": "0B8F",
-          "name": "SAMP_CONVERT_SCREEN_COORDS_TO_WORLD_3D",
-          "num_params": 6,
           "input": [
             {
               "name": "_p1",
@@ -62395,7 +62395,10 @@
               "name": "_p6",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B8F",
+          "name": "SF_CONVERT_WINDOW_SCREEN_COORDS_TO_WORLD_COORDS",
+          "num_params": 6
         },
         {
           "id": "0B90",

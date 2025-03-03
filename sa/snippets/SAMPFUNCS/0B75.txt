@@ -1,16 +1,20 @@
+int textColor, prefixColor
 strBufText   = ALLOCATE_MEMORY {size} 256
 strBufPrefix = ALLOCATE_MEMORY {size} 256
-if int strBufText, strBufPrefix, textColor, prefixColor = SAMP_GET_CHAT_LINE_PARAMS {chatlineid} 0 // test a valid chatlineid
+
+if textColor, prefixColor = SAMP_GET_CHAT_LINE_PARAMS {chatlineid} 0 {buffertext} strBufText {bufferprefix} strBufPrefix // test a valid chatlineid
 then
     // do something to strBufText, strBufPrefix, textColor, prefixColor
 else
     // this section will not execute
 end
-if int strBufText, strBufPrefix, textColor, prefixColor = SAMP_GET_CHAT_LINE_PARAMS {chatlineid} 100 // test an invalid chatlineid
+
+if textColor, prefixColor = SAMP_GET_CHAT_LINE_PARAMS {chatlineid} 100 {buffertext} strBufText {bufferprefix} strBufPrefix // test an invalid chatlineid
 then
     // this section will not execute
 else
     // chatlineid is not valid
 end
+
 FREE_MEMORY {address} strBufText
 FREE_MEMORY {address} strBufPrefix

@@ -1,0 +1,22 @@
+{$CLEO .cs}
+{$USE Cleo+}
+
+set_script_event_car_create {add} true EVENT_ON_MENU {varCar} 0@
+
+// main script loop
+while true
+    wait {time} 1000
+end
+
+
+// event handler
+function EVENT_ON_MENU(carHandle: int)
+    if
+        is_emergency_services_vehicle carHandle
+    then
+        int blipHandle = add_blip_for_car {vehicle} carHandle
+        change_blip_colour blipHandle {color} BlipColor.Cyan
+    end
+
+    return_script_event
+end

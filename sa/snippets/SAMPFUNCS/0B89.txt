@@ -1,0 +1,12 @@
+int clientSidedDialog = SF_DXUT_CREATE_DIALOG {title} "SF Dialog"
+SF_DXUT_DIALOG_ADD_CHECKBOX clientSidedDialog {id} 40 {text} "God Mode" {relcoordx} 10 {relcoordy} 80 {width} 50 {height} 10
+
+int controlText
+if controlText = SF_DXUT_DIALOG_GET_TEXT_OF_CONTROL clientSidedDialog {id} 14
+then // this section will not be be executed
+else // clientSidedDialog has no control with ID = 14
+end
+if controlText = SF_DXUT_DIALOG_GET_TEXT_OF_CONTROL clientSidedDialog {id} 40
+then // expected controlText = "God Mode"
+else // this section will not be be executed
+end

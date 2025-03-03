@@ -1,0 +1,13 @@
+int clientSidedDialog = SF_DXUT_CREATE_DIALOG {title} "SF Dialog"
+
+SF_DXUT_DIALOG_SET_VISIBILITY clientSidedDialog {isvisible} true // show dialog
+if SF_DXUT_DIALOG_IS_VISIBLE clientSidedDialog
+then // expected
+else // will not reach this section
+end
+
+SF_DXUT_DIALOG_SET_VISIBILITY clientSidedDialog {isvisible} false // hide dialog
+if SF_DXUT_DIALOG_IS_VISIBLE clientSidedDialog
+then // will not reach this section
+else // expected
+end

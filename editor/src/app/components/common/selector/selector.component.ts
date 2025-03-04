@@ -60,7 +60,7 @@ export class SelectorComponent {
     this.modelChange.emit(value);
   }
 
-  @HostListener('window:keydown', ['$event.key'])
+  @HostListener('keydown', ['$event.key'])
   onkeydown(key: string) {
     if (!key) return;
     this.choicesUi.forEach((c) => {

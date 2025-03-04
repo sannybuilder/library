@@ -257,7 +257,11 @@ export class UiEffects {
     () =>
       this._actions$.pipe(
         ofType(displayOrEditCommandInfo),
-        filter(({ viewMode }) => viewMode === ViewMode.ViewCommand),
+        filter(
+          ({ viewMode }) =>
+            viewMode === ViewMode.ViewCommand ||
+            viewMode === ViewMode.EditCommand
+        ),
         withLatestFrom(this._game.game$),
         tap(([{ command }, game]) => {
           if (isSupported(command.attrs)) {

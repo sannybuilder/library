@@ -552,6 +552,40 @@
     </div>
   </div>
 
+  <ng-container
+    *ngIf="
+      !command.attrs?.is_unsupported &&
+      !command.attrs?.is_nop &&
+      fullDescription?.length
+    "
+  >
+    <hr />
+    <div class="row mb-2">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>
+            {{ "ui.commandOverview.descriptionSubtitle" | translate }}
+          </h5>
+          <div class="d-flex mb-2" *ngIf="fullDescription[1] as path">
+            <a
+              target="_blank"
+              [href]="
+                'https://github.com/sannybuilder/library/edit/master/' + path
+              "
+              >{{ "ui.shared.edit" | translate }}</a
+            >
+          </div>
+        </div>
+        <div
+          class="full-description"
+          [innerHTML]="
+            fullDescription[0] | markdown | sanitize
+          "
+        ></div>
+      </div>
+    </div>
+  </ng-container>
+
   <div class="row mb-2">
     <div class="col-12">
       <ul class="nav mb-2">

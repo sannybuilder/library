@@ -84,7 +84,7 @@ export class CommandInfoComponent {
   @Input() relatedCommands: Command[] | undefined;
   @Input() classDesc?: string;
   @Input() gameExtensions: Extension[];
-  @Input() fullDescription?: string;
+  @Input() fullDescription?: [string, string];
   @Input() viewContext: ViewContext;
   @Input() syntaxKind: SyntaxKind;
   @Output() switchSyntaxKind = new EventEmitter();

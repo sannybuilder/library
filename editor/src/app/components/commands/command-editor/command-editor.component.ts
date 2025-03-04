@@ -285,6 +285,7 @@ export class CommandEditorComponent implements OnInit {
   @Output() delete: EventEmitter<void> = new EventEmitter();
   @Output() clone: EventEmitter<Game> = new EventEmitter();
   @Output() copyFrom: EventEmitter<Game> = new EventEmitter();
+  @Input() fullDescription?: [string, string];
 
   @Input() set types(val: ParamType[]) {
     const prefixes: Record<ParamType['type'], string> = {

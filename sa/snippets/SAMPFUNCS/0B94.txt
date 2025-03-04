@@ -1,0 +1,14 @@
+int clientSidedDialog = SF_DXUT_CREATE_DIALOG {title} "SF Dialog"
+SF_DXUT_DIALOG_ADD_STATIC_TEXT clientSidedDialog {id} 40 {text} "A Static Text Example" {relcoordx} 10 {relcoordy} 80 {width} 50 {height} 10
+
+// test invalid control
+if SF_DXUT_DIALOG_SET_TEXT_OF_CONTROL clientSidedDialog {id} 9 {text} "New Text"
+then // this section will not execute
+else // clientSidedDialog has no control with id = 9
+end
+
+// test valid control
+if SF_DXUT_DIALOG_SET_TEXT_OF_CONTROL clientSidedDialog {id} 40 {text} "New Text"
+then // The text written at the static text control is now "New Text"
+else // this section will not execute
+end

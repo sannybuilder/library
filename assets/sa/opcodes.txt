@@ -2210,7 +2210,7 @@
 {0B52:}   [var id: int] = samp_get_object_id {handle} [Object]
 {0B53:}   [var id: int] = samp_get_pickup_id {handle} [Pickup]
 {0B54:}   [var itemscount: int] = samp_get_items_count_of_last_opened_dialog
-{0B55:}   [var screencoordx: int], [var screencoordy: int] = sf_convert_3d_coords_to_window_screen_coords {worldcoordx} [float] {worldcoordy} [float] {worldcoordz} [float]
+{0B55:}   [var screencoordx: int], [var screencoordy: int] = sf_world_coords_to_window_screen_coords {worldcoordx} [float] {worldcoordy} [float] {worldcoordz} [float]
 {0B56:} sf_set_button {buttonid} [Button] {behaviorvalue} [int]
 {0B57:}   [var animid: int] = samp_get_player_animation {playerid} [int]
 {0B58:}   [var filename: int], [var animname: int] = samp_get_animation_name {animid} [int]
@@ -2220,8 +2220,8 @@
 {0B5C:}   samp_is_player_paused {playerid} [int]
 {0B5D:} samp_set_cursor_visibility {isvisible} [bool]
 {0B5E:} [var windowscreencoordx: int], [var windowscreencoordy: int] = sf_get_cursor_coord
-{0B5F:} [var gamescreencoordx: float], [var gamescreencoordy: float] = sf_convert_window_screen_coords_to_game_screen_coords {windowscreencoordx} [int] {windowscreencoordy} [int]
-{0B60:} [var windowscreencoordx: int], [var windowscreencoordy: int] = sf_convert_game_screen_coords_to_window_screen_coords {gamescreencoordx} [float] {gamescreencoordy} [float]
+{0B5F:} [var gamescreencoordx: float], [var gamescreencoordy: float] = sf_window_screen_coords_to_game_screen_coords {windowscreencoordx} [int] {windowscreencoordy} [int]
+{0B60:} [var windowscreencoordx: int], [var windowscreencoordy: int] = sf_game_screen_coords_to_window_screen_coords {gamescreencoordx} [float] {gamescreencoordy} [float]
 {0B61:}   samp_is_local_player_spawned
 {0B62:}   [var specialactionid: SampSpecialAction] = samp_get_player_special_action {playerid} [int]
 {0B63:}   samp_unregister_client_sided_command {chatcommand} [string]
@@ -2268,8 +2268,8 @@
 {0B8C:}   samp_is_cursor_active
 {0B8D:} samp_set_cursor_mode {mode} [SampCursorMode]
 {0B8E:}   [var mode: SampCursorMode] = samp_get_cursor_mode
-{0B8F:} sf_convert_window_screen_coords_to_world_coords {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
-{0B90:} samp_dialog_set_control_visibility {_p1} [int] {_p2} [int] {_p3} [int]
+{0B8F:} [var worldcoordx: float], [var worldcoordy: float], [var worldcoordz: float] = sf_window_screen_coords_to_world_coords {screencoordx} [int] {screencoordy} [int] {depth} [float]
+{0B90:} sf_dxut_dialog_set_visibility_of_control [DxutDialog] {controlid} [int] {isvisible} [int]
 {0B91:} samp_dialog_add_static {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int]
 {0B92:}   samp_dialog_is_checkbox_checked {_p1} [int] {_p2} [int]
 {0B93:} samp_dialog_set_background_color {_p1} [int] {_p2} [int]

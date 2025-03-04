@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1741063820699,
+    "last_update": 1741056713948,
     "version": "0.876",
     "url": "https://library.sannybuilder.com/#/sa"
   },
@@ -59925,9 +59925,6 @@
           "id": "0AF6",
           "name": "SAMP_SPAWN_LOCAL_PLAYER",
           "num_params": 0,
-          "attrs": {
-            "is_static": true
-          },
           "short_desc": "Sends SampRpc.Spawn to SAMP Server. Teleports our actor to spawn as well"
         },
         {
@@ -61056,7 +61053,7 @@
             }
           ],
           "id": "0B55",
-          "name": "SF_CONVERT_3D_COORDS_TO_WINDOW_SCREEN_COORDS",
+          "name": "SF_WORLD_COORDS_TO_WINDOW_SCREEN_COORDS",
           "num_params": 5,
           "attrs": {
             "is_condition": true
@@ -61261,7 +61258,7 @@
             }
           ],
           "id": "0B5F",
-          "name": "SF_CONVERT_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS",
+          "name": "SF_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS",
           "num_params": 4,
           "short_desc": "Returns the GameScreen Coordinates counterpart of the specified WindowScreen Coordinates"
         },
@@ -61289,7 +61286,7 @@
             }
           ],
           "id": "0B60",
-          "name": "SF_CONVERT_GAME_SCREEN_COORDS_TO_WINDOW_SCREEN_COORDS",
+          "name": "SF_GAME_SCREEN_COORDS_TO_WINDOW_SCREEN_COORDS",
           "num_params": 4,
           "short_desc": "Returns the WindowScreen Coordinates counterpart of the specified GameScreen Coordinates"
         },
@@ -62372,52 +62369,61 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "screencoordx",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "screencoordy",
               "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "depth",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "worldcoordx",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "worldcoordy",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
+              "name": "worldcoordz",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "0B8F",
-          "name": "SF_CONVERT_WINDOW_SCREEN_COORDS_TO_WORLD_COORDS",
-          "num_params": 6
+          "name": "SF_WINDOW_SCREEN_COORDS_TO_WORLD_COORDS",
+          "num_params": 6,
+          "short_desc": "Converts the screen coordinate system to the game 3D coordinate system with the specified depth"
         },
         {
-          "id": "0B90",
-          "name": "SAMP_DIALOG_SET_CONTROL_VISIBILITY",
-          "num_params": 3,
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "DxutDialog"
+            },
+            {
+              "name": "controlid",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "isvisible",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0B90",
+          "name": "SF_DXUT_DIALOG_SET_VISIBILITY_OF_CONTROL",
+          "num_params": 3,
+          "short_desc": "Sets the visibility of the DXUTDialog's control element with ID",
+          "class": "DxutDialog",
+          "member": "SetVisibilityOfControl"
         },
         {
           "id": "0B91",

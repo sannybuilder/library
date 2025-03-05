@@ -1,1 +1,5 @@
-This opcode does not instruct our character to actually exit the car(Fake RPC). Execute Opcode 05CD/0633/05CF/09F6 separately to do so
+This opcode does not instruct our character to actually exit the car(Fake RPC). Execute a separate command to do so, like:
+* TASK_LEAVE_CAR
+* TASK_LEAVE_ANY_CAR
+* TASK_LEAVE_CAR_AND_FLEE
+* SET_CHAR_GET_OUT_UPSIDE_DOWN_CAR

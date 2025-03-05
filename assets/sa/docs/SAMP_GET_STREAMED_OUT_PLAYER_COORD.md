@@ -1,1 +1,1 @@
- Take note that the server rounds down the coordinate values for data compression purposes. Meaning that the returned coordinates of this opcode have discrepancies compared to the correct coordinates
+The returned coordinates of this command have some discrepancies compared to the correct coordinates because the server rounds down the streamed-out coordinate values sent to our client for data compression purposes.

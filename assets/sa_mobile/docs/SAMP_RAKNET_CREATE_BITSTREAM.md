@@ -1,1 +1,1 @@
-Keep in mind that this command allocates memory, so don't forget to manually destroy this object using opcode 0B3E to free it from memory
+This command allocates memory for the object, and needs to be manually destroyed when not used by executing command SAMP_RAKNET_DELETE_BITSTREAM to free it from memory

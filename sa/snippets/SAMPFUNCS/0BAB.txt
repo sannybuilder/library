@@ -1,0 +1,11 @@
+int clientSidedDialog = SF_DXUT_CREATE_DIALOG {title} "SF Dialog"
+if SF_DXUT_DIALOG_EXIST clientSidedDialog
+then // expected
+else // this section will not execute
+end
+
+SF_DXUT_DIALOG_DELETE clientSidedDialog
+if SF_DXUT_DIALOG_EXIST clientSidedDialog
+then // this section will not execute
+else // expected
+end

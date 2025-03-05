@@ -1,0 +1,13 @@
+int clientSidedDialog = SF_DXUT_CREATE_DIALOG {title} "SF Dialog"
+
+SF_DXUT_DIALOG_SET_MINIMIZED clientSidedDialog {isminimized} false // minimize the dialog
+if SF_DXUT_DIALOG_IS_MINIMIZED clientSidedDialog
+then // this section will not execute
+else // expected
+end
+
+SF_DXUT_DIALOG_SET_MINIMIZED clientSidedDialog {isminimized} true // maximize the dialog
+if SF_DXUT_DIALOG_IS_MINIMIZED clientSidedDialog
+then // expected
+else // this section will not execute
+end

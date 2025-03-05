@@ -1,5 +1,5 @@
-CLEO5 introduced idea of stream types:
-* None - no volume or speed corrections are applied (like in CLEO4)
-* Sfx - automatically follows game's sfx volume and in-game speed changes
-* Music - automatically follows game's music volume, muted if current in-game speed is different than 1.0
-* UserInterface - automatically follows game's sfx volume, unaffected by in-game speed
+CLEO5 introduced concept of stream types:
+* **None** - no automatic volume or speed corrections are applied (like in CLEO4)
+* **Sfx** - automatically corrected by global SFX volume settings and in-game speed changes
+* **Music** - automatically corrected by global music volume settings, muted if current in-game speed is not 1.0
+* **UserInterface** - automatically corrected by global SFX volume settings, unaffected by in-game speed

@@ -1,0 +1,1 @@
+width, height must be window screen values in pixels.

@@ -1,0 +1,1 @@
+width, height are window screen values in pixels.

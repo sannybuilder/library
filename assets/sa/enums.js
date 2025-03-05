@@ -2531,7 +2531,8 @@ export const AudioStreamState = {
 export const AudioStreamType = {
   "None": 0,
   "Sfx": 1,
-  "Music": 2
+  "Music": 2,
+  "UserInterface": 3
 };
 export const DriveMode = {
   "Normal": 0,

@@ -1,0 +1,1 @@
+This command will not be able to delete old controls that has their ID duplicated by newly created controls

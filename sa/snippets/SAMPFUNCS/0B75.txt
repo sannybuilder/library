@@ -1,20 +1,16 @@
-int textColor, prefixColor
-strBufText   = ALLOCATE_MEMORY {size} 256
-strBufPrefix = ALLOCATE_MEMORY {size} 256
+{$CLEO}
+{$USE SAMPFUNCS}
 
-if textColor, prefixColor = SAMP_GET_CHAT_LINE_PARAMS {chatlineid} 0 {buffertext} strBufText {bufferprefix} strBufPrefix // test a valid chatlineid
-then
-    // do something to strBufText, strBufPrefix, textColor, prefixColor
-else
-    // this section will not execute
+int prefix = allocate_memory {size} 255
+int msg = allocate_memory {size} 255
+
+while true
+    wait {time} 0
+    
+    int color
+    if
+        samp_get_chat_line {index} 99 {messageBuffer} msg {prefixBuffer} prefix {messageColor} color {prefixColor} -1 // get most recent message
+    then
+        print_formatted_now {format} "Color: %p~n~Prefix: %s~n~Message: %s" {time} 100 {args} str
+    end
 end
-
-if textColor, prefixColor = SAMP_GET_CHAT_LINE_PARAMS {chatlineid} 100 {buffertext} strBufText {bufferprefix} strBufPrefix // test an invalid chatlineid
-then
-    // this section will not execute
-else
-    // chatlineid is not valid
-end
-
-FREE_MEMORY {address} strBufText
-FREE_MEMORY {address} strBufPrefix

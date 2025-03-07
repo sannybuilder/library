@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741245805193,
-    "version": "0.882",
+    "last_update": 1741320847934,
+    "version": "0.883",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60062,7 +60062,12 @@
           "id": "0AFF",
           "name": "SAMP_GET_CAR_BY_ID",
           "num_params": 2,
-          "short_desc": "Returns the vehicle handle using its samp vehicle id. Returns 0 If the car is not in the stream zone"
+          "short_desc": "Returns the vehicle handle using its samp vehicle id. Returns 0 If the car is not in the stream zone",
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetCar"
         },
         {
           "input": [
@@ -60081,16 +60086,24 @@
           "id": "0B20",
           "name": "SAMP_GET_PLAYER_CHAR_BY_ID",
           "num_params": 2,
-          "short_desc": "Returns the character handle using the Player ID. Returns -1 if the player is not in the stream zone"
+          "short_desc": "Returns the character handle using the Player ID. Returns -1 if the player is not in the stream zone",
+          "class": "Samp",
+          "member": "GetChar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0B21",
-          "name": "SAMP_IS_CHAT_OPEN",
+          "name": "SAMP_IS_CHATBOX_OPENED",
           "num_params": 0,
           "short_desc": "Checks if the chat box is open/visible",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "IsChatboxOpened"
         },
         {
           "input": [
@@ -60238,7 +60251,7 @@
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -60252,12 +60265,14 @@
           "id": "0B2B",
           "name": "SAMP_GET_PLAYER_ID",
           "num_params": 2,
-          "short_desc": "Returns the samp player's id controlling the character handle"
+          "short_desc": "Returns the samp player's id controlling the character handle. Returns -1 if the character isn't controlled by any Player",
+          "class": "Char",
+          "member": "GetSampId"
         },
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -60271,7 +60286,9 @@
           "id": "0B2C",
           "name": "SAMP_GET_CAR_ID",
           "num_params": 2,
-          "short_desc": "Returns the SAMP vehicle ID using its car handle"
+          "short_desc": "Returns the SAMP vehicle ID using its car handle",
+          "class": "Car",
+          "member": "GetSampId"
         },
         {
           "input": [
@@ -67075,11 +67092,11 @@
             }
           ],
           "id": "0C8D",
-          "name": "SAMP_SET_CLIPBOARD_TEXT",
+          "name": "SF_WRITE_TEXT_TO_CLIPBOARD",
           "num_params": 1,
           "short_desc": "Sets the text on the clipboard",
-          "class": "SfClipboard",
-          "member": "Set",
+          "class": "Sf",
+          "member": "ClipboardWriteText",
           "attrs": {
             "is_static": true
           }
@@ -67096,15 +67113,15 @@
             }
           ],
           "id": "0C8E",
-          "name": "SAMP_GET_CLIPBOARD_TEXT",
+          "name": "SF_READ_DATA_FROM_CLIPBOARD",
           "num_params": 2,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "short_desc": "Copies raw binary or text from the clipboard to buffer",
-          "class": "SfClipboard",
-          "member": "Get"
+          "class": "Sf",
+          "member": "ClipboardReadData"
         },
         {
           "id": "0C8F",

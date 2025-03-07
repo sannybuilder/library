@@ -63,10 +63,11 @@ RenderFont
 RenderObject
 RenderTexture
 Restart
+Samp
 ScriptFire
 Searchlight
 Sequence
-SfClipboard
+Sf
 Shopping
 Skip
 Sound
@@ -203,6 +204,7 @@ GetProofs,0EAD,0,0,("self: Car" "bullet%b" "fire%b" "explosion%b" "collision%b" 
 GetQuaternion,07C5,0,0,("self: Car" "x%f" "y%f" "z%f" "w%f")
 GetRandomSeed,0EC9,0,0,("self: Car" "randomSeed%i")
 GetRoll,06BE,0,0,("self: Car" "angle%f")
+GetSampId,0B2C,0,0,("self: Car" "id%i")
 GetSpeed,02E3,0,0,("self: Car" "speed%f")
 GetSpeedVector,06A2,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetSubclass,0E12,0,0,("self: Car" "subclass: VehicleSubclass")
@@ -471,6 +473,7 @@ GetProofs,0EAD,0,0,("self: Car" "bullet%b" "fire%b" "explosion%b" "collision%b" 
 GetQuaternion,07C5,0,0,("self: Car" "x%f" "y%f" "z%f" "w%f")
 GetRandomSeed,0EC9,0,0,("self: Car" "randomSeed%i")
 GetRoll,06BE,0,0,("self: Car" "angle%f")
+GetSampId,0B2C,0,0,("self: Car" "id%i")
 GetSpeed,02E3,0,0,("self: Car" "speed%f")
 GetSpeedVector,06A2,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetSubclass,0E12,0,0,("self: Car" "subclass: VehicleSubclass")
@@ -750,6 +753,7 @@ GetProofs,0EAD,0,0,("self: Car" "bullet%b" "fire%b" "explosion%b" "collision%b" 
 GetQuaternion,07C5,0,0,("self: Car" "x%f" "y%f" "z%f" "w%f")
 GetRandomSeed,0EC9,0,0,("self: Car" "randomSeed%i")
 GetRoll,06BE,0,0,("self: Car" "angle%f")
+GetSampId,0B2C,0,0,("self: Car" "id%i")
 GetSpeed,02E3,0,0,("self: Car" "speed%f")
 GetSpeedVector,06A2,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetSubclass,0E12,0,0,("self: Car" "subclass: VehicleSubclass")
@@ -1002,6 +1006,7 @@ GetProofs,0EAD,0,0,("self: Car" "bullet%b" "fire%b" "explosion%b" "collision%b" 
 GetQuaternion,07C5,0,0,("self: Car" "x%f" "y%f" "z%f" "w%f")
 GetRandomSeed,0EC9,0,0,("self: Car" "randomSeed%i")
 GetRoll,06BE,0,0,("self: Car" "angle%f")
+GetSampId,0B2C,0,0,("self: Car" "id%i")
 GetSpeed,02E3,0,0,("self: Car" "speed%f")
 GetSpeedVector,06A2,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetSubclass,0E12,0,0,("self: Car" "subclass: VehicleSubclass")
@@ -1411,6 +1416,7 @@ GetProofs,0EAD,0,0,("self: Car" "bullet%b" "fire%b" "explosion%b" "collision%b" 
 GetQuaternion,07C5,0,0,("self: Car" "x%f" "y%f" "z%f" "w%f")
 GetRandomSeed,0EC9,0,0,("self: Car" "randomSeed%i")
 GetRoll,06BE,0,0,("self: Car" "angle%f")
+GetSampId,0B2C,0,0,("self: Car" "id%i")
 GetSpeed,02E3,0,0,("self: Car" "speed%f")
 GetSpeedVector,06A2,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetSubclass,0E12,0,0,("self: Car" "subclass: VehicleSubclass")
@@ -1666,6 +1672,7 @@ GetPedType,089F,0,0,("self: Char" "pedType: PedType")
 GetPositionOfEntryExitCharUsed,094C,0,0,("self: Char" "x%f" "y%f" "z%f" "heading%f")
 GetProofs,0EAC,0,0,("self: Char" "bullet%b" "fire%b" "explosion%b" "collision%b" "melee%b")
 GetRandomSeed,0EC8,0,0,("self: Char" "randomSeed%i")
+GetSampId,0B2B,0,0,("self: Char" "id%i")
 GetScriptTaskStatus,062E,0,0,("self: Char" "taskId%i" "status: TaskStatus")
 GetSequenceProgress,0646,0,0,("self: Char" "progress%i")
 GetSequenceProgressRecursive,07A4,0,0,("self: Char" "_p2%i" "_p3%i")
@@ -2888,6 +2895,13 @@ SetExtraPoliceStationRestartPoint,08E0,0,0,("x%f" "y%f" "z%f" "radius%f" "headin
 SetRespawnPointForDurationOfMission,09FF,0,0,("x%f" "y%f" "z%f")
 $END
 
+$Samp
+$BEGIN
+GetCar,0AFF,0,0,("id%i" "handle: Car")
+GetChar,0B20,0,0,("id%i" "handle: Char")
+IsChatboxOpened,0B21,1,0,()
+$END
+
 $ScriptFire
 $BEGIN
 CreateCarFire,0325,0,0,("vehicle: Car" "handle: ScriptFire")
@@ -2924,10 +2938,10 @@ Open,0615,0,0,("handle: Sequence")
 SetToRepeat,0643,0,0,("self: Sequence" "state%b")
 $END
 
-$SfClipboard
+$Sf
 $BEGIN
-Get,0C8E,1,0,("buffer%i" "size%i")
-Set,0C8D,0,0,("text%s")
+ClipboardReadData,0C8E,1,0,("buffer%i" "size%i")
+ClipboardWriteText,0C8D,0,0,("text%s")
 $END
 
 $Shopping

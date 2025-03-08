@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741406087114,
-    "version": "0.888",
+    "last_update": 1741423514523,
+    "version": "0.889",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59925,7 +59925,12 @@
           "id": "0AF6",
           "name": "SAMP_SPAWN_LOCAL_PLAYER",
           "num_params": 0,
-          "short_desc": "Sends SampRpc.Spawn to SAMP Server. Teleports our actor to spawn as well"
+          "short_desc": "Sends SampRpc.Spawn to SAMP Server. Teleports our actor to spawn as well",
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "ForceSpawn"
         },
         {
           "output": [
@@ -59938,7 +59943,12 @@
           "id": "0AF7",
           "name": "SAMP_GET_BASE_ADDRESS",
           "num_params": 1,
-          "short_desc": "Returns a pointer to the memory address of samp.dll"
+          "short_desc": "Returns a pointer to the memory address of samp.dll",
+          "class": "Samp",
+          "member": "GetBaseAddress",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -59958,7 +59968,12 @@
           "id": "0AF8",
           "name": "SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT",
           "num_params": 3,
-          "short_desc": "Adds one line of colored message to the chat"
+          "short_desc": "Adds one line of colored message to the chat",
+          "class": "Samp",
+          "member": "ChatMsg",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -59970,7 +59985,12 @@
           "id": "0AF9",
           "name": "SAMP_SEND_CHAT_MESSAGE_TO_SERVER",
           "num_params": 1,
-          "short_desc": "Sends a message or command to the server"
+          "short_desc": "Sends a message or command to the server",
+          "class": "Samp",
+          "member": "SendChatMsg",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0AFA",
@@ -59978,25 +59998,33 @@
           "num_params": 0,
           "short_desc": "Returns true if SAMP structures were initialized. Used when checking if gta sa is running on SAMP or in Single Player",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "Available"
         },
         {
           "input": [
             {
-              "name": "classid",
+              "name": "classId",
               "type": "int"
             }
           ],
           "id": "0AFB",
           "name": "SAMP_SEND_REQUEST_CLASS_TO_SERVER",
           "num_params": 1,
-          "short_desc": "Sends SampRpc.RequestClass to Server"
+          "short_desc": "Sends SampRpc.RequestClass to Server",
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SendRpcRequestClass"
         },
         {
           "input": [
             {
-              "name": "carid",
+              "name": "carId",
               "type": "int"
             },
             {
@@ -60015,35 +60043,50 @@
           "id": "0AFC",
           "name": "SAMP_SEND_SCM_EVENT_TO_SERVER",
           "num_params": 4,
-          "short_desc": "Sends SampRpc.ScmEvent information about car modification to the server"
+          "short_desc": "Sends SampRpc.ScmEvent information about car modification to the server",
+          "class": "Samp",
+          "member": "SendRpcScmEvent",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "actionid",
+              "name": "id",
               "type": "SampSpecialAction"
             }
           ],
           "id": "0AFD",
           "name": "SAMP_SET_SPECIAL_ACTION",
           "num_params": 1,
-          "short_desc": "Sets the special action for our Player"
+          "short_desc": "Sets the special action for our Player",
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SetSpecialAction"
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "playerId",
               "type": "int"
             },
             {
-              "name": "weaponid",
+              "name": "weaponId",
               "type": "WeaponType"
             }
           ],
           "id": "0AFE",
           "name": "SAMP_SEND_DEATH_BY_PLAYER_TO_SERVER",
           "num_params": 2,
-          "short_desc": "Sends SampRpc.Death to Server without our character actually dying"
+          "short_desc": "Sends SampRpc.Death to Server without our character actually dying",
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SendRpcDeath"
         },
         {
           "input": [
@@ -60119,7 +60162,12 @@
           "id": "0B22",
           "name": "SAMP_SET_SEND_RATE",
           "num_params": 2,
-          "short_desc": "Sets the periodic delay (in milliseconds) of sending specific data type to Server"
+          "short_desc": "Sets the periodic delay (in milliseconds) of sending specific data type to Server",
+          "class": "Samp",
+          "member": "SetSendRate",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60133,19 +60181,22 @@
           "num_params": 1,
           "short_desc": "Returns true if REMOTE Player with the given ID is connected",
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "IsRemotePlayerConnected"
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "playerstruct",
+              "name": "structure",
               "type": "int",
               "source": "var_any"
             }
@@ -60153,12 +60204,17 @@
           "id": "0B24",
           "name": "SAMP_GET_PLAYER_STRUCT",
           "num_params": 2,
-          "short_desc": "Returns the player's samp structure. Returns 0 (NULL Pointer) if player isn't connected"
+          "short_desc": "Returns the player's samp structure. Returns 0 (NULL Pointer) if player isn't connected",
+          "class": "Samp",
+          "member": "GetPlayerStruct",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -60172,12 +60228,17 @@
           "id": "0B25",
           "name": "SAMP_GET_PLAYER_HEALTH",
           "num_params": 2,
-          "short_desc": "Gets the amount of health the specified player has"
+          "short_desc": "Gets the amount of health the specified player has",
+          "class": "Samp",
+          "member": "GetPlayerHealth",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -60191,31 +60252,46 @@
           "id": "0B26",
           "name": "SAMP_GET_PLAYER_ARMOR",
           "num_params": 2,
-          "short_desc": "Gets the amount of armor the specified player has"
+          "short_desc": "Gets the amount of armor the specified player has",
+          "class": "Samp",
+          "member": "GetPlayerArmor",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "statusid",
+              "name": "id",
               "type": "SampGameState"
             }
           ],
           "id": "0B27",
           "name": "SAMP_SET_GAMESTATE",
           "num_params": 1,
-          "short_desc": "Sets the connection status to the server. Useful when attempting to reconnect or disconnect to server"
+          "short_desc": "Sets the connection status to the server. Useful when attempting to reconnect or disconnect to server",
+          "class": "Samp",
+          "member": "SetGameState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "reasonid",
+              "name": "id",
               "type": "SampDisconnectReason"
             }
           ],
           "id": "0B28",
           "name": "SAMP_SEND_DISCONNECTED_TO_SERVER",
           "num_params": 1,
-          "short_desc": "Sends SampRpc.ScrServerQuit to the server without actually disconnecting our client to the server"
+          "short_desc": "Sends SampRpc.ScrServerQuit to the server without actually disconnecting our client to the server",
+          "class": "Samp",
+          "member": "SendRpcDisconnected",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60227,12 +60303,17 @@
           "id": "0B29",
           "name": "SAMP_SET_LOCAL_NICKNAME",
           "num_params": 1,
-          "short_desc": "Changes our Local Nickname"
+          "short_desc": "Changes our Local Nickname",
+          "class": "Samp",
+          "member": "SetMyName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -60246,7 +60327,12 @@
           "id": "0B2A",
           "name": "SAMP_GET_PLAYER_PING",
           "num_params": 2,
-          "short_desc": "Returns the ping of the specified player"
+          "short_desc": "Returns the ping of the specified player with ID",
+          "class": "Samp",
+          "member": "GetPlayerPing",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60293,7 +60379,7 @@
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -60315,14 +60401,19 @@
             }
           ],
           "id": "0B2F",
-          "name": "SAMP_GET_STREAMED_OUT_PLAYER_COORD",
+          "name": "SAMP_GET_STREAMED_OUT_PLAYER_COORDS",
           "num_params": 4,
-          "short_desc": "Returns the 3D Coordinates of a player who is outside the stream zone, if the server allows it"
+          "short_desc": "Returns the 3D Coordinates of a player who is outside the stream zone, if the server allows it",
+          "class": "Samp",
+          "member": "GetPlayerStreamedOutCoords",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "carid",
+              "name": "carId",
               "type": "int"
             },
             {
@@ -60333,53 +60424,73 @@
           "id": "0B30",
           "name": "SAMP_SEND_ENTER_CAR",
           "num_params": 2,
-          "short_desc": "Sends SampRpc.EnterCar to Server"
+          "short_desc": "Sends SampRpc.EnterCar to Server",
+          "class": "Samp",
+          "member": "SendRpcEnterCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "carid",
+              "name": "carId",
               "type": "int"
             }
           ],
           "id": "0B31",
           "name": "SAMP_SEND_EXIT_CAR",
           "num_params": 1,
-          "short_desc": "Sends SampRpc.ExitCar to Server"
+          "short_desc": "Sends SampRpc.ExitCar to Server",
+          "class": "Samp",
+          "member": "SendRpcExitCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0B32",
           "name": "SAMP_SEND_SPAWN_TO_SERVER",
           "num_params": 0,
-          "short_desc": "Sends a SampRpc.Spawn to SAMP Server without spawning our character"
+          "short_desc": "Sends a SampRpc.Spawn to SAMP Server without spawning our character",
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SendRpcSpawn"
         },
         {
           "input": [
             {
-              "name": "carid",
+              "name": "carId",
               "type": "int"
             },
             {
-              "name": "bodyflags",
+              "name": "bodyFlags",
               "type": "int"
             },
             {
-              "name": "doorflags",
+              "name": "doorFlags",
               "type": "int"
             },
             {
-              "name": "lightflags",
+              "name": "lightFlags",
               "type": "int"
             },
             {
-              "name": "wheelflags",
+              "name": "wheelFlags",
               "type": "int"
             }
           ],
           "id": "0B33",
           "name": "SAMP_SEND_DAMAGE_CAR",
           "num_params": 5,
-          "short_desc": "Sends a SampRpc.DamageCar to the Server"
+          "short_desc": "Sends a SampRpc.DamageCar to the Server",
+          "class": "Samp",
+          "member": "SendRpcDamageCar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60396,9 +60507,12 @@
           "name": "SAMP_REGISTER_CLIENT_SIDED_COMMAND",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Registers a callback hooked from a client sided chat command"
+          "short_desc": "Registers a callback hooked from a client sided chat command",
+          "class": "Samp",
+          "member": "HookCmdEvent"
         },
         {
           "output": [
@@ -60412,9 +60526,12 @@
           "name": "SAMP_GET_PARAMS_OF_LAST_TRIGGERED_COMMAND",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns a pointer to a string containing the parameters of the last command entered"
+          "short_desc": "Returns a pointer to a string containing the parameters of the last command entered",
+          "class": "Samp",
+          "member": "GetCmdParams"
         },
         {
           "input": [
@@ -60433,7 +60550,12 @@
           "id": "0B36",
           "name": "SAMP_GET_PLAYER_NICKNAME",
           "num_params": 2,
-          "short_desc": "Returns a pointer to the nickname of the specified player"
+          "short_desc": "Returns a pointer to the nickname of the specified player",
+          "class": "Samp",
+          "member": "GetPlayerName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60452,7 +60574,12 @@
           "id": "0B37",
           "name": "SAMP_GET_PLAYER_COLOR",
           "num_params": 2,
-          "short_desc": "Returns the color of the specified player in 0xAARRGGBB format"
+          "short_desc": "Returns the color of the specified player in 0xAARRGGBB format",
+          "class": "Samp",
+          "member": "GetPlayerColor",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60468,7 +60595,12 @@
           "id": "0B38",
           "name": "SAMP_CONNECT_TO_SERVER",
           "num_params": 2,
-          "short_desc": "Connects to the specified samp server information"
+          "short_desc": "Connects to the specified samp server information",
+          "class": "Samp",
+          "member": "Connect",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60488,7 +60620,12 @@
           "id": "0B39",
           "name": "SAMP_GET_CURRENT_SERVER_ADDRESS",
           "num_params": 2,
-          "short_desc": "Returns the server's IP address and port"
+          "short_desc": "Returns the server's IP address and port",
+          "class": "Samp",
+          "member": "GetServerAddress",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -63378,108 +63515,150 @@
           ]
         },
         {
-          "id": "0BBF",
-          "name": "SAMP_SEND_RCON_COMMAND",
-          "num_params": 1,
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BBF",
+          "name": "SAMP_SEND_RCON_COMMAND_TO_SERVER",
+          "num_params": 1,
+          "class": "Samp",
+          "member": "SendRpcRconCmd",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            }
+          ],
           "id": "0BC0",
           "name": "SAMP_SEND_ONFOOT_DATA",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendOnFootData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BC1",
           "name": "SAMP_SEND_INCAR_DATA",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendInCarData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BC2",
           "name": "SAMP_SEND_PASSENGER_DATA",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendPassengerData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BC3",
           "name": "SAMP_SEND_AIM_DATA",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendAimData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BC4",
           "name": "SAMP_SEND_BULLET_DATA",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendBulletData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BC5",
           "name": "SAMP_SEND_TRAILER_DATA",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendTrailerData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BC6",
           "name": "SAMP_SEND_UNOCCUPIED_DATA",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendUnoccupiedData",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BC7",
           "name": "SAMP_SEND_SPECTATOR_DATA",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "Samp",
+          "member": "SendSpectatorData",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0BC8",
-          "name": "SAMP_SEND_CLICK_PLAYER",
-          "num_params": 2,
           "input": [
             {
               "name": "_p1",
@@ -63489,46 +63668,89 @@
               "name": "_p2",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BC8",
+          "name": "SAMP_SEND_CLICK_PLAYER_TO_SERVER",
+          "num_params": 2,
+          "class": "Samp",
+          "member": "SendRpcClickPlayer",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "_p1",
+              "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            }
+          ],
           "id": "0BC9",
           "name": "SAMP_SEND_DIALOG_RESPONSE",
           "num_params": 4,
+          "class": "Samp",
+          "member": "SendRpcDialogResponse",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BCA",
-          "name": "SAMP_SEND_CLICK_TEXTDRAW",
+          "name": "SAMP_SEND_CLICK_TEXTDRAW_TO_SERVER",
           "num_params": 1,
+          "class": "Samp",
+          "member": "SendRpcClickTextDraw",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
           "input": [
             {
               "name": "_p1",
               "type": "int"
+            },
+            {
+              "name": "_p2",
+              "type": "int"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BCB",
-          "name": "SAMP_SEND_GIVE_DAMAGE",
+          "name": "SAMP_SEND_GIVE_DAMAGE_TO_SERVER",
           "num_params": 4,
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SendRpcGiveDamage"
+        },
+        {
           "input": [
             {
               "name": "_p1",
@@ -63546,35 +63768,17 @@
               "name": "_p4",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0BCC",
-          "name": "SAMP_SEND_TAKE_DAMAGE",
+          "name": "SAMP_SEND_TAKE_DAMAGE_TO_SERVER",
           "num_params": 4,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "class": "Samp",
+          "member": "SendTakeDamage",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0BCD",
-          "name": "SAMP_SEND_EDIT_OBJECT",
-          "num_params": 9,
           "input": [
             {
               "name": "_p1",
@@ -63612,12 +63816,17 @@
               "name": "_p9",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BCD",
+          "name": "SAMP_SEND_EDIT_OBJECT_TO_SERVER",
+          "num_params": 9,
+          "class": "Samp",
+          "member": "SendRpcEditObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0BCE",
-          "name": "SAMP_SEND_EDIT_ATTACHED_OBJECT",
-          "num_params": 13,
           "input": [
             {
               "name": "_p1",
@@ -63671,34 +63880,57 @@
               "name": "_p13",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BCE",
+          "name": "SAMP_SEND_EDIT_ATTACHED_OBJECT",
+          "num_params": 13,
+          "class": "Samp",
+          "member": "SendEditAttachedObject",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0BCF",
-          "name": "SAMP_SEND_INTERIOR_CHANGE",
-          "num_params": 1,
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BCF",
+          "name": "SAMP_SEND_INTERIOR_CHANGED_TO_SERVER",
+          "num_params": 1,
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SendRpcInteriorChanged"
         },
         {
           "id": "0BD0",
           "name": "SAMP_SEND_REQUEST_SPAWN",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Samp",
+          "member": "SendRpcRequestSpawn",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0BD1",
-          "name": "SAMP_SEND_PICKED_UP_PICKUP",
-          "num_params": 1,
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BD1",
+          "name": "SAMP_SEND_PICKED_UP_PICKUP",
+          "num_params": 1,
+          "class": "Samp",
+          "member": "SendPickedupPickup",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0BD2",
@@ -63713,19 +63945,29 @@
         },
         {
           "id": "0BD3",
-          "name": "SAMP_SEND_MENU_QUIT",
-          "num_params": 0
+          "name": "SAMP_SEND_QUIT_MENU_TO_SERVER",
+          "num_params": 0,
+          "class": "Samp",
+          "member": "SendRpcQuitMenu",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0BD4",
-          "name": "SAMP_SEND_CAR_DESTROYED",
-          "num_params": 1,
           "input": [
             {
               "name": "_p1",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BD4",
+          "name": "SAMP_SEND_CAR_DESTROYED",
+          "num_params": 1,
+          "class": "Samp",
+          "member": "SendRpcCarDestroyed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0BD5",

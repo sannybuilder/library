@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741423514523,
-    "version": "0.889",
+    "last_update": 1741433289617,
+    "version": "0.891",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60196,17 +60196,17 @@
           ],
           "output": [
             {
-              "name": "structure",
+              "name": "address",
               "type": "int",
               "source": "var_any"
             }
           ],
           "id": "0B24",
-          "name": "SAMP_GET_PLAYER_STRUCT",
+          "name": "SAMP_GET_PLAYER_POINTER",
           "num_params": 2,
           "short_desc": "Returns the player's samp structure. Returns 0 (NULL Pointer) if player isn't connected",
           "class": "Samp",
-          "member": "GetPlayerStruct",
+          "member": "GetPlayerPtr",
           "attrs": {
             "is_static": true
           }
@@ -60417,7 +60417,7 @@
               "type": "int"
             },
             {
-              "name": "ispassenger",
+              "name": "isPassenger",
               "type": "bool"
             }
           ],
@@ -60495,12 +60495,12 @@
         {
           "input": [
             {
-              "name": "chatcommand",
+              "name": "chatCommand",
               "type": "string"
             },
             {
-              "name": "callbacklabel",
-              "type": "int"
+              "name": "callbackLabel",
+              "type": "label"
             }
           ],
           "id": "0B34",
@@ -60536,13 +60536,13 @@
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "stringpointernickname",
+              "name": "nickname",
               "type": "int",
               "source": "var_any"
             }
@@ -60584,7 +60584,7 @@
         {
           "input": [
             {
-              "name": "serverip",
+              "name": "serverIp",
               "type": "string"
             },
             {
@@ -60603,14 +60603,12 @@
           }
         },
         {
-          "input": [
+          "output": [
             {
-              "name": "bufferserverip",
+              "name": "buffer",
               "type": "string",
               "source": "var_any"
-            }
-          ],
-          "output": [
+            },
             {
               "name": "port",
               "type": "int",
@@ -60618,27 +60616,25 @@
             }
           ],
           "id": "0B39",
-          "name": "SAMP_GET_CURRENT_SERVER_ADDRESS",
+          "name": "SAMP_GET_SERVER_ADDRESS",
           "num_params": 2,
-          "short_desc": "Returns the server's IP address and port",
-          "class": "Samp",
-          "member": "GetServerAddress",
+          "short_desc": "Returns the server's port and writes server's IP address to buffer",
           "attrs": {
             "is_static": true
           }
         },
         {
-          "input": [
+          "output": [
             {
               "name": "buffer",
-              "type": "int",
+              "type": "string",
               "source": "var_any"
             }
           ],
           "id": "0B3A",
-          "name": "SAMP_GET_CURRENT_SERVER_NAME",
+          "name": "SAMP_GET_SERVER_NAME",
           "num_params": 1,
-          "short_desc": "Writes the server name to the buffer variable"
+          "short_desc": "Writes the server name to buffer"
         },
         {
           "input": [
@@ -60655,11 +60651,11 @@
               "type": "int"
             },
             {
-              "name": "leftormiddlebuttonname",
+              "name": "leftOrMiddleButtonName",
               "type": "int"
             },
             {
-              "name": "rightbuttonname",
+              "name": "rightButtonName",
               "type": "int"
             },
             {
@@ -60675,20 +60671,25 @@
         {
           "input": [
             {
-              "name": "dialogid",
+              "name": "dialogId",
               "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "buttonId",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "buttonidstore",
-              "type": "int"
+              "name": "listItemId",
+              "type": "int",
+              "source": "var_any"
             },
             {
-              "name": "listitemidstore",
-              "type": "int"
-            },
-            {
-              "name": "bufferinputtext",
-              "type": "int"
+              "name": "inputTextBuffer",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0B3C",
@@ -60985,10 +60986,10 @@
           "short_desc": "Selects the id of an element in the dialog list"
         },
         {
-          "input": [
+          "output": [
             {
               "name": "buffer",
-              "type": "int",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -61328,10 +61329,12 @@
             {
               "name": "itemid",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "buffer",
-              "type": "int",
+              "type": "string",
               "source": "var_any"
             }
           ],
@@ -63428,10 +63431,13 @@
             {
               "name": "id",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "buffer",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0BBA",

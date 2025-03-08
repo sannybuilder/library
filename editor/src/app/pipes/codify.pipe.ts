@@ -279,6 +279,6 @@ function findCommand(
   return null;
 }
 
-function getName(command: Command) {
+export function getName(command: Command) {
   return command.name.startsWith('0x') ? functionName(command) : command.name;
 }

@@ -1,1 +1,0 @@
-The returned coordinates of this command have some discrepancies compared to the correct coordinates because the server rounds down the streamed-out coordinate values sent to our client for data compression purposes.

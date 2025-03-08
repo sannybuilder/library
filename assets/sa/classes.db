@@ -79,6 +79,7 @@ Streaming
 StuckCarCheck
 Task
 Text
+TextLabel3D
 Texture
 Trailer
 Train
@@ -1235,10 +1236,10 @@ Create,0B3D,0,0,("handle: Bitstream")
 Delete,0B3E,1,0,("self: Bitstream")
 Reset,0B3F,1,0,("self: Bitstream")
 SendAsPacket,0B8B,1,0,("self: Bitstream")
-SendAsPacketWithParams,0B42,1,0,("self: Bitstream" "priorityid: SampPriority" "reliabilityid: SampReliability" "orderingchannel%i")
+SendAsPacketWithParams,0B42,1,0,("self: Bitstream" "priority: SampPriority" "reliability: SampReliability" "orderingChannel%i")
 SendAsRpc,0B8A,1,0,("rpcid: SampRpc" "self: Bitstream")
-SendAsRpcWithParams,0B41,1,0,("rpcid: SampRpc" "self: Bitstream" "priorityid: SampPriority" "reliabilityid: SampReliability" "orderingchannel%i" "shifttimestamp%i")
-Write,0B40,1,0,("self: Bitstream" "value%i" "datatype: SampBitStreamDataType" "datasize%i")
+SendAsRpcWithParams,0B41,1,0,("rpc: SampRpc" "self: Bitstream" "priority: SampPriority" "reliability: SampReliability" "orderingChannel%i" "shiftTimeStamp%i")
+Write,0B40,1,0,("self: Bitstream" "value%i" "dataType: SampBitStreamDataType" "dataSize%i")
 $END
 
 $Blip
@@ -2042,7 +2043,7 @@ Create,0B80,0,0,("title%s" "handle: DxutDialog")
 Delete,0BA4,0,0,("self: DxutDialog")
 DeleteControl,0BA3,0,0,("self: DxutDialog" "id%i")
 DeleteListboxElement,0B9C,1,0,("self: DxutDialog" "id%i" "index%i")
-Exists,0BAB,1,0,("self: DxutDialog")
+DoesExist,0BAB,1,0,("self: DxutDialog")
 GetControlCoords,0BA9,0,0,("self: DxutDialog" "id%i" "coordx%i" "coordy%i")
 GetControlDims,0BA7,0,0,("self: DxutDialog" "id%i" "width%i" "height%i")
 GetControlText,0B89,1,0,("self: DxutDialog" "id%i" "text%i")
@@ -2899,14 +2900,16 @@ $Samp
 $BEGIN
 Available,0AFA,1,0,()
 ChatMsg,0AF8,0,0,("format%s" "color%i" "args: arguments")
+CmdRet,0B43,0,0,()
 Connect,0B38,0,0,("serverIp%s" "port%i")
+DialogResponded,0B3C,1,0,("dialogId%i" "buttonId%i" "listItemId%i" "inputTextBuffer%i")
 ForceSpawn,0AF6,0,0,()
 GetBaseAddress,0AF7,0,0,("pointer%i")
 GetCar,0AFF,0,0,("id%i" "handle: Car")
 GetChar,0B20,0,0,("id%i" "handle: Char")
 GetCmdParams,0B35,1,0,("pointer%i")
 GetPlayerArmor,0B26,0,0,("id%i" "armor%i")
-GetPlayerColor,0B37,0,0,("playerid%i" "color%i")
+GetPlayerColor,0B37,0,0,("id%i" "color%i")
 GetPlayerHealth,0B25,0,0,("id%i" "health%i")
 GetPlayerName,0B36,0,0,("id%i" "nickname%i")
 GetPlayerPing,0B2A,0,0,("id%i" "ping%i")
@@ -2949,6 +2952,7 @@ SetGameState,0B27,0,0,("id: SampGameState")
 SetMyName,0B29,0,0,("nickname%s")
 SetSendRate,0B22,0,0,("type: SampSendRateType" "delay%i")
 SetSpecialAction,0AFD,0,0,("id: SampSpecialAction")
+ShowDialog,0B3B,0,0,("id%i" "name%i" "content%i" "leftOrMiddleButtonName%i" "rightButtonName%i" "type%i")
 $END
 
 $ScriptFire
@@ -3340,6 +3344,16 @@ StringFloatFormat,0AED,0,0,("number%f" "format%s" "text%s")
 StringFormat,0AD3,0,0,("buffer%i" "format%s" "args: arguments")
 UnloadFxt,2607,1,0,("filepath%s")
 UseCommands,03F0,0,0,("state%b")
+$END
+
+$TextLabel3D
+$BEGIN
+Create,0B44,1,0,("text%s" "color%i" "coordX%f" "coordY%f" "coordZ%f" "visibilityRadius%f" "showBehindWalls%b" "attachedPlayerId%i" "attachedCarId%i" "handle: TextLabel3D")
+CreateWithId,0C45,0,0,("idAsHandle: TextLabel3D" "text%i" "color%i" "coordX%f" "coordY%f" "coordZ%f" "visibilityRadius%f" "showBehindWalls%b" "attachedPlayerId%i" "attachedCarId%i")
+Delete,0B45,1,0,("self: TextLabel3D")
+DoesExist,0B46,1,0,("self: TextLabel3D")
+GetParams,0C46,1,0,("self: TextLabel3D" "text%s" "color%i" "coordX%f" "coordY%f" "coordZ%f" "visibilityRadius%f" "showBehindWalls%b" "attachedPlayerId%i" "attachedCarId%i")
+SetText,0C47,1,0,("self: TextLabel3D" "text%s")
 $END
 
 $Texture

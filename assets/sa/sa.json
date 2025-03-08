@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741433289617,
-    "version": "0.891",
+    "last_update": 1741442437806,
+    "version": "0.892",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60560,7 +60560,7 @@
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -60666,7 +60666,12 @@
           "id": "0B3B",
           "name": "SAMP_SHOW_DIALOG",
           "num_params": 6,
-          "short_desc": "Shows an artificial SAMP dialog with specified parameter attributes"
+          "short_desc": "Shows an artificial SAMP dialog with specified parameter attributes",
+          "class": "Samp",
+          "member": "ShowDialog",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -60696,9 +60701,12 @@
           "name": "SAMP_HAS_DIALOG_RESPONDED",
           "num_params": 4,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns logical true if the last submitted SAMP Dialog is equal to the specified dialogid"
+          "short_desc": "Returns logical true if the last submitted SAMP Dialog is equal to the specified dialogid",
+          "class": "Samp",
+          "member": "DialogResponded"
         },
         {
           "output": [
@@ -60765,11 +60773,11 @@
               "type": "int"
             },
             {
-              "name": "datatype",
+              "name": "dataType",
               "type": "SampBitStreamDataType"
             },
             {
-              "name": "datasize",
+              "name": "dataSize",
               "type": "int"
             }
           ],
@@ -60786,7 +60794,7 @@
         {
           "input": [
             {
-              "name": "rpcid",
+              "name": "rpc",
               "type": "SampRpc"
             },
             {
@@ -60794,19 +60802,19 @@
               "type": "Bitstream"
             },
             {
-              "name": "priorityid",
+              "name": "priority",
               "type": "SampPriority"
             },
             {
-              "name": "reliabilityid",
+              "name": "reliability",
               "type": "SampReliability"
             },
             {
-              "name": "orderingchannel",
+              "name": "orderingChannel",
               "type": "int"
             },
             {
-              "name": "shifttimestamp",
+              "name": "shiftTimeStamp",
               "type": "int"
             }
           ],
@@ -60827,15 +60835,15 @@
               "type": "Bitstream"
             },
             {
-              "name": "priorityid",
+              "name": "priority",
               "type": "SampPriority"
             },
             {
-              "name": "reliabilityid",
+              "name": "reliability",
               "type": "SampReliability"
             },
             {
-              "name": "orderingchannel",
+              "name": "orderingChannel",
               "type": "int"
             }
           ],
@@ -60853,7 +60861,12 @@
           "id": "0B43",
           "name": "SAMP_CMD_RET",
           "num_params": 0,
-          "short_desc": "Marks the end of the callback created by Opcode 0B34. Used as its returning statement"
+          "short_desc": "Marks the end of the client sided command's callback. Used as its returning statement",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "CmdRet"
         },
         {
           "input": [
@@ -60866,38 +60879,38 @@
               "type": "int"
             },
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "float"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "float"
             },
             {
-              "name": "coordz",
+              "name": "coordZ",
               "type": "float"
             },
             {
-              "name": "visibilityradius",
+              "name": "visibilityRadius",
               "type": "float"
             },
             {
-              "name": "showbehindwalls",
+              "name": "showBehindWalls",
               "type": "bool"
             },
             {
-              "name": "attachedplayerid",
+              "name": "attachedPlayerId",
               "type": "int"
             },
             {
-              "name": "attachedcarid",
+              "name": "attachedCarId",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "3Dtextid",
-              "type": "int",
+              "name": "handle",
+              "type": "TextLabel3D",
               "source": "var_any"
             }
           ],
@@ -60905,39 +60918,47 @@
           "name": "SAMP_CREATE_3D_TEXT",
           "num_params": 10,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true
           },
-          "short_desc": "Creates an artificial SAMP 3D text with the specified parameter attributes"
+          "short_desc": "Creates an artificial SAMP 3D text with the specified parameter attributes",
+          "class": "TextLabel3D",
+          "member": "Create"
         },
         {
           "input": [
             {
-              "name": "3Dtextid",
-              "type": "int"
+              "name": "self",
+              "type": "TextLabel3D"
             }
           ],
           "id": "0B45",
-          "name": "SAMP_DESTROY_3D_TEXT",
+          "name": "SAMP_DELETE_3D_TEXT",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_destructor": true
           },
-          "short_desc": "Destroys a 3D text using it's ID"
+          "short_desc": "Destroys a 3D text using it's ID",
+          "class": "TextLabel3D",
+          "member": "Delete"
         },
         {
           "input": [
             {
-              "name": "3Dtextid",
-              "type": "int"
+              "name": "self",
+              "type": "TextLabel3D"
             }
           ],
           "id": "0B46",
-          "name": "SAMP_IS_3D_TEXT_DEFINED",
+          "name": "SAMP_IS_3D_TEXT_EXIST",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns logical true if the specified 3D text exists"
+          "short_desc": "Returns logical true if the specified 3D text exists",
+          "class": "TextLabel3D",
+          "member": "DoesExist"
         },
         {
           "input": [
@@ -63245,7 +63266,7 @@
           },
           "short_desc": "Evaluates as logical true if the specified DxutDialog exists",
           "class": "DxutDialog",
-          "member": "Exists"
+          "member": "DoesExist"
         },
         {
           "output": [
@@ -65983,119 +66004,142 @@
           ]
         },
         {
-          "id": "0C45",
-          "name": "SAMP_CREATE_3D_TEXT_EXTENDED",
-          "num_params": 10,
           "input": [
             {
-              "name": "_p1",
+              "name": "idAsHandle",
+              "type": "TextLabel3D"
+            },
+            {
+              "name": "text",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "color",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "coordX",
+              "type": "float"
+            },
+            {
+              "name": "coordY",
+              "type": "float"
+            },
+            {
+              "name": "coordZ",
+              "type": "float"
+            },
+            {
+              "name": "visibilityRadius",
+              "type": "float"
+            },
+            {
+              "name": "showBehindWalls",
+              "type": "bool"
+            },
+            {
+              "name": "attachedPlayerId",
               "type": "int"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
-            },
-            {
-              "name": "_p10",
+              "name": "attachedCarId",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0C45",
+          "name": "SAMP_CREATE_3D_TEXT_WITH_ID",
+          "num_params": 10,
+          "short_desc": "Creates/overwrites a 3D text with the specified ID",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "TextLabel3D",
+          "member": "CreateWithId"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "TextLabel3D"
+            }
+          ],
+          "output": [
+            {
+              "name": "text",
+              "type": "string",
+              "source": "var_any"
+            },
+            {
+              "name": "color",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "coordX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "coordY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "coordZ",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "visibilityRadius",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "showBehindWalls",
+              "type": "bool",
+              "source": "var_any"
+            },
+            {
+              "name": "attachedPlayerId",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "attachedCarId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C46",
-          "name": "SAMP_GET_3D_TEXT",
+          "name": "SAMP_GET_3D_TEXT_PARAMS",
           "num_params": 10,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
-            },
-            {
-              "name": "_p10",
-              "type": "int"
-            }
-          ]
+          "class": "TextLabel3D",
+          "member": "GetParams",
+          "short_desc": "Returns all the informations about a TextLabel3D using its ID"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "TextLabel3D"
+            },
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
           "id": "0C47",
           "name": "SAMP_SET_3D_TEXT",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets new text for 3D text",
+          "class": "TextLabel3D",
+          "member": "SetText"
         },
         {
           "id": "0C48",

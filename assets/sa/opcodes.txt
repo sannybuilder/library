@@ -2180,7 +2180,7 @@
 {0B34:}   samp_register_client_sided_command {chatCommand} [string] @label
 {0B35:}   [var pointer: int] = samp_get_params_of_last_triggered_command
 {0B36:} [var nickname: int] = samp_get_player_nickname {id} [int]
-{0B37:} [var color: int] = samp_get_player_color {playerid} [int]
+{0B37:} [var color: int] = samp_get_player_color {id} [int]
 {0B38:} samp_connect_to_server {serverIp} [string] {port} [int]
 {0B39:} [var buffer: string], [var port: int] = samp_get_server_address
 {0B3A:} [var buffer: string] = samp_get_server_name
@@ -2189,13 +2189,13 @@
 {0B3D:} [var handle: Bitstream] = samp_raknet_create_bitstream
 {0B3E:}   [var self: Bitstream] = samp_raknet_delete_bitstream
 {0B3F:}   samp_raknet_reset_bitstream [Bitstream]
-{0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [int] {datatype} [SampBitStreamDataType] {datasize} [int]
-{0B41:}   samp_raknet_send_rpc_with_params_to_server {rpcid} [SampRpc] [Bitstream] {priorityid} [SampPriority] {reliabilityid} [SampReliability] {orderingchannel} [int] {shifttimestamp} [int]
-{0B42:}   samp_raknet_send_packet_with_params_to_server [Bitstream] {priorityid} [SampPriority] {reliabilityid} [SampReliability] {orderingchannel} [int]
+{0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [int] {dataType} [SampBitStreamDataType] {dataSize} [int]
+{0B41:}   samp_raknet_send_rpc_with_params_to_server {rpc} [SampRpc] [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int] {shiftTimeStamp} [int]
+{0B42:}   samp_raknet_send_packet_with_params_to_server [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int]
 {0B43:} samp_cmd_ret
-{0B44:}   [var 3Dtextid: int] = samp_create_3d_text {text} [string] {color} [int] {coordx} [float] {coordy} [float] {coordz} [float] {visibilityradius} [float] {showbehindwalls} [bool] {attachedplayerid} [int] {attachedcarid} [int]
-{0B45:}   samp_destroy_3d_text {3Dtextid} [int]
-{0B46:}   samp_is_3d_text_defined {3Dtextid} [int]
+{0B44:}   [var handle: TextLabel3D] = samp_create_3d_text {text} [string] {color} [int] {coordX} [float] {coordY} [float] {coordZ} [float] {visibilityRadius} [float] {showBehindWalls} [bool] {attachedPlayerId} [int] {attachedCarId} [int]
+{0B45:}   samp_delete_3d_text [TextLabel3D]
+{0B46:}   samp_is_3d_text_exist [TextLabel3D]
 {0B47:}   samp_close_current_dialog_with_button {buttonid} [int]
 {0B48:}   [var itemid: int] = samp_get_current_dialog_list_item
 {0B49:}   samp_select_list_item_from_current_dialog {itemid} [int]
@@ -2450,9 +2450,9 @@
 {0C42:}   samp_render_texture_sprite {_p1} [int] {_p2} [int]
 {0C43:}   samp_render_get_texture_size {_p1} [int] {_p2} [int] {_p3} [int]
 {0C44:} samp_render_set_render_state {_p1} [int] {_p2} [int]
-{0C45:} samp_create_3d_text_extended {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int]
-{0C46:}   samp_get_3d_text {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int]
-{0C47:}   samp_set_3d_text {_p1} [int] {_p2} [int]
+{0C45:} samp_create_3d_text_with_id {idAsHandle} [TextLabel3D] {text} [int] {color} [int] {coordX} [float] {coordY} [float] {coordZ} [float] {visibilityRadius} [float] {showBehindWalls} [bool] {attachedPlayerId} [int] {attachedCarId} [int]
+{0C46:}   [var text: string], [var color: int], [var coordX: float], [var coordY: float], [var coordZ: float], [var visibilityRadius: float], [var showBehindWalls: bool], [var attachedPlayerId: int], [var attachedCarId: int] = samp_get_3d_text_params [TextLabel3D]
+{0C47:}   samp_set_3d_text [TextLabel3D] {text} [string]
 {0C48:}   samp_create_textdraw {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {0C49:}   samp_set_textdraw_box {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {0C4A:}   samp_set_textdraw_align {_p1} [int] {_p2} [int]

@@ -1,0 +1,22 @@
+// Example 1: attach a 3D text to our character or car
+int attachedID
+if IS_CHAR_SITTING_IN_ANY_CAR $scplayer
+then // attach a red 3d text at the top of my car
+    int myCar = STORE_CAR_CHAR_IS_IN_NO_SAVE $scplayer
+    int myCarModel = GET_CAR_MODEL myCar
+    float offsetZ, unused
+    unused, unused, unused, unused, unused, offsetZ = get_model_dimensions {modelId} myCarModel
+    offsetZ += 2.0 // elevate
+    attachedID = SAMP_GET_CAR_ID {handle} myCar
+    SAMP_CREATE_3D_TEXT_WITH_ID {id} 19 {text} "I'm InCar" {color} 0xFFFF0000 {coordx} 0.0 {coordy} 0.0 {coordz} offsetZ {visibilityradius} 10.0 {showbehindwalls} true {attachedplayerid} -1 {attachedcarid} attachedID
+    // 3D Text with ID = 19 has been created successfully, overwriting the old 3D text
+else // attach a purple 3d text at my character's back
+    attachedID = SAMP_GET_PLAYER_ID {handle} $scplayer
+    SAMP_CREATE_3D_TEXT_WITH_ID {id} 19 {text} "I'm Onfoot" {color} 0xFFFF00FF {coordx} 0.0 {coordy} -2.0 {coordz} 0.0 {visibilityradius} 10.0 {showbehindwalls} true {attachedplayerid} attachedID {attachedcarid} -1
+    // 3D Text with ID = 19 has been created successfully, overwriting the old 3D text
+end
+
+
+// Example 2: Create a yellow 3D Text at specified world coordinate
+SAMP_CREATE_3D_TEXT_WITH_ID {id} 19 {text} "Hello World!" {color} 0xFFFFFF00 {coordx} 1324.14 {coordy} -2032.44 {coordz} 50.13 {visibilityradius} 50.0 {showbehindwalls} false {attachedplayerid} -1 {attachedcarid} -1
+// 3D Text with ID = 19 has been created successfully, overwriting the old 3D text

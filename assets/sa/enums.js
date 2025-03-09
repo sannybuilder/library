@@ -3888,3 +3888,7 @@ export const SampCursorMode = {
   "LockCam": 3,
   "LockCamNoCursor": 4
 };
+export const SampDialogButton = {
+  "Right": 0,
+  "LeftOrCenter": 1
+};

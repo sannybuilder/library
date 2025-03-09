@@ -2184,7 +2184,7 @@
 {0B38:} samp_connect_to_server {serverIp} [string] {port} [int]
 {0B39:} [var buffer: string], [var port: int] = samp_get_server_address
 {0B3A:} [var buffer: string] = samp_get_server_name
-{0B3B:} samp_show_dialog {id} [int] {name} [int] {content} [int] {leftOrMiddleButtonName} [int] {rightButtonName} [int] {type} [int]
+{0B3B:} samp_show_dialog {id} [int] {title} [string] {content} [string] {leftOrMiddleButtonName} [string] {rightButtonName} [string] {style} [SampDialogStyle]
 {0B3C:}   [var buttonId: int], [var listItemId: int], [var inputTextBuffer: int] = samp_has_dialog_responded {dialogId} [int]
 {0B3D:} [var handle: Bitstream] = samp_raknet_create_bitstream
 {0B3E:}   [var self: Bitstream] = samp_raknet_delete_bitstream
@@ -2196,27 +2196,27 @@
 {0B44:}   [var handle: TextLabel3D] = samp_create_3d_text {text} [string] {color} [int] {coordX} [float] {coordY} [float] {coordZ} [float] {visibilityRadius} [float] {showBehindWalls} [bool] {attachedPlayerId} [int] {attachedCarId} [int]
 {0B45:}   samp_delete_3d_text [TextLabel3D]
 {0B46:}   samp_is_3d_text_exist [TextLabel3D]
-{0B47:}   samp_close_current_dialog_with_button {buttonid} [int]
-{0B48:}   [var itemid: int] = samp_get_current_dialog_list_item
-{0B49:}   samp_select_list_item_from_current_dialog {itemid} [int]
-{0B4A:}   [var buffer: string] = samp_get_current_dialog_editbox_text
-{0B4B:}   samp_set_current_dialog_editbox_text {text} [string]
-{0B4C:}   samp_is_dialog_active {dialogid} [int]
-{0B4D:}   [var typeid: int] = samp_get_type_of_last_opened_dialog
-{0B4E:}   [var dialogid: int] = samp_get_id_of_last_opened_dialog
+{0B47:}   samp_close_active_dialog_with_button {button} [SampDialogButton]
+{0B48:}   [var itemId: int] = samp_get_active_dialog_selected_list_item
+{0B49:}   samp_select_active_dialog_list_item {itemId} [int]
+{0B4A:}   [var buffer: string] = samp_get_active_dialog_editbox_text
+{0B4B:}   samp_set_active_dialog_editbox_text {text} [string]
+{0B4C:}   samp_is_dialog_active {id} [int]
+{0B4D:}   [var style: SampDialogStyle] = samp_get_dialog_style
+{0B4E:}   [var id: int] = samp_get_dialog_id
 {0B4F:} [var statusid: SampGameState] = samp_get_gamestate
 {0B50:}   [var handle: Object] = samp_get_object_by_id {id} [int]
 {0B51:}   [var handle: Pickup] = samp_get_pickup_by_id {id} [int]
 {0B52:}   [var id: int] = samp_get_object_id {handle} [Object]
 {0B53:}   [var id: int] = samp_get_pickup_id {handle} [Pickup]
-{0B54:}   [var itemscount: int] = samp_get_items_count_of_last_opened_dialog
+{0B54:}   [var itemsCount: int] = samp_get_dialog_list_items_count
 {0B55:}   [var screencoordx: int], [var screencoordy: int] = sf_world_coords_to_window_screen_coords {worldcoordx} [float] {worldcoordy} [float] {worldcoordz} [float]
 {0B56:} sf_set_button {buttonid} [Button] {behaviorvalue} [int]
 {0B57:}   [var animid: int] = samp_get_player_animation {playerid} [int]
 {0B58:}   [var filename: int], [var animname: int] = samp_get_animation_name {animid} [int]
 {0B59:}   [var animid: int] = samp_get_animation_id {animname} [string] {filename} [string]
 {0B5A:} [var width: int], [var height: int] = sf_get_screen_resolution
-{0B5B:}   [var buffer: string] = samp_get_listbox_item_text_of_dialog {itemid} [int]
+{0B5B:}   [var buffer: string] = samp_get_dialog_list_item_text {itemId} [int]
 {0B5C:}   samp_is_player_paused {playerid} [int]
 {0B5D:} samp_set_cursor_visibility {isvisible} [bool]
 {0B5E:} [var windowscreencoordx: int], [var windowscreencoordy: int] = sf_get_cursor_coord
@@ -2283,7 +2283,7 @@
 {0B9B:} [var index: int], [var count: int] = sf_dxut_dialog_get_selected_listbox_element [DxutDialog] {id} [int]
 {0B9C:}   sf_dxut_dialog_delete_listbox_element [DxutDialog] {id} [int] {index} [int]
 {0B9D:}   [var text: string], [var data: int] = sf_dxut_dialog_get_listbox_element [DxutDialog] {id} [int] {index} [int]
-{0B9E:} samp_dialog_set_status_of_checkbox [DxutDialog] {id} [int] {ischecked} [bool]
+{0B9E:} samp_dialog_set_status_of_checkbox [DxutDialog] {id} [int] {isChecked} [bool]
 {0B9F:} sf_dxut_dialog_set_title_visibility [DxutDialog] {isVisible} [bool]
 {0BA0:}   sf_dxut_dialog_is_title_visible [DxutDialog]
 {0BA1:} sf_dxut_dialog_set_minimized [DxutDialog] {isminimized} [bool]
@@ -2326,7 +2326,7 @@
 {0BC6:} samp_send_unoccupied_data {_p1} [int]
 {0BC7:} samp_send_spectator_data {_p1} [int]
 {0BC8:} samp_send_click_player_to_server {_p1} [int] {_p2} [int]
-{0BC9:} samp_send_dialog_response {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{0BC9:} samp_send_dialog_response_to_server {dialogId} [int] {whichButton} [SampDialogButton] {itemId} [int] {inputText} [string]
 {0BCA:} samp_send_click_textdraw_to_server {_p1} [int]
 {0BCB:} samp_send_give_damage_to_server {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {0BCC:} samp_send_take_damage_to_server {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
@@ -2340,10 +2340,10 @@
 {0BD4:} samp_send_car_destroyed {_p1} [int]
 {0BD5:}   samp_is_scoreboard_opened
 {0BD6:} samp_enable_scoreboard {_p1} [int]
-{0BD7:} samp_get_dialog_text {_p1} [int]
-{0BD8:} samp_get_dialog_caption {_p1} [int]
-{0BD9:} samp_set_dialog_clientside {_p1} [int]
-{0BDA:}   samp_is_dialog_clientside
+{0BD7:} samp_get_dialog_content {buffer} [string]
+{0BD8:} samp_get_dialog_title {buffer} [string]
+{0BD9:} samp_set_active_dialog_environment {isClientSide} [bool]
+{0BDA:}   samp_is_active_dialog_clientside
 {0BDB:}   samp_is_chat_visible
 {0BDC:} samp_get_chat_display_mode {_p1} [int]
 {0BDD:} samp_set_chat_display_mode {_p1} [int]

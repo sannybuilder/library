@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741503821379,
-    "version": "0.896",
+    "last_update": 1741513855518,
+    "version": "0.897",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60647,24 +60647,24 @@
               "type": "int"
             },
             {
-              "name": "name",
-              "type": "int"
+              "name": "title",
+              "type": "string"
             },
             {
               "name": "content",
-              "type": "int"
+              "type": "string"
             },
             {
               "name": "leftOrMiddleButtonName",
-              "type": "int"
+              "type": "string"
             },
             {
               "name": "rightButtonName",
-              "type": "int"
+              "type": "string"
             },
             {
-              "name": "type",
-              "type": "int"
+              "name": "style",
+              "type": "SampDialogStyle"
             }
           ],
           "id": "0B3B",
@@ -60967,31 +60967,31 @@
         {
           "input": [
             {
-              "name": "buttonid",
-              "type": "int"
+              "name": "button",
+              "type": "SampDialogButton"
             }
           ],
           "id": "0B47",
-          "name": "SAMP_CLOSE_CURRENT_DIALOG_WITH_BUTTON",
+          "name": "SAMP_CLOSE_ACTIVE_DIALOG_WITH_BUTTON",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Closes the currently opened dialog with an indication of the button pressed",
+          "short_desc": "Closes the active dialog by pressing the specified button programmatically",
           "class": "Samp",
           "member": "CloseDialog"
         },
         {
           "output": [
             {
-              "name": "itemid",
+              "name": "itemId",
               "type": "int",
               "source": "var_any"
             }
           ],
           "id": "0B48",
-          "name": "SAMP_GET_CURRENT_DIALOG_LIST_ITEM",
+          "name": "SAMP_GET_ACTIVE_DIALOG_SELECTED_LIST_ITEM",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
@@ -60999,17 +60999,17 @@
           },
           "short_desc": "Returns the ID of the currently selected item on the list",
           "class": "Samp",
-          "member": "GetDialogItem"
+          "member": "GetDialogSelectedItem"
         },
         {
           "input": [
             {
-              "name": "itemid",
+              "name": "itemId",
               "type": "int"
             }
           ],
           "id": "0B49",
-          "name": "SAMP_SELECT_LIST_ITEM_FROM_CURRENT_DIALOG",
+          "name": "SAMP_SELECT_ACTIVE_DIALOG_LIST_ITEM",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
@@ -61017,7 +61017,7 @@
           },
           "short_desc": "Selects the id of an element in the dialog list",
           "class": "Samp",
-          "member": "DialogSelectItem"
+          "member": "SelectDialogItem"
         },
         {
           "output": [
@@ -61028,13 +61028,13 @@
             }
           ],
           "id": "0B4A",
-          "name": "SAMP_GET_CURRENT_DIALOG_EDITBOX_TEXT",
+          "name": "SAMP_GET_ACTIVE_DIALOG_EDITBOX_TEXT",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Writes the current text from a field in a dialog to the buffer",
+          "short_desc": "Writes the text from the input field of the active dialog to the buffer",
           "class": "Samp",
           "member": "GetDialogEditboxText"
         },
@@ -61046,7 +61046,7 @@
             }
           ],
           "id": "0B4B",
-          "name": "SAMP_SET_CURRENT_DIALOG_EDITBOX_TEXT",
+          "name": "SAMP_SET_ACTIVE_DIALOG_EDITBOX_TEXT",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
@@ -61059,7 +61059,7 @@
         {
           "input": [
             {
-              "name": "dialogid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -61077,34 +61077,40 @@
         {
           "output": [
             {
-              "name": "typeid",
-              "type": "int",
+              "name": "style",
+              "type": "SampDialogStyle",
               "source": "var_any"
             }
           ],
           "id": "0B4D",
-          "name": "SAMP_GET_TYPE_OF_LAST_OPENED_DIALOG",
+          "name": "SAMP_GET_DIALOG_STYLE",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the style of the currently opened dialog. If the dialog is not opened, returns the style of the last opened dialog instead"
+          "short_desc": "Returns the style of the active dialog. If the dialog is not opened, returns the style of the last opened dialog instead",
+          "class": "Samp",
+          "member": "GetDialogStyle"
         },
         {
           "output": [
             {
-              "name": "dialogid",
+              "name": "id",
               "type": "int",
               "source": "var_any"
             }
           ],
           "id": "0B4E",
-          "name": "SAMP_GET_ID_OF_LAST_OPENED_DIALOG",
+          "name": "SAMP_GET_DIALOG_ID",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the ID of the currently opened dialog. If the dialog is not opened, returns the ID of the last opened dialog instead"
+          "short_desc": "Returns the ID of the active dialog. If the dialog is not opened, returns the ID of the last opened dialog instead",
+          "class": "Samp",
+          "member": "GetDialogId"
         },
         {
           "output": [
@@ -61210,18 +61216,21 @@
         {
           "output": [
             {
-              "name": "itemscount",
+              "name": "itemsCount",
               "type": "int",
               "source": "var_any"
             }
           ],
           "id": "0B54",
-          "name": "SAMP_GET_ITEMS_COUNT_OF_LAST_OPENED_DIALOG",
+          "name": "SAMP_GET_DIALOG_LIST_ITEMS_COUNT",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the total number of items found on the currently opened dialog's list. If the dialog is not opened, the last opened dialog is used instead"
+          "short_desc": "Returns the total number of items found on the active dialog's list. If the dialog is not opened, the last opened dialog is used instead",
+          "class": "Samp",
+          "member": "GetDialogItemsCount"
         },
         {
           "input": [
@@ -61370,7 +61379,7 @@
         {
           "input": [
             {
-              "name": "itemid",
+              "name": "itemId",
               "type": "int"
             }
           ],
@@ -61382,12 +61391,15 @@
             }
           ],
           "id": "0B5B",
-          "name": "SAMP_GET_LISTBOX_ITEM_TEXT_OF_DIALOG",
+          "name": "SAMP_GET_DIALOG_LIST_ITEM_TEXT",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Writes the text of an item with specific id from the currently opened dialog's list, to buffer"
+          "short_desc": "Writes the text of an item with specific id from the active dialog's list, to buffer. If the dialog is not opened, the last opened dialog is evaluated instead",
+          "class": "Samp",
+          "member": "GetDialogItemText"
         },
         {
           "input": [
@@ -63009,7 +63021,7 @@
               "type": "int"
             },
             {
-              "name": "ischecked",
+              "name": "isChecked",
               "type": "bool"
             }
           ],
@@ -63357,7 +63369,12 @@
           "id": "0BB0",
           "name": "SAMP_GET_DIALOG_INFO_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp dialog structure"
+          "short_desc": "Returns the pointer to samp dialog structure",
+          "class": "Samp",
+          "member": "GetDialogInfoPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63734,30 +63751,31 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "dialogId",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "whichButton",
+              "type": "SampDialogButton"
+            },
+            {
+              "name": "itemId",
               "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
+              "name": "inputText",
+              "type": "string"
             }
           ],
           "id": "0BC9",
-          "name": "SAMP_SEND_DIALOG_RESPONSE",
+          "name": "SAMP_SEND_DIALOG_RESPONSE_TO_SERVER",
           "num_params": 4,
           "class": "Samp",
           "member": "SendRpcDialogResponse",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends an SampRpc.DialogResponse to the server"
         },
         {
           "input": [
@@ -64042,45 +64060,67 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "buffer",
+              "type": "string"
+            }
+          ],
           "id": "0BD7",
-          "name": "SAMP_GET_DIALOG_TEXT",
+          "name": "SAMP_GET_DIALOG_CONTENT",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the content of the active dialog to buffer. If the dialog is not opened, the last opened dialog is evaluated instead",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "GetDialogContent"
         },
         {
+          "input": [
+            {
+              "name": "buffer",
+              "type": "string"
+            }
+          ],
           "id": "0BD8",
-          "name": "SAMP_GET_DIALOG_CAPTION",
+          "name": "SAMP_GET_DIALOG_TITLE",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Writes the title of the active dialog to buffer. If the dialog is not opened, the last opened dialog is evaluated instead",
+          "class": "Samp",
+          "member": "GetDialogTitle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0BD9",
-          "name": "SAMP_SET_DIALOG_CLIENTSIDE",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "isClientSide",
+              "type": "bool"
             }
-          ]
+          ],
+          "id": "0BD9",
+          "name": "SAMP_SET_ACTIVE_DIALOG_ENVIRONMENT",
+          "num_params": 1,
+          "class": "Samp",
+          "member": "SetDialogEnv",
+          "short_desc": "Sets whether interactions with the active dialog would sync to the server(server-sided dialog) or not(client-sided dialog)",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0BDA",
-          "name": "SAMP_IS_DIALOG_CLIENTSIDE",
+          "name": "SAMP_IS_ACTIVE_DIALOG_CLIENTSIDE",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "IsDialogClientSide",
+          "short_desc": "Evaluates as logical true if the active dialog is has a client side attribute"
         },
         {
           "id": "0BDB",

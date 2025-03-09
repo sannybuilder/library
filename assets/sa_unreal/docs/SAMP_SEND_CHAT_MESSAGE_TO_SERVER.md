@@ -1,1 +1,1 @@
-Take note that this command can only process literal strings. So passing a formatted string with arguments will treat it as a literal string while the passed arguments are ignored
+Can process formatted string.

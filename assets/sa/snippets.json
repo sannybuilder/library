@@ -83,7 +83,7 @@
   "SAMPFUNCS": {
     "0AF6": "SAMP_SPAWN_LOCAL_PLAYER",
     "0AF7": "int sampaddr = SAMP_GET_BASE_ADDRESS",
-    "0AF8": "SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT {format} \"Script Initialized!\" {color} 0xFF00FFFF {args} // shows a literal string as teal colored text\n\nSAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT {format} \"WeaponID: %d, Weapon Damage: %f, WeaponName:%s\" {color} 0xFF00FFFF {values} 24 14@ \"Desert Eagle\" // shows a formatted string as teal colored text",
+    "0AF8": "SAMP_ADD_MESSAGE_TO_CHAT {format} \"Script Initialized!\" {color} 0xFF00FFFF {args} // shows a literal string as teal colored text\n\nSAMP_ADD_MESSAGE_TO_CHAT {format} \"WeaponID: %d, Weapon Damage: %f, WeaponName:%s\" {color} 0xFF00FFFF {values} 24 14@ \"Desert Eagle\" // shows a formatted string as teal colored text",
     "0AF9": "// Example 1: Sends a String Constant to Server.\nSAMP_SEND_CHAT_MESSAGE_TO_SERVER \"Hello Everyone!\"\nSAMP_SEND_CHAT_MESSAGE_TO_SERVER \"/cmds\"\n\n\n// Example 2: Periodically sends a formatted text message to server\n{$CLEO}\n{$USE SAMPFUNCS}\nNOP\n\nrepeat\n    wait 100\nuntil samp_is_available\n\nint loopIndex = 1\n\nwhile true\n    wait 3000\n    int myID = samp_get_player_id $scplayer\n    int myName = samp_get_player_nickname {id} myID\n    samp_send_chat_message_to_server {message} \"%d) My Name is %s.\" {args} loopIndex myName\n    loopIndex++\nend\n",
     "0AFA": "if SAMP_IS_AVAILABLE\nthen\n    // gta_sa is running in SAMP\nelse\n    // samp is still loading its structures, or gta_sa is running in single player\nend\n\n\n// samp.dll takes time to initialize its structures, executing samp-related opcodes will lead to gta_sa crash. To avoid this, we must wait indefinitely until samp is fully initialized.\nrepeat\n    wait 100\nuntil SAMP_IS_AVAILABLE\n\n// the rest of the code",
     "0AFB": "int targetClassID\n// do something to targetClassID\nSAMP_SEND_REQUEST_CLASS_TO_SERVER {id} targetClassID\n\n\nSAMP_SEND_REQUEST_CLASS_TO_SERVER {classid} 13",
@@ -231,7 +231,7 @@
     "0BAC": "int svSettPtr = SAMP_GET_SERVER_SETTINGS_POINTER",
     "0BAD": "int poolsPtr = SAMP_GET_POOLS_POINTER",
     "0BAE": "int chatinfoPtr = SAMP_GET_CHAT_INFO_POINTER",
-    "0BAF": "int inputinfoPtr = SAMP_GET_INPUT_INFO_POINTER",
+    "0BAF": "int inputinfoPtr = SAMP_GET_CHAT_INPUT_INFO_POINTER",
     "0BB0": "int dialogInfoPtr = SAMP_GET_DIALOG_INFO_POINTER",
     "0BB1": "int killInfoPtr = SAMP_GET_KILL_INFO_POINTER",
     "0BB2": "int miscInfoPtr = SAMP_GET_MISC_INFO_POINTER",

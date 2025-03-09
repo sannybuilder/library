@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741486749267,
-    "version": "0.895",
+    "last_update": 1741503821379,
+    "version": "0.896",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59966,11 +59966,11 @@
             }
           ],
           "id": "0AF8",
-          "name": "SAMP_ADD_CLIENT_SIDED_MESSAGE_TO_CHAT",
+          "name": "SAMP_ADD_MESSAGE_TO_CHAT",
           "num_params": 3,
           "short_desc": "Adds one line of colored message to the chat",
           "class": "Samp",
-          "member": "ChatMsg",
+          "member": "AddChatMsg",
           "attrs": {
             "is_static": true
           }
@@ -59978,7 +59978,7 @@
         {
           "input": [
             {
-              "name": "message",
+              "name": "format",
               "type": "string"
             },
             {
@@ -59989,7 +59989,7 @@
           "id": "0AF9",
           "name": "SAMP_SEND_CHAT_MESSAGE_TO_SERVER",
           "num_params": 2,
-          "short_desc": "Sends a message or command to the server",
+          "short_desc": "Sends SampRpc.Chat containing the message or command to the server",
           "class": "Samp",
           "member": "SendChatMsg",
           "attrs": {
@@ -60508,7 +60508,7 @@
             }
           ],
           "id": "0B34",
-          "name": "SAMP_REGISTER_CLIENT_SIDED_COMMAND",
+          "name": "SAMP_REGISTER_CLIENTSIDE_COMMAND",
           "num_params": 2,
           "attrs": {
             "is_condition": true,
@@ -60516,7 +60516,7 @@
           },
           "short_desc": "Registers a callback hooked from a client sided chat command",
           "class": "Samp",
-          "member": "HookCmdEvent"
+          "member": "HookCmdCallback"
         },
         {
           "output": [
@@ -61529,12 +61529,15 @@
             }
           ],
           "id": "0B63",
-          "name": "SAMP_UNREGISTER_CLIENT_SIDED_COMMAND",
+          "name": "SAMP_UNREGISTER_CLIENTSIDED_COMMAND",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Removes all callbacks hooked from a client sided chat command created by Opcode 0B63, suppressing all its callback's operation "
+          "short_desc": "Removes all callbacks hooked from a client sided chat command created by SAMP_REGISTER_CLIENTSIDE_COMMAND, suppressing all its callback's operation ",
+          "class": "Samp",
+          "member": "UnhookCmdCallback"
         },
         {
           "input": [
@@ -63339,7 +63342,7 @@
             }
           ],
           "id": "0BAF",
-          "name": "SAMP_GET_INPUT_INFO_POINTER",
+          "name": "SAMP_GET_CHAT_INPUT_INFO_POINTER",
           "num_params": 1,
           "short_desc": "Returns the pointer to samp chat input field structure"
         },

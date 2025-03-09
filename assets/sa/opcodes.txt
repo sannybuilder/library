@@ -2151,8 +2151,8 @@
 {0D7F:} draw_2d_sprite_with_gradient {texture} [int] {cornerAx} [float] {cornerAy} [float] {cornerBx} [float] {cornerBy} [float] {red0} [int] {green0} [int] {blue0} [int] {alpha0} [int] {red1} [int] {green1} [int] {blue1} [int] {alpha1} [int] {red2} [int] {green2} [int] {blue2} [int] {alpha2} [int] {red3} [int] {green3} [int] {blue3} [int] {alpha3} [int] {angle} [float]
 {0AF6:} samp_spawn_local_player
 {0AF7:} [var pointer: int] = samp_get_base_address
-{0AF8:} samp_add_client_sided_message_to_chat {format} [string] {color} [int] {args} [arguments]
-{0AF9:} samp_send_chat_message_to_server {message} [string] {args} [arguments]
+{0AF8:} samp_add_message_to_chat {format} [string] {color} [int] {args} [arguments]
+{0AF9:} samp_send_chat_message_to_server {format} [string] {args} [arguments]
 {0AFA:}   samp_is_available
 {0AFB:} samp_send_request_class_to_server {classId} [int]
 {0AFC:} samp_send_scm_event_to_server {carId} [int] {type} [SampScmEvent] {param1} [int] {param2} [int]
@@ -2177,7 +2177,7 @@
 {0B31:} samp_send_exit_car {carId} [int]
 {0B32:} samp_send_spawn_to_server
 {0B33:} samp_send_damage_car {carId} [int] {bodyFlags} [int] {doorFlags} [int] {lightFlags} [int] {wheelFlags} [int]
-{0B34:}   samp_register_client_sided_command {chatCommand} [string] @label
+{0B34:}   samp_register_clientside_command {chatCommand} [string] @label
 {0B35:}   [var pointer: int] = samp_get_params_of_last_triggered_command
 {0B36:} [var nickname: int] = samp_get_player_nickname {id} [int]
 {0B37:} [var color: int] = samp_get_player_color {id} [int]
@@ -2224,7 +2224,7 @@
 {0B60:} [var windowscreencoordx: int], [var windowscreencoordy: int] = sf_game_screen_coords_to_window_screen_coords {gamescreencoordx} [float] {gamescreencoordy} [float]
 {0B61:}   samp_is_local_player_spawned
 {0B62:}   [var specialactionid: SampSpecialAction] = samp_get_player_special_action {playerid} [int]
-{0B63:}   samp_unregister_client_sided_command {chatcommand} [string]
+{0B63:}   samp_unregister_clientsided_command {chatcommand} [string]
 {0B64:}   samp_is_player_npc {playerid} [int]
 {0B65:}   [var score: int] = samp_get_player_score {playerid} [int]
 {0B66:} [var alpha: int], [var red: int], [var green: int], [var blue: int] = sf_hex_to_argb {color} [int]
@@ -2300,7 +2300,7 @@
 {0BAC:} [var address: int] = samp_get_server_settings_pointer
 {0BAD:} [var address: int] = samp_get_pools_pointer
 {0BAE:} [var address: int] = samp_get_chat_info_pointer
-{0BAF:} [var address: int] = samp_get_input_info_pointer
+{0BAF:} [var address: int] = samp_get_chat_input_info_pointer
 {0BB0:} [var address: int] = samp_get_dialog_info_pointer
 {0BB1:} [var address: int] = samp_get_kill_info_pointer
 {0BB2:} [var address: int] = samp_get_misc_info_pointer

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741513855518,
-    "version": "0.897",
+    "last_update": 1741532324680,
+    "version": "0.898",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60625,7 +60625,9 @@
           "short_desc": "Returns the server's port and writes server's IP address to buffer",
           "attrs": {
             "is_static": true
-          }
+          },
+          "class": "Samp",
+          "member": "GetSvAddr"
         },
         {
           "output": [
@@ -60638,7 +60640,12 @@
           "id": "0B3A",
           "name": "SAMP_GET_SERVER_NAME",
           "num_params": 1,
-          "short_desc": "Writes the server name to buffer"
+          "short_desc": "Writes the server name to buffer",
+          "class": "Samp",
+          "member": "GetSvName",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -61115,7 +61122,7 @@
         {
           "output": [
             {
-              "name": "statusid",
+              "name": "statusId",
               "type": "SampGameState",
               "source": "var_any"
             }
@@ -61143,9 +61150,12 @@
           "name": "SAMP_GET_OBJECT_BY_ID",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the handle of an object using its SAMP ID"
+          "short_desc": "Returns the handle of an object using its SAMP ID",
+          "class": "Samp",
+          "member": "GetObject"
         },
         {
           "input": [
@@ -61165,14 +61175,17 @@
           "name": "SAMP_GET_PICKUP_BY_ID",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the handle of a pickup using its SAMP ID"
+          "short_desc": "Returns the handle of a pickup using its SAMP ID",
+          "class": "Samp",
+          "member": "GetPickup"
         },
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Object"
             }
           ],
@@ -61189,12 +61202,14 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the SAMP ID of an object using its handle"
+          "short_desc": "Returns the SAMP ID of an object using its handle",
+          "class": "Object",
+          "member": "GetSampId"
         },
         {
           "input": [
             {
-              "name": "handle",
+              "name": "self",
               "type": "Pickup"
             }
           ],
@@ -61211,7 +61226,9 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Returns the SAMP ID of a pickup using its handle"
+          "short_desc": "Returns the SAMP ID of a pickup using its handle",
+          "class": "Pickup",
+          "member": "GetSampId"
         },
         {
           "output": [
@@ -61235,26 +61252,26 @@
         {
           "input": [
             {
-              "name": "worldcoordx",
+              "name": "worldCoordX",
               "type": "float"
             },
             {
-              "name": "worldcoordy",
+              "name": "worldCoordY",
               "type": "float"
             },
             {
-              "name": "worldcoordz",
+              "name": "worldCoordZ",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "screencoordx",
+              "name": "screenCoordX",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "screencoordy",
+              "name": "screenCoordY",
               "type": "int",
               "source": "var_any"
             }
@@ -61263,36 +61280,44 @@
           "name": "SF_WORLD_COORDS_TO_WINDOW_SCREEN_COORDS",
           "num_params": 5,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Converts 3D coordinates from the world into window screen coordinates (pixels)"
+          "short_desc": "Converts 3D coordinates from the world into window screen coordinates (pixels)",
+          "class": "Sf",
+          "member": "From3DTo2D"
         },
         {
           "input": [
             {
-              "name": "buttonid",
+              "name": "buttonId",
               "type": "Button"
             },
             {
-              "name": "behaviorvalue",
+              "name": "behaviorValue",
               "type": "int"
             }
           ],
           "id": "0B56",
           "name": "SF_SET_BUTTON",
           "num_params": 2,
-          "short_desc": "Sets the press status of a game (NOT keyboard) key"
+          "short_desc": "Sets the press status of a game (NOT keyboard) key",
+          "class": "Sf",
+          "member": "SetButton",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "playerId",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "animid",
+              "name": "animId",
               "type": "int",
               "source": "var_any"
             }
@@ -61301,25 +61326,28 @@
           "name": "SAMP_GET_PLAYER_ANIMATION",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the SAMP ID of the animation currently being played by the specified player"
+          "short_desc": "Returns the SAMP ID of the animation currently being played by the specified player",
+          "class": "Samp",
+          "member": "GetPlayerAnim"
         },
         {
           "input": [
             {
-              "name": "animid",
+              "name": "animId",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "filename",
+              "name": "fileName",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "animname",
+              "name": "animName",
               "type": "int",
               "source": "var_any"
             }
@@ -61328,24 +61356,27 @@
           "name": "SAMP_GET_ANIMATION_NAME",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Writes the filename and animname of the animation using its SAMP ID"
+          "short_desc": "Writes the filename and animname of the animation using its SAMP ID",
+          "class": "Samp",
+          "member": "GetAnimName"
         },
         {
           "input": [
             {
-              "name": "animname",
+              "name": "animName",
               "type": "string"
             },
             {
-              "name": "filename",
+              "name": "fileName",
               "type": "string"
             }
           ],
           "output": [
             {
-              "name": "animid",
+              "name": "animId",
               "type": "int",
               "source": "var_any"
             }
@@ -61354,9 +61385,12 @@
           "name": "SAMP_GET_ANIMATION_ID",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the Animation SAMP ID using its name and the file it was loaded from"
+          "short_desc": "Returns the Animation SAMP ID using its name and the file it was loaded from",
+          "class": "Samp",
+          "member": "GetAnimId"
         },
         {
           "output": [
@@ -61374,7 +61408,12 @@
           "id": "0B5A",
           "name": "SF_GET_SCREEN_RESOLUTION",
           "num_params": 2,
-          "short_desc": "Returns the current window screen resolution in pixels"
+          "short_desc": "Returns the current window screen resolution in pixels",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "GetScreenRes"
         },
         {
           "input": [
@@ -61404,7 +61443,7 @@
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "playerId",
               "type": "int"
             }
           ],
@@ -61412,31 +61451,39 @@
           "name": "SAMP_IS_PLAYER_PAUSED",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Evaluates as logical true if the specified player is in paused state (or AFK)"
+          "short_desc": "Evaluates as logical true if the specified player is in paused state (or AFK)",
+          "class": "Samp",
+          "member": "IsPlayerPaused"
         },
         {
           "input": [
             {
-              "name": "isvisible",
+              "name": "isVisible",
               "type": "bool"
             }
           ],
           "id": "0B5D",
           "name": "SAMP_SET_CURSOR_VISIBILITY",
           "num_params": 1,
-          "short_desc": "Sets the visibility status of mouse cursor"
+          "short_desc": "Sets the visibility status of mouse cursor",
+          "class": "Samp",
+          "member": "SetCursorVisibility",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
             {
-              "name": "windowscreencoordx",
+              "name": "windowScreenCoordX",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "windowscreencoordy",
+              "name": "windowScreenCoordY",
               "type": "int",
               "source": "var_any"
             }
@@ -61444,27 +61491,32 @@
           "id": "0B5E",
           "name": "SF_GET_CURSOR_COORD",
           "num_params": 2,
-          "short_desc": "Returns the mouse cursor's window screen coordinates in pixels"
+          "short_desc": "Returns the mouse cursor's window screen coordinates in pixels",
+          "class": "Sf",
+          "member": "GetCursorCoord",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "windowscreencoordx",
+              "name": "windowScreenCoordX",
               "type": "int"
             },
             {
-              "name": "windowscreencoordy",
+              "name": "windowScreenCoordY",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "gamescreencoordx",
+              "name": "gameScreenCoordX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "gamescreencoordy",
+              "name": "gameScreenCoordY",
               "type": "float",
               "source": "var_any"
             }
@@ -61472,27 +61524,32 @@
           "id": "0B5F",
           "name": "SF_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS",
           "num_params": 4,
-          "short_desc": "Returns the GameScreen Coordinates counterpart of the specified WindowScreen Coordinates"
+          "short_desc": "Returns the GameScreen Coordinates counterpart of the specified WindowScreen Coordinates",
+          "class": "Sf",
+          "member": "FromWinToGameScreen",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "gamescreencoordx",
+              "name": "gameScreenCoordX",
               "type": "float"
             },
             {
-              "name": "gamescreencoordy",
+              "name": "gameScreenCoordY",
               "type": "float"
             }
           ],
           "output": [
             {
-              "name": "windowscreencoordx",
+              "name": "windowScreenCoordX",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "windowscreencoordy",
+              "name": "windowScreenCoordY",
               "type": "int",
               "source": "var_any"
             }
@@ -61500,27 +61557,35 @@
           "id": "0B60",
           "name": "SF_GAME_SCREEN_COORDS_TO_WINDOW_SCREEN_COORDS",
           "num_params": 4,
-          "short_desc": "Returns the WindowScreen Coordinates counterpart of the specified GameScreen Coordinates"
+          "short_desc": "Returns the WindowScreen Coordinates counterpart of the specified GameScreen Coordinates",
+          "class": "Sf",
+          "member": "FromGameToWinScreen",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0B61",
           "name": "SAMP_IS_LOCAL_PLAYER_SPAWNED",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Evaluates as logical true if our local player has been spawned already"
+          "short_desc": "Evaluates as logical true if our local player has been spawned already",
+          "class": "Sf",
+          "member": "ImSpawned"
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "playerId",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "specialactionid",
+              "name": "specialActionId",
               "type": "SampSpecialAction",
               "source": "var_any"
             }
@@ -61529,14 +61594,17 @@
           "name": "SAMP_GET_PLAYER_SPECIAL_ACTION",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the special action ID of the specified player"
+          "short_desc": "Returns the special action ID of the specified player",
+          "class": "Samp",
+          "member": "GetPlayerSpecialAction"
         },
         {
           "input": [
             {
-              "name": "chatcommand",
+              "name": "chatCommand",
               "type": "string"
             }
           ],
@@ -61554,7 +61622,7 @@
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -61562,14 +61630,17 @@
           "name": "SAMP_IS_PLAYER_NPC",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Checks if the specified player is an NPC"
+          "short_desc": "Checks if the specified player is an NPC",
+          "class": "Samp",
+          "member": "IsPlayerNpc"
         },
         {
           "input": [
             {
-              "name": "playerid",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -61584,9 +61655,12 @@
           "name": "SAMP_GET_PLAYER_SCORE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the current score of the specified player"
+          "short_desc": "Returns the current score of the specified player",
+          "class": "Samp",
+          "member": "GetPlayerScore"
         },
         {
           "input": [
@@ -61620,7 +61694,12 @@
           "id": "0B66",
           "name": "SF_HEX_TO_ARGB",
           "num_params": 5,
-          "short_desc": "Splits 0xAARRGGBB colorcode format into individial color channels"
+          "short_desc": "Splits 0xAARRGGBB colorcode format into individial color channels",
+          "class": "Sf",
+          "member": "HexToArgb",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -61651,24 +61730,29 @@
           "id": "0B67",
           "name": "SF_ARGB_TO_HEX",
           "num_params": 5,
-          "short_desc": "mixes color channels into 0xAARRGGBB colorcode format"
+          "short_desc": "mixes color channels into 0xAARRGGBB colorcode format",
+          "class": "Sf",
+          "member": "ArgbToHex",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "fromcoordx",
+              "name": "fromCoordX",
               "type": "int"
             },
             {
-              "name": "fromcoordy",
+              "name": "fromCoordY",
               "type": "int"
             },
             {
-              "name": "tocoordx",
+              "name": "toCoordX",
               "type": "int"
             },
             {
-              "name": "tocoordy",
+              "name": "toCoordY",
               "type": "int"
             },
             {
@@ -61683,16 +61767,21 @@
           "id": "0B68",
           "name": "SF_RENDER_DRAW_LINE",
           "num_params": 6,
-          "short_desc": "Draws a line between two window screen coordinates"
+          "short_desc": "Draws a line between two window screen coordinates",
+          "class": "Sf",
+          "member": "RenderDrawLine",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int"
             },
             {
@@ -61709,18 +61798,23 @@
             }
           ],
           "id": "0B69",
-          "name": "SF_RENDER_DRAW_BOX_NO_BORDER",
+          "name": "SF_RENDER_DRAW_BORDERLESS_BOX",
           "num_params": 5,
-          "short_desc": "Draws a rectangular area at the specified coordinates"
+          "short_desc": "Draws a rectangular area at the specified coordinates",
+          "class": "Sf",
+          "member": "RenderDrawBorderlessBox",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int"
             },
             {
@@ -61736,18 +61830,23 @@
               "type": "int"
             },
             {
-              "name": "bordersize",
+              "name": "borderSize",
               "type": "int"
             },
             {
-              "name": "bordercolor",
+              "name": "borderColor",
               "type": "int"
             }
           ],
           "id": "0B6A",
-          "name": "SF_RENDER_DRAW_BOX_WITH_BORDER",
+          "name": "SF_RENDER_DRAW_BORDERED_BOX",
           "num_params": 7,
-          "short_desc": "Draws a rectangular area with border at the specified coordinates"
+          "short_desc": "Draws a rectangular area with border at the specified coordinates",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "RenderDrawBorderedBox"
         },
         {
           "input": [
@@ -61798,7 +61897,7 @@
         {
           "input": [
             {
-              "name": "fontname",
+              "name": "fontName",
               "type": "string"
             },
             {
@@ -61856,11 +61955,11 @@
               "type": "string"
             },
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int"
             },
             {
@@ -61878,11 +61977,11 @@
         {
           "input": [
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int"
             },
             {
@@ -61894,7 +61993,7 @@
               "type": "int"
             },
             {
-              "name": "cornercount",
+              "name": "cornerCount",
               "type": "int"
             },
             {
@@ -61909,12 +62008,17 @@
           "id": "0B70",
           "name": "SF_RENDER_DRAW_POLYGON",
           "num_params": 7,
-          "short_desc": "Draws a polygon with the specified parameters"
+          "short_desc": "Draws a polygon with the specified parameters",
+          "class": "Sf",
+          "member": "RenderDrawPolygon",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "filepath",
+              "name": "filePath",
               "type": "string"
             }
           ],
@@ -61961,11 +62065,11 @@
               "type": "RenderTexture"
             },
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int"
             },
             {
@@ -61995,7 +62099,7 @@
         {
           "input": [
             {
-              "name": "chatlineid",
+              "name": "chatLinIid",
               "type": "int"
             },
             {
@@ -62007,11 +62111,11 @@
               "type": "string"
             },
             {
-              "name": "bodycolor",
+              "name": "bodyColor",
               "type": "int"
             },
             {
-              "name": "prefixcolor",
+              "name": "prefixColor",
               "type": "int"
             }
           ],
@@ -62019,9 +62123,12 @@
           "name": "SAMP_SET_CHAT_LINE",
           "num_params": 5,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Changes the chat line's text into a custom one"
+          "short_desc": "Changes the chat line's text into a custom one",
+          "class": "Samp",
+          "member": "SetChatLine"
         },
         {
           "input": [
@@ -62056,9 +62163,12 @@
           "name": "SAMP_GET_CHAT_LINE",
           "num_params": 5,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the chat line's text parameters"
+          "short_desc": "Returns the chat line's text parameters",
+          "class": "Samp",
+          "member": "GetChatLine"
         },
         {
           "input": [
@@ -62070,12 +62180,17 @@
           "id": "0B76",
           "name": "SAMP_SET_CHAT_INPUT_TEXT",
           "num_params": 1,
-          "short_desc": "Overwrites the content written at the chat input box"
+          "short_desc": "Overwrites the content written at the chat input box",
+          "class": "Samp",
+          "member": "SetChatInputText",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
             {
-              "name": "text",
+              "name": "buffer",
               "type": "string",
               "source": "var_any"
             }
@@ -62084,33 +62199,50 @@
           "name": "SAMP_GET_CHAT_INPUT_TEXT",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the current text in the chat input box"
+          "short_desc": "Returns the current text in the chat input box",
+          "class": "Samp",
+          "member": "GetChatInputText"
         },
         {
           "input": [
             {
-              "name": "text",
+              "name": "format",
               "type": "string"
+            },
+            {
+              "name": "args",
+              "type": "arguments"
             }
           ],
           "id": "0B78",
-          "name": "SF_CONSOLE_LOG",
-          "num_params": 1,
-          "short_desc": "Adds a line to the SAMPFUNCS console and logs it"
+          "name": "SF_LOG_TO_CONSOLE",
+          "num_params": 2,
+          "short_desc": "Adds a line to the SAMPFUNCS console and logs it",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "ConsoleLog"
         },
         {
           "input": [
             {
-              "name": "isvisible",
+              "name": "isVisible",
               "type": "bool"
             }
           ],
           "id": "0B79",
           "name": "SAMP_SET_CHAT_INPUT_VISIBILITY",
           "num_params": 1,
-          "short_desc": "Sets the visibility status (open/closed) of the chat input box"
+          "short_desc": "Sets the visibility status (open/closed) of the chat input box",
+          "class": "Samp",
+          "member": "SetChatInputVisibility",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -62123,7 +62255,12 @@
           "id": "0B7A",
           "name": "SAMP_GET_RAKCLIENT_INTERFACE",
           "num_params": 1,
-          "short_desc": "Returns a pointer to a RakClientInterface object"
+          "short_desc": "Returns a pointer to a RakClientInterface object",
+          "class": "Samp",
+          "member": "GetRakClientInterface",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -62136,7 +62273,12 @@
           "id": "0B7B",
           "name": "SAMP_GET_RAKPEER",
           "num_params": 1,
-          "short_desc": "Returns a pointer to RakPeer"
+          "short_desc": "Returns a pointer to RakPeer",
+          "class": "Samp",
+          "member": "GetRakPeer",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

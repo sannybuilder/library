@@ -1,8 +1,23 @@
-// Sends a String Constant to Server.
+// Example 1: Sends a String Constant to Server.
 SAMP_SEND_CHAT_MESSAGE_TO_SERVER "Hello Everyone!"
 SAMP_SEND_CHAT_MESSAGE_TO_SERVER "/cmds"
 
-// Sends the string pointed by msgPtr variable to Server
-int msgPtr
-// do something to msgPtr
-SAMP_SEND_CHAT_MESSAGE_TO_SERVER msgPtr
+
+// Example 2: Periodically sends a formatted text message to server
+{$CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+repeat
+    wait 100
+until samp_is_available
+
+int loopIndex = 1
+
+while true
+    wait 3000
+    int myID = samp_get_player_id $scplayer
+    int myName = samp_get_player_nickname {id} myID
+    samp_send_chat_message_to_server {message} "%d) My Name is %s." {args} loopIndex myName
+    loopIndex++
+end

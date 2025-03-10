@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741532324680,
-    "version": "0.898",
+    "last_update": 1741589838742,
+    "version": "0.899",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -62297,7 +62297,12 @@
           "id": "0B7C",
           "name": "SAMP_GET_RAKCLIENT_FUNC_BY_INDEX",
           "num_params": 2,
-          "short_desc": "Returns the address of the RakClientInterface virtual method table function by index"
+          "short_desc": "Returns the address of the RakClientInterface virtual method table function by index",
+          "class": "Samp",
+          "member": "GetRakClientFunc",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -62317,8 +62322,12 @@
           "name": "SAMP_GET_RPC_FUNC_BY_INDEX",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "GetRpcFunc",
+          "short_desc": "Returns the RPC callback address by index"
         },
         {
           "input": [
@@ -62338,9 +62347,12 @@
           "name": "SAMP_GET_RPC_NODE_BY_INDEX",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns a pointer to the RPC structure at index"
+          "short_desc": "Returns a pointer to the RPC structure at index",
+          "class": "Samp",
+          "member": "GetRpcNode"
         },
         {
           "output": [
@@ -62351,9 +62363,14 @@
             }
           ],
           "id": "0B7F",
-          "name": "SAMP_GET_SAMP_INFO_POINTER",
+          "name": "SAMP_GET_INFO_POINTER",
           "num_params": 1,
-          "short_desc": "Returns a pointer to a SampInfo structure"
+          "short_desc": "Returns a pointer to a SampInfo structure",
+          "class": "Samp",
+          "member": "GetInfoPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -62388,12 +62405,12 @@
           ],
           "output": [
             {
-              "name": "eventid",
+              "name": "eventId",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "controlid",
+              "name": "controlId",
               "type": "int",
               "source": "var_any"
             }
@@ -62423,11 +62440,11 @@
               "type": "string"
             },
             {
-              "name": "relcoordx",
+              "name": "relCoordX",
               "type": "int"
             },
             {
-              "name": "relcoordy",
+              "name": "relCoordY",
               "type": "int"
             },
             {
@@ -62461,11 +62478,11 @@
               "type": "string"
             },
             {
-              "name": "coordx",
+              "name": "relCoordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "relCoordY",
               "type": "int"
             },
             {
@@ -62491,11 +62508,11 @@
               "type": "DxutDialog"
             },
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int"
             },
             {
@@ -62523,12 +62540,12 @@
           ],
           "output": [
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int",
               "source": "var_any"
             },
@@ -62557,7 +62574,7 @@
               "type": "DxutDialog"
             },
             {
-              "name": "isvisible",
+              "name": "isVisible",
               "type": "bool"
             }
           ],
@@ -62596,15 +62613,15 @@
               "type": "int"
             },
             {
-              "name": "initialtext",
+              "name": "initialText",
               "type": "string"
             },
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int"
             },
             {
@@ -62654,7 +62671,7 @@
         {
           "input": [
             {
-              "name": "rpcid",
+              "name": "rpcId",
               "type": "SampRpc"
             },
             {
@@ -62694,9 +62711,12 @@
           "name": "SAMP_IS_CURSOR_ACTIVE",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Checks if the mouse cursor is visible"
+          "short_desc": "Checks if the mouse cursor were both visible and movable",
+          "class": "Samp",
+          "member": "IsCursorActive"
         },
         {
           "input": [
@@ -62708,7 +62728,12 @@
           "id": "0B8D",
           "name": "SAMP_SET_CURSOR_MODE",
           "num_params": 1,
-          "short_desc": "Sets the cursor mode"
+          "short_desc": "Sets the cursor mode",
+          "class": "Samp",
+          "member": "SetCursorMode",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -62722,18 +62747,21 @@
           "name": "SAMP_GET_CURSOR_MODE",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the current mouse cursor mode"
+          "short_desc": "Returns the current mouse cursor mode",
+          "class": "Samp",
+          "member": "GetCursorMode"
         },
         {
           "input": [
             {
-              "name": "screencoordx",
+              "name": "screenCoordX",
               "type": "int"
             },
             {
-              "name": "screencoordy",
+              "name": "screenCoordY",
               "type": "int"
             },
             {
@@ -62743,17 +62771,17 @@
           ],
           "output": [
             {
-              "name": "worldcoordx",
+              "name": "worldCoordX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "worldcoordy",
+              "name": "worldCoordY",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "worldcoordz",
+              "name": "worldCoordZ",
               "type": "float",
               "source": "var_any"
             }
@@ -62761,7 +62789,12 @@
           "id": "0B8F",
           "name": "SF_WINDOW_SCREEN_COORDS_TO_WORLD_COORDS",
           "num_params": 6,
-          "short_desc": "Converts the screen coordinate system to the game 3D coordinate system with the specified depth"
+          "short_desc": "Converts the screen coordinate system to the game 3D coordinate system with the specified depth",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "From2Dto3D"
         },
         {
           "input": [
@@ -62770,11 +62803,11 @@
               "type": "DxutDialog"
             },
             {
-              "name": "controlid",
+              "name": "controlId",
               "type": "int"
             },
             {
-              "name": "isvisible",
+              "name": "isVisible",
               "type": "int"
             }
           ],
@@ -62800,11 +62833,11 @@
               "type": "string"
             },
             {
-              "name": "relcoordx",
+              "name": "relCoordX",
               "type": "int"
             },
             {
-              "name": "relcoordy",
+              "name": "relCoordY",
               "type": "int"
             },
             {
@@ -62830,7 +62863,7 @@
               "type": "DxutDialog"
             },
             {
-              "name": "checkboxid",
+              "name": "checkboxId",
               "type": "int"
             }
           ],
@@ -62919,11 +62952,11 @@
               "type": "int"
             },
             {
-              "name": "relcoordx",
+              "name": "relCoordX",
               "type": "int"
             },
             {
-              "name": "relcoordy",
+              "name": "relCoordY",
               "type": "int"
             },
             {
@@ -62935,7 +62968,7 @@
               "type": "int"
             },
             {
-              "name": "maxvalue",
+              "name": "maxValue",
               "type": "int"
             }
           ],
@@ -63004,11 +63037,11 @@
               "type": "int"
             },
             {
-              "name": "relcoordx",
+              "name": "relCoordX",
               "type": "int"
             },
             {
-              "name": "relcoordy",
+              "name": "relCoordY",
               "type": "int"
             },
             {
@@ -63216,7 +63249,7 @@
               "type": "DxutDialog"
             },
             {
-              "name": "isminimized",
+              "name": "isMinimized",
               "type": "bool"
             }
           ],
@@ -63312,7 +63345,7 @@
               "type": "int"
             },
             {
-              "name": "heights",
+              "name": "height",
               "type": "int"
             }
           ],
@@ -63364,11 +63397,11 @@
               "type": "int"
             },
             {
-              "name": "relcoordx",
+              "name": "relCoordX",
               "type": "int"
             },
             {
-              "name": "relcoordy",
+              "name": "relCoordY",
               "type": "int"
             }
           ],
@@ -63392,12 +63425,12 @@
           ],
           "output": [
             {
-              "name": "coordx",
+              "name": "coordX",
               "type": "int",
               "source": "var_any"
             },
             {
-              "name": "coordy",
+              "name": "coordY",
               "type": "int",
               "source": "var_any"
             }
@@ -63459,7 +63492,12 @@
           "id": "0BAC",
           "name": "SAMP_GET_SERVER_SETTINGS_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to server settings structure"
+          "short_desc": "Returns the pointer to server settings structure",
+          "class": "Sf",
+          "member": "GetSvSettingsPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63472,7 +63510,12 @@
           "id": "0BAD",
           "name": "SAMP_GET_POOLS_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp pools structure"
+          "short_desc": "Returns the pointer to samp pools structure",
+          "class": "Samp",
+          "member": "GetPoolsPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63485,7 +63528,12 @@
           "id": "0BAE",
           "name": "SAMP_GET_CHAT_INFO_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp chat information structure"
+          "short_desc": "Returns the pointer to samp chat information structure",
+          "class": "Samp",
+          "member": "GetChatInfoPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63498,7 +63546,12 @@
           "id": "0BAF",
           "name": "SAMP_GET_CHAT_INPUT_INFO_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp chat input field structure"
+          "short_desc": "Returns the pointer to samp chat input field structure",
+          "class": "Samp",
+          "member": "GetChatInfoPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63529,7 +63582,12 @@
           "id": "0BB1",
           "name": "SAMP_GET_KILL_INFO_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp kill list structure"
+          "short_desc": "Returns the pointer to samp kill list structure",
+          "class": "Samp",
+          "member": "GetKillInfoPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63542,7 +63600,12 @@
           "id": "0BB2",
           "name": "SAMP_GET_MISC_INFO_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to a structure of various samp miscellaneous data"
+          "short_desc": "Returns the pointer to a structure of various samp miscellaneous data",
+          "class": "Samp",
+          "member": "GetMiscInfoPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63555,7 +63618,12 @@
           "id": "0BB3",
           "name": "SAMP_GET_TEXTDRAW_POOL_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp textdraw pool structure"
+          "short_desc": "Returns the pointer to samp textdraw pool structure",
+          "class": "Samp",
+          "member": "GetTextDrawPoolPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63568,43 +63636,66 @@
           "id": "0BB4",
           "name": "SAMP_GET_OBJECT_POOL_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp object pool structure"
+          "short_desc": "Returns the pointer to samp object pool structure",
+          "class": "Samp",
+          "member": "GetObjectPoolPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "input": [
+          "output": [
             {
               "name": "address",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0BB5",
           "name": "SAMP_GET_GANGZONE_POOL_POINTER",
           "num_params": 1,
-          "short_desc": "Returns a pointer to the pool of samp allocated territories (gang territories)"
+          "short_desc": "Returns a pointer to the pool of samp allocated territories (gang territories)",
+          "class": "Samp",
+          "member": "GetGangZonePoolPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "input": [
+          "output": [
             {
               "name": "address",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0BB6",
           "name": "SAMP_GET_TEXTLABEL_POOL_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to 3D text pool structure"
+          "short_desc": "Returns the pointer to 3D text pool structure",
+          "class": "Samp",
+          "member": "GetTextLabelPoolPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "input": [
+          "output": [
             {
               "name": "address",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0BB7",
           "name": "SAMP_GET_PLAYER_POOL_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to player pool structure"
+          "short_desc": "Returns the pointer to player pool structure",
+          "class": "Samp",
+          "member": "GetPlayerPoolPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63617,7 +63708,12 @@
           "id": "0BB8",
           "name": "SAMP_GET_CAR_POOL_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp car pool structure"
+          "short_desc": "Returns the pointer to samp car pool structure",
+          "class": "Samp",
+          "member": "GetCarPoolPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -63630,7 +63726,12 @@
           "id": "0BB9",
           "name": "SAMP_GET_PICKUP_POOL_POINTER",
           "num_params": 1,
-          "short_desc": "Returns the pointer to samp pickup pool structure"
+          "short_desc": "Returns the pointer to samp pickup pool structure",
+          "class": "Samp",
+          "member": "GetPickupPoolPtr",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -63650,87 +63751,118 @@
           "name": "SAMP_STORE_PLAYER_ONFOOT_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Writes the current player's onFootData structure to the buffer"
+          "short_desc": "Writes the current player's onFootData structure to the buffer",
+          "class": "Samp",
+          "member": "StoreOnFootData"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "buffer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BBB",
           "name": "SAMP_STORE_PLAYER_INCAR_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Samp",
+          "member": "StoreInCarData",
+          "short_desc": "Writes the current player's inCarData structure to the buffer"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "buffer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BBC",
           "name": "SAMP_STORE_PLAYER_PASSENGER_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Writes the current passengerData structure of the player to the buffer",
+          "class": "Samp",
+          "member": "StorePassengerData"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "buffer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BBD",
           "name": "SAMP_STORE_PLAYER_TRAILER_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Samp",
+          "member": "StoreTrailerData",
+          "short_desc": "Writes the player's current trailerData structure to the buffer"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "buffer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BBE",
           "name": "SAMP_STORE_PLAYER_AIM_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Writes the specified player's aimData structure to the buffer",
+          "class": "Samp",
+          "member": "StoreAimData"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "command",
+              "type": "string"
             }
           ],
           "id": "0BBF",
@@ -63740,7 +63872,8 @@
           "member": "SendRpcRconCmd",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends an RCON command to the server"
         },
         {
           "input": [

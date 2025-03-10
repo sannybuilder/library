@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741589838742,
-    "version": "0.899",
+    "last_update": 1741628571798,
+    "version": "0.900",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -63878,139 +63878,147 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stOnFootData",
               "type": "int"
             }
           ],
           "id": "0BC0",
-          "name": "SAMP_SEND_ONFOOT_DATA",
+          "name": "SAMP_SEND_ONFOOT_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
           "member": "SendOnFootData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.OnFootSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stInCarData",
               "type": "int"
             }
           ],
           "id": "0BC1",
-          "name": "SAMP_SEND_INCAR_DATA",
+          "name": "SAMP_SEND_INCAR_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
           "member": "SendInCarData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.DriverSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stPassengerData",
               "type": "int"
             }
           ],
           "id": "0BC2",
-          "name": "SAMP_SEND_PASSENGER_DATA",
+          "name": "SAMP_SEND_PASSENGER_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
           "member": "SendPassengerData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.PassengerSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stAimData",
               "type": "int"
             }
           ],
           "id": "0BC3",
-          "name": "SAMP_SEND_AIM_DATA",
+          "name": "SAMP_SEND_AIM_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
           "member": "SendAimData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.AimSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stBulletData",
               "type": "int"
             }
           ],
           "id": "0BC4",
-          "name": "SAMP_SEND_BULLET_DATA",
+          "name": "SAMP_SEND_BULLET_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
           "member": "SendBulletData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.BulletSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stTrailerData",
               "type": "int"
             }
           ],
           "id": "0BC5",
-          "name": "SAMP_SEND_TRAILER_DATA",
+          "name": "SAMP_SEND_TRAILER_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
           "member": "SendTrailerData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.TrailerSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stUnoccupiedData",
               "type": "int"
             }
           ],
           "id": "0BC6",
-          "name": "SAMP_SEND_UNOCCUPIED_DATA",
+          "name": "SAMP_SEND_UNOCCUPIEDCAR_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendUnoccupiedData",
+          "member": "SendUnoccupiedCarData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.UnoccupiedCarSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "stSpectatorData",
               "type": "int"
             }
           ],
           "id": "0BC7",
-          "name": "SAMP_SEND_SPECTATOR_DATA",
+          "name": "SAMP_SEND_SPECTATOR_DATA_TO_SERVER",
           "num_params": 1,
           "class": "Samp",
           "member": "SendSpectatorData",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampPacket.SpectatorSync to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "playerId",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "clickSourceId",
               "type": "int"
             }
           ],
@@ -64021,7 +64029,8 @@
           "member": "SendRpcClickPlayer",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampRpc.ClickPlayer about double click on player (from Scoreboard for example)"
         },
         {
           "input": [
@@ -64055,7 +64064,7 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "textDrawId",
               "type": "int"
             }
           ],
@@ -64066,25 +64075,26 @@
           "member": "SendRpcClickTextDraw",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends an SampRpc.ClickTextDraw to the server"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "playerId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "damage",
+              "type": "SampWeaponDamage"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "weapon",
+              "type": "WeaponType"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "bodyPart",
+              "type": "BodyPart"
             }
           ],
           "id": "0BCB",
@@ -64094,25 +64104,26 @@
           "attrs": {
             "is_static": true
           },
-          "member": "SendRpcGiveDamage"
+          "member": "SendRpcGiveDamage",
+          "short_desc": "Sends an SampRpc.GiveTakeDamage to the server about damage dealt by another player"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "playerId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "damage",
+              "type": "SampWeaponDamage"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "weapon",
+              "type": "WeaponType"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "bodyPart",
+              "type": "SampBodyPart"
             }
           ],
           "id": "0BCC",
@@ -64122,7 +64133,8 @@
           "member": "SendTakeDamage",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends an SampRpc.GiveTakeDamage to the server about damage taken from another player"
         },
         {
           "input": [

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FUSEJS_OPTIONS } from '../utils';
+import { SEARCH_OPTIONS } from '../utils';
 
 @Pipe({
     name: 'propExtract',
@@ -8,7 +8,7 @@ import { FUSEJS_OPTIONS } from '../utils';
 export class PropExtractPipe implements PipeTransform {
   transform(command: any, propKey: string) {
     const content =
-      command[FUSEJS_OPTIONS.fusejsHighlightKey]?.[propKey] ??
+      command[SEARCH_OPTIONS.highlightKey]?.[propKey] ??
       command[propKey] ??
       '';
     return content;

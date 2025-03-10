@@ -44,7 +44,7 @@ import {
 import {
   doesGameHaveNativeDocs,
   doesGameRequireOpcode,
-  FUSEJS_OPTIONS,
+  SEARCH_OPTIONS,
   getBaseGames,
   getDefaultExtension,
   getQueryParamsForCommand,
@@ -547,7 +547,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         oldExtension: this.oldExtension!,
         command: omit(
           this.command,
-          FUSEJS_OPTIONS.fusejsHighlightKey
+          SEARCH_OPTIONS.highlightKey
         ) as Command,
         updateRelated: this.updateRelatedCommands,
       });

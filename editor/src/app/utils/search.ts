@@ -1,17 +1,24 @@
-import Fuse, {
-  FuseOptionKeyObject,
-  FuseResult,
-  FuseResultMatch,
-  IFuseOptions,
-  RangeTuple,
-} from 'fuse.js';
 import { get, set, omit, cloneDeep, sortBy, uniqWith, isEqual } from 'lodash';
 import { Command, Game } from '../models';
 import { commandParams, isOpcode, normalizeId } from './command';
 
-export const FUSEJS_OPTIONS: IFuseOptions<Command> & {
-  fusejsHighlightKey: string;
-} = {
+type RangeTuple = [number, number]
+
+type SearchResultMatch = {
+  indices: ReadonlyArray<RangeTuple>
+  key?: string
+  refIndex?: number
+  value?: string
+}
+
+type SearchResult<T> = {
+  item: T
+  refIndex: number
+  score?: number
+  matches?: ReadonlyArray<SearchResultMatch>
+}
+
+export const SEARCH_OPTIONS = {
   keys: [
     { name: 'name', weight: 50.0 },
     { name: 'member', weight: 2.5 },
@@ -25,11 +32,11 @@ export const FUSEJS_OPTIONS: IFuseOptions<Command> & {
   distance: 500,
   ignoreLocation: false,
   minMatchCharLength: 3,
-  fusejsHighlightKey: '_highlight',
+  highlightKey: '_highlight',
   includeScore: true,
   includeMatches: true,
   useExtendedSearch: true,
-};
+} as const;
 
 const OPCODE_WORDS = ['beef', 'cafe', 'dead', 'deaf', 'face', 'fade', 'feed'];
 
@@ -229,12 +236,12 @@ function parseQuery(searchTerms: string) {
 }
 
 function scoreResult(command: Command, filters: [QueryFilter, string][]) {
-  const matches: FuseResultMatch[] = [];
+  const matches: SearchResultMatch[] = [];
   let score = 0;
 
-  (FUSEJS_OPTIONS.keys as Array<FuseOptionKeyObject<unknown>>).forEach(
+  SEARCH_OPTIONS.keys.forEach(
     ({ name, weight = 1 }) => {
-      const prop: string = get(command, name);
+      const prop = get(command, name);
       if (!prop) {
         return;
       }
@@ -281,18 +288,18 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
 
 export function exactSearch(list: Command[], searchTerms: string) {
   const filters = parseQuery(searchTerms);
-  const options = { ...FUSEJS_OPTIONS };
+  const options = { ...SEARCH_OPTIONS };
 
   // try to find exact match for all words
   const result = list.filter((c) => filters.every(([h, i]) => h(c, i)));
   const scored = result.map((command) => scoreResult(command, filters));
 
-  return handleHighlight(scored, options.fusejsHighlightKey);
+  return handleHighlight(scored, options.highlightKey);
 }
 
 export function partialSearch(list: Command[], searchTerms: string) {
   const filters = parseQuery(searchTerms);
-  const options = { ...FUSEJS_OPTIONS };
+  const options = { ...SEARCH_OPTIONS };
 
   // try to find exact match for some words
   const result = list.filter((c) =>
@@ -303,81 +310,18 @@ export function partialSearch(list: Command[], searchTerms: string) {
 
   const scored = result.map((command) => scoreResult(command, filters));
 
-  return handleHighlight(scored, options.fusejsHighlightKey);
+  return handleHighlight(scored, options.highlightKey);
 }
 
-function fuzzySearch(list: Command[], searchTerms: string, game: Game) {
-  const filters = parseQuery(searchTerms);
-  const options = { ...FUSEJS_OPTIONS };
-
-  const fuzzymatch = list
-    .map((command) => {
-      const matches: FuseResultMatch[] = [];
-      let score = 1;
-
-      (FUSEJS_OPTIONS.keys as Array<FuseOptionKeyObject<unknown>>).forEach(
-        ({ name, weight = 1 }) => {
-          const value: string = get(command, name);
-          if (!value) {
-            return;
-          }
-
-          const indices: RangeTuple[] = [];
-          const lowerValue = value.toLowerCase();
-
-          for (const [_, word] of filters) {
-            let index = lowerValue.indexOf(word.toLowerCase());
-            if (index !== -1) {
-              indices.push([index, index + word.length]);
-              index = lowerValue.indexOf(word.toLowerCase(), index + 1);
-              score /= weight; // lower's better
-            } else {
-              const fuse = new Fuse([command], {
-                ...options,
-                keys: [{ name, weight }],
-                minMatchCharLength: word.length - 1,
-              });
-              const found = fuse.search(word);
-
-              if (found.length) {
-                for (const f of found) {
-                  for (const m of f.matches!) {
-                    for (const i of m.indices) {
-                      indices.push(i);
-                    }
-                  }
-                }
-                score *= found[0].score ?? 1; // lower's better
-              }
-            }
-          }
-
-          if (indices.length) {
-            matches.push({ indices, key: name as string, value });
-          }
-        }
-      );
-
-      if (matches.length > 0) {
-        return { item: command, score, matches, refIndex: 0 };
-      }
-
-      return;
-    })
-
-    .filter(Boolean) as FuseResult<any>[];
-
-  return handleHighlight(fuzzymatch, options.fusejsHighlightKey);
-}
 
 function handleHighlight(
-  result: FuseResult<any>[],
-  fusejsHighlightKey: string
+  result: SearchResult<any>[],
+  highlightKey: string
 ) {
   return result.map((matchObject) => {
     const item = cloneDeep(matchObject.item);
     item.score = matchObject.score;
-    item[fusejsHighlightKey] = omit(item, fusejsHighlightKey);
+    item[highlightKey] = omit(item, highlightKey);
     if (!matchObject.matches) {
       return item;
     }
@@ -392,7 +336,7 @@ function handleHighlight(
       }
 
       for (const [intervalStart, intervalEnd] of mergeIntervals(indices)) {
-        const initialValue = get(item[fusejsHighlightKey], key).toString();
+        const initialValue = get(item[highlightKey], key).toString();
 
         const startOffset = intervalStart + highlightOffset;
         const endOffset = intervalEnd + highlightOffset + 1;
@@ -404,7 +348,7 @@ function handleHighlight(
           '</em>' +
           initialValue.substring(endOffset);
         highlightOffset += '<em></em>'.length;
-        set(item[fusejsHighlightKey], key, newValue);
+        set(item[highlightKey], key, newValue);
       }
     }
 

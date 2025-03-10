@@ -3776,7 +3776,7 @@ export const SampPacket = {
   "BulletSync": 206,
   "OnFootSync": 207,
   "MarkerSync": 208,
-  "UnoccupiedVehicleSync": 209,
+  "UnoccupiedCarSync": 209,
   "TrailerSync": 210,
   "PassengerSync": 211,
   "SpectatorSync": 212
@@ -3807,15 +3807,6 @@ export const SampSendRateType = {
   "Onfoot": 1,
   "Incar": 2,
   "Aims": 3
-};
-export const SampTextStyles = {
-  "FcrNone": 0,
-  "FcrBold": 1,
-  "FcrItalics": 2,
-  "FcrBorder": 4,
-  "FcrShadow": 8,
-  "FcrUnderline": 16,
-  "FcrStrikeout": 32
 };
 export const SampScmEvent = {
   "Paintjob": 1,
@@ -3891,4 +3882,43 @@ export const SampCursorMode = {
 export const SampDialogButton = {
   "Right": 0,
   "LeftOrCenter": 1
+};
+export const SampBodyPart = {
+  "Torso": 3,
+  "Groin": 4,
+  "LeftArm": 5,
+  "RightArm": 6,
+  "LeftLeg": 7,
+  "RightLeg": 8,
+  "Head": 9
+};
+export const SampTextStyle = {
+  "FcrNone": 0,
+  "FcrBold": 1,
+  "FcrItalics": 2,
+  "FcrBorder": 4,
+  "FcrShadow": 8,
+  "FcrUnderline": 16,
+  "FcrStrikeout": 32
+};
+export const SampEditObjectResponse = {
+  "Cancel": 0,
+  "Final": 1,
+  "Update": 2
+};
+export const SampWeaponDamage = {
+  "Melee_UZI_Tec9": 1087583028,
+  "Chainsaw": 1104706274,
+  "Flowers": 1083430667,
+  "Pistol_Mp5": 1090781184,
+  "Silencer": 1095971636,
+  "DesertEagle_Minigun": 1111018701,
+  "Shotgun_3meters": 1111883777,
+  "SawnOff_3meters": 1110153626,
+  "SPAZ_3meters": 1109288551,
+  "AK47_M4_CarRam": 1092511335,
+  "Rifle": 1103495169,
+  "Sniper": 1109721088,
+  "SprayPaint_FireExtinguisher": 1051260355,
+  "Burning": 1054582246
 };

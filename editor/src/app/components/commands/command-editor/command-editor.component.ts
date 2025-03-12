@@ -72,6 +72,7 @@ import {
   filterSources,
   doesScriptCommandHaveEmptyMember,
   doesNativeFunctionHaveNoName,
+  formatNativeName,
 } from '../../../utils';
 
 type ErrorType =
@@ -378,7 +379,11 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onCommandNameChange(command: Command, value: string) {
-    command.name = trim(this.defaultCommandNameFormatter(value));
+    if (this.viewContext === ViewContext.Code) {
+      command.name = trim(formatNativeName(value));
+    } else {
+      command.name = trim(this.defaultCommandNameFormatter(value));
+    }
     this.updateErrors();
   }
 

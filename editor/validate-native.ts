@@ -19,6 +19,7 @@ import {
   doesCommandHaveInvalidConditionalOperator,
   doesCommandHaveInvalidArgumentWithOperator,
   doesSelfArgumentHaveInvalidType,
+  formatNativeName,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -34,8 +35,6 @@ export function run(inputFile: string, game: Game) {
   const translations = JSON.parse(translationFile);
 
   let exitStatus = 0;
-
-  const commandNameFormatter = getDefaultCommandNameFormatter(game as Game);
 
   const errorHandlers = {
     invalidAttributeCombo: doesCommandHaveAnyAttributeInvalid,
@@ -75,10 +74,10 @@ export function run(inputFile: string, game: Game) {
   }
 
   function validateFormatting(command: Command, extension: string): void {
-    if (trim(commandNameFormatter(command.name)) !== command.name) {
+    if (trim(formatNativeName(command.name)) !== command.name) {
       console.error(
         `Error: command name is not properly formatted, expected ${trim(
-          commandNameFormatter(command.name)
+          formatNativeName(command.name)
         )}, command: ${command.name}, extension: ${extension}`
       );
       exitStatus = 1;

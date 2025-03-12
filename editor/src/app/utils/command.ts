@@ -95,13 +95,6 @@ export function formatCommandNameScreaming(name: string | undefined) {
     return name;
   }
   let formatted = name.replace(/[\s-]/g, '_');
-  if (name.startsWith('0x') || name.startsWith('0X')) {
-    return `0x${formatted
-      .slice(2)
-      .replace(/^0+/, '')
-      .replace(/[^0-9A-F]/gi, '')
-      .toUpperCase()}`;
-  }
   return formatted.toUpperCase();
 }
 
@@ -114,6 +107,14 @@ export function getDefaultCommandNameFormatter(game: Game) {
     return formatCommandNameUpFirst;
   }
   return formatCommandNameScreaming;
+}
+
+export function formatNativeName(name: string) {
+  return `0x${name
+    .replace(/^0x/i, '')
+    .replace(/^0+/, '')
+    .replace(/[^0-9A-F]/gi, '')
+    .toUpperCase()}`;
 }
 
 export function formatOpcode(opcode: string) {

@@ -22,6 +22,8 @@ export function run(inputDir: string, game: Game) {
     return;
   }
   console.log(`Validating snippets in ${snippetDir}`);
+
+  let exitStatus = 0;
   readdirSync(snippetDir, {
     recursive: true,
     encoding: 'utf-8',
@@ -37,7 +39,7 @@ export function run(inputDir: string, game: Game) {
     if (!allExtensions.includes(parentDir)) {
       if (!allNativeExtensions.includes(parentDir)) {
         console.error(`Error: Extension ${parentDir} not found in extensions`);
-        process.exit(1);
+        exitStatus = 1;
       } else {
         isNative = true;
       }
@@ -51,7 +53,7 @@ export function run(inputDir: string, game: Game) {
       console.error(
         `Error: ${filename} not found in ${parentDir}, referenced in ${path}`
       );
-      process.exit(1);
+      exitStatus = 1;
     }
 
     const name = getName(command);
@@ -71,8 +73,11 @@ export function run(inputDir: string, game: Game) {
         console.error(
           `Error: Command name ${name} not found in snippet ${path}`
         );
-        process.exit(1);
+        exitStatus = 1;
       }
     }
   });
+
+  if (exitStatus) process.exit(exitStatus);
 }
+

@@ -11,6 +11,7 @@ import { run as generateOpcodeExamples } from './generate-opcode-examples';
 import { run as generateSupportInfo } from './generate-support-info';
 import { run as validateCommands } from './validate-commands';
 import { run as validateEnums } from './validate-enums';
+import { run as validateSnippets } from './validate-native';
 
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);

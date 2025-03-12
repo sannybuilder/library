@@ -22,10 +22,14 @@ import {
   formatNativeName,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
+import { existsSync } from 'fs';
 
 run('../sa/native.json', Game.sa);
 
 export function run(inputFile: string, game: Game) {
+  if (!existsSync(inputFile)) {
+    return;
+  }
   console.log(`Validating native code in ${inputFile}`);
 
   const { readFileSync } = require('fs');

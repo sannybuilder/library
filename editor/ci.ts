@@ -26,10 +26,11 @@ games.forEach((game) => {
   const assets = assetsDir(game);
   const gameJson = join('../', game, `${game}.json`);
   const enumsJson = join('../', game, `enums.json`);
+  const nativeJson = join('../', game, `native.json`);
 
   validateCommands(gameJson, game);
   validateEnums(enumsJson, game);
-  validateSnippets(gameJson, game);
+  validateSnippets(nativeJson, game);
   run(`[ -d ${assets} ] || mkdir -p ${assets}`);
   generateEnums(enumsJson, join(assets, 'enums.js'));
 

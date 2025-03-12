@@ -5,4 +5,4 @@ There are GXT keys that are actually omitted by this command and will not print 
 - HELP15
 - GUN_2A
 - GUN_2C
-  -GUN_2D
+- GUN_2D

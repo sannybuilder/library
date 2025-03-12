@@ -1,1 +1,3 @@
-CLEO provides similar commands PRINT_BIG_STRING and PRINT_BIG_FORMATTED, which does not require GXT label.
+This command prints a big message. Several messages of different styles can be displayed on the screen at the same time. Displaying another message of the same style will overwrite the previous message except when the style involves fading (styles `1` and `2`) &mdash; the message will be overwritten once the fading sequence finishes before the time on the next message ends. This command takes priority over PRINT_BIG_Q, another command that behaves almost like this command but with a lower priority.
+
+CLEO provides similar commands PRINT_BIG_STRING and PRINT_BIG_FORMATTED, which does not require a GXT label.

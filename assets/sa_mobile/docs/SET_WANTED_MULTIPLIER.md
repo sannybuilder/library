@@ -1,0 +1,1 @@
+This sets the value of the wanted multiplier for the current player. This value is used to calculate a new value of the player's chaos level after committing a crime. By default the multiplier is equal to `1.0`. Altering its value results in faster or slower attainment of wanted levels.

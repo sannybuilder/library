@@ -1,0 +1,1 @@
+This conditional command returns true if the state of the garage is open. This happens regardless of a physical door. The states it detects are `1` (fully opened) and `4` (fully opened with vehicle serviced by bomb or spray shops).

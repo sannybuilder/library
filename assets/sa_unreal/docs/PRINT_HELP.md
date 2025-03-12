@@ -1,0 +1,1 @@
+This command prints a help message. It will generate a sound effect and display for a few seconds before fading away. Use CLEAR_HELP to immediately remove the help message. SET_HELP_MESSAGE_BOX_SIZE can set the width of the message box. Help messages cannot be seen while widescreen is switched on. In the German version, the font size is smaller than other versions.

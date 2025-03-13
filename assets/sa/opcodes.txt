@@ -2152,12 +2152,12 @@
 {0AF6:} samp_spawn_local_player
 {0AF7:} [var pointer: int] = samp_get_base_address
 {0AF8:} samp_add_message_to_chat {format} [string] {color} [int] {args} [arguments]
-{0AF9:} samp_send_chat_message_to_server {format} [string] {args} [arguments]
+{0AF9:} samp_send_chat_message {format} [string] {args} [arguments]
 {0AFA:}   samp_is_available
-{0AFB:} samp_send_request_class_to_server {classId} [int]
-{0AFC:} samp_send_scm_event_to_server {carId} [int] {type} [SampScmEvent] {param1} [int] {param2} [int]
+{0AFB:} samp_send_request_class {classId} [int]
+{0AFC:} samp_send_scm_event {carId} [int] {type} [SampScmEvent] {param1} [int] {param2} [int]
 {0AFD:} samp_set_special_action {id} [SampSpecialAction]
-{0AFE:} samp_send_death_by_player_to_server {playerId} [int] {weaponId} [WeaponType]
+{0AFE:} samp_send_death_by_player {playerId} [int] {weaponId} [WeaponType]
 {0AFF:} [var handle: Car] = samp_get_car_by_id {id} [int]
 {0B20:} [var handle: Char] = samp_get_player_char_by_id {id} [int]
 {0B21:}   samp_is_chat_input_open
@@ -2167,7 +2167,7 @@
 {0B25:} [var health: int] = samp_get_player_health {id} [int]
 {0B26:} [var armor: int] = samp_get_player_armor {id} [int]
 {0B27:} samp_set_gamestate {id} [SampGameState]
-{0B28:} samp_send_disconnected_to_server {id} [SampDisconnectReason]
+{0B28:} samp_send_disconnected {id} [SampDisconnectReason]
 {0B29:} samp_set_local_nickname {nickname} [string]
 {0B2A:} [var ping: int] = samp_get_player_ping {id} [int]
 {0B2B:} [var id: int] = samp_get_player_id [Char]
@@ -2175,13 +2175,13 @@
 {0B2F:} [var x: float], [var y: float], [var z: float] = samp_get_streamed_out_player_coords {id} [int]
 {0B30:} samp_send_enter_car {carId} [int] {isPassenger} [bool]
 {0B31:} samp_send_exit_car {carId} [int]
-{0B32:} samp_send_spawn_to_server
+{0B32:} samp_send_spawn
 {0B33:} samp_send_damage_car {carId} [int] {bodyFlags} [int] {doorFlags} [int] {lightFlags} [int] {wheelFlags} [int]
 {0B34:}   samp_register_clientside_command {chatCommand} [string] @label
 {0B35:}   [var pointer: int] = samp_get_params_of_last_triggered_command
 {0B36:} [var nickname: int] = samp_get_player_nickname {id} [int]
 {0B37:} [var color: int] = samp_get_player_color {id} [int]
-{0B38:} samp_connect_to_server {serverIp} [string] {port} [int]
+{0B38:} samp_connect {serverIp} [string] {port} [int]
 {0B39:} [var buffer: string], [var port: int] = samp_get_server_address
 {0B3A:} [var buffer: string] = samp_get_server_name
 {0B3B:} samp_show_dialog {id} [int] {title} [string] {content} [string] {leftOrMiddleButtonName} [string] {rightButtonName} [string] {style} [SampDialogStyle]
@@ -2190,8 +2190,8 @@
 {0B3E:}   [var self: Bitstream] = samp_raknet_delete_bitstream
 {0B3F:}   samp_raknet_reset_bitstream [Bitstream]
 {0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [int] {dataType} [SampBitStreamDataType] {dataSize} [int]
-{0B41:}   samp_raknet_send_rpc_with_params_to_server {rpc} [SampRpc] [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int] {shiftTimeStamp} [int]
-{0B42:}   samp_raknet_send_packet_with_params_to_server [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int]
+{0B41:}   samp_raknet_send_rpc_with_params {rpc} [SampRpc] [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int] {shiftTimeStamp} [int]
+{0B42:}   samp_raknet_send_packet_with_params [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int]
 {0B43:} samp_cmd_ret
 {0B44:}   [var handle: TextLabel3D] = samp_create_3d_text {text} [string] {color} [int] {coordX} [float] {coordY} [float] {coordZ} [float] {visibilityRadius} [float] {showBehindWalls} [bool] {attachedPlayerId} [int] {attachedCarId} [int]
 {0B45:}   samp_delete_3d_text [TextLabel3D]
@@ -2263,8 +2263,8 @@
 {0B87:}   sf_dxut_dialog_is_visible [DxutDialog]
 {0B88:} sf_dxut_dialog_add_editbox [DxutDialog] {id} [int] {initialText} [string] {coordX} [int] {coordY} [int] {width} [int] {height} [int]
 {0B89:}   [var text: int] = sf_dxut_dialog_get_text_of_control [DxutDialog] {id} [int]
-{0B8A:}   samp_raknet_send_rpc_to_server {rpcId} [SampRpc] [Bitstream]
-{0B8B:}   samp_raknet_send_packet_to_server [Bitstream]
+{0B8A:}   samp_raknet_send_rpc {rpcId} [SampRpc] [Bitstream]
+{0B8B:}   samp_raknet_send_packet [Bitstream]
 {0B8C:}   samp_is_cursor_active
 {0B8D:} samp_set_cursor_mode {mode} [SampCursorMode]
 {0B8E:}   [var mode: SampCursorMode] = samp_get_cursor_mode
@@ -2316,27 +2316,27 @@
 {0BBC:}   [var buffer: int] = samp_store_player_passenger_data {id} [int]
 {0BBD:}   [var buffer: int] = samp_store_player_trailer_data {id} [int]
 {0BBE:}   [var buffer: int] = samp_store_player_aim_data {id} [int]
-{0BBF:} samp_send_rcon_command_to_server {command} [string]
-{0BC0:} samp_send_onfoot_data_to_server {stOnFootData} [int]
-{0BC1:} samp_send_incar_data_to_server {stInCarData} [int]
-{0BC2:} samp_send_passenger_data_to_server {stPassengerData} [int]
-{0BC3:} samp_send_aim_data_to_server {stAimData} [int]
-{0BC4:} samp_send_bullet_data_to_server {stBulletData} [int]
-{0BC5:} samp_send_trailer_data_to_server {stTrailerData} [int]
-{0BC6:} samp_send_unoccupiedcar_data_to_server {stUnoccupiedData} [int]
-{0BC7:} samp_send_spectator_data_to_server {stSpectatorData} [int]
-{0BC8:} samp_send_click_player_to_server {playerId} [int] {clickSourceId} [int]
-{0BC9:} samp_send_dialog_response_to_server {dialogId} [int] {whichButton} [SampDialogButton] {itemId} [int] {inputText} [string]
-{0BCA:} samp_send_click_textdraw_to_server {textDrawId} [int]
-{0BCB:} samp_send_give_damage_to_server {playerId} [int] {damage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [BodyPart]
-{0BCC:} samp_send_take_damage_to_server {playerId} [int] {damage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [SampBodyPart]
-{0BCD:} samp_send_edit_object_to_server {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int]
+{0BBF:} samp_send_rcon_command {command} [string]
+{0BC0:} samp_send_onfoot_data {stOnFootData} [int]
+{0BC1:} samp_send_incar_data {stInCarData} [int]
+{0BC2:} samp_send_passenger_data {stPassengerData} [int]
+{0BC3:} samp_send_aim_data {stAimData} [int]
+{0BC4:} samp_send_bullet_data {stBulletData} [int]
+{0BC5:} samp_send_trailer_data {stTrailerData} [int]
+{0BC6:} samp_send_unoccupiedcar_data {stUnoccupiedData} [int]
+{0BC7:} samp_send_spectator_data {stSpectatorData} [int]
+{0BC8:} samp_send_click_player {playerId} [int] {clickSourceId} [int]
+{0BC9:} samp_send_dialog_response {dialogId} [int] {whichButton} [SampDialogButton] {itemId} [int] {inputText} [string]
+{0BCA:} samp_send_click_textdraw {textDrawId} [int]
+{0BCB:} samp_send_give_damage {playerId} [int] {damage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [BodyPart]
+{0BCC:} samp_send_take_damage {playerId} [int] {damage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [SampBodyPart]
+{0BCD:} samp_send_edit_object {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int]
 {0BCE:} samp_send_edit_attached_object {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int] {_p11} [int] {_p12} [int] {_p13} [int]
-{0BCF:} samp_send_interior_changed_to_server {_p1} [int]
+{0BCF:} samp_send_interior_changed {_p1} [int]
 {0BD0:} samp_send_request_spawn
 {0BD1:} samp_send_picked_up_pickup {_p1} [int]
 {0BD2:} samp_send_menu_select_row {_p1} [int]
-{0BD3:} samp_send_quit_menu_to_server
+{0BD3:} samp_send_quit_menu
 {0BD4:} samp_send_car_destroyed {_p1} [int]
 {0BD5:}   samp_is_scoreboard_opened
 {0BD6:} samp_enable_scoreboard {_p1} [int]

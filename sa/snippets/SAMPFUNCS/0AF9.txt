@@ -1,6 +1,6 @@
 // Example 1: Sends a String Constant to Server.
-SAMP_SEND_CHAT_MESSAGE_TO_SERVER "Hello Everyone!"
-SAMP_SEND_CHAT_MESSAGE_TO_SERVER "/cmds"
+SAMP_SEND_CHAT_MESSAGE "Hello Everyone!"
+SAMP_SEND_CHAT_MESSAGE "/cmds"
 
 
 // Example 2: Periodically sends a formatted text message to server
@@ -18,6 +18,6 @@ while true
     wait 3000
     int myID = samp_get_player_id $scplayer
     int myName = samp_get_player_nickname {id} myID
-    samp_send_chat_message_to_server {message} "%d) My Name is %s." {args} loopIndex myName
+    samp_send_chat_message {message} "%d) My Name is %s." {args} loopIndex myName
     loopIndex++
 end

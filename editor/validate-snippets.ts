@@ -1,7 +1,7 @@
-import { Game, LoadExtensionsResponse } from 'src/app/models';
+import { Game, LoadExtensionsResponse } from './src/app/models';
 import { existsSync, readdirSync, readFileSync, statSync } from 'fs';
 import { basename, dirname, join } from 'path';
-import { getName } from 'src/app/pipes';
+import { getName } from './src/app/pipes';
 
 export function run(inputDir: string, game: Game) {
   const _commands = readFileSync(join(inputDir, `${game}.json`), 'utf-8');
@@ -54,30 +54,29 @@ export function run(inputDir: string, game: Game) {
         `Error: ${filename} not found in ${parentDir}, referenced in ${path}`
       );
       exitStatus = 1;
-    }
+    } else {
+      const name = getName(command);
+      const snippet = readFileSync(path, 'utf-8');
+      if (command.operator) {
+        return;
+      }
+      if (snippet.trim().length === 0) {
+        console.warn(`Error: Empty snippet ${path}`);
+      }
 
-    const name = getName(command);
-    const snippet = readFileSync(path, 'utf-8');
-    if (command.operator) {
-      return;
-    }
-    if (snippet.trim().length === 0) {
-      console.warn(`Error: Empty snippet ${path}`);
-    }
-
-    const slow = snippet.toLowerCase();
-    if (!slow.includes(name.toLowerCase())) {
-      const classForm =
-        command.class && command.member ? `.${command.member}` : '';
-      if (!classForm || !slow.includes(classForm.toLowerCase())) {
-        console.error(
-          `Error: Command name ${name} not found in snippet ${path}`
-        );
-        exitStatus = 1;
+      const slow = snippet.toLowerCase();
+      if (!slow.includes(name.toLowerCase())) {
+        const classForm =
+          command.class && command.member ? `.${command.member}` : '';
+        if (!classForm || !slow.includes(classForm.toLowerCase())) {
+          console.error(
+            `Error: Command name ${name} not found in snippet ${path}`
+          );
+          exitStatus = 1;
+        }
       }
     }
   });
 
   if (exitStatus) process.exit(exitStatus);
 }
-

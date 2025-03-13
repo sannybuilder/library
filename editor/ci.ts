@@ -12,6 +12,7 @@ import { run as generateSupportInfo } from './generate-support-info';
 import { run as validateCommands } from './validate-commands';
 import { run as validateEnums } from './validate-enums';
 import { run as validateSnippets } from './validate-snippets';
+import { run as validateNative } from './validate-native';
 
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
@@ -31,6 +32,7 @@ games.forEach((game) => {
   validateCommands(gameJson, game);
   validateEnums(enumsJson, game);
   validateSnippets(join('../', game), game);
+  validateNative(nativeJson, game), game);
   run(`[ -d ${assets} ] || mkdir -p ${assets}`);
   generateEnums(enumsJson, join(assets, 'enums.js'));
 

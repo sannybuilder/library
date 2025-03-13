@@ -24,6 +24,7 @@ import {
   Attribute,
 } from '../models';
 import { HEX_DIGITS, HEX_NEGATION } from './hex';
+import { functionName } from './functions';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
 export function smash(value: object) {
@@ -495,4 +496,8 @@ export function filterSources(game: Game, viewContext: ViewContext) {
   }
 
   return sources;
+}
+
+export function getCommandName(command: Command) {
+  return command.name.startsWith('0x') ? functionName(command) : command.name;
 }

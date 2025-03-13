@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Command, Extension, Game } from '../models';
 import { template } from 'lodash';
 import { braceify, stringifyWithColonNoHighlight } from './params';
-import { functionName, generateFunctionDeclaration } from '../utils';
+import { functionName, generateFunctionDeclaration, getCommandName } from '../utils';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-pascal';
 
@@ -102,7 +102,7 @@ function format(
     extension: string;
   }
 ): string {
-  const highlightName = getName(command);
+  const highlightName = getCommandName(command);
   const opcodified = showOpcodes
     ? opcodify(code, extensions, command, extension)
     : code;
@@ -260,7 +260,7 @@ function findCommand(
 ) {
   for (let { name, commands } of extensions) {
     const found = commands.find((c) => {
-      const commandName = getName(c);
+      const commandName = getCommandName(c);
       if (!matches(commandName, keyword)) {
         return false;
       }
@@ -279,6 +279,4 @@ function findCommand(
   return null;
 }
 
-export function getName(command: Command) {
-  return command.name.startsWith('0x') ? functionName(command) : command.name;
-}
+

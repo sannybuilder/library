@@ -1,7 +1,7 @@
 import { Game, LoadExtensionsResponse } from './src/app/models';
 import { existsSync, readdirSync, readFileSync, statSync } from 'fs';
 import { basename, dirname, join } from 'path';
-import { getName } from './src/app/pipes';
+import { getCommandName } from './src/app/utils';
 
 export function run(inputDir: string, game: Game) {
   const _commands = readFileSync(join(inputDir, `${game}.json`), 'utf-8');
@@ -55,7 +55,7 @@ export function run(inputDir: string, game: Game) {
       );
       exitStatus = 1;
     } else {
-      const name = getName(command);
+      const name = getCommandName(command);
       const snippet = readFileSync(path, 'utf-8');
       if (command.operator) {
         return;

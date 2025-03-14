@@ -12,7 +12,7 @@ REPEAT
     wait 100
 UNTIL SAMP_IS_AVAILABLE
 
-SAMP_REGISTER_CLIENTSIDE_COMMAND {chatcommand} "receiveweapon" {callbacklabel} @ChatCallback_ReceiveWeapon
+SAMP_HOOK_CHAT_COMMAND_AS_LOCAL {chatcommand} "receiveweapon" {callbacklabel} @ChatCallback_ReceiveWeapon
 
 // We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
 SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
@@ -33,4 +33,4 @@ SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
             end
         end
     end
-SAMP_CMD_RET // end of callback
+SAMP_COMMAND_RETURN // end of callback

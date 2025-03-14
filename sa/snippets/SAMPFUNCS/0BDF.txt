@@ -10,7 +10,7 @@ REPEAT
     wait 100
 UNTIL SAMP_IS_AVAILABLE
 
-SAMP_REGISTER_CLIENTSIDE_COMMAND {chatcommand} "resumethread" {callbacklabel} @ChatCallback_ResumeThread
+SAMP_HOOK_CHAT_COMMAND_AS_LOCAL {chatcommand} "resumethread" {callbacklabel} @ChatCallback_ResumeThread
 
 SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
 
@@ -23,4 +23,4 @@ end
 
 :ChatCallback_ResumeThread
     SF_RESUME_THREAD {threadId} 0 // Resumes this script's main thread
-SAMP_CMD_RET // end of callback
+SAMP_COMMAND_RETURN // end of callback

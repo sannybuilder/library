@@ -10,7 +10,7 @@ REPEAT
     wait 100
 UNTIL SAMP_IS_AVAILABLE
 
-SAMP_REGISTER_CLIENTSIDE_COMMAND {chatcommand} "killme" {callbacklabel} @ChatCallback_KillMe
+SAMP_HOOK_CHAT_COMMAND_AS_LOCAL {chatcommand} "killme" {callbacklabel} @ChatCallback_KillMe
 
 // We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
 SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
@@ -19,4 +19,4 @@ SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
 :ChatCallback_KillMe
     TASK_DIE {handle} $scplauer // kill our local character
     SAMP_SEND_DEATH_BY_PLAYER {playerid} 0xFFFF {weaponid} WeaponType.UziDriveby // inform the server that I died by natural means(toxicated)
-SAMP_CMD_RET // end of callback
+SAMP_COMMAND_RETURN // end of callback

@@ -1,1 +1,7 @@
 // See SAMP_RAKNET_HOOK_INCOMING_RPC command's snippet for example usage of this command
+
+int myBitstream = SAMP_RAKNET_CREATE_BITSTREAM
+SAMP_RAKNET_BITSTREAM_SKIP_BITS bitStream {bitCount} 24 // increase the write offset and read offset by 3 bytes
+SAMP_RAKNET_BITSTREAM_WRITE myBitstream {value} 0x83FF3ABC {datatype} SampBitStreamDataType.Int {datasize} DataTypeSize.Int
+int value = SAMP_RAKNET_BITSTREAM_READ myBitstream {datatype} SampBitStreamDataType.Int {datasize} DataTypeSize.Int
+// expected: value = 0x83FF3ABC

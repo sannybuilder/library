@@ -5,3 +5,8 @@
  * * SAMP_RAKNET_HOOK_INCOMING_RPC
  * * SAMP_RAKNET_HOOK_INCOMING_PACKET
  */
+
+int myBitstream = SAMP_RAKNET_CREATE_BITSTREAM
+SAMP_RAKNET_BITSTREAM_SET_WRITE_OFFSET bitStream {offset} 24 // set the write offset at the 4th byte
+SAMP_RAKNET_BITSTREAM_WRITE myBitstream {value} 0x83FF3ABC {datatype} SampBitStreamDataType.Int {datasize} DataTypeSize.Int
+SAMP_RAKNET_BITSTREAM_RESET_WRITE_POINTER bitStream // write offset is now at its default value

@@ -3788,7 +3788,10 @@ export const SampBitStreamDataType = {
   "Int": 3,
   "Float": 4,
   "Array": 5,
-  "BitStream": 6
+  "BitStream": 6,
+  "int8": 0,
+  "int16": 2,
+  "int32": 3
 };
 export const SampPriority = {
   "System": 0,
@@ -3846,7 +3849,7 @@ export const SampDialogStyle = {
 };
 export const SampRakNetHookParam = {
   "Bitstream": 0,
-  "Packetid": 1,
+  "PacketId": 1,
   "Priority": 2,
   "Reliability": 3,
   "Orderingchannel": 4,

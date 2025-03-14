@@ -44,6 +44,7 @@ ImGui
 IniFile
 KillFrenzy
 List
+LocalChatCmd
 Math
 Matrix
 Memory
@@ -58,6 +59,7 @@ Path
 Pickup
 Plane
 Player
+RakNet
 Rc
 RenderFont
 RenderObject
@@ -1234,12 +1236,25 @@ $Bitstream
 $BEGIN
 Create,0B3D,0,0,("handle: Bitstream")
 Delete,0B3E,1,0,("self: Bitstream")
+GetBitsUsed,0BEE,0,0,("self: Bitstream" "usedBits%i")
+GetBytesUsed,0BEF,1,0,("self: Bitstream" "usedBytes%i")
+GetDataPtr,0BF3,1,0,("self: Bitstream" "address%i")
+GetReadOffset,0BF2,1,0,("self: Bitstream" "offset%i")
+GetUnreadBits,0BF0,1,0,("self: Bitstream" "unreadBits%i")
+GetWriteOffset,0BF1,1,0,("self: Bitstream" "offset%i")
+Read,0BE7,1,0,("self: Bitstream" "dataType: SampBitStreamDataType" "value: any")
+ReadArray,0BE8,1,0,("self: Bitstream" "buffer%i" "size%i")
 Reset,0B3F,1,0,("self: Bitstream")
+ResetReadPtr,0BE9,1,0,("self: Bitstream")
+ResetWritePtr,0BEA,1,0,("self: Bitstream")
 SendAsPacket,0B8B,1,0,("self: Bitstream")
 SendAsPacketWithParams,0B42,1,0,("self: Bitstream" "priority: SampPriority" "reliability: SampReliability" "orderingChannel%i")
 SendAsRpc,0B8A,1,0,("rpcId: SampRpc" "self: Bitstream")
 SendAsRpcWithParams,0B41,1,0,("rpc: SampRpc" "self: Bitstream" "priority: SampPriority" "reliability: SampReliability" "orderingChannel%i" "shiftTimeStamp%i")
-Write,0B40,1,0,("self: Bitstream" "value%i" "dataType: SampBitStreamDataType" "dataSize%i")
+SetReadPtr,0BED,1,0,("self: Bitstream" "offset%i")
+SetWriteOffset,0BEC,1,0,("self: Bitstream" "offset%i")
+SkipBits,0BEB,1,0,("self: Bitstream" "bitCount%i")
+Write,0B40,1,0,("self: Bitstream" "value: any" "dataType: SampBitStreamDataType" "dataSize%i")
 $END
 
 $Blip
@@ -2455,6 +2470,14 @@ Reset,0E79,0,0,("self: List")
 Reverse,0E7E,0,0,("self: List")
 $END
 
+$LocalChatCmd
+$BEGIN
+Hook,0B34,1,0,("chatCommand%s" "callbackLabel: label")
+IsHooked,0C90,1,0,("chatCommand%s")
+SetDescription,0C7F,0,0,("chatCommand%s" "decription%s")
+Unhook,0B63,1,0,("chatCommand%s")
+$END
+
 $Math
 $BEGIN
 Abs,0097,0,0,("number%f")
@@ -2850,6 +2873,17 @@ TakeOffGoggles,09EB,0,0,("self: Player" "animate%b")
 UseDetonator,09D9,0,0,()
 $END
 
+$RakNet
+$BEGIN
+GetHookParam,0BE5,1,0,("type: SampRakNetHookParam" "value: any")
+HookPacketIn,0BE4,1,0,("callbackLabel: label")
+HookPacketOut,0BE2,1,0,("callbackLabel: label")
+HookRpcIn,0BE3,1,0,("callbackLabel: label")
+HookRpcOut,0BE1,1,0,("callbackLabel: label")
+Return,0BE0,0,0,("unblockData%b")
+SetHookParam,0BE6,1,0,("type: SampRakNetHookParam" "value: any")
+$END
+
 $Rc
 $BEGIN
 GetCar,0484,0,0,("player: Player" "car: Car")
@@ -2900,12 +2934,16 @@ $END
 
 $Samp
 $BEGIN
-AddChatMsg,0AF8,0,0,("format%s" "color%i" "args: arguments")
+AddChatMessage,0AF8,0,0,("format%s" "color%i" "args: arguments")
 Available,0AFA,1,0,()
+ChatInputVisible,0B21,1,0,()
+ChatVisible,0BDB,1,0,()
 CloseDialog,0B47,1,0,("button: SampDialogButton")
 CmdRet,0B43,0,0,()
 Connect,0B38,0,0,("serverIp%s" "port%i")
+CursorActive,0B8C,1,0,()
 DialogActive,0B4C,1,0,("id%i")
+DialogClientSide,0BDA,1,0,()
 DialogResponded,0B3C,1,0,("dialogId%i" "buttonId%i" "listItemId%i" "inputTextBuffer%i")
 ForceSpawn,0AF6,0,0,()
 GetAnimId,0B59,1,0,("animName%s" "fileName%s" "animId%i")
@@ -2954,18 +2992,14 @@ GetRakClientInterface,0B7A,0,0,("pointer%i")
 GetRakPeer,0B7B,0,0,("pointer%i")
 GetRpcFunc,0B7D,1,0,("index%i" "address%i")
 GetRpcNode,0B7E,1,0,("index%i" "address%i")
-GetSvAddr,0B39,0,0,("buffer%s" "port%i")
-GetSvName,0B3A,0,0,("buffer%s")
+GetServerAddress,0B39,0,0,("buffer%s" "port%i")
+GetServerName,0B3A,0,0,("buffer%s")
+GetServerSettingsPtr,0BAC,0,0,("address%i")
 GetTextDrawPoolPtr,0BB3,0,0,("address%i")
 GetTextLabelPoolPtr,0BB6,0,0,("address%i")
-HookCmdCallback,0B34,1,0,("chatCommand%s" "callbackLabel: label")
-IsChatVisible,0BDB,1,0,()
-IsChatboxOpen,0B21,1,0,()
-IsCursorActive,0B8C,1,0,()
-IsDialogClientSide,0BDA,1,0,()
-IsPlayerNpc,0B64,1,0,("id%i")
-IsPlayerPaused,0B5C,1,0,("playerId%i")
-IsRemotePlayerConnected,0B23,1,0,("id%i")
+Npc,0B64,1,0,("id%i")
+PlayerPaused,0B5C,1,0,("playerId%i")
+RemotePlayerConnected,0B23,1,0,("id%i")
 SelectDialogItem,0B49,1,0,("itemId%i")
 SendAimData,0BC3,0,0,("stAimData%i")
 SendBulletData,0BC4,0,0,("stBulletData%i")
@@ -3015,7 +3049,6 @@ StoreInCarData,0BBB,1,0,("id%i" "buffer%i")
 StoreOnFootData,0BBA,1,0,("id%i" "buffer%i")
 StorePassengerData,0BBC,1,0,("id%i" "buffer%i")
 StoreTrailerData,0BBD,1,0,("id%i" "buffer%i")
-UnhookCmdCallback,0B63,1,0,("chatCommand%s")
 $END
 
 $ScriptFire
@@ -3066,7 +3099,6 @@ FromGameToWinScreen,0B60,0,0,("gameScreenCoordX%f" "gameScreenCoordY%f" "windowS
 FromWinToGameScreen,0B5F,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i" "gameScreenCoordX%f" "gameScreenCoordY%f")
 GetCursorCoord,0B5E,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i")
 GetScreenRes,0B5A,0,0,("width%i" "height%i")
-GetSvSettingsPtr,0BAC,0,0,("address%i")
 HexToArgb,0B66,0,0,("color%i" "alpha%i" "red%i" "green%i" "blue%i")
 ImSpawned,0B61,1,0,()
 PauseThread,0BDE,0,0,("threadId%i")

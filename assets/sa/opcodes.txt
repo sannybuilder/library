@@ -2160,7 +2160,7 @@
 {0AFE:} samp_send_death_by_player {playerId} [int] {weaponId} [WeaponType]
 {0AFF:} [var handle: Car] = samp_get_car_by_id {id} [int]
 {0B20:} [var handle: Char] = samp_get_player_char_by_id {id} [int]
-{0B21:}   samp_is_chat_input_open
+{0B21:}   samp_is_chat_input_visible
 {0B22:} samp_set_send_rate {type} [SampSendRateType] {delay} [int]
 {0B23:}   samp_is_remote_player_connected {id} [int]
 {0B24:} [var address: int] = samp_get_player_pointer {id} [int]
@@ -2177,7 +2177,7 @@
 {0B31:} samp_send_exit_car {carId} [int]
 {0B32:} samp_send_spawn
 {0B33:} samp_send_damage_car {carId} [int] {bodyFlags} [int] {doorFlags} [int] {lightFlags} [int] {wheelFlags} [int]
-{0B34:}   samp_register_clientside_command {chatCommand} [string] @label
+{0B34:}   samp_hook_chat_command_as_local {chatCommand} [string] @label
 {0B35:}   [var pointer: int] = samp_get_params_of_last_triggered_command
 {0B36:} [var nickname: int] = samp_get_player_nickname {id} [int]
 {0B37:} [var color: int] = samp_get_player_color {id} [int]
@@ -2189,10 +2189,10 @@
 {0B3D:} [var handle: Bitstream] = samp_raknet_create_bitstream
 {0B3E:}   [var self: Bitstream] = samp_raknet_delete_bitstream
 {0B3F:}   samp_raknet_reset_bitstream [Bitstream]
-{0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [int] {dataType} [SampBitStreamDataType] {dataSize} [int]
+{0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [any] {dataType} [SampBitStreamDataType] {dataSize} [int]
 {0B41:}   samp_raknet_send_rpc_with_params {rpc} [SampRpc] [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int] {shiftTimeStamp} [int]
 {0B42:}   samp_raknet_send_packet_with_params [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int]
-{0B43:} samp_cmd_ret
+{0B43:} samp_command_return
 {0B44:}   [var handle: TextLabel3D] = samp_create_3d_text {text} [string] {color} [int] {coordX} [float] {coordY} [float] {coordZ} [float] {visibilityRadius} [float] {showBehindWalls} [bool] {attachedPlayerId} [int] {attachedCarId} [int]
 {0B45:}   samp_delete_3d_text [TextLabel3D]
 {0B46:}   samp_is_3d_text_exist [TextLabel3D]
@@ -2224,7 +2224,7 @@
 {0B60:} [var windowScreenCoordX: int], [var windowScreenCoordY: int] = sf_game_screen_coords_to_window_screen_coords {gameScreenCoordX} [float] {gameScreenCoordY} [float]
 {0B61:}   samp_is_local_player_spawned
 {0B62:}   [var specialActionId: SampSpecialAction] = samp_get_player_special_action {playerId} [int]
-{0B63:}   samp_unregister_clientsided_command {chatCommand} [string]
+{0B63:}   samp_unhook_local_chat_command {chatCommand} [string]
 {0B64:}   samp_is_player_npc {id} [int]
 {0B65:}   [var score: int] = samp_get_player_score {id} [int]
 {0B66:} [var alpha: int], [var red: int], [var green: int], [var blue: int] = sf_hex_to_argb {color} [int]
@@ -2349,26 +2349,26 @@
 {0BDD:} samp_set_chat_display_mode {mode} [SampChatDisplayMode]
 {0BDE:} sf_pause_thread {threadId} [int]
 {0BDF:} sf_resume_thread {threadId} [int]
-{0BE0:} raknet_hook_ret {_p1} [int]
-{0BE1:}   raknet_setup_outcoming_rpc_hook {_p1} [int]
-{0BE2:}   raknet_setup_outcoming_packet_hook {_p1} [int]
-{0BE3:}   raknet_setup_incoming_rpc_hook {_p1} [int]
-{0BE4:}   raknet_setup_incoming_packet_hook {_p1} [int]
-{0BE5:}   raknet_get_hook_param {_p1} [int] {_p2} [int]
-{0BE6:}   raknet_set_hook_param {_p1} [int] {_p2} [int]
-{0BE7:}   raknet_bit_stream_read {_p1} [int] {_p2} [int] {_p3} [int]
-{0BE8:}   raknet_bit_stream_read_array {_p1} [int] {_p2} [int] {_p3} [int]
-{0BE9:}   raknet_bit_stream_reset_read_pointer {_p1} [int]
-{0BEA:}   raknet_bit_stream_reset_write_pointer {_p1} [int]
-{0BEB:}   raknet_bit_stream_ignore_bits {_p1} [int] {_p2} [int]
-{0BEC:}   raknet_bit_stream_set_write_offset {_p1} [int] {_p2} [int]
-{0BED:}   raknet_bit_stream_set_read_offset {_p1} [int] {_p2} [int]
-{0BEE:} raknet_bit_stream_get_number_of_bits_used {_p1} [int] {_p2} [int]
-{0BEF:}   raknet_bit_stream_get_number_of_bytes_used {_p1} [int] {_p2} [int]
-{0BF0:}   raknet_bit_stream_get_number_of_unread_bits {_p1} [int] {_p2} [int]
-{0BF1:}   raknet_bit_stream_get_write_offset {_p1} [int] {_p2} [int]
-{0BF2:}   raknet_bit_stream_get_read_offset {_p1} [int] {_p2} [int]
-{0BF3:}   raknet_bit_stream_get_data_pointer {_p1} [int] {_p2} [int]
+{0BE0:} samp_raknet_hook_return {unblockData} [bool]
+{0BE1:}   samp_raknet_hook_outcoming_rpc @label
+{0BE2:}   samp_raknet_hook_outcoming_packet @label
+{0BE3:}   samp_raknet_hook_incoming_rpc @label
+{0BE4:}   samp_raknet_hook_incoming_packet @label
+{0BE5:}   [var value: any] = samp_raknet_hook_get_param {type} [SampRakNetHookParam]
+{0BE6:}   samp_raknet_set_hook_param {type} [SampRakNetHookParam] {value} [any]
+{0BE7:}   [var value: any] = samp_raknet_bitstream_read [Bitstream] {dataType} [SampBitStreamDataType]
+{0BE8:}   samp_raknet_bitstream_read_array [Bitstream] {buffer} [int] {size} [int]
+{0BE9:}   samp_raknet_bitstream_reset_read_pointer [Bitstream]
+{0BEA:}   samp_raknet_bitstream_reset_write_pointer [Bitstream]
+{0BEB:}   samp_raknet_bitstream_skip_bits [Bitstream] {bitCount} [int]
+{0BEC:}   samp_raknet_bitstream_set_write_offset [Bitstream] {offset} [int]
+{0BED:}   samp_raknet_bitstream_set_read_offset [Bitstream] {offset} [int]
+{0BEE:} [var usedBits: int] = samp_raknet_bitstream_get_number_of_bits_used [Bitstream]
+{0BEF:}   [var usedBytes: int] = samp_raknet_bitstream_get_number_of_bytes_used [Bitstream]
+{0BF0:}   [var unreadBits: int] = samp_raknet_bitstream_get_number_of_unread_bits [Bitstream]
+{0BF1:}   [var offset: int] = samp_raknet_bitstream_get_write_offset [Bitstream]
+{0BF2:}   [var offset: int] = samp_raknet_bitstream_get_read_offset [Bitstream]
+{0BF3:}   [var address: int] = raknet_bit_stream_get_data_pointer [Bitstream]
 {0BF4:}   raknet_bit_stream_decode_string {_p1} [int] {_p2} [int] {_p3} [int]
 {0BF5:}   raknet_bit_stream_encode_string {_p1} [int] {_p2} [int] {_p3} [int]
 {0BF6:}   raknet_emul_rpc_receive {_p1} [int] {_p2} [int]
@@ -2508,7 +2508,7 @@
 {0C7C:}   samp_get_timer_time_left {_p1} [int] {_p2} [int]
 {0C7D:}   samp_release_download {_p1} [int]
 {0C7E:}   samp_is_console_active
-{0C7F:} samp_set_client_command {_p1} [int] {_p2} [int]
+{0C7F:} samp_set_local_chat_command_description {chatCommand} [string] {decription} [string]
 {0C80:} samp_set_console_command {_p1} [int] {_p2} [int]
 {0C81:} samp_force_car_sync {_p1} [int]
 {0C82:} samp_force_unoccupied_sync {_p1} [int] {_p2} [int]
@@ -2525,7 +2525,7 @@
 {0C8D:} sf_write_text_to_clipboard {text} [string]
 {0C8E:}   sf_read_data_from_clipboard {buffer} [int] {size} [int]
 {0C8F:} samp_process_chat_input {_p1} [int]
-{0C90:}   samp_is_client_command_defined {_p1} [int]
+{0C90:}   samp_is_chat_command_hooked {chatCommand} [string]
 {0C91:}   samp_is_console_command_defined {_p1} [int]
 {0C92:} samp_get_cleo_library_version {_p1} [int]
 {1337:} samp_make_script_private {_p1} [int]

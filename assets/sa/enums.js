@@ -3685,7 +3685,7 @@ export const SampRpc = {
   "GiveTakeDamage": 115,
   "EditAttachedObject": 116,
   "EditObject": 117,
-  "SetInteriorId": 118,
+  "RequestInteriorChange": 118,
   "MapMarker": 119,
   "ScrGangZoneDestroy": 120,
   "ScrGangZoneFlash": 121,
@@ -3921,4 +3921,9 @@ export const SampWeaponDamage = {
   "Sniper": 1109721088,
   "SprayPaint_FireExtinguisher": 1051260355,
   "Burning": 1054582246
+};
+export const SampChatDisplayMode = {
+  "Hidden": 0,
+  "NoShadow": 1,
+  "Standard": 2
 };

@@ -2328,27 +2328,27 @@
 {0BC8:} samp_send_click_player {playerId} [int] {clickSourceId} [int]
 {0BC9:} samp_send_dialog_response {dialogId} [int] {whichButton} [SampDialogButton] {itemId} [int] {inputText} [string]
 {0BCA:} samp_send_click_textdraw {textDrawId} [int]
-{0BCB:} samp_send_give_damage {playerId} [int] {damage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [BodyPart]
-{0BCC:} samp_send_take_damage {playerId} [int] {damage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [SampBodyPart]
-{0BCD:} samp_send_edit_object {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int]
-{0BCE:} samp_send_edit_attached_object {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int] {_p11} [int] {_p12} [int] {_p13} [int]
-{0BCF:} samp_send_interior_changed {_p1} [int]
+{0BCB:} samp_send_give_damage {playerId} [int] {floatDamage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [BodyPart]
+{0BCC:} samp_send_take_damage {playerId} [int] {floatDamage} [SampWeaponDamage] {weapon} [WeaponType] {bodyPart} [SampBodyPart]
+{0BCD:} samp_send_edit_object {isLocalObject} [bool] {id} [int] {response} [SampEditObjectResponse] {coordX} [float] {coordY} [float] {coordZ} [float] {pitch} [float] {roll} [float] {yaw} [float]
+{0BCE:} samp_send_edit_attached_object {response} [SampEditObjectResponse] {index} [int] {model} [model_object] {pedBone} [PedBone] {offsetX} [float] {offsetY} [float] {offsetZ} [float] {pitch} [float] {roll} [float] {yaw} [float] {scaleX} [float] {scaleY} [float] {scaleZ} [float]
+{0BCF:} samp_send_request_interior_change {id} [int]
 {0BD0:} samp_send_request_spawn
-{0BD1:} samp_send_picked_up_pickup {_p1} [int]
-{0BD2:} samp_send_menu_select_row {_p1} [int]
+{0BD1:} samp_send_picked_up_pickup {id} [int]
+{0BD2:} samp_send_menu_select_row {elementId} [int]
 {0BD3:} samp_send_quit_menu
-{0BD4:} samp_send_car_destroyed {_p1} [int]
-{0BD5:}   samp_is_scoreboard_opened
-{0BD6:} samp_enable_scoreboard {_p1} [int]
+{0BD4:} samp_send_car_destroyed {id} [int]
+{0BD5:}   samp_is_scoreboard_visible
+{0BD6:} samp_set_scoreboard_visibility {isVisible} [bool]
 {0BD7:} samp_get_dialog_content {buffer} [string]
 {0BD8:} samp_get_dialog_title {buffer} [string]
 {0BD9:} samp_set_active_dialog_environment {isClientSide} [bool]
 {0BDA:}   samp_is_active_dialog_clientside
 {0BDB:}   samp_is_chat_visible
-{0BDC:} samp_get_chat_display_mode {_p1} [int]
-{0BDD:} samp_set_chat_display_mode {_p1} [int]
-{0BDE:} samp_pause_thread {_p1} [int]
-{0BDF:} samp_resume_thread {_p1} [int]
+{0BDC:} [var mode: SampChatDisplayMode] = samp_get_chat_display_mode
+{0BDD:} samp_set_chat_display_mode {mode} [SampChatDisplayMode]
+{0BDE:} sf_pause_thread {threadId} [int]
+{0BDF:} sf_resume_thread {threadId} [int]
 {0BE0:} raknet_hook_ret {_p1} [int]
 {0BE1:}   raknet_setup_outcoming_rpc_hook {_p1} [int]
 {0BE2:}   raknet_setup_outcoming_packet_hook {_p1} [int]

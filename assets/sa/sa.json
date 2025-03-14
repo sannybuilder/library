@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1741887666554,
+    "last_update": 1741917040628,
     "version": "0.901",
     "url": "https://library.sannybuilder.com/#/sa"
   },
@@ -64085,7 +64085,7 @@
               "type": "int"
             },
             {
-              "name": "damage",
+              "name": "floatDamage",
               "type": "SampWeaponDamage"
             },
             {
@@ -64114,7 +64114,7 @@
               "type": "int"
             },
             {
-              "name": "damage",
+              "name": "floatDamage",
               "type": "SampWeaponDamage"
             },
             {
@@ -64130,7 +64130,7 @@
           "name": "SAMP_SEND_TAKE_DAMAGE",
           "num_params": 4,
           "class": "Samp",
-          "member": "SendTakeDamage",
+          "member": "SendRpcTakeDamage",
           "attrs": {
             "is_static": true
           },
@@ -64139,40 +64139,40 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "isLocalObject",
+              "type": "bool"
+            },
+            {
+              "name": "id",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "response",
+              "type": "SampEditObjectResponse"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "coordX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "coordY",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "coordZ",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "pitch",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "roll",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
+              "name": "yaw",
+              "type": "float"
             }
           ],
           "id": "0BCD",
@@ -64182,87 +64182,90 @@
           "member": "SendRpcEditObject",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends an SampRpc.EditObject about changing the structure of an object in its editing mode"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "response",
+              "type": "SampEditObjectResponse"
+            },
+            {
+              "name": "index",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "model",
+              "type": "model_object"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "pedBone",
+              "type": "PedBone"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "offsetX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "offsetY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "offsetZ",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "pitch",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "roll",
+              "type": "float"
             },
             {
-              "name": "_p9",
-              "type": "int"
+              "name": "yaw",
+              "type": "float"
             },
             {
-              "name": "_p10",
-              "type": "int"
+              "name": "scaleX",
+              "type": "float"
             },
             {
-              "name": "_p11",
-              "type": "int"
+              "name": "scaleY",
+              "type": "float"
             },
             {
-              "name": "_p12",
-              "type": "int"
-            },
-            {
-              "name": "_p13",
-              "type": "int"
+              "name": "scaleZ",
+              "type": "float"
             }
           ],
           "id": "0BCE",
           "name": "SAMP_SEND_EDIT_ATTACHED_OBJECT",
           "num_params": 13,
           "class": "Samp",
-          "member": "SendEditAttachedObject",
+          "member": "SendRpcEditAttachedObject",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampRpc.EditAttachedObject about a change to an attached object in object edit mode"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             }
           ],
           "id": "0BCF",
-          "name": "SAMP_SEND_INTERIOR_CHANGED",
+          "name": "SAMP_SEND_REQUEST_INTERIOR_CHANGE",
           "num_params": 1,
           "class": "Samp",
           "attrs": {
             "is_static": true
           },
-          "member": "SendRpcInteriorChanged"
+          "member": "SendRpcRequestInteriorChange",
+          "short_desc": "Sends SampRpc.RequestInteriorChange"
         },
         {
           "id": "0BD0",
@@ -64272,12 +64275,13 @@
           "member": "SendRpcRequestSpawn",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampRpc.RequestSpawn"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -64285,21 +64289,23 @@
           "name": "SAMP_SEND_PICKED_UP_PICKUP",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendPickedupPickup",
+          "member": "SendRpcPickedupPickup",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampRpc.PickedUpPickup to take a pickup"
         },
         {
+          "input": [
+            {
+              "name": "elementId",
+              "type": "int"
+            }
+          ],
           "id": "0BD2",
           "name": "SAMP_SEND_MENU_SELECT_ROW",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sends SampRpc.MenuSelect about selecting an item in a menu (GTA:SA menu)"
         },
         {
           "id": "0BD3",
@@ -64309,12 +64315,13 @@
           "member": "SendRpcQuitMenu",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampRpc.MenuQuit to tell the server we exited the menu (GTA:SA menu)"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             }
           ],
@@ -64325,26 +64332,29 @@
           "member": "SendRpcCarDestroyed",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Sends SampRpc.CarDestroyed about destruction of a specific car (exploded or drenched in water)"
         },
         {
           "id": "0BD5",
-          "name": "SAMP_IS_SCOREBOARD_OPENED",
+          "name": "SAMP_IS_SCOREBOARD_VISIBLE",
           "num_params": 0,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "short_desc": "Evaluates as logical true if the scoreboard is visible"
         },
         {
-          "id": "0BD6",
-          "name": "SAMP_ENABLE_SCOREBOARD",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "isVisible",
+              "type": "bool"
             }
-          ]
+          ],
+          "id": "0BD6",
+          "name": "SAMP_SET_SCOREBOARD_VISIBILITY",
+          "num_params": 1,
+          "short_desc": "Sets the visibility of the scoreboard"
         },
         {
           "input": [
@@ -64414,52 +64424,81 @@
           "name": "SAMP_IS_CHAT_VISIBLE",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Evaluates as logical true if chat lines are visible",
+          "class": "Samp",
+          "member": "IsChatVisible"
         },
         {
+          "output": [
+            {
+              "name": "mode",
+              "type": "SampChatDisplayMode",
+              "source": "var_any"
+            }
+          ],
           "id": "0BDC",
           "name": "SAMP_GET_CHAT_DISPLAY_MODE",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the current chat display mode",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "GetChatDisplayMode"
         },
         {
+          "input": [
+            {
+              "name": "mode",
+              "type": "SampChatDisplayMode"
+            }
+          ],
           "id": "0BDD",
           "name": "SAMP_SET_CHAT_DISPLAY_MODE",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the chat display mode",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "SetChatDisplayMode"
         },
         {
+          "input": [
+            {
+              "name": "threadId",
+              "type": "int"
+            }
+          ],
           "id": "0BDE",
-          "name": "SAMP_PAUSE_THREAD",
+          "name": "SF_PAUSE_THREAD",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the specified thread's isActive parameter to 0",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "PauseThread"
         },
         {
-          "id": "0BDF",
-          "name": "SAMP_RESUME_THREAD",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
+              "name": "threadId",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0BDF",
+          "name": "SF_RESUME_THREAD",
+          "num_params": 1,
+          "short_desc": "Sets the specified thread's isActive parameter to 1",
+          "class": "Sf",
+          "member": "ResumeThread",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0BE0",

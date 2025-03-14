@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741917040628,
-    "version": "0.901",
+    "last_update": 1741966630145,
+    "version": "0.902",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59970,7 +59970,7 @@
           "num_params": 3,
           "short_desc": "Adds one line of colored message to the chat",
           "class": "Samp",
-          "member": "AddChatMsg",
+          "member": "AddChatMessage",
           "attrs": {
             "is_static": true
           }
@@ -60142,7 +60142,7 @@
         },
         {
           "id": "0B21",
-          "name": "SAMP_IS_CHAT_INPUT_OPEN",
+          "name": "SAMP_IS_CHAT_INPUT_VISIBLE",
           "num_params": 0,
           "short_desc": "Checks if the chat box input is open/visible",
           "attrs": {
@@ -60150,7 +60150,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "IsChatboxOpen"
+          "member": "ChatInputVisible"
         },
         {
           "input": [
@@ -60189,7 +60189,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "IsRemotePlayerConnected"
+          "member": "RemotePlayerConnected"
         },
         {
           "input": [
@@ -60508,15 +60508,15 @@
             }
           ],
           "id": "0B34",
-          "name": "SAMP_REGISTER_CLIENTSIDE_COMMAND",
+          "name": "SAMP_HOOK_CHAT_COMMAND_AS_LOCAL",
           "num_params": 2,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "short_desc": "Registers a callback hooked from a client sided chat command",
-          "class": "Samp",
-          "member": "HookCmdCallback"
+          "class": "LocalChatCmd",
+          "member": "Hook"
         },
         {
           "output": [
@@ -60627,7 +60627,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "GetSvAddr"
+          "member": "GetServerAddress"
         },
         {
           "output": [
@@ -60642,7 +60642,7 @@
           "num_params": 1,
           "short_desc": "Writes the server name to buffer",
           "class": "Samp",
-          "member": "GetSvName",
+          "member": "GetServerName",
           "attrs": {
             "is_static": true
           }
@@ -60781,7 +60781,7 @@
             },
             {
               "name": "value",
-              "type": "int"
+              "type": "any"
             },
             {
               "name": "dataType",
@@ -60870,9 +60870,9 @@
         },
         {
           "id": "0B43",
-          "name": "SAMP_CMD_RET",
+          "name": "SAMP_COMMAND_RETURN",
           "num_params": 0,
-          "short_desc": "Marks the end of the client sided command's callback. Used as its returning statement",
+          "short_desc": "Marks the end of a console command's callback or a chat command's callback. Used as its returning statement",
           "attrs": {
             "is_static": true
           },
@@ -61456,7 +61456,7 @@
           },
           "short_desc": "Evaluates as logical true if the specified player is in paused state (or AFK)",
           "class": "Samp",
-          "member": "IsPlayerPaused"
+          "member": "PlayerPaused"
         },
         {
           "input": [
@@ -61609,15 +61609,15 @@
             }
           ],
           "id": "0B63",
-          "name": "SAMP_UNREGISTER_CLIENTSIDED_COMMAND",
+          "name": "SAMP_UNHOOK_LOCAL_CHAT_COMMAND",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "short_desc": "Removes all callbacks hooked from a client sided chat command created by SAMP_REGISTER_CLIENTSIDE_COMMAND, suppressing all its callback's operation ",
-          "class": "Samp",
-          "member": "UnhookCmdCallback"
+          "class": "LocalChatCmd",
+          "member": "Unhook"
         },
         {
           "input": [
@@ -61635,7 +61635,7 @@
           },
           "short_desc": "Checks if the specified player is an NPC",
           "class": "Samp",
-          "member": "IsPlayerNpc"
+          "member": "Npc"
         },
         {
           "input": [
@@ -62716,7 +62716,7 @@
           },
           "short_desc": "Checks if the mouse cursor were both visible and movable",
           "class": "Samp",
-          "member": "IsCursorActive"
+          "member": "CursorActive"
         },
         {
           "input": [
@@ -63493,8 +63493,8 @@
           "name": "SAMP_GET_SERVER_SETTINGS_POINTER",
           "num_params": 1,
           "short_desc": "Returns the pointer to server settings structure",
-          "class": "Sf",
-          "member": "GetSvSettingsPtr",
+          "class": "Samp",
+          "member": "GetServerSettingsPtr",
           "attrs": {
             "is_static": true
           }
@@ -64416,7 +64416,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "IsDialogClientSide",
+          "member": "DialogClientSide",
           "short_desc": "Evaluates as logical true if the active dialog is has a client side attribute"
         },
         {
@@ -64429,7 +64429,7 @@
           },
           "short_desc": "Evaluates as logical true if chat lines are visible",
           "class": "Samp",
-          "member": "IsChatVisible"
+          "member": "ChatVisible"
         },
         {
           "output": [
@@ -64501,338 +64501,431 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "unblockData",
+              "type": "bool"
+            }
+          ],
           "id": "0BE0",
-          "name": "RAKNET_HOOK_RET",
+          "name": "SAMP_RAKNET_HOOK_RETURN",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "RakNet",
+          "member": "Return",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns the flow of control to RakNet and decides wether the currently intercepted data will be processed by RakNet or not"
         },
         {
+          "input": [
+            {
+              "name": "callbackLabel",
+              "type": "label"
+            }
+          ],
           "id": "0BE1",
-          "name": "RAKNET_SETUP_OUTCOMING_RPC_HOOK",
+          "name": "SAMP_RAKNET_HOOK_OUTCOMING_RPC",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "RakNet",
+          "member": "HookRpcOut",
+          "short_desc": "Redirects all outgoing RPCs to the specified callback(label) for subsequent processing before sending to the server"
         },
         {
+          "input": [
+            {
+              "name": "callbackLabel",
+              "type": "label"
+            }
+          ],
           "id": "0BE2",
-          "name": "RAKNET_SETUP_OUTCOMING_PACKET_HOOK",
+          "name": "SAMP_RAKNET_HOOK_OUTCOMING_PACKET",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "RakNet",
+          "member": "HookPacketOut",
+          "short_desc": "Redirects all outgoing Packets to the specified callback(label) for subsequent processing before sending to the server"
         },
         {
+          "input": [
+            {
+              "name": "callbackLabel",
+              "type": "label"
+            }
+          ],
           "id": "0BE3",
-          "name": "RAKNET_SETUP_INCOMING_RPC_HOOK",
+          "name": "SAMP_RAKNET_HOOK_INCOMING_RPC",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Redirects all incoming RPCs to the specified callback(label) for subsequent processing before acceptance on the local client",
+          "class": "RakNet",
+          "member": "HookRpcIn"
         },
         {
+          "input": [
+            {
+              "name": "callbackLabel",
+              "type": "label"
+            }
+          ],
           "id": "0BE4",
-          "name": "RAKNET_SETUP_INCOMING_PACKET_HOOK",
+          "name": "SAMP_RAKNET_HOOK_INCOMING_PACKET",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "RakNet",
+          "member": "HookPacketIn",
+          "short_desc": "Redirects all incoming packets to the specified callback(label) for subsequent processing before acceptance on the local client"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "SampRakNetHookParam"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
           "id": "0BE5",
-          "name": "RAKNET_GET_HOOK_PARAM",
+          "name": "SAMP_RAKNET_HOOK_GET_PARAM",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the hook parameter's value of the currently executing callback",
+          "class": "RakNet",
+          "member": "GetHookParam"
         },
         {
+          "input": [
+            {
+              "name": "type",
+              "type": "SampRakNetHookParam"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
           "id": "0BE6",
-          "name": "RAKNET_SET_HOOK_PARAM",
+          "name": "SAMP_RAKNET_SET_HOOK_PARAM",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "RakNet",
+          "member": "SetHookParam",
+          "short_desc": "Sets the hook parameter's value of the currently executing callback"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "dataType",
+              "type": "SampBitStreamDataType"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
           "id": "0BE7",
-          "name": "RAKNET_BIT_STREAM_READ",
+          "name": "SAMP_RAKNET_BITSTREAM_READ",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Reads a value with datatype and datasize at the \"read pointer\" of the specified bitstream , then advances its \"read pointer\" by the same size",
+          "class": "Bitstream",
+          "member": "Read"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "buffer",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
           "id": "0BE8",
-          "name": "RAKNET_BIT_STREAM_READ_ARRAY",
+          "name": "SAMP_RAKNET_BITSTREAM_READ_ARRAY",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Stores an array of bytes from the Bitstream to buffer",
+          "class": "Bitstream",
+          "member": "ReadArray"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
           "id": "0BE9",
-          "name": "RAKNET_BIT_STREAM_RESET_READ_POINTER",
+          "name": "SAMP_RAKNET_BITSTREAM_RESET_READ_POINTER",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "ResetReadPtr",
+          "short_desc": "Resets the read pointer of the BitStream. Setting \"write offset = 0\""
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
           "id": "0BEA",
-          "name": "RAKNET_BIT_STREAM_RESET_WRITE_POINTER",
+          "name": "SAMP_RAKNET_BITSTREAM_RESET_WRITE_POINTER",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Resets (THIS COMMAND IS BUGGED, SETS THE WRITE POINTER AT THE BEGINNING OF THE DATA ( WRITE OFFSET = 0) WHICH IS WRONG. DO NOT USE) the value write pointer in the BitStream",
+          "class": "Bitstream",
+          "member": "ResetWritePtr"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "bitCount",
+              "type": "int"
+            }
+          ],
           "id": "0BEB",
-          "name": "RAKNET_BIT_STREAM_IGNORE_BITS",
+          "name": "SAMP_RAKNET_BITSTREAM_SKIP_BITS",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "SkipBits",
+          "short_desc": "Increases both its \"read pointer\" and \"write pointer\" of the Bitstream by the specified bit count"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            }
+          ],
           "id": "0BEC",
-          "name": "RAKNET_BIT_STREAM_SET_WRITE_OFFSET",
+          "name": "SAMP_RAKNET_BITSTREAM_SET_WRITE_OFFSET",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "SetWriteOffset",
+          "short_desc": "Sets the write offset of the BitStream"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            }
+          ],
           "id": "0BED",
-          "name": "RAKNET_BIT_STREAM_SET_READ_OFFSET",
+          "name": "SAMP_RAKNET_BITSTREAM_SET_READ_OFFSET",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "SetReadPtr",
+          "short_desc": "Sets the read offset of the BitStream"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
+          "output": [
+            {
+              "name": "usedBits",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BEE",
-          "name": "RAKNET_BIT_STREAM_GET_NUMBER_OF_BITS_USED",
+          "name": "SAMP_RAKNET_BITSTREAM_GET_NUMBER_OF_BITS_USED",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "GetBitsUsed",
+          "short_desc": "Returns the number of used bits in the BitStream"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
+          "output": [
+            {
+              "name": "usedBytes",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BEF",
-          "name": "RAKNET_BIT_STREAM_GET_NUMBER_OF_BYTES_USED",
+          "name": "SAMP_RAKNET_BITSTREAM_GET_NUMBER_OF_BYTES_USED",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the number of bytes used in the BitStream",
+          "class": "Bitstream",
+          "member": "GetBytesUsed"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
+          "output": [
+            {
+              "name": "unreadBits",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BF0",
-          "name": "RAKNET_BIT_STREAM_GET_NUMBER_OF_UNREAD_BITS",
+          "name": "SAMP_RAKNET_BITSTREAM_GET_NUMBER_OF_UNREAD_BITS",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the number of unread bits in the BitStream",
+          "class": "Bitstream",
+          "member": "GetUnreadBits"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
+          "output": [
+            {
+              "name": "offset",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BF1",
-          "name": "RAKNET_BIT_STREAM_GET_WRITE_OFFSET",
+          "name": "SAMP_RAKNET_BITSTREAM_GET_WRITE_OFFSET",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "GetWriteOffset",
+          "short_desc": "Returns the current write offset of the BitStream"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
+          "output": [
+            {
+              "name": "offset",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BF2",
-          "name": "RAKNET_BIT_STREAM_GET_READ_OFFSET",
+          "name": "SAMP_RAKNET_BITSTREAM_GET_READ_OFFSET",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "GetReadOffset",
+          "short_desc": "Returns the current read offset of the BitStream"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0BF3",
           "name": "RAKNET_BIT_STREAM_GET_DATA_POINTER",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to the BitStream's data",
+          "class": "Bitstream",
+          "member": "GetDataPtr"
         },
         {
           "id": "0BF4",
@@ -67600,19 +67693,25 @@
           }
         },
         {
-          "id": "0C7F",
-          "name": "SAMP_SET_CLIENT_COMMAND",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "chatCommand",
+              "type": "string"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "decription",
+              "type": "string"
             }
-          ]
+          ],
+          "id": "0C7F",
+          "name": "SAMP_SET_LOCAL_CHAT_COMMAND_DESCRIPTION",
+          "num_params": 2,
+          "short_desc": "Sets the description for the local command",
+          "class": "LocalChatCmd",
+          "member": "SetDescription",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0C80",
@@ -67821,18 +67920,22 @@
           ]
         },
         {
-          "id": "0C90",
-          "name": "SAMP_IS_CLIENT_COMMAND_DEFINED",
-          "num_params": 1,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "chatCommand",
+              "type": "string"
             }
-          ]
+          ],
+          "id": "0C90",
+          "name": "SAMP_IS_CHAT_COMMAND_HOOKED",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Evaluates as logical true if the specified command is localized by a callback hook",
+          "class": "LocalChatCmd",
+          "member": "IsHooked"
         },
         {
           "id": "0C91",

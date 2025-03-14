@@ -1,0 +1,38 @@
+// Example: Manipulated RPC Damage Sync
+// * Everytime we take damage from a player, the damage indication will not be sent to the server
+// * Everytime we deal damage to a player by any means(punching, chainsaw, MP5, etc), the weapon and its damage is modified into shotgun(weapon with highest damage) XD lol
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+// wait for SAMP to fully initialize
+REPEAT
+    wait 100
+UNTIL SAMP_IS_AVAILABLE
+
+if not SAMP_RAKNET_HOOK_OUTCOMING_RPC {callbackLabel} @RPC_Out
+then TERMINATE_THIS_CUSTOM_SCRIPT
+end
+
+// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
+SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
+// This part of the main thread will not be reached unless the main thread is resumed
+TERMINATE_THIS_CUSTOM_SCRIPT
+
+:RPC_Out // all transmitted RPC will detour here first
+    int packetId = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.PacketId
+    if packetId == SampRpc.GiveTakeDamage
+    then
+        Bitstream bitStream = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.Bitstream
+        bool isTakeDamage = SAMP_RAKNET_BITSTREAM_READ bitStream {dataType} SampBitStreamDataType.Bool
+        if isTakeDamage == true
+        then SAMP_RAKNET_HOOK_RETURN {unblockData} false // end this callback and block transmission of this data
+        else // I'm dealing damage to another player
+            int saveWriteOffset = SAMP_RAKNET_BITSTREAM_GET_WRITE_OFFSET bitStream // store the original write offset to be used later
+            SAMP_RAKNET_BITSTREAM_SET_WRITE_OFFSET bitStream {offset} 24 // skip isTakeDamage and PlayerID 
+            SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} SampWeaponDamage.Shotgun_3meters {dataType} SampBitStreamDataType.Float {dataSize} 4
+            SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} WeaponType.Shotgun {dataType} SampBitStreamDataType.Int {dataSize} 4
+            SAMP_RAKNET_BITSTREAM_SET_WRITE_OFFSET bitStream {offset} saveWriteOffset // ALWAYS Set the Write Offset to its original value OR ELSE GTA SA WILL CRASH
+        end
+    end
+SAMP_RAKNET_HOOK_RETURN {unblockData} true // end this callback and allow RakNet to transmit this data

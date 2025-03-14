@@ -1,0 +1,26 @@
+// Example: No Unexpected Unoccupied Car Modification
+// Prevents all attempts of the server to manipulate unocuppied cars
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+// wait for SAMP to fully initialize
+REPEAT
+    wait 100
+UNTIL SAMP_IS_AVAILABLE
+
+if not SAMP_RAKNET_HOOK_INCOMING_PACKET {callbackLabel} @Packet_In
+then TERMINATE_THIS_CUSTOM_SCRIPT
+end
+
+// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
+SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
+// This part of the main thread will not be reached unless the main thread is resumed
+TERMINATE_THIS_CUSTOM_SCRIPT
+
+:Packet_In // all received Packet will detour here first
+    int packetId = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.PacketId
+    if packetId == SampPacket.UnoccupiedCarSync
+    then SAMP_RAKNET_HOOK_RETURN {unblockData} false // end this callback and block this data
+    end
+SAMP_RAKNET_HOOK_RETURN {unblockData} true // end this callback and allow RakNet to process the data

@@ -1,0 +1,44 @@
+// Example: Super Saiyan Dash (Fugga) Troll Hack
+// Our Character will appear normal from our client's perspective. But our character will appear to be dashing insanely fast at the client of all remote players, and rams everything that comes near >-:D Muhahaha!
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+// wait for SAMP to fully initialize
+REPEAT
+    wait 100
+UNTIL SAMP_IS_AVAILABLE
+
+if not SAMP_RAKNET_HOOK_OUTCOMING_PACKET {callbackLabel} @Packet_Out
+then TERMINATE_THIS_CUSTOM_SCRIPT
+end
+
+// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
+SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
+// This part of the main thread will not be reached unless the main thread is resumed
+TERMINATE_THIS_CUSTOM_SCRIPT
+
+:Packet_Out // all transmitted Packet will detour here first
+    int packetId = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.PacketId
+    if packetId == SampPacket.OnFootSync
+    then
+        Bitstream bitStream = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.Bitstream
+        int saveWriteOffset = SAMP_RAKNET_BITSTREAM_GET_WRITE_OFFSET bitStream // store the original write offset to be used later
+        SAMP_RAKNET_BITSTREAM_SET_WRITE_OFFSET bitStream {offset} 56 // offset to my character's coordinates
+        float offsetX = generate_random_float_in_range {min} 0.0 {max} 5.0
+        float offsetY = generate_random_float_in_range {min} 0.0 {max} 5.0
+        float offsetZ = generate_random_float_in_range {min} 0.0 {max} 5.0
+        float newCoordX, newCoordY, newCoordZ = get_offset_from_char_in_world_coords $scplayer {xOffset} offsetX {yOffset} offsetY {zOffset} offsetZ
+        SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} newCoordX {dataType} SampBitStreamDataType.Float {dataSize} 4
+        SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} newCoordY {dataType} SampBitStreamDataType.Float {dataSize} 4
+        SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} newCoordZ {dataType} SampBitStreamDataType.Float {dataSize} 4
+        SAMP_RAKNET_BITSTREAM_SKIP_BITS bitStream {bitCount} 256 // offset to my character's velocity per frame (50FPS basis)
+        float velocityX = generate_random_float_in_range {min} 0.0 {max} 0.8660254038
+        float velocityY = generate_random_float_in_range {min} 0.0 {max} 0.8660254038
+        float velocityZ = generate_random_float_in_range {min} 0.0 {max} 0.8660254038
+        SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} velocityX {dataType} SampBitStreamDataType.Float {dataSize} 4
+        SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} velocityY {dataType} SampBitStreamDataType.Float {dataSize} 4
+        SAMP_RAKNET_BITSTREAM_WRITE bitStream {value} velocityZ {dataType} SampBitStreamDataType.Float {dataSize} 4
+        SAMP_RAKNET_BITSTREAM_SET_WRITE_OFFSET bitStream {offset} saveWriteOffset // ALWAYS Set the Write Offset to its original value OR ELSE GTA SA WILL CRASH
+    end
+SAMP_RAKNET_HOOK_RETURN {unblockData} true // end this callback and allow RakNet to transmit this data

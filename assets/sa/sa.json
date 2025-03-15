@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1741966630145,
-    "version": "0.902",
+    "last_update": 1742019921876,
+    "version": "0.903",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -64918,7 +64918,7 @@
             }
           ],
           "id": "0BF3",
-          "name": "RAKNET_BIT_STREAM_GET_DATA_POINTER",
+          "name": "SAMP_RAKNET_BITSTREAM_GET_DATA_POINTER",
           "num_params": 2,
           "attrs": {
             "is_condition": true
@@ -64928,84 +64928,96 @@
           "member": "GetDataPtr"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "buffer",
+              "type": "int"
+            },
+            {
+              "name": "buffersize",
+              "type": "int"
+            }
+          ],
           "id": "0BF4",
-          "name": "RAKNET_BIT_STREAM_DECODE_STRING",
+          "name": "SAMP_RAKNET_BITSTREAM_DECODE_COMPRESSED_STRING",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Decrypts a compressed string (CString) from the bitstream and writes it to the buffer",
+          "class": "Bitstream",
+          "member": "DecodeCString"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "Bitstream"
+            },
+            {
+              "name": "buffer",
+              "type": "int"
+            },
+            {
+              "name": "bufferSize",
+              "type": "int"
+            }
+          ],
           "id": "0BF5",
-          "name": "RAKNET_BIT_STREAM_ENCODE_STRING",
+          "name": "SAMP_RAKNET_BITSTREAM_ENCODE_STRING",
           "num_params": 3,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Encrypts a string stored in the buffer and writes the compressed string (CString) to the bitstream",
+          "class": "Bitstream",
+          "member": "EncodeString"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "SampRpc"
+            },
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
           "id": "0BF6",
-          "name": "RAKNET_EMUL_RPC_RECEIVE",
+          "name": "SAMP_RAKNET_BITSTREAM_EMULATE_AS_INCOMING_RPC",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "EmulateAsRpcIn",
+          "short_desc": "Emulates the BitStream's data like an incoming RPC"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "SampPacket"
+            },
+            {
+              "name": "self",
+              "type": "Bitstream"
+            }
+          ],
           "id": "0BF7",
-          "name": "RAKNET_EMUL_PACKET_RECEIVE",
+          "name": "SAMP_RAKNET_BITSTREAM_EMULATE_AS_INCOMING_PACKET",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Bitstream",
+          "member": "EmulateAsPacketIn",
+          "short_desc": "Emulates the BitStream's data like an Incoming Packet"
         },
         {
           "id": "0BF8",

@@ -1235,7 +1235,11 @@ $END
 $Bitstream
 $BEGIN
 Create,0B3D,0,0,("handle: Bitstream")
+DecodeCString,0BF4,1,0,("self: Bitstream" "buffer%i" "buffersize%i")
 Delete,0B3E,1,0,("self: Bitstream")
+EmulateAsPacketIn,0BF7,1,0,("id: SampPacket" "self: Bitstream")
+EmulateAsRpcIn,0BF6,1,0,("id: SampRpc" "self: Bitstream")
+EncodeString,0BF5,1,0,("self: Bitstream" "buffer%i" "bufferSize%i")
 GetBitsUsed,0BEE,0,0,("self: Bitstream" "usedBits%i")
 GetBytesUsed,0BEF,1,0,("self: Bitstream" "usedBytes%i")
 GetDataPtr,0BF3,1,0,("self: Bitstream" "address%i")

@@ -1,0 +1,54 @@
+// Example: Echo Shown Dialog to local chat
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+// wait for SAMP to fully initialize
+REPEAT
+    wait 100
+UNTIL SAMP_IS_AVAILABLE
+
+if not SAMP_RAKNET_HOOK_INCOMING_RPC {callbackLabel} @RPC_In
+then TERMINATE_THIS_CUSTOM_SCRIPT
+end
+
+// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
+SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
+// This part of the main thread will not be reached unless the main thread is resumed
+TERMINATE_THIS_CUSTOM_SCRIPT
+
+:RPC_In // all received Packet will detour here first
+    int packetId = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.PacketId
+    if packetId == SampRpc.ScrShowDialog
+    then
+        int strLen
+        int strBuf = ALLOCATE_MEMORY {size} 4097 // max CString size
+
+        Bitstream bitStream = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.Bitstream
+
+        int dialogID = SAMP_RAKNET_BITSTREAM_READ bitStream {dataType} SampBitStreamDataType.Short
+        int dialogStyle = SAMP_RAKNET_BITSTREAM_READ bitStream {dataType} SampBitStreamDataType.Byte
+        SAMP_ADD_MESSAGE_TO_CHAT {format} "DialogID=%hu , DialogStyle=%hhu" {color} 0xFF00FF00 {args} dialogID dialogStyle
+            
+        strLen = SAMP_RAKNET_BITSTREAM_READ bitStream {dataType} SampBitStreamDataType.Byte
+        SAMP_RAKNET_BITSTREAM_READ_ARRAY bitStream {buffer} strBuf {size} strLen
+        WRITE_MEMORY_WITH_OFFSET {address} strBuf {offset} strLen {size} 1 {value} 0 // assure the end of the string is a null terminator
+        SAMP_ADD_MESSAGE_TO_CHAT {format} "DialogTitle=%s" {color} 0xFF00FF00 {args} strBuf
+            
+        strLen = SAMP_RAKNET_BITSTREAM_READ bitStream {dataType} SampBitStreamDataType.Byte
+        SAMP_RAKNET_BITSTREAM_READ_ARRAY bitStream {buffer} strBuf {size} strLen
+        WRITE_MEMORY_WITH_OFFSET {address} strBuf {offset} strLen {size} 1 {value} 0 // assure the end of the string is a null terminator
+        SAMP_ADD_MESSAGE_TO_CHAT {format} "DialogButton1Text=%s" {color} 0xFF00FF00 {args} strBuf
+            
+        strLen = SAMP_RAKNET_BITSTREAM_READ bitStream {dataType} SampBitStreamDataType.Byte
+        SAMP_RAKNET_BITSTREAM_READ_ARRAY bitStream {buffer} strBuf {size} strLen
+        WRITE_MEMORY_WITH_OFFSET {address} strBuf {offset} strLen {size} 1 {value} 0 // assure the end of the string is a null terminator
+        SAMP_ADD_MESSAGE_TO_CHAT {format} "DialogButton2Text=%s" {color} 0xFF00FF00 {args} strBuf
+            
+        SAMP_RAKNET_BITSTREAM_DECODE_COMPRESSED_STRING bitStream {buffer} strBuf {buffersize} 4097
+        SAMP_ADD_MESSAGE_TO_CHAT {format} "DialogInfo=%s" {color} 0xFF00FF00 {args} strBuf
+
+        FREE_MEMORY {address} strBuf
+        RAKNET_BIT_STREAM_RESET_READ_POINTER bitStream // This assures that RakNet will read the entire data once the detour finishes
+    end
+RAKNET_HOOK_RETURN {unblockData} true // end this callback and allow RakNet to process the data

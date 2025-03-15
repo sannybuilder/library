@@ -3788,7 +3788,7 @@ export const SampBitStreamDataType = {
   "Int": 3,
   "Float": 4,
   "Array": 5,
-  "BitStream": 6,
+  "Bitstream": 6,
   "int8": 0,
   "int16": 2,
   "int32": 3

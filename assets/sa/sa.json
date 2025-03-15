@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742019921876,
-    "version": "0.903",
+    "last_update": 1742054495004,
+    "version": "0.904",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -65020,351 +65020,511 @@
           "short_desc": "Emulates the BitStream's data like an Incoming Packet"
         },
         {
-          "id": "0BF8",
-          "name": "RAKNET_GET_RPC_NAME",
-          "num_params": 2,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
+              "name": "id",
               "type": "int"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "name",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0BF8",
+          "name": "SAMP_RAKNET_GET_RPC_NAME",
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Returns a pointer to the RPC ID's Name",
+          "class": "RakNet",
+          "member": "GetRpcName"
         },
         {
-          "id": "0BF9",
-          "name": "RAKNET_GET_PACKET_NAME",
-          "num_params": 2,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
+              "name": "id",
               "type": "int"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "name",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0BF9",
+          "name": "SAMP_RAKNET_GET_PACKET_NAME",
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Returns a pointer to the Packet ID's Name",
+          "class": "RakNet",
+          "member": "GetPacketName"
         },
         {
           "id": "0BFA",
-          "name": "SAMP_PUSH_VARS",
-          "num_params": 0
+          "name": "SF_PUSH_LOCAL_VARIABLES",
+          "num_params": 0,
+          "short_desc": "Saves the values ​​of all local variables from the currently executing thread (Main Thread or a Function) to a separate memory that can be recovered later on by SF_POP_LOCAL_VARIABLES",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "PushLocalVars"
         },
         {
           "id": "0BFB",
-          "name": "SAMP_POP_VARS",
-          "num_params": 0
+          "name": "SF_POP_LOCAL_VARIABLES",
+          "num_params": 0,
+          "class": "Sf",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "PopLocalVars",
+          "short_desc": "Restores all previously saved local variables by SF_PUSH_LOCAL_VARIABLES to the local variables of the currently executing thread (Main Thread or a Function)"
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
           "id": "0BFC",
-          "name": "SAMP_SET_GLOBAL_VAR",
+          "name": "SF_SET_CUSTOM_GLOBAL_VARIABLE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the value of the custom global variable with name",
+          "class": "Sf",
+          "member": "SetCustomGlobalVar"
         },
         {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
           "id": "0BFD",
-          "name": "SAMP_GET_GLOBAL_VAR",
+          "name": "SF_GET_CUSTOM_GLOBAL_VARIABLE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
+          "class": "Sf",
+          "member": "GetCustomGlobalVar",
+          "short_desc": "Returns the value of the custom global variable with name"
+        },
+        {
+          "output": [
+            {
+              "name": "tickCount",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0BFE",
+          "name": "SF_GET_TICK_COUNT",
+          "num_params": 1,
+          "short_desc": "Returns the OS's current uptime in milliseconds. Recommended substitute for TIMERA and TIMERB when requiring precise timing operations",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "GetTickCount"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "fromCoordX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0BFE",
-          "name": "SAMP_GET_TICK_COUNT",
-          "num_params": 1,
-          "input": [
+              "name": "fromCoordY",
+              "type": "float"
+            },
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "fromCoordZ",
+              "type": "float"
+            },
+            {
+              "name": "toCoordX",
+              "type": "float"
+            },
+            {
+              "name": "toCoordY",
+              "type": "float"
+            },
+            {
+              "name": "toCoordZ",
+              "type": "float"
+            },
+            {
+              "name": "checkBuildings",
+              "type": "bool"
+            },
+            {
+              "name": "checkCars",
+              "type": "bool"
+            },
+            {
+              "name": "checkChars",
+              "type": "bool"
+            },
+            {
+              "name": "checkObjects",
+              "type": "bool"
+            },
+            {
+              "name": "checkParticles",
+              "type": "bool"
+            },
+            {
+              "name": "seeThrough",
+              "type": "bool"
+            },
+            {
+              "name": "ignoreCameras",
+              "type": "bool"
             }
-          ]
-        },
-        {
+          ],
+          "output": [
+            {
+              "name": "colPointPtr",
+              "type": "any",
+              "source": "var_any"
+            },
+            {
+              "name": "entityPtr",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
           "id": "0BFF",
-          "name": "SAMP_PROCESS_LINE_OF_SIGHT",
+          "name": "SF_PROCESS_LINE_OF_SIGHT",
           "num_params": 15,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
-            },
-            {
-              "name": "_p10",
-              "type": "int"
-            },
-            {
-              "name": "_p11",
-              "type": "int"
-            },
-            {
-              "name": "_p12",
-              "type": "int"
-            },
-            {
-              "name": "_p13",
-              "type": "int"
-            },
-            {
-              "name": "_p14",
-              "type": "int"
-            },
-            {
-              "name": "_p15",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "ProcessLineOfSight",
+          "short_desc": "Checks for collisions using flags from the start of the vector to its end"
         },
         {
+          "input": [
+            {
+              "name": "number",
+              "type": "any"
+            }
+          ],
+          "output": [
+            {
+              "name": "modulus",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
           "id": "0C00",
-          "name": "SAMP_MATH_ABS",
+          "name": "SF_MATH_MODULUS",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the absolute value of a number (float or integer)",
+          "class": "Sf",
+          "member": "MathModulus",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "radians",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "degrees",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C01",
-          "name": "SAMP_MATH_RADIAN_TO_ANGLE",
+          "name": "SF_MATH_RADIANS_TO_DEGREES",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "MathRadToDeg",
+          "short_desc": "Converts radians to degrees"
         },
         {
+          "input": [
+            {
+              "name": "degrees",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "radians",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C02",
-          "name": "SAMP_MATH_ANGLE_TO_RADIAN",
+          "name": "SF_MATH_DEGREES_TO_RADIANS",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Converts degrees to radians",
+          "class": "Sf",
+          "member": "MathDegToRad",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "radians",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "ratio",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C03",
-          "name": "SAMP_MATH_SINE",
+          "name": "SF_MATH_SINE",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "MathSin",
+          "short_desc": "Returns the sine of the specified radians",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "ratio",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "radians",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C04",
-          "name": "SAMP_MATH_ARCSINE",
+          "name": "SF_MATH_ARCSINE",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the radian arcsine of the specified ratio",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "MathaSin"
         },
         {
+          "input": [
+            {
+              "name": "radians",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "ratio",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C05",
-          "name": "SAMP_MATH_COSINE",
+          "name": "SF_MATH_COSINE",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the cosine of the specified radians",
+          "class": "Sf",
+          "member": "MathCos",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "ratio",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "radians",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C06",
-          "name": "SAMP_MATH_ARCCOSINE",
+          "name": "SF_MATH_ARCCOSINE",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the radian arccosine of the specified ratio",
+          "class": "Sf",
+          "member": "MathaCos",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "radians",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "ratio",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C07",
-          "name": "SAMP_MATH_TANGENT",
+          "name": "SF_MATH_TANGENT",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the tangent of the specified radians",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "MathTan"
         },
         {
+          "input": [
+            {
+              "name": "ratio",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "radians",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C08",
-          "name": "SAMP_MATH_ARCTANGENT",
+          "name": "SF_MATH_ARCTANGENT",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the radian arctangent of the specified ratio",
+          "class": "Sf",
+          "member": "MathaTan",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "coefficient",
+              "type": "float"
+            },
+            {
+              "name": "exponent",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "power",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C09",
-          "name": "SAMP_MATH_POWER",
+          "name": "SF_MATH_POWER",
           "num_params": 3,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "MathPow",
+          "short_desc": "Raises a number to the specified power",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "number",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C0A",
-          "name": "SAMP_MATH_CEIL",
+          "name": "SF_MATH_CEILING",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "MathCeil",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns the rounded-up result the specified number"
         },
         {
-          "id": "0C0B",
-          "name": "SAMP_MATH_FLOOR",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "number",
+              "type": "float"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C0B",
+          "name": "SF_MATH_FLOOR",
+          "num_params": 2,
+          "short_desc": "Returns the rounded-down result the specified number",
+          "class": "Sf",
+          "member": "MathFloor",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0C0C",

@@ -1,0 +1,2 @@
+* This command <span style="color:red">does not</span> trigger all callbacks created by SAMP_RAKNET_HOOK_INCOMING_PACKET.
+* Can be used as a condition which evaluates as true if this Fake Packet Data has been marked by RakNet as a valid data.

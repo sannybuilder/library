@@ -1,0 +1,69 @@
+// Example: Script Intercommunication
+// Allowed two or more scripts to communicate to each other using Custom Global Variables
+
+// at script1.cs
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+const
+    STRMSG = "Hello Script2 How are you?"
+    PASSEDINT = 0xFA2AD
+    PASSEDFLOAT = 444.23
+end
+
+int strBuf = ALLOCATE_MEMORY {size} 415
+SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "myBufGVar" {value} strBuf
+STRING_FORMAT {buffer} strBuf {format} STRMSG
+SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "myIntGVar" {value} PASSEDINT
+SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "myFloatGVar" {value} PASSEDFLOAT
+SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "S1S2ready" {value} true // tell script 2 that the data is ready
+
+while true
+    wait 0
+    bool readAvailable
+    if readAvailable = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} "S2S1ready" // script 2 is telling us to read his data
+    then
+        if readAvailable == true
+        then
+            bool getInt = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} "myIntGVar"
+            bool getFloat = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} "myFloatGVar"
+            print_formatted_now "Received:~n~Int=%d , Float=%f~n~Msg=%s" 2000 getInt getFloat strBuf
+            wait 4000 // give time for the print to disappear so that it will not overwrite newly printed text
+            STRING_FORMAT {buffer} strBuf {format} STRMSG
+            SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "myIntGVar" {value} PASSEDINT
+            SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "myFloatGVar" {value} PASSEDFLOAT
+            SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "S1S2ready" {value} true // tell script 2 that the data is ready
+        end
+    end
+end
+
+// at script2.cs
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+const
+    STRMSG = "I'm Good Script1 Thanks for asking!"
+    PASSEDINT = 0x14AC00
+    PASSEDFLOAT = 1923.44
+end
+
+while true
+    wait 0
+    bool readAvailable
+    if readAvailable = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} "S1S2ready" // script 2 is telling us to read his data
+    then
+        if readAvailable == true
+        then
+            bool getInt = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} "myIntGVar"
+            bool getFloat = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} "myFloatGVar"
+            print_formatted_now "Received:~n~Int=%d , Float=%f~n~Msg=%s" 2000 getInt getFloat strBuf
+            wait 4000 // give time for the print to disappear so that it will not overwrite newly printed text
+            STRING_FORMAT {buffer} strBuf {format} STRMSG
+            SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "myIntGVar" {value} PASSEDINT
+            SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "myFloatGVar" {value} PASSEDFLOAT
+            SF_SET_CUSTOM_GLOBAL_VARIABLE {name} "S2S1ready" {value} true // tell script 1 that the data is ready
+        end
+    end
+end

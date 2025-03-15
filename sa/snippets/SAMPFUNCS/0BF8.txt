@@ -1,0 +1,38 @@
+// Example: Everytime our client transmits/receives an RPC. We Echo the RPC Name to chat
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+// wait for SAMP to fully initialize
+REPEAT
+    wait 100
+UNTIL SAMP_IS_AVAILABLE
+
+if or
+    not SAMP_RAKNET_HOOK_INCOMING_RPC {callbackLabel} @RPC_In
+    not SAMP_RAKNET_HOOK_OUTCOMING_RPC {callbackLabel} @RPC_Out
+then TERMINATE_THIS_CUSTOM_SCRIPT
+end
+
+// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
+SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
+// This part of the main thread will not be reached unless the main thread is resumed
+TERMINATE_THIS_CUSTOM_SCRIPT
+
+:RPC_In // all received RPC will detour here first
+    int packetId = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.PacketId
+    int packetName
+    if packetName = SAMP_RAKNET_GET_RPC_NAME {id} packetId
+    then SAMP_ADD_MESSAGE_TO_CHAT {format} "Received RPC: ID=%d , Name=%s" {color} 0xFF00FFFF {values} packetId packetName
+    else // unknown RPC ID
+    end
+SAMP_RAKNET_HOOK_RETURN {unblockData} true // end this callback and allow RakNet to process the data
+
+:RPC_Out // all transmitting RPC will detour here first
+    int packetId = SAMP_RAKNET_HOOK_GET_PARAM {type} SampRakNetHookParam.PacketId
+    int packetName
+    if packetName = SAMP_RAKNET_GET_RPC_NAME {id} packetId
+    then SAMP_ADD_MESSAGE_TO_CHAT {format} "Transmitting RPC: ID=%d , Name=%s" {color} 0xFF00FFFF {values} packetId packetName
+    else // unknown RPC ID
+    end
+SAMP_RAKNET_HOOK_RETURN {unblockData} true // end this callback and allow RakNet to process the data

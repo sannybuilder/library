@@ -1,0 +1,39 @@
+int iVal, strBuf
+float fVal
+iVal = 0x3AB0 // let's call this value as Int_A
+fVal = 13.42 // let's call this value as Float_A
+ALLOCATE_MEMORY strBuf {size} 70 // lets call the pointer to this allocated memory as Ptr_A
+SF_PUSH_LOCAL_VARIABLES // trigger our savepoint, we call it SavePoint_A
+// do something to iVal, fVal, strBuf
+
+// let's try to overwrite the values
+iVal = 0x98A // let's call this value as Int_B
+fVal = 721.99 // let's call this value as Float_B
+ALLOCATE_MEMORY strBuf {size} 14 // lets call the pointer to this allocated memory as Ptr_B
+SF_PUSH_LOCAL_VARIABLES // trigger our savepoint, we call it SavePoint_B
+// do something to iVal, fVal, strBuf
+
+// let's try to overwrite the values, again!
+iVal = 0x3FB0A1FF // let's call this value as Int_C
+fVal = 1938.0 // let's call this value as Float_C
+ALLOCATE_MEMORY strBuf {size} 400 // lets call the pointer to this allocated memory as Ptr_C
+// do something to iVal, fVal, strBuf
+FREE_MEMORY {address} strBuf // free Ptr_C
+
+// Now let's recover back all the local variables from the previous savepoint
+SF_POP_LOCAL_VARIABLES
+/* expected:
+ *     iVal   = Int_B   = 0x98A
+ *     fVal   = Float_B = 721.99
+ *     strBuf = Ptr_B
+ */
+FREE_MEMORY {address} strBuf // free Ptr_B
+
+// Now let's recover back all the local variables again
+SF_POP_LOCAL_VARIABLES
+/* expected:
+ *     iVal   = Int_A   = 0x3AB0
+ *     fVal   = Float_A = 13.42
+ *     strBuf = Ptr_A
+ */
+FREE_MEMORY {address} strBuf // free Ptr_A

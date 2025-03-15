@@ -1,0 +1,10 @@
+int timeStamp = SF_GET_TICK_COUNT
+timeStamp += 3000 // duration of the wait
+repeat
+    wait 0
+    // do something
+    int lapseOfTime = SF_GET_TICK_COUNT
+    lapseOfTime -= timeStamp
+until lapseOfTime >= 0
+
+// precisely 3 seconds have passed after this block

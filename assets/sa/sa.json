@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742124693600,
-    "version": "0.905",
+    "last_update": 1742139971873,
+    "version": "0.906",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -65774,7 +65774,7 @@
           ],
           "output": [
             {
-              "name": "combinedString",
+              "name": "stringBuffer",
               "type": "string",
               "source": "var_any"
             }
@@ -65784,7 +65784,7 @@
           "num_params": 2,
           "class": "Sf",
           "member": "StrCat",
-          "short_desc": "Appends the string at the end of another string",
+          "short_desc": "Appends the string at the end of the string found at the stringBuffer",
           "attrs": {
             "is_static": true
           }
@@ -65792,7 +65792,7 @@
         {
           "input": [
             {
-              "name": "string",
+              "name": "stringBuffer",
               "type": "string"
             },
             {
@@ -65816,7 +65816,7 @@
           },
           "class": "Sf",
           "member": "StrTok",
-          "short_desc": "Searches a string for any delimiters then replaces the first hit with a NULL terminator (0x00). Returns the (token) pointer next to the first hit. Evaluates as logical true if none of the delimiters were found at the string"
+          "short_desc": "Searches the stringBuffer for any delimiters then replaces the first hit with a NULL terminator (0x00). Returns the (token) pointer next to the first hit. Can be used as a condition which evaluates as logical false if none of the delimiters were found at the string"
         },
         {
           "input": [
@@ -65843,257 +65843,336 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            },
+            {
+              "name": "subString",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "matchAddress",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C18",
-          "name": "SAMP_STRSTR",
+          "name": "SF_FIND_SUBSTRING",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "StrStr",
+          "short_desc": "Returns a pointer to the first occurence of a specified substring in the source string"
         },
         {
+          "input": [
+            {
+              "name": "string",
+              "type": "string"
+            },
+            {
+              "name": "characterList",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "index",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C19",
-          "name": "SAMP_STRCSPN",
+          "name": "SF_COMPLEMENTARY_SPAN_STRING",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Searches the string for any matching characters at the characterList. Returns the character index of the first occurence from the string and evaluates as logical true if used as a condition. Returns the length of the string if nothing matched the characterSet",
+          "class": "Sf",
+          "member": "StrCspn"
         },
         {
+          "input": [
+            {
+              "name": "ascii",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "integer",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C1A",
-          "name": "SAMP_ATOI",
+          "name": "SF_ASCII_TO_INTEGER",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Converts a string into a decimal integer",
+          "class": "Sf",
+          "member": "AtoI",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "ascii",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "float",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0C1B",
-          "name": "SAMP_ATOF",
+          "name": "SF_ASCII_TO_FLOAT",
           "num_params": 2,
+          "short_desc": "Converts a string to a floating point number",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "AtoF"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "integer",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "radix",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
+          "output": [
+            {
+              "name": "stringBuffer",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C1C",
-          "name": "SAMP_ITOA",
+          "name": "SF_INTEGER_TO_ASCII",
           "num_params": 3,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Converts a baseN integer to string and writes it to stringBuffer",
+          "class": "Sf",
+          "member": "ItoA",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "array",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
           "id": "0C1D",
-          "name": "SAMP_GET_ARRAY_ELEMENT_SIZED",
+          "name": "SF_READ_ELEMENT_OF_SIZED_ARRAY",
           "num_params": 4,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Reads the value of the sized array's element at index. The size per element is constrained between 1 to 4",
+          "class": "Sf",
+          "member": "ReadElementOfSizedArray"
         },
         {
+          "input": [
+            {
+              "name": "array",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
           "id": "0C1E",
-          "name": "SAMP_SET_ARRAY_ELEMENT_SIZED",
+          "name": "SF_WRITE_ELEMENT_OF_SIZED_ARRAY",
           "num_params": 4,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "WriteElementOfSizedArray",
+          "short_desc": "Writes the value to the specified element index of a sized array. The size per element is constrained between 1 to 4"
         },
         {
+          "input": [
+            {
+              "name": "array",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "address",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C1F",
-          "name": "SAMP_GET_STRING_ARRAY_ELEMENT",
+          "name": "SF_GET_ELEMENT_POINTER_OF_BUFFER_ARRAY",
           "num_params": 4,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to the element of an array of sized buffers using its element index",
+          "class": "Sf",
+          "member": "GetElementPointerOfBufferArray",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "array",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "string",
+              "type": "string"
+            }
+          ],
           "id": "0C20",
-          "name": "SAMP_SET_STRING_ARRAY_ELEMENT",
+          "name": "SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY",
           "num_params": 4,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "WriteStringToElementOfBufferArray",
+          "short_desc": "Writes a string at the buffer element of an array of sized buffers using its element index",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "string1",
+              "type": "string"
+            },
+            {
+              "name": "string2",
+              "type": "string"
+            }
+          ],
           "id": "0C21",
-          "name": "SAMP_STRICMP",
+          "name": "SF_EQUAL_INSENSITIVE_STRINGS",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Evaluates as logical true if both case-insensitive strings are equal",
+          "class": "Sf",
+          "member": "StriEq"
         },
         {
+          "input": [
+            {
+              "name": "binaryString",
+              "type": "string"
+            },
+            {
+              "name": "stringBuffer",
+              "type": "string"
+            },
+            {
+              "name": "bufferSize",
+              "type": "int"
+            }
+          ],
           "id": "0C22",
-          "name": "SAMP_BIN_TO_HEX",
+          "name": "SF_BIN_TO_HEX",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Converts binary text to hexadecimal text and stores at stringBuffer. Can be used as a condition which evaluates as logical false if the bufferSize is not enough to contain the converted hexadecimal text",
+          "class": "Sf",
+          "member": "BintoHex"
         },
         {
-          "id": "0C23",
-          "name": "SAMP_HEX_TO_BIN",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "hexString",
+              "type": "string"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "stringBuffer",
+              "type": "string"
             },
             {
-              "name": "_p3",
+              "name": "bufferSize",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0C23",
+          "name": "SF_HEX_TO_BIN",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Converts hexadecimal text to binary text and stores at stringBuffer. Can be used as a condition which evaluates as logical false if the bufferSize is not enough to contain the converted binary text",
+          "class": "Sf",
+          "member": "HextoBin"
         },
         {
           "id": "0C24",

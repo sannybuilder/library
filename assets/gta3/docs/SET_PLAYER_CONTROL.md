@@ -1,0 +1,3 @@
+This command sets control of the player character. Switching off control will prevent any inputs from having an effect on the player character and the camera that follows the player character. Many effects in the environment occur while the character is frozen, including extinguishing all fires, all pedestrians ignoring the player, and instantly stopping the player vehicle if the player is driving.
+
+Additionally, it makes the player immune to all damage, similar to SET_CHAR_PROOFS with all proofs enabled. Returning control to the player makes it vulnerable to all damage again, even if some proofs were set before the control was taken away.

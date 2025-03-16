@@ -1,0 +1,14 @@
+int binStrBuf = ALLOCATE_MEMORY {size} 20
+int hexStrBuf = ALLOCATE_MEMORY {size} 9 // 4-Byte Hex has a maximum character length of 8 + null terminator
+
+SF_COPY_STRING {destination} hexStrBuf {source} "CB52C"
+if SF_HEX_TO_BIN {hexString} hexStrBuf {stringBuffer} binStrBuf {bufferSize} 20
+then // expected: binStrBuf = "11001011010100101100"
+else // this section will not be executed
+end
+
+SF_COPY_STRING {destination} hexStrBuf {source} "ABCDEF98"
+if SF_HEX_TO_BIN {hexString} hexStrBuf {stringBuffer} binStrBuf {bufferSize} 20
+then // this section will not be executed
+else // allocated memory size for binStrBuf is insufficient to fit the resulting binary string. It requires at least 33 bytes
+end

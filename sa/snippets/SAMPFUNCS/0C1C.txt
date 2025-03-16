@@ -1,0 +1,17 @@
+int strBuf = ALLOCATE_MEMORY {size} 33 // max binary length is 32 + null terminator
+
+const TESTINT = 41534
+
+strBuf = SF_INTEGER_TO_ASCII {integer} TESTINT {radix} 2 // binary
+// expected strBuf = "1010001000111110"
+
+strBuf = SF_INTEGER_TO_ASCII {integer} TESTINT {radix} 8 // octal
+// expected strBuf = "121076"
+
+strBuf = SF_INTEGER_TO_ASCII {integer} TESTINT {radix} 10 // decimal
+// expected strBuf = "41534"
+
+strBuf = SF_INTEGER_TO_ASCII {integer} TESTINT {radix} 16 // hex
+// expected strBuf = "A23E"
+
+FREE_MEMORY {address} strBuf

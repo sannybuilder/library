@@ -1,0 +1,26 @@
+const
+    SIZEPERBUFFER = 46
+    ELEMENTSCOUNT = 10
+end
+int bufSize = SIZEPERBUFFER * ELEMENTSCOUNT
+int arrOfBufs = ALLOCATE_MEMORY {size} bufSize
+
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 0 {size} SIZEPERBUFFER {string} "Script: Hello World!"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 1 {size} SIZEPERBUFFER {string} "Script: How are you?"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 2 {size} SIZEPERBUFFER {string} "World: I'm a big ball of mess"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 3 {size} SIZEPERBUFFER {string} "World: How about you?"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 4 {size} SIZEPERBUFFER {string} "Script: That's sad to hear"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 5 {size} SIZEPERBUFFER {string} "Script: But I'm Fine, thanks for asking!"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 6 {size} SIZEPERBUFFER {string} "World: That's good to Hear!"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 7 {size} SIZEPERBUFFER {string} "Are you ready to join the mess in this world?"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 8 {size} SIZEPERBUFFER {string} "Script: Heck Yea! Let's do this!"
+SF_WRITE_STRING_TO_ELEMENT_OF_BUFFER_ARRAY {array} arrOfBufs {index} 9 {size} SIZEPERBUFFER {string} "World: I'll be watching you"
+
+int lastIndex = ELEMENTSCOUNT - 1
+for elIndex = 0 to lastIndex
+    int elPtr = SF_GET_ELEMENT_POINTER_OF_BUFFER_ARRAY {array} arrOfBufs {index} elIndex {size} SIZEPERBUFFER
+    PRINT_STRING_NOW {text} elPtr {time} 2000
+    wait 2000
+end
+
+FREE_MEMORY {address} arrOfBufs

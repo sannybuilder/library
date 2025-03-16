@@ -1,0 +1,1 @@
+This command disables all cutscene shadows. By default, the game draws dynamic shadows on cutscene characters, except for special characters `12` and above, during cutscenes. The effect of this command is reset after a cutscene ends.

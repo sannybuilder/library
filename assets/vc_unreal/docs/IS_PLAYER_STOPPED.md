@@ -1,0 +1,1 @@
+This conditional command returns true when the player is "stopped." It behaves almost exactly the same as IS_CHAR_STOPPED except it returns false when the player is jumping without pressing the movement buttons.

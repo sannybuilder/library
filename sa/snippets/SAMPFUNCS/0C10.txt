@@ -1,0 +1,7 @@
+// copy the entire struct of our character to a buffer
+int saveBuf = ALLOCATE_MEMORY {size} 0x7C4
+int myCharPtr = GET_PED_POINTER $scplayer
+SAMP_COPY_MEMORY_BLOCK {destination} saveBuf {source} myCharPtr {size} 0x7C4
+// do something to myCharPtr, saveBuf
+
+FREE_MEMORY {address} saveBuf

@@ -1,0 +1,20 @@
+int strbuf = ALLOCATE_MEMORY {size} 131
+SF_COPY_STRING {destination} strbuf {source} "I like playing SASP, But I also like playing SAMP. What should I choose? OK I'll play SASP First! Then I'll player SAMP afterwards"
+
+int tokenPtr
+if tokenPtr = SF_TOKENIZE_STRING {string} strbuf {delimiters} ".,?!"
+then
+    PRINT_STRING_NOW strbuf {time} 2000 // prints "I like playing SASP"
+    wait 2000
+    repeat
+        // prints the following substrings in series
+        // Initial:       " But I also like playing SAMP"
+        // 1st iteration: " What should I choose"
+        // 2nd iteration: " OK I'll play SASP First"
+        // 3rd iteration: " Then I'll player SAMP afterwards"
+        PRINT_STRING_NOW tokenPtr {time} 2000
+        wait 2000
+    until not tokenPtr = SF_TOKENIZE_STRING {string} strbuf {delimiters} ".,?!"
+end
+
+FREE_MEMORY {address} strBuf

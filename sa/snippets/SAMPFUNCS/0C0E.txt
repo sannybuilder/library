@@ -1,0 +1,28 @@
+// Example: Read the rotation matrix values
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+while true
+    wait 500
+    float randVal
+    int myCharPtr = GET_PED_POINTER $scplayer
+    int rotMtxPtr
+    if rotMtxPtr = SF_READ_MEMORY_OFFSET {address} myCharPtr {offset} 0x14 {size} 4 // pointer to rotation matrix
+    then
+        float rotX_OffsetX = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 0
+        float rotX_OffsetY = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 1
+        float rotX_OffsetZ = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 2
+        float rotX_OffsetW = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 3
+
+        float rotY_OffsetX = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 4
+        float rotY_OffsetY = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 5
+        float rotY_OffsetZ = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 6
+        float rotY_OffsetW = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 7
+
+        float rotZ_OffsetX = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 8
+        float rotZ_OffsetY = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 9
+        float rotZ_OffsetZ = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 10
+        float rotZ_OffsetW = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 11
+    end
+end

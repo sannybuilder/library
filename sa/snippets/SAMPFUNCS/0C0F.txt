@@ -1,0 +1,41 @@
+// Example: Weird Looking Player Character
+// Make our character model look like a messed-up pancake by corrupting the rotation matrix values
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+while true
+    wait 500
+    float randVal
+    int myCharPtr = GET_PED_POINTER $scplayer
+    int rotMtxPtr
+    if rotMtxPtr = SF_READ_MEMORY_OFFSET {address} myCharPtr {offset} 0x14 {size} 4 // pointer to rotation matrix
+    then
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 0 {value} randVal // RotX_OffsetX
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 1 {value} randVal // RotX_OffsetY
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 2 {value} randVal // RotX_OffsetZ
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 3 {value} randVal // RotX_OffsetW
+
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 4 {value} randVal // RotY_OffsetX
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 5 {value} randVal // RotY_OffsetY
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 6 {value} randVal // RotY_OffsetZ
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 7 {value} randVal // RotY_OffsetW
+
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 8 {value} randVal // RotZ_OffsetX
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 9 {value} randVal // RotZ_OffsetY
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 10 {value} randVal // RotZ_OffsetZ
+        float randVal = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -1.0 {max} 1.0
+        SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 11 {value} randVal // RotZ_OffsetW
+    end
+end

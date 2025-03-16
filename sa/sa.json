@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742054495004,
-    "version": "0.904",
+    "last_update": 1742124693600,
+    "version": "0.905",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -65527,251 +65527,320 @@
           }
         },
         {
-          "id": "0C0C",
-          "name": "SAMP_READ_STRUCT_WITH_OFFSET",
-          "num_params": 4,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
+              "name": "address",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "offset",
               "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C0D",
-          "name": "SAMP_WRITE_STRUCT_WITH_OFFSET",
-          "num_params": 4,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C0E",
-          "name": "SAMP_GET_ARRAY_ELEMENT",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C0F",
-          "name": "SAMP_SET_ARRAY_ELEMENT",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C10",
-          "name": "SAMP_MEMCPY",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C11",
-          "name": "SAMP_MEMSET",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C12",
-          "name": "SAMP_MEMCMP",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C13",
-          "name": "SAMP_STRCPY",
-          "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C14",
-          "name": "SAMP_STRCMP",
-          "num_params": 2,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C15",
-          "name": "SAMP_STRCAT",
-          "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "id": "0C16",
-          "name": "SAMP_STRTOK",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
-        },
-        {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
+              "name": "size",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C0C",
+          "name": "SF_READ_MEMORY_OFFSET",
+          "num_params": 4,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Reads the value with size from memory address with offset",
+          "class": "Sf",
+          "member": "MemoryReadOffset"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "offset",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0C0D",
+          "name": "SF_WRITE_MEMORY_OFFSET",
+          "num_params": 4,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Writes the value with size to memory address with offset",
+          "class": "Sf",
+          "member": "MemoryWriteOffset"
+        },
+        {
+          "input": [
+            {
+              "name": "array",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C0E",
+          "name": "SF_READ_ELEMENT_OF_4BYTES_ARRAY",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "ReadElementOf4BytesArray",
+          "short_desc": "Reads the value from the specified element index of an array"
+        },
+        {
+          "input": [
+            {
+              "name": "array",
+              "type": "int"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            },
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ],
+          "id": "0C0F",
+          "name": "SF_WRITE_ELEMENT_OF_4BYTES_ARRAY",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Writes the value to the specified element index of an array",
+          "class": "Sf",
+          "member": "WriteElementOf4BytesArray"
+        },
+        {
+          "input": [
+            {
+              "name": "destination",
+              "type": "int"
+            },
+            {
+              "name": "source",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0C10",
+          "name": "SF_COPY_MEMORY_BLOCK",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "MemCpy",
+          "short_desc": "Copies a memory block with size from source address to destination address"
+        },
+        {
+          "input": [
+            {
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "byteValue",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0C11",
+          "name": "SF_FILL_MEMORY_BLOCK",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Fills a sized memory block with value byte-by-byte",
+          "class": "Sf",
+          "member": "MemFill"
+        },
+        {
+          "input": [
+            {
+              "name": "address1",
+              "type": "int"
+            },
+            {
+              "name": "address2",
+              "type": "int"
+            },
+            {
+              "name": "size",
+              "type": "int"
+            }
+          ],
+          "id": "0C12",
+          "name": "SF_EQUAL_MEMORY_BLOCKS",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "MemEq",
+          "short_desc": "Evaluates as logical true if both memory blocks have the same content"
+        },
+        {
+          "input": [
+            {
+              "name": "destination",
+              "type": "string"
+            },
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "id": "0C13",
+          "name": "SF_COPY_STRING",
+          "num_params": 2,
+          "class": "Sf",
+          "member": "StrCpy",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Copies the string from source to destination"
+        },
+        {
+          "input": [
+            {
+              "name": "string1",
+              "type": "string"
+            },
+            {
+              "name": "string2",
+              "type": "string"
+            }
+          ],
+          "id": "0C14",
+          "name": "SF_EQUAL_STRINGS",
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Evaluates as logical true if both case-sensitive strings are equal",
+          "class": "Sf",
+          "member": "StrEq"
+        },
+        {
+          "input": [
+            {
+              "name": "appendedString",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "combinedString",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C15",
+          "name": "SF_CONCATENATE_STRINGS",
+          "num_params": 2,
+          "class": "Sf",
+          "member": "StrCat",
+          "short_desc": "Appends the string at the end of another string",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "string",
+              "type": "string"
+            },
+            {
+              "name": "delimiters",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "token",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C16",
+          "name": "SF_TOKENIZE_STRING",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "StrTok",
+          "short_desc": "Searches a string for any delimiters then replaces the first hit with a NULL terminator (0x00). Returns the (token) pointer next to the first hit. Evaluates as logical true if none of the delimiters were found at the string"
+        },
+        {
+          "input": [
+            {
+              "name": "string",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "length",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C17",
-          "name": "SF_STRLEN",
-          "num_params": 2
+          "name": "SF_GET_STRING_LENGTH",
+          "num_params": 2,
+          "class": "Sf",
+          "member": "StrLen",
+          "short_desc": "Returns the length of a string",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0C18",

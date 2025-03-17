@@ -1,8 +1,8 @@
 int strbuf = ALLOCATE_MEMORY {size} 131
-SF_COPY_STRING {destination} strbuf {source} "I like playing SASP, But I also like playing SAMP. What should I choose? OK I'll play SASP First! Then I'll player SAMP afterwards"
+SF_STRCPY {destination} strbuf {source} "I like playing SASP, But I also like playing SAMP. What should I choose? OK I'll play SASP First! Then I'll player SAMP afterwards"
 
 int tokenPtr
-if tokenPtr = SF_TOKENIZE_STRING {buffer} strbuf {delimiters} ".,?!"
+if tokenPtr = SF_STRTOK {buffer} strbuf {delimiters} ".,?!"
 then
     PRINT_STRING_NOW strbuf {time} 2000 // prints "I like playing SASP"
     wait 2000
@@ -14,7 +14,7 @@ then
         // 4th iteration: " Then I'll player SAMP afterwards"
         PRINT_STRING_NOW tokenPtr {time} 2000
         wait 2000
-    until not tokenPtr = SF_TOKENIZE_STRING {buffer} tokenPtr {delimiters} ".,?!"
+    until not tokenPtr = SF_STRTOK {buffer} tokenPtr {delimiters} ".,?!"
 end
 
 FREE_MEMORY {address} strBuf

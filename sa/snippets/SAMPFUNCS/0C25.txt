@@ -1,8 +1,8 @@
 int strbuf1 = ALLOCATE_MEMORY {size} 13
 int strbuf2 = ALLOCATE_MEMORY {size} 16
 
-SF_COPY_STRING {destination} strbuf1 {source} "Hello World?"
-SF_COPY_STRING {destination} strbuf2 {source} "Hello World!"
+SF_STRCPY {destination} strbuf1 {source} "Hello World?"
+SF_STRCPY {destination} strbuf2 {source} "Hello World!"
 if SF_EQUAL_SUBSTRINGS {string1} strBuf1 {string2} strBuf2 {length} 11
 then // expected
 else // this section will not be executed
@@ -12,8 +12,8 @@ then // this section will not be executed
 else // expected since the last character ofstrBuf1 is different from strBuf2's last character
 end
 
-SF_COPY_STRING {destination} strbuf1 {source} "Hello World"
-SF_COPY_STRING {destination} strbuf2 {source} "Hello World :-)"
+SF_STRCPY {destination} strbuf1 {source} "Hello World"
+SF_STRCPY {destination} strbuf2 {source} "Hello World :-)"
 if SF_EQUAL_SUBSTRINGS {string1} strBuf1 {string2} strBuf2 {length} 15
 then // expected since the strBuf1's length is only 11, the specified length of 15 got overridden and the rest of the remaining characters at strBuf2 were ignored
 else // this section will not be executed

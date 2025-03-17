@@ -1,13 +1,13 @@
 int binStrBuf = ALLOCATE_MEMORY {size} 33 // 32-bit has a maximum character length of 32 + null terminator
 int hexStrBuf = ALLOCATE_MEMORY {size} 6
 
-SF_COPY_STRING {destination} binStrBuf {source} "10010101110101101"
+SF_STRCPY {destination} binStrBuf {source} "10010101110101101"
 if SF_BIN_TO_HEX {binaryString} binStrBuf {stringBuffer} hexStrBuf {bufferSize} 6
 then // expected: hexStrBuf = "12BAD"
 else // this section will not be executed
 end
 
-SF_COPY_STRING {destination} binStrBuf {source} "10101011110011011110111110011000"
+SF_STRCPY {destination} binStrBuf {source} "10101011110011011110111110011000"
 if SF_BIN_TO_HEX {binaryString} binStrBuf {stringBuffer} hexStrBuf {bufferSize} 6
 then // this section will not be executed
 else // allocated memory size for hexStrBuf is not enough to fit resulting hex string. It requires at least 9 bytes

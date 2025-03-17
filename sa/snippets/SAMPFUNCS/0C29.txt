@@ -1,13 +1,13 @@
 int strbuf = ALLOCATE_MEMORY {size} 14
-SF_SAFELY_COPY_STRING {destination} strbuf {source} "Are You Sure?" {size} 14
+SF_STRNCPY {destination} strbuf {source} "Are You Sure?" {size} 14
 PRINT_STRING_NOW {text} strBuf {time} 2000
 wait 2000
 int subStr
-if subStr = SF_INSENSITIVELY_FIND_SUBSTRING {source} strbuf {substring} "you"
+if subStr = SF_STRISTR {source} strbuf {substring} "you"
 then PRINT_STRING_NOW {text} subStr {time} 2000 // prints "You Sure?"
 else // this section will not execute
 end
-if subStr = SF_INSENSITIVELY_FIND_SUBSTRING {source} strbuf {substring} "World"
+if subStr = SF_STRISTR {source} strbuf {substring} "World"
 then // this section will not execute
 else // strbuf does not have a substring "World" in it
 end

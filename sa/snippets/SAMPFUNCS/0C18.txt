@@ -1,14 +1,14 @@
 int strbuf = ALLOCATE_MEMORY {size} 14
-SF_COPY_STRING {destination} strbuf {source} "Are you sure?"
+SF_STRCPY {destination} strbuf {source} "Are you sure?"
 PRINT_STRING_NOW {text} strBuf {time} 2000
 wait 2000
 int subStr
-if subStr = SF_FIND_SUBSTRING {source} strbuf {substring} "you"
+if subStr = SF_STRSTR {source} strbuf {substring} "you"
 then PRINT_STRING_NOW {text} subStr {time} 2000 // prints "you sure?"
 else // this section will not execute
 end
-if subStr = SF_FIND_SUBSTRING {source} strbuf {substring} "You"
+if subStr = SF_STRSTR {source} strbuf {substring} "You"
 then // this section will not execute
-else // SF_FIND_SUBSTRING command is case-sensitive. "you" != "You"
+else // SF_STRSTR command is case-sensitive. "you" != "You"
 end
 FREE_MEMORY {address} strBuf

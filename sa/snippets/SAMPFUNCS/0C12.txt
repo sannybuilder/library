@@ -1,8 +1,8 @@
 int buf1 = ALLOCATE_MEMORY {size} 14
 int buf2 = ALLOCATE_MEMORY {size} 14
 
-SF_FILL_MEMORY_BLOCK {address} buf1 {byteValue} 0x00 {size} 14
-SF_FILL_MEMORY_BLOCK {address} buf2 {byteValue} 0x00 {size} 14
+SF_MEMFILL {address} buf1 {byteValue} 0x00 {size} 14
+SF_MEMFILL {address} buf2 {byteValue} 0x00 {size} 14
 if SF_EQUAL_MEMORY_BLOCKS {address1} buf1 {address2} buf2 {size} 14
 then // expected
 else // this section will not execute

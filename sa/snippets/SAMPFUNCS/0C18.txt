@@ -7,8 +7,8 @@ if subStr = SF_FIND_SUBSTRING {source} strbuf {substring} "you"
 then PRINT_STRING_NOW {text} subStr {time} 2000 // prints "you sure?"
 else // this section will not execute
 end
-if subStr = SF_FIND_SUBSTRING {source} strbuf {substring} "World"
+if subStr = SF_FIND_SUBSTRING {source} strbuf {substring} "You"
 then // this section will not execute
-else // strbuf does not have a substring "World" in it
+else // SF_FIND_SUBSTRING command is case-sensitive. "you" != "You"
 end
 FREE_MEMORY {address} strBuf

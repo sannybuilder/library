@@ -8,13 +8,13 @@ then
     wait 2000
     repeat
         // prints the following substrings in series
-        // Initial:       " But I also like playing SAMP"
-        // 1st iteration: " What should I choose"
-        // 2nd iteration: " OK I'll play SASP First"
-        // 3rd iteration: " Then I'll player SAMP afterwards"
+        // 1st iteration: " But I also like playing SAMP"
+        // 2nd iteration: " What should I choose"
+        // 3rd iteration: " OK I'll play SASP First"
+        // 4th iteration: " Then I'll player SAMP afterwards"
         PRINT_STRING_NOW tokenPtr {time} 2000
         wait 2000
-    until not tokenPtr = SF_TOKENIZE_STRING {buffer} strbuf {delimiters} ".,?!"
+    until not tokenPtr = SF_TOKENIZE_STRING {buffer} tokenPtr {delimiters} ".,?!"
 end
 
 FREE_MEMORY {address} strBuf

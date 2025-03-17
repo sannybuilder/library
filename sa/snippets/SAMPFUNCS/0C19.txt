@@ -1,11 +1,11 @@
 int strbuf = ALLOCATE_MEMORY {size} 12
 SF_COPY_STRING {destination} strbuf {source} "I'm Human"
 int charIndex
-if charIndex = SF_COMPLEMENTARY_SPAN_STRING{string} strbuf {characterList} "HiJKl"
+if charIndex = SF_COMPLEMENTARY_SPAN_STRING {source} strbuf {characterList} "HiJKl"
 then // expected: charIndex = 4
 else // this section will not execute
 end
-if charIndex = SF_COMPLEMENTARY_SPAN_STRING{string} strbuf {characterList} "hijk"
+if charIndex = SF_COMPLEMENTARY_SPAN_STRING {source} strbuf {characterList} "hijk"
 then // this section will not execute
 else // characters are not found in strbuf
 end

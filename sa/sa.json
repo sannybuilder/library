@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742139971873,
-    "version": "0.906",
+    "last_update": 1742193247426,
+    "version": "0.907",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -65768,15 +65768,12 @@
         {
           "input": [
             {
+              "name": "stringBuffer",
+              "type": "string"
+            },
+            {
               "name": "appendedString",
               "type": "string"
-            }
-          ],
-          "output": [
-            {
-              "name": "stringBuffer",
-              "type": "string",
-              "source": "var_any"
             }
           ],
           "id": "0C15",
@@ -65784,7 +65781,7 @@
           "num_params": 2,
           "class": "Sf",
           "member": "StrCat",
-          "short_desc": "Appends the string at the end of the string found at the stringBuffer",
+          "short_desc": "Appends the appendedString at the end of the string found at the stringBuffer",
           "attrs": {
             "is_static": true
           }
@@ -65874,7 +65871,7 @@
         {
           "input": [
             {
-              "name": "string",
+              "name": "source",
               "type": "string"
             },
             {
@@ -66175,242 +66172,330 @@
           "member": "HextoBin"
         },
         {
+          "input": [
+            {
+              "name": "stringBuffer",
+              "type": "int"
+            },
+            {
+              "name": "source",
+              "type": "int"
+            },
+            {
+              "name": "bufferSize",
+              "type": "int"
+            }
+          ],
           "id": "0C24",
-          "name": "SAMP_STRNCPY",
+          "name": "SF_SAFELY_COPY_STRING",
           "num_params": 3,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Copies the string from source to stringBuffer. The copied string will be truncated if the occupied size is beyond the specified bufferSize",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "StrnCpy"
         },
         {
+          "input": [
+            {
+              "name": "string1",
+              "type": "string"
+            },
+            {
+              "name": "string2",
+              "type": "string"
+            },
+            {
+              "name": "length",
+              "type": "int"
+            }
+          ],
           "id": "0C25",
-          "name": "SAMP_STRNCMP",
+          "name": "SF_EQUAL_SUBSTRINGS",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "StrnEq",
+          "short_desc": "Evaluates as logical true if all characters with length at the beginning of both case-sensitive strings are equal"
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "destination",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C26",
-          "name": "SAMP_STRUPR",
+          "name": "SF_UPPERCASE_STRING",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "StrUpr",
+          "short_desc": "Converts all letters of the source's string into CAPITAL LETTERS stored at destination",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "stringBuffer",
+              "type": "string"
+            },
+            {
+              "name": "appendedString",
+              "type": "string"
+            },
+            {
+              "name": "bufferSize",
+              "type": "int"
+            }
+          ],
           "id": "0C27",
-          "name": "SAMP_STRNCAT",
+          "name": "SF_SAFELY_CONCATENATE_STRINGS",
           "num_params": 3,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Appends a appendedString at the end of the string found at the stringBuffer. The appendedString will be truncated if the overall size is beyond the specified bufferSize",
+          "class": "Sf",
+          "member": "StrnCat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "destination",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C28",
-          "name": "SAMP_STRLWR",
+          "name": "SF_LOWERCASE_STRING",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "member": "StrLwr",
+          "short_desc": "Converts all letters of the source's string into non-capital letters stored at destination",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            },
+            {
+              "name": "subString",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "matchAddress",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C29",
-          "name": "SAMP_STRISTR",
+          "name": "SF_INSENSITIVELY_FIND_SUBSTRING",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to the first case-insensitive occurence of the specified substring in the source string",
+          "class": "Sf",
+          "member": "StriStr"
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            },
+            {
+              "name": "character",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "matchAddress",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C2A",
-          "name": "SAMP_STRCHR",
+          "name": "SF_FIND_ASCII_CHARACTER",
           "num_params": 3,
+          "short_desc": "Returns a pointer to the first occurence of the specified ascii character in the source string",
+          "class": "Sf",
+          "member": "StrChr",
           "attrs": {
-            "is_condition": true
-          },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+            "is_condition": true,
+            "is_static": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            },
+            {
+              "name": "characterList",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "matchAddress",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C2B",
-          "name": "SAMP_STRPBRK",
+          "name": "SF_FIND_CHARACTER_LIST",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Searches the source's string for any matching characters at the characterList. Returns a pointer to the first occurence from the source's string and evaluates as logical true if used as a condition",
+          "class": "Sf",
+          "member": "StrPBrk"
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            },
+            {
+              "name": "character",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "matchAddress",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C2C",
-          "name": "SAMP_STRRCHR",
+          "name": "SF_REVERSE_FIND_ASCII_CHARACTER",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer to the last occurence of the specified ascii character in the source string",
+          "class": "Sf",
+          "member": "StrRChr"
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "destination",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C2D",
-          "name": "SAMP_STRREV",
+          "name": "SF_REVERSE_STRING",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Reverses the source's string, changing the positions of characters, then stores it to the destination",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "StrRev"
         },
         {
+          "input": [
+            {
+              "name": "source",
+              "type": "string"
+            },
+            {
+              "name": "characterList",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "index",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C2E",
-          "name": "SAMP_STRSPN",
+          "name": "SF_SPAN_STRING",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Searches the source's string then returns the index of the first character that does not match any of the specified characters in the characterList and evaluates as logical true if used as a condition. Returns the length of the string if all characters matches any characters at the characterList",
+          "class": "Sf",
+          "member": "StrSpn"
         },
         {
-          "id": "0C2F",
-          "name": "SAMP_STRTOL",
-          "num_params": 4,
           "input": [
             {
-              "name": "_p1",
+              "name": "source",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
+              "name": "radix",
               "type": "int"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "unscannedAddress",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "longInteger",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C2F",
+          "name": "SF_STRING_TO_LONG",
+          "num_params": 4,
+          "class": "Sf",
+          "member": "StrTol",
+          "short_desc": "Ignores any whitespace at the beginning of the source's string, converting the next characters into a baseN longInteger. The scanning stops when it comes across the first non-integer character, stores its pointer to unscannedAddress",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0C30",

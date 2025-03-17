@@ -1,0 +1,13 @@
+int strbuf = ALLOCATE_MEMORY {size} 12
+
+SF_SAFELY_COPY_STRING {buffer} strbuf {source} "Hello" {bufferSize} 12
+SF_SAFELY_CONCATENATE_STRINGS {stringBuffer} strbuf {appendedString} " World" {bufferSize} 12
+PRINT_FORMATTED_NOW {text} strBuf {time} 3000 // prints "Hello World"
+WAIT 2000
+
+SF_SAFELY_COPY_STRING {buffer} strbuf {source} "Hello" {bufferSize} 12
+SF_SAFELY_CONCATENATE_STRINGS {stringBuffer} strbuf {appendedString} " San Andreas" {bufferSize} 12
+PRINT_FORMATTED_NOW {text} strBuf {time} 3000 // prints "Hello San A"
+WAIT 2000
+
+FREE_MEMORY {address} strBuf

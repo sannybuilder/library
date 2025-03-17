@@ -1,0 +1,13 @@
+int strbuf = ALLOCATE_MEMORY {size} 19
+SF_COPY_STRING {destination} strbuf {source} "2324 0x324 MP5 523"
+
+int unscannedPtr, convertedLong
+unscannedPtr, convertedLong = SF_STRING_TO_LONG {source} strbuf {radix} 10 // extract decimal integer
+// expected: convertedLong = 2324
+unscannedPtr, convertedLong = SF_STRING_TO_LONG {source} unscannedPtr {radix} 16 // extract hexadecimal integer
+// expected: convertedLong = 0x324
+unscannedPtr, convertedLong = SF_STRING_TO_LONG {source} unscannedPtr {radix} 10
+// extraction will failed because a non whitespace non-integer character has been encountered and cannot proceed further,
+// when the scan fails, unscannedPtr remains the same while convertedLong = 0 
+
+FREE_MEMORY {address} strBuf

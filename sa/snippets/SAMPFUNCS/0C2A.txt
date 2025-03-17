@@ -1,0 +1,22 @@
+int strbuf = ALLOCATE_MEMORY {size} 36
+SF_SAFELY_COPY_STRING {destination} strbuf {source} "He sells Sea Shells by the Seashore" {size} 36
+PRINT_STRING_NOW {text} strBuf {time} 2000
+wait 2000
+int subStr
+if subStr = SF_FIND_ASCII_CHARACTER {source} strbuf {character} 's'
+then // prints "sells Sea Shells by the Seashore"
+    PRINT_STRING_NOW {text} subStr {time} 2000
+    wait 2000
+else // this section will not execute
+end
+if subStr = SF_FIND_ASCII_CHARACTER {source} strbuf {character} 'S'
+then // prints "Sea Shells by the Seashore"
+    PRINT_STRING_NOW {text} subStr {time} 2000
+    wait 2000
+else // this section will not execute
+end
+if subStr = SF_FIND_ASCII_CHARACTER {source} strbuf {substring} 'Y'
+then // this section will not execute
+else // SF_FIND_ASCII_CHARACTER command is case-sensitive. 'y' != 'Y'
+end
+FREE_MEMORY {address} strBuf

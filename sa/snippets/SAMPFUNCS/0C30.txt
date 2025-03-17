@@ -1,0 +1,24 @@
+int mxbuf = ALLOCATE_MEMORY {size} 36
+int quatbuf = ALLOCATE_MEMORY {size} 16
+
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 0 {value}  0.2232394 // pitchVectorX
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 1 {value}  0.1799574 // pitchVectorY
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 2 {value}  0.9580081 // pitchVectorZ
+
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 3 {value}  0.8151008 // rollVectorX
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 4 {value}  0.5045292 // rollVectorY
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 5 {value} -0.2847120 // rollVectorZ
+
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 6 {value} -0.5345791 // yawVectorX
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 7 {value}  0.8444321 // yawVectorY
+SF_WRITE_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} mxbuf {elementIndex} 8 {value} -0.0340526 // yawVectorZ
+
+quatbuf = SF_MATH_MATRIX_TO_QUATERNION {matrix} mxbuf
+float qW = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} quatbuf {elementIndex} 0
+float qX = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} quatbuf {elementIndex} 1
+float qY = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} quatbuf {elementIndex} 2
+float qZ = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} quatbuf {elementIndex} 3
+PRINT_FORMATTED_NOW "%f %f~n~%f %f" 5000 qW qX qY qZ
+
+FREE_MEMORY {address} mxbuf
+FREE_MEMORY {address} quatbuf

@@ -1,2 +1,2 @@
 * For more info about fontname and flags, read Font API's by Microsoft.
-* RenderFont objects created by this command allocates memory and needs to be manually destroyed by SF_RENDER_DELETE_FONT if not used anymore to free it from memory.
+* RenderFont objects created by this command allocates memory and needs to be manually destroyed by SF_D3D_DELETE_FONT if not used anymore to free it from memory.

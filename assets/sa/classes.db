@@ -23,6 +23,8 @@ Conversation
 Crane
 Credits
 Cutscene
+D3DFont
+D3DTexture
 Debugger
 DecisionMaker
 DecisionMakerChar
@@ -61,9 +63,7 @@ Plane
 Player
 RakNet
 Rc
-RenderFont
 RenderObject
-RenderTexture
 Restart
 Samp
 ScriptFire
@@ -2032,6 +2032,22 @@ Start,02E7,0,0,()
 WasSkipped,056A,1,0,()
 $END
 
+$D3DFont
+$BEGIN
+Create,0B6D,0,0,("fontName%s" "size%i" "flags%i" "handle: D3DFont")
+Delete,0B6E,1,0,("self: D3DFont")
+DrawText,0B6F,0,0,("self: D3DFont" "text%s" "coordX%i" "coordY%i" "color%i")
+GetDrawHeight,0B6C,0,0,("self: D3DFont" "height%i")
+GetDrawWidth,0B6B,0,0,("self: D3DFont" "text%s" "width%i")
+$END
+
+$D3DTexture
+$BEGIN
+Draw,0B73,0,0,("self: D3DTexture" "coordX%i" "coordY%i" "width%i" "height%i" "heading%f" "contrast%i")
+Load,0B71,1,0,("filePath%s" "handle: D3DTexture")
+Release,0B72,1,0,("self: D3DTexture")
+$END
+
 $Debugger
 $BEGIN
 Breakpoint,2100,0,0,("blocking%b" "text%s" "args: arguments")
@@ -2900,15 +2916,6 @@ SetEnableDetonateOnContact,04D6,0,0,("state%b")
 TakeCar,0715,0,0,("player: Player" "vehicle: Car")
 $END
 
-$RenderFont
-$BEGIN
-Create,0B6D,0,0,("fontName%s" "size%i" "flags%i" "handle: RenderFont")
-Delete,0B6E,1,0,("self: RenderFont")
-DrawText,0B6F,0,0,("self: RenderFont" "text%s" "coordX%i" "coordY%i" "color%i")
-GetDrawHeight,0B6C,0,0,("self: RenderFont" "height%i")
-GetDrawWidth,0B6B,0,0,("self: RenderFont" "text%s" "width%i")
-$END
-
 $RenderObject
 $BEGIN
 CreateToCharBone,0E2E,0,0,("char: Char" "modelId: model_object" "pedBone: PedBone" "x%f" "y%f" "z%f" "rx%f" "ry%f" "rz%f" "handle: RenderObject")
@@ -2918,13 +2925,6 @@ SetPosition,0E35,0,0,("self: RenderObject" "x%f" "y%f" "z%f")
 SetRotation,0E36,0,0,("self: RenderObject" "x%f" "y%f" "z%f")
 SetScale,0E37,0,0,("self: RenderObject" "x%f" "y%f" "z%f")
 SetVisible,0E31,0,0,("self: RenderObject" "visible%b")
-$END
-
-$RenderTexture
-$BEGIN
-Draw,0B73,0,0,("self: RenderTexture" "coordX%i" "coordY%i" "width%i" "height%i" "heading%f" "contrast%i")
-Load,0B71,1,0,("filePath%s" "handle: RenderTexture")
-Release,0B72,1,0,("self: RenderTexture")
 $END
 
 $Restart
@@ -3103,20 +3103,29 @@ ArgbToHex,0B67,0,0,("alpha%i" "red%i" "green%i" "blue%i" "color%i")
 AtoF,0C1B,0,0,("ascii%s" "float%f")
 AtoI,0C1A,0,0,("ascii%s" "integer%i")
 BintoHex,0C22,1,0,("binaryString%s" "stringBuffer%s" "bufferSize%i")
+CallGFunc,0C35,1,0,("name%s" "numParam%i" "params: arguments")
 Ceil,0C0A,0,0,("number%f" "result%f")
 ClipboardReadData,0C8E,1,0,("buffer%i" "size%i")
 ClipboardWriteText,0C8D,0,0,("text%s")
 ConsoleLog,0B78,0,0,("format%s" "args: arguments")
 Cos,0C05,0,0,("radians%f" "ratio%f")
+D3DDrawBorderedBox,0B6A,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "color%i" "borderSize%i" "borderColor%i")
+D3DDrawBorderlessBox,0B69,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "color%i")
+D3DDrawLine,0B68,0,0,("fromCoordX%i" "fromCoordY%i" "toCoordX%i" "toCoordY%i" "tickness%i" "color%i")
+D3DDrawPolygon,0B70,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "cornerCount%i" "heading%f" "color%i")
 DegToRad,0C02,0,0,("degrees%f" "radians%f")
 Floor,0C0B,0,0,("number%f" "result%f")
 From2Dto3D,0B8F,0,0,("screenCoordX%i" "screenCoordY%i" "depth%f" "worldCoordX%f" "worldCoordY%f" "worldCoordZ%f")
 From3DTo2D,0B55,1,0,("worldCoordX%f" "worldCoordY%f" "worldCoordZ%f" "screenCoordX%i" "screenCoordY%i")
 FromGameToWinScreen,0B60,0,0,("gameScreenCoordX%f" "gameScreenCoordY%f" "windowScreenCoordX%i" "windowScreenCoordY%i")
 FromWinToGameScreen,0B5F,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i" "gameScreenCoordX%f" "gameScreenCoordY%f")
+GFuncGetOrigin,0C38,1,0,("name%s" "hostThreadAddress%i" "functionAddress%i")
+GFuncRegistered,0C37,1,0,("name%s")
+GFuncRet,0C36,1,0,("numRet%i" "retParams: arguments")
+GFuncUnreg,0C39,0,0,("name%s")
 GetCursorCoord,0B5E,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i")
-GetCustomGlobalVar,0BFD,1,0,("name%s" "value: any")
 GetElementPointerOfBufferArray,0C1F,0,0,("array%i" "index%i" "size%i" "address%i")
+GetGVar,0BFD,1,0,("name%s" "value: any")
 GetScreenRes,0B5A,0,0,("width%i" "height%i")
 GetTickCount,0BFE,0,0,("tickCount%i")
 HexToArgb,0B66,0,0,("color%i" "alpha%i" "red%i" "green%i" "blue%i")
@@ -3140,13 +3149,10 @@ QuatToMatrix,0C31,0,0,("quaternion%i" "matrixBuffer%i")
 RadToDeg,0C01,0,0,("radians%f" "degrees%f")
 ReadElementOf4BytesArray,0C0E,1,0,("array%i" "index%i" "value: any")
 ReadElementOfSizedArray,0C1D,1,0,("array%i" "index%i" "size%i" "value: any")
-RenderDrawBorderedBox,0B6A,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "color%i" "borderSize%i" "borderColor%i")
-RenderDrawBorderlessBox,0B69,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "color%i")
-RenderDrawLine,0B68,0,0,("fromCoordX%i" "fromCoordY%i" "toCoordX%i" "toCoordY%i" "tickness%i" "color%i")
-RenderDrawPolygon,0B70,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "cornerCount%i" "heading%f" "color%i")
+RegGFunc,0C34,1,0,("name%s" "label: label")
 ResumeThread,0BDF,0,0,("threadId%i")
 SetButton,0B56,0,0,("buttonId: Button" "behaviorValue%i")
-SetCustomGlobalVar,0BFC,1,0,("name%s" "value: any")
+SetGVar,0BFC,1,0,("name%s" "value: any")
 Sin,0C03,0,0,("radians%f" "ratio%f")
 StrCat,0C15,0,0,("stringBuffer%s" "appendedString%s")
 StrChr,0C2A,1,0,("source%s" "character%i" "matchAddress%i")
@@ -3156,6 +3162,7 @@ StrEq,0C14,1,0,("string1%s" "string2%s")
 StrLen,0C17,0,0,("string%s" "length%i")
 StrLwr,0C28,0,0,("source%s" "destination%s")
 StrPBrk,0C2B,1,0,("source%s" "characterList%s" "matchAddress%s")
+StrPtr,0C3A,0,0,("string%s")
 StrRChr,0C2C,1,0,("source%s" "character%i" "matchAddress%s")
 StrRev,0C2D,0,0,("source%s" "destination%s")
 StrSpn,0C2E,1,0,("source%s" "characterList%s" "index%i")

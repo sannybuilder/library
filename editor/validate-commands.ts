@@ -27,6 +27,8 @@ import {
   doesSelfArgumentHaveInvalidType,
   doesOutputHaveInvalidSource,
   wrongConstructorType,
+  doesScriptCommandHaveEmptyMember,
+  doesCommandHaveInvalidArguments,
 } from './src/app/utils';
 import { Command, Game, LoadExtensionsResponse, Param } from './src/app/models';
 
@@ -71,6 +73,8 @@ export function run(inputFile: string, game: Game) {
     invalidArgumentWithOperator: doesCommandHaveInvalidArgumentWithOperator,
     invalidSelfType: doesSelfArgumentHaveInvalidType,
     invalidOutputSource: doesOutputHaveInvalidSource,
+    emptyMember: doesScriptCommandHaveEmptyMember,
+    // invalidArguments: doesCommandHaveInvalidArguments,
     // invalidInputSource: doesInputHaveInvalidSource,
   };
 
@@ -85,6 +89,20 @@ export function run(inputFile: string, game: Game) {
         }
       });
       validateFormatting(command, extension.name);
+      
+      if (wrongConstructorType(command, content.classes)) {
+        console.error(
+          `Error: constructor type must match the class type, command: ${command.name}, extension: ${extension.name}`
+        );
+        exitStatus = 1;
+      }
+
+      if (doesCommandHaveInvalidArguments(command, game)) {
+        console.error(
+          `Error: ${translations?.ui?.errors?.command?.['invalidArguments']}, name: ${command.name}, extension: ${extension.name}`
+        );
+        exitStatus = 1;
+      }
     });
   });
 
@@ -165,12 +183,5 @@ export function run(inputFile: string, game: Game) {
         exitStatus = 1;
       }
     });
-
-    if (wrongConstructorType(command, content.classes)) {
-      console.error(
-        `Error: constructor type must match the class type, command: ${command.name}, extension: ${extension}`
-      );
-      exitStatus = 1;
-    }
   }
 }

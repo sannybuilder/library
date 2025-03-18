@@ -3,6 +3,7 @@ import {
   Attribute,
   ClassMeta,
   Command,
+  Game,
   Param,
   Platform,
   PrimitiveType,
@@ -13,6 +14,7 @@ import {
 import { commandParams, inputParams, isOpcode, outputParams } from './command';
 import { isValidIdentifier } from './enum-validation';
 import { HEX_NEGATION } from './hex';
+import { doesGameRequireOpcode } from './game';
 
 export const ATTRIBUTE_RULES: Partial<
   Record<Attribute, { allowed?: Attribute[]; disallowed?: Attribute[] }>
@@ -274,4 +276,31 @@ export function wrongConstructorType(command: Command, classMeta: ClassMeta[]) {
     classMeta.find((c) => c.name === command.class)?.constructable &&
     command.output?.[0]?.type !== command.class
   );
+}
+
+export function doesCommandHaveInvalidArguments(command: Command, game: Game) {
+  if (!doesGameRequireOpcode(game)) {
+    return false;
+  }
+  const count = commandParams(command).reduce(
+    (m, v) => m + (v.type === PrimitiveType.arguments ? 1 : 0),
+    0
+  );
+  if (count == 0) {
+    return false;
+  }
+  if (count > 1) {
+    return true;
+  }
+
+  const input = inputParams(command);
+  const output = outputParams(command);
+
+  const isLast = (params: Param[]) =>
+    params.length && params[params.length - 1].type === PrimitiveType.arguments;
+
+  if (isLast(output) || isLast(input)) {
+    return false;
+  }
+  return true;
 }

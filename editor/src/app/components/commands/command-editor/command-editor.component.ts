@@ -65,7 +65,7 @@ import {
   doesCommandHaveInvalidArgumentWithOperator,
   doesSelfArgumentHaveInvalidType,
   doesOutputHaveInvalidSource,
-  primitiveTypes,
+  doesCommandHaveInvalidArguments,
   getDefaultExtension,
   doesCommandHaveEmptyCallingConvention,
   filterAttributes,
@@ -97,7 +97,8 @@ type ErrorType =
   | 'invalidArgumentWithOperator'
   | 'invalidSelfType'
   | 'invalidOutputSource'
-  | 'emptyMember';
+  | 'emptyMember'
+  | 'invalidArguments';
 
 const DEFAULT_INPUT_SOURCE = SourceType.any;
 const DEFAULT_OUTPUT_SOURCE = SourceType.var_any;
@@ -189,6 +190,7 @@ export class CommandEditorComponent implements OnInit {
     invalidSelfType: false,
     invalidOutputSource: false,
     emptyMember: false,
+    invalidArguments: false,
   };
   errorMessages: string[] = [];
   extensionNames: string[] = [];
@@ -352,6 +354,7 @@ export class CommandEditorComponent implements OnInit {
     invalidOutputSource: this.invalidOutputSourceError,
     emptyCallingConvention: this.emptyCallingConventionError,
     emptyMember: this.emptyMemberError,
+    invalidArguments: this.invalidArgumentsError,
   };
 
   isDirty: boolean;
@@ -1022,5 +1025,12 @@ export class CommandEditorComponent implements OnInit {
         doesNativeFunctionHaveNoName(this.command)) ||
       (this.viewContext === ViewContext.Script &&
         doesScriptCommandHaveEmptyMember(this.command));
+  }
+
+  private invalidArgumentsError() {
+    this.errors.invalidArguments = doesCommandHaveInvalidArguments(
+      this.command,
+      this.game
+    );
   }
 }

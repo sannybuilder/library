@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742316942531,
-    "version": "0.909",
+    "last_update": 1742370089258,
+    "version": "0.910",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -66834,9 +66834,16 @@
               "type": "string"
             }
           ],
+          "output": [
+            {
+              "name": "address",
+              "type": "string",
+              "source": "var_any"
+            }
+          ],
           "id": "0C3A",
           "name": "SF_STRING_POINTER",
-          "num_params": 1,
+          "num_params": 2,
           "class": "Sf",
           "short_desc": "Returns a pointer to the specified string. Commonly used on string constants",
           "member": "StrPtr",
@@ -67144,200 +67151,232 @@
           "member": "SetText"
         },
         {
-          "id": "0C48",
-          "name": "SAMP_CREATE_TEXTDRAW",
-          "num_params": 4,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "text",
+              "type": "string"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "coordX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "coordY",
+              "type": "float"
             }
-          ]
+          ],
+          "id": "0C48",
+          "name": "SAMP_MODIFY_TEXTDRAW",
+          "num_params": 4,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Modifies a textdraw with the specified parameters, creating it if it doesn't exist",
+          "class": "Samp",
+          "member": "ModifyTextDraw"
         },
         {
+          "input": [
+            {
+              "name": "textDrawId",
+              "type": "int"
+            },
+            {
+              "name": "isVisible",
+              "type": "bool"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            },
+            {
+              "name": "width",
+              "type": "float"
+            },
+            {
+              "name": "height",
+              "type": "float"
+            }
+          ],
           "id": "0C49",
           "name": "SAMP_SET_TEXTDRAW_BOX",
           "num_params": 5,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the parameters of the \"box\" (rectangle) of the text draw",
+          "class": "Samp",
+          "member": "SetTextDrawBox"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "alignment",
+              "type": "SampTextDrawAlignment"
+            }
+          ],
           "id": "0C4A",
-          "name": "SAMP_SET_TEXTDRAW_ALIGN",
+          "name": "SAMP_SET_TEXTDRAW_ALIGNMENT",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
+          "short_desc": "Sets the alignment of the text in the textdraw",
+          "class": "Samp",
+          "member": "SetTextDrawAlignment"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "isProportional",
+              "type": "bool"
             }
-          ]
-        },
-        {
+          ],
           "id": "0C4B",
-          "name": "SAMP_SET_TEXTDRAW_PROPORTIONAL",
+          "name": "SAMP_SET_TEXTDRAW_PROPORTIONALITY",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
+          "class": "Samp",
+          "short_desc": "Sets wether the text scaling status is proportional to the text draw or not",
+          "member": "SetTextDrawProportionality"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "style",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0C4C",
           "name": "SAMP_SET_TEXTDRAW_STYLE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
+          "short_desc": "Sets the text draw style",
+          "class": "Samp",
+          "member": "SetTextDrawStyle"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "tickness",
+              "type": "int"
+            },
+            {
+              "name": "color",
               "type": "int"
             }
-          ]
-        },
-        {
+          ],
           "id": "0C4D",
           "name": "SAMP_SET_TEXTDRAW_SHADOW",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets a shadow on the text draw",
+          "class": "Samp",
+          "member": "SetTextDrawShadow"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            },
+            {
+              "name": "tickness",
+              "type": "int"
+            },
+            {
+              "name": "color",
+              "type": "int"
+            }
+          ],
           "id": "0C4E",
           "name": "SAMP_SET_TEXTDRAW_OUTLINE",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the outline of the text draw",
+          "class": "Samp",
+          "member": "SetTextDrawOutline"
         },
         {
+          "input": [
+            {
+              "name": "textDrawId",
+              "type": "int"
+            },
+            {
+              "name": "model",
+              "type": "model_any"
+            },
+            {
+              "name": "rotPitch",
+              "type": "float"
+            },
+            {
+              "name": "rotRoll",
+              "type": "float"
+            },
+            {
+              "name": "rotYaw",
+              "type": "float"
+            },
+            {
+              "name": "camZoomRange",
+              "type": "float"
+            },
+            {
+              "name": "primaryColor",
+              "type": "int"
+            },
+            {
+              "name": "secondaryColor",
+              "type": "int"
+            }
+          ],
           "id": "0C4F",
           "name": "SAMP_SET_TEXTDRAW_MODEL",
           "num_params": 8,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets the model (object, auto) of the text draw for style 5",
+          "class": "Sf",
+          "member": "SetTextDrawModel"
         },
         {
           "id": "0C50",
@@ -68365,26 +68404,33 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "buffer",
+              "type": "int"
+            },
+            {
+              "name": "bufferSize",
+              "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "D3DTexture",
+              "source": "var_any"
+            }
+          ],
           "id": "0C8C",
           "name": "SF_D3D_LOAD_TEXTURE_FROM_FILE_IN_MEMORY",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Loads a texture from a file located in memory buffer",
+          "class": "D3DTexture",
+          "member": "LoadTextureFromFileMemory"
         },
         {
           "input": [

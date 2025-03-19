@@ -1,7 +1,7 @@
 // Example: Shared Global Function across scripts with Interlocking Support between Scripts
 
 // ~~~~~~~~~~~~~~~~~~~Script1.cs~~~~~~~~~~~~~~~~~~~
-{$USE CLEO}
+{$CLEO}
 {$USE SAMPFUNCS}
 NOP
 
@@ -9,46 +9,43 @@ const
     SCRIPT_TEXTNAME = "Script1"
     
     GFUNC_DOARITHMETIC = "DoArithmetic"
-    HFUNC_PRINTSCOPE = "PrintScope"
-    HFUNC_SETMYHPGETMYPOSITION = "SetMyHPGetMyPosition"
+    GFUNC_SETMYHPGETMYPOSITION = "SetMyHPGetMyPosition"
 
     GVAR_PRINTMUTEX = "PrintMutEx"
 end
 
+// initialize hosted global functions
+if SF_IS_CUSTOM_GLOBAL_FUNCTION_REGISTERED {name} GFUNC_SETMYHPGETMYPOSITION
+then SF_UNREGISTER_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_SETMYHPGETMYPOSITION
+end
+SF_REGISTER_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_SETMYHPGETMYPOSITION {label} @GlobalFunc_SetMyHPGetMyPosition
+    //
+
+int strScriptName
+SF_STRING_POINTER {var_storeAddressTo} strScriptName {string} SCRIPT_TEXTNAME
+
 while true
     wait 0
-    bool printMutEx
+    int printMutEx
     if and
         printMutEx = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} GVAR_PRINTMUTEX
         printMutEx == 0 // Script1's turn to print texts
     then
-        float randVal1 = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -10.0 {max} 10.0
-        float randVal2 = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -10.0 {max} 10.0
+        float randVal1 = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -10.0 {max}  0.0
+        float randVal2 = GENERATE_RANDOM_FLOAT_IN_RANGE {min}   0.0 {max} 10.0
         float retSum, retDiff, retProduct, retQuotient
-        retSum, retDiff, retProduct, retQuotient = SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_DOARITHMETIC {numParams} 2 {value1} randVal1 {value2} randVal2
-        PRINT_FORMATTED_NOW {format} "%s: GlobalFunc_DoArithmetic~n~value1=%.2f value2=%.2f~n~Sum=%.2f Diff=%.2f~n~Product=%.2f Quotient=%.2f" {time} 3000 {args} SCRIPT_TEXTNAME randVal1 randVal2 retSum retDiff retProduct retQuotient
-        wait 3000
-
-        // Calls a Hybridfunction using normal CLEO call
-        CLEO_CALL @HybridFunc_PrintScope {numParams} 1 {scriptName} SCRIPT_TEXTNAME
-        retX, retY, retZ = CLEO_CALL @HybridFunc_SetMyHPGetMyPosition {numParams} 2 {health} 25 {armor} 100
-        PRINT_FORMATTED_NOW {format} "%s: HybridFunc_SetMyHPGetMyPosition~n~Normal Call Returned~n~x=%.2f y=%.2f z=%.2f" {time} 2000 {args} SCRIPT_TEXTNAME retX retY retZ
-        wait 2000
-        
-        float retX, retY, retZ
-
-        // Calls a Hybridfunction as a Global Function
-        if SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_PRINTSCOPE {numParams} 1 {scriptName} SCRIPT_TEXTNAME
-        then // name is registered globally
-            PRINT_FORMATTED_NOW {format} "%s: HybridFunc_PrintScope~n~Executed using SF_CALL_CUSTOM_GLOBAL_FUNCTION" {time} 2000 {args} SCRIPT_TEXTNAME
-            wait 2000
+        if SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_DOARITHMETIC {numParams} 2 {value1} randVal1 {value2} randVal2 {retSum} retSum {retDiff} retDiff {retProduct} retProduct {retQuotient} retQuotient
+        then
+            PRINT_FORMATTED_NOW {format} "%s: GlobalFunc_DoArithmetic~n~value1=%.2f value2=%.2f~n~Sum=%.2f Diff=%.2f~n~Product=%.2f Quotient=%.2f" {time} 3000 {args} strScriptName randVal1 randVal2 retSum retDiff retProduct retQuotient
+            wait 3000
         else // name isn't registered globally
         end
 
-        if retX, retY, retZ = SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_SETMYHPGETMYPOSITION {numParams} 2 {health} 50 {armor} 75
+        float retX, retY, retZ
+        if SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_SETMYHPGETMYPOSITION {numParams} 2 {health} 50 {armor} 100 {retCoordX} retX {retCoordY} retY {retCoordZ} retZ
         then // name is registered globally
-            PRINT_FORMATTED_NOW {format} "%s: HybridFunc_SetMyHPGetMyPosition~n~Global Call Returned~n~x=%.2f y=%.2f z=%.2f" {time} 2000 {args} SCRIPT_TEXTNAME retX retY retZ
-            wait 2000
+            PRINT_FORMATTED_NOW {format} "%s: HybridFunc_SetMyHPGetMyPosition~n~x=%.2f y=%.2f z=%.2f" {time} 3000 {args} strScriptName retX retY retZ
+            wait 3000
         else // name isn't registered globally
         end
 
@@ -57,8 +54,32 @@ while true
     end
 end
 
+:GlobalFunc_SetMyHPGetMyPosition
+    var 0@:int , 1@:int
+
+    if IS_CHAR_HEALTH_GREATER $scplayer {health} 0 // not IS_CHAR_DEAD {handle} $scplayer
+    then
+        SET_CHAR_HEALTH $scplayer {health} 0@
+        
+        var 31@:int
+        31@ = get_char_armour $scplayer
+        1@ -= 31@
+        if 1@ < 0
+        then
+            1@ *= -1
+            damage_char $scplayer {amount} 1@ {damageArmour} true
+        else if 1@ > 0
+        then ADD_ARMOUR_TO_CHAR $scplayer {amount} 1@
+        end
+        end
+        
+        var 31@:float
+        29@, 30@, 31@ = GET_CHAR_COORDINATES $scplayer
+    end
+SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 3 {xyz} 29@ 30@ 31@
+
 // ~~~~~~~~~~~~~~~~~~~Script2.cs~~~~~~~~~~~~~~~~~~~
-{$USE CLEO}
+{$CLEO}
 {$USE SAMPFUNCS}
 NOP
 
@@ -66,58 +87,47 @@ const
     SCRIPT_TEXTNAME = "Script2"
     
     GFUNC_DOARITHMETIC = "DoArithmetic"
-    HFUNC_PRINTSCOPE = "PrintScope"
-    HFUNC_SETMYHPGETMYPOSITION = "SetMyHPGetMyPosition"
+    GFUNC_SETMYHPGETMYPOSITION = "SetMyHPGetMyPosition"
 
     GVAR_PRINTMUTEX = "PrintMutEx"
 end
 
-    // initialize global functions
+// initialize hosted global functions
 if SF_IS_CUSTOM_GLOBAL_FUNCTION_REGISTERED {name} GFUNC_DOARITHMETIC
 then SF_UNREGISTER_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_DOARITHMETIC
 end
-if SF_IS_CUSTOM_GLOBAL_FUNCTION_REGISTERED {name} HFUNC_PRINTSCOPE
-then SF_UNREGISTER_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_PRINTSCOPE
-end
-if SF_IS_CUSTOM_GLOBAL_FUNCTION_REGISTERED {name} HFUNC_SETMYHPGETMYPOSITION
-then SF_UNREGISTER_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_SETMYHPGETMYPOSITION
-end
 SF_REGISTER_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_DOARITHMETIC {label} @GlobalFunc_DoArithmetic
-SF_REGISTER_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_PRINTSCOPE {label} @HybridFunc_PrintScope
-SF_REGISTER_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_SETMYHPGETMYPOSITION {label} @HybridFunc_SetMyHPGetMyPosition
     //
 
-    // initialize global variables
+    // initialize hosted global variables
 SF_SET_CUSTOM_GLOBAL_VARIABLE {name} GVAR_PRINTMUTEX {value} 0
     //
 
+int strScriptName
+SF_STRING_POINTER {var_storeAddressTo} strScriptName {string} SCRIPT_TEXTNAME
+
 while true
     wait 0
-    bool printMutEx
+    int printMutEx
     if and
         printMutEx = SF_GET_CUSTOM_GLOBAL_VARIABLE {name} GVAR_PRINTMUTEX
         printMutEx == 1 // Script2's turn to print texts
     then
         float retX, retY, retZ
-
-        // Calls a Hybridfunction using normal CLEO call
-        CLEO_CALL @HybridFunc_PrintScope {numParams} 1 {scriptName} SCRIPT_TEXTNAME
-        retX, retY, retZ = CLEO_CALL @HybridFunc_SetMyHPGetMyPosition {numParams} 2 {health} 25 {armor} 100
-        PRINT_FORMATTED_NOW {format} "%s: HybridFunc_SetMyHPGetMyPosition~n~Normal Call Returned~n~x=%.2f y=%.2f z=%.2f" {time} 2000 {args} SCRIPT_TEXTNAME retX retY retZ
-        wait 2000
-
-        // Calls a Hybridfunction as a Global Function
-        if SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_PRINTSCOPE {numParams} 1 {scriptName} SCRIPT_TEXTNAME
+        if SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_SETMYHPGETMYPOSITION {numParams} 2 {health} 100 {armor} 50 {retCoordX} retX {retCoordY} retY {retCoordZ} retZ
         then // name is registered globally
-            PRINT_FORMATTED_NOW {format} "%s: HybridFunc_PrintScope~n~Executed using SF_CALL_CUSTOM_GLOBAL_FUNCTION" {time} 2000 {args} SCRIPT_TEXTNAME
-            wait 2000
+            PRINT_FORMATTED_NOW {format} "%s: HybridFunc_SetMyHPGetMyPosition~n~x=%.2f y=%.2f z=%.2f" {time} 3000 {args} strScriptName retX retY retZ
+            wait 3000
         else // name isn't registered globally
         end
-
-        if retX, retY, retZ = SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} HFUNC_SETMYHPGETMYPOSITION {numParams} 2 {health} 50 {armor} 75
-        then // name is registered globally
-            PRINT_FORMATTED_NOW {format} "%s: HybridFunc_SetMyHPGetMyPosition~n~Global Call Returned~n~x=%.2f y=%.2f z=%.2f" {time} 2000 {args} SCRIPT_TEXTNAME retX retY retZ
-            wait 2000
+        
+        float randVal1 = GENERATE_RANDOM_FLOAT_IN_RANGE {min}   0.0 {max} 10.0
+        float randVal2 = GENERATE_RANDOM_FLOAT_IN_RANGE {min} -10.0 {max}  0.0
+        float retSum, retDiff, retProduct, retQuotient
+        if SF_CALL_CUSTOM_GLOBAL_FUNCTION {name} GFUNC_DOARITHMETIC {numParams} 2 {value1} randVal1 {value2} randVal2 {retSum} retSum {retDiff} retDiff {retProduct} retProduct {retQuotient} retQuotient
+        then
+            PRINT_FORMATTED_NOW {format} "%s: GlobalFunc_DoArithmetic~n~value1=%.2f value2=%.2f~n~Sum=%.2f Diff=%.2f~n~Product=%.2f Quotient=%.2f" {time} 3000 {args} strScriptName randVal1 randVal2 retSum retDiff retProduct retQuotient
+            wait 3000
         else // name isn't registered globally
         end
 
@@ -127,47 +137,16 @@ while true
 end
 
 :GlobalFunc_DoArithmetic
-    var 0@:float , 1@:float
-    float sum = 0@
-    sum += 1@
-    float diff = 0@
-    diff -= 1@
-    float product = 0@
-    product *= 1@
-    float quotient
+    var 0@:float , 1@:float, 28@:float, 29@:float , 30@:float , 31@:float
+    28@ = 0@
+    28@ += 1@
+    29@ = 0@
+    29@ -= 1@
+    30@ = 0@
+    30@ *= 1@
     if 1@ <> 0.0
     then
-        quotient = 0@
-        quotient /= 1@
+        31@ = 0@
+        31@ /= 1@
     end
-SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 4 {sum} sum {diff} diff {product} product {quotient} quotient
-
-:HybridFunc_PrintScope
-    // do something
-    
-if not SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 0 // <- immediately returns if this function was called via SF_CALL_CUSTOM_GLOBAL_FUNCTION
-then
-    PRINT_FORMATTED_NOW {format} "%s: HybridFunc_PrintScope~n~Executed using CLEO_CALL" {time} 2000 {scriptName} 0@
-    wait 3000
-    CLEO_RETURN {numRet} 0
-else // this section isn't reached as well
-end
-// this part will not be reached in any way
-
-:HybridFunc_SetMyHPGetMyPosition
-    var 0@:int , 1@:int
-    float x, y, z
-
-    if IS_CHAR_HEALTH_GREATER $scplayer {health} 0 // not IS_CHAR_DEAD {handle} $scplayer
-    then
-        SET_CHAR_HEALTH $scplayer {health} 0@
-        int missingArmor = 100 - 1@
-        ADD_ARMOUR_TO_CHAR $scplayer {amount} missingArmor
-
-        x, y, z = GET_CHAR_COORDINATES $scplayer
-    end
-
-    // hybrid function's returning statement must have these two commands in this order
-SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 3 {xyz} x y z
-CLEO_RETURN {numRet} 3 {xyz} x y z
-    //
+SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 4 {sum} 28@ {diff} 29@ {product} 30@ {quotient} 31@

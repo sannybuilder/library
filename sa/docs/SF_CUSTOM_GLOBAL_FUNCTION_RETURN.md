@@ -1,1 +1,0 @@
-If the executing function was not called via SF_CALL_CUSTOM_GLOBAL_FUNCTION then this command does nothing (will not return) and will be evaluated as logical false when used as a condition

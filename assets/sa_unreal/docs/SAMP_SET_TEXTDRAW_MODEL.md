@@ -1,0 +1,3 @@
+* This command only changes the parameters of how the model is projected as a TextDraw Model and does not implicitly change the TextDraw's Style into a model style (style = 5).
+* You will only see the effect of this command when the TextDraw Style = 5 . You can explicitly change the TextDraw Style by executing SAMP_SET_TEXTDRAW_STYLE command with style = 5.
+* primaryColor and primaryColor must be in 0xAARRGGBB format where A = Alpha, R = Red, G = Green, B = Blue.

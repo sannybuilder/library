@@ -3930,3 +3930,8 @@ export const SampChatDisplayMode = {
   "NoShadow": 1,
   "Standard": 2
 };
+export const SampTextDrawAlignment = {
+  "Left": 0,
+  "Center": 1,
+  "Right": 2
+};

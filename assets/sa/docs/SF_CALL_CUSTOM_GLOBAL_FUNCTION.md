@@ -1,3 +1,10 @@
+* **Global Functions** and **Hybrid Functions** only supports the legacy function syntax and does not support SBL's Function Syntax. Doing so would lead to undesirable results. Specifically:
+    * Variable Names that are autoassigned to unused local variables. such as **"int iValue"** or **"float fValue"** must not be used. You need to literally use local variable indexes (12@, 25@, etc) or implicitly setup your variables in legacy way:
+```
+// Legacy Syntax
+const inputValue1=0@,inputValue2=2@,retValue1=30@,retValue2=31@
+var inputValue1:int,inputValue2:float,retValue1:int,retValue2:float
+```
 * Both **Global Functions** and **Hybrid Functions** are like Local Functions
     * Has its own local variable space.
     * Can optionally accept input parameters

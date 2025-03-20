@@ -2482,8 +2482,8 @@
 {0C62:} sf_execute_console_command {command} [string]
 {0C63:}   sf_register_console_command {command} [string] @label
 {0C64:}   sf_unregister_console_command {command} [string]
-{0C65:} samp_download_url {_p1} [int] {_p2} [int] {_p3} [int]
-{0C66:}   samp_get_download_state {_p1} [int] {_p2} [int]
+{0C65:} [var handle: AsyncDownload] = sf_download_file {url} [string] {filepath} [string]
+{0C66:}   [var state: int] = sf_get_download_state [AsyncDownload]
 {0C67:}   samp_get_windows_environment_variable {_p1} [int] {_p2} [int] {_p3} [int]
 {0C68:}   samp_unicode_to_ansi {_p1} [int] {_p2} [int] {_p3} [int]
 {0C69:}   samp_ansi_to_unicode {_p1} [int] {_p2} [int] {_p3} [int]
@@ -2506,7 +2506,7 @@
 {0C7A:}   samp_get_timer_interval {_p1} [int] {_p2} [int]
 {0C7B:}   samp_get_timer_time_elapsed {_p1} [int] {_p2} [int]
 {0C7C:}   samp_get_timer_time_left {_p1} [int] {_p2} [int]
-{0C7D:}   samp_release_download {_p1} [int]
+{0C7D:}   samp_release_download [AsyncDownload]
 {0C7E:}   sf_is_console_open
 {0C7F:} samp_set_local_chat_command_description {chatCommand} [string] {decription} [string]
 {0C80:} sf_set_console_command_description {command} [string] {description} [string]

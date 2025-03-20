@@ -65914,7 +65914,7 @@
           "id": "0C1A",
           "name": "SF_ATOI",
           "num_params": 2,
-          "short_desc": "Converts a string into a decimal integer",
+          "short_desc": "Converts an ascii string into a decimal integer",
           "class": "Sf",
           "member": "AtoI",
           "attrs": {
@@ -65938,7 +65938,7 @@
           "id": "0C1B",
           "name": "SF_ATOF",
           "num_params": 2,
-          "short_desc": "Converts a string to a floating point number",
+          "short_desc": "Converts an ascii string into a floating point number",
           "attrs": {
             "is_static": true
           },
@@ -65966,7 +65966,7 @@
           "id": "0C1C",
           "name": "SF_ITOA",
           "num_params": 3,
-          "short_desc": "Converts a baseN integer to string and writes it to stringBuffer",
+          "short_desc": "Converts a baseN integer into an ascii string then writes it to stringBuffer",
           "class": "Sf",
           "member": "ItoA",
           "attrs": {
@@ -67954,41 +67954,56 @@
           "short_desc": "Removes the specified SAMPFUNCS console command. This command does nothing if the the specified command isn't a registered in the SAMPFUNCS console then evaluates as logical false if used as a condition"
         },
         {
-          "id": "0C65",
-          "name": "SAMP_DOWNLOAD_URL",
-          "num_params": 3,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "url",
+              "type": "string"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
+              "name": "filepath",
+              "type": "string"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "AsyncDownload",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C65",
+          "name": "SF_DOWNLOAD_FILE",
+          "num_params": 3,
+          "short_desc": "Downloads a file from the specified url source asynchronosly then saves it to filepath. Returns a handle to this file's AsyncDownload object for tracking purposes",
+          "class": "AsyncDownload",
+          "member": "File",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "AsyncDownload"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C66",
-          "name": "SAMP_GET_DOWNLOAD_STATE",
+          "name": "SF_GET_DOWNLOAD_STATE",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "AsyncDownload",
+          "member": "GetState",
+          "short_desc": "Returns the download status of the AsyncDownload object"
         },
         {
           "id": "0C67",
@@ -68363,18 +68378,22 @@
           ]
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "AsyncDownload"
+            }
+          ],
+          "output": [],
           "id": "0C7D",
           "name": "SAMP_RELEASE_DOWNLOAD",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "AsyncDownload",
+          "member": "Release",
+          "short_desc": "Frees an AsyncDownload object from memory"
         },
         {
           "id": "0C7E",

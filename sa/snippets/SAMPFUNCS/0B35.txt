@@ -1,36 +1,10 @@
-// Script Example
-// Type /receiveweapon <weapon id> <ammo> to receive a weapon with ammo
-// Our character will receive SPAZ Gun with 1324 bullets:
-// /receiveweapon 27 1324
-
-{$USE CLEO}
-{$USE SAMPFUNCS}
-NOP
-
-// wait for SAMP to fully initialize
-REPEAT
-    wait 100
-UNTIL SAMP_IS_AVAILABLE
-
-SAMP_HOOK_CHAT_COMMAND_AS_LOCAL {chatcommand} "receiveweapon" {callbacklabel} @ChatCallback_ReceiveWeapon
-
-// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
-SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
-// This part of the main thread will not be reached unless the main thread is resumed
-
-:ChatCallback_ReceiveWeapon
-    int cmdParams, paramCountCheck, weaponID, ammo
-    if cmdParams = SAMP_GET_PARAMS_OF_LAST_TRIGGERED_COMMAND // check if user included parameters after the command keyword
-    then
-        if paramCountCheck, weaponID, ammo = SCAN_STRING {string} cmdParams {format} "%hhu %u"
-        then
-            if paramCountCheck == 2 // 2 parameters were parsed
-            then
-                if HAS_CHAR_GOT_WEAPON {char} $scplayer {weaponType} weaponID
-                then ADD_AMMO_TO_CHAR {char} $scplayer {weaponType} weaponID {ammo} ammo
-                else GIVE_WEAPON_TO_CHAR {char} $scplayer {weaponType} weaponID {ammo} ammo
-                end
-            end
-        end
-    end
-SAMP_COMMAND_RETURN // end of callback
+/*
+ * Check the snippet of the following commands for example usage of this command:
+ * SAMP_HOOK_CHAT_COMMAND_AS_LOCAL
+ * SF_CONSOLE_REGISTER_COMMAND
+ */
+int cmdParams
+if cmdParams = SF_GET_PARAMS_OF_LAST_TRIGGERED_COMMAND
+then // user provided parameters on its last command
+else // user provided no parameters on its last command
+end

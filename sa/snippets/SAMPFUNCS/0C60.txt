@@ -1,0 +1,23 @@
+const GVARNAME = "myGVar"
+int slaveScriptPtr1, slaveScriptPtr2, slaveScriptPtr3, slaveScriptPtr4
+// do something to slaveScriptPtr1, slaveScriptPtr2
+
+if SAMP_SET_THREAD_ACCESS_PERMISSION_TO_CUSTOM_GLOBAL_VARIABLE {gVarName} GVARNAME {threadPtr} slaveScriptPtr1 {canRead} false {canWrite} false
+then // block read/write attempt from slaveScriptPtr1 
+else // Global Var GVARNAME isn't created yet
+end
+
+if SAMP_SET_THREAD_ACCESS_PERMISSION_TO_CUSTOM_GLOBAL_VARIABLE {gVarName} GVARNAME {threadPtr} slaveScriptPtr2 {canRead} false {canWrite} true
+then // block read attempt from slaveScriptPtr2
+else // Global Var GVARNAME isn't created yet
+end
+
+if SAMP_SET_THREAD_ACCESS_PERMISSION_TO_CUSTOM_GLOBAL_VARIABLE {gVarName} GVARNAME {threadPtr} slaveScriptPtr3 {canRead} true {canWrite} false
+then // block write attempt from slaveScriptPtr3 
+else // Global Var GVARNAME isn't created yet
+end
+
+if SAMP_SET_THREAD_ACCESS_PERMISSION_TO_CUSTOM_GLOBAL_VARIABLE {gVarName} GVARNAME {threadPtr} slaveScriptPtr 4 {canRead} true {canWrite} true
+then // allow read/write attempt from slaveScriptPtr4 
+else // Global Var GVARNAME isn't created yet
+end

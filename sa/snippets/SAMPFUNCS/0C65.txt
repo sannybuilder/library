@@ -1,4 +1,6 @@
 {$CLEO}
+{$USE debug}
+{$USE file}
 {$USE SAMPFUNCS}
 nop
 
@@ -19,10 +21,10 @@ end
 Debugger.Enable()
 
 int map_FilePaths[DLCOUNT]
-map_FilePaths[MAPINDEX_SBLVER] = Sf.StrPtr(SBLVER_FILEPATH)
-map_FilePaths[MAPINDEX_NATVER] = Sf.StrPtr(NATVER_FILEPATH)
+Sf.StrPtr(map_FilePaths[MAPINDEX_SBLVER],SBLVER_FILEPATH)
+Sf.StrPtr(map_FilePaths[MAPINDEX_NATVER],NATVER_FILEPATH)
 
-AsyncDownload map_DLHandles[DLCOUNT]
+int map_DLHandles[DLCOUNT]
 map_DLHandles[MAPINDEX_SBLVER] = AsyncDownload.File(SBLVER_URL, SBLVER_FILEPATH)
 map_DLHandles[MAPINDEX_NATVER] = AsyncDownload.File(NATVER_URL, NATVER_FILEPATH)
 
@@ -37,14 +39,14 @@ while true
     for loopIndex = 0 to maxIndex
         if map_DLHandles[loopIndex] >= 1 // download handle defined
         then
-            int state = map_DLHandles[loopIndex].GetState()
+            int state = AsyncDownload.GetState(map_DLHandles[loopIndex])
             if state >= 0 // download object is now on standby
             then
-                map_DLHandles[loopIndex].Release()
+                AsyncDownload.Release(map_DLHandles[loopIndex])
                 map_DLHandles[loopIndex] = 0 // tell our script that the download is done for this loopindex
                 if Fs.DoesFileExist(map_FilePaths[loopIndex])
                 then
-                    if File fileaHandle = File.Open(map_FilePaths[loopIndex], FileMode.ReadText)
+                    if File fileaHandle = File.Open(map_FilePaths[loopIndex], "rt")
                     then
                         int buffer = Memory.Allocate(TMPBUFSIZE)
                         if fileaHandle.ReadString(buffer, TMPBUFSIZE)

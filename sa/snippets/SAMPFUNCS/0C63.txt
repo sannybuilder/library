@@ -9,10 +9,10 @@ NOP
 
 int cmdStr
 sf_string_pointer {var_storeAddressTo} cmdStr {string} "setmycharhp"
-if SF_CONSOLE_HAS_COMMAND {command} cmdStr
-then SF_CONSOLE_UNREGISTER_COMMAND {command} cmdStr
+if SF_IS_CONSOLE_COMMAND_REGISTERED {command} cmdStr
+then SF_UNREGISTER_CONSOLE_COMMAND {command} cmdStr
 end
-SF_CONSOLE_REGISTER_COMMAND {command} cmdStr {callback} @ConsoleCallback_SetHP
+SF_REGISTER_CONSOLE_COMMAND {command} cmdStr {callback} @ConsoleCallback_SetHP
 
 // We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
 SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread

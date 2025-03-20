@@ -1,0 +1,1 @@
+color is in 0xAARRGGBB format where A = Alpha, R = Red, G = Green, B = Blue.

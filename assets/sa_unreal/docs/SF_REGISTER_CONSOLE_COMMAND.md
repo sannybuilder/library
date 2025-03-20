@@ -1,8 +1,4 @@
-* When a callback is hooked on a chatcommand, then everytime we type this chatcommand, it will not be sent to the server. To reverse this behavior, execute **SAMP_UNHOOK_LOCAL_CHAT_COMMAND** for the affected chatcommand.
-* The chat command trigger text will be **/\<chatcommand\>** . For example:
-  * if chatcommand = **"killme"** then you need to type **/killme** in chat
-  * if chatcommand = **"/killme"** then you need to type **//killme** in chat
-* You must pass an offset label as the callback parameter. Like For example, **@ChatCallback_GiveWeapon**
+* You must pass an offset label as the callback parameter. Like For example, **@ConsoleCallback_SetHP**
 * The callback label must contain the callback's body.
 * Construct the callback's flow of execution with caution.
   * Callbacks have higher priority than the custom script's main thread. Meaning, eveytime the script encounters the **WAIT** command at the main thread, the script will execute all callbacks first(if interrupt flag was fired by a callback), then continues to execute the main thread's commands after where the **WAIT** command was encountered.

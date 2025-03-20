@@ -1,0 +1,36 @@
+/* Script Example: Set our character's health and armor through console
+    Type /setmycharhp <health> <armor>
+    Example: /setmycharhp 50 75
+*/
+
+{$USE CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+int cmdStr
+sf_string_pointer {var_storeAddressTo} cmdStr {string} "setmycharhp"
+if SF_CONSOLE_HAS_COMMAND {command} cmdStr
+then SF_CONSOLE_UNREGISTER_COMMAND {command} cmdStr
+end
+SF_CONSOLE_REGISTER_COMMAND {command} cmdStr {callback} @ConsoleCallback_SetHP
+
+// We don't need an infinite loop for this example. So we pause the thread to lessen the workload for our processor
+SF_PAUSE_THREAD {streamid} 0 // Pauses the main thread
+// This part of the main thread will not be reached unless the main thread is resumed
+
+:ConsoleCallback_SetHP
+    int cmdParams
+    if cmdParams = SAMP_GET_PARAMS_OF_LAST_TRIGGERED_COMMAND // check if user included parameters after the command keyword
+    then
+        int paramCountCheck, desiredHealth, desiredArmor
+        if paramCountCheck, desiredHealth, desiredArmor = SCAN_STRING {string} cmdParams {format} "%f %f"
+        then
+            if paramCountCheck == 2 // 2 parameters were parsed
+            then
+                int myCharStruct = get_ped_pointer {char} $scplayer
+                write_memory_with_offset {address} myCharStruct {offset} 0x540 {size} 4 {value} desiredHealth
+                write_memory_with_offset {address} myCharStruct {offset} 0x548 {size} 4 {value} desiredArmor
+            end
+        end
+    end
+SF_COMMAND_RETURN // end of callback

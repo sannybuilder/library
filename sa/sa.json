@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742443804631,
-    "version": "0.915",
+    "last_update": 1742487683876,
+    "version": "0.916",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -60527,14 +60527,14 @@
             }
           ],
           "id": "0B35",
-          "name": "SAMP_GET_PARAMS_OF_LAST_TRIGGERED_COMMAND",
+          "name": "SF_GET_PARAMS_OF_LAST_TRIGGERED_COMMAND",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Returns a pointer to a string containing the parameters of the last command entered",
-          "class": "Samp",
+          "short_desc": "Returns a pointer to a string containing the parameters of the last command entered at console or SAMP Chat",
+          "class": "Sf",
           "member": "GetCmdParams"
         },
         {
@@ -60870,13 +60870,13 @@
         },
         {
           "id": "0B43",
-          "name": "SAMP_COMMAND_RETURN",
+          "name": "SF_COMMAND_RETURN",
           "num_params": 0,
           "short_desc": "Marks the end of a console command's callback or a chat command's callback. Used as its returning statement",
           "attrs": {
             "is_static": true
           },
-          "class": "Samp",
+          "class": "Sf",
           "member": "CmdRet"
         },
         {
@@ -62218,7 +62218,7 @@
             }
           ],
           "id": "0B78",
-          "name": "SF_LOG_TO_CONSOLE",
+          "name": "SF_CONSOLE_LOG",
           "num_params": 2,
           "short_desc": "Adds a line to the SAMPFUNCS console and logs it",
           "attrs": {
@@ -67855,9 +67855,12 @@
           "name": "SF_SET_THREAD_ACCESS_PERMISSION_TO_CUSTOM_GLOBAL_VARIABLE",
           "num_params": 4,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Sets wether the specified script thread can read or write to the specified custom global variable"
+          "short_desc": "Sets wether the specified script thread can read or write to the specified custom global variable",
+          "class": "Sf",
+          "member": "ThreadSetGVarAccess"
         },
         {
           "input": [
@@ -67886,52 +67889,69 @@
           "name": "SF_GET_THREAD_ACCESS_PERMISSION_TO_CUSTOM_GLOBAL_VARIABLE",
           "num_params": 4,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the specified script thread's read/write permissions to the specified custom global variable"
+          "short_desc": "Returns the specified script thread's read/write permissions to the specified custom global variable",
+          "class": "Sf",
+          "member": "ThreadGetGVarAccess"
         },
         {
-          "id": "0C62",
-          "name": "SAMP_EXEC_CONSOLE_COMMAND",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "command",
+              "type": "string"
             }
-          ]
+          ],
+          "id": "0C62",
+          "name": "SF_CONSOLE_EXECUTE_COMMAND",
+          "num_params": 1,
+          "short_desc": "Executes the specified command in the SAMPFUNCS console",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "ConsoleExecCmd"
         },
         {
-          "id": "0C63",
-          "name": "SAMP_REGISTER_CONSOLE_COMMAND",
-          "num_params": 2,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "command",
+              "type": "string"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "callback",
+              "type": "label"
             }
-          ]
+          ],
+          "id": "0C63",
+          "name": "SF_CONSOLE_REGISTER_COMMAND",
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "ConsoleRegCmd",
+          "short_desc": "Registers a callback hooked on a SAMPFUNCS console command with maximum length of 64 characters"
         },
         {
-          "id": "0C64",
-          "name": "SAMP_UNREGISTER_CONSOLE_COMMAND",
-          "num_params": 1,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "command",
+              "type": "string"
             }
-          ]
+          ],
+          "id": "0C64",
+          "name": "SF_CONSOLE_UNREGISTER_COMMAND",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "ConsoleUnregCmd",
+          "short_desc": "Removes the specified SAMPFUNCS console command. This command does nothing if the the specified command isn't a registered in the SAMPFUNCS console then evaluates as logical false if used as a condition"
         },
         {
           "id": "0C65",
@@ -68358,11 +68378,15 @@
         },
         {
           "id": "0C7E",
-          "name": "SAMP_IS_CONSOLE_ACTIVE",
+          "name": "SF_CONSOLE_IS_OPEN",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "ConsoleIsOpen",
+          "short_desc": "Evaluates as logical true if the SAMPFUNCS console is open"
         },
         {
           "input": [
@@ -68386,19 +68410,20 @@
           }
         },
         {
-          "id": "0C80",
-          "name": "SAMP_SET_CONSOLE_COMMAND",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "command",
+              "type": "string"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "description",
+              "type": "string"
             }
-          ]
+          ],
+          "id": "0C80",
+          "name": "SAMP_CONSOLE_SET_COMMAND_DESCRIPTION",
+          "num_params": 2,
+          "short_desc": "Sets the description for the console command"
         },
         {
           "id": "0C81",
@@ -68617,18 +68642,22 @@
           "member": "IsHooked"
         },
         {
-          "id": "0C91",
-          "name": "SAMP_IS_CONSOLE_COMMAND_DEFINED",
-          "num_params": 1,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "command",
+              "type": "string"
             }
-          ]
+          ],
+          "id": "0C91",
+          "name": "SF_CONSOLE_HAS_COMMAND",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Returns logical true if the specified console command is registered",
+          "class": "Sf",
+          "member": "ConsoleHasCmd"
         },
         {
           "id": "0C92",

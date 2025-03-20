@@ -1,0 +1,1 @@
+primaryColor and primaryColor are in 0xAARRGGBB format where A = Alpha, R = Red, G = Green, B = Blue.

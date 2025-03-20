@@ -2178,7 +2178,7 @@
 {0B32:} samp_send_spawn
 {0B33:} samp_send_damage_car {carId} [int] {bodyFlags} [int] {doorFlags} [int] {lightFlags} [int] {wheelFlags} [int]
 {0B34:}   samp_hook_chat_command_as_local {chatCommand} [string] @label
-{0B35:}   [var pointer: int] = samp_get_params_of_last_triggered_command
+{0B35:}   [var pointer: int] = sf_get_params_of_last_triggered_command
 {0B36:} [var nickname: int] = samp_get_player_nickname {id} [int]
 {0B37:} [var color: int] = samp_get_player_color {id} [int]
 {0B38:} samp_connect {serverIp} [string] {port} [int]
@@ -2192,7 +2192,7 @@
 {0B40:}   samp_raknet_bitstream_write [Bitstream] {value} [any] {dataType} [SampBitStreamDataType] {dataSize} [int]
 {0B41:}   samp_raknet_send_rpc_with_params {rpc} [SampRpc] [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int] {shiftTimeStamp} [int]
 {0B42:}   samp_raknet_send_packet_with_params [Bitstream] {priority} [SampPriority] {reliability} [SampReliability] {orderingChannel} [int]
-{0B43:} samp_command_return
+{0B43:} sf_command_return
 {0B44:}   [var handle: TextLabel3D] = samp_create_3d_text {text} [string] {color} [int] {coordX} [float] {coordY} [float] {coordZ} [float] {visibilityRadius} [float] {showBehindWalls} [bool] {attachedPlayerId} [int] {attachedCarId} [int]
 {0B45:}   samp_delete_3d_text [TextLabel3D]
 {0B46:}   samp_is_3d_text_exist [TextLabel3D]
@@ -2245,7 +2245,7 @@
 {0B75:}   [var bodyBuffer: string], [var prefixBuffer: string], [var bodyColor: int], [var prefixColor: int] = samp_get_chat_line {index} [int]
 {0B76:} samp_set_chat_input_text {text} [string]
 {0B77:}   [var buffer: string] = samp_get_chat_input_text
-{0B78:} sf_log_to_console {format} [string] {args} [arguments]
+{0B78:} sf_console_log {format} [string] {args} [arguments]
 {0B79:} samp_set_chat_input_visibility {isVisible} [bool]
 {0B7A:} [var pointer: int] = samp_get_rakclient_interface
 {0B7B:} [var pointer: int] = samp_get_rakpeer
@@ -2479,9 +2479,9 @@
 {0C5F:}   sf_is_custom_global_variable_defined {name} [string]
 {0C60:}   sf_set_thread_access_permission_to_custom_global_variable {gVarName} [string] {threadPtr} [int] {canRead} [bool] {canWrite} [bool]
 {0C61:}   [var canRead: bool], [var canWrite: bool] = sf_get_thread_access_permission_to_custom_global_variable {gVarName} [int] {threadPtr} [int]
-{0C62:} samp_exec_console_command {_p1} [int]
-{0C63:}   samp_register_console_command {_p1} [int] {_p2} [int]
-{0C64:}   samp_unregister_console_command {_p1} [int]
+{0C62:} sf_console_execute_command {command} [string]
+{0C63:}   sf_console_register_command {command} [string] @label
+{0C64:}   sf_console_unregister_command {command} [string]
 {0C65:} samp_download_url {_p1} [int] {_p2} [int] {_p3} [int]
 {0C66:}   samp_get_download_state {_p1} [int] {_p2} [int]
 {0C67:}   samp_get_windows_environment_variable {_p1} [int] {_p2} [int] {_p3} [int]
@@ -2507,9 +2507,9 @@
 {0C7B:}   samp_get_timer_time_elapsed {_p1} [int] {_p2} [int]
 {0C7C:}   samp_get_timer_time_left {_p1} [int] {_p2} [int]
 {0C7D:}   samp_release_download {_p1} [int]
-{0C7E:}   samp_is_console_active
+{0C7E:}   sf_console_is_open
 {0C7F:} samp_set_local_chat_command_description {chatCommand} [string] {decription} [string]
-{0C80:} samp_set_console_command {_p1} [int] {_p2} [int]
+{0C80:} samp_console_set_command_description {command} [string] {description} [string]
 {0C81:} samp_force_car_sync {_p1} [int]
 {0C82:} samp_force_unoccupied_sync {_p1} [int] {_p2} [int]
 {0C83:} samp_force_onfoot_sync
@@ -2526,7 +2526,7 @@
 {0C8E:}   sf_read_data_from_clipboard {buffer} [int] {size} [int]
 {0C8F:} samp_process_chat_input {_p1} [int]
 {0C90:}   samp_is_chat_command_hooked {chatCommand} [string]
-{0C91:}   samp_is_console_command_defined {_p1} [int]
+{0C91:}   sf_console_has_command {command} [string]
 {0C92:} samp_get_cleo_library_version {_p1} [int]
 {1337:} samp_make_script_private {_p1} [int]
 {2880:} set_sphere_color [Sphere] {r} [int] {g} [int] {b} [int]

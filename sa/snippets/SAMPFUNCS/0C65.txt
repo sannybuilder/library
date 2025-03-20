@@ -1,0 +1,82 @@
+{$CLEO}
+{$USE SAMPFUNCS}
+nop
+
+const
+    SBLVER_URL = "https://github.com/sannybuilder/library/blob/master/sa/version.txt"
+    SBLVER_FILEPATH = ".\readSBLVer.txt"
+    MAPINDEX_SBLVER = 0
+
+    NATVER_URL = "https://github.com/sannybuilder/library/blob/master/sa/native_version.txt"
+    NATVER_FILEPATH = ".\readNativeVer.txt"
+    MAPINDEX_NATVER = 1
+
+    DLCOUNT = 2
+
+    TMPBUFSIZE = 64
+end
+
+Debugger.Enable()
+
+int map_FilePaths[DLCOUNT]
+map_FilePaths[MAPINDEX_SBLVER] = Sf.StrPtr(SBLVER_FILEPATH)
+map_FilePaths[MAPINDEX_NATVER] = Sf.StrPtr(NATVER_FILEPATH)
+
+AsyncDownload map_DLHandles[DLCOUNT]
+map_DLHandles[MAPINDEX_SBLVER] = AsyncDownload.File(SBLVER_URL, SBLVER_FILEPATH)
+map_DLHandles[MAPINDEX_NATVER] = AsyncDownload.File(NATVER_URL, NATVER_FILEPATH)
+
+float map_Versions[DLCOUNT]
+map_Versions[MAPINDEX_SBLVER] = -1 // intially undefined value
+map_Versions[MAPINDEX_NATVER] = -1 // intially undefined value
+
+while true
+    wait 0
+    int loopIndex
+    int maxIndex = DLCOUNT - 1
+    for loopIndex = 0 to maxIndex
+        if map_DLHandles[loopIndex] >= 1 // download handle defined
+        then
+            int state = map_DLHandles[loopIndex].GetState()
+            if state >= 0 // download object is now on standby
+            then
+                map_DLHandles[loopIndex].Release()
+                map_DLHandles[loopIndex] = 0 // tell our script that the download is done for this loopindex
+                if Fs.DoesFileExist(map_FilePaths[loopIndex])
+                then
+                    if File fileaHandle = File.Open(map_FilePaths[loopIndex], FileMode.ReadText)
+                    then
+                        int buffer = Memory.Allocate(TMPBUFSIZE)
+                        if fileaHandle.ReadString(buffer, TMPBUFSIZE)
+                        then
+                            map_Versions[loopIndex] = Sf.AtoF(buffer)
+                            Debugger.Trace("Retrieved Version[%u]: %f", loopIndex, sblVer)
+                        else Debugger.Trace("Failed to read string from %s", map_FilePaths[loopIndex])
+                        end
+                        
+                        // cleanup
+                        Memory.Free(buffer)
+                        fileaHandle.Close()
+                    else Debugger.Trace("Failed to open %s", map_FilePaths[loopIndex])
+                    end
+                    Fs.DeleteFile(map_FilePaths[loopIndex])
+                else Debugger.Trace("Downloaded File not found: %s", map_FilePaths[loopIndex])
+                end
+            else // map_DLHandles[loopIndex] is still downloading
+            end
+        end
+    end
+
+    if and
+        map_Versions[MAPINDEX_SBLVER] <> -1
+        map_Versions[MAPINDEX_NATVER] <> -1
+    then
+        Debugger.Trace("All Download Instances Ended!")
+        Debugger.Trace("SBL Version: %f", map_Versions[MAPINDEX_SBLVER])
+        Debugger.Trace("Native Version: %f", map_Versions[MAPINDEX_NATVER])
+        break
+    end
+end
+
+Debugger.Disable()
+terminate_this_custom_script

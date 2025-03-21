@@ -68086,8 +68086,8 @@
         {
           "input": [
             {
-              "name": "newScriptPtrTo",
-              "type": "int",
+              "name": "self",
+              "type": "CustomScript",
               "source": "var_any"
             },
             {
@@ -68102,18 +68102,15 @@
           "id": "0C6A",
           "name": "SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL",
           "num_params": 3,
-          "class": "Sf",
-          "member": "StartNewScriptFromLabel",
-          "attrs": {
-            "is_static": true
-          },
+          "class": "CustomScript",
+          "member": "RunFromLabel",
           "short_desc": "Starts a new custom script from the specified scriptLabel then stores its pointer at newScriptPtrTo parameter"
         },
         {
           "input": [
             {
-              "name": "newScriptPtrTo",
-              "type": "int",
+              "name": "self",
+              "type": "CustomScript",
               "source": "var_any"
             },
             {
@@ -68129,11 +68126,8 @@
           "name": "SF_START_NEW_CUSTOM_SCRIPT_FROM_POINTER",
           "num_params": 3,
           "short_desc": "Starts a new custom script from the specified memory location where a custom script binary data is stored (scriptBin) then stores its pointer at newScriptPtrTo parameter",
-          "attrs": {
-            "is_static": true
-          },
-          "class": "Sf",
-          "member": "StartNewCustomScriptFromPointer"
+          "class": "CustomScript",
+          "member": "RunFromPtr"
         },
         {
           "id": "0C6C",
@@ -68176,25 +68170,22 @@
         {
           "input": [
             {
-              "name": "address",
-              "type": "int"
+              "name": "self",
+              "type": "CustomScript"
             }
           ],
           "id": "0C6E",
           "name": "SF_TERMINATE_CUSTOM_SCRIPT",
           "num_params": 1,
-          "class": "Sf",
-          "member": "TerminateCustomScript",
-          "attrs": {
-            "is_static": true
-          },
+          "class": "CustomScript",
+          "member": "Terminate",
           "short_desc": "Terminates a custom script pointed by the address"
         },
         {
           "input": [
             {
-              "name": "address",
-              "type": "int"
+              "name": "self",
+              "type": "CustomScript"
             },
             {
               "name": "passedValues",
@@ -68205,11 +68196,8 @@
           "name": "SF_RESTART_CUSTOM_SCRIPT",
           "num_params": 2,
           "short_desc": "Restarts a custom script pointed by the address",
-          "class": "Sf",
-          "member": "RestartCustomScript",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "CustomScript",
+          "member": "Restart"
         },
         {
           "id": "0C70",

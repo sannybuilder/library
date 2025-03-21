@@ -23,6 +23,7 @@ Component
 Conversation
 Crane
 Credits
+CustomScript
 Cutscene
 D3DFont
 D3DTexture
@@ -2029,6 +2030,14 @@ Start,0434,0,0,()
 Stop,0435,0,0,()
 $END
 
+$CustomScript
+$BEGIN
+Restart,0C6F,0,0,("self: CustomScript" "passedValues: arguments")
+RunFromLabel,0C6A,0,0,("self: CustomScript" "scriptLabel: label" "passedValues: arguments")
+RunFromPtr,0C6B,0,0,("self: CustomScript" "scriptBin%i" "passedValues: arguments")
+Terminate,0C6E,0,0,("self: CustomScript")
+$END
+
 $Cutscene
 $BEGIN
 AppendToNext,08F0,0,0,("objectName%s" "animName%s")
@@ -3195,14 +3204,11 @@ RadToDeg,0C01,0,0,("radians%f" "degrees%f")
 ReadElementOf4BytesArray,0C0E,1,0,("array%i" "index%i" "value: any")
 ReadElementOfSizedArray,0C1D,1,0,("array%i" "index%i" "size%i" "value: any")
 RegGFunc,0C34,1,0,("name%s" "label: label")
-RestartCustomScript,0C6F,0,0,("address%i" "passedValues: arguments")
 ResumeThread,0BDF,0,0,("threadId%i")
 SetButton,0B56,0,0,("buttonId: Button" "behaviorValue%i")
 SetGVar,0BFC,1,0,("name%s" "value: any")
 SetTextDrawModel,0C4F,1,0,("textDrawId%i" "model: model_any" "rotPitch%f" "rotRoll%f" "rotYaw%f" "camZoomRange%f" "primaryColor%i" "secondaryColor%i")
 Sin,0C03,0,0,("radians%f" "ratio%f")
-StartNewCustomScriptFromPointer,0C6B,0,0,("newScriptPtrTo%i" "scriptBin%i" "passedValues: arguments")
-StartNewScriptFromLabel,0C6A,0,0,("newScriptPtrTo%i" "scriptLabel: label" "passedValues: arguments")
 StrCat,0C15,0,0,("stringBuffer%s" "appendedString%s")
 StrChr,0C2A,1,0,("source%s" "character%i" "matchAddress%i")
 StrCpy,0C13,0,0,("destination%s" "source%s")
@@ -3225,7 +3231,6 @@ StrnCat,0C27,0,0,("stringBuffer%s" "appendedString%s" "bufferSize%i")
 StrnCpy,0C24,0,0,("stringBuffer%i" "source%i" "bufferSize%i")
 StrnEq,0C25,1,0,("string1%s" "string2%s" "length%i")
 Tan,0C07,0,0,("radians%f" "ratio%f")
-TerminateCustomScript,0C6E,0,0,("address%i")
 UnicodeToAnsi,0C68,1,0,("unicodeString%i" "ansiStringBuffer%s" "bufferSize%i")
 WriteElementOf4BytesArray,0C0F,1,0,("array%i" "index%i" "value: any")
 WriteElementOfSizedArray,0C1E,1,0,("array%i" "index%i" "size%i" "value: any")

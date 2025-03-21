@@ -1,0 +1,1 @@
+The stored string is truncated if its size(length + null terminator) is greater than the buffersize.

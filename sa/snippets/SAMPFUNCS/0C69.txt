@@ -1,0 +1,11 @@
+int ansiStrBuf = ALLOCATE_MEMORY {size} 51
+// do something to ansiStrBuf
+
+int unicodeStrBuf = ALLOCATE_MEMORY {size} 101
+if SF_ANSI_TO_UNICODE {ansiString} ansiStrBuf {unicodeStringBuffer} unicodeStrBuf {bufferSize} 101
+then do something to unicodeStrBuf
+else // Failed Retrieving the Unicode version of the ANSI String
+end
+
+FREE_MEMORY {address} unicodeStrBuf
+FREE_MEMORY {address} ansiStrBuf

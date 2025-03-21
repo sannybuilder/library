@@ -2,7 +2,7 @@
     * Absolute Path
         * `C:\Program Files\somefolder\conf.ini`
         * `C:\Users\Public\Pictures\somefolder\pic.jpg`
-    * Relative Path prefix **.\**
+    * Relative Path prefix "**.\\**"
 
 |             cleoFileFormat           |                   msFileFormat                  |
 |             -------------            |                  -------------                  |

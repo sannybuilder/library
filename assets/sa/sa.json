@@ -68086,13 +68086,13 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "CustomScript",
-              "source": "var_any"
-            },
-            {
               "name": "scriptLabel",
               "type": "label"
+            },
+            {
+              "name": "newScriptPtrTo",
+              "type": "SfScript",
+              "source": "var_any"
             },
             {
               "name": "passedValues",
@@ -68100,22 +68100,25 @@
             }
           ],
           "id": "0C6A",
-          "name": "SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL",
+          "name": "SF_START_NEW_SCRIPT_FROM_LABEL",
           "num_params": 3,
-          "class": "CustomScript",
+          "class": "SfScript",
           "member": "RunFromLabel",
-          "short_desc": "Starts a new custom script from the specified scriptLabel then stores its pointer at newScriptPtrTo parameter"
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Starts a new script from the specified scriptLabel then stores its pointer at newScriptPtrTo parameter"
         },
         {
           "input": [
             {
-              "name": "self",
-              "type": "CustomScript",
-              "source": "var_any"
-            },
-            {
               "name": "scriptBin",
               "type": "int"
+            },
+            {
+              "name": "newScriptPtrTo",
+              "type": "SfScript",
+              "source": "var_any"
             },
             {
               "name": "passedValues",
@@ -68123,10 +68126,13 @@
             }
           ],
           "id": "0C6B",
-          "name": "SF_START_NEW_CUSTOM_SCRIPT_FROM_POINTER",
+          "name": "SF_START_NEW_SCRIPT_FROM_POINTER",
           "num_params": 3,
-          "short_desc": "Starts a new custom script from the specified memory location where a custom script binary data is stored (scriptBin) then stores its pointer at newScriptPtrTo parameter",
-          "class": "CustomScript",
+          "short_desc": "Starts a new script from the specified memory location where a script binary data is stored (scriptBin) then stores its pointer at newScriptPtrTo parameter",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "SfScript",
           "member": "RunFromPtr"
         },
         {
@@ -68171,21 +68177,21 @@
           "input": [
             {
               "name": "self",
-              "type": "CustomScript"
+              "type": "SfScript"
             }
           ],
           "id": "0C6E",
-          "name": "SF_TERMINATE_CUSTOM_SCRIPT",
+          "name": "SF_TERMINATE_SCRIPT",
           "num_params": 1,
-          "class": "CustomScript",
+          "class": "SfScript",
           "member": "Terminate",
-          "short_desc": "Terminates a custom script pointed by the address"
+          "short_desc": "Terminates a script pointed by the address"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "CustomScript"
+              "type": "SfScript"
             },
             {
               "name": "passedValues",
@@ -68193,10 +68199,10 @@
             }
           ],
           "id": "0C6F",
-          "name": "SF_RESTART_CUSTOM_SCRIPT",
+          "name": "SF_RESTART_SCRIPT",
           "num_params": 2,
-          "short_desc": "Restarts a custom script pointed by the address",
-          "class": "CustomScript",
+          "short_desc": "Restarts a script pointed by the address",
+          "class": "SfScript",
           "member": "Restart"
         },
         {

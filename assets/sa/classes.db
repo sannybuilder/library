@@ -23,7 +23,6 @@ Component
 Conversation
 Crane
 Credits
-CustomScript
 Cutscene
 D3DFont
 D3DTexture
@@ -72,6 +71,7 @@ ScriptFire
 Searchlight
 Sequence
 Sf
+SfScript
 Shopping
 Skip
 Sound
@@ -2030,14 +2030,6 @@ Start,0434,0,0,()
 Stop,0435,0,0,()
 $END
 
-$CustomScript
-$BEGIN
-Restart,0C6F,0,0,("self: CustomScript" "passedValues: arguments")
-RunFromLabel,0C6A,0,0,("self: CustomScript" "scriptLabel: label" "passedValues: arguments")
-RunFromPtr,0C6B,0,0,("self: CustomScript" "scriptBin%i" "passedValues: arguments")
-Terminate,0C6E,0,0,("self: CustomScript")
-$END
-
 $Cutscene
 $BEGIN
 AppendToNext,08F0,0,0,("objectName%s" "animName%s")
@@ -3235,6 +3227,14 @@ UnicodeToAnsi,0C68,1,0,("unicodeString%i" "ansiStringBuffer%s" "bufferSize%i")
 WriteElementOf4BytesArray,0C0F,1,0,("array%i" "index%i" "value: any")
 WriteElementOfSizedArray,0C1E,1,0,("array%i" "index%i" "size%i" "value: any")
 WriteStringToElementOfBufferArray,0C20,0,0,("array%i" "index%i" "size%i" "string%s")
+$END
+
+$SfScript
+$BEGIN
+Restart,0C6F,0,0,("self: SfScript" "passedValues: arguments")
+RunFromLabel,0C6A,0,0,("scriptLabel: label" "newScriptPtrTo: SfScript" "passedValues: arguments")
+RunFromPtr,0C6B,0,0,("scriptBin%i" "newScriptPtrTo: SfScript" "passedValues: arguments")
+Terminate,0C6E,0,0,("self: SfScript")
 $END
 
 $Shopping

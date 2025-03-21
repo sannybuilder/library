@@ -1,23 +1,30 @@
 // Run an embedded script that prints incrementing values. Then restart this embedded script, resetting the incremented values to the specified passedValues
 {$CLEO}
 {$USE SAMPFUNCS}
+{$USE debug}
 NOP
 
-int csPtr
-SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL {newScriptPtrTo} csPtr {scriptLabel} @EmbeddedScript {passedValues} 0 0.0
+Debugger.Enable()
+
+SfScript csPtr
+SfScript.RunFromLabel(@EmbeddedScript, csPtr, 0, 0.0) // csPtr now holds the Pointer to the newly created Custom Script
 
 while true
     wait 5000
-    SF_RESTART_CUSTOM_SCRIPT {address} csPtr {passedValues} 5 10.0
+    Debugger.Trace("Restarting EmbeddedScript")
+    csPtr.Restart(5, 10.0) // restarts the EmbeddedScript, setting new initial values
 end
 
-:EmbeddedScript
-NOP
-var 0@:int , 1@:float
-
-while true
-    wait 0
-    PRINT_FORMATTED_NOW {text} "Values: %d %f" {time} 100 {args} 0@ 1@
-    0@++
-    1@ += 0.25
-end
+:EmbeddedScript // start of the EmbeddedScript's body
+function EmbeddedScript(testIntegerValue:int, testFloatValue:float) // variable definitions of our asynchronous embedded script
+    Debugger.Enable() // since this custom script is executing independintly from our main script, we need to enable the debugger for this independent custom script
+    
+    Debugger.Trace("EmbeddedScript has been Started.") // this message will be our indication that this embeddedscript restarted
+    
+    while true
+        wait 0
+        PRINT_FORMATTED_NOW {text} "Values: %d %f" {time} 100 {args} testIntegerValue testFloatValue
+        testIntegerValue++
+        testFloatValue += 0.25
+    end
+end // end of the EmbeddedScript's body

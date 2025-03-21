@@ -1,15 +1,15 @@
 /* Check the snippets of the following commands for example usage of this command
-* SF_RESTART_CUSTOM_SCRIPT
-* SF_TERMINATE_CUSTOM_SCRIPT
+* SF_RESTART_SCRIPT
+* SF_TERMINATE_SCRIPT
 */
 
-// Run a separate synchronous task that prints something.
+// Run a separate asynchronous task that prints something.
 {$CLEO}
 {$USE SAMPFUNCS}
+{$USE debug}
 NOP
 
-int csPtr
-SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL {newScriptPtrTo} csPtr {scriptLabel} @AsyncTask {passedValues} 321 19.33 // create another task that separately runs from this script in an asynchronous manner
+SF_START_NEW_SCRIPT_FROM_LABEL {scriptLabel} @AsyncTask {newScriptPtrTo} 0 {passedValues} 321 19.33 // create another task that separately runs from this script in an asynchronous manner
 
 while true
     wait 0
@@ -17,9 +17,14 @@ while true
 end
 
 :AsyncTask
-NOP
-
-while true
-    wait 5000
-    PRINT_FORMATTED_NOW {text} "Hello World %d %f" {time} 1000 {args} 0@ 1@
-end
+function AsyncTask(testIntegerValue:int, testFloatValue:float) // variable definitions of our asynchronous task
+ // start of the AsyncTask's body
+ // no need to specify the "NOP" command
+    Debugger.Enable() // debugger will only work inside the AsyncTask's scope. The main script is unaffected
+    Debugger.Trace("EmbeddedScript has been Started.")
+    wait 3000
+    Debugger.Trace("Self Terminate")
+    Debugger.Disable()
+    
+    terminate_this_script // terminate this task
+end // end of the AsyncTask's body (will not be reached, and MUST NOT BE REACHED in any way)

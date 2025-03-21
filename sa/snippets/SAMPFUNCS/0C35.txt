@@ -55,28 +55,28 @@ while true
 end
 
 :GlobalFunc_SetMyHPGetMyPosition
-    var 0@:int , 1@:int
+function GlobalFunc_SetMyHPGetMyPosition(desiredHealth:int, desiredArmor:int) // input variable definitions
+    float coordX, coordY, coordZ // output variable definitions
 
     if IS_CHAR_HEALTH_GREATER $scplayer {health} 0 // not IS_CHAR_DEAD {handle} $scplayer
     then
-        SET_CHAR_HEALTH $scplayer {health} 0@
+        SET_CHAR_HEALTH $scplayer {health} desiredHealth
         
-        var 31@:int
-        31@ = get_char_armour $scplayer
-        1@ -= 31@
-        if 1@ < 0
+        int myArmor = get_char_armour $scplayer
+        int armorDiff = desiredArmor - myArmor
+        if armorDiff < 0
         then
-            1@ *= -1
-            damage_char $scplayer {amount} 1@ {damageArmour} true
-        else if 1@ > 0
-        then ADD_ARMOUR_TO_CHAR $scplayer {amount} 1@
+            armorDiff *= -1
+            damage_char $scplayer {amount} armorDiff {damageArmour} true
+        else if armorDiff > 0
+        then ADD_ARMOUR_TO_CHAR $scplayer {amount} armorDiff
         end
         end
         
-        var 31@:float
-        29@, 30@, 31@ = GET_CHAR_COORDINATES $scplayer
+        coordX, coordY, coordZ = GET_CHAR_COORDINATES $scplayer
     end
-SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 3 {xyz} 29@ 30@ 31@
+SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 3 coordX coordY coordZ
+end // <--- This part will not be reached. End of GlobalFunc_SetMyHPGetMyPosition
 
 // ~~~~~~~~~~~~~~~~~~~Script2.cs~~~~~~~~~~~~~~~~~~~
 {$CLEO}
@@ -137,16 +137,18 @@ while true
 end
 
 :GlobalFunc_DoArithmetic
-    var 0@:float , 1@:float, 28@:float, 29@:float , 30@:float , 31@:float
-    28@ = 0@
-    28@ += 1@
-    29@ = 0@
-    29@ -= 1@
-    30@ = 0@
-    30@ *= 1@
-    if 1@ <> 0.0
+function GlobalFunc_DoArithmetic(value1:float, value2:float) // input variable definitions
+    float sum, diff, product, quotient // output variable definitions
+    sum = value1
+    sum += value2
+    diff = value1
+    diff -= value2
+    product = value1
+    product *= value2
+    if value2 <> 0.0
     then
-        31@ = 0@
-        31@ /= 1@
+        quotient = value1
+        quotient /= value2
     end
-SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 4 {sum} 28@ {diff} 29@ {product} 30@ {quotient} 31@
+SF_CUSTOM_GLOBAL_FUNCTION_RETURN {numRet} 4 sum diff product quotient
+end // <--- This part will not be reached. End of GlobalFunc_DoArithmetic

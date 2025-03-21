@@ -3935,3 +3935,9 @@ export const SampTextDrawAlignment = {
   "Center": 1,
   "Right": 2
 };
+export const AsyncDownloadState = {
+  "InProgress": -1,
+  "Complete": 0,
+  "OutOfMemory": 2147942414,
+  "DownloadFailure": 2148270088
+};

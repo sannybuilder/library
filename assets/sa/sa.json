@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742497999756,
-    "version": "0.917",
+    "last_update": 1742545129552,
+    "version": "0.918",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -67991,7 +67991,7 @@
           "output": [
             {
               "name": "state",
-              "type": "int",
+              "type": "AsyncDownloadState",
               "source": "var_any"
             }
           ],
@@ -68006,70 +68006,82 @@
           "short_desc": "Returns the download status of the AsyncDownload object"
         },
         {
+          "input": [
+            {
+              "name": "varName",
+              "type": "string"
+            },
+            {
+              "name": "stringBuffer",
+              "type": "string"
+            },
+            {
+              "name": "buffersize",
+              "type": "int"
+            }
+          ],
           "id": "0C67",
-          "name": "SAMP_GET_WINDOWS_ENVIRONMENT_VARIABLE",
+          "name": "SF_STORE_OS_ENVIRONMENT_VARIABLE",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "class": "Sf",
+          "short_desc": "Stores the contents of the specified Windows variable (or environment variable) name to buffer",
+          "member": "GetOsEnv"
         },
         {
+          "input": [
+            {
+              "name": "unicodeString",
+              "type": "int"
+            },
+            {
+              "name": "ansiStringBuffer",
+              "type": "string"
+            },
+            {
+              "name": "bufferSize",
+              "type": "int"
+            }
+          ],
           "id": "0C68",
-          "name": "SAMP_UNICODE_TO_ANSI",
+          "name": "SF_UNICODE_TO_ANSI",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Converts a Unicode string to ANSI string then stores it to ansiStringBuffer",
+          "class": "Sf",
+          "member": "UnicodeToAnsi"
         },
         {
-          "id": "0C69",
-          "name": "SAMP_ANSI_TO_UNICODE",
-          "num_params": 3,
-          "attrs": {
-            "is_condition": true
-          },
           "input": [
             {
-              "name": "_p1",
+              "name": "ansiString",
+              "type": "string"
+            },
+            {
+              "name": "unicodeStringBuffer",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "buffersize",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0C69",
+          "name": "SF_ANSI_TO_UNICODE",
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "AnsiToUnicode",
+          "short_desc": "Converts an ANSI string to Unicode string then stores it to ansiStringBuffer"
         },
         {
           "id": "0C6A",
@@ -68384,7 +68396,6 @@
               "type": "AsyncDownload"
             }
           ],
-          "output": [],
           "id": "0C7D",
           "name": "SF_RELEASE_DOWNLOAD",
           "num_params": 1,

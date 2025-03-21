@@ -1,0 +1,20 @@
+// Run an embedded script that prints something. Then terminate it after 5 seconds
+{$CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+int csPtr
+SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL {newScriptPtrTo} csPtr {scriptLabel} @EmbeddedScript {passedValues} 321 19.33
+wait 5000
+SF_TERMINATE_CUSTOM_SCRIPT {address} csPtr
+
+TERMINATE_THIS_CUSTOM_SCRIPT
+
+:EmbeddedScript
+
+NOP
+
+while true
+    wait 0
+    PRINT_FORMATTED_NOW {text} "Hello World %d %f" {time} 100 {args} 0@ 1@
+end

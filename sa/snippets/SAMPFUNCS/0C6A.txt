@@ -1,0 +1,25 @@
+/* Check the snippets of the following commands for example usage of this command
+* SF_RESTART_CUSTOM_SCRIPT
+* SF_TERMINATE_CUSTOM_SCRIPT
+*/
+
+// Run a separate synchronous task that prints something.
+{$CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+int csPtr
+SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL {newScriptPtrTo} csPtr {scriptLabel} @AsyncTask {passedValues} 321 19.33 // create another task that separately runs from this script in an asynchronous manner
+
+while true
+    wait 0
+    // do something asynchronously
+end
+
+:AsyncTask
+NOP
+
+while true
+    wait 5000
+    PRINT_FORMATTED_NOW {text} "Hello World %d %f" {time} 1000 {args} 0@ 1@
+end

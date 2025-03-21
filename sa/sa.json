@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742545129552,
-    "version": "0.918",
+    "last_update": 1742568802124,
+    "version": "0.919",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -68084,26 +68084,56 @@
           "short_desc": "Converts an ANSI string to Unicode string then stores it to ansiStringBuffer"
         },
         {
-          "id": "0C6A",
-          "name": "SAMP_CREATE_CUSTOM_SCRIPT_AT_LABEL",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
+              "name": "newScriptPtrTo",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "scriptLabel",
+              "type": "label"
+            },
+            {
+              "name": "passedValues",
               "type": "arguments"
             }
-          ]
+          ],
+          "id": "0C6A",
+          "name": "SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL",
+          "num_params": 3,
+          "class": "Sf",
+          "member": "StartNewScriptFromLabel",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Starts a new custom script from the specified scriptLabel then stores its pointer at newScriptPtrTo parameter"
         },
         {
-          "id": "0C6B",
-          "name": "SAMP_CREATE_CUSTOM_SCRIPT_AT_POINTER",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
+              "name": "newScriptPtrTo",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "scriptBin",
+              "type": "int"
+            },
+            {
+              "name": "passedValues",
               "type": "arguments"
             }
-          ]
+          ],
+          "id": "0C6B",
+          "name": "SF_START_NEW_CUSTOM_SCRIPT_FROM_POINTER",
+          "num_params": 3,
+          "short_desc": "Starts a new custom script from the specified memory location where a custom script binary data is stored (scriptBin) then stores its pointer at newScriptPtrTo parameter",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "StartNewCustomScriptFromPointer"
         },
         {
           "id": "0C6C",
@@ -68144,26 +68174,42 @@
           ]
         },
         {
-          "id": "0C6E",
-          "name": "SAMP_DESTROY_CUSTOM_SCRIPT",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
+              "name": "address",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0C6E",
+          "name": "SF_TERMINATE_CUSTOM_SCRIPT",
+          "num_params": 1,
+          "class": "Sf",
+          "member": "TerminateCustomScript",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Terminates a custom script pointed by the address"
         },
         {
-          "id": "0C6F",
-          "name": "SAMP_RESTART_CUSTOM_SCRIPT",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
+              "name": "address",
+              "type": "int"
+            },
+            {
+              "name": "passedValues",
               "type": "arguments"
             }
-          ]
+          ],
+          "id": "0C6F",
+          "name": "SF_RESTART_CUSTOM_SCRIPT",
+          "num_params": 2,
+          "short_desc": "Restarts a custom script pointed by the address",
+          "class": "Sf",
+          "member": "RestartCustomScript",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0C70",
@@ -68400,7 +68446,8 @@
           "name": "SF_RELEASE_DOWNLOAD",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_destructor": true
           },
           "class": "AsyncDownload",
           "member": "Release",

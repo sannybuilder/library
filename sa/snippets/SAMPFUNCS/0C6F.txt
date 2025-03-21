@@ -1,0 +1,23 @@
+// Run an embedded script that prints incrementing values. Then restart this embedded script, resetting the incremented values to the specified passedValues
+{$CLEO}
+{$USE SAMPFUNCS}
+NOP
+
+int csPtr
+SF_START_NEW_CUSTOM_SCRIPT_FROM_LABEL {newScriptPtrTo} csPtr {scriptLabel} @EmbeddedScript {passedValues} 0 0.0
+
+while true
+    wait 5000
+    SF_RESTART_CUSTOM_SCRIPT {address} csPtr {passedValues} 5 10.0
+end
+
+:EmbeddedScript
+NOP
+var 0@:int , 1@:float
+
+while true
+    wait 0
+    PRINT_FORMATTED_NOW {text} "Values: %d %f" {time} 100 {args} 0@ 1@
+    0@++
+    1@ += 0.25
+end

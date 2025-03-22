@@ -1,0 +1,1 @@
+Unlike LOAD_DYNAMIC_LIBRARY, this command does not load the module if it's not yet loaded/running and will evaluate as logical false if used as a condition

@@ -1,0 +1,19 @@
+int moduleHandle, procPtr
+
+if moduleHandle = SF_GET_LOADED_MODULE {module} "MyFuncs.dll"
+then
+    if procPtr = SF_GET_MODULE_PROCEDURE {moduleHandle} moduleHandle {functionName} "MyProc"
+    then // do something to procPtr
+    else // MyFuncs.dll has no function with name MyProc
+    end
+else // MyFuncs.dll is not yet loaded
+end
+
+if moduleHandle = SF_GET_LOADED_MODULE {module} "Crypt32.dll"
+then
+    if procPtr = SF_GET_MODULE_PROCEDURE {moduleHandle} moduleHandle {functionName} "CryptProtectData"
+    then // do something to procPtr
+    else // this section will not execute since Crypt32.dll has CryptProtectData function
+    end
+else // Crypt32.dll is not yet loaded
+end

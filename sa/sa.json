@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742568802124,
-    "version": "0.919",
+    "last_update": 1742644658219,
+    "version": "0.920",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -64515,12 +64515,12 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Returns the flow of control to RakNet and decides wether the currently intercepted data will be processed by RakNet or not"
+          "short_desc": "Returns the flow of control to RakNet and decides whether the currently intercepted data will be processed by RakNet or not"
         },
         {
           "input": [
             {
-              "name": "callbackLabel",
+              "name": "callback",
               "type": "label"
             }
           ],
@@ -64533,12 +64533,12 @@
           },
           "class": "RakNet",
           "member": "HookRpcOut",
-          "short_desc": "Redirects all outgoing RPCs to the specified callback(label) for subsequent processing before sending to the server"
+          "short_desc": "Redirects all outgoing RPCs to the specified callback for subsequent processing before sending to the server"
         },
         {
           "input": [
             {
-              "name": "callbackLabel",
+              "name": "callback",
               "type": "label"
             }
           ],
@@ -64551,12 +64551,12 @@
           },
           "class": "RakNet",
           "member": "HookPacketOut",
-          "short_desc": "Redirects all outgoing Packets to the specified callback(label) for subsequent processing before sending to the server"
+          "short_desc": "Redirects all outgoing Packets to the specified callback for subsequent processing before sending to the server"
         },
         {
           "input": [
             {
-              "name": "callbackLabel",
+              "name": "callback",
               "type": "label"
             }
           ],
@@ -64567,14 +64567,14 @@
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Redirects all incoming RPCs to the specified callback(label) for subsequent processing before acceptance on the local client",
+          "short_desc": "Redirects all incoming RPCs to the specified callback for subsequent processing before acceptance on the local client",
           "class": "RakNet",
           "member": "HookRpcIn"
         },
         {
           "input": [
             {
-              "name": "callbackLabel",
+              "name": "callback",
               "type": "label"
             }
           ],
@@ -64587,7 +64587,7 @@
           },
           "class": "RakNet",
           "member": "HookPacketIn",
-          "short_desc": "Redirects all incoming packets to the specified callback(label) for subsequent processing before acceptance on the local client"
+          "short_desc": "Redirects all incoming packets to the specified callback for subsequent processing before acceptance on the local client"
         },
         {
           "input": [
@@ -67257,7 +67257,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "short_desc": "Sets wether the text scaling status is proportional to the text draw or not",
+          "short_desc": "Sets whether the text scaling status is proportional to the text draw or not",
           "member": "SetTextDrawProportionality"
         },
         {
@@ -67858,7 +67858,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Sets wether the specified script thread can read or write to the specified custom global variable",
+          "short_desc": "Sets whether the specified script thread can read or write to the specified custom global variable",
           "class": "Sf",
           "member": "GVarSetThreadScope"
         },
@@ -68136,42 +68136,57 @@
           "member": "RunFromPtr"
         },
         {
-          "id": "0C6C",
-          "name": "SAMP_SET_SCRIPT_LOCAL_VAR",
-          "num_params": 3,
           "input": [
             {
-              "name": "_p1",
+              "name": "ptr",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "varIndex",
               "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "value",
+              "type": "any"
             }
-          ]
+          ],
+          "id": "0C6C",
+          "name": "SF_SET_SCRIPT_LOCAL_VARIABLE",
+          "num_params": 3,
+          "short_desc": "Sets the values ​​for a local variable in the specified script",
+          "class": "SfScript",
+          "member": "SetLVar",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0C6D",
-          "name": "SAMP_GET_SCRIPT_LOCAL_VAR",
-          "num_params": 3,
           "input": [
             {
-              "name": "_p1",
+              "name": "ptr",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "varIndex",
               "type": "int"
             }
-          ]
+          ],
+          "output": [
+            {
+              "name": "value",
+              "type": "any",
+              "source": "var_any"
+            }
+          ],
+          "id": "0C6D",
+          "name": "SF_GET_SCRIPT_LOCAL_VARIABLE",
+          "num_params": 3,
+          "class": "Sf",
+          "member": "GetLVar",
+          "short_desc": "Returns the value of a local variable in the specified script",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -68206,228 +68221,295 @@
           "member": "Restart"
         },
         {
+          "input": [
+            {
+              "name": "moduleName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C70",
-          "name": "SAMP_GET_MODULE_HANDLE",
+          "name": "SF_GET_LOADED_MODULE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
+          "short_desc": "Returns the handle of a loaded module with name (moduleName)",
+          "class": "Sf",
+          "member": "GetModule"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "moduleHandle",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "functionName",
+              "type": "string"
             }
-          ]
-        },
-        {
+          ],
+          "output": [
+            {
+              "name": "functionPtr",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C71",
-          "name": "SAMP_GET_MODULE_PROC_ADDRESS",
+          "name": "SF_GET_MODULE_PROCEDURE",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns a pointer (functionPtr) to specified functionName inside the moduleHandle",
+          "class": "Sf",
+          "member": "GetModuleProc"
         },
         {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            },
+            {
+              "name": "isPressed",
+              "type": "bool"
+            }
+          ],
           "id": "0C72",
-          "name": "SAMP_SET_VIRTUAL_KEY",
+          "name": "SF_SET_KEY_STATUS",
           "num_params": 2,
+          "short_desc": "Sets whether a specific virtual key code is pressed or not",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "SetKeyStatus"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "ascii",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "isPressed",
+              "type": "bool"
             }
-          ]
-        },
-        {
+          ],
           "id": "0C73",
-          "name": "SAMP_SET_CHAR_KEY",
+          "name": "SF_SET_CHARACTER_KEY_STATUS",
           "num_params": 2,
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Sets whether a specific virtual key represented in ascii character format is pressed or not",
+          "class": "Sf",
+          "member": "SetCharKeyStatus"
+        },
+        {
           "input": [
             {
-              "name": "_p1",
+              "name": "interval",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "callback",
+              "type": "label"
             }
-          ]
-        },
-        {
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "SfTimer",
+              "source": "var_any"
+            }
+          ],
           "id": "0C74",
-          "name": "SAMP_CREATE_TIMER_INTERVAL",
+          "name": "SF_CREATE_TIMER",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_constructor": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ]
+          "class": "SfTimer",
+          "short_desc": "Creates and starts an SfTimer object that periodically executes its callback upon expiration",
+          "member": "Create"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            }
+          ],
           "id": "0C75",
-          "name": "SAMP_KILL_TIMER",
+          "name": "SF_DELETE_TIMER",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_destructor": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "SfTimer",
+          "member": "Delete",
+          "short_desc": "Removes the specified SfTimer object, freeing it from memory"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            }
+          ],
           "id": "0C76",
-          "name": "SAMP_RESET_TIMER",
+          "name": "SF_RESET_TIMER",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "class": "SfTimer",
+          "member": "Reset",
+          "short_desc": "Resets the SfTimer's countdown interval"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            },
+            {
+              "name": "interval",
+              "type": "int"
+            }
+          ],
           "id": "0C77",
-          "name": "SAMP_SET_TIMER_INTERVAL",
+          "name": "SF_SET_TIMER_INTERVAL",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sets a new interval for the SfTimer",
+          "class": "SfTimer",
+          "member": "SetInterval"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            },
+            {
+              "name": "isActive",
+              "type": "bool"
+            }
+          ],
           "id": "0C78",
-          "name": "SAMP_SET_TIMER_ACTIVE",
+          "name": "SF_SET_TIMER_STATUS",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "SfTimer",
+          "member": "SetStatus",
+          "short_desc": "Activates or pauses an SfTimer's functionality"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            }
+          ],
           "id": "0C79",
-          "name": "SAMP_IS_TIMER_ACTIVE",
+          "name": "SF_IS_TIMER_ACTIVE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Evaluates as logical true if the SfTimer is active",
+          "class": "SfTimer",
+          "member": "IsActive"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            }
+          ],
+          "output": [
+            {
+              "name": "interval",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C7A",
-          "name": "SAMP_GET_TIMER_INTERVAL",
+          "name": "SF_GET_TIMER_INTERVAL",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "SfTimer",
+          "member": "GetInterval",
+          "short_desc": "Returns the SfTimer's configured interval"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            }
+          ],
+          "output": [
+            {
+              "name": "elapsedTime",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C7B",
-          "name": "SAMP_GET_TIMER_TIME_ELAPSED",
+          "name": "SF_GET_TIMER_ELAPSED_TIME",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "SfTimer",
+          "member": "GetElapsedTime",
+          "short_desc": "Returns the number of milliseconds that have passed since the last SfTimer reset (including after the interval has passed)"
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "SfTimer"
+            }
+          ],
+          "output": [
+            {
+              "name": "timeLeft",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C7C",
-          "name": "SAMP_GET_TIMER_TIME_LEFT",
+          "name": "SF_GET_TIMER_TIME_LEFT",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "class": "SfTimer",
+          "member": "GetTimeLeft",
+          "short_desc": "Returns the number of milliseconds remaining before the SfTimer expires (decremented if the timer is active)"
         },
         {
           "input": [

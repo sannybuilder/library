@@ -1,0 +1,61 @@
+// This example demonstrates the entire SfTimer Class usage
+{$USE CLEO}
+{$USE SAMPFUNCS}
+{$USE debug}
+NOP
+
+Debugger.Enable()
+
+    // initialize variables
+int unrefIterations = 0
+int refIterations = 0
+    //
+
+    // initialize SfTimers
+SfTimer enablerTimerObj // global SfTimer definition, to be used later
+SfTimer.Create(3500, @UnreferencedTimerCallback_DoSomething, 0) // don't retrieve the SfTimer handle, let's call it "UnrefTimer"
+SfTimer myTimerObj = SfTimer.Create(5000, @ReferencedTimerCallback_DoSomething) // myTimerObj now contains the handle of this newly created SfTimer
+    //
+
+while true
+    wait 0
+    int isActive
+    if myTimerObj.IsActive()
+    then isActive = true
+    else isActive = false
+    end
+    int interval = myTimerObj.GetInterval()
+    int elapsedTime = myTimerObj.GetElapsedTime()
+    int timeLeft = myTimerObj.GetTimeLeft()
+    Text.PrintFormattedNow("isActive=%d interval=%d~n~elapsedTime=%d timeLeft=%d", 100, isActive, interval, elapsedTime, timeLeft)
+end
+
+:ReferencedTimerCallback_Enabler
+    enablerTimerObj.Delete() // delete this temporary oneshot timer
+
+    float newInterval = Math.RandomFloatInRange(4000, 7000)
+    var newInterval:int
+    newInterval =# newInterval
+    int elapsedTime = myTimerObj.GetElapsedTime()
+    int timeLeft = myTimerObj.GetTimeLeft()
+    Debugger.Trace("elapsedTime=%d timeLeft=%d", elapsedTime, timeLeft)
+    myTimerObj.SetInteval(newInterval) // update myTimerObj's interval
+    myTimerObj.Reset() // reset myTimerObj's interval
+    myTimerObj.SetStatus(true) // resume myTimerObj
+    Debugger.Trace("myTimerObj resumed")
+SF_COMMAND_RETURN // end of callback
+
+:ReferencedTimerCallback_DoSomething
+    refIterations++
+    Debugger.Trace("Callback of myTimerObj with ID %X triggered %u times", myTimerObj, refIterations)
+    if refIterations >= 5
+    then
+        enablerTimerObj = SfTimer.Create(3000, @ReferencedTimerCallback_Enabler) // temporarily create a oneshot timer
+        Debugger.Trace("myTimerObj Paused for 3 seconds")
+    end
+SF_COMMAND_RETURN // end of callback
+
+:UnreferencedTimerCallback_DoSomething
+    unrefIterations++
+    Debugger.Trace("UnrefTimer's Callback triggered %u times", unrefIterations)
+SF_COMMAND_RETURN // end of callback

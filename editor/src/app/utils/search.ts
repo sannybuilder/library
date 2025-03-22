@@ -253,7 +253,7 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
       for (const [handler, word] of filters) {
         let index = lowerProp.indexOf(word.toLowerCase());
 
-        if (index === -1) {
+        if (index === -1 || !word.length) {
           // don't reorder results based on custom filters
           if (handler !== ContainsHandler) {
             // demote partial results

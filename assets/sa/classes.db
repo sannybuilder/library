@@ -71,6 +71,7 @@ ScriptFire
 Searchlight
 Sequence
 Sf
+SfConsole
 SfScript
 SfTimer
 Shopping
@@ -3006,6 +3007,7 @@ GetPickupPoolPtr,0BB9,0,0,("address%i")
 GetPlayerAnim,0B57,1,0,("playerId%i" "animId%i")
 GetPlayerArmor,0B26,0,0,("id%i" "armor%i")
 GetPlayerColor,0B37,0,0,("id%i" "color%i")
+GetPlayerCount,0C8B,0,0,("streamedOnly%b" "playerCount%i")
 GetPlayerHealth,0B25,0,0,("id%i" "health%i")
 GetPlayerName,0B36,0,0,("id%i" "nickname%i")
 GetPlayerPing,0B2A,0,0,("id%i" "ping%i")
@@ -3027,13 +3029,14 @@ GetTextDrawAlignment,0C54,1,0,("id%i" "alignment: SampTextDrawAlignment")
 GetTextDrawBox,0C53,1,0,("id%i" "isVisible%b" "color%i" "width%f" "height%f")
 GetTextDrawPoolPtr,0BB3,0,0,("address%i")
 GetTextLabelPoolPtr,0BB6,0,0,("address%i")
-GetTextdrawCharacterProperties,0C5C,1,0,("id%i" "width%f" "height%f" "color%i")
+GetTextdrawCharProps,0C5C,1,0,("id%i" "width%f" "height%f" "color%i")
 GetTextdrawCoords,0C5B,1,0,("id%i" "coordX%f" "coordY%f")
 GetTextdrawModel,0C59,1,0,("id%i" "model: model_any" "rotPitch%f" "rotRoll%f" "rotYaw%f" "camZoomRange%f" "primaryColor%i" "secondaryColor%i")
 GetTextdrawOutline,0C58,1,0,("id%i" "tickness%i" "color%i")
 GetTextdrawProportionality,0C55,1,0,("id%i" "isProportional%b")
 GetTextdrawShadow,0C57,1,0,("id%i" "tickness%i" "color%i")
 GetTextdrawStyle,0C56,1,0,("id%i" "style%i")
+MaxPlayerId,0C8A,1,0,("streamedOnly%b" "maxPlayerId%i")
 ModifyTextDraw,0C48,1,0,("id%i" "text%s" "coordX%f" "coordY%f")
 Npc,0B64,1,0,("id%i")
 PlayerPaused,0B5C,1,0,("playerId%i")
@@ -3084,7 +3087,7 @@ SetSendRate,0B22,0,0,("type: SampSendRateType" "delay%i")
 SetSpecialAction,0AFD,0,0,("id: SampSpecialAction")
 SetTextDrawAlignment,0C4A,1,0,("id%i" "alignment: SampTextDrawAlignment")
 SetTextDrawBox,0C49,1,0,("textDrawId%i" "isVisible%b" "color%i" "width%f" "height%f")
-SetTextDrawCharacterProperties,0C52,1,0,("id%i" "width%f" "height%f" "color%i")
+SetTextDrawCharProps,0C52,1,0,("id%i" "width%f" "height%f" "color%i")
 SetTextDrawCoords,0C51,1,0,("id%i" "coordX%f" "coordY%f")
 SetTextDrawOutline,0C4E,1,0,("id%i" "tickness%i" "color%i")
 SetTextDrawProportionality,0C4B,1,0,("id%i" "isProportional%b")
@@ -3153,13 +3156,6 @@ Ceil,0C0A,0,0,("number%f" "result%f")
 ClipboardReadData,0C8E,1,0,("buffer%i" "size%i")
 ClipboardWriteText,0C8D,0,0,("text%s")
 CmdRet,0B43,0,0,()
-ConsoleExecCmd,0C62,0,0,("command%s")
-ConsoleHasCmd,0C91,1,0,("command%s")
-ConsoleIsOpen,0C7E,1,0,()
-ConsoleLog,0B78,0,0,("format%s" "args: arguments")
-ConsoleRegCmd,0C63,1,0,("command%s" "callback: label")
-ConsoleSetCmdDesc,0C80,0,0,("command%s" "description%s")
-ConsoleUnregCmd,0C64,1,0,("command%s")
 Cos,0C05,0,0,("radians%f" "ratio%f")
 D3DDrawBorderedBox,0B6A,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "color%i" "borderSize%i" "borderColor%i")
 D3DDrawBorderlessBox,0B69,0,0,("coordX%i" "coordY%i" "width%i" "height%i" "color%i")
@@ -3245,6 +3241,17 @@ WriteElementOf4BytesArray,0C0F,1,0,("array%i" "index%i" "value: any")
 WriteElementOfSizedArray,0C1E,1,0,("array%i" "index%i" "size%i" "value: any")
 WriteMemoryWithOffset,0C0D,1,0,("address%i" "offset%i" "size%i" "value: any")
 WriteStringToElementOfBufferArray,0C20,0,0,("array%i" "index%i" "size%i" "string%s")
+$END
+
+$SfConsole
+$BEGIN
+ExecCmd,0C62,0,0,("command%s")
+HasCmd,0C91,1,0,("command%s")
+IsOpen,0C7E,1,0,()
+Log,0B78,0,0,("format%s" "args: arguments")
+RegCmd,0C63,1,0,("command%s" "callback: label")
+SetCmdDesc,0C80,0,0,("command%s" "description%s")
+UnregCmd,0C64,1,0,("command%s")
 $END
 
 $SfScript

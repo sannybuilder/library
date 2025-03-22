@@ -3172,7 +3172,6 @@ GetCmdParams,0B35,1,0,("pointer%i")
 GetCursorCoord,0B5E,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i")
 GetElementPointerOfBufferArray,0C1F,0,0,("array%i" "index%i" "size%i" "address%i")
 GetGVar,0BFD,1,0,("name%s" "value: any")
-GetLVar,0C6D,0,0,("ptr%i" "varIndex%i" "value: any")
 GetModule,0C70,1,0,("moduleName%s" "handle%i")
 GetModuleProc,0C71,1,0,("moduleHandle%i" "functionName%s" "functionPtr%i")
 GetOsEnv,0C67,1,0,("varName%s" "stringBuffer%s" "buffersize%i")
@@ -3237,10 +3236,11 @@ $END
 
 $SfScript
 $BEGIN
+GetLVar,0C6D,0,0,("self: SfScript" "varIndex%i" "value: any")
 Restart,0C6F,0,0,("self: SfScript" "passedValues: arguments")
 RunFromLabel,0C6A,0,0,("scriptLabel: label" "newScriptPtrTo: SfScript" "passedValues: arguments")
 RunFromPtr,0C6B,0,0,("scriptBin%i" "newScriptPtrTo: SfScript" "passedValues: arguments")
-SetLVar,0C6C,0,0,("ptr%i" "varIndex%i" "value: any")
+SetLVar,0C6C,0,0,("self: SfScript" "varIndex%i" "value: any")
 Terminate,0C6E,0,0,("self: SfScript")
 $END
 

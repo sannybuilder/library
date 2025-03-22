@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742662565827,
-    "version": "0.921",
+    "last_update": 1742664765763,
+    "version": "0.922",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -62224,8 +62224,8 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Sf",
-          "member": "ConsoleLog"
+          "class": "SfConsole",
+          "member": "Log"
         },
         {
           "input": [
@@ -67455,7 +67455,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "SetTextDrawCharacterProperties",
+          "member": "SetTextDrawCharProps",
           "short_desc": "Sets the size and color property of all characters in the textdraw"
         },
         {
@@ -67775,7 +67775,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "GetTextdrawCharacterProperties",
+          "member": "GetTextdrawCharProps",
           "short_desc": "Returns the size and color property of all characters in the textdraw"
         },
         {
@@ -67910,8 +67910,8 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Sf",
-          "member": "ConsoleExecCmd"
+          "class": "SfConsole",
+          "member": "ExecCmd"
         },
         {
           "input": [
@@ -67931,8 +67931,8 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "Sf",
-          "member": "ConsoleRegCmd",
+          "class": "SfConsole",
+          "member": "RegCmd",
           "short_desc": "Registers a callback hooked on a SAMPFUNCS console command with maximum length of 64 characters"
         },
         {
@@ -67949,8 +67949,8 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "Sf",
-          "member": "ConsoleUnregCmd",
+          "class": "SfConsole",
+          "member": "UnregCmd",
           "short_desc": "Removes the specified SAMPFUNCS console command. This command does nothing if the the specified command isn't a registered in the SAMPFUNCS console then evaluates as logical false if used as a condition"
         },
         {
@@ -68194,7 +68194,10 @@
           "num_params": 1,
           "class": "SfScript",
           "member": "Terminate",
-          "short_desc": "Terminates a script pointed by the address"
+          "short_desc": "Terminates a script pointed by the address",
+          "attrs": {
+            "is_destructor": true
+          }
         },
         {
           "input": [
@@ -68531,8 +68534,8 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "Sf",
-          "member": "ConsoleIsOpen",
+          "class": "SfConsole",
+          "member": "IsOpen",
           "short_desc": "Evaluates as logical true if the SAMPFUNCS console is open"
         },
         {
@@ -68571,8 +68574,8 @@
           "name": "SF_SET_CONSOLE_COMMAND_DESCRIPTION",
           "num_params": 2,
           "short_desc": "Sets the description for the console command",
-          "class": "Sf",
-          "member": "ConsoleSetCmdDesc",
+          "class": "SfConsole",
+          "member": "SetCmdDesc",
           "attrs": {
             "is_static": true
           }
@@ -68733,9 +68736,12 @@
           "name": "SAMP_GET_MAX_PLAYER_ID",
           "num_params": 2,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Returns the maximum player ID currently streamed if streamedOnly = true. Else, returns the maximum player ID allowed in the server"
+          "short_desc": "Returns the maximum player ID currently streamed if streamedOnly = true. Else, returns the maximum player ID allowed in the server",
+          "class": "Samp",
+          "member": "MaxPlayerId"
         },
         {
           "input": [
@@ -68754,7 +68760,12 @@
           "id": "0C8B",
           "name": "SAMP_GET_PLAYER_COUNT",
           "num_params": 2,
-          "short_desc": "Returns the number of players that are currently streamed if streamedOnly = true. Else, returns the number of players allowed in the server"
+          "short_desc": "Returns the number of players that are currently streamed if streamedOnly = true. Else, returns the number of players allowed in the server",
+          "class": "Samp",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "GetPlayerCount"
         },
         {
           "input": [
@@ -68874,8 +68885,8 @@
             "is_static": true
           },
           "short_desc": "Returns logical true if the specified console command is registered",
-          "class": "Sf",
-          "member": "ConsoleHasCmd"
+          "class": "SfConsole",
+          "member": "HasCmd"
         },
         {
           "output": [
@@ -68886,7 +68897,7 @@
             }
           ],
           "id": "0C92",
-          "name": "SAMP_GET_CLEO_LIBRARY_VERSION",
+          "name": "SF_GET_CLEO_LIBRARY_VERSION",
           "num_params": 1,
           "short_desc": "Returns the installed version of CLEO",
           "attrs": {
@@ -68903,7 +68914,7 @@
             }
           ],
           "id": "1337",
-          "name": "SAMP_MAKE_SCRIPT_PRIVATE",
+          "name": "SF_MAKE_SCRIPT_PRIVATE",
           "num_params": 1,
           "short_desc": "Makes the script where this command is executed invisible across other scripts",
           "class": "Sf",

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742644658219,
-    "version": "0.920",
+    "last_update": 1742662565827,
+    "version": "0.921",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -63900,7 +63900,7 @@
             }
           ],
           "id": "0BC1",
-          "name": "SAMP_SEND_INCAR_DATA",
+          "name": "SAMP_SEND_DRIVER_DATA",
           "num_params": 1,
           "class": "Samp",
           "member": "SendInCarData",
@@ -68372,7 +68372,7 @@
           },
           "class": "SfTimer",
           "member": "Reset",
-          "short_desc": "Resets the expiration time of the SfTimer, restarting the trigger countdown"
+          "short_desc": "Resets the expiration time of the SfTimer, restarting its trigger countdown"
         },
         {
           "input": [
@@ -68570,126 +68570,191 @@
           "id": "0C80",
           "name": "SF_SET_CONSOLE_COMMAND_DESCRIPTION",
           "num_params": 2,
-          "short_desc": "Sets the description for the console command"
+          "short_desc": "Sets the description for the console command",
+          "class": "Sf",
+          "member": "ConsoleSetCmdDesc",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0C81",
-          "name": "SAMP_FORCE_CAR_SYNC",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
+              "name": "id",
               "type": "int"
             }
-          ]
+          ],
+          "id": "0C81",
+          "name": "SAMP_FORCE_DRIVER_SYNC",
+          "num_params": 1,
+          "short_desc": "Sends SampPacket.DriverSync to server about our character driving a car with ID",
+          "class": "Samp",
+          "member": "ForceDriverSync",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "id": "0C82",
-          "name": "SAMP_FORCE_UNOCCUPIED_SYNC",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
+              "name": "carId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "seatId",
+              "type": "SeatId"
             }
-          ]
+          ],
+          "id": "0C82",
+          "name": "SAMP_FORCE_UNOCCUPIED_SYNC",
+          "num_params": 2,
+          "short_desc": "Sends SampPacket.UnoccupiedCarSync to server about a seatId of a car with carId being unoccupied",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "ForceUnnocupiedSync"
         },
         {
           "id": "0C83",
           "name": "SAMP_FORCE_ONFOOT_SYNC",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Sends SampPacket.OnFootSync to server about our character being onfoot",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "ForceOnfootSync"
         },
         {
           "id": "0C84",
           "name": "SAMP_FORCE_AIM_SYNC",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Sends SampPacket.AimSync containing our current aim data, to server",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "ForceAimSync"
         },
         {
+          "input": [
+            {
+              "name": "id",
+              "type": "int"
+            }
+          ],
           "id": "0C85",
           "name": "SAMP_FORCE_TRAILER_SYNC",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Sends SampPacket.TrailerSync to server about a trailer with ID being attached to our player",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "ForceTrailerSync"
         },
         {
-          "id": "0C86",
-          "name": "SAMP_FORCE_PASSENGER_SYNC",
-          "num_params": 2,
           "input": [
             {
-              "name": "_p1",
+              "name": "carId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "seatId",
+              "type": "SeatId"
             }
-          ]
+          ],
+          "id": "0C86",
+          "name": "SAMP_FORCE_PASSENGER_SYNC",
+          "num_params": 2,
+          "short_desc": "Sends SampPacket.PassengerSync to server about our character sitting at seatId of a car with carId",
+          "class": "Samp",
+          "member": "ForcePassengerSync",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0C87",
           "name": "SAMP_FORCE_STATS_SYNC",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Sends SampPacket.StatsUpdate containing our current money and drunk level, to server",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "ForceStatsSync"
         },
         {
           "id": "0C88",
           "name": "SAMP_FORCE_WEAPONS_SYNC",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": "Sends SampPacket.WeaponsUpdate containing our character's current weapons, to server",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "ForceWeaponsSync"
         },
         {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
           "id": "0C89",
           "name": "SAMP_KEY_JUST_PRESSED",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Evaluates as logical true if the specified virtual keyCode has been pressed just now",
+          "class": "Sf",
+          "member": "KeyJustPressed"
         },
         {
+          "input": [
+            {
+              "name": "streamedOnly",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "maxPlayerId",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C8A",
           "name": "SAMP_GET_MAX_PLAYER_ID",
           "num_params": 2,
           "attrs": {
             "is_condition": true
           },
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the maximum player ID currently streamed if streamedOnly = true. Else, returns the maximum player ID allowed in the server"
         },
         {
+          "input": [
+            {
+              "name": "streamedOnly",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "playerCount",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C8B",
           "name": "SAMP_GET_PLAYER_COUNT",
           "num_params": 2,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the number of players that are currently streamed if streamedOnly = true. Else, returns the number of players allowed in the server"
         },
         {
           "input": [
@@ -68760,15 +68825,21 @@
           "member": "ClipboardReadData"
         },
         {
+          "input": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ],
           "id": "0C8F",
           "name": "SAMP_PROCESS_CHAT_INPUT",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Processes a message by SAMPFUNCS callbacks, then sent to server as SampRpc.Chat",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Samp",
+          "member": "ProcessChatInput"
         },
         {
           "input": [
@@ -68807,26 +68878,39 @@
           "member": "ConsoleHasCmd"
         },
         {
+          "output": [
+            {
+              "name": "version",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0C92",
           "name": "SAMP_GET_CLEO_LIBRARY_VERSION",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Returns the installed version of CLEO",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Sf",
+          "member": "GetCleoLibVer"
         },
         {
+          "input": [
+            {
+              "name": "isPrivate",
+              "type": "int"
+            }
+          ],
           "id": "1337",
           "name": "SAMP_MAKE_SCRIPT_PRIVATE",
           "num_params": 1,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ]
+          "short_desc": "Makes the script where this command is executed invisible across other scripts",
+          "class": "Sf",
+          "member": "MakeScriptPrivate",
+          "attrs": {
+            "is_static": true
+          }
         }
       ]
     },

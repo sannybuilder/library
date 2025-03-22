@@ -8,7 +8,7 @@ while true
     float randVal
     int myCharPtr = GET_PED_POINTER $scplayer
     int rotMtxPtr
-    if rotMtxPtr = SF_READ_MEMORY_OFFSET {address} myCharPtr {offset} 0x14 {size} 4 // pointer to rotation matrix
+    if rotMtxPtr = SF_READ_MEMORY_WITH_OFFSET {address} myCharPtr {offset} 0x14 {size} 4 // pointer to rotation matrix
     then
         float rotX_OffsetX = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 0
         float rotX_OffsetY = SF_READ_ELEMENT_OF_4BYTES_ARRAY {arrayAddress} rotMtxPtr {elementIndex} 1

@@ -1,7 +1,8 @@
 // This example demonstrates the entire SfTimer Class usage
-{$USE CLEO}
+{$CLEO}
 {$USE SAMPFUNCS}
 {$USE debug}
+{$USE bitwise}
 NOP
 
 Debugger.Enable()
@@ -12,9 +13,16 @@ int refIterations = 0
     //
 
     // initialize SfTimers
-SfTimer enablerTimerObj // global SfTimer definition, to be used later
-SfTimer.Create(3500, @UnreferencedTimerCallback_DoSomething, 0) // don't retrieve the SfTimer handle, let's call it "UnrefTimer"
-SfTimer myTimerObj = SfTimer.Create(5000, @ReferencedTimerCallback_DoSomething) // myTimerObj now contains the handle of this newly created SfTimer
+SfTimer enablerTimerObj = 0 // 0 = undefined SfTimer, to be used later
+if not SfTimer.Create(2000, @UnreferencedTimerCallback_DoSomething, 0) // don't retrieve the SfTimer handle, let's call it "UnrefTimer"
+then Debugger.Trace("Failed to Create Unreferenced SfTimer")
+end
+SfTimer myTimerObj
+if not myTimerObj = SfTimer.Create(5000, @ReferencedTimerCallback_DoSomething) // myTimerObj now contains the handle of this newly created SfTimer
+then
+    myTimerObj = 0 // 0 = undefined SfTimer
+    Debugger.Trace("Failed to Create myTimerObj")
+end
     //
 
 while true
@@ -31,31 +39,43 @@ while true
 end
 
 :ReferencedTimerCallback_Enabler
-    enablerTimerObj.Delete() // delete this temporary oneshot timer
-
-    float newInterval = Math.RandomFloatInRange(4000, 7000)
-    var newInterval:int
-    newInterval =# newInterval
-    int elapsedTime = myTimerObj.GetElapsedTime()
-    int timeLeft = myTimerObj.GetTimeLeft()
-    Debugger.Trace("elapsedTime=%d timeLeft=%d", elapsedTime, timeLeft)
-    myTimerObj.SetInteval(newInterval) // update myTimerObj's interval
-    myTimerObj.Reset() // reset myTimerObj's interval
-    myTimerObj.SetStatus(true) // resume myTimerObj
     Debugger.Trace("myTimerObj resumed")
-SF_COMMAND_RETURN // end of callback
+    if enablerTimerObj <> 0 // SfTimer is defined
+    then
+        if not enablerTimerObj.Delete() // delete this temporary oneshot timer
+        then Debugger.Trace("Failed to Delete enablerTimerObj")
+        end
+    else Debugger.Trace("myTimerObj is Undefined")
+    end
+    enablerTimerObj = 0 // 0 = undefined SfTimer
+    int newInterval = Math.RandomIntInRange(4000, 7000)
+    myTimerObj.Reset() // the timeStamp variable sometimes overshootof reset myTimerObj's interval
+    myTimerObj.SetInterval(newInterval) // update myTimerObj's interval
+    myTimerObj.Reset() // reset myTimerObj's interval again
+    if not myTimerObj.SetStatus(true) // resume myTimerObj
+    then Debugger.Trace("Failed to Resume myTimerObj")
+    end
+Sf.CmdRet() // end of callback
 
 :ReferencedTimerCallback_DoSomething
     refIterations++
     Debugger.Trace("Callback of myTimerObj with ID %X triggered %u times", myTimerObj, refIterations)
-    if refIterations >= 5
+    int isResumed = refIterations % 5
+    if isResumed == false
     then
-        enablerTimerObj = SfTimer.Create(3000, @ReferencedTimerCallback_Enabler) // temporarily create a oneshot timer
-        Debugger.Trace("myTimerObj Paused for 3 seconds")
+        if not myTimerObj.SetStatus(false) // pause myTimerObj
+        then Debugger.Trace("Failed to Pause myTimerObj")
+        end
+        if not enablerTimerObj = SfTimer.Create(7000, @ReferencedTimerCallback_Enabler) // temporarily create a oneshot timer
+        then
+            myTimerObj = 0 // 0 = undefined SfTimer
+            Debugger.Trace("Failed to Create enablerTimerObj")
+        end
+        Debugger.Trace("myTimerObj Paused for 7 seconds")
     end
-SF_COMMAND_RETURN // end of callback
+Sf.CmdRet() // end of callback
 
 :UnreferencedTimerCallback_DoSomething
     unrefIterations++
     Debugger.Trace("UnrefTimer's Callback triggered %u times", unrefIterations)
-SF_COMMAND_RETURN // end of callback
+Sf.CmdRet() // end of callback

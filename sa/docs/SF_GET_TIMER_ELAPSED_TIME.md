@@ -1,0 +1,1 @@
+The elapsed time computed by this command isn't affected by the Sftimer's current status. you might notice that the returned elapsed time value is still changing from time to time despite the SfTimer is currently paused.

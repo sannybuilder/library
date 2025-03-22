@@ -1,8 +1,7 @@
-* When a callback is hooked on a chatcommand, then everytime we type this chatcommand, it will not be sent to the server. To reverse this behavior, execute **SAMP_UNHOOK_LOCAL_CHAT_COMMAND** for the affected chatcommand.
-* The chat command trigger text will be **/\<chatcommand\>** . For example:
-  * if chatcommand = **"killme"** then you need to type **/killme** in chat
-  * if chatcommand = **"/killme"** then you need to type **//killme** in chat
-* You must pass an offset label as the callback parameter. Like For example, **@ChatCallback_GiveWeapon**
+* The handle parameter can be set to any constant value if the SfTimer object's handle isn't needed to be retrieved. Else, pass a variable to handle parameter:
+  * `SF_CREATE_TIMER {interval} 500 {callback} @TimerCallback_DoSomething {handleTo} 0 // legacy syntax` creates an SfTimer **without** retrieving its handle
+  * `5@ = SF_CREATE_TIMER {interval} 500 {callback} @TimerCallback_DoSomething` creates an SfTimer then stores the handle to **5@**
+* The callback parameter must be an offset label. For example, **@TimerCallback_DoSomething**
 * The callback label must contain the callback's body.
 * Construct the callback's flow of execution with caution.
   * Like subroutines, callbacks uses the variable space of the script's main thread.

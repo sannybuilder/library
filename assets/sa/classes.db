@@ -72,6 +72,7 @@ Searchlight
 Sequence
 Sf
 SfScript
+SfTimer
 Shopping
 Skip
 Sound
@@ -2912,10 +2913,10 @@ $BEGIN
 GetHookParam,0BE5,1,0,("type: SampRakNetHookParam" "value: any")
 GetPacketName,0BF9,1,0,("id%i" "name%i")
 GetRpcName,0BF8,1,0,("id%i" "name%s")
-HookPacketIn,0BE4,1,0,("callbackLabel: label")
-HookPacketOut,0BE2,1,0,("callbackLabel: label")
-HookRpcIn,0BE3,1,0,("callbackLabel: label")
-HookRpcOut,0BE1,1,0,("callbackLabel: label")
+HookPacketIn,0BE4,1,0,("callback: label")
+HookPacketOut,0BE2,1,0,("callback: label")
+HookRpcIn,0BE3,1,0,("callback: label")
+HookRpcOut,0BE1,1,0,("callback: label")
 Return,0BE0,0,0,("unblockData%b")
 SetHookParam,0BE6,1,0,("type: SampRakNetHookParam" "value: any")
 $END
@@ -3171,6 +3172,9 @@ GetCmdParams,0B35,1,0,("pointer%i")
 GetCursorCoord,0B5E,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i")
 GetElementPointerOfBufferArray,0C1F,0,0,("array%i" "index%i" "size%i" "address%i")
 GetGVar,0BFD,1,0,("name%s" "value: any")
+GetLVar,0C6D,0,0,("ptr%i" "varIndex%i" "value: any")
+GetModule,0C70,1,0,("moduleName%s" "handle%i")
+GetModuleProc,0C71,1,0,("moduleHandle%i" "functionName%s" "functionPtr%i")
 GetOsEnv,0C67,1,0,("varName%s" "stringBuffer%s" "buffersize%i")
 GetScreenRes,0B5A,0,0,("width%i" "height%i")
 GetTickCount,0BFE,0,0,("tickCount%i")
@@ -3197,7 +3201,9 @@ ReadMemoryWithOffset,0C0C,1,0,("address%i" "offset%i" "size%i" "value: any")
 RegGFunc,0C34,1,0,("name%s" "label: label")
 ResumeThread,0BDF,0,0,("threadId%i")
 SetButton,0B56,0,0,("buttonId: Button" "behaviorValue%i")
+SetCharKeyStatus,0C73,0,0,("ascii%i" "isPressed%b")
 SetGVar,0BFC,1,0,("name%s" "value: any")
+SetKeyStatus,0C72,0,0,("keyCode: KeyCode" "isPressed%b")
 SetTextDrawModel,0C4F,1,0,("textDrawId%i" "model: model_any" "rotPitch%f" "rotRoll%f" "rotYaw%f" "camZoomRange%f" "primaryColor%i" "secondaryColor%i")
 Sin,0C03,0,0,("radians%f" "ratio%f")
 StrCat,0C15,0,0,("stringBuffer%s" "appendedString%s")
@@ -3234,7 +3240,21 @@ $BEGIN
 Restart,0C6F,0,0,("self: SfScript" "passedValues: arguments")
 RunFromLabel,0C6A,0,0,("scriptLabel: label" "newScriptPtrTo: SfScript" "passedValues: arguments")
 RunFromPtr,0C6B,0,0,("scriptBin%i" "newScriptPtrTo: SfScript" "passedValues: arguments")
+SetLVar,0C6C,0,0,("ptr%i" "varIndex%i" "value: any")
 Terminate,0C6E,0,0,("self: SfScript")
+$END
+
+$SfTimer
+$BEGIN
+Create,0C74,1,0,("interval%i" "callback: label" "handle: SfTimer")
+Delete,0C75,1,0,("self: SfTimer")
+GetElapsedTime,0C7B,1,0,("self: SfTimer" "elapsedTime%i")
+GetInterval,0C7A,1,0,("self: SfTimer" "interval%i")
+GetTimeLeft,0C7C,1,0,("self: SfTimer" "timeLeft%i")
+IsActive,0C79,1,0,("self: SfTimer")
+Reset,0C76,1,0,("self: SfTimer")
+SetInterval,0C77,1,0,("self: SfTimer" "interval%i")
+SetStatus,0C78,1,0,("self: SfTimer" "isActive%b")
 $END
 
 $Shopping

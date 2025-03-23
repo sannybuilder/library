@@ -1,1 +1,0 @@
-Unlike SF_SET_KEYPRESSED_STATUS, this command is limited to keyboard characters defined in the ascii table, and cannot process special keys like CTRL, F1, PRTSCR.

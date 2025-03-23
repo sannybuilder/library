@@ -1,4 +1,19 @@
-// Example 1, how to correctly write the server IP to string variable 1@v
+// Example 1, server ip isn't retrieved if we passing NULL (0) pointer to buffer parameter
+int port
+SAMP_GET_SERVER_ADDRESS {var_buffer} 0 {var_port} port
+// server ip in string format has been written at the allocated memory region strBuf
+// do something to strBuf
+FREE_MEMORY {address} strBuf // free this temporary memory region to avoid memory leak
+
+// Example 2, port isn't retrieved if we pass any constant to port parameter
+int strBuf
+strBuf = ALLOCATE_MEMORY {size} 16
+SAMP_GET_SERVER_ADDRESS {var_buffer} strBuf {var_port} 324
+// server ip in string format has been written at the allocated memory region strBuf
+// do something to strBuf
+FREE_MEMORY {address} strBuf // free this temporary memory region to avoid memory leak
+
+// Example 3, how to correctly write the server IP to string variable 1@v
 const
     port = 0@
     strBuf = 1@
@@ -7,7 +22,7 @@ strBuf = GET_VAR_POINTER strBuf // get pointer to self
 strBuf, port = SAMP_GET_SERVER_ADDRESS
 // server ip in string format has been written to strBuf. This string occupies 16 bytes to satisfy the string ip(uses 1@, 2@, 3@, 4@)
 
-// Example 2, write server IP to a temporarily allocated memory
+// Example 4, retrieves the port and writes the server IP to a temporarily allocated memory
 int strBuf, port
 strBuf = ALLOCATE_MEMORY {size} 16
 strBuf, port = SAMP_GET_SERVER_ADDRESS

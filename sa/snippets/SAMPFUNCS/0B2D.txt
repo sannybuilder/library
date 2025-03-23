@@ -1,0 +1,7 @@
+// Example: Take clean screenshot for 0.3.7 R1
+
+SAMP_WRITE_SAMP_MEMORY_WITH_OFFSET {offset} 0x5D8C1 {value} false {size} 1 // temporarily disable SAMP manual screenshot when pressing F8
+wait 500 // give all other scripts time to hide our hacks :)
+SAMP_WRITE_SAMP_MEMORY_WITH_OFFSET {offset} 0x119CBC {value} true {size} 1 // programmatically take SAMP screenshot
+wait 500 // necessary delay to make sure that the screenshot is clean before enabling manual screenshot
+SAMP_WRITE_SAMP_MEMORY_WITH_OFFSET {offset} 0x5D8C1 {value} true {size} 1 // reenable SAMP manual screenshot when pressing F8

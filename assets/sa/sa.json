@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1742664765763,
-    "version": "0.922",
+    "last_update": 1742711434104,
+    "version": "0.923",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -59970,7 +59970,7 @@
           "num_params": 3,
           "short_desc": "Adds one line of colored message to the chat",
           "class": "Samp",
-          "member": "AddChatMessage",
+          "member": "AddChatMsg",
           "attrs": {
             "is_static": true
           }
@@ -59991,7 +59991,7 @@
           "num_params": 2,
           "short_desc": "Sends SampRpc.Chat containing the message or command to the server",
           "class": "Samp",
-          "member": "SendChatMsg",
+          "member": "SendRpcChat",
           "attrs": {
             "is_static": true
           }
@@ -63773,15 +63773,15 @@
             }
           ],
           "id": "0BBB",
-          "name": "SAMP_STORE_PLAYER_INCAR_DATA",
+          "name": "SAMP_STORE_PLAYER_DRIVING_DATA",
           "num_params": 2,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "class": "Samp",
-          "member": "StoreInCarData",
-          "short_desc": "Writes the current player's inCarData structure to the buffer"
+          "member": "StoreDrivingData",
+          "short_desc": "Writes the player's current inCarData structure to the buffer"
         },
         {
           "input": [
@@ -63886,7 +63886,7 @@
           "name": "SAMP_SEND_ONFOOT_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendOnFootData",
+          "member": "SendPktOnFootData",
           "attrs": {
             "is_static": true
           },
@@ -63900,14 +63900,14 @@
             }
           ],
           "id": "0BC1",
-          "name": "SAMP_SEND_DRIVER_DATA",
+          "name": "SAMP_SEND_DRIVING_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendInCarData",
+          "member": "SendPktDrivingData",
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Sends SampPacket.DriverSync to the server"
+          "short_desc": "Sends SampPacket.DrivingSync to the server"
         },
         {
           "input": [
@@ -63920,7 +63920,7 @@
           "name": "SAMP_SEND_PASSENGER_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendPassengerData",
+          "member": "SendPktPassengerData",
           "attrs": {
             "is_static": true
           },
@@ -63937,7 +63937,7 @@
           "name": "SAMP_SEND_AIM_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendAimData",
+          "member": "SendPktAimData",
           "attrs": {
             "is_static": true
           },
@@ -63954,7 +63954,7 @@
           "name": "SAMP_SEND_BULLET_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendBulletData",
+          "member": "SendPktBulletData",
           "attrs": {
             "is_static": true
           },
@@ -63971,7 +63971,7 @@
           "name": "SAMP_SEND_TRAILER_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendTrailerData",
+          "member": "SendPktTrailerData",
           "attrs": {
             "is_static": true
           },
@@ -63988,7 +63988,7 @@
           "name": "SAMP_SEND_UNOCCUPIEDCAR_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendUnoccupiedCarData",
+          "member": "SendPktUnoccupiedCarData",
           "attrs": {
             "is_static": true
           },
@@ -64005,7 +64005,7 @@
           "name": "SAMP_SEND_SPECTATOR_DATA",
           "num_params": 1,
           "class": "Samp",
-          "member": "SendSpectatorData",
+          "member": "SendPktSpectatorData",
           "attrs": {
             "is_static": true
           },
@@ -64305,7 +64305,12 @@
           "id": "0BD2",
           "name": "SAMP_SEND_MENU_SELECT_ROW",
           "num_params": 1,
-          "short_desc": "Sends SampRpc.MenuSelect about selecting an item in a menu (GTA:SA menu)"
+          "short_desc": "Sends SampRpc.MenuSelect about selecting an item in a menu (GTA:SA menu)",
+          "class": "Samp",
+          "member": "SendRpcMenuSelectRow",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "id": "0BD3",
@@ -64503,7 +64508,7 @@
         {
           "input": [
             {
-              "name": "unblockData",
+              "name": "processData",
               "type": "bool"
             }
           ],
@@ -65699,11 +65704,11 @@
         {
           "input": [
             {
-              "name": "address1",
+              "name": "addressA",
               "type": "int"
             },
             {
-              "name": "address2",
+              "name": "addressB",
               "type": "int"
             },
             {
@@ -65712,7 +65717,7 @@
             }
           ],
           "id": "0C12",
-          "name": "SF_EQUAL_MEMORY_BLOCKS",
+          "name": "SF_MEMEQ",
           "num_params": 3,
           "attrs": {
             "is_condition": true,
@@ -65746,16 +65751,16 @@
         {
           "input": [
             {
-              "name": "string1",
+              "name": "stringA",
               "type": "string"
             },
             {
-              "name": "string2",
+              "name": "stringB",
               "type": "string"
             }
           ],
           "id": "0C14",
-          "name": "SF_EQUAL_STRINGS",
+          "name": "SF_STREQ",
           "num_params": 2,
           "attrs": {
             "is_condition": true,
@@ -66100,16 +66105,16 @@
         {
           "input": [
             {
-              "name": "string1",
+              "name": "stringA",
               "type": "string"
             },
             {
-              "name": "string2",
+              "name": "stringB",
               "type": "string"
             }
           ],
           "id": "0C21",
-          "name": "SF_EQUAL_INSENSITIVE_STRINGS",
+          "name": "SF_STRIEQ",
           "num_params": 2,
           "attrs": {
             "is_condition": true,
@@ -66199,11 +66204,11 @@
         {
           "input": [
             {
-              "name": "string1",
+              "name": "stringA",
               "type": "string"
             },
             {
-              "name": "string2",
+              "name": "stringB",
               "type": "string"
             },
             {
@@ -66212,7 +66217,7 @@
             }
           ],
           "id": "0C25",
-          "name": "SF_EQUAL_SUBSTRINGS",
+          "name": "SF_STRNEQ",
           "num_params": 3,
           "attrs": {
             "is_condition": true,
@@ -66607,14 +66612,14 @@
             }
           ],
           "id": "0C32",
-          "name": "SF_MATRIX_VECTORS_TO_QUAT",
+          "name": "SF_AXES_TO_QUAT",
           "num_params": 13,
           "attrs": {
             "is_static": true
           },
           "class": "Sf",
-          "member": "MatrixVectorsToQuat",
-          "short_desc": "Converts the matrix vectors into quaternion values"
+          "member": "AxesToQuat",
+          "short_desc": "Converts the basis vectors of a rotation matrix into quaternion values"
         },
         {
           "input": [
@@ -66683,9 +66688,9 @@
             }
           ],
           "id": "0C33",
-          "name": "SF_QUAT_TO_MATRIX_VECTORS",
+          "name": "SF_QUAT_TO_AXES",
           "num_params": 13,
-          "short_desc": "Converts the quaternion values into matrix vectors",
+          "short_desc": "Converts the quaternion values into basis vectors of a rotation matrix",
           "attrs": {
             "is_static": true
           },
@@ -68588,11 +68593,11 @@
             }
           ],
           "id": "0C81",
-          "name": "SAMP_FORCE_DRIVER_SYNC",
+          "name": "SAMP_FORCE_DRIVING_SYNC",
           "num_params": 1,
-          "short_desc": "Sends SampPacket.DriverSync to server about our character driving a car with ID",
+          "short_desc": "Sends SampPacket.DrivingSync to server about our character driving a car with ID",
           "class": "Samp",
-          "member": "ForceDriverSync",
+          "member": "ForceDrivingSync",
           "attrs": {
             "is_static": true
           }

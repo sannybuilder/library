@@ -2312,13 +2312,13 @@
 {0BB8:} [var address: int] = samp_get_car_pool_pointer
 {0BB9:} [var address: int] = samp_get_pickup_pool_pointer
 {0BBA:}   [var buffer: int] = samp_store_player_onfoot_data {id} [int]
-{0BBB:}   [var buffer: int] = samp_store_player_incar_data {id} [int]
+{0BBB:}   [var buffer: int] = samp_store_player_driving_data {id} [int]
 {0BBC:}   [var buffer: int] = samp_store_player_passenger_data {id} [int]
 {0BBD:}   [var buffer: int] = samp_store_player_trailer_data {id} [int]
 {0BBE:}   [var buffer: int] = samp_store_player_aim_data {id} [int]
 {0BBF:} samp_send_rcon_command {command} [string]
 {0BC0:} samp_send_onfoot_data {stOnFootData} [int]
-{0BC1:} samp_send_driver_data {stInCarData} [int]
+{0BC1:} samp_send_driving_data {stInCarData} [int]
 {0BC2:} samp_send_passenger_data {stPassengerData} [int]
 {0BC3:} samp_send_aim_data {stAimData} [int]
 {0BC4:} samp_send_bullet_data {stBulletData} [int]
@@ -2349,7 +2349,7 @@
 {0BDD:} samp_set_chat_display_mode {mode} [SampChatDisplayMode]
 {0BDE:} sf_pause_thread {threadId} [int]
 {0BDF:} sf_resume_thread {threadId} [int]
-{0BE0:} samp_raknet_hook_return {unblockData} [bool]
+{0BE0:} samp_raknet_hook_return {processData} [bool]
 {0BE1:}   samp_raknet_hook_outcoming_rpc @label
 {0BE2:}   samp_raknet_hook_outcoming_packet @label
 {0BE3:}   samp_raknet_hook_incoming_rpc @label
@@ -2399,9 +2399,9 @@
 {0C0F:}   sf_write_element_of_4bytes_array {array} [int] {index} [int] {value} [any]
 {0C10:}   sf_memcpy {destination} [int] {source} [int] {size} [int]
 {0C11:}   sf_memfill {address} [int] {byteValue} [int] {size} [int]
-{0C12:}   sf_equal_memory_blocks {address1} [int] {address2} [int] {size} [int]
+{0C12:}   sf_memeq {addressA} [int] {addressB} [int] {size} [int]
 {0C13:} sf_strcpy {destination} [string] {source} [string]
-{0C14:}   sf_equal_strings {string1} [string] {string2} [string]
+{0C14:}   sf_streq {stringA} [string] {stringB} [string]
 {0C15:} sf_strcat {stringBuffer} [string] {appendedString} [string]
 {0C16:}   [var token: string] = sf_strtok {stringBuffer} [string] {delimiters} [string]
 {0C17:} [var length: int] = sf_strlen {string} [string]
@@ -2414,11 +2414,11 @@
 {0C1E:}   sf_write_element_of_sized_array {array} [int] {index} [int] {size} [int] {value} [any]
 {0C1F:} [var address: int] = sf_get_element_pointer_of_buffer_array {array} [int] {index} [int] {size} [int]
 {0C20:} sf_write_string_to_element_of_buffer_array {array} [int] {index} [int] {size} [int] {string} [string]
-{0C21:}   sf_equal_insensitive_strings {string1} [string] {string2} [string]
+{0C21:}   sf_strieq {stringA} [string] {stringB} [string]
 {0C22:}   sf_bin_to_hex {binaryString} [string] {stringBuffer} [string] {bufferSize} [int]
 {0C23:}   sf_hex_to_bin {hexString} [string] {stringBuffer} [string] {bufferSize} [int]
 {0C24:} sf_strncpy {stringBuffer} [int] {source} [int] {bufferSize} [int]
-{0C25:}   sf_equal_substrings {string1} [string] {string2} [string] {length} [int]
+{0C25:}   sf_strneq {stringA} [string] {stringB} [string] {length} [int]
 {0C26:} [var destination: string] = sf_strupr {source} [string]
 {0C27:} sf_strncat {stringBuffer} [string] {appendedString} [string] {bufferSize} [int]
 {0C28:} [var destination: string] = sf_strlwr {source} [string]
@@ -2431,8 +2431,8 @@
 {0C2F:} [var unscannedAddress: int], [var longInteger: int] = sf_strtol {source} [int] {radix} [int]
 {0C30:} [var quaternionBuffer: int] = sf_matrix_to_quat {matrix} [int]
 {0C31:} [var matrixBuffer: int] = sf_quat_to_matrix {quaternion} [int]
-{0C32:} [var quaternionW: float], [var quaternionX: float], [var quaternionY: float], [var quaternionZ: float] = sf_matrix_vectors_to_quat {pitchVectorX} [float] {pitchVectorY} [float] {pitchVectorZ} [float] {rollVectorX} [float] {rollVectorY} [float] {rollVectorZ} [float] {yawVectorX} [float] {yawVectorY} [float] {yawVectorZ} [float]
-{0C33:} [var pitchVectorX: float], [var pitchVectorY: float], [var pitchVectorZ: float], [var rollVectorX: float], [var rollVectorY: float], [var rollVectorZ: float], [var yawVectorX: float], [var yawVectorY: float], [var yawVectorZ: float] = sf_quat_to_matrix_vectors {quaternionW} [float] {quaternionX} [float] {quaternionY} [float] {pitchVectorZ} [float]
+{0C32:} [var quaternionW: float], [var quaternionX: float], [var quaternionY: float], [var quaternionZ: float] = sf_axes_to_quat {pitchVectorX} [float] {pitchVectorY} [float] {pitchVectorZ} [float] {rollVectorX} [float] {rollVectorY} [float] {rollVectorZ} [float] {yawVectorX} [float] {yawVectorY} [float] {yawVectorZ} [float]
+{0C33:} [var pitchVectorX: float], [var pitchVectorY: float], [var pitchVectorZ: float], [var rollVectorX: float], [var rollVectorY: float], [var rollVectorZ: float], [var yawVectorX: float], [var yawVectorY: float], [var yawVectorZ: float] = sf_quat_to_axes {quaternionW} [float] {quaternionX} [float] {quaternionY} [float] {pitchVectorZ} [float]
 {0C34:}   sf_register_custom_global_function {name} [string] @label
 {0C35:}   sf_call_custom_global_function {name} [string] {numParam} [int] {params} [arguments]
 {0C36:}   sf_custom_global_function_return {numRet} [int] {retParams} [arguments]
@@ -2510,7 +2510,7 @@
 {0C7E:}   sf_is_console_open
 {0C7F:} samp_set_local_chat_command_description {chatCommand} [string] {decription} [string]
 {0C80:} sf_set_console_command_description {command} [string] {description} [string]
-{0C81:} samp_force_driver_sync {id} [int]
+{0C81:} samp_force_driving_sync {id} [int]
 {0C82:} samp_force_unoccupied_sync {carId} [int] {seatId} [SeatId]
 {0C83:} samp_force_onfoot_sync
 {0C84:} samp_force_aim_sync

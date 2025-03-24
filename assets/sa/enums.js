@@ -3941,3 +3941,10 @@ export const AsyncDownloadState = {
   "OutOfMemory": 2147942414,
   "DownloadFailure": 2148270088
 };
+export const Language = {
+  "English": 0,
+  "French": 1,
+  "German": 2,
+  "Italian": 3,
+  "Spanish": 4
+};

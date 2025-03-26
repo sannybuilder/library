@@ -1,0 +1,13 @@
+function CEntryExitManager_FindNearestEntryExit<cdecl, 0x43F4B0>(position: int {CVector2D const &}, range: float, ignoreArea: int): int
+
+int pos[3]  
+int posPtr = get_var_pointer pos
+
+while true
+    wait 250
+    
+    pos[0], pos[1], pos[2] = get_char_coordinates $scplayer
+    
+    int ptr = CEntryExitManager_FindNearestEntryExit(posPtr, 5.0, -1)
+    print_formatted_now {format} "EnEx: %p" {time} 250 {args} ptr
+end

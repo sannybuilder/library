@@ -12,9 +12,9 @@ UNTIL SAMP_IS_AVAILABLE
 
 SAMP_HOOK_CHAT_COMMAND_AS_LOCAL {chatcommand} "resumethread" {callbacklabel} @ChatCallback_ResumeThread
 
-SF_PAUSE_THREAD {id} 0 // Pauses the main thread
+SF_PAUSE_SCRIPT {id} 0 // Pauses the main thread
 
-// This part of the main thread will not be reached until SF_RESUME_THREAD is called
+// This part of the main thread will not be reached until SF_RESUME_SCRIPT is called
 while true
     wait 2000
     PRINT_STRING_NOW "Main Loop Executed!" {time} 1000
@@ -22,5 +22,5 @@ end
 
 
 :ChatCallback_ResumeThread
-    SF_RESUME_THREAD {id} 0 // Resumes this script's main thread
+    SF_RESUME_SCRIPT {id} 0 // Resumes this script's main thread
 SF_COMMAND_RETURN // end of callback

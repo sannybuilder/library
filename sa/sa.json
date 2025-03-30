@@ -59926,10 +59926,10 @@
           "name": "SAMP_SPAWN_LOCAL_PLAYER",
           "num_params": 0,
           "short_desc": "Sends SampRpc.Spawn to SAMP Server. Teleports our char to spawn as well",
-          "class": "Samp",
           "attrs": {
             "is_static": true
           },
+          "class": "Samp",
           "member": "ForceSpawn"
         },
         {
@@ -59969,8 +59969,8 @@
           "name": "SAMP_ADD_MESSAGE_TO_CHAT",
           "num_params": 3,
           "short_desc": "Adds one line of colored message to the chat",
-          "class": "Samp",
-          "member": "AddChatMsg",
+          "class": "SampChat",
+          "member": "AddMsg",
           "attrs": {
             "is_static": true
           }
@@ -60006,7 +60006,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "Available"
+          "member": "IsAvailable"
         },
         {
           "input": [
@@ -60119,8 +60119,8 @@
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60134,11 +60134,8 @@
           "name": "SAMP_GET_PLAYER_CHAR_BY_ID",
           "num_params": 2,
           "short_desc": "Returns the character handle using the Player ID. Returns -1 if the player is not in the stream zone",
-          "class": "Samp",
-          "member": "GetChar",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetChar"
         },
         {
           "id": "0B21",
@@ -60149,8 +60146,8 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "Samp",
-          "member": "ChatInputVisible"
+          "class": "SampChatInput",
+          "member": "IsVisible"
         },
         {
           "input": [
@@ -60176,8 +60173,8 @@
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "id": "0B23",
@@ -60185,17 +60182,16 @@
           "num_params": 1,
           "short_desc": "Returns true if REMOTE Player with the given ID is connected",
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
-          "member": "RemotePlayerConnected"
+          "class": "SampPlayer",
+          "member": "IsRemotelyConnected"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60209,17 +60205,14 @@
           "name": "SAMP_GET_PLAYER_POINTER",
           "num_params": 2,
           "short_desc": "Returns the player's samp structure. Returns 0 (NULL Pointer) if player isn't connected",
-          "class": "Samp",
-          "member": "GetPlayerPtr",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetPtr"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60233,17 +60226,14 @@
           "name": "SAMP_GET_PLAYER_HEALTH",
           "num_params": 2,
           "short_desc": "Gets the amount of health the specified player has",
-          "class": "Samp",
-          "member": "GetPlayerHealth",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetHealth"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60257,11 +60247,8 @@
           "name": "SAMP_GET_PLAYER_ARMOR",
           "num_params": 2,
           "short_desc": "Gets the amount of armor the specified player has",
-          "class": "Samp",
-          "member": "GetPlayerArmor",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetArmor"
         },
         {
           "input": [
@@ -60317,8 +60304,8 @@
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60332,11 +60319,8 @@
           "name": "SAMP_GET_PLAYER_PING",
           "num_params": 2,
           "short_desc": "Returns the ping of the specified player with ID",
-          "class": "Samp",
-          "member": "GetPlayerPing",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetPing"
         },
         {
           "input": [
@@ -60347,8 +60331,8 @@
           ],
           "output": [
             {
-              "name": "id",
-              "type": "int",
+              "name": "handle",
+              "type": "SampPlayer",
               "source": "var_any"
             }
           ],
@@ -60357,7 +60341,10 @@
           "num_params": 2,
           "short_desc": "Returns the samp player's id controlling the character handle. Returns -1 if the character isn't controlled by any Player",
           "class": "Char",
-          "member": "GetSampId"
+          "member": "GetSampId",
+          "attrs": {
+            "is_constructor": true
+          }
         },
         {
           "input": [
@@ -60436,8 +60423,8 @@
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60461,11 +60448,8 @@
           "name": "SAMP_GET_STREAMED_OUT_PLAYER_COORDS",
           "num_params": 4,
           "short_desc": "Returns the 3D Coordinates of a player who is outside the stream zone, if the server allows it",
-          "class": "Samp",
-          "member": "GetPlayerStreamedOutCoords",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetStreamedOutCoords"
         },
         {
           "input": [
@@ -60568,7 +60552,7 @@
             "is_static": true
           },
           "short_desc": "Registers a callback hooked from a client sided chat command",
-          "class": "LocalChatCmd",
+          "class": "SampLocalChatCmd",
           "member": "Hook"
         },
         {
@@ -60593,8 +60577,8 @@
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60608,17 +60592,14 @@
           "name": "SAMP_GET_PLAYER_NICKNAME",
           "num_params": 2,
           "short_desc": "Returns a pointer to the nickname of the specified player",
-          "class": "Samp",
-          "member": "GetPlayerName",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetName"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -60632,11 +60613,8 @@
           "name": "SAMP_GET_PLAYER_COLOR",
           "num_params": 2,
           "short_desc": "Returns the color of the specified player in 0xAARRGGBB format",
-          "class": "Samp",
-          "member": "GetPlayerColor",
-          "attrs": {
-            "is_static": true
-          }
+          "class": "SampPlayer",
+          "member": "GetColor"
         },
         {
           "input": [
@@ -60776,7 +60754,7 @@
           "output": [
             {
               "name": "handle",
-              "type": "Bitstream",
+              "type": "SampBitstream",
               "source": "var_any"
             }
           ],
@@ -60784,7 +60762,7 @@
           "name": "SAMP_RAKNET_CREATE_BITSTREAM",
           "num_params": 1,
           "short_desc": "Creates a new raknet bitstream object",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "Create",
           "attrs": {
             "is_constructor": true
@@ -60794,7 +60772,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0B3E",
@@ -60804,7 +60782,7 @@
             "is_condition": true,
             "is_destructor": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "Delete",
           "short_desc": "Remove's the specified bitstream object, freeing it from memory"
         },
@@ -60812,7 +60790,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0B3F",
@@ -60822,14 +60800,14 @@
             "is_condition": true
           },
           "short_desc": "Resets all parameters/clears BitStream",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "Reset"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "value",
@@ -60850,7 +60828,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "Write",
           "short_desc": "Writes a specified value with datatype and datasize at the \"write pointer\" of the specified bitstream, then advances its \"write pointer\" by the same size"
         },
@@ -60862,7 +60840,7 @@
             },
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "priority",
@@ -60888,14 +60866,14 @@
             "is_condition": true
           },
           "short_desc": "Sends a BitStream as an RPC with the specified parameters",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "SendAsRpcWithParams"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "priority",
@@ -60916,7 +60894,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "SendAsPacketWithParams",
           "short_desc": "Sends a Packet BitStream with the specified parameters. Commonly used to send dacket data to server"
         },
@@ -60973,7 +60951,7 @@
           "output": [
             {
               "name": "handle",
-              "type": "TextLabel3D",
+              "type": "SampTextLabel3D",
               "source": "var_any"
             }
           ],
@@ -60985,14 +60963,14 @@
             "is_constructor": true
           },
           "short_desc": "Creates an artificial SAMP 3D text with the specified parameter attributes",
-          "class": "TextLabel3D",
+          "class": "SampTextLabel3D",
           "member": "Create"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "TextLabel3D"
+              "type": "SampTextLabel3D"
             }
           ],
           "id": "0B45",
@@ -61003,24 +60981,24 @@
             "is_destructor": true
           },
           "short_desc": "Destroys a 3D text using it's ID",
-          "class": "TextLabel3D",
+          "class": "SampTextLabel3D",
           "member": "Delete"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "TextLabel3D"
+              "type": "SampTextLabel3D"
             }
           ],
           "id": "0B46",
-          "name": "SAMP_IS_3D_TEXT_EXIST",
+          "name": "SAMP_DOES_3D_TEXT_EXIST",
           "num_params": 1,
           "attrs": {
             "is_condition": true
           },
           "short_desc": "Returns logical true if the specified 3D text exists",
-          "class": "TextLabel3D",
+          "class": "SampTextLabel3D",
           "member": "DoesExist"
         },
         {
@@ -61131,7 +61109,7 @@
           },
           "short_desc": "Evaluates as logical true if the specified dialog with id is currently visible",
           "class": "Samp",
-          "member": "DialogActive"
+          "member": "IsDialogActive"
         },
         {
           "output": [
@@ -61368,8 +61346,8 @@
         {
           "input": [
             {
-              "name": "playerId",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -61383,12 +61361,11 @@
           "name": "SAMP_GET_PLAYER_ANIMATION",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Returns the SAMP ID of the animation currently being played by the specified player",
-          "class": "Samp",
-          "member": "GetPlayerAnim"
+          "class": "SampPlayer",
+          "member": "GetAnim"
         },
         {
           "input": [
@@ -61500,20 +61477,19 @@
         {
           "input": [
             {
-              "name": "playerId",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "id": "0B5C",
           "name": "SAMP_IS_PLAYER_PAUSED",
           "num_params": 1,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Evaluates as logical true if the specified player is in paused state (or AFK)",
-          "class": "Samp",
-          "member": "PlayerPaused"
+          "class": "SampPlayer",
+          "member": "IsPaused"
         },
         {
           "input": [
@@ -61636,8 +61612,8 @@
         {
           "input": [
             {
-              "name": "playerId",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -61651,12 +61627,11 @@
           "name": "SAMP_GET_PLAYER_SPECIAL_ACTION",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Returns the special action ID of the specified player",
-          "class": "Samp",
-          "member": "GetPlayerSpecialAction"
+          "class": "SampPlayer",
+          "member": "GetSpecialAction"
         },
         {
           "input": [
@@ -61673,32 +61648,31 @@
             "is_static": true
           },
           "short_desc": "Removes all callbacks hooked from a client sided chat command created by SAMP_REGISTER_CLIENTSIDE_COMMAND, suppressing all its callback's operation ",
-          "class": "LocalChatCmd",
+          "class": "SampLocalChatCmd",
           "member": "Unhook"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "id": "0B64",
           "name": "SAMP_IS_PLAYER_NPC",
           "num_params": 1,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Checks if the specified player is an NPC",
-          "class": "Samp",
-          "member": "Npc"
+          "class": "SampPlayer",
+          "member": "IsNpc"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -61712,12 +61686,11 @@
           "name": "SAMP_GET_PLAYER_SCORE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Returns the current score of the specified player",
-          "class": "Samp",
-          "member": "GetPlayerScore"
+          "class": "SampPlayer",
+          "member": "GetScore"
         },
         {
           "input": [
@@ -61825,8 +61798,8 @@
           "name": "SF_D3D_DRAW_LINE",
           "num_params": 6,
           "short_desc": "Draws a line between two window screen coordinates",
-          "class": "Sf",
-          "member": "D3DDrawLine",
+          "class": "SfD3D",
+          "member": "DrawLine",
           "attrs": {
             "is_static": true
           }
@@ -61858,8 +61831,8 @@
           "name": "SF_D3D_DRAW_BORDERLESS_BOX",
           "num_params": 5,
           "short_desc": "Draws a rectangular area at the specified coordinates",
-          "class": "Sf",
-          "member": "D3DDrawBorderlessBox",
+          "class": "SfD3D",
+          "member": "DrawBorderlessBox",
           "attrs": {
             "is_static": true
           }
@@ -61902,14 +61875,14 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Sf",
-          "member": "D3DDrawBorderedBox"
+          "class": "SfD3D",
+          "member": "DrawBorderedBox"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "D3DFont"
+              "type": "SfD3DFont"
             },
             {
               "name": "text",
@@ -61927,14 +61900,14 @@
           "name": "SF_D3D_GET_DRAW_WIDTH_OF_TEXT_WITH_FONT",
           "num_params": 3,
           "short_desc": "Returns the width (in pixels) that will be occupied by the text with font",
-          "class": "D3DFont",
+          "class": "SfD3DFont",
           "member": "GetDrawWidth"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "D3DFont"
+              "type": "SfD3DFont"
             }
           ],
           "output": [
@@ -61948,7 +61921,7 @@
           "name": "SF_D3D_GET_FONT_DRAW_HEIGHT",
           "num_params": 2,
           "short_desc": "Returns the height (in pixels) occupied by any text that uses the specified font",
-          "class": "D3DFont",
+          "class": "SfD3DFont",
           "member": "GetDrawHeight"
         },
         {
@@ -61969,7 +61942,7 @@
           "output": [
             {
               "name": "handle",
-              "type": "D3DFont",
+              "type": "SfD3DFont",
               "source": "var_any"
             }
           ],
@@ -61977,7 +61950,7 @@
           "name": "SF_D3D_CREATE_FONT",
           "num_params": 4,
           "short_desc": "Creates a D3DFont Object",
-          "class": "D3DFont",
+          "class": "SfD3DFont",
           "member": "Create",
           "attrs": {
             "is_constructor": true
@@ -61987,7 +61960,7 @@
           "input": [
             {
               "name": "self",
-              "type": "D3DFont"
+              "type": "SfD3DFont"
             }
           ],
           "id": "0B6E",
@@ -61998,14 +61971,14 @@
             "is_destructor": true
           },
           "short_desc": "Destroys the specified font object, freeing it from memory",
-          "class": "D3DFont",
+          "class": "SfD3DFont",
           "member": "Delete"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "D3DFont"
+              "type": "SfD3DFont"
             },
             {
               "name": "text",
@@ -62028,7 +62001,7 @@
           "name": "SF_D3D_DRAW_TEXT_WITH_FONT",
           "num_params": 5,
           "short_desc": "Draws text using the specified font",
-          "class": "D3DFont",
+          "class": "SfD3DFont",
           "member": "DrawText"
         },
         {
@@ -62066,8 +62039,8 @@
           "name": "SF_D3D_DRAW_POLYGON",
           "num_params": 7,
           "short_desc": "Draws a polygon with the specified parameters",
-          "class": "Sf",
-          "member": "D3DDrawPolygon",
+          "class": "SfD3D",
+          "member": "DrawPolygon",
           "attrs": {
             "is_static": true
           }
@@ -62082,7 +62055,7 @@
           "output": [
             {
               "name": "handle",
-              "type": "D3DTexture",
+              "type": "SfD3DTexture",
               "source": "var_any"
             }
           ],
@@ -62094,14 +62067,14 @@
             "is_constructor": true
           },
           "short_desc": "Loads a file (any image, or txd) as D3DTexture Object",
-          "class": "D3DTexture",
+          "class": "SfD3DTexture",
           "member": "Load"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "D3DTexture"
+              "type": "SfD3DTexture"
             }
           ],
           "id": "0B72",
@@ -62111,7 +62084,7 @@
             "is_condition": true,
             "is_destructor": true
           },
-          "class": "D3DTexture",
+          "class": "SfD3DTexture",
           "member": "Release",
           "short_desc": "Releases the D3DTexture Object, freeing it from memory"
         },
@@ -62119,7 +62092,7 @@
           "input": [
             {
               "name": "self",
-              "type": "D3DTexture"
+              "type": "SfD3DTexture"
             },
             {
               "name": "coordX",
@@ -62149,14 +62122,14 @@
           "id": "0B73",
           "name": "SF_D3D_DRAW_TEXTURE",
           "num_params": 7,
-          "class": "D3DTexture",
+          "class": "SfD3DTexture",
           "member": "Draw",
           "short_desc": "Draws the texture on the screen"
         },
         {
           "input": [
             {
-              "name": "chatLinIid",
+              "name": "chatLineid",
               "type": "int"
             },
             {
@@ -62184,8 +62157,8 @@
             "is_static": true
           },
           "short_desc": "Changes the chat line's text into a custom one",
-          "class": "Samp",
-          "member": "SetChatLine"
+          "class": "SampChat",
+          "member": "SetLine"
         },
         {
           "input": [
@@ -62224,8 +62197,8 @@
             "is_static": true
           },
           "short_desc": "Returns the chat line's text parameters",
-          "class": "Samp",
-          "member": "GetChatLine"
+          "class": "SampChat",
+          "member": "GetLine"
         },
         {
           "input": [
@@ -62238,8 +62211,8 @@
           "name": "SAMP_SET_CHAT_INPUT_TEXT",
           "num_params": 1,
           "short_desc": "Overwrites the content written at the chat input box",
-          "class": "Samp",
-          "member": "SetChatInputText",
+          "class": "SampChatInput",
+          "member": "SetText",
           "attrs": {
             "is_static": true
           }
@@ -62260,8 +62233,8 @@
             "is_static": true
           },
           "short_desc": "Returns the current text in the chat input box",
-          "class": "Samp",
-          "member": "GetChatInputText"
+          "class": "SampChatInput",
+          "member": "GetText"
         },
         {
           "input": [
@@ -62295,8 +62268,8 @@
           "name": "SAMP_SET_CHAT_INPUT_VISIBILITY",
           "num_params": 1,
           "short_desc": "Sets the visibility status (open/closed) of the chat input box",
-          "class": "Samp",
-          "member": "SetChatInputVisibility",
+          "class": "SampChatInput",
+          "member": "SetVisibility",
           "attrs": {
             "is_static": true
           }
@@ -62439,14 +62412,14 @@
           "output": [
             {
               "name": "handle",
-              "type": "DxutDialog",
+              "type": "SfDxutDialog",
               "source": "var_any"
             }
           ],
           "id": "0B80",
           "name": "SF_DXUT_CREATE_DIALOG",
           "num_params": 2,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "Create",
           "attrs": {
             "is_constructor": true
@@ -62457,7 +62430,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             }
           ],
           "output": [
@@ -62479,14 +62452,14 @@
             "is_condition": true
           },
           "short_desc": "Returns the last event and component ID that occurred with the specified dialog",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "Pop"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -62517,14 +62490,14 @@
           "name": "SF_DXUT_DIALOG_ADD_BUTTON",
           "num_params": 7,
           "short_desc": "Adds a button on the DXUTDialog",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "AddButton"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -62554,7 +62527,7 @@
           "id": "0B83",
           "name": "SF_DXUT_DIALOG_ADD_CHECKBOX",
           "num_params": 7,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "AddCheckbox",
           "short_desc": "Creates a checkbox on the DxutDialog"
         },
@@ -62562,7 +62535,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "coordX",
@@ -62585,14 +62558,14 @@
           "name": "SF_DXUT_DIALOG_SET_COORDS_AND_DIMS",
           "num_params": 5,
           "short_desc": "Sets the coordinates and dimensions of the DxutDialog",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetCoordsAndDims"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             }
           ],
           "output": [
@@ -62620,7 +62593,7 @@
           "id": "0B85",
           "name": "SF_DXUT_DIALOG_GET_COORDS_AND_DIMS",
           "num_params": 5,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "GetCoordsAndDims",
           "short_desc": "Returns the Coordinates and Dimensions of the DxutDialog"
         },
@@ -62628,7 +62601,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "isVisible",
@@ -62639,14 +62612,14 @@
           "name": "SF_DXUT_DIALOG_SET_VISIBILITY",
           "num_params": 2,
           "short_desc": "Sets the visibility status of the DxutDialog",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "Visibility"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             }
           ],
           "id": "0B87",
@@ -62655,7 +62628,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "IsVisible",
           "short_desc": "Checks if the DxutDialog is visible"
         },
@@ -62663,7 +62636,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -62694,14 +62667,14 @@
           "name": "SF_DXUT_DIALOG_ADD_EDITBOX",
           "num_params": 7,
           "short_desc": "Creates a text input field on a DxutDialog",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "AddEditbox"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -62722,7 +62695,7 @@
             "is_condition": true
           },
           "short_desc": "Returns the text of a control using its ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "GetControlText"
         },
         {
@@ -62733,7 +62706,7 @@
             },
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0B8A",
@@ -62743,14 +62716,14 @@
             "is_condition": true
           },
           "short_desc": "Sends BitStream as RPC to Server",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "SendAsRpc"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0B8B",
@@ -62759,7 +62732,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "SendAsPacket",
           "short_desc": "Sends Packet BitStream to Server"
         },
@@ -62773,7 +62746,7 @@
           },
           "short_desc": "Checks if the mouse cursor were both visible and movable",
           "class": "Samp",
-          "member": "CursorActive"
+          "member": "IsCursorActive"
         },
         {
           "input": [
@@ -62857,7 +62830,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "controlId",
@@ -62872,14 +62845,14 @@
           "name": "SF_DXUT_DIALOG_SET_VISIBILITY_OF_CONTROL",
           "num_params": 3,
           "short_desc": "Sets the visibility of the DXUTDialog's control element with ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetVisibilityOfControl"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -62909,7 +62882,7 @@
           "id": "0B91",
           "name": "SF_DXUT_DIALOG_ADD_STATIC_TEXT",
           "num_params": 7,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "AddStaticText",
           "short_desc": "Adds a static text control in the DxutDialog"
         },
@@ -62917,7 +62890,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "checkboxId",
@@ -62931,14 +62904,14 @@
             "is_condition": true
           },
           "short_desc": "Evaluates as logical true if the checkbox control of the DxutDialog is checked",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "IsCheckBoxChecked"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "color",
@@ -62949,14 +62922,14 @@
           "name": "SF_DXUT_DIALOG_SET_BACKGROUND_COLOR",
           "num_params": 2,
           "short_desc": "Sets the background color of the DxutDialog",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetBgColor"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -62974,14 +62947,14 @@
             "is_condition": true
           },
           "short_desc": "Sets the text of a control using its ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetControlText"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -62994,7 +62967,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "IsControlVisible",
           "short_desc": "Evaluates as true if the DxutDialog's control element with ID is visible"
         },
@@ -63002,7 +62975,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63032,7 +63005,7 @@
           "id": "0B96",
           "name": "SF_DXUT_DIALOG_ADD_SLIDER",
           "num_params": 7,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "AddSlider",
           "short_desc": "Creates a horizontal slider on the DxutDialog"
         },
@@ -63040,7 +63013,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63058,14 +63031,14 @@
           "name": "SF_DXUT_DIALOG_GET_SLIDER_VALUE",
           "num_params": 3,
           "short_desc": "Returns the thumb position value of the DxutDialog's slider with ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "GetSliderValue"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63079,7 +63052,7 @@
           "id": "0B98",
           "name": "SF_DXUT_DIALOG_SET_SLIDER_VALUE",
           "num_params": 3,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetSliderValue",
           "short_desc": "Sets the thumb position value of the DxutDialog's slider with ID"
         },
@@ -63087,7 +63060,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63113,7 +63086,7 @@
           "id": "0B99",
           "name": "SF_DXUT_DIALOG_ADD_LISTBOX",
           "num_params": 6,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "AddListbox",
           "short_desc": "Creates a listbox on the dialog"
         },
@@ -63121,7 +63094,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63147,14 +63120,14 @@
             "is_condition": true
           },
           "short_desc": "Inserts a new element into the DxutDialog's listbox with ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "InsertListboxElement"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63177,14 +63150,14 @@
           "name": "SF_DXUT_DIALOG_GET_SELECTED_LISTBOX_ELEMENT",
           "num_params": 4,
           "short_desc": "Returns the index of the selected element and the count/number of elements in the DxutDialog's listbox with ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "GetSelectedListboxElement"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63201,7 +63174,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "DeleteListboxElement",
           "short_desc": "Removes the element found at the specified index from the DxutDialog's listbox with ID"
         },
@@ -63209,7 +63182,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63239,14 +63212,14 @@
             "is_condition": true
           },
           "short_desc": "Returns the text and data associated with the DxutDialog's listbox element by index",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "GetListboxElement"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63260,7 +63233,7 @@
           "id": "0B9E",
           "name": "SAMP_DIALOG_SET_STATUS_OF_CHECKBOX",
           "num_params": 3,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetCheckboxStatus",
           "short_desc": "Sets the status of a checkbox"
         },
@@ -63268,7 +63241,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "isVisible",
@@ -63279,14 +63252,14 @@
           "name": "SF_DXUT_DIALOG_SET_TITLE_VISIBILITY",
           "num_params": 2,
           "short_desc": "Sets the visibility of the DxutDialog's title",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetTitleVisibility"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             }
           ],
           "id": "0BA0",
@@ -63295,7 +63268,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "IsTitleVisible",
           "short_desc": "Evaluates as logical true if the DxutDialog's title is visible"
         },
@@ -63303,7 +63276,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "isMinimized",
@@ -63314,14 +63287,14 @@
           "name": "SF_DXUT_DIALOG_SET_MINIMIZED",
           "num_params": 2,
           "short_desc": "Sets the minimized status of the DxutDialog",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetMinimized"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             }
           ],
           "id": "0BA2",
@@ -63331,14 +63304,14 @@
             "is_condition": true
           },
           "short_desc": "Returns logical true if the DxutDialog is minimized",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "IsMinimized"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63348,7 +63321,7 @@
           "id": "0BA3",
           "name": "SF_DXUT_DIALOG_DELETE_CONTROL",
           "num_params": 2,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "DeleteControl",
           "short_desc": "Removes a DxutDialog's control with ID and frees the memory allocated for it"
         },
@@ -63356,7 +63329,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             }
           ],
           "id": "0BA4",
@@ -63365,7 +63338,7 @@
           "attrs": {
             "is_destructor": true
           },
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "Delete",
           "short_desc": "Deletes the DxutDialog and frees the memory allocated for it"
         },
@@ -63373,7 +63346,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63384,14 +63357,14 @@
           "name": "SF_DXUT_DIALOG_SET_FOCUSED_CONTROL",
           "num_params": 2,
           "short_desc": "Sets the focus of user interaction to a specific DxutDialog control with ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "ToggleControlFocus"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63410,14 +63383,14 @@
           "name": "SF_DXUT_DIALOG_SET_DIMS_OF_CONTROL",
           "num_params": 4,
           "short_desc": "Changes the dimensions of the DxutDialog control with ID",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetDims"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63439,7 +63412,7 @@
           "id": "0BA7",
           "name": "SF_DXUT_DIALOG_GET_DIMS_OF_CONTROL",
           "num_params": 4,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "GetControlDims",
           "short_desc": "Returns the dimensions of the DxutDialog control with ID"
         },
@@ -63447,7 +63420,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63465,7 +63438,7 @@
           "id": "0BA8",
           "name": "SF_DXUT_DIALOG_SET_COORDS_OF_CONTROL",
           "num_params": 4,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetControlCoords",
           "short_desc": "Sets the window position of the DxutDialog control with ID"
         },
@@ -63473,7 +63446,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63495,7 +63468,7 @@
           "id": "0BA9",
           "name": "SF_DXUT_DIALOG_GET_COORDS_OF_CONTROL",
           "num_params": 4,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "GetControlCoords",
           "short_desc": "Returns the window position of a DxutDialog control"
         },
@@ -63503,7 +63476,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             },
             {
               "name": "id",
@@ -63517,7 +63490,7 @@
           "id": "0BAA",
           "name": "SF_DXUT_DIALOG_SET_COLOR_OF_CHECKBOX",
           "num_params": 3,
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "SetCheckboxColor",
           "short_desc": "Sets the color of DxutDialog's checkbox control with ID"
         },
@@ -63525,7 +63498,7 @@
           "input": [
             {
               "name": "self",
-              "type": "DxutDialog"
+              "type": "SfDxutDialog"
             }
           ],
           "id": "0BAB",
@@ -63535,7 +63508,7 @@
             "is_condition": true
           },
           "short_desc": "Evaluates as logical true if the specified DxutDialog exists",
-          "class": "DxutDialog",
+          "class": "SfDxutDialog",
           "member": "DoesExist"
         },
         {
@@ -63793,8 +63766,8 @@
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -63808,18 +63781,17 @@
           "name": "SAMP_STORE_PLAYER_ONFOOT_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Writes the current player's onFootData structure to the buffer",
-          "class": "Samp",
+          "class": "SampPlayer",
           "member": "StoreOnFootData"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -63833,18 +63805,17 @@
           "name": "SAMP_STORE_PLAYER_DRIVING_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
+          "class": "SampPlayer",
           "member": "StoreDrivingData",
           "short_desc": "Writes the player's current inCarData structure to the buffer"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -63858,18 +63829,17 @@
           "name": "SAMP_STORE_PLAYER_PASSENGER_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Writes the current passengerData structure of the player to the buffer",
-          "class": "Samp",
+          "class": "SampPlayer",
           "member": "StorePassengerData"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -63883,18 +63853,17 @@
           "name": "SAMP_STORE_PLAYER_TRAILER_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
+          "class": "SampPlayer",
           "member": "StoreTrailerData",
           "short_desc": "Writes the player's current trailerData structure to the buffer"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampPlayer"
             }
           ],
           "output": [
@@ -63908,11 +63877,10 @@
           "name": "SAMP_STORE_PLAYER_AIM_DATA",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Writes the specified player's aimData structure to the buffer",
-          "class": "Samp",
+          "class": "SampPlayer",
           "member": "StoreAimData"
         },
         {
@@ -64486,7 +64454,7 @@
             "is_static": true
           },
           "class": "Samp",
-          "member": "DialogClientSide",
+          "member": "IsDialogClientSide",
           "short_desc": "Evaluates as logical true if the active dialog is has a client side attribute"
         },
         {
@@ -64498,8 +64466,8 @@
             "is_static": true
           },
           "short_desc": "Evaluates as logical true if chat lines are visible",
-          "class": "Samp",
-          "member": "ChatVisible"
+          "class": "SampChat",
+          "member": "IsVisible"
         },
         {
           "output": [
@@ -64516,8 +64484,8 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Samp",
-          "member": "GetChatDisplayMode"
+          "class": "SampChat",
+          "member": "GetDisplayMode"
         },
         {
           "input": [
@@ -64533,8 +64501,8 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Samp",
-          "member": "SetChatDisplayMode"
+          "class": "SampChat",
+          "member": "SetDisplayMode"
         },
         {
           "input": [
@@ -64580,7 +64548,7 @@
           "id": "0BE0",
           "name": "SAMP_RAKNET_HOOK_RETURN",
           "num_params": 1,
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "Return",
           "attrs": {
             "is_static": true
@@ -64601,7 +64569,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "HookRpcOut",
           "short_desc": "Redirects all outgoing RPCs to the specified callback for subsequent processing before sending to the server"
         },
@@ -64619,7 +64587,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "HookPacketOut",
           "short_desc": "Redirects all outgoing Packets to the specified callback for subsequent processing before sending to the server"
         },
@@ -64638,7 +64606,7 @@
             "is_static": true
           },
           "short_desc": "Redirects all incoming RPCs to the specified callback for subsequent processing before acceptance on the local client",
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "HookRpcIn"
         },
         {
@@ -64655,7 +64623,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "HookPacketIn",
           "short_desc": "Redirects all incoming packets to the specified callback for subsequent processing before acceptance on the local client"
         },
@@ -64681,7 +64649,7 @@
             "is_static": true
           },
           "short_desc": "Returns the hook parameter's value of the currently executing callback",
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "GetHookParam"
         },
         {
@@ -64702,7 +64670,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "SetHookParam",
           "short_desc": "Sets the hook parameter's value of the currently executing callback"
         },
@@ -64710,7 +64678,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "dataType",
@@ -64731,14 +64699,14 @@
             "is_condition": true
           },
           "short_desc": "Reads a value with datatype and datasize at the \"read pointer\" of the specified bitstream , then advances its \"read pointer\" by the same size",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "Read"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "buffer",
@@ -64756,14 +64724,14 @@
             "is_condition": true
           },
           "short_desc": "Stores an array of bytes from the Bitstream to buffer",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "ReadArray"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0BE9",
@@ -64772,7 +64740,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "ResetReadPtr",
           "short_desc": "Resets the read pointer of the BitStream. Setting \"write offset = 0\""
         },
@@ -64780,7 +64748,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0BEA",
@@ -64790,14 +64758,14 @@
             "is_condition": true
           },
           "short_desc": "Resets (THIS COMMAND IS BUGGED, SETS THE WRITE POINTER AT THE BEGINNING OF THE DATA ( WRITE OFFSET = 0) WHICH IS WRONG. DO NOT USE) the value write pointer in the BitStream",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "ResetWritePtr"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "bitCount",
@@ -64810,7 +64778,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "SkipBits",
           "short_desc": "Increases both its \"read pointer\" and \"write pointer\" of the Bitstream by the specified bit count"
         },
@@ -64818,7 +64786,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "offset",
@@ -64831,7 +64799,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "SetWriteOffset",
           "short_desc": "Sets the write offset of the BitStream"
         },
@@ -64839,7 +64807,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "offset",
@@ -64852,7 +64820,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "SetReadPtr",
           "short_desc": "Sets the read offset of the BitStream"
         },
@@ -64860,7 +64828,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "output": [
@@ -64873,7 +64841,7 @@
           "id": "0BEE",
           "name": "SAMP_RAKNET_BITSTREAM_GET_NUMBER_OF_BITS_USED",
           "num_params": 2,
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "GetBitsUsed",
           "short_desc": "Returns the number of used bits in the BitStream"
         },
@@ -64881,7 +64849,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "output": [
@@ -64898,14 +64866,14 @@
             "is_condition": true
           },
           "short_desc": "Returns the number of bytes used in the BitStream",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "GetBytesUsed"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "output": [
@@ -64922,14 +64890,14 @@
             "is_condition": true
           },
           "short_desc": "Returns the number of unread bits in the BitStream",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "GetUnreadBits"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "output": [
@@ -64945,7 +64913,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "GetWriteOffset",
           "short_desc": "Returns the current write offset of the BitStream"
         },
@@ -64953,7 +64921,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "output": [
@@ -64969,7 +64937,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "GetReadOffset",
           "short_desc": "Returns the current read offset of the BitStream"
         },
@@ -64977,7 +64945,7 @@
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "output": [
@@ -64994,14 +64962,14 @@
             "is_condition": true
           },
           "short_desc": "Returns a pointer to the BitStream's data",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "GetDataPtr"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "buffer",
@@ -65019,14 +64987,14 @@
             "is_condition": true
           },
           "short_desc": "Decrypts a compressed string (CString) from the bitstream and writes it to the buffer",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "DecodeCString"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             },
             {
               "name": "buffer",
@@ -65044,7 +65012,7 @@
             "is_condition": true
           },
           "short_desc": "Encrypts a string stored in the buffer and writes the compressed string (CString) to the bitstream",
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "EncodeString"
         },
         {
@@ -65055,7 +65023,7 @@
             },
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0BF6",
@@ -65064,7 +65032,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "EmulateAsRpcIn",
           "short_desc": "Emulates the BitStream's data like an incoming RPC"
         },
@@ -65076,7 +65044,7 @@
             },
             {
               "name": "self",
-              "type": "Bitstream"
+              "type": "SampBitstream"
             }
           ],
           "id": "0BF7",
@@ -65085,7 +65053,7 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "Bitstream",
+          "class": "SampBitstream",
           "member": "EmulateAsPacketIn",
           "short_desc": "Emulates the BitStream's data like an Incoming Packet"
         },
@@ -65111,7 +65079,7 @@
             "is_static": true
           },
           "short_desc": "Returns a pointer to the RPC ID's Name",
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "GetRpcName"
         },
         {
@@ -65136,7 +65104,7 @@
             "is_static": true
           },
           "short_desc": "Returns a pointer to the Packet ID's Name",
-          "class": "RakNet",
+          "class": "SampRaknet",
           "member": "GetPacketName"
         },
         {
@@ -66847,7 +66815,7 @@
             "is_static": true
           },
           "class": "Sf",
-          "member": "GFuncRegistered",
+          "member": "IsGFuncRegistered",
           "short_desc": "Evaluates as logical true if the specified name is registered a custom global function"
         },
         {
@@ -67088,7 +67056,7 @@
           "input": [
             {
               "name": "idAsHandle",
-              "type": "TextLabel3D"
+              "type": "SampTextLabel3D"
             },
             {
               "name": "text",
@@ -67134,14 +67102,14 @@
           "attrs": {
             "is_static": true
           },
-          "class": "TextLabel3D",
+          "class": "SampTextLabel3D",
           "member": "CreateWithId"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "TextLabel3D"
+              "type": "SampTextLabel3D"
             }
           ],
           "output": [
@@ -67197,15 +67165,15 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "TextLabel3D",
+          "class": "SampTextLabel3D",
           "member": "GetParams",
-          "short_desc": "Returns all the informations about a TextLabel3D using its ID"
+          "short_desc": "Returns all the informations about a SampTextLabel3D using its ID"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "TextLabel3D"
+              "type": "SampTextLabel3D"
             },
             {
               "name": "text",
@@ -67219,14 +67187,14 @@
             "is_condition": true
           },
           "short_desc": "Sets new text for 3D text",
-          "class": "TextLabel3D",
+          "class": "SampTextLabel3D",
           "member": "SetText"
         },
         {
           "input": [
             {
               "name": "id",
-              "type": "int"
+              "type": "SampTextDraw"
             },
             {
               "name": "text",
@@ -67242,21 +67210,21 @@
             }
           ],
           "id": "0C48",
-          "name": "SAMP_MODIFY_TEXTDRAW",
+          "name": "SAMP_CREATE_TEXTDRAW",
           "num_params": 4,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
           "short_desc": "Modifies a textdraw with the specified parameters, creating it if it doesn't exist",
-          "class": "Samp",
-          "member": "ModifyTextDraw"
+          "class": "SampTextDraw",
+          "member": "Create"
         },
         {
           "input": [
             {
-              "name": "textDrawId",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "isVisible",
@@ -67279,18 +67247,17 @@
           "name": "SAMP_SET_TEXTDRAW_BOX",
           "num_params": 5,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the parameters of the \"box\" (rectangle) of the text draw",
-          "class": "Samp",
-          "member": "SetTextDrawBox"
+          "class": "SampTextDraw",
+          "member": "SetBox"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "alignment",
@@ -67301,18 +67268,17 @@
           "name": "SAMP_SET_TEXTDRAW_ALIGNMENT",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the alignment of the text in the textdraw",
-          "class": "Samp",
-          "member": "SetTextDrawAlignment"
+          "class": "SampTextDraw",
+          "member": "SetAlignment"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "isProportional",
@@ -67323,18 +67289,17 @@
           "name": "SAMP_SET_TEXTDRAW_PROPORTIONALITY",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
+          "class": "SampTextDraw",
           "short_desc": "Sets whether the text scaling status is proportional to the text draw or not",
-          "member": "SetTextDrawProportionality"
+          "member": "SetProportionality"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "style",
@@ -67345,18 +67310,17 @@
           "name": "SAMP_SET_TEXTDRAW_STYLE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the text draw style",
-          "class": "Samp",
-          "member": "SetTextDrawStyle"
+          "class": "SampTextDraw",
+          "member": "SetStyle"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "tickness",
@@ -67371,18 +67335,17 @@
           "name": "SAMP_SET_TEXTDRAW_SHADOW",
           "num_params": 3,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets a shadow on the text draw",
-          "class": "Samp",
-          "member": "SetTextDrawShadow"
+          "class": "SampTextDraw",
+          "member": "SetShadow"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "tickness",
@@ -67397,18 +67360,17 @@
           "name": "SAMP_SET_TEXTDRAW_OUTLINE",
           "num_params": 3,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the outline of the text draw",
-          "class": "Samp",
-          "member": "SetTextDrawOutline"
+          "class": "SampTextDraw",
+          "member": "SetOutline"
         },
         {
           "input": [
             {
-              "name": "textDrawId",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "model",
@@ -67443,18 +67405,17 @@
           "name": "SAMP_SET_TEXTDRAW_MODEL",
           "num_params": 8,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the model (object, auto) of the text draw for style 5",
-          "class": "Sf",
-          "member": "SetTextDrawModel"
+          "class": "SampTextDraw",
+          "member": "SetModel"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "text",
@@ -67465,18 +67426,17 @@
           "name": "SAMP_SET_TEXTDRAW_TEXT",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the text of the textdraw",
-          "class": "Samp",
-          "member": "SetTextDrawText"
+          "class": "SampTextDraw",
+          "member": "SetText"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "coordX",
@@ -67491,18 +67451,17 @@
           "name": "SAMP_SET_TEXTDRAW_COORDS",
           "num_params": 3,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the gamescreen coordinates of the textdraw",
-          "class": "Samp",
-          "member": "SetTextDrawCoords"
+          "class": "SampTextDraw",
+          "member": "SetCoords"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             },
             {
               "name": "width",
@@ -67521,18 +67480,17 @@
           "name": "SAMP_SET_TEXTDRAW_CHARACTER_PROPERTIES",
           "num_params": 4,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
-          "member": "SetTextDrawCharProps",
+          "class": "SampTextDraw",
+          "member": "SetCharProps",
           "short_desc": "Sets the size and color property of all characters in the textdraw"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67561,18 +67519,17 @@
           "name": "SAMP_GET_TEXTDRAW_BOX",
           "num_params": 5,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Returns the parameters of the \"box\" (rectangle) of the specified text draw",
-          "class": "Samp",
-          "member": "GetTextDrawBox"
+          "class": "SampTextDraw",
+          "member": "GetBox"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67586,18 +67543,17 @@
           "name": "SAMP_GET_TEXTDRAW_ALIGNMENT",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Sets the alignment of the text in the textdraw",
-          "class": "Samp",
-          "member": "GetTextDrawAlignment"
+          "class": "SampTextDraw",
+          "member": "GetAlignment"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67611,18 +67567,17 @@
           "name": "SAMP_GET_TEXTDRAW_PROPORTIONALITY",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
-          "member": "GetTextdrawProportionality",
+          "class": "SampTextDraw",
+          "member": "GetProportionality",
           "short_desc": "Returns true if the text scaling status is proportional to the text draw"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67636,18 +67591,17 @@
           "name": "SAMP_GET_TEXTDRAW_STYLE",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Returns the text draw style",
-          "class": "Samp",
-          "member": "GetTextdrawStyle"
+          "class": "SampTextDraw",
+          "member": "GetStyle"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67666,18 +67620,17 @@
           "name": "SAMP_GET_TEXTDRAW_SHADOW",
           "num_params": 3,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Returns the tickness and color property of the text draw's shadow",
-          "class": "Samp",
-          "member": "GetTextdrawShadow"
+          "class": "SampTextDraw",
+          "member": "GetShadow"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67696,18 +67649,17 @@
           "name": "SAMP_GET_TEXTDRAW_OUTLINE",
           "num_params": 3,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Returns the tickness and color property of the text draw's outline",
-          "class": "Samp",
-          "member": "GetTextdrawOutline"
+          "class": "SampTextDraw",
+          "member": "GetOutline"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67751,18 +67703,17 @@
           "name": "SAMP_GET_TEXTDRAW_MODEL",
           "num_params": 8,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
-          "member": "GetTextdrawModel",
+          "class": "SampTextDraw",
+          "member": "GetModel",
           "short_desc": "Returns the properties of the text draw as a model (style 5)"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67776,18 +67727,17 @@
           "name": "SAMP_STORE_TEXTDRAW_TEXT",
           "num_params": 2,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
           "short_desc": "Stores the textdraw's text to stringBuffer",
-          "class": "Samp",
-          "member": "StoreTextdrawText"
+          "class": "SampTextDraw",
+          "member": "StoreText"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67806,18 +67756,17 @@
           "name": "SAMP_GET_TEXTDRAW_COORDS",
           "num_params": 3,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
-          "member": "GetTextdrawCoords",
+          "class": "SampTextDraw",
+          "member": "GetCoords",
           "short_desc": "Returns the gamescreen coordinates of the textdraw"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "output": [
@@ -67841,36 +67790,34 @@
           "name": "SAMP_GET_TEXTDRAW_CHARACTER_PROPERTIES",
           "num_params": 4,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
-          "member": "GetTextdrawCharProps",
+          "class": "SampTextDraw",
+          "member": "GetCharProps",
           "short_desc": "Returns the size and color property of all characters in the textdraw"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "id": "0C5D",
           "name": "SAMP_DOES_TEXTDRAW_EXIST",
           "num_params": 1,
           "attrs": {
-            "is_condition": true,
-            "is_static": true
+            "is_condition": true
           },
-          "class": "Samp",
-          "member": "TextDrawExist",
+          "class": "SampTextDraw",
+          "member": "DoesExist",
           "short_desc": "Evaluates as logical true if the specified textdraw exists"
         },
         {
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "self",
+              "type": "SampTextDraw"
             }
           ],
           "id": "0C5E",
@@ -67878,10 +67825,10 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true,
-            "is_static": true
+            "is_destructor": true
           },
-          "class": "Samp",
-          "member": "DeleteTextdraw",
+          "class": "SampTextDraw",
+          "member": "Delete",
           "short_desc": "Deletes the specified textdraw"
         },
         {
@@ -67899,7 +67846,7 @@
             "is_static": true
           },
           "class": "Sf",
-          "member": "GVarDefined",
+          "member": "IsGVarDefined",
           "short_desc": "Evaluates as logical true if a custom global variable with specified name existed"
         },
         {
@@ -68037,15 +67984,15 @@
           "output": [
             {
               "name": "handle",
-              "type": "AsyncDownload",
+              "type": "SfDownload",
               "source": "var_any"
             }
           ],
           "id": "0C65",
           "name": "SF_DOWNLOAD_FILE",
           "num_params": 3,
-          "short_desc": "Downloads a file from the specified url source asynchronosly then saves it to filepath. Returns a handle to this file's AsyncDownload object for tracking purposes",
-          "class": "AsyncDownload",
+          "short_desc": "Downloads a file from the specified url source asynchronosly then saves it to filepath. Returns a handle to this file's SfDownload object for tracking purposes",
+          "class": "SfDownload",
           "member": "File",
           "attrs": {
             "is_constructor": true
@@ -68055,13 +68002,13 @@
           "input": [
             {
               "name": "self",
-              "type": "AsyncDownload"
+              "type": "SfDownload"
             }
           ],
           "output": [
             {
               "name": "state",
-              "type": "AsyncDownloadState",
+              "type": "SfDownloadState",
               "source": "var_any"
             }
           ],
@@ -68071,9 +68018,9 @@
           "attrs": {
             "is_condition": true
           },
-          "class": "AsyncDownload",
+          "class": "SfDownload",
           "member": "GetState",
-          "short_desc": "Returns the download status of the AsyncDownload object"
+          "short_desc": "Returns the download status of the SfDownload object"
         },
         {
           "input": [
@@ -68582,7 +68529,7 @@
           "input": [
             {
               "name": "self",
-              "type": "AsyncDownload"
+              "type": "SfDownload"
             }
           ],
           "id": "0C7D",
@@ -68592,9 +68539,9 @@
             "is_condition": true,
             "is_destructor": true
           },
-          "class": "AsyncDownload",
+          "class": "SfDownload",
           "member": "Release",
-          "short_desc": "Frees an AsyncDownload object from memory"
+          "short_desc": "Frees an SfDownload object from memory"
         },
         {
           "id": "0C7E",
@@ -68623,7 +68570,7 @@
           "name": "SAMP_SET_LOCAL_CHAT_COMMAND_DESCRIPTION",
           "num_params": 2,
           "short_desc": "Sets the description for the local command",
-          "class": "LocalChatCmd",
+          "class": "SampLocalChatCmd",
           "member": "SetDescription",
           "attrs": {
             "is_static": true
@@ -68851,7 +68798,7 @@
           "output": [
             {
               "name": "handle",
-              "type": "D3DTexture",
+              "type": "SfD3DTexture",
               "source": "var_any"
             }
           ],
@@ -68863,7 +68810,7 @@
             "is_constructor": true
           },
           "short_desc": "Loads a texture from a file located in memory buffer",
-          "class": "D3DTexture",
+          "class": "SfD3DTexture",
           "member": "LoadTextureFromFileMemory"
         },
         {
@@ -68919,8 +68866,8 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Samp",
-          "member": "ProcessChatInput"
+          "class": "SampChatInput",
+          "member": "Process"
         },
         {
           "input": [
@@ -68937,7 +68884,7 @@
             "is_static": true
           },
           "short_desc": "Evaluates as logical true if the specified command is localized by a callback hook",
-          "class": "LocalChatCmd",
+          "class": "SampLocalChatCmd",
           "member": "IsHooked"
         },
         {
@@ -68956,7 +68903,7 @@
           },
           "short_desc": "Returns logical true if the specified console command is registered",
           "class": "SfConsole",
-          "member": "HasCmd"
+          "member": "IsCmdRegistered"
         },
         {
           "output": [

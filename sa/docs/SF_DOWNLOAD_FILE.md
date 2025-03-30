@@ -11,4 +11,4 @@
 | `"modules:\somefolder\thisfile.txt"` | `".\cleo\cleo_modules\somefolder\thisfile.txt"` |
 
 * Execute SF_GET_DOWNLOAD_STATE to know the download status
-* When the AsyncDownload object is on Do-Nothing mode (status >= 0), you must manually execute SF_RELEASE_DOWNLOAD to free the AsyncDownload object from memory and avoid memory leak
+* When the SfDownload object is on Do-Nothing mode (status >= 0), you must manually execute SF_RELEASE_DOWNLOAD to free the SfDownload object from memory and avoid memory leak

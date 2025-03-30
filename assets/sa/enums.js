@@ -3935,7 +3935,7 @@ export const SampTextDrawAlignment = {
   "Center": 1,
   "Right": 2
 };
-export const AsyncDownloadState = {
+export const SfDownloadState = {
   "InProgress": -1,
   "Complete": 0,
   "OutOfMemory": 2147942414,

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1743324559739,
-    "version": "0.930",
+    "last_update": 1743346191395,
+    "version": "0.931",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -64504,33 +64504,33 @@
         {
           "input": [
             {
-              "name": "threadId",
+              "name": "scriptId",
               "type": "int"
             }
           ],
           "id": "0BDE",
-          "name": "SF_PAUSE_THREAD",
+          "name": "SF_PAUSE_SCRIPT",
           "num_params": 1,
-          "short_desc": "Sets the specified thread's isActive parameter to 0",
+          "short_desc": "Sets the specified script's isActive parameter to 0",
           "attrs": {
             "is_static": true
           },
           "class": "Sf",
-          "member": "PauseThread"
+          "member": "PauseScript"
         },
         {
           "input": [
             {
-              "name": "threadId",
+              "name": "scriptId",
               "type": "int"
             }
           ],
           "id": "0BDF",
-          "name": "SF_RESUME_THREAD",
+          "name": "SF_RESUME_SCRIPT",
           "num_params": 1,
-          "short_desc": "Sets the specified thread's isActive parameter to 1",
+          "short_desc": "Sets the specified script's isActive parameter to 1",
           "class": "Sf",
-          "member": "ResumeThread",
+          "member": "ResumeScript",
           "attrs": {
             "is_static": true
           }
@@ -65108,7 +65108,7 @@
           "id": "0BFA",
           "name": "SF_PUSH_LOCAL_VARIABLES",
           "num_params": 0,
-          "short_desc": "Saves the values ​​of all local variables from the currently executing thread (Main Thread or a Function) to a separate memory that can be recovered later on by SF_POP_LOCAL_VARIABLES",
+          "short_desc": "Saves the values ​​of all local variables from the currently executing script (Main Script or a Function) to a separate memory that can be recovered later on by SF_POP_LOCAL_VARIABLES",
           "attrs": {
             "is_static": true
           },
@@ -65124,7 +65124,7 @@
             "is_static": true
           },
           "member": "PopLocalVars",
-          "short_desc": "Restores all previously saved local variables by SF_PUSH_LOCAL_VARIABLES to the local variables of the currently executing thread (Main Thread or a Function)"
+          "short_desc": "Restores all previously saved local variables by SF_PUSH_LOCAL_VARIABLES to the local variables of the currently executing script (Main Script or a Function)"
         },
         {
           "input": [
@@ -65145,8 +65145,8 @@
             "is_static": true
           },
           "short_desc": "Sets the value of the custom global variable with name",
-          "class": "Sf",
-          "member": "SetGVar"
+          "class": "SfGVar",
+          "member": "Set"
         },
         {
           "input": [
@@ -65169,8 +65169,8 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "Sf",
-          "member": "GetGVar",
+          "class": "SfGVar",
+          "member": "Get",
           "short_desc": "Returns the value of the custom global variable with name"
         },
         {
@@ -66746,8 +66746,8 @@
             "is_static": true
           },
           "short_desc": "Registers the name of a custom global function allowing other scripts to call it using SF_CALL_CUSTOM_GLOBAL_FUNCTION command",
-          "class": "Sf",
-          "member": "RegGFunc"
+          "class": "SfGFunc",
+          "member": "Register"
         },
         {
           "input": [
@@ -66772,8 +66772,8 @@
             "is_static": true
           },
           "short_desc": "Calls a registered custom global function with name",
-          "class": "Sf",
-          "member": "CallGFunc"
+          "class": "SfGFunc",
+          "member": "Call"
         },
         {
           "input": [
@@ -66794,8 +66794,8 @@
             "is_static": true
           },
           "short_desc": "Returns the flow of the execution to the next instruction after the custom global function call, optionally returning one or more parameters as result",
-          "class": "Sf",
-          "member": "GFuncRet"
+          "class": "SfGFunc",
+          "member": "Return"
         },
         {
           "input": [
@@ -66811,8 +66811,8 @@
             "is_condition": true,
             "is_static": true
           },
-          "class": "Sf",
-          "member": "IsGFuncRegistered",
+          "class": "SfGFunc",
+          "member": "IsRegistered",
           "short_desc": "Evaluates as logical true if the specified name is registered a custom global function"
         },
         {
@@ -66842,8 +66842,8 @@
             "is_static": true
           },
           "short_desc": "Returns the origin informations of a custom global function with name",
-          "class": "Sf",
-          "member": "GFuncGetOrigin"
+          "class": "SfGFunc",
+          "member": "GetOrigin"
         },
         {
           "input": [
@@ -66859,8 +66859,8 @@
           "attrs": {
             "is_static": true
           },
-          "class": "Sf",
-          "member": "GFuncUnreg"
+          "class": "SfGFunc",
+          "member": "Unregister"
         },
         {
           "input": [
@@ -67836,14 +67836,14 @@
             }
           ],
           "id": "0C5F",
-          "name": "SF_IS_CUSTOM_GLOBAL_VARIABLE_DEFINED",
+          "name": "SF_DOES_CUSTOM_GLOBAL_VARIABLE_EXIST",
           "num_params": 1,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
-          "class": "Sf",
-          "member": "IsGVarDefined",
+          "class": "SfGVar",
+          "member": "DoesExist",
           "short_desc": "Evaluates as logical true if a custom global variable with specified name existed"
         },
         {
@@ -67853,7 +67853,7 @@
               "type": "string"
             },
             {
-              "name": "threadPtr",
+              "name": "scriptPtr",
               "type": "int"
             },
             {
@@ -67866,15 +67866,15 @@
             }
           ],
           "id": "0C60",
-          "name": "SF_GVAR_SET_THREAD_SCOPE",
+          "name": "SF_SET_CUSTOM_GLOBAL_VARIABLE_SCOPE",
           "num_params": 4,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Sets whether the specified script thread can read or write to the specified custom global variable",
-          "class": "Sf",
-          "member": "GVarSetThreadScope"
+          "short_desc": "Sets whether the specified script can read or write to the specified custom global variable",
+          "class": "SfGVar",
+          "member": "SetScope"
         },
         {
           "input": [
@@ -67883,7 +67883,7 @@
               "type": "int"
             },
             {
-              "name": "threadPtr",
+              "name": "scriptPtr",
               "type": "int"
             }
           ],
@@ -67900,15 +67900,15 @@
             }
           ],
           "id": "0C61",
-          "name": "SF_GVAR_GET_THREAD_SCOPE",
+          "name": "SF_GET_CUSTOM_GLOBAL_VARIABLE_SCOPE",
           "num_params": 4,
           "attrs": {
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Returns the specified script thread's read/write permissions to the specified custom global variable",
-          "class": "Sf",
-          "member": "GVarGetThreadScope"
+          "short_desc": "Returns the specified script's read/write permissions to the specified custom global variable",
+          "class": "SfGVar",
+          "member": "GetScope"
         },
         {
           "input": [
@@ -67946,7 +67946,7 @@
             "is_static": true
           },
           "class": "SfConsole",
-          "member": "RegCmd",
+          "member": "RegisterCmd",
           "short_desc": "Registers a callback hooked on a SAMPFUNCS console command with maximum length of 64 characters"
         },
         {
@@ -67964,7 +67964,7 @@
             "is_static": true
           },
           "class": "SfConsole",
-          "member": "UnregCmd",
+          "member": "UnregisterCmd",
           "short_desc": "Removes the specified SAMPFUNCS console command. This command does nothing if the the specified command isn't a registered in the SAMPFUNCS console then evaluates as logical false if used as a condition"
         },
         {

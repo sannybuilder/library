@@ -78,6 +78,8 @@ SfD3DFont
 SfD3DTexture
 SfDownload
 SfDxutDialog
+SfGFunc
+SfGVar
 SfScript
 SfTimer
 Shopping
@@ -3123,7 +3125,6 @@ AtoF,0C1B,0,0,("ascii%s" "float%f")
 AtoI,0C1A,0,0,("ascii%s" "integer%i")
 AxesToQuat,0C32,0,0,("pitchVectorX%f" "pitchVectorY%f" "pitchVectorZ%f" "rollVectorX%f" "rollVectorY%f" "rollVectorZ%f" "yawVectorX%f" "yawVectorY%f" "yawVectorZ%f" "quaternionW%f" "quaternionX%f" "quaternionY%f" "quaternionZ%f")
 BintoHex,0C22,1,0,("binaryString%s" "stringBuffer%s" "bufferSize%i")
-CallGFunc,0C35,1,0,("name%s" "numParam%i" "params: arguments")
 Ceil,0C0A,0,0,("number%f" "result%f")
 ClipboardReadData,0C8E,1,0,("buffer%i" "size%i")
 ClipboardWriteText,0C8D,0,0,("text%s")
@@ -3135,16 +3136,10 @@ From2Dto3D,0B8F,0,0,("screenCoordX%i" "screenCoordY%i" "depth%f" "worldCoordX%f"
 From3DTo2D,0B55,1,0,("worldCoordX%f" "worldCoordY%f" "worldCoordZ%f" "screenCoordX%i" "screenCoordY%i")
 FromGameToWinScreen,0B60,0,0,("gameScreenCoordX%f" "gameScreenCoordY%f" "windowScreenCoordX%i" "windowScreenCoordY%i")
 FromWinToGameScreen,0B5F,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i" "gameScreenCoordX%f" "gameScreenCoordY%f")
-GFuncGetOrigin,0C38,1,0,("name%s" "hostThreadAddress%i" "functionAddress%i")
-GFuncRet,0C36,1,0,("numRet%i" "retParams: arguments")
-GFuncUnreg,0C39,0,0,("name%s")
-GVarGetThreadScope,0C61,1,0,("gVarName%i" "threadPtr%i" "canRead%b" "canWrite%b")
-GVarSetThreadScope,0C60,1,0,("gVarName%s" "threadPtr%i" "canRead%b" "canWrite%b")
 GetCleoLibVer,0C92,0,0,("version%i")
 GetCmdParams,0B35,1,0,("pointer%i")
 GetCursorCoord,0B5E,0,0,("windowScreenCoordX%i" "windowScreenCoordY%i")
 GetElementPointerOfBufferArray,0C1F,0,0,("array%i" "index%i" "size%i" "address%i")
-GetGVar,0BFD,1,0,("name%s" "value: any")
 GetModule,0C70,1,0,("moduleName%s" "handle%i")
 GetModuleProc,0C71,1,0,("moduleHandle%i" "functionName%s" "functionPtr%i")
 GetOsEnv,0C67,1,0,("varName%s" "stringBuffer%s" "buffersize%i")
@@ -3153,8 +3148,6 @@ GetTickCount,0BFE,0,0,("tickCount%i")
 HexToArgb,0B66,0,0,("color%i" "alpha%i" "red%i" "green%i" "blue%i")
 HextoBin,0C23,1,0,("hexString%s" "stringBuffer%s" "bufferSize%i")
 ImSpawned,0B61,1,0,()
-IsGFuncRegistered,0C37,1,0,("name%s")
-IsGVarDefined,0C5F,1,0,("name%s")
 ItoA,0C1C,0,0,("integer%i" "radix%i" "stringBuffer%s")
 KeyJustPressed,0C89,1,0,("keyCode: KeyCode")
 MakeScriptPrivate,1337,0,0,("isPrivate%i")
@@ -3163,7 +3156,7 @@ MatrixToQuat,0C30,0,0,("matrix%i" "quaternionBuffer%i")
 MemCpy,0C10,1,0,("destination%i" "source%i" "size%i")
 MemEq,0C12,1,0,("addressA%i" "addressB%i" "size%i")
 MemFill,0C11,1,0,("address%i" "byteValue%i" "size%i")
-PauseThread,0BDE,0,0,("threadId%i")
+PauseScript,0BDE,0,0,("scriptId%i")
 PopLocalVars,0BFB,0,0,()
 Pow,0C09,0,0,("coefficient%f" "exponent%f" "power%f")
 ProcessLineOfSight,0BFF,1,0,("fromCoordX%f" "fromCoordY%f" "fromCoordZ%f" "toCoordX%f" "toCoordY%f" "toCoordZ%f" "checkBuildings%b" "checkCars%b" "checkChars%b" "checkObjects%b" "checkParticles%b" "seeThrough%b" "ignoreCameras%b" "colPointPtr: any" "entityPtr: any")
@@ -3173,11 +3166,9 @@ RadToDeg,0C01,0,0,("radians%f" "degrees%f")
 ReadElementOf4BytesArray,0C0E,1,0,("array%i" "index%i" "value: any")
 ReadElementOfSizedArray,0C1D,1,0,("array%i" "index%i" "size%i" "value: any")
 ReadMemoryWithOffset,0C0C,1,0,("address%i" "offset%i" "size%i" "value: any")
-RegGFunc,0C34,1,0,("name%s" "label: label")
-ResumeThread,0BDF,0,0,("threadId%i")
+ResumeScript,0BDF,0,0,("scriptId%i")
 SetButton,0B56,0,0,("buttonId: Button" "behaviorValue%i")
 SetCharKeyStatus,0C73,0,0,("ascii%i" "isPressed%b")
-SetGVar,0BFC,1,0,("name%s" "value: any")
 SetKeyStatus,0C72,0,0,("keyCode: KeyCode" "isPressed%b")
 SetScoreboardVisibility,0BD6,0,0,("isVisible%b")
 Sin,0C03,0,0,("radians%f" "ratio%f")
@@ -3216,9 +3207,9 @@ ExecCmd,0C62,0,0,("command%s")
 IsCmdRegistered,0C91,1,0,("command%s")
 IsOpen,0C7E,1,0,()
 Log,0B78,0,0,("format%s" "args: arguments")
-RegCmd,0C63,1,0,("command%s" "callback: label")
+RegisterCmd,0C63,1,0,("command%s" "callback: label")
 SetCmdDesc,0C80,0,0,("command%s" "description%s")
-UnregCmd,0C64,1,0,("command%s")
+UnregisterCmd,0C64,1,0,("command%s")
 $END
 
 $SfD3D
@@ -3293,6 +3284,25 @@ SetTitleVisibility,0B9F,0,0,("self: SfDxutDialog" "isVisible%b")
 SetVisibilityOfControl,0B90,0,0,("self: SfDxutDialog" "controlId%i" "isVisible%i")
 ToggleControlFocus,0BA5,0,0,("self: SfDxutDialog" "id%i")
 Visibility,0B86,0,0,("self: SfDxutDialog" "isVisible%b")
+$END
+
+$SfGFunc
+$BEGIN
+Call,0C35,1,0,("name%s" "numParam%i" "params: arguments")
+GetOrigin,0C38,1,0,("name%s" "hostThreadAddress%i" "functionAddress%i")
+IsRegistered,0C37,1,0,("name%s")
+Register,0C34,1,0,("name%s" "label: label")
+Return,0C36,1,0,("numRet%i" "retParams: arguments")
+Unregister,0C39,0,0,("name%s")
+$END
+
+$SfGVar
+$BEGIN
+DoesExist,0C5F,1,0,("name%s")
+Get,0BFD,1,0,("name%s" "value: any")
+GetScope,0C61,1,0,("gVarName%i" "scriptPtr%i" "canRead%b" "canWrite%b")
+Set,0BFC,1,0,("name%s" "value: any")
+SetScope,0C60,1,0,("gVarName%s" "scriptPtr%i" "canRead%b" "canWrite%b")
 $END
 
 $SfScript

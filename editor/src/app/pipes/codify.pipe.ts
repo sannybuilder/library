@@ -107,7 +107,7 @@ function format(
     ? opcodify(code, extensions, command, extension)
     : code;
   const declaratified = showFuncDeclarations
-    ? declaratify(opcodified, extensions, game)
+    ? declaratify(opcodified, extensions, game, command)
     : opcodified;
   const highlighted = Prism.highlight(
     declaratified,
@@ -187,9 +187,10 @@ function opcodify(
 function declaratify(
   text: string,
   extensions: Extension[],
-  game: Game
+  game: Game,
+  command: Command,
 ): string {
-  const foundFunctions: Set<Command> = new Set();
+  const foundFunctions: Set<Command> = new Set([command]);
   const names = text.match(/\b\w+\b/g) ?? [];
 
   for (let name of names) {

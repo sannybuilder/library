@@ -64,6 +64,7 @@ SampBitstream
 SampChat
 SampChatInput
 SampLocalChatCmd
+SampMyPlayer
 SampPlayer
 SampRaknet
 SampTextDraw
@@ -2853,7 +2854,6 @@ ForceAimSync,0C84,0,0,()
 ForceDrivingSync,0C81,0,0,("id%i")
 ForceOnfootSync,0C83,0,0,()
 ForcePassengerSync,0C86,0,0,("carId%i" "seatId: SeatId")
-ForceSpawn,0AF6,0,0,()
 ForceStatsSync,0C87,0,0,()
 ForceTrailerSync,0C85,0,0,("id%i")
 ForceUnnocupiedSync,0C82,0,0,("carId%i" "seatId: SeatId")
@@ -2941,7 +2941,6 @@ SetCursorVisibility,0B5D,0,0,("isVisible%b")
 SetDialogEditboxText,0B4B,1,0,("text%s")
 SetDialogEnv,0BD9,0,0,("isClientSide%b")
 SetGameState,0B27,0,0,("id: SampGameState")
-SetMyName,0B29,0,0,("nickname%s")
 SetSendRate,0B22,0,0,("type: SampSendRateType" "delay%i")
 SetSpecialAction,0AFD,0,0,("id: SampSpecialAction")
 ShowDialog,0B3B,0,0,("id%i" "title%s" "content%s" "leftOrMiddleButtonName%s" "rightButtonName%s" "style: SampDialogStyle")
@@ -3002,6 +3001,13 @@ Hook,0B34,1,0,("chatCommand%s" "callback: label")
 IsHooked,0C90,1,0,("chatCommand%s")
 SetDescription,0C7F,0,0,("chatCommand%s" "decription%s")
 Unhook,0B63,1,0,("chatCommand%s")
+$END
+
+$SampMyPlayer
+$BEGIN
+ForceSpawn,0AF6,0,0,()
+IsSpawned,0B61,1,0,()
+SetNickname,0B29,0,0,("nickname%s")
 $END
 
 $SampPlayer
@@ -3147,7 +3153,6 @@ GetScreenRes,0B5A,0,0,("width%i" "height%i")
 GetTickCount,0BFE,0,0,("tickCount%i")
 HexToArgb,0B66,0,0,("color%i" "alpha%i" "red%i" "green%i" "blue%i")
 HextoBin,0C23,1,0,("hexString%s" "stringBuffer%s" "bufferSize%i")
-ImSpawned,0B61,1,0,()
 ItoA,0C1C,0,0,("integer%i" "radix%i" "stringBuffer%s")
 KeyJustPressed,0C89,1,0,("keyCode: KeyCode")
 MakeScriptPrivate,1337,0,0,("isPrivate%i")

@@ -82,7 +82,7 @@
     "0F16": "const Key_F11=122\nwhile true\n    wait 0\n    if is_key_just_pressed Key_F11\n    then\n        if is_on_mission\n        then set_on_mission False\n        else set_on_mission True\n        end\n    end\nend"
   },
   "SAMPFUNCS": {
-    "0AF6": "SAMP_SPAWN_LOCAL_PLAYER",
+    "0AF6": "SAMP_FORCE_SPAWN_MY_PLAYER",
     "0AF7": "int sampaddr = SAMP_GET_BASE_ADDRESS",
     "0AF8": "SAMP_ADD_MESSAGE_TO_CHAT {format} \"Script Initialized!\" {color} 0xFF00FFFF {args} // shows a literal string as teal colored text\n\nSAMP_ADD_MESSAGE_TO_CHAT {format} \"WeaponID: %d, Weapon Damage: %f, WeaponName:%s\" {color} 0xFF00FFFF {values} 24 14@ \"Desert Eagle\" // shows a formatted string as teal colored text",
     "0AF9": "// Example 1: Sends a String Constant to Server.\nSAMP_SEND_CHAT_MESSAGE \"Hello Everyone!\"\nSAMP_SEND_CHAT_MESSAGE \"/cmds\"\n\n\n// Example 2: Periodically sends a formatted text message to server\n{$CLEO}\n{$USE SAMPFUNCS}\nNOP\n\nrepeat\n    wait 100\nuntil samp_is_available\n\nint loopIndex = 1\n\nwhile true\n    wait 3000\n    int myID = samp_get_player_id $scplayer\n    int myName = samp_get_player_nickname {id} myID\n    samp_send_chat_message {message} \"%d) My Name is %s.\" {args} loopIndex myName\n    loopIndex++\nend\n",
@@ -101,7 +101,7 @@
     "0B26": "int targetArmor, targetPlayer\n// do something to targetPlayer\n{armor} targetArmor = SAMP_GET_PLAYER_ARMOR {playerid} targetPlayer",
     "0B27": "SAMP_SET_GAMESTATE {statusid} SampGameState.Disconnected // disconnect to server",
     "0B28": "SAMP_SEND_DISCONNECTED {reasonid} SampDisconnectReason.KickedOrBanned",
-    "0B29": "SAMP_SET_LOCAL_NICKNAME {nickname} \"ajom\" // locally change our nickname into ajom\n\n\nint strBuf = ALLOCATE_MEMORY {size} 30\n// write something to strBuf as a valid string\nSAMP_SET_LOCAL_NICKNAME {nickname} strBuf // locally change our nickname into ajom\nFREE_MEMORY {address} strBuf",
+    "0B29": "SAMP_SET_MY_NICKNAME {nickname} \"ajom\" // locally change our nickname into ajom\n\n\nint strBuf = ALLOCATE_MEMORY {size} 30\n// write something to strBuf as a valid string\nSAMP_SET_MY_NICKNAME {nickname} strBuf // locally change our nickname into ajom\nFREE_MEMORY {address} strBuf",
     "0B2A": "// get my ping\nint myPlayerID, myPing\nint playerChar = get_player_char 0\n{id} myPlayerID = SAMP_GET_PLAYER_ID {handle} playerChar\n{ping} myPing = SAMP_GET_PLAYER_PING {playerid} myPlayerID",
     "0B2B": "// get my player id\nint char = get_player_char 0\nint myID = SAMP_GET_PLAYER_ID {handle} char",
     "0B2C": "int targetHandle\n// do something to targetHandle\nint targetID = SAMP_GET_CAR_ID {handle} targetHandle",
@@ -157,7 +157,7 @@
     "0B5E": "int coordX,coordY = SF_GET_CURSOR_COORD",
     "0B5F": "int myWindowScreenCoordX, myWindowScreenCoordY = SF_GET_SCREEN_RESOLUTION\nfloat myGameScreenCoordX, myGameScreenCoordY = SF_WINDOW_SCREEN_COORDS_TO_GAME_SCREEN_COORDS {windowscreencoordx} myWindowScreenCoordX {windowscreencoordy} myWindowScreenCoordY",
     "0B60": "int myWindowScreenCoordX, myWindowScreenCoordY = SF_GAME_SCREEN_COORDS_TO_WINDOW_SCREEN_COORDS {gamescreencoordx} 315.19 {gamescreencoordy} 98.89",
-    "0B61": "if SAMP_IS_LOCAL_PLAYER_SPAWNED\nthen // our local player had spawned already\nelse // our local player hasn't spawned yet\nend",
+    "0B61": "if SAMP_IS_MY_PLAYER_SPAWNED\nthen // our local player had spawned already\nelse // our local player hasn't spawned yet\nend",
     "0B62": "int mySpecialAction\nint myPlayerID = SAMP_GET_PLAYER_ID $scplayer\nif mySpecialAction = SAMP_GET_PLAYER_SPECIAL_ACTION myPlayerID\nthen\n    // do something to mySpecialAction\nelse // myPlayerID is not connected\nend",
     "0B63": "SAMP_UNHOOK_LOCAL_CHAT_COMMAND {chatcommand} \"greedisgood\"",
     "0B64": "if SAMP_IS_PLAYER_NPC {playerid} 17\nthen // player 17 is an NPC\nelse // player 17 is not an NPC\nend",

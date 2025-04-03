@@ -1,0 +1,39 @@
+debug_on
+int blipPed = -1
+int blipVeh = -1
+while true
+    wait 0
+    
+    if
+        test_cheat {input} "1"
+    then
+        if
+            blipPed <> -1
+        then
+            remove_blip blipPed
+            blipPed = -1
+        end
+        if
+            blipVeh <> -1
+        then
+            remove_blip blipVeh
+            blipVeh = -1
+        end
+    
+        int pedHandle, vehHandle
+        vehHandle, pedHandle = store_closest_entities $scplayer
+
+        trace "store_closest_entities -> ped: %p, veh: %p" pedHandle vehHandle
+
+        if
+            pedHandle <> -1
+        then
+            blipPed = add_blip_for_char {char} pedHandle
+        end
+        if
+            vehHandle <> -1
+        then
+            blipVeh = add_blip_for_char {char} vehHandle
+        end       
+    end
+end

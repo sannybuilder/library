@@ -50,7 +50,9 @@
               extensions: gameExtensions,
               showOpcodes: displayOpcodePresentation$ | async,
               showFuncDeclarations:
-                (showControls === false) || (displayFunctionDeclaration$ | async),
+                viewContext === ViewContext.Code &&
+                (showControls === false ||
+                  (displayFunctionDeclaration$ | async)),
               extension: extension
             }
         | sanitize

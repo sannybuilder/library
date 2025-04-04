@@ -1,24 +1,17 @@
-float x,y,z
-Char ped
-
 while true
-    wait 0
+    wait 100
     
     if
         test_cheat "1"
     then
-        get_active_camera_coordinates {store_to} x y z
+        float x, y, z
+        x, y, z = get_active_camera_coordinates
         
-        if
-            get_random_char_in_sphere_no_save_recursive {pos} x y z {radius} 30.0 {find_next} false {skip_dead} true {store_to} ped
-        then
-            explode_char_head ped // the first one
+        int ped = get_random_char_in_sphere_no_save_recursive {pos} x y z {radius} 30.0 {find_next} false {filter} CharSearchFilter.AliveNPC // get first
+        while ped <> -1
+            explode_char_head ped
             
-            while get_random_char_in_sphere_no_save_recursive {pos} x y z {radius} 30.0 {find_next} true {skip_dead} true {store_to} ped
-                explode_char_head ped
-            end
-        else
-            print_formatted_now "First not found" {time} 4000
+            ped = get_random_char_in_sphere_no_save_recursive {pos} x y z {radius} 30.0 {find_next} true {filter} CharSearchFilter.AliveNPC // get next
         end
     end
 end

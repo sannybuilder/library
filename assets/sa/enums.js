@@ -3948,13 +3948,3 @@ export const Language = {
   "Italian": 3,
   "Spanish": 4
 };
-export const CharSearch = {
-  "AliveDeadPlayer": -1,
-  "AliveDead": 0,
-  "Alive": 1
-};
-export const CharSearchFilter = {
-  "Any": -1,
-  "NPC": 0,
-  "AliveNPC": 1
-};

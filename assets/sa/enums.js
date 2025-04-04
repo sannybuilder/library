@@ -3953,3 +3953,8 @@ export const CharSearch = {
   "AliveDead": 0,
   "Alive": 1
 };
+export const CharSearchFilter = {
+  "Any": -1,
+  "NPC": 0,
+  "AliveNPC": 1
+};

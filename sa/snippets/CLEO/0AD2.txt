@@ -1,0 +1,21 @@
+debug_on // enable "trace" command
+int blipHandle = -1
+while true
+    wait 200
+    
+    if
+        blipHandle <> -1
+    then
+        remove_blip blipHandle
+        blipHandle = -1
+    end
+
+    if
+        int pedHandle = get_char_player_is_targeting $player1
+    then
+        blipHandle = add_blip_for_char {char} pedHandle
+        trace "get_char_player_is_targeting -> %p, true" pedHandle
+    else
+        trace "get_char_player_is_targeting -> %p, false" pedHandle
+    end
+end

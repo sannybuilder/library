@@ -3948,3 +3948,8 @@ export const Language = {
   "Italian": 3,
   "Spanish": 4
 };
+export const CharSearchFilter = {
+  "Any": -1,
+  "AnyNPC": 0,
+  "AnyAliveNPC": 1
+};

@@ -1,0 +1,1 @@
+This conditional command returns true if the button assigned to a function in the game is being pressed. The GXT file can display on screen specific buttons assigned to the action. If CLEO is installed, use IS_KEY_PRESSED to get a specific key on a keyboard.

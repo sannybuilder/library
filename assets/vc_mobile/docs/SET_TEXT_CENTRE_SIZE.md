@@ -1,0 +1,1 @@
+This command sets the size of centered text (SET_TEXT_CENTRE), which has the size of `640.0` by default. Similar to wrap x for non-centered text (SET_TEXT_WRAPX), text that goes beyond the size will be wrapped to the next line.

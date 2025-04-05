@@ -1,0 +1,1 @@
+This command sets the color and opacity of the text, which defaults to the RGBA color of (`225`,`225`,`225`,`255`) (or `#E1E1E1FF` in hexadecimal, <span style="display: inline-block; width: 12px; height: 12px; background-color: #E1E1E1FF; border: 1px solid #000;"></span>). The color and opacity do not affect the black text shadow beneath the text.

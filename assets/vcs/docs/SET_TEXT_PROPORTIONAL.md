@@ -1,0 +1,1 @@
+This command sets the text to be proportional, which means the space occupied by each character depends on the character. Text that is not proportional uses an equal amount of space for any characters. 

@@ -1,0 +1,1 @@
+This command sets the horizontal centering of the text, which is not centered by default. Without centering, the text uses the left side of the text to position itself. With centering, it uses the center of the text to position itself. Centered text cannot use wrap x (SET_TEXT_WRAPX); instead it uses center size (SET_TEXT_CENTRE), which defaults to a size of `640.0`.

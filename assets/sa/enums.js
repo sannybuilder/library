@@ -3938,8 +3938,8 @@ export const SampTextDrawAlignment = {
 export const SfDownloadState = {
   "InProgress": -1,
   "Complete": 0,
-  "OutOfMemory": 2147942414,
-  "DownloadFailure": 2148270088
+  "OutOfMemory": -2147024882,
+  "DownloadFailure": -2146697208
 };
 export const Language = {
   "English": 0,

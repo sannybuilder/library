@@ -1,0 +1,116 @@
+<div id="wrapper">
+  <div id="map-holder">
+    <!-- <div id="map-canvas"></div> -->
+    <google-map
+      [height]="'100%'"
+      [width]="'100%'"
+      [zoom]="1"
+      [options]="mapOptions"
+      (mapInitialized)="onMapReady($event)"
+    >
+      @for (m of markers; track m.id) {
+      <map-marker
+        #marker="mapMarker"
+        [position]="m.position"
+        [icon]="m.icon"
+        (mapClick)="openInfoWindow(marker, m)"
+      />
+      }; @for (p of paths; track p.id) {
+      <map-polyline
+        #path="mapPolyline"
+        [path]="p.vertices"
+        [options]="{
+          strokeColor: p.strokeColor,
+          strokeOpacity: p.strokeOpacity,
+          strokeWeight: p.strokeWeight
+        }"
+        (polylineMouseover)="onPathMouseover(path, p)"
+        (polylineMouseout)="onPathMouseout(path, p)"
+      />
+      }; @for (a of areas; track a.id) {
+      <map-polygon
+        #area="mapPolygon"
+        [paths]="a.vertices"
+        [options]="{
+          strokeColor: a.strokeColor,
+          strokeOpacity: a.strokeOpacity,
+          strokeWeight: a.strokeWeight,
+          fillColor: a.fillColor,
+          fillOpacity: a.fillOpacity
+        }"
+        (polygonClick)="openInfoWindowAt($event, a.data)"
+      />
+      }
+      <map-info-window />
+    </google-map>
+    <div
+      id="map-overlay-slide"
+      [ngClass]="{ open: isSidebarOpen }"
+      (click)="toggleSidebar()"
+    ></div>
+    <div id="map-overlay" [ngClass]="{ open: isSidebarOpen }">
+      <div>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a
+              class="nav-link border-left-0"
+              href="#"
+              (click)="(activeTab = 1) && false"
+              [ngClass]="{ active: activeTab == 1 }"
+              >Locations</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              (click)="(activeTab = 2) && false"
+              [ngClass]="{ active: activeTab == 2 }"
+              >Zones</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <ng-container *ngIf="activeTab == 1">
+          @for(cat of BlipCategories; track cat.id) {
+
+          <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
+            <li
+              *ngFor="let subcat of cat.subcategory"
+              class="marker-type d-flex align-items-center"
+              [ngClass]="{ active: subcat.visible }"
+            >
+              <img [src]="_MAP_iconURL + subcat.icon" />
+              <span>{{ subcat.name }} ({{ subcat.positions.length }})</span>
+              <button class="btn ml-auto" (click)="toggleBlips(subcat)">
+                {{ subcat.visible ? "Hide" : "Show" }}
+              </button>
+            </li>
+          </ul>
+
+          }
+        </ng-container>
+
+        <ng-container *ngIf="activeTab == 2">
+          <ul class="list-unstyled p-3">
+            <li class="d-flex align-items-center">
+              <span>4-Star Areas</span>
+              <button class="btn ml-auto" (click)="toggleWantedZones()">
+                {{ areWantedZonesEnabled ? "Hide" : "Show" }}
+              </button>
+            </li>
+            <li class="d-flex align-items-center">
+              <span>Pre-Recorded Paths (RRR)</span>
+              <button class="btn ml-auto" (click)="togglePreRecordedPaths()">
+                {{ arePreRecordedPathsEnabled ? "Hide" : "Show" }}
+              </button>
+            </li>
+          </ul>
+
+          <div>{{ tooltip }}</div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

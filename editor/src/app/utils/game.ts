@@ -86,6 +86,10 @@ export function doesGameHaveNativeDocs(game: Game): boolean {
   return [Game.sa].includes(game);
 }
 
+export function doesGameHaveMap(game: Game): boolean {
+  return [Game.sa].includes(game);
+}
+
 export function hasCLEOReduxSupport(game: Game): boolean {
   return ![Game.gta3_mobile, Game.vc_mobile, Game.sa_mobile].includes(game);
 }

@@ -60,6 +60,13 @@
                     >{{ "ui.header.nativeCode" | translate }}</a
                   >
                 </ng-container>
+                <ng-container *ngIf="doesGameHaveMap(v)">
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'map']"
+                    >{{ "ui.header.map" | translate }}</a
+                  >
+                </ng-container>
               </ng-container>
             </div>
           </li>
@@ -410,6 +417,13 @@
                     class="dropdown-item marker"
                     [routerLink]="['/', v, 'native']"
                     >{{ "ui.header.nativeCode" | translate }}</a
+                  >
+                </ng-container>
+                <ng-container *ngIf="doesGameHaveMap(v)">
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'map']"
+                    >{{ "ui.header.map" | translate }}</a
                   >
                 </ng-container>
               </ng-container>

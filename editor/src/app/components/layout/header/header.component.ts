@@ -11,6 +11,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import {
+  doesGameHaveMap,
   doesGameHaveNativeDocs,
   getBaseGame,
   getBaseGames,
@@ -141,5 +142,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   doesGameHaveNativeDocs(game: Game) {
     return doesGameHaveNativeDocs(game);
+  }
+
+  doesGameHaveMap(game: Game) {
+    return doesGameHaveMap(game);
   }
 }

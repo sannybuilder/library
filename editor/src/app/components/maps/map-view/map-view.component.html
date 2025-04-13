@@ -71,34 +71,31 @@
             <li class="nav-item">
               <a
                 class="nav-link border-left-0"
-                href="#"
-                (click)="(activeTab = 1) && false"
-                [ngClass]="{ active: activeTab == 1 }"
+                routerLink="../locations"
+                routerLinkActive="active"
                 >Locations</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="#"
-                (click)="(activeTab = 2) && false"
-                [ngClass]="{ active: activeTab == 2 }"
+                routerLink="../zones"
+                routerLinkActive="active"
                 >Zones</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="#"
-                (click)="(activeTab = 3) && false"
-                [ngClass]="{ active: activeTab == 3 }"
+                routerLink="../paths"
+                routerLinkActive="active"
                 >Paths</a
               >
             </li>
           </ul>
         </div>
         <div>
-          <ng-container *ngIf="activeTab == 1">
+          <ng-container *ngIf="activeTab == 'locations'">
             @for(cat of locations; track cat.id) {
 
             <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
@@ -118,7 +115,7 @@
             }
           </ng-container>
 
-          <ng-container *ngIf="activeTab == 2">
+          <ng-container *ngIf="activeTab == 'zones'">
             @for(cat of zones; track cat.id) {
 
             <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
@@ -138,7 +135,7 @@
             }
           </ng-container>
 
-          <ng-container *ngIf="activeTab == 3">
+          <ng-container *ngIf="activeTab == 'paths'">
             @for(cat of paths; track cat.id) {
 
             <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">

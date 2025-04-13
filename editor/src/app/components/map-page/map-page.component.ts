@@ -100,6 +100,8 @@ export class MapPageComponent {
     })
   );
 
+  activeTab$ = this._route.params.pipe(map((p) => p.tab));
+
   constructor(
     private _http: HttpClient,
     private _title: Title,

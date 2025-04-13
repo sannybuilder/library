@@ -281,9 +281,13 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
               pathMatch: 'full',
               component: HomePageComponent,
             },
-
             {
               path: 'sa/map',
+              pathMatch: 'full',
+              redirectTo: 'sa/map/locations',
+            },
+            {
+              path: 'sa/map/:tab',
               pathMatch: 'full',
               title: `${GameTitle['sa']} :: Map`,
               component: MapPageComponent,

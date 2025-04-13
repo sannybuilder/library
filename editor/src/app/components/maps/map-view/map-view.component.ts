@@ -35,13 +35,13 @@ export class MapViewComponent {
   @Input() paths: Category<PathData>[] = [];
   @Input() locations: Category<XYZ>[] = [];
   @Input() zones: Category<AreaData>[];
+  @Input() activeTab: string;
 
   gmMarkers: GMMarker[] = [];
   gmPolylines: GMPolyline[] = [];
   gmPolygons: GMPolygon[] = [];
 
   isSidebarOpen = true;
-  activeTab = 1;
   tooltip: string;
   map: google.maps.Map;
 
@@ -62,7 +62,6 @@ export class MapViewComponent {
 
     private _cd: ChangeDetectorRef
   ) {}
-
 
 
   toggleSidebar() {

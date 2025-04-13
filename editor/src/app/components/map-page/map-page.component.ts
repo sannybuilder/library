@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import {
-  AreaData,
-  BlipCategory,
-  BlipData,
-  RRRData,
-} from '../maps/map-view/model';
+import { map, Observable, zip } from 'rxjs';
+import { AreaData, Category, BlipData, PathData } from '../maps/map-view/model';
 
 export interface XYZ {
   x: number;
@@ -21,50 +16,87 @@ export interface XYZ {
   standalone: false,
 })
 export class MapPageComponent {
-  rrr$ = this._http.get<RRRData>('/assets/sa/maps/locations/rrr.json');
-  blips$: Observable<BlipCategory[]> = this._http
-    .get<BlipData>('/assets/sa/maps/locations/blips.json')
-    .pipe(
-      map((blips) => {
-        return [
-          {
-            id: 1,
-            name: 'Collectibles',
-            subcategory: [
-              {
-                id: 1,
-                name: 'Spray Tags',
-                icon: 'spray_tag.png',
-                positions: blips.sprayTags,
-                visible: false,
-              },
-              {
-                id: 2,
-                name: 'Oysters',
-                icon: 'oyster.png',
-                positions: blips.oysters,
-                visible: false,
-              },
-              {
-                id: 3,
-                name: 'Photo Opportunities',
-                icon: 'photo_op.png',
-                positions: blips.photoOps,
-                visible: false,
-              },
-              {
-                id: 4,
-                name: 'Horseshoes',
-                icon: 'horseshoe.png',
-                positions: blips.horseshoes,
-                visible: false,
-              },
-            ],
-          },
-        ];
-      })
-    );
-  areas$ = this._http.get<AreaData>('/assets/sa/maps/locations/areas.json');
+  paths$: Observable<Category<PathData>[]> = zip(
+    this._http.get<PathData[]>('/assets/sa/maps/locations/rrr.json')
+  ).pipe(
+    map(([rrr]) => {
+      return [
+        {
+          name: 'Paths',
+          subcategory: [
+            {
+              name: 'Pre-Recorded Paths (RRR)',
+              items: rrr,
+              visible: false,
+            },
+          ],
+        },
+      ];
+    })
+  );
+
+  locations$: Observable<Category<XYZ>[]> = zip(
+    this._http.get<BlipData>('/assets/sa/maps/locations/blips.json')
+  ).pipe(
+    map(([blips]) => {
+      return [
+        {
+          name: 'Collectibles',
+          subcategory: [
+            {
+              name: 'Spray Tags',
+              icon: 'spray_tag.png',
+              items: blips.sprayTags,
+              visible: false,
+            },
+            {
+              name: 'Oysters',
+              icon: 'oyster.png',
+              items: blips.oysters,
+              visible: false,
+            },
+            {
+              name: 'Photo Opportunities',
+              icon: 'photo_op.png',
+              items: blips.photoOps,
+              visible: false,
+            },
+            {
+              name: 'Horseshoes',
+              icon: 'horseshoe.png',
+              items: blips.horseshoes,
+              visible: false,
+            },
+          ],
+        },
+      ];
+    })
+  );
+
+  zones$ = zip(
+    this._http.get<AreaData[]>('/assets/sa/maps/locations/areas.json'),
+    this._http.get<AreaData[]>('/assets/sa/maps/locations/weather.json')
+  ).pipe(
+    map(([areas, weather]) => {
+      return [
+        {
+          name: 'Zones',
+          subcategory: [
+            {
+              name: '4-Star Areas',
+              items: areas,
+              visible: false,
+            },
+            {
+              name: 'Weather Regions',
+              items: weather,
+              visible: false,
+            },
+          ],
+        },
+      ];
+    })
+  );
 
   constructor(private _http: HttpClient) {}
 }

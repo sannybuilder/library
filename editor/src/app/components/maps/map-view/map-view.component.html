@@ -22,14 +22,14 @@
         (mapDrag)="openInfoWindow(debugMarker)"
       />
 
-      @for (m of gmBlips; track m.id) {
+      @for (m of gmMarkers; track m.id) {
       <map-marker
         #marker="mapMarker"
         [position]="m.position"
         [icon]="m.icon"
         (mapClick)="openInfoWindow(marker, m)"
       />
-      }; @for (p of gmPaths; track p.id) {
+      }; @for (p of gmPolylines; track p.id) {
       <map-polyline
         #path="mapPolyline"
         [path]="p.vertices"
@@ -41,7 +41,7 @@
         (polylineMouseover)="onPathMouseover(path, p)"
         (polylineMouseout)="onPathMouseout(path, p)"
       />
-      }; @for (a of gmAreas; track a.id) {
+      }; @for (a of gmPolygons; track a.id) {
       <map-polygon
         #area="mapPolygon"
         [paths]="a.vertices"
@@ -99,17 +99,17 @@
         </div>
         <div>
           <ng-container *ngIf="activeTab == 1">
-            @for(cat of blips; track cat.id) {
+            @for(cat of locations; track cat.id) {
 
             <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
               <li
                 *ngFor="let subcat of cat.subcategory"
-                class="marker-type d-flex align-items-center"
+                class="cat-item d-flex align-items-center"
                 [ngClass]="{ active: subcat.visible }"
               >
-                <img [src]="mapIconUri + subcat.icon" />
-                <span>{{ subcat.name }} ({{ subcat.positions.length }})</span>
-                <button class="btn ml-auto" (click)="toggleBlips(subcat)">
+                <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
+                <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
+                <button class="btn ml-auto" (click)="toggleLocations(subcat)">
                   {{ subcat.visible ? "Hide" : "Show" }}
                 </button>
               </li>
@@ -119,26 +119,43 @@
           </ng-container>
 
           <ng-container *ngIf="activeTab == 2">
-            <ul class="list-unstyled p-3">
-              <li class="d-flex align-items-center">
-                <span>4-Star Areas</span>
-                <button class="btn ml-auto" (click)="toggleWantedZones()">
-                  {{ areWantedZonesEnabled ? "Hide" : "Show" }}
+            @for(cat of zones; track cat.id) {
+
+            <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
+              <li
+                *ngFor="let subcat of cat.subcategory"
+                class="cat-item d-flex align-items-center"
+                [ngClass]="{ active: subcat.visible }"
+              >
+                <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
+                <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
+                <button class="btn ml-auto" (click)="toggleZones(subcat)">
+                  {{ subcat.visible ? "Hide" : "Show" }}
                 </button>
               </li>
             </ul>
+
+            }
           </ng-container>
 
           <ng-container *ngIf="activeTab == 3">
-            <ul class="list-unstyled p-3">
-              <li class="d-flex align-items-center">
-                <span>Pre-Recorded Paths (RRR)</span>
-                <button class="btn ml-auto" (click)="togglePreRecordedPaths()">
-                  {{ arePreRecordedPathsEnabled ? "Hide" : "Show" }}
+            @for(cat of paths; track cat.id) {
+
+            <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
+              <li
+                *ngFor="let subcat of cat.subcategory"
+                class="cat-item d-flex align-items-center"
+                [ngClass]="{ active: subcat.visible }"
+              >
+                <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
+                <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
+                <button class="btn ml-auto" (click)="togglePaths(subcat)">
+                  {{ subcat.visible ? "Hide" : "Show" }}
                 </button>
               </li>
             </ul>
 
+            }
             <div class="p-3">{{ tooltip }}</div>
           </ng-container>
         </div>

@@ -1,19 +1,27 @@
 import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
-import { MapInfoWindow, MapMarker, MapPolygon, MapPolyline } from '@angular/google-maps';
+import {
+  MapInfoWindow,
+  MapMarker,
+  MapPolygon,
+  MapPolyline,
+} from '@angular/google-maps';
 import {
   AreaData,
-  BlipCategory,
-  BlipSubcategory,
-  RRRData,
-  GMArea,
+  PathData,
+  Category,
+  Subcategory,
+  GMPolygon,
   GMMarker,
-  GMPath,
+  GMPolyline,
   mapIconUri,
   cdnUri,
+  XYZ,
 } from './model';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { MProjection } from './classes';
+
+const DEFAULT_STROKE_WEIGHT = 1;
 
 @Component({
   selector: 'scl-map-view',
@@ -23,21 +31,18 @@ import { MProjection } from './classes';
 })
 export class MapViewComponent {
   @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
-
-  @Input() rrr: RRRData[] = [];
-  @Input() blips: BlipCategory[] = [];
-  @Input() areas: AreaData;
-
   mapIconUri = mapIconUri;
+
+  @Input() paths: Category<PathData>[] = [];
+  @Input() locations: Category<XYZ>[] = [];
+  @Input() zones: Category<AreaData>[];
+
+  gmMarkers: GMMarker[] = [];
+  gmPolylines: GMPolyline[] = [];
+  gmPolygons: GMPolygon[] = [];
 
   isSidebarOpen = true;
   activeTab = 1;
-  gmBlips: GMMarker[] = [];
-  gmPaths: GMPath[] = [];
-  gmAreas: GMArea[] = [];
-
-  areWantedZonesEnabled = false;
-  arePreRecordedPathsEnabled = false;
   tooltip: string;
   map: google.maps.Map;
 
@@ -134,119 +139,111 @@ export class MapViewComponent {
     }
   }
 
-  toggleBlips(blipCategory: BlipSubcategory) {
-    blipCategory.visible = !blipCategory.visible;
-    this.gmBlips = this.gmBlips.filter(
-      (m) => !m.id.includes(blipCategory.name)
+  toggleLocations(category: Subcategory<XYZ>) {
+    category.visible = !category.visible;
+    this.gmMarkers = this.gmMarkers.filter(
+      (m) => !m.id.includes(category.name)
     );
-    if (!blipCategory.visible) {
+    if (!category.visible) {
       return;
     }
-    this.gmBlips.push(
-      ...blipCategory.positions.map(
-        ({ x, y, z }: { x: number; y: number; z: number }, i) => {
-          const id = blipCategory.name + ' #' + i;
-          return {
-            position: xyToLatLng(x, y),
-            icon: {
-              url: mapIconUri + blipCategory.icon,
-              size: new google.maps.Size(32, 37),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(15, 35),
-            },
-            id,
-            data: {
-              x,
-              y,
-              z,
-              name: id,
-            },
-          };
-        }
-      )
+    this.gmMarkers.push(
+      ...category.items.map(({ x, y, z }, i) => {
+        const id = category.name + ' #' + i;
+        return {
+          position: xyToLatLng(x, y),
+          icon: {
+            url: mapIconUri + category.icon,
+            size: new google.maps.Size(32, 37),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(15, 35),
+          },
+          id,
+          data: {
+            x,
+            y,
+            z,
+            name: id,
+          },
+        };
+      })
     );
   }
 
-  toggleWantedZones() {
-    this.areWantedZonesEnabled = !this.areWantedZonesEnabled;
-    this.gmAreas = [];
-
-    if (!this.areWantedZonesEnabled) {
+  toggleZones(category: Subcategory<AreaData>) {
+    category.visible = !category.visible;
+    this.gmPolygons = this.gmPolygons.filter(
+      (m) => !m.id.includes(category.name)
+    );
+    if (!category.visible) {
       return;
     }
 
-    this.gmAreas = [
-      {
-        id: 'LV Restricted Area',
-        vertices: this.areas.lvRestrictedArea.map(([x, y]) => xyToLatLng(x, y)),
-        fillColor: '#FF0000',
-        fillOpacity: 0.35,
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.5,
-        strokeWeight: 1,
-        data: {
-          toString() {
-            return 'LV Restricted Area';
+    this.gmPolygons.push(
+      ...category.items.map((area, i) => {
+        const id = category.name + ' #' + i;
+        return {
+          id,
+          vertices: area.vertices.map(([x, y]) => xyToLatLng(x, y)),
+          fillColor: area.color,
+          fillOpacity: 0.35,
+          strokeColor: area.color,
+          strokeOpacity: 0.5,
+          strokeWeight: DEFAULT_STROKE_WEIGHT,
+          data: {
+            toString() {
+              return area.name;
+            },
           },
-        },
-      },
-      {
-        id: 'SF Restricted Area',
-        vertices: this.areas.sfRestrictedArea.map(([x, y]) => xyToLatLng(x, y)),
-        fillColor: '#FFFF00',
-        fillOpacity: 0.35,
-        strokeColor: '#FFFF00',
-        strokeOpacity: 0.5,
-        strokeWeight: 1,
-        data: {
-          toString() {
-            return 'SF Restricted Area';
-          },
-        },
-      },
-    ];
+        };
+      })
+    );
   }
 
-  togglePreRecordedPaths() {
-    this.arePreRecordedPathsEnabled = !this.arePreRecordedPathsEnabled;
-
-    this.gmPaths = this.gmPaths.filter((p) => !p.id.includes('RRR'));
-    if (!this.arePreRecordedPathsEnabled) {
+  togglePaths(category: Subcategory<PathData>) {
+    category.visible = !category.visible;
+    this.gmPolylines = this.gmPolylines.filter(
+      (m) => !m.id.includes(category.name)
+    );
+    if (!category.visible) {
       return;
     }
 
-    this.gmPaths = this.rrr.map((rrr, i) => {
-      return {
-        id: 'RRR #' + i,
-        vertices: rrr.path.map(({ x, y }) => xyToLatLng(x, y)),
-        strokeColor: '#FF0080',
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-        data: {
-          toString() {
-            return [rrr.name, rrr.description].filter(Boolean).join(': ');
+    this.gmPolylines.push(
+      ...category.items.map((path, i) => {
+        const id = category.name + ' #' + i;
+        return {
+          id,
+          vertices: path.path.map(({ x, y }) => xyToLatLng(x, y)),
+          strokeColor: '#FF0080',
+          strokeOpacity: 1.0,
+          strokeWeight: DEFAULT_STROKE_WEIGHT + 1,
+          data: {
+            toString() {
+              return [path.name, path.description].filter(Boolean).join(': ');
+            },
           },
-        },
-      };
-    });
+        };
+      })
+    );
   }
 
-  onPathMouseover(_: MapPolyline, path: GMPath) {
+  onPathMouseover(_: MapPolyline, path: GMPolyline) {
     path.strokeColor = '#FFFF80';
     this.tooltip = `${path.data}`;
   }
 
-  onPathMouseout(_: MapPolyline, path: GMPath) {
+  onPathMouseout(_: MapPolyline, path: GMPolyline) {
     path.strokeColor = '#FF0080';
     this.tooltip = `${path.data}`;
   }
 
-  onAreaMouseover(_: MapPolygon, area: GMArea) {
-    area.strokeWeight = 3;
+  onAreaMouseover(_: MapPolygon, area: GMPolygon) {
+    area.strokeWeight = DEFAULT_STROKE_WEIGHT + 2;
   }
 
-  onAreaMouseout(_: MapPolygon, area: GMArea) {
-    area.strokeWeight = 1;
+  onAreaMouseout(_: MapPolygon, area: GMPolygon) {
+    area.strokeWeight = DEFAULT_STROKE_WEIGHT;
   }
 }
 
@@ -254,18 +251,6 @@ function xyToLatLng(x: number, y: number) {
   return new google.maps.LatLng(y / 128, x / 128);
 }
 
-// function mapCoordsToGame(lat: number, lng: number) {
-//   return { y: lat * 128, x: lng * 128 };
-// }
-
 function latLngToXY(latLng: google.maps.LatLng) {
   return { y: latLng.lat() * 128, x: latLng.lng() * 128 };
-}
-
-function stringCoordToFloat(coord: any) {
-  return {
-    x: parseFloat(coord.x),
-    y: parseFloat(coord.y),
-    z: parseFloat(coord.z),
-  };
 }

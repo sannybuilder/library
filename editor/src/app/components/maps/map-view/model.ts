@@ -4,7 +4,7 @@ export interface XYZ {
   z: number;
 }
 
-export interface GMPath {
+export interface GMPolyline {
   id: string;
   vertices: google.maps.LatLng[];
   strokeColor: string;
@@ -13,7 +13,7 @@ export interface GMPath {
   data: unknown;
 }
 
-export interface GMArea {
+export interface GMPolygon {
   id: string;
   vertices: google.maps.LatLng[];
   strokeColor: string;
@@ -31,29 +31,28 @@ export interface GMMarker {
   data: { x: number; y: number; z: number; name: string };
 }
 
-export interface BlipCategory {
-  id: number;
+export interface Category<T> {
   name: string;
-  subcategory: BlipSubcategory[];
+  subcategory: Subcategory<T>[];
 }
 
-export interface BlipSubcategory {
-  id: number;
+export interface Subcategory<T> {
   name: string;
-  icon: string;
+  icon?: string;
   visible: boolean;
-  positions: XYZ[];
+  items: T[];
 }
 
-export interface RRRData {
+export interface PathData {
   name: string;
   path: Array<{ x: number; y: number }>;
   description: string;
 }
 
 export interface AreaData {
-  lvRestrictedArea: Array<[number, number]>;
-  sfRestrictedArea: Array<[number, number]>;
+  name: string;
+  color: string;
+  vertices: Array<[number, number]>;
 }
 
 export interface BlipData {

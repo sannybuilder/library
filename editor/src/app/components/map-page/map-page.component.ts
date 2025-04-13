@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { map, Observable, zip } from 'rxjs';
 import { AreaData, Category, BlipData, PathData } from '../maps/map-view/model';
+import { ActivatedRoute } from '@angular/router';
 
 export interface XYZ {
   x: number;
@@ -98,5 +100,15 @@ export class MapPageComponent {
     })
   );
 
-  constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private _title: Title,
+    private _route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this._route.title.subscribe((title) => {
+      this._title.setTitle(`Sanny Builder Library :: ${title}`);
+    });
+  }
 }

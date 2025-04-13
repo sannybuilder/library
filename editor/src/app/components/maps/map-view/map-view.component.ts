@@ -17,8 +17,7 @@ import {
   cdnUri,
   XYZ,
 } from './model';
-import { Title } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
+
 import { MProjection } from './classes';
 
 const DEFAULT_STROKE_WEIGHT = 1;
@@ -60,16 +59,11 @@ export class MapViewComponent {
     },
   };
   constructor(
-    private _title: Title,
-    private _translate: TranslateService,
+
     private _cd: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
-    const contentKey = 'ui.map.title';
-    const title = this._translate.instant(contentKey);
-    this._title.setTitle(`Sanny Builder Library :: ${title}`);
-  }
+
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

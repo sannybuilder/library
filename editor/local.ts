@@ -1,4 +1,8 @@
-import { doesGameRequireOpcode, getBaseGame } from './src/app/utils';
+import {
+  doesGameHaveMap,
+  doesGameRequireOpcode,
+  getBaseGame,
+} from './src/app/utils';
 import {
   Game,
   GameClassesAssets,
@@ -37,6 +41,10 @@ games.forEach((game) => {
 
   if (doesGameRequireOpcode(game)) {
     generateOpcodeExamples(gameJson, join(assets, 'opcodes.txt'));
+  }
+
+  if (doesGameHaveMap(game)) {
+    run(`cp ../${game}/maps ${assets} -r`);
   }
 
   run(`cp *.json ../editor/src/assets/${game}`, join('..', game));

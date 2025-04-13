@@ -141,11 +141,14 @@ import {
 
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
-import { KNOWN_LANGUAGES } from './models';
+import { GameTitle, KNOWN_LANGUAGES } from './models';
 import { DecisionTreeComponent } from './components/decision-tree/decision-tree.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { catchError, timeout } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MapPageComponent } from './components/map-page/map-page.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapViewComponent } from './components/maps/map-view/map-view.component';
 
 class CustomTranslateLoader extends TranslateHttpLoader {
   getTranslation(lang: string) {
@@ -184,7 +187,7 @@ export function localStorageSyncReducer(
           'isSidebarCollapsed',
           'selectedSyntaxKind',
           'displayFunctionDeclaration',
-          'isHotkeyInfoDismissed'
+          'isHotkeyInfoDismissed',
         ],
       },
     ],
@@ -222,6 +225,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     HeaderComponent,
     CommandInfoComponent,
     HomePageComponent,
+    MapPageComponent,
     FooterComponent,
     SelectorComponent,
     DownloadPanelComponent,
@@ -247,12 +251,14 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     CommandSnippetComponent,
     HotkeysInfoComponent,
     GameLinksComponent,
+    MapViewComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ConfigModule,
     FormsModule,
+    GoogleMapsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -274,6 +280,13 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
               path: '',
               pathMatch: 'full',
               component: HomePageComponent,
+            },
+
+            {
+              path: 'sa/map',
+              pathMatch: 'full',
+              title: `${GameTitle['sa']} :: Map`,
+              component: MapPageComponent,
             },
             {
               path: '**',
@@ -334,9 +347,12 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     CookieService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideAppInitializer(() => {
-        const initializerFn = (loadTranslations)(inject(TranslateService), inject(CookieService));
-        return initializerFn();
-      }),
+      const initializerFn = loadTranslations(
+        inject(TranslateService),
+        inject(CookieService)
+      );
+      return initializerFn();
+    }),
     provideHttpClient(withInterceptorsFromDi()),
   ],
   bootstrap: [AppComponent],

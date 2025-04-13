@@ -1,0 +1,81 @@
+@import "variables";
+
+#wrapper {
+  height: calc(100vh - 92px);
+  min-height: 100%;
+  position: relative;
+}
+
+#map-holder {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#map-canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(15, 168, 210);
+  & > * {
+    background-color: transparent !important;
+  }
+}
+
+#map-overlay {
+  background-color: $body-bg;
+  width: 340px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -340px;
+  transition: right ease-in-out 0.4s;
+
+  &.open {
+    right: 0;
+  }
+}
+
+#map-overlay-slide {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transition: right ease-in-out 0.4s;
+  padding: 35px 15px;
+  cursor: pointer;
+  border-radius: 5px 0 0 5px;
+  background-color: $body-bg;
+
+  &.open {
+    right: 340px;
+  }
+
+  &::after {
+    content: "<";
+  }
+
+  &.open::after {
+    content: ">";
+  }
+}
+
+::ng-deep .info-box {
+  color: $dark;
+}
+::ng-deep .info-header-box {
+  border-bottom: 1px solid $dark;
+  margin-bottom: 4px;
+}
+
+.cat-item:not(.active) img {
+  filter: grayscale(1);
+}
+
+.nav-link.active {
+  color: $white;
+}

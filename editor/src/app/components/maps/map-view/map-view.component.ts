@@ -34,7 +34,7 @@ export class MapViewComponent {
 
   @Input() paths: Category<PathData>[] = [];
   @Input() locations: Category<XYZ>[] = [];
-  @Input() zones: Category<AreaData>[];
+  @Input() zones: Category<AreaData>[] = [];
   @Input() activeTab: string;
 
   gmMarkers: GMMarker[] = [];
@@ -58,11 +58,7 @@ export class MapViewComponent {
       mapTypeIds: [],
     },
   };
-  constructor(
-
-    private _cd: ChangeDetectorRef
-  ) {}
-
+  constructor(private _cd: ChangeDetectorRef) {}
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

@@ -1,8 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { map, Observable, zip } from 'rxjs';
-import { AreaData, Category, BlipData, PathData } from '../maps/map-view/model';
+import { map, shareReplay, switchMap, zip } from 'rxjs';
+import {
+  AreaData,
+  PathData,
+  MapManifest,
+  MapSource,
+} from '../maps/map-view/model';
 import { ActivatedRoute } from '@angular/router';
 
 export interface XYZ {
@@ -18,89 +23,56 @@ export interface XYZ {
   standalone: false,
 })
 export class MapPageComponent {
-  paths$: Observable<Category<PathData>[]> = zip(
-    this._http.get<PathData[]>('/assets/sa/maps/locations/rrr.json')
-  ).pipe(
-    map(([rrr]) => {
-      return [
-        {
-          name: 'Paths',
-          subcategory: [
-            {
-              name: 'Pre-Recorded Paths (RRR)',
-              items: rrr,
-              visible: false,
-            },
-          ],
-        },
-      ];
-    })
-  );
-
-  locations$: Observable<Category<XYZ>[]> = zip(
-    this._http.get<BlipData>('/assets/sa/maps/locations/blips.json')
-  ).pipe(
-    map(([blips]) => {
-      return [
-        {
-          name: 'Collectibles',
-          subcategory: [
-            {
-              name: 'Spray Tags',
-              icon: 'spray_tag.png',
-              items: blips.sprayTags,
-              visible: false,
-            },
-            {
-              name: 'Oysters',
-              icon: 'oyster.png',
-              items: blips.oysters,
-              visible: false,
-            },
-            {
-              name: 'Photo Opportunities',
-              icon: 'photo_op.png',
-              items: blips.photoOps,
-              visible: false,
-            },
-            {
-              name: 'Horseshoes',
-              icon: 'horseshoe.png',
-              items: blips.horseshoes,
-              visible: false,
-            },
-          ],
-        },
-      ];
-    })
-  );
-
-  zones$ = zip(
-    this._http.get<AreaData[]>('/assets/sa/maps/locations/areas.json'),
-    this._http.get<AreaData[]>('/assets/sa/maps/locations/weather.json')
-  ).pipe(
-    map(([areas, weather]) => {
-      return [
-        {
-          name: 'Zones',
-          subcategory: [
-            {
-              name: '4-Star Areas',
-              items: areas,
-              visible: false,
-            },
-            {
-              name: 'Weather Regions',
-              items: weather,
-              visible: false,
-            },
-          ],
-        },
-      ];
-    })
-  );
-
   activeTab$ = this._route.params.pipe(map((p) => p.tab));
+
+  manifest$ = this._http
+    .get<MapManifest>('/assets/sa/maps/locations/manifest.json')
+    .pipe(shareReplay());
+
+  paths$ = this.manifest$.pipe(
+    switchMap((manifest) => this.loadItems<PathData[]>(manifest.paths)),
+    map((subcategory) => [
+      {
+        name: 'Paths',
+        subcategory,
+      },
+    ])
+  );
+
+  zones$ = this.manifest$.pipe(
+    switchMap((manifest) => this.loadItems<AreaData[]>(manifest.zones)),
+    map((subcategory) => [
+      {
+        name: 'Zones',
+        subcategory,
+      },
+    ])
+  );
+
+  locations$ = this.manifest$.pipe(
+    switchMap((manifest) => this.loadItems<XYZ[]>(manifest.locations)),
+    map((subcategory) => [
+      {
+        name: 'Locations',
+        subcategory,
+      },
+    ])
+  );
+
+  loadItems<T>(items: MapSource[]) {
+    return zip(
+      ...items.map((p) => {
+        return this._http.get<T>(`/assets/sa/maps/locations/${p.path}`).pipe(
+          map((items) => ({
+            name: p.name,
+            items,
+            visible: false,
+            icon: p.icon,
+          }))
+        );
+      })
+    );
+  }
 
   constructor(
     private _http: HttpClient,

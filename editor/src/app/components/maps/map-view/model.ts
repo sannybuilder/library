@@ -62,5 +62,17 @@ export interface BlipData {
   horseshoes: XYZ[];
 }
 
+export interface MapManifest {
+  zones: MapSource[];
+  paths: MapSource[];
+  locations: MapSource[];
+}
+
+export interface MapSource {
+  name: string;
+  path: string;
+  icon?: string;
+}
+
 export const cdnUri = 'https://cdn.sannybuilder.com/maps/sa';
 export const mapIconUri = '/assets/sa/maps/icons/';

@@ -16,6 +16,7 @@ import {
   mapIconUri,
   cdnUri,
   XYZ,
+  MarkerData,
 } from './model';
 
 import { MProjection } from './classes';
@@ -33,7 +34,7 @@ export class MapViewComponent {
   mapIconUri = mapIconUri;
 
   @Input() paths: Category<PathData>[] = [];
-  @Input() locations: Category<XYZ>[] = [];
+  @Input() locations: Category<MarkerData>[] = [];
   @Input() zones: Category<AreaData>[] = [];
   @Input() activeTab: string;
 
@@ -108,15 +109,19 @@ export class MapViewComponent {
     );
   }
 
-  openInfoWindow(marker: MapMarker) {
+  openInfoWindow(marker: MapMarker, extra: any) {
     if (marker.marker) {
       let pos = latLngToXY(marker.marker.getPosition()!);
       const coords = [pos.x, pos.y].join(', ');
       //   <div class="info-header-box d-flex align-items-center">
       // <img src="${icon.url}" /><h5>${data.name}</h5></div>
 
-      const infoContent = `<div class="p-3 info-box">
-      <div><strong>Position:</strong> ${coords}</div></div>`;
+      let infoContent = `<div>Position: ${coords}</div>`;
+
+      if (extra) {
+        infoContent += `<div>${extra}</div>`;
+      }
+      infoContent = `<div class="p-3 info-box">${infoContent}</div>`;
 
       const infoWindow = this.infoWindow.infoWindow;
       if (infoWindow?.isOpen) {
@@ -128,7 +133,7 @@ export class MapViewComponent {
     }
   }
 
-  toggleLocations(category: Subcategory<XYZ>) {
+  toggleLocations(category: Subcategory<MarkerData>) {
     category.visible = !category.visible;
     this.gmMarkers = this.gmMarkers.filter(
       (m) => !m.id.includes(category.name)
@@ -137,7 +142,7 @@ export class MapViewComponent {
       return;
     }
     this.gmMarkers.push(
-      ...category.items.map(({ x, y, z }, i) => {
+      ...category.items.map(({ x, y, z, name }, i) => {
         const id = category.name + ' #' + i;
         return {
           position: xyToLatLng(x, y),
@@ -149,10 +154,9 @@ export class MapViewComponent {
           },
           id,
           data: {
-            x,
-            y,
-            z,
-            name: id,
+            toString() {
+              return name || id;
+            },
           },
         };
       })

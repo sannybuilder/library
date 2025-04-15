@@ -28,7 +28,7 @@ export interface GMMarker {
   id: string;
   position: google.maps.LatLng;
   icon: any;
-  data: { x: number; y: number; z: number; name: string };
+  data: unknown;
 }
 
 export interface Category<T> {
@@ -47,6 +47,13 @@ export interface PathData {
   name: string;
   path: Array<{ x: number; y: number }>;
   description: string;
+}
+
+export interface MarkerData {
+  x: number;
+  y: number;
+  z: number;
+  name?: string;
 }
 
 export interface AreaData {

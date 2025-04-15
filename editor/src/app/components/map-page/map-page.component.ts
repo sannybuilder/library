@@ -7,6 +7,7 @@ import {
   PathData,
   MapManifest,
   MapSource,
+  MarkerData,
 } from '../maps/map-view/model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -50,7 +51,7 @@ export class MapPageComponent {
   );
 
   locations$ = this.manifest$.pipe(
-    switchMap((manifest) => this.loadItems<XYZ[]>(manifest.locations)),
+    switchMap((manifest) => this.loadItems<MarkerData[]>(manifest.locations)),
     map((subcategory) => [
       {
         name: 'Locations',

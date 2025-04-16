@@ -109,7 +109,7 @@ export class MapViewComponent {
     );
   }
 
-  openInfoWindow(marker: MapMarker, extra: any) {
+  openInfoWindow(marker: MapMarker, extra?: any) {
     if (marker.marker) {
       let pos = latLngToXY(marker.marker.getPosition()!);
       const coords = [pos.x, pos.y].join(', ');

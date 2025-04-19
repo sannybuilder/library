@@ -2,7 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Command, Extension, Game } from '../models';
 import { template } from 'lodash';
 import { braceify, stringifyWithColonNoHighlight } from './params';
-import { functionName, generateFunctionDeclaration, getCommandName } from '../utils';
+import {
+  functionName,
+  generateFunctionDeclaration,
+  getCommandName,
+} from '../utils';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-pascal';
 
@@ -188,18 +192,20 @@ function declaratify(
   text: string,
   extensions: Extension[],
   game: Game,
-  command: Command,
+  command: Command
 ): string {
   const foundFunctions: Set<Command> = new Set([command]);
-  const names = text.match(/\b\w+\b/g) ?? [];
+  const names = (text.match(/\b\w+\b/g) ?? []).filter(
+    (n) => !matches(functionName(command), n)
+  );
 
   for (let name of names) {
     for (let extension of extensions) {
-      const command = extension.commands.find((c) =>
+      const extraCommand = extension.commands.find((c) =>
         matches(functionName(c), name)
       );
-      if (command) {
-        foundFunctions.add(command);
+      if (extraCommand) {
+        foundFunctions.add(extraCommand);
       }
     }
   }
@@ -279,5 +285,3 @@ function findCommand(
   }
   return null;
 }
-
-

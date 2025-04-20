@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
 import {
+  MapAdvancedMarker,
   MapInfoWindow,
-  MapMarker,
   MapPolygon,
   MapPolyline,
 } from '@angular/google-maps';
@@ -15,7 +15,6 @@ import {
   GMPolyline,
   mapIconUri,
   cdnUri,
-  XYZ,
   MarkerData,
 } from './model';
 
@@ -45,6 +44,7 @@ export class MapViewComponent {
   isSidebarOpen = true;
   tooltip: string;
   map: google.maps.Map;
+  debugMarkerContent = createMarkerIcon(23, 32, 'debug.png');
 
   mapOptions = {
     backgroundColor: '#00799E',
@@ -55,6 +55,7 @@ export class MapViewComponent {
     streetViewControl: false,
     gestureHandling: 'greedy',
     zoom: 1,
+    mapId: 'GTASA_MAP_ID',
     mapTypeControlOptions: {
       mapTypeIds: [],
     },
@@ -109,28 +110,27 @@ export class MapViewComponent {
     );
   }
 
-  openInfoWindow(marker: MapMarker, extra?: any) {
-    if (marker.marker) {
-      let pos = latLngToXY(marker.marker.getPosition()!);
-      const coords = [pos.x, pos.y].join(', ');
-      //   <div class="info-header-box d-flex align-items-center">
-      // <img src="${icon.url}" /><h5>${data.name}</h5></div>
+  openInfoWindow(marker: MapAdvancedMarker, extra?: any) {
+    if (!marker.advancedMarker) return;
 
-      let infoContent = `<div>Position: ${coords}</div>`;
+    let markerPosition = marker.getAnchor()
+      .position as google.maps.LatLngLiteral;
+    let pos = latLngToXY(markerPosition);
+    const coords = [pos.x, pos.y].join(', ');
 
-      if (extra) {
-        infoContent += `<div>${extra}</div>`;
-      }
-      infoContent = `<div class="p-3 info-box">${infoContent}</div>`;
+    let infoContent = `<div>Position: ${coords}</div>`;
 
-      const infoWindow = this.infoWindow.infoWindow;
-      if (infoWindow?.isOpen) {
-        infoWindow.setContent(infoContent);
-        infoWindow.setPosition(marker.getPosition());
-      } else {
-        this.infoWindow.open(marker, true, infoContent);
-      }
+    if (extra) {
+      infoContent += `<div>${extra}</div>`;
     }
+    infoContent = `<div class="p-3 info-box">${infoContent}</div>`;
+
+    // const infoPosition = new google.maps.LatLng({
+    //   lat: markerPosition.lat + 1.0,
+    //   lng: markerPosition.lng,
+    // })
+    this.infoWindow.infoWindow?.setPosition(markerPosition);
+    this.infoWindow.open(undefined, false, infoContent);
   }
 
   toggleLocations(category: Subcategory<MarkerData>) {
@@ -146,12 +146,7 @@ export class MapViewComponent {
         const id = category.name + ' #' + i;
         return {
           position: xyToLatLng(x, y),
-          icon: {
-            url: mapIconUri + category.icon,
-            size: new google.maps.Size(32, 37),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(15, 35),
-          },
+          content: createMarkerIcon(32, 37, category.icon!),
           id,
           data: {
             toString() {
@@ -244,6 +239,15 @@ function xyToLatLng(x: number, y: number) {
   return new google.maps.LatLng(y / 128, x / 128);
 }
 
-function latLngToXY(latLng: google.maps.LatLng) {
-  return { y: latLng.lat() * 128, x: latLng.lng() * 128 };
+function latLngToXY(latLng: google.maps.LatLngLiteral) {
+  return { y: latLng.lat * 128, x: latLng.lng * 128 };
+}
+
+function createMarkerIcon(width: number, height: number, icon: string) {
+  const img = document.createElement('img');
+  img.src = mapIconUri + icon;
+  img.width = width;
+  img.height = height;
+  img.style.transform = 'translateY(50%)';
+  return img;
 }

@@ -7,26 +7,20 @@
       [options]="mapOptions"
       (mapInitialized)="onMapReady($event)"
     >
-      <map-marker
-        #debugMarker="mapMarker"
+      <map-advanced-marker
+        #debugMarker="mapAdvancedMarker"
         [position]="{ lat: 0, lng: 0 }"
-        [icon]="{
-            url: mapIconUri + 'debug.png',
-            size: { width: 23, height: 32 },
-            anchor: { x: 11.5, y: 32 },
-          }"
-        [options]="{
-          draggable: true
-        }"
+        [content]="debugMarkerContent"
+        [gmpDraggable]="true"
         (mapClick)="openInfoWindow(debugMarker)"
         (mapDrag)="openInfoWindow(debugMarker)"
       />
 
       @for (m of gmMarkers; track m.id) {
-      <map-marker
-        #marker="mapMarker"
+      <map-advanced-marker
+        #marker="mapAdvancedMarker"
         [position]="m.position"
-        [icon]="m.icon"
+        [content]="m.content"
         (mapClick)="openInfoWindow(marker, m.data)"
       />
       }; @for (p of gmPolylines; track p.id) {

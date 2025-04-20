@@ -27,7 +27,7 @@ export interface GMPolygon {
 export interface GMMarker {
   id: string;
   position: google.maps.LatLng;
-  icon: any;
+  content: any;
   data: unknown;
 }
 

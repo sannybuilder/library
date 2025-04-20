@@ -125,10 +125,6 @@ export class MapViewComponent {
     }
     infoContent = `<div class="p-3 info-box">${infoContent}</div>`;
 
-    // const infoPosition = new google.maps.LatLng({
-    //   lat: markerPosition.lat + 1.0,
-    //   lng: markerPosition.lng,
-    // })
     this.infoWindow.infoWindow?.setPosition(markerPosition);
     this.infoWindow.open(undefined, false, infoContent);
   }

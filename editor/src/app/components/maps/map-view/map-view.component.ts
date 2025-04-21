@@ -21,6 +21,10 @@ import {
 import { MProjection } from './classes';
 
 const DEFAULT_STROKE_WEIGHT = 1;
+const MAP_TYPE = {
+  Satellite: 'Satellite',
+  Light: 'Light',
+} as const;
 
 @Component({
   selector: 'scl-map-view',
@@ -57,7 +61,7 @@ export class MapViewComponent {
     zoom: 1,
     mapId: 'GTASA_MAP_ID',
     mapTypeControlOptions: {
-      mapTypeIds: [],
+      mapTypeIds: Object.keys(MAP_TYPE),
     },
   };
   constructor(private _cd: ChangeDetectorRef) {}
@@ -69,32 +73,52 @@ export class MapViewComponent {
   onMapReady(_map: any) {
     this.map = _map;
     this.map.setOptions({ center: xyToLatLng(1500, 0) });
-    this.globalInit(this.map);
+    this.init(this.map);
     this._cd.markForCheck();
   }
 
-  globalInit(map: google.maps.Map) {
+  init(map: google.maps.Map) {
     const mapSatellite = new google.maps.ImageMapType({
       getTileUrl: function (coord: { x: number; y: number }, zoom: number) {
-        const normCoord = getNormalizedCoord(coord, zoom);
+        const tileRanges = [0, 1, 2, 5, 11, 23, 47, 95];
+        const tileRange = tileRanges[zoom];
+        const normCoord = getNormalizedCoord(coord, tileRange);
         if (!normCoord) return null;
         return `${cdnUri}/satellite/map_${zoom}_${normCoord.x}_${normCoord.y}.jpg`;
       },
       tileSize: new google.maps.Size(500, 500),
       maxZoom: 7,
-      name: 'Satellite',
+      name: MAP_TYPE.Satellite,
       alt: 'GTA SA Satellite Map',
     });
-    mapSatellite.projection = new MProjection();
+    mapSatellite.projection = new MProjection(187.5, 8);
 
-    map.mapTypes.set('Satellite', mapSatellite);
-    map.setMapTypeId('Satellite');
+    const mapLight = new google.maps.ImageMapType({
+      getTileUrl: function (coord: { x: number; y: number }, zoom: number) {
+        const tileRanges = [0, 1, 3, 7, 15, 31];
+        const tileRange = tileRanges[zoom];
+        const normCoord = getNormalizedCoord(coord, tileRange);
+        if (!normCoord) return null;
+        return `http://localhost:4201/map_${zoom}_${normCoord.x}_${normCoord.y}.webp`; // todo: update
+      },
+      tileSize: new google.maps.Size(256, 256),
+      maxZoom: 5,
+      minZoom: 1,
+      name: MAP_TYPE.Light,
+      alt: 'GTA SA Light Map',
+    });
+    mapLight.projection = new MProjection(128, 5.46);
+
+    map.mapTypes.set(MAP_TYPE.Satellite, mapSatellite);
+    map.mapTypes.set(MAP_TYPE.Light, mapLight);
+    map.setMapTypeId(MAP_TYPE.Satellite);
 
     // Normalizes the coords that tiles repeat across the x axis (horizontally)
     // like the standard Google map tiles.
-    function getNormalizedCoord(coord: { x: number; y: number }, zoom: number) {
-      const tileRanges = [0, 1, 2, 5, 11, 23, 47, 95];
-      const tileRange = tileRanges[zoom];
+    function getNormalizedCoord(
+      coord: { x: number; y: number },
+      tileRange: number
+    ) {
       if (coord.y < 0 || coord.y > tileRange) return null;
       if (coord.x < 0 || coord.x > tileRange) return null;
       return { x: coord.x, y: coord.y };

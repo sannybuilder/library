@@ -1,11 +1,17 @@
 export class MProjection {
+  constructor(private center: number, private scale: number) {}
+
   fromLatLngToPoint(latlng: any) {
-    const x = 187.5 + 8 * latlng.lng();
-    const y = 187.5 + -8 * latlng.lat();
+    const x = this.center + this.scale * latlng.lng();
+    const y = this.center + -this.scale * latlng.lat();
     return new google.maps.Point(x, y);
   }
 
   fromPointToLatLng(pos: any, b: any) {
-    return new google.maps.LatLng((pos.y - 187.5) / -8, (pos.x - 187.5) / 8, b);
+    return new google.maps.LatLng(
+      (pos.y - this.center) / -this.scale,
+      (pos.x - this.center) / this.scale,
+      b
+    );
   }
 }

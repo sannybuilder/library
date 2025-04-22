@@ -24,6 +24,7 @@ const DEFAULT_STROKE_WEIGHT = 1;
 const MAP_TYPE = {
   Satellite: 'Satellite',
   Light: 'Light',
+  Radar: 'Radar'
 } as const;
 
 @Component({
@@ -109,8 +110,25 @@ export class MapViewComponent {
     });
     mapLight.projection = new MProjection(128, 5.46);
 
+    const mapRadar = new google.maps.ImageMapType({
+      getTileUrl: function (coord: { x: number; y: number }, zoom: number) {
+        const tileRanges = [0, 1, 3, 7, 15, 31];
+        const tileRange = tileRanges[zoom];
+        const normCoord = getNormalizedCoord(coord, tileRange);
+        if (!normCoord) return null;
+        return `http://localhost:4202/map_${zoom}_${normCoord.x}_${normCoord.y}.webp`; // todo: update
+      },
+      tileSize: new google.maps.Size(256, 256),
+      maxZoom: 5,
+      minZoom: 1,
+      name: MAP_TYPE.Radar,
+      alt: 'GTA SA Radar Map',
+    });
+    mapRadar.projection = new MProjection(128, 5.46);
+
     map.mapTypes.set(MAP_TYPE.Satellite, mapSatellite);
     map.mapTypes.set(MAP_TYPE.Light, mapLight);
+    map.mapTypes.set(MAP_TYPE.Radar, mapRadar);
     map.setMapTypeId(MAP_TYPE.Satellite);
 
     // Normalizes the coords that tiles repeat across the x axis (horizontally)

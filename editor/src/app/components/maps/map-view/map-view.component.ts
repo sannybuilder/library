@@ -24,7 +24,7 @@ const DEFAULT_STROKE_WEIGHT = 1;
 const MAP_TYPE = {
   Satellite: 'Satellite',
   Light: 'Light',
-  Radar: 'Radar'
+  Radar: 'Radar',
 } as const;
 
 @Component({
@@ -52,7 +52,6 @@ export class MapViewComponent {
   debugMarkerContent = createMarkerIcon(23, 32, 'debug.png');
 
   mapOptions = {
-    backgroundColor: '#00799E',
     minZoom: 0,
     maxZoom: 7,
     isPng: false,
@@ -140,6 +139,25 @@ export class MapViewComponent {
       if (coord.y < 0 || coord.y > tileRange) return null;
       if (coord.x < 0 || coord.x > tileRange) return null;
       return { x: coord.x, y: coord.y };
+    }
+  }
+
+  onMapTypeChanged() {
+    const id = this.map.getMapTypeId();
+    const container = this.map.getDiv().children[0] as HTMLDivElement;
+    switch (id) {
+      case MAP_TYPE.Light: {
+        container.style.backgroundColor = '#0d2f4c';
+        break;
+      }
+      case MAP_TYPE.Radar: {
+        container.style.backgroundColor = '#7489af';
+        break;
+      }
+      case MAP_TYPE.Satellite: {
+        container.style.backgroundColor = '#00799E';
+        break;
+      }
     }
   }
 

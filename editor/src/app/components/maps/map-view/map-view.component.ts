@@ -214,6 +214,39 @@ export class MapViewComponent {
     );
   }
 
+  highlightItem<T>(category: Subcategory<T>, item: T, state: boolean) {
+    const index = category.items.findIndex((i) => i === item);
+
+    if (category.name === 'Locations') {
+      if (state) {
+        this.infoWindow.close();
+        this.openInfoWindowAt(
+          this.gmMarkers[index].position,
+          `${this.gmMarkers[index].data}`
+        );
+      }
+      if (!state) {
+        this.infoWindow.close();
+      }
+    }
+    if (category.name === 'Paths') {
+      if (state) {
+        this.onPathMouseover(null as any, this.gmPolygons[index]);
+      }
+      if (!state) {
+        this.onPathMouseout(null as any, this.gmPolygons[index]);
+      }
+    }
+    if (category.name === 'Zones') {
+      if (state) {
+        this.onAreaMouseover(null as any, this.gmPolygons[index]);
+      }
+      if (!state) {
+        this.onAreaMouseout(null as any, this.gmPolygons[index]);
+      }
+    }
+  }
+
   toggleZones(category: Subcategory<AreaData>) {
     category.visible = !category.visible;
     this.gmPolygons = this.gmPolygons.filter(

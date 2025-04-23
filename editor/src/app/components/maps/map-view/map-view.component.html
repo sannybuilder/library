@@ -89,21 +89,34 @@
             </li>
           </ul>
         </div>
-        <div>
+        <div class="scroll">
           <ng-container *ngIf="activeTab == 'locations'">
             @for(cat of locations; track cat.id) {
 
             <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
               <li
                 *ngFor="let subcat of cat.subcategory"
-                class="cat-item d-flex align-items-center"
                 [ngClass]="{ active: subcat.visible }"
               >
-                <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
-                <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
-                <button class="btn ml-auto" (click)="toggleLocations(subcat)">
-                  {{ subcat.visible ? "Hide" : "Show" }}
-                </button>
+                <div class="cat-item d-flex align-items-center">
+                  <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
+                  <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
+                  <button class="btn ml-auto" (click)="toggleLocations(subcat)">
+                    {{ subcat.visible ? "Hide" : "Show" }}
+                  </button>
+                </div>
+                <div *ngIf="subcat.visible">
+                  <ul class="list-unstyled p-1">
+                    <li
+                      class="highlightable p-1"
+                      *ngFor="let item of subcat.items"
+                      (mouseover)="highlightItem(subcat, item, true)"
+                      (mouseout)="highlightItem(subcat, item, false)"
+                    >
+                      x: {{ item.x }}, y: {{ item.y }}, z: {{ item.z }}
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
 
@@ -116,14 +129,28 @@
             <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
               <li
                 *ngFor="let subcat of cat.subcategory"
-                class="cat-item d-flex align-items-center"
                 [ngClass]="{ active: subcat.visible }"
               >
-                <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
-                <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
-                <button class="btn ml-auto" (click)="toggleZones(subcat)">
-                  {{ subcat.visible ? "Hide" : "Show" }}
-                </button>
+                <div class="cat-item d-flex align-items-center">
+                  <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
+                  <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
+                  <button class="btn ml-auto" (click)="toggleZones(subcat)">
+                    {{ subcat.visible ? "Hide" : "Show" }}
+                  </button>
+                </div>
+
+                <div *ngIf="subcat.visible">
+                  <ul class="list-unstyled p-1">
+                    <li
+                      class="highlightable p-1"
+                      *ngFor="let item of subcat.items"
+                      (mouseover)="highlightItem(subcat, item, true)"
+                      (mouseout)="highlightItem(subcat, item, false)"
+                    >
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
 
@@ -136,14 +163,28 @@
             <ul class="list-unstyled p-3" *ngIf="cat.subcategory.length > 0">
               <li
                 *ngFor="let subcat of cat.subcategory"
-                class="cat-item d-flex align-items-center"
                 [ngClass]="{ active: subcat.visible }"
               >
-                <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
-                <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
-                <button class="btn ml-auto" (click)="togglePaths(subcat)">
-                  {{ subcat.visible ? "Hide" : "Show" }}
-                </button>
+                <div class="cat-item d-flex align-items-center">
+                  <img [src]="mapIconUri + subcat.icon" *ngIf="subcat.icon" />
+                  <span>{{ subcat.name }} ({{ subcat.items.length }})</span>
+                  <button class="btn ml-auto" (click)="togglePaths(subcat)">
+                    {{ subcat.visible ? "Hide" : "Show" }}
+                  </button>
+                </div>
+
+                <div *ngIf="subcat.visible">
+                  <ul class="list-unstyled p-1">
+                    <li
+                      class="highlightable p-1"
+                      *ngFor="let item of subcat.items"
+                      (mouseover)="highlightItem(subcat, item, true)"
+                      (mouseout)="highlightItem(subcat, item, false)"
+                    >
+                      {{ item.name }} {{ item.description }}
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
 

@@ -44,7 +44,7 @@ games.forEach((game) => {
   }
 
   if (doesGameHaveMap(game)) {
-    run(`cp ../${game}/maps ${assets} -r`);
+    run(`cp -r ../${game}/maps ${assets}`);
   }
 
   run(`cp *.json ../editor/src/assets/${game}`, join('..', game));

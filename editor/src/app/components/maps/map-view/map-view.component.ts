@@ -214,8 +214,13 @@ export class MapViewComponent {
     );
   }
 
-  highlightItem<T>(category: Subcategory<T>, item: T, state: boolean) {
-    const index = category.items.findIndex((i) => i === item);
+  highlightItem<T>(
+    category: Category<T>,
+    subcat: Subcategory<T>,
+    item: T,
+    state: boolean
+  ) {
+    const index = subcat.items.findIndex((i) => i === item);
 
     if (category.name === 'Locations') {
       if (state) {
@@ -231,10 +236,10 @@ export class MapViewComponent {
     }
     if (category.name === 'Paths') {
       if (state) {
-        this.onPathMouseover(null as any, this.gmPolygons[index]);
+        this.onPathMouseover(null as any, this.gmPolylines[index]);
       }
       if (!state) {
-        this.onPathMouseout(null as any, this.gmPolygons[index]);
+        this.onPathMouseout(null as any, this.gmPolylines[index]);
       }
     }
     if (category.name === 'Zones') {

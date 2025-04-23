@@ -68,7 +68,7 @@
                 class="nav-link border-left-0"
                 routerLink="../locations"
                 routerLinkActive="active"
-                >Locations</a
+                >{{ "ui.map.locations" | translate }}</a
               >
             </li>
             <li class="nav-item">
@@ -76,7 +76,7 @@
                 class="nav-link"
                 routerLink="../zones"
                 routerLinkActive="active"
-                >Zones</a
+                >{{ "ui.map.zones" | translate }}</a
               >
             </li>
             <li class="nav-item">
@@ -84,7 +84,7 @@
                 class="nav-link"
                 routerLink="../paths"
                 routerLinkActive="active"
-                >Paths</a
+                >{{ "ui.map.paths" | translate }}</a
               >
             </li>
           </ul>
@@ -110,8 +110,8 @@
                     <li
                       class="highlightable p-1"
                       *ngFor="let item of subcat.items"
-                      (mouseover)="highlightItem(subcat, item, true)"
-                      (mouseout)="highlightItem(subcat, item, false)"
+                      (mouseover)="highlightItem(cat, subcat, item, true)"
+                      (mouseout)="highlightItem(cat, subcat, item, false)"
                     >
                       x: {{ item.x }}, y: {{ item.y }}, z: {{ item.z }}
                     </li>
@@ -144,8 +144,8 @@
                     <li
                       class="highlightable p-1"
                       *ngFor="let item of subcat.items"
-                      (mouseover)="highlightItem(subcat, item, true)"
-                      (mouseout)="highlightItem(subcat, item, false)"
+                      (mouseover)="highlightItem(cat, subcat, item, true)"
+                      (mouseout)="highlightItem(cat, subcat, item, false)"
                     >
                       {{ item.name }}
                     </li>
@@ -178,8 +178,8 @@
                     <li
                       class="highlightable p-1"
                       *ngFor="let item of subcat.items"
-                      (mouseover)="highlightItem(subcat, item, true)"
-                      (mouseout)="highlightItem(subcat, item, false)"
+                      (mouseover)="highlightItem(cat, subcat, item, true)"
+                      (mouseout)="highlightItem(cat, subcat, item, false)"
                     >
                       {{ item.name }} {{ item.description }}
                     </li>

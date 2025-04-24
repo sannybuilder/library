@@ -53,7 +53,7 @@ export class MapViewComponent {
 
   mapOptions = {
     minZoom: 0,
-    maxZoom: 7,
+    maxZoom: 8,
     isPng: false,
     mapTypeControl: true,
     streetViewControl: false,
@@ -95,14 +95,14 @@ export class MapViewComponent {
 
     const mapLight = new google.maps.ImageMapType({
       getTileUrl: function (coord: { x: number; y: number }, zoom: number) {
-        const tileRanges = [0, 1, 3, 7, 15, 31];
+        const tileRanges = new Array(9).fill(0).map((_, i) => (1 << i) - 1);
         const tileRange = tileRanges[zoom];
         const normCoord = getNormalizedCoord(coord, tileRange);
         if (!normCoord) return null;
-        return `http://localhost:4201/map_${zoom}_${normCoord.x}_${normCoord.y}.webp`; // todo: update
+        return `${cdnUri}/bright/map_${zoom}_${normCoord.x}_${normCoord.y}.webp`;
       },
       tileSize: new google.maps.Size(256, 256),
-      maxZoom: 5,
+      maxZoom: 8,
       minZoom: 1,
       name: MAP_TYPE.Light,
       alt: 'GTA SA Light Map',
@@ -147,7 +147,7 @@ export class MapViewComponent {
     const container = this.map.getDiv().children[0] as HTMLDivElement;
     switch (id) {
       case MAP_TYPE.Light: {
-        container.style.backgroundColor = '#0d2f4c';
+        container.style.backgroundColor = '#1f323a';
         break;
       }
       case MAP_TYPE.Radar: {

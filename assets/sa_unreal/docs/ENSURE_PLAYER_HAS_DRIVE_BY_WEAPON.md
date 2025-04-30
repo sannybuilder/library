@@ -1,0 +1,1 @@
+This command ensures the player has a drive-by weapon and a minimum amount of ammo. If the player has any drive-by weapon (TEC, UZI, etc) the game updates the ammo to be no less that the specified minimum. If the player does not have any drive-by weapon yet, the game will give you an Uzi. Note that the weapon model has to be preloaded, otherwise it won't be seen in the game.

@@ -983,6 +983,7 @@ export const CoronaType = {
   "Moon": 2,
   "Reflect": 3,
   "Headlight": 4,
+  "None": 5,
   "Ring": 9
 };
 export const PlayerMood = {

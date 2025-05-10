@@ -1,0 +1,12 @@
+while true
+    wait {time} 0
+    
+    float x, y, z
+    x, y, z = get_offset_from_char_in_world_coords $scplayer {offset} 0.0 2.0 2.0
+    
+    int coronaType = TimerA / 3000
+    coronaType %= 10
+    print_formatted_now {format} "Corona type: %d" {time} 100 {args} coronaType
+
+    draw_weaponshop_corona {pos} x y z {size} 0.5 {coronaType} coronaType {flareType} FlareType.Sun {rgb} 255 128 64
+end

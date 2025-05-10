@@ -978,15 +978,12 @@ export const RadioChannel = {
   "None": 12
 };
 export const CoronaType = {
-  "Star": 0,
-  "Normal": 1,
+  "Normal": 0,
+  "Star": 1,
   "Moon": 2,
   "Reflect": 3,
   "Headlight": 4,
-  "Hex": 5,
-  "Circle": 6,
-  "Ring": 7,
-  "Streak": 8
+  "Ring": 9
 };
 export const PlayerMood = {
   "Calm": 0,

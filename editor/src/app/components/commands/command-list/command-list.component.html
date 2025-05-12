@@ -140,7 +140,7 @@
       </div>
     </div>
 
-    <ng-container *ngIf="rowsCount$ | async as rowsCount; else noResults">
+    <ng-container *ngIf="rowsCount$ | async as rowsCount; else empty">
       <scl-pagination
         *ngIf="rowsCount > 100"
         [total]="rowsCount"
@@ -148,6 +148,13 @@
         (pageChange)="goToPage($event)"
       ></scl-pagination>
     </ng-container>
+
+    <ng-template #empty>
+      <ng-container
+        *ngIf="loading$ | async; then loading; else noResults"
+      ></ng-container>
+    </ng-template>
+
     <ng-template #noResults>
       <ng-container *ngIf="(rowsCount$ | async) === 0">
         <p>
@@ -167,12 +174,10 @@
 </ng-container>
 
 <ng-template #loading>
-  <div
-    class="spinner-border spinner-color"
-    role="status"
-    *ngIf="loading$ | async"
-  ></div>
-
+  <div class="d-flex" *ngIf="loading$ | async">
+    <div class="spinner-border spinner-color" role="status"></div>
+    <span class="ml-3">{{ "ui.commandList.loading" | translate }}</span>
+  </div>
   <div *ngIf="loadingError$ | async" class="error">
     {{ "ui.commandList.errorLoading" | translate }}
   </div>

@@ -1,5 +1,5 @@
 import { Command, Extension, Game } from './src/app/models/index';
-import { generateNativeFunctionDeclaration } from './src/app/pipes';
+import { generateFunctionDeclaration } from 'src/app/utils';
 
 const { readFileSync, writeFileSync } = require('fs');
 
@@ -43,6 +43,6 @@ export function run(inFile: string, game: Game, outFile: string) {
   }
 
   function makeLine(command: Command) {
-    return generateNativeFunctionDeclaration(command, game);
+    return generateFunctionDeclaration(command, game);
   }
 }

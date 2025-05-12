@@ -17,12 +17,16 @@ import { primitiveTypes, inputParams, outputParams } from './command';
 export function generateFunctionDeclaration(
   command: Command,
   game: Game
-): string {
+) {
   if (!command.member) {
     return '';
   }
+  let declaration = '';
 
-  let declaration = 'function ';
+  if (command.short_desc) {
+    declaration += `/// ${command.short_desc}\n`;
+  }
+  declaration += 'function ';
   declaration += functionName(command);
 
   if (command.cc && command.name) {
@@ -91,5 +95,5 @@ function paramCStyle(p: Param, isSimpleType: boolean): Param {
 }
 
 export function functionName(command: Command): string {
-  return [command.class, command.member].filter(Boolean).join('_')
+  return [command.class, command.member].filter(Boolean).join('_');
 }

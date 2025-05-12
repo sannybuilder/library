@@ -2,10 +2,8 @@ import {
   Game,
   GameClassesAssets,
   GameEnumsAssets,
-  GameNativeAssets,
   GameSnippets,
 } from './src/app/models';
-import { run as validateNative } from './validate-native';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -20,7 +18,6 @@ const games: Game[] = JSON.parse(gamesRaw);
 games.forEach((game) => {
   const assets = assetsDir(game);
   const gameJson = join('../', game, `${game}.json`);
-  const nativeJson = join('../', game, `native.json`);
   const enumsJson = join('../', game, `enums.json`);
 
   run(`[ -d ${assets} ] || mkdir -p ${assets}`);
@@ -35,10 +32,6 @@ games.forEach((game) => {
   if (GameSnippets[game].includes(game)) {
     const srcDir = join('..', game, 'snippets');
     cargo(`snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
-  }
-  if (GameNativeAssets[game]) {
-    validateNative(nativeJson, game);
-    cargo(`native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
   }
 });
 

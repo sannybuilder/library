@@ -15,6 +15,7 @@ import { run as generateEnumsInfo } from './generate-enums-info';
 import { run as generateEnums } from './generate-enums';
 import { run as generateOpcodeExamples } from './generate-opcode-examples';
 import { run as generateSupportInfo } from './generate-support-info';
+import { run as generateNativeFunctionDeclaration } from './generate-native-functions';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -94,7 +95,7 @@ games.forEach((game) => {
     cargo(`snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
   }
   if (GameNativeAssets[game]) {
-    cargo(`native ${nativeJson} 1.0 > ${join(dest, 'native.txt')}`);
+    generateNativeFunctionDeclaration(nativeJson, game, join(dest, 'native.txt'));
   }
 });
 

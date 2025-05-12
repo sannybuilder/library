@@ -211,11 +211,7 @@ function declaratify(
   }
 
   const decls = [...foundFunctions]
-    .map(
-      (command) =>
-        (command.short_desc ? `/// ${command.short_desc}\n` : '') +
-        generateFunctionDeclaration(command, game)
-    )
+    .map((c) => generateNativeFunctionDeclaration(c, game))
     .concat(['', '']);
   return decls.join('\n') + text;
 }
@@ -284,4 +280,14 @@ function findCommand(
     }
   }
   return null;
+}
+
+export function generateNativeFunctionDeclaration(
+  command: Command,
+  game: Game
+) {
+  return (
+    (command.short_desc ? `/// ${command.short_desc}\n` : '') +
+    generateFunctionDeclaration(command, game)
+  );
 }

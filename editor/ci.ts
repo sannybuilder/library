@@ -1,5 +1,5 @@
 import { doesGameHaveMap, doesGameRequireOpcode, getBaseGame } from './src/app/utils';
-import { Game } from './src/app/models';
+import { Game, GameNativeAssets } from './src/app/models';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -13,6 +13,7 @@ import { run as validateCommands } from './validate-commands';
 import { run as validateEnums } from './validate-enums';
 import { run as validateSnippets } from './validate-snippets';
 import { run as validateNative } from './validate-native';
+import { run as generateNativeFunctionDeclaration  } from './generate-native-functions';
 
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
@@ -46,6 +47,11 @@ games.forEach((game) => {
 
   if (doesGameHaveMap(game)) {
     run(`cp ../${game}/maps ${assets} -r`);
+  }
+
+  if (GameNativeAssets[game]) {
+    validateNative(nativeJson, game);
+    generateNativeFunctionDeclaration(nativeJson, game, join(assets, 'native.txt'));
   }
 
   try {

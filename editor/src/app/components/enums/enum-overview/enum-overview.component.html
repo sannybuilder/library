@@ -18,13 +18,15 @@ enum <span class="identifier">{{ enumToView.name }}</span>
 <ng-template #fieldTemplate let-field="field" let-i="i">
   <div>
     &nbsp; <span class="identifier">{{ field[0] }}</span
-    ><span [ngClass]="{ secondary: field[1] === null }">{{
-      field[1] !== null
-        ? " = " +
-          (isStringEnum ? '"' : "") +
-          field[1] +
-          (isStringEnum ? '"' : "")
-        : " = " + autoValue(i)
-    }}</span>
+    ><span [ngClass]="{ secondary: field[1] === null }">
+      =
+      {{
+        field[1] !== null
+          ? isStringEnum
+            ? '"' + field[1] + '"'
+            : field[1]
+          : autoValue(i)
+      }}</span
+    >
   </div>
 </ng-template>

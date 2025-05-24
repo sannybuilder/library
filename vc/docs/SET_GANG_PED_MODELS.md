@@ -1,0 +1,1 @@
+This command sets the ped models of the gang. Without this command, the game uses the default ped models. Special characters are allowed as the gang's ped models. The settings are saved in block 13 of the save file in Vice City.

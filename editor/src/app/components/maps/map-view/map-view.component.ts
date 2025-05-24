@@ -49,9 +49,8 @@ export class MapViewComponent {
   gmPolygons: GMPolygon[] = [];
 
   isSidebarOpen = true;
-  tooltip: string;
+  tooltip: string = 'Hold Ctrl to display coordinates';
   map: google.maps.Map;
-  debugMarkerContent = createMarkerIcon(23, 32, 'debug.png');
 
   mapOptions = {
     minZoom: 0,
@@ -74,7 +73,7 @@ export class MapViewComponent {
 
   onMapReady(_map: any) {
     this.map = _map;
-    this.map.setOptions({ center: xyToLatLng(0, 0) });
+    this.map.setOptions({ center: xyToLatLng(1500, 0) });
     this.init(this.map);
     this._cd.markForCheck();
   }
@@ -86,29 +85,49 @@ export class MapViewComponent {
       maxZoom: 6,
       getTileUrl: function (coord: { x: number; y: number }, zoom: number) {
         const levels = 7;
-        const tileRanges = new Array(levels).fill(0).map((_, i) => (1 << i) - 1);
-        const normCoord = getNormalizedCoord(coord, tileRanges[Math.min(zoom, levels - 1)]);
+        const tileRanges = new Array(levels)
+          .fill(0)
+          .map((_, i) => (1 << i) - 1);
+        const normCoord = getNormalizedCoord(
+          coord,
+          tileRanges[Math.min(zoom, levels - 1)]
+        );
         if (!normCoord) return null;
-        return `${cdnUri}/satellite/map_${Math.min(zoom, levels - 1)}_${normCoord.x}_${normCoord.y}.webp`;
+        return `${cdnUri}/satellite/map_${Math.min(zoom, levels - 1)}_${
+          normCoord.x
+        }_${normCoord.y}.webp`;
       },
       tileSize: new google.maps.Size(TILE_SIZE, TILE_SIZE),
     });
-    mapSatellite.projection = new MProjection(TILE_SIZE * 0.5, (TILE_SIZE / 6000.0) * SCALE_MUL);
-    
+    mapSatellite.projection = new MProjection(
+      TILE_SIZE * 0.5,
+      (TILE_SIZE / 6000.0) * SCALE_MUL
+    );
+
     const mapLight = new google.maps.ImageMapType({
       alt: 'GTA SA Light Map',
       name: MAP_TYPE.Light,
       maxZoom: 6,
       getTileUrl: function (coord: { x: number; y: number }, zoom: number) {
         const levels = 7;
-        const tileRanges = new Array(levels).fill(0).map((_, i) => (1 << i) - 1);
-        const normCoord = getNormalizedCoord(coord, tileRanges[Math.min(zoom, levels - 1)]);
+        const tileRanges = new Array(levels)
+          .fill(0)
+          .map((_, i) => (1 << i) - 1);
+        const normCoord = getNormalizedCoord(
+          coord,
+          tileRanges[Math.min(zoom, levels - 1)]
+        );
         if (!normCoord) return null;
-        return `${cdnUri}/light/map_${Math.min(zoom, levels - 1)}_${normCoord.x}_${normCoord.y}.webp`;
+        return `${cdnUri}/light/map_${Math.min(zoom, levels - 1)}_${
+          normCoord.x
+        }_${normCoord.y}.webp`;
       },
       tileSize: new google.maps.Size(TILE_SIZE, TILE_SIZE),
     });
-    mapLight.projection = new MProjection(TILE_SIZE * 0.5, (TILE_SIZE / 6000.0) * SCALE_MUL);
+    mapLight.projection = new MProjection(
+      TILE_SIZE * 0.5,
+      (TILE_SIZE / 6000.0) * SCALE_MUL
+    );
 
     const mapRadar = new google.maps.ImageMapType({
       alt: 'GTA SA Radar Map',
@@ -116,14 +135,24 @@ export class MapViewComponent {
       maxZoom: 6,
       getTileUrl: function (coord: { x: number; y: number }, zoom: number) {
         const levels = 7;
-        const tileRanges = new Array(levels).fill(0).map((_, i) => (1 << i) - 1);
-        const normCoord = getNormalizedCoord(coord, tileRanges[Math.min(zoom, levels - 1)]);
+        const tileRanges = new Array(levels)
+          .fill(0)
+          .map((_, i) => (1 << i) - 1);
+        const normCoord = getNormalizedCoord(
+          coord,
+          tileRanges[Math.min(zoom, levels - 1)]
+        );
         if (!normCoord) return null;
-        return `${cdnUri}/radar/map_${Math.min(zoom, levels - 1)}_${normCoord.x}_${normCoord.y}.webp`;
+        return `${cdnUri}/radar/map_${Math.min(zoom, levels - 1)}_${
+          normCoord.x
+        }_${normCoord.y}.webp`;
       },
       tileSize: new google.maps.Size(TILE_SIZE, TILE_SIZE),
     });
-    mapRadar.projection = new MProjection(TILE_SIZE * 0.5, (TILE_SIZE / 6000.0) * SCALE_MUL);
+    mapRadar.projection = new MProjection(
+      TILE_SIZE * 0.5,
+      (TILE_SIZE / 6000.0) * SCALE_MUL
+    );
 
     map.mapTypes.set(MAP_TYPE.Satellite, mapSatellite);
     map.mapTypes.set(MAP_TYPE.Light, mapLight);
@@ -140,6 +169,25 @@ export class MapViewComponent {
       if (coord.x < 0 || coord.x > tileRange) return null;
       return { x: coord.x, y: coord.y };
     }
+  }
+
+  onMapMousemove(event: any) {
+    const ctrlKey = event.domEvent.ctrlKey;
+    if (!ctrlKey) {
+      this.tooltip = 'Hold Ctrl to display coordinates';
+      this.map.setOptions({
+        draggableCursor: 'grab',
+      });
+      return;
+    }
+
+    this.map.setOptions({
+      draggableCursor: 'crosshair',
+    });
+
+    const latLng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+    const pos = latLngToXY(latLng);
+    this.tooltip = `X: ${pos.x.toFixed(3)}, Y: ${pos.y.toFixed(3)}`;
   }
 
   onMapTypeChanged() {
@@ -330,9 +378,7 @@ export class MapViewComponent {
 }
 
 function xyToLatLng(x: number, y: number) {
-  return new google.maps.LatLng(
-    y / SCALE_MUL, 
-    x / SCALE_MUL);
+  return new google.maps.LatLng(y / SCALE_MUL, x / SCALE_MUL);
 }
 
 function latLngToXY(latLng: google.maps.LatLngLiteral) {

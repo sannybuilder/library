@@ -7,16 +7,8 @@
       [options]="mapOptions"
       (mapInitialized)="onMapReady($event)"
       (maptypeidChanged)="onMapTypeChanged()"
+      (mapMousemove)="onMapMousemove($event)"
     >
-      <map-advanced-marker
-        #debugMarker="mapAdvancedMarker"
-        [position]="{ lat: 0, lng: 0 }"
-        [content]="debugMarkerContent"
-        [gmpDraggable]="true"
-        (mapClick)="openInfoWindow(debugMarker)"
-        (mapDrag)="openInfoWindow(debugMarker)"
-      />
-
       @for (m of gmMarkers; track m.id) {
       <map-advanced-marker
         #marker="mapAdvancedMarker"
@@ -50,11 +42,15 @@
         (polygonClick)="openInfoWindowAt($event.latLng, a.data)"
         (polygonMouseover)="onAreaMouseover(area, a)"
         (polygonMouseout)="onAreaMouseout(area, a)"
+        (polygonMousemove)="onMapMousemove($event)"
       />
       }
       <map-info-window />
     </google-map>
     <ng-container *ngIf="map">
+      <div id="map-tooltip">
+        {{ tooltip }}
+      </div>
       <div
         id="map-overlay-slide"
         [ngClass]="{ open: isSidebarOpen }"
@@ -189,7 +185,6 @@
             </ul>
 
             }
-            <div class="p-3">{{ tooltip }}</div>
           </ng-container>
         </div>
       </div>

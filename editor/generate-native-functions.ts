@@ -1,5 +1,5 @@
 import { Command, Extension, Game } from './src/app/models/index';
-import { generateFunctionDeclaration } from 'src/app/utils';
+import { generateFunctionDeclaration } from './src/app/utils';
 
 const { readFileSync, writeFileSync } = require('fs');
 

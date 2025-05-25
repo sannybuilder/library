@@ -25,6 +25,7 @@ import {
 } from '../models';
 import { HEX_DIGITS, HEX_NEGATION } from './hex';
 import { functionName } from './functions';
+import { doesGameRequireOpcode } from './game';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
 export function smash(value: object) {
@@ -431,7 +432,7 @@ export function normalize(extensions: Extension[], game: Game) {
             },
             (x) => x != null && (!Array.isArray(x) || x.length > 0)
           );
-        }, 'id')
+        }, doesGameRequireOpcode(game) ? 'id' : 'name'),
       ),
     }))
     .filter((e) => e.commands.length > 0);

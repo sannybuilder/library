@@ -1,0 +1,20 @@
+while true
+    wait 0
+    
+    if
+        test_cheat {input} "1"
+    then
+        float pos[3]
+        int posPtr = get_var_pointer pos
+        int texPtr
+        
+        pos[0], pos[1], pos[2] = get_offset_from_char_in_world_coords $scplayer {offset} 0.0 0.0 -0.5
+        //texPtr = read_memory {address} 0x00C403E0 {size} 4 {vp} false // gpShadowCarTex
+        texPtr = read_memory {address} 0x00C403E4 {size} 4 {vp} false // gpShadowPedTex
+        AddPermanentShadow(1, texPtr, posPtr, 0.5, 0, 0, -0.5, 200, 0, 0, 0, 10.0, 5000, 1.0)
+        
+        pos[0], pos[1], pos[2] = get_offset_from_char_in_world_coords $scplayer {offset} 0.0 6.0 -0.5
+        texPtr = read_memory {address} 0x00C403FC {size} 4 {vp} false // gpShadowHeadLightsTex2
+        AddPermanentShadow(2, texPtr, posPtr, 4.0, 0, 0, -4.0, 255, 0, 128, 255, 10.0, 3000, 1.0)
+    end
+end

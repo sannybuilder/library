@@ -319,7 +319,7 @@ export class MapViewComponent {
           fillOpacity: 0.35,
           strokeColor: area.color,
           strokeOpacity: 0.5,
-          strokeWeight: DEFAULT_STROKE_WEIGHT,
+          strokeWeight: this.getStrokeWeight(),
           data: {
             toString() {
               return area.name;
@@ -328,6 +328,16 @@ export class MapViewComponent {
         };
       })
     );
+  }
+
+  onMapZoomChanged() {
+    this.gmPolylines.forEach((polyline) => {
+      polyline.strokeWeight = this.getStrokeWeight();
+    });
+    this.gmPolygons.forEach((polygon) => {
+      polygon.strokeWeight = this.getStrokeWeight();
+    });
+    this._cd.markForCheck();
   }
 
   togglePaths(category: Subcategory<PathData>) {
@@ -347,7 +357,7 @@ export class MapViewComponent {
           vertices: path.path.map(({ x, y }) => xyToLatLng(x, y)),
           strokeColor: '#FF0080',
           strokeOpacity: 1.0,
-          strokeWeight: DEFAULT_STROKE_WEIGHT + 1,
+          strokeWeight: this.getStrokeWeight(),
           data: {
             toString() {
               return [path.name, path.description].filter(Boolean).join(': ');
@@ -369,11 +379,15 @@ export class MapViewComponent {
   }
 
   onAreaMouseover(_: MapPolygon, area: GMPolygon) {
-    area.strokeWeight = DEFAULT_STROKE_WEIGHT + 2;
+    area.strokeWeight = this.getStrokeWeight() + 2;
   }
 
   onAreaMouseout(_: MapPolygon, area: GMPolygon) {
-    area.strokeWeight = DEFAULT_STROKE_WEIGHT;
+    area.strokeWeight = this.getStrokeWeight();
+  }
+
+  getStrokeWeight() {
+    return DEFAULT_STROKE_WEIGHT + Math.trunc((this.map.getZoom() ?? 0) / 2);
   }
 }
 

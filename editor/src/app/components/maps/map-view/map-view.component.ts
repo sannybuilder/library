@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import {
   MapAdvancedMarker,
   MapInfoWindow,
@@ -49,7 +55,9 @@ export class MapViewComponent {
   gmPolygons: GMPolygon[] = [];
 
   isSidebarOpen = true;
-  tooltip: string = 'Hold Ctrl to display coordinates';
+  coordsTooltip: string = '';
+  customTooltip: string = '';
+  isCtrlPressed = false;
   map: google.maps.Map;
 
   mapOptions = {
@@ -59,13 +67,22 @@ export class MapViewComponent {
     mapTypeControl: true,
     streetViewControl: false,
     gestureHandling: 'greedy',
-    zoom: 0,
     mapId: 'GTASA_MAP_ID',
     mapTypeControlOptions: {
       mapTypeIds: Object.keys(MAP_TYPE),
     },
   };
   constructor(private _cd: ChangeDetectorRef) {}
+
+  @HostListener('window:keydown', ['$event'])
+  changeCtrl(event: KeyboardEvent) {
+    this.isCtrlPressed = event.ctrlKey;
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  changeCtrlUp(event: KeyboardEvent) {
+    this.isCtrlPressed = event.ctrlKey;
+  }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
@@ -172,22 +189,12 @@ export class MapViewComponent {
   }
 
   onMapMousemove(event: any) {
-    const ctrlKey = event.domEvent.ctrlKey;
-    if (!ctrlKey) {
-      this.tooltip = 'Hold Ctrl to display coordinates';
-      this.map.setOptions({
-        draggableCursor: 'grab',
-      });
-      return;
-    }
-
-    this.map.setOptions({
-      draggableCursor: 'crosshair',
-    });
-
     const latLng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
     const pos = latLngToXY(latLng);
-    this.tooltip = `X: ${pos.x.toFixed(3)}, Y: ${pos.y.toFixed(3)}`;
+    this.coordsTooltip = `X: ${pos.x.toFixed(3)}, Y: ${pos.y.toFixed(3)}`;
+    this.map.setOptions({
+      draggableCursor: this.isCtrlPressed ? 'crosshair' : 'grab',
+    });
   }
 
   onMapTypeChanged() {
@@ -370,20 +377,22 @@ export class MapViewComponent {
 
   onPathMouseover(_: MapPolyline, path: GMPolyline) {
     path.strokeColor = '#FFFF80';
-    this.tooltip = `${path.data}`;
+    this.customTooltip = `${path.data}`;
   }
 
   onPathMouseout(_: MapPolyline, path: GMPolyline) {
     path.strokeColor = '#FF0080';
-    this.tooltip = `${path.data}`;
+    this.customTooltip = '';
   }
 
   onAreaMouseover(_: MapPolygon, area: GMPolygon) {
     area.strokeWeight = this.getStrokeWeight() + 2;
+    this.customTooltip = `${area.data}`;
   }
 
   onAreaMouseout(_: MapPolygon, area: GMPolygon) {
     area.strokeWeight = this.getStrokeWeight();
+    this.customTooltip = '';
   }
 
   getStrokeWeight() {

@@ -50,7 +50,11 @@
     </google-map>
     <ng-container *ngIf="map">
       <div id="map-tooltip">
-        {{ tooltip }}
+        {{
+          (isCtrlPressed && coordsTooltip) ||
+            customTooltip ||
+            "ui.map.holdCtrlForCoords" | translate
+        }}
       </div>
       <div
         id="map-overlay-slide"

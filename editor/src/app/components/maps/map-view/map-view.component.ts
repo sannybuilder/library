@@ -22,6 +22,7 @@ import {
   mapIconUri,
   cdnUri,
   MarkerData,
+  RenderingType,
 } from './model';
 
 import { MProjection } from './classes';

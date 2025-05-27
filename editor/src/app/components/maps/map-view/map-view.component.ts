@@ -10,7 +10,6 @@ import {
   MapInfoWindow,
   MapPolygon,
   MapPolyline,
-  MapRenderingType,
 } from '@angular/google-maps';
 import {
   AreaData,
@@ -66,7 +65,7 @@ export class MapViewComponent {
     maxZoom: 12,
     isFractionalZoomEnabled: true,
     isPng: false,
-    renderingType: MapRenderingType.VECTOR,
+    renderingType: google.maps.RenderingType.VECTOR,
     mapTypeControl: true,
     streetViewControl: false,
     gestureHandling: 'greedy',

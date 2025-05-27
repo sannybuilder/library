@@ -65,7 +65,7 @@ export class MapViewComponent {
     maxZoom: 12,
     isFractionalZoomEnabled: true,
     isPng: false,
-    renderingType: google.maps.RenderingType.VECTOR,
+    renderingType: "VECTOR",
     mapTypeControl: true,
     streetViewControl: false,
     gestureHandling: 'greedy',

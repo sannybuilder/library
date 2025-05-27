@@ -10,6 +10,7 @@ import {
   MapInfoWindow,
   MapPolygon,
   MapPolyline,
+  RenderingType,
 } from '@angular/google-maps';
 import {
   AreaData,
@@ -22,7 +23,6 @@ import {
   mapIconUri,
   cdnUri,
   MarkerData,
-  RenderingType,
 } from './model';
 
 import { MProjection } from './classes';

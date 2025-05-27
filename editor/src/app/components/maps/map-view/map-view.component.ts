@@ -65,6 +65,7 @@ export class MapViewComponent {
     maxZoom: 12,
     isFractionalZoomEnabled: true,
     isPng: false,
+    renderingType: RenderingType.VECTOR,
     mapTypeControl: true,
     streetViewControl: false,
     gestureHandling: 'greedy',

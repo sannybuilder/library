@@ -63,6 +63,7 @@ export class MapViewComponent {
   mapOptions = {
     minZoom: 0,
     maxZoom: 12,
+    isFractionalZoomEnabled: true,
     isPng: false,
     mapTypeControl: true,
     streetViewControl: false,

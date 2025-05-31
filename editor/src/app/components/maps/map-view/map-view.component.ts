@@ -27,7 +27,7 @@ import {
 import { MProjection } from './classes';
 
 const DEFAULT_STROKE_WEIGHT = 1;
-const TILE_SIZE = 256.0 * 2.0; // allow upscaling
+const TILE_SIZE = 256.0;
 const SCALE_MUL = 128.0; // tweak for game units <> lonlat
 const MAP_TYPE = {
   Satellite: 'Satellite',
@@ -65,7 +65,6 @@ export class MapViewComponent {
     maxZoom: 12,
     isFractionalZoomEnabled: true,
     isPng: false,
-    //renderingType: google.maps.RenderingType.VECTOR,
     mapTypeControl: true,
     streetViewControl: false,
     gestureHandling: 'greedy',

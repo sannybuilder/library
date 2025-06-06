@@ -16,6 +16,7 @@ import { run as generateEnums } from './generate-enums';
 import { run as generateOpcodeExamples } from './generate-opcode-examples';
 import { run as generateSupportInfo } from './generate-support-info';
 import { run as generateNativeFunctionDeclaration } from './generate-native-functions';
+import { existsSync } from 'fs';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -23,12 +24,12 @@ const { execSync } = require('child_process');
 
 const gamesRaw = readFileSync('games.json');
 const games: Game[] = JSON.parse(gamesRaw);
-
 generateSupportInfo('src/assets/support-info.json');
 generateEnumsInfo('src/assets/enums-info.json');
 
-run(`cargo build`, '../generator');
-
+try {
+  run(`cargo build`, '../generator');
+} catch {}
 // GENERATE DATA FILES
 games.forEach((game) => {
   const assets = assetsDir(game);
@@ -95,7 +96,11 @@ games.forEach((game) => {
     cargo(`snippets ${srcDir} > ${join(dest, 'snippets.json')}`);
   }
   if (GameNativeAssets[game]) {
-    generateNativeFunctionDeclaration(nativeJson, game, join(dest, 'native.txt'));
+    generateNativeFunctionDeclaration(
+      nativeJson,
+      game,
+      join(dest, 'native.txt')
+    );
   }
 });
 
@@ -115,6 +120,9 @@ function run(cmd: string, cwd = process.cwd()) {
 }
 
 function cargo(cmd: string) {
+  if (!existsSync('../generator/target/debug/generator')) {
+    return;
+  }
   console.log(`generating "${cmd}"`);
   run(
     `"../generator/target/debug/generator${

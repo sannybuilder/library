@@ -322,7 +322,7 @@ export class MapViewComponent {
         const id = category.name + ' #' + i;
         return {
           id,
-          vertices: area.vertices.map(([x, y]) => xyToLatLng(x, y)),
+          vertices: this.getVertices(area),
           fillColor: area.color,
           fillOpacity: 0.35,
           strokeColor: area.color,
@@ -336,6 +336,18 @@ export class MapViewComponent {
         };
       })
     );
+  }
+
+  getVertices(area: AreaData) {
+    if (area.vertices.length === 2) {
+      return [
+        xyToLatLng(area.vertices[0][0], area.vertices[0][1]),
+        xyToLatLng(area.vertices[0][0], area.vertices[1][1]),
+        xyToLatLng(area.vertices[1][0], area.vertices[1][1]),
+        xyToLatLng(area.vertices[1][0], area.vertices[0][1]),
+      ]
+    }
+    return area.vertices.map(([x, y]) => xyToLatLng(x, y));
   }
 
   onMapZoomChanged() {

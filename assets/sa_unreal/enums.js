@@ -2221,3 +2221,12 @@ export const SpeechId = {
   "PainCjDrowning": 357,
   "PainCjHighFall": 358
 };
+export const SwimState = {
+  "Idle": 0,
+  "Breast": 1,
+  "Crawl": 2,
+  "Dive": 3,
+  "Underwater": 4,
+  "Jump": 5,
+  "JustEnteredWater": 6
+};

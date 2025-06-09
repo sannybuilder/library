@@ -1,15 +1,10 @@
 export function compile(input: string) {
-  const commands = input
-    .split('\n')
-    .map((line) => parse(line))
-    .filter((cmd) => cmd !== undefined);
-
-  return commands;
+  return input.split('\n').map((line) => parse(line));
 }
 
-const POOL_SIZE = 64;
+export const POOL_SIZE = 64;
 
-interface Command {
+export interface Command {
   name: string;
   arguments: number[];
 }
@@ -96,11 +91,19 @@ function strTok(s: string, tok: string): [boolean, string] {
 }
 
 export function execute(
-  commands: Command[],
+  commands: Array<Command | undefined>,
   options: { patched: boolean },
   pool: CNodesSwitchedOnOrOff[]
 ) {
   for (const cmd of commands) {
+    if (!cmd) {
+      continue;
+    }
+    console.log(
+      `Executing command: ${cmd.name} with arguments: ${cmd.arguments.join(
+        ', '
+      )}`
+    );
     const [xA, yA, zA] = cmd.arguments.slice(0, 3);
     const [xB, yB, zB] = cmd.arguments.slice(3, 6);
     const xMin = Math.min(xA, xB);

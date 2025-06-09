@@ -23,9 +23,9 @@ import {
   cdnUri,
   MarkerData,
 } from './model';
-import { CNodesSwitchedOnOrOff, compile, execute } from './switchcompiler';
 
 import { MProjection } from './classes';
+import { CNodesSwitchedOnOrOff } from '../road-switch/compiler';
 
 const DEFAULT_STROKE_WEIGHT = 1;
 const TILE_SIZE = 256.0;
@@ -60,12 +60,6 @@ export class MapViewComponent {
   customTooltip: string = '';
   isCtrlPressed = false;
   map: google.maps.Map;
-
-  nodeSwitchesSrc = `//switch_roads_off {leftBottomX} -2696.4641 {leftBottomY} 1239.8665 {leftBottomZ} 40.7599 {rightTopX} -2665.3591 {rightTopY} 2190.9604 {rightTopZ} 70.8125
-  `;
-  nodeSwitchesPool: CNodesSwitchedOnOrOff[] = [];
-  nodeSwitchAlgorithms = ['Original (Bugged)', 'Patched'];
-  selectedNodeSwitchAlgorithm = this.nodeSwitchAlgorithms[0];
 
   mapOptions = {
     minZoom: 0,
@@ -419,18 +413,8 @@ export class MapViewComponent {
     return DEFAULT_STROKE_WEIGHT + Math.trunc((this.map.getZoom() ?? 0) / 2);
   }
 
-  compileSwitches() {
-    this.nodeSwitchesPool = [];
-    execute(
-      compile(this.nodeSwitchesSrc),
-      {
-        patched:
-          this.selectedNodeSwitchAlgorithm === this.nodeSwitchAlgorithms[1],
-      },
-      this.nodeSwitchesPool
-    );
-
-    this.gmPolygons = this.nodeSwitchesPool.map((s, i) => {
+  onRoadSwitchUpdate(pool: CNodesSwitchedOnOrOff[]) {
+    this.gmPolygons = pool.map((s, i) => {
       const id = `${s.xMin},${s.yMin} ${s.xMax},${s.yMax}`;
       return {
         id,

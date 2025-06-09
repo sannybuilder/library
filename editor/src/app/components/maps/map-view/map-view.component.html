@@ -91,6 +91,43 @@
           </ul>
         </div>
         <div class="scroll">
+          <ng-container *ngIf="activeTab == 'switchroads'">
+            <div class="p-3">
+              <h6>Switch Roads Commands</h6>
+              <textarea
+                class="form-control monospaced"
+                rows="5"
+                placeholder="Enter SWITCH_ROAD commands here"
+                [(ngModel)]="nodeSwitchesSrc"
+              ></textarea>
+
+              <div class="d-flex flex-row mt-2">
+                <ng-container *ngFor="let algorithm of nodeSwitchAlgorithms">
+                  <label class="mr-3">
+                    <input
+                      type="radio"
+                      name="switchType"
+                      [value]="algorithm"
+                      [(ngModel)]="selectedNodeSwitchAlgorithm"
+                    />
+
+                    {{ algorithm }}
+                  </label>
+                </ng-container>
+              </div>
+              <button
+                class="btn btn-outline-success mt-2"
+                (click)="compileSwitches()"
+              >
+                Run
+              </button>
+
+              <h6 class="mt-3">Switch Roads Pool</h6>
+              <div>
+                <pre class="sample">{{ nodeSwitchesPool | json }}</pre>
+              </div>
+            </div>
+          </ng-container>
           <ng-container *ngIf="activeTab == 'locations'">
             @for(cat of locations; track cat.id) {
 

@@ -16,9 +16,12 @@ enum Algorithm {
 export class RoadSwitchComponent {
   POOL_SIZE = POOL_SIZE;
   source = `
-  // main.sc
+  // -------------------- main.sc --------------------
+
   SWITCH_ROADS_OFF 2500.0 -1677.0 20.0 2430.0 -1653.0 0.0	 //REMOVE (SPEAK TO JOHN)
 
+  // -------------------- intro.sc --------------------
+  
   //Gant Bridge  ( Golden Gate )
 	SWITCH_ROADS_OFF -2696.4641 1239.8665 40.7599 -2665.3591 2190.9604 70.8125    // Main Section.
 	SWITCH_ROADS_OFF -2740.6941 2233.6179 40.8431 -2720.9102 2338.2244 80.4822	  // Country Section.
@@ -134,10 +137,12 @@ export class RoadSwitchComponent {
   }
 
   scrollToActiveLine() {
-    const line = document.querySelector('.line.active');
-    if (line) {
-      line.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    setTimeout(() => {
+      const line = document.querySelector('.line.active');
+      if (line) {
+        line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
   }
 
   execute(line: number) {
@@ -151,5 +156,23 @@ export class RoadSwitchComponent {
       this.pool
     );
     this.update.emit(this.pool);
+  }
+
+  toStart() {
+    if (!this.isRunning || this.activeLine <= 0) {
+      return;
+    }
+    this.activeLine = 0;
+    this.scrollToActiveLine();
+    this.execute(this.activeLine);
+  }
+
+  toEnd() {
+    if (!this.isRunning || this.activeLine >= this.lines.length - 1) {
+      return;
+    }
+    this.activeLine = this.lines.length - 1;
+    this.scrollToActiveLine();
+    this.execute(this.activeLine);
   }
 }

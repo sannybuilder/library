@@ -6,6 +6,7 @@ import source from './source';
 enum Algorithm {
   Original = 'Original (Bugged)',
   Patched = 'Patched',
+  Improved = 'Patched (Improved)',
 }
 
 @Component({
@@ -21,7 +22,7 @@ export class RoadSwitchComponent {
     .map((x) => x.trim())
     .join('\n');
   pool: CNodesSwitchedOnOrOff[] = [];
-  algorithms = [Algorithm.Original, Algorithm.Patched];
+  algorithms = [Algorithm.Original, Algorithm.Patched, Algorithm.Improved];
   selectedAlgorithm = Algorithm.Original;
 
   isRunning = false;
@@ -92,7 +93,10 @@ export class RoadSwitchComponent {
     execute(
       commands.slice(0, line + 1),
       {
-        patched: this.selectedAlgorithm === Algorithm.Patched,
+        patched:
+          this.selectedAlgorithm === Algorithm.Patched ||
+          this.selectedAlgorithm === Algorithm.Improved,
+        improved: this.selectedAlgorithm === Algorithm.Improved,
       },
       this.pool
     );

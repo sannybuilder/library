@@ -94,7 +94,7 @@ function strTok(s: string, tok: string): [boolean, string] {
 
 export function execute(
   commands: Array<Command | undefined>,
-  options: { patched: boolean },
+  options: { patched: boolean; improved: boolean },
   pool: CNodesSwitchedOnOrOff[]
 ) {
   for (const cmd of commands) {
@@ -215,7 +215,7 @@ export function execute(
 
 function SwitchRoadsOffInArea(
   pool: CNodesSwitchedOnOrOff[],
-  options: { patched: boolean },
+  options: { patched: boolean; improved: boolean },
   xMin: number,
   xMax: number,
   yMin: number,
@@ -238,6 +238,25 @@ function SwitchRoadsOffInArea(
       area.zMax > zMax
     ) {
       continue;
+    }
+
+    // store cars and peds zones separately
+    if (options.improved && area.isCars !== bCars) {
+      continue;
+    }
+
+    // toggling areas of the same size acts like BACK_TO_ORIGINAL and new area is not saved
+    if (
+      options.improved &&
+      area.xMin === xMin &&
+      area.xMax === xMax &&
+      area.yMin === yMin &&
+      area.yMax === yMax &&
+      area.zMin === zMin &&
+      area.zMax === zMax &&
+      area.isOff !== bSwitchOff
+    ) {
+      bBackToOriginal = true;
     }
 
     // Remove the area from the pool

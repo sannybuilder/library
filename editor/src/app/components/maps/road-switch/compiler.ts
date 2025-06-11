@@ -58,6 +58,8 @@ function parse(input: string): Command | undefined {
     switch_ped_roads_back_to_original: 'switch_ped_roads_back_to_original',
     switch_ped_roads_on: 'switch_ped_roads_on',
     switch_ped_roads_off: 'switch_ped_roads_off',
+    mission_has_finished: 'mission_has_finished',
+    '00d8': 'mission_has_finished',
   };
 
   for (const [id, name] of Object.entries(commandMap)) {
@@ -113,6 +115,10 @@ export function execute(
     const zMin = Math.min(zA, zB);
     const zMax = Math.max(zA, zB);
     switch (cmd.name) {
+      case 'mission_has_finished': {
+        pool.splice(54);
+        break;
+      }
       case 'switch_roads_on':
         SwitchRoadsOffInArea(
           pool,

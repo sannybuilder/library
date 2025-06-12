@@ -416,6 +416,9 @@ export class MapViewComponent {
   onRoadSwitchUpdate(pool: CNodesSwitchedOnOrOff[]) {
     this.gmPolygons = pool.map((s, i) => {
       const id = `${s.xMin},${s.yMin} ${s.xMax},${s.yMax}`;
+      const fillColor = s.isCars ? '#FF00FF' : '#FFFF00';
+      const strokeColor = s.isOff ? '#000000' : fillColor;
+
       return {
         id,
         vertices: [
@@ -424,14 +427,16 @@ export class MapViewComponent {
           xyToLatLng(s.xMax, s.yMax),
           xyToLatLng(s.xMax, s.yMin),
         ],
-        fillColor: '#FF00FF',
-        fillOpacity: 0.35,
-        strokeColor: '#FF00FF',
+        fillColor,
+        strokeColor,
+        fillOpacity: 0.5,
         strokeOpacity: 0.5,
         strokeWeight: this.getStrokeWeight(),
         data: {
           toString() {
-            return id;
+            return `${id} (${s.isCars ? 'Cars' : 'Peds'} - ${
+              s.isOff ? 'Disabled' : 'Enabled'
+            })`;
           },
         },
       };

@@ -30,6 +30,7 @@ import {
   Primitive,
   ViewMode,
   SyntaxKind,
+  GameSourceRepo,
 } from '../../models';
 import {
   ExtensionsFacade,
@@ -534,6 +535,10 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   dismissHotkeysInfo() {
     this._ui.dismissHotkeysInfo();
+  }
+
+  getSourceCodeRepo(game: Game) {
+    return GameSourceRepo[game];
   }
 
   private _onSaveCommand(force: boolean) {

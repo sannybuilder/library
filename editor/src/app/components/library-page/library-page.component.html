@@ -32,7 +32,10 @@
               [game]="game"
               [viewContext]="viewContext"
             ></scl-filter-panel>
-            <div class="card mb-3" *ngIf="(isHotkeyInfoDismissed$ | async) === false">
+            <div
+              class="card mb-3"
+              *ngIf="(isHotkeyInfoDismissed$ | async) === false"
+            >
               <div class="card-body">
                 <scl-hotkeys-info></scl-hotkeys-info>
 
@@ -401,6 +404,29 @@
               ) | translate
             "
           ></scl-copy-button>
+          <a
+            *ngIf="
+              viewMode === ViewMode.ViewCommand &&
+              command.name &&
+              getSourceCodeRepo(game) as repo
+            "
+            [href]="
+              'https://github.com/search' +
+              '?q=repo%3A' +
+              repo +
+              ' ' +
+              command.name +
+              '&type=code'
+            "
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <scl-icon-button
+              icon="search"
+              [title]="'ui.shared.findCommandUsages' | translate"
+            >
+            </scl-icon-button>
+          </a>
 
           <scl-icon-button
             *ngIf="

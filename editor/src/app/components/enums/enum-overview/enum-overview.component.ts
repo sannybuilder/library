@@ -12,21 +12,36 @@ import { EnumRaw, Game } from '../../../models';
 export class EnumOverviewComponent {
   private _enumToView: EnumRaw;
   private _values: EnumRaw['fields'] = [];
-  isStringEnum = false;
+  filterQuery = '';
+
+  enumFields: Array<
+    [/*name*/ string, /*value*/ string, /*is auto value*/ boolean]
+  > = [];
 
   @Input() game: Game;
   @Input() enumGames: Game[];
 
   @Input() set enumToView(val: EnumRaw) {
     this._enumToView = val;
-    this.isStringEnum = isStringEnum(val.fields);
-    this._values = fillEnumValues(this._enumToView.fields);
+    const _isStringEnum = isStringEnum(val.fields);
+    const autoValues = fillEnumValues(val.fields);
+    this.enumFields = val.fields.map(([name, value], i) => {
+      return [
+        name,
+        value !== null
+          ? _isStringEnum
+            ? `"${value}"`
+            : value.toString()
+          : autoValues[i][1]?.toString() ?? '',
+        value === null,
+      ];
+    });
   }
   get enumToView() {
     return this._enumToView;
   }
 
   autoValue(index: number) {
-    return this._values[index]?.[1] ?? "";
+    return this._values[index]?.[1] ?? '';
   }
 }

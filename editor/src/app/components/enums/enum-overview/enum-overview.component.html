@@ -9,24 +9,38 @@
 
 <h5>{{ "ui.enumOverview.title" | translate }}</h5>
 
+<div class="row mb-2">
+  <div class="col-12">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control filter-input"
+        [placeholder]="'ui.enumOverview.filter' | translate"
+        [(ngModel)]="filterQuery"
+      />
+      <div class="input-group-append">
+        <scl-icon-button
+          icon="clear"
+          [title]="'ui.header.searchClear' | translate"
+          (clicked)="filterQuery = ''"
+        ></scl-icon-button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="scroll-container">
-  <pre *ngIf="enumToView?.fields" class="sample">
+  <pre *ngIf="enumFields.length" class="sample">
 enum <span class="identifier">{{ enumToView.name }}</span> 
-<ng-container *ngFor="let field of enumToView.fields; let i = index"><ng-container *ngTemplateOutlet="fieldTemplate; context: { field: field, i: i }"></ng-container></ng-container>end
+<ng-container *ngFor="let field of enumFields | filterEnums: filterQuery;"><ng-container *ngTemplateOutlet="fieldTemplate; context: { field: field }"></ng-container></ng-container>end
 </pre>
 </div>
-<ng-template #fieldTemplate let-field="field" let-i="i">
+<ng-template #fieldTemplate let-field="field">
   <div>
     &nbsp; <span class="identifier">{{ field[0] }}</span
-    ><span [ngClass]="{ secondary: field[1] === null }">
+    ><span [ngClass]="{ secondary: field[2] }">
       =
-      {{
-        field[1] !== null
-          ? isStringEnum
-            ? '"' + field[1] + '"'
-            : field[1]
-          : autoValue(i)
-      }}</span
+      {{ field[1] }}</span
     >
   </div>
 </ng-template>

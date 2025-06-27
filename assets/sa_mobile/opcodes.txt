@@ -345,7 +345,6 @@
 {0254:} restore_clock
 {0256:}   is_player_playing [Player]
 {0293:} [var mode: ControllerMode] = get_controller_mode
-{0293:} [var mode: ControllerMode] = get_controller_mode
 {0294:} set_can_respray_car [Car] {changeColors} [bool]
 {0296:} unload_special_character {slotId} [int]
 {0297:} reset_num_of_models_killed_by_player [Player]
@@ -1630,37 +1629,25 @@
 {0A4E:}   is_xbox_player2_pressing_start
 {0A4F:} finished_with_xbox_player2
 {0A50:} do_debug_stuff
-{0A51:}   is_widget_pressed {widgetId} [int]
 {0A51:}   is_widget_pressed {widgetId} [WidgetId]
-{0A52:}   is_widget_released {widgetId} [int]
 {0A52:}   is_widget_released {widgetId} [WidgetId]
-{0A53:}   is_widget_doubletapped {widgetId} [int]
 {0A53:}   is_widget_doubletapped {widgetId} [WidgetId]
-{0A54:}   is_widget_swiped {widgetId} [int]
 {0A54:}   is_widget_swiped {widgetId} [WidgetId]
-{0A55:}   is_widget_swiped_left {widgetId} [int]
 {0A55:}   is_widget_swiped_left {widgetId} [WidgetId]
-{0A56:}   is_widget_swiped_right {widgetId} [int]
 {0A56:}   is_widget_swiped_right {widgetId} [WidgetId]
 {0A57:}   [var missionPage: int], [var missionNum: int] = do_mission_skip
 {0A58:}   [var missionNum: int] = get_mission_num
 {0A59:}   [var missionPage: int] = get_mission_page
-{0A5A:} [var _p2: float] = get_widget_value {widgetId} [int]
 {0A5A:} [var _p2: float] = get_widget_value {widgetId} [WidgetId]
-{0A5B:} [var _p2: float], [var _p3: float] = get_widget_value2 {widgetId} [int]
 {0A5B:} [var _p2: float], [var _p3: float] = get_widget_value2 {widgetId} [WidgetId]
 {0A5C:} display_text_widget {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key]
-{0A5D:} [var screenX: float], [var screenY: float], [var scaleX: float], [var scaleY: float] = get_widget_position {widgetId} [int]
 {0A5D:} [var screenX: float], [var screenY: float], [var scaleX: float], [var scaleY: float] = get_widget_position {widgetId} [WidgetId]
-{0A5E:} set_widget_value {widgetId} [int] {_p2} [float]
 {0A5E:} set_widget_value {widgetId} [WidgetId] {_p2} [float]
 {0A5F:} set_slider_range {widgetId} [int] {rangeX} [float] {rangeY} [float]
 {0A5F:} set_widget_slider_range {widgetId} [WidgetId] {rangeX} [float] {rangeY} [float]
 {0A60:} add_widget_flag {widgetId} [WidgetId] {widgetFlag} [WidgetFlag]
 {0A61:} remove_widget_flag {widgetId} [WidgetId] {widgetFlag} [WidgetFlag]
-{0A62:} add_button_flag {widgetId} [int] {flag} [int]
 {0A62:} add_button_flag {widgetId} [WidgetId] {flag} [int]
-{0A63:} remove_button_flag {widgetId} [int] {flag} [int]
 {0A63:} remove_button_flag {widgetId} [WidgetId] {flag} [int]
 {0A64:}   is_touch_enabled
 {0A65:}   is_finalbuild
@@ -1669,18 +1656,14 @@
 {0A68:} write_log_float {_p1} [float] {_p2} [float] {_p3} [float] {_p4} [literal string128]
 {0A69:} create_shop_widget {menuName} [gxt_key]
 {0A6A:} add_shop_item {itemName} [gxt_key] {price} [int]
-{0A6B:} delete_widget {widgetId} [int]
 {0A6B:} delete_widget {widgetId} [WidgetId]
-{0A6C:} set_equipped_item {widgetId} [int] {_p2} [int]
 {0A6C:} set_equipped_item {widgetId} [WidgetId] {_p2} [int]
 {0A6D:} print_help_forever_conditional {key} [gxt_key] {type} [int]
-{0A6E:} set_widget_texture {widgetId} [int] {textureName} [literal string128]
 {0A6E:} set_widget_texture {widgetId} [WidgetId] {textureName} [literal string128]
 {0A6F:} checkpoint_save {_p1} [int]
 {0A70:} display_text_clamped {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key] {scale} [float]
 {0A71:} display_text_with_number_clamped {offsetLeft} [float] {offsetTop} [float] {key} [gxt_key] {number} [int] {scale} [float]
 {0A72:} auto_save
-{0A73:} set_widget_value3 {widgetId} [int] {x} [float] {y} [float] {z} [float]
 {0A73:} set_widget_value3 {widgetId} [WidgetId] {x} [float] {y} [float] {z} [float]
 {0A74:}   is_checkpoint_resuming {_p1} [bool]
 {0A75:}   set_active_menu_item_car_mods [MenuGrid] {carcolor} [int]
@@ -1703,11 +1686,8 @@
 {0A86:} print_help_conditional_hid_joypad {key} [gxt_key] {type} [int]
 {0A87:} print_help_conditional_hid_keyboard {key} [gxt_key] {type} [int]
 {0A88:} print_help_conditional_touch_analog {key} [gxt_key] {type} [int]
-{0A89:} set_widget_value2 {widgetId} [int] {_p2} [float] {_p3} [float]
 {0A89:} set_widget_value2 {widgetId} [WidgetId] {_p2} [float] {_p3} [float]
-{0A8A:} set_widget_info {widgetId} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [float] {key} [gxt_key]
 {0A8A:} set_widget_info {widgetId} [WidgetId] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [float] {key} [gxt_key]
-{0A8B:} set_widget_info2 {widgetId} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {key} [gxt_key]
 {0A8B:} set_widget_info2 {widgetId} [WidgetId] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {key} [gxt_key]
 {0A8C:} load_all_streaming_models
 {0A8D:}   is_hid_released {hidId} [int]

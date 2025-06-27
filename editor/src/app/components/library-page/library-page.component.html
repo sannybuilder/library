@@ -404,29 +404,6 @@
               ) | translate
             "
           ></scl-copy-button>
-          <a
-            *ngIf="
-              viewMode === ViewMode.ViewCommand &&
-              command.name &&
-              getSourceCodeRepo(game) as repo
-            "
-            [href]="
-              'https://github.com/search' +
-              '?q=repo%3A' +
-              repo +
-              ' ' +
-              command.name +
-              '&type=code'
-            "
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <scl-icon-button
-              icon="search"
-              [title]="'ui.shared.findCommandUsages' | translate"
-            >
-            </scl-icon-button>
-          </a>
 
           <scl-icon-button
             *ngIf="
@@ -480,6 +457,30 @@
             (clicked)="toggleInlineDesc()"
             [title]="'ui.classOverview.toggleInlineDescription' | translate"
           ></scl-icon-button>
+
+          <a
+            *ngIf="
+              viewMode === ViewMode.ViewCommand &&
+              command.name &&
+              getSourceCodeRepo(game) as repo
+            "
+            [href]="
+              'https://github.com/search' +
+              '?q=repo%3A' +
+              repo +
+              ' ' +
+              command.name +
+              '&type=code'
+            "
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <scl-icon-button
+              icon="search"
+              [title]="'ui.shared.findCommandUsages' | translate"
+            >
+            </scl-icon-button>
+          </a>
 
           <scl-icon-button
             *ngIf="viewMode === ViewMode.ViewEnum"

@@ -1,9 +1,10 @@
-int f = open_file "root:\stream.ini" "rb" // file must be open in binary mode
+int f = open_file {filePathName} "root:\stream.ini" {mode} "rb" // file must be open in binary mode
 int size = get_file_size f
-int buf = allocate_memory size
+int buf = allocate_memory {size} size
 
-read_block_from_file f size buf // read file to allocated buffer
+read_block_from_file f {size} size {address} buf // read file into allocated buffer
 
-trace buf
+debug_on
+trace "Read: %s" buf
 
 free_memory buf

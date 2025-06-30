@@ -31,6 +31,8 @@ import {
   ViewMode,
   SyntaxKind,
   GameSourceRepo,
+  DEFAULT_EXTENSION,
+  SnippetsRepo,
 } from '../../models';
 import {
   ExtensionsFacade,
@@ -54,11 +56,11 @@ import {
 } from '../../utils';
 
 @Component({
-    selector: 'scl-library-page',
-    templateUrl: './library-page.component.html',
-    styleUrls: ['./library-page.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'scl-library-page',
+  templateUrl: './library-page.component.html',
+  styleUrls: ['./library-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sidebar') sidebar: ElementRef<HTMLDivElement>;
@@ -537,8 +539,17 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._ui.dismissHotkeysInfo();
   }
 
-  getSourceCodeRepo(game: Game) {
-    return GameSourceRepo[game];
+  getSourceCodeRepo(command: Command, game: Game, extension: string) {
+    if (command.name) {
+      if (extension === DEFAULT_EXTENSION) {
+        if (GameSourceRepo[game]) {
+          return `https://github.com/search?q=repo%3A${GameSourceRepo[game]}+${command.name}&type=code`;
+        }
+      } else if (SnippetsRepo[game]) {
+        return `https://github.com/search?q=repo%3A${SnippetsRepo[game]}+${command.name}&type=code`;
+      }
+    }
+    return '';
   }
 
   private _onSaveCommand(force: boolean) {
@@ -550,10 +561,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this._extensions.updateCommand({
         newExtension: this.extension!,
         oldExtension: this.oldExtension!,
-        command: omit(
-          this.command,
-          SEARCH_OPTIONS.highlightKey
-        ) as Command,
+        command: omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
         updateRelated: this.updateRelatedCommands,
       });
     }

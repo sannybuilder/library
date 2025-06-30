@@ -461,17 +461,9 @@
           <a
             *ngIf="
               viewMode === ViewMode.ViewCommand &&
-              command.name &&
-              getSourceCodeRepo(game) as repo
+              getSourceCodeRepo(command, game, extension) as link
             "
-            [href]="
-              'https://github.com/search' +
-              '?q=repo%3A' +
-              repo +
-              ' ' +
-              command.name +
-              '&type=code'
-            "
+            [href]="link"
             target="_blank"
             rel="noopener noreferrer"
           >

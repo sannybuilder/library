@@ -392,3 +392,9 @@ export const GameSourceRepo: Partial<Record<Game, string>> = {
   [Game.vc_unreal]: 'sannybuilder/GTA_VC_SCRIPT',
   [Game.sa_unreal]: 'sannybuilder/GTA_SA_SCRIPT',
 };
+
+export const SnippetsRepo: Partial<Record<Game, string>> = {
+  [Game.gta3]: 'sannybuilder/library+path:gta3/snippets',
+  [Game.vc]: 'sannybuilder/library+path:vc/snippets',
+  [Game.sa]: 'sannybuilder/library+path:sa/snippets',
+};

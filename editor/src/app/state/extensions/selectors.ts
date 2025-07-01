@@ -158,6 +158,7 @@ export const commandRelated = createSelector(
           ['GET_', 'SET_'],
           ['READ_', 'WRITE_'],
           ['CREATE_', 'DELETE_'],
+          ['ADD_', 'REMOVE_'],
         ],
         endings: [
           ['_CHAR', '_CAR', '_PLAYER', '_OBJECT'],

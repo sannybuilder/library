@@ -1,0 +1,1 @@
+This commands sets a new price for shop items. The price can be saved and remains active until a new price is set, or the override is removed using REMOVE_PRICE_MODIFIER. The game can save only up to 20 custom prices in total.

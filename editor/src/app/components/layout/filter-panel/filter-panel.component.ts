@@ -74,7 +74,8 @@ export class FilterPanelComponent {
       uniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
     )
   );
-  isCustomAttibuteSelected$ = this._ui.isCustomAttibuteSelected$
+  isCustomAttibuteSelected$ = this._ui.isCustomAttibuteSelected$;
+  isCustomExtensionSelected$ = this._ui.isCustomExtensionSelected$;
 
   attributes: Attribute[];
   platforms: Platform[] = [];

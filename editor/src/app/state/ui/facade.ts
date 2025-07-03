@@ -120,20 +120,30 @@ export class UiFacade {
     })
   );
 
+  isCustomExtensionSelected$ = this.selectedExtensions$.pipe(
+    map((selectedExtensions) => {
+      return (
+        selectedExtensions &&
+        selectedExtensions.length !== 0 &&
+        (selectedExtensions.length !== 1 || selectedExtensions[0] !== 'any')
+      );
+    })
+  );
+
   isCustomFilterSelected$ = combineLatest([
     this.isCustomAttibuteSelected$,
     this.getClassCheckedState('any'),
-    this.getExtensionCheckedState('any'),
+    this.isCustomExtensionSelected$,
   ]).pipe(
     map(
       ([
         isCustomAttibuteSelected,
         isAnyClassSelected,
-        isAnyExtensionSelected,
+        isCustomExtensionSelected,
       ]) =>
         isCustomAttibuteSelected ||
         !isAnyClassSelected ||
-        !isAnyExtensionSelected
+        isCustomExtensionSelected
     )
   );
 

@@ -712,7 +712,7 @@
   "input": {
     "0AB0": "while true\n    wait 0\n\n    if\n        is_key_pressed {keyCode} KeyCode.F8\n    then\n        print_help_formatted {text} \"~r~Key pressed!\"\n\n        \n        // wait for key release\n        while is_key_pressed {keyCode} KeyCode.F8\n            wait 0\n        end\n        \n        print_help_formatted {text} \"~g~Key released!\"\n    end\nend",
     "0ADC": "while true\n    wait 0\n    \n    if \n        test_cheat \"TEST\"\n    then\n        print_help_string {text} \"Cheat activated\"\n    end\nend",
-    "2880": "while\n    wait {time} 0 // other than 0 will cause is_key_just_pressed to miss some key presses\n\n    if\n        is_key_just_pressed {keyCode} KeyCode.A\n    then\n        print_help_string {text} \"Key pressed!\"\n    end\nend",
+    "2880": "while true\n    wait {time} 0 // other than 0 will cause is_key_just_pressed to miss some key presses\n\n    if\n        is_key_just_pressed {keyCode} KeyCode.A\n    then\n        print_help_string {text} \"Key pressed!\"\n    end\nend",
     "28F1": "while true\n    wait {time} 0\n    \n    int key\n    if\n        key = get_key_pressed_in_range {minKeyCode} KeyCode.Num0 {maxKeyCode} KeyCode.Num9\n    then\n        print_help_formatted {text} \"Key press: %c\" {args} key // many keycodes are same as their ASCII representation\n    \n        // wait for keys release\n        repeat\n            wait {time} 0\n        until not key = get_key_pressed_in_range {minKeyCode} KeyCode.Num0 {maxKeyCode} KeyCode.Num9\n    end \nend"
   },
   "math": {

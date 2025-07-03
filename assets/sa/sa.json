@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1751506293519,
-    "version": "0.970",
+    "last_update": 1751508146292,
+    "version": "0.971",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -47372,24 +47372,6 @@
         {
           "input": [
             {
-              "name": "keyCode",
-              "type": "KeyCode"
-            }
-          ],
-          "id": "0AB0",
-          "name": "IS_KEY_PRESSED",
-          "num_params": 1,
-          "class": "Pad",
-          "member": "IsKeyPressed",
-          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          }
-        },
-        {
-          "input": [
-            {
               "name": "",
               "type": "label"
             },
@@ -48141,24 +48123,6 @@
           "member": "GetNameOfVehicleModel",
           "attrs": {
             "is_static": true
-          }
-        },
-        {
-          "input": [
-            {
-              "name": "input",
-              "type": "string"
-            }
-          ],
-          "id": "0ADC",
-          "name": "TEST_CHEAT",
-          "num_params": 1,
-          "short_desc": "Returns true if the specified string of letters has been typed on the keyboard",
-          "class": "Pad",
-          "member": "TestCheat",
-          "attrs": {
-            "is_static": true,
-            "is_condition": true
           }
         },
         {
@@ -72496,6 +72460,42 @@
               "type": "KeyCode"
             }
           ],
+          "id": "0AB0",
+          "name": "IS_KEY_PRESSED",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "IsKeyPressed",
+          "short_desc": "Returns true if the player is pressing a keyboard button with the specified code",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "input",
+              "type": "string"
+            }
+          ],
+          "id": "0ADC",
+          "name": "TEST_CHEAT",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified string of letters has been typed on the keyboard",
+          "class": "Pad",
+          "member": "TestCheat",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
           "id": "28F0",
           "name": "IS_KEY_JUST_PRESSED",
           "num_params": 1,
@@ -72533,6 +72533,35 @@
           "attrs": {
             "is_condition": true,
             "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "minKeyCode",
+              "type": "KeyCode"
+            },
+            {
+              "name": "maxKeyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "output": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode",
+              "source": "var_any"
+            }
+          ],
+          "id": "28F2",
+          "name": "GET_KEY_JUST_PRESSED_IN_RANGE",
+          "num_params": 3,
+          "short_desc": "Gets code of first just pressed key in range between minKeyCode and maxKeyCode. If no key was pressed return value is unmodified and logical result is set to false",
+          "class": "Pad",
+          "member": "GetKeyJustPressedInRange",
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
           }
         }
       ]

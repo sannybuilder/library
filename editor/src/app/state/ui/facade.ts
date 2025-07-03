@@ -42,6 +42,8 @@ import {
   dismissHotkeysInfo,
 } from './actions';
 import * as selector from './selectors';
+import { combineLatest } from 'rxjs';
+import { defaultFilterState } from './reducer';
 
 @Injectable({ providedIn: 'root' })
 export class UiFacade {
@@ -84,6 +86,56 @@ export class UiFacade {
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
   isSnippetOnly$ = this.store$.select(selector.isSnippetOnly);
+  selectedAttributesOnly$ = this.store$.select(selector.selectedAttributesOnly);
+  selectedAttributesExcept$ = this.store$.select(
+    selector.selectedAttributesExcept
+  );
+  isCustomAttibuteSelected$ = combineLatest([
+    this.selectedAttributesOnly$,
+    this.selectedAttributesExcept$,
+  ]).pipe(
+    map(([selectedOnly, selectedExcept]) => {
+      const { selectedAttributesOnly, selectedAttributesExcept } =
+        defaultFilterState;
+
+      if (selectedOnly.length !== selectedAttributesOnly.length) {
+        return true;
+      }
+      for (const attr of selectedOnly) {
+        if (!selectedAttributesOnly.includes(attr)) {
+          return true;
+        }
+      }
+
+      if (selectedExcept.length !== selectedAttributesExcept.length) {
+        return true;
+      }
+      for (const attr of selectedExcept) {
+        if (!selectedAttributesExcept.includes(attr)) {
+          return true;
+        }
+      }
+
+      return false;
+    })
+  );
+
+  isCustomFilterSelected$ = combineLatest([
+    this.isCustomAttibuteSelected$,
+    this.getClassCheckedState('any'),
+    this.getExtensionCheckedState('any'),
+  ]).pipe(
+    map(
+      ([
+        isCustomAttibuteSelected,
+        isAnyClassSelected,
+        isAnyExtensionSelected,
+      ]) =>
+        isCustomAttibuteSelected ||
+        !isAnyClassSelected ||
+        !isAnyExtensionSelected
+    )
+  );
 
   getAttributeCheckedState(attribute: Attribute, modifier: Modifier) {
     return this.store$.select(

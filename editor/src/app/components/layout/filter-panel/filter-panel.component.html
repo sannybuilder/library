@@ -120,6 +120,12 @@
           aria-controls="collapseExtensions"
         >
           {{ "ui.filters.filterExtensions" | translate }}
+          <span
+            class="customized"
+            [title]="'ui.filters.customized' | translate"
+            *ngIf="(isExtensionChecked('any') | async) === false"
+          >
+          </span>
         </button>
       </h2>
     </div>
@@ -173,6 +179,12 @@
           aria-controls="collapseThree"
         >
           {{ "ui.filters.filterClasses" | translate }}
+          <span
+            class="customized"
+            [title]="'ui.filters.customized' | translate"
+            *ngIf="(isClassChecked('any') | async) === false"
+          >
+          </span>
         </button>
       </h2>
     </div>
@@ -240,6 +252,12 @@
           aria-controls="collapseAttrs"
         >
           {{ "ui.filters.filterAttributes" | translate }}
+          <span
+            class="customized"
+            [title]="'ui.filters.customized' | translate"
+            *ngIf="isCustomAttibuteSelected$ | async"
+          >
+          </span>
         </button>
       </h2>
     </div>

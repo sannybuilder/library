@@ -19,11 +19,11 @@ import { ExtensionsFacade, UiFacade } from '../../../state';
 import { filterAttributes } from '../../../utils';
 
 @Component({
-    selector: 'scl-filter-panel',
-    templateUrl: './filter-panel.component.html',
-    styleUrls: ['./filter-panel.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'scl-filter-panel',
+  templateUrl: './filter-panel.component.html',
+  styleUrls: ['./filter-panel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class FilterPanelComponent {
   private _game: Game;
@@ -74,6 +74,7 @@ export class FilterPanelComponent {
       uniqBy(orderBy(flatten(entities), ['type', 'name']), 'name')
     )
   );
+  isCustomAttibuteSelected$ = this._ui.isCustomAttibuteSelected$
 
   attributes: Attribute[];
   platforms: Platform[] = [];

@@ -70,7 +70,7 @@ export interface UiState {
   isSnippetOnly: boolean;
 }
 
-const defaultFilterState: {
+export const defaultFilterState: {
   searchTerm: string;
   selectedAttributesOnly: Attribute[];
   selectedAttributesExcept: Attribute[];

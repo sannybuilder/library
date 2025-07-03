@@ -121,6 +121,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   canGoBackInDecisionTree$ = this._tree.currentNode$.pipe(
     map((node) => node && node.id !== 'root')
   );
+  isCustomFilterSelected$ = this._ui.isCustomFilterSelected$
+
 
   command?: Command;
   oldCommand?: Command;

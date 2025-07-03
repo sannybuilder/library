@@ -4,10 +4,10 @@ while true
     wait {time} 0 // other than 0 will cause get_key_just_pressed_in_range to miss some key presses
     
     print_formatted_now {format} "Input text:~n~%s_" {time} 100 {args} buffer
-    
+        
     if
         int key = get_key_just_pressed_in_range {minKeyCode} KeyCode.Space {maxKeyCode} KeyCode.Z
     then
-        string_format {result} buffer {format} "%s%c" {args} key // append character
+        string_format {result} buffer {format} "%s%c" {args} buffer key // append character
     end
 end

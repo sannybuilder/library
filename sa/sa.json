@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1751580822024,
-    "version": "0.984",
+    "last_update": 1751644226974,
+    "version": "0.985",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -46651,6 +46651,23 @@
           "name": "DO_DEBUG_STUFF",
           "num_params": 0,
           "short_desc": "Increments an unused counter, likely used in the debug version of the game"
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "id": "2084",
+          "name": "PULL_KEY",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "PullKey",
+          "short_desc": "Simulates key release event",
+          "attrs": {
+            "is_static": true
+          }
         }
       ]
     },
@@ -72564,6 +72581,47 @@
             "is_condition": true
           },
           "class": "Pad"
+        },
+        {
+          "input": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode"
+            }
+          ],
+          "id": "2083",
+          "name": "PUSH_KEY",
+          "num_params": 1,
+          "class": "Pad",
+          "member": "PushKey",
+          "short_desc": "Simulates key press event",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "action",
+              "type": "ControllerAction"
+            }
+          ],
+          "output": [
+            {
+              "name": "keyCode",
+              "type": "KeyCode",
+              "source": "var_any"
+            }
+          ],
+          "id": "2085",
+          "name": "GET_CONTROLLER_KEY",
+          "num_params": 2,
+          "class": "Pad",
+          "member": "GetControllerKey",
+          "short_desc": "Returns key assigned to specified controller action",
+          "attrs": {
+            "is_static": true
+          }
         }
       ]
     },

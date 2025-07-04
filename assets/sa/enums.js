@@ -1019,6 +1019,7 @@ export const DefaultTaskAllocator = {
   "Random": 5
 };
 export const KeyCode = {
+  "None": -1,
   "LeftButton": 1,
   "RightButton": 2,
   "Cancel": 3,

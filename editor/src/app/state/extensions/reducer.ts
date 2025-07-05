@@ -75,14 +75,14 @@ export const extensionsReducer = createReducer(
         memo,
         {
           command: newCommand,
-          newExtension: name,
+          newExtension,
           oldExtension,
           ignoreVersionAndPlatform,
         }
       ) => {
         memo = upsertBy(
           memo,
-          (extension) => extension.name === name,
+          (extension) => extension.name === newExtension,
           'name',
           (e) => ({
             ...e,
@@ -109,10 +109,10 @@ export const extensionsReducer = createReducer(
                   : newCommand
             ),
           }),
-          () => ({ name, commands: [newCommand] })
+          () => ({ name: newExtension, commands: [newCommand] })
         );
 
-        if (name === oldExtension) {
+        if (newExtension === oldExtension) {
           return memo;
         }
 

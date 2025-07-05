@@ -787,6 +787,17 @@ export class CommandEditorComponent implements OnInit {
     this.updateErrors();
   }
 
+  addOutput() {
+    this.command.output ??= [];
+    this.command.output.push({
+      name: '',
+      type: PrimitiveType.any,
+      source: DEFAULT_OUTPUT_SOURCE,
+    });
+    this.command.num_params++;
+    this.updateErrors();
+  }
+
   deleteCommand() {
     this.delete.emit();
   }

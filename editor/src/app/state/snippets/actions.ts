@@ -19,7 +19,8 @@ export const loadSnippetsError = createAction('[snippets] load error');
 export const updateSnippet = createAction(
   '[snippets] update',
   props<{
-    extension: string;
+    oldExtension: string;
+    newExtension: string;
     command: Command;
     content: string;
     updateRelated: boolean;
@@ -28,5 +29,5 @@ export const updateSnippet = createAction(
 
 export const updateGameSnippet = createAction(
   '[snippets] update for the given game',
-  props<{ game: Game; extension: string; id: string; content: string }>()
+  props<{ game: Game; oldExtension: string; newExtension: string; id: string; content: string }>()
 );

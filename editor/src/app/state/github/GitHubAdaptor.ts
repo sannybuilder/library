@@ -10,7 +10,7 @@ export interface GitCommitPushOptions {
   repo: string;
   files: {
     path: string;
-    content: string | ArrayBuffer;
+    content: string | null;
   }[];
   ref: string;
   forceUpdate?: boolean;
@@ -70,7 +70,15 @@ const createTree = (
             type: 'blob',
           } as const;
         });
+    } else if (file.content === null) {
+      return Promise.resolve({
+        sha: null,
+        path: file.path,
+        mode: '100644',
+        type: 'blob',
+      } as const);
     }
+
     throw new Error(`This file can not handled: ${file}`);
   });
   return Promise.all(promises).then((files) => {

@@ -16,20 +16,31 @@ export class SnippetsFacade {
   }
 
   updateSnippet({
-    extension,
+    oldExtension,
+    newExtension,
     command,
     content,
     updateRelated,
   }: {
-    extension: string;
+    oldExtension: string;
+    newExtension: string;
     command: Command;
     content: string;
     updateRelated: boolean;
   }) {
-    return this.store$.dispatch(updateSnippet({ extension, command, content, updateRelated }));
+    return this.store$.dispatch(
+      updateSnippet({
+        oldExtension,
+        newExtension,
+        command,
+        content,
+        updateRelated,
+      })
+    );
   }
 
   loadSnippets(game: Game) {
     return this.store$.dispatch(loadSnippets({ game }));
   }
+
 }

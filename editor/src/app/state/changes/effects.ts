@@ -67,7 +67,7 @@ export class ChangesEffects {
       switchMap(([{ files }, accessToken]) => {
         return zip(
           ...files.map((file) => {
-            if (!isExtensionFile(file.path)) {
+            if (!isExtensionFile(file.path) || !file.content) {
               return of(file);
             }
             const game = gameByExtensionFile(file.path);
@@ -89,7 +89,7 @@ export class ChangesEffects {
                     const patch = diff.createPatch(
                       file.path,
                       snapshots[file.path].content,
-                      file.content
+                      file.content!
                     );
                     const newContent = JSON.stringify(response, null, 2);
                     return {

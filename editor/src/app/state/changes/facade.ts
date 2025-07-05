@@ -12,7 +12,6 @@ import {
   loadGitTree,
 } from './actions';
 import * as selector from './selectors';
-import { filter, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ChangesFacade {
@@ -52,7 +51,7 @@ export class ChangesFacade {
     );
   }
 
-  registerTextFileChange(fileName: string, content: string) {
+  registerTextFileChange(fileName: string, content: string | null) {
     this.store$.dispatch(registerTextFileChange({ fileName, content }));
   }
 

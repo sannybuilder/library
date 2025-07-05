@@ -17,13 +17,21 @@ export const snippetsReducer = createReducer(
     const games = getGameVariations(game);
     return games.reduce((m, v) => updateState(m, v, extensionSnippets), state);
   }),
-  on(updateGameSnippet, (state, { game, extension, id, content }) =>
-    updateState(state, game, {
-      [extension]: {
-        ...(state.extensionSnippets[game]?.[extension] ?? {}),
-        [id]: content,
-      },
-    })
+  on(
+    updateGameSnippet,
+    (state, { game, oldExtension, newExtension, id, content }) =>
+      updateState(state, game, {
+        // Remove old snippet
+        [oldExtension]: {
+          ...(state.extensionSnippets[game]?.[oldExtension] ?? {}),
+          [id]: undefined,
+        },
+        // Add new snippet
+        [newExtension]: {
+          ...(state.extensionSnippets[game]?.[newExtension] ?? {}),
+          [id]: content,
+        },
+      })
   )
 );
 

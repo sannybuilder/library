@@ -50,38 +50,47 @@ export class SnippetsEffects {
       ofType(updateSnippet),
       // distinctUntilChanged(isEqual),
       withLatestFrom(this._game.game$),
-      switchMap(([{ content, extension, command, updateRelated }, game]) => {
-        return this._extensions.getCommandSupportInfo(command, extension).pipe(
-          take(1),
-          switchMap((supportInfo?: GameSupportInfo[]) => {
-            if (
-              // Other games should not trigger cross game updates, nor should they be updated
-              !isOtherGame(game) &&
-              updateRelated
-            ) {
-              return getSameCommands(supportInfo, game)
-                .filter((d) => !isOtherGame(d.game))
-                .map((d) =>
-                  updateGameSnippet({
-                    game: d.game,
-                    content,
-                    extension,
-                    id: command.id || command.name,
-                  })
-                );
-            } else {
-              return [
-                updateGameSnippet({
-                  game,
-                  content,
-                  extension,
-                  id: command.id || command.name,
-                }),
-              ];
-            }
-          })
-        );
-      })
+      switchMap(
+        ([
+          { content, oldExtension, newExtension, command, updateRelated },
+          game,
+        ]) => {
+          return this._extensions
+            .getCommandSupportInfo(command, oldExtension)
+            .pipe(
+              take(1),
+              switchMap((supportInfo?: GameSupportInfo[]) => {
+                if (
+                  // Other games should not trigger cross game updates, nor should they be updated
+                  !isOtherGame(game) &&
+                  updateRelated
+                ) {
+                  return getSameCommands(supportInfo, game)
+                    .filter((d) => !isOtherGame(d.game))
+                    .map((d) =>
+                      updateGameSnippet({
+                        game: d.game,
+                        content,
+                        oldExtension,
+                        newExtension,
+                        id: command.id || command.name,
+                      })
+                    );
+                } else {
+                  return [
+                    updateGameSnippet({
+                      game,
+                      content,
+                      oldExtension,
+                      newExtension,
+                      id: command.id || command.name,
+                    }),
+                  ];
+                }
+              })
+            );
+        }
+      )
     )
   );
 
@@ -90,9 +99,14 @@ export class SnippetsEffects {
       this.actions$.pipe(
         ofType(updateGameSnippet),
         // distinctUntilChanged(isEqual),
-        tap(({ game, content, extension, id }) => {
-          const fileName = `${game}/snippets/${extension}/${id}.txt`;
+        tap(({ game, content, oldExtension, newExtension, id }) => {
+          const fileName = `${game}/snippets/${newExtension}/${id}.txt`;
           this._changes.registerTextFileChange(fileName, content);
+
+          if (oldExtension !== newExtension) {
+            const oldFileName = `${game}/snippets/${oldExtension}/${id}.txt`;
+            this._changes.registerTextFileChange(oldFileName, null);
+          }
         })
       ),
     { dispatch: false }

@@ -121,12 +121,11 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   canGoBackInDecisionTree$ = this._tree.currentNode$.pipe(
     map((node) => node && node.id !== 'root')
   );
-  isCustomFilterSelected$ = this._ui.isCustomFilterSelected$
-
+  isCustomFilterSelected$ = this._ui.isCustomFilterSelected$;
 
   command?: Command;
   oldCommand?: Command;
-  snippet?: string;
+  snippet?: string | null;
   oldSnippet?: string;
   extension?: string;
   oldExtension?: string;
@@ -236,6 +235,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onDeleteCommand(command: Command, game: Game) {
     this._extensions.markCommandsToDelete([command.name], game);
+    if (this.snippet !== undefined) {
+      this.snippet = null; // mark snippet to delete
+    }
     this._onSaveCommand(true);
   }
 
@@ -567,9 +569,13 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         updateRelated: this.updateRelatedCommands,
       });
     }
-    if (this.snippet !== this.oldSnippet) {
+    if (
+      this.snippet !== this.oldSnippet ||
+      this.extension !== this.oldExtension
+    ) {
       this._snippets.updateSnippet({
-        extension: this.extension!,
+        newExtension: this.extension!,
+        oldExtension: this.oldExtension!,
         command: this.command!,
         content: this.snippet!,
         updateRelated: this.updateRelatedCommands,

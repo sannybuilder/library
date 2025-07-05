@@ -19,50 +19,49 @@
 <div class="scroll-container">
   <div class="row mb-2">
     <div class="col-12 flex-row d-flex justify-content-end">
-      <button
-        [disabled]="!command.name"
-        class="btn btn-outline-secondary mr-2 dropdown-toggle"
-        data-toggle="dropdown"
-        data-offset="0,0"
-        aria-haspopup="true"
-        aria-expanded="false"
-        [title]="'ui.commandEditor.copyFromHint' | translate"
-      >
-        {{ "ui.commandEditor.copyFrom" | translate }}
-      </button>
-      <div class="dropdown-menu">
-        <span
-          class="dropdown-item"
-          *ngFor="let target of games"
-          (click)="copyFromCommand(target)"
-          >{{ target | gameTitle }}</span
+      <div>
+        <button
+          [disabled]="!command.name"
+          class="btn btn-outline-secondary mr-2 dropdown-toggle"
+          data-toggle="dropdown"
+          data-offset="0,0"
+          aria-haspopup="true"
+          aria-expanded="false"
+          [title]="'ui.commandEditor.copyFromHint' | translate"
         >
+          {{ "ui.commandEditor.copyFrom" | translate }}
+        </button>
+        <div class="dropdown-menu">
+          <span
+            class="dropdown-item"
+            *ngFor="let target of games"
+            (click)="copyFromCommand(target)"
+            >{{ target | gameTitle }}</span
+          >
+        </div>
       </div>
-      <button
-        *ngIf="canClone()"
-        [disabled]="isInvalid"
-        class="btn btn-outline-secondary mr-2 dropdown-toggle"
-        data-toggle="dropdown"
-        data-offset="0,0"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        {{ "ui.shared.clone" | translate }}
-      </button>
-      <div class="dropdown-menu">
-        <span
-          class="dropdown-item"
-          *ngFor="let target of cloneTargets"
-          (click)="cloneCommand(target)"
-          >{{ target | gameTitle }}</span
+
+      <div>
+        <button
+          *ngIf="canClone()"
+          [disabled]="isInvalid"
+          class="btn btn-outline-secondary mr-2 dropdown-toggle"
+          data-toggle="dropdown"
+          data-offset="0,0"
+          aria-haspopup="true"
+          aria-expanded="false"
         >
+          {{ "ui.shared.clone" | translate }}
+        </button>
+        <div class="dropdown-menu">
+          <span
+            class="dropdown-item"
+            *ngFor="let target of cloneTargets"
+            (click)="cloneCommand(target)"
+            >{{ target | gameTitle }}</span
+          >
+        </div>
       </div>
-      <button
-        class="btn btn-outline-secondary text-nowrap"
-        (click)="addInput()"
-      >
-        {{ "ui.commandEditor.addInput" | translate }}
-      </button>
       <scl-icon-button
         class="ml-3 text-danger"
         icon="delete"
@@ -285,13 +284,36 @@
 
   <ng-container cdkDropListGroup>
     <div
+      class="flex-row d-flex align-items-center justify-content-between mb-2"
+    >
+      <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
+      <button
+        class="btn btn-outline-secondary text-nowrap"
+        (click)="addInput()"
+        [title]="'ui.commandEditor.addInput' | translate"
+      >
+        <svg
+          style="margin-top: -3px"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-plus"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+          />
+        </svg>
+        {{ "ui.layout.new" | translate }}
+      </button>
+    </div>
+    <div
       cdkDropList
       [cdkDropListData]="command.input"
       [ngClass]="{ 'empty-list': !command.input?.length }"
       (cdkDropListDropped)="drop($event, SourceType.any)"
     >
-      <h5>{{ "ui.commandEditor.paramsSubtitle" | translate }}</h5>
-
       <div
         *ngFor="let param of command.input; let i = index"
         cdkDrag
@@ -367,12 +389,36 @@
     </div>
 
     <div
+      class="flex-row d-flex align-items-center justify-content-between mb-2"
+    >
+      <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
+      <button
+        class="btn btn-outline-secondary text-nowrap"
+        (click)="addOutput()"
+        [title]="'ui.commandEditor.addOutput' | translate"
+      >
+        <svg
+          style="margin-top: -3px"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-plus"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+          />
+        </svg>
+        {{ "ui.layout.new" | translate }}
+      </button>
+    </div>
+    <div
       cdkDropList
       [cdkDropListData]="command.output"
       [ngClass]="{ 'empty-list': !command.output?.length }"
       (cdkDropListDropped)="drop($event, SourceType.var_any)"
     >
-      <h5>{{ "ui.commandEditor.resultSubtitle" | translate }}</h5>
       <div
         *ngFor="let param of command.output; let i = index"
         cdkDrag
@@ -578,9 +624,7 @@
         </div>
         <div
           class="full-description"
-          [innerHTML]="
-            fullDescription[0] | markdown | sanitize
-          "
+          [innerHTML]="fullDescription[0] | markdown | sanitize"
         ></div>
       </div>
     </div>

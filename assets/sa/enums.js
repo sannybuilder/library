@@ -4025,3 +4025,9 @@ export const ControllerAction = {
   "TakeScreenShot": 56,
   "ShowMousePointerToggle": 57
 };
+export const ControllerAltKey = {
+  "Primary": 0,
+  "Secondary": 1,
+  "Tertiary": 2,
+  "Quaternary": 3
+};

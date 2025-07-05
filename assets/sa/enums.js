@@ -3977,7 +3977,7 @@ export const ControllerAction = {
   "PedSniperZoomIn": 8,
   "PedSniperZoomOut": 9,
   "VehicleEnterExit": 10,
-  "CameraChangeViewAllSituations": 11,
+  "CameraChange": 11,
   "PedJumping": 12,
   "PedSprint": 13,
   "PedLookbehind": 14,

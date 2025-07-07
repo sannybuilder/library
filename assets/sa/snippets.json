@@ -718,7 +718,7 @@
     "2083": "emulate_key_press {keyCode} KeyCode.W",
     "2084": "emulate_key_press {keyCode} KeyCode.W\nwait {time} 3000\nemulate_key_release {keyCode} KeyCode.W",
     "2085": "int key = get_controller_key {action} ControllerAction.PedJump {altKey} ControllerAltKey.Primary",
-    "2086": "debug_on // enable trace command\n\nwhile true\n    wait wait {time} 0 // other than 0 will miss some key presses\n    \n    if\n        int key = get_key_just_pressed_in_range {minKeyCode} KeyCode.Min {maxKeyCode} KeyCode.Max\n    then\n        longString name = \"???\"\n        name = get_key_name {keyCode} key\n        trace \"Key press: 0x%02X  %s\" key name\n    end\nend"
+    "2086": "debug_on // enable trace command\n\nwhile true\n    wait {time} 0 // other than 0 will miss some key presses\n    \n    if\n        int key = get_key_just_pressed_in_range {minKeyCode} KeyCode.Min {maxKeyCode} KeyCode.Max\n    then\n        longString name = \"???\"\n        name = get_key_name {keyCode} key\n        trace \"Key press: 0x%02X  %s\" key name\n    end\nend"
   },
   "math": {
     "2700": "int val = 0x100\nif\n    is_bit_set {number} val {bitIndex} 8 // 0-based indexing\nthen\n    ...\nend",

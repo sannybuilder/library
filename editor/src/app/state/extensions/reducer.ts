@@ -15,7 +15,6 @@ import {
   loadExtensionsError,
   loadExtensionsSuccess,
   loadSupportInfo,
-  markCommandsToDelete,
   updateGameCommands,
 } from './actions';
 import { sortBy, orderBy } from 'lodash';
@@ -31,7 +30,6 @@ export interface GameState {
   version?: string;
   supportInfo: SupportInfo;
   classesMeta: ClassMeta[];
-  commandsToDelete: string[];
 }
 export interface ExtensionsState {
   games: Partial<Record<Game, GameState>>;
@@ -54,7 +52,10 @@ export const extensionsReducer = createReducer(
   ),
   on(
     loadExtensionsSuccess,
-    (state, { game, extensions, version, lastUpdate, classes, viewContext }) => {
+    (
+      state,
+      { game, extensions, version, lastUpdate, classes, viewContext }
+    ) => {
       return updateState(state, game, {
         extensions: sortExtensions(extensions),
         entities: getEntities(extensions, classes, game, viewContext),
@@ -67,7 +68,11 @@ export const extensionsReducer = createReducer(
     }
   ),
   on(loadExtensionsError, (state, { game }) =>
-    updateState(state, game, { loading: false, loadingError: true, extensions: [] })
+    updateState(state, game, {
+      loading: false,
+      loadingError: true,
+      extensions: [],
+    })
   ),
   on(updateGameCommands, (state, { game, batch }) => {
     const extensions: Extension[] = batch.reduce(
@@ -75,14 +80,36 @@ export const extensionsReducer = createReducer(
         memo,
         {
           command: newCommand,
-          newExtension,
-          oldExtension,
+          extension,
+          shouldDelete,
           ignoreVersionAndPlatform,
         }
       ) => {
-        memo = upsertBy(
+        if (shouldDelete) {
+          // remove from previous collection
+          return upsertBy(
+            memo,
+            ({ name }) => name === extension,
+            'name',
+            (e) => {
+              const commands = upsertBy(
+                e.commands,
+                (command) =>
+                  commandMatcher(command, newCommand, ignoreVersionAndPlatform),
+                'id'
+              );
+              if (!commands.length) {
+                // remove previous collection if it is empty
+                return null;
+              }
+              return { ...e, commands };
+            }
+          );
+        }
+
+        return upsertBy(
           memo,
-          (extension) => extension.name === newExtension,
+          ({ name }) => name === extension,
           'name',
           (e) => ({
             ...e,
@@ -92,9 +119,7 @@ export const extensionsReducer = createReducer(
                 commandMatcher(command, newCommand, ignoreVersionAndPlatform),
               'id',
               (c) =>
-                state.games[game]?.commandsToDelete?.includes(newCommand.name)
-                  ? null
-                  : ignoreVersionAndPlatform
+                ignoreVersionAndPlatform
                   ? {
                       ...ensureOverload(newCommand, c),
                       id: c.id,
@@ -103,47 +128,24 @@ export const extensionsReducer = createReducer(
                     }
                   : ensureOverload(newCommand, c),
 
-              () =>
-                state.games[game]?.commandsToDelete?.includes(newCommand.name)
-                  ? null
-                  : newCommand
+              () => newCommand
             ),
           }),
-          () => ({ name: newExtension, commands: [newCommand] })
-        );
-
-        if (newExtension === oldExtension) {
-          return memo;
-        }
-
-        // remove from previous collection
-        return upsertBy(
-          memo,
-          (extension) => extension.name === oldExtension,
-          'name',
-          (e) => {
-            const commands = upsertBy(
-              e.commands,
-              (command) =>
-                commandMatcher(command, newCommand, ignoreVersionAndPlatform),
-              'id'
-            );
-            if (!commands.length) {
-              // remove previous collection if it is empty
-              return null;
-            }
-            return { ...e, commands };
-          }
+          () => ({ name: extension, commands: [newCommand] })
         );
       },
       state.games[game]?.extensions ?? []
     );
 
-    const entities = getEntities(extensions, state.games[game]?.classesMeta, game, ViewContext.Script);
+    const entities = getEntities(
+      extensions,
+      state.games[game]?.classesMeta,
+      game,
+      ViewContext.Script
+    );
     return updateState(state, game, {
       extensions: sortExtensions(extensions),
       entities,
-      commandsToDelete: [],
     });
   }),
   on(loadSupportInfo, (state, { data }) => {
@@ -163,11 +165,6 @@ export const extensionsReducer = createReducer(
         }, {} as Record<Game, GameState>),
         game as Game
       ),
-    });
-  }),
-  on(markCommandsToDelete, (state, { names, game }) => {
-    return updateState(state, game, {
-      commandsToDelete: names,
     });
   })
 );

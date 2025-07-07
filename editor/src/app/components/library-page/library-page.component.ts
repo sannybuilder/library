@@ -125,7 +125,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   command?: Command;
   oldCommand?: Command;
-  snippet?: string | null;
+  snippet?: string;
   oldSnippet?: string;
   extension?: string;
   oldExtension?: string;
@@ -215,9 +215,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  onSave(viewMode: ViewMode) {
+  onSave(game: Game, viewMode: ViewMode) {
     if (viewMode === ViewMode.EditCommand) {
-      this._onSaveCommand(false);
+      this._onSaveCommand(game);
     }
     if (viewMode === ViewMode.EditEnum) {
       this._onSaveEnum();
@@ -231,14 +231,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onCloneEnum(game: Game) {
     this._enums.cloneEnum({ enumToClone: this.enumToDisplayOrEdit!, game });
-  }
-
-  onDeleteCommand(command: Command, game: Game) {
-    this._extensions.markCommandsToDelete([command.name], game);
-    if (this.snippet !== undefined) {
-      this.snippet = null; // mark snippet to delete
-    }
-    this._onSaveCommand(true);
   }
 
   onCloneCommand(game: Game) {
@@ -556,26 +548,93 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return '';
   }
 
-  private _onSaveCommand(force: boolean) {
-    if (
-      force ||
-      !isEqual(this.command, this.oldCommand) ||
-      this.extension !== this.oldExtension
-    ) {
-      this._extensions.updateCommand({
-        newExtension: this.extension!,
-        oldExtension: this.oldExtension!,
-        command: omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
-        updateRelated: this.updateRelatedCommands,
+  isNewCommand(command: Command | undefined) {
+    return !command || !command.name;
+  }
+
+  onDeleteCommand(game: Game) {
+    const command = this.oldCommand;
+
+    if (this.isNewCommand(command)) {
+      // If the command has no name, it means it's a new command that hasn't been saved yet.
+      this._ui.stopEditOrDisplay();
+    } else {
+      this.deleteCommand(
+        omit(command, SEARCH_OPTIONS.highlightKey) as Command,
+        this.oldExtension!, // ignore possible extension change
+        game
+      );
+    }
+  }
+
+  deleteCommand(command: Command, extension: string, game: Game) {
+    this._extensions.deleteCommand({
+      command,
+      extension,
+      game,
+    });
+
+    if (this.snippet) {
+      this._snippets.deleteSnippet({
+        extension,
+        command,
       });
     }
-    if (
-      this.snippet !== this.oldSnippet ||
-      this.extension !== this.oldExtension
-    ) {
+
+    this._ui.stopEditOrDisplay();
+    this.updateRelatedCommands = true;
+  }
+
+  createCommand(command: Command, extension: string) {
+    this._extensions.updateCommand({
+      command,
+      extension,
+      shouldDelete: false,
+      updateRelated: false,
+    });
+
+    if (this.snippet) {
       this._snippets.updateSnippet({
-        newExtension: this.extension!,
-        oldExtension: this.oldExtension!,
+        command,
+        extension,
+        content: this.snippet,
+        updateRelated: false,
+      });
+    }
+
+    this._ui.stopEditOrDisplay();
+    this.updateRelatedCommands = true;
+  }
+
+  private _onSaveCommand(game: Game) {
+    if (this.isNewCommand(this.command)) {
+      this.createCommand(
+        omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
+        this.extension!
+      );
+      return;
+    }
+
+    if (
+      this.extension !== this.oldExtension ||
+      this.command?.name !== this.oldCommand?.name ||
+      this.command?.id !== this.oldCommand?.id
+    ) {
+      this.deleteCommand(this.oldCommand!, this.oldExtension!, game);
+      this.createCommand(this.command!, this.extension!);
+      return;
+    }
+
+    this._extensions.updateCommand({
+      extension: this.extension!,
+      command: omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
+      shouldDelete: false,
+      updateRelated: this.updateRelatedCommands,
+    });
+
+    if (this.snippet !== this.oldSnippet) {
+      this._snippets.updateSnippet({
+        extension: this.extension!,
         command: this.command!,
         content: this.snippet!,
         updateRelated: this.updateRelatedCommands,

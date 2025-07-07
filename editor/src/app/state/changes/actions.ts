@@ -15,7 +15,7 @@ export const registerExtensionsChange = createAction(
 
 export const registerTextFileChange = createAction(
   '[changes] register snippet',
-  props<{ fileName: string; content: string | null }>()
+  props<{ fileName: string; content: string }>()
 );
 
 export const registerEnumChange = createAction(
@@ -45,7 +45,7 @@ export const registerFileContent = createAction(
 
 export const validateAndWriteFiles = createAction(
   '[changes] validate and write files',
-  props<{ files: Array<{ path: string; content: string | null }> }>()
+  props<{ files: Array<{ path: string; content: string }> }>()
 );
 
 export const loadGitTree = createAction('[changes] load git tree');

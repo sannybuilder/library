@@ -15,23 +15,37 @@ export class SnippetsFacade {
     });
   }
 
+  deleteSnippet({
+    extension,
+    command,
+  }: {
+    extension: string;
+    command: Command;
+  }) {
+    return this.store$.dispatch(
+      updateSnippet({
+        extension,
+        command,
+        content: '',
+        updateRelated: false,
+      })
+    );
+  }
+
   updateSnippet({
-    oldExtension,
-    newExtension,
+    extension,
     command,
     content,
     updateRelated,
   }: {
-    oldExtension: string;
-    newExtension: string;
+    extension: string;
     command: Command;
     content: string;
     updateRelated: boolean;
   }) {
     return this.store$.dispatch(
       updateSnippet({
-        oldExtension,
-        newExtension,
+        extension,
         command,
         content,
         updateRelated,
@@ -42,5 +56,4 @@ export class SnippetsFacade {
   loadSnippets(game: Game) {
     return this.store$.dispatch(loadSnippets({ game }));
   }
-
 }

@@ -3,8 +3,8 @@ import { ClassMeta, Command, Extension, Game, SupportInfo, ViewContext } from '.
 
 export interface GameCommandUpdate {
   command: Command;
-  newExtension: string;
-  oldExtension: string;
+  extension: string;
+  shouldDelete: boolean;
   ignoreVersionAndPlatform: boolean;
 }
 
@@ -69,9 +69,4 @@ export const loadSupportInfo = createAction(
 
 export const loadSupportInfoError = createAction(
   '[extensions] load support info error',
-);
-
-export const markCommandsToDelete = createAction(
-  '[extensions] mark commands to delete',
-  props<{ names: string[], game: Game }>()
 );

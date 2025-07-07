@@ -8,7 +8,6 @@ import {
   cloneCommand,
   initSupportInfo,
   init,
-  markCommandsToDelete,
 } from './actions';
 import * as selector from './selectors';
 
@@ -26,7 +25,6 @@ export class ExtensionsFacade {
   version$ = this.store$.select(selector.version);
   supportInfo$ = this.store$.select(selector.supportInfo);
   classesMeta$ = this.store$.select(selector.classesMeta);
-  commandsToDelete$ = this.store$.select(selector.commandsToDelete);
   extensionTypes$ = this.store$.select(selector.extensionTypes);
 
   getGameExtensions(game: Game) {
@@ -62,15 +60,39 @@ export class ExtensionsFacade {
 
   constructor(private store$: Store) {}
 
+  deleteCommand({
+    command,
+    extension,
+    game,
+  }: {
+    command: Command;
+    extension: string;
+    game: Game;
+  }) {
+    this.store$.dispatch(
+      updateCommands({
+        batch: [
+          {
+            command,
+            extension,
+            shouldDelete: true,
+            ignoreVersionAndPlatform: false,
+          },
+        ],
+        updateRelated: false,
+      })
+    );
+  }
+
   updateCommand({
     command,
-    newExtension,
-    oldExtension,
+    extension,
+    shouldDelete,
     updateRelated,
   }: {
     command: Command;
-    newExtension: string;
-    oldExtension: string;
+    extension: string;
+    shouldDelete: boolean;
     updateRelated: boolean;
   }) {
     this.store$.dispatch(
@@ -78,8 +100,8 @@ export class ExtensionsFacade {
         batch: [
           {
             command,
-            newExtension,
-            oldExtension,
+            extension,
+            shouldDelete,
             ignoreVersionAndPlatform: false,
           },
         ],
@@ -139,7 +161,4 @@ export class ExtensionsFacade {
       .subscribe();
   }
 
-  markCommandsToDelete(names: string[], game: Game) {
-    this.store$.dispatch(markCommandsToDelete({ names, game }));
-  }
 }

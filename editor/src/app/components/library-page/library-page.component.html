@@ -538,7 +538,7 @@
             [disabled]="shouldDisableSaveButton(viewMode)"
             type="button"
             class="btn btn-outline-success"
-            (click)="onSave(viewMode)"
+            (click)="onSave(game, viewMode)"
           >
             {{ "ui.shared.save" | translate }}
           </button>
@@ -586,7 +586,7 @@
           [viewContext]="viewContext"
           [fullDescription]="getFullDescription() | async"
           (hasError)="editorHasError = $event"
-          (delete)="onDeleteCommand(command, game)"
+          (delete)="onDeleteCommand(game)"
           (clone)="onCloneCommand($event)"
           (copyFrom)="onCopyFromCommand($event)"
         ></scl-command-editor>

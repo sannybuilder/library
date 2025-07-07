@@ -10,7 +10,7 @@ export interface GitCommitPushOptions {
   repo: string;
   files: {
     path: string;
-    content: string | null;
+    content: string;
   }[];
   ref: string;
   forceUpdate?: boolean;
@@ -39,6 +39,14 @@ const createTree = (
 ) => {
   const promises = options.files.map((file) => {
     if (typeof file.content === 'string') {
+      if (!file.content) {
+        return Promise.resolve({
+          sha: null,
+          path: file.path,
+          mode: '100644',
+          type: 'blob',
+        } as const);
+      }
       return octokit.git
         .createBlob({
           owner: options.owner,
@@ -70,13 +78,6 @@ const createTree = (
             type: 'blob',
           } as const;
         });
-    } else if (file.content === null) {
-      return Promise.resolve({
-        sha: null,
-        path: file.path,
-        mode: '100644',
-        type: 'blob',
-      } as const);
     }
 
     throw new Error(`This file can not handled: ${file}`);

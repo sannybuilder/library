@@ -117,74 +117,59 @@ export class ExtensionsEffects {
   updateCommands$ = createEffect(() =>
     this._actions$.pipe(
       ofType(updateCommands),
-      withLatestFrom(this._game.game$, this._extensions.commandsToDelete$),
-      switchMap(([{ batch, updateRelated }, game, commandsToDelete]) => {
+      withLatestFrom(this._game.game$),
+      switchMap(([{ batch, updateRelated }, game]) => {
         return zip(
-          ...batch.map(({ command, newExtension, oldExtension }) => {
+          ...batch.map(({ command, extension, shouldDelete }) => {
             // find copies of this command in other games to propagate the changes
-            if (!commandsToDelete?.includes(command.name)) {
-              return this._extensions
-                .getCommandSupportInfo(command, oldExtension)
-                .pipe(
-                  withLatestFrom(
-                    this._extensions.getExtensionCommand({
-                      id: command.id || command.name,
-                      extension: oldExtension,
-                    })
-                  ),
-                  take(1),
-                  map(([supportInfo, oldCommand]) => {
-                    if (
-                      // Other games should not trigger cross game updates, nor should they be updated
-                      !isOtherGame(game) &&
-                      shouldUpdateOtherGames(command, oldCommand) &&
-                      updateRelated
-                    ) {
-                      return getSameCommands(supportInfo, game)
-                        .filter((d) => !isOtherGame(d.game))
-                        .map((d) => ({
-                          game: d.game,
-                          command,
-                          newExtension,
-                          oldExtension,
-                          ignoreVersionAndPlatform: d.game !== game,
-                        }));
-                    } else {
-                      return [
-                        {
-                          game,
-                          command,
-                          newExtension,
-                          oldExtension,
-                          ignoreVersionAndPlatform: false,
-                        },
-                      ];
-                    }
+
+            return this._extensions
+              .getCommandSupportInfo(command, extension)
+              .pipe(
+                withLatestFrom(
+                  this._extensions.getExtensionCommand({
+                    id: command.id || command.name,
+                    extension,
                   })
-                );
-            } else {
-              return this._extensions
-                .getCommandSupportInfo(command, oldExtension)
-                .pipe(
-                  take(1),
-                  map((supportInfo) => {
-                    // delete command only from this game
+                ),
+                take(1),
+                map(([supportInfo, oldCommand]) => {
+                  if (
+                    // delete command only from the current game
+                    !shouldDelete &&
+                    // Other games should not trigger cross game updates, nor should they be updated
+                    !isOtherGame(game) &&
+                    shouldUpdateOtherGames(command, oldCommand) &&
+                    updateRelated
+                  ) {
+                    return getSameCommands(supportInfo, game)
+                      .filter((d) => !isOtherGame(d.game))
+                      .map((d) => ({
+                        game: d.game,
+                        command,
+                        extension,
+                        shouldDelete,
+                        ignoreVersionAndPlatform: d.game !== game,
+                      }));
+                  } else {
                     return [
                       {
                         game,
                         command,
-                        newExtension,
-                        oldExtension,
+                        extension,
+                        shouldDelete,
                         ignoreVersionAndPlatform: false,
                       },
                       // also update supportinfo for other games where this command is present
-                      ...getSameCommands(supportInfo, game)
-                        .filter((d) => d.game !== game)
-                        .map((d) => ({ game: d.game })),
+                      ...(shouldDelete
+                        ? getSameCommands(supportInfo, game)
+                            .filter((d) => d.game !== game)
+                            .map((d) => ({ game: d.game }))
+                        : []),
                     ];
-                  })
-                );
-            }
+                  }
+                })
+              );
           })
         );
       }),
@@ -308,9 +293,9 @@ export class ExtensionsEffects {
               game,
               batch: affectedCommands.map(({ extension, command }) => ({
                 command,
+                extension,
+                shouldDelete: false,
                 ignoreVersionAndPlatform: isAffected,
-                oldExtension: extension,
-                newExtension: extension,
               })),
             }),
             ...otherGames.map((otherGame) =>
@@ -379,8 +364,8 @@ export class ExtensionsEffects {
                 platforms: GamePlatforms[game],
                 versions: GameVersions[game],
               },
-              newExtension: extension,
-              oldExtension: extension,
+              extension,
+              shouldDelete: false,
               ignoreVersionAndPlatform: false,
             },
           ],

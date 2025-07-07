@@ -21,7 +21,7 @@ import {
 
 type FileName = string;
 export interface ChangesState {
-  changes: Record<FileName, string | null>;
+  changes: Record<FileName, string>;
   snapshots: Record<FileName, { lastUpdate: number; content: string }>;
   github?: KoreFile;
   lastUpdate?: number;

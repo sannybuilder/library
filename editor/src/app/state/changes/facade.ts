@@ -51,7 +51,7 @@ export class ChangesFacade {
     );
   }
 
-  registerTextFileChange(fileName: string, content: string | null) {
+  registerTextFileChange(fileName: string, content: string) {
     this.store$.dispatch(registerTextFileChange({ fileName, content }));
   }
 

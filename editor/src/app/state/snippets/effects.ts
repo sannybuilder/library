@@ -52,11 +52,11 @@ export class SnippetsEffects {
       withLatestFrom(this._game.game$),
       switchMap(
         ([
-          { content, oldExtension, newExtension, command, updateRelated },
+          { content, extension, command, updateRelated },
           game,
         ]) => {
           return this._extensions
-            .getCommandSupportInfo(command, oldExtension)
+            .getCommandSupportInfo(command, extension)
             .pipe(
               take(1),
               switchMap((supportInfo?: GameSupportInfo[]) => {
@@ -71,8 +71,7 @@ export class SnippetsEffects {
                       updateGameSnippet({
                         game: d.game,
                         content,
-                        oldExtension,
-                        newExtension,
+                        extension,
                         id: command.id || command.name,
                       })
                     );
@@ -81,8 +80,7 @@ export class SnippetsEffects {
                     updateGameSnippet({
                       game,
                       content,
-                      oldExtension,
-                      newExtension,
+                      extension,
                       id: command.id || command.name,
                     }),
                   ];
@@ -99,14 +97,9 @@ export class SnippetsEffects {
       this.actions$.pipe(
         ofType(updateGameSnippet),
         // distinctUntilChanged(isEqual),
-        tap(({ game, content, oldExtension, newExtension, id }) => {
-          const fileName = `${game}/snippets/${newExtension}/${id}.txt`;
+        tap(({ game, content, extension, id }) => {
+          const fileName = `${game}/snippets/${extension}/${id}.txt`;
           this._changes.registerTextFileChange(fileName, content);
-
-          if (oldExtension !== newExtension) {
-            const oldFileName = `${game}/snippets/${oldExtension}/${id}.txt`;
-            this._changes.registerTextFileChange(oldFileName, null);
-          }
         })
       ),
     { dispatch: false }

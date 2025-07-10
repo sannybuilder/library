@@ -473,6 +473,7 @@
   },
   "audio": {
     "0AAC": "int snd = load_audio_stream {audioFileName} \"cleo/sound.mp3\"\nset_audio_stream_looped snd {state} true\nset_audio_stream_state snd {action} AudioStreamAction.Play",
+    "0AC1": "int snd = load_3d_audio_stream {audioFileName} \"cleo/sound.mp3\"\nset_audio_stream_looped snd {state} true\nset_play_3d_audio_stream_at_char snd {char} $scplayer\nset_audio_stream_state snd {action} AudioStreamAction.Play",
     "2500": "while is_audio_stream_playing 0@\n    wait 0\nend",
     "2501": "set_audio_stream_speed 0@ {speed} 0.25\nfloat duration = get_audio_stream_duration 0@\nprint_formatted_now \"It will take %f seconds to play this sound\" {time} 5000 {args} duration",
     "2503": "set_audio_stream_speed 0@ speed 1.0",

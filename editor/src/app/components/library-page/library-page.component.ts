@@ -625,12 +625,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
 
-    this._extensions.updateCommand({
-      extension: this.extension!,
-      command: omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
-      shouldDelete: false,
-      updateRelated: this.updateRelatedCommands,
-    });
+    if (!isEqual(this.command, this.oldCommand)) {
+      this._extensions.updateCommand({
+        extension: this.extension!,
+        command: omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
+        shouldDelete: false,
+        updateRelated: this.updateRelatedCommands,
+      });
+    }
 
     if (this.snippet !== this.oldSnippet) {
       this._snippets.updateSnippet({

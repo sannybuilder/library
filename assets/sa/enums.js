@@ -963,6 +963,7 @@ export const BombType = {
   "OnIgnitionActive": 5
 };
 export const RadioChannel = {
+  "NoRadio": -1,
   "PlaybackFM": 0,
   "KRose": 1,
   "KDST": 2,

@@ -1,14 +1,17 @@
 int targetActor
 if targetActor = GET_CHAR_PLAYER_IS_TARGETING $player1
 then
+    int targetScreenX, targetScreenY, myScreenX, myScreenY
+
     // get target screen coordinates
     float worldX, worldY, worldZ
     worldX, worldY, worldZ = GET_CHAR_COORDINATES targetActor
-    int targetScreenX, targetScreenY = SF_WORLD_COORDS_TO_WINDOW_SCREEN_COORDS {worldcoordx} worldX {worldcoordy} worldY {worldcoordz} worldZ
+
+    targetScreenX, targetScreenY = SF_WORLD_COORDS_TO_WINDOW_SCREEN_COORDS {worldcoordx} worldX {worldcoordy} worldY {worldcoordz} worldZ
 
     // get my screen coordinates
     worldX, worldY, worldZ = GET_CHAR_COORDINATES $scplayer
-    int myScreenX, myScreenY = SF_WORLD_COORDS_TO_WINDOW_SCREEN_COORDS {worldcoordx} worldX {worldcoordy} worldY {worldcoordz} worldZ
+    myScreenX, myScreenY = SF_WORLD_COORDS_TO_WINDOW_SCREEN_COORDS {worldcoordx} worldX {worldcoordy} worldY {worldcoordz} worldZ
 
     // draw a teal-colored line from me to target
     SF_D3D_DRAW_LINE {fromcoordx} myScreenX {fromcoordy} myScreenY {tocoordx} targetScreenX {tocoordy} targetScreenY {tickness} 2 {color} 0xFF00FFFF

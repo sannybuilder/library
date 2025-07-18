@@ -2,21 +2,20 @@ import { get, set, omit, cloneDeep, sortBy, uniqWith, isEqual } from 'lodash';
 import { Command, Game } from '../models';
 import { commandParams, isOpcode, normalizeId } from './command';
 
-type RangeTuple = [number, number]
+type RangeTuple = [number, number];
 
 type SearchResultMatch = {
-  indices: ReadonlyArray<RangeTuple>
-  key?: string
-  refIndex?: number
-  value?: string
-}
+  indices: ReadonlyArray<RangeTuple>;
+  key?: string;
+  refIndex?: number;
+  value?: string;
+};
 
 type SearchResult<T> = {
-  item: T
-  refIndex: number
-  score?: number
-  matches?: ReadonlyArray<SearchResultMatch>
-}
+  item: T;
+  score?: number;
+  matches?: ReadonlyArray<SearchResultMatch>;
+};
 
 export const SEARCH_OPTIONS = {
   keys: [
@@ -26,19 +25,29 @@ export const SEARCH_OPTIONS = {
     { name: 'short_desc', weight: 1.5 },
     { name: 'id', weight: 0.5 },
   ],
-  shouldSort: false,
-  threshold: 0.3,
-  location: 0,
-  distance: 500,
-  ignoreLocation: false,
-  minMatchCharLength: 3,
   highlightKey: '_highlight',
-  includeScore: true,
-  includeMatches: true,
-  useExtendedSearch: true,
 } as const;
 
 const OPCODE_WORDS = ['beef', 'cafe', 'dead', 'deaf', 'face', 'fade', 'feed'];
+const operators = [
+  '+',
+  '-',
+  '*',
+  '/',
+  '%',
+  '+=@',
+  '-=@',
+  '=#',
+  '==',
+  '>',
+  '>=',
+  '&',
+  '|',
+  '^',
+  '~',
+  '<<',
+  '>>',
+];
 
 type QueryFilter = (c: Command, query: string) => boolean;
 
@@ -113,6 +122,7 @@ function getQueryHandlers() {
     'contains:': ContainsHandler,
     'class:': (c, q) => Boolean(match(q, c.class)),
     'member:': (c, q) => Boolean(starts(q, c.member)),
+    'operator:': (c, q) => Boolean(match(q, c.operator)),
   };
 
   const entries = Object.entries(SpecialQueryHandlers);
@@ -202,6 +212,8 @@ function parseQuery(searchTerms: string) {
           bucket.push(`member:${s}`);
         } else if (isOpcode(s) && !OPCODE_WORDS.includes(s)) {
           bucket.push(`id:${s}`);
+        } else if (operators.includes(s)) {
+          bucket.push(`operator:${s}`);
         } else {
           if (s.includes(':')) {
             bucket.push(s);
@@ -239,51 +251,49 @@ function scoreResult(command: Command, filters: [QueryFilter, string][]) {
   const matches: SearchResultMatch[] = [];
   let score = 0;
 
-  SEARCH_OPTIONS.keys.forEach(
-    ({ name, weight = 1 }) => {
-      const prop = get(command, name);
-      if (!prop) {
-        return;
-      }
-
-      const indices: RangeTuple[] = [];
-      const lowerProp = prop.toLowerCase();
-      let usePct = 0;
-
-      for (const [handler, word] of filters) {
-        let index = lowerProp.indexOf(word.toLowerCase());
-
-        if (index === -1 || !word.length) {
-          // don't reorder results based on custom filters
-          if (handler !== ContainsHandler) {
-            // demote partial results
-            score += weight;
-          }
-
-          continue;
-        }
-        while (index !== -1) {
-          // don't reorder results based on custom filters
-          if (handler !== ContainsHandler) {
-            score -= weight / (index + 1); // lower's better
-          }
-          indices.push([index, index + word.length - 1]);
-          index = lowerProp.indexOf(word.toLowerCase(), index + 1);
-        }
-
-        // more consumed's better
-        usePct += word.length / prop.length;
-      }
-
-      score -= weight * usePct;
-
-      if (indices.length) {
-        matches.push({ indices, key: name as string, value: prop });
-      }
+  SEARCH_OPTIONS.keys.forEach(({ name, weight = 1 }) => {
+    const prop = get(command, name);
+    if (!prop) {
+      return;
     }
-  );
 
-  return { item: command, score, matches, refIndex: 0 };
+    const indices: RangeTuple[] = [];
+    const lowerProp = prop.toLowerCase();
+    let usePct = 0;
+
+    for (const [handler, word] of filters) {
+      let index = lowerProp.indexOf(word.toLowerCase());
+
+      if (index === -1 || !word.length) {
+        // don't reorder results based on custom filters
+        if (handler !== ContainsHandler) {
+          // demote partial results
+          score += weight;
+        }
+
+        continue;
+      }
+      while (index !== -1) {
+        // don't reorder results based on custom filters
+        if (handler !== ContainsHandler) {
+          score -= weight / (index + 1); // lower's better
+        }
+        indices.push([index, index + word.length - 1]);
+        index = lowerProp.indexOf(word.toLowerCase(), index + 1);
+      }
+
+      // more consumed's better
+      usePct += word.length / prop.length;
+    }
+
+    score -= weight * usePct;
+
+    if (indices.length) {
+      matches.push({ indices, key: name as string, value: prop });
+    }
+  });
+
+  return { item: command, score, matches };
 }
 
 export function exactSearch(list: Command[], searchTerms: string) {
@@ -313,11 +323,7 @@ export function partialSearch(list: Command[], searchTerms: string) {
   return handleHighlight(scored, options.highlightKey);
 }
 
-
-function handleHighlight(
-  result: SearchResult<any>[],
-  highlightKey: string
-) {
+function handleHighlight(result: SearchResult<any>[], highlightKey: string) {
   return result.map((matchObject) => {
     const item = cloneDeep(matchObject.item);
     item.score = matchObject.score;

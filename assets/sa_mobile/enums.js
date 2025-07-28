@@ -2073,3 +2073,7 @@ export const WidgetId = {
   "TattooPreview": 188,
   "SaveNotification": 189
 };
+export const HoldOrientation = {
+  "PedHeading": 1,
+  "Bone": 16
+};

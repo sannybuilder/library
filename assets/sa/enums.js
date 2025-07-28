@@ -4034,3 +4034,7 @@ export const ControllerAltKey = {
   "Tertiary": 2,
   "Quaternary": 3
 };
+export const HoldOrientation = {
+  "PedHeading": 1,
+  "Bone": 16
+};

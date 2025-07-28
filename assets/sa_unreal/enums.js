@@ -2230,3 +2230,7 @@ export const SwimState = {
   "Jump": 5,
   "JustEnteredWater": 6
 };
+export const HoldOrientation = {
+  "PedHeading": 1,
+  "Bone": 16
+};

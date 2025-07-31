@@ -348,3 +348,8 @@ export const ZoneType = {
   "OutOfTownFactory": 18,
   "AirportRunway": 19
 };
+export const MoveState = {
+  "Walk": 2,
+  "Run": 3,
+  "Sprint": 4
+};

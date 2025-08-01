@@ -1,0 +1,20 @@
+float pos[3]
+...pos = get_offset_from_char_in_world_coords $scplayer {offset} 0.0 5.0 0.0
+
+request_model {modelId} #HEALTH
+load_all_models_now
+int obj = create_object {modelId} #HEALTH {pos} ...pos
+mark_model_as_no_longer_needed {modelId} #HEALTH
+
+while true
+    wait {time} 0
+    
+    ...pos = get_char_coordinates $scplayer
+    if
+        slide_object obj {pos} ...pos {speed} 0.02 0.02 0.02 {collisionCheck} true
+    then
+        print_string {text} "~r~Stopped" {time} 100
+    else
+        print_string {text} "~g~Sliding..." {time} 100
+    end
+end

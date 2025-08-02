@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1753973544304,
-    "version": "0.90",
+    "last_update": 1754159148664,
+    "version": "0.91",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -6041,6 +6041,10 @@
             {
               "name": "z",
               "type": "float"
+            },
+            {
+              "name": "direction",
+              "type": "bool"
             }
           ],
           "output": [
@@ -6051,10 +6055,10 @@
             }
           ],
           "name": "CREATE_MISSION_TRAIN",
-          "num_params": 5,
+          "num_params": 6,
           "class": "Train",
           "member": "Create",
-          "short_desc": "Creates a script handled train from a predefined type (the type dictates how long the train is and the varieties of carriages) and sets the direction for the train to head in",
+          "short_desc": "Creates a script handled train from a predefined type (the type dictates how long the train is) and sets the direction for the train to head in",
           "attrs": {
             "is_static": true,
             "is_constructor": true
@@ -38556,7 +38560,7 @@
           ],
           "name": "SET_OBJECT_LIGHTS",
           "num_params": 2,
-          "short_desc": "Sets the light of the object",
+          "short_desc": "Sets the light of the object (there must be light sources in the object model itself). When setting state to false, nothing seems to happen",
           "class": "Object",
           "member": "SetLights"
         },
@@ -42120,7 +42124,8 @@
             }
           ],
           "name": "SETTIMERA",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Sets the time of timer A in milliseconds. The current time of this timer can be obtained using TIMERA"
         },
         {
           "input": [
@@ -42130,17 +42135,19 @@
             }
           ],
           "name": "SETTIMERB",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Sets the time of timer B in milliseconds. The current time of this timer can be obtained using TIMERB"
         },
         {
-          "name": "SETTIMERC",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
+              "name": "value",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SETTIMERC",
+          "num_params": 1,
+          "short_desc": "Sets the time of timer C in milliseconds. The current time of this timer can be obtained using TIMERC"
         },
         {
           "input": [
@@ -48744,35 +48751,38 @@
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "value",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "TIMERA",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Gets the current time of timer A in milliseconds, which was set with SETTIMERA"
         },
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "value",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "TIMERB",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Gets the current time of timer B in milliseconds, which was set with SETTIMERB"
         },
         {
-          "name": "TIMERC",
-          "num_params": 1,
           "output": [
             {
-              "name": "_p1",
+              "name": "value",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "TIMERC",
+          "num_params": 1,
+          "short_desc": "Gets the current time of timer C in milliseconds, which was set with SETTIMERC"
         },
         {
           "output": [

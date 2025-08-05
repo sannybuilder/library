@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1754159148664,
-    "version": "0.91",
+    "last_update": 1754412605347,
+    "version": "0.92",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -3076,11 +3076,11 @@
               "type": "Char"
             },
             {
-              "name": "animName0",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "animName1",
+              "name": "animName",
               "type": "string"
             },
             {
@@ -3102,7 +3102,12 @@
           ],
           "name": "BLEND_FROM_NM_WITH_ANIM",
           "num_params": 7,
-          "short_desc": "Blends from NM with an Animation"
+          "short_desc": "Blends from NM with an Animation",
+          "class": "Ragdoll",
+          "member": "BlendFromNmWithAnim",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4220,8 +4225,11 @@
           "name": "CHECK_NM_FEEDBACK",
           "num_params": 3,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Ragdoll",
+          "member": "CheckNmFeedback"
         },
         {
           "input": [
@@ -6122,7 +6130,12 @@
             }
           ],
           "name": "CREATE_NM_MESSAGE",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Ragdoll",
+          "member": "CreateNmMessage",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7769,7 +7782,7 @@
           ],
           "name": "DO_SCREEN_FADE_IN",
           "num_params": 1,
-          "short_desc": "Fades in the screen and turns on the sound of the game. Can be called only after DO_SCREEN_FADE_OUT",
+          "short_desc": "Fades in the screen and turns on the sound of the game after one second (regardless of timeMs). DO_SCREEN_FADE_IN_UNHACKED allows to specify any time",
           "class": "Camera",
           "member": "DoFadeIn",
           "attrs": {
@@ -7784,7 +7797,13 @@
             }
           ],
           "name": "DO_SCREEN_FADE_IN_UNHACKED",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Fades in the screen and turns on the sound of the game after the time specified in the timeMs",
+          "class": "Camera",
+          "member": "DoFadeInUnhacked",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7795,7 +7814,7 @@
           ],
           "name": "DO_SCREEN_FADE_OUT",
           "num_params": 1,
-          "short_desc": "Fades out the screen and turns off the sound of the game. To fade in the screen and turn on the sound call DO_SCREEN_FADE_IN",
+          "short_desc": "Fades in the screen and turns on the sound of the game after one second (regardless of timeMs). DO_SCREEN_FADE_OUT_UNHACKED allows to specify any time",
           "class": "Camera",
           "member": "DoFadeOut",
           "attrs": {
@@ -7810,7 +7829,13 @@
             }
           ],
           "name": "DO_SCREEN_FADE_OUT_UNHACKED",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Fades out the screen and turns off the sound of the game after the time specified in the timeMs",
+          "class": "Camera",
+          "member": "DoFadeOutUnhacked",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "DO_WEAPON_STUFF_AT_START_OF_2P_GAME",
@@ -14341,13 +14366,18 @@
         {
           "output": [
             {
-              "name": "_p1",
+              "name": "hour",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_HOURS_OF_DAY",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Clock",
+          "member": "GetHoursOfDay",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -16866,11 +16896,11 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "bone",
+              "name": "boneId",
               "type": "int"
             },
             {
@@ -16886,15 +16916,18 @@
               "type": "float"
             }
           ],
-          "name": "GET_PED_BONE_POSITION",
-          "num_params": 6,
           "output": [
             {
-              "name": "pPosition",
+              "name": "position",
               "type": "Vector3",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_PED_BONE_POSITION",
+          "num_params": 6,
+          "class": "Char",
+          "member": "GetBonePosition",
+          "short_desc": ""
         },
         {
           "input": [
@@ -20940,7 +20973,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -20948,7 +20981,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsAmbientSpeechPlaying"
         },
         {
           "input": [
@@ -32107,7 +32142,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -32132,7 +32167,9 @@
             }
           ],
           "name": "SAY_AMBIENT_SPEECH_WITH_VOICE",
-          "num_params": 6
+          "num_params": 6,
+          "class": "Char",
+          "member": "SayAmbientSpeechWithVoice"
         },
         {
           "input": [
@@ -32260,7 +32297,12 @@
             }
           ],
           "name": "SEND_NM_MESSAGE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Ragdoll",
+          "member": "SendNmMessage",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38116,11 +38158,11 @@
               "type": "Char"
             },
             {
-              "name": "animName0",
+              "name": "animGroup",
               "type": "string"
             },
             {
-              "name": "animName1",
+              "name": "animName",
               "type": "string"
             },
             {
@@ -38129,7 +38171,12 @@
             }
           ],
           "name": "SET_NM_ANIM_POSE",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Ragdoll",
+          "member": "SetNmAnimPose",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38143,7 +38190,12 @@
             }
           ],
           "name": "SET_NM_MESSAGE_BOOL",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Ragdoll",
+          "member": "SetNmMessageBool",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38157,7 +38209,12 @@
             }
           ],
           "name": "SET_NM_MESSAGE_FLOAT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Ragdoll",
+          "member": "SetNmMessageFloat",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38179,7 +38236,12 @@
             }
           ],
           "name": "SET_NM_MESSAGE_INSTANCE_INDEX",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Ragdoll",
+          "member": "SetNmMessageInstanceIndex",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38193,7 +38255,12 @@
             }
           ],
           "name": "SET_NM_MESSAGE_INT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Ragdoll",
+          "member": "SetNmMessageInt",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38207,7 +38274,12 @@
             }
           ],
           "name": "SET_NM_MESSAGE_STRING",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Ragdoll",
+          "member": "SetNmMessageString",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -38229,7 +38301,12 @@
             }
           ],
           "name": "SET_NM_MESSAGE_VEC3",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Ragdoll",
+          "member": "SetNmMessageVec3",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -49715,13 +49792,19 @@
           ],
           "output": [
             {
-              "name": "_p4",
+              "name": "magnitude",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "VMAG",
-          "num_params": 4
+          "num_params": 4,
+          "short_desc": "Gets the magnitude (length) of a vector",
+          "class": "Math",
+          "member": "Vmag",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -49740,13 +49823,19 @@
           ],
           "output": [
             {
-              "name": "_p4",
+              "name": "magnitude",
               "type": "float",
               "source": "var_any"
             }
           ],
           "name": "VMAG2",
-          "num_params": 4
+          "num_params": 4,
+          "short_desc": "Gets the magnitude (length) of a vector",
+          "class": "Math",
+          "member": "Vmag2",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [

@@ -1,0 +1,13 @@
+// Teleports the player to the tracks and creates a moving train nearby
+
+PlayerChar.setCoordinatesNoOffset(1392.1, 779.0, 47.7);
+
+Streaming.RequestModel(Text.GetHashKey("subway_lo"));
+while (!Streaming.HasModelLoaded(Text.GetHashKey("subway_lo"))) {
+	wait(0);
+}
+let myTrain = Train.Create(0, 1402.1, 810.9, 47.8, false);
+Streaming.MarkModelAsNoLongerNeeded(Text.GetHashKey("subway_lo"));
+
+myTrain.setSpeed(10.0);
+myTrain.setCruiseSpeed(10.0);

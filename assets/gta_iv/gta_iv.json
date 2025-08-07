@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1754489057564,
-    "version": "0.94",
+    "last_update": 1754587532893,
+    "version": "0.95",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -200,7 +200,8 @@
           "member": "ActivateReplayMenu",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Activates the video editor"
         },
         {
           "name": "ACTIVATE_SAVE_MENU",
@@ -11564,8 +11565,8 @@
           ],
           "output": [
             {
-              "name": "status",
-              "type": "int",
+              "name": "lockStatus",
+              "type": "CarLock",
               "source": "var_any"
             }
           ],
@@ -24277,7 +24278,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -24285,7 +24286,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsFleeing"
         },
         {
           "input": [
@@ -24985,8 +24988,12 @@
           "name": "IS_REPLAY_SAVING",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsReplaySaving",
+          "short_desc": "Returns true if a game clip is currently being saved for the video editor"
         },
         {
           "name": "IS_REPLAY_SYSTEM_ACTIVE",
@@ -27104,8 +27111,8 @@
               "type": "Car"
             },
             {
-              "name": "value",
-              "type": "int"
+              "name": "lockStatus",
+              "type": "CarLock"
             }
           ],
           "name": "LOCK_CAR_DOORS",
@@ -32628,7 +32635,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -32637,7 +32644,10 @@
             }
           ],
           "name": "SET_BLOCKING_OF_NON_TEMPORARY_EVENTS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetBlockingOfNonTemporaryEvents",
+          "short_desc": "Prevents the character from reacting to standard events (such as gunshots)"
         },
         {
           "input": [
@@ -46645,19 +46655,19 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "vehicle",
               "type": "Car"
             },
             {
-              "name": "_p3",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "z",
               "type": "float"
             }
           ],
@@ -48192,11 +48202,11 @@
               "type": "Char"
             },
             {
-              "name": "_p3",
+              "name": "radius",
               "type": "float"
             },
             {
-              "name": "duration",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -48255,11 +48265,11 @@
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "radius",
               "type": "float"
             },
             {
-              "name": "duration",
+              "name": "time",
               "type": "int"
             }
           ],

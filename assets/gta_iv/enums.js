@@ -377,3 +377,11 @@ export const PedBone = {
   "RightForearm": 1225,
   "RightHand": 1232
 };
+export const CarLock = {
+  "NotUsed": 0,
+  "Unlocked": 1,
+  "Locked": 2,
+  "LockoutPlayerOnly": 3,
+  "LockedPlayerInside": 4,
+  "LockedPlayerCanBreakIn": 7
+};

@@ -11,9 +11,6 @@ import { Directive, HostListener, Renderer2 } from '@angular/core';
   standalone: false,
 })
 export class CopyOnClickDirective {
-  private readonly COPY_SUCCESS_CLASS = 'copy-success';
-  private readonly INDICATOR_DURATION = 2000; // 2 seconds
-
   constructor(private renderer: Renderer2) {}
 
   @HostListener('click', ['$event'])
@@ -32,12 +29,14 @@ export class CopyOnClickDirective {
   }
 
   private showCopyIndicator(element: HTMLElement): void {
+    const COPY_SUCCESS_CLASS = 'copy-success';
+    const INDICATOR_DURATION = 2000; // 2 seconds
     // Add the success class for visual feedback
-    this.renderer.addClass(element, this.COPY_SUCCESS_CLASS);
+    this.renderer.addClass(element, COPY_SUCCESS_CLASS);
 
     // Remove the class after the specified duration
     setTimeout(() => {
-      this.renderer.removeClass(element, this.COPY_SUCCESS_CLASS);
-    }, this.INDICATOR_DURATION);
+      this.renderer.removeClass(element, COPY_SUCCESS_CLASS);
+    }, INDICATOR_DURATION);
   }
 }

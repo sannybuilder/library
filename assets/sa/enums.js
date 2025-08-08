@@ -360,10 +360,19 @@ export const CameraMode = {
   "AimWeaponAttached": 65
 };
 export const HudObject = {
+  "None": -1,
+  "Weapon": 0,
+  "Clock": 1,
+  "Score": 2,
   "Armor": 3,
   "Health": 4,
+  "Wanted": 5,
+  "ZoneName": 6,
+  "CarName": 7,
   "Radar": 8,
-  "Breathbar": 10
+  "Blip": 9,
+  "Breath": 10,
+  "BreathBar": 10
 };
 export const ExplosionType = {
   "Grenade": 0,

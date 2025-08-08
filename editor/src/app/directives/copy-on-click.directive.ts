@@ -1,5 +1,4 @@
 import { Directive, HostListener, Renderer2 } from '@angular/core';
-import { Clipboard } from '@angular/cdk/clipboard';
 
 /**
  * Attribute directive that delegates click handling to child elements.
@@ -8,17 +7,14 @@ import { Clipboard } from '@angular/cdk/clipboard';
  * Shows a temporary visual indicator when copy is successful.
  */
 @Directive({
-  selector: '[copyOnChildClick]',
-  standalone: false
+  selector: '[copyOnClick]',
+  standalone: false,
 })
-export class CopyOnChildClickDirective {
+export class CopyOnClickDirective {
   private readonly COPY_SUCCESS_CLASS = 'copy-success';
   private readonly INDICATOR_DURATION = 2000; // 2 seconds
 
-  constructor(
-    private clipboard: Clipboard,
-    private renderer: Renderer2
-  ) {}
+  constructor(private renderer: Renderer2) {}
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
@@ -29,23 +25,19 @@ export class CopyOnChildClickDirective {
 
     const textToCopy = target.getAttribute('data-copy-text');
     if (textToCopy && textToCopy.length > 0) {
-      const success = this.clipboard.copy(textToCopy);
-      
-      if (success) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
         this.showCopyIndicator(target);
-      }
+      });
     }
   }
 
   private showCopyIndicator(element: HTMLElement): void {
     // Add the success class for visual feedback
     this.renderer.addClass(element, this.COPY_SUCCESS_CLASS);
-    
+
     // Remove the class after the specified duration
     setTimeout(() => {
       this.renderer.removeClass(element, this.COPY_SUCCESS_CLASS);
     }, this.INDICATOR_DURATION);
   }
 }
-
-

@@ -150,6 +150,7 @@ import { of } from 'rxjs';
 import { MapPageComponent } from './components/map-page/map-page.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapViewComponent } from './components/maps/map-view/map-view.component';
+import { CopyOnChildClickDirective } from './directives/copy-on-child-click.directive';
 import { RoadSwitchComponent } from './components/maps/road-switch/road-switch.component';
 
 class CustomTranslateLoader extends TranslateHttpLoader {
@@ -255,7 +256,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     HotkeysInfoComponent,
     GameLinksComponent,
     MapViewComponent,
-    RoadSwitchComponent
+    RoadSwitchComponent,
+    CopyOnChildClickDirective
   ],
   imports: [
     BrowserModule,

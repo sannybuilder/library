@@ -4068,21 +4068,3 @@ export const PedBoneId = {
   "Neck": 17,
   "Jaw": 18
 };
-export const HudColour = {
-  "Red": 0,
-  "Green": 1,
-  "DarkBlue": 2,
-  "LightBlue": 3,
-  "NewBlue": 4,
-  "White": 5,
-  "Black": 6,
-  "Yellow": 7,
-  "Purple": 8,
-  "Grey": 9,
-  "DarkRed": 10,
-  "DarkGreen": 11,
-  "LightYellow": 12,
-  "DarkBlueFrontend": 13,
-  "DarkBlueRadar": 14,
-  "EntryExitYellow": 15
-};

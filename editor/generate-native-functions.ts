@@ -16,8 +16,10 @@ export function run(inFile: string, game: Game, outFile: string) {
 
   console.log(`Generating native functions from ${inFile}`);
 
-  const { extensions } = loadFile(inFile);
-  const lines = [];
+  const { extensions, meta } = loadFile(inFile);
+  const lines = [
+    `// This file is auto-generated from ${meta.url} v${meta.version}`,
+  ];
   const names = new Set<string>();
 
   for (const { name, commands } of extensions) {
@@ -37,7 +39,10 @@ export function run(inFile: string, game: Game, outFile: string) {
 
   function loadFile(path: string) {
     const file = readFileSync(path);
-    const content: { extensions: Extension[] } = JSON.parse(file);
+    const content: {
+      extensions: Extension[];
+      meta: { version: string; url: string };
+    } = JSON.parse(file);
 
     return content;
   }

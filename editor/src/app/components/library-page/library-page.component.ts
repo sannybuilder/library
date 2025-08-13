@@ -553,14 +553,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onDeleteCommand(game: Game) {
-    const command = this.oldCommand;
-
-    if (this.isNewCommand(command)) {
+    if (this.isNewCommand(this.oldCommand)) {
       // If the command has no name, it means it's a new command that hasn't been saved yet.
       this._ui.stopEditOrDisplay();
     } else {
       this.deleteCommand(
-        omit(command, SEARCH_OPTIONS.highlightKey) as Command,
+        this.oldCommand!,
         this.oldExtension!, // ignore possible extension change
         game
       );
@@ -607,15 +605,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private _onSaveCommand(game: Game) {
-    delete this.command?.attrs?._unverified;
-
-    if (this.isNewCommand(this.command)) {
-      this.createCommand(
-        omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
-        this.extension!
-      );
+    if (this.isNewCommand(this.oldCommand)) {
+      this.createCommand(this.command!, this.extension!);
       return;
     }
+
+    delete this.command?.attrs?._unverified;
 
     if (
       this.extension !== this.oldExtension ||

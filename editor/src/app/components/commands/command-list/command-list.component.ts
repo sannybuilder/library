@@ -23,11 +23,11 @@ import {
 import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 
 @Component({
-    selector: 'scl-command-list',
-    templateUrl: './command-list.component.html',
-    styleUrls: ['./command-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'scl-command-list',
+  templateUrl: './command-list.component.html',
+  styleUrls: ['./command-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CommandListComponent {
   ViewContext = ViewContext;

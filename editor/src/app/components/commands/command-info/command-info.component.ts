@@ -70,6 +70,8 @@ export class CommandInfoComponent {
       this.command.versions?.filter((p) => p !== Version.Any) ?? [];
   }
 
+  @Input() canEdit: boolean;
+
   get command(): Command {
     return this._command;
   }

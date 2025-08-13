@@ -107,6 +107,7 @@ import {
   CopyButtonComponent,
   HotkeysInfoComponent,
   GameLinksComponent,
+  UnverifiedComponent,
 } from './components/common';
 
 import {
@@ -257,7 +258,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     GameLinksComponent,
     MapViewComponent,
     RoadSwitchComponent,
-    CopyOnClickDirective
+    CopyOnClickDirective,
+    UnverifiedComponent,
   ],
   imports: [
     BrowserModule,

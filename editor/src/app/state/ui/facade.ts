@@ -40,6 +40,7 @@ import {
   displayFilters,
   displayDownloads,
   dismissHotkeysInfo,
+  verifyCommand,
 } from './actions';
 import * as selector from './selectors';
 import { combineLatest } from 'rxjs';
@@ -309,5 +310,9 @@ export class UiFacade {
 
   dismissHotkeysInfo() {
     this.store$.dispatch(dismissHotkeysInfo());
+  }
+
+  verifyCommand() {
+    this.store$.dispatch(verifyCommand());
   }
 }

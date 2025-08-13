@@ -112,3 +112,5 @@ export const toggleSnippetOnlySearch = createAction('[ui] toggle snippet only se
 export const toggleFunctionDeclaration = createAction('[ui] toggle function declaration');
 
 export const dismissHotkeysInfo = createAction('[ui] dismiss hotkeys info');
+
+export const verifyCommand = createAction('[ui] verify command');

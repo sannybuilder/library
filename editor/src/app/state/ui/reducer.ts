@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { intersection, partition, without } from 'lodash';
+import { intersection, omit, partition, without } from 'lodash';
 
 import {
   Command,
@@ -38,7 +38,9 @@ import {
   displayFilters,
   displayDownloads,
   dismissHotkeysInfo,
+  verifyCommand,
 } from './actions';
+import { commandToDisplayOrEdit } from './selectors';
 
 export interface GameState {
   selectedExtensions: Array<string | 'any'>;
@@ -295,7 +297,19 @@ export const uiReducer = createReducer(
   on(dismissHotkeysInfo, (state) => ({
     ...state,
     isHotkeyInfoDismissed: true,
-  }))
+  })),
+  on(verifyCommand, (state) => {
+    if (state.commandToDisplayOrEdit) {
+      return {
+        ...state,
+        commandToDisplayOrEdit: {
+          ...state.commandToDisplayOrEdit,
+          attrs: omit(state.commandToDisplayOrEdit.attrs, '_unverified'),
+        },
+      };
+    }
+    return state;
+  })
 );
 
 function updateState(state: UiState, game: Game, newState: Partial<GameState>) {

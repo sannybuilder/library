@@ -120,8 +120,11 @@
                   </a>
                 </ng-container>
 
-                <ng-container *ngIf="row.command.attrs._unverified">
-                  <code class="platform-badge badge-spacing red">
+                <ng-container *ngIf="row.command.attrs?._unverified">
+                  <code
+                    class="platform-badge badge-spacing red"
+                    [title]="'ui.attributes._unverified' | translate"
+                  >
                     {{ 'ui.shared.unverified' | translate }}
                   </code>
                 </ng-container>

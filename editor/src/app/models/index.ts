@@ -9,6 +9,7 @@ export interface Attr {
   is_static: boolean;
   is_overload: boolean;
   is_positional: boolean;
+  _unverified: boolean;
 }
 
 export type Attribute = keyof Attr;

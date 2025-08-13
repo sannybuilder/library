@@ -607,7 +607,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private _onSaveCommand(game: Game) {
-    // @ts-ignore
     delete this.command?.attrs?._unverified;
 
     if (this.isNewCommand(this.command)) {

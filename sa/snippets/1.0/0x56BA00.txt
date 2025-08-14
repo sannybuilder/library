@@ -1,0 +1,22 @@
+// inputs
+float fromCoord[3], toCoord[3]
+fromCoord[0] = 1023.0
+fromCoord[1] = 218.13
+fromCoord[2] = 40.0
+toCoord[0] = 1015.0
+toCoord[1] = 220.13
+toCoord[2] = 30.0
+
+// outputs
+float out_CollisionPoint[3]
+int out_CollidedEntity
+
+int fromCoordPtr = get_var_pointer fromCoord
+int toCoordPtr = get_var_pointer toCoord
+int collisionPointPtr = get_var_pointer out_CollisionPoint
+int collidedEntityPtr = get_var_pointer out_CollidedEntity
+
+int isCollidingSomething = CWorld_ProcessLineOfSight(fromCoordPtr, toCoordPtr, collisionPointPtr, collidedEntityPtr, isBuilding, isVehicle, isPed, isObject, isParticle, ignoreSeeThroughStuff, ignoreSomeObjectsForCamera, ignoreShootThroughStuff)
+if isCollidingSomething == true
+then print_formatted_now "Obstacle detected between two points:~n~Entity: %p~n~%f %f %f" 100 out_CollidedEntity ...out_CollisionPoint
+end

@@ -1,4 +1,4 @@
-// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.103
+// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.104
 /// Sets the current vector to the sum of two other vectors
 function CVector_Add<thiscall, 0x40FDD0>(self: int {CVector}, vector1: int {CVector}, vector2: int {CVector})
 /// Initializes a CEntity struct
@@ -22,8 +22,11 @@ function CGangWars_EndGangWar<cdecl, 0x4464C0>()
 /// Removes all CarGenerators from the specified iplStream
 function CTheCarGenerators_RemoveCarGenerators<cdecl, 0x6F3240>(iplStream: int)
 function C_PcSave_PopulateSlotInfo<thiscall, 0x619140>(self: int {C_PcSave})
-function C_PcSave_DeleteSlot<thiscall, 0x6190D0>(self: int {C_PcSave}, slot: int): int
+/// Deletes a save file from the default save directory
+function C_PcSave_DeleteSlot<thiscall, 0x6190D0>(self: int {C_PcSave}, slot: int)
+/// Creates a new save file in the default save directory and returns 0 if the save was successful, or 2 otherwise
 function C_PcSave_SaveSlot<thiscall, 0x619060>(self: int {C_PcSave}, slot: int): int
+/// Changes the default directory of save files
 function C_PcSave_SetSaveDirectory<cdecl, 0x619040>(path: int)
 function C3dMarker_AddMarker<thiscall, 0x722230>(self: int {C3dMarker}, id: int, type: int, size: float, red: int, green: int, blue: int, alpha: int, pulsePeriod: int, pulseFraction: float, rotateRate: int): int
 function C3dMarker_DeleteMarkerObject<thiscall, 0x722390>(self: int {C3dMarker})
@@ -5342,7 +5345,8 @@ function IKChainManager_c_PointArm<thiscall, 0x618B60>(self: int {IKChainManager
 function CGenericGameStorage_InitRadioStationPositionList<cdecl, 0x618E70>()
 function CGenericGameStorage_DoGameSpecificStuffAfterSucessLoad<cdecl, 0x618E90>()
 function CGenericGameStorage_DoGameSpecificStuffBeforeSave<cdecl, 0x618F50>()
-function C_PcSave_GenerateGameFilename<thiscall, 0x6190A0>(self: int {C_PcSave}, slot: int {int32}, out: int {char*})
+/// Creates a name for the save file using the default save directory and the given slot and stores the result in the provided buffer
+function C_PcSave_GenerateGameFilename<thiscall, 0x6190A0>(self: int {C_PcSave}, slot: int, buffer: string)
 function CPlayerRelationshipRecorder_ctor<thiscall, 0x61A130>(self: int {CPlayerRelationshipRecorder}): int {CPlayerRelationshipRecorder}
 function CPlayerRelationshipRecorder_ClearRelationshipWithPlayer<thiscall, 0x61A150>(self: int {CPlayerRelationshipRecorder}, ped: int {CPed*})
 function CPlayerRelationshipRecorder_AddRelationship<thiscall, 0x61A180>(self: int {CPlayerRelationshipRecorder}, ped: int {CPed*}, value: int {int32})

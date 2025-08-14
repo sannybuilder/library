@@ -1,0 +1,9 @@
+int s_PcSaveHelper = 0xC17034
+const slot = 0 // first save slot
+
+// change default save directory
+int save_path = allocate_memory 256
+resolve_filepath {path} "user:\\new_save_dir" save_path
+fs.CreateDirectory(save_path)
+C_PcSave_SetSaveDirectory(save_path)
+free_memory {address} save_path

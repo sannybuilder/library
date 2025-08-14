@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755116704168,
-    "version": "0.103",
+    "last_update": 1755147948522,
+    "version": "0.104",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -237,10 +237,27 @@
           }
         },
         {
+          "input": [
+            {
+              "name": "self",
+              "type": "C_PcSave"
+            },
+            {
+              "name": "slot",
+              "type": "int"
+            }
+          ],
           "name": "0x6190D0",
           "class": "C_PcSave",
           "member": "DeleteSlot",
           "cc": "thiscall",
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Deletes a save file from the default save directory"
+        },
+        {
           "input": [
             {
               "name": "self",
@@ -257,53 +274,29 @@
               "type": "int"
             }
           ],
-          "num_params": 3,
-          "attrs": {
-            "_unverified": true
-          }
-        },
-        {
           "name": "0x619060",
           "class": "C_PcSave",
           "member": "SaveSlot",
           "cc": "thiscall",
-          "input": [
-            {
-              "name": "self",
-              "type": "C_PcSave"
-            },
-            {
-              "name": "slot",
-              "type": "int"
-            }
-          ],
-          "output": [
-            {
-              "name": "result",
-              "type": "int"
-            }
-          ],
           "num_params": 3,
-          "attrs": {
-            "_unverified": true
-          }
+          "short_desc": "Creates a new save file in the default save directory and returns 0 if the save was successful, or 2 otherwise"
         },
         {
-          "name": "0x619040",
-          "class": "C_PcSave",
-          "member": "SetSaveDirectory",
-          "cc": "cdecl",
           "input": [
             {
               "name": "path",
               "type": "int"
             }
           ],
+          "name": "0x619040",
+          "class": "C_PcSave",
+          "member": "SetSaveDirectory",
+          "cc": "cdecl",
           "num_params": 1,
           "attrs": {
-            "is_static": true,
-            "_unverified": true
-          }
+            "is_static": true
+          },
+          "short_desc": "Changes the default directory of save files"
         },
         {
           "name": "0x722230",
@@ -121046,8 +121039,6 @@
           }
         },
         {
-          "name": "0x6190A0",
-          "num_params": 3,
           "input": [
             {
               "name": "self",
@@ -121055,19 +121046,19 @@
             },
             {
               "name": "slot",
-              "type": "int32"
+              "type": "int"
             },
             {
-              "name": "out",
-              "type": "char*"
+              "name": "buffer",
+              "type": "string"
             }
           ],
+          "name": "0x6190A0",
+          "num_params": 3,
           "class": "C_PcSave",
           "member": "GenerateGameFilename",
           "cc": "thiscall",
-          "attrs": {
-            "_unverified": true
-          }
+          "short_desc": "Creates a name for the save file using the default save directory and the given slot and stores the result in the provided buffer"
         },
         {
           "name": "0x61A130",

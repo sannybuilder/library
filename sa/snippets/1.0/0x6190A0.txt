@@ -1,0 +1,9 @@
+int save_filename = allocate_memory 256
+int s_PcSaveHelper = 0xC17034
+const slot = 0 // first save slot
+
+C_PcSave_GenerateGameFilename(s_PcSaveHelper, slot, save_filename)
+
+debug_on
+trace "save filename: %s" save_filename
+free_memory save_filename

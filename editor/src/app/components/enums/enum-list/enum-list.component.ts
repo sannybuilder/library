@@ -17,6 +17,8 @@ export class EnumListComponent {
     this._game = val;
   }
 
+  filterQuery = '';
+
   get game() {
     return this._game;
   }

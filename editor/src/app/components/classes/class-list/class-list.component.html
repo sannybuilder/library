@@ -6,12 +6,32 @@
 
 <h5>{{ "ui.classList.title" | translate }}</h5>
 
+<div class="row mb-2" *ngIf="entities.length > 10">
+  <div class="col-12">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control filter-input"
+        [placeholder]="'ui.shared.filter' | translate"
+        [(ngModel)]="filterQuery"
+      />
+      <div class="input-group-append">
+        <scl-icon-button
+          icon="clear"
+          [title]="'ui.header.searchClear' | translate"
+          (clicked)="filterQuery = ''"
+        ></scl-icon-button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="scroll-container" [attr.translate]="'no'">
   <pre *ngIf="entities; else noClasses" class="sample">
-<div *ngFor="let entity of entities"><a 
+@for(entity of entities; track entity.name) {@if(entity.name.toLowerCase().includes(filterQuery.toLowerCase())) {<div><a 
   [routerLink]="[getBaseHref(game), 'classes', entity.name]"
   >{{ entity.name }}</a><span class="secondary" *ngIf="getClassDesc(entity.name) as desc"> // {{ desc }}</span><span class="secondary"
-  *ngIf="entity.origin !== getDefaultExtension()"> // <span [innerHTML]="'ui.classOverview.onlyWithExtensionInline' | translate: { extension: entity.origin, game: game }"></span></span></div></pre>
+  *ngIf="entity.origin !== getDefaultExtension()"> // <span [innerHTML]="'ui.classOverview.onlyWithExtensionInline' | translate: { extension: entity.origin, game: game }"></span></span></div>}}</pre>
 </div>
 
 <ng-template #noClasses>

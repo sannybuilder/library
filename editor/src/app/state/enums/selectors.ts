@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Enums, Game } from '../../models';
-import { game } from '../game/selectors';
+import { Enums, Game, ViewContext } from '../../models';
+import { game, viewContext } from '../game/selectors';
 import { EnumsState } from './reducer';
 
 export const state = createFeatureSelector<EnumsState>('enums');
@@ -8,8 +8,11 @@ export const state = createFeatureSelector<EnumsState>('enums');
 export const enums = createSelector(
   state,
   game,
-  (state: EnumsState, game: Game | undefined) =>
-    game ? state.enums[game] : undefined
+  viewContext,
+  (state: EnumsState, game: Game | undefined, viewContext: ViewContext) =>
+    game && viewContext === ViewContext.Script
+      ? state.enums[game]
+      : undefined
 );
 
 export const enumNames = createSelector(enums, (enums) =>

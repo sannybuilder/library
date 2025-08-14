@@ -52,7 +52,7 @@ export class SelectorComponent {
   @Input() narrowDropdown = false;
   @Input() invalid = false;
 
-  freeInput: string;
+  freeInput = '';
 
   @Output() modelChange: EventEmitter<string> = new EventEmitter();
 

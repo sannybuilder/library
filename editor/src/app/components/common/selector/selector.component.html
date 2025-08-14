@@ -11,12 +11,30 @@
       {{ label }}
     </button>
     <div class="dropdown-menu" [ngClass]="{ narrow: narrowDropdown }">
+      <div
+        class="dropdown-item input-group"
+        *ngIf="canInput || choicesUi.length > 10"
+      >
+        <input
+          class="form-control"
+          type="text"
+          [(ngModel)]="freeInput"
+          [placeholder]="'ui.shared.filter' | translate"
+        />
+        <div class="input-group-append" *ngIf="canInput">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="update(freeInput)"
+          >
+            {{ "ui.picker.addNew" | translate }}
+          </button>
+        </div>
+      </div>
       <div class="choices-list">
-        <button
-          class="dropdown-item"
-          *ngFor="let choice of choicesUi"
-          (click)="update(choice.value)"
-        >
+        @for(choice of choicesUi; track choice.value) {
+        @if(choice.value.toLowerCase().includes(freeInput.toLowerCase())) {
+        <button class="dropdown-item" (click)="update(choice.value)">
           <span *ngIf="choice.prefix" class="text-muted"
             >{{ choice.prefix }}&nbsp;&nbsp;</span
           >{{ choice.value }}
@@ -25,24 +43,7 @@
             choice.hotkey
           }}</kbd>
         </button>
-      </div>
-      <div class="dropdown-item input-group" *ngIf="canInput">
-        <input
-          class="form-control"
-          type="text"
-          [(ngModel)]="freeInput"
-          [placeholder]="'ui.picker.newPlaceholder' | translate"
-          [ngModelOptions]="{ updateOn: 'blur' }"
-        />
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="update(freeInput)"
-          >
-            OK
-          </button>
-        </div>
+        }}
       </div>
     </div>
   </div>

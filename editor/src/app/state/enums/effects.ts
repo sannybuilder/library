@@ -65,7 +65,7 @@ export class EnumsEffects {
       filter(([_, viewContext]) => viewContext === ViewContext.Script),
       distinctUntilChanged(
         ([a, ea], [b, eb]) =>
-          GameEnums[a.game] === GameEnums[b.game] && ea === eb
+          GameEnums[a.game] === GameEnums[b.game] && ea === eb //ea always == eb as we filter actions by viewContext
       ),
       concatMap(([{ game }, viewContext, accessToken]) =>
         this._service.loadEnums(game, accessToken).pipe(

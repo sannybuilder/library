@@ -17,6 +17,8 @@ export class ClassListComponent {
   @Input() classesMeta: ClassMeta[];
   @Input() viewContext: ViewContext;
 
+  filterQuery = '';
+
   @Input() set game(val: Game) {
     this.games = Object.values(Game);
     this._game = val;

@@ -6,7 +6,6 @@ import { fillEnumValues } from '../utils';
   standalone: false,
 })
 export class FilterEnumsPipe implements PipeTransform {
-  constructor() {}
 
   transform(fields: Array<[string, string]>, needle: string) {
     const autoValues = fillEnumValues(fields);

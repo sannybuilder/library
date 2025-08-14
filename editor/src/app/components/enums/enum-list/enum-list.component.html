@@ -6,10 +6,31 @@
 
 <h5>{{ "ui.enumList.title" | translate }}</h5>
 
+<div class="row mb-2" *ngIf="enumNames.length > 10">
+  <div class="col-12">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control filter-input"
+        [placeholder]="'ui.shared.filter' | translate"
+        [(ngModel)]="filterQuery"
+      />
+      <div class="input-group-append">
+        <scl-icon-button
+          icon="clear"
+          [title]="'ui.header.searchClear' | translate"
+          (clicked)="filterQuery = ''"
+        ></scl-icon-button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="scroll-container" [attr.translate]="'no'">
   <pre *ngIf="enumNames.length; else noEnums" class="sample">
-<div *ngFor="let enumName of enumNames"><a [routerLink]="['/', game, 'enums', enumName]">{{ enumName }}</a><span 
-  class="secondary" *ngIf="isUnused(enumName)"> ({{ "ui.enumList.unused" | translate }})</span></div></pre>
+@for(enumName of enumNames; track enumName) {@if(enumName.toLowerCase().includes(filterQuery.toLowerCase())) {<div><a [routerLink]="['/', game, 'enums', enumName]">{{ enumName }}</a><span 
+  class="secondary" *ngIf="isUnused(enumName)"> ({{ "ui.enumList.unused" | translate }})</span></div>}}
+</pre>
 </div>
 
 <ng-template #noEnums>

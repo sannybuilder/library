@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1754587532893,
-    "version": "0.95",
+    "last_update": 1755184798675,
+    "version": "0.96",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -603,27 +603,27 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "x1",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y1",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z1",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "x2",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "y2",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "z2",
               "type": "float"
             },
             {
@@ -641,20 +641,25 @@
           ],
           "name": "ADD_COVER_BLOCKING_AREA",
           "num_params": 9,
-          "short_desc": "Adds a cover blocking area"
+          "short_desc": "Adds a cover blocking area",
+          "class": "World",
+          "member": "AddCoverBlockingArea",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p2",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "z",
               "type": "float"
             },
             {
@@ -662,7 +667,7 @@
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "heading",
               "type": "float"
             },
             {
@@ -672,15 +677,23 @@
             {
               "name": "_p7",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "coverPoint",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "name": "ADD_COVER_POINT",
           "num_params": 8,
-          "short_desc": "Adds a cover point to a cover object"
+          "short_desc": "Adds a cover point",
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
+          "member": "AddCoverPoint"
         },
         {
           "input": [
@@ -3184,7 +3197,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3194,7 +3207,9 @@
           ],
           "name": "BLOCK_COWERING_IN_COVER",
           "num_params": 2,
-          "short_desc": "Blocks a Character from cowering in cover"
+          "short_desc": "Blocks the ped from cowering in cover",
+          "class": "Char",
+          "member": "BlockCoweringInCover"
         },
         {
           "input": [
@@ -3214,7 +3229,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3224,7 +3239,9 @@
           ],
           "name": "BLOCK_PEEKING_IN_COVER",
           "num_params": 2,
-          "short_desc": "Blocks a Character from Peeking in cover"
+          "short_desc": "Blocks the ped from peeking in cover",
+          "class": "Char",
+          "member": "BlockPeekingInCover"
         },
         {
           "input": [
@@ -10097,7 +10114,12 @@
         },
         {
           "name": "FLUSH_COVER_BLOCKING_AREAS",
-          "num_params": 0
+          "num_params": 0,
+          "class": "World",
+          "member": "FlushCoverBlockingAreas",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "FLUSH_PATROL_ROUTE",
@@ -10314,7 +10336,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -10323,7 +10345,9 @@
             }
           ],
           "name": "FORCE_PED_TO_LOAD_COVER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Char",
+          "member": "ForceToLoadCover"
         },
         {
           "name": "FORCE_POPULATION_INIT",
@@ -24321,7 +24345,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
@@ -24329,7 +24353,9 @@
           "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Char",
+          "member": "IsInCover"
         },
         {
           "input": [
@@ -31190,11 +31216,17 @@
           "input": [
             {
               "name": "coverPoint",
-              "type": "CoverPoint"
+              "type": "int"
             }
           ],
           "name": "REMOVE_COVER_POINT",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Removes the cover point created with ADD_COVER_POINT",
+          "class": "World",
+          "member": "RemoveCoverPoint"
         },
         {
           "input": [
@@ -39502,7 +39534,7 @@
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             },
             {
@@ -39511,7 +39543,9 @@
             }
           ],
           "name": "SET_PLAYER_CAN_USE_COVER",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Player",
+          "member": "SetCanUseCover"
         },
         {
           "name": "SET_PLAYER_COLOUR",
@@ -47565,19 +47599,19 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "atX",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "atY",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "atZ",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47587,7 +47621,8 @@
           "member": "PutCharDirectlyIntoCover",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Puts the ped next to the nearest cover at coordinates"
         },
         {
           "name": "TASK_SAY",
@@ -47603,15 +47638,15 @@
         {
           "input": [
             {
-              "name": "char",
+              "name": "ped",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "fromPed",
               "type": "Char"
             },
             {
-              "name": "_p3",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47630,19 +47665,19 @@
               "type": "Char"
             },
             {
-              "name": "x",
+              "name": "fromX",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "fromY",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "fromZ",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47657,35 +47692,35 @@
         {
           "input": [
             {
-              "name": "char",
+              "name": "ped",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "atX",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "atY",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "atZ",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "fromX",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "fromY",
               "type": "float"
             },
             {
-              "name": "_p7",
+              "name": "fromZ",
               "type": "float"
             },
             {
-              "name": "_p8",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47695,32 +47730,33 @@
             "is_static": true
           },
           "class": "Task",
-          "member": "SeekCoverToCoords"
+          "member": "SeekCoverToCoords",
+          "short_desc": "Forces the ped to move to cover that protects from point fromX, fromY and fromZ. The closest cover is selected at point atX, atY and atZ"
         },
         {
           "input": [
             {
-              "name": "char",
+              "name": "ped",
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "coverPoint",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "fromX",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "fromY",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "fromZ",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "time",
               "type": "int"
             }
           ],
@@ -47730,11 +47766,10 @@
           "member": "SeekCoverToCoverPoint",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Forces the ped to move to the cover point from the coordinates. The cover point is created with ADD_COVER_POINT"
         },
         {
-          "name": "TASK_SEEK_COVER_TO_OBJECT",
-          "num_params": 6,
           "input": [
             {
               "name": "ped",
@@ -47760,7 +47795,14 @@
               "name": "_p6",
               "type": "any"
             }
-          ]
+          ],
+          "name": "TASK_SEEK_COVER_TO_OBJECT",
+          "num_params": 6,
+          "class": "Task",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "SeekCoverToObject"
         },
         {
           "input": [
@@ -52799,18 +52841,20 @@
           ]
         },
         {
-          "name": "SET_PED_SKIPS_COMPLEX_COVER_COLLISION_CHECKS",
-          "num_params": 2,
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
               "name": "set",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_PED_SKIPS_COMPLEX_COVER_COLLISION_CHECKS",
+          "num_params": 2,
+          "class": "Char",
+          "member": "SetSkipsComplexCoverCollisionChecks"
         },
         {
           "input": [

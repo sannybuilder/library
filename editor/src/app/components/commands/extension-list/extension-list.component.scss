@@ -1,11 +1,19 @@
-.scroll-container {
-  overflow: auto;
-  max-height: calc(100% - 119px);
-  padding-right: 16px;
+:host {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
 }
 
-:host-context(.modal) .scroll-container {
+.scroll-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  padding-right: 16px;
+}
+
+:host-context(.modal) {
   max-height: calc(100vh - 198px);
 }
 

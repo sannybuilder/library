@@ -33,11 +33,19 @@
   display: none;
 }
 
-.scroll-container {
-  overflow: auto;
-  max-height: calc(100% - 141px);
-  padding-right: 16px;
+:host {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
+}
+
+.scroll-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  padding-right: 16px;
 }
 
 .nav-link.active {

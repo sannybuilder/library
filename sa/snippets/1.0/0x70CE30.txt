@@ -1,0 +1,14 @@
+float worldCoords[3], gameScreenCoords[2], widthScale, heightScale
+int worldCoordsPtr = get_var_pointer worldCoords
+int gameScreenCoordsPtr = get_var_pointer gameScreenCoords
+int widthScalePtr = get_var_pointer widthScale
+int heightScalePtr = get_var_pointer heightScale
+
+
+worldCoords[0] = 1000.0
+worldCoords[1] = 274.0
+worldCoords[2] = 10.0
+int isSucess = CSprite_CalcScreenCoords(worldCoordsPtr, gameScreenCoordsPtr, widthScalePtr, heightScalePtr, false, false)
+if isSuccess == true
+then print_formatted_now {format} "coords found at:~n~%f %f~n~Scale: %f %f" {time} 1000 {args} ...gameScreenCoords widthScale heightScale
+end

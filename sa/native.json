@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755247738226,
-    "version": "0.109",
+    "last_update": 1755271104086,
+    "version": "0.110",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -161328,7 +161328,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Converts 3D World Coordinates into Window Screen Coordinates + depth"
+          "short_desc": "Converts 3D World Coordinates with extra visibility checks, into Window Screen Coordinates + depth"
         },
         {
           "name": "0x70CF20",
@@ -165667,6 +165667,32 @@
           "member": "aCos",
           "cc": "cdecl",
           "short_desc": "Computes the inverse cosine of a real number"
+        },
+        {
+          "input": [
+            {
+              "name": "inWorldCoordsPtr",
+              "type": "CVector",
+              "source": "pointer"
+            },
+            {
+              "name": "outScreenCoordsPtr",
+              "type": "CVector",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
+              "name": "result",
+              "type": "bool",
+              "source": "var_any"
+            }
+          ],
+          "name": "0x71DAB0",
+          "num_params": 3,
+          "member": "CalcScreenCoors",
+          "cc": "cdecl",
+          "short_desc": "Converts 3D World Coordinates into Window Screen Coordinates + depth"
         }
       ]
     }

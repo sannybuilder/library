@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755184798675,
-    "version": "0.96",
+    "last_update": 1755366331197,
+    "version": "0.97",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -247,8 +247,8 @@
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
               "name": "activate",
@@ -256,7 +256,9 @@
             }
           ],
           "name": "ACTIVATE_VIEWPORT",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Viewport",
+          "member": "Activate"
         },
         {
           "input": [
@@ -2468,12 +2470,12 @@
             },
             {
               "name": "viewportId",
-              "type": "int"
+              "type": "Viewport"
             }
           ],
           "name": "ATTACH_CAM_TO_VIEWPORT",
           "num_params": 2,
-          "short_desc": "Attaches a camera to a viewport",
+          "short_desc": "Attaches a camera to the viewport",
           "class": "Camera",
           "member": "AttachToViewport"
         },
@@ -4913,12 +4915,15 @@
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             }
           ],
           "name": "CLEAR_ROOM_FOR_VIEWPORT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Viewport",
+          "member": "ClearRoom",
+          "short_desc": "Clears the room (interior) of the viewport"
         },
         {
           "input": [
@@ -6635,15 +6640,21 @@
           }
         },
         {
-          "name": "CREATE_VIEWPORT",
-          "num_params": 1,
           "output": [
             {
-              "name": "viewport",
-              "type": "int",
+              "name": "handle",
+              "type": "Viewport",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "CREATE_VIEWPORT",
+          "num_params": 1,
+          "class": "Viewport",
+          "member": "Create",
+          "attrs": {
+            "is_constructor": true,
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7028,7 +7039,13 @@
         },
         {
           "name": "DESTROY_ALL_SCRIPT_VIEWPORTS",
-          "num_params": 0
+          "num_params": 0,
+          "class": "Viewport",
+          "member": "DestroyAllScript",
+          "short_desc": "Destroys all script viewports",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -7067,22 +7084,27 @@
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             }
           ],
           "name": "DESTROY_VIEWPORT",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Viewport",
+          "member": "Destroy"
         },
         {
-          "name": "DETACH_CAM_FROM_VIEWPORT",
-          "num_params": 1,
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Camera"
             }
-          ]
+          ],
+          "name": "DETACH_CAM_FROM_VIEWPORT",
+          "num_params": 1,
+          "class": "Camera",
+          "member": "DetachFromViewport",
+          "short_desc": ""
         },
         {
           "input": [
@@ -8253,15 +8275,18 @@
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "viewportId",
+              "type": "Viewport"
             }
           ],
           "name": "DOES_VIEWPORT_EXIST",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Viewport",
+          "member": "DoesExist"
         },
         {
           "input": [
@@ -14083,15 +14108,20 @@
           }
         },
         {
-          "name": "GET_GAME_VIEWPORT_ID",
-          "num_params": 1,
           "output": [
             {
-              "name": "viewportid",
-              "type": "int",
+              "name": "viewportId",
+              "type": "Viewport",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_GAME_VIEWPORT_ID",
+          "num_params": 1,
+          "class": "Viewport",
+          "member": "GetGameId",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -14638,19 +14668,22 @@
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
+            }
+          ],
+          "output": [
+            {
+              "name": "roomKey",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "name": "GET_KEY_FOR_VIEWPORT_IN_ROOM",
           "num_params": 2,
-          "output": [
-            {
-              "name": "roomkey",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Viewport",
+          "member": "GetKeyInRoom",
+          "short_desc": "Gets the room (interior) key of the viewport"
         },
         {
           "name": "GET_KEYBOARD_MOVE_INPUT",
@@ -17554,15 +17587,21 @@
           }
         },
         {
-          "name": "GET_RADAR_VIEWPORT_ID",
-          "num_params": 1,
           "output": [
             {
-              "name": "viewport",
-              "type": "int",
+              "name": "viewportId",
+              "type": "Viewport",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_RADAR_VIEWPORT_ID",
+          "num_params": 1,
+          "class": "Viewport",
+          "member": "GetRadarId",
+          "short_desc": "Gets the radar viewport, which also applies to the map in the pause menu",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "GET_RADIO_NAME",
@@ -18236,15 +18275,21 @@
           ]
         },
         {
-          "name": "GET_SCREEN_VIEWPORT_ID",
-          "num_params": 1,
           "output": [
             {
-              "name": "viewportid",
-              "type": "int",
+              "name": "viewportId",
+              "type": "Viewport",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_SCREEN_VIEWPORT_ID",
+          "num_params": 1,
+          "class": "Viewport",
+          "member": "GetScreenId",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Gets the screen viewport (frontend viewport)"
         },
         {
           "name": "GET_SCRIPT_CAM",
@@ -19284,37 +19329,39 @@
           ]
         },
         {
-          "name": "GET_VIEWPORT_POS_AND_SIZE",
-          "num_params": 5,
-          "short_desc": "Gets the position and size of the specified viewport",
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             }
           ],
           "output": [
             {
-              "name": "x",
+              "name": "posX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "y",
+              "name": "posY",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "xsize",
+              "name": "sizeX",
               "type": "float",
               "source": "var_any"
             },
             {
-              "name": "ysize",
+              "name": "sizeY",
               "type": "float",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_VIEWPORT_POS_AND_SIZE",
+          "num_params": 5,
+          "short_desc": "Gets the position and size of the specified viewport",
+          "class": "Viewport",
+          "member": "GetPosAndSize"
         },
         {
           "name": "GET_VIEWPORT_POSITION_OF_COORD",
@@ -25690,17 +25737,19 @@
           "member": "IsTouchingObject"
         },
         {
-          "name": "IS_VIEWPORT_ACTIVE",
-          "num_params": 1,
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             }
           ],
+          "name": "IS_VIEWPORT_ACTIVE",
+          "num_params": 1,
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Viewport",
+          "member": "IsActive"
         },
         {
           "input": [
@@ -40401,30 +40450,36 @@
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
-              "name": "roomkey",
+              "name": "key",
               "type": "int"
             }
           ],
           "name": "SET_ROOM_FOR_VIEWPORT_BY_KEY",
-          "num_params": 2
+          "num_params": 2,
+          "short_desc": "Sets the room (interior) by key for the viewport",
+          "class": "Viewport",
+          "member": "SetRoomByKey"
         },
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
-              "name": "roomname",
+              "name": "name",
               "type": "string"
             }
           ],
           "name": "SET_ROOM_FOR_VIEWPORT_BY_NAME",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Viewport",
+          "member": "SetRoomByName",
+          "short_desc": "Sets the room (interior) by name for the viewport. The room name is taken from .ide file"
         },
         {
           "name": "SET_ROPE_HEIGHT_FOR_OBJECT",
@@ -41290,14 +41345,20 @@
           "num_params": 1
         },
         {
-          "name": "SET_TEXT_VIEWPORT_ID",
-          "num_params": 1,
           "input": [
             {
-              "name": "id",
-              "type": "int"
+              "name": "viewportId",
+              "type": "Viewport"
             }
-          ]
+          ],
+          "name": "SET_TEXT_VIEWPORT_ID",
+          "num_params": 1,
+          "class": "Text",
+          "member": "SetViewportId",
+          "short_desc": "Sets the viewport in which the text should be rendered",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -41932,53 +41993,54 @@
           "member": "SetSteerBias"
         },
         {
-          "name": "SET_VIEWPORT",
-          "num_params": 5,
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
-              "name": "_p2",
+              "name": "posX",
               "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "posY",
               "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "sizeX",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "sizeY",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_VIEWPORT",
+          "num_params": 5,
+          "class": "Viewport",
+          "member": "Set",
+          "short_desc": "Sets the position and size of the viewport"
         },
         {
-          "name": "SET_VIEWPORT_DESTINATION",
-          "num_params": 7,
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
-              "name": "x",
+              "name": "posX",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "posY",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "sizeX",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "sizeY",
               "type": "float"
             },
             {
@@ -41989,27 +42051,33 @@
               "name": "_p7",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_VIEWPORT_DESTINATION",
+          "num_params": 7,
+          "class": "Viewport",
+          "member": "SetDestination"
         },
         {
-          "name": "SET_VIEWPORT_MIRRORED",
-          "num_params": 2,
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
               "name": "set",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_VIEWPORT_MIRRORED",
+          "num_params": 2,
+          "class": "Viewport",
+          "member": "SetMirrored"
         },
         {
           "input": [
             {
-              "name": "viewportid",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
               "name": "priority",
@@ -42017,21 +42085,25 @@
             }
           ],
           "name": "SET_VIEWPORT_PRIORITY",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Viewport",
+          "member": "SetPriority"
         },
         {
-          "name": "SET_VIEWPORT_SHAPE",
-          "num_params": 2,
           "input": [
             {
-              "name": "cam",
-              "type": "int"
+              "name": "self",
+              "type": "Viewport"
             },
             {
               "name": "shape",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_VIEWPORT_SHAPE",
+          "num_params": 2,
+          "class": "Viewport",
+          "member": "SetShape"
         },
         {
           "input": [

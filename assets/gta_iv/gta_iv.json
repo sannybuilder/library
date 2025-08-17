@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755399133970,
-    "version": "0.99",
+    "last_update": 1755426285098,
+    "version": "0.100",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -3139,7 +3139,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3149,12 +3149,14 @@
           ],
           "name": "BLOCK_CHAR_AMBIENT_ANIMS",
           "num_params": 2,
-          "short_desc": "Blocks a Characters Ambient Animations"
+          "short_desc": "Blocks a Characters Ambient Animations",
+          "class": "Char",
+          "member": "BlockAmbientAnims"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3164,12 +3166,14 @@
           ],
           "name": "BLOCK_CHAR_GESTURE_ANIMS",
           "num_params": 2,
-          "short_desc": "Blocks a characters gesture animations"
+          "short_desc": "Blocks a characters gesture animations. Sometimes it is necessary to call it every frame",
+          "class": "Char",
+          "member": "BlockGestureAnims"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3179,12 +3183,14 @@
           ],
           "name": "BLOCK_CHAR_HEAD_IK",
           "num_params": 2,
-          "short_desc": "Blocks a characters head from animations"
+          "short_desc": "Blocks a characters head from animations",
+          "class": "Char",
+          "member": "BlockHeadIk"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3194,7 +3200,9 @@
           ],
           "name": "BLOCK_CHAR_VISEME_ANIMS",
           "num_params": 2,
-          "short_desc": "Blocks a Characters Viseme (facial expression) Animations"
+          "short_desc": "Blocks a Characters Viseme (facial expression) Animations",
+          "class": "Char",
+          "member": "BlockVisemeAnims"
         },
         {
           "input": [
@@ -9891,21 +9899,23 @@
           "member": "FindTimePositionInRecording"
         },
         {
-          "name": "FIND_TRAIN_DIRECTION",
-          "num_params": 2,
           "input": [
             {
-              "name": "train",
-              "type": "Car"
+              "name": "self",
+              "type": "Train"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "direction",
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "FIND_TRAIN_DIRECTION",
+          "num_params": 2,
+          "class": "Train",
+          "member": "FindDirection"
         },
         {
           "name": "FINISH_SETTING_UP_CONVERSATION",
@@ -15638,19 +15648,21 @@
         {
           "input": [
             {
-              "name": "train",
+              "name": "self",
               "type": "Train"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "station",
               "type": "int",
               "source": "var_any"
             }
           ],
           "name": "GET_NEXT_STATION_FOR_TRAIN",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Train",
+          "member": "GetNextStation"
         },
         {
           "input": [
@@ -19184,19 +19196,21 @@
         {
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
+            }
+          ],
+          "output": [
+            {
+              "name": "train",
+              "type": "Train",
+              "source": "var_any"
             }
           ],
           "name": "GET_TRAIN_PLAYER_WOULD_ENTER",
           "num_params": 2,
-          "output": [
-            {
-              "name": "train",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Player",
+          "member": "GetTrainWouldEnter"
         },
         {
           "input": [
@@ -25428,8 +25442,11 @@
           "name": "IS_THIS_MODEL_A_BIKE",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsThisModelABike"
         },
         {
           "input": [
@@ -25492,8 +25509,11 @@
           "name": "IS_THIS_MODEL_A_PED",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsThisModelAPed"
         },
         {
           "input": [
@@ -25522,8 +25542,11 @@
           "name": "IS_THIS_MODEL_A_TRAIN",
           "num_params": 1,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
+          "member": "IsThisModelATrain"
         },
         {
           "input": [
@@ -25808,13 +25831,15 @@
         {
           "input": [
             {
-              "name": "vehicle",
-              "type": "Car"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "name": "KNOCK_PED_OFF_BIKE",
           "num_params": 1,
-          "short_desc": "Knocks ped off of bike. To use this, first check if the vehicle is a bike (using GET_CAR_MODEL and IS_THIS_MODEL_A_BIKE), then check if there is a ped on the bike (using GET_DRIVER_OF_CAR and IS_CAR_PASSENGER_SEAT_FREE)"
+          "short_desc": "Knocks ped off of bike",
+          "class": "Char",
+          "member": "KnockOffBike"
         },
         {
           "name": "LAUNCH_LOCAL_PLAYER_IN_NETWORK_GAME",
@@ -40155,8 +40180,8 @@
         {
           "input": [
             {
-              "name": "train",
-              "type": "Car"
+              "name": "self",
+              "type": "Train"
             },
             {
               "name": "set",
@@ -40164,7 +40189,9 @@
             }
           ],
           "name": "SET_RENDER_TRAIN_AS_DERAILED",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Train",
+          "member": "SetRenderAsDerailed"
         },
         {
           "name": "SET_RETURN_TO_FILTER_MENU",
@@ -41519,8 +41546,8 @@
         {
           "input": [
             {
-              "name": "train",
-              "type": "Car"
+              "name": "self",
+              "type": "Train"
             },
             {
               "name": "rolloff",
@@ -41528,7 +41555,9 @@
             }
           ],
           "name": "SET_TRAIN_AUDIO_ROLLOFF",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Train",
+          "member": "SetAudioRolloff"
         },
         {
           "input": [
@@ -41567,12 +41596,14 @@
         {
           "input": [
             {
-              "name": "train",
-              "type": "Car"
+              "name": "self",
+              "type": "Train"
             }
           ],
           "name": "SET_TRAIN_IS_STOPPED_AT_STATION",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Train",
+          "member": "SetIsStoppedAtStation"
         },
         {
           "input": [
@@ -41594,8 +41625,8 @@
         {
           "input": [
             {
-              "name": "train",
-              "type": "Car"
+              "name": "self",
+              "type": "Train"
             },
             {
               "name": "set",
@@ -41603,7 +41634,9 @@
             }
           ],
           "name": "SET_TRAIN_STOPS_FOR_STATIONS",
-          "num_params": 2
+          "num_params": 2,
+          "class": "Train",
+          "member": "SetStopsForStations"
         },
         {
           "name": "SET_UP_CONVERSATION_END_NODE_WITH_SCRIPTED_SPEECH",
@@ -49061,12 +49094,14 @@
         {
           "input": [
             {
-              "name": "train",
-              "type": "Car"
+              "name": "self",
+              "type": "Train"
             }
           ],
           "name": "TRAIN_LEAVE_STATION",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Train",
+          "member": "LeaveStation"
         },
         {
           "name": "TRIGGER_LOADING_MUSIC_ON_NEXT_FADE",

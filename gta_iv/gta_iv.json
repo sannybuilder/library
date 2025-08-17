@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755426285098,
-    "version": "0.100",
+    "last_update": 1755428142407,
+    "version": "0.101",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -1038,13 +1038,13 @@
               "type": "Object"
             },
             {
-              "name": "roomKey",
+              "name": "key",
               "type": "int"
             }
           ],
           "name": "ADD_OBJECT_TO_INTERIOR_ROOM_BY_KEY",
           "num_params": 2,
-          "short_desc": "Adds an object to the interior room denoted by the key",
+          "short_desc": "Adds an object to the interior room denoted by the key (room hash)",
           "class": "Object",
           "member": "AddToInteriorRoomByKey"
         },
@@ -1055,7 +1055,7 @@
               "type": "Object"
             },
             {
-              "name": "roomName",
+              "name": "name",
               "type": "string"
             }
           ],
@@ -1106,13 +1106,13 @@
               "type": "Pickup"
             },
             {
-              "name": "roomHash",
+              "name": "key",
               "type": "int"
             }
           ],
           "name": "ADD_PICKUP_TO_INTERIOR_ROOM_BY_KEY",
           "num_params": 2,
-          "short_desc": "Adds a pickup to the interior room denoted by the key",
+          "short_desc": "Adds a pickup to the interior room denoted by the key (room hash)",
           "class": "Pickup",
           "member": "AddToInteriorRoomByKey"
         },
@@ -1123,7 +1123,7 @@
               "type": "Pickup"
             },
             {
-              "name": "roomName",
+              "name": "name",
               "type": "string"
             }
           ],
@@ -4886,17 +4886,21 @@
           "name": "CLEAR_ROOM_FOR_CAR",
           "num_params": 1,
           "class": "Car",
-          "member": "ClearRoom"
+          "member": "ClearRoom",
+          "short_desc": "Clears the room (interior) of the car"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "CLEAR_ROOM_FOR_CHAR",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "ClearRoom",
+          "short_desc": "Clears the room (interior) of the char"
         },
         {
           "name": "CLEAR_ROOM_FOR_DUMMY_CHAR",
@@ -4918,7 +4922,8 @@
           "name": "CLEAR_ROOM_FOR_OBJECT",
           "num_params": 1,
           "class": "Object",
-          "member": "ClearRoom"
+          "member": "ClearRoom",
+          "short_desc": "Clears the room (interior) of the object"
         },
         {
           "input": [
@@ -5825,11 +5830,19 @@
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "lookX",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "lookY",
+              "type": "float"
+            },
+            {
+              "name": "lookZ",
+              "type": "float"
+            },
+            {
+              "name": "radius",
               "type": "float"
             }
           ],
@@ -5841,7 +5854,7 @@
             }
           ],
           "name": "CREATE_CHECKPOINT",
-          "num_params": 7,
+          "num_params": 9,
           "attrs": {
             "is_constructor": true
           },
@@ -14636,19 +14649,22 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
+            }
+          ],
+          "output": [
+            {
+              "name": "key",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "name": "GET_KEY_FOR_CAR_IN_ROOM",
           "num_params": 2,
-          "output": [
-            {
-              "name": "pKey",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "class": "Car",
+          "member": "GetKeyInRoom",
+          "short_desc": "Gets the room (interior) by key (room hash) of the car"
         },
         {
           "input": [
@@ -14659,7 +14675,7 @@
           ],
           "output": [
             {
-              "name": "roomHash",
+              "name": "key",
               "type": "int",
               "source": "var_any"
             }
@@ -14667,7 +14683,8 @@
           "name": "GET_KEY_FOR_CHAR_IN_ROOM",
           "num_params": 2,
           "class": "Char",
-          "member": "GetKeyInRoom"
+          "member": "GetKeyInRoom",
+          "short_desc": "Gets the room (interior) by key (room hash) for the char"
         },
         {
           "name": "GET_KEY_FOR_DUMMY_CHAR_IN_ROOM",
@@ -14695,7 +14712,7 @@
           ],
           "output": [
             {
-              "name": "roomKey",
+              "name": "key",
               "type": "int",
               "source": "var_any"
             }
@@ -14704,7 +14721,7 @@
           "num_params": 2,
           "class": "Viewport",
           "member": "GetKeyInRoom",
-          "short_desc": "Gets the room (interior) key of the viewport"
+          "short_desc": "Gets the room (interior) key (room hash) of the viewport"
         },
         {
           "name": "GET_KEYBOARD_MOVE_INPUT",
@@ -18121,19 +18138,22 @@
         {
           "input": [
             {
-              "name": "obj",
+              "name": "self",
               "type": "Object"
+            }
+          ],
+          "output": [
+            {
+              "name": "key",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "name": "GET_ROOM_KEY_FROM_OBJECT",
           "num_params": 2,
-          "output": [
-            {
-              "name": "pRoomKey",
-              "type": "int",
-              "source": "var_any"
-            }
-          ]
+          "short_desc": "Gets the room (interior) by key (room hash) from the object",
+          "class": "Object",
+          "member": "GetRoomKey"
         },
         {
           "input": [
@@ -18144,7 +18164,7 @@
           ],
           "output": [
             {
-              "name": "hash",
+              "name": "key",
               "type": "int",
               "source": "var_any"
             }
@@ -18152,7 +18172,8 @@
           "name": "GET_ROOM_KEY_FROM_PICKUP",
           "num_params": 2,
           "class": "Pickup",
-          "member": "GetRoomKey"
+          "member": "GetRoomKey",
+          "short_desc": "Gets the room (interior) by key (room hash) from the pickup"
         },
         {
           "name": "GET_ROOM_NAME_FROM_CHAR_DEBUG",
@@ -26101,7 +26122,7 @@
               "type": "int"
             },
             {
-              "name": "roomhash",
+              "name": "key",
               "type": "int"
             }
           ],
@@ -26111,7 +26132,8 @@
           "member": "LoadSceneForRoomByKey",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Loads the scene for the room (interior) by key (room hash)"
         },
         {
           "name": "LOAD_SETTINGS",
@@ -40398,18 +40420,21 @@
           "short_desc": "Sets the mood of Roman. Roman has four sets of audio that can be chosen with this function.*0 = normal*1 = sad*2 = shaken up*3 = drunkAny higher values will use Roman's normal audio. This can be called at any time, even after Roman is spawned"
         },
         {
-          "name": "SET_ROOM_FOR_CAR_BY_KEY",
-          "num_params": 2,
           "input": [
             {
-              "name": "car",
+              "name": "self",
               "type": "Car"
             },
             {
-              "name": "roomkey",
+              "name": "key",
               "type": "int"
             }
-          ]
+          ],
+          "name": "SET_ROOM_FOR_CAR_BY_KEY",
+          "num_params": 2,
+          "class": "Car",
+          "member": "SetRoomByKey",
+          "short_desc": "Sets the room (interior) by key (room hash) for the car"
         },
         {
           "input": [
@@ -40418,19 +40443,20 @@
               "type": "Car"
             },
             {
-              "name": "roomname",
+              "name": "name",
               "type": "string"
             }
           ],
           "name": "SET_ROOM_FOR_CAR_BY_NAME",
           "num_params": 2,
           "class": "Car",
-          "member": "SetRoomByName"
+          "member": "SetRoomByName",
+          "short_desc": "Sets the room (interior) by name for the car. The room name is taken from .ide file"
         },
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -40439,7 +40465,10 @@
             }
           ],
           "name": "SET_ROOM_FOR_CHAR_BY_KEY",
-          "num_params": 2
+          "num_params": 2,
+          "short_desc": "Sets the room (interior) by key (room hash) for the char",
+          "class": "Char",
+          "member": "SetRoomByKey"
         },
         {
           "input": [
@@ -40448,14 +40477,15 @@
               "type": "Char"
             },
             {
-              "name": "roomname",
+              "name": "name",
               "type": "string"
             }
           ],
           "name": "SET_ROOM_FOR_CHAR_BY_NAME",
           "num_params": 2,
           "class": "Char",
-          "member": "SetRoomByName"
+          "member": "SetRoomByName",
+          "short_desc": "Sets the room (interior) by name for the char. The room name is taken from .ide file"
         },
         {
           "name": "SET_ROOM_FOR_DUMMY_CHAR_BY_KEY",
@@ -40498,7 +40528,7 @@
           ],
           "name": "SET_ROOM_FOR_VIEWPORT_BY_KEY",
           "num_params": 2,
-          "short_desc": "Sets the room (interior) by key for the viewport",
+          "short_desc": "Sets the room (interior) by key (room hash) for the viewport",
           "class": "Viewport",
           "member": "SetRoomByKey"
         },

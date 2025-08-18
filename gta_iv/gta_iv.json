@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755428142407,
-    "version": "0.101",
+    "last_update": 1755542791126,
+    "version": "0.102",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -48180,21 +48180,21 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "animType",
+              "type": "SitAnimType"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "animDirection",
+              "type": "SitAnimDirection"
             },
             {
-              "name": "_p4",
+              "name": "time",
               "type": "int"
             }
           ],
           "name": "TASK_SIT_DOWN",
           "num_params": 4,
-          "short_desc": "Makes handled ped (P1) sit down right now. Ped will get up automaticly after time (p4) is up",
+          "short_desc": "Makes the ped sit down right now. Ped will get up automaticly after time is up",
           "class": "Task",
           "member": "SitDown",
           "attrs": {
@@ -48208,21 +48208,21 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "animType",
+              "type": "SitAnimType"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "animDirection",
+              "type": "SitAnimDirection"
             },
             {
-              "name": "_p4",
+              "name": "time",
               "type": "int"
             }
           ],
           "name": "TASK_SIT_DOWN_INSTANTLY",
           "num_params": 4,
-          "short_desc": "Makes handled ped (P1) sit down right now. Ped will get up automaticly after time (p4) is up",
+          "short_desc": "Makes the ped sit down right now, skipping the sit down animation. Ped will get up automaticly after time is up",
           "class": "Task",
           "member": "SitDownInstantly",
           "attrs": {
@@ -48236,40 +48236,40 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "animType",
+              "type": "SitAnimType"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "animDirection",
+              "type": "SitAnimDirection"
             },
             {
-              "name": "_p4",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p7",
+              "name": "modelHash",
               "type": "int"
             },
             {
-              "name": "_p8",
+              "name": "heading",
               "type": "float"
             },
             {
-              "name": "_p9",
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p10",
-              "type": "int"
+              "name": "instantly",
+              "type": "bool"
             }
           ],
           "name": "TASK_SIT_DOWN_ON_NEAREST_OBJECT",
@@ -48278,7 +48278,8 @@
           "member": "SitDownOnNearestObject",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Makes the ped sit down on the nearest object with the given modelHash from the specified coordinates. Ped will get up automaticly after time is up"
         },
         {
           "input": [
@@ -48287,27 +48288,27 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "animType",
+              "type": "SitAnimType"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "animDirection",
+              "type": "SitAnimDirection"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "object",
+              "type": "Object"
             },
             {
-              "name": "_p5",
+              "name": "offsetX",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "offsetY",
               "type": "float"
             },
             {
-              "name": "_p7",
+              "name": "offsetZ",
               "type": "float"
             },
             {
@@ -48315,12 +48316,12 @@
               "type": "float"
             },
             {
-              "name": "_p9",
+              "name": "time",
               "type": "int"
             },
             {
-              "name": "_p10",
-              "type": "int"
+              "name": "instantly",
+              "type": "bool"
             }
           ],
           "name": "TASK_SIT_DOWN_ON_OBJECT",
@@ -48329,7 +48330,8 @@
           "member": "SitDownOnObject",
           "attrs": {
             "is_static": true
-          }
+          },
+          "short_desc": "Makes the ped sit down on the object with the specified offset. Ped will get up automaticly after time is up"
         },
         {
           "input": [
@@ -48338,37 +48340,37 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "animType",
+              "type": "SitAnimType"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "animDirection",
+              "type": "SitAnimDirection"
             },
             {
-              "name": "_p4",
+              "name": "x",
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "y",
               "type": "float"
             },
             {
-              "name": "_p6",
+              "name": "z",
               "type": "float"
             },
             {
-              "name": "_p7",
+              "name": "heading",
               "type": "float"
             },
             {
-              "name": "_p8",
+              "name": "time",
               "type": "int"
             }
           ],
           "name": "TASK_SIT_DOWN_ON_SEAT",
           "num_params": 8,
-          "short_desc": "Makes ped sit on seat place (on world point p4 (x), p5 (y), p6 (z)) with specific facing angle (p7) and ped`s own 'seat animation' which can be changed with CHANGE_CHAR_SIT_IDLE_ANIM",
+          "short_desc": "Makes the ped sit on seat place in the specified coordinates and heading. Ped will get up automaticly after time is up",
           "class": "Task",
           "member": "SitDownOnSeat",
           "attrs": {

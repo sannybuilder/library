@@ -385,3 +385,16 @@ export const CarLock = {
   "LockedPlayerInside": 4,
   "LockedPlayerCanBreakIn": 7
 };
+export const SitAnimType = {
+  "Chair": 0,
+  "Stool": 1,
+  "Coach": 2,
+  "Wall": 3,
+  "Step": 4
+};
+export const SitAnimDirection = {
+  "TurnAround": 0,
+  "Straight": 1,
+  "Right": 2,
+  "Left": 3
+};

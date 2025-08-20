@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755542791126,
-    "version": "0.102",
+    "last_update": 1755699733983,
+    "version": "0.103",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -2312,22 +2312,27 @@
           }
         },
         {
-          "name": "ASCII_INT_TO_STRING",
-          "num_params": 2,
-          "short_desc": "Converts an integer to a string",
           "input": [
             {
-              "name": "ascii",
+              "name": "keyCode",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "result",
               "type": "string",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "ASCII_INT_TO_STRING",
+          "num_params": 2,
+          "short_desc": "Converts an integer to a string",
+          "class": "Text",
+          "member": "AsciiIntToString",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -10949,45 +10954,51 @@
           "member": "GetAnimGroup"
         },
         {
-          "name": "GET_ASCII_JUST_PRESSED",
-          "num_params": 3,
           "input": [
             {
-              "name": "key",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
+              "name": "keyCode",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "_p3",
-              "type": "int",
+              "name": "pressed",
+              "type": "bool",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_ASCII_JUST_PRESSED",
+          "num_params": 2,
+          "short_desc": "Checks if the specified ASCII key code is just pressed",
+          "class": "Pad",
+          "member": "GetAsciiJustPressed",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
-          "name": "GET_ASCII_PRESSED",
-          "num_params": 2,
           "input": [
             {
-              "name": "key",
+              "name": "keyCode",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "_p2",
-              "type": "int",
+              "name": "pressed",
+              "type": "bool",
               "source": "var_any"
             }
           ],
+          "name": "GET_ASCII_PRESSED",
+          "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Pad",
+          "member": "GetAsciiPressed",
+          "short_desc": "Checks if the specified ASCII key code is pressed"
         },
         {
           "name": "GET_ASPECT_RATIO",
@@ -11242,24 +11253,28 @@
           "member": "GetSprite"
         },
         {
-          "name": "GET_BUFFERED_ASCII",
-          "num_params": 2,
           "input": [
             {
-              "name": "key",
+              "name": "_p1",
               "type": "int"
             }
           ],
           "output": [
             {
-              "name": "_p2",
+              "name": "keyCode",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_BUFFERED_ASCII",
+          "num_params": 2,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Gets the buffered ASCII code of the last key pressed",
+          "class": "Pad",
+          "member": "GetBufferedAscii"
         },
         {
           "input": [
@@ -25382,8 +25397,12 @@
           "name": "IS_SYSTEM_UI_SHOWING",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
+          "member": "IsSystemUiShowing",
+          "short_desc": "Checks if the account system overlay is open. The overlay can be opened using SHOW_SIGNIN_UI"
         },
         {
           "name": "IS_THIS_A_MINIGAME_SCRIPT",
@@ -42481,7 +42500,12 @@
         {
           "name": "SHOW_SIGNIN_UI",
           "num_params": 0,
-          "short_desc": "Opens the Xbox 360 Guide asking you to select a profile"
+          "short_desc": "Shows one of the account system overlays depending on the game version",
+          "class": "Game",
+          "attrs": {
+            "is_static": true
+          },
+          "member": "ShowSignInUi"
         },
         {
           "input": [

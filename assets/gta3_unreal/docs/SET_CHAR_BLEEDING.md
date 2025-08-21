@@ -1,0 +1,1 @@
+This command allows the character to constantly bleed. Blood textures are placed at the feet of the character. No blood is squirt out and the health of the character does not decrease; it is just a simple visual effect.

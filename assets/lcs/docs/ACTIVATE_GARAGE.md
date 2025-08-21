@@ -1,1 +1,1 @@
-This command activates the garage, which can be deactivated through command DEACTIVATE_GARAGE.
+This command activates the garage, which can be deactivated through DEACTIVATE_GARAGE.

@@ -1,0 +1,1 @@
+This command switches the car generator created using CREATE_CAR_GENERATOR, which is off by default. Oddly, an integer value less than `101` is meant to be a counter for the number of times the car generator spawns the vehicle before it stops spawning but a bug prevents this feature from working.

@@ -8,6 +8,4 @@ Number of text draws displayed on screen is limited:
 
 Each text must be less than `100` characters long.
 
-Positions `0.0` and lower will display only the shadow of the text. The following images show text displayed in Vice City at positions (`0.0, 0.0`), (`50.0, 50.0`), (`100.0, 100.0`), and (`200.0, 200.0`), from top left to bottom right. Note that the last text is wrapped due to the default wrap x of `182.0` (SET_TEXT_WRAPX).
-
-![](https://raw.githubusercontent.com/sannybuilder/library/refs/heads/master/shared/media/033E.png)
+Positions `0.0` and lower will display only the shadow of the text. The following images show text displayed in Vice City at positions (`0.0, 0.0`), (`50.0, 50.0`), (`100.0, 100.0`), and (`200.0, 200.0`), from top left to bottom right. Note that the last text is wrapped due to the default wrap x of `182.0` (SET_TEXT_WRAPX).![](https://raw.githubusercontent.com/sannybuilder/library/refs/heads/master/shared/media/033E.png)

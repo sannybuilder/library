@@ -1,0 +1,1 @@
+This command enables debug mode to visualize location check boundaries. It draws squares for 2D area checks and cubes for 3D area checks, helping developers see the exact boundaries being tested. The debug mode flag is constantly reset by the game, so DEBUG_ON must be placed in a loop for continuous effect. Use DEBUG_OFF to turn off debug mode instantly.

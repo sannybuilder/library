@@ -1,0 +1,1 @@
+This command sets the vehicle to watertight, meaning any characters except the player sitting inside the vehicle will not drown when submerged in water. It only affects wheeled vehicles like automobiles, helicopters, and motorbikes.

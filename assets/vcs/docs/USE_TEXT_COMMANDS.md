@@ -1,0 +1,1 @@
+This command allows the display and removal of all intro text displayed using commands such as DISPLAY_TEXT. Just before displaying text of that type, switch on this command and then perform whatever task you want with the text. After you are done displaying text, you switch off this command.

@@ -1,0 +1,1 @@
+This command sets the garage to accept the specified vehicle. The effectiveness of this command depends on the type of the garage and are noticeable for a few of them, with each of them behaving differently. For garage types `1`, `14`, and `21`, the vehicle is considered dropped off if the vehicle is in the garage and the garage door closed itself.

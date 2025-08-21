@@ -1,0 +1,1 @@
+This conditional command returns true if the player's current wanted level is greater than the integer value. The wanted level can be compared with any integer value, but only values between `0` and `5` are useful.

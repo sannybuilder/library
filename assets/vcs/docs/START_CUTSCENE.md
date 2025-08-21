@@ -1,0 +1,3 @@
+This command starts a cutscene loaded by LOAD_CUTSCENE. Cutscenes must be properly ended using CLEAR_CUTSCENE otherwise the game will be stuck in an uncontrollable state when the cutscene ends playing or is skipped.
+
+In GTA III and Vice City, widescreen is switched on while the cutscene plays. Most cutscenes can be started without loading anything other than cutscene data but it would look really weird. The minimum to view cutscenes properly is to load the relevant models, set the position of the cutscene, create cutscene objects and assign them an animation, and, in GTA III, create cutscene heads and assign them an animation. Subtitles are generally shown using PRINT_NOW timed to appear using GET_CUTSCENE_TIME along with the cutscene.

@@ -3,3 +3,5 @@ CLEO5 introduced concept of stream types:
 * **Sfx** - automatically corrected by global SFX volume settings and in-game speed changes
 * **Music** - automatically corrected by global music volume settings, muted if current in-game speed is not 1.0
 * **UserInterface** - automatically corrected by global SFX volume settings, unaffected by in-game speed
+
+New streams default to `UserInterface` type, except in compatibility mode (.cs4 extension) where they default to `None`.

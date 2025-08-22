@@ -398,3 +398,37 @@ export const SitAnimDirection = {
   "Right": 2,
   "Left": 3
 };
+export const DriveMode = {
+  "Normal": 0,
+  "Backward": 2
+};
+export const DrivingMode = {
+  "StopForCars": 0,
+  "SlowDownForCars": 1,
+  "AvoidCars": 2,
+  "PloughThrough": 3,
+  "StopForCarsIgnoreLights": 4,
+  "AvoidCarsObeyLights": 5,
+  "AvoidCarsStopForPedsObeyLights": 6
+};
+export const TempAction = {
+  "BrakeSmoothly": 1,
+  "Reverse": 3,
+  "HandbrakeTurnLeft": 4,
+  "HandbrakeTurnRight": 5,
+  "HandbrakeStraight": 6,
+  "TurnLeft": 7,
+  "TurnRight": 8,
+  "GoForward": 9,
+  "SwerveRightLeft": 10,
+  "SwerveLeftRight": 11,
+  "ReverseLeft": 13,
+  "ReverseRight": 14,
+  "BrakeSmoothlySwerveRightLeft": 20,
+  "BrakeSmoothlySwerveLeftRight": 21,
+  "ReverseSlowly": 22,
+  "GoForwardUseSteeringAngle": 23
+};
+export const CarMission = {
+  "GoTo": 4
+};

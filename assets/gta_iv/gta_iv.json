@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755866588102,
-    "version": "0.104",
+    "last_update": 1755876646100,
+    "version": "0.105",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -4424,7 +4424,12 @@
           ],
           "name": "CLEAR_AREA_OF_CARS",
           "num_params": 4,
-          "short_desc": "Clears the specified radius of cars"
+          "short_desc": "Clears the specified radius of cars",
+          "class": "World",
+          "member": "ClearAreaOfCars",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4447,7 +4452,12 @@
           ],
           "name": "CLEAR_AREA_OF_CHARS",
           "num_params": 4,
-          "short_desc": "Clears the specified radius out of chars"
+          "short_desc": "Clears the specified radius out of chars",
+          "class": "World",
+          "member": "ClearAreaOfChars",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4470,7 +4480,12 @@
           ],
           "name": "CLEAR_AREA_OF_COPS",
           "num_params": 4,
-          "short_desc": "Clears the specified radius out of cops"
+          "short_desc": "Clears the specified radius out of cops",
+          "class": "World",
+          "member": "ClearAreaOfCops",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -4493,7 +4508,12 @@
           ],
           "name": "CLEAR_AREA_OF_OBJECTS",
           "num_params": 4,
-          "short_desc": "Clears the specified radius out of objects"
+          "short_desc": "Clears the specified radius out of objects",
+          "class": "World",
+          "member": "ClearAreaOfObjects",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -18420,20 +18440,20 @@
               "type": "Char"
             },
             {
-              "name": "task",
-              "type": "int"
+              "name": "id",
+              "type": "TaskId"
+            }
+          ],
+          "output": [
+            {
+              "name": "status",
+              "type": "TaskStatus",
+              "source": "var_any"
             }
           ],
           "name": "GET_SCRIPT_TASK_STATUS",
           "num_params": 3,
-          "short_desc": "Returns the status of the specified script task of the character",
-          "output": [
-            {
-              "name": "status",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
+          "short_desc": "Returns the status of the specified script task id of the character",
           "class": "Char",
           "member": "GetScriptTaskStatus"
         },

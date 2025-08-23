@@ -1,0 +1,7 @@
+int gxtPtr = CText_Get(0xC1B340, 'CRED007') // Get gxt text address by gxt name
+print_formatted_now {format} "Old: %s" {time} 3000 {args} gxtPtr
+
+wait 3000
+
+AsciiToGxtChar("Hello World", gxtPtr) // change the gxt text
+print_formatted_now {format} "New: %s" {time} 3000 {args} gxtPtr

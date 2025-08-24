@@ -1,4 +1,4 @@
-// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.113
+// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.114
 /// Sets the current vector to the sum of two other vectors
 function CVector_Add<thiscall, 0x40FDD0>(self: int {CVector}, vector1: int {CVector}, vector2: int {CVector})
 /// Initializes a CEntity struct
@@ -7203,3 +7203,7 @@ function CText_LoadMissionText<thiscall, 0x69FBF0>(self: int {CText}, tableName:
 /// Unloads a text
 function CText_Unload<thiscall, 0x69FF20>(self: int {CText}, index: int {bool})
 function AsciiToGxtChar<cdecl, 0x718600>(inAscii: string, outGxt: string): int {bool}
+/// Calculates the difference between two Vectors(minuend - subtrahend) then store the result to outDifference. Returns the address equal to outDifference if the subtraction was successful, else returns 0(NULL)
+function VectorSubtract<cdecl, 0x40FE60>(outDifference: int {CVector*}, minuend: int {CVector*}, subtrahend: int {CVector*}): int {int*}
+/// Calculates the sum of two Vectors(vectorA + vectorB) then store the result to outSum. Returns the address equal to outSum if the addition was successful, else returns 0(NULL)
+function VectorAdd<cdecl, 0x40FE30>(outSum: int {CVector*}, vectorA: int {CVector*}, vectorB: int {CVector*}): int {CVector*}

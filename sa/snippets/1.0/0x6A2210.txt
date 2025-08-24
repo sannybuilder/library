@@ -1,0 +1,9 @@
+if Char.IsSittingInAnyCar($scplayer)
+then
+    int myVehicleHandle = Char.StoreCarIsInNoSave($scplayer)
+    int myVehiclePtr = Memory.GetVehiclePointer(myVehicleHandle)
+    float coords[3]
+    int coordsPtr = get_var_pointer coords
+    CAutomobile_GetComponentWorldPosition(myVehiclePtr, 0, coordsPtr) // 0 = driver's door
+    Text.PrintFormattedNow("%f %f %f", 3000, ...coords)
+end

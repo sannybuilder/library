@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755965161195,
-    "version": "0.113",
+    "last_update": 1756023806757,
+    "version": "0.114",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -165862,6 +165862,68 @@
           "num_params": 3,
           "member": "AsciiToGxtChar",
           "cc": "cdecl"
+        },
+        {
+          "input": [
+            {
+              "name": "outDifference",
+              "type": "CVector",
+              "source": "pointer"
+            },
+            {
+              "name": "minuend",
+              "type": "CVector",
+              "source": "pointer"
+            },
+            {
+              "name": "subtrahend",
+              "type": "CVector",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
+              "name": "status",
+              "type": "int",
+              "source": "pointer"
+            }
+          ],
+          "name": "0x40FE60",
+          "num_params": 4,
+          "member": "VectorSubtract",
+          "cc": "cdecl",
+          "short_desc": "Calculates the difference between two Vectors(minuend - subtrahend) then store the result to outDifference. Returns the address equal to outDifference if the subtraction was successful, else returns 0(NULL)"
+        },
+        {
+          "input": [
+            {
+              "name": "outSum",
+              "type": "CVector",
+              "source": "pointer"
+            },
+            {
+              "name": "vectorA",
+              "type": "CVector",
+              "source": "pointer"
+            },
+            {
+              "name": "vectorB",
+              "type": "CVector",
+              "source": "pointer"
+            }
+          ],
+          "output": [
+            {
+              "name": "status",
+              "type": "CVector",
+              "source": "pointer"
+            }
+          ],
+          "name": "0x40FE30",
+          "num_params": 4,
+          "cc": "cdecl",
+          "member": "VectorAdd",
+          "short_desc": "Calculates the sum of two Vectors(vectorA + vectorB) then store the result to outSum. Returns the address equal to outSum if the addition was successful, else returns 0(NULL)"
         }
       ]
     }

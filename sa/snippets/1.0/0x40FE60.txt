@@ -1,0 +1,22 @@
+Debugger.Enable()
+
+float fromCoords[3], toCoords[3], outCoords[3]
+int fromCoordsPtr = get_var_pointer fromCoords
+int toCoordsPtr = get_var_pointer toCoords
+int outCoordsPtr = get_var_pointer outCoords
+
+// test values
+fromCoords[0] = -70.49
+fromCoords[1] = 33.12
+fromCoords[2] = 6.49
+
+toCoords[0] = 40.64
+toCoords[1] = 90.12
+toCoords[2] = -9.98
+
+int status = VectorSubtract(outCoordsPtr, toCoordsPtr, fromCoordsPtr)
+if status == outCoordsPtr // subtraction was successful
+then // prints message: "(40.64, 90.12, -9.98) - (-70.49, 33.12, 6.49) = (111.13, 57.00, -16.47)"
+    Debugger.Trace("(%.2f, %.2f, %.2f) - (%.2f, %.2f, %.2f) = (%.2f, %.2f, %.2f)", ...toCoords, ...fromCoords, ...outCoords)
+end
+Debugger.Disable()

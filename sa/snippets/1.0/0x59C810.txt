@@ -1,0 +1,13 @@
+float testMatrix[4], testVector[3], resultantVector[3]
+// do something to testMatrix and testVector
+
+int testMatrixPtr = get_var_pointer testMatrix
+int testVectorPtr = get_var_pointer testVector
+int resultantVectorPtr = get_var_pointer resultantVector
+int status = MatrixVectorProduct(resultantVectorPtr, testVectorPtr, testMatrixPtr)
+if status == resultantVectorPtr // operation was successful
+then
+    Debugger.Enable()
+    Debugger.Trace("%f %f %f", ...resultantVector)
+    Debugger.Disable()
+end

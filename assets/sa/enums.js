@@ -985,6 +985,7 @@ export const RadioChannel = {
   "MasterSounds": 9,
   "WCTR": 10,
   "UserTracks": 11,
+  "Off": 12,
   "None": 12
 };
 export const CoronaType = {

@@ -1,0 +1,7 @@
+This command creates a vehicle at the coordinates point. 
+Using this command requires the model to be already loaded, usually through REQUEST_MODEL, or else the game might crash. 
+The major script editors like Sanny Builder support using the vehicle's DFF model name and automatically converts those values into integers upon compilation. 
+The Enforcer, Police, and Rhino are locked initially (lock state 5) when spawned; they can be unlocked using LOCK_CAR_DOORS or if any driver exits the vehicle. 
+All vehicles created by this command outside a mission will become near-permanent in the game until MARK_CAR_AS_NO_LONGER_NEEDED is used to mark it as no longer needed.
+
+Additionally, CREATE_CAR sets the `VEHICLEFLAG_ISLOCKED` flag, which prevents the vehicle from being towed.

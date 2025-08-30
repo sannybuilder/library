@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1755876646100,
-    "version": "0.105",
+    "last_update": 1756565685400,
+    "version": "0.106",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -2023,19 +2023,19 @@
               "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "forceType",
               "type": "int"
             },
             {
-              "name": "x",
+              "name": "forceX",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "forceY",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "forceZ",
               "type": "float"
             },
             {
@@ -2055,23 +2055,23 @@
               "type": "int"
             },
             {
-              "name": "_p10",
-              "type": "int"
+              "name": "isForceRelative",
+              "type": "bool"
             },
             {
-              "name": "_p11",
-              "type": "int"
+              "name": "isSpinRelative",
+              "type": "bool"
             },
             {
-              "name": "_p12",
-              "type": "int"
+              "name": "isMassRelative",
+              "type": "bool"
             }
           ],
           "class": "Car",
           "member": "ApplyForce",
           "name": "APPLY_FORCE_TO_CAR",
           "num_params": 12,
-          "short_desc": "Applies force to a car. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)"
+          "short_desc": "Applies force to the car"
         },
         {
           "input": [
@@ -2080,19 +2080,19 @@
               "type": "Object"
             },
             {
-              "name": "uk03",
+              "name": "forceType",
               "type": "int"
             },
             {
-              "name": "x",
+              "name": "forceX",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "forceY",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "forceZ",
               "type": "float"
             },
             {
@@ -2108,25 +2108,25 @@
               "type": "float"
             },
             {
-              "name": "uk40",
+              "name": "_p9",
               "type": "int"
             },
             {
-              "name": "uk51",
-              "type": "int"
+              "name": "isForceRelative",
+              "type": "bool"
             },
             {
-              "name": "uk61",
-              "type": "int"
+              "name": "isSpinRelative",
+              "type": "bool"
             },
             {
-              "name": "uk71",
-              "type": "int"
+              "name": "isMassRelative",
+              "type": "bool"
             }
           ],
           "name": "APPLY_FORCE_TO_OBJECT",
           "num_params": 12,
-          "short_desc": "Applies force to an object. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)",
+          "short_desc": "Applies force to the object",
           "class": "Object",
           "member": "ApplyForce"
         },
@@ -2137,19 +2137,19 @@
               "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "forceType",
               "type": "int"
             },
             {
-              "name": "x",
+              "name": "forceX",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "forceY",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "forceZ",
               "type": "float"
             },
             {
@@ -2169,34 +2169,36 @@
               "type": "int"
             },
             {
-              "name": "_p10",
-              "type": "int"
+              "name": "isForceRelative",
+              "type": "bool"
             },
             {
-              "name": "_p11",
-              "type": "int"
+              "name": "isSpinRelative",
+              "type": "bool"
             },
             {
-              "name": "_p12",
-              "type": "int"
+              "name": "isMassRelative",
+              "type": "bool"
             }
           ],
           "name": "APPLY_FORCE_TO_PED",
           "num_params": 12,
-          "short_desc": "Applies force to an ped. Params 6,7,8 does not seem to work in animated or ragdolled state. Param 10 specifies if the force direction is relative to direction object is facing (true), or static world direction (false)",
+          "short_desc": "Applies force to the ped. Spin does not seem to work in animated or ragdolled state",
           "class": "Char",
           "member": "ApplyForce"
         },
         {
           "input": [
             {
-              "name": "playerIndex",
+              "name": "self",
               "type": "Player"
             }
           ],
           "name": "APPLY_WANTED_LEVEL_CHANGE_NOW",
           "num_params": 1,
-          "short_desc": "Applies the wanted level changes immediately"
+          "short_desc": "Applies the wanted level changes immediately",
+          "class": "Player",
+          "member": "ApplyWantedLevelChangeNow"
         },
         {
           "name": "ARE_ALL_NAVMESH_REGIONS_LOADED",
@@ -2292,7 +2294,7 @@
         {
           "input": [
             {
-              "name": "vehicle",
+              "name": "self",
               "type": "Car"
             }
           ],
@@ -2301,7 +2303,9 @@
           "short_desc": "Returns true or false depending on whether the taxi lights are on",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "class": "Car",
+          "member": "AreTaxiLightsOn"
         },
         {
           "name": "ARE_WIDESCREEN_BORDERS_ACTIVE",
@@ -2495,221 +2499,56 @@
               "type": "Car"
             },
             {
-              "name": "_p3",
+              "name": "carPartIndex",
               "type": "int"
             },
             {
-              "name": "x0",
+              "name": "offsetX",
               "type": "float"
             },
             {
-              "name": "y0",
+              "name": "offsetY",
               "type": "float"
             },
             {
-              "name": "z0",
+              "name": "offsetZ",
               "type": "float"
             },
             {
-              "name": "x1",
+              "name": "rotX",
               "type": "float"
             },
             {
-              "name": "y1",
+              "name": "rotY",
               "type": "float"
             },
             {
-              "name": "z1",
+              "name": "rotZ",
               "type": "float"
             }
           ],
           "name": "ATTACH_CAR_TO_CAR",
           "num_params": 9,
-          "short_desc": "Attaches two Vehicles together. Rotation are in radians. If the 'Absolute offsets' boolean is true the offsets are absolute (to the world) otherwise they are relative (to the vehicle)",
+          "short_desc": "Attaches two vehicles together. Rotation are in radians",
           "class": "Car",
           "member": "AttachToCar"
-        },
-        {
-          "name": "ATTACH_CAR_TO_CAR_PHYSICALLY",
-          "num_params": 0,
-          "short_desc": "Attaches a Vehicle to another Vehicle Physically"
         },
         {
           "input": [
             {
               "name": "self",
               "type": "Car"
-            },
-            {
-              "name": "object",
-              "type": "Object"
-            },
-            {
-              "name": "_p3",
-              "type": "float"
-            },
-            {
-              "name": "_p4",
-              "type": "float"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "float"
-            },
-            {
-              "name": "_p8",
-              "type": "float"
-            },
-            {
-              "name": "_p9",
-              "type": "float"
-            }
-          ],
-          "name": "ATTACH_CAR_TO_OBJECT",
-          "num_params": 9,
-          "short_desc": "Attaches a vehicle to an object",
-          "class": "Car",
-          "member": "AttachToObject"
-        },
-        {
-          "name": "ATTACH_CAR_TO_OBJECT_PHYSICALLY",
-          "num_params": 0,
-          "short_desc": "Attaches a Vehicle to an Object Physically"
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Object"
-            },
-            {
-              "name": "vehicle",
-              "type": "Car"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "rX",
-              "type": "float"
-            },
-            {
-              "name": "rY",
-              "type": "float"
-            },
-            {
-              "name": "rZ",
-              "type": "float"
-            }
-          ],
-          "name": "ATTACH_OBJECT_TO_CAR",
-          "num_params": 9,
-          "short_desc": "Attaches an object to a car",
-          "class": "Object",
-          "member": "AttachToCar"
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Object"
             },
             {
               "name": "car",
               "type": "Car"
             },
             {
-              "name": "_p3",
+              "name": "carPartIndex",
               "type": "int"
             },
             {
               "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "float"
-            },
-            {
-              "name": "_p6",
-              "type": "float"
-            },
-            {
-              "name": "_p7",
-              "type": "float"
-            },
-            {
-              "name": "_p8",
-              "type": "float"
-            },
-            {
-              "name": "_p9",
-              "type": "float"
-            },
-            {
-              "name": "_p10",
-              "type": "float"
-            },
-            {
-              "name": "_p11",
-              "type": "float"
-            },
-            {
-              "name": "_p12",
-              "type": "float"
-            },
-            {
-              "name": "_p13",
-              "type": "float"
-            },
-            {
-              "name": "_p14",
-              "type": "float"
-            },
-            {
-              "name": "flag",
-              "type": "bool"
-            }
-          ],
-          "name": "ATTACH_OBJECT_TO_CAR_PHYSICALLY",
-          "num_params": 15,
-          "short_desc": "Attaches an Object to a Vehicle Physically",
-          "class": "Object",
-          "member": "AttachToCarPhysically"
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Object"
-            },
-            {
-              "name": "object",
-              "type": "Object"
-            },
-            {
-              "name": "_p3",
               "type": "int"
             },
             {
@@ -2735,81 +2574,43 @@
             {
               "name": "z1",
               "type": "float"
+            },
+            {
+              "name": "x2",
+              "type": "float"
+            },
+            {
+              "name": "y2",
+              "type": "float"
+            },
+            {
+              "name": "z2",
+              "type": "float"
+            },
+            {
+              "name": "detachmentForce",
+              "type": "float"
+            },
+            {
+              "name": "attachStrongly",
+              "type": "bool"
             }
           ],
-          "name": "ATTACH_OBJECT_TO_OBJECT",
-          "num_params": 9,
-          "short_desc": "Attaches 2 Objects together",
-          "class": "Object",
-          "member": "AttachToObject"
-        },
-        {
-          "name": "ATTACH_OBJECT_TO_OBJECT_PHYSICALLY",
-          "num_params": 0,
-          "short_desc": "Attaches an Object to another Object Physically"
+          "name": "ATTACH_CAR_TO_CAR_PHYSICALLY",
+          "num_params": 15,
+          "short_desc": "Attaches the vehicle to another vehicle physically",
+          "class": "Car",
+          "member": "AttachToCarPhysically"
         },
         {
           "input": [
             {
               "name": "self",
-              "type": "Object"
-            },
-            {
-              "name": "char",
-              "type": "Char"
-            },
-            {
-              "name": "boneId",
-              "type": "int"
-            },
-            {
-              "name": "x",
-              "type": "float"
-            },
-            {
-              "name": "y",
-              "type": "float"
-            },
-            {
-              "name": "z",
-              "type": "float"
-            },
-            {
-              "name": "rX",
-              "type": "float"
-            },
-            {
-              "name": "rY",
-              "type": "float"
-            },
-            {
-              "name": "rZ",
-              "type": "float"
-            },
-            {
-              "name": "_p10",
-              "type": "int"
-            }
-          ],
-          "name": "ATTACH_OBJECT_TO_PED",
-          "num_params": 10,
-          "short_desc": "Attaches an object to the ped",
-          "class": "Object",
-          "member": "AttachToPed"
-        },
-        {
-          "name": "ATTACH_OBJECT_TO_PED_PHYSICALLY",
-          "num_params": 0
-        },
-        {
-          "input": [
-            {
-              "name": "self",
-              "type": "Char"
-            },
-            {
-              "name": "vehicle",
               "type": "Car"
+            },
+            {
+              "name": "object",
+              "type": "Object"
             },
             {
               "name": "_p3",
@@ -2836,6 +2637,273 @@
               "type": "float"
             },
             {
+              "name": "rotZ",
+              "type": "float"
+            }
+          ],
+          "name": "ATTACH_CAR_TO_OBJECT",
+          "num_params": 9,
+          "short_desc": "Attaches the vehicle to the object",
+          "class": "Car",
+          "member": "AttachToObject"
+        },
+        {
+          "name": "ATTACH_CAR_TO_OBJECT_PHYSICALLY",
+          "num_params": 0,
+          "short_desc": "Attaches a Vehicle to an Object Physically"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "carPartIndex",
+              "type": "int"
+            },
+            {
+              "name": "offsetX",
+              "type": "float"
+            },
+            {
+              "name": "offsetY",
+              "type": "float"
+            },
+            {
+              "name": "offsetZ",
+              "type": "float"
+            },
+            {
+              "name": "rotX",
+              "type": "float"
+            },
+            {
+              "name": "rotY",
+              "type": "float"
+            },
+            {
+              "name": "rotZ",
+              "type": "float"
+            }
+          ],
+          "name": "ATTACH_OBJECT_TO_CAR",
+          "num_params": 9,
+          "short_desc": "Attaches the object to the car",
+          "class": "Object",
+          "member": "AttachToCar"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "car",
+              "type": "Car"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
+              "type": "int"
+            },
+            {
+              "name": "offsetX",
+              "type": "float"
+            },
+            {
+              "name": "offsetY",
+              "type": "float"
+            },
+            {
+              "name": "offsetZ",
+              "type": "float"
+            },
+            {
+              "name": "radius1",
+              "type": "float"
+            },
+            {
+              "name": "radius2",
+              "type": "float"
+            },
+            {
+              "name": "radius3",
+              "type": "float"
+            },
+            {
+              "name": "_p11",
+              "type": "float"
+            },
+            {
+              "name": "_p12",
+              "type": "float"
+            },
+            {
+              "name": "_p13",
+              "type": "float"
+            },
+            {
+              "name": "detachmentForce",
+              "type": "float"
+            },
+            {
+              "name": "attachStrongly",
+              "type": "bool"
+            }
+          ],
+          "name": "ATTACH_OBJECT_TO_CAR_PHYSICALLY",
+          "num_params": 15,
+          "short_desc": "Attaches the object to the vehicle physically",
+          "class": "Object",
+          "member": "AttachToCarPhysically"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            },
+            {
+              "name": "_p3",
+              "type": "int"
+            },
+            {
+              "name": "offsetX",
+              "type": "float"
+            },
+            {
+              "name": "offsetY",
+              "type": "float"
+            },
+            {
+              "name": "offsetZ",
+              "type": "float"
+            },
+            {
+              "name": "rotX",
+              "type": "float"
+            },
+            {
+              "name": "rotY",
+              "type": "float"
+            },
+            {
+              "name": "rotZ",
+              "type": "float"
+            }
+          ],
+          "name": "ATTACH_OBJECT_TO_OBJECT",
+          "num_params": 9,
+          "short_desc": "Attaches 2 objects together",
+          "class": "Object",
+          "member": "AttachToObject"
+        },
+        {
+          "name": "ATTACH_OBJECT_TO_OBJECT_PHYSICALLY",
+          "num_params": 0,
+          "short_desc": "Attaches an Object to another Object Physically"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Object"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            },
+            {
+              "name": "boneId",
+              "type": "PedBone"
+            },
+            {
+              "name": "offsetX",
+              "type": "float"
+            },
+            {
+              "name": "offsetY",
+              "type": "float"
+            },
+            {
+              "name": "offsetZ",
+              "type": "float"
+            },
+            {
+              "name": "rotX",
+              "type": "float"
+            },
+            {
+              "name": "rotY",
+              "type": "float"
+            },
+            {
+              "name": "rotZ",
+              "type": "float"
+            },
+            {
+              "name": "_p10",
+              "type": "bool"
+            }
+          ],
+          "name": "ATTACH_OBJECT_TO_PED",
+          "num_params": 10,
+          "short_desc": "Attaches the object to the ped",
+          "class": "Object",
+          "member": "AttachToPed"
+        },
+        {
+          "name": "ATTACH_OBJECT_TO_PED_PHYSICALLY",
+          "num_params": 0
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "vehicle",
+              "type": "Car"
+            },
+            {
+              "name": "carPartIndex",
+              "type": "int"
+            },
+            {
+              "name": "offsetX",
+              "type": "float"
+            },
+            {
+              "name": "offsetY",
+              "type": "float"
+            },
+            {
+              "name": "offsetZ",
+              "type": "float"
+            },
+            {
+              "name": "heading",
+              "type": "float"
+            },
+            {
+              "name": "headingRange",
+              "type": "float"
+            },
+            {
               "name": "_p9",
               "type": "bool"
             },
@@ -2846,7 +2914,7 @@
           ],
           "name": "ATTACH_PED_TO_CAR",
           "num_params": 10,
-          "short_desc": "Attaches a ped to a vehicle",
+          "short_desc": "Attaches the ped to the vehicle",
           "class": "Char",
           "member": "AttachToCar"
         },
@@ -2861,7 +2929,11 @@
               "type": "Car"
             },
             {
-              "name": "pedbone",
+              "name": "carPartIndex",
+              "type": "int"
+            },
+            {
+              "name": "_p4",
               "type": "int"
             },
             {
@@ -2877,11 +2949,7 @@
               "type": "float"
             },
             {
-              "name": "angle",
-              "type": "float"
-            },
-            {
-              "name": "_p8",
+              "name": "detachmentForce",
               "type": "float"
             },
             {
@@ -2889,13 +2957,13 @@
               "type": "bool"
             },
             {
-              "name": "_p10",
+              "name": "collideWithEachOther",
               "type": "bool"
             }
           ],
           "name": "ATTACH_PED_TO_CAR_PHYSICALLY",
           "num_params": 10,
-          "short_desc": "Attaches a Ped to a Vehicle physically",
+          "short_desc": "Attaches the ped to the vehicle physically. Position in world coordinates",
           "class": "Char",
           "member": "AttachToCarPhysically"
         },
@@ -2910,27 +2978,27 @@
               "type": "Object"
             },
             {
-              "name": "pedBone",
+              "name": "_p3",
               "type": "int"
             },
             {
-              "name": "x",
+              "name": "offsetX",
               "type": "float"
             },
             {
-              "name": "y",
+              "name": "offsetY",
               "type": "float"
             },
             {
-              "name": "z",
+              "name": "offsetZ",
               "type": "float"
             },
             {
-              "name": "angle",
+              "name": "heading",
               "type": "float"
             },
             {
-              "name": "_p8",
+              "name": "headingRange",
               "type": "float"
             },
             {
@@ -2944,7 +3012,7 @@
           ],
           "name": "ATTACH_PED_TO_OBJECT",
           "num_params": 10,
-          "short_desc": "Attaches a Ped to an Object",
+          "short_desc": "Attaches the ped to the object",
           "class": "Char",
           "member": "AttachToObject"
         },
@@ -36714,8 +36782,6 @@
           ]
         },
         {
-          "name": "SET_FAKE_WANTED_CIRCLE",
-          "num_params": 3,
           "input": [
             {
               "name": "x",
@@ -36729,18 +36795,30 @@
               "name": "radius",
               "type": "float"
             }
-          ]
+          ],
+          "name": "SET_FAKE_WANTED_CIRCLE",
+          "num_params": 3,
+          "class": "Game",
+          "member": "SetFakeWantedCircle",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "lvl",
+              "name": "level",
               "type": "int"
             }
           ],
           "name": "SET_FAKE_WANTED_LEVEL",
           "num_params": 1,
-          "short_desc": "Sets a fake wanted level. Its effects can only be seen if the player has no wanted level. If the player does have a wanted level, its effects can only be seen after the wanted level is cleared. The radar will show the search zone and the HUD will display the wanted level but the cops will behave as if the player has no wanted level. The search zone will follow the player. To clear the fake wanted level, set the fake wanted level to 0"
+          "short_desc": "Sets a fake wanted level. Its effects can only be seen if the player has no wanted level. If the player does have a wanted level, its effects can only be seen after the wanted level is cleared. The radar will show the search zone and the HUD will display the wanted level but the cops will behave as if the player has no wanted level. The search zone will follow the player. To clear the fake wanted level, set the fake wanted level to 0",
+          "class": "Game",
+          "member": "SetFakeWantedLevel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_FILTER_MENU_ON",
@@ -41090,12 +41168,17 @@
         {
           "input": [
             {
-              "name": "radiostate",
+              "name": "radioState",
               "type": "bool"
             }
           ],
           "name": "SET_TAXI_GARAGE_RADIO_STATE",
-          "num_params": 1
+          "num_params": 1,
+          "class": "World",
+          "member": "SetTaxiGarageRadioState",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -50117,9 +50200,12 @@
           "name": "WANTED_STARS_ARE_FLASHING",
           "num_params": 0,
           "attrs": {
-            "is_condition": true
+            "is_condition": true,
+            "is_static": true
           },
-          "short_desc": "Does nothing"
+          "short_desc": "Returns true if wanted stars are flashing",
+          "class": "Game",
+          "member": "WantedStarsAreFlashing"
         },
         {
           "input": [
@@ -51727,12 +51813,10 @@
           "num_params": 0
         },
         {
-          "name": "GET_PLAYER_WANTED_LEVEL_INCREMENT",
-          "num_params": 2,
           "input": [
             {
-              "name": "player",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
           "output": [
@@ -51741,7 +51825,11 @@
               "type": "int",
               "source": "var_any"
             }
-          ]
+          ],
+          "name": "GET_PLAYER_WANTED_LEVEL_INCREMENT",
+          "num_params": 2,
+          "class": "Player",
+          "member": "GetWantedLevelIncrement"
         },
         {
           "name": "GET_RANDOM_WATER_NODE",

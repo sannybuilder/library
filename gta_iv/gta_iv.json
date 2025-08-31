@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1756565685400,
-    "version": "0.106",
+    "last_update": 1756663316697,
+    "version": "0.107",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -268,7 +268,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "amount",
@@ -3297,7 +3297,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -3307,7 +3307,9 @@
           ],
           "name": "BLOCK_PED_WEAPON_SWITCHING",
           "num_params": 2,
-          "short_desc": "Blocks a ped from weapon switching"
+          "short_desc": "Blocks the ped from weapon switching",
+          "class": "Char",
+          "member": "BlockWeaponSwitching"
         },
         {
           "input": [
@@ -4628,7 +4630,7 @@
           "num_params": 1,
           "class": "Car",
           "member": "ClearLastWeaponDamage",
-          "short_desc": "Clears the vehicle's last weapon damage (see 031E)"
+          "short_desc": "Clears the vehicle's last weapon damage (see HAS_CAR_BEEN_DAMAGED_BY_WEAPON)"
         },
         {
           "input": [
@@ -4683,7 +4685,7 @@
           "num_params": 1,
           "class": "Char",
           "member": "ClearLastWeaponDamage",
-          "short_desc": "Clears the character's last weapon damage (see 031D)"
+          "short_desc": "Clears the character's last weapon damage (see HAS_CHAR_BEEN_DAMAGED_BY_WEAPON)"
         },
         {
           "input": [
@@ -4859,17 +4861,17 @@
           "member": "ClearLastDamageEntity"
         },
         {
-          "name": "CLEAR_OBJECT_LAST_WEAPON_DAMAGE",
-          "num_params": 1,
           "input": [
             {
               "name": "self",
               "type": "Object"
             }
           ],
+          "name": "CLEAR_OBJECT_LAST_WEAPON_DAMAGE",
+          "num_params": 1,
           "class": "Object",
           "member": "ClearLastWeaponDamage",
-          "short_desc": "Clears the object's last damaging weapon ID"
+          "short_desc": "Clears the object's last weapon damage (see HAS_OBJECT_BEEN_DAMAGED_BY_WEAPON)"
         },
         {
           "input": [
@@ -9461,7 +9463,12 @@
           ],
           "name": "ENABLE_MAX_AMMO_CAP",
           "num_params": 1,
-          "short_desc": "Sets a cap on the amount of ammo the player can carry. Turning on will remove the extra ammo if the player has more ammo than the cap. The caps are set in the Weaponinfo.xml file"
+          "short_desc": "Sets a cap on the amount of ammo the player can carry. Turning on will remove the extra ammo if the player has more ammo than the cap. The caps are set in the Weaponinfo.xml file",
+          "class": "Game",
+          "member": "EnableMaxAmmoCap",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -10070,7 +10077,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -10087,7 +10094,10 @@
             }
           ],
           "name": "FIRE_PED_WEAPON",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Char",
+          "member": "FireWeapon",
+          "short_desc": "Fires a shot from the ped's weapon at the specified coordinates"
         },
         {
           "input": [
@@ -10233,7 +10243,12 @@
             }
           ],
           "name": "FLASH_WEAPON_ICON",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "FlashWeaponIcon",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -10945,18 +10960,18 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
-          "name": "GET_AMMO_IN_CHAR_WEAPON",
-          "num_params": 3,
           "output": [
             {
-              "name": "pAmmo",
+              "name": "ammo",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_AMMO_IN_CHAR_WEAPON",
+          "num_params": 3,
           "class": "Char",
           "member": "GetAmmoInWeapon",
           "short_desc": "Gets the amount of ammo in the specified weapon of the character"
@@ -12712,31 +12727,31 @@
             },
             {
               "name": "slot",
-              "type": "int"
+              "type": "WeaponSlot"
+            }
+          ],
+          "output": [
+            {
+              "name": "weaponType",
+              "type": "WeaponType",
+              "source": "var_any"
+            },
+            {
+              "name": "weaponAmmo",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "modelHash",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "name": "GET_CHAR_WEAPON_IN_SLOT",
           "num_params": 5,
-          "output": [
-            {
-              "name": "pWeapon",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "pAmmo0",
-              "type": "int",
-              "source": "var_any"
-            },
-            {
-              "name": "pAmmo1",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "class": "Char",
           "member": "GetWeaponInSlot",
-          "short_desc": "Returns the weapon type, ammo and model from the specified slot"
+          "short_desc": "Returns the weapon type, ammo and model hash from the specified slot"
         },
         {
           "input": [
@@ -13298,8 +13313,8 @@
           ],
           "output": [
             {
-              "name": "pWeapon",
-              "type": "int",
+              "name": "weapon",
+              "type": "WeaponType",
               "source": "var_any"
             }
           ],
@@ -19610,22 +19625,22 @@
         {
           "input": [
             {
-              "name": "weapontype",
-              "type": "int"
+              "name": "weapon",
+              "type": "WeaponType"
             }
           ],
-          "name": "GET_WEAPONTYPE_MODEL",
-          "num_params": 2,
           "output": [
             {
-              "name": "model",
+              "name": "hash",
               "type": "int",
               "source": "var_any"
             }
           ],
+          "name": "GET_WEAPONTYPE_MODEL",
+          "num_params": 2,
           "class": "Weapon",
           "member": "GetModel",
-          "short_desc": "Gets the model ID of the weapon according to the weapon type",
+          "short_desc": "Gets the model hash of the weapon according to the weapon type",
           "attrs": {
             "is_static": true
           }
@@ -19634,18 +19649,18 @@
           "input": [
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
+            }
+          ],
+          "output": [
+            {
+              "name": "slot",
+              "type": "WeaponSlot",
+              "source": "var_any"
             }
           ],
           "name": "GET_WEAPONTYPE_SLOT",
           "num_params": 2,
-          "output": [
-            {
-              "name": "slot",
-              "type": "int",
-              "source": "var_any"
-            }
-          ],
           "class": "Weapon",
           "member": "GetSlot",
           "short_desc": "",
@@ -19774,20 +19789,20 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
               "type": "int"
             },
             {
-              "name": "switchToGivenWeapon",
+              "name": "swapToGivenWeapon",
               "type": "bool"
             }
           ],
           "name": "GIVE_DELAYED_WEAPON_TO_CHAR",
           "num_params": 4,
-          "short_desc": "Gives a weapon to the specified ped. It works similarly as GIVE_WEAPON_TO_CHAR",
+          "short_desc": "Gives a weapon to the specified ped",
           "class": "Char",
           "member": "GiveDelayedWeapon"
         },
@@ -19923,24 +19938,27 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "hotSwap",
               "type": "bool"
             }
           ],
           "name": "GIVE_WEAPON_TO_CHAR",
-          "num_params": 4
+          "num_params": 4,
+          "class": "Char",
+          "member": "GiveWeapon",
+          "short_desc": "Gives the weapon to the specified ped. The weapon will be given instantly if hotSwap is true"
         },
         {
           "name": "GRAB_ENTITY_ON_ROPE_FOR_OBJECT",
@@ -20092,7 +20110,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "name": "HAS_CAR_BEEN_DAMAGED_BY_WEAPON",
@@ -20257,7 +20275,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "name": "HAS_CHAR_BEEN_DAMAGED_BY_WEAPON",
@@ -20293,7 +20311,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "name": "HAS_CHAR_GOT_WEAPON",
@@ -20582,18 +20600,18 @@
           "member": "HasBeenDamagedByChar"
         },
         {
-          "name": "HAS_OBJECT_BEEN_DAMAGED_BY_WEAPON",
-          "num_params": 2,
           "input": [
             {
               "name": "self",
               "type": "Object"
             },
             {
-              "name": "unk",
-              "type": "int"
+              "name": "weapon",
+              "type": "WeaponType"
             }
           ],
+          "name": "HAS_OBJECT_BEEN_DAMAGED_BY_WEAPON",
+          "num_params": 2,
           "attrs": {
             "is_condition": true
           },
@@ -31724,7 +31742,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "name": "REMOVE_WEAPON_FROM_CHAR",
@@ -32726,7 +32744,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
@@ -34385,7 +34403,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             },
             {
               "name": "ammo",
@@ -36186,21 +36204,23 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
-              "name": "w",
-              "type": "int"
+              "name": "weapon",
+              "type": "WeaponType"
             },
             {
-              "name": "_p3",
+              "name": "hotSwap",
               "type": "bool"
             }
           ],
           "name": "SET_CURRENT_CHAR_WEAPON",
           "num_params": 3,
-          "short_desc": "Sets the current weapon in the peds hand"
+          "short_desc": "Sets the current weapon in the peds hand. The weapon will be given instantly if hotSwap is true",
+          "class": "Char",
+          "member": "SetCurrentWeapon"
         },
         {
           "input": [
@@ -36260,7 +36280,12 @@
             }
           ],
           "name": "SET_DEAD_PEDS_DROP_WEAPONS",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Game",
+          "member": "SetDeadPedsDropWeapons",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -43859,12 +43884,14 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             }
           ],
           "name": "STOP_PED_WEAPON_FIRING_WHEN_DROPPED",
-          "num_params": 1
+          "num_params": 1,
+          "class": "Char",
+          "member": "StopPedWeaponFiringWhenDropped"
         },
         {
           "input": [
@@ -48778,7 +48805,7 @@
             },
             {
               "name": "weapon",
-              "type": "int"
+              "type": "WeaponType"
             }
           ],
           "name": "TASK_SWAP_WEAPON",
@@ -50795,14 +50822,19 @@
           ]
         },
         {
-          "name": "SET_HIDE_WEAPON_ICON",
-          "num_params": 1,
           "input": [
             {
               "name": "set",
               "type": "bool"
             }
-          ]
+          ],
+          "name": "SET_HIDE_WEAPON_ICON",
+          "num_params": 1,
+          "class": "Hud",
+          "member": "SetHideWeaponIcon",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "SET_IGNORE_NO_GPS_FLAG",

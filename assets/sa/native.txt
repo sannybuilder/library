@@ -1,4 +1,4 @@
-// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.116
+// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.117
 /// Sets the current vector to the sum of two other vectors
 function CVector_Add<thiscall, 0x40FDD0>(self: int {CVector}, vector1: int {CVector}, vector2: int {CVector})
 /// Initializes a CEntity struct
@@ -2218,7 +2218,7 @@ function atoi<cdecl, 0x82258E>(str: string): int
 function CVehicle_ctor<thiscall, 0x6D5F10>(self: int {CVehicle}): int {CVehicle}
 /// Checks if the vehicle is a law enforcement vehicle
 function CVehicle_IsLawEnforcementVehicle<thiscall, 0x6D2370>(self: int {CVehicle}): int {bool}
-/// Returns a position vector of the given player. Use -1 for the current player
+/// Returns the player's coordinates
 function FindPlayerCentreOfWorld<cdecl, 0x56E250>(playerIndex: int): int {CVector}
 /// Returns a pointer to the player's current vehicle, or 0 if the player is not driving any
 function FindPlayerVehicle<cdecl, 0x56E0D0>(playerIndex: int, includeRemote: int {bool}): int {CVehicle}
@@ -7210,3 +7210,7 @@ function VectorSubtract<cdecl, 0x40FE60>(outDifference: int {CVector*}, minuend:
 function VectorAdd<cdecl, 0x40FE30>(outSum: int {CVector*}, vectorA: int {CVector*}, vectorB: int {CVector*}): int {CVector*}
 /// Performs Matrix-Vector Multiplication then stores the resultant vector to outResultant. Returns the address equal to outResultant if the multiplication was successful, else returns 0(NULL)
 function MatrixVectorProduct<cdecl, 0x59C810>(outResultant: int {CVector}, vector: int {CVector*}, matrix: int {int*}): int {CVector}
+/// Returns a pointer to the player's CWanted struct
+function FindPlayerWanted<cdecl, 0x56E230>(playerIndex: int): int
+/// Returns a pointer to the player's CPed struct
+function FindPlayerPed<cdecl, 0x56E210>(playerIndex: int): int {CPed}

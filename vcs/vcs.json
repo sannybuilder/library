@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "0.34",
-    "last_update": 1757304157168,
+    "last_update": 1757373609897,
+    "version": "0.35",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -12617,7 +12617,7 @@
           "member": "PlayMissionAudio",
           "name": "PLAY_MISSION_AUDIO",
           "num_params": 1,
-          "short_desc": "Plays the loaded sound (03CF)"
+          "short_desc": "Plays the loaded sound (0257)"
         },
         {
           "input": [
@@ -12635,7 +12635,7 @@
           "member": "HasMissionAudioFinished",
           "name": "HAS_MISSION_AUDIO_FINISHED",
           "num_params": 1,
-          "short_desc": "Returns true if the audio (03CF) is no longer playing"
+          "short_desc": "Returns true if the audio (0257) is no longer playing"
         },
         {
           "input": [
@@ -12766,7 +12766,7 @@
           "member": "SetMissionAudioPosition",
           "name": "SET_MISSION_AUDIO_POSITION",
           "num_params": 4,
-          "short_desc": "Sets the location of the mission audio (03CF) where it can be heard"
+          "short_desc": "Sets the location of the mission audio (0257) where it can be heard"
         },
         {
           "attrs": {
@@ -13068,7 +13068,6 @@
               "type": "int"
             }
           ],
-          "output": [],
           "attrs": {
             "is_static": true
           },
@@ -13357,84 +13356,125 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "total",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "0280",
-          "name": "COMMAND_0280",
-          "num_params": 1
+          "member": "SetTotalNumberOfKillFrenzies",
+          "name": "SET_TOTAL_NUMBER_OF_KILL_FRENZIES",
+          "num_params": 1,
+          "short_desc": "Sets the total number of rampages passed stat"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Rc",
           "id": "0281",
-          "name": "COMMAND_0281",
-          "num_params": 0
+          "member": "BlowUpBuggy",
+          "name": "BLOW_UP_RC_BUGGY",
+          "num_params": 0,
+          "short_desc": "Destroys the remote-control vehicle"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0282",
-          "name": "COMMAND_0282",
-          "num_params": 0
+          "member": "IsFrench",
+          "name": "IS_FRENCH_GAME",
+          "num_params": 0,
+          "short_desc": "Returns true if the game language is set to French"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0283",
-          "name": "COMMAND_0283",
-          "num_params": 0
+          "member": "IsGerman",
+          "name": "IS_GERMAN_GAME",
+          "num_params": 0,
+          "short_desc": "Returns true if the game language is set to German"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "slotId",
+              "type": "MissionAudioSlot"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "0284",
-          "name": "COMMAND_0284",
-          "num_params": 1
+          "member": "ClearMissionAudio",
+          "name": "CLEAR_MISSION_AUDIO",
+          "num_params": 1,
+          "short_desc": "Unloads the mission audio (0257), freeing game memory"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0285",
-          "name": "COMMAND_0285",
-          "num_params": 2
+          "member": "SetUsePednodeSeek",
+          "name": "SET_CHAR_USE_PEDNODE_SEEK",
+          "num_params": 2,
+          "short_desc": "Sets whether the character should follow paths set for pedestrians"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
           "id": "0286",
-          "name": "COMMAND_0286",
-          "num_params": 2
+          "member": "SetGetOutOfJailFree",
+          "name": "SET_GET_OUT_OF_JAIL_FREE",
+          "num_params": 2,
+          "short_desc": "Sets whether the player loses the cash when gets busted (works once)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
           "id": "0287",
-          "name": "COMMAND_0287",
-          "num_params": 2
+          "member": "SetFreeHealthCare",
+          "name": "SET_FREE_HEALTH_CARE",
+          "num_params": 2,
+          "short_desc": "Sets whether the player loses the cash when gets wasted (works once)"
         },
         {
           "input": [
@@ -13456,369 +13496,493 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Object",
           "id": "028A",
-          "name": "COMMAND_028A",
-          "num_params": 2
+          "member": "SetDrawLast",
+          "name": "SET_OBJECT_DRAW_LAST",
+          "num_params": 2,
+          "short_desc": "Sets the specified object to always draw on top of other objects"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
+              "name": "weaponType",
+              "type": "WeaponType"
+            }
+          ],
+          "output": [
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "ammo",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "028B",
-          "name": "COMMAND_028B",
-          "num_params": 3
+          "name": "GET_AMMO_IN_CHAR_WEAPON",
+          "num_params": 3,
+          "short_desc": "Gets the amount of ammo in the specified weapon of the character",
+          "class": "Char",
+          "member": "GetAmmoInWeapon"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "soundId",
+              "type": "ScriptSound"
             }
           ],
+          "class": "Char",
           "id": "028C",
-          "name": "COMMAND_028C",
-          "num_params": 2
+          "member": "SetSay",
+          "name": "SET_CHAR_SAY",
+          "num_params": 2,
+          "short_desc": "Makes the character shout once"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "distance",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "028D",
-          "name": "COMMAND_028D",
-          "num_params": 1
+          "member": "SetNearClip",
+          "name": "SET_NEAR_CLIP",
+          "num_params": 1,
+          "short_desc": "Sets camera minimum drawing distance"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "channel",
+              "type": "RadioChannel"
             },
             {
-              "name": "_p2",
+              "name": "startFromMs",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "028E",
-          "name": "COMMAND_028E",
-          "num_params": 2
+          "member": "SetRadioChannel",
+          "name": "SET_RADIO_CHANNEL",
+          "num_params": 2,
+          "short_desc": "Sets the current radio station that is playing, if the player is in a vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Garage",
           "id": "028F",
-          "name": "COMMAND_028F",
-          "num_params": 2
+          "member": "DoesContainCar",
+          "name": "DOES_GARAGE_CONTAIN_CAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the garage contains the vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "traction",
+              "type": "float"
             }
           ],
+          "class": "Car",
           "id": "0290",
-          "name": "COMMAND_0290",
-          "num_params": 2
+          "member": "SetTraction",
+          "name": "SET_CAR_TRACTION",
+          "num_params": 2,
+          "short_desc": "Overrides the default AI controlled vehicle traction value of 1.0"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0291",
-          "name": "COMMAND_0291",
-          "num_params": 0
+          "member": "AreMeasurementsInMeters",
+          "name": "ARE_MEASUREMENTS_IN_METRES",
+          "num_params": 0,
+          "short_desc": "Returns true if the game uses metric measurements (meters instead of feet)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "meters",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "feet",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          },
+          "class": "Math",
           "id": "0292",
-          "name": "COMMAND_0292",
-          "num_params": 2
+          "member": "ConvertMetersToFeet",
+          "name": "CONVERT_METRES_TO_FEET",
+          "num_params": 2,
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Path",
           "id": "0293",
-          "name": "COMMAND_0293",
-          "num_params": 6
+          "member": "MarkRoadsBetweenLevels",
+          "name": "MARK_ROADS_BETWEEN_LEVELS",
+          "num_params": 6,
+          "short_desc": "Marks all car path nodes in the given 3D area as transitional between two levels (islands)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
           "id": "0294",
-          "name": "COMMAND_0294",
-          "num_params": 2
+          "member": "SetAvoidLevelTransitions",
+          "name": "SET_CAR_AVOID_LEVEL_TRANSITIONS",
+          "num_params": 2,
+          "short_desc": "Sets whether the vehicle will avoid paths between levels (0293)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0295",
-          "name": "COMMAND_0295",
-          "num_params": 6
+          "member": "ClearAreaOfChars",
+          "name": "CLEAR_AREA_OF_CHARS",
+          "num_params": 6,
+          "short_desc": "Clears all pedestrians from the given area"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "numMissions",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "0296",
-          "name": "COMMAND_0296",
-          "num_params": 1
+          "member": "SetTotalNumberOfMissions",
+          "name": "SET_TOTAL_NUMBER_OF_MISSIONS",
+          "num_params": 1,
+          "short_desc": "Sets the total number of missions that can be completed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
+              "name": "meters",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "feet",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true,
+            "is_overload": true
+          },
+          "class": "Math",
           "id": "0297",
-          "name": "COMMAND_0297",
-          "num_params": 2
+          "member": "ConvertMetersToFeet",
+          "name": "CONVERT_METRES_TO_FEET_INT",
+          "num_params": 2,
+          "short_desc": "Returns the result of converting meters to feet"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "seat",
+              "type": "SeatId"
             }
           ],
           "id": "0298",
-          "name": "COMMAND_0298",
-          "num_params": 3
+          "name": "WARP_CHAR_INTO_CAR_AS_PASSENGER",
+          "num_params": 3,
+          "short_desc": "Puts the character into a vehicle's passenger seat",
+          "class": "Char",
+          "member": "WarpIntoCarAsPassenger"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "seat",
+              "type": "SeatId"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
           "id": "0299",
-          "name": "COMMAND_0299",
-          "num_params": 2
+          "member": "IsPassengerSeatFree",
+          "name": "IS_CAR_PASSENGER_SEAT_FREE",
+          "num_params": 2,
+          "short_desc": "Returns true if the specified car seat is empty"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
+              "name": "seat",
+              "type": "SeatId"
+            }
+          ],
+          "output": [
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "id": "029A",
-          "name": "COMMAND_029A",
-          "num_params": 3
+          "name": "GET_CHAR_IN_CAR_PASSENGER_SEAT",
+          "num_params": 3,
+          "short_desc": "Returns the handle of a character sitting in the specified car seat",
+          "class": "Car",
+          "member": "GetCharInPassengerSeat"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "029B",
-          "name": "COMMAND_029B",
-          "num_params": 2
+          "member": "SetIsChrisCriminal",
+          "name": "SET_CHAR_IS_CHRIS_CRIMINAL",
+          "num_params": 2,
+          "short_desc": "Sets whether the character is a psychotic killer or not"
         },
         {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            }
-          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Credits",
           "id": "029C",
-          "name": "COMMAND_029C",
-          "num_params": 1
+          "member": "Start",
+          "name": "START_CREDITS",
+          "num_params": 0,
+          "short_desc": "Makes the credits scroll up the screen"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Credits",
           "id": "029D",
-          "name": "COMMAND_029D",
-          "num_params": 0
+          "member": "Stop",
+          "name": "STOP_CREDITS",
+          "num_params": 0,
+          "short_desc": "Stops the credits text from showing"
         },
         {
+          "attrs": {
+            "is_static": true,
+            "is_condition": true
+          },
+          "class": "Credits",
           "id": "029E",
-          "name": "COMMAND_029E",
-          "num_params": 0
+          "member": "AreFinished",
+          "name": "ARE_CREDITS_FINISHED",
+          "num_params": 0,
+          "short_desc": "Returns true if the credits have finished"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "type",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "strengthX",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "strengthY",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "strengthZ",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "scale",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Fx",
           "id": "029F",
-          "name": "COMMAND_029F",
-          "num_params": 8
+          "member": "CreateSingleParticle",
+          "name": "CREATE_SINGLE_PARTICLE",
+          "num_params": 8,
+          "short_desc": "Creates a single particle at the specified coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "02A0",
-          "name": "COMMAND_02A0",
-          "num_params": 1
+          "member": "SetMusicDoesFade",
+          "name": "SET_MUSIC_DOES_FADE",
+          "num_params": 1,
+          "short_desc": "Sets whether sounds should fade along with the screen"
         },
         {
           "id": "02A1",

@@ -1,7 +1,7 @@
 {
   "meta": {
+    "version": "0.34",
     "last_update": 1757304157168,
-    "version": "0.33",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -12433,238 +12433,340 @@
           "short_desc": "Sets sensitivity to crime, changing how many crimes a player can commit before police begin to pursue"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "0250",
-          "name": "COMMAND_0250",
-          "num_params": 0
+          "member": "SetInFrontOfPlayer",
+          "name": "SET_CAMERA_IN_FRONT_OF_PLAYER",
+          "num_params": 0,
+          "short_desc": "Puts the camera in front of the player, pointing towards the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "id": "0251",
-          "name": "COMMAND_0251",
-          "num_params": 1
+          "name": "IS_CAR_VISIBLY_DAMAGED",
+          "num_params": 1,
+          "short_desc": "Returns true if any of the car components is visibly damaged or lost",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
+          "member": "IsVisiblyDamaged"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "any"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Object",
           "id": "0252",
-          "name": "COMMAND_0252",
-          "num_params": 1
+          "member": "DoesExist",
+          "name": "DOES_OBJECT_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if the handle is a valid object handle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0253",
-          "name": "COMMAND_0253",
-          "num_params": 3
+          "member": "LoadScene",
+          "name": "LOAD_SCENE",
+          "num_params": 3,
+          "short_desc": "Starts loading a specific location, just like if the player was there, removing LOD textures"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "distance",
+              "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "time",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "StuckCarCheck",
           "id": "0254",
-          "name": "COMMAND_0254",
-          "num_params": 3
+          "member": "Add",
+          "name": "ADD_STUCK_CAR_CHECK",
+          "num_params": 3,
+          "short_desc": "Adds the vehicle to the stuck cars array"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "StuckCarCheck",
           "id": "0255",
-          "name": "COMMAND_0255",
-          "num_params": 1
+          "member": "Remove",
+          "name": "REMOVE_STUCK_CAR_CHECK",
+          "num_params": 1,
+          "short_desc": "Removes the vehicle from the stuck cars array"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "StuckCarCheck",
           "id": "0256",
-          "name": "COMMAND_0256",
-          "num_params": 1
+          "member": "IsCarStuck",
+          "name": "IS_CAR_STUCK",
+          "num_params": 1,
+          "short_desc": "Returns true if the car is stuck"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "slotId",
+              "type": "MissionAudioSlot"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "name",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "0257",
-          "name": "COMMAND_0257",
-          "num_params": 2
+          "member": "LoadMissionAudio",
+          "name": "LOAD_MISSION_AUDIO",
+          "num_params": 2,
+          "short_desc": "Loads the file from the audio directory"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "slotId",
+              "type": "MissionAudioSlot"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "0258",
-          "name": "COMMAND_0258",
-          "num_params": 1
+          "member": "HasMissionAudioLoaded",
+          "name": "HAS_MISSION_AUDIO_LOADED",
+          "num_params": 1,
+          "short_desc": "Returns true if the mission audio requested with LOAD_MISSION_AUDIO has loaded"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "slotId",
+              "type": "MissionAudioSlot"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "0259",
-          "name": "COMMAND_0259",
-          "num_params": 2
+          "member": "PlayMissionAudio",
+          "name": "PLAY_MISSION_AUDIO",
+          "num_params": 1,
+          "short_desc": "Plays the loaded sound (03CF)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "slotId",
+              "type": "MissionAudioSlot"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "025A",
-          "name": "COMMAND_025A",
-          "num_params": 1
+          "member": "HasMissionAudioFinished",
+          "name": "HAS_MISSION_AUDIO_FINISHED",
+          "num_params": 1,
+          "short_desc": "Returns true if the audio (03CF) is no longer playing"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "nodeX",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "nodeY",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "nodeZ",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "angle",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Path",
           "id": "025B",
-          "name": "COMMAND_025B",
-          "num_params": 7
+          "member": "GetClosestCarNodeWithHeading",
+          "name": "GET_CLOSEST_CAR_NODE_WITH_HEADING",
+          "num_params": 7,
+          "short_desc": "Returns the position and heading of the closest vehicle path node to the specified position"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             },
             {
-              "name": "_p2",
+              "name": "importSlot",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Garage",
           "id": "025C",
-          "name": "COMMAND_025C",
-          "num_params": 2
+          "member": "HasSlotBeenFilled",
+          "name": "HAS_IMPORT_GARAGE_SLOT_BEEN_FILLED",
+          "num_params": 2,
+          "short_desc": "Returns true if the import garage has collected a vehicle from the predefined list"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "key",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "025D",
-          "name": "COMMAND_025D",
-          "num_params": 1
+          "member": "ClearThisPrint",
+          "name": "CLEAR_THIS_PRINT",
+          "num_params": 1,
+          "short_desc": "Removes the priority text from the screen"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "key",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "025E",
-          "name": "COMMAND_025E",
-          "num_params": 1
+          "member": "ClearThisBigPrint",
+          "name": "CLEAR_THIS_BIG_PRINT",
+          "num_params": 1,
+          "short_desc": "Removes the styled text from the screen"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "slotId",
+              "type": "MissionAudioSlot"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "025F",
-          "name": "COMMAND_025F",
-          "num_params": 4
+          "member": "SetMissionAudioPosition",
+          "name": "SET_MISSION_AUDIO_POSITION",
+          "num_params": 4,
+          "short_desc": "Sets the location of the mission audio (03CF) where it can be heard"
         },
         {
           "attrs": {
@@ -12692,61 +12794,91 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             }
           ],
+          "class": "Garage",
           "id": "0262",
-          "name": "COMMAND_0262",
-          "num_params": 1
+          "member": "NoSpecialCameraForThisGarage",
+          "name": "NO_SPECIAL_CAMERA_FOR_THIS_GARAGE",
+          "num_params": 1,
+          "short_desc": "Disables special camera when in the garage"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "pickup",
+              "type": "Pickup"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "0263",
-          "name": "COMMAND_0263",
-          "num_params": 2
+          "member": "AddForPickup",
+          "name": "ADD_BLIP_FOR_PICKUP",
+          "num_params": 2,
+          "short_desc": "Adds a blip and a marker to the pickup"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "multiplier",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0264",
-          "name": "COMMAND_0264",
-          "num_params": 1
+          "member": "SetPedDensityMultiplier",
+          "name": "SET_PED_DENSITY_MULTIPLIER",
+          "num_params": 1,
+          "short_desc": "Sets the quantity of pedestrians to spawn in the game"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "pedType",
+              "type": "PedType"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0265",
-          "name": "COMMAND_0265",
-          "num_params": 1
+          "member": "ForceRandomPedType",
+          "name": "FORCE_RANDOM_PED_TYPE",
+          "num_params": 1,
+          "short_desc": "Forces the game to spawn only pedestrians of the given type"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0266",
-          "name": "COMMAND_0266",
-          "num_params": 1
+          "member": "SetRightJustify",
+          "name": "SET_TEXT_RIGHT_JUSTIFY",
+          "num_params": 1,
+          "short_desc": "Sets the text draw to be aligned to the right"
         },
         {
           "input": [
@@ -12766,326 +12898,461 @@
           "short_desc": "Displays a black text box for a few seconds"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0268",
-          "name": "COMMAND_0268",
-          "num_params": 0
+          "member": "ClearHelp",
+          "name": "CLEAR_HELP",
+          "num_params": 0,
+          "short_desc": "Removes the text box from the screen"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "object",
+              "type": "HudObject"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "0269",
-          "name": "COMMAND_0269",
-          "num_params": 1
+          "member": "FlashObject",
+          "name": "FLASH_HUD_OBJECT",
+          "num_params": 1,
+          "short_desc": "Makes a specific part of the HUD disappear and reappear several times"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "026A",
-          "name": "COMMAND_026A",
-          "num_params": 1
+          "member": "IsInControl",
+          "name": "IS_CHAR_IN_CONTROL",
+          "num_params": 1,
+          "short_desc": "Returns true if the character can move"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "026B",
-          "name": "COMMAND_026B",
-          "num_params": 1
+          "member": "SetGenerateCarsAround",
+          "name": "SET_GENERATE_CARS_AROUND_CAMERA",
+          "num_params": 1,
+          "short_desc": "Enables traffic spawn at the camera position, otherwise at the player position (default)"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "026C",
-          "name": "COMMAND_026C",
-          "num_params": 0
+          "member": "ClearSmallPrints",
+          "name": "CLEAR_SMALL_PRINTS",
+          "num_params": 0,
+          "short_desc": "Clears small messages from the screen"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
           "id": "026D",
-          "name": "COMMAND_026D",
-          "num_params": 2
+          "member": "SetUpsidedownNotDamaged",
+          "name": "SET_UPSIDEDOWN_CAR_NOT_DAMAGED",
+          "num_params": 2,
+          "short_desc": "Disables the car from exploding when it is upside down, as long as the player is not in the vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "026E",
-          "name": "COMMAND_026E",
-          "num_params": 1
+          "member": "CanStartMission",
+          "name": "CAN_PLAYER_START_MISSION",
+          "num_params": 1,
+          "short_desc": "Returns true if the player can move"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "class": "Player",
           "id": "026F",
-          "name": "COMMAND_026F",
-          "num_params": 1
+          "member": "MakeSafeForCutscene",
+          "name": "MAKE_PLAYER_SAFE_FOR_CUTSCENE",
+          "num_params": 1,
+          "short_desc": "Makes the player safe, putting the character in a safe location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "0270",
-          "name": "COMMAND_0270",
-          "num_params": 1
+          "member": "UseCommands",
+          "name": "USE_TEXT_COMMANDS",
+          "num_params": 1,
+          "short_desc": "Enables text and texture drawing"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "type",
+              "type": "PedType"
             },
             {
-              "name": "_p2",
+              "name": "threatMask",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0271",
-          "name": "COMMAND_0271",
-          "num_params": 2
+          "member": "SetThreatForPedType",
+          "name": "SET_THREAT_FOR_PED_TYPE",
+          "num_params": 2,
+          "short_desc": "Sets the ped type's hostility to other ped types"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "type",
+              "type": "PedType"
             },
             {
-              "name": "_p2",
+              "name": "threatMask",
               "type": "int"
             }
           ],
+          "output": [],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0272",
-          "name": "COMMAND_0272",
-          "num_params": 2
+          "member": "ClearThreatForPedType",
+          "name": "CLEAR_THREAT_FOR_PED_TYPE",
+          "num_params": 2,
+          "short_desc": "Clears the ped type's hostility to other ped types (0271)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "color1",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "color2",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "0273",
-          "name": "COMMAND_0273",
-          "num_params": 3
+          "member": "GetColors",
+          "name": "GET_CAR_COLOURS",
+          "num_params": 3,
+          "short_desc": "Gets the car's primary and secondary colors"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0274",
-          "name": "COMMAND_0274",
-          "num_params": 1
+          "member": "SetAllCarsCanBeDamaged",
+          "name": "SET_ALL_CARS_CAN_BE_DAMAGED",
+          "num_params": 1,
+          "short_desc": "Sets whether all cars receive damage"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
           "id": "0275",
-          "name": "COMMAND_0275",
-          "num_params": 2
+          "member": "SetCanBeDamaged",
+          "name": "SET_CAR_CAN_BE_DAMAGED",
+          "num_params": 2,
+          "short_desc": "Sets whether the car receives damage"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "char1",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "char2",
+              "type": "Char"
             },
             {
-              "name": "_p3",
+              "name": "duration",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0276",
-          "name": "COMMAND_0276",
-          "num_params": 3
+          "member": "SetCharsChatting",
+          "name": "SET_CHARS_CHATTING",
+          "num_params": 3,
+          "short_desc": "Makes the two characters chat for the specified period of time"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "pad",
+              "type": "PadId"
             },
             {
-              "name": "_p2",
+              "name": "delay",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Pad",
           "id": "0277",
-          "name": "COMMAND_0277",
-          "num_params": 2
+          "member": "SetDrunkInputDelay",
+          "name": "SET_DRUNK_INPUT_DELAY",
+          "num_params": 2,
+          "short_desc": "Affects the delay to the left and right steering while driving"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "amount",
               "type": "int"
             }
           ],
+          "class": "Char",
           "id": "0278",
-          "name": "COMMAND_0278",
-          "num_params": 2
+          "member": "SetMoney",
+          "name": "SET_CHAR_MONEY",
+          "num_params": 2,
+          "short_desc": "Sets the character's cash sum, setting how much cash they will drop when dead"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "xOffset",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "yOffset",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "zOffset",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Object",
           "id": "0279",
-          "name": "COMMAND_0279",
-          "num_params": 7
+          "member": "GetOffsetInWorldCoords",
+          "name": "GET_OFFSET_FROM_OBJECT_IN_WORLD_COORDS",
+          "num_params": 7,
+          "short_desc": "Returns the object's coordinates with an offset"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "027A",
-          "name": "COMMAND_027A",
-          "num_params": 0
+          "member": "RegisterLifeSaved",
+          "name": "REGISTER_LIFE_SAVED",
+          "num_params": 0,
+          "short_desc": "Increments the number of people saved in an ambulance stat by 1"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "027B",
-          "name": "COMMAND_027B",
-          "num_params": 0
+          "member": "RegisterCriminalCaught",
+          "name": "REGISTER_CRIMINAL_CAUGHT",
+          "num_params": 0,
+          "short_desc": "Increments the number of criminals killed on Vigilante mission stat by 1"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "highestLevel",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "027C",
-          "name": "COMMAND_027C",
-          "num_params": 1
+          "member": "RegisterAmbulanceLevel",
+          "name": "REGISTER_AMBULANCE_LEVEL",
+          "num_params": 1,
+          "short_desc": "Saves the highest paramedic mission level stat"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "027D",
-          "name": "COMMAND_027D",
-          "num_params": 0
+          "member": "RegisterFireExtinguished",
+          "name": "REGISTER_FIRE_EXTINGUISHED",
+          "num_params": 0,
+          "short_desc": "Increments the number of fires extinguished stat by 1"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Phone"
             }
           ],
+          "class": "Phone",
           "id": "027E",
-          "name": "COMMAND_027E",
-          "num_params": 1
+          "member": "TurnOn",
+          "name": "TURN_PHONE_ON",
+          "num_params": 1,
+          "short_desc": "Makes the phone ringing"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "xOffset",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "yOffset",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "zOffset",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "027F",
-          "name": "COMMAND_027F",
-          "num_params": 7
+          "member": "GetOffsetInWorldCoords",
+          "name": "GET_OFFSET_FROM_CAR_IN_WORLD_COORDS",
+          "num_params": 7,
+          "short_desc": "Returns the coordinates of an offset of the vehicle's position, depending on the vehicle's rotation"
         },
         {
           "input": [

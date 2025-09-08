@@ -10,6 +10,7 @@ CarGenerator
 Char
 Clock
 Crane
+Credits
 Cutscene
 Fx
 Game
@@ -49,6 +50,7 @@ Create,0048,0,0,("modelId: model_vehicle" "x%f" "y%f" "z%f" "handle: Car")
 Delete,0049,0,0,("self: Car")
 DontRemove,0116,0,0,("self: Car")
 Explode,013B,0,0,("self: Car")
+GetCharInPassengerSeat,029A,0,0,("self: Car" "seat: SeatId" "handle: Char")
 GetColors,0273,0,0,("self: Car" "color1%i" "color2%i")
 GetCoordinates,004D,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetForwardX,01D4,0,0,("self: Car" "x%f")
@@ -75,6 +77,7 @@ IsInArea3D,0054,0,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f"
 IsInWater,01B3,1,0,("self: Car")
 IsModel,00A6,1,0,("self: Car" "modelId: model_vehicle")
 IsOnScreen,01B7,1,0,("self: Car")
+IsPassengerSeatFree,0299,1,0,("self: Car" "seat: SeatId")
 IsStillAlive,004F,1,0,("self: Car")
 IsStopped,0111,1,0,("self: Car")
 IsStoppedInArea2D,0100,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
@@ -90,6 +93,7 @@ LocateStopped3D,0105,1,0,("self: Car" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" 
 LockDoors,013A,0,0,("self: Car" "lockStatus: CarLock")
 MarkAsNoLongerNeeded,0113,0,0,("self: Car")
 RemoveUpsidedownCheck,00DE,0,0,("self: Car")
+SetAvoidLevelTransitions,0294,0,0,("self: Car" "state%b")
 SetBigWheels,01FE,0,0,("self: Car" "state%b")
 SetCanBeDamaged,0275,0,0,("self: Car" "state%b")
 SetCanRespray,01A6,0,0,("self: Car" "state%b")
@@ -107,6 +111,7 @@ SetRamCar,01FA,0,0,("self: Car" "target: Car")
 SetStatus,0236,0,0,("self: Car" "status: EntityStatus")
 SetStrong,023D,0,0,("self: Car" "state%b")
 SetTaxiLights,0142,0,0,("self: Car" "state%b")
+SetTraction,0290,0,0,("self: Car" "traction%f")
 SetUpsidedownNotDamaged,026D,0,0,("self: Car" "state%b")
 SetVisible,0201,0,0,("self: Car" "state%b")
 SetWatertight,0230,0,0,("self: Car" "state%b")
@@ -134,6 +139,7 @@ DontRemove,0115,0,0,("self: Char")
 ExplodeHead,01F1,0,0,("self: Char")
 FollowChar,0119,0,0,("self: Char" "leader: Char")
 FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
+GetAmmoInWeapon,028B,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetHeading,00CE,0,0,("self: Char" "heading%f")
 GetHealth,014D,0,0,("self: Char" "health%i")
@@ -208,6 +214,7 @@ SetHeading,00CF,0,0,("self: Char" "heading%f")
 SetHealth,014B,0,0,("self: Char" "health%i")
 SetHeedThreats,01A4,0,0,("self: Char" "state%b")
 SetIdle,0042,0,0,("self: Char")
+SetIsChrisCriminal,029B,0,0,("self: Char" "state%b")
 SetMoney,0278,0,0,("self: Char" "amount%i")
 SetObjAimGunAtChar,00F4,0,0,("self: Char" "target: Char")
 SetObjDestroyCar,00EC,0,0,("self: Char" "vehicle: Car")
@@ -239,8 +246,10 @@ SetOnlyDamagedByPlayer,01AF,0,0,("self: Char" "state%b")
 SetPersonality,015D,0,0,("self: Char" "pedstat: PedStat")
 SetProofs,01B1,0,0,("self: Char" "bulletProof%b" "fireProof%b" "explosionProof%b" "collisionProof%b" "meleeProof%b")
 SetRunning,01EC,0,0,("self: Char" "state%b")
+SetSay,028C,0,0,("self: Char" "soundId: ScriptSound")
 SetStayInSamePlace,020E,0,0,("self: Char" "state%b")
 SetThreatSearch,00A1,0,0,("self: Char" "pedThreat%i")
+SetUsePednodeSeek,0285,0,0,("self: Char" "state%b")
 SetVisible,0200,0,0,("self: Char" "state%b")
 SetWaitState,0220,0,0,("self: Char" "stateId: WaitState" "timeInMs%i")
 StopLooking,0154,0,0,("self: Char")
@@ -252,6 +261,7 @@ Undress,020F,0,0,("self: Char" "modelName%s")
 WanderDir,0040,0,0,("self: Char" "direction%i")
 WarpFromCarToCoord,0216,0,0,("self: Char" "x%f" "y%f" "z%f")
 WarpIntoCar,021C,0,0,("self: Char" "vehicle: Car")
+WarpIntoCarAsPassenger,0298,0,0,("self: Char" "handle: Car" "seat: SeatId")
 AddScore,0094,0,0,("self: Player" "money%i")
 AlterWantedLevel,0098,0,0,("self: Player" "wantedLevel%i")
 AlterWantedLevelNoDrop,0099,0,0,("self: Player" "wantedLevel%i")
@@ -271,6 +281,8 @@ MakeSafeForCutscene,026F,0,0,("self: Player")
 ResetNumOfModelsKilled,01A8,0,0,()
 SetControl,0107,0,0,("self: Player" "state%b")
 SetFastReload,01FC,0,0,("self: Player" "state%b")
+SetFreeHealthCare,0287,0,0,("self: Player" "state%b")
+SetGetOutOfJailFree,0286,0,0,("self: Player" "state%b")
 SetNeverGetsTired,01FB,0,0,("self: Player" "state%b")
 StoreScore,0096,0,0,("self: Player" "money%i")
 StoreWantedLevel,0110,0,0,("self: Player" "wantedLevel%i")
@@ -278,6 +290,7 @@ $END
 
 $Audio
 $BEGIN
+ClearMissionAudio,0284,0,0,("slotId: MissionAudioSlot")
 HasMissionAudioFinished,025A,1,0,("slotId: MissionAudioSlot")
 HasMissionAudioLoaded,0258,1,0,("slotId: MissionAudioSlot")
 LoadMissionAudio,0257,0,0,("slotId: MissionAudioSlot" "name%s")
@@ -285,6 +298,8 @@ PlayMissionAudio,0259,0,0,("slotId: MissionAudioSlot")
 PlayMissionPassedTune,022B,0,0,("soundId%i")
 PoliceRadioMessage,023C,0,0,("x%f" "y%f" "z%f")
 SetMissionAudioPosition,025F,0,0,("slotId: MissionAudioSlot" "x%f" "y%f" "z%f")
+SetMusicDoesFade,02A0,0,0,("state%b")
+SetRadioChannel,028E,0,0,("channel: RadioChannel" "startFromMs%i")
 $END
 
 $Blip
@@ -321,6 +336,7 @@ SetFadingColor,00C8,0,0,("r%i" "g%i" "b%i")
 SetFixedPosition,00B9,0,0,("x%f" "y%f" "z%f" "xRotation%f" "yRotation%f" "zRotation%f")
 SetGenerateCarsAround,026B,0,0,("state%b")
 SetInFrontOfPlayer,0250,0,0,()
+SetNearClip,028D,0,0,("distance%f")
 SetZoom,01F8,0,0,("zoom%i")
 Shake,0003,0,0,("intensity%i")
 $END
@@ -334,6 +350,7 @@ Create,0048,0,0,("modelId: model_vehicle" "x%f" "y%f" "z%f" "handle: Car")
 Delete,0049,0,0,("self: Car")
 DontRemove,0116,0,0,("self: Car")
 Explode,013B,0,0,("self: Car")
+GetCharInPassengerSeat,029A,0,0,("self: Car" "seat: SeatId" "handle: Char")
 GetColors,0273,0,0,("self: Car" "color1%i" "color2%i")
 GetCoordinates,004D,0,0,("self: Car" "x%f" "y%f" "z%f")
 GetForwardX,01D4,0,0,("self: Car" "x%f")
@@ -360,6 +377,7 @@ IsInArea3D,0054,0,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f"
 IsInWater,01B3,1,0,("self: Car")
 IsModel,00A6,1,0,("self: Car" "modelId: model_vehicle")
 IsOnScreen,01B7,1,0,("self: Car")
+IsPassengerSeatFree,0299,1,0,("self: Car" "seat: SeatId")
 IsStillAlive,004F,1,0,("self: Car")
 IsStopped,0111,1,0,("self: Car")
 IsStoppedInArea2D,0100,1,0,("self: Car" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
@@ -375,6 +393,7 @@ LocateStopped3D,0105,1,0,("self: Car" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" 
 LockDoors,013A,0,0,("self: Car" "lockStatus: CarLock")
 MarkAsNoLongerNeeded,0113,0,0,("self: Car")
 RemoveUpsidedownCheck,00DE,0,0,("self: Car")
+SetAvoidLevelTransitions,0294,0,0,("self: Car" "state%b")
 SetBigWheels,01FE,0,0,("self: Car" "state%b")
 SetCanBeDamaged,0275,0,0,("self: Car" "state%b")
 SetCanRespray,01A6,0,0,("self: Car" "state%b")
@@ -392,6 +411,7 @@ SetRamCar,01FA,0,0,("self: Car" "target: Car")
 SetStatus,0236,0,0,("self: Car" "status: EntityStatus")
 SetStrong,023D,0,0,("self: Car" "state%b")
 SetTaxiLights,0142,0,0,("self: Car" "state%b")
+SetTraction,0290,0,0,("self: Car" "traction%f")
 SetUpsidedownNotDamaged,026D,0,0,("self: Car" "state%b")
 SetVisible,0201,0,0,("self: Car" "state%b")
 SetWatertight,0230,0,0,("self: Car" "state%b")
@@ -421,6 +441,7 @@ DontRemove,0115,0,0,("self: Char")
 ExplodeHead,01F1,0,0,("self: Char")
 FollowChar,0119,0,0,("self: Char" "leader: Char")
 FollowPath,0041,0,0,("self: Char" "x%f" "y%f" "z%f" "_p5%i" "_p6%i")
+GetAmmoInWeapon,028B,0,0,("self: Char" "weaponType: WeaponType" "ammo%i")
 GetCoordinates,0043,0,0,("self: Char" "x%f" "y%f" "z%f")
 GetHeading,00CE,0,0,("self: Char" "heading%f")
 GetHealth,014D,0,0,("self: Char" "health%i")
@@ -495,6 +516,7 @@ SetHeading,00CF,0,0,("self: Char" "heading%f")
 SetHealth,014B,0,0,("self: Char" "health%i")
 SetHeedThreats,01A4,0,0,("self: Char" "state%b")
 SetIdle,0042,0,0,("self: Char")
+SetIsChrisCriminal,029B,0,0,("self: Char" "state%b")
 SetMoney,0278,0,0,("self: Char" "amount%i")
 SetObjAimGunAtChar,00F4,0,0,("self: Char" "target: Char")
 SetObjDestroyCar,00EC,0,0,("self: Char" "vehicle: Car")
@@ -526,8 +548,10 @@ SetOnlyDamagedByPlayer,01AF,0,0,("self: Char" "state%b")
 SetPersonality,015D,0,0,("self: Char" "pedstat: PedStat")
 SetProofs,01B1,0,0,("self: Char" "bulletProof%b" "fireProof%b" "explosionProof%b" "collisionProof%b" "meleeProof%b")
 SetRunning,01EC,0,0,("self: Char" "state%b")
+SetSay,028C,0,0,("self: Char" "soundId: ScriptSound")
 SetStayInSamePlace,020E,0,0,("self: Char" "state%b")
 SetThreatSearch,00A1,0,0,("self: Char" "pedThreat%i")
+SetUsePednodeSeek,0285,0,0,("self: Char" "state%b")
 SetVisible,0200,0,0,("self: Char" "state%b")
 SetWaitState,0220,0,0,("self: Char" "stateId: WaitState" "timeInMs%i")
 StopLooking,0154,0,0,("self: Char")
@@ -539,6 +563,7 @@ Undress,020F,0,0,("self: Char" "modelName%s")
 WanderDir,0040,0,0,("self: Char" "direction%i")
 WarpFromCarToCoord,0216,0,0,("self: Char" "x%f" "y%f" "z%f")
 WarpIntoCar,021C,0,0,("self: Char" "vehicle: Car")
+WarpIntoCarAsPassenger,0298,0,0,("self: Char" "handle: Car" "seat: SeatId")
 $END
 
 $Clock
@@ -558,6 +583,13 @@ ActivateCrusher,01D7,0,0,("craneX%f" "craneY%f" "pickupZoneX1%f" "pickupZoneY1%f
 IsLiftingCar,0234,1,0,("craneX%f" "craneY%f" "car: Car")
 $END
 
+$Credits
+$BEGIN
+AreFinished,029E,1,0,()
+Start,029C,0,0,()
+Stop,029D,0,0,()
+$END
+
 $Cutscene
 $BEGIN
 Clear,01CE,0,0,()
@@ -571,14 +603,18 @@ $Fx
 $BEGIN
 AddExplosion,013C,0,0,("x%f" "y%f" "z%f" "type: ExplosionType")
 AddMovingParticleEffect,0231,0,0,("particle: ParticleObject" "x%f" "y%f" "z%f" "strengthX%f" "strengthY%f" "strengthZ%f" "scale%f" "r%i" "g%i" "b%i" "durationInMs%i")
+CreateSingleParticle,029F,0,0,("type%i" "x%f" "y%f" "z%f" "strengthX%f" "strengthY%f" "strengthZ%f" "scale%f")
 DrawCorona,0165,0,0,("x%f" "y%f" "z%f" "size%f" "coronaType: CoronaType" "flareType: FlareType" "r%i" "g%i" "b%i")
 $END
 
 $Game
 $BEGIN
 ActivateSaveMenu,0260,0,0,()
+AreMeasurementsInMeters,0291,1,0,()
 ClearThreatForPedType,0272,0,0,("type: PedType" "threatMask%i")
 HasSaveGameFinished,0261,1,0,()
+IsFrench,0282,1,0,()
+IsGerman,0283,1,0,()
 SetAllCarsCanBeDamaged,0274,0,0,("state%b")
 SetCharsChatting,0276,0,0,("char1: Char" "char2: Char" "duration%i")
 SetEveryoneIgnorePlayer,024A,0,0,("player: Player" "state%b")
@@ -602,6 +638,7 @@ $BEGIN
 ChangeType,01D6,0,0,("self: Garage" "type: GarageType")
 Close,0215,0,0,("self: Garage")
 Create,0145,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "frontX%f" "frontY%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "type: GarageType" "handle: Garage")
+DoesContainCar,028F,1,0,("self: Garage" "vehicle: Car")
 HasResprayHappened,01F7,1,0,("self: Garage")
 HasSlotBeenFilled,025C,1,0,("self: Garage" "importSlot%i")
 IsCarInMission,0147,1,0,("self: Garage")
@@ -637,6 +674,7 @@ $Math
 $BEGIN
 AbsFloat,003B,0,0,("%f")
 AbsInt,003A,0,0,("%i")
+ConvertMetersToFeet,0297,0,0,("meters%i" "feet%i")
 Cos,01D3,0,0,("angle%f" "result%f")
 RandomFloat,003C,0,0,("%f")
 RandomFloatInRange,0138,0,0,("min%f" "max%f" "result%f")
@@ -671,6 +709,7 @@ PlaceRelativeToCar,0211,0,0,("self: Object" "vehicle: Car" "xOffset%f" "yOffset%
 Rotate,020B,1,0,("self: Object" "fromAngle%f" "toAngle%f" "collisionCheck%b")
 SetCollision,0225,0,0,("self: Object" "state%b")
 SetCoordinates,010D,0,0,("self: Object" "x%f" "y%f" "z%f")
+SetDrawLast,028A,0,0,("self: Object" "state%b")
 SetDynamic,022A,0,0,("self: Object" "state%b")
 SetHeading,00D3,0,0,("self: Object" "heading%f")
 SetVelocity,0224,0,0,("self: Object" "xSpeed%f" "ySpeed%f" "zSpeed%f")
@@ -689,6 +728,7 @@ $BEGIN
 GetClosestCarNode,01B5,0,0,("x%f" "y%f" "z%f" "nodeX%f" "nodeY%f" "nodeZ%f")
 GetClosestCarNodeWithHeading,025B,0,0,("x%f" "y%f" "z%f" "nodeX%f" "nodeY%f" "nodeZ%f" "angle%f")
 GetClosestCharNode,01B4,0,0,("x%f" "y%f" "z%f" "nodeX%f" "nodeY%f" "nodeZ%f")
+MarkRoadsBetweenLevels,0293,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 RemoveRoute,023E,0,0,("routeId%i")
 SwitchPedRoadsOff,0152,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 SwitchPedRoadsOffAngled,022F,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "angle%f")
@@ -715,6 +755,7 @@ $END
 
 $Rc
 $BEGIN
+BlowUpBuggy,0281,0,0,()
 GiveCarToPlayer,0097,0,0,("player: Player" "x%f" "y%f" "z%f" "angle%f")
 $END
 
@@ -766,6 +807,8 @@ RegisterMoneyMadeTaxi,01E9,0,0,("cashAmount%i")
 RegisterPassengerDroppedOffTaxi,01E8,0,0,()
 RegisterUniqueJumpFound,01E6,0,0,()
 SetProgressTotal,01E0,0,0,("maxProgress%i")
+SetTotalNumberOfKillFrenzies,0280,0,0,("total%i")
+SetTotalNumberOfMissions,0296,0,0,("numMissions%i")
 SetUniqueJumpsTotal,01E7,0,0,("total%i")
 $END
 
@@ -850,6 +893,7 @@ $World
 $BEGIN
 ClearArea,022C,0,0,("x%f" "y%f" "z%f" "radius%f" "clearParticles%b")
 ClearAreaOfCars,0246,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+ClearAreaOfChars,0295,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 CreateRandomCarForCarPark,024E,0,0,("x%f" "y%f" "z%f" "heading%f")
 ForceRandomPedType,0265,0,0,("pedType: PedType")
 GetGroundZFor3DCoord,01BB,0,0,("x%f" "y%f" "z%f" "groundZ%f")

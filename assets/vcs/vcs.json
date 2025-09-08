@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1730053024986,
-    "version": "0.32",
+    "last_update": 1757304157168,
+    "version": "0.33",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -12086,259 +12086,351 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0241",
-          "name": "COMMAND_0241",
-          "num_params": 1
+          "member": "Switch",
+          "name": "SWITCH_STREAMING",
+          "num_params": 1,
+          "short_desc": "Sets the streaming of additional models like peds, cars, and maps"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Garage",
           "id": "0242",
-          "name": "COMMAND_0242",
-          "num_params": 1
+          "member": "IsOpen",
+          "name": "IS_GARAGE_OPEN",
+          "num_params": 1,
+          "short_desc": "Returns true if the garage's door is open"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Garage",
           "id": "0243",
-          "name": "COMMAND_0243",
-          "num_params": 1
+          "member": "IsClosed",
+          "name": "IS_GARAGE_CLOSED",
+          "num_params": 1,
+          "short_desc": "Returns true if the garage's door is closed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "radius",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "fromModelId",
+              "type": "model_object"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "toModelId",
+              "type": "model_object"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0244",
-          "name": "COMMAND_0244",
-          "num_params": 6
+          "member": "SwapNearestBuildingModel",
+          "name": "SWAP_NEAREST_BUILDING_MODEL",
+          "num_params": 6,
+          "short_desc": "Swaps a map model with another map model nearest to the center of the search area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0245",
-          "name": "COMMAND_0245",
-          "num_params": 1
+          "member": "SwitchProcessing",
+          "name": "SWITCH_WORLD_PROCESSING",
+          "num_params": 1,
+          "short_desc": "Sets whether the game should render the world or only the cutscene objects"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0246",
-          "name": "COMMAND_0246",
-          "num_params": 6
+          "member": "ClearAreaOfCars",
+          "name": "CLEAR_AREA_OF_CARS",
+          "num_params": 6,
+          "short_desc": "Clears all cars in the specified 3D area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             }
           ],
+          "class": "Garage",
           "id": "0247",
-          "name": "COMMAND_0247",
-          "num_params": 1
+          "member": "SetRotatingDoor",
+          "name": "SET_ROTATING_GARAGE_DOOR",
+          "num_params": 1,
+          "short_desc": "Sets the garage door to swing open instead of slide open"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "radius",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Sphere",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Sphere",
           "id": "0248",
-          "name": "COMMAND_0248",
-          "num_params": 5
+          "member": "Create",
+          "name": "ADD_SPHERE",
+          "num_params": 5,
+          "short_desc": "Creates a static sphere at the location, with the specified radius"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Sphere"
             }
           ],
+          "attrs": {
+            "is_destructor": true
+          },
+          "class": "Sphere",
           "id": "0249",
-          "name": "COMMAND_0249",
-          "num_params": 1
+          "member": "Remove",
+          "name": "REMOVE_SPHERE",
+          "num_params": 1,
+          "short_desc": "Destroys a static sphere"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "player",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "024A",
-          "name": "COMMAND_024A",
-          "num_params": 2
+          "member": "SetEveryoneIgnorePlayer",
+          "name": "SET_EVERYONE_IGNORE_PLAYER",
+          "num_params": 2,
+          "short_desc": "Makes pedestrians pay no attention to the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
           "id": "024B",
-          "name": "COMMAND_024B",
-          "num_params": 2
+          "member": "StoreCarIsInNoSave",
+          "name": "STORE_CAR_CHAR_IS_IN_NO_SAVE",
+          "num_params": 2,
+          "short_desc": "Returns the character's vehicle handle without marking it as used by the script, therefore allowing it to be deleted by the game at any time (alts:00D9,0811,0484)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "timer",
+              "type": "int",
+              "source": "var_global"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "direction",
+              "type": "TimerDirection"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "text",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "024C",
-          "name": "COMMAND_024C",
-          "num_params": 3
+          "member": "DisplayTimerWithString",
+          "name": "DISPLAY_ONSCREEN_TIMER_WITH_STRING",
+          "num_params": 3,
+          "short_desc": "Creates a countdown or countup onscreen timer with the text"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "counter",
+              "type": "int",
+              "source": "var_global"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "display",
+              "type": "CounterDisplay"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "text",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "024D",
-          "name": "COMMAND_024D",
-          "num_params": 3
+          "member": "DisplayCounterWithString",
+          "name": "DISPLAY_ONSCREEN_COUNTER_WITH_STRING",
+          "num_params": 3,
+          "short_desc": "Displays an onscreen counter with the text, either shown in numbers or as a bar"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "heading",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "024E",
-          "name": "COMMAND_024E",
-          "num_params": 4
+          "member": "CreateRandomCarForCarPark",
+          "name": "CREATE_RANDOM_CAR_FOR_CAR_PARK",
+          "num_params": 4,
+          "short_desc": "Starts spawning random cars at the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "multiplier",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "024F",
-          "name": "COMMAND_024F",
-          "num_params": 1
+          "member": "SetWantedMultiplier",
+          "name": "SET_WANTED_MULTIPLIER",
+          "num_params": 1,
+          "short_desc": "Sets sensitivity to crime, changing how many crimes a player can commit before police begin to pursue"
         },
         {
           "id": "0250",
@@ -24919,7 +25011,7 @@
     },
     {
       "name": "Sphere",
-      "constructable": false,
+      "constructable": true,
       "desc": ""
     },
     {

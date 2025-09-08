@@ -237,6 +237,7 @@ SetVisible,0200,0,0,("self: Char" "state%b")
 SetWaitState,0220,0,0,("self: Char" "stateId: WaitState" "timeInMs%i")
 StopLooking,0154,0,0,("self: Char")
 StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
+StoreCarIsInNoSave,024B,0,0,("self: Char" "handle: Car")
 TurnToFaceChar,013E,0,0,("self: Char" "char: Char")
 TurnToFaceCoord,010F,0,0,("self: Char" "x%f" "y%f" "z%f")
 Undress,020F,0,0,("self: Char" "modelName%s")
@@ -506,6 +507,7 @@ SetVisible,0200,0,0,("self: Char" "state%b")
 SetWaitState,0220,0,0,("self: Char" "stateId: WaitState" "timeInMs%i")
 StopLooking,0154,0,0,("self: Char")
 StoreCarIsIn,007B,0,0,("self: Char" "handle: Car")
+StoreCarIsInNoSave,024B,0,0,("self: Char" "handle: Car")
 TurnToFaceChar,013E,0,0,("self: Char" "char: Char")
 TurnToFaceCoord,010F,0,0,("self: Char" "x%f" "y%f" "z%f")
 Undress,020F,0,0,("self: Char" "modelName%s")
@@ -551,10 +553,12 @@ $Game
 $BEGIN
 ActivateSaveMenu,0260,0,0,()
 HasSaveGameFinished,0261,1,0,()
+SetEveryoneIgnorePlayer,024A,0,0,("player: Player" "state%b")
 SetFreeBombs,0148,0,0,("state%b")
 SetFreeResprays,01FF,0,0,("state%b")
 SetMaxWantedLevel,0128,0,0,("wantedLevel%i")
 SetPoliceIgnorePlayer,012E,0,0,("player: Player" "state%b")
+SetWantedMultiplier,024F,0,0,("multiplier%f")
 $END
 
 $Gang
@@ -571,7 +575,10 @@ Close,0215,0,0,("self: Garage")
 Create,0145,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "frontX%f" "frontY%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "type: GarageType" "handle: Garage")
 HasResprayHappened,01F7,1,0,("self: Garage")
 IsCarInMission,0147,1,0,("self: Garage")
+IsClosed,0243,1,0,("self: Garage")
+IsOpen,0242,1,0,("self: Garage")
 Open,0214,0,0,("self: Garage")
+SetRotatingDoor,0247,0,0,("self: Garage")
 SetTargetCarForMission,0146,0,0,("self: Garage" "vehicle: Car")
 $END
 
@@ -580,7 +587,9 @@ $BEGIN
 ClearCounter,00AE,0,0,("counter%i")
 ClearTimer,00AC,0,0,("timer%i")
 DisplayCounter,00AD,0,0,("counter%i" "display: CounterDisplay")
+DisplayCounterWithString,024D,0,0,("counter%i" "display: CounterDisplay" "text: gxt_key")
 DisplayTimer,00AB,0,0,("timer%i" "direction: TimerDirection")
+DisplayTimerWithString,024C,0,0,("timer%i" "direction: TimerDirection" "text: gxt_key")
 FreezeTimer,022D,0,0,("state%b")
 SwitchWidescreen,01AE,0,0,("state%b")
 $END
@@ -698,7 +707,9 @@ $END
 
 $Sphere
 $BEGIN
+Create,0248,0,0,("x%f" "y%f" "z%f" "radius%f" "handle: Sphere")
 Draw,0235,0,0,("x%f" "y%f" "z%f" "diameter%f")
+Remove,0249,0,0,("self: Sphere")
 $END
 
 $Stat
@@ -726,6 +737,7 @@ LoadSpecialCharacter,0159,0,0,("slotId%i" "modelName%s")
 LoadSpecialModel,01D1,0,0,("cutsceneModelId: model_any" "modelName%s")
 MarkModelAsNoLongerNeeded,0162,0,0,("modelId: model_any")
 RequestModel,0160,0,0,("modelId: model_any")
+Switch,0241,0,0,("state%b")
 UnloadSpecialCharacter,01A7,0,0,("slotId%i")
 $END
 
@@ -782,6 +794,8 @@ $END
 $World
 $BEGIN
 ClearArea,022C,0,0,("x%f" "y%f" "z%f" "radius%f" "clearParticles%b")
+ClearAreaOfCars,0246,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
+CreateRandomCarForCarPark,024E,0,0,("x%f" "y%f" "z%f" "heading%f")
 GetGroundZFor3DCoord,01BB,0,0,("x%f" "y%f" "z%f" "groundZ%f")
 GetRandomCarOfTypeInArea,01F6,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "modelId: model_vehicle" "handle: Car")
 GetRandomCharInArea,01C4,0,0,("leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "handle: Char")
@@ -793,6 +807,8 @@ RemoveAllScriptFires,01ED,0,0,()
 RemoveParticleEffectsInArea,0240,0,0,("leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f")
 SetCarDensityMultiplier,0125,0,0,("multiplier%f")
 SetVisibilityOfClosestObjectOfType,0217,0,0,("x%f" "y%f" "z%f" "radius%f" "modelId: model_object" "state%b")
+SwapNearestBuildingModel,0244,0,0,("x%f" "y%f" "z%f" "radius%f" "fromModelId: model_object" "toModelId: model_object")
+SwitchProcessing,0245,0,0,("state%b")
 SwitchRubbish,023F,0,0,("state%b")
 $END
 

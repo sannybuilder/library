@@ -552,17 +552,21 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return !command || !command.name;
   }
 
+  finalizeCommandUpdate() {
+    this._ui.stopEditOrDisplay();
+    this.updateRelatedCommands = true;
+  }
+
   onDeleteCommand(game: Game) {
-    if (this.isNewCommand(this.oldCommand)) {
-      // If the command has no name, it means it's a new command that hasn't been saved yet.
-      this._ui.stopEditOrDisplay();
-    } else {
+    if (!this.isNewCommand(this.oldCommand)) {
       this.deleteCommand(
         this.oldCommand!,
         this.oldExtension!, // ignore possible extension change
         game
       );
     }
+
+    this.finalizeCommandUpdate();
   }
 
   deleteCommand(command: Command, extension: string, game: Game) {
@@ -578,9 +582,6 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         command,
       });
     }
-
-    this._ui.stopEditOrDisplay();
-    this.updateRelatedCommands = true;
   }
 
   createCommand(command: Command, extension: string) {
@@ -599,14 +600,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         updateRelated: false,
       });
     }
-
-    this._ui.stopEditOrDisplay();
-    this.updateRelatedCommands = true;
   }
 
   private _onSaveCommand(game: Game) {
     if (this.isNewCommand(this.oldCommand)) {
       this.createCommand(this.command!, this.extension!);
+      this.finalizeCommandUpdate();
       return;
     }
 
@@ -619,6 +618,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     ) {
       this.deleteCommand(this.oldCommand!, this.oldExtension!, game);
       this.createCommand(this.command!, this.extension!);
+      this.finalizeCommandUpdate();
       return;
     }
 
@@ -640,8 +640,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       });
     }
 
-    this._ui.stopEditOrDisplay();
-    this.updateRelatedCommands = true;
+    this.finalizeCommandUpdate();
   }
 
   private _onSaveEnum() {

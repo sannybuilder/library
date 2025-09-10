@@ -1,4 +1,4 @@
-// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.118
+// This file is auto-generated from https://library.sannybuilder.com/#/sa v0.119
 /// Sets the current vector to the sum of two other vectors
 function CVector_Add<thiscall, 0x40FDD0>(self: int {CVector}, vector1: int {CVector}, vector2: int {CVector})
 /// Initializes a CEntity struct
@@ -4112,7 +4112,8 @@ function CIdleCam_Run<thiscall, 0x51D3E0>(self: int {CIdleCam})
 function CCam_Process_Fixed<thiscall, 0x51D470>(self: int {CCam}, target: int {CVector*}, orientation: float, speedVar: float, speedVarWanted: float)
 function CCam_LookBehind<thiscall, 0x520690>(self: int {CCam})
 function CCam_LookRight<thiscall, 0x520E40>(self: int {CCam}, bLookRight: int {bool})
-function CCam_Process_AimWeapon<thiscall, 0x521500>(self: int {CCam}, param1: int {CVector*})
+/// Updates the Camera view to look from plyrPosn to target Coords
+function CCam_Process_AimWeapon<thiscall, 0x521500>(self: int {CCam}, plyrPosn: int {CVector*}, targetX: float, targetY: float, targetZ: float): int {bool}
 function CIdleCam_Process<thiscall, 0x522C80>(self: int {CIdleCam}): int {bool}
 function CCam_Process_FollowPed_SA<thiscall, 0x522D40>(self: int {CCam}, param1: int {CVector*})
 function CCam_Process_FollowCar_SA<thiscall, 0x5245B0>(self: int {CCam}, param1: int {CVector*})

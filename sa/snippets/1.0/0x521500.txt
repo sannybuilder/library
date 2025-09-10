@@ -1,0 +1,11 @@
+float origin[3], target[3]
+...origin = get_char_coordinates $scplayer
+target[0] = 1000.0
+target[1] = -1000.0
+target[2] = 7.0
+
+int originPtr = get_var_pointer origin
+int status = CCam_Process_AimWeapon(0xB6F028, originPtr, ...target) // 0xB6F028 = TheCamera Entity Ptr
+if status != false
+then print_string_now {text} "CCam_Process_AimWeapon Success" {time} 1000
+end

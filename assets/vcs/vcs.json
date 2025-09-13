@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1757373609897,
-    "version": "0.35",
+    "last_update": 1757727171638,
+    "version": "0.36",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -13985,130 +13985,192 @@
           "short_desc": "Sets whether sounds should fade along with the screen"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "02A1",
-          "name": "COMMAND_02A1",
-          "num_params": 0
+          "member": "PlayEndOfGameTune",
+          "name": "PLAY_END_OF_GAME_TUNE",
+          "num_params": 0,
+          "short_desc": "Plays the theme tune"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "02A2",
-          "name": "COMMAND_02A2",
-          "num_params": 0
+          "member": "StopEndOfGameTune",
+          "name": "STOP_END_OF_GAME_TUNE",
+          "num_params": 0,
+          "short_desc": "Stops the theme tune"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "modelId",
+              "type": "model_vehicle",
+              "source": "var_any"
+            }
+          ],
+          "class": "Car",
           "id": "02A3",
-          "name": "COMMAND_02A3",
-          "num_params": 2
+          "member": "GetModel",
+          "name": "GET_CAR_MODEL",
+          "num_params": 2,
+          "short_desc": "Returns the car's model id"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
           "id": "02A4",
-          "name": "COMMAND_02A4",
-          "num_params": 0
+          "member": "AreAnyCarCheatsActivated",
+          "name": "ARE_ANY_CAR_CHEATS_ACTIVATED",
+          "num_params": 0,
+          "short_desc": "Returns true if the player has used any of the cheats"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "02A5",
-          "name": "COMMAND_02A5",
-          "num_params": 2
+          "member": "SetSuffersCriticalHits",
+          "name": "SET_CHAR_SUFFERS_CRITICAL_HITS",
+          "num_params": 2,
+          "short_desc": "Sets whether the specified character is immune to headshots"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "02A6",
-          "name": "COMMAND_02A6",
-          "num_params": 2
+          "member": "IsSittingInCar",
+          "name": "IS_CHAR_SITTING_IN_CAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the character is sitting in the specified vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "02A7",
-          "name": "COMMAND_02A7",
-          "num_params": 1
+          "member": "IsSittingInAnyCar",
+          "name": "IS_CHAR_SITTING_IN_ANY_CAR",
+          "num_params": 1,
+          "short_desc": "Returns true if the character is sitting in any vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "02A8",
-          "name": "COMMAND_02A8",
-          "num_params": 1
+          "member": "IsOnFoot",
+          "name": "IS_CHAR_ON_FOOT",
+          "num_params": 1,
+          "short_desc": "Returns true if the character is on foot, and not occupying a vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "txdName",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "02A9",
-          "name": "COMMAND_02A9",
-          "num_params": 1
+          "member": "LoadSplash",
+          "name": "LOAD_SPLASH_SCREEN",
+          "num_params": 1,
+          "short_desc": "Loads the specified splash screen"
         },
         {
           "id": "02AA",
           "name": "COMMAND_02AA",
-          "num_params": 0
+          "num_params": 0,
+          "short_desc": ""
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Camera",
           "id": "02AB",
-          "name": "COMMAND_02AB",
-          "num_params": 0
+          "member": "EnablePlayerControl",
+          "name": "ENABLE_PLAYER_CONTROL_CAMERA",
+          "num_params": 0,
+          "short_desc": "Gives camera control to the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "class": "Object",
           "id": "02AC",
-          "name": "COMMAND_02AC",
-          "num_params": 4
+          "member": "SetRotation",
+          "name": "SET_OBJECT_ROTATION",
+          "num_params": 4,
+          "short_desc": "Sets the object rotation along X, Y and Z axis"
         },
         {
           "input": [

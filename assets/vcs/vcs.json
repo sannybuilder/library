@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1757784788350,
-    "version": "0.37",
+    "last_update": 1757983366612,
+    "version": "0.38",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -15814,1016 +15814,1271 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
           "id": "02F1",
-          "name": "COMMAND_02F1",
-          "num_params": 1
+          "name": "IS_CHAR_IN_FLYING_VEHICLE",
+          "num_params": 1,
+          "short_desc": "Returns true if the character is in a flying vehicle",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
+          "member": "IsInFlyingVehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "angle",
+              "type": "float"
             }
           ],
+          "class": "Heli",
           "id": "02F2",
-          "name": "COMMAND_02F2",
-          "num_params": 2
+          "member": "SetOrientation",
+          "name": "SET_HELI_ORIENTATION",
+          "num_params": 2,
+          "short_desc": "Forces the heli rotation relative to the north"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             }
           ],
+          "class": "Heli",
           "id": "02F3",
-          "name": "COMMAND_02F3",
-          "num_params": 1
+          "member": "ClearOrientation",
+          "name": "CLEAR_HELI_ORIENTATION",
+          "num_params": 1,
+          "short_desc": "Resets the heli rotation set with SET_HELI_ORIENTATION"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Plane"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "speed",
               "type": "int"
             }
           ],
+          "class": "Plane",
           "id": "02F4",
-          "name": "COMMAND_02F4",
-          "num_params": 5
+          "member": "GotoCoords",
+          "name": "PLANE_GOTO_COORDS",
+          "num_params": 5,
+          "short_desc": "Makes the AI fly the plane to the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "fromX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "fromY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "fromZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
+              "name": "n",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Path",
           "id": "02F5",
-          "name": "COMMAND_02F5",
-          "num_params": 7
+          "member": "GetNthClosestCarNode",
+          "name": "GET_NTH_CLOSEST_CAR_NODE",
+          "num_params": 7,
+          "short_desc": "Gets the coordinates of the nth car path node closest to the given coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "fromX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "fromY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "fromZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
+              "name": "n",
               "type": "int"
+            }
+          ],
+          "output": [
+            {
+              "name": "x",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "y",
+              "type": "float",
+              "source": "var_any"
             },
             {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "z",
+              "type": "float",
+              "source": "var_any"
             }
           ],
           "id": "02F6",
-          "name": "COMMAND_02F6",
-          "num_params": 7
+          "name": "GET_NTH_CLOSEST_CHAR_NODE",
+          "num_params": 7,
+          "class": "Path",
+          "member": "GetNthClosestCharNode",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Gets the coordinates of the nth ped path node closest to the given coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Rc",
           "id": "02F7",
-          "name": "COMMAND_02F7",
-          "num_params": 1
+          "member": "SetEnableDetonateOnContact",
+          "name": "SET_ENABLE_RC_DETONATE_ON_CONTACT",
+          "num_params": 1,
+          "short_desc": "Sets whether RC Bandits detonate on contact with the wheels of any four-wheeled vehicles"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "02F8",
-          "name": "COMMAND_02F8",
-          "num_params": 2
+          "member": "FreezePosition",
+          "name": "FREEZE_CHAR_POSITION",
+          "num_params": 2,
+          "short_desc": "Sets whether the character's position remains unchanged"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "02F9",
-          "name": "COMMAND_02F9",
-          "num_params": 2
+          "member": "SetDrownsInWater",
+          "name": "SET_CHAR_DROWNS_IN_WATER",
+          "num_params": 2,
+          "short_desc": "Controls whether the character can drown in water"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Object",
           "id": "02FA",
-          "name": "COMMAND_02FA",
-          "num_params": 2
+          "member": "SetRecordsCollisions",
+          "name": "SET_OBJECT_RECORDS_COLLISIONS",
+          "num_params": 2,
+          "short_desc": "Enables the use of collision checking for the object"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
           "id": "02FB",
-          "name": "COMMAND_02FB",
-          "num_params": 1
+          "member": "HasCollidedWithAnything",
+          "name": "HAS_OBJECT_COLLIDED_WITH_ANYTHING",
+          "num_params": 1,
+          "short_desc": "Returns true if the object has collided"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Rc",
           "id": "02FC",
-          "name": "COMMAND_02FC",
-          "num_params": 0
+          "member": "RemoveBuggy",
+          "name": "REMOVE_RC_BUGGY",
+          "num_params": 0,
+          "short_desc": "Exits remote-control mode"
         },
         {
           "id": "02FD",
-          "name": "COMMAND_02FD",
-          "num_params": 0
+          "name": "HAS_PHOTOGRAPH_BEEN_TAKEN",
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "output": [
+            {
+              "name": "armor",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
           "id": "02FE",
-          "name": "COMMAND_02FE",
-          "num_params": 2
+          "member": "GetArmor",
+          "name": "GET_CHAR_ARMOUR",
+          "num_params": 2,
+          "short_desc": "Returns the character's armor amount"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Heli",
           "id": "02FF",
-          "name": "COMMAND_02FF",
-          "num_params": 2
+          "member": "SetStabiliser",
+          "name": "SET_HELI_STABILISER",
+          "num_params": 2,
+          "short_desc": "Limits the amount a helicopter can tilt"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
+              "name": "distance",
               "type": "int"
             }
           ],
+          "class": "Car",
           "id": "0300",
-          "name": "COMMAND_0300",
-          "num_params": 2
+          "member": "SetStraightLineDistance",
+          "name": "SET_CAR_STRAIGHT_LINE_DISTANCE",
+          "num_params": 2,
+          "short_desc": "Sets the minimum distance for the AI driver to start ignoring car paths and go straight to the target"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "class": "Car",
           "id": "0301",
-          "name": "COMMAND_0301",
-          "num_params": 1
+          "member": "PopBoot",
+          "name": "POP_CAR_BOOT",
+          "num_params": 1,
+          "short_desc": "Opens the car's trunk and keeps it open"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "mood",
+              "type": "PlayerMood"
             },
             {
-              "name": "_p3",
+              "name": "time",
               "type": "int"
             }
           ],
+          "class": "Player",
           "id": "0302",
-          "name": "COMMAND_0302",
-          "num_params": 3
+          "member": "SetMood",
+          "name": "SET_PLAYER_MOOD",
+          "num_params": 3,
+          "short_desc": "Sets the players mood, affecting the dialogue spoken by the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "0303",
-          "name": "COMMAND_0303",
-          "num_params": 2
+          "member": "RequestCollision",
+          "name": "REQUEST_COLLISION",
+          "num_params": 2,
+          "short_desc": "Reloads the area at the specified coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "xRadius",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "yRadius",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
           "id": "0304",
-          "name": "COMMAND_0304",
-          "num_params": 6
+          "member": "Locate2D",
+          "name": "LOCATE_OBJECT_2D",
+          "num_params": 6,
+          "short_desc": "Returns true if the object is near the specified coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "xRadius",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "yRadius",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "zRadius",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
           "id": "0305",
-          "name": "COMMAND_0305",
-          "num_params": 8
+          "member": "Locate3D",
+          "name": "LOCATE_OBJECT_3D",
+          "num_params": 8,
+          "short_desc": "Returns true if the object is near the specified point"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
           "id": "0306",
-          "name": "COMMAND_0306",
-          "num_params": 1
+          "member": "IsInWater",
+          "name": "IS_OBJECT_IN_WATER",
+          "num_params": 1,
+          "short_desc": "Returns true if the object is in water"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
           "id": "0307",
-          "name": "COMMAND_0307",
-          "num_params": 6
+          "member": "IsInArea2D",
+          "name": "IS_OBJECT_IN_AREA_2D",
+          "num_params": 6,
+          "short_desc": "Returns true if object is in the specified area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "leftBottomZ",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "rightTopZ",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "drawSphere",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
           "id": "0308",
-          "name": "COMMAND_0308",
-          "num_params": 8
+          "member": "IsInArea3D",
+          "name": "IS_OBJECT_IN_AREA_3D",
+          "num_params": 8,
+          "short_desc": "Returns true if the object is in the specified area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             },
             {
-              "name": "_p3",
+              "name": "time",
               "type": "int"
             }
           ],
+          "class": "Char",
           "id": "0309",
-          "name": "COMMAND_0309",
-          "num_params": 3
+          "member": "SetCrouch",
+          "name": "SET_CHAR_CROUCH",
+          "num_params": 3,
+          "short_desc": "Makes the character crouch"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "dayOrNight",
+              "type": "DayOrNight"
+            },
+            {
+              "name": "normal",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "poor",
               "type": "int"
             },
             {
-              "name": "_p3",
+              "name": "rich",
               "type": "int"
             },
             {
-              "name": "_p4",
+              "name": "exec",
               "type": "int"
             },
             {
-              "name": "_p5",
+              "name": "worker",
               "type": "int"
             },
             {
-              "name": "_p6",
+              "name": "big",
               "type": "int"
             },
             {
-              "name": "_p7",
+              "name": "taxi",
               "type": "int"
             },
             {
-              "name": "_p8",
+              "name": "moped",
               "type": "int"
             },
             {
-              "name": "_p9",
+              "name": "motorbike",
               "type": "int"
             },
             {
-              "name": "_p10",
+              "name": "leisureBoat",
               "type": "int"
             },
             {
-              "name": "_p11",
-              "type": "int"
-            },
-            {
-              "name": "_p12",
-              "type": "int"
-            },
-            {
-              "name": "_p13",
-              "type": "int"
-            },
-            {
-              "name": "_p14",
-              "type": "int"
-            },
-            {
-              "name": "_p15",
+              "name": "workerBoat",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Zone",
           "id": "030A",
-          "name": "COMMAND_030A",
-          "num_params": 15
+          "member": "SetCivilianCarInfo",
+          "name": "SET_ZONE_CIVILIAN_CAR_INFO",
+          "num_params": 13,
+          "short_desc": "Sets the traffic density of cars and boats in the zone"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "animationFile",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "030B",
-          "name": "COMMAND_030B",
-          "num_params": 1
+          "member": "RequestAnimation",
+          "name": "REQUEST_ANIMATION",
+          "num_params": 1,
+          "short_desc": "Loads the specified IFP File"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "animationFile",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "030C",
-          "name": "COMMAND_030C",
-          "num_params": 1
+          "member": "HasAnimationLoaded",
+          "name": "HAS_ANIMATION_LOADED",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified IFP file is loaded"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "animationFile",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Streaming",
           "id": "030D",
-          "name": "COMMAND_030D",
-          "num_params": 1
+          "member": "RemoveAnimation",
+          "name": "REMOVE_ANIMATION",
+          "num_params": 1,
+          "short_desc": "Releases the specified IFP file, freeing game memory"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "030E",
-          "name": "COMMAND_030E",
-          "num_params": 1
+          "member": "SetShuffleIntoDriversSeat",
+          "name": "SET_CHAR_SHUFFLE_INTO_DRIVERS_SEAT",
+          "num_params": 1,
+          "short_desc": "Moves the character from a passenger seat to the driver seat"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Object"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "xOffset",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "yOffset",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "zOffset",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "heading",
+              "type": "Facing"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "headingRange",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "weaponType",
+              "type": "WeaponType"
             }
           ],
+          "class": "Char",
           "id": "030F",
-          "name": "COMMAND_030F",
-          "num_params": 8
+          "member": "AttachToObject",
+          "name": "ATTACH_CHAR_TO_OBJECT",
+          "num_params": 8,
+          "short_desc": "Attaches the character to the specified object, in turret mode"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "player",
+              "type": "Player"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0310",
-          "name": "COMMAND_0310",
-          "num_params": 3
+          "member": "SetAsPlayerFriend",
+          "name": "SET_CHAR_AS_PLAYER_FRIEND",
+          "num_params": 3,
+          "short_desc": "Sets whether the character ignores the player's crimes"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "counter",
+              "type": "int",
+              "source": "var_global"
+            },
+            {
+              "name": "display",
+              "type": "CounterDisplay"
+            },
+            {
+              "name": "slot",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
+              "name": "text",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "0311",
-          "name": "COMMAND_0311",
-          "num_params": 4
+          "member": "DisplayNthCounterWithString",
+          "name": "DISPLAY_NTH_ONSCREEN_COUNTER_WITH_STRING",
+          "num_params": 4,
+          "short_desc": "Displays an onscreen counter with the text in the specified slot, either shown in numbers or as a bar"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "type",
+              "type": "SetPieceType"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "fromX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "fromY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "toX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "toY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "spawnPoliceAAtX",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "spawnPoliceAAtY",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "headedTowardsAAtX",
+              "type": "float"
             },
             {
-              "name": "_p9",
-              "type": "int"
+              "name": "headedTowardsAAtY",
+              "type": "float"
             },
             {
-              "name": "_p10",
-              "type": "int"
+              "name": "spawnPoliceBAtX",
+              "type": "float"
             },
             {
-              "name": "_p11",
-              "type": "int"
+              "name": "spawnPoliceBAtY",
+              "type": "float"
             },
             {
-              "name": "_p12",
-              "type": "int"
+              "name": "headedTowardsBAtX",
+              "type": "float"
             },
             {
-              "name": "_p13",
-              "type": "int"
+              "name": "headedTowardsBAtY",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0312",
-          "name": "COMMAND_0312",
-          "num_params": 13
+          "member": "AddSetPiece",
+          "name": "ADD_SET_PIECE",
+          "num_params": 13,
+          "short_desc": "Creates a trigger zone for police to appear during chases"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "color",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "fade",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0313",
-          "name": "COMMAND_0313",
-          "num_params": 2
+          "member": "SetExtraColors",
+          "name": "SET_EXTRA_COLOURS",
+          "num_params": 2,
+          "short_desc": "Sets the extra color of the sky"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "withFade",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0314",
-          "name": "COMMAND_0314",
-          "num_params": 1
+          "member": "ClearExtraColors",
+          "name": "CLEAR_EXTRA_COLOURS",
+          "num_params": 1,
+          "short_desc": "Clears the extra color of the sky"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "output": [
+            {
+              "name": "twoWheelsTime",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "twoWheelsDistance",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "wheelieTime",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "wheelieDistance",
+              "type": "float",
+              "source": "var_any"
+            },
+            {
+              "name": "stoppieTime",
+              "type": "int",
+              "source": "var_any"
+            },
+            {
+              "name": "stoppieDistance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "class": "Player",
           "id": "0315",
-          "name": "COMMAND_0315",
-          "num_params": 7
+          "member": "GetWheelieStats",
+          "name": "GET_WHEELIE_STATS",
+          "num_params": 7,
+          "short_desc": "Returns the stats of the most recent wheelie or stoppie attempt"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "tireId",
+              "type": "WheelId"
             }
           ],
+          "class": "Car",
           "id": "0316",
-          "name": "COMMAND_0316",
-          "num_params": 2
+          "member": "BurstTire",
+          "name": "BURST_CAR_TYRE",
+          "num_params": 2,
+          "short_desc": "Deflates the car's tire"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "0317",
-          "name": "COMMAND_0317",
-          "num_params": 1
+          "member": "IsObjNoObj",
+          "name": "IS_CHAR_OBJ_NO_OBJ",
+          "num_params": 1,
+          "short_desc": "Returns true if the character has no objective (00A2)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "modelName",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "0318",
-          "name": "COMMAND_0318",
-          "num_params": 2
+          "member": "IsWearing",
+          "name": "IS_PLAYER_WEARING",
+          "num_params": 2,
+          "short_desc": "Returns true if the player has the specified model (020F)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Player",
           "id": "0319",
-          "name": "COMMAND_0319",
-          "num_params": 2
+          "member": "SetCanDoDriveBy",
+          "name": "SET_PLAYER_CAN_DO_DRIVE_BY",
+          "num_params": 2,
+          "short_desc": "Sets the players driveby mode"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "031A",
-          "name": "COMMAND_031A",
-          "num_params": 3
+          "member": "CreateSwatRope",
+          "name": "CREATE_SWAT_ROPE",
+          "num_params": 3,
+          "short_desc": "Creates a SWAT character coming down from a rope at the coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "_unused",
+              "type": "model_vehicle"
+            },
+            {
+              "name": "component1",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "component2",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Car",
           "id": "031B",
-          "name": "COMMAND_031B",
-          "num_params": 3
+          "member": "SetModelComponents",
+          "name": "SET_CAR_MODEL_COMPONENTS",
+          "num_params": 3,
+          "short_desc": "Sets the variation of the next car to be created"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "class": "Car",
           "id": "031C",
-          "name": "COMMAND_031C",
-          "num_params": 1
+          "member": "CloseAllDoors",
+          "name": "CLOSE_ALL_CAR_DOORS",
+          "num_params": 1,
+          "short_desc": "Closes all car doors, hoods and boots"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "fromX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "fromY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "toX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "toZ",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "distance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Math",
           "id": "031D",
-          "name": "COMMAND_031D",
-          "num_params": 5
+          "member": "GetDistanceBetweenCoords2D",
+          "name": "GET_DISTANCE_BETWEEN_COORDS_2D",
+          "num_params": 5,
+          "short_desc": "Gets the distance between two points"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "fromX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "fromY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "fromZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "toX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "toY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "toZ",
+              "type": "float"
             }
           ],
+          "output": [
+            {
+              "name": "distance",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Math",
           "id": "031E",
-          "name": "COMMAND_031E",
-          "num_params": 7
+          "member": "GetDistanceBetweenCoords3D",
+          "name": "GET_DISTANCE_BETWEEN_COORDS_3D",
+          "num_params": 7,
+          "short_desc": "Gets the distance between two points"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "class": "Car",
           "id": "031F",
-          "name": "COMMAND_031F",
-          "num_params": 1
+          "member": "PopBootUsingPhysics",
+          "name": "POP_CAR_BOOT_USING_PHYSICS",
+          "num_params": 1,
+          "short_desc": "Opens the trunk/boot door component of the vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "0320",
-          "name": "COMMAND_0320",
-          "num_params": 1
+          "member": "IsLeavingVehicleToDie",
+          "name": "IS_CHAR_LEAVING_VEHICLE_TO_DIE",
+          "num_params": 1,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
+          "class": "Object",
           "id": "0321",
-          "name": "COMMAND_0321",
-          "num_params": 2
+          "member": "SortOutCollisionWithCar",
+          "name": "SORT_OUT_OBJECT_COLLISION_WITH_CAR",
+          "num_params": 2,
+          "short_desc": "Makes the specified car have no collision with the specified object"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "radius",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "0322",
-          "name": "COMMAND_0322",
-          "num_params": 5
+          "member": "IsWanderPathClear",
+          "name": "IS_CHAR_WANDER_PATH_CLEAR",
+          "num_params": 5,
+          "short_desc": ""
         },
         {
           "input": [
@@ -16845,178 +17100,240 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "gangId",
+              "type": "GangType"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0324",
-          "name": "COMMAND_0324",
-          "num_params": 3
+          "member": "SetCanBeDamagedByMembersOfGang",
+          "name": "SET_CHAR_CAN_BE_DAMAGED_BY_MEMBERS_OF_GANG",
+          "num_params": 3,
+          "short_desc": "Sets the character be damageable by members of the gang"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
           "id": "0325",
-          "name": "COMMAND_0325",
-          "num_params": 2
+          "member": "FreezePosition",
+          "name": "FREEZE_CAR_POSITION",
+          "num_params": 2,
+          "short_desc": "Locks the vehicle's position"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "0326",
-          "name": "COMMAND_0326",
-          "num_params": 2
+          "member": "HasBeenDamagedByChar",
+          "name": "HAS_CHAR_BEEN_DAMAGED_BY_CHAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the character has been hurt by the other character"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
           "id": "0327",
-          "name": "COMMAND_0327",
-          "num_params": 2
+          "name": "HAS_CHAR_BEEN_DAMAGED_BY_CAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the char has been hurt by the specified vehicle",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
+          "member": "HasBeenDamagedByCar"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Char"
             }
           ],
           "id": "0328",
-          "name": "COMMAND_0328",
-          "num_params": 2
+          "name": "HAS_CAR_BEEN_DAMAGED_BY_CHAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the car has been damaged by the specified char",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
+          "member": "HasBeenDamagedByChar"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "other",
+              "type": "Car"
             }
           ],
           "id": "0329",
-          "name": "COMMAND_0329",
-          "num_params": 2
+          "name": "HAS_CAR_BEEN_DAMAGED_BY_CAR",
+          "num_params": 2,
+          "short_desc": "Returns true if the vehicle has been damaged by another specified vehicle",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Car",
+          "member": "HasBeenDamagedByCar"
         },
         {
-          "input": [
+          "output": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "channel",
+              "type": "RadioChannel",
+              "source": "var_any"
             }
           ],
           "id": "032A",
-          "name": "COMMAND_032A",
-          "num_params": 1
+          "name": "GET_RADIO_CHANNEL",
+          "num_params": 1,
+          "short_desc": "Returns the current radio station that is being played",
+          "class": "Audio",
+          "member": "GetRadioChannel",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "032B",
-          "name": "COMMAND_032B",
-          "num_params": 1
+          "member": "IsDrowningInWater",
+          "name": "IS_CHAR_DROWNING_IN_WATER",
+          "num_params": 1,
+          "short_desc": "Returns true if the character is taking damage from ocean water while on foot"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
           "id": "032C",
-          "name": "COMMAND_032C",
-          "num_params": 3
+          "member": "HasGlassBeenShatteredNearby",
+          "name": "HAS_GLASS_BEEN_SHATTERED_NEARBY",
+          "num_params": 3,
+          "short_desc": "Checks if glass has been shattered near the specified location"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "032D",
-          "name": "COMMAND_032D",
-          "num_params": 2
+          "member": "SetStayInCarWhenJacked",
+          "name": "SET_CHAR_STAY_IN_CAR_WHEN_JACKED",
+          "num_params": 2,
+          "short_desc": "Makes the character stay in the vehicle when it is jacked (characters let themselves get \"kidnapped\")"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "amount",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "032E",
-          "name": "COMMAND_032E",
-          "num_params": 1
+          "member": "AddMoneySpentOnWeapons",
+          "name": "ADD_MONEY_SPENT_ON_WEAPONS",
+          "num_params": 1,
+          "short_desc": "Adds to the weapon budget stat"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "032F",
-          "name": "COMMAND_032F",
-          "num_params": 2
+          "member": "SetAnsweringMobile",
+          "name": "SET_CHAR_ANSWERING_MOBILE",
+          "num_params": 2,
+          "short_desc": ""
         },
         {
           "input": [
@@ -25853,6 +26170,12 @@
       "name": "Pickup",
       "constructable": true,
       "desc": ""
+    },
+    {
+      "name": "Plane",
+      "constructable": true,
+      "extends": "Car",
+      "desc": "Planes"
     },
     {
       "name": "Rc",

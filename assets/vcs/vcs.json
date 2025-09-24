@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1757983366612,
-    "version": "0.38",
+    "version": "0.39",
+    "last_update": 1758739982467,
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -17338,982 +17338,1318 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "intensity",
               "type": "int"
             }
           ],
+          "class": "Player",
           "id": "0330",
-          "name": "COMMAND_0330",
-          "num_params": 2
+          "member": "SetDrunkenness",
+          "name": "SET_PLAYER_DRUNKENNESS",
+          "num_params": 2,
+          "short_desc": "Makes the camera start moving around in a swirling motion with the specified intensity as if drunk"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0331",
-          "name": "COMMAND_0331",
-          "num_params": 2
+          "member": "SetInPlayersGroupCanFight",
+          "name": "SET_CHAR_IN_PLAYERS_GROUP_CAN_FIGHT",
+          "num_params": 2,
+          "short_desc": "Sets whether the char assists the player in attacking another character on foot"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "0332",
-          "name": "COMMAND_0332",
-          "num_params": 1
+          "member": "ClearWaitState",
+          "name": "CLEAR_CHAR_WAIT_STATE",
+          "num_params": 1,
+          "short_desc": "Stops the idle animation on the character (0220)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "rightTopY",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
+              "name": "modelId",
+              "type": "model_vehicle"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0333",
-          "name": "COMMAND_0333",
-          "num_params": 6
+          "member": "GetRandomCarOfTypeInAreaNoSave",
+          "name": "GET_RANDOM_CAR_OF_TYPE_IN_AREA_NO_SAVE",
+          "num_params": 6,
+          "short_desc": "Loops through the pool of vehicles to retrieve one that matches the specified model in the specified 2D area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
           "id": "0334",
-          "name": "COMMAND_0334",
-          "num_params": 2
+          "member": "SetCanBurstTires",
+          "name": "SET_CAN_BURST_CAR_TYRES",
+          "num_params": 2,
+          "short_desc": "Sets whether the car's tires can be deflated"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             }
           ],
+          "class": "Heli",
           "id": "0335",
-          "name": "COMMAND_0335",
-          "num_params": 1
+          "member": "FireHunterGun",
+          "name": "FIRE_HUNTER_GUN",
+          "num_params": 1,
+          "short_desc": "Makes the Hunter helicopter fire cannon gun"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
           "id": "0336",
-          "name": "COMMAND_0336",
-          "num_params": 2
+          "name": "IS_CHAR_TOUCHING_VEHICLE",
+          "num_params": 2,
+          "short_desc": "Returns true if the character is colliding with a car",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
+          "member": "IsTouchingVehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "player",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "offsetX",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "offsetY",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "offsetZ",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "modelId1",
+              "type": "model_char"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "modelId2",
+              "type": "model_char"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
           "id": "0337",
-          "name": "COMMAND_0337",
-          "num_params": 6
+          "member": "CheckForPedModelAroundPlayer",
+          "name": "CHECK_FOR_PED_MODEL_AROUND_PLAYER",
+          "num_params": 6,
+          "short_desc": "Returns true if there is a pedestrian of the given model in the specified area around the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "0338",
-          "name": "COMMAND_0338",
-          "num_params": 1
+          "member": "ClearFollowPath",
+          "name": "CLEAR_CHAR_FOLLOW_PATH",
+          "num_params": 1,
+          "short_desc": "Clears the character's follow path (0041)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0339",
-          "name": "COMMAND_0339",
-          "num_params": 2
+          "member": "SetCanBeShotInVehicle",
+          "name": "SET_CHAR_CAN_BE_SHOT_IN_VEHICLE",
+          "num_params": 2,
+          "short_desc": "Makes the character immune to a damage while in a vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "tableName",
+              "type": "string"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Text",
           "id": "033A",
-          "name": "COMMAND_033A",
-          "num_params": 1
+          "member": "LoadMissionText",
+          "name": "LOAD_MISSION_TEXT",
+          "num_params": 1,
+          "short_desc": "Makes the game use GXT Entries from the specified GXT Table"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "033B",
-          "name": "COMMAND_033B",
-          "num_params": 1
+          "member": "ClearLastDamageEntity",
+          "name": "CLEAR_CHAR_LAST_DAMAGE_ENTITY",
+          "num_params": 1,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "id": "033C",
-          "name": "COMMAND_033C",
-          "num_params": 1
+          "name": "CLEAR_CAR_LAST_DAMAGE_ENTITY",
+          "num_params": 1,
+          "short_desc": "Clears the car's last damage entity",
+          "class": "Car",
+          "member": "ClearLastDamageEntity"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Object",
           "id": "033D",
-          "name": "COMMAND_033D",
-          "num_params": 2
+          "member": "FreezePosition",
+          "name": "FREEZE_OBJECT_POSITION",
+          "num_params": 2,
+          "short_desc": "Sets whether the object's position remains unchanged"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "pickUpX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "pickUpY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "pickUpZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "pickUpAngle",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "dropoffX",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "dropoffY",
+              "type": "float"
             },
             {
-              "name": "_p7",
-              "type": "int"
+              "name": "dropoffZ",
+              "type": "float"
             },
             {
-              "name": "_p8",
-              "type": "int"
+              "name": "dropoffAngle",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Shortcut",
           "id": "033E",
-          "name": "COMMAND_033E",
-          "num_params": 8
+          "member": "SetUpTaxi",
+          "name": "SET_UP_TAXI_SHORTCUT",
+          "num_params": 8,
+          "short_desc": "Sets up both the pick-up (058D) and drop-off (058E) points of the taxi shortcut"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Shortcut",
           "id": "033F",
-          "name": "COMMAND_033F",
-          "num_params": 0
+          "member": "ClearTaxi",
+          "name": "CLEAR_TAXI_SHORTCUT",
+          "num_params": 0,
+          "short_desc": "Clears any taxi shortcut that is set up by 0556 or 058E"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "value",
               "type": "int"
             }
           ],
+          "class": "Player",
           "id": "0340",
-          "name": "COMMAND_0340",
-          "num_params": 2
+          "member": "IncreaseMaxHealth",
+          "name": "INCREASE_PLAYER_MAX_HEALTH",
+          "num_params": 2,
+          "short_desc": "Increases the player's max health by the specified value and changes current health to the new maximum"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
+              "name": "value",
               "type": "int"
             }
           ],
+          "class": "Player",
           "id": "0341",
-          "name": "COMMAND_0341",
-          "num_params": 2
+          "member": "IncreaseMaxArmor",
+          "name": "INCREASE_PLAYER_MAX_ARMOUR",
+          "num_params": 2,
+          "short_desc": "Increases the player's max armor by the specified value and changes current armor to the new maximum"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Char",
           "id": "0342",
-          "name": "COMMAND_0342",
-          "num_params": 2
+          "member": "CreateRandomAsDriver",
+          "name": "CREATE_RANDOM_CHAR_AS_DRIVER",
+          "num_params": 2,
+          "short_desc": "Creates a driver in the vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "vehicle",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
+              "name": "seat",
+              "type": "SeatId"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Char",
           "id": "0343",
-          "name": "COMMAND_0343",
-          "num_params": 3
+          "member": "CreateRandomAsPassenger",
+          "name": "CREATE_RANDOM_CHAR_AS_PASSENGER",
+          "num_params": 3,
+          "short_desc": "Creates a random character in the passenger seat of the vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0344",
-          "name": "COMMAND_0344",
-          "num_params": 2
+          "member": "SetIgnoreThreatsBehindObjects",
+          "name": "SET_CHAR_IGNORE_THREATS_BEHIND_OBJECTS",
+          "num_params": 2,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Heli"
             }
           ],
+          "class": "Heli",
           "id": "0345",
-          "name": "COMMAND_0345",
-          "num_params": 1
+          "member": "MakeComeCrashingDown",
+          "name": "MAKE_HELI_COME_CRASHING_DOWN",
+          "num_params": 1,
+          "short_desc": "Makes helicopter simulate crash landing, exploding on the way if high up"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "areaId",
+              "type": "Interior"
             }
           ],
+          "class": "Object",
           "id": "0346",
-          "name": "COMMAND_0346",
-          "num_params": 2
+          "member": "SetAreaVisible",
+          "name": "SET_OBJECT_AREA_VISIBLE",
+          "num_params": 2,
+          "short_desc": "Sets the visibility of the object to the specified interior"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0347",
-          "name": "COMMAND_0347",
-          "num_params": 2
+          "member": "SetNeverTargeted",
+          "name": "SET_CHAR_NEVER_TARGETTED",
+          "num_params": 2,
+          "short_desc": "Sets whether the character won't be targeted by the autoaim system"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0348",
-          "name": "COMMAND_0348",
-          "num_params": 2
+          "member": "SetCrouchWhenThreatened",
+          "name": "SET_CHAR_CROUCH_WHEN_THREATENED",
+          "num_params": 2,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "0349",
-          "name": "COMMAND_0349",
-          "num_params": 1
+          "member": "IsInAnyPoliceVehicle",
+          "name": "IS_CHAR_IN_ANY_POLICE_VEHICLE",
+          "num_params": 1,
+          "short_desc": "Returns true if the character is driving a police vehicle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "any"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Char",
           "id": "034A",
-          "name": "COMMAND_034A",
-          "num_params": 1
+          "member": "DoesExist",
+          "name": "DOES_CHAR_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if the handle is a valid character handle"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "any"
             }
           ],
           "id": "034B",
-          "name": "COMMAND_034B",
-          "num_params": 1
+          "name": "DOES_VEHICLE_EXIST",
+          "num_params": 1,
+          "short_desc": "Returns true if the handle is a valid vehicle handle",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Car",
+          "member": "DoesExist"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "sprite",
+              "type": "RadarSprite"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Blip",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "Blip",
           "id": "034C",
-          "name": "COMMAND_034C",
-          "num_params": 5
+          "member": "AddShortRangeSpriteForContactPoint",
+          "name": "ADD_SHORT_RANGE_SPRITE_BLIP_FOR_CONTACT_POINT",
+          "num_params": 5,
+          "short_desc": "Adds a short range sprite blip and sphere to the contact point that is not displayed while on mission"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "034D",
-          "name": "COMMAND_034D",
-          "num_params": 1
+          "member": "IsStuck",
+          "name": "IS_CHAR_STUCK",
+          "num_params": 1,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "034E",
-          "name": "COMMAND_034E",
-          "num_params": 1
+          "member": "SetAllTaxisHaveNitro",
+          "name": "SET_ALL_TAXIS_HAVE_NITRO",
+          "num_params": 1,
+          "short_desc": "Toggles whether all taxis have nitrous"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "034F",
-          "name": "COMMAND_034F",
-          "num_params": 2
+          "member": "SetStopShootDontSeekEntity",
+          "name": "SET_CHAR_STOP_SHOOT_DONT_SEEK_ENTITY",
+          "num_params": 2,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
           "id": "0350",
-          "name": "COMMAND_0350",
-          "num_params": 2
+          "member": "FreezePositionAndDontLoadCollision",
+          "name": "FREEZE_CAR_POSITION_AND_DONT_LOAD_COLLISION",
+          "num_params": 2,
+          "short_desc": "Makes the car maintain its position"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "highestLevel",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "0351",
-          "name": "COMMAND_0351",
-          "num_params": 1
+          "member": "RegisterVigilanteLevel",
+          "name": "REGISTER_VIGILANTE_LEVEL",
+          "num_params": 1,
+          "short_desc": "Saves the highest vigilante level stat"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "0352",
-          "name": "COMMAND_0352",
-          "num_params": 1
+          "member": "ClearAllAnims",
+          "name": "CLEAR_ALL_CHAR_ANIMS",
+          "num_params": 1,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Garage"
             },
             {
-              "name": "_p2",
+              "name": "max",
               "type": "int"
             }
           ],
+          "class": "Garage",
           "id": "0353",
-          "name": "COMMAND_0353",
-          "num_params": 2
+          "member": "SetMaximumNumberOfCars",
+          "name": "SET_MAXIMUM_NUMBER_OF_CARS_IN_GARAGE",
+          "num_params": 2,
+          "short_desc": "Sets the maximum number of vehicles for a save garage to open"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "0354",
-          "name": "COMMAND_0354",
-          "num_params": 0
+          "member": "AreWantedStarsFlashing",
+          "name": "WANTED_STARS_ARE_FLASHING",
+          "num_params": 0,
+          "short_desc": "Returns true if the wanted stars are flashing (normally after visiting a Pay'n'Spray)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Weather",
           "id": "0355",
-          "name": "COMMAND_0355",
-          "num_params": 1
+          "member": "SetAllowHurricanes",
+          "name": "SET_ALLOW_HURRICANES",
+          "num_params": 1,
+          "short_desc": "Allows hurricane weather"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "track",
+              "type": "AnnouncementTrack"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Audio",
           "id": "0356",
-          "name": "COMMAND_0356",
-          "num_params": 1
+          "member": "PlayAnnouncement",
+          "name": "PLAY_ANNOUNCEMENT",
+          "num_params": 1,
+          "short_desc": "Plays an announcement audio"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Game",
           "id": "0357",
-          "name": "COMMAND_0357",
-          "num_params": 1
+          "member": "SetIsInStadium",
+          "name": "SET_PLAYER_IS_IN_STADIUM",
+          "num_params": 1,
+          "short_desc": "Greys out the radar"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "output": [
+            {
+              "name": "num",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "class": "Player",
           "id": "0358",
-          "name": "COMMAND_0358",
-          "num_params": 2
+          "member": "GetBusFaresCollected",
+          "name": "GET_BUS_FARES_COLLECTED_BY_PLAYER",
+          "num_params": 2,
+          "short_desc": "Gets the bus fares collected by the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
+              "name": "distributionCar",
+              "type": "Car"
             }
           ],
+          "output": [
+            {
+              "name": "status",
+              "type": "ObjBuyIceCreamStatus",
+              "source": "var_any"
+            }
+          ],
+          "class": "Char",
           "id": "0359",
-          "name": "COMMAND_0359",
-          "num_params": 3
+          "member": "SetObjBuyIceCream",
+          "name": "SET_CHAR_OBJ_BUY_ICE_CREAM",
+          "num_params": 3,
+          "short_desc": "Makes the character approach the distribution vehicle to buy \"ice cream\" and returns the status of this attempt"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Hud",
           "id": "035A",
-          "name": "COMMAND_035A",
-          "num_params": 1
+          "member": "DisplayRadar",
+          "name": "DISPLAY_RADAR",
+          "num_params": 1,
+          "short_desc": "Displays or hides the radar"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "infoZone",
+              "type": "gxt_key"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "035B",
-          "name": "COMMAND_035B",
-          "num_params": 2
+          "member": "IsInInfoZone",
+          "name": "IS_PLAYER_IN_INFO_ZONE",
+          "num_params": 2,
+          "short_desc": "Returns true if the player is in the specified zone"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "class": "Char",
           "id": "035C",
-          "name": "COMMAND_035C",
-          "num_params": 1
+          "member": "ClearIceCreamPurchase",
+          "name": "CLEAR_CHAR_ICE_CREAM_PURCHASE",
+          "num_params": 1,
+          "short_desc": "Resets the information that the character has bought \"ice cream\""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "035D",
-          "name": "COMMAND_035D",
-          "num_params": 1
+          "member": "HasAttemptedAttractor",
+          "name": "HAS_CHAR_ATTEMPTED_ATTRACTOR",
+          "num_params": 1,
+          "short_desc": "Checks if the distribution ped has been attracted"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Car",
           "id": "035E",
-          "name": "COMMAND_035E",
-          "num_params": 2
+          "member": "SetLoadCollisionFlag",
+          "name": "SET_LOAD_COLLISION_FOR_CAR_FLAG",
+          "num_params": 2,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "035F",
-          "name": "COMMAND_035F",
-          "num_params": 2
+          "member": "SetLoadCollisionFlag",
+          "name": "SET_LOAD_COLLISION_FOR_CHAR_FLAG",
+          "num_params": 2,
+          "short_desc": ""
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "fromX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "fromY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "fromZ",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "toX",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "toY",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "toZ",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Fx",
           "id": "0360",
-          "name": "COMMAND_0360",
-          "num_params": 6
+          "member": "AddBigGunFlash",
+          "name": "ADD_BIG_GUN_FLASH",
+          "num_params": 6,
+          "short_desc": "Creates a gun flash particle effect"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "0361",
-          "name": "COMMAND_0361",
-          "num_params": 1
+          "member": "HasBoughtIceCream",
+          "name": "HAS_CHAR_BOUGHT_ICE_CREAM",
+          "num_params": 1,
+          "short_desc": "Returns true if the character has bought \"ice cream\""
         },
         {
-          "input": [
+          "output": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "percentage",
+              "type": "float",
+              "source": "var_any"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "0362",
-          "name": "COMMAND_0362",
-          "num_params": 1
+          "member": "GetProgressPercentage",
+          "name": "GET_PROGRESS_PERCENTAGE",
+          "num_params": 1,
+          "short_desc": "Gets the progress of completion as a percentage"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "angle",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Shortcut",
           "id": "0363",
-          "name": "COMMAND_0363",
-          "num_params": 4
+          "member": "SetPickupPoint",
+          "name": "SET_SHORTCUT_PICKUP_POINT",
+          "num_params": 4,
+          "short_desc": "Sets the taxi shortcut pick-up point for mission"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "angle",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Shortcut",
           "id": "0364",
-          "name": "COMMAND_0364",
-          "num_params": 4
+          "member": "SetDropoffPointForMission",
+          "name": "SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION",
+          "num_params": 4,
+          "short_desc": "Sets the taxi shortcut pick-up point for mission"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "leftBottomX",
+              "type": "float"
+            },
+            {
+              "name": "leftBottomY",
+              "type": "float"
+            },
+            {
+              "name": "rightTopX",
+              "type": "float"
+            },
+            {
+              "name": "rightTopY",
+              "type": "float"
+            },
+            {
+              "name": "allowCivilian",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "allowGangMember",
               "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
+              "name": "allowCriminal",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_constructor": true
+          },
+          "class": "World",
           "id": "0365",
-          "name": "COMMAND_0365",
-          "num_params": 8
+          "member": "GetRandomIceCreamCustomerInArea",
+          "name": "GET_RANDOM_ICE_CREAM_CUSTOMER_IN_AREA",
+          "num_params": 8,
+          "short_desc": "Returns the handle of the next ped in the given area who has not bought \"ice cream\" yet, or -1 otherwise"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "topRightX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "topRightY",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "World",
           "id": "0366",
-          "name": "COMMAND_0366",
-          "num_params": 4
+          "member": "UnlockAllCarDoorsInArea",
+          "name": "UNLOCK_ALL_CAR_DOORS_IN_AREA",
+          "num_params": 4,
+          "short_desc": "Unlocks all car doors in the specified rectangular area"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "gangId",
+              "type": "GangType"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Gang",
           "id": "0367",
-          "name": "COMMAND_0367",
-          "num_params": 2
+          "member": "SetAttackPlayerWithCops",
+          "name": "SET_GANG_ATTACK_PLAYER_WITH_COPS",
+          "num_params": 2,
+          "short_desc": "Forces members of the specified gang to act as law enforcement towards the player"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
+          "class": "Char",
           "id": "0368",
-          "name": "COMMAND_0368",
-          "num_params": 2
+          "member": "SetFrightenedInJackedCar",
+          "name": "SET_CHAR_FRIGHTENED_IN_JACKED_CAR",
+          "num_params": 2,
+          "short_desc": ""
         },
         {
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
+          "class": "Car",
           "id": "0369",
-          "name": "COMMAND_0369",
-          "num_params": 2
+          "input": [
+            {
+              "name": "self",
+              "type": "Car"
+            },
+            {
+              "name": "alpha",
+              "type": "int"
+            }
+          ],
+          "member": "SetToFadeIn",
+          "name": "SET_VEHICLE_TO_FADE_IN",
+          "num_params": 2,
+          "short_desc": "Sets the alpha transparency of a distant vehicle"
         },
         {
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "036A",
-          "name": "COMMAND_036A",
-          "num_params": 0
+          "member": "RegisterOddjobMissionPassed",
+          "name": "REGISTER_ODDJOB_MISSION_PASSED",
+          "num_params": 0,
+          "short_desc": "Sets the latest odd job mission passed"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
+          "output": [],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
           "id": "036B",
-          "name": "COMMAND_036B",
-          "num_params": 1
+          "member": "IsInShortcutTaxi",
+          "name": "IS_PLAYER_IN_SHORTCUT_TAXI",
+          "num_params": 1,
+          "short_desc": "Returns true if the player is entering a shortcut taxi (033E)"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             }
           ],
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Char",
           "id": "036C",
-          "name": "COMMAND_036C",
-          "num_params": 1
+          "member": "IsDucking",
+          "name": "IS_CHAR_DUCKING",
+          "num_params": 1,
+          "short_desc": "Returns true if the specified character is crouching"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "heliObject",
+              "type": "CutsceneObject"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "radius",
+              "type": "float"
             },
             {
-              "name": "_p3",
+              "name": "density",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Cutscene",
           "id": "036D",
-          "name": "COMMAND_036D",
-          "num_params": 3
+          "member": "CreateDustEffectForHeli",
+          "name": "CREATE_DUST_EFFECT_FOR_CUTSCENE_HELI",
+          "num_params": 3,
+          "short_desc": "Creates an effect of a heli blowing up dust on the ground"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "highestLevel",
               "type": "int"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Stat",
           "id": "036E",
-          "name": "COMMAND_036E",
-          "num_params": 1
+          "member": "RegisterFireLevel",
+          "name": "REGISTER_FIRE_LEVEL",
+          "num_params": 1,
+          "short_desc": "Saves the highest firefighter level stat"
         },
         {
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Game",
           "id": "036F",
-          "name": "COMMAND_036F",
-          "num_params": 0
+          "member": "IsAustralian",
+          "name": "IS_AUSTRALIAN_GAME",
+          "num_params": 0,
+          "short_desc": "Returns true if the current game is an Australian release"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
+          "class": "Car",
           "id": "0370",
-          "name": "COMMAND_0370",
-          "num_params": 1
+          "member": "DisarmBomb",
+          "name": "DISARM_CAR_BOMB",
+          "num_params": 1,
+          "short_desc": "Disarms the car's bomb"
         },
         {
+          "input": [],
+          "output": [],
           "id": "0371",
-          "name": "COMMAND_0371",
-          "num_params": 0
+          "name": "IS_JAPANESE_GAME",
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -18338,6 +18674,7 @@
               "type": "int"
             }
           ],
+          "output": [],
           "id": "0372",
           "name": "COMMAND_0372",
           "num_params": 5
@@ -18373,6 +18710,7 @@
               "type": "int"
             }
           ],
+          "output": [],
           "id": "0373",
           "name": "COMMAND_0373",
           "num_params": 7
@@ -18392,6 +18730,7 @@
               "type": "int"
             }
           ],
+          "output": [],
           "id": "0374",
           "name": "COMMAND_0374",
           "num_params": 3
@@ -18978,8 +19317,15 @@
         },
         {
           "id": "03AB",
-          "name": "COMMAND_03AB",
-          "num_params": 0
+          "name": "HAS_CUTSCENE_LOADED",
+          "num_params": 0,
+          "short_desc": "Returns true if the cutscene has finished loading",
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "Cutscene",
+          "member": "HasLoaded"
         },
         {
           "input": [
@@ -19037,28 +19383,37 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "weaponType",
+              "type": "WeaponType"
             }
           ],
           "id": "03B1",
-          "name": "COMMAND_03B1",
-          "num_params": 2
+          "name": "HAS_OBJECT_BEEN_DAMAGED_BY_WEAPON",
+          "num_params": 2,
+          "short_desc": "Returns true if the object has been damaged by the specified weapon or damage type",
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Object",
+          "member": "HasBeenDamagedByWeapon"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             }
           ],
           "id": "03B2",
-          "name": "COMMAND_03B2",
-          "num_params": 1
+          "name": "CLEAR_OBJECT_LAST_WEAPON_DAMAGE",
+          "num_params": 1,
+          "short_desc": "Clears the object's last damaging weapon ID",
+          "class": "Object",
+          "member": "ClearLastWeaponDamage"
         },
         {
           "input": [
@@ -19109,33 +19464,36 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Object"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "bulletProof",
+              "type": "bool"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "fireProof",
+              "type": "bool"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "explosionProof",
+              "type": "bool"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "collisionProof",
+              "type": "bool"
             },
             {
-              "name": "_p6",
-              "type": "int"
+              "name": "meleeProof",
+              "type": "bool"
             }
           ],
           "id": "03B5",
-          "name": "COMMAND_03B5",
-          "num_params": 6
+          "name": "SET_OBJECT_PROOFS",
+          "num_params": 6,
+          "short_desc": "Sets what immunities the object has",
+          "class": "Object",
+          "member": "SetProofs"
         },
         {
           "input": [
@@ -19553,19 +19911,22 @@
           "num_params": 1
         },
         {
+          "id": "03D5",
+          "name": "SET_CHAR_MAX_HEALTH",
+          "num_params": 2,
+          "short_desc": "Sets the characters max health",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
+              "name": "maxHealth",
               "type": "int"
             }
           ],
-          "id": "03D5",
-          "name": "COMMAND_03D5",
-          "num_params": 2
+          "class": "Char",
+          "member": "SetMaxHealth"
         },
         {
           "input": [
@@ -20400,17 +20761,26 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
-            },
+              "name": "text",
+              "type": "string"
+            }
+          ],
+          "output": [
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "length",
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "040F",
-          "name": "COMMAND_040F",
-          "num_params": 2
+          "name": "GET_STRING_LENGTH",
+          "num_params": 2,
+          "class": "Text",
+          "member": "GetStringLength",
+          "attrs": {
+            "is_static": true
+          },
+          "short_desc": "Returns the string length"
         },
         {
           "input": [
@@ -20767,61 +21137,73 @@
           "num_params": 5
         },
         {
+          "id": "0422",
+          "name": "SET_CAR_COORDINATES_NO_OFFSET",
+          "num_params": 4,
+          "short_desc": "Sets the vehicle coordinates without applying offsets to account for the height of the vehicle",
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
-          "id": "0422",
-          "name": "COMMAND_0422",
-          "num_params": 4
+          "class": "Car",
+          "member": "SetCoordinatesNoOffset"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Char"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
           "id": "0423",
-          "name": "COMMAND_0423",
-          "num_params": 4
+          "name": "SET_CHAR_COORDINATES_NO_OFFSET",
+          "num_params": 4,
+          "short_desc": "Puts the characters at the coordinates by the center of body instead of the feet",
+          "class": "Char",
+          "member": "SetCoordinatesNoOffset"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Car"
             }
           ],
           "id": "0424",
-          "name": "COMMAND_0424",
-          "num_params": 1
+          "name": "IS_CAR_SIREN_ON",
+          "num_params": 1,
+          "short_desc": "",
+          "class": "Car",
+          "member": "IsSirenOn",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -20883,19 +21265,20 @@
           ],
           "output": [
             {
-              "name": "name",
-              "type": "string",
+              "name": "key",
+              "type": "gxt_key",
               "source": "var_any"
             }
           ],
           "id": "0426",
           "name": "GET_NAME_OF_ZONE",
           "num_params": 4,
-          "short_desc": "Gets the name of the zone at the specified coordinates",
+          "short_desc": "Returns the GXT key associated with the zone at the specified coordinates",
           "class": "Zone",
-          "member": "GetName",
+          "member": "GetTextKey",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           }
         },
         {
@@ -20923,11 +21306,12 @@
           "id": "0427",
           "name": "GET_NAME_OF_INFO_ZONE",
           "num_params": 4,
-          "short_desc": "Gets the name of the info zone at the specified coordinates",
+          "short_desc": "Returns the name of the zone at the specified coordinates",
           "class": "Zone",
           "member": "GetName",
           "attrs": {
-            "is_static": true
+            "is_static": true,
+            "is_overload": true
           }
         },
         {
@@ -26191,6 +26575,11 @@
       "name": "ScriptFire",
       "constructable": true,
       "desc": ""
+    },
+    {
+      "name": "Shortcut",
+      "constructable": false,
+      "desc": "Mission Shortcut Taxi"
     },
     {
       "name": "Sound",

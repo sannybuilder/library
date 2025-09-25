@@ -53,8 +53,7 @@ export function run(inputFile: string, game: Game) {
     duplicateParamName: doesCommandHaveDuplicateParamName,
     duplicateName: doesCommandHaveDuplicateName,
     noConstructorWithoutOutputParams: doesConstructorCommandHaveNoOutputParams,
-    noGetterWithoutResult:
-      game === Game.gta_iv ? noopHandler : doesGetterCommandReturnNothing,
+    noGetterWithoutResult: doesGetterCommandReturnNothing,
     emptyName: doesCommandHaveEmptyName,
     emptyOpcode: isOpcodeRequired ? doesCommandHaveEmptyId : noopHandler,
     invalidOpcode: isOpcodeRequired

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "0.39",
-    "last_update": 1758739982467,
+    "last_update": 1758762200998,
+    "version": "0.40",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -18545,7 +18545,6 @@
               "type": "Player"
             }
           ],
-          "output": [],
           "attrs": {
             "is_condition": true
           },
@@ -18642,11 +18641,10 @@
           "short_desc": "Disarms the car's bomb"
         },
         {
-          "input": [],
-          "output": [],
           "id": "0371",
-          "name": "IS_JAPANESE_GAME",
+          "name": "IS_JAPANESE_VERSION",
           "num_params": 0,
+          "short_desc": "Returns true for Japanese versions of the game",
           "attrs": {
             "is_condition": true
           }
@@ -18654,66 +18652,72 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x1",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y1",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "x2",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
+              "name": "y2",
+              "type": "float"
             }
           ],
-          "output": [],
+          "output": [
+            {
+              "name": "result",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
           "id": "0372",
-          "name": "COMMAND_0372",
-          "num_params": 5
+          "name": "GET_DOT_PRODUCT_2D",
+          "num_params": 5,
+          "short_desc": "Returns the dot product of two 2D vectors"
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "x1",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "y1",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "z1",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "x2",
+              "type": "float"
             },
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "y2",
+              "type": "float"
             },
             {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
+              "name": "z2",
+              "type": "float"
             }
           ],
-          "output": [],
+          "output": [
+            {
+              "name": "result",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
           "id": "0373",
-          "name": "COMMAND_0373",
-          "num_params": 7
+          "name": "GET_DOT_PRODUCT_3D",
+          "num_params": 7,
+          "short_desc": "Returns the dot product of two 3D vectors"
         },
         {
           "input": [
@@ -18730,10 +18734,12 @@
               "type": "int"
             }
           ],
-          "output": [],
           "id": "0374",
           "name": "COMMAND_0374",
-          "num_params": 3
+          "num_params": 3,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -18756,7 +18762,10 @@
           ],
           "id": "0375",
           "name": "COMMAND_0375",
-          "num_params": 4
+          "num_params": 4,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -18783,62 +18792,102 @@
           ],
           "id": "0376",
           "name": "COMMAND_0376",
+          "num_params": 5,
+          "attrs": {
+            "is_nop": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "pad",
+              "type": "PadId"
+            },
+            {
+              "name": "buttonId",
+              "type": "Button"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "id": "0377",
+          "name": "GET_PAD_STATE",
+          "num_params": 3,
+          "short_desc": "Stores the status of the specified key into a variable",
+          "class": "Pad",
+          "member": "GetState",
+          "attrs": {
+            "is_static": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "id": "0378",
+          "name": "SET_NAVIGATION_ARROW",
+          "num_params": 3
+        },
+        {
+          "id": "0379",
+          "name": "CLEAR_NAVIGATION_ARROW",
+          "num_params": 0
+        },
+        {
+          "input": [
+            {
+              "name": "in",
+              "type": "int"
+            },
+            {
+              "name": "out",
+              "type": "int"
+            },
+            {
+              "name": "localsOffset",
+              "type": "int"
+            },
+            {
+              "name": "",
+              "type": "label"
+            },
+            {
+              "name": "",
+              "type": "arguments"
+            }
+          ],
+          "id": "037A",
+          "name": "CALL_NOT",
           "num_params": 5
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "in",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            }
-          ],
-          "id": "0377",
-          "name": "COMMAND_0377",
-          "num_params": 2
-        },
-        {
-          "input": [
-            {
-              "name": "_p1",
+              "name": "out",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            }
-          ],
-          "id": "0378",
-          "name": "COMMAND_0378",
-          "num_params": 3
-        },
-        {
-          "id": "0379",
-          "name": "COMMAND_0379",
-          "num_params": 0
-        },
-        {
-          "id": "037A",
-          "name": "COMMAND_037A",
-          "num_params": 5,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
+              "name": "localsOffset",
               "type": "int"
             },
             {
@@ -18849,88 +18898,75 @@
               "name": "",
               "type": "arguments"
             }
-          ]
-        },
-        {
+          ],
           "id": "037B",
-          "name": "COMMAND_037B",
-          "num_params": 5,
-          "input": [
-            {
-              "name": "_p1",
-              "type": "int"
-            },
-            {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "",
-              "type": "label"
-            },
-            {
-              "name": "",
-              "type": "arguments"
-            }
-          ]
+          "name": "CALL",
+          "num_params": 5
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
           "id": "037C",
-          "name": "COMMAND_037C",
-          "num_params": 1
+          "name": "IS_THIS_VEHICLE_A_CAR",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
           "id": "037D",
-          "name": "COMMAND_037D",
-          "num_params": 1
+          "name": "IS_THIS_VEHICLE_A_BIKE",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
           "id": "037E",
-          "name": "COMMAND_037E",
-          "num_params": 1
+          "name": "IS_THIS_VEHICLE_A_PLANE",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "handle",
+              "type": "Car"
             }
           ],
           "id": "037F",
-          "name": "COMMAND_037F",
+          "name": "IS_THIS_VEHICLE_A_HELI",
           "num_params": 1
         },
         {
           "id": "0390",
-          "name": "COMMAND_0390",
-          "num_params": 0
+          "name": "RETURN_IF_TRUE",
+          "num_params": 0,
+          "short_desc": "Returns from a gosub (0025) or function call (037A, 037B) if the last condition result was true"
         },
         {
           "id": "0391",
-          "name": "COMMAND_0391",
-          "num_params": 0
+          "name": "RETURN_TRUE_IF_TRUE",
+          "num_params": 0,
+          "short_desc": "Returns from a gosub (0025) or function call (037A, 037B) if the last condition result was true and sets the current condition to true"
         },
         {
           "id": "0392",

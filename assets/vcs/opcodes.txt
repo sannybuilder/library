@@ -826,23 +826,20 @@
 {036E:} register_fire_level {highestLevel} [int]
 {036F:}   is_australian_game
 {0370:} disarm_car_bomb [Car]
-{0371:}   is_japanese_game
-{0372:} command_0372 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
-{0373:} command_0373 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int]
-{0374:} command_0374 {_p1} [int] {_p2} [int] {_p3} [int]
-{0375:} command_0375 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{0376:} command_0376 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
-{0377:} command_0377 {_p1} [int] {_p2} [int]
-{0378:} command_0378 {_p1} [int] {_p2} [int] {_p3} [int]
-{0379:} command_0379
-{037A:} command_037a {_p1} [int] {_p2} [int] {_p3} [int] @label [arguments]
-{037B:} command_037b {_p1} [int] {_p2} [int] {_p3} [int] @label [arguments]
-{037C:} command_037c {_p1} [int]
-{037D:} command_037d {_p1} [int]
-{037E:} command_037e {_p1} [int]
-{037F:} command_037f {_p1} [int]
-{0390:} command_0390
-{0391:} command_0391
+{0371:}   is_japanese_version
+{0372:} [var result: float] = get_dot_product_2d {x1} [float] {y1} [float] {x2} [float] {y2} [float]
+{0373:} [var result: int] = get_dot_product_3d {x1} [float] {y1} [float] {z1} [float] {x2} [float] {y2} [float] {z2} [float]
+{0377:} [var state: int] = get_pad_state {pad} [PadId] {buttonId} [Button]
+{0378:} set_navigation_arrow {x} [float] {y} [float] {z} [float]
+{0379:} clear_navigation_arrow
+{037A:} call_not {in} [int] {out} [int] {localsOffset} [int] @label [arguments]
+{037B:} call {in} [int] {out} [int] {localsOffset} [int] @label [arguments]
+{037C:}   is_this_vehicle_a_car {handle} [Car]
+{037D:}   is_this_vehicle_a_bike {handle} [Car]
+{037E:}   is_this_vehicle_a_plane {handle} [Car]
+{037F:} is_this_vehicle_a_heli {handle} [Car]
+{0390:} return_if_true
+{0391:} return_true_if_true
 {0392:} command_0392
 {0393:} command_0393 {_p1} [int] {_p2} [int]
 {0394:} command_0394 {_p1} [int]

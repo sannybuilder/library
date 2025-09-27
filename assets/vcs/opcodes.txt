@@ -81,7 +81,7 @@
 {0051:} set_car_driving_style [Car] {drivingStyle} [int]
 {0052:} set_car_mission [Car] {carMission} [int]
 {0053:}   is_car_in_area_2d [Car] {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float] {drawSphere} [bool]
-{0054:} is_car_in_area_3d [Car] {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float] {drawSphere} [bool]
+{0054:}   is_car_in_area_3d [Car] {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float] {drawSphere} [bool]
 {0055:} print_big {key} [gxt_key] {time} [int] {style} [int]
 {0056:} print {key} [gxt_key] {time} [int] {flag} [int]
 {0057:} print_now {key} [gxt_key] {time} [int] {flag} [int]
@@ -363,13 +363,13 @@
 {0186:} command_0186 {_p1} [int]
 {0187:} command_0187 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
 {0188:} command_0188 {_p1} [int]
-{0189:} command_0189 {_p1} [int] {_p2} [int]
+{0189:}   command_0189 {_p1} [int] {_p2} [int]
 {018A:} command_018a {_p1} [int] {_p2} [int]
 {018B:} command_018b {_p1} [int]
-{018C:} command_018c {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{018D:} command_018d {_p1} [int] {_p2} [int]
+{018C:}   command_018c {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{018D:}   command_018d {_p1} [int] {_p2} [int]
 {018E:} command_018e {_p1} [int]
-{018F:} command_018f {_p1} [int]
+{018F:}   command_018f {_p1} [int]
 {01A4:} set_char_heed_threats [Char] {state} [bool]
 {01A5:} [var mode: ControllerMode] = get_controller_mode
 {01A6:} set_can_respray_car [Car] {state} [bool]
@@ -403,7 +403,7 @@
 {01C2:}   is_current_char_weapon [Char] {weaponType} [WeaponType]
 {01C3:} set_boat_cruise_speed [Boat] {maxSpeed} [float]
 {01C4:} [var handle: Char] = get_random_char_in_area {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float]
-{01C5:}   is_player_in_taxi [Player]
+{01C5:} [var handle: Char] = get_random_char_in_zone {zone} [zone_key] {civilian} [bool] {gang} [bool] {criminalOrProstitute} [bool]
 {01C6:}   is_player_shooting [Player]
 {01C7:}   is_char_shooting [Char]
 {01C8:} [var handle: Pickup] = create_money_pickup {x} [float] {y} [float] {z} [float] {cashAmount} [int]
@@ -837,15 +837,15 @@
 {037C:}   is_this_vehicle_a_car {handle} [Car]
 {037D:}   is_this_vehicle_a_bike {handle} [Car]
 {037E:}   is_this_vehicle_a_plane {handle} [Car]
-{037F:} is_this_vehicle_a_heli {handle} [Car]
+{037F:}   is_this_vehicle_a_heli {handle} [Car]
 {0391:} return_if_true
-{0392:} return_true_if_true
+{0392:}   return_true_if_true
 {0393:} set_char_only_allowed_to_sit_behind {_p1} [int] {_p2} [int]
 {0394:} set_rc_heli_height_limit {limit} [float]
 {0395:} [var handle: int] = draw_weaponshop_corona {x} [float] {y} [float] {z} [float] {size} [float] {coronaType} [CoronaType] {flareType} [FlareType] {r} [int] {g} [int] {b} [int]
 {0396:} remove_weaponshop_corona {handle} [int]
 {0397:}   is_boat_in_water {_p1} [int]
-{0398:} is_car_driver_being_jacked {_p1} [int]
+{0398:}   is_car_driver_being_jacked {_p1} [int]
 {0399:} set_char_only_allowed_to_sit_in_front {_p1} [int] {_p2} [int]
 {039A:} set_car_tilted_by_char {_p1} [int] {_p2} [int]
 {039B:} [var _p5: int] = get_weapon_type_for_pickup_in_area {leftBottomX} [float] {leftBottomY} [float] {topRightX} [float] {topRightY} [float]
@@ -855,7 +855,7 @@
 {03A3:} [var handle: Car] = get_random_car_in_area_no_checks {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float]
 {03A4:} command_03a4 {_p1} [int] {_p2} [int]
 {03A5:} command_03a5 {_p1} [int] {_p2} [int]
-{03A6:} command_03a6 {_p1} [int]
+{03A6:}   command_03a6 {_p1} [int]
 {03A7:} command_03a7 {_p1} [int] {_p2} [int]
 {03A8:} command_03a8
 {03A9:} command_03a9 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
@@ -875,27 +875,27 @@
 {03B7:} command_03b7 {_p1} [int]
 {03B8:} command_03b8 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {03B9:} command_03b9 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03BA:} command_03ba
+{03BA:}   command_03ba
 {03BB:} command_03bb {_p1} [int]
 {03BC:} command_03bc {_p1} [int] {_p2} [int]
 {03BD:} command_03bd {_p1} [int]
 {03BE:} command_03be {_p1} [int]
 {03BF:} command_03bf {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
-{03C0:} command_03c0
-{03C1:} command_03c1
+{03C0:}   command_03c0
+{03C1:}   command_03c1
 {03C2:} command_03c2
 {03C3:} command_03c3 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
 {03C4:} command_03c4 {_p1} [int]
 {03C5:} command_03c5 {_p1} [int]
-{03C6:} command_03c6 {_p1} [int]
+{03C6:}   command_03c6 {_p1} [int]
 {03C7:} command_03c7 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03C8:} command_03c8
+{03C8:}   command_03c8
 {03C9:} command_03c9 {_p1} [int]
 {03CA:} command_03ca
-{03CB:} command_03cb
-{03CC:} command_03cc
+{03CB:}   command_03cb
+{03CC:}   command_03cc
 {03CD:} command_03cd {_p1} [int]
-{03CE:} command_03ce
+{03CE:}   command_03ce
 {03CF:} command_03cf {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {03D0:} command_03d0 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {03D1:} command_03d1 {_p1} [int]
@@ -905,18 +905,17 @@
 {03D5:} set_char_max_health [Char] {maxHealth} [int]
 {03D6:} command_03d6 {_p1} [int] {_p2} [int]
 {03D7:} command_03d7 {_p1} [int] {_p2} [int]
-{03D8:} command_03d8 {_p1} [int]
+{03D8:}   command_03d8 {_p1} [int]
 {03D9:} command_03d9 {_p1} [int]
 {03DA:} command_03da {_p1} [int] {_p2} [int]
 {03DB:} command_03db
-{03DC:} command_03dc
-{03DD:} command_03dd
+{03DC:}   command_03dc
 {03DE:} command_03de {_p1} [int] {_p2} [int]
 {03DF:} command_03df {_p1} [int]
 {03E0:} command_03e0 {_p1} [int]
 {03E1:} command_03e1 {_p1} [int]
 {03E2:} command_03e2 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int]
-{03E5:} command_03e5
+{03E5:}   command_03e5
 {03E6:} command_03e6 {_p1} [int]
 {03E7:} command_03e7 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {03E8:} command_03e8 {_p1} [int]
@@ -927,7 +926,6 @@
 {03ED:} command_03ed {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {03EE:} command_03ee {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {03EF:} command_03ef {_p1} [int]
-{03F0:} command_03f0 {_p1} [int]
 {03F1:} command_03f1 {_p1} [int]
 {03F2:} command_03f2 {_p1} [int]
 {03F3:} command_03f3
@@ -940,12 +938,12 @@
 {03FA:} command_03fa {_p1} [int]
 {03FB:} command_03fb {_p1} [int] {_p2} [int] {_p3} [int]
 {03FC:} command_03fc {_p1} [int] {_p2} [int]
-{03FD:} command_03fd
+{03FD:}   command_03fd
 {03FE:} command_03fe {_p1} [int] {_p2} [int]
 {03FF:} command_03ff {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
 {0400:} command_0400 {_p1} [int] {_p2} [int]
 {0401:} command_0401 {_p1} [int]
-{0402:} command_0402 {_p1} [int]
+{0402:}   command_0402 {_p1} [int]
 {0403:} command_0403 {_p1} [int] {_p2} [int] {_p3} [int]
 {0404:} command_0404 {_p1} [int] {_p2} [int] {_p3} [int]
 {0405:} command_0405 {_p1} [int]
@@ -962,7 +960,7 @@
 {0411:} command_0411 {_p1} [int]
 {0412:} command_0412 {_p1} [int]
 {0413:} command_0413 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{0414:} command_0414 {_p1} [int] {_p2} [int] {_p3} [int]
+{0414:}   command_0414 {_p1} [int] {_p2} [int] {_p3} [int]
 {0415:} command_0415 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int]
 {0416:} command_0416 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
 {0417:} command_0417 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
@@ -971,7 +969,7 @@
 {041A:} command_041a {_p1} [int] {_p2} [int]
 {041B:} command_041b {_p1} [int] {_p2} [int]
 {041C:} command_041c {_p1} [int] {_p2} [int]
-{041D:} command_041d {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{041D:}   command_041d {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {041E:} command_041e {_p1} [int]
 {041F:} command_041f {_p1} [int]
 {0420:} command_0420 {_p1} [int]
@@ -986,9 +984,9 @@
 {0429:} command_0429 {_p1} [int] {_p2} [int]
 {042A:} command_042a {_p1} [int] {_p2} [int]
 {042B:} command_042b {_p1} [int] {_p2} [int]
-{042C:} command_042c {_p1} [int] {_p2} [int]
-{042D:} command_042d {_p1} [int] {_p2} [int]
-{042E:} command_042e {_p1} [int]
+{042C:}   command_042c {_p1} [int] {_p2} [int]
+{042D:}   command_042d {_p1} [int] {_p2} [int]
+{042E:}   command_042e {_p1} [int]
 {042F:} command_042f {_p1} [int] {_p2} [int]
 {0430:} command_0430 {_p1} [int] {_p2} [int]
 {0431:} command_0431 {_p1} [int] {_p2} [int]
@@ -996,29 +994,29 @@
 {0433:} command_0433 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
 {0434:} command_0434 {_p1} [int] {_p2} [int]
 {0435:} command_0435 {_p1} [int] {_p2} [int]
-{0436:} command_0436 {_p1} [int]
-{0437:} command_0437 {_p1} [int]
-{0438:} command_0438 {_p1} [int]
-{0439:} command_0439 {_p1} [int]
+{0436:}   command_0436 {_p1} [int]
+{0437:}   command_0437 {_p1} [int]
+{0438:}   command_0438 {_p1} [int]
+{0439:}   command_0439 {_p1} [int]
 {043A:} command_043a {_p1} [int] {_p2} [int]
-{043B:} command_043b {_p1} [int]
+{043B:}   command_043b {_p1} [int]
 {043C:} command_043c {_p1} [int] {_p2} [int] {_p3} [int]
 {043D:} command_043d {_p1} [int] {_p2} [int] {_p3} [int]
 {043E:} command_043e {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int]
 {043F:} command_043f {_p1} [int] {_p2} [int]
-{0440:} command_0440 {_p1} [int] {_p2} [int]
-{0441:} command_0441 {_p1} [int]
+{0440:}   command_0440 {_p1} [int] {_p2} [int]
+{0441:}   command_0441 {_p1} [int]
 {0442:} command_0442 {_p1} [int] {_p2} [int]
 {0443:} command_0443 {_p1} [int]
 {0444:} command_0444 {_p1} [int]
-{0445:} command_0445 {_p1} [int]
-{0446:} command_0446 {_p1} [int]
+{0445:}   command_0445 {_p1} [int]
+{0446:}   command_0446 {_p1} [int]
 {0447:} command_0447 {_p1} [int] {_p2} [int]
 {0448:} command_0448 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {0449:} command_0449 {_p1} [int] {_p2} [int]
 {044A:} command_044a {_p1} [int] {_p2} [int]
 {044B:} command_044b
-{044C:} command_044c {_p1} [int]
+{044C:}   command_044c {_p1} [int]
 {044D:} command_044d {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {044E:} command_044e {_p1} [int] {_p2} [int]
 {044F:} command_044f
@@ -1052,7 +1050,7 @@
 {046B:} command_046b {_p1} [int] {_p2} [int]
 {046C:} command_046c {_p1} [int] {_p2} [int]
 {046D:} command_046d {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
-{046E:} command_046e {_p1} [int]
+{046E:}   command_046e {_p1} [int]
 {046F:} command_046f {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {0470:} command_0470 {_p1} [int] {_p2} [int] {_p3} [int]
 {0471:} command_0471 {_p1} [int] {_p2} [int] {_p3} [int]
@@ -1075,7 +1073,7 @@
 {0482:} command_0482 {_p1} [int] {_p2} [int]
 {0483:} command_0483 {_p1} [int] {_p2} [int]
 {0484:} command_0484 {_p1} [int] {_p2} [int]
-{0485:} command_0485 {_p1} [int] {_p2} [int]
+{0485:}   command_0485 {_p1} [int] {_p2} [int]
 {0486:} command_0486 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {0487:} command_0487 {_p1} [int] {_p2} [int] {_p3} [int]
 {0488:} command_0488 {_p1} [int]
@@ -1085,7 +1083,7 @@
 {048C:} command_048c {_p1} [int] {_p2} [int] {_p3} [int]
 {048D:} command_048d {_p1} [int] {_p2} [int] {_p3} [int]
 {048E:} command_048e {_p1} [int] {_p2} [int] {_p3} [int]
-{048F:} command_048f {_p1} [int] {_p2} [int]
+{048F:}   command_048f {_p1} [int] {_p2} [int]
 {0490:} command_0490 {_p1} [int] {_p2} [int]
 {0491:} command_0491 {_p1} [int] {_p2} [int]
 {0492:} command_0492 {_p1} [int]
@@ -1122,11 +1120,11 @@
 {04B1:} command_04b1 {_p1} [int] {_p2} [int]
 {04B2:} command_04b2 {_p1} [int] {_p2} [int]
 {04B3:} command_04b3 {_p1} [int] {_p2} [int]
-{04B4:} command_04b4 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{04B4:}   command_04b4 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {04B5:} command_04b5 {_p1} [int] {_p2} [int]
 {04B6:} command_04b6 {_p1} [int] {_p2} [int]
 {04B7:} command_04b7 {_p1} [int] {_p2} [int]
-{04B8:} command_04b8 {_p1} [int] {_p2} [int]
+{04B8:}   command_04b8 {_p1} [int] {_p2} [int]
 {04B9:} command_04b9 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {04BA:} command_04ba {_p1} [int]
 {04BB:} command_04bb
@@ -1143,10 +1141,9 @@
 {04C6:} command_04c6 {_p1} [int]
 {04C7:} command_04c7
 {04C8:} command_04c8
-{04C9:} command_04c9
+{04C9:}   command_04c9
 {04CA:} command_04ca {_p1} [int] {_p2} [int]
 {04CB:} command_04cb {_p1} [int] {_p2} [int]
-{04CC:} command_04cc
 {04CD:} command_04cd {_p1} [int] {_p2} [int]
 {04CE:} command_04ce {_p1} [int] {_p2} [int]
 {04CF:} command_04cf {_p1} [int] {_p2} [int]
@@ -1158,24 +1155,24 @@
 {04D5:} command_04d5 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
 {04D6:} command_04d6 {_p1} [int] {_p2} [int]
 {04D7:} command_04d7 {_p1} [int] {_p2} [int] {_p3} [int]
-{04D8:} command_04d8 {_p1} [int]
+{04D8:}   command_04d8 {_p1} [int]
 {04D9:} command_04d9 {_p1} [int]
 {04DA:} command_04da {_p1} [int]
 {04DB:} command_04db {_p1} [int]
-{04DC:} command_04dc
+{04DC:}   command_04dc
 {04DD:} command_04dd {_p1} [int]
 {04DE:} command_04de {_p1} [int]
-{04DF:} command_04df {_p1} [int]
+{04DF:}   command_04df {_p1} [int]
 {04E0:} command_04e0
-{04E1:} command_04e1
+{04E1:}   command_04e1
 {04E2:} command_04e2 {_p1} [int]
 {04E3:} command_04e3 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int] {_p11} [int]
 {04E4:} command_04e4 {_p1} [int] {_p2} [int]
 {04E5:} command_04e5 {_p1} [int] {_p2} [int]
 {04E6:} command_04e6 {_p1} [int] {_p2} [int]
-{04E7:} command_04e7 {_p1} [int] {_p2} [int] {_p3} [int]
-{04E8:} command_04e8 {_p1} [int]
-{04E9:} command_04e9 {_p1} [int]
+{04E7:}   command_04e7 {_p1} [int] {_p2} [int] {_p3} [int]
+{04E8:}   command_04e8 {_p1} [int]
+{04E9:}   command_04e9 {_p1} [int]
 {04EA:} command_04ea
 {04EB:} command_04eb {_p1} [int]
 {04EC:} command_04ec {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
@@ -1183,15 +1180,15 @@
 {04EE:} command_04ee {_p1} [int]
 {04EF:} command_04ef {_p1} [int]
 {04F0:} command_04f0 {_p1} [int] {_p2} [int]
-{04F1:} command_04f1 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int]
+{04F1:}   command_04f1 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int]
 {04F2:}   is_this_script_a_mission
 {04F3:} command_04f3 {_p1} [int]
 {04F4:} command_04f4 {_p1} [int] {_p2} [int]
 {04F5:} command_04f5 {_p1} [int]
 {04F6:} command_04f6 {_p1} [int]
 {04F7:} command_04f7 {_p1} [int] {_p2} [int] {_p3} [int]
-{04F8:} command_04f8 {_p1} [int]
-{04F9:} command_04f9 {_p1} [int]
+{04F8:}   command_04f8 {_p1} [int]
+{04F9:}   command_04f9 {_p1} [int]
 {04FA:} command_04fa {_p1} [int] {_p2} [int]
 {04FB:} command_04fb {_p1} [int]
 {04FC:} command_04fc {_p1} [int] {_p2} [int]
@@ -1237,7 +1234,7 @@
 {0524:} command_0524 {_p1} [int]
 {0525:} command_0525 {_p1} [int]
 {0526:} command_0526 {_p1} [int] {_p2} [int]
-{0527:} command_0527 {_p1} [int]
+{0527:}   command_0527 {_p1} [int]
 {0528:} command_0528 {_p1} [int] {_p2} [int] {_p3} [int]
 {0529:} command_0529 {_p1} [int] {_p2} [int] {_p3} [int]
 {052A:} command_052a {_p1} [int] {_p2} [int] {_p3} [int]
@@ -1283,12 +1280,12 @@
 {0552:} command_0552 {_p1} [int]
 {0553:} command_0553 {_p1} [int]
 {0554:} command_0554 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{0555:} command_0555 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int] {_p11} [int] {_p12} [int]
+{0555:}   command_0555 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int] {_p11} [int] {_p12} [int]
 {0556:} command_0556 {_p1} [int]
 {0557:} command_0557 {_p1} [int] {_p2} [int]
 {0558:} command_0558 {_p1} [int] {_p2} [int]
 {0559:} command_0559 {_p1} [int]
-{055A:} command_055a
+{055A:}   command_055a
 {055B:} command_055b {_p1} [int]
 {055C:} command_055c {_p1} [int]
 {055D:} command_055d {_p1} [int]

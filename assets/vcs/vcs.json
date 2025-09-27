@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1758999057903,
-    "version": "0.42",
+    "last_update": 1759003423120,
+    "version": "0.43",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -1746,7 +1746,10 @@
           "num_params": 8,
           "short_desc": "Returns true if the vehicle is located within the specified 3D area",
           "class": "Car",
-          "member": "IsInArea3D"
+          "member": "IsInArea3D",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -8426,7 +8429,10 @@
           ],
           "id": "0189",
           "name": "COMMAND_0189",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -8475,7 +8481,10 @@
           ],
           "id": "018C",
           "name": "COMMAND_018C",
-          "num_params": 4
+          "num_params": 4,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -8490,7 +8499,10 @@
           ],
           "id": "018D",
           "name": "COMMAND_018D",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -8512,7 +8524,10 @@
           ],
           "id": "018F",
           "name": "COMMAND_018F",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -9274,19 +9289,38 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "Player"
+              "name": "zone",
+              "type": "zone_key"
+            },
+            {
+              "name": "civilian",
+              "type": "bool"
+            },
+            {
+              "name": "gang",
+              "type": "bool"
+            },
+            {
+              "name": "criminalOrProstitute",
+              "type": "bool"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "attrs": {
-            "is_condition": true
+            "is_constructor": true
           },
-          "class": "Player",
+          "class": "Zone",
           "id": "01C5",
-          "member": "IsInTaxi",
-          "name": "IS_PLAYER_IN_TAXI",
-          "num_params": 1,
-          "short_desc": "Returns true if the player is driving a taxi"
+          "member": "GetRandomChar",
+          "name": "GET_RANDOM_CHAR_IN_ZONE",
+          "num_params": 5,
+          "short_desc": "Gets a random character in the specified zone whose pedtype matches the specified values"
         },
         {
           "input": [
@@ -18963,7 +18997,10 @@
           ],
           "id": "037F",
           "name": "IS_THIS_VEHICLE_A_HELI",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "0390",
@@ -18983,7 +19020,10 @@
           "id": "0392",
           "name": "RETURN_TRUE_IF_TRUE",
           "num_params": 0,
-          "short_desc": "Returns from a gosub (0025) or function call (037A, 037B) if the last condition result was true and sets the current condition to true"
+          "short_desc": "Returns from a gosub (0025) or function call (037A, 037B) if the last condition result was true and sets the current condition to true",
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19099,7 +19139,10 @@
           ],
           "id": "0398",
           "name": "IS_CAR_DRIVER_BEING_JACKED",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19331,7 +19374,10 @@
           ],
           "id": "03A6",
           "name": "COMMAND_03A6",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19650,7 +19696,10 @@
         {
           "id": "03BA",
           "name": "COMMAND_03BA",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19734,12 +19783,18 @@
         {
           "id": "03C0",
           "name": "COMMAND_03C0",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "03C1",
           "name": "COMMAND_03C1",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "03C2",
@@ -19808,7 +19863,10 @@
           ],
           "id": "03C6",
           "name": "COMMAND_03C6",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19836,7 +19894,10 @@
         {
           "id": "03C8",
           "name": "COMMAND_03C8",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19857,12 +19918,18 @@
         {
           "id": "03CB",
           "name": "COMMAND_03CB",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "03CC",
           "name": "COMMAND_03CC",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19878,7 +19945,10 @@
         {
           "id": "03CE",
           "name": "COMMAND_03CE",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -20051,7 +20121,10 @@
           ],
           "id": "03D8",
           "name": "COMMAND_03D8",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -20087,12 +20160,18 @@
         {
           "id": "03DC",
           "name": "COMMAND_03DC",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "03DD",
           "name": "COMMAND_03DD",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -20192,7 +20271,10 @@
         {
           "id": "03E5",
           "name": "COMMAND_03E5",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -20385,7 +20467,10 @@
           ],
           "id": "03F0",
           "name": "COMMAND_03F0",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -20584,7 +20669,10 @@
         {
           "id": "03FD",
           "name": "COMMAND_03FD",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -20667,7 +20755,10 @@
           ],
           "id": "0402",
           "name": "COMMAND_0402",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -20939,7 +21030,10 @@
           ],
           "id": "0414",
           "name": "COMMAND_0414",
-          "num_params": 3
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21158,7 +21252,10 @@
           ],
           "id": "041D",
           "name": "COMMAND_041D",
-          "num_params": 4
+          "num_params": 4,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21515,7 +21612,10 @@
           ],
           "id": "042C",
           "name": "COMMAND_042C",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21530,7 +21630,10 @@
           ],
           "id": "042D",
           "name": "COMMAND_042D",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21541,7 +21644,10 @@
           ],
           "id": "042E",
           "name": "COMMAND_042E",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21673,7 +21779,10 @@
           ],
           "id": "0436",
           "name": "COMMAND_0436",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21684,7 +21793,10 @@
           ],
           "id": "0437",
           "name": "COMMAND_0437",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21695,7 +21807,10 @@
           ],
           "id": "0438",
           "name": "COMMAND_0438",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21706,7 +21821,10 @@
           ],
           "id": "0439",
           "name": "COMMAND_0439",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21732,7 +21850,10 @@
           ],
           "id": "043B",
           "name": "COMMAND_043B",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21839,7 +21960,10 @@
           ],
           "id": "0440",
           "name": "COMMAND_0440",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21850,7 +21974,10 @@
           ],
           "id": "0441",
           "name": "COMMAND_0441",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21898,7 +22025,10 @@
           ],
           "id": "0445",
           "name": "COMMAND_0445",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21909,7 +22039,10 @@
           ],
           "id": "0446",
           "name": "COMMAND_0446",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -21993,7 +22126,10 @@
           ],
           "id": "044C",
           "name": "COMMAND_044C",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -22633,7 +22769,10 @@
           ],
           "id": "046E",
           "name": "COMMAND_046E",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -23194,7 +23333,10 @@
           ],
           "id": "0485",
           "name": "COMMAND_0485",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -23368,7 +23510,10 @@
           ],
           "id": "048F",
           "name": "COMMAND_048F",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -23975,7 +24120,10 @@
           ],
           "id": "04B4",
           "name": "COMMAND_04B4",
-          "num_params": 4
+          "num_params": 4,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24035,7 +24183,10 @@
           ],
           "id": "04B8",
           "name": "COMMAND_04B8",
-          "num_params": 2
+          "num_params": 2,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24338,7 +24489,10 @@
         {
           "id": "04C9",
           "name": "COMMAND_04C9",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24373,7 +24527,10 @@
         {
           "id": "04CC",
           "name": "COMMAND_04CC",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -24553,7 +24710,10 @@
           ],
           "id": "04D8",
           "name": "COMMAND_04D8",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24591,7 +24751,10 @@
         {
           "id": "04DC",
           "name": "COMMAND_04DC",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24624,7 +24787,10 @@
           ],
           "id": "04DF",
           "name": "COMMAND_04DF",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "04E0",
@@ -24634,7 +24800,10 @@
         {
           "id": "04E1",
           "name": "COMMAND_04E1",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24760,7 +24929,10 @@
           ],
           "id": "04E7",
           "name": "COMMAND_04E7",
-          "num_params": 3
+          "num_params": 3,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24771,7 +24943,10 @@
           ],
           "id": "04E8",
           "name": "COMMAND_04E8",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -24782,7 +24957,10 @@
           ],
           "id": "04E9",
           "name": "COMMAND_04E9",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "04EA",
@@ -24940,7 +25118,10 @@
           ],
           "id": "04F1",
           "name": "COMMAND_04F1",
-          "num_params": 8
+          "num_params": 8,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "id": "04F2",
@@ -25028,7 +25209,10 @@
           ],
           "id": "04F8",
           "name": "COMMAND_04F8",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -25039,7 +25223,10 @@
           ],
           "id": "04F9",
           "name": "COMMAND_04F9",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -25635,7 +25822,10 @@
           ],
           "id": "0527",
           "name": "COMMAND_0527",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -26329,7 +26519,10 @@
           ],
           "id": "0555",
           "name": "COMMAND_0555",
-          "num_params": 12
+          "num_params": 12,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -26386,7 +26579,10 @@
         {
           "id": "055A",
           "name": "COMMAND_055A",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [

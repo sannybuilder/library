@@ -269,7 +269,7 @@ function mergeWithAbbr<T = { command: Command; extension: string }>(
   abbr: T[],
   game: Game
 ) {
-  const sorted = sortBy(filtered, 'command.score');
+  const sorted = sortBy(filtered, 'command._highlight.score');
   if (abbr.length > 0) {
     const key = doesGameRequireOpcode(game) ? 'id' : 'name';
     return uniqBy(abbr.concat(sorted), 'command.' + key);

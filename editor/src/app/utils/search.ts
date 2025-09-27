@@ -326,8 +326,8 @@ export function partialSearch(list: Command[], searchTerms: string) {
 function handleHighlight(result: SearchResult<any>[], highlightKey: string) {
   return result.map((matchObject) => {
     const item = cloneDeep(matchObject.item);
-    item.score = matchObject.score;
     item[highlightKey] = omit(item, highlightKey);
+    item[highlightKey].score = matchObject.score;
     if (!matchObject.matches) {
       return item;
     }

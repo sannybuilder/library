@@ -10,6 +10,8 @@ import {
   init,
 } from './actions';
 import * as selector from './selectors';
+import { SEARCH_OPTIONS } from '../../utils';
+import { omit } from 'lodash';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsFacade {
@@ -99,7 +101,7 @@ export class ExtensionsFacade {
       updateCommands({
         batch: [
           {
-            command,
+            command: omit(command, SEARCH_OPTIONS.highlightKey),
             extension,
             shouldDelete,
             ignoreVersionAndPlatform: false,

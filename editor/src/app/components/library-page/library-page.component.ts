@@ -625,7 +625,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!isEqual(this.command, this.oldCommand)) {
       this._extensions.updateCommand({
         extension: this.extension!,
-        command: omit(this.command, SEARCH_OPTIONS.highlightKey) as Command,
+        command: this.command!,
         shouldDelete: false,
         updateRelated: this.updateRelatedCommands,
       });

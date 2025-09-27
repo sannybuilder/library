@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1758762200998,
-    "version": "0.40",
+    "last_update": 1758998380087,
+    "version": "0.41",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -18958,20 +18958,20 @@
         },
         {
           "id": "0390",
+          "name": "COMMAND_0390",
+          "num_params": 0
+        },
+        {
+          "id": "0391",
           "name": "RETURN_IF_TRUE",
           "num_params": 0,
           "short_desc": "Returns from a gosub (0025) or function call (037A, 037B) if the last condition result was true"
         },
         {
-          "id": "0391",
+          "id": "0392",
           "name": "RETURN_TRUE_IF_TRUE",
           "num_params": 0,
           "short_desc": "Returns from a gosub (0025) or function call (037A, 037B) if the last condition result was true and sets the current condition to true"
-        },
-        {
-          "id": "0392",
-          "name": "COMMAND_0392",
-          "num_params": 0
         },
         {
           "input": [
@@ -18985,7 +18985,7 @@
             }
           ],
           "id": "0393",
-          "name": "COMMAND_0393",
+          "name": "SET_CHAR_ONLY_ALLOWED_TO_SIT_BEHIND",
           "num_params": 2
         },
         {
@@ -18996,65 +18996,72 @@
             }
           ],
           "id": "0394",
-          "name": "COMMAND_0394",
+          "name": "SET_RC_HELI_HEIGHT_LIMIT",
           "num_params": 1
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            },
+            {
+              "name": "size",
+              "type": "float"
+            },
+            {
+              "name": "coronaType",
+              "type": "CoronaType"
+            },
+            {
+              "name": "flareType",
+              "type": "FlareType"
+            },
+            {
+              "name": "r",
               "type": "int"
             },
             {
-              "name": "_p2",
+              "name": "g",
               "type": "int"
             },
             {
-              "name": "_p3",
-              "type": "int"
-            },
-            {
-              "name": "_p4",
-              "type": "int"
-            },
-            {
-              "name": "_p5",
-              "type": "int"
-            },
-            {
-              "name": "_p6",
-              "type": "int"
-            },
-            {
-              "name": "_p7",
-              "type": "int"
-            },
-            {
-              "name": "_p8",
-              "type": "int"
-            },
-            {
-              "name": "_p9",
-              "type": "int"
-            },
-            {
-              "name": "_p10",
+              "name": "b",
               "type": "int"
             }
           ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "attrs": {
+            "is_static": true
+          },
           "id": "0395",
-          "name": "COMMAND_0395",
-          "num_params": 10
+          "name": "DRAW_WEAPONSHOP_CORONA",
+          "num_params": 10,
+          "short_desc": "Displays a corona with the lowered draw distance at the specified coordinates"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "handle",
               "type": "int"
             }
           ],
           "id": "0396",
-          "name": "COMMAND_0396",
+          "name": "REMOVE_WEAPONSHOP_CORONA",
           "num_params": 1
         },
         {
@@ -19065,8 +19072,11 @@
             }
           ],
           "id": "0397",
-          "name": "COMMAND_0397",
-          "num_params": 1
+          "name": "IS_BOAT_IN_WATER",
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          }
         },
         {
           "input": [
@@ -19076,7 +19086,7 @@
             }
           ],
           "id": "0398",
-          "name": "COMMAND_0398",
+          "name": "IS_CAR_DRIVER_BEING_JACKED",
           "num_params": 1
         },
         {
@@ -19091,7 +19101,7 @@
             }
           ],
           "id": "0399",
-          "name": "COMMAND_0399",
+          "name": "SET_CHAR_ONLY_ALLOWED_TO_SIT_IN_FRONT",
           "num_params": 2
         },
         {
@@ -19106,7 +19116,7 @@
             }
           ],
           "id": "039A",
-          "name": "COMMAND_039A",
+          "name": "SET_CAR_TILTED_BY_CHAR",
           "num_params": 2
         },
         {
@@ -19126,14 +19136,17 @@
             {
               "name": "_p4",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p5",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "039B",
-          "name": "COMMAND_039B",
+          "name": "GET_WEAPON_TYPE_FOR_PICKUP_IN_AREA",
           "num_params": 5
         },
         {
@@ -19144,18 +19157,24 @@
             }
           ],
           "id": "039C",
-          "name": "COMMAND_039C",
+          "name": "IS_PLAYER_USING_FIRST_PERSON_CAMERA",
           "num_params": 1
         },
         {
           "id": "039D",
           "name": "COMMAND_039D",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "id": "039E",
           "name": "COMMAND_039E",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -19166,7 +19185,10 @@
           ],
           "id": "039F",
           "name": "COMMAND_039F",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
@@ -19177,71 +19199,80 @@
           ],
           "id": "03A0",
           "name": "COMMAND_03A0",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "state",
+              "type": "bool"
             }
           ],
           "id": "03A1",
-          "name": "COMMAND_03A1",
+          "name": "DISPLAY_HUD",
           "num_params": 1
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
+              "name": "rightTopY",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "id": "03A2",
-          "name": "COMMAND_03A2",
+          "name": "GET_RANDOM_CHAR_IN_AREA_NO_CHECKS",
           "num_params": 5
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
+              "name": "rightTopY",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
             }
           ],
           "id": "03A3",
-          "name": "COMMAND_03A3",
+          "name": "GET_RANDOM_CAR_IN_AREA_NO_CHECKS",
           "num_params": 5
         },
         {

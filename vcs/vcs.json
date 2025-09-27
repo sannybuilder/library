@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1758998380087,
-    "version": "0.41",
+    "last_update": 1758999057903,
+    "version": "0.42",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -6116,44 +6116,53 @@
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "self",
+              "type": "Char"
+            },
+            {
+              "name": "routeId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
-            },
-            {
-              "name": "_p3",
-              "type": "int"
+              "name": "mode",
+              "type": "FollowRoute"
             }
           ],
+          "class": "Char",
           "id": "011B",
-          "name": "COMMAND_011B",
-          "num_params": 3
+          "member": "SetObjFollowRoute",
+          "name": "SET_CHAR_OBJ_FOLLOW_ROUTE",
+          "num_params": 3,
+          "short_desc": "Sets the character's objective to follow along the specified route"
         },
         {
           "input": [
             {
-              "name": "_p1",
+              "name": "routeId",
               "type": "int"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "x",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "y",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "z",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_static": true
+          },
+          "class": "Path",
           "id": "011C",
-          "name": "COMMAND_011C",
-          "num_params": 4
+          "member": "AddRoutePoint",
+          "name": "ADD_ROUTE_POINT",
+          "num_params": 4,
+          "short_desc": "Adds a new waypoint to the route with the specified id"
         },
         {
           "input": [
@@ -18959,7 +18968,10 @@
         {
           "id": "0390",
           "name": "COMMAND_0390",
-          "num_params": 0
+          "num_params": 0,
+          "attrs": {
+            "is_nop": true
+          }
         },
         {
           "id": "0391",
@@ -18991,8 +19003,8 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "limit",
+              "type": "float"
             }
           ],
           "id": "0394",
@@ -19122,20 +19134,20 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "topRightX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
+              "name": "topRightY",
+              "type": "float"
             }
           ],
           "output": [
@@ -19152,13 +19164,18 @@
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "self",
+              "type": "Player"
             }
           ],
           "id": "039C",
           "name": "IS_PLAYER_USING_FIRST_PERSON_CAMERA",
-          "num_params": 1
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
+          "member": "IsUsingFirstPersonCamera"
         },
         {
           "id": "039D",

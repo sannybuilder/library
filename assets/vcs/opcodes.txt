@@ -853,51 +853,51 @@
 {03A1:} display_hud {state} [bool]
 {03A2:} [var handle: Char] = get_random_char_in_area_no_checks {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float]
 {03A3:} [var handle: Car] = get_random_car_in_area_no_checks {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float]
-{03A4:} command_03a4 {_p1} [int] {_p2} [int]
-{03A5:} command_03a5 {_p1} [int] {_p2} [int]
-{03A6:}   command_03a6 {_p1} [int]
-{03A7:} command_03a7 {_p1} [int] {_p2} [int]
-{03A8:} command_03a8
-{03A9:} command_03a9 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03AA:} command_03aa {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03A4:} [var _p2: int] = get_car_collided_with_no_save {_p1} [int]
+{03A5:} set_char_drops_weapons_when_dead [Char] {state} [bool]
+{03A6:}   is_char_crouching {_p1} [int]
+{03A7:} override_car_remote_control {_p1} [int] {_p2} [int]
+{03A8:} cancel_remote_mode
+{03A9:} set_object_turn_speed {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03AA:} set_object_mass {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {03AB:}   has_cutscene_loaded
 {03AC:} command_03ac {_p1} [int]
-{03AD:} command_03ad {_p1} [int]
-{03AE:} command_03ae {_p1} [int] {_p2} [int]
-{03AF:} command_03af {_p1} [int]
-{03B0:} command_03b0
+{03AD:} set_unique_jumps_found {_p1} [int]
+{03AE:} set_char_dive_from_car {_p1} [int] {_p2} [int]
+{03AF:} wreck_car {_p1} [int]
+{03B0:} register_outfit_changed
 {03B1:}   has_object_been_damaged_by_weapon [Object] {weaponType} [WeaponType]
 {03B2:} clear_object_last_weapon_damage [Object]
-{03B3:} command_03b3 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03B4:} command_03b4 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03B3:} set_car_turn_speed {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03B4:} set_car_move_speed {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {03B5:} set_object_proofs [Object] {bulletProof} [bool] {fireProof} [bool] {explosionProof} [bool] {collisionProof} [bool] {meleeProof} [bool]
-{03B6:} command_03b6 {_p1} [int]
-{03B7:} command_03b7 {_p1} [int]
-{03B8:} command_03b8 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03B9:} command_03b9 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03BA:}   command_03ba
-{03BB:} command_03bb {_p1} [int]
-{03BC:} command_03bc {_p1} [int] {_p2} [int]
-{03BD:} command_03bd {_p1} [int]
-{03BE:} command_03be {_p1} [int]
-{03BF:} command_03bf {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
-{03C0:}   command_03c0
-{03C1:}   command_03c1
-{03C2:} command_03c2
-{03C3:} command_03c3 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
-{03C4:} command_03c4 {_p1} [int]
-{03C5:} command_03c5 {_p1} [int]
-{03C6:}   command_03c6 {_p1} [int]
-{03C7:} command_03c7 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03C8:}   command_03c8
-{03C9:} command_03c9 {_p1} [int]
-{03CA:} command_03ca
-{03CB:}   command_03cb
-{03CC:}   command_03cc
-{03CD:} command_03cd {_p1} [int]
-{03CE:}   command_03ce
-{03CF:} command_03cf {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03D0:} command_03d0 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03B6:} [var _p1: int] = get_camera_ped_zoom_indicator
+{03B7:} set_camera_ped_zoom_indicator {_p1} [int]
+{03B8:} [var _p2: int], [var _p3: int], [var _p4: int] = get_car_rotation {_p1} [int]
+{03B9:} set_car_rotation {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03BA:}   is_debug_menu_on
+{03BB:} open_van_back_doors {_p1} [int]
+{03BC:} [var _p2: int] = get_char_threat_char {_p1} [int]
+{03BD:} freeze_ped_zoom_switch {_p1} [int]
+{03BE:} set_object_rendered_damaged {_p1} [int]
+{03BF:} [var _p6: int] = get_random_car_in_area_no_save {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
+{03C0:}   is_player_made_safe
+{03C1:}   is_e3_build
+{03C2:} clear_big_messages
+{03C3:} clear_area_of_objects {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
+{03C4:} load_non_standard_ped_anim {_p1} [int]
+{03C5:} unload_non_standard_ped_anim {_p1} [int]
+{03C6:}   build_world_geometry {_p1} [int]
+{03C7:} store_building_swap {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03C8:}   is_multiplayer_active
+{03C9:} [var _p1: int] = get_multiplayer_mode
+{03CA:} multiplayer_script_done
+{03CB:}   is_multiplayer_server
+{03CC:}   is_multiplayer_team_game
+{03CD:} [var _p1: int] = get_multiplayer_team_id
+{03CE:}   does_shortcut_taxi_exist
+{03CF:} set_onscreen_counter_colour {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03D0:} set_onscreen_counter_background_colour {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
 {03D1:} command_03d1 {_p1} [int]
 {03D2:} command_03d2 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int]
 {03D3:} command_03d3 {_p1} [int]

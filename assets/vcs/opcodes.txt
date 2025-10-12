@@ -868,23 +868,23 @@
 {03B0:} register_outfit_changed
 {03B1:}   has_object_been_damaged_by_weapon [Object] {weaponType} [WeaponType]
 {03B2:} clear_object_last_weapon_damage [Object]
-{03B3:} set_car_turn_speed {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03B4:} set_car_move_speed {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03B3:} set_car_turn_speed [Car] {x} [float] {y} [float] {z} [float]
+{03B4:} set_car_move_speed [Car] {x} [float] {y} [float] {z} [float]
 {03B5:} set_object_proofs [Object] {bulletProof} [bool] {fireProof} [bool] {explosionProof} [bool] {collisionProof} [bool] {meleeProof} [bool]
 {03B6:} [var _p1: int] = get_camera_ped_zoom_indicator
 {03B7:} set_camera_ped_zoom_indicator {_p1} [int]
-{03B8:} [var _p2: int], [var _p3: int], [var _p4: int] = get_car_rotation {_p1} [int]
-{03B9:} set_car_rotation {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
+{03B8:} [var x: float], [var y: float], [var z: float] = get_car_rotation [Car]
+{03B9:} set_car_rotation [Car] {x} [float] {y} [float] {z} [float]
 {03BA:}   is_debug_menu_on
-{03BB:} open_van_back_doors {_p1} [int]
-{03BC:} [var _p2: int] = get_char_threat_char {_p1} [int]
-{03BD:} freeze_ped_zoom_switch {_p1} [int]
-{03BE:} set_object_rendered_damaged {_p1} [int]
-{03BF:} [var _p6: int] = get_random_car_in_area_no_save {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int]
+{03BB:} open_van_back_doors [Car]
+{03BC:} [var _p2: int] = get_char_threat_char [Char]
+{03BD:} freeze_ped_zoom_switch {state} [bool]
+{03BE:} render_object_damaged [Object]
+{03BF:} [var car: Car] = get_random_car_in_area_no_save {x1} [int] {y1} [int] {x2} [int] {y2} [int] {modelId} [model_vehicle]
 {03C0:}   is_player_made_safe
 {03C1:}   is_e3_build
 {03C2:} clear_big_messages
-{03C3:} clear_area_of_objects {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int]
+{03C3:} clear_area_of_objects {leftTopX} [int] {leftTopY} [int] {leftTopZ} [int] {rightBottomX} [int] {rightBottomY} [int] {rightBottomZ} [int]
 {03C4:} load_non_standard_ped_anim {_p1} [int]
 {03C5:} unload_non_standard_ped_anim {_p1} [int]
 {03C6:}   build_world_geometry {_p1} [int]
@@ -896,24 +896,24 @@
 {03CC:}   is_multiplayer_team_game
 {03CD:} [var _p1: int] = get_multiplayer_team_id
 {03CE:}   does_shortcut_taxi_exist
-{03CF:} set_onscreen_counter_colour {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03D0:} set_onscreen_counter_background_colour {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int]
-{03D1:} command_03d1 {_p1} [int]
-{03D2:} command_03d2 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int]
-{03D3:} command_03d3 {_p1} [int]
-{03D4:} command_03d4 {_p1} [int]
+{03CF:} set_onscreen_counter_colour {r} [int] {g} [int] {b} [int] {a} [int]
+{03D0:} set_onscreen_counter_background_colour {r} [int] {g} [int] {b} [int] {a} [int]
+{03D1:} remove_car_boot [Car]
+{03D2:} add_point_3d_marker {x} [float] {y} [float] {z} [float] {radius} [float] {r} [int] {g} [int] {b} [int]
+{03D3:} print_help_always {key} [gxt_key]
+{03D4:} print_help_forever_always {key} [gxt_key]
 {03D5:} set_char_max_health [Char] {maxHealth} [int]
-{03D6:} command_03d6 {_p1} [int] {_p2} [int]
-{03D7:} command_03d7 {_p1} [int] {_p2} [int]
-{03D8:}   command_03d8 {_p1} [int]
-{03D9:} command_03d9 {_p1} [int]
-{03DA:} command_03da {_p1} [int] {_p2} [int]
-{03DB:} command_03db
-{03DC:}   command_03dc
-{03DE:} command_03de {_p1} [int] {_p2} [int]
-{03DF:} command_03df {_p1} [int]
-{03E0:} command_03e0 {_p1} [int]
-{03E1:} command_03e1 {_p1} [int]
+{03D6:} set_char_shoot_timer [Char] {timer} [int]
+{03D7:} set_char_attack_timer [Char] {timer} [int]
+{03D8:}   set_heli_rotor_blades_fullspeed [Heli]
+{03D9:} set_crusher_reward_multiplier {_p1} [int]
+{03DA:} swap_buildings {_p1} [int] {_p2} [int]
+{03DB:} stream_building_swaps
+{03DC:}   is_world_streaming_complete
+{03DE:} set_char_attacks_player_with_cops [Char] {state} [bool]
+{03DF:} register_face_plant_distance {distance} [float]
+{03E0:} register_car_exported {num} [int]
+{03E1:} set_export_cars_total {total} [int]
 {03E2:} command_03e2 {_p1} [int] {_p2} [int] {_p3} [int] {_p4} [int] {_p5} [int] {_p6} [int] {_p7} [int] {_p8} [int] {_p9} [int] {_p10} [int]
 {03E5:}   command_03e5
 {03E6:} command_03e6 {_p1} [int]

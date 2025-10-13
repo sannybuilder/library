@@ -540,3 +540,9 @@ export const WeaponSlot = {
   "Parachute": 11,
   "DetonatorUnknown": 12
 };
+export const ExplosionType = {
+  "Grenade": 0,
+  "Molotov": 1,
+  "Rocket": 2,
+  "Car": 4
+};

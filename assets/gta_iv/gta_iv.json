@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1756663316697,
-    "version": "0.107",
+    "last_update": 1760371131631,
+    "version": "0.108",
     "url": "https://library.sannybuilder.com/#/gta_iv"
   },
   "extensions": [
@@ -712,7 +712,7 @@
               "type": "float"
             },
             {
-              "name": "exptype",
+              "name": "type",
               "type": "ExplosionType"
             },
             {
@@ -720,21 +720,21 @@
               "type": "float"
             },
             {
-              "name": "playsound",
+              "name": "playSound",
               "type": "bool"
             },
             {
-              "name": "novisual",
+              "name": "noVisual",
               "type": "bool"
             },
             {
-              "name": "camshake",
+              "name": "camShake",
               "type": "float"
             }
           ],
           "name": "ADD_EXPLOSION",
           "num_params": 8,
-          "short_desc": "Creates an explosion with given parameters. Do NOT over use. It will stop rendering the explosion graphics/camera shake",
+          "short_desc": "Creates an explosion with given parameters",
           "class": "Fx",
           "member": "AddExplosion",
           "attrs": {
@@ -1961,7 +1961,7 @@
         {
           "input": [
             {
-              "name": "ped",
+              "name": "self",
               "type": "Char"
             },
             {
@@ -1971,7 +1971,9 @@
           ],
           "name": "ALWAYS_USE_HEAD_ON_HORN_ANIM_WHEN_DEAD_IN_CAR",
           "num_params": 2,
-          "short_desc": "Turns on/off the need to always use the head on horn animation when dead in a car"
+          "short_desc": "Turns on/off the need to always use the head on horn animation when dead in a car",
+          "class": "Char",
+          "member": "AlwaysUseHeadOnHornAnimWhenDeadInCar"
         },
         {
           "name": "AMBIENT_AUDIO_BANK_NO_LONGER_NEEDED",
@@ -21450,15 +21452,19 @@
               "type": "float"
             },
             {
-              "name": "_p5",
+              "name": "checkOnlyPlayerBullets",
               "type": "bool"
             }
           ],
           "name": "IS_BULLET_IN_AREA",
           "num_params": 5,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Checks whether a non-sniper bullet is within a sphere-shaped area. IS_SNIPER_BULLET_IN_AREA is used for a sniper bullet",
+          "class": "World",
+          "member": "IsBulletInArea"
         },
         {
           "input": [
@@ -21487,15 +21493,19 @@
               "type": "float"
             },
             {
-              "name": "_p7",
+              "name": "checkOnlyPlayerBullets",
               "type": "bool"
             }
           ],
           "name": "IS_BULLET_IN_BOX",
           "num_params": 7,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "short_desc": "Checks whether a non-sniper bullet is within a box-shaped area. IS_SNIPER_BULLET_IN_AREA is used for a sniper bullet",
+          "class": "World",
+          "member": "IsBulletInBox"
         },
         {
           "input": [
@@ -23515,8 +23525,11 @@
           "name": "IS_EXPLOSION_IN_SPHERE",
           "num_params": 5,
           "attrs": {
-            "is_condition": true
-          }
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
+          "member": "IsExplosionInSphere"
         },
         {
           "name": "IS_FOLLOW_VEHICLE_CAM_OFFSET_ACTIVE",
@@ -25401,7 +25414,13 @@
             }
           ],
           "name": "IS_SNIPER_BULLET_IN_AREA",
-          "num_params": 6
+          "num_params": 6,
+          "class": "World",
+          "member": "IsSniperBulletInArea",
+          "short_desc": "Checks whether a sniper bullet is within a box-shaped area. IS_BULLET_IN_AREA is used for a non-sniper bullet",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "name": "IS_SNIPER_INVERTED",

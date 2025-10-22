@@ -1,0 +1,1 @@
+This command turns on the payphone and sets it to four messages with repeat. It behaves almost exactly the same as SET_4_PHONE_MESSAGES except the phone turns back on and is set to the same messages one minute after the cutscene ends.

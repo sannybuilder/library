@@ -1,0 +1,1 @@
+This conditional command returns true if the car component of the car is closed; the component does not need to be a door. If the component is damaged and cannot be closed shut, the command can still return true if the component rotates into the closing position. 

@@ -20,6 +20,7 @@ export class GameFacade {
     game,
     id,
     extension,
+    structName,
     enumName,
     className,
     action,
@@ -33,6 +34,7 @@ export class GameFacade {
     extension?: string;
     id?: string;
     enumName?: string;
+    structName?: string;
     className?: string;
     action?: string | null;
     searchTerm?: string;
@@ -47,6 +49,7 @@ export class GameFacade {
         id,
         extension,
         enumName,
+        structName,
         className,
         action,
         searchTerm,

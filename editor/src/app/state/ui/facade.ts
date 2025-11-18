@@ -9,6 +9,7 @@ import {
   Game,
   GenerateJsonModel,
   Modifier,
+  StructRaw,
   SyntaxKind,
   ViewMode,
 } from '../../models';
@@ -26,6 +27,7 @@ import {
   selectExtensions,
   displayClassOverview,
   displayOrEditEnum,
+  displayOrEditStruct,
   toggleInlineMethodDescription,
   toggleOpcodePresentation,
   toggleSearchHelp,
@@ -79,6 +81,7 @@ export class UiFacade {
     selector.extensionToDisplayOrEdit
   );
   enumToDisplayOrEdit$ = this.store$.select(selector.enumToDisplayOrEdit);
+  structToDisplayOrEdit$ = this.store$.select(selector.structToDisplayOrEdit);
   viewMode$ = this.store$.select(selector.viewMode);
   snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
   rows$ = this.store$.select(selector.rows);
@@ -228,6 +231,12 @@ export class UiFacade {
   editEnum(enumToEdit: EnumRaw) {
     this.store$.dispatch(
       displayOrEditEnum({ enumToEdit, viewMode: ViewMode.EditEnum })
+    );
+  }
+
+  editStruct(structToEdit: StructRaw) {
+    this.store$.dispatch(
+      displayOrEditStruct({ structToEdit, viewMode: ViewMode.EditStruct })
     );
   }
 

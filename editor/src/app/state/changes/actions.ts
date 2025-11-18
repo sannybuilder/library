@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ClassMeta, Enums, Extension, Game } from '../../models';
+import { ClassMeta, Enums, Extension, Game, Structs } from '../../models';
 
 export const registerExtensionsChange = createAction(
   '[changes] register extensions',
@@ -21,6 +21,11 @@ export const registerTextFileChange = createAction(
 export const registerEnumChange = createAction(
   '[changes] register enum',
   props<{ fileName: string; content: Enums }>()
+);
+
+export const registerStructChange = createAction(
+  '[changes] register struct',
+  props<{ fileName: string; content: Structs }>()
 );
 
 export const clearChanges = createAction('[changes] clear');

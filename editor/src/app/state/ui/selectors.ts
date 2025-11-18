@@ -112,6 +112,11 @@ export const enumToDisplayOrEdit = createSelector(
   (state: UiState) => state.enumToDisplayOrEdit
 );
 
+export const structToDisplayOrEdit = createSelector(
+  state,
+  (state: UiState) => state.structToDisplayOrEdit
+);
+
 export const viewMode = createSelector(
   state,
   (state: UiState) => state.viewMode

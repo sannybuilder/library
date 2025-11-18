@@ -1,0 +1,15 @@
+<h5>{{ "ui.structOverview.title" | translate }}</h5>
+
+<div class="scroll-container">
+  <pre
+    *ngIf="structToView.fields && structToView.fields.length; else noFields"
+    class="sample"
+  >struct <span class="identifier">{{ structToView.name }}</span>
+<ng-container *ngFor="let field of structToView.fields">  <span class="identifier">{{ field.name }}</span>: {{ getFieldTypeDisplay(field) }} <span class="comment" *ngIf="field.padding">  // padding: {{ field.padding }} bytes</span>
+</ng-container><ng-container>end</ng-container>
+</pre>
+</div>
+
+<ng-template #noFields>
+  <div class="my-3">{{ "ui.structOverview.noFields" | translate }}</div>
+</ng-template>

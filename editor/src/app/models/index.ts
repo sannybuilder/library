@@ -112,6 +112,35 @@ export interface EnumRaw {
   fields: Array<[string, string | number | null]>;
   isNew: boolean;
 }
+export interface Structs {
+  [structName: string]: { fields: StructField[] };
+}
+
+export enum StructFieldType {
+  Int8 = 'int8',
+  UInt8 = 'uint8',
+  Int16 = 'int16',
+  UInt16 = 'uint16',
+  Int32 = 'int32',
+  UInt32 = 'uint32',
+  Float = 'float',
+  Pointer = 'pointer',
+}
+
+export interface StructField {
+  name: string;
+  type: StructFieldType | string; // string allows for custom struct types
+  isArray?: boolean;
+  arraySize?: number;
+  isPointer?: boolean;
+  padding?: number; // padding bytes after this field
+}
+
+export interface StructRaw {
+  name: string;
+  fields: StructField[];
+  isNew: boolean;
+}
 
 export const KNOWN_LANGUAGES = [
   'en',
@@ -213,6 +242,10 @@ export const GameNativeVersion: Record<Game, string> = r(
   (game) => `${game}/native_version.txt`
 );
 
+export const GameStructs: Record<Game, string> = r(
+  (game) => `${game}/structs.json`
+);
+
 export const GameSnippets: Record<Game, string> = {
   [Game.gta3]: 'gta3/snippets.json',
   [Game.vc]: 'vc/snippets.json',
@@ -305,8 +338,11 @@ export enum ViewMode {
   ViewClass = 'ViewClass',
   ViewEnum = 'ViewEnum',
   EditEnum = 'EditEnum',
+  ViewStruct = 'ViewStruct',
+  EditStruct = 'EditStruct',
   ViewAllClasses = 'ViewAllClasses',
   ViewAllEnums = 'ViewAllEnums',
+  ViewAllStructs = 'ViewAllStructs',
   ViewAllExtensions = 'ViewAllExtensions',
   ViewDecisionTree = 'ViewDecisionTree',
   ViewGenerateJson = 'ViewGenerateJson',

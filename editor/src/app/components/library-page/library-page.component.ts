@@ -23,6 +23,7 @@ import {
   Command,
   Enum,
   EnumRaw,
+  StructRaw,
   ViewContext,
   Game,
   GenerateJsonModel,
@@ -40,6 +41,7 @@ import {
   UiFacade,
   GameFacade,
   EnumsFacade,
+  StructsFacade,
   TreeFacade,
   ArticlesFacade,
   ChangesFacade,
@@ -77,6 +79,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   canEdit$ = this._ui.canEdit$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
+  structNames$ = this._structs.structNames$;
   extensions$ = this._extensions.extensions$;
   extensionTypes$ = this._extensions.extensionTypes$;
   displayInlineDescription$ = this._ui.displayInlineMethodDescription$;
@@ -131,6 +134,8 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   oldExtension?: string;
   enumToDisplayOrEdit?: EnumRaw;
   oldEnumToEdit?: EnumRaw;
+  structToDisplayOrEdit?: StructRaw;
+  oldStructToEdit?: StructRaw;
   screenSize: number;
   editorHasError = false;
   generateJsonModel: GenerateJsonModel;
@@ -144,6 +149,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     private _game: GameFacade,
     private _tree: TreeFacade,
     private _enums: EnumsFacade,
+    private _structs: StructsFacade,
     private _ref: ChangeDetectorRef,
     private _el: ElementRef,
     private _articles: ArticlesFacade,
@@ -199,6 +205,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
         this._ref.detectChanges();
       });
 
+    this._ui.structToDisplayOrEdit$
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((structToEdit) => {
+        this.structToDisplayOrEdit = cloneDeep(structToEdit);
+        this.oldStructToEdit = cloneDeep(structToEdit);
+        this._ref.detectChanges();
+      });
+
     combineLatest([
       this._ui.commandToDisplayOrEdit$,
       this._ui.extensionToDisplayOrEdit$,
@@ -222,6 +236,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     if (viewMode === ViewMode.EditEnum) {
       this._onSaveEnum();
     }
+    if (viewMode === ViewMode.EditStruct) {
+      this._onSaveStruct();
+    }
   }
 
   onDeleteEnum() {
@@ -229,8 +246,17 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._onSaveEnum();
   }
 
+  onDeleteStruct() {
+    this.structToDisplayOrEdit = { name: '', fields: [], isNew: false };
+    this._onSaveStruct();
+  }
+
   onCloneEnum(game: Game) {
     this._enums.cloneEnum({ enumToClone: this.enumToDisplayOrEdit!, game });
+  }
+
+  onCloneStruct(game: Game) {
+    this._structs.cloneStruct({ structToClone: this.structToDisplayOrEdit!, game });
   }
 
   onCloneCommand(game: Game) {
@@ -316,12 +342,12 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     return this._extensions.findRelatedCommands(command, extension, game);
   }
 
-  getEnum(enumName: string) {
-    return this._enums.getEnumFields(enumName);
-  }
-
   getGamesWhereEnumExists(enumName: string) {
     return this._enums.getGamesWhereEnumExists(enumName);
+  }
+
+  getGamesWhereStructExists(structName: string) {
+    return this._structs.getGamesWhereStructExists(structName);
   }
 
   getClassOrigin(className: string) {
@@ -362,6 +388,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     if (viewMode === ViewMode.EditEnum) {
       return false;
     }
+    if (viewMode === ViewMode.EditStruct) {
+      return false;
+    }
 
     return true;
   }
@@ -373,6 +402,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (viewMode === ViewMode.EditEnum) {
       this._ui.editEnum(this.oldEnumToEdit!);
+    }
+    if (viewMode === ViewMode.EditStruct) {
+      this._ui.editStruct(this.oldStructToEdit!);
     }
     return false;
   }
@@ -387,6 +419,9 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     if (viewMode === ViewMode.EditEnum) {
       return isEqual(this.enumToDisplayOrEdit, this.oldEnumToEdit);
+    }
+    if (viewMode === ViewMode.EditStruct) {
+      return isEqual(this.structToDisplayOrEdit, this.oldStructToEdit);
     }
     return true;
   }
@@ -647,6 +682,14 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
     this._enums.updateEnum({
       enumToEdit: this.enumToDisplayOrEdit!,
       oldEnumToEdit: this.oldEnumToEdit!,
+    });
+    this._ui.stopEditOrDisplay();
+  }
+
+  private _onSaveStruct() {
+    this._structs.updateStruct({
+      structToEdit: this.structToDisplayOrEdit!,
+      oldStructToEdit: this.oldStructToEdit!,
     });
     this._ui.stopEditOrDisplay();
   }

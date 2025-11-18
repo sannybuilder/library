@@ -11,6 +11,7 @@ import {
   initializeGithub,
   registerFileContent,
   registerEnumChange,
+  registerStructChange,
   registerExtensionsChange,
   registerTextFileChange,
   submitChanges,
@@ -75,6 +76,16 @@ export const changesReducer = createReducer(
     };
   }),
   on(registerEnumChange, (state, { fileName, content }) => {
+    return {
+      ...state,
+      hasChanges: true,
+      changes: {
+        ...state.changes,
+        [fileName]: JSON.stringify(content, null, 2),
+      },
+    };
+  }),
+  on(registerStructChange, (state, { fileName, content }) => {
     return {
       ...state,
       hasChanges: true,

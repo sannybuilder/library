@@ -203,6 +203,12 @@
                     ]"
                     >{{ "ui.layout.newFunction" | translate }}</a
                   >
+                  <a
+                    class="dropdown-item"
+                    *ngIf="viewContext === ViewContext.Code"
+                    [routerLink]="['/', game, 'native', 'structs', 'new']"
+                    >{{ "ui.layout.newStruct" | translate }}</a
+                  >
                 </div>
 
                 <button
@@ -294,6 +300,12 @@
                   [routerLink]="['/', game, 'native', 'classes']"
                   >{{ "ui.header.menuClasses" | translate }}</a
                 >
+
+                <a
+                  class="mr-3"
+                  [routerLink]="['/', game, 'native', 'structs']"
+                  >{{ "ui.header.menuStructs" | translate }}</a
+                >
               </ng-container>
             </div>
 
@@ -314,7 +326,7 @@
 
           <div
             class="col-xl-5 right-rail no-scroll"
-            [ngClass]="{ 
+            [ngClass]="{
               extended: sidebar.collapsed
             }"
             *ngIf="
@@ -526,6 +538,13 @@
             {{ "ui.shared.edit" | translate }}
           </a>
           <a
+            *ngIf="viewMode === ViewMode.ViewStruct && (canEdit$ | async)"
+            class="btn btn-outline-success"
+            [routerLink]="['edit']"
+          >
+            {{ "ui.shared.edit" | translate }}
+          </a>
+          <a
             *ngIf="viewMode === ViewMode.ViewAllEnums && (canEdit$ | async)"
             class="btn btn-outline-success"
             [routerLink]="['/', game, 'enums', 'new']"
@@ -535,7 +554,8 @@
           <button
             *ngIf="
               viewMode === ViewMode.EditCommand ||
-              viewMode === ViewMode.EditEnum
+              viewMode === ViewMode.EditEnum ||
+              viewMode === ViewMode.EditStruct
             "
             [disabled]="shouldDisableSaveButton(viewMode)"
             type="button"
@@ -669,6 +689,32 @@
           [enumNames]="enumNames$ | async"
           [extensionTypes]="extensionTypes$ | async"
         ></scl-enum-list>
+        <scl-struct-overview
+          *ngIf="viewMode === ViewMode.ViewStruct && structToDisplayOrEdit"
+          [structToView]="structToDisplayOrEdit"
+          [game]="game"
+          [structGames]="
+            getGamesWhereStructExists(structToDisplayOrEdit.name) | async
+          "
+        ></scl-struct-overview>
+        <scl-struct-editor
+          *ngIf="viewMode === ViewMode.EditStruct && structToDisplayOrEdit"
+          [game]="game"
+          [structToEdit]="structToDisplayOrEdit"
+          [structGames]="
+            getGamesWhereStructExists(structToDisplayOrEdit.name) | async
+          "
+          [structNames]="structNames$ | async"
+          (hasError)="editorHasError = $event"
+          (delete)="onDeleteStruct()"
+          (clone)="onCloneStruct($event)"
+        ></scl-struct-editor>
+        <scl-struct-list
+          *ngIf="viewMode === ViewMode.ViewAllStructs"
+          [game]="game"
+          [structNames]="structNames$ | async"
+          [viewContext]="viewContext"
+        ></scl-struct-list>
       </ng-template>
     </ng-container>
   </ng-container>

@@ -73,6 +73,7 @@ export class RouteGuard {
           'generate',
           'classes',
           'enums',
+          'structs',
         ].includes(scope)
       ) {
         // /:game/:extensionName/ -> /:game/script/extensions/:extensionName/
@@ -141,6 +142,18 @@ export class RouteGuard {
       this._game.onListEnter({
         game,
         enumName,
+        extension: defaultExtension,
+        action,
+        viewContext,
+      });
+      return true;
+    }
+
+    if (scope === 'structs') {
+      const structName = scopeName || 'all';
+      this._game.onListEnter({
+        game,
+        structName,
         extension: defaultExtension,
         action,
         viewContext,

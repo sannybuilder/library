@@ -86,6 +86,10 @@ import { VersionEffects } from './state/version/effects';
 import { EnumsEffects } from './state/enums/effects';
 import { enumsReducer } from './state/enums/reducer';
 
+// structs state
+import { StructsEffects } from './state/structs/effects';
+import { structsReducer } from './state/structs/reducer';
+
 // articles state
 import { ArticlesEffects } from './state/articles/effects';
 import { articlesReducer } from './state/articles/reducer';
@@ -135,6 +139,12 @@ import {
   EnumGamesComponent,
   EnumListComponent,
 } from './components/enums';
+
+import {
+  StructOverviewComponent,
+  StructEditorComponent,
+  StructListComponent,
+} from './components/structs';
 
 import {
   ClassOverviewComponent,
@@ -245,6 +255,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     EnumEditorComponent,
     EnumGamesComponent,
     EnumListComponent,
+    StructOverviewComponent,
+    StructEditorComponent,
+    StructListComponent,
     ClassListComponent,
     IconButtonComponent,
     CopyButtonComponent,
@@ -319,6 +332,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
         auth: authReducer,
         changes: changesReducer,
         enums: enumsReducer,
+        structs: structsReducer,
         extensions: extensionsReducer,
         game: gameReducer,
         snippets: snippetsReducer,
@@ -333,6 +347,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       AuthEffects,
       ChangesEffects,
       EnumsEffects,
+      StructsEffects,
       ExtensionsEffects,
       SnippetsEffects,
       UiEffects,

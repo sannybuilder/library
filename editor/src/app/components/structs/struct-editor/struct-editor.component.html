@@ -1,0 +1,185 @@
+<h5>
+  {{
+    (structToEdit.isNew ? "ui.structEditor.titleNew" : "ui.structEditor.title")
+      | translate
+  }}
+</h5>
+
+<hr />
+
+<div class="scroll-container">
+  <div class="row mb-2">
+    <div class="col-12 col-md-5 mb-2 mb-md-0">
+      <div class="input-group">
+        <span class="input-group-text d-none d-md-inline">{{
+          "ui.structEditor.name" | translate
+        }}</span>
+        <input
+          type="text"
+          [ngModel]="structToEdit.name"
+          (ngModelChange)="onStructNameChange($event)"
+          class="form-control"
+          [placeholder]="'ui.structEditor.newStructPlaceholder' | translate"
+          autofocus
+          [ngClass]="{
+            'is-invalid': isDirty && !structToEdit.name
+          }"
+        />
+      </div>
+    </div>
+
+    <div class="col-12 col-md-7">
+      <div class="input-group justify-content-md-end flex-nowrap">
+        <button
+          *ngIf="canClone()"
+          [disabled]="isInvalid"
+          class="btn btn-outline-secondary mr-2 dropdown-toggle"
+          data-toggle="dropdown"
+          data-offset="0,0"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ "ui.shared.clone" | translate }}
+        </button>
+        <div class="dropdown-menu">
+          <span
+            class="dropdown-item"
+            *ngFor="let target of cloneTargets"
+            (click)="cloneStruct(target.value)"
+            >{{ target.name }}</span
+          >
+        </div>
+        <button
+          class="btn btn-outline-secondary text-nowrap"
+          (click)="addNewField()"
+        >
+          {{ "ui.structEditor.addField" | translate }}
+        </button>
+        <scl-icon-button
+          *ngIf="!structToEdit.isNew"
+          class="text-danger ml-4"
+          icon="delete"
+          (clicked)="deleteStruct()"
+          [title]="'ui.structEditor.deleteStruct' | translate"
+        ></scl-icon-button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    cdkDropList
+    [cdkDropListData]="structToEdit.fields"
+    [ngClass]="{ 'empty-list': !structToEdit.fields.length }"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h5>{{ "ui.structEditor.fields" | translate }}</h5>
+    <div
+      *ngFor="let field of structToEdit.fields; let i = index"
+      class="d-flex"
+      cdkDrag
+      cdkDragBoundary="scl-struct-editor"
+    >
+      <div class="row mb-2 w-100">
+        <div class="col-12 col-md-3">
+          <div class="input-group">
+            <span class="input-group-text" cdkDragHandle>{{ i + 1 }}</span>
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="'ui.structEditor.fieldNamePlaceholder' | translate"
+              [ngModel]="field.name"
+              (ngModelChange)="onFieldNameChange($event, i)"
+              [ngClass]="{
+                'is-invalid': isDirty && !field.name
+              }"
+            />
+          </div>
+        </div>
+
+        <div class="col-12 col-md-2">
+          <select
+            class="form-control"
+            [ngModel]="field.type"
+            (ngModelChange)="onFieldTypeChange($event, i)"
+          >
+            <option *ngFor="let type of fieldTypes" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-2">
+          <input
+            type="number"
+            class="form-control"
+            [ngModel]="field.padding"
+            (ngModelChange)="onPaddingChange($event, i)"
+            min="0"
+            placeholder="padding"
+          />
+        </div>
+
+        <div class="col-12 col-md-2 d-flex align-items-center">
+          <div class="form-check form-check-inline">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [id]="'pointer-' + i"
+              [ngModel]="field.isPointer"
+              (ngModelChange)="onFieldPointerChange($event, i)"
+            />
+            <label class="form-check-label" [for]="'pointer-' + i">
+              {{ "ui.structEditor.pointer" | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="col-12 col-md-2 d-flex align-items-center">
+          <div class="form-check form-check-inline">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [id]="'array-' + i"
+              [ngModel]="field.isArray"
+              (ngModelChange)="onFieldArrayChange($event, i)"
+            />
+            <label class="form-check-label" [for]="'array-' + i">
+              {{ "ui.structEditor.array" | translate }}
+            </label>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-md-1 d-flex align-items-center justify-content-end"
+        >
+          <scl-icon-button
+            class="text-danger"
+            icon="delete"
+            (clicked)="deleteField(i)"
+            [title]="'ui.structEditor.deleteField' | translate"
+          ></scl-icon-button>
+        </div>
+
+        <div class="col-12 col-md-2" *ngIf="field.isArray">
+          <div class="input-group">
+            <span class="input-group-text">
+              {{ "ui.structEditor.arraySize" | translate }}
+            </span>
+            <input
+              type="number"
+              class="form-control"
+              [ngModel]="field.arraySize"
+              (ngModelChange)="onArraySizeChange($event, i)"
+              min="1"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger mt-3" *ngIf="errorMessages.length">
+    <div *ngFor="let message of errorMessages">
+      {{ message | translate }}
+    </div>
+  </div>
+</div>

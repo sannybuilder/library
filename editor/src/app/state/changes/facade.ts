@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ClassMeta, Enums, Extension, Game } from '../../models';
+import { ClassMeta, Enums, Extension, Game, Structs } from '../../models';
 import {
   clearChanges,
   initializeGithub,
   registerExtensionsChange,
   registerTextFileChange,
   registerEnumChange,
+  registerStructChange,
   submitChanges,
   registerFileContent,
   loadGitTree,
@@ -57,6 +58,10 @@ export class ChangesFacade {
 
   registerEnumChange(fileName: string, content: Enums) {
     this.store$.dispatch(registerEnumChange({ fileName, content }));
+  }
+
+  registerStructChange(fileName: string, content: Structs) {
+    this.store$.dispatch(registerStructChange({ fileName, content }));
   }
 
   clearChanges() {

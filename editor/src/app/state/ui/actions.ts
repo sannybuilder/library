@@ -3,6 +3,7 @@ import {
   Attribute,
   Command,
   EnumRaw,
+  StructRaw,
   Game,
   GenerateJsonModel,
   Modifier,
@@ -63,9 +64,15 @@ export const displayOrEditEnum = createAction(
   props<{ enumToEdit: EnumRaw; viewMode: ViewMode }>()
 );
 
+export const displayOrEditStruct = createAction(
+  '[ui] display or edit struct',
+  props<{ structToEdit: StructRaw; viewMode: ViewMode }>()
+);
+
 export const displayExtensionList = createAction('[ui] display extension list');
 export const displayClassesList = createAction('[ui] display classes list');
 export const displayEnumsList = createAction('[ui] display enums list');
+export const displayStructsList = createAction('[ui] display structs list');
 export const displayDecisionTree = createAction('[ui] display decision tree');
 export const displayFilters = createAction('[ui] display filters');
 export const displayDownloads = createAction('[ui] display downloads');
@@ -84,6 +91,11 @@ export const resetFilters = createAction('[ui] reset filters');
 export const displayClassOverview = createAction(
   '[ui] display class overview',
   props<{ className: string }>()
+);
+
+export const displayStructOverview = createAction(
+  '[ui] display struct overview',
+  props<{ structName: string }>()
 );
 
 export const toggleSearchHelp = createAction(

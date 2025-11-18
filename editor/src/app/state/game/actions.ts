@@ -14,6 +14,7 @@ export const onListEnter = createAction(
     extension?: string;
     id?: string;
     enumName?: string;
+    structName?: string;
     className?: string;
     action?: string | null;
     searchTerm?: string;

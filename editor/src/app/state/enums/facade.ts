@@ -19,12 +19,6 @@ export class EnumsFacade {
     return this.store$.select(selector.gameEnums, { game });
   }
 
-  getEnumFields(enumName: string) {
-    return this.store$.select(selector.enumFields, {
-      enumName,
-    });
-  }
-
   getGamesWhereEnumExists(enumName: string) {
     return this.store$.select(selector.gamesWhereExist, { enumName });
   }

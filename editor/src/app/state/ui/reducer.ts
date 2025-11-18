@@ -7,6 +7,7 @@ import {
   Attribute,
   Game,
   EnumRaw,
+  StructRaw,
   SyntaxKind,
 } from '../../models';
 import {
@@ -22,8 +23,10 @@ import {
   selectExtensions,
   displayClassOverview,
   displayOrEditEnum,
+  displayOrEditStruct,
   displayClassesList,
   displayEnumsList,
+  displayStructsList,
   displayExtensionList,
   displayDecisionTree,
   toggleInlineMethodDescription,
@@ -40,7 +43,6 @@ import {
   dismissHotkeysInfo,
   verifyCommand,
 } from './actions';
-import { commandToDisplayOrEdit } from './selectors';
 
 export interface GameState {
   selectedExtensions: Array<string | 'any'>;
@@ -63,6 +65,7 @@ export interface UiState {
   snippetToDisplayOrEdit?: string;
   selectedSyntaxKind: SyntaxKind;
   enumToDisplayOrEdit?: EnumRaw;
+  structToDisplayOrEdit?: StructRaw;
   viewMode: ViewMode;
   currentPage: number | 'all';
   games: Record<Game, GameState>;
@@ -159,6 +162,11 @@ export const uiReducer = createReducer(
     viewMode,
     enumToDisplayOrEdit: enumToEdit,
   })),
+  on(displayOrEditStruct, (state, { structToEdit, viewMode }) => ({
+    ...state,
+    viewMode,
+    structToDisplayOrEdit: structToEdit,
+  })),
   on(stopEditOrDisplay, (state) => ({
     ...state,
     commandToDisplayOrEdit: undefined,
@@ -166,6 +174,7 @@ export const uiReducer = createReducer(
     snippetToDisplayOrEdit: undefined,
     classToDisplay: undefined,
     enumToDisplayOrEdit: undefined,
+    structToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
   })),
   on(changePage, (state, { index: currentPage }) => ({
@@ -245,6 +254,10 @@ export const uiReducer = createReducer(
   on(displayEnumsList, (state) => ({
     ...state,
     viewMode: ViewMode.ViewAllEnums,
+  })),
+  on(displayStructsList, (state) => ({
+    ...state,
+    viewMode: ViewMode.ViewAllStructs,
   })),
   on(displayExtensionList, (state) => ({
     ...state,

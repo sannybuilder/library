@@ -8,10 +8,12 @@ import {
   displayClassOverview,
   displayDecisionTree,
   displayEnumsList,
+  displayStructsList,
   displayExtensionList,
   displayJsonGenerator,
   displayOrEditCommandInfo,
   displayOrEditEnum,
+  displayOrEditStruct,
   displayOrEditSnippet,
   generateNewJson,
   resetFilters,
@@ -48,6 +50,7 @@ import {
   Version,
   ViewContext,
   ViewMode,
+  Structs,
 } from '../../models';
 
 import {
@@ -65,6 +68,7 @@ import { ChangesFacade } from '../changes/facade';
 import { onListEnter } from '../game/actions';
 import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
+import { StructsFacade } from '../structs/facade';
 import { loadEnumsSuccess } from '../enums/actions';
 import { ArticlesFacade } from '../articles/facade';
 import { AnalyticsService } from '../../analytics';
@@ -81,6 +85,7 @@ export class UiEffects {
             id,
             extension,
             enumName,
+            structName,
             className,
             action,
             searchTerm,
@@ -135,6 +140,43 @@ export class UiEffects {
                   },
                   viewMode:
                     action === 'edit' ? ViewMode.EditEnum : ViewMode.ViewEnum,
+                });
+              })
+            );
+          }
+
+          if (structName) {
+            if (structName === 'all') {
+              return [displayStructsList()];
+            }
+            return this._structs.structs$.pipe(
+              first((v): v is Structs => !!v),
+              map((structs) => {
+                const name =
+                  structName.toLowerCase() === 'new'
+                    ? ''
+                    : capitalizeFirst(structName);
+                const structToEdit = structs[name];
+                const isNew = !structToEdit;
+
+                if (isNew) {
+                  if (!canEdit) {
+                    return stopEditOrDisplay();
+                  }
+                  return displayOrEditStruct({
+                    structToEdit: { isNew, name, fields: [] },
+                    viewMode: ViewMode.EditStruct,
+                  });
+                }
+
+                return displayOrEditStruct({
+                  structToEdit: {
+                    isNew,
+                    name: name,
+                    fields: structToEdit.fields,
+                  },
+                  viewMode:
+                    action === 'edit' ? ViewMode.EditStruct : ViewMode.ViewStruct,
                 });
               })
             );
@@ -537,6 +579,7 @@ export class UiEffects {
     private _changes: ChangesFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
+    private _structs: StructsFacade,
     private _articles: ArticlesFacade,
     private _analytics: AnalyticsService,
     @Inject(DOCUMENT) private _d: Document

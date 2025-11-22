@@ -1,0 +1,1 @@
+This command behaves similarly to REGISTER_MISSION_PASSED except it does not save the mission name. Unlike GTA III, in Vice City there is no mission passed stat so this command is almost entirely useless. Its main effect is disabling the taxi shortcut drop-off set by SET_SHORTCUT_DROPOFF_POINT_FOR_MISSION.

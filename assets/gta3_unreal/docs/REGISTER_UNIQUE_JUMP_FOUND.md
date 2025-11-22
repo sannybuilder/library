@@ -1,0 +1,1 @@
+This command increments by `1` to the left value of the "Unique Jumps completed" stat ( GXT key `NOUNIF`). It is independent of SET_UNIQUE_JUMPS_TOTAL, which affects the right value. The stat initially starts with a value of `0`. The value set with this command is saved in block 17 of the save file in GTA III and block 19 in Vice City.

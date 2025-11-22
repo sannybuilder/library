@@ -1,0 +1,1 @@
+This conditional command returns true if a glass map object has been shattered near the specified location. The command detects any glass within a 20-unit radius to the center of the glass. If there is more than one glass within the radius, glass that is closest to the coordinates point takes the highest priority. The original script called this command during "Shakedown."

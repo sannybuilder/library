@@ -2220,7 +2220,6 @@ export const TaskId = {
   "GroupHandSignal": 1515,
   "GroupDriveby": 1516,
   "GroupHassleThreatPassive": 1517,
-  "PerformSequenceTask": 1560,
   "ComplexUseMobilePhone": 1600,
   "SimplePhoneTalk": 1601,
   "SimplePhoneIn": 1602,

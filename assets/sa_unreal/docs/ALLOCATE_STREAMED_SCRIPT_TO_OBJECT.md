@@ -1,0 +1,1 @@
+This command initiates the streamed script if the player is within the radius of the object model. The object has to be defined in the `object.dat` file. You do not have to load the script or the object for this command to work. The priority is the priority of the script over other objects that may also be in the area.

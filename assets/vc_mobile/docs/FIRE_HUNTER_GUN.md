@@ -1,0 +1,3 @@
+This command is normally used to fire the guns on the Hunter and Sea Sparrow but the command can be used on any vehicles. All vehicles have a vehicle-mounted gun but the gun is situated too low for any practical use on land vehicles. It is much more useful on airborne vehicles. The gun can do damage and can alert the police. The command doesn't control vehicle-mounted rockets.
+
+Using the command once will fire one bullet. It has to be in a loop in order to fire constantly. In Vice City, if used on vehicles other than the Hunter or Sea Sparrow, the bullet will only travel parallel to the horizon. It will not autoaim or tilt with your vehicle.

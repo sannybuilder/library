@@ -1,0 +1,1 @@
+This command destroys any projectile within the cubic area. A projectile can be a Grenade, Molotov Cocktail, or Missile. This command is also conditional, returning true if any projectile is destroyed.

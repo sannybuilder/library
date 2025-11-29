@@ -1,0 +1,1 @@
+This command links a global variable to the onmission flag for specific contacts. It has no effect on the gameplay at all. It seems like during development of GTA III its usage would have allowed custom messages to be printed when a death/arrest has been executed, a feature carried over from GTA 2.

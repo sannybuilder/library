@@ -1,0 +1,27 @@
+{$CLEO .cs}
+
+int dm = copy_shared_char_decision_maker {template} DecisionMakerCharTemplate.Empty
+
+// setup aimed by player response
+add_char_decision_maker_event_response dm {event} Event.GunAimedAt {taskId} TaskId.SimpleDuck    {respect} 10.0 {hate} 10.0 {like} 10.0 {dislike} 10.0 {inCar} false {onFoot} true // crouch, hands on the head
+add_char_decision_maker_event_response dm {event} Event.GunAimedAt {taskId} TaskId.SimpleHandsUp {respect}  5.0 {hate}  5.0 {like}  5.0 {dislike}  5.0 {inCar} false {onFoot} true // hands up
+add_char_decision_maker_event_response dm {event} Event.GunAimedAt {taskId} TaskId.SimpleCower   {respect}  1.0 {hate}  1.0 {like}  1.0 {dislike}  1.0 {inCar} false {onFoot} true // cover face, step back
+
+wait 3000
+
+float pos[3]
+...pos = get_offset_from_char_in_world_coords $scplayer {offset} 0.0 3.0 -1.0
+
+int man = create_char {type} PedType.CivMale {model} #MALE01 {xyz} ...pos
+task_turn_char_to_face_char {char} man {target} $scplayer
+
+set_char_decision_maker man {handleOrTemplate} dm
+//remove_decision_maker dm // removes from character too
+
+// give player gun
+request_model {modelId} #COLT45
+load_all_models_now
+give_weapon_to_char $scplayer {weaponType} WeaponType.Pistol {ammo} 999999
+mark_model_as_no_longer_needed {modelId} #COLT45
+
+terminate_this_script

@@ -12,6 +12,7 @@
     "0x4464C0": "CGangWars_EndGangWar(true)\nBlip hDefenseBlip = read_memory 0x96AB98 size 4 virtual_protect 0\nif does_blip_exist hDefenseBlip\nthen remove_blip hDefenseBlip\nend",
     "0x448900": "const cleo_player = 0\n\nwhile true\n    wait 200\n    if is_player_playing cleo_player\n    then \n        int pos = FindPlayerCentreOfWorld(cleo_player)\n        int bInGarage = CGarages_IsPointWithinHideOutGarage(pos)\n        if is_bit_set bInGarage {bitIndex} 0\n        then \n            add_score cleo_player {money} 1\n        end\n    end\nend",
     "0x4563A0": "int pos = FindPlayerCentreOfWorld(-1)\nCPickups_RemoveUnnecessaryPickups(pos, 100.0)\nprint_help_string {text} \"Pickups cleared\"",
+    "0x46CD80": "const CTheScripts_ScriptsForBrains = 0xA90CF0\nconst PED_STREAMED  = 0\nconst DEALER_SCRIPT_INDEX = 19\n\nChar myChar\nint pMyChar = get_ped_pointer {char} myChar\n\nCScriptsForBrains_StartOrRequestNewStreamedScriptBrain(CTheScripts_ScriptsForBrains, DEALER_SCRIPT_INDEX, pMyChar, PED_STREAMED, true)",
     "0x470740": "int DealerIndex = CStreamedScripts_FindStreamedScript(0xA47B60, 'DEALER')\nprint_help_formatted \"Index of streamed DEALER script: %d\" DealerIndex",
     "0x504F80": "int playerChar = get_player_char 0\nint charPtr = get_ped_pointer playerChar\nint weaponAudioPtr = charPtr + 0x394\nconst weaponType = 22 // Pistol\nCAEWeaponAudioEntity_WeaponFire(weaponAudioPtr, weaponType, charPtr, 145)",
     "0x5096F0": "float val = tan(0.78539) // 45 degrees (PI/4)",

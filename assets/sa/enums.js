@@ -2202,7 +2202,6 @@ export const TaskId = {
   "InteriorReserved6": 1415,
   "InteriorReserved7": 1416,
   "InteriorReserved8": 1417,
-  "Stand_Still": 1466,
   "GroupFollowLeaderAnyMeans": 1500,
   "GroupFollowLeaderWithLimits": 1501,
   "GroupKillThreatsBasic": 1502,

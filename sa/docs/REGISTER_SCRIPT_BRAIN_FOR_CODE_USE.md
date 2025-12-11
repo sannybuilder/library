@@ -10,7 +10,7 @@ The script starts when the game code calls the brain by its string name, e.g. wh
 StartOrRequestNewStreamedScriptBrainWithThisName("HOUSE", pedHandle, CODE_PED)
 ```
 
-## Overview of Brain Types
+**Overview of Brain Types**
 
 San Andreas has multiple types of AI brains that can be assigned to pedestrians or objects to control their behavior.
 

@@ -1,0 +1,1 @@
+This command sets the state of the garage to opened. The garage does not require a door but it is a good visual indication showing that the garage is opened. If the garage is normally closed, after getting wasted or busted, the door will close back automatically.

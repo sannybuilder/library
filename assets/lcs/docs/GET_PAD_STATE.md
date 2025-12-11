@@ -1,0 +1,1 @@
+This command gets the state of the button. It returns a value between `0` and `255`, `255` meaning the button is completely pressed down. For left and right analogue sticks (buttons `0` to `3`), it returns a value between `-128` and `128`, `-128` meaning the stick is completely pressed in one direction and `128` meaning the stick is completely pressed in the other direction.

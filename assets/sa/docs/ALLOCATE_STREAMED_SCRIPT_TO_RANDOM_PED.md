@@ -1,10 +1,11 @@
-This command creates an association between an ambient script and the object model, allowing the game to start the script when an object of that model is created. The object has to be defined in the `object.dat` file.
+This command creates an association between an ambient script and the pedestrian model, allowing the game to start the script when a ped of that model is created. It only affects random peds spawned by the game.
 
 ```
-allocate_streamed_script_to_object {id} 4 (SLOT_MACHINE) {modelId} #KB_BANDIT_U {priority} 100 {radius} 6.0 {type} 1
+allocate_streamed_script_to_random_ped {id} 19 (DEALER) {modelId} #BMYDRUG {priority} 100
 ```
 
-It triggers when the game spawns a random object with the specified model ID, if the player is within the defined radius of the object. The object handle is passed to the script in the first local variable.
+It starts the script when the game spawns a random ped with the specified model ID, if the player is within the radius of `5.0` of the ped. The ped handle is passed to the script in the first local variable.
+
 
 ## Overview of Brain Types
 

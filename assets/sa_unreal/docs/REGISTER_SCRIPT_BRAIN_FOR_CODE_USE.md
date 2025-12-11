@@ -1,10 +1,14 @@
-This command creates an association between an ambient script and the object model, allowing the game to start the script when an object of that model is created. The object has to be defined in the `object.dat` file.
+This command creates an association between an ambient script and its name, allowing the game to start the script from the code.
 
 ```
-allocate_streamed_script_to_object {id} 4 (SLOT_MACHINE) {modelId} #KB_BANDIT_U {priority} 100 {radius} 6.0 {type} 1
+register_script_brain_for_code_use 23 'HOUSE'
 ```
 
-It triggers when the game spawns a random object with the specified model ID, if the player is within the defined radius of the object. The object handle is passed to the script in the first local variable.
+The script starts when the game code calls the brain by its string name, e.g. when creating peds in interiors. The ped handle is passed to the script in the first local variable.
+
+```
+StartOrRequestNewStreamedScriptBrainWithThisName("HOUSE", pedHandle, CODE_PED)
+```
 
 ## Overview of Brain Types
 

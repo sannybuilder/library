@@ -1,10 +1,16 @@
-This command creates an association between an ambient script and the object model, allowing the game to start the script when an object of that model is created. The object has to be defined in the `object.dat` file.
+This command creates an association between an ambient script and its name, allowing the game to start the script when a ped uses a corresponding attractor.
 
 ```
-allocate_streamed_script_to_object {id} 4 (SLOT_MACHINE) {modelId} #KB_BANDIT_U {priority} 100 {radius} 6.0 {type} 1
+register_attractor_script_brain_for_code_use {id} 41 (PCHAIR) {_p2} 'PCHAIR'
 ```
 
-It triggers when the game spawns a random object with the specified model ID, if the player is within the defined radius of the object. The object handle is passed to the script in the first local variable.
+The script starts when a ped is tasked to use an attractor defined in the map data. The ped handle is passed to the script in the first local variable.
+
+```
+task_use_closest_map_attractor {handle} ped {radius} 20.0 {modelId} #NULL {fromX} 0.0 {fromY} 0.0 {fromZ} 0.0 {name} "PCHAIR"
+```
+
+The game can also spawn peds that use attractors defined in the map data, such as gym equipment, chairs, and dance spots. In this case, the second local variable of the script will be set to `1` to indicate that the ped was spawned by the game.
 
 ## Overview of Brain Types
 

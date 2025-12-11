@@ -6,7 +6,7 @@ allocate_streamed_script_to_object {id} 4 (SLOT_MACHINE) {modelId} #KB_BANDIT_U 
 
 It triggers when the game spawns a random object with the specified model ID, if the player is within the defined radius of the object. The object handle is passed to the script in the first local variable.
 
-## Overview of Brain Types
+**Overview of Brain Types**
 
 San Andreas has multiple types of AI brains that can be assigned to pedestrians or objects to control their behavior.
 

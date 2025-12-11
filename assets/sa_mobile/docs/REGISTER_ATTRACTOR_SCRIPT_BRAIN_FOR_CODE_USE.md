@@ -12,7 +12,7 @@ task_use_closest_map_attractor {handle} ped {radius} 20.0 {modelId} #NULL {fromX
 
 The game can also spawn peds that use attractors defined in the map data, such as gym equipment, chairs, and dance spots. In this case, the second local variable of the script will be set to `1` to indicate that the ped was spawned by the game.
 
-## Overview of Brain Types
+**Overview of Brain Types**
 
 San Andreas has multiple types of AI brains that can be assigned to pedestrians or objects to control their behavior.
 

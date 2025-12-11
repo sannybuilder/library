@@ -6,8 +6,7 @@ allocate_streamed_script_to_random_ped {id} 19 (DEALER) {modelId} #BMYDRUG {prio
 
 It starts the script when the game spawns a random ped with the specified model ID, if the player is within the radius of `5.0` of the ped. The ped handle is passed to the script in the first local variable.
 
-
-## Overview of Brain Types
+**Overview of Brain Types**
 
 San Andreas has multiple types of AI brains that can be assigned to pedestrians or objects to control their behavior.
 

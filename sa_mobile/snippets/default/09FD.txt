@@ -1,0 +1,89 @@
+{$CLEO .cs}
+
+const PANEL_WIDTH = 220.0
+const TEXT_WIDTH = 0.6
+const TEXT_HEIGHT = 1.8
+
+const MAX_TEXT_LENGHT = 80
+
+int iTmp
+float fTmp
+
+iTmp = MAX_TEXT_LENGHT + 1 // plus string terminator character
+int str = allocate_memory {size} iTmp
+
+TimerA = 0
+while true
+    wait {time} 0
+    
+    // update text every 0.1 second
+    if
+        TimerA > 100
+    then
+        TimerA = 0
+        
+        iTmp = get_text_length {text} str
+        if
+            iTmp < MAX_TEXT_LENGHT
+        then
+            iTmp = generate_random_int_in_range {min} 0x61 {max} 0x7A // ASCII: from A to Z
+            string_format str = "%s%c" str iTmp // append extra character
+        else
+            string_format str = "" // clear
+        end
+        
+        add_text_label {dynamicKey} 'TX_TEST' {text} str
+    end
+        
+    // drawing
+    use_text_commands {state} true
+    
+    // background rectangle
+    draw_rect {pos} 320.0 210.0 {width} PANEL_WIDTH {height} 60.0 {rgb} 0 0 0 {alpha} 180
+    
+    // calculate text horizontal position
+    fTmp = PANEL_WIDTH
+    fTmp /= 2.0
+    float posX = 320.0
+    posX -= fTmp
+    
+    // draw text without scaling
+    set_text_scale {widthScale} TEXT_WIDTH {heightScale} TEXT_HEIGHT
+    display_text {pos} posX 180.0 {key} 'TX_TEST'
+    
+    // draw text scaled to the area
+    fTmp = GetTextScaleForWidth('TX_TEST', PANEL_WIDTH, TEXT_WIDTH, 0.0, 1000.0)
+    set_text_scale {widthScale} fTmp {heightScale} TEXT_HEIGHT
+    display_text {pos} posX 200.0 {key} 'TX_TEST'
+    
+    // draw resonably fitted text
+    fTmp = GetTextScaleForWidth('TX_TEST', PANEL_WIDTH, TEXT_WIDTH, 0.5, 1.0)
+    set_text_scale {widthScale} fTmp {heightScale} TEXT_HEIGHT
+    display_text {pos} posX 220.0 {key} 'TX_TEST'
+end
+
+terminate_this_script
+
+
+function GetTextScaleForWidth(gxt: shortString, panelWidth: float, scale: float, factorMin: float, factorMax: float): float    
+    set_text_scale {widthScale} scale {heightScale} 1.0
+    int iTmp = get_string_width {entry} 'TX_TEST'
+    float width =# iTmp
+    
+    float factor = panelWidth
+    factor /= width
+    
+    if
+        factor < factorMin
+    then
+        factor = factorMin
+    end
+    if
+        factor > factorMax
+    then
+        factor = factorMax
+    end
+    
+    scale *= factor // apply scaling factor
+    return scale 
+end

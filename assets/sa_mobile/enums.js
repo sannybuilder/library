@@ -78,11 +78,6 @@ export const WeaponType = {
   "Infrared": 45,
   "Parachute": 46
 };
-export const Town = {
-  "LS": 0,
-  "SF": 1,
-  "LV": 2
-};
 export const Fade = {
   "Out": 0,
   "In": 1,
@@ -107,25 +102,6 @@ export const BodyPart = {
   "Glasses": 15,
   "Hat": 16,
   "SpecialCostume": 17
-};
-export const AudioStreamState = {
-  "Stop": 0,
-  "Play": 1,
-  "Pause": 2,
-  "Resume": 3
-};
-export const FileMode = {
-  "ReadText": "rt",
-  "WriteText": "wt",
-  "AppendText": "at",
-  "ReadBinary": "rb",
-  "WriteBinary": "wb",
-  "AppendBinary": "ab"
-};
-export const SeekOrigin = {
-  "Begin": 0,
-  "Current": 1,
-  "End": 2
 };
 export const Button = {
   "LeftStickX": 0,
@@ -418,10 +394,6 @@ export const BlipColor = {
   "Cyan": 6,
   "Threat": 7,
   "Destination": 8
-};
-export const ScriptBrainAttachType = {
-  "Ped": 0,
-  "Object": 1
 };
 export const TempAction = {
   "None": 0,

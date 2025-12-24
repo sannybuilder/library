@@ -430,10 +430,6 @@ export const BlipColor = {
   "PurpleFix": -939472641,
   "CyanFix": 13172735
 };
-export const ScriptBrainAttachType = {
-  "Ped": 0,
-  "Object": 1
-};
 export const TempAction = {
   "None": 0,
   "Wait": 1,

@@ -1,0 +1,1 @@
+This command checks if a ped captured by GET_RANDOM_ICE_CREAM_CUSTOMER_IN_AREA has bought ice cream. This command is only used during the Cherry Poppers Distribution mission. Using the negative conditional command (NOT HAS_CHAR_BOUGHT_ICE_CREAM) on the player will crash the game.

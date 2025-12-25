@@ -1,0 +1,3 @@
+This command gets the progress of completion as a percentage. The value is obtained by taking the progress made (which can be changed through PLAYER_MADE_PROGRESS), multiplying that by `100.0`, and dividing that by the total progress (which can be set through SET_PROGRESS_TOTAL). If the total progress points is set to `0`, the value will be set to `0` to avoid division by zero. Any value greater than `100.0` will be set to `100.0`. Negative values can be returned.
+
+In Vice City, if your game language is set to French or German, subtract the total progress by 1 before the division. For example, if the total progress points is set to `152`, this command will return `100.0` if just `151` progress points are made.

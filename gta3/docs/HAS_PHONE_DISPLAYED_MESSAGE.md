@@ -1,0 +1,1 @@
+This conditional command returns true when the payphone has finished displaying a message and is not currently displaying one. If the phone is turned on, off, or set to a message through the script, the payphone is considered as having never displayed a message even if it had displayed a previous one in the past.

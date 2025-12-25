@@ -1,4 +1,4 @@
-This command can be used to temporarily stop creating AI brains for random pedestrians (PED_STREAMED) or objects (OBJECT_STREAMED). It was used in the original game during the mission "Breaking the Bank at Caligula's".
+This command can be used to temporarily disable AI brains created with ALLOCATE_STREAMED_SCRIPT_TO_OBJECT. It was used in the original game during the mission "Breaking the Bank at Caligula's".
 
 **Overview of Brain Types**
 

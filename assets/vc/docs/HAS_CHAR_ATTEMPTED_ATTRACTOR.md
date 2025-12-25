@@ -1,0 +1,1 @@
+This command returns true if the character was captured by GET_RANDOM_ICE_CREAM_CUSTOMER_IN_AREA and has finished buying or has failed to buy ice cream after using SET_CHAR_OBJ_BUY_ICE_CREAM. The original script called this command during "Distribution".

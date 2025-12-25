@@ -1,0 +1,1 @@
+This conditional command returns true if you have the specified weapon. It will remain true if you run out of ammo for that weapon and have not replaced it with another weapon of the same slot unless you are wasted or busted. Weapon type `0` does not actually check if you have a fist and produces a meaningless result.

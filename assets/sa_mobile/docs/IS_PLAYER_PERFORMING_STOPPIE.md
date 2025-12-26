@@ -1,0 +1,1 @@
+This conditional command returns true when the player is performing a stoppie. A stoppie is being performed if only the front wheel of a motorcycle or bicycle is touching the ground. The body of the bike and the rear wheel cannot touch any solid surface.

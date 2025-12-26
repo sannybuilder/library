@@ -1,0 +1,1 @@
+This conditional command returns true when the player picks up a phone, specifically during the entire duration of the picking up the phone to hanging up the phone animation sequence. This occurs only for commands where payphone messages are involved.

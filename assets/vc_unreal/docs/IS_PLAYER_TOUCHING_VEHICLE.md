@@ -1,0 +1,1 @@
+This conditional command returns true when the player character touches or collides with the vehicle. If the player is driving a vehicle (excluding the target vehicle), the command also returns true when the player's vehicle touches or collides with the target vehicle.

@@ -1,0 +1,1 @@
+This conditional command returns true when the player is performing a wheelie. A wheelie is being performed if only the rear wheel of a motorcycle or bicycle is touching the ground. The body of the bike and the front wheel cannot touch any solid surface.

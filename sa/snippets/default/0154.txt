@@ -3,8 +3,11 @@ load_all_models_now
 Char charHandle = create_char {type} PedType.CivFemale {model} #BFYST {pos} 2479.0 -1660.0 13.0
 mark_model_as_no_longer_needed #BFYST
 
-if
-    is_char_in_zone charHandle {zone} "DOWNT"
-then
-    print_string_now {text} "Character is downtown" {time} 1000
+while true
+    wait 0
+    if
+        is_char_in_zone charHandle {zone} 'SF'
+    then
+        print_string_now {text} "Character is in San Fierro" {time} 1000
+    end
 end

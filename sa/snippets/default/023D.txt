@@ -1,5 +1,9 @@
-if
-    has_special_character_loaded {slotId} 1
-then
-    print_string_now {text} "Special character loaded" {time} 1000
+load_special_character {slotId} 1 {modelName} 'TENPEN'
+
+while not has_special_character_loaded {slotId} 1
+    wait 0
 end
+
+print_string_now {text} "Special character loaded" {time} 1000
+
+unload_special_character {slotId} 1

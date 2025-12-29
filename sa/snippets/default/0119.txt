@@ -3,8 +3,12 @@ load_all_models_now
 Car carHandle = create_car {modelId} #INFERNUS {pos} 2479.0 -1660.0 13.0
 mark_model_as_no_longer_needed #INFERNUS
 
-if
-    is_car_dead carHandle
-then
-    print_string_now {text} "Vehicle is destroyed" {time} 1000
+while true
+    wait 0
+    if
+        is_car_dead carHandle
+    then
+        print_string_now {text} "Vehicle is destroyed" {time} 1000
+        break
+    end
 end

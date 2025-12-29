@@ -1,0 +1,1 @@
+By default, when a garage is created, entering the garage places the camera outside the garage at a fixed position and the camera will track the player character as you move around in the garage (this does not happen when in standard controls on foot in Vice City). This command disables that special camera for the garage, allowing the regular game camera to be in control.

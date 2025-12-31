@@ -4214,3 +4214,10 @@ export const TaskCommand = {
   "TaskHandGesture": 2589,
   "TaskFollowPathNodesToCoordWithRadius": 2606
 };
+export const CutsceneTrackStatus = {
+  "Stopped": 0,
+  "Loading": 1,
+  "Loaded": 2,
+  "Playing": 3,
+  "Stopping": 4
+};

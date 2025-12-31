@@ -1,0 +1,1 @@
+This command fully opens the trunk lid or tailgate of a car if it has one that is initially closed. Physics does not apply to the lid until it is damaged twice (the third damage pops the lid off the car). If the lid is already opened and can swing in motion, this command produce no effect.

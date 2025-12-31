@@ -1,0 +1,1 @@
+This command loads the soundtrack audio that is stored in the `audio\streams\BEATS` file. The soundtrack can be played using PLAY_BEAT_TRACK and stopped using STOP_BEAT_TRACK. GET_BEAT_TRACK_STATUS gets the status of the soundtrack.

@@ -4221,3 +4221,12 @@ export const CutsceneTrackStatus = {
   "Playing": 3,
   "Stopping": 4
 };
+export const CarPanel = {
+  "FrontLeft": 0,
+  "FrontRight": 1,
+  "RearLeft": 2,
+  "RearRight": 3,
+  "Windscreen": 4,
+  "FrontBumper": 5,
+  "RearBumper": 6
+};

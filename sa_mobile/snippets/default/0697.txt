@@ -1,0 +1,27 @@
+while true
+    wait {time} 2000
+    
+    if
+        not is_char_sitting_in_any_car $scplayer
+    then
+        continue
+    end
+    
+    int handle = store_car_char_is_in_no_save $scplayer
+    
+    if
+        not is_car_health_greater handle {health} 900
+    then
+        fix_car handle
+    else
+        set_car_health handle {health} 900
+        
+        pop_car_panel handle {panelId} CarPanel.FrontLeft {drop} true
+        pop_car_panel handle {panelId} CarPanel.FrontRight {drop} true
+        pop_car_panel handle {panelId} CarPanel.RearLeft {drop} true
+        pop_car_panel handle {panelId} CarPanel.RearRight {drop} true
+        pop_car_panel handle {panelId} CarPanel.Windscreen {drop} true
+        pop_car_panel handle {panelId} CarPanel.FrontBumper {drop} true
+        pop_car_panel handle {panelId} CarPanel.RearBumper {drop} true
+    end
+end

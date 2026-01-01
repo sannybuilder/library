@@ -1,0 +1,11 @@
+const MODEL_ID = #HEALTH
+
+float pos[3]
+...pos = get_offset_from_char_in_world_coords $scplayer {offset} 3.0 2.0 0.0
+        
+request_model {modelId} MODEL_ID
+load_all_models_now
+int obj = create_object {modelId} MODEL_ID {pos} pos[0] pos[1] -150.0 // snap to the ground
+mark_model_as_no_longer_needed {modelId} MODEL_ID
+        
+task_complex_pickup_object {char} $scplayer {object} obj

@@ -1,0 +1,13 @@
+while true
+    wait {time} 5000
+    
+    if
+        not is_char_sitting_in_any_car $scplayer
+    then
+        continue
+    end
+    
+    int handle = store_car_char_is_in_no_save $scplayer
+    
+    fix_car_panel handle {panelId} CarPanel.FrontBumper
+end

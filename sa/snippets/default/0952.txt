@@ -1,0 +1,45 @@
+{$CLEO}
+wait 500
+
+int beatTime, beatType, beatIndex
+int isPlaying = true
+
+const CUTSCENE_TRACK_STOPPED = 0 //CutsceneTrackStatus.Stopped
+const CUTSCENE_TRACK_LOADING = 1 //CutsceneTrackStatus.Loading
+const CUTSCENE_TRACK_LOADED = 2 //CutsceneTrackStatus.Loaded
+const CUTSCENE_TRACK_PLAYING = 3 //CutsceneTrackStatus.Playing
+const CUTSCENE_TRACK_STOPPING = 4 //CutsceneTrackStatus.Stopping
+
+preload_beat_track {trackId} 2
+play_beat_track
+
+print_help_formatted {text} "Press U to stop the track, P to pause"
+
+while true
+    wait 0
+
+    if is_key_just_pressed {keyCode} KeyCode.P
+    then
+        isPlaying ^= 1 // toggle on/off
+        pause_current_beat_track {state} isPlaying
+    end
+
+    if is_key_just_pressed {keyCode} KeyCode.U
+    then
+        stop_beat_track
+    end
+
+    int status = get_beat_track_status
+
+    switch status
+    case CUTSCENE_TRACK_STOPPED
+        break
+    case CUTSCENE_TRACK_PLAYING
+        beatTime, beatType, beatIndex = get_beat_proximity {offset} 0
+        print_formatted_now {format} "Time: %d Type: %d Index: %d" {time} 500 {args} beatTime beatType beatIndex
+    end
+
+end
+
+stop_beat_track
+terminate_this_script

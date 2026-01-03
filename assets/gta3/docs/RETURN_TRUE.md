@@ -1,0 +1,1 @@
+This conditional command always returns true as the result. It was never called in the original script of GTA III. This command does not exist in Vice City or San Andreas but IS_PC_VERSION, which exists in both games, generally has the same behavior as this command.

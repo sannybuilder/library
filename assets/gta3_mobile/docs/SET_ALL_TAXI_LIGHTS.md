@@ -1,0 +1,1 @@
+This command allows all taxis to spawn with their roof lights turned on. Anything that can spawn a taxi like CREATE_CAR, CREATE_CAR_GENERATOR, or natural traffic, is affected. Taxis that are already spawned are not affected by this command.

@@ -2,8 +2,8 @@ The output text is constructed out of the given string and any extra arguments.
 
 Common [C++ format specifiers](https://cplusplus.com/reference/cstdio/printf/) starting from `%` are used to define argument type, e.g.:  
 * `%d` integer number in decimal form
-* `%h` integer number in hex form (lower case letters)
-* `%H` integer number in hex form (upper case letters)
+* `%x` integer number in hex form (lower case letters)
+* `%X` integer number in hex form (upper case letters)
 * `%f` floating-point number
 * `%s` string
 * `%p` 8-digit hex number

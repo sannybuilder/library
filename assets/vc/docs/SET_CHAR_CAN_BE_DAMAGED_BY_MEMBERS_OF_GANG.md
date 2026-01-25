@@ -1,0 +1,1 @@
+This command allows the character to be immune from gun fire from members of the gang, including from any characters spawned as a ped type of that gang. The character can still be damaged by fists and area effects. Due to a bug, all characters are permanently immune from gun fire from members of the unused gang number `8` (ped type `GANG9`).

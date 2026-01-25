@@ -1,0 +1,1 @@
+This command sets the character to be never targetted (auto-aimed) by the player. Characters can only be auto-aimed while in classic or joypad controls, so the command serves no function in standard controls.

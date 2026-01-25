@@ -1,0 +1,1 @@
+This command sets the interior of the character. This is required when creating the character inside an interior or moving the character to another interior with a different number or else the character will become non-solid.

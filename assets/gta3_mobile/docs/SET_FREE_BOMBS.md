@@ -1,0 +1,1 @@
+This command sets all bomb shops to free. You can have your vehicle fitted even with no money, and no money will be deducted after using it. The value set with this command is saved in block `2` of the save file.

@@ -1,0 +1,1 @@
+This command sets the character to use the hail taxi animation "idle_taxi" in the `ped.ifp` file. The character periodically raises the right arm as long as the character is in control, e.g. simply standing. The periodicity can be ended using CHAR_SET_IDLE or by other actions like entering a vehicle.

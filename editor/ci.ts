@@ -35,7 +35,7 @@ games.forEach((game) => {
   validateSnippets(join('../', game), game);
   validateNative(nativeJson, game);
   run(`[ -d ${assets} ] || mkdir -p ${assets}`);
-  generateEnums(enumsJson, join(assets, 'enums.js'));
+  generateEnums(enumsJson, join(assets, 'enums'));
 
   [`cp ${gameJson} ${assets}`, `cp ${enumsJson} ${assets}`].forEach((x) =>
     run(x)

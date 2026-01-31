@@ -39,7 +39,7 @@ games.forEach((game) => {
 
   run(`[ -d ${assets} ] || mkdir ${assets}`);
 
-  generateEnums(enumsJson, join(assets, 'enums.js'));
+  generateEnums(enumsJson, join(assets, 'enums'));
 
   if (doesGameRequireOpcode(game)) {
     generateOpcodeExamples(gameJson, join(assets, 'opcodes.txt'));

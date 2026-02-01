@@ -1,0 +1,12 @@
+int carPtr = get_car_char_is_using $scplayer
+carPtr = get_vehicle_pointer {handle} carPtr
+
+// install bomb
+int flags = read_memory_with_offset {address} carPtr {offset} 0x4A8 {size} 1 // CVehicle::m_nBombLightsWinchFlags
+flags &= 0xF8 // clear 3 lowest bits
+//flags |= 1 // 7 second delay bomb
+flags |= 2 // triggered on entry bomb
+write_memory_with_offset {address} carPtr {offset} 0x4A8 {size} 1 {value} flags // CVehicle::m_nBombLightsWinchFlags
+
+// activete now
+CVehicle_ActivateBomb(carPtr)

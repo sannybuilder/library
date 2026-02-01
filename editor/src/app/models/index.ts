@@ -380,7 +380,7 @@ export interface GenerateJsonModel {
 
 export const SELF = 'self';
 
-export type SyntaxKind = 'sb_command' | 'sb_class' | 'cleo_redux';
+export type SyntaxKind = 'sb_command' | 'sb_class' | 'cleo_redux' | 'sb_function';
 
 export const GameSourceRepo: Partial<Record<Game, string>> = {
   [Game.gta3]: 'sannybuilder/GTA_III_SCRIPT',

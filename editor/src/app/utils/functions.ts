@@ -14,10 +14,7 @@ import {
 } from '../pipes/params';
 import { primitiveTypes, inputParams, outputParams } from './command';
 
-export function generateFunctionDeclaration(
-  command: Command,
-  game: Game
-) {
+export function generateFunctionDeclaration(command: Command, game: Game) {
   if (!command.member) {
     return '';
   }
@@ -41,7 +38,7 @@ export function generateFunctionDeclaration(
 export function functionParamList(
   command: Command,
   game: Game,
-  simpleTypes: boolean
+  simpleTypes: boolean,
 ): string {
   let params = '()';
   let primitives = without(
@@ -50,7 +47,7 @@ export function functionParamList(
     PrimitiveType.model_any,
     PrimitiveType.model_char,
     PrimitiveType.model_object,
-    PrimitiveType.model_vehicle
+    PrimitiveType.model_vehicle,
   );
   if (command.input?.length) {
     params = braceify(
@@ -58,12 +55,12 @@ export function functionParamList(
         inputParams(command).map((p) => {
           const isSimpleType =
             !simpleTypes || primitives.includes(p.type as PrimitiveType);
-          return paramCStyle(p, isSimpleType);
+          return paramCStyle(p, isSimpleType, '{', '}');
         }),
         ', ',
-        stringifyWithColonNoHighlight
+        stringifyWithColonNoHighlight,
       ),
-      '()'
+      '()',
     );
   }
 
@@ -76,7 +73,7 @@ export function functionParamList(
         .map((p) => {
           const isSimpleType =
             !simpleTypes || primitives.includes(p.type as PrimitiveType);
-          return paramCStyle(p, isSimpleType).type;
+          return paramCStyle(p, isSimpleType, '{', '}').type;
         })
         .join(', ')
     );
@@ -85,11 +82,53 @@ export function functionParamList(
   return params;
 }
 
-function paramCStyle(p: Param, isSimpleType: boolean): Param {
+export function functionGenericParamsList(command: Command, game: Game) {
+  let params: string = '[]';
+  let primitives = without(
+    primitiveTypes(game, ViewContext.Code),
+    PrimitiveType.boolean,
+    PrimitiveType.model_any,
+    PrimitiveType.model_char,
+    PrimitiveType.model_object,
+    PrimitiveType.model_vehicle,
+  );
+  if (command.input?.length) {
+    params = braceify(
+      stringify(
+        inputParams(command).map((p) => {
+          if (p.type === 'bool') {
+            // bool is supported in TS
+            return paramCStyle({ name: p.name, type: 'boolean' }, true, '/*', '*/');
+          }
+          if (p.type === 'float') {
+            return {
+              name: p.name,
+              type: 'float /* Wrap in Memory.FromFloat */',
+            };
+          }
+          const isSimpleType = primitives.includes(p.type as PrimitiveType);
+          return paramCStyle(p, isSimpleType, '/*', '*/');
+        }),
+        ', ',
+        stringifyWithColonNoHighlight,
+      ),
+      '[]',
+    );
+  }
+
+  return params;
+}
+
+function paramCStyle(
+  p: Param,
+  isSimpleType: boolean,
+  openComment: '{' | '/*',
+  closeComment: '}' | '*/',
+): Param {
   const type = p.source === SourceType.pointer ? p.type + '*' : p.type;
 
   if (!isSimpleType || p.source === SourceType.pointer) {
-    return { name: p.name, type: `int {${type}}` };
+    return { name: p.name, type: `int ${openComment}${type}${closeComment}` };
   }
   return { name: p.name, type };
 }

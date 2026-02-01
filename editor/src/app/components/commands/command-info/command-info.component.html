@@ -47,7 +47,8 @@
         [syntaxKind]="defaultSyntaxKind"
         (switchSyntaxKind)="onSwitchSyntaxKind($event)"
         [withToggle]="
-          viewContext === ViewContext.Script && doesGameRequireOpcode(game)
+          (viewContext === ViewContext.Script && doesGameRequireOpcode(game)) ||
+          viewContext === ViewContext.Code
         "
         [withCopyButton]="true"
         [simpleTypes]="true"
@@ -107,8 +108,8 @@
           [innerHTML]="
             fullDescription[0]
               | markdown
-              | linkify : game : gameExtensions : viewContext
-              | linkifyClasses : game : classNames : viewContext
+              | linkify: game : gameExtensions : viewContext
+              | linkifyClasses: game : classNames : viewContext
               | sanitize
           "
         ></div>
@@ -132,14 +133,14 @@
             *ngIf="extension !== getDefaultExtension()"
             [innerHTML]="
               'ui.commandOverview.withExtension'
-                | translate : { extension: extension, game: game }
+                | translate: { extension: extension, game: game }
             "
           ></li>
           <li
             *ngIf="customPlatforms.length === 1"
             [innerHTML]="
               'ui.commandOverview.customPlatform'
-                | translate : { platform: customPlatforms[0] }
+                | translate: { platform: customPlatforms[0] }
             "
           ></li>
           <li
@@ -149,7 +150,7 @@
                 | translate
                   : {
                       platform1: customPlatforms[0],
-                      platform2: customPlatforms[1]
+                      platform2: customPlatforms[1],
                     }
             "
           ></li>
@@ -157,14 +158,14 @@
             *ngIf="customVersions.length === 1"
             [innerHTML]="
               'ui.commandOverview.customVersion'
-                | translate : { version: customVersions[0] }
+                | translate: { version: customVersions[0] }
             "
           ></li>
           <li
             *ngIf="customVersions.length > 1"
             [innerHTML]="
               'ui.commandOverview.customVersions'
-                | translate : { versions: customVersions.join(', ') }
+                | translate: { versions: customVersions.join(', ') }
             "
           ></li>
           <li *ngIf="command?.input[0]?.name === 'self'">
@@ -198,7 +199,7 @@
               [routerLink]="[
                 '../..',
                 extension,
-                relatedCommand.id || relatedCommand.name
+                relatedCommand.id || relatedCommand.name,
               ]"
               [queryParams]="getQueryParamsForCommand(relatedCommand, game)"
               >{{ relatedCommand.name }}</a
@@ -250,7 +251,7 @@
         [routerLink]="[
           baseHref,
           isEnumParam(param) ? 'enums' : 'classes',
-          param.type
+          param.type,
         ]"
         >{{ param.type }}</a
       >

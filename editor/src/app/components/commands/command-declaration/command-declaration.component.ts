@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { hasCLEOReduxSupport, isSupported } from '../../../utils';
+import { hasCLEOReduxSupport, isSupported, outputParams } from '../../../utils';
 import {
   Command,
   Extension,
@@ -73,5 +73,21 @@ export class CommandDeclarationComponent {
 
   hasCLEOReduxSupport(game: Game) {
     return hasCLEOReduxSupport(game);
+  }
+
+  // https://re.cleo.li/docs/en/using-memory.html
+  getReduxMethodForCommand(command: Command): string {
+    let cc = upperFirst(command.cc) || 'Cdecl';
+    const outputs = outputParams(command);
+    if (outputs.length > 0) {
+      if (outputs[0].type === 'bool') {
+        return `${cc}U8`;
+      }
+      if (outputs[0].type === 'float') {
+        return `${cc}Float`;
+      }
+      return `${cc}I32`;
+    }
+    return cc;
   }
 }

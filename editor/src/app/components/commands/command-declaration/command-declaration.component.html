@@ -115,12 +115,21 @@
   </ng-container>
   <ng-container *ngIf="syntaxKind === 'cleo_redux'">
     <code class="text-break mt-3">
-      Memory.Fn.{{ getReduxMethodForCommand(command) }}<wbr />&lt;<span
+      Memory.Fn.{{ getReduxMethodForCommand(command) }}<wbr />({{ command.name
+      }}<span
+        class="code"
+        [innerHTML]="
+          command.cc === 'thiscall'
+            ? ', self: int <span class=\'comment\'>/*' +
+              command.class +
+              '*/</span></span>'
+            : ''
+        "
+      ></span
+      >)<wbr /><span
         class="code"
         [innerHTML]="command | functionGeneric: game | highlight | sanitize"
-      ></span
-      >&gt;({{ command.name
-      }}{{ command.cc === "thiscall" ? ", self" : "" }})<wbr />
+      ></span>
     </code>
   </ng-container>
 </ng-template>

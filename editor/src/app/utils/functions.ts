@@ -83,7 +83,7 @@ export function functionParamList(
 }
 
 export function functionGenericParamsList(command: Command, game: Game) {
-  let params: string = '[]';
+  let params: string = '()';
   let primitives = without(
     primitiveTypes(game, ViewContext.Code),
     PrimitiveType.boolean,
@@ -95,24 +95,31 @@ export function functionGenericParamsList(command: Command, game: Game) {
   if (command.input?.length) {
     params = braceify(
       stringify(
-        inputParams(command).map((p) => {
-          if (p.type === 'bool') {
-            // bool is supported in TS
-            return paramCStyle({ name: p.name, type: 'boolean' }, true, '/*', '*/');
-          }
-          if (p.type === 'float') {
-            return {
-              name: p.name,
-              type: 'float /* Wrap in Memory.FromFloat */',
-            };
-          }
-          const isSimpleType = primitives.includes(p.type as PrimitiveType);
-          return paramCStyle(p, isSimpleType, '/*', '*/');
-        }),
+        inputParams(command)
+          .filter((p) => p.name !== 'self')
+          .map((p) => {
+            if (p.type === 'bool') {
+              // bool is supported in TS
+              return paramCStyle(
+                { name: p.name, type: 'boolean' },
+                true,
+                '/*',
+                '*/',
+              );
+            }
+            if (p.type === 'float') {
+              return {
+                name: `Memory.FromFloat(${p.name})`,
+                type: '',
+              };
+            }
+            const isSimpleType = primitives.includes(p.type as PrimitiveType);
+            return paramCStyle(p, isSimpleType, '/*', '*/');
+          }),
         ', ',
         stringifyWithColonNoHighlight,
       ),
-      '[]',
+      '()',
     );
   }
 

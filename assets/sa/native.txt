@@ -104,8 +104,6 @@ function CAnimBlendAssociation_AllocateAnimBlendNodeArray<thiscall, 0x4CE9F0>(se
 function CAnimBlendAssociation_FreeAnimBlendNodeArray<thiscall, 0x4CEA40>(self: int {CAnimBlendAssociation})
 function CAnimBlendAssociation_GetNode<thiscall, 0x4CEB60>(self: int {CAnimBlendAssociation}, nodeIndex: int): int
 function CAnimBlendAssociation_Init<thiscall, 0x4CEEC0>(self: int {CAnimBlendAssociation}, clump: int, hierarchy: int)
-function CAnimBlendAssociation_Init<thiscall, 0x4CEEC0>(self: int {CAnimBlendAssociation}, source: int)
-function CAnimBlendAssociation_Init<thiscall, 0x4CEEC0>(self: int {CAnimBlendAssociation}, source: int)
 function CAnimBlendAssociation_ReferenceAnimBlock<thiscall, 0x4CEA50>(self: int {CAnimBlendAssociation})
 function CAnimBlendAssociation_SetBlend<thiscall, 0x4CEBA0>(self: int {CAnimBlendAssociation}, blendAmount: int, blendDelta: int)
 function CAnimBlendAssociation_SetBlendTo<thiscall, 0x4CEB80>(self: int {CAnimBlendAssociation}, blendAmount: int, blendDelta: int)
@@ -242,8 +240,8 @@ function CBrightLights_RenderOutGeometryBuffer<cdecl, 0x722150>()
 function CBrightLights_Render<cdecl, 0x7241C0>()
 function CBrightLights_RegisterOne<cdecl, 0x724770>(posn: int {CVector}, top: int {CVector}, right: int {CVector}, at: int {CVector}, color: int, arg5: int, arg6: int, arg7: int)
 function CBrightLights_Init<cdecl, 0x722140>()
-function CBuilding_operator new<cdecl, 0x404090>(size: int): int
-function CBuilding_operator delete<cdecl, 0x4040A0>(data: int)
+function CBuilding_operator_new<cdecl, 0x404090>(size: int): int
+function CBuilding_operator_delete<cdecl, 0x4040A0>(data: int)
 function CBuilding_CBuilding<thiscall, 0x403E00>(self: int {CBuilding})
 function CBulletInfo_Initialise<cdecl, 0x735FD0>()
 function CBulletInfo_Shutdown<cdecl, 0x736000>()
@@ -302,12 +300,10 @@ function CCamera_InitCameraVehicleTweaks<thiscall, 0x50A3B0>(self: int {CCamera}
 function CCamera_InitialiseScriptableComponents<thiscall, 0x50D2D0>(self: int {CCamera}): int
 function CCamera_IsExtraEntityToIgnore<thiscall, 0x50CE80>(self: int {CCamera}, entity: int): int
 function CCamera_IsItTimeForNewcam<thiscall, 0x51D770>(self: int {CCamera}, camSequence: int, startTime: int): int
-function CCamera_IsSphereVisible<thiscall, 0x420D40>(self: int {CCamera}, origin: int {CVector const &}, radius: float, transformMatrix: int): int
 function CCamera_IsSphereVisible<thiscall, 0x420D40>(self: int {CCamera}, origin: int {CVector const &}, radius: float): int
 function CCamera_LerpFOV<thiscall, 0x50D280>(self: int {CCamera}, zoomInFactor: int, zoomOutFactor: int, timelimit: int, bEase: int)
 function CCamera_LoadPathSplines<thiscall, 0x5B24D0>(self: int {CCamera}, pFile: int)
 function CCamera_Process<thiscall, 0x52B730>(self: int {CCamera})
-function CCamera_ProcessFOVLerp<thiscall, 0x516500>(self: int {CCamera}, ratio: int)
 function CCamera_ProcessFOVLerp<thiscall, 0x516500>(self: int {CCamera})
 function CCamera_ProcessFade<thiscall, 0x50B5D0>(self: int {CCamera})
 function CCamera_ProcessMusicFade<thiscall, 0x50B6D0>(self: int {CCamera})
@@ -318,11 +314,8 @@ function CCamera_ProcessObbeCinemaCameraPed<thiscall, 0x50B880>(self: int {CCame
 function CCamera_ProcessObbeCinemaCameraPlane<thiscall, 0x526C80>(self: int {CCamera})
 function CCamera_ProcessObbeCinemaCameraTrain<thiscall, 0x526950>(self: int {CCamera})
 function CCamera_ProcessScriptedCommands<thiscall, 0x516AE0>(self: int {CCamera})
-function CCamera_ProcessShake<thiscall, 0x51A6F0>(self: int {CCamera}, jiggleIntensity: int)
 function CCamera_ProcessShake<thiscall, 0x51A6F0>(self: int {CCamera})
-function CCamera_ProcessVectorMoveLinear<thiscall, 0x5164A0>(self: int {CCamera}, ratio: int)
 function CCamera_ProcessVectorMoveLinear<thiscall, 0x5164A0>(self: int {CCamera})
-function CCamera_ProcessVectorTrackLinear<thiscall, 0x516440>(self: int {CCamera}, ratio: int)
 function CCamera_ProcessVectorTrackLinear<thiscall, 0x516440>(self: int {CCamera})
 function CCamera_ProcessWideScreenOn<thiscall, 0x50B890>(self: int {CCamera})
 function CCamera_RenderMotionBlur<thiscall, 0x50B8F0>(self: int {CCamera})
@@ -667,15 +660,15 @@ function CColModel_ctor<thiscall, 0x40FB60>(self: int {CColModel}): int {CColMod
 /// Deinitializes the CColModel struct
 function CColModel_dtor<thiscall, 0x40F700>(self: int {CColModel})
 function CColModel_MakeMultipleAlloc<thiscall, 0x40F740>(self: int {CColModel})
-function CColModel_operator=<thiscall, 0x40F7C0>(self: int {CColModel}, colModel: int {CColModel const&}): int
+function CColModel_operator_eq<thiscall, 0x40F7C0>(self: int {CColModel}, colModel: int {CColModel const&}): int
 function CColModel_AllocateData<thiscall, 0x40F810>(self: int {CColModel})
 function CColModel_AllocateData<thiscall, 0x40F870>(self: int {CColModel}, numSpheres: int, numBoxes: int, numLines: int, numVertices: int, numTriangles: int, disks: int {bool})
 function CColModel_AllocateData<thiscall, 0x40F9B0>(self: int {CColModel}, size: int)
 function CColModel_RemoveCollisionVolumes<thiscall, 0x40F9E0>(self: int {CColModel})
 function CColModel_CalculateTrianglePlanes<thiscall, 0x40FA30>(self: int {CColModel})
 function CColModel_RemoveTrianglePlanes<thiscall, 0x40FA40>(self: int {CColModel})
-function CColModel_operator new<cdecl, 0x40FC30>(size: int): int
-function CColModel_operator delete<cdecl, 0x40FC40>(data: int)
+function CColModel_operator_new<cdecl, 0x40FC30>(size: int): int
+function CColModel_operator_delete<cdecl, 0x40FC40>(data: int)
 function CColourSet_CColourSet<thiscall, 0x55F4B0>(self: int {CColourSet}, weatherId: int, timeId: int)
 function CColourSet_Interpolate<thiscall, 0x55F870>(self: int {CColourSet}, a: int, b: int, factorA: float, factorB: float, bIgnoreSky: int {bool})
 function CControllerConfigManager_GetIsKeyboardKeyDown<thiscall, 0x52DDB0>(self: int {CControllerConfigManager}, key: int {RsKeyCodes}): int
@@ -801,9 +794,9 @@ function CDarkel_ResetOnPlayerDeath<cdecl, 0x43DC10>()
 function CDarkel_FailKillFrenzy<cdecl, 0x43DC60>()
 function CDarkel_RegisterKillByPlayer<cdecl, 0x43DCD0>(pKilledPed: int, damageWeaponId: int {eWeaponType}, bHeadShotted: int {bool}, arg4: int)
 function CDarkel_RegisterCarBlownUpByPlayer<cdecl, 0x43DF20>(pVehicle: int {CVehicle}, arg2: int)
-function CDate_operator<<thiscall, 0x618D90>(self: int {CDate}, rhs: int {CDate const &}): int
-function CDate_operator==<thiscall, 0x618DF0>(self: int {CDate}, rhs: int {CDate const &}): int
-function CDate_operator><thiscall, 0x618D30>(self: int {CDate}, rhs: int {CDate const &>(gaddrof(CDate::operator}): int
+function CDate_operator_lt<thiscall, 0x618D90>(self: int {CDate}, rhs: int {CDate const &}): int
+function CDate_operator_eq<thiscall, 0x618DF0>(self: int {CDate}, rhs: int {CDate const &}): int
+function CDate_operator_gt<thiscall, 0x618D30>(self: int {CDate}, rhs: int {CDate const &}): int
 function CDate_PopulateDateFields<thiscall, 0x618E30>(self: int {CDate}, seconds: int, minutes: int, hours: int, day: int, month: int, year: int)
 function CDecisionSimple_Set<thiscall, 0x600730>(self: int {CDecisionSimple}, taskTypes: int, chances: int, count: int)
 function CDecisionSimple_MakeDecision<thiscall, 0x6007A0>(self: int {CDecisionSimple}, taskType: int, outTaskType: int {short&}, outDecisionIndex: int {int&})
@@ -818,9 +811,9 @@ function CDirectory_Init<thiscall, 0x5322F0>(self: int {CDirectory}, capacity: i
 function CDirectory_AddItem<thiscall, 0x532310>(self: int {CDirectory}, entry: int {DirectoryInfo const&})
 function CDirectory_ReadDirFile<thiscall, 0x532350>(self: int {CDirectory}, filename: int)
 function CDirectory_WriteDirFile<thiscall, 0x532410>(self: int {CDirectory}, filename: int): int
-function CDirectory_DirectoryInfo* CDirectory<thiscall, 0x532450>(self: int {CDirectory}, name: int): int
-function CDirectory_DirectoryInfo* CDirectory<thiscall, 0x5324A0>(self: int {CDirectory}, name: int, outOffset: int, outStreamingSize: int): int
-function CDirectory_DirectoryInfo* CDirectory<thiscall, 0x5324D0>(self: int {CDirectory}, key: int, outOffset: int, outStreamingSize: int): int
+function CDirectory_FindItem<thiscall, 0x532450>(self: int {CDirectory}, name: int): int
+function CDirectory_FindItem<thiscall, 0x5324A0>(self: int {CDirectory}, name: int, outOffset: int, outStreamingSize: int): int
+function CDirectory_FindItem<thiscall, 0x5324D0>(self: int {CDirectory}, key: int, outOffset: int, outStreamingSize: int): int
 function CDoor_Process<thiscall, 0x6F4040>(self: int {CDoor}, vehicle: int {CVehicle}, arg1: int {CVector&}, arg2: int {CVector&}, arg3: int {CVector&}): int
 function CDoor_ProcessImpact<thiscall, 0x6F4540>(self: int {CDoor}, vehicle: int {CVehicle}, arg1: int {CVector&}, arg2: int {CVector&}, arg3: int {CVector&}): int
 function CDoor_Open<thiscall, 0x6F4790>(self: int {CDoor}, openRatio: float)
@@ -865,10 +858,9 @@ function CFileLoader_LoadClumpFile<cdecl, 0x5B3A30>(stream: int, modelIndex: int
 function CFileLoader_LoadClumpObject<cdecl, 0x5B4040>(line: int): int
 function CFileLoader_LoadCollisionFile<cdecl, 0x5B4E60>(data: int, dataSize: int, colId: int): int
 function CFileLoader_LoadCollisionFileFirstTime<cdecl, 0x5B5000>(data: int, dataSize: int, colId: int): int
-function CFileLoader_LoadLine<cdecl, 0x536FE0>(file: int {FILESTREAM}): int
+function CFileLoader_LoadLine<cdecl, 0x536F80>(file: int {FILESTREAM}): int
 function CFileLoader_LoadLine<cdecl, 0x536FE0>(outLine: int, outSize: int {int &}): int
 function CFileLoader_LoadObject<cdecl, 0x5B3C60>(line: int): int
-function CFileLoader_LoadObjectInstance<cdecl, 0x538690>(objInstance: int, modelname: int): int
 function CFileLoader_LoadObjectInstance<cdecl, 0x538690>(line: int): int
 function CFileLoader_LoadPathHeader<cdecl, 0x5B41C0>(line: int, outPathType: int {int &}): int
 function CFileLoader_LoadPedObject<cdecl, 0x5B7420>(line: int): int
@@ -1040,7 +1032,7 @@ function CLoadingScreen_DoPCTitleFadeIn<cdecl, 0x590860>()
 function CLoadingScreen_DoPCScreenChange<cdecl, 0x590AC0>(bFinish: int)
 function CLoadingScreen_NewChunkLoaded<cdecl, 0x590D00>()
 function CMatrix_Scale<thiscall, 0x459350>(self: int {CMatrix}, scale: float)
-function CMatrix_Scale<thiscall, 0x459350>(self: int {CMatrix}, x: float, y: float, z: float)
+function CMatrix_Scale<thiscall, 0x5A2E60>(self: int {CMatrix}, x: float, y: float, z: float)
 function CMatrixLink_Insert<thiscall, 0x54E8F0>(self: int {CMatrixLink}, where: int)
 function CMatrixLink_Remove<thiscall, 0x54E910>(self: int {CMatrixLink})
 /// Initializes a CMenuManager struct
@@ -1057,8 +1049,6 @@ function CMenuManager_CheckFrontEndUpInput<thiscall, 0x573840>(self: int {CMenuM
 function CMenuManager_CheckHover<thiscall, 0x57C4F0>(self: int {CMenuManager}, x1: int, x2: int, y1: int, y2: int): int
 function CMenuManager_CheckMissionPackValidMenu<thiscall, 0x57D720>(self: int {CMenuManager}): int
 function CMenuManager_CheckRedefineControlInput<thiscall, 0x57E4D0>(self: int {CMenuManager}): int
-function CMenuManager_CheckSliderMovement<thiscall, 0x57E4D0>(self: int {CMenuManager}, input: int)
-function CMenuManager_DisplayHelperText<thiscall, 0x57E4D0>(self: int {CMenuManager}, text: int)
 function CMenuManager_DisplaySlider<thiscall, 0x576860>(self: int {CMenuManager}, posX: int, posY: int, beginHeight: int, endHeight: int, distBetweenRects: int, filledAmount: int, colour: int): int
 function CMenuManager_DoSettingsBeforeStartingAGame<thiscall, 0x573330>(self: int {CMenuManager}): int
 function CMenuManager_DrawBackground<thiscall, 0x57B750>(self: int {CMenuManager}): int
@@ -1137,8 +1127,8 @@ function COctTree_ReduceTree<thiscall, 0x5A7040>(self: int {COctTree})
 function COctTree_RemoveChildren<thiscall, 0x5A74F0>(self: int {COctTree})
 function COctTree_ShutdownPool<thiscall, 0x5A6F70>(self: int {COctTree})
 function COctTree_empty<thiscall, 0x5A6FC0>(self: int {COctTree})
-function COctTree_operator delete<cdecl, 0x5A7420>(data: int)
-function COctTree_operator new<cdecl, 0x5A7410>(size: int): int
+function COctTree_operator_delete<cdecl, 0x5A7420>(data: int)
+function COctTree_operator_new<cdecl, 0x5A7410>(size: int): int
 function COctTreeBase_COctTreeBase<thiscall, 0x5A7570>(self: int {COctTreeBase})
 function COctTreeBase_Init<thiscall, 0x5A7260>(self: int {COctTreeBase}, numBranches: int)
 function COctTreeBase_Insert<thiscall, 0x5A7750>(self: int {COctTreeBase}, colorRed: int, colorGreen: int, colorBlue: int): int
@@ -1184,7 +1174,7 @@ function CPad_GetHandBrake<thiscall, 0x540040>(self: int {CPad}): int
 function CPad_GetBrake<thiscall, 0x540080>(self: int {CPad}): int
 function CPad_GetExitVehicle<thiscall, 0x5400D0>(self: int {CPad}): int
 function CPad_ExitVehicleJustDown<thiscall, 0x540120>(self: int {CPad}): int
-function CPad_GetMeleeAttack<thiscall, 0x540340>(self: int {CPad}, 0: int): int
+function CPad_GetMeleeAttack<thiscall, 0x540340>(self: int {CPad}, checkButtonCircleStateOnly: int {bool}): int
 function CPad_MeleeAttackJustDown<thiscall, 0x540390>(self: int {CPad}): int
 function CPad_GetAccelerate<thiscall, 0x5403F0>(self: int {CPad}): int
 function CPad_GetAccelerateJustDown<thiscall, 0x540440>(self: int {CPad}): int
@@ -1249,9 +1239,7 @@ function CPedGroupIntelligence_IsGroupResponding<thiscall, 0x5F7760>(self: int {
 function CPedGroupIntelligence_Process<thiscall, 0x5FC4A0>(self: int {CPedGroupIntelligence})
 function CPedGroupIntelligence_ProcessIgnorePlayerGroup<thiscall, 0x5F87A0>(self: int {CPedGroupIntelligence})
 function CPedGroupIntelligence_ReportAllBarScriptTasksFinished<thiscall, 0x5F8780>(self: int {CPedGroupIntelligence})
-function CPedGroupIntelligence_ReportAllTasksFinished<thiscall, 0x5F8750>(self: int {CPedGroupIntelligence}, taskpair: int)
 function CPedGroupIntelligence_ReportAllTasksFinished<thiscall, 0x5F8750>(self: int {CPedGroupIntelligence})
-function CPedGroupIntelligence_ReportFinishedTask<thiscall, 0x5F86F0>(self: int {CPedGroupIntelligence}, ped: int, task: int, taskpair: int): int
 function CPedGroupIntelligence_ReportFinishedTask<thiscall, 0x5F86F0>(self: int {CPedGroupIntelligence}, ped: int, task: int): int
 function CPedGroupIntelligence_SetDefaultTask<thiscall, 0x5F8580>(self: int {CPedGroupIntelligence}, ped: int, task: int)
 function CPedGroupIntelligence_SetDefaultTaskAllocator<thiscall, 0x5FB280>(self: int {CPedGroupIntelligence}, pedGroupDefaultTaskAllocator: int)
@@ -1347,7 +1335,7 @@ function CPedIntelligence_CanSeeEntityWithLights<thiscall, 0x605550>(self: int {
 function CPedIntelligence_ProcessStaticCounter<thiscall, 0x605650>(self: int {CPedIntelligence})
 function CPedIntelligence_ProcessFirst<thiscall, 0x6073A0>(self: int {CPedIntelligence})
 function CPedIntelligence_Process<thiscall, 0x608260>(self: int {CPedIntelligence})
-function CPedIntelligence_operator delete<cdecl, 0x6074E0>(arg1: int)
+function CPedIntelligence_operator_delete<cdecl, 0x6074E0>(arg1: int)
 function CPedList_BuildListFromGroup_NoLeader<thiscall, 0x699DD0>(self: int {CPedList}, pedGroupMemberShip: int)
 function CPedList_BuildListFromGroup_NotInCar_NoLeader<thiscall, 0x69A340>(self: int {CPedList}, pedGroupMembership: int)
 function CPedList_BuildListOfPedsOfPedType<thiscall, 0x69A3B0>(self: int {CPedList}, pedtype: int)
@@ -1358,7 +1346,6 @@ function CPedList_RemovePedsAttackingPedType<thiscall, 0x69A450>(self: int {CPed
 function CPedList_RemovePedsThatDontListenToPlayer<thiscall, 0x69A420>(self: int {CPedList})
 function CPedPlacement_FindZCoorForPed<cdecl, 0x616920>(pos: int): int
 function CPedPlacement_IsPositionClearForPed<cdecl, 0x616860>(pos: int, radius: float, maxNumObjects: int, pObjectList: int, bCheckVehicles: int, bCheckPeds: int, bCheckObjects: int): int
-function CPedPlacement_IsPositionClearOfCars<cdecl, 0x616A40>(pos: int): int
 function CPedPlacement_IsPositionClearOfCars<cdecl, 0x616A40>(ped: int): int
 function CPedTaskPair_Flush<thiscall, 0x5E95B0>(self: int {CPedTaskPair})
 function CPickup_SetPosn<thiscall, 0x454960>(self: int {CPickup}, x: float, y: float, z: float)
@@ -1532,10 +1519,10 @@ function CPtrListDoubleLink_DeleteItem<thiscall, 0x5336B0>(self: int {CPtrListDo
 function CPtrListSingleLink_Flush<thiscall, 0x552400>(self: int {CPtrListSingleLink})
 function CPtrListSingleLink_AddItem<thiscall, 0x5335E0>(self: int {CPtrListSingleLink}, item: int)
 function CPtrListSingleLink_DeleteItem<thiscall, 0x533610>(self: int {CPtrListSingleLink}, item: int)
-function CPtrNodeDoubleLink_operator new<cdecl, 0x5523C0>(size: int): int
-function CPtrNodeDoubleLink_operator delete<cdecl, 0x5523D0>(data: int)
-function CPtrNodeSingleLink_operator new<cdecl, 0x552380>(size: int): int
-function CPtrNodeSingleLink_operator delete<cdecl, 0x552390>(data: int)
+function CPtrNodeDoubleLink_operator_new<cdecl, 0x5523C0>(size: int): int
+function CPtrNodeDoubleLink_operator_delete<cdecl, 0x5523D0>(data: int)
+function CPtrNodeSingleLink_operator_new<cdecl, 0x552380>(size: int): int
+function CPtrNodeSingleLink_operator_delete<cdecl, 0x552390>(data: int)
 function CQuadTreeNode_AddItem<thiscall, 0x552CD0>(self: int {CQuadTreeNode}, item: int, rect: int {CRect const&})
 /// Initializes a CQuadTreeNode struct
 function CQuadTreeNode_ctor<thiscall, 0x552830>(self: int {CQuadTreeNode}, rect: int {CRect const&}, startLevel: int): int {CQuadTreeNode}
@@ -1550,8 +1537,8 @@ function CQuadTreeNode_GetAllMatching<thiscall, 0x5528C0>(self: int {CQuadTreeNo
 function CQuadTreeNode_GetAllMatching<thiscall, 0x552930>(self: int {CQuadTreeNode}, posn: int {CVector2D const&}, list: int {CPtrListSingleLink&})
 function CQuadTreeNode_InSector<thiscall, 0x5526A0>(self: int {CQuadTreeNode}, rect: int {CRect const&}, sector: int): int
 function CQuadTreeNode_InitPool<thiscall, 0x552C00>(self: int {CQuadTreeNode})
-function CQuadTreeNode_operator delete<cdecl, 0x552C90>(data: int)
-function CQuadTreeNode_operator new<cdecl, 0x552C80>(size: int): int
+function CQuadTreeNode_operator_delete<cdecl, 0x552C90>(data: int)
+function CQuadTreeNode_operator_new<cdecl, 0x552C80>(size: int): int
 /// Deinitializes the CQuadTreeNode struct
 function CQuadTreeNode_dtor<thiscall, 0x552520>(self: int {CQuadTreeNode})
 function CRegisteredMotionBlurStreak_Update<thiscall, 0x721EE0>(self: int {CRegisteredMotionBlurStreak})
@@ -1868,7 +1855,6 @@ function CTheScripts_IsPointWithinSearchLight<cdecl, 0x493280>(pointPosn: int, i
 function CTheScripts_IsVehicleStopped<cdecl, 0x4861F0>(pVehicle: int {CVehicle}): int
 function CTheScripts_RemoveFromWaitingForScriptBrainArray<cdecl, 0x46ABC0>(a1: int, modelIndex: int): int
 function CTheScripts_ScriptAttachAnimGroupToCharModel<cdecl, 0x474800>(modelId: int, ifpName: int): int
-function CTheScripts_StartNewScript<cdecl, 0x464C90>(startIp: int): int
 function CTheScripts_StartNewScript<cdecl, 0x464C90>(startIp: int, index: int): int
 function CTimeCycle_AddOne<cdecl, 0x55FF40>(box: int {CBox&}, farclip: int, extracolor: int, strength: float, falloff: float, lodDistMult: float)
 function CTimeCycle_CalcColoursForPoint<cdecl, 0x5603D0>(point: int {CVector}, pCurrentColourSet: int)
@@ -1896,7 +1882,7 @@ function CUpsideDownCarCheck_HasCarBeenUpsideDownForAWhile<thiscall, 0x463940>(s
 function CUpsideDownCarCheck_Init<thiscall, 0x463810>(self: int {CUpsideDownCarCheck})
 function CUpsideDownCarCheck_RemoveCarFromCheck<thiscall, 0x463910>(self: int {CUpsideDownCarCheck}, carHandle: int)
 function CUpsideDownCarCheck_UpdateTimers<thiscall, 0x4655E0>(self: int {CUpsideDownCarCheck})
-function CUpsideDownCarCheck_IsCarUpsideDown<cdecl, 0x4655A0>(pVehicle: int {CVehicle}): int
+function CUpsideDownCarCheck_IsCarUpsideDown<cdecl, 0x463830>(pVehicle: int {CVehicle}): int
 function CUpsideDownCarCheck_IsCarUpsideDown<cdecl, 0x4655A0>(carhandle: int): int
 function CVisibilityPlugins_AtomicConstructor<cdecl, 0x732150>(object: int)
 function CVisibilityPlugins_AtomicCopyConstructor<cdecl, 0x732170>(object: int, originalObject: int)
@@ -2167,10 +2153,6 @@ function D3DIndexDataBuffer_Pop<thiscall, 0x730250>(self: int {D3DIndexDataBuffe
 function D3DIndexDataBuffer_Pop<thiscall, 0x730270>(self: int {D3DIndexDataBuffer}, indexCount: int): int
 function D3DIndexDataBuffer_Push<thiscall, 0x730300>(self: int {D3DIndexDataBuffer}, indexBuffer: int): int
 function D3DIndexDataBuffer_PushWithoutIncreasingCounter<thiscall, 0x730B00>(self: int {D3DIndexDataBuffer}, indexBuffer: int): int
-function D3DIndexDataBuffer_Pop<thiscall, 0x730250>(self: int {D3DIndexDataBuffer}): int
-function D3DIndexDataBuffer_Pop<thiscall, 0x730270>(self: int {D3DIndexDataBuffer}, indexCount: int): int
-function D3DIndexDataBuffer_Push<thiscall, 0x730300>(self: int {D3DIndexDataBuffer}, indexBuffer: int): int
-function D3DIndexDataBuffer_PushWithoutIncreasingCounter<thiscall, 0x730B00>(self: int {D3DIndexDataBuffer}, indexBuffer: int): int
 function D3DResourceSystem_CancelBuffering<cdecl, 0x730900>()
 function D3DResourceSystem_GetTotalIndexDataSize<cdecl, 0x7307F0>(): int
 function D3DResourceSystem_GetTotalPixelsSize<cdecl, 0x730660>(): int
@@ -2183,19 +2165,11 @@ function D3DResourceSystem_CreateIndexBuffer<cdecl, 0x7306A0>(numIndices: int, f
 function D3DResourceSystem_CreateTexture<cdecl, 0x730510>(width: int, height: int, format: int, ppTexture: int): int
 function D3DResourceSystem_DestroyIndexBuffer<cdecl, 0x730D30>(pIndexBuffer: int)
 function D3DResourceSystem_DestroyTexture<cdecl, 0x730B70>(pTexture: int)
-function D3DResourceSystem_CreateIndexBuffer<cdecl, 0x7306A0>(numIndices: int, format: int, ppIndexBuffer: int): int
-function D3DResourceSystem_CreateTexture<cdecl, 0x730510>(width: int, height: int, format: int, ppTexture: int): int
-function D3DResourceSystem_DestroyIndexBuffer<cdecl, 0x730D30>(pIndexBuffer: int)
-function D3DResourceSystem_DestroyTexture<cdecl, 0x730B70>(pTexture: int)
 function D3DTextureBuffer_Clear<thiscall, 0x72FEC0>(self: int {D3DTextureBuffer})
 function D3DTextureBuffer_Destroy<thiscall, 0x72FEF0>(self: int {D3DTextureBuffer})
 function D3DTextureBuffer_GetTotalDataSize<thiscall, 0x7300A0>(self: int {D3DTextureBuffer}): int
 function D3DTextureBuffer_Resize<thiscall, 0x730020>(self: int {D3DTextureBuffer}, newCapacity: int)
 function D3DTextureBuffer_Setup<thiscall, 0x72FE80>(self: int {D3DTextureBuffer}, format: int, width: int, bOneLevel: int, capacity: int)
-function D3DTextureBuffer_Pop<thiscall, 0x72FF40>(self: int {D3DTextureBuffer}): int
-function D3DTextureBuffer_Pop<thiscall, 0x72FF60>(self: int {D3DTextureBuffer}, format: int, width: int, height: int, bOneLevel: int): int
-function D3DTextureBuffer_Push<thiscall, 0x72FFF0>(self: int {D3DTextureBuffer}, texture: int): int
-function D3DTextureBuffer_PushWithoutIncreasingCounter<thiscall, 0x730AD0>(self: int {D3DTextureBuffer}, texture: int): int
 function D3DTextureBuffer_Pop<thiscall, 0x72FF40>(self: int {D3DTextureBuffer}): int
 function D3DTextureBuffer_Pop<thiscall, 0x72FF60>(self: int {D3DTextureBuffer}, format: int, width: int, height: int, bOneLevel: int): int
 function D3DTextureBuffer_Push<thiscall, 0x72FFF0>(self: int {D3DTextureBuffer}, texture: int): int

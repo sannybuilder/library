@@ -50,7 +50,7 @@ export function doesCommandHaveAnyAttributeInvalid(command: Command): boolean {
 
 export function doesCommandHaveDuplicateName(
   command: Command,
-  otherCommands: Command[] | undefined
+  otherCommands: Command[] | undefined,
 ) {
   const thisCommandPlatforms = command.platforms ?? [Platform.Any];
   const thisCommandVersions = command.versions ?? [Version.Any];
@@ -63,7 +63,7 @@ export function doesCommandHaveDuplicateName(
       intersection(thisCommandPlatforms, platforms ?? [Platform.Any]).length >
         0 &&
       intersection(thisCommandVersions, versions ?? [Version.Any]).length > 0 &&
-      !command.attrs?.is_overload
+      !command.attrs?.is_overload,
   );
 }
 
@@ -81,7 +81,7 @@ export function isCommandParamNameDuplicate(command: Command, name: string) {
 
 export function doesCommandHaveDuplicateParamName(command: Command) {
   return commandParams(command).some((param) =>
-    isCommandParamNameDuplicate(command, param.name)
+    isCommandParamNameDuplicate(command, param.name),
   );
 }
 
@@ -169,7 +169,7 @@ export function doesCommandDescriptionHaveTrailingPeriod(command: Command) {
 }
 
 export function doesCommandDescriptionNotStartWith3rdPersonVerb(
-  command: Command
+  command: Command,
 ) {
   return (
     !!command.short_desc && !command.short_desc?.split(' ')[0]?.endsWith('s')
@@ -248,7 +248,7 @@ export function doesCommandHaveInvalidArgumentWithOperator(command: Command) {
 
 export function doesSelfArgumentHaveInvalidType(command: Command) {
   return commandParams(command).some(
-    (p) => p.name === SELF && p.type !== command.class
+    (p) => p.name === SELF && p.type !== command.class && command.class,
   );
 }
 
@@ -258,7 +258,7 @@ export function doesOutputHaveInvalidSource(command: Command) {
 
 export function doesInputHaveInvalidSource(command: Command) {
   return inputParams(command).some(
-    (p) => isVarSource(p.source) && !command.operator
+    (p) => isVarSource(p.source) && !command.operator,
   );
 }
 
@@ -284,7 +284,7 @@ export function doesCommandHaveInvalidArguments(command: Command, game: Game) {
   }
   const count = commandParams(command).reduce(
     (m, v) => m + (v.type === PrimitiveType.arguments ? 1 : 0),
-    0
+    0,
   );
   if (count == 0) {
     return false;

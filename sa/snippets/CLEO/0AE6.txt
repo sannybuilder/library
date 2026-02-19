@@ -1,0 +1,12 @@
+int fileSearch
+int filename = allocate_memory {size} 128
+
+if
+    fileSearch, filename = find_first_file {searchMask} "cleo:/*.cs"
+then
+    repeat
+        trace "%s" filename
+    until not filename = find_next_file fileSearch
+end
+find_close fileSearch
+free_memory filename

@@ -1,0 +1,14 @@
+add_text_label 'TESTTXT' {text} "0123456789abcdef and even more..."
+
+shortString short_string = get_text_label_string 'TESTTXT' // stores "01234567"
+print_formatted_now {format} "short string variable: \"%s\"" {time} 4000 {args} short_string
+
+wait {time} 4000
+
+longString long_string = get_text_label_string 'TESTTXT' // stores "0123456789abcdef"
+print_formatted_now {format} "long string variable: \"%s\"" {time} 4000 {args} long_string
+
+wait {time} 4000
+
+int string_pointer = get_text_label_string 'TESTTXT' // stores address
+print_formatted_now {format} "string pointer: \"%s\"" {time} 4000 {args} string_pointer

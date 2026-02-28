@@ -4230,3 +4230,10 @@ export const CarPanel = {
   "FrontBumper": 5,
   "RearBumper": 6
 };
+export const CarWeapon = {
+  "None": 0,
+  "Guns": 1,
+  "Bombs": 2,
+  "HsMissiles": 3,
+  "Missiles": 4
+};

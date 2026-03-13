@@ -4,7 +4,7 @@ The internal buffer is 400 characters; text longer than 399 characters is silent
 
 To display a message using a GXT key, use PRINT_NOW.
 
-### Supported format specifiers
+## Supported format specifiers
 
 Common [C++ format specifiers](https://cplusplus.com/reference/cstdio/printf/) starting from `%` are used to define argument type, e.g.:  
 * `%d` integer number in decimal form

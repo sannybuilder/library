@@ -1,1 +1,9 @@
+// Basic queued subtitle
 print_string {text} "Hello from ~y~CLEO~s~!" {time} 5000
+
+// Suppress brief history for one message (CS5 only)
+add_next_message_to_previous_briefs false
+print_string {text} "This won't appear in brief." {time} 3000
+
+// Next call is back to default (flag auto-restored)
+print_string {text} "This will appear in brief." {time} 3000

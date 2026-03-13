@@ -6,7 +6,7 @@ To display a message using a GXT key, use PRINT.
 
 ## Queueing behaviour
 
-Messages are placed in a circular queue of 8 slots. Only the first slot (the *current* message) is visible on screen. Each subsequent message waits until the one before it expires.
+Messages are placed in a circular queue of 8 slots. Only the first slot (the current message) is visible on screen. Each subsequent message waits until the one before it expires.
 
 If all 8 slots are occupied, the next message is silently discarded.
 

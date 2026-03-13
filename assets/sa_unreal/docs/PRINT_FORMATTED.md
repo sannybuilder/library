@@ -2,7 +2,7 @@ This command displays a **printf-style formatted text string** as a subtitle. Th
 
 The internal buffer is 400 characters; text longer than 399 characters is silently truncated.
 
-### Supported format specifiers
+## Supported format specifiers
 
 Common [C++ format specifiers](https://cplusplus.com/reference/cstdio/printf/) starting from `%` are used to define argument type, e.g.:  
 * `%d` integer number in decimal form
@@ -21,7 +21,7 @@ The format string may contain zero or more specifiers and their count must match
 
 ## Queueing behaviour
 
-Messages are placed in a circular queue of 8 slots. Only the first slot (the *current* message) is visible on screen. Each subsequent message waits until the one before it expires.
+Messages are placed in a circular queue of 8 slots. Only the first slot (the current message) is visible on screen. Each subsequent message waits until the one before it expires.
 
 If all 8 slots are occupied, the next message is silently discarded.
 

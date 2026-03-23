@@ -1,7 +1,7 @@
 {
   "meta": {
+    "version": "0.50",
     "last_update": 1774211164390,
-    "version": "0.49",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -9267,6 +9267,21 @@
             {
               "name": "rightTopY",
               "type": "float"
+            },
+            {
+              "name": "civilian",
+              "type": "bool",
+              "source": "any"
+            },
+            {
+              "name": "gang",
+              "type": "bool",
+              "source": "any"
+            },
+            {
+              "name": "criminalOrProstitute",
+              "type": "bool",
+              "source": "any"
             }
           ],
           "output": [
@@ -9280,8 +9295,8 @@
           "id": "01C4",
           "member": "GetRandomCharInArea",
           "name": "GET_RANDOM_CHAR_IN_AREA",
-          "num_params": 5,
-          "short_desc": "Returns the handle of a random pedestrian in the specified 2D area, or -1 otherwise",
+          "num_params": 8,
+          "short_desc": "Returns the handle of a pedestrian of the specified type, or -1 otherwise",
           "attrs": {
             "is_constructor": true
           }
@@ -21205,7 +21220,7 @@
             }
           ],
           "id": "0417",
-          "name": "COMMAND_0417",
+          "name": "SET_PLAY_AUDIO_STREAM_AT_COORDS",
           "num_params": 5
         },
         {
@@ -21224,34 +21239,37 @@
             }
           ],
           "id": "0418",
-          "name": "COMMAND_0418",
+          "name": "STOP_AUDIO_STREAM_AT_COORDS",
           "num_params": 3
         },
         {
           "input": [
             {
-              "name": "_p1",
-              "type": "int"
+              "name": "leftBottomX",
+              "type": "float"
             },
             {
-              "name": "_p2",
-              "type": "int"
+              "name": "leftBottomY",
+              "type": "float"
             },
             {
-              "name": "_p3",
-              "type": "int"
+              "name": "rightTopX",
+              "type": "float"
             },
             {
-              "name": "_p4",
-              "type": "int"
-            },
+              "name": "rightTopY",
+              "type": "float"
+            }
+          ],
+          "output": [
             {
-              "name": "_p5",
-              "type": "int"
+              "name": "handle",
+              "type": "Char",
+              "source": "var_any"
             }
           ],
           "id": "0419",
-          "name": "COMMAND_0419",
+          "name": "GET_ANY_CHAR_IN_AREA",
           "num_params": 5
         },
         {
@@ -21266,7 +21284,7 @@
             }
           ],
           "id": "041A",
-          "name": "COMMAND_041A",
+          "name": "REQUEST_MODEL_NAME",
           "num_params": 2
         },
         {
@@ -21281,7 +21299,7 @@
             }
           ],
           "id": "041B",
-          "name": "COMMAND_041B",
+          "name": "CHAR_SET_LOCK_ON_PRIORITY",
           "num_params": 2
         },
         {
@@ -21296,7 +21314,7 @@
             }
           ],
           "id": "041C",
-          "name": "COMMAND_041C",
+          "name": "CHAR_GET_LOCK_ON_PRIORITY",
           "num_params": 2
         },
         {
@@ -21319,7 +21337,7 @@
             }
           ],
           "id": "041D",
-          "name": "COMMAND_041D",
+          "name": "IS_3D_COORD_IN_ZONE",
           "num_params": 4,
           "attrs": {
             "is_condition": true
@@ -21384,15 +21402,19 @@
             {
               "name": "_p4",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p5",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0421",
-          "name": "COMMAND_0421",
-          "num_params": 5
+          "name": "GET_RANDOM_OBJECT_IN_AREA_NO_SAVE",
+          "num_params": 5,
+          "attrs": {}
         },
         {
           "id": "0422",
@@ -21496,15 +21518,19 @@
             {
               "name": "_p8",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p9",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0425",
-          "name": "COMMAND_0425",
-          "num_params": 9
+          "name": "GET_RANDOM_CHAR_OF_SPECIFIED_MODEL_IN_AREA_3D",
+          "num_params": 9,
+          "attrs": {}
         },
         {
           "input": [
@@ -21581,70 +21607,88 @@
             {
               "name": "_p2",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p4",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p5",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p6",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p7",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p8",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p9",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p10",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p11",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p12",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p13",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0428",
-          "name": "COMMAND_0428",
-          "num_params": 13
+          "name": "GET_ZONE_PED_INFO_TIME_OF_DAY",
+          "num_params": 13,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0429",
-          "name": "COMMAND_0429",
-          "num_params": 2
+          "name": "GET_CHAR_CHAR_IS_TARGETTING",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -21658,7 +21702,7 @@
             }
           ],
           "id": "042A",
-          "name": "COMMAND_042A",
+          "name": "REMOVE_CHAR_WEAPON_IN_SLOT",
           "num_params": 2
         },
         {
@@ -21666,15 +21710,19 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "042B",
-          "name": "COMMAND_042B",
-          "num_params": 2
+          "name": "GET_ANIM_GROUP_FROM_CHAR",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -21688,7 +21736,7 @@
             }
           ],
           "id": "042C",
-          "name": "COMMAND_042C",
+          "name": "IS_ARMOUR_HEALTH_GREATER_THAN",
           "num_params": 2,
           "attrs": {
             "is_condition": true
@@ -21706,7 +21754,7 @@
             }
           ],
           "id": "042D",
-          "name": "COMMAND_042D",
+          "name": "IS_CHAR_PED_TYPE",
           "num_params": 2,
           "attrs": {
             "is_condition": true
@@ -21720,7 +21768,7 @@
             }
           ],
           "id": "042E",
-          "name": "COMMAND_042E",
+          "name": "IS_PLAYER_IN_THIS_LEVEL",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -21764,30 +21812,38 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0431",
-          "name": "COMMAND_0431",
-          "num_params": 2
+          "name": "GET_OBJECT_HEADING_VECTOR_INVERSE_SQUARED_X",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0432",
-          "name": "COMMAND_0432",
-          "num_params": 2
+          "name": "GET_OBJECT_HEADING_VECTOR_INVERSE_SQUARED_Y",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -21817,7 +21873,7 @@
             }
           ],
           "id": "0433",
-          "name": "COMMAND_0433",
+          "name": "SET_CHAR_CONSTRAINT_ZONE",
           "num_params": 6
         },
         {
@@ -21858,7 +21914,7 @@
             }
           ],
           "id": "0436",
-          "name": "COMMAND_0436",
+          "name": "IS_CHAR_FIGHTING",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -21872,7 +21928,7 @@
             }
           ],
           "id": "0437",
-          "name": "COMMAND_0437",
+          "name": "IS_CHAR_OUTSIDE_MOVEMENT_CONSTRAINT_ZONE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -21886,7 +21942,7 @@
             }
           ],
           "id": "0438",
-          "name": "COMMAND_0438",
+          "name": "IS_CHAR_MOVEMENT_CONSTRAINT_ZONE_ENABLED",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -21900,7 +21956,7 @@
             }
           ],
           "id": "0439",
-          "name": "COMMAND_0439",
+          "name": "IS_CHAR_BLOCKED_BY_MOVEMENT_CONSTRAINT_ZONE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -22009,7 +22065,7 @@
             }
           ],
           "id": "043E",
-          "name": "COMMAND_043E",
+          "name": "FIRE_PROJECTILE_FROM_CHAR",
           "num_params": 8
         },
         {
@@ -22024,7 +22080,7 @@
             }
           ],
           "id": "043F",
-          "name": "COMMAND_043F",
+          "name": "REMOVE_PROJECTILE_DO_EXPLOSION",
           "num_params": 2
         },
         {
@@ -22039,7 +22095,7 @@
             }
           ],
           "id": "0440",
-          "name": "COMMAND_0440",
+          "name": "IS_PROJECTILE_OF_TYPE_WEAPON_TYPE",
           "num_params": 2,
           "attrs": {
             "is_condition": true
@@ -22053,7 +22109,7 @@
             }
           ],
           "id": "0441",
-          "name": "COMMAND_0441",
+          "name": "IS_PROJECTILE_DESTROYED",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -22071,7 +22127,7 @@
             }
           ],
           "id": "0442",
-          "name": "COMMAND_0442",
+          "name": "SET_CHAR_DRIVEBY_MODE",
           "num_params": 2
         },
         {
@@ -22082,7 +22138,7 @@
             }
           ],
           "id": "0443",
-          "name": "COMMAND_0443",
+          "name": "REQUEST_ANIMS",
           "num_params": 1
         },
         {
@@ -22093,7 +22149,7 @@
             }
           ],
           "id": "0444",
-          "name": "COMMAND_0444",
+          "name": "REMOVE_ANIMS",
           "num_params": 1
         },
         {
@@ -22104,7 +22160,7 @@
             }
           ],
           "id": "0445",
-          "name": "COMMAND_0445",
+          "name": "HAVE_ANIMS_LOADED",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -22118,7 +22174,7 @@
             }
           ],
           "id": "0446",
-          "name": "COMMAND_0446",
+          "name": "IS_CHAR_SURRENDERING",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -22136,7 +22192,7 @@
             }
           ],
           "id": "0447",
-          "name": "COMMAND_0447",
+          "name": "APPLY_VISIBLE_DAMAGE_TO_CAR_AMOUNT_OF_DAMAGE",
           "num_params": 2
         },
         {
@@ -22144,38 +22200,48 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p4",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0448",
-          "name": "COMMAND_0448",
-          "num_params": 4
+          "name": "GET_DEAD_CHAR_COORDINATES",
+          "num_params": 4,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0449",
-          "name": "COMMAND_0449",
-          "num_params": 2
+          "name": "GET_NUMBER_OF_CHAR_COLOUR_SETS",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -22189,7 +22255,7 @@
             }
           ],
           "id": "044A",
-          "name": "COMMAND_044A",
+          "name": "CHANGE_CHAR_COLOUR_SET_DONT_UPDATED_SAVED_ONE_SET_ID",
           "num_params": 2
         },
         {
@@ -22205,7 +22271,7 @@
             }
           ],
           "id": "044C",
-          "name": "COMMAND_044C",
+          "name": "CAN_CHAR_BE_CONTROLLED",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -22231,7 +22297,7 @@
             }
           ],
           "id": "044D",
-          "name": "COMMAND_044D",
+          "name": "ADD_TOGGLEABLE_BLIP_FOR_COORD_COORDS",
           "num_params": 4
         },
         {
@@ -22246,12 +22312,12 @@
             }
           ],
           "id": "044E",
-          "name": "COMMAND_044E",
+          "name": "SET_EMPIRE_HUD_ELEMENT_VISIBLE_STATE",
           "num_params": 2
         },
         {
           "id": "044F",
-          "name": "COMMAND_044F",
+          "name": "CLEAR_ALL_EMPIRE_HUD_ELEMENTS",
           "num_params": 0
         },
         {
@@ -22270,7 +22336,7 @@
             }
           ],
           "id": "0450",
-          "name": "COMMAND_0450",
+          "name": "SET_EMPIRE_HUD_ELEMENT_START_POSITION",
           "num_params": 3
         },
         {
@@ -22289,7 +22355,7 @@
             }
           ],
           "id": "0451",
-          "name": "COMMAND_0451",
+          "name": "SET_EMPIRE_HUD_ELEMENT_SIZE",
           "num_params": 3
         },
         {
@@ -22316,7 +22382,7 @@
             }
           ],
           "id": "0452",
-          "name": "COMMAND_0452",
+          "name": "SET_EMPIRE_HUD_ELEMENT_BACKGROUND_COLOUR",
           "num_params": 5
         },
         {
@@ -22343,7 +22409,7 @@
             }
           ],
           "id": "0453",
-          "name": "COMMAND_0453",
+          "name": "SET_EMPIRE_HUD_ELEMENT_BORDER_COLOUR",
           "num_params": 5
         },
         {
@@ -22370,7 +22436,7 @@
             }
           ],
           "id": "0454",
-          "name": "COMMAND_0454",
+          "name": "ADD_EMPIRE_HUD_TEXT_ELEMENT",
           "num_params": 5
         },
         {
@@ -22425,7 +22491,7 @@
             }
           ],
           "id": "0455",
-          "name": "COMMAND_0455",
+          "name": "ADD_EMPIRE_HUD_TEXT_ELEMENT_WITH_NUMBERS",
           "num_params": 12
         },
         {
@@ -22436,7 +22502,7 @@
             }
           ],
           "id": "0456",
-          "name": "COMMAND_0456",
+          "name": "REMOVE_EMPIRE_HUD_ELEMENT",
           "num_params": 1
         },
         {
@@ -22463,7 +22529,7 @@
             }
           ],
           "id": "0457",
-          "name": "COMMAND_0457",
+          "name": "SET_EMPIRE_HUD_ELEMENT_COLOUR",
           "num_params": 5
         },
         {
@@ -22478,7 +22544,7 @@
             }
           ],
           "id": "0458",
-          "name": "COMMAND_0458",
+          "name": "SET_EMPIRE_HUD_TEXT_ELEMENT_SIZE",
           "num_params": 2
         },
         {
@@ -22493,7 +22559,7 @@
             }
           ],
           "id": "0459",
-          "name": "COMMAND_0459",
+          "name": "SET_EMPIRE_HUD_TEXT_ELEMENT_STYLE",
           "num_params": 2
         },
         {
@@ -22508,7 +22574,7 @@
             }
           ],
           "id": "045A",
-          "name": "COMMAND_045A",
+          "name": "SET_EMPIRE_HUD_TEXT_ELEMENT_ALIGNMENT",
           "num_params": 2
         },
         {
@@ -22527,7 +22593,7 @@
             }
           ],
           "id": "045B",
-          "name": "COMMAND_045B",
+          "name": "SET_EMPIRE_HUD_TEXT_ELEMENT_POSITION",
           "num_params": 3
         },
         {
@@ -22538,7 +22604,7 @@
             }
           ],
           "id": "045C",
-          "name": "COMMAND_045C",
+          "name": "REMOVE_EMPIRE_HUD_ELEMENT_FIRST",
           "num_params": 1
         },
         {
@@ -22569,7 +22635,7 @@
             }
           ],
           "id": "045D",
-          "name": "COMMAND_045D",
+          "name": "SET_EMPIRE_HUD_ELEMENT_BACKGROUND",
           "num_params": 6
         },
         {
@@ -22592,7 +22658,7 @@
             }
           ],
           "id": "045E",
-          "name": "COMMAND_045E",
+          "name": "ADD_EMPIRE",
           "num_params": 4
         },
         {
@@ -22607,7 +22673,7 @@
             }
           ],
           "id": "045F",
-          "name": "COMMAND_045F",
+          "name": "SET_EMPIRE_OWNERSHIP_VALUE",
           "num_params": 2
         },
         {
@@ -22622,7 +22688,7 @@
             }
           ],
           "id": "0460",
-          "name": "COMMAND_0460",
+          "name": "SET_EMPIRE_TYPE_TYPE",
           "num_params": 2
         },
         {
@@ -22637,7 +22703,7 @@
             }
           ],
           "id": "0461",
-          "name": "COMMAND_0461",
+          "name": "SET_EMPIRE_SCALE_SCALE",
           "num_params": 2
         },
         {
@@ -22652,7 +22718,7 @@
             }
           ],
           "id": "0462",
-          "name": "COMMAND_0462",
+          "name": "SET_EMPIRE_CONDITION_CONDITION",
           "num_params": 2
         },
         {
@@ -22667,7 +22733,7 @@
             }
           ],
           "id": "0463",
-          "name": "COMMAND_0463",
+          "name": "SET_EMPIRE_VISUAL_DAMAGE_FLAG",
           "num_params": 2
         },
         {
@@ -22682,7 +22748,7 @@
             }
           ],
           "id": "0464",
-          "name": "COMMAND_0464",
+          "name": "SET_EMPIRE_STATE_STATE",
           "num_params": 2
         },
         {
@@ -22690,128 +22756,162 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p4",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0465",
-          "name": "COMMAND_0465",
-          "num_params": 4
+          "name": "GET_EMPIRE_COORDS",
+          "num_params": 4,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0466",
-          "name": "COMMAND_0466",
-          "num_params": 2
+          "name": "GET_EMPIRE_OWNERSHIP",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0467",
-          "name": "COMMAND_0467",
-          "num_params": 2
+          "name": "GET_EMPIRE_TYPE",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0468",
-          "name": "COMMAND_0468",
-          "num_params": 2
+          "name": "GET_EMPIRE_SCALE",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0469",
-          "name": "COMMAND_0469",
-          "num_params": 2
+          "name": "GET_EMPIRE_CONDITION",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "046A",
-          "name": "COMMAND_046A",
-          "num_params": 2
+          "name": "GET_EMPIRE_VISUAL_DAMAGE",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "046B",
-          "name": "COMMAND_046B",
-          "num_params": 2
+          "name": "GET_EMPIRE_STATE",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "046C",
-          "name": "COMMAND_046C",
-          "num_params": 2
+          "name": "GET_EMPIRE_HEADING",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -22882,42 +22982,52 @@
           "num_params": 5
         },
         {
-          "input": [
+          "input": [],
+          "output": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0470",
-          "name": "COMMAND_0470",
-          "num_params": 3
+          "name": "GET_ACTIVE_CAMERA_COORDINATES",
+          "num_params": 3,
+          "attrs": {}
         },
         {
-          "input": [
+          "input": [],
+          "output": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0471",
-          "name": "COMMAND_0471",
-          "num_params": 3
+          "name": "GET_ACTIVE_CAMERA_POINT_AT",
+          "num_params": 3,
+          "attrs": {}
         },
         {
           "input": [
@@ -22939,7 +23049,7 @@
             }
           ],
           "id": "0472",
-          "name": "COMMAND_0472",
+          "name": "ADD_PAGER_MESSAGE",
           "num_params": 4
         },
         {
@@ -22997,7 +23107,7 @@
             }
           ],
           "id": "0475",
-          "name": "COMMAND_0475",
+          "name": "SET_OBJECT_COLLISION_DAMAGE_MULTIPLIER",
           "num_params": 3
         },
         {
@@ -23048,15 +23158,18 @@
           "num_params": 10
         },
         {
-          "input": [
+          "input": [],
+          "output": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0477",
-          "name": "COMMAND_0477",
-          "num_params": 1
+          "name": "GET_MISSION_SCRIPT_NAME",
+          "num_params": 1,
+          "attrs": {}
         },
         {
           "input": [
@@ -23175,15 +23288,19 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "047B",
-          "name": "COMMAND_047B",
-          "num_params": 2
+          "name": "GET_EMPIRE_BUILDING_TYPED_POOL_HANDLE",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -23206,15 +23323,19 @@
             {
               "name": "_p5",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p6",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "047C",
-          "name": "COMMAND_047C",
-          "num_params": 6
+          "name": "GET_RANDOM_OBJECT_OF_SPECIFIED_MODEL_IN_AREA_2D_MODEL",
+          "num_params": 6,
+          "attrs": {}
         },
         {
           "input": [
@@ -23225,15 +23346,19 @@
             {
               "name": "_p2",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "047D",
-          "name": "COMMAND_047D",
-          "num_params": 3
+          "name": "GET_COUNT_INTERIOR_ELEMENTS_BY_TYPE",
+          "num_params": 3,
+          "attrs": {}
         },
         {
           "input": [
@@ -23248,27 +23373,34 @@
             {
               "name": "_p3",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p4",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p5",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p6",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p7",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "047E",
-          "name": "COMMAND_047E",
-          "num_params": 7
+          "name": "GET_POSITION_HEADING_INTERIOR_ELEMENT_BY_TYPED_POOL_HANDLE",
+          "num_params": 7,
+          "attrs": {}
         },
         {
           "input": [
@@ -23287,15 +23419,19 @@
             {
               "name": "_p4",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p5",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "047F",
-          "name": "COMMAND_047F",
-          "num_params": 5
+          "name": "GET_COUNT_INTERIOR_ELEMENTS_BY_FILTER",
+          "num_params": 5,
+          "attrs": {}
         },
         {
           "input": [
@@ -23317,28 +23453,36 @@
             },
             {
               "name": "_p5",
-              "type": "int"
-            },
+              "type": "int",
+              "source": "any"
+            }
+          ],
+          "output": [
             {
               "name": "_p6",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p7",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p8",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p9",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0480",
-          "name": "COMMAND_0480",
-          "num_params": 9
+          "name": "GET_POSITION_HEADING_INTERIOR_ELEMENT",
+          "num_params": 9,
+          "attrs": {}
         },
         {
           "input": [
@@ -23352,7 +23496,7 @@
             }
           ],
           "id": "0481",
-          "name": "COMMAND_0481",
+          "name": "SET_PLAYER_DRIVEBY_MODE",
           "num_params": 2
         },
         {
@@ -23367,7 +23511,7 @@
             }
           ],
           "id": "0482",
-          "name": "COMMAND_0482",
+          "name": "TOGGLE_BUILDING_SWAP_STATE",
           "num_params": 2
         },
         {
@@ -23375,30 +23519,38 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0483",
-          "name": "COMMAND_0483",
-          "num_params": 2
+          "name": "GET_BUILDING_TYPED_POOL_HANDLE",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0484",
-          "name": "COMMAND_0484",
-          "num_params": 2
+          "name": "GET_HASH_KEY_HASH",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -23412,7 +23564,7 @@
             }
           ],
           "id": "0485",
-          "name": "COMMAND_0485",
+          "name": "IS_CHAR_PLAYING_ANIM",
           "num_params": 2,
           "attrs": {
             "is_condition": true
@@ -23442,7 +23594,7 @@
             }
           ],
           "id": "0486",
-          "name": "COMMAND_0486",
+          "name": "SET_EMPIRE_OWNER",
           "num_params": 5
         },
         {
@@ -23461,7 +23613,7 @@
             }
           ],
           "id": "0487",
-          "name": "COMMAND_0487",
+          "name": "SET_CHAR_DRAW_FOOTPRINTS",
           "num_params": 3
         },
         {
@@ -23472,17 +23624,17 @@
             }
           ],
           "id": "0488",
-          "name": "COMMAND_0488",
+          "name": "SET_TUNNEL_VISION_INTENSITY",
           "num_params": 1
         },
         {
           "id": "0489",
-          "name": "COMMAND_0489",
+          "name": "LOAD_EMPIRE_HUD",
           "num_params": 0
         },
         {
           "id": "048A",
-          "name": "COMMAND_048A",
+          "name": "INITIALISE_EMPIRE_HUD_TEX_REFS",
           "num_params": 0
         },
         {
@@ -23517,7 +23669,7 @@
             }
           ],
           "id": "048B",
-          "name": "COMMAND_048B",
+          "name": "ADD_EMPIRE_HUD_ICON_ELEMENT",
           "num_params": 7
         },
         {
@@ -23536,7 +23688,7 @@
             }
           ],
           "id": "048C",
-          "name": "COMMAND_048C",
+          "name": "SET_EMPIRE_HUD_ICON_ELEMENT_SIZE",
           "num_params": 3
         },
         {
@@ -23555,7 +23707,7 @@
             }
           ],
           "id": "048D",
-          "name": "COMMAND_048D",
+          "name": "BITWISE_OR",
           "num_params": 3
         },
         {
@@ -23574,7 +23726,7 @@
             }
           ],
           "id": "048E",
-          "name": "COMMAND_048E",
+          "name": "BITWISE_AND",
           "num_params": 3
         },
         {
@@ -23589,7 +23741,7 @@
             }
           ],
           "id": "048F",
-          "name": "COMMAND_048F",
+          "name": "IS_BITWISE_AND_NOT_EQUAL_TO_ZERO_AND",
           "num_params": 2,
           "attrs": {
             "is_condition": true
@@ -23607,7 +23759,7 @@
             }
           ],
           "id": "0490",
-          "name": "COMMAND_0490",
+          "name": "SET_OBJECT_HEALTH_TO",
           "num_params": 2
         },
         {
@@ -23615,15 +23767,19 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0491",
-          "name": "COMMAND_0491",
-          "num_params": 2
+          "name": "GET_OBJECT_HEALTH",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -23633,7 +23789,7 @@
             }
           ],
           "id": "0492",
-          "name": "COMMAND_0492",
+          "name": "SET_RADAR_DISPLAY_MODE",
           "num_params": 1
         },
         {
@@ -23641,38 +23797,48 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0493",
-          "name": "COMMAND_0493",
-          "num_params": 2
+          "name": "GET_INTERIOR_RADIUS",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p4",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0494",
-          "name": "COMMAND_0494",
-          "num_params": 4
+          "name": "GET_INTERIOR_POSITION",
+          "num_params": 4,
+          "attrs": {}
         },
         {
           "input": [
@@ -23686,7 +23852,7 @@
             }
           ],
           "id": "0495",
-          "name": "COMMAND_0495",
+          "name": "CHANGE_CAR_COLOUR_SET",
           "num_params": 2
         },
         {
@@ -23701,7 +23867,7 @@
             }
           ],
           "id": "0496",
-          "name": "COMMAND_0496",
+          "name": "CHANGE_CAR_SCRIPT_COLOUR_SET",
           "num_params": 2
         },
         {
@@ -23709,71 +23875,90 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0497",
-          "name": "COMMAND_0497",
-          "num_params": 2
+          "name": "GET_CAR_COLOUR_SET",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0498",
-          "name": "COMMAND_0498",
-          "num_params": 2
+          "name": "GET_CAR_SCRIPT_COLOUR_SET",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0499",
-          "name": "COMMAND_0499",
-          "num_params": 2
+          "name": "GET_NUMBER_OF_CAR_COLOUR_SETS",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "049A",
-          "name": "COMMAND_049A",
-          "num_params": 2
+          "name": "GET_NUMBER_OF_CAR_SCRIPT_COLOUR_SETS",
+          "num_params": 2,
+          "attrs": {}
         },
         {
-          "input": [
+          "input": [],
+          "output": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "049B",
-          "name": "COMMAND_049B",
-          "num_params": 1
+          "name": "GET_NUMBER_OF_DAYS_PASSED",
+          "num_params": 1,
+          "attrs": {}
         },
         {
           "input": [
@@ -23787,7 +23972,7 @@
             }
           ],
           "id": "049C",
-          "name": "COMMAND_049C",
+          "name": "SET_BINOCULARS_MODE",
           "num_params": 2
         },
         {
@@ -23798,7 +23983,7 @@
             }
           ],
           "id": "049D",
-          "name": "COMMAND_049D",
+          "name": "SET_DISPLAY_WIDESCREEN_MODE",
           "num_params": 1
         },
         {
@@ -23813,7 +23998,7 @@
             }
           ],
           "id": "049E",
-          "name": "COMMAND_049E",
+          "name": "ADD_SPRITE_BLIP_FOR_EMPIRE_BUILDING",
           "num_params": 2
         },
         {
@@ -23824,7 +24009,7 @@
             }
           ],
           "id": "049F",
-          "name": "COMMAND_049F",
+          "name": "SWITCH_DOLLAR_PARTICLE",
           "num_params": 1
         },
         {
@@ -23863,7 +24048,7 @@
             }
           ],
           "id": "04A0",
-          "name": "COMMAND_04A0",
+          "name": "ADD_DOLLAR_PARTICLE",
           "num_params": 8
         },
         {
@@ -23871,15 +24056,19 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04A1",
-          "name": "COMMAND_04A1",
-          "num_params": 2
+          "name": "GET_MISSION_AUDIO_DURATION",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -23921,7 +24110,7 @@
             }
           ],
           "id": "04A2",
-          "name": "COMMAND_04A2",
+          "name": "IS_CHAR_IN_ANGLED_AREA",
           "num_params": 9
         },
         {
@@ -23936,7 +24125,7 @@
             }
           ],
           "id": "04A3",
-          "name": "COMMAND_04A3",
+          "name": "SET_CHAR_FORCED_THREAT_TO_CHAR",
           "num_params": 2
         },
         {
@@ -23951,7 +24140,7 @@
             }
           ],
           "id": "04A4",
-          "name": "COMMAND_04A4",
+          "name": "SET_CHAR_FORCED_THREAT_TO_CAR",
           "num_params": 2
         },
         {
@@ -23962,7 +24151,7 @@
             }
           ],
           "id": "04A5",
-          "name": "COMMAND_04A5",
+          "name": "POP_CAR_BONNET",
           "num_params": 1
         },
         {
@@ -23977,7 +24166,7 @@
             }
           ],
           "id": "04A6",
-          "name": "COMMAND_04A6",
+          "name": "CREATE_ROPE_FOR_CAR",
           "num_params": 2
         },
         {
@@ -23988,7 +24177,7 @@
             }
           ],
           "id": "04A7",
-          "name": "COMMAND_04A7",
+          "name": "DELETE_ROPE_FROM_CAR",
           "num_params": 1
         },
         {
@@ -23996,30 +24185,38 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04A8",
-          "name": "COMMAND_04A8",
-          "num_params": 2
+          "name": "GET_HOOKED_ROPE_OBJECT_FROM_CAR",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04A9",
-          "name": "COMMAND_04A9",
-          "num_params": 2
+          "name": "GET_HOOKED_ROPE_CAR_FROM_CAR",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -24033,7 +24230,7 @@
             }
           ],
           "id": "04AA",
-          "name": "COMMAND_04AA",
+          "name": "SET_OBJECT_ALLOW_HOOKED_ROPE_FLAG",
           "num_params": 2
         },
         {
@@ -24048,7 +24245,7 @@
             }
           ],
           "id": "04AB",
-          "name": "COMMAND_04AB",
+          "name": "SET_CAR_ALLOW_HOOKED_ROPE_FLAG",
           "num_params": 2
         },
         {
@@ -24071,7 +24268,7 @@
             }
           ],
           "id": "04AC",
-          "name": "COMMAND_04AC",
+          "name": "SET_CAR_HOOKED_ROPE_START_OFFSET",
           "num_params": 4
         },
         {
@@ -24079,15 +24276,19 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04AD",
-          "name": "COMMAND_04AD",
-          "num_params": 2
+          "name": "GET_HOOKED_ROPE_HOOK_OBJECT_FROM_CAR",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -24101,7 +24302,7 @@
             }
           ],
           "id": "04AE",
-          "name": "COMMAND_04AE",
+          "name": "CHANGE_CHAR_COLOUR_SET",
           "num_params": 2
         },
         {
@@ -24116,7 +24317,7 @@
             }
           ],
           "id": "04AF",
-          "name": "COMMAND_04AF",
+          "name": "CHANGE_CHAR_SCRIPT_COLOUR_SET",
           "num_params": 2
         },
         {
@@ -24124,60 +24325,76 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04B0",
-          "name": "COMMAND_04B0",
-          "num_params": 2
+          "name": "GET_CHAR_COLOUR_SET",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04B1",
-          "name": "COMMAND_04B1",
-          "num_params": 2
+          "name": "GET_CHAR_SCRIPT_COLOUR_SET",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04B2",
-          "name": "COMMAND_04B2",
-          "num_params": 2
+          "name": "GET_NUMBER_OF_CHAR_COLOUR_SETS_2",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04B3",
-          "name": "COMMAND_04B3",
-          "num_params": 2
+          "name": "GET_NUMBER_OF_CHAR_SCRIPT_COLOUR_SETS",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -24199,7 +24416,7 @@
             }
           ],
           "id": "04B4",
-          "name": "COMMAND_04B4",
+          "name": "PLAY_CHAR_ANIM_WITH_BLEND",
           "num_params": 4,
           "attrs": {
             "is_condition": true
@@ -24217,7 +24434,7 @@
             }
           ],
           "id": "04B5",
-          "name": "COMMAND_04B5",
+          "name": "SET_PED_COLLISION",
           "num_params": 2
         },
         {
@@ -24262,7 +24479,7 @@
             }
           ],
           "id": "04B8",
-          "name": "COMMAND_04B8",
+          "name": "HAS_OBJECT_COLLIDED_WITH_CAR_CAR",
           "num_params": 2,
           "attrs": {
             "is_condition": true
@@ -24299,12 +24516,12 @@
             }
           ],
           "id": "04BA",
-          "name": "COMMAND_04BA",
+          "name": "RESET_CAR_NUM_COLLIDED_ENTITIES",
           "num_params": 1
         },
         {
           "id": "04BB",
-          "name": "COMMAND_04BB",
+          "name": "CLEAR_ALL_RADAR_BLIPS",
           "num_params": 0
         },
         {
@@ -24355,7 +24572,7 @@
             }
           ],
           "id": "04BC",
-          "name": "COMMAND_04BC",
+          "name": "FIRE_ROCKET_PROJECTILE_FROM_CAR",
           "num_params": 11
         },
         {
@@ -24366,7 +24583,7 @@
             }
           ],
           "id": "04BD",
-          "name": "COMMAND_04BD",
+          "name": "DONT_UPDATE_PLAYER_POSITION_ON_FRONTEND_MAP",
           "num_params": 1
         },
         {
@@ -24385,7 +24602,7 @@
             }
           ],
           "id": "04BE",
-          "name": "COMMAND_04BE",
+          "name": "SET_CAR_MASS_COEFFICIENT_VALUES",
           "num_params": 3
         },
         {
@@ -24432,7 +24649,7 @@
             }
           ],
           "id": "04BF",
-          "name": "COMMAND_04BF",
+          "name": "DRAW_RING_CHECKPOINT",
           "num_params": 10
         },
         {
@@ -24474,7 +24691,7 @@
             }
           ],
           "id": "04C1",
-          "name": "COMMAND_04C1",
+          "name": "DETACH_OBJECT_FROM_CHAR",
           "num_params": 1
         },
         {
@@ -24500,7 +24717,7 @@
             }
           ],
           "id": "04C3",
-          "name": "COMMAND_04C3",
+          "name": "CLEAR_ALL_THREATS_FOR_PED_TYPE",
           "num_params": 1
         },
         {
@@ -24516,23 +24733,29 @@
             {
               "name": "_p3",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p4",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p5",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p6",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04C4",
-          "name": "COMMAND_04C4",
-          "num_params": 6
+          "name": "GET_CLOSEST_WATER_NODE",
+          "num_params": 6,
+          "attrs": {}
         },
         {
           "input": [
@@ -24542,7 +24765,7 @@
             }
           ],
           "id": "04C5",
-          "name": "COMMAND_04C5",
+          "name": "TOOGLE_PLAYER_LONG_DISTANCE_SWIMMING",
           "num_params": 1
         },
         {
@@ -24553,22 +24776,22 @@
             }
           ],
           "id": "04C6",
-          "name": "COMMAND_04C6",
+          "name": "TOOGLE_BOATS_SPAWN",
           "num_params": 1
         },
         {
           "id": "04C7",
-          "name": "COMMAND_04C7",
+          "name": "FERRIS_WHEEL_RESET",
           "num_params": 0
         },
         {
           "id": "04C8",
-          "name": "COMMAND_04C8",
+          "name": "FERRIS_WHEEL_WAIT",
           "num_params": 0
         },
         {
           "id": "04C9",
-          "name": "COMMAND_04C9",
+          "name": "IS_FERRIS_WHEEL_STOPPED",
           "num_params": 0,
           "attrs": {
             "is_condition": true
@@ -24579,15 +24802,19 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04CA",
-          "name": "COMMAND_04CA",
-          "num_params": 2
+          "name": "GET_FERRIS_WHEEL_SEAT",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "input": [
@@ -24601,7 +24828,7 @@
             }
           ],
           "id": "04CB",
-          "name": "COMMAND_04CB",
+          "name": "ADD_SPRITE_BLIP_FOR_EMPIRE_BUILDING_2",
           "num_params": 2
         },
         {
@@ -24624,7 +24851,7 @@
             }
           ],
           "id": "04CD",
-          "name": "COMMAND_04CD",
+          "name": "SET_AREA_NAME",
           "num_params": 2
         },
         {
@@ -24639,7 +24866,7 @@
             }
           ],
           "id": "04CE",
-          "name": "COMMAND_04CE",
+          "name": "SET_HUD_ITEM_VISIBILITY",
           "num_params": 2
         },
         {
@@ -24654,7 +24881,7 @@
             }
           ],
           "id": "04CF",
-          "name": "COMMAND_04CF",
+          "name": "SET_ATTACHED_PLAYER_VERTICAL_CAMERA_ANGLE_MIN_LIMIT",
           "num_params": 2
         },
         {
@@ -24669,7 +24896,7 @@
             }
           ],
           "id": "04D0",
-          "name": "COMMAND_04D0",
+          "name": "SET_ATTACHED_PLAYER_VERTICAL_CAMERA_ANGLE_MAX_LIMIT",
           "num_params": 2
         },
         {
@@ -24680,7 +24907,7 @@
             }
           ],
           "id": "04D1",
-          "name": "COMMAND_04D1",
+          "name": "TRIGGER_CAR_ALARM",
           "num_params": 1
         },
         {
@@ -24695,7 +24922,7 @@
             }
           ],
           "id": "04D2",
-          "name": "COMMAND_04D2",
+          "name": "SET_BIKE_STANDING",
           "num_params": 2
         },
         {
@@ -24706,7 +24933,7 @@
             }
           ],
           "id": "04D3",
-          "name": "COMMAND_04D3",
+          "name": "CLEAR_CHAR_LEADERSHIP",
           "num_params": 1
         },
         {
@@ -24717,7 +24944,7 @@
             }
           ],
           "id": "04D4",
-          "name": "COMMAND_04D4",
+          "name": "MAKE_PLAYER_FIRE_PROOF",
           "num_params": 1
         },
         {
@@ -24744,7 +24971,7 @@
             }
           ],
           "id": "04D5",
-          "name": "COMMAND_04D5",
+          "name": "SET_DATA_FOR_CURRENT_SAVE_SLOT",
           "num_params": 5
         },
         {
@@ -24759,7 +24986,7 @@
             }
           ],
           "id": "04D6",
-          "name": "COMMAND_04D6",
+          "name": "SET_PLAYER_FORCE_FREE_AIMING",
           "num_params": 2
         },
         {
@@ -24778,7 +25005,7 @@
             }
           ],
           "id": "04D7",
-          "name": "COMMAND_04D7",
+          "name": "CAMERA_LOOK_AT_ENTITY_CHAR_OR_CAR_ENABLE_LOOK_AT",
           "num_params": 3
         },
         {
@@ -24789,7 +25016,7 @@
             }
           ],
           "id": "04D8",
-          "name": "COMMAND_04D8",
+          "name": "IS_OBJECT_STILL_ALIVE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -24803,7 +25030,7 @@
             }
           ],
           "id": "04D9",
-          "name": "COMMAND_04D9",
+          "name": "SET_NUMBER_OF_BALLOONS_BURST",
           "num_params": 1
         },
         {
@@ -24814,7 +25041,7 @@
             }
           ],
           "id": "04DA",
-          "name": "COMMAND_04DA",
+          "name": "SET_TOTAL_BALLOONS_TO",
           "num_params": 1
         },
         {
@@ -24844,7 +25071,7 @@
             }
           ],
           "id": "04DD",
-          "name": "COMMAND_04DD",
+          "name": "MAKE_VEHICLE_INVISIBLE",
           "num_params": 1
         },
         {
@@ -24855,7 +25082,7 @@
             }
           ],
           "id": "04DE",
-          "name": "COMMAND_04DE",
+          "name": "FREEZE_TIME",
           "num_params": 1
         },
         {
@@ -24866,7 +25093,7 @@
             }
           ],
           "id": "04DF",
-          "name": "COMMAND_04DF",
+          "name": "IS_CHAR_HOLDING_SNIPER",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -24874,12 +25101,12 @@
         },
         {
           "id": "04E0",
-          "name": "COMMAND_04E0",
+          "name": "CLEAR_PAGER",
           "num_params": 0
         },
         {
           "id": "04E1",
-          "name": "COMMAND_04E1",
+          "name": "DOES_GAME_WANT_TO_DRAW_HUD",
           "num_params": 0,
           "attrs": {
             "is_condition": true
@@ -24893,7 +25120,7 @@
             }
           ],
           "id": "04E2",
-          "name": "COMMAND_04E2",
+          "name": "SET_PLAYER_STATUS_COMMENTS",
           "num_params": 1
         },
         {
@@ -24944,7 +25171,7 @@
             }
           ],
           "id": "04E3",
-          "name": "COMMAND_04E3",
+          "name": "FIRE_ROCKET_PROJECTILE_FROM_CHAR",
           "num_params": 11
         },
         {
@@ -24974,7 +25201,7 @@
             }
           ],
           "id": "04E5",
-          "name": "COMMAND_04E5",
+          "name": "SET_NUMBER_OF_EMPIRE_BUSINESS_SITES_OWNED",
           "num_params": 2
         },
         {
@@ -25008,7 +25235,7 @@
             }
           ],
           "id": "04E7",
-          "name": "COMMAND_04E7",
+          "name": "IS_3D_COORD_IN_CURRENT_LEVEL",
           "num_params": 3,
           "attrs": {
             "is_condition": true
@@ -25022,7 +25249,7 @@
             }
           ],
           "id": "04E8",
-          "name": "COMMAND_04E8",
+          "name": "IS_VEHICLE_PERFORMING_WHEELIE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -25036,7 +25263,7 @@
             }
           ],
           "id": "04E9",
-          "name": "COMMAND_04E9",
+          "name": "IS_VEHICLE_PERFORMING_STOPPIE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -25044,7 +25271,7 @@
         },
         {
           "id": "04EA",
-          "name": "COMMAND_04EA",
+          "name": "REGISTER_SHOPLIFTER_APPRENDED",
           "num_params": 0
         },
         {
@@ -25055,7 +25282,7 @@
             }
           ],
           "id": "04EB",
-          "name": "COMMAND_04EB",
+          "name": "LOCK_RELEASE_MISSION_AUDIO_SLOT",
           "num_params": 1
         },
         {
@@ -25082,7 +25309,7 @@
             }
           ],
           "id": "04EC",
-          "name": "COMMAND_04EC",
+          "name": "EXTINGUISH_FIRE_AT_POINT_RADIUS_USE_WATER",
           "num_params": 5
         },
         {
@@ -25121,7 +25348,7 @@
             }
           ],
           "id": "04ED",
-          "name": "COMMAND_04ED",
+          "name": "ADD_FIGHT_RING_STATIC_SHADOW_AT_COORDS_RGB_INTENSITY_RADIUS",
           "num_params": 8
         },
         {
@@ -25132,7 +25359,7 @@
             }
           ],
           "id": "04EE",
-          "name": "COMMAND_04EE",
+          "name": "MAKE_CHAR_INVISIBLE",
           "num_params": 1
         },
         {
@@ -25143,7 +25370,7 @@
             }
           ],
           "id": "04EF",
-          "name": "COMMAND_04EF",
+          "name": "SET_TONIGHTS_EVENT",
           "num_params": 1
         },
         {
@@ -25158,7 +25385,7 @@
             }
           ],
           "id": "04F0",
-          "name": "COMMAND_04F0",
+          "name": "SET_CHAR_CAN_BE_DAMAGED_FLAG",
           "num_params": 2
         },
         {
@@ -25221,7 +25448,7 @@
             }
           ],
           "id": "04F3",
-          "name": "COMMAND_04F3",
+          "name": "LOCK_THE_COSTUME",
           "num_params": 1
         },
         {
@@ -25236,7 +25463,7 @@
             }
           ],
           "id": "04F4",
-          "name": "COMMAND_04F4",
+          "name": "REGISTER_DRIVING_RANGE_STAT_BEST_SCORE_FURTHEST_DRIVE",
           "num_params": 2
         },
         {
@@ -25247,7 +25474,7 @@
             }
           ],
           "id": "04F5",
-          "name": "COMMAND_04F5",
+          "name": "SET_RADAR_ZOOM",
           "num_params": 1
         },
         {
@@ -25258,7 +25485,7 @@
             }
           ],
           "id": "04F6",
-          "name": "COMMAND_04F6",
+          "name": "ENABLE_EMPIRE_STATS",
           "num_params": 1
         },
         {
@@ -25277,7 +25504,7 @@
             }
           ],
           "id": "04F7",
-          "name": "COMMAND_04F7",
+          "name": "DISPLAY_TEXT_WITHOUT_HIGHLIGHTING_GXT",
           "num_params": 3
         },
         {
@@ -25324,15 +25551,18 @@
           "num_params": 2
         },
         {
-          "input": [
+          "input": [],
+          "output": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "04FB",
-          "name": "COMMAND_04FB",
-          "num_params": 1
+          "name": "GET_STREAMED_TRACK_POSITION_SAMPLE_COUNT",
+          "num_params": 1,
+          "attrs": {}
         },
         {
           "input": [
@@ -25404,7 +25634,7 @@
             }
           ],
           "id": "0500",
-          "name": "COMMAND_0500",
+          "name": "SET_CHAR_CANT_BE_ATTACKED_BY_MEMBERS_OF_GANG",
           "num_params": 2
         },
         {
@@ -25419,7 +25649,7 @@
             }
           ],
           "id": "0501",
-          "name": "COMMAND_0501",
+          "name": "SET_CHAR_CAN_BE_ATTACKED_BY_MEMBERS_OF_GANG",
           "num_params": 2
         },
         {
@@ -25430,7 +25660,7 @@
             }
           ],
           "id": "0502",
-          "name": "COMMAND_0502",
+          "name": "CLEAR_CHAR_GANG_ATTACKED_FLAGS",
           "num_params": 1
         },
         {
@@ -25468,7 +25698,7 @@
             }
           ],
           "id": "0504",
-          "name": "COMMAND_0504",
+          "name": "NOP_CHAR_VCS_0504_COORDS",
           "num_params": 4
         },
         {
@@ -25491,7 +25721,7 @@
             }
           ],
           "id": "0505",
-          "name": "COMMAND_0505",
+          "name": "CHAR_ATTACK_ENTITY_USING_FLYBY",
           "num_params": 4
         },
         {
@@ -25521,7 +25751,7 @@
             }
           ],
           "id": "0507",
-          "name": "COMMAND_0507",
+          "name": "SET_MISSION_CHAR_TALK_SFX",
           "num_params": 2
         },
         {
@@ -25560,22 +25790,22 @@
         },
         {
           "id": "050A",
-          "name": "COMMAND_050A",
+          "name": "REGISTER_EMPIRE_ATTACK_SUCCESSFUL",
           "num_params": 0
         },
         {
           "id": "050B",
-          "name": "COMMAND_050B",
+          "name": "REGISTER_EMPIRE_ATTACK_UNSUCCESSFUL",
           "num_params": 0
         },
         {
           "id": "050C",
-          "name": "COMMAND_050C",
+          "name": "REGISTER_SITE_WAS_DEFENDED_SUCCESSFULLY",
           "num_params": 0
         },
         {
           "id": "050D",
-          "name": "COMMAND_050D",
+          "name": "REGISTER_SITE_WAS_NOT_DEFENDED_SUCCESSFULLY",
           "num_params": 0
         },
         {
@@ -25586,7 +25816,7 @@
             }
           ],
           "id": "050E",
-          "name": "COMMAND_050E",
+          "name": "REGISTER_MOST_DAMAGE_CAUSED_ON_CRASH_MISSION",
           "num_params": 1
         },
         {
@@ -25597,7 +25827,7 @@
             }
           ],
           "id": "050F",
-          "name": "COMMAND_050F",
+          "name": "REGISTER_FASTEST_TIME_ON_MASHING_UP_THE_MALL",
           "num_params": 1
         },
         {
@@ -25608,7 +25838,7 @@
             }
           ],
           "id": "0510",
-          "name": "COMMAND_0510",
+          "name": "REGISTER_FASTEST_TIME_ON_HARBOR_HOVER_RACE",
           "num_params": 1
         },
         {
@@ -25619,7 +25849,7 @@
             }
           ],
           "id": "0511",
-          "name": "COMMAND_0511",
+          "name": "REGISTER_FASTEST_TIME_ON_HAITI_HOVER_RACE",
           "num_params": 1
         },
         {
@@ -25630,7 +25860,7 @@
             }
           ],
           "id": "0512",
-          "name": "COMMAND_0512",
+          "name": "REGISTER_CRIMEWAVE_VALUE_OF_GOODS_SAVED",
           "num_params": 1
         },
         {
@@ -25641,7 +25871,7 @@
             }
           ],
           "id": "0513",
-          "name": "COMMAND_0513",
+          "name": "REGISTER_CRIMEWAVE_LEVEL",
           "num_params": 1
         },
         {
@@ -25652,7 +25882,7 @@
             }
           ],
           "id": "0514",
-          "name": "COMMAND_0514",
+          "name": "REGISTER_AIR_AMBULANCE_LEVEL",
           "num_params": 1
         },
         {
@@ -25663,7 +25893,7 @@
             }
           ],
           "id": "0515",
-          "name": "COMMAND_0515",
+          "name": "REGISTER_VICE_SIGHTS_LEVEL",
           "num_params": 1
         },
         {
@@ -25674,7 +25904,7 @@
             }
           ],
           "id": "0516",
-          "name": "COMMAND_0516",
+          "name": "REGISTER_VICE_SIGHTS_NUMBER_OF_SIGHTS_VIEWED",
           "num_params": 1
         },
         {
@@ -25685,7 +25915,7 @@
             }
           ],
           "id": "0517",
-          "name": "COMMAND_0517",
+          "name": "REGISTER_FIRE_COPTER_LEVEL",
           "num_params": 1
         },
         {
@@ -25696,7 +25926,7 @@
             }
           ],
           "id": "0518",
-          "name": "COMMAND_0518",
+          "name": "REGISTER_BEACH_PATROL_LEVEL",
           "num_params": 1
         },
         {
@@ -25707,7 +25937,7 @@
             }
           ],
           "id": "0519",
-          "name": "COMMAND_0519",
+          "name": "REGISTER_CRIMS_ON_WINGS_TIME",
           "num_params": 1
         },
         {
@@ -25718,7 +25948,7 @@
             }
           ],
           "id": "051A",
-          "name": "COMMAND_051A",
+          "name": "REGISTER_PCJPLAY_TOWN_TIME",
           "num_params": 1
         },
         {
@@ -25729,7 +25959,7 @@
             }
           ],
           "id": "051B",
-          "name": "COMMAND_051B",
+          "name": "REGISTER_PCJPLAY_POINT_TIME",
           "num_params": 1
         },
         {
@@ -25744,7 +25974,7 @@
             }
           ],
           "id": "051C",
-          "name": "COMMAND_051C",
+          "name": "REGISTER_WATERSPORTS_TIME_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -25759,7 +25989,7 @@
             }
           ],
           "id": "051D",
-          "name": "COMMAND_051D",
+          "name": "REGISTER_WATERSPORTS_BEST_LAP_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -25774,7 +26004,7 @@
             }
           ],
           "id": "051E",
-          "name": "COMMAND_051E",
+          "name": "REGISTER_DTRIAL_TIME_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -25789,7 +26019,7 @@
             }
           ],
           "id": "051F",
-          "name": "COMMAND_051F",
+          "name": "REGISTER_DTRIAL_BEST_LAP_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -25804,7 +26034,7 @@
             }
           ],
           "id": "0520",
-          "name": "COMMAND_0520",
+          "name": "REGISTER_TURISMO_TIME_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -25819,7 +26049,7 @@
             }
           ],
           "id": "0521",
-          "name": "COMMAND_0521",
+          "name": "REGISTER_TURISMO_BEST_LAP_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -25834,7 +26064,7 @@
             }
           ],
           "id": "0522",
-          "name": "COMMAND_0522",
+          "name": "REGISTER_TURISMO_BEST_POSITION_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -25853,19 +26083,22 @@
             }
           ],
           "id": "0523",
-          "name": "COMMAND_0523",
+          "name": "PLAY_CHAR_ANIM_SECONDARY",
           "num_params": 3
         },
         {
-          "input": [
+          "input": [],
+          "output": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0524",
-          "name": "COMMAND_0524",
-          "num_params": 1
+          "name": "GET_CAMERA_VEHICLE_ZOOM_BASE",
+          "num_params": 1,
+          "attrs": {}
         },
         {
           "input": [
@@ -25875,7 +26108,7 @@
             }
           ],
           "id": "0525",
-          "name": "COMMAND_0525",
+          "name": "SET_CAMERA_VEHICLE_ZOOM_BASE",
           "num_params": 1
         },
         {
@@ -25890,7 +26123,7 @@
             }
           ],
           "id": "0526",
-          "name": "COMMAND_0526",
+          "name": "SET_CHAR_ANIM_BLEND_DELTA_FOR_ALL_SCRIPTED_ANIMS",
           "num_params": 2
         },
         {
@@ -25901,7 +26134,7 @@
             }
           ],
           "id": "0527",
-          "name": "COMMAND_0527",
+          "name": "IS_CHAR_ON_FIRE",
           "num_params": 1,
           "attrs": {
             "is_condition": true
@@ -25923,7 +26156,7 @@
             }
           ],
           "id": "0528",
-          "name": "COMMAND_0528",
+          "name": "SET_CHAR_ANIM_BLEND_DELTA",
           "num_params": 3
         },
         {
@@ -25935,15 +26168,19 @@
             {
               "name": "_p2",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0529",
-          "name": "COMMAND_0529",
-          "num_params": 3
+          "name": "GET_CHAR_ANIM_CURRENT_TIME",
+          "num_params": 3,
+          "attrs": {}
         },
         {
           "input": [
@@ -25961,7 +26198,7 @@
             }
           ],
           "id": "052A",
-          "name": "COMMAND_052A",
+          "name": "SET_CHAR_ANIM_CURRENT_TIME",
           "num_params": 3
         },
         {
@@ -25972,7 +26209,7 @@
             }
           ],
           "id": "052B",
-          "name": "COMMAND_052B",
+          "name": "REGISTER_MVRACE_TIME",
           "num_params": 1
         },
         {
@@ -25983,7 +26220,7 @@
             }
           ],
           "id": "052C",
-          "name": "COMMAND_052C",
+          "name": "REGISTER_SKYWOLF_TIME",
           "num_params": 1
         },
         {
@@ -26026,7 +26263,7 @@
             }
           ],
           "id": "052D",
-          "name": "COMMAND_052D",
+          "name": "ADD_PED_STATIC_SHADOW_CORNERA_CORNERB_INTENSITY_RADIUS_UNUSED",
           "num_params": 9
         },
         {
@@ -26034,19 +26271,23 @@
             {
               "name": "_p1",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p2",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "052E",
-          "name": "COMMAND_052E",
-          "num_params": 2
+          "name": "GET_RADIO_CHANNEL_ALL_VALUES",
+          "num_params": 2,
+          "attrs": {}
         },
         {
           "id": "052F",
-          "name": "COMMAND_052F",
+          "name": "RETURN_PLAYER_WEAPONS",
           "num_params": 0
         },
         {
@@ -26057,7 +26298,7 @@
             }
           ],
           "id": "0530",
-          "name": "COMMAND_0530",
+          "name": "DISABLE_SPLASH_SCREEN_WHEN_MOVING_BETWEEN_LEVELS",
           "num_params": 1
         },
         {
@@ -26087,7 +26328,7 @@
             }
           ],
           "id": "0532",
-          "name": "COMMAND_0532",
+          "name": "PLAYER_INFINITE_OXYGEN_FLAG",
           "num_params": 2
         },
         {
@@ -26102,7 +26343,7 @@
             }
           ],
           "id": "0533",
-          "name": "COMMAND_0533",
+          "name": "REMOVE_CAR_DOOR",
           "num_params": 2
         },
         {
@@ -26113,7 +26354,7 @@
             }
           ],
           "id": "0534",
-          "name": "COMMAND_0534",
+          "name": "ALLOW_PLANES_TO_MOVE",
           "num_params": 1
         },
         {
@@ -26124,7 +26365,7 @@
             }
           ],
           "id": "0535",
-          "name": "COMMAND_0535",
+          "name": "REGISTER_DTRIAL_FURTHEST_HOOP",
           "num_params": 1
         },
         {
@@ -26135,7 +26376,7 @@
             }
           ],
           "id": "0536",
-          "name": "COMMAND_0536",
+          "name": "REGISTER_BTRIAL_FURTHEST_HOOP",
           "num_params": 1
         },
         {
@@ -26150,7 +26391,7 @@
             }
           ],
           "id": "0537",
-          "name": "COMMAND_0537",
+          "name": "REGISTER_BTRIAL_TIME_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -26165,7 +26406,7 @@
             }
           ],
           "id": "0538",
-          "name": "COMMAND_0538",
+          "name": "REGISTER_BTRIAL_BEST_LAP_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -26176,7 +26417,7 @@
             }
           ],
           "id": "0539",
-          "name": "COMMAND_0539",
+          "name": "REGISTER_QTTRIAL_FURTHEST_HOOP",
           "num_params": 1
         },
         {
@@ -26191,7 +26432,7 @@
             }
           ],
           "id": "053A",
-          "name": "COMMAND_053A",
+          "name": "REGISTER_QTTRIAL_TIME_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -26206,7 +26447,7 @@
             }
           ],
           "id": "053B",
-          "name": "COMMAND_053B",
+          "name": "REGISTER_QTTRIAL_BEST_LAP_COURSE_TIME",
           "num_params": 2
         },
         {
@@ -26217,7 +26458,7 @@
             }
           ],
           "id": "053C",
-          "name": "COMMAND_053C",
+          "name": "REGISTER_SHRANGE_TIME",
           "num_params": 1
         },
         {
@@ -26228,7 +26469,7 @@
             }
           ],
           "id": "053D",
-          "name": "COMMAND_053D",
+          "name": "REGISTER_SHRANGE_ACCURACY",
           "num_params": 1
         },
         {
@@ -26239,7 +26480,7 @@
             }
           ],
           "id": "053E",
-          "name": "COMMAND_053E",
+          "name": "REGISTER_SHRANGE_SCORE",
           "num_params": 1
         },
         {
@@ -26250,7 +26491,7 @@
             }
           ],
           "id": "053F",
-          "name": "COMMAND_053F",
+          "name": "SET_CHAR_SAY_PICKUP_CASH_PED_COMMENT",
           "num_params": 1
         },
         {
@@ -26265,7 +26506,7 @@
             }
           ],
           "id": "0540",
-          "name": "COMMAND_0540",
+          "name": "SET_STREAMED_TRACK_POSITION_SAMPLE_COUNT",
           "num_params": 2
         },
         {
@@ -26277,23 +26518,29 @@
             {
               "name": "_p2",
               "type": "int"
-            },
+            }
+          ],
+          "output": [
             {
               "name": "_p3",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p4",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             },
             {
               "name": "_p5",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "0541",
-          "name": "COMMAND_0541",
-          "num_params": 5
+          "name": "GET_CAR_PATH_NODE_POSITION",
+          "num_params": 5,
+          "attrs": {}
         },
         {
           "input": [
@@ -26333,7 +26580,7 @@
             }
           ],
           "id": "0544",
-          "name": "COMMAND_0544",
+          "name": "SET_BLOCK_SNIPER_BULLET_BY_BUILDINGS",
           "num_params": 1
         },
         {
@@ -26355,7 +26602,7 @@
             }
           ],
           "id": "0546",
-          "name": "COMMAND_0546",
+          "name": "REGISTER_EMPIRE_JOB_COMPLETED",
           "num_params": 1
         },
         {
@@ -26370,7 +26617,7 @@
             }
           ],
           "id": "0547",
-          "name": "COMMAND_0547",
+          "name": "SET_GANG_DROP_WEAPON_CHANCE",
           "num_params": 2
         },
         {
@@ -26400,7 +26647,7 @@
             }
           ],
           "id": "0549",
-          "name": "COMMAND_0549",
+          "name": "SET_RADAR_BLIP_BY_RANGE",
           "num_params": 1
         },
         {
@@ -26451,7 +26698,7 @@
             }
           ],
           "id": "054C",
-          "name": "COMMAND_054C",
+          "name": "SET_GAME_PROGRESS",
           "num_params": 2
         },
         {
@@ -26470,19 +26717,22 @@
           "num_params": 2
         },
         {
-          "input": [
+          "input": [],
+          "output": [
             {
               "name": "_p1",
-              "type": "int"
+              "type": "int",
+              "source": "var_any"
             }
           ],
           "id": "054E",
-          "name": "COMMAND_054E",
-          "num_params": 1
+          "name": "GET_NUMBER_OF_WEAPONS_TO_RETURN_TO_PLAYER",
+          "num_params": 1,
+          "attrs": {}
         },
         {
           "id": "054F",
-          "name": "COMMAND_054F",
+          "name": "SET_PHOTOGRAPH_HAS_NOT_BEEN_TAKEN",
           "num_params": 0
         },
         {
@@ -26493,7 +26743,7 @@
             }
           ],
           "id": "0550",
-          "name": "COMMAND_0550",
+          "name": "ADD_MONEY_SPENT_ON_EMPIRE_DEVELOPMENT",
           "num_params": 1
         },
         {
@@ -26504,7 +26754,7 @@
             }
           ],
           "id": "0551",
-          "name": "COMMAND_0551",
+          "name": "ADD_MONEY_SPENT_ON_EMPIRE_REPAIR",
           "num_params": 1
         },
         {
@@ -26515,7 +26765,7 @@
             }
           ],
           "id": "0552",
-          "name": "COMMAND_0552",
+          "name": "SET_LARGEST_EARNING_FROM_EMPIRE_BUILDING",
           "num_params": 1
         },
         {
@@ -26526,7 +26776,7 @@
             }
           ],
           "id": "0553",
-          "name": "COMMAND_0553",
+          "name": "ADD_MONEY_EARNT_FROM_EMPIRE_BUILDING",
           "num_params": 1
         },
         {
@@ -26549,7 +26799,7 @@
             }
           ],
           "id": "0554",
-          "name": "COMMAND_0554",
+          "name": "SET_AMOUNTS_EMPIRE_SITES_OWNED_VANCE_CHOLO_SHARKS_BIKERS",
           "num_params": 4
         },
         {
@@ -26618,7 +26868,7 @@
             }
           ],
           "id": "0556",
-          "name": "COMMAND_0556",
+          "name": "SET_NEARCLIP_Z_LIMIT",
           "num_params": 1
         },
         {
@@ -26678,7 +26928,7 @@
             }
           ],
           "id": "055B",
-          "name": "COMMAND_055B",
+          "name": "REGISTER_RUSH_DAMAGE_VALUE",
           "num_params": 1
         },
         {
@@ -26689,7 +26939,7 @@
             }
           ],
           "id": "055C",
-          "name": "COMMAND_055C",
+          "name": "REGISTER_AIRRACE2_TIME",
           "num_params": 1
         },
         {
@@ -26700,7 +26950,7 @@
             }
           ],
           "id": "055D",
-          "name": "COMMAND_055D",
+          "name": "REGISTER_DOCK_PCJPLAY_TIME",
           "num_params": 1
         },
         {
@@ -26711,7 +26961,7 @@
             }
           ],
           "id": "055E",
-          "name": "COMMAND_055E",
+          "name": "REGISTER_PARK_PCJPLAY_TIME",
           "num_params": 1
         },
         {
@@ -26722,7 +26972,7 @@
             }
           ],
           "id": "055F",
-          "name": "COMMAND_055F",
+          "name": "REGISTER_MVRACE2_TIME",
           "num_params": 1
         },
         {
@@ -26733,7 +26983,7 @@
             }
           ],
           "id": "0560",
-          "name": "COMMAND_0560",
+          "name": "REGISTER_GTRIAL_BEST_LAP",
           "num_params": 1
         },
         {
@@ -26744,7 +26994,7 @@
             }
           ],
           "id": "0561",
-          "name": "COMMAND_0561",
+          "name": "REGISTER_GTRIAL_FURTHEST_HOOP",
           "num_params": 1
         },
         {
@@ -26755,7 +27005,7 @@
             }
           ],
           "id": "0562",
-          "name": "COMMAND_0562",
+          "name": "REGISTER_GTRIAL_TIME",
           "num_params": 1
         },
         {
@@ -26781,7 +27031,7 @@
             }
           ],
           "id": "0564",
-          "name": "COMMAND_0564",
+          "name": "ALLOW_PAUSE_IN_WIDESCREEN",
           "num_params": 1
         }
       ]

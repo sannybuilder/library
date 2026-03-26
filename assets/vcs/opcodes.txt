@@ -548,7 +548,7 @@
 {0256:}   is_car_stuck {vehicle} [Car]
 {0257:} load_mission_audio {slotId} [MissionAudioSlot] {name} [string]
 {0258:}   has_mission_audio_loaded {slotId} [MissionAudioSlot]
-{0259:} play_mission_audio {slotId} [MissionAudioSlot]
+{0259:} play_mission_audio {slotId} [MissionAudioSlot] {enable} [bool]
 {025A:}   has_mission_audio_finished {slotId} [MissionAudioSlot]
 {025B:} [var nodeX: float], [var nodeY: float], [var nodeZ: float], [var angle: float] = get_closest_car_node_with_heading {x} [float] {y} [float] {z} [float]
 {025C:}   has_import_garage_slot_been_filled [Garage] {importSlot} [int]
@@ -614,7 +614,7 @@
 {0299:}   is_car_passenger_seat_free [Car] {seat} [SeatId]
 {029A:} [var handle: Char] = get_char_in_car_passenger_seat [Car] {seat} [SeatId]
 {029B:} set_char_is_chris_criminal [Char] {state} [bool]
-{029C:} start_credits
+{029C:} start_credits {_p0} [int]
 {029D:} stop_credits
 {029E:}   are_credits_finished
 {029F:} create_single_particle {type} [int] {x} [float] {y} [float] {z} [float] {strengthX} [float] {strengthY} [float] {strengthZ} [float] {scale} [float]
@@ -668,7 +668,7 @@
 {02D0:} shut_char_up [Char] {state} [bool]
 {02D1:} set_enable_rc_detonate {state} [bool]
 {02D2:} set_car_random_route_seed [Car] {routeSeed} [int]
-{02D3:}   is_any_pickup_at_coords {x} [float] {y} [float] {z} [float]
+{02D3:}   is_any_pickup_at_coords {x} [float] {y} [float] {z} [float] {radius} [float]
 {02D4:} remove_all_char_weapons [Char]
 {02D5:}   has_char_got_weapon [Char] {weaponType} [WeaponType]
 {02D6:} set_tank_detonate_cars [Tank] {state} [bool]
@@ -723,7 +723,7 @@
 {0307:}   is_object_in_area_2d [Object] {leftBottomX} [float] {leftBottomY} [float] {rightTopX} [float] {rightTopY} [float] {drawSphere} [bool]
 {0308:}   is_object_in_area_3d [Object] {leftBottomX} [float] {leftBottomY} [float] {leftBottomZ} [float] {rightTopX} [float] {rightTopY} [float] {rightTopZ} [float] {drawSphere} [bool]
 {0309:} set_char_crouch [Char] {state} [bool] {time} [int]
-{030A:} set_zone_civilian_car_info {zone} [zone_key] {dayOrNight} [DayOrNight] {normal} [int] {poor} [int] {rich} [int] {exec} [int] {worker} [int] {big} [int] {taxi} [int] {moped} [int] {motorbike} [int] {leisureBoat} [int] {workerBoat} [int]
+{030A:} set_zone_civilian_car_info {zone} [zone_key] {dayOrNight} [DayOrNight] {normal} [int] {poor} [int] {rich} [int] {exec} [int] {worker} [int] {big} [int] {taxi} [int] {moped} [int] {motorbike} [int] {leisureBoat} [int] {workerBoat} [int] {smallFunBoat} [any] {bigFunBoat} [any]
 {030B:} request_animation {animationFile} [string]
 {030C:}   has_animation_loaded {animationFile} [string]
 {030D:} remove_animation {animationFile} [string]
@@ -829,7 +829,7 @@
 {0371:}   is_japanese_version
 {0372:} [var result: float] = get_dot_product_2d {x1} [float] {y1} [float] {x2} [float] {y2} [float]
 {0373:} [var result: int] = get_dot_product_3d {x1} [float] {y1} [float] {z1} [float] {x2} [float] {y2} [float] {z2} [float]
-{0377:} [var state: int] = get_pad_state {pad} [PadId] {buttonId} [Button]
+{0377:} [var state: int] = get_pad_state {buttonId} [Button]
 {0378:} set_navigation_arrow {x} [float] {y} [float] {z} [float]
 {0379:} clear_navigation_arrow
 {037A:} call_not {in} [int] {out} [int] {localsOffset} [int] @label [arguments]

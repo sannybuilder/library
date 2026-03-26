@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "0.50",
-    "last_update": 1774211164390,
+    "last_update": 1774493063231,
+    "version": "0.51",
     "url": "https://library.sannybuilder.com/#/vcs"
   },
   "extensions": [
@@ -9270,18 +9270,15 @@
             },
             {
               "name": "civilian",
-              "type": "bool",
-              "source": "any"
+              "type": "bool"
             },
             {
               "name": "gang",
-              "type": "bool",
-              "source": "any"
+              "type": "bool"
             },
             {
               "name": "criminalOrProstitute",
-              "type": "bool",
-              "source": "any"
+              "type": "bool"
             }
           ],
           "output": [
@@ -12665,6 +12662,10 @@
             {
               "name": "slotId",
               "type": "MissionAudioSlot"
+            },
+            {
+              "name": "enable",
+              "type": "bool"
             }
           ],
           "attrs": {
@@ -12674,7 +12675,7 @@
           "id": "0259",
           "member": "PlayMissionAudio",
           "name": "PLAY_MISSION_AUDIO",
-          "num_params": 1,
+          "num_params": 2,
           "short_desc": "Plays the loaded sound (0257)"
         },
         {
@@ -13947,6 +13948,12 @@
           "short_desc": "Sets whether the character is a psychotic killer or not"
         },
         {
+          "input": [
+            {
+              "name": "_p0",
+              "type": "int"
+            }
+          ],
           "attrs": {
             "is_static": true
           },
@@ -13954,7 +13961,7 @@
           "id": "029C",
           "member": "Start",
           "name": "START_CREDITS",
-          "num_params": 0,
+          "num_params": 1,
           "short_desc": "Makes the credits scroll up the screen"
         },
         {
@@ -15143,12 +15150,6 @@
           "short_desc": "Sets the car on a specific route"
         },
         {
-          "attrs": {
-            "is_condition": true,
-            "is_static": true
-          },
-          "class": "World",
-          "id": "02D3",
           "input": [
             {
               "name": "x",
@@ -15161,11 +15162,21 @@
             {
               "name": "z",
               "type": "float"
+            },
+            {
+              "name": "radius",
+              "type": "float"
             }
           ],
+          "attrs": {
+            "is_condition": true,
+            "is_static": true
+          },
+          "class": "World",
+          "id": "02D3",
           "member": "IsAnyPickupAtCoords",
           "name": "IS_ANY_PICKUP_AT_COORDS",
-          "num_params": 3,
+          "num_params": 4,
           "short_desc": "Returns true if the pickup at the specified coordinates is available to be picked up"
         },
         {
@@ -16517,6 +16528,14 @@
             {
               "name": "workerBoat",
               "type": "int"
+            },
+            {
+              "name": "smallFunBoat",
+              "type": "any"
+            },
+            {
+              "name": "bigFunBoat",
+              "type": "any"
             }
           ],
           "attrs": {
@@ -16526,7 +16545,7 @@
           "id": "030A",
           "member": "SetCivilianCarInfo",
           "name": "SET_ZONE_CIVILIAN_CAR_INFO",
-          "num_params": 13,
+          "num_params": 15,
           "short_desc": "Sets the traffic density of cars and boats in the zone"
         },
         {
@@ -18858,10 +18877,6 @@
         {
           "input": [
             {
-              "name": "pad",
-              "type": "PadId"
-            },
-            {
               "name": "buttonId",
               "type": "Button"
             }
@@ -18875,7 +18890,7 @@
           ],
           "id": "0377",
           "name": "GET_PAD_STATE",
-          "num_params": 3,
+          "num_params": 2,
           "short_desc": "Stores the status of the specified key into a variable",
           "class": "Pad",
           "member": "GetState",
@@ -21413,8 +21428,7 @@
           ],
           "id": "0421",
           "name": "GET_RANDOM_OBJECT_IN_AREA_NO_SAVE",
-          "num_params": 5,
-          "attrs": {}
+          "num_params": 5
         },
         {
           "id": "0422",
@@ -21529,8 +21543,7 @@
           ],
           "id": "0425",
           "name": "GET_RANDOM_CHAR_OF_SPECIFIED_MODEL_IN_AREA_3D",
-          "num_params": 9,
-          "attrs": {}
+          "num_params": 9
         },
         {
           "input": [
@@ -21668,8 +21681,7 @@
           ],
           "id": "0428",
           "name": "GET_ZONE_PED_INFO_TIME_OF_DAY",
-          "num_params": 13,
-          "attrs": {}
+          "num_params": 13
         },
         {
           "input": [
@@ -21687,8 +21699,7 @@
           ],
           "id": "0429",
           "name": "GET_CHAR_CHAR_IS_TARGETTING",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -21721,8 +21732,7 @@
           ],
           "id": "042B",
           "name": "GET_ANIM_GROUP_FROM_CHAR",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -21823,8 +21833,7 @@
           ],
           "id": "0431",
           "name": "GET_OBJECT_HEADING_VECTOR_INVERSE_SQUARED_X",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -21842,8 +21851,7 @@
           ],
           "id": "0432",
           "name": "GET_OBJECT_HEADING_VECTOR_INVERSE_SQUARED_Y",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22221,8 +22229,7 @@
           ],
           "id": "0448",
           "name": "GET_DEAD_CHAR_COORDINATES",
-          "num_params": 4,
-          "attrs": {}
+          "num_params": 4
         },
         {
           "input": [
@@ -22240,8 +22247,7 @@
           ],
           "id": "0449",
           "name": "GET_NUMBER_OF_CHAR_COLOUR_SETS",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22777,8 +22783,7 @@
           ],
           "id": "0465",
           "name": "GET_EMPIRE_COORDS",
-          "num_params": 4,
-          "attrs": {}
+          "num_params": 4
         },
         {
           "input": [
@@ -22796,8 +22801,7 @@
           ],
           "id": "0466",
           "name": "GET_EMPIRE_OWNERSHIP",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22815,8 +22819,7 @@
           ],
           "id": "0467",
           "name": "GET_EMPIRE_TYPE",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22834,8 +22837,7 @@
           ],
           "id": "0468",
           "name": "GET_EMPIRE_SCALE",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22853,8 +22855,7 @@
           ],
           "id": "0469",
           "name": "GET_EMPIRE_CONDITION",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22872,8 +22873,7 @@
           ],
           "id": "046A",
           "name": "GET_EMPIRE_VISUAL_DAMAGE",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22891,8 +22891,7 @@
           ],
           "id": "046B",
           "name": "GET_EMPIRE_STATE",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22910,8 +22909,7 @@
           ],
           "id": "046C",
           "name": "GET_EMPIRE_HEADING",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -22982,7 +22980,6 @@
           "num_params": 5
         },
         {
-          "input": [],
           "output": [
             {
               "name": "_p1",
@@ -23002,11 +22999,9 @@
           ],
           "id": "0470",
           "name": "GET_ACTIVE_CAMERA_COORDINATES",
-          "num_params": 3,
-          "attrs": {}
+          "num_params": 3
         },
         {
-          "input": [],
           "output": [
             {
               "name": "_p1",
@@ -23026,8 +23021,7 @@
           ],
           "id": "0471",
           "name": "GET_ACTIVE_CAMERA_POINT_AT",
-          "num_params": 3,
-          "attrs": {}
+          "num_params": 3
         },
         {
           "input": [
@@ -23158,7 +23152,6 @@
           "num_params": 10
         },
         {
-          "input": [],
           "output": [
             {
               "name": "_p1",
@@ -23168,8 +23161,7 @@
           ],
           "id": "0477",
           "name": "GET_MISSION_SCRIPT_NAME",
-          "num_params": 1,
-          "attrs": {}
+          "num_params": 1
         },
         {
           "input": [
@@ -23299,8 +23291,7 @@
           ],
           "id": "047B",
           "name": "GET_EMPIRE_BUILDING_TYPED_POOL_HANDLE",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23334,8 +23325,7 @@
           ],
           "id": "047C",
           "name": "GET_RANDOM_OBJECT_OF_SPECIFIED_MODEL_IN_AREA_2D_MODEL",
-          "num_params": 6,
-          "attrs": {}
+          "num_params": 6
         },
         {
           "input": [
@@ -23357,8 +23347,7 @@
           ],
           "id": "047D",
           "name": "GET_COUNT_INTERIOR_ELEMENTS_BY_TYPE",
-          "num_params": 3,
-          "attrs": {}
+          "num_params": 3
         },
         {
           "input": [
@@ -23399,8 +23388,7 @@
           ],
           "id": "047E",
           "name": "GET_POSITION_HEADING_INTERIOR_ELEMENT_BY_TYPED_POOL_HANDLE",
-          "num_params": 7,
-          "attrs": {}
+          "num_params": 7
         },
         {
           "input": [
@@ -23430,8 +23418,7 @@
           ],
           "id": "047F",
           "name": "GET_COUNT_INTERIOR_ELEMENTS_BY_FILTER",
-          "num_params": 5,
-          "attrs": {}
+          "num_params": 5
         },
         {
           "input": [
@@ -23453,8 +23440,7 @@
             },
             {
               "name": "_p5",
-              "type": "int",
-              "source": "any"
+              "type": "int"
             }
           ],
           "output": [
@@ -23481,8 +23467,7 @@
           ],
           "id": "0480",
           "name": "GET_POSITION_HEADING_INTERIOR_ELEMENT",
-          "num_params": 9,
-          "attrs": {}
+          "num_params": 9
         },
         {
           "input": [
@@ -23530,8 +23515,7 @@
           ],
           "id": "0483",
           "name": "GET_BUILDING_TYPED_POOL_HANDLE",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23549,8 +23533,7 @@
           ],
           "id": "0484",
           "name": "GET_HASH_KEY_HASH",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23778,8 +23761,7 @@
           ],
           "id": "0491",
           "name": "GET_OBJECT_HEALTH",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23808,8 +23790,7 @@
           ],
           "id": "0493",
           "name": "GET_INTERIOR_RADIUS",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23837,8 +23818,7 @@
           ],
           "id": "0494",
           "name": "GET_INTERIOR_POSITION",
-          "num_params": 4,
-          "attrs": {}
+          "num_params": 4
         },
         {
           "input": [
@@ -23886,8 +23866,7 @@
           ],
           "id": "0497",
           "name": "GET_CAR_COLOUR_SET",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23905,8 +23884,7 @@
           ],
           "id": "0498",
           "name": "GET_CAR_SCRIPT_COLOUR_SET",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23924,8 +23902,7 @@
           ],
           "id": "0499",
           "name": "GET_NUMBER_OF_CAR_COLOUR_SETS",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -23943,11 +23920,9 @@
           ],
           "id": "049A",
           "name": "GET_NUMBER_OF_CAR_SCRIPT_COLOUR_SETS",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
-          "input": [],
           "output": [
             {
               "name": "_p1",
@@ -23957,8 +23932,7 @@
           ],
           "id": "049B",
           "name": "GET_NUMBER_OF_DAYS_PASSED",
-          "num_params": 1,
-          "attrs": {}
+          "num_params": 1
         },
         {
           "input": [
@@ -24067,8 +24041,7 @@
           ],
           "id": "04A1",
           "name": "GET_MISSION_AUDIO_DURATION",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24196,8 +24169,7 @@
           ],
           "id": "04A8",
           "name": "GET_HOOKED_ROPE_OBJECT_FROM_CAR",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24215,8 +24187,7 @@
           ],
           "id": "04A9",
           "name": "GET_HOOKED_ROPE_CAR_FROM_CAR",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24287,8 +24258,7 @@
           ],
           "id": "04AD",
           "name": "GET_HOOKED_ROPE_HOOK_OBJECT_FROM_CAR",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24336,8 +24306,7 @@
           ],
           "id": "04B0",
           "name": "GET_CHAR_COLOUR_SET",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24355,8 +24324,7 @@
           ],
           "id": "04B1",
           "name": "GET_CHAR_SCRIPT_COLOUR_SET",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24374,8 +24342,7 @@
           ],
           "id": "04B2",
           "name": "GET_NUMBER_OF_CHAR_COLOUR_SETS_2",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24393,8 +24360,7 @@
           ],
           "id": "04B3",
           "name": "GET_NUMBER_OF_CHAR_SCRIPT_COLOUR_SETS",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -24754,8 +24720,7 @@
           ],
           "id": "04C4",
           "name": "GET_CLOSEST_WATER_NODE",
-          "num_params": 6,
-          "attrs": {}
+          "num_params": 6
         },
         {
           "input": [
@@ -24813,8 +24778,7 @@
           ],
           "id": "04CA",
           "name": "GET_FERRIS_WHEEL_SEAT",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "input": [
@@ -25551,7 +25515,6 @@
           "num_params": 2
         },
         {
-          "input": [],
           "output": [
             {
               "name": "_p1",
@@ -25561,8 +25524,7 @@
           ],
           "id": "04FB",
           "name": "GET_STREAMED_TRACK_POSITION_SAMPLE_COUNT",
-          "num_params": 1,
-          "attrs": {}
+          "num_params": 1
         },
         {
           "input": [
@@ -26087,7 +26049,6 @@
           "num_params": 3
         },
         {
-          "input": [],
           "output": [
             {
               "name": "_p1",
@@ -26097,8 +26058,7 @@
           ],
           "id": "0524",
           "name": "GET_CAMERA_VEHICLE_ZOOM_BASE",
-          "num_params": 1,
-          "attrs": {}
+          "num_params": 1
         },
         {
           "input": [
@@ -26179,8 +26139,7 @@
           ],
           "id": "0529",
           "name": "GET_CHAR_ANIM_CURRENT_TIME",
-          "num_params": 3,
-          "attrs": {}
+          "num_params": 3
         },
         {
           "input": [
@@ -26282,8 +26241,7 @@
           ],
           "id": "052E",
           "name": "GET_RADIO_CHANNEL_ALL_VALUES",
-          "num_params": 2,
-          "attrs": {}
+          "num_params": 2
         },
         {
           "id": "052F",
@@ -26539,8 +26497,7 @@
           ],
           "id": "0541",
           "name": "GET_CAR_PATH_NODE_POSITION",
-          "num_params": 5,
-          "attrs": {}
+          "num_params": 5
         },
         {
           "input": [
@@ -26717,7 +26674,6 @@
           "num_params": 2
         },
         {
-          "input": [],
           "output": [
             {
               "name": "_p1",
@@ -26727,8 +26683,7 @@
           ],
           "id": "054E",
           "name": "GET_NUMBER_OF_WEAPONS_TO_RETURN_TO_PLAYER",
-          "num_params": 1,
-          "attrs": {}
+          "num_params": 1
         },
         {
           "id": "054F",

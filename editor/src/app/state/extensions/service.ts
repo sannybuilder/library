@@ -8,6 +8,7 @@ import {
   LoadExtensionsResponse,
   PackedSupportInfo,
 } from '../../models';
+import { isCodeViewContext } from '../../utils';
 import { GitHubService } from '../github/service';
 
 @Injectable({ providedIn: 'root' })
@@ -20,9 +21,7 @@ export class ExtensionsService {
     accessToken?: string
   ) {
     return this._github.loadFileGracefully<LoadExtensionsResponse>(
-      viewContext === ViewContext.Script
-        ? GameLibrary[game]
-        : GameNativeLibrary[game],
+      isCodeViewContext(viewContext) ? GameNativeLibrary[game] : GameLibrary[game],
       accessToken,
       game
     );

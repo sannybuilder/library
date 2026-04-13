@@ -73,6 +73,8 @@ import {
   doesScriptCommandHaveEmptyMember,
   doesNativeFunctionHaveNoName,
   formatNativeName,
+  isCodeViewContext,
+  isScriptViewContext,
 } from '../../../utils';
 
 type ErrorType =
@@ -125,6 +127,8 @@ export class CommandEditorComponent implements OnInit {
   Platform = Platform;
   Version = Version;
   ViewContext = ViewContext;
+  readonly isCodeViewContext = isCodeViewContext;
+  readonly isScriptViewContext = isScriptViewContext;
 
   @ViewChild(SelectorComponent) selector: SelectorComponent;
 
@@ -200,7 +204,7 @@ export class CommandEditorComponent implements OnInit {
   @Input() set viewContext(val: ViewContext) {
     this._viewContext = val;
 
-    if (val === ViewContext.Code) {
+    if (isCodeViewContext(val)) {
       this.features.opcode = false;
       this.features.operator = false;
       this.features.cc = true;
@@ -382,7 +386,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onCommandNameChange(command: Command, value: string) {
-    if (this.viewContext === ViewContext.Code) {
+    if (isCodeViewContext(this.viewContext)) {
       command.name = trim(formatNativeName(value));
     } else {
       command.name = trim(this.defaultCommandNameFormatter(value));
@@ -396,7 +400,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onClassChange(command: Command, value: string) {
-    if (this.viewContext === ViewContext.Script) {
+    if (isScriptViewContext(this.viewContext)) {
       command.class = capitalizeFirst(value);
     } else {
       command.class = value;
@@ -405,7 +409,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   onMemberChange(command: Command, value: string) {
-    if (this.viewContext === ViewContext.Script) {
+    if (isScriptViewContext(this.viewContext)) {
       command.member = capitalizeFirst(value);
     } else {
       command.member = value;
@@ -422,7 +426,7 @@ export class CommandEditorComponent implements OnInit {
     command.cc = cc;
 
     // prefill the fields for thiscall methods
-    if (this.viewContext === ViewContext.Code) {
+    if (isCodeViewContext(this.viewContext)) {
       if (command.cc === 'thiscall') {
         if (command.class) {
           if (!command.input || !command.input.length) {
@@ -501,7 +505,7 @@ export class CommandEditorComponent implements OnInit {
   }
 
   getDefaultOutputSource(param: Param) {
-    if (this.viewContext === ViewContext.Code) {
+    if (isCodeViewContext(this.viewContext)) {
       return SourceType.any;
     }
     return param.source ?? DEFAULT_OUTPUT_SOURCE;
@@ -517,7 +521,7 @@ export class CommandEditorComponent implements OnInit {
     const compressed = smash(command.attrs);
     if (compressed) {
       command.attrs = compressed;
-      if (this.viewContext === ViewContext.Code) {
+      if (isCodeViewContext(this.viewContext)) {
         command.attrs.is_constructor && this.onIsConstructorToggle(command);
         command.attrs.is_destructor && this.onIsDestructorToggle(command);
         command.attrs.is_condition && this.onIsConditionToggle(command);
@@ -740,7 +744,7 @@ export class CommandEditorComponent implements OnInit {
       this.command.attrs?.is_constructor &&
       this.command.output?.[index]?.source === SourceType.any
     ) {
-      if (this.viewContext === ViewContext.Script) {
+      if (isScriptViewContext(this.viewContext)) {
         return DEFAULT_OUTPUT_SOURCE;
       }
     }
@@ -769,7 +773,7 @@ export class CommandEditorComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      if (this.viewContext === ViewContext.Script) {
+      if (isScriptViewContext(this.viewContext)) {
         event.container.data[event.currentIndex].source = newSource;
       }
     }
@@ -1020,21 +1024,21 @@ export class CommandEditorComponent implements OnInit {
 
   private invalidOutputSourceError() {
     this.errors.invalidOutputSource =
-      this.viewContext === ViewContext.Script &&
+      isScriptViewContext(this.viewContext) &&
       doesOutputHaveInvalidSource(this.command);
   }
 
   private emptyCallingConventionError() {
     this.errors.emptyCallingConvention =
-      this.viewContext === ViewContext.Code &&
+      isCodeViewContext(this.viewContext) &&
       doesCommandHaveEmptyCallingConvention(this.command);
   }
 
   private emptyMemberError() {
     this.errors.emptyMember =
-      (this.viewContext === ViewContext.Code &&
+      (isCodeViewContext(this.viewContext) &&
         doesNativeFunctionHaveNoName(this.command)) ||
-      (this.viewContext === ViewContext.Script &&
+      (isScriptViewContext(this.viewContext) &&
         doesScriptCommandHaveEmptyMember(this.command));
   }
 

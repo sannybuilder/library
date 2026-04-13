@@ -1,5 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Extension, Game, ViewContext } from 'src/app/models';
+import {
+  getContextRouteSegment,
+  getExtensionScopeSegment,
+  isCodeViewContext,
+  isScriptViewContext,
+} from 'src/app/utils';
 
 @Component({
     selector: 'scl-extension-list',
@@ -9,6 +15,8 @@ import { Extension, Game, ViewContext } from 'src/app/models';
 })
 export class ExtensionListComponent {
   ViewContext = ViewContext;
+  readonly isCodeViewContext = isCodeViewContext;
+  readonly isScriptViewContext = isScriptViewContext;
 
   private _game: Game;
   games: Game[];
@@ -26,10 +34,7 @@ export class ExtensionListComponent {
   }
 
   get baseHref() {
-    if (this.viewContext === ViewContext.Code) {
-      return `/${this.game}/native/versions`
-    }
-    return `/${this.game}/script/extensions`;
+    return `/${this.game}/${getContextRouteSegment(this.viewContext)}/${getExtensionScopeSegment(this.viewContext)}`;
   }
 
   getGameLinks() {

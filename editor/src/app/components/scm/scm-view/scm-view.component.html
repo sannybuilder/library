@@ -1,0 +1,81 @@
+<div class="monospaced py-4 overflow-auto">
+  <ng-container *ngFor="let line of code.lines; let i = index">
+    <a
+      *ngIf="isRef(i)"
+      [routerLink]="[]"
+      [fragment]="'label-' + (code.base + line[0])"
+      [attr.id]="'label-' + (code.base + line[0])"
+      class="tok-label tok-ref identifier"
+    >
+      {{ line[0] | labelOverlay: code.base : overlay }}
+    </a>
+
+    <div *ngIf="isUnreachableInstruction(i)" class="text-muted pt-3 pl-5">
+      // unreachable
+    </div>
+
+    <div
+      class="line-row"
+      [ngClass]="{
+        active: isActiveLine(i, line),
+      }"
+    >
+      <div class="line-number" *ngIf="showLineNumbers">
+        <a
+          class="identifier"
+          [attr.id]="getLineNumberAnchorId(i)"
+          [routerLink]="[]"
+          [fragment]="getLineNumberAnchorId(i)"
+        >
+          {{ i + 1 }}
+        </a>
+      </div>
+      <div class="text-muted line-offset" *ngIf="showOffsets">
+        {{ line[0] !== "" ? code.base + line[0] : "" }}
+      </div>
+      <div
+        class="line-content"
+        [style]="{ 'padding-left': idents[i] * 2 + 'ch' }"
+      >
+        <ng-container *ngFor="let arg of line.slice(2)">
+          <ng-container
+            *ngIf="arg !== '' && findCommand(arg) as command; else token"
+            ><a
+              class="tok tok-command"
+              [ngClass]="{ 'text-break': command.name.length > 10 }"
+              [name]="command.name"
+              [innerHTML]="command | propExtract: 'name' | sanitize"
+              [attr.translate]="'no'"
+              [routerLink]="[
+                baseHref,
+                'extensions',
+                getDefaultExtension(),
+                command.id || command.name,
+              ]"
+            ></a
+          ></ng-container>
+
+          <ng-template #token>
+            <ng-container *ngIf="getRefLink(arg) as refLink; else plainToken">
+              <a
+                class="tok tok-ref identifier"
+                [routerLink]="refLink.routerLink"
+                [fragment]="refLink.fragment"
+              >
+                {{ arg | overlay: code.symbols : overlay }}
+              </a>
+            </ng-container>
+
+            <ng-template #plainToken>
+              <span class="tok" [ngClass]="getClass(arg)">{{
+                arg | overlay: code.symbols : overlay
+              }}</span>
+            </ng-template>
+          </ng-template>
+
+          {{ " " }}
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</div>

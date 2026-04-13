@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { doesGameRequireOpcode } from '../../../utils';
+import {
+  doesGameRequireOpcode,
+  isCodeViewContext,
+  isScriptViewContext,
+} from '../../../utils';
 import { Command, Extension, ViewContext, Game } from '../../../models';
 import { UiFacade } from 'src/app/state';
 
@@ -12,6 +16,8 @@ import { UiFacade } from 'src/app/state';
 })
 export class CommandSnippetComponent {
   ViewContext = ViewContext;
+  readonly isCodeViewContext = isCodeViewContext;
+  readonly isScriptViewContext = isScriptViewContext;
   @Input() snippet: string;
   @Input() game: Game;
   @Input() viewContext: ViewContext;

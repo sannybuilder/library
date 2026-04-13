@@ -1,0 +1,14 @@
+<div class="refs-container" *ngIf="refs">
+  <div class="text-muted" *ngIf="!refs.length">No refs</div>
+
+  <ul class="ref-list mb-0" *ngIf="refs.length">
+    <li
+      *ngFor="let item of refs"
+      [class.active]="'label-' + item.offset === activeFragment"
+    >
+      <a [routerLink]="[]" [fragment]="'label-' + item.offset">
+        {{ item.displayLabel }}
+      </a>
+    </li>
+  </ul>
+</div>

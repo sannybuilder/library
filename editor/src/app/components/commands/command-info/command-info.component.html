@@ -26,7 +26,7 @@
     </h5>
     <h5
       class="ml-3 text-break"
-      *ngIf="viewContext === ViewContext.Code"
+      *ngIf="isCodeViewContext(viewContext)"
       [attr.translate]="'no'"
       [innerHTML]="command | nativeName | sanitize"
     ></h5>
@@ -47,8 +47,8 @@
         [syntaxKind]="defaultSyntaxKind"
         (switchSyntaxKind)="onSwitchSyntaxKind($event)"
         [withToggle]="
-          (viewContext === ViewContext.Script && doesGameRequireOpcode(game)) ||
-          viewContext === ViewContext.Code
+          (isScriptViewContext(viewContext) && doesGameRequireOpcode(game)) ||
+          isCodeViewContext(viewContext)
         "
         [withCopyButton]="true"
         [simpleTypes]="true"
@@ -197,7 +197,7 @@
           <li *ngFor="let relatedCommand of relatedCommands">
             <a
               [routerLink]="[
-                '../..',
+                baseHref,
                 extension,
                 relatedCommand.id || relatedCommand.name,
               ]"

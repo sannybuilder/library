@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Game, GenerateJsonModel } from '../../../models';
+import { Game, JsonModel } from '../../../models';
 
 @Component({
     selector: 'scl-json-generator',
@@ -13,10 +13,12 @@ export class JsonGeneratorComponent {
 
   private _extensionNames: string[];
 
-  @Output() changed = new EventEmitter<GenerateJsonModel>();
+  @Output() changed = new EventEmitter<JsonModel>();
 
   @Input() set game(val: Game) {
     this.fileName = val + '.json';
+
+    this.emit();
   }
 
   @Input() set extensionNames(val: string[]) {

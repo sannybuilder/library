@@ -1,0 +1,421 @@
+<ng-container *ngIf="viewMode$ | async as viewMode">
+  <ng-container *ngIf="game$ | async as game">
+    <ng-container *ngIf="viewContext$ | async as viewContext">
+      <div class="container-fluid mt-3">
+        <div
+          class="row"
+          *ngIf="{ collapsed: isSidebarCollapsed$ | async } as sidebar"
+        >
+          <div
+            class="col-12 col-xl-2 left-rail"
+            [ngClass]="{ collapsed: sidebar.collapsed }"
+            *ngIf="screenSize >= 1200"
+          >
+            <!-- <div class="card mb-3">
+              <div class="flex-column">
+                <button
+                  class="btn btn-block text-left"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseDownload"
+                  aria-expanded="false"
+                  aria-controls="collapseDownload"
+                >
+                  {{ "ui.layout.downloads" | translate }}
+                </button>
+                <div id="collapseDownload" class="collapse card-body">
+                  <scl-download-panel [game]="game"></scl-download-panel>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="card mb-3">
+              <div class="flex-column">
+                <button
+                  class="btn btn-block text-left"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseScmTree"
+                  aria-expanded="false"
+                  aria-controls="collapseScmTree"
+                >
+                  {{ "ui.scm.files" | translate }}
+                </button>
+                <div id="collapseScmTree" class="collapse card-body">
+                  <scl-scm-tree
+                    [activeFile]="activeFile$ | async"
+                    [game]="game"
+                    [tree]="tree$ | async"
+                  ></scl-scm-tree>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-3">
+              <div class="flex-column">
+                <button
+                  class="btn btn-block text-left"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseScmXrefs"
+                  aria-expanded="false"
+                  aria-controls="collapseScmXrefs"
+                >
+                  {{ "ui.scm.xrefs" | translate }}
+                  <ng-container *ngIf="xrefs$ | async as xrefs">
+                    @if (xrefs.length > 0) {
+                      ({{ xrefs.length }})
+                    }
+                  </ng-container>
+                </button>
+                <div id="collapseScmXrefs" class="collapse card-body">
+                  <scl-scm-xrefs
+                    [game]="game"
+                    [xrefs]="xrefs$ | async"
+                  ></scl-scm-xrefs>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-3">
+              <div class="flex-column">
+                <button
+                  class="btn btn-block text-left"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseScmRefs"
+                  aria-expanded="false"
+                  aria-controls="collapseScmRefs"
+                >
+                  {{ "ui.scm.refs" | translate }}
+                </button>
+                <div id="collapseScmRefs" class="collapse card-body">
+                  <scl-scm-refs
+                    [refs]="refs$ | async"
+                    [activeFragment]="activeFragment"
+                  ></scl-scm-refs>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-3">
+              <div class="flex-column">
+                <button
+                  class="btn btn-block text-left"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseDisplayOptions"
+                  aria-expanded="false"
+                  aria-controls="collapseDisplayOptions"
+                >
+                  {{ "ui.scm.displayOptions" | translate }}
+                </button>
+                <div id="collapseDisplayOptions" class="collapse card-body">
+                  <label class="form-check-label btn">
+                    <input type="checkbox" [(ngModel)]="showLineNumbers" />
+                    <span class="checkbox"></span>
+                    {{ "ui.scm.showLineNumbers" | translate }}
+                  </label>
+                  <label class="form-check-label btn">
+                    <input type="checkbox" [(ngModel)]="showOffsets" />
+                    <span class="checkbox"></span>
+                    {{ "ui.scm.showOffsets" | translate }}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="btn btn-sm collapse-button d-none d-xl-block"
+              (click)="toggleSidebar()"
+            >
+              <div class="d-flex align-items-center">
+                <scl-icon-button
+                  *ngIf="sidebar.collapsed"
+                  icon="uncollapse"
+                ></scl-icon-button>
+
+                <scl-icon-button
+                  *ngIf="!sidebar.collapsed"
+                  icon="collapse"
+                  [label]="'ui.layout.collapseSidebar' | translate"
+                ></scl-icon-button>
+              </div>
+            </button>
+          </div>
+
+          <main
+            class="col-12"
+            [ngClass]="{
+              'col-xl-5':
+                shouldDisplayRightRail(viewMode) && !sidebar.collapsed,
+              'col-xl-8':
+                !shouldDisplayRightRail(viewMode) && !sidebar.collapsed,
+              'col-xl-6': shouldDisplayRightRail(viewMode) && sidebar.collapsed,
+              'col-xl-9':
+                !shouldDisplayRightRail(viewMode) && sidebar.collapsed,
+            }"
+          >
+            <div class="d-flex flex-row align-items-center">
+              <scl-breadcrumbs
+                class="mr-auto"
+                [game]="game"
+                [screenSize]="screenSize"
+                [viewContext]="viewContext"
+              ></scl-breadcrumbs>
+
+              <div class="d-flex flex-row">
+                <!-- <button
+                  *ngIf="canEdit$ | async"
+                  class="btn btn-outline-secondary dropdown-toggle mb-3"
+                  data-toggle="dropdown"
+                  data-offset="0,0"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  [title]="'ui.layout.new' | translate"
+                >
+                  <svg
+                    style="margin-top: -3px"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-plus"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                    />
+                  </svg>
+                  <span class="d-none d-sm-inline">{{
+                    "ui.layout.new" | translate
+                  }}</span>
+                </button> -->
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a
+                    class="dropdown-item"
+                    *ngIf="isScriptViewContext(viewContext)"
+                    [routerLink]="['/', game, 'scm', 'enums', 'new']"
+                    >{{ "ui.layout.newEnum" | translate }}</a
+                  >
+                  <a
+                    class="dropdown-item"
+                    *ngIf="isScriptViewContext(viewContext)"
+                    [routerLink]="[
+                      '/',
+                      game,
+                      'scm',
+                      'extensions',
+                      extensionToCreateCommands$ | async,
+                      'new',
+                    ]"
+                    >{{ "ui.layout.newCommand" | translate }}</a
+                  >
+                  <a
+                    class="dropdown-item"
+                    *ngIf="isCodeViewContext(viewContext)"
+                    [routerLink]="[
+                      '/',
+                      game,
+                      'native',
+                      'versions',
+                      extensionToCreateCommands$ | async,
+                      'new',
+                    ]"
+                    >{{ "ui.layout.newFunction" | translate }}</a
+                  >
+                </div>
+
+                <button
+                  class="btn btn-outline-secondary mb-3 ml-2"
+                  *ngIf="screenSize < 1200"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseScmTreeMobile"
+                  aria-expanded="false"
+                  aria-controls="collapseScmTreeMobile"
+                  [title]="'ui.scm.files' | translate"
+                >
+                  <span class="d-none d-sm-inline pl-2">{{
+                    "ui.scm.files" | translate
+                  }}</span>
+                </button>
+
+                <button
+                  class="btn btn-outline-secondary mb-3 ml-2"
+                  *ngIf="screenSize < 1200"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseScmXrefsMobile"
+                  aria-expanded="false"
+                  aria-controls="collapseScmXrefsMobile"
+                  [title]="'ui.scm.xrefs' | translate"
+                >
+                  <span class="d-none d-sm-inline pl-2">{{"ui.scm.xrefs" | translate}}</span>
+                </button>
+
+                <button
+                  class="btn btn-outline-secondary mb-3 ml-2"
+                  *ngIf="screenSize < 1200"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseScmRefsMobile"
+                  aria-expanded="false"
+                  aria-controls="collapseScmRefsMobile"
+                  [title]="'ui.scm.refs' | translate"
+                >
+                  <span class="d-none d-sm-inline pl-2">{{
+                    "ui.scm.refs" | translate
+                  }}</span>
+                </button>
+
+                <button
+                  class="btn btn-outline-secondary mb-3 ml-2"
+                  *ngIf="screenSize < 1200"
+                  (click)="displayDownloads()"
+                  [title]="'ui.layout.downloads' | translate"
+                >
+                  <svg
+                    style="margin-top: -4px"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-download"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"
+                    />
+                    <path
+                      d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"
+                    />
+                  </svg>
+                  <span class="d-none d-sm-inline pl-2">{{
+                    "ui.layout.downloads" | translate
+                  }}</span>
+                </button>
+              </div>
+            </div>
+
+            <ng-container *ngIf="screenSize < 1200">
+              <div id="collapseScmTreeMobile" class="collapse mb-3">
+                <div class="card card-body">
+                  <scl-scm-tree
+                    [activeFile]="activeFile$ | async"
+                    [game]="game"
+                    [tree]="(tree$ | async) ?? []"
+                  ></scl-scm-tree>
+                </div>
+              </div>
+
+              <div id="collapseScmRefsMobile" class="collapse mb-3">
+                <div class="card card-body">
+                  <scl-scm-refs
+                    [refs]="refs$ | async"
+                    [activeFragment]="activeFragment"
+                    [activeRef]="activeRef$ | async"
+                  ></scl-scm-refs>
+                </div>
+              </div>
+
+              <div id="collapseScmXrefsMobile" class="collapse mb-3">
+                <div class="card card-body">
+                  <scl-scm-xrefs
+                    [game]="game"
+                    [xrefs]="xrefs$ | async"
+                  ></scl-scm-xrefs>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="code$ | async as code; else loading">
+              <ng-container *ngIf="overlay$ | async as overlay">
+                <ng-container *ngIf="map$ | async as map">
+                  <scl-scm-view
+                    [code]="code"
+                    [commands]="getCommands() | async"
+                    [overlay]="overlay"
+                    [scmMap]="map"
+                    [game]="game"
+                    [viewContext]="viewContext"
+                    [activeFragment]="activeFragment"
+                    [showLineNumbers]="showLineNumbers"
+                    [showOffsets]="showOffsets"
+                  ></scl-scm-view>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </main>
+
+          <div
+            class="col-xl-5 right-rail no-scroll"
+            [ngClass]="{
+              extended: sidebar.collapsed,
+            }"
+            *ngIf="
+              shouldDisplayRightRail(viewMode) &&
+              screenSize >= 1200 &&
+              !isFullScreenMode
+            "
+          >
+            <ng-container *ngTemplateOutlet="rightRail"></ng-container>
+            <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+          </div>
+        </div>
+      </div>
+
+      <scl-modal
+        *ngIf="
+          shouldDisplayRightRail(viewMode) &&
+          (screenSize < 1200 || isFullScreenMode)
+        "
+        [size]="screenSize >= 1200 ? 'modal-xl' : 'modal-lg'"
+        (close)="
+          (screenSize < 1200 || isFullScreenMode) && onCancel();
+          isFullScreenMode = false
+        "
+      >
+        <div class="modal-body">
+          <ng-container *ngTemplateOutlet="rightRail"></ng-container>
+        </div>
+        <ng-container class="modal-footer">
+          <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+        </ng-container>
+      </scl-modal>
+
+      <!-- <scl-modal
+        *ngIf="viewMode === ViewMode.ViewDownloads"
+        (close)="onCancel()"
+      >
+        <div class="modal-body">
+          <scl-download-panel [game]="game"></scl-download-panel>
+        </div>
+        <ng-container class="modal-footer">
+          <ng-container *ngTemplateOutlet="modalFooter"></ng-container>
+        </ng-container>
+      </scl-modal> -->
+
+      <ng-template #modalFooter>
+        <div class="modal-footer">
+          <scl-context-actions
+            [screenSize]="screenSize"
+            [isFullScreenMode]="isFullScreenMode"
+            (fullScreenModeChange)="isFullScreenMode = $event"
+          ></scl-context-actions>
+        </div>
+      </ng-template>
+
+      <ng-template #rightRail>
+        <scl-context-view></scl-context-view>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <div class="d-flex">
+    <div class="spinner-border spinner-color" role="status"></div>
+    <span class="ml-3">{{ "ui.commandList.loading" | translate }}</span>
+  </div>
+</ng-template>

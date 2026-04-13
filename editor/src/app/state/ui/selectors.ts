@@ -383,3 +383,13 @@ export const isHotkeyInfoDismissed = createSelector(
   state,
   (state: UiState) => state.isHotkeyInfoDismissed
 );
+
+export const editorHasError = createSelector(
+  state,
+  (state: UiState) => state.editorHasError
+);
+
+export const jsonModel = createSelector(
+  state,
+  (state: UiState) => state.jsonModel
+);

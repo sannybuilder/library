@@ -6,7 +6,7 @@
   <div class="d-flex mb-2">
     <button
       class="btn btn-outline-secondary mr-1"
-      *ngIf="doesGameRequireOpcode(game) && viewContext === ViewContext.Script"
+      *ngIf="doesGameRequireOpcode(game) && isScriptViewContext(viewContext)"
       [title]="'ui.shared.toggleOpcode' | translate"
       (click)="onToggleOpcodePresentation()"
       [ngClass]="{ active: displayOpcodePresentation$ | async }"
@@ -16,7 +16,7 @@
 
     <button
       class="btn btn-outline-secondary mr-1"
-      *ngIf="viewContext === ViewContext.Code"
+      *ngIf="isCodeViewContext(viewContext)"
       [title]="'ui.shared.toggleFunction' | translate"
       (click)="onToggleFunctionDefinitions()"
       [ngClass]="{ active: displayFunctionDeclaration$ | async }"
@@ -50,7 +50,7 @@
               extensions: gameExtensions,
               showOpcodes: displayOpcodePresentation$ | async,
               showFuncDeclarations:
-                viewContext === ViewContext.Code &&
+                isCodeViewContext(viewContext) &&
                 (showControls === false ||
                   (displayFunctionDeclaration$ | async)),
               extension: extension

@@ -12,6 +12,9 @@ import {
   getDefaultSyntaxKind,
   getQueryParamsForCommand,
   isSupported,
+  getContextRouteSegment,
+  isCodeViewContext,
+  isScriptViewContext,
 } from '../../../utils';
 import {
   Attribute,
@@ -37,6 +40,8 @@ import { stringifySource } from '../../../pipes/params';
 })
 export class CommandInfoComponent {
   ViewContext = ViewContext;
+  readonly isCodeViewContext = isCodeViewContext;
+  readonly isScriptViewContext = isScriptViewContext;
   private _command: Command;
   private _attrs: Attribute[];
   private _primitives: string[] = [];
@@ -125,10 +130,7 @@ export class CommandInfoComponent {
   }
 
   get baseHref() {
-    if (this.viewContext === ViewContext.Code) {
-      return `/${this.game}/native`;
-    }
-    return `/${this.game}/script`;
+    return `/${this.game}/${getContextRouteSegment(this.viewContext)}`;
   }
 
   getDefaultExtension() {

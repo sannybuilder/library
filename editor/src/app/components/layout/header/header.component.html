@@ -67,6 +67,13 @@
                     >{{ "ui.header.map" | translate }}</a
                   >
                 </ng-container>
+                <ng-container *ngIf="doesGameHaveScm(v)">
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'scm']"
+                    >{{ "ui.header.scm" | translate }}</a
+                  >
+                </ng-container>
               </ng-container>
             </div>
           </li>
@@ -91,13 +98,13 @@
               aria-hidden="true"
               [title]="
                 'ui.header.userAvatar'
-                  | translate : { userName: userName$ | async }
+                  | translate: { userName: userName$ | async }
               "
             />
             <span class="pl-2 d-none d-lg-inline-block align-middle"
               >{{
                 "ui.header.greeting"
-                  | translate : { userName: userName$ | async }
+                  | translate: { userName: userName$ | async }
               }}
             </span>
           </a>
@@ -203,7 +210,7 @@
           <div
             class="card search-help d-none"
             [ngClass]="{
-              'd-none': (displaySearchHelp$ | async) !== true
+              'd-none': (displaySearchHelp$ | async) !== true,
             }"
           >
             <div class="card-body">
@@ -357,7 +364,7 @@
               class="pl-3 mb-1"
               *ngIf="(isAuthorized$ | async) && (userName$ | async) as userName"
             >
-              {{ "ui.header.greeting" | translate : { userName: userName } }}
+              {{ "ui.header.greeting" | translate: { userName: userName } }}
             </p>
 
             <a
@@ -424,6 +431,13 @@
                     class="dropdown-item marker"
                     [routerLink]="['/', v, 'map']"
                     >{{ "ui.header.map" | translate }}</a
+                  >
+                </ng-container>
+                <ng-container *ngIf="doesGameHaveScm(v)">
+                  <a
+                    class="dropdown-item marker"
+                    [routerLink]="['/', v, 'scm']"
+                    >{{ "ui.header.scm" | translate }}</a
                   >
                 </ng-container>
               </ng-container>

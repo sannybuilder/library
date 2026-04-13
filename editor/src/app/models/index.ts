@@ -317,6 +317,7 @@ export enum ViewMode {
 export enum ViewContext {
   Script = 'Script',
   Code = 'Code',
+  Scm = 'Scm',
 }
 
 export type Modifier = 'except' | 'only';
@@ -373,7 +374,7 @@ export interface LoadExtensionsResponse {
   classes: ClassMeta[];
 }
 
-export interface GenerateJsonModel {
+export interface JsonModel {
   selectedExtensions: string[];
   fileName: string;
 }

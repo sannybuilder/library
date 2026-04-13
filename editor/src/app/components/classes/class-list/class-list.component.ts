@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { ClassMeta, Game, ViewContext } from '../../../models';
-import { getDefaultExtension } from '../../../utils';
+import {
+  getContextRouteSegment,
+  getDefaultExtension,
+  isCodeViewContext,
+  isScriptViewContext,
+} from '../../../utils';
 
 @Component({
   selector: 'scl-class-list',
@@ -10,6 +15,8 @@ import { getDefaultExtension } from '../../../utils';
 })
 export class ClassListComponent {
   ViewContext = ViewContext;
+  readonly isCodeViewContext = isCodeViewContext;
+  readonly isScriptViewContext = isScriptViewContext;
   private _game: Game;
   games: Game[];
 
@@ -33,10 +40,7 @@ export class ClassListComponent {
   }
 
   getBaseHref(game: Game) {
-    if (this.viewContext === ViewContext.Code) {
-      return `/${game}/native`;
-    }
-    return `/${game}/script`;
+    return `/${game}/${getContextRouteSegment(this.viewContext)}`;
   }
 
   getDefaultExtension() {

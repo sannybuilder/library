@@ -1,0 +1,105 @@
+@import "variables";
+.line-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+}
+
+.line-row.active {
+  background: #2a3138;
+}
+
+.line-content {
+  white-space: nowrap;
+}
+
+.line-offset {
+  width: 64px;
+  user-select: none;
+}
+
+.line-content.active {
+  background: rgba(255, 236, 153, 0.18);
+}
+
+.line-content.is-label {
+  font-weight: 600;
+}
+
+.tok {
+  position: relative;
+  color: #c585bf;
+  // margin-right: 6px;
+}
+
+.tok-var {
+  color: #9fdcfc;
+}
+
+.tok-num {
+  color: #a9ceb5;
+}
+
+.tok-label {
+  display: inline-block;
+  margin: 16px 0 4px 48px; // align with second grid column
+}
+
+.tok-ref {
+  color: #acdcdb;
+  font-weight: 500;
+}
+
+.tok-str {
+  color: #cd917a;
+}
+
+.tok-comment {
+  color: #6a9958;
+  font-style: italic;
+}
+
+.tok-label:focus,
+.tok:focus {
+  outline: 2px solid #4d90fe;
+  outline-offset: 2px;
+}
+
+.tok-punct.left-bind {
+  margin-left: -1ch;
+}
+.tok-punct.both-bind {
+  margin-left: -1ch;
+  margin-right: -1ch;
+  & + .tok-punct.left-bind {
+    margin-left: 0;
+  }
+  & + .tok-punct.right-bind {
+    margin-right: 0;
+  }
+}
+.tok-punct.right-bind {
+  margin-right: -1ch;
+}
+
+.line-number {
+  width: 48px;
+  color: $secondary;
+  user-select: none;
+  text-align: right;
+  padding-right: 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.line-number:hover {
+  text-decoration: underline;
+}
+
+.line-anchor {
+  display: block;
+  position: relative;
+  top: -64px;
+  height: 0;
+  visibility: hidden;
+}

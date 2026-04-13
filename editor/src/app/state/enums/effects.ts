@@ -34,6 +34,7 @@ import { AuthFacade } from '../auth/facade';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { isEqual } from 'lodash';
+import { isScriptViewContext } from '../../utils';
 
 @Injectable({ providedIn: 'root' })
 export class EnumsEffects {
@@ -62,7 +63,7 @@ export class EnumsEffects {
     this._actions$.pipe(
       ofType(loadEnums),
       withLatestFrom(this._game.viewContext$, this._auth.authToken$),
-      filter(([_, viewContext]) => viewContext === ViewContext.Script),
+      filter(([_, viewContext]) => isScriptViewContext(viewContext)),
       distinctUntilChanged(
         ([a, ea], [b, eb]) =>
           GameEnums[a.game] === GameEnums[b.game] && ea === eb //ea always == eb as we filter actions by viewContext
@@ -154,7 +155,7 @@ export class EnumsEffects {
     this._actions$.pipe(
       ofType(loadEnumsInfo),
       withLatestFrom(this._game.viewContext$, this._auth.authToken$),
-      filter(([_, viewContext]) => viewContext === ViewContext.Script),
+      filter(([_, viewContext]) => isScriptViewContext(viewContext)),
       switchMap(() =>
         this._service.loadEnumsInfo().pipe(
           map((data) => loadEnumsInfoSuccess({ data })),

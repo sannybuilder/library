@@ -9,8 +9,11 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import {
   getDefaultExtension,
+  getContextRouteSegment,
+  getExtensionScopeSegment,
   getDefaultSyntaxKind,
   getQueryParamsForCommand,
+  isCodeViewContext,
   isSupported,
 } from '../../../utils';
 import {
@@ -31,6 +34,7 @@ import { ExtensionsFacade, SnippetsFacade, UiFacade } from '../../../state';
 })
 export class CommandListComponent {
   ViewContext = ViewContext;
+  readonly isCodeViewContext = isCodeViewContext;
 
   @Input() gameExtensions: Extension[];
   @Input() game: Game;
@@ -81,10 +85,7 @@ export class CommandListComponent {
   }
 
   get baseHref() {
-    if (this.viewContext === ViewContext.Code) {
-      return `/${this.game}/native/versions`;
-    }
-    return `/${this.game}/script/extensions`;
+    return `/${this.game}/${getContextRouteSegment(this.viewContext)}/${getExtensionScopeSegment(this.viewContext)}`;
   }
 
   getDefaultExtension() {

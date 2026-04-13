@@ -7,7 +7,7 @@ import {
   Command,
   EnumRaw,
   Game,
-  GenerateJsonModel,
+  JsonModel,
   Modifier,
   SyntaxKind,
   ViewMode,
@@ -41,6 +41,8 @@ import {
   displayDownloads,
   dismissHotkeysInfo,
   verifyCommand,
+  setEditorHasError,
+  updateJsonModel,
 } from './actions';
 import * as selector from './selectors';
 import { combineLatest } from 'rxjs';
@@ -59,6 +61,7 @@ export class UiFacade {
   displaySearchHelp$ = this.store$.select(selector.displaySearchHelp);
   isSearchHelpDismissed$ = this.store$.select(selector.isSearchHelpDismissed);
   isSidebarCollapsed$ = this.store$.select(selector.isSidebarCollapsed);
+  editorHasError$ = this.store$.select(selector.editorHasError);
 
   displayLastUpdated$ = this.store$.select(selector.displayLastUpdated);
   displayInlineMethodDescription$ = this.store$.select(
@@ -87,6 +90,9 @@ export class UiFacade {
   classToDisplay$ = this.store$.select(selector.classToDisplay);
   classToDisplayCommands$ = this.store$.select(selector.classToDisplayCommands);
   isSnippetOnly$ = this.store$.select(selector.isSnippetOnly);
+
+  jsonModel$ = this.store$.select(selector.jsonModel);
+
   selectedAttributesOnly$ = this.store$.select(selector.selectedAttributesOnly);
   selectedAttributesExcept$ = this.store$.select(
     selector.selectedAttributesExcept
@@ -284,8 +290,12 @@ export class UiFacade {
     this.store$.dispatch(displayJsonGenerator());
   }
 
-  generateNewJson(model: GenerateJsonModel) {
-    this.store$.dispatch(generateNewJson({ model }));
+  generateNewJson() {
+    this.store$.dispatch(generateNewJson());
+  }
+
+  updateJsonModel(model: JsonModel) {
+    this.store$.dispatch(updateJsonModel({ model }));
   }
 
   displayExtensionList() {
@@ -314,5 +324,9 @@ export class UiFacade {
 
   verifyCommand() {
     this.store$.dispatch(verifyCommand());
+  }
+
+  setEditorHasError(hasError: boolean) {
+    this.store$.dispatch(setEditorHasError({ hasError }));
   }
 }

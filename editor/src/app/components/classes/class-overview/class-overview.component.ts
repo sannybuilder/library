@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import {
   ConstructorHandler,
+  getContextRouteSegment,
   getDefaultExtension,
+  getExtensionScopeSegment,
   getQueryParamsForCommand,
   isSupported,
 } from '../../../utils';
@@ -121,10 +123,7 @@ export class ClassOverviewComponent {
   }
 
   get baseHref() {
-    if (this.viewContext === ViewContext.Code) {
-      return `/${this.game}/native/versions`
-    }
-    return `/${this.game}/script/extensions`;
+    return `/${this.game}/${getContextRouteSegment(this.viewContext)}/${getExtensionScopeSegment(this.viewContext)}`;
   }
 
   getDefaultExtension() {

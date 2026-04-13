@@ -13,6 +13,11 @@ import {
   Game,
   SyntaxKind,
 } from '../../../models';
+import {
+  getContextRouteSegment,
+  isCodeViewContext,
+  isScriptViewContext,
+} from '../../../utils';
 import { Router } from '@angular/router';
 import { lowerFirst, upperFirst } from 'lodash';
 
@@ -24,10 +29,12 @@ import { lowerFirst, upperFirst } from 'lodash';
     standalone: false
 })
 export class CommandDeclarationComponent {
-  ViewContext = ViewContext;
   @Input() command: Command;
   @Input() classDesc?: string;
   @Input() game: Game;
+  readonly isCodeViewContext = isCodeViewContext;
+  readonly isScriptViewContext = isScriptViewContext;
+  readonly getContextRouteSegment = getContextRouteSegment;
   @Input() viewContext: ViewContext;
   @Input() withToggle: boolean;
   @Input() simpleTypes: boolean;

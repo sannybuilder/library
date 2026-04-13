@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import {
   ViewContext,
   Game,
-  GenerateJsonModel,
+  JsonModel,
   Platform,
   Version,
 } from '../../models';
@@ -20,6 +20,6 @@ export const onListEnter = createAction(
     platforms?: Platform[];
     versions?: Version[];
     viewContext?: ViewContext;
-    generateJsonModel?: GenerateJsonModel;
+    jsonModel?: JsonModel;
   }>()
 );

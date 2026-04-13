@@ -13,6 +13,7 @@ import {
 import {
   doesGameHaveMap,
   doesGameHaveNativeDocs,
+  doesGameHaveScm,
   getBaseGame,
   getBaseGames,
   getGameVariations,
@@ -146,5 +147,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   doesGameHaveMap(game: Game) {
     return doesGameHaveMap(game);
+  }
+  
+  doesGameHaveScm(game: Game) {
+    return doesGameHaveScm(game);
   }
 }

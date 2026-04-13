@@ -2,7 +2,7 @@
   *ngIf="isSupported(command) && command.short_desc"
   class="mb-3"
   (click)="onDescriptionClick($event)"
-  [innerHTML]="command | linkify: game : gameExtensions | sanitize"
+  [innerHTML]="command | linkify: game : gameExtensions : viewContext | sanitize"
 ></div>
 
 <div *ngIf="command.attrs?.is_unsupported" class="mb-3">
@@ -21,7 +21,7 @@
         withToggle
       "
     >
-      <li class="nav-item" *ngIf="viewContext === ViewContext.Code">
+      <li class="nav-item" *ngIf="isCodeViewContext(viewContext)">
         <a
           class="nav-link p-0 small"
           [ngClass]="{ active: syntaxKind === 'sb_function' }"
@@ -30,7 +30,7 @@
           >{{ "ui.commandOverview.sbFunctionSyntax" | translate }}</a
         >
       </li>
-      <li class="nav-item" *ngIf="viewContext === ViewContext.Script">
+      <li class="nav-item" *ngIf="isScriptViewContext(viewContext)">
         <a
           class="nav-link p-0 small"
           [ngClass]="{ active: syntaxKind === 'sb_command' }"
@@ -42,7 +42,7 @@
       <li
         class="nav-item ml-3"
         *ngIf="
-          command.class && command.member && viewContext === ViewContext.Script
+          command.class && command.member && isScriptViewContext(viewContext)
         "
       >
         <a
@@ -67,7 +67,7 @@
     <div #decl>
       <ng-container
         [ngTemplateOutlet]="
-          viewContext === ViewContext.Code ? Function : ScriptCommand
+          isCodeViewContext(viewContext) ? Function : ScriptCommand
         "
       >
       </ng-container>
@@ -170,7 +170,7 @@
       <a
         class="identifier"
         [attr.title]="classDesc"
-        [routerLink]="['/', game, 'script', 'classes', command.class]"
+        [routerLink]="['/', game, getContextRouteSegment(viewContext), 'classes', command.class]"
         [innerHTML]="command | propExtract: 'class' | sanitize"
       ></a
       >.<span
@@ -198,7 +198,7 @@
         <a
           class="identifier"
           [attr.title]="classDesc"
-          [routerLink]="['/', game, 'script', 'classes', command.class]"
+          [routerLink]="['/', game, getContextRouteSegment(viewContext), 'classes', command.class]"
           [innerHTML]="
             (command.attrs?.is_static || command.attrs?.is_constructor
               ? (command | propExtract: 'class')

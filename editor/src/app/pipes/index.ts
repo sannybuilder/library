@@ -19,6 +19,9 @@ export { MarkdownPipe } from './markdown.pipe';
 export * from './expressify.pipe';
 export * from './function-params.pipe';
 export * from './highlight.pipe';
-export * from './native-params.pipe'
+export * from './native-params.pipe';
 export * from './native-name.pipe';
 export * from './function-generic.pipe';
+export * from './overlay.pipe';
+export * from './label-overlay.pipe';
+export * from './scm-offset.pipe';

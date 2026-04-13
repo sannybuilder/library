@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Game, ViewContext } from '../models';
+import { getContextRouteSegment } from '../utils';
 
 @Pipe({
     name: 'linkifyClasses',
@@ -20,9 +21,7 @@ export class LinkifyClassesPipe implements PipeTransform {
       // don't match if the class is inside an html tag
       text = text.replace(
         new RegExp(`(\\b${className}\\b)(?!([^<]+)?>)`, 'i'),
-        `<a href="#/${game}/${
-          viewContext === ViewContext.Code ? 'native' : 'script'
-        }/classes/${className}">$&</a>`
+        `<a href="#/${game}/${getContextRouteSegment(viewContext)}/classes/${className}">$&</a>`
       );
     });
 

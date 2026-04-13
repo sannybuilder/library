@@ -47,6 +47,7 @@ import {
   getSameCommands,
   doesCommandHaveAnyAttributeInvalid,
   replaceType,
+  isCodeViewContext,
   isOtherGame,
 } from '../../utils';
 import { AuthFacade } from '../auth/facade';
@@ -211,7 +212,7 @@ export class ExtensionsEffects {
               this._changes.registerExtensionsChange({
                 version,
                 fileName:
-                  viewContext === ViewContext.Code
+                  isCodeViewContext(viewContext)
                     ? GameNativeLibrary[game]
                     : GameLibrary[game],
                 content: extensions,
@@ -220,7 +221,7 @@ export class ExtensionsEffects {
                 game,
               });
               this._changes.registerTextFileChange(
-                viewContext === ViewContext.Code
+                isCodeViewContext(viewContext)
                   ? GameNativeVersion[game]
                   : GameVersion[game],
                 version

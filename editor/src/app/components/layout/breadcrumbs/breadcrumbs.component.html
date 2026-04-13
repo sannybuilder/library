@@ -1,0 +1,59 @@
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" *ngIf="screenSize > 767">
+      <a routerLink="/">{{ "ui.header.home" | translate }}</a>
+    </li>
+    <li
+      class="breadcrumb-item text-truncate"
+      [title]="game | gameTitle"
+      aria-current="page"
+      [attr.translate]="'no'"
+    >
+      <scl-icon [game]="game" [title]="game | gameTitle" size="16"></scl-icon>
+      <span class="d-none d-md-inline pl-2">{{ game | gameTitle }}</span>
+    </li>
+
+    <li
+      class="breadcrumb-item position-relative"
+      aria-current="page"
+      [attr.translate]="'no'"
+      *ngIf="doesGameHaveNativeDocs(game) || doesGameHaveScm(game)"
+    >
+      <span
+        type="button"
+        class="dropdown-toggle"
+        data-toggle="dropdown"
+        data-offset="0,0"
+        data-display="static"
+        tabindex="0"
+      >
+        {{
+          (isCodeViewContext(viewContext)
+            ? "ui.header.nativeCode"
+            : isScmViewContext(viewContext)
+              ? "ui.header.scm"
+              : "ui.header.scriptCommands"
+          ) | translate
+        }}
+      </span>
+
+      <div class="dropdown-menu">
+        <a [routerLink]="['/', game, 'script']" class="dropdown-item">{{
+          "ui.header.scriptCommands" | translate
+        }}</a>
+        <a
+          [routerLink]="['/', game, 'native']"
+          class="dropdown-item"
+          *ngIf="doesGameHaveNativeDocs(game)"
+          >{{ "ui.header.nativeCode" | translate }}</a
+        >
+        <a
+          [routerLink]="['/', game, 'scm']"
+          class="dropdown-item"
+          *ngIf="doesGameHaveScm(game)"
+          >{{ "ui.header.scm" | translate }}</a
+        >
+      </div>
+    </li>
+  </ol>
+</nav>

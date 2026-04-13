@@ -53,7 +53,9 @@ import {
   HighlightPipe,
   NativeParamsPipe,
   NativeNamePipe,
-  FunctionGenericPipe
+  FunctionGenericPipe,
+  OverlayPipe,
+  LabelOverlayPipe,
 } from './pipes';
 
 // extensions state
@@ -90,6 +92,10 @@ import { enumsReducer } from './state/enums/reducer';
 // articles state
 import { ArticlesEffects } from './state/articles/effects';
 import { articlesReducer } from './state/articles/reducer';
+
+// scm state
+import { ScmEffects } from './state/scm/effects';
+import { scmReducer } from './state/scm/reducer';
 
 // tree state
 import { treeReducer } from './state/tree/reducer';
@@ -128,6 +134,9 @@ import {
   FilterPanelComponent,
   JsonGeneratorComponent,
   QuizComponent,
+  BreadcrumbsComponent,
+  ContextViewComponent,
+  ContextActionsComponent,
 } from './components/layout';
 
 import {
@@ -141,6 +150,14 @@ import {
   ClassOverviewComponent,
   ClassListComponent,
 } from './components/classes';
+
+import {
+  ScmPageComponent,
+  ScmRefsComponent,
+  ScmTreeComponent,
+  ScmViewComponent,
+  ScmXrefsComponent,
+} from './components/scm';
 
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
@@ -159,7 +176,7 @@ class CustomTranslateLoader extends TranslateHttpLoader {
   getTranslation(lang: string) {
     return super.getTranslation(lang).pipe(
       timeout(3000),
-      catchError(() => of({}))
+      catchError(() => of({})),
     );
   }
 }
@@ -170,7 +187,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export function loadTranslations(
   translate: TranslateService,
-  cookies: CookieService
+  cookies: CookieService,
 ) {
   return () => {
     const lang = cookies.get('sblang');
@@ -180,7 +197,7 @@ export function loadTranslations(
 }
 
 export function localStorageSyncReducer(
-  reducer: ActionReducer<any>
+  reducer: ActionReducer<any>,
 ): ActionReducer<any> {
   return localStorageSync({
     keys: [
@@ -228,6 +245,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     HighlightPipe,
     NativeParamsPipe,
     NativeNamePipe,
+    OverlayPipe,
+    LabelOverlayPipe,
+
     CommandEditorComponent,
     HeaderComponent,
     CommandInfoComponent,
@@ -262,6 +282,14 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     RoadSwitchComponent,
     CopyOnClickDirective,
     UnverifiedComponent,
+    BreadcrumbsComponent,
+    ScmViewComponent,
+    ScmPageComponent,
+    ScmTreeComponent,
+    ScmRefsComponent,
+    ScmXrefsComponent,
+    ContextViewComponent,
+    ContextActionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -303,6 +331,26 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
               component: MapPageComponent,
             },
             {
+              path: 'vcs/scm',
+              canActivate: [
+                (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
+                  inject(RouteGuard).canActivate(route, state),
+              ],
+              title: `${GameTitle['vcs']} :: SCM`,
+              children: [
+                {
+                  path: '',
+                  pathMatch: 'full',
+                  redirectTo: 'files',
+                },
+                {
+                  path: '**',
+                  component: ScmPageComponent,
+                },
+              ],
+              runGuardsAndResolvers: 'always',
+            },
+            {
               path: '**',
               canActivate: [
                 (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
@@ -314,7 +362,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
           ],
         },
       ],
-      { useHash: false, onSameUrlNavigation: 'reload' }
+      { useHash: false, onSameUrlNavigation: 'reload' },
     ),
     StoreModule.forRoot(
       {
@@ -328,8 +376,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
         tree: treeReducer,
         version: versionReducer,
         articles: articlesReducer,
+        scm: scmReducer,
       },
-      { metaReducers }
+      { metaReducers },
     ),
     EffectsModule.forRoot([
       AuthEffects,
@@ -341,6 +390,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       TreeEffects,
       VersionEffects,
       ArticlesEffects,
+      ScmEffects,
     ]),
     DragDropModule,
     ClipboardModule,
@@ -363,7 +413,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     provideAppInitializer(() => {
       const initializerFn = loadTranslations(
         inject(TranslateService),
-        inject(CookieService)
+        inject(CookieService),
       );
       return initializerFn();
     }),

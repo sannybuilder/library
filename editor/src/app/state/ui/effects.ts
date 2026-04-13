@@ -21,6 +21,7 @@ import {
   stopEditOrDisplay,
   toggleAttribute,
   toggleSnippetOnlySearch,
+  updateJsonModel,
   updateSearchTerm,
 } from './actions';
 import {
@@ -54,6 +55,7 @@ import {
   capitalizeFirst,
   isOpcode,
   isPlatformMatchingExact,
+  isScriptViewContext,
   isSupported,
   isVersionMatchingExact,
 } from '../../utils';
@@ -67,7 +69,9 @@ import { GameFacade } from '../game/facade';
 import { EnumsFacade } from '../enums/facade';
 import { loadEnumsSuccess } from '../enums/actions';
 import { ArticlesFacade } from '../articles/facade';
+import { ScmFacade } from '../scm/facade';
 import { AnalyticsService } from '../../analytics';
+import { loadMainFile, loadScmFile } from '../scm/actions';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -86,11 +90,16 @@ export class UiEffects {
             searchTerm,
             platforms,
             versions,
-            generateJsonModel,
+            viewContext,
+            jsonModel,
           },
           canEdit,
           game,
         ]) => {
+          if (viewContext === ViewContext.Scm && action === 'scm-file') {
+            return [id ? loadScmFile({ name: id }) : loadMainFile()];
+          }
+
           if (searchTerm) {
             this._ui.updateSearch(searchTerm, true);
           }
@@ -98,8 +107,8 @@ export class UiEffects {
             return [displayDecisionTree()];
           }
           if (action === 'generate-json') {
-            if (generateJsonModel) {
-              return [generateNewJson({ model: generateJsonModel })];
+            if (jsonModel) {
+              return [updateJsonModel({ model: jsonModel }), generateNewJson()];
             }
             return [displayJsonGenerator()];
           }
@@ -136,7 +145,7 @@ export class UiEffects {
                   viewMode:
                     action === 'edit' ? ViewMode.EditEnum : ViewMode.ViewEnum,
                 });
-              })
+              }),
             );
           }
 
@@ -152,7 +161,7 @@ export class UiEffects {
                 } else {
                   return stopEditOrDisplay();
                 }
-              })
+              }),
             );
           }
 
@@ -176,7 +185,7 @@ export class UiEffects {
                       ((opcode && command.id === opcode) ||
                         (commandName && command.name === commandName)) &&
                       isPlatformMatchingExact(command, neededPlatforms) &&
-                      isVersionMatchingExact(command, neededVersions)
+                      isVersionMatchingExact(command, neededVersions),
                   );
 
                 const isNew = !commandToEdit;
@@ -203,7 +212,7 @@ export class UiEffects {
                       ? ViewMode.EditCommand
                       : ViewMode.ViewCommand,
                 });
-              })
+              }),
             );
           }
 
@@ -219,38 +228,38 @@ export class UiEffects {
                   game,
                   extensionNames.filter((name) => name !== extension),
                   false,
-                  extensionNames
+                  extensionNames,
                 );
                 this._ui.selectExtensions(
                   game,
                   [extension],
                   true,
-                  extensionNames
+                  extensionNames,
                 );
               } else {
                 this._ui.selectExtensions(
                   game,
                   extensionNames,
                   true,
-                  extensionNames
+                  extensionNames,
                 );
               }
             }),
-            map(() => stopEditOrDisplay())
+            map(() => stopEditOrDisplay()),
           );
-        }
-      )
-    )
+        },
+      ),
+    ),
   );
 
   displayOrEditSnippet$ = createEffect(() =>
     this._actions$.pipe(
       ofType(displayOrEditCommandInfo),
       switchMap(({ command, extension }) =>
-        this._snippets.getSnippet(extension, command.id || command.name)
+        this._snippets.getSnippet(extension, command.id || command.name),
       ),
-      map((snippet) => displayOrEditSnippet({ snippet }))
-    )
+      map((snippet) => displayOrEditSnippet({ snippet })),
+    ),
   );
 
   displayOrEditArticle$ = createEffect(
@@ -260,7 +269,7 @@ export class UiEffects {
         filter(
           ({ viewMode }) =>
             viewMode === ViewMode.ViewCommand ||
-            viewMode === ViewMode.EditCommand
+            viewMode === ViewMode.EditCommand,
         ),
         withLatestFrom(this._game.game$),
         tap(([{ command }, game]) => {
@@ -271,9 +280,9 @@ export class UiEffects {
             name: command.name,
             game: game,
           });
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   preloadEnums$ = createEffect(
@@ -281,7 +290,7 @@ export class UiEffects {
       this._actions$.pipe(
         ofType(displayOrEditEnum),
         withLatestFrom(this._game.viewContext$),
-        filter(([_, viewContext]) => viewContext === ViewContext.Script),
+        filter(([_, viewContext]) => isScriptViewContext(viewContext)),
         first(([{ viewMode }]) => viewMode === ViewMode.EditEnum),
         tap(() => {
           Object.values(Game).forEach((game) => {
@@ -290,9 +299,9 @@ export class UiEffects {
           Object.values(Game).forEach((game) => {
             this._enums.loadEnums(game);
           });
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   // we need to preload extensions and enums for cross-edits to work
@@ -301,15 +310,15 @@ export class UiEffects {
       this._actions$.pipe(
         ofType(displayOrEditCommandInfo),
         withLatestFrom(this._game.viewContext$),
-        filter(([_, viewContext]) => viewContext === ViewContext.Script),
+        filter(([_, viewContext]) => isScriptViewContext(viewContext)),
         first(([{ viewMode }]) => viewMode === ViewMode.EditCommand),
         tap(() => {
           Object.values(Game).forEach((game) => {
             this._extensions.loadExtensions(game);
           });
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   resetPagination$ = createEffect(() =>
@@ -320,11 +329,11 @@ export class UiEffects {
           selectExtensions,
           selectClass,
           updateSearchTerm,
-          toggleSnippetOnlySearch
-        )
+          toggleSnippetOnlySearch,
+        ),
       ),
-      this._game.game$ // needed as the current page may not exist in the chosen game resulting in the empty list
-    ).pipe(mapTo(changePage({ index: 1 })))
+      this._game.game$, // needed as the current page may not exist in the chosen game resulting in the empty list
+    ).pipe(mapTo(changePage({ index: 1 }))),
   );
 
   commandPage$ = createEffect(() =>
@@ -340,10 +349,10 @@ export class UiEffects {
       withLatestFrom(this._ui.currentPage$),
       filter(
         ([index, currentPage]) =>
-          index !== undefined && index >= 0 && currentPage !== index
+          index !== undefined && index >= 0 && currentPage !== index,
       ),
-      map(([index]) => changePage({ index: Math.ceil((index! + 1) / 100) }))
-    )
+      map(([index]) => changePage({ index: Math.ceil((index! + 1) / 100) })),
+    ),
   );
 
   updateSearchTerm$ = createEffect(() =>
@@ -357,17 +366,17 @@ export class UiEffects {
           take(1),
           switchMap(() => this._ui.rows$),
           take(1),
-          filter((rows) => rows?.length === 1)
-        )
+          filter((rows) => rows?.length === 1),
+        ),
       ),
       map((rows) =>
         displayOrEditCommandInfo({
           command: rows![0].command,
           extension: rows![0].extension!,
           viewMode: ViewMode.ViewCommand,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
   scrollTop$ = createEffect(
@@ -376,9 +385,9 @@ export class UiEffects {
         ofType(scrollTop),
         tap(() => {
           window.scroll(0, 0);
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   hasChanges$ = createEffect(
@@ -386,11 +395,11 @@ export class UiEffects {
       this._changes.hasChanges$.pipe(
         tap((hasChanges) => {
           this._d.body.classList[hasChanges ? 'add' : 'remove'](
-            'has-unsubmitted-changes'
+            'has-unsubmitted-changes',
           );
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   /**
@@ -406,7 +415,7 @@ export class UiEffects {
           mergeMap((game) =>
             this._extensions
               .getGameExtensions(game)
-              .pipe(map((extensions) => ({ extensions, game })))
+              .pipe(map((extensions) => ({ extensions, game }))),
           ),
           startWith({ extensions: [] as Extension[] }),
           pairwise<{ extensions: Extension[]; game?: Game }>(),
@@ -432,10 +441,10 @@ export class UiEffects {
                 extensionNames: c,
               }),
             ].filter(({ extensions }) => extensions.length > 0);
-          })
-        )
-      )
-    )
+          }),
+        ),
+      ),
+    ),
   );
 
   resetFilters$ = createEffect(() =>
@@ -448,25 +457,26 @@ export class UiEffects {
           extensions,
           state: true,
           extensionNames: extensions,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
   generateNewJson$ = createEffect(
     () =>
       this._actions$.pipe(
         ofType(generateNewJson),
-        switchMap(({ model }) => {
+        switchMap(() => {
           return combineLatest([
             this._game.game$,
             this._extensions.extensions$,
             this._extensions.version$,
             this._extensions.lastUpdate$,
             this._extensions.classesMeta$,
+            this._ui.jsonModel$,
           ]).pipe(
             take(1),
-            tap(([game, extensions, version, last_update, classes]) => {
+            tap(([game, extensions, version, last_update, classes, model]) => {
               const { selectedExtensions } = model;
 
               const content = {
@@ -476,7 +486,7 @@ export class UiEffects {
                   url: 'https://library.sannybuilder.com/#/' + game,
                 },
                 extensions: extensions.filter((e: any) =>
-                  selectedExtensions.includes(e.name)
+                  selectedExtensions.includes(e.name),
                 ),
                 classes,
               };
@@ -485,18 +495,18 @@ export class UiEffects {
               element.setAttribute(
                 'href',
                 'data:text/plain;charset=utf-8,' +
-                  encodeURIComponent(JSON.stringify(content, null, 2))
+                  encodeURIComponent(JSON.stringify(content, null, 2)),
               );
               element.setAttribute('download', model.fileName);
               element.style.display = 'none';
               document.body.appendChild(element);
               element.click();
               document.body.removeChild(element);
-            })
+            }),
           );
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   loadEnumsSuccess$ = createEffect(() =>
@@ -505,7 +515,7 @@ export class UiEffects {
       withLatestFrom(
         this._ui.enumToDisplayOrEdit$,
         this._ui.viewMode$,
-        this._game.game$
+        this._game.game$,
       ),
       filter(
         ([{ enums, game }, enumToEdit, viewMode, currentGame]) =>
@@ -513,7 +523,7 @@ export class UiEffects {
           !!enumToEdit.name &&
           !!enums &&
           !!enums[enumToEdit.name] &&
-          game === currentGame
+          game === currentGame,
       ),
       map(([{ enums }, enumToEdit, viewMode]) => {
         let { isNew, name } = enumToEdit!;
@@ -525,8 +535,8 @@ export class UiEffects {
           },
           viewMode,
         });
-      })
-    )
+      }),
+    ),
   );
 
   constructor(
@@ -537,8 +547,9 @@ export class UiEffects {
     private _changes: ChangesFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
+    private _scm: ScmFacade,
     private _articles: ArticlesFacade,
     private _analytics: AnalyticsService,
-    @Inject(DOCUMENT) private _d: Document
+    @Inject(DOCUMENT) private _d: Document,
   ) {}
 }

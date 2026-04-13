@@ -1,0 +1,32 @@
+<div class="xrefs-container">
+  <ng-container *ngIf="xrefs as list">
+  <div class="text-muted" *ngIf="!list.length">
+    {{ 'ui.scm.xrefEmpty' | translate }}
+  </div>
+
+  <ul class="xref-list mb-0" *ngIf="list.length">
+    <li *ngFor="let item of list">
+      <ng-container
+        *ngIf="
+          item.targetPath && item.fragment;
+          else unresolved
+        "
+      >
+        <a
+          [routerLink]="getRoutePath(item.targetPath)"
+          [fragment]="item.fragment"
+        >
+          {{ item.targetName || item.targetPath }}
+          <span>:{{ item.fragment }}</span>
+        </a>
+      </ng-container>
+
+      <ng-template #unresolved>
+        <span class="unresolved"
+          >{{ item.targetName || item.targetPath || item.source }} - unresolved</span
+        >
+      </ng-template>
+    </li>
+  </ul>
+  </ng-container>
+</div>

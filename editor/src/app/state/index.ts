@@ -7,3 +7,4 @@ export { GameFacade } from './game/facade';
 export { EnumsFacade } from './enums/facade';
 export { TreeFacade } from './tree/facade';
 export { ArticlesFacade } from './articles/facade';
+export { ScmFacade } from './scm/facade';

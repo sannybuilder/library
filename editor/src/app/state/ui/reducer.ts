@@ -8,6 +8,7 @@ import {
   Game,
   EnumRaw,
   SyntaxKind,
+  JsonModel,
 } from '../../models';
 import {
   displayOrEditCommandInfo,
@@ -39,8 +40,9 @@ import {
   displayDownloads,
   dismissHotkeysInfo,
   verifyCommand,
+  setEditorHasError,
+  updateJsonModel,
 } from './actions';
-import { commandToDisplayOrEdit } from './selectors';
 
 export interface GameState {
   selectedExtensions: Array<string | 'any'>;
@@ -70,6 +72,8 @@ export interface UiState {
   displaySearchHelp: boolean;
   isSearchHelpDismissed: boolean; // this should match localStorageSyncReducer in AppModule
   isSnippetOnly: boolean;
+  editorHasError: boolean;
+  jsonModel: JsonModel;
 }
 
 export const defaultFilterState: {
@@ -106,6 +110,11 @@ export const initialState: UiState = {
   viewMode: ViewMode.None,
   currentPage: 1,
   selectedSyntaxKind: 'sb_command',
+  editorHasError: false,
+  jsonModel: {
+    selectedExtensions: [],
+    fileName: '',
+  },
 };
 
 export const uiReducer = createReducer(
@@ -282,6 +291,10 @@ export const uiReducer = createReducer(
     ...state,
     viewMode: ViewMode.ViewGenerateJson,
   })),
+  on(updateJsonModel, (state, { model }) => ({
+    ...state,
+    jsonModel: model,
+  })),
   on(switchSyntaxKind, (state, { syntaxKind }) => ({
     ...state,
     selectedSyntaxKind: syntaxKind,
@@ -309,7 +322,11 @@ export const uiReducer = createReducer(
       };
     }
     return state;
-  })
+  }),
+  on(setEditorHasError, (state, { hasError }) => ({
+    ...state,
+    editorHasError: hasError,
+  }))
 );
 
 function updateState(state: UiState, game: Game, newState: Partial<GameState>) {

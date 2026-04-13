@@ -107,7 +107,7 @@
     </div>
     <div class="col-12 col-xl-8">
       <div class="input-group mb-2">
-        @if(viewContext === ViewContext.Script){
+        @if(isScriptViewContext(viewContext)){
         <span class="input-group-text d-none d-md-inline">{{
           "ui.commandEditor.fieldCommandLong" | translate
         }}</span>
@@ -192,7 +192,7 @@
         <input
           type="text"
           [disabled]="
-            viewContext === ViewContext.Script &&
+            isScriptViewContext(viewContext) &&
             (command.attrs?.is_nop || !command.class)
           "
           class="form-control"

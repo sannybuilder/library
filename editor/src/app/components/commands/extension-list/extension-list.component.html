@@ -1,4 +1,4 @@
-<div class="row mb-2" *ngIf="viewContext === ViewContext.Script">
+<div class="row mb-2" *ngIf="isScriptViewContext(viewContext)">
   <div class="col-12 d-flex justify-content-end">
     <scl-game-links [links]="getGameLinks()"> </scl-game-links>
   </div>
@@ -7,7 +7,7 @@
 <h5>
   {{
     "ui." +
-      (viewContext === ViewContext.Code ? "versionList" : "extensionList") +
+      (isCodeViewContext(viewContext) ? "versionList" : "extensionList") +
       ".title" | translate
   }}
 </h5>
@@ -16,14 +16,14 @@
   <pre
     *ngIf="extensions.length; else noExtensions"
     class="sample"
-  ><div *ngFor="let extension of extensions"><a [routerLink]="[baseHref, extension.name]">{{ extension.name }}</a> <span class="secondary">({{ "ui." + (viewContext === ViewContext.Code ? "versionList" : "extensionList") + ".numCommands" | translate: { total: extension.commands.length } }})</span></div></pre>
+  ><div *ngFor="let extension of extensions"><a [routerLink]="[baseHref, extension.name]">{{ extension.name }}</a> <span class="secondary">({{ "ui." + (isCodeViewContext(viewContext) ? "versionList" : "extensionList") + ".numCommands" | translate: { total: extension.commands.length } }})</span></div></pre>
 </div>
 
 <ng-template #noExtensions>
   <div class="my-3">
     {{
       "ui." +
-        (viewContext === ViewContext.Code ? "versionList" : "extensionList") +
+        (isCodeViewContext(viewContext) ? "versionList" : "extensionList") +
         ".noExtensions" | translate
     }}
   </div>

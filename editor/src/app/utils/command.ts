@@ -26,6 +26,7 @@ import {
 import { HEX_DIGITS, HEX_NEGATION } from './hex';
 import { functionName } from './functions';
 import { doesGameRequireOpcode } from './game';
+import { isCodeViewContext, isScriptViewContext } from './view-context';
 
 // remove all falsy properties from an object and return undefined if the object is an empty object {}
 export function smash(value: object) {
@@ -259,7 +260,7 @@ export function primitiveTypes(
   game: Game,
   viewContext: ViewContext
 ): PrimitiveType[] {
-  if (viewContext === ViewContext.Code) {
+  if (isCodeViewContext(viewContext)) {
     return [
       PrimitiveType.any,
       PrimitiveType.boolean,
@@ -469,11 +470,11 @@ export function filterAttributes(
             Game.sa_unreal,
             Game.lcs,
             Game.vcs,
-          ].includes(game) && viewContext === ViewContext.Script
+          ].includes(game) && isScriptViewContext(viewContext)
         );
 
       case 'is_unsupported':
-        return viewContext === ViewContext.Script;
+        return isScriptViewContext(viewContext);
 
       default:
         return true;
@@ -482,7 +483,7 @@ export function filterAttributes(
 }
 
 export function filterSources(game: Game, viewContext: ViewContext) {
-  if (viewContext === ViewContext.Code) {
+  if (isCodeViewContext(viewContext)) {
     return [SourceType.any, SourceType.pointer];
   }
   const sources = [

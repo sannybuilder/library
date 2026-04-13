@@ -10,6 +10,7 @@ import {
   DEFAULT_VERSION,
 } from '../models';
 import { primitiveTypes } from './command';
+import { isCodeViewContext } from './view-context';
 
 export function getEntities(
   extensions: Extension[],
@@ -69,5 +70,5 @@ export function getEntities(
 
 
 export function getDefaultExtension(viewContext: ViewContext) {
-  return viewContext === ViewContext.Code ? DEFAULT_VERSION : DEFAULT_EXTENSION;
+  return isCodeViewContext(viewContext) ? DEFAULT_VERSION : DEFAULT_EXTENSION;
 }

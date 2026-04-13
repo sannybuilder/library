@@ -1,0 +1,101 @@
+<ng-container *ngIf="viewMode$ | async as viewMode">
+  <ng-container *ngIf="game$ | async as game">
+    <ng-container *ngIf="viewContext$ | async as viewContext">
+      <scl-decision-tree
+        *ngIf="viewMode === ViewMode.ViewDecisionTree"
+        [game]="game"
+      ></scl-decision-tree>
+      <scl-command-editor
+        *ngIf="viewMode === ViewMode.EditCommand && command"
+        [game]="game"
+        [command]="command"
+        [(extension)]="extension"
+        [(snippet)]="snippet"
+        [extensions]="extensions$ | async"
+        [supportInfo]="getCommandSupportInfo(command, extension) | async"
+        [types]="
+          getExtensionTypes(extension, getDefaultExtension(viewContext)) | async
+        "
+        [commands]="getExtensionCommands(extension) | async"
+        [viewContext]="viewContext"
+        [fullDescription]="getFullDescription() | async"
+        (hasError)="onEditorHasError($event)"
+        (delete)="onDeleteCommand(game)"
+        (clone)="onCloneCommand($event)"
+        (copyFrom)="onCopyFromCommand($event)"
+      ></scl-command-editor>
+      <scl-command-info
+        *ngIf="viewMode === ViewMode.ViewCommand && command"
+        [command]="command"
+        [game]="game"
+        [types]="
+          getExtensionTypes(extension, getDefaultExtension(viewContext)) | async
+        "
+        [snippet]="getSnippet(extension, command.id || command.name) | async"
+        [supportInfo]="getCommandSupportInfo(command, extension) | async"
+        [relatedCommands]="
+          findRelatedCommands(command, extension, game) | async
+        "
+        [extension]="extension"
+        [classDesc]="(getClassMeta(game, command.class) | async)?.desc"
+        [gameExtensions]="getGameExtensions(game) | async"
+        [fullDescription]="getFullDescription() | async"
+        [viewContext]="viewContext"
+        [syntaxKind]="selectedSyntaxKind$ | async"
+        (switchSyntaxKind)="onChangeSyntaxKind($event)"
+        [canEdit]="canEdit$ | async"
+      >
+      </scl-command-info>
+      <scl-class-overview
+        *ngIf="
+          viewMode === ViewMode.ViewClass &&
+          (classToDisplay$ | async) as classToDisplay
+        "
+        [game]="game"
+        [viewContext]="viewContext"
+        [className]="classToDisplay"
+        [classCommands]="classCommands$ | async"
+        [classOrigin]="getClassOrigin(classToDisplay) | async"
+        [meta]="getClassMeta(game, classToDisplay) | async"
+        [gameExtensions]="getGameExtensions(game) | async"
+        [displayInlineDescription]="displayInlineDescription$ | async"
+        (descriptionClick)="onDescriptionClick($event)"
+      ></scl-class-overview>
+      <scl-class-list
+        *ngIf="viewMode === ViewMode.ViewAllClasses"
+        [game]="game"
+        [entities]="entities$ | async"
+        [classesMeta]="getClassesMeta(game) | async"
+        [viewContext]="viewContext"
+      ></scl-class-list>
+      <scl-extension-list
+        *ngIf="viewMode === ViewMode.ViewAllExtensions"
+        [game]="game"
+        [extensions]="getGameExtensions(game) | async"
+        [viewContext]="viewContext"
+      ></scl-extension-list>
+      <scl-enum-overview
+        *ngIf="viewMode === ViewMode.ViewEnum && enumToDisplayOrEdit"
+        [enumToView]="enumToDisplayOrEdit"
+        [game]="game"
+        [enumGames]="getGamesWhereEnumExists(enumToDisplayOrEdit.name) | async"
+      ></scl-enum-overview>
+      <scl-enum-editor
+        *ngIf="viewMode === ViewMode.EditEnum && enumToDisplayOrEdit"
+        [game]="game"
+        [enumToEdit]="enumToDisplayOrEdit"
+        [enumGames]="getGamesWhereEnumExists(enumToDisplayOrEdit.name) | async"
+        [entityNames]="classAndEnumNames$ | async"
+        (hasError)="onEditorHasError($event)"
+        (delete)="onDeleteEnum()"
+        (clone)="onCloneEnum($event)"
+      ></scl-enum-editor>
+      <scl-enum-list
+        *ngIf="viewMode === ViewMode.ViewAllEnums"
+        [game]="game"
+        [enumNames]="enumNames$ | async"
+        [extensionTypes]="extensionTypes$ | async"
+      ></scl-enum-list>
+    </ng-container>
+  </ng-container>
+</ng-container>

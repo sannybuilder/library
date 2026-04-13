@@ -1,0 +1,32 @@
+<div class="tree-container">
+  <div class="tree-group" *ngFor="let node of tree">
+    <ng-container
+      *ngTemplateOutlet="fileNode; context: { node: node }"
+    ></ng-container>
+  </div>
+</div>
+
+<ng-template #fileNode let-node="node">
+  <a
+    *ngIf="node.path"
+    class="btn btn-sm btn-link tree-file"
+    [class.active]="activeFile === node.path"
+    [routerLink]="getRoutePathForNode(node.path!)"
+  >
+    {{ node.label }}
+  </a>
+
+  <details [open]="isNodeOpen(node)" *ngIf="node.children?.length">
+    <summary [class.no-arrow]="!node.children?.length">
+      {{ node.label }}
+    </summary>
+
+    <ul class="tree-list">
+      <li *ngFor="let child of node.children">
+        <ng-container
+          *ngTemplateOutlet="fileNode; context: { node: child }"
+        ></ng-container>
+      </li>
+    </ul>
+  </details>
+</ng-template>

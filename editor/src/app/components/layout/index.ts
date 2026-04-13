@@ -4,3 +4,6 @@ export { FilterPanelComponent } from './filter-panel/filter-panel.component';
 export { DownloadPanelComponent } from './download-panel/download-panel.component';
 export { JsonGeneratorComponent } from './json-generator/json-generator.component';
 export { QuizComponent } from './quiz/quiz.component';
+export { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+export { ContextViewComponent } from './context-view/context-view.component';
+export { ContextActionsComponent } from './context-actions/context-actions.component';

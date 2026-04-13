@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Command, Extension, Game, ViewContext } from '../models';
-import { commandParams } from '../utils';
+import { commandParams, getContextRouteSegment, getExtensionScopeSegment } from '../utils';
 import { words } from 'lodash';
 
 const reAscii = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
@@ -24,9 +24,8 @@ export class LinkifyPipe implements PipeTransform {
 
     const base = [
       game,
-      viewContext === ViewContext.Code
-        ? 'native/versions'
-        : 'script/extensions',
+      getContextRouteSegment(viewContext),
+      getExtensionScopeSegment(viewContext),
     ].join('/');
 
     // todo: gradually replace ids with names

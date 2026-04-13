@@ -6,19 +6,21 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import {
-  ViewContext,
-  Game,
-  GameTitle,
-  Platform,
-  Version,
-} from './models';
+import { ViewContext, Game, GameTitle, Platform, Version } from './models';
 import { AuthFacade, GameFacade } from './state';
-import { decodePlatforms, decodeVersions, getDefaultExtension, isValidGame } from './utils';
+import {
+  decodePlatforms,
+  decodeVersions,
+  getDefaultExtension,
+  isValidGame,
+} from './utils';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard {
-  constructor(private _auth: AuthFacade, private location: Location) {}
+  constructor(
+    private _auth: AuthFacade,
+    private location: Location,
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const { access_token } = route.queryParams;
@@ -35,13 +37,13 @@ export class RouteGuard {
   constructor(
     private _router: Router,
     private _game: GameFacade,
-    private _title: Title
+    private _title: Title,
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const { segments, searchTerm } = getSegmentsFromUrl(
       this._router,
-      state.url
+      state.url,
     );
     if (segments.length === 0) {
       return this.goHome();
@@ -53,12 +55,13 @@ export class RouteGuard {
     }
     this._title.setTitle(`Sanny Builder Library :: ${GameTitle[game]}`);
 
-    const context = segments.shift();
-    if (!context || !['script', 'native'].includes(context)) {
+    let context = segments.shift();
+
+    if (!context || !['script', 'native', 'scm'].includes(context)) {
       // redirect old /game/<...> under new /game/script route
       return this._router.navigate(
         ['/', game, 'script', context, ...segments].filter(Boolean),
-        { queryParams: route.queryParams }
+        { queryParams: route.queryParams },
       );
     }
 
@@ -73,21 +76,25 @@ export class RouteGuard {
           'generate',
           'classes',
           'enums',
+          'files',
         ].includes(scope)
       ) {
         // /:game/:extensionName/ -> /:game/script/extensions/:extensionName/
         return this._router.navigate(
           ['/', game, 'script', 'extensions', scope, ...segments].filter(
-            Boolean
+            Boolean,
           ),
-          { queryParams: route.queryParams }
+          { queryParams: route.queryParams },
         );
       }
 
-      if (scope === 'extensions' && context !== 'script') {
+      if (scope === 'extensions' && context !== 'script' && context !== 'scm') {
         return this.goHome();
       }
       if (scope === 'versions' && context !== 'native') {
+        return this.goHome();
+      }
+      if (scope === 'files' && context !== 'scm') {
         return this.goHome();
       }
     }
@@ -120,8 +127,26 @@ export class RouteGuard {
     }
 
     const viewContext =
-      context === 'native' ? ViewContext.Code : ViewContext.Script;
+      context === 'native'
+        ? ViewContext.Code
+        : context === 'scm'
+          ? ViewContext.Scm
+          : ViewContext.Script;
     const defaultExtension = getDefaultExtension(viewContext);
+
+    if (scope === 'files') {
+      const fileName = [scopeName, itemName, action, ...segments]
+        .filter(Boolean)
+        .join('/');
+      this._game.onListEnter({
+        game,
+        extension: defaultExtension,
+        id: fileName,
+        action: 'scm-file',
+        viewContext,
+      });
+      return true;
+    }
 
     if (scope === 'classes') {
       const className = scopeName || 'all';
@@ -165,7 +190,7 @@ export class RouteGuard {
           game,
           extension: defaultExtension,
           action: 'generate-json',
-          generateJsonModel: { fileName, selectedExtensions },
+          jsonModel: { fileName, selectedExtensions },
         });
         return true;
       } else {
@@ -189,7 +214,7 @@ export class RouteGuard {
 
     // extensions
     const id = itemName;
-    const extension = scopeName;
+    const extension = scopeName; // display ALL when undefined
 
     const platforms = getPlatformsFromUrl(this._router, state.url, game);
     const versions = getVersionsFromUrl(this._router, state.url, game);
@@ -215,7 +240,7 @@ export class RouteGuard {
 
 function getSegmentsFromUrl(
   router: Router,
-  url: string
+  url: string,
 ): {
   segments: string[];
   searchTerm?: string;
@@ -232,7 +257,7 @@ function getSegmentsFromUrl(
 function getPlatformsFromUrl(
   router: Router,
   url: string,
-  game: Game
+  game: Game,
 ): Platform[] {
   const tree = router.parseUrl(url);
   return decodePlatforms(tree.queryParams?.p, game);
@@ -241,7 +266,7 @@ function getPlatformsFromUrl(
 function getVersionsFromUrl(
   router: Router,
   url: string,
-  game: Game
+  game: Game,
 ): Version[] {
   const tree = router.parseUrl(url);
   return decodeVersions(tree.queryParams?.v, game);

@@ -112,7 +112,7 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @HostListener('window:resize', [])
-  private detectScreenSize() {
+  detectScreenSize() {
     this.screenSize = window.innerWidth;
   }
 

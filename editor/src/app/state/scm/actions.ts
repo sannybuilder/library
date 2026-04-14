@@ -36,6 +36,11 @@ export const loadScmMapSuccess = createAction(
   props<{ game: Game; map: ScmMap }>(),
 );
 
+export const loadScmMapError = createAction(
+  '[SCM] Load Map Error',
+  props<{ game: Game }>(),
+);
+
 export const selectScmLabelOffset = createAction(
   '[SCM] Select Label Offset',
   props<{ offset: number }>(),

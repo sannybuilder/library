@@ -7,6 +7,7 @@ import {
   map,
   switchMap,
   take,
+  filter,
   withLatestFrom,
 } from 'rxjs/operators';
 import { ScmMap } from 'src/app/components/scm/model';
@@ -15,6 +16,7 @@ import {
   loadScmFile,
   loadScmFileSuccess,
   loadScmMap,
+  loadScmMapError,
   loadScmMapSuccess,
   loadScmOverlay,
   loadScmOverlaySuccess,
@@ -66,7 +68,7 @@ export class ScmEffects {
       switchMap(() =>
         this._facade.map$.pipe(
           map((scmMap) => {
-            const mainEntry = scmMap!.files.find((f) => f.pid === 0);
+            const mainEntry = scmMap.files.find((f) => f.pid === 0);
             const mainFileName = mainEntry!.path.replace(/\.json$/, '');
             return loadScmFile({ name: mainFileName });
           }),
@@ -111,9 +113,7 @@ export class ScmEffects {
 
             return this._service.loadMap(game).pipe(
               map((mapData) => loadScmMapSuccess({ game, map: mapData })),
-              catchError(() =>
-                of(loadScmMapSuccess({ game, map: this._emptyMap })),
-              ),
+              catchError(() => of(loadScmMapError({ game }))),
             );
           }),
         ),

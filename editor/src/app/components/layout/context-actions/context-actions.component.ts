@@ -41,7 +41,6 @@ import { map } from 'rxjs/operators';
   selector: 'scl-context-actions',
   templateUrl: './context-actions.component.html',
   styleUrls: ['./context-actions.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
 export class ContextActionsComponent {

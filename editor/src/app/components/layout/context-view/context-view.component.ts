@@ -28,7 +28,6 @@ import { ContextEditSessionService } from '../context-edit-session.service';
   selector: 'scl-context-view',
   templateUrl: './context-view.component.html',
   styleUrls: ['./context-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
 export class ContextViewComponent {

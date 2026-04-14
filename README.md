@@ -1,6 +1,6 @@
 # Sanny Builder Library
 
-[![Discord](https://img.shields.io/discord/911487285990674473?style=for-the-badge)](https://discord.gg/d5dZSfgBZr)
+[![Discord](https://img.shields.io/discord/911487285990674473?style=for-the-badge)](https://sannybuilder.com/discord)
 
 A platform for collaborative editing and maintaining documentation for the GTA 3D series games, with a focus on scripting and native code.
 
@@ -22,7 +22,7 @@ Sanny Builder Library is an open project where anyone can contribute. If you are
 
 Information presented here is attributed to many talented individuals in the GTA modding community.
 
-- http://www.gtagmodding.com/opcode-database
+- https://gtag.sannybuilder.com/opcode-database/
 - https://gtamods.com/wiki/List_of_opcodes
 - https://github.com/GTAmodding
 - https://github.com/DK22Pac/plugin-sdk

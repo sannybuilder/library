@@ -348,7 +348,7 @@ export class LibraryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   @HostListener('window:resize', [])
-  private detectScreenSize() {
+  detectScreenSize() {
     this.screenSize = window.innerWidth;
   }
 

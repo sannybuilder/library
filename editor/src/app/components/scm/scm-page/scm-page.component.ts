@@ -12,7 +12,12 @@ import { ExtensionsFacade } from '../../../state/extensions/facade';
 import { GameFacade } from '../../../state/game/facade';
 import { ScmFacade } from '../../../state/scm/facade';
 import { UiFacade } from '../../../state/ui/facade';
-import { DEFAULT_EXTENSION, ViewContext, ViewMode } from '../../../models';
+import {
+  DEFAULT_EXTENSION,
+  Game,
+  ViewContext,
+  ViewMode,
+} from '../../../models';
 import { combineLatest, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { ContextEditSessionService } from '../../layout/context-edit-session.service';
@@ -30,12 +35,14 @@ import {
   providers: [ContextEditSessionService],
 })
 export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  ViewMode = ViewMode;
+  ViewContext = ViewContext;
+  Game = Game;
+
   game$ = this._game.game$;
   isSidebarCollapsed$ = this._ui.isSidebarCollapsed$;
   onDestroy$ = new Subject<void>();
   viewMode$ = this._ui.viewMode$;
-  ViewMode = ViewMode;
-  ViewContext = ViewContext;
   readonly isCodeViewContext = isCodeViewContext;
   readonly isScriptViewContext = isScriptViewContext;
   activeFile$ = this._scm.activeFileName$;
@@ -52,8 +59,9 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   activeFragment?: string | null;
 
   // display options
-  showLineNumbers = true;
-  showOffsets = false;
+  showLineNumbers$ = this._ui.scmViewShowLineNumbers$;
+  showOffsets$ = this._ui.scmViewShowOffsets$;
+  adjustOffsets$ = this._ui.scmViewAdjustOffsets$;
 
   constructor(
     private _extensions: ExtensionsFacade,
@@ -126,5 +134,17 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayDownloads() {
     this._ui.displayDownloads();
+  }
+
+  toggleShowLineNumbers(showLineNumbers: boolean) {
+    this._ui.changeScmViewShowLineNumbers(showLineNumbers);
+  }
+
+  toggleShowOffsets(showOffsets: boolean) {
+    this._ui.changeScmViewShowOffsets(showOffsets);
+  }
+
+  toggleAdjustOffsets(adjustOffsets: boolean) {
+    this._ui.changeScmViewAdjustOffsets(adjustOffsets);
   }
 }

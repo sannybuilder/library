@@ -112,14 +112,38 @@
                 </button>
                 <div id="collapseDisplayOptions" class="collapse card-body">
                   <label class="form-check-label btn">
-                    <input type="checkbox" [(ngModel)]="showLineNumbers" />
+                    <input
+                      type="checkbox"
+                      [ngModel]="showLineNumbers$ | async"
+                      (ngModelChange)="toggleShowLineNumbers($event)"
+                    />
+
                     <span class="checkbox"></span>
                     {{ "ui.scm.showLineNumbers" | translate }}
                   </label>
                   <label class="form-check-label btn">
-                    <input type="checkbox" [(ngModel)]="showOffsets" />
+                    <input
+                      type="checkbox"
+                      [ngModel]="showOffsets$ | async"
+                      (ngModelChange)="toggleShowOffsets($event)"
+                    />
                     <span class="checkbox"></span>
                     {{ "ui.scm.showOffsets" | translate }}
+                  </label>
+                  <label
+                    class="form-check-label btn"
+                    *ngIf="
+                      (game === Game.vcs || game === Game.lcs) &&
+                      (showOffsets$ | async)
+                    "
+                  >
+                    <input
+                      type="checkbox"
+                      [ngModel]="adjustOffsets$ | async"
+                      (ngModelChange)="toggleAdjustOffsets($event)"
+                    />
+                    <span class="checkbox"></span>
+                    {{ "ui.scm.adjustOffsets" | translate }}
                   </label>
                 </div>
               </div>
@@ -251,7 +275,9 @@
                   aria-controls="collapseScmXrefsMobile"
                   [title]="'ui.scm.xrefs' | translate"
                 >
-                  <span class="d-none d-sm-inline pl-2">{{"ui.scm.xrefs" | translate}}</span>
+                  <span class="d-none d-sm-inline pl-2">{{
+                    "ui.scm.xrefs" | translate
+                  }}</span>
                 </button>
 
                 <button
@@ -314,7 +340,6 @@
                   <scl-scm-refs
                     [refs]="refs$ | async"
                     [activeFragment]="activeFragment"
-                    [activeRef]="activeRef$ | async"
                   ></scl-scm-refs>
                 </div>
               </div>
@@ -340,8 +365,9 @@
                     [game]="game"
                     [viewContext]="viewContext"
                     [activeFragment]="activeFragment"
-                    [showLineNumbers]="showLineNumbers"
-                    [showOffsets]="showOffsets"
+                    [showLineNumbers]="showLineNumbers$ | async"
+                    [showOffsets]="showOffsets$ | async"
+                    [adjustOffsets]="(adjustOffsets$ | async) ? 8 : 0"
                   ></scl-scm-view>
                 </ng-container>
               </ng-container>

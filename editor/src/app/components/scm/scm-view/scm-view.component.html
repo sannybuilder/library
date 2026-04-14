@@ -30,8 +30,16 @@
           {{ i + 1 }}
         </a>
       </div>
-      <div class="text-muted line-offset" *ngIf="showOffsets">
-        {{ line[0] !== "" ? code.base + line[0] : "" }}
+      <div
+        class="text-muted line-offset pointer"
+        *ngIf="showOffsets"
+        copyOnClick
+        [attr.data-copy-text]="
+          line[0] !== '' ? code.base + line[0] + adjustOffsets : ''
+        "
+        title="Click the offset number to copy to clipboard"
+      >
+        {{ line[0] !== "" ? code.base + line[0] + adjustOffsets : "" }}
       </div>
       <div
         class="line-content"

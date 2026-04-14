@@ -71,7 +71,12 @@ import { loadEnumsSuccess } from '../enums/actions';
 import { ArticlesFacade } from '../articles/facade';
 import { ScmFacade } from '../scm/facade';
 import { AnalyticsService } from '../../analytics';
-import { loadMainFile, loadScmFile } from '../scm/actions';
+import {
+  loadMainFile,
+  loadScmFile,
+  loadScmMap,
+  loadScmOverlay,
+} from '../scm/actions';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
@@ -97,7 +102,11 @@ export class UiEffects {
           game,
         ]) => {
           if (viewContext === ViewContext.Scm && action === 'scm-file') {
-            return [id ? loadScmFile({ name: id }) : loadMainFile()];
+            return [
+              loadScmMap({ game }),
+              loadScmOverlay({ game }),
+              id ? loadScmFile({ name: id }) : loadMainFile(),
+            ];
           }
 
           if (searchTerm) {
@@ -547,7 +556,6 @@ export class UiEffects {
     private _changes: ChangesFacade,
     private _game: GameFacade,
     private _enums: EnumsFacade,
-    private _scm: ScmFacade,
     private _articles: ArticlesFacade,
     private _analytics: AnalyticsService,
     @Inject(DOCUMENT) private _d: Document,

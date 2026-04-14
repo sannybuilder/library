@@ -125,3 +125,18 @@ export const setEditorHasError = createAction(
   '[ui] set editor has error',
   props<{ hasError: boolean }>(),
 );
+
+export const changeScmViewShowLineNumbers = createAction(
+  '[ui] change scm view show line numbers',
+  props<{ showLineNumbers: boolean }>(),
+);
+
+export const changeScmViewShowOffsets = createAction(
+  '[ui] change scm view show offsets',
+  props<{ showOffsets: boolean }>(),
+);
+
+export const changeScmViewAdjustOffsets = createAction(
+  '[ui] change scm view adjust offsets',
+  props<{ adjustOffsets: boolean }>(),
+);

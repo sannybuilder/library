@@ -42,6 +42,9 @@ import {
   verifyCommand,
   setEditorHasError,
   updateJsonModel,
+  changeScmViewShowLineNumbers,
+  changeScmViewShowOffsets,
+  changeScmViewAdjustOffsets,
 } from './actions';
 
 export interface GameState {
@@ -74,6 +77,9 @@ export interface UiState {
   isSnippetOnly: boolean;
   editorHasError: boolean;
   jsonModel: JsonModel;
+  scmViewShowLineNumbers: boolean
+  scmViewShowOffsets: boolean;
+  scmViewAdjustOffsets: boolean;
 }
 
 export const defaultFilterState: {
@@ -107,6 +113,9 @@ export const initialState: UiState = {
   displaySearchHelp: false,
   isSearchHelpDismissed: false,
   isSidebarCollapsed: false,
+  scmViewShowLineNumbers: true,
+  scmViewShowOffsets: false,
+  scmViewAdjustOffsets: false,
   viewMode: ViewMode.None,
   currentPage: 1,
   selectedSyntaxKind: 'sb_command',
@@ -326,6 +335,18 @@ export const uiReducer = createReducer(
   on(setEditorHasError, (state, { hasError }) => ({
     ...state,
     editorHasError: hasError,
+  })),
+  on(changeScmViewShowLineNumbers, (state, { showLineNumbers }) => ({
+    ...state,
+    scmViewShowLineNumbers: showLineNumbers,
+  })),
+  on(changeScmViewShowOffsets, (state, { showOffsets }) => ({
+    ...state,
+    scmViewShowOffsets: showOffsets,
+  })),
+  on(changeScmViewAdjustOffsets, (state, { adjustOffsets }) => ({
+    ...state,
+    scmViewAdjustOffsets: adjustOffsets,
   }))
 );
 

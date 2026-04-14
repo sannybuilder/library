@@ -393,3 +393,18 @@ export const jsonModel = createSelector(
   state,
   (state: UiState) => state.jsonModel
 );
+
+export const scmViewShowLineNumbers = createSelector(
+  state,
+  (state: UiState) => state.scmViewShowLineNumbers
+);
+
+export const scmViewShowOffsets = createSelector(
+  state,
+  (state: UiState) => state.scmViewShowOffsets
+);
+
+export const scmViewAdjustOffsets = createSelector(
+  state,
+  (state: UiState) => state.scmViewAdjustOffsets
+);

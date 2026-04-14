@@ -49,9 +49,8 @@ export class ScmViewComponent {
         this.idents[i] = ident;
       }
 
-      if (['THEN', 'ELSE', 'DO', 'CASE'].includes(keyword)) {
+      if (['THEN', 'ELSE', 'DO', 'CASE', 'DEFAULT'].includes(keyword)) {
         this.idents[i] = ident - 1;
-        // ident++;
       }
     }
   }
@@ -64,6 +63,7 @@ export class ScmViewComponent {
   @Input() activeFragment?: string | null;
   @Input() showLineNumbers!: boolean;
   @Input() showOffsets!: boolean;
+  @Input() adjustOffsets: number = 0;
 
   findCommand(name: string): Command | undefined {
     if (!this.commands) {
@@ -220,7 +220,7 @@ export class ScmViewComponent {
       index > 0 &&
       index < this.code.lines.length &&
       this.isTerminalInstruction(this.code.lines[index - 1][2] as string) &&
-      !['END', 'ELSE', 'CASE'].includes(this.code.lines[index][2] as string)
+      !['END', 'ELSE', 'CASE', 'DEFAULT'].includes(this.code.lines[index][2] as string)
     );
   }
 }

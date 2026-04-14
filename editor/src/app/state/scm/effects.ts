@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import {
   catchError,
-  distinctUntilChanged,
   map,
   switchMap,
   take,
-  filter,
   withLatestFrom,
 } from 'rxjs/operators';
-import { ScmMap } from 'src/app/components/scm/model';
 import {
   loadMainFile,
   loadScmFile,
@@ -27,20 +24,6 @@ import { ScmFacade } from './facade';
 
 @Injectable({ providedIn: 'root' })
 export class ScmEffects {
-  private readonly _emptyMap: ScmMap = {
-    version: '2.0',
-    groups: [],
-    files: [],
-    xrefs: {},
-  };
-
-  maps$ = createEffect(() =>
-    this._game.game$.pipe(
-      distinctUntilChanged(),
-      switchMap((game) => [loadScmMap({ game }), loadScmOverlay({ game })]),
-    ),
-  );
-
   loadScmFile$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadScmFile),
@@ -50,7 +33,7 @@ export class ScmEffects {
           take(1),
           switchMap((cachedContent) => {
             if (cachedContent) {
-              return EMPTY;
+              return [];
             }
 
             return this._service
@@ -85,7 +68,7 @@ export class ScmEffects {
           take(1),
           switchMap((cachedOverlay) => {
             if (cachedOverlay !== undefined) {
-              return EMPTY;
+              return [];
             }
 
             return this._service.loadOverlay(game).pipe(
@@ -108,7 +91,7 @@ export class ScmEffects {
           take(1),
           switchMap((cachedMap) => {
             if (cachedMap !== undefined) {
-              return EMPTY;
+              return [];
             }
 
             return this._service.loadMap(game).pipe(

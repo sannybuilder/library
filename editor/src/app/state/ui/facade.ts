@@ -43,6 +43,9 @@ import {
   verifyCommand,
   setEditorHasError,
   updateJsonModel,
+  changeScmViewShowLineNumbers,
+  changeScmViewShowOffsets,
+  changeScmViewAdjustOffsets,
 } from './actions';
 import * as selector from './selectors';
 import { combineLatest } from 'rxjs';
@@ -92,6 +95,9 @@ export class UiFacade {
   isSnippetOnly$ = this.store$.select(selector.isSnippetOnly);
 
   jsonModel$ = this.store$.select(selector.jsonModel);
+  scmViewShowLineNumbers$ = this.store$.select(selector.scmViewShowLineNumbers);
+  scmViewShowOffsets$ = this.store$.select(selector.scmViewShowOffsets)
+  scmViewAdjustOffsets$ = this.store$.select(selector.scmViewAdjustOffsets);
 
   selectedAttributesOnly$ = this.store$.select(selector.selectedAttributesOnly);
   selectedAttributesExcept$ = this.store$.select(
@@ -328,5 +334,17 @@ export class UiFacade {
 
   setEditorHasError(hasError: boolean) {
     this.store$.dispatch(setEditorHasError({ hasError }));
+  }
+
+  changeScmViewShowLineNumbers(showLineNumbers: boolean) {
+    this.store$.dispatch(changeScmViewShowLineNumbers({ showLineNumbers }));
+  }
+
+  changeScmViewShowOffsets(showOffsets: boolean) {
+    this.store$.dispatch(changeScmViewShowOffsets({ showOffsets }));
+  }
+
+  changeScmViewAdjustOffsets(adjustOffsets: boolean) {
+    this.store$.dispatch(changeScmViewAdjustOffsets({ adjustOffsets }));
   }
 }

@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, DOCUMENT } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { combineLatest, merge } from 'rxjs';
 import {

@@ -125,10 +125,30 @@
           {{ "ui.shared.close" | translate }}
         </button>
         <a
-          *ngIf="viewMode === ViewMode.ViewCommand && canEdit$ | async"
+          *ngIf="
+            viewMode === ViewMode.ViewCommand &&
+            (canEdit$ | async) &&
+            viewContext !== ViewContext.Scm
+          "
           class="btn btn-outline-success"
           [routerLink]="['edit']"
           [queryParams]="getQueryParamsForCommand(command, game)"
+        >
+          {{ "ui.shared.edit" | translate }}
+        </a>
+        <a
+          *ngIf="
+            (viewMode === ViewMode.ViewCommand ||
+              viewMode === ViewMode.ViewScmRefs ||
+              viewMode === ViewMode.ViewScmVariables) &&
+            (canEdit$ | async) &&
+            viewContext === ViewContext.Scm &&
+            getScmEditRail(viewMode, extension, command) as rail
+          "
+          class="btn btn-outline-success"
+          [routerLink]="[]"
+          [queryParams]="{ rail: rail }"
+          queryParamsHandling="merge"
         >
           {{ "ui.shared.edit" | translate }}
         </a>
@@ -148,7 +168,10 @@
         </a>
         <button
           *ngIf="
-            viewMode === ViewMode.EditCommand || viewMode === ViewMode.EditEnum
+            viewMode === ViewMode.EditCommand ||
+            viewMode === ViewMode.EditEnum ||
+            viewMode === ViewMode.EditScmRefs ||
+            viewMode === ViewMode.EditScmVariables
           "
           [disabled]="
             shouldDisableSaveButton(viewMode, editorHasError$ | async)

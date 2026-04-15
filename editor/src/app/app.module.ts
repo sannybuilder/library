@@ -152,9 +152,14 @@ import {
 } from './components/classes';
 
 import {
+  RefEditorComponent,
+  KeyValueEditorComponent,
+  RefListComponent,
   ScmPageComponent,
   ScmRefsComponent,
   ScmTreeComponent,
+  VariableEditorComponent,
+  VariableListComponent,
   ScmViewComponent,
   ScmXrefsComponent,
 } from './components/scm';
@@ -291,6 +296,11 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     ScmTreeComponent,
     ScmRefsComponent,
     ScmXrefsComponent,
+    RefListComponent,
+    RefEditorComponent,
+    KeyValueEditorComponent,
+    VariableListComponent,
+    VariableEditorComponent,
     ContextViewComponent,
     ContextActionsComponent,
   ],
@@ -344,7 +354,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
                 {
                   path: '',
                   pathMatch: 'full',
-                  redirectTo: 'files',
+                  component: ScmPageComponent,
                 },
                 {
                   path: '**',

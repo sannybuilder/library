@@ -1,0 +1,30 @@
+<h5>{{ 'ui.scm.varList' | translate }}</h5>
+
+<div class="row mb-2">
+  <div class="col-12">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control filter-input"
+        [placeholder]="'ui.scm.filterVars' | translate"
+        [(ngModel)]="filterQuery"
+      />
+      <div class="input-group-append">
+        <scl-icon-button
+          icon="clear"
+          [title]="'ui.header.searchClear' | translate"
+          (clicked)="filterQuery = ''"
+        ></scl-icon-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scroll-container">
+  <pre class="sample" *ngIf="filteredEntries.length; else emptyState"><ng-container *ngFor="let item of filteredEntries">{{ toRawVariableKey(item[0]) }}={{ item[1] }}
+</ng-container></pre>
+</div>
+
+<ng-template #emptyState>
+  <div class="text-muted">{{ 'ui.scm.emptyVarList' | translate }}</div>
+</ng-template>

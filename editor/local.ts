@@ -1,5 +1,6 @@
 import {
   doesGameHaveMap,
+  doesGameHaveScm,
   doesGameRequireOpcode,
   getBaseGame,
 } from './src/app/utils';
@@ -47,6 +48,10 @@ games.forEach((game) => {
 
   if (doesGameHaveMap(game)) {
     run(`cp -r ../${game}/maps ${assets}`);
+  }
+
+  if (doesGameHaveScm(game)) {
+    run(`cp -r ../${game}/scm ${assets}`);
   }
 
   run(`cp *.json ../editor/src/assets/${game}`, join('..', game));

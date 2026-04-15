@@ -19,8 +19,9 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   @Input() size: string = 'modal-lg';
   @Output() close = new EventEmitter();
 
-  private _handle: Modal;
-  private _element: HTMLElement;
+  private _handle?: Modal;
+  private _element?: HTMLElement;
+  private _isDestroying = false;
   private _close = this.onClose.bind(this);
 
   ngAfterViewInit() {
@@ -35,12 +36,18 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._handle.hide();
-    this._handle.dispose();
-    jQuery(this._element).off('hidden.bs.modal', this._close);
+    this._isDestroying = true;
+
+    if (this._element) {
+      jQuery(this._element).off('hidden.bs.modal', this._close);
+    }
+    this._handle?.hide();
+    this._handle?.dispose();
   }
 
   onClose() {
-    this.close.emit();
+    if (!this._isDestroying) {
+      this.close.emit();
+    }
   }
 }

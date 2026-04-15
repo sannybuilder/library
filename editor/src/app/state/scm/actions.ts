@@ -23,7 +23,21 @@ export const loadScmOverlay = createAction(
 
 export const loadScmOverlaySuccess = createAction(
   '[SCM] Load Overlay Success',
-  props<{ game: Game; overlay: Record<string, string> }>(),
+  props<{
+    game: Game;
+    refs: Record<string, string>;
+    variables: Record<string, string>;
+  }>(),
+);
+
+export const updateScmRefs = createAction(
+  '[SCM] Update Refs',
+  props<{ refs: Record<string, string> }>(),
+);
+
+export const updateScmVariables = createAction(
+  '[SCM] Update Variables',
+  props<{ variables: Record<string, string> }>(),
 );
 
 export const loadScmMap = createAction(

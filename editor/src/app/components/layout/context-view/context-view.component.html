@@ -96,6 +96,30 @@
         [enumNames]="enumNames$ | async"
         [extensionTypes]="extensionTypes$ | async"
       ></scl-enum-list>
+      <scl-ref-list
+        *ngIf="viewMode === ViewMode.ViewScmRefs && scmRefsToDisplayOrEdit"
+        [refs]="scmRefsToDisplayOrEdit"
+      ></scl-ref-list>
+      <scl-ref-editor
+        *ngIf="viewMode === ViewMode.EditScmRefs && scmRefsToDisplayOrEdit"
+        [refs]="scmRefsToDisplayOrEdit"
+        (refsChange)="onScmRefsChange($event)"
+      ></scl-ref-editor>
+      <scl-variable-list
+        *ngIf="
+          viewMode === ViewMode.ViewScmVariables &&
+          scmVariablesToDisplayOrEdit
+        "
+        [variables]="scmVariablesToDisplayOrEdit"
+      ></scl-variable-list>
+      <scl-variable-editor
+        *ngIf="
+          viewMode === ViewMode.EditScmVariables &&
+          scmVariablesToDisplayOrEdit
+        "
+        [variables]="scmVariablesToDisplayOrEdit"
+        (variablesChange)="onScmVariablesChange($event)"
+      ></scl-variable-editor>
     </ng-container>
   </ng-container>
 </ng-container>

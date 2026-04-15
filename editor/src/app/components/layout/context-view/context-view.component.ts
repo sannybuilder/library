@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { cloneDeep, flatten, orderBy, uniqBy } from 'lodash';
 import { combineLatest, Observable, of, zip } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
@@ -18,6 +18,7 @@ import {
   EnumsFacade,
   ExtensionsFacade,
   GameFacade,
+  ScmFacade,
   SnippetsFacade,
   UiFacade,
 } from '../../..//state';
@@ -31,6 +32,15 @@ import { ContextEditSessionService } from '../context-edit-session.service';
   standalone: false,
 })
 export class ContextViewComponent {
+  private _game = inject(GameFacade);
+  private _ui = inject(UiFacade);
+  private _extensions = inject(ExtensionsFacade);
+  private _enums = inject(EnumsFacade);
+  private _snippets = inject(SnippetsFacade);
+  private _articles = inject(ArticlesFacade);
+  private _scm = inject(ScmFacade);
+  private _session = inject(ContextEditSessionService);
+
   ViewMode = ViewMode;
   ViewContext = ViewContext;
 
@@ -82,6 +92,32 @@ export class ContextViewComponent {
     return this._session.oldEnumToEdit;
   }
 
+  get scmRefsToDisplayOrEdit() {
+    return this._session.scmRefsToDisplayOrEdit;
+  }
+
+  set scmRefsToDisplayOrEdit(value: Record<string, string> | undefined) {
+    this._session.scmRefsToDisplayOrEdit = value;
+  }
+
+  get oldScmRefsToEdit() {
+    return this._session.oldScmRefsToEdit;
+  }
+
+  get scmVariablesToDisplayOrEdit() {
+    return this._session.scmVariablesToDisplayOrEdit;
+  }
+
+  set scmVariablesToDisplayOrEdit(
+    value: Record<string, string> | undefined,
+  ) {
+    this._session.scmVariablesToDisplayOrEdit = value;
+  }
+
+  get oldScmVariablesToEdit() {
+    return this._session.oldScmVariablesToEdit;
+  }
+
   entities$: Observable<Array<{ origin: string; name: string }>> =
     this._extensions.extensionNames$.pipe(
       switchMap((extensions) =>
@@ -107,15 +143,7 @@ export class ContextViewComponent {
     })),
   );
 
-  constructor(
-    private _game: GameFacade,
-    private _ui: UiFacade,
-    private _extensions: ExtensionsFacade,
-    private _enums: EnumsFacade,
-    private _snippets: SnippetsFacade,
-    private _articles: ArticlesFacade,
-    private _session: ContextEditSessionService,
-  ) {}
+  constructor() {}
 
   getSnippet(extension: string, id: string) {
     return this._snippets.getSnippet(extension, id);
@@ -238,6 +266,14 @@ export class ContextViewComponent {
 
   onEditorHasError(hasError: boolean) {
     this._ui.setEditorHasError(hasError);
+  }
+
+  onScmRefsChange(refs: Record<string, string>) {
+    this.scmRefsToDisplayOrEdit = refs;
+  }
+
+  onScmVariablesChange(variables: Record<string, string>) {
+    this.scmVariablesToDisplayOrEdit = variables;
   }
 
   onChangeSyntaxKind(syntaxKind: SyntaxKind) {

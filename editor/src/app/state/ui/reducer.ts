@@ -45,7 +45,10 @@ import {
   changeScmViewShowLineNumbers,
   changeScmViewShowOffsets,
   changeScmViewAdjustOffsets,
+  displayOrEditScmRefs,
+  displayOrEditScmVariables,
 } from './actions';
+import { sortBy } from '../../utils';
 
 export interface GameState {
   selectedExtensions: Array<string | 'any'>;
@@ -68,6 +71,8 @@ export interface UiState {
   snippetToDisplayOrEdit?: string;
   selectedSyntaxKind: SyntaxKind;
   enumToDisplayOrEdit?: EnumRaw;
+  scmRefsToDisplayOrEdit?: Record<string, string>;
+  scmVariablesToDisplayOrEdit?: Record<string, string>;
   viewMode: ViewMode;
   currentPage: number | 'all';
   games: Record<Game, GameState>;
@@ -164,6 +169,7 @@ export const uiReducer = createReducer(
   on(displayOrEditCommandInfo, (state, { command, extension, viewMode }) => ({
     ...state,
     viewMode,
+    editorHasError: false,
     commandToDisplayOrEdit: command,
     extensionToDisplayOrEdit: extension,
     snippetToDisplayOrEdit: undefined,
@@ -175,15 +181,31 @@ export const uiReducer = createReducer(
   on(displayOrEditEnum, (state, { enumToEdit, viewMode }) => ({
     ...state,
     viewMode,
+    editorHasError: false,
     enumToDisplayOrEdit: enumToEdit,
+  })),
+  on(displayOrEditScmRefs, (state, { refs, viewMode }) => ({
+    ...state,
+    viewMode,
+    editorHasError: false,
+    scmRefsToDisplayOrEdit: sortBy(refs, 'ref.'),
+  })),
+  on(displayOrEditScmVariables, (state, { variables, viewMode }) => ({
+    ...state,
+    viewMode,
+    editorHasError: false,
+    scmVariablesToDisplayOrEdit: sortBy(variables, 'g.'),
   })),
   on(stopEditOrDisplay, (state) => ({
     ...state,
+    editorHasError: false,
     commandToDisplayOrEdit: undefined,
     extensionToDisplayOrEdit: undefined,
     snippetToDisplayOrEdit: undefined,
     classToDisplay: undefined,
     enumToDisplayOrEdit: undefined,
+    scmRefsToDisplayOrEdit: undefined,
+    scmVariablesToDisplayOrEdit: undefined,
     viewMode: ViewMode.None,
   })),
   on(changePage, (state, { index: currentPage }) => ({

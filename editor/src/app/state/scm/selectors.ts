@@ -8,6 +8,7 @@ import {
 import { ScmState } from './reducer';
 import { Game } from '../../models';
 import {
+  extractRefOffset,
   getFragment,
   normalizeScmPath,
   toLineNumber,
@@ -48,19 +49,45 @@ export const files = createSelector(
 export const overlayByGame = createSelector(
   state,
   (state: ScmState | undefined, props: { game: Game }) =>
-    props.game ? state?.overlays[props.game] : undefined,
+    getGameOverlay(state, props.game),
+);
+
+export const refsByGame = createSelector(
+  state,
+  (state: ScmState | undefined, props: { game: Game }) =>
+    props.game ? state?.refsByGame[props.game] : undefined,
+);
+
+export const variablesByGame = createSelector(
+  state,
+  (state: ScmState | undefined, props: { game: Game }) =>
+    props.game ? state?.variablesByGame[props.game] : undefined,
 );
 
 export const currentOverlay = createSelector(
   state,
   game,
   (state: ScmState | undefined, game: Game | undefined) =>
-    game ? state?.overlays[game] : undefined,
+    getGameOverlay(state, game),
+);
+
+export const currentRefsOverlay = createSelector(
+  state,
+  game,
+  (state: ScmState | undefined, game: Game | undefined) =>
+    game ? (state?.refsByGame[game] ?? {}) : {},
+);
+
+export const currentVariablesOverlay = createSelector(
+  state,
+  game,
+  (state: ScmState | undefined, game: Game | undefined) =>
+    game ? (state?.variablesByGame[game] ?? {}) : {},
 );
 
 export const mapByGame = createSelector(
   state,
-  (state: ScmState | undefined, props: { game: Game }) =>
+  (state: ScmState | undefined, props: { game: Game | undefined }) =>
     props.game ? state?.maps[props.game] : undefined,
 );
 
@@ -153,11 +180,14 @@ function buildTree(
         })
         .sort((a, b) => {
           if (a.label.startsWith('ref.') && b.label.startsWith('ref.')) {
-            const aOffset = Number.parseInt(a.label.slice('ref.'.length), 10);
-            const bOffset = Number.parseInt(b.label.slice('ref.'.length), 10);
+            const aOffset = Number.parseInt(extractRefOffset(a.label), 10);
+            const bOffset = Number.parseInt(extractRefOffset(b.label), 10);
             return aOffset - bOffset;
           }
-          return a.label.localeCompare(b.label, undefined, { numeric: true, sensitivity: 'base' });
+          return a.label.localeCompare(b.label, undefined, {
+            numeric: true,
+            sensitivity: 'base',
+          });
         });
 
       if (children.length === 1 && groupName === 'main') {
@@ -269,4 +299,21 @@ function parseRefOffset(ref: string): number | undefined {
 
   const extractedValue = Number.parseInt(match[1], 10);
   return Number.isNaN(extractedValue) ? undefined : extractedValue;
+}
+
+function getGameOverlay(state: ScmState | undefined, game: Game | undefined) {
+  if (!game) {
+    return undefined;
+  }
+
+  const refs = state?.refsByGame[game];
+  const variables = state?.variablesByGame[game];
+  if (refs === undefined && variables === undefined) {
+    return undefined;
+  }
+
+  return {
+    ...(refs ?? {}),
+    ...(variables ?? {}),
+  };
 }

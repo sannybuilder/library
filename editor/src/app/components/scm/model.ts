@@ -18,7 +18,7 @@ export interface ScmMapFileEntry {
 }
 
 export interface ScmMap {
-  version: '2.0';
+  version: number;
   groups: string[];
   files: ScmMapFileEntry[];
   xrefs: Record<string, string[]>;

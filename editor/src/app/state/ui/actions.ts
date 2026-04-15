@@ -63,6 +63,16 @@ export const displayOrEditEnum = createAction(
   props<{ enumToEdit: EnumRaw; viewMode: ViewMode }>(),
 );
 
+export const displayOrEditScmRefs = createAction(
+  '[ui] display or edit scm refs',
+  props<{ refs: Record<string, string>; viewMode: ViewMode }>(),
+);
+
+export const displayOrEditScmVariables = createAction(
+  '[ui] display or edit scm variables',
+  props<{ variables: Record<string, string>; viewMode: ViewMode }>(),
+);
+
 export const displayExtensionList = createAction('[ui] display extension list');
 export const displayClassesList = createAction('[ui] display classes list');
 export const displayEnumsList = createAction('[ui] display enums list');

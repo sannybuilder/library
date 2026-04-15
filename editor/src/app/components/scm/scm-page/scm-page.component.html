@@ -354,6 +354,23 @@
               </div>
             </ng-container>
 
+            <div class="d-flex flex-row justify-content-center mb-3">
+              <a
+                class="mr-3"
+                [routerLink]="[]"
+                [queryParams]="{ rail: 'refs' }"
+                queryParamsHandling="merge"
+                >{{ 'ui.scm.refList' | translate }}</a
+              >
+              <a
+                class="mr-3"
+                [routerLink]="[]"
+                [queryParams]="{ rail: 'variables' }"
+                queryParamsHandling="merge"
+                >{{ 'ui.scm.varList' | translate }}</a
+              >
+            </div>
+
             <ng-container *ngIf="code$ | async as code; else loading">
               <ng-container *ngIf="overlay$ | async as overlay">
                 <ng-container *ngIf="map$ | async as map">

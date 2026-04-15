@@ -46,6 +46,8 @@ import {
   changeScmViewShowLineNumbers,
   changeScmViewShowOffsets,
   changeScmViewAdjustOffsets,
+  displayOrEditScmRefs,
+  displayOrEditScmVariables,
 } from './actions';
 import * as selector from './selectors';
 import { combineLatest } from 'rxjs';
@@ -85,6 +87,12 @@ export class UiFacade {
     selector.extensionToDisplayOrEdit
   );
   enumToDisplayOrEdit$ = this.store$.select(selector.enumToDisplayOrEdit);
+  scmRefsToDisplayOrEdit$ = this.store$.select(
+    selector.scmRefsToDisplayOrEdit,
+  );
+  scmVariablesToDisplayOrEdit$ = this.store$.select(
+    selector.scmVariablesToDisplayOrEdit,
+  );
   viewMode$ = this.store$.select(selector.viewMode);
   snippetToDisplayOrEdit$ = this.store$.select(selector.snippetToDisplayOrEdit);
   rows$ = this.store$.select(selector.rows);
@@ -240,6 +248,36 @@ export class UiFacade {
   editEnum(enumToEdit: EnumRaw) {
     this.store$.dispatch(
       displayOrEditEnum({ enumToEdit, viewMode: ViewMode.EditEnum })
+    );
+  }
+
+  displayScmRefs(refs: Record<string, string>) {
+    this.store$.dispatch(
+      displayOrEditScmRefs({ refs, viewMode: ViewMode.ViewScmRefs }),
+    );
+  }
+
+  editScmRefs(refs: Record<string, string>) {
+    this.store$.dispatch(
+      displayOrEditScmRefs({ refs, viewMode: ViewMode.EditScmRefs }),
+    );
+  }
+
+  displayScmVariables(variables: Record<string, string>) {
+    this.store$.dispatch(
+      displayOrEditScmVariables({
+        variables,
+        viewMode: ViewMode.ViewScmVariables,
+      }),
+    );
+  }
+
+  editScmVariables(variables: Record<string, string>) {
+    this.store$.dispatch(
+      displayOrEditScmVariables({
+        variables,
+        viewMode: ViewMode.EditScmVariables,
+      }),
     );
   }
 

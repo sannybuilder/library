@@ -41,7 +41,7 @@ export class RouteGuard {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const { segments, searchTerm } = getSegmentsFromUrl(
+    const { segments, searchTerm, rail } = getSegmentsFromUrl(
       this._router,
       state.url,
     );
@@ -65,6 +65,27 @@ export class RouteGuard {
       );
     }
 
+    const viewContext =
+      context === 'native'
+        ? ViewContext.Code
+        : context === 'scm'
+          ? ViewContext.Scm
+          : ViewContext.Script;
+    const defaultExtension = getDefaultExtension(viewContext);
+
+    if (viewContext === ViewContext.Scm) {
+      const fileName = segments.join('/');
+      this._game.onListEnter({
+        game,
+        extension: defaultExtension,
+        id: fileName || undefined,
+        action: 'scm-file',
+        rail,
+        viewContext,
+      });
+      return true;
+    }
+
     const scope = segments.shift();
 
     if (scope) {
@@ -76,7 +97,6 @@ export class RouteGuard {
           'generate',
           'classes',
           'enums',
-          'files',
         ].includes(scope)
       ) {
         // /:game/:extensionName/ -> /:game/script/extensions/:extensionName/
@@ -92,9 +112,6 @@ export class RouteGuard {
         return this.goHome();
       }
       if (scope === 'versions' && context !== 'native') {
-        return this.goHome();
-      }
-      if (scope === 'files' && context !== 'scm') {
         return this.goHome();
       }
     }
@@ -124,28 +141,6 @@ export class RouteGuard {
       if (assertAction(action)) {
         return this.goHome();
       }
-    }
-
-    const viewContext =
-      context === 'native'
-        ? ViewContext.Code
-        : context === 'scm'
-          ? ViewContext.Scm
-          : ViewContext.Script;
-    const defaultExtension = getDefaultExtension(viewContext);
-
-    if (scope === 'files') {
-      const fileName = [scopeName, itemName, action, ...segments]
-        .filter(Boolean)
-        .join('/');
-      this._game.onListEnter({
-        game,
-        extension: defaultExtension,
-        id: fileName,
-        action: 'scm-file',
-        viewContext,
-      });
-      return true;
     }
 
     if (scope === 'classes') {
@@ -244,10 +239,12 @@ function getSegmentsFromUrl(
 ): {
   segments: string[];
   searchTerm?: string;
+  rail?: string;
 } {
   const tree = router.parseUrl(url);
   return {
     searchTerm: tree.queryParams?.q,
+    rail: tree.queryParams?.rail,
     segments:
       tree.root?.children?.primary?.segments.map((segment) => segment.path) ??
       [],

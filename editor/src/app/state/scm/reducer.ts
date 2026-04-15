@@ -8,19 +8,25 @@ import {
   loadScmMapSuccess,
   loadScmOverlaySuccess,
   selectScmLabelOffset,
+  updateScmRefs,
+  updateScmVariables,
 } from './actions';
+import { sortBy } from '../../utils';
 
 export interface ScmState {
   activeFileName?: string;
+  activeGame?: Game;
   selectedLabelOffset?: number;
   files: Record<string, ScriptFile>;
-  overlays: Partial<Record<Game, Record<string, string>>>;
+  refsByGame: Partial<Record<Game, Record<string, string>>>;
+  variablesByGame: Partial<Record<Game, Record<string, string>>>;
   maps: Partial<Record<Game, ScmMap>>;
 }
 
 export const initialState: ScmState = {
   files: {},
-  overlays: {},
+  refsByGame: {},
+  variablesByGame: {},
   maps: {},
 };
 
@@ -42,13 +48,45 @@ export const scmReducer = createReducer(
       [name]: content,
     },
   })),
-  on(loadScmOverlaySuccess, (state, { game, overlay }) => ({
+  on(loadScmOverlaySuccess, (state, { game, refs, variables }) => ({
     ...state,
-    overlays: {
-      ...state.overlays,
-      [game]: overlay,
+    refsByGame: {
+      ...state.refsByGame,
+      [game]: sortBy(refs, 'ref.'),
+    },
+    variablesByGame: {
+      ...state.variablesByGame,
+      [game]: sortBy(variables, 'g.'),
     },
   })),
+  on(updateScmRefs, (state, { refs }) => {
+    const game = state.activeGame;
+    if (!game) {
+      return state;
+    }
+
+    return {
+      ...state,
+      refsByGame: {
+        ...state.refsByGame,
+        [game]: sortBy(refs, 'ref.'),
+      },
+    };
+  }),
+  on(updateScmVariables, (state, { variables }) => {
+    const game = state.activeGame;
+    if (!game) {
+      return state;
+    }
+
+    return {
+      ...state,
+      variablesByGame: {
+        ...state.variablesByGame,
+        [game]: sortBy(variables, 'g.'),
+      },
+    };
+  }),
   on(loadScmMapSuccess, (state, { game, map }) => ({
     ...state,
     maps: {

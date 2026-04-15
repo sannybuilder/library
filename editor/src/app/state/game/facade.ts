@@ -26,6 +26,7 @@ export class GameFacade {
     searchTerm,
     platforms,
     versions,
+    rail,
     viewContext,
     jsonModel
   }: {
@@ -38,6 +39,7 @@ export class GameFacade {
     searchTerm?: string;
     platforms?: Platform[];
     versions?: Version[];
+    rail?: string;
     viewContext?: ViewContext,
     jsonModel?: JsonModel
   }) {
@@ -52,6 +54,7 @@ export class GameFacade {
         searchTerm,
         platforms,
         versions,
+        rail,
         viewContext,
         jsonModel
       })

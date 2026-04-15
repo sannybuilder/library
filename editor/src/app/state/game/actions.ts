@@ -19,6 +19,7 @@ export const onListEnter = createAction(
     searchTerm?: string;
     platforms?: Platform[];
     versions?: Version[];
+    rail?: string;
     viewContext?: ViewContext;
     jsonModel?: JsonModel;
   }>()

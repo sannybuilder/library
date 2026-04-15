@@ -1,4 +1,4 @@
-import { doesGameHaveMap, doesGameRequireOpcode, getBaseGame } from './src/app/utils';
+import { doesGameHaveMap, doesGameHaveScm, doesGameRequireOpcode, getBaseGame } from './src/app/utils';
 import { Game, GameNativeAssets } from './src/app/models';
 
 const { join } = require('path');
@@ -47,6 +47,10 @@ games.forEach((game) => {
 
   if (doesGameHaveMap(game)) {
     run(`cp ../${game}/maps ${assets} -r`);
+  }
+
+  if (doesGameHaveScm(game)) {
+    run(`cp ../${game}/scm ${assets} -r`);
   }
 
   if (GameNativeAssets[game]) {

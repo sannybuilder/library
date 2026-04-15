@@ -4,3 +4,8 @@ export { ScmTreeComponent } from './scm-tree/scm-tree.component';
 export { ScmRefsComponent } from './scm-refs/scm-refs.component';
 export { ScmXrefsComponent } from './scm-xrefs/scm-xrefs.component';
 export { ScmPageComponent } from './scm-page/scm-page.component';
+export { RefListComponent } from './ref-list/ref-list.component';
+export { RefEditorComponent } from './ref-editor/ref-editor.component';
+export { VariableListComponent } from './variable-list/variable-list.component';
+export { VariableEditorComponent } from './variable-editor/variable-editor.component';
+export { KeyValueEditorComponent } from './key-value-editor/key-value-editor.component';

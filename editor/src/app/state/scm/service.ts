@@ -15,20 +15,23 @@ export class ScmService {
   }
 
   loadOverlay(game: Game) {
-    let refs = this._http.get<Record<string, string>>(
+    const refs = this._http.get<Record<string, string>>(
       `/assets/${game}/scm/refs.json`,
       {
         params: { ts: Date.now().toString() },
       },
     );
-    let variables = this._http.get<Record<string, string>>(
+    const variables = this._http.get<Record<string, string>>(
       `/assets/${game}/scm/variables.json`,
       {
         params: { ts: Date.now().toString() },
       },
     );
     return combineLatest([refs, variables]).pipe(
-      map(([base, user]) => ({ ...base, ...user })),
+      map(([refsData, variablesData]) => ({
+        refs: refsData,
+        variables: variablesData,
+      })),
     );
   }
 

@@ -5,6 +5,8 @@ import {
   loadScmFile,
   loadScmMap,
   selectScmLabelOffset,
+  updateScmRefs,
+  updateScmVariables,
 } from './actions';
 import * as selector from './selectors';
 import { Game } from '../../models';
@@ -25,6 +27,8 @@ export class ScmFacade {
   );
   xrefs$ = this.store$.select(selector.currentXrefs);
   refs$ = this.store$.select(selector.currentRefs);
+  refsOverlay$ = this.store$.select(selector.currentRefsOverlay);
+  variablesOverlay$ = this.store$.select(selector.currentVariablesOverlay);
 
   constructor(private store$: Store) {}
 
@@ -42,6 +46,14 @@ export class ScmFacade {
 
   selectLabelOffset(offset: number) {
     return this.store$.dispatch(selectScmLabelOffset({ offset }));
+  }
+
+  updateRefs(refs: Record<string, string>) {
+    return this.store$.dispatch(updateScmRefs({ refs }));
+  }
+
+  updateVariables(variables: Record<string, string>) {
+    return this.store$.dispatch(updateScmVariables({ variables }));
   }
 
   mapByGame$(game: Game) {
@@ -62,5 +74,13 @@ export class ScmFacade {
 
   overlayByGame$(game: Game) {
     return this.store$.select(selector.overlayByGame, { game });
+  }
+
+  refsByGame$(game: Game) {
+    return this.store$.select(selector.refsByGame, { game });
+  }
+
+  variablesByGame$(game: Game) {
+    return this.store$.select(selector.variablesByGame, { game });
   }
 }

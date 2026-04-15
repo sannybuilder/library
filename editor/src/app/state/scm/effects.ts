@@ -6,6 +6,7 @@ import {
   map,
   switchMap,
   take,
+  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import {
@@ -17,10 +18,13 @@ import {
   loadScmMapSuccess,
   loadScmOverlay,
   loadScmOverlaySuccess,
+  updateScmRefs,
+  updateScmVariables,
 } from './actions';
 import { ScmService } from './service';
 import { GameFacade } from '../game/facade';
 import { ScmFacade } from './facade';
+import { ChangesFacade } from '../changes/facade';
 
 @Injectable({ providedIn: 'root' })
 export class ScmEffects {
@@ -72,15 +76,47 @@ export class ScmEffects {
             }
 
             return this._service.loadOverlay(game).pipe(
-              map((overlay) => loadScmOverlaySuccess({ game, overlay })),
+              map(({ refs, variables }) =>
+                loadScmOverlaySuccess({ game, refs, variables }),
+              ),
               catchError(() =>
-                of(loadScmOverlaySuccess({ game, overlay: {} })),
+                of(loadScmOverlaySuccess({ game, refs: {}, variables: {} })),
               ),
             );
           }),
         ),
       ),
     ),
+  );
+
+  updateRefs$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(updateScmRefs),
+        withLatestFrom(this._game.game$),
+        tap(([{ refs }, game]) => {
+          this._changes.registerTextFileChange(
+            `${game}/scm/refs.json`,
+            JSON.stringify(refs, null, 2),
+          );
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  updateVariables$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(updateScmVariables),
+        withLatestFrom(this._game.game$),
+        tap(([{ variables }, game]) => {
+          this._changes.registerTextFileChange(
+            `${game}/scm/variables.json`,
+            JSON.stringify(variables, null, 2),
+          );
+        }),
+      ),
+    { dispatch: false },
   );
 
   loadScmMap$ = createEffect(() =>
@@ -109,5 +145,6 @@ export class ScmEffects {
     private _service: ScmService,
     private _game: GameFacade,
     private _facade: ScmFacade,
+    private _changes: ChangesFacade,
   ) {}
 }

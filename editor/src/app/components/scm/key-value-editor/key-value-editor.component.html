@@ -1,0 +1,62 @@
+<div class="row mb-2">
+  <div class="col-12">
+    <div class="editor-toolbar">
+      <div class="input-group filter-group">
+        <input
+          type="text"
+          class="form-control filter-input"
+          [placeholder]="filterPlaceholder"
+          [(ngModel)]="filterQuery"
+        />
+        <div class="input-group-append">
+          <scl-icon-button
+            icon="clear"
+            [title]="'ui.header.searchClear' | translate"
+            (clicked)="filterQuery = ''"
+          ></scl-icon-button>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-outline-secondary text-nowrap"
+        (click)="addRow()"
+      >
+        {{ addButtonText }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="scroll-container mb-0"
+  *ngIf="filteredEntries.length; else emptyState"
+>
+  <div
+    class="entry-row"
+    *ngFor="let item of filteredEntries; trackBy: trackByIndex"
+  >
+    <input
+      type="text"
+      class="form-control form-control-sm key-input"
+      #keyInput
+      [ngModel]="item.key"
+      (ngModelChange)="updateKey(item, $event)"
+    />
+    <input
+      type="text"
+      class="form-control form-control-sm value-input"
+      [ngModel]="item.value"
+      (ngModelChange)="updateValue(item, $event)"
+    />
+    <scl-icon-button
+      class="delete-row"
+      icon="delete"
+      (clicked)="deleteRow(item)"
+      [title]="'ui.shared.deleteRow' | translate"
+    ></scl-icon-button>
+  </div>
+</div>
+
+<ng-template #emptyState>
+  <div class="text-muted">{{ emptyText }}</div>
+</ng-template>

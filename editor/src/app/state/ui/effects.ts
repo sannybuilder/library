@@ -9,6 +9,8 @@ import {
   displayDecisionTree,
   displayEnumsList,
   displayExtensionList,
+  displayOrEditScmRefs,
+  displayOrEditScmVariables,
   displayJsonGenerator,
   displayOrEditCommandInfo,
   displayOrEditEnum,
@@ -76,6 +78,7 @@ import {
   loadScmFile,
   loadScmMap,
   loadScmOverlay,
+  loadScmOverlaySuccess,
 } from '../scm/actions';
 
 @Injectable({ providedIn: 'root' })
@@ -95,6 +98,7 @@ export class UiEffects {
             searchTerm,
             platforms,
             versions,
+            rail,
             viewContext,
             jsonModel,
           },
@@ -102,11 +106,149 @@ export class UiEffects {
           game,
         ]) => {
           if (viewContext === ViewContext.Scm && action === 'scm-file') {
-            return [
+            const loadFileActions = [
               loadScmMap({ game }),
               loadScmOverlay({ game }),
               id ? loadScmFile({ name: id }) : loadMainFile(),
             ];
+
+            const railParts = rail?.split('/').filter(Boolean) ?? [];
+            if (railParts.length === 0) {
+              return loadFileActions;
+            }
+
+            const [railScope, railExtension, railId, railMode] = railParts;
+            if (railScope === 'refs') {
+              return this._scm.refsByGame$(game).pipe(
+                take(1),
+                switchMap((refs) => [
+                  ...loadFileActions,
+                  displayOrEditScmRefs({
+                    refs: refs ?? {},
+                    viewMode:
+                      railExtension === 'edit'
+                        ? ViewMode.EditScmRefs
+                        : ViewMode.ViewScmRefs,
+                  }),
+                ]),
+              );
+            }
+
+            if (railScope === 'variables') {
+              return this._scm.variablesByGame$(game).pipe(
+                take(1),
+                switchMap((variables) => [
+                  ...loadFileActions,
+                  displayOrEditScmVariables({
+                    variables: variables ?? {},
+                    viewMode:
+                      railExtension === 'edit'
+                        ? ViewMode.EditScmVariables
+                        : ViewMode.ViewScmVariables,
+                  }),
+                ]),
+              );
+            }
+
+            if (
+              railScope === 'extensions' &&
+              railExtension &&
+              railId
+            ) {
+              return this._extensions.extensions$.pipe(
+                first<Extension[]>(Boolean),
+                map((extensions) => {
+                  const neededPlatforms = platforms ?? [Platform.Any];
+                  const neededVersions = versions ?? [Version.Any];
+
+                  const opcode = isOpcode(railId) ? railId : undefined;
+                  const commandName = !isOpcode(railId) ? railId : undefined;
+                  const commandToEdit = extensions
+                    .find((e) => e.name === railExtension)
+                    ?.commands.find(
+                      (command) =>
+                        ((opcode && command.id === opcode) ||
+                          (commandName && command.name === commandName)) &&
+                        isPlatformMatchingExact(command, neededPlatforms) &&
+                        isVersionMatchingExact(command, neededVersions),
+                    );
+
+                  if (!commandToEdit) {
+                    if (railMode === 'edit' && canEdit) {
+                      return displayOrEditCommandInfo({
+                        extension: railExtension,
+                        command: {
+                          id: opcode,
+                          name: commandName || '',
+                          num_params: 0,
+                        },
+                        viewMode: ViewMode.EditCommand,
+                      });
+                    }
+
+                    return stopEditOrDisplay();
+                  }
+
+                  return displayOrEditCommandInfo({
+                    extension: railExtension,
+                    command: commandToEdit,
+                    viewMode:
+                      railMode === 'edit'
+                        ? ViewMode.EditCommand
+                        : ViewMode.ViewCommand,
+                  });
+                }),
+                switchMap((commandAction) => [
+                  ...loadFileActions,
+                  commandAction,
+                ]),
+              );
+            }
+
+            return loadFileActions;
+          }
+
+          if (viewContext === ViewContext.Scm && action === 'scm-refs') {
+            return this._scm.refsByGame$(game).pipe(
+              take(1),
+              switchMap((refs) =>
+                [
+                  loadScmMap({ game }),
+                  loadScmOverlay({ game }),
+                  loadMainFile(),
+                  displayOrEditScmRefs({
+                    refs: refs ?? {},
+                    viewMode:
+                      id === 'edit'
+                        ? ViewMode.EditScmRefs
+                        : ViewMode.ViewScmRefs,
+                  }),
+                ],
+              ),
+            );
+          }
+
+          if (
+            viewContext === ViewContext.Scm &&
+            action === 'scm-variables'
+          ) {
+            return this._scm.variablesByGame$(game).pipe(
+              take(1),
+              switchMap((variables) =>
+                [
+                  loadScmMap({ game }),
+                  loadScmOverlay({ game }),
+                  loadMainFile(),
+                  displayOrEditScmVariables({
+                    variables: variables ?? {},
+                    viewMode:
+                      id === 'edit'
+                        ? ViewMode.EditScmVariables
+                        : ViewMode.ViewScmVariables,
+                  }),
+                ],
+              ),
+            );
           }
 
           if (searchTerm) {
@@ -548,6 +690,43 @@ export class UiEffects {
     ),
   );
 
+  refreshScmOverlayView$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadScmOverlaySuccess),
+      withLatestFrom(this._ui.viewMode$),
+      switchMap(([{ refs, variables }, viewMode]) => {
+        if (viewMode === ViewMode.EditScmRefs) {
+          return [
+            displayOrEditScmRefs({ refs, viewMode: ViewMode.EditScmRefs }),
+          ];
+        }
+        if (viewMode === ViewMode.ViewScmRefs) {
+          return [
+            displayOrEditScmRefs({ refs, viewMode: ViewMode.ViewScmRefs }),
+          ];
+        }
+        if (viewMode === ViewMode.EditScmVariables) {
+          return [
+            displayOrEditScmVariables({
+              variables,
+              viewMode: ViewMode.EditScmVariables,
+            }),
+          ];
+        }
+        if (viewMode === ViewMode.ViewScmVariables) {
+          return [
+            displayOrEditScmVariables({
+              variables,
+              viewMode: ViewMode.ViewScmVariables,
+            }),
+          ];
+        }
+
+        return [];
+      }),
+    ),
+  );
+
   constructor(
     private _actions$: Actions,
     private _ui: UiFacade,
@@ -557,6 +736,7 @@ export class UiEffects {
     private _game: GameFacade,
     private _enums: EnumsFacade,
     private _articles: ArticlesFacade,
+    private _scm: ScmFacade,
     private _analytics: AnalyticsService,
     @Inject(DOCUMENT) private _d: Document,
   ) {}

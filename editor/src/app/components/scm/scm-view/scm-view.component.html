@@ -54,12 +54,9 @@
               [name]="command.name"
               [innerHTML]="command | propExtract: 'name' | sanitize"
               [attr.translate]="'no'"
-              [routerLink]="[
-                baseHref,
-                'extensions',
-                getDefaultExtension(),
-                command.id || command.name,
-              ]"
+              [routerLink]="[]"
+              [queryParams]="{ rail: getCommandRail(command) }"
+              queryParamsHandling="merge"
             ></a
           ></ng-container>
 

@@ -15,6 +15,10 @@ export class ContextEditSessionService implements OnDestroy {
   oldExtension?: string;
   enumToDisplayOrEdit?: EnumRaw;
   oldEnumToEdit?: EnumRaw;
+  scmRefsToDisplayOrEdit?: Record<string, string>;
+  oldScmRefsToEdit?: Record<string, string>;
+  scmVariablesToDisplayOrEdit?: Record<string, string>;
+  oldScmVariablesToEdit?: Record<string, string>;
 
   private readonly _onDestroy$ = new Subject<void>();
 
@@ -45,6 +49,20 @@ export class ContextEditSessionService implements OnDestroy {
       .subscribe((enumToEdit) => {
         this.enumToDisplayOrEdit = cloneDeep(enumToEdit);
         this.oldEnumToEdit = cloneDeep(enumToEdit);
+      });
+
+    this._ui.scmRefsToDisplayOrEdit$
+      .pipe(takeUntil(this._onDestroy$))
+      .subscribe((refs) => {
+        this.scmRefsToDisplayOrEdit = cloneDeep(refs);
+        this.oldScmRefsToEdit = cloneDeep(refs);
+      });
+
+    this._ui.scmVariablesToDisplayOrEdit$
+      .pipe(takeUntil(this._onDestroy$))
+      .subscribe((variables) => {
+        this.scmVariablesToDisplayOrEdit = cloneDeep(variables);
+        this.oldScmVariablesToEdit = cloneDeep(variables);
       });
   }
 

@@ -112,6 +112,16 @@ export const enumToDisplayOrEdit = createSelector(
   (state: UiState) => state.enumToDisplayOrEdit
 );
 
+export const scmRefsToDisplayOrEdit = createSelector(
+  state,
+  (state: UiState) => state.scmRefsToDisplayOrEdit,
+);
+
+export const scmVariablesToDisplayOrEdit = createSelector(
+  state,
+  (state: UiState) => state.scmVariablesToDisplayOrEdit,
+);
+
 export const viewMode = createSelector(
   state,
   (state: UiState) => state.viewMode

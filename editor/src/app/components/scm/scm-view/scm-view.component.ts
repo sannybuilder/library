@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Command, Game, ViewContext } from '../../../models';
 import {
-  getContextRouteSegment,
   getRoutePath,
   normalizeScmPath,
-  getQueryParamsForCommand,
+  extractRefOffset,
 } from '../../../utils';
 import { getDefaultExtension } from '../../../utils/extension';
 import { ScmMap, ScriptFile } from '../model';
@@ -73,16 +72,17 @@ export class ScmViewComponent {
     return command;
   }
 
-  getQueryParamsForCommand(command: Command, game: Game) {
-    return getQueryParamsForCommand(command, game);
-  }
-
-  get baseHref() {
-    return `/${this.game}/${getContextRouteSegment(this.viewContext)}`;
-  }
-
   getDefaultExtension() {
     return getDefaultExtension(this.viewContext);
+  }
+
+  getCommandRail(command: Command): string | undefined {
+    const commandId = command.id || command.name;
+    if (!commandId) {
+      return undefined;
+    }
+
+    return `extensions/${this.getDefaultExtension()}/${commandId}`;
   }
 
   getLineNumberAnchorId(index: number): string {
@@ -104,12 +104,12 @@ export class ScmViewComponent {
     }
 
     // is this a local label reference?
-    const absOffset = refKey.slice('ref.'.length);
+    const absOffset = extractRefOffset(refKey);
     const relativeOffset = Number.parseInt(absOffset, 10) - this._code.base;
     if (this._code.refs.includes(relativeOffset)) {
       return {
         routerLink: [],
-        fragment: 'label-' + refKey.slice('ref.'.length),
+        fragment: 'label-' + absOffset,
       };
     }
 
@@ -169,11 +169,16 @@ export class ScmViewComponent {
   }
 
   private getRefKey(arg: number | string): string | null {
-    if (typeof arg !== 'string') {
+    const symbol = this.resolveSymbol(arg);
+    if (!symbol?.startsWith('ref.')) {
       return null;
     }
 
-    if (!arg.startsWith('$')) {
+    return symbol;
+  }
+
+  private resolveSymbol(arg: number | string): string | null {
+    if (typeof arg !== 'string' || !arg.startsWith('$')) {
       return null;
     }
 
@@ -186,12 +191,7 @@ export class ScmViewComponent {
       return null;
     }
 
-    const symbol = this._code.symbols[refIndex];
-    if (!symbol?.startsWith('ref.')) {
-      return null;
-    }
-
-    return symbol;
+    return this._code.symbols[refIndex] ?? null;
   }
 
   isRef(index: number) {

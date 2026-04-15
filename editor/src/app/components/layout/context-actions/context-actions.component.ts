@@ -4,8 +4,9 @@ import {
   Input,
   EventEmitter,
   Output,
+  inject,
 } from '@angular/core';
-import { isEqual } from 'lodash';
+import { cloneDeep, isEqual } from 'lodash';
 import {
   ViewMode,
   Game,
@@ -22,6 +23,7 @@ import {
   UiFacade,
   ExtensionsFacade,
   EnumsFacade,
+  ScmFacade,
   SnippetsFacade,
   TreeFacade,
 } from 'src/app/state';
@@ -44,6 +46,15 @@ import { map } from 'rxjs/operators';
   standalone: false,
 })
 export class ContextActionsComponent {
+  private _game = inject(GameFacade);
+  private _ui = inject(UiFacade);
+  private _extensions = inject(ExtensionsFacade);
+  private _tree = inject(TreeFacade);
+  private _snippets = inject(SnippetsFacade);
+  private _enums = inject(EnumsFacade);
+  private _scm = inject(ScmFacade);
+  private _session = inject(ContextEditSessionService);
+
   ViewMode = ViewMode;
   ViewContext = ViewContext;
   readonly isCodeViewContext = isCodeViewContext;
@@ -103,19 +114,25 @@ export class ContextActionsComponent {
     return this._session.oldEnumToEdit;
   }
 
+  get scmRefsToDisplayOrEdit() {
+    return this._session.scmRefsToDisplayOrEdit;
+  }
+
+  get oldScmRefsToEdit() {
+    return this._session.oldScmRefsToEdit;
+  }
+
+  get scmVariablesToDisplayOrEdit() {
+    return this._session.scmVariablesToDisplayOrEdit;
+  }
+
+  get oldScmVariablesToEdit() {
+    return this._session.oldScmVariablesToEdit;
+  }
+
   @Input() screenSize!: number;
   @Input() isFullScreenMode!: boolean;
   @Output() fullScreenModeChange = new EventEmitter<boolean>();
-
-  constructor(
-    private _game: GameFacade,
-    private _ui: UiFacade,
-    private _extensions: ExtensionsFacade,
-    private _tree: TreeFacade,
-    private _snippets: SnippetsFacade,
-    private _enums: EnumsFacade,
-    private _session: ContextEditSessionService,
-  ) {}
 
   onFullScreenModeChange(isFullScreenMode: boolean) {
     this.fullScreenModeChange.emit(isFullScreenMode);
@@ -142,6 +159,16 @@ export class ContextActionsComponent {
   }) {
     const base = 'https://library.sannybuilder.com/#';
     const context = getContextRouteSegment(viewContext);
+
+    if (viewContext === ViewContext.Scm) {
+      const rail = this.getScmRail(viewMode, extension, command);
+      const scmFileName = this._getActiveScmFileNameFromHash();
+      if (rail && scmFileName) {
+        const url = [base, game, context, scmFileName].join('/');
+        return serializeUrlAndParams(url, { rail });
+      }
+    }
+
     if (viewMode === ViewMode.ViewAllClasses) {
       return [base, game, context, 'classes'].join('/');
     }
@@ -202,17 +229,7 @@ export class ContextActionsComponent {
   }
 
   shouldDisableSaveButton(viewMode: ViewMode, editorHasError: boolean) {
-    if (editorHasError || this.noChanges(viewMode)) {
-      return true;
-    }
-    if (viewMode === ViewMode.EditCommand) {
-      return false;
-    }
-    if (viewMode === ViewMode.EditEnum) {
-      return false;
-    }
-
-    return true;
+    return editorHasError || this.noChanges(viewMode);
   }
 
   noChanges(viewMode: ViewMode): boolean {
@@ -226,6 +243,15 @@ export class ContextActionsComponent {
     if (viewMode === ViewMode.EditEnum) {
       return isEqual(this.enumToDisplayOrEdit, this.oldEnumToEdit);
     }
+    if (viewMode === ViewMode.EditScmRefs) {
+      return isEqual(this.scmRefsToDisplayOrEdit, this.oldScmRefsToEdit);
+    }
+    if (viewMode === ViewMode.EditScmVariables) {
+      return isEqual(
+        this.scmVariablesToDisplayOrEdit,
+        this.oldScmVariablesToEdit,
+      );
+    }
     return true;
   }
 
@@ -236,6 +262,14 @@ export class ContextActionsComponent {
     }
     if (viewMode === ViewMode.EditEnum) {
       this._ui.editEnum(this.oldEnumToEdit!);
+    }
+    if (viewMode === ViewMode.EditScmRefs) {
+      this._session.scmRefsToDisplayOrEdit = cloneDeep(this.oldScmRefsToEdit);
+    }
+    if (viewMode === ViewMode.EditScmVariables) {
+      this._session.scmVariablesToDisplayOrEdit = cloneDeep(
+        this.oldScmVariablesToEdit,
+      );
     }
     return false;
   }
@@ -283,6 +317,73 @@ export class ContextActionsComponent {
     return !command || !command.name;
   }
 
+  getScmEditRail(viewMode: ViewMode, extension?: string, command?: Command) {
+    if (viewMode === ViewMode.ViewScmRefs) {
+      return 'refs/edit';
+    }
+
+    if (viewMode === ViewMode.ViewScmVariables) {
+      return 'variables/edit';
+    }
+
+    if (viewMode === ViewMode.ViewCommand && extension && command) {
+      const commandId = command.id || command.name;
+      if (!commandId) {
+        return undefined;
+      }
+      return `extensions/${extension}/${commandId}/edit`;
+    }
+
+    return undefined;
+  }
+
+  private getScmRail(
+    viewMode: ViewMode,
+    extension?: string,
+    command?: Command,
+  ): string | undefined {
+    if (viewMode === ViewMode.ViewScmRefs) {
+      return 'refs';
+    }
+    if (viewMode === ViewMode.EditScmRefs) {
+      return 'refs/edit';
+    }
+    if (viewMode === ViewMode.ViewScmVariables) {
+      return 'variables';
+    }
+    if (viewMode === ViewMode.EditScmVariables) {
+      return 'variables/edit';
+    }
+
+    if (
+      (viewMode === ViewMode.ViewCommand || viewMode === ViewMode.EditCommand) &&
+      extension &&
+      command
+    ) {
+      const commandId = command.id || command.name;
+      if (!commandId) {
+        return undefined;
+      }
+      return viewMode === ViewMode.EditCommand
+        ? `extensions/${extension}/${commandId}/edit`
+        : `extensions/${extension}/${commandId}`;
+    }
+
+    return undefined;
+  }
+
+  private _getActiveScmFileNameFromHash(): string | undefined {
+    const hash = window.location.hash.replace(/^#\/?/, '');
+    const [path] = hash.split('?');
+    const segments = path.split('/');
+    const scmIndex = segments.indexOf('scm');
+    if (scmIndex < 0 || scmIndex === segments.length - 1) {
+      return undefined;
+    }
+
+    return segments.slice(scmIndex + 1).join('/');
+  }
+
   createCommand(command: Command, extension: string) {
     this._extensions.updateCommand({
       command,
@@ -307,6 +408,12 @@ export class ContextActionsComponent {
     }
     if (viewMode === ViewMode.EditEnum) {
       this._onSaveEnum();
+    }
+    if (viewMode === ViewMode.EditScmRefs) {
+      this._onSaveScmRefs();
+    }
+    if (viewMode === ViewMode.EditScmVariables) {
+      this._onSaveScmVariables();
     }
   }
 
@@ -388,6 +495,16 @@ export class ContextActionsComponent {
       enumToEdit: this.enumToDisplayOrEdit!,
       oldEnumToEdit: this.oldEnumToEdit!,
     });
+    this._ui.stopEditOrDisplay();
+  }
+
+  private _onSaveScmRefs() {
+    this._scm.updateRefs(this.scmRefsToDisplayOrEdit!);
+    this._ui.stopEditOrDisplay();
+  }
+
+  private _onSaveScmVariables() {
+    this._scm.updateVariables(this.scmVariablesToDisplayOrEdit!);
     this._ui.stopEditOrDisplay();
   }
 }

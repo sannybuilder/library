@@ -31,8 +31,8 @@ export class ScmEffects {
   loadScmFile$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadScmFile),
-      withLatestFrom(this._game.game$),
-      switchMap(([{ name }, game]) => {
+      withLatestFrom(this._game.game$, this._facade.map$),
+      switchMap(([{ name }, game, scmMap]) => {
         return this._facade.fileByName$(name).pipe(
           take(1),
           switchMap((cachedContent) => {
@@ -40,8 +40,9 @@ export class ScmEffects {
               return [];
             }
 
+            const base = scmMap.base || `/assets/${game}/scm`;
             return this._service
-              .loadFile(name, game)
+              .loadFile(name, base)
               .pipe(map((content) => loadScmFileSuccess({ name, content })));
           }),
         );

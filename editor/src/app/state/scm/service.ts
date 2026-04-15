@@ -8,8 +8,8 @@ import { combineLatest, map } from 'rxjs';
 export class ScmService {
   constructor(private _http: HttpClient) {}
 
-  loadFile(name: string, game: Game) {
-    return this._http.get<ScriptFile>(`/assets/${game}/scm/${name}.json`, {
+  loadFile(name: string, base: string) {
+    return this._http.get<ScriptFile>(`${base}/${name}.json`, {
       params: { ts: Date.now().toString() },
     });
   }

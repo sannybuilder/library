@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   loadMainFile,
@@ -14,6 +14,8 @@ import { filter } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ScmFacade {
+  private store$ = inject(Store);
+
   activeFileName$ = this.store$.select(selector.activeFileName);
   currentFile$ = this.store$.select(selector.currentFile);
   files$ = this.store$.select(selector.files);
@@ -29,8 +31,6 @@ export class ScmFacade {
   refs$ = this.store$.select(selector.currentRefs);
   refsOverlay$ = this.store$.select(selector.currentRefsOverlay);
   variablesOverlay$ = this.store$.select(selector.currentVariablesOverlay);
-
-  constructor(private store$: Store) {}
 
   loadFile(name: string) {
     return this.store$.dispatch(loadScmFile({ name }));

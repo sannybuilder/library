@@ -31,12 +31,17 @@ export class VariableEditorComponent {
   }
 
   @Output() variablesChange = new EventEmitter<Record<string, string>>();
+  @Output() hasError = new EventEmitter<boolean>();
 
   entries: KeyValueEntry[] = [];
 
   onEntriesChange(entries: KeyValueEntry[]) {
     this.entries = entries;
     this.variablesChange.emit(this.toRecord(this.entries));
+  }
+
+  onHasError(hasError: boolean) {
+    this.hasError.emit(hasError);
   }
 
   toRawVariableKey(key: string): string {

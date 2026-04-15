@@ -104,6 +104,7 @@
         *ngIf="viewMode === ViewMode.EditScmRefs && scmRefsToDisplayOrEdit"
         [refs]="scmRefsToDisplayOrEdit"
         (refsChange)="onScmRefsChange($event)"
+        (hasError)="onEditorHasError($event)"
       ></scl-ref-editor>
       <scl-variable-list
         *ngIf="
@@ -119,6 +120,7 @@
         "
         [variables]="scmVariablesToDisplayOrEdit"
         (variablesChange)="onScmVariablesChange($event)"
+        (hasError)="onEditorHasError($event)"
       ></scl-variable-editor>
     </ng-container>
   </ng-container>

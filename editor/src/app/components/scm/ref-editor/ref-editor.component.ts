@@ -31,12 +31,17 @@ export class RefEditorComponent {
   }
 
   @Output() refsChange = new EventEmitter<Record<string, string>>();
+  @Output() hasError = new EventEmitter<boolean>();
 
   entries: KeyValueEntry[] = [];
 
   onEntriesChange(entries: KeyValueEntry[]) {
     this.entries = entries;
     this.refsChange.emit(this.toRecord(this.entries));
+  }
+
+  onHasError(hasError: boolean) {
+    this.hasError.emit(hasError);
   }
 
   private toRecord(entries: KeyValueEntry[]): Record<string, string> {

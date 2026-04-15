@@ -41,18 +41,20 @@
       #keyInput
       [ngModel]="item.key"
       (ngModelChange)="updateKey(item, $event)"
+      [ngClass]="{ 'is-invalid': !item.key?.trim() }"
     />
     <input
       type="text"
       class="form-control form-control-sm value-input"
       [ngModel]="item.value"
       (ngModelChange)="updateValue(item, $event)"
+      [ngClass]="{ 'is-invalid': !item.value?.trim() }"
     />
     <scl-icon-button
       class="delete-row"
       icon="delete"
       (clicked)="deleteRow(item)"
-      [title]="'ui.shared.deleteRow' | translate"
+      [title]="'ui.scm.deleteRow' | translate"
     ></scl-icon-button>
   </div>
 </div>
@@ -60,3 +62,7 @@
 <ng-template #emptyState>
   <div class="text-muted">{{ emptyText }}</div>
 </ng-template>
+
+<div class="alert alert-danger mt-3" *ngIf="isInvalid">
+  <div *ngFor="let message of errorMessages">{{ message | translate }}</div>
+</div>

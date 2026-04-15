@@ -22,16 +22,33 @@ export interface KeyValueEntry {
   standalone: false,
 })
 export class KeyValueEditorComponent {
-  @Input() entries: KeyValueEntry[] = [];
+  private _entries: KeyValueEntry[] = [];
+
+  @Input() set entries(value: KeyValueEntry[]) {
+    this._entries = value ?? [];
+    this.updateErrors();
+  }
+
+  get entries() {
+    return this._entries;
+  }
+
   @Input() emptyText = 'No entries found';
   @Input() addButtonText = 'Add row';
   @Input() filterPlaceholder = 'Filter key or value';
 
   @Output() entriesChange = new EventEmitter<KeyValueEntry[]>();
+  @Output() hasError = new EventEmitter<boolean>();
 
   @ViewChildren('keyInput') keyInputs!: QueryList<ElementRef<HTMLInputElement>>;
 
   filterQuery = '';
+  isInvalid = false;
+  errors: Record<'emptyKey' | 'emptyValue', boolean> = {
+    emptyKey: false,
+    emptyValue: false,
+  };
+  errorMessages: string[] = [];
 
   get filteredEntries() {
     const query = this.filterQuery.trim().toLowerCase();
@@ -55,6 +72,7 @@ export class KeyValueEditorComponent {
     this.filterQuery = '';
     this.entries = [...this.entries, { key: '', value: '' }];
     this.entriesChange.emit(this.entries);
+    this.updateErrors();
 
     setTimeout(() => {
       const lastKeyInput = this.keyInputs?.last?.nativeElement;
@@ -67,15 +85,32 @@ export class KeyValueEditorComponent {
   updateKey(target: KeyValueEntry, key: string) {
     target.key = key;
     this.entriesChange.emit(this.entries);
+    this.updateErrors();
   }
 
   updateValue(target: KeyValueEntry, value: string) {
     target.value = value;
     this.entriesChange.emit(this.entries);
+    this.updateErrors();
   }
 
   deleteRow(target: KeyValueEntry) {
     this.entries = this.entries.filter((entry) => entry !== target);
     this.entriesChange.emit(this.entries);
+    this.updateErrors();
+  }
+
+  private updateErrors() {
+    this.errors.emptyKey = this.entries.some((entry) => !entry.key?.trim());
+    this.errors.emptyValue = this.entries.some(
+      (entry) => !entry.value?.trim(),
+    );
+
+    this.errorMessages = Object.entries(this.errors)
+      .filter(([_, hasError]) => hasError)
+      .map(([errorType]) => `ui.errors.scm.${errorType}`);
+
+    this.isInvalid = this.errorMessages.length > 0;
+    this.hasError.emit(this.isInvalid);
   }
 }

@@ -163,8 +163,10 @@ export class ContextActionsComponent {
     if (viewContext === ViewContext.Scm) {
       const rail = this.getScmRail(viewMode, extension, command);
       const scmFileName = this._getActiveScmFileNameFromHash();
-      if (rail && scmFileName) {
-        const url = [base, game, context, scmFileName].join('/');
+      if (rail || scmFileName) {
+        const url = [base, game, context, scmFileName]
+          .filter(Boolean)
+          .join('/');
         return serializeUrlAndParams(url, { rail });
       }
     }
@@ -356,7 +358,8 @@ export class ContextActionsComponent {
     }
 
     if (
-      (viewMode === ViewMode.ViewCommand || viewMode === ViewMode.EditCommand) &&
+      (viewMode === ViewMode.ViewCommand ||
+        viewMode === ViewMode.EditCommand) &&
       extension &&
       command
     ) {

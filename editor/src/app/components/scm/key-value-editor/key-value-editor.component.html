@@ -27,42 +27,40 @@
   </div>
 </div>
 
-<div
-  class="scroll-container mb-0"
-  *ngIf="filteredEntries.length; else emptyState"
->
-  <div
-    class="entry-row"
-    *ngFor="let item of filteredEntries; trackBy: trackByIndex"
-  >
-    <input
-      type="text"
-      class="form-control form-control-sm key-input"
-      #keyInput
-      [ngModel]="item.key"
-      (ngModelChange)="updateKey(item, $event)"
-      [ngClass]="{ 'is-invalid': !item.key?.trim() }"
-    />
-    <input
-      type="text"
-      class="form-control form-control-sm value-input"
-      [ngModel]="item.value"
-      (ngModelChange)="updateValue(item, $event)"
-      [ngClass]="{ 'is-invalid': !item.value?.trim() }"
-    />
-    <scl-icon-button
-      class="delete-row"
-      icon="delete"
-      (clicked)="deleteRow(item)"
-      [title]="'ui.scm.deleteRow' | translate"
-    ></scl-icon-button>
-  </div>
+<div class="scroll-container">
+  <ng-container *ngIf="filteredEntries.length; else emptyState">
+    <div
+      class="entry-row"
+      *ngFor="let item of filteredEntries; trackBy: trackByIndex"
+    >
+      <input
+        type="text"
+        class="form-control form-control-sm key-input"
+        #keyInput
+        [ngModel]="item.key"
+        (ngModelChange)="updateKey(item, $event)"
+        [ngClass]="{ 'is-invalid': !item.key?.trim() }"
+      />
+      <input
+        type="text"
+        class="form-control form-control-sm value-input"
+        [ngModel]="item.value"
+        (ngModelChange)="updateValue(item, $event)"
+        [ngClass]="{ 'is-invalid': !item.value?.trim() }"
+      />
+      <scl-icon-button
+        class="delete-row"
+        icon="delete"
+        (clicked)="deleteRow(item)"
+        [title]="'ui.scm.deleteRow' | translate"
+      ></scl-icon-button>
+    </div>
+    <div class="alert alert-danger mt-3" *ngIf="isInvalid">
+      <div *ngFor="let message of errorMessages">{{ message | translate }}</div>
+    </div>
+  </ng-container>
 </div>
 
 <ng-template #emptyState>
   <div class="text-muted">{{ emptyText }}</div>
 </ng-template>
-
-<div class="alert alert-danger mt-3" *ngIf="isInvalid">
-  <div *ngFor="let message of errorMessages">{{ message | translate }}</div>
-</div>

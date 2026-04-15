@@ -36,7 +36,7 @@ export class ScmEffects {
         this._game.game$.pipe(
           take(1),
           switchMap((game) =>
-            this._facade.mapByGame$(game).pipe(
+            this._facade.map$.pipe(
               take(1),
               switchMap((scmMap) =>
                 this._facade.fileByName$(name).pipe(

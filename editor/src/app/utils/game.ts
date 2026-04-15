@@ -91,8 +91,7 @@ export function doesGameHaveMap(game: Game): boolean {
 }
 
 export function doesGameHaveScm(game: Game): boolean {
-  // return [Game.vcs].includes(game);
-  return false;
+  return [Game.vcs].includes(game);
 }
 
 export function hasCLEOReduxSupport(game: Game): boolean {

@@ -12,6 +12,7 @@ import {
 import {
   loadMainFile,
   loadScmFile,
+  loadScmFileError,
   loadScmFileSuccess,
   loadScmMap,
   loadScmMapError,
@@ -31,22 +32,32 @@ export class ScmEffects {
   loadScmFile$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadScmFile),
-      withLatestFrom(this._game.game$, this._facade.map$),
-      switchMap(([{ name }, game, scmMap]) => {
-        return this._facade.fileByName$(name).pipe(
+      switchMap(({ name }) =>
+        this._game.game$.pipe(
           take(1),
-          switchMap((cachedContent) => {
-            if (cachedContent) {
-              return [];
-            }
+          switchMap((game) =>
+            this._facade.mapByGame$(game).pipe(
+              take(1),
+              switchMap((scmMap) =>
+                this._facade.fileByName$(name).pipe(
+                  take(1),
+                  switchMap((cachedContent) => {
+                    if (cachedContent) {
+                      return [];
+                    }
 
-            const base = scmMap.base || `/assets/${game}/scm`;
-            return this._service
-              .loadFile(name, base)
-              .pipe(map((content) => loadScmFileSuccess({ name, content })));
-          }),
-        );
-      }),
+                    const base = scmMap?.base || `/assets/${game}/scm`;
+                    return this._service.loadFile(name, base).pipe(
+                      map((content) => loadScmFileSuccess({ name, content })),
+                      catchError(() => of(loadScmFileError({ name }))),
+                    );
+                  }),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     ),
   );
 

@@ -16,6 +16,11 @@ export const loadScmFileSuccess = createAction(
   props<{ name: string; content: ScriptFile }>(),
 );
 
+export const loadScmFileError = createAction(
+  '[SCM] Load File Error',
+  props<{ name: string }>(),
+);
+
 export const loadScmOverlay = createAction(
   '[SCM] Load Overlay',
   props<{ game: Game }>(),

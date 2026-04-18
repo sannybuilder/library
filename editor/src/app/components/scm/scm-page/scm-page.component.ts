@@ -111,12 +111,11 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.onDestroy$.next(undefined);
     this.onDestroy$.complete();
-    this._ui.toggleCommandListElements(false);
   }
 
   ngAfterViewInit(): void {
     this.detectScreenSize();
-    this._ui.toggleCommandListElements(true);
+    this._ui.toggleCommandListElements(false);
   }
 
   onCancel() {

@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -32,6 +32,15 @@ import { AnalyticsService } from '../../../analytics';
     standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  private _auth = inject(AuthFacade);
+  private _ui = inject(UiFacade)
+  private _router = inject(Router);
+  private _translate = inject(TranslateService)
+  private _cookies = inject(CookieService);
+  private _game = inject(GameFacade)
+  private _analytics = inject(AnalyticsService);
+  private _config = inject(CONFIG);
+
   baseGames = getBaseGames();
   KNOWN_LANGUAGES = KNOWN_LANGUAGES;
   displaySearchHelp$ = this._ui.displaySearchHelp$;
@@ -54,17 +63,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       return isValidGame(maybeGame) ? getBaseGame(maybeGame) : maybeGame;
     })
   );
-
-  constructor(
-    private _auth: AuthFacade,
-    private _ui: UiFacade,
-    private _router: Router,
-    private _translate: TranslateService,
-    private _cookies: CookieService,
-    private _game: GameFacade,
-    private _analytics: AnalyticsService,
-    @Inject(CONFIG) private _config: Config
-  ) {}
 
   ngOnInit() {
     this.searchDebounced$

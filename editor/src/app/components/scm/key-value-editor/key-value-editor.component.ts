@@ -8,6 +8,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { isValidIdentifier } from '../../../utils';
 
 export interface KeyValueEntry {
   key: string;
@@ -44,9 +45,10 @@ export class KeyValueEditorComponent {
 
   filterQuery = '';
   isInvalid = false;
-  errors: Record<'emptyKey' | 'emptyValue', boolean> = {
+  errors: Record<'emptyKey' | 'emptyValue' | 'invalidIdentifier', boolean> = {
     emptyKey: false,
     emptyValue: false,
+    invalidIdentifier: false,
   };
   errorMessages: string[] = [];
 
@@ -102,10 +104,10 @@ export class KeyValueEditorComponent {
 
   private updateErrors() {
     this.errors.emptyKey = this.entries.some((entry) => !entry.key?.trim());
-    this.errors.emptyValue = this.entries.some(
-      (entry) => !entry.value?.trim(),
+    this.errors.emptyValue = this.entries.some((entry) => !entry.value?.trim());
+    this.errors.invalidIdentifier = this.entries.some(
+      ({ value }) => !isValidIdentifier(value),
     );
-
     this.errorMessages = Object.entries(this.errors)
       .filter(([_, hasError]) => hasError)
       .map(([errorType]) => `ui.errors.scm.${errorType}`);

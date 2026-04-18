@@ -142,14 +142,8 @@ export class ScmViewComponent implements OnChanges {
         case '"':
           return 'tok-str';
         case '$': {
-          const refIndex = parseInt(arg.slice(1), 10);
-
-          if (
-            !isNaN(refIndex) &&
-            refIndex >= 0 &&
-            refIndex < this.code.symbols.length
-          ) {
-            let symbol = this.code.symbols[refIndex];
+          const symbol = this.getSymbol(arg);
+          if (symbol) {
             if (symbol.startsWith('g.') || symbol.startsWith('l.')) {
               return 'tok-var';
             }
@@ -241,18 +235,17 @@ export class ScmViewComponent implements OnChanges {
 
       if (this.isRef(i) && typeof lineOffset === 'number') {
         const labelId = `label-${this.code.base + lineOffset}`;
+        let text = this.escapeHtml(this.formatLabel(lineOffset));
+        let title = `Click to view Xrefs for ${text}`;
+        let href = this.escapeAttribute(
+          this.toCurrentHref({ fragment: labelId }),
+        );
+        let id = this.escapeAttribute(labelId);
+        let classes = 'tok-label tok-ref identifier';
         parts.push(
-          `<a href="${this.escapeAttribute(
-            this.toCurrentHref({ fragment: labelId }),
-          )}" id="${this.escapeAttribute(labelId)}" class="tok-label tok-ref identifier">${this.escapeHtml(
-            this.formatLabel(lineOffset),
-          )}</a>`,
+          `<a title="${title}" href="${href}" id="${id}" class="${classes}">${text}</a>`,
         );
       }
-
-      // if (this.isUnreachableInstruction(i)) {
-      //   parts.push('<div class="text-muted pt-3 pl-5">// unreachable</div>');
-      // }
 
       const activeClass =
         this.activeFragment === this.getLineNumberAnchorId(i) ? ' active' : '';
@@ -348,22 +341,32 @@ export class ScmViewComponent implements OnChanges {
       )}</a>`;
     }
 
+    let symbol = this.getSymbol(arg);
+    if (symbol) {
+      let escapedSymbol = this.escapeAttribute(symbol);
+      return `<span title="Click to copy ${symbol} to clipboard" data-copy-text="${escapedSymbol}" class="tok ${this.getClass(arg)}">${this.escapeHtml(display)}</span>`;
+    }
+
     return `<span class="tok ${this.getClass(arg)}">${this.escapeHtml(display)}</span>`;
   }
 
-  private overlayValue(arg: number | string): string {
-    let resolved: number | string = arg;
-    if (typeof arg === 'string' && arg.startsWith('$')) {
-      const refIndex = Number.parseInt(arg.slice(1), 10);
-      if (
-        !Number.isNaN(refIndex) &&
-        refIndex >= 0 &&
-        refIndex < this.code.symbols.length
-      ) {
-        resolved = this.code.symbols[refIndex];
-      }
+  private getSymbol(arg: number | string): string | null {
+    if (typeof arg !== 'string' || !arg.startsWith('$')) {
+      return null;
     }
+    const refIndex = Number.parseInt(arg.slice(1), 10);
+    if (
+      Number.isNaN(refIndex) ||
+      refIndex < 0 ||
+      refIndex >= this.code.symbols.length
+    ) {
+      return null;
+    }
+    return this.code.symbols[refIndex] ?? null;
+  }
 
+  private overlayValue(arg: number | string): string {
+    const resolved = this.getSymbol(arg) ?? arg;
     const value = String(resolved);
     return this.overlay[value] ?? this.defaultOverlay(value);
   }

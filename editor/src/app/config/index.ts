@@ -1,7 +1,7 @@
 import { InjectionToken, NgModule } from '@angular/core';
 import { environment } from '../../environments/environment';
 
-export const CONFIG = new InjectionToken('config');
+export const CONFIG = new InjectionToken<Config>('config');
 
 export interface Config {
   production: boolean;

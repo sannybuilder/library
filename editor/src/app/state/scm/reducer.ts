@@ -11,7 +11,7 @@ import {
   updateScmRefs,
   updateScmVariables,
 } from './actions';
-import { sortBy } from '../../utils';
+import { sortRefs, sortVariables } from '../../utils';
 
 export interface ScmState {
   activeFileName?: string;
@@ -53,10 +53,10 @@ export const scmReducer = createReducer(
   on(loadScmOverlaySuccess, (state, { game, refs, variables }) =>
     updateState(state, game, {
       refsByGame: {
-        [game]: sortBy(refs, 'ref.'),
+        [game]: sortRefs(refs),
       },
       variablesByGame: {
-        [game]: sortBy(variables, 'g.'),
+        [game]: sortVariables(variables),
       },
     }),
   ),
@@ -68,7 +68,7 @@ export const scmReducer = createReducer(
 
     return updateState(state, game, {
       refsByGame: {
-        [game]: sortBy(refs, 'ref.'),
+        [game]: refs,
       },
     });
   }),
@@ -80,7 +80,7 @@ export const scmReducer = createReducer(
 
     return updateState(state, game, {
       variablesByGame: {
-        [game]: sortBy(variables, 'g.'),
+        [game]: variables,
       },
     });
   }),

@@ -33,7 +33,17 @@ export function extractRefOffset(ref: string): string {
   return ref.slice('ref.'.length);
 }
 
-export function sortBy(list: Record<string, string>, prefix: string) {
+export function sortRefs(refs: Record<string, string>): Record<string, string> {
+  return sortBy(refs, 'ref.');
+}
+
+export function sortVariables(
+  variables: Record<string, string>
+): Record<string, string> {
+  return sortBy(variables, 'g.');
+}
+
+function sortBy(list: Record<string, string>, prefix: string) {
   return Object.fromEntries(
     Object.entries(list)
       .filter(([key]) => key.startsWith(prefix))

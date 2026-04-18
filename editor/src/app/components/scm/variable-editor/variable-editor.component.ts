@@ -6,7 +6,6 @@ import {
   Output,
 } from '@angular/core';
 import { KeyValueEntry } from '../key-value-editor/key-value-editor.component';
-import { sortBy } from '../../../utils/scm';
 
 @Component({
   selector: 'scl-variable-editor',
@@ -54,6 +53,6 @@ export class VariableEditorComponent {
     for (const entry of entries) {
       variables[`g.${entry.key}`] = entry.value ?? '';
     }
-    return sortBy(variables, 'g.');
+    return variables;
   }
 }

@@ -48,7 +48,6 @@ import {
   displayOrEditScmRefs,
   displayOrEditScmVariables,
 } from './actions';
-import { sortBy } from '../../utils';
 
 export interface GameState {
   selectedExtensions: Array<string | 'any'>;
@@ -188,13 +187,13 @@ export const uiReducer = createReducer(
     ...state,
     viewMode,
     editorHasError: false,
-    scmRefsToDisplayOrEdit: sortBy(refs, 'ref.'),
+    scmRefsToDisplayOrEdit: refs,
   })),
   on(displayOrEditScmVariables, (state, { variables, viewMode }) => ({
     ...state,
     viewMode,
     editorHasError: false,
-    scmVariablesToDisplayOrEdit: sortBy(variables, 'g.'),
+    scmVariablesToDisplayOrEdit: variables,
   })),
   on(stopEditOrDisplay, (state) => ({
     ...state,

@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { KeyValueEntry } from '../key-value-editor/key-value-editor.component';
-import { extractRefOffset, sortBy } from '../../../utils';
+import { extractRefOffset } from '../../../utils';
 
 @Component({
   selector: 'scl-ref-editor',
@@ -49,6 +49,6 @@ export class RefEditorComponent {
     for (const entry of entries) {
       refs[`ref.${entry.key}`] = entry.value ?? '';
     }
-    return sortBy(refs, 'ref.');
+    return refs;
   }
 }

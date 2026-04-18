@@ -1,6 +1,5 @@
 import {
   Component,
-  ChangeDetectionStrategy,
   Input,
   EventEmitter,
   Output,
@@ -36,6 +35,8 @@ import {
   getExtensionScopeSegment,
   isCodeViewContext,
   isScriptViewContext,
+  sortRefs,
+  sortVariables
 } from '../../../utils';
 import { map } from 'rxjs/operators';
 
@@ -502,12 +503,12 @@ export class ContextActionsComponent {
   }
 
   private _onSaveScmRefs() {
-    this._scm.updateRefs(this.scmRefsToDisplayOrEdit!);
+    this._scm.updateRefs(sortRefs(this.scmRefsToDisplayOrEdit!));
     this._ui.stopEditOrDisplay();
   }
 
   private _onSaveScmVariables() {
-    this._scm.updateVariables(this.scmVariablesToDisplayOrEdit!);
+    this._scm.updateVariables(sortVariables(this.scmVariablesToDisplayOrEdit!));
     this._ui.stopEditOrDisplay();
   }
 }

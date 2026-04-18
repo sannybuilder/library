@@ -1,4 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { LocationStrategy } from '@angular/common';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Command, Game, ViewContext } from '../../../models';
 import {
   getRoutePath,
@@ -7,11 +15,7 @@ import {
 } from '../../../utils';
 import { getDefaultExtension } from '../../../utils/extension';
 import { ScmMap, ScriptFile } from '../model';
-
-interface RefLink {
-  routerLink: string[];
-  fragment?: string;
-}
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'scl-scm-view',
@@ -19,41 +23,13 @@ interface RefLink {
   styleUrls: ['./scm-view.component.scss'],
   standalone: false,
 })
-export class ScmViewComponent {
-  private _code: ScriptFile = { base: 0, symbols: [], refs: [], lines: [] };
-  idents: number[] = [];
-  get code() {
-    return this._code;
-  }
-  @Input() set code(value: ScriptFile) {
-    this._code = value;
+export class ScmViewComponent implements OnChanges {
+  private sanitizer = inject(DomSanitizer);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private locationStrategy = inject(LocationStrategy);
 
-    let ident = 0;
-    this.idents = [];
-
-    for (let i = 0; i < this.code.lines.length; i++) {
-      let keyword = this.code.lines[i][2];
-      this.idents[i] = ident;
-      if (!keyword || typeof keyword !== 'string') {
-        continue;
-      }
-
-      if (['IF', 'SWITCH', 'WHILE', 'REPEAT'].includes(keyword)) {
-        this.idents[i] = ident;
-        ident++;
-      }
-
-      if (['END', 'UNTIL'].includes(keyword)) {
-        ident = Math.max(0, ident - 1);
-        this.idents[i] = ident;
-      }
-
-      if (['THEN', 'ELSE', 'DO', 'CASE', 'DEFAULT'].includes(keyword)) {
-        this.idents[i] = ident - 1;
-      }
-    }
-  }
-
+  @Input() code: ScriptFile = { base: 0, symbols: [], refs: [], lines: [] };
   @Input() commands: Command[] = [];
   @Input() overlay: Record<string, string> = {};
   @Input() scmMap: ScmMap | null = null;
@@ -63,13 +39,61 @@ export class ScmViewComponent {
   @Input() showLineNumbers!: boolean;
   @Input() showOffsets!: boolean;
   @Input() adjustOffsets: number = 0;
+  renderedHtml: SafeHtml = this.sanitizer.bypassSecurityTrustHtml('');
 
-  findCommand(name: string): Command | undefined {
-    if (!this.commands) {
-      return;
+  private commandByName = new Map<string, Command>();
+  private scmTargetPathByName = new Map<string, string>();
+  private refsSet = new Set<number>();
+  private readonly terminalInstructions = new Set([
+    'RETURN',
+    'RETURN_TRUE',
+    'RETURN_FALSE',
+    'RETURN_IF_TRUE',
+    'RETURN_TRUE_IF_TRUE',
+    'TERMINATE_THIS_SCRIPT',
+    'GOTO',
+  ]);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['commands']) {
+      this.commandByName = new Map(
+        (this.commands ?? []).map((command) => [command.name, command]),
+      );
     }
-    const command = this.commands.find((cmd) => cmd.name === name);
-    return command;
+
+    if (changes['scmMap']) {
+      this.scmTargetPathByName.clear();
+      for (const file of this.scmMap?.files ?? []) {
+        this.scmTargetPathByName.set(file.name, file.path);
+      }
+    }
+
+    if (changes['code']) {
+      this.refsSet = new Set(
+        (this.code?.refs ?? []).filter(
+          (offset): offset is number => typeof offset === 'number',
+        ),
+      );
+    }
+
+    const shouldRebuildHtml = [
+      'code',
+      'commands',
+      'overlay',
+      'scmMap',
+      'game',
+      'viewContext',
+      'activeFragment',
+      'showLineNumbers',
+      'showOffsets',
+      'adjustOffsets',
+    ].some((key) => !!changes[key]);
+
+    if (shouldRebuildHtml) {
+      this.renderedHtml = this.sanitizer.bypassSecurityTrustHtml(
+        this.buildRenderedHtml(),
+      );
+    }
   }
 
   getDefaultExtension() {
@@ -85,19 +109,7 @@ export class ScmViewComponent {
     return `extensions/${this.getDefaultExtension()}/${commandId}`;
   }
 
-  getLineNumberAnchorId(index: number): string {
-    return `L${index + 1}`;
-  }
-
-  isActiveLine(index: number, line: Array<number | string>): boolean {
-    if (!this.activeFragment) {
-      return false;
-    }
-
-    return this.activeFragment === this.getLineNumberAnchorId(index);
-  }
-
-  getRefLink(arg: number | string): RefLink | null {
+  private getRefHref(arg: number | string): string | null {
     const refKey = this.getRefKey(arg);
     if (!refKey || !this.scmMap) {
       return null;
@@ -105,22 +117,18 @@ export class ScmViewComponent {
 
     // is this a local label reference?
     const absOffset = extractRefOffset(refKey);
-    const relativeOffset = Number.parseInt(absOffset, 10) - this._code.base;
-    if (this._code.refs.includes(relativeOffset)) {
-      return {
-        routerLink: [],
-        fragment: 'label-' + absOffset,
-      };
+    const relativeOffset = Number.parseInt(absOffset, 10) - this.code.base;
+    if (this.refsSet.has(relativeOffset)) {
+      return this.toCurrentHref({ fragment: 'label-' + absOffset });
     }
 
-    const target = this.scmMap.files.find((file) => file.name === refKey);
-    if (!target) {
+    const targetPath = this.scmTargetPathByName.get(refKey);
+    if (!targetPath) {
       return null;
     }
 
-    return {
-      routerLink: getRoutePath(this.game, normalizeScmPath(target.path)),
-    };
+    const route = getRoutePath(this.game, normalizeScmPath(targetPath));
+    return this.toRouteHref(route);
   }
 
   getClass(arg: number | string): string {
@@ -139,9 +147,9 @@ export class ScmViewComponent {
           if (
             !isNaN(refIndex) &&
             refIndex >= 0 &&
-            refIndex < this._code.symbols.length
+            refIndex < this.code.symbols.length
           ) {
-            let symbol = this._code.symbols[refIndex];
+            let symbol = this.code.symbols[refIndex];
             if (symbol.startsWith('g.') || symbol.startsWith('l.')) {
               return 'tok-var';
             }
@@ -186,41 +194,261 @@ export class ScmViewComponent {
     if (
       Number.isNaN(refIndex) ||
       refIndex < 0 ||
-      refIndex >= this._code.symbols.length
+      refIndex >= this.code.symbols.length
     ) {
       return null;
     }
 
-    return this._code.symbols[refIndex] ?? null;
+    return this.code.symbols[refIndex] ?? null;
   }
 
-  isRef(index: number) {
+  private isRef(index: number): boolean {
     const line = this.code.lines[index];
     if (typeof line[0] !== 'number') {
       return false;
     }
-    return this.code.refs.includes(line[0]);
+    return this.refsSet.has(line[0]);
   }
 
-  isTerminalInstruction(name: string): boolean {
-    return [
-      'RETURN',
-      'RETURN_TRUE',
-      'RETURN_FALSE',
-      'RETURN_IF_TRUE',
-      'RETURN_TRUE_IF_TRUE',
-      'TERMINATE_THIS_SCRIPT',
-      'GOTO',
-    ].includes(name);
+  private isTerminalInstruction(name: string): boolean {
+    return this.terminalInstructions.has(name);
   }
 
-  isUnreachableInstruction(index: number): boolean {
+  private isUnreachableInstruction(index: number): boolean {
     return (
       !this.isRef(index) &&
       index > 0 &&
       index < this.code.lines.length &&
       this.isTerminalInstruction(this.code.lines[index - 1][2] as string) &&
-      !['END', 'ELSE', 'CASE', 'DEFAULT'].includes(this.code.lines[index][2] as string)
+      !['END', 'ELSE', 'CASE', 'DEFAULT'].includes(
+        this.code.lines[index][2] as string,
+      )
     );
+  }
+
+  private buildRenderedHtml(): string {
+    const lines = this.code?.lines ?? [];
+    if (!lines.length) {
+      return '';
+    }
+
+    const idents = this.buildIdents();
+    const parts: string[] = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const lineOffset = line[0];
+
+      if (this.isRef(i) && typeof lineOffset === 'number') {
+        const labelId = `label-${this.code.base + lineOffset}`;
+        parts.push(
+          `<a href="${this.escapeAttribute(
+            this.toCurrentHref({ fragment: labelId }),
+          )}" id="${this.escapeAttribute(labelId)}" class="tok-label tok-ref identifier">${this.escapeHtml(
+            this.formatLabel(lineOffset),
+          )}</a>`,
+        );
+      }
+
+      if (this.isUnreachableInstruction(i)) {
+        parts.push('<div class="text-muted pt-3 pl-5">// unreachable</div>');
+      }
+
+      const activeClass =
+        this.activeFragment === this.getLineNumberAnchorId(i) ? ' active' : '';
+      parts.push(`<div class="line-row${activeClass}">`);
+
+      if (this.showLineNumbers) {
+        const lineAnchorId = this.getLineNumberAnchorId(i);
+        parts.push(
+          `<div class="line-number"><a class="identifier" id="${lineAnchorId}" href="${this.escapeAttribute(
+            this.toCurrentHref({ fragment: lineAnchorId }),
+          )}">${i + 1}</a></div>`,
+        );
+      }
+
+      if (this.showOffsets) {
+        const copyText =
+          lineOffset !== ''
+            ? String(this.code.base + Number(lineOffset) + this.adjustOffsets)
+            : '';
+        parts.push(
+          `<div class="text-muted line-offset pointer" data-copy-text="${this.escapeAttribute(
+            copyText,
+          )}" title="Click the offset number to copy to clipboard">${this.escapeHtml(copyText)}</div>`,
+        );
+      }
+
+      parts.push('<div class="line-content">');
+      parts.push(this.renderIndent(idents[i]));
+      for (const arg of line.slice(2)) {
+        parts.push(this.renderToken(arg));
+        parts.push(' ');
+      }
+      parts.push('</div></div>');
+    }
+
+    return parts.join('');
+  }
+
+  private buildIdents(): number[] {
+    const idents: number[] = [];
+    let ident = 0;
+
+    for (let i = 0; i < this.code.lines.length; i++) {
+      const keyword = this.code.lines[i][2];
+      idents[i] = ident;
+
+      if (!keyword || typeof keyword !== 'string') {
+        continue;
+      }
+
+      if (['IF', 'SWITCH', 'WHILE', 'REPEAT'].includes(keyword)) {
+        idents[i] = ident;
+        ident++;
+      }
+
+      if (['END', 'UNTIL'].includes(keyword)) {
+        ident = Math.max(0, ident - 1);
+        idents[i] = ident;
+      }
+
+      if (['THEN', 'ELSE', 'DO', 'CASE', 'DEFAULT'].includes(keyword)) {
+        idents[i] = ident - 1;
+      }
+    }
+
+    return idents;
+  }
+
+  private renderToken(arg: number | string): string {
+    if (arg !== '' && typeof arg === 'string') {
+      const command = this.commandByName.get(arg);
+      if (command) {
+        const classes =
+          command.name.length > 10
+            ? 'tok tok-command text-break'
+            : 'tok tok-command';
+        const rail = this.getCommandRail(command);
+        const href = this.toCurrentHref({ rail });
+        return `<a class="${classes}" name="${this.escapeAttribute(
+          command.name,
+        )}" translate="no" href="${this.escapeAttribute(href)}">${this.escapeHtml(
+          command.name,
+        )}</a>`;
+      }
+    }
+
+    const refHref = this.getRefHref(arg);
+    const display = this.overlayValue(arg);
+
+    if (refHref) {
+      return `<a class="tok tok-ref identifier" href="${this.escapeAttribute(refHref)}">${this.escapeHtml(
+        display,
+      )}</a>`;
+    }
+
+    return `<span class="tok ${this.getClass(arg)}">${this.escapeHtml(display)}</span>`;
+  }
+
+  private overlayValue(arg: number | string): string {
+    let resolved: number | string = arg;
+    if (typeof arg === 'string' && arg.startsWith('$')) {
+      const refIndex = Number.parseInt(arg.slice(1), 10);
+      if (
+        !Number.isNaN(refIndex) &&
+        refIndex >= 0 &&
+        refIndex < this.code.symbols.length
+      ) {
+        resolved = this.code.symbols[refIndex];
+      }
+    }
+
+    const value = String(resolved);
+    return this.overlay[value] ?? this.defaultOverlay(value);
+  }
+
+  private defaultOverlay(value: string): string {
+    if (value.startsWith('g.')) {
+      return `$${value.split('.')[1]}`;
+    }
+    if (value.startsWith('ref.')) {
+      return `@label_${value.split('.')[1]}`;
+    }
+    if (value.startsWith('l.')) {
+      return `${value.split('.')[1]}@`;
+    }
+    return value;
+  }
+
+  private formatLabel(lineOffset: number): string {
+    const ref = lineOffset + this.code.base;
+    const key = `ref.${ref}`;
+    const label = this.overlay[key];
+    return label ? `:${label}` : `:label_${ref}`;
+  }
+
+  private toRouteHref(route: string[]): string {
+    return this.toExternalHref(this.router.createUrlTree(route));
+  }
+
+  private toCurrentHref(options: {
+    fragment?: string;
+    rail?: string | undefined;
+  }): string {
+    const tree = this.router.createUrlTree([], {
+      relativeTo: this.route,
+      fragment: options.fragment,
+      queryParams: options.rail ? { rail: options.rail } : { rail: null },
+      queryParamsHandling: 'merge',
+    });
+    return this.toExternalHref(tree);
+  }
+
+  private toExternalHref(tree: ReturnType<Router['createUrlTree']>): string {
+    return this.locationStrategy.prepareExternalUrl(
+      this.router.serializeUrl(tree),
+    );
+  }
+
+  private getLineNumberAnchorId(index: number): string {
+    return `L${index + 1}`;
+  }
+
+  private renderIndent(level: number): string {
+    if (level <= 0) {
+      return '';
+    }
+
+    return `<span class="line-indent" aria-hidden="true">${' '.repeat(level * 2)}</span>`;
+  }
+
+  private escapeHtml(value: string): string {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  private escapeAttribute(value: string): string {
+    return this.escapeHtml(value);
+  }
+
+  onRenderedClick(event: MouseEvent): void {
+    const eventTarget = event.target as EventTarget | null;
+    if (eventTarget instanceof HTMLAnchorElement) {
+      const href = eventTarget.getAttribute('href');
+
+      if (!href) {
+        return;
+      }
+
+      const routeUrl = href.startsWith('#/') ? href.slice(2) : href;
+      event.preventDefault();
+      event.stopPropagation();
+      this.router.navigateByUrl(routeUrl);
+    }
   }
 }

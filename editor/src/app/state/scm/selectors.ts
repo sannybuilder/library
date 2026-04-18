@@ -49,7 +49,7 @@ export const files = createSelector(
 export const overlayByGame = createSelector(
   state,
   (state: ScmState | undefined, props: { game: Game }) =>
-    getGameOverlay(state, props.game),
+    props.game ? state?.overlayByGame[props.game] : undefined,
 );
 
 export const refsByGame = createSelector(
@@ -68,7 +68,7 @@ export const currentOverlay = createSelector(
   state,
   game,
   (state: ScmState | undefined, game: Game | undefined) =>
-    getGameOverlay(state, game),
+    game ? state?.overlayByGame[game] : undefined,
 );
 
 export const currentRefsOverlay = createSelector(
@@ -143,7 +143,7 @@ export const currentRefs = createSelector(
     return offsets.map((offset) => {
       const key = toRefKey(offset);
       return {
-        displayLabel: toDisplayLabel(key, overlayMap),
+        displayLabel: toDisplayLabel(key, offset, overlayMap),
         offset,
       };
     });
@@ -271,6 +271,7 @@ function parseLineIndex(raw: string | undefined): number | undefined {
 
 function toDisplayLabel(
   refKey: string,
+  offset: number,
   overlay: Record<string, string>,
 ): string {
   const label = overlay[refKey];
@@ -278,42 +279,5 @@ function toDisplayLabel(
     return `:${label}`;
   }
 
-  const offset = parseRefOffset(refKey);
-  if (typeof offset !== 'number') {
-    return refKey;
-  }
-
   return `:label_${offset.toString()}`;
-}
-
-function parseRefOffset(ref: string): number | undefined {
-  const directValue = Number.parseInt(ref, 10);
-  if (!Number.isNaN(directValue)) {
-    return directValue;
-  }
-
-  const match = ref.match(/(\d{1,})/);
-  if (!match) {
-    return undefined;
-  }
-
-  const extractedValue = Number.parseInt(match[1], 10);
-  return Number.isNaN(extractedValue) ? undefined : extractedValue;
-}
-
-function getGameOverlay(state: ScmState | undefined, game: Game | undefined) {
-  if (!game) {
-    return undefined;
-  }
-
-  const refs = state?.refsByGame[game];
-  const variables = state?.variablesByGame[game];
-  if (refs === undefined && variables === undefined) {
-    return undefined;
-  }
-
-  return {
-    ...(refs ?? {}),
-    ...(variables ?? {}),
-  };
 }

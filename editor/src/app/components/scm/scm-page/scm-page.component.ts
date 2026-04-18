@@ -5,6 +5,7 @@ import {
   HostListener,
   OnDestroy,
   OnInit,
+  inject,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -35,6 +36,13 @@ import {
   providers: [ContextEditSessionService],
 })
 export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  private _extensions = inject(ExtensionsFacade);
+  private _game = inject(GameFacade);
+  private _scm = inject(ScmFacade);
+  private _ui = inject(UiFacade);
+  private _route = inject(ActivatedRoute);
+  private _document = inject(DOCUMENT);
+
   ViewMode = ViewMode;
   ViewContext = ViewContext;
   Game = Game;
@@ -63,28 +71,28 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   showOffsets$ = this._ui.scmViewShowOffsets$;
   adjustOffsets$ = this._ui.scmViewAdjustOffsets$;
 
-  constructor(
-    private _extensions: ExtensionsFacade,
-    private _game: GameFacade,
-    private _scm: ScmFacade,
-    private _ui: UiFacade,
-    private _route: ActivatedRoute,
-    @Inject(DOCUMENT) private _document: Document,
-  ) {}
-
   ngOnInit() {
     this._extensions.init();
 
     combineLatest([this._route.fragment, this.code$])
       .pipe(
         takeUntil(this.onDestroy$),
-        filter(([fragment, code]) => !!fragment && !!code),
+        filter(([fragment, code]) => !!code),
       )
       .subscribe(([fragment]) => {
         this.activeFragment = fragment;
 
         // File content is loaded asynchronously, so defer scrolling until the DOM is updated.
         requestAnimationFrame(() => {
+
+          // TODO: proper scroll position restoration on back navigation
+          if (!fragment) {
+            const container = this._document.getElementById('code-container');
+            if (container) {
+              container.scrollTop = 0;
+            }
+            return;
+          }
           const target = this._document.getElementById(fragment!);
           target?.focus();
 

@@ -99,6 +99,8 @@
       <scl-ref-list
         *ngIf="viewMode === ViewMode.ViewScmRefs && scmRefsToDisplayOrEdit"
         [refs]="scmRefsToDisplayOrEdit"
+        [map]="scmMap$ | async"
+        [game]="game"
       ></scl-ref-list>
       <scl-ref-editor
         *ngIf="viewMode === ViewMode.EditScmRefs && scmRefsToDisplayOrEdit"
@@ -108,15 +110,13 @@
       ></scl-ref-editor>
       <scl-variable-list
         *ngIf="
-          viewMode === ViewMode.ViewScmVariables &&
-          scmVariablesToDisplayOrEdit
+          viewMode === ViewMode.ViewScmVariables && scmVariablesToDisplayOrEdit
         "
         [variables]="scmVariablesToDisplayOrEdit"
       ></scl-variable-list>
       <scl-variable-editor
         *ngIf="
-          viewMode === ViewMode.EditScmVariables &&
-          scmVariablesToDisplayOrEdit
+          viewMode === ViewMode.EditScmVariables && scmVariablesToDisplayOrEdit
         "
         [variables]="scmVariablesToDisplayOrEdit"
         (variablesChange)="onScmVariablesChange($event)"

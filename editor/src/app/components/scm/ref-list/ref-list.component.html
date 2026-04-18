@@ -1,4 +1,4 @@
-<h5>{{ 'ui.scm.refList' | translate }}</h5>
+<h5>{{ "ui.scm.refList" | translate }}</h5>
 
 <div class="row mb-2">
   <div class="col-12">
@@ -21,10 +21,13 @@
 </div>
 
 <div class="scroll-container">
-  <pre class="sample" *ngIf="filteredEntries.length; else emptyState"><ng-container *ngFor="let item of filteredEntries">{{ toRawRefKey(item[0]) }}={{ item[1] }}
+  <pre
+    class="sample"
+    *ngIf="filteredEntries.length; else emptyState"
+  ><ng-container *ngFor="let item of filteredEntries">{{ toRawRefKey(item[0]) }}=<a [routerLink]="route" *ngIf="getScmTargetPath(item[0]) as route else justName">{{ item[1] }}</a><ng-template #justName>{{ item[1] }}</ng-template>
 </ng-container></pre>
 </div>
 
 <ng-template #emptyState>
-  <div class="text-muted">{{ 'ui.scm.emptyRefList' | translate }}</div>
+  <div class="text-muted">{{ "ui.scm.emptyRefList" | translate }}</div>
 </ng-template>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { cloneDeep, flatten, orderBy, uniqBy } from 'lodash';
 import { combineLatest, Observable, of, zip } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
@@ -55,6 +55,7 @@ export class ContextViewComponent {
   canEdit$ = this._ui.canEdit$;
   selectedSyntaxKind$ = this._ui.selectedSyntaxKind$;
   classCommands$ = this._ui.classToDisplayCommands$;
+  scmMap$ = this._scm.map$;
 
   get command() {
     return this._session.command;
@@ -108,9 +109,7 @@ export class ContextViewComponent {
     return this._session.scmVariablesToDisplayOrEdit;
   }
 
-  set scmVariablesToDisplayOrEdit(
-    value: Record<string, string> | undefined,
-  ) {
+  set scmVariablesToDisplayOrEdit(value: Record<string, string> | undefined) {
     this._session.scmVariablesToDisplayOrEdit = value;
   }
 

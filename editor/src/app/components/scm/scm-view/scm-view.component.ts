@@ -250,9 +250,9 @@ export class ScmViewComponent implements OnChanges {
         );
       }
 
-      if (this.isUnreachableInstruction(i)) {
-        parts.push('<div class="text-muted pt-3 pl-5">// unreachable</div>');
-      }
+      // if (this.isUnreachableInstruction(i)) {
+      //   parts.push('<div class="text-muted pt-3 pl-5">// unreachable</div>');
+      // }
 
       const activeClass =
         this.activeFragment === this.getLineNumberAnchorId(i) ? ' active' : '';

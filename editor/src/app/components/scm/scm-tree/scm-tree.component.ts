@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, inject, Input } from '@angular/core';
 import { ScmTreeNode } from '../model';
 import { Game } from '../../../models';
 import { getRoutePath } from '../../../utils';
+import { install, uninstall } from '@github/hotkey';
 
 @Component({
   selector: 'scl-scm-tree',
@@ -10,6 +11,8 @@ import { getRoutePath } from '../../../utils';
   standalone: false,
 })
 export class ScmTreeComponent {
+  private _element = inject(ElementRef);
+
   @Input() activeFile?: string;
   @Input() game!: Game;
   @Input() tree: ScmTreeNode[] = [];
@@ -32,5 +35,25 @@ export class ScmTreeComponent {
       node.path?.toLowerCase().includes(query) ||
       (node.children?.some((child) => this.shouldShowNode(child)) ?? false)
     );
+  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      const elems =
+        this._element.nativeElement.querySelectorAll('[data-hotkey]');
+      for (const el of elems) {
+        install(el);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    setTimeout(() => {
+      const elems =
+        this._element.nativeElement.querySelectorAll('[data-hotkey]');
+      for (const el of elems) {
+        uninstall(el);
+      }
+    });
   }
 }

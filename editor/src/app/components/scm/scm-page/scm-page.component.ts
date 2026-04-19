@@ -1,11 +1,11 @@
 import {
   AfterViewInit,
   Component,
-  Inject,
   HostListener,
   OnDestroy,
   OnInit,
   inject,
+  ElementRef,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -27,6 +27,7 @@ import {
   isScriptViewContext,
   shouldDisplayRightRail,
 } from '../../../utils';
+import { install, uninstall } from '@github/hotkey';
 
 @Component({
   selector: 'scl-scm-page',
@@ -42,6 +43,7 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private _ui = inject(UiFacade);
   private _route = inject(ActivatedRoute);
   private _document = inject(DOCUMENT);
+  private _element = inject(ElementRef);
 
   ViewMode = ViewMode;
   ViewContext = ViewContext;
@@ -73,7 +75,13 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this._extensions.init();
-
+    setTimeout(() => {
+      const elems =
+        this._element.nativeElement.querySelectorAll('[data-hotkey]');
+      for (const el of elems) {
+        install(el);
+      }
+    });
     combineLatest([this._route.fragment, this.code$])
       .pipe(
         takeUntil(this.onDestroy$),
@@ -84,7 +92,6 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // File content is loaded asynchronously, so defer scrolling until the DOM is updated.
         requestAnimationFrame(() => {
-
           // TODO: proper scroll position restoration on back navigation
           if (!fragment) {
             const container = this._document.getElementById('code-container');
@@ -111,6 +118,11 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.onDestroy$.next(undefined);
     this.onDestroy$.complete();
+
+    const elems = this._element.nativeElement.querySelectorAll('[data-hotkey]');
+    for (const el of elems) {
+      uninstall(el);
+    }
   }
 
   ngAfterViewInit(): void {

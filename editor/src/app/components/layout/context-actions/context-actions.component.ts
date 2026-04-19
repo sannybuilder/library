@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Output,
   inject,
+  ElementRef,
 } from '@angular/core';
 import { cloneDeep, isEqual } from 'lodash';
 import {
@@ -36,9 +37,10 @@ import {
   isCodeViewContext,
   isScriptViewContext,
   sortRefs,
-  sortVariables
+  sortVariables,
 } from '../../../utils';
 import { map } from 'rxjs/operators';
+import { install, uninstall } from '@github/hotkey';
 
 @Component({
   selector: 'scl-context-actions',
@@ -55,6 +57,7 @@ export class ContextActionsComponent {
   private _enums = inject(EnumsFacade);
   private _scm = inject(ScmFacade);
   private _session = inject(ContextEditSessionService);
+  private _element = inject(ElementRef);
 
   ViewMode = ViewMode;
   ViewContext = ViewContext;
@@ -227,6 +230,22 @@ export class ContextActionsComponent {
     return undefined;
   }
 
+  ngOnInit() {
+    setTimeout(() => {
+      const elems =
+        this._element.nativeElement.querySelectorAll('[data-hotkey]');
+      for (const el of elems) {
+        install(el);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    const elems = this._element.nativeElement.querySelectorAll('[data-hotkey]');
+    for (const el of elems) {
+      uninstall(el);
+    }
+  }
   shouldDisplayRightRail(viewMode: ViewMode) {
     return shouldDisplayRightRail(viewMode);
   }

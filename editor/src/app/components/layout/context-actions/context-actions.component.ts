@@ -504,11 +504,9 @@ export class ContextActionsComponent {
 
   private _onSaveScmRefs() {
     this._scm.updateRefs(sortRefs(this.scmRefsToDisplayOrEdit!));
-    this._ui.stopEditOrDisplay();
   }
 
   private _onSaveScmVariables() {
     this._scm.updateVariables(sortVariables(this.scmVariablesToDisplayOrEdit!));
-    this._ui.stopEditOrDisplay();
   }
 }

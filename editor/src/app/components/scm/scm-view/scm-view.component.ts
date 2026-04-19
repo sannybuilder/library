@@ -153,6 +153,8 @@ export class ScmViewComponent implements OnChanges {
           }
           return 'tok';
         }
+        case '#': 
+          return 'tok-model';
         case '[':
         case '(':
         case ',':

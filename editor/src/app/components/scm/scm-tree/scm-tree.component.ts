@@ -14,11 +14,23 @@ export class ScmTreeComponent {
   @Input() game!: Game;
   @Input() tree: ScmTreeNode[] = [];
 
+  filterQuery = '';
+
   isNodeOpen(node: ScmTreeNode): boolean {
     return !!node.children?.some((child) => child.path === this.activeFile);
   }
 
   getRoutePathForNode(path: string) {
     return getRoutePath(this.game, path);
+  }
+
+  shouldShowNode(node: ScmTreeNode): boolean {
+    const query = this.filterQuery.trim().toLowerCase();
+    return (
+      !query ||
+      node.label.toLowerCase().includes(query) ||
+      node.path?.toLowerCase().includes(query) ||
+      (node.children?.some((child) => this.shouldShowNode(child)) ?? false)
+    );
   }
 }

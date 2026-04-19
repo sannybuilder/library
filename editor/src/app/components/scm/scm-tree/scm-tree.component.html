@@ -1,3 +1,19 @@
+<div class="input-group mb-3">
+  <input
+    type="text"
+    class="form-control filter-input"
+    [placeholder]="'ui.shared.filter' | translate"
+    [(ngModel)]="filterQuery"
+  />
+  <div class="input-group-append">
+    <scl-icon-button
+      icon="clear"
+      [title]="'ui.header.searchClear' | translate"
+      (clicked)="filterQuery = ''"
+    ></scl-icon-button>
+  </div>
+</div>
+
 <div class="tree-container">
   <div class="tree-group" *ngFor="let node of tree">
     <ng-container
@@ -8,7 +24,7 @@
 
 <ng-template #fileNode let-node="node">
   <a
-    *ngIf="node.path"
+    *ngIf="node.path && shouldShowNode(node)"
     class="btn btn-sm btn-link tree-file"
     [class.active]="activeFile === node.path"
     [routerLink]="getRoutePathForNode(node.path!)"
@@ -16,7 +32,10 @@
     {{ node.label }}
   </a>
 
-  <details [open]="isNodeOpen(node)" *ngIf="node.children?.length">
+  <details
+    [open]="isNodeOpen(node) || filterQuery"
+    *ngIf="node.children?.length && shouldShowNode(node)"
+  >
     <summary [class.no-arrow]="!node.children?.length">
       {{ node.label }}
     </summary>

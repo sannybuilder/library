@@ -1,3 +1,6 @@
+import { uniqBy } from 'lodash';
+import { KeyValueEntry } from '../components/scm';
+
 export function normalizeScmPath(path: string): string {
   return path.replace(/\\/g, '/').replace(/\.json$/i, '');
 }
@@ -33,24 +36,23 @@ export function extractRefOffset(ref: string): string {
   return ref.slice('ref.'.length);
 }
 
-export function sortRefs(refs: Record<string, string>): Record<string, string> {
-  return sortBy(refs, 'ref.');
+export function sortRefs(refs: KeyValueEntry[]): KeyValueEntry[] {
+  let sorted = refs
+    .filter(({ key }) => key.startsWith('ref.'))
+    .sort((a, b) => getOffset(a.key) - getOffset(b.key));
+
+  return uniqBy(sorted, 'key');
 }
 
-export function sortVariables(
-  variables: Record<string, string>
-): Record<string, string> {
-  return sortBy(variables, 'g.');
+export function sortVariables(variables: KeyValueEntry[]): KeyValueEntry[] {
+  let sorted = variables
+    .filter(({ key }) => key.startsWith('g.') || key.startsWith('l.'))
+    .sort((a, b) => getOffset(a.key) - getOffset(b.key));
+
+  return uniqBy(sorted, 'key');
 }
 
-function sortBy(list: Record<string, string>, prefix: string) {
-  return Object.fromEntries(
-    Object.entries(list)
-      .filter(([key]) => key.startsWith(prefix))
-      .sort((a, b) => toNumber(a[0], prefix) - toNumber(b[0], prefix)),
-  );
-}
-
-function toNumber(value: string, prefix: string): number {
-  return Number.parseInt(value.slice(prefix.length), 10);
+function getOffset(value: string): number {
+  const parts = value.split('.');
+  return Number.parseInt(parts.at(-1) ?? '0', 10);
 }

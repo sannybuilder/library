@@ -26,7 +26,7 @@ import {
   ScmFacade,
   SnippetsFacade,
   TreeFacade,
-} from 'src/app/state';
+} from '../../../state';
 import { ContextEditSessionService } from '../context-edit-session.service';
 import {
   serializeUrlAndParams,
@@ -522,10 +522,14 @@ export class ContextActionsComponent {
   }
 
   private _onSaveScmRefs() {
-    this._scm.updateRefs(sortRefs(this.scmRefsToDisplayOrEdit!));
+    let refs = sortRefs(this.scmRefsToDisplayOrEdit!);
+    this._scm.updateRefs(refs);
+    this._session.oldScmRefsToEdit = cloneDeep(refs); // disable Save button until next change
   }
 
   private _onSaveScmVariables() {
-    this._scm.updateVariables(sortVariables(this.scmVariablesToDisplayOrEdit!));
+    let variables = sortVariables(this.scmVariablesToDisplayOrEdit!);
+    this._scm.updateVariables(variables);
+    this._session.oldScmVariablesToEdit = cloneDeep(variables); // disable Save button until next change
   }
 }

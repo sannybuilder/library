@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import {
@@ -11,14 +11,18 @@ import {
 } from 'rxjs/operators';
 import {
   loadMainFile,
+  loadRefsOverlay,
+  loadRefsOverlayError,
+  loadRefsOverlaySuccess,
   loadScmFile,
   loadScmFileError,
   loadScmFileSuccess,
   loadScmMap,
   loadScmMapError,
   loadScmMapSuccess,
-  loadScmOverlay,
-  loadScmOverlaySuccess,
+  loadVariableOverlay,
+  loadVariableOverlayError,
+  loadVariableOverlaySuccess,
   updateScmRefs,
   updateScmVariables,
 } from './actions';
@@ -29,6 +33,12 @@ import { ChangesFacade } from '../changes/facade';
 
 @Injectable({ providedIn: 'root' })
 export class ScmEffects {
+  private _actions$ = inject(Actions);
+  private _service = inject(ScmService);
+  private _game = inject(GameFacade);
+  private _facade = inject(ScmFacade);
+  private _changes = inject(ChangesFacade);
+
   loadScmFile$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadScmFile),
@@ -76,24 +86,53 @@ export class ScmEffects {
     ),
   );
 
-  loadScmOverlay$ = createEffect(() =>
+  loadVariableOverlay$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(loadScmOverlay),
+      ofType(loadVariableOverlay),
       switchMap(({ game }) =>
-        this._facade.overlayByGame$(game).pipe(
+        this._facade.variablesByGame$(game).pipe(
           take(1),
-          switchMap((cachedOverlay) => {
-            if (cachedOverlay !== undefined) {
+          switchMap((cachedVariables) => {
+            if (cachedVariables.length > 0) {
               return [];
             }
 
-            return this._service.loadOverlay(game).pipe(
-              map(({ refs, variables }) =>
-                loadScmOverlaySuccess({ game, refs, variables }),
-              ),
-              catchError(() =>
-                of(loadScmOverlaySuccess({ game, refs: {}, variables: {} })),
-              ),
+            return this._service.loadVariableOverlay(game).pipe(
+              map((variables) => {
+                const mapper = (obj: Record<string, string>) =>
+                  Object.entries(obj).map(([key, value]) => ({ key, value }));
+                const variablesArray = mapper(variables);
+                return loadVariableOverlaySuccess({
+                  game,
+                  variables: variablesArray,
+                });
+              }),
+              catchError(() => of(loadVariableOverlayError({ game }))),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
+  loadRefsOverlay$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadRefsOverlay),
+      switchMap(({ game }) =>
+        this._facade.refsByGame$(game).pipe(
+          take(1),
+          switchMap((cachedRefs) => {
+            if (cachedRefs.length > 0) {
+              return [];
+            }
+            return this._service.loadRefsOverlay(game).pipe(
+              map((refs) => {
+                const mapper = (obj: Record<string, string>) =>
+                  Object.entries(obj).map(([key, value]) => ({ key, value }));
+                const refsArray = mapper(refs);
+                return loadRefsOverlaySuccess({ game, refs: refsArray });
+              }),
+              catchError(() => of(loadRefsOverlayError({ game }))),
             );
           }),
         ),
@@ -109,7 +148,11 @@ export class ScmEffects {
         tap(([{ refs }, game]) => {
           this._changes.registerTextFileChange(
             `${game}/scm/refs.json`,
-            JSON.stringify(refs, null, 2),
+            JSON.stringify(
+              Object.fromEntries(refs.map(({ key, value }) => [key, value])),
+              null,
+              2,
+            ),
           );
         }),
       ),
@@ -124,7 +167,13 @@ export class ScmEffects {
         tap(([{ variables }, game]) => {
           this._changes.registerTextFileChange(
             `${game}/scm/variables.json`,
-            JSON.stringify(variables, null, 2),
+            JSON.stringify(
+              Object.fromEntries(
+                variables.map(({ key, value }) => [key, value]),
+              ),
+              null,
+              2,
+            ),
           );
         }),
       ),
@@ -151,12 +200,4 @@ export class ScmEffects {
       ),
     ),
   );
-
-  constructor(
-    private _actions$: Actions,
-    private _service: ScmService,
-    private _game: GameFacade,
-    private _facade: ScmFacade,
-    private _changes: ChangesFacade,
-  ) {}
 }

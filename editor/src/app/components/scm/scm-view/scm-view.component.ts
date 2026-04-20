@@ -14,7 +14,7 @@ import {
   extractRefOffset,
 } from '../../../utils';
 import { getDefaultExtension } from '../../../utils/extension';
-import { ScmMap, ScriptFile } from '../model';
+import { KeyValueEntry, ScmMap, ScriptFile } from '../model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -31,7 +31,8 @@ export class ScmViewComponent implements OnChanges {
 
   @Input() code: ScriptFile = { base: 0, symbols: [], refs: [], lines: [] };
   @Input() commands: Command[] = [];
-  @Input() overlay: Record<string, string> = {};
+  @Input() variablesOverlay: KeyValueEntry[] = [];
+  @Input() refsOverlay: KeyValueEntry[] = [];
   @Input() scmMap: ScmMap | null = null;
   @Input() game!: Game;
   @Input() viewContext!: ViewContext;
@@ -79,7 +80,8 @@ export class ScmViewComponent implements OnChanges {
     const shouldRebuildHtml = [
       'code',
       'commands',
-      'overlay',
+      'variablesOverlay',
+      'refsOverlay',
       'scmMap',
       'game',
       'viewContext',
@@ -173,29 +175,12 @@ export class ScmViewComponent implements OnChanges {
   }
 
   private getRefKey(arg: number | string): string | null {
-    const symbol = this.resolveSymbol(arg);
+    const symbol = this.getSymbol(arg);
     if (!symbol?.startsWith('ref.')) {
       return null;
     }
 
     return symbol;
-  }
-
-  private resolveSymbol(arg: number | string): string | null {
-    if (typeof arg !== 'string' || !arg.startsWith('$')) {
-      return null;
-    }
-
-    const refIndex = Number.parseInt(arg.slice(1), 10);
-    if (
-      Number.isNaN(refIndex) ||
-      refIndex < 0 ||
-      refIndex >= this.code.symbols.length
-    ) {
-      return null;
-    }
-
-    return this.code.symbols[refIndex] ?? null;
   }
 
   private isRef(index: number): boolean {
@@ -370,7 +355,13 @@ export class ScmViewComponent implements OnChanges {
   private overlayValue(arg: number | string): string {
     const resolved = this.getSymbol(arg) ?? arg;
     const value = String(resolved);
-    return this.overlay[value] ?? this.defaultOverlay(value);
+    if (value.startsWith('g.') || value.startsWith('l.')) {
+      return this.variablesOverlay.find((e) => e.key === value)?.value ?? this.defaultOverlay(value);
+    }
+    if (value.startsWith('ref.')) {
+      return this.refsOverlay.find((e) => e.key === value)?.value ?? this.defaultOverlay(value);
+    }
+    return this.defaultOverlay(value);
   }
 
   private defaultOverlay(value: string): string {
@@ -389,7 +380,7 @@ export class ScmViewComponent implements OnChanges {
   private formatLabel(lineOffset: number): string {
     const ref = lineOffset + this.code.base;
     const key = `ref.${ref}`;
-    const label = this.overlay[key];
+    const label = this.refsOverlay.find((e) => e.key === key)?.value;
     return label ? `:${label}` : `:label_${ref}`;
   }
 

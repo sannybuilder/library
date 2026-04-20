@@ -55,7 +55,7 @@ import { GameFacade } from '../game/facade';
 import { renameGameEnum } from '../enums/actions';
 import { registerFileContent } from '../changes/actions';
 import { Action } from '@ngrx/store';
-import { unpackSupportInfo } from 'src/app/utils/support-info';
+import { unpackSupportInfo } from '../../utils/support-info';
 
 @Injectable({ providedIn: 'root' })
 export class ExtensionsEffects {

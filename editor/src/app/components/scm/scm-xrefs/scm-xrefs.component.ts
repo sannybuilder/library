@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Game } from 'src/app/models';
+import { Game } from '../../../models';
 import { ScmXrefItem } from '../model';
 import { getRoutePath } from '../../../utils';
 

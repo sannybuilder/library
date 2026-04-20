@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Config, CONFIG } from '../../config';
@@ -52,9 +52,14 @@ import {
 import * as selector from './selectors';
 import { combineLatest } from 'rxjs';
 import { defaultFilterState } from './reducer';
+import { KeyValueEntry } from '../../components/scm';
 
 @Injectable({ providedIn: 'root' })
 export class UiFacade {
+  private store$ = inject(Store);
+  private _auth = inject(AuthFacade);
+  private _config = inject(CONFIG);
+
   canEdit$ = this._auth.isAuthorized$.pipe(
     map(
       (isAuthorized) =>
@@ -189,11 +194,6 @@ export class UiFacade {
     });
   }
 
-  constructor(
-    private store$: Store,
-    private _auth: AuthFacade,
-    @Inject(CONFIG) private _config: Config
-  ) {}
 
   toggleAttribute(attribute: Attribute, modifier: Modifier) {
     this.store$.dispatch(toggleAttribute({ attribute, modifier }));
@@ -251,19 +251,19 @@ export class UiFacade {
     );
   }
 
-  displayScmRefs(refs: Record<string, string>) {
+  displayScmRefs(refs: KeyValueEntry[]) {
     this.store$.dispatch(
       displayOrEditScmRefs({ refs, viewMode: ViewMode.ViewScmRefs }),
     );
   }
 
-  editScmRefs(refs: Record<string, string>) {
+  editScmRefs(refs: KeyValueEntry[]) {
     this.store$.dispatch(
       displayOrEditScmRefs({ refs, viewMode: ViewMode.EditScmRefs }),
     );
   }
 
-  displayScmVariables(variables: Record<string, string>) {
+  displayScmVariables(variables: KeyValueEntry[]) {
     this.store$.dispatch(
       displayOrEditScmVariables({
         variables,
@@ -272,7 +272,7 @@ export class UiFacade {
     );
   }
 
-  editScmVariables(variables: Record<string, string>) {
+  editScmVariables(variables: KeyValueEntry[]) {
     this.store$.dispatch(
       displayOrEditScmVariables({
         variables,

@@ -61,7 +61,10 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   tree$ = this._scm.tree$;
   xrefs$ = this._scm.xrefs$;
   refs$ = this._scm.refs$;
-  overlay$ = this._scm.overlay$;
+  
+  refsOverlay$ = this._scm.refsOverlay$;
+  variablesOverlay$ = this._scm.variablesOverlay$;
+
   viewContext$ = this._game.viewContext$;
   screenSize: number = window.innerWidth;
   canEdit$ = this._ui.canEdit$;

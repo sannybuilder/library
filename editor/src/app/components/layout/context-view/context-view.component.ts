@@ -24,6 +24,7 @@ import {
 } from '../../..//state';
 import { getDefaultExtension } from '../../../utils/extension';
 import { ContextEditSessionService } from '../context-edit-session.service';
+import { KeyValueEntry } from '../../scm';
 
 @Component({
   selector: 'scl-context-view',
@@ -97,7 +98,7 @@ export class ContextViewComponent {
     return this._session.scmRefsToDisplayOrEdit;
   }
 
-  set scmRefsToDisplayOrEdit(value: Record<string, string> | undefined) {
+  set scmRefsToDisplayOrEdit(value: KeyValueEntry[] | undefined) {
     this._session.scmRefsToDisplayOrEdit = value;
   }
 
@@ -109,7 +110,7 @@ export class ContextViewComponent {
     return this._session.scmVariablesToDisplayOrEdit;
   }
 
-  set scmVariablesToDisplayOrEdit(value: Record<string, string> | undefined) {
+  set scmVariablesToDisplayOrEdit(value: KeyValueEntry[] | undefined) {
     this._session.scmVariablesToDisplayOrEdit = value;
   }
 
@@ -267,11 +268,11 @@ export class ContextViewComponent {
     this._ui.setEditorHasError(hasError);
   }
 
-  onScmRefsChange(refs: Record<string, string>) {
+  onScmRefsChange(refs: KeyValueEntry[]) {
     this.scmRefsToDisplayOrEdit = refs;
   }
 
-  onScmVariablesChange(variables: Record<string, string>) {
+  onScmVariablesChange(variables: KeyValueEntry[]) {
     this.scmVariablesToDisplayOrEdit = variables;
   }
 

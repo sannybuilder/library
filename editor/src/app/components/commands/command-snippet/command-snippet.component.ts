@@ -5,7 +5,7 @@ import {
   isScriptViewContext,
 } from '../../../utils';
 import { Command, Extension, ViewContext, Game } from '../../../models';
-import { UiFacade } from 'src/app/state';
+import { UiFacade } from '../../../state';
 
 @Component({
     selector: 'scl-command-snippet',

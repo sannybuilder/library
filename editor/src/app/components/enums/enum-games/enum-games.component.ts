@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Game } from 'src/app/models';
+import { Game } from '../../../models';
 
 @Component({
     selector: 'scl-enum-games',

@@ -9,6 +9,7 @@ import {
   SyntaxKind,
   ViewMode,
 } from '../../models';
+import { KeyValueEntry } from '../../components/scm/model';
 
 export const selectExtensions = createAction(
   '[ui] change extensions selection',
@@ -65,12 +66,12 @@ export const displayOrEditEnum = createAction(
 
 export const displayOrEditScmRefs = createAction(
   '[ui] display or edit scm refs',
-  props<{ refs: Record<string, string>; viewMode: ViewMode }>(),
+  props<{ refs: KeyValueEntry[]; viewMode: ViewMode }>(),
 );
 
 export const displayOrEditScmVariables = createAction(
   '[ui] display or edit scm variables',
-  props<{ variables: Record<string, string>; viewMode: ViewMode }>(),
+  props<{ variables: KeyValueEntry[]; viewMode: ViewMode }>(),
 );
 
 export const displayExtensionList = createAction('[ui] display extension list');

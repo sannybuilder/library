@@ -1,4 +1,4 @@
-import { Inject, Injectable, DOCUMENT } from '@angular/core';
+import { Inject, Injectable, DOCUMENT, inject } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { combineLatest, merge } from 'rxjs';
@@ -75,14 +75,28 @@ import { ScmFacade } from '../scm/facade';
 import { AnalyticsService } from '../../analytics';
 import {
   loadMainFile,
+  loadRefsOverlay,
+  loadRefsOverlaySuccess,
   loadScmFile,
   loadScmMap,
-  loadScmOverlay,
-  loadScmOverlaySuccess,
+  loadVariableOverlay,
+  loadVariableOverlaySuccess,
 } from '../scm/actions';
 
 @Injectable({ providedIn: 'root' })
 export class UiEffects {
+  private _actions$ = inject(Actions);
+  private _ui = inject(UiFacade);
+  private _snippets = inject(SnippetsFacade);
+  private _extensions = inject(ExtensionsFacade);
+  private _changes = inject(ChangesFacade);
+  private _game = inject(GameFacade);
+  private _enums = inject(EnumsFacade);
+  private _articles = inject(ArticlesFacade);
+  private _scm = inject(ScmFacade);
+  private _analytics = inject(AnalyticsService);
+  private _d = inject(DOCUMENT);
+
   viewOnLoad$ = createEffect(() =>
     this._actions$.pipe(
       ofType(onListEnter),
@@ -108,7 +122,8 @@ export class UiEffects {
           if (viewContext === ViewContext.Scm && action === 'scm-file') {
             const loadFileActions = [
               loadScmMap({ game }),
-              loadScmOverlay({ game }),
+              loadVariableOverlay({ game }),
+              loadRefsOverlay({ game }),
               id ? loadScmFile({ name: id }) : loadMainFile(),
             ];
 
@@ -124,7 +139,7 @@ export class UiEffects {
                 switchMap((refs) => [
                   ...loadFileActions,
                   displayOrEditScmRefs({
-                    refs: refs ?? {},
+                    refs,
                     viewMode:
                       railExtension === 'edit'
                         ? ViewMode.EditScmRefs
@@ -140,7 +155,7 @@ export class UiEffects {
                 switchMap((variables) => [
                   ...loadFileActions,
                   displayOrEditScmVariables({
-                    variables: variables ?? {},
+                    variables,
                     viewMode:
                       railExtension === 'edit'
                         ? ViewMode.EditScmVariables
@@ -150,11 +165,7 @@ export class UiEffects {
               );
             }
 
-            if (
-              railScope === 'extensions' &&
-              railExtension &&
-              railId
-            ) {
+            if (railScope === 'extensions' && railExtension && railId) {
               return this._extensions.extensions$.pipe(
                 first<Extension[]>(Boolean),
                 map((extensions) => {
@@ -211,43 +222,36 @@ export class UiEffects {
           if (viewContext === ViewContext.Scm && action === 'scm-refs') {
             return this._scm.refsByGame$(game).pipe(
               take(1),
-              switchMap((refs) =>
-                [
-                  loadScmMap({ game }),
-                  loadScmOverlay({ game }),
-                  loadMainFile(),
-                  displayOrEditScmRefs({
-                    refs: refs ?? {},
-                    viewMode:
-                      id === 'edit'
-                        ? ViewMode.EditScmRefs
-                        : ViewMode.ViewScmRefs,
-                  }),
-                ],
-              ),
+              switchMap((refs) => [
+                loadScmMap({ game }),
+                loadRefsOverlay({ game }),
+                loadVariableOverlay({ game }),
+                loadMainFile(),
+                displayOrEditScmRefs({
+                  refs,
+                  viewMode:
+                    id === 'edit' ? ViewMode.EditScmRefs : ViewMode.ViewScmRefs,
+                }),
+              ]),
             );
           }
 
-          if (
-            viewContext === ViewContext.Scm &&
-            action === 'scm-variables'
-          ) {
+          if (viewContext === ViewContext.Scm && action === 'scm-variables') {
             return this._scm.variablesByGame$(game).pipe(
               take(1),
-              switchMap((variables) =>
-                [
-                  loadScmMap({ game }),
-                  loadScmOverlay({ game }),
-                  loadMainFile(),
-                  displayOrEditScmVariables({
-                    variables: variables ?? {},
-                    viewMode:
-                      id === 'edit'
-                        ? ViewMode.EditScmVariables
-                        : ViewMode.ViewScmVariables,
-                  }),
-                ],
-              ),
+              switchMap((variables) => [
+                loadScmMap({ game }),
+                loadVariableOverlay({ game }),
+                loadRefsOverlay({ game }),
+                loadMainFile(),
+                displayOrEditScmVariables({
+                  variables,
+                  viewMode:
+                    id === 'edit'
+                      ? ViewMode.EditScmVariables
+                      : ViewMode.ViewScmVariables,
+                }),
+              ]),
             );
           }
 
@@ -690,21 +694,11 @@ export class UiEffects {
     ),
   );
 
-  refreshScmOverlayView$ = createEffect(() =>
+  refreshVariableOverlayView$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(loadScmOverlaySuccess),
+      ofType(loadVariableOverlaySuccess),
       withLatestFrom(this._ui.viewMode$),
-      switchMap(([{ refs, variables }, viewMode]) => {
-        if (viewMode === ViewMode.EditScmRefs) {
-          return [
-            displayOrEditScmRefs({ refs, viewMode: ViewMode.EditScmRefs }),
-          ];
-        }
-        if (viewMode === ViewMode.ViewScmRefs) {
-          return [
-            displayOrEditScmRefs({ refs, viewMode: ViewMode.ViewScmRefs }),
-          ];
-        }
+      switchMap(([{ variables }, viewMode]) => {
         if (viewMode === ViewMode.EditScmVariables) {
           return [
             displayOrEditScmVariables({
@@ -721,23 +715,29 @@ export class UiEffects {
             }),
           ];
         }
-
         return [];
       }),
     ),
   );
 
-  constructor(
-    private _actions$: Actions,
-    private _ui: UiFacade,
-    private _snippets: SnippetsFacade,
-    private _extensions: ExtensionsFacade,
-    private _changes: ChangesFacade,
-    private _game: GameFacade,
-    private _enums: EnumsFacade,
-    private _articles: ArticlesFacade,
-    private _scm: ScmFacade,
-    private _analytics: AnalyticsService,
-    @Inject(DOCUMENT) private _d: Document,
-  ) {}
+  refreshRefsOverlayView$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadRefsOverlaySuccess),
+      withLatestFrom(this._ui.viewMode$),
+      switchMap(([{ refs }, viewMode]) => {
+        if (viewMode === ViewMode.EditScmRefs) {
+          return [
+            displayOrEditScmRefs({ refs, viewMode: ViewMode.EditScmRefs }),
+          ];
+        }
+        if (viewMode === ViewMode.ViewScmRefs) {
+          return [
+            displayOrEditScmRefs({ refs, viewMode: ViewMode.ViewScmRefs }),
+          ];
+        }
+        return [];
+      }),
+    ),
+  );
+
 }

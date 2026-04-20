@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { Extension, Game, ViewContext } from 'src/app/models';
+import { Extension, Game, ViewContext } from '../../../models';
 import {
   getContextRouteSegment,
   getExtensionScopeSegment,
   isCodeViewContext,
   isScriptViewContext,
-} from 'src/app/utils';
+} from '../../../utils';
 
 @Component({
     selector: 'scl-extension-list',

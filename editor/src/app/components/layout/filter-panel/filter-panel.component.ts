@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { flatten, orderBy, uniqBy } from 'lodash';
 import { of, zip } from 'rxjs';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { VersionFacade } from 'src/app/state/version/facade';
+import { VersionFacade } from '../../../state/version/facade';
 
 import {
   Attribute,

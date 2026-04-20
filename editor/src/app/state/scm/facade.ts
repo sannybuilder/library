@@ -11,6 +11,7 @@ import {
 import * as selector from './selectors';
 import { Game } from '../../models';
 import { filter } from 'rxjs/operators';
+import { KeyValueEntry } from '../../components/scm/model';
 
 @Injectable({ providedIn: 'root' })
 export class ScmFacade {
@@ -19,7 +20,6 @@ export class ScmFacade {
   activeFileName$ = this.store$.select(selector.activeFileName);
   currentFile$ = this.store$.select(selector.currentFile);
   files$ = this.store$.select(selector.files);
-  overlay$ = this.store$.select(selector.currentOverlay);
   map$ = this.store$
     .select(selector.currentMap)
     .pipe(filter((v): v is NonNullable<typeof v> => !!v));
@@ -48,11 +48,11 @@ export class ScmFacade {
     return this.store$.dispatch(selectScmLabelOffset({ offset }));
   }
 
-  updateRefs(refs: Record<string, string>) {
+  updateRefs(refs: KeyValueEntry[]) {
     return this.store$.dispatch(updateScmRefs({ refs }));
   }
 
-  updateVariables(variables: Record<string, string>) {
+  updateVariables(variables: KeyValueEntry[]) {
     return this.store$.dispatch(updateScmVariables({ variables }));
   }
 
@@ -70,10 +70,6 @@ export class ScmFacade {
 
   fileByName$(name: string) {
     return this.store$.select(selector.fileByName, { name });
-  }
-
-  overlayByGame$(game: Game) {
-    return this.store$.select(selector.overlayByGame, { game });
   }
 
   refsByGame$(game: Game) {

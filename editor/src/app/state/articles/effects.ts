@@ -6,7 +6,7 @@ import { loadArticle, loadArticleSuccess } from './actions';
 import { GameFacade } from '../game/facade';
 import { ArticlesService } from './service';
 import { ChangesFacade } from '../changes/facade';
-import { getBaseGame } from 'src/app/utils';
+import { getBaseGame } from '../../utils';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesEffects {

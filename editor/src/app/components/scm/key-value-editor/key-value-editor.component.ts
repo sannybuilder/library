@@ -9,11 +9,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { isValidIdentifier } from '../../../utils';
-
-export interface KeyValueEntry {
-  key: string;
-  value: string;
-}
+import { KeyValueEntry } from '../model';
 
 @Component({
   selector: 'scl-key-value-editor',
@@ -24,6 +20,7 @@ export interface KeyValueEntry {
 })
 export class KeyValueEditorComponent {
   private _entries: KeyValueEntry[] = [];
+  private _requiredPrefix: string[] = [];
 
   @Input() set entries(value: KeyValueEntry[]) {
     this._entries = value ?? [];
@@ -32,6 +29,14 @@ export class KeyValueEditorComponent {
 
   get entries() {
     return this._entries;
+  }
+
+  @Input() set requiredPrefix(value: string[]) {
+    this._requiredPrefix = value ?? [];
+    this.updateErrors();
+  }
+  get requiredPrefix() {
+    return this._requiredPrefix;
   }
 
   @Input() emptyText = 'No entries found';
@@ -45,12 +50,21 @@ export class KeyValueEditorComponent {
 
   filterQuery = '';
   isInvalid = false;
-  errors: Record<'emptyKey' | 'emptyValue' | 'invalidIdentifier', boolean> = {
+  errors: Record<
+    | 'emptyKey'
+    | 'emptyValue'
+    | 'invalidIdentifier'
+    | 'duplicateKey'
+    | 'invalidKeyPrefix',
+    boolean
+  > = {
     emptyKey: false,
     emptyValue: false,
     invalidIdentifier: false,
+    duplicateKey: false,
+    invalidKeyPrefix: false,
   };
-  errorMessages: string[] = [];
+  errorMessages: Array<{ args?: Record<string, unknown>; text: string }> = [];
 
   get filteredEntries() {
     const query = this.filterQuery.trim().toLowerCase();
@@ -103,15 +117,47 @@ export class KeyValueEditorComponent {
   }
 
   private updateErrors() {
-    this.errors.emptyKey = this.entries.some((entry) => !entry.key?.trim());
-    this.errors.emptyValue = this.entries.some((entry) => !entry.value?.trim());
-    this.errors.invalidIdentifier = this.entries.some(
-      ({ value }) => !isValidIdentifier(value),
-    );
-    this.errorMessages = Object.entries(this.errors)
-      .filter(([_, hasError]) => hasError)
-      .map(([errorType]) => `ui.errors.scm.${errorType}`);
+    this.errors.emptyKey = false;
+    this.errors.emptyValue = false;
+    this.errors.invalidIdentifier = false;
+    this.errors.duplicateKey = false;
+    this.errors.invalidKeyPrefix = false;
+    this.errorMessages = [];
+    for (const entry of this.entries) {
+      if (!entry.key?.trim()) {
+        this.errors.emptyKey = true;
+        this.errorMessages.push({ text: 'ui.errors.scm.emptyKey' });
+      } else if (
+        this.requiredPrefix.length > 0 &&
+        !this.requiredPrefix.some((prefix) => entry.key.startsWith(prefix))
+      ) {
+        this.errors.invalidKeyPrefix = true;
+        this.errorMessages.push({
+          args: {
+            key: entry.key,
+            requiredPrefix: this.requiredPrefix.join(', '),
+          },
+          text: 'ui.errors.scm.invalidKeyPrefix',
+        });
+      } else if (this.entries.filter((e) => e.key === entry.key).length > 1) {
+        this.errors.duplicateKey = true;
+        this.errorMessages.push({
+          args: { key: entry.key },
+          text: 'ui.errors.scm.duplicateKey',
+        });
+      }
 
+      if (!entry.value?.trim()) {
+        this.errors.emptyValue = true;
+        this.errorMessages.push({ text: 'ui.errors.scm.emptyValue' });
+      } else if (!isValidIdentifier(entry.value!)) {
+        this.errors.invalidIdentifier = true;
+        this.errorMessages.push({
+          args: { value: entry.value },
+          text: 'ui.errors.scm.invalidIdentifier',
+        });
+      }
+    }
     this.isInvalid = this.errorMessages.length > 0;
     this.hasError.emit(this.isInvalid);
   }

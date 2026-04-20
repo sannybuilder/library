@@ -4,6 +4,7 @@ import { Subject, combineLatest } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Command, EnumRaw } from '../../models';
 import { UiFacade } from '../../state';
+import { KeyValueEntry } from '../scm';
 
 @Injectable()
 export class ContextEditSessionService implements OnDestroy {
@@ -15,10 +16,10 @@ export class ContextEditSessionService implements OnDestroy {
   oldExtension?: string;
   enumToDisplayOrEdit?: EnumRaw;
   oldEnumToEdit?: EnumRaw;
-  scmRefsToDisplayOrEdit?: Record<string, string>;
-  oldScmRefsToEdit?: Record<string, string>;
-  scmVariablesToDisplayOrEdit?: Record<string, string>;
-  oldScmVariablesToEdit?: Record<string, string>;
+  scmRefsToDisplayOrEdit?: KeyValueEntry[];
+  oldScmRefsToEdit?: KeyValueEntry[];
+  scmVariablesToDisplayOrEdit?: KeyValueEntry[];
+  oldScmVariablesToEdit?: KeyValueEntry[];
 
   private readonly _onDestroy$ = new Subject<void>();
 

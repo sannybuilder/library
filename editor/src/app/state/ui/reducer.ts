@@ -48,6 +48,7 @@ import {
   displayOrEditScmRefs,
   displayOrEditScmVariables,
 } from './actions';
+import { KeyValueEntry } from '../../components/scm/model';
 
 export interface GameState {
   selectedExtensions: Array<string | 'any'>;
@@ -70,8 +71,8 @@ export interface UiState {
   snippetToDisplayOrEdit?: string;
   selectedSyntaxKind: SyntaxKind;
   enumToDisplayOrEdit?: EnumRaw;
-  scmRefsToDisplayOrEdit?: Record<string, string>;
-  scmVariablesToDisplayOrEdit?: Record<string, string>;
+  scmRefsToDisplayOrEdit?: KeyValueEntry[];
+  scmVariablesToDisplayOrEdit?: KeyValueEntry[];
   viewMode: ViewMode;
   currentPage: number | 'all';
   games: Record<Game, GameState>;

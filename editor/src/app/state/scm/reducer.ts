@@ -1,12 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { ScmMap, ScriptFile } from '../../components/scm/model';
+import { KeyValueEntry, ScmMap, ScriptFile } from '../../components/scm/model';
 import { Game } from '../../models';
 import {
+  loadRefsOverlaySuccess,
   loadScmFile,
   loadScmFileSuccess,
   loadScmMap,
   loadScmMapSuccess,
-  loadScmOverlaySuccess,
+  loadVariableOverlaySuccess,
   selectScmLabelOffset,
   updateScmRefs,
   updateScmVariables,
@@ -18,15 +19,13 @@ export interface ScmState {
   activeGame?: Game;
   selectedLabelOffset?: number;
   files: Record<string, ScriptFile>;
-  overlayByGame: Partial<Record<Game, Record<string, string>>>;
-  refsByGame: Partial<Record<Game, Record<string, string>>>;
-  variablesByGame: Partial<Record<Game, Record<string, string>>>;
+  refsByGame: Partial<Record<Game, KeyValueEntry[]>>;
+  variablesByGame: Partial<Record<Game, KeyValueEntry[]>>;
   maps: Partial<Record<Game, ScmMap>>;
 }
 
 export const initialState: ScmState = {
   files: {},
-  overlayByGame: {},
   refsByGame: {},
   variablesByGame: {},
   maps: {},
@@ -50,13 +49,17 @@ export const scmReducer = createReducer(
       [name]: content,
     },
   })),
-  on(loadScmOverlaySuccess, (state, { game, refs, variables }) =>
+  on(loadVariableOverlaySuccess, (state, { game, variables }) =>
+    updateState(state, game, {
+      variablesByGame: {
+        [game]: sortVariables(variables),
+      },
+    }),
+  ),
+  on(loadRefsOverlaySuccess, (state, { game, refs }) =>
     updateState(state, game, {
       refsByGame: {
         [game]: sortRefs(refs),
-      },
-      variablesByGame: {
-        [game]: sortVariables(variables),
       },
     }),
   ),
@@ -102,9 +105,9 @@ function updateState(
   game: Game,
   update: Partial<ScmState>,
 ): ScmState {
-  const refs = update.refsByGame?.[game] ?? state.refsByGame[game] ?? {};
+  const refs = update.refsByGame?.[game] ?? state.refsByGame[game] ?? [];
   const variables =
-    update.variablesByGame?.[game] ?? state.variablesByGame[game] ?? {};
+    update.variablesByGame?.[game] ?? state.variablesByGame[game] ?? [];
 
   return {
     ...state,
@@ -118,13 +121,6 @@ function updateState(
       ...state.variablesByGame,
       ...update.variablesByGame,
       [game]: variables,
-    },
-    overlayByGame: {
-      ...state.overlayByGame,
-      [game]: {
-        ...refs,
-        ...variables,
-      },
     },
   };
 }

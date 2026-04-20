@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { CONFIG, Config } from '../../config';
-import { serializeUrlAndParams } from 'src/app/utils';
+import { serializeUrlAndParams } from '../../utils';
 
 interface UserResponse {
   login: string;

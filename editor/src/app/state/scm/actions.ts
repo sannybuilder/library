@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ScmMap, ScriptFile } from '../../components/scm/model';
+import { KeyValueEntry, ScmMap, ScriptFile } from '../../components/scm/model';
 import { Game } from '../../models';
 
 export const loadScmFile = createAction(
@@ -7,9 +7,7 @@ export const loadScmFile = createAction(
   props<{ name: string }>(),
 );
 
-export const loadMainFile = createAction(
-  '[SCM] Load Main File',
-);
+export const loadMainFile = createAction('[SCM] Load Main File');
 
 export const loadScmFileSuccess = createAction(
   '[SCM] Load File Success',
@@ -21,28 +19,50 @@ export const loadScmFileError = createAction(
   props<{ name: string }>(),
 );
 
-export const loadScmOverlay = createAction(
-  '[SCM] Load Overlay',
+export const loadVariableOverlay = createAction(
+  '[SCM] Load Variable Overlay',
   props<{ game: Game }>(),
 );
 
-export const loadScmOverlaySuccess = createAction(
-  '[SCM] Load Overlay Success',
+export const loadVariableOverlaySuccess = createAction(
+  '[SCM] Load Variable Overlay Success',
   props<{
     game: Game;
-    refs: Record<string, string>;
-    variables: Record<string, string>;
+    variables: KeyValueEntry[];
   }>(),
+);
+
+export const loadVariableOverlayError = createAction(
+  '[SCM] Load Variable Overlay Error',
+  props<{ game: Game }>(),
+);
+
+export const loadRefsOverlay = createAction(
+  '[SCM] Load Refs Overlay',
+  props<{ game: Game }>(),
+);
+
+export const loadRefsOverlaySuccess = createAction(
+  '[SCM] Load Refs Overlay Success',
+  props<{
+    game: Game;
+    refs: KeyValueEntry[];
+  }>(),
+);
+
+export const loadRefsOverlayError = createAction(
+  '[SCM] Load Refs Overlay Error',
+  props<{ game: Game }>(),
 );
 
 export const updateScmRefs = createAction(
   '[SCM] Update Refs',
-  props<{ refs: Record<string, string> }>(),
+  props<{ refs: KeyValueEntry[] }>(),
 );
 
 export const updateScmVariables = createAction(
   '[SCM] Update Variables',
-  props<{ variables: Record<string, string> }>(),
+  props<{ variables: KeyValueEntry[] }>(),
 );
 
 export const loadScmMap = createAction(

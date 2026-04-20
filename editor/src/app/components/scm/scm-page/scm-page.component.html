@@ -429,20 +429,25 @@
             </div>
 
             <ng-container *ngIf="code$ | async as code; else loading">
-              <ng-container *ngIf="overlay$ | async as overlay">
-                <ng-container *ngIf="map$ | async as map">
-                  <scl-scm-view
-                    [code]="code"
-                    [commands]="getCommands() | async"
-                    [overlay]="overlay"
-                    [scmMap]="map"
-                    [game]="game"
-                    [viewContext]="viewContext"
-                    [activeFragment]="activeFragment"
-                    [showLineNumbers]="showLineNumbers$ | async"
-                    [showOffsets]="showOffsets$ | async"
-                    [adjustOffsets]="(adjustOffsets$ | async) ? 8 : 0"
-                  ></scl-scm-view>
+              <ng-container
+                *ngIf="variablesOverlay$ | async as variablesOverlay"
+              >
+                <ng-container *ngIf="refsOverlay$ | async as refsOverlay">
+                  <ng-container *ngIf="map$ | async as map">
+                    <scl-scm-view
+                      [code]="code"
+                      [commands]="getCommands() | async"
+                      [variablesOverlay]="variablesOverlay"
+                      [refsOverlay]="refsOverlay"
+                      [scmMap]="map"
+                      [game]="game"
+                      [viewContext]="viewContext"
+                      [activeFragment]="activeFragment"
+                      [showLineNumbers]="showLineNumbers$ | async"
+                      [showOffsets]="showOffsets$ | async"
+                      [adjustOffsets]="(adjustOffsets$ | async) ? 8 : 0"
+                    ></scl-scm-view>
+                  </ng-container>
                 </ng-container>
               </ng-container>
             </ng-container>

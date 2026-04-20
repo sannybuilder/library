@@ -24,7 +24,7 @@
   <pre
     class="sample"
     *ngIf="filteredEntries.length; else emptyState"
-  ><ng-container *ngFor="let item of filteredEntries">{{ toRawRefKey(item[0]) }}=<a [routerLink]="route" *ngIf="getScmTargetPath(item[0]) as route else justName">{{ item[1] }}</a><ng-template #justName>{{ item[1] }}</ng-template>
+  ><ng-container *ngFor="let item of filteredEntries">{{ toRawRefKey(item.key) }}=<a [routerLink]="route" *ngIf="getScmTargetPath(item.key) as route else justName">{{ item.value }}</a><ng-template #justName>{{ item.value }}</ng-template>
 </ng-container></pre>
 </div>
 

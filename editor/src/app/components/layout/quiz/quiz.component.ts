@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BehaviorSubject, debounceTime, map, merge } from 'rxjs';
-import { Command, Extension, Game } from 'src/app/models';
-import { isSupported } from 'src/app/utils';
+import { Command, Extension, Game } from '../../../models';
+import { isSupported } from '../../../utils';
 
 enum Status {
   UNANSWERED = 0,

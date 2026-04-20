@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { KeyValueEntry } from '../model';
 
 @Component({
   selector: 'scl-variable-list',
@@ -8,29 +9,21 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   standalone: false,
 })
 export class VariableListComponent {
-  private _variables: Record<string, string> = {};
-
-  @Input() set variables(value: Record<string, string>) {
-    this._variables = value ?? {};
-    this.entries = Object.entries(this._variables);
-  }
-
-  get variables() {
-    return this._variables;
-  }
-
+  @Input() variables: KeyValueEntry[] = [];
   filterQuery = '';
-  entries: Array<[string, string]> = [];
 
-  get filteredEntries(): Array<[string, string]> {
+  get filteredEntries(): KeyValueEntry[] {
     const query = this.filterQuery.trim().toLowerCase();
     if (!query) {
-      return this.entries;
+      return this.variables;
     }
 
-    return this.entries.filter(([key, value]) => {
+    return this.variables.filter(({ key, value }) => {
       const formattedKey = this.toRawVariableKey(key).toLowerCase();
-      return formattedKey.includes(query) || (value ?? '').toLowerCase().includes(query);
+      return (
+        formattedKey.includes(query) ||
+        (value ?? '').toLowerCase().includes(query)
+      );
     });
   }
 

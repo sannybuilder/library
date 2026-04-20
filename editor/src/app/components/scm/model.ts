@@ -33,3 +33,8 @@ export interface ScmXrefItem {
   lineNumber?: number;
   fragment?: string;
 }
+
+export interface KeyValueEntry {
+  key: string;
+  value: string;
+}

@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
+  KeyValueEntry,
   ScmMap,
   ScmMapFileEntry,
   ScmTreeNode,
@@ -46,43 +47,30 @@ export const files = createSelector(
   (state: ScmState | undefined) => state?.files ?? {},
 );
 
-export const overlayByGame = createSelector(
-  state,
-  (state: ScmState | undefined, props: { game: Game }) =>
-    props.game ? state?.overlayByGame[props.game] : undefined,
-);
-
 export const refsByGame = createSelector(
   state,
   (state: ScmState | undefined, props: { game: Game }) =>
-    props.game ? state?.refsByGame[props.game] : undefined,
+    props.game ? (state?.refsByGame[props.game] ?? []) : [],
 );
 
 export const variablesByGame = createSelector(
   state,
   (state: ScmState | undefined, props: { game: Game }) =>
-    props.game ? state?.variablesByGame[props.game] : undefined,
-);
-
-export const currentOverlay = createSelector(
-  state,
-  game,
-  (state: ScmState | undefined, game: Game | undefined) =>
-    game ? state?.overlayByGame[game] : undefined,
+    props.game ? (state?.variablesByGame[props.game] ?? []) : [],
 );
 
 export const currentRefsOverlay = createSelector(
   state,
   game,
   (state: ScmState | undefined, game: Game | undefined) =>
-    game ? (state?.refsByGame[game] ?? {}) : {},
+    game ? (state?.refsByGame[game] ?? []) : [],
 );
 
 export const currentVariablesOverlay = createSelector(
   state,
   game,
   (state: ScmState | undefined, game: Game | undefined) =>
-    game ? (state?.variablesByGame[game] ?? {}) : {},
+    game ? (state?.variablesByGame[game] ?? []) : [],
 );
 
 export const mapByGame = createSelector(
@@ -100,28 +88,28 @@ export const currentMap = createSelector(
 
 export const treeByGame = createSelector(
   mapByGame,
-  overlayByGame,
-  (map, overlay) => buildTree(map, overlay ?? {}),
+  currentRefsOverlay,
+  (map, overlay) => buildTree(map, overlay),
 );
 
 export const currentTree = createSelector(
   currentMap,
-  currentOverlay,
-  (map, overlay) => buildTree(map, overlay ?? {}),
+  currentRefsOverlay,
+  (map, overlay) => buildTree(map, overlay),
 );
 
 export const xrefsByGame = createSelector(
   mapByGame,
-  overlayByGame,
+  currentRefsOverlay,
   selectedLabelOffset,
-  (map, overlay, offset) => buildXrefs(map, offset, overlay ?? {}),
+  (map, overlay, offset) => buildXrefs(map, offset, overlay),
 );
 
 export const currentXrefs = createSelector(
   currentMap,
-  currentOverlay,
+  currentRefsOverlay,
   selectedLabelOffset,
-  (map, overlay, offset) => buildXrefs(map, offset, overlay ?? {}),
+  (map, overlay, offset) => buildXrefs(map, offset, overlay),
 );
 
 export const currentFileLabelOffsets = createSelector(currentFile, (file) => {
@@ -137,13 +125,12 @@ export const currentFileLabelOffsets = createSelector(currentFile, (file) => {
 
 export const currentRefs = createSelector(
   currentFileLabelOffsets,
-  currentOverlay,
+  currentRefsOverlay,
   (offsets, overlay) => {
-    const overlayMap = overlay ?? {};
     return offsets.map((offset) => {
       const key = toRefKey(offset);
       return {
-        displayLabel: toDisplayLabel(key, offset, overlayMap),
+        displayLabel: toDisplayLabel(key, offset, overlay),
         offset,
       };
     });
@@ -152,7 +139,7 @@ export const currentRefs = createSelector(
 
 function buildTree(
   map: ScmMap | undefined,
-  overlay: Record<string, string>,
+  overlay: KeyValueEntry[],
 ): ScmTreeNode[] {
   if (!map) {
     return [];
@@ -202,8 +189,9 @@ function buildTree(
     .filter((node) => !!node.path || !!node.children?.length);
 }
 
-function toTreeLabel(path: string, overlay: Record<string, string>): string {
-  return overlay[path] ?? leafName(path);
+function toTreeLabel(path: string, overlay: KeyValueEntry[]): string {
+  const entry = overlay.find((e) => e.key === path);
+  return entry ? entry.value : leafName(path);
 }
 
 function leafName(path: string): string {
@@ -218,7 +206,7 @@ function toGroupTitle(group: string): string {
 function buildXrefs(
   map: ScmMap | undefined,
   offset: number | undefined,
-  overlay: Record<string, string>,
+  overlay: KeyValueEntry[],
 ): ScmXrefItem[] {
   if (!map || typeof offset !== 'number') {
     return [];
@@ -232,7 +220,7 @@ function buildXrefs(
 function resolveXref(
   map: ScmMap,
   source: string,
-  overlay: Record<string, string>,
+  overlay: KeyValueEntry[],
 ): ScmXrefItem {
   const [fileIndexRaw, lineIndexRaw] = source.split(':');
   const fileIndex = Number.parseInt(fileIndexRaw, 10);
@@ -272,11 +260,11 @@ function parseLineIndex(raw: string | undefined): number | undefined {
 function toDisplayLabel(
   refKey: string,
   offset: number,
-  overlay: Record<string, string>,
+  overlay: KeyValueEntry[],
 ): string {
-  const label = overlay[refKey];
-  if (label) {
-    return `:${label}`;
+  const entry = overlay.find((e) => e.key === refKey);
+  if (entry) {
+    return `:${entry.value}`;
   }
 
   return `:label_${offset.toString()}`;

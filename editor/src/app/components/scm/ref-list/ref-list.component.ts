@@ -4,7 +4,7 @@ import {
   getRoutePath,
   normalizeScmPath,
 } from '../../../utils';
-import { ScmMap } from '../model';
+import { KeyValueEntry, ScmMap } from '../model';
 
 @Component({
   selector: 'scl-ref-list',
@@ -14,7 +14,6 @@ import { ScmMap } from '../model';
   standalone: false,
 })
 export class RefListComponent {
-  private _refs: Record<string, string> = {};
   private _map: ScmMap | null = null;
   private scmTargetPathByName = new Map<string, string>();
 
@@ -32,27 +31,17 @@ export class RefListComponent {
     return this._map;
   }
 
-  @Input() set refs(value: Record<string, string>) {
-    this._refs = value ?? {};
-    this.entries = Object.entries(this._refs);
-  }
-
+  @Input() refs: KeyValueEntry[] = [];
   @Input() game!: string;
-
-  get refs() {
-    return this._refs;
-  }
-
   filterQuery = '';
-  entries: Array<[string, string]> = [];
 
-  get filteredEntries(): Array<[string, string]> {
+  get filteredEntries(): KeyValueEntry[] {
     const query = this.filterQuery.trim().toLowerCase();
     if (!query) {
-      return this.entries;
+      return this.refs;
     }
 
-    return this.entries.filter(([key, value]) => {
+    return this.refs.filter(({ key, value }) => {
       const formattedKey = this.toRawRefKey(key).toLowerCase();
       return (
         formattedKey.includes(query) ||

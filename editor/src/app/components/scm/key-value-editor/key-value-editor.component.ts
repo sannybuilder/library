@@ -21,7 +21,6 @@ import { KeyValueEntry } from '../model';
 export class KeyValueEditorComponent {
   private _entries: KeyValueEntry[] = [];
   private _requiredPrefix: string[] = [];
-  private _inEditMode = false;
   filterQuery = '';
   filteredEntries: KeyValueEntry[] = [];
 
@@ -153,10 +152,6 @@ export class KeyValueEditorComponent {
 
   updateFilterQuery(newQuery: string) {
     this.filterQuery = newQuery;
-
-    if (this._inEditMode) {
-      return;
-    }
 
     const query = this.filterQuery.trim().toLowerCase();
     if (!query) {

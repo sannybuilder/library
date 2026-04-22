@@ -21,9 +21,13 @@ import { KeyValueEntry } from '../model';
 export class KeyValueEditorComponent {
   private _entries: KeyValueEntry[] = [];
   private _requiredPrefix: string[] = [];
+  private _inEditMode = false;
+  filterQuery = '';
+  filteredEntries: KeyValueEntry[] = [];
 
   @Input() set entries(value: KeyValueEntry[]) {
     this._entries = value ?? [];
+    this.updateFilterQuery(this.filterQuery);
     this.updateErrors();
   }
 
@@ -48,7 +52,6 @@ export class KeyValueEditorComponent {
 
   @ViewChildren('keyInput') keyInputs!: QueryList<ElementRef<HTMLInputElement>>;
 
-  filterQuery = '';
   isInvalid = false;
   errors: Record<
     | 'emptyKey'
@@ -65,20 +68,6 @@ export class KeyValueEditorComponent {
     invalidKeyPrefix: false,
   };
   errorMessages: Array<{ args?: Record<string, unknown>; text: string }> = [];
-
-  get filteredEntries() {
-    const query = this.filterQuery.trim().toLowerCase();
-    if (!query) {
-      return this.entries;
-    }
-
-    return this.entries.filter((entry) => {
-      return (
-        entry.key.toLowerCase().includes(query) ||
-        (entry.value ?? '').toLowerCase().includes(query)
-      );
-    });
-  }
 
   trackByIndex(index: number): number {
     return index;
@@ -160,5 +149,25 @@ export class KeyValueEditorComponent {
     }
     this.isInvalid = this.errorMessages.length > 0;
     this.hasError.emit(this.isInvalid);
+  }
+
+  updateFilterQuery(newQuery: string) {
+    this.filterQuery = newQuery;
+
+    if (this._inEditMode) {
+      return;
+    }
+
+    const query = this.filterQuery.trim().toLowerCase();
+    if (!query) {
+      this.filteredEntries = this.entries;
+    }
+
+    this.filteredEntries = this.entries.filter((entry) => {
+      return (
+        entry.key.toLowerCase().includes(query) ||
+        (entry.value ?? '').toLowerCase().includes(query)
+      );
+    });
   }
 }

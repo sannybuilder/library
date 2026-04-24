@@ -364,6 +364,26 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
               runGuardsAndResolvers: 'always',
             },
             {
+              path: 'lcs/scm',
+              canActivate: [
+                (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
+                  inject(RouteGuard).canActivate(route, state),
+              ],
+              title: `${GameTitle['lcs']} :: SCM`,
+              children: [
+                {
+                  path: '',
+                  pathMatch: 'full',
+                  component: ScmPageComponent,
+                },
+                {
+                  path: '**',
+                  component: ScmPageComponent,
+                },
+              ],
+              runGuardsAndResolvers: 'always',
+            },
+            {
               path: '**',
               canActivate: [
                 (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>

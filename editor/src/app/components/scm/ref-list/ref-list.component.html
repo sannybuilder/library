@@ -24,7 +24,7 @@
   <pre
     class="sample"
     *ngIf="filteredEntries.length; else emptyState"
-  ><ng-container *ngFor="let item of filteredEntries">{{ toRawRefKey(item.key) }}=<a [routerLink]="route" *ngIf="getScmTargetPath(item.key) as route else justName">{{ item.value }}</a><ng-template #justName>{{ item.value }}</ng-template>
+  ><ng-container *ngFor="let item of filteredEntries"><span>{{ toRawRefKey(item.key) }}=<a  *ngIf="getScmTargetPath(item.key) as route else justName" [routerLink]="route.route" [fragment]="route.fragment">{{ item.value }}</a><ng-template #justName>{{ item.value }}</ng-template></span><span class="secondary" *ngIf="isOrphanRef(item.key)"> ({{ "ui.enumList.unused" | translate }})</span>
 </ng-container></pre>
 </div>
 

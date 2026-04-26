@@ -5,9 +5,8 @@
 }
 :host-context ::ng-deep {
   .line-row {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
+    display: flex;
+    align-items: baseline;
   }
 
   .line-row.active {
@@ -15,6 +14,8 @@
   }
 
   .line-content {
+    flex: 1 1 auto;
+    min-width: 0;
     white-space: nowrap;
   }
 
@@ -23,8 +24,17 @@
   }
 
   .line-offset {
-    width: 80px;
+    flex-shrink: 0;
+    display: inline-block;
     user-select: none;
+  }
+
+  .line-offset-absolute {
+    flex: 0 0 80px;
+  }
+
+  .line-offset-relative {
+    flex: 0 0 64px;
   }
 
   .line-content.active {
@@ -96,7 +106,7 @@
   }
 
   .line-number {
-    width: 48px;
+    flex: 0 0 48px;
     color: $secondary;
     user-select: none;
     text-align: right;

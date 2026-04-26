@@ -36,6 +36,7 @@ export class ScmViewComponent implements OnChanges {
   @Input() scmMap: ScmMap | null = null;
   @Input() game!: Game;
   @Input() viewContext!: ViewContext;
+  @Input() activeFileName?: string | null;
   @Input() activeFragment?: string | null;
   @Input() showLineNumbers!: boolean;
   @Input() showOffsets!: boolean;
@@ -45,6 +46,7 @@ export class ScmViewComponent implements OnChanges {
   private commandByName = new Map<string, Command>();
   private scmTargetPathByName = new Map<string, string>();
   private refsSet = new Set<number>();
+  private isActiveMissionFile = false;
   private readonly terminalInstructions = new Set([
     'RETURN',
     'RETURN_TRUE',
@@ -69,6 +71,10 @@ export class ScmViewComponent implements OnChanges {
       }
     }
 
+    if (changes['scmMap'] || changes['activeFileName']) {
+      this.isActiveMissionFile = this.computeIsActiveMissionFile();
+    }
+
     if (changes['code']) {
       this.refsSet = new Set(
         (this.code?.refs ?? []).filter(
@@ -85,6 +91,7 @@ export class ScmViewComponent implements OnChanges {
       'scmMap',
       'game',
       'viewContext',
+      'activeFileName',
       'activeFragment',
       'showLineNumbers',
       'showOffsets',
@@ -155,7 +162,7 @@ export class ScmViewComponent implements OnChanges {
           }
           return 'tok';
         }
-        case '#': 
+        case '#':
           return 'tok-model';
         case '[':
         case '(':
@@ -248,15 +255,19 @@ export class ScmViewComponent implements OnChanges {
       }
 
       if (this.showOffsets) {
-        const copyText =
-          lineOffset !== ''
-            ? String(this.code.base + Number(lineOffset) + this.adjustOffsets)
-            : '';
+        const absoluteOffset = this.getAbsoluteOffset(lineOffset);
         parts.push(
-          `<div class="text-muted line-offset pointer" data-copy-text="${this.escapeAttribute(
-            copyText,
-          )}" title="Click the offset number to copy to clipboard">${this.escapeHtml(copyText)}</div>`,
+          `<div class="text-muted line-offset line-offset-absolute pointer" data-copy-text="${this.escapeAttribute(
+            absoluteOffset,
+          )}" title="Click the absolute offset number to copy to clipboard">${this.escapeHtml(absoluteOffset)}</div>`,
         );
+
+        if (this.isActiveMissionFile) {
+          const relativeOffset = this.getRelativeOffset(lineOffset);
+          parts.push(
+            `<div class="text-muted line-offset line-offset-relative" title="Relative to mission base offset">${this.escapeHtml(relativeOffset)}</div>`,
+          );
+        }
       }
 
       parts.push('<div class="line-content">');
@@ -356,10 +367,16 @@ export class ScmViewComponent implements OnChanges {
     const resolved = this.getSymbol(arg) ?? arg;
     const value = String(resolved);
     if (value.startsWith('g.') || value.startsWith('l.')) {
-      return this.variablesOverlay.find((e) => e.key === value)?.value ?? this.defaultOverlay(value);
+      return (
+        this.variablesOverlay.find((e) => e.key === value)?.value ??
+        this.defaultOverlay(value)
+      );
     }
     if (value.startsWith('ref.')) {
-      return this.refsOverlay.find((e) => e.key === value)?.value ?? this.defaultOverlay(value);
+      return (
+        this.refsOverlay.find((e) => e.key === value)?.value ??
+        this.defaultOverlay(value)
+      );
     }
     return this.defaultOverlay(value);
   }
@@ -409,6 +426,52 @@ export class ScmViewComponent implements OnChanges {
 
   private getLineNumberAnchorId(index: number): string {
     return `L${index + 1}`;
+  }
+
+  private getAbsoluteOffset(lineOffset: number | string): string {
+    const numericOffset = this.parseLineOffset(lineOffset);
+    if (numericOffset === null) {
+      return '';
+    }
+    return String(this.code.base + numericOffset + this.adjustOffsets);
+  }
+
+  private getRelativeOffset(lineOffset: number | string): string {
+    const numericOffset = this.parseLineOffset(lineOffset);
+    if (numericOffset === null) {
+      return '';
+    }
+
+    return String(numericOffset);
+  }
+
+  private parseLineOffset(lineOffset: number | string): number | null {
+    if (lineOffset === '') {
+      return null;
+    }
+
+    const numericOffset = Number(lineOffset);
+    if (Number.isNaN(numericOffset)) {
+      return null;
+    }
+
+    return numericOffset;
+  }
+
+  private computeIsActiveMissionFile(): boolean {
+    if (!this.scmMap || !this.activeFileName) {
+      return false;
+    }
+
+    const activeEntry = this.scmMap.files.find(
+      (file) => normalizeScmPath(file.path) === this.activeFileName,
+    );
+    if (!activeEntry) {
+      return false;
+    }
+
+    const groupName = (this.scmMap.groups[activeEntry.pid] ?? '').toLowerCase();
+    return groupName === 'missions';
   }
 
   private renderIndent(level: number): string {

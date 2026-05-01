@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { KeyValueEntry, ScmMap, ScriptFile } from '../../components/scm/model';
 import { Game } from '../../models';
 import {
+  loadCommentsOverlaySuccess,
   loadRefsOverlaySuccess,
   loadScmFile,
   loadScmFileSuccess,
@@ -9,6 +10,7 @@ import {
   loadScmMapSuccess,
   loadVariableOverlaySuccess,
   selectScmLabelOffset,
+  updateScmComments,
   updateScmRefs,
   updateScmVariables,
 } from './actions';
@@ -19,6 +21,7 @@ export interface ScmState {
   activeGame?: Game;
   selectedLabelOffset?: number;
   files: Record<string, ScriptFile>;
+  commentsByGame: Partial<Record<Game, KeyValueEntry[]>>;
   refsByGame: Partial<Record<Game, KeyValueEntry[]>>;
   variablesByGame: Partial<Record<Game, KeyValueEntry[]>>;
   maps: Partial<Record<Game, ScmMap>>;
@@ -26,6 +29,7 @@ export interface ScmState {
 
 export const initialState: ScmState = {
   files: {},
+  commentsByGame: {},
   refsByGame: {},
   variablesByGame: {},
   maps: {},
@@ -63,6 +67,13 @@ export const scmReducer = createReducer(
       },
     }),
   ),
+  on(loadCommentsOverlaySuccess, (state, { game, comments }) =>
+    updateState(state, game, {
+      commentsByGame: {
+        [game]: comments,
+      },
+    }),
+  ),
   on(updateScmRefs, (state, { refs }) => {
     const game = state.activeGame;
     if (!game) {
@@ -87,6 +98,18 @@ export const scmReducer = createReducer(
       },
     });
   }),
+  on(updateScmComments, (state, { comments }) => {
+    const game = state.activeGame;
+    if (!game) {
+      return state;
+    }
+
+    return updateState(state, game, {
+      commentsByGame: {
+        [game]: comments,
+      },
+    });
+  }),
   on(loadScmMapSuccess, (state, { game, map }) => ({
     ...state,
     maps: {
@@ -106,12 +129,19 @@ function updateState(
   update: Partial<ScmState>,
 ): ScmState {
   const refs = update.refsByGame?.[game] ?? state.refsByGame[game] ?? [];
+  const comments =
+    update.commentsByGame?.[game] ?? state.commentsByGame[game] ?? [];
   const variables =
     update.variablesByGame?.[game] ?? state.variablesByGame[game] ?? [];
 
   return {
     ...state,
     ...update,
+    commentsByGame: {
+      ...state.commentsByGame,
+      ...update.commentsByGame,
+      [game]: comments,
+    },
     refsByGame: {
       ...state.refsByGame,
       ...update.refsByGame,

@@ -1,10 +1,15 @@
 import { LocationStrategy } from '@angular/common';
 import {
   Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
   inject,
   Input,
   OnChanges,
+  Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Command, Game, ViewContext } from '../../../models';
@@ -28,11 +33,15 @@ export class ScmViewComponent implements OnChanges {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private locationStrategy = inject(LocationStrategy);
+  private host = inject(ElementRef<HTMLElement>);
 
   @Input() code: ScriptFile = { base: 0, symbols: [], refs: [], lines: [] };
   @Input() commands: Command[] = [];
   @Input() variablesOverlay: KeyValueEntry[] = [];
   @Input() refsOverlay: KeyValueEntry[] = [];
+  @Input() commentsOverlay: KeyValueEntry[] = [];
+  @Input() showComments: boolean = true;
+  @Input() canEdit: boolean = false;
   @Input() scmMap: ScmMap | null = null;
   @Input() game!: Game;
   @Input() viewContext!: ViewContext;
@@ -41,11 +50,16 @@ export class ScmViewComponent implements OnChanges {
   @Input() showLineNumbers!: boolean;
   @Input() showOffsets!: boolean;
   @Input() adjustOffsets: number = 0;
+  @Output() commentsOverlayChange = new EventEmitter<KeyValueEntry[]>();
+  @ViewChild('commentEditorTextarea')
+  commentEditorTextarea?: ElementRef<HTMLTextAreaElement>;
   renderedHtml: SafeHtml = this.sanitizer.bypassSecurityTrustHtml('');
 
   private commandByName = new Map<string, Command>();
   private scmTargetPathByName = new Map<string, string>();
   private refsSet = new Set<number>();
+  private editableComments: KeyValueEntry[] = [];
+  private commentsByOffset = new Map<number, string[]>();
   private isActiveMissionFile = false;
   private readonly terminalInstructions = new Set([
     'RETURN',
@@ -56,6 +70,12 @@ export class ScmViewComponent implements OnChanges {
     'TERMINATE_THIS_SCRIPT',
     'GOTO',
   ]);
+  commentEditorOpen = false;
+  commentEditorOffset: number | null = null;
+  commentEditorText = '';
+  commentEditorHasExisting = false;
+  commentEditorTop = 0;
+  commentEditorLeft = 0;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['commands']) {
@@ -83,11 +103,22 @@ export class ScmViewComponent implements OnChanges {
       );
     }
 
+    if (changes['commentsOverlay']) {
+      this.editableComments = (this.commentsOverlay ?? []).map((entry) => ({
+        key: entry.key,
+        value: entry.value,
+      }));
+      this.commentsByOffset = this.buildCommentsByOffset(this.editableComments);
+    }
+
     const shouldRebuildHtml = [
       'code',
       'commands',
       'variablesOverlay',
       'refsOverlay',
+      'commentsOverlay',
+      'showComments',
+      'canEdit',
       'scmMap',
       'game',
       'viewContext',
@@ -226,6 +257,62 @@ export class ScmViewComponent implements OnChanges {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const lineOffset = line[0];
+      const isStandaloneComment = this.isStandaloneCommentLine(line);
+      const isCommentGroupStart =
+        isStandaloneComment && !this.isStandaloneCommentLine(lines[i - 1]);
+      const externalComments = this.showComments
+        ? this.getExternalComments(lineOffset)
+        : [];
+      const commentOffset = this.getCommentOffset(lineOffset);
+      const hasExternalComment =
+        commentOffset !== null && this.commentsByOffset.has(commentOffset);
+      const activeClass =
+        this.activeFragment === this.getLineNumberAnchorId(i) ? ' active' : '';
+      const isActiveLine =
+        this.activeFragment === this.getLineNumberAnchorId(i);
+
+      if (externalComments.length > 0) {
+        parts.push('<div class="line-row comment-group-start">');
+        if (this.showLineNumbers) {
+          parts.push('<div class="line-number"></div>');
+        }
+        if (this.canEdit) {
+          parts.push('<div class="line-comment-control">');
+          parts.push(this.renderIndent(idents[i]));
+          if (commentOffset !== null) {
+            if (hasExternalComment || isActiveLine) {
+              const buttonLabel = hasExternalComment ? '…' : '+';
+              const buttonTitle = hasExternalComment
+                ? 'Edit line comment'
+                : 'Add line comment';
+              const buttonClass = [
+                'line-comment-trigger',
+                hasExternalComment ? 'has-comment' : '',
+                isActiveLine ? 'is-active-line' : '',
+              ]
+                .filter((className) => className.length > 0)
+                .join(' ');
+              parts.push(
+                `<button type="button" class="${buttonClass}" data-comment-action="open" data-comment-offset="${this.escapeAttribute(
+                  String(commentOffset),
+                )}" data-line-index="${i}" title="${this.escapeAttribute(
+                  buttonTitle,
+                )}" aria-label="${this.escapeAttribute(
+                  buttonTitle,
+                )}">${buttonLabel}</button>`,
+              );
+            }
+          }
+          parts.push('</div>');
+        }
+        parts.push('<div class="line-content">');
+        for (const comment of externalComments) {
+          parts.push(
+            `<span class="tok tok-comment">${this.escapeHtml(this.toCommentText(comment))}</span><br>`,
+          );
+        }
+        parts.push('</div></div>');
+      }
 
       if (this.isRef(i) && typeof lineOffset === 'number') {
         const labelId = `label-${this.code.base + lineOffset}`;
@@ -241,9 +328,10 @@ export class ScmViewComponent implements OnChanges {
         );
       }
 
-      const activeClass =
-        this.activeFragment === this.getLineNumberAnchorId(i) ? ' active' : '';
-      parts.push(`<div class="line-row${activeClass}">`);
+      const commentGroupClass = isCommentGroupStart
+        ? ' comment-group-start'
+        : '';
+      parts.push(`<div class="line-row${activeClass}${commentGroupClass}">`);
 
       if (this.showLineNumbers) {
         const lineAnchorId = this.getLineNumberAnchorId(i);
@@ -254,7 +342,34 @@ export class ScmViewComponent implements OnChanges {
         );
       }
 
-      if (this.showOffsets) {
+      if (this.canEdit) {
+        parts.push('<div class="line-comment-control">');
+        if (commentOffset !== null && isActiveLine) {
+          const buttonLabel = hasExternalComment ? '…' : '+';
+          const buttonTitle = hasExternalComment
+            ? 'Edit line comment'
+            : 'Add line comment';
+          const buttonClass = [
+            'line-comment-trigger',
+            hasExternalComment ? 'has-comment' : '',
+            isActiveLine ? 'is-active-line' : '',
+          ]
+            .filter((className) => className.length > 0)
+            .join(' ');
+          parts.push(
+            `<button type="button" class="${buttonClass}" data-comment-action="open" data-comment-offset="${this.escapeAttribute(
+              String(commentOffset),
+            )}" data-line-index="${i}" title="${this.escapeAttribute(
+              buttonTitle,
+            )}" aria-label="${this.escapeAttribute(
+              buttonTitle,
+            )}">${buttonLabel}</button>`,
+          );
+        }
+        parts.push('</div>');
+      }
+
+      if (this.showOffsets && !isStandaloneComment) {
         const absoluteOffset = this.getAbsoluteOffset(lineOffset);
         parts.push(
           `<div class="text-muted line-offset line-offset-absolute pointer" data-copy-text="${this.escapeAttribute(
@@ -280,6 +395,86 @@ export class ScmViewComponent implements OnChanges {
     }
 
     return parts.join('');
+  }
+
+  private getExternalComments(lineOffset: number | string): string[] {
+    const absoluteOffset = this.getCommentOffset(lineOffset);
+    if (absoluteOffset === null) {
+      return [];
+    }
+
+    return this.commentsByOffset.get(absoluteOffset) ?? [];
+  }
+
+  private getCommentOffset(lineOffset: number | string): number | null {
+    const numericOffset = this.parseLineOffset(lineOffset);
+    if (numericOffset === null) {
+      return null;
+    }
+
+    return this.code.base + numericOffset;
+  }
+
+  private buildCommentsByOffset(
+    entries: KeyValueEntry[],
+  ): Map<number, string[]> {
+    const result = new Map<number, string[]>();
+
+    for (const entry of entries) {
+      const offset = Number(entry.key);
+      if (Number.isNaN(offset)) {
+        continue;
+      }
+
+      const normalizedValue = entry.value.replace(/\r\n/g, '\n');
+      if (!normalizedValue.trim().length) {
+        continue;
+      }
+
+      const lines = normalizedValue.split('\n');
+
+      if (lines.length > 0) {
+        result.set(offset, lines);
+      }
+    }
+
+    return result;
+  }
+
+  private toCommentText(comment: string): string {
+    const trimmed = comment.trimStart();
+    if (trimmed.startsWith('//')) {
+      return comment;
+    }
+
+    if (!trimmed.length) {
+      return '//';
+    }
+
+    return `// ${comment}`;
+  }
+
+  private isStandaloneCommentLine(
+    line: Array<number | string> | undefined,
+  ): boolean {
+    if (!line) {
+      return false;
+    }
+
+    for (const token of line.slice(2)) {
+      if (typeof token !== 'string') {
+        return false;
+      }
+
+      const trimmedToken = token.trimStart();
+      if (!trimmedToken.length) {
+        continue;
+      }
+
+      return trimmedToken.startsWith('//');
+    }
+
+    return false;
   }
 
   private buildIdents(): number[] {
@@ -372,12 +567,14 @@ export class ScmViewComponent implements OnChanges {
         this.defaultOverlay(value)
       );
     }
+
     if (value.startsWith('ref.')) {
       return (
         this.refsOverlay.find((e) => e.key === value)?.value ??
         this.defaultOverlay(value)
       );
     }
+
     return this.defaultOverlay(value);
   }
 
@@ -496,9 +693,32 @@ export class ScmViewComponent implements OnChanges {
   }
 
   onRenderedClick(event: MouseEvent): void {
-    const eventTarget = event.target as EventTarget | null;
-    if (eventTarget instanceof HTMLAnchorElement) {
-      const href = eventTarget.getAttribute('href');
+    const eventTarget = event.target as HTMLElement | null;
+    if (!eventTarget) {
+      return;
+    }
+
+    const commentButton = eventTarget.closest(
+      'button[data-comment-action="open"]',
+    );
+    if (commentButton instanceof HTMLButtonElement) {
+      if (!this.canEdit) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      this.openCommentEditor(commentButton);
+      return;
+    }
+
+    if (this.commentEditorOpen) {
+      this.closeCommentEditor();
+    }
+
+    const anchorTarget = eventTarget.closest('a[href]');
+    if (anchorTarget instanceof HTMLAnchorElement) {
+      const href = anchorTarget.getAttribute('href');
 
       if (!href) {
         return;
@@ -509,5 +729,126 @@ export class ScmViewComponent implements OnChanges {
       event.stopPropagation();
       this.router.navigateByUrl(routeUrl);
     }
+  }
+
+  onCommentEditorInput(event: Event): void {
+    const target = event.target as HTMLTextAreaElement;
+    this.commentEditorText = target.value;
+  }
+
+  onCommentEditorKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeCommentEditor();
+      return;
+    }
+
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+      event.preventDefault();
+      this.saveCommentEditor();
+    }
+  }
+
+  saveCommentEditor(): void {
+    if (this.commentEditorOffset === null) {
+      return;
+    }
+
+    const nextComments = this.applyCommentUpdate(
+      this.editableComments,
+      this.commentEditorOffset,
+      this.commentEditorText,
+    );
+    this.commitComments(nextComments);
+  }
+
+  deleteCommentEditor(): void {
+    if (this.commentEditorOffset === null) {
+      return;
+    }
+
+    const nextComments = this.applyCommentUpdate(
+      this.editableComments,
+      this.commentEditorOffset,
+      '',
+    );
+    this.commitComments(nextComments);
+  }
+
+  closeCommentEditor(): void {
+    this.commentEditorOpen = false;
+    this.commentEditorOffset = null;
+    this.commentEditorText = '';
+    this.commentEditorHasExisting = false;
+  }
+
+  @HostListener('document:keydown.escape')
+  onDocumentEscape(): void {
+    if (this.commentEditorOpen) {
+      this.closeCommentEditor();
+    }
+  }
+
+  private openCommentEditor(button: HTMLButtonElement): void {
+    const offsetRaw = button.dataset['commentOffset'];
+    const offset = offsetRaw ? Number.parseInt(offsetRaw, 10) : Number.NaN;
+    if (Number.isNaN(offset)) {
+      return;
+    }
+
+    const existingComment = this.commentsByOffset.get(offset);
+    const container = this.host.nativeElement.querySelector(
+      '#code-container',
+    ) as HTMLElement | null;
+    if (!container) {
+      return;
+    }
+
+    const buttonRect = button.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const estimatedEditorWidth = 360;
+    const maxLeft = Math.max(8, container.clientWidth - estimatedEditorWidth);
+
+    this.commentEditorOffset = offset;
+    this.commentEditorText = existingComment?.join('\n') ?? '';
+    this.commentEditorHasExisting = !!existingComment?.length;
+    this.commentEditorTop = buttonRect.top - containerRect.top + 16;
+    this.commentEditorLeft = Math.min(
+      Math.max(8, buttonRect.left - containerRect.left + 16),
+      maxLeft,
+    );
+    this.commentEditorOpen = true;
+
+    setTimeout(() => {
+      this.commentEditorTextarea?.nativeElement.focus();
+    });
+  }
+
+  private applyCommentUpdate(
+    currentEntries: KeyValueEntry[],
+    offset: number,
+    value: string,
+  ): KeyValueEntry[] {
+    const normalizedValue = value.replace(/\r\n/g, '\n');
+    const nextEntries = currentEntries
+      .filter((entry) => Number(entry.key) !== offset)
+      .map((entry) => ({ key: entry.key, value: entry.value }));
+
+    if (normalizedValue.trim().length > 0) {
+      nextEntries.push({ key: String(offset), value: normalizedValue });
+    }
+
+    nextEntries.sort((a, b) => Number(a.key) - Number(b.key));
+    return nextEntries;
+  }
+
+  private commitComments(nextComments: KeyValueEntry[]): void {
+    this.editableComments = nextComments;
+    this.commentsByOffset = this.buildCommentsByOffset(nextComments);
+    this.renderedHtml = this.sanitizer.bypassSecurityTrustHtml(
+      this.buildRenderedHtml(),
+    );
+    this.commentsOverlayChange.emit(nextComments);
+    this.closeCommentEditor();
   }
 }

@@ -418,3 +418,8 @@ export const scmViewAdjustOffsets = createSelector(
   state,
   (state: UiState) => state.scmViewAdjustOffsets
 );
+
+export const scmViewShowComments = createSelector(
+  state,
+  (state: UiState) => state.scmViewShowComments
+);

@@ -46,6 +46,7 @@ import {
   changeScmViewShowLineNumbers,
   changeScmViewShowOffsets,
   changeScmViewAdjustOffsets,
+  changeScmViewShowComments,
   displayOrEditScmRefs,
   displayOrEditScmVariables,
 } from './actions';
@@ -111,6 +112,7 @@ export class UiFacade {
   scmViewShowLineNumbers$ = this.store$.select(selector.scmViewShowLineNumbers);
   scmViewShowOffsets$ = this.store$.select(selector.scmViewShowOffsets)
   scmViewAdjustOffsets$ = this.store$.select(selector.scmViewAdjustOffsets);
+  scmViewShowComments$ = this.store$.select(selector.scmViewShowComments);
 
   selectedAttributesOnly$ = this.store$.select(selector.selectedAttributesOnly);
   selectedAttributesExcept$ = this.store$.select(
@@ -384,5 +386,9 @@ export class UiFacade {
 
   changeScmViewAdjustOffsets(adjustOffsets: boolean) {
     this.store$.dispatch(changeScmViewAdjustOffsets({ adjustOffsets }));
+  }
+
+  changeScmViewShowComments(showComments: boolean) {
+    this.store$.dispatch(changeScmViewShowComments({ showComments }));
   }
 }

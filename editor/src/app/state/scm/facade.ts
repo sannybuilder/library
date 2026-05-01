@@ -5,6 +5,7 @@ import {
   loadScmFile,
   loadScmMap,
   selectScmLabelOffset,
+  updateScmComments,
   updateScmRefs,
   updateScmVariables,
 } from './actions';
@@ -30,6 +31,7 @@ export class ScmFacade {
   xrefs$ = this.store$.select(selector.currentXrefs);
   refs$ = this.store$.select(selector.currentRefs);
   refsOverlay$ = this.store$.select(selector.currentRefsOverlay);
+  commentsOverlay$ = this.store$.select(selector.currentCommentsOverlay);
   variablesOverlay$ = this.store$.select(selector.currentVariablesOverlay);
 
   loadFile(name: string) {
@@ -56,6 +58,10 @@ export class ScmFacade {
     return this.store$.dispatch(updateScmVariables({ variables }));
   }
 
+  updateComments(comments: KeyValueEntry[]) {
+    return this.store$.dispatch(updateScmComments({ comments }));
+  }
+
   mapByGame$(game: Game) {
     return this.store$.select(selector.mapByGame, { game });
   }
@@ -74,6 +80,10 @@ export class ScmFacade {
 
   refsByGame$(game: Game) {
     return this.store$.select(selector.refsByGame, { game });
+  }
+
+  commentsByGame$(game: Game) {
+    return this.store$.select(selector.commentsByGame, { game });
   }
 
   variablesByGame$(game: Game) {

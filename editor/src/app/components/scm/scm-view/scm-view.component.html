@@ -1,7 +1,55 @@
-<div
-  id="code-container"
-  class="monospaced py-4 overflow-auto"
-  copyOnClick
-  [innerHTML]="renderedHtml"
-  (click)="onRenderedClick($event)"
-></div>
+<div class="scm-view-shell">
+  <div
+    id="code-container"
+    class="monospaced py-4 overflow-auto"
+    copyOnClick
+    [innerHTML]="renderedHtml"
+    (click)="onRenderedClick($event)"
+  ></div>
+
+  <div
+    *ngIf="commentEditorOpen"
+    class="comment-editor-popover"
+    [style.top.px]="commentEditorTop"
+    [style.left.px]="commentEditorLeft"
+    (click)="$event.stopPropagation()"
+  >
+    <label class="comment-editor-label mb-1" for="commentEditorTextarea">
+      {{ "ui.scm.lineComment" | translate }}
+    </label>
+    <textarea
+      #commentEditorTextarea
+      id="commentEditorTextarea"
+      class="form-control comment-editor-textarea"
+      rows="6"
+      [value]="commentEditorText"
+      (input)="onCommentEditorInput($event)"
+      (keydown)="onCommentEditorKeyDown($event)"
+    ></textarea>
+    <div class="comment-editor-actions mt-2">
+      <scl-icon-button
+        *ngIf="commentEditorHasExisting"
+        icon="delete"
+        (clicked)="deleteCommentEditor()"
+        title="Delete Comment"
+      >
+      </scl-icon-button>
+
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-secondary ml-auto"
+        (click)="closeCommentEditor()"
+      >
+        {{ "ui.shared.close" | translate }}
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-success"
+        (click)="saveCommentEditor()"
+      >
+        {{ "ui.shared.save" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -31,6 +31,15 @@ export class ScmService {
     );
   }
 
+  loadCommentsOverlay(game: Game) {
+    return this._http.get<Record<string, string | string[]>>(
+      `/assets/${game}/scm/comments.json`,
+      {
+        params: { ts: Date.now().toString() },
+      },
+    );
+  }
+
   loadMap(game: Game) {
     return this._http.get<ScmMap>(`/assets/${game}/scm/map.json`, {
       params: { ts: Date.now().toString() },

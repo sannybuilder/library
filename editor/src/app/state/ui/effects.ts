@@ -74,6 +74,7 @@ import { ArticlesFacade } from '../articles/facade';
 import { ScmFacade } from '../scm/facade';
 import { AnalyticsService } from '../../analytics';
 import {
+  loadCommentsOverlay,
   loadMainFile,
   loadRefsOverlay,
   loadRefsOverlaySuccess,
@@ -124,6 +125,7 @@ export class UiEffects {
               loadScmMap({ game }),
               loadVariableOverlay({ game }),
               loadRefsOverlay({ game }),
+              loadCommentsOverlay({ game }),
               id ? loadScmFile({ name: id }) : loadMainFile(),
             ];
 
@@ -226,6 +228,7 @@ export class UiEffects {
                 loadScmMap({ game }),
                 loadRefsOverlay({ game }),
                 loadVariableOverlay({ game }),
+                loadCommentsOverlay({ game }),
                 loadMainFile(),
                 displayOrEditScmRefs({
                   refs,
@@ -243,6 +246,7 @@ export class UiEffects {
                 loadScmMap({ game }),
                 loadVariableOverlay({ game }),
                 loadRefsOverlay({ game }),
+                loadCommentsOverlay({ game }),
                 loadMainFile(),
                 displayOrEditScmVariables({
                   variables,

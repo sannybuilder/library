@@ -1,8 +1,44 @@
 @import "variables";
 
+:host {
+  display: block;
+}
+
+.scm-view-shell {
+  position: relative;
+}
+
 #code-container {
   max-height: calc(100vh - 200px);
 }
+
+.comment-editor-popover {
+  position: absolute;
+  width: min(360px, calc(100% - 16px));
+  background: #202328;
+  border: 1px solid #3f4650;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 20;
+}
+
+.comment-editor-label {
+  display: block;
+  font-size: 12px;
+  color: #d7d9dc;
+}
+
+.comment-editor-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.comment-editor-actions {
+  display: flex;
+  gap: 8px;
+}
+
 :host-context ::ng-deep {
   .line-row {
     display: flex;
@@ -11,6 +47,10 @@
 
   .line-row.active {
     background: #2a3138;
+  }
+
+  .line-row.comment-group-start {
+    margin-top: 16px;
   }
 
   .line-content {
@@ -60,7 +100,7 @@
   }
 
   .tok-model {
-    color: #B5CEA9
+    color: #b5cea9;
   }
 
   .tok-label {
@@ -117,6 +157,37 @@
 
   .line-number:hover {
     text-decoration: underline;
+  }
+
+  .line-comment-control {
+    flex: 0 0 28px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .line-comment-trigger {
+    opacity: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 25%;
+    border: 1px solid $secondary;
+    background: transparent;
+    color: $gray-300;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+
+    &.has-comment {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .line-comment-trigger.is-active-line,
+  .line-comment-trigger.has-comment,
+  .line-comment-trigger:focus {
+    opacity: 1;
   }
 
   .line-anchor {

@@ -428,30 +428,67 @@
               </span>
             </div>
 
-            <ng-container *ngIf="code$ | async as code; else loading">
-              <ng-container
-                *ngIf="variablesOverlay$ | async as variablesOverlay"
-              >
-                <ng-container *ngIf="refsOverlay$ | async as refsOverlay">
-                  <ng-container *ngIf="map$ | async as map">
-                    <scl-scm-view
-                      [code]="code"
-                      [commands]="getCommands() | async"
-                      [variablesOverlay]="variablesOverlay"
-                      [refsOverlay]="refsOverlay"
-                      [scmMap]="map"
-                      [game]="game"
-                      [viewContext]="viewContext"
-                      [activeFileName]="activeFile$ | async"
-                      [activeFragment]="activeFragment"
-                      [showLineNumbers]="showLineNumbers$ | async"
-                      [showOffsets]="showOffsets$ | async"
-                      [adjustOffsets]="(adjustOffsets$ | async) ? 8 : 0"
-                    ></scl-scm-view>
+            <div class="scm-code-area">
+              <ng-container *ngIf="code$ | async as code; else loading">
+                <ng-container
+                  *ngIf="variablesOverlay$ | async as variablesOverlay"
+                >
+                  <ng-container *ngIf="refsOverlay$ | async as refsOverlay">
+                    <ng-container
+                      *ngIf="commentsOverlay$ | async as commentsOverlay"
+                    >
+                      <ng-container *ngIf="map$ | async as map">
+                        <scl-scm-view
+                          [code]="code"
+                          [commands]="getCommands() | async"
+                          [variablesOverlay]="variablesOverlay"
+                          [refsOverlay]="refsOverlay"
+                          [commentsOverlay]="commentsOverlay"
+                          [showComments]="showComments$ | async"
+                          [scmMap]="map"
+                          [game]="game"
+                          [viewContext]="viewContext"
+                          [activeFileName]="activeFile$ | async"
+                          [activeFragment]="activeFragment"
+                          [showLineNumbers]="showLineNumbers$ | async"
+                          [showOffsets]="showOffsets$ | async"
+                          [adjustOffsets]="(adjustOffsets$ | async) ? 8 : 0"
+                          [canEdit]="canEdit$ | async"
+                          (commentsOverlayChange)="
+                            onCommentsOverlayChange($event)
+                          "
+                        ></scl-scm-view>
+                      </ng-container>
+                    </ng-container>
                   </ng-container>
                 </ng-container>
               </ng-container>
-            </ng-container>
+            </div>
+
+            <div class="file-nav-desktop d-none d-xl-flex">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="goToPrevFile()"
+                [disabled]="!canGoPrev"
+                data-hotkey="ArrowLeft,left"
+                [title]="'ui.scm.prevFile' | translate"
+              >
+                {{ "ui.scm.prevFile" | translate }}
+                <kbd class="ml-2">&larr;</kbd>
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="goToNextFile()"
+                [disabled]="!canGoNext"
+                data-hotkey="ArrowRight,right"
+                [title]="'ui.scm.nextFile' | translate"
+              >
+                {{ "ui.scm.nextFile" | translate }}
+                <kbd class="ml-2">&rarr;</kbd>
+              </button>
+            </div>
           </main>
 
           <div
@@ -549,6 +586,15 @@
           />
           <span class="checkbox"></span>
           {{ "ui.scm.adjustOffsets" | translate }}
+        </label>
+        <label class="form-check-label btn">
+          <input
+            type="checkbox"
+            [ngModel]="showComments$ | async"
+            (ngModelChange)="toggleShowComments($event)"
+          />
+          <span class="checkbox"></span>
+          {{ "ui.scm.showComments" | translate }}
         </label>
       </ng-template>
     </ng-container>

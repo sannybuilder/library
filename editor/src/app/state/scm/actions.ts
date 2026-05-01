@@ -55,6 +55,24 @@ export const loadRefsOverlayError = createAction(
   props<{ game: Game }>(),
 );
 
+export const loadCommentsOverlay = createAction(
+  '[SCM] Load Comments Overlay',
+  props<{ game: Game }>(),
+);
+
+export const loadCommentsOverlaySuccess = createAction(
+  '[SCM] Load Comments Overlay Success',
+  props<{
+    game: Game;
+    comments: KeyValueEntry[];
+  }>(),
+);
+
+export const loadCommentsOverlayError = createAction(
+  '[SCM] Load Comments Overlay Error',
+  props<{ game: Game }>(),
+);
+
 export const updateScmRefs = createAction(
   '[SCM] Update Refs',
   props<{ refs: KeyValueEntry[] }>(),
@@ -63,6 +81,11 @@ export const updateScmRefs = createAction(
 export const updateScmVariables = createAction(
   '[SCM] Update Variables',
   props<{ variables: KeyValueEntry[] }>(),
+);
+
+export const updateScmComments = createAction(
+  '[SCM] Update Comments',
+  props<{ comments: KeyValueEntry[] }>(),
 );
 
 export const loadScmMap = createAction(

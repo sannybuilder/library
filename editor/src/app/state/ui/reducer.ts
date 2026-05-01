@@ -45,6 +45,7 @@ import {
   changeScmViewShowLineNumbers,
   changeScmViewShowOffsets,
   changeScmViewAdjustOffsets,
+  changeScmViewShowComments,
   displayOrEditScmRefs,
   displayOrEditScmVariables,
 } from './actions';
@@ -85,6 +86,7 @@ export interface UiState {
   scmViewShowLineNumbers: boolean
   scmViewShowOffsets: boolean;
   scmViewAdjustOffsets: boolean;
+  scmViewShowComments: boolean;
 }
 
 export const defaultFilterState: {
@@ -121,6 +123,7 @@ export const initialState: UiState = {
   scmViewShowLineNumbers: true,
   scmViewShowOffsets: false,
   scmViewAdjustOffsets: false,
+  scmViewShowComments: true,
   viewMode: ViewMode.None,
   currentPage: 1,
   selectedSyntaxKind: 'sb_command',
@@ -369,6 +372,10 @@ export const uiReducer = createReducer(
   on(changeScmViewAdjustOffsets, (state, { adjustOffsets }) => ({
     ...state,
     scmViewAdjustOffsets: adjustOffsets,
+  })),
+  on(changeScmViewShowComments, (state, { showComments }) => ({
+    ...state,
+    scmViewShowComments: showComments,
   }))
 );
 

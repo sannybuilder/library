@@ -53,6 +53,12 @@ export const refsByGame = createSelector(
     props.game ? (state?.refsByGame[props.game] ?? []) : [],
 );
 
+export const commentsByGame = createSelector(
+  state,
+  (state: ScmState | undefined, props: { game: Game }) =>
+    props.game ? (state?.commentsByGame[props.game] ?? []) : [],
+);
+
 export const variablesByGame = createSelector(
   state,
   (state: ScmState | undefined, props: { game: Game }) =>
@@ -64,6 +70,13 @@ export const currentRefsOverlay = createSelector(
   game,
   (state: ScmState | undefined, game: Game | undefined) =>
     game ? (state?.refsByGame[game] ?? []) : [],
+);
+
+export const currentCommentsOverlay = createSelector(
+  state,
+  game,
+  (state: ScmState | undefined, game: Game | undefined) =>
+    game ? (state?.commentsByGame[game] ?? []) : [],
 );
 
 export const currentVariablesOverlay = createSelector(

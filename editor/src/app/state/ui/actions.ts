@@ -151,3 +151,8 @@ export const changeScmViewAdjustOffsets = createAction(
   '[ui] change scm view adjust offsets',
   props<{ adjustOffsets: boolean }>(),
 );
+
+export const changeScmViewShowComments = createAction(
+  '[ui] change scm view show comments',
+  props<{ showComments: boolean }>(),
+);

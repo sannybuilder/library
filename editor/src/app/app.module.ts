@@ -218,6 +218,7 @@ export function localStorageSyncReducer(
           'scmViewShowLineNumbers',
           'scmViewShowOffsets',
           'scmViewAdjustOffsets',
+          'scmViewShowComments',
         ],
       },
     ],

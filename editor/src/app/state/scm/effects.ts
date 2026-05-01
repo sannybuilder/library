@@ -10,6 +10,9 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import {
+  loadCommentsOverlay,
+  loadCommentsOverlayError,
+  loadCommentsOverlaySuccess,
   loadMainFile,
   loadRefsOverlay,
   loadRefsOverlayError,
@@ -23,6 +26,7 @@ import {
   loadVariableOverlay,
   loadVariableOverlayError,
   loadVariableOverlaySuccess,
+  updateScmComments,
   updateScmRefs,
   updateScmVariables,
 } from './actions';
@@ -140,6 +144,39 @@ export class ScmEffects {
     ),
   );
 
+  loadCommentsOverlay$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadCommentsOverlay),
+      switchMap(({ game }) =>
+        this._facade.commentsByGame$(game).pipe(
+          take(1),
+          switchMap((cachedComments) => {
+            if (cachedComments.length > 0) {
+              return [];
+            }
+
+            return this._service.loadCommentsOverlay(game).pipe(
+              map((comments) => {
+                const commentsArray = Object.entries(comments).map(
+                  ([key, value]) => ({
+                    key,
+                    value: Array.isArray(value) ? value.join('\n') : value,
+                  }),
+                );
+
+                return loadCommentsOverlaySuccess({
+                  game,
+                  comments: commentsArray,
+                });
+              }),
+              catchError(() => of(loadCommentsOverlayError({ game }))),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
   updateRefs$ = createEffect(
     () =>
       this._actions$.pipe(
@@ -170,6 +207,27 @@ export class ScmEffects {
             JSON.stringify(
               Object.fromEntries(
                 variables.map(({ key, value }) => [key, value]),
+              ),
+              null,
+              2,
+            ),
+          );
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  updateComments$ = createEffect(
+    () =>
+      this._actions$.pipe(
+        ofType(updateScmComments),
+        withLatestFrom(this._game.game$),
+        tap(([{ comments }, game]) => {
+          this._changes.registerTextFileChange(
+            `${game}/scm/comments.json`,
+            JSON.stringify(
+              Object.fromEntries(
+                comments.map(({ key, value }) => [key, value]),
               ),
               null,
               2,

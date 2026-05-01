@@ -227,7 +227,7 @@ export class ScmEffects {
             `${game}/scm/comments.json`,
             JSON.stringify(
               Object.fromEntries(
-                comments.map(({ key, value }) => [key, value]),
+                comments.map(({ key, value }) => [key, value.split('\n')]),
               ),
               null,
               2,

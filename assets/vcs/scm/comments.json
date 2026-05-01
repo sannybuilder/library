@@ -1,0 +1,2370 @@
+{
+  "30816": [
+    "Vice City Stories PSP script.",
+    "Start of MAIN script: initializes the game world, player and mission state at startup"
+  ],
+  "30833": "Initialize the game",
+  "31309": "Enable debug mode",
+  "31438": "Check if a new game started.",
+  "31470": "Start the intro mission.",
+  "31477": "Check if the intro mission is completed.",
+  "31505": "Automatically restart the intro mission if the player failed",
+  "31664": "Initialize start position in dev mode",
+  "31680": "Return control to player in dev mode",
+  "31707": "Monitor odd jobs",
+  "31719": "Monitor the main story",
+  "31731": "Keep the main script alive",
+  "31743": [
+    "Main game initialization and mission-chain setup.",
+    "Registers mission-chain names, clears runtime flags, initializes unlock/help/outfit/empire/odd-job state for a new game, and restores save-position state when continuing from a save."
+  ],
+  "33027": ["Empty placeholder function (no-op)."],
+  "33029": ["Empty placeholder function (no-op)."],
+  "33031": ["Empty placeholder function (no-op)."],
+  "33283": [
+    "function AddOutfit(in_outfitId: int, in_slotIdx: int, in_msgIdx: int)",
+    "Adds outfit data to the player outfits, messages, and racing site data arrays."
+  ],
+  "33306": ["Registers all 14 player outfits at the safehouse."],
+  "33769": ["Loops through player outfits to find and update the current outfit index."],
+  "33847": [
+    "Finds the current outfit index by iterating through all outfit slots and comparing against CURRENT_OUTFIT.",
+    "Returns early if player is dead or has been arrested."
+  ],
+  "33959": [
+    "function ChangePlayerOutfitWithFade(in_outfitIdx: int, in_fadeFlag: bool)",
+    "Changes the player's outfit with optional fade transitions."
+  ],
+  "34141": ["function UnlockOutfit(in_outfitIdx: int): bool", "Unlocks an outfit if it is currently locked."],
+  "34170": [
+    "function LockOutfit(in_outfitId: int)",
+    "Locks the given outfit if not already locked, then calls LOCK_THE_COSTUME."
+  ],
+  "34197": ["function IsOutfitLocked(): bool", "Checks if any outfit is currently locked."],
+  "34237": [
+    "Open the wardrobe/outfit selection menu, let the player cycle through outfits, and apply the chosen one.",
+    "",
+    "Setup: disables player control, positions camera in front of the player, loads the outfit display.",
+    "Loop: polls pad input for left/right to cycle outfits and right trigger to confirm selection.",
+    "Exit: restores player control, fades out, and returns to normal gameplay."
+  ],
+  "35029": ["Empty placeholder function (no-op)."],
+  "35031": ["function LoadModel(in_modelId: int)", "Requests the given model and waits until it is loaded."],
+  "35056": ["Clears all on-screen text: prints, big messages, and help text."],
+  "35064": [
+    "function FadeOut(in_duration: int)",
+    "Fades the screen to blue over the given duration and waits for completion."
+  ],
+  "35095": [
+    "function FadeIn(in_duration: int)",
+    "Fades the screen in from blue over the given duration and waits for completion."
+  ],
+  "35127": ["Fades the screen out over 1 second."],
+  "35142": ["Fades the screen in over 1 second."],
+  "35157": [
+    "function WaitForPadState(in_startTime: int): bool",
+    "Waits for the pad to reach a specific state with debounce logic."
+  ],
+  "35300": ["Non-blocking wait that resumes when current game timer exceeds accumulated start time."],
+  "35333": ["Mission pre-launch setup: disables player control, saves weapon, clears text, resets taxi shortcut."],
+  "35424": [
+    "function TryDeletePlayerCarNotSubmerged(in_car: int): bool",
+    "Attempts to delete the player car if dead, player dead, or player not in car but only if the car is not submerged in water. Returns true if deleted, false if kept."
+  ],
+  "35513": [
+    "function TryDeletePlayerCar(in_car: int): bool",
+    "Attempts to delete the player car if dead, player dead, or player not in car. Returns true if deleted, false if kept."
+  ],
+  "35592": ["function ToggleFreeResprays(in_enabled: int)", "Toggles free resprays based on empire status."],
+  "35641": [
+    "function TeleportPlayerToEntry(in_isFrontDoor: bool)",
+    "Teleports the player to an entry point, freezes position during the teleport, then restores."
+  ],
+  "35789": ["function PrintMissionFailReason(in_failReason: int)", "Prints the mission failure reason message."],
+  "35799": [
+    "function WaitWhilePlayingNonBlocking(in_duration: int)",
+    "Waits for the specified duration while checking for death arrest."
+  ],
+  "35856": [
+    "function Vec3Sub(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): float, float, float",
+    "Subtracts the second 3D vector from the first component-wise."
+  ],
+  "35882": [
+    "function Vec3Mul(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): float, float, float",
+    "Multiplies two 3D vectors component-wise."
+  ],
+  "35908": [
+    "function Vec3Scale(in_x: float, in_y: float, in_z: float, in_scale: float): float, float, float",
+    "Scales a 3D vector by a scalar multiplier."
+  ],
+  "35934": [
+    "function Vec3Div(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): float, float, float",
+    "Divides two 3D vectors component-wise."
+  ],
+  "35960": [
+    "function Vec3Add(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): float, float, float",
+    "Adds two 3D vectors component-wise."
+  ],
+  "35986": [
+    "function Vec3Normalize(in_x: float, in_y: float, in_z: float): float, float, float",
+    "Normalizes a 3D vector to unit length."
+  ],
+  "36031": [
+    "function Vec3Eq(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): bool",
+    "Checks if two 3D vectors are equal."
+  ],
+  "36058": [
+    "function Vec3Lerp(in_startX: float, in_startY: float, in_startZ: float, in_endX: float, in_endY: float, in_endZ: float, in_t: float): float, float, float",
+    "Linearly interpolates between two 3D vectors by factor t."
+  ],
+  "36115": [
+    "function Lerp(in_start: float, in_end: float, in_t: float): float",
+    "Linearly interpolates between two scalar values by factor t."
+  ],
+  "36137": [
+    "function ClampInt(in_val: int, in_min: int, in_max: int): int",
+    "Clamps val between min and max, returning the clamped result."
+  ],
+  "36209": [
+    "function ClampFloat(in_val: float, in_min: float, in_max: float): float",
+    "Clamps val between min and max, returning the clamped result."
+  ],
+  "36313": ["function GetAbsValue(in_value: int): int", "Returns the absolute value of the input."],
+  "36355": ["function Negate(in_value: int): int", "Returns the negation of the input value."],
+  "36406": [
+    "function IsValueInRange(in_value: int, in_min: int, in_max: int): bool",
+    "Checks if a value is within [min, max] range."
+  ],
+  "36434": [
+    "function GetAABBFromCenter(in_centerX: float, in_centerY: float, in_centerZ: float, in_halfSizeX: float, in_halfSizeY: float, in_halfSizeZ: float): float, float, float, float, float, float",
+    "Computes the min/max corners of an axis-aligned bounding box from a center point and half-extents."
+  ],
+  "36492": [
+    "function GetSquaredDistance2D(in_x1: float, in_y1: float, in_x2: float, in_y2: float): float",
+    "Computes the squared 2D distance between two points."
+  ],
+  "36530": [
+    "function GetSquaredDistance3D(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): float",
+    "Computes the squared 3D distance between two points."
+  ],
+  "36580": [
+    "function Vec3Direction(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): float, float, float",
+    "Computes a normalized direction vector from one point to another."
+  ],
+  "36617": [
+    "function ComputePercentageInt(in_current: int, in_total: int): int",
+    "Computes the percentage of current relative to total using integer math."
+  ],
+  "36662": [
+    "function ComputePercentageFloat(in_current: float, in_total: float): float",
+    "Computes the percentage of current relative to total (multiplied by 100)."
+  ],
+  "36695": [
+    "function DecomposeFloatForDisplay(in_value: float): int",
+    "Decomposes a float into integer and fractional parts for display."
+  ],
+  "36723": [
+    "function IsIntValueInRangeInclusive(in_min: int, in_value: int, in_max: int): bool",
+    "Checks if an integer value is within [min, max] inclusive."
+  ],
+  "36749": [
+    "function IsFloatValueInRangeInclusive(in_min: float, in_value: float, in_max: float): bool",
+    "Checks if a float value is within [min, max] inclusive."
+  ],
+  "36775": [
+    "function Vec3RotZ(in_x: float, in_y: float, in_z: float, in_angle: float): float, float, float",
+    "Rotates a 3D vector by an angle around the Z axis."
+  ],
+  "36829": ["function IsEvenNumber(in_value: int): bool", "Checks if the value is an even number."],
+  "36858": [
+    "function WorldCoorsToScreenClamped(in_worldX: float, in_worldY: float, in_worldZ: float): float, float",
+    "Converts world coordinates to screen coordinates and clamps to 5-380 (x) and 5-240 (y) range."
+  ],
+  "36951": [
+    "function GetForwardDistance(in_x1: float, in_y1: float, in_z1: float, in_x2: float, in_y2: float, in_z2: float): float",
+    "Calculates the forward distance from point 1 to the line defined by point 2."
+  ],
+  "37146": ["Empty placeholder function (no-op)."],
+  "37148": [
+    "function GetMissionChainName(in_chainIdx: int): string",
+    "Returns the name of the mission chain at the given index from the global chain name array."
+  ],
+  "37157": [
+    "function IsMissionChainCompleted(in_chainIdx: int): bool",
+    "Checks if the mission chain at the given index has been completed."
+  ],
+  "37176": [
+    "function GetMissionChainCompletedFlag(in_chainIdx: int): int",
+    "Returns the completion flag for a mission chain (1 if completed, 0 otherwise)."
+  ],
+  "37212": [
+    "function GetMissionChainProgress(in_chainIdx: int): int",
+    "Gets mission chain progress and sets the script name if in a mission."
+  ],
+  "37245": ["function GetCurrentChapter(): int", "Returns the current chapter number."],
+  "37252": [
+    "function GetGlobalMissionIndex(in_chainIdx: int, in_missionIdx: int): int",
+    "Calculates the global mission index from chain and mission indices."
+  ],
+  "37307": [
+    "function MarkMissionChainMissionComplete(in_chainIdx: int, in_progress: int)",
+    "Marks a mission chain mission as complete and increments progress."
+  ],
+  "37353": [
+    "function HasMissionUnlocked(in_chainIdx: int, in_missionIdx: int): bool",
+    "Checks if the mission at the given chain/mission index is unlocked (g.30 == -999)."
+  ],
+  "37386": [
+    "function IsMissionChainUnlocked(in_chainIdx: int): bool",
+    "Checks if a mission chain is unlocked by verifying all missions."
+  ],
+  "37440": [
+    "function SetMissionUnlock(in_chainIdx: int, in_missionIdx: int, in_unlockValue: int)",
+    "Sets the mission unlock value for a chain mission."
+  ],
+  "37619": [
+    "function CanShowMissionChainHelp(in_chainIdx: int, in_missionIdx: int): bool",
+    "Checks if mission chain help should be shown based on unlock status."
+  ],
+  "37678": [
+    "function UpdateMissionChainProgress(in_chainIdx: int, in_progress: int)",
+    "Update the mission chain progress based on the current chapter and chain/progress values.",
+    "",
+    "Nested switches map chapter, chain, and progress values to specific mission completion calls.",
+    "Calls MarkMissionChainMissionComplete with the appropriate chain ID and progress values."
+  ],
+  "39886": [
+    "function GetMissionChainCoors(in_chapter: int, in_chainIdx: int, in_subChain: int): float, float, float",
+    "Return the coordinates for a specific mission chain entry point based on chapter, chain, and sub-chain indices.",
+    "",
+    "Nested switches map the chapter/chain/sub-chain tuple to hardcoded coordinate values."
+  ],
+  "41753": ["Initializes mission chain coordinates based on the current chapter."],
+  "41824": [
+    "function GetNextAvailableMissionChain(): int",
+    "Finds the next available mission chain by iterating through the chain array and checking completion status."
+  ],
+  "41915": [
+    "function ActivateMissionChainMonitor(in_chainIdx: int)",
+    "Activates the mission chain monitor for the given chain index."
+  ],
+  "41959": ["Activates all available mission chains."],
+  "42059": [
+    "function CreateEmpireCar(in_site_idx: int): car",
+    "Creates an empire car at the position specified by the given site index.",
+    "Looks up the car model, spawn coordinates, and heading from the site data table.",
+    "Clears the area of cars, loads the model, creates the car, sets its heading and color set.",
+    "",
+    "Returns the created car handle, or -1 if creation failed."
+  ],
+  "42963": ["Starts the mission audio monitor script (@AUDIMON)."],
+  "42973": [
+    "function SetCharAnimBlendDelta(in_scriptInfoIdx: int)",
+    "Sets the animation blend delta for a character from script info."
+  ],
+  "43018": [
+    "function PlayCharAnimWithBlend(in_scriptInfoIdx: int)",
+    "Plays an animation with blend for a character from script info."
+  ],
+  "43065": [
+    "function ClearPedScriptInfo(in_slotIdx: int)",
+    "Clears all script info for a ped slot: resets flags, character handle, audio, and animation data."
+  ],
+  "43198": ["Loops through all 5 ped script info entries, clearing each one."],
+  "43232": ["Loops through all 5 ped script info entries, clearing each one."],
+  "43266": [
+    "function GetFreePedScriptSlot(in_requiredScriptInfoIdx: int): int",
+    "Finds and returns a free ped script info slot."
+  ],
+  "43329": ["function GetFreeMissionAudioSlot(): int", "Retrieves a free mission audio slot index."],
+  "43339": [
+    "function SetPedScriptInfoFlag(in_ped: ped, in_flag: int)",
+    "Sets or clears a bitwise flag in the PED_SCRIPT_INFO_FLAGS array for the given ped."
+  ],
+  "43437": [
+    "function HasMissionAudioFinishedForSlot(in_scriptInfoIdx: int): bool",
+    "Checks if mission audio has finished for the given script info slot."
+  ],
+  "43477": [
+    "function HasMissionAudioPlaying(in_scriptInfoIdx: int): bool",
+    "Checks if mission audio is currently playing for the given script info slot."
+  ],
+  "43520": [
+    "function WaitForMissionAudioReady(in_scriptInfoIdx: int)",
+    "Waits for a free ped script slot and ensures the audio is ready."
+  ],
+  "43571": [
+    "function StartMissionAudio(in_audioId: int, in_soundId: int, in_charId: int): int",
+    "Finds a free ped or mission audio slot, loads the audio, and returns the slot index."
+  ],
+  "43747": [
+    "function PlayMissionAudio0(in_scriptInfoIdx: int): bool",
+    "Plays mission audio for slot 0 if a free slot is available."
+  ],
+  "43806": [
+    "function PlayMissionAudio1(in_scriptInfoIdx: int): bool",
+    "Plays mission audio for slot 1 if a free slot is available."
+  ],
+  "43866": [
+    "function PlayMissionAudioForChar(in_slotIdx: int): bool",
+    "Finds a free ped script slot for the given ped and plays mission audio with its associated animation.",
+    "",
+    "Returns true if audio was successfully started for the ped, false otherwise."
+  ],
+  "43987": [
+    "function PlayMissionAudioForChar1(in_slotIdx: int): bool",
+    "Finds a free ped script slot for the given ped and plays mission audio on channel 1 with its associated animation.",
+    "",
+    "Identical to PlayMissionAudioForChar except audio channel is 1 instead of 0. Returns true if audio was successfully started for the ped, false otherwise."
+  ],
+  "44109": ["function StopMissionAudio(in_scriptInfoIdx: int)", "Stops mission audio for the given script info slot."],
+  "44164": [
+    "function WaitForMissionAudioFinish(in_slotIdx: int)",
+    "Waits for mission audio to finish, checking pad state to allow skipping."
+  ],
+  "44328": [
+    "function HasAnyMissionAudioFinished(): bool",
+    "Checks if any mission audio has finished playing across 5 slots."
+  ],
+  "44368": [
+    "function GetMissionAudioStateLabel(in_slotIdx: int): string",
+    "Returns a string label for the mission audio state (AU_ST1 through AU_ST4) based on flag bits."
+  ],
+  "44495": ["Creates and updates the empire HUD element with audio channel, status, and song information."],
+  "44958": "Mission audio monitor - manages ped script info flags and audio playback states.",
+  "45290": ["Starts the gang monitor (@GANGMO) and gang attack (@GANG_ATTACK) scripts."],
+  "45308": [
+    "function GetEmpireVoiceClip(in_char: ped): string",
+    "Return a random voice clip string ID based on the character model type.",
+    "",
+    "Checks if the character is PLAYER1 first, then checks gang model types (PGANG7A/B, GANG9A/B).",
+    "Generates a random index and returns a corresponding voice clip string (GDVICAA-GDVICAT, GDVICBA-GDVICBB, etc.)."
+  ],
+  "47263": [
+    "function SetMissionAudioChar(in_charHandle: int, in_wait: int)",
+    "Sets mission audio for a character and waits if requested."
+  ],
+  "47365": [
+    "function IsCharNotInGang(in_ped: ped): bool",
+    "Verifies that a character isn't currently a gang follower by checking against the gang follower handles."
+  ],
+  "47467": [
+    "function AddPedToPlayerGroup(in_ped: ped)",
+    "Finds a free gang follower slot and assigns the given ped as a follower with special properties."
+  ],
+  "47637": ["Removes all gang follower characters from the mission."],
+  "47717": [
+    "function FreezeGangFollowers(in_freeze: int)",
+    "Freezes or unfreezes gang follower characters based on the flag, iterating through all follower handles."
+  ],
+  "47866": ["Toggles gang follower visibility based on freeze state."],
+  "47935": [
+    "function SetGangFollowerChar(in_followerChar: ped)",
+    "Sets the character that the gang follower should track for visibility checks."
+  ],
+  "47942": [
+    "function ToggleGangFollowerVisibility(in_visible: int)",
+    "Toggles gang follower visibility by freezing/unfreezing position."
+  ],
+  "48025": ["Creates a shooting range target character at the shooting range position."],
+  "48094": ["function AddGangKillCount(in_gangId: int)", "Increments the empire build progress for the given gang ID."],
+  "48251": [
+    "Aggregates kill counts for gang pairs (A/B variants) and adds them to the game progress tracker.",
+    "Processes 3 gang pairs with different multipliers (2x each), then resets the kill counter."
+  ],
+  "48389": [
+    "function SetGangMemberThreatReactions(in_threatLevel: int)",
+    "Sets the threat level for gang member ped types (13 and 15)."
+  ],
+  "48401": [
+    "function SetGangThreatReactions(in_gangType: int, in_enable: int)",
+    "Sets or clears threat reactions for a specific gang type against ped types 8, 12, 9, 10, 13, and 15."
+  ],
+  "48836": [
+    "Gang followers monitor script.",
+    "Tracks recruited gang followers, lets the player recruit targeted gang members, removes dead or distant followers, and updates gang threat/reputation state from empire progress flags."
+  ],
+  "49824": [
+    "function GetEmpireReputation(in_empireIdx: int): int",
+    "Calculates empire reputation based on gang members killed by the player."
+  ],
+  "49864": [
+    "Airport/army base gang attack monitor.",
+    "Makes Fort Baxter soldiers hostile while the player is in the restricted airport/army area, then clears hostility after the player leaves or reputation conditions allow it."
+  ],
+  "50355": ["Empty placeholder function (no-op)."],
+  "50357": ["Empty placeholder function (no-op)."],
+  "50359": [
+    "Saves the player's current weapon loadout by storing weapon IDs and ammunition counts, then records which weapon is currently selected."
+  ],
+  "50521": [
+    "Removes all player weapons, requests and loads weapon model data from the stored player weapons array, then restores all weapons and ammunition."
+  ],
+  "50648": [
+    "function SetSaveSlotData(in_slotIdx: int, in_dataId: int, in_slotId: int, in_saveFlag: int)",
+    "Sets save slot data for the current level, adjusting the slot ID based on whether the player is in level 2."
+  ],
+  "50746": [
+    "function ShowSaveMenu(in_showFade: int)",
+    "Shows the save game menu, storing player position, weapons, armor, and money state."
+  ],
+  "59353": [
+    "function SwitchRoadsByChapter(in_chapterIdx: int)",
+    "Sets zone pedestrian and car info densities based on the current game chapter."
+  ],
+  "60645": ["Disables road and pedestrian spawning in a large number of coordinate regions across the map."],
+  "62332": ["function SetZoneInfoByChapter(): int", "Sets road and boat spawn settings based on the current chapter."],
+  "63045": [
+    "Initializes gang ped models, car models, weapons, drop chances, road markings, and set pieces for all 9 gangs.",
+    "Sets up gang attack parameters and calls @SetZoneInfo, @SwitchRoadsOff, @SetZoneInfoByChapter."
+  ],
+  "65595": ["Empty placeholder function (no-op)."],
+  "65597": ["Initializes build site blip headings to zero and sets blip coordinates and states for all four sites."],
+  "65723": ["Initializes develop site blip headings to zero and sets blip coordinates and states for all four sites."],
+  "65857": ["Initializes land site blip coordinates and headings."],
+  "65964": ["Initializes water site coordinates and heading."],
+  "66021": ["Initializes racing site blip headings to zero and sets blip coordinates and states for all four sites."],
+  "66159": ["function RemoveBlip(in_blipId: int)", "Removes the given blip ID and sets it to -1."],
+  "66173": [
+    "function UpdateBuildSiteBlips(in_siteIdx: int, in_state: int)",
+    "Updates the blip for a build site based on its state: removes or creates the appropriate blip type for the given site index."
+  ],
+  "66418": [
+    "function UpdateDevelopSiteBlips(in_siteIdx, in_active: int)",
+    "Updates the blip for a development site based on whether it is active or inactive."
+  ],
+  "66819": [
+    "function UpdateLandSiteBlips(in_siteIdx: int, in_state: int)",
+    "Updates the blip for a land empire site based on its state: removes or creates the appropriate blip type for the given site index."
+  ],
+  "67064": [
+    "function UpdateWaterSiteBlips(in_siteIdx: int, in_state: int)",
+    "Updates the blip for a water empire site based on its state: removes or creates the appropriate blip type for the given site index."
+  ],
+  "67309": [
+    "function UpdateRacingSiteBlips(in_blipIdx: int, in_state: int)",
+    "Updates the racing site blip based on state: removes old blip for states 1/3, creates new blip for states 1/2."
+  ],
+  "67500": ["Initializes build site blips for all chapters, then updates them based on the current chapter state."],
+  "67637": ["Initializes blips for all development sites based on the current chapter and mission progress."],
+  "68010": ["Initializes water site blips for all water sites."],
+  "68083": [
+    "function IsCloserThan(in_x: float, in_y: float, in_z: float, in_distance: float): int",
+    "Checks if the player is closer than the given distance to the target coords."
+  ],
+  "68114": [
+    "function GetClosestBuildSite(in_site_type: int): int",
+    "Finds the closest build site of the given type by iterating all sites and tracking the minimum distance.",
+    "For each site type (build, develop, land, water, racing), iterates the corresponding blip array.",
+    "Updates the result site if the current site is closer than the previous minimum.",
+    "",
+    "Returns the index of the closest site, or -1 if none found."
+  ],
+  "69286": ["Empty placeholder function (no-op)."],
+  "69288": [
+    "function SetExtraColours(in_extraColorIdx: int)",
+    "Sets the extra car colours based on the given colour index."
+  ],
+  "69925": [
+    "function SetEmpireData(in_empireId: int)",
+    "Sets empire-related data: area visibility, extra colors, radar display, and camera mode based on empire type."
+  ],
+  "70197": [
+    "function UpdateEmpireSiteBlip(in_siteIdx: int, in_enable: int): int",
+    "Updates the blip for an empire site: creates or removes the blip based on the enable flag."
+  ],
+  "70306": ["Updates blips for empire building swap objects."],
+  "70386": [
+    "function StoreEmpireObject(in_objectIdx: int, in_handle: int)",
+    "Stores empire object handle and data at the given index."
+  ],
+  "70437": ["Iterates through all empire object entries, deleting objects, blips, and clearing array slots."],
+  "70528": [
+    "function CreateEmpireObject(in_modelId: int, in_health: float, in_spawnX: float, in_spawnY: float, in_spawnZ: float, in_heading: float, in_siteIdx: int, in_damaged: int, in_temp: int): int",
+    "Creates an empire object with the given model, spawn position, and health. Optionally renders it damaged and stores it."
+  ],
+  "70626": [
+    "function SetInteriorElementData(in_empireIdx: int, in_modelId: int, in_data: int, in_z: float, in_integrityStatus: int)",
+    "Sets the model, data, Z coordinate, and integrity status for an empire interior element."
+  ],
+  "70656": ["Initializes empire build site interior element data and resets business/ped arrays."],
+  "71451": [
+    "function CreateInteriorObjects(in_interior_mode: int)",
+    "Initializes empire interior objects by clearing building/empire arrays and creating objects for all valid interior elements.",
+    "First loop: clears BUILDING_SWAP_OBJ_TEMP_4 and EMPIRE_OBJECT_HANDLE arrays for 70 entries.",
+    "Second loop: iterates EMPIRE_INTERIOR_DATA, counts elements by filter type, then creates Empire objects for valid elements."
+  ],
+  "72041": [
+    "function GetEmpireInteriorPosition(in_empireIdx: int, in_interiorHandle: int)",
+    "Generates a random position inside an empire building interior for placing interactive elements.",
+    "Uses the empire site random seed to pick a site, loads interior objects, then queries position/heading.",
+    "Also sets up a sphere collider for security gang buildings if not in a mission."
+  ],
+  "72208": [
+    "function CreateEmpirePed(in_modelId: int, in_x: float, in_y: float, in_z: float, in_gangId: int): int",
+    "Creates a ped with the given model at the specified coordinates and gang, adjusts heading by 180 degrees."
+  ],
+  "72236": [
+    "function PlayEmpirePedAnimation(in_ped: ped, in_animDictId: int)",
+    "Generates a random animation ID based on the empire ped type and plays it on the character."
+  ],
+  "72665": ["Requests and creates empire peds for various interior types, setting up their animations and properties."],
+  "73003": [
+    "function AddBlipForChar(in_char: int): int",
+    "Adds a blip for the given char, sets display to 1 and colour to 2."
+  ],
+  "73024": [
+    "function UpdateEmpirePeds(in_empireIdx, in_interiorHandle)",
+    "Updates empire peds by spawning them at interior element positions with gang-specific ped types."
+  ],
+  "73344": [
+    "Removes all gang peds and empire business characters from the empire system, resets all related data arrays, and clears animations."
+  ],
+  "73461": [
+    "function SetEmpirePedsFrozen(in_freezeFlag: bool)",
+    "Freezes or unfreezes the positions of all empire business characters and empire ped handles."
+  ],
+  "73553": ["Removes the save pickup and resets related globals."],
+  "73593": [
+    "function RemoveMissionEntities(in_siteIdx: int)",
+    "Removes mission-related entities including objects, markers, blips, and the empire car, resetting their handles to -1."
+  ],
+  "73719": [
+    "Iterates through all empire building objects, updating flags for destroyed objects and removing integrity blips."
+  ],
+  "73874": ["function HasEmpireObjects(): bool", "Checks if empire objects exist (g.2809 == 0)."],
+  "73892": [
+    "function ClearEmpireFlags(in_flagBase: int)",
+    "Clears a block of 30 empire building flags starting at the given base index."
+  ],
+  "73901": [
+    "function TeleportPlayerToCoords(in_x: float, in_y: float, in_z: float, in_heading: float)",
+    "Teleports the player to the given coords and sets camera behind player."
+  ],
+  "73939": [
+    "function MovePlayerToInterior(in_interiorType: int, in_interiorIdx: int)",
+    "Moves the player to the specified interior element position."
+  ],
+  "73986": [
+    "function EnterEmpireInterior(): bool",
+    "Enters an empire interior: removes mission entities, loads the BUILDDE mission, sets radar blip range."
+  ],
+  "74068": ["Checks if the save pickup has been collected and triggers the save menu if so."],
+  "74313": ["function IsPlayerNearEmpirePed(): bool", "Checks if the player is near any empire business ped."],
+  "74376": [
+    "function HandleEmpireInteraction(): bool",
+    "Handles player interaction at an empire interior: shows help text, triggers mission or development menu.",
+    "Checks if the player is near the interaction point, prints appropriate help messages, and handles button input.",
+    "If near a gang ped, launches an empire mission. Updates blips and spheres for the interaction zone.",
+    "",
+    "Returns true if the interaction completed, false if cancelled."
+  ],
+  "75169": [
+    "function GetEmpireBuildingPoolHandle(in_siteIdx: int): int",
+    "Returns the hash key for an empire building type based on the site index and empire scale."
+  ],
+  "75356": [
+    "function TeleportPlayerToEmpireSite(in_empireIdx: int)",
+    "Teleports the player to the specified empire site."
+  ],
+  "75446": [
+    "function ToggleEmpireInterior(in_empireIdx: int, in_entering: int)",
+    "Toggles the empire interior on or off, handling building swaps, peds, and radar radius."
+  ],
+  "75751": [
+    "function SetEmpireAudioStream(in_enable: int)",
+    "Toggles the empire audio stream at the building's coordinates, enabling or disabling it based on the parameter."
+  ],
+  "75919": [
+    "function SwapEmpireBuilding(in_siteIdx: int, in_swapState: int)",
+    "Swaps the empire building interior state: enters the interior (swapState=1) or exits it (swapState=0).",
+    "On enter: activates building, creates interior objects, loads models, positions player inside, starts audio.",
+    "On exit: removes interior objects and gang peds, deactivates building, stops audio."
+  ],
+  "76459": [
+    "function EnterEmpireInterior(in_empire_site_idx: int, in_interior_id: int, in_enter_flag: int, in_fade_flag: int)",
+    "Freezes the player, computes the building swap hash for the empire interior, and calls SwapEmpireBuilding.",
+    "If enter_flag is 0, sets empire business var to -1 and swaps the building for entry.",
+    "If enter_flag is non-zero, swaps the building for exit and optionally fades to black."
+  ],
+  "77090": ["function IsPlayerNotInEmpireInterior(): bool", "Checks if the player is not inside an empire interior."],
+  "77150": [
+    "function IsPlayerAtInteractionPoint(in_interactionId: int): int",
+    "Checks if the player is at the given interaction point and creates a 3D marker if needed."
+  ],
+  "77315": ["Iterates through empire business peds to trigger random animations and remove blips for dead peds."],
+  "77451": ["Updates all empire ped entities: triggers random animations for idle peds with animation state 0."],
+  "77565": ["Makes all empire peds flee from the player by clearing their animations and setting flee objective."],
+  "77649": [
+    "Main loop for empire development: checks if player is at an interaction point, handles empire interactions, and updates peds."
+  ],
+  "77915": [
+    "function GetEmpireProgressPercent(in_empireState: int, in_empireTier: int): float",
+    "Calculates the progress percentage for an empire based on current vs total condition values."
+  ],
+  "77993": [
+    "function HandleEmpireMissionLoop(in_empire_type: int)",
+    "Monitors the player at an empire interior and handles mission triggers, money pickups, and character animations.",
+    "While the loop is running, checks if the player is at the interaction point, updates empire objects and peds.",
+    "When progress threshold is met, plays animation, creates a money pickup, and increases wanted level."
+  ],
+  "78701": [
+    "function IsValueLessThan100(in_value: int, in_unused: int): bool",
+    "Checks if the given value is less than 100."
+  ],
+  "78717": [
+    "function SwapEmpireInterior(in_enterFlag: int)",
+    "Swaps the player between the real world and an empire interior, handling position updates and radar radius."
+  ],
+  "79034": [
+    "function MovePlayerToInterior(in_enterFlag: int)",
+    "Moves the player into or out of an empire interior, handling coordinate transforms and radar updates."
+  ],
+  "79413": ["Empty placeholder function (no-op)."],
+  "79415": [
+    "function GetEmpireMissionJobsCompleted(in_slotIdx: int): int",
+    "Returns the number of jobs completed for an empire mission slot."
+  ],
+  "79567": ["function SetEmpireOwner(in_ownerGang: int)", "Sets the empire owner gang and its ped models."],
+  "79642": [
+    "function IsEmpireAvailable(in_empireIdx: int): bool",
+    "Checks if the empire is available for the current owner."
+  ],
+  "79687": [
+    "function UpdateEmpireBlips(in_enableBlips: int)",
+    "Updates all 30 empire site blips, enabling or disabling them based on the current chapter state."
+  ],
+  "79808": [
+    "function WaitForEmpireBuildingLoaded(in_buildingType: int): bool",
+    "Waits for an empire building of the given type to load and checks player proximity."
+  ],
+  "79892": [
+    "function GetRandomEmpireInteriorPos(in_buildingType: int, in_elementType: int): float, float, float, float",
+    "Returns a random position and heading from an empire building typed pool handle."
+  ],
+  "79985": [
+    "function GetEmpireInteriorPosition(in_empireIdx: int): float, float, float",
+    "Gets the interior position for an empire building with ground Z."
+  ],
+  "80067": [
+    "function GetEmpireInteriorGroundZ(in_empireIdx: int): float, float, float, float",
+    "Gets ground Z for an empire interior, trying random position first."
+  ],
+  "80110": [
+    "function GetEmpireInteriorGroundZ(in_empireIdx: int): float, float, float, bool",
+    "Gets ground Z for empire interior with random position fallback."
+  ],
+  "80184": [
+    "function GetEmpireInteriorPosition(in_empireIdx: int): float, float, float, float",
+    "Gets position for an empire interior, trying random position first."
+  ],
+  "80226": [
+    "function GetEmpirePositionOffset(in_empireIdx: int): float, float, float",
+    "Computes an offset position for an empire building entry using rotation and radius."
+  ],
+  "80299": [
+    "function GetEmpirePosition(in_empireIdx: int): float, float, float",
+    "Retrieves the X/Y/Z position of an empire building from the EMPIRE_BUILDING_ENTRY arrays."
+  ],
+  "80327": [
+    "function GetNextEmpireScale(in_currentScale: int): int",
+    "Gets the next empire scale value by incrementing the current scale."
+  ],
+  "80341": [
+    "function IsEmpireConditionMet(in_empireIdx: int): bool",
+    "Checks empire condition by comparing GetNextEmpireScale result against EMPIRE_CONDITIONS."
+  ],
+  "80371": [
+    "function GetEmpireConditionProgress(in_scaleIdx: int): int",
+    "Calculates the empire condition progress for a given scale index."
+  ],
+  "80396": [
+    "Initializes empire site data: clears handles/flags, populates building coordinates and headings, calculates position offsets, and sets sphere radii for all 30 empire buildings."
+  ],
+  "80574": [
+    "function SetEmpireData(in_empireIdx: int)",
+    "Validates empire index and sets condition, scale, type, ownership, and state data."
+  ],
+  "80662": [
+    "function SetEmpireOwnerGangDensity(in_empireIdx: int, in_densityType: int)",
+    "Sets the owner gang density for an empire based on type."
+  ],
+  "80729": [
+    "function SetEmpireSiteData(in_siteIdx: int, in_typeOverride: int, in_scale: int, in_ownerGang: int, in_state: int)",
+    "Sets empire site data: type, scale, owner gang, and state."
+  ],
+  "80833": [
+    "function GetClosestEmpireSites(in_playerX: int, in_playerY: int): int, int, int",
+    "Finds the three closest owned empire sites to the given coordinates and returns their indices."
+  ],
+  "81095": ["Counts empire sites owned by each gang type and sets the ownership amounts."],
+  "81382": [
+    "function GetEmpireSiteCount(in_siteType: int): int",
+    "Gets the empire site count for the given site type."
+  ],
+  "81473": [
+    "function CountEmpireSitesOfType(in_type: int): int",
+    "Counts empire sites matching a given type by iterating through all 30 sites and comparing their empire type."
+  ],
+  "81639": [
+    "function GetRandomEmpireSiteOfType(in_siteType: int, in_targetType: int): int",
+    "Returns a random empire site of the specified type, filtering by chapter and state."
+  ],
+  "81922": [
+    "function GetRandomEmpireSite(in_siteType: int, in_searchPreference: int): int",
+    "Returns a random empire site index, filtering by type and search preference (below or above threshold)."
+  ],
+  "82362": [
+    "function GetRandomOwnedEmpireSite(in_siteType: int): int",
+    "Returns a random owned empire site index, filtering by type and chapter requirements."
+  ],
+  "82649": [
+    "function GetEmpirePedModel(in_empireIdx: int): int, int",
+    "Returns ped model IDs for the given empire index, with a fallback if the empire isn't available."
+  ],
+  "82939": [
+    "function GetEmpirePedType(in_empireIdx: int): int",
+    "Maps an empire index (0-8) to a corresponding ped model type ID, defaulting to 22 for unknown indices."
+  ],
+  "83154": [
+    "function GetEmpireWeapon(in_empireType: int): int, int, int",
+    "Returns weapon ID, ammo ID, and ammo count for empire sites based on type."
+  ],
+  "83354": [
+    "function GetEmpireCar(in_empireIdx: int): int",
+    "Gets the empire car model ID for the given empire index."
+  ],
+  "83437": [
+    "function GetEmpireOwner(in_empireIdx: int): string",
+    "Returns the PR_GANx owner string for the given empire index.",
+    "For index 6, checks IsEmpireAvailable to decide between Marty gang or Vance."
+  ],
+  "83759": [
+    "function SaveEmpireSiteData(in_siteIdx: int)",
+    "Saves the current state of the given empire site to global save data arrays."
+  ],
+  "83902": [
+    "function SpawnEmpireSiteCar(in_site_idx: int)",
+    "Spawns an empire site car at the given site index, computing ground Z and clearing the area first.",
+    "Selects car model based on empire owner gang and business type, loads the model, and creates the car."
+  ],
+  "84531": [
+    "function SetEmpireConstructionObject(in_site_idx: int, in_enable_flag: int)",
+    "Sets or removes the empire construction object for a given site based on empire state and time of day.",
+    "If enable_flag is 1 and conditions are met, computes the construction model ID from empire type and scale.",
+    "Creates the object at the empire site position with the computed heading. If disable, removes the existing object."
+  ],
+  "85313": [
+    "function IsEmpireSiteAvailable(): bool",
+    "Checks if the current empire site is available and creates a for-sale object if so."
+  ],
+  "85611": [
+    "function TeleportPlayerToEmpireSite(in_empireIdx: int)",
+    "Teleports the player to an empire site with interior positioning."
+  ],
+  "85723": [
+    "function IsPlayerNearEmpireInterior(in_empireIdx: int): bool",
+    "Checks if the player is near the empire interior ground position."
+  ],
+  "85772": [
+    "function EnterSafehouse(in_fadeFlag: int)",
+    "Handles entering a safehouse, toggling empire interiors and teleporting the player."
+  ],
+  "86111": [
+    "function UpdateEmpireMarker(in_empireIdx: int, in_markerBlip: int): bool",
+    "Updates the empire interior marker blip based on player proximity and interior ground position."
+  ],
+  "86311": ["Clears any pending help message and resets the display flag."],
+  "86338": [
+    "function HandleEmpireInteraction(): bool",
+    "Handle empire site interactions: purchase sites, start missions, display blips and help messages.",
+    "",
+    "Checks if the player is near a site entrance and triggers purchase or mission launch.",
+    "Manages blip display, help messages, and gang threat reactions based on site state."
+  ],
+  "87430": [
+    "function SetEmpireConstruction(in_siteIdx: int, in_timer: int, in_state: int)",
+    "Enables or disables empire construction for the given site: sets state, starts/stops audio, updates blip, and clears the area."
+  ],
+  "87576": [
+    "function SetEmpireRepair(in_empireIdx: int, in_repair: int, in_refreshBlip: int)",
+    "Sets or clears empire repair state and optionally updates the site blip."
+  ],
+  "87702": [
+    "function HandleEmpireUpgrade(in_buildingIdx: int, in_upgradeState: int)",
+    "Handles empire upgrade logic: awards score, updates gang ownership, sets construction timers, and updates blips."
+  ],
+  "88222": [
+    "function GetEmpireUpgradeCost(in_buildingType: int, in_upgradeLevel: int, in_category: int, in_customCost: int): int",
+    "Returns the cost to upgrade an empire building based on type, category, and upgrade level."
+  ],
+  "88773": [
+    "function GetEmpireMissionJobsCompleted(in_slotIdx: int): int",
+    "Reads the jobs-completed count from the empire mission array for the given slot index."
+  ],
+  "88782": [
+    "function RegisterEmpireJobCompleted(in_empireIdx: int)",
+    "Registers an empire job as completed and updates the respect level for the empire."
+  ],
+  "89071": [
+    "function ShowEmpireReputationHelp(in_empireIdx: int)",
+    "Shows help message about empire reputation status."
+  ],
+  "89115": [
+    "function DisplayJobProgressTimer(in_empireIdx: int)",
+    "Displays an onscreen timer showing remaining time for the current empire job."
+  ],
+  "89210": [
+    "function DisplayJobProgress(in_siteIdx: int)",
+    "Calculates the job completion threshold for an empire site and updates the temporary state."
+  ],
+  "89291": ["Clears the on-screen counter display for empire site state tracking."],
+  "89297": ["Resets the empire mission blip data field to zero."],
+  "89314": [
+    "function GetEmpireConditionProgress(in_empireIdx: int, in_current_scale: int): int, int",
+    "Calculates empire condition progress and remaining value for the given empire site scale."
+  ],
+  "89371": [
+    "function CalculateEmpireMissionCost(in_siteIdx: int): int, int",
+    "Calculates the mission cost and revenue multiplier for an empire site based on its type and scale level."
+  ],
+  "90271": [
+    "function UnlockEmpireType(in_empireType: int)",
+    "Unlocks the specified empire type if it is currently locked. Returns true on success, false otherwise."
+  ],
+  "90423": [
+    "function CanEmpireBeUpgraded(in_empireState: int, in_empireTier: int): bool",
+    "Checks if an empire can be upgraded based on its state, tier, and current site count."
+  ],
+  "90513": ["Initializes the empire system: sets up site data, owner gangs, colors, and default configurations."],
+  "91291": [
+    "Checks conditions that allow the player to interact with empire businesses: no active mission, not in cutscene, no help message displayed, and character is alive."
+  ],
+  "91428": [
+    "function WaitForPagerCleared(): bool",
+    "Waits for the pager to be cleared while the player is alive, returns TRUE when pager is cleared."
+  ],
+  "91487": [
+    "function WaitForTimer(in_timerDuration: int)",
+    "Waits for a timer duration to elapse while checking for red balloon and pager messenger flags."
+  ],
+  "91561": [
+    "function TriggerPagerMessage(in_chainIdx: int)",
+    "Trigger a pager message based on the mission chain index, showing dialogue and updating mission progress.",
+    "",
+    "Switch statement maps each chain index to a specific pager message string and target chain/progress.",
+    "Adds the pager message, waits for it to clear, and marks mission chain progress if applicable."
+  ],
+  "93595": ["Starts the pager messenger script (@PAGER)."],
+  "93605": [
+    "Pager messenger system script.",
+    "Polls story and empire progress gates, marks pager messages as eligible, waits until the player can interact, then triggers one pending pager message at a time."
+  ],
+  "93733": ["Updates pager-message eligibility flags from chapter and mission-chain progress."],
+  "95516": ["Finds the next eligible pager message and triggers it when empire interactions are allowed."],
+  "95616": ["Starts the empire payday monitor script (@EMPIMON)."],
+  "95626": [
+    "Empire payday monitor script.",
+    "Checks once per in-game day after 16:00, waits until empire interactions are safe, calculates total business earnings, pays the player, and shows the payday message."
+  ],
+  "95709": ["Checks whether an empire payday is due and pays the player when interaction state allows it."],
+  "95884": ["Calculates total empire payday earnings from all owned business sites."],
+  "96210": ["Starts global state monitoring and the Ferris wheel attraction monitor."],
+  "96228": [
+    "Global game state monitor script.",
+    "Continuously caches the player's current vehicle, bike state, and world coordinates, and clears the empire mission help timer while missions are running."
+  ],
+  "96480": [
+    "function AttachCharToObject(in_obj: object, in_attachCase: int)",
+    "Generates a random character and attaches it to the given object with case-specific offsets."
+  ],
+  "96738": [
+    "Ferris wheel attraction monitor script.",
+    "Streams Ferris wheel NPCs near Vice Point, manages help prompts and wheel waiting state, controls nearby traffic density, and cleans up passengers/NPCs when the player leaves."
+  ],
+  "97208": ["Display help message and start the Ferris wheel animation."],
+  "97255": ["Manage passenger lifecycle at the Ferris wheel."],
+  "97562": ["Manage NPC behavior and interactions near the Ferris wheel."],
+  "97894": ["Attach NPCs to Ferris wheel seats."],
+  "98228": ["Cleanup and reset Ferris wheel state."],
+  "98316": ["Starts the radio announcement monitor script (@RADIA)."],
+  "98326": [
+    "function GetNextMissionChainIndex(): int",
+    "Determine the next mission chain index to activate based on the current chapter and save state.",
+    "",
+    "Checks save state entries for each chain in chapter order, verifying progress conditions.",
+    "Returns the first chain index whose conditions are met, or -1 if none qualify."
+  ],
+  "99160": [
+    "function IsAnyMissionChainNotCompleted(): bool",
+    "Checks if any of the 18 mission chain save states is incomplete (value == 0)."
+  ],
+  "99428": ["function PlayAnnouncement(in_announcementId: int)", "Plays an announcement and saves its state flag."],
+  "99441": [
+    "function InCarWithRadio(): bool",
+    "Returns true if the player is in a vehicle where the radio can be used."
+  ],
+  "99580": ["function IsRadioOn(): bool", "Checks if the radio is currently on by getting the radio channel."],
+  "99603": ["Radio announcement monitor script.", "Plays the next radio announcement during story progression."],
+  "99780": ["Starts the reward pickup monitor script (@REWMON)."],
+  "99790": [
+    "function AddMissionAudioSlot(in_condition: int, in_reward_amount: int, in_x: float, in_y: float, in_z: float, in_flags: int)",
+    "Adds a reward pickup slot at the given coordinates and marks it pending until the monitor can create its icon."
+  ],
+  "99861": [
+    "function RemoveLastMissionAudioSlot(in_flags: int)",
+    "Applies the given flag bits to the most recently added reward pickup slot."
+  ],
+  "99884": ["Clears all mission audio flags across empire land sites."],
+  "99934": [
+    "function CreatePickupIcon(in_site_idx: int, in_force_create_flag: bool)",
+    "Creates an unlockable pickup icon for a reward slot, optionally bypassing the normal proximity and occupancy checks."
+  ],
+  "100185": [
+    "function RemovePickupArraySlot(in_slotIdx: int)",
+    "Remove a pickup from the pickup array by slot index and mark the slot as empty (-1)"
+  ],
+  "100201": [
+    "Iterate through the pickup array and remove all active pickups, then reset the mission audio backup flag"
+  ],
+  "100255": [
+    "function WaitForControllerInput(in_slotIdx: int): bool",
+    "Poll controller pad state and return when input detected; awards score if empire marker slot is negative"
+  ],
+  "100461": [
+    "function CreateCarAtCoords(in_modelId: int, in_spawnX: float, in_spawnY: float, in_spawnZ: float, in_heading: float, in_posX: float, in_posY: float, in_posZ: float, in_proofFlag: int): car",
+    "Load a model, create a car at specified coordinates with heading, optionally make it proofed and reposition the player"
+  ],
+  "100564": [
+    "function SetNewPurchaseNotification(in_siteIndex: int)",
+    "Set the purchase notification message string based on empire site index"
+  ],
+  "100744": [
+    "function CheckAndUnlockMissionChain(in_targetCondition: int)",
+    "Check if any empire site matches the target condition and has landable flag set, then unlock and notify"
+  ],
+  "100827": [
+    "function IsMissionChainCompleted(in_chainId: int): bool",
+    "Check if all sites for a mission chain have been completed (landable flag set)"
+  ],
+  "100881": [
+    "function HandleArcadeMachine(in_siteCondition: int)",
+    "Handle empire arcade machine interactions: weapon buyback, concert tickets, and vehicle purchases"
+  ],
+  "102643": ["Update chapter 2 mission chain unlock progress based on chapter and chain completion state"],
+  "102933": [
+    "Reward pickup monitor script.",
+    "Initializes temporary reward pickup slots and keeps unlockable pickup icons visible around empire and reward locations.",
+    "Handles death/arrest recovery, pickup collection, arcade-machine rewards, and cleanup while missions are running."
+  ],
+  "103730": ["Waits for the player to recover from death, then respawns empire site pickups that were removed."],
+  "103841": ["Waits for the player to stop being arrested, then respawns empire site pickups that were removed."],
+  "103970": [
+    "Iterates through all empire sites, checking pickup conditions. Removes pickups that have been collected or are out of range, and creates pickups where conditions are met."
+  ],
+  "104298": ["Starts the game help monitor script (@GAMHELP)."],
+  "104308": ["Wait for a mission chain to load by polling progress and completed flag until ready"],
+  "104450": [
+    "function HasPickupBeenCollected(): bool",
+    "Check if any tutorial pickup (busted, wasted, spray shop, bomb shop) has been collected"
+  ],
+  "104718": [
+    "function WaitWhileShowingHelp(in_timeout: int): bool",
+    "Wait while a help message is being displayed, returning false if player dies, gets arrested, or pickup collected"
+  ],
+  "104842": [
+    "function CanShowHelpText(in_allowFlag: int): bool",
+    "Determine if help text can be shown based on game state and various condition checks"
+  ],
+  "105056": [
+    "function ShowHelpText(in_textId: string, in_duration: int)",
+    "Display a help text message with optional timeout duration"
+  ],
+  "105119": [
+    "function CheckAndUnlockOutfits(): bool",
+    "Check and unlock outfits based on chapter progress and mission chain completion flags"
+  ],
+  "106238": [
+    "function CheckAndUnlockEmpireBuildSites(): bool",
+    "Check and unlock empire build sites (drugs, smuggling, robbery) when unlock flags are set"
+  ],
+  "106449": [
+    "function UpdateEmpireReputation(): bool",
+    "Update empire reputation levels across all categories and show notification when reputation increases"
+  ],
+  "107304": [
+    "function CheckAndUnlockMultiplayerContent(): bool",
+    "Check and unlock multiplayer content, showing appropriate notification message"
+  ],
+  "107439": [
+    "function Check100PercentUnlock(): bool",
+    "Check if player has reached 100% game completion and unlock associated content"
+  ],
+  "107512": [
+    "Game help and unlock notification monitor.",
+    "Polls mission-chain progress, player state, pickups, vehicles, and unlock flags to show one-time tutorial/help messages when they become relevant.",
+    "Also records milestone progress for empire ownership, applies unlock rewards such as free resprays, and terminates once no pending help checks remain."
+  ],
+  "114496": ["Starts the zone management monitor script (@ZONEMO)."],
+  "114506": [
+    "function AddZonePedInfo(in_pedType: int)",
+    "Add zone ped info to the pool if not already present, setting time-of-day data based on zone type"
+  ],
+  "114895": ["function IsNightTime(): bool", "Check if the current game time is nighttime (before 5am or after 10pm)"],
+  "114931": [
+    "function UpdateZonePedInfo(in_zoneIdx: int, in_zoneSlot: int)",
+    "Updates the zone ped info entry for the given zone index and slot, setting or clearing markers based on night/day.",
+    "Switches on zoneSlot to position the marker flag in the correct field of the zone data array."
+  ],
+  "115719": "Clear all zone ped info entries and reset the zone memo site counter",
+  "116116": [
+    "function IsClosestToPlayer(in_site_a: int, in_site_b: int): bool",
+    "Compares which of two empire sites is closer to the player; returns true if site A is closer or equal distance."
+  ],
+  "116176": [
+    "function ResetGangSettings(in_flag: int)",
+    "Resets gang settings by removing mission entities and resetting empire construction object."
+  ],
+  "116202": [
+    "function IsValidFairCategory(in_category: string): bool",
+    "Returns true if the category string is \"FAIR\", \"GOLF1\", or \"GOLF2\"."
+  ],
+  "116274": [
+    "Zone and empire site monitor.",
+    "Tracks the player's current info zone near empire properties, updates zone ped/gang metadata, and manages the currently active empire site interaction.",
+    "Also advances construction timers, maintains construction objects and HUD hints, and clears empire markers when the player leaves or missions suspend interactions."
+  ],
+  "117612": ["Saves current empire site data, finds a new available site, resets the empire, and fades in."],
+  "117679": ["Calculates time delta since last frame and returns."],
+  "117696": [
+    "Advances the active construction countdown for the current empire site.",
+    "When the timer has expired and the player is away from the site, finalizes construction and clears the timer."
+  ],
+  "117785": ["Clears zone ped info, resets empire site index, and returns to default state."],
+  "117823": ["Starts the pickup help monitor script (@PUHELP)."],
+  "117833": [
+    "function WaitForControllerInputTimeout(in_playerX: float, in_playerY: float, in_playerZ: float, in_playerHeading: float): bool",
+    "Waits up to 6 seconds for controller input. Returns true on input, false on timeout. Preserves player position/heading during wait."
+  ],
+  "117930": [
+    "function ShowTutorialCutscene(in_isBusted: int, in_tutorialType: int)",
+    "Plays a tutorial cutscene showing busted or wasted recovery info with camera animations and help texts.",
+    "Sets up camera positions and look-at targets based on busted/wasted and tutorial type parameters.",
+    "Displays help texts about taxiwarp and weapon buyback with timed waits between each.",
+    "Restores player control and clears cutscene state when done."
+  ],
+  "119439": ["Removes all tutorial pickups and resets their display/cutscene flags."],
+  "119513": [
+    "Pickup help monitor script.",
+    "Creates tutorial info pickups for Pay 'n' Spray, bomb shops, busted recovery, and wasted recovery once early story progress is reached.",
+    "Shows the relevant help or recovery cutscene when those pickups are collected, then removes pickups and exits after all hints are resolved."
+  ],
+  "120555": ["Starts the shop monitor script (@SHOPMON)."],
+  "120565": ["Clears all garage marker handles and removes the 3D marker objects."],
+  "121096": [
+    "function AddPedToArray(in_ped: int, in_idx: int)",
+    "Adds a ped entry to the safehouse ped array at the given index."
+  ],
+  "121152": [
+    "function GetRandomWeaponModel(): int",
+    "Generates a random integer and maps it to one of five weapon model IDs."
+  ],
+  "121273": [
+    "function CreatePedAtPosition(in_activation_idx: int)",
+    "Gets a random weapon model, loads it, and creates a char at the position from the activation index arrays."
+  ],
+  "121379": ["Initializes the ped spawn location array with hardcoded coordinates, headings, and types."],
+  "121994": [
+    "Checks each ped in the ped array and creates or removes peds based on player proximity to safehouse markers.",
+    "Creates a ped if player is near and the ped slot is empty, removes the ped if player is away."
+  ],
+  "122187": ["Clears all peds from the PED_ARRAY by iterating through all slots and deleting each entry."],
+  "122223": [
+    "function SpawnBmxPed(in_activation_idx: int)",
+    "Checks if the spawn area is clear, then loads the BMXBOY model and spawns a BMX car at the fixed location."
+  ],
+  "122383": [
+    "function TransitionToMall(in_destX: float, in_destY: float, in_destZ: float, in_destHeading: float, in_mallType: int)",
+    "Transitions the player to the mall or back, teleporting them to the given coordinates.",
+    "Sets area names, updates blips, spawns BMX ped, and manages fade transitions."
+  ],
+  "122623": [
+    "Handles mall/garage interaction logic: creates and manages 3D markers for garage entries and mall entries.",
+    "Checks player proximity to markers and triggers transitions to/from the mall when conditions are met."
+  ],
+  "123263": [
+    "function SetPedInfoSlot(in_slot: int, in_slot_value: int)",
+    "Sets the ped info slot at the given index to the specified value."
+  ],
+  "123272": ["Loops through all 30 ped info slots, calling SetPedInfoSlot for each."],
+  "123307": [
+    "function GetBuildingPoolPosition(in_x: float, in_y: float, in_z: float, in_heading: float)",
+    "Gets the position and heading of an interior element by typed pool handle."
+  ],
+  "123324": [
+    "function GetPedInfoCoords(in_pedIndex: int): float, float, float, float",
+    "Retrieves the position and heading of a ped from the PED_INFO array."
+  ],
+  "123354": [
+    "function IsPlayerNearCoords(in_x: float, in_y: float): bool",
+    "Checks if the player is within 35.0 units of the given 2D coordinates."
+  ],
+  "123378": [
+    "function GetGroundZ(in_x: float, in_y: float, in_z: float): float, float, float",
+    "Returns the input X/Y with the resolved ground Z, falling back to the input Z if the ground lookup fails."
+  ],
+  "123419": [
+    "Shop monitor script.",
+    "Initializes the empire shop directory, keeps shop entry markers active while the player is nearby, and starts the matching empire interior flow when the player enters a marker.",
+    "Restores the player outside the shop after exit, resets business state after death, and keeps the shop ped/interior monitors running."
+  ],
+  "123614": ["Initializes ped info data for all 30 empire shops including positions, headings, shop types, and names."],
+  "125594": ["Checks player proximity to all empire shops, creates 3D markers, and handles shop entry/exit logic."],
+  "126221": ["Resets empire business variables and clears the last shop index."],
+  "126475": ["Initializes animation indices and starts GA (garage/animation) monitor scripts."],
+  "126524": [
+    "function SetSafehouseTier(in_tier: int, in_animIndex: int)",
+    "Sets the animation index for a safehouse tier (door, shop, or garage)."
+  ],
+  "126736": [
+    "function ContinueObjectAnimation(in_obj: object, in_objX: float, in_objY: float, in_objZ: float, in_soundStartX: float, in_soundStartY: float, in_soundStartZ: float, in_slideStartX: float, in_slideStartY: float, in_slideStartZ: float, in_isAnimating: int, in_hasSound: int, in_slideEnabled: int): int",
+    "Continues an object animation by updating its position, playing start/end sounds, and handling slide animations."
+  ],
+  "126884": [
+    "function IsObjectAtPosition(in_objHandle: int, in_x: float, in_y: float, in_z: float): bool",
+    "Checks if an object is at the given position."
+  ],
+  "126936": [
+    "First Fort Baxter gate animation controller.",
+    "Creates the eastern barrier gate, opens it when the player is in the airport/army zone and allowed through, and otherwise drives it back to the closed position."
+  ],
+  "127514": [
+    "Second Fort Baxter gate animation controller.",
+    "Creates the western barrier gate, mirrors the army/airport access rules from GA_ARM1, and keeps the gate closed when the player leaves the area."
+  ],
+  "128092": [
+    "Civil asset impound gate animation controller.",
+    "Creates the Viceport impound gate, computes its open offset from object heading, and opens it while the player is inside the angled entry area."
+  ],
+  "128548": [
+    "Laguna garage door animation controller.",
+    "Creates the Ocean Beach garage door and opens or closes it according to the shared garage animation state."
+  ],
+  "128925": ["Starts the safehouse monitor script (@SAFEHOU)."],
+  "128935": [
+    "function CreateSafehouseEntry(in_zoneIdx, in_markerX, in_buildingSwapId, in_entryX, in_entryY, in_entryZ, in_exitHeading, in_exitX, in_exitY, in_exitZ, in_positionHeading, in_stateData4, in_stateData8, in_hasActiveMission, in_hasClothesShop, in_hasWeaponShop)",
+    "Initializes a safehouse entry with the given coordinates, state data, and flags."
+  ],
+  "129193": [
+    "function SetClothesPickupPosition(in_x: float, in_y: float, in_z: float, in_areaName: string)",
+    "Sets the position and area name of a clothes pickup at a safehouse."
+  ],
+  "129233": [
+    "function SetPickupPosition(in_x: float, in_y: float, in_heading: float)",
+    "Sets the position and heading of a safehouse marker pickup."
+  ],
+  "129266": [
+    "function SetWeaponPickupPosition(in_x: float, in_y: float, in_z: float, in_safehouseIdx: int)",
+    "Sets weapon pickup position coordinates and cooldown for a safehouse."
+  ],
+  "129312": [
+    "function SetSafehouseData(in_x: float, in_y: float, in_z: float, in_heading: float, in_exitX: float, in_exitY: float, in_exitZ: float, in_exitHeading: float)",
+    "Sets safehouse interior entry data for the last safehouse slot."
+  ],
+  "129380": ["function RemoveWeaponPickups(in_safehouseIdx: int)", "Removes weapon pickups for the given safehouse."],
+  "129457": [
+    "function CreateWeaponPickups(in_safehouseIdx: int)",
+    "Creates weapon pickups at the safehouse coordinates for the given safehouse index.",
+    "Removes any existing pickups first, then creates them based on the safehouse index and weapon slot.",
+    "Each safehouse has different weapon options and coordinates."
+  ],
+  "131271": [
+    "function SetSafehouseInteriorState(in_safehouseIdx: int, in_activeState: bool)",
+    "Sets the active state for a safehouse interior slot."
+  ],
+  "131280": ["Creates a clothes pickup at the safehouse coordinates if one doesn't already exist."],
+  "131467": ["Creates or updates a weapon pickup at the safehouse position if the cooldown timer allows it."],
+  "131607": [
+    "function CheckHealthPickupAvailable(in_safehouseIdx: int)",
+    "Checks if a health pickup should be spawned at the safehouse."
+  ],
+  "131852": [
+    "function UpdateSafehouseState(in_safehouseIdx: int)",
+    "Updates the safehouse state: ensures markers and pickups exist, then checks health pickup availability.",
+    "Creates exit and weapon pickup markers if they do not exist, calls helper functions for clothes and weapon pickups."
+  ],
+  "132143": [
+    "function LoadSafehouse(in_safehouseIdx: int)",
+    "Toggles the safehouse building swap state, sets the interior state, updates empire data based on the safehouse index, and resets pickup handles."
+  ],
+  "132338": [
+    "function UnloadSafehouse(in_safehouseIdx: int)",
+    "Removes all safehouse-related entities including markers, pickups, and characters."
+  ],
+  "132470": [
+    "function CreateSafehouseMarkers(in_safehouseIdx: int)",
+    "Creates 3D markers at the safehouse entry and interior positions for the given safehouse index."
+  ],
+  "132617": [
+    "function RemoveSafehouseMarkers(in_safehouseIdx: int)",
+    "Removes safehouse markers for the given safehouse index."
+  ],
+  "132677": [
+    "function SetPlayerPositionAndCamera(in_x: float, in_y: float, in_z: float, in_heading: float)",
+    "Sets player position, heading, and repositions the camera behind the player."
+  ],
+  "132720": [
+    "function LoadSafehouse(in_safehouseIdx: int, in_interiorFlag: int)",
+    "Teleports the player inside or outside the safehouse based on the interior flag"
+  ],
+  "132937": [
+    "function ExitSafehouse(in_safehouseIdx: int, in_interiorFlag: int)",
+    "Exits the current safehouse, deactivating it and teleporting the player to the entry position.",
+    "Removes clothes pickup, resets spray bomb flag, sets empire data to 0, and restores the zone name."
+  ],
+  "133183": [
+    "function IsPlayerOutsideSafehouse(in_buildingIdx: int): bool",
+    "Checks if the player is outside the interior bounds of a safehouse building."
+  ],
+  "133259": [
+    "Safehouse monitor script.",
+    "Initializes all safehouse definitions, maintains entry/exit markers and pickups for active safehouses, and handles player transitions into and out of safehouse interiors.",
+    "While inside a safehouse, keeps save, clothes, and weapon pickups available and removes markers when the player leaves the relevant zone."
+  ],
+  "133980": [
+    "Creates or removes safehouse markers and weapon pickups based on whether the player is in the correct zone."
+  ],
+  "134089": [
+    "Initializes all safehouse data including positions, entry points, interior coordinates, and pickup locations for all 4 safehouses."
+  ],
+  "134700": ["Empty placeholder function (no-op)."],
+  "134702": [
+    "Manages chapter-specific safehouse door objects: deletes all door objects, creates chapter 2-specific ones with positions and headings, and toggles long-distance swimming."
+  ],
+  "134874": ["Resets empire owner gang states and updates empire statuses for specific gang indices."],
+  "135024": ["Sets the max wanted level based on the current chapter."],
+  "139993": [
+    "function SetThreatForPedType(in_ped: int, in_setGang: int, in_setPolice: int, in_setFire: int, in_setArmy: int, in_setCivilians: int)",
+    "Sets threat flags for a ped against various ped types (gang, police, fire, army, civilians)."
+  ],
+  "140092": [
+    "Clears all existing threats for ped types 0-12, then sets new threat reactions for various ped types based on empire state."
+  ],
+  "140615": ["Updates the mission chain monitor based on current chapter."],
+  "140711": ["Updates game state by calling various subsystem update functions."],
+  "140801": ["Empty placeholder function (no-op)."],
+  "140803": ["function GetMocapLabel(in_labelIdx: int): string", "Gets the mocap label string for a given index."],
+  "140901": ["Plays a cutscene by waiting for load, starting it, and clearing it when done."],
+  "145127": [
+    "function StartCutscene(in_fadeDuration: int)",
+    "Starts a cutscene by freezing the player, hiding them, and fading to black."
+  ],
+  "145291": [
+    "function EndCutscene(in_fadeDuration: int)",
+    "Ends the cutscene, restores player controls, and initiates fade out."
+  ],
+  "145427": [
+    "function PlayMissionCutscene(in_missionIndex: int)",
+    "Plays a mission cutscene or shows a press-prompt, handling building state and camera setup."
+  ],
+  "145780": ["Starts the shooting range helper script (@SRANGEH)."],
+  "145790": [
+    "function LoadMissionAudio(): bool",
+    "Loads mission audio by getting a free slot, loading the audio, and waiting for it to load."
+  ],
+  "145859": ["Clears mission audio if TEMP_EMPIRE_BUILD_DATA_8 is not -1."],
+  "145882": [
+    "Selects a random shooting range target, creates the target object and fake target at the selected position, and starts mission audio."
+  ],
+  "146002": [
+    "Rotates the shooting range target clockwise by 10 degrees, or resets and triggers destruction after 4 seconds."
+  ],
+  "146106": ["Checks if the target object has been damaged and handles cleanup."],
+  "146259": [
+    "Rotates the shooting range target counter-clockwise by 10 degrees, or deletes targets after reaching 270 degrees."
+  ],
+  "146353": ["Checks if the target timer has elapsed; resets the flag when ready."],
+  "146377": [
+    "Dispatches shooting range updates based on state: setup target, rotate clockwise, handle damage, rotate counter-clockwise, check timer."
+  ],
+  "146583": ["Checks player range and clamps position if needed."],
+  "146646": ["Creates a user marker at the shooting range exit position."],
+  "146787": ["Removes the shooting range marker, associated objects, and character."],
+  "146829": ["Creates a user marker at the shooting range entry position."],
+  "146892": [
+    "function SetShootingRangePosition(in_x: float, in_y: float, in_z: float, in_heading: float)",
+    "Sets the shooting range position for the player."
+  ],
+  "146944": ["Deactivates the shooting range and resets its state if the player is no longer alive"],
+  "147018": [
+    "Activates the shooting range: disables player control, loads models/animations, sets up the target, and starts the shooting sequence."
+  ],
+  "147161": ["Handles the shooting range clerk being attacked."],
+  "147231": [
+    "Handles the player's exit from the shooting range by restoring controls, clearing animations, and resetting state."
+  ],
+  "147393": ["Checks player position and launches the Odd Job shooting range mission."],
+  "147624": [
+    "Shooting range helper script.",
+    "Initializes Phil's shooting range entry, exit, and target positions, waits until the activity is unlocked, and manages the range marker while the player is in Viceport.",
+    "When active, runs the shooting range update loop, handles target kills, launches the activity, and exits or deactivates it when needed."
+  ],
+  "148421": ["Creates or removes the shooting range marker based on whether the player is in the correct zone."],
+  "148502": ["Empty placeholder function (no-op)."],
+  "148504": [
+    "function GetRandomCarOfType(in_type: int, in_excludeCar: int)",
+    "Finds a random car of the given type within a bounding box around the player that has available passenger seats. Returns via return value."
+  ],
+  "148639": [
+    "Play the end-of-game credits: hide the player, start credits, spawn a car for the player to enter, then restore.",
+    "",
+    "Setup: freezes player, moves to a spawn point, disables HUD and music.",
+    "Credits loop: alternates between spawning a car and placing the player inside it.",
+    "Cleanup: stops music, restores player position, re-enables controls and HUD."
+  ],
+  "149450": ["Sets total export cars and starts export car (@EXPORTC) and export boat (@EXPORTB) monitor scripts."],
+  "149872": [
+    "function Impound_CreateSphere(in_sphere_id: int, in_x: float, in_y: float, in_z: float): int",
+    "Creates and returns an impound delivery sphere when no sphere is currently active."
+  ],
+  "149899": [
+    "function Impound_RemoveSphere(in_sphere_id: int): int",
+    "Removes the impound delivery sphere when present and returns -1 for the cleared handle."
+  ],
+  "149921": [
+    "function Impound_StrikeListItem(in_obj_handle: object, in_z_offset: float, in_heading: float, in_next_idx: int): int, object",
+    "Creates a strike mark on the impound list object, advances the delivered-item count, and returns the new strike object."
+  ],
+  "149983": [
+    "function IsCarInImpoundList(in_carModel: int): bool",
+    "Checks if a car model is in the impound delivery list."
+  ],
+  "150043": [
+    "function IsWatercraftInImpoundList(in_watercraftModel: int): bool",
+    "Checks if a watercraft model is in the impound delivery list."
+  ],
+  "150103": ["Clears the impound help message if impound data flag is set to 2."],
+  "150130": ["Validates the impounded vehicle exists and is in the correct impound list, showing help text if needed."],
+  "150420": [
+    "function Impound_AwardPlayer(in_list_idx: int, in_reward: int, in_delivered_count: int)",
+    "Awards the player money and displays the appropriate impound message based on the list index and delivered-item count."
+  ],
+  "150569": [
+    "Displays a timed message about the Civil Asset Forfeiture department's interest in boats, waits for player input, then fades out."
+  ],
+  "150887": [
+    "Car impound export monitor script.",
+    "Builds the current Civil Asset Forfeiture car list, marks already delivered cars on the board, and waits for matching vehicles to be delivered to the Viceport impound.",
+    "On delivery, removes the player's car, strikes the list item, awards the fee, advances to the next list when complete, and terminates after all car lists are finished."
+  ],
+  "152387": [
+    "Watercraft impound export monitor script.",
+    "Creates the marina impound sign/list, tracks delivered watercraft, and waits for matching boats or jet skis to be delivered to the Viceport marina pickup point.",
+    "On delivery, removes the vehicle, strikes the list item, awards the fee, and marks progress complete once all watercraft have been delivered."
+  ],
+  "153238": ["Awards player progress and plays mission passed tune when all watercraft have been delivered."],
+  "153283": ["Starts the Ammu-Nation monitor script (@AMMUNAT)."],
+  "154400": ["Checks if the player is not eligible to view another weapon in the ammunation"],
+  "154430": [
+    "function CreateAmmunationMarker(in_x: float, in_y: float, in_z: float): int",
+    "Removes any existing ammunation marker and creates a new one at the given coords."
+  ],
+  "154470": ["Removes the ammunation 3D marker and resets garage state."],
+  "154495": [
+    "function CreateAmmunationSphere(in_x: float, in_y: float, in_z: float): int",
+    "Creates an ammunation sphere at the given coordinates if not already created."
+  ],
+  "154525": ["Removes the ammunation sphere and resets garage state."],
+  "154550": [
+    "function DisplayCenteredText(in_wrapX: float, in_text: string, in_y: float)",
+    "Displays centered text with red color at the given position."
+  ],
+  "154588": [
+    "function ClearWeaponArray(in_value: int)",
+    "Clears the weapon array g.4047 by setting all 6 entries to the given value."
+  ],
+  "154625": [
+    "function UpdateAmmunationState(in_chapter: int)",
+    "Updates ammunation garage weapon availability based on the current mission chapter and progress."
+  ],
+  "154968": [
+    "Checks garage state timers for all 4 garage slots and resets state to 0 if the timer has elapsed.",
+    "Also resets garage state if the player is dead."
+  ],
+  "155102": [
+    "function GetWeaponDisplayIndex(in_weaponId: int): int",
+    "Returns the weapon display index for the given weapon ID, or -1 if not found."
+  ],
+  "155575": [
+    "function GetWeaponPrice(in_weapon_id: int): string, int, int, int",
+    "Returns the name, ammo count, and price for a given weapon ID, with a 25% discount if Phils shooting range is completed."
+  ],
+  "156353": ["function CountValidAmmunationEntries(): int", "Counts the number of valid ammunation entries."],
+  "156407": ["Updates g.4035 with weapon display indices for all 6 weapon slots."],
+  "156455": ["function HasEnoughArmor(): bool", "Checks if the player has enough armor relative to view distance."],
+  "156488": [
+    "function IsPlayerDeadOrFullArmor(): bool",
+    "Checks if the player is dead or has full armor relative to view distance."
+  ],
+  "156539": [
+    "function HasSpecificWeapon(in_weaponId: int): bool",
+    "Maps a weapon ID to its slot, checks if the player has that weapon equipped, and returns false if not."
+  ],
+  "156904": ["function HasWeaponInSlot(in_weaponId: int): bool", "Checks if PLAYER1 has the given weapon in slot 2."],
+  "156928": [
+    "Updates the killfrenzy state for the current garage, checking if the player is targeting the garage character.",
+    "If conditions are met, transitions to killfrenzy mode (state 2), sets the character to attack the player.",
+    "In state 1, makes the character wait and face the player. In state 3, removes the ammunsphere and handles transitions.",
+    "Returns false to indicate the state was not updated."
+  ],
+  "157424": [
+    "function CreateKillfrenzyAI(in_garageIdx: int)",
+    "Creates and configures an AI character for the killfrenzy garage mission."
+  ],
+  "157660": ["Prepares the player for entering an ammunation shop: disables controls, fades out, clears animations."],
+  "157746": ["Ends ammunation mode by restoring player control and fading out."],
+  "157791": [
+    "Stops the Ammunation garage: removes spheres/markers, handles building state transitions, cleans up peds/objects, and repositions player."
+  ],
+  "158284": [
+    "Initializes the ammunation garage state, starts ammunation, and creates display objects for weapons.",
+    "Clears old ammo display objects, creates new ones at the garage position, and loads required models.",
+    "Sets up the killfrenzy AI and positions the player character."
+  ],
+  "159131": [
+    "function CanStartKillfrenzy() : bool",
+    "Checks if the killfrenzy can be started: status is active, a garage is open, the garage character is alive, not in cutscene, and pager is off."
+  ],
+  "159213": ["Plays a one-off purchase sound effect at the player position using the default sound ID (70)."],
+  "159225": ["Plays a one-off purchase sound effect at the player position using the default sound ID (14)."],
+  "159237": ["Plays a one-off purchase sound effect at the player position using the default sound ID (13)."],
+  "159249": [
+    "function HandleAmmunationInput(in_categoryIdx: int, in_categoryCount: int): int",
+    "Handles ammunation shop input for navigating weapon categories with pad state checks."
+  ],
+  "159462": [
+    "function PurchaseWeapon(in_weaponCost: int)",
+    "Processes a weapon purchase: awards score, tracks spending, plays purchase sound."
+  ],
+  "159537": [
+    "Run the ammunation shop menu: browse weapons, display prices, and purchase weapons for the player.",
+    "",
+    "Setup: positions camera, locks player control, and loads the weapon list.",
+    "Loop: polls input for weapon navigation and purchase, displays price and availability info.",
+    "Cleanup: restores camera and player control, updates player status flags."
+  ],
+  "161048": [
+    "Ammu-Nation shop monitor script.",
+    "Polls the current Ammu-Nation location, creates the entry marker when the player is nearby, and loads the shop-specific weapon display and camera data when the player steps into the marker.",
+    "Runs the weapon purchase flow, keeps weapon timers updated, and suppresses entry while the player is dead or in a kill frenzy."
+  ],
+  "165525": ["Starts the metal detector monitor script (@METALDE)."],
+  "165535": [
+    "function CreateGangMember(in_x: float, in_y: float, in_z: float): int",
+    "Creates a gang member ped at the given coords with a weapon."
+  ],
+  "165580": ["Sets each garage state gang member to target and attack the player."],
+  "165677": [
+    "function CalculateOrbitPosition(in_orbitIndex: int)",
+    "Calculates the orbit position for a red balloon based on its orbit index and animation state."
+  ],
+  "166060": ["Iterates through the gang array and creates pickups at orbit positions."],
+  "166309": ["Removes all 10 gang pickup entries from g.4141."],
+  "166345": ["Removes all gang peds and clears player weapons while saving their loadout."],
+  "166380": ["Marks gang model as no longer needed, cleans up garage state chars, and resets balloon data."],
+  "166469": ["Removes the gang model and pickups from the game world."],
+  "166497": ["function SetGangState(in_gangState: int)", "Sets the red balloon gang state flag."],
+  "166504": [
+    "Metal detector and confiscated-weapon pickup monitor script.",
+    "Cycles through configured detector zones, creates the related pickup array, and manages special gang peds around the golf course detector area.",
+    "Removes spawned peds/pickups when the player leaves the active area and toggles emergency services while the golf course detector logic is active."
+  ],
+  "167561": ["Debug button combo counter that increments and wraps at 11."],
+  "167588": ["Decrements g.4167 and wraps to 10 if it hits 0."],
+  "167614": [
+    "function DisplayTextOnScreen(in_text: string, in_x: float, in_y: float, in_colorType: int, in_background: int)",
+    "Displays text on screen with configurable color and background."
+  ],
+  "170613": ["Launches the DEBMENU subsystem script."],
+  "170623": [
+    "function CheckDebugButtonCombo(): bool",
+    "Checks if a debug button combo (L+R+Select) is pressed and held, returns TRUE if so."
+  ],
+  "170694": ["function CheckButtonCombo(): bool", "Checks if a specific button combo (buttons 4 and 8) is pressed."],
+  "170719": [
+    "function DisplayFormattedText(in_text: string, in_x: float, in_y: float, in_colorType: int, in_background: int)",
+    "Displays formatted text on screen with configurable color and background."
+  ],
+  "170799": ["function WaitForButtonRelease(in_button: int)", "Waits until the given button is released."],
+  "170822": [
+    "Debug menu monitor script.",
+    "Displays the debug menu HUD after the debug button combo, handles menu navigation and selection, and launches debug tools such as level skip, weather/time, mocap, player cheats, character viewer, and empire status.",
+    "Also handles developer shortcuts for writing player coordinates, launching the JetSki mission, completing story chains, and unlocking the endgame viewer."
+  ],
+  "172186": ["Draws the debug menu entries and highlights the currently selected item."],
+  "172415": ["Empty debug menu hook (no-op)."],
+  "172417": ["Updates debug menu selection from d-pad or analogue stick input with a short repeat delay."],
+  "172560": ["Handles debug menu shortcut inputs for the armor/money cheat and weapon cheat menu."],
+  "172664": ["Grants the player armor, health, and debug cash."],
+  "172920": ["Starts the save-game initialization script (@INITSAV)."],
+  "172930": [
+    "Save-game initialization script.",
+    "Rebuilds empire/safehouse state after loading, restores player position, heading, weapons, armor, odd-job rewards, free resprays, and camera state, then returns control to the player.",
+    "Clears mission state and marks the script system ready once initialization has completed."
+  ],
+  "173556": [
+    "function IsR3MissionActivated(): int",
+    "Checks if the R3 mission button is held down. Waits while the player is alive and returns the pad state."
+  ],
+  "173629": [
+    "function CanStartR3MissionWithEitherOfTheseVehicleModels(in_modelId: int, in_modelId2: int): bool",
+    "Checks if the player is in a car with a driver matching either of the two given model IDs."
+  ],
+  "173783": [
+    "function IsPlayerDrivingAPoliceVehicle(): bool",
+    "Checks if the player is driving any police vehicle model."
+  ],
+  "173874": [
+    "function CanStartVigilanteMission(): bool",
+    "Checks if the player can start a vigilante mission by verifying they're alive, have control, are in a car, and driving a police vehicle."
+  ],
+  "173974": [
+    "function CanStartMission(in_targetX: float, in_targetY: float, in_targetZ: float, in_3d: int): bool",
+    "Checks if the player can start a mission at the given coordinates, returning true if they're alive, not on a mission, and within range."
+  ],
+  "174082": [
+    "function IsPlayerAtCoorsWhileDrivingEitherOfTheseVehicleModels(in_modelId1: int, in_modelId2: int, in_targetX: int, in_targetY: int, in_targetZ: int): bool",
+    "Checks if the player is at the given coordinates while driving one of two specified vehicle models."
+  ],
+  "174339": [
+    "function OddJobPrelaunch(in_textIndex: int)",
+    "Runs mission preliminary setup, prints a big message, then fades out."
+  ],
+  "174375": [
+    "function WaitMissionCompleteWithCooldown(in_cooldown: int)",
+    "Waits for the mission to complete with an optional cooldown delay."
+  ],
+  "174425": [
+    "function ToggleR3MissionHelp(in_helpTextId: int, in_r3Pressed: bool)",
+    "Toggles the R3 mission help display based on button state."
+  ],
+  "174593": ["Initializes shared odd-job help state and starts all ambient odd-job launch monitors."],
+  "174787": "Paramedic mission launch monitor",
+  "174976": "Vigilante mission launch monitor",
+  "175160": "Fire fighter mission launch monitor",
+  "175348": "Air rescue mission launch monitor",
+  "175537": "Driving range mission launch monitor",
+  "175710": "Taxi driver mission launch monitor",
+  "175900": "Empire mission launch monitor",
+  "176545": "Watersports mission launch monitor",
+  "176705": "Crane mission launch monitor",
+  "176910": "Quad bike time trial mission launch monitor",
+  "177201": "BMX mall mission launch monitor",
+  "177373": "Beach patrol mission launch monitor",
+  "177556": "Heli mission launch monitor",
+  "177707": "Fire copter mission launch monitor",
+  "177877": "Turismo race mission launch monitor (Havana)",
+  "178035": "Turismo race mission launch monitor (Vice Point)",
+  "178193": "Skywolf mission launch monitor",
+  "178344": "Crims on wings mission launch monitor",
+  "178495": "Land sea air race mission launch monitor",
+  "178622": "PCJ playground mission launch monitor",
+  "178855": "Hover race mission launch monitor",
+  "179063": [
+    "Red balloon collection monitor script.",
+    "Initializes all 99 balloon coordinates, streams nearby balloon objects into a small handle pool, and removes streamed objects when the player leaves range.",
+    "When a balloon object is destroyed, records the burst, awards score, updates the HUD counter, and grants progress rewards every 10 balloons."
+  ],
+  "182273": [
+    "Handles a balloon burst: updates counters, awards score, shows collection text, and sets milestone reward flags."
+  ],
+  "182674": ["Checks whether the current balloon should be streamed in for the player."],
+  "182770": ["Finds a free streamed-balloon handle slot and creates the current balloon object."],
+  "182824": ["Creates the current red balloon object and records its source balloon index."],
+  "182869": ["Deletes a streamed red balloon object and marks its source balloon as no longer loaded."],
+  "187347": [
+    "function InitializeMissionChapter(in_chapter_idx: int)",
+    "Initializes mission chain progress and unlock data for the given chapter, then sets up mission unlocks.",
+    "Resets MISSION_CHAIN_PROGRESS, MISSION_CHAIN_COMPLETED_FLAG, MISSION_CHAIN_SIZE, and MISSION_CHAIN_MONITOR_ACTIVE_FLAG arrays.",
+    "Sets MISSION_CHAIN_SIZE values for the chapter and calls @SetMissionUnlock for each mission in the chain."
+  ],
+  "188622": [
+    "function LaunchNextMissionInChain(in_chainIdx: int)",
+    "Launch the next mission in the specified chain by setting up the chain data and loading the mission.",
+    "",
+    "Sets the current mission chain and progress, then switches on chapter and chain to prepare and launch.",
+    "Calls PrepareStoryMissionLaunch with the appropriate chapter and mission string, then loads the mission."
+  ],
+  "191412": ["Starts the empire AI monitor via the empire AI launcher."],
+  "191426": ["Checks empire availability and launches the EAI combo mission with the appropriate empire state."],
+  "191551": ["Checks mission chapter completion flags and initializes the next chapter when all missions are done."],
+  "191910": [
+    "function ShowMissionPassed(in_missionName: string, in_score: int)",
+    "Displays mission passed text, adds score, registers mission complete, plays tune, clears wanted level, and increments mission chain progress."
+  ],
+  "192030": [
+    "Story script controller.",
+    "Waits for startup initialization, clears save-start state, refreshes empire/racing blips and ped info between missions, checks mission-chain completion, launches empire AI combat, and keeps outfit/save state current."
+  ],
+  "192400": ["Initializes story script mission-chain state for the current chapter."],
+  "192414": ["Starts a mission-chain monitor for the chain id stored in the shared launch argument."],
+  "192426": [
+    "function NameScriptByMissionChain(in_chainIdx: int)",
+    "Sets the script name based on the mission chain index, mapping to gang name strings (STR_JER, STR_PHI, etc.)."
+  ],
+  "192780": [
+    "Mission-chain contact monitor script.",
+    "Names itself for the chain, creates the contact blip and trigger sphere, launches the next mission when the player reaches the contact, and exits if another mission starts first."
+  ],
+  "193327": ["Starts an empire AI monitor for the empire id stored in the shared launch argument."],
+  "193339": ["function SetAiScriptName(in_aiType: int)", "Sets the AI script name based on the AI type."],
+  "193424": [
+    "function GetEmpirePedId(in_pedType: int, in_empireIdx: int): int",
+    "Gets the empire ped ID based on the ped type."
+  ],
+  "193502": [
+    "function CheckEmpireConditions(): int",
+    "Checks empire conditions across all sites and returns the first ped ID that can be upgraded."
+  ],
+  "193601": [
+    "function GetEmpirePedModelData(in_empireType: int): int, int",
+    "Returns model ID and count for empire ped data based on type, with additional state, spawn time, and reward values."
+  ],
+  "193759": [
+    "function FindClosestGangMember(in_excludeGang: int): int",
+    "Finds the closest empire site owned by a gang member, excluding a specified gang."
+  ],
+  "194079": [
+    "function IsEmpireMissionActive(in_missionIdx: int): bool",
+    "Checks if the empire mission at the given index has build progress (>= 0)."
+  ],
+  "194097": ["function GetEmpirePedType(in_empireIdx: int): int", "Gets the ped type for the given empire index."],
+  "194183": [
+    "Empire AI monitor script.",
+    "Loads AI parameters for one empire type, waits for the empire system to become active, then periodically advances build progress, triggers upgrades, and starts combat encounters while free-roam is active."
+  ],
+  "194448": ["Updates empire AI progress flags and build timers from owned-site counts and current empire conditions."],
+  "194682": ["Checks whether the AI should trigger an upgrade or combat event based on accumulated empire progress."],
+  "194838": ["Occasionally upgrades a random owned empire site while the player is away from it."],
+  "195069": ["Selects a new empire site for an attack and waits while the combat encounter runs."],
+  "195470": [
+    "Starts a lower-priority combat encounter at a rival site or nearby gang-owned site, then applies building damage after combat."
+  ],
+  "195785": ["Starts an empire combat encounter when a matching empire mission is already active."],
+  "195878": ["Resets the empire AI combat elapsed timer."],
+  "195890": ["Updates elapsed time since the last empire AI timer reset."],
+  "195903": ["Empire AI idle hook (no-op)."],
+  "196602": ["Starts the empire AI combat script (@EAICOMB)."],
+  "196612": [
+    "function SetPedObject(in_ped: int, in_pedIdx: int, in_state: int)",
+    "Sets the object behavior for a ped based on the given state: no object, wait in car, or follow path tracking."
+  ],
+  "196832": [
+    "function UpdatePedFollowState(in_ped: ped, in_pedIdx: int)",
+    "Updates a character's follow state based on PED_OBJECT_STATE, handling car following, tracking, and spotting."
+  ],
+  "197343": [
+    "function EmptyCar(in_car: car)",
+    "Clears all passengers from a car by ejecting the driver and removing passengers from each seat, then marks the car as no longer needed."
+  ],
+  "197453": [
+    "function GetEmpireScaleValue(in_empireIdx: int): int",
+    "Gets the empire scale value for the given empire index."
+  ],
+  "197514": [
+    "function GenerateRandomEmpireScale(in_buildingType: int, in_randomize: int): int",
+    "Generates a random empire scale value based on building type, with optional randomization."
+  ],
+  "197665": [
+    "function CheckReturnToSiteTimer(in_distance: float): bool",
+    "Checks if the return-to-site timer has elapsed based on the given distance. Returns true when time expires, false otherwise."
+  ],
+  "197818": [
+    "function CalculatePercentage(in_current: int, in_max: int, in_total: int): int",
+    "Calculates a percentage value."
+  ],
+  "197863": [
+    "Empire AI combat script.",
+    "Loads attacker/defender models, spawns enemy cars and peds for the selected combat trigger, runs outdoor/interior/defense combat phases, and cleans up all spawned entities afterward.",
+    "Handles business defense repair progress, victory/defeat reporting, building damage, wanted-level suppression, emergency service toggles, and ped follow-state updates."
+  ],
+  "198416": "Load combat models and determine ped/car types based on combat trigger",
+  "198887": "Load additional car models for combat",
+  "198961": "Initialize combat - spawn vehicles and set up combat state",
+  "199446": "Calculate spawn timer based on distance to empire site",
+  "199551": "Main combat loop - check combat phase and update entities",
+  "199655": "Combat phase 0 (outdoor): check vehicle status and player proximity",
+  "199910": "Combat phase 1 (interior): check if player reached empire site",
+  "200059": "Combat phase 2 (interior defense): manage repair progress and enemy spawning",
+  "200905": "Check all spawned peds and update their follow states",
+  "201270": "Remove a single ped from combat",
+  "201345": "Spawn a single combat ped with weapon",
+  "201600": "Give weapon and configure combat ped settings",
+  "201691": "Spawn a replacement combat car near empire site",
+  "201914": "Reset combat timers",
+  "201923": "Generate and spawn empire scale peds",
+  "202220": "Count alive peds by ped type",
+  "202309": "Cleanup all combat models and entities",
+  "202454": "Flee and cleanup empire scale peds",
+  "205360": [
+    "Face plant detection monitor.",
+    "Tracks when the player is thrown from a bike, measures the distance from the vehicle to the recovered player position, and reports face-plant distance stats when the fall is valid."
+  ],
+  "209369": [
+    "Rampage pickup monitor script.",
+    "Initializes all rampage pickup locations, creates either active or completed pickup icons, launches the selected kill frenzy when collected, and tracks completed rampage count."
+  ],
+  "209391": "Create rampage pickup",
+  "209435": "Initialize rampage data",
+  "135087": [
+    "Updates game progress state based on the current chapter, unlocks content, manages empire ownership, garage states, and safehouse interiors.",
+    "Checks mission chain progress to gate unlocks for golf, shooting range, races, jetski trials, and minigun.",
+    "Handles outfit unlocking/locking per chapter and toggles car generators for empire sites."
+  ],
+  "140960": [
+    "function GetMissionLabelData(in_missionId: int): int, string, float, float, float, string, float, int, int",
+    "Returns mission data (model ID, label, coordinates, gang ID) for a given mission ID via a large switch table."
+  ],
+  "182892": [
+    "function PrepareStoryMissionLaunch(in_missionId: int)",
+    "Prepares a story mission launch: sets player position/heading, configures camera, creates empire car, and sets shortcut dropoff point."
+  ],
+  "202523": [
+    "Monitors player vehicle for wheelie/stoppie stats, displays bonus info, then tracks airborne stunts (flips, spins, height, distance) and awards stunt ratings on landing."
+  ],
+  "205857": [
+    "Unique stunt jump monitor.",
+    "",
+    "Monitors player vehicle speed and zone to detect stunt jump zones, initiates timed challenges with checkpoints, and awards rewards for completion."
+  ],
+  "204736": [
+    "Detect car flip transitions",
+    "Toggles upright flag and increments flip count when car transitions between upright and flipped states."
+  ],
+  "204790": [
+    "Calculate heading delta for spin tracking",
+    "Computes the absolute heading difference between frames, accumulates it into spin_total, and updates spin_count."
+  ],
+  "204892": [
+    "Award stunt bonus score and display message",
+    "Adds score, prints the appropriate stunt bonus message based on rating tier and conditions, and registers the stunt tier."
+  ],
+  "209326": [
+    "Handle checkpoint or failure transition",
+    "If the jump is completed, sets checkpoint timer and resets end timer. If failed, marks the challenge as done."
+  ],
+  "213710": [
+    "Car park population script.",
+    "Creates or clears ambient parked cars on multi-level car park floors based on the active floor/area."
+  ],
+  "213732": ["Validate park level index", "Update car park floor state and behavior."],
+  "216068": "Initialize car park data",
+  "217072": [
+    "Downtown warp point monitor script.",
+    "Cycles through paired warp points, creates markers while the player is in the Downtown zone, and teleports the player between rooftop/street locations when they enter a marker on foot or bike."
+  ],
+  "217758": [
+    "Ambient taxi behavior controller.",
+    "Runs a state machine that finds a nearby taxi, recruits a pedestrian passenger, and resets the setup when mission/player conditions invalidate it."
+  ],
+  "217780": ["Build search-box minimum bounds from a center point and half-extents."],
+  "217806": ["Build search-box maximum bounds from a center point and half-extents."],
+  "217832": ["Release taxi, driver, and passenger handles, then reset them to -1."],
+  "217981": [
+    "Validate that the tracked taxi setup is still usable.",
+    "Rejects dead/invalid taxi-driver state, player-occupied taxis, and invalid passenger state for active ride phases."
+  ],
+  "218204": [
+    "Return true when ambient taxi behavior must cancel.",
+    "Cancels for player death, active mission/script locks, or failed taxi validation."
+  ],
+  "218280": [
+    "Main ambient taxi state machine loop.",
+    "Cycles through search, passenger pickup, ride, and timeout/drop-off phases until cancellation resets the state."
+  ],
+  "219314": ["Starts the debug car spawning script (@DBGCARS)."],
+  "219327": ["function IsTopFunVehicle(in_modelId: int): bool", "Checks if the given model ID corresponds to TopFun."],
+  "219344": [
+    "function IsValidEmpireOptionId(in_optionId: int): bool",
+    "Checks if the given empire option ID is valid by comparing against a set of known valid IDs."
+  ],
+  "219475": [
+    "Debug car spawning script.",
+    "Lets developers browse vehicle model IDs, load the selected model, spawn it near the player, and toggle traffic/ped density while the debug car-spawn control is held."
+  ],
+  "220720": ["Starts the debug marker/camera tool script (@MARKCAM)."],
+  "220730": ["function WaitUntilButtonReleased(in_button: int): bool", "Waits until the specified button is released."],
+  "220766": [
+    "function SetTextProperties(in_background: int)",
+    "Sets text properties including scale, wrap, and background."
+  ],
+  "220802": [
+    "Debug marker/camera manipulation script.",
+    "Runs while the debug menu is open, selects nearby peds/cars/objects at the debug camera point, and lets the developer move, rotate, delete, or inspect them with HUD overlays."
+  ],
+  "221081": "Handle debug menu button inputs and drag rotation",
+  "222275": "Find and highlight target char/car/object near debug camera",
+  "222642": "Display HUD text for current filter mode",
+  "222962": "Display XYZ coordinates and rotation at target position",
+  "223192": ["Starts the debug level skip menu script (@LEVSKIP)."],
+  "223202": [
+    "function DisplayColoredText(in_text: string, in_x: float, in_y: float, in_number: int, in_r: int, in_g: int, in_b: int, in_a: int)",
+    "Displays colored text with an optional number."
+  ],
+  "223256": ["Displays debug info on screen showing the current stage, character, and level for the empire mission."],
+  "224007": [
+    "function WaitUntilButtonReleasedWithRefresh(in_button: int): bool",
+    "Waits until the specified button is released, refreshing display while waiting."
+  ],
+  "224053": [
+    "function CycleMissionChainIndex(in_chainIdx: int, in_missionIdx: int)",
+    "Cycles the mission chain index: advances to next unlocked mission or increments progress and sets unlock."
+  ],
+  "224184": [
+    "Debug level skip menu script.",
+    "Displays a mission-chain/mission selector, lets developers change chapter and mission with controls, applies prerequisite mission-chain state, and teleports the player to the selected mission start."
+  ],
+  "224345": ["Main debug menu loop with mission chain/index navigation", "Main loop for the debug level skip menu."],
+  "224648": ["Handle mission index navigation via analog stick", "Handle mission index navigation via analog stick."],
+  "224836": [
+    "Handle mission chain index navigation via analog stick",
+    "Handle mission chain index navigation via analog stick."
+  ],
+  "225261": ["Handle chapter selection via buttons", "Handle chapter selection via button input."],
+  "225395": [
+    "Find first unlocked mission chain after chapter change",
+    "Find first unlocked mission chain after chapter change."
+  ],
+  "225513": ["Teleport player to mission start location", "Teleport player to mission start location."],
+  "225589": ["Initialize chapter and cycle mission chain/index", "Initialize chapter and cycle mission chain/index."],
+  "225624": [
+    "Apply mission chain progress flags based on chapter and mission",
+    "Apply mission chain progress flags based on chapter and mission."
+  ],
+  "226954": ["Exit level skip menu and restore game state", "Exit level skip menu and restore game state."],
+  "226998": ["Starts the debug weather/time changer script (@WETIMCH)."],
+  "227008": [
+    "Debug weather/time changer script.",
+    "Disables player control, displays weather/time controls, adjusts hour and weather from analogue input, supports freezing time, and restores control on exit."
+  ],
+  "227147": [
+    "Handle time and weather changes via analog stick",
+    "function HandleWeatherTimeChange(in_direction: int)",
+    "Adjust weather or time based on analog stick direction input."
+  ],
+  "227314": ["Handle hour adjustment via analog X", "Render the weather/time selection HUD with current values."],
+  "227396": ["Apply new time of day", "Process analog stick input to navigate weather/time options."],
+  "227424": ["Handle weather adjustment via analog Y", "Apply the selected weather or time change to the game world."],
+  "227506": ["Apply new weather type", "Reset menu state and restore game weather/time to defaults."],
+  "227863": ["Check for exit button press", "Clean up weather/time change menu and return control to player."],
+  "227904": ["Debug mocap assets launcher."],
+  "227924": [
+    "function DisplayStatusText(in_text: string, in_x: float, in_y: float, in_status: int)",
+    "Displays text with a color based on the status value."
+  ],
+  "227994": [
+    "function GetMissionLabelIndex(in_step: int): int",
+    "Searches through mission label data using a stride offset to find the target index."
+  ],
+  "228095": [
+    "Debug mocap display script.",
+    "Shows mission/interior/animation availability for cutscene labels, lets developers browse entries, and can play the selected mission cutscene before restoring the HUD."
+  ],
+  "228217": "Display mocap status HUD overlay",
+  "228475": "Handle navigation inputs and mission cutscene playback",
+  "228776": "Exit debug mocap display and restore game",
+  "228813": ["Launches the DEBUG_CAMERA subsystem script."],
+  "228823": [
+    "Debug camera entity placement script.",
+    "Freezes the player at the debug camera, lets developers cycle object models and slots, moves the selected object to the camera target position, and keeps created objects when exiting."
+  ],
+  "229268": [
+    "Handle entity navigation and heading adjustment inputs",
+    "Update debug camera position relative to selected entity."
+  ],
+  "229747": [
+    "Load entity at index and position player at it",
+    "Clean up debug camera entity navigation and restore camera."
+  ],
+  "229836": ["Starts the debug player cheats menu script (@DBGPCHE)."],
+  "229846": [
+    "Debug player cheats menu script.",
+    "Displays cheat options for weapons, invincibility, wanted level, cash, armour, saving, outfits, and outfit cycling, then applies the selected cheat to the player."
+  ],
+  "230008": ["Inner loop: wait for button release and display menu", "Render the player cheats selection HUD."],
+  "230078": [
+    "Handle menu navigation and cheat activation",
+    "Process button and stick input for cheats menu navigation."
+  ],
+  "230251": [
+    "Execute selected cheat action",
+    "function ApplyPlayerCheat(in_cheatIdx: int)",
+    "Apply the selected cheat option to the player character."
+  ],
+  "230660": ["Draw menu items on HUD", "Clean up and exit the player cheats menu."],
+  "230910": ["Starts the debug character/vehicle viewer script (@DBGCHVI)."],
+  "230920": [
+    "function StoreModelName(in_modelIdx: int): string",
+    "Stores the model name string into g.5009 at the given index, then increments the model count."
+  ],
+  "230940": [
+    "function SpawnCharacterOrVehicle(in_modelIdx: int, in_spawnType: int)",
+    "Removes previous spawn and creates a new character or vehicle at the debug viewer camera position."
+  ],
+  "231140": [
+    "Load the character viewer model database by storing model name strings, then spawn the first model.",
+    "",
+    "Stores model names for player models, gang members, civilians, and named characters.",
+    "Spawns the selected character and sets up the viewer state."
+  ],
+  "233879": [
+    "function SetCharWeapon(in_weaponType: int)",
+    "Equips or removes a weapon for the debug viewer spawned character based on weapon type."
+  ],
+  "233975": [
+    "Debug character viewer script.",
+    "Hides the player, initializes the model list, spawns the selected character/vehicle, and lets developers browse models, animations, weapons, colors, and camera angles before restoring the player."
+  ],
+  "234289": [
+    "Handle model navigation, camera rotation, and animation inputs",
+    "Update the debug character viewer position and camera."
+  ],
+  "235219": [
+    "Update fixed camera position based on spherical coordinates",
+    "Render the character viewer information on HUD."
+  ],
+  "235284": ["Display character viewer HUD overlay", "Process input for character viewer navigation."],
+  "235534": ["Set extra colour light direction", "Clean up and exit the character viewer."],
+  "235559": ["Starts the debug empire building menu script (@DBGDEB)."],
+  "235569": [
+    "function DisplayDebugText(in_x: float, in_y: float, in_scaleX: float, in_scaleY: float, in_textOrNumber: int, in_showNumber: int, in_number: int, in_colorR: float, in_colorG: float, in_colorB: float, in_alpha: int)",
+    "Displays debug text on screen with optional number rendering and color/alpha control."
+  ],
+  "235657": [
+    "Displays a debug menu overlay showing empire site details: ID, type, location, owner, scale, and status.",
+    "Loops through 13 empire sites, computes display colors based on state (normal, damaged, under attack, for sale).",
+    "Shows control hints for purchasing, damaging, selling, cycling size, warping, and hiding the menu."
+  ],
+  "237305": ["Toggles the empire unlock cheat by monitoring button presses and updating debug state flags."],
+  "237398": [
+    "Debug empire building menu script.",
+    "Displays empire site data, lets developers cycle site ownership/type/scale/state, warp to selected sites, damage or repair buildings, and toggle empire unlock cheats."
+  ],
+  "237569": [
+    "Handle empire debug menu inputs - upgrade, damage, and position manipulation",
+    "Render the empire building selection HUD."
+  ],
+  "238765": ["Check for exit button press", "Process input for empire building menu navigation."],
+  "238806": [
+    "Creates all police bribe pickups, body armor pickups, health pickups, and weapon pickups across the map.",
+    "Sets up pickup handles in POLICE_BRIBE_PICKUP_HANDLE, PICKUP_HANDLE arrays, and global pickup variables.",
+    "Includes weapon pickups with ammo counts for all available weapons."
+  ],
+  "254146": [
+    "Initializes all garage data structures: sets garage positions, max cars, rotating doors, and respay data. Skipped if loading from save."
+  ],
+  "254649": ["Creates and configures all mission gate and door objects for the game."],
+  "255051": [
+    "Initializes the player: loads outfits, sets player position, adds police/hospital restarts, and shortcut pickup points."
+  ],
+  "255294": [
+    "Initializes general mission settings: sets mission count, progress total, wanted level, and enables player control."
+  ],
+  "255373": ["Builds world geometry if not already built, then terminates the script."],
+  "255397": [
+    "Mission Title: Soldier",
+    "Given By: Jerry Martinez",
+    "Objective: Collect a drug delivery for Sgt. Martinez.",
+    "Reward: $50; Pistol"
+  ],
+  "278879": ["Initializes player position and camera in dev mode."],
+  "292872": [
+    "Mission Title: In the Air Tonight",
+    "Given By: Reni Wassulmaier",
+    "Objective: Protect Phil Collins from saboteurs during his concert in Hyman Memorial Stadium.",
+    "Reward: $3,000; Can be purchase a ticket for Phil Collins' concert by paying $6,000 at the stadium at any time."
+  ],
+  "743141": [
+    "Mission Title: Cleaning House",
+    "Given By: Jerry Martinez",
+    "Objective: Clear Phil Cassidy's house of the Cholos to get the money he owes to Martinez.",
+    "Reward: $100"
+  ],
+  "756834": [
+    "Mission Title: Conduct Unbecoming",
+    "Given By: Jerry Martinez",
+    "Objective: Pick up a prostitute for Martinez.",
+    "Reward: 101 Bayshore Avenue; Casual Outfit"
+  ],
+  "777293": [
+    "Mission Title: Cholo Victory",
+    "Given By: Phil Cassidy",
+    "Objective: Perform a drive-by on some Cholos.",
+    "Reward: $200"
+  ],
+  "790035": [
+    "Mission Title: Boomshine Blowout",
+    "Given By: Phil Cassidy",
+    "Objective: Get Phil's boomshine out of his warehouse before it goes up in flames.",
+    "Reward: $250"
+  ],
+  "805961": ["Mission Title: Truck Stop", "Given By: Phil Cassidy", "Objective: Hijack an arms truck.", "Reward: $300"],
+  "821742": [
+    "Mission Title: Marked Men",
+    "Given By: Phil Cassidy",
+    "Objective: Escape an ambush set by Jerry Martinez.",
+    "Reward: N/A"
+  ],
+  "841584": [
+    "Mission Title: Shakedown",
+    "Given By: Marty Jay Williams",
+    "Objective: Help Marty take care of his protection racket.",
+    "Reward: $500"
+  ],
+  "860708": [
+    "Mission Title: Fear the Repo",
+    "Given By: Marty Jay Williams",
+    "Objective: Repossess three cars for Marty.",
+    "Reward: $500"
+  ],
+  "873872": [
+    "Mission Title: Waking Up the Neighbors",
+    "Given By: Marty Jay Williams",
+    "Objective: Blow up three Cholo vans with grenades.",
+    "Reward: $500"
+  ],
+  "889718": [
+    "Mission Title: O, Brothel, Where Art Thou?",
+    "Given By: Marty Jay Williams",
+    "Objective: Take over a Cholo brothel for Marty.",
+    "Reward: $700; Stonewall J's store"
+  ],
+  "900963": [
+    "Mission Title: Got Protection?",
+    "Given By: Marty Jay Williams",
+    "Objective: Rescue Marty's prostitutes from the Cholos.",
+    "Reward: $500"
+  ],
+  "916028": [
+    "Mission Title: When Funday Comes",
+    "Given By: Louise Cassidy-Williams",
+    "Objective: Participate in a quad bike race with Louise.",
+    "Reward: $500"
+  ],
+  "936695": [
+    "Mission Title: Takin' Out the White-Trash",
+    "Given By: Louise Cassidy-Williams",
+    "Objective: Retrieve Louise's belongings from Marty's trailer.",
+    "Reward: $200"
+  ],
+  "948265": [
+    "Mission Title: D.I.V.O.R.C.E.",
+    "Given By: Louise Cassidy-Williams",
+    "Objective: Rescue Louise from Marty and kill him.",
+    "Reward: The Compound; Trailer Trash"
+  ],
+  "967012": [
+    "Mission Title: To Victor, the Spoils",
+    "Given By: Louise Cassidy-Williams",
+    "Objective: Take over Marty's businesses.",
+    "Reward: $1,500; Gang recruitment; Ability to have a 5-star wanted level"
+  ],
+  "987266": [
+    "Mission Title: Hose the Hoes",
+    "Given By: Louise Cassidy-Williams",
+    "Objective: Extinguish the fire at Vic's brothel.",
+    "Reward: $300"
+  ],
+  "998176": [
+    "Mission Title: Robbing the Cradle",
+    "Given By: Louise Cassidy-Williams",
+    "Objective: Convince the Welfare Agent to drop Louise's case.",
+    "Reward: $300"
+  ],
+  "1006764": [
+    "Mission Title: Jive Drive",
+    "Given By: Victor Vance",
+    "Objective: Defend Lance's car from the attacking Cholos.",
+    "Reward: N/A"
+  ],
+  "1025163": [
+    "Mission Title: The Audition",
+    "Given By: Lance Vance",
+    "Objective: Retrieve the impounded car of Lance's new business associate.",
+    "Reward: $750"
+  ],
+  "1055244": [
+    "Mission Title: Caught as an Act",
+    "Given By: Lance Vance",
+    "Objective: Confront and chase down Bryan Forbes.",
+    "Reward: $750"
+  ],
+  "1063388": [
+    "Mission Title: Snitch Hitch",
+    "Given By: Lance Vance",
+    "Objective: Acquire the files detailing a big drug shipment.",
+    "Reward: $1,000"
+  ],
+  "1079979": [
+    "Mission Title: From Zero to Hero",
+    "Given By: Lance Vance",
+    "Objective: Steal Jerry Martinez's cocaine shipment.",
+    "Reward: $3,000; Infernus; Access to Vice City Beach, Prawn Island, and Leaf Links; Ability to have a 6-star wanted level"
+  ],
+  "1110624": [
+    "Mission Title: Nice Package",
+    "Given By: Umberto Robina",
+    "Objective: Acquire a package for Umberto.",
+    "Reward: $750"
+  ],
+  "1119564": [
+    "Mission Title: Balls",
+    "Given By: Umberto Robina",
+    "Objective: Take care of the Cholo troublemakers around Little Havana with Umberto's men.",
+    "Reward: $800"
+  ],
+  "1136870": [
+    "Mission Title: Papi Don't Screech",
+    "Given By: Umberto Robina",
+    "Objective: Pick up Umberto's father from the Stadium and protect him from the Cholos.",
+    "Reward: $1,000"
+  ],
+  "1147434": [
+    "Mission Title: Havana Good Time",
+    "Given By: Umberto Robina",
+    "Objective: Rob a Cholo warehouse and wipe them out once and for all.",
+    "Reward: $1,500; Cuban Style"
+  ],
+  "1182577": [
+    "Mission Title: Money for Nothing",
+    "Given By: Bryan Forbes",
+    "Objective: Distract the cops during Lance and Forbes' drug run.",
+    "Reward: $1,500"
+  ],
+  "1199326": [
+    "Mission Title: Leap and Bound",
+    "Given By: Bryan Forbes",
+    "Objective: Rescue Lance from kidnapping drug dealers.",
+    "Reward: $1,500"
+  ],
+  "1229010": [
+    "Mission Title: The Bum Deal",
+    "Given By: Bryan Forbes",
+    "Objective: Survive Forbes' second betrayal and kill him.",
+    "Reward: N/A"
+  ],
+  "1243085": [
+    "Mission Title: The Mugshot Longshot",
+    "Given By: Mendez Brothers",
+    "Objective: Take photos of Jerry Martinez to \"prove\" he's an undercover DEA agent.",
+    "Reward: N/A"
+  ],
+  "1257271": [
+    "Mission Title: Hostile Takeover",
+    "Given By: Mendez Brothers",
+    "Objective: Kill a gang of bikers.",
+    "Reward: $1,000"
+  ],
+  "1266487": [
+    "Mission Title: Unfriendly Competition",
+    "Given By: Mendez Brothers",
+    "Objective: Kill two competing drug runners.",
+    "Reward: $1,300"
+  ],
+  "1289886": [
+    "Mission Title: High Wire",
+    "Given By: Mendez Brothers",
+    "Objective: Use a chopper with a magnet to steal back the drugs confiscated by the police.",
+    "Reward: $1,500"
+  ],
+  "1304492": [
+    "Mission Title: Burning Bridges",
+    "Given By: Mendez Brothers",
+    "Objective: Survive Mendez Brothers' betrayal.",
+    "Reward: N/A"
+  ],
+  "1333364": [
+    "Mission Title: Accidents Will Happen",
+    "Given By: Reni Wassulmaier",
+    "Objective: Drive a stunt car for Reni's commercial.",
+    "Reward: $850"
+  ],
+  "1354383": [
+    "Mission Title: The Colonel's Coke",
+    "Given By: Reni Wassulmaier",
+    "Objective: Escort Gonzalez and his drug shipment to Viceport.",
+    "Reward: $850"
+  ],
+  "1381152": [
+    "Mission Title: Kill Phil",
+    "Given By: Reni Wassulmaier",
+    "Objective: Rescue Phil Collins from Forelli Crime Family hitmen.",
+    "Reward: $1,000"
+  ],
+  "1400536": [
+    "Mission Title: Say Cheese",
+    "Given By: Reni Wassulmaier",
+    "Objective: Act as a stunt driver in Reni's commercial.",
+    "Reward: $850"
+  ],
+  "1414368": [
+    "Mission Title: Kill Phil: Part 2",
+    "Given By: Reni Wassulmaier",
+    "Objective: Clear out the Hyman Memorial Stadium from hitmen and assassins.",
+    "Reward: $1,500"
+  ],
+  "1427115": [
+    "Mission Title: So Long Schlong",
+    "Given By: Reni Wassulmaier",
+    "Objective: Defend Reni from the Mendez Brothers' hitmen.",
+    "Reward: $1,000"
+  ],
+  "1458088": [
+    "Mission Title: Brawn of the Dead",
+    "Given By: Lance Vance",
+    "Objective: Act as a stuntman in a zombie horror film.",
+    "Reward: $850; Pastel Suit"
+  ],
+  "1478953": [
+    "Mission Title: Blitzkrieg",
+    "Given By: Lance Vance",
+    "Objective: Defend Vance Brothers' businesses from the Mendez Cartel.",
+    "Reward: $500"
+  ],
+  "1500363": [
+    "Mission Title: Turn on, Tune in, Bug out",
+    "Given By: Lance Vance",
+    "Objective: Destroy three antennas used by the DEA to spy on the Vance Brothers.",
+    "Reward: $300; Rocket Launcher available in Ammu-Nation"
+  ],
+  "1508573": [
+    "Mission Title: Taking the Fall",
+    "Given By: Lance Vance",
+    "Objective: Take out the bikers who've been stealing the Vance Brothers' cocaine.",
+    "Reward: $300; Biker Angel"
+  ],
+  "1528829": [
+    "Mission Title: White Lies",
+    "Given By: Lance Vance",
+    "Objective: Gather back all the drugs Lance throws away.",
+    "Reward: $1,500; Bovver'64"
+  ],
+  "1536859": [
+    "Mission Title: Where it Hurts Most",
+    "Given By: Lance Vance",
+    "Objective: Rescue Louise from Jerry Martinez's goons.",
+    "Reward: $500"
+  ],
+  "1550117": [
+    "Mission Title: Blitzkrieg Strikes Again",
+    "Given By: Lance Vance",
+    "Objective: Defend the Vance Brothers' businesses from the Mendez Cartel.",
+    "Reward: $700"
+  ],
+  "1574201": [
+    "Mission Title: Lost and Found",
+    "Given By: Lance Vance",
+    "Objective: Pick up Louise from the hospital and save Lance from Martinez's goons.",
+    "Reward: $1,500"
+  ],
+  "1593999": [
+    "Mission Title: Light My Pyre",
+    "Given By: Lance Vance",
+    "Objective: Protect Lance from the Mendez Cartel and kill Armando Mendez.",
+    "Reward: $2,500"
+  ],
+  "1624636": [
+    "Mission Title: Home's on the Range",
+    "Given By: Gonzales",
+    "Objective: Kill a traitor in Gonzalez's organization using explosive golf balls.",
+    "Reward: $1,000"
+  ],
+  "1642188": [
+    "Mission Title: Purple Haze",
+    "Given By: Gonzales",
+    "Objective: Steal back Gonzalez's drugs after a botched deal.",
+    "Reward: $1,000"
+  ],
+  "1663624": [
+    "Mission Title: Farewell To Arms",
+    "Given By: Gonzales",
+    "Objective: Ensure Gonzalez's safe arrival to the airport.",
+    "Reward: $2,500; Minigun available in Ammu-Nation"
+  ],
+  "1696745": [
+    "Mission Title: Steal the Deal",
+    "Given By: Ricardo Diaz",
+    "Objective: Steal Gonzalez's drug boat.",
+    "Reward: $1,500"
+  ],
+  "1725063": [
+    "Mission Title: The Exchange",
+    "Given By: Ricardo Diaz",
+    "Objective: Defend Diaz's men during a meeting with the DEA.",
+    "Reward: $1,750"
+  ],
+  "1746733": [
+    "Mission Title: Domo Arigato Domestoboto",
+    "Given By: Ricardo Diaz",
+    "Objective: Destroy the contents of Armando Mendez's safe by remote controlling his robotic servant.",
+    "Reward: $2,000"
+  ],
+  "1778161": [
+    "Mission Title: Over the Top",
+    "Given By: Ricardo Diaz",
+    "Objective: Steal a military helicopter from Fort Baxter Air Base.",
+    "Reward: $3,000"
+  ],
+  "1808072": [
+    "Mission Title: Last Stand",
+    "Given By: Ricardo Diaz",
+    "Objective: Attack the Mendez Building and kill Diego Mendez and Jerry Martinez.",
+    "Reward: $5,000; Hunter; Winner Outfit"
+  ],
+  "51018": [
+    "function SetZoneInfo(in_zoneIdx: int)",
+    "Sets zone ped, car, and civilian car info for multiple zones based on the zone index. Switches between Chapter 1 zones (AIRPORT, TERMINL, DOCKS, etc.) and Chapter 2 zones (FAIR, BEACH1, BEACH2, etc.) to configure spawn densities and group assignments."
+  ],
+  "245876": [
+    "Creates and enables all car generators in the game world, including land vehicles, watercraft, and aircraft. Groups generators by type and enables them in batches."
+  ],
+  "331428": [
+    "Main loop for the cutscene browser debug tool. Displays mission list via HUD, handles input for browsing missions by chapter, and launches selected cutscenes."
+  ],
+  "331443": [
+    "function CutsceneBrowser_CreateHud(in_x: int, in_y: int, in_textRef: int, in_flag: int)",
+    "Creates a HUD text element with color and style based on the flag parameter."
+  ],
+  "167694": [
+    "Debug weapon cheat menu that lets the player select and receive weapons via a repetitive loop. Displays weapon categories (melee, explosives, pistols, shotguns, SMGs, rifles, heavy, sniper), loads required models, and gives the selected weapons to the player."
+  ],
+  "49158": ["Update gang follower positions and states."],
+  "49292": [
+    "function ManageGangFollower(in_followerIdx: int)",
+    "Manage individual gang follower behavior and positioning."
+  ],
+  "49433": ["Check if player is near gang follower locations."],
+  "49802": ["Clean up gang follower entities and reset state."],
+  "219637": ["Render the car spawning selection HUD."],
+  "219732": ["Process input for car spawning menu navigation."],
+  "219808": ["function SpawnDebugCar(in_modelIdx: int)", "Spawn a debug car at player position with given model."],
+  "220031": ["function UpdateCarDensity(in_toggle: int)", "Toggle vehicle density multiplier in the game world."],
+  "220488": ["Clean up and exit the car spawning menu."],
+  "220585": ["function LoadCarModel(in_modelId: int)", "Request and load a car model into memory."],
+  "220804": ["Display current car spawn menu information on HUD."],
+  "214177": ["Check if car park is occupied and manage entries."],
+  "214366": ["Spawn vehicles in the car park."],
+  "214463": ["Manage pedestrian activity in the car park."],
+  "214633": ["Update car park blip position and visibility."],
+  "214763": ["Check if player is near the car park."],
+  "214811": ["Handle player entering the car park area."],
+  "215501": ["Update car park lighting based on time of day."],
+  "215777": ["Manage parking spots and vehicle placement."],
+  "215874": ["Clean up car park floor and reset state."],
+  "706794": [
+    "Mission Title: Skywolf",
+    "Given By: The player must enter the Hunter at Escobar International Airport after completing Last Stand.",
+    "Objective: Pass through each checkpoint and beat the record time of 4:00.",
+    "Reward: $500"
+  ]
+}

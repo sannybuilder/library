@@ -165,4 +165,37 @@ export class KeyValueEditorComponent {
       );
     });
   }
+
+  onContentPaste(event: ClipboardEvent, item: KeyValueEntry) {
+    const dataTransfer = event?.clipboardData;
+    const text = dataTransfer?.getData('text');
+    if (!text || item.key || item.value) {
+      return;
+    }
+
+    let newItems: KeyValueEntry[] = [];
+    text.split('\n').forEach((line, i) => {
+      let name = line.trim();
+      let value = '';
+
+      const parts = name.split(/[=:\t]/).map((p) => p.trim());
+      if (parts.length === 2) {
+        name = parts[0].replace(/[^\w\.]/g, '');
+        value = parts[1].replace(/[^\w\.]/g, '');
+      }
+
+      if (i === 0) {
+        item.key = name;
+        item.value = value;
+      } else {
+        newItems.push({ key: name, value });
+      }
+    });
+    if (newItems.length > 0) {
+      this.entries = [...this.entries, ...newItems];
+    }
+    this.entriesChange.emit(this.entries);
+    this.updateErrors();
+    return false;
+  }
 }

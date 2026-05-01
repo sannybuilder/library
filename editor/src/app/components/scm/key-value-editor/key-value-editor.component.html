@@ -41,6 +41,7 @@
         [ngModel]="item.key"
         (ngModelChange)="updateKey(item, $event)"
         [ngClass]="{ 'is-invalid': !item.key?.trim() }"
+        (paste)="onContentPaste($event, item)"
       />
       <input
         type="text"

@@ -168,7 +168,6 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { LibraryPageComponent } from './components/library-page/library-page.component';
 import { GameTitle, KNOWN_LANGUAGES } from './models';
 import { DecisionTreeComponent } from './components/decision-tree/decision-tree.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { catchError, timeout } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MapPageComponent } from './components/map-page/map-page.component';
@@ -435,10 +434,6 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
           logOnly: false,
           autoPause: true,
         }),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      registrationStrategy: 'registerImmediately',
-    }),
   ],
   exports: [],
   providers: [

@@ -39,42 +39,9 @@
               }}</span></a
             >
             <div class="dropdown-menu">
-              <ng-container *ngFor="let v of getGameVariations(game)">
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/', v]"
-                  [attr.translate]="'no'"
-                >
-                  <scl-icon [game]="v" size="16"></scl-icon>
-                  {{ v | gameTitle }}</a
-                >
-                <ng-container *ngIf="doesGameHaveNativeDocs(v)">
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'script']"
-                    >{{ "ui.header.scriptCommands" | translate }}</a
-                  >
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'native']"
-                    >{{ "ui.header.nativeCode" | translate }}</a
-                  >
-                </ng-container>
-                <ng-container *ngIf="doesGameHaveMap(v)">
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'map']"
-                    >{{ "ui.header.map" | translate }}</a
-                  >
-                </ng-container>
-                <ng-container *ngIf="doesGameHaveScm(v)">
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'scm']"
-                    >{{ "ui.header.scm" | translate }}</a
-                  >
-                </ng-container>
-              </ng-container>
+              <ng-container
+                *ngTemplateOutlet="subItems; context: { game: game }"
+              ></ng-container>
             </div>
           </li>
         </ul>
@@ -402,45 +369,9 @@
               <p class="pl-3 mb-1" [attr.translate]="'no'">
                 {{ game | gameTitleSimple }}
               </p>
-              <ng-container *ngFor="let v of getGameVariations(game)">
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/', v]"
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  [attr.translate]="'no'"
-                >
-                  <scl-icon [game]="v" size="16"></scl-icon>
-                  {{ v | gameTitle }}</a
-                >
-
-                <ng-container *ngIf="doesGameHaveNativeDocs(v)">
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'script']"
-                    >{{ "ui.header.scriptCommands" | translate }}</a
-                  >
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'native']"
-                    >{{ "ui.header.nativeCode" | translate }}</a
-                  >
-                </ng-container>
-                <ng-container *ngIf="doesGameHaveMap(v)">
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'map']"
-                    >{{ "ui.header.map" | translate }}</a
-                  >
-                </ng-container>
-                <ng-container *ngIf="doesGameHaveScm(v)">
-                  <a
-                    class="dropdown-item marker"
-                    [routerLink]="['/', v, 'scm']"
-                    >{{ "ui.header.scm" | translate }}</a
-                  >
-                </ng-container>
-              </ng-container>
+              <ng-container
+                *ngTemplateOutlet="subItems; context: { game: game }"
+              ></ng-container>
 
               <div class="dropdown-divider"></div>
             </ng-container>
@@ -490,4 +421,37 @@
       q
     }}</a></code
   >
+</ng-template>
+
+<ng-template #subItems let-game="game">
+  <ng-container *ngFor="let v of getGameVariations(game)">
+    <a class="dropdown-item" [routerLink]="['/', v]" [attr.translate]="'no'">
+      <scl-icon [game]="v" size="16"></scl-icon>
+      {{ v | gameTitle }}</a
+    >
+    <ng-container
+      *ngIf="
+        doesGameHaveNativeDocs(v) || doesGameHaveMap(v) || doesGameHaveScm(v)
+      "
+    >
+      <a class="dropdown-item marker" [routerLink]="['/', v, 'script']">{{
+        "ui.header.scriptCommands" | translate
+      }}</a>
+    </ng-container>
+    <ng-container *ngIf="doesGameHaveNativeDocs(v)">
+      <a class="dropdown-item marker" [routerLink]="['/', v, 'native']">{{
+        "ui.header.nativeCode" | translate
+      }}</a>
+    </ng-container>
+    <ng-container *ngIf="doesGameHaveMap(v)">
+      <a class="dropdown-item marker" [routerLink]="['/', v, 'map']">{{
+        "ui.header.map" | translate
+      }}</a>
+    </ng-container>
+    <ng-container *ngIf="doesGameHaveScm(v)">
+      <a class="dropdown-item marker" [routerLink]="['/', v, 'scm']">{{
+        "ui.header.scm" | translate
+      }}</a>
+    </ng-container>
+  </ng-container>
 </ng-template>

@@ -2075,3 +2075,9 @@ export enum HudColors {
   "Blue" = 13,
   "Yellow" = 14
 };
+export enum Facing {
+  "Forward" = 0,
+  "Left" = 1,
+  "Back" = 2,
+  "Right" = 3
+};

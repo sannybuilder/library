@@ -2232,3 +2232,9 @@ export const RaceSet = {
   "HispanicOrientalWhite": 14,
   "BlackHispanicOrientalWhite": 15
 };
+export const Facing = {
+  "Forward": 0,
+  "Left": 1,
+  "Back": 2,
+  "Right": 3
+};

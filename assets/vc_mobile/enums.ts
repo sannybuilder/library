@@ -2037,3 +2037,9 @@ export enum SfxMission {
   "TEX3_7" = "TEX3_7",
   "TEX3_8" = "TEX3_8"
 };
+export enum Facing {
+  "Forward" = 0,
+  "Left" = 1,
+  "Back" = 2,
+  "Right" = 3
+};

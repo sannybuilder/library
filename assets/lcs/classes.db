@@ -177,6 +177,50 @@ SetCruiseSpeed,02E0,0,0,("self: Boat" "maxSpeed%f")
 Stop,02D9,0,0,("self: Boat")
 $END
 
+$CutsceneObject
+$BEGIN
+AddToVelocity,0391,0,0,("self: Object" "x%f" "y%f" "z%f")
+Create,010C,0,0,("modelId: model_object" "x%f" "y%f" "z%f" "handle: Object")
+CreateNoOffset,02A0,0,0,("modelId: model_object" "x%f" "y%f" "z%f" "handle: Object")
+Delete,010D,0,0,("self: Object")
+DoesExist,03CF,1,0,("handle: Object")
+DontRemove,01CC,0,0,("self: Object")
+FreezePosition,0555,0,0,("self: Object" "state%b")
+GetBodyCastHealth,03FD,0,0,("health%i")
+GetCoordinates,01C0,0,0,("self: Object" "x%f" "y%f" "z%f")
+GetHeading,017B,0,0,("self: Object" "heading%f")
+GetOffsetInWorldCoords,0405,0,0,("self: Object" "xOffset%f" "yOffset%f" "zOffset%f" "x%f" "y%f" "z%f")
+HasBeenDamaged,036B,1,0,("self: Object")
+HasCollidedWithAnything,04DF,1,0,("self: Object")
+IsInArea2D,04EE,1,0,("self: Object" "leftBottomX%f" "leftBottomY%f" "rightTopX%f" "rightTopY%f" "drawSphere%b")
+IsInArea3D,04EF,1,0,("self: Object" "leftBottomX%f" "leftBottomY%f" "leftBottomZ%f" "rightTopX%f" "rightTopY%f" "rightTopZ%f" "drawSphere%b")
+IsInWater,04EC,1,0,("self: Object")
+IsOnScreen,02D1,1,0,("self: Object")
+Locate2D,04EA,1,0,("self: Object" "x%f" "y%f" "xRadius%f" "yRadius%f" "drawSphere%b")
+Locate3D,04EB,1,0,("self: Object" "x%f" "y%f" "z%f" "xRadius%f" "yRadius%f" "zRadius%f" "drawSphere%b")
+MakeTargetable,0362,0,0,("self: Object")
+MarkAsNoLongerNeeded,01C9,0,0,("self: Object")
+PlaceRelativeToCar,0361,0,0,("self: Object" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f")
+PlaceRelativeToObject,0463,0,0,("self: Object" "target: Object" "offsetX%f" "offsetY%f" "offsetZ%f")
+Rotate,0352,1,0,("self: Object" "fromAngle%f" "toAngle%f" "collisionCheck%b")
+SetAreaVisible,056B,0,0,("self: Object" "areaId: Interior")
+SetCollision,0387,0,0,("self: Object" "state%b")
+SetCoordinates,01C1,0,0,("self: Object" "x%f" "y%f" "z%f")
+SetDrawLast,041D,0,0,("self: Object" "state%b")
+SetDynamic,0397,0,0,("self: Object" "state%b")
+SetHeading,017C,0,0,("self: Object" "heading%f")
+SetRecordsCollisions,04DE,0,0,("self: Object" "state%b")
+SetRotation,0458,0,0,("self: Object" "x%f" "y%f" "z%f")
+SetVelocity,0386,0,0,("self: Object" "xSpeed%f" "ySpeed%f" "zSpeed%f")
+Slide,0353,1,0,("self: Object" "fromX%f" "fromY%f" "fromZ%f" "xSpeed%f" "ySpeed%f" "zSpeed%f" "collisionCheck%b")
+SortOutCollisionWithCar,0513,0,0,("self: Object" "handle: Car")
+AttachToBone,0529,0,0,("self: CutsceneObject" "char: CutsceneObject" "boneId: Bone")
+AttachToComponent,052A,0,0,("self: CutsceneObject" "char: CutsceneObject" "frameName%s")
+AttachToVehicle,0550,0,0,("self: CutsceneObject" "vehicle: Car")
+Create,02EA,0,0,("modelId: model_any" "handle: CutsceneObject")
+SetAnim,02EB,0,0,("self: CutsceneObject" "animation%s")
+$END
+
 $Heli
 $BEGIN
 AddUpsidedownCheck,0195,0,0,("self: Car")
@@ -1012,15 +1056,6 @@ $CutsceneHead
 $BEGIN
 Create,02F9,0,0,("modelId: model_any" "cutsceneObject: CutsceneObject" "handle: CutsceneHead")
 SetAnim,02FA,0,0,("self: CutsceneHead" "animation%s")
-$END
-
-$CutsceneObject
-$BEGIN
-AttachToBone,0529,0,0,("self: CutsceneObject" "char: CutsceneObject" "boneId: Bone")
-AttachToComponent,052A,0,0,("self: CutsceneObject" "char: CutsceneObject" "frameName%s")
-AttachToVehicle,0550,0,0,("self: CutsceneObject" "vehicle: Car")
-Create,02EA,0,0,("modelId: model_any" "handle: CutsceneObject")
-SetAnim,02EB,0,0,("self: CutsceneObject" "animation%s")
 $END
 
 $Debugger

@@ -174,6 +174,38 @@ SetCruiseSpeed,02DB,0,0,("self: Boat" "maxSpeed%f")
 Stop,02D4,0,0,("self: Boat")
 $END
 
+$CutsceneObject
+$BEGIN
+AddToVelocity,038C,0,0,("self: Object" "x%f" "y%f" "z%f")
+Create,0107,0,0,("modelId: model_object" "x%f" "y%f" "z%f" "handle: Object")
+CreateNoOffset,029B,0,0,("modelId: model_object" "x%f" "y%f" "z%f" "handle: Object")
+Delete,0108,0,0,("self: Object")
+DoesExist,03CA,1,0,("handle: any")
+DontRemove,01C7,0,0,("self: Object")
+Flash,0240,0,0,("self: Object" "state%b")
+GetBodyCastHealth,03F8,0,0,("health%i")
+GetCoordinates,01BB,0,0,("self: Object" "x%f" "y%f" "z%f")
+GetHeading,0176,0,0,("self: Object" "heading%f")
+GetOffsetInWorldCoords,04C2,0,0,("self: Object" "xOffset%f" "yOffset%f" "zOffset%f" "x%f" "y%f" "z%f")
+HasBeenDamaged,0366,1,0,("self: Object")
+IsOnScreen,02CC,1,0,("self: Object")
+MakeTargetable,035D,0,0,("self: Object")
+MarkAsNoLongerNeeded,01C4,0,0,("self: Object")
+PlaceRelativeToCar,035C,0,0,("self: Object" "vehicle: Car" "xOffset%f" "yOffset%f" "zOffset%f")
+PlaceRelativeToObject,045E,0,0,("self: Object" "target: Object" "offsetX%f" "offsetY%f" "offsetZ%f")
+Rotate,034D,1,0,("self: Object" "fromAngle%f" "toAngle%f" "collisionCheck%b")
+SetCollision,0382,0,0,("self: Object" "state%b")
+SetCoordinates,01BC,0,0,("self: Object" "x%f" "y%f" "z%f")
+SetDrawLast,0418,0,0,("self: Object" "state%b")
+SetDynamic,0392,0,0,("self: Object" "state%b")
+SetHeading,0177,0,0,("self: Object" "heading%f")
+SetRotation,0453,0,0,("self: Object" "x%f" "y%f" "z%f")
+SetVelocity,0381,0,0,("self: Object" "xSpeed%f" "ySpeed%f" "zSpeed%f")
+Slide,034E,1,0,("self: Object" "posX%f" "posY%f" "posZ%f" "speedX%f" "speedY%f" "speedZ%f" "collisionCheck%b")
+Create,02E5,0,0,("modelId: model_any" "handle: CutsceneObject")
+SetAnim,02E6,0,0,("self: CutsceneObject" "animation%s")
+$END
+
 $Audio
 $BEGIN
 ClearMissionAudio,040D,0,0,()
@@ -605,12 +637,6 @@ $CutsceneHead
 $BEGIN
 Create,02F4,0,0,("cutsceneObject: CutsceneObject" "modelId: model_any" "handle: CutsceneHead")
 SetAnim,02F5,0,0,("self: CutsceneHead" "animation%s")
-$END
-
-$CutsceneObject
-$BEGIN
-Create,02E5,0,0,("modelId: model_any" "handle: CutsceneObject")
-SetAnim,02E6,0,0,("self: CutsceneObject" "animation%s")
 $END
 
 $Debugger

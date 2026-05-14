@@ -19,7 +19,8 @@ export enum PedType {
   "Fireman" = 17,
   "Criminal" = 18,
   "Prostitute" = 20,
-  "Special" = 21
+  "Special" = 21,
+  "Bum" = 19
 };
 export enum Fade {
   "Out" = 0,

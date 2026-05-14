@@ -19,7 +19,8 @@ export const PedType = {
   "Fireman": 17,
   "Criminal": 18,
   "Prostitute": 20,
-  "Special": 21
+  "Special": 21,
+  "Bum": 19
 };
 export const Fade = {
   "Out": 0,

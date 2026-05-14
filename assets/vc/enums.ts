@@ -18,6 +18,7 @@ export enum PedType {
   "Emergency" = 16,
   "Fireman" = 17,
   "Criminal" = 18,
+  "Bum" = 19,
   "Prostitute" = 20,
   "Special" = 21
 };

@@ -1,0 +1,1 @@
+This command sets the appropriate event-specific message to display on the scrollbar at the Hyman Memorial Stadium. If the scrollbar is set to display a different message, the message will change once the current message finishes scrolling.

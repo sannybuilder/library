@@ -1,0 +1,1 @@
+This command stops the chase scene started by START_CHASE_SCENE by deleting all cars from the scene. The chase scene causes many parts of the city's collision to unload so, in order to restore the collision, place the player character outside Staunton Island to force the loading of level collisions.

@@ -1,0 +1,1 @@
+Calling CHAR_WANDER_DIR with a value outside of the allowed range will cause the game to pick a random direction for the character to wander in.

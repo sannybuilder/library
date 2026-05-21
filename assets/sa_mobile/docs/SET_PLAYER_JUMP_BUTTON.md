@@ -1,0 +1,1 @@
+This command can be used to disable the functionality of the jump key in the game. The jump key is button 14 on foot. Disabling it will disable any actions related to the key, including jumping and climbing.

@@ -1,0 +1,1 @@
+This command sets the ped stat of the character. The ped stat value corresponds to the line number (starting with 0) in the `pedstats.dat` file. The original scripts of GTA III and Vice City primarily used "tough guy" and "geek guy" throughout them.

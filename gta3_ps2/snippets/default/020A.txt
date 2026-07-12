@@ -1,0 +1,10 @@
+const LockoutPlayerOnly = 3
+float x,y,z, radius=10.0
+int Car
+while true
+    wait 100
+    get_active_camera_coordinates store_to x y z
+    if get_random_car_in_sphere_no_save_recursive x y z radius findNext True skipWrecked True store_to Car
+    then lock_car_doors Car lockStatus LockoutPlayerOnly
+    end
+end

@@ -2,7 +2,7 @@ import { flatten } from 'lodash';
 import { Game, SyntaxKind } from '../models';
 
 export const GameEditions: Partial<Record<Game, Game[]>> = {
-  [Game.gta3]: [Game.gta3, Game.gta3_mobile, Game.gta3_unreal],
+  [Game.gta3]: [Game.gta3, Game.gta3_ps2, Game.gta3_mobile, Game.gta3_unreal],
   [Game.vc]: [Game.vc, Game.vc_mobile, Game.vc_unreal],
   [Game.sa]: [Game.sa, Game.sa_mobile, Game.sa_unreal],
   [Game.unknown_x86]: [
@@ -67,6 +67,7 @@ export function doesGameRequireOpcode(game: Game): boolean {
     Game.gta3,
     Game.vc,
     Game.sa,
+    Game.gta3_ps2,
     Game.gta3_mobile,
     Game.vc_mobile,
     Game.sa_mobile,
@@ -95,7 +96,7 @@ export function doesGameHaveScm(game: Game): boolean {
 }
 
 export function hasCLEOReduxSupport(game: Game): boolean {
-  return ![Game.gta3_mobile, Game.vc_mobile, Game.sa_mobile].includes(game);
+  return ![Game.gta3_ps2, Game.gta3_mobile, Game.vc_mobile, Game.sa_mobile].includes(game);
 }
 
 export function getDefaultSyntaxKind(game: Game, kind: SyntaxKind): SyntaxKind {

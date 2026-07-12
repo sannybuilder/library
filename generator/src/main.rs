@@ -138,6 +138,21 @@ fn does_command_match_target(command: &Command, target: &str) -> bool {
                 return false;
             }
         }
+        "gta3_ps2" => {
+            if !command.platforms.is_empty()
+                && !(command.platforms.contains(&"any".to_string())
+                    || command.platforms.contains(&"console".to_string()))
+            {
+                return false;
+            }
+
+            if !command.versions.is_empty()
+                && !(command.versions.contains(&"any".to_string())
+                    || command.versions.contains(&"1.0".to_string()))
+            {
+                return false;
+            }
+        }
         _ => {
             // do nothing
         }

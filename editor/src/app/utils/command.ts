@@ -460,6 +460,7 @@ export function filterAttributes(
         return (
           [
             Game.gta3,
+            Game.gta3_ps2,
             Game.gta3_mobile,
             Game.gta3_unreal,
             Game.vc,

@@ -124,6 +124,8 @@ export const versionReducer = createReducer(
       Game.sa_mobile,
     ].includes(game);
 
+    const isConsole = [Game.gta3_ps2].includes(game);
+
     let selectedPlatforms: Platform[] = [];
     let selectedVersions: Version[] = [];
 
@@ -135,6 +137,9 @@ export const versionReducer = createReducer(
       selectedVersions = GameVersions[game].filter(
         (v) => v !== Version._unreal10
       );
+    } else if (isConsole) {
+      selectedPlatforms = [Platform.Console];
+      selectedVersions = [Version._10];
     } else {
       // classic
       selectedPlatforms = [Platform.PC];

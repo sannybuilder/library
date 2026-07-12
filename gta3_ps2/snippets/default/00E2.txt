@@ -1,0 +1,7 @@
+int state = get_pad_state {pad} PadId.Pad1 {buttonId} Button.LeftStickX // -128 to 128
+
+// as multiplier
+float analog =# state
+analog /= 128.0 // -1.0 to 1.0 range
+
+print_formatted_now {format} "state: %d, analog: %f" {time} 5000 {args} state analog

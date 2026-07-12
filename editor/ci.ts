@@ -64,6 +64,7 @@ games.forEach((game) => {
         Game.gta3,
         Game.vc,
         Game.sa,
+        Game.gta3_ps2,
         Game.gta3_mobile,
         Game.vc_mobile,
         Game.sa_mobile,

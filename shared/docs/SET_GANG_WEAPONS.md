@@ -1,0 +1,1 @@
+This command sets the weapons of the gang. If a gang's weapons have not been set by this command, the game will use the default hardcoded weapons as the gang's weapons. The value set with this command is saved in block 12 of the save file in GTA III, block 13 in Vice City, and block 11 in San Andreas.

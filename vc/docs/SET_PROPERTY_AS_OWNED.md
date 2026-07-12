@@ -1,0 +1,1 @@
+This command adds a property to the "Property Owned" stat (GXT key `PROPOWN`). The number of property is incremented by one and the name is added to the list of properties. Values higher than the ones in the game can be used but only the number of properties will be incremented; the property name will not show up.

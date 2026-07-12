@@ -1,0 +1,1 @@
+This command sets the garage door to swing open instead of slide open. There is no way to undo this behavior without extensively editing the memory of the game. Some doors do not properly swing open if it was not designed to do so, e.g. the Vice Port Pay n Spray.

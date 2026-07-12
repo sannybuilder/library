@@ -1,0 +1,1 @@
+This command sets the separation range of the group. The distance is how far the members of the group can stray around before getting "lost." If a member strays too far from the leader, the member will no longer belong to the group.

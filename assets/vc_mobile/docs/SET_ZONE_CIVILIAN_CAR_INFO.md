@@ -1,0 +1,1 @@
+This command sets the zone's vehicle class info. The class of a vehicle is defined in the CARS section of the item definition file. The densities have values with a range between `0` and `2000`. All the values have to add up to `2000` or else other class vehicles will spawn along with yours or yours will not spawn correctly.

@@ -1,0 +1,1 @@
+By default, objects created through CREATE_OBJECT or CREATE_OBJECT_NO_OFFSET have their interior number set to `13`, allowing it to be visible regardless of the current interior. This command allows you to change the object's interior number, allowing it to be visible in the specified interior.

@@ -1,0 +1,1 @@
+This command can be used to disable the functionality of the action key in the game. The action key is button 4 on foot. Disabling it will disable any actions related to the key, including answering phone calls and replacing a weapon.

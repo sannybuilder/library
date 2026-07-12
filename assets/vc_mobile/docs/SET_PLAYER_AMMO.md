@@ -1,0 +1,3 @@
+This command sets your weapon ammo. Unlike GIVE_WEAPON_TO_PLAYER, it sets rather than adds to the ammo count and does not set the weapon as the current one for you. You have to use SET_CURRENT_PLAYER_WEAPON to set it as the current one.
+
+In GTA III, if you do not have the weapon, the weapon will be given to you. In Vice City, if you do not have the weapon or another weapon of the same slot, nothing happens. If you do not have the weapon but do have another weapon of the same slot, weapon ammo will be set for that weapon instead. If this behavior is not wanted, you can use HAS_PLAYER_GOT_WEAPON to check if you have the weapon already.

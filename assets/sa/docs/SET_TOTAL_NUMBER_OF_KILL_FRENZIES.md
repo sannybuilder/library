@@ -1,0 +1,1 @@
+This command sets the right value of the "Rampages passed" stat (GXT key `FEST_RP`). The stat can be set at anytime with any value. The stat will initially start with a value of `0`. The value set with this command is saved in block 17 of the save file in GTA III and block 19 in Vice City. The name "kill frenzy" comes from GTA 2 where rampages are called kill frenzies.

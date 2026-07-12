@@ -1,0 +1,1 @@
+This command gets the number of ped and vehicle models killed by the player. The number of all models killed can be reset using RESET_NUM_OF_MODELS_KILLED_BY_PLAYER. A maximum number of `65535` kills can be stored per model. The number can be carried over to other game sessions until you reset it.

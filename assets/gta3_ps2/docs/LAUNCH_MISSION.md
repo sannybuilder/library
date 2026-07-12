@@ -1,0 +1,1 @@
+This command starts a new script and begins an execution from the label. It works similar to START_NEW_SCRIPT except that it has only one parameter, without extra ones. In GTA III and Vice City, scripts started with this command behave like missions and can use MISSION_HAS_FINISHED within the script; it does not work in San Andreas.

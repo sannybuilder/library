@@ -1,0 +1,1 @@
+This command allows the vehicle to retain its colors when using a spray shop. The spray shop will not generate particles when respraying. This behavior is equivalent to respraying vehicles with only one defined pair of colors like the Sabre Turbo. This command has no effect on vehicles with only one defined pair of colors; the behavior cannot be changed.

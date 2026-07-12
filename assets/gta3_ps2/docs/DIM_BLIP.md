@@ -1,0 +1,1 @@
+This command dims the brightness of the blip. The resulting color is determined by a predefined list and the color of the normal blip. It essentially halves all three RGB color values of the blip. For example, if the blip's color is normally (`255`,`0`,`255`), dimming the blip will produce a blip with color (`127`,`0`,`127`). It has no effect on sprites.

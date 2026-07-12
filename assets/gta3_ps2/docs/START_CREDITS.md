@@ -1,0 +1,1 @@
+In GTA III, the player is fully controllable while the credits plays. In Vice City, certain movements are disabled or hindered like jumping, entering a vehicle, and using weapons. Pressing button `16` ends the credits.

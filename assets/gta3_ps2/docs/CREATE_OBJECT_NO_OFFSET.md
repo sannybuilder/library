@@ -1,0 +1,1 @@
+This command behaves similarly to CREATE_OBJECT except the z-coordinate uses the center rather than the base of the object's bounding box.

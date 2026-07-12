@@ -1,0 +1,1 @@
+This command gets a random float between `0.0` and `1.0` and stores the result into a variable. It only returns a fixed range of `0.0` and `1.0`. To return a custom range, use GENERATE_RANDOM_FLOAT_IN_RANGE instead.

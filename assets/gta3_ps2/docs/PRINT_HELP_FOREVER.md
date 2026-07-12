@@ -1,0 +1,1 @@
+This command prints a permanent help message. Unlike PRINT_HELP, no sound effect is produced, no GXT keys are omitted, and the message stays permanently displayed on the screen until it is cleared or replaced by another help message.

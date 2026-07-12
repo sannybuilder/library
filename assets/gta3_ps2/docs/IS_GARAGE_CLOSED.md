@@ -1,0 +1,1 @@
+This conditional command returns true if the state of the garage is closed. This happens regardless of a physical door. It only detects state `0` (fully closed), not state `5` (fully closed with vehicle dropped off for garage types `14` or `21`).

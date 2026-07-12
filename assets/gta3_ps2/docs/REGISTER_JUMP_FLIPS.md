@@ -1,0 +1,1 @@
+This command saves the highest value to the "Max. INSANE Jump flips" stat (GXT key `MXFLIP`). The stat initially starts with a value of `0`. Any value higher than the saved value will update the saved value with the new value; lower values have no effect on the stat. The value set with this command is saved in block 17 of the save file in GTA III and block 19 in Vice City.

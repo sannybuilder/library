@@ -1,0 +1,1 @@
+This command sets the roof light of the taxi. This only has an effect on taxi vehicles. Roof lights are coronas with the "coronastar" texture, RGB value `128,128,0` (yellow), size `0.8`, and emit yellow light on entities. The roof light switches off when the vehicle explodes but calling the command again can switch back on the roof light on the wrecked vehicle.

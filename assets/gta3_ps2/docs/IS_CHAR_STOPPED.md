@@ -1,0 +1,1 @@
+This conditional command returns true when the character is "stopped." The command name is somewhat misleading. Being stopped includes standing still while on foot or in a vehicle, jumping without pressing the movement buttons, releasing the sprint button while running, falling without pressing the movement buttons, and exiting a vehicle.

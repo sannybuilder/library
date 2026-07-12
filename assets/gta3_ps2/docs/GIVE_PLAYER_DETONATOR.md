@@ -1,0 +1,1 @@
+This command adds one to the number of detonators for the player. The number of detonators on hand can stack up but using one will remove all detonators on hand. The detonator detonates all cars armed with a remote detonation bomb. This command behaves similarly to GIVE_WEAPON_TO_CHAR.

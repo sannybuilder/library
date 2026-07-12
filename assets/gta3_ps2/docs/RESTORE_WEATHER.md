@@ -1,0 +1,1 @@
+This command restores the weather previously saved with STORE_WEATHER. If the weather has never been stored before, all values affected by this command are set to 0. Saved values are not reset if a new game is started or a save game is loaded, so values can be restored with values stored in another game session. This command was never called in the original script of GTA III.

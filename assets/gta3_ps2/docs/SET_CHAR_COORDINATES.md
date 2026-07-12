@@ -1,0 +1,1 @@
+This command sets the character's coordinates point by warping it to the location. The character's feet is the point where the character will be placed by. If the character is in a vehicle, the vehicle will also move along with the character.

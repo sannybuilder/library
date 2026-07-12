@@ -1,0 +1,1 @@
+This command takes away the player control and enables all effects of SET_PLAYER_CONTROL. To regain the control, the currently active cutscene must be loaded and then ended with CLEAR_CUTSCENE. CLEAR_CUTSCENE won't return the control back to the player if the no cutscene was loaded.

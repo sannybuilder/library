@@ -1,0 +1,1 @@
+This command turns on the payphone and sets it to the message with repeat. It behaves almost exactly the same as SET_PHONE_MESSAGE except the phone turns back on and is set to the same message one minute after the cutscene ends.

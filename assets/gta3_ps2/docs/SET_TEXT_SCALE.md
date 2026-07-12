@@ -1,0 +1,1 @@
+This command sets the scale of the text. Negative values are permitted, allowing the text to mirror itself along the `x` and `y` axis.

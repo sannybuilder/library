@@ -1,0 +1,1 @@
+This conditional command returns true if the vehicle is dead, which occurs when the vehicle is blown up and rendered undrivable. The vehicle is also dead if it is submerged into water, except if it is a boat. The vehicle can be revived if it can be rendered drivable again, e.g. fished out of the water. It behaves exactly opposite to IS_CAR_STILL_ALIVE.

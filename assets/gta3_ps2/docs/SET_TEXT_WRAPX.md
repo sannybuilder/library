@@ -1,0 +1,1 @@
+This command sets the wrap x of the text, which has the value of `182.0` by default. Text that goes beyond the wrap x will be wrapped to the next line. The background of the text also relies on this property for its length. Centered text ignores this property, use SET_TEXT_CENTRE_SIZE instead. 

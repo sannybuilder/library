@@ -1,0 +1,1 @@
+This command sets the player's current wanted level from `0` to `6`. It will not exceed the maximum wanted level set by SET_MAX_WANTED_LEVEL. Negative values have no effect while values higher than six will not exceed six.

@@ -1,0 +1,1 @@
+This command sets the wasted and busted check when on a mission. It is used to disable HAS_DEATHARREST_BEEN_EXECUTED 's check if the player is wasted or busted when on a mission. The command only has an effect when placed in scripts launched using LOAD_AND_LAUNCH_MISSION_INTERNAL or, in GTA III and Vice City only, LAUNCH_MISSION ; it has no effect elsewhere.

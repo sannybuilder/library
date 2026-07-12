@@ -1,0 +1,1 @@
+This command sets the player's current wanted level ranging from `0` to `6`, similar to ALTER_WANTED_LEVEL. Unlike ALTER_WANTED_LEVEL, if placed in a loop, the wanted level will not drop below the set value but a higher wanted level can be attained.

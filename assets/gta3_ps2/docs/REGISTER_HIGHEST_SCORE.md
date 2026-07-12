@@ -1,0 +1,1 @@
+This command saves the highest value to almost any stat in the game. The stat can only be overwritten by a value larger than the previously saved value. The value set with this command is saved in block 17 of the save file in GTA III and block 19 in Vice City. This command is a no operation in San Andreas.

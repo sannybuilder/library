@@ -1,0 +1,1 @@
+This conditional command returns true when the character touches or collides with the object. If the character is driving a vehicle, the command also returns true when the character's vehicle touches or collides with the object.

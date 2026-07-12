@@ -1,0 +1,1 @@
+This command turns on the payphone and sets it to two messages. It behaves almost exactly the same as SET_PHONE_MESSAGE except two messages are displayed, each three seconds long for a total of six seconds, before the cutscene ends.

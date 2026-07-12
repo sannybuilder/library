@@ -1,0 +1,1 @@
+This conditional command returns true if the vehicle is fully contained inside the garage. Note that wrecking the vehicle and leaving it inside the garage will eventually crash the game (it is not immediate).

@@ -1,0 +1,1 @@
+This command creates a pickup of type `PICKUP_FLOATINGPACKAGE` at the coordinates point and uses a model that matches the name `floatpackge1`. This command is only used during the 'A Drop In The Ocean' mission in GTA III.

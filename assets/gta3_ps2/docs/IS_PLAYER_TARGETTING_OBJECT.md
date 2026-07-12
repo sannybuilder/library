@@ -1,0 +1,1 @@
+This conditional command returns true if the player is auto-aiming at the object. This feature is only available with joypad controls, not mouse. The object has to be made targetable using MAKE_OBJECT_TARGETTABLE.

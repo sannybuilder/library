@@ -1,0 +1,3 @@
+This sets the total amount of progress points that can be achieved. Progress points can be incremented using PLAYER_MADE_PROGRESS. Not giving a value to this command will initialize the total progress points to `0`. The value set with this command is saved in block 19 of the save file in Vice City. When calling the command in the German version of Vice City, the game will automatically subtract two from the value set by the command, e.g., if `154` is set, the game will subtract it by two and reset the value to `152` internally.
+
+In GTA3script the parameter for this command should be `0`. The compiler will automatically discover the total progress by analyzing all occurrences of PLAYER_MADE_PROGRESS.

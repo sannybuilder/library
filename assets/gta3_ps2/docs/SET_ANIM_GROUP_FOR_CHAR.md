@@ -1,0 +1,1 @@
+This command sets the animation group for the character, notably changing the way the character walks. The character's initial animation group is defined in the PEDS section of the IDE file. Many values are invalid and can crash the game. Setting an animation group for the player produces no effect..

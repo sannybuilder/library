@@ -1,0 +1,1 @@
+This command removes all donkey magazine and platinum pickups created through commands  02C3 ,  02C7 , and  02DA .

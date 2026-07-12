@@ -1,0 +1,1 @@
+This command sets the background of the text to enclose centered text, which only has an effect when text is centered and text background is switched on (SET_TEXT_CENTRE, SET_TEXT_BACKGROUNDSET_TEXT_BACKGROUND).

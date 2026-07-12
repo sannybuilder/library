@@ -1,0 +1,1 @@
+This command allows the character, including the player, to not drown while in water. In Vice City, health will not be depleted. In San Andreas, NPCs will be able to swim on their own and the player's lung capacity will never run out.

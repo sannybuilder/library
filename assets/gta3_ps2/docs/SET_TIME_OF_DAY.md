@@ -1,0 +1,3 @@
+This command sets the current game clock. Valid values for hours are between 0 and 23, and for minutes are between `0` and `59`. In Vice City, it is not possible to set a time outside the range as the game takes the modulo of `24` with the hour and modulo of `60` with the minute.
+
+Due to a bug in Vice City when starting a new game, setting the clock before a timer update (which can happen through WAIT or LOAD_SCENE, among others) can cause the clock to speed forward similar in effect to inputting the "faster game clock" cheat. Either don't set the time at all (which will initialize the clock to 12:00) or set it after a timer update.

@@ -1,0 +1,1 @@
+This command plays an animation sequence on a character. Some animations can play for a set amount of time but some animations require to be looped in order to work. If played on the player, most animations allow some extent of control as the animations are trying to play.

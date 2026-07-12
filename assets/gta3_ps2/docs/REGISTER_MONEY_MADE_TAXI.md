@@ -1,0 +1,1 @@
+This command adds to the "Cash made in taxi" stat ( GXT key `MONTAX`). The stat initially starts with a value of `0` and its value appears in the stats menu formatted as $0.00. The parameter can be any integer value, including negative ones. The value set with this command is saved in block 17 of the save file in GTA III and block 19 in Vice City.

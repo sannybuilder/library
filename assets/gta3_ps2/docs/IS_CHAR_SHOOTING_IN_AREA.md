@@ -1,0 +1,1 @@
+This conditional command returns true if the character while on foot fires a bullet, throws a projectile, or uses a flamethrower in the rectangular area. It only briefly returns true so a loop with a short wait is needed to detect this. Its area detection and cylindrical marker behave similarly to command IS_PLAYER_IN_AREA_2D.

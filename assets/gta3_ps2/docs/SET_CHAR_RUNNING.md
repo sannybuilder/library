@@ -1,0 +1,1 @@
+Many actions that require the character to move to a location will make the character walk to its destination. This command allows the character to run to its destination instead. It does not seem to work on the player character.

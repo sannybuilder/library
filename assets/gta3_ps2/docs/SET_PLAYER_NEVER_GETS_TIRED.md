@@ -1,0 +1,1 @@
+This command sets the player's ability to sprint without tiring out. The value set with this command is saved in block `16` of the save file in GTA III, block `18` in Vice City, and block `15` in San Andreas.

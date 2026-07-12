@@ -1,0 +1,1 @@
+A newly spawned character does not react when threatened by most events, e.g. getting punched or about to be run over by a car. This command sets the character to heed threats and react to them accordingly, e.g. running away, attacking back, or dodging a car. The game can cause the character to heed threats on its own depending on the conditions.

@@ -1,0 +1,1 @@
+This conditional command returns true if you are playing, i.e. the wasted screen or busted screen does not pop up. It is used throughout the script to prevent interruptions or unintended effects during wasted/busted sequence.

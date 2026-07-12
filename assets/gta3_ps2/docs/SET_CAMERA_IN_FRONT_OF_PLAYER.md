@@ -1,0 +1,1 @@
+This command forces the camera to be set in front of the player instead of the usual behind the player. This effect is fully noticeable while in "Classic" or "Joypad" controls but only noticeable while player control is disabled if in "Standard" controls. Legacy documentations incorrectly describes this as rotating the player 180 degrees.

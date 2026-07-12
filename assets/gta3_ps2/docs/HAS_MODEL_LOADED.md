@@ -1,0 +1,1 @@
+This command returns true if the model has been loaded. A model can load in a number of ways, including using REQUEST_MODEL or traveling to the location of a placed object that uses the model. The check can be avoided if LOAD_ALL_MODELS_NOW is used.

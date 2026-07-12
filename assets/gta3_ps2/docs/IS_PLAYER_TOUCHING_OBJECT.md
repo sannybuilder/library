@@ -1,0 +1,1 @@
+This conditional command returns true when the player character touches or collides with the object. If the player is driving a vehicle, the command also returns true when the player's vehicle touches or collides with the object. The original script called this command during "S.A.M."

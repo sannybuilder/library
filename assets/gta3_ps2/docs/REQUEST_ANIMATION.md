@@ -1,0 +1,1 @@
+This command is almost always required when using animation commands that need to read from a specific animation file. The only animation file that does not need loading is "PED". HAS_ANIMATION_LOADED checks if the animation is loaded and REMOVE_ANIMATION marks the animation as no longer needed.

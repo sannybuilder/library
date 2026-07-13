@@ -1,3 +1,4 @@
+// load weapon model
 int modelIdx = get_weapontype_model {weaponType} WeaponType.Ak47
 request_model {modelId} modelIdx
 if
@@ -6,25 +7,28 @@ then
     load_all_models_now
 end
 
-start_kill_frenzy {text} '_' {weaponType} WeaponType.Ak47 {timeInMs} 120000 {targetsNum} 10 {targetModel1} #LAPD1 {targetModel2} #LAPDM1 {targetModel3} #SFPD1 {targetModel4} #LVPD1 {betaSoundsAndMessages} false
+start_kill_frenzy {text} '_' {weaponType} WeaponType.Ak47 {timeInMs} 60000 {targetsNum} 5 {targetModel1} #LAPD1 {targetModel2} #LAPDM1 {targetModel3} #SFPD1 {targetModel4} #LVPD1 {betaSoundsAndMessages} true
 
 mark_model_as_no_longer_needed {modelId} modelIdx
 
-print_big {key} 'GW_ATK' {time} 3000 {style} TextStyle.MiddleSmaller
+print_big {key} 'GW_ATK' {time} 4000 {style} TextStyle.MiddleSmaller
 
 // wait till rampage end
 int status
 repeat
     wait {time} 0
-    alter_wanted_level $player1 {wantedLevel} 2 // keep police around
-    
     status = read_kill_frenzy_status
+    
+    if
+        status == 1 // KILLFRENZY_ONGOING
+    then
+        alter_wanted_level $player1 {wantedLevel} 2 // keep police around
+    end
 until status <> 1 // KILLFRENZY_ONGOING
 
 if
     status == 2 // KILLFRENZY_PASSED
 then
-    clear_wanted_level $player1
     print_big {key} 'GW_WON' {time} 5000 {style} TextStyle.MiddleSmaller
 else
     if

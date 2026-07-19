@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1784423380030,
-    "version": "1.61",
+    "last_update": 1784426523180,
+    "version": "1.62",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -46679,7 +46679,7 @@
           "id": "0A8C",
           "name": "WRITE_MEMORY",
           "num_params": 4,
-          "short_desc": "Writes the value at the memory address",
+          "short_desc": "Writes a value to a memory address",
           "class": "Memory",
           "member": "Write",
           "attrs": {
@@ -46711,7 +46711,7 @@
           "id": "0A8D",
           "name": "READ_MEMORY",
           "num_params": 4,
-          "short_desc": "Reads a value from the game memory",
+          "short_desc": "Reads a value from a memory address",
           "class": "Memory",
           "member": "Read",
           "attrs": {
@@ -46853,7 +46853,7 @@
           "id": "0A94",
           "name": "LOAD_AND_LAUNCH_CUSTOM_MISSION",
           "num_params": 2,
-          "short_desc": ""
+          "short_desc": "Loads and launches a CLEO custom mission script (.cm file) and returns true if successful"
         },
         {
           "id": "0A95",
@@ -46989,7 +46989,7 @@
           "id": "0A9B",
           "name": "CLOSE_FILE",
           "num_params": 1,
-          "short_desc": "Closes the file and frees the memory",
+          "short_desc": "Closes an open file by its handle",
           "class": "File",
           "member": "Close",
           "attrs": {
@@ -47013,7 +47013,7 @@
           "id": "0A9C",
           "name": "GET_FILE_SIZE",
           "num_params": 2,
-          "short_desc": "Gets the file size in bytes",
+          "short_desc": "Gets the size in bytes of an open file",
           "class": "File",
           "member": "GetSize"
         },
@@ -47437,7 +47437,7 @@
           "id": "0AB3",
           "name": "SET_CLEO_SHARED_VAR",
           "num_params": 2,
-          "short_desc": "Sets the value of an element in the global array maintained by CLEO (index is between 0-1023)"
+          "short_desc": "Sets a global CLEO shared variable accessible across all scripts (index is between 0-1023)"
         },
         {
           "input": [
@@ -47456,7 +47456,7 @@
           "id": "0AB4",
           "name": "GET_CLEO_SHARED_VAR",
           "num_params": 2,
-          "short_desc": "Reads the value of an element in the global array maintained by CLEO (index is between 0-1023)"
+          "short_desc": "Gets a global CLEO shared variable set by another script (index is between 0-1023)"
         },
         {
           "input": [
@@ -47505,7 +47505,7 @@
           "id": "0AB6",
           "name": "GET_TARGET_BLIP_COORDS",
           "num_params": 3,
-          "short_desc": "Gets the coordinates of the location targeted in the game map",
+          "short_desc": "Gets the 3D world coordinates of the target blip on the radar",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -47530,7 +47530,7 @@
           "id": "0AB7",
           "name": "GET_CAR_NUMBER_OF_GEARS",
           "num_params": 2,
-          "short_desc": "Gets the total number of gears of the vehicle and stores it to the variable",
+          "short_desc": "Gets the number of gears of a vehicle from its handling data",
           "class": "Car",
           "member": "GetNumberOfGears"
         },
@@ -47551,7 +47551,7 @@
           "id": "0AB8",
           "name": "GET_CAR_CURRENT_GEAR",
           "num_params": 2,
-          "short_desc": "Returns the current gear of the vehicle",
+          "short_desc": "Gets the current gear of a vehicle",
           "class": "Car",
           "member": "GetCurrentGear"
         },
@@ -47577,7 +47577,7 @@
           "id": "0ABD",
           "name": "IS_CAR_SIREN_ON",
           "num_params": 1,
-          "short_desc": "",
+          "short_desc": "Checks if a vehicle's siren or alarm is currently active",
           "class": "Car",
           "member": "IsSirenOn",
           "attrs": {
@@ -47598,7 +47598,8 @@
           "member": "IsEngineOn",
           "attrs": {
             "is_condition": true
-          }
+          },
+          "short_desc": "Checks if a vehicle's engine is currently running"
         },
         {
           "input": [
@@ -47614,7 +47615,7 @@
           "id": "0ABF",
           "name": "CLEO_SET_CAR_ENGINE_ON",
           "num_params": 2,
-          "short_desc": "Sets whether the vehicle's engine is turned on or off",
+          "short_desc": "Sets a vehicle's engine state on (true) or off (false)",
           "class": "Car",
           "member": "CleoSetEngineOn"
         },
@@ -47660,7 +47661,7 @@
           "id": "0AC7",
           "name": "GET_VAR_POINTER",
           "num_params": 2,
-          "short_desc": "Stores the absolute address of the variable",
+          "short_desc": "Gets the memory address/pointer of a script variable (local or global)",
           "class": "Memory",
           "member": "GetVarPointer",
           "attrs": {
@@ -47684,7 +47685,7 @@
           "id": "0AC8",
           "name": "ALLOCATE_MEMORY",
           "num_params": 2,
-          "short_desc": "Allocates a chunk of memory of the given size and stores its address to the variable",
+          "short_desc": "Allocates a block of memory of specified size and returns its address",
           "class": "Memory",
           "member": "Allocate",
           "attrs": {
@@ -47910,7 +47911,7 @@
           "id": "0AD2",
           "name": "GET_CHAR_PLAYER_IS_TARGETING",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the character (ped) handle that the specified player is currently targeting",
           "class": "Player",
           "member": "GetCharIsTargeting",
           "attrs": {
@@ -47935,7 +47936,7 @@
           "id": "0AD3",
           "name": "STRING_FORMAT",
           "num_params": 3,
-          "short_desc": "Formats a text according to the format string and given arguments and writes it in the result",
+          "short_desc": "Formats a string with printf-style arguments and stores the result in a variable",
           "class": "Text",
           "member": "StringFormat",
           "attrs": {
@@ -47968,7 +47969,7 @@
           "id": "0AD4",
           "name": "SCAN_STRING",
           "num_params": 4,
-          "short_desc": "Extracts data from a string using sscanf",
+          "short_desc": "Scans/parses a string using sscanf-style format and stores the parsed values",
           "class": "Text",
           "member": "ScanString",
           "attrs": {
@@ -47994,7 +47995,7 @@
           "id": "0AD5",
           "name": "FILE_SEEK",
           "num_params": 3,
-          "short_desc": "Sets the position of the file to the given offset from the origin",
+          "short_desc": "Seeks to a position in an open file (sets the file pointer offset)",
           "class": "File",
           "member": "Seek",
           "attrs": {
@@ -48082,7 +48083,7 @@
           "id": "0AD9",
           "name": "WRITE_FORMATTED_STRING_TO_FILE",
           "num_params": 3,
-          "short_desc": "Writes a formatted string to the file",
+          "short_desc": "Writes a formatted string to a file using printf-style format",
           "class": "File",
           "member": "WriteFormattedString"
         },
@@ -48112,7 +48113,7 @@
           "id": "0ADA",
           "name": "SCAN_FILE",
           "num_params": 4,
-          "short_desc": "Extracts data from a file using fscanf",
+          "short_desc": "Scans/parses content from a file using sscanf-style format",
           "class": "File",
           "member": "Scan",
           "attrs": {
@@ -48136,7 +48137,7 @@
           "id": "0ADB",
           "name": "GET_NAME_OF_VEHICLE_MODEL",
           "num_params": 2,
-          "short_desc": "",
+          "short_desc": "Gets the display name of a vehicle model (e.g. 'INFERNUS')",
           "class": "Streaming",
           "member": "GetNameOfVehicleModel",
           "attrs": {
@@ -48277,7 +48278,7 @@
           "id": "0AE1",
           "name": "GET_RANDOM_CHAR_IN_SPHERE_NO_SAVE_RECURSIVE",
           "num_params": 7,
-          "short_desc": "",
+          "short_desc": "Finds a random character within a sphere, returns handle and true if found",
           "class": "World",
           "member": "GetRandomCharInSphereNoSaveRecursive",
           "attrs": {
@@ -48322,7 +48323,7 @@
           "id": "0AE2",
           "name": "GET_RANDOM_CAR_IN_SPHERE_NO_SAVE_RECURSIVE",
           "num_params": 7,
-          "short_desc": "",
+          "short_desc": "Finds a random vehicle within a sphere, returns handle and true if found",
           "class": "World",
           "member": "GetRandomCarInSphereNoSaveRecursive",
           "attrs": {
@@ -48363,7 +48364,7 @@
           "id": "0AE3",
           "name": "GET_RANDOM_OBJECT_IN_SPHERE_NO_SAVE_RECURSIVE",
           "num_params": 6,
-          "short_desc": "",
+          "short_desc": "Finds a random object within a sphere, returns handle and true if found",
           "class": "World",
           "member": "GetRandomObjectInSphereNoSaveRecursive",
           "attrs": {
@@ -48381,7 +48382,7 @@
           "id": "0AE4",
           "name": "DOES_DIRECTORY_EXIST",
           "num_params": 1,
-          "short_desc": "Returns true if a directory at the given path exists",
+          "short_desc": "Checks if a directory exists at the specified path",
           "class": "Fs",
           "member": "DoesDirectoryExist",
           "attrs": {
@@ -48399,7 +48400,7 @@
           "id": "0AE5",
           "name": "CREATE_DIRECTORY",
           "num_params": 1,
-          "short_desc": "Creates a directory at the given path",
+          "short_desc": "Creates a new directory at the specified path",
           "class": "Fs",
           "member": "CreateDirectory",
           "attrs": {
@@ -48429,7 +48430,7 @@
           "id": "0AE6",
           "name": "FIND_FIRST_FILE",
           "num_params": 3,
-          "short_desc": "Searches a directory for a file or subdirectory with a name that matches a specific name (or partial name if wildcards are used)",
+          "short_desc": "Finds the first file/directory matching a search pattern, returns name and handle",
           "class": "FindFile",
           "member": "First",
           "attrs": {
@@ -48454,7 +48455,7 @@
           "id": "0AE7",
           "name": "FIND_NEXT_FILE",
           "num_params": 2,
-          "short_desc": "Continues a file search from a previous call to 0AE6",
+          "short_desc": "Finds the next file/directory in a search started with FIND_FIRST_FILE",
           "class": "FindFile",
           "member": "Next",
           "attrs": {
@@ -48471,7 +48472,7 @@
           "id": "0AE8",
           "name": "FIND_CLOSE",
           "num_params": 1,
-          "short_desc": "Closes a file search handle opened by 0AE6",
+          "short_desc": "Closes a file search handle opened with FIND_FIRST_FILE",
           "class": "FindFile",
           "member": "Close"
         },
@@ -48586,7 +48587,7 @@
           "id": "0AED",
           "name": "STRING_FLOAT_FORMAT",
           "num_params": 3,
-          "short_desc": "",
+          "short_desc": "Converts a float value to a string with format specifier",
           "class": "Text",
           "member": "StringFloatFormat",
           "attrs": {
@@ -48642,7 +48643,7 @@
           "id": "0AEF",
           "name": "LOG",
           "num_params": 3,
-          "short_desc": "Returns the logarithm of the specified number in the specified base",
+          "short_desc": "Computes the logarithm of a value with a specified base",
           "class": "Math",
           "member": "Log",
           "attrs": {
@@ -48665,7 +48666,7 @@
           },
           "class": "Game",
           "member": "GetPlatform",
-          "short_desc": "Returns platform type info (device/operating system)"
+          "short_desc": "Gets the current platform identifier (e.g. PC, Android, Xbox)"
         },
         {
           "output": [
@@ -48678,7 +48679,7 @@
           "id": "2000",
           "name": "GET_CLEO_ARG_COUNT",
           "num_params": 1,
-          "short_desc": "Gets argument count used to call current cleo function (0AB1)"
+          "short_desc": "Gets the number of arguments passed to the current CLEO_CALL"
         },
         {
           "input": [
@@ -69054,7 +69055,7 @@
           "id": "0AAE",
           "name": "REMOVE_AUDIO_STREAM",
           "num_params": 1,
-          "short_desc": "Unloads the audio stream and frees the memory",
+          "short_desc": "Releases/destroys an audio stream and frees its resources",
           "attrs": {
             "is_destructor": true
           },
@@ -69120,7 +69121,7 @@
           "id": "0ABB",
           "name": "GET_AUDIO_STREAM_VOLUME",
           "num_params": 2,
-          "short_desc": "Returns the audio stream volume (from 0.0 to 1.0)",
+          "short_desc": "Gets the volume level of an audio stream (range 0.0 to 1.0)",
           "class": "AudioStream",
           "member": "GetVolume"
         },
@@ -69138,7 +69139,7 @@
           "id": "0ABC",
           "name": "SET_AUDIO_STREAM_VOLUME",
           "num_params": 2,
-          "short_desc": "Sets the audio stream volume (default is 1.0). Pauses/Starts stream playback if neccesarry",
+          "short_desc": "Sets the audio stream volume (default is 1.0). Pauses/Starts stream playback if necessary",
           "class": "AudioStream",
           "member": "SetVolume"
         },
@@ -69177,7 +69178,7 @@
           "id": "0AC1",
           "name": "LOAD_3D_AUDIO_STREAM",
           "num_params": 2,
-          "short_desc": "Loads an audio file and creates a new 3d audio stream (see 0AAC)",
+          "short_desc": "Loads an audio stream with 3D positional audio support",
           "class": "AudioStream3D",
           "member": "Load",
           "attrs": {
@@ -69207,7 +69208,7 @@
           "id": "0AC2",
           "name": "SET_PLAY_3D_AUDIO_STREAM_AT_COORDS",
           "num_params": 4,
-          "short_desc": "Sets sound source position to specific world location",
+          "short_desc": "Sets the 3D position for a 3D audio stream to play from",
           "class": "AudioStream3D",
           "member": "SetPlayAtCoords"
         },
@@ -69225,7 +69226,7 @@
           "id": "0AC3",
           "name": "SET_PLAY_3D_AUDIO_STREAM_AT_OBJECT",
           "num_params": 2,
-          "short_desc": "Attaches sound source to the object",
+          "short_desc": "Attaches a 3D audio stream to an object's position",
           "class": "AudioStream3D",
           "member": "SetPlayAtObject"
         },
@@ -69243,7 +69244,7 @@
           "id": "0AC4",
           "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CHAR",
           "num_params": 2,
-          "short_desc": "Attaches sound source to the character",
+          "short_desc": "Attaches a 3D audio stream to a character's position",
           "class": "AudioStream3D",
           "member": "SetPlayAtChar"
         },
@@ -69261,7 +69262,7 @@
           "id": "0AC5",
           "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CAR",
           "num_params": 2,
-          "short_desc": "Attaches sound source to the vehicle",
+          "short_desc": "Attaches a 3D audio stream to a vehicle's position",
           "class": "AudioStream3D",
           "member": "SetPlayAtCar"
         },
@@ -69322,7 +69323,7 @@
           "num_params": 2,
           "class": "AudioStream",
           "member": "GetSpeed",
-          "short_desc": "Gets audio stream playback speed multiplier"
+          "short_desc": "Gets the playback speed multiplier of an audio stream"
         },
         {
           "input": [
@@ -69338,7 +69339,7 @@
           "id": "2503",
           "name": "SET_AUDIO_STREAM_SPEED",
           "num_params": 2,
-          "short_desc": "Sets audio stream playback speed multiplier",
+          "short_desc": "Sets the playback speed multiplier of an audio stream",
           "class": "AudioStream",
           "member": "SetSpeed"
         },
@@ -69384,7 +69385,7 @@
           "num_params": 3,
           "class": "AudioStream",
           "member": "SetSpeedWithTransition",
-          "short_desc": "Changes stream speed with smooth transition. Pauses/Starts stream playback if neccesarry"
+          "short_desc": "Changes stream speed with smooth transition. Pauses/Starts stream playback if necessary"
         },
         {
           "input": [
@@ -69402,7 +69403,7 @@
           "num_params": 2,
           "class": "AudioStream3D",
           "member": "SetSourceSize",
-          "short_desc": "Sets size of 3d audio stream sound source in the world. Volume will not decay within the specified distance"
+          "short_desc": "Sets the spatial source size for a 3D audio stream"
         },
         {
           "input": [
@@ -69441,7 +69442,7 @@
           "num_params": 2,
           "class": "AudioStream",
           "member": "SetProgress",
-          "short_desc": "Sets audio stream playback position. Progress range is from 0.0 to 1.0"
+          "short_desc": "Sets audio stream playback progress as value from 0.0 to 1.0"
         },
         {
           "input": [
@@ -69462,7 +69463,7 @@
           "num_params": 2,
           "class": "AudioStream",
           "member": "GetType",
-          "short_desc": "Returns current volume settings type group of the stream"
+          "short_desc": "Gets the audio stream type (e.g. music, SFX)"
         },
         {
           "input": [
@@ -69480,7 +69481,7 @@
           "num_params": 2,
           "class": "AudioStream",
           "member": "SetType",
-          "short_desc": "Sets which game's master volume settings the stream should follow"
+          "short_desc": "Sets the audio stream type (e.g. music, SFX)"
         },
         {
           "input": [
@@ -69501,7 +69502,7 @@
           "num_params": 2,
           "class": "AudioStream",
           "member": "GetProgressSeconds",
-          "short_desc": "Returns current playback progress in seconds. Does not take in consideration current stream's playback speed"
+          "short_desc": "Gets the current playback progress of an audio stream in seconds irrespective of its speed (see 2505)"
         },
         {
           "input": [
@@ -69517,7 +69518,7 @@
           "id": "250C",
           "name": "SET_AUDIO_STREAM_PROGRESS_SECONDS",
           "num_params": 2,
-          "short_desc": "Sets current playback progress in seconds. Does not take in consideration current stream's playback speed",
+          "short_desc": "Sets the current playback progress of an audio stream in seconds irrespective of its speed (see 2505)",
           "class": "AudioStream",
           "member": "SetProgressSeconds"
         }
@@ -69639,7 +69640,7 @@
           "id": "0B14",
           "name": "MOD",
           "num_params": 3,
-          "short_desc": "Returns the modulo; remainder of a division, after the first number is divided by the second number",
+          "short_desc": "Computes the modulo (remainder) of integer division",
           "operator": "%"
         },
         {
@@ -69705,7 +69706,7 @@
           "id": "0B17",
           "name": "BIT_AND_COMPOUND",
           "num_params": 2,
-          "short_desc": "Reads a value from the variable, performs bitwise AND operation on it and the operand (BIT_AND) and stores the result back to the variable",
+          "short_desc": "Performs in-place bitwise AND assignment",
           "operator": "&"
         },
         {
@@ -69723,7 +69724,7 @@
           "id": "0B18",
           "name": "BIT_OR_COMPOUND",
           "num_params": 2,
-          "short_desc": "Reads a value from the variable, performs bitwise OR operation on it and the operand (BIT_OR) and stores the result back to the variable",
+          "short_desc": "Performs in-place bitwise OR assignment",
           "operator": "|"
         },
         {
@@ -69741,7 +69742,7 @@
           "id": "0B19",
           "name": "BIT_XOR_COMPOUND",
           "num_params": 2,
-          "short_desc": "Reads a value from the variable, performs bitwise XOR operation on it and the operand (BIT_XOR) and stores the result back to the variable",
+          "short_desc": "Performs in-place bitwise XOR assignment",
           "operator": "^"
         },
         {
@@ -69755,7 +69756,7 @@
           "id": "0B1A",
           "name": "BIT_NOT_COMPOUND",
           "num_params": 1,
-          "short_desc": "Reads a value from the variable, performs bitwise NOT operation on it (BIT_NOT) and stores the result back to the variable",
+          "short_desc": "Performs in-place bitwise NOT assignment",
           "operator": "~"
         },
         {
@@ -69773,7 +69774,7 @@
           "id": "0B1B",
           "name": "MOD_COMPOUND",
           "num_params": 2,
-          "short_desc": "Reads a value from the variable, divides it by the number and stores the remainder (MOD) back to the variable",
+          "short_desc": "Performs in-place modulo assignment",
           "operator": "%"
         },
         {
@@ -69791,7 +69792,7 @@
           "id": "0B1C",
           "name": "BIT_SHR_COMPOUND",
           "num_params": 2,
-          "short_desc": "Reads a value from the variable, shifts right by n bits (BIT_SHR) and stores the result back to the variable",
+          "short_desc": "Performs in-place shift-right assignment",
           "operator": ">>"
         },
         {
@@ -69809,7 +69810,7 @@
           "id": "0B1D",
           "name": "BIT_SHL_COMPOUND",
           "num_params": 2,
-          "short_desc": "Reads a value from the variable, shifts left by n bits (BIT_SHL) and stores the result back to the variable",
+          "short_desc": "Performs in-place shift-left assignment",
           "operator": "<<"
         },
         {
@@ -69895,7 +69896,8 @@
           ],
           "id": "0662",
           "name": "WRITE_DEBUG",
-          "num_params": 1
+          "num_params": 1,
+          "short_desc": "Writes a debug string to the game's debug output"
         },
         {
           "input": [
@@ -69910,7 +69912,8 @@
           ],
           "id": "0663",
           "name": "WRITE_DEBUG_WITH_INT",
-          "num_params": 2
+          "num_params": 2,
+          "short_desc": "Writes an integer value to the game's debug output"
         },
         {
           "input": [
@@ -69925,7 +69928,8 @@
           ],
           "id": "0664",
           "name": "WRITE_DEBUG_WITH_FLOAT",
-          "num_params": 2
+          "num_params": 2,
+          "short_desc": "Writes a float value to the game's debug output"
         },
         {
           "input": [
@@ -69951,7 +69955,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Creates a debug breakpoint in script"
+          "short_desc": "Pauses script execution at a breakpoint, can be continued with F5-F12 keys"
         },
         {
           "input": [
@@ -70062,7 +70066,7 @@
           "id": "0B02",
           "name": "MOVE_FILE",
           "num_params": 2,
-          "short_desc": "Moves an existing file and returns true if the operation is successful",
+          "short_desc": "Moves or renames a file and returns true if the operation is successful",
           "class": "Fs",
           "member": "MoveFile",
           "attrs": {
@@ -70090,7 +70094,7 @@
             "is_static": true,
             "is_condition": true
           },
-          "short_desc": "Moves an existing directory and returns true if the operation is successful"
+          "short_desc": "Moves or renames a directory and returns true if the operation is successful"
         },
         {
           "input": [
@@ -70108,7 +70112,7 @@
           "num_params": 2,
           "class": "Fs",
           "member": "CopyFile",
-          "short_desc": "Copies an existing file to a new file and returns true if the operation is successful",
+          "short_desc": "Copies a file and returns true if the operation is successful",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -70128,7 +70132,7 @@
           "id": "0B05",
           "name": "COPY_DIRECTORY",
           "num_params": 2,
-          "short_desc": "Copies an existing directory to a new directory and returns true if the operation is successful",
+          "short_desc": "Copies a directory and all its contents and returns true if the operation is successful",
           "class": "Fs",
           "member": "CopyDirectory",
           "attrs": {
@@ -70153,7 +70157,7 @@
           "id": "2300",
           "name": "GET_FILE_POSITION",
           "num_params": 2,
-          "short_desc": "Gets current offset of read-write carret within the file stream",
+          "short_desc": "Gets the current read/write position within an open file",
           "class": "File",
           "member": "GetPosition"
         },
@@ -70177,7 +70181,7 @@
           "num_params": 3,
           "class": "File",
           "member": "ReadBlock",
-          "short_desc": "Reads data from file into buffer at specified address",
+          "short_desc": "Reads a block of raw binary data from a file into a buffer",
           "attrs": {
             "is_condition": true
           }
@@ -70200,7 +70204,7 @@
           "id": "2302",
           "name": "WRITE_BLOCK_TO_FILE",
           "num_params": 3,
-          "short_desc": "Writes data from memory address into file",
+          "short_desc": "Writes a block of raw binary data from a buffer to a file",
           "class": "File",
           "member": "WriteBlock",
           "attrs": {
@@ -70226,7 +70230,7 @@
           "num_params": 2,
           "class": "Fs",
           "member": "ResolvePath",
-          "short_desc": "Resolves absolute filepath. Input path can be relative, starts with 'virtual path' prefix or be already absolute filepath",
+          "short_desc": "Resolves absolute filepath. Input path can be relative, start with a 'virtual path' prefix or be already absolute filepath",
           "attrs": {
             "is_static": true
           }
@@ -70254,7 +70258,7 @@
           "num_params": 3,
           "class": "Fs",
           "member": "GetScriptFilename",
-          "short_desc": "Returns a file name or full file path of a script at the address (0A9F, 0AAA, 2404). If the address is -1 then this script is used. If no script with a given pointer is found, then the condition result is set to false and output argument is not modified",
+          "short_desc": "Gets the filename of the currently running script",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -72305,7 +72309,7 @@
           "num_params": 4,
           "class": "IniFile",
           "member": "ReadInt",
-          "short_desc": "Reads an integer value from the ini file",
+          "short_desc": "Reads an integer value from an INI file section and key",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -72335,7 +72339,7 @@
           "num_params": 4,
           "class": "IniFile",
           "member": "WriteInt",
-          "short_desc": "Writes the integer value to the ini file",
+          "short_desc": "Writes an integer value to an INI file section and key",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -72368,7 +72372,7 @@
           "num_params": 4,
           "class": "IniFile",
           "member": "ReadFloat",
-          "short_desc": "Reads a floating-point value from the ini file",
+          "short_desc": "Reads a float value from an INI file section and key",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -72398,7 +72402,7 @@
           "num_params": 4,
           "class": "IniFile",
           "member": "WriteFloat",
-          "short_desc": "Writes the floating-point value to the ini file",
+          "short_desc": "Writes a float value to an INI file section and key",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -72431,7 +72435,7 @@
           "num_params": 4,
           "class": "IniFile",
           "member": "ReadString",
-          "short_desc": "Reads a string value from the ini file",
+          "short_desc": "Reads a string value from an INI file section and key",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -72459,7 +72463,7 @@
           "id": "0AF5",
           "name": "WRITE_STRING_TO_INI_FILE",
           "num_params": 4,
-          "short_desc": "Writes the string value to the ini file",
+          "short_desc": "Writes a string value to an INI file section and key",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -72483,7 +72487,7 @@
           "num_params": 2,
           "class": "IniFile",
           "member": "DeleteSection",
-          "short_desc": "Deletes the section from the ini file",
+          "short_desc": "Deletes an entire section from an INI file",
           "attrs": {
             "is_condition": true,
             "is_static": true
@@ -72509,7 +72513,7 @@
           "num_params": 3,
           "class": "IniFile",
           "member": "DeleteKey",
-          "short_desc": "Deletes the key from the ini file",
+          "short_desc": "Deletes a specific key from an INI file section",
           "attrs": {
             "is_condition": true,
             "is_static": true
@@ -72536,7 +72540,7 @@
             "is_static": true,
             "is_condition": true
           },
-          "short_desc": "Returns true if the player has just started to press a specified key this frame"
+          "short_desc": "Checks if a virtual key was just pressed this frame (not held)"
         },
         {
           "input": [
@@ -72561,7 +72565,7 @@
           "num_params": 3,
           "class": "Pad",
           "member": "GetKeyPressedInRange",
-          "short_desc": "Gets code of first currently hold down key in range between minKeyCode and maxKeyCode. If no key is pressed return value is unmodified and logical result is set to false",
+          "short_desc": "Checks if any key from a range of virtual key codes is currently held",
           "attrs": {
             "is_condition": true,
             "is_static": true
@@ -72588,7 +72592,7 @@
           "id": "2082",
           "name": "GET_KEY_JUST_PRESSED_IN_RANGE",
           "num_params": 3,
-          "short_desc": "Gets code of first just pressed key in range between minKeyCode and maxKeyCode. If no key was pressed return value is unmodified and logical result is set to false",
+          "short_desc": "Checks if any key from a range was just pressed this frame",
           "member": "GetKeyJustPressedInRange",
           "attrs": {
             "is_static": true,
@@ -72608,7 +72612,7 @@
           "num_params": 1,
           "class": "Pad",
           "member": "EmulateKeyPress",
-          "short_desc": "Simulates key press event",
+          "short_desc": "Emulates/simulates a key press event for a virtual key code",
           "attrs": {
             "is_static": true
           }
@@ -72625,7 +72629,7 @@
           "num_params": 1,
           "class": "Pad",
           "member": "EmulateKeyRelease",
-          "short_desc": "Simulates key release event",
+          "short_desc": "Emulates/simulates a key release event for a virtual key code",
           "attrs": {
             "is_static": true
           }
@@ -72709,7 +72713,7 @@
             "is_condition": true
           },
           "member": "IsBitSet",
-          "short_desc": "Checks if n-th bit of the number is set"
+          "short_desc": "Checks if a specific bit (by index 0-31) is set in an integer value"
         },
         {
           "input": [
@@ -72730,7 +72734,7 @@
           "attrs": {
             "is_static": true
           },
-          "short_desc": "Sets n-th bit of the number",
+          "short_desc": "Sets a specific bit (by index 0-31) in an integer variable to 1",
           "member": "SetBit"
         },
         {
@@ -72753,7 +72757,7 @@
             "is_static": true
           },
           "member": "ClearBit",
-          "short_desc": "Clears n-th bit of the number"
+          "short_desc": "Clears a specific bit (by index 0-31) in an integer variable to 0"
         },
         {
           "input": [
@@ -72779,7 +72783,7 @@
           },
           "class": "Math",
           "member": "ToggleBit",
-          "short_desc": "Sets state of n-th bit in the number"
+          "short_desc": "Sets or clears a specific bit (by index 0-31) in an integer variable based on state"
         },
         {
           "input": [
@@ -72797,7 +72801,7 @@
           },
           "class": "Math",
           "member": "IsTruthy",
-          "short_desc": "Checks if value contains number different than 0 or not empty string"
+          "short_desc": "Checks if a value is truthy (non-zero, non-empty string), sets condition flag"
         },
         {
           "input": [
@@ -72818,7 +72822,7 @@
           "num_params": 2,
           "class": "Math",
           "member": "RandomPick",
-          "short_desc": "Selects one random integer from provided values",
+          "short_desc": "Picks a random integer value from a list of provided values",
           "attrs": {
             "is_static": true
           }
@@ -72845,7 +72849,7 @@
           },
           "class": "Math",
           "member": "RandomPick",
-          "short_desc": "Selects one random float from provided values"
+          "short_desc": "Picks a random float value from a list of provided values"
         },
         {
           "input": [
@@ -72869,7 +72873,7 @@
             "is_static": true
           },
           "member": "RandomPick",
-          "short_desc": "Selects one random text from provided values"
+          "short_desc": "Picks a random text string from a list of provided values"
         },
         {
           "input": [
@@ -72881,7 +72885,7 @@
           "id": "2708",
           "name": "RANDOM_CHANCE",
           "num_params": 1,
-          "short_desc": "Sets random condition result, with percent chance to be true",
+          "short_desc": "Returns true with a given percentage chance (0.0-100.0)",
           "class": "Math",
           "member": "RandomChance",
           "attrs": {
@@ -73045,7 +73049,7 @@
           },
           "class": "Memory",
           "member": "ReadWithOffset",
-          "short_desc": "Reads a value from the given offset from the memory address (see: 2402)"
+          "short_desc": "Reads memory at a base address with a byte offset"
         },
         {
           "input": [
@@ -73074,7 +73078,7 @@
           },
           "class": "Memory",
           "member": "WriteWithOffset",
-          "short_desc": "Writes the value at the given offset from the memory address (see: 2401)"
+          "short_desc": "Writes a value to memory at a base address with a byte offset"
         },
         {
           "input": [
@@ -73127,7 +73131,7 @@
           },
           "class": "Memory",
           "member": "IsScriptRunning",
-          "short_desc": "Checks if address points at valid and running script"
+          "short_desc": "Checks if address points at a valid and running script"
         },
         {
           "input": [
@@ -73153,7 +73157,7 @@
           },
           "class": "Memory",
           "member": "IsEqual",
-          "short_desc": "Compares two memory blocks"
+          "short_desc": "Compares two blocks of memory for equality and returns true if they match"
         },
         {
           "input": [
@@ -73188,7 +73192,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Checks if string length is equal to zero"
+          "short_desc": "Checks if a text string variable is empty (zero-length)"
         },
         {
           "input": [
@@ -73240,7 +73244,7 @@
             "is_static": true,
             "is_condition": true
           },
-          "short_desc": "Checks if text contains specified text"
+          "short_desc": "Checks if one text string contains another (substring search)"
         },
         {
           "input": [
@@ -73266,7 +73270,7 @@
             "is_static": true,
             "is_condition": true
           },
-          "short_desc": "Checks if text starts with specified prefix text"
+          "short_desc": "Checks if one text string starts with a given prefix"
         },
         {
           "input": [
@@ -73288,7 +73292,7 @@
           "num_params": 3,
           "class": "Text",
           "member": "EndsWith",
-          "short_desc": "Checks if text ends with specified suffix text",
+          "short_desc": "Checks if one text string ends with a given suffix",
           "attrs": {
             "is_condition": true,
             "is_static": true
@@ -73335,7 +73339,7 @@
           "num_params": 1,
           "class": "Text",
           "member": "LoadFxt",
-          "short_desc": "Loads GXT texts from selected FXT dictionary file",
+          "short_desc": "Loads custom text entries from a FXT file",
           "attrs": {
             "is_static": true,
             "is_condition": true
@@ -73353,7 +73357,7 @@
           "num_params": 1,
           "class": "Text",
           "member": "UnloadFxt",
-          "short_desc": "Unloads GXT labels defined in selected Fxt file",
+          "short_desc": "Unloads custom text entries loaded from a FXT file",
           "attrs": {
             "is_static": true,
             "is_condition": true

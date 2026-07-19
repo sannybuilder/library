@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1783799907290,
-    "version": "1.60",
+    "last_update": 1784423380030,
+    "version": "1.61",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -56554,7 +56554,7 @@
           "id": "0D00",
           "name": "MULTIPLY_MATRICES",
           "num_params": 3,
-          "short_desc": "Multiplies matrices",
+          "short_desc": "Multiplies two RwMatrix matrices: result = matrixA * matrixB",
           "attrs": {
             "is_constructor": true,
             "is_static": true
@@ -56592,7 +56592,7 @@
           "id": "0D01",
           "name": "ROTATE_MATRIX_ON_AXIS",
           "num_params": 6,
-          "short_desc": "Rotates matrix on axis",
+          "short_desc": "Rotates a matrix around a specified axis vector by an angle (degrees) using the given combine operation (RwOpCombineType)",
           "class": "Matrix",
           "member": "RotateOnAxis"
         },
@@ -56613,7 +56613,7 @@
           "id": "0D02",
           "name": "GET_MATRIX_X_ANGLE",
           "num_params": 2,
-          "short_desc": "Gets the X angle of matrix (in degrees)",
+          "short_desc": "Gets the X (right vector) Euler angle of a matrix in degrees",
           "class": "Matrix",
           "member": "GetXAngle"
         },
@@ -56634,7 +56634,7 @@
           "id": "0D03",
           "name": "GET_MATRIX_Y_ANGLE",
           "num_params": 2,
-          "short_desc": "Gets the Y angle of matrix (in degrees)",
+          "short_desc": "Gets the Y (up vector) Euler angle of a matrix in degrees",
           "class": "Matrix",
           "member": "GetYAngle"
         },
@@ -56655,7 +56655,7 @@
           "id": "0D04",
           "name": "GET_MATRIX_Z_ANGLE",
           "num_params": 2,
-          "short_desc": "Gets the Z angle of matrix (in degrees)",
+          "short_desc": "Gets the Z (at vector) Euler angle of a matrix in degrees",
           "class": "Matrix",
           "member": "GetZAngle"
         },
@@ -56681,7 +56681,7 @@
           "id": "0D05",
           "name": "SET_MATRIX_POSITION",
           "num_params": 4,
-          "short_desc": "Sets position for matrix",
+          "short_desc": "Sets the position (translation) component of a matrix from X, Y, Z coordinates",
           "class": "Matrix",
           "member": "SetPosition"
         },
@@ -56712,7 +56712,7 @@
           "id": "0D06",
           "name": "GET_MATRIX_POSITION",
           "num_params": 4,
-          "short_desc": "Gets position of matrix"
+          "short_desc": "Extracts the position (translation) X, Y, Z components from a matrix"
         },
         {
           "input": [
@@ -56753,7 +56753,7 @@
           "id": "0D07",
           "name": "GET_COORDS_OFFSETS_RELATIVE_TO_MATRIX",
           "num_params": 7,
-          "short_desc": "Gets point relative offset on matrix",
+          "short_desc": "Transforms world-space coordinates into local coordinates relative to a matrix (inverse transform)",
           "attrs": {
             "is_static": true
           }
@@ -56780,7 +56780,7 @@
           "id": "0D08",
           "name": "SET_MATRIX_ROTATION",
           "num_params": 4,
-          "short_desc": "Sets matrix angles",
+          "short_desc": "Sets the rotation of a matrix from Euler angles (pitch, yaw, roll in degrees) while preserving its position",
           "class": "Matrix",
           "member": "Rotate"
         },
@@ -56798,7 +56798,7 @@
           "id": "0D09",
           "name": "COPY_MATRIX",
           "num_params": 2,
-          "short_desc": "Copies matrix to another matrix",
+          "short_desc": "Copies all 16 elements of one RwMatrix to another (deep copy)",
           "class": "Matrix",
           "member": "Copy"
         },
@@ -56841,7 +56841,7 @@
           "id": "0D0A",
           "name": "GET_OFFSET_FROM_MATRIX_IN_WORLD_COORDS",
           "num_params": 7,
-          "short_desc": "Gets coords on offset from matrix",
+          "short_desc": "Transforms a local offset vector into world-space coordinates using the matrix",
           "class": "Matrix",
           "member": "GetOffset"
         },
@@ -56869,7 +56869,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets char's bone world matrix"
+          "short_desc": "Gets the world matrix (LTM) of a character's specified bone for direct manipulation"
         },
         {
           "input": [
@@ -56895,7 +56895,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets matrix of car component",
+          "short_desc": "Gets the world matrix (LTM) of a named vehicle component frame (e.g. wheel, door, bumper)",
           "class": "Car",
           "member": "GetComponentMatrix"
         },
@@ -56923,7 +56923,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets car component by name",
+          "short_desc": "Finds and returns a pointer to a vehicle component (RwFrame) by its dummy name",
           "class": "Car",
           "member": "GetComponent"
         },
@@ -56948,7 +56948,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Sets component state"
+          "short_desc": "Sets the visibility/state of a named vehicle component (e.g. damaged, broken, intact)"
         },
         {
           "input": [
@@ -56967,7 +56967,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Sets alpha value for car's model"
+          "short_desc": "Sets the alpha (transparency) for a car's model (0=invisible, 255=opaque)"
         },
         {
           "input": [
@@ -56986,7 +56986,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Sets alpha value for char's model"
+          "short_desc": "Sets the alpha (transparency) for a character's model (0=invisible, 255=opaque)"
         },
         {
           "input": [
@@ -57005,7 +57005,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Sets alpha value for object's model"
+          "short_desc": "Sets the alpha (transparency) for an object's model (0=invisible, 255=opaque)"
         },
         {
           "input": [
@@ -57028,7 +57028,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Sets alpha value for car's component model",
+          "short_desc": "Sets the alpha (transparency) for a specific named vehicle component model",
           "class": "Car",
           "member": "SetComponentModelAlpha"
         },
@@ -57046,7 +57046,7 @@
           "id": "0D13",
           "name": "SET_MATRIX_X_ROTATION",
           "num_params": 2,
-          "short_desc": "Sets matrix x angle"
+          "short_desc": "Sets only the X (right vector) rotation angle of a matrix in degrees, preserving Y and Z"
         },
         {
           "input": [
@@ -57062,7 +57062,7 @@
           "id": "0D14",
           "name": "SET_MATRIX_Y_ROTATION",
           "num_params": 2,
-          "short_desc": "Sets matrix y angle"
+          "short_desc": "Sets only the Y (up vector) rotation angle of a matrix in degrees, preserving X and Z"
         },
         {
           "input": [
@@ -57078,7 +57078,7 @@
           "id": "0D15",
           "name": "SET_MATRIX_Z_ROTATION",
           "num_params": 2,
-          "short_desc": "Sets matrix z angle"
+          "short_desc": "Sets only the Z (at vector) rotation angle of a matrix in degrees, preserving X and Y"
         },
         {
           "input": [
@@ -57094,7 +57094,7 @@
           "id": "0D16",
           "name": "SET_MATRIX_ROTATION_FROM_QUAT",
           "num_params": 2,
-          "short_desc": "Sets matrix rotation from quaternion"
+          "short_desc": "Sets a matrix's rotation from a quaternion (CQuaternion)"
         },
         {
           "input": [
@@ -57110,7 +57110,7 @@
           "id": "0D17",
           "name": "SET_QUAT_FROM_MATRIX",
           "num_params": 2,
-          "short_desc": "Sets quaternion from matrix"
+          "short_desc": "Converts a matrix's rotation into a quaternion (CQuaternion)"
         },
         {
           "input": [
@@ -57142,7 +57142,7 @@
           "id": "0D18",
           "name": "ROTATE_QUAT_ON_AXIS",
           "num_params": 6,
-          "short_desc": "Rotates quaternion"
+          "short_desc": "Rotates a quaternion around a specified axis by an angle (degrees) with combine operation"
         },
         {
           "input": [
@@ -57161,7 +57161,7 @@
           "id": "0D19",
           "name": "GET_NORMALISED_QUAT",
           "num_params": 2,
-          "short_desc": "Normalizes quaternion"
+          "short_desc": "Normalizes a quaternion to unit length and stores the result"
         },
         {
           "input": [
@@ -57184,7 +57184,7 @@
           "id": "0D1A",
           "name": "MULTIPLY_QUATS",
           "num_params": 3,
-          "short_desc": "Multiplies quaternions"
+          "short_desc": "Multiplies two quaternions: result = quat1 * quat2 (quaternion concatenation)"
         },
         {
           "input": [
@@ -57208,7 +57208,7 @@
           "id": "0D1B",
           "name": "GET_ENTITY_TYPE_AND_CLASS",
           "num_params": 3,
-          "short_desc": "Gets information about entity type"
+          "short_desc": "Gets the entity type and class (vtable identifier) of any game entity pointer"
         },
         {
           "input": [
@@ -57220,7 +57220,7 @@
           "id": "0D1C",
           "name": "NORMALISE_VECTOR",
           "num_params": 1,
-          "short_desc": "Normalizes vector"
+          "short_desc": "Normalizes a 3D vector (CVector) to unit length in-place"
         },
         {
           "input": [
@@ -57244,7 +57244,7 @@
           "id": "0D1D",
           "name": "INTERPOLATE_MATRIX",
           "num_params": 4,
-          "short_desc": "Performs matrix slerp"
+          "short_desc": "Performs spherical linear interpolation (slerp) between two matrix rotations via quaternions"
         },
         {
           "input": [
@@ -57268,7 +57268,7 @@
           "id": "0D1E",
           "name": "QUAT_SLERP",
           "num_params": 4,
-          "short_desc": "Performs quaternion slerp"
+          "short_desc": "Performs spherical linear interpolation (slerp) between two quaternions with factor t"
         },
         {
           "input": [
@@ -57287,7 +57287,7 @@
           "id": "0D1F",
           "name": "GET_COMPONENT_CHILD_COMPONENT",
           "num_params": 2,
-          "short_desc": "Gets component child component",
+          "short_desc": "Gets the first child frame (RwFrame) of a component",
           "class": "Component",
           "member": "GetChildComponent"
         },
@@ -57308,7 +57308,7 @@
           "id": "0D20",
           "name": "GET_COMPONENT_NEXT_COMPONENT",
           "num_params": 2,
-          "short_desc": "Gets component next component",
+          "short_desc": "Gets the next sibling frame (RwFrame) of a component",
           "class": "Component",
           "member": "GetNextComponent"
         },
@@ -57329,7 +57329,7 @@
           "id": "0D21",
           "name": "GET_COMPONENT_NAME",
           "num_params": 2,
-          "short_desc": "Gets component name component",
+          "short_desc": "Gets the name string of a component (RwFrame) node",
           "class": "Component",
           "member": "GetName"
         },
@@ -57350,7 +57350,7 @@
           "id": "0D22",
           "name": "GET_COMPONENT_WORLD_MATRIX",
           "num_params": 2,
-          "short_desc": "Gets component world matrix",
+          "short_desc": "Gets the world matrix (Local Transform Matrix/LTM) of a component",
           "class": "Component",
           "member": "GetWorldMatrix"
         },
@@ -57371,7 +57371,7 @@
           "id": "0D23",
           "name": "GET_COMPONENT_MODELLING_MATRIX",
           "num_params": 2,
-          "short_desc": "Gets component modelling matrix",
+          "short_desc": "Gets the local modelling matrix of a component (relative to its parent)",
           "class": "Component",
           "member": "GetModellingMatrix"
         },
@@ -57401,7 +57401,7 @@
           "id": "0D24",
           "name": "INITIALISE_QUAT",
           "num_params": 5,
-          "short_desc": "Sets quaternion elements"
+          "short_desc": "Initializes a quaternion from X, Y, Z axis components and angle (degrees)"
         },
         {
           "input": [
@@ -57477,7 +57477,7 @@
           "id": "0D25",
           "name": "INITIALISE_MATRIX",
           "num_params": 17,
-          "short_desc": "Sets matrix elements"
+          "short_desc": "Sets all 16 elements of a matrix individually (right, up, at vectors and position with flags)"
         },
         {
           "input": [
@@ -57501,7 +57501,7 @@
           "id": "0D26",
           "name": "INITIALISE_VECTOR",
           "num_params": 4,
-          "short_desc": "Sets vector elements"
+          "short_desc": "Initializes a 3D vector (CVector) from X, Y, Z components"
         },
         {
           "input": [
@@ -57521,7 +57521,7 @@
           "id": "0D27",
           "name": "MEMCPY",
           "num_params": 3,
-          "short_desc": "Copies block of memory"
+          "short_desc": "Copies a block of memory from source to destination with specified byte size"
         },
         {
           "input": [
@@ -57550,7 +57550,7 @@
           "id": "0D28",
           "name": "GET_VECTOR_ELEMENTS",
           "num_params": 4,
-          "short_desc": "Gets vector elements"
+          "short_desc": "Extracts the X, Y, Z components from a 3D vector (CVector)"
         },
         {
           "input": [
@@ -57584,7 +57584,7 @@
           "id": "0D29",
           "name": "GET_QUAT_ELEMENTS",
           "num_params": 5,
-          "short_desc": "Gets quaternion elements"
+          "short_desc": "Extracts the X, Y, Z, W components from a quaternion (CQuaternion)"
         },
         {
           "input": [
@@ -57603,7 +57603,7 @@
           "id": "0D2A",
           "name": "GET_CAR_NUM_COLLIDED_ENTITIES",
           "num_params": 2,
-          "short_desc": "Gets car number of collided entities"
+          "short_desc": "Gets the number of entities currently collided with by a car"
         },
         {
           "input": [
@@ -57622,7 +57622,7 @@
           "id": "0D2B",
           "name": "GET_CHAR_NUM_COLLIDED_ENTITIES",
           "num_params": 2,
-          "short_desc": "Gets char number of collided entities"
+          "short_desc": "Gets the number of entities currently collided with by a character"
         },
         {
           "input": [
@@ -57641,7 +57641,7 @@
           "id": "0D2C",
           "name": "GET_OBJECT_NUM_COLLIDED_ENTITIES",
           "num_params": 2,
-          "short_desc": "Gets object number of collided entities"
+          "short_desc": "Gets the number of entities currently collided with by an object"
         },
         {
           "output": [
@@ -57689,7 +57689,7 @@
           "id": "0D2D",
           "name": "GET_LOCAL_TIME",
           "num_params": 8,
-          "short_desc": "Gets current time from OS"
+          "short_desc": "Gets the current local system time: year, month, day-of-week, day, hour, minute, second, ms"
         },
         {
           "input": [
@@ -57709,7 +57709,7 @@
           "id": "0D2E",
           "name": "SET_THREAD_VAR",
           "num_params": 3,
-          "short_desc": "Sets value of thread's local variable"
+          "short_desc": "Sets a local variable value in another script thread by variable index"
         },
         {
           "input": [
@@ -57732,7 +57732,7 @@
           "id": "0D2F",
           "name": "GET_THREAD_VAR",
           "num_params": 3,
-          "short_desc": "Gets value of thread's local variable"
+          "short_desc": "Gets a local variable value from another script thread by variable index"
         },
         {
           "input": [
@@ -57758,7 +57758,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets char's bone"
+          "short_desc": "Gets a character's bone frame data by bone index or bone name (string)"
         },
         {
           "input": [
@@ -57777,7 +57777,7 @@
           "id": "0D31",
           "name": "GET_BONE_OFFSET",
           "num_params": 2,
-          "short_desc": "Gets bone offset"
+          "short_desc": "Gets the offset vector (relative position) of a bone frame"
         },
         {
           "input": [
@@ -57796,7 +57796,7 @@
           "id": "0D32",
           "name": "GET_BONE_QUAT",
           "num_params": 2,
-          "short_desc": "Returns pointer to the quaterion under bone address obtained with GET_CHAR_BONE"
+          "short_desc": "Returns a pointer to the rotation quaternion (RtQuat) of a bone frame"
         },
         {
           "input": [
@@ -57816,7 +57816,7 @@
           "id": "0D33",
           "name": "SET_CAR_DOOR_WINDOW_STATE",
           "num_params": 3,
-          "short_desc": "Sets car window state"
+          "short_desc": "Sets a car door window state to opened (1) or closed (0)"
         },
         {
           "input": [
@@ -57860,7 +57860,7 @@
           "id": "0D34",
           "name": "GET_CAR_COLLIDED_ENTITIES",
           "num_params": 7,
-          "short_desc": "Stores car collided entities"
+          "short_desc": "Stores up to 6 entities that a car has collided with into variables"
         },
         {
           "input": [
@@ -57904,7 +57904,7 @@
           "id": "0D35",
           "name": "GET_CHAR_COLLIDED_ENTITIES",
           "num_params": 7,
-          "short_desc": "Stores char collided entities"
+          "short_desc": "Stores up to 6 entities that a character has collided with into variables"
         },
         {
           "input": [
@@ -57948,7 +57948,7 @@
           "id": "0D36",
           "name": "GET_OBJECT_COLLIDED_ENTITIES",
           "num_params": 7,
-          "short_desc": "Stores object collided entities"
+          "short_desc": "Stores up to 6 entities that an object has collided with into variables"
         },
         {
           "input": [
@@ -57968,7 +57968,7 @@
           "id": "0D37",
           "name": "SET_STRUCT_PARAM",
           "num_params": 3,
-          "short_desc": "Sets struct with 4b alignment param value"
+          "short_desc": "Sets a 4-byte parameter value in a struct by element index (raw memory write)"
         },
         {
           "input": [
@@ -57991,7 +57991,7 @@
           "id": "0D38",
           "name": "GET_STRUCT_PARAM",
           "num_params": 3,
-          "short_desc": "Gets struct with 4b alignment param value"
+          "short_desc": "Gets a 4-byte parameter value from a struct by element index (raw memory read)"
         },
         {
           "input": [
@@ -58010,7 +58010,7 @@
           "id": "0D39",
           "name": "GET_CHAR_MAX_HEALTH",
           "num_params": 2,
-          "short_desc": "Gets char max health value"
+          "short_desc": "Gets the maximum health value of a character (CPed.m_fMaxHealth)"
         },
         {
           "input": [
@@ -58105,7 +58105,7 @@
           "id": "0D3A",
           "name": "GET_COLLISION_BETWEEN_POINTS",
           "num_params": 20,
-          "short_desc": "Gets collision data between two points"
+          "short_desc": "Performs a line-of-sight collision test between two 3D points with configurable filter flags"
         },
         {
           "input": [
@@ -58134,7 +58134,7 @@
           "id": "0D3B",
           "name": "GET_COL_DATA_NORMAL_VECTOR",
           "num_params": 4,
-          "short_desc": "Gets colpoint normal vector"
+          "short_desc": "Gets the surface normal vector (X, Y, Z) from a CColPoint"
         },
         {
           "input": [
@@ -58153,7 +58153,7 @@
           "id": "0D3C",
           "name": "GET_COL_DATA_SURFACE",
           "num_params": 2,
-          "short_desc": "Gets colpoint data surface ID"
+          "short_desc": "Gets the surface type ID from a CColPoint"
         },
         {
           "input": [
@@ -58172,7 +58172,7 @@
           "id": "0D3D",
           "name": "GET_COL_DATA_LIGHTING",
           "num_params": 2,
-          "short_desc": "Gets colpoint data lighting value"
+          "short_desc": "Gets the lighting value (packed day/night) from a CColPoint"
         },
         {
           "input": [
@@ -58191,7 +58191,7 @@
           "id": "0D3E",
           "name": "GET_COL_DATA_DEPTH",
           "num_params": 2,
-          "short_desc": "Gets colpoint data depth value"
+          "short_desc": "Gets the depth value from a CColPoint"
         },
         {
           "input": [
@@ -58248,7 +58248,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Finds intersection coordinates between two circles"
+          "short_desc": "Finds the intersection point(s) between two 2D circles, returns true if they intersect"
         },
         {
           "input": [
@@ -58288,7 +58288,7 @@
           "id": "0D40",
           "name": "DRAW_SHAPE",
           "num_params": 8,
-          "short_desc": "Draws 2D shape"
+          "short_desc": "Draws a 2D polygon shape with primitive type, texture, vertex data and blend modes"
         },
         {
           "input": [
@@ -58352,7 +58352,7 @@
           "id": "0D41",
           "name": "SETUP_SHAPE_VERTEX",
           "num_params": 14,
-          "short_desc": "Sets vertex params"
+          "short_desc": "Sets up a vertex for a 2D shape with position, RHW, color, UV and optional screen-flip"
         },
         {
           "input": [
@@ -58371,7 +58371,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Loads txd from file"
+          "short_desc": "Loads a TXD texture dictionary from a file and registers it by a name"
         },
         {
           "input": [
@@ -58390,7 +58390,7 @@
           "id": "0D43",
           "name": "GET_TXD_ID",
           "num_params": 2,
-          "short_desc": "Gets txd's id"
+          "short_desc": "Gets the TXD slot ID for a named texture dictionary"
         },
         {
           "input": [
@@ -58416,7 +58416,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Finds texture in txd"
+          "short_desc": "Finds a texture by name within a named texture dictionary and returns its pointer"
         },
         {
           "input": [
@@ -58444,7 +58444,7 @@
           "id": "0D45",
           "name": "ROTATE_SHAPE_VERTICES",
           "num_params": 5,
-          "short_desc": "Rotates vertices of 2D shape around point"
+          "short_desc": "Rotates all vertices of a 2D shape around a pivot point by an angle (degrees)"
         },
         {
           "input": [
@@ -58470,7 +58470,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Finds texture in txd"
+          "short_desc": "Finds a texture by name within a texture dictionary identified by slot ID"
         },
         {
           "input": [
@@ -58492,7 +58492,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets txd's id for model"
+          "short_desc": "Gets the TXD slot index used by a given model"
         },
         {
           "input": [
@@ -58514,7 +58514,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets model's CRC32 key"
+          "short_desc": "Gets the CRC32 hash key of a model (from CBaseModelInfo.m_nKey)"
         },
         {
           "input": [
@@ -58540,7 +58540,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Compares two strings"
+          "short_desc": "Compares two strings, returns 0 if equal, condition true if equal"
         },
         {
           "input": [
@@ -58557,7 +58557,7 @@
           "id": "0D4A",
           "name": "STRING_CAT",
           "num_params": 2,
-          "short_desc": "Concatenates two strings"
+          "short_desc": "Concatenates (appends) a source string to a destination string buffer"
         },
         {
           "input": [
@@ -58584,7 +58584,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Finds the first occurrence of a string"
+          "short_desc": "Finds the first occurrence of a substring within a string, returns pointer or NULL"
         },
         {
           "input": [
@@ -58603,7 +58603,7 @@
           "id": "0D4C",
           "name": "STRING_LEN",
           "num_params": 2,
-          "short_desc": "Gets string length"
+          "short_desc": "Gets the length of a string (strlen)"
         },
         {
           "input": [
@@ -58620,7 +58620,7 @@
           "id": "0D4D",
           "name": "STRING_CPY",
           "num_params": 2,
-          "short_desc": "Copies string to another string"
+          "short_desc": "Copies a source string to a destination string buffer (strcpy)"
         },
         {
           "input": [
@@ -58647,7 +58647,7 @@
           "id": "0D4E",
           "name": "GET_STRUCT_FIELD",
           "num_params": 4,
-          "short_desc": "Gets value at struct offset"
+          "short_desc": "Reads a value from a struct at a byte offset with specifiable size (supports string reads)"
         },
         {
           "input": [
@@ -58671,7 +58671,7 @@
           "id": "0D4F",
           "name": "SET_STRUCT_FIELD",
           "num_params": 4,
-          "short_desc": "Sets value at struct offset"
+          "short_desc": "Writes a value to a struct at a byte offset with specifiable size (supports string writes)"
         },
         {
           "input": [
@@ -58735,7 +58735,7 @@
           "id": "0D50",
           "name": "DRAW_TEMPORARY_SHADOW",
           "num_params": 14,
-          "short_desc": "Draws shadow"
+          "short_desc": "Draws a temporary shadow with position, size, rotation, texture, color and intensity"
         },
         {
           "input": [
@@ -58799,7 +58799,7 @@
           "id": "0D51",
           "name": "DRAW_PERMANENT_SHADOW",
           "num_params": 14,
-          "short_desc": "Draws permanent shadow"
+          "short_desc": "Draws a permanent shadow with position, size, rotation, texture, color and duration (ms)"
         },
         {
           "input": [
@@ -58855,7 +58855,7 @@
           "id": "0D52",
           "name": "DRAW_TEMPORARY_LIGHT",
           "num_params": 12,
-          "short_desc": "Draws light"
+          "short_desc": "Draws a temporary point light with type, position, direction, radius and RGB color"
         },
         {
           "input": [
@@ -58903,7 +58903,7 @@
           "id": "0D53",
           "name": "DRAW_TEMPORARY_CORONA",
           "num_params": 10,
-          "short_desc": "Draws corona"
+          "short_desc": "Draws a temporary corona (glow) with texture, RGBA color, position and size"
         },
         {
           "input": [
@@ -58983,7 +58983,7 @@
           "id": "0D54",
           "name": "DRAW_TEMPORARY_CORONA_EX",
           "num_params": 18,
-          "short_desc": "Draws corona with some extra parameters"
+          "short_desc": "Draws a corona with extended parameters: farClip, nearClip, flare type, reflection, fade speed"
         },
         {
           "output": [
@@ -59021,7 +59021,7 @@
           "id": "0D55",
           "name": "GET_SUN_COLORS",
           "num_params": 6,
-          "short_desc": "Gets sun colors"
+          "short_desc": "Gets the current sun core RGB color and sun corona (glow) RGB color"
         },
         {
           "output": [
@@ -59039,7 +59039,7 @@
           "id": "0D56",
           "name": "GET_SUN_SCREEN_COORS",
           "num_params": 2,
-          "short_desc": "Gets sun 2D position"
+          "short_desc": "Gets the sun's 2D screen coordinates"
         },
         {
           "output": [
@@ -59065,7 +59065,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets sun 3D position"
+          "short_desc": "Gets the sun's 3D world position, returns false if sun is below horizon"
         },
         {
           "output": [
@@ -59083,7 +59083,7 @@
           "id": "0D58",
           "name": "GET_SUN_SIZE",
           "num_params": 2,
-          "short_desc": "Gets sun size"
+          "short_desc": "Gets the sun's core size and glow (corona) size"
         },
         {
           "output": [
@@ -59096,7 +59096,7 @@
           "id": "0D59",
           "name": "GET_CURRENT_WEATHER",
           "num_params": 1,
-          "short_desc": "Gets current weather"
+          "short_desc": "Gets the current weather type (CWeather::OldWeatherType)"
         },
         {
           "output": [
@@ -59114,7 +59114,7 @@
           "id": "0D5A",
           "name": "GET_TRAFFICLIGHTS_CURRENT_COLOR",
           "num_params": 2,
-          "short_desc": "Gets trafficlight colors"
+          "short_desc": "Gets the current traffic light colors for North-South and West-East directions"
         },
         {
           "input": [
@@ -59170,7 +59170,7 @@
           "id": "0D5B",
           "name": "DRAW_SPOTLIGHT",
           "num_params": 12,
-          "short_desc": "Draws spotlight"
+          "short_desc": "Draws a spotlight cone from origin to target with base/target radius and shadow options"
         },
         {
           "input": [
@@ -59193,7 +59193,7 @@
           "id": "0D5C",
           "name": "GET_CAR_LIGHT_DAMAGE_STATUS",
           "num_params": 3,
-          "short_desc": "Gets car light damaging state"
+          "short_desc": "Gets the damage state of a specific car light (e.g. headlight, taillight)"
         },
         {
           "input": [
@@ -59213,7 +59213,7 @@
           "id": "0D5D",
           "name": "SET_CAR_LIGHT_DAMAGE_STATUS",
           "num_params": 3,
-          "short_desc": "Sets car light damaging state"
+          "short_desc": "Sets the damage state of a specific car light (e.g. headlight, taillight)"
         },
         {
           "input": [
@@ -59237,7 +59237,7 @@
           "id": "0D5E",
           "name": "GET_VEHICLE_CLASS_AND_SUBCLASS",
           "num_params": 3,
-          "short_desc": "Gets vehicle class and subclass"
+          "short_desc": "Gets the vehicle class and subclass type identifiers"
         },
         {
           "input": [
@@ -59281,7 +59281,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets vehicle dummy position"
+          "short_desc": "Gets the position of a vehicle dummy element by type index (world or local space)"
         },
         {
           "input": [
@@ -59332,7 +59332,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Creates projectile"
+          "short_desc": "Creates a projectile (e.g. missile) from an entity toward a target with configurable force"
         },
         {
           "input": [
@@ -59359,7 +59359,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Loads texture from BMP file. Can be used with texture memory option to load file from memory",
+          "short_desc": "Loads a texture from a BMP file, optionally with a separate mask file for alpha channel",
           "class": "Texture",
           "member": "LoadFromBmpFile"
         },
@@ -59384,7 +59384,7 @@
             "is_condition": true,
             "is_static": true
           },
-          "short_desc": "Loads texture from PNG file. Can be used with texturememory option to load file from memory",
+          "short_desc": "Loads a texture from a PNG file",
           "class": "Texture",
           "member": "LoadFromPngFile"
         },
@@ -59418,7 +59418,7 @@
           "id": "0D65",
           "name": "PRINT_TEMPORARY_TEXT",
           "num_params": 6,
-          "short_desc": "Prints a text into display (\"light\" version)"
+          "short_desc": "Prints temporary text on screen at position with scale and font style (basic version)"
         },
         {
           "input": [
@@ -59526,7 +59526,7 @@
           "id": "0D66",
           "name": "PRINT_TEMPORARY_TEXT_EX",
           "num_params": 25,
-          "short_desc": "Prints a text into display"
+          "short_desc": "Prints temporary text on screen with full formatting: font, color, alignment, outline, shadow"
         },
         {
           "input": [
@@ -59550,7 +59550,7 @@
           "id": "0D72",
           "name": "GET_GAME_VOLUME",
           "num_params": 3,
-          "short_desc": "Gets game sfx and radio volume"
+          "short_desc": "Gets the current SFX and music/radio volume settings as int or float"
         },
         {
           "input": [
@@ -59574,7 +59574,7 @@
           "id": "0D73",
           "name": "GET_SCREEN_WIDTH_AND_HEIGHT",
           "num_params": 3,
-          "short_desc": "Gets screen width and height"
+          "short_desc": "Gets the screen width and height as integer or float values"
         },
         {
           "input": [
@@ -59593,7 +59593,7 @@
           "id": "0D74",
           "name": "GET_COMPONENT_PARENT_COMPONENT",
           "num_params": 2,
-          "short_desc": "Gets component parent component",
+          "short_desc": "Gets the parent frame (RwFrame) of a component",
           "class": "Component",
           "member": "GetParentComponent"
         },
@@ -59614,7 +59614,7 @@
           "id": "0D75",
           "name": "GET_COMPONENT_NUM_OBJECTS",
           "num_params": 2,
-          "short_desc": "Gets component number of objects",
+          "short_desc": "Gets the number of RpAtomic objects within a component",
           "class": "Component",
           "member": "GetNumObjects"
         },
@@ -59642,7 +59642,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets component object"
+          "short_desc": "Gets an RpAtomic object by index from a component's child objects"
         },
         {
           "input": [
@@ -59658,7 +59658,7 @@
           "id": "0D77",
           "name": "HIDE_OBJECT_ATOMIC",
           "num_params": 2,
-          "short_desc": "Hides object atomic"
+          "short_desc": "Hides (1) or shows (0) an atomic object by modifying its render flags"
         },
         {
           "input": [
@@ -59681,7 +59681,7 @@
           "id": "0D78",
           "name": "GET_OBJECT_ATOMIC_FLAG",
           "num_params": 3,
-          "short_desc": "Gets object atomic flag"
+          "short_desc": "Checks if a specific visibility flag is set on an atomic object"
         },
         {
           "input": [
@@ -59701,7 +59701,7 @@
           "id": "0D79",
           "name": "SET_OBJECT_ATOMIC_FLAG",
           "num_params": 3,
-          "short_desc": "Sets object atomic flag"
+          "short_desc": "Sets or clears a visibility flag on an atomic object"
         },
         {
           "input": [
@@ -59723,7 +59723,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets object atomic material texture"
+          "short_desc": "Gets the number of materials in an atomic object's geometry"
         },
         {
           "input": [
@@ -59749,7 +59749,7 @@
           "attrs": {
             "is_condition": true
           },
-          "short_desc": "Gets object atomic material texture"
+          "short_desc": "Gets the texture pointer for a material by index from an atomic geometry"
         },
         {
           "input": [
@@ -59768,7 +59768,7 @@
           "id": "0D7C",
           "name": "LOAD_TEXTURE_FROM_DDS_FILE",
           "num_params": 2,
-          "short_desc": "Loads texture from DDS file",
+          "short_desc": "Loads a texture from a DDS file",
           "class": "Texture",
           "member": "LoadFromDdsFile",
           "attrs": {
@@ -59786,7 +59786,7 @@
           "id": "0D7D",
           "name": "CLEAN_LOADED_TEXTURE",
           "num_params": 1,
-          "short_desc": "Cleans loaded texture",
+          "short_desc": "Unloads/frees a previously loaded texture from memory",
           "class": "Texture",
           "member": "CleanLoaded"
         },
@@ -59836,7 +59836,7 @@
           "id": "0D7E",
           "name": "DRAW_2D_SPRITE",
           "num_params": 10,
-          "short_desc": "Draws 2D sprite",
+          "short_desc": "Draws a 2D sprite with texture, rectangle corners, RGBA color and rotation angle",
           "class": "Sprite",
           "member": "Draw2D",
           "attrs": {
@@ -59937,7 +59937,7 @@
           "id": "0D7F",
           "name": "DRAW_2D_SPRITE_WITH_GRADIENT",
           "num_params": 22,
-          "short_desc": "Draws 2D sprite with gradient",
+          "short_desc": "Draws a 2D sprite with per-vertex colors (gradient) using texture and rectangle",
           "class": "Sprite",
           "member": "Draw2DWithGradient",
           "attrs": {

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_update": 1784496376965,
+    "last_update": 1784496656700,
     "version": "0.302",
     "url": "https://library.sannybuilder.com/#/gta3_ps2"
   },
@@ -5966,12 +5966,21 @@
           "num_params": 0
         },
         {
-          "attrs": {
-            "is_unsupported": true
-          },
+          "input": [
+            {
+              "name": "self",
+              "type": "Player"
+            }
+          ],
           "id": "0116",
           "name": "IS_PLAYER_STILL_ALIVE",
-          "num_params": 0
+          "num_params": 1,
+          "attrs": {
+            "is_condition": true
+          },
+          "class": "Player",
+          "member": "IsStillAlive",
+          "short_desc": "Checks if the player is not dead (not wasted), opposite of IS_PLAYER_DEAD"
         },
         {
           "input": [
@@ -6641,12 +6650,40 @@
           "short_desc": "Returns true if the specified vehicle has been crushed by the car crusher"
         },
         {
+          "input": [
+            {
+              "name": "modelId",
+              "type": "model_vehicle"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "Car",
+              "source": "var_any"
+            }
+          ],
           "attrs": {
-            "is_unsupported": true
+            "is_constructor": true
           },
           "id": "014A",
           "name": "CREATE_GANG_CAR",
-          "num_params": 0
+          "num_params": 5,
+          "class": "Car",
+          "member": "CreateGang",
+          "short_desc": "Creates a vehicle at the specified location, with the specified model"
         },
         {
           "input": [

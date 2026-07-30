@@ -1,0 +1,11 @@
+request_model {modelId} #SAVANNA
+if
+    not has_model_loaded {modelId} #SAVANNA
+then
+    load_all_models_now
+end
+
+custom_plate_for_next_car {modelId} #SAVANNA {text} "__CLEO__"
+custom_plate_design_for_next_car {modelId} #SAVANNA {design} CarPlateDesign.LosSantos
+int handle = create_car {modelId} #SAVANNA {pos} 2492.0 -1660.0 12.5
+mark_model_as_no_longer_needed {modelId} #SAVANNA

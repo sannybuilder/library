@@ -1,0 +1,1 @@
+This command sets fixed text for the number plate of the car created immediately after this command. If the car has two number plates, only one will be changed, the other one will have a random text (this behavior is fixed in SilentPatch - both plates will have the custom text.)

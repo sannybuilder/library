@@ -1,12 +1,5 @@
-int modelIdx = #WHEEL_OR1
+request_vehicle_mod {modelId} #WHEEL_OR1
+load_all_models_now
+int modHandle = add_vehicle_mod carHandle {modelId} #WHEEL_OR1
 
-request_vehicle_mod {modelId} modelIdx
-if
-	not has_model_loaded {modelId} modelIdx
-then
-	load_all_models_now
-end 
-
-int modHandle = add_vehicle_mod carHandle {modelId} modelIdx
-
-mark_vehicle_mod_as_no_longer_needed {modelId} modelIdx
+mark_vehicle_mod_as_no_longer_needed {modelId} #WHEEL_OR1

@@ -1,10 +1,12 @@
-const LockoutPlayerOnly = 3
-float x,y,z, radius=10.0
-int Car
+float x, y, z, radius = 10.0
+Car carHandle
+
 while true
     wait 100
-    get_active_camera_coordinates store_to x y z
-    if get_random_car_in_sphere_no_save_recursive x y z radius findNext True skipWrecked True store_to Car
-    then lock_car_doors Car lockStatus LockoutPlayerOnly
+    x, y, z = get_active_camera_coordinates
+    if
+        carHandle = get_random_car_in_sphere_no_save_recursive x y z radius findNext True skipWrecked True
+    then
+        lock_car_doors carHandle CarLock.LockoutPlayerOnly
     end
 end

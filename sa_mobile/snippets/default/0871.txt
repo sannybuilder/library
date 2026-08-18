@@ -1,2 +1,22 @@
-0871: switch_start $model_id num_cases 3 has_default_case true @default_label #NRG500 @case_nrg #FCR900 @case_fcr #BF400 @case_bf400 -1 @end_switch -1 @end_switch -1 @end_switch -1 @end_switch
-0871: switch_start $girlfriend num_cases 4 has_default_case false @end_switch 1 @case_michelle 2 @case_helena 3 @case_barbara 4 @case_katie -1 @end_switch -1 @end_switch -1 @end_switch
+// raw-opcode switch: dispatch on a value, then jump to the case label
+switch_start $model_id num_cases 3 has_default_case true @default_label #NRG500 @case_nrg #FCR900 @case_fcr #BF400 @case_bf400 -1 @end_switch -1 @end_switch -1 @end_switch -1 @end_switch
+
+:default_label
+print_string_now {text} "No matching model" {time} 3000
+terminate_this_script
+
+:case_nrg
+print_string_now {text} "NRG-500 selected" {time} 3000
+terminate_this_script
+
+:case_fcr
+print_string_now {text} "FCR-900 selected" {time} 3000
+terminate_this_script
+
+:case_bf400
+print_string_now {text} "BF-400 selected" {time} 3000
+terminate_this_script
+
+:end_switch
+print_string_now {text} "Switch ended" {time} 3000
+terminate_this_script

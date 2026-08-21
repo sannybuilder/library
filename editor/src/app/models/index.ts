@@ -157,7 +157,7 @@ export const GameScmVersions: Partial<Record<Game, ScmVersionConfig>> = {
   [Game.lcs]: {
     versions: [
       { id: 'psp', label: 'SCM (PSP)' },
-      // { id: 'beta', label: 'SCM (Beta)' },
+      { id: 'beta', label: 'SCM (Beta)' },
     ],
   },
   [Game.vcs]: {

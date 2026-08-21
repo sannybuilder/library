@@ -850,6 +850,7 @@
     "0605": "request_animation \"SUNBATHE\" // not needed for \"PED\"!\nload_all_models_now\n        \ntask_play_anim {handle} $scplayer {animationName} \"ParkSit_W_idleA\" {animationFile} \"SUNBATHE\" {blendSpeed} 0.5 {loop} true {lockX} false {lockY} false {keepLastFrame} false {time} 10000\n        \nremove_animation {animationFile} \"SUNBATHE\" // not allowed for \"PED\"!",
     "062A": "set_float_stat {id} StatId.Fat {value} 1000.0",
     "062E": "// wait for task sequence end\nrepeat\n    wait {time} 0\n    int status = get_script_task_status $scplayer {taskId} TaskCommand.PerformSequenceTask\nuntil status <> 1 // TaskStatus.PerformingTask",
+    "064B": "int effect = create_fx_system {name} \"prt_spark_2\" {pos} 2488.0 -1660.0 13.0 {ignoreBoundingChecks} true\nplay_fx_system effect",
     "064C": "int effect = create_fx_system {name} \"prt_spark_2\" {pos} 2488.0 -1660.0 13.0 {ignoreBoundingChecks} true\nplay_fx_system effect",
     "066A": "int effect = create_fx_system_on_char_with_direction {name} \"cement\" {char} $scplayer {offset} 0.0 0.5 1.0 {direction} 0.0 0.5 0.5 {ignoreBoundingChecks} true\nplay_fx_system effect",
     "0674": "request_model {modelId} #SAVANNA\nload_all_models_now\n\ncustom_plate_for_next_car {modelId} #SAVANNA {text} \"__CLEO__\"\ncustom_plate_design_for_next_car {modelId} #SAVANNA {design} CarPlateDesign.LosSantos\nint handle = create_car {modelId} #SAVANNA {pos} 2492.0 -1660.0 12.5\nmark_model_as_no_longer_needed {modelId} #SAVANNA",

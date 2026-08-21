@@ -44,6 +44,7 @@ export class ScmViewComponent implements OnChanges {
   @Input() canEdit: boolean = false;
   @Input() scmMap: ScmMap | null = null;
   @Input() game!: Game;
+  @Input() version?: string;
   @Input() viewContext!: ViewContext;
   @Input() activeFileName?: string | null;
   @Input() activeFragment?: string | null;
@@ -167,7 +168,11 @@ export class ScmViewComponent implements OnChanges {
       return null;
     }
 
-    const route = getRoutePath(this.game, normalizeScmPath(targetPath));
+    const route = getRoutePath(
+      this.game,
+      normalizeScmPath(targetPath),
+      this.version,
+    );
     return this.toRouteHref(route);
   }
 

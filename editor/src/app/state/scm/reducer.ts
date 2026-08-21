@@ -14,17 +14,18 @@ import {
   updateScmRefs,
   updateScmVariables,
 } from './actions';
-import { sortRefs, sortVariables } from '../../utils';
+import { getScmScopeKey, sortRefs, sortVariables } from '../../utils';
 
 export interface ScmState {
   activeFileName?: string;
   activeGame?: Game;
+  activeVersion?: string;
   selectedLabelOffset?: number;
   files: Record<string, ScriptFile>;
-  commentsByGame: Partial<Record<Game, KeyValueEntry[]>>;
-  refsByGame: Partial<Record<Game, KeyValueEntry[]>>;
-  variablesByGame: Partial<Record<Game, KeyValueEntry[]>>;
-  maps: Partial<Record<Game, ScmMap>>;
+  commentsByGame: Record<string, KeyValueEntry[]>;
+  refsByGame: Record<string, KeyValueEntry[]>;
+  variablesByGame: Record<string, KeyValueEntry[]>;
+  maps: Record<string, ScmMap>;
 }
 
 export const initialState: ScmState = {
@@ -41,80 +42,81 @@ export const scmReducer = createReducer(
     ...state,
     activeFileName: name,
   })),
-  on(loadScmMap, (state, { game }) => ({
+  on(loadScmMap, (state, { game, version }) => ({
     ...state,
     activeGame: game,
+    activeVersion: version,
   })),
   on(loadScmFileSuccess, (state, { name, content }) => ({
     ...state,
     activeFileName: name,
     files: {
       ...state.files,
-      [name]: content,
+      [fileCacheKey(state, name)]: content,
     },
   })),
-  on(loadVariableOverlaySuccess, (state, { game, variables }) =>
-    updateState(state, game, {
+  on(loadVariableOverlaySuccess, (state, { game, version, variables }) =>
+    updateState(state, game, version, {
       variablesByGame: {
-        [game]: sortVariables(variables),
+        [getScmScopeKey(game, version)]: sortVariables(variables),
       },
     }),
   ),
-  on(loadRefsOverlaySuccess, (state, { game, refs }) =>
-    updateState(state, game, {
+  on(loadRefsOverlaySuccess, (state, { game, version, refs }) =>
+    updateState(state, game, version, {
       refsByGame: {
-        [game]: sortRefs(refs),
+        [getScmScopeKey(game, version)]: sortRefs(refs),
       },
     }),
   ),
-  on(loadCommentsOverlaySuccess, (state, { game, comments }) =>
-    updateState(state, game, {
+  on(loadCommentsOverlaySuccess, (state, { game, version, comments }) =>
+    updateState(state, game, version, {
       commentsByGame: {
-        [game]: comments,
+        [getScmScopeKey(game, version)]: comments,
       },
     }),
   ),
   on(updateScmRefs, (state, { refs }) => {
-    const game = state.activeGame;
+    const { activeGame: game, activeVersion: version } = state;
     if (!game) {
       return state;
     }
 
-    return updateState(state, game, {
+    return updateState(state, game, version, {
       refsByGame: {
-        [game]: refs,
+        [getScmScopeKey(game, version)]: refs,
       },
     });
   }),
   on(updateScmVariables, (state, { variables }) => {
-    const game = state.activeGame;
+    const { activeGame: game, activeVersion: version } = state;
     if (!game) {
       return state;
     }
 
-    return updateState(state, game, {
+    return updateState(state, game, version, {
       variablesByGame: {
-        [game]: variables,
+        [getScmScopeKey(game, version)]: variables,
       },
     });
   }),
   on(updateScmComments, (state, { comments }) => {
-    const game = state.activeGame;
+    const { activeGame: game, activeVersion: version } = state;
     if (!game) {
       return state;
     }
 
-    return updateState(state, game, {
+    return updateState(state, game, version, {
       commentsByGame: {
-        [game]: comments,
+        [getScmScopeKey(game, version)]: comments,
       },
     });
   }),
-  on(loadScmMapSuccess, (state, { game, map }) => ({
+  on(loadScmMapSuccess, (state, { game, version, map }) => ({
     ...state,
     maps: {
       ...state.maps,
-      [game]: map,
+      [getScmScopeKey(game, version)]: map,
     },
   })),
   on(selectScmLabelOffset, (state, { offset }) => ({
@@ -126,13 +128,15 @@ export const scmReducer = createReducer(
 function updateState(
   state: ScmState,
   game: Game,
+  version: string | undefined,
   update: Partial<ScmState>,
 ): ScmState {
-  const refs = update.refsByGame?.[game] ?? state.refsByGame[game] ?? [];
+  const scope = getScmScopeKey(game, version);
+  const refs = update.refsByGame?.[scope] ?? state.refsByGame[scope] ?? [];
   const comments =
-    update.commentsByGame?.[game] ?? state.commentsByGame[game] ?? [];
+    update.commentsByGame?.[scope] ?? state.commentsByGame[scope] ?? [];
   const variables =
-    update.variablesByGame?.[game] ?? state.variablesByGame[game] ?? [];
+    update.variablesByGame?.[scope] ?? state.variablesByGame[scope] ?? [];
 
   return {
     ...state,
@@ -140,17 +144,25 @@ function updateState(
     commentsByGame: {
       ...state.commentsByGame,
       ...update.commentsByGame,
-      [game]: comments,
+      [scope]: comments,
     },
     refsByGame: {
       ...state.refsByGame,
       ...update.refsByGame,
-      [game]: refs,
+      [scope]: refs,
     },
     variablesByGame: {
       ...state.variablesByGame,
       ...update.variablesByGame,
-      [game]: variables,
+      [scope]: variables,
     },
   };
+}
+
+function fileCacheKey(state: ScmState, name: string): string {
+  const scope = getScmScopeKey(
+    state.activeGame ?? ('' as Game),
+    state.activeVersion,
+  );
+  return `${scope}:${name}`;
 }

@@ -12,6 +12,7 @@ import {
   decodePlatforms,
   decodeVersions,
   getDefaultExtension,
+  getScmVersionConfig,
   isValidGame,
 } from './utils';
 
@@ -74,6 +75,29 @@ export class RouteGuard {
     const defaultExtension = getDefaultExtension(viewContext);
 
     if (viewContext === ViewContext.Scm) {
+      const scmConfig = getScmVersionConfig(game);
+      let version: string | undefined;
+
+      if (scmConfig) {
+        const first = segments[0];
+        if (first && scmConfig.versions.some((v) => v.id === first)) {
+          // /lcs/scm/psp/<file>
+          version = segments.shift();
+        } else {
+          // missing or unknown version -> redirect to the first one
+          return this._router.navigate(
+            [
+              '/',
+              game,
+              'scm',
+              scmConfig.versions[0].id,
+              ...segments,
+            ].filter(Boolean),
+            { queryParams: route.queryParams },
+          );
+        }
+      }
+
       const fileName = segments.join('/');
       this._game.onListEnter({
         game,
@@ -82,6 +106,7 @@ export class RouteGuard {
         action: 'scm-file',
         rail,
         viewContext,
+        scmVersion: version,
       });
       return true;
     }

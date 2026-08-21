@@ -27,14 +27,19 @@
         data-display="static"
         tabindex="0"
       >
-        {{
-          (isCodeViewContext(viewContext)
-            ? "ui.header.nativeCode"
-            : isScmViewContext(viewContext)
-              ? "ui.header.scm"
-              : "ui.header.scriptCommands"
-          ) | translate
-        }}
+        <ng-container *ngIf="getCurrentScmLabel() as label">{{
+          label
+        }}</ng-container>
+        <ng-container *ngIf="!getCurrentScmLabel()">
+          {{
+            (isCodeViewContext(viewContext)
+              ? "ui.header.nativeCode"
+              : isScmViewContext(viewContext)
+                ? "ui.header.scm"
+                : "ui.header.scriptCommands"
+            ) | translate
+          }}
+        </ng-container>
       </span>
 
       <div class="dropdown-menu">
@@ -47,12 +52,22 @@
           *ngIf="doesGameHaveNativeDocs(game)"
           >{{ "ui.header.nativeCode" | translate }}</a
         >
-        <a
-          [routerLink]="['/', game, 'scm']"
-          class="dropdown-item"
-          *ngIf="doesGameHaveScm(game)"
-          >{{ "ui.header.scm" | translate }}</a
-        >
+        <ng-container *ngIf="doesGameHaveScm(game)">
+          <ng-container *ngFor="let version of getScmVersions(game)">
+            <a
+              class="dropdown-item"
+              [routerLink]="['/', game, 'scm', version.id]"
+              [attr.translate]="'no'"
+              >{{ getScmVersionLabel(game, version.id) }}</a
+            >
+          </ng-container>
+          <a
+            class="dropdown-item"
+            *ngIf="!getScmVersions(game)"
+            [routerLink]="['/', game, 'scm']"
+            >{{ "ui.header.scm" | translate }}</a
+          >
+        </ng-container>
       </div>
     </li>
   </ol>

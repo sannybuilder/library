@@ -11,17 +11,22 @@ import { Game } from '../../models';
 import {
   extractRefOffset,
   getFragment,
+  getScmScopeKey,
   normalizeScmPath,
   toLineNumber,
   toRefKey,
 } from '../../utils';
-import { game } from '../game/selectors';
 
 export const state = createFeatureSelector<ScmState>('scm');
 
 export const activeFileName = createSelector(
   state,
   (state: ScmState | undefined) => state?.activeFileName,
+);
+
+export const activeVersion = createSelector(
+  state,
+  (state: ScmState | undefined) => state?.activeVersion,
 );
 
 export const selectedLabelOffset = createSelector(
@@ -33,13 +38,15 @@ export const currentFile = createSelector(
   state,
   activeFileName,
   (state: ScmState | undefined, fileName: string | undefined) =>
-    fileName ? state?.files[fileName] : undefined,
+    fileName
+      ? state?.files[fileCacheKey(state, fileName)]
+      : undefined,
 );
 
 export const fileByName = createSelector(
   state,
   (state: ScmState | undefined, props: { name: string }) =>
-    state?.files[props.name],
+    state ? state.files[fileCacheKey(state, props.name)] : undefined,
 );
 
 export const files = createSelector(
@@ -49,54 +56,74 @@ export const files = createSelector(
 
 export const refsByGame = createSelector(
   state,
-  (state: ScmState | undefined, props: { game: Game }) =>
-    props.game ? (state?.refsByGame[props.game] ?? []) : [],
+  (state: ScmState | undefined, props: { game: Game; version?: string }) =>
+    props.game
+      ? (state?.refsByGame[getScmScopeKey(props.game, props.version)] ?? [])
+      : [],
 );
 
 export const commentsByGame = createSelector(
   state,
-  (state: ScmState | undefined, props: { game: Game }) =>
-    props.game ? (state?.commentsByGame[props.game] ?? []) : [],
+  (state: ScmState | undefined, props: { game: Game; version?: string }) =>
+    props.game
+      ? (state?.commentsByGame[getScmScopeKey(props.game, props.version)] ??
+        [])
+      : [],
 );
 
 export const variablesByGame = createSelector(
   state,
-  (state: ScmState | undefined, props: { game: Game }) =>
-    props.game ? (state?.variablesByGame[props.game] ?? []) : [],
+  (state: ScmState | undefined, props: { game: Game; version?: string }) =>
+    props.game
+      ? (state?.variablesByGame[getScmScopeKey(props.game, props.version)] ??
+        [])
+      : [],
 );
 
 export const currentRefsOverlay = createSelector(
   state,
-  game,
-  (state: ScmState | undefined, game: Game | undefined) =>
-    game ? (state?.refsByGame[game] ?? []) : [],
+  (state: ScmState | undefined) =>
+    state?.activeGame
+      ? (state.refsByGame[
+          getScmScopeKey(state.activeGame, state.activeVersion)
+        ] ?? [])
+      : [],
 );
 
 export const currentCommentsOverlay = createSelector(
   state,
-  game,
-  (state: ScmState | undefined, game: Game | undefined) =>
-    game ? (state?.commentsByGame[game] ?? []) : [],
+  (state: ScmState | undefined) =>
+    state?.activeGame
+      ? (state.commentsByGame[
+          getScmScopeKey(state.activeGame, state.activeVersion)
+        ] ?? [])
+      : [],
 );
 
 export const currentVariablesOverlay = createSelector(
   state,
-  game,
-  (state: ScmState | undefined, game: Game | undefined) =>
-    game ? (state?.variablesByGame[game] ?? []) : [],
+  (state: ScmState | undefined) =>
+    state?.activeGame
+      ? (state.variablesByGame[
+          getScmScopeKey(state.activeGame, state.activeVersion)
+        ] ?? [])
+      : [],
 );
 
 export const mapByGame = createSelector(
   state,
-  (state: ScmState | undefined, props: { game: Game | undefined }) =>
-    props.game ? state?.maps[props.game] : undefined,
+  (state: ScmState | undefined, props: { game: Game | undefined; version?: string }) =>
+    props.game
+      ? state?.maps[getScmScopeKey(props.game, props.version)]
+      : undefined,
 );
 
 export const currentMap = createSelector(
   state,
-  game,
-  (state: ScmState | undefined, game: Game | undefined) =>
-    game ? state?.maps[game] : undefined,
+  (state: ScmState | undefined) =>
+    state?.activeGame
+      ? state.maps[getScmScopeKey(state.activeGame, state.activeVersion)]
+      : undefined,
 );
 
 export const treeByGame = createSelector(
@@ -281,4 +308,12 @@ function toDisplayLabel(
   }
 
   return `:label_${offset.toString()}`;
+}
+
+function fileCacheKey(state: ScmState, name: string): string {
+  const scope = getScmScopeKey(
+    state.activeGame ?? ('' as Game),
+    state.activeVersion,
+  );
+  return `${scope}:${name}`;
 }

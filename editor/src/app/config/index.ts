@@ -18,6 +18,11 @@ export interface Config {
     contents: string;
     tree: string;
   };
+  // Base URL template for SCM data (map.json + all script files).
+  // Supports {game} and {version} placeholders, e.g.
+  //   local:  /assets/{game}/scm/{version}
+  //   remote: https://sannybuilder.com/decfiles/{game}_{version}
+  scmBase: string;
 }
 
 @NgModule({

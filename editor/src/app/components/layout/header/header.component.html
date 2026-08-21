@@ -449,9 +449,20 @@
       }}</a>
     </ng-container>
     <ng-container *ngIf="doesGameHaveScm(v)">
-      <a class="dropdown-item marker" [routerLink]="['/', v, 'scm']">{{
-        "ui.header.scm" | translate
-      }}</a>
+      <ng-container *ngFor="let version of getScmVersions(v)">
+        <a
+          class="dropdown-item marker"
+          [routerLink]="['/', v, 'scm', version.id]"
+          [attr.translate]="'no'"
+          >{{ getScmVersionLabel(v, version.id) }}</a
+        >
+      </ng-container>
+      <a
+        class="dropdown-item marker"
+        *ngIf="!getScmVersions(v)"
+        [routerLink]="['/', v, 'scm']"
+        >{{ "ui.header.scm" | translate }}</a
+      >
     </ng-container>
   </ng-container>
 </ng-template>

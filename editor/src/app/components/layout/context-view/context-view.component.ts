@@ -47,6 +47,7 @@ export class ContextViewComponent {
 
   viewContext$ = this._game.viewContext$;
   game$ = this._game.game$;
+  version$ = this._game.scmVersion$;
   viewMode$ = this._ui.viewMode$;
   enumNames$ = this._enums.enumNames$;
   extensions$ = this._extensions.extensions$;

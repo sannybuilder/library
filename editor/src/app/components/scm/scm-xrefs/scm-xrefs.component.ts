@@ -11,10 +11,11 @@ import { getRoutePath } from '../../../utils';
 })
 export class ScmXrefsComponent {
   @Input() game!: Game;
+  @Input() version?: string;
   @Input() xrefs: ScmXrefItem[] = [];
   @Input() activeRef!: string;
 
   getRoutePath(path: string) {
-    return getRoutePath(this.game, path);
+    return getRoutePath(this.game, path, this.version);
   }
 }

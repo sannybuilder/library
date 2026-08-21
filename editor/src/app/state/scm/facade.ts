@@ -33,6 +33,7 @@ export class ScmFacade {
   refsOverlay$ = this.store$.select(selector.currentRefsOverlay);
   commentsOverlay$ = this.store$.select(selector.currentCommentsOverlay);
   variablesOverlay$ = this.store$.select(selector.currentVariablesOverlay);
+  activeVersion$ = this.store$.select(selector.activeVersion);
 
   loadFile(name: string) {
     return this.store$.dispatch(loadScmFile({ name }));
@@ -62,31 +63,31 @@ export class ScmFacade {
     return this.store$.dispatch(updateScmComments({ comments }));
   }
 
-  mapByGame$(game: Game) {
-    return this.store$.select(selector.mapByGame, { game });
+  mapByGame$(game: Game, version?: string) {
+    return this.store$.select(selector.mapByGame, { game, version });
   }
 
-  treeByGame$(game: Game) {
-    return this.store$.select(selector.treeByGame, { game });
+  treeByGame$(game: Game, version?: string) {
+    return this.store$.select(selector.treeByGame, { game, version });
   }
 
-  xrefsByGame$(game: Game) {
-    return this.store$.select(selector.xrefsByGame, { game });
+  xrefsByGame$(game: Game, version?: string) {
+    return this.store$.select(selector.xrefsByGame, { game, version });
   }
 
   fileByName$(name: string) {
     return this.store$.select(selector.fileByName, { name });
   }
 
-  refsByGame$(game: Game) {
-    return this.store$.select(selector.refsByGame, { game });
+  refsByGame$(game: Game, version?: string) {
+    return this.store$.select(selector.refsByGame, { game, version });
   }
 
-  commentsByGame$(game: Game) {
-    return this.store$.select(selector.commentsByGame, { game });
+  commentsByGame$(game: Game, version?: string) {
+    return this.store$.select(selector.commentsByGame, { game, version });
   }
 
-  variablesByGame$(game: Game) {
-    return this.store$.select(selector.variablesByGame, { game });
+  variablesByGame$(game: Game, version?: string) {
+    return this.store$.select(selector.variablesByGame, { game, version });
   }
 }

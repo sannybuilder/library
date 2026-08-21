@@ -53,6 +53,7 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   Game = Game;
 
   game$ = this._game.game$;
+  version$ = this._game.scmVersion$;
   isSidebarCollapsed$ = this._ui.isSidebarCollapsed$;
   onDestroy$ = new Subject<void>();
   viewMode$ = this._ui.viewMode$;
@@ -81,6 +82,7 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private orderedFilePaths: string[] = [];
   private currentActiveFile?: string;
   private currentGame?: Game;
+  private currentVersion?: string;
   private touchStartX?: number;
   private touchStartY?: number;
 
@@ -131,12 +133,13 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       });
 
-    combineLatest([this.tree$, this.activeFile$, this.game$])
+    combineLatest([this.tree$, this.activeFile$, this.game$, this.version$])
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(([tree, activeFile, game]) => {
+      .subscribe(([tree, activeFile, game, version]) => {
         this.orderedFilePaths = this.flattenTreePaths(tree ?? []);
         this.currentActiveFile = activeFile ?? undefined;
         this.currentGame = game;
+        this.currentVersion = version;
         this.updateQuickNavState();
       });
   }
@@ -274,7 +277,9 @@ export class ScmPageComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     const targetPath = this.orderedFilePaths[targetIndex];
-    this._router.navigate(getRoutePath(this.currentGame, targetPath));
+    this._router.navigate(
+      getRoutePath(this.currentGame, targetPath, this.currentVersion),
+    );
   }
 
   private flattenTreePaths(nodes: ScmTreeNode[]): string[] {

@@ -34,6 +34,7 @@ import { ScmService } from './service';
 import { GameFacade } from '../game/facade';
 import { ScmFacade } from './facade';
 import { ChangesFacade } from '../changes/facade';
+import { getScmAssetBase } from '../../utils';
 
 @Injectable({ providedIn: 'root' })
 export class ScmEffects {
@@ -50,9 +51,9 @@ export class ScmEffects {
         this._game.game$.pipe(
           take(1),
           switchMap((game) =>
-            this._facade.map$.pipe(
+            this._facade.activeVersion$.pipe(
               take(1),
-              switchMap((scmMap) =>
+              switchMap((version) =>
                 this._facade.fileByName$(name).pipe(
                   take(1),
                   switchMap((cachedContent) => {
@@ -60,9 +61,11 @@ export class ScmEffects {
                       return [];
                     }
 
-                    const base = scmMap?.base || `/assets/${game}/scm`;
+                    const base = this._service.scmBase(game, version);
                     return this._service.loadFile(name, base).pipe(
-                      map((content) => loadScmFileSuccess({ name, content })),
+                      map((content) =>
+                        loadScmFileSuccess({ name, content }),
+                      ),
                       catchError(() => of(loadScmFileError({ name }))),
                     );
                   }),
@@ -93,25 +96,26 @@ export class ScmEffects {
   loadVariableOverlay$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadVariableOverlay),
-      switchMap(({ game }) =>
-        this._facade.variablesByGame$(game).pipe(
+      switchMap(({ game, version }) =>
+        this._facade.variablesByGame$(game, version).pipe(
           take(1),
           switchMap((cachedVariables) => {
             if (cachedVariables.length > 0) {
               return [];
             }
 
-            return this._service.loadVariableOverlay(game).pipe(
+            return this._service.loadVariableOverlay(game, version).pipe(
               map((variables) => {
                 const mapper = (obj: Record<string, string>) =>
                   Object.entries(obj).map(([key, value]) => ({ key, value }));
                 const variablesArray = mapper(variables);
                 return loadVariableOverlaySuccess({
                   game,
+                  version,
                   variables: variablesArray,
                 });
               }),
-              catchError(() => of(loadVariableOverlayError({ game }))),
+              catchError(() => of(loadVariableOverlayError({ game, version }))),
             );
           }),
         ),
@@ -122,21 +126,21 @@ export class ScmEffects {
   loadRefsOverlay$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadRefsOverlay),
-      switchMap(({ game }) =>
-        this._facade.refsByGame$(game).pipe(
+      switchMap(({ game, version }) =>
+        this._facade.refsByGame$(game, version).pipe(
           take(1),
           switchMap((cachedRefs) => {
             if (cachedRefs.length > 0) {
               return [];
             }
-            return this._service.loadRefsOverlay(game).pipe(
+            return this._service.loadRefsOverlay(game, version).pipe(
               map((refs) => {
                 const mapper = (obj: Record<string, string>) =>
                   Object.entries(obj).map(([key, value]) => ({ key, value }));
                 const refsArray = mapper(refs);
-                return loadRefsOverlaySuccess({ game, refs: refsArray });
+                return loadRefsOverlaySuccess({ game, version, refs: refsArray });
               }),
-              catchError(() => of(loadRefsOverlayError({ game }))),
+              catchError(() => of(loadRefsOverlayError({ game, version }))),
             );
           }),
         ),
@@ -147,15 +151,15 @@ export class ScmEffects {
   loadCommentsOverlay$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadCommentsOverlay),
-      switchMap(({ game }) =>
-        this._facade.commentsByGame$(game).pipe(
+      switchMap(({ game, version }) =>
+        this._facade.commentsByGame$(game, version).pipe(
           take(1),
           switchMap((cachedComments) => {
             if (cachedComments.length > 0) {
               return [];
             }
 
-            return this._service.loadCommentsOverlay(game).pipe(
+            return this._service.loadCommentsOverlay(game, version).pipe(
               map((comments) => {
                 const commentsArray = Object.entries(comments).map(
                   ([key, value]) => ({
@@ -166,10 +170,11 @@ export class ScmEffects {
 
                 return loadCommentsOverlaySuccess({
                   game,
+                  version,
                   comments: commentsArray,
                 });
               }),
-              catchError(() => of(loadCommentsOverlayError({ game }))),
+              catchError(() => of(loadCommentsOverlayError({ game, version }))),
             );
           }),
         ),
@@ -181,10 +186,10 @@ export class ScmEffects {
     () =>
       this._actions$.pipe(
         ofType(updateScmRefs),
-        withLatestFrom(this._game.game$),
-        tap(([{ refs }, game]) => {
+        withLatestFrom(this._game.game$, this._game.scmVersion$),
+        tap(([{ refs }, game, version]) => {
           this._changes.registerTextFileChange(
-            `${game}/scm/refs.json`,
+            `${getScmAssetBase(game, version).replace(/^\/assets\//, '')}/refs.json`,
             JSON.stringify(
               Object.fromEntries(refs.map(({ key, value }) => [key, value])),
               null,
@@ -200,10 +205,10 @@ export class ScmEffects {
     () =>
       this._actions$.pipe(
         ofType(updateScmVariables),
-        withLatestFrom(this._game.game$),
-        tap(([{ variables }, game]) => {
+        withLatestFrom(this._game.game$, this._game.scmVersion$),
+        tap(([{ variables }, game, version]) => {
           this._changes.registerTextFileChange(
-            `${game}/scm/variables.json`,
+            `${getScmAssetBase(game, version).replace(/^\/assets\//, '')}/variables.json`,
             JSON.stringify(
               Object.fromEntries(
                 variables.map(({ key, value }) => [key, value]),
@@ -221,10 +226,10 @@ export class ScmEffects {
     () =>
       this._actions$.pipe(
         ofType(updateScmComments),
-        withLatestFrom(this._game.game$),
-        tap(([{ comments }, game]) => {
+        withLatestFrom(this._game.game$, this._game.scmVersion$),
+        tap(([{ comments }, game, version]) => {
           this._changes.registerTextFileChange(
-            `${game}/scm/comments.json`,
+            `${getScmAssetBase(game, version).replace(/^\/assets\//, '')}/comments.json`,
             JSON.stringify(
               Object.fromEntries(
                 comments.map(({ key, value }) => [key, value.split('\n')]),
@@ -241,17 +246,19 @@ export class ScmEffects {
   loadScmMap$ = createEffect(() =>
     this._actions$.pipe(
       ofType(loadScmMap),
-      switchMap(({ game }) =>
-        this._facade.mapByGame$(game).pipe(
+      switchMap(({ game, version }) =>
+        this._facade.mapByGame$(game, version).pipe(
           take(1),
           switchMap((cachedMap) => {
             if (cachedMap !== undefined) {
               return [];
             }
 
-            return this._service.loadMap(game).pipe(
-              map((mapData) => loadScmMapSuccess({ game, map: mapData })),
-              catchError(() => of(loadScmMapError({ game }))),
+            return this._service.loadMap(game, version).pipe(
+              map((mapData) =>
+                loadScmMapSuccess({ game, version, map: mapData }),
+              ),
+              catchError(() => of(loadScmMapError({ game, version }))),
             );
           }),
         ),

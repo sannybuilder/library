@@ -21,56 +21,59 @@ export const loadScmFileError = createAction(
 
 export const loadVariableOverlay = createAction(
   '[SCM] Load Variable Overlay',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const loadVariableOverlaySuccess = createAction(
   '[SCM] Load Variable Overlay Success',
   props<{
     game: Game;
+    version?: string;
     variables: KeyValueEntry[];
   }>(),
 );
 
 export const loadVariableOverlayError = createAction(
   '[SCM] Load Variable Overlay Error',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const loadRefsOverlay = createAction(
   '[SCM] Load Refs Overlay',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const loadRefsOverlaySuccess = createAction(
   '[SCM] Load Refs Overlay Success',
   props<{
     game: Game;
+    version?: string;
     refs: KeyValueEntry[];
   }>(),
 );
 
 export const loadRefsOverlayError = createAction(
   '[SCM] Load Refs Overlay Error',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const loadCommentsOverlay = createAction(
   '[SCM] Load Comments Overlay',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const loadCommentsOverlaySuccess = createAction(
   '[SCM] Load Comments Overlay Success',
   props<{
     game: Game;
+    version?: string;
     comments: KeyValueEntry[];
   }>(),
 );
 
 export const loadCommentsOverlayError = createAction(
   '[SCM] Load Comments Overlay Error',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const updateScmRefs = createAction(
@@ -90,17 +93,17 @@ export const updateScmComments = createAction(
 
 export const loadScmMap = createAction(
   '[SCM] Load Map',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const loadScmMapSuccess = createAction(
   '[SCM] Load Map Success',
-  props<{ game: Game; map: ScmMap }>(),
+  props<{ game: Game; version?: string; map: ScmMap }>(),
 );
 
 export const loadScmMapError = createAction(
   '[SCM] Load Map Error',
-  props<{ game: Game }>(),
+  props<{ game: Game; version?: string }>(),
 );
 
 export const selectScmLabelOffset = createAction(

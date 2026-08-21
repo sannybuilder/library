@@ -17,6 +17,8 @@ import {
   getBaseGame,
   getBaseGames,
   getGameVariations,
+  getScmVersionConfig,
+  getScmVersionLabel,
   isValidGame,
 } from '../../../utils';
 import { Config, CONFIG } from '../../../config';
@@ -149,5 +151,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
   doesGameHaveScm(game: Game) {
     return doesGameHaveScm(game);
+  }
+
+  getScmVersions(game: Game) {
+    return getScmVersionConfig(game)?.versions;
+  }
+
+  getScmVersionLabel(game: Game, id: string) {
+    return getScmVersionLabel(game, id);
   }
 }

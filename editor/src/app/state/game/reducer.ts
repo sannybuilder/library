@@ -5,6 +5,7 @@ import { primitiveTypes } from '../../utils';
 
 export interface GameState {
   game?: Game;
+  scmVersion?: string;
   viewContext: ViewContext;
   primitiveTypes: PrimitiveType[];
 }
@@ -16,9 +17,10 @@ export const initialState: GameState = {
 
 export const gameReducer = createReducer(
   initialState,
-  on(onListEnter, (state, { game, viewContext }) => ({
+  on(onListEnter, (state, { game, viewContext, scmVersion }) => ({
     ...state,
     game,
+    scmVersion,
     viewContext: viewContext ?? ViewContext.Script,
     primitiveTypes: primitiveTypes(game, viewContext ?? ViewContext.Script),
   }))

@@ -15,6 +15,7 @@ export class ScmTreeComponent {
 
   @Input() activeFile?: string;
   @Input() game!: Game;
+  @Input() version?: string;
   @Input() tree: ScmTreeNode[] = [];
 
   filterQuery = '';
@@ -24,7 +25,7 @@ export class ScmTreeComponent {
   }
 
   getRoutePathForNode(path: string) {
-    return getRoutePath(this.game, path);
+    return getRoutePath(this.game, path, this.version);
   }
 
   shouldShowNode(node: ScmTreeNode): boolean {

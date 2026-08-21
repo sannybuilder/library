@@ -1,5 +1,41 @@
 import { uniqBy } from 'lodash';
 import { KeyValueEntry } from '../components/scm';
+import { Game, GameScmVersions, ScmVersionConfig } from '../models';
+
+export function getScmVersionConfig(game: Game): ScmVersionConfig | undefined {
+  return GameScmVersions[game];
+}
+
+export function getScmDefaultVersion(game: Game): string | undefined {
+  return GameScmVersions[game]?.versions[0]?.id;
+}
+
+export function getScmVersionLabel(game: Game, id: string): string {
+  const version = GameScmVersions[game]?.versions.find((v) => v.id === id);
+  return version?.label ?? id;
+}
+
+// Unique cache scope for a game + optional SCM version, e.g. 'lcs' or 'lcs/psp'.
+export function getScmScopeKey(game: Game, version?: string): string {
+  return version ? `${game}/${version}` : game;
+}
+
+// Base folder the SCM overlays/map are loaded from, e.g. '/assets/lcs/scm/psp'.
+export function getScmAssetBase(game: Game, version?: string): string {
+  return version ? `/assets/${game}/scm/${version}` : `/assets/${game}/scm`;
+}
+
+// Interpolate the configured SCM base template (see Config.scmBase).
+// e.g. template '/assets/{game}/scm/{version}' + (lcs, psp) -> '/assets/lcs/scm/psp'
+export function getScmBase(
+  template: string,
+  game: Game,
+  version: string,
+): string {
+  return template
+    .replace(/\{game\}/g, game)
+    .replace(/\{version\}/g, version);
+}
 
 export function normalizeScmPath(path: string): string {
   return path.replace(/\\/g, '/').replace(/\.json$/i, '');
@@ -24,8 +60,12 @@ export function getFragment(lineIndex: number | undefined): string | undefined {
   return undefined;
 }
 
-export function getRoutePath(game: string, path: string) {
-  return [`/${game}/scm`, ...path.split('/').filter(Boolean)];
+export function getRoutePath(game: string, path: string, version?: string) {
+  const parts = [`/${game}/scm`];
+  if (version) {
+    parts.push(version);
+  }
+  return [...parts, ...path.split('/').filter(Boolean)];
 }
 
 export function toRefKey(offset: number): string {

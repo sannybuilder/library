@@ -144,6 +144,27 @@ export enum Game {
   vcs = 'vcs',
 }
 
+export interface ScmVersion {
+  id: string;
+  label: string;
+}
+
+export interface ScmVersionConfig {
+  versions: ScmVersion[];
+}
+
+export const GameScmVersions: Partial<Record<Game, ScmVersionConfig>> = {
+  [Game.lcs]: {
+    versions: [
+      { id: 'psp', label: 'SCM (PSP)' },
+      // { id: 'beta', label: 'SCM (Beta)' },
+    ],
+  },
+  [Game.vcs]: {
+    versions: [{ id: 'psp', label: 'SCM (PSP)' }],
+  },
+};
+
 const r = <T>(cb: (game: Game, index: number) => T) =>
   Object.values(Game).reduce((m, v, index) => {
     m[v] = cb(v, index);

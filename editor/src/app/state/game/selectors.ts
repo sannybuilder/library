@@ -5,6 +5,11 @@ export const state = createFeatureSelector<GameState>('game');
 
 export const game = createSelector(state, (state: GameState) => state.game);
 
+export const scmVersion = createSelector(
+  state,
+  (state: GameState) => state.scmVersion,
+);
+
 export const primitiveTypes = createSelector(
   state,
   (state: GameState) => state.primitiveTypes

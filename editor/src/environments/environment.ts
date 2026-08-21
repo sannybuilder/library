@@ -19,6 +19,7 @@ export const environment: Config = {
     contents: 'https://api.github.com/repos/sannybuilder/library/contents',
     tree: 'https://api.github.com/repos/sannybuilder/library/git/trees/HEAD?recursive=1',
   },
+  scmBase: '/assets/{game}/scm/{version}',
 };
 
 /*

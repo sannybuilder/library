@@ -101,7 +101,11 @@ export class UiEffects {
   viewOnLoad$ = createEffect(() =>
     this._actions$.pipe(
       ofType(onListEnter),
-      withLatestFrom(this._ui.canEdit$, this._game.game$),
+      withLatestFrom(
+        this._ui.canEdit$,
+        this._game.game$,
+        this._game.scmVersion$,
+      ),
       switchMap(
         ([
           {
@@ -119,13 +123,14 @@ export class UiEffects {
           },
           canEdit,
           game,
+          scmVersion,
         ]) => {
           if (viewContext === ViewContext.Scm && action === 'scm-file') {
             const loadFileActions = [
-              loadScmMap({ game }),
-              loadVariableOverlay({ game }),
-              loadRefsOverlay({ game }),
-              loadCommentsOverlay({ game }),
+              loadScmMap({ game, version: scmVersion }),
+              loadVariableOverlay({ game, version: scmVersion }),
+              loadRefsOverlay({ game, version: scmVersion }),
+              loadCommentsOverlay({ game, version: scmVersion }),
               id ? loadScmFile({ name: id }) : loadMainFile(),
             ];
 
@@ -136,7 +141,7 @@ export class UiEffects {
 
             const [railScope, railExtension, railId, railMode] = railParts;
             if (railScope === 'refs') {
-              return this._scm.refsByGame$(game).pipe(
+              return this._scm.refsByGame$(game, scmVersion).pipe(
                 take(1),
                 switchMap((refs) => [
                   ...loadFileActions,
@@ -152,7 +157,7 @@ export class UiEffects {
             }
 
             if (railScope === 'variables') {
-              return this._scm.variablesByGame$(game).pipe(
+              return this._scm.variablesByGame$(game, scmVersion).pipe(
                 take(1),
                 switchMap((variables) => [
                   ...loadFileActions,
@@ -222,13 +227,13 @@ export class UiEffects {
           }
 
           if (viewContext === ViewContext.Scm && action === 'scm-refs') {
-            return this._scm.refsByGame$(game).pipe(
+            return this._scm.refsByGame$(game, scmVersion).pipe(
               take(1),
               switchMap((refs) => [
-                loadScmMap({ game }),
-                loadRefsOverlay({ game }),
-                loadVariableOverlay({ game }),
-                loadCommentsOverlay({ game }),
+                loadScmMap({ game, version: scmVersion }),
+                loadRefsOverlay({ game, version: scmVersion }),
+                loadVariableOverlay({ game, version: scmVersion }),
+                loadCommentsOverlay({ game, version: scmVersion }),
                 loadMainFile(),
                 displayOrEditScmRefs({
                   refs,
@@ -240,13 +245,13 @@ export class UiEffects {
           }
 
           if (viewContext === ViewContext.Scm && action === 'scm-variables') {
-            return this._scm.variablesByGame$(game).pipe(
+            return this._scm.variablesByGame$(game, scmVersion).pipe(
               take(1),
               switchMap((variables) => [
-                loadScmMap({ game }),
-                loadVariableOverlay({ game }),
-                loadRefsOverlay({ game }),
-                loadCommentsOverlay({ game }),
+                loadScmMap({ game, version: scmVersion }),
+                loadVariableOverlay({ game, version: scmVersion }),
+                loadRefsOverlay({ game, version: scmVersion }),
+                loadCommentsOverlay({ game, version: scmVersion }),
                 loadMainFile(),
                 displayOrEditScmVariables({
                   variables,

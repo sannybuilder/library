@@ -45,6 +45,7 @@ export class RefListComponent {
 
   @Input() refs: KeyValueEntry[] = [];
   @Input() game!: string;
+  @Input() version?: string;
   filterQuery = '';
 
   get filteredEntries(): KeyValueEntry[] {
@@ -74,7 +75,9 @@ export class RefListComponent {
   getScmTargetPath(refName: string) {
     const filePath = this.scmTargetPathByName.get(refName);
     if (filePath) {
-      return { route: getRoutePath(this.game, normalizeScmPath(filePath)) };
+      return {
+        route: getRoutePath(this.game, normalizeScmPath(filePath), this.version),
+      };
     }
 
     // local label, try to find it in xrefs
@@ -85,7 +88,11 @@ export class RefListComponent {
       const file = this.map?.files?.[Number(fileIndex)];
       if (file?.path) {
         return {
-          route: getRoutePath(this.game, normalizeScmPath(file.path)),
+          route: getRoutePath(
+            this.game,
+            normalizeScmPath(file.path),
+            this.version,
+          ),
           fragment: 'label-' + extractRefOffset(refName),
         };
       }

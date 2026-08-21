@@ -17,7 +17,7 @@ import { run as generateEnums } from './generate-enums';
 import { run as generateOpcodeExamples } from './generate-opcode-examples';
 import { run as generateSupportInfo } from './generate-support-info';
 import { run as generateNativeFunctionDeclaration } from './generate-native-functions';
-import { existsSync } from 'fs';
+import { cpSync, existsSync, mkdirSync } from 'fs';
 
 const { join } = require('path');
 const { readFileSync } = require('fs');
@@ -51,7 +51,8 @@ games.forEach((game) => {
   }
 
   if (doesGameHaveScm(game)) {
-    run(`cp -r ../${game}/scm ${assets}`);
+    // copy the whole SCM folder (all versions / subfolders) into assets/<game>/scm
+    copyScm(game, join(assets, 'scm'));
   }
 
   run(`cp *.json ../editor/src/assets/${game}`, join('..', game));
@@ -123,6 +124,16 @@ function run(cmd: string, cwd = process.cwd()) {
     cwd,
     stdio: [0, 1, 2],
   });
+}
+
+// Copy the game's whole SCM folder (all versions / subfolders)
+function copyScm(game: string, dest: string) {
+  const src = join('..', game, 'scm');
+  if (!existsSync(src)) {
+    return;
+  }
+  mkdirSync(dest, { recursive: true });
+  cpSync(src, dest, { recursive: true, force: true });
 }
 
 function cargo(cmd: string) {

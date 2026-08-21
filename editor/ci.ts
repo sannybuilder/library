@@ -2,7 +2,7 @@ import { doesGameHaveMap, doesGameHaveScm, doesGameRequireOpcode, getBaseGame } 
 import { Game, GameNativeAssets } from './src/app/models';
 
 const { join } = require('path');
-const { readFileSync } = require('fs');
+const { cpSync, existsSync, mkdirSync, readFileSync } = require('fs');
 const { execSync } = require('child_process');
 
 import { run as generateEnumsInfo } from './generate-enums-info';
@@ -50,7 +50,8 @@ games.forEach((game) => {
   }
 
   if (doesGameHaveScm(game)) {
-    run(`cp ../${game}/scm ${assets} -r`);
+    // copy the whole SCM folder (all versions / subfolders) into assets/<game>/scm
+    copyScm(game, join(assets, 'scm'));
   }
 
   if (GameNativeAssets[game]) {
@@ -98,4 +99,14 @@ function run(cmd: string, cwd = process.cwd()) {
     cwd,
     stdio: [0, 1, 2],
   });
+}
+
+// Copy the game's whole SCM folder (all versions / subfolders)
+function copyScm(game: string, dest: string) {
+  const src = join('..', game, 'scm');
+  if (!existsSync(src)) {
+    return;
+  }
+  mkdirSync(dest, { recursive: true });
+  cpSync(src, dest, { recursive: true, force: true });
 }

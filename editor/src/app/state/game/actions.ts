@@ -22,5 +22,6 @@ export const onListEnter = createAction(
     rail?: string;
     viewContext?: ViewContext;
     jsonModel?: JsonModel;
+    scmVersion?: string;
   }>()
 );

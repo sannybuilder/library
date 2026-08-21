@@ -14,6 +14,7 @@ export class GameFacade {
     distinctUntilChanged(),
     filter((v): v is Game => !!v),
   );
+  scmVersion$ = this.store$.select(selector.scmVersion);
   viewContext$ = this.store$.select(selector.viewContext);
 
   onListEnter({
@@ -29,6 +30,7 @@ export class GameFacade {
     rail,
     viewContext,
     jsonModel,
+    scmVersion,
   }: {
     game: Game;
     extension?: string;
@@ -42,6 +44,7 @@ export class GameFacade {
     rail?: string;
     viewContext?: ViewContext;
     jsonModel?: JsonModel;
+    scmVersion?: string;
   }) {
     this.store$.dispatch(
       onListEnter({
@@ -57,6 +60,7 @@ export class GameFacade {
         rail,
         viewContext,
         jsonModel,
+        scmVersion,
       }),
     );
   }

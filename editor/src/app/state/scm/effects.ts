@@ -189,7 +189,7 @@ export class ScmEffects {
         withLatestFrom(this._game.game$, this._game.scmVersion$),
         tap(([{ refs }, game, version]) => {
           this._changes.registerTextFileChange(
-            `${getScmAssetBase(game, version).replace(/^\/assets\//, '')}/refs.json`,
+            [game, 'scm', version, 'refs.json'].filter(Boolean).join('/'),
             JSON.stringify(
               Object.fromEntries(refs.map(({ key, value }) => [key, value])),
               null,
@@ -208,7 +208,7 @@ export class ScmEffects {
         withLatestFrom(this._game.game$, this._game.scmVersion$),
         tap(([{ variables }, game, version]) => {
           this._changes.registerTextFileChange(
-            `${getScmAssetBase(game, version).replace(/^\/assets\//, '')}/variables.json`,
+            [game, 'scm', version, 'variables.json'].filter(Boolean).join('/'),
             JSON.stringify(
               Object.fromEntries(
                 variables.map(({ key, value }) => [key, value]),
@@ -229,7 +229,7 @@ export class ScmEffects {
         withLatestFrom(this._game.game$, this._game.scmVersion$),
         tap(([{ comments }, game, version]) => {
           this._changes.registerTextFileChange(
-            `${getScmAssetBase(game, version).replace(/^\/assets\//, '')}/comments.json`,
+            [game, 'scm', version, 'comments.json'].filter(Boolean).join('/'),
             JSON.stringify(
               Object.fromEntries(
                 comments.map(({ key, value }) => [key, value.split('\n')]),

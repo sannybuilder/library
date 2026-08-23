@@ -59,6 +59,7 @@ export class ScmViewComponent implements OnChanges {
   private commandByName = new Map<string, Command>();
   private scmTargetPathByName = new Map<string, string>();
   private refsSet = new Set<number>();
+  private arrayMembers = new Map<string, { name: string; index: number }>();
   private editableComments: KeyValueEntry[] = [];
   private commentsByOffset = new Map<number, string[]>();
   private isActiveMissionFile = false;
@@ -110,6 +111,10 @@ export class ScmViewComponent implements OnChanges {
         value: entry.value,
       }));
       this.commentsByOffset = this.buildCommentsByOffset(this.editableComments);
+    }
+
+    if (changes['variablesOverlay']) {
+      this.arrayMembers = this.buildArrayMembers(this.variablesOverlay ?? []);
     }
 
     const shouldRebuildHtml = [
@@ -392,8 +397,9 @@ export class ScmViewComponent implements OnChanges {
 
       parts.push('<div class="line-content">');
       parts.push(this.renderIndent(idents[i]));
-      for (const arg of line.slice(2)) {
-        parts.push(this.renderToken(arg));
+      const args = line.slice(2);
+      for (let j = 0; j < args.length; j++) {
+        parts.push(this.renderToken(args[j], this.isIndexAhead(args, j)));
         parts.push(' ');
       }
       parts.push('</div></div>');
@@ -444,6 +450,121 @@ export class ScmViewComponent implements OnChanges {
     }
 
     return result;
+  }
+
+  // Derive array declarations from the variables overlay:
+  // a value ending in[N]` (e.g. "iRadioAnnounce[13]")
+  // defines that variable as an array of N elements.
+  private buildArrayMembers(
+    variables: KeyValueEntry[],
+  ): Map<string, { name: string; index: number }> {
+    const result = new Map<string, { name: string; index: number }>();
+    const scopeKeys = this.groupVariableKeysByScope(variables);
+
+    for (const entry of variables) {
+      const declaration = this.parseArrayDeclaration(entry.value);
+      if (!declaration) {
+        continue;
+      }
+
+      const members = this.arrayMemberKeys(
+        entry.key,
+        declaration.size,
+        scopeKeys,
+      );
+      members.forEach((key, index) =>
+        result.set(key, { name: declaration.name, index }),
+      );
+    }
+
+    return result;
+  }
+
+  private parseArrayDeclaration(
+    value: string,
+  ): { name: string; size: number } | undefined {
+    const match = /^(.*)\[(\d+)\]$/.exec(value);
+    if (!match) {
+      return undefined;
+    }
+
+    const size = Number.parseInt(match[2], 10);
+    if (size <= 0) {
+      return undefined;
+    }
+
+    return { name: match[1], size };
+  }
+
+  // Ordered member keys of one array declaration.
+  private arrayMemberKeys(
+    base: string,
+    size: number,
+    scopeKeys: Map<string, string[]>,
+  ): string[] {
+    const parts = base.split('.');
+
+    if (parts.length === 2 && (parts[0] === 'g' || parts[0] === 'l')) {
+      const offset = Number.parseInt(parts[1], 10);
+      if (Number.isNaN(offset)) {
+        return [];
+      }
+      return Array.from(
+        { length: size },
+        (_, i) => `${parts[0]}.${offset + i}`,
+      );
+    }
+
+    if (parts.length >= 3 && (parts[0] === 'g' || parts[0] === 'l')) {
+      const groupKey = `${parts[0]}:${parts[parts.length - 1]}`;
+      const ordered = scopeKeys.get(groupKey);
+      if (!ordered) {
+        return [base];
+      }
+
+      const position = ordered.indexOf(base);
+      if (position === -1) {
+        return [base];
+      }
+
+      return ordered.slice(position, position + size);
+    }
+
+    return [];
+  }
+
+  // Group multi-segment variable keys (g.<slot>.<scope>, l.<index>.<scope>)
+  // by kind + trailing scope segment, ordered by the slot/index segment.
+  private groupVariableKeysByScope(
+    variables: KeyValueEntry[],
+  ): Map<string, string[]> {
+    const groups = new Map<string, string[]>();
+
+    for (const { key } of variables) {
+      const parts = key.split('.');
+      if (parts.length < 3 || (parts[0] !== 'g' && parts[0] !== 'l')) {
+        continue;
+      }
+
+      const groupKey = `${parts[0]}:${parts[parts.length - 1]}`;
+      const list = groups.get(groupKey) ?? [];
+      list.push(key);
+      groups.set(groupKey, list);
+    }
+
+    for (const list of groups.values()) {
+      list.sort(
+        (a, b) =>
+          this.getVariableSlotSegment(a) - this.getVariableSlotSegment(b),
+      );
+    }
+
+    return groups;
+  }
+
+  private getVariableSlotSegment(key: string): number {
+    const slot = Number.parseInt(key.split('.')[1] ?? '', 10);
+    return Number.isNaN(slot) ? 0 : slot;
   }
 
   private toCommentText(comment: string): string {
@@ -512,7 +633,7 @@ export class ScmViewComponent implements OnChanges {
     return idents;
   }
 
-  private renderToken(arg: number | string): string {
+  private renderToken(arg: number | string, isIndexAhead = false): string {
     if (arg !== '' && typeof arg === 'string') {
       const command = this.commandByName.get(arg);
       if (command) {
@@ -531,7 +652,7 @@ export class ScmViewComponent implements OnChanges {
     }
 
     const refHref = this.getRefHref(arg);
-    const display = this.overlayValue(arg);
+    const display = this.overlayValue(arg, isIndexAhead);
 
     if (refHref) {
       return `<a class="tok tok-ref identifier" href="${this.escapeAttribute(refHref)}">${this.escapeHtml(
@@ -563,10 +684,18 @@ export class ScmViewComponent implements OnChanges {
     return this.code.symbols[refIndex] ?? null;
   }
 
-  private overlayValue(arg: number | string): string {
+  private overlayValue(arg: number | string, isIndexAhead = false): string {
     const resolved = this.getSymbol(arg) ?? arg;
     const value = String(resolved);
     if (value.startsWith('g.') || value.startsWith('l.')) {
+      const member = this.arrayMembers.get(value);
+      if (member) {
+        return this.arrayOverlayDisplay(
+          member.name,
+          member.index,
+          isIndexAhead,
+        );
+      }
       return (
         this.variablesOverlay.find((e) => e.key === value)?.value ??
         this.defaultOverlay(value)
@@ -581,6 +710,26 @@ export class ScmViewComponent implements OnChanges {
     }
 
     return this.defaultOverlay(value);
+  }
+
+  // A variable member of an array declared via variables.json (`[N]` suffix)
+  // renders as the base name plus its index, e.g. g.2153 -> iRadioAnnounce[1].
+  // When the variable is itself indexed in code (g.2152[i]) the extra index is
+  // omitted so it stays iRadioAnnounce[i].
+  private arrayOverlayDisplay(
+    name: string,
+    index: number,
+    isIndexAhead: boolean,
+  ): string {
+    if (isIndexAhead) {
+      return name;
+    }
+
+    return `${name}[${index}]`;
+  }
+
+  private isIndexAhead(args: Array<number | string>, index: number): boolean {
+    return args[index + 1] === '[';
   }
 
   private defaultOverlay(value: string): string {

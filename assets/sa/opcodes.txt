@@ -1749,10 +1749,10 @@
 {0D37:} write_struct_param {address} [int] {index} [int] {value} [int]
 {0D38:} [var value: int] = read_struct_param {address} [int] {index} [int]
 {0D39:} [var maxHealth: float] = get_char_max_health [Char]
-{0D3A:}   [var handle: ColPoint], [var outX: float], [var outY: float], [var outZ: float], [var entity: int] = get_collision_between_points {fromX} [float] {fromY} [float] {fromZ} [float] {toX} [float] {toY} [float] {toZ} [float] {buildings} [bool] {vehicles} [bool] {peds} [bool] {objects} [bool] {dummies} [bool] {seeThroughCheck} [bool] {cameraIgnoreCheck} [bool] {shotThroughCheck} [bool] {entityToIgnore} [int]
-{0D3B:} [var x: float], [var y: float], [var z: float] = get_colpoint_normal_vector [ColPoint]
-{0D3C:} [var surfaceType: SurfaceType] = get_colpoint_surface [ColPoint]
-{0D3E:} [var depth: float] = get_colpoint_depth [ColPoint]
+{0D3A:}   [var outX: float], [var outY: float], [var outZ: float], [var entity: int] = get_collision_between_points {fromX} [float] {fromY} [float] {fromZ} [float] {toX} [float] {toY} [float] {toZ} [float] {buildings} [bool] {vehicles} [bool] {peds} [bool] {objects} [bool] {dummies} [bool] {seeThroughCheck} [bool] {cameraIgnoreCheck} [bool] {shotThroughCheck} [bool] {entityToIgnore} [int] {colPoint} [int]
+{0D3B:} [var x: float], [var y: float], [var z: float] = get_colpoint_normal_vector {colPoint} [int]
+{0D3C:} [var surfaceType: SurfaceType] = get_colpoint_surface {colPoint} [int]
+{0D3E:} [var depth: float] = get_colpoint_depth {colPoint} [int]
 {0D4C:} [var length: int] = get_string_length {text} [string]
 {0D4D:} copy_string {string} [string] {address} [int]
 {0D4E:} [var result: any] = read_struct_offset {address} [int] {offset} [int] {size} [int]
@@ -1864,7 +1864,7 @@
 {0E68:} set_player_control_pad {pad} [PadId] {enabled} [bool]
 {0E69:} set_player_control_pad_movement {pad} [PadId] {movement} [bool]
 {0E6A:} make_nop {address} [int] {size} [int]
-{0E6B:} [var lighting: int] = get_colpoint_lighting [ColPoint] {fromNight} [bool]
+{0E6B:} [var lighting: int] = get_colpoint_lighting {colPoint} [int] {fromNight} [bool]
 {0E6C:} [var intensity: float] = get_day_night_balance
 {0E6D:} [var intensity: float] = get_underwaterness
 {0E6E:}   is_select_menu_just_pressed
@@ -1982,7 +1982,7 @@
 {0EDE:} set_script_event_char_damage {add} [bool] @label {var_char} [var Char]
 {0EDF:} set_script_event_car_weapon_damage {add} [bool] @label {var_car} [var Car]
 {0EE0:} set_script_event_bullet_impact {add} [bool] @label {var_ownerPtr} [var int] {var_victimPtr} [var int] {var_weaponType} [var WeaponType] {var_colPoint} [var int]
-{0EE1:} [var x: float], [var y: float], [var z: float] = get_colpoint_coordinates [ColPoint]
+{0EE1:} [var x: float], [var y: float], [var z: float] = get_colpoint_coordinates {colPoint} [int]
 {0EE2:} [var results: arguments] = read_struct_offset_multi {address} [int] {offset} [int] {count} [int] {size} [int]
 {0EE3:} write_struct_offset_multi {address} [int] {offset} [int] {count} [int] {size} [int] {params} [arguments]
 {0EE4:}   locate_char_distance_to_char [Char] {character} [Char] {radius} [float]

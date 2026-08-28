@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1784426523180,
-    "version": "1.62",
+    "last_update": 1787881321971,
+    "version": "1.64",
     "url": "https://library.sannybuilder.com/#/sa"
   },
   "extensions": [
@@ -49531,14 +49531,13 @@
             {
               "name": "entityToIgnore",
               "type": "int"
+            },
+            {
+              "name": "colPoint",
+              "type": "int"
             }
           ],
           "output": [
-            {
-              "name": "handle",
-              "type": "ColPoint",
-              "source": "var_any"
-            },
             {
               "name": "outX",
               "type": "float",
@@ -49565,8 +49564,7 @@
           "num_params": 20,
           "attrs": {
             "is_condition": true,
-            "is_static": true,
-            "is_constructor": true
+            "is_static": true
           },
           "class": "ColPoint",
           "member": "GetCollisionBetweenPoints",
@@ -49575,8 +49573,8 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "ColPoint"
+              "name": "colPoint",
+              "type": "int"
             }
           ],
           "output": [
@@ -49601,13 +49599,16 @@
           "num_params": 4,
           "class": "ColPoint",
           "member": "GetNormalVector",
-          "short_desc": "Returns the vector of the specified ColPoint"
+          "short_desc": "Returns the vector of the specified ColPoint",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "self",
-              "type": "ColPoint"
+              "name": "colPoint",
+              "type": "int"
             }
           ],
           "output": [
@@ -49622,13 +49623,16 @@
           "num_params": 2,
           "class": "ColPoint",
           "member": "GetSurface",
-          "short_desc": "Returns the surfaceType of the specified ColPoint"
+          "short_desc": "Returns the surfaceType of the specified ColPoint",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
             {
-              "name": "self",
-              "type": "ColPoint"
+              "name": "colPoint",
+              "type": "int"
             }
           ],
           "output": [
@@ -49643,7 +49647,10 @@
           "num_params": 2,
           "class": "ColPoint",
           "member": "GetDepth",
-          "short_desc": "Returns the depth of the specified ColPoint"
+          "short_desc": "Returns the depth of the specified ColPoint",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -52382,8 +52389,8 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "ColPoint"
+              "name": "colPoint",
+              "type": "int"
             },
             {
               "name": "fromNight",
@@ -52402,7 +52409,10 @@
           "num_params": 3,
           "class": "ColPoint",
           "member": "GetLighting",
-          "short_desc": "Returns the lighting of the specified ColPoint"
+          "short_desc": "Returns the lighting of the specified ColPoint",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "output": [
@@ -55004,8 +55014,8 @@
         {
           "input": [
             {
-              "name": "self",
-              "type": "ColPoint"
+              "name": "colPoint",
+              "type": "int"
             }
           ],
           "output": [
@@ -55030,7 +55040,10 @@
           "num_params": 4,
           "class": "ColPoint",
           "member": "GetCoordinates",
-          "short_desc": "Returns the coordinates of the specified ColPoint"
+          "short_desc": "Returns the coordinates of the specified ColPoint",
+          "attrs": {
+            "is_static": true
+          }
         },
         {
           "input": [
@@ -73791,8 +73804,8 @@
     },
     {
       "name": "ColPoint",
-      "constructable": true,
-      "desc": "Collision point information"
+      "constructable": false,
+      "desc": "Collision point object"
     },
     {
       "name": "Entity",

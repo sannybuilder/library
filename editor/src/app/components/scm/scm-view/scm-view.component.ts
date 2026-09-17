@@ -459,7 +459,6 @@ export class ScmViewComponent implements OnChanges {
     variables: KeyValueEntry[],
   ): Map<string, { name: string; index: number }> {
     const result = new Map<string, { name: string; index: number }>();
-    const scopeKeys = this.groupVariableKeysByScope(variables);
 
     for (const entry of variables) {
       const declaration = this.parseArrayDeclaration(entry.value);
@@ -467,11 +466,7 @@ export class ScmViewComponent implements OnChanges {
         continue;
       }
 
-      const members = this.arrayMemberKeys(
-        entry.key,
-        declaration.size,
-        scopeKeys,
-      );
+      const members = this.arrayMemberKeys(entry.key, declaration.size);
       members.forEach((key, index) =>
         result.set(key, { name: declaration.name, index }),
       );
@@ -496,75 +491,28 @@ export class ScmViewComponent implements OnChanges {
     return { name: match[1], size };
   }
 
-  // Ordered member keys of one array declaration.
-  private arrayMemberKeys(
-    base: string,
-    size: number,
-    scopeKeys: Map<string, string[]>,
-  ): string[] {
+  // Ordered member keys of one array declaration. Array elements always
+  // occupy consecutive slots (g.<slot>, g.<slot>.<scope>, l.<slot>.<scope>)
+  // and the declared variable is the first element, so members are the
+  // following slots while the scope segment stays untouched. The members
+  // themselves are usually absent from the variables overlay.
+  private arrayMemberKeys(base: string, size: number): string[] {
     const parts = base.split('.');
+    const kind = parts[0];
 
-    if (parts.length === 2 && (parts[0] === 'g' || parts[0] === 'l')) {
-      const offset = Number.parseInt(parts[1], 10);
-      if (Number.isNaN(offset)) {
-        return [];
-      }
-      return Array.from(
-        { length: size },
-        (_, i) => `${parts[0]}.${offset + i}`,
-      );
+    if (parts.length < 2 || (kind !== 'g' && kind !== 'l')) {
+      return [];
     }
 
-    if (parts.length >= 3 && (parts[0] === 'g' || parts[0] === 'l')) {
-      const groupKey = `${parts[0]}:${parts[parts.length - 1]}`;
-      const ordered = scopeKeys.get(groupKey);
-      if (!ordered) {
-        return [base];
-      }
-
-      const position = ordered.indexOf(base);
-      if (position === -1) {
-        return [base];
-      }
-
-      return ordered.slice(position, position + size);
+    const slot = Number.parseInt(parts[1], 10);
+    if (Number.isNaN(slot)) {
+      return [];
     }
 
-    return [];
-  }
-
-  // Group multi-segment variable keys (g.<slot>.<scope>, l.<index>.<scope>)
-  // by kind + trailing scope segment, ordered by the slot/index segment.
-  private groupVariableKeysByScope(
-    variables: KeyValueEntry[],
-  ): Map<string, string[]> {
-    const groups = new Map<string, string[]>();
-
-    for (const { key } of variables) {
-      const parts = key.split('.');
-      if (parts.length < 3 || (parts[0] !== 'g' && parts[0] !== 'l')) {
-        continue;
-      }
-
-      const groupKey = `${parts[0]}:${parts[parts.length - 1]}`;
-      const list = groups.get(groupKey) ?? [];
-      list.push(key);
-      groups.set(groupKey, list);
-    }
-
-    for (const list of groups.values()) {
-      list.sort(
-        (a, b) =>
-          this.getVariableSlotSegment(a) - this.getVariableSlotSegment(b),
-      );
-    }
-
-    return groups;
-  }
-
-  private getVariableSlotSegment(key: string): number {
-    const slot = Number.parseInt(key.split('.')[1] ?? '', 10);
-    return Number.isNaN(slot) ? 0 : slot;
+    const scope = parts.slice(2);
+    return Array.from({ length: size }, (_, index) =>
+      [kind, String(slot + index), ...scope].join('.'),
+    );
   }
 
   private toCommentText(comment: string): string {

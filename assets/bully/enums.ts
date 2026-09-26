@@ -4074,3 +4074,10 @@ export enum AreaId {
   "BmxTrack" = 62,
   "XLibrary2" = 63
 };
+export enum PedSpeed {
+  "Walk" = 0,
+  "Jog" = 1,
+  "Run" = 2,
+  "Sprint" = 3,
+  "Instant" = 4
+};

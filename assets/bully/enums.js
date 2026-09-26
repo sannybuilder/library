@@ -4074,3 +4074,10 @@ export const AreaId = {
   "BmxTrack": 62,
   "XLibrary2": 63
 };
+export const PedSpeed = {
+  "Walk": 0,
+  "Jog": 1,
+  "Run": 2,
+  "Sprint": 3,
+  "Instant": 4
+};

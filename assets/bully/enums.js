@@ -14,9 +14,12 @@ export const PedType = {
   "Nerd": 1,
   "Jock": 2,
   "Townie": 3,
+  "Dropout": 3,
   "Greaser": 4,
   "Preppy": 5,
+  "Prep": 5,
   "Student": 6,
+  "NonClique": 6,
   "Cop": 7,
   "Teacher": 8,
   "Townsperson": 9,
@@ -2313,7 +2316,6 @@ export const MissionName = {
   "GreasersChallenge": "3_R09_G3",
   "JocksChallenge": "3_R09_J3",
   "TowniesChallenge": "3_R09_D3",
-  "MissionBoxingMinigame2R11Chad": "2_R11_Chad",
   "MissionTheDiary1G1": "1_G1",
   "Mission1G2": "1_G2",
   "MissionCarnivalDate2G2": "2_G2",
@@ -2399,7 +2401,12 @@ export const MissionName = {
   "GoKartRace1": "GoKart_SR1",
   "GoKartRace2": "GoKart_SR2",
   "GoKartRace3": "GoKart_SR3",
-  "Bikepark4Tutorial": "BIKEPARK4X"
+  "Bikepark4Tutorial": "BIKEPARK4X",
+  "MinigameBoxingChallengeChad": "2_R11_Chad",
+  "MinigameBoxingChallengeJustin": "2_R11_Justin",
+  "MinigameBoxingChallengeParker": "2_R11_Parker",
+  "MinigameBoxingChallengeBryce": "2_R11_Bryce",
+  "MinigameBoxingChallengeRandom": "2_R11_Random"
 };
 export const PedModel = {
   "Jimmy": 0,

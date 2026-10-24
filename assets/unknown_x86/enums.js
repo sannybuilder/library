@@ -282,3 +282,20 @@ export const ImGuiStyleVar = {
   "ButtonTextAlign": 23,
   "SelectableTextAlign": 24
 };
+export const AudioStreamAction = {
+  "Stop": 0,
+  "Play": 1,
+  "Pause": 2,
+  "Resume": 3
+};
+export const AudioStreamState = {
+  "Stopped": -1,
+  "Playing": 1,
+  "Paused": 2
+};
+export const AudioStreamType = {
+  "None": 0,
+  "Sfx": 1,
+  "Music": 2,
+  "UserInterface": 3
+};

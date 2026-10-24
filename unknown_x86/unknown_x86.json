@@ -1,7 +1,7 @@
 {
   "meta": {
-    "last_update": 1726244929456,
-    "version": "0.236",
+    "last_update": 1792855547273,
+    "version": "0.237",
     "url": "https://library.sannybuilder.com/#/unknown_x86"
   },
   "extensions": [
@@ -2484,6 +2484,505 @@
           "short_desc": "Allocates a chunk of memory of the given size near to the memory page of the main exe module"
         }
       ]
+    },
+    {
+      "name": "audio",
+      "commands": [
+        {
+          "input": [
+            {
+              "name": "audioFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "AudioStream",
+              "source": "var_any"
+            }
+          ],
+          "name": "LOAD_AUDIO_STREAM",
+          "num_params": 2,
+          "short_desc": "Loads an audio file and creates a new audio stream (see LOAD_3D_AUDIO_STREAM)",
+          "class": "AudioStream",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "action",
+              "type": "AudioStreamAction"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_STATE",
+          "num_params": 2,
+          "short_desc": "Sets the state of the audio stream",
+          "class": "AudioStream",
+          "member": "SetState"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "name": "REMOVE_AUDIO_STREAM",
+          "num_params": 1,
+          "short_desc": "Releases/destroys an audio stream and frees its resources",
+          "attrs": {
+            "is_destructor": true
+          },
+          "class": "AudioStream",
+          "member": "Remove"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "length",
+              "type": "int",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_LENGTH",
+          "num_params": 2,
+          "short_desc": "Gets the audio stream length in seconds",
+          "class": "AudioStream",
+          "member": "GetLength"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "state",
+              "type": "AudioStreamState",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_STATE",
+          "num_params": 2,
+          "short_desc": "Returns the state of the audio stream",
+          "class": "AudioStream",
+          "member": "GetState"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "volume",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_VOLUME",
+          "num_params": 2,
+          "short_desc": "Gets the volume level of an audio stream (range 0.0 to 1.0)",
+          "class": "AudioStream",
+          "member": "GetVolume"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "volume",
+              "type": "float"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_VOLUME",
+          "num_params": 2,
+          "short_desc": "Sets the audio stream volume (default is 1.0). Pauses/Starts stream playback if necessary",
+          "class": "AudioStream",
+          "member": "SetVolume"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "state",
+              "type": "bool"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_LOOPED",
+          "num_params": 2,
+          "short_desc": "Makes the audio stream repeat endlessly",
+          "class": "AudioStream",
+          "member": "SetLooped"
+        },
+        {
+          "input": [
+            {
+              "name": "audioFileName",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "handle",
+              "type": "AudioStream3D",
+              "source": "var_any"
+            }
+          ],
+          "name": "LOAD_3D_AUDIO_STREAM",
+          "num_params": 2,
+          "short_desc": "Loads an audio stream with 3D positional audio support",
+          "class": "AudioStream3D",
+          "member": "Load",
+          "attrs": {
+            "is_constructor": true,
+            "is_condition": true
+          }
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream3D"
+            },
+            {
+              "name": "x",
+              "type": "float"
+            },
+            {
+              "name": "y",
+              "type": "float"
+            },
+            {
+              "name": "z",
+              "type": "float"
+            }
+          ],
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_COORDS",
+          "num_params": 4,
+          "short_desc": "Sets the 3D position for a 3D audio stream to play from",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtCoords"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream3D"
+            },
+            {
+              "name": "object",
+              "type": "Object"
+            }
+          ],
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_OBJECT",
+          "num_params": 2,
+          "short_desc": "Attaches a 3D audio stream to an object's position",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtObject"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream3D"
+            },
+            {
+              "name": "char",
+              "type": "Char"
+            }
+          ],
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CHAR",
+          "num_params": 2,
+          "short_desc": "Attaches a 3D audio stream to a character's position",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtChar"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream3D"
+            },
+            {
+              "name": "car",
+              "type": "Car"
+            }
+          ],
+          "name": "SET_PLAY_3D_AUDIO_STREAM_AT_CAR",
+          "num_params": 2,
+          "short_desc": "Attaches a 3D audio stream to a vehicle's position",
+          "class": "AudioStream3D",
+          "member": "SetPlayAtCar"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "name": "IS_AUDIO_STREAM_PLAYING",
+          "num_params": 1,
+          "class": "AudioStream",
+          "member": "IsPlaying",
+          "attrs": {
+            "is_condition": true
+          },
+          "short_desc": "Checks if audio stream is currently in 'play' state"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "seconds",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_DURATION",
+          "num_params": 2,
+          "class": "AudioStream",
+          "member": "GetDuration",
+          "short_desc": "Gets the audio stream total duration considering its speed (see SET_AUDIO_STREAM_SPEED_WITH_TRANSITION)"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "speed",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_SPEED",
+          "num_params": 2,
+          "class": "AudioStream",
+          "member": "GetSpeed",
+          "short_desc": "Gets the playback speed multiplier of an audio stream"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_SPEED",
+          "num_params": 2,
+          "short_desc": "Sets the playback speed multiplier of an audio stream",
+          "class": "AudioStream",
+          "member": "SetSpeed"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "volume",
+              "type": "float"
+            },
+            {
+              "name": "timeMs",
+              "type": "int"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_VOLUME_WITH_TRANSITION",
+          "num_params": 3,
+          "class": "AudioStream",
+          "member": "SetVolumeWithTransition",
+          "short_desc": "Changes stream volume with smooth transition"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "speed",
+              "type": "float"
+            },
+            {
+              "name": "timeMs",
+              "type": "int"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_SPEED_WITH_TRANSITION",
+          "num_params": 3,
+          "class": "AudioStream",
+          "member": "SetSpeedWithTransition",
+          "short_desc": "Changes stream speed with smooth transition. Pauses/Starts stream playback if necessary"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream3D"
+            },
+            {
+              "name": "radius",
+              "type": "float"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_SOURCE_SIZE",
+          "num_params": 2,
+          "class": "AudioStream3D",
+          "member": "SetSourceSize",
+          "short_desc": "Sets the spatial source size for a 3D audio stream"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "progress",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_PROGRESS",
+          "num_params": 2,
+          "class": "AudioStream",
+          "member": "GetProgress",
+          "short_desc": "Gets audio stream playback progress as value from 0.0 to 1.0"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "progress",
+              "type": "float"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_PROGRESS",
+          "num_params": 2,
+          "class": "AudioStream",
+          "member": "SetProgress",
+          "short_desc": "Sets audio stream playback progress as value from 0.0 to 1.0"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "type",
+              "type": "AudioStreamType",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_TYPE",
+          "num_params": 2,
+          "class": "AudioStream",
+          "member": "GetType",
+          "short_desc": "Gets the audio stream type (e.g. music, SFX)"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "type",
+              "type": "AudioStreamType"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_TYPE",
+          "num_params": 2,
+          "class": "AudioStream",
+          "member": "SetType",
+          "short_desc": "Sets the audio stream type (e.g. music, SFX)"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            }
+          ],
+          "output": [
+            {
+              "name": "progress",
+              "type": "float",
+              "source": "var_any"
+            }
+          ],
+          "name": "GET_AUDIO_STREAM_PROGRESS_SECONDS",
+          "num_params": 2,
+          "class": "AudioStream",
+          "member": "GetProgressSeconds",
+          "short_desc": "Gets the current playback progress of an audio stream in seconds irrespective of its speed (see SET_AUDIO_STREAM_SPEED_WITH_TRANSITION)"
+        },
+        {
+          "input": [
+            {
+              "name": "self",
+              "type": "AudioStream"
+            },
+            {
+              "name": "progress",
+              "type": "float"
+            }
+          ],
+          "name": "SET_AUDIO_STREAM_PROGRESS_SECONDS",
+          "num_params": 2,
+          "short_desc": "Sets the current playback progress of an audio stream in seconds irrespective of its speed (see SET_AUDIO_STREAM_SPEED_WITH_TRANSITION)",
+          "class": "AudioStream",
+          "member": "SetProgressSeconds"
+        }
+      ]
     }
   ],
   "classes": [
@@ -2526,6 +3025,17 @@
       "name": "Game",
       "constructable": false,
       "desc": "Game-related functions"
+    },
+    {
+      "name": "AudioStream",
+      "constructable": true,
+      "desc": ""
+    },
+    {
+      "name": "AudioStream3D",
+      "constructable": true,
+      "extends": "AudioStream",
+      "desc": ""
     }
   ]
 }

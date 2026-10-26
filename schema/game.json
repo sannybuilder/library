@@ -1,0 +1,238 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "definitions": {
+    "url": {
+      "type": "string",
+      "pattern": "^(http|https|ftp)://([a-zA-Z\\.\\d/#?=%+_]+)$"
+    },
+    "type_name": {
+      "description": "CamelCase type name",
+      "type": "string",
+      "pattern": "^[A-Z][a-zA-Z0-9]+$"
+    },
+    "extension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/command"
+          }
+        }
+      },
+      "required": [ "name", "commands" ],
+      "additionalProperties": false
+    },
+    "command": {
+      "description": "Command definition",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Opcode unique identifier",
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{4}$"
+        },
+        "name": {
+          "description": "Opcode unique name (Rockstar fashion)",
+          "pattern": "^([A-Z0-9_]+|{|})$"
+        },
+        "num_params": {
+          "description": "Total parameter count",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "input": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/command_parameter"
+          }
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/command_parameter"
+          }
+        },
+        "short_desc": {
+          "type": "string"
+        },
+        "attrs": {
+          "$ref": "#/definitions/command_attributes"
+        },
+        "class": {
+          "type": "string"
+        },
+        "member": {
+          "type": "string"
+        },
+        "platforms": {
+          "type": "array"
+        },
+        "versions": {
+          "type": "array"
+        }
+      },
+      "required": [ "id", "name", "num_params" ],
+      "additionalProperties": false
+    },
+    "command_parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^([a-zA-Z_0-9]+|)$"
+        },
+        "type": {
+          "$ref": "#/definitions/parameter_type"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [ "name", "type" ],
+      "additionalProperties": false
+    },
+    "command_attributes": {
+      "description": "Command attributes",
+      "type": "object",
+      "properties": {
+        "is_branch": {
+          "description": "This command branches the code",
+          "type": "boolean"
+        },
+        "is_condition": {
+          "description": "This command can be used in conditional statements",
+          "type": "boolean"
+        },
+        "is_constructor": {
+          "description": "This command creates a new in-game entity",
+          "type": "boolean"
+        },
+        "is_destructor": {
+          "description": "This command deletes the in-game entity",
+          "type": "boolean"
+        },
+        "is_keyword": {
+          "description": "This command is used as a single keyword followed by arguments",
+          "type": "boolean"
+        },
+        "is_nop": {
+          "description": "This command is a no-operation",
+          "type": "boolean"
+        },
+        "is_overload": {
+          "description": "This command has multiple variations for different types of arguments",
+          "type": "boolean"
+        },
+        "is_segment": {
+          "description": "This command is used to separate segments in SCM header",
+          "type": "boolean"
+        },
+        "is_static": {
+          "description": "This command operates on a static property or in-game entity that can not be constructed dynamically",
+          "type": "boolean"
+        },
+        "is_unsupported": {
+          "description": "This command is unsupported in the given game and its usage is forbidden",
+          "type": "boolean"
+        },
+        "is_variadic": {
+          "description": "This command has variadic number of arguments",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "parameter_type": {
+      "anyOf": [
+        {
+          "description": "Basic type",
+          "enum": [
+            "any",
+            "arguments",
+            "bool",
+            "script_id",
+            "float",
+            "gxt_key",
+            "int",
+            "label",
+            "model_any",
+            "model_char",
+            "model_object",
+            "model_vehicle",
+            "string",
+            "string128",
+            "zone_key"
+          ]
+        },
+        {
+          "description": "Enumeration name",
+          "$ref": "#/definitions/type_name"
+        }
+      ]
+    },
+    "class": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Class name",
+          "$ref": "#/definitions/type_name"
+        },
+        "constructable": {
+          "type": "boolean"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "extends": {
+          "$ref": "#/definitions/type_name"
+        }
+      },
+      "required": [ "name", "constructable", "desc" ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "meta": {
+      "description": "Meta-information",
+      "type": "object",
+      "properties": {
+        "last_update": {
+          "description": "Timestamp",
+          "type": "integer"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[\\d\\.]+$"
+        },
+        "url": {
+          "$ref": "#/definitions/url"
+        }
+      },
+      "additionalProperties": false
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/extension"
+      }
+    },
+    "classes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/class"
+      }
+    }
+  },
+  "required": [ "meta", "extensions" ],
+  "additionalProperties": false
+}
